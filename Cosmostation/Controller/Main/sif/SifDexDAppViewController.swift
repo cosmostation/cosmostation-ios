@@ -92,7 +92,11 @@ class SifDexDAppViewController: BaseViewController {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Sifnode_Clp_V1_PoolsReq.init()
                 if let response = try? Sifnode_Clp_V1_QueryClient(channel: channel).getPools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    BaseData.instance.mSifDexPools_gRPC = response.pools
+                    response.pools.forEach { pool in
+                        if (pool.externalAsset.symbol != "ccro") {
+                            BaseData.instance.mSifDexPools_gRPC.append(pool)
+                        }
+                    }
                 }
                 try channel.close().wait()
                 
