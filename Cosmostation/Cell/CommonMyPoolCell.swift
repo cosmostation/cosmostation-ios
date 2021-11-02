@@ -173,7 +173,7 @@ class CommonMyPoolCell: UITableViewCell {
         let poolValueFormatted = "$ " + nf.string(from: poolValue)!
         WUtils.DpCosmosTokenName(liquidity1DenomLabel, coin0Denom)
         WUtils.DpCosmosTokenName(liquidity2DenomLabel, coin1Denom)
-        poolPairLabel.text = WUtils.getCosmosTokenName(coin0Denom) + " : " + WUtils.getCosmosTokenName(coin1Denom)
+        poolPairLabel.text = "#" + String(pool.id) + " " + WUtils.getCosmosTokenName(coin0Denom) + " : " + WUtils.getCosmosTokenName(coin1Denom)
         totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(poolValueFormatted, 2, totalLiquidityValueLabel.font)
         liquidity1AmountLabel.attributedText = WUtils.displayAmount2(coin0Amount.stringValue, liquidity1AmountLabel.font, coin0Decimal, 6)
         liquidity2AmountLabel.attributedText = WUtils.displayAmount2(coin1Amount.stringValue, liquidity2AmountLabel.font, coin1Decimal, 6)

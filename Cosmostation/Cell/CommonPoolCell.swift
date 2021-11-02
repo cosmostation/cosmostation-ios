@@ -116,7 +116,7 @@ class CommonPoolCell: UITableViewCell {
         let coin0Decimal = WUtils.getCosmosCoinDecimal(coin0Denom)
         let coin1Decimal = WUtils.getCosmosCoinDecimal(coin1Denom)
         
-        poolPairLabel.text = WUtils.getCosmosTokenName(coin0Denom) + " : " + WUtils.getCosmosTokenName(coin1Denom)
+        poolPairLabel.text = "#" + String(pool.id) + " " + WUtils.getCosmosTokenName(coin0Denom) + " : " + WUtils.getCosmosTokenName(coin1Denom)
         
         let poolValue = WUtils.getGdexPoolValue(pool)
         let poolValueFormatted = "$ " + nf.string(from: poolValue)!
