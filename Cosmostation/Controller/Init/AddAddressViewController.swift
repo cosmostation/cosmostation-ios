@@ -57,7 +57,7 @@ class AddAddressViewController: BaseViewController, QrScannerDelegate {
         let userInput = self.addAddressInputText.text?.trimmingCharacters(in: .whitespaces) ?? ""
         
         if let chains = WUtils.getChainsFromAddress(userInput) {
-            if (chains.count == 0) {
+            if (chains.count == 1) {
                 self.onGenWatchAccount(chains[0], userInput)
                 
             } else {
