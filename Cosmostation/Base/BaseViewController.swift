@@ -449,6 +449,21 @@ extension BaseViewController {
         })
         bitcannaAction.setValue(UIImage(named: "chainBitcanna")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let altheaAction = UIAlertAction(title: NSLocalizedString("chain_title_althea", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.ALTHEA_MAIN)
+        })
+        altheaAction.setValue(UIImage(named: "chainAlthea")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
+        let gravityBridgeAction = UIAlertAction(title: NSLocalizedString("chain_title_gravity_bridge", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.GRAVITY_BRIDGE_MAIN)
+        })
+        gravityBridgeAction.setValue(UIImage(named: "chainGravitybridge")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
+        let stargazeAction = UIAlertAction(title: NSLocalizedString("chain_title_stargaze", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.STARGAZE_MAIN)
+        })
+        stargazeAction.setValue(UIImage(named: "chainStargaze")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         let secretAction = UIAlertAction(title: NSLocalizedString("chain_title_secret", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.SECRET_MAIN)
         })
@@ -492,6 +507,9 @@ extension BaseViewController {
         showAlert.addAction(regenAction)
         showAlert.addAction(junoAction)
         showAlert.addAction(bitcannaAction)
+        showAlert.addAction(altheaAction)
+        showAlert.addAction(gravityBridgeAction)
+        showAlert.addAction(stargazeAction)
         showAlert.addAction(secretAction)
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {

@@ -24,9 +24,9 @@ class WKey {
         if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.IRIS_MAIN || chainType == ChainType.CERTIK_MAIN || chainType == ChainType.AKASH_MAIN ||
                 chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.KI_MAIN || chainType == ChainType.OSMOSIS_MAIN ||
                 chainType == ChainType.EMONEY_MAIN || chainType == ChainType.RIZON_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.REGEN_MAIN ||
-                chainType == ChainType.BITCANA_MAIN ||
+                chainType == ChainType.BITCANA_MAIN || chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.GRAVITY_BRIDGE_MAIN || chainType == ChainType.STARGAZE_MAIN ||
                 chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.CERTIK_TEST || chainType == ChainType.UMEE_TEST ||
-                chainType == ChainType.AXELAR_TEST || chainType == ChainType.RIZON_TEST) {
+                chainType == ChainType.AXELAR_TEST || chainType == ChainType.RIZON_TEST || chainType == ChainType.ALTHEA_TEST) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
         } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
@@ -64,10 +64,7 @@ class WKey {
         } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(371)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
-        } else if (chainType == ChainType.ALTHEA_TEST) {
-            return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-
-        } else if (chainType == ChainType.FETCH_MAIN) {
+        }  else if (chainType == ChainType.FETCH_MAIN) {
             if (account.account_custom_path == 1) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
                 
@@ -129,7 +126,7 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "rizon", program: ripemd160)
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "panacea", program: ripemd160)
-        } else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "althea", program: ripemd160)
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "osmo", program: ripemd160)
@@ -145,6 +142,10 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "regen", program: ripemd160)
         } else if (chain == ChainType.BITCANA_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "bcna", program: ripemd160)
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "gravity", program: ripemd160)
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "stars", program: ripemd160)
         }
         return result
     }
@@ -154,9 +155,9 @@ class WKey {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.IRIS_MAIN || chain == ChainType.CERTIK_MAIN || chain == ChainType.AKASH_MAIN ||
                 chain == ChainType.SENTINEL_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.KI_MAIN || chain == ChainType.OSMOSIS_MAIN ||
                 chain == ChainType.EMONEY_MAIN || chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
-                chain == ChainType.BITCANA_MAIN ||
+                chain == ChainType.BITCANA_MAIN || chain == ChainType.ALTHEA_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.STARGAZE_MAIN ||
                 chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.CERTIK_TEST || chain == ChainType.UMEE_TEST ||
-                chain == ChainType.AXELAR_TEST || chain == ChainType.RIZON_TEST) {
+                chain == ChainType.AXELAR_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
@@ -193,9 +194,6 @@ class WKey {
             
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(371)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            
-        } else if (chain == ChainType.ALTHEA_TEST) {
-            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         } else {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
@@ -298,7 +296,7 @@ class WKey {
             result = bech32.encode("rizon", values: data)
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             result = bech32.encode("panacea", values: data)
-        } else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             result = bech32.encode("althea", values: data)
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             result = bech32.encode("osmo", values: data)
@@ -314,6 +312,10 @@ class WKey {
             result = bech32.encode("regen", values: data)
         } else if (chain == ChainType.BITCANA_MAIN) {
             result = bech32.encode("bcna", values: data)
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            result = bech32.encode("gravity", values: data)
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            result = bech32.encode("stars", values: data)
         }
         return result
     }

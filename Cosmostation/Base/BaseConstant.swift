@@ -117,15 +117,8 @@ let MEDI_TEST_API                       = "https://api-medibloc-opentestnet.cosm
 
 let OSMOSIS_API                         = "https://api-osmosis.cosmostation.io/";
 
-
+let ALTHEA_API                          = "https://api-althea.cosmostation.io/";
 let ALTHEA_TEST_API                     = "https://api-office.cosmostation.io/althea-testnet2v1/";
-
-
-let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-1/";
-
-
-let AXELAR_TEST_API                     = "https://api-office.cosmostation.io/axelar-testnet-adelaide/";
-
 
 let EMONEY_API                          = "https://api-emoney.cosmostation.io/";
 
@@ -134,6 +127,15 @@ let JUNO_API                            = "https://api-juno.cosmostation.io/";
 let REGEN_API                           = "https://api-regen.cosmostation.io/";
 
 let BITCANNA_API                        = "https://api-bitcanna.cosmostation.io/";
+
+let GRAVITY_BRIDGE_API                  = "https://api-gravity-bridge.cosmostation.io/";
+
+let STATGAZE_API                        = "https://api-stargaze.cosmostation.io/";
+
+
+let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-1/";
+
+let AXELAR_TEST_API                     = "https://api-office.cosmostation.io/axelar-testnet-adelaide/";
 
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
@@ -171,6 +173,8 @@ let EMONEY_VAL_URL                      = "https://raw.githubusercontent.com/cos
 let JUNO_VAL_URL                        = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/juno/";
 let REGEN_VAL_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/regen/";
 let BITCANNA_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/bitcanna/";
+let GRAVITY_BRIDGE_VAL_URL              = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/gravity-bridge/";
+let STARGAZE_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/stargaze/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -416,8 +420,6 @@ let OK_BASE_PATH                            = "m/44'/996'/0'/0/"
 let PERSIS_BASE_PATH                        = "m/44'/750'/0'/0/"
 let CRYPTO_BASE_PATH                        = "m/44'/394'/0'/0/"
 let MEDI_BASE_PATH                          = "m/44'/371'/0'/0/"
-let ALTHEA_BASE_PATH                        = "m/44'/60'/0'/0/"
-//let FETCH_BASE_PATH                         = "m/44'/118'/0'/0/"
 let ETH_NON_LEDGER_PATH                     = "m/44'/60'/0'/0/"
 let ETH_LEDGER_LIVE_PATH_1                  = "m/44'/60'/"
 let ETH_LEDGER_LIVE_PATH_2                  = "'/0/0"
@@ -788,10 +790,10 @@ let TRANS_BG_COLOR_MEDI2                    = UIColor.init(hexString: "79aaf2", 
 let COLOR_MEDI                              = UIColor.init(hexString: "79aaf2")
 let COLOR_MEDI_DARK                         = UIColor.init(hexString: "0d3d84")
 
-let TRANS_BG_COLOR_ALTHEA                   = UIColor.init(hexString: "eadea5", alpha: 0.15)
-let TRANS_BG_COLOR_ALTHEA2                  = UIColor.init(hexString: "eadea5", alpha: 0.4)
-let COLOR_ALTHEA                            = UIColor.init(hexString: "eadea5")
-let COLOR_ALTHEA_DARK                       = UIColor.init(hexString: "7d7659")
+let TRANS_BG_COLOR_ALTHEA                   = UIColor.init(hexString: "f8d9c0", alpha: 0.15)
+let TRANS_BG_COLOR_ALTHEA2                  = UIColor.init(hexString: "f8d9c0", alpha: 0.4)
+let COLOR_ALTHEA                            = UIColor.init(hexString: "f8d9c0")
+let COLOR_ALTHEA_DARK                       = UIColor.init(hexString: "908277")
 
 let TRANS_BG_COLOR_OSMOSIS                  = UIColor.init(hexString: "9248db", alpha: 0.15)
 let TRANS_BG_COLOR_OSMOSIS2                 = UIColor.init(hexString: "9248db", alpha: 0.4)
@@ -829,6 +831,16 @@ let TRANS_BG_COLOR_BITCANNA2                = UIColor.init(hexString: "00b786", 
 let COLOR_BITCANNA                          = UIColor.init(hexString: "00b786")
 let COLOR_BITCANNA_DARK                     = UIColor.init(hexString: "04684f")
 
+let TRANS_BG_COLOR_GRAVITY_BRIDGE           = UIColor.init(hexString: "0088c8", alpha: 0.15)
+let TRANS_BG_COLOR_GRAVITY_BRIDGE2          = UIColor.init(hexString: "0088c8", alpha: 0.4)
+let COLOR_GRAVITY_BRIDGE                    = UIColor.init(hexString: "0088c8")
+let COLOR_GRAVITY_BRIDGE_DARK               = UIColor.init(hexString: "04547a")
+
+let TRANS_BG_COLOR_STARGAZE                 = UIColor.init(hexString: "e38cd4", alpha: 0.15)
+let TRANS_BG_COLOR_STARGAZE2                = UIColor.init(hexString: "e38cd4", alpha: 0.4)
+let COLOR_STARGAZE                          = UIColor.init(hexString: "e38cd4")
+let COLOR_STARGAZE_DARK                     = UIColor.init(hexString: "8a5a84")
+
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
@@ -865,6 +877,9 @@ public enum ChainType: String {
     case JUNO_MAIN
     case REGEN_MAIN
     case BITCANA_MAIN
+    case ALTHEA_MAIN
+    case GRAVITY_BRIDGE_MAIN
+    case STARGAZE_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -904,6 +919,10 @@ public enum ChainType: String {
         result.append(JUNO_MAIN)
         result.append(BITCANA_MAIN)
         result.append(SECRET_MAIN)
+        
+        result.append(ALTHEA_MAIN)
+        result.append(GRAVITY_BRIDGE_MAIN)
+        result.append(STARGAZE_MAIN)
 
 //        result.append(COSMOS_TEST)
 //        result.append(IRIS_TEST)
@@ -1016,6 +1035,9 @@ let CHAIN_RIZON_S = "SUPPORT_CHAIN_RIZON"
 let CHAIN_JUNO_S = "SUPPORT_CHAIN_JUNO"
 let CHAIN_REGEN_S = "SUPPORT_CHAIN_REGEN"
 let CHAIN_BITCANA_S = "SUPPORT_CHAIN_BITCANA"
+let CHAIN_ALTHEA_S = "SUPPORT_CHAIN_ALTHEA"
+let CHAIN_GRAVITY_BRIDGE_S = "SUPPORT_CHAIN_GRAVITY_BRIDGE"
+let CHAIN_STARGAZE_S = "SUPPORT_CHAIN_STARGAZE"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1057,6 +1079,8 @@ let EMONEY_MAIN_DENOM = "ungm"
 let JUNO_MAIN_DENOM = "ujuno"
 let REGNE_MAIN_DENOM = "uregen"
 let BITCANA_MAIN_DENOM = "ubcna"
+let GRAVITY_BRIDGE_MAIN_DENOM = "ugrav"
+let STARGAZE_MAIN_DENOM = "ustars"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1137,6 +1161,9 @@ let EXPLORER_HDAC_MAIN      = "https://explorer.as.hdactech.com/hdac-explorer/";
 let EXPLORER_JUNO           = "https://www.mintscan.io/juno/";
 let EXPLORER_REGEN          = "https://www.mintscan.io/regen/";
 let EXPLORER_BITCANNA       = "https://www.mintscan.io/bitcanna/";
+let EXPLORER_ALTHEA         = "https://www.mintscan.io/althea/";
+let EXPLORER_GRAVITY_BRIDGE = "https://www.mintscan.io/gravity-bridge/";
+let EXPLORER_STARGAZE       = "https://www.mintscan.io/stargaze/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
