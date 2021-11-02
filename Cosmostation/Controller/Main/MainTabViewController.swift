@@ -1398,9 +1398,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
         }
     }
     
-    func accountSelected(_ id: Int) {
+    func accountSelected(_ id: Int64) {
         if (id != self.mAccount.account_id) {
-            BaseData.instance.setRecentAccountId(Int64(id))
+            BaseData.instance.setRecentAccountId(id)
             BaseData.instance.setLastTab(self.selectedIndex)
 
             let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController

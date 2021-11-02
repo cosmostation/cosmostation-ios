@@ -103,6 +103,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func updateTitle() {
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.titleChainImg.image = WUtils.getChainImg(chainType)
         self.titleChainName.text = WUtils.getChainTitle(chainType)
         self.titleChainName.textColor = WUtils.getChainColor(chainType!)

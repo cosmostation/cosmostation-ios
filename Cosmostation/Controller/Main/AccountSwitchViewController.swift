@@ -117,7 +117,7 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
             self.onRefechUserInfo()
             
         } else if (tableView == accountTableView) {
-            self.resultDelegate?.accountSelected(Int(displayAccounts[indexPath.row].account_id))
+            self.resultDelegate?.accountSelected(displayAccounts[indexPath.row].account_id)
             self.dismiss(animated: false, completion: nil)
         }
     }
@@ -143,6 +143,6 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
 }
 
 protocol AccountSwitchDelegate {
-    func accountSelected (_ id:Int)
-    func addAccount(_ chain:ChainType)
+    func accountSelected (_ id: Int64)
+    func addAccount(_ chain: ChainType)
 }
