@@ -170,6 +170,10 @@
 "send_guide_msg_regen" = "A Cosmos SDK based PoS blockchain designed to utilize ecological data and climate markets.";
 "send_guide_title_bitcanna" = "BitCanna Network";
 "send_guide_msg_bitcanna" = "A Cosmos SDK-based decentralized payment network and supply chain for legal cannabis industry.";
+"send_guide_title_gbridge" = "GRAVITY BRIDGE";
+"send_guide_msg_gbridge" = "A neutral peg zone designed primarily for bridge operation between Cosmos and Ethereum ecosystems.";
+"send_guide_title_stargaze" = "STARGAZE";
+"send_guide_msg_stargaze" = "A Cosmos SDK-based decentralized interchain NFT marketplace and social network.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

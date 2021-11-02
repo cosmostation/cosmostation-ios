@@ -137,7 +137,7 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_medi", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_medi", comment: "")
             
-        } else if (chainType == ChainType.ALTHEA_TEST) {
+        } else if (chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.ALTHEA_TEST) {
             guideImg.image = UIImage(named: "infoiconAlthea")
             guideTitle.text = NSLocalizedString("send_guide_title_althea", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_althea", comment: "")
@@ -171,6 +171,16 @@ class WalletGuideCell: UITableViewCell {
             guideImg.image = UIImage(named: "infoiconBitcanna")
             guideTitle.text = NSLocalizedString("send_guide_title_bitcanna", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_bitcanna", comment: "")
+            
+        } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
+            guideImg.image = UIImage(named: "infoiconGravitybridge")
+            guideTitle.text = NSLocalizedString("send_guide_title_gbridge", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_gbridge", comment: "")
+            
+        } else if (chainType == ChainType.STARGAZE_MAIN) {
+            guideImg.image = UIImage(named: "infoiconStargaze")
+            guideTitle.text = NSLocalizedString("send_guide_title_stargaze", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_stargaze", comment: "")
         }
         
     }
