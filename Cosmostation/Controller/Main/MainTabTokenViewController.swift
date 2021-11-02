@@ -589,6 +589,29 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             let allBnca = WUtils.getAllMainAsset(BITCANA_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBnca.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BITCANA_MAIN_DENOM, allBnca, 6, cell!.tokenValue.font)
+            
+        } else if (coin.denom == GRAVITY_BRIDGE_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenGravitybridge")
+            cell?.tokenSymbol.text = "GRAV"
+            cell?.tokenSymbol.textColor = COLOR_GRAVITY_BRIDGE
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "G-Bridge Staking Token"
+            
+            let allGrav = WUtils.getAllMainAsset(GRAVITY_BRIDGE_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allGrav.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(GRAVITY_BRIDGE_MAIN_DENOM, allGrav, 6, cell!.tokenValue.font)
+            
+        } else if (coin.denom == STARGAZE_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenStargaze")
+            cell?.tokenSymbol.text = "STARS"
+            cell?.tokenSymbol.textColor = COLOR_STARGAZE
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Stargaze Staking Token"
+            
+            let allStars = WUtils.getAllMainAsset(STARGAZE_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allStars.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(STARGAZE_MAIN_DENOM, allStars, 6, cell!.tokenValue.font)
+            
         }
         
         
