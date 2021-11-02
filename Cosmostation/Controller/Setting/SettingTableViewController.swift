@@ -270,7 +270,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 
                 
             } else if(indexPath.row == 1) {
-                guard let url = URL(string: "https://github.com/cosmostation/cosmostation-mobile") else { return }
+                guard let url = URL(string: "https://github.com/cosmostation/cosmostation-ios") else { return }
                 self.onShowSafariWeb(url)
                 
             } else if(indexPath.row == 2) {
