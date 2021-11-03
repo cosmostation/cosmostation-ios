@@ -462,6 +462,10 @@ final class BaseData : NSObject{
         return mGravityPools_gRPC.filter { $0.id == UInt64(id) }.first
     }
     
+    func getParamGravityPoolByDenom(_ denom: String) -> GdexStatus? {
+        return mParam?.getGdexList()?.filter { $0.pool_token == denom }.first
+    }
+    
     
     func setRecentAccountId(_ id : Int64) {
         UserDefaults.standard.set(id, forKey: KEY_RECENT_ACCOUNT)

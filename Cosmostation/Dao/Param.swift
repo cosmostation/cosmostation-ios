@@ -134,6 +134,10 @@ public struct Param {
         return params?.sifchain_token_registry?.registry?.entries
     }
     
+    func getGdexList() -> Array<GdexStatus>? {
+        return params?.gdex_status
+    }
+    
 }
 
 public struct Params {
@@ -149,6 +153,8 @@ public struct Params {
     var iris_tokens: Array<IrisToken>?
 
     var enabled_pools: Array<Int>?
+    
+    var gdex_status: Array<GdexStatus>?
     
     var osmosis_minting_params: OsmosisMintingParam?
     var osmosis_minting_epoch_provisions: String?
@@ -213,6 +219,13 @@ public struct Params {
             self.enabled_pools = Array<Int>()
             for rawEnabledPool in rawEnabledPools {
                 self.enabled_pools?.append(rawEnabledPool)
+            }
+        }
+        
+        if let rawGdexStatus = dictionary?["gdex_status"] as? Array<NSDictionary> {
+            self.gdex_status = Array<GdexStatus>()
+            for rawGdex in rawGdexStatus {
+                self.gdex_status?.append(GdexStatus.init(rawGdex))
             }
         }
         
@@ -657,6 +670,24 @@ public struct SifTokenEntry {
         self.ibc_counterparty_denom = dictionary?["ibc_counterparty_denom"] as? String
         if let rawDecimal = dictionary?["decimals"] as? String {
             self.decimals = Int16(rawDecimal)
+        }
+    }
+}
+
+public struct GdexStatus {
+    var id: UInt64?
+    var reserve_address: String?
+    var pool_token: String?
+    var token_pair = Array<Coin>()
+    
+    init(_ dictionary: NSDictionary?) {
+        self.id = dictionary?["id"] as? UInt64
+        self.reserve_address = dictionary?["reserve_address"] as? String
+        self.pool_token = dictionary?["pool_token"] as? String
+        if let rawCoins = dictionary?["token_pair"] as? Array<NSDictionary> {
+            for rawCoin in rawCoins {
+                self.token_pair.append(Coin.init(rawCoin))
+            }
         }
     }
 }

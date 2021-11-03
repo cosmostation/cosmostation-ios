@@ -317,4 +317,26 @@ extension WUtils {
         return myShare.multiplying(byPowerOf10: -6, withBehavior: handler6).multiplying(by: lpPrice, withBehavior: handler18)
     }
     
+    static func getParamGdexPoolValue(_ pool: GdexStatus) -> NSDecimalNumber {
+        let coin0Denom = pool.token_pair[0].denom
+        let coin1Denom = pool.token_pair[1].denom
+        let coin0BaseDenom = BaseData.instance.getBaseDenom(coin0Denom)
+        let coin1BaseDenom = BaseData.instance.getBaseDenom(coin1Denom)
+        let coin0Amount = NSDecimalNumber.init(string: pool.token_pair[0].amount)
+        let coin1Amount = NSDecimalNumber.init(string: pool.token_pair[1].amount)
+        let coin0Decimal = getCosmosCoinDecimal(coin0Denom)
+        let coin1Decimal = getCosmosCoinDecimal(coin1Denom)
+        let coin0price = perUsdValue(coin0BaseDenom) ?? NSDecimalNumber.zero
+        let coin1price = perUsdValue(coin1BaseDenom) ?? NSDecimalNumber.zero
+        let coin0Value = coin0Amount.multiplying(by: coin0price).multiplying(byPowerOf10: -coin0Decimal, withBehavior: WUtils.handler2)
+        let coin1Value = coin1Amount.multiplying(by: coin1price).multiplying(byPowerOf10: -coin1Decimal, withBehavior: WUtils.handler2)
+        return coin0Value.adding(coin1Value)
+    }
+    
+    static func getParamGdexLpTokenPerUsdPrice(_ pool: GdexStatus) -> NSDecimalNumber {
+        let poolValue = getParamGdexPoolValue(pool)
+        let totalShare = NSDecimalNumber.init(string: BaseData.instance.mParam?.params?.supply?.filter({ $0.denom == pool.pool_token}).first?.amount)
+        return poolValue.dividing(by: totalShare.multiplying(byPowerOf10: -6, withBehavior: handler24Down), withBehavior: handler18)
+    }
+    
 }

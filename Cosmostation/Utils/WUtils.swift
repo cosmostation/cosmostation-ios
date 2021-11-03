@@ -1085,8 +1085,8 @@ public class WUtils {
             }
         }
         if (denom.starts(with: "pool") && denom.count >= 68) {
-            if let pool = BaseData.instance.getGravityPoolByDenom(denom) {
-                //TODO need manager account balance for display gDex coin value
+            if let pool = BaseData.instance.getParamGravityPoolByDenom(denom) {
+                return WUtils.getParamGdexLpTokenPerUsdPrice(pool)
             }
         }
         if (denom == EMONEY_EUR_DENOM || denom == EMONEY_CHF_DENOM || denom == EMONEY_DKK_DENOM || denom == EMONEY_NOK_DENOM || denom == EMONEY_SEK_DENOM) {
