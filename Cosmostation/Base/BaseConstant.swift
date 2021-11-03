@@ -518,6 +518,10 @@ let GAS_FEE_RATE_TINY_BITCANNA              = "0.025"
 let GAS_FEE_RATE_LOW_BITCANNA               = "0.025"
 let GAS_FEE_RATE_AVERAGE_BITCANNA           = "0.025"
 
+let GAS_FEE_RATE_TINY_STARGAZER             = "0.000"
+let GAS_FEE_RATE_LOW_STARGAZER              = "0.000"
+let GAS_FEE_RATE_AVERAGE_STARGAZER          = "0.000"
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
@@ -919,10 +923,11 @@ public enum ChainType: String {
         result.append(JUNO_MAIN)
         result.append(BITCANA_MAIN)
         result.append(SECRET_MAIN)
-        
-        result.append(ALTHEA_MAIN)
-        result.append(GRAVITY_BRIDGE_MAIN)
         result.append(STARGAZE_MAIN)
+        
+//        result.append(ALTHEA_MAIN)
+//        result.append(GRAVITY_BRIDGE_MAIN)
+        
 
 //        result.append(COSMOS_TEST)
 //        result.append(IRIS_TEST)

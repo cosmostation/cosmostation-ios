@@ -507,8 +507,8 @@ extension BaseViewController {
         showAlert.addAction(regenAction)
         showAlert.addAction(junoAction)
         showAlert.addAction(bitcannaAction)
-        showAlert.addAction(altheaAction)
-        showAlert.addAction(gravityBridgeAction)
+//        showAlert.addAction(altheaAction)
+//        showAlert.addAction(gravityBridgeAction)
         showAlert.addAction(stargazeAction)
         showAlert.addAction(secretAction)
         
