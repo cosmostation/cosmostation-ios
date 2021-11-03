@@ -248,6 +248,27 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
+        } else if (chainType == ChainType.ALTHEA_MAIN) {
+            chainImg.image = UIImage(named: "chainAlthea")
+            keyPath.text = BASE_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
+        } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
+            chainImg.image = UIImage(named: "chainGravitybridge")
+            keyPath.text = BASE_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
+        } else if (chainType == ChainType.STARGAZE_MAIN) {
+            chainImg.image = UIImage(named: "chainStargaze")
+            keyPath.text = BASE_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
         }
         
         
@@ -314,7 +335,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             
         } else if (chainType! == ChainType.ALTHEA_TEST) {
             chainImg.image = UIImage(named: "testnetAlthea")
-            keyPath.text = ALTHEA_BASE_PATH.appending(account!.account_path)
+            keyPath.text = BASE_PATH.appending(account!.account_path)
             cardPush.isHidden = true
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow

@@ -1160,7 +1160,6 @@ public class WUtils {
                     let assetValue = userCurrencyValue(coin.denom, amount, mainDivideDecimal(chainType))
                     totalValue = totalValue.adding(assetValue)
                     
-                    
                 } else if (chainType == ChainType.OSMOSIS_MAIN && coin.denom == OSMOSIS_ION_DENOM) {
                     let amount = baseData.getAvailableAmount_gRPC(coin.denom)
                     let assetValue = userCurrencyValue(coin.denom, amount, 6)
@@ -2070,7 +2069,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.ALTHEA_TEST) {
+        } else if (chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.ALTHEA_TEST) {
             if (coin.denom == ALTHEA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -2129,6 +2128,24 @@ public class WUtils {
             
         } else if (chainType == ChainType.BITCANA_MAIN) {
             if (coin.denom == BITCANA_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel.textColor = .white
+                denomLabel.text = coin.denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
+            
+        } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
+            if (coin.denom == GRAVITY_BRIDGE_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel.textColor = .white
+                denomLabel.text = coin.denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
+            
+        } else if (chainType == ChainType.STARGAZE_MAIN) {
+            if (coin.denom == STARGAZE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
                 denomLabel.textColor = .white
@@ -2377,7 +2394,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.ALTHEA_TEST) {
+        } else if (chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.ALTHEA_TEST) {
             if (denom == ALTHEA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -2436,6 +2453,24 @@ public class WUtils {
             
         } else if (chainType == ChainType.BITCANA_MAIN) {
             if (denom == BITCANA_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel.textColor = .white
+                denomLabel.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            
+        } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
+            if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel.textColor = .white
+                denomLabel.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            
+        } else if (chainType == ChainType.STARGAZE_MAIN) {
+            if (denom == STARGAZE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
                 denomLabel.textColor = .white
@@ -2525,7 +2560,7 @@ public class WUtils {
             return COLOR_RIZON
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             return COLOR_MEDI
-        } else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return COLOR_ALTHEA
         } else if (chain == ChainType.UMEE_TEST) {
             return COLOR_UMEE
@@ -2539,6 +2574,10 @@ public class WUtils {
             return COLOR_REGEN
         } else if (chain == ChainType.BITCANA_MAIN) {
             return COLOR_BITCANNA
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return COLOR_GRAVITY_BRIDGE
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return COLOR_STARGAZE
         }
         return COLOR_DARK_GRAY
     }
@@ -2582,7 +2621,7 @@ public class WUtils {
             return COLOR_RIZON_DARK
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             return COLOR_MEDI_DARK
-        } else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return COLOR_ALTHEA_DARK
         } else if (chain == ChainType.UMEE_TEST) {
             return COLOR_UMEE_DARK
@@ -2596,6 +2635,10 @@ public class WUtils {
             return COLOR_REGEN_DARK
         } else if (chain == ChainType.BITCANA_MAIN) {
             return COLOR_BITCANNA_DARK
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return COLOR_GRAVITY_BRIDGE_DARK
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return COLOR_STARGAZE_DARK
         }
         return COLOR_DARK_GRAY
     }
@@ -2639,7 +2682,7 @@ public class WUtils {
             return TRANS_BG_COLOR_RIZON
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             return TRANS_BG_COLOR_MEDI
-        } else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return TRANS_BG_COLOR_ALTHEA
         } else if (chain == ChainType.UMEE_TEST) {
             return TRANS_BG_COLOR_UMEE
@@ -2653,6 +2696,10 @@ public class WUtils {
             return TRANS_BG_COLOR_REGEN
         } else if (chain == ChainType.BITCANA_MAIN) {
             return TRANS_BG_COLOR_BITCANNA
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return TRANS_BG_COLOR_GRAVITY_BRIDGE
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return TRANS_BG_COLOR_STARGAZE
         }
         return COLOR_BG_GRAY
     }
@@ -2700,7 +2747,7 @@ public class WUtils {
             return "BIF"
         } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
             return "ATOLO"
-        } else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return "ALTG"
         } else if (chain == ChainType.UMEE_TEST) {
             return "UMEE"
@@ -2714,6 +2761,10 @@ public class WUtils {
             return "REGEN"
         } else if (chain == ChainType.BITCANA_MAIN) {
             return "BCNA"
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return "GRAV"
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return "STARS"
         }
         return ""
     }
@@ -2765,6 +2816,12 @@ public class WUtils {
             return REGNE_MAIN_DENOM
         } else if (chain == ChainType.BITCANA_MAIN) {
             return BITCANA_MAIN_DENOM
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
+            return ALTHEA_MAIN_DENOM
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return GRAVITY_BRIDGE_MAIN_DENOM
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return STARGAZE_MAIN_DENOM
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -2773,8 +2830,6 @@ public class WUtils {
             return IRIS_TEST_DENOM
         } else if (chain == ChainType.IOV_TEST) {
             return IOV_TEST_DENOM
-        } else if (chain == ChainType.ALTHEA_TEST) {
-            return ALTHEA_MAIN_DENOM
         } else if (chain == ChainType.UMEE_TEST) {
             return UMEE_MAIN_DENOM
         } else if (chain == ChainType.AXELAR_TEST) {
@@ -2904,7 +2959,7 @@ public class WUtils {
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             label.text = "MED"
             label.textColor = COLOR_MEDI
-        } else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             label.text = "ALTG"
             label.textColor = COLOR_ALTHEA
         } else if (chain == ChainType.UMEE_TEST) {
@@ -2925,6 +2980,12 @@ public class WUtils {
         } else if (chain == ChainType.BITCANA_MAIN) {
             label.text = "BCNA"
             label.textColor = COLOR_BITCANNA
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            label.text = "GRAV"
+            label.textColor = COLOR_GRAVITY_BRIDGE
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            label.text = "STARS"
+            label.textColor = COLOR_STARGAZE
         }
     }
     
@@ -2975,6 +3036,12 @@ public class WUtils {
             return ChainType.REGEN_MAIN
         } else if (chainS == CHAIN_BITCANA_S) {
             return ChainType.BITCANA_MAIN
+        } else if (chainS == CHAIN_ALTHEA_S) {
+            return ChainType.ALTHEA_MAIN
+        } else if (chainS == CHAIN_GRAVITY_BRIDGE_S) {
+            return ChainType.GRAVITY_BRIDGE_MAIN
+        } else if (chainS == CHAIN_STARGAZE_S) {
+            return ChainType.STARGAZE_MAIN
         }
         
         else if (chainS == CHAIN_COSMOS_TEST_S) {
@@ -3052,6 +3119,12 @@ public class WUtils {
             return CHAIN_REGEN_S
         } else if (chain == ChainType.BITCANA_MAIN) {
             return CHAIN_BITCANA_S
+        } else if (chain == ChainType.ALTHEA_MAIN) {
+            return CHAIN_ALTHEA_S
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return CHAIN_GRAVITY_BRIDGE_S
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return CHAIN_STARGAZE_S
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -3101,8 +3174,6 @@ public class WUtils {
             return CRYPTO_BASE_PATH + String(endPath)
         } else if (chain == ChainType.MEDI_MAIN) {
             return MEDI_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.ALTHEA_TEST) {
-            return ALTHEA_BASE_PATH + String(endPath)
         }
         return BASE_PATH + String(endPath)
     }
@@ -3122,8 +3193,6 @@ public class WUtils {
             return CRYPTO_BASE_PATH + String(endPath)
         } else if (chain == ChainType.MEDI_MAIN) {
             return MEDI_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.ALTHEA_TEST) {
-            return ALTHEA_BASE_PATH + String(endPath)
         }
         
         //TODO custom Path
@@ -3521,9 +3590,10 @@ public class WUtils {
     
     static func getEstimateGasFeeAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
-                chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN || chain == ChainType.BITCANA_MAIN ||
-                chain == ChainType.COSMOS_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST ||
-                chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
+            chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN || chain == ChainType.BITCANA_MAIN ||
+            chain == ChainType.STARGAZE_MAIN ||
+            chain == ChainType.COSMOS_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST ||
+            chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
@@ -3745,6 +3815,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_BITCANNA)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_BITCANNA)
+            }
+            
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_STARGAZER)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_STARGAZER)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_STARGAZER)
             }
             
         }
@@ -4116,7 +4195,7 @@ public class WUtils {
             return FETCH_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.KI_MAIN) {
             return KI_VAL_URL + opAddress + ".png";
-        } else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return ALTHEA_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
             return RIZON_VAL_URL + opAddress + ".png";
@@ -4128,6 +4207,10 @@ public class WUtils {
             return REGEN_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.BITCANA_MAIN) {
             return BITCANNA_VAL_URL + opAddress + ".png";
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return GRAVITY_BRIDGE_VAL_URL + opAddress + ".png";
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return STARGAZE_VAL_URL + opAddress + ".png";
         }
         return ""
     }
@@ -4168,6 +4251,15 @@ public class WUtils {
             
         } else if (chain == ChainType.BITCANA_MAIN) {
             return EXPLORER_BITCANNA + "txs/" + hash
+            
+        } else if (chain == ChainType.ALTHEA_MAIN) {
+            return EXPLORER_ALTHEA + "txs/" + hash
+            
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return EXPLORER_GRAVITY_BRIDGE + "txs/" + hash
+            
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return EXPLORER_STARGAZE + "txs/" + hash
             
         }
         
@@ -4302,6 +4394,15 @@ public class WUtils {
         } else if (chain == ChainType.BITCANA_MAIN) {
             return EXPLORER_BITCANNA + "account/" + address
             
+        } else if (chain == ChainType.ALTHEA_MAIN) {
+            return EXPLORER_ALTHEA + "account/" + address
+            
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return EXPLORER_GRAVITY_BRIDGE + "account/" + address
+            
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return EXPLORER_STARGAZE + "account/" + address
+            
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4405,6 +4506,15 @@ public class WUtils {
         } else if (chain == ChainType.BITCANA_MAIN) {
             return EXPLORER_BITCANNA + "proposals/" + proposalId
             
+        } else if (chain == ChainType.ALTHEA_MAIN) {
+            return EXPLORER_ALTHEA + "proposals/" + proposalId
+            
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return EXPLORER_GRAVITY_BRIDGE + "proposals/" + proposalId
+            
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return EXPLORER_STARGAZE + "proposals/" + proposalId
+            
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4505,12 +4615,18 @@ public class WUtils {
         } else if (chain == ChainType.BITCANA_MAIN) {
             return UIImage(named: "tokenBitcanna")
             
-        }
-        
-        else if (chain == ChainType.ALTHEA_TEST) {
+        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return UIImage(named: "tokenAlthea")
             
-        } else if (chain == ChainType.UMEE_TEST) {
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return UIImage(named: "tokenGravitybridge")
+            
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return UIImage(named: "tokenStargaze")
+            
+        }
+        
+        else if (chain == ChainType.UMEE_TEST) {
             return UIImage(named: "tokenUmee")
             
         } else if (chain == ChainType.AXELAR_TEST) {
@@ -4545,6 +4661,9 @@ public class WUtils {
         else if (chain == ChainType.JUNO_MAIN) { return UIImage(named: "chainJuno") }
         else if (chain == ChainType.REGEN_MAIN) { return UIImage(named: "chainRegen") }
         else if (chain == ChainType.BITCANA_MAIN) { return UIImage(named: "chainBitcanna") }
+        else if (chain == ChainType.ALTHEA_MAIN) { return UIImage(named: "chainAlthea") }
+        else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return UIImage(named: "chainGravitybridge") }
+        else if (chain == ChainType.STARGAZE_MAIN) { return UIImage(named: "chainStargaze") }
         
         else if (chain == ChainType.COSMOS_TEST) { return UIImage(named: "cosmosTestChainImg") }
         else if (chain == ChainType.IRIS_TEST) { return UIImage(named: "irisTestChainImg") }
@@ -4581,6 +4700,9 @@ public class WUtils {
         else if (chain == ChainType.JUNO_MAIN) { return "(Juno Mainnet)" }
         else if (chain == ChainType.REGEN_MAIN) { return "(Regen Mainnet)" }
         else if (chain == ChainType.BITCANA_MAIN) { return "(Bitcanna Mainnet)" }
+        else if (chain == ChainType.ALTHEA_MAIN) { return "(Althea Mainnet)" }
+        else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "(G-Bridge Mainnet)" }
+        else if (chain == ChainType.STARGAZE_MAIN) { return "(Stargaze Mainnet)" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "(StarGate Testnet)" }
         else if (chain == ChainType.IRIS_TEST) { return "(Bifrost Testnet)" }
@@ -4618,6 +4740,9 @@ public class WUtils {
         else if (chain == ChainType.JUNO_MAIN) { return "JUNO" }
         else if (chain == ChainType.REGEN_MAIN) { return "REGEN" }
         else if (chain == ChainType.BITCANA_MAIN) { return "BITCANNA" }
+        else if (chain == ChainType.ALTHEA_MAIN) { return "ALTHEA" }
+        else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "G-BRIDGE" }
+        else if (chain == ChainType.STARGAZE_MAIN) { return "STARGAZE" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "STARGATE" }
         else if (chain == ChainType.IRIS_TEST) { return "BIFROST" }
@@ -4668,7 +4793,14 @@ public class WUtils {
             return ChainType.REGEN_MAIN
         } else if (chainId?.contains("bitcanna-") == true) {
             return ChainType.BITCANA_MAIN
+        } else if (chainId?.contains("althea-") == true) {
+            return ChainType.ALTHEA_MAIN
+        } else if (chainId?.contains("stargaze-") == true) {
+            return ChainType.STARGAZE_MAIN
         }
+//        else if (chainId?.contains("gravitybridge-") == true) {
+//           return ChainType.GRAVITY_BRIDGE_MAIN
+//       }
         return nil
     }
     
@@ -4703,8 +4835,10 @@ public class WUtils {
         else if (address?.starts(with: "juno1") == true && chain == ChainType.JUNO_MAIN) { return true }
         else if (address?.starts(with: "regen1") == true && chain == ChainType.REGEN_MAIN) { return true }
         else if (address?.starts(with: "bcna1") == true && chain == ChainType.BITCANA_MAIN) { return true }
+        else if (address?.starts(with: "althea1") == true && chain == ChainType.ALTHEA_MAIN) { return true }
+        else if (address?.starts(with: "gravity1") == true && chain == ChainType.GRAVITY_BRIDGE_MAIN) { return true }
+        else if (address?.starts(with: "stars1") == true && chain == ChainType.STARGAZE_MAIN) { return true }
         
-        else if (address?.starts(with: "althea1") == true && chain == ChainType.ALTHEA_TEST) { return true }
         else if (address?.starts(with: "umee1") == true && chain == ChainType.UMEE_TEST) { return true }
         else if (address?.starts(with: "axelar1") == true && chain == ChainType.AXELAR_TEST) { return true }
         return false
@@ -4739,9 +4873,11 @@ public class WUtils {
         else if (address?.starts(with: "juno1") == true) { return [ChainType.JUNO_MAIN] }
         else if (address?.starts(with: "regen1") == true) { return [ChainType.REGEN_MAIN] }
         else if (address?.starts(with: "bcna1") == true) { return [ChainType.BITCANA_MAIN] }
+        else if (address?.starts(with: "althea1") == true) { return [ChainType.ALTHEA_MAIN] }
+        else if (address?.starts(with: "gravity1") == true) { return [ChainType.GRAVITY_BRIDGE_MAIN] }
+        else if (address?.starts(with: "stars1") == true) { return [ChainType.STARGAZE_MAIN] }
         
         else if (address?.starts(with: "tbnb1") == true) { return [ChainType.BINANCE_TEST] }
-        else if (address?.starts(with: "althea1") == true) { return [ChainType.ALTHEA_TEST] }
         else if (address?.starts(with: "umee1") == true) { return [ChainType.UMEE_TEST] }
         else if (address?.starts(with: "axelar1") == true) { return [ChainType.AXELAR_TEST] }
         

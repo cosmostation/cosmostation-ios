@@ -68,6 +68,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletJunoCell", bundle: nil), forCellReuseIdentifier: "WalletJunoCell")
         self.walletTableView.register(UINib(nibName: "WalletRegenCell", bundle: nil), forCellReuseIdentifier: "WalletRegenCell")
         self.walletTableView.register(UINib(nibName: "WalletBitcannaCell", bundle: nil), forCellReuseIdentifier: "WalletBitcannaCell")
+        self.walletTableView.register(UINib(nibName: "WalletGBridgeCell", bundle: nil), forCellReuseIdentifier: "WalletGBridgeCell")
+        self.walletTableView.register(UINib(nibName: "WalletStargazeCell", bundle: nil), forCellReuseIdentifier: "WalletStargazeCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -151,7 +153,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.CRYPTO_MAIN) {
             floaty.buttonImage = UIImage.init(named: "sendImg")
             floaty.buttonColor = COLOR_CRYPTO_DARK
-        } else if (chainType! == ChainType.ALTHEA_TEST) {
+        } else if (chainType! == ChainType.ALTHEA_MAIN || chainType! == ChainType.ALTHEA_TEST) {
             floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
             floaty.buttonColor = COLOR_ALTHEA
         } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
@@ -247,14 +249,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetRegenItems(tableView, indexPath);
         } else if (chainType == ChainType.BITCANA_MAIN) {
             return onSetBitcanaItems(tableView, indexPath);
+        } else if (chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.ALTHEA_TEST) {
+            return onSetAltheaItems(tableView, indexPath);
+        } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return onSetGBridgeItems(tableView, indexPath);
+        } else if (chainType == ChainType.STARGAZE_MAIN) {
+            return onSetStargazeItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
             return onSetCosmosTestItems(tableView, indexPath);
         } else if (chainType == ChainType.IRIS_TEST) {
             return onSetIrisTestItems(tableView, indexPath);
-        } else if (chainType == ChainType.ALTHEA_TEST) {
-            return onSetAltheaItems(tableView, indexPath);
         } else if (chainType == ChainType.UMEE_TEST) {
             return onSetUmeeItems(tableView, indexPath);
         } else if (chainType == ChainType.AXELAR_TEST) {
@@ -1068,6 +1074,66 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    func onSetGBridgeItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGBridgeCell") as? WalletGBridgeCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+        
+    }
+    
+    func onSetStargazeItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletStargazeCell") as? WalletStargazeCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+        
+    }
+    
     
     
     func onSetCosmosTestItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
@@ -1581,6 +1647,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.bitcanna.io/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.ALTHEA_MAIN || chainType! == ChainType.ALTHEA_TEST) {
+            guard let url = URL(string: "https://www.althea.net/") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
+            guard let url = URL(string: "https://www.gravitybridge.net/") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.STARGAZE_MAIN) {
+            guard let url = URL(string: "https://stargaze.zone/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -1689,6 +1767,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.BITCANA_MAIN) {
             guard let url = URL(string: "https://medium.com/@BitCannaGlobal") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.ALTHEA_MAIN || chainType! == ChainType.ALTHEA_TEST) {
+            guard let url = URL(string: "https://blog.althea.net/") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
+            guard let url = URL(string: "https://www.gravitybridge.net/blog") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.STARGAZE_MAIN) {
+            guard let url = URL(string: "https://mirror.xyz/stargazezone.eth") else { return }
             self.onShowSafariWeb(url)
             
         }

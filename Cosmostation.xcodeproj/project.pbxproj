@@ -43,6 +43,10 @@
 		049758832685AA270039872C /* iov_starname_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049758792685AA240039872C /* iov_starname_v1beta1_genesis.pb.swift */; };
 		049758842685AA270039872C /* iov_starname_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497587A2685AA260039872C /* iov_starname_v1beta1_query.pb.swift */; };
 		049758852685AA270039872C /* iov_starname_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0497587B2685AA270039872C /* iov_starname_v1beta1_query.grpc.swift */; };
+		049DAA0127311DEB00658CFB /* WalletGBridgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */; };
+		049DAA0227311DEB00658CFB /* WalletGBridgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */; };
+		049DAA0527311DFE00658CFB /* WalletStargazeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */; };
+		049DAA0627311DFE00658CFB /* WalletStargazeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */; };
 		04CFBD482691F8460013150B /* TxTokenSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD462691F8460013150B /* TxTokenSwapCell.swift */; };
 		04CFBD492691F8460013150B /* TxTokenSwapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CFBD472691F8460013150B /* TxTokenSwapCell.xib */; };
 		04CFBD4D2692274B0013150B /* TxIbcReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD4B2692274B0013150B /* TxIbcReceiveCell.swift */; };
@@ -1243,6 +1247,10 @@
 		049758792685AA240039872C /* iov_starname_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iov_starname_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		0497587A2685AA260039872C /* iov_starname_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iov_starname_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		0497587B2685AA270039872C /* iov_starname_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iov_starname_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletGBridgeCell.swift; sourceTree = "<group>"; };
+		049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletGBridgeCell.xib; sourceTree = "<group>"; };
+		049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStargazeCell.swift; sourceTree = "<group>"; };
+		049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStargazeCell.xib; sourceTree = "<group>"; };
 		04CFBD462691F8460013150B /* TxTokenSwapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxTokenSwapCell.swift; sourceTree = "<group>"; };
 		04CFBD472691F8460013150B /* TxTokenSwapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxTokenSwapCell.xib; sourceTree = "<group>"; };
 		04CFBD4B2692274B0013150B /* TxIbcReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIbcReceiveCell.swift; sourceTree = "<group>"; };
@@ -3036,6 +3044,10 @@
 				28A2A4BD271FF9020042ACC4 /* WalletRegenCell.xib */,
 				28A2A4C0271FF9140042ACC4 /* WalletBitcannaCell.swift */,
 				28A2A4C1271FF9140042ACC4 /* WalletBitcannaCell.xib */,
+				049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */,
+				049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */,
+				049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */,
+				049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -4307,6 +4319,7 @@
 				E11338FE235D70D20011B61D /* ManageAccountAddCell.xib in Resources */,
 				28B2E4C426CFC84000ECF960 /* TokenDetailIBCCell.xib in Resources */,
 				2872B0F3252EF79900E8CACF /* WalletSecretCell.xib in Resources */,
+				049DAA0227311DEB00658CFB /* WalletGBridgeCell.xib in Resources */,
 				288F8083270DDF25009825B5 /* TxSifIncentiveCell.xib in Resources */,
 				287D746226A52B8E00532E01 /* JoinPool0ViewController.xib in Resources */,
 				2894106226FDC029005BCBE4 /* IBCSend4ViewController.xib in Resources */,
@@ -4316,6 +4329,7 @@
 				04D138582691E25500D6AF9F /* TxJoinPoolCell.xib in Resources */,
 				288F807B270DDEFA009825B5 /* TxSifAddLpCell.xib in Resources */,
 				28474ECB241E06AF00AF5A81 /* TxCdpWithdrawCell.xib in Resources */,
+				049DAA0627311DFE00658CFB /* WalletStargazeCell.xib in Resources */,
 				2842AB6F242C5C7200248EEB /* CdpLisyMyCell.xib in Resources */,
 				28B9B68D271DC5F60067C6AE /* SifMyPoolCell.xib in Resources */,
 				E15DA48122F1738C000557FC /* PromotionCell.xib in Resources */,
@@ -4593,6 +4607,7 @@
 				28B785BB26B808CE009F755F /* StepEventHorizon0ViewController.swift in Sources */,
 				2845AE48271C243A005AA537 /* sifnode_tokenregistry_v1_tx.grpc.swift in Sources */,
 				287AC62725FDF7260070837E /* cosmos_tx_v1beta1_service.grpc.swift in Sources */,
+				049DAA0127311DEB00658CFB /* WalletGBridgeCell.swift in Sources */,
 				28156E7F25360B70006FF06C /* HardListCell.swift in Sources */,
 				28B7858326B3A7E4009F755F /* panacea_aol_v2_owner.pb.swift in Sources */,
 				28AABEC825F8CBBA0019091F /* HardModuleAccount.swift in Sources */,
@@ -5398,6 +5413,7 @@
 				287AC63025FDF7260070837E /* tendermint_crypto_keys.pb.swift in Sources */,
 				287AC5A325FDF7250070837E /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
 				287AC58525FDF7250070837E /* coinswap_query.grpc.swift in Sources */,
+				049DAA0527311DFE00658CFB /* WalletStargazeCell.swift in Sources */,
 				E1069B0E22968DF4007517DC /* StepRedelegateToViewController.swift in Sources */,
 				287AC5E225FDF7260070837E /* mint_mint.pb.swift in Sources */,
 				283EB77926C8288400B9D28D /* EarnBondedCell.swift in Sources */,

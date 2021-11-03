@@ -824,6 +824,12 @@ class BaseNetWork {
             result = REGEN_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.BITCANA_MAIN) {
             result = BITCANNA_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.ALTHEA_MAIN) {
+            result = ALTHEA_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            result = GRAVITY_BRIDGE_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            result = STATGAZE_API + "v1/account/new_txs/" + address
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -894,6 +900,12 @@ class BaseNetWork {
             result = REGEN_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.BITCANA_MAIN) {
             result = BITCANNA_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.ALTHEA_MAIN) {
+            result = ALTHEA_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            result = GRAVITY_BRIDGE_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            result = STATGAZE_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -998,6 +1010,17 @@ class BaseNetWork {
             
         } else if (chain == ChainType.BITCANA_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-bitcanna-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.ALTHEA_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20100)
+//            return ClientConnection.insecure(group: group).connect(host: "lcd-althea-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20300)
+//            return ClientConnection.insecure(group: group).connect(host: "lcd-gravitybridge-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-stargaze-app.cosmostation.io", port: 9090)
             
         }
         

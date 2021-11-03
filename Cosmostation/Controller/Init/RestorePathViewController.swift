@@ -83,9 +83,6 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
         } else if (userChain == ChainType.MEDI_MAIN || userChain == ChainType.MEDI_TEST) {
             cell?.pathLabel.text = MEDI_BASE_PATH.appending(String(indexPath.row))
             
-        } else if (userChain == ChainType.ALTHEA_TEST) {
-            cell?.pathLabel.text = ALTHEA_BASE_PATH.appending(String(indexPath.row))
-            
         } else {
             cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row))
         }
