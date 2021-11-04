@@ -40,6 +40,9 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
         self.accountTableView.backgroundView?.addGestureRecognizer(dismissTap1)
         
         self.onRefechUserInfo()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+            self.chainTableView.selectRow(at: IndexPath.init(item: self.displayChains.firstIndex(of: self.selectedChain) ?? 0, section: 0), animated: false, scrollPosition: .middle)
+        })
     }
     
     @objc public func tableTapped() {

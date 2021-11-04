@@ -44,6 +44,9 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         self.onRefechUserInfo()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+            self.chainTableView.selectRow(at: IndexPath.init(item: self.displayChains.firstIndex(of: self.selectedChain) ?? 0, section: 0), animated: false, scrollPosition: .middle)
+        })
     }
     
     @objc public func onStartEdit() {
