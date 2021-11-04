@@ -171,23 +171,103 @@ extension WUtils {
                 resource.ticker = "iris"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.KAVA_MAIN) {
-                resource.ticker = "kava"
-                resource.address = account.account_address
-                result.addresses.append(resource)
             } else if (WUtils.getChainType(account.account_base_chain) == ChainType.BINANCE_MAIN) {
                 resource.ticker = "bnb"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.IOV_MAIN) {
-                resource.ticker = "iov"
+            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.OKEX_MAIN) {
+                resource.ticker = "okb"
+                resource.address = WKey.convertAddressOkexToEth(account.account_address)
+                result.addresses.append(resource)
+            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.KAVA_MAIN) {
+                resource.ticker = "kava"
                 resource.address = account.account_address
                 result.addresses.append(resource)
             } else if (WUtils.getChainType(account.account_base_chain) == ChainType.BAND_MAIN) {
                 resource.ticker = "band"
                 resource.address = account.account_address
                 result.addresses.append(resource)
+            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.PERSIS_MAIN) {
+                resource.ticker = "xprt"
+                resource.address = account.account_address
+                result.addresses.append(resource)
+            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.IOV_MAIN) {
+                resource.ticker = "iov"
+                resource.address = account.account_address
+                result.addresses.append(resource)
+            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.CERTIK_MAIN) {
+                resource.ticker = "ctk"
+                resource.address = account.account_address
+                result.addresses.append(resource)
+            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.AKASH_MAIN) {
+                resource.ticker = "akt"
+                resource.address = account.account_address
+                result.addresses.append(resource)
+            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.SENTINEL_MAIN) {
+                resource.ticker = "dvpn"
+                resource.address = account.account_address
+                result.addresses.append(resource)
             }
+//            else if (WUtils.getChainType(account.account_base_chain) == ChainType.FETCH_MAIN) {
+//                resource.ticker = "dvpn"
+//                resource.address = account.account_address
+//                result.addresses.append(resource)
+//            }
+            else if (WUtils.getChainType(account.account_base_chain) == ChainType.CRYPTO_MAIN) {
+                resource.ticker = "cro"
+                resource.address = account.account_address
+                result.addresses.append(resource)
+            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.SIF_MAIN) {
+                resource.ticker = "rowan"
+                resource.address = account.account_address
+                result.addresses.append(resource)
+            }
+//            else if (WUtils.getChainType(account.account_base_chain) == ChainType.KI_MAIN) {
+//                resource.ticker = "rowan"
+//                resource.address = account.account_address
+//                result.addresses.append(resource)
+//            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.RIZON_MAIN) {
+//                resource.ticker = "rowan"
+//                resource.address = account.account_address
+//                result.addresses.append(resource)
+//            }
+            else if (WUtils.getChainType(account.account_base_chain) == ChainType.OSMOSIS_MAIN) {
+                resource.ticker = "osmo"
+                resource.address = account.account_address
+                result.addresses.append(resource)
+            }
+//            else if (WUtils.getChainType(account.account_base_chain) == ChainType.MEDI_MAIN) {
+//                resource.ticker = "osmo"
+//                resource.address = account.account_address
+//                result.addresses.append(resource)
+//            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.EMONEY_MAIN) {
+//                resource.ticker = "osmo"
+//                resource.address = account.account_address
+//                result.addresses.append(resource)
+//            }
+            else if (WUtils.getChainType(account.account_base_chain) == ChainType.REGEN_MAIN) {
+                resource.ticker = "regen"
+                resource.address = account.account_address
+                result.addresses.append(resource)
+            }
+//            else if (WUtils.getChainType(account.account_base_chain) == ChainType.JUNO_MAIN) {
+//                resource.ticker = "regen"
+//                resource.address = account.account_address
+//                result.addresses.append(resource)
+//            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.BITCANA_MAIN) {
+//                resource.ticker = "regen"
+//                resource.address = account.account_address
+//                result.addresses.append(resource)
+//            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.STARGAZE_MAIN) {
+//                resource.ticker = "regen"
+//                resource.address = account.account_address
+//                result.addresses.append(resource)
+//            }
+            else if (WUtils.getChainType(account.account_base_chain) == ChainType.SECRET_MAIN) {
+               resource.ticker = "scrt"
+               resource.address = account.account_address
+               result.addresses.append(resource)
+           }
         }
         return result;
         
