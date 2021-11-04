@@ -74,6 +74,9 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
             naviTokenImg.image = UIImage(named: "tokenGravitydex")
             naviTokenSymbol.text = "GDEX-" + String(poolInfo.id)
             
+            poolDivideDecimal = 6
+            poolDisplayDecimal = 6
+            totalAmount = BaseData.instance.getAvailableAmount_gRPC(poolDenom)
         }
         
         self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(poolDenom, naviPerPrice.font)
