@@ -39,7 +39,7 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
 
     @IBAction func onClickConfirm(_ sender: Any) {
         let popupVC = DelegateWarnPopup(nibName: "DelegateWarnPopup", bundle: nil)
-        if (chainType! == ChainType.SENTINEL_MAIN || chainType! == ChainType.CRYPTO_MAIN) {
+        if (chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.CRYPTO_MAIN || chainType == ChainType.JUNO_MAIN) {
             popupVC.warnImgType = 28
         } else if (chainType! == ChainType.OSMOSIS_MAIN) {
             popupVC.warnImgType = 14
