@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletChainEditViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="displayingChainTableView" destination="C8Q-MK-a9f" id="X6M-0r-2yF"/>
+                <outlet property="emptyListImg" destination="30X-k5-pBb" id="GuP-LG-7Be"/>
                 <outlet property="hideChainTableView" destination="sFZ-tq-R7c" id="1E2-Ii-wR3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,8 +24,8 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="pmT-6o-xeH">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Chains" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6v-42-4hv">
-                    <rect key="frame" x="12" y="615" width="83" height="19"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hidden Chains" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t6v-42-4hv">
+                    <rect key="frame" x="12" y="615" width="105" height="19"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                     <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
@@ -39,8 +40,15 @@
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="historyNoneImg" translatesAutoresizingMaskIntoConstraints="NO" id="30X-k5-pBb">
+                    <rect key="frame" x="182" y="746" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="C1z-jw-420"/>
+                        <constraint firstAttribute="width" constant="50" id="XYq-IX-1yr"/>
+                    </constraints>
+                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C8Q-MK-a9f">
-                    <rect key="frame" x="0.0" y="52" width="414" height="539"/>
+                    <rect key="frame" x="0.0" y="83" width="414" height="508"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -48,6 +56,12 @@
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Displayed Chains" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lvd-WC-XiW">
+                    <rect key="frame" x="12" y="52" width="125" height="19"/>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,12 +70,16 @@
                 <constraint firstItem="sFZ-tq-R7c" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="E6X-NG-27f"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="C8Q-MK-a9f" secondAttribute="trailing" id="Efl-AS-UJ4"/>
                 <constraint firstItem="sFZ-tq-R7c" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="KGW-E9-YaE"/>
+                <constraint firstItem="Lvd-WC-XiW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="OYU-JM-5ZO"/>
                 <constraint firstItem="pmT-6o-xeH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Sc5-Lx-pjW"/>
-                <constraint firstItem="C8Q-MK-a9f" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="cYz-fR-B1Y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="pmT-6o-xeH" secondAttribute="leading" id="dZa-y0-a05"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pmT-6o-xeH" secondAttribute="trailing" id="fEM-dk-wqe"/>
+                <constraint firstItem="Lvd-WC-XiW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="gPH-h2-U0r"/>
+                <constraint firstItem="30X-k5-pBb" firstAttribute="centerX" secondItem="sFZ-tq-R7c" secondAttribute="centerX" id="lPi-0X-CIA"/>
+                <constraint firstItem="30X-k5-pBb" firstAttribute="centerY" secondItem="sFZ-tq-R7c" secondAttribute="centerY" id="nEf-Jp-dQW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sFZ-tq-R7c" secondAttribute="trailing" id="nIk-3h-bua"/>
                 <constraint firstItem="sFZ-tq-R7c" firstAttribute="top" secondItem="t6v-42-4hv" secondAttribute="bottom" constant="12" id="rvT-I2-m8Y"/>
+                <constraint firstItem="C8Q-MK-a9f" firstAttribute="top" secondItem="Lvd-WC-XiW" secondAttribute="bottom" constant="12" id="sfj-GO-BUL"/>
                 <constraint firstItem="pmT-6o-xeH" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="xdv-I4-CfL"/>
                 <constraint firstItem="t6v-42-4hv" firstAttribute="top" secondItem="C8Q-MK-a9f" secondAttribute="bottom" constant="24" id="xwF-ug-ZfX"/>
                 <constraint firstItem="C8Q-MK-a9f" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ysf-7j-nII"/>
@@ -71,5 +89,6 @@
     </objects>
     <resources>
         <image name="bg_cosmos" width="360" height="740"/>
+        <image name="historyNoneImg" width="36" height="36"/>
     </resources>
 </document>

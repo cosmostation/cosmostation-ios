@@ -72,6 +72,11 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             if(indexPath.row == 0) {
+                if let parentVC = self.parent as? MainTabSettingViewController {
+                    parentVC.onShowSelectChainDialog()
+                }
+                
+            } else if (indexPath.row == 1) {
                 let accoutManageVC = WalletManageViewController(nibName: "WalletManageViewController", bundle: nil)
                 accoutManageVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""

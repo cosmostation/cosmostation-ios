@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class WalletManageViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, SBCardPopupDelegate {
+class WalletManageViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var chainTableView: UITableView!
     @IBOutlet weak var accountTableView: UITableView!
@@ -126,47 +126,6 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
     func sortWallet() {
         self.displayAccounts.sort{
             return $0.account_sort_order < $1.account_sort_order
-        }
-    }
-    
-    func SBCardPopupResponse(type:Int, result: Int) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(490), execute: {
-            var tagetVC:BaseViewController?
-            if (result == 1) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "CreateViewController") as! CreateViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            } else if (result == 2) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            } else if (result == 3) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
-                
-            } else if (result == 4) {
-                
-            }
-            if (tagetVC != nil) {
-                tagetVC?.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(tagetVC!, animated: true)
-            }
-        })
-    }
-    
-    @IBAction func onClickAddNew(_ sender: UIButton) {
-        self.onShowSelectChainDialog()
-    }
-    
-    override func onChainSelected(_ chainType: ChainType) {
-        self.toAddChain = chainType
-        if (BaseData.instance.selectAllAccountsByChain(toAddChain!).count >= MAX_WALLET_PER_CHAIN) {
-            self.onShowToast(NSLocalizedString("error_max_account_number", comment: ""))
-            
-        } else {let popupVC = NewAccountTypePopup(nibName: "NewAccountTypePopup", bundle: nil)
-            let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
-            cardPopup.resultDelegate = self
-            cardPopup.show(onViewController: self)
         }
     }
     

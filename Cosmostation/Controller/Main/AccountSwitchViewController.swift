@@ -125,21 +125,6 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     @IBAction func onClose(_ sender: UIButton) {
         self.dismiss(animated: false, completion: nil)
     }
-
-    @IBAction func onClickAddNew(_ sender: UIButton) {
-        self.onShowSelectChainDialog()
-    }
-    
-    override func onChainSelected(_ chainType: ChainType) {
-        self.toAddChain = chainType
-        if (BaseData.instance.selectAllAccountsByChain(toAddChain!).count >= MAX_WALLET_PER_CHAIN) {
-            self.onShowToast(NSLocalizedString("error_max_account_number", comment: ""))
-            
-        } else {
-            self.resultDelegate?.addAccount(toAddChain!)
-            self.dismiss(animated: false, completion: nil)
-        }
-    }
 }
 
 protocol AccountSwitchDelegate {

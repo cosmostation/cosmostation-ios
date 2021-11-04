@@ -12,6 +12,7 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
     
     @IBOutlet weak var displayingChainTableView: UITableView!
     @IBOutlet weak var hideChainTableView: UITableView!
+    @IBOutlet weak var emptyListImg: UIImageView!
     
     var allChains = Array<ChainType>()
     var displayedChains = Array<ChainType>()
@@ -54,7 +55,6 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         self.onSaveUserChains()
     }
     
-    
     @objc public func onEndEdit() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -68,6 +68,8 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         if (tableView == displayingChainTableView) {
             return displayedChains.count
         } else if (tableView == hideChainTableView) {
+            if (hidedChains.count == 0) { emptyListImg.isHidden = false }
+            else { emptyListImg.isHidden = true }
             return hidedChains.count
         } else {
             return 0

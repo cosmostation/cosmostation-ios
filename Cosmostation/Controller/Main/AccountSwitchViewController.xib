@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,32 +50,8 @@
                         <constraint firstItem="7Gr-ym-3NM" firstAttribute="centerY" secondItem="8YH-S8-9Ra" secondAttribute="centerY" id="t6q-Xf-5JT"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CBa-gk-V8J">
-                    <rect key="frame" x="16" y="796" width="382" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="1Yt-6g-7LZ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                    <state key="normal" title="ADD NEW">
-                        <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="onClickAddNew:" destination="-1" eventType="touchUpInside" id="gpP-Wt-Te6"/>
-                    </connections>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bt4-ek-5uI">
-                    <rect key="frame" x="0.0" y="102" width="80" height="682"/>
+                    <rect key="frame" x="0.0" y="102" width="80" height="760"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -83,7 +59,7 @@
                     </constraints>
                 </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ytM-en-tlJ">
-                    <rect key="frame" x="80" y="102" width="334" height="682"/>
+                    <rect key="frame" x="80" y="102" width="334" height="760"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -94,17 +70,14 @@
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8YH-S8-9Ra" secondAttribute="trailing" constant="8" id="4Fy-ih-gRV"/>
-                <constraint firstItem="CBa-gk-V8J" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Atb-k1-5o3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="8YH-S8-9Ra" secondAttribute="leading" constant="8" id="G2w-nE-tXf"/>
-                <constraint firstItem="CBa-gk-V8J" firstAttribute="top" secondItem="bt4-ek-5uI" secondAttribute="bottom" constant="12" id="Oq9-iw-qdR"/>
                 <constraint firstItem="ytM-en-tlJ" firstAttribute="top" secondItem="bt4-ek-5uI" secondAttribute="top" id="STK-hE-mrx"/>
                 <constraint firstItem="bt4-ek-5uI" firstAttribute="top" secondItem="8YH-S8-9Ra" secondAttribute="bottom" constant="8" symbolic="YES" id="WIS-Fp-95d"/>
                 <constraint firstItem="ytM-en-tlJ" firstAttribute="leading" secondItem="bt4-ek-5uI" secondAttribute="trailing" id="Yay-Bl-u4J"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="bt4-ek-5uI" secondAttribute="bottom" id="cd3-2e-jfQ"/>
                 <constraint firstItem="ytM-en-tlJ" firstAttribute="bottom" secondItem="bt4-ek-5uI" secondAttribute="bottom" id="eow-PO-MRm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ytM-en-tlJ" secondAttribute="trailing" id="fW7-nE-dTs"/>
                 <constraint firstItem="8YH-S8-9Ra" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="hUb-iI-Tyu"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CBa-gk-V8J" secondAttribute="trailing" constant="16" id="uRn-4g-5n8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="CBa-gk-V8J" secondAttribute="bottom" constant="16" id="v8T-DK-uwg"/>
                 <constraint firstItem="bt4-ek-5uI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vNh-EV-jsT"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="105.80357142857143"/>
