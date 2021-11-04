@@ -19,6 +19,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var feeTotalDenom: UILabel!
     @IBOutlet weak var feeTotalValue: UILabel!
     
+    @IBOutlet weak var gasDetailCard: CardView!
     @IBOutlet weak var gasAmountLabel: UILabel!
     @IBOutlet weak var gasRateLabel: UILabel!
     @IBOutlet weak var gasFeeLabel: UILabel!
@@ -54,13 +55,22 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
         } else {
             gasSelectSegments.tintColor = WUtils.getChainColor(chainType!)
         }
+        
+        if (chainType == ChainType.SIF_MAIN) {
+            gasDetailCard.isHidden = true
+        }
+        
         mEstimateGasAmount = WUtils.getEstimateGasAmount(chainType!, pageHolderVC.mType!, pageHolderVC.mRewardTargetValidators_gRPC.count)
         onUpdateView()
     }
     
     func onCalculateFees() {
         mSelectedGasRate = WUtils.getGasRate(chainType!, mSelectedGasPosition)
-        mFee = mSelectedGasRate.multiplying(by: mEstimateGasAmount, withBehavior: WUtils.handler0Up)
+        if (chainType == ChainType.SIF_MAIN) {
+            mFee = NSDecimalNumber.init(string: "100000000000000000")
+        } else {
+            mFee = mSelectedGasRate.multiplying(by: mEstimateGasAmount, withBehavior: WUtils.handler0Up)
+        }
 //        print("mSelectedGasRate ", mSelectedGasRate)
 //        print("mEstimateGasAmount ", mEstimateGasAmount)
 //        print("mFee ", mFee)

@@ -3634,9 +3634,7 @@ public class WUtils {
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
         } else if (chain == ChainType.SIF_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_SIF)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            return NSDecimalNumber.init(string: "100000000000000000")
             
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MEDI)
@@ -3761,15 +3759,6 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_IOV)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_IOV)
-            }
-            
-        } else if (chain == ChainType.SIF_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_SIF)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_SIF)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_SIF)
             }
             
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {

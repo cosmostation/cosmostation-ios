@@ -494,10 +494,6 @@ let GAS_FEE_RATE_TINY_IOV                   = "0.10"
 let GAS_FEE_RATE_LOW_IOV                    = "1.00"
 let GAS_FEE_RATE_AVERAGE_IOV                = "1.00"
 
-let GAS_FEE_RATE_TINY_SIF                   = "0.50";
-let GAS_FEE_RATE_LOW_SIF                    = "0.50";
-let GAS_FEE_RATE_AVERAGE_SIF                = "0.50";
-
 let GAS_FEE_RATE_TINY_MEDI                  = "5";
 let GAS_FEE_RATE_LOW_MEDI                   = "5";
 let GAS_FEE_RATE_AVERAGE_MEDI               = "5";
