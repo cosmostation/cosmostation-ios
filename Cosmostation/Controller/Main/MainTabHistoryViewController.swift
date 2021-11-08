@@ -137,8 +137,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     @objc func onRequestFetch() {
         if (chainType == ChainType.CRYPTO_MAIN) {
             onFetchApiHistoryCustom(account!.account_address)
-        } else if (chainType == ChainType.KI_MAIN) {
-            onFetchLegacyOldApiHistory(account!.account_address)
         } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
             onFetchBnbHistory(account!.account_address)
         } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
@@ -168,8 +166,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         var cntString = "0"
         if (chainType == ChainType.CRYPTO_MAIN) {
             cntString = String(self.mApiCustomHistories.count)
-        } else if (chainType == ChainType.KI_MAIN) {
-            cntString = String(self.mApiHistories.count)
         } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
             cntString = String(self.mBnbHistories.count)
         } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
@@ -184,8 +180,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (chainType == ChainType.CRYPTO_MAIN) {
             return self.mApiCustomHistories.count
-        } else if (chainType == ChainType.KI_MAIN) {
-            return self.mApiHistories.count
         } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
             return self.mBnbHistories.count
         } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
@@ -199,11 +193,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         if (chainType == ChainType.CRYPTO_MAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
             cell?.bindHistoryCustomView(mApiCustomHistories[indexPath.row], account!.account_address)
-            return cell!
-            
-        } else if (chainType == ChainType.KI_MAIN) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
-            cell?.bindHistoryLegacyView(mApiHistories[indexPath.row], account!.account_address)
             return cell!
             
         } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
@@ -244,15 +233,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(txDetailVC, animated: true)
             }
-            
-        } else if (chainType == ChainType.KI_MAIN) {
-            let history = mApiHistories[indexPath.row]
-            let txDetailVC = TxDetailViewController(nibName: "TxDetailViewController", bundle: nil)
-            txDetailVC.mIsGen = false
-            txDetailVC.mTxHash = history.tx_hash
-            txDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(txDetailVC, animated: true)
             
         } else if (chainType == ChainType.BINANCE_MAIN) {
             let bnbHistory = mBnbHistories[indexPath.row]

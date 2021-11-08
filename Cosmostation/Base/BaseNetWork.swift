@@ -983,8 +983,7 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-stargaze-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.KI_MAIN) {
-//            return ClientConnection.insecure(group: group).connect(host: "lcd-ki-app.cosmostation.io", port: 9090)
-            return ClientConnection.insecure(group: group).connect(host: "lcd-certik-app.cosmostation.io", port: 9090)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-kichain-app.cosmostation.io", port: 9090)
         }
         
         

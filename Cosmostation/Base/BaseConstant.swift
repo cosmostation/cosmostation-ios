@@ -96,7 +96,6 @@ let SIF_API                             = "https://api-sifchain.cosmostation.io/
 let SIF_FINANCE_API                     = "https://api-cryptoeconomics.sifchain.finance/";
 
 
-let KI_URL                              = "https://lcd-kichain-app.cosmostation.io/";
 let KI_API                              = "https://api-kichain.cosmostation.io/";
 
 
