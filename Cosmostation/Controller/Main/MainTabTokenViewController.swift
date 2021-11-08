@@ -612,6 +612,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allStars.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(STARGAZE_MAIN_DENOM, allStars, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == KI_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenKifoundation")
+            cell?.tokenSymbol.text = "XKI"
+            cell?.tokenSymbol.textColor = COLOR_KI
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "KiChain Staking Token"
+            
+            let allKi = WUtils.getAllMainAsset(KI_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allKi.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KI_MAIN_DENOM, allKi, 6, cell!.tokenValue.font)
+            
         }
         
         
@@ -792,17 +803,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             let allSecret = WUtils.getAllMainAssetOld(SECRET_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allSecret.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(SECRET_MAIN_DENOM, allSecret, 6, cell!.tokenValue.font)
-            
-        } else if (balance.balance_denom == KI_MAIN_DENOM) {
-            cell?.tokenImg.image = UIImage(named: "tokenKifoundation")
-            cell?.tokenSymbol.text = "XKI"
-            cell?.tokenSymbol.textColor = COLOR_KI
-            cell?.tokenTitle.text = "(" + balance.balance_denom + ")"
-            cell?.tokenDescription.text = "KiChain Staking Token"
-            
-            let allKi = WUtils.getAllMainAssetOld(KI_MAIN_DENOM)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allKi.stringValue, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KI_MAIN_DENOM, allKi, 6, cell!.tokenValue.font)
             
         }
     }
