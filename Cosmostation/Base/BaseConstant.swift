@@ -518,6 +518,10 @@ let GAS_FEE_RATE_TINY_STARGAZER             = "0.000"
 let GAS_FEE_RATE_LOW_STARGAZER              = "0.000"
 let GAS_FEE_RATE_AVERAGE_STARGAZER          = "0.000"
 
+let GAS_FEE_RATE_TINY_KI                    = "0.025";
+let GAS_FEE_RATE_LOW_KI                     = "0.025";
+let GAS_FEE_RATE_AVERAGE_KI                 = "0.025";
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
@@ -628,7 +632,7 @@ let SIF_GAS_AMOUNT_INCENTIVE                    = "250000";
 let SIF_GAS_AMOUNT_LP                           = "250000";
 let SIF_GAS_AMOUNT_SWAP                         = "250000";
 
-let KI_GAS_FEE_RATE_AVERAGE                     = "0.025";
+//let KI_GAS_FEE_RATE_AVERAGE                     = "0.025";
 let KI_GAS_AMOUNT_SEND                          = "100000";
 let KI_GAS_AMOUNT_STAKE                         = "200000";
 let KI_GAS_AMOUNT_REDELEGATE                    = "300000";
