@@ -114,10 +114,6 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
             inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
             return
         }
-        if (userInput.compare(NSDecimalNumber.init(string: "0.01")).rawValue < 0) {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
-            return
-        }
         if (userInput.multiplying(byPowerOf10: dpInPutDecimal).compare(availableMaxAmount).rawValue > 0) {
             inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
             return
