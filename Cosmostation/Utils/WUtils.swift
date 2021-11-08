@@ -5736,8 +5736,8 @@ public class WUtils {
     
     public static func isGRPC(_ chain: ChainType?) -> Bool {
         if (chain == ChainType.BINANCE_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.KAVA_MAIN ||
-                chain == ChainType.KI_MAIN || chain == ChainType.SECRET_MAIN ||
-                chain == ChainType.BINANCE_TEST || chain == ChainType.OKEX_TEST || chain == ChainType.KAVA_TEST) {
+            chain == ChainType.SECRET_MAIN ||
+            chain == ChainType.BINANCE_TEST || chain == ChainType.OKEX_TEST || chain == ChainType.KAVA_TEST) {
             return false
         }
         return true
