@@ -303,7 +303,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
                    self.mChainType == ChainType.CERTIK_MAIN  || self.mChainType == ChainType.EMONEY_MAIN || self.mChainType == ChainType.FETCH_MAIN ||
                    self.mChainType == ChainType.RIZON_MAIN || self.mChainType == ChainType.BAND_MAIN || self.mChainType == ChainType.JUNO_MAIN ||
                    self.mChainType == ChainType.REGEN_MAIN || self.mChainType == ChainType.BITCANA_MAIN || self.mChainType == ChainType.ALTHEA_MAIN ||
-                   self.mChainType == ChainType.GRAVITY_BRIDGE_MAIN || self.mChainType == ChainType.STARGAZE_MAIN || self.mChainType == ChainType.KI_MAIN) {
+                   self.mChainType == ChainType.GRAVITY_BRIDGE_MAIN || self.mChainType == ChainType.KI_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -361,6 +361,23 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
             self.onFetchgRPCOsmoPools()
+            
+        } else if (self.mChainType == ChainType.STARGAZE_MAIN) {
+            self.mFetchCnt = 9
+            self.onFetchgRPCNodeInfo()
+            self.onFetchgRPCAuth(self.mAccount.account_address)
+            self.onFetchgRPCBondedValidators(0)
+            self.onFetchgRPCUnbondedValidators(0)
+            self.onFetchgRPCUnbondingValidators(0)
+            
+            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
+            self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
+            self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
+            self.onFetchgRPCRewards(self.mAccount.account_address, 0)
+            
+//            self.onFetchgRPCStargazeClaimParam()
+//            self.onFetchgRPCStargazeClaimRecord(self.mAccount.account_address)
+//            self.onFetchgRPCStargazeClaimTotal(self.mAccount.account_address)
         }
         
         else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.RIZON_TEST || self.mChainType == ChainType.ALTHEA_TEST ||
@@ -1274,6 +1291,58 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
+    
+    func onFetchgRPCStargazeClaimParam() {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryParamsRequest.init()
+                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("Param response ", response)
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCStargazeClaimParam failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchgRPCStargazeClaimRecord(_ address: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryClaimRecordRequest.with { $0.address = address }
+                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).claimRecord(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("Record response ", response)
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCStargazeClaimRecord failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchgRPCStargazeClaimTotal(_ address: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryTotalClaimableRequest.with { $0.address = address }
+                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).totalClaimable(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("Total response ", response)
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCStargazeClaimTotal failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
     
     func onFetchPriceInfo() {
         let request = Alamofire.request(BaseNetWork.getPrices(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])

@@ -69,6 +69,13 @@
 		04D138582691E25500D6AF9F /* TxJoinPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D138562691E25500D6AF9F /* TxJoinPoolCell.xib */; };
 		04D1385B2691E26700D6AF9F /* TxExitPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D138592691E26700D6AF9F /* TxExitPoolCell.swift */; };
 		04D1385C2691E26700D6AF9F /* TxExitPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D1385A2691E26700D6AF9F /* TxExitPoolCell.xib */; };
+		04F5FE0727394DB600472DFA /* stargaze_claim_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5FE0027394DB500472DFA /* stargaze_claim_v1beta1_params.pb.swift */; };
+		04F5FE0827394DB600472DFA /* stargaze_claim_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5FE0127394DB500472DFA /* stargaze_claim_v1beta1_query.grpc.swift */; };
+		04F5FE0927394DB600472DFA /* stargaze_claim_v1beta1_claim_record.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5FE0227394DB500472DFA /* stargaze_claim_v1beta1_claim_record.pb.swift */; };
+		04F5FE0A27394DB600472DFA /* stargaze_claim_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5FE0327394DB500472DFA /* stargaze_claim_v1beta1_tx.grpc.swift */; };
+		04F5FE0B27394DB600472DFA /* stargaze_claim_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5FE0427394DB600472DFA /* stargaze_claim_v1beta1_query.pb.swift */; };
+		04F5FE0C27394DB600472DFA /* stargaze_claim_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5FE0527394DB600472DFA /* stargaze_claim_v1beta1_genesis.pb.swift */; };
+		04F5FE0D27394DB600472DFA /* stargaze_claim_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F5FE0627394DB600472DFA /* stargaze_claim_v1beta1_tx.pb.swift */; };
 		2800CF9624719EC4003C3EF1 /* Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF9524719EC4003C3EF1 /* Tally.swift */; };
 		2800CF982471A004003C3EF1 /* CosmosProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF972471A004003C3EF1 /* CosmosProposer.swift */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -1273,6 +1280,13 @@
 		04D138562691E25500D6AF9F /* TxJoinPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxJoinPoolCell.xib; sourceTree = "<group>"; };
 		04D138592691E26700D6AF9F /* TxExitPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxExitPoolCell.swift; sourceTree = "<group>"; };
 		04D1385A2691E26700D6AF9F /* TxExitPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxExitPoolCell.xib; sourceTree = "<group>"; };
+		04F5FE0027394DB500472DFA /* stargaze_claim_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_claim_v1beta1_params.pb.swift; sourceTree = "<group>"; };
+		04F5FE0127394DB500472DFA /* stargaze_claim_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_claim_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		04F5FE0227394DB500472DFA /* stargaze_claim_v1beta1_claim_record.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_claim_v1beta1_claim_record.pb.swift; sourceTree = "<group>"; };
+		04F5FE0327394DB500472DFA /* stargaze_claim_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_claim_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		04F5FE0427394DB600472DFA /* stargaze_claim_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_claim_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		04F5FE0527394DB600472DFA /* stargaze_claim_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_claim_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		04F5FE0627394DB600472DFA /* stargaze_claim_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_claim_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		2800CF9524719EC4003C3EF1 /* Tally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tally.swift; sourceTree = "<group>"; };
 		2800CF972471A004003C3EF1 /* CosmosProposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposer.swift; sourceTree = "<group>"; };
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
@@ -2555,6 +2569,13 @@
 		282121BA25FDE71C0016ABFE /* ProtoBuff */ = {
 			isa = PBXGroup;
 			children = (
+				04F5FE0227394DB500472DFA /* stargaze_claim_v1beta1_claim_record.pb.swift */,
+				04F5FE0527394DB600472DFA /* stargaze_claim_v1beta1_genesis.pb.swift */,
+				04F5FE0027394DB500472DFA /* stargaze_claim_v1beta1_params.pb.swift */,
+				04F5FE0127394DB500472DFA /* stargaze_claim_v1beta1_query.grpc.swift */,
+				04F5FE0427394DB600472DFA /* stargaze_claim_v1beta1_query.pb.swift */,
+				04F5FE0327394DB500472DFA /* stargaze_claim_v1beta1_tx.grpc.swift */,
+				04F5FE0627394DB600472DFA /* stargaze_claim_v1beta1_tx.pb.swift */,
 				2887BA1726DE278000CDA415 /* shentu_auth_v1alpha1_tx.grpc.swift */,
 				2887BA2026DE278200CDA415 /* shentu_auth_v1alpha1_tx.pb.swift */,
 				2887BA2226DE278300CDA415 /* shentu_auth_v1alpha1_vesting.pb.swift */,
@@ -4651,10 +4672,12 @@
 				28D7BE5A25F0FBB7006EECD7 /* KavaHardTotalDeposit.swift in Sources */,
 				282A9612260DE054000F4CE6 /* StepFeeGrpcViewController.swift in Sources */,
 				2887BA4B26DE278700CDA415 /* shentu_oracle_v1alpha1_query.grpc.swift in Sources */,
+				04F5FE0A27394DB600472DFA /* stargaze_claim_v1beta1_tx.grpc.swift in Sources */,
 				28D7BE5625F0FAFA006EECD7 /* HardInterestRate.swift in Sources */,
 				287AC5A825FDF7250070837E /* tendermint_types_validator.pb.swift in Sources */,
 				287AC5FC25FDF7260070837E /* akash_base_v1beta1_resource.pb.swift in Sources */,
 				28B4303524F7766200BD7BB2 /* TxOkDirectVoteCell.swift in Sources */,
+				04F5FE0B27394DB600472DFA /* stargaze_claim_v1beta1_query.pb.swift in Sources */,
 				E16B89152341C558003E0922 /* TokenCell.swift in Sources */,
 				28A3700A269DA17000990696 /* tendermint_liquidity_v1beta1_genesis.pb.swift in Sources */,
 				28C3F50D269DC54C00F4A58C /* TxGravitySwapCell.swift in Sources */,
@@ -4679,6 +4702,7 @@
 				28B7858726B3A7E4009F755F /* panacea_aol_v2_topic.pb.swift in Sources */,
 				287AC5D625FDF7250070837E /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
 				E16D9B28224A08660019B7BB /* AlphabetViewController.swift in Sources */,
+				04F5FE0927394DB600472DFA /* stargaze_claim_v1beta1_claim_record.pb.swift in Sources */,
 				28DB56EB25F9DC7A00B2F0E5 /* HardDetailAssetsCell.swift in Sources */,
 				28FEDCE926DB141900A43D01 /* KavaIncentiveClaim3ViewController.swift in Sources */,
 				28A3701D269DA20600990696 /* gravity_v1_msgs.grpc.swift in Sources */,
@@ -4781,6 +4805,7 @@
 				288F807A270DDEFA009825B5 /* TxSifAddLpCell.swift in Sources */,
 				289EF83126824E4700F90AC1 /* osmosis_pool-incentives_v1beta1_query.pb.swift in Sources */,
 				289EF83726824E4700F90AC1 /* osmosis_lockup_tx.grpc.swift in Sources */,
+				04F5FE0827394DB600472DFA /* stargaze_claim_v1beta1_query.grpc.swift in Sources */,
 				287AC5F625FDF7260070837E /* ibc_core_connection_v1_query.pb.swift in Sources */,
 				28B7858026B3A7E4009F755F /* panacea_token_v2_query.pb.swift in Sources */,
 				28B7857C26B3A7E4009F755F /* panacea_aol_v2_record.pb.swift in Sources */,
@@ -4984,6 +5009,7 @@
 				287AC64525FDF7260070837E /* tendermint_abci_types.pb.swift in Sources */,
 				0497585A26856DE30039872C /* oracle_v1_tx.grpc.swift in Sources */,
 				28DB571525FA3BEA00B2F0E5 /* HardPoolRepay3ViewController.swift in Sources */,
+				04F5FE0C27394DB600472DFA /* stargaze_claim_v1beta1_genesis.pb.swift in Sources */,
 				E19A322B2254AFE100A05E41 /* ManageAccountCell.swift in Sources */,
 				2816E11526BA886100408F8E /* EventHorizonResultViewController.swift in Sources */,
 				287D746126A52B8E00532E01 /* JoinPool0ViewController.swift in Sources */,
@@ -5012,6 +5038,7 @@
 				283E74FF26CE247C0097CC04 /* StakingTokenGrpcViewController.swift in Sources */,
 				287AC64C25FDF7260070837E /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
 				287AC58D25FDF7250070837E /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
+				04F5FE0D27394DB600472DFA /* stargaze_claim_v1beta1_tx.pb.swift in Sources */,
 				E151B647224850040026B8C0 /* Msg.swift in Sources */,
 				E151B62E2245248C0026B8C0 /* MyValidatorCell.swift in Sources */,
 				28B2E4D326CFFA9500ECF960 /* TokenStakingOldCell.swift in Sources */,
@@ -5073,6 +5100,7 @@
 				283D2EA624F5308900247424 /* OkTokenList.swift in Sources */,
 				287AC60425FDF7260070837E /* guardian_query.pb.swift in Sources */,
 				284FBC7D26DBE97200403FE2 /* TxSwapDepositCell.swift in Sources */,
+				04F5FE0727394DB600472DFA /* stargaze_claim_v1beta1_params.pb.swift in Sources */,
 				287AC60725FDF7260070837E /* akash_audit_v1beta1_genesis.pb.swift in Sources */,
 				28E8FAEB2716F190005EAA9B /* SelectTextCell.swift in Sources */,
 				287AC5E125FDF7260070837E /* akash_market_v1beta1_order.pb.swift in Sources */,

@@ -611,7 +611,6 @@ let SENTINEL_GAS_AMOUNT_REWARD_ADDRESS_CHANGE   = "100000";
 let SENTINEL_GAS_AMOUNT_VOTE                    = "100000";
 let SENTINEL_GAS_AMOUNT_IBC_SEND                = "500000";
 
-//let FETCH_GAS_FEE_RATE_AVERAGE                  = "0.00";
 let FETCH_GAS_AMOUNT_SEND                       = "100000";
 let FETCH_GAS_AMOUNT_STAKE                      = "200000";
 let FETCH_GAS_AMOUNT_REDELEGATE                 = "300000";
@@ -632,7 +631,6 @@ let SIF_GAS_AMOUNT_INCENTIVE                    = "250000";
 let SIF_GAS_AMOUNT_LP                           = "250000";
 let SIF_GAS_AMOUNT_SWAP                         = "250000";
 
-//let KI_GAS_FEE_RATE_AVERAGE                     = "0.025";
 let KI_GAS_AMOUNT_SEND                          = "100000";
 let KI_GAS_AMOUNT_STAKE                         = "200000";
 let KI_GAS_AMOUNT_REDELEGATE                    = "300000";
