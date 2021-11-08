@@ -4668,7 +4668,7 @@ public class WUtils {
         else if (chain == ChainType.ALTHEA_TEST) { return UIImage(named: "testnetAlthea") }
         else if (chain == ChainType.UMEE_TEST) { return UIImage(named: "testnetUmee") }
         else if (chain == ChainType.AXELAR_TEST) { return UIImage(named: "testnetAxelar") }
-        return UIImage(named: "cosmosTestChainImg")
+        return UIImage(named: "defaultChainImg")
     }
     
     static func getChainTitle(_ chain: ChainType?) -> String {

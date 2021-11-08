@@ -45,17 +45,12 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
         } else {
             ibcSendableRelayers = BaseData.instance.getIbcSendableRelayers()
         }
-//        print("ibcSendableRelayers ", ibcSendableRelayers.count)
         if (ibcSendableRelayers.count <= 0) {
             self.onForceBack()
             return
         }
-        onSortRelayer()
+        onSortToChain()
         ibcSelectedRelayer = ibcSendableRelayers[0]
-//        print("ibcSelectedRelayer ", ibcSelectedRelayer)
-//        ibcSendableRelayers.forEach { relayer in
-//            print("relayer ", relayer.chain_id)
-//        }
         
         //init select for channel
         ibcSendablePaths = ibcSelectedRelayer.paths
@@ -63,10 +58,8 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
             self.onForceBack()
             return
         }
-        onSortPath()
+        onSortChannel()
         ibcSelectedPath = ibcSendablePaths[0]
-//        print("ibcSendablePaths ", ibcSendablePaths.count)
-//        print("ibcSelectedPath ", ibcSelectedPath)
         
         self.onUpdateView()
         self.toChainCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToChain (_:))))
@@ -93,11 +86,6 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
         } else {
             self.relayerImg.image = UIImage(named: "ibcunknown")
         }
-//        if let description = ibcSelectedPath.description {
-//            self.relayerMsg.text = "(" + description + ")"
-//        } else {
-//            self.relayerMsg.text = "(Unknown)"
-//        }
     }
     
     @objc func onClickToChain (_ sender: UITapGestureRecognizer) {
@@ -122,7 +110,7 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
         if (type == SELECT_POPUP_IBC_CHAIN) {
             ibcSelectedRelayer = ibcSendableRelayers[result]
             ibcSendablePaths = ibcSelectedRelayer.paths
-            onSortPath()
+            onSortChannel()
             ibcSelectedPath = ibcSendablePaths[0]
             onUpdateView()
             
@@ -178,7 +166,7 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
         })
     }
     
-    func onSortRelayer() {
+    func onSortToChain() {
         self.ibcSendableRelayers.sort {
             if ($0.chain_id?.contains("cosmoshub-") == true) { return true }
             if ($0.chain_id?.contains("osmosis-") == true) { return true }
@@ -188,10 +176,17 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
         }
     }
     
-    func onSortPath() {
+    func onSortChannel() {
         self.ibcSendablePaths.sort {
             if ($0.auth == true) { return true }
             if ($1.auth != true) { return false }
+        
+            if (self.ibcSendDenom.starts(with: "ibc/")) {
+                if let ibcToken = BaseData.instance.getIbcToken(self.ibcSendDenom.replacingOccurrences(of: "ibc/", with: "")) {
+                    if ($0.channel_id == ibcToken.channel_id) { return true }
+                    if ($1.channel_id != ibcToken.channel_id) { return false }
+                }
+            }
             return false
         }
     }
