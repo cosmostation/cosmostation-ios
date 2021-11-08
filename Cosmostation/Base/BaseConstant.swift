@@ -918,8 +918,8 @@ public enum ChainType: String {
         result.append(REGEN_MAIN)
         result.append(JUNO_MAIN)
         result.append(BITCANA_MAIN)
-        result.append(SECRET_MAIN)
         result.append(STARGAZE_MAIN)
+        result.append(SECRET_MAIN)
         
 //        result.append(ALTHEA_MAIN)
 //        result.append(GRAVITY_BRIDGE_MAIN)
