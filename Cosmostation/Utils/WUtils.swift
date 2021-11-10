@@ -4751,6 +4751,27 @@ public class WUtils {
         return "Unknown"
     }
     
+    
+    
+    static func getDefaultRlayerImg(_ chain: ChainType?) -> String {
+        if (chain == ChainType.COSMOS_MAIN) { return RELAYER_IMG_COSMOS }
+        else if (chain == ChainType.IRIS_MAIN) { return RELAYER_IMG_IRIS }
+        else if (chain == ChainType.BAND_MAIN) { return RELAYER_IMG_BAND }
+        else if (chain == ChainType.IOV_MAIN) { return RELAYER_IMG_IOV }
+        else if (chain == ChainType.CERTIK_MAIN) { return RELAYER_IMG_CERTIK }
+        else if (chain == ChainType.AKASH_MAIN) { return RELAYER_IMG_AKASH }
+        else if (chain == ChainType.PERSIS_MAIN) { return RELAYER_IMG_PERSIS }
+        else if (chain == ChainType.SENTINEL_MAIN) { return RELAYER_IMG_SENTINEL }
+        else if (chain == ChainType.FETCH_MAIN) { return RELAYER_IMG_FETCH }
+        else if (chain == ChainType.CRYPTO_MAIN) { return RELAYER_IMG_CRYPTO }
+        else if (chain == ChainType.SIF_MAIN) { return RELAYER_IMG_SIF }
+        else if (chain == ChainType.OSMOSIS_MAIN) { return RELAYER_IMG_OSMOSIS }
+        else if (chain == ChainType.EMONEY_MAIN) { return RELAYER_IMG_EMONEY }
+        else if (chain == ChainType.JUNO_MAIN) { return RELAYER_IMG_JUNO }
+        else if (chain == ChainType.REGEN_MAIN) { return RELAYER_IMG_REGEN }
+        return ""
+    }
+    
     static func getChainTypeByChainId(_ chainId: String?) -> ChainType? {
         if (chainId?.contains("cosmoshub-") == true) {
             return ChainType.COSMOS_MAIN

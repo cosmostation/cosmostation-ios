@@ -28,6 +28,7 @@ public struct Path {
     var port_id: String?
     var counter_party: CounterParty?
     var description: String?
+    var relayer_img: String?
     
     init(_ dictionary: NSDictionary?) {
         self.auth = dictionary?["auth"] as? Bool
@@ -37,6 +38,7 @@ public struct Path {
             self.counter_party = CounterParty.init(rawCounterParty)
         }
         self.description = dictionary?["description"] as? String
+        self.relayer_img = dictionary?["relayer_img"] as? String
     }
 }
 

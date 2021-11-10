@@ -117,6 +117,16 @@ final class BaseData : NSObject{
         return nil
     }
     
+    func getIbcRlayerImg(_ chainType: ChainType?, _ channelId: String?) -> URL? {
+        if let url = URL(string: getIbcPath(channelId)?.relayer_img ?? "") {
+            return url
+        }
+        if let url = URL(string: WUtils.getDefaultRlayerImg(chainType)) {
+            return url
+        }
+        return nil
+    }
+    
     func getIbcSendableRelayers() -> Array<IbcPath> {
         var result = Array<IbcPath>()
         for ibcPath in mIbcPaths {

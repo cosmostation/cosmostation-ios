@@ -10,40 +10,27 @@ import UIKit
 
 class TokenDetailIBCInfoCell: TokenDetailCell {
 
-    @IBOutlet weak var statusImg: UIImageView!
-    @IBOutlet weak var counterChainIDLabel: UILabel!
+    @IBOutlet weak var relayerImg: UIImageView!
     @IBOutlet weak var channelLabel: UILabel!
-    @IBOutlet weak var counterChannelLabel: UILabel!
     @IBOutlet weak var denomLabel: UILabel!
-    @IBOutlet weak var counterDenomLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.selectionStyle = .none
     }
     
     func onBindIBCTokenInfo(_ chainType: ChainType, _ ibcDenom: String) {
         let ibcHash = ibcDenom.replacingOccurrences(of: "ibc/", with: "")
         if let ibcToken = BaseData.instance.getIbcToken(ibcHash) {
-            if (ibcToken.auth == true) {
-                statusImg.image = UIImage(named: "ibcauthed")
-            } else {
-                statusImg.image = UIImage(named: "ibcunknown")
+            if let url = BaseData.instance.getIbcRlayerImg(chainType, ibcToken.channel_id) {
+                relayerImg.af_setImage(withURL: url)
             }
-            counterChainIDLabel.text = ibcToken.counter_party?.chain_id
             channelLabel.text = ibcToken.channel_id
-            counterChannelLabel.text = ibcToken.counter_party?.channel_id
             denomLabel.text = ibcDenom
-            counterDenomLabel.text = ibcToken.base_denom
-            
             
         } else {
-            statusImg.image = UIImage(named: "ibcunknown")
-            counterChainIDLabel.text = "unknown"
             channelLabel.text = "unknown"
-            counterChannelLabel.text = "unknown"
             denomLabel.text = "unknown"
-            counterDenomLabel.text = "unknown"
         }
     }
 }

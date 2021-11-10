@@ -185,6 +185,25 @@ let SIF_COIN_IMG_URL                    = "https://raw.githubusercontent.com/cos
 let EMONEY_COIN_IMG_URL                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/emoney/";
 
 
+let RELAYER_IMG_COSMOS                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cosmos/relay-cosmos-unknown.png"
+let RELAYER_IMG_IRIS                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/iris/relay-iris-unknown.png"
+let RELAYER_IMG_BAND                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/band/relay-band-unknown.png"
+let RELAYER_IMG_IOV                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/starname/relay-starname-unknown.png"
+let RELAYER_IMG_CERTIK                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/certik/relay-certik-unknown.png"
+let RELAYER_IMG_AKASH                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/akash/relay-akash-unknown.png"
+let RELAYER_IMG_PERSIS                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/persistence/relay-persistence-unknown.png"
+let RELAYER_IMG_SENTINEL                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/sentinel/relay-sentinel-unknown.png"
+let RELAYER_IMG_FETCH                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/fetchai/relay-fetchai-unknown.png"
+let RELAYER_IMG_CRYPTO                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cryptoorg/relay-cryptoorg-unknown.png"
+let RELAYER_IMG_SIF                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/sifchain/relay-sifchain-unknown.png"
+let RELAYER_IMG_OSMOSIS                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/osmosis/relay-osmosis-unknown.png"
+let RELAYER_IMG_EMONEY                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/emoney/relay-emoney-unknown.png"
+let RELAYER_IMG_JUNO                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/juno/relay-juno-unknown.png"
+let RELAYER_IMG_REGEN                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/regen/relay-regen-unknown.png"
+//let RELAYER_IMG_KI                      = ""
+//let RELAYER_IMG_BITCANNA                = ""
+//let RELAYER_IMG_INJECTIVE               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/injective/relay-injective-unknown.png"
+
 
 
 //DB for Account
