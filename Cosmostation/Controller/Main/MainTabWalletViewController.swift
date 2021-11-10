@@ -163,6 +163,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.AXELAR_TEST) {
             floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
             floaty.buttonColor = .white
+        } else if (chainType! == ChainType.COMDEX_MAIN) {
+            floaty.buttonImage = UIImage.init(named: "sendImg")
+            floaty.buttonColor = UIColor.init(hexString: "03264a")
         } else {
             floaty.buttonImage = UIImage.init(named: "sendImg")
             floaty.buttonColor = WUtils.getChainColor(chainType)
@@ -1692,6 +1695,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://stargaze.zone/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.COSMOS_MAIN) {
+            guard let url = URL(string: "https://comdex.one/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -1812,6 +1819,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.STARGAZE_MAIN) {
             guard let url = URL(string: "https://mirror.xyz/stargazezone.eth") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.COMDEX_MAIN) {
+            guard let url = URL(string: "https://blog.comdex.one/") else { return }
             self.onShowSafariWeb(url)
             
         }

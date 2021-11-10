@@ -544,9 +544,9 @@ let GAS_FEE_RATE_TINY_KI                    = "0.025";
 let GAS_FEE_RATE_LOW_KI                     = "0.025";
 let GAS_FEE_RATE_AVERAGE_KI                 = "0.025";
 
-let GAS_FEE_RATE_TINY_COMDEX                = "0.025";
-let GAS_FEE_RATE_LOW_COMDEX                 = "0.025";
-let GAS_FEE_RATE_AVERAGE_COMDEX             = "0.025";
+let GAS_FEE_RATE_TINY_COMDEX                = "0.2";
+let GAS_FEE_RATE_LOW_COMDEX                 = "0.2";
+let GAS_FEE_RATE_AVERAGE_COMDEX             = "0.2";
 
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
