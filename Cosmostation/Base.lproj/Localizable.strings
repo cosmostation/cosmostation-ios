@@ -849,6 +849,7 @@ support@cosmostation.io";
 "chain_title_althea" = "Althea";
 "chain_title_gravity_bridge" = "Gravity Bridge";
 "chain_title_stargaze" = "Stargaze";
+"chain_title_comdex" = "Comdex";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_test_bnb" = "Binance Testnet";
