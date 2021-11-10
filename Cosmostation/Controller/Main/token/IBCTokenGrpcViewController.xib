@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +13,7 @@
                 <outlet property="btnIbcSend" destination="BV7-Tx-kLR" id="2C9-MM-wHY"/>
                 <outlet property="btnSend" destination="t1r-UG-yuP" id="Y59-k6-CIV"/>
                 <outlet property="naviPerPrice" destination="Vdw-mT-FvJ" id="rSc-r8-mBz"/>
+                <outlet property="naviTokenChannel" destination="EIy-M0-I9Z" id="UBV-sD-510"/>
                 <outlet property="naviTokenImg" destination="QKx-Ca-hNH" id="ZZ4-QB-hta"/>
                 <outlet property="naviTokenSymbol" destination="u4E-fS-vly" id="uJk-3O-VYd"/>
                 <outlet property="naviUpdownImg" destination="cBv-iy-Iob" id="X0s-4e-U1x"/>
@@ -152,11 +153,18 @@
                                 <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="818-uh-MuM"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="(channel-0)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIy-M0-I9Z">
+                            <rect key="frame" x="137.5" y="18" width="67" height="14.5"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                            <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Zk9-hV-1o0" firstAttribute="centerY" secondItem="xfY-a2-UVk" secondAttribute="centerY" id="2bh-or-dXR"/>
                         <constraint firstItem="u4E-fS-vly" firstAttribute="leading" secondItem="QKx-Ca-hNH" secondAttribute="trailing" constant="8" id="3JL-Yn-RFy"/>
+                        <constraint firstItem="EIy-M0-I9Z" firstAttribute="leading" secondItem="u4E-fS-vly" secondAttribute="trailing" constant="2" id="9kC-Gf-byU"/>
                         <constraint firstItem="QKx-Ca-hNH" firstAttribute="centerY" secondItem="xfY-a2-UVk" secondAttribute="centerY" id="CSi-E8-l1W"/>
                         <constraint firstItem="RHD-42-HFF" firstAttribute="height" secondItem="xfY-a2-UVk" secondAttribute="height" multiplier="0.6" id="GMZ-hB-VGe"/>
                         <constraint firstItem="QKx-Ca-hNH" firstAttribute="leading" secondItem="RHD-42-HFF" secondAttribute="trailing" constant="4" id="RQN-3N-YDG"/>
@@ -165,6 +173,7 @@
                         <constraint firstItem="u4E-fS-vly" firstAttribute="centerY" secondItem="xfY-a2-UVk" secondAttribute="centerY" id="dec-c0-bv5"/>
                         <constraint firstItem="Zk9-hV-1o0" firstAttribute="height" secondItem="xfY-a2-UVk" secondAttribute="height" multiplier="0.6" id="etJ-NS-JLe"/>
                         <constraint firstItem="RHD-42-HFF" firstAttribute="leading" secondItem="xfY-a2-UVk" secondAttribute="leading" id="iVj-lS-Qpp"/>
+                        <constraint firstItem="EIy-M0-I9Z" firstAttribute="centerY" secondItem="u4E-fS-vly" secondAttribute="centerY" id="pMN-8x-0mN"/>
                         <constraint firstItem="RHD-42-HFF" firstAttribute="centerY" secondItem="xfY-a2-UVk" secondAttribute="centerY" id="siA-X9-JWw"/>
                     </constraints>
                 </view>

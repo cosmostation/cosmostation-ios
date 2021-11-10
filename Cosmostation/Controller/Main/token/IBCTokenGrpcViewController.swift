@@ -12,6 +12,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var naviTokenImg: UIImageView!
     @IBOutlet weak var naviTokenSymbol: UILabel!
+    @IBOutlet weak var naviTokenChannel: UILabel!
     @IBOutlet weak var naviPerPrice: UILabel!
     @IBOutlet weak var naviUpdownPercent: UILabel!
     @IBOutlet weak var naviUpdownImg: UIImageView!
@@ -38,7 +39,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.tokenTableView.register(UINib(nibName: "TokenDetailIBCCell", bundle: nil), forCellReuseIdentifier: "TokenDetailIBCCell")
+//        self.tokenTableView.register(UINib(nibName: "TokenDetailIBCCell", bundle: nil), forCellReuseIdentifier: "TokenDetailIBCCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailIBCInfoCell", bundle: nil), forCellReuseIdentifier: "TokenDetailIBCInfoCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
         
@@ -75,6 +76,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         if (ibcToken.auth == true) {
             naviTokenImg.af_setImage(withURL: URL(string: ibcToken.moniker!)!)
             naviTokenSymbol.text = ibcToken.display_denom?.uppercased()
+            naviTokenChannel.text = "(" + ibcToken.channel_id! + ")"
             topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalAmount, ibcDivideDecimal, topValue.font)
             
             self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(baseDenom, naviPerPrice.font)
@@ -87,6 +89,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         } else {
             naviTokenImg.image = UIImage(named: "tokenDefaultIbc")
             naviTokenSymbol.text = "UnKnown"
+            naviTokenChannel.text = "(" + ibcToken.channel_id! + ")"
             topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, NSDecimalNumber.zero, ibcDivideDecimal, topValue.font)
             
             self.naviPerPrice.text = ""
@@ -106,13 +109,11 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
-            return 1
-        } else if (section == 1) {
             return 1
         }
         return 0
@@ -120,11 +121,6 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailIBCCell") as? TokenDetailIBCCell
-            cell?.onBindIBCToken(chainType!, ibcDenom)
-            return cell!
-            
-        } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailIBCInfoCell") as? TokenDetailIBCInfoCell
             cell?.onBindIBCTokenInfo(chainType!, ibcDenom)
             return cell!
@@ -134,8 +130,6 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
             return cell!
         }
     }
-    
-    
     
     @objc func onClickActionShare() {
         var address = account!.account_address
