@@ -623,6 +623,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allKi.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KI_MAIN_DENOM, allKi, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == COMDEX_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenComdex")
+            cell?.tokenSymbol.text = "CMDX"
+            cell?.tokenSymbol.textColor = COLOR_COMDEX
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Comdex Staking Token"
+            
+            let allCmdx = WUtils.getAllMainAsset(COMDEX_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCmdx.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(COMDEX_MAIN_DENOM, allCmdx, 6, cell!.tokenValue.font)
+            
         }
         
         
