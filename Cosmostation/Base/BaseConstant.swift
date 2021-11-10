@@ -131,6 +131,8 @@ let GRAVITY_BRIDGE_API                  = "https://api-gravity-bridge.cosmostati
 
 let STATGAZE_API                        = "https://api-stargaze.cosmostation.io/";
 
+let COMDEX_API                          = "https://api-office.cosmostation.io/comets-test/";
+
 
 let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-1/";
 
@@ -174,6 +176,7 @@ let REGEN_VAL_URL                       = "https://raw.githubusercontent.com/cos
 let BITCANNA_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/bitcanna/";
 let GRAVITY_BRIDGE_VAL_URL              = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/gravity-bridge/";
 let STARGAZE_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/stargaze/";
+let COMDEX_VAL_URL                      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/comdex/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -203,6 +206,7 @@ let RELAYER_IMG_REGEN                   = "https://raw.githubusercontent.com/cos
 //let RELAYER_IMG_KI                      = ""
 //let RELAYER_IMG_BITCANNA                = ""
 //let RELAYER_IMG_INJECTIVE               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/injective/relay-injective-unknown.png"
+//let RELAYER_IMG_COMDEX                = ""
 
 
 
@@ -540,6 +544,10 @@ let GAS_FEE_RATE_TINY_KI                    = "0.025";
 let GAS_FEE_RATE_LOW_KI                     = "0.025";
 let GAS_FEE_RATE_AVERAGE_KI                 = "0.025";
 
+let GAS_FEE_RATE_TINY_COMDEX                = "0.2";
+let GAS_FEE_RATE_LOW_COMDEX                 = "0.2";
+let GAS_FEE_RATE_AVERAGE_COMDEX             = "0.2";
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
@@ -861,6 +869,11 @@ let TRANS_BG_COLOR_STARGAZE2                = UIColor.init(hexString: "e38cd4", 
 let COLOR_STARGAZE                          = UIColor.init(hexString: "e38cd4")
 let COLOR_STARGAZE_DARK                     = UIColor.init(hexString: "8a5a84")
 
+let TRANS_BG_COLOR_COMDEX                   = UIColor.init(hexString: "005ac5", alpha: 0.15)
+let TRANS_BG_COLOR_COMDEX2                  = UIColor.init(hexString: "005ac5", alpha: 0.4)
+let COLOR_COMDEX                            = UIColor.init(hexString: "fe4350")
+let COLOR_COMDEX_DARK                       = UIColor.init(hexString: "802938")
+
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
@@ -900,6 +913,7 @@ public enum ChainType: String {
     case ALTHEA_MAIN
     case GRAVITY_BRIDGE_MAIN
     case STARGAZE_MAIN
+    case COMDEX_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -939,10 +953,10 @@ public enum ChainType: String {
         result.append(JUNO_MAIN)
         result.append(BITCANA_MAIN)
         result.append(STARGAZE_MAIN)
-        result.append(SECRET_MAIN)
-        
+        result.append(COMDEX_MAIN)
 //        result.append(ALTHEA_MAIN)
 //        result.append(GRAVITY_BRIDGE_MAIN)
+        result.append(SECRET_MAIN)
         
 
 //        result.append(COSMOS_TEST)
@@ -1059,6 +1073,7 @@ let CHAIN_BITCANA_S = "SUPPORT_CHAIN_BITCANA"
 let CHAIN_ALTHEA_S = "SUPPORT_CHAIN_ALTHEA"
 let CHAIN_GRAVITY_BRIDGE_S = "SUPPORT_CHAIN_GRAVITY_BRIDGE"
 let CHAIN_STARGAZE_S = "SUPPORT_CHAIN_STARGAZE"
+let CHAIN_COMDEX_S = "SUPPORT_CHAIN_COMDEX"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1102,6 +1117,7 @@ let REGNE_MAIN_DENOM = "uregen"
 let BITCANA_MAIN_DENOM = "ubcna"
 let GRAVITY_BRIDGE_MAIN_DENOM = "ugrav"
 let STARGAZE_MAIN_DENOM = "ustars"
+let COMDEX_MAIN_DENOM = "ucmdx"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1185,6 +1201,7 @@ let EXPLORER_BITCANNA       = "https://www.mintscan.io/bitcanna/";
 let EXPLORER_ALTHEA         = "https://www.mintscan.io/althea/";
 let EXPLORER_GRAVITY_BRIDGE = "https://www.mintscan.io/gravity-bridge/";
 let EXPLORER_STARGAZE       = "https://www.mintscan.io/stargaze/";
+let EXPLORER_COMDEX         = "https://www.mintscan.io/comdex/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";

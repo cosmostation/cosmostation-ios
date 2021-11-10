@@ -464,6 +464,11 @@ extension BaseViewController {
         })
         stargazeAction.setValue(UIImage(named: "chainStargaze")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let comdexAction = UIAlertAction(title: NSLocalizedString("chain_title_comdex", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.COMDEX_MAIN)
+        })
+        comdexAction.setValue(UIImage(named: "chainComdex")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         let secretAction = UIAlertAction(title: NSLocalizedString("chain_title_secret", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.SECRET_MAIN)
         })
@@ -510,6 +515,7 @@ extension BaseViewController {
 //        showAlert.addAction(altheaAction)
 //        showAlert.addAction(gravityBridgeAction)
         showAlert.addAction(stargazeAction)
+        showAlert.addAction(comdexAction)
         showAlert.addAction(secretAction)
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {

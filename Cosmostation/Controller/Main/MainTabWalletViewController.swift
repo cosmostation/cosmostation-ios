@@ -70,6 +70,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletBitcannaCell", bundle: nil), forCellReuseIdentifier: "WalletBitcannaCell")
         self.walletTableView.register(UINib(nibName: "WalletGBridgeCell", bundle: nil), forCellReuseIdentifier: "WalletGBridgeCell")
         self.walletTableView.register(UINib(nibName: "WalletStargazeCell", bundle: nil), forCellReuseIdentifier: "WalletStargazeCell")
+        self.walletTableView.register(UINib(nibName: "WalletComdexCell", bundle: nil), forCellReuseIdentifier: "WalletComdexCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -162,6 +163,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.AXELAR_TEST) {
             floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
             floaty.buttonColor = .white
+        } else if (chainType! == ChainType.COMDEX_MAIN) {
+            floaty.buttonImage = UIImage.init(named: "sendImg")
+            floaty.buttonColor = UIColor.init(hexString: "03264a")
         } else {
             floaty.buttonImage = UIImage.init(named: "sendImg")
             floaty.buttonColor = WUtils.getChainColor(chainType)
@@ -255,6 +259,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetGBridgeItems(tableView, indexPath);
         } else if (chainType == ChainType.STARGAZE_MAIN) {
             return onSetStargazeItems(tableView, indexPath);
+        } else if (chainType == ChainType.COMDEX_MAIN) {
+            return onSetComdexItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -1134,6 +1140,36 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
     }
     
+    func onSetComdexItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletComdexCell") as? WalletComdexCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+        
+    }
+    
     
     
     func onSetCosmosTestItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
@@ -1659,6 +1695,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://stargaze.zone/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.COSMOS_MAIN) {
+            guard let url = URL(string: "https://comdex.one/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -1779,6 +1819,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.STARGAZE_MAIN) {
             guard let url = URL(string: "https://mirror.xyz/stargazezone.eth") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.COMDEX_MAIN) {
+            guard let url = URL(string: "https://blog.comdex.one/") else { return }
             self.onShowSafariWeb(url)
             
         }
