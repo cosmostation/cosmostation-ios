@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0428ACFE268AD31700EB438F /* BandOracleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428ACFD268AD31700EB438F /* BandOracleStatus.swift */; };
+		042E0C40273BBE190026CEFB /* WalletComdexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */; };
+		042E0C41273BBE190026CEFB /* WalletComdexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */; };
 		0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
 		046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
@@ -1219,6 +1221,8 @@
 
 /* Begin PBXFileReference section */
 		0428ACFD268AD31700EB438F /* BandOracleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandOracleStatus.swift; sourceTree = "<group>"; };
+		042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletComdexCell.swift; sourceTree = "<group>"; };
+		042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletComdexCell.xib; sourceTree = "<group>"; };
 		0437E086268C0A6700088391 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
 		046E9038268C3F95002CFFE1 /* BinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceModel.swift; sourceTree = "<group>"; };
@@ -3069,6 +3073,8 @@
 				049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */,
 				049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */,
 				049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */,
+				042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */,
+				042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -4406,6 +4412,7 @@
 				28D28ADE26CB6C2B0074964C /* StartUnlock3ViewController.xib in Resources */,
 				288D250526834E980093121A /* TxIbcSendCell.xib in Resources */,
 				2852EAFF268216B4003A5E74 /* WalletSifIncentiveCell.xib in Resources */,
+				042E0C41273BBE190026CEFB /* WalletComdexCell.xib in Resources */,
 				280E1F12254AB5C70007BA7D /* ReplaceResource3ViewController.xib in Resources */,
 				2816E11626BA886100408F8E /* EventHorizonResultViewController.xib in Resources */,
 				285A33DB244763290052BD3D /* SelectChainCell.xib in Resources */,
@@ -4802,6 +4809,7 @@
 				28D14E6E2418B7F0002CD42E /* ApiHistory.swift in Sources */,
 				287AC5D325FDF7250070837E /* akash_market_v1beta1_service.pb.swift in Sources */,
 				2815AA7424349DE2008B23AA /* StepRepayCdpAmountViewController.swift in Sources */,
+				042E0C40273BBE190026CEFB /* WalletComdexCell.swift in Sources */,
 				288F807A270DDEFA009825B5 /* TxSifAddLpCell.swift in Sources */,
 				289EF83126824E4700F90AC1 /* osmosis_pool-incentives_v1beta1_query.pb.swift in Sources */,
 				289EF83726824E4700F90AC1 /* osmosis_lockup_tx.grpc.swift in Sources */,

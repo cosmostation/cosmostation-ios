@@ -173,6 +173,8 @@
 "send_guide_msg_gbridge" = "코스모스와 이더리움 생태계의 브릿지 연결을 위해 설계된 Tendermint 기반 블록체인.";
 "send_guide_title_stargaze" = "STARGAZE";
 "send_guide_msg_stargaze" = "소셜 콘텐츠의 NFT화를 통해 탈중앙화를 실현하는 Cosmos SDK 기반 NFT 마켓플레이스 및 소셜 네트워크.";
+"send_guide_title_comdex" = "COMDEX";
+"send_guide_msg_comdex" = "토큰화된 합성자산의 거래와 파생상품 활용을 위한 탈중앙화 플랫폼";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

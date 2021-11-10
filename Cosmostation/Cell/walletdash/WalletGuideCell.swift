@@ -181,6 +181,11 @@ class WalletGuideCell: UITableViewCell {
             guideImg.image = UIImage(named: "infoiconStargaze")
             guideTitle.text = NSLocalizedString("send_guide_title_stargaze", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_stargaze", comment: "")
+            
+        } else if (chainType == ChainType.COMDEX_MAIN) {
+            guideImg.image = UIImage(named: "infoiconComdex")
+            guideTitle.text = NSLocalizedString("send_guide_title_comdex", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_comdex", comment: "")
         }
         
     }
