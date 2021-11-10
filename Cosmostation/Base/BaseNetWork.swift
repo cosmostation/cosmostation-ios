@@ -792,6 +792,8 @@ class BaseNetWork {
             result = STATGAZE_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.KI_MAIN) {
             result = KI_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.COMDEX_MAIN) {
+            result = COMDEX_API + "v1/account/new_txs/" + address
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -868,6 +870,8 @@ class BaseNetWork {
             result = STATGAZE_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.KI_MAIN) {
             result = KI_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.COMDEX_MAIN) {
+            result = COMDEX_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -984,6 +988,10 @@ class BaseNetWork {
             
         } else if (chain == ChainType.KI_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-kichain-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.COMDEX_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20500)
+//            return ClientConnection.insecure(group: group).connect(host: "lcd-comdex-app.cosmostation.io", port: 9090)
         }
         
         
