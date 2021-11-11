@@ -35,6 +35,14 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
         
         self.delegate = self
         self.selectedIndex = BaseData.instance.getLastTab()
+        
+        if #available(iOS 15.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = UIColor.init(hexString: "232526")
+            tabBar.standardAppearance = appearance
+            tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
