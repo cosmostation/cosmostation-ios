@@ -62,6 +62,10 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         self.farmDetailTableView.register(UINib(nibName: "EarnUnbondingCell", bundle: nil), forCellReuseIdentifier: "EarnUnbondingCell")
         self.farmDetailTableView.register(UINib(nibName: "EarnUnbondedCell", bundle: nil), forCellReuseIdentifier: "EarnUnbondedCell")
         
+        if #available(iOS 15.0, *) {
+            self.farmDetailTableView.sectionHeaderTopPadding = 0.0
+        }
+        
         print("mPool ", mPool.id)
         print("mPoolGauges ", mPoolGauges.count)
         print("mLockUps ", mLockUps.count)

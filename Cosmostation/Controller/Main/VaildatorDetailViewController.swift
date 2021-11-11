@@ -52,6 +52,10 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         self.validatorDetailTableView.rowHeight = UITableView.automaticDimension
         self.validatorDetailTableView.estimatedRowHeight = UITableView.automaticDimension
         
+        if #available(iOS 15.0, *) {
+            self.validatorDetailTableView.sectionHeaderTopPadding = 0.0
+        }
+        
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onFech), for: .valueChanged)
         refresher.tintColor = UIColor.white

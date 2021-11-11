@@ -72,6 +72,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.tokenTableView.rowHeight = UITableView.automaticDimension
         self.tokenTableView.estimatedRowHeight = UITableView.automaticDimension
         
+        if #available(iOS 15.0, *) {
+            self.tokenTableView.sectionHeaderTopPadding = 0.0
+        }
+        
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         refresher.tintColor = UIColor.white
