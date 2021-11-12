@@ -1695,7 +1695,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://stargaze.zone/") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.COSMOS_MAIN) {
+        } else if (chainType! == ChainType.COMDEX_MAIN) {
             guard let url = URL(string: "https://comdex.one/") else { return }
             self.onShowSafariWeb(url)
             
