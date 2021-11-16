@@ -20,8 +20,6 @@ class BaseNetWork {
             return OKEX_URL + "node_info"
         } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "node_info"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "node_info"
         }
         
         else if (chain == ChainType.BINANCE_TEST) {
@@ -45,8 +43,6 @@ class BaseNetWork {
             return OKEX_URL + "auth/accounts/" + address
         } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "auth/accounts/" + address
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "auth/accounts/" + address
         }
         
         else if (chain == ChainType.BINANCE_TEST) {
@@ -68,8 +64,6 @@ class BaseNetWork {
             return OKEX_URL + "staking/validators"
         } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/validators"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "staking/validators"
         }
         
         else if (chain == ChainType.OKEX_TEST) {
@@ -87,8 +81,6 @@ class BaseNetWork {
     static func validatorUrl(_ chain: ChainType?, _ opAddress: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/validators" + "/" + opAddress
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "staking/validators" + "/" + opAddress
         }
         
         if (chain == ChainType.KAVA_TEST) {
@@ -104,8 +96,6 @@ class BaseNetWork {
     static func bondingsUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/delegators/" + address + "/delegations"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "staking/delegators/" + address + "/delegations"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -121,8 +111,6 @@ class BaseNetWork {
     static func bondingUrl(_ chain: ChainType?, _ address: String, _ opAddress: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/delegators/" + address + "/delegations/" + opAddress
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "staking/delegators/" + address + "/delegations/" + opAddress
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -138,8 +126,6 @@ class BaseNetWork {
     static func unbondingsUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/delegators/" + address + "/unbonding_delegations"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "staking/delegators/" + address + "/unbonding_delegations"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -155,8 +141,6 @@ class BaseNetWork {
     static func unbondingUrl(_ chain: ChainType?, _ address: String, _ opAddress: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/delegators/" + address + "/unbonding_delegations/" + opAddress
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "staking/delegators/" + address + "/unbonding_delegations/" + opAddress
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -172,8 +156,6 @@ class BaseNetWork {
     static func redelegationsUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/redelegations"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "staking/redelegations"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -189,8 +171,6 @@ class BaseNetWork {
     static func rewardsUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "distribution/delegators/" + address + "/rewards"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "distribution/delegators/" + address + "/rewards"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -206,8 +186,6 @@ class BaseNetWork {
     static func rewardUrl(_ chain: ChainType?, _ address: String, _ opAddress: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "distribution/delegators/" + address + "/rewards/" + opAddress
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "distribution/delegators/" + address + "/rewards/" + opAddress
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -223,8 +201,6 @@ class BaseNetWork {
     static func rewardAddressUrl(_ chain: ChainType?, _ address: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "distribution/delegators/" + address + "/withdraw_address"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "distribution/delegators/" + address + "/withdraw_address"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -240,8 +216,6 @@ class BaseNetWork {
     static func proposalsUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "gov/proposals"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "gov/proposals"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -257,8 +231,6 @@ class BaseNetWork {
     static func proposalUrl(_ chain: ChainType?, _ id: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "gov/proposals" + "/" + id
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "gov/proposals" + "/" + id
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -274,8 +246,6 @@ class BaseNetWork {
     static func tallyUrl(_ chain: ChainType?, _ id: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "gov/proposals" + "/" + id + "/tally"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "gov/proposals" + "/" + id + "/tally"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -291,8 +261,6 @@ class BaseNetWork {
     static func voteUrl(_ chain: ChainType?, _ id: String, _ address: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "gov/proposals" +  "/" + id + "/votes/" + address
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "gov/proposals" + "/" + id + "/votes/" + address
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -308,8 +276,6 @@ class BaseNetWork {
     static func proposerUrl(_ chain: ChainType?, _ id: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "gov/proposals" + "/" + id + "/proposer"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "gov/proposals" + "/" + id + "/proposer"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -325,8 +291,6 @@ class BaseNetWork {
     static func votesUrl(_ chain: ChainType?, _ id: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "gov/proposals" + "/" + id + "/votes"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "gov/proposals" + "/" + id + "/votes"
         }
         
         else if (chain == ChainType.KAVA_TEST) {
@@ -347,8 +311,6 @@ class BaseNetWork {
             return OKEX_URL + "txs/" + txhash
         } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "txs/" + txhash
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "txs/" + txhash
         }
         
         else if (chain == ChainType.BINANCE_TEST) {
@@ -372,8 +334,6 @@ class BaseNetWork {
             return OKEX_URL + "txs"
         } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "txs"
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_URL + "txs"
         }
         
         else if (chain == ChainType.BINANCE_TEST) {
@@ -794,6 +754,8 @@ class BaseNetWork {
             result = KI_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.COMDEX_MAIN) {
             result = COMDEX_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.SECRET_MAIN) {
+            result = SECRET_API + "v1/account/new_txs/" + address
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -872,6 +834,8 @@ class BaseNetWork {
             result = KI_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.COMDEX_MAIN) {
             result = COMDEX_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.SECRET_MAIN) {
+            result = SECRET_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -992,6 +956,9 @@ class BaseNetWork {
         } else if (chain == ChainType.COMDEX_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20500)
 //            return ClientConnection.insecure(group: group).connect(host: "lcd-comdex-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.SECRET_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-secret.cosmostation.io", port: 9090)
         }
         
         

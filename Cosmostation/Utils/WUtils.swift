@@ -4336,7 +4336,7 @@ public class WUtils {
             return EXPLORER_BAND_MAIN + "txs/" + hash
             
         } else if (chain == ChainType.SECRET_MAIN) {
-            return EXPLORER_SECRET_MAIN + "transactions/" + hash
+            return EXPLORER_SECRET_MAIN + "txs/" + hash
             
         } else if (chain == ChainType.IOV_MAIN) {
             return EXPLORER_IOV_MAIN + "txs/" + hash
@@ -4384,7 +4384,7 @@ public class WUtils {
             return EXPLORER_BAND_MAIN + "account/" + address
             
         } else if (chain == ChainType.SECRET_MAIN) {
-            return EXPLORER_SECRET_MAIN + "accounts/" + address
+            return EXPLORER_SECRET_MAIN + "account/" + address
             
         } else if (chain == ChainType.CERTIK_MAIN) {
             return EXPLORER_CERTIK + "account/" + address
@@ -4505,7 +4505,7 @@ public class WUtils {
             return EXPLORER_BAND_MAIN + "proposals/" + proposalId
             
         } else if (chain == ChainType.SECRET_MAIN) {
-            return EXPLORER_SECRET_MAIN + "governance/proposals/" + proposalId
+            return EXPLORER_SECRET_MAIN + "proposals/" + proposalId
             
         } else if (chain == ChainType.CERTIK_MAIN) {
             return EXPLORER_CERTIK + "proposals/" + proposalId
@@ -5827,7 +5827,6 @@ public class WUtils {
     
     public static func isGRPC(_ chain: ChainType?) -> Bool {
         if (chain == ChainType.BINANCE_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.KAVA_MAIN ||
-            chain == ChainType.SECRET_MAIN ||
             chain == ChainType.BINANCE_TEST || chain == ChainType.OKEX_TEST || chain == ChainType.KAVA_TEST) {
             return false
         }

@@ -250,20 +250,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
             onFetchKavaIncentiveParam()
             onFetchKavaIncentiveReward(mAccount.account_address)
             
-        } else if (mChainType == ChainType.SECRET_MAIN) {
-            self.mFetchCnt = 8
-            onFetchNodeInfo()
-            onFetchTopValidatorsInfo()
-            onFetchUnbondedValidatorsInfo()
-            onFetchUnbondingValidatorsInfo()
-            
-            onFetchAccountInfo(mAccount)
-            onFetchBondingInfo(mAccount)
-            onFetchUnbondingInfo(mAccount)
-            onFetchAllReward(mAccount)
-            
-            self.onShowToast("Using Figment's Data Hub API for Secret Network.")
-            
         } else if (mChainType == ChainType.OKEX_MAIN || mChainType == ChainType.OKEX_TEST) {
             self.mFetchCnt = 8
             onFetchNodeInfo()
@@ -311,7 +297,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
                    self.mChainType == ChainType.CERTIK_MAIN  || self.mChainType == ChainType.EMONEY_MAIN || self.mChainType == ChainType.FETCH_MAIN ||
                    self.mChainType == ChainType.RIZON_MAIN || self.mChainType == ChainType.BAND_MAIN || self.mChainType == ChainType.JUNO_MAIN ||
                    self.mChainType == ChainType.REGEN_MAIN || self.mChainType == ChainType.BITCANA_MAIN || self.mChainType == ChainType.ALTHEA_MAIN ||
-                   self.mChainType == ChainType.GRAVITY_BRIDGE_MAIN || self.mChainType == ChainType.KI_MAIN || self.mChainType == ChainType.COMDEX_MAIN) {
+                   self.mChainType == ChainType.GRAVITY_BRIDGE_MAIN || self.mChainType == ChainType.KI_MAIN || self.mChainType == ChainType.COMDEX_MAIN ||
+                   self.mChainType == ChainType.SECRET_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)

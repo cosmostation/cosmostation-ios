@@ -144,9 +144,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             onFetchBnbHistory(account!.account_address)
         } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
             onFetchOkHistory(account!.account_address)
-        } else if (chainType == ChainType.SECRET_MAIN) {
-            self.comingLabel.text = "Check with Explorer"
-            self.comingLabel.isHidden = false
         } else if (chainType == ChainType.MEDI_TEST) {
             self.comingLabel.text = "Support Soon"
             self.comingLabel.isHidden = false

@@ -638,6 +638,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCmdx.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(COMDEX_MAIN_DENOM, allCmdx, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == SECRET_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "secretTokenImg")
+            cell?.tokenSymbol.text = "SCRT"
+            cell?.tokenSymbol.textColor = COLOR_SECRET
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Secret Staking Token"
+            
+            let allSecret = WUtils.getAllMainAsset(SECRET_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allSecret.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(SECRET_MAIN_DENOM, allSecret, 6, cell!.tokenValue.font)
+            
         }
         
         
@@ -807,17 +818,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.tokenAmount.attributedText = WUtils.displayAmount2(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
                 cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OKEX_MAIN_DENOM, tokenAmount, 0, cell!.tokenValue.font)
             }
-            
-        } else if (balance.balance_denom == SECRET_MAIN_DENOM) {
-            cell?.tokenImg.image = UIImage(named: "secretTokenImg")
-            cell?.tokenSymbol.text = "SCRT"
-            cell?.tokenSymbol.textColor = COLOR_SECRET
-            cell?.tokenTitle.text = "(" + balance.balance_denom + ")"
-            cell?.tokenDescription.text = "Secret Staking Token"
-            
-            let allSecret = WUtils.getAllMainAssetOld(SECRET_MAIN_DENOM)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allSecret.stringValue, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(SECRET_MAIN_DENOM, allSecret, 6, cell!.tokenValue.font)
             
         }
     }
