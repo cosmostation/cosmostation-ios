@@ -989,16 +989,18 @@ public class WUtils {
         let nf = NumberFormatter()
         nf.minimumFractionDigits = Int(dpPoint)
         nf.maximumFractionDigits = Int(dpPoint)
+//        nf.maximumSignificantDigits = Int(dpPoint) - 1
+//        nf.minimumSignificantDigits = Int(dpPoint) - 1
+        nf.roundingMode = .floor
         nf.numberStyle = .decimal
         
         let amount = plainStringToDecimal(amount)
-        let handler = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: Int16(dpPoint), raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
-        
         var formatted: String?
         if (amount == NSDecimalNumber.zero) {
             formatted = nf.string(from: NSDecimalNumber.zero)
         } else {
-            formatted = nf.string(from: amount.multiplying(byPowerOf10: -Int16(inputPoint), withBehavior: handler))
+            let calAmount = amount.multiplying(byPowerOf10: -Int16(inputPoint))
+            formatted = nf.string(from: calAmount)
         }
         
         let added       = formatted
@@ -4187,6 +4189,30 @@ public class WUtils {
             
         } else if (chain == ChainType.MEDI_MAIN) {
             return BLOCK_TIME_MEDI
+            
+        } else if (chain == ChainType.OSMOSIS_MAIN) {
+            return BLOCK_TIME_OSMOSIS
+            
+        } else if (chain == ChainType.EMONEY_MAIN) {
+            return BLOCK_TIME_EMONEY
+            
+        } else if (chain == ChainType.EMONEY_MAIN) {
+            return BLOCK_TIME_EMONEY
+            
+        } else if (chain == ChainType.RIZON_MAIN) {
+            return BLOCK_TIME_RIZON
+            
+        } else if (chain == ChainType.JUNO_MAIN) {
+            return BLOCK_TIME_JUNO
+            
+        } else if (chain == ChainType.BITCANA_MAIN) {
+            return BLOCK_TIME_BITCANNA
+            
+        } else if (chain == ChainType.REGEN_MAIN) {
+            return BLOCK_TIME_REGEN
+            
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            return BLOCK_TIME_STARGAZE
             
         }
         return NSDecimalNumber.zero
