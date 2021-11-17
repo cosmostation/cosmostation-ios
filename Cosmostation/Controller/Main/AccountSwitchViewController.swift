@@ -10,12 +10,10 @@ import UIKit
 
 class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var resultDelegate: AccountSwitchDelegate?
-    @IBOutlet weak var chainTableView: UITableView!
     @IBOutlet weak var accountTableView: UITableView!
     
-    var displayChains = Array<ChainType>()
-    var displayAccounts = Array<Account>()
+    var resultDelegate: AccountSwitchDelegate?
+    var chainAccounts = Array<ChainAccounts>()
     var selectedChain: ChainType!
     var toAddChain: ChainType?
 
@@ -26,23 +24,23 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
         self.accountTableView.delegate = self
         self.accountTableView.dataSource = self
         self.accountTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.accountTableView.register(UINib(nibName: "AccountPopupCell", bundle: nil), forCellReuseIdentifier: "AccountPopupCell")
-        self.accountTableView.register(UINib(nibName: "ManageAccountAddCell", bundle: nil), forCellReuseIdentifier: "ManageAccountAddCell")
-        
-        self.chainTableView.delegate = self
-        self.chainTableView.dataSource = self
-        self.chainTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.chainTableView.register(UINib(nibName: "ManageChainCell", bundle: nil), forCellReuseIdentifier: "ManageChainCell")
+        self.accountTableView.register(UINib(nibName: "ManageChainAccoutsCell", bundle: nil), forCellReuseIdentifier: "ManageChainAccoutsCell")
         
         let dismissTap1 = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
-        self.accountTableView.backgroundView = UIView()
-        self.chainTableView.backgroundView = UIView()
         self.accountTableView.backgroundView?.addGestureRecognizer(dismissTap1)
         
         self.onRefechUserInfo()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-            self.chainTableView.selectRow(at: IndexPath.init(item: self.displayChains.firstIndex(of: self.selectedChain) ?? 0, section: 0), animated: false, scrollPosition: .middle)
-        })
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        var expenedChains = Array<ChainType>()
+        chainAccounts.forEach { chainAccount in
+            if (chainAccount.opened) {
+                expenedChains.append(chainAccount.chainType!)
+            }
+        }
+        BaseData.instance.setExpendedChains(expenedChains)
     }
     
     @objc public func tableTapped() {
@@ -50,82 +48,52 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onRefechUserInfo() {
-        self.displayChains = BaseData.instance.dpSortedChains()
-        self.selectedChain = BaseData.instance.getRecentChain()
-        self.displayAccounts = BaseData.instance.selectAllAccountsByChain(selectedChain)
-        self.displayAccounts.sort{
-            return $0.account_sort_order < $1.account_sort_order
+        let displayChains = BaseData.instance.dpSortedChains()
+        let expenedChains = BaseData.instance.getExpendedChains()
+        displayChains.forEach { chain in
+            if (expenedChains.contains(chain) || self.selectedChain == chain) {
+                chainAccounts.append(ChainAccounts.init(opened: true, chainType: chain, accounts: BaseData.instance.selectAllAccountsByChain(chain)))
+            } else {
+                chainAccounts.append(ChainAccounts.init(opened: false, chainType: chain, accounts: BaseData.instance.selectAllAccountsByChain(chain)))
+            }
         }
-        self.chainTableView.reloadData()
         self.accountTableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+            self.accountTableView.selectRow(at: IndexPath.init(item: self.chainAccounts.firstIndex(where: { $0.chainType ==  self.selectedChain }) ?? 0, section: 0), animated: false, scrollPosition: .middle)
+        })
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (tableView == chainTableView) {
-            return displayChains.count
-        } else {
-            return displayAccounts.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (tableView == chainTableView) {
-            let cell:ManageChainCell? = tableView.dequeueReusableCell(withIdentifier:"ManageChainCell") as? ManageChainCell
-            let selected = displayChains[indexPath.row]
-            cell?.chainImg.image = WUtils.getChainImg(selected)
-            cell?.chainName.text = WUtils.getChainTitle2(selected)
-            if (selected == selectedChain) { cell?.onSetView(true) }
-            else { cell?.onSetView(false) }
-            return cell!
-            
-        } else {
-            let account = displayAccounts[indexPath.row]
-            let cell:AccountPopupCell? = tableView.dequeueReusableCell(withIdentifier:"AccountPopupCell") as? AccountPopupCell
-            let userChain = WUtils.getChainType(account.account_base_chain)
-            
-            if (account.account_has_private) {
-                cell?.keyImg.image = cell?.keyImg.image!.withRenderingMode(.alwaysTemplate)
-                cell?.keyImg.tintColor = WUtils.getChainColor(userChain)
-            } else {
-                cell?.keyImg.tintColor = COLOR_DARK_GRAY
-            }
-            cell?.nameLabel.text = WUtils.getWalletName(account)
-            
-            var address = account.account_address
-            if (userChain == ChainType.OKEX_MAIN || userChain == ChainType.OKEX_TEST) {
-                address = WKey.convertAddressOkexToEth(address)
-            }
-            cell?.address.text = address
-            cell?.amount.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.amount.font, 0, 6)
-            WUtils.setDenomTitle(userChain, cell!.amountDenom)
-            
-            cell?.cardView.borderColor = UIColor.init(hexString: "#9ca2ac")
-            if (self.account?.account_id == account.account_id) {
-                cell?.cardView.borderWidth = 1.0
-            } else {
-                cell?.cardView.borderWidth = 0.0
-            }
-            return cell!
-        }
+        return chainAccounts.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80;
+        return UITableView.automaticDimension;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"ManageChainAccoutsCell") as? ManageChainAccoutsCell
+        cell?.onBindChainAccounts(self.chainAccounts[indexPath.row], self.account)
+        cell?.actionSelect0 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[0]) }
+        cell?.actionSelect1 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[1]) }
+        cell?.actionSelect2 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[2]) }
+        cell?.actionSelect3 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[3]) }
+        cell?.actionSelect4 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[4]) }
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (tableView == chainTableView ) {
-            selectedChain = displayChains[indexPath.row]
-            BaseData.instance.setRecentChain(selectedChain)
-            self.onRefechUserInfo()
-            
-        } else if (tableView == accountTableView) {
-            self.resultDelegate?.accountSelected(displayAccounts[indexPath.row].account_id)
-            self.dismiss(animated: false, completion: nil)
-        }
+        self.chainAccounts[indexPath.row].opened = !self.chainAccounts[indexPath.row].opened
+        self.accountTableView.reloadSections([indexPath.section], with: .automatic)
     }
     
     @IBAction func onClose(_ sender: UIButton) {
+        self.dismiss(animated: false, completion: nil)
+    }
+    
+    func onSelectAccount(_ account: Account) {
+        BaseData.instance.setRecentChain(WUtils.getChainType(account.account_base_chain)!)
+        self.resultDelegate?.accountSelected(account.account_id)
         self.dismiss(animated: false, completion: nil)
     }
 }
@@ -133,4 +101,10 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
 protocol AccountSwitchDelegate {
     func accountSelected (_ id: Int64)
     func addAccount(_ chain: ChainType)
+}
+
+struct ChainAccounts {
+    var opened = false
+    var chainType: ChainType?
+    var accounts = Array<Account>()
 }

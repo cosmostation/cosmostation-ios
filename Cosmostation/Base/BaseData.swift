@@ -774,6 +774,23 @@ final class BaseData : NSObject{
         return result;
     }
     
+    func setExpendedChains(_ chains: Array<ChainType>) {
+        var expendedChains = Array<String>()
+        chains.forEach { chainType in
+            expendedChains.append(WUtils.getChainDBName(chainType))
+        }
+        UserDefaults.standard.set(expendedChains, forKey: KEY_USER_EXPENDED_CHAINS)
+    }
+    
+    func getExpendedChains() -> Array<ChainType> {
+        var result = Array<ChainType>()
+        let expendedChainS = UserDefaults.standard.stringArray(forKey: KEY_USER_EXPENDED_CHAINS) ?? []
+        expendedChainS.forEach({ chainS in
+            result.append(WUtils.getChainType(chainS)!)
+        })
+        return result;
+    }
+    
     
     func initdb() {
         do {

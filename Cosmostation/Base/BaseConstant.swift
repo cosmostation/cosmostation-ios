@@ -26,6 +26,7 @@ let KEY_FCM_TOKEN                       = "KEY_FCM_TOKEN"
 let KEY_KAVA_TESTNET_WARN               = "KEY_KAVA_TESTNET_WARN"
 let KEY_USER_HIDEN_CHAINS               = "KEY_USER_HIDEN_CHAINS"
 let KEY_USER_SORTED_CHAINS              = "KEY_USER_SORTED_CHAINS"
+let KEY_USER_EXPENDED_CHAINS            = "KEY_USER_EXPENDED_CHAINS"
 let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 
 let STATION_URL                         = "https://api-utility.cosmostation.io/";

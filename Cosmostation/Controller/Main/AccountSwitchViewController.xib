@@ -11,7 +11,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AccountSwitchViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="accountTableView" destination="ytM-en-tlJ" id="G9x-iz-rq6"/>
-                <outlet property="chainTableView" destination="bt4-ek-5uI" id="fGY-Iz-GNc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -50,16 +49,8 @@
                         <constraint firstItem="7Gr-ym-3NM" firstAttribute="centerY" secondItem="8YH-S8-9Ra" secondAttribute="centerY" id="t6q-Xf-5JT"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bt4-ek-5uI">
-                    <rect key="frame" x="0.0" y="102" width="80" height="760"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="80" id="46U-GF-xXp"/>
-                    </constraints>
-                </tableView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ytM-en-tlJ">
-                    <rect key="frame" x="80" y="102" width="334" height="760"/>
+                    <rect key="frame" x="0.0" y="102" width="414" height="794"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -71,14 +62,11 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8YH-S8-9Ra" secondAttribute="trailing" constant="8" id="4Fy-ih-gRV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="8YH-S8-9Ra" secondAttribute="leading" constant="8" id="G2w-nE-tXf"/>
-                <constraint firstItem="ytM-en-tlJ" firstAttribute="top" secondItem="bt4-ek-5uI" secondAttribute="top" id="STK-hE-mrx"/>
-                <constraint firstItem="bt4-ek-5uI" firstAttribute="top" secondItem="8YH-S8-9Ra" secondAttribute="bottom" constant="8" symbolic="YES" id="WIS-Fp-95d"/>
-                <constraint firstItem="ytM-en-tlJ" firstAttribute="leading" secondItem="bt4-ek-5uI" secondAttribute="trailing" id="Yay-Bl-u4J"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="bt4-ek-5uI" secondAttribute="bottom" id="cd3-2e-jfQ"/>
-                <constraint firstItem="ytM-en-tlJ" firstAttribute="bottom" secondItem="bt4-ek-5uI" secondAttribute="bottom" id="eow-PO-MRm"/>
+                <constraint firstItem="ytM-en-tlJ" firstAttribute="top" secondItem="8YH-S8-9Ra" secondAttribute="bottom" constant="8" symbolic="YES" id="OLo-Ll-646"/>
+                <constraint firstAttribute="bottom" secondItem="ytM-en-tlJ" secondAttribute="bottom" id="d0d-gu-mW6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ytM-en-tlJ" secondAttribute="trailing" id="fW7-nE-dTs"/>
                 <constraint firstItem="8YH-S8-9Ra" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="hUb-iI-Tyu"/>
-                <constraint firstItem="bt4-ek-5uI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vNh-EV-jsT"/>
+                <constraint firstItem="ytM-en-tlJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="iA6-Zi-gKu"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="105.80357142857143"/>
         </view>

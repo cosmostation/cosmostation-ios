@@ -141,7 +141,9 @@ class BaseViewController: UIViewController {
             for chain in BaseData.instance.dpSortedChains() {
                 let accountNum = BaseData.instance.selectAllAccountsByChain(chain).count
                 if (accountNum > 0) {
-                    BaseData.instance.setRecentAccountId(BaseData.instance.selectAllAccountsByChain(chain)[0].account_id)
+                    let account = BaseData.instance.selectAllAccountsByChain(chain)[0]
+                    BaseData.instance.setRecentAccountId(account.account_id)
+                    BaseData.instance.setRecentChain(chain)
                     break
                 }
             }

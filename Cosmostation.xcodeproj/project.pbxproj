@@ -11,6 +11,8 @@
 		042E0C40273BBE190026CEFB /* WalletComdexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */; };
 		042E0C41273BBE190026CEFB /* WalletComdexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */; };
 		0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
+		04394AFF2744C6FF002334F1 /* ManageChainAccoutsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04394AFD2744C6FF002334F1 /* ManageChainAccoutsCell.swift */; };
+		04394B002744C6FF002334F1 /* ManageChainAccoutsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */; };
 		046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
 		046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
@@ -1224,6 +1226,8 @@
 		042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletComdexCell.swift; sourceTree = "<group>"; };
 		042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletComdexCell.xib; sourceTree = "<group>"; };
 		0437E086268C0A6700088391 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
+		04394AFD2744C6FF002334F1 /* ManageChainAccoutsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageChainAccoutsCell.swift; sourceTree = "<group>"; };
+		04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageChainAccoutsCell.xib; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
 		046E9038268C3F95002CFFE1 /* BinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceModel.swift; sourceTree = "<group>"; };
 		046E903A268C401E002CFFE1 /* BinanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceType.swift; sourceTree = "<group>"; };
@@ -4097,6 +4101,8 @@
 				E19A322A2254AFE100A05E41 /* ManageAccountCell.xib */,
 				E11338FB235D70D20011B61D /* ManageAccountAddCell.swift */,
 				E11338FC235D70D20011B61D /* ManageAccountAddCell.xib */,
+				04394AFD2744C6FF002334F1 /* ManageChainAccoutsCell.swift */,
+				04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */,
 				E1827E19225628FF00BC0350 /* ValidatorDetailMyDetailCell.swift */,
 				E103DAB6228127A3006C2146 /* ValidatorDetailMyDetailCell.xib */,
 				E1827E1F2256292900BC0350 /* ValidatorDetailMyActionCell.swift */,
@@ -4490,6 +4496,7 @@
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				28FA685126D8A53E00CF4C57 /* WalletKavaIncentiveCell.xib in Resources */,
 				2812956F250F81C3007B217E /* SelectCoinCell.xib in Resources */,
+				04394B002744C6FF002334F1 /* ManageChainAccoutsCell.xib in Resources */,
 				28E8FAEC2716F190005EAA9B /* SelectTextCell.xib in Resources */,
 				28474ED6241E06AF00AF5A81 /* TxCdpDepositCell.xib in Resources */,
 				28B2E4C026CFC66100ECF960 /* IBCTokenGrpcViewController.xib in Resources */,
@@ -4833,6 +4840,7 @@
 				E1E251DF22A66FC30008F0DB /* OtherValidatorCell.swift in Sources */,
 				28393B8326B9023D00DF2F88 /* HdacBalancePopup.swift in Sources */,
 				285A33D12446CDAB0052BD3D /* StepHtlcSend2ViewController.swift in Sources */,
+				04394AFF2744C6FF002334F1 /* ManageChainAccoutsCell.swift in Sources */,
 				284FF3C225A6C13E00505E7A /* OkAccountInfo.swift in Sources */,
 				2845D884246FAEED007CD497 /* VoteTallyTableViewCell.swift in Sources */,
 				286EB38626035FB00021C79D /* TxCdpLiquidateCell.swift in Sources */,
