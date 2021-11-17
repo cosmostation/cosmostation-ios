@@ -171,7 +171,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
         }
         
         BaseData.instance.mParam = nil
-        BaseData.instance.mPrices.removeAll()
         BaseData.instance.mIbcPaths.removeAll()
         BaseData.instance.mIbcTokens.removeAll()
         
@@ -1271,9 +1270,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 1000 }
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
                 let req = Tendermint_Liquidity_V1beta1_QueryLiquidityPoolsRequest.with { $0.pagination = page }
-                if let response = try? Tendermint_Liquidity_V1beta1_QueryClient(channel: channel).liquidityPools(req).response.wait() {
+                if let response = try? Tendermint_Liquidity_V1beta1_QueryClient(channel: channel).liquidityPools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.pools.forEach { pool in
                         BaseData.instance.mGravityPools_gRPC.append(pool)
                     }
@@ -1344,6 +1343,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
+                BaseData.instance.mPrices.removeAll()
                 if let priceInfos = res as? Array<NSDictionary> {
                     priceInfos.forEach { priceInfo in
                         BaseData.instance.mPrices.append(Price.init(priceInfo))
@@ -1366,7 +1366,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
                 if let params = res as? NSDictionary {
                     BaseData.instance.mParam = Param.init(params)
                 }
-                print("mParam ", BaseData.instance.mParam?.getGdexList()?.count)
+//                print("mParam ", BaseData.instance.mParam?.getGdexList()?.count)
             
             case .failure(let error):
                 print("onFetchParams ", error)
