@@ -69,6 +69,12 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         self.checkBioAuth()
     }
     
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.textColor = UIColor.init(hexString: "7a7f88")
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             if(indexPath.row == 0) {

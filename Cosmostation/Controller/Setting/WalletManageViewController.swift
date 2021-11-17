@@ -43,6 +43,9 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
         let rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(onStartEdit))
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
+        
+        self.displayChains = BaseData.instance.dpSortedChains()
+        self.selectedChain = BaseData.instance.getRecentChain()
         self.onRefechUserInfo()
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
             self.chainTableView.selectRow(at: IndexPath.init(item: self.displayChains.firstIndex(of: self.selectedChain) ?? 0, section: 0), animated: false, scrollPosition: .middle)
@@ -57,8 +60,6 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onRefechUserInfo() {
-        self.displayChains = BaseData.instance.dpSortedChains()
-        self.selectedChain = BaseData.instance.getRecentChain()
         self.displayAccounts = BaseData.instance.selectAllAccountsByChain(selectedChain)
         self.sortWallet()
         self.chainTableView.reloadData()
@@ -114,7 +115,6 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (tableView == chainTableView ) {
             selectedChain = displayChains[indexPath.row]
-            BaseData.instance.setRecentChain(selectedChain)
             self.onRefechUserInfo()
             
         } else if (tableView == accountTableView) {

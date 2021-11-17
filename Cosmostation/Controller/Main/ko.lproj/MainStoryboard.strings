@@ -33,7 +33,7 @@
 "BZu-1u-gLc.text" = "(Cosmos Hub)";
 
 /* Class = "UITableViewSection"; headerTitle = "About App"; ObjectID = "Ckg-1F-Dy6"; */
-"Ckg-1F-Dy6.headerTitle" = "About App";
+"Ckg-1F-Dy6.headerTitle" = "앱 정보";
 
 /* Class = "UILabel"; text = "My Wallet"; ObjectID = "D4N-0h-U3Y"; */
 "D4N-0h-U3Y.text" = "My Wallet";
