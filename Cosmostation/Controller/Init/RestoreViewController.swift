@@ -128,7 +128,7 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("clear_all", comment: ""), style: .done, target: self, action: #selector(clearAll))
         
         if (chainType == nil) {
-            self.onShowSelectChainDialog()
+            self.onShowSelectChainDialog(false)
         } else {
             self.initViewUpdate()
         }

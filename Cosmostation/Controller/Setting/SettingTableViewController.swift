@@ -73,7 +73,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         if (indexPath.section == 0) {
             if(indexPath.row == 0) {
                 if let parentVC = self.parent as? MainTabSettingViewController {
-                    parentVC.onShowSelectChainDialog()
+                    parentVC.onShowSelectChainDialog(true)
                 }
                 
             } else if (indexPath.row == 1) {

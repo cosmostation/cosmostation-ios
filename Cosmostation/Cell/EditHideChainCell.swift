@@ -10,6 +10,7 @@ import UIKit
 
 class EditHideChainCell: UITableViewCell {
     
+    @IBOutlet weak var chainCardView: CardView!
     @IBOutlet weak var chainImgView: UIImageView!
     @IBOutlet weak var chainTitleLabel: UILabel!
 

@@ -101,7 +101,7 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
         self.nextBtn.isHidden = true
         
         if (chainType == nil) {
-            self.onShowSelectChainDialog()
+            self.onShowSelectChainDialog(false)
         } else {
             self.onGenNewKey()
         }

@@ -338,7 +338,7 @@ extension BaseViewController {
     }
     
     
-    func onShowSelectChainDialog() {
+    func onShowSelectChainDialog(_ cancleable: Bool) {
         let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         
         let cosmosAction = UIAlertAction(title: NSLocalizedString("chain_title_cosmos", comment: ""), style: .default, handler: { _ in
@@ -530,6 +530,14 @@ extension BaseViewController {
             showAlert.addAction(axelarTestAction)
         }
         
-        self.present(showAlert, animated: true, completion: nil)
+        if (cancleable) {
+            self.present(showAlert, animated: true) {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+                showAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+            }
+            
+        } else {
+            self.present(showAlert, animated: true, completion: nil)
+        }
     }
 }

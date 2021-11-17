@@ -58,7 +58,7 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
             }
         }
         self.accountTableView.reloadData()
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
             self.accountTableView.selectRow(at: IndexPath.init(item: self.chainAccounts.firstIndex(where: { $0.chainType ==  self.selectedChain }) ?? 0, section: 0), animated: false, scrollPosition: .middle)
         })
     }

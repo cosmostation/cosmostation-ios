@@ -80,6 +80,7 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         if (tableView == displayingChainTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"EditDisplayChainCell") as? EditDisplayChainCell
             let chainType = displayedChains[indexPath.row]
+            cell?.chainCardView.backgroundColor = WUtils.getChainBg(chainType)
             cell?.chainImgView.image = WUtils.getChainImg(chainType)
             cell?.chainTitleLabel.text = WUtils.getChainTitle2(chainType)
             cell?.actionRemoveChain = { self.onClickRemoveChain(chainType) }
@@ -89,6 +90,7 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"EditHideChainCell") as? EditHideChainCell
             let chainType = hidedChains[indexPath.row]
+            cell?.chainCardView.backgroundColor = WUtils.getChainBg(chainType)
             cell?.chainImgView.image = WUtils.getChainImg(chainType)
             cell?.chainTitleLabel.text = WUtils.getChainTitle2(chainType)
             cell?.actionAddChain = { self.onClickAddChain(chainType) }
