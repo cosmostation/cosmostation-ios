@@ -186,6 +186,12 @@ class WalletGuideCell: UITableViewCell {
             guideImg.image = UIImage(named: "infoiconComdex")
             guideTitle.text = NSLocalizedString("send_guide_title_comdex", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_comdex", comment: "")
+            
+        } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            guideImg.image = UIImage(named: "infoiconInjective")
+            guideTitle.text = NSLocalizedString("send_guide_title_injective", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_injective", comment: "")
+            
         }
         
     }

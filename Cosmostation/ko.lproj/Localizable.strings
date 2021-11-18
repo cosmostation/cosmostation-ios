@@ -174,7 +174,9 @@
 "send_guide_title_stargaze" = "STARGAZE";
 "send_guide_msg_stargaze" = "소셜 콘텐츠의 NFT화를 통해 탈중앙화를 실현하는 Cosmos SDK 기반 NFT 마켓플레이스 및 소셜 네트워크.";
 "send_guide_title_comdex" = "COMDEX";
-"send_guide_msg_comdex" = "토큰화된 합성자산의 거래와 파생상품 활용을 위한 탈중앙화 플랫폼";
+"send_guide_msg_comdex" = "토큰화된 합성자산의 거래와 파생상품 활용을 위한 탈중앙화 플랫폼.";
+"send_guide_title_injective" = "INJECTIVE PROTOCOL";
+"send_guide_msg_injective" = "다양한 금융서비스를 제공하는 Cosmos SDK 기반의 탈중앙화 크로스체인 금융 플랫폼입니다.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

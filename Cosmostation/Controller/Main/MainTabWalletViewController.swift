@@ -71,6 +71,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletGBridgeCell", bundle: nil), forCellReuseIdentifier: "WalletGBridgeCell")
         self.walletTableView.register(UINib(nibName: "WalletStargazeCell", bundle: nil), forCellReuseIdentifier: "WalletStargazeCell")
         self.walletTableView.register(UINib(nibName: "WalletComdexCell", bundle: nil), forCellReuseIdentifier: "WalletComdexCell")
+        self.walletTableView.register(UINib(nibName: "WalletInjectiveCell", bundle: nil), forCellReuseIdentifier: "WalletInjectiveCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -169,6 +170,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.SECRET_MAIN) {
             floaty.buttonImage = UIImage.init(named: "sendImg")
             floaty.buttonColor = COLOR_SECRET_DARK
+        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
+            floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
+            floaty.buttonColor = COLOR_INJECTIVE_DARK
         } else {
             floaty.buttonImage = UIImage.init(named: "sendImg")
             floaty.buttonColor = WUtils.getChainColor(chainType)
@@ -264,6 +268,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetStargazeItems(tableView, indexPath);
         } else if (chainType == ChainType.COMDEX_MAIN) {
             return onSetComdexItems(tableView, indexPath);
+        } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            return onSetInjectiveItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -1173,6 +1179,36 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
     }
     
+    func onSetInjectiveItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInjectiveCell") as? WalletInjectiveCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+        
+    }
+    
     
     
     func onSetCosmosTestItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
@@ -1702,6 +1738,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://comdex.one/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
+            guard let url = URL(string: "https://injectiveprotocol.com/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -1828,6 +1868,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://blog.comdex.one/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
+            guard let url = URL(string: "https://blog.injectiveprotocol.com/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
     }
     
@@ -1912,8 +1956,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.coingecko.com/en/coins/bitcanna") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.JUNO_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/juno-network") else { return }
+        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/injective-protocol") else { return }
             self.onShowSafariWeb(url)
         }
         
