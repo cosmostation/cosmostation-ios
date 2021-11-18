@@ -649,6 +649,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allSecret.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(SECRET_MAIN_DENOM, allSecret, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == INJECTIVE_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenInjective")
+            cell?.tokenSymbol.text = "INJ"
+            cell?.tokenSymbol.textColor = COLOR_INJECTIVE
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Injective Staking Token"
+            
+            let allInj = WUtils.getAllMainAsset(INJECTIVE_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allInj.stringValue, cell!.tokenAmount.font, 18, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(INJECTIVE_MAIN_DENOM, allInj, 18, cell!.tokenValue.font)
+            
         }
         
         

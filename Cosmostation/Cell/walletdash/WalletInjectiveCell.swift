@@ -57,7 +57,7 @@ class WalletInjectiveCell: UITableViewCell {
             vestingLayer.isHidden = false
             vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(INJECTIVE_MAIN_DENOM), vestingAmount.font!, 18, 6)
         }
-        BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
+        BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -18).stringValue)
     }
     
 }

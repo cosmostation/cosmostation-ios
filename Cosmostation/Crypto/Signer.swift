@@ -1535,6 +1535,7 @@ class Signer {
         }
         let pubKey = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.crypto.secp256k1.PubKey"
+//            $0.typeURL = "/injective.crypto.v1beta1.ethsecp256k1.PubKey"
             $0.value = try! pub.serializedData()
         }
         return Cosmos_Tx_V1beta1_SignerInfo.with {

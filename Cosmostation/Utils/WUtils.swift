@@ -3048,7 +3048,7 @@ public class WUtils {
             label.text = "CMDX"
             label.textColor = COLOR_COMDEX
         } else if (chain == ChainType.INJECTIVE_MAIN) {
-            label.text = "INJECTIVE"
+            label.text = "INJ"
             label.textColor = COLOR_INJECTIVE
         }
     }
@@ -3355,11 +3355,12 @@ public class WUtils {
     static func getEstimateGasAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.IRIS_MAIN || chain == ChainType.AKASH_MAIN ||
-                chain == ChainType.PERSIS_MAIN || chain == ChainType.CRYPTO_MAIN || chain == ChainType.EMONEY_MAIN ||
-                chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
-                chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
-                chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.RIZON_TEST ||
-                chain == ChainType.ALTHEA_TEST || chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
+            chain == ChainType.PERSIS_MAIN || chain == ChainType.CRYPTO_MAIN || chain == ChainType.EMONEY_MAIN ||
+            chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
+            chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
+            chain == ChainType.INJECTIVE_MAIN ||
+            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.RIZON_TEST ||
+            chain == ChainType.ALTHEA_TEST || chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
             } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
@@ -3741,6 +3742,11 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_INJECTIVE)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         
         else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
@@ -3915,6 +3921,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_SECRET)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_SECRET)
+            }
+            
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_INJECTIVE)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_INJECTIVE)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_INJECTIVE)
             }
             
         }
@@ -4252,6 +4267,9 @@ public class WUtils {
             
         } else if (chain == ChainType.STARGAZE_MAIN) {
             return BLOCK_TIME_STARGAZE
+            
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            return BLOCK_TIME_INJECTIVE
             
         }
         return NSDecimalNumber.zero
@@ -5220,6 +5238,14 @@ public class WUtils {
             return (auth.address, auth.accountNumber, auth.sequence)
             
         }
+        
+//        else if (response.account.typeURL.contains("injective.types.v1beta1.EthAccount")) {
+//            response.account
+//
+//            let auth = try! Cosmos_Auth_V1beta1_ModuleAccount.init(serializedData: response.account.value).baseAccount
+//            return (auth.address, auth.accountNumber, auth.sequence)
+//
+//        }
         return (nil, nil, nil)
     }
     

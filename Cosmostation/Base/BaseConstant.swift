@@ -555,6 +555,10 @@ let GAS_FEE_RATE_TINY_SECRET                = "0.25";
 let GAS_FEE_RATE_LOW_SECRET                 = "0.25";
 let GAS_FEE_RATE_AVERAGE_SECRET             = "0.25";
 
+let GAS_FEE_RATE_TINY_INJECTIVE             = "500000000";
+let GAS_FEE_RATE_LOW_INJECTIVE              = "500000000";
+let GAS_FEE_RATE_AVERAGE_INJECTIVE          = "500000000";
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
@@ -1269,6 +1273,7 @@ let BLOCK_TIME_JUNO         = NSDecimalNumber.init(string: "6.2104")
 let BLOCK_TIME_BITCANNA     = NSDecimalNumber.init(string: "6.0256")
 let BLOCK_TIME_REGEN        = NSDecimalNumber.init(string: "6.2491")
 let BLOCK_TIME_STARGAZE     = NSDecimalNumber.init(string: "5.8129")
+let BLOCK_TIME_INJECTIVE    = NSDecimalNumber.init(string: "2.4865")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;
