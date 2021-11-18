@@ -80,6 +80,9 @@ class WKey {
                 
             }
             
+        } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            
         } else {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
         }
@@ -149,6 +152,8 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "stars", program: ripemd160)
         } else if (chain == ChainType.COMDEX_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "comdex", program: ripemd160)
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "inj", program: ripemd160)
         }
         return result
     }
@@ -199,6 +204,9 @@ class WKey {
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(371)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            
         } else {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
@@ -212,6 +220,10 @@ class WKey {
         if ((chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) && newbip) {
             let pKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             return generateAddressFromPriv("ex", pKey.raw)
+            
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            let pKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            return generateAddressFromPriv("inj", pKey.raw)
             
         } else {
             return getHDKeyDpAddressWithPath(masterKey, path: path, chain: chain, newbip)
@@ -322,6 +334,8 @@ class WKey {
             result = bech32.encode("stars", values: data)
         } else if (chain == ChainType.COMDEX_MAIN) {
             result = bech32.encode("comdex", values: data)
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            result = bech32.encode("inj", values: data)
         }
         return result
     }
@@ -456,7 +470,7 @@ class WKey {
         }
     }
     
-    // Ethermint Style address gen (OKex)
+    // Ethermint Style address gen (OKex, Injective)
     static func generateAddressFromPriv(_ prefix: String, _ priKey: Data) -> String {
         let uncompressedPubKey = HDWalletKit.Crypto.generatePublicKey(data: priKey, compressed: false)
         var pub = Data(count: 64)
