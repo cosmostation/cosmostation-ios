@@ -522,9 +522,9 @@ extension BaseViewController {
 //        showAlert.addAction(altheaAction)
 //        showAlert.addAction(gravityBridgeAction)
         showAlert.addAction(stargazeAction)
-        showAlert.addAction(comdexAction)
+//        showAlert.addAction(comdexAction)
         showAlert.addAction(secretAction)
-        showAlert.addAction(injectiveAction)
+//        showAlert.addAction(injectiveAction)
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {
             showAlert.addAction(altheaTestAction)
