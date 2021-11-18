@@ -79,6 +79,9 @@ class CKey {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             }
             
+        } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+
         } else {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
         }
@@ -134,6 +137,9 @@ class CKey {
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 371, true), 0, true), 0, false), UInt32(path), false)
             
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
+            
         } else {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
             
@@ -147,6 +153,10 @@ class CKey {
             let pKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(path), false)
             return WKey.generateAddressFromPriv("ex", pKey.raw)
 
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            let pKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            return WKey.generateAddressFromPriv("inj", pKey.raw)
+            
         } else {
             return getHDKeyDpAddressWithPath(masterKey, path: path, chain: chain, newbip)
         }

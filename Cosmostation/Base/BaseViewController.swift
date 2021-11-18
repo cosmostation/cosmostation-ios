@@ -476,6 +476,11 @@ extension BaseViewController {
         })
         secretAction.setValue(UIImage(named: "secretChainImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let injectiveAction = UIAlertAction(title: NSLocalizedString("chain_title_injective", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.INJECTIVE_MAIN)
+        })
+        injectiveAction.setValue(UIImage(named: "chainInjective")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -519,6 +524,7 @@ extension BaseViewController {
         showAlert.addAction(stargazeAction)
         showAlert.addAction(comdexAction)
         showAlert.addAction(secretAction)
+        showAlert.addAction(injectiveAction)
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {
             showAlert.addAction(altheaTestAction)
