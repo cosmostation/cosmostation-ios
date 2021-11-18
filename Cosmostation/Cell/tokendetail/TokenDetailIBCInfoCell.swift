@@ -13,6 +13,8 @@ class TokenDetailIBCInfoCell: TokenDetailCell {
     @IBOutlet weak var relayerImg: UIImageView!
     @IBOutlet weak var availableLabel: UILabel!
     @IBOutlet weak var denomLabel: UILabel!
+    @IBOutlet weak var acrossChain: UILabel!
+    @IBOutlet weak var acrossDenom: UILabel!
     
     var ibcDivideDecimal: Int16 = 6
     var ibcDisplayDecimal: Int16 = 6
@@ -34,6 +36,8 @@ class TokenDetailIBCInfoCell: TokenDetailCell {
                 relayerImg.af_setImage(withURL: url)
             }
             denomLabel.text = ibcDenom
+            acrossChain.text = ibcToken.counter_party?.chain_id
+            acrossDenom.text = ibcToken.base_denom
             
         } else {
             denomLabel.text = "unknown"
