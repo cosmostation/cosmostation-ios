@@ -987,7 +987,7 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 40800)
             
         } else if (chain == ChainType.AXELAR_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 40600)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-axelar-testnet.cosmostation.io", port: 9090)
             
         }
         return nil

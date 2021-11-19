@@ -138,7 +138,7 @@ let INJECTIVE_API                       = "https://api-inj.cosmostation.io/";
 
 let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-1/";
 
-let AXELAR_TEST_API                     = "https://api-office.cosmostation.io/axelar-testnet-adelaide/";
+let AXELAR_TEST_API                     = "https://api-axelar-testnet.cosmostation.io/";
 
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
