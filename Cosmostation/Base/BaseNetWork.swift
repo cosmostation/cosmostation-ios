@@ -958,8 +958,7 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-kichain-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.COMDEX_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20500)
-//            return ClientConnection.insecure(group: group).connect(host: "lcd-comdex-app.cosmostation.io", port: 9090)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-comdex-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.SECRET_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-secret.cosmostation.io", port: 9090)

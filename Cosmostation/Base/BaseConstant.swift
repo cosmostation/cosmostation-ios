@@ -131,7 +131,7 @@ let GRAVITY_BRIDGE_API                  = "https://api-gravity-bridge.cosmostati
 
 let STATGAZE_API                        = "https://api-stargaze.cosmostation.io/";
 
-let COMDEX_API                          = "https://api-office.cosmostation.io/comets-test/";
+let COMDEX_API                          = "https://api-comdex.cosmostation.io/";
 
 let INJECTIVE_API                       = "https://api-inj.cosmostation.io/";
 
@@ -547,9 +547,9 @@ let GAS_FEE_RATE_TINY_KI                    = "0.025";
 let GAS_FEE_RATE_LOW_KI                     = "0.025";
 let GAS_FEE_RATE_AVERAGE_KI                 = "0.025";
 
-let GAS_FEE_RATE_TINY_COMDEX                = "0.2";
-let GAS_FEE_RATE_LOW_COMDEX                 = "0.2";
-let GAS_FEE_RATE_AVERAGE_COMDEX             = "0.2";
+let GAS_FEE_RATE_TINY_COMDEX                = "0.25";
+let GAS_FEE_RATE_LOW_COMDEX                 = "0.25";
+let GAS_FEE_RATE_AVERAGE_COMDEX             = "0.25";
 
 let GAS_FEE_RATE_TINY_SECRET                = "0.25";
 let GAS_FEE_RATE_LOW_SECRET                 = "0.25";
@@ -969,7 +969,7 @@ public enum ChainType: String {
         result.append(JUNO_MAIN)
         result.append(BITCANA_MAIN)
         result.append(STARGAZE_MAIN)
-//        result.append(COMDEX_MAIN)
+        result.append(COMDEX_MAIN)
 //        result.append(ALTHEA_MAIN)
 //        result.append(GRAVITY_BRIDGE_MAIN)
         result.append(SECRET_MAIN)

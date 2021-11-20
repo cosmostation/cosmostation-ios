@@ -522,7 +522,7 @@ extension BaseViewController {
 //        showAlert.addAction(altheaAction)
 //        showAlert.addAction(gravityBridgeAction)
         showAlert.addAction(stargazeAction)
-//        showAlert.addAction(comdexAction)
+        showAlert.addAction(comdexAction)
         showAlert.addAction(secretAction)
 //        showAlert.addAction(injectiveAction)
         
