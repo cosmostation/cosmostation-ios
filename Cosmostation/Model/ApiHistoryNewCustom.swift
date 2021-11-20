@@ -371,10 +371,14 @@ public struct ApiHistoryNewCustom {
                     var totalRewardSum = NSDecimalNumber.zero
                     for log in self.data!.logs! {
                         if let rawEvents = log.value(forKeyPath: "events") as? Array<NSDictionary> {
-                            if let rawType = rawEvents[1].object(forKey: "type") as? String, rawType == "transfer" {
-                                if let rawAttributes = rawEvents[1].object(forKey: "attributes") as? Array<NSDictionary> {
-                                    if let amount = rawAttributes[2].object(forKey: "value") as? String {
-                                        totalRewardSum = totalRewardSum.adding(NSDecimalNumber.init(string: amount.filter{$0.isNumber}))
+                            for rawEvent in rawEvents {
+                                if let rawType = rawEvent.object(forKey: "type") as? String, rawType == "transfer" {
+                                    if let rawAttributes = rawEvent.object(forKey: "attributes") as? Array<NSDictionary> {
+                                        for rawAttribute in rawAttributes {
+                                            if let rawKey = rawAttribute.object(forKey: "key") as? String, rawKey == "amount", let rawValue = rawAttribute.object(forKey: "value") as? String  {
+                                                totalRewardSum = totalRewardSum.adding(NSDecimalNumber.init(string: rawValue.filter{$0.isNumber}))
+                                            }
+                                        }
                                     }
                                 }
                             }
