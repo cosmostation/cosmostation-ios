@@ -32,6 +32,7 @@ class WalletOsmoCell: UITableViewCell {
     var actionDelegate: (() -> Void)? = nil
     var actionVote: (() -> Void)? = nil
     var actionLab: (() -> Void)? = nil
+    var actionWc: (() -> Void)? = nil
     
     @IBAction func onClickDelegate(_ sender: Any) {
         actionDelegate?()
@@ -41,6 +42,9 @@ class WalletOsmoCell: UITableViewCell {
     }
     @IBAction func onClickLab(_ sender: Any) {
         actionLab?()
+    }
+    @IBAction func onClickWc(_ sender: Any) {
+        actionWc?()
     }
     
     override func prepareForReuse() {

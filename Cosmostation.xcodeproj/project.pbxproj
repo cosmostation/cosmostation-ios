@@ -53,6 +53,8 @@
 		049DAA0227311DEB00658CFB /* WalletGBridgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */; };
 		049DAA0527311DFE00658CFB /* WalletStargazeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */; };
 		049DAA0627311DFE00658CFB /* WalletStargazeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */; };
+		04C53944274B41FE00C1EE83 /* CommonWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */; };
+		04C53945274B41FE00C1EE83 /* CommonWCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */; };
 		04CFBD482691F8460013150B /* TxTokenSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD462691F8460013150B /* TxTokenSwapCell.swift */; };
 		04CFBD492691F8460013150B /* TxTokenSwapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CFBD472691F8460013150B /* TxTokenSwapCell.xib */; };
 		04CFBD4D2692274B0013150B /* TxIbcReceiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD4B2692274B0013150B /* TxIbcReceiveCell.swift */; };
@@ -1270,6 +1272,8 @@
 		049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletGBridgeCell.xib; sourceTree = "<group>"; };
 		049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStargazeCell.swift; sourceTree = "<group>"; };
 		049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStargazeCell.xib; sourceTree = "<group>"; };
+		04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWCViewController.swift; sourceTree = "<group>"; };
+		04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonWCViewController.xib; sourceTree = "<group>"; };
 		04CFBD462691F8460013150B /* TxTokenSwapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxTokenSwapCell.swift; sourceTree = "<group>"; };
 		04CFBD472691F8460013150B /* TxTokenSwapCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxTokenSwapCell.xib; sourceTree = "<group>"; };
 		04CFBD4B2692274B0013150B /* TxIbcReceiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIbcReceiveCell.swift; sourceTree = "<group>"; };
@@ -3937,6 +3941,8 @@
 				28641F2B2601959E000AAEB8 /* TxDetailgRPCViewController.xib */,
 				28A2A4C82721B9030042ACC4 /* AccountSwitchViewController.swift */,
 				28A2A4C92721B9030042ACC4 /* AccountSwitchViewController.xib */,
+				04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */,
+				04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -4292,6 +4298,7 @@
 				E1F2AE59227EC5B600C87F3F /* MainStoryboard.storyboard in Resources */,
 				282FF35E23F530ED0028CC66 /* TxEditRewardAddressCell.xib in Resources */,
 				28DB56F825FA3B8800B2F0E5 /* HardPoolDeposit3ViewController.xib in Resources */,
+				04C53945274B41FE00C1EE83 /* CommonWCViewController.xib in Resources */,
 				28B785B226B79C70009F755F /* RizonSwapStatusViewController.xib in Resources */,
 				28474ED3241E06AF00AF5A81 /* TxCdpCreateCell.xib in Resources */,
 				28156EA02536DE29006FF06C /* HarvestDetailMyActionCell.xib in Resources */,
@@ -4863,6 +4870,7 @@
 				287AC5E025FDF7260070837E /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				289EF81926824E4700F90AC1 /* osmosis_lockup_query.grpc.swift in Sources */,
 				2894106826FF1307005BCBE4 /* SelectRelayerCell.swift in Sources */,
+				04C53944274B41FE00C1EE83 /* CommonWCViewController.swift in Sources */,
 				285F8C8E25CFB27D00317B30 /* OkTickerList.swift in Sources */,
 				289E4DB326E5D777007C7C35 /* CommonMyPoolCell.swift in Sources */,
 				287AC65B25FDF7260070837E /* akash_market_v1beta1_genesis.pb.swift in Sources */,
