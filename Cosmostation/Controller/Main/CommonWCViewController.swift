@@ -62,21 +62,49 @@ class CommonWCViewController: BaseViewController {
     }
     
     func onConnectSession(_ session: WCSession) {
-        let interactor = WCInteractor(session: session, meta: WCPeerMeta(name: "Osmosis", url: "Osmosis is the first IBC-native Cosmos interchain AMM"))
+//        let interactor = WCInteractor(session: session, meta: WCPeerMeta(name: "Osmosis", url: "Osmosis is the first IBC-native Cosmos interchain AMM"))
+        let interactor = WCInteractor(session: session, meta: WCPeerMeta(name: "", url: ""))
         self.configure(interactor: interactor)
         interactor.connect().cauterize()
         self.interactor = interactor
     }
     
     func configure(interactor: WCInteractor) {
-        let accounts = Array<String>()
-        let chainId = 99999
+//        let accounts = Array<String>()
+//        let accounts = [""]
+//        let chainId = -1
+        let accounts = [account!.account_address]
+        let chainId = 459
+        
         
         interactor.onSessionRequest = { [weak self] (id, peer) in
             print("onSessionRequest ", id, "  ", peer)
             self?.interactor?.approveSession(accounts: accounts, chainId: chainId).done { _ in
                 self?.onViewUpdate(peer)
             }
+        }
+        
+        interactor.onGetAccounts = { [weak self] (id) in
+            print("onGetAccounts ", id)
+//            let account = GetAccount.init(459, self!.account!.account_address)
+//            let encoder = JSONEncoder()
+//            let jsonData = try? encoder.encode(account)
+//            let json = String(data: jsonData!, encoding: .utf8)
+
+            var acountArrays = Array<GetAccount>()
+            let account = GetAccount.init(459, self!.account!.account_address)
+            acountArrays.append(account)
+            let encoder = JSONEncoder()
+            let jsonData = try? encoder.encode(acountArrays)
+            let json = String(data: jsonData!, encoding: .utf8)
+            self?.interactor?.approveRequest(id: id, result: json!).done { _ in
+                print("onGetAccounts Done")
+            }
+
+
+//            self?.interactor?.approveRequest(id: id, result: json!).done { _ in
+//                print("onGetAccounts Done")
+//            }
         }
 
         interactor.onDisconnect = { [weak self] (error) in
@@ -89,10 +117,12 @@ class CommonWCViewController: BaseViewController {
             
         }
         
+        
     }
     
     func onViewUpdate(_ peer: WCPeerMeta) {
-        wcImg.af_setImage(withURL: URL(string: peer.icons[0])!)
+        print("onViewUpdate ", peer.icons[0])
+        wcImg.af_setImage(withURL: URL(string: peer.icons[2])!)
         
         self.wcTitle.text = peer.name
         self.wcUrl.text = peer.url
@@ -108,5 +138,16 @@ class CommonWCViewController: BaseViewController {
     
 
     @IBAction func onClickDisconnect(_ sender: UIButton) {
+    }
+    
+    
+    public struct GetAccount: Codable {
+        public let network: UInt
+        public let address: String
+
+        public init(_ network: UInt, _ address: String) {
+            self.network = network
+            self.address = address
+        }
     }
 }
