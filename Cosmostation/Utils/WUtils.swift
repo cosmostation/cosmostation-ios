@@ -4915,8 +4915,6 @@ public class WUtils {
         return "Unknown"
     }
     
-    
-    
     static func getDefaultRlayerImg(_ chain: ChainType?) -> String {
         if (chain == ChainType.COSMOS_MAIN) { return RELAYER_IMG_COSMOS }
         else if (chain == ChainType.IRIS_MAIN) { return RELAYER_IMG_IRIS }
@@ -4934,6 +4932,14 @@ public class WUtils {
         else if (chain == ChainType.JUNO_MAIN) { return RELAYER_IMG_JUNO }
         else if (chain == ChainType.REGEN_MAIN) { return RELAYER_IMG_REGEN }
         else if (chain == ChainType.INJECTIVE_MAIN) { return RELAYER_IMG_INJECTIVE }
+        else if (chain == ChainType.KI_MAIN) { return RELAYER_IMG_KI }
+        else if (chain == ChainType.SECRET_MAIN) { return RELAYER_IMG_SECRET }
+        else if (chain == ChainType.BITCANA_MAIN) { return RELAYER_IMG_BITCANNA }
+        else if (chain == ChainType.COMDEX_MAIN) { return RELAYER_IMG_COMDEX }
+        else if (chain == ChainType.STARGAZE_MAIN) { return RELAYER_IMG_STARGAZE }
+        else if (chain == ChainType.RIZON_MAIN) { return RELAYER_IMG_RIZON }
+        else if (chain == ChainType.MEDI_MAIN) { return RELAYER_IMG_MEDI }
+//        else if (chain == ChainType.UMEE_TEST) { return RELAYER_IMG_UMEE }
         return ""
     }
     
@@ -4978,10 +4984,14 @@ public class WUtils {
             return ChainType.ALTHEA_MAIN
         } else if (chainId?.contains("stargaze-") == true) {
             return ChainType.STARGAZE_MAIN
-        } else if (chainId?.contains("comets-") == true) {
+        } else if (chainId?.contains("comdex-") == true) {
             return ChainType.COMDEX_MAIN
         } else if (chainId?.contains("injective-") == true) {
             return ChainType.INJECTIVE_MAIN
+        } else if (chainId?.contains("kichain-") == true) {
+            return ChainType.KI_MAIN
+        } else if (chainId?.contains("secret-") == true) {
+            return ChainType.SECRET_MAIN
         }
 //        else if (chainId?.contains("gravitybridge-") == true) {
 //           return ChainType.GRAVITY_BRIDGE_MAIN

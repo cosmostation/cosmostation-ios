@@ -207,9 +207,14 @@ let RELAYER_IMG_EMONEY                  = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_JUNO                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/juno/relay-juno-unknown.png"
 let RELAYER_IMG_REGEN                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/regen/relay-regen-unknown.png"
 let RELAYER_IMG_INJECTIVE               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/injective/relay-injective-unknown.png"
-//let RELAYER_IMG_KI                      = ""
-//let RELAYER_IMG_BITCANNA                = ""
-//let RELAYER_IMG_COMDEX                = ""
+let RELAYER_IMG_KI                      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/ki/relay-kichain-unknown.png"
+let RELAYER_IMG_SECRET                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/secret/relay-secret-unknown.png"
+let RELAYER_IMG_BITCANNA                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/bitcanna/relay-bitcanna-unknown.png"
+let RELAYER_IMG_COMDEX                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/comdex/relay-comdex-unknown.png"
+let RELAYER_IMG_STARGAZE                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/stargaze/relay-stargaze-unknown.png"
+let RELAYER_IMG_RIZON                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/rizon/relay-rizon-unknown.png"
+let RELAYER_IMG_MEDI                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/medibloc/relay-medibloc-unknown.png"
+let RELAYER_IMG_UMEE                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/umee/relay-umee-unknown.png"
 
 
 
