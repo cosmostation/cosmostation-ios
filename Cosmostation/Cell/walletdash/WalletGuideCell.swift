@@ -192,6 +192,11 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_injective", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_injective", comment: "")
             
+        } else if (chainType == ChainType.BITSONG_MAIN) {
+            guideImg.image = UIImage(named: "infoiconBitsong")
+            guideTitle.text = NSLocalizedString("send_guide_title_injective", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_injective", comment: "")
+            
         }
         
     }

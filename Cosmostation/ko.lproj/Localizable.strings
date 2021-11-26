@@ -177,6 +177,8 @@
 "send_guide_msg_comdex" = "토큰화된 합성자산의 거래와 파생상품 활용을 위한 탈중앙화 플랫폼.";
 "send_guide_title_injective" = "INJECTIVE PROTOCOL";
 "send_guide_msg_injective" = "다양한 금융서비스를 제공하는 Cosmos SDK 기반의 탈중앙화 크로스체인 금융 플랫폼입니다.";
+"send_guide_title_bitsong" = "BITSONG Netwrok";
+"send_guide_msg_bitsong" = "Cosmos SDK 기반 블록체인으로서 음악산업 내 아티스트와 팬, 음원 공급사를 연결해주는 탈중앙화 플랫폼입니다.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -857,6 +859,7 @@ support@cosmostation.io";
 "chain_title_stargaze" = "Stargaze";
 "chain_title_comdex" = "Comdex";
 "chain_title_injective" = "Injective";
+"chain_title_bitsong" = "Bitsong";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_test_bnb" = "Binance Testnet";

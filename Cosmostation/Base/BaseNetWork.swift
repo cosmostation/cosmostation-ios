@@ -758,6 +758,8 @@ class BaseNetWork {
             result = SECRET_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             result = INJECTIVE_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            result = BITSONG_API + "v1/account/new_txs/" + address
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -840,6 +842,8 @@ class BaseNetWork {
             result = SECRET_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             result = INJECTIVE_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            result = BITSONG_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -965,6 +969,9 @@ class BaseNetWork {
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-inj-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-bitsong-app.cosmostation.io", port: 9090)
             
         }
         

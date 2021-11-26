@@ -82,6 +82,9 @@ class CKey {
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
+        } else if (chainType == ChainType.BITSONG_MAIN) {
+            return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 639, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+
         } else {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
         }
@@ -139,6 +142,9 @@ class CKey {
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
+            
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 639, true), 0, true), 0, false), UInt32(path), false)
             
         } else {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)

@@ -660,6 +660,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allInj.stringValue, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(INJECTIVE_MAIN_DENOM, allInj, 18, cell!.tokenValue.font)
             
+        } else if (coin.denom == BITSONG_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenBitsong")
+            cell?.tokenSymbol.text = "BTSG"
+            cell?.tokenSymbol.textColor = COLOR_BITSONG
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Bitsong Staking Token"
+            
+            let allBtsg = WUtils.getAllMainAsset(BITSONG_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBtsg.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BITSONG_MAIN_DENOM, allBtsg, 6, cell!.tokenValue.font)
+            
         }
         
         

@@ -2173,6 +2173,15 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
             
+        } else if (chainType == ChainType.BITSONG_MAIN) {
+            if (coin.denom == BITSONG_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel.textColor = .white
+                denomLabel.text = coin.denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
+            
         }
     }
     
@@ -2516,6 +2525,15 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
             
+        } else if (chainType == ChainType.BITSONG_MAIN) {
+            if (denom == BITSONG_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel.textColor = .white
+                denomLabel.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            
         }
             
     }
@@ -2620,6 +2638,8 @@ public class WUtils {
             return COLOR_COMDEX
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return COLOR_INJECTIVE
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return COLOR_BITSONG
         }
         return COLOR_DARK_GRAY
     }
@@ -2685,6 +2705,8 @@ public class WUtils {
             return COLOR_COMDEX_DARK
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return COLOR_INJECTIVE_DARK
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return COLOR_BITSONG_DARK
         }
         return COLOR_DARK_GRAY
     }
@@ -2750,6 +2772,8 @@ public class WUtils {
             return TRANS_BG_COLOR_COMDEX
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return TRANS_BG_COLOR_INJECTIVE
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return TRANS_BG_COLOR_BITSONG
         }
         return COLOR_BG_GRAY
     }
@@ -2819,6 +2843,8 @@ public class WUtils {
             return "CMDX"
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return "INJ"
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return "BTSG"
         }
         return ""
     }
@@ -2880,6 +2906,8 @@ public class WUtils {
             return COMDEX_MAIN_DENOM
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return INJECTIVE_MAIN_DENOM
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return BITSONG_MAIN_DENOM
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -3050,6 +3078,9 @@ public class WUtils {
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             label.text = "INJ"
             label.textColor = COLOR_INJECTIVE
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            label.text = "BTSG"
+            label.textColor = COLOR_BITSONG
         }
     }
     
@@ -3110,6 +3141,8 @@ public class WUtils {
             return ChainType.COMDEX_MAIN
         } else if (chainS == CHAIN_INJECTIVE_S) {
             return ChainType.INJECTIVE_MAIN
+        } else if (chainS == CHAIN_BITSONG_S) {
+            return ChainType.BITSONG_MAIN
         }
         
         else if (chainS == CHAIN_COSMOS_TEST_S) {
@@ -3197,6 +3230,8 @@ public class WUtils {
             return CHAIN_COMDEX_S
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return CHAIN_INJECTIVE_S
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return CHAIN_BITSONG_S
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -3248,6 +3283,8 @@ public class WUtils {
             return MEDI_BASE_PATH + String(endPath)
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return ETH_NON_LEDGER_PATH + String(endPath)
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return BITSONG_BASE_PATH + String(endPath)
         }
         return BASE_PATH + String(endPath)
     }
@@ -3269,6 +3306,8 @@ public class WUtils {
             return MEDI_BASE_PATH + String(endPath)
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return ETH_NON_LEDGER_PATH + String(endPath)
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return BITSONG_BASE_PATH + String(endPath)
         }
         
         //TODO custom Path
@@ -3358,7 +3397,7 @@ public class WUtils {
             chain == ChainType.PERSIS_MAIN || chain == ChainType.CRYPTO_MAIN || chain == ChainType.EMONEY_MAIN ||
             chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
-            chain == ChainType.INJECTIVE_MAIN ||
+            chain == ChainType.INJECTIVE_MAIN || chain == ChainType.BITSONG_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.RIZON_TEST ||
             chain == ChainType.ALTHEA_TEST || chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
@@ -3747,6 +3786,11 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_BITSONG)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         
         else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
@@ -3930,6 +3974,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_INJECTIVE)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_INJECTIVE)
+            }
+            
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_BITSONG)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_BITSONG)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_BITSONG)
             }
             
         }
@@ -4271,6 +4324,9 @@ public class WUtils {
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return BLOCK_TIME_INJECTIVE
             
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return BLOCK_TIME_BITSONG
+            
         }
         return NSDecimalNumber.zero
     }
@@ -4342,6 +4398,8 @@ public class WUtils {
             return COMDEX_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return INJECTIVE_VAL_URL + opAddress + ".png";
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return BITSONG_VAL_URL + opAddress + ".png";
         }
         return ""
     }
@@ -4430,6 +4488,9 @@ public class WUtils {
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return EXPLORER_INJECTIVE + "txs/" + hash
+            
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return EXPLORER_BITSONG + "txs/" + hash
             
         }
         
@@ -4543,6 +4604,9 @@ public class WUtils {
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return EXPLORER_INJECTIVE + "account/" + address
+            
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return EXPLORER_BITSONG + "account/" + address
             
         }
         
@@ -4662,6 +4726,9 @@ public class WUtils {
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return EXPLORER_INJECTIVE + "proposals/" + proposalId
             
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return EXPLORER_BITSONG + "proposals/" + proposalId
+            
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4777,6 +4844,9 @@ public class WUtils {
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             return UIImage(named: "tokenInjective")
             
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            return UIImage(named: "tokenBitsong")
+            
         }
         
         else if (chain == ChainType.UMEE_TEST) {
@@ -4819,6 +4889,8 @@ public class WUtils {
         else if (chain == ChainType.STARGAZE_MAIN) { return UIImage(named: "chainStargaze") }
         else if (chain == ChainType.COMDEX_MAIN) { return UIImage(named: "chainComdex") }
         else if (chain == ChainType.INJECTIVE_MAIN) { return UIImage(named: "chainInjective") }
+        else if (chain == ChainType.BITSONG_MAIN) { return UIImage(named: "chainBitsong") }
+
         
         else if (chain == ChainType.COSMOS_TEST) { return UIImage(named: "cosmosTestChainImg") }
         else if (chain == ChainType.IRIS_TEST) { return UIImage(named: "irisTestChainImg") }
@@ -4860,6 +4932,7 @@ public class WUtils {
         else if (chain == ChainType.STARGAZE_MAIN) { return "(Stargaze Mainnet)" }
         else if (chain == ChainType.COMDEX_MAIN) { return "(Comdex Mainnet)" }
         else if (chain == ChainType.INJECTIVE_MAIN) { return "(Injective Mainnet)" }
+        else if (chain == ChainType.BITSONG_MAIN) { return "(Bitsong Mainnet)" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "(StarGate Testnet)" }
         else if (chain == ChainType.IRIS_TEST) { return "(Bifrost Testnet)" }
@@ -4902,6 +4975,7 @@ public class WUtils {
         else if (chain == ChainType.STARGAZE_MAIN) { return "STARGAZE" }
         else if (chain == ChainType.COMDEX_MAIN) { return "COMDEX" }
         else if (chain == ChainType.INJECTIVE_MAIN) { return "INJECTIVE" }
+        else if (chain == ChainType.BITSONG_MAIN) { return "BITSONG" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "STARGATE" }
         else if (chain == ChainType.IRIS_TEST) { return "BIFROST" }
@@ -4939,6 +5013,7 @@ public class WUtils {
         else if (chain == ChainType.STARGAZE_MAIN) { return RELAYER_IMG_STARGAZE }
         else if (chain == ChainType.RIZON_MAIN) { return RELAYER_IMG_RIZON }
         else if (chain == ChainType.MEDI_MAIN) { return RELAYER_IMG_MEDI }
+        else if (chain == ChainType.BITSONG_MAIN) { return RELAYER_IMG_BITSONG }
 //        else if (chain == ChainType.UMEE_TEST) { return RELAYER_IMG_UMEE }
         return ""
     }
@@ -4992,6 +5067,8 @@ public class WUtils {
             return ChainType.KI_MAIN
         } else if (chainId?.contains("secret-") == true) {
             return ChainType.SECRET_MAIN
+        } else if (chainId?.contains("bitsong-") == true) {
+            return ChainType.BITSONG_MAIN
         }
 //        else if (chainId?.contains("gravitybridge-") == true) {
 //           return ChainType.GRAVITY_BRIDGE_MAIN
@@ -5035,6 +5112,7 @@ public class WUtils {
         else if (address?.starts(with: "stars1") == true && chain == ChainType.STARGAZE_MAIN) { return true }
         else if (address?.starts(with: "comdex1") == true && chain == ChainType.COMDEX_MAIN) { return true }
         else if (address?.starts(with: "inj1") == true && chain == ChainType.INJECTIVE_MAIN) { return true }
+        else if (address?.starts(with: "bitsong1") == true && chain == ChainType.BITSONG_MAIN) { return true }
         
         else if (address?.starts(with: "umee1") == true && chain == ChainType.UMEE_TEST) { return true }
         else if (address?.starts(with: "axelar1") == true && chain == ChainType.AXELAR_TEST) { return true }
@@ -5075,6 +5153,7 @@ public class WUtils {
         else if (address?.starts(with: "stars1") == true) { return [ChainType.STARGAZE_MAIN] }
         else if (address?.starts(with: "comdex1") == true) { return [ChainType.COMDEX_MAIN] }
         else if (address?.starts(with: "inj1") == true) { return [ChainType.INJECTIVE_MAIN] }
+        else if (address?.starts(with: "bitsong1") == true) { return [ChainType.BITSONG_MAIN] }
         
         else if (address?.starts(with: "tbnb1") == true) { return [ChainType.BINANCE_TEST] }
         else if (address?.starts(with: "umee1") == true) { return [ChainType.UMEE_TEST] }

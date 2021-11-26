@@ -15,6 +15,8 @@
 		04394B002744C6FF002334F1 /* ManageChainAccoutsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */; };
 		04394B032746299F002334F1 /* WalletInjectiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04394B012746299F002334F1 /* WalletInjectiveCell.swift */; };
 		04394B042746299F002334F1 /* WalletInjectiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394B022746299F002334F1 /* WalletInjectiveCell.xib */; };
+		04615CC4275074A600A693B0 /* WalletBitsongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC2275074A600A693B0 /* WalletBitsongCell.swift */; };
+		04615CC5275074A600A693B0 /* WalletBitsongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC3275074A600A693B0 /* WalletBitsongCell.xib */; };
 		046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
 		046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
@@ -1234,6 +1236,8 @@
 		04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageChainAccoutsCell.xib; sourceTree = "<group>"; };
 		04394B012746299F002334F1 /* WalletInjectiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInjectiveCell.swift; sourceTree = "<group>"; };
 		04394B022746299F002334F1 /* WalletInjectiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletInjectiveCell.xib; sourceTree = "<group>"; };
+		04615CC2275074A600A693B0 /* WalletBitsongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBitsongCell.swift; sourceTree = "<group>"; };
+		04615CC3275074A600A693B0 /* WalletBitsongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletBitsongCell.xib; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
 		046E9038268C3F95002CFFE1 /* BinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceModel.swift; sourceTree = "<group>"; };
 		046E903A268C401E002CFFE1 /* BinanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceType.swift; sourceTree = "<group>"; };
@@ -3089,6 +3093,8 @@
 				042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */,
 				04394B012746299F002334F1 /* WalletInjectiveCell.swift */,
 				04394B022746299F002334F1 /* WalletInjectiveCell.xib */,
+				04615CC2275074A600A693B0 /* WalletBitsongCell.swift */,
+				04615CC3275074A600A693B0 /* WalletBitsongCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -4461,6 +4467,7 @@
 				287654702726BFD30071FF96 /* EditDisplayChainCell.xib in Resources */,
 				282FF35623F518E00028CC66 /* TxMultiTransferCell.xib in Resources */,
 				28E667052699448F00BA2C68 /* Osmosis.storyboard in Resources */,
+				04615CC5275074A600A693B0 /* WalletBitsongCell.xib in Resources */,
 				284FBC8226DBE98500403FE2 /* TxSwapWithdrawCell.xib in Resources */,
 				28EEECA926DAE9A4002DDC4A /* KavaSwapJoin3ViewController.xib in Resources */,
 				E1CF42F123598AFE00907F45 /* ManageChainCell.xib in Resources */,
@@ -4678,6 +4685,7 @@
 				289EF83526824E4700F90AC1 /* osmosis_mint_v1beta1_genesis.pb.swift in Sources */,
 				2887BA4E26DE278700CDA415 /* shentu_oracle_v1alpha1_oracle.pb.swift in Sources */,
 				287AC61225FDF7260070837E /* cosmos_base_reflection_v1beta1_reflection.pb.swift in Sources */,
+				04615CC4275074A600A693B0 /* WalletBitsongCell.swift in Sources */,
 				28B2E4C726CFC85400ECF960 /* TokenDetailIBCInfoCell.swift in Sources */,
 				287AC62F25FDF7260070837E /* cosmos_auth_v1beta1_auth.pb.swift in Sources */,
 				28CFB6A726133C9700A18634 /* StakingTokenDetailViewController.swift in Sources */,

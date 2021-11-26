@@ -83,6 +83,9 @@ class WKey {
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
+        } else if (chainType == ChainType.BITSONG_MAIN) {
+            return masterKey.derived(at: .hardened(44)).derived(at: .hardened(639)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            
         } else {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
         }
@@ -154,6 +157,8 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "comdex", program: ripemd160)
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "inj", program: ripemd160)
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "bitsong", program: ripemd160)
         }
         return result
     }
@@ -206,6 +211,9 @@ class WKey {
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(639)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         } else {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
@@ -336,6 +344,8 @@ class WKey {
             result = bech32.encode("comdex", values: data)
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             result = bech32.encode("inj", values: data)
+        } else if (chain == ChainType.BITSONG_MAIN) {
+            result = bech32.encode("bitsong", values: data)
         }
         return result
     }
