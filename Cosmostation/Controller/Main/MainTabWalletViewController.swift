@@ -1774,6 +1774,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://injectiveprotocol.com/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.BITSONG_MAIN) {
+            guard let url = URL(string: "http://bitsong.io/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -1902,6 +1906,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.INJECTIVE_MAIN) {
             guard let url = URL(string: "https://blog.injectiveprotocol.com/") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.BITSONG_MAIN) {
+            guard let url = URL(string: "https://bitsongofficial.medium.com/") else { return }
             self.onShowSafariWeb(url)
             
         }
