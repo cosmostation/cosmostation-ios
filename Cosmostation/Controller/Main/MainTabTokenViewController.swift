@@ -478,7 +478,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "MED"
             cell?.tokenSymbol.textColor = COLOR_MEDI
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Mediblock Staking Token"
+            cell?.tokenDescription.text = "Medibloc Staking Token"
 
             let allMed = WUtils.getAllMainAsset(MEDI_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allMed.stringValue, cell!.tokenAmount.font, 6, 6)
