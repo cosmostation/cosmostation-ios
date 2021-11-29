@@ -671,6 +671,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBtsg.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BITSONG_MAIN_DENOM, allBtsg, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == DESMOS_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenDesmos")
+            cell?.tokenSymbol.text = "DSM"
+            cell?.tokenSymbol.textColor = COLOR_DESMOS
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Desmos Staking Token"
+            
+            let allDsm = WUtils.getAllMainAsset(DESMOS_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allDsm.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(DESMOS_MAIN_DENOM, allDsm, 6, cell!.tokenValue.font)
+            
         }
         
         
