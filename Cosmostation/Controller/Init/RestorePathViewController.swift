@@ -86,6 +86,12 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
         } else if (userChain == ChainType.INJECTIVE_MAIN) {
             cell?.pathLabel.text = ETH_NON_LEDGER_PATH.appending(String(indexPath.row))
             
+        } else if (userChain == ChainType.BITSONG_MAIN) {
+            cell?.pathLabel.text = BITSONG_BASE_PATH.appending(String(indexPath.row))
+            
+        } else if (userChain == ChainType.DESMOS_MAIN) {
+            cell?.pathLabel.text = DESMOS_BASE_PATH.appending(String(indexPath.row))
+            
         } else {
             cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row))
         }

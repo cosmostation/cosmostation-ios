@@ -486,6 +486,11 @@ extension BaseViewController {
         })
         bitsongAction.setValue(UIImage(named: "chainBitsong")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let desmosAction = UIAlertAction(title: NSLocalizedString("chain_title_desmos", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.DESMOS_MAIN)
+        })
+        desmosAction.setValue(UIImage(named: "chainDesmos")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -530,6 +535,7 @@ extension BaseViewController {
         showAlert.addAction(comdexAction)
         showAlert.addAction(secretAction)
         showAlert.addAction(bitsongAction)
+        showAlert.addAction(desmosAction)
 //        showAlert.addAction(injectiveAction)
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {

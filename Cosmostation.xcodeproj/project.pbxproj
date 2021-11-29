@@ -17,6 +17,8 @@
 		04394B042746299F002334F1 /* WalletInjectiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394B022746299F002334F1 /* WalletInjectiveCell.xib */; };
 		04615CC4275074A600A693B0 /* WalletBitsongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC2275074A600A693B0 /* WalletBitsongCell.swift */; };
 		04615CC5275074A600A693B0 /* WalletBitsongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC3275074A600A693B0 /* WalletBitsongCell.xib */; };
+		04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */; };
+		04615CC92750C7AD00A693B0 /* WalletDesmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */; };
 		046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
 		046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
@@ -1238,6 +1240,8 @@
 		04394B022746299F002334F1 /* WalletInjectiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletInjectiveCell.xib; sourceTree = "<group>"; };
 		04615CC2275074A600A693B0 /* WalletBitsongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBitsongCell.swift; sourceTree = "<group>"; };
 		04615CC3275074A600A693B0 /* WalletBitsongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletBitsongCell.xib; sourceTree = "<group>"; };
+		04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosCell.swift; sourceTree = "<group>"; };
+		04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosCell.xib; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
 		046E9038268C3F95002CFFE1 /* BinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceModel.swift; sourceTree = "<group>"; };
 		046E903A268C401E002CFFE1 /* BinanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceType.swift; sourceTree = "<group>"; };
@@ -3095,6 +3099,8 @@
 				04394B022746299F002334F1 /* WalletInjectiveCell.xib */,
 				04615CC2275074A600A693B0 /* WalletBitsongCell.swift */,
 				04615CC3275074A600A693B0 /* WalletBitsongCell.xib */,
+				04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */,
+				04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -4274,6 +4280,7 @@
 				280524B5255CDA7D004D6172 /* StarnameWalletConnectViewController.xib in Resources */,
 				283EB77626C8148D00B9D28D /* TxUnlockTokenCell.xib in Resources */,
 				289E4DAC26E59263007C7C35 /* WalletUmeeCell.xib in Resources */,
+				04615CC92750C7AD00A693B0 /* WalletDesmosCell.xib in Resources */,
 				2829CEA82627080C0048B52A /* WalletCrytoCell.xib in Resources */,
 				282FF36623F533AF0028CC66 /* TxUnknownCell.xib in Resources */,
 				2894105626FDBE97005BCBE4 /* IBCSend1ViewController.xib in Resources */,
@@ -5335,6 +5342,7 @@
 				28CE973625872B7C006DEBEE /* Signer.swift in Sources */,
 				287AC64825FDF7260070837E /* akash_cert_v1beta1_genesis.pb.swift in Sources */,
 				28E0458E269B35750022A366 /* FarmingViewController.swift in Sources */,
+				04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */,
 				283EB78126C828AE00B9D28D /* EarnUnbondedCell.swift in Sources */,
 				E1F1CF0A239F7D7D004EF8A2 /* VoteSelectViewController.swift in Sources */,
 				28584B5626E87D0F00EE5719 /* GdexWithdraw3ViewController.swift in Sources */,

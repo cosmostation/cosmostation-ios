@@ -73,6 +73,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletComdexCell", bundle: nil), forCellReuseIdentifier: "WalletComdexCell")
         self.walletTableView.register(UINib(nibName: "WalletInjectiveCell", bundle: nil), forCellReuseIdentifier: "WalletInjectiveCell")
         self.walletTableView.register(UINib(nibName: "WalletBitsongCell", bundle: nil), forCellReuseIdentifier: "WalletBitsongCell")
+        self.walletTableView.register(UINib(nibName: "WalletDesmosCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -273,6 +274,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetInjectiveItems(tableView, indexPath);
         } else if (chainType == ChainType.BITSONG_MAIN) {
             return onSetBitsongItems(tableView, indexPath);
+        } else if (chainType == ChainType.DESMOS_MAIN) {
+            return onSetDesmosItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -1238,7 +1241,35 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
         }
-        
+    }
+    
+    func onSetDesmosItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDesmosCell") as? WalletDesmosCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
     }
     
     
@@ -1778,6 +1809,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "http://bitsong.io/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.DESMOS_MAIN) {
+            guard let url = URL(string: "https://www.desmos.network/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -1910,6 +1945,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.BITSONG_MAIN) {
             guard let url = URL(string: "https://bitsongofficial.medium.com/") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.DESMOS_MAIN) {
+            guard let url = URL(string: "https://medium.com/desmosnetwork") else { return }
             self.onShowSafariWeb(url)
             
         }
