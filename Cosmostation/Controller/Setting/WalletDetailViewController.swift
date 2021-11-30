@@ -733,7 +733,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             
             do {
                 let response = try Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req).response.wait()
-                chainId = response.defaultNodeInfo.network
+                chainId = response.nodeInfo.network
                 
             } catch {
                 print("onFetchgRPCNodeInfo failed: \(error)")

@@ -50,7 +50,7 @@ class TransactionViewController: UIViewController {
     var mPoolId: String?
     var mSwapInDenom: String?
     var mSwapOutDenom: String?
-    var mPool: Osmosis_Gamm_V1beta1_Pool?
+    var mPool: Osmosis_Gamm_V1beta1_BalancerPool?
     var mLockupDuration: Int64?
     var mLockups: Array<Osmosis_Lockup_PeriodLock>?
     

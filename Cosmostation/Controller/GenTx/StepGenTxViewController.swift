@@ -121,7 +121,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mSwapOutDenom: String?
     var mSwapInAmount: NSDecimalNumber?
     var mSwapOutAmount: NSDecimalNumber?
-    var mPool: Osmosis_Gamm_V1beta1_Pool?
+    var mPool: Osmosis_Gamm_V1beta1_BalancerPool?
     var mPoolCoin0: Coin?
     var mPoolCoin1: Coin?
     var mLPCoin: Coin?

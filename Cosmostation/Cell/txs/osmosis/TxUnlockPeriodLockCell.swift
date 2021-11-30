@@ -26,31 +26,31 @@ class TxUnlockPeriodLockCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = WUtils.getChainColor(chain)
         
-        let msg = try! Osmosis_Lockup_MsgUnlockPeriodLock.init(serializedData: response.tx.body.messages[position].value)
-        
-        txOwenerLabel.text = msg.owner
-        txOwenerLabel.adjustsFontSizeToFitWidth = true
-        
-        txIdLabel.text = String(msg.id)
-        
-        var coin: Coin?
-        if response.txResponse.logs.count > position {
-            response.txResponse.logs[position].events.forEach { event in
-                if (event.type == "transfer") {
-                    event.attributes.forEach { attribute in
-                        if (attribute.key == "amount") {
-                            if let range = attribute.value.range(of: "[0-9]*", options: .regularExpression){
-                                let amount = String(attribute.value[range])
-                                coin = Coin.init(attribute.value.replacingOccurrences(of: amount, with: ""), amount)
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (coin != nil) {
-            WUtils.showCoinDp(coin!, txUnlockDenomLabel, txUnlockAmountLabel, chain)
-        }
+//        let msg = try! Osmosis_Lockup_MsgUnlockPeriodLock.init(serializedData: response.tx.body.messages[position].value)
+//        
+//        txOwenerLabel.text = msg.owner
+//        txOwenerLabel.adjustsFontSizeToFitWidth = true
+//        
+//        txIdLabel.text = String(msg.id)
+//        
+//        var coin: Coin?
+//        if response.txResponse.logs.count > position {
+//            response.txResponse.logs[position].events.forEach { event in
+//                if (event.type == "transfer") {
+//                    event.attributes.forEach { attribute in
+//                        if (attribute.key == "amount") {
+//                            if let range = attribute.value.range(of: "[0-9]*", options: .regularExpression){
+//                                let amount = String(attribute.value[range])
+//                                coin = Coin.init(attribute.value.replacingOccurrences(of: amount, with: ""), amount)
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        if (coin != nil) {
+//            WUtils.showCoinDp(coin!, txUnlockDenomLabel, txUnlockAmountLabel, chain)
+//        }
         
     }
 }

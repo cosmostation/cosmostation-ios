@@ -42,7 +42,7 @@ class CommonMyPoolCell: UITableViewCell {
         availableCoin1AmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
-    func onBindOsmoPoolView(_ pool: Osmosis_Gamm_V1beta1_Pool) {
+    func onBindOsmoPoolView(_ pool: Osmosis_Gamm_V1beta1_BalancerPool) {
         //dp pool info
         poolCardView.backgroundColor = TRANS_BG_COLOR_OSMOSIS
         poolPairLabel.textColor = COLOR_OSMOSIS

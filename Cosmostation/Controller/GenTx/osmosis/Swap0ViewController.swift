@@ -211,7 +211,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
                     $0.poolID = UInt64(poolId)!
                 }
                 let response = try Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pool(req, callOptions: BaseNetWork.getCallOptions()).response.wait()
-                self.pageHolderVC.mPool = try! Osmosis_Gamm_V1beta1_Pool.init(serializedData: response.pool.value)
+                self.pageHolderVC.mPool = try! Osmosis_Gamm_V1beta1_BalancerPool.init(serializedData: response.pool.value)
                 
                 
             } catch {

@@ -23,7 +23,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
     @IBOutlet weak var topAvailableDenomLabel: UILabel!
     @IBOutlet weak var topAvailableValueLabel: UILabel!
     
-    var mPool: Osmosis_Gamm_V1beta1_Pool!
+    var mPool: Osmosis_Gamm_V1beta1_BalancerPool!
     var mPoolGauges: Array<Osmosis_Incentives_Gauge>!
     var mLockUps: Array<Osmosis_Lockup_PeriodLock>!
     var mBondedList: Array<Osmosis_Lockup_PeriodLock> = Array<Osmosis_Lockup_PeriodLock>()

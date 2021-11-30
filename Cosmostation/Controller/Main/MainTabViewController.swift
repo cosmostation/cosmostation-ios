@@ -1039,7 +1039,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    BaseData.instance.mNodeInfo_gRPC = response.defaultNodeInfo
+                    BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
                     self.mFetchCnt = self.mFetchCnt + 3
                     self.onFetchParams(BaseData.instance.getChainId(self.mChainType))
                     self.onFetchIbcPaths(BaseData.instance.getChainId(self.mChainType))
@@ -1254,7 +1254,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
                 let req = Osmosis_Gamm_V1beta1_QueryPoolsRequest.with { $0.pagination = page }
                 if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.pools.forEach { pool in
-                        let rawPool = try! Osmosis_Gamm_V1beta1_Pool.init(serializedData: pool.value)
+                        let rawPool = try! Osmosis_Gamm_V1beta1_BalancerPool.init(serializedData: pool.value)
                         BaseData.instance.mOsmoPools_gRPC.append(rawPool)
                     }
                 }

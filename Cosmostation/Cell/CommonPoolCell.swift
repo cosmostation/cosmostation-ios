@@ -32,7 +32,7 @@ class CommonPoolCell: UITableViewCell {
         availableCoin1AmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
-    func onBindOsmoPoolView(_ pool: Osmosis_Gamm_V1beta1_Pool) {
+    func onBindOsmoPoolView(_ pool: Osmosis_Gamm_V1beta1_BalancerPool) {
         //dp pool info
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)

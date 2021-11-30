@@ -65,8 +65,8 @@ final class BaseData : NSObject{
     
     //For ProtoBuf and gRPC
     var mVestingAccountInfoResult: VestingAccountInfo.VestingAccountInfoResult?
-    var mNodeInfo_gRPC: Tendermint_P2p_DefaultNodeInfo?
-    var mAccount_gRPC: Google_Protobuf2_Any?
+    var mNodeInfo_gRPC: Tendermint_P2p_NodeInfo?
+    var mAccount_gRPC: Google_Protobuf_Any!
     var mAllValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     var mBondedValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     var mUnbondValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
@@ -81,7 +81,7 @@ final class BaseData : NSObject{
     var mStarNameFee_gRPC: Starnamed_X_Configuration_V1beta1_Fees?
     var mStarNameConfig_gRPC: Starnamed_X_Configuration_V1beta1_Config?
     
-    var mOsmoPools_gRPC = Array<Osmosis_Gamm_V1beta1_Pool>()
+    var mOsmoPools_gRPC = Array<Osmosis_Gamm_V1beta1_BalancerPool>()
     
     var mGravityParam_gRPC: Tendermint_Liquidity_V1beta1_Params?
     var mGravityPools_gRPC = Array<Tendermint_Liquidity_V1beta1_Pool>()
@@ -460,7 +460,7 @@ final class BaseData : NSObject{
         return NSDecimalNumber.zero
     }
     
-    func getOsmoPoolByDenom(_ denom: String) -> Osmosis_Gamm_V1beta1_Pool? {
+    func getOsmoPoolByDenom(_ denom: String) -> Osmosis_Gamm_V1beta1_BalancerPool? {
         return mOsmoPools_gRPC.filter { $0.totalShares.denom == denom }.first
     }
     

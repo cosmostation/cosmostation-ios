@@ -535,7 +535,7 @@ extension BaseViewController {
         showAlert.addAction(comdexAction)
         showAlert.addAction(secretAction)
         showAlert.addAction(bitsongAction)
-        showAlert.addAction(desmosAction)
+//        showAlert.addAction(desmosAction)
 //        showAlert.addAction(injectiveAction)
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {

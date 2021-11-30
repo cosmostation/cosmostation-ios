@@ -1009,7 +1009,7 @@ public enum ChainType: String {
 //        result.append(GRAVITY_BRIDGE_MAIN)
         result.append(SECRET_MAIN)
         result.append(BITSONG_MAIN)
-        result.append(DESMOS_MAIN)
+//        result.append(DESMOS_MAIN)
 //        result.append(INJECTIVE_MAIN)
         
 

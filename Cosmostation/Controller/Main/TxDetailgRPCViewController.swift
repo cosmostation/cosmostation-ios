@@ -224,7 +224,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             }
             
-            else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgCreatePool.protoMessageName)) {
+            else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgCreateBalancerPool.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCreatePoolCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
@@ -269,12 +269,13 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
-            } else if (msg.typeURL.contains(Osmosis_Lockup_MsgUnlockPeriodLock.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxUnlockPeriodLockCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
             }
+//            else if (msg.typeURL.contains(Osmosis_Lockup_MsgUnlockPeriodLock.protoMessageName)) {
+//                let cell = tableView.dequeueReusableCell(withIdentifier:"TxUnlockPeriodLockCell") as? TxCell
+//                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+//                return cell!
+//                
+//            }
             
             else if (msg.typeURL.contains(Tendermint_Liquidity_V1beta1_MsgCreatePool.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxGravityCreatePoolCell") as? TxCell
