@@ -36,6 +36,11 @@ internal protocol Cosmos_Params_V1beta1_QueryClientProtocol: GRPCClient {
     _ request: Cosmos_Params_V1beta1_QueryParamsRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Params_V1beta1_QueryParamsRequest, Cosmos_Params_V1beta1_QueryParamsResponse>
+
+  func subspaces(
+    _ request: Cosmos_Params_V1beta1_QuerySubspacesRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Params_V1beta1_QuerySubspacesRequest, Cosmos_Params_V1beta1_QuerySubspacesResponse>
 }
 
 extension Cosmos_Params_V1beta1_QueryClientProtocol {
@@ -61,12 +66,33 @@ extension Cosmos_Params_V1beta1_QueryClientProtocol {
       interceptors: self.interceptors?.makeParamsInterceptors() ?? []
     )
   }
+
+  /// Subspaces queries for all registered subspaces and all keys for a subspace.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Subspaces.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func subspaces(
+    _ request: Cosmos_Params_V1beta1_QuerySubspacesRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Params_V1beta1_QuerySubspacesRequest, Cosmos_Params_V1beta1_QuerySubspacesResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.params.v1beta1.Query/Subspaces",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSubspacesInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Cosmos_Params_V1beta1_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'params'.
   func makeParamsInterceptors() -> [ClientInterceptor<Cosmos_Params_V1beta1_QueryParamsRequest, Cosmos_Params_V1beta1_QueryParamsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'subspaces'.
+  func makeSubspacesInterceptors() -> [ClientInterceptor<Cosmos_Params_V1beta1_QuerySubspacesRequest, Cosmos_Params_V1beta1_QuerySubspacesResponse>]
 }
 
 internal final class Cosmos_Params_V1beta1_QueryClient: Cosmos_Params_V1beta1_QueryClientProtocol {
@@ -100,6 +126,9 @@ internal protocol Cosmos_Params_V1beta1_QueryProvider: CallHandlerProvider {
   /// Params queries a specific parameter of a module, given its subspace and
   /// key.
   func params(request: Cosmos_Params_V1beta1_QueryParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Params_V1beta1_QueryParamsResponse>
+
+  /// Subspaces queries for all registered subspaces and all keys for a subspace.
+  func subspaces(request: Cosmos_Params_V1beta1_QuerySubspacesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Params_V1beta1_QuerySubspacesResponse>
 }
 
 extension Cosmos_Params_V1beta1_QueryProvider {
@@ -121,6 +150,15 @@ extension Cosmos_Params_V1beta1_QueryProvider {
         userFunction: self.params(request:context:)
       )
 
+    case "Subspaces":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Params_V1beta1_QuerySubspacesRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Params_V1beta1_QuerySubspacesResponse>(),
+        interceptors: self.interceptors?.makeSubspacesInterceptors() ?? [],
+        userFunction: self.subspaces(request:context:)
+      )
+
     default:
       return nil
     }
@@ -132,4 +170,8 @@ internal protocol Cosmos_Params_V1beta1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'params'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeParamsInterceptors() -> [ServerInterceptor<Cosmos_Params_V1beta1_QueryParamsRequest, Cosmos_Params_V1beta1_QueryParamsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'subspaces'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeSubspacesInterceptors() -> [ServerInterceptor<Cosmos_Params_V1beta1_QuerySubspacesRequest, Cosmos_Params_V1beta1_QuerySubspacesResponse>]
 }

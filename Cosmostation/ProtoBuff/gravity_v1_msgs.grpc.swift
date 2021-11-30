@@ -32,70 +32,35 @@ internal protocol Gravity_V1_MsgClientProtocol: GRPCClient {
   var serviceName: String { get }
   var interceptors: Gravity_V1_MsgClientInterceptorFactoryProtocol? { get }
 
-  func valsetConfirm(
-    _ request: Gravity_V1_MsgValsetConfirm,
+  func sendToEthereum(
+    _ request: Gravity_V1_MsgSendToEthereum,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgValsetConfirm, Gravity_V1_MsgValsetConfirmResponse>
+  ) -> UnaryCall<Gravity_V1_MsgSendToEthereum, Gravity_V1_MsgSendToEthereumResponse>
 
-  func sendToEth(
-    _ request: Gravity_V1_MsgSendToEth,
+  func cancelSendToEthereum(
+    _ request: Gravity_V1_MsgCancelSendToEthereum,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgSendToEth, Gravity_V1_MsgSendToEthResponse>
+  ) -> UnaryCall<Gravity_V1_MsgCancelSendToEthereum, Gravity_V1_MsgCancelSendToEthereumResponse>
 
-  func requestBatch(
-    _ request: Gravity_V1_MsgRequestBatch,
+  func requestBatchTx(
+    _ request: Gravity_V1_MsgRequestBatchTx,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgRequestBatch, Gravity_V1_MsgRequestBatchResponse>
+  ) -> UnaryCall<Gravity_V1_MsgRequestBatchTx, Gravity_V1_MsgRequestBatchTxResponse>
 
-  func confirmBatch(
-    _ request: Gravity_V1_MsgConfirmBatch,
+  func submitEthereumTxConfirmation(
+    _ request: Gravity_V1_MsgSubmitEthereumTxConfirmation,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgConfirmBatch, Gravity_V1_MsgConfirmBatchResponse>
+  ) -> UnaryCall<Gravity_V1_MsgSubmitEthereumTxConfirmation, Gravity_V1_MsgSubmitEthereumTxConfirmationResponse>
 
-  func confirmLogicCall(
-    _ request: Gravity_V1_MsgConfirmLogicCall,
+  func submitEthereumEvent(
+    _ request: Gravity_V1_MsgSubmitEthereumEvent,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgConfirmLogicCall, Gravity_V1_MsgConfirmLogicCallResponse>
+  ) -> UnaryCall<Gravity_V1_MsgSubmitEthereumEvent, Gravity_V1_MsgSubmitEthereumEventResponse>
 
-  func depositClaim(
-    _ request: Gravity_V1_MsgDepositClaim,
+  func setDelegateKeys(
+    _ request: Gravity_V1_MsgDelegateKeys,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgDepositClaim, Gravity_V1_MsgDepositClaimResponse>
-
-  func withdrawClaim(
-    _ request: Gravity_V1_MsgWithdrawClaim,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgWithdrawClaim, Gravity_V1_MsgWithdrawClaimResponse>
-
-  func valsetUpdateClaim(
-    _ request: Gravity_V1_MsgValsetUpdatedClaim,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgValsetUpdatedClaim, Gravity_V1_MsgValsetUpdatedClaimResponse>
-
-  func eRC20DeployedClaim(
-    _ request: Gravity_V1_MsgERC20DeployedClaim,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgERC20DeployedClaim, Gravity_V1_MsgERC20DeployedClaimResponse>
-
-  func logicCallExecutedClaim(
-    _ request: Gravity_V1_MsgLogicCallExecutedClaim,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgLogicCallExecutedClaim, Gravity_V1_MsgLogicCallExecutedClaimResponse>
-
-  func setOrchestratorAddress(
-    _ request: Gravity_V1_MsgSetOrchestratorAddress,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgSetOrchestratorAddress, Gravity_V1_MsgSetOrchestratorAddressResponse>
-
-  func cancelSendToEth(
-    _ request: Gravity_V1_MsgCancelSendToEth,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgCancelSendToEth, Gravity_V1_MsgCancelSendToEthResponse>
-
-  func submitBadSignatureEvidence(
-    _ request: Gravity_V1_MsgSubmitBadSignatureEvidence,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_MsgSubmitBadSignatureEvidence, Gravity_V1_MsgSubmitBadSignatureEvidenceResponse>
+  ) -> UnaryCall<Gravity_V1_MsgDelegateKeys, Gravity_V1_MsgDelegateKeysResponse>
 }
 
 extension Gravity_V1_MsgClientProtocol {
@@ -103,281 +68,134 @@ extension Gravity_V1_MsgClientProtocol {
     return "gravity.v1.Msg"
   }
 
-  /// Unary call to ValsetConfirm
+  /// option (google.api.http).post = "/gravity/v1/send_to_ethereum";
   ///
   /// - Parameters:
-  ///   - request: Request to send to ValsetConfirm.
+  ///   - request: Request to send to SendToEthereum.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func valsetConfirm(
-    _ request: Gravity_V1_MsgValsetConfirm,
+  internal func sendToEthereum(
+    _ request: Gravity_V1_MsgSendToEthereum,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgValsetConfirm, Gravity_V1_MsgValsetConfirmResponse> {
+  ) -> UnaryCall<Gravity_V1_MsgSendToEthereum, Gravity_V1_MsgSendToEthereumResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/ValsetConfirm",
+      path: "/gravity.v1.Msg/SendToEthereum",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeValsetConfirmInterceptors() ?? []
+      interceptors: self.interceptors?.makeSendToEthereumInterceptors() ?? []
     )
   }
 
-  /// Unary call to SendToEth
+  /// option (google.api.http).post = "/gravity/v1/send_to_ethereum/cancel";
   ///
   /// - Parameters:
-  ///   - request: Request to send to SendToEth.
+  ///   - request: Request to send to CancelSendToEthereum.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func sendToEth(
-    _ request: Gravity_V1_MsgSendToEth,
+  internal func cancelSendToEthereum(
+    _ request: Gravity_V1_MsgCancelSendToEthereum,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgSendToEth, Gravity_V1_MsgSendToEthResponse> {
+  ) -> UnaryCall<Gravity_V1_MsgCancelSendToEthereum, Gravity_V1_MsgCancelSendToEthereumResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/SendToEth",
+      path: "/gravity.v1.Msg/CancelSendToEthereum",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSendToEthInterceptors() ?? []
+      interceptors: self.interceptors?.makeCancelSendToEthereumInterceptors() ?? []
     )
   }
 
-  /// Unary call to RequestBatch
+  /// option (google.api.http).post = "/gravity/v1/batchtx/request";
   ///
   /// - Parameters:
-  ///   - request: Request to send to RequestBatch.
+  ///   - request: Request to send to RequestBatchTx.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func requestBatch(
-    _ request: Gravity_V1_MsgRequestBatch,
+  internal func requestBatchTx(
+    _ request: Gravity_V1_MsgRequestBatchTx,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgRequestBatch, Gravity_V1_MsgRequestBatchResponse> {
+  ) -> UnaryCall<Gravity_V1_MsgRequestBatchTx, Gravity_V1_MsgRequestBatchTxResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/RequestBatch",
+      path: "/gravity.v1.Msg/RequestBatchTx",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeRequestBatchInterceptors() ?? []
+      interceptors: self.interceptors?.makeRequestBatchTxInterceptors() ?? []
     )
   }
 
-  /// Unary call to ConfirmBatch
+  /// option (google.api.http).post = "/gravity/v1/ethereum_signature";
   ///
   /// - Parameters:
-  ///   - request: Request to send to ConfirmBatch.
+  ///   - request: Request to send to SubmitEthereumTxConfirmation.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func confirmBatch(
-    _ request: Gravity_V1_MsgConfirmBatch,
+  internal func submitEthereumTxConfirmation(
+    _ request: Gravity_V1_MsgSubmitEthereumTxConfirmation,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgConfirmBatch, Gravity_V1_MsgConfirmBatchResponse> {
+  ) -> UnaryCall<Gravity_V1_MsgSubmitEthereumTxConfirmation, Gravity_V1_MsgSubmitEthereumTxConfirmationResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/ConfirmBatch",
+      path: "/gravity.v1.Msg/SubmitEthereumTxConfirmation",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeConfirmBatchInterceptors() ?? []
+      interceptors: self.interceptors?.makeSubmitEthereumTxConfirmationInterceptors() ?? []
     )
   }
 
-  /// Unary call to ConfirmLogicCall
+  /// option (google.api.http).post = "/gravity/v1/ethereum_event";
   ///
   /// - Parameters:
-  ///   - request: Request to send to ConfirmLogicCall.
+  ///   - request: Request to send to SubmitEthereumEvent.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func confirmLogicCall(
-    _ request: Gravity_V1_MsgConfirmLogicCall,
+  internal func submitEthereumEvent(
+    _ request: Gravity_V1_MsgSubmitEthereumEvent,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgConfirmLogicCall, Gravity_V1_MsgConfirmLogicCallResponse> {
+  ) -> UnaryCall<Gravity_V1_MsgSubmitEthereumEvent, Gravity_V1_MsgSubmitEthereumEventResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/ConfirmLogicCall",
+      path: "/gravity.v1.Msg/SubmitEthereumEvent",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeConfirmLogicCallInterceptors() ?? []
+      interceptors: self.interceptors?.makeSubmitEthereumEventInterceptors() ?? []
     )
   }
 
-  /// Unary call to DepositClaim
+  /// option (google.api.http).post = "/gravity/v1/delegate_keys";
   ///
   /// - Parameters:
-  ///   - request: Request to send to DepositClaim.
+  ///   - request: Request to send to SetDelegateKeys.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func depositClaim(
-    _ request: Gravity_V1_MsgDepositClaim,
+  internal func setDelegateKeys(
+    _ request: Gravity_V1_MsgDelegateKeys,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgDepositClaim, Gravity_V1_MsgDepositClaimResponse> {
+  ) -> UnaryCall<Gravity_V1_MsgDelegateKeys, Gravity_V1_MsgDelegateKeysResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/DepositClaim",
+      path: "/gravity.v1.Msg/SetDelegateKeys",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeDepositClaimInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to WithdrawClaim
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to WithdrawClaim.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func withdrawClaim(
-    _ request: Gravity_V1_MsgWithdrawClaim,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgWithdrawClaim, Gravity_V1_MsgWithdrawClaimResponse> {
-    return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/WithdrawClaim",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeWithdrawClaimInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to ValsetUpdateClaim
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to ValsetUpdateClaim.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func valsetUpdateClaim(
-    _ request: Gravity_V1_MsgValsetUpdatedClaim,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgValsetUpdatedClaim, Gravity_V1_MsgValsetUpdatedClaimResponse> {
-    return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/ValsetUpdateClaim",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeValsetUpdateClaimInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to ERC20DeployedClaim
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to ERC20DeployedClaim.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func eRC20DeployedClaim(
-    _ request: Gravity_V1_MsgERC20DeployedClaim,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgERC20DeployedClaim, Gravity_V1_MsgERC20DeployedClaimResponse> {
-    return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/ERC20DeployedClaim",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeERC20DeployedClaimInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to LogicCallExecutedClaim
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to LogicCallExecutedClaim.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func logicCallExecutedClaim(
-    _ request: Gravity_V1_MsgLogicCallExecutedClaim,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgLogicCallExecutedClaim, Gravity_V1_MsgLogicCallExecutedClaimResponse> {
-    return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/LogicCallExecutedClaim",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeLogicCallExecutedClaimInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to SetOrchestratorAddress
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to SetOrchestratorAddress.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func setOrchestratorAddress(
-    _ request: Gravity_V1_MsgSetOrchestratorAddress,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgSetOrchestratorAddress, Gravity_V1_MsgSetOrchestratorAddressResponse> {
-    return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/SetOrchestratorAddress",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSetOrchestratorAddressInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to CancelSendToEth
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to CancelSendToEth.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func cancelSendToEth(
-    _ request: Gravity_V1_MsgCancelSendToEth,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgCancelSendToEth, Gravity_V1_MsgCancelSendToEthResponse> {
-    return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/CancelSendToEth",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCancelSendToEthInterceptors() ?? []
-    )
-  }
-
-  /// Unary call to SubmitBadSignatureEvidence
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to SubmitBadSignatureEvidence.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func submitBadSignatureEvidence(
-    _ request: Gravity_V1_MsgSubmitBadSignatureEvidence,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_MsgSubmitBadSignatureEvidence, Gravity_V1_MsgSubmitBadSignatureEvidenceResponse> {
-    return self.makeUnaryCall(
-      path: "/gravity.v1.Msg/SubmitBadSignatureEvidence",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeSubmitBadSignatureEvidenceInterceptors() ?? []
+      interceptors: self.interceptors?.makeSetDelegateKeysInterceptors() ?? []
     )
   }
 }
 
 internal protocol Gravity_V1_MsgClientInterceptorFactoryProtocol {
 
-  /// - Returns: Interceptors to use when invoking 'valsetConfirm'.
-  func makeValsetConfirmInterceptors() -> [ClientInterceptor<Gravity_V1_MsgValsetConfirm, Gravity_V1_MsgValsetConfirmResponse>]
+  /// - Returns: Interceptors to use when invoking 'sendToEthereum'.
+  func makeSendToEthereumInterceptors() -> [ClientInterceptor<Gravity_V1_MsgSendToEthereum, Gravity_V1_MsgSendToEthereumResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'sendToEth'.
-  func makeSendToEthInterceptors() -> [ClientInterceptor<Gravity_V1_MsgSendToEth, Gravity_V1_MsgSendToEthResponse>]
+  /// - Returns: Interceptors to use when invoking 'cancelSendToEthereum'.
+  func makeCancelSendToEthereumInterceptors() -> [ClientInterceptor<Gravity_V1_MsgCancelSendToEthereum, Gravity_V1_MsgCancelSendToEthereumResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'requestBatch'.
-  func makeRequestBatchInterceptors() -> [ClientInterceptor<Gravity_V1_MsgRequestBatch, Gravity_V1_MsgRequestBatchResponse>]
+  /// - Returns: Interceptors to use when invoking 'requestBatchTx'.
+  func makeRequestBatchTxInterceptors() -> [ClientInterceptor<Gravity_V1_MsgRequestBatchTx, Gravity_V1_MsgRequestBatchTxResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'confirmBatch'.
-  func makeConfirmBatchInterceptors() -> [ClientInterceptor<Gravity_V1_MsgConfirmBatch, Gravity_V1_MsgConfirmBatchResponse>]
+  /// - Returns: Interceptors to use when invoking 'submitEthereumTxConfirmation'.
+  func makeSubmitEthereumTxConfirmationInterceptors() -> [ClientInterceptor<Gravity_V1_MsgSubmitEthereumTxConfirmation, Gravity_V1_MsgSubmitEthereumTxConfirmationResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'confirmLogicCall'.
-  func makeConfirmLogicCallInterceptors() -> [ClientInterceptor<Gravity_V1_MsgConfirmLogicCall, Gravity_V1_MsgConfirmLogicCallResponse>]
+  /// - Returns: Interceptors to use when invoking 'submitEthereumEvent'.
+  func makeSubmitEthereumEventInterceptors() -> [ClientInterceptor<Gravity_V1_MsgSubmitEthereumEvent, Gravity_V1_MsgSubmitEthereumEventResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'depositClaim'.
-  func makeDepositClaimInterceptors() -> [ClientInterceptor<Gravity_V1_MsgDepositClaim, Gravity_V1_MsgDepositClaimResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'withdrawClaim'.
-  func makeWithdrawClaimInterceptors() -> [ClientInterceptor<Gravity_V1_MsgWithdrawClaim, Gravity_V1_MsgWithdrawClaimResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'valsetUpdateClaim'.
-  func makeValsetUpdateClaimInterceptors() -> [ClientInterceptor<Gravity_V1_MsgValsetUpdatedClaim, Gravity_V1_MsgValsetUpdatedClaimResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'eRC20DeployedClaim'.
-  func makeERC20DeployedClaimInterceptors() -> [ClientInterceptor<Gravity_V1_MsgERC20DeployedClaim, Gravity_V1_MsgERC20DeployedClaimResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'logicCallExecutedClaim'.
-  func makeLogicCallExecutedClaimInterceptors() -> [ClientInterceptor<Gravity_V1_MsgLogicCallExecutedClaim, Gravity_V1_MsgLogicCallExecutedClaimResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'setOrchestratorAddress'.
-  func makeSetOrchestratorAddressInterceptors() -> [ClientInterceptor<Gravity_V1_MsgSetOrchestratorAddress, Gravity_V1_MsgSetOrchestratorAddressResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'cancelSendToEth'.
-  func makeCancelSendToEthInterceptors() -> [ClientInterceptor<Gravity_V1_MsgCancelSendToEth, Gravity_V1_MsgCancelSendToEthResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'submitBadSignatureEvidence'.
-  func makeSubmitBadSignatureEvidenceInterceptors() -> [ClientInterceptor<Gravity_V1_MsgSubmitBadSignatureEvidence, Gravity_V1_MsgSubmitBadSignatureEvidenceResponse>]
+  /// - Returns: Interceptors to use when invoking 'setDelegateKeys'.
+  func makeSetDelegateKeysInterceptors() -> [ClientInterceptor<Gravity_V1_MsgDelegateKeys, Gravity_V1_MsgDelegateKeysResponse>]
 }
 
 internal final class Gravity_V1_MsgClient: Gravity_V1_MsgClientProtocol {
@@ -408,31 +226,23 @@ internal final class Gravity_V1_MsgClient: Gravity_V1_MsgClientProtocol {
 internal protocol Gravity_V1_MsgProvider: CallHandlerProvider {
   var interceptors: Gravity_V1_MsgServerInterceptorFactoryProtocol? { get }
 
-  func valsetConfirm(request: Gravity_V1_MsgValsetConfirm, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgValsetConfirmResponse>
+  /// option (google.api.http).post = "/gravity/v1/send_to_ethereum";
+  func sendToEthereum(request: Gravity_V1_MsgSendToEthereum, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgSendToEthereumResponse>
 
-  func sendToEth(request: Gravity_V1_MsgSendToEth, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgSendToEthResponse>
+  /// option (google.api.http).post = "/gravity/v1/send_to_ethereum/cancel";
+  func cancelSendToEthereum(request: Gravity_V1_MsgCancelSendToEthereum, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgCancelSendToEthereumResponse>
 
-  func requestBatch(request: Gravity_V1_MsgRequestBatch, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgRequestBatchResponse>
+  /// option (google.api.http).post = "/gravity/v1/batchtx/request";
+  func requestBatchTx(request: Gravity_V1_MsgRequestBatchTx, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgRequestBatchTxResponse>
 
-  func confirmBatch(request: Gravity_V1_MsgConfirmBatch, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgConfirmBatchResponse>
+  /// option (google.api.http).post = "/gravity/v1/ethereum_signature";
+  func submitEthereumTxConfirmation(request: Gravity_V1_MsgSubmitEthereumTxConfirmation, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgSubmitEthereumTxConfirmationResponse>
 
-  func confirmLogicCall(request: Gravity_V1_MsgConfirmLogicCall, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgConfirmLogicCallResponse>
+  /// option (google.api.http).post = "/gravity/v1/ethereum_event";
+  func submitEthereumEvent(request: Gravity_V1_MsgSubmitEthereumEvent, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgSubmitEthereumEventResponse>
 
-  func depositClaim(request: Gravity_V1_MsgDepositClaim, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgDepositClaimResponse>
-
-  func withdrawClaim(request: Gravity_V1_MsgWithdrawClaim, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgWithdrawClaimResponse>
-
-  func valsetUpdateClaim(request: Gravity_V1_MsgValsetUpdatedClaim, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgValsetUpdatedClaimResponse>
-
-  func eRC20DeployedClaim(request: Gravity_V1_MsgERC20DeployedClaim, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgERC20DeployedClaimResponse>
-
-  func logicCallExecutedClaim(request: Gravity_V1_MsgLogicCallExecutedClaim, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgLogicCallExecutedClaimResponse>
-
-  func setOrchestratorAddress(request: Gravity_V1_MsgSetOrchestratorAddress, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgSetOrchestratorAddressResponse>
-
-  func cancelSendToEth(request: Gravity_V1_MsgCancelSendToEth, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgCancelSendToEthResponse>
-
-  func submitBadSignatureEvidence(request: Gravity_V1_MsgSubmitBadSignatureEvidence, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgSubmitBadSignatureEvidenceResponse>
+  /// option (google.api.http).post = "/gravity/v1/delegate_keys";
+  func setDelegateKeys(request: Gravity_V1_MsgDelegateKeys, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_MsgDelegateKeysResponse>
 }
 
 extension Gravity_V1_MsgProvider {
@@ -445,121 +255,58 @@ extension Gravity_V1_MsgProvider {
     context: CallHandlerContext
   ) -> GRPCServerHandlerProtocol? {
     switch name {
-    case "ValsetConfirm":
+    case "SendToEthereum":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgValsetConfirm>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgValsetConfirmResponse>(),
-        interceptors: self.interceptors?.makeValsetConfirmInterceptors() ?? [],
-        userFunction: self.valsetConfirm(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgSendToEthereum>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_MsgSendToEthereumResponse>(),
+        interceptors: self.interceptors?.makeSendToEthereumInterceptors() ?? [],
+        userFunction: self.sendToEthereum(request:context:)
       )
 
-    case "SendToEth":
+    case "CancelSendToEthereum":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgSendToEth>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgSendToEthResponse>(),
-        interceptors: self.interceptors?.makeSendToEthInterceptors() ?? [],
-        userFunction: self.sendToEth(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgCancelSendToEthereum>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_MsgCancelSendToEthereumResponse>(),
+        interceptors: self.interceptors?.makeCancelSendToEthereumInterceptors() ?? [],
+        userFunction: self.cancelSendToEthereum(request:context:)
       )
 
-    case "RequestBatch":
+    case "RequestBatchTx":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgRequestBatch>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgRequestBatchResponse>(),
-        interceptors: self.interceptors?.makeRequestBatchInterceptors() ?? [],
-        userFunction: self.requestBatch(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgRequestBatchTx>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_MsgRequestBatchTxResponse>(),
+        interceptors: self.interceptors?.makeRequestBatchTxInterceptors() ?? [],
+        userFunction: self.requestBatchTx(request:context:)
       )
 
-    case "ConfirmBatch":
+    case "SubmitEthereumTxConfirmation":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgConfirmBatch>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgConfirmBatchResponse>(),
-        interceptors: self.interceptors?.makeConfirmBatchInterceptors() ?? [],
-        userFunction: self.confirmBatch(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgSubmitEthereumTxConfirmation>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_MsgSubmitEthereumTxConfirmationResponse>(),
+        interceptors: self.interceptors?.makeSubmitEthereumTxConfirmationInterceptors() ?? [],
+        userFunction: self.submitEthereumTxConfirmation(request:context:)
       )
 
-    case "ConfirmLogicCall":
+    case "SubmitEthereumEvent":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgConfirmLogicCall>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgConfirmLogicCallResponse>(),
-        interceptors: self.interceptors?.makeConfirmLogicCallInterceptors() ?? [],
-        userFunction: self.confirmLogicCall(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgSubmitEthereumEvent>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_MsgSubmitEthereumEventResponse>(),
+        interceptors: self.interceptors?.makeSubmitEthereumEventInterceptors() ?? [],
+        userFunction: self.submitEthereumEvent(request:context:)
       )
 
-    case "DepositClaim":
+    case "SetDelegateKeys":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgDepositClaim>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgDepositClaimResponse>(),
-        interceptors: self.interceptors?.makeDepositClaimInterceptors() ?? [],
-        userFunction: self.depositClaim(request:context:)
-      )
-
-    case "WithdrawClaim":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgWithdrawClaim>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgWithdrawClaimResponse>(),
-        interceptors: self.interceptors?.makeWithdrawClaimInterceptors() ?? [],
-        userFunction: self.withdrawClaim(request:context:)
-      )
-
-    case "ValsetUpdateClaim":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgValsetUpdatedClaim>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgValsetUpdatedClaimResponse>(),
-        interceptors: self.interceptors?.makeValsetUpdateClaimInterceptors() ?? [],
-        userFunction: self.valsetUpdateClaim(request:context:)
-      )
-
-    case "ERC20DeployedClaim":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgERC20DeployedClaim>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgERC20DeployedClaimResponse>(),
-        interceptors: self.interceptors?.makeERC20DeployedClaimInterceptors() ?? [],
-        userFunction: self.eRC20DeployedClaim(request:context:)
-      )
-
-    case "LogicCallExecutedClaim":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgLogicCallExecutedClaim>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgLogicCallExecutedClaimResponse>(),
-        interceptors: self.interceptors?.makeLogicCallExecutedClaimInterceptors() ?? [],
-        userFunction: self.logicCallExecutedClaim(request:context:)
-      )
-
-    case "SetOrchestratorAddress":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgSetOrchestratorAddress>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgSetOrchestratorAddressResponse>(),
-        interceptors: self.interceptors?.makeSetOrchestratorAddressInterceptors() ?? [],
-        userFunction: self.setOrchestratorAddress(request:context:)
-      )
-
-    case "CancelSendToEth":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgCancelSendToEth>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgCancelSendToEthResponse>(),
-        interceptors: self.interceptors?.makeCancelSendToEthInterceptors() ?? [],
-        userFunction: self.cancelSendToEth(request:context:)
-      )
-
-    case "SubmitBadSignatureEvidence":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgSubmitBadSignatureEvidence>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_MsgSubmitBadSignatureEvidenceResponse>(),
-        interceptors: self.interceptors?.makeSubmitBadSignatureEvidenceInterceptors() ?? [],
-        userFunction: self.submitBadSignatureEvidence(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_MsgDelegateKeys>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_MsgDelegateKeysResponse>(),
+        interceptors: self.interceptors?.makeSetDelegateKeysInterceptors() ?? [],
+        userFunction: self.setDelegateKeys(request:context:)
       )
 
     default:
@@ -570,55 +317,27 @@ extension Gravity_V1_MsgProvider {
 
 internal protocol Gravity_V1_MsgServerInterceptorFactoryProtocol {
 
-  /// - Returns: Interceptors to use when handling 'valsetConfirm'.
+  /// - Returns: Interceptors to use when handling 'sendToEthereum'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeValsetConfirmInterceptors() -> [ServerInterceptor<Gravity_V1_MsgValsetConfirm, Gravity_V1_MsgValsetConfirmResponse>]
+  func makeSendToEthereumInterceptors() -> [ServerInterceptor<Gravity_V1_MsgSendToEthereum, Gravity_V1_MsgSendToEthereumResponse>]
 
-  /// - Returns: Interceptors to use when handling 'sendToEth'.
+  /// - Returns: Interceptors to use when handling 'cancelSendToEthereum'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeSendToEthInterceptors() -> [ServerInterceptor<Gravity_V1_MsgSendToEth, Gravity_V1_MsgSendToEthResponse>]
+  func makeCancelSendToEthereumInterceptors() -> [ServerInterceptor<Gravity_V1_MsgCancelSendToEthereum, Gravity_V1_MsgCancelSendToEthereumResponse>]
 
-  /// - Returns: Interceptors to use when handling 'requestBatch'.
+  /// - Returns: Interceptors to use when handling 'requestBatchTx'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeRequestBatchInterceptors() -> [ServerInterceptor<Gravity_V1_MsgRequestBatch, Gravity_V1_MsgRequestBatchResponse>]
+  func makeRequestBatchTxInterceptors() -> [ServerInterceptor<Gravity_V1_MsgRequestBatchTx, Gravity_V1_MsgRequestBatchTxResponse>]
 
-  /// - Returns: Interceptors to use when handling 'confirmBatch'.
+  /// - Returns: Interceptors to use when handling 'submitEthereumTxConfirmation'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeConfirmBatchInterceptors() -> [ServerInterceptor<Gravity_V1_MsgConfirmBatch, Gravity_V1_MsgConfirmBatchResponse>]
+  func makeSubmitEthereumTxConfirmationInterceptors() -> [ServerInterceptor<Gravity_V1_MsgSubmitEthereumTxConfirmation, Gravity_V1_MsgSubmitEthereumTxConfirmationResponse>]
 
-  /// - Returns: Interceptors to use when handling 'confirmLogicCall'.
+  /// - Returns: Interceptors to use when handling 'submitEthereumEvent'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeConfirmLogicCallInterceptors() -> [ServerInterceptor<Gravity_V1_MsgConfirmLogicCall, Gravity_V1_MsgConfirmLogicCallResponse>]
+  func makeSubmitEthereumEventInterceptors() -> [ServerInterceptor<Gravity_V1_MsgSubmitEthereumEvent, Gravity_V1_MsgSubmitEthereumEventResponse>]
 
-  /// - Returns: Interceptors to use when handling 'depositClaim'.
+  /// - Returns: Interceptors to use when handling 'setDelegateKeys'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeDepositClaimInterceptors() -> [ServerInterceptor<Gravity_V1_MsgDepositClaim, Gravity_V1_MsgDepositClaimResponse>]
-
-  /// - Returns: Interceptors to use when handling 'withdrawClaim'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeWithdrawClaimInterceptors() -> [ServerInterceptor<Gravity_V1_MsgWithdrawClaim, Gravity_V1_MsgWithdrawClaimResponse>]
-
-  /// - Returns: Interceptors to use when handling 'valsetUpdateClaim'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeValsetUpdateClaimInterceptors() -> [ServerInterceptor<Gravity_V1_MsgValsetUpdatedClaim, Gravity_V1_MsgValsetUpdatedClaimResponse>]
-
-  /// - Returns: Interceptors to use when handling 'eRC20DeployedClaim'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeERC20DeployedClaimInterceptors() -> [ServerInterceptor<Gravity_V1_MsgERC20DeployedClaim, Gravity_V1_MsgERC20DeployedClaimResponse>]
-
-  /// - Returns: Interceptors to use when handling 'logicCallExecutedClaim'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeLogicCallExecutedClaimInterceptors() -> [ServerInterceptor<Gravity_V1_MsgLogicCallExecutedClaim, Gravity_V1_MsgLogicCallExecutedClaimResponse>]
-
-  /// - Returns: Interceptors to use when handling 'setOrchestratorAddress'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeSetOrchestratorAddressInterceptors() -> [ServerInterceptor<Gravity_V1_MsgSetOrchestratorAddress, Gravity_V1_MsgSetOrchestratorAddressResponse>]
-
-  /// - Returns: Interceptors to use when handling 'cancelSendToEth'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeCancelSendToEthInterceptors() -> [ServerInterceptor<Gravity_V1_MsgCancelSendToEth, Gravity_V1_MsgCancelSendToEthResponse>]
-
-  /// - Returns: Interceptors to use when handling 'submitBadSignatureEvidence'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeSubmitBadSignatureEvidenceInterceptors() -> [ServerInterceptor<Gravity_V1_MsgSubmitBadSignatureEvidence, Gravity_V1_MsgSubmitBadSignatureEvidenceResponse>]
+  func makeSetDelegateKeysInterceptors() -> [ServerInterceptor<Gravity_V1_MsgDelegateKeys, Gravity_V1_MsgDelegateKeysResponse>]
 }

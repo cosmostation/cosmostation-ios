@@ -33,114 +33,129 @@ internal protocol Gravity_V1_QueryClientProtocol: GRPCClient {
   var interceptors: Gravity_V1_QueryClientInterceptorFactoryProtocol? { get }
 
   func params(
-    _ request: Gravity_V1_QueryParamsRequest,
+    _ request: Gravity_V1_ParamsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryParamsRequest, Gravity_V1_QueryParamsResponse>
+  ) -> UnaryCall<Gravity_V1_ParamsRequest, Gravity_V1_ParamsResponse>
 
-  func currentValset(
-    _ request: Gravity_V1_QueryCurrentValsetRequest,
+  func signerSetTx(
+    _ request: Gravity_V1_SignerSetTxRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryCurrentValsetRequest, Gravity_V1_QueryCurrentValsetResponse>
+  ) -> UnaryCall<Gravity_V1_SignerSetTxRequest, Gravity_V1_SignerSetTxResponse>
 
-  func valsetRequest(
-    _ request: Gravity_V1_QueryValsetRequestRequest,
+  func latestSignerSetTx(
+    _ request: Gravity_V1_LatestSignerSetTxRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryValsetRequestRequest, Gravity_V1_QueryValsetRequestResponse>
+  ) -> UnaryCall<Gravity_V1_LatestSignerSetTxRequest, Gravity_V1_SignerSetTxResponse>
 
-  func valsetConfirm(
-    _ request: Gravity_V1_QueryValsetConfirmRequest,
+  func batchTx(
+    _ request: Gravity_V1_BatchTxRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryValsetConfirmRequest, Gravity_V1_QueryValsetConfirmResponse>
+  ) -> UnaryCall<Gravity_V1_BatchTxRequest, Gravity_V1_BatchTxResponse>
 
-  func valsetConfirmsByNonce(
-    _ request: Gravity_V1_QueryValsetConfirmsByNonceRequest,
+  func contractCallTx(
+    _ request: Gravity_V1_ContractCallTxRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryValsetConfirmsByNonceRequest, Gravity_V1_QueryValsetConfirmsByNonceResponse>
+  ) -> UnaryCall<Gravity_V1_ContractCallTxRequest, Gravity_V1_ContractCallTxResponse>
 
-  func lastValsetRequests(
-    _ request: Gravity_V1_QueryLastValsetRequestsRequest,
+  func signerSetTxs(
+    _ request: Gravity_V1_SignerSetTxsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryLastValsetRequestsRequest, Gravity_V1_QueryLastValsetRequestsResponse>
+  ) -> UnaryCall<Gravity_V1_SignerSetTxsRequest, Gravity_V1_SignerSetTxsResponse>
 
-  func lastPendingValsetRequestByAddr(
-    _ request: Gravity_V1_QueryLastPendingValsetRequestByAddrRequest,
+  func batchTxs(
+    _ request: Gravity_V1_BatchTxsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryLastPendingValsetRequestByAddrRequest, Gravity_V1_QueryLastPendingValsetRequestByAddrResponse>
+  ) -> UnaryCall<Gravity_V1_BatchTxsRequest, Gravity_V1_BatchTxsResponse>
 
-  func lastPendingBatchRequestByAddr(
-    _ request: Gravity_V1_QueryLastPendingBatchRequestByAddrRequest,
+  func contractCallTxs(
+    _ request: Gravity_V1_ContractCallTxsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryLastPendingBatchRequestByAddrRequest, Gravity_V1_QueryLastPendingBatchRequestByAddrResponse>
+  ) -> UnaryCall<Gravity_V1_ContractCallTxsRequest, Gravity_V1_ContractCallTxsResponse>
 
-  func lastPendingLogicCallByAddr(
-    _ request: Gravity_V1_QueryLastPendingLogicCallByAddrRequest,
+  func signerSetTxConfirmations(
+    _ request: Gravity_V1_SignerSetTxConfirmationsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryLastPendingLogicCallByAddrRequest, Gravity_V1_QueryLastPendingLogicCallByAddrResponse>
+  ) -> UnaryCall<Gravity_V1_SignerSetTxConfirmationsRequest, Gravity_V1_SignerSetTxConfirmationsResponse>
 
-  func lastEventNonceByAddr(
-    _ request: Gravity_V1_QueryLastEventNonceByAddrRequest,
+  func batchTxConfirmations(
+    _ request: Gravity_V1_BatchTxConfirmationsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryLastEventNonceByAddrRequest, Gravity_V1_QueryLastEventNonceByAddrResponse>
+  ) -> UnaryCall<Gravity_V1_BatchTxConfirmationsRequest, Gravity_V1_BatchTxConfirmationsResponse>
 
-  func batchFees(
-    _ request: Gravity_V1_QueryBatchFeeRequest,
+  func contractCallTxConfirmations(
+    _ request: Gravity_V1_ContractCallTxConfirmationsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryBatchFeeRequest, Gravity_V1_QueryBatchFeeResponse>
+  ) -> UnaryCall<Gravity_V1_ContractCallTxConfirmationsRequest, Gravity_V1_ContractCallTxConfirmationsResponse>
 
-  func outgoingTxBatches(
-    _ request: Gravity_V1_QueryOutgoingTxBatchesRequest,
+  func unsignedSignerSetTxs(
+    _ request: Gravity_V1_UnsignedSignerSetTxsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryOutgoingTxBatchesRequest, Gravity_V1_QueryOutgoingTxBatchesResponse>
+  ) -> UnaryCall<Gravity_V1_UnsignedSignerSetTxsRequest, Gravity_V1_UnsignedSignerSetTxsResponse>
 
-  func outgoingLogicCalls(
-    _ request: Gravity_V1_QueryOutgoingLogicCallsRequest,
+  func unsignedBatchTxs(
+    _ request: Gravity_V1_UnsignedBatchTxsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryOutgoingLogicCallsRequest, Gravity_V1_QueryOutgoingLogicCallsResponse>
+  ) -> UnaryCall<Gravity_V1_UnsignedBatchTxsRequest, Gravity_V1_UnsignedBatchTxsResponse>
 
-  func batchRequestByNonce(
-    _ request: Gravity_V1_QueryBatchRequestByNonceRequest,
+  func unsignedContractCallTxs(
+    _ request: Gravity_V1_UnsignedContractCallTxsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryBatchRequestByNonceRequest, Gravity_V1_QueryBatchRequestByNonceResponse>
+  ) -> UnaryCall<Gravity_V1_UnsignedContractCallTxsRequest, Gravity_V1_UnsignedContractCallTxsResponse>
 
-  func batchConfirms(
-    _ request: Gravity_V1_QueryBatchConfirmsRequest,
+  func lastSubmittedEthereumEvent(
+    _ request: Gravity_V1_LastSubmittedEthereumEventRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryBatchConfirmsRequest, Gravity_V1_QueryBatchConfirmsResponse>
+  ) -> UnaryCall<Gravity_V1_LastSubmittedEthereumEventRequest, Gravity_V1_LastSubmittedEthereumEventResponse>
 
-  func logicConfirms(
-    _ request: Gravity_V1_QueryLogicConfirmsRequest,
+  func batchTxFees(
+    _ request: Gravity_V1_BatchTxFeesRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryLogicConfirmsRequest, Gravity_V1_QueryLogicConfirmsResponse>
+  ) -> UnaryCall<Gravity_V1_BatchTxFeesRequest, Gravity_V1_BatchTxFeesResponse>
 
   func eRC20ToDenom(
-    _ request: Gravity_V1_QueryERC20ToDenomRequest,
+    _ request: Gravity_V1_ERC20ToDenomRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryERC20ToDenomRequest, Gravity_V1_QueryERC20ToDenomResponse>
+  ) -> UnaryCall<Gravity_V1_ERC20ToDenomRequest, Gravity_V1_ERC20ToDenomResponse>
+
+  func denomToERC20Params(
+    _ request: Gravity_V1_DenomToERC20ParamsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Gravity_V1_DenomToERC20ParamsRequest, Gravity_V1_DenomToERC20ParamsResponse>
 
   func denomToERC20(
-    _ request: Gravity_V1_QueryDenomToERC20Request,
+    _ request: Gravity_V1_DenomToERC20Request,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryDenomToERC20Request, Gravity_V1_QueryDenomToERC20Response>
+  ) -> UnaryCall<Gravity_V1_DenomToERC20Request, Gravity_V1_DenomToERC20Response>
 
-  func getDelegateKeyByValidator(
-    _ request: Gravity_V1_QueryDelegateKeysByValidatorAddress,
+  func batchedSendToEthereums(
+    _ request: Gravity_V1_BatchedSendToEthereumsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryDelegateKeysByValidatorAddress, Gravity_V1_QueryDelegateKeysByValidatorAddressResponse>
+  ) -> UnaryCall<Gravity_V1_BatchedSendToEthereumsRequest, Gravity_V1_BatchedSendToEthereumsResponse>
 
-  func getDelegateKeyByEth(
-    _ request: Gravity_V1_QueryDelegateKeysByEthAddress,
+  func unbatchedSendToEthereums(
+    _ request: Gravity_V1_UnbatchedSendToEthereumsRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryDelegateKeysByEthAddress, Gravity_V1_QueryDelegateKeysByEthAddressResponse>
+  ) -> UnaryCall<Gravity_V1_UnbatchedSendToEthereumsRequest, Gravity_V1_UnbatchedSendToEthereumsResponse>
 
-  func getDelegateKeyByOrchestrator(
-    _ request: Gravity_V1_QueryDelegateKeysByOrchestratorAddress,
+  func delegateKeysByValidator(
+    _ request: Gravity_V1_DelegateKeysByValidatorRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryDelegateKeysByOrchestratorAddress, Gravity_V1_QueryDelegateKeysByOrchestratorAddressResponse>
+  ) -> UnaryCall<Gravity_V1_DelegateKeysByValidatorRequest, Gravity_V1_DelegateKeysByValidatorResponse>
 
-  func getPendingSendToEth(
-    _ request: Gravity_V1_QueryPendingSendToEth,
+  func delegateKeysByEthereumSigner(
+    _ request: Gravity_V1_DelegateKeysByEthereumSignerRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Gravity_V1_QueryPendingSendToEth, Gravity_V1_QueryPendingSendToEthResponse>
+  ) -> UnaryCall<Gravity_V1_DelegateKeysByEthereumSignerRequest, Gravity_V1_DelegateKeysByEthereumSignerResponse>
+
+  func delegateKeysByOrchestrator(
+    _ request: Gravity_V1_DelegateKeysByOrchestratorRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Gravity_V1_DelegateKeysByOrchestratorRequest, Gravity_V1_DelegateKeysByOrchestratorResponse>
+
+  func delegateKeys(
+    _ request: Gravity_V1_DelegateKeysRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Gravity_V1_DelegateKeysRequest, Gravity_V1_DelegateKeysResponse>
 }
 
 extension Gravity_V1_QueryClientProtocol {
@@ -148,16 +163,16 @@ extension Gravity_V1_QueryClientProtocol {
     return "gravity.v1.Query"
   }
 
-  /// Deployments queries deployments
+  /// Module parameters query
   ///
   /// - Parameters:
   ///   - request: Request to send to Params.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func params(
-    _ request: Gravity_V1_QueryParamsRequest,
+    _ request: Gravity_V1_ParamsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryParamsRequest, Gravity_V1_QueryParamsResponse> {
+  ) -> UnaryCall<Gravity_V1_ParamsRequest, Gravity_V1_ParamsResponse> {
     return self.makeUnaryCall(
       path: "/gravity.v1.Query/Params",
       request: request,
@@ -166,286 +181,295 @@ extension Gravity_V1_QueryClientProtocol {
     )
   }
 
-  /// Unary call to CurrentValset
+  /// get info on individual outgoing data
   ///
   /// - Parameters:
-  ///   - request: Request to send to CurrentValset.
+  ///   - request: Request to send to SignerSetTx.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func currentValset(
-    _ request: Gravity_V1_QueryCurrentValsetRequest,
+  internal func signerSetTx(
+    _ request: Gravity_V1_SignerSetTxRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryCurrentValsetRequest, Gravity_V1_QueryCurrentValsetResponse> {
+  ) -> UnaryCall<Gravity_V1_SignerSetTxRequest, Gravity_V1_SignerSetTxResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/CurrentValset",
+      path: "/gravity.v1.Query/SignerSetTx",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCurrentValsetInterceptors() ?? []
+      interceptors: self.interceptors?.makeSignerSetTxInterceptors() ?? []
     )
   }
 
-  /// Unary call to ValsetRequest
+  /// option (google.api.http).get = "/gravity/v1/signer_set/latest";
   ///
   /// - Parameters:
-  ///   - request: Request to send to ValsetRequest.
+  ///   - request: Request to send to LatestSignerSetTx.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func valsetRequest(
-    _ request: Gravity_V1_QueryValsetRequestRequest,
+  internal func latestSignerSetTx(
+    _ request: Gravity_V1_LatestSignerSetTxRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryValsetRequestRequest, Gravity_V1_QueryValsetRequestResponse> {
+  ) -> UnaryCall<Gravity_V1_LatestSignerSetTxRequest, Gravity_V1_SignerSetTxResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/ValsetRequest",
+      path: "/gravity.v1.Query/LatestSignerSetTx",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeValsetRequestInterceptors() ?? []
+      interceptors: self.interceptors?.makeLatestSignerSetTxInterceptors() ?? []
     )
   }
 
-  /// Unary call to ValsetConfirm
+  /// option (google.api.http).get =
+  /// "/gravity/v1/batch_txs/{token_contract}/{nonce}";
   ///
   /// - Parameters:
-  ///   - request: Request to send to ValsetConfirm.
+  ///   - request: Request to send to BatchTx.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func valsetConfirm(
-    _ request: Gravity_V1_QueryValsetConfirmRequest,
+  internal func batchTx(
+    _ request: Gravity_V1_BatchTxRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryValsetConfirmRequest, Gravity_V1_QueryValsetConfirmResponse> {
+  ) -> UnaryCall<Gravity_V1_BatchTxRequest, Gravity_V1_BatchTxResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/ValsetConfirm",
+      path: "/gravity.v1.Query/BatchTx",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeValsetConfirmInterceptors() ?? []
+      interceptors: self.interceptors?.makeBatchTxInterceptors() ?? []
     )
   }
 
-  /// Unary call to ValsetConfirmsByNonce
+  /// option (google.api.http).get =
+  /// "/gravity/v1/contract_call_txs/{invalidation_id}/{invalidation_nonce}";
   ///
   /// - Parameters:
-  ///   - request: Request to send to ValsetConfirmsByNonce.
+  ///   - request: Request to send to ContractCallTx.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func valsetConfirmsByNonce(
-    _ request: Gravity_V1_QueryValsetConfirmsByNonceRequest,
+  internal func contractCallTx(
+    _ request: Gravity_V1_ContractCallTxRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryValsetConfirmsByNonceRequest, Gravity_V1_QueryValsetConfirmsByNonceResponse> {
+  ) -> UnaryCall<Gravity_V1_ContractCallTxRequest, Gravity_V1_ContractCallTxResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/ValsetConfirmsByNonce",
+      path: "/gravity.v1.Query/ContractCallTx",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeValsetConfirmsByNonceInterceptors() ?? []
+      interceptors: self.interceptors?.makeContractCallTxInterceptors() ?? []
     )
   }
 
-  /// Unary call to LastValsetRequests
+  /// get collections of outgoing traffic from the bridge
   ///
   /// - Parameters:
-  ///   - request: Request to send to LastValsetRequests.
+  ///   - request: Request to send to SignerSetTxs.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func lastValsetRequests(
-    _ request: Gravity_V1_QueryLastValsetRequestsRequest,
+  internal func signerSetTxs(
+    _ request: Gravity_V1_SignerSetTxsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryLastValsetRequestsRequest, Gravity_V1_QueryLastValsetRequestsResponse> {
+  ) -> UnaryCall<Gravity_V1_SignerSetTxsRequest, Gravity_V1_SignerSetTxsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/LastValsetRequests",
+      path: "/gravity.v1.Query/SignerSetTxs",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeLastValsetRequestsInterceptors() ?? []
+      interceptors: self.interceptors?.makeSignerSetTxsInterceptors() ?? []
     )
   }
 
-  /// Unary call to LastPendingValsetRequestByAddr
+  /// option (google.api.http).get = "/gravity/v1/batch/batch_txs";
   ///
   /// - Parameters:
-  ///   - request: Request to send to LastPendingValsetRequestByAddr.
+  ///   - request: Request to send to BatchTxs.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func lastPendingValsetRequestByAddr(
-    _ request: Gravity_V1_QueryLastPendingValsetRequestByAddrRequest,
+  internal func batchTxs(
+    _ request: Gravity_V1_BatchTxsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryLastPendingValsetRequestByAddrRequest, Gravity_V1_QueryLastPendingValsetRequestByAddrResponse> {
+  ) -> UnaryCall<Gravity_V1_BatchTxsRequest, Gravity_V1_BatchTxsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/LastPendingValsetRequestByAddr",
+      path: "/gravity.v1.Query/BatchTxs",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeLastPendingValsetRequestByAddrInterceptors() ?? []
+      interceptors: self.interceptors?.makeBatchTxsInterceptors() ?? []
     )
   }
 
-  /// Unary call to LastPendingBatchRequestByAddr
+  /// option (google.api.http).get = "/gravity/v1/batch/contract_call_txs";
   ///
   /// - Parameters:
-  ///   - request: Request to send to LastPendingBatchRequestByAddr.
+  ///   - request: Request to send to ContractCallTxs.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func lastPendingBatchRequestByAddr(
-    _ request: Gravity_V1_QueryLastPendingBatchRequestByAddrRequest,
+  internal func contractCallTxs(
+    _ request: Gravity_V1_ContractCallTxsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryLastPendingBatchRequestByAddrRequest, Gravity_V1_QueryLastPendingBatchRequestByAddrResponse> {
+  ) -> UnaryCall<Gravity_V1_ContractCallTxsRequest, Gravity_V1_ContractCallTxsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/LastPendingBatchRequestByAddr",
+      path: "/gravity.v1.Query/ContractCallTxs",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeLastPendingBatchRequestByAddrInterceptors() ?? []
+      interceptors: self.interceptors?.makeContractCallTxsInterceptors() ?? []
     )
   }
 
-  /// Unary call to LastPendingLogicCallByAddr
+  /// TODO: can/should we group these into one endpoint?
   ///
   /// - Parameters:
-  ///   - request: Request to send to LastPendingLogicCallByAddr.
+  ///   - request: Request to send to SignerSetTxConfirmations.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func lastPendingLogicCallByAddr(
-    _ request: Gravity_V1_QueryLastPendingLogicCallByAddrRequest,
+  internal func signerSetTxConfirmations(
+    _ request: Gravity_V1_SignerSetTxConfirmationsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryLastPendingLogicCallByAddrRequest, Gravity_V1_QueryLastPendingLogicCallByAddrResponse> {
+  ) -> UnaryCall<Gravity_V1_SignerSetTxConfirmationsRequest, Gravity_V1_SignerSetTxConfirmationsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/LastPendingLogicCallByAddr",
+      path: "/gravity.v1.Query/SignerSetTxConfirmations",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeLastPendingLogicCallByAddrInterceptors() ?? []
+      interceptors: self.interceptors?.makeSignerSetTxConfirmationsInterceptors() ?? []
     )
   }
 
-  /// Unary call to LastEventNonceByAddr
+  /// option (google.api.http).get =
+  /// "/gravity/v1/batch_txs/ethereum_signatures";
   ///
   /// - Parameters:
-  ///   - request: Request to send to LastEventNonceByAddr.
+  ///   - request: Request to send to BatchTxConfirmations.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func lastEventNonceByAddr(
-    _ request: Gravity_V1_QueryLastEventNonceByAddrRequest,
+  internal func batchTxConfirmations(
+    _ request: Gravity_V1_BatchTxConfirmationsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryLastEventNonceByAddrRequest, Gravity_V1_QueryLastEventNonceByAddrResponse> {
+  ) -> UnaryCall<Gravity_V1_BatchTxConfirmationsRequest, Gravity_V1_BatchTxConfirmationsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/LastEventNonceByAddr",
+      path: "/gravity.v1.Query/BatchTxConfirmations",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeLastEventNonceByAddrInterceptors() ?? []
+      interceptors: self.interceptors?.makeBatchTxConfirmationsInterceptors() ?? []
     )
   }
 
-  /// Unary call to BatchFees
+  /// option (google.api.http).get =
+  /// "/gravity/v1/logic_calls/ethereum_signatures";
   ///
   /// - Parameters:
-  ///   - request: Request to send to BatchFees.
+  ///   - request: Request to send to ContractCallTxConfirmations.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func batchFees(
-    _ request: Gravity_V1_QueryBatchFeeRequest,
+  internal func contractCallTxConfirmations(
+    _ request: Gravity_V1_ContractCallTxConfirmationsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryBatchFeeRequest, Gravity_V1_QueryBatchFeeResponse> {
+  ) -> UnaryCall<Gravity_V1_ContractCallTxConfirmationsRequest, Gravity_V1_ContractCallTxConfirmationsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/BatchFees",
+      path: "/gravity.v1.Query/ContractCallTxConfirmations",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeBatchFeesInterceptors() ?? []
+      interceptors: self.interceptors?.makeContractCallTxConfirmationsInterceptors() ?? []
     )
   }
 
-  /// Unary call to OutgoingTxBatches
+  /// pending ethereum signature queries for orchestrators to figure out which
+  /// signatures they are missing
+  /// TODO: can/should we group this into one endpoint?
   ///
   /// - Parameters:
-  ///   - request: Request to send to OutgoingTxBatches.
+  ///   - request: Request to send to UnsignedSignerSetTxs.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func outgoingTxBatches(
-    _ request: Gravity_V1_QueryOutgoingTxBatchesRequest,
+  internal func unsignedSignerSetTxs(
+    _ request: Gravity_V1_UnsignedSignerSetTxsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryOutgoingTxBatchesRequest, Gravity_V1_QueryOutgoingTxBatchesResponse> {
+  ) -> UnaryCall<Gravity_V1_UnsignedSignerSetTxsRequest, Gravity_V1_UnsignedSignerSetTxsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/OutgoingTxBatches",
+      path: "/gravity.v1.Query/UnsignedSignerSetTxs",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeOutgoingTxBatchesInterceptors() ?? []
+      interceptors: self.interceptors?.makeUnsignedSignerSetTxsInterceptors() ?? []
     )
   }
 
-  /// Unary call to OutgoingLogicCalls
+  /// option (google.api.http).get = "/gravity/v1/batches/{address}/pending";
   ///
   /// - Parameters:
-  ///   - request: Request to send to OutgoingLogicCalls.
+  ///   - request: Request to send to UnsignedBatchTxs.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func outgoingLogicCalls(
-    _ request: Gravity_V1_QueryOutgoingLogicCallsRequest,
+  internal func unsignedBatchTxs(
+    _ request: Gravity_V1_UnsignedBatchTxsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryOutgoingLogicCallsRequest, Gravity_V1_QueryOutgoingLogicCallsResponse> {
+  ) -> UnaryCall<Gravity_V1_UnsignedBatchTxsRequest, Gravity_V1_UnsignedBatchTxsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/OutgoingLogicCalls",
+      path: "/gravity.v1.Query/UnsignedBatchTxs",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeOutgoingLogicCallsInterceptors() ?? []
+      interceptors: self.interceptors?.makeUnsignedBatchTxsInterceptors() ?? []
     )
   }
 
-  /// Unary call to BatchRequestByNonce
+  /// option (google.api.http).get =
+  /// "/gravity/v1/ContractCallTxs/{address}/pending";
   ///
   /// - Parameters:
-  ///   - request: Request to send to BatchRequestByNonce.
+  ///   - request: Request to send to UnsignedContractCallTxs.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func batchRequestByNonce(
-    _ request: Gravity_V1_QueryBatchRequestByNonceRequest,
+  internal func unsignedContractCallTxs(
+    _ request: Gravity_V1_UnsignedContractCallTxsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryBatchRequestByNonceRequest, Gravity_V1_QueryBatchRequestByNonceResponse> {
+  ) -> UnaryCall<Gravity_V1_UnsignedContractCallTxsRequest, Gravity_V1_UnsignedContractCallTxsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/BatchRequestByNonce",
+      path: "/gravity.v1.Query/UnsignedContractCallTxs",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeBatchRequestByNonceInterceptors() ?? []
+      interceptors: self.interceptors?.makeUnsignedContractCallTxsInterceptors() ?? []
     )
   }
 
-  /// Unary call to BatchConfirms
+  /// option (google.api.http).get =
+  /// "/gravity/v1/oracle/event_nonce/{address}";
   ///
   /// - Parameters:
-  ///   - request: Request to send to BatchConfirms.
+  ///   - request: Request to send to LastSubmittedEthereumEvent.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func batchConfirms(
-    _ request: Gravity_V1_QueryBatchConfirmsRequest,
+  internal func lastSubmittedEthereumEvent(
+    _ request: Gravity_V1_LastSubmittedEthereumEventRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryBatchConfirmsRequest, Gravity_V1_QueryBatchConfirmsResponse> {
+  ) -> UnaryCall<Gravity_V1_LastSubmittedEthereumEventRequest, Gravity_V1_LastSubmittedEthereumEventResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/BatchConfirms",
+      path: "/gravity.v1.Query/LastSubmittedEthereumEvent",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeBatchConfirmsInterceptors() ?? []
+      interceptors: self.interceptors?.makeLastSubmittedEthereumEventInterceptors() ?? []
     )
   }
 
-  /// Unary call to LogicConfirms
+  /// Queries the fees for all pending batches, results are returned in sdk.Coin
+  /// (fee_amount_int)(contract_address) style
   ///
   /// - Parameters:
-  ///   - request: Request to send to LogicConfirms.
+  ///   - request: Request to send to BatchTxFees.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func logicConfirms(
-    _ request: Gravity_V1_QueryLogicConfirmsRequest,
+  internal func batchTxFees(
+    _ request: Gravity_V1_BatchTxFeesRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryLogicConfirmsRequest, Gravity_V1_QueryLogicConfirmsResponse> {
+  ) -> UnaryCall<Gravity_V1_BatchTxFeesRequest, Gravity_V1_BatchTxFeesResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/LogicConfirms",
+      path: "/gravity.v1.Query/BatchTxFees",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeLogicConfirmsInterceptors() ?? []
+      interceptors: self.interceptors?.makeBatchTxFeesInterceptors() ?? []
     )
   }
 
-  /// Unary call to ERC20ToDenom
+  /// Query for info about denoms tracked by gravity
   ///
   /// - Parameters:
   ///   - request: Request to send to ERC20ToDenom.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func eRC20ToDenom(
-    _ request: Gravity_V1_QueryERC20ToDenomRequest,
+    _ request: Gravity_V1_ERC20ToDenomRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryERC20ToDenomRequest, Gravity_V1_QueryERC20ToDenomResponse> {
+  ) -> UnaryCall<Gravity_V1_ERC20ToDenomRequest, Gravity_V1_ERC20ToDenomResponse> {
     return self.makeUnaryCall(
       path: "/gravity.v1.Query/ERC20ToDenom",
       request: request,
@@ -454,16 +478,35 @@ extension Gravity_V1_QueryClientProtocol {
     )
   }
 
-  /// Unary call to DenomToERC20
+  /// DenomToERC20Params implements a query that allows ERC-20 parameter information
+  /// to be retrieved by a Cosmos base denomination.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to DenomToERC20Params.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func denomToERC20Params(
+    _ request: Gravity_V1_DenomToERC20ParamsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Gravity_V1_DenomToERC20ParamsRequest, Gravity_V1_DenomToERC20ParamsResponse> {
+    return self.makeUnaryCall(
+      path: "/gravity.v1.Query/DenomToERC20Params",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDenomToERC20ParamsInterceptors() ?? []
+    )
+  }
+
+  /// Query for info about denoms tracked by gravity
   ///
   /// - Parameters:
   ///   - request: Request to send to DenomToERC20.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func denomToERC20(
-    _ request: Gravity_V1_QueryDenomToERC20Request,
+    _ request: Gravity_V1_DenomToERC20Request,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryDenomToERC20Request, Gravity_V1_QueryDenomToERC20Response> {
+  ) -> UnaryCall<Gravity_V1_DenomToERC20Request, Gravity_V1_DenomToERC20Response> {
     return self.makeUnaryCall(
       path: "/gravity.v1.Query/DenomToERC20",
       request: request,
@@ -472,75 +515,114 @@ extension Gravity_V1_QueryClientProtocol {
     )
   }
 
-  /// Unary call to GetDelegateKeyByValidator
+  /// Query for batch send to ethereums
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetDelegateKeyByValidator.
+  ///   - request: Request to send to BatchedSendToEthereums.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getDelegateKeyByValidator(
-    _ request: Gravity_V1_QueryDelegateKeysByValidatorAddress,
+  internal func batchedSendToEthereums(
+    _ request: Gravity_V1_BatchedSendToEthereumsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryDelegateKeysByValidatorAddress, Gravity_V1_QueryDelegateKeysByValidatorAddressResponse> {
+  ) -> UnaryCall<Gravity_V1_BatchedSendToEthereumsRequest, Gravity_V1_BatchedSendToEthereumsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/GetDelegateKeyByValidator",
+      path: "/gravity.v1.Query/BatchedSendToEthereums",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetDelegateKeyByValidatorInterceptors() ?? []
+      interceptors: self.interceptors?.makeBatchedSendToEthereumsInterceptors() ?? []
     )
   }
 
-  /// Unary call to GetDelegateKeyByEth
+  /// Query for unbatched send to ethereums
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetDelegateKeyByEth.
+  ///   - request: Request to send to UnbatchedSendToEthereums.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getDelegateKeyByEth(
-    _ request: Gravity_V1_QueryDelegateKeysByEthAddress,
+  internal func unbatchedSendToEthereums(
+    _ request: Gravity_V1_UnbatchedSendToEthereumsRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryDelegateKeysByEthAddress, Gravity_V1_QueryDelegateKeysByEthAddressResponse> {
+  ) -> UnaryCall<Gravity_V1_UnbatchedSendToEthereumsRequest, Gravity_V1_UnbatchedSendToEthereumsResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/GetDelegateKeyByEth",
+      path: "/gravity.v1.Query/UnbatchedSendToEthereums",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetDelegateKeyByEthInterceptors() ?? []
+      interceptors: self.interceptors?.makeUnbatchedSendToEthereumsInterceptors() ?? []
     )
   }
 
-  /// Unary call to GetDelegateKeyByOrchestrator
+  /// delegate keys
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetDelegateKeyByOrchestrator.
+  ///   - request: Request to send to DelegateKeysByValidator.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getDelegateKeyByOrchestrator(
-    _ request: Gravity_V1_QueryDelegateKeysByOrchestratorAddress,
+  internal func delegateKeysByValidator(
+    _ request: Gravity_V1_DelegateKeysByValidatorRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryDelegateKeysByOrchestratorAddress, Gravity_V1_QueryDelegateKeysByOrchestratorAddressResponse> {
+  ) -> UnaryCall<Gravity_V1_DelegateKeysByValidatorRequest, Gravity_V1_DelegateKeysByValidatorResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/GetDelegateKeyByOrchestrator",
+      path: "/gravity.v1.Query/DelegateKeysByValidator",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetDelegateKeyByOrchestratorInterceptors() ?? []
+      interceptors: self.interceptors?.makeDelegateKeysByValidatorInterceptors() ?? []
     )
   }
 
-  /// Unary call to GetPendingSendToEth
+  /// option (google.api.http).get =
+  /// "/gravity/v1/delegate_keys/ethereum/{ethereum_signer}";
   ///
   /// - Parameters:
-  ///   - request: Request to send to GetPendingSendToEth.
+  ///   - request: Request to send to DelegateKeysByEthereumSigner.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func getPendingSendToEth(
-    _ request: Gravity_V1_QueryPendingSendToEth,
+  internal func delegateKeysByEthereumSigner(
+    _ request: Gravity_V1_DelegateKeysByEthereumSignerRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Gravity_V1_QueryPendingSendToEth, Gravity_V1_QueryPendingSendToEthResponse> {
+  ) -> UnaryCall<Gravity_V1_DelegateKeysByEthereumSignerRequest, Gravity_V1_DelegateKeysByEthereumSignerResponse> {
     return self.makeUnaryCall(
-      path: "/gravity.v1.Query/GetPendingSendToEth",
+      path: "/gravity.v1.Query/DelegateKeysByEthereumSigner",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeGetPendingSendToEthInterceptors() ?? []
+      interceptors: self.interceptors?.makeDelegateKeysByEthereumSignerInterceptors() ?? []
+    )
+  }
+
+  /// option (google.api.http).get =
+  /// "/gravity/v1/delegate_keys/orchestrator/{orchestrator}";
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to DelegateKeysByOrchestrator.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func delegateKeysByOrchestrator(
+    _ request: Gravity_V1_DelegateKeysByOrchestratorRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Gravity_V1_DelegateKeysByOrchestratorRequest, Gravity_V1_DelegateKeysByOrchestratorResponse> {
+    return self.makeUnaryCall(
+      path: "/gravity.v1.Query/DelegateKeysByOrchestrator",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDelegateKeysByOrchestratorInterceptors() ?? []
+    )
+  }
+
+  /// option (google.api.http).get =
+  /// "/gravity/v1/delegate_keys";
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to DelegateKeys.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func delegateKeys(
+    _ request: Gravity_V1_DelegateKeysRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Gravity_V1_DelegateKeysRequest, Gravity_V1_DelegateKeysResponse> {
+    return self.makeUnaryCall(
+      path: "/gravity.v1.Query/DelegateKeys",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDelegateKeysInterceptors() ?? []
     )
   }
 }
@@ -548,70 +630,79 @@ extension Gravity_V1_QueryClientProtocol {
 internal protocol Gravity_V1_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'params'.
-  func makeParamsInterceptors() -> [ClientInterceptor<Gravity_V1_QueryParamsRequest, Gravity_V1_QueryParamsResponse>]
+  func makeParamsInterceptors() -> [ClientInterceptor<Gravity_V1_ParamsRequest, Gravity_V1_ParamsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'currentValset'.
-  func makeCurrentValsetInterceptors() -> [ClientInterceptor<Gravity_V1_QueryCurrentValsetRequest, Gravity_V1_QueryCurrentValsetResponse>]
+  /// - Returns: Interceptors to use when invoking 'signerSetTx'.
+  func makeSignerSetTxInterceptors() -> [ClientInterceptor<Gravity_V1_SignerSetTxRequest, Gravity_V1_SignerSetTxResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'valsetRequest'.
-  func makeValsetRequestInterceptors() -> [ClientInterceptor<Gravity_V1_QueryValsetRequestRequest, Gravity_V1_QueryValsetRequestResponse>]
+  /// - Returns: Interceptors to use when invoking 'latestSignerSetTx'.
+  func makeLatestSignerSetTxInterceptors() -> [ClientInterceptor<Gravity_V1_LatestSignerSetTxRequest, Gravity_V1_SignerSetTxResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'valsetConfirm'.
-  func makeValsetConfirmInterceptors() -> [ClientInterceptor<Gravity_V1_QueryValsetConfirmRequest, Gravity_V1_QueryValsetConfirmResponse>]
+  /// - Returns: Interceptors to use when invoking 'batchTx'.
+  func makeBatchTxInterceptors() -> [ClientInterceptor<Gravity_V1_BatchTxRequest, Gravity_V1_BatchTxResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'valsetConfirmsByNonce'.
-  func makeValsetConfirmsByNonceInterceptors() -> [ClientInterceptor<Gravity_V1_QueryValsetConfirmsByNonceRequest, Gravity_V1_QueryValsetConfirmsByNonceResponse>]
+  /// - Returns: Interceptors to use when invoking 'contractCallTx'.
+  func makeContractCallTxInterceptors() -> [ClientInterceptor<Gravity_V1_ContractCallTxRequest, Gravity_V1_ContractCallTxResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'lastValsetRequests'.
-  func makeLastValsetRequestsInterceptors() -> [ClientInterceptor<Gravity_V1_QueryLastValsetRequestsRequest, Gravity_V1_QueryLastValsetRequestsResponse>]
+  /// - Returns: Interceptors to use when invoking 'signerSetTxs'.
+  func makeSignerSetTxsInterceptors() -> [ClientInterceptor<Gravity_V1_SignerSetTxsRequest, Gravity_V1_SignerSetTxsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'lastPendingValsetRequestByAddr'.
-  func makeLastPendingValsetRequestByAddrInterceptors() -> [ClientInterceptor<Gravity_V1_QueryLastPendingValsetRequestByAddrRequest, Gravity_V1_QueryLastPendingValsetRequestByAddrResponse>]
+  /// - Returns: Interceptors to use when invoking 'batchTxs'.
+  func makeBatchTxsInterceptors() -> [ClientInterceptor<Gravity_V1_BatchTxsRequest, Gravity_V1_BatchTxsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'lastPendingBatchRequestByAddr'.
-  func makeLastPendingBatchRequestByAddrInterceptors() -> [ClientInterceptor<Gravity_V1_QueryLastPendingBatchRequestByAddrRequest, Gravity_V1_QueryLastPendingBatchRequestByAddrResponse>]
+  /// - Returns: Interceptors to use when invoking 'contractCallTxs'.
+  func makeContractCallTxsInterceptors() -> [ClientInterceptor<Gravity_V1_ContractCallTxsRequest, Gravity_V1_ContractCallTxsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'lastPendingLogicCallByAddr'.
-  func makeLastPendingLogicCallByAddrInterceptors() -> [ClientInterceptor<Gravity_V1_QueryLastPendingLogicCallByAddrRequest, Gravity_V1_QueryLastPendingLogicCallByAddrResponse>]
+  /// - Returns: Interceptors to use when invoking 'signerSetTxConfirmations'.
+  func makeSignerSetTxConfirmationsInterceptors() -> [ClientInterceptor<Gravity_V1_SignerSetTxConfirmationsRequest, Gravity_V1_SignerSetTxConfirmationsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'lastEventNonceByAddr'.
-  func makeLastEventNonceByAddrInterceptors() -> [ClientInterceptor<Gravity_V1_QueryLastEventNonceByAddrRequest, Gravity_V1_QueryLastEventNonceByAddrResponse>]
+  /// - Returns: Interceptors to use when invoking 'batchTxConfirmations'.
+  func makeBatchTxConfirmationsInterceptors() -> [ClientInterceptor<Gravity_V1_BatchTxConfirmationsRequest, Gravity_V1_BatchTxConfirmationsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'batchFees'.
-  func makeBatchFeesInterceptors() -> [ClientInterceptor<Gravity_V1_QueryBatchFeeRequest, Gravity_V1_QueryBatchFeeResponse>]
+  /// - Returns: Interceptors to use when invoking 'contractCallTxConfirmations'.
+  func makeContractCallTxConfirmationsInterceptors() -> [ClientInterceptor<Gravity_V1_ContractCallTxConfirmationsRequest, Gravity_V1_ContractCallTxConfirmationsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'outgoingTxBatches'.
-  func makeOutgoingTxBatchesInterceptors() -> [ClientInterceptor<Gravity_V1_QueryOutgoingTxBatchesRequest, Gravity_V1_QueryOutgoingTxBatchesResponse>]
+  /// - Returns: Interceptors to use when invoking 'unsignedSignerSetTxs'.
+  func makeUnsignedSignerSetTxsInterceptors() -> [ClientInterceptor<Gravity_V1_UnsignedSignerSetTxsRequest, Gravity_V1_UnsignedSignerSetTxsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'outgoingLogicCalls'.
-  func makeOutgoingLogicCallsInterceptors() -> [ClientInterceptor<Gravity_V1_QueryOutgoingLogicCallsRequest, Gravity_V1_QueryOutgoingLogicCallsResponse>]
+  /// - Returns: Interceptors to use when invoking 'unsignedBatchTxs'.
+  func makeUnsignedBatchTxsInterceptors() -> [ClientInterceptor<Gravity_V1_UnsignedBatchTxsRequest, Gravity_V1_UnsignedBatchTxsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'batchRequestByNonce'.
-  func makeBatchRequestByNonceInterceptors() -> [ClientInterceptor<Gravity_V1_QueryBatchRequestByNonceRequest, Gravity_V1_QueryBatchRequestByNonceResponse>]
+  /// - Returns: Interceptors to use when invoking 'unsignedContractCallTxs'.
+  func makeUnsignedContractCallTxsInterceptors() -> [ClientInterceptor<Gravity_V1_UnsignedContractCallTxsRequest, Gravity_V1_UnsignedContractCallTxsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'batchConfirms'.
-  func makeBatchConfirmsInterceptors() -> [ClientInterceptor<Gravity_V1_QueryBatchConfirmsRequest, Gravity_V1_QueryBatchConfirmsResponse>]
+  /// - Returns: Interceptors to use when invoking 'lastSubmittedEthereumEvent'.
+  func makeLastSubmittedEthereumEventInterceptors() -> [ClientInterceptor<Gravity_V1_LastSubmittedEthereumEventRequest, Gravity_V1_LastSubmittedEthereumEventResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'logicConfirms'.
-  func makeLogicConfirmsInterceptors() -> [ClientInterceptor<Gravity_V1_QueryLogicConfirmsRequest, Gravity_V1_QueryLogicConfirmsResponse>]
+  /// - Returns: Interceptors to use when invoking 'batchTxFees'.
+  func makeBatchTxFeesInterceptors() -> [ClientInterceptor<Gravity_V1_BatchTxFeesRequest, Gravity_V1_BatchTxFeesResponse>]
 
   /// - Returns: Interceptors to use when invoking 'eRC20ToDenom'.
-  func makeERC20ToDenomInterceptors() -> [ClientInterceptor<Gravity_V1_QueryERC20ToDenomRequest, Gravity_V1_QueryERC20ToDenomResponse>]
+  func makeERC20ToDenomInterceptors() -> [ClientInterceptor<Gravity_V1_ERC20ToDenomRequest, Gravity_V1_ERC20ToDenomResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'denomToERC20Params'.
+  func makeDenomToERC20ParamsInterceptors() -> [ClientInterceptor<Gravity_V1_DenomToERC20ParamsRequest, Gravity_V1_DenomToERC20ParamsResponse>]
 
   /// - Returns: Interceptors to use when invoking 'denomToERC20'.
-  func makeDenomToERC20Interceptors() -> [ClientInterceptor<Gravity_V1_QueryDenomToERC20Request, Gravity_V1_QueryDenomToERC20Response>]
+  func makeDenomToERC20Interceptors() -> [ClientInterceptor<Gravity_V1_DenomToERC20Request, Gravity_V1_DenomToERC20Response>]
 
-  /// - Returns: Interceptors to use when invoking 'getDelegateKeyByValidator'.
-  func makeGetDelegateKeyByValidatorInterceptors() -> [ClientInterceptor<Gravity_V1_QueryDelegateKeysByValidatorAddress, Gravity_V1_QueryDelegateKeysByValidatorAddressResponse>]
+  /// - Returns: Interceptors to use when invoking 'batchedSendToEthereums'.
+  func makeBatchedSendToEthereumsInterceptors() -> [ClientInterceptor<Gravity_V1_BatchedSendToEthereumsRequest, Gravity_V1_BatchedSendToEthereumsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'getDelegateKeyByEth'.
-  func makeGetDelegateKeyByEthInterceptors() -> [ClientInterceptor<Gravity_V1_QueryDelegateKeysByEthAddress, Gravity_V1_QueryDelegateKeysByEthAddressResponse>]
+  /// - Returns: Interceptors to use when invoking 'unbatchedSendToEthereums'.
+  func makeUnbatchedSendToEthereumsInterceptors() -> [ClientInterceptor<Gravity_V1_UnbatchedSendToEthereumsRequest, Gravity_V1_UnbatchedSendToEthereumsResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'getDelegateKeyByOrchestrator'.
-  func makeGetDelegateKeyByOrchestratorInterceptors() -> [ClientInterceptor<Gravity_V1_QueryDelegateKeysByOrchestratorAddress, Gravity_V1_QueryDelegateKeysByOrchestratorAddressResponse>]
+  /// - Returns: Interceptors to use when invoking 'delegateKeysByValidator'.
+  func makeDelegateKeysByValidatorInterceptors() -> [ClientInterceptor<Gravity_V1_DelegateKeysByValidatorRequest, Gravity_V1_DelegateKeysByValidatorResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'getPendingSendToEth'.
-  func makeGetPendingSendToEthInterceptors() -> [ClientInterceptor<Gravity_V1_QueryPendingSendToEth, Gravity_V1_QueryPendingSendToEthResponse>]
+  /// - Returns: Interceptors to use when invoking 'delegateKeysByEthereumSigner'.
+  func makeDelegateKeysByEthereumSignerInterceptors() -> [ClientInterceptor<Gravity_V1_DelegateKeysByEthereumSignerRequest, Gravity_V1_DelegateKeysByEthereumSignerResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'delegateKeysByOrchestrator'.
+  func makeDelegateKeysByOrchestratorInterceptors() -> [ClientInterceptor<Gravity_V1_DelegateKeysByOrchestratorRequest, Gravity_V1_DelegateKeysByOrchestratorResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'delegateKeys'.
+  func makeDelegateKeysInterceptors() -> [ClientInterceptor<Gravity_V1_DelegateKeysRequest, Gravity_V1_DelegateKeysResponse>]
 }
 
 internal final class Gravity_V1_QueryClient: Gravity_V1_QueryClientProtocol {
@@ -642,50 +733,93 @@ internal final class Gravity_V1_QueryClient: Gravity_V1_QueryClientProtocol {
 internal protocol Gravity_V1_QueryProvider: CallHandlerProvider {
   var interceptors: Gravity_V1_QueryServerInterceptorFactoryProtocol? { get }
 
-  /// Deployments queries deployments
-  func params(request: Gravity_V1_QueryParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryParamsResponse>
+  /// Module parameters query
+  func params(request: Gravity_V1_ParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_ParamsResponse>
 
-  func currentValset(request: Gravity_V1_QueryCurrentValsetRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryCurrentValsetResponse>
+  /// get info on individual outgoing data
+  func signerSetTx(request: Gravity_V1_SignerSetTxRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_SignerSetTxResponse>
 
-  func valsetRequest(request: Gravity_V1_QueryValsetRequestRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryValsetRequestResponse>
+  /// option (google.api.http).get = "/gravity/v1/signer_set/latest";
+  func latestSignerSetTx(request: Gravity_V1_LatestSignerSetTxRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_SignerSetTxResponse>
 
-  func valsetConfirm(request: Gravity_V1_QueryValsetConfirmRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryValsetConfirmResponse>
+  /// option (google.api.http).get =
+  /// "/gravity/v1/batch_txs/{token_contract}/{nonce}";
+  func batchTx(request: Gravity_V1_BatchTxRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_BatchTxResponse>
 
-  func valsetConfirmsByNonce(request: Gravity_V1_QueryValsetConfirmsByNonceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryValsetConfirmsByNonceResponse>
+  /// option (google.api.http).get =
+  /// "/gravity/v1/contract_call_txs/{invalidation_id}/{invalidation_nonce}";
+  func contractCallTx(request: Gravity_V1_ContractCallTxRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_ContractCallTxResponse>
 
-  func lastValsetRequests(request: Gravity_V1_QueryLastValsetRequestsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryLastValsetRequestsResponse>
+  /// get collections of outgoing traffic from the bridge
+  func signerSetTxs(request: Gravity_V1_SignerSetTxsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_SignerSetTxsResponse>
 
-  func lastPendingValsetRequestByAddr(request: Gravity_V1_QueryLastPendingValsetRequestByAddrRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryLastPendingValsetRequestByAddrResponse>
+  /// option (google.api.http).get = "/gravity/v1/batch/batch_txs";
+  func batchTxs(request: Gravity_V1_BatchTxsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_BatchTxsResponse>
 
-  func lastPendingBatchRequestByAddr(request: Gravity_V1_QueryLastPendingBatchRequestByAddrRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryLastPendingBatchRequestByAddrResponse>
+  /// option (google.api.http).get = "/gravity/v1/batch/contract_call_txs";
+  func contractCallTxs(request: Gravity_V1_ContractCallTxsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_ContractCallTxsResponse>
 
-  func lastPendingLogicCallByAddr(request: Gravity_V1_QueryLastPendingLogicCallByAddrRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryLastPendingLogicCallByAddrResponse>
+  /// TODO: can/should we group these into one endpoint?
+  func signerSetTxConfirmations(request: Gravity_V1_SignerSetTxConfirmationsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_SignerSetTxConfirmationsResponse>
 
-  func lastEventNonceByAddr(request: Gravity_V1_QueryLastEventNonceByAddrRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryLastEventNonceByAddrResponse>
+  /// option (google.api.http).get =
+  /// "/gravity/v1/batch_txs/ethereum_signatures";
+  func batchTxConfirmations(request: Gravity_V1_BatchTxConfirmationsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_BatchTxConfirmationsResponse>
 
-  func batchFees(request: Gravity_V1_QueryBatchFeeRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryBatchFeeResponse>
+  /// option (google.api.http).get =
+  /// "/gravity/v1/logic_calls/ethereum_signatures";
+  func contractCallTxConfirmations(request: Gravity_V1_ContractCallTxConfirmationsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_ContractCallTxConfirmationsResponse>
 
-  func outgoingTxBatches(request: Gravity_V1_QueryOutgoingTxBatchesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryOutgoingTxBatchesResponse>
+  /// pending ethereum signature queries for orchestrators to figure out which
+  /// signatures they are missing
+  /// TODO: can/should we group this into one endpoint?
+  func unsignedSignerSetTxs(request: Gravity_V1_UnsignedSignerSetTxsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_UnsignedSignerSetTxsResponse>
 
-  func outgoingLogicCalls(request: Gravity_V1_QueryOutgoingLogicCallsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryOutgoingLogicCallsResponse>
+  /// option (google.api.http).get = "/gravity/v1/batches/{address}/pending";
+  func unsignedBatchTxs(request: Gravity_V1_UnsignedBatchTxsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_UnsignedBatchTxsResponse>
 
-  func batchRequestByNonce(request: Gravity_V1_QueryBatchRequestByNonceRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryBatchRequestByNonceResponse>
+  /// option (google.api.http).get =
+  /// "/gravity/v1/ContractCallTxs/{address}/pending";
+  func unsignedContractCallTxs(request: Gravity_V1_UnsignedContractCallTxsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_UnsignedContractCallTxsResponse>
 
-  func batchConfirms(request: Gravity_V1_QueryBatchConfirmsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryBatchConfirmsResponse>
+  /// option (google.api.http).get =
+  /// "/gravity/v1/oracle/event_nonce/{address}";
+  func lastSubmittedEthereumEvent(request: Gravity_V1_LastSubmittedEthereumEventRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_LastSubmittedEthereumEventResponse>
 
-  func logicConfirms(request: Gravity_V1_QueryLogicConfirmsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryLogicConfirmsResponse>
+  /// Queries the fees for all pending batches, results are returned in sdk.Coin
+  /// (fee_amount_int)(contract_address) style
+  func batchTxFees(request: Gravity_V1_BatchTxFeesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_BatchTxFeesResponse>
 
-  func eRC20ToDenom(request: Gravity_V1_QueryERC20ToDenomRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryERC20ToDenomResponse>
+  /// Query for info about denoms tracked by gravity
+  func eRC20ToDenom(request: Gravity_V1_ERC20ToDenomRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_ERC20ToDenomResponse>
 
-  func denomToERC20(request: Gravity_V1_QueryDenomToERC20Request, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryDenomToERC20Response>
+  /// DenomToERC20Params implements a query that allows ERC-20 parameter information
+  /// to be retrieved by a Cosmos base denomination.
+  func denomToERC20Params(request: Gravity_V1_DenomToERC20ParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_DenomToERC20ParamsResponse>
 
-  func getDelegateKeyByValidator(request: Gravity_V1_QueryDelegateKeysByValidatorAddress, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryDelegateKeysByValidatorAddressResponse>
+  /// Query for info about denoms tracked by gravity
+  func denomToERC20(request: Gravity_V1_DenomToERC20Request, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_DenomToERC20Response>
 
-  func getDelegateKeyByEth(request: Gravity_V1_QueryDelegateKeysByEthAddress, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryDelegateKeysByEthAddressResponse>
+  /// Query for batch send to ethereums
+  func batchedSendToEthereums(request: Gravity_V1_BatchedSendToEthereumsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_BatchedSendToEthereumsResponse>
 
-  func getDelegateKeyByOrchestrator(request: Gravity_V1_QueryDelegateKeysByOrchestratorAddress, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryDelegateKeysByOrchestratorAddressResponse>
+  /// Query for unbatched send to ethereums
+  func unbatchedSendToEthereums(request: Gravity_V1_UnbatchedSendToEthereumsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_UnbatchedSendToEthereumsResponse>
 
-  func getPendingSendToEth(request: Gravity_V1_QueryPendingSendToEth, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_QueryPendingSendToEthResponse>
+  /// delegate keys
+  func delegateKeysByValidator(request: Gravity_V1_DelegateKeysByValidatorRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_DelegateKeysByValidatorResponse>
+
+  /// option (google.api.http).get =
+  /// "/gravity/v1/delegate_keys/ethereum/{ethereum_signer}";
+  func delegateKeysByEthereumSigner(request: Gravity_V1_DelegateKeysByEthereumSignerRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_DelegateKeysByEthereumSignerResponse>
+
+  /// option (google.api.http).get =
+  /// "/gravity/v1/delegate_keys/orchestrator/{orchestrator}";
+  func delegateKeysByOrchestrator(request: Gravity_V1_DelegateKeysByOrchestratorRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_DelegateKeysByOrchestratorResponse>
+
+  /// option (google.api.http).get =
+  /// "/gravity/v1/delegate_keys";
+  func delegateKeys(request: Gravity_V1_DelegateKeysRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Gravity_V1_DelegateKeysResponse>
 }
 
 extension Gravity_V1_QueryProvider {
@@ -701,199 +835,226 @@ extension Gravity_V1_QueryProvider {
     case "Params":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryParamsRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryParamsResponse>(),
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_ParamsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_ParamsResponse>(),
         interceptors: self.interceptors?.makeParamsInterceptors() ?? [],
         userFunction: self.params(request:context:)
       )
 
-    case "CurrentValset":
+    case "SignerSetTx":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryCurrentValsetRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryCurrentValsetResponse>(),
-        interceptors: self.interceptors?.makeCurrentValsetInterceptors() ?? [],
-        userFunction: self.currentValset(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_SignerSetTxRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_SignerSetTxResponse>(),
+        interceptors: self.interceptors?.makeSignerSetTxInterceptors() ?? [],
+        userFunction: self.signerSetTx(request:context:)
       )
 
-    case "ValsetRequest":
+    case "LatestSignerSetTx":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryValsetRequestRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryValsetRequestResponse>(),
-        interceptors: self.interceptors?.makeValsetRequestInterceptors() ?? [],
-        userFunction: self.valsetRequest(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_LatestSignerSetTxRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_SignerSetTxResponse>(),
+        interceptors: self.interceptors?.makeLatestSignerSetTxInterceptors() ?? [],
+        userFunction: self.latestSignerSetTx(request:context:)
       )
 
-    case "ValsetConfirm":
+    case "BatchTx":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryValsetConfirmRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryValsetConfirmResponse>(),
-        interceptors: self.interceptors?.makeValsetConfirmInterceptors() ?? [],
-        userFunction: self.valsetConfirm(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_BatchTxRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_BatchTxResponse>(),
+        interceptors: self.interceptors?.makeBatchTxInterceptors() ?? [],
+        userFunction: self.batchTx(request:context:)
       )
 
-    case "ValsetConfirmsByNonce":
+    case "ContractCallTx":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryValsetConfirmsByNonceRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryValsetConfirmsByNonceResponse>(),
-        interceptors: self.interceptors?.makeValsetConfirmsByNonceInterceptors() ?? [],
-        userFunction: self.valsetConfirmsByNonce(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_ContractCallTxRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_ContractCallTxResponse>(),
+        interceptors: self.interceptors?.makeContractCallTxInterceptors() ?? [],
+        userFunction: self.contractCallTx(request:context:)
       )
 
-    case "LastValsetRequests":
+    case "SignerSetTxs":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryLastValsetRequestsRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryLastValsetRequestsResponse>(),
-        interceptors: self.interceptors?.makeLastValsetRequestsInterceptors() ?? [],
-        userFunction: self.lastValsetRequests(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_SignerSetTxsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_SignerSetTxsResponse>(),
+        interceptors: self.interceptors?.makeSignerSetTxsInterceptors() ?? [],
+        userFunction: self.signerSetTxs(request:context:)
       )
 
-    case "LastPendingValsetRequestByAddr":
+    case "BatchTxs":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryLastPendingValsetRequestByAddrRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryLastPendingValsetRequestByAddrResponse>(),
-        interceptors: self.interceptors?.makeLastPendingValsetRequestByAddrInterceptors() ?? [],
-        userFunction: self.lastPendingValsetRequestByAddr(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_BatchTxsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_BatchTxsResponse>(),
+        interceptors: self.interceptors?.makeBatchTxsInterceptors() ?? [],
+        userFunction: self.batchTxs(request:context:)
       )
 
-    case "LastPendingBatchRequestByAddr":
+    case "ContractCallTxs":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryLastPendingBatchRequestByAddrRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryLastPendingBatchRequestByAddrResponse>(),
-        interceptors: self.interceptors?.makeLastPendingBatchRequestByAddrInterceptors() ?? [],
-        userFunction: self.lastPendingBatchRequestByAddr(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_ContractCallTxsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_ContractCallTxsResponse>(),
+        interceptors: self.interceptors?.makeContractCallTxsInterceptors() ?? [],
+        userFunction: self.contractCallTxs(request:context:)
       )
 
-    case "LastPendingLogicCallByAddr":
+    case "SignerSetTxConfirmations":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryLastPendingLogicCallByAddrRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryLastPendingLogicCallByAddrResponse>(),
-        interceptors: self.interceptors?.makeLastPendingLogicCallByAddrInterceptors() ?? [],
-        userFunction: self.lastPendingLogicCallByAddr(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_SignerSetTxConfirmationsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_SignerSetTxConfirmationsResponse>(),
+        interceptors: self.interceptors?.makeSignerSetTxConfirmationsInterceptors() ?? [],
+        userFunction: self.signerSetTxConfirmations(request:context:)
       )
 
-    case "LastEventNonceByAddr":
+    case "BatchTxConfirmations":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryLastEventNonceByAddrRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryLastEventNonceByAddrResponse>(),
-        interceptors: self.interceptors?.makeLastEventNonceByAddrInterceptors() ?? [],
-        userFunction: self.lastEventNonceByAddr(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_BatchTxConfirmationsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_BatchTxConfirmationsResponse>(),
+        interceptors: self.interceptors?.makeBatchTxConfirmationsInterceptors() ?? [],
+        userFunction: self.batchTxConfirmations(request:context:)
       )
 
-    case "BatchFees":
+    case "ContractCallTxConfirmations":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryBatchFeeRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryBatchFeeResponse>(),
-        interceptors: self.interceptors?.makeBatchFeesInterceptors() ?? [],
-        userFunction: self.batchFees(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_ContractCallTxConfirmationsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_ContractCallTxConfirmationsResponse>(),
+        interceptors: self.interceptors?.makeContractCallTxConfirmationsInterceptors() ?? [],
+        userFunction: self.contractCallTxConfirmations(request:context:)
       )
 
-    case "OutgoingTxBatches":
+    case "UnsignedSignerSetTxs":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryOutgoingTxBatchesRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryOutgoingTxBatchesResponse>(),
-        interceptors: self.interceptors?.makeOutgoingTxBatchesInterceptors() ?? [],
-        userFunction: self.outgoingTxBatches(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_UnsignedSignerSetTxsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_UnsignedSignerSetTxsResponse>(),
+        interceptors: self.interceptors?.makeUnsignedSignerSetTxsInterceptors() ?? [],
+        userFunction: self.unsignedSignerSetTxs(request:context:)
       )
 
-    case "OutgoingLogicCalls":
+    case "UnsignedBatchTxs":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryOutgoingLogicCallsRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryOutgoingLogicCallsResponse>(),
-        interceptors: self.interceptors?.makeOutgoingLogicCallsInterceptors() ?? [],
-        userFunction: self.outgoingLogicCalls(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_UnsignedBatchTxsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_UnsignedBatchTxsResponse>(),
+        interceptors: self.interceptors?.makeUnsignedBatchTxsInterceptors() ?? [],
+        userFunction: self.unsignedBatchTxs(request:context:)
       )
 
-    case "BatchRequestByNonce":
+    case "UnsignedContractCallTxs":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryBatchRequestByNonceRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryBatchRequestByNonceResponse>(),
-        interceptors: self.interceptors?.makeBatchRequestByNonceInterceptors() ?? [],
-        userFunction: self.batchRequestByNonce(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_UnsignedContractCallTxsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_UnsignedContractCallTxsResponse>(),
+        interceptors: self.interceptors?.makeUnsignedContractCallTxsInterceptors() ?? [],
+        userFunction: self.unsignedContractCallTxs(request:context:)
       )
 
-    case "BatchConfirms":
+    case "LastSubmittedEthereumEvent":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryBatchConfirmsRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryBatchConfirmsResponse>(),
-        interceptors: self.interceptors?.makeBatchConfirmsInterceptors() ?? [],
-        userFunction: self.batchConfirms(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_LastSubmittedEthereumEventRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_LastSubmittedEthereumEventResponse>(),
+        interceptors: self.interceptors?.makeLastSubmittedEthereumEventInterceptors() ?? [],
+        userFunction: self.lastSubmittedEthereumEvent(request:context:)
       )
 
-    case "LogicConfirms":
+    case "BatchTxFees":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryLogicConfirmsRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryLogicConfirmsResponse>(),
-        interceptors: self.interceptors?.makeLogicConfirmsInterceptors() ?? [],
-        userFunction: self.logicConfirms(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_BatchTxFeesRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_BatchTxFeesResponse>(),
+        interceptors: self.interceptors?.makeBatchTxFeesInterceptors() ?? [],
+        userFunction: self.batchTxFees(request:context:)
       )
 
     case "ERC20ToDenom":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryERC20ToDenomRequest>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryERC20ToDenomResponse>(),
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_ERC20ToDenomRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_ERC20ToDenomResponse>(),
         interceptors: self.interceptors?.makeERC20ToDenomInterceptors() ?? [],
         userFunction: self.eRC20ToDenom(request:context:)
+      )
+
+    case "DenomToERC20Params":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_DenomToERC20ParamsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_DenomToERC20ParamsResponse>(),
+        interceptors: self.interceptors?.makeDenomToERC20ParamsInterceptors() ?? [],
+        userFunction: self.denomToERC20Params(request:context:)
       )
 
     case "DenomToERC20":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryDenomToERC20Request>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryDenomToERC20Response>(),
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_DenomToERC20Request>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_DenomToERC20Response>(),
         interceptors: self.interceptors?.makeDenomToERC20Interceptors() ?? [],
         userFunction: self.denomToERC20(request:context:)
       )
 
-    case "GetDelegateKeyByValidator":
+    case "BatchedSendToEthereums":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryDelegateKeysByValidatorAddress>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryDelegateKeysByValidatorAddressResponse>(),
-        interceptors: self.interceptors?.makeGetDelegateKeyByValidatorInterceptors() ?? [],
-        userFunction: self.getDelegateKeyByValidator(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_BatchedSendToEthereumsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_BatchedSendToEthereumsResponse>(),
+        interceptors: self.interceptors?.makeBatchedSendToEthereumsInterceptors() ?? [],
+        userFunction: self.batchedSendToEthereums(request:context:)
       )
 
-    case "GetDelegateKeyByEth":
+    case "UnbatchedSendToEthereums":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryDelegateKeysByEthAddress>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryDelegateKeysByEthAddressResponse>(),
-        interceptors: self.interceptors?.makeGetDelegateKeyByEthInterceptors() ?? [],
-        userFunction: self.getDelegateKeyByEth(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_UnbatchedSendToEthereumsRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_UnbatchedSendToEthereumsResponse>(),
+        interceptors: self.interceptors?.makeUnbatchedSendToEthereumsInterceptors() ?? [],
+        userFunction: self.unbatchedSendToEthereums(request:context:)
       )
 
-    case "GetDelegateKeyByOrchestrator":
+    case "DelegateKeysByValidator":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryDelegateKeysByOrchestratorAddress>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryDelegateKeysByOrchestratorAddressResponse>(),
-        interceptors: self.interceptors?.makeGetDelegateKeyByOrchestratorInterceptors() ?? [],
-        userFunction: self.getDelegateKeyByOrchestrator(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_DelegateKeysByValidatorRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_DelegateKeysByValidatorResponse>(),
+        interceptors: self.interceptors?.makeDelegateKeysByValidatorInterceptors() ?? [],
+        userFunction: self.delegateKeysByValidator(request:context:)
       )
 
-    case "GetPendingSendToEth":
+    case "DelegateKeysByEthereumSigner":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Gravity_V1_QueryPendingSendToEth>(),
-        responseSerializer: ProtobufSerializer<Gravity_V1_QueryPendingSendToEthResponse>(),
-        interceptors: self.interceptors?.makeGetPendingSendToEthInterceptors() ?? [],
-        userFunction: self.getPendingSendToEth(request:context:)
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_DelegateKeysByEthereumSignerRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_DelegateKeysByEthereumSignerResponse>(),
+        interceptors: self.interceptors?.makeDelegateKeysByEthereumSignerInterceptors() ?? [],
+        userFunction: self.delegateKeysByEthereumSigner(request:context:)
+      )
+
+    case "DelegateKeysByOrchestrator":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_DelegateKeysByOrchestratorRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_DelegateKeysByOrchestratorResponse>(),
+        interceptors: self.interceptors?.makeDelegateKeysByOrchestratorInterceptors() ?? [],
+        userFunction: self.delegateKeysByOrchestrator(request:context:)
+      )
+
+    case "DelegateKeys":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Gravity_V1_DelegateKeysRequest>(),
+        responseSerializer: ProtobufSerializer<Gravity_V1_DelegateKeysResponse>(),
+        interceptors: self.interceptors?.makeDelegateKeysInterceptors() ?? [],
+        userFunction: self.delegateKeys(request:context:)
       )
 
     default:
@@ -906,89 +1067,101 @@ internal protocol Gravity_V1_QueryServerInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when handling 'params'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeParamsInterceptors() -> [ServerInterceptor<Gravity_V1_QueryParamsRequest, Gravity_V1_QueryParamsResponse>]
+  func makeParamsInterceptors() -> [ServerInterceptor<Gravity_V1_ParamsRequest, Gravity_V1_ParamsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'currentValset'.
+  /// - Returns: Interceptors to use when handling 'signerSetTx'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeCurrentValsetInterceptors() -> [ServerInterceptor<Gravity_V1_QueryCurrentValsetRequest, Gravity_V1_QueryCurrentValsetResponse>]
+  func makeSignerSetTxInterceptors() -> [ServerInterceptor<Gravity_V1_SignerSetTxRequest, Gravity_V1_SignerSetTxResponse>]
 
-  /// - Returns: Interceptors to use when handling 'valsetRequest'.
+  /// - Returns: Interceptors to use when handling 'latestSignerSetTx'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeValsetRequestInterceptors() -> [ServerInterceptor<Gravity_V1_QueryValsetRequestRequest, Gravity_V1_QueryValsetRequestResponse>]
+  func makeLatestSignerSetTxInterceptors() -> [ServerInterceptor<Gravity_V1_LatestSignerSetTxRequest, Gravity_V1_SignerSetTxResponse>]
 
-  /// - Returns: Interceptors to use when handling 'valsetConfirm'.
+  /// - Returns: Interceptors to use when handling 'batchTx'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeValsetConfirmInterceptors() -> [ServerInterceptor<Gravity_V1_QueryValsetConfirmRequest, Gravity_V1_QueryValsetConfirmResponse>]
+  func makeBatchTxInterceptors() -> [ServerInterceptor<Gravity_V1_BatchTxRequest, Gravity_V1_BatchTxResponse>]
 
-  /// - Returns: Interceptors to use when handling 'valsetConfirmsByNonce'.
+  /// - Returns: Interceptors to use when handling 'contractCallTx'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeValsetConfirmsByNonceInterceptors() -> [ServerInterceptor<Gravity_V1_QueryValsetConfirmsByNonceRequest, Gravity_V1_QueryValsetConfirmsByNonceResponse>]
+  func makeContractCallTxInterceptors() -> [ServerInterceptor<Gravity_V1_ContractCallTxRequest, Gravity_V1_ContractCallTxResponse>]
 
-  /// - Returns: Interceptors to use when handling 'lastValsetRequests'.
+  /// - Returns: Interceptors to use when handling 'signerSetTxs'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeLastValsetRequestsInterceptors() -> [ServerInterceptor<Gravity_V1_QueryLastValsetRequestsRequest, Gravity_V1_QueryLastValsetRequestsResponse>]
+  func makeSignerSetTxsInterceptors() -> [ServerInterceptor<Gravity_V1_SignerSetTxsRequest, Gravity_V1_SignerSetTxsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'lastPendingValsetRequestByAddr'.
+  /// - Returns: Interceptors to use when handling 'batchTxs'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeLastPendingValsetRequestByAddrInterceptors() -> [ServerInterceptor<Gravity_V1_QueryLastPendingValsetRequestByAddrRequest, Gravity_V1_QueryLastPendingValsetRequestByAddrResponse>]
+  func makeBatchTxsInterceptors() -> [ServerInterceptor<Gravity_V1_BatchTxsRequest, Gravity_V1_BatchTxsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'lastPendingBatchRequestByAddr'.
+  /// - Returns: Interceptors to use when handling 'contractCallTxs'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeLastPendingBatchRequestByAddrInterceptors() -> [ServerInterceptor<Gravity_V1_QueryLastPendingBatchRequestByAddrRequest, Gravity_V1_QueryLastPendingBatchRequestByAddrResponse>]
+  func makeContractCallTxsInterceptors() -> [ServerInterceptor<Gravity_V1_ContractCallTxsRequest, Gravity_V1_ContractCallTxsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'lastPendingLogicCallByAddr'.
+  /// - Returns: Interceptors to use when handling 'signerSetTxConfirmations'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeLastPendingLogicCallByAddrInterceptors() -> [ServerInterceptor<Gravity_V1_QueryLastPendingLogicCallByAddrRequest, Gravity_V1_QueryLastPendingLogicCallByAddrResponse>]
+  func makeSignerSetTxConfirmationsInterceptors() -> [ServerInterceptor<Gravity_V1_SignerSetTxConfirmationsRequest, Gravity_V1_SignerSetTxConfirmationsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'lastEventNonceByAddr'.
+  /// - Returns: Interceptors to use when handling 'batchTxConfirmations'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeLastEventNonceByAddrInterceptors() -> [ServerInterceptor<Gravity_V1_QueryLastEventNonceByAddrRequest, Gravity_V1_QueryLastEventNonceByAddrResponse>]
+  func makeBatchTxConfirmationsInterceptors() -> [ServerInterceptor<Gravity_V1_BatchTxConfirmationsRequest, Gravity_V1_BatchTxConfirmationsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'batchFees'.
+  /// - Returns: Interceptors to use when handling 'contractCallTxConfirmations'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeBatchFeesInterceptors() -> [ServerInterceptor<Gravity_V1_QueryBatchFeeRequest, Gravity_V1_QueryBatchFeeResponse>]
+  func makeContractCallTxConfirmationsInterceptors() -> [ServerInterceptor<Gravity_V1_ContractCallTxConfirmationsRequest, Gravity_V1_ContractCallTxConfirmationsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'outgoingTxBatches'.
+  /// - Returns: Interceptors to use when handling 'unsignedSignerSetTxs'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeOutgoingTxBatchesInterceptors() -> [ServerInterceptor<Gravity_V1_QueryOutgoingTxBatchesRequest, Gravity_V1_QueryOutgoingTxBatchesResponse>]
+  func makeUnsignedSignerSetTxsInterceptors() -> [ServerInterceptor<Gravity_V1_UnsignedSignerSetTxsRequest, Gravity_V1_UnsignedSignerSetTxsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'outgoingLogicCalls'.
+  /// - Returns: Interceptors to use when handling 'unsignedBatchTxs'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeOutgoingLogicCallsInterceptors() -> [ServerInterceptor<Gravity_V1_QueryOutgoingLogicCallsRequest, Gravity_V1_QueryOutgoingLogicCallsResponse>]
+  func makeUnsignedBatchTxsInterceptors() -> [ServerInterceptor<Gravity_V1_UnsignedBatchTxsRequest, Gravity_V1_UnsignedBatchTxsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'batchRequestByNonce'.
+  /// - Returns: Interceptors to use when handling 'unsignedContractCallTxs'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeBatchRequestByNonceInterceptors() -> [ServerInterceptor<Gravity_V1_QueryBatchRequestByNonceRequest, Gravity_V1_QueryBatchRequestByNonceResponse>]
+  func makeUnsignedContractCallTxsInterceptors() -> [ServerInterceptor<Gravity_V1_UnsignedContractCallTxsRequest, Gravity_V1_UnsignedContractCallTxsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'batchConfirms'.
+  /// - Returns: Interceptors to use when handling 'lastSubmittedEthereumEvent'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeBatchConfirmsInterceptors() -> [ServerInterceptor<Gravity_V1_QueryBatchConfirmsRequest, Gravity_V1_QueryBatchConfirmsResponse>]
+  func makeLastSubmittedEthereumEventInterceptors() -> [ServerInterceptor<Gravity_V1_LastSubmittedEthereumEventRequest, Gravity_V1_LastSubmittedEthereumEventResponse>]
 
-  /// - Returns: Interceptors to use when handling 'logicConfirms'.
+  /// - Returns: Interceptors to use when handling 'batchTxFees'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeLogicConfirmsInterceptors() -> [ServerInterceptor<Gravity_V1_QueryLogicConfirmsRequest, Gravity_V1_QueryLogicConfirmsResponse>]
+  func makeBatchTxFeesInterceptors() -> [ServerInterceptor<Gravity_V1_BatchTxFeesRequest, Gravity_V1_BatchTxFeesResponse>]
 
   /// - Returns: Interceptors to use when handling 'eRC20ToDenom'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeERC20ToDenomInterceptors() -> [ServerInterceptor<Gravity_V1_QueryERC20ToDenomRequest, Gravity_V1_QueryERC20ToDenomResponse>]
+  func makeERC20ToDenomInterceptors() -> [ServerInterceptor<Gravity_V1_ERC20ToDenomRequest, Gravity_V1_ERC20ToDenomResponse>]
+
+  /// - Returns: Interceptors to use when handling 'denomToERC20Params'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeDenomToERC20ParamsInterceptors() -> [ServerInterceptor<Gravity_V1_DenomToERC20ParamsRequest, Gravity_V1_DenomToERC20ParamsResponse>]
 
   /// - Returns: Interceptors to use when handling 'denomToERC20'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeDenomToERC20Interceptors() -> [ServerInterceptor<Gravity_V1_QueryDenomToERC20Request, Gravity_V1_QueryDenomToERC20Response>]
+  func makeDenomToERC20Interceptors() -> [ServerInterceptor<Gravity_V1_DenomToERC20Request, Gravity_V1_DenomToERC20Response>]
 
-  /// - Returns: Interceptors to use when handling 'getDelegateKeyByValidator'.
+  /// - Returns: Interceptors to use when handling 'batchedSendToEthereums'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetDelegateKeyByValidatorInterceptors() -> [ServerInterceptor<Gravity_V1_QueryDelegateKeysByValidatorAddress, Gravity_V1_QueryDelegateKeysByValidatorAddressResponse>]
+  func makeBatchedSendToEthereumsInterceptors() -> [ServerInterceptor<Gravity_V1_BatchedSendToEthereumsRequest, Gravity_V1_BatchedSendToEthereumsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'getDelegateKeyByEth'.
+  /// - Returns: Interceptors to use when handling 'unbatchedSendToEthereums'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetDelegateKeyByEthInterceptors() -> [ServerInterceptor<Gravity_V1_QueryDelegateKeysByEthAddress, Gravity_V1_QueryDelegateKeysByEthAddressResponse>]
+  func makeUnbatchedSendToEthereumsInterceptors() -> [ServerInterceptor<Gravity_V1_UnbatchedSendToEthereumsRequest, Gravity_V1_UnbatchedSendToEthereumsResponse>]
 
-  /// - Returns: Interceptors to use when handling 'getDelegateKeyByOrchestrator'.
+  /// - Returns: Interceptors to use when handling 'delegateKeysByValidator'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetDelegateKeyByOrchestratorInterceptors() -> [ServerInterceptor<Gravity_V1_QueryDelegateKeysByOrchestratorAddress, Gravity_V1_QueryDelegateKeysByOrchestratorAddressResponse>]
+  func makeDelegateKeysByValidatorInterceptors() -> [ServerInterceptor<Gravity_V1_DelegateKeysByValidatorRequest, Gravity_V1_DelegateKeysByValidatorResponse>]
 
-  /// - Returns: Interceptors to use when handling 'getPendingSendToEth'.
+  /// - Returns: Interceptors to use when handling 'delegateKeysByEthereumSigner'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeGetPendingSendToEthInterceptors() -> [ServerInterceptor<Gravity_V1_QueryPendingSendToEth, Gravity_V1_QueryPendingSendToEthResponse>]
+  func makeDelegateKeysByEthereumSignerInterceptors() -> [ServerInterceptor<Gravity_V1_DelegateKeysByEthereumSignerRequest, Gravity_V1_DelegateKeysByEthereumSignerResponse>]
+
+  /// - Returns: Interceptors to use when handling 'delegateKeysByOrchestrator'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeDelegateKeysByOrchestratorInterceptors() -> [ServerInterceptor<Gravity_V1_DelegateKeysByOrchestratorRequest, Gravity_V1_DelegateKeysByOrchestratorResponse>]
+
+  /// - Returns: Interceptors to use when handling 'delegateKeys'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeDelegateKeysInterceptors() -> [ServerInterceptor<Gravity_V1_DelegateKeysRequest, Gravity_V1_DelegateKeysResponse>]
 }

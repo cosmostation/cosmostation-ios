@@ -233,7 +233,8 @@ extension Ibc_Core_Channel_V1_QueryClientProtocol {
     )
   }
 
-  /// PacketReceipt queries if a given packet sequence has been received on the queried chain
+  /// PacketReceipt queries if a given packet sequence has been received on the
+  /// queried chain
   ///
   /// - Parameters:
   ///   - request: Request to send to PacketReceipt.
@@ -307,8 +308,8 @@ extension Ibc_Core_Channel_V1_QueryClientProtocol {
     )
   }
 
-  /// UnreceivedAcks returns all the unreceived IBC acknowledgements associated with a
-  /// channel and sequences.
+  /// UnreceivedAcks returns all the unreceived IBC acknowledgements associated
+  /// with a channel and sequences.
   ///
   /// - Parameters:
   ///   - request: Request to send to UnreceivedAcks.
@@ -440,7 +441,8 @@ internal protocol Ibc_Core_Channel_V1_QueryProvider: CallHandlerProvider {
   /// with a channel.
   func packetCommitments(request: Ibc_Core_Channel_V1_QueryPacketCommitmentsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Channel_V1_QueryPacketCommitmentsResponse>
 
-  /// PacketReceipt queries if a given packet sequence has been received on the queried chain
+  /// PacketReceipt queries if a given packet sequence has been received on the
+  /// queried chain
   func packetReceipt(request: Ibc_Core_Channel_V1_QueryPacketReceiptRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Channel_V1_QueryPacketReceiptResponse>
 
   /// PacketAcknowledgement queries a stored packet acknowledgement hash.
@@ -454,8 +456,8 @@ internal protocol Ibc_Core_Channel_V1_QueryProvider: CallHandlerProvider {
   /// channel and sequences.
   func unreceivedPackets(request: Ibc_Core_Channel_V1_QueryUnreceivedPacketsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Channel_V1_QueryUnreceivedPacketsResponse>
 
-  /// UnreceivedAcks returns all the unreceived IBC acknowledgements associated with a
-  /// channel and sequences.
+  /// UnreceivedAcks returns all the unreceived IBC acknowledgements associated
+  /// with a channel and sequences.
   func unreceivedAcks(request: Ibc_Core_Channel_V1_QueryUnreceivedAcksRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Channel_V1_QueryUnreceivedAcksResponse>
 
   /// NextSequenceReceive returns the next receive sequence for a given channel.

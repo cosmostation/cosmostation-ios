@@ -54,6 +54,11 @@ internal protocol Osmosis_Poolincentives_V1beta1_QueryClientProtocol: GRPCClient
     _ request: Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsRequest, Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsResponse>
+
+  func externalIncentiveGauges(
+    _ request: Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesRequest, Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesResponse>
 }
 
 extension Osmosis_Poolincentives_V1beta1_QueryClientProtocol {
@@ -150,6 +155,24 @@ extension Osmosis_Poolincentives_V1beta1_QueryClientProtocol {
       interceptors: self.interceptors?.makeIncentivizedPoolsInterceptors() ?? []
     )
   }
+
+  /// Unary call to ExternalIncentiveGauges
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ExternalIncentiveGauges.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func externalIncentiveGauges(
+    _ request: Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesRequest, Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesResponse> {
+    return self.makeUnaryCall(
+      path: "/osmosis.poolincentives.v1beta1.Query/ExternalIncentiveGauges",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeExternalIncentiveGaugesInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Osmosis_Poolincentives_V1beta1_QueryClientInterceptorFactoryProtocol {
@@ -168,6 +191,9 @@ internal protocol Osmosis_Poolincentives_V1beta1_QueryClientInterceptorFactoryPr
 
   /// - Returns: Interceptors to use when invoking 'incentivizedPools'.
   func makeIncentivizedPoolsInterceptors() -> [ClientInterceptor<Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsRequest, Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'externalIncentiveGauges'.
+  func makeExternalIncentiveGaugesInterceptors() -> [ClientInterceptor<Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesRequest, Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesResponse>]
 }
 
 internal final class Osmosis_Poolincentives_V1beta1_QueryClient: Osmosis_Poolincentives_V1beta1_QueryClientProtocol {
@@ -206,6 +232,8 @@ internal protocol Osmosis_Poolincentives_V1beta1_QueryProvider: CallHandlerProvi
   func lockableDurations(request: Osmosis_Poolincentives_V1beta1_QueryLockableDurationsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Poolincentives_V1beta1_QueryLockableDurationsResponse>
 
   func incentivizedPools(request: Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsResponse>
+
+  func externalIncentiveGauges(request: Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesResponse>
 }
 
 extension Osmosis_Poolincentives_V1beta1_QueryProvider {
@@ -263,6 +291,15 @@ extension Osmosis_Poolincentives_V1beta1_QueryProvider {
         userFunction: self.incentivizedPools(request:context:)
       )
 
+    case "ExternalIncentiveGauges":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesRequest>(),
+        responseSerializer: ProtobufSerializer<Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesResponse>(),
+        interceptors: self.interceptors?.makeExternalIncentiveGaugesInterceptors() ?? [],
+        userFunction: self.externalIncentiveGauges(request:context:)
+      )
+
     default:
       return nil
     }
@@ -290,4 +327,8 @@ internal protocol Osmosis_Poolincentives_V1beta1_QueryServerInterceptorFactoryPr
   /// - Returns: Interceptors to use when handling 'incentivizedPools'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeIncentivizedPoolsInterceptors() -> [ServerInterceptor<Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsRequest, Osmosis_Poolincentives_V1beta1_QueryIncentivizedPoolsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'externalIncentiveGauges'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeExternalIncentiveGaugesInterceptors() -> [ServerInterceptor<Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesRequest, Osmosis_Poolincentives_V1beta1_QueryExternalIncentiveGaugesResponse>]
 }

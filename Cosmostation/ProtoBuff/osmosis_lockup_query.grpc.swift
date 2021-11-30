@@ -77,6 +77,11 @@ internal protocol Osmosis_Lockup_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Osmosis_Lockup_AccountLockedPastTimeDenomRequest, Osmosis_Lockup_AccountLockedPastTimeDenomResponse>
 
+  func lockedDenom(
+    _ request: Osmosis_Lockup_LockedDenomRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Osmosis_Lockup_LockedDenomRequest, Osmosis_Lockup_LockedDenomResponse>
+
   func lockedByID(
     _ request: Osmosis_Lockup_LockedRequest,
     callOptions: CallOptions?
@@ -266,6 +271,24 @@ extension Osmosis_Lockup_QueryClientProtocol {
     )
   }
 
+  /// Returns total locked per denom with longer past given time
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to LockedDenom.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func lockedDenom(
+    _ request: Osmosis_Lockup_LockedDenomRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Osmosis_Lockup_LockedDenomRequest, Osmosis_Lockup_LockedDenomResponse> {
+    return self.makeUnaryCall(
+      path: "/osmosis.lockup.Query/LockedDenom",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeLockedDenomInterceptors() ?? []
+    )
+  }
+
   /// Returns lock record by id
   ///
   /// - Parameters:
@@ -369,6 +392,9 @@ internal protocol Osmosis_Lockup_QueryClientInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when invoking 'accountLockedPastTimeDenom'.
   func makeAccountLockedPastTimeDenomInterceptors() -> [ClientInterceptor<Osmosis_Lockup_AccountLockedPastTimeDenomRequest, Osmosis_Lockup_AccountLockedPastTimeDenomResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'lockedDenom'.
+  func makeLockedDenomInterceptors() -> [ClientInterceptor<Osmosis_Lockup_LockedDenomRequest, Osmosis_Lockup_LockedDenomResponse>]
+
   /// - Returns: Interceptors to use when invoking 'lockedByID'.
   func makeLockedByIDInterceptors() -> [ClientInterceptor<Osmosis_Lockup_LockedRequest, Osmosis_Lockup_LockedResponse>]
 
@@ -437,6 +463,9 @@ internal protocol Osmosis_Lockup_QueryProvider: CallHandlerProvider {
 
   /// Returns lock records by address, timestamp, denom
   func accountLockedPastTimeDenom(request: Osmosis_Lockup_AccountLockedPastTimeDenomRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_AccountLockedPastTimeDenomResponse>
+
+  /// Returns total locked per denom with longer past given time
+  func lockedDenom(request: Osmosis_Lockup_LockedDenomRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_LockedDenomResponse>
 
   /// Returns lock record by id
   func lockedByID(request: Osmosis_Lockup_LockedRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_LockedResponse>
@@ -543,6 +572,15 @@ extension Osmosis_Lockup_QueryProvider {
         userFunction: self.accountLockedPastTimeDenom(request:context:)
       )
 
+    case "LockedDenom":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Osmosis_Lockup_LockedDenomRequest>(),
+        responseSerializer: ProtobufSerializer<Osmosis_Lockup_LockedDenomResponse>(),
+        interceptors: self.interceptors?.makeLockedDenomInterceptors() ?? [],
+        userFunction: self.lockedDenom(request:context:)
+      )
+
     case "LockedByID":
       return UnaryServerHandler(
         context: context,
@@ -622,6 +660,10 @@ internal protocol Osmosis_Lockup_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'accountLockedPastTimeDenom'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeAccountLockedPastTimeDenomInterceptors() -> [ServerInterceptor<Osmosis_Lockup_AccountLockedPastTimeDenomRequest, Osmosis_Lockup_AccountLockedPastTimeDenomResponse>]
+
+  /// - Returns: Interceptors to use when handling 'lockedDenom'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeLockedDenomInterceptors() -> [ServerInterceptor<Osmosis_Lockup_LockedDenomRequest, Osmosis_Lockup_LockedDenomResponse>]
 
   /// - Returns: Interceptors to use when handling 'lockedByID'.
   ///   Defaults to calling `self.makeInterceptors()`.

@@ -30,10 +30,10 @@ internal protocol Osmosis_Gamm_V1beta1_MsgClientProtocol: GRPCClient {
   var serviceName: String { get }
   var interceptors: Osmosis_Gamm_V1beta1_MsgClientInterceptorFactoryProtocol? { get }
 
-  func createPool(
-    _ request: Osmosis_Gamm_V1beta1_MsgCreatePool,
+  func createBalancerPool(
+    _ request: Osmosis_Gamm_V1beta1_MsgCreateBalancerPool,
     callOptions: CallOptions?
-  ) -> UnaryCall<Osmosis_Gamm_V1beta1_MsgCreatePool, Osmosis_Gamm_V1beta1_MsgCreatePoolResponse>
+  ) -> UnaryCall<Osmosis_Gamm_V1beta1_MsgCreateBalancerPool, Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse>
 
   func joinPool(
     _ request: Osmosis_Gamm_V1beta1_MsgJoinPool,
@@ -81,21 +81,21 @@ extension Osmosis_Gamm_V1beta1_MsgClientProtocol {
     return "osmosis.gamm.v1beta1.Msg"
   }
 
-  /// Unary call to CreatePool
+  /// Unary call to CreateBalancerPool
   ///
   /// - Parameters:
-  ///   - request: Request to send to CreatePool.
+  ///   - request: Request to send to CreateBalancerPool.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func createPool(
-    _ request: Osmosis_Gamm_V1beta1_MsgCreatePool,
+  internal func createBalancerPool(
+    _ request: Osmosis_Gamm_V1beta1_MsgCreateBalancerPool,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Osmosis_Gamm_V1beta1_MsgCreatePool, Osmosis_Gamm_V1beta1_MsgCreatePoolResponse> {
+  ) -> UnaryCall<Osmosis_Gamm_V1beta1_MsgCreateBalancerPool, Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse> {
     return self.makeUnaryCall(
-      path: "/osmosis.gamm.v1beta1.Msg/CreatePool",
+      path: "/osmosis.gamm.v1beta1.Msg/CreateBalancerPool",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeCreatePoolInterceptors() ?? []
+      interceptors: self.interceptors?.makeCreateBalancerPoolInterceptors() ?? []
     )
   }
 
@@ -246,8 +246,8 @@ extension Osmosis_Gamm_V1beta1_MsgClientProtocol {
 
 internal protocol Osmosis_Gamm_V1beta1_MsgClientInterceptorFactoryProtocol {
 
-  /// - Returns: Interceptors to use when invoking 'createPool'.
-  func makeCreatePoolInterceptors() -> [ClientInterceptor<Osmosis_Gamm_V1beta1_MsgCreatePool, Osmosis_Gamm_V1beta1_MsgCreatePoolResponse>]
+  /// - Returns: Interceptors to use when invoking 'createBalancerPool'.
+  func makeCreateBalancerPoolInterceptors() -> [ClientInterceptor<Osmosis_Gamm_V1beta1_MsgCreateBalancerPool, Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse>]
 
   /// - Returns: Interceptors to use when invoking 'joinPool'.
   func makeJoinPoolInterceptors() -> [ClientInterceptor<Osmosis_Gamm_V1beta1_MsgJoinPool, Osmosis_Gamm_V1beta1_MsgJoinPoolResponse>]
@@ -300,7 +300,7 @@ internal final class Osmosis_Gamm_V1beta1_MsgClient: Osmosis_Gamm_V1beta1_MsgCli
 internal protocol Osmosis_Gamm_V1beta1_MsgProvider: CallHandlerProvider {
   var interceptors: Osmosis_Gamm_V1beta1_MsgServerInterceptorFactoryProtocol? { get }
 
-  func createPool(request: Osmosis_Gamm_V1beta1_MsgCreatePool, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Gamm_V1beta1_MsgCreatePoolResponse>
+  func createBalancerPool(request: Osmosis_Gamm_V1beta1_MsgCreateBalancerPool, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse>
 
   func joinPool(request: Osmosis_Gamm_V1beta1_MsgJoinPool, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Gamm_V1beta1_MsgJoinPoolResponse>
 
@@ -329,13 +329,13 @@ extension Osmosis_Gamm_V1beta1_MsgProvider {
     context: CallHandlerContext
   ) -> GRPCServerHandlerProtocol? {
     switch name {
-    case "CreatePool":
+    case "CreateBalancerPool":
       return UnaryServerHandler(
         context: context,
-        requestDeserializer: ProtobufDeserializer<Osmosis_Gamm_V1beta1_MsgCreatePool>(),
-        responseSerializer: ProtobufSerializer<Osmosis_Gamm_V1beta1_MsgCreatePoolResponse>(),
-        interceptors: self.interceptors?.makeCreatePoolInterceptors() ?? [],
-        userFunction: self.createPool(request:context:)
+        requestDeserializer: ProtobufDeserializer<Osmosis_Gamm_V1beta1_MsgCreateBalancerPool>(),
+        responseSerializer: ProtobufSerializer<Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse>(),
+        interceptors: self.interceptors?.makeCreateBalancerPoolInterceptors() ?? [],
+        userFunction: self.createBalancerPool(request:context:)
       )
 
     case "JoinPool":
@@ -418,9 +418,9 @@ extension Osmosis_Gamm_V1beta1_MsgProvider {
 
 internal protocol Osmosis_Gamm_V1beta1_MsgServerInterceptorFactoryProtocol {
 
-  /// - Returns: Interceptors to use when handling 'createPool'.
+  /// - Returns: Interceptors to use when handling 'createBalancerPool'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeCreatePoolInterceptors() -> [ServerInterceptor<Osmosis_Gamm_V1beta1_MsgCreatePool, Osmosis_Gamm_V1beta1_MsgCreatePoolResponse>]
+  func makeCreateBalancerPoolInterceptors() -> [ServerInterceptor<Osmosis_Gamm_V1beta1_MsgCreateBalancerPool, Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse>]
 
   /// - Returns: Interceptors to use when handling 'joinPool'.
   ///   Defaults to calling `self.makeInterceptors()`.

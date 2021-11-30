@@ -46,6 +46,11 @@ internal protocol Cosmos_Upgrade_V1beta1_QueryClientProtocol: GRPCClient {
     _ request: Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateRequest, Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateResponse>
+
+  func moduleVersions(
+    _ request: Cosmos_Upgrade_V1beta1_QueryModuleVersionsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Upgrade_V1beta1_QueryModuleVersionsRequest, Cosmos_Upgrade_V1beta1_QueryModuleVersionsResponse>
 }
 
 extension Cosmos_Upgrade_V1beta1_QueryClientProtocol {
@@ -93,6 +98,8 @@ extension Cosmos_Upgrade_V1beta1_QueryClientProtocol {
   /// as a trusted kernel for the next version of this chain. It will only be
   /// stored at the last height of this chain.
   /// UpgradedConsensusState RPC not supported with legacy querier
+  /// This rpc is deprecated now that IBC has its own replacement
+  /// (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54)
   ///
   /// - Parameters:
   ///   - request: Request to send to UpgradedConsensusState.
@@ -109,6 +116,26 @@ extension Cosmos_Upgrade_V1beta1_QueryClientProtocol {
       interceptors: self.interceptors?.makeUpgradedConsensusStateInterceptors() ?? []
     )
   }
+
+  /// ModuleVersions queries the list of module versions from state.
+  ///
+  /// Since: cosmos-sdk 0.43
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ModuleVersions.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func moduleVersions(
+    _ request: Cosmos_Upgrade_V1beta1_QueryModuleVersionsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Upgrade_V1beta1_QueryModuleVersionsRequest, Cosmos_Upgrade_V1beta1_QueryModuleVersionsResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.upgrade.v1beta1.Query/ModuleVersions",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeModuleVersionsInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Cosmos_Upgrade_V1beta1_QueryClientInterceptorFactoryProtocol {
@@ -121,6 +148,9 @@ internal protocol Cosmos_Upgrade_V1beta1_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'upgradedConsensusState'.
   func makeUpgradedConsensusStateInterceptors() -> [ClientInterceptor<Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateRequest, Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'moduleVersions'.
+  func makeModuleVersionsInterceptors() -> [ClientInterceptor<Cosmos_Upgrade_V1beta1_QueryModuleVersionsRequest, Cosmos_Upgrade_V1beta1_QueryModuleVersionsResponse>]
 }
 
 internal final class Cosmos_Upgrade_V1beta1_QueryClient: Cosmos_Upgrade_V1beta1_QueryClientProtocol {
@@ -161,7 +191,14 @@ internal protocol Cosmos_Upgrade_V1beta1_QueryProvider: CallHandlerProvider {
   /// as a trusted kernel for the next version of this chain. It will only be
   /// stored at the last height of this chain.
   /// UpgradedConsensusState RPC not supported with legacy querier
+  /// This rpc is deprecated now that IBC has its own replacement
+  /// (https://github.com/cosmos/ibc-go/blob/2c880a22e9f9cc75f62b527ca94aa75ce1106001/proto/ibc/core/client/v1/query.proto#L54)
   func upgradedConsensusState(request: Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateResponse>
+
+  /// ModuleVersions queries the list of module versions from state.
+  ///
+  /// Since: cosmos-sdk 0.43
+  func moduleVersions(request: Cosmos_Upgrade_V1beta1_QueryModuleVersionsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Upgrade_V1beta1_QueryModuleVersionsResponse>
 }
 
 extension Cosmos_Upgrade_V1beta1_QueryProvider {
@@ -201,6 +238,15 @@ extension Cosmos_Upgrade_V1beta1_QueryProvider {
         userFunction: self.upgradedConsensusState(request:context:)
       )
 
+    case "ModuleVersions":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Upgrade_V1beta1_QueryModuleVersionsRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Upgrade_V1beta1_QueryModuleVersionsResponse>(),
+        interceptors: self.interceptors?.makeModuleVersionsInterceptors() ?? [],
+        userFunction: self.moduleVersions(request:context:)
+      )
+
     default:
       return nil
     }
@@ -220,4 +266,8 @@ internal protocol Cosmos_Upgrade_V1beta1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'upgradedConsensusState'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpgradedConsensusStateInterceptors() -> [ServerInterceptor<Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateRequest, Cosmos_Upgrade_V1beta1_QueryUpgradedConsensusStateResponse>]
+
+  /// - Returns: Interceptors to use when handling 'moduleVersions'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeModuleVersionsInterceptors() -> [ServerInterceptor<Cosmos_Upgrade_V1beta1_QueryModuleVersionsRequest, Cosmos_Upgrade_V1beta1_QueryModuleVersionsResponse>]
 }

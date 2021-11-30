@@ -178,7 +178,8 @@ extension Ibc_Core_Channel_V1_MsgClientProtocol {
     )
   }
 
-  /// ChannelCloseConfirm defines a rpc handler method for MsgChannelCloseConfirm.
+  /// ChannelCloseConfirm defines a rpc handler method for
+  /// MsgChannelCloseConfirm.
   ///
   /// - Parameters:
   ///   - request: Request to send to ChannelCloseConfirm.
@@ -345,7 +346,8 @@ internal protocol Ibc_Core_Channel_V1_MsgProvider: CallHandlerProvider {
   /// ChannelCloseInit defines a rpc handler method for MsgChannelCloseInit.
   func channelCloseInit(request: Ibc_Core_Channel_V1_MsgChannelCloseInit, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Channel_V1_MsgChannelCloseInitResponse>
 
-  /// ChannelCloseConfirm defines a rpc handler method for MsgChannelCloseConfirm.
+  /// ChannelCloseConfirm defines a rpc handler method for
+  /// MsgChannelCloseConfirm.
   func channelCloseConfirm(request: Ibc_Core_Channel_V1_MsgChannelCloseConfirm, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Channel_V1_MsgChannelCloseConfirmResponse>
 
   /// RecvPacket defines a rpc handler method for MsgRecvPacket.

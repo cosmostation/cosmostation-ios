@@ -112,7 +112,8 @@ extension Ibc_Core_Connection_V1_MsgClientProtocol {
     )
   }
 
-  /// ConnectionOpenConfirm defines a rpc handler method for MsgConnectionOpenConfirm.
+  /// ConnectionOpenConfirm defines a rpc handler method for
+  /// MsgConnectionOpenConfirm.
   ///
   /// - Parameters:
   ///   - request: Request to send to ConnectionOpenConfirm.
@@ -183,7 +184,8 @@ internal protocol Ibc_Core_Connection_V1_MsgProvider: CallHandlerProvider {
   /// ConnectionOpenAck defines a rpc handler method for MsgConnectionOpenAck.
   func connectionOpenAck(request: Ibc_Core_Connection_V1_MsgConnectionOpenAck, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Connection_V1_MsgConnectionOpenAckResponse>
 
-  /// ConnectionOpenConfirm defines a rpc handler method for MsgConnectionOpenConfirm.
+  /// ConnectionOpenConfirm defines a rpc handler method for
+  /// MsgConnectionOpenConfirm.
   func connectionOpenConfirm(request: Ibc_Core_Connection_V1_MsgConnectionOpenConfirm, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Connection_V1_MsgConnectionOpenConfirmResponse>
 }
 

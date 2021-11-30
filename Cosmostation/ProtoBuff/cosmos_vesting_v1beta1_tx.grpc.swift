@@ -36,6 +36,11 @@ internal protocol Cosmos_Vesting_V1beta1_MsgClientProtocol: GRPCClient {
     _ request: Cosmos_Vesting_V1beta1_MsgCreateVestingAccount,
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Vesting_V1beta1_MsgCreateVestingAccount, Cosmos_Vesting_V1beta1_MsgCreateVestingAccountResponse>
+
+  func createPeriodicVestingAccount(
+    _ request: Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccount,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccount, Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccountResponse>
 }
 
 extension Cosmos_Vesting_V1beta1_MsgClientProtocol {
@@ -61,12 +66,34 @@ extension Cosmos_Vesting_V1beta1_MsgClientProtocol {
       interceptors: self.interceptors?.makeCreateVestingAccountInterceptors() ?? []
     )
   }
+
+  /// CreatePeriodicVestingAccount defines a method that enables creating a
+  /// periodic vesting account.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to CreatePeriodicVestingAccount.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func createPeriodicVestingAccount(
+    _ request: Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccount,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccount, Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccountResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.vesting.v1beta1.Msg/CreatePeriodicVestingAccount",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeCreatePeriodicVestingAccountInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Cosmos_Vesting_V1beta1_MsgClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'createVestingAccount'.
   func makeCreateVestingAccountInterceptors() -> [ClientInterceptor<Cosmos_Vesting_V1beta1_MsgCreateVestingAccount, Cosmos_Vesting_V1beta1_MsgCreateVestingAccountResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'createPeriodicVestingAccount'.
+  func makeCreatePeriodicVestingAccountInterceptors() -> [ClientInterceptor<Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccount, Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccountResponse>]
 }
 
 internal final class Cosmos_Vesting_V1beta1_MsgClient: Cosmos_Vesting_V1beta1_MsgClientProtocol {
@@ -100,6 +127,10 @@ internal protocol Cosmos_Vesting_V1beta1_MsgProvider: CallHandlerProvider {
   /// CreateVestingAccount defines a method that enables creating a vesting
   /// account.
   func createVestingAccount(request: Cosmos_Vesting_V1beta1_MsgCreateVestingAccount, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Vesting_V1beta1_MsgCreateVestingAccountResponse>
+
+  /// CreatePeriodicVestingAccount defines a method that enables creating a
+  /// periodic vesting account.
+  func createPeriodicVestingAccount(request: Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccount, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccountResponse>
 }
 
 extension Cosmos_Vesting_V1beta1_MsgProvider {
@@ -121,6 +152,15 @@ extension Cosmos_Vesting_V1beta1_MsgProvider {
         userFunction: self.createVestingAccount(request:context:)
       )
 
+    case "CreatePeriodicVestingAccount":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccount>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccountResponse>(),
+        interceptors: self.interceptors?.makeCreatePeriodicVestingAccountInterceptors() ?? [],
+        userFunction: self.createPeriodicVestingAccount(request:context:)
+      )
+
     default:
       return nil
     }
@@ -132,4 +172,8 @@ internal protocol Cosmos_Vesting_V1beta1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'createVestingAccount'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeCreateVestingAccountInterceptors() -> [ServerInterceptor<Cosmos_Vesting_V1beta1_MsgCreateVestingAccount, Cosmos_Vesting_V1beta1_MsgCreateVestingAccountResponse>]
+
+  /// - Returns: Interceptors to use when handling 'createPeriodicVestingAccount'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeCreatePeriodicVestingAccountInterceptors() -> [ServerInterceptor<Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccount, Cosmos_Vesting_V1beta1_MsgCreatePeriodicVestingAccountResponse>]
 }

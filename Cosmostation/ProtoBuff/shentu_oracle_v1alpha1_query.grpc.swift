@@ -32,12 +32,12 @@ internal protocol Shentu_Oracle_V1alpha1_QueryClientProtocol: GRPCClient {
   var serviceName: String { get }
   var interceptors: Shentu_Oracle_V1alpha1_QueryClientInterceptorFactoryProtocol? { get }
 
-    func `operator`(
+  func oracleOperator(
     _ request: Shentu_Oracle_V1alpha1_QueryOperatorRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Shentu_Oracle_V1alpha1_QueryOperatorRequest, Shentu_Oracle_V1alpha1_QueryOperatorResponse>
 
-  func operators(
+  func oracleOperators(
     _ request: Shentu_Oracle_V1alpha1_QueryOperatorsRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Shentu_Oracle_V1alpha1_QueryOperatorsRequest, Shentu_Oracle_V1alpha1_QueryOperatorsResponse>
@@ -63,39 +63,39 @@ extension Shentu_Oracle_V1alpha1_QueryClientProtocol {
     return "shentu.oracle.v1alpha1.Query"
   }
 
-  /// Unary call to Operator
+  /// Unary call to OracleOperator
   ///
   /// - Parameters:
-  ///   - request: Request to send to Operator.
+  ///   - request: Request to send to OracleOperator.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-    internal func `operator`(
+  internal func oracleOperator(
     _ request: Shentu_Oracle_V1alpha1_QueryOperatorRequest,
     callOptions: CallOptions? = nil
   ) -> UnaryCall<Shentu_Oracle_V1alpha1_QueryOperatorRequest, Shentu_Oracle_V1alpha1_QueryOperatorResponse> {
     return self.makeUnaryCall(
-      path: "/shentu.oracle.v1alpha1.Query/Operator",
+      path: "/shentu.oracle.v1alpha1.Query/OracleOperator",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeOperatorInterceptors() ?? []
+      interceptors: self.interceptors?.makeOracleOperatorInterceptors() ?? []
     )
   }
 
-  /// Unary call to Operators
+  /// Unary call to OracleOperators
   ///
   /// - Parameters:
-  ///   - request: Request to send to Operators.
+  ///   - request: Request to send to OracleOperators.
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func operators(
+  internal func oracleOperators(
     _ request: Shentu_Oracle_V1alpha1_QueryOperatorsRequest,
     callOptions: CallOptions? = nil
   ) -> UnaryCall<Shentu_Oracle_V1alpha1_QueryOperatorsRequest, Shentu_Oracle_V1alpha1_QueryOperatorsResponse> {
     return self.makeUnaryCall(
-      path: "/shentu.oracle.v1alpha1.Query/Operators",
+      path: "/shentu.oracle.v1alpha1.Query/OracleOperators",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeOperatorsInterceptors() ?? []
+      interceptors: self.interceptors?.makeOracleOperatorsInterceptors() ?? []
     )
   }
 
@@ -156,11 +156,11 @@ extension Shentu_Oracle_V1alpha1_QueryClientProtocol {
 
 internal protocol Shentu_Oracle_V1alpha1_QueryClientInterceptorFactoryProtocol {
 
-  /// - Returns: Interceptors to use when invoking 'operator'.
-  func makeOperatorInterceptors() -> [ClientInterceptor<Shentu_Oracle_V1alpha1_QueryOperatorRequest, Shentu_Oracle_V1alpha1_QueryOperatorResponse>]
+  /// - Returns: Interceptors to use when invoking 'oracleOperator'.
+  func makeOracleOperatorInterceptors() -> [ClientInterceptor<Shentu_Oracle_V1alpha1_QueryOperatorRequest, Shentu_Oracle_V1alpha1_QueryOperatorResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'operators'.
-  func makeOperatorsInterceptors() -> [ClientInterceptor<Shentu_Oracle_V1alpha1_QueryOperatorsRequest, Shentu_Oracle_V1alpha1_QueryOperatorsResponse>]
+  /// - Returns: Interceptors to use when invoking 'oracleOperators'.
+  func makeOracleOperatorsInterceptors() -> [ClientInterceptor<Shentu_Oracle_V1alpha1_QueryOperatorsRequest, Shentu_Oracle_V1alpha1_QueryOperatorsResponse>]
 
   /// - Returns: Interceptors to use when invoking 'withdraws'.
   func makeWithdrawsInterceptors() -> [ClientInterceptor<Shentu_Oracle_V1alpha1_QueryWithdrawsRequest, Shentu_Oracle_V1alpha1_QueryWithdrawsResponse>]
@@ -200,9 +200,9 @@ internal final class Shentu_Oracle_V1alpha1_QueryClient: Shentu_Oracle_V1alpha1_
 internal protocol Shentu_Oracle_V1alpha1_QueryProvider: CallHandlerProvider {
   var interceptors: Shentu_Oracle_V1alpha1_QueryServerInterceptorFactoryProtocol? { get }
 
-    func `operator`(request: Shentu_Oracle_V1alpha1_QueryOperatorRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Shentu_Oracle_V1alpha1_QueryOperatorResponse>
+  func oracleOperator(request: Shentu_Oracle_V1alpha1_QueryOperatorRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Shentu_Oracle_V1alpha1_QueryOperatorResponse>
 
-  func operators(request: Shentu_Oracle_V1alpha1_QueryOperatorsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Shentu_Oracle_V1alpha1_QueryOperatorsResponse>
+  func oracleOperators(request: Shentu_Oracle_V1alpha1_QueryOperatorsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Shentu_Oracle_V1alpha1_QueryOperatorsResponse>
 
   func withdraws(request: Shentu_Oracle_V1alpha1_QueryWithdrawsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Shentu_Oracle_V1alpha1_QueryWithdrawsResponse>
 
@@ -221,22 +221,22 @@ extension Shentu_Oracle_V1alpha1_QueryProvider {
     context: CallHandlerContext
   ) -> GRPCServerHandlerProtocol? {
     switch name {
-    case "Operator":
+    case "OracleOperator":
       return UnaryServerHandler(
         context: context,
         requestDeserializer: ProtobufDeserializer<Shentu_Oracle_V1alpha1_QueryOperatorRequest>(),
         responseSerializer: ProtobufSerializer<Shentu_Oracle_V1alpha1_QueryOperatorResponse>(),
-        interceptors: self.interceptors?.makeOperatorInterceptors() ?? [],
-        userFunction: self.operator(request:context:)
+        interceptors: self.interceptors?.makeOracleOperatorInterceptors() ?? [],
+        userFunction: self.oracleOperator(request:context:)
       )
 
-    case "Operators":
+    case "OracleOperators":
       return UnaryServerHandler(
         context: context,
         requestDeserializer: ProtobufDeserializer<Shentu_Oracle_V1alpha1_QueryOperatorsRequest>(),
         responseSerializer: ProtobufSerializer<Shentu_Oracle_V1alpha1_QueryOperatorsResponse>(),
-        interceptors: self.interceptors?.makeOperatorsInterceptors() ?? [],
-        userFunction: self.operators(request:context:)
+        interceptors: self.interceptors?.makeOracleOperatorsInterceptors() ?? [],
+        userFunction: self.oracleOperators(request:context:)
       )
 
     case "Withdraws":
@@ -274,13 +274,13 @@ extension Shentu_Oracle_V1alpha1_QueryProvider {
 
 internal protocol Shentu_Oracle_V1alpha1_QueryServerInterceptorFactoryProtocol {
 
-  /// - Returns: Interceptors to use when handling 'operator'.
+  /// - Returns: Interceptors to use when handling 'oracleOperator'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeOperatorInterceptors() -> [ServerInterceptor<Shentu_Oracle_V1alpha1_QueryOperatorRequest, Shentu_Oracle_V1alpha1_QueryOperatorResponse>]
+  func makeOracleOperatorInterceptors() -> [ServerInterceptor<Shentu_Oracle_V1alpha1_QueryOperatorRequest, Shentu_Oracle_V1alpha1_QueryOperatorResponse>]
 
-  /// - Returns: Interceptors to use when handling 'operators'.
+  /// - Returns: Interceptors to use when handling 'oracleOperators'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeOperatorsInterceptors() -> [ServerInterceptor<Shentu_Oracle_V1alpha1_QueryOperatorsRequest, Shentu_Oracle_V1alpha1_QueryOperatorsResponse>]
+  func makeOracleOperatorsInterceptors() -> [ServerInterceptor<Shentu_Oracle_V1alpha1_QueryOperatorsRequest, Shentu_Oracle_V1alpha1_QueryOperatorsResponse>]
 
   /// - Returns: Interceptors to use when handling 'withdraws'.
   ///   Defaults to calling `self.makeInterceptors()`.

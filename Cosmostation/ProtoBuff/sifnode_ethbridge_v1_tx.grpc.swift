@@ -61,6 +61,11 @@ internal protocol Sifnode_Ethbridge_V1_MsgClientProtocol: GRPCClient {
     _ request: Sifnode_Ethbridge_V1_MsgRescueCeth,
     callOptions: CallOptions?
   ) -> UnaryCall<Sifnode_Ethbridge_V1_MsgRescueCeth, Sifnode_Ethbridge_V1_MsgRescueCethResponse>
+
+  func setBlacklist(
+    _ request: Sifnode_Ethbridge_V1_MsgSetBlacklist,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Ethbridge_V1_MsgSetBlacklist, Sifnode_Ethbridge_V1_MsgSetBlacklistResponse>
 }
 
 extension Sifnode_Ethbridge_V1_MsgClientProtocol {
@@ -175,6 +180,24 @@ extension Sifnode_Ethbridge_V1_MsgClientProtocol {
       interceptors: self.interceptors?.makeRescueCethInterceptors() ?? []
     )
   }
+
+  /// Unary call to SetBlacklist
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to SetBlacklist.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func setBlacklist(
+    _ request: Sifnode_Ethbridge_V1_MsgSetBlacklist,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Ethbridge_V1_MsgSetBlacklist, Sifnode_Ethbridge_V1_MsgSetBlacklistResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.ethbridge.v1.Msg/SetBlacklist",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSetBlacklistInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Sifnode_Ethbridge_V1_MsgClientInterceptorFactoryProtocol {
@@ -196,6 +219,9 @@ internal protocol Sifnode_Ethbridge_V1_MsgClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'rescueCeth'.
   func makeRescueCethInterceptors() -> [ClientInterceptor<Sifnode_Ethbridge_V1_MsgRescueCeth, Sifnode_Ethbridge_V1_MsgRescueCethResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'setBlacklist'.
+  func makeSetBlacklistInterceptors() -> [ClientInterceptor<Sifnode_Ethbridge_V1_MsgSetBlacklist, Sifnode_Ethbridge_V1_MsgSetBlacklistResponse>]
 }
 
 internal final class Sifnode_Ethbridge_V1_MsgClient: Sifnode_Ethbridge_V1_MsgClientProtocol {
@@ -237,6 +263,8 @@ internal protocol Sifnode_Ethbridge_V1_MsgProvider: CallHandlerProvider {
   func updateCethReceiverAccount(request: Sifnode_Ethbridge_V1_MsgUpdateCethReceiverAccount, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Ethbridge_V1_MsgUpdateCethReceiverAccountResponse>
 
   func rescueCeth(request: Sifnode_Ethbridge_V1_MsgRescueCeth, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Ethbridge_V1_MsgRescueCethResponse>
+
+  func setBlacklist(request: Sifnode_Ethbridge_V1_MsgSetBlacklist, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Ethbridge_V1_MsgSetBlacklistResponse>
 }
 
 extension Sifnode_Ethbridge_V1_MsgProvider {
@@ -303,6 +331,15 @@ extension Sifnode_Ethbridge_V1_MsgProvider {
         userFunction: self.rescueCeth(request:context:)
       )
 
+    case "SetBlacklist":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Ethbridge_V1_MsgSetBlacklist>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Ethbridge_V1_MsgSetBlacklistResponse>(),
+        interceptors: self.interceptors?.makeSetBlacklistInterceptors() ?? [],
+        userFunction: self.setBlacklist(request:context:)
+      )
+
     default:
       return nil
     }
@@ -334,4 +371,8 @@ internal protocol Sifnode_Ethbridge_V1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'rescueCeth'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeRescueCethInterceptors() -> [ServerInterceptor<Sifnode_Ethbridge_V1_MsgRescueCeth, Sifnode_Ethbridge_V1_MsgRescueCethResponse>]
+
+  /// - Returns: Interceptors to use when handling 'setBlacklist'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeSetBlacklistInterceptors() -> [ServerInterceptor<Sifnode_Ethbridge_V1_MsgSetBlacklist, Sifnode_Ethbridge_V1_MsgSetBlacklistResponse>]
 }

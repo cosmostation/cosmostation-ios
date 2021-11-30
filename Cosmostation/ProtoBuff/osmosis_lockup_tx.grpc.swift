@@ -42,20 +42,10 @@ internal protocol Osmosis_Lockup_MsgClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Osmosis_Lockup_MsgBeginUnlockingAll, Osmosis_Lockup_MsgBeginUnlockingAllResponse>
 
-  func unlockTokens(
-    _ request: Osmosis_Lockup_MsgUnlockTokens,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Osmosis_Lockup_MsgUnlockTokens, Osmosis_Lockup_MsgUnlockTokensResponse>
-
   func beginUnlocking(
     _ request: Osmosis_Lockup_MsgBeginUnlocking,
     callOptions: CallOptions?
   ) -> UnaryCall<Osmosis_Lockup_MsgBeginUnlocking, Osmosis_Lockup_MsgBeginUnlockingResponse>
-
-  func unlockPeriodLock(
-    _ request: Osmosis_Lockup_MsgUnlockPeriodLock,
-    callOptions: CallOptions?
-  ) -> UnaryCall<Osmosis_Lockup_MsgUnlockPeriodLock, Osmosis_Lockup_MsgUnlockPeriodLockResponse>
 }
 
 extension Osmosis_Lockup_MsgClientProtocol {
@@ -99,24 +89,6 @@ extension Osmosis_Lockup_MsgClientProtocol {
     )
   }
 
-  /// UnlockTokens unlock all unlockable tokens
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to UnlockTokens.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func unlockTokens(
-    _ request: Osmosis_Lockup_MsgUnlockTokens,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Osmosis_Lockup_MsgUnlockTokens, Osmosis_Lockup_MsgUnlockTokensResponse> {
-    return self.makeUnaryCall(
-      path: "/osmosis.lockup.Msg/UnlockTokens",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeUnlockTokensInterceptors() ?? []
-    )
-  }
-
   /// MsgBeginUnlocking begins unlocking tokens by lock ID
   ///
   /// - Parameters:
@@ -134,24 +106,6 @@ extension Osmosis_Lockup_MsgClientProtocol {
       interceptors: self.interceptors?.makeBeginUnlockingInterceptors() ?? []
     )
   }
-
-  /// UnlockPeriodLock unlock individual period lock by ID
-  ///
-  /// - Parameters:
-  ///   - request: Request to send to UnlockPeriodLock.
-  ///   - callOptions: Call options.
-  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
-  internal func unlockPeriodLock(
-    _ request: Osmosis_Lockup_MsgUnlockPeriodLock,
-    callOptions: CallOptions? = nil
-  ) -> UnaryCall<Osmosis_Lockup_MsgUnlockPeriodLock, Osmosis_Lockup_MsgUnlockPeriodLockResponse> {
-    return self.makeUnaryCall(
-      path: "/osmosis.lockup.Msg/UnlockPeriodLock",
-      request: request,
-      callOptions: callOptions ?? self.defaultCallOptions,
-      interceptors: self.interceptors?.makeUnlockPeriodLockInterceptors() ?? []
-    )
-  }
 }
 
 internal protocol Osmosis_Lockup_MsgClientInterceptorFactoryProtocol {
@@ -162,14 +116,8 @@ internal protocol Osmosis_Lockup_MsgClientInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when invoking 'beginUnlockingAll'.
   func makeBeginUnlockingAllInterceptors() -> [ClientInterceptor<Osmosis_Lockup_MsgBeginUnlockingAll, Osmosis_Lockup_MsgBeginUnlockingAllResponse>]
 
-  /// - Returns: Interceptors to use when invoking 'unlockTokens'.
-  func makeUnlockTokensInterceptors() -> [ClientInterceptor<Osmosis_Lockup_MsgUnlockTokens, Osmosis_Lockup_MsgUnlockTokensResponse>]
-
   /// - Returns: Interceptors to use when invoking 'beginUnlocking'.
   func makeBeginUnlockingInterceptors() -> [ClientInterceptor<Osmosis_Lockup_MsgBeginUnlocking, Osmosis_Lockup_MsgBeginUnlockingResponse>]
-
-  /// - Returns: Interceptors to use when invoking 'unlockPeriodLock'.
-  func makeUnlockPeriodLockInterceptors() -> [ClientInterceptor<Osmosis_Lockup_MsgUnlockPeriodLock, Osmosis_Lockup_MsgUnlockPeriodLockResponse>]
 }
 
 internal final class Osmosis_Lockup_MsgClient: Osmosis_Lockup_MsgClientProtocol {
@@ -206,14 +154,8 @@ internal protocol Osmosis_Lockup_MsgProvider: CallHandlerProvider {
   /// BeginUnlockingAll begin unlocking all tokens
   func beginUnlockingAll(request: Osmosis_Lockup_MsgBeginUnlockingAll, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_MsgBeginUnlockingAllResponse>
 
-  /// UnlockTokens unlock all unlockable tokens
-  func unlockTokens(request: Osmosis_Lockup_MsgUnlockTokens, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_MsgUnlockTokensResponse>
-
   /// MsgBeginUnlocking begins unlocking tokens by lock ID
   func beginUnlocking(request: Osmosis_Lockup_MsgBeginUnlocking, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_MsgBeginUnlockingResponse>
-
-  /// UnlockPeriodLock unlock individual period lock by ID
-  func unlockPeriodLock(request: Osmosis_Lockup_MsgUnlockPeriodLock, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_MsgUnlockPeriodLockResponse>
 }
 
 extension Osmosis_Lockup_MsgProvider {
@@ -244,15 +186,6 @@ extension Osmosis_Lockup_MsgProvider {
         userFunction: self.beginUnlockingAll(request:context:)
       )
 
-    case "UnlockTokens":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Osmosis_Lockup_MsgUnlockTokens>(),
-        responseSerializer: ProtobufSerializer<Osmosis_Lockup_MsgUnlockTokensResponse>(),
-        interceptors: self.interceptors?.makeUnlockTokensInterceptors() ?? [],
-        userFunction: self.unlockTokens(request:context:)
-      )
-
     case "BeginUnlocking":
       return UnaryServerHandler(
         context: context,
@@ -260,15 +193,6 @@ extension Osmosis_Lockup_MsgProvider {
         responseSerializer: ProtobufSerializer<Osmosis_Lockup_MsgBeginUnlockingResponse>(),
         interceptors: self.interceptors?.makeBeginUnlockingInterceptors() ?? [],
         userFunction: self.beginUnlocking(request:context:)
-      )
-
-    case "UnlockPeriodLock":
-      return UnaryServerHandler(
-        context: context,
-        requestDeserializer: ProtobufDeserializer<Osmosis_Lockup_MsgUnlockPeriodLock>(),
-        responseSerializer: ProtobufSerializer<Osmosis_Lockup_MsgUnlockPeriodLockResponse>(),
-        interceptors: self.interceptors?.makeUnlockPeriodLockInterceptors() ?? [],
-        userFunction: self.unlockPeriodLock(request:context:)
       )
 
     default:
@@ -287,15 +211,7 @@ internal protocol Osmosis_Lockup_MsgServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeBeginUnlockingAllInterceptors() -> [ServerInterceptor<Osmosis_Lockup_MsgBeginUnlockingAll, Osmosis_Lockup_MsgBeginUnlockingAllResponse>]
 
-  /// - Returns: Interceptors to use when handling 'unlockTokens'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeUnlockTokensInterceptors() -> [ServerInterceptor<Osmosis_Lockup_MsgUnlockTokens, Osmosis_Lockup_MsgUnlockTokensResponse>]
-
   /// - Returns: Interceptors to use when handling 'beginUnlocking'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeBeginUnlockingInterceptors() -> [ServerInterceptor<Osmosis_Lockup_MsgBeginUnlocking, Osmosis_Lockup_MsgBeginUnlockingResponse>]
-
-  /// - Returns: Interceptors to use when handling 'unlockPeriodLock'.
-  ///   Defaults to calling `self.makeInterceptors()`.
-  func makeUnlockPeriodLockInterceptors() -> [ServerInterceptor<Osmosis_Lockup_MsgUnlockPeriodLock, Osmosis_Lockup_MsgUnlockPeriodLockResponse>]
 }

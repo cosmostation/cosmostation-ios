@@ -36,6 +36,11 @@ internal protocol Sifnode_Ethbridge_V1_QueryClientProtocol: GRPCClient {
     _ request: Sifnode_Ethbridge_V1_QueryEthProphecyRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Sifnode_Ethbridge_V1_QueryEthProphecyRequest, Sifnode_Ethbridge_V1_QueryEthProphecyResponse>
+
+  func getBlacklist(
+    _ request: Sifnode_Ethbridge_V1_QueryBlacklistRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Ethbridge_V1_QueryBlacklistRequest, Sifnode_Ethbridge_V1_QueryBlacklistResponse>
 }
 
 extension Sifnode_Ethbridge_V1_QueryClientProtocol {
@@ -60,12 +65,33 @@ extension Sifnode_Ethbridge_V1_QueryClientProtocol {
       interceptors: self.interceptors?.makeEthProphecyInterceptors() ?? []
     )
   }
+
+  /// Unary call to GetBlacklist
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetBlacklist.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getBlacklist(
+    _ request: Sifnode_Ethbridge_V1_QueryBlacklistRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Ethbridge_V1_QueryBlacklistRequest, Sifnode_Ethbridge_V1_QueryBlacklistResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.ethbridge.v1.Query/GetBlacklist",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetBlacklistInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Sifnode_Ethbridge_V1_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'ethProphecy'.
   func makeEthProphecyInterceptors() -> [ClientInterceptor<Sifnode_Ethbridge_V1_QueryEthProphecyRequest, Sifnode_Ethbridge_V1_QueryEthProphecyResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'getBlacklist'.
+  func makeGetBlacklistInterceptors() -> [ClientInterceptor<Sifnode_Ethbridge_V1_QueryBlacklistRequest, Sifnode_Ethbridge_V1_QueryBlacklistResponse>]
 }
 
 internal final class Sifnode_Ethbridge_V1_QueryClient: Sifnode_Ethbridge_V1_QueryClientProtocol {
@@ -98,6 +124,8 @@ internal protocol Sifnode_Ethbridge_V1_QueryProvider: CallHandlerProvider {
 
   /// EthProphecy queries an EthProphecy
   func ethProphecy(request: Sifnode_Ethbridge_V1_QueryEthProphecyRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Ethbridge_V1_QueryEthProphecyResponse>
+
+  func getBlacklist(request: Sifnode_Ethbridge_V1_QueryBlacklistRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Ethbridge_V1_QueryBlacklistResponse>
 }
 
 extension Sifnode_Ethbridge_V1_QueryProvider {
@@ -119,6 +147,15 @@ extension Sifnode_Ethbridge_V1_QueryProvider {
         userFunction: self.ethProphecy(request:context:)
       )
 
+    case "GetBlacklist":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Ethbridge_V1_QueryBlacklistRequest>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Ethbridge_V1_QueryBlacklistResponse>(),
+        interceptors: self.interceptors?.makeGetBlacklistInterceptors() ?? [],
+        userFunction: self.getBlacklist(request:context:)
+      )
+
     default:
       return nil
     }
@@ -130,4 +167,8 @@ internal protocol Sifnode_Ethbridge_V1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'ethProphecy'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeEthProphecyInterceptors() -> [ServerInterceptor<Sifnode_Ethbridge_V1_QueryEthProphecyRequest, Sifnode_Ethbridge_V1_QueryEthProphecyResponse>]
+
+  /// - Returns: Interceptors to use when handling 'getBlacklist'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetBlacklistInterceptors() -> [ServerInterceptor<Sifnode_Ethbridge_V1_QueryBlacklistRequest, Sifnode_Ethbridge_V1_QueryBlacklistResponse>]
 }

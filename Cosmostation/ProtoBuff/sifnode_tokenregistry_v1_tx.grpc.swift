@@ -39,6 +39,11 @@ internal protocol Sifnode_Tokenregistry_V1_MsgClientProtocol: GRPCClient {
     _ request: Sifnode_Tokenregistry_V1_MsgDeregister,
     callOptions: CallOptions?
   ) -> UnaryCall<Sifnode_Tokenregistry_V1_MsgDeregister, Sifnode_Tokenregistry_V1_MsgDeregisterResponse>
+
+  func setRegistry(
+    _ request: Sifnode_Tokenregistry_V1_MsgSetRegistry,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Tokenregistry_V1_MsgSetRegistry, Sifnode_Tokenregistry_V1_MsgSetRegistryResponse>
 }
 
 extension Sifnode_Tokenregistry_V1_MsgClientProtocol {
@@ -81,6 +86,24 @@ extension Sifnode_Tokenregistry_V1_MsgClientProtocol {
       interceptors: self.interceptors?.makeDeregisterInterceptors() ?? []
     )
   }
+
+  /// Unary call to SetRegistry
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to SetRegistry.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func setRegistry(
+    _ request: Sifnode_Tokenregistry_V1_MsgSetRegistry,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Tokenregistry_V1_MsgSetRegistry, Sifnode_Tokenregistry_V1_MsgSetRegistryResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.tokenregistry.v1.Msg/SetRegistry",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSetRegistryInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Sifnode_Tokenregistry_V1_MsgClientInterceptorFactoryProtocol {
@@ -90,6 +113,9 @@ internal protocol Sifnode_Tokenregistry_V1_MsgClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'deregister'.
   func makeDeregisterInterceptors() -> [ClientInterceptor<Sifnode_Tokenregistry_V1_MsgDeregister, Sifnode_Tokenregistry_V1_MsgDeregisterResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'setRegistry'.
+  func makeSetRegistryInterceptors() -> [ClientInterceptor<Sifnode_Tokenregistry_V1_MsgSetRegistry, Sifnode_Tokenregistry_V1_MsgSetRegistryResponse>]
 }
 
 internal final class Sifnode_Tokenregistry_V1_MsgClient: Sifnode_Tokenregistry_V1_MsgClientProtocol {
@@ -121,6 +147,8 @@ internal protocol Sifnode_Tokenregistry_V1_MsgProvider: CallHandlerProvider {
   func register(request: Sifnode_Tokenregistry_V1_MsgRegister, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Tokenregistry_V1_MsgRegisterResponse>
 
   func deregister(request: Sifnode_Tokenregistry_V1_MsgDeregister, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Tokenregistry_V1_MsgDeregisterResponse>
+
+  func setRegistry(request: Sifnode_Tokenregistry_V1_MsgSetRegistry, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Tokenregistry_V1_MsgSetRegistryResponse>
 }
 
 extension Sifnode_Tokenregistry_V1_MsgProvider {
@@ -151,6 +179,15 @@ extension Sifnode_Tokenregistry_V1_MsgProvider {
         userFunction: self.deregister(request:context:)
       )
 
+    case "SetRegistry":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Tokenregistry_V1_MsgSetRegistry>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Tokenregistry_V1_MsgSetRegistryResponse>(),
+        interceptors: self.interceptors?.makeSetRegistryInterceptors() ?? [],
+        userFunction: self.setRegistry(request:context:)
+      )
+
     default:
       return nil
     }
@@ -166,4 +203,8 @@ internal protocol Sifnode_Tokenregistry_V1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'deregister'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeDeregisterInterceptors() -> [ServerInterceptor<Sifnode_Tokenregistry_V1_MsgDeregister, Sifnode_Tokenregistry_V1_MsgDeregisterResponse>]
+
+  /// - Returns: Interceptors to use when handling 'setRegistry'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeSetRegistryInterceptors() -> [ServerInterceptor<Sifnode_Tokenregistry_V1_MsgSetRegistry, Sifnode_Tokenregistry_V1_MsgSetRegistryResponse>]
 }

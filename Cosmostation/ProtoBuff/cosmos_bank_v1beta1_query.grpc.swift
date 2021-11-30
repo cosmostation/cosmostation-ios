@@ -66,6 +66,11 @@ internal protocol Cosmos_Bank_V1beta1_QueryClientProtocol: GRPCClient {
     _ request: Cosmos_Bank_V1beta1_QueryDenomsMetadataRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Bank_V1beta1_QueryDenomsMetadataRequest, Cosmos_Bank_V1beta1_QueryDenomsMetadataResponse>
+
+  func denomOwners(
+    _ request: Cosmos_Bank_V1beta1_QueryDenomOwnersRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Bank_V1beta1_QueryDenomOwnersRequest, Cosmos_Bank_V1beta1_QueryDenomOwnersResponse>
 }
 
 extension Cosmos_Bank_V1beta1_QueryClientProtocol {
@@ -181,7 +186,8 @@ extension Cosmos_Bank_V1beta1_QueryClientProtocol {
     )
   }
 
-  /// DenomsMetadata queries the client metadata for all registered coin denominations.
+  /// DenomsMetadata queries the client metadata for all registered coin
+  /// denominations.
   ///
   /// - Parameters:
   ///   - request: Request to send to DenomsMetadata.
@@ -196,6 +202,25 @@ extension Cosmos_Bank_V1beta1_QueryClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeDenomsMetadataInterceptors() ?? []
+    )
+  }
+
+  /// DenomOwners queries for all account addresses that own a particular token
+  /// denomination.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to DenomOwners.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func denomOwners(
+    _ request: Cosmos_Bank_V1beta1_QueryDenomOwnersRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Bank_V1beta1_QueryDenomOwnersRequest, Cosmos_Bank_V1beta1_QueryDenomOwnersResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.bank.v1beta1.Query/DenomOwners",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeDenomOwnersInterceptors() ?? []
     )
   }
 }
@@ -222,6 +247,9 @@ internal protocol Cosmos_Bank_V1beta1_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'denomsMetadata'.
   func makeDenomsMetadataInterceptors() -> [ClientInterceptor<Cosmos_Bank_V1beta1_QueryDenomsMetadataRequest, Cosmos_Bank_V1beta1_QueryDenomsMetadataResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'denomOwners'.
+  func makeDenomOwnersInterceptors() -> [ClientInterceptor<Cosmos_Bank_V1beta1_QueryDenomOwnersRequest, Cosmos_Bank_V1beta1_QueryDenomOwnersResponse>]
 }
 
 internal final class Cosmos_Bank_V1beta1_QueryClient: Cosmos_Bank_V1beta1_QueryClientProtocol {
@@ -270,8 +298,13 @@ internal protocol Cosmos_Bank_V1beta1_QueryProvider: CallHandlerProvider {
   /// DenomsMetadata queries the client metadata of a given coin denomination.
   func denomMetadata(request: Cosmos_Bank_V1beta1_QueryDenomMetadataRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Bank_V1beta1_QueryDenomMetadataResponse>
 
-  /// DenomsMetadata queries the client metadata for all registered coin denominations.
+  /// DenomsMetadata queries the client metadata for all registered coin
+  /// denominations.
   func denomsMetadata(request: Cosmos_Bank_V1beta1_QueryDenomsMetadataRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Bank_V1beta1_QueryDenomsMetadataResponse>
+
+  /// DenomOwners queries for all account addresses that own a particular token
+  /// denomination.
+  func denomOwners(request: Cosmos_Bank_V1beta1_QueryDenomOwnersRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Bank_V1beta1_QueryDenomOwnersResponse>
 }
 
 extension Cosmos_Bank_V1beta1_QueryProvider {
@@ -347,6 +380,15 @@ extension Cosmos_Bank_V1beta1_QueryProvider {
         userFunction: self.denomsMetadata(request:context:)
       )
 
+    case "DenomOwners":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Bank_V1beta1_QueryDenomOwnersRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Bank_V1beta1_QueryDenomOwnersResponse>(),
+        interceptors: self.interceptors?.makeDenomOwnersInterceptors() ?? [],
+        userFunction: self.denomOwners(request:context:)
+      )
+
     default:
       return nil
     }
@@ -382,4 +424,8 @@ internal protocol Cosmos_Bank_V1beta1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'denomsMetadata'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeDenomsMetadataInterceptors() -> [ServerInterceptor<Cosmos_Bank_V1beta1_QueryDenomsMetadataRequest, Cosmos_Bank_V1beta1_QueryDenomsMetadataResponse>]
+
+  /// - Returns: Interceptors to use when handling 'denomOwners'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeDenomOwnersInterceptors() -> [ServerInterceptor<Cosmos_Bank_V1beta1_QueryDenomOwnersRequest, Cosmos_Bank_V1beta1_QueryDenomOwnersResponse>]
 }

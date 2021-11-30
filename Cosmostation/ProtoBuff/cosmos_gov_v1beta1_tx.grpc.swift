@@ -42,6 +42,11 @@ internal protocol Cosmos_Gov_V1beta1_MsgClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Gov_V1beta1_MsgVote, Cosmos_Gov_V1beta1_MsgVoteResponse>
 
+  func voteWeighted(
+    _ request: Cosmos_Gov_V1beta1_MsgVoteWeighted,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Gov_V1beta1_MsgVoteWeighted, Cosmos_Gov_V1beta1_MsgVoteWeightedResponse>
+
   func deposit(
     _ request: Cosmos_Gov_V1beta1_MsgDeposit,
     callOptions: CallOptions?
@@ -89,6 +94,26 @@ extension Cosmos_Gov_V1beta1_MsgClientProtocol {
     )
   }
 
+  /// VoteWeighted defines a method to add a weighted vote on a specific proposal.
+  ///
+  /// Since: cosmos-sdk 0.43
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to VoteWeighted.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func voteWeighted(
+    _ request: Cosmos_Gov_V1beta1_MsgVoteWeighted,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Gov_V1beta1_MsgVoteWeighted, Cosmos_Gov_V1beta1_MsgVoteWeightedResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.gov.v1beta1.Msg/VoteWeighted",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeVoteWeightedInterceptors() ?? []
+    )
+  }
+
   /// Deposit defines a method to add deposit on a specific proposal.
   ///
   /// - Parameters:
@@ -115,6 +140,9 @@ internal protocol Cosmos_Gov_V1beta1_MsgClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'vote'.
   func makeVoteInterceptors() -> [ClientInterceptor<Cosmos_Gov_V1beta1_MsgVote, Cosmos_Gov_V1beta1_MsgVoteResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'voteWeighted'.
+  func makeVoteWeightedInterceptors() -> [ClientInterceptor<Cosmos_Gov_V1beta1_MsgVoteWeighted, Cosmos_Gov_V1beta1_MsgVoteWeightedResponse>]
 
   /// - Returns: Interceptors to use when invoking 'deposit'.
   func makeDepositInterceptors() -> [ClientInterceptor<Cosmos_Gov_V1beta1_MsgDeposit, Cosmos_Gov_V1beta1_MsgDepositResponse>]
@@ -154,6 +182,11 @@ internal protocol Cosmos_Gov_V1beta1_MsgProvider: CallHandlerProvider {
   /// Vote defines a method to add a vote on a specific proposal.
   func vote(request: Cosmos_Gov_V1beta1_MsgVote, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Gov_V1beta1_MsgVoteResponse>
 
+  /// VoteWeighted defines a method to add a weighted vote on a specific proposal.
+  ///
+  /// Since: cosmos-sdk 0.43
+  func voteWeighted(request: Cosmos_Gov_V1beta1_MsgVoteWeighted, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Gov_V1beta1_MsgVoteWeightedResponse>
+
   /// Deposit defines a method to add deposit on a specific proposal.
   func deposit(request: Cosmos_Gov_V1beta1_MsgDeposit, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Gov_V1beta1_MsgDepositResponse>
 }
@@ -186,6 +219,15 @@ extension Cosmos_Gov_V1beta1_MsgProvider {
         userFunction: self.vote(request:context:)
       )
 
+    case "VoteWeighted":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Gov_V1beta1_MsgVoteWeighted>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Gov_V1beta1_MsgVoteWeightedResponse>(),
+        interceptors: self.interceptors?.makeVoteWeightedInterceptors() ?? [],
+        userFunction: self.voteWeighted(request:context:)
+      )
+
     case "Deposit":
       return UnaryServerHandler(
         context: context,
@@ -210,6 +252,10 @@ internal protocol Cosmos_Gov_V1beta1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'vote'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeVoteInterceptors() -> [ServerInterceptor<Cosmos_Gov_V1beta1_MsgVote, Cosmos_Gov_V1beta1_MsgVoteResponse>]
+
+  /// - Returns: Interceptors to use when handling 'voteWeighted'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeVoteWeightedInterceptors() -> [ServerInterceptor<Cosmos_Gov_V1beta1_MsgVoteWeighted, Cosmos_Gov_V1beta1_MsgVoteWeightedResponse>]
 
   /// - Returns: Interceptors to use when handling 'deposit'.
   ///   Defaults to calling `self.makeInterceptors()`.

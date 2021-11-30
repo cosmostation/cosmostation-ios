@@ -32,6 +32,11 @@ internal protocol Cosmos_Auth_V1beta1_QueryClientProtocol: GRPCClient {
   var serviceName: String { get }
   var interceptors: Cosmos_Auth_V1beta1_QueryClientInterceptorFactoryProtocol? { get }
 
+  func accounts(
+    _ request: Cosmos_Auth_V1beta1_QueryAccountsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_QueryAccountsRequest, Cosmos_Auth_V1beta1_QueryAccountsResponse>
+
   func account(
     _ request: Cosmos_Auth_V1beta1_QueryAccountRequest,
     callOptions: CallOptions?
@@ -41,11 +46,51 @@ internal protocol Cosmos_Auth_V1beta1_QueryClientProtocol: GRPCClient {
     _ request: Cosmos_Auth_V1beta1_QueryParamsRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Cosmos_Auth_V1beta1_QueryParamsRequest, Cosmos_Auth_V1beta1_QueryParamsResponse>
+
+  func moduleAccounts(
+    _ request: Cosmos_Auth_V1beta1_QueryModuleAccountsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_QueryModuleAccountsRequest, Cosmos_Auth_V1beta1_QueryModuleAccountsResponse>
+
+  func bech32Prefix(
+    _ request: Cosmos_Auth_V1beta1_Bech32PrefixRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_Bech32PrefixRequest, Cosmos_Auth_V1beta1_Bech32PrefixResponse>
+
+  func addressBytesToString(
+    _ request: Cosmos_Auth_V1beta1_AddressBytesToStringRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_AddressBytesToStringRequest, Cosmos_Auth_V1beta1_AddressBytesToStringResponse>
+
+  func addressStringToBytes(
+    _ request: Cosmos_Auth_V1beta1_AddressStringToBytesRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_AddressStringToBytesRequest, Cosmos_Auth_V1beta1_AddressStringToBytesResponse>
 }
 
 extension Cosmos_Auth_V1beta1_QueryClientProtocol {
   internal var serviceName: String {
     return "cosmos.auth.v1beta1.Query"
+  }
+
+  /// Accounts returns all the existing accounts
+  ///
+  /// Since: cosmos-sdk 0.43
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Accounts.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func accounts(
+    _ request: Cosmos_Auth_V1beta1_QueryAccountsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_QueryAccountsRequest, Cosmos_Auth_V1beta1_QueryAccountsResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.auth.v1beta1.Query/Accounts",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAccountsInterceptors() ?? []
+    )
   }
 
   /// Account returns account details based on address.
@@ -83,15 +128,102 @@ extension Cosmos_Auth_V1beta1_QueryClientProtocol {
       interceptors: self.interceptors?.makeParamsInterceptors() ?? []
     )
   }
+
+  /// ModuleAccounts returns all the existing module accounts.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ModuleAccounts.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func moduleAccounts(
+    _ request: Cosmos_Auth_V1beta1_QueryModuleAccountsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_QueryModuleAccountsRequest, Cosmos_Auth_V1beta1_QueryModuleAccountsResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.auth.v1beta1.Query/ModuleAccounts",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeModuleAccountsInterceptors() ?? []
+    )
+  }
+
+  /// Bech32 queries bech32Prefix
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to Bech32Prefix.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func bech32Prefix(
+    _ request: Cosmos_Auth_V1beta1_Bech32PrefixRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_Bech32PrefixRequest, Cosmos_Auth_V1beta1_Bech32PrefixResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.auth.v1beta1.Query/Bech32Prefix",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeBech32PrefixInterceptors() ?? []
+    )
+  }
+
+  /// AddressBytesToString converts Account Address bytes to string
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to AddressBytesToString.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func addressBytesToString(
+    _ request: Cosmos_Auth_V1beta1_AddressBytesToStringRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_AddressBytesToStringRequest, Cosmos_Auth_V1beta1_AddressBytesToStringResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.auth.v1beta1.Query/AddressBytesToString",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddressBytesToStringInterceptors() ?? []
+    )
+  }
+
+  /// AddressStringToBytes converts Address string to bytes
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to AddressStringToBytes.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func addressStringToBytes(
+    _ request: Cosmos_Auth_V1beta1_AddressStringToBytesRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Cosmos_Auth_V1beta1_AddressStringToBytesRequest, Cosmos_Auth_V1beta1_AddressStringToBytesResponse> {
+    return self.makeUnaryCall(
+      path: "/cosmos.auth.v1beta1.Query/AddressStringToBytes",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddressStringToBytesInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Cosmos_Auth_V1beta1_QueryClientInterceptorFactoryProtocol {
+
+  /// - Returns: Interceptors to use when invoking 'accounts'.
+  func makeAccountsInterceptors() -> [ClientInterceptor<Cosmos_Auth_V1beta1_QueryAccountsRequest, Cosmos_Auth_V1beta1_QueryAccountsResponse>]
 
   /// - Returns: Interceptors to use when invoking 'account'.
   func makeAccountInterceptors() -> [ClientInterceptor<Cosmos_Auth_V1beta1_QueryAccountRequest, Cosmos_Auth_V1beta1_QueryAccountResponse>]
 
   /// - Returns: Interceptors to use when invoking 'params'.
   func makeParamsInterceptors() -> [ClientInterceptor<Cosmos_Auth_V1beta1_QueryParamsRequest, Cosmos_Auth_V1beta1_QueryParamsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'moduleAccounts'.
+  func makeModuleAccountsInterceptors() -> [ClientInterceptor<Cosmos_Auth_V1beta1_QueryModuleAccountsRequest, Cosmos_Auth_V1beta1_QueryModuleAccountsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'bech32Prefix'.
+  func makeBech32PrefixInterceptors() -> [ClientInterceptor<Cosmos_Auth_V1beta1_Bech32PrefixRequest, Cosmos_Auth_V1beta1_Bech32PrefixResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'addressBytesToString'.
+  func makeAddressBytesToStringInterceptors() -> [ClientInterceptor<Cosmos_Auth_V1beta1_AddressBytesToStringRequest, Cosmos_Auth_V1beta1_AddressBytesToStringResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'addressStringToBytes'.
+  func makeAddressStringToBytesInterceptors() -> [ClientInterceptor<Cosmos_Auth_V1beta1_AddressStringToBytesRequest, Cosmos_Auth_V1beta1_AddressStringToBytesResponse>]
 }
 
 internal final class Cosmos_Auth_V1beta1_QueryClient: Cosmos_Auth_V1beta1_QueryClientProtocol {
@@ -122,11 +254,28 @@ internal final class Cosmos_Auth_V1beta1_QueryClient: Cosmos_Auth_V1beta1_QueryC
 internal protocol Cosmos_Auth_V1beta1_QueryProvider: CallHandlerProvider {
   var interceptors: Cosmos_Auth_V1beta1_QueryServerInterceptorFactoryProtocol? { get }
 
+  /// Accounts returns all the existing accounts
+  ///
+  /// Since: cosmos-sdk 0.43
+  func accounts(request: Cosmos_Auth_V1beta1_QueryAccountsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Auth_V1beta1_QueryAccountsResponse>
+
   /// Account returns account details based on address.
   func account(request: Cosmos_Auth_V1beta1_QueryAccountRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Auth_V1beta1_QueryAccountResponse>
 
   /// Params queries all parameters.
   func params(request: Cosmos_Auth_V1beta1_QueryParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Auth_V1beta1_QueryParamsResponse>
+
+  /// ModuleAccounts returns all the existing module accounts.
+  func moduleAccounts(request: Cosmos_Auth_V1beta1_QueryModuleAccountsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Auth_V1beta1_QueryModuleAccountsResponse>
+
+  /// Bech32 queries bech32Prefix
+  func bech32Prefix(request: Cosmos_Auth_V1beta1_Bech32PrefixRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Auth_V1beta1_Bech32PrefixResponse>
+
+  /// AddressBytesToString converts Account Address bytes to string
+  func addressBytesToString(request: Cosmos_Auth_V1beta1_AddressBytesToStringRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Auth_V1beta1_AddressBytesToStringResponse>
+
+  /// AddressStringToBytes converts Address string to bytes
+  func addressStringToBytes(request: Cosmos_Auth_V1beta1_AddressStringToBytesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Cosmos_Auth_V1beta1_AddressStringToBytesResponse>
 }
 
 extension Cosmos_Auth_V1beta1_QueryProvider {
@@ -139,6 +288,15 @@ extension Cosmos_Auth_V1beta1_QueryProvider {
     context: CallHandlerContext
   ) -> GRPCServerHandlerProtocol? {
     switch name {
+    case "Accounts":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Auth_V1beta1_QueryAccountsRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Auth_V1beta1_QueryAccountsResponse>(),
+        interceptors: self.interceptors?.makeAccountsInterceptors() ?? [],
+        userFunction: self.accounts(request:context:)
+      )
+
     case "Account":
       return UnaryServerHandler(
         context: context,
@@ -157,6 +315,42 @@ extension Cosmos_Auth_V1beta1_QueryProvider {
         userFunction: self.params(request:context:)
       )
 
+    case "ModuleAccounts":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Auth_V1beta1_QueryModuleAccountsRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Auth_V1beta1_QueryModuleAccountsResponse>(),
+        interceptors: self.interceptors?.makeModuleAccountsInterceptors() ?? [],
+        userFunction: self.moduleAccounts(request:context:)
+      )
+
+    case "Bech32Prefix":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Auth_V1beta1_Bech32PrefixRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Auth_V1beta1_Bech32PrefixResponse>(),
+        interceptors: self.interceptors?.makeBech32PrefixInterceptors() ?? [],
+        userFunction: self.bech32Prefix(request:context:)
+      )
+
+    case "AddressBytesToString":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Auth_V1beta1_AddressBytesToStringRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Auth_V1beta1_AddressBytesToStringResponse>(),
+        interceptors: self.interceptors?.makeAddressBytesToStringInterceptors() ?? [],
+        userFunction: self.addressBytesToString(request:context:)
+      )
+
+    case "AddressStringToBytes":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Cosmos_Auth_V1beta1_AddressStringToBytesRequest>(),
+        responseSerializer: ProtobufSerializer<Cosmos_Auth_V1beta1_AddressStringToBytesResponse>(),
+        interceptors: self.interceptors?.makeAddressStringToBytesInterceptors() ?? [],
+        userFunction: self.addressStringToBytes(request:context:)
+      )
+
     default:
       return nil
     }
@@ -165,6 +359,10 @@ extension Cosmos_Auth_V1beta1_QueryProvider {
 
 internal protocol Cosmos_Auth_V1beta1_QueryServerInterceptorFactoryProtocol {
 
+  /// - Returns: Interceptors to use when handling 'accounts'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeAccountsInterceptors() -> [ServerInterceptor<Cosmos_Auth_V1beta1_QueryAccountsRequest, Cosmos_Auth_V1beta1_QueryAccountsResponse>]
+
   /// - Returns: Interceptors to use when handling 'account'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeAccountInterceptors() -> [ServerInterceptor<Cosmos_Auth_V1beta1_QueryAccountRequest, Cosmos_Auth_V1beta1_QueryAccountResponse>]
@@ -172,4 +370,20 @@ internal protocol Cosmos_Auth_V1beta1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'params'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeParamsInterceptors() -> [ServerInterceptor<Cosmos_Auth_V1beta1_QueryParamsRequest, Cosmos_Auth_V1beta1_QueryParamsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'moduleAccounts'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeModuleAccountsInterceptors() -> [ServerInterceptor<Cosmos_Auth_V1beta1_QueryModuleAccountsRequest, Cosmos_Auth_V1beta1_QueryModuleAccountsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'bech32Prefix'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeBech32PrefixInterceptors() -> [ServerInterceptor<Cosmos_Auth_V1beta1_Bech32PrefixRequest, Cosmos_Auth_V1beta1_Bech32PrefixResponse>]
+
+  /// - Returns: Interceptors to use when handling 'addressBytesToString'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeAddressBytesToStringInterceptors() -> [ServerInterceptor<Cosmos_Auth_V1beta1_AddressBytesToStringRequest, Cosmos_Auth_V1beta1_AddressBytesToStringResponse>]
+
+  /// - Returns: Interceptors to use when handling 'addressStringToBytes'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeAddressStringToBytesInterceptors() -> [ServerInterceptor<Cosmos_Auth_V1beta1_AddressStringToBytesRequest, Cosmos_Auth_V1beta1_AddressStringToBytesResponse>]
 }

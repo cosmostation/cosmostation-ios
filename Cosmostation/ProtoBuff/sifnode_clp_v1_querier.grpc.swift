@@ -45,6 +45,11 @@ internal protocol Sifnode_Clp_V1_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Sifnode_Clp_V1_LiquidityProviderReq, Sifnode_Clp_V1_LiquidityProviderRes>
 
+  func getLiquidityProviderData(
+    _ request: Sifnode_Clp_V1_LiquidityProviderDataReq,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_LiquidityProviderDataReq, Sifnode_Clp_V1_LiquidityProviderDataRes>
+
   func getAssetList(
     _ request: Sifnode_Clp_V1_AssetListReq,
     callOptions: CallOptions?
@@ -120,6 +125,24 @@ extension Sifnode_Clp_V1_QueryClientProtocol {
     )
   }
 
+  /// Unary call to GetLiquidityProviderData
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetLiquidityProviderData.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getLiquidityProviderData(
+    _ request: Sifnode_Clp_V1_LiquidityProviderDataReq,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_LiquidityProviderDataReq, Sifnode_Clp_V1_LiquidityProviderDataRes> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Query/GetLiquidityProviderData",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetLiquidityProviderDataInterceptors() ?? []
+    )
+  }
+
   /// Unary call to GetAssetList
   ///
   /// - Parameters:
@@ -186,6 +209,9 @@ internal protocol Sifnode_Clp_V1_QueryClientInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when invoking 'getLiquidityProvider'.
   func makeGetLiquidityProviderInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_LiquidityProviderReq, Sifnode_Clp_V1_LiquidityProviderRes>]
 
+  /// - Returns: Interceptors to use when invoking 'getLiquidityProviderData'.
+  func makeGetLiquidityProviderDataInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_LiquidityProviderDataReq, Sifnode_Clp_V1_LiquidityProviderDataRes>]
+
   /// - Returns: Interceptors to use when invoking 'getAssetList'.
   func makeGetAssetListInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_AssetListReq, Sifnode_Clp_V1_AssetListRes>]
 
@@ -227,6 +253,8 @@ internal protocol Sifnode_Clp_V1_QueryProvider: CallHandlerProvider {
   func getPools(request: Sifnode_Clp_V1_PoolsReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_PoolsRes>
 
   func getLiquidityProvider(request: Sifnode_Clp_V1_LiquidityProviderReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_LiquidityProviderRes>
+
+  func getLiquidityProviderData(request: Sifnode_Clp_V1_LiquidityProviderDataReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_LiquidityProviderDataRes>
 
   func getAssetList(request: Sifnode_Clp_V1_AssetListReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_AssetListRes>
 
@@ -270,6 +298,15 @@ extension Sifnode_Clp_V1_QueryProvider {
         responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_LiquidityProviderRes>(),
         interceptors: self.interceptors?.makeGetLiquidityProviderInterceptors() ?? [],
         userFunction: self.getLiquidityProvider(request:context:)
+      )
+
+    case "GetLiquidityProviderData":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_LiquidityProviderDataReq>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_LiquidityProviderDataRes>(),
+        interceptors: self.interceptors?.makeGetLiquidityProviderDataInterceptors() ?? [],
+        userFunction: self.getLiquidityProviderData(request:context:)
       )
 
     case "GetAssetList":
@@ -318,6 +355,10 @@ internal protocol Sifnode_Clp_V1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'getLiquidityProvider'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetLiquidityProviderInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_LiquidityProviderReq, Sifnode_Clp_V1_LiquidityProviderRes>]
+
+  /// - Returns: Interceptors to use when handling 'getLiquidityProviderData'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetLiquidityProviderDataInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_LiquidityProviderDataReq, Sifnode_Clp_V1_LiquidityProviderDataRes>]
 
   /// - Returns: Interceptors to use when handling 'getAssetList'.
   ///   Defaults to calling `self.makeInterceptors()`.

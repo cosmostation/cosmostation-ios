@@ -52,10 +52,25 @@ internal protocol Ibc_Core_Client_V1_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Ibc_Core_Client_V1_QueryConsensusStatesRequest, Ibc_Core_Client_V1_QueryConsensusStatesResponse>
 
+  func clientStatus(
+    _ request: Ibc_Core_Client_V1_QueryClientStatusRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryClientStatusRequest, Ibc_Core_Client_V1_QueryClientStatusResponse>
+
   func clientParams(
     _ request: Ibc_Core_Client_V1_QueryClientParamsRequest,
     callOptions: CallOptions?
   ) -> UnaryCall<Ibc_Core_Client_V1_QueryClientParamsRequest, Ibc_Core_Client_V1_QueryClientParamsResponse>
+
+  func upgradedClientState(
+    _ request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryUpgradedClientStateRequest, Ibc_Core_Client_V1_QueryUpgradedClientStateResponse>
+
+  func upgradedConsensusState(
+    _ request: Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>
 }
 
 extension Ibc_Core_Client_V1_QueryClientProtocol {
@@ -137,6 +152,24 @@ extension Ibc_Core_Client_V1_QueryClientProtocol {
     )
   }
 
+  /// Status queries the status of an IBC client.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ClientStatus.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func clientStatus(
+    _ request: Ibc_Core_Client_V1_QueryClientStatusRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryClientStatusRequest, Ibc_Core_Client_V1_QueryClientStatusResponse> {
+    return self.makeUnaryCall(
+      path: "/ibc.core.client.v1.Query/ClientStatus",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeClientStatusInterceptors() ?? []
+    )
+  }
+
   /// ClientParams queries all parameters of the ibc client.
   ///
   /// - Parameters:
@@ -152,6 +185,42 @@ extension Ibc_Core_Client_V1_QueryClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeClientParamsInterceptors() ?? []
+    )
+  }
+
+  /// UpgradedClientState queries an Upgraded IBC light client.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpgradedClientState.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func upgradedClientState(
+    _ request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryUpgradedClientStateRequest, Ibc_Core_Client_V1_QueryUpgradedClientStateResponse> {
+    return self.makeUnaryCall(
+      path: "/ibc.core.client.v1.Query/UpgradedClientState",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpgradedClientStateInterceptors() ?? []
+    )
+  }
+
+  /// UpgradedConsensusState queries an Upgraded IBC consensus state.
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpgradedConsensusState.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func upgradedConsensusState(
+    _ request: Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse> {
+    return self.makeUnaryCall(
+      path: "/ibc.core.client.v1.Query/UpgradedConsensusState",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpgradedConsensusStateInterceptors() ?? []
     )
   }
 }
@@ -170,8 +239,17 @@ internal protocol Ibc_Core_Client_V1_QueryClientInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when invoking 'consensusStates'.
   func makeConsensusStatesInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryConsensusStatesRequest, Ibc_Core_Client_V1_QueryConsensusStatesResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'clientStatus'.
+  func makeClientStatusInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryClientStatusRequest, Ibc_Core_Client_V1_QueryClientStatusResponse>]
+
   /// - Returns: Interceptors to use when invoking 'clientParams'.
   func makeClientParamsInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryClientParamsRequest, Ibc_Core_Client_V1_QueryClientParamsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'upgradedClientState'.
+  func makeUpgradedClientStateInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryUpgradedClientStateRequest, Ibc_Core_Client_V1_QueryUpgradedClientStateResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'upgradedConsensusState'.
+  func makeUpgradedConsensusStateInterceptors() -> [ClientInterceptor<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>]
 }
 
 internal final class Ibc_Core_Client_V1_QueryClient: Ibc_Core_Client_V1_QueryClientProtocol {
@@ -216,8 +294,17 @@ internal protocol Ibc_Core_Client_V1_QueryProvider: CallHandlerProvider {
   /// client.
   func consensusStates(request: Ibc_Core_Client_V1_QueryConsensusStatesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryConsensusStatesResponse>
 
+  /// Status queries the status of an IBC client.
+  func clientStatus(request: Ibc_Core_Client_V1_QueryClientStatusRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryClientStatusResponse>
+
   /// ClientParams queries all parameters of the ibc client.
   func clientParams(request: Ibc_Core_Client_V1_QueryClientParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryClientParamsResponse>
+
+  /// UpgradedClientState queries an Upgraded IBC light client.
+  func upgradedClientState(request: Ibc_Core_Client_V1_QueryUpgradedClientStateRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryUpgradedClientStateResponse>
+
+  /// UpgradedConsensusState queries an Upgraded IBC consensus state.
+  func upgradedConsensusState(request: Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>
 }
 
 extension Ibc_Core_Client_V1_QueryProvider {
@@ -266,6 +353,15 @@ extension Ibc_Core_Client_V1_QueryProvider {
         userFunction: self.consensusStates(request:context:)
       )
 
+    case "ClientStatus":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Client_V1_QueryClientStatusRequest>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryClientStatusResponse>(),
+        interceptors: self.interceptors?.makeClientStatusInterceptors() ?? [],
+        userFunction: self.clientStatus(request:context:)
+      )
+
     case "ClientParams":
       return UnaryServerHandler(
         context: context,
@@ -273,6 +369,24 @@ extension Ibc_Core_Client_V1_QueryProvider {
         responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryClientParamsResponse>(),
         interceptors: self.interceptors?.makeClientParamsInterceptors() ?? [],
         userFunction: self.clientParams(request:context:)
+      )
+
+    case "UpgradedClientState":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Client_V1_QueryUpgradedClientStateRequest>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryUpgradedClientStateResponse>(),
+        interceptors: self.interceptors?.makeUpgradedClientStateInterceptors() ?? [],
+        userFunction: self.upgradedClientState(request:context:)
+      )
+
+    case "UpgradedConsensusState":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest>(),
+        responseSerializer: ProtobufSerializer<Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>(),
+        interceptors: self.interceptors?.makeUpgradedConsensusStateInterceptors() ?? [],
+        userFunction: self.upgradedConsensusState(request:context:)
       )
 
     default:
@@ -299,7 +413,19 @@ internal protocol Ibc_Core_Client_V1_QueryServerInterceptorFactoryProtocol {
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeConsensusStatesInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryConsensusStatesRequest, Ibc_Core_Client_V1_QueryConsensusStatesResponse>]
 
+  /// - Returns: Interceptors to use when handling 'clientStatus'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeClientStatusInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryClientStatusRequest, Ibc_Core_Client_V1_QueryClientStatusResponse>]
+
   /// - Returns: Interceptors to use when handling 'clientParams'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeClientParamsInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryClientParamsRequest, Ibc_Core_Client_V1_QueryClientParamsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'upgradedClientState'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpgradedClientStateInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryUpgradedClientStateRequest, Ibc_Core_Client_V1_QueryUpgradedClientStateResponse>]
+
+  /// - Returns: Interceptors to use when handling 'upgradedConsensusState'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpgradedConsensusStateInterceptors() -> [ServerInterceptor<Ibc_Core_Client_V1_QueryUpgradedConsensusStateRequest, Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse>]
 }
