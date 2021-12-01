@@ -719,7 +719,7 @@ class BaseNetWork {
         } else if (chain == ChainType.PERSIS_MAIN) {
             result = PERSIS_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.CRYPTO_MAIN) {
-            result = CRYTO_API + "v1/account/txs/" + address
+            result = CRYTO_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             result = OSMOSIS_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.BAND_MAIN) {
@@ -762,12 +762,12 @@ class BaseNetWork {
             result = BITSONG_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.DESMOS_MAIN) {
             result = DESMOS_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.SENTINEL_MAIN) {
+            result = SENTINEL_API + "v1/account/new_txs/" + address
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
             result = KAVA_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            result = SENTINEL_API + "v1/account/new_txs/" + address
         }
         
         
@@ -777,8 +777,7 @@ class BaseNetWork {
             result = IRIS_TEST_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.RIZON_TEST) {
             result = RIZON_TEST_API + "v1/account/new_txs/" + address
-        }
-        else if (chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_TEST) {
             result = KAVA_TEST_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.CERTIK_TEST) {
             result = CERTIK_TEST_API + "v1/account/txs/" + address
@@ -805,7 +804,7 @@ class BaseNetWork {
         } else if (chain == ChainType.PERSIS_MAIN) {
             result = PERSIS_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.CRYPTO_MAIN) {
-            result = CRYTO_API + "v1/account/txs/" + address + "/" + valAddress
+            result = CRYTO_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             result = OSMOSIS_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.BAND_MAIN) {
@@ -848,12 +847,12 @@ class BaseNetWork {
             result = BITSONG_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.DESMOS_MAIN) {
             result = DESMOS_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.SENTINEL_MAIN) {
+            result = SENTINEL_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
             result = KAVA_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            result = SENTINEL_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.COSMOS_TEST) {

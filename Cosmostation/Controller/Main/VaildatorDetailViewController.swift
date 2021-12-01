@@ -99,16 +99,10 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             
         }
         
-        if (chainType == ChainType.CRYPTO_MAIN) {
-            onFetchApiHistoryCustom(account!.account_address, mValidator_gRPC!.operatorAddress)
-            
-        }
-        else {
-            if (WUtils.isGRPC(chainType)) {
-                onFetchNewApiHistoryCustom(account!.account_address, mValidator_gRPC!.operatorAddress)
-            } else {
-                onFetchNewApiHistoryCustom(account!.account_address, mValidator!.operator_address)
-            }
+        if (WUtils.isGRPC(chainType)) {
+            onFetchNewApiHistoryCustom(account!.account_address, mValidator_gRPC!.operatorAddress)
+        } else {
+            onFetchNewApiHistoryCustom(account!.account_address, mValidator!.operator_address)
         }
     }
     
@@ -153,11 +147,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             }
             
         } else {
-            if (chainType == ChainType.CRYPTO_MAIN) {
-                return self.mApiCustomHistories.count
-            } else {
-                return self.mApiCustomNewHistories.count
-            }
+            return self.mApiCustomNewHistories.count
         }
     }
     
@@ -422,60 +412,35 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onSetHistoryItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
-        if (chainType == ChainType.CRYPTO_MAIN) {
-            let cell:HistoryCell? = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
-            cell?.bindHistoryCustomView(mApiCustomHistories[indexPath.row], account!.account_address)
-            return cell!
-            
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-            cell?.bindHistoryView(chainType!, mApiCustomNewHistories[indexPath.row], account!.account_address)
-            return cell!
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
+        cell?.bindHistoryView(chainType!, mApiCustomNewHistories[indexPath.row], account!.account_address)
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
-            if (chainType == ChainType.CRYPTO_MAIN) {
-                let history = mApiCustomHistories[indexPath.row]
-                if (history.chain_id?.isEmpty == false && (BaseData.instance.getChainId(self.chainType) != history.chain_id)) {
-                    let link = WUtils.getTxExplorer(self.chainType!, history.tx_hash!)
-                    guard let url = URL(string: link) else { return }
-                    self.onShowSafariWeb(url)
+            let history = mApiCustomNewHistories[indexPath.row]
+            if (history.header?.chain_id != BaseData.instance.getChainId(self.chainType)) {
+                let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
+                guard let url = URL(string: link) else { return }
+                self.onShowSafariWeb(url)
 
-                } else {
+            } else {
+                if (WUtils.isGRPC(self.chainType)) {
                     let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
                     txDetailVC.mIsGen = false
-                    txDetailVC.mTxHash = history.tx_hash
+                    txDetailVC.mTxHash = history.data!.txhash!
                     txDetailVC.hidesBottomBarWhenPushed = true
                     self.navigationItem.title = ""
                     self.navigationController?.pushViewController(txDetailVC, animated: true)
-                }
-                
-            } else {
-                let history = mApiCustomNewHistories[indexPath.row]
-                if (history.header?.chain_id != BaseData.instance.getChainId(self.chainType)) {
-                    let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
-                    guard let url = URL(string: link) else { return }
-                    self.onShowSafariWeb(url)
-
+                    
                 } else {
-                    if (WUtils.isGRPC(self.chainType)) {
-                        let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
-                        txDetailVC.mIsGen = false
-                        txDetailVC.mTxHash = history.data!.txhash!
-                        txDetailVC.hidesBottomBarWhenPushed = true
-                        self.navigationItem.title = ""
-                        self.navigationController?.pushViewController(txDetailVC, animated: true)
-                        
-                    } else {
-                        let txDetailVC = TxDetailViewController(nibName: "TxDetailViewController", bundle: nil)
-                        txDetailVC.mIsGen = false
-                        txDetailVC.mTxHash = history.data!.txhash!
-                        txDetailVC.hidesBottomBarWhenPushed = true
-                        self.navigationItem.title = ""
-                        self.navigationController?.pushViewController(txDetailVC, animated: true)
-                    }
+                    let txDetailVC = TxDetailViewController(nibName: "TxDetailViewController", bundle: nil)
+                    txDetailVC.mIsGen = false
+                    txDetailVC.mTxHash = history.data!.txhash!
+                    txDetailVC.hidesBottomBarWhenPushed = true
+                    self.navigationItem.title = ""
+                    self.navigationController?.pushViewController(txDetailVC, animated: true)
                 }
             }
         }
