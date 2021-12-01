@@ -30,6 +30,7 @@ let KEY_USER_EXPENDED_CHAINS            = "KEY_USER_EXPENDED_CHAINS"
 let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 
 let STATION_URL                         = "https://api-utility.cosmostation.io/";
+let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 
 let COSMOS_API                          = "https://api.cosmostation.io/";

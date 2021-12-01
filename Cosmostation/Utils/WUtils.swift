@@ -4974,6 +4974,43 @@ public class WUtils {
         return UIImage(named: "defaultChainImg")
     }
     
+    static func getChainNameByBaseChain(_ chain: ChainType?) -> String {
+        if (chain == ChainType.COSMOS_MAIN) { return "cosmos" }
+        else if (chain == ChainType.IRIS_MAIN) { return "iris" }
+        else if (chain == ChainType.AKASH_MAIN) { return "akash" }
+        else if (chain == ChainType.KAVA_MAIN) { return "kava" }
+        else if (chain == ChainType.BAND_MAIN) { return "band" }
+        else if (chain == ChainType.SECRET_MAIN) { return "secret" }
+        else if (chain == ChainType.CERTIK_MAIN) { return "certik" }
+        else if (chain == ChainType.IOV_MAIN) { return "starname" }
+        else if (chain == ChainType.PERSIS_MAIN) { return "persistence" }
+        else if (chain == ChainType.SENTINEL_MAIN) { return "sentinel" }
+        else if (chain == ChainType.FETCH_MAIN) { return "fetchai" }
+        else if (chain == ChainType.CRYPTO_MAIN) { return "cryptoorg" }
+        else if (chain == ChainType.SIF_MAIN) { return "sifchain" }
+        else if (chain == ChainType.KI_MAIN) { return "kichain" }
+        else if (chain == ChainType.OSMOSIS_MAIN) { return "osmosis" }
+        else if (chain == ChainType.MEDI_MAIN) { return "medibloc" }
+        else if (chain == ChainType.EMONEY_MAIN) { return "emoney" }
+        else if (chain == ChainType.RIZON_MAIN) { return "rizon" }
+        else if (chain == ChainType.JUNO_MAIN) { return "juno" }
+        else if (chain == ChainType.REGEN_MAIN) { return "regen" }
+        else if (chain == ChainType.BITCANA_MAIN) { return "bitcanna" }
+        else if (chain == ChainType.STARGAZE_MAIN) { return "stargaze" }
+        else if (chain == ChainType.COMDEX_MAIN) { return "comdex" }
+        else if (chain == ChainType.INJECTIVE_MAIN) { return "injective" }
+        else if (chain == ChainType.BITSONG_MAIN) { return "bitsong" }
+        else if (chain == ChainType.DESMOS_MAIN) { return "desmos" }
+        
+        else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
+        else if (chain == ChainType.OKEX_MAIN) { return "okex" }
+        
+        else if (chain == ChainType.ALTHEA_MAIN) { return "ALTHEA" }
+        else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "G-BRIDGE" }
+        
+        return "Unknown"
+    }
+    
     static func getChainTitle(_ chain: ChainType?) -> String {
         if (chain == ChainType.COSMOS_MAIN) { return "(Cosmos Mainnet)" }
         else if (chain == ChainType.IRIS_MAIN) { return "(Iris Mainnet)" }
@@ -5950,6 +5987,27 @@ public class WUtils {
         }
     }
     
+    static func onProposalProposer(_ proposal: MintscanProposalDetail?) -> String? {
+        if (proposal?.moniker?.isEmpty == true) {
+            return proposal?.proposer
+        } else {
+            return proposal?.moniker
+        }
+    }
+    
+    static func onProposalStatusTxt(_ proposal: MintscanProposalDetail?) -> String {
+        if (proposal?.proposal_status?.contains("DEPOSIT") == true) {
+            return "DepositPeriod"
+        } else if (proposal?.proposal_status?.contains("VOTING") == true) {
+            return "VotingPeriod"
+        } else if (proposal?.proposal_status?.contains("PASSED") == true) {
+            return "Passed"
+        } else if (proposal?.proposal_status?.contains("REJECTED") == true) {
+            return "Rejected"
+        }
+        return "unKnown"
+    }
+    
     static func onParseProposalStatusTxt(_ proposal: Cosmos_Gov_V1beta1_Proposal) -> String {
         if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.depositPeriod) {
             return "DepositPeriod"
@@ -5976,6 +6034,19 @@ public class WUtils {
             return "Failed"
         }
         return "unKnown"
+    }
+    
+    static func onProposalStatusImg(_ proposal: MintscanProposalDetail?) -> UIImage? {
+        if (proposal?.proposal_status?.contains("DEPOSIT") == true) {
+            return UIImage.init(named: "depositImg")
+        } else if (proposal?.proposal_status?.contains("VOTING") == true) {
+            return UIImage.init(named: "votingImg")
+        } else if (proposal?.proposal_status?.contains("PASSED") == true) {
+            return UIImage.init(named: "passedImg")
+        } else if (proposal?.proposal_status?.contains("REJECTED") == true) {
+            return UIImage.init(named: "rejectedImg")
+        }
+        return nil
     }
     
     static func onParseProposalStatusImg(_ proposal: Cosmos_Gov_V1beta1_Proposal) -> UIImage? {

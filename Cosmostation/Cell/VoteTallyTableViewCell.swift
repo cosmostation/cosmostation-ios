@@ -13,6 +13,10 @@ class VoteTallyTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        self.cardYes.borderWidth = 1
+        self.cardNo.borderWidth = 1
+        self.cardVeto.borderWidth = 1
+        self.cardAbstain.borderWidth = 1
     }
     
     @IBOutlet weak var cardYes: CardView!
@@ -50,15 +54,6 @@ class VoteTallyTableViewCell: UITableViewCell {
     
     func onCheckMyVote (_ myVote:Vote?) {
         if (myVote == nil) { return }
-        self.cardYes.borderColor = UIColor.init(hexString: "#9CA2AC", alpha: 1.0)
-        self.cardNo.borderColor = UIColor.init(hexString: "#9CA2AC", alpha: 1.0)
-        self.cardVeto.borderColor = UIColor.init(hexString: "#9CA2AC", alpha: 1.0)
-        self.cardAbstain.borderColor = UIColor.init(hexString: "#9CA2AC", alpha: 1.0)
-        self.cardYes.borderWidth = 1
-        self.cardNo.borderWidth = 1
-        self.cardVeto.borderWidth = 1
-        self.cardAbstain.borderWidth = 1
-        
         if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_YES) == .orderedSame) {
             self.myVoteYes.isHidden = false
             self.cardYes.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
@@ -77,117 +72,38 @@ class VoteTallyTableViewCell: UITableViewCell {
         }
     }
     
-    func onUpdateCards(_ chain: ChainType, _ tally:Tally, _ voters:Array<Vote>, _ status: String?) {
-        progressYes.progress = tally.getYes().floatValue / 100
-        progressNo.progress = tally.getNo().floatValue / 100
-        progressVeto.progress = tally.getVeto().floatValue / 100
-        propressAbstain.progress = tally.getAbstain().floatValue / 100
-
-        percentYes.attributedText = WUtils.displayPercent(tally.getYes(), percentYes.font)
-        percentNo.attributedText = WUtils.displayPercent(tally.getNo(), percentYes.font)
-        percentVeto.attributedText = WUtils.displayPercent(tally.getVeto(), percentYes.font)
-        percentAbstain.attributedText = WUtils.displayPercent(tally.getAbstain(), percentYes.font)
-        
-        if (status == Proposal.PROPOSAL_VOTING) {
-            imgYes.isHidden = false
-            imgNo.isHidden = false
-            imgVeto.isHidden = false
-            imgAbstain.isHidden = false
-            cntYes.isHidden = false
-            cntNo.isHidden = false
-            cntVeto.isHidden = false
-            cntAbstain.isHidden = false
-
-            cntYes.text = WUtils.getVoterTypeCnt(voters, Vote.OPTION_YES)
-            cntNo.text = WUtils.getVoterTypeCnt(voters, Vote.OPTION_NO)
-            cntVeto.text = WUtils.getVoterTypeCnt(voters, Vote.OPTION_VETO)
-            cntAbstain.text = WUtils.getVoterTypeCnt(voters, Vote.OPTION_ABSTAIN)
-            
-            quorumTitle.isHidden = false
-            quorumRate.isHidden = false
-            turnoutRate.isHidden = false
-            turnoutTitle.isHidden = false
-            quorumRate.attributedText = WUtils.displayPercent(WUtils.systemQuorum(chain).multiplying(byPowerOf10: 2), quorumRate.font)
-            turnoutRate.attributedText = WUtils.displayPercent(tally.getTurnout(), turnoutRate.font)
-            
-        }
-    }
-    
-    
     func onCheckMyVote_gRPC(_ option: Cosmos_Gov_V1beta1_VoteOption?) {
         if (option == nil) { return }
-        
         if (option == Cosmos_Gov_V1beta1_VoteOption.yes) {
             self.myVoteYes.isHidden = false
-            self.cardYes.borderWidth = 1
             self.cardYes.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
             
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.no) {
             self.myVoteNo.isHidden = false
-            self.cardNo.borderWidth = 1
             self.cardNo.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
             
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.noWithVeto) {
             self.myVoteVeto.isHidden = false
-            self.cardVeto.borderWidth = 1
             self.cardVeto.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
             
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.abstain) {
             self.myVoteAbstain.isHidden = false
-            self.cardAbstain.borderWidth = 1
             self.cardAbstain.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
         }
-        
     }
     
-    func onUpdateCards_gRPC(_ chain: ChainType, _ tally:Cosmos_Gov_V1beta1_TallyResult, _ voters:Array<Cosmos_Gov_V1beta1_Vote>?, _ proposal: Cosmos_Gov_V1beta1_Proposal?) {
-        progressYes.progress = WUtils.getYes(tally).floatValue / 100
-        progressNo.progress = WUtils.getNo(tally).floatValue / 100
-        progressVeto.progress = WUtils.getVeto(tally).floatValue / 100
-        propressAbstain.progress = WUtils.getAbstain(tally).floatValue / 100
+    func onUpdateCards(_ chain: ChainType?, _ detail: MintscanProposalDetail) {
+        progressYes.progress = detail.getYes().floatValue / 100
+        progressNo.progress = detail.getNo().floatValue / 100
+        progressVeto.progress = detail.getVeto().floatValue / 100
+        propressAbstain.progress = detail.getAbstain().floatValue / 100
 
-        percentYes.attributedText = WUtils.displayPercent(WUtils.getYes(tally), percentYes.font)
-        percentNo.attributedText = WUtils.displayPercent(WUtils.getNo(tally), percentYes.font)
-        percentVeto.attributedText = WUtils.displayPercent(WUtils.getVeto(tally), percentYes.font)
-        percentAbstain.attributedText = WUtils.displayPercent(WUtils.getAbstain(tally), percentYes.font)
+        percentYes.attributedText = WUtils.displayPercent(detail.getYes(), percentYes.font)
+        percentNo.attributedText = WUtils.displayPercent(detail.getNo(), percentNo.font)
+        percentVeto.attributedText = WUtils.displayPercent(detail.getVeto(), percentVeto.font)
+        percentAbstain.attributedText = WUtils.displayPercent(detail.getAbstain(), percentAbstain.font)
         
-        if (proposal?.status == Cosmos_Gov_V1beta1_ProposalStatus.votingPeriod) {
-            imgYes.isHidden = false
-            imgNo.isHidden = false
-            imgVeto.isHidden = false
-            imgAbstain.isHidden = false
-            cntYes.isHidden = false
-            cntNo.isHidden = false
-            cntVeto.isHidden = false
-            cntAbstain.isHidden = false
-
-            cntYes.text = WUtils.getVoterTypeCnt_gRPC(voters, Cosmos_Gov_V1beta1_VoteOption.yes)
-            cntNo.text = WUtils.getVoterTypeCnt_gRPC(voters, Cosmos_Gov_V1beta1_VoteOption.no)
-            cntVeto.text = WUtils.getVoterTypeCnt_gRPC(voters, Cosmos_Gov_V1beta1_VoteOption.noWithVeto)
-            cntAbstain.text = WUtils.getVoterTypeCnt_gRPC(voters, Cosmos_Gov_V1beta1_VoteOption.abstain)
-            
-            quorumTitle.isHidden = false
-            quorumRate.isHidden = false
-            turnoutRate.isHidden = false
-            turnoutTitle.isHidden = false
-            quorumRate.attributedText = WUtils.displayPercent(WUtils.systemQuorum(chain).multiplying(byPowerOf10: 2), quorumRate.font)
-            turnoutRate.attributedText = WUtils.displayPercent(WUtils.getTurnout(tally), turnoutRate.font)
-        }
-    }
-    
-    func onCertikUpdateCards_gRPC(_ chain: ChainType, _ tally:Cosmos_Gov_V1beta1_TallyResult, _ voters:Array<Shentu_Gov_V1alpha1_Vote>?, _ proposal: Shentu_Gov_V1alpha1_Proposal?) {
-        progressYes.progress = WUtils.getYes(tally).floatValue / 100
-        progressNo.progress = WUtils.getNo(tally).floatValue / 100
-        progressVeto.progress = WUtils.getVeto(tally).floatValue / 100
-        propressAbstain.progress = WUtils.getAbstain(tally).floatValue / 100
-        
-        percentYes.attributedText = WUtils.displayPercent(WUtils.getYes(tally), percentYes.font)
-        percentNo.attributedText = WUtils.displayPercent(WUtils.getNo(tally), percentYes.font)
-        percentVeto.attributedText = WUtils.displayPercent(WUtils.getVeto(tally), percentYes.font)
-        percentAbstain.attributedText = WUtils.displayPercent(WUtils.getAbstain(tally), percentYes.font)
-        
-        if (proposal?.status == Shentu_Gov_V1alpha1_ProposalStatus.certifierVotingPeriod ||
-                proposal?.status == Shentu_Gov_V1alpha1_ProposalStatus.validatorVotingPeriod ) {
+        if (detail.proposal_status?.contains("VOTING") == true) {
             imgYes.isHidden = false
             imgNo.isHidden = false
             imgVeto.isHidden = false
@@ -197,19 +113,17 @@ class VoteTallyTableViewCell: UITableViewCell {
             cntVeto.isHidden = false
             cntAbstain.isHidden = false
             
-            cntYes.text = WUtils.getCertikVoterTypeCnt_gRPC(voters, Cosmos_Gov_V1beta1_VoteOption.yes)
-            cntNo.text = WUtils.getCertikVoterTypeCnt_gRPC(voters, Cosmos_Gov_V1beta1_VoteOption.no)
-            cntVeto.text = WUtils.getCertikVoterTypeCnt_gRPC(voters, Cosmos_Gov_V1beta1_VoteOption.noWithVeto)
-            cntAbstain.text = WUtils.getCertikVoterTypeCnt_gRPC(voters, Cosmos_Gov_V1beta1_VoteOption.abstain)
+            cntYes.text = detail.voteMeta?.yes
+            cntNo.text = detail.voteMeta?.no
+            cntVeto.text = detail.voteMeta?.no_with_veto
+            cntAbstain.text = detail.voteMeta?.abstain
             
             quorumTitle.isHidden = false
             quorumRate.isHidden = false
             turnoutRate.isHidden = false
             turnoutTitle.isHidden = false
             quorumRate.attributedText = WUtils.displayPercent(WUtils.systemQuorum(chain).multiplying(byPowerOf10: 2), quorumRate.font)
-            turnoutRate.attributedText = WUtils.displayPercent(WUtils.getTurnout(tally), turnoutRate.font)
-            
+            turnoutRate.attributedText = WUtils.displayPercent(detail.getTurnout(), turnoutRate.font)
         }
     }
-    
 }

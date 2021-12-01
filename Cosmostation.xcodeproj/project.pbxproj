@@ -27,6 +27,7 @@
 		046E9041268C4863002CFFE1 /* BinanceInt+VarInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9040268C4863002CFFE1 /* BinanceInt+VarInt.swift */; };
 		046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */; };
 		046E9049268C7C2B002CFFE1 /* BinanceHexEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */; };
+		047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		047AE7242693378A00C1DD51 /* TxUnlockPeriodLockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */; };
 		047AE7252693378A00C1DD51 /* TxUnlockPeriodLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */; };
 		049DAA0127311DEB00658CFB /* WalletGBridgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */; };
@@ -1724,6 +1725,7 @@
 		046E9040268C4863002CFFE1 /* BinanceInt+VarInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceInt+VarInt.swift"; sourceTree = "<group>"; };
 		046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceSegwitAddrCoder.swift; sourceTree = "<group>"; };
 		046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceHexEncoding.swift; sourceTree = "<group>"; };
+		0479664F2757409700315D55 /* MintscanProposalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposalDetail.swift; sourceTree = "<group>"; };
 		047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxUnlockPeriodLockCell.swift; sourceTree = "<group>"; };
 		047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxUnlockPeriodLockCell.xib; sourceTree = "<group>"; };
 		049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletGBridgeCell.swift; sourceTree = "<group>"; };
@@ -5395,6 +5397,7 @@
 				28E3E37F2671BE8D00BA89C2 /* Param.swift */,
 				04D1384C2691C78F00D6AF9F /* IbcPath.swift */,
 				04D1384E2691CAF100D6AF9F /* IbcToken.swift */,
+				0479664F2757409700315D55 /* MintscanProposalDetail.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -6987,6 +6990,7 @@
 				E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */,
 				04EEF09227565325008F61AB /* sentinel_session_v1_events.pb.swift in Sources */,
 				04EEEF7227565324008F61AB /* osmosis_incentives_params.pb.swift in Sources */,
+				047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */,
 				04EEF08927565325008F61AB /* gravity_v1_query.grpc.swift in Sources */,
 				284FBC7926DBE96000403FE2 /* TxSwapTokenCell.swift in Sources */,
 				28B4304024F7EE3B00BD7BB2 /* StepOkWithdrawAmountViewController.swift in Sources */,

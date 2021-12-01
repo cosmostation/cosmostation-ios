@@ -706,7 +706,10 @@ class BaseNetWork {
         return ""
     }
     
-    
+    static func mintscanProposalDetail(_ chain: ChainType, _ proposalId: String) -> String {
+        let chainName = WUtils.getChainNameByBaseChain(chain)
+        return MINTSCAN_API_URL + "v1/" + chainName + "/proposals/" + proposalId
+    }
     
     static func accountHistory(_ chain: ChainType, _ address: String) -> String {
         var result = ""
