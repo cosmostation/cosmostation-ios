@@ -2042,6 +2042,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.BITSONG_MAIN) {
             guard let url = URL(string: "https://www.coingecko.com/en/coins/bitsong") else { return }
             self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.RIZON_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/rizon") else { return }
+            self.onShowSafariWeb(url)
         }
         
     }
