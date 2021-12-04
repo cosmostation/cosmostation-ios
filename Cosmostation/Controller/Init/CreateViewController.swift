@@ -232,7 +232,6 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
                 
                 if (insertResult < 0) {
                     KeychainWrapper.standard.removeObject(forKey: newAccount.account_uuid.sha1())
-                    KeychainWrapper.standard.removeObject(forKey: newAccount.getPrivateKeySha1())
                 }
             }
             

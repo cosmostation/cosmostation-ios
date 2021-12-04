@@ -60,11 +60,16 @@ class KeyFac {
         return pKeyPred.evaluate(with: input)
     }
     
-    static func getPrivateString(_ hexInput: String) -> Data {
+    static func getPrivateFromString(_ hexInput: String) -> Data {
         if (hexInput.starts(with: "0x") || hexInput.starts(with: "0X")) {
             return hexInput.substring(from: 2).hexadecimal!
         }
         return hexInput.hexadecimal!
+    }
+    
+    static func getPublicFromString(_ hexInput: String) -> Data {
+        let privateKey = getPrivateFromString(hexInput)
+        return WKey.getPublicFromString(privateKey)
     }
     
 }

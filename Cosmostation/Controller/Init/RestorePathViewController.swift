@@ -109,7 +109,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             }
             DispatchQueue.main.async(execute: {
                 cell?.addressLabel.text = dpAddress
-                let tempAccount = BaseData.instance.selectExistAccount(address: address, chain: WUtils.getChainDBName(self.userChain!))
+                let tempAccount = BaseData.instance.selectExistAccount(address, self.userChain)
                 if (tempAccount == nil) {
                     cell?.stateLabel.text = NSLocalizedString("ready", comment: "")
                     cell?.stateLabel.textColor = UIColor.white
@@ -263,7 +263,6 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
                 
                 if(insertResult < 0) {
                     KeychainWrapper.standard.removeObject(forKey: newAccount.account_uuid.sha1())
-                    KeychainWrapper.standard.removeObject(forKey: newAccount.getPrivateKeySha1())
                 }
             }
             
@@ -300,7 +299,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             } else {
                 dpAddress = KeyFac.getDpAddressPath(mnemonic, path, chain, newBip)
             }
-            let existedAccount = BaseData.instance.selectExistAccount(address: dpAddress, chain: WUtils.getChainDBName(chain))
+            let existedAccount = BaseData.instance.selectExistAccount(dpAddress, chain)
             let keyResult = KeychainWrapper.standard.set(resource, forKey: existedAccount!.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             var updateResult :Int64 = -1
             if(keyResult) {
