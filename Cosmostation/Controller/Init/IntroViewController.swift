@@ -159,6 +159,8 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
                 tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
                 
             } else if (result == 4) {
+                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "KeyRestoreViewController") as! KeyRestoreViewController
+                tagetVC?.chainType = self.toAddChain!
                 
             }
             if (tagetVC != nil) {

@@ -14,7 +14,7 @@ import GRPC
 import NIO
 import SwiftProtobuf
 
-class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBCardPopupDelegate, AccountSwitchDelegate {
+class MainTabViewController: UITabBarController, UITabBarControllerDelegate, AccountSwitchDelegate {
     
     var mAccount: Account!
     var mChainType: ChainType!
@@ -125,31 +125,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
             sourceVC.present(accountSwitchVC, animated: false, completion: nil)
         }
     }
-    
-    func SBCardPopupResponse(type:Int, result: Int) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(490), execute: {
-            let naviVC = self.selectedViewController as? UINavigationController
-            var tagetVC:BaseViewController?
-            if(result == 1) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "CreateViewController") as! CreateViewController
-                tagetVC?.chainType = self.targetChain
-                
-            } else if(result == 2) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
-                tagetVC?.chainType = self.targetChain
-                
-            } else if(result == 3) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
-                
-            }
-            if(tagetVC != nil) {
-                tagetVC?.hidesBottomBarWhenPushed = true
-                naviVC?.navigationItem.title = ""
-                naviVC?.pushViewController(tagetVC!, animated: true)
-            }
-        })
-    }
-    
     
     func onUpdateAccountDB() {
         mAccount = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -1470,15 +1445,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
         }
     }
     
-    var targetChain:ChainType?
     func addAccount(_ chain: ChainType) {
-        targetChain = chain
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
-            let popupVC = NewAccountTypePopup(nibName: "NewAccountTypePopup", bundle: nil)
-            let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
-            cardPopup.resultDelegate = self
-            cardPopup.show(onViewController: self)
-        })
     }
     
 }

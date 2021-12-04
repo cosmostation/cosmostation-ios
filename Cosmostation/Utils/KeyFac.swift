@@ -54,4 +54,17 @@ class KeyFac {
         }
     }
     
+    static func isValidStringPrivateKey(_ input: String) -> Bool {
+        let pKeyRegEx = "^(0x|0X)?[a-fA-F0-9]{64}"
+        let pKeyPred = NSPredicate(format:"SELF MATCHES %@", pKeyRegEx)
+        return pKeyPred.evaluate(with: input)
+    }
+    
+    static func getPrivateString(_ hexInput: String) -> Data {
+        if (hexInput.starts(with: "0x") || hexInput.starts(with: "0X")) {
+            return hexInput.substring(from: 2).hexadecimal!
+        }
+        return hexInput.hexadecimal!
+    }
+    
 }

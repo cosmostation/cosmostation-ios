@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -2581,6 +2582,170 @@ To make transaction can add private information with later.</string>
             </objects>
             <point key="canvasLocation" x="2221.739130434783" y="1669.4196428571429"/>
         </scene>
+        <!--Key Restore View Controller-->
+        <scene sceneID="AQL-1F-OYd">
+            <objects>
+                <viewController storyboardIdentifier="KeyRestoreViewController" id="EBS-j3-Kde" customClass="KeyRestoreViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xkI-fg-6gw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="vV0-L5-a1Z">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L17-Ze-2vH">
+                                <rect key="frame" x="18" y="60.000000000000007" width="378" height="25.333333333333336"/>
+                                <string key="text">Please enter your private key.
+The private key is a 66-digit string starting with 0x.</string>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert Private Key." adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eAv-Rx-Cir" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                                <rect key="frame" x="16" y="97.333333333333329" width="382" height="49.999999999999986"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fYK-3y-LfG"/>
+                                </constraints>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done" smartInsertDeleteType="no"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lb3-5a-wlv">
+                                <rect key="frame" x="170" y="159.33333333333334" width="110" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="1RX-KL-vdO"/>
+                                    <constraint firstAttribute="width" constant="110" id="heN-Qi-vBl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                <state key="normal" title=" QR Scan" image="iconQrcode"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.80000000000000004"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onClickScan:" destination="aKk-rD-wQP" eventType="touchUpInside" id="b6y-8k-qOJ"/>
+                                    <action selector="onClickScan:" destination="EBS-j3-Kde" eventType="touchUpInside" id="ej9-0Z-0xO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cf-lv-Vjd">
+                                <rect key="frame" x="288" y="159.33333333333334" width="110" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="BU5-Fz-uQZ"/>
+                                    <constraint firstAttribute="height" constant="30" id="kZG-vr-PoD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                <state key="normal" title="Paste" image="copyIc"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.80000000000000004"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onClickPaste:" destination="aKk-rD-wQP" eventType="touchUpInside" id="gYA-cr-UtT"/>
+                                    <action selector="onClickPaste:" destination="EBS-j3-Kde" eventType="touchUpInside" id="ji6-um-aez"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fYJ-FJ-DIx">
+                                <rect key="frame" x="16" y="796" width="382" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtf-XJ-PoM">
+                                        <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="7Mm-Ia-RLr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickCancel:" destination="aKk-rD-wQP" eventType="touchUpInside" id="3dG-nc-J4b"/>
+                                            <action selector="onClickCancel:" destination="EBS-j3-Kde" eventType="touchUpInside" id="A9b-lD-F7Z"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="teE-3C-hGa">
+                                        <rect key="frame" x="196" y="0.0" width="186" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="e0A-Dr-H6g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickNext:" destination="aKk-rD-wQP" eventType="touchUpInside" id="4pK-xb-YQC"/>
+                                            <action selector="onClickNext:" destination="EBS-j3-Kde" eventType="touchUpInside" id="akF-ZE-3bl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="mmy-Qn-qfN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="L17-Ze-2vH" firstAttribute="top" secondItem="mmy-Qn-qfN" secondAttribute="top" constant="16" id="3vk-lO-LZs"/>
+                            <constraint firstItem="mmy-Qn-qfN" firstAttribute="trailing" secondItem="L17-Ze-2vH" secondAttribute="trailing" constant="18" id="5Fw-Ns-IZ0"/>
+                            <constraint firstItem="8cf-lv-Vjd" firstAttribute="leading" secondItem="Lb3-5a-wlv" secondAttribute="trailing" constant="8" id="7hR-xk-24G"/>
+                            <constraint firstAttribute="bottom" secondItem="vV0-L5-a1Z" secondAttribute="bottom" id="8Jx-Ik-wV9"/>
+                            <constraint firstItem="vV0-L5-a1Z" firstAttribute="top" secondItem="xkI-fg-6gw" secondAttribute="top" id="9mL-JL-A09"/>
+                            <constraint firstItem="mmy-Qn-qfN" firstAttribute="trailing" secondItem="eAv-Rx-Cir" secondAttribute="trailing" constant="16" id="EYb-Ci-VCt"/>
+                            <constraint firstItem="mmy-Qn-qfN" firstAttribute="bottom" secondItem="fYJ-FJ-DIx" secondAttribute="bottom" constant="16" id="LDg-Cr-D5s"/>
+                            <constraint firstItem="L17-Ze-2vH" firstAttribute="leading" secondItem="mmy-Qn-qfN" secondAttribute="leading" constant="18" id="Mcx-HP-MUZ"/>
+                            <constraint firstItem="mmy-Qn-qfN" firstAttribute="trailing" secondItem="8cf-lv-Vjd" secondAttribute="trailing" constant="16" id="NV1-2b-M7F"/>
+                            <constraint firstItem="mmy-Qn-qfN" firstAttribute="leading" secondItem="vV0-L5-a1Z" secondAttribute="leading" id="NX0-DK-TAb"/>
+                            <constraint firstItem="eAv-Rx-Cir" firstAttribute="leading" secondItem="mmy-Qn-qfN" secondAttribute="leading" constant="16" id="NgW-78-g4r"/>
+                            <constraint firstItem="8cf-lv-Vjd" firstAttribute="top" secondItem="eAv-Rx-Cir" secondAttribute="bottom" constant="12" id="QRn-xG-O4E"/>
+                            <constraint firstItem="eAv-Rx-Cir" firstAttribute="top" secondItem="L17-Ze-2vH" secondAttribute="bottom" constant="12" id="ayQ-ma-9RD"/>
+                            <constraint firstItem="mmy-Qn-qfN" firstAttribute="trailing" secondItem="fYJ-FJ-DIx" secondAttribute="trailing" constant="16" id="glZ-4J-wfq"/>
+                            <constraint firstItem="fYJ-FJ-DIx" firstAttribute="leading" secondItem="mmy-Qn-qfN" secondAttribute="leading" constant="16" id="mZH-vZ-v0x"/>
+                            <constraint firstItem="Lb3-5a-wlv" firstAttribute="centerY" secondItem="8cf-lv-Vjd" secondAttribute="centerY" id="uZy-Hd-czV"/>
+                            <constraint firstItem="mmy-Qn-qfN" firstAttribute="trailing" secondItem="vV0-L5-a1Z" secondAttribute="trailing" id="xj8-VX-bzO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="keyInputText" destination="eAv-Rx-Cir" id="Bog-AC-rKv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VwZ-uT-xxY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2222" y="2463"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="qOt-XG-MuT">
             <objects>
@@ -2620,5 +2785,8 @@ To make transaction can add private information with later.</string>
         <image name="mnemonicsIc" width="25" height="25"/>
         <image name="passwordDelete" width="33" height="23"/>
         <image name="warning_ic" width="38" height="38"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

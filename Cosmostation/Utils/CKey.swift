@@ -217,7 +217,6 @@ class CKey {
         var genedSignature = Signature.init()
         var genPubkey =  PublicKey.init()
         genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-//        genPubkey.value = pKey.publicKey.data.base64EncodedString()
         genPubkey.value = cPublicKey(pKey)!.data.base64EncodedString()
         genedSignature.pub_key = genPubkey
         genedSignature.signature = signedData.base64EncodedString()
