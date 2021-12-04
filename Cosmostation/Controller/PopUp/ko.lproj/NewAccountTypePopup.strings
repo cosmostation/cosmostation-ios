@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Private Key"; ObjectID = "6yW-7B-a8Z"; */
+"6yW-7B-a8Z.text" = "개인키";
+
+/* Class = "UILabel"; text = "Watching only"; ObjectID = "Cdq-Wy-eKK"; */
+"Cdq-Wy-eKK.text" = "관찰 모드";
+
+/* Class = "UILabel"; text = "Mnemonic"; ObjectID = "DfQ-F5-a0K"; */
+"DfQ-F5-a0K.text" = "복구문자";
+
+/* Class = "UILabel"; text = "Create"; ObjectID = "aVK-Nh-nYN"; */
+"aVK-Nh-nYN.text" = "지갑 생성";
+
+/* Class = "UILabel"; text = "Restore with"; ObjectID = "b0k-He-hhw"; */
+"b0k-He-hhw.text" = "지갑 복원";
+
+/* Class = "UILabel"; text = "Address"; ObjectID = "db3-9t-fHm"; */
+"db3-9t-fHm.text" = "주소";
+
+/* Class = "UILabel"; text = "Restore with"; ObjectID = "hKk-C7-Bk1"; */
+"hKk-C7-Bk1.text" = "지갑 복원";

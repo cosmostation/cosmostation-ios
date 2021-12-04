@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,31 +13,31 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_intro" translatesAutoresizingMaskIntoConstraints="NO" id="CpL-84-w9F">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmostaion" translatesAutoresizingMaskIntoConstraints="NO" id="GPe-QH-ejp">
-                                <rect key="frame" x="69.666666666666686" y="254" width="236" height="41"/>
+                                <rect key="frame" x="89" y="239" width="236" height="41"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmostationLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TkH-JF-SCg">
-                                <rect key="frame" x="123" y="716" width="129" height="46"/>
+                                <rect key="frame" x="142.66666666666666" y="800" width="128.99999999999997" height="46"/>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="CpL-84-w9F" firstAttribute="top" secondItem="GPe-QH-ejp" secondAttribute="bottom" constant="-280" id="6wl-dt-09R"/>
                             <constraint firstItem="CpL-84-w9F" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" id="Hqj-2S-3C3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CpL-84-w9F" secondAttribute="trailing" id="JOU-xC-cjo"/>
                             <constraint firstItem="CpL-84-w9F" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QXp-8I-xJk"/>
                             <constraint firstItem="GPe-QH-ejp" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="R2D-3h-mFm"/>
                             <constraint firstAttribute="top" secondItem="CpL-84-w9F" secondAttribute="top" id="Sq3-RG-SJe"/>
-                            <constraint firstItem="CpL-84-w9F" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="YF5-Na-XUM"/>
                             <constraint firstItem="TkH-JF-SCg" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="cnU-2U-Jga"/>
-                            <constraint firstItem="GPe-QH-ejp" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="210" id="dhL-44-XYM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TkH-JF-SCg" secondAttribute="bottom" constant="16" id="pMY-yP-sC1"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -34,6 +34,7 @@
 		049DAA0227311DEB00658CFB /* WalletGBridgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */; };
 		049DAA0527311DFE00658CFB /* WalletStargazeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */; };
 		049DAA0627311DFE00658CFB /* WalletStargazeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */; };
+		04AAD5B7275BAD9B002D3A95 /* NewAccountTypePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AAD5B9275BAD9B002D3A95 /* NewAccountTypePopup.xib */; };
 		04C53944274B41FE00C1EE83 /* CommonWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */; };
 		04C53945274B41FE00C1EE83 /* CommonWCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */; };
 		04CFBD482691F8460013150B /* TxTokenSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD462691F8460013150B /* TxTokenSwapCell.swift */; };
@@ -1329,7 +1330,6 @@
 		28A2A4C2271FF9140042ACC4 /* WalletBitcannaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A2A4C0271FF9140042ACC4 /* WalletBitcannaCell.swift */; };
 		28A2A4C3271FF9140042ACC4 /* WalletBitcannaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A2A4C1271FF9140042ACC4 /* WalletBitcannaCell.xib */; };
 		28A2A4C627218D0B0042ACC4 /* NewAccountTypePopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A2A4C427218D0A0042ACC4 /* NewAccountTypePopup.swift */; };
-		28A2A4C727218D0B0042ACC4 /* NewAccountTypePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A2A4C527218D0A0042ACC4 /* NewAccountTypePopup.xib */; };
 		28A2A4CA2721B9030042ACC4 /* AccountSwitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A2A4C82721B9030042ACC4 /* AccountSwitchViewController.swift */; };
 		28A2A4CB2721B9030042ACC4 /* AccountSwitchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28A2A4C92721B9030042ACC4 /* AccountSwitchViewController.xib */; };
 		28A8401F2605A3D8008C2D61 /* NodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A8401E2605A3D8008C2D61 /* NodeInfo.swift */; };
@@ -1732,6 +1732,8 @@
 		049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletGBridgeCell.xib; sourceTree = "<group>"; };
 		049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStargazeCell.swift; sourceTree = "<group>"; };
 		049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStargazeCell.xib; sourceTree = "<group>"; };
+		04AAD5B8275BAD9B002D3A95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NewAccountTypePopup.xib; sourceTree = "<group>"; };
+		04AAD5BB275BADA2002D3A95 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/NewAccountTypePopup.strings; sourceTree = "<group>"; };
 		04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWCViewController.swift; sourceTree = "<group>"; };
 		04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonWCViewController.xib; sourceTree = "<group>"; };
 		04CFBD462691F8460013150B /* TxTokenSwapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxTokenSwapCell.swift; sourceTree = "<group>"; };
@@ -3038,7 +3040,6 @@
 		28A2A4C0271FF9140042ACC4 /* WalletBitcannaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBitcannaCell.swift; sourceTree = "<group>"; };
 		28A2A4C1271FF9140042ACC4 /* WalletBitcannaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletBitcannaCell.xib; sourceTree = "<group>"; };
 		28A2A4C427218D0A0042ACC4 /* NewAccountTypePopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountTypePopup.swift; sourceTree = "<group>"; };
-		28A2A4C527218D0A0042ACC4 /* NewAccountTypePopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewAccountTypePopup.xib; sourceTree = "<group>"; };
 		28A2A4C82721B9030042ACC4 /* AccountSwitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSwitchViewController.swift; sourceTree = "<group>"; };
 		28A2A4C92721B9030042ACC4 /* AccountSwitchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountSwitchViewController.xib; sourceTree = "<group>"; };
 		28A8401E2605A3D8008C2D61 /* NodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeInfo.swift; sourceTree = "<group>"; };
@@ -4840,7 +4841,7 @@
 				28393B8126B9023D00DF2F88 /* HdacBalancePopup.swift */,
 				28393B8226B9023D00DF2F88 /* HdacBalancePopup.xib */,
 				28A2A4C427218D0A0042ACC4 /* NewAccountTypePopup.swift */,
-				28A2A4C527218D0A0042ACC4 /* NewAccountTypePopup.xib */,
+				04AAD5B9275BAD9B002D3A95 /* NewAccountTypePopup.xib */,
 			);
 			path = PopUp;
 			sourceTree = "<group>";
@@ -5775,7 +5776,7 @@
 				28DB570225FA3BA900B2F0E5 /* HardPoolWithdraw3ViewController.xib in Resources */,
 				28C3F506269DC52600F4A58C /* TxGravityDepositBatchCell.xib in Resources */,
 				285A33E724486DA20052BD3D /* HtlcResultSentCell.xib in Resources */,
-				28A2A4C727218D0B0042ACC4 /* NewAccountTypePopup.xib in Resources */,
+				04AAD5B7275BAD9B002D3A95 /* NewAccountTypePopup.xib in Resources */,
 				28E1D4592658E32D002FDF9B /* StepFeeOldViewController.xib in Resources */,
 				E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */,
 				280E6CDE2605D78900B3BCBB /* WalletPersisCell.xib in Resources */,
@@ -7439,6 +7440,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		04AAD5B9275BAD9B002D3A95 /* NewAccountTypePopup.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				04AAD5B8275BAD9B002D3A95 /* Base */,
+				04AAD5BB275BADA2002D3A95 /* ko */,
+			);
+			name = NewAccountTypePopup.xib;
+			sourceTree = "<group>";
+		};
 		283A80C524513F6F008FF813 /* CdpListAllCell.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

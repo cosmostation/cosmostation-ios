@@ -207,7 +207,7 @@
 "yDW-0A-2w2.normalTitle" = "n";
 
 /* Class = "UIButton"; normalTitle = "CREATE"; ObjectID = "yqM-8h-gAN"; */
-"yqM-8h-gAN.normalTitle" = "지갑 생성";
+"yqM-8h-gAN.normalTitle" = "시작하기";
 
 /* Class = "UILabel"; text = "bembino"; ObjectID = "yua-My-VbZ"; */
 "yua-My-VbZ.text" = "bembino";

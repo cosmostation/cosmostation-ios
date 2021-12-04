@@ -10,32 +10,19 @@ import UIKit
 import Alamofire
 import Firebase
 
-class IntroViewController: BaseViewController, PasswordViewDelegate {
+class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopupDelegate {
 
     @IBOutlet weak var bottomLogoView: UIView!
     @IBOutlet weak var bottomControlView: UIView!
-    @IBOutlet weak var importBtn: UIButton!
-    @IBOutlet weak var importView: UIView!
-    @IBOutlet weak var importMnemonicMsg: UIStackView!
-    @IBOutlet weak var importMnemonicBtn: UIButton!
-    @IBOutlet weak var importAddressMsg: UIStackView!
-    @IBOutlet weak var importAddressBtn: UIButton!
     
     var accounts:Array<Account>?
     var lockPasses = false;
-    
+    var toAddChain: ChainType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.lockPasses = false;
         accounts = BaseData.instance.selectAllAccounts()
-        importMnemonicBtn.addTarget(self, action: #selector(startHighlight), for: .touchDown)
-        importMnemonicBtn.addTarget(self, action: #selector(stopHighlight), for: .touchUpInside)
-        importMnemonicBtn.addTarget(self, action: #selector(stopHighlight), for: .touchUpOutside)
-
-        importAddressBtn.addTarget(self, action: #selector(startHighlight), for: .touchDown)
-        importAddressBtn.addTarget(self, action: #selector(stopHighlight), for: .touchUpInside)
-        importAddressBtn.addTarget(self, action: #selector(stopHighlight), for: .touchUpOutside)
         
         Messaging.messaging().token { token, error in
             if let error = error {
@@ -140,45 +127,46 @@ class IntroViewController: BaseViewController, PasswordViewDelegate {
     
     
     @IBAction func onClickCreate(_ sender: Any) {
-        self.onStartCreate()
-        
+        self.onShowSelectChainDialog(true)
     }
     
-    @IBAction func onClickImport(_ sender: Any) {
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseOut, animations: {
-            self.importBtn.alpha = 0.0
-        }, completion: { (finished) -> Void in
-            UIView.animate(withDuration: 0.2, delay: 0.0, options: .transitionCurlUp, animations: {
-                self.importView.alpha = 1.0
-            }, completion: nil)
-            UIView.animate(withDuration: 0.1, delay: 0.1, options: .transitionCurlUp, animations: {
-                self.importMnemonicMsg.transform = CGAffineTransform(translationX: 0, y: -9.6)
-                self.importAddressMsg.transform = CGAffineTransform(translationX: 0, y: -9.6)
-            }, completion: nil)
-            
-        })
-    }
-    
-    @IBAction func onClickImportMnemonic(_ sender: Any) {
-        self.onStartImportMnemonic()
-    }
-    
-    @IBAction func onClickImportAddress(_ sender: Any) {
-        self.onStartImportAddress()
-        
-    }
-    
-    @objc func startHighlight(sender: UIButton) {
-        sender.layer.borderColor = UIColor.gray.cgColor
-    }
-    @objc func stopHighlight(sender: UIButton) {
-        sender.layer.borderColor = UIColor.white.cgColor
+    override func onChainSelected(_ chainType: ChainType) {
+        self.toAddChain = chainType
+        let popupVC = NewAccountTypePopup(nibName: "NewAccountTypePopup", bundle: nil)
+        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+        cardPopup.resultDelegate = self
+        cardPopup.show(onViewController: self)
     }
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             self.lockPasses = true
         }
+    }
+    
+    func SBCardPopupResponse(type: Int, result: Int) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(490), execute: {
+            var tagetVC:BaseViewController?
+            if (result == 1) {
+                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "CreateViewController") as! CreateViewController
+                tagetVC?.chainType = self.toAddChain!
+                
+            } else if (result == 2) {
+                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
+                tagetVC?.chainType = self.toAddChain!
+                
+            } else if (result == 3) {
+                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
+                
+            } else if (result == 4) {
+                
+            }
+            if (tagetVC != nil) {
+                tagetVC?.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(tagetVC!, animated: true)
+            }
+        })
     }
     
     func onCheckAppVersion() {
