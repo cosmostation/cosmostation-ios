@@ -5425,20 +5425,25 @@ public class WUtils {
     
     //address, accountnumber, sequencenumber
     static func onParseAuthGrpc(_ response :Cosmos_Auth_V1beta1_QueryAccountResponse) -> (String?, UInt64?, UInt64?) {
-        if (response.account.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)) {
-            let auth = try! Cosmos_Auth_V1beta1_BaseAccount.init(serializedData: response.account.value)
+        var rawAccount = response.account
+        if (rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
+            rawAccount = try! Desmos_Profiles_V1beta1_Profile.init(serializedData: rawAccount.value).account
+        }
+        
+        if (rawAccount.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName)) {
+            let auth = try! Cosmos_Auth_V1beta1_BaseAccount.init(serializedData: rawAccount.value)
             return (auth.address, auth.accountNumber, auth.sequence)
             
-        } else if (response.account.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
-            let auth = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: response.account.value).baseVestingAccount.baseAccount
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
+            let auth = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value).baseVestingAccount.baseAccount
             return (auth.address, auth.accountNumber, auth.sequence)
             
-        } else if (response.account.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
-            let auth = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: response.account.value).baseVestingAccount.baseAccount
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
+            let auth = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value).baseVestingAccount.baseAccount
             return (auth.address, auth.accountNumber, auth.sequence)
             
-        } else if (response.account.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)) {
-            let auth = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: response.account.value).baseVestingAccount.baseAccount
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)) {
+            let auth = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value).baseVestingAccount.baseAccount
             return (auth.address, auth.accountNumber, auth.sequence)
             
         }
@@ -5453,16 +5458,35 @@ public class WUtils {
         return (nil, nil, nil)
     }
     
-    static func onParseVestingAccount(_ chain: ChainType) {
+    
+    static func onParseAuthAccount(_ chain: ChainType) {
+        print("onParseAuthAccount")
+        guard let rawAccount = BaseData.instance.mAccount_gRPC else { return }
+        if (chain == ChainType.PERSIS_MAIN) {
+            onParsePersisVestingAccount(rawAccount)
+            
+        } else if (chain == ChainType.DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
+            if let profileAccount = try? Desmos_Profiles_V1beta1_Profile.init(serializedData: rawAccount.value) {
+                onParseVestingAccount(chain, profileAccount.account)
+            } else {
+                onParseVestingAccount(chain, rawAccount)
+            }
+            
+        } else {
+            onParseVestingAccount(chain, rawAccount)
+        }
+        
+    }
+    
+    static func onParseVestingAccount(_ chain: ChainType, _ rawAccount: Google_Protobuf_Any) {
         print("onParseVestingAccount")
-        guard let account = BaseData.instance.mAccount_gRPC else { return }
         var sBalace = Array<Coin>()
         BaseData.instance.mMyBalances_gRPC.forEach { coin in
             sBalace.append(coin)
         }
 //        print("sBalace ", sBalace)
-        if (account.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
-            let vestingAccount = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: account.value)
+        if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value)
             sBalace.forEach({ (coin) in
                 let denom = coin.denom
                 var dpBalance = NSDecimalNumber.zero
@@ -5517,8 +5541,8 @@ public class WUtils {
                 }
             })
             
-        } else if (account.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
-            let vestingAccount = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: account.value)
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value)
             sBalace.forEach({ (coin) in
                 let denom = coin.denom
                 var dpBalance = NSDecimalNumber.zero
@@ -5584,8 +5608,8 @@ public class WUtils {
                 
             })
             
-        } else if (account.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)) {
-            let vestingAccount = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: account.value)
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value)
             sBalace.forEach({ (coin) in
                 let denom = coin.denom
                 var dpBalance = NSDecimalNumber.zero
@@ -5659,16 +5683,15 @@ public class WUtils {
         }
     }
     
-    static func onParsePersisVestingAccount() {
-//        print("onParsePersisVestingAccount")
-        guard let account = BaseData.instance.mAccount_gRPC else { return }
+    static func onParsePersisVestingAccount(_ rawAccount: Google_Protobuf_Any) {
+        print("onParsePersisVestingAccount")
         var sBalace = Array<Coin>()
         BaseData.instance.mMyBalances_gRPC.forEach { coin in
             sBalace.append(coin)
         }
 //        print("sBalace ", sBalace)
-        if (account.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
-            let vestingAccount = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: account.value)
+        if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value)
             sBalace.forEach({ (coin) in
                 let denom = coin.denom
                 var bankBalance = NSDecimalNumber.zero
@@ -5701,8 +5724,8 @@ public class WUtils {
                 }
             })
             
-        } else if (account.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
-            let vestingAccount = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: account.value)
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value)
             sBalace.forEach({ (coin) in
                 let denom = coin.denom
                 var bankBalance = NSDecimalNumber.zero

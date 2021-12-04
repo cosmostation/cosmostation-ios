@@ -199,8 +199,8 @@ class WalletGuideCell: UITableViewCell {
             
         } else if (chainType == ChainType.DESMOS_MAIN) {
             guideImg.image = UIImage(named: "infoiconDesmos")
-            guideTitle.text = NSLocalizedString("send_guide_title_bitsong", comment: "")
-            guideMsg.text = NSLocalizedString("send_guide_msg_bitsong", comment: "")
+            guideTitle.text = NSLocalizedString("send_guide_title_desmos", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_desmos", comment: "")
             
         }
         

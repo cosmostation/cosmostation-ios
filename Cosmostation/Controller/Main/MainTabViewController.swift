@@ -428,13 +428,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, SBC
             if (BaseData.instance.mNodeInfo_gRPC == nil) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
             } else {
-                if (BaseData.instance.mAccount_gRPC != nil && BaseData.instance.mAccount_gRPC!.typeURL.contains(Cosmos_Auth_V1beta1_BaseAccount.protoMessageName) == false) {
-                    if (self.mChainType == ChainType.PERSIS_MAIN) {
-                        WUtils.onParsePersisVestingAccount()
-                    } else {
-                        WUtils.onParseVestingAccount(self.mChainType)
-                    }
-                }
+                WUtils.onParseAuthAccount(self.mChainType)
             }
             self.onFetchPriceInfo()
             NotificationCenter.default.post(name: Notification.Name("onFetchDone"), object: nil, userInfo: nil)

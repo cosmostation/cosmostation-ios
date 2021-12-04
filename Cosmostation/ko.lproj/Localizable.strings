@@ -180,7 +180,7 @@
 "send_guide_title_bitsong" = "BITSONG Netwrok";
 "send_guide_msg_bitsong" = "Cosmos SDK 기반 블록체인으로서 음악산업 내 아티스트와 팬, 음원 공급사를 연결해주는 탈중앙화 플랫폼입니다.";
 "send_guide_title_desmos" = "DESMOS";
-"send_guide_msg_bitsong" = "Desmos 프로필을 통해 탈중앙화를 실현하는 Forbole사의 소셜 네트워크 블록체인.";
+"send_guide_msg_desmos" = "Desmos 프로필을 통해 탈중앙화를 실현하는 Forbole사의 소셜 네트워크 블록체인.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

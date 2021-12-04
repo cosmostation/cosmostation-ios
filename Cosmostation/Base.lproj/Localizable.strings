@@ -181,7 +181,7 @@
 "send_guide_title_bitsong" = "BITSONG Netwrok";
 "send_guide_msg_bitsong" = "CA decentralized blockchain hub that provides a trustless marketplace for the music industry.";
 "send_guide_title_desmos" = "DESMOS";
-"send_guide_msg_bitsong" = "A blockchain for decentralized social networks powered by Forbole.";
+"send_guide_msg_desmos" = "A blockchain for decentralized social networks powered by Forbole.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
