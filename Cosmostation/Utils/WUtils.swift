@@ -5015,7 +5015,7 @@ public class WUtils {
         if (chain == ChainType.COSMOS_MAIN) { return "(Cosmos Mainnet)" }
         else if (chain == ChainType.IRIS_MAIN) { return "(Iris Mainnet)" }
         else if (chain == ChainType.BINANCE_MAIN) { return "(Binance Mainnet)" }
-        else if (chain == ChainType.OKEX_MAIN) { return "(ExChain Mainnet)" }
+        else if (chain == ChainType.OKEX_MAIN) { return "(OEC Mainnet)" }
         else if (chain == ChainType.AKASH_MAIN) { return "(Akash Mainnet)" }
         else if (chain == ChainType.KAVA_MAIN) { return "(Kava Mainnet)" }
         else if (chain == ChainType.BAND_MAIN) { return "(Band Mainnet)" }
@@ -5059,7 +5059,7 @@ public class WUtils {
         if (chain == ChainType.COSMOS_MAIN) { return "COSMOS" }
         else if (chain == ChainType.IRIS_MAIN) { return "IRIS" }
         else if (chain == ChainType.BINANCE_MAIN) { return "BINANCE" }
-        else if (chain == ChainType.OKEX_MAIN) { return "EX" }
+        else if (chain == ChainType.OKEX_MAIN) { return "OEC" }
         else if (chain == ChainType.AKASH_MAIN) { return "AKASH" }
         else if (chain == ChainType.KAVA_MAIN) { return "KAVA" }
         else if (chain == ChainType.BAND_MAIN) { return "BAND" }
