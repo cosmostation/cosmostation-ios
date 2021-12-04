@@ -4383,6 +4383,9 @@ public class WUtils {
         } else if (chain == ChainType.DESMOS_MAIN) {
             return BLOCK_TIME_DESMOS
             
+        } else if (chain == ChainType.COMDEX_MAIN) {
+            return BLOCK_TIME_COMDEX
+            
         }
         return NSDecimalNumber.zero
     }

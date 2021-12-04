@@ -1322,6 +1322,7 @@ let BLOCK_TIME_STARGAZE     = NSDecimalNumber.init(string: "5.8129")
 let BLOCK_TIME_INJECTIVE    = NSDecimalNumber.init(string: "2.4865")
 let BLOCK_TIME_BITSONG      = NSDecimalNumber.init(string: "5.9040")
 let BLOCK_TIME_DESMOS       = NSDecimalNumber.init(string: "6.1605")
+let BLOCK_TIME_COMDEX       = NSDecimalNumber.init(string: "6.1746")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;
