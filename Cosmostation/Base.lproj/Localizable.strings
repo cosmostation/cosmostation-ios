@@ -23,6 +23,8 @@
 "address_copied" = "Address copied";
 "mnemonic_copied" = "Mnemonic copied\nClear your clipboard after paste it!";
 "mnemonic_safe_copied" = "Mnemonic copied safely";
+"pkey_copied" = "PrivateKey copied\nClear your clipboard after paste it!";
+"pkey_safe_copied" = "PrivateKey copied safely";
 "wallet_delete_complete" = "Delete Completed!";
 "delegate_step_1" = "Enter delegation amount";
 "delegate_step_2" = "Insert memo (optional)";
@@ -521,6 +523,7 @@ support@cosmostation.io";
 "title_wallet_manage" = "Wallet Manage";
 "title_wallet_detail" = "Wallet Detail";
 "title_check_mnemonics" = "Check Mnemonics";
+"title_check_privatekey" = "Check Private Key";
 "title_create" = "Create Wallet";
 "title_watch_wallet" = "Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";

@@ -23,6 +23,8 @@
 "address_copied" = "클립보드에 복사하였습니다.";
 "mnemonic_copied" = "클립보드에 복사하였습니다.";
 "mnemonic_safe_copied" = "안전 모드로 복사되었습니다.";
+"pkey_copied" = "클립보드에 복사하였습니다.";
+"pkey_safe_copied" = "안전 모드로 복사되었습니다.";
 "wallet_delete_complete" = "삭제 완료!";
 "delegate_step_1" = "위임 할 수량을 입력하세요";
 "delegate_step_2" = "메모를 입력하세요 (선택사항)";
@@ -31,7 +33,7 @@
 "undelegate_step_1" = "위임 철회할 수량을 입력하세요";
 "undelegate_step_4" = "입력하신 정보를 확인하세요";
 "withdraw_single_step_1" = "지급받을 이자 내역을 확인하세요";
-"withdraw_single_step_4" = "입력하신 정보를 확인하세요";eke
+"withdraw_single_step_4" = "입력하신 정보를 확인하세요";
 "send_step_1" = "받을 지갑 주소를 입력하세요";
 "send_step_2" = "전송하실 토큰과 수량을 입력하세요";
 "send_step_3" = "메모를 입력하세요 (선택사항)";
@@ -523,6 +525,7 @@ support@cosmostation.io";
 "title_wallet_manage" = "지갑 관리";
 "title_wallet_detail" = "지갑 상세";
 "title_check_mnemonics" = "복구 단어 확인";
+"title_check_privatekey" = "개인키 확인";
 "title_create" = "지갑 생성";
 "title_watch_wallet" = "관찰 지갑";
 "title_restore_privatekey" = "개인키로 지갑복원";
