@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -849,7 +849,7 @@ You can recover your wallet using your mnemonics</string>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eZf-hK-zF8">
                     <rect key="frame" x="10" y="531" width="353" height="120"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wi9-IX-heE">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wi9-IX-heE">
                             <rect key="frame" x="16" y="70" width="321" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="zie-2v-SNW"/>
@@ -873,7 +873,7 @@ You can recover your wallet using your mnemonics</string>
                                 <action selector="onClickOK:" destination="-1" eventType="touchUpInside" id="Hgg-RP-m0a"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3D-nF-ee2">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3D-nF-ee2">
                             <rect key="frame" x="16" y="10" width="321" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="s16-QU-BFz"/>
@@ -910,6 +910,7 @@ You can recover your wallet using your mnemonics</string>
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="eZf-hK-zF8" secondAttribute="trailing" constant="12" id="0AS-mq-rih"/>
@@ -928,7 +929,6 @@ You can recover your wallet using your mnemonics</string>
                 <constraint firstItem="ZEO-2O-Gad" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="54" id="ydK-0B-n42"/>
                 <constraint firstItem="eZf-hK-zF8" firstAttribute="top" secondItem="ZEO-2O-Gad" secondAttribute="bottom" constant="16" id="zCx-Ef-p4P"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="140" y="152.47376311844079"/>
         </view>
     </objects>

@@ -3206,7 +3206,7 @@ public class WUtils {
         return nil
     }
     
-    static func getChainDBName(_ chain:ChainType) -> String {
+    static func getChainDBName(_ chain:ChainType?) -> String {
         if (chain == ChainType.COSMOS_MAIN) {
             return CHAIN_COSMOS_S
         } else if (chain == ChainType.IRIS_MAIN) {

@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletDetailViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="actionBtn" destination="7YT-6H-gLA" id="IrO-WP-8e2"/>
+                <outlet property="actionBtn1" destination="7YT-6H-gLA" id="QLZ-5y-lRh"/>
+                <outlet property="actionBtn2" destination="MxZ-HF-5CB" id="t61-sj-430"/>
                 <outlet property="cardAddress" destination="byL-PX-1ub" id="L3G-FC-EVS"/>
                 <outlet property="cardInfo" destination="R7D-Sl-Ids" id="rou-g2-WpS"/>
                 <outlet property="cardPush" destination="zYS-1C-cfR" id="nTv-YI-qld"/>
@@ -162,68 +163,68 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9A-Sm-obj">
-                            <rect key="frame" x="16" y="34" width="283" height="17"/>
+                            <rect key="frame" x="16" y="34" width="283" height="16.5"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QAt-JI-vWN">
-                            <rect key="frame" x="12" y="67" width="319" height="0.5"/>
+                            <rect key="frame" x="12" y="66.5" width="319" height="0.5"/>
                             <color key="backgroundColor" red="0.29411764709999999" green="0.30980392159999998" blue="0.3294117647" alpha="1" colorSpace="deviceRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="qIM-0f-bBe"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chain Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFx-iE-W5a">
-                            <rect key="frame" x="16" y="83.5" width="55" height="14"/>
+                            <rect key="frame" x="16" y="83" width="55" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Imported Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FQ-6L-D0A">
-                            <rect key="frame" x="16" y="107.5" width="76.5" height="14"/>
+                            <rect key="frame" x="16" y="107" width="76.5" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Imported State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxH-Wt-SxB">
-                            <rect key="frame" x="16" y="131.5" width="79" height="14"/>
+                            <rect key="frame" x="16" y="131" width="79" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key Path" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87G-OB-BRl">
-                            <rect key="frame" x="16" y="155.5" width="49" height="14"/>
+                            <rect key="frame" x="16" y="155" width="49" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Op6-9y-J50">
-                            <rect key="frame" x="327" y="83.5" width="4" height="14"/>
+                            <rect key="frame" x="327" y="83" width="4" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gsg-Id-mWi">
-                            <rect key="frame" x="327" y="107.5" width="4" height="14"/>
+                            <rect key="frame" x="327" y="107" width="4" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVk-TP-eew">
-                            <rect key="frame" x="327" y="131.5" width="4" height="14"/>
+                            <rect key="frame" x="327" y="131" width="4" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyi-i3-uWr">
-                            <rect key="frame" x="327" y="155.5" width="4" height="14"/>
+                            <rect key="frame" x="327" y="155" width="4" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGz-gq-KBU">
-                            <rect key="frame" x="47.5" y="157.5" width="283.5" height="28"/>
+                            <rect key="frame" x="47.5" y="157" width="283.5" height="28"/>
                             <string key="text">Now only watch mode
 All services are available after mnemonics integration</string>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
@@ -319,53 +320,82 @@ All services are available after mnemonics integration</string>
                                 <action selector="onClickDelete:" destination="-1" eventType="touchUpInside" id="PrO-fj-O2J"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YT-6H-gLA">
-                            <rect key="frame" x="16" y="10" width="343" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="MBH-Sq-8Wr"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                            <state key="normal" title="CEHCK MNEMONIC">
-                                <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="8"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="onClickActionBtn:" destination="-1" eventType="touchUpInside" id="oeQ-KM-JK2"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VRf-gq-V1b">
+                            <rect key="frame" x="16" y="12" width="343" height="50"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YT-6H-gLA">
+                                    <rect key="frame" x="0.0" y="0.0" width="167.5" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="MBH-Sq-8Wr"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                    <state key="normal" title="Check Mnemonic">
+                                        <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="onClickActionBtn1:" destination="-1" eventType="touchUpInside" id="Mge-2g-Y3W"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MxZ-HF-5CB">
+                                    <rect key="frame" x="175.5" y="0.0" width="167.5" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="Q83-nB-MHY"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                    <state key="normal" title="Check Private Key">
+                                        <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="onClickActionBtn2:" destination="-1" eventType="touchUpInside" id="HQt-IU-nuX"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="lkh-oe-cma" firstAttribute="top" secondItem="7YT-6H-gLA" secondAttribute="bottom" constant="10" id="0JR-hP-zbh"/>
                         <constraint firstAttribute="bottom" secondItem="lkh-oe-cma" secondAttribute="bottom" id="3Hq-mq-iix"/>
-                        <constraint firstAttribute="trailing" secondItem="7YT-6H-gLA" secondAttribute="trailing" constant="16" id="6Bl-bj-JsS"/>
+                        <constraint firstItem="lkh-oe-cma" firstAttribute="top" secondItem="VRf-gq-V1b" secondAttribute="bottom" constant="8" id="4Qo-6V-zCQ"/>
                         <constraint firstAttribute="height" constant="120" id="M4x-1f-8Ip"/>
-                        <constraint firstItem="7YT-6H-gLA" firstAttribute="leading" secondItem="ojd-Vn-gHM" secondAttribute="leading" constant="16" id="QLL-G8-GTy"/>
                         <constraint firstAttribute="trailing" secondItem="lkh-oe-cma" secondAttribute="trailing" constant="16" id="c9N-Ox-ZJb"/>
                         <constraint firstItem="lkh-oe-cma" firstAttribute="leading" secondItem="ojd-Vn-gHM" secondAttribute="leading" constant="16" id="eJR-7P-mNh"/>
+                        <constraint firstAttribute="trailing" secondItem="VRf-gq-V1b" secondAttribute="trailing" constant="16" id="jhq-F2-baI"/>
+                        <constraint firstItem="VRf-gq-V1b" firstAttribute="leading" secondItem="ojd-Vn-gHM" secondAttribute="leading" constant="16" id="qk7-eX-r2n"/>
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C1f-W5-wv9" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="388" width="343" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward Recipient Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LQ4-c4-4FH">
-                            <rect key="frame" x="16" y="12" width="142" height="14"/>
+                            <rect key="frame" x="16" y="12" width="141.5" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwM-A2-KH6">
-                            <rect key="frame" x="16" y="30" width="281" height="17"/>
+                            <rect key="frame" x="16" y="30" width="281" height="16.5"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
@@ -438,7 +468,7 @@ All services are available after mnemonics integration</string>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ojd-Vn-gHM" secondAttribute="bottom" constant="16" id="zjg-sx-I22"/>
                 <constraint firstItem="zYS-1C-cfR" firstAttribute="leading" secondItem="byL-PX-1ub" secondAttribute="leading" id="zlr-ve-KUa"/>
             </constraints>
-            <point key="canvasLocation" x="140" y="154"/>
+            <point key="canvasLocation" x="140" y="153.37331334332833"/>
         </view>
     </objects>
     <resources>

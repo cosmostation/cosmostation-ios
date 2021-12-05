@@ -214,3 +214,5 @@
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "zle-n6-KK9"; */
 "zle-n6-KK9.text" = "Label";
+
+"L17-Ze-2vH.text" = "개인키(프라이빗키)를 입력해주세요.\n개인키는 0x로 시작하는 66자리의 문자열 입니다.";

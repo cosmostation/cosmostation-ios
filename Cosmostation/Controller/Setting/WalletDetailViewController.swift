@@ -16,6 +16,7 @@ import NIO
 class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
 
     var accountId: Int64?
+    var option: Int?
     
     @IBOutlet weak var cardAddress: CardView!
     @IBOutlet weak var chainImg: UIImageView!
@@ -38,7 +39,8 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var rewardCard: CardView!
     @IBOutlet weak var rewardAddress: UILabel!
     
-    @IBOutlet weak var actionBtn: UIButton!
+    @IBOutlet weak var actionBtn1: UIButton!
+    @IBOutlet weak var actionBtn2: UIButton!
     
     @IBOutlet weak var constraint1: NSLayoutConstraint!
     @IBOutlet weak var constraint2: NSLayoutConstraint!
@@ -386,19 +388,30 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
         
         importDate.text = WUtils.longTimetoString(account!.account_import_time)
         
-        if (account!.account_has_private)  {
-            actionBtn.setTitle(NSLocalizedString("check_mnemonic", comment: ""), for: .normal)
+        if (account?.account_has_private == true && account?.account_from_mnemonic == true) {
+            actionBtn1.setTitle(NSLocalizedString("check_mnemonic", comment: ""), for: .normal)
+            actionBtn2.setTitle(NSLocalizedString("check_private_key", comment: ""), for: .normal)
             importState.text = NSLocalizedString("with_mnemonic", comment: "")
             pathTitle.isHidden = false
             keyPath.isHidden = false
             noKeyMsg.isHidden = true
             
+        } else if (account?.account_has_private == true && account?.account_from_mnemonic == false) {
+            actionBtn1.isHidden = true
+            actionBtn2.setTitle(NSLocalizedString("check_private_key", comment: ""), for: .normal)
+            importState.text = NSLocalizedString("with_private_key", comment: "")
+            pathTitle.isHidden = true
+            keyPath.isHidden = true
+            noKeyMsg.isHidden = true
+            
         } else {
-            actionBtn.setTitle(NSLocalizedString("import_address", comment: ""), for: .normal)
+            actionBtn1.setTitle(NSLocalizedString("import_menmonic", comment: ""), for: .normal)
+            actionBtn2.setTitle(NSLocalizedString("import_private_key", comment: ""), for: .normal)
             importState.text = NSLocalizedString("only_address", comment: "")
             pathTitle.isHidden = true
             keyPath.isHidden = true
             noKeyMsg.isHidden = false
+            
         }
         self.updatePushCardView()
         
@@ -582,8 +595,9 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
         }
     }
     
-    @IBAction func onClickActionBtn(_ sender: Any) {
-        if(self.account!.account_has_private) {
+    @IBAction func onClickActionBtn1(_ sender: UIButton) {
+        if (account?.account_from_mnemonic == true) {
+            self.option = 1
             let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
@@ -592,9 +606,31 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             self.navigationController?.pushViewController(passwordVC, animated: false)
             
         } else {
-            self.onStartImportMnemonic()
+            let restoreMnemonicVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
+            restoreMnemonicVC.chainType = self.chainType
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(restoreMnemonicVC, animated: true)
         }
     }
+    
+    @IBAction func onClickActionBtn2(_ sender: UIButton) {
+        if (account?.account_has_private == true) {
+            self.option = 2
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+            passwordVC.resultDelegate = self
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+            
+        } else {
+            let restorePKeyVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "KeyRestoreViewController") as! KeyRestoreViewController
+            restorePKeyVC.chainType = self.chainType
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(restorePKeyVC, animated: true)
+        }
+    }
+    
     
     @IBAction func onClickDelete(_ sender: Any) {
         let dpChains = BaseData.instance.dpSortedChains()
@@ -638,11 +674,21 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
-                let walletCheckVC = WalletCheckViewController(nibName: "WalletCheckViewController", bundle: nil)
-                walletCheckVC.hidesBottomBarWhenPushed = true
-                walletCheckVC.accountId = self.accountId
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(walletCheckVC, animated: true)
+                if (self.option == 1) {
+                    let walletCheckVC = WalletCheckViewController(nibName: "WalletCheckViewController", bundle: nil)
+                    walletCheckVC.hidesBottomBarWhenPushed = true
+                    walletCheckVC.accountId = self.accountId
+                    self.navigationItem.title = ""
+                    self.navigationController?.pushViewController(walletCheckVC, animated: true)
+                    
+                } else if (self.option == 2) {
+                    let walletCheckPkeyVC = WalletCheckPKeyViewController(nibName: "WalletCheckPKeyViewController", bundle: nil)
+                    walletCheckPkeyVC.hidesBottomBarWhenPushed = true
+                    walletCheckPkeyVC.accountId = self.accountId
+                    self.navigationItem.title = ""
+                    self.navigationController?.pushViewController(walletCheckPkeyVC, animated: true)
+                }
+                
             })
             
         } else if (result == PASSWORD_RESUKT_OK_FOR_DELETE) {

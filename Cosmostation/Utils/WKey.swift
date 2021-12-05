@@ -566,6 +566,10 @@ class WKey {
         return PrivateKey.init(pk: hex, chainCode: chaincode)!
     }
     
+    static func getPublicFromString(_ dataInput: Data) -> Data {
+        return Crypto.generatePublicKey(data: dataInput, compressed: true)
+    }
+    
     
     static func getStdTx(_ words: [String], _ msgList: Array<Msg>, _ stdMsg: StdSignMsg, _ account: Account, _ fee: Fee, _ memo: String) -> StdTx {
         let pKey = getHDKeyFromWords(words, account)
