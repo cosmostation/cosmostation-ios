@@ -606,7 +606,10 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             self.navigationController?.pushViewController(passwordVC, animated: false)
             
         } else {
-            self.onStartImportMnemonic()
+            let restoreMnemonicVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
+            restoreMnemonicVC.chainType = self.chainType
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(restoreMnemonicVC, animated: true)
         }
     }
     
@@ -619,8 +622,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
             passwordVC.resultDelegate = self
             self.navigationController?.pushViewController(passwordVC, animated: false)
+            
+        } else {
+            let restorePKeyVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "KeyRestoreViewController") as! KeyRestoreViewController
+            restorePKeyVC.chainType = self.chainType
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(restorePKeyVC, animated: true)
         }
-        
     }
     
     

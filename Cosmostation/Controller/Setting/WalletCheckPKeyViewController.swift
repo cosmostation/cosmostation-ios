@@ -69,7 +69,7 @@ class WalletCheckPKeyViewController: BaseViewController {
     }
     
     func onCopyAlert() {
-        let copyAlert = UIAlertController(title: NSLocalizedString("str_safe_copy_title", comment: ""), message: NSLocalizedString("str_safe_copy_msg", comment: ""), preferredStyle: .alert)
+        let copyAlert = UIAlertController(title: NSLocalizedString("str_safe_pkey_copy_title", comment: ""), message: NSLocalizedString("str_safe_pkey_copy_msg", comment: ""), preferredStyle: .alert)
         copyAlert.addAction(UIAlertAction(title: NSLocalizedString("str_raw_copy", comment: ""), style: .destructive, handler: { _ in
             UIPasteboard.general.string = self.keyString!.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("pkey_copied", comment: ""))
