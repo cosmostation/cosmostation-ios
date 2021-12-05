@@ -38,7 +38,8 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var rewardCard: CardView!
     @IBOutlet weak var rewardAddress: UILabel!
     
-    @IBOutlet weak var actionBtn: UIButton!
+    @IBOutlet weak var actionBtn1: UIButton!
+    @IBOutlet weak var actionBtn2: UIButton!
     
     @IBOutlet weak var constraint1: NSLayoutConstraint!
     @IBOutlet weak var constraint2: NSLayoutConstraint!
@@ -386,19 +387,30 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
         
         importDate.text = WUtils.longTimetoString(account!.account_import_time)
         
-        if (account!.account_has_private)  {
-            actionBtn.setTitle(NSLocalizedString("check_mnemonic", comment: ""), for: .normal)
+        if (account?.account_has_private == true && account?.account_from_mnemonic == true) {
+            actionBtn1.setTitle(NSLocalizedString("check_mnemonic", comment: ""), for: .normal)
+            actionBtn2.setTitle(NSLocalizedString("check_private_key", comment: ""), for: .normal)
             importState.text = NSLocalizedString("with_mnemonic", comment: "")
             pathTitle.isHidden = false
             keyPath.isHidden = false
             noKeyMsg.isHidden = true
             
+        } else if (account?.account_has_private == true && account?.account_from_mnemonic == false) {
+            actionBtn1.isHidden = true
+            actionBtn2.setTitle(NSLocalizedString("check_private_key", comment: ""), for: .normal)
+            importState.text = NSLocalizedString("with_private_key", comment: "")
+            pathTitle.isHidden = true
+            keyPath.isHidden = true
+            noKeyMsg.isHidden = true
+            
         } else {
-            actionBtn.setTitle(NSLocalizedString("import_address", comment: ""), for: .normal)
+            actionBtn1.setTitle(NSLocalizedString("import_menmonic", comment: ""), for: .normal)
+            actionBtn2.setTitle(NSLocalizedString("import_private_key", comment: ""), for: .normal)
             importState.text = NSLocalizedString("only_address", comment: "")
             pathTitle.isHidden = true
             keyPath.isHidden = true
             noKeyMsg.isHidden = false
+            
         }
         self.updatePushCardView()
         
@@ -582,8 +594,8 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
         }
     }
     
-    @IBAction func onClickActionBtn(_ sender: Any) {
-        if(self.account!.account_has_private) {
+    @IBAction func onClickActionBtn1(_ sender: UIButton) {
+        if (account?.account_from_mnemonic == true) {
             let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
@@ -595,6 +607,11 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             self.onStartImportMnemonic()
         }
     }
+    
+    @IBAction func onClickActionBtn2(_ sender: UIButton) {
+        
+    }
+    
     
     @IBAction func onClickDelete(_ sender: Any) {
         let dpChains = BaseData.instance.dpSortedChains()

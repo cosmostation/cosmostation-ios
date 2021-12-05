@@ -60,12 +60,15 @@
 "sort_by_amount" = "By Amount";
 "sort_by_value" = "By Value";
 "with_mnemonics" = "With Mnemonics";
+"with_private_key" = "With Private Key";
 "only_address" = "Only Address";
 "wallet_dash" = "Wallet ";
 "with_mnemonic" = "With Mnemonics ";
 "only_address" = "Only Address";
 "check_mnemonic" = "Check Mnemonic";
-"import_address" = "Import Mnemonic";
+"check_private_key" = "Check PrivateKey";
+"import_menmonic" = "Import Mnemonic";
+"import_private_key" = "Import PrivateKey";
 "change_wallet_name" = "Change Wallet Name";
 "wallet_name" = "wallet name";
 "share_text" = "Share Text Address";

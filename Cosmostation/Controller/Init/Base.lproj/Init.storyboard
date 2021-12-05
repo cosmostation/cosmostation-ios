@@ -2601,7 +2601,7 @@ The private key is a 66-digit string starting with 0x.</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert Private Key." adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eAv-Rx-Cir" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert Private Key." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eAv-Rx-Cir" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="16" y="97.333333333333329" width="382" height="49.999999999999986"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

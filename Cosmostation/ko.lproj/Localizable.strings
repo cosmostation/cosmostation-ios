@@ -31,7 +31,7 @@
 "undelegate_step_1" = "위임 철회할 수량을 입력하세요";
 "undelegate_step_4" = "입력하신 정보를 확인하세요";
 "withdraw_single_step_1" = "지급받을 이자 내역을 확인하세요";
-"withdraw_single_step_4" = "입력하신 정보를 확인하세요";
+"withdraw_single_step_4" = "입력하신 정보를 확인하세요";eke
 "send_step_1" = "받을 지갑 주소를 입력하세요";
 "send_step_2" = "전송하실 토큰과 수량을 입력하세요";
 "send_step_3" = "메모를 입력하세요 (선택사항)";
@@ -59,13 +59,14 @@
 "sort_by_yield" = "이율로 정렬";
 "sort_by_amount" = "수량으로 정렬";
 "sort_by_value" = "금액으로 정렬";
-"with_mnemonics" = "전송 가능 지갑";
+"with_mnemonics" = "전송 가능 지갑 (복구단어)";
+"with_private_key" = "전송 가능 지갑 (개인키)";
 "only_address" = "관찰용 지갑";
 "wallet_dash" = "내 지갑 ";
 "with_mnemonic" = "전송 가능 지갑";
 "only_address" = "관찰용 지갑";
-"check_mnemonic" = "복구 단어 확인";
-"import_address" = "복구 단어 입력";
+"check_mnemonic" = "복구단어 확인";
+"check_private_key" = "개인키 확인";
 "change_wallet_name" = "지갑 별칭 변경";
 "wallet_name" = "별칭";
 "share_text" = "\t\t주소 공유\t\t";
