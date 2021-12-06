@@ -141,7 +141,7 @@ let BITSONG_API                         = "https://api-bitsong.cosmostation.io/"
 let DESMOS_API                          = "https://api-desmos.cosmostation.io/";
 
 
-let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-1/";
+let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-5/";
 
 let AXELAR_TEST_API                     = "https://api-axelar-testnet.cosmostation.io/";
 
