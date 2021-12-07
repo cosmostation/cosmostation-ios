@@ -1004,11 +1004,11 @@ public enum ChainType: String {
         result.append(PERSIS_MAIN)
         result.append(REGEN_MAIN)
         result.append(RIZON_MAIN)
-        result.append(STARGAZE_MAIN)
-        result.append(IOV_MAIN)
+        result.append(SECRET_MAIN)
         result.append(SENTINEL_MAIN)
         result.append(SIF_MAIN)
-        result.append(SECRET_MAIN)
+        result.append(STARGAZE_MAIN)
+        result.append(IOV_MAIN)
         
         
 //        result.append(ALTHEA_MAIN)

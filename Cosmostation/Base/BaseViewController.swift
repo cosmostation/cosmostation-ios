@@ -366,10 +366,10 @@ extension BaseViewController {
         })
         cryptoAction.setValue(UIImage(named: "chaincrypto")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
-        let iovAction = UIAlertAction(title: NSLocalizedString("chain_title_iov", comment: ""), style: .default, handler: { _ in
+        let starnameAction = UIAlertAction(title: NSLocalizedString("chain_title_iov", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.IOV_MAIN)
         })
-        iovAction.setValue(UIImage(named: "chainStarname")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        starnameAction.setValue(UIImage(named: "chainStarname")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
         let kavaAction = UIAlertAction(title: NSLocalizedString("chain_title_kava", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.KAVA_MAIN)
@@ -529,11 +529,11 @@ extension BaseViewController {
         showAlert.addAction(persisAction)
         showAlert.addAction(regenAction)
         showAlert.addAction(rizonAction)
-        showAlert.addAction(stargazeAction)
-        showAlert.addAction(iovAction)
+        showAlert.addAction(secretAction)
         showAlert.addAction(sentinelAction)
         showAlert.addAction(sifAction)
-        showAlert.addAction(secretAction)
+        showAlert.addAction(stargazeAction)
+        showAlert.addAction(starnameAction)
         
 //        showAlert.addAction(altheaAction)
 //        showAlert.addAction(gravityBridgeAction)
@@ -542,11 +542,11 @@ extension BaseViewController {
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {
             showAlert.addAction(altheaTestAction)
         }
-        if (ChainType.SUPPRT_CHAIN().contains(ChainType.UMEE_TEST)) {
-            showAlert.addAction(umeeTestAction)
-        }
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.AXELAR_TEST)) {
             showAlert.addAction(axelarTestAction)
+        }
+        if (ChainType.SUPPRT_CHAIN().contains(ChainType.UMEE_TEST)) {
+            showAlert.addAction(umeeTestAction)
         }
         
         if (cancleable) {
