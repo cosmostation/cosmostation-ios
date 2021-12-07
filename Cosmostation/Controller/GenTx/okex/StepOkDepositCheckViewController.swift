@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import SwiftKeychainWrapper
 import HDWalletKit
 
 class StepOkDepositCheckViewController: BaseViewController, PasswordViewDelegate, SBCardPopupDelegate {
@@ -104,12 +103,6 @@ class StepOkDepositCheckViewController: BaseViewController, PasswordViewDelegate
     func onGenOkDepositTx() {
         DispatchQueue.global().async {
             var stdTx:StdTx!
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-            let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
-            
             do {
                 let msg = MsgGenerator.genOkDepositMsg(self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mOkToStaking)
                 var msgList = Array<Msg>()
@@ -130,12 +123,12 @@ class StepOkDepositCheckViewController: BaseViewController, PasswordViewDelegate
                 
                 if (self.pageHolderVC.mAccount!.account_new_bip44) {
                     let hash = HDWalletKit.Crypto.sha3keccak256(data: rawData!)
-                    let signedData: Data? = try ECDSA.compactsign(hash, privateKey: privateKey)
+                    let signedData: Data? = try ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
                     
                     var genedSignature = Signature.init()
                     var genPubkey =  PublicKey.init()
                     genPubkey.type = ETHERMINT_KEY_TYPE_PUBLIC
-                    genPubkey.value = publicKey.base64EncodedString()
+                    genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
                     genedSignature.pub_key = genPubkey
                     genedSignature.signature = signedData!.base64EncodedString()
                     genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
@@ -148,12 +141,12 @@ class StepOkDepositCheckViewController: BaseViewController, PasswordViewDelegate
                     
                 } else {
                     let hash = rawData!.sha256()
-                    let signedData = try! ECDSA.compactsign(hash, privateKey: privateKey)
+                    let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
 
                     var genedSignature = Signature.init()
                     var genPubkey =  PublicKey.init()
                     genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-                    genPubkey.value = publicKey.base64EncodedString()
+                    genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
                     genedSignature.pub_key = genPubkey
                     genedSignature.signature = signedData.base64EncodedString()
                     genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
