@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import SwiftKeychainWrapper
 
 class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
     
@@ -113,10 +111,6 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onGenWithdrawTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
             let msg = MsgGenerator.genSwapWithdrawMsg(self.chainType!,
                                                      self.pageHolderVC.mAccount!.account_address,
@@ -124,7 +118,6 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
                                                      self.coin0!,
                                                      self.coin1!,
                                                      String(deadline))
-            
             var msgList = Array<Msg>()
             msgList.append(msg)
             
@@ -135,7 +128,9 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
                                                    self.pageHolderVC.mFee!,
                                                    self.pageHolderVC.mMemo!)
             
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
+                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             DispatchQueue.main.async(execute: {
                 let postTx = PostTx.init("sync", stdTx.value)

@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import SwiftKeychainWrapper
 import GRPC
 import NIO
 
@@ -144,14 +142,10 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
     
     func onGenDelegateTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
             let msg = MsgGenerator.genDelegateMsg(self.pageHolderVC.mAccount!.account_address,
                                                   self.pageHolderVC.mTargetValidator!.operator_address,
                                                   self.pageHolderVC.mToDelegateAmount!,
                                                   self.chainType!)
-            
             var msgList = Array<Msg>()
             msgList.append(msg)
             
@@ -162,7 +156,8 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
                                                    self.pageHolderVC.mFee!,
                                                    self.pageHolderVC.mMemo!)
             
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg,
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
                                         self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             DispatchQueue.main.async(execute: {

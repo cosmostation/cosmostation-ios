@@ -203,21 +203,19 @@ class CKey {
         return getHDKeyFromWords(mnemonic, account).publicKey.data
     }
     
-    
-    static func getStdTx(_ words: [String], _ msgList: Array<Msg>, _ stdMsg: StdSignMsg, _ account: Account, _ fee: Fee, _ memo: String) -> StdTx {
-        let pKey = getHDKeyFromWords(words, account)
+    static func getStdTx(_ privateKey: Data, _ publicKey: Data, _ msgList: Array<Msg>, _ stdMsg: StdSignMsg, _ account: Account, _ fee: Fee, _ memo: String) -> StdTx {
         let encoder = JSONEncoder()
         encoder.outputFormatting = .sortedKeys
         let data = try? encoder.encode(stdMsg)
         let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
         let rawData: Data? = rawResult!.data(using: .utf8)
         let hash = rawData!.sha256()
-        let signedData = try! ECDSA.compactsign(hash, privateKey: pKey.raw)
+        let signedData = try! ECDSA.compactsign(hash, privateKey: privateKey)
         
         var genedSignature = Signature.init()
         var genPubkey =  PublicKey.init()
         genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-        genPubkey.value = cPublicKey(pKey)!.data.base64EncodedString()
+        genPubkey.value = publicKey.base64EncodedString()
         genedSignature.pub_key = genPubkey
         genedSignature.signature = signedData.base64EncodedString()
         genedSignature.account_number = String(account.account_account_numner)

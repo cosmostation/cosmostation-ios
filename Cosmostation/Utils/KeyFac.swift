@@ -46,11 +46,11 @@ class KeyFac {
         }
     }
     
-    static func getStdTx(_ words: [String], _ msgList: Array<Msg>, _ stdMsg: StdSignMsg, _ account: Account, _ fee: Fee, _ memo: String) -> StdTx {
+    static func getStdTx(_ privateKey: Data, _ publicKey: Data, _ msgList: Array<Msg>, _ stdMsg: StdSignMsg, _ account: Account, _ fee: Fee, _ memo: String) -> StdTx {
         if (BaseData.instance.getUsingEnginerMode()) {
-            return CKey.getStdTx(words, msgList, stdMsg, account, fee, memo)
+            return CKey.getStdTx(privateKey, publicKey, msgList, stdMsg, account, fee, memo)
         } else {
-            return WKey.getStdTx(words, msgList, stdMsg, account, fee, memo)
+            return WKey.getStdTx(privateKey, publicKey, msgList, stdMsg, account, fee, memo)
         }
     }
     

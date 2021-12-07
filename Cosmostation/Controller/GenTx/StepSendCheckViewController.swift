@@ -213,10 +213,6 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
     func onGenSendTx() {
         DispatchQueue.global().async {
             var stdTx:StdTx!
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            
             do {
                 let msg = MsgGenerator.genGetSendMsg(self.pageHolderVC.mAccount!.account_address,
                                                      self.pageHolderVC.mToSendRecipientAddress!,
@@ -225,8 +221,6 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                 var msgList = Array<Msg>()
                 msgList.append(msg)
                 
-                let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-                let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
                 if (self.chainType == ChainType.OKEX_MAIN || self.chainType == ChainType.OKEX_TEST) {
                     let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
                                                            String(self.pageHolderVC.mAccount!.account_account_numner),
@@ -241,12 +235,12 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                     
                     if (self.pageHolderVC.mAccount!.account_new_bip44) {
                         let hash = HDWalletKit.Crypto.sha3keccak256(data: rawData!)
-                        let signedData: Data? = try ECDSA.compactsign(hash, privateKey: privateKey)
+                        let signedData: Data? = try ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
                         
                         var genedSignature = Signature.init()
                         var genPubkey =  PublicKey.init()
                         genPubkey.type = ETHERMINT_KEY_TYPE_PUBLIC
-                        genPubkey.value = publicKey.base64EncodedString()
+                        genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
                         genedSignature.pub_key = genPubkey
                         genedSignature.signature = signedData!.base64EncodedString()
                         genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
@@ -259,12 +253,12 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                         
                     } else {
                         let hash = rawData!.sha256()
-                        let signedData = try! ECDSA.compactsign(hash, privateKey: privateKey)
+                        let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
                         
                         var genedSignature = Signature.init()
                         var genPubkey =  PublicKey.init()
                         genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-                        genPubkey.value = publicKey.base64EncodedString()
+                        genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
                         genedSignature.pub_key = genPubkey
                         genedSignature.signature = signedData.base64EncodedString()
                         genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
@@ -282,7 +276,9 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                                                            String(self.pageHolderVC.mAccount!.account_sequence_number),
                                                            msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
                 
-                    stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+                    stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                            msgList, stdMsg,
+                                            self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
                 }
                 
                 
@@ -329,20 +325,15 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
     
     func onGenBnbSendTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let pKey = WKey.getHDKeyFromWords(words, self.pageHolderVC.mAccount!)
-            
             let bnbMsg = BinanceMessage.transfer(symbol: self.pageHolderVC.mToSendAmount[0].denom,
-                                    amount: (self.pageHolderVC.mToSendAmount[0].amount as NSString).doubleValue,
-                                    toAddress: self.pageHolderVC.mToSendRecipientAddress!,
-                                    memo: self.pageHolderVC.mMemo!,
-                                    privateKey: pKey,
-                                    signerAddress: self.pageHolderVC.mAccount!.account_address,
-                                    sequence: Int(self.pageHolderVC.mAccount!.account_sequence_number),
-                                    accountNumber: Int(self.pageHolderVC.mAccount!.account_account_numner),
-                                    chainId: BaseData.instance.getChainId(self.chainType))
+                                                 amount: (self.pageHolderVC.mToSendAmount[0].amount as NSString).doubleValue,
+                                                 toAddress: self.pageHolderVC.mToSendRecipientAddress!,
+                                                 memo: self.pageHolderVC.mMemo!,
+                                                 privateKey: PrivateKey.init(pk: self.pageHolderVC.privateKey!.hexEncodedString(), coin: .bitcoin)!,
+                                                 signerAddress: self.pageHolderVC.mAccount!.account_address,
+                                                 sequence: Int(self.pageHolderVC.mAccount!.account_sequence_number),
+                                                 accountNumber: Int(self.pageHolderVC.mAccount!.account_account_numner),
+                                                 chainId: BaseData.instance.getChainId(self.chainType))
             
             DispatchQueue.main.async(execute: {
                 do {

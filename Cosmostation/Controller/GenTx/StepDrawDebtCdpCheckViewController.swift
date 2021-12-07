@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import SwiftKeychainWrapper
 
 class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelegate {
 
@@ -120,9 +118,6 @@ class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelega
     
     func onGenDrawDebtCdpTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
             let msg = MsgGenerator.genGetDrawDebtCdpMsg(self.chainType!,
                                                         self.pageHolderVC.mAccount!.account_address,
                                                         self.pageHolderVC.mCDenom!,
@@ -139,7 +134,9 @@ class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelega
                                                    self.pageHolderVC.mFee!,
                                                    self.pageHolderVC.mMemo!)
             
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
+                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             
             DispatchQueue.main.async(execute: {

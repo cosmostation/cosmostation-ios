@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import SwiftKeychainWrapper
 import GRPC
 import NIO
 
@@ -262,10 +260,6 @@ class StepRewardCheckViewController: BaseViewController, PasswordViewDelegate{
     
     func onGenGetRewardTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            
             var msgList = Array<Msg>()
             for val in self.pageHolderVC.mRewardTargetValidators {
                 let msg = MsgGenerator.genGetRewardMsg(self.pageHolderVC.mAccount!.account_address, val.operator_address, self.chainType!)
@@ -278,7 +272,9 @@ class StepRewardCheckViewController: BaseViewController, PasswordViewDelegate{
                                                    self.pageHolderVC.mFee!,
                                                    self.pageHolderVC.mMemo!)
             
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
+                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             DispatchQueue.main.async(execute: {
                 let postTx = PostTx.init("sync", stdTx.value)

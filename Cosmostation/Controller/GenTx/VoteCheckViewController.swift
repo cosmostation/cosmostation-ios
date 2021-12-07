@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import SwiftKeychainWrapper
 import GRPC
 import NIO
 
@@ -124,14 +122,10 @@ class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
     
     func onGenVoteTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
             let msg = MsgGenerator.genGetVoteMsg(self.pageHolderVC.mAccount!.account_address,
                                                 self.pageHolderVC.mProposeId!,
                                                 self.pageHolderVC.mVoteOpinion!,
                                                 self.chainType!)
-            
             var msgList = Array<Msg>()
             msgList.append(msg)
             
@@ -139,7 +133,9 @@ class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
                                                    String(self.pageHolderVC.mAccount!.account_account_numner),
                                                    String(self.pageHolderVC.mAccount!.account_sequence_number),
                                                    msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg,
+            
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
                                         self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             DispatchQueue.main.async(execute: {

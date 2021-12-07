@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import SwiftKeychainWrapper
 
 class HardPoolRepay3ViewController: BaseViewController, PasswordViewDelegate {
     
@@ -97,14 +95,10 @@ class HardPoolRepay3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onGenRepayHardPoolTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
             let msg = MsgGenerator.genRepayHardMsg(self.chainType!,
                                                    self.pageHolderVC.mAccount!.account_address,
                                                    self.pageHolderVC.mAccount!.account_address,
                                                    self.pageHolderVC.mHardPoolCoins!)
-            
             var msgList = Array<Msg>()
             msgList.append(msg)
             
@@ -115,7 +109,9 @@ class HardPoolRepay3ViewController: BaseViewController, PasswordViewDelegate {
                                                    self.pageHolderVC.mFee!,
                                                    self.pageHolderVC.mMemo!)
             
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
+                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             DispatchQueue.main.async(execute: {
                 let postTx = PostTx.init("sync", stdTx.value)

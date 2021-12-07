@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import SwiftKeychainWrapper
 import GRPC
 import NIO
 
@@ -132,9 +130,6 @@ class StepChangeCheckViewController: BaseViewController, PasswordViewDelegate {
     
     func onGenModifyRewardAddressTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
             let msg = MsgGenerator.genGetModifyRewardAddressMsg(self.pageHolderVC.mAccount!.account_address,
                                                                 self.pageHolderVC.mToChangeRewardAddress!,
                                                                 self.chainType!)
@@ -148,7 +143,9 @@ class StepChangeCheckViewController: BaseViewController, PasswordViewDelegate {
                                                    self.pageHolderVC.mFee!,
                                                    self.pageHolderVC.mMemo!)
             
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
+                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
  
             DispatchQueue.main.async(execute: {
                 let postTx = PostTx.init("sync", stdTx.value)

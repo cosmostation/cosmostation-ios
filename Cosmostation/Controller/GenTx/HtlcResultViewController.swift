@@ -274,23 +274,33 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     func onCreateHtlcSwap() {
 //        print("onCreateHtlcSwap")
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                self.onUpdateView(NSLocalizedString("error_invalid_password", comment: ""))
-                return
+            var privateKey: Data?
+            var publicKey: Data?
+            if (self.account!.account_from_mnemonic == true) {
+                if let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                    privateKey = KeyFac.getPrivateRaw(words, self.account!)
+                    publicKey = KeyFac.getPublicFromPrivateKey(privateKey!)
+                }
+                
+            } else {
+                if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
+                    privateKey = KeyFac.getPrivateFromString(key)
+                    publicKey = KeyFac.getPublicFromPrivateKey(privateKey!)
+                }
             }
             
+            
             if (self.chainType == ChainType.BINANCE_MAIN || self.chainType == ChainType.BINANCE_TEST) {
-                let pKey = WKey.getHDKeyFromWords(words, self.account!)
-                
                 self.mTimeStamp = Date().millisecondsSince1970 / 1000
                 self.mRandomNumber = WKey.generateRandomBytes()
                 self.mRandomNumberHash = WKey.getRandomNumnerHash(self.mRandomNumber!, self.mTimeStamp!)
                 print("BINANCE mTimeStamp ", self.mTimeStamp)
                 print("BINANCE mRandomNumber ", self.mRandomNumber)
                 print("BINANCE mRandomNumberHash ", self.mRandomNumberHash)
-                
+
                 let bnbMsg = MsgGenerator.genBnbCreateHTLCSwapMsg(self.chainType!, self.mHtlcToChain!, self.account!, self.mHtlcToAccount!,
-                                                                  self.mHtlcToSendAmount, self.mTimeStamp!, self.mRandomNumberHash!, pKey)
+                                                                  self.mHtlcToSendAmount, self.mTimeStamp!, self.mRandomNumberHash!,
+                                                                  PrivateKey.init(pk: privateKey!.hexEncodedString(), coin: .bitcoin)!)
                 DispatchQueue.main.async(execute: {
                     do {
                         var encoding: ParameterEncoding = URLEncoding.default
@@ -306,7 +316,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                                 DispatchQueue.main.async(execute: {
                                     self.onFetchSwapId()
                                 });
-                                
+
                             case .failure(let error):
                                 self.onUpdateView(error.localizedDescription)
                             }
@@ -336,7 +346,8 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                                                        self.mHtlcSendFee!,
                                                        SWAP_MEMO_CREATE)
                 
-                let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.account!, self.mHtlcSendFee!, SWAP_MEMO_CREATE)
+                let stdTx = KeyFac.getStdTx(privateKey!, publicKey!, msgList, stdMsg,
+                                            self.account!, self.mHtlcSendFee!, SWAP_MEMO_CREATE)
                 
                 DispatchQueue.main.async(execute: {
                     let postTx = PostTx.init("sync", stdTx.value)
@@ -477,20 +488,29 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             group.wait()
             print("mHtlcToChainId ", mHtlcToChainId)
             
-            guard let words = KeychainWrapper.standard.string(forKey: self.mHtlcToAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                self.onUpdateView(NSLocalizedString("error_invalid_password", comment: ""))
-                return
+            var privateKey: Data?
+            var publicKey: Data?
+            if (self.mHtlcToAccount!.account_from_mnemonic == true) {
+                if let words = KeychainWrapper.standard.string(forKey: self.mHtlcToAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                    privateKey = KeyFac.getPrivateRaw(words, self.account!)
+                    publicKey = KeyFac.getPublicFromPrivateKey(privateKey!)
+                }
+                
+            } else {
+                if let key = KeychainWrapper.standard.string(forKey: self.mHtlcToAccount!.getPrivateKeySha1()) {
+                    privateKey = KeyFac.getPrivateFromString(key)
+                    publicKey = KeyFac.getPublicFromPrivateKey(privateKey!)
+                }
             }
             
             if (self.mHtlcToChain == ChainType.BINANCE_MAIN || self.mHtlcToChain == ChainType.BINANCE_TEST) {
-                let pKey = WKey.getHDKeyFromWords(words, self.mHtlcToAccount!)
                 let swapId = WKey.getSwapId(self.mHtlcToChain!, self.mHtlcToSendAmount, self.mRandomNumberHash!, self.account!.account_address)
                 let bnbMsg = MsgGenerator.genBnbClaimHTLCSwapMsg(self.mHtlcToAccount!,
                                                                  self.mRandomNumber!,
                                                                  swapId,
-                                                                 pKey,
+                                                                 PrivateKey.init(pk: privateKey!.hexEncodedString(), coin: .bitcoin)!,
                                                                  mHtlcToChainId)
-                
+
                 DispatchQueue.main.async(execute: {
                     do {
                         var encoding: ParameterEncoding = URLEncoding.default
@@ -511,7 +531,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                                 self.onUpdateView(error.localizedDescription)
                             }
                         }
-                        
+
                     } catch {
                         print(error)
                         self.onUpdateView(error.localizedDescription)
@@ -534,7 +554,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                                                        self.mHtlcClaimFee!,
                                                        SWAP_MEMO_CLAIM)
                 
-                let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.mHtlcToAccount!, self.mHtlcClaimFee!, SWAP_MEMO_CLAIM)
+                let stdTx = KeyFac.getStdTx(privateKey!, publicKey!, msgList, stdMsg, self.mHtlcToAccount!, self.mHtlcClaimFee!, SWAP_MEMO_CLAIM)
                 
                 DispatchQueue.main.async(execute: {
                     let postTx = PostTx.init("sync", stdTx.value)

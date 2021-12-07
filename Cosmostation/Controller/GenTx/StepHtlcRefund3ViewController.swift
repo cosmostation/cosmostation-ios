@@ -8,10 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import CryptoSwift
-import SwiftKeychainWrapper
-
 
 class StepHtlcRefund3ViewController: BaseViewController, PasswordViewDelegate {
     
@@ -115,10 +111,6 @@ class StepHtlcRefund3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onGenKavaRefund() {
         DispatchQueue.global().async {
-//            var stdTx:StdTx!
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
             let msg = MsgGenerator.genRefundAtomicSwap(self.pageHolderVC.mAccount!.account_address,
                                                        self.pageHolderVC.mHtlcRefundSwapId!)
             var msgList = Array<Msg>()
@@ -129,7 +121,9 @@ class StepHtlcRefund3ViewController: BaseViewController, PasswordViewDelegate {
                                                    String(self.pageHolderVC.mAccount!.account_sequence_number),
                                                    msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
+                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             DispatchQueue.main.async(execute: {
                 let postTx = PostTx.init("sync", stdTx.value)

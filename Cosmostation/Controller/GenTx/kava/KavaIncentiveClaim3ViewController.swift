@@ -8,8 +8,6 @@
 
 import UIKit
 import Alamofire
-import HDWalletKit
-import SwiftKeychainWrapper
 
 class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegate {
     
@@ -118,10 +116,6 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
     
     func onGenClaimIncentiveAllTx() {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            
             var msgList = Array<Msg>()
             if (self.mIncentiveRewards.getMintingRewardAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
                 let msg = MsgGenerator.genClaimUSDXMintingRewardMsg(self.chainType!,
@@ -173,7 +167,9 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
                                                    self.pageHolderVC.mFee!,
                                                    self.pageHolderVC.mMemo!)
             
-            let stdTx = KeyFac.getStdTx(words, msgList, stdMsg, self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                        msgList, stdMsg,
+                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
             
             DispatchQueue.main.async(execute: {
                 let postTx = PostTx.init("sync", stdTx.value)
