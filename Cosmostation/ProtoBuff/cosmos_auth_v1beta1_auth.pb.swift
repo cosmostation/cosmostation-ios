@@ -30,8 +30,8 @@ struct Cosmos_Auth_V1beta1_BaseAccount {
 
   var address: String = String()
 
-  var pubKey: Google_Protobuf_Any {
-    get {return _pubKey ?? Google_Protobuf_Any()}
+  var pubKey: Google_Protobuf2_Any {
+    get {return _pubKey ?? Google_Protobuf2_Any()}
     set {_pubKey = newValue}
   }
   /// Returns true if `pubKey` has been explicitly set.
@@ -47,7 +47,7 @@ struct Cosmos_Auth_V1beta1_BaseAccount {
 
   init() {}
 
-  fileprivate var _pubKey: Google_Protobuf_Any? = nil
+  fileprivate var _pubKey: Google_Protobuf2_Any? = nil
 }
 
 /// ModuleAccount defines an account for modules that holds coins on a pool.

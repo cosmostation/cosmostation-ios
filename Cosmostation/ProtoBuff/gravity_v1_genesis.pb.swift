@@ -144,12 +144,12 @@ struct Gravity_V1_GenesisState {
     set {_uniqueStorage()._lastObservedEventNonce = newValue}
   }
 
-  var outgoingTxs: [Google_Protobuf_Any] {
+  var outgoingTxs: [Google_Protobuf2_Any] {
     get {return _storage._outgoingTxs}
     set {_uniqueStorage()._outgoingTxs = newValue}
   }
 
-  var confirmations: [Google_Protobuf_Any] {
+  var confirmations: [Google_Protobuf2_Any] {
     get {return _storage._confirmations}
     set {_uniqueStorage()._confirmations = newValue}
   }
@@ -333,8 +333,8 @@ extension Gravity_V1_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._Message
   fileprivate class _StorageClass {
     var _params: Gravity_V1_Params? = nil
     var _lastObservedEventNonce: UInt64 = 0
-    var _outgoingTxs: [Google_Protobuf_Any] = []
-    var _confirmations: [Google_Protobuf_Any] = []
+    var _outgoingTxs: [Google_Protobuf2_Any] = []
+    var _confirmations: [Google_Protobuf2_Any] = []
     var _ethereumEventVoteRecords: [Gravity_V1_EthereumEventVoteRecord] = []
     var _delegateKeys: [Gravity_V1_MsgDelegateKeys] = []
     var _erc20ToDenoms: [Gravity_V1_ERC20ToDenom] = []

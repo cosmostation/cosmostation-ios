@@ -83,8 +83,8 @@ struct Cosmos_Farming_V1beta1_PlanRecord {
   // methods supported on all messages.
 
   /// plan specifies the plan interface; it can be FixedAmountPlan or RatioPlan
-  var plan: Google_Protobuf_Any {
-    get {return _plan ?? Google_Protobuf_Any()}
+  var plan: Google_Protobuf2_Any {
+    get {return _plan ?? Google_Protobuf2_Any()}
     set {_plan = newValue}
   }
   /// Returns true if `plan` has been explicitly set.
@@ -100,7 +100,7 @@ struct Cosmos_Farming_V1beta1_PlanRecord {
 
   init() {}
 
-  fileprivate var _plan: Google_Protobuf_Any? = nil
+  fileprivate var _plan: Google_Protobuf2_Any? = nil
 }
 
 /// StakingRecord is used for import/export via genesis json.

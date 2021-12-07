@@ -251,8 +251,8 @@ struct Starnamed_X_Wasm_V1beta1_ContractInfo {
 
   /// Extension is an extension point to store custom metadata within the
   /// persistence model.
-  var `extension`: Google_Protobuf_Any {
-    get {return _extension ?? Google_Protobuf_Any()}
+  var `extension`: Google_Protobuf2_Any {
+    get {return _extension ?? Google_Protobuf2_Any()}
     set {_extension = newValue}
   }
   /// Returns true if ``extension`` has been explicitly set.
@@ -265,7 +265,7 @@ struct Starnamed_X_Wasm_V1beta1_ContractInfo {
   init() {}
 
   fileprivate var _created: Starnamed_X_Wasm_V1beta1_AbsoluteTxPosition? = nil
-  fileprivate var _extension: Google_Protobuf_Any? = nil
+  fileprivate var _extension: Google_Protobuf2_Any? = nil
 }
 
 /// ContractCodeHistoryEntry metadata to a contract.

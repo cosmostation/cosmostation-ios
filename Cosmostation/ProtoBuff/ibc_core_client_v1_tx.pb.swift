@@ -27,8 +27,8 @@ struct Ibc_Core_Client_V1_MsgCreateClient {
   // methods supported on all messages.
 
   /// light client state
-  var clientState: Google_Protobuf_Any {
-    get {return _clientState ?? Google_Protobuf_Any()}
+  var clientState: Google_Protobuf2_Any {
+    get {return _clientState ?? Google_Protobuf2_Any()}
     set {_clientState = newValue}
   }
   /// Returns true if `clientState` has been explicitly set.
@@ -38,8 +38,8 @@ struct Ibc_Core_Client_V1_MsgCreateClient {
 
   /// consensus state associated with the client that corresponds to a given
   /// height.
-  var consensusState: Google_Protobuf_Any {
-    get {return _consensusState ?? Google_Protobuf_Any()}
+  var consensusState: Google_Protobuf2_Any {
+    get {return _consensusState ?? Google_Protobuf2_Any()}
     set {_consensusState = newValue}
   }
   /// Returns true if `consensusState` has been explicitly set.
@@ -54,8 +54,8 @@ struct Ibc_Core_Client_V1_MsgCreateClient {
 
   init() {}
 
-  fileprivate var _clientState: Google_Protobuf_Any? = nil
-  fileprivate var _consensusState: Google_Protobuf_Any? = nil
+  fileprivate var _clientState: Google_Protobuf2_Any? = nil
+  fileprivate var _consensusState: Google_Protobuf2_Any? = nil
 }
 
 /// MsgCreateClientResponse defines the Msg/CreateClient response type.
@@ -80,8 +80,8 @@ struct Ibc_Core_Client_V1_MsgUpdateClient {
   var clientID: String = String()
 
   /// header to update the light client
-  var header: Google_Protobuf_Any {
-    get {return _header ?? Google_Protobuf_Any()}
+  var header: Google_Protobuf2_Any {
+    get {return _header ?? Google_Protobuf2_Any()}
     set {_header = newValue}
   }
   /// Returns true if `header` has been explicitly set.
@@ -96,7 +96,7 @@ struct Ibc_Core_Client_V1_MsgUpdateClient {
 
   init() {}
 
-  fileprivate var _header: Google_Protobuf_Any? = nil
+  fileprivate var _header: Google_Protobuf2_Any? = nil
 }
 
 /// MsgUpdateClientResponse defines the Msg/UpdateClient response type.
@@ -121,8 +121,8 @@ struct Ibc_Core_Client_V1_MsgUpgradeClient {
   var clientID: String = String()
 
   /// upgraded client state
-  var clientState: Google_Protobuf_Any {
-    get {return _clientState ?? Google_Protobuf_Any()}
+  var clientState: Google_Protobuf2_Any {
+    get {return _clientState ?? Google_Protobuf2_Any()}
     set {_clientState = newValue}
   }
   /// Returns true if `clientState` has been explicitly set.
@@ -132,8 +132,8 @@ struct Ibc_Core_Client_V1_MsgUpgradeClient {
 
   /// upgraded consensus state, only contains enough information to serve as a
   /// basis of trust in update logic
-  var consensusState: Google_Protobuf_Any {
-    get {return _consensusState ?? Google_Protobuf_Any()}
+  var consensusState: Google_Protobuf2_Any {
+    get {return _consensusState ?? Google_Protobuf2_Any()}
     set {_consensusState = newValue}
   }
   /// Returns true if `consensusState` has been explicitly set.
@@ -154,8 +154,8 @@ struct Ibc_Core_Client_V1_MsgUpgradeClient {
 
   init() {}
 
-  fileprivate var _clientState: Google_Protobuf_Any? = nil
-  fileprivate var _consensusState: Google_Protobuf_Any? = nil
+  fileprivate var _clientState: Google_Protobuf2_Any? = nil
+  fileprivate var _consensusState: Google_Protobuf2_Any? = nil
 }
 
 /// MsgUpgradeClientResponse defines the Msg/UpgradeClient response type.
@@ -180,8 +180,8 @@ struct Ibc_Core_Client_V1_MsgSubmitMisbehaviour {
   var clientID: String = String()
 
   /// misbehaviour used for freezing the light client
-  var misbehaviour: Google_Protobuf_Any {
-    get {return _misbehaviour ?? Google_Protobuf_Any()}
+  var misbehaviour: Google_Protobuf2_Any {
+    get {return _misbehaviour ?? Google_Protobuf2_Any()}
     set {_misbehaviour = newValue}
   }
   /// Returns true if `misbehaviour` has been explicitly set.
@@ -196,7 +196,7 @@ struct Ibc_Core_Client_V1_MsgSubmitMisbehaviour {
 
   init() {}
 
-  fileprivate var _misbehaviour: Google_Protobuf_Any? = nil
+  fileprivate var _misbehaviour: Google_Protobuf2_Any? = nil
 }
 
 /// MsgSubmitMisbehaviourResponse defines the Msg/SubmitMisbehaviour response

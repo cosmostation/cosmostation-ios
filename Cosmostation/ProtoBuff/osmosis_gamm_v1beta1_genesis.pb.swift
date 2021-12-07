@@ -39,7 +39,7 @@ struct Osmosis_Gamm_GenesisState {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var pools: [Google_Protobuf_Any] = []
+  var pools: [Google_Protobuf2_Any] = []
 
   var nextPoolNumber: UInt64 = 0
 

@@ -289,8 +289,8 @@ struct Ibc_Core_Channel_V1_QueryChannelConsensusStateResponse {
   // methods supported on all messages.
 
   /// consensus state associated with the channel
-  var consensusState: Google_Protobuf_Any {
-    get {return _consensusState ?? Google_Protobuf_Any()}
+  var consensusState: Google_Protobuf2_Any {
+    get {return _consensusState ?? Google_Protobuf2_Any()}
     set {_consensusState = newValue}
   }
   /// Returns true if `consensusState` has been explicitly set.
@@ -318,7 +318,7 @@ struct Ibc_Core_Channel_V1_QueryChannelConsensusStateResponse {
 
   init() {}
 
-  fileprivate var _consensusState: Google_Protobuf_Any? = nil
+  fileprivate var _consensusState: Google_Protobuf2_Any? = nil
   fileprivate var _proofHeight: Ibc_Core_Client_V1_Height? = nil
 }
 

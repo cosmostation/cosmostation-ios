@@ -28,8 +28,8 @@ struct Gravity_V1_EthereumEventVoteRecord {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var event: Google_Protobuf_Any {
-    get {return _event ?? Google_Protobuf_Any()}
+  var event: Google_Protobuf2_Any {
+    get {return _event ?? Google_Protobuf2_Any()}
     set {_event = newValue}
   }
   /// Returns true if `event` has been explicitly set.
@@ -45,7 +45,7 @@ struct Gravity_V1_EthereumEventVoteRecord {
 
   init() {}
 
-  fileprivate var _event: Google_Protobuf_Any? = nil
+  fileprivate var _event: Google_Protobuf2_Any? = nil
 }
 
 /// LatestEthereumBlockHeight defines the latest observed ethereum block height

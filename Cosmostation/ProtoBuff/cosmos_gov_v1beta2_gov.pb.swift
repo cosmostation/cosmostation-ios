@@ -198,7 +198,7 @@ struct Cosmos_Gov_V1beta2_Proposal {
 
   var proposalID: UInt64 = 0
 
-  var messages: [Google_Protobuf_Any] = []
+  var messages: [Google_Protobuf2_Any] = []
 
   var status: Cosmos_Gov_V1beta2_ProposalStatus = .unspecified
 

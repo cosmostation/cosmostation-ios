@@ -30,7 +30,7 @@ struct Cosmos_Crypto_Multisig_LegacyAminoPubKey {
 
   var threshold: UInt32 = 0
 
-  var publicKeys: [Google_Protobuf_Any] = []
+  var publicKeys: [Google_Protobuf2_Any] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 

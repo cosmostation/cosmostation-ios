@@ -29,8 +29,8 @@ struct Cosmos_Evidence_V1beta1_MsgSubmitEvidence {
 
   var submitter: String = String()
 
-  var evidence: Google_Protobuf_Any {
-    get {return _evidence ?? Google_Protobuf_Any()}
+  var evidence: Google_Protobuf2_Any {
+    get {return _evidence ?? Google_Protobuf2_Any()}
     set {_evidence = newValue}
   }
   /// Returns true if `evidence` has been explicitly set.
@@ -42,7 +42,7 @@ struct Cosmos_Evidence_V1beta1_MsgSubmitEvidence {
 
   init() {}
 
-  fileprivate var _evidence: Google_Protobuf_Any? = nil
+  fileprivate var _evidence: Google_Protobuf2_Any? = nil
 }
 
 /// MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type.

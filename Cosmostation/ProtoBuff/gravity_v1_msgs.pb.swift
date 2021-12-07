@@ -134,8 +134,8 @@ struct Gravity_V1_MsgSubmitEthereumTxConfirmation {
   // methods supported on all messages.
 
   /// TODO: can we make this take an array?
-  var confirmation: Google_Protobuf_Any {
-    get {return _confirmation ?? Google_Protobuf_Any()}
+  var confirmation: Google_Protobuf2_Any {
+    get {return _confirmation ?? Google_Protobuf2_Any()}
     set {_confirmation = newValue}
   }
   /// Returns true if `confirmation` has been explicitly set.
@@ -149,7 +149,7 @@ struct Gravity_V1_MsgSubmitEthereumTxConfirmation {
 
   init() {}
 
-  fileprivate var _confirmation: Google_Protobuf_Any? = nil
+  fileprivate var _confirmation: Google_Protobuf2_Any? = nil
 }
 
 /// ContractCallTxConfirmation is a signature on behalf of a validator for a
@@ -225,8 +225,8 @@ struct Gravity_V1_MsgSubmitEthereumEvent {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var event: Google_Protobuf_Any {
-    get {return _event ?? Google_Protobuf_Any()}
+  var event: Google_Protobuf2_Any {
+    get {return _event ?? Google_Protobuf2_Any()}
     set {_event = newValue}
   }
   /// Returns true if `event` has been explicitly set.
@@ -240,7 +240,7 @@ struct Gravity_V1_MsgSubmitEthereumEvent {
 
   init() {}
 
-  fileprivate var _event: Google_Protobuf_Any? = nil
+  fileprivate var _event: Google_Protobuf2_Any? = nil
 }
 
 struct Gravity_V1_MsgSubmitEthereumEventResponse {

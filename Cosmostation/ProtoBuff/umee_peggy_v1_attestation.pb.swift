@@ -100,8 +100,8 @@ struct Umeenetwork_Umee_Peggy_V1_Attestation {
 
   var height: UInt64 = 0
 
-  var claim: Google_Protobuf_Any {
-    get {return _claim ?? Google_Protobuf_Any()}
+  var claim: Google_Protobuf2_Any {
+    get {return _claim ?? Google_Protobuf2_Any()}
     set {_claim = newValue}
   }
   /// Returns true if `claim` has been explicitly set.
@@ -113,7 +113,7 @@ struct Umeenetwork_Umee_Peggy_V1_Attestation {
 
   init() {}
 
-  fileprivate var _claim: Google_Protobuf_Any? = nil
+  fileprivate var _claim: Google_Protobuf2_Any? = nil
 }
 
 /// ERC20Token unique identifier for an Ethereum ERC20 token.

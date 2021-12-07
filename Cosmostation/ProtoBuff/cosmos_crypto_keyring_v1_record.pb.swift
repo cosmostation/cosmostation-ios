@@ -30,8 +30,8 @@ struct Cosmos_Crypto_Keyring_V1_Record {
   var name: String = String()
 
   /// pub_key represents a public key in any format
-  var pubKey: Google_Protobuf_Any {
-    get {return _pubKey ?? Google_Protobuf_Any()}
+  var pubKey: Google_Protobuf2_Any {
+    get {return _pubKey ?? Google_Protobuf2_Any()}
     set {_pubKey = newValue}
   }
   /// Returns true if `pubKey` has been explicitly set.
@@ -126,8 +126,8 @@ struct Cosmos_Crypto_Keyring_V1_Record {
     // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
     // methods supported on all messages.
 
-    var privKey: Google_Protobuf_Any {
-      get {return _privKey ?? Google_Protobuf_Any()}
+    var privKey: Google_Protobuf2_Any {
+      get {return _privKey ?? Google_Protobuf2_Any()}
       set {_privKey = newValue}
     }
     /// Returns true if `privKey` has been explicitly set.
@@ -141,7 +141,7 @@ struct Cosmos_Crypto_Keyring_V1_Record {
 
     init() {}
 
-    fileprivate var _privKey: Google_Protobuf_Any? = nil
+    fileprivate var _privKey: Google_Protobuf2_Any? = nil
   }
 
   /// Ledger item
@@ -190,7 +190,7 @@ struct Cosmos_Crypto_Keyring_V1_Record {
 
   init() {}
 
-  fileprivate var _pubKey: Google_Protobuf_Any? = nil
+  fileprivate var _pubKey: Google_Protobuf2_Any? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.

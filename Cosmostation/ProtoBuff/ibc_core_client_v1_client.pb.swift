@@ -31,8 +31,8 @@ struct Ibc_Core_Client_V1_IdentifiedClientState {
   var clientID: String = String()
 
   /// client state
-  var clientState: Google_Protobuf_Any {
-    get {return _clientState ?? Google_Protobuf_Any()}
+  var clientState: Google_Protobuf2_Any {
+    get {return _clientState ?? Google_Protobuf2_Any()}
     set {_clientState = newValue}
   }
   /// Returns true if `clientState` has been explicitly set.
@@ -44,7 +44,7 @@ struct Ibc_Core_Client_V1_IdentifiedClientState {
 
   init() {}
 
-  fileprivate var _clientState: Google_Protobuf_Any? = nil
+  fileprivate var _clientState: Google_Protobuf2_Any? = nil
 }
 
 /// ConsensusStateWithHeight defines a consensus state with an additional height
@@ -65,8 +65,8 @@ struct Ibc_Core_Client_V1_ConsensusStateWithHeight {
   mutating func clearHeight() {self._height = nil}
 
   /// consensus state
-  var consensusState: Google_Protobuf_Any {
-    get {return _consensusState ?? Google_Protobuf_Any()}
+  var consensusState: Google_Protobuf2_Any {
+    get {return _consensusState ?? Google_Protobuf2_Any()}
     set {_consensusState = newValue}
   }
   /// Returns true if `consensusState` has been explicitly set.
@@ -79,7 +79,7 @@ struct Ibc_Core_Client_V1_ConsensusStateWithHeight {
   init() {}
 
   fileprivate var _height: Ibc_Core_Client_V1_Height? = nil
-  fileprivate var _consensusState: Google_Protobuf_Any? = nil
+  fileprivate var _consensusState: Google_Protobuf2_Any? = nil
 }
 
 /// ClientConsensusStates defines all the stored consensus states for a given
@@ -153,8 +153,8 @@ struct Ibc_Core_Client_V1_UpgradeProposal {
   /// new upgraded client is valid by verifying a proof on the previous version
   /// of the chain. This will allow IBC connections to persist smoothly across
   /// planned chain upgrades
-  var upgradedClientState: Google_Protobuf_Any {
-    get {return _upgradedClientState ?? Google_Protobuf_Any()}
+  var upgradedClientState: Google_Protobuf2_Any {
+    get {return _upgradedClientState ?? Google_Protobuf2_Any()}
     set {_upgradedClientState = newValue}
   }
   /// Returns true if `upgradedClientState` has been explicitly set.
@@ -167,7 +167,7 @@ struct Ibc_Core_Client_V1_UpgradeProposal {
   init() {}
 
   fileprivate var _plan: Cosmos_Upgrade_V1beta1_Plan? = nil
-  fileprivate var _upgradedClientState: Google_Protobuf_Any? = nil
+  fileprivate var _upgradedClientState: Google_Protobuf2_Any? = nil
 }
 
 /// Height is a monotonically increasing data type

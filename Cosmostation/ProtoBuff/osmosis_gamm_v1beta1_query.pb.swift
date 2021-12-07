@@ -38,8 +38,8 @@ struct Osmosis_Gamm_V1beta1_QueryPoolResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var pool: Google_Protobuf_Any {
-    get {return _pool ?? Google_Protobuf_Any()}
+  var pool: Google_Protobuf2_Any {
+    get {return _pool ?? Google_Protobuf2_Any()}
     set {_pool = newValue}
   }
   /// Returns true if `pool` has been explicitly set.
@@ -51,7 +51,7 @@ struct Osmosis_Gamm_V1beta1_QueryPoolResponse {
 
   init() {}
 
-  fileprivate var _pool: Google_Protobuf_Any? = nil
+  fileprivate var _pool: Google_Protobuf2_Any? = nil
 }
 
 ///=============================== Pools
@@ -82,7 +82,7 @@ struct Osmosis_Gamm_V1beta1_QueryPoolsResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var pools: [Google_Protobuf_Any] = []
+  var pools: [Google_Protobuf2_Any] = []
 
   /// pagination defines the pagination in the response.
   var pagination: Cosmos_Base_Query_V1beta1_PageResponse {

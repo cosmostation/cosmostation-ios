@@ -27,8 +27,8 @@ struct Cosmos_Gov_V1beta1_MsgSubmitProposal {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var content: Google_Protobuf_Any {
-    get {return _content ?? Google_Protobuf_Any()}
+  var content: Google_Protobuf2_Any {
+    get {return _content ?? Google_Protobuf2_Any()}
     set {_content = newValue}
   }
   /// Returns true if `content` has been explicitly set.
@@ -44,7 +44,7 @@ struct Cosmos_Gov_V1beta1_MsgSubmitProposal {
 
   init() {}
 
-  fileprivate var _content: Google_Protobuf_Any? = nil
+  fileprivate var _content: Google_Protobuf2_Any? = nil
 }
 
 /// MsgSubmitProposalResponse defines the Msg/SubmitProposal response type.

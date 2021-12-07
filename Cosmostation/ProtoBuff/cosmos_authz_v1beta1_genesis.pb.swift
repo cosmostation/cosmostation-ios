@@ -45,8 +45,8 @@ struct Cosmos_Authz_V1beta1_GrantAuthorization {
 
   var grantee: String = String()
 
-  var authorization: Google_Protobuf_Any {
-    get {return _authorization ?? Google_Protobuf_Any()}
+  var authorization: Google_Protobuf2_Any {
+    get {return _authorization ?? Google_Protobuf2_Any()}
     set {_authorization = newValue}
   }
   /// Returns true if `authorization` has been explicitly set.
@@ -67,7 +67,7 @@ struct Cosmos_Authz_V1beta1_GrantAuthorization {
 
   init() {}
 
-  fileprivate var _authorization: Google_Protobuf_Any? = nil
+  fileprivate var _authorization: Google_Protobuf2_Any? = nil
   fileprivate var _expiration: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }
 

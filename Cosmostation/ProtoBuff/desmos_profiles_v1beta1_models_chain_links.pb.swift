@@ -32,8 +32,8 @@ struct Desmos_Profiles_V1beta1_ChainLink {
 
   /// Address contains the data of the external chain address to be connected
   /// with the Desmos profile
-  var address: Google_Protobuf_Any {
-    get {return _address ?? Google_Protobuf_Any()}
+  var address: Google_Protobuf2_Any {
+    get {return _address ?? Google_Protobuf2_Any()}
     set {_address = newValue}
   }
   /// Returns true if `address` has been explicitly set.
@@ -75,7 +75,7 @@ struct Desmos_Profiles_V1beta1_ChainLink {
 
   init() {}
 
-  fileprivate var _address: Google_Protobuf_Any? = nil
+  fileprivate var _address: Google_Protobuf2_Any? = nil
   fileprivate var _proof: Desmos_Profiles_V1beta1_Proof? = nil
   fileprivate var _chainConfig: Desmos_Profiles_V1beta1_ChainConfig? = nil
   fileprivate var _creationTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
@@ -103,8 +103,8 @@ struct Desmos_Profiles_V1beta1_Proof {
 
   /// PubKey represents the public key associated with the address for which to
   /// prove the ownership
-  var pubKey: Google_Protobuf_Any {
-    get {return _pubKey ?? Google_Protobuf_Any()}
+  var pubKey: Google_Protobuf2_Any {
+    get {return _pubKey ?? Google_Protobuf2_Any()}
     set {_pubKey = newValue}
   }
   /// Returns true if `pubKey` has been explicitly set.
@@ -122,7 +122,7 @@ struct Desmos_Profiles_V1beta1_Proof {
 
   init() {}
 
-  fileprivate var _pubKey: Google_Protobuf_Any? = nil
+  fileprivate var _pubKey: Google_Protobuf2_Any? = nil
 }
 
 /// Bech32Address represents a Bech32-encoded address

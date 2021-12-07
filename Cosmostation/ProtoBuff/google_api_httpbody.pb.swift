@@ -86,7 +86,7 @@ struct Google_Api_HttpBody {
 
   /// Application specific response metadata. Must be set in the first response
   /// for streaming APIs.
-  var extensions: [Google_Protobuf_Any] = []
+  var extensions: [Google_Protobuf2_Any] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 

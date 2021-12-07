@@ -123,8 +123,8 @@ struct Shentu_Cert_V1alpha1_Certificate {
 
   var certificateID: UInt64 = 0
 
-  var content: Google_Protobuf_Any {
-    get {return _content ?? Google_Protobuf_Any()}
+  var content: Google_Protobuf2_Any {
+    get {return _content ?? Google_Protobuf2_Any()}
     set {_content = newValue}
   }
   /// Returns true if `content` has been explicitly set.
@@ -149,7 +149,7 @@ struct Shentu_Cert_V1alpha1_Certificate {
 
   init() {}
 
-  fileprivate var _content: Google_Protobuf_Any? = nil
+  fileprivate var _content: Google_Protobuf2_Any? = nil
   fileprivate var _compilationContent: Shentu_Cert_V1alpha1_CompilationContent? = nil
 }
 
@@ -258,8 +258,8 @@ struct Shentu_Cert_V1alpha1_Platform {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var validatorPubkey: Google_Protobuf_Any {
-    get {return _validatorPubkey ?? Google_Protobuf_Any()}
+  var validatorPubkey: Google_Protobuf2_Any {
+    get {return _validatorPubkey ?? Google_Protobuf2_Any()}
     set {_validatorPubkey = newValue}
   }
   /// Returns true if `validatorPubkey` has been explicitly set.
@@ -273,7 +273,7 @@ struct Shentu_Cert_V1alpha1_Platform {
 
   init() {}
 
-  fileprivate var _validatorPubkey: Google_Protobuf_Any? = nil
+  fileprivate var _validatorPubkey: Google_Protobuf2_Any? = nil
 }
 
 /// CertifierUpdateProposal adds or removes a certifier

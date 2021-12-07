@@ -59,8 +59,8 @@ struct Cosmos_Base_Abci_V1beta1_TxResponse {
   var gasUsed: Int64 = 0
 
   /// The request transaction bytes.
-  var tx: Google_Protobuf_Any {
-    get {return _tx ?? Google_Protobuf_Any()}
+  var tx: Google_Protobuf2_Any {
+    get {return _tx ?? Google_Protobuf2_Any()}
     set {_tx = newValue}
   }
   /// Returns true if `tx` has been explicitly set.
@@ -77,7 +77,7 @@ struct Cosmos_Base_Abci_V1beta1_TxResponse {
 
   init() {}
 
-  fileprivate var _tx: Google_Protobuf_Any? = nil
+  fileprivate var _tx: Google_Protobuf2_Any? = nil
 }
 
 /// ABCIMessageLog defines a structure containing an indexed tx ABCI message log.

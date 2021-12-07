@@ -78,72 +78,93 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenTry {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var clientID: String = String()
+  var clientID: String {
+    get {return _storage._clientID}
+    set {_uniqueStorage()._clientID = newValue}
+  }
 
   /// in the case of crossing hello's, when both chains call OpenInit, we need
   /// the connection identifier of the previous connection in state INIT
-  var previousConnectionID: String = String()
+  var previousConnectionID: String {
+    get {return _storage._previousConnectionID}
+    set {_uniqueStorage()._previousConnectionID = newValue}
+  }
 
-  var clientState: Google_Protobuf_Any {
-    get {return _clientState ?? Google_Protobuf_Any()}
-    set {_clientState = newValue}
+  var clientState: Google_Protobuf2_Any {
+    get {return _storage._clientState ?? Google_Protobuf2_Any()}
+    set {_uniqueStorage()._clientState = newValue}
   }
   /// Returns true if `clientState` has been explicitly set.
-  var hasClientState: Bool {return self._clientState != nil}
+  var hasClientState: Bool {return _storage._clientState != nil}
   /// Clears the value of `clientState`. Subsequent reads from it will return its default value.
-  mutating func clearClientState() {self._clientState = nil}
+  mutating func clearClientState() {_uniqueStorage()._clientState = nil}
 
   var counterparty: Ibc_Core_Connection_V1_Counterparty {
-    get {return _counterparty ?? Ibc_Core_Connection_V1_Counterparty()}
-    set {_counterparty = newValue}
+    get {return _storage._counterparty ?? Ibc_Core_Connection_V1_Counterparty()}
+    set {_uniqueStorage()._counterparty = newValue}
   }
   /// Returns true if `counterparty` has been explicitly set.
-  var hasCounterparty: Bool {return self._counterparty != nil}
+  var hasCounterparty: Bool {return _storage._counterparty != nil}
   /// Clears the value of `counterparty`. Subsequent reads from it will return its default value.
-  mutating func clearCounterparty() {self._counterparty = nil}
+  mutating func clearCounterparty() {_uniqueStorage()._counterparty = nil}
 
-  var delayPeriod: UInt64 = 0
+  var delayPeriod: UInt64 {
+    get {return _storage._delayPeriod}
+    set {_uniqueStorage()._delayPeriod = newValue}
+  }
 
-  var counterpartyVersions: [Ibc_Core_Connection_V1_Version] = []
+  var counterpartyVersions: [Ibc_Core_Connection_V1_Version] {
+    get {return _storage._counterpartyVersions}
+    set {_uniqueStorage()._counterpartyVersions = newValue}
+  }
 
   var proofHeight: Ibc_Core_Client_V1_Height {
-    get {return _proofHeight ?? Ibc_Core_Client_V1_Height()}
-    set {_proofHeight = newValue}
+    get {return _storage._proofHeight ?? Ibc_Core_Client_V1_Height()}
+    set {_uniqueStorage()._proofHeight = newValue}
   }
   /// Returns true if `proofHeight` has been explicitly set.
-  var hasProofHeight: Bool {return self._proofHeight != nil}
+  var hasProofHeight: Bool {return _storage._proofHeight != nil}
   /// Clears the value of `proofHeight`. Subsequent reads from it will return its default value.
-  mutating func clearProofHeight() {self._proofHeight = nil}
+  mutating func clearProofHeight() {_uniqueStorage()._proofHeight = nil}
 
   /// proof of the initialization the connection on Chain A: `UNITIALIZED ->
   /// INIT`
-  var proofInit: Data = Data()
+  var proofInit: Data {
+    get {return _storage._proofInit}
+    set {_uniqueStorage()._proofInit = newValue}
+  }
 
   /// proof of client state included in message
-  var proofClient: Data = Data()
+  var proofClient: Data {
+    get {return _storage._proofClient}
+    set {_uniqueStorage()._proofClient = newValue}
+  }
 
   /// proof of client consensus state
-  var proofConsensus: Data = Data()
+  var proofConsensus: Data {
+    get {return _storage._proofConsensus}
+    set {_uniqueStorage()._proofConsensus = newValue}
+  }
 
   var consensusHeight: Ibc_Core_Client_V1_Height {
-    get {return _consensusHeight ?? Ibc_Core_Client_V1_Height()}
-    set {_consensusHeight = newValue}
+    get {return _storage._consensusHeight ?? Ibc_Core_Client_V1_Height()}
+    set {_uniqueStorage()._consensusHeight = newValue}
   }
   /// Returns true if `consensusHeight` has been explicitly set.
-  var hasConsensusHeight: Bool {return self._consensusHeight != nil}
+  var hasConsensusHeight: Bool {return _storage._consensusHeight != nil}
   /// Clears the value of `consensusHeight`. Subsequent reads from it will return its default value.
-  mutating func clearConsensusHeight() {self._consensusHeight = nil}
+  mutating func clearConsensusHeight() {_uniqueStorage()._consensusHeight = nil}
 
-  var signer: String = String()
+  var signer: String {
+    get {return _storage._signer}
+    set {_uniqueStorage()._signer = newValue}
+  }
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _clientState: Google_Protobuf_Any? = nil
-  fileprivate var _counterparty: Ibc_Core_Connection_V1_Counterparty? = nil
-  fileprivate var _proofHeight: Ibc_Core_Client_V1_Height? = nil
-  fileprivate var _consensusHeight: Ibc_Core_Client_V1_Height? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// MsgConnectionOpenTryResponse defines the Msg/ConnectionOpenTry response type.
@@ -177,8 +198,8 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenAck {
   /// Clears the value of `version`. Subsequent reads from it will return its default value.
   mutating func clearVersion() {self._version = nil}
 
-  var clientState: Google_Protobuf_Any {
-    get {return _clientState ?? Google_Protobuf_Any()}
+  var clientState: Google_Protobuf2_Any {
+    get {return _clientState ?? Google_Protobuf2_Any()}
     set {_clientState = newValue}
   }
   /// Returns true if `clientState` has been explicitly set.
@@ -221,7 +242,7 @@ struct Ibc_Core_Connection_V1_MsgConnectionOpenAck {
   init() {}
 
   fileprivate var _version: Ibc_Core_Connection_V1_Version? = nil
-  fileprivate var _clientState: Google_Protobuf_Any? = nil
+  fileprivate var _clientState: Google_Protobuf2_Any? = nil
   fileprivate var _proofHeight: Ibc_Core_Client_V1_Height? = nil
   fileprivate var _consensusHeight: Ibc_Core_Client_V1_Height? = nil
 }
@@ -375,82 +396,136 @@ extension Ibc_Core_Connection_V1_MsgConnectionOpenTry: SwiftProtobuf.Message, Sw
     12: .same(proto: "signer"),
   ]
 
+  fileprivate class _StorageClass {
+    var _clientID: String = String()
+    var _previousConnectionID: String = String()
+    var _clientState: Google_Protobuf2_Any? = nil
+    var _counterparty: Ibc_Core_Connection_V1_Counterparty? = nil
+    var _delayPeriod: UInt64 = 0
+    var _counterpartyVersions: [Ibc_Core_Connection_V1_Version] = []
+    var _proofHeight: Ibc_Core_Client_V1_Height? = nil
+    var _proofInit: Data = Data()
+    var _proofClient: Data = Data()
+    var _proofConsensus: Data = Data()
+    var _consensusHeight: Ibc_Core_Client_V1_Height? = nil
+    var _signer: String = String()
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _clientID = source._clientID
+      _previousConnectionID = source._previousConnectionID
+      _clientState = source._clientState
+      _counterparty = source._counterparty
+      _delayPeriod = source._delayPeriod
+      _counterpartyVersions = source._counterpartyVersions
+      _proofHeight = source._proofHeight
+      _proofInit = source._proofInit
+      _proofClient = source._proofClient
+      _proofConsensus = source._proofConsensus
+      _consensusHeight = source._consensusHeight
+      _signer = source._signer
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.clientID) }()
-      case 2: try { try decoder.decodeSingularStringField(value: &self.previousConnectionID) }()
-      case 3: try { try decoder.decodeSingularMessageField(value: &self._clientState) }()
-      case 4: try { try decoder.decodeSingularMessageField(value: &self._counterparty) }()
-      case 5: try { try decoder.decodeSingularUInt64Field(value: &self.delayPeriod) }()
-      case 6: try { try decoder.decodeRepeatedMessageField(value: &self.counterpartyVersions) }()
-      case 7: try { try decoder.decodeSingularMessageField(value: &self._proofHeight) }()
-      case 8: try { try decoder.decodeSingularBytesField(value: &self.proofInit) }()
-      case 9: try { try decoder.decodeSingularBytesField(value: &self.proofClient) }()
-      case 10: try { try decoder.decodeSingularBytesField(value: &self.proofConsensus) }()
-      case 11: try { try decoder.decodeSingularMessageField(value: &self._consensusHeight) }()
-      case 12: try { try decoder.decodeSingularStringField(value: &self.signer) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularStringField(value: &_storage._clientID) }()
+        case 2: try { try decoder.decodeSingularStringField(value: &_storage._previousConnectionID) }()
+        case 3: try { try decoder.decodeSingularMessageField(value: &_storage._clientState) }()
+        case 4: try { try decoder.decodeSingularMessageField(value: &_storage._counterparty) }()
+        case 5: try { try decoder.decodeSingularUInt64Field(value: &_storage._delayPeriod) }()
+        case 6: try { try decoder.decodeRepeatedMessageField(value: &_storage._counterpartyVersions) }()
+        case 7: try { try decoder.decodeSingularMessageField(value: &_storage._proofHeight) }()
+        case 8: try { try decoder.decodeSingularBytesField(value: &_storage._proofInit) }()
+        case 9: try { try decoder.decodeSingularBytesField(value: &_storage._proofClient) }()
+        case 10: try { try decoder.decodeSingularBytesField(value: &_storage._proofConsensus) }()
+        case 11: try { try decoder.decodeSingularMessageField(value: &_storage._consensusHeight) }()
+        case 12: try { try decoder.decodeSingularStringField(value: &_storage._signer) }()
+        default: break
+        }
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.clientID.isEmpty {
-      try visitor.visitSingularStringField(value: self.clientID, fieldNumber: 1)
-    }
-    if !self.previousConnectionID.isEmpty {
-      try visitor.visitSingularStringField(value: self.previousConnectionID, fieldNumber: 2)
-    }
-    if let v = self._clientState {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
-    }
-    if let v = self._counterparty {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    }
-    if self.delayPeriod != 0 {
-      try visitor.visitSingularUInt64Field(value: self.delayPeriod, fieldNumber: 5)
-    }
-    if !self.counterpartyVersions.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.counterpartyVersions, fieldNumber: 6)
-    }
-    if let v = self._proofHeight {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
-    }
-    if !self.proofInit.isEmpty {
-      try visitor.visitSingularBytesField(value: self.proofInit, fieldNumber: 8)
-    }
-    if !self.proofClient.isEmpty {
-      try visitor.visitSingularBytesField(value: self.proofClient, fieldNumber: 9)
-    }
-    if !self.proofConsensus.isEmpty {
-      try visitor.visitSingularBytesField(value: self.proofConsensus, fieldNumber: 10)
-    }
-    if let v = self._consensusHeight {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
-    }
-    if !self.signer.isEmpty {
-      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 12)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if !_storage._clientID.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._clientID, fieldNumber: 1)
+      }
+      if !_storage._previousConnectionID.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._previousConnectionID, fieldNumber: 2)
+      }
+      if let v = _storage._clientState {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+      }
+      if let v = _storage._counterparty {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      }
+      if _storage._delayPeriod != 0 {
+        try visitor.visitSingularUInt64Field(value: _storage._delayPeriod, fieldNumber: 5)
+      }
+      if !_storage._counterpartyVersions.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._counterpartyVersions, fieldNumber: 6)
+      }
+      if let v = _storage._proofHeight {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 7)
+      }
+      if !_storage._proofInit.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._proofInit, fieldNumber: 8)
+      }
+      if !_storage._proofClient.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._proofClient, fieldNumber: 9)
+      }
+      if !_storage._proofConsensus.isEmpty {
+        try visitor.visitSingularBytesField(value: _storage._proofConsensus, fieldNumber: 10)
+      }
+      if let v = _storage._consensusHeight {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 11)
+      }
+      if !_storage._signer.isEmpty {
+        try visitor.visitSingularStringField(value: _storage._signer, fieldNumber: 12)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Ibc_Core_Connection_V1_MsgConnectionOpenTry, rhs: Ibc_Core_Connection_V1_MsgConnectionOpenTry) -> Bool {
-    if lhs.clientID != rhs.clientID {return false}
-    if lhs.previousConnectionID != rhs.previousConnectionID {return false}
-    if lhs._clientState != rhs._clientState {return false}
-    if lhs._counterparty != rhs._counterparty {return false}
-    if lhs.delayPeriod != rhs.delayPeriod {return false}
-    if lhs.counterpartyVersions != rhs.counterpartyVersions {return false}
-    if lhs._proofHeight != rhs._proofHeight {return false}
-    if lhs.proofInit != rhs.proofInit {return false}
-    if lhs.proofClient != rhs.proofClient {return false}
-    if lhs.proofConsensus != rhs.proofConsensus {return false}
-    if lhs._consensusHeight != rhs._consensusHeight {return false}
-    if lhs.signer != rhs.signer {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._clientID != rhs_storage._clientID {return false}
+        if _storage._previousConnectionID != rhs_storage._previousConnectionID {return false}
+        if _storage._clientState != rhs_storage._clientState {return false}
+        if _storage._counterparty != rhs_storage._counterparty {return false}
+        if _storage._delayPeriod != rhs_storage._delayPeriod {return false}
+        if _storage._counterpartyVersions != rhs_storage._counterpartyVersions {return false}
+        if _storage._proofHeight != rhs_storage._proofHeight {return false}
+        if _storage._proofInit != rhs_storage._proofInit {return false}
+        if _storage._proofClient != rhs_storage._proofClient {return false}
+        if _storage._proofConsensus != rhs_storage._proofConsensus {return false}
+        if _storage._consensusHeight != rhs_storage._consensusHeight {return false}
+        if _storage._signer != rhs_storage._signer {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

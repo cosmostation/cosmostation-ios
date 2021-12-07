@@ -28,8 +28,8 @@ struct Desmos_Profiles_V1beta1_MsgLinkChainAccount {
 
   /// ChainAddress contains the details of the external chain address to be
   /// linked
-  var chainAddress: Google_Protobuf_Any {
-    get {return _chainAddress ?? Google_Protobuf_Any()}
+  var chainAddress: Google_Protobuf2_Any {
+    get {return _chainAddress ?? Google_Protobuf2_Any()}
     set {_chainAddress = newValue}
   }
   /// Returns true if `chainAddress` has been explicitly set.
@@ -65,7 +65,7 @@ struct Desmos_Profiles_V1beta1_MsgLinkChainAccount {
 
   init() {}
 
-  fileprivate var _chainAddress: Google_Protobuf_Any? = nil
+  fileprivate var _chainAddress: Google_Protobuf2_Any? = nil
   fileprivate var _proof: Desmos_Profiles_V1beta1_Proof? = nil
   fileprivate var _chainConfig: Desmos_Profiles_V1beta1_ChainConfig? = nil
 }

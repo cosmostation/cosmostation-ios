@@ -44,8 +44,8 @@ struct Ibc_Core_Client_V1_QueryClientStateResponse {
   // methods supported on all messages.
 
   /// client state associated with the request identifier
-  var clientState: Google_Protobuf_Any {
-    get {return _clientState ?? Google_Protobuf_Any()}
+  var clientState: Google_Protobuf2_Any {
+    get {return _clientState ?? Google_Protobuf2_Any()}
     set {_clientState = newValue}
   }
   /// Returns true if `clientState` has been explicitly set.
@@ -70,7 +70,7 @@ struct Ibc_Core_Client_V1_QueryClientStateResponse {
 
   init() {}
 
-  fileprivate var _clientState: Google_Protobuf_Any? = nil
+  fileprivate var _clientState: Google_Protobuf2_Any? = nil
   fileprivate var _proofHeight: Ibc_Core_Client_V1_Height? = nil
 }
 
@@ -159,8 +159,8 @@ struct Ibc_Core_Client_V1_QueryConsensusStateResponse {
   // methods supported on all messages.
 
   /// consensus state associated with the client identifier at the given height
-  var consensusState: Google_Protobuf_Any {
-    get {return _consensusState ?? Google_Protobuf_Any()}
+  var consensusState: Google_Protobuf2_Any {
+    get {return _consensusState ?? Google_Protobuf2_Any()}
     set {_consensusState = newValue}
   }
   /// Returns true if `consensusState` has been explicitly set.
@@ -185,7 +185,7 @@ struct Ibc_Core_Client_V1_QueryConsensusStateResponse {
 
   init() {}
 
-  fileprivate var _consensusState: Google_Protobuf_Any? = nil
+  fileprivate var _consensusState: Google_Protobuf2_Any? = nil
   fileprivate var _proofHeight: Ibc_Core_Client_V1_Height? = nil
 }
 
@@ -328,8 +328,8 @@ struct Ibc_Core_Client_V1_QueryUpgradedClientStateResponse {
   // methods supported on all messages.
 
   /// client state associated with the request identifier
-  var upgradedClientState: Google_Protobuf_Any {
-    get {return _upgradedClientState ?? Google_Protobuf_Any()}
+  var upgradedClientState: Google_Protobuf2_Any {
+    get {return _upgradedClientState ?? Google_Protobuf2_Any()}
     set {_upgradedClientState = newValue}
   }
   /// Returns true if `upgradedClientState` has been explicitly set.
@@ -341,7 +341,7 @@ struct Ibc_Core_Client_V1_QueryUpgradedClientStateResponse {
 
   init() {}
 
-  fileprivate var _upgradedClientState: Google_Protobuf_Any? = nil
+  fileprivate var _upgradedClientState: Google_Protobuf2_Any? = nil
 }
 
 /// QueryUpgradedConsensusStateRequest is the request type for the
@@ -364,8 +364,8 @@ struct Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse {
   // methods supported on all messages.
 
   /// Consensus state associated with the request identifier
-  var upgradedConsensusState: Google_Protobuf_Any {
-    get {return _upgradedConsensusState ?? Google_Protobuf_Any()}
+  var upgradedConsensusState: Google_Protobuf2_Any {
+    get {return _upgradedConsensusState ?? Google_Protobuf2_Any()}
     set {_upgradedConsensusState = newValue}
   }
   /// Returns true if `upgradedConsensusState` has been explicitly set.
@@ -377,7 +377,7 @@ struct Ibc_Core_Client_V1_QueryUpgradedConsensusStateResponse {
 
   init() {}
 
-  fileprivate var _upgradedConsensusState: Google_Protobuf_Any? = nil
+  fileprivate var _upgradedConsensusState: Google_Protobuf2_Any? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.

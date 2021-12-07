@@ -223,8 +223,8 @@ struct Cosmos_Group_V1beta1_GroupAccountInfo {
   var version: UInt64 = 0
 
   /// decision_policy specifies the group account's decision policy.
-  var decisionPolicy: Google_Protobuf_Any {
-    get {return _decisionPolicy ?? Google_Protobuf_Any()}
+  var decisionPolicy: Google_Protobuf2_Any {
+    get {return _decisionPolicy ?? Google_Protobuf2_Any()}
     set {_decisionPolicy = newValue}
   }
   /// Returns true if `decisionPolicy` has been explicitly set.
@@ -240,7 +240,7 @@ struct Cosmos_Group_V1beta1_GroupAccountInfo {
 
   init() {}
 
-  fileprivate var _decisionPolicy: Google_Protobuf_Any? = nil
+  fileprivate var _decisionPolicy: Google_Protobuf2_Any? = nil
 }
 
 /// Proposal defines a group proposal. Any member of a group can submit a proposal
@@ -342,7 +342,7 @@ struct Cosmos_Group_V1beta1_Proposal {
   }
 
   /// msgs is a list of Msgs that will be executed if the proposal passes.
-  var msgs: [Google_Protobuf_Any] {
+  var msgs: [Google_Protobuf2_Any] {
     get {return _storage._msgs}
     set {_uniqueStorage()._msgs = newValue}
   }
@@ -896,7 +896,7 @@ extension Cosmos_Group_V1beta1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._M
     var _voteState: Cosmos_Group_V1beta1_Tally? = nil
     var _timeout: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
     var _executorResult: Cosmos_Group_V1beta1_Proposal.ExecutorResult = .unspecified
-    var _msgs: [Google_Protobuf_Any] = []
+    var _msgs: [Google_Protobuf2_Any] = []
 
     static let defaultInstance = _StorageClass()
 

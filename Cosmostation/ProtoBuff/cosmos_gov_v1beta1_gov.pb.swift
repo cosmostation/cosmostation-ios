@@ -214,76 +214,80 @@ struct Cosmos_Gov_V1beta1_Proposal {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var proposalID: UInt64 = 0
+  var proposalID: UInt64 {
+    get {return _storage._proposalID}
+    set {_uniqueStorage()._proposalID = newValue}
+  }
 
-  var content: Google_Protobuf_Any {
-    get {return _content ?? Google_Protobuf_Any()}
-    set {_content = newValue}
+  var content: Google_Protobuf2_Any {
+    get {return _storage._content ?? Google_Protobuf2_Any()}
+    set {_uniqueStorage()._content = newValue}
   }
   /// Returns true if `content` has been explicitly set.
-  var hasContent: Bool {return self._content != nil}
+  var hasContent: Bool {return _storage._content != nil}
   /// Clears the value of `content`. Subsequent reads from it will return its default value.
-  mutating func clearContent() {self._content = nil}
+  mutating func clearContent() {_uniqueStorage()._content = nil}
 
-  var status: Cosmos_Gov_V1beta1_ProposalStatus = .unspecified
+  var status: Cosmos_Gov_V1beta1_ProposalStatus {
+    get {return _storage._status}
+    set {_uniqueStorage()._status = newValue}
+  }
 
   var finalTallyResult: Cosmos_Gov_V1beta1_TallyResult {
-    get {return _finalTallyResult ?? Cosmos_Gov_V1beta1_TallyResult()}
-    set {_finalTallyResult = newValue}
+    get {return _storage._finalTallyResult ?? Cosmos_Gov_V1beta1_TallyResult()}
+    set {_uniqueStorage()._finalTallyResult = newValue}
   }
   /// Returns true if `finalTallyResult` has been explicitly set.
-  var hasFinalTallyResult: Bool {return self._finalTallyResult != nil}
+  var hasFinalTallyResult: Bool {return _storage._finalTallyResult != nil}
   /// Clears the value of `finalTallyResult`. Subsequent reads from it will return its default value.
-  mutating func clearFinalTallyResult() {self._finalTallyResult = nil}
+  mutating func clearFinalTallyResult() {_uniqueStorage()._finalTallyResult = nil}
 
   var submitTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _submitTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_submitTime = newValue}
+    get {return _storage._submitTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._submitTime = newValue}
   }
   /// Returns true if `submitTime` has been explicitly set.
-  var hasSubmitTime: Bool {return self._submitTime != nil}
+  var hasSubmitTime: Bool {return _storage._submitTime != nil}
   /// Clears the value of `submitTime`. Subsequent reads from it will return its default value.
-  mutating func clearSubmitTime() {self._submitTime = nil}
+  mutating func clearSubmitTime() {_uniqueStorage()._submitTime = nil}
 
   var depositEndTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _depositEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_depositEndTime = newValue}
+    get {return _storage._depositEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._depositEndTime = newValue}
   }
   /// Returns true if `depositEndTime` has been explicitly set.
-  var hasDepositEndTime: Bool {return self._depositEndTime != nil}
+  var hasDepositEndTime: Bool {return _storage._depositEndTime != nil}
   /// Clears the value of `depositEndTime`. Subsequent reads from it will return its default value.
-  mutating func clearDepositEndTime() {self._depositEndTime = nil}
+  mutating func clearDepositEndTime() {_uniqueStorage()._depositEndTime = nil}
 
-  var totalDeposit: [Cosmos_Base_V1beta1_Coin] = []
+  var totalDeposit: [Cosmos_Base_V1beta1_Coin] {
+    get {return _storage._totalDeposit}
+    set {_uniqueStorage()._totalDeposit = newValue}
+  }
 
   var votingStartTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _votingStartTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_votingStartTime = newValue}
+    get {return _storage._votingStartTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._votingStartTime = newValue}
   }
   /// Returns true if `votingStartTime` has been explicitly set.
-  var hasVotingStartTime: Bool {return self._votingStartTime != nil}
+  var hasVotingStartTime: Bool {return _storage._votingStartTime != nil}
   /// Clears the value of `votingStartTime`. Subsequent reads from it will return its default value.
-  mutating func clearVotingStartTime() {self._votingStartTime = nil}
+  mutating func clearVotingStartTime() {_uniqueStorage()._votingStartTime = nil}
 
   var votingEndTime: SwiftProtobuf.Google_Protobuf_Timestamp {
-    get {return _votingEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
-    set {_votingEndTime = newValue}
+    get {return _storage._votingEndTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_uniqueStorage()._votingEndTime = newValue}
   }
   /// Returns true if `votingEndTime` has been explicitly set.
-  var hasVotingEndTime: Bool {return self._votingEndTime != nil}
+  var hasVotingEndTime: Bool {return _storage._votingEndTime != nil}
   /// Clears the value of `votingEndTime`. Subsequent reads from it will return its default value.
-  mutating func clearVotingEndTime() {self._votingEndTime = nil}
+  mutating func clearVotingEndTime() {_uniqueStorage()._votingEndTime = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
-  fileprivate var _content: Google_Protobuf_Any? = nil
-  fileprivate var _finalTallyResult: Cosmos_Gov_V1beta1_TallyResult? = nil
-  fileprivate var _submitTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-  fileprivate var _depositEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-  fileprivate var _votingStartTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-  fileprivate var _votingEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _storage = _StorageClass.defaultInstance
 }
 
 /// TallyResult defines a standard tally for a governance proposal.
@@ -560,67 +564,115 @@ extension Cosmos_Gov_V1beta1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._Mes
     9: .standard(proto: "voting_end_time"),
   ]
 
+  fileprivate class _StorageClass {
+    var _proposalID: UInt64 = 0
+    var _content: Google_Protobuf2_Any? = nil
+    var _status: Cosmos_Gov_V1beta1_ProposalStatus = .unspecified
+    var _finalTallyResult: Cosmos_Gov_V1beta1_TallyResult? = nil
+    var _submitTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _depositEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _totalDeposit: [Cosmos_Base_V1beta1_Coin] = []
+    var _votingStartTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+    var _votingEndTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+
+    static let defaultInstance = _StorageClass()
+
+    private init() {}
+
+    init(copying source: _StorageClass) {
+      _proposalID = source._proposalID
+      _content = source._content
+      _status = source._status
+      _finalTallyResult = source._finalTallyResult
+      _submitTime = source._submitTime
+      _depositEndTime = source._depositEndTime
+      _totalDeposit = source._totalDeposit
+      _votingStartTime = source._votingStartTime
+      _votingEndTime = source._votingEndTime
+    }
+  }
+
+  fileprivate mutating func _uniqueStorage() -> _StorageClass {
+    if !isKnownUniquelyReferenced(&_storage) {
+      _storage = _StorageClass(copying: _storage)
+    }
+    return _storage
+  }
+
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.proposalID) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._content) }()
-      case 3: try { try decoder.decodeSingularEnumField(value: &self.status) }()
-      case 4: try { try decoder.decodeSingularMessageField(value: &self._finalTallyResult) }()
-      case 5: try { try decoder.decodeSingularMessageField(value: &self._submitTime) }()
-      case 6: try { try decoder.decodeSingularMessageField(value: &self._depositEndTime) }()
-      case 7: try { try decoder.decodeRepeatedMessageField(value: &self.totalDeposit) }()
-      case 8: try { try decoder.decodeSingularMessageField(value: &self._votingStartTime) }()
-      case 9: try { try decoder.decodeSingularMessageField(value: &self._votingEndTime) }()
-      default: break
+    _ = _uniqueStorage()
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      while let fieldNumber = try decoder.nextFieldNumber() {
+        // The use of inline closures is to circumvent an issue where the compiler
+        // allocates stack space for every case branch when no optimizations are
+        // enabled. https://github.com/apple/swift-protobuf/issues/1034
+        switch fieldNumber {
+        case 1: try { try decoder.decodeSingularUInt64Field(value: &_storage._proposalID) }()
+        case 2: try { try decoder.decodeSingularMessageField(value: &_storage._content) }()
+        case 3: try { try decoder.decodeSingularEnumField(value: &_storage._status) }()
+        case 4: try { try decoder.decodeSingularMessageField(value: &_storage._finalTallyResult) }()
+        case 5: try { try decoder.decodeSingularMessageField(value: &_storage._submitTime) }()
+        case 6: try { try decoder.decodeSingularMessageField(value: &_storage._depositEndTime) }()
+        case 7: try { try decoder.decodeRepeatedMessageField(value: &_storage._totalDeposit) }()
+        case 8: try { try decoder.decodeSingularMessageField(value: &_storage._votingStartTime) }()
+        case 9: try { try decoder.decodeSingularMessageField(value: &_storage._votingEndTime) }()
+        default: break
+        }
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if self.proposalID != 0 {
-      try visitor.visitSingularUInt64Field(value: self.proposalID, fieldNumber: 1)
-    }
-    if let v = self._content {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
-    if self.status != .unspecified {
-      try visitor.visitSingularEnumField(value: self.status, fieldNumber: 3)
-    }
-    if let v = self._finalTallyResult {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
-    }
-    if let v = self._submitTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
-    }
-    if let v = self._depositEndTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
-    }
-    if !self.totalDeposit.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.totalDeposit, fieldNumber: 7)
-    }
-    if let v = self._votingStartTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
-    }
-    if let v = self._votingEndTime {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+    try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
+      if _storage._proposalID != 0 {
+        try visitor.visitSingularUInt64Field(value: _storage._proposalID, fieldNumber: 1)
+      }
+      if let v = _storage._content {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+      }
+      if _storage._status != .unspecified {
+        try visitor.visitSingularEnumField(value: _storage._status, fieldNumber: 3)
+      }
+      if let v = _storage._finalTallyResult {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+      }
+      if let v = _storage._submitTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 5)
+      }
+      if let v = _storage._depositEndTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 6)
+      }
+      if !_storage._totalDeposit.isEmpty {
+        try visitor.visitRepeatedMessageField(value: _storage._totalDeposit, fieldNumber: 7)
+      }
+      if let v = _storage._votingStartTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 8)
+      }
+      if let v = _storage._votingEndTime {
+        try visitor.visitSingularMessageField(value: v, fieldNumber: 9)
+      }
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Cosmos_Gov_V1beta1_Proposal, rhs: Cosmos_Gov_V1beta1_Proposal) -> Bool {
-    if lhs.proposalID != rhs.proposalID {return false}
-    if lhs._content != rhs._content {return false}
-    if lhs.status != rhs.status {return false}
-    if lhs._finalTallyResult != rhs._finalTallyResult {return false}
-    if lhs._submitTime != rhs._submitTime {return false}
-    if lhs._depositEndTime != rhs._depositEndTime {return false}
-    if lhs.totalDeposit != rhs.totalDeposit {return false}
-    if lhs._votingStartTime != rhs._votingStartTime {return false}
-    if lhs._votingEndTime != rhs._votingEndTime {return false}
+    if lhs._storage !== rhs._storage {
+      let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
+        let _storage = _args.0
+        let rhs_storage = _args.1
+        if _storage._proposalID != rhs_storage._proposalID {return false}
+        if _storage._content != rhs_storage._content {return false}
+        if _storage._status != rhs_storage._status {return false}
+        if _storage._finalTallyResult != rhs_storage._finalTallyResult {return false}
+        if _storage._submitTime != rhs_storage._submitTime {return false}
+        if _storage._depositEndTime != rhs_storage._depositEndTime {return false}
+        if _storage._totalDeposit != rhs_storage._totalDeposit {return false}
+        if _storage._votingStartTime != rhs_storage._votingStartTime {return false}
+        if _storage._votingEndTime != rhs_storage._votingEndTime {return false}
+        return true
+      }
+      if !storagesAreEqual {return false}
+    }
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

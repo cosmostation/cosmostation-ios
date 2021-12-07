@@ -28,8 +28,8 @@ struct Desmos_Profiles_V1beta1_Profile {
   // methods supported on all messages.
 
   /// Account represents the base Cosmos account associated with this profile
-  var account: Google_Protobuf_Any {
-    get {return _account ?? Google_Protobuf_Any()}
+  var account: Google_Protobuf2_Any {
+    get {return _account ?? Google_Protobuf2_Any()}
     set {_account = newValue}
   }
   /// Returns true if `account` has been explicitly set.
@@ -70,7 +70,7 @@ struct Desmos_Profiles_V1beta1_Profile {
 
   init() {}
 
-  fileprivate var _account: Google_Protobuf_Any? = nil
+  fileprivate var _account: Google_Protobuf2_Any? = nil
   fileprivate var _pictures: Desmos_Profiles_V1beta1_Pictures? = nil
   fileprivate var _creationDate: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }

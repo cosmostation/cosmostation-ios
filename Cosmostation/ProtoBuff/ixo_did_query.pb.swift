@@ -39,8 +39,8 @@ struct Did_QueryDidDocResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var diddoc: Google_Protobuf_Any {
-    get {return _diddoc ?? Google_Protobuf_Any()}
+  var diddoc: Google_Protobuf2_Any {
+    get {return _diddoc ?? Google_Protobuf2_Any()}
     set {_diddoc = newValue}
   }
   /// Returns true if `diddoc` has been explicitly set.
@@ -52,7 +52,7 @@ struct Did_QueryDidDocResponse {
 
   init() {}
 
-  fileprivate var _diddoc: Google_Protobuf_Any? = nil
+  fileprivate var _diddoc: Google_Protobuf2_Any? = nil
 }
 
 /// QueryAllDidsRequest is the request type for the Query/AllDids RPC method.
@@ -96,7 +96,7 @@ struct Did_QueryAllDidDocsResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var diddocs: [Google_Protobuf_Any] = []
+  var diddocs: [Google_Protobuf2_Any] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 

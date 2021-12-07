@@ -197,7 +197,7 @@ struct Cosmos_Base_Reflection_V2alpha1_InterfaceDescriptor {
   var fullname: String = String()
 
   /// interface_accepting_messages contains information regarding the proto messages which contain the interface as
-  /// google.protobuf.Any field
+  /// google.protobuf2.Any field
   var interfaceAcceptingMessages: [Cosmos_Base_Reflection_V2alpha1_InterfaceAcceptingMessageDescriptor] = []
 
   /// interface_implementers is a list of the descriptors of the interface implementers
@@ -218,7 +218,7 @@ struct Cosmos_Base_Reflection_V2alpha1_InterfaceImplementerDescriptor {
   var fullname: String = String()
 
   /// type_url defines the type URL used when marshalling the type as any
-  /// this is required so we can provide type safe google.protobuf.Any marshalling and
+  /// this is required so we can provide type safe google.protobuf2.Any marshalling and
   /// unmarshalling, making sure that we don't accept just 'any' type
   /// in our interface fields
   var typeURL: String = String()
@@ -229,7 +229,7 @@ struct Cosmos_Base_Reflection_V2alpha1_InterfaceImplementerDescriptor {
 }
 
 /// InterfaceAcceptingMessageDescriptor describes a protobuf message which contains
-/// an interface represented as a google.protobuf.Any
+/// an interface represented as a google.protobuf2.Any
 struct Cosmos_Base_Reflection_V2alpha1_InterfaceAcceptingMessageDescriptor {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -239,7 +239,7 @@ struct Cosmos_Base_Reflection_V2alpha1_InterfaceAcceptingMessageDescriptor {
   var fullname: String = String()
 
   /// field_descriptor_names is a list of the protobuf name (not fullname) of the field
-  /// which contains the interface as google.protobuf.Any (the interface is the same, but
+  /// which contains the interface as google.protobuf2.Any (the interface is the same, but
   /// it can be in multiple fields of the same proto message)
   var fieldDescriptorNames: [String] = []
 

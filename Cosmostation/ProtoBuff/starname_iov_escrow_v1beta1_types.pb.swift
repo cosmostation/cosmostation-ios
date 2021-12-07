@@ -87,8 +87,8 @@ struct Starnamed_X_Escrow_V1beta1_Escrow {
 
   var seller: String = String()
 
-  var object: Google_Protobuf_Any {
-    get {return _object ?? Google_Protobuf_Any()}
+  var object: Google_Protobuf2_Any {
+    get {return _object ?? Google_Protobuf2_Any()}
     set {_object = newValue}
   }
   /// Returns true if `object` has been explicitly set.
@@ -113,7 +113,7 @@ struct Starnamed_X_Escrow_V1beta1_Escrow {
 
   init() {}
 
-  fileprivate var _object: Google_Protobuf_Any? = nil
+  fileprivate var _object: Google_Protobuf2_Any? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.

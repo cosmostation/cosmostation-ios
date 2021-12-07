@@ -75,7 +75,7 @@ struct Cosmos_Authz_V1beta1_MsgExec {
   /// Authorization Msg requests to execute. Each msg must implement Authorization interface
   /// The x/authz will try to find a grant matching (msg.signers[0], grantee, MsgTypeURL(msg))
   /// triple and validate it.
-  var msgs: [Google_Protobuf_Any] = []
+  var msgs: [Google_Protobuf2_Any] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 

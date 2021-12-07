@@ -41,8 +41,8 @@ struct Cosmos_Evidence_V1beta1_QueryEvidenceResponse {
   // methods supported on all messages.
 
   /// evidence returns the requested evidence.
-  var evidence: Google_Protobuf_Any {
-    get {return _evidence ?? Google_Protobuf_Any()}
+  var evidence: Google_Protobuf2_Any {
+    get {return _evidence ?? Google_Protobuf2_Any()}
     set {_evidence = newValue}
   }
   /// Returns true if `evidence` has been explicitly set.
@@ -54,7 +54,7 @@ struct Cosmos_Evidence_V1beta1_QueryEvidenceResponse {
 
   init() {}
 
-  fileprivate var _evidence: Google_Protobuf_Any? = nil
+  fileprivate var _evidence: Google_Protobuf2_Any? = nil
 }
 
 /// QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
@@ -89,7 +89,7 @@ struct Cosmos_Evidence_V1beta1_QueryAllEvidenceResponse {
   // methods supported on all messages.
 
   /// evidence returns all evidences.
-  var evidence: [Google_Protobuf_Any] = []
+  var evidence: [Google_Protobuf2_Any] = []
 
   /// pagination defines the pagination in the response.
   var pagination: Cosmos_Base_Query_V1beta1_PageResponse {

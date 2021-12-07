@@ -45,8 +45,8 @@ struct Cosmos_Nft_V1beta1_CosmosNFTClass {
   var uriHash: String = String()
 
   /// data is the metadata of NFT classification,optional
-  var data: Google_Protobuf_Any {
-    get {return _data ?? Google_Protobuf_Any()}
+  var data: Google_Protobuf2_Any {
+    get {return _data ?? Google_Protobuf2_Any()}
     set {_data = newValue}
   }
   /// Returns true if `data` has been explicitly set.
@@ -58,7 +58,7 @@ struct Cosmos_Nft_V1beta1_CosmosNFTClass {
 
   init() {}
 
-  fileprivate var _data: Google_Protobuf_Any? = nil
+  fileprivate var _data: Google_Protobuf2_Any? = nil
 }
 
 /// NFT defines the NFT.
@@ -80,8 +80,8 @@ struct Cosmos_Nft_V1beta1_CosmosNFT {
   var uriHash: String = String()
 
   /// data is the metadata of the NFT,optional
-  var data: Google_Protobuf_Any {
-    get {return _data ?? Google_Protobuf_Any()}
+  var data: Google_Protobuf2_Any {
+    get {return _data ?? Google_Protobuf2_Any()}
     set {_data = newValue}
   }
   /// Returns true if `data` has been explicitly set.
@@ -93,7 +93,7 @@ struct Cosmos_Nft_V1beta1_CosmosNFT {
 
   init() {}
 
-  fileprivate var _data: Google_Protobuf_Any? = nil
+  fileprivate var _data: Google_Protobuf2_Any? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.

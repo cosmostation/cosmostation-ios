@@ -26,7 +26,7 @@ struct Did_GenesisState {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var didDocs: [Google_Protobuf_Any] = []
+  var didDocs: [Google_Protobuf2_Any] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 

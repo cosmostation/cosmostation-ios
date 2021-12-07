@@ -114,8 +114,8 @@ struct Cosmos_Feegrant_V1beta1_AllowedMsgAllowance {
   // methods supported on all messages.
 
   /// allowance can be any of basic and filtered fee allowance.
-  var allowance: Google_Protobuf_Any {
-    get {return _allowance ?? Google_Protobuf_Any()}
+  var allowance: Google_Protobuf2_Any {
+    get {return _allowance ?? Google_Protobuf2_Any()}
     set {_allowance = newValue}
   }
   /// Returns true if `allowance` has been explicitly set.
@@ -130,7 +130,7 @@ struct Cosmos_Feegrant_V1beta1_AllowedMsgAllowance {
 
   init() {}
 
-  fileprivate var _allowance: Google_Protobuf_Any? = nil
+  fileprivate var _allowance: Google_Protobuf2_Any? = nil
 }
 
 /// Grant is stored in the KVStore to record a grant with full context
@@ -146,8 +146,8 @@ struct Cosmos_Feegrant_V1beta1_Grant {
   var grantee: String = String()
 
   /// allowance can be any of basic and filtered fee allowance.
-  var allowance: Google_Protobuf_Any {
-    get {return _allowance ?? Google_Protobuf_Any()}
+  var allowance: Google_Protobuf2_Any {
+    get {return _allowance ?? Google_Protobuf2_Any()}
     set {_allowance = newValue}
   }
   /// Returns true if `allowance` has been explicitly set.
@@ -159,7 +159,7 @@ struct Cosmos_Feegrant_V1beta1_Grant {
 
   init() {}
 
-  fileprivate var _allowance: Google_Protobuf_Any? = nil
+  fileprivate var _allowance: Google_Protobuf2_Any? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.

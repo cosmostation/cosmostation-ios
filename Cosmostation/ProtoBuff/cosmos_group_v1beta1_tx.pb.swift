@@ -213,8 +213,8 @@ struct Cosmos_Group_V1beta1_MsgCreateGroupAccountRequest {
   var metadata: Data = Data()
 
   /// decision_policy specifies the group account's decision policy.
-  var decisionPolicy: Google_Protobuf_Any {
-    get {return _decisionPolicy ?? Google_Protobuf_Any()}
+  var decisionPolicy: Google_Protobuf2_Any {
+    get {return _decisionPolicy ?? Google_Protobuf2_Any()}
     set {_decisionPolicy = newValue}
   }
   /// Returns true if `decisionPolicy` has been explicitly set.
@@ -226,7 +226,7 @@ struct Cosmos_Group_V1beta1_MsgCreateGroupAccountRequest {
 
   init() {}
 
-  fileprivate var _decisionPolicy: Google_Protobuf_Any? = nil
+  fileprivate var _decisionPolicy: Google_Protobuf2_Any? = nil
 }
 
 /// MsgCreateGroupAccountResponse is the Msg/CreateGroupAccount response type.
@@ -287,8 +287,8 @@ struct Cosmos_Group_V1beta1_MsgUpdateGroupAccountDecisionPolicyRequest {
   var address: String = String()
 
   /// decision_policy is the updated group account decision policy.
-  var decisionPolicy: Google_Protobuf_Any {
-    get {return _decisionPolicy ?? Google_Protobuf_Any()}
+  var decisionPolicy: Google_Protobuf2_Any {
+    get {return _decisionPolicy ?? Google_Protobuf2_Any()}
     set {_decisionPolicy = newValue}
   }
   /// Returns true if `decisionPolicy` has been explicitly set.
@@ -300,7 +300,7 @@ struct Cosmos_Group_V1beta1_MsgUpdateGroupAccountDecisionPolicyRequest {
 
   init() {}
 
-  fileprivate var _decisionPolicy: Google_Protobuf_Any? = nil
+  fileprivate var _decisionPolicy: Google_Protobuf2_Any? = nil
 }
 
 /// MsgUpdateGroupAccountDecisionPolicyResponse is the Msg/UpdateGroupAccountDecisionPolicy response type.
@@ -362,7 +362,7 @@ struct Cosmos_Group_V1beta1_MsgCreateProposalRequest {
   var metadata: Data = Data()
 
   /// msgs is a list of Msgs that will be executed if the proposal passes.
-  var msgs: [Google_Protobuf_Any] = []
+  var msgs: [Google_Protobuf2_Any] = []
 
   /// exec defines the mode of execution of the proposal,
   /// whether it should be executed immediately on creation or not.

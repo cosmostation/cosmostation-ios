@@ -205,8 +205,8 @@ struct Cosmos_Staking_V1beta1_Validator {
   }
 
   /// consensus_pubkey is the consensus public key of the validator, as a Protobuf Any.
-  var consensusPubkey: Google_Protobuf_Any {
-    get {return _storage._consensusPubkey ?? Google_Protobuf_Any()}
+  var consensusPubkey: Google_Protobuf2_Any {
+    get {return _storage._consensusPubkey ?? Google_Protobuf2_Any()}
     set {_uniqueStorage()._consensusPubkey = newValue}
   }
   /// Returns true if `consensusPubkey` has been explicitly set.
@@ -840,7 +840,7 @@ extension Cosmos_Staking_V1beta1_Validator: SwiftProtobuf.Message, SwiftProtobuf
 
   fileprivate class _StorageClass {
     var _operatorAddress: String = String()
-    var _consensusPubkey: Google_Protobuf_Any? = nil
+    var _consensusPubkey: Google_Protobuf2_Any? = nil
     var _jailed: Bool = false
     var _status: Cosmos_Staking_V1beta1_BondStatus = .unspecified
     var _tokens: String = String()

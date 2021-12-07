@@ -36,8 +36,8 @@ struct Cosmos_Feegrant_V1beta1_MsgGrantAllowance {
   var grantee: String = String()
 
   /// allowance can be any of basic and filtered fee allowance.
-  var allowance: Google_Protobuf_Any {
-    get {return _allowance ?? Google_Protobuf_Any()}
+  var allowance: Google_Protobuf2_Any {
+    get {return _allowance ?? Google_Protobuf2_Any()}
     set {_allowance = newValue}
   }
   /// Returns true if `allowance` has been explicitly set.
@@ -49,7 +49,7 @@ struct Cosmos_Feegrant_V1beta1_MsgGrantAllowance {
 
   init() {}
 
-  fileprivate var _allowance: Google_Protobuf_Any? = nil
+  fileprivate var _allowance: Google_Protobuf2_Any? = nil
 }
 
 /// MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type.

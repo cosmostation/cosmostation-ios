@@ -127,8 +127,8 @@ struct Cosmos_Tx_V1beta1_SignDocDirectAux {
   var bodyBytes: Data = Data()
 
   /// public_key is the public key of the signing account.
-  var publicKey: Google_Protobuf_Any {
-    get {return _publicKey ?? Google_Protobuf_Any()}
+  var publicKey: Google_Protobuf2_Any {
+    get {return _publicKey ?? Google_Protobuf2_Any()}
     set {_publicKey = newValue}
   }
   /// Returns true if `publicKey` has been explicitly set.
@@ -162,7 +162,7 @@ struct Cosmos_Tx_V1beta1_SignDocDirectAux {
 
   init() {}
 
-  fileprivate var _publicKey: Google_Protobuf_Any? = nil
+  fileprivate var _publicKey: Google_Protobuf2_Any? = nil
   fileprivate var _tip: Cosmos_Tx_V1beta1_Tip? = nil
 }
 
@@ -179,7 +179,7 @@ struct Cosmos_Tx_V1beta1_TxBody {
   /// By convention, the first required signer (usually from the first message)
   /// is referred to as the primary signer and pays the fee for the whole
   /// transaction.
-  var messages: [Google_Protobuf_Any] = []
+  var messages: [Google_Protobuf2_Any] = []
 
   /// memo is any arbitrary note/comment to be added to the transaction.
   /// WARNING: in clients, any publicly exposed text should not be called memo,
@@ -193,12 +193,12 @@ struct Cosmos_Tx_V1beta1_TxBody {
   /// extension_options are arbitrary options that can be added by chains
   /// when the default options are not sufficient. If any of these are present
   /// and can't be handled, the transaction will be rejected
-  var extensionOptions: [Google_Protobuf_Any] = []
+  var extensionOptions: [Google_Protobuf2_Any] = []
 
   /// extension_options are arbitrary options that can be added by chains
   /// when the default options are not sufficient. If any of these are present
   /// and can't be handled, they will be ignored
-  var nonCriticalExtensionOptions: [Google_Protobuf_Any] = []
+  var nonCriticalExtensionOptions: [Google_Protobuf2_Any] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
@@ -261,8 +261,8 @@ struct Cosmos_Tx_V1beta1_SignerInfo {
   /// public_key is the public key of the signer. It is optional for accounts
   /// that already exist in state. If unset, the verifier can use the required \
   /// signer address for this position and lookup the public key.
-  var publicKey: Google_Protobuf_Any {
-    get {return _publicKey ?? Google_Protobuf_Any()}
+  var publicKey: Google_Protobuf2_Any {
+    get {return _publicKey ?? Google_Protobuf2_Any()}
     set {_publicKey = newValue}
   }
   /// Returns true if `publicKey` has been explicitly set.
@@ -290,7 +290,7 @@ struct Cosmos_Tx_V1beta1_SignerInfo {
 
   init() {}
 
-  fileprivate var _publicKey: Google_Protobuf_Any? = nil
+  fileprivate var _publicKey: Google_Protobuf2_Any? = nil
   fileprivate var _modeInfo: Cosmos_Tx_V1beta1_ModeInfo? = nil
 }
 

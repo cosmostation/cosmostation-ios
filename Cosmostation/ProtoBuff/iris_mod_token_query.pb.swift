@@ -39,8 +39,8 @@ struct Irismod_Token_QueryTokenResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var token: Google_Protobuf_Any {
-    get {return _token ?? Google_Protobuf_Any()}
+  var token: Google_Protobuf2_Any {
+    get {return _token ?? Google_Protobuf2_Any()}
     set {_token = newValue}
   }
   /// Returns true if `token` has been explicitly set.
@@ -52,7 +52,7 @@ struct Irismod_Token_QueryTokenResponse {
 
   init() {}
 
-  fileprivate var _token: Google_Protobuf_Any? = nil
+  fileprivate var _token: Google_Protobuf2_Any? = nil
 }
 
 /// QueryTokensRequest is request type for the Query/Tokens RPC method
@@ -86,7 +86,7 @@ struct Irismod_Token_QueryTokensResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var tokens: [Google_Protobuf_Any] = []
+  var tokens: [Google_Protobuf2_Any] = []
 
   var pagination: Cosmos_Base_Query_V1beta1_PageResponse {
     get {return _pagination ?? Cosmos_Base_Query_V1beta1_PageResponse()}

@@ -394,8 +394,8 @@ struct Umeenetwork_Umee_Peggy_V1_MsgSubmitBadSignatureEvidence {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var subject: Google_Protobuf_Any {
-    get {return _subject ?? Google_Protobuf_Any()}
+  var subject: Google_Protobuf2_Any {
+    get {return _subject ?? Google_Protobuf2_Any()}
     set {_subject = newValue}
   }
   /// Returns true if `subject` has been explicitly set.
@@ -411,7 +411,7 @@ struct Umeenetwork_Umee_Peggy_V1_MsgSubmitBadSignatureEvidence {
 
   init() {}
 
-  fileprivate var _subject: Google_Protobuf_Any? = nil
+  fileprivate var _subject: Google_Protobuf2_Any? = nil
 }
 
 struct Umeenetwork_Umee_Peggy_V1_MsgSubmitBadSignatureEvidenceResponse {

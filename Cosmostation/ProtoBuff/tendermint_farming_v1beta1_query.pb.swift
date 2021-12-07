@@ -92,7 +92,7 @@ struct Cosmos_Farming_V1beta1_QueryPlansResponse {
   // methods supported on all messages.
 
   /// plans are the existing plans
-  var plans: [Google_Protobuf_Any] = []
+  var plans: [Google_Protobuf2_Any] = []
 
   /// pagination defines the pagination in the response.
   var pagination: Cosmos_Base_Query_V1beta1_PageResponse {
@@ -130,8 +130,8 @@ struct Cosmos_Farming_V1beta1_QueryPlanResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var plan: Google_Protobuf_Any {
-    get {return _plan ?? Google_Protobuf_Any()}
+  var plan: Google_Protobuf2_Any {
+    get {return _plan ?? Google_Protobuf2_Any()}
     set {_plan = newValue}
   }
   /// Returns true if `plan` has been explicitly set.
@@ -143,7 +143,7 @@ struct Cosmos_Farming_V1beta1_QueryPlanResponse {
 
   init() {}
 
-  fileprivate var _plan: Google_Protobuf_Any? = nil
+  fileprivate var _plan: Google_Protobuf2_Any? = nil
 }
 
 /// QueryStakingsRequest is the request type for the Query/Stakings RPC method.

@@ -58,8 +58,8 @@ struct Cosmos_Upgrade_V1beta1_Plan {
   /// Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
   /// moved to the IBC module in the sub module 02-client.
   /// If this field is not empty, an error will be thrown.
-  var upgradedClientState: Google_Protobuf_Any {
-    get {return _upgradedClientState ?? Google_Protobuf_Any()}
+  var upgradedClientState: Google_Protobuf2_Any {
+    get {return _upgradedClientState ?? Google_Protobuf2_Any()}
     set {_upgradedClientState = newValue}
   }
   /// Returns true if `upgradedClientState` has been explicitly set.
@@ -72,7 +72,7 @@ struct Cosmos_Upgrade_V1beta1_Plan {
   init() {}
 
   fileprivate var _time: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
-  fileprivate var _upgradedClientState: Google_Protobuf_Any? = nil
+  fileprivate var _upgradedClientState: Google_Protobuf2_Any? = nil
 }
 
 /// SoftwareUpgradeProposal is a gov Content type for initiating a software

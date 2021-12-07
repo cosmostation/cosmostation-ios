@@ -54,7 +54,7 @@ struct Cosmos_Auth_V1beta1_QueryAccountsResponse {
   // methods supported on all messages.
 
   /// accounts are the existing accounts
-  var accounts: [Google_Protobuf_Any] = []
+  var accounts: [Google_Protobuf2_Any] = []
 
   /// pagination defines the pagination in the response.
   var pagination: Cosmos_Base_Query_V1beta1_PageResponse {
@@ -128,8 +128,8 @@ struct Cosmos_Auth_V1beta1_QueryAccountResponse {
   // methods supported on all messages.
 
   /// account defines the account of the corresponding address.
-  var account: Google_Protobuf_Any {
-    get {return _account ?? Google_Protobuf_Any()}
+  var account: Google_Protobuf2_Any {
+    get {return _account ?? Google_Protobuf2_Any()}
     set {_account = newValue}
   }
   /// Returns true if `account` has been explicitly set.
@@ -141,7 +141,7 @@ struct Cosmos_Auth_V1beta1_QueryAccountResponse {
 
   init() {}
 
-  fileprivate var _account: Google_Protobuf_Any? = nil
+  fileprivate var _account: Google_Protobuf2_Any? = nil
 }
 
 /// QueryParamsRequest is the request type for the Query/Params RPC method.
@@ -161,7 +161,7 @@ struct Cosmos_Auth_V1beta1_QueryModuleAccountsResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var accounts: [Google_Protobuf_Any] = []
+  var accounts: [Google_Protobuf2_Any] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 

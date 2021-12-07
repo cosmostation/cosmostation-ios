@@ -268,8 +268,8 @@ struct Shentu_Gov_V1alpha1_Proposal {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var content: Google_Protobuf_Any {
-    get {return _storage._content ?? Google_Protobuf_Any()}
+  var content: Google_Protobuf2_Any {
+    get {return _storage._content ?? Google_Protobuf2_Any()}
     set {_uniqueStorage()._content = newValue}
   }
   /// Returns true if `content` has been explicitly set.
@@ -650,7 +650,7 @@ extension Shentu_Gov_V1alpha1_Proposal: SwiftProtobuf.Message, SwiftProtobuf._Me
   ]
 
   fileprivate class _StorageClass {
-    var _content: Google_Protobuf_Any? = nil
+    var _content: Google_Protobuf2_Any? = nil
     var _proposalID: UInt64 = 0
     var _status: Shentu_Gov_V1alpha1_ProposalStatus = .unspecified
     var _isProposerCouncilMember: Bool = false

@@ -130,8 +130,8 @@ struct Cosmos_Base_Tendermint_V1beta1_Validator {
 
   var address: String = String()
 
-  var pubKey: Google_Protobuf_Any {
-    get {return _pubKey ?? Google_Protobuf_Any()}
+  var pubKey: Google_Protobuf2_Any {
+    get {return _pubKey ?? Google_Protobuf2_Any()}
     set {_pubKey = newValue}
   }
   /// Returns true if `pubKey` has been explicitly set.
@@ -147,7 +147,7 @@ struct Cosmos_Base_Tendermint_V1beta1_Validator {
 
   init() {}
 
-  fileprivate var _pubKey: Google_Protobuf_Any? = nil
+  fileprivate var _pubKey: Google_Protobuf2_Any? = nil
 }
 
 /// GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method.

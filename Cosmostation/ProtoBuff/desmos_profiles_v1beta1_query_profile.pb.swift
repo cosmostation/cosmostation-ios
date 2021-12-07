@@ -40,8 +40,8 @@ struct Desmos_Profiles_V1beta1_QueryProfileResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var profile: Google_Protobuf_Any {
-    get {return _profile ?? Google_Protobuf_Any()}
+  var profile: Google_Protobuf2_Any {
+    get {return _profile ?? Google_Protobuf2_Any()}
     set {_profile = newValue}
   }
   /// Returns true if `profile` has been explicitly set.
@@ -53,7 +53,7 @@ struct Desmos_Profiles_V1beta1_QueryProfileResponse {
 
   init() {}
 
-  fileprivate var _profile: Google_Protobuf_Any? = nil
+  fileprivate var _profile: Google_Protobuf2_Any? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.

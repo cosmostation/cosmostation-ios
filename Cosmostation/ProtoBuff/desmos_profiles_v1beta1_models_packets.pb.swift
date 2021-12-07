@@ -29,8 +29,8 @@ struct Desmos_Profiles_V1beta1_LinkChainAccountPacketData {
   // methods supported on all messages.
 
   /// SourceAddress contains the details of the external chain address
-  var sourceAddress: Google_Protobuf_Any {
-    get {return _sourceAddress ?? Google_Protobuf_Any()}
+  var sourceAddress: Google_Protobuf2_Any {
+    get {return _sourceAddress ?? Google_Protobuf2_Any()}
     set {_sourceAddress = newValue}
   }
   /// Returns true if `sourceAddress` has been explicitly set.
@@ -76,7 +76,7 @@ struct Desmos_Profiles_V1beta1_LinkChainAccountPacketData {
 
   init() {}
 
-  fileprivate var _sourceAddress: Google_Protobuf_Any? = nil
+  fileprivate var _sourceAddress: Google_Protobuf2_Any? = nil
   fileprivate var _sourceProof: Desmos_Profiles_V1beta1_Proof? = nil
   fileprivate var _sourceChainConfig: Desmos_Profiles_V1beta1_ChainConfig? = nil
   fileprivate var _destinationProof: Desmos_Profiles_V1beta1_Proof? = nil

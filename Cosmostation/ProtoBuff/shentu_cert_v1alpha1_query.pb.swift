@@ -82,8 +82,8 @@ struct Shentu_Cert_V1alpha1_QueryPlatformRequest {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var pubkey: Google_Protobuf_Any {
-    get {return _pubkey ?? Google_Protobuf_Any()}
+  var pubkey: Google_Protobuf2_Any {
+    get {return _pubkey ?? Google_Protobuf2_Any()}
     set {_pubkey = newValue}
   }
   /// Returns true if `pubkey` has been explicitly set.
@@ -95,7 +95,7 @@ struct Shentu_Cert_V1alpha1_QueryPlatformRequest {
 
   init() {}
 
-  fileprivate var _pubkey: Google_Protobuf_Any? = nil
+  fileprivate var _pubkey: Google_Protobuf2_Any? = nil
 }
 
 struct Shentu_Cert_V1alpha1_QueryPlatformResponse {

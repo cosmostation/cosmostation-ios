@@ -27,7 +27,7 @@ struct Cosmos_Gov_V1beta2_MsgSubmitProposal {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var messages: [Google_Protobuf_Any] = []
+  var messages: [Google_Protobuf2_Any] = []
 
   var initialDeposit: [Cosmos_Base_V1beta1_Coin] = []
 

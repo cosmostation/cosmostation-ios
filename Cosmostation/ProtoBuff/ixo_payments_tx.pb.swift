@@ -133,8 +133,8 @@ struct Payments_MsgCreateSubscription {
 
   var maxPeriods: String = String()
 
-  var period: Google_Protobuf_Any {
-    get {return _period ?? Google_Protobuf_Any()}
+  var period: Google_Protobuf2_Any {
+    get {return _period ?? Google_Protobuf2_Any()}
     set {_period = newValue}
   }
   /// Returns true if `period` has been explicitly set.
@@ -146,7 +146,7 @@ struct Payments_MsgCreateSubscription {
 
   init() {}
 
-  fileprivate var _period: Google_Protobuf_Any? = nil
+  fileprivate var _period: Google_Protobuf2_Any? = nil
 }
 
 /// MsgCreateSubscriptionResponse defines the Msg/CreateSubscription response type.

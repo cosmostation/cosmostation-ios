@@ -37,7 +37,7 @@ struct Cosmos_Auth_V1beta1_GenesisState {
   mutating func clearParams() {self._params = nil}
 
   /// accounts are the accounts present at genesis.
-  var accounts: [Google_Protobuf_Any] = []
+  var accounts: [Google_Protobuf2_Any] = []
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 

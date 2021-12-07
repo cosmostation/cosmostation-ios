@@ -44,8 +44,8 @@ struct Cosmos_Authz_V1beta1_Grant {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var authorization: Google_Protobuf_Any {
-    get {return _authorization ?? Google_Protobuf_Any()}
+  var authorization: Google_Protobuf2_Any {
+    get {return _authorization ?? Google_Protobuf2_Any()}
     set {_authorization = newValue}
   }
   /// Returns true if `authorization` has been explicitly set.
@@ -66,7 +66,7 @@ struct Cosmos_Authz_V1beta1_Grant {
 
   init() {}
 
-  fileprivate var _authorization: Google_Protobuf_Any? = nil
+  fileprivate var _authorization: Google_Protobuf2_Any? = nil
   fileprivate var _expiration: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }
 

@@ -156,8 +156,8 @@ struct Ibc_Lightclients_Solomachine_V1_ConsensusState {
   // methods supported on all messages.
 
   /// public key of the solo machine
-  var publicKey: Google_Protobuf_Any {
-    get {return _publicKey ?? Google_Protobuf_Any()}
+  var publicKey: Google_Protobuf2_Any {
+    get {return _publicKey ?? Google_Protobuf2_Any()}
     set {_publicKey = newValue}
   }
   /// Returns true if `publicKey` has been explicitly set.
@@ -176,7 +176,7 @@ struct Ibc_Lightclients_Solomachine_V1_ConsensusState {
 
   init() {}
 
-  fileprivate var _publicKey: Google_Protobuf_Any? = nil
+  fileprivate var _publicKey: Google_Protobuf2_Any? = nil
 }
 
 /// Header defines a solo machine consensus header
@@ -192,8 +192,8 @@ struct Ibc_Lightclients_Solomachine_V1_Header {
 
   var signature: Data = Data()
 
-  var newPublicKey: Google_Protobuf_Any {
-    get {return _newPublicKey ?? Google_Protobuf_Any()}
+  var newPublicKey: Google_Protobuf2_Any {
+    get {return _newPublicKey ?? Google_Protobuf2_Any()}
     set {_newPublicKey = newValue}
   }
   /// Returns true if `newPublicKey` has been explicitly set.
@@ -207,7 +207,7 @@ struct Ibc_Lightclients_Solomachine_V1_Header {
 
   init() {}
 
-  fileprivate var _newPublicKey: Google_Protobuf_Any? = nil
+  fileprivate var _newPublicKey: Google_Protobuf2_Any? = nil
 }
 
 /// Misbehaviour defines misbehaviour for a solo machine which consists
@@ -313,8 +313,8 @@ struct Ibc_Lightclients_Solomachine_V1_HeaderData {
   // methods supported on all messages.
 
   /// header public key
-  var newPubKey: Google_Protobuf_Any {
-    get {return _newPubKey ?? Google_Protobuf_Any()}
+  var newPubKey: Google_Protobuf2_Any {
+    get {return _newPubKey ?? Google_Protobuf2_Any()}
     set {_newPubKey = newValue}
   }
   /// Returns true if `newPubKey` has been explicitly set.
@@ -329,7 +329,7 @@ struct Ibc_Lightclients_Solomachine_V1_HeaderData {
 
   init() {}
 
-  fileprivate var _newPubKey: Google_Protobuf_Any? = nil
+  fileprivate var _newPubKey: Google_Protobuf2_Any? = nil
 }
 
 /// ClientStateData returns the SignBytes data for client state verification.
@@ -340,8 +340,8 @@ struct Ibc_Lightclients_Solomachine_V1_ClientStateData {
 
   var path: Data = Data()
 
-  var clientState: Google_Protobuf_Any {
-    get {return _clientState ?? Google_Protobuf_Any()}
+  var clientState: Google_Protobuf2_Any {
+    get {return _clientState ?? Google_Protobuf2_Any()}
     set {_clientState = newValue}
   }
   /// Returns true if `clientState` has been explicitly set.
@@ -353,7 +353,7 @@ struct Ibc_Lightclients_Solomachine_V1_ClientStateData {
 
   init() {}
 
-  fileprivate var _clientState: Google_Protobuf_Any? = nil
+  fileprivate var _clientState: Google_Protobuf2_Any? = nil
 }
 
 /// ConsensusStateData returns the SignBytes data for consensus state
@@ -365,8 +365,8 @@ struct Ibc_Lightclients_Solomachine_V1_ConsensusStateData {
 
   var path: Data = Data()
 
-  var consensusState: Google_Protobuf_Any {
-    get {return _consensusState ?? Google_Protobuf_Any()}
+  var consensusState: Google_Protobuf2_Any {
+    get {return _consensusState ?? Google_Protobuf2_Any()}
     set {_consensusState = newValue}
   }
   /// Returns true if `consensusState` has been explicitly set.
@@ -378,7 +378,7 @@ struct Ibc_Lightclients_Solomachine_V1_ConsensusStateData {
 
   init() {}
 
-  fileprivate var _consensusState: Google_Protobuf_Any? = nil
+  fileprivate var _consensusState: Google_Protobuf2_Any? = nil
 }
 
 /// ConnectionStateData returns the SignBytes data for connection state

@@ -115,8 +115,8 @@ struct Cosmos_Tx_Signing_V1beta1_SignatureDescriptor {
   // methods supported on all messages.
 
   /// public_key is the public key of the signer
-  var publicKey: Google_Protobuf_Any {
-    get {return _publicKey ?? Google_Protobuf_Any()}
+  var publicKey: Google_Protobuf2_Any {
+    get {return _publicKey ?? Google_Protobuf2_Any()}
     set {_publicKey = newValue}
   }
   /// Returns true if `publicKey` has been explicitly set.
@@ -244,7 +244,7 @@ struct Cosmos_Tx_Signing_V1beta1_SignatureDescriptor {
 
   init() {}
 
-  fileprivate var _publicKey: Google_Protobuf_Any? = nil
+  fileprivate var _publicKey: Google_Protobuf2_Any? = nil
   fileprivate var _data: Cosmos_Tx_Signing_V1beta1_SignatureDescriptor.DataMessage? = nil
 }
 

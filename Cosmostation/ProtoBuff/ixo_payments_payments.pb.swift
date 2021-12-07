@@ -119,8 +119,8 @@ struct Payments_Subscription {
 
   var periodsAccumulated: String = String()
 
-  var period: Google_Protobuf_Any {
-    get {return _period ?? Google_Protobuf_Any()}
+  var period: Google_Protobuf2_Any {
+    get {return _period ?? Google_Protobuf2_Any()}
     set {_period = newValue}
   }
   /// Returns true if `period` has been explicitly set.
@@ -132,7 +132,7 @@ struct Payments_Subscription {
 
   init() {}
 
-  fileprivate var _period: Google_Protobuf_Any? = nil
+  fileprivate var _period: Google_Protobuf2_Any? = nil
 }
 
 /// BlockPeriod implements the Period interface and specifies a period in terms of number
