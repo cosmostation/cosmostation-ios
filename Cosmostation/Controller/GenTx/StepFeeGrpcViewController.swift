@@ -201,12 +201,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
     
     func onSimulateGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?, _ height: Ibc_Core_Client_V1_Height?) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-            let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
-            let simulateReq = self.genSimulateReq(auth!, privateKey, publicKey, height)
+            let simulateReq = self.genSimulateReq(auth!, self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, height)
             
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!

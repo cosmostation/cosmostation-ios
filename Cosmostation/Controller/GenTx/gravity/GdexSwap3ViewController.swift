@@ -101,12 +101,6 @@ class GdexSwap3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-            let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
-            
             let reqTx = Signer.genSignedSwapBatchMsgTxgRPC(auth!,
                                                            self.pageHolderVC.mAccount!.account_address,
                                                            String(self.pageHolderVC.mGDexPool!.id),
@@ -117,7 +111,7 @@ class GdexSwap3ViewController: BaseViewController, PasswordViewDelegate {
                                                            self.pageHolderVC.mGDexSwapOrderPrice!.stringValue,
                                                            self.pageHolderVC.mFee!,
                                                            self.pageHolderVC.mMemo!,
-                                                           privateKey, publicKey,
+                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                            BaseData.instance.getChainId(self.chainType))
             
             

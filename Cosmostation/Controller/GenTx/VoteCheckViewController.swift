@@ -202,14 +202,10 @@ class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            
-            let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-            let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
-            let reqTx = Signer.genSignedVoteTxgRPC(auth!, self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!, self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            let reqTx = Signer.genSignedVoteTxgRPC(auth!, self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
+                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                   BaseData.instance.getChainId(self.chainType))
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

@@ -98,12 +98,6 @@ class Swap3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-            let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
-            
             var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
             let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with {
                 $0.poolID = self.pageHolderVC.mPool!.id
@@ -118,7 +112,7 @@ class Swap3ViewController: BaseViewController, PasswordViewDelegate {
                                                         self.pageHolderVC.mSwapOutAmount!.stringValue,
                                                         self.pageHolderVC.mFee!,
                                                         self.pageHolderVC.mMemo!,
-                                                        privateKey, publicKey,
+                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                         BaseData.instance.getChainId(self.chainType))
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)

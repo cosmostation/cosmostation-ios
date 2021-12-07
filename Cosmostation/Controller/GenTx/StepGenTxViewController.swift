@@ -11,6 +11,7 @@ import Alamofire
 import GRPC
 import NIO
 import HDWalletKit
+import SwiftKeychainWrapper
 
 class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIScrollViewDelegate {
     
@@ -512,6 +513,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         chainType       = WUtils.getChainType(mAccount!.account_base_chain)
         mBnbToken       = WUtils.getBnbToken(mToSendDenom)
         
+        self.getKey()
+        
         if (mType == COSMOS_MSG_TYPE_REDELEGATE2) {
             if (WUtils.isGRPC(chainType!)) {
                 onFetchBondedValidators(0)
@@ -693,6 +696,30 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
             if ($0.jailed && !$1.jailed) { return false }
             if (!$0.jailed && $1.jailed) { return true }
             return Double($0.tokens)! > Double($1.tokens)!
+        }
+    }
+    
+    
+    var privateKey: Data?
+    var publicKey: Data?
+    func getKey() {
+        DispatchQueue.global().async {
+            if (self.mAccount?.account_from_mnemonic == true) {
+                if let words = KeychainWrapper.standard.string(forKey: self.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                    self.privateKey = KeyFac.getPrivateRaw(words, self.mAccount!)
+                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    print("Mnemonci private ", self.privateKey!.hexEncodedString())
+                    print("Mnemonci publicKey ", self.publicKey!.hexEncodedString())
+                }
+                
+            } else {
+                if let key = KeychainWrapper.standard.string(forKey: self.mAccount!.getPrivateKeySha1()) {
+                    self.privateKey = KeyFac.getPrivateFromString(key)
+                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    print("Private private ", self.privateKey!.hexEncodedString())
+                    print("Private publicKey ", self.publicKey!.hexEncodedString())
+                }
+            }
         }
     }
 }

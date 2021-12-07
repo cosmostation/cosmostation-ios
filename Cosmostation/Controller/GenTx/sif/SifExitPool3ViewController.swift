@@ -102,11 +102,6 @@ class SifExitPool3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.account!)
-            let publicKey = KeyFac.getPublicRaw(words, self.account!)
             
             var basisPoints = ""
             let myShareAllAmount = NSDecimalNumber.init(string: self.pageHolderVC.mSifMyAllUnitAmount)
@@ -120,7 +115,7 @@ class SifExitPool3ViewController: BaseViewController, PasswordViewDelegate {
                                                              basisPoints,
                                                              self.pageHolderVC.mFee!,
                                                              self.pageHolderVC.mMemo!,
-                                                             privateKey, publicKey,
+                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                              BaseData.instance.getChainId(self.chainType))
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)

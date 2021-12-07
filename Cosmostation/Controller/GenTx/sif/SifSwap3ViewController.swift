@@ -103,11 +103,6 @@ class SifSwap3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.account!)
-            let publicKey = KeyFac.getPublicRaw(words, self.account!)
             let reqTx = Signer.genSignedSifSwapMsgTxgRPC(auth!,
                                                          self.account!.account_address,
                                                          self.pageHolderVC.mSwapInDenom!,
@@ -116,7 +111,7 @@ class SifSwap3ViewController: BaseViewController, PasswordViewDelegate {
                                                          self.pageHolderVC.mSwapOutAmount!.stringValue,
                                                          self.pageHolderVC.mFee!,
                                                          self.pageHolderVC.mMemo!,
-                                                         privateKey, publicKey,
+                                                         self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                          BaseData.instance.getChainId(self.chainType))
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)

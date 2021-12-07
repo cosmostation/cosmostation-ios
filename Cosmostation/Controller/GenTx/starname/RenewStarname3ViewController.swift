@@ -109,12 +109,6 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-            let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
-            
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest = Cosmos_Tx_V1beta1_BroadcastTxRequest.init()
             if (self.pageHolderVC.mType == IOV_MSG_TYPE_RENEW_DOMAIN) {
                 reqTx = Signer.genSignedRenewDomainMsgTxgRPC (auth!,
@@ -122,7 +116,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
                                                                self.pageHolderVC.mAccount!.account_address,
                                                                self.pageHolderVC.mFee!,
                                                                self.pageHolderVC.mMemo!,
-                                                               privateKey, publicKey,
+                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                BaseData.instance.getChainId(self.chainType))
                 
             } else if (self.pageHolderVC.mType == IOV_MSG_TYPE_RENEW_ACCOUNT) {
@@ -132,7 +126,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
                                                                self.pageHolderVC.mAccount!.account_address,
                                                                self.pageHolderVC.mFee!,
                                                                self.pageHolderVC.mMemo!,
-                                                               privateKey, publicKey,
+                                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                BaseData.instance.getChainId(self.chainType))
             }
             

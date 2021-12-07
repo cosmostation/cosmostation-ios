@@ -69,7 +69,11 @@ class KeyFac {
     
     static func getPublicFromString(_ hexInput: String) -> Data {
         let privateKey = getPrivateFromString(hexInput)
-        return WKey.getPublicFromString(privateKey)
+        return getPublicFromPrivateKey(privateKey)
+    }
+    
+    static func getPublicFromPrivateKey(_ dataInput: Data) -> Data {
+        return WKey.getPublicFromString(dataInput)
     }
     
 }

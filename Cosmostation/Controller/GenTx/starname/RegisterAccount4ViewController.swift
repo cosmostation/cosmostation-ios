@@ -114,11 +114,6 @@ class RegisterAccount4ViewController: BaseViewController, UITableViewDelegate, U
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-            let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
             let reqTx = Signer.genSignedRegisterAccountMsgTxgRPC(auth!,
                                                                  self.pageHolderVC.mStarnameDomain!,
                                                                  self.pageHolderVC.mStarnameAccount!,
@@ -127,7 +122,7 @@ class RegisterAccount4ViewController: BaseViewController, UITableViewDelegate, U
                                                                  self.pageHolderVC.mStarnameResources_gRPC,
                                                                  self.pageHolderVC.mFee!,
                                                                  self.pageHolderVC.mMemo!,
-                                                                 privateKey, publicKey,
+                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                  BaseData.instance.getChainId(self.chainType))
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)

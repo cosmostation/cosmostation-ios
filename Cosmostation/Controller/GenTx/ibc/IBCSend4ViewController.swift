@@ -110,12 +110,6 @@ class IBCSend4ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ height: Ibc_Core_Client_V1_Height) {
         DispatchQueue.global().async {
-            guard let words = KeychainWrapper.standard.string(forKey: self.pageHolderVC.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let privateKey = KeyFac.getPrivateRaw(words, self.pageHolderVC.mAccount!)
-            let publicKey = KeyFac.getPublicRaw(words, self.pageHolderVC.mAccount!)
-            
             let reqTx = Signer.genSignedIbcTransferMsgTxgRPC(auth,
                                                              self.pageHolderVC.mAccount!.account_address,
                                                              self.pageHolderVC.mIBCRecipient!,
@@ -125,7 +119,7 @@ class IBCSend4ViewController: BaseViewController, PasswordViewDelegate {
                                                              height,
                                                              self.pageHolderVC.mFee!,
                                                              IBC_TRANSFER_MEMO,
-                                                             privateKey, publicKey,
+                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                              BaseData.instance.getChainId(self.chainType))
             
             do {
