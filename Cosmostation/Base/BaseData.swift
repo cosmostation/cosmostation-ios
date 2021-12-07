@@ -66,7 +66,7 @@ final class BaseData : NSObject{
     //For ProtoBuf and gRPC
     var mVestingAccountInfoResult: VestingAccountInfo.VestingAccountInfoResult?
     var mNodeInfo_gRPC: Tendermint_P2p_NodeInfo?
-    var mAccount_gRPC: Google_Protobuf_Any!
+    var mAccount_gRPC: Google_Protobuf2_Any!
     var mAllValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     var mBondedValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     var mUnbondValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()

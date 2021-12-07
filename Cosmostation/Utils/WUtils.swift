@@ -5481,7 +5481,7 @@ public class WUtils {
         
     }
     
-    static func onParseVestingAccount(_ chain: ChainType, _ rawAccount: Google_Protobuf_Any) {
+    static func onParseVestingAccount(_ chain: ChainType, _ rawAccount: Google_Protobuf2_Any) {
         print("onParseVestingAccount")
         var sBalace = Array<Coin>()
         BaseData.instance.mMyBalances_gRPC.forEach { coin in
@@ -5686,7 +5686,7 @@ public class WUtils {
         }
     }
     
-    static func onParsePersisVestingAccount(_ rawAccount: Google_Protobuf_Any) {
+    static func onParsePersisVestingAccount(_ rawAccount: Google_Protobuf2_Any) {
         print("onParsePersisVestingAccount")
         var sBalace = Array<Coin>()
         BaseData.instance.mMyBalances_gRPC.forEach { coin in
@@ -5930,7 +5930,7 @@ public class WUtils {
         return result
     }
     
-    static func onParseProposalTitle(_ proposalContent: Google_Protobuf_Any) -> String {
+    static func onParseProposalTitle(_ proposalContent: Google_Protobuf2_Any) -> String {
         if (proposalContent.typeURL.contains(Cosmos_Gov_V1beta1_TextProposal.protoMessageName)) {
             let textProposal = try! Cosmos_Gov_V1beta1_TextProposal.init(serializedData: proposalContent.value)
             return textProposal.title
@@ -5967,7 +5967,7 @@ public class WUtils {
         return ""
     }
     
-    static func onParseProposalDescription(_ proposalContent: Google_Protobuf_Any) -> String {
+    static func onParseProposalDescription(_ proposalContent: Google_Protobuf2_Any) -> String {
         if (proposalContent.typeURL.contains(Cosmos_Gov_V1beta1_TextProposal.protoMessageName)) {
             let textProposal = try! Cosmos_Gov_V1beta1_TextProposal.init(serializedData: proposalContent.value)
             return textProposal.description_p
@@ -6004,7 +6004,7 @@ public class WUtils {
         return ""
     }
     
-    static func onParseProposalRequestAmount(_ proposalContent: Google_Protobuf_Any) -> Coin? {
+    static func onParseProposalRequestAmount(_ proposalContent: Google_Protobuf2_Any) -> Coin? {
         if (proposalContent.typeURL.contains(Cosmos_Distribution_V1beta1_CommunityPoolSpendProposal.protoMessageName)) {
             let poolProposal = try! Cosmos_Distribution_V1beta1_CommunityPoolSpendProposal.init(serializedData: proposalContent.value)
             return Coin.init(poolProposal.amount[0].denom, poolProposal.amount[0].amount)

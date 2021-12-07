@@ -25,7 +25,7 @@ class Signer {
             $0.toAddress = toAddress
             $0.amount = [sendCoin]
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.bank.v1beta1.MsgSend"
             $0.value = try! sendMsg.serializedData()
         }
@@ -51,7 +51,7 @@ class Signer {
             $0.toAddress = toAddress
             $0.amount = [sendCoin]
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.bank.v1beta1.MsgSend"
             $0.value = try! sendMsg.serializedData()
         }
@@ -77,7 +77,7 @@ class Signer {
             $0.validatorAddress = toValAddress
             $0.amount = toCoin
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
             $0.value = try! deleMsg.serializedData()
         }
@@ -103,7 +103,7 @@ class Signer {
             $0.validatorAddress = toValAddress
             $0.amount = toCoin
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
             $0.value = try! deleMsg.serializedData()
         }
@@ -128,7 +128,7 @@ class Signer {
             $0.validatorAddress = toValAddress
             $0.amount = toCoin
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgUndelegate"
             $0.value = try! undeleMsg.serializedData()
         }
@@ -154,7 +154,7 @@ class Signer {
             $0.validatorAddress = toValAddress
             $0.amount = toCoin
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgUndelegate"
             $0.value = try! undeleMsg.serializedData()
         }
@@ -181,7 +181,7 @@ class Signer {
             $0.validatorDstAddress = toValAddress
             $0.amount = toCoin
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgBeginRedelegate"
             $0.value = try! redeleMsg.serializedData()
         }
@@ -208,7 +208,7 @@ class Signer {
             $0.validatorDstAddress = toValAddress
             $0.amount = toCoin
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgBeginRedelegate"
             $0.value = try! redeleMsg.serializedData()
         }
@@ -225,13 +225,13 @@ class Signer {
     static func genSignedClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                             _ validators: Array<Cosmos_Staking_V1beta1_Validator>, _ fee: Fee, _ memo: String,
                                             _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        var anyMsgs = Array<Google_Protobuf_Any>()
+        var anyMsgs = Array<Google_Protobuf2_Any>()
         for validator in validators{
             let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
                 $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
                 $0.validatorAddress = validator.operatorAddress
             }
-            let anyMsg = Google_Protobuf_Any.with {
+            let anyMsg = Google_Protobuf2_Any.with {
                 $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
                 $0.value = try! claimMsg.serializedData()
             }
@@ -250,13 +250,13 @@ class Signer {
     static func genSimulateClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                               _ validators: Array<Cosmos_Staking_V1beta1_Validator>, _ fee: Fee, _ memo: String,
                                               _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        var anyMsgs = Array<Google_Protobuf_Any>()
+        var anyMsgs = Array<Google_Protobuf2_Any>()
         for validator in validators{
             let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
                 $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
                 $0.validatorAddress = validator.operatorAddress
             }
-            let anyMsg = Google_Protobuf_Any.with {
+            let anyMsg = Google_Protobuf2_Any.with {
                 $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
                 $0.value = try! claimMsg.serializedData()
             }
@@ -275,12 +275,12 @@ class Signer {
     static func genSignedReInvestTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                         _ valAddress: String, _ amount: Coin, _ fee: Fee, _ memo: String,
                                         _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        var anyMsgs = Array<Google_Protobuf_Any>()
+        var anyMsgs = Array<Google_Protobuf2_Any>()
         let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
             $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
             $0.validatorAddress = valAddress
         }
-        let claimAnyMsg = Google_Protobuf_Any.with {
+        let claimAnyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
             $0.value = try! claimMsg.serializedData()
         }
@@ -294,7 +294,7 @@ class Signer {
             $0.validatorAddress = valAddress
             $0.amount = deleCoin
         }
-        let deleAnyMsg = Google_Protobuf_Any.with {
+        let deleAnyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
             $0.value = try! deleMsg.serializedData()
         }
@@ -312,12 +312,12 @@ class Signer {
     static func genSimulateReInvestTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                           _ valAddress: String, _ amount: Coin, _ fee: Fee, _ memo: String,
                                           _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        var anyMsgs = Array<Google_Protobuf_Any>()
+        var anyMsgs = Array<Google_Protobuf2_Any>()
         let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
             $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
             $0.validatorAddress = valAddress
         }
-        let claimAnyMsg = Google_Protobuf_Any.with {
+        let claimAnyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
             $0.value = try! claimMsg.serializedData()
         }
@@ -331,7 +331,7 @@ class Signer {
             $0.validatorAddress = valAddress
             $0.amount = deleCoin
         }
-        let deleAnyMsg = Google_Protobuf_Any.with {
+        let deleAnyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
             $0.value = try! deleMsg.serializedData()
         }
@@ -362,7 +362,7 @@ class Signer {
                 $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
             }
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
             $0.value = try! voteMsg.serializedData()
         }
@@ -392,7 +392,7 @@ class Signer {
                 $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
             }
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
             $0.value = try! voteMsg.serializedData()
         }
@@ -413,7 +413,7 @@ class Signer {
             $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
             $0.withdrawAddress = newRewardAddress
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
             $0.value = try! rewardAddressMsg.serializedData()
         }
@@ -435,7 +435,7 @@ class Signer {
             $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
             $0.withdrawAddress = newRewardAddress
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress"
             $0.value = try! rewardAddressMsg.serializedData()
         }
@@ -461,7 +461,7 @@ class Signer {
             $0.broker = ""
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgRegisterDomain"
             $0.value = try! rgisterdomainMsg.serializedData()
         }
@@ -485,7 +485,7 @@ class Signer {
             $0.broker = ""
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgRegisterDomain"
             $0.value = try! registerdomainMsg.serializedData()
         }
@@ -510,7 +510,7 @@ class Signer {
             $0.broker = ""
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgRegisterAccount"
             $0.value = try! registerAccountMsg.serializedData()
         }
@@ -536,7 +536,7 @@ class Signer {
             $0.broker = ""
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgRegisterAccount"
             $0.value = try! registerAccountMsg.serializedData()
         }
@@ -557,7 +557,7 @@ class Signer {
             $0.owner = owner
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgDeleteDomain"
             $0.value = try! deleteDomainMsg.serializedData()
         }
@@ -579,7 +579,7 @@ class Signer {
             $0.owner = owner
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgDeleteDomain"
             $0.value = try! deleteDomainMsg.serializedData()
         }
@@ -601,7 +601,7 @@ class Signer {
             $0.owner = owner
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgDeleteAccount"
             $0.value = try! deleteAccountMsg.serializedData()
         }
@@ -624,7 +624,7 @@ class Signer {
             $0.owner = owner
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgDeleteAccount"
             $0.value = try! deleteAccountMsg.serializedData()
         }
@@ -645,7 +645,7 @@ class Signer {
             $0.signer = signer
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgRenewDomain"
             $0.value = try! renewDomainMsg.serializedData()
         }
@@ -667,7 +667,7 @@ class Signer {
             $0.signer = signer
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgRenewDomain"
             $0.value = try! renewDomainMsg.serializedData()
         }
@@ -689,7 +689,7 @@ class Signer {
             $0.signer = signer
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgRenewAccount"
             $0.value = try! renewAccountMsg.serializedData()
         }
@@ -712,7 +712,7 @@ class Signer {
             $0.signer = signer
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgRenewAccount"
             $0.value = try! renewAccountMsg.serializedData()
         }
@@ -736,7 +736,7 @@ class Signer {
             $0.newResources = resources
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgReplaceAccountResources"
             $0.value = try! replaceResourceMsg.serializedData()
         }
@@ -761,7 +761,7 @@ class Signer {
             $0.newResources = resources
             $0.payer = ""
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/starnamed.x.starname.v1beta1.MsgReplaceAccountResources"
             $0.value = try! replaceResourceMsg.serializedData()
         }
@@ -790,7 +790,7 @@ class Signer {
             $0.tokenOutMinAmount = outputAmount
             
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn"
             $0.value = try! swapMsg.serializedData()
         }
@@ -818,7 +818,7 @@ class Signer {
             $0.tokenOutMinAmount = outputAmount
             
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/osmosis.gamm.v1beta1.MsgSwapExactAmountIn"
             $0.value = try! swapMsg.serializedData()
         }
@@ -846,7 +846,7 @@ class Signer {
             $0.tokenInMaxs = tokenMax
             $0.shareOutAmount = shareAmount
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/osmosis.gamm.v1beta1.MsgJoinPool"
             $0.value = try! joinPoolMsg.serializedData()
         }
@@ -875,7 +875,7 @@ class Signer {
             $0.tokenInMaxs = tokenMax
             $0.shareOutAmount = shareAmount
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/osmosis.gamm.v1beta1.MsgJoinPool"
             $0.value = try! joinPoolMsg.serializedData()
         }
@@ -903,7 +903,7 @@ class Signer {
             $0.tokenOutMins = tokenMin
             $0.shareInAmount = shareAmount
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/osmosis.gamm.v1beta1.MsgExitPool"
             $0.value = try! exitPoolMsg.serializedData()
         }
@@ -932,7 +932,7 @@ class Signer {
             $0.tokenOutMins = tokenMin
             $0.shareInAmount = shareAmount
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/osmosis.gamm.v1beta1.MsgExitPool"
             $0.value = try! exitPoolMsg.serializedData()
         }
@@ -957,7 +957,7 @@ class Signer {
             $0.duration = SwiftProtobuf.Google_Protobuf_Duration.init(seconds: duration, nanos: 0)
             $0.coins = lockupTokens
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/osmosis.lockup.MsgLockTokens"
             $0.value = try! lockTokensMsg.serializedData()
         }
@@ -983,7 +983,7 @@ class Signer {
             $0.duration = SwiftProtobuf.Google_Protobuf_Duration.init(seconds: duration, nanos: 0)
             $0.coins = lockupTokens
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/osmosis.lockup.MsgLockTokens"
             $0.value = try! lockTokensMsg.serializedData()
         }
@@ -1000,13 +1000,13 @@ class Signer {
     static func genSignedBeginUnlockingsMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                   _ ids: Array<UInt64>,
                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        var anyMsgs = Array<Google_Protobuf_Any>()
+        var anyMsgs = Array<Google_Protobuf2_Any>()
         for id in ids {
             let unlockMsg = Osmosis_Lockup_MsgBeginUnlocking.with {
                 $0.owner = WUtils.onParseAuthGrpc(auth).0!
                 $0.id = id
             }
-            let anyMsg = Google_Protobuf_Any.with {
+            let anyMsg = Google_Protobuf2_Any.with {
                 $0.typeURL = "/osmosis.lockup.MsgBeginUnlocking"
                 $0.value = try! unlockMsg.serializedData()
             }
@@ -1025,13 +1025,13 @@ class Signer {
     static func genSimulateBeginUnlockingsMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                     _ ids: Array<UInt64>,
                                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        var anyMsgs = Array<Google_Protobuf_Any>()
+        var anyMsgs = Array<Google_Protobuf2_Any>()
         for id in ids {
             let unlockMsg = Osmosis_Lockup_MsgBeginUnlocking.with {
                 $0.owner = WUtils.onParseAuthGrpc(auth).0!
                 $0.id = id
             }
-            let anyMsg = Google_Protobuf_Any.with {
+            let anyMsg = Google_Protobuf2_Any.with {
                 $0.typeURL = "/osmosis.lockup.MsgBeginUnlocking"
                 $0.value = try! unlockMsg.serializedData()
             }
@@ -1050,13 +1050,13 @@ class Signer {
     static func genSignedUnlockPeriodLocksMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                     _ ids: Array<UInt64>,
                                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        var anyMsgs = Array<Google_Protobuf_Any>()
+        var anyMsgs = Array<Google_Protobuf2_Any>()
 //        for id in ids {
 //            let unlockMsg = Osmosis_Lockup_MsgUnlockPeriodLock.with {
 //                $0.owner = WUtils.onParseAuthGrpc(auth).0!
 //                $0.id = id
 //            }
-//            let anyMsg = Google_Protobuf_Any.with {
+//            let anyMsg = Google_Protobuf2_Any.with {
 //                $0.typeURL = "/osmosis.lockup.MsgUnlockPeriodLock"
 //                $0.value = try! unlockMsg.serializedData()
 //            }
@@ -1075,13 +1075,13 @@ class Signer {
     static func genSimulateUnlockPeriodLocksMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                       _ ids: Array<UInt64>,
                                                       _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        var anyMsgs = Array<Google_Protobuf_Any>()
+        var anyMsgs = Array<Google_Protobuf2_Any>()
 //        for id in ids {
 //            let unlockMsg = Osmosis_Lockup_MsgUnlockPeriodLock.with {
 //                $0.owner = WUtils.onParseAuthGrpc(auth).0!
 //                $0.id = id
 //            }
-//            let anyMsg = Google_Protobuf_Any.with {
+//            let anyMsg = Google_Protobuf2_Any.with {
 //                $0.typeURL = "/osmosis.lockup.MsgUnlockPeriodLock"
 //                $0.value = try! unlockMsg.serializedData()
 //            }
@@ -1110,7 +1110,7 @@ class Signer {
             $0.demandCoinDenom = demandCoinDenom
             $0.orderPrice = orderPrice
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/tendermint.liquidity.v1beta1.MsgSwapWithinBatch"
             $0.value = try! swapBatchMsg.serializedData()
         }
@@ -1137,7 +1137,7 @@ class Signer {
             $0.demandCoinDenom = demandCoinDenom
             $0.orderPrice = orderPrice
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/tendermint.liquidity.v1beta1.MsgSwapWithinBatch"
             $0.value = try! swapBatchMsg.serializedData()
         }
@@ -1162,7 +1162,7 @@ class Signer {
             }
             $0.depositCoins = convertedCoins
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/tendermint.liquidity.v1beta1.MsgDepositWithinBatch"
             $0.value = try! depositBatchMsg.serializedData()
         }
@@ -1188,7 +1188,7 @@ class Signer {
             }
             $0.depositCoins = convertedCoins
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/tendermint.liquidity.v1beta1.MsgDepositWithinBatch"
             $0.value = try! depositBatchMsg.serializedData()
         }
@@ -1209,7 +1209,7 @@ class Signer {
             $0.poolID = UInt64(poolId)!
             $0.poolCoin = Cosmos_Base_V1beta1_Coin.with { $0.denom = withdrawCoin.denom; $0.amount = withdrawCoin.amount }
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/tendermint.liquidity.v1beta1.MsgWithdrawWithinBatch"
             $0.value = try! withdrawBatchMsg.serializedData()
         }
@@ -1231,7 +1231,7 @@ class Signer {
             $0.poolID = UInt64(poolId)!
             $0.poolCoin = Cosmos_Base_V1beta1_Coin.with { $0.denom = withdrawCoin.denom; $0.amount = withdrawCoin.amount }
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/tendermint.liquidity.v1beta1.MsgWithdrawWithinBatch"
             $0.value = try! withdrawBatchMsg.serializedData()
         }
@@ -1265,7 +1265,7 @@ class Signer {
             $0.timeoutTimestamp = 0
             $0.token = re_token
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/ibc.applications.transfer.v1.MsgTransfer"
             $0.value = try! ibcSendMsg.serializedData()
         }
@@ -1300,7 +1300,7 @@ class Signer {
             $0.timeoutTimestamp = 0
             $0.token = re_token
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/ibc.applications.transfer.v1.MsgTransfer"
             $0.value = try! ibcSendMsg.serializedData()
         }
@@ -1320,7 +1320,7 @@ class Signer {
             $0.userClaimAddress = userClaimAddress
             $0.userClaimType = Sifnode_Dispensation_V1_DistributionType.liquidityMining
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/sifnode.dispensation.v1.MsgCreateUserClaim"
             $0.value = try! claimIncentiveMsg.serializedData()
         }
@@ -1340,7 +1340,7 @@ class Signer {
             $0.userClaimAddress = userClaimAddress
             $0.userClaimType = Sifnode_Dispensation_V1_DistributionType.liquidityMining
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/sifnode.dispensation.v1.MsgCreateUserClaim"
             $0.value = try! claimIncentiveMsg.serializedData()
         }
@@ -1369,7 +1369,7 @@ class Signer {
             $0.receivedAsset = outputAsset
             $0.minReceivingAmount = outputAmount
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/sifnode.clp.v1.MsgSwap"
             $0.value = try! swapMsg.serializedData()
         }
@@ -1399,7 +1399,7 @@ class Signer {
             $0.receivedAsset = outputAsset
             $0.minReceivingAmount = outputAmount
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/sifnode.clp.v1.MsgSwap"
             $0.value = try! swapMsg.serializedData()
         }
@@ -1425,7 +1425,7 @@ class Signer {
             $0.externalAsset = eAsset
             $0.externalAssetAmount = externalAmount
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/sifnode.clp.v1.MsgAddLiquidity"
             $0.value = try! addLpMsg.serializedData()
         }
@@ -1452,7 +1452,7 @@ class Signer {
             $0.externalAsset = eAsset
             $0.externalAssetAmount = externalAmount
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/sifnode.clp.v1.MsgAddLiquidity"
             $0.value = try! addLpMsg.serializedData()
         }
@@ -1477,7 +1477,7 @@ class Signer {
             $0.asymmetry = "0"
             $0.wBasisPoints = w_basis_points
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/sifnode.clp.v1.MsgRemoveLiquidity"
             $0.value = try! removeLpMsg.serializedData()
         }
@@ -1503,7 +1503,7 @@ class Signer {
             $0.asymmetry = "0"
             $0.wBasisPoints = w_basis_points
         }
-        let anyMsg = Google_Protobuf_Any.with {
+        let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/sifnode.clp.v1.MsgRemoveLiquidity"
             $0.value = try! removeLpMsg.serializedData()
         }
@@ -1518,7 +1518,7 @@ class Signer {
     }
     
     
-    static func getGrpcTxBody(_ msgAnys: Array<Google_Protobuf_Any>, _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {
+    static func getGrpcTxBody(_ msgAnys: Array<Google_Protobuf2_Any>, _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
             $0.memo = memo
             $0.messages = msgAnys
@@ -1535,7 +1535,7 @@ class Signer {
         let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
             $0.key = publicKey
         }
-        let pubKey = Google_Protobuf_Any.with {
+        let pubKey = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.crypto.secp256k1.PubKey"
 //            $0.typeURL = "/injective.crypto.v1beta1.ethsecp256k1.PubKey"
             $0.value = try! pub.serializedData()
