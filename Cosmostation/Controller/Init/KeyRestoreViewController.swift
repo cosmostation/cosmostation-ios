@@ -9,9 +9,10 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class KeyRestoreViewController: BaseViewController, QrScannerDelegate {
+class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordViewDelegate {
     
     @IBOutlet weak var keyInputText: AddressInputTextField!
+    var userInput: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,14 +57,13 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        //TODO check validate
-        let userInput = keyInputText.text?.trimmingCharacters(in: .whitespaces) ?? ""
-        if (!KeyFac.isValidStringPrivateKey(userInput)) {
+        userInput = keyInputText.text?.trimmingCharacters(in: .whitespaces) ?? ""
+        if (!KeyFac.isValidStringPrivateKey(userInput!)) {
             self.onShowToast(NSLocalizedString("error_invalid_private_Key", comment: ""))
             return
         }
         
-        let publicKey = KeyFac.getPublicFromString(userInput)
+        let publicKey = KeyFac.getPublicFromString(userInput!)
         let address = WKey.getPubToDpAddress(publicKey.hexEncodedString(), chainType!)
         print("address ", address)
         
@@ -71,13 +71,9 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate {
             if (existAccount.account_has_private == true) {
                 self.onShowToast(NSLocalizedString("error_duple_address", comment: ""))
                 return
-            } else {
-                self.onOverridePkeyAccount(userInput, existAccount)
             }
-            
-        } else {
-            self.onGenPkeyAccount(userInput, address)
         }
+        self.onCheckPassword()
     }
     
     func scannedAddress(result: String) {
@@ -167,4 +163,30 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate {
         }
     }
 
+    
+    func onCheckPassword() {
+        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        self.navigationItem.title = ""
+        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+        passwordVC.resultDelegate = self
+        if(!BaseData.instance.hasPassword()) {
+            passwordVC.mTarget = PASSWORD_ACTION_INIT
+        } else  {
+            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+        }
+        self.navigationController?.pushViewController(passwordVC, animated: false)
+    }
+    
+    func passwordResponse(result: Int) {
+        if (result == PASSWORD_RESUKT_OK) {
+            let publicKey = KeyFac.getPublicFromString(userInput!)
+            let address = WKey.getPubToDpAddress(publicKey.hexEncodedString(), chainType!)
+            
+            if let existAccount = BaseData.instance.selectExistAccount(address, chainType) {
+                self.onOverridePkeyAccount(userInput!, existAccount)
+            } else {
+                self.onGenPkeyAccount(userInput!, address)
+            }
+        }
+    }
 }
