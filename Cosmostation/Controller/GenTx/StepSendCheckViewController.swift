@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import SwiftKeychainWrapper
 import HDWalletKit
 import GRPC
 import NIO

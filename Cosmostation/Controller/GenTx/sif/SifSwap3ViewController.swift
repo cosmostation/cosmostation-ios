@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import HDWalletKit
-import SwiftKeychainWrapper
 import GRPC
 import NIO
 

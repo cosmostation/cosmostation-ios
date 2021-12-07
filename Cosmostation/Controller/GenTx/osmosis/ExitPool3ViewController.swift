@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftKeychainWrapper
 import GRPC
 import NIO
 class ExitPool3ViewController: BaseViewController, PasswordViewDelegate {
