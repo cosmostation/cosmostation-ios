@@ -148,8 +148,8 @@ extension WUtils {
         else if (denom?.caseInsensitiveCompare(OSMOSIS_ION_DENOM) == .orderedSame) { return 6; }
         else if (denom!.starts(with: "gamm/pool/")) { return 18; }
         else if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")) {
-                return ibcToken.decimal!
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
+                return deciaml
             }
         }
         return 6;
