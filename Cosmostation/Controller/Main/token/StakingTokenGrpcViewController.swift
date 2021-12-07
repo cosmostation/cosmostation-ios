@@ -96,7 +96,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
             return 1
             
         } else if (section == 1) {
-            if (BaseData.instance.getVestingAmount_gRPC(stakingDenom).compare(NSDecimalNumber.zero).rawValue > 0) { return 1 }
+            if (BaseData.instance.onParseRemainVestingsByDenom_gRPC(stakingDenom).count > 0) { return 1 }
             else { return 0 }
             
         } else if (section == 2) {
