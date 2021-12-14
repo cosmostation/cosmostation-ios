@@ -4401,6 +4401,9 @@ public class WUtils {
         } else if (chain == ChainType.COMDEX_MAIN) {
             return BLOCK_TIME_COMDEX
             
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            return BLOCK_TIME_GRAV
+            
         }
         return NSDecimalNumber.zero
     }
