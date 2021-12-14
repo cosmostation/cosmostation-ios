@@ -143,7 +143,9 @@ class GravityDAppViewController: BaseViewController {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Cosmos_Bank_V1beta1_QueryTotalSupplyRequest.init()
+                
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
+                let req = Cosmos_Bank_V1beta1_QueryTotalSupplyRequest.with { $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).totalSupply(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.supply.forEach { coin in
                         if (coin.denom.starts(with: "pool")) {
