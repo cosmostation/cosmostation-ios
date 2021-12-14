@@ -2860,7 +2860,7 @@ public class WUtils {
         } else if (chain == ChainType.BITCANA_MAIN) {
             return "BCNA"
         } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            return "GRAV"
+            return "GRAVITON"
         } else if (chain == ChainType.STARGAZE_MAIN) {
             return "STARS"
         } else if (chain == ChainType.COMDEX_MAIN) {
@@ -3095,7 +3095,7 @@ public class WUtils {
             label.text = "BCNA"
             label.textColor = COLOR_BITCANNA
         } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            label.text = "GRAV"
+            label.text = "GRAVITON"
             label.textColor = COLOR_GRAVITY_BRIDGE
         } else if (chain == ChainType.STARGAZE_MAIN) {
             label.text = "STARS"
@@ -3437,6 +3437,7 @@ public class WUtils {
             chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
             chain == ChainType.INJECTIVE_MAIN || chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN ||
+            chain == ChainType.GRAVITY_BRIDGE_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.RIZON_TEST ||
             chain == ChainType.ALTHEA_TEST || chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
@@ -3835,6 +3836,11 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_GRAV)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         
         else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
@@ -4036,6 +4042,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_DESMOS)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_DESMOS)
+            }
+            
+        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_GRAV)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_GRAV)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_GRAV)
             }
             
         }
@@ -5580,6 +5595,7 @@ public class WUtils {
                     remainVesting = NSDecimalNumber.zero
                 } else {
                     let progress = ((Float)(cTime - vestingStart)) / ((Float)(vestingEnd - vestingStart))
+//                    print("progress ", progress)
                     remainVesting = originalVesting.multiplying(by: NSDecimalNumber.init(value: 1 - progress), withBehavior: handler0Up)
                 }
 //                print("remainVesting ", denom, "  ", remainVesting)
@@ -5593,7 +5609,7 @@ public class WUtils {
                 if (remainVesting.compare(delegatedVesting).rawValue > 0) {
                     dpBalance = dpBalance.subtracting(remainVesting).adding(delegatedVesting);
                 }
-//                print("final dpBalance ", denom, "  ", dpBalance)
+                print("final dpBalance ", denom, "  ", dpBalance)
                 
                 if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
                     let vestingCoin = Coin.init(denom, dpVesting.stringValue)

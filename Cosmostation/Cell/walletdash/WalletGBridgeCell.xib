@@ -27,8 +27,8 @@
                                     <constraint firstAttribute="height" constant="20" id="fNf-a4-3gk"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRAV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ct-WM-Oof">
-                                <rect key="frame" x="38" y="16" width="32.5" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRAVITON" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ct-WM-Oof">
+                                <rect key="frame" x="38" y="16" width="61" height="15"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="0.0" green="0.53333333333333333" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>

@@ -958,8 +958,7 @@ class BaseNetWork {
 //            return ClientConnection.insecure(group: group).connect(host: "lcd-althea-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20300)
-//            return ClientConnection.insecure(group: group).connect(host: "lcd-gravitybridge-app.cosmostation.io", port: 9090)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-gravity-bridge-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.STARGAZE_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-stargaze-app.cosmostation.io", port: 9090)

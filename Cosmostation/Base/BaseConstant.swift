@@ -224,6 +224,7 @@ let RELAYER_IMG_MEDI                    = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_UMEE                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/umee/relay-umee-unknown.png"
 let RELAYER_IMG_BITSONG                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/bitsong/relay-bitsong-unknown.png"
 let RELAYER_IMG_DESMOS                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/desmos/relay-desmos-unknown.png"
+let RELAYER_IMG_GRAVITYBRIDGE           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/gravity-bridge/relay-gravitybridge-unknown.png"
 
 
 
@@ -582,6 +583,10 @@ let GAS_FEE_RATE_AVERAGE_BITSONG            = "0.025";
 let GAS_FEE_RATE_TINY_DESMOS                = "0.001";
 let GAS_FEE_RATE_LOW_DESMOS                 = "0.010";
 let GAS_FEE_RATE_AVERAGE_DESMOS             = "0.025";
+
+let GAS_FEE_RATE_TINY_GRAV                  = "0.00";
+let GAS_FEE_RATE_LOW_GRAV                   = "0.00";
+let GAS_FEE_RATE_AVERAGE_GRAV               = "0.00";
 
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
@@ -995,6 +1000,8 @@ public enum ChainType: String {
         result.append(DESMOS_MAIN)
         result.append(EMONEY_MAIN)
         result.append(FETCH_MAIN)
+        result.append(GRAVITY_BRIDGE_MAIN)
+//        result.append(INJECTIVE_MAIN)
         result.append(JUNO_MAIN)
         result.append(KAVA_MAIN)
         result.append(KI_MAIN)
@@ -1012,8 +1019,6 @@ public enum ChainType: String {
         
         
 //        result.append(ALTHEA_MAIN)
-//        result.append(GRAVITY_BRIDGE_MAIN)
-//        result.append(INJECTIVE_MAIN)
         
 
 //        result.append(COSMOS_TEST)
@@ -1175,7 +1180,7 @@ let EMONEY_MAIN_DENOM = "ungm"
 let JUNO_MAIN_DENOM = "ujuno"
 let REGNE_MAIN_DENOM = "uregen"
 let BITCANA_MAIN_DENOM = "ubcna"
-let GRAVITY_BRIDGE_MAIN_DENOM = "ugrav"
+let GRAVITY_BRIDGE_MAIN_DENOM = "ugraviton"
 let STARGAZE_MAIN_DENOM = "ustars"
 let COMDEX_MAIN_DENOM = "ucmdx"
 let INJECTIVE_MAIN_DENOM = "inj"

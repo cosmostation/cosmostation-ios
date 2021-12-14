@@ -596,7 +596,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             
         } else if (coin.denom == GRAVITY_BRIDGE_MAIN_DENOM) {
             cell?.tokenImg.image = UIImage(named: "tokenGravitybridge")
-            cell?.tokenSymbol.text = "GRAV"
+            cell?.tokenSymbol.text = "GRAVITON"
             cell?.tokenSymbol.textColor = COLOR_GRAVITY_BRIDGE
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "G-Bridge Staking Token"
