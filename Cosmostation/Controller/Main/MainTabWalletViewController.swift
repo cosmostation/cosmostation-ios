@@ -1556,8 +1556,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return
         }
         if (BaseData.instance.mParam?.params?.rison_swap_enabled != true) {
-            return
             self.onShowToast(NSLocalizedString("error_rizon_swap_finished", comment: ""))
+            return
         }
         
         let rizonSwapAlert = UIAlertController(title: "Event Horizon", message: NSLocalizedString("str_rizon_swap_alert_msg", comment: ""), preferredStyle: .alert)
