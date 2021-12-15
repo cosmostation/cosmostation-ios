@@ -99,12 +99,13 @@ class GdexSwap3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
+            let offerFee = self.pageHolderVC.mSwapInAmount!.multiplying(byPowerOf10: -4).multiplying(by: NSDecimalNumber.init(string: "15"), withBehavior: WUtils.handler0)
             let reqTx = Signer.genSignedSwapBatchMsgTxgRPC(auth!,
                                                            self.pageHolderVC.mAccount!.account_address,
                                                            String(self.pageHolderVC.mGDexPool!.id),
                                                            "1",
                                                            Coin.init(self.pageHolderVC.mSwapInDenom!, self.pageHolderVC.mSwapInAmount!.stringValue),
-                                                           Coin.init(self.pageHolderVC.mSwapInDenom!, "0"),
+                                                           Coin.init(self.pageHolderVC.mSwapInDenom!, offerFee.stringValue),
                                                            self.pageHolderVC.mSwapOutDenom!,
                                                            self.pageHolderVC.mGDexSwapOrderPrice!.stringValue,
                                                            self.pageHolderVC.mFee!,
