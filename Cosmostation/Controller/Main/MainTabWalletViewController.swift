@@ -1555,6 +1555,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
+        if (BaseData.instance.mParam?.params?.rison_swap_enabled != true) {
+            return
+            self.onShowToast(NSLocalizedString("error_rizon_swap_finished", comment: ""))
+        }
+        
         let rizonSwapAlert = UIAlertController(title: "Event Horizon", message: NSLocalizedString("str_rizon_swap_alert_msg", comment: ""), preferredStyle: .alert)
         rizonSwapAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default))
         rizonSwapAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in

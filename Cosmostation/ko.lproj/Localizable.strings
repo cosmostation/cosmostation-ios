@@ -708,6 +708,7 @@ support@cosmostation.io";
 "error_reserve_1_account" = "표시되는 최소 1개이상의 계정을 남겨두세요.";
 "error_hided_chain" = "비표시 체인 입니다.";
 "error_invalid_private_Key" = "유효하지않는 개인키 입니다.";
+"error_rizon_swap_finished" = "스왑 유효기간이 지났습니다.";
 
 
 

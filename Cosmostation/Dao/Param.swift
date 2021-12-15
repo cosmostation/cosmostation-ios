@@ -167,6 +167,8 @@ public struct Params {
     
     var sifchain_token_registry: SifChainTokens?
     
+    var rison_swap_enabled: Bool?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawIbcParams = dictionary?["ibc_params"] as? NSDictionary {
             self.ibc_params = IbcParams.init(rawIbcParams)
@@ -258,6 +260,10 @@ public struct Params {
         
         if let rawSifchainTokenRegistry = dictionary?["sifchain_token_registry"] as? NSDictionary {
             self.sifchain_token_registry = SifChainTokens.init(rawSifchainTokenRegistry)
+        }
+        
+        if let rawSwap_enabled = dictionary?["swap_enabled"] as? Bool {
+            self.rison_swap_enabled = rawSwap_enabled
         }
     }
 }

@@ -1337,7 +1337,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 if let params = res as? NSDictionary {
                     BaseData.instance.mParam = Param.init(params)
                 }
-//                print("mParam ", BaseData.instance.mParam?.getGdexList()?.count)
+                print("mParam ", BaseData.instance.mParam?.params?.rison_swap_enabled)
             
             case .failure(let error):
                 print("onFetchParams ", error)
