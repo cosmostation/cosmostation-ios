@@ -1271,6 +1271,8 @@
 		2888B800246BCA3200B2EB4A /* KavaSwapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888B7FF246BCA3200B2EB4A /* KavaSwapInfo.swift */; };
 		2888B802246CE35D00B2EB4A /* StepHtlcRefund0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888B801246CE35D00B2EB4A /* StepHtlcRefund0ViewController.swift */; };
 		2888B804246CE37200B2EB4A /* StepHtlcRefund3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888B803246CE37200B2EB4A /* StepHtlcRefund3ViewController.swift */; };
+		2889C8BB276DC2B90041D68C /* WalletLumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2889C8B9276DC2B90041D68C /* WalletLumCell.swift */; };
+		2889C8BC276DC2B90041D68C /* WalletLumCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2889C8BA276DC2B90041D68C /* WalletLumCell.xib */; };
 		2889FD682603377700CA9896 /* TxHardDepositCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2889FD662603377700CA9896 /* TxHardDepositCell.swift */; };
 		2889FD692603377700CA9896 /* TxHardDepositCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2889FD672603377700CA9896 /* TxHardDepositCell.xib */; };
 		2889FD6D2603378900CA9896 /* TxHardWithdrawCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2889FD6B2603378900CA9896 /* TxHardWithdrawCell.swift */; };
@@ -2983,6 +2985,8 @@
 		2888B7FF246BCA3200B2EB4A /* KavaSwapInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaSwapInfo.swift; sourceTree = "<group>"; };
 		2888B801246CE35D00B2EB4A /* StepHtlcRefund0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepHtlcRefund0ViewController.swift; sourceTree = "<group>"; };
 		2888B803246CE37200B2EB4A /* StepHtlcRefund3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepHtlcRefund3ViewController.swift; sourceTree = "<group>"; };
+		2889C8B9276DC2B90041D68C /* WalletLumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletLumCell.swift; sourceTree = "<group>"; };
+		2889C8BA276DC2B90041D68C /* WalletLumCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletLumCell.xib; sourceTree = "<group>"; };
 		2889FD662603377700CA9896 /* TxHardDepositCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxHardDepositCell.swift; sourceTree = "<group>"; };
 		2889FD672603377700CA9896 /* TxHardDepositCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxHardDepositCell.xib; sourceTree = "<group>"; };
 		2889FD6B2603378900CA9896 /* TxHardWithdrawCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxHardWithdrawCell.swift; sourceTree = "<group>"; };
@@ -4532,6 +4536,8 @@
 				04615CC3275074A600A693B0 /* WalletBitsongCell.xib */,
 				04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */,
 				04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */,
+				2889C8B9276DC2B90041D68C /* WalletLumCell.swift */,
+				2889C8BA276DC2B90041D68C /* WalletLumCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -5705,6 +5711,7 @@
 				2868559C24989ACD0099D18F /* DelegateWarnPopup.xib in Resources */,
 				283EB77E26C8289900B9D28D /* EarnUnbondingCell.xib in Resources */,
 				283E9464254902BA007A9291 /* TxRegisterDomainCell.xib in Resources */,
+				2889C8BC276DC2B90041D68C /* WalletLumCell.xib in Resources */,
 				28584B5726E87D0F00EE5719 /* GdexWithdraw3ViewController.xib in Resources */,
 				28BBAAC7264945890013A555 /* WalletOkAddressCell.xib in Resources */,
 				283A80C824513FF7008FF813 /* CdpDetailTopCell.xib in Resources */,
@@ -7068,6 +7075,7 @@
 				040FA884275F55C200229F6F /* osmosis_epochs_query.grpc.swift in Sources */,
 				040FA975275F55C300229F6F /* bitsong_nft_v1beta1_nft.pb.swift in Sources */,
 				040FAA99275F55C400229F6F /* injective_auction_v1beta1_tx.pb.swift in Sources */,
+				2889C8BB276DC2B90041D68C /* WalletLumCell.swift in Sources */,
 				040FA81F275F55C200229F6F /* comdex_asset_v1beta1_asset.pb.swift in Sources */,
 				E1271B08224B90230083AF17 /* AddressInputTextField.swift in Sources */,
 				E1E15FC22253748B00A10C7B /* DashedButton.swift in Sources */,

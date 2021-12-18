@@ -187,6 +187,8 @@
 "send_guide_msg_bitsong" = "CA decentralized blockchain hub that provides a trustless marketplace for the music industry.";
 "send_guide_title_desmos" = "DESMOS";
 "send_guide_msg_desmos" = "A blockchain for decentralized social networks powered by Forbole.";
+"send_guide_title_lum" = "LUM NETWORK";
+"send_guide_msg_lum" = "A Cosmos SDK-based blockchain designed for on-chain user reviews and rewards.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
