@@ -682,6 +682,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allDsm.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(DESMOS_MAIN_DENOM, allDsm, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == LUM_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenLum")
+            cell?.tokenSymbol.text = "LUM"
+            cell?.tokenSymbol.textColor = COLOR_LUM
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Lum Network Staking Token"
+            
+            let allLum = WUtils.getAllMainAsset(LUM_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allLum.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(LUM_MAIN_DENOM, allLum, 6, cell!.tokenValue.font)
+            
         }
         
         

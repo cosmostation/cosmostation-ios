@@ -299,6 +299,17 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
+        } else if (chainType == ChainType.LUM_MAIN) {
+            chainImg.image = UIImage(named: "chainLum")
+            if (account!.account_new_bip44) {
+                keyPath.text = LUM_BASE_PATH.appending(account!.account_path)
+            } else {
+                keyPath.text = BASE_PATH.appending(account!.account_path)
+            }
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
         }
         
         
