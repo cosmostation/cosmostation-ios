@@ -257,6 +257,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 } else if (chainType == ChainType.DESMOS_MAIN) {
                     guard let url = URL(string: EXPLORER_DESMOS) else { return }
                     self.onShowSafariWeb(url)
+                    
+                } else if (chainType == ChainType.LUM_MAIN) {
+                    guard let url = URL(string: EXPLORER_LUM) else { return }
+                    self.onShowSafariWeb(url)
                 }
                 
                 else if (chainType == ChainType.COSMOS_TEST) {
