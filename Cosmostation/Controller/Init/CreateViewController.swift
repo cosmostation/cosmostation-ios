@@ -224,7 +224,7 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
                 newAccount.account_from_mnemonic = true
                 newAccount.account_m_size = 24
                 newAccount.account_import_time = Date().millisecondsSince1970
-                if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST || chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+                if (chain == ChainType.KAVA_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.LUM_MAIN || chain == ChainType.KAVA_TEST || chain == ChainType.OKEX_TEST) {
                     newAccount.account_new_bip44 = true
                 }
                 newAccount.account_sort_order = 9999

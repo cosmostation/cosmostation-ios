@@ -324,6 +324,8 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
                 self.onSelectKeyTypeForOKex()
             } else if (self.chainType == ChainType.FETCH_MAIN) {
                 self.onSelectKeyTypeForFetch()
+            }else if (self.chainType == ChainType.LUM_MAIN) {
+                self.onSelectBip44Lum()
             } else {
                 self.onCheckPassword()
             }
@@ -425,6 +427,32 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
         }))
         selectAlert.addAction(UIAlertAction(title: NSLocalizedString("fetch_path_3", comment: ""), style: .default, handler: { _ in
             self.customPath = 3
+            self.onCheckPassword()
+        }))
+        self.present(selectAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            selectAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func onSelectBip44Lum() {
+        let selectAlert = UIAlertController(title: NSLocalizedString("select_new_path_title", comment: ""), message: "", preferredStyle: .alert)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.left
+        let messageText = NSMutableAttributedString(
+            string: NSLocalizedString("select_keytype_lum_msg", comment: ""),
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption1)
+            ]
+        )
+        selectAlert.setValue(messageText, forKey: "attributedMessage")
+        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("lum_path_0", comment: ""), style: .default, handler: { _ in
+            self.usingBip44 = true
+            self.onCheckPassword()
+        }))
+        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("lum_path_1", comment: ""), style: .default, handler: { _ in
+            self.usingBip44 = false
             self.onCheckPassword()
         }))
         self.present(selectAlert, animated: true) {

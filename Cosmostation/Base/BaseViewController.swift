@@ -491,6 +491,11 @@ extension BaseViewController {
         })
         desmosAction.setValue(UIImage(named: "chainDesmos")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let lumAction = UIAlertAction(title: NSLocalizedString("chain_title_lum", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.LUM_MAIN)
+        })
+        lumAction.setValue(UIImage(named: "chainLumnetwork")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -524,6 +529,7 @@ extension BaseViewController {
         showAlert.addAction(junoAction)
         showAlert.addAction(kavaAction)
         showAlert.addAction(kiAction)
+        showAlert.addAction(lumAction)
         showAlert.addAction(mediAction)
         showAlert.addAction(okexAction)
         showAlert.addAction(osmosisAction)

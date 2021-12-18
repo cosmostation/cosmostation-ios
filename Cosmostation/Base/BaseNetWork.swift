@@ -981,6 +981,9 @@ class BaseNetWork {
         } else if (chain == ChainType.DESMOS_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-desmos-app.cosmostation.io", port: 9090)
             
+        } else if (chain == ChainType.LUM_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-lum-app.cosmostation.io", port: 9090)
+            
         }
         
         
