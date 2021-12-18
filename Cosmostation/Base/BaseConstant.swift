@@ -140,6 +140,8 @@ let BITSONG_API                         = "https://api-bitsong.cosmostation.io/"
 
 let DESMOS_API                          = "https://api-desmos.cosmostation.io/";
 
+let LUM_API                             = "https://api-lum.cosmostation.io/";
+
 
 let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-v5/";
 
@@ -187,6 +189,7 @@ let COMDEX_VAL_URL                      = "https://raw.githubusercontent.com/cos
 let INJECTIVE_VAL_URL                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/injective/";
 let BITSONG_VAL_URL                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/bitsong/";
 let DESMOS_VAL_URL                      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/desmos/";
+let LUM_VAL_URL                         = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/lum-network/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -225,6 +228,7 @@ let RELAYER_IMG_UMEE                    = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_BITSONG                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/bitsong/relay-bitsong-unknown.png"
 let RELAYER_IMG_DESMOS                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/desmos/relay-desmos-unknown.png"
 let RELAYER_IMG_GRAVITYBRIDGE           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/gravity-bridge/relay-gravitybridge-unknown.png"
+let RELAYER_IMG_LUM                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/lum-network/relay-lum-unknown.png"
 
 
 
@@ -466,6 +470,7 @@ let ETH_LEDGER_LIVE_PATH_2                  = "'/0/0"
 let ETH_LEDGER_LEGACY_PATH                  = "m/44'/60'/0'/"
 let BITSONG_BASE_PATH                       = "m/44'/639'/0'/0/"
 let DESMOS_BASE_PATH                        = "m/44'/852'/0'/0/"
+let LUM_BASE_PATH                           = "m/44'/880'/0'/0/"
 
 
 
@@ -587,6 +592,10 @@ let GAS_FEE_RATE_AVERAGE_DESMOS             = "0.025";
 let GAS_FEE_RATE_TINY_GRAV                  = "0.00";
 let GAS_FEE_RATE_LOW_GRAV                   = "0.00";
 let GAS_FEE_RATE_AVERAGE_GRAV               = "0.00";
+
+let GAS_FEE_RATE_TINY_LUM                   = "0.001";
+let GAS_FEE_RATE_LOW_LUM                    = "0.001";
+let GAS_FEE_RATE_AVERAGE_LUM                = "0.001";
 
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
@@ -928,6 +937,11 @@ let TRANS_BG_COLOR_DESMOS2                  = UIColor.init(hexString: "ed6c53", 
 let COLOR_DESMOS                            = UIColor.init(hexString: "ed6c53")
 let COLOR_DESMOS_DARK                       = UIColor.init(hexString: "8e4537")
 
+let TRANS_BG_COLOR_LUM                      = UIColor.init(hexString: "3e68f9", alpha: 0.15)
+let TRANS_BG_COLOR_LUM2                     = UIColor.init(hexString: "3e68f9", alpha: 0.4)
+let COLOR_LUM                               = UIColor.init(hexString: "3e68f9")
+let COLOR_LUM_DARK                          = UIColor.init(hexString: "264099")
+
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
@@ -971,6 +985,7 @@ public enum ChainType: String {
     case BITSONG_MAIN
     case DESMOS_MAIN
     case INJECTIVE_MAIN
+    case LUM_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1005,6 +1020,7 @@ public enum ChainType: String {
         result.append(JUNO_MAIN)
         result.append(KAVA_MAIN)
         result.append(KI_MAIN)
+        result.append(LUM_MAIN)
         result.append(MEDI_MAIN)
         result.append(OKEX_MAIN)
         result.append(OSMOSIS_MAIN)
@@ -1139,6 +1155,7 @@ let CHAIN_COMDEX_S = "SUPPORT_CHAIN_COMDEX"
 let CHAIN_INJECTIVE_S = "SUPPORT_CHAIN_INJECTIVE"
 let CHAIN_BITSONG_S = "SUPPORT_CHAIN_BITSONG"
 let CHAIN_DESMOS_S = "SUPPORT_CHAIN_DESMOS"
+let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1186,6 +1203,7 @@ let COMDEX_MAIN_DENOM = "ucmdx"
 let INJECTIVE_MAIN_DENOM = "inj"
 let BITSONG_MAIN_DENOM = "ubtsg"
 let DESMOS_MAIN_DENOM = "udsm"
+let LUM_MAIN_DENOM = "ulum"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1273,6 +1291,7 @@ let EXPLORER_COMDEX         = "https://www.mintscan.io/comdex/";
 let EXPLORER_INJECTIVE      = "https://www.mintscan.io/injective/";
 let EXPLORER_BITSONG        = "https://www.mintscan.io/bitsong/";
 let EXPLORER_DESMOS         = "https://www.mintscan.io/desmos/";
+let EXPLORER_LUM            = "https://www.mintscan.io/lum/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
@@ -1329,6 +1348,7 @@ let BLOCK_TIME_BITSONG      = NSDecimalNumber.init(string: "5.9040")
 let BLOCK_TIME_DESMOS       = NSDecimalNumber.init(string: "6.1605")
 let BLOCK_TIME_COMDEX       = NSDecimalNumber.init(string: "6.1746")
 let BLOCK_TIME_GRAV         = NSDecimalNumber.init(string: "6.4500")
+let BLOCK_TIME_LUM          = NSDecimalNumber.init(string: "5.7210")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;

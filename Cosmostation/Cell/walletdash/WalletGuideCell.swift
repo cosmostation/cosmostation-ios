@@ -202,6 +202,11 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_desmos", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_desmos", comment: "")
             
+        } else if (chainType == ChainType.LUM_MAIN) {
+            guideImg.image = UIImage(named: "infoiconLumnetwork")
+            guideTitle.text = NSLocalizedString("send_guide_title_lum", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_lum", comment: "")
+            
         }
         
     }

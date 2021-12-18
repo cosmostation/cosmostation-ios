@@ -767,6 +767,8 @@ class BaseNetWork {
             result = DESMOS_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.SENTINEL_MAIN) {
             result = SENTINEL_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.LUM_MAIN) {
+            result = LUM_API + "v1/account/new_txs/" + address
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -852,6 +854,8 @@ class BaseNetWork {
             result = DESMOS_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.SENTINEL_MAIN) {
             result = SENTINEL_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.LUM_MAIN) {
+            result = LUM_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -980,6 +984,9 @@ class BaseNetWork {
             
         } else if (chain == ChainType.DESMOS_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-desmos-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.LUM_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-lum-app.cosmostation.io", port: 9090)
             
         }
         

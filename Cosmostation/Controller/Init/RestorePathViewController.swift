@@ -92,6 +92,10 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
         } else if (userChain == ChainType.DESMOS_MAIN) {
             cell?.pathLabel.text = DESMOS_BASE_PATH.appending(String(indexPath.row))
             
+        } else if (userChain == ChainType.LUM_MAIN) {
+            if (self.usingBip44) { cell?.pathLabel.text = LUM_BASE_PATH.appending(String(indexPath.row)) }
+            else { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
+            
         } else {
             cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row))
         }

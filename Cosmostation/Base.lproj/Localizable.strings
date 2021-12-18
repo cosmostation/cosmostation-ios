@@ -187,6 +187,8 @@
 "send_guide_msg_bitsong" = "CA decentralized blockchain hub that provides a trustless marketplace for the music industry.";
 "send_guide_title_desmos" = "DESMOS";
 "send_guide_msg_desmos" = "A blockchain for decentralized social networks powered by Forbole.";
+"send_guide_title_lum" = "LUM NETWORK";
+"send_guide_msg_lum" = "A Cosmos SDK-based blockchain designed for on-chain user reviews and rewards.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -257,6 +259,9 @@
 "fetch_path_1" = "Non Ledger (44'/60'/0'/0/X)";
 "fetch_path_2" = "Ledger Live (44'/60'/X'/0/0)";
 "fetch_path_3" = "Ledger Legacy (44'/60'/0'/X)";
+"select_keytype_lum_msg" = "Select [Air-Drop Path] to import the address that received the Lum airdrop. If you wish to import a general Lum address, select [Default Path].\nit will not affect your original Lum wallet. Simply press [Import Mnemonics] to re-select your path.";
+"lum_path_0" = "Default PATH (44'/880'/0'/0)";
+"lum_path_1" = "Air-Drop PATH (44'/118'/0'/0)";
 
 "current_price_format" = "Current %@ Price";
 "liquidation_price_format" = "Liquidation %@ Price";
@@ -872,6 +877,7 @@ support@cosmostation.io";
 "chain_title_injective" = "Injective";
 "chain_title_bitsong" = "Bitsong";
 "chain_title_desmos" = "Desmos";
+"chain_title_lum" = "Lum";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_test_bnb" = "Binance Testnet";

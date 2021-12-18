@@ -1,14 +1,14 @@
 //
-//  WalletComdexCell.swift
+//  WalletLumCell.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2021/11/10.
+//  Created by 정용주 on 2021/12/18.
 //  Copyright © 2021 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class WalletComdexCell: UITableViewCell {
+class WalletLumCell: UITableViewCell {
     @IBOutlet weak var cardRoot: CardView!
     @IBOutlet weak var totalAmount: UILabel!
     @IBOutlet weak var totalValue: UILabel!
@@ -44,20 +44,19 @@ class WalletComdexCell: UITableViewCell {
     }
     
     func updateView(_ account: Account?, _ chainType: ChainType?) {
-        let totalToken = WUtils.getAllMainAsset(COMDEX_MAIN_DENOM)
+        let totalToken = WUtils.getAllMainAsset(LUM_MAIN_DENOM)
         totalAmount.attributedText = WUtils.displayAmount2(totalToken.stringValue, totalAmount.font!, 6, 6)
-        totalValue.attributedText = WUtils.dpUserCurrencyValue(COMDEX_MAIN_DENOM, totalToken, 6, totalValue.font)
-        availableAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getAvailable_gRPC(COMDEX_MAIN_DENOM), availableAmount.font!, 6, 6)
+        totalValue.attributedText = WUtils.dpUserCurrencyValue(LUM_MAIN_DENOM, totalToken, 6, totalValue.font)
+        availableAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getAvailable_gRPC(LUM_MAIN_DENOM), availableAmount.font!, 6, 6)
         delegatedAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
         unbondingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
-        rewardAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(COMDEX_MAIN_DENOM), rewardAmount.font, 6, 6)
+        rewardAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(LUM_MAIN_DENOM), rewardAmount.font, 6, 6)
         
-        let vesting = BaseData.instance.getVestingAmount_gRPC(COMDEX_MAIN_DENOM)
+        let vesting = BaseData.instance.getVestingAmount_gRPC(LUM_MAIN_DENOM)
         if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
             vestingLayer.isHidden = false
-            vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(COMDEX_MAIN_DENOM), vestingAmount.font!, 6, 6)
+            vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(LUM_MAIN_DENOM), vestingAmount.font!, 6, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
     }
-    
 }
