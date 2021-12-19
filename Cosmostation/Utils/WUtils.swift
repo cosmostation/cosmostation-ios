@@ -2684,7 +2684,7 @@ public class WUtils {
         return COLOR_DARK_GRAY
     }
     
-    static func getChainDarkColor(_ chain:ChainType) -> UIColor {
+    static func getChainDarkColor(_ chain:ChainType?) -> UIColor {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.COSMOS_TEST ) {
             return COLOR_ATOM_DARK
         } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {

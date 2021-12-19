@@ -601,6 +601,7 @@ support@cosmostation.io";
 "title_ibc_transfer" = "IBC 전송";
 "title_sif_dex" = "시프 Dex";
 "title_edit_chain" = "체인 관리";
+"title_nft" = "NFT";
 
 
 "proposal_type_basic" = "기본";

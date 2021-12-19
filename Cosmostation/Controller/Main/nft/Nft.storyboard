@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--TsD App View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NFTsDAppViewController" id="Y6W-OH-hqX" customClass="NFTsDAppViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="fBl-Wx-ipZ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rOn-iu-WZA">
+                                <rect key="frame" x="129.5" y="52" width="155" height="32"/>
+                                <segments>
+                                    <segment title="My NFTs"/>
+                                    <segment title="Top NTFs"/>
+                                </segments>
+                                <color key="tintColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <connections>
+                                    <action selector="switchView:" destination="Y6W-OH-hqX" eventType="valueChanged" id="tra-GK-9sQ"/>
+                                </connections>
+                            </segmentedControl>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eoq-su-ZkE">
+                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
+                                <connections>
+                                    <segue destination="ZSS-ZJ-aCy" kind="embed" id="ycc-eR-dS9"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptb-lY-1aG">
+                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
+                                <connections>
+                                    <segue destination="TYY-xI-MsT" kind="embed" id="53C-4O-BgT"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ptb-lY-1aG" firstAttribute="trailing" secondItem="Eoq-su-ZkE" secondAttribute="trailing" id="0RM-Rh-ma7"/>
+                            <constraint firstAttribute="top" secondItem="fBl-Wx-ipZ" secondAttribute="top" id="CO0-LE-Cu3"/>
+                            <constraint firstItem="Ptb-lY-1aG" firstAttribute="bottom" secondItem="Eoq-su-ZkE" secondAttribute="bottom" id="EUq-KU-LTD"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fBl-Wx-ipZ" secondAttribute="trailing" id="IQl-8Z-kvq"/>
+                            <constraint firstItem="Ptb-lY-1aG" firstAttribute="leading" secondItem="Eoq-su-ZkE" secondAttribute="leading" id="SxC-in-R1B"/>
+                            <constraint firstItem="rOn-iu-WZA" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="WGV-cB-ADD"/>
+                            <constraint firstItem="fBl-Wx-ipZ" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="YMp-lN-EjE"/>
+                            <constraint firstItem="fBl-Wx-ipZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Zgh-K7-ETi"/>
+                            <constraint firstItem="Ptb-lY-1aG" firstAttribute="top" secondItem="Eoq-su-ZkE" secondAttribute="top" id="b7w-JW-tL3"/>
+                            <constraint firstItem="Eoq-su-ZkE" firstAttribute="top" secondItem="rOn-iu-WZA" secondAttribute="bottom" constant="8" id="bIn-rO-fmh"/>
+                            <constraint firstItem="Eoq-su-ZkE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cNw-iD-Ddi"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Eoq-su-ZkE" secondAttribute="trailing" id="fUV-0r-6Bp"/>
+                            <constraint firstItem="Eoq-su-ZkE" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="maf-DU-FaT"/>
+                            <constraint firstItem="rOn-iu-WZA" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="8" id="u7h-tY-2pR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dAppsSegment" destination="rOn-iu-WZA" id="jII-C4-kAD"/>
+                        <outlet property="myNFTsView" destination="Eoq-su-ZkE" id="guR-UP-6R9"/>
+                        <outlet property="topNFTsView" destination="Ptb-lY-1aG" id="idy-AB-bMZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140.57971014492756" y="138.61607142857142"/>
+        </scene>
+        <!--MyNT Fs View Controller-->
+        <scene sceneID="eHB-bz-Bbg">
+            <objects>
+                <viewController storyboardIdentifier="MyNTFsViewController" id="ZSS-ZJ-aCy" customClass="MyNTFsViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gxi-P4-lJm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vI0-Hy-RJZ">
+                                <rect key="frame" x="16" y="739" width="382" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="G2F-7C-adb"/>
+                                </constraints>
+                                <state key="normal" title="  Create NFT" image="btnIconNft">
+                                    <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onClickCreateNFT:" destination="ZSS-ZJ-aCy" eventType="touchUpInside" id="IxZ-4A-UlG"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mYF-oa-D4R">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="727"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="j4U-Is-UmF" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
+                                <rect key="frame" x="177" y="312.5" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="iNl-og-Bsc"/>
+                                    <constraint firstAttribute="height" constant="60" id="ycT-UF-Hh2"/>
+                                </constraints>
+                            </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bgc-Fn-I0x">
+                                <rect key="frame" x="114.5" y="289.5" width="185" height="106"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="historyNoneImg" translatesAutoresizingMaskIntoConstraints="NO" id="Dkc-2X-nnK">
+                                        <rect key="frame" x="67.5" y="8" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="979-n8-O81"/>
+                                            <constraint firstAttribute="height" constant="50" id="oOb-pz-ofO"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No NFT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rwk-bS-MIY">
+                                        <rect key="frame" x="71" y="66" width="43" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="Btm-Ge-KHR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Dkc-2X-nnK" firstAttribute="centerX" secondItem="Bgc-Fn-I0x" secondAttribute="centerX" id="JzF-Yq-skN"/>
+                                    <constraint firstAttribute="width" constant="185" id="LDS-8h-Pmf"/>
+                                    <constraint firstItem="rwk-bS-MIY" firstAttribute="centerX" secondItem="Bgc-Fn-I0x" secondAttribute="centerX" id="d9h-Be-cDM"/>
+                                    <constraint firstAttribute="height" constant="106" id="vl9-1W-hW3"/>
+                                    <constraint firstItem="Dkc-2X-nnK" firstAttribute="top" secondItem="Bgc-Fn-I0x" secondAttribute="top" constant="8" id="y85-En-hDd"/>
+                                    <constraint firstItem="rwk-bS-MIY" firstAttribute="top" secondItem="Dkc-2X-nnK" secondAttribute="bottom" constant="8" id="zTa-oo-2mb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="vI0-Hy-RJZ" secondAttribute="bottom" constant="16" id="143-ta-wiO"/>
+                            <constraint firstAttribute="trailing" secondItem="mYF-oa-D4R" secondAttribute="trailing" id="GIi-QG-qNh"/>
+                            <constraint firstItem="vI0-Hy-RJZ" firstAttribute="leading" secondItem="Gxi-P4-lJm" secondAttribute="leading" constant="16" id="Mkh-Ty-3Ve"/>
+                            <constraint firstItem="j4U-Is-UmF" firstAttribute="centerX" secondItem="Gxi-P4-lJm" secondAttribute="centerX" id="P3e-mU-3Hv"/>
+                            <constraint firstItem="Bgc-Fn-I0x" firstAttribute="centerY" secondItem="j4U-Is-UmF" secondAttribute="centerY" id="P4z-xp-UPO"/>
+                            <constraint firstItem="j4U-Is-UmF" firstAttribute="centerY" secondItem="Gxi-P4-lJm" secondAttribute="centerY" constant="-60" id="Pnd-8e-Wrk"/>
+                            <constraint firstItem="mYF-oa-D4R" firstAttribute="leading" secondItem="Gxi-P4-lJm" secondAttribute="leading" id="X6u-RK-AIs"/>
+                            <constraint firstItem="mYF-oa-D4R" firstAttribute="top" secondItem="Gxi-P4-lJm" secondAttribute="top" id="atc-1V-juM"/>
+                            <constraint firstItem="vI0-Hy-RJZ" firstAttribute="top" secondItem="mYF-oa-D4R" secondAttribute="bottom" constant="12" id="kdE-j2-e8z"/>
+                            <constraint firstItem="Bgc-Fn-I0x" firstAttribute="centerX" secondItem="j4U-Is-UmF" secondAttribute="centerX" id="qTu-Rl-0C0"/>
+                            <constraint firstAttribute="trailing" secondItem="vI0-Hy-RJZ" secondAttribute="trailing" constant="16" id="t4w-YF-eRa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="emptyView" destination="Bgc-Fn-I0x" id="EMR-CQ-XWu"/>
+                        <outlet property="loadingImg" destination="j4U-Is-UmF" id="1W0-4a-9ca"/>
+                        <outlet property="myNFTTableView" destination="mYF-oa-D4R" id="L1P-qN-TE5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QO3-oV-mdd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-707.24637681159425" y="843.41517857142856"/>
+        </scene>
+        <!--TopNT Fs View Controller-->
+        <scene sceneID="lwe-C6-3G0">
+            <objects>
+                <viewController storyboardIdentifier="TopNTFsViewController" id="TYY-xI-MsT" customClass="TopNTFsViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YEC-14-VeX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V40-Tn-crh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="951" y="837"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="bg_cosmos" width="360" height="740"/>
+        <image name="btnIconNft" width="20" height="20"/>
+        <image name="historyNoneImg" width="36" height="36"/>
+        <image name="loading_1" width="144" height="144"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

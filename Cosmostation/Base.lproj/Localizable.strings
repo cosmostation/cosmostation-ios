@@ -600,6 +600,7 @@ support@cosmostation.io";
 "title_sif_dex" = "SifChain Dex";
 "title_sif_incentive" = "Incentive Claim";
 "title_edit_chain" = "Edit Chains";
+"title_nft" = "NFT";
 
 
 "proposal_type_basic" = "Basic";
