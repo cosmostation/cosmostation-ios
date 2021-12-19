@@ -506,7 +506,7 @@ support@cosmostation.io";
 "str_enginer_is_on_title" = "Engineer Mode Enabled";
 "str_enginer_is_on_msg" = "Engineer mode is currently on.\n\nThere is a very low probability that an account with incompatibility may be created, which may cause inconvenience to users.\n\nBefore use, be sure to consult with the Cosmo Station administrator team before use.";
 "str_rizon_swap_alert_msg" = "Swap Hdac chain assets to Rizon chain.\nDue to the nature of the swap, it is irreversible, and it may take some time until the actual swap is completed due to the asynchronous operation between the two chains.";
-
+"str_icon_updated" = "Icon updated.";
 
 "clear_all" = "Clear All";
 "delete" = "Delete";
