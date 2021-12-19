@@ -408,6 +408,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchPriceInfo()
             NotificationCenter.default.post(name: Notification.Name("onFetchDone"), object: nil, userInfo: nil)
             self.hideWaittingAlert()
+            self.checkEventIcon()
             return
             
         } else if (mChainType == ChainType.BINANCE_MAIN || mChainType == ChainType.BINANCE_TEST) {
@@ -417,6 +418,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchPriceInfo()
             NotificationCenter.default.post(name: Notification.Name("onFetchDone"), object: nil, userInfo: nil)
             self.hideWaittingAlert()
+            self.checkEventIcon()
             return
             
         } else if (mChainType == ChainType.OKEX_MAIN || mChainType == ChainType.OKEX_TEST) {
@@ -484,6 +486,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onShowToast(NSLocalizedString("error_network", comment: ""))
         }
         NotificationCenter.default.post(name: Notification.Name("onFetchDone"), object: nil, userInfo: nil)
+        self.checkEventIcon()
         self.hideWaittingAlert()
     }
     
@@ -1449,4 +1452,33 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func addAccount(_ chain: ChainType) {
     }
     
+    
+    func checkEventIcon() {
+        let nowTime = Date().millisecondsSince1970
+        let xmasStart = Calendar.current.date(from: DateComponents(year: 2021, month: 12, day: 21))!.millisecondsSince1970
+        let newYearStart = Calendar.current.date(from: DateComponents(year: 2021, month: 12, day: 28))!.millisecondsSince1970
+        let newYearEnd = Calendar.current.date(from: DateComponents(year: 2022, month: 1, day: 5))!.millisecondsSince1970
+        
+        if (nowTime <= newYearEnd && nowTime > newYearStart) {
+            changeEventIcon("New2022")
+            return
+        } else if (nowTime > xmasStart && nowTime <= newYearStart) {
+            changeEventIcon("Xmas")
+            return
+        } else {
+            UIApplication.shared.setAlternateIconName(nil)
+            return
+        }
+    }
+    
+    func changeEventIcon(_ iconName: String) {
+        guard UIApplication.shared.supportsAlternateIcons, iconName != UIApplication.shared.alternateIconName else {
+            return
+        }
+        UIApplication.shared.setAlternateIconName(iconName) { (error) in
+            if (error != nil) {
+                self.onShowToast(NSLocalizedString("str_icon_updated", comment: ""))
+            }
+        }
+    }
 }

@@ -943,6 +943,10 @@
 		04D138582691E25500D6AF9F /* TxJoinPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D138562691E25500D6AF9F /* TxJoinPoolCell.xib */; };
 		04D1385B2691E26700D6AF9F /* TxExitPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D138592691E26700D6AF9F /* TxExitPoolCell.swift */; };
 		04D1385C2691E26700D6AF9F /* TxExitPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D1385A2691E26700D6AF9F /* TxExitPoolCell.xib */; };
+		04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
+		04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
+		04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2C276F23D9009B39BA /* xmas@2x.png */; };
+		04E25D31276F23D9009B39BA /* new2022@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2D276F23D9009B39BA /* new2022@2x.png */; };
 		2800CF9624719EC4003C3EF1 /* Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF9524719EC4003C3EF1 /* Tally.swift */; };
 		2800CF982471A004003C3EF1 /* CosmosProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF972471A004003C3EF1 /* CosmosProposer.swift */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -2647,6 +2651,10 @@
 		04D138562691E25500D6AF9F /* TxJoinPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxJoinPoolCell.xib; sourceTree = "<group>"; };
 		04D138592691E26700D6AF9F /* TxExitPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxExitPoolCell.swift; sourceTree = "<group>"; };
 		04D1385A2691E26700D6AF9F /* TxExitPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxExitPoolCell.xib; sourceTree = "<group>"; };
+		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
+		04E25D2B276F23D9009B39BA /* new2022@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@3x.png"; sourceTree = "<group>"; };
+		04E25D2C276F23D9009B39BA /* xmas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@2x.png"; sourceTree = "<group>"; };
+		04E25D2D276F23D9009B39BA /* new2022@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@2x.png"; sourceTree = "<group>"; };
 		2800CF9524719EC4003C3EF1 /* Tally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tally.swift; sourceTree = "<group>"; };
 		2800CF972471A004003C3EF1 /* CosmosProposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposer.swift; sourceTree = "<group>"; };
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
@@ -3514,6 +3522,17 @@
 				047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */,
 			);
 			path = osmosis;
+			sourceTree = "<group>";
+		};
+		04E25D29276F23C5009B39BA /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				04E25D2D276F23D9009B39BA /* new2022@2x.png */,
+				04E25D2B276F23D9009B39BA /* new2022@3x.png */,
+				04E25D2C276F23D9009B39BA /* xmas@2x.png */,
+				04E25D2A276F23D9009B39BA /* xmas@3x.png */,
+			);
+			path = Icons;
 			sourceTree = "<group>";
 		};
 		2808FEDE26BBFC2600DE5E9A /* medi */ = {
@@ -5304,6 +5323,7 @@
 		E1945E26222E7C0600A1436F /* Cosmostation */ = {
 			isa = PBXGroup;
 			children = (
+				04E25D29276F23C5009B39BA /* Icons */,
 				282121BA25FDE71C0016ABFE /* ProtoBuff */,
 				28B6AFE023D9863800063D9C /* GoogleService-Info.plist */,
 				E136D8A223039493001BEBB8 /* Cosmostation.entitlements */,
@@ -5696,6 +5716,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */,
 				28D28ADA26CB6C1E0074964C /* StartUnlock0ViewController.xib in Resources */,
 				28A97CAC26DE45480085FD0E /* Gravity.storyboard in Resources */,
 				283E9473254902F4007A9291 /* TxDeleteAccountCell.xib in Resources */,
@@ -5708,6 +5729,7 @@
 				E103DAA32281266D006C2146 /* ValidatorDetailCell.xib in Resources */,
 				2894105226FDBE8A005BCBE4 /* IBCSend0ViewController.xib in Resources */,
 				2808FEE226BBFC4700DE5E9A /* TxMediAddRecordCell.xib in Resources */,
+				04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */,
 				2868559C24989ACD0099D18F /* DelegateWarnPopup.xib in Resources */,
 				283EB77E26C8289900B9D28D /* EarnUnbondingCell.xib in Resources */,
 				283E9464254902BA007A9291 /* TxRegisterDomainCell.xib in Resources */,
@@ -5886,6 +5908,7 @@
 				28D28ADE26CB6C2B0074964C /* StartUnlock3ViewController.xib in Resources */,
 				288D250526834E980093121A /* TxIbcSendCell.xib in Resources */,
 				2852EAFF268216B4003A5E74 /* WalletSifIncentiveCell.xib in Resources */,
+				04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */,
 				042E0C41273BBE190026CEFB /* WalletComdexCell.xib in Resources */,
 				280E1F12254AB5C70007BA7D /* ReplaceResource3ViewController.xib in Resources */,
 				2816E11626BA886100408F8E /* EventHorizonResultViewController.xib in Resources */,
@@ -5926,6 +5949,7 @@
 				28CFBFDB26C0286A009A300D /* CommonHeader.xib in Resources */,
 				284FBC8626DBE9A100403FE2 /* TxIncentiveSwapCell.xib in Resources */,
 				28B2E4BC26CFB94800ECF960 /* NativeTokenGrpcViewController.xib in Resources */,
+				04E25D31276F23D9009B39BA /* new2022@2x.png in Resources */,
 				E1C3C89923B1E27800A693C0 /* NotificationView.xib in Resources */,
 				282BDFEB24A5BCE000D3A5D4 /* WcTransferPopup.xib in Resources */,
 				28B785B726B7B084009F755F /* SwapStatusCell.xib in Resources */,
