@@ -16,8 +16,9 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var myNFTTableView: UITableView!
-    var mMyTotalCnt: UInt64 = 0;
     var mMyNFTs = Array<NFTCollectionId>()
+    var mPageTotalCnt: UInt64 = 0;
+    var mPageKey: Data?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,12 +49,6 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         return self.mMyNFTs.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"NFTListCell") as? NFTListCell
-        cell?.onBindNFT(self.chainType, mMyNFTs[indexPath.row])
-        return cell!
-    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
@@ -61,10 +56,24 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         view.headerTitleLabel.text = "NTFs";
-        view.headerCntLabel.text = String(mMyTotalCnt)
+        view.headerCntLabel.text = String(mPageTotalCnt)
         return view
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"NFTListCell") as? NFTListCell
+        cell?.onBindNFT(self.chainType, mMyNFTs[indexPath.row])
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let lastRowIndex = tableView.numberOfRows(inSection: 0) - 1
+        if (indexPath.row == lastRowIndex ) {
+            if (mPageTotalCnt > mMyNFTs.count) {
+                self.onFetchNFTColleactions(self.account!.account_address, mPageKey)
+            }
+        }
+    }
     
     @IBAction func onClickCreateNFT(_ sender: UIButton) {
         
@@ -76,7 +85,7 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
             return false
         }
         self.mFetchCnt = 1
-        self.onFetchNFTColleactions(self.account!.account_address)
+        self.onFetchNFTColleactions(self.account!.account_address, mPageKey)
         return true
     }
     
@@ -87,19 +96,32 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         self.updateView()
     }
     
-    func onFetchNFTColleactions(_ owner: String) {
+    func onFetchNFTColleactions(_ owner: String, _ nextKey: Data?) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Irismod_Nft_QueryOwnerRequest.with { $0.owner = owner }
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
+                    $0.countTotal = true
+                    $0.limit = 100
+                    if let pageKey = nextKey {
+                        $0.key = pageKey
+                    }
+                }
+                let req = Irismod_Nft_QueryOwnerRequest.with {
+                    $0.owner = owner
+                    $0.pagination = page
+                }
                 if let response = try? Irismod_Nft_QueryClient(channel: channel).owner(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.mMyNFTs.removeAll()
                     response.owner.idCollections.forEach { id_collection in
                         id_collection.tokenIds.forEach { token_id in
                             self.mMyNFTs.append(NFTCollectionId.init(id_collection.denomID, token_id))
                         }
                     }
-                    self.mMyTotalCnt = response.pagination.total
+
+                    if (nextKey == nil) {
+                        self.mPageTotalCnt = response.pagination.total
+                    }
+                    self.mPageKey = response.pagination.nextKey
                 }
                 try channel.close().wait()
 
@@ -108,6 +130,5 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
-        
     }
 }
