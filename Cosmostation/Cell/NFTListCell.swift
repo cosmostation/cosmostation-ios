@@ -40,20 +40,40 @@ class NFTListCell: UITableViewCell {
     
     func onBindNFT(_ chainType: ChainType?, _ nftCollectionId: NFTCollectionId) {
         nftCardView.backgroundColor = WUtils.getChainBg(chainType)
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Irismod_Nft_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
-                if let response = try? Irismod_Nft_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    DispatchQueue.main.async(execute: {
-                        self.nftImgView.af_setImage(withURL: URL(string: response.nft.uri)!)
-                        self.nftNameLabel.text = response.nft.name
-                        self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)   
-                    });
+        if (chainType == ChainType.IRIS_MAIN) {
+            DispatchQueue.global().async {
+                do {
+                    let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let req = Irismod_Nft_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
+                    if let response = try? Irismod_Nft_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        DispatchQueue.main.async(execute: {
+                            self.nftImgView.af_setImage(withURL: URL(string: response.nft.uri)!)
+                            self.nftNameLabel.text = response.nft.name
+                            self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)
+                        });
+                    }
+                    try channel.close().wait()
+                } catch {
+                    print("IRIS QueryNFTRequest failed: \(error)")
                 }
-                try channel.close().wait()
-            } catch {
-                print("QueryNFTRequest failed: \(error)")
+            }
+            
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            DispatchQueue.global().async {
+                do {
+                    let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let req = Chainmain_Nft_V1_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
+                    if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        DispatchQueue.main.async(execute: {
+                            self.nftImgView.af_setImage(withURL: URL(string: response.nft.uri)!)
+                            self.nftNameLabel.text = response.nft.name
+                            self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)
+                        });
+                    }
+                    try channel.close().wait()
+                } catch {
+                    print("CRYPTO QueryNFTRequest failed: \(error)")
+                }
             }
         }
     }

@@ -70,7 +70,7 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         let lastRowIndex = tableView.numberOfRows(inSection: 0) - 1
         if (indexPath.row == lastRowIndex ) {
             if (mPageTotalCnt > mMyNFTs.count) {
-                self.onFetchNFTColleactions(self.account!.account_address, mPageKey)
+                self.onFetchNFTData()
             }
         }
     }
@@ -79,24 +79,17 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         
     }
     
-    var mFetchCnt = 0
-    @objc func onFetchNFTData() -> Bool {
-        if (self.mFetchCnt > 0)  {
-            return false
+    @objc func onFetchNFTData() {
+        if (chainType == ChainType.IRIS_MAIN) {
+            self.onFetchIrisNFT(self.account!.account_address, mPageKey)
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            self.onFetchCroNFT(self.account!.account_address, mPageKey)
+        } else {
+            self.updateView()
         }
-        self.mFetchCnt = 1
-        self.onFetchNFTColleactions(self.account!.account_address, mPageKey)
-        return true
     }
     
-    func onFetchFinished() {
-        self.mFetchCnt = self.mFetchCnt - 1
-        if (mFetchCnt > 0) { return }
-        
-        self.updateView()
-    }
-    
-    func onFetchNFTColleactions(_ owner: String, _ nextKey: Data?) {
+    func onFetchIrisNFT(_ owner: String, _ nextKey: Data?) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
@@ -117,7 +110,6 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
                             self.mMyNFTs.append(NFTCollectionId.init(id_collection.denomID, token_id))
                         }
                     }
-
                     if (nextKey == nil) {
                         self.mPageTotalCnt = response.pagination.total
                     }
@@ -126,9 +118,45 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
                 try channel.close().wait()
 
             } catch {
-                print("onFetchNFTColleactions failed: \(error)")
+                print("onFetchIrisNFT failed: \(error)")
             }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+            DispatchQueue.main.async(execute: { self.updateView() });
+        }
+    }
+    
+    func onFetchCroNFT(_ owner: String, _ nextKey: Data?) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
+                    $0.countTotal = true
+                    $0.limit = 100
+                    if let pageKey = nextKey {
+                        $0.key = pageKey
+                    }
+                }
+                let req = Chainmain_Nft_V1_QueryOwnerRequest.with {
+                    $0.owner = owner
+                    $0.pagination = page
+                }
+                
+                if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).owner(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    response.owner.idCollections.forEach { id_collection in
+                        id_collection.tokenIds.forEach { token_id in
+                            self.mMyNFTs.append(NFTCollectionId.init(id_collection.denomID, token_id))
+                        }
+                    }
+                    if (nextKey == nil) {
+                        self.mPageTotalCnt = response.pagination.total
+                    }
+                    self.mPageKey = response.pagination.nextKey
+                }
+                try channel.close().wait()
+
+            } catch {
+                print("onFetchCroNFT failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.updateView() });
         }
     }
 }

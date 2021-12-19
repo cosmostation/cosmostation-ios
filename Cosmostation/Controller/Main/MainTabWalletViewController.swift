@@ -708,6 +708,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionNFT = { self.onClickNFT() }
             return cell!
             
         } else if (indexPath.row == 1) {
