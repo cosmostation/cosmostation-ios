@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rTt-tw-K2E" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="600" height="121"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oYV-93-XYV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconNftNone" translatesAutoresizingMaskIntoConstraints="NO" id="oYV-93-XYV">
                                 <rect key="frame" x="12" y="12" width="75" height="75"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="Xvb-HR-eS9"/>
@@ -93,4 +93,7 @@
             <point key="canvasLocation" x="233.33333333333334" y="126.22767857142857"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="iconNftNone" width="40" height="40"/>
+    </resources>
 </document>

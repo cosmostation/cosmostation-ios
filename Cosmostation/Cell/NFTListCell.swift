@@ -33,7 +33,7 @@ class NFTListCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        nftImgView.image = nil
+        nftImgView.image = UIImage(named: "iconNftNone")
         nftNameLabel.text = ""
         nftDescriptionLabel.text = ""
     }
