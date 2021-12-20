@@ -28,8 +28,8 @@ class NFTListCell: UITableViewCell {
         nftImgView.clipsToBounds = true
         self.selectionStyle = .none
         
-        nftNameLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
-        nftDescriptionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_12_caption1)
+//        nftNameLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+//        nftDescriptionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_12_caption1)
     }
     
     override func prepareForReuse() {
