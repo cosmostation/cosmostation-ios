@@ -75,6 +75,12 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let nftDetailVC = NTFDetailViewController(nibName: "NTFDetailViewController", bundle: nil)
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(nftDetailVC, animated: true)
+    }
+    
     @IBAction func onClickCreateNFT(_ sender: UIButton) {
         
     }
