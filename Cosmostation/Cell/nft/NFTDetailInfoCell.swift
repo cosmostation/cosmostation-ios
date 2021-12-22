@@ -10,15 +10,34 @@ import UIKit
 
 class NFTDetailInfoCell: UITableViewCell {
 
+    @IBOutlet weak var nftCardView: CardView!
+    @IBOutlet weak var nftNameLabel: UILabel!
+    @IBOutlet weak var nftDescrpLabel: UILabel!
+    @IBOutlet weak var nftDenomLabel: UILabel!
+    @IBOutlet weak var nftTokenLabel: UILabel!
+    @IBOutlet weak var nftIssuerLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    
+    func onBindNFT(_ chainType: ChainType?, _ irisRes: Irismod_Nft_QueryNFTResponse?, _ croRes: Chainmain_Nft_V1_QueryNFTResponse?, _ collectionId: NFTCollectionId?) {
+        nftCardView.backgroundColor = WUtils.getChainBg(chainType)
+        if (chainType == ChainType.IRIS_MAIN) {
+            self.nftNameLabel.text = irisRes?.nft.name
+            self.nftDescrpLabel.text = WUtils.getNftDescription(irisRes?.nft.data)
+            self.nftIssuerLabel.text = WUtils.getNftIssuer(irisRes?.nft.data)
+            
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            self.nftNameLabel.text = croRes?.nft.name
+            self.nftDescrpLabel.text = WUtils.getNftDescription(croRes?.nft.data)
+            self.nftIssuerLabel.text = WUtils.getNftIssuer(croRes?.nft.data)
+            
+        }
+        nftDenomLabel.text = collectionId?.denom_id
+        nftTokenLabel.text = collectionId?.token_ids
     }
     
 }

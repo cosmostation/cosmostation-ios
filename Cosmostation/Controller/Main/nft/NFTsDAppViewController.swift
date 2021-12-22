@@ -81,5 +81,33 @@ extension WUtils {
         return ""
     }
     
+    static func getNftIssuer(_ text: String?) -> String {
+        if let data = text?.data(using: .utf8) {
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary
+                
+                if let issuerAddr = json?.object(forKey: "issuerAddr") as? String {
+                    return issuerAddr
+                }
+                if let issuerAddr = json?.value(forKeyPath: "body.issuerAddr") as? String {
+                    return issuerAddr
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        return ""
+    }
     
+    
+}
+
+extension Data {
+    var prettyJson: String? {
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: .allowFragments),
+              let data = try? JSONSerialization.data(withJSONObject: object, options: [.sortedKeys, .prettyPrinted]),
+              let prettyPrintedString = String(data: data, encoding:.utf8) else { return nil }
+
+        return prettyPrintedString
+    }
 }

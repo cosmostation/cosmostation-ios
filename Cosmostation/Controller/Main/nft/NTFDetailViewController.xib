@@ -100,7 +100,7 @@
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J5d-31-6rc">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Background" translatesAutoresizingMaskIntoConstraints="NO" id="Lch-e2-1Wt">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nftNone" translatesAutoresizingMaskIntoConstraints="NO" id="Lch-e2-1Wt">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </imageView>
             </subviews>
@@ -115,9 +115,9 @@
         </view>
     </objects>
     <resources>
-        <image name="Background" width="400" height="300"/>
         <image name="bg_cosmos" width="360" height="740"/>
         <image name="icIbcsend20" width="20" height="20"/>
         <image name="icSend20" width="20" height="20"/>
+        <image name="nftNone" width="375" height="300"/>
     </resources>
 </document>

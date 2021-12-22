@@ -94,6 +94,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="iconNftNone" width="40" height="40"/>
+        <image name="iconNftNone" width="60" height="60"/>
     </resources>
 </document>

@@ -10,15 +10,20 @@ import UIKit
 
 class NFTDetailRawCell: UITableViewCell {
 
+    @IBOutlet weak var nftCardView: CardView!
+    @IBOutlet weak var nftRawLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+        self.selectionStyle = .none
     }
     
+    func onBindNFT(_ chainType: ChainType?, _ irisRes: Irismod_Nft_QueryNFTResponse?, _ croRes: Chainmain_Nft_V1_QueryNFTResponse?) {
+        nftCardView.backgroundColor = WUtils.getChainBg(chainType)
+        if (chainType == ChainType.IRIS_MAIN) {
+            nftRawLabel.text = irisRes?.nft.data.data(using: .utf8)!.prettyJson!.replacingOccurrences(of: "\\", with: "")
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            nftRawLabel.text = croRes?.nft.data.data(using: .utf8)!.prettyJson!.replacingOccurrences(of: "\\", with: "")
+        }
+    }
 }

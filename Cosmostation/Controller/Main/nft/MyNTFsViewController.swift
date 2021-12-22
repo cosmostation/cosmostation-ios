@@ -76,7 +76,11 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = myNFTTableView.cellForRow(at: indexPath) as? NFTListCell
         let nftDetailVC = NTFDetailViewController(nibName: "NTFDetailViewController", bundle: nil)
+        nftDetailVC.irisResponse = cell?.irisResponse
+        nftDetailVC.croResponse = cell?.croResponse
+        nftDetailVC.mNFT = mMyNFTs[indexPath.row]
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(nftDetailVC, animated: true)
     }

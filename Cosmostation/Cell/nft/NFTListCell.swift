@@ -18,6 +18,8 @@ class NFTListCell: UITableViewCell {
     @IBOutlet weak var nftNameLabel: UILabel!
     @IBOutlet weak var nftDescriptionLabel: UILabel!
     
+    var irisResponse: Irismod_Nft_QueryNFTResponse?
+    var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -47,6 +49,7 @@ class NFTListCell: UITableViewCell {
                     let req = Irismod_Nft_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
                     if let response = try? Irismod_Nft_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
+                            self.irisResponse = response
                             self.nftImgView.af_setImage(withURL: URL(string: response.nft.uri)!)
                             self.nftNameLabel.text = response.nft.name
                             self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)
@@ -65,6 +68,7 @@ class NFTListCell: UITableViewCell {
                     let req = Chainmain_Nft_V1_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
                     if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
+                            self.croResponse = response
                             self.nftImgView.af_setImage(withURL: URL(string: response.nft.uri)!)
                             self.nftNameLabel.text = response.nft.name
                             self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)
