@@ -262,6 +262,7 @@
 "select_keytype_lum_msg" = "Select [Air-Drop Path] to import the address that received the Lum airdrop. If you wish to import a general Lum address, select [Default Path].\nit will not affect your original Lum wallet. Simply press [Import Mnemonics] to re-select your path.";
 "lum_path_0" = "Default PATH (44'/880'/0'/0)";
 "lum_path_1" = "Air-Drop PATH (44'/118'/0'/0)";
+"permission_photo_title" = "Need Permission for Photo Library. Please enable with Settings";
 
 "current_price_format" = "Current %@ Price";
 "liquidation_price_format" = "Liquidation %@ Price";

@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GenNFT0ViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="btnCancel" destination="7Zz-fH-3Vb" id="206-xp-Hsn"/>
+                <outlet property="btnNext" destination="ZP8-8u-hQE" id="pQf-jI-rHn"/>
                 <outlet property="nftAddBtn" destination="2IX-gl-Pzy" id="uLQ-5S-8Wo"/>
                 <outlet property="nftDeleteBtn" destination="0U8-8n-F6L" id="Kd5-Dn-jLv"/>
                 <outlet property="nftDescriptionTextView" destination="Tdc-15-LHr" id="Puf-op-QHY"/>
@@ -46,6 +48,9 @@
                                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickCancel:" destination="-1" eventType="touchUpInside" id="LEj-0w-4ZT"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZP8-8u-hQE">
                             <rect key="frame" x="196" y="0.0" width="186" height="50"/>
@@ -67,6 +72,9 @@
                                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickNext:" destination="-1" eventType="touchUpInside" id="hsC-f8-qGX"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
