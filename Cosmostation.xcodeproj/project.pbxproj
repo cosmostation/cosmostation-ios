@@ -959,6 +959,10 @@
 		04E25D472770D56C009B39BA /* NFTDetailInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D452770D56C009B39BA /* NFTDetailInfoCell.xib */; };
 		04E25D4A2770D57E009B39BA /* NFTDetailRawCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D482770D57E009B39BA /* NFTDetailRawCell.swift */; };
 		04E25D4B2770D57E009B39BA /* NFTDetailRawCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D492770D57E009B39BA /* NFTDetailRawCell.xib */; };
+		04E25D4F27749A92009B39BA /* GenNFT0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D4D27749A92009B39BA /* GenNFT0ViewController.swift */; };
+		04E25D5027749A92009B39BA /* GenNFT0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D4E27749A92009B39BA /* GenNFT0ViewController.xib */; };
+		04E25D5327749AA0009B39BA /* GenNFT3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D5127749AA0009B39BA /* GenNFT3ViewController.swift */; };
+		04E25D5427749AA0009B39BA /* GenNFT3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D5227749AA0009B39BA /* GenNFT3ViewController.xib */; };
 		2800CF9624719EC4003C3EF1 /* Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF9524719EC4003C3EF1 /* Tally.swift */; };
 		2800CF982471A004003C3EF1 /* CosmosProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF972471A004003C3EF1 /* CosmosProposer.swift */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -2679,6 +2683,10 @@
 		04E25D452770D56C009B39BA /* NFTDetailInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NFTDetailInfoCell.xib; sourceTree = "<group>"; };
 		04E25D482770D57E009B39BA /* NFTDetailRawCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailRawCell.swift; sourceTree = "<group>"; };
 		04E25D492770D57E009B39BA /* NFTDetailRawCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NFTDetailRawCell.xib; sourceTree = "<group>"; };
+		04E25D4D27749A92009B39BA /* GenNFT0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenNFT0ViewController.swift; sourceTree = "<group>"; };
+		04E25D4E27749A92009B39BA /* GenNFT0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenNFT0ViewController.xib; sourceTree = "<group>"; };
+		04E25D5127749AA0009B39BA /* GenNFT3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenNFT3ViewController.swift; sourceTree = "<group>"; };
+		04E25D5227749AA0009B39BA /* GenNFT3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenNFT3ViewController.xib; sourceTree = "<group>"; };
 		2800CF9524719EC4003C3EF1 /* Tally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tally.swift; sourceTree = "<group>"; };
 		2800CF972471A004003C3EF1 /* CosmosProposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposer.swift; sourceTree = "<group>"; };
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
@@ -3581,6 +3589,17 @@
 				04E25D452770D56C009B39BA /* NFTDetailInfoCell.xib */,
 				04E25D482770D57E009B39BA /* NFTDetailRawCell.swift */,
 				04E25D492770D57E009B39BA /* NFTDetailRawCell.xib */,
+			);
+			path = nft;
+			sourceTree = "<group>";
+		};
+		04E25D4C27749A70009B39BA /* nft */ = {
+			isa = PBXGroup;
+			children = (
+				04E25D4D27749A92009B39BA /* GenNFT0ViewController.swift */,
+				04E25D4E27749A92009B39BA /* GenNFT0ViewController.xib */,
+				04E25D5127749AA0009B39BA /* GenNFT3ViewController.swift */,
+				04E25D5227749AA0009B39BA /* GenNFT3ViewController.xib */,
 			);
 			path = nft;
 			sourceTree = "<group>";
@@ -5292,6 +5311,7 @@
 		E171A067225AF71800C5756C /* GenTx */ = {
 			isa = PBXGroup;
 			children = (
+				04E25D4C27749A70009B39BA /* nft */,
 				2845AE4C271C70EB005AA537 /* sif */,
 				2894104E26FDB30A005BCBE4 /* ibc */,
 				28584B3F26E8696B00EE5719 /* gravity */,
@@ -5823,6 +5843,7 @@
 				04D138542691E23200D6AF9F /* TxCreatePoolCell.xib in Resources */,
 				282FC71C26C3FD72001BE250 /* MyFarmCell.xib in Resources */,
 				282FF34A23F50C540028CC66 /* TxUndelegateCell.xib in Resources */,
+				04E25D5027749A92009B39BA /* GenNFT0ViewController.xib in Resources */,
 				28EEECA526DAE996002DDC4A /* KavaSwapJoin0ViewController.xib in Resources */,
 				E1F2AE59227EC5B600C87F3F /* MainStoryboard.storyboard in Resources */,
 				282FF35E23F530ED0028CC66 /* TxEditRewardAddressCell.xib in Resources */,
@@ -5891,6 +5912,7 @@
 				28A2A4C3271FF9140042ACC4 /* WalletBitcannaCell.xib in Resources */,
 				28DB570725FA3BBC00B2F0E5 /* HardPoolBorrow0ViewController.xib in Resources */,
 				282FF34223F4FFD20028CC66 /* TxCommissionCell.xib in Resources */,
+				04E25D5427749AA0009B39BA /* GenNFT3ViewController.xib in Resources */,
 				280E1F0D254AB5BA0007BA7D /* ReplaceResource0ViewController.xib in Resources */,
 				E11338FE235D70D20011B61D /* ManageAccountAddCell.xib in Resources */,
 				28B2E4C426CFC84000ECF960 /* TokenDetailIBCCell.xib in Resources */,
@@ -6903,6 +6925,7 @@
 				040FA9B9275F55C300229F6F /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
 				040FA7B4275F55C200229F6F /* rizon_treasury_query.grpc.swift in Sources */,
 				282FF35923F52FD40028CC66 /* TxRewardCell.swift in Sources */,
+				04E25D5327749AA0009B39BA /* GenNFT3ViewController.swift in Sources */,
 				28EEEC8D26DA5747002DDC4A /* KavaSwapDeposit.swift in Sources */,
 				28592E772580616D00C31460 /* BaseNetWork.swift in Sources */,
 				040FA99F275F55C300229F6F /* iris_mod_coinswap_coinswap.pb.swift in Sources */,
@@ -7470,6 +7493,7 @@
 				040FA7AF275F55C200229F6F /* panacea_token_v2_genesis.pb.swift in Sources */,
 				040FA84C275F55C200229F6F /* umee_peggy_v1_attestation.pb.swift in Sources */,
 				040FA7EE275F55C200229F6F /* shentu_burrow_spec.pb.swift in Sources */,
+				04E25D4F27749A92009B39BA /* GenNFT0ViewController.swift in Sources */,
 				040FA92A275F55C300229F6F /* ixo_bonds_query.pb.swift in Sources */,
 				040FA807275F55C200229F6F /* cosmos_group_v1beta1_query.pb.swift in Sources */,
 				040FA7DE275F55C200229F6F /* iris_mod_random_query.grpc.swift in Sources */,

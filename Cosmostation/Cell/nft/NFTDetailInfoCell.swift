@@ -22,7 +22,6 @@ class NFTDetailInfoCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    
     func onBindNFT(_ chainType: ChainType?, _ irisRes: Irismod_Nft_QueryNFTResponse?, _ croRes: Chainmain_Nft_V1_QueryNFTResponse?, _ collectionId: NFTCollectionId?) {
         nftCardView.backgroundColor = WUtils.getChainBg(chainType)
         if (chainType == ChainType.IRIS_MAIN) {

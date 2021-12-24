@@ -484,6 +484,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     SifSwap3ViewController(nibName: "SifSwap3ViewController", bundle: nil)]
             
+        } else if (mType == TASK_ISSUE_NFT) {
+            return [GenNFT0ViewController(nibName: "GenNFT0ViewController", bundle: nil),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    GenNFT3ViewController(nibName: "GenNFT3ViewController", bundle: nil)]
+            
         }
         
         else {

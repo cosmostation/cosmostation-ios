@@ -28,6 +28,8 @@
 	<string>The camera is used to scan QR-Code that expresses a blockchain address or URL of Wallet Connect.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Face ID is using for unlock app</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access your photo for generating NFT.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

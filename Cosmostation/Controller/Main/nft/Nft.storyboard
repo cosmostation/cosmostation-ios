@@ -86,7 +86,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="G2F-7C-adb"/>
                                 </constraints>
-                                <state key="normal" title="  Create NFT" image="btnIconNft">
+                                <state key="normal" title="  Issue NFT" image="btnIconNft">
                                     <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -146,9 +146,10 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="dfl-mU-SnN"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="vI0-Hy-RJZ" secondAttribute="bottom" constant="16" id="143-ta-wiO"/>
+                            <constraint firstItem="dfl-mU-SnN" firstAttribute="bottom" secondItem="vI0-Hy-RJZ" secondAttribute="bottom" constant="16" id="143-ta-wiO"/>
                             <constraint firstAttribute="trailing" secondItem="mYF-oa-D4R" secondAttribute="trailing" id="GIi-QG-qNh"/>
                             <constraint firstItem="vI0-Hy-RJZ" firstAttribute="leading" secondItem="Gxi-P4-lJm" secondAttribute="leading" constant="16" id="Mkh-Ty-3Ve"/>
                             <constraint firstItem="j4U-Is-UmF" firstAttribute="centerX" secondItem="Gxi-P4-lJm" secondAttribute="centerX" id="P3e-mU-3Hv"/>
@@ -178,6 +179,7 @@
                     <view key="view" contentMode="scaleToFill" id="YEC-14-VeX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="cjR-CR-qmw"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </viewController>
