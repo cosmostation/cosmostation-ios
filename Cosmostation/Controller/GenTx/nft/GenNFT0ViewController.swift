@@ -8,11 +8,15 @@
 
 import UIKit
 import Photos
+import Ipfs
 
-class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var loadingImg: LoadingImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var editRootView: UIView!
     @IBOutlet weak var nftImageView: UIImageView!
     @IBOutlet weak var nftAddBtn: UIButton!
     @IBOutlet weak var nftDeleteBtn: UIButton!
@@ -20,17 +24,37 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var nftDescriptionTextView: UITextView!
     
     var pageHolderVC: StepGenTxViewController!
+    var object: ObjectModel?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.nftNameTextView.delegate = self
+        self.nftDescriptionTextView.delegate = self
+        self.loadingImg.startAnimating()
+        
+        Ipfs.shared().setBase(address: "https://ipfs.infura.io", port: 5001, apiVersionPath: "/api/v0")
+        Ipfs.swarm.peers { (result) in
+            self.loadingImg.stopAnimating()
+            self.loadingImg.isHidden = true
+            switch result {
+            case let .success(response):
+//                print("statusCode: \(response.statusCode)")
+//                print("result: \(response.data)")
+                self.inInitView()
+                break
+            case let .failure(error):
+                self.onIPFSNetworkError()
+                break
+            }
+        }
+        self.editRootView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:))))
     }
     
-    override func viewDidLayoutSubviews() {
-        print("viewDidLayoutSubviews")
-        super.viewDidLayoutSubviews()
+    func inInitView() {
         nftAddBtn.alignTextBelow()
         nftNameTextView.layer.borderWidth = 1.0
         nftNameTextView.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
@@ -39,6 +63,7 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         nftDescriptionTextView.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
         nftDescriptionTextView.layer.cornerRadius = 8
         onUpdateImgView(nil)
+        editRootView.isHidden = false
     }
     
     override func enableUserInteraction() {
@@ -46,17 +71,42 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         self.btnNext.isUserInteractionEnabled = true
     }
     
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if (textView == nftNameTextView) {
+            DispatchQueue.main.async {
+                let offset = CGPoint(x: 0, y: 100)
+                self.scrollView.setContentOffset(offset, animated: true)
+            }
+        } else if (textView == nftDescriptionTextView) {
+            DispatchQueue.main.async {
+                let offset = CGPoint(x: 0, y: 200)
+                self.scrollView.setContentOffset(offset, animated: true)
+            }
+        }
+        return true
+    }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if (text == "\n" && textView == nftNameTextView) {
+            nftDescriptionTextView.becomeFirstResponder()
+            return false
+        }
+        return true
+    }
+    
+    @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
     func onUpdateImgView(_ hash: String?) {
         if (hash != nil) {
-//            nftImageView.image = nil
+            nftImageView.af_setImage(withURL: URL(string: NFT_INFURA + hash!)!)
             nftAddBtn.isHidden = true
             nftDeleteBtn.isHidden = false
             nftImageView.layer.sublayers = nil
             
         } else {
-//            nftImageView.image = nil
+            nftImageView.image = nil
             nftAddBtn.isHidden = false
             nftDeleteBtn.isHidden = true
             
@@ -80,10 +130,34 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         } else if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
             newImage = image
         }
-//        nftImageView.image = newImage
         picker.dismiss(animated: true) {
-            //TODO upload & get hash with ipfs
-            
+            self.showWaittingAlert()
+            self.imageUpload(newImage!) { (success) in
+                print("upload result ", self.object?.hash)
+                if success {
+                    self.onUpdateImgView(self.object?.hash)
+                } else {
+                    self.onShowToast(NSLocalizedString("error_fail_upload_img", comment: ""))
+                }
+                self.hideWaittingAlert()
+            }
+        }
+    }
+    
+    func imageUpload(_ imag: UIImage, _ handler: @escaping (Bool)->()) {
+        guard let data = imag.pngData() else { return }
+        Ipfs.files.add(data: data) { (result) in
+            switch result {
+            case let .success(moyaResponse):
+                let object = try? moyaResponse.map(ObjectModel.self)
+                self.object = object
+                handler(object != nil)
+                break
+            case let .failure(error):
+                print("failure: \(error.localizedDescription)")
+                handler(false)
+                break
+            }
         }
     }
     
@@ -93,6 +167,8 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     }
     
     @IBAction func onClickImgDele(_ sender: UIButton) {
+        object = nil
+        onUpdateImgView(nil)
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
@@ -102,7 +178,26 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        nftImageView.image = UIImage(named: "kavamainImg")
+        if (object == nil) {
+            self.onShowToast(NSLocalizedString("error_no_nft_image", comment: ""))
+            return
+        }
+        if (nftNameTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty == true) {
+            self.onShowToast(NSLocalizedString("error_no_nft_title", comment: ""))
+            return
+        }
+        if (nftDescriptionTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).isEmpty == true) {
+            self.onShowToast(NSLocalizedString("error_no_nft_dexcription", comment: ""))
+            return
+        }
+        
+        self.pageHolderVC.mNFTHash = object?.hash!
+        self.pageHolderVC.mNFTName = nftNameTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        self.pageHolderVC.mNFTDescription = nftDescriptionTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        
+        self.btnCancel.isUserInteractionEnabled = false
+        self.btnNext.isUserInteractionEnabled = false
+        pageHolderVC.onNextPage()
     }
     
     
@@ -149,8 +244,16 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
             myPickerController.delegate = self
             myPickerController.sourceType = .photoLibrary
             self.present(myPickerController, animated: true, completion: nil)
-            
         });
+    }
+    
+    func onIPFSNetworkError() {
+        let title = NSLocalizedString("str_ipfs_connect_fail_title", comment: "")
+        let msg = NSLocalizedString("str_ipfs_connect_fail_msg", comment: "")
+        let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { _ in
+            self.pageHolderVC.onBeforePage()
+        }))
     }
 }
 

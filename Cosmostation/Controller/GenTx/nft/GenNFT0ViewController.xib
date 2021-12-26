@@ -12,11 +12,14 @@
             <connections>
                 <outlet property="btnCancel" destination="7Zz-fH-3Vb" id="206-xp-Hsn"/>
                 <outlet property="btnNext" destination="ZP8-8u-hQE" id="pQf-jI-rHn"/>
+                <outlet property="editRootView" destination="CyF-sG-1V1" id="gny-OR-wx0"/>
+                <outlet property="loadingImg" destination="tea-XB-h2Y" id="SRx-s6-jCf"/>
                 <outlet property="nftAddBtn" destination="2IX-gl-Pzy" id="uLQ-5S-8Wo"/>
                 <outlet property="nftDeleteBtn" destination="0U8-8n-F6L" id="Kd5-Dn-jLv"/>
                 <outlet property="nftDescriptionTextView" destination="Tdc-15-LHr" id="Puf-op-QHY"/>
                 <outlet property="nftImageView" destination="9XS-8n-xSe" id="yaU-yz-iP6"/>
                 <outlet property="nftNameTextView" destination="ZQ9-Sl-Wva" id="Qzq-yB-J8N"/>
+                <outlet property="scrollView" destination="Olj-oH-Xus" id="zZ5-PZ-pg2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -81,7 +84,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Olj-oH-Xus">
                     <rect key="frame" x="0.0" y="60" width="414" height="720"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CyF-sG-1V1">
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CyF-sG-1V1">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="742.66666666666663"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9XS-8n-xSe">
@@ -198,6 +201,13 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="mMi-Ov-2xD"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="dC8-XQ-K2K"/>
                 </scrollView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tea-XB-h2Y" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="177" y="423" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="5Yx-XY-P1v"/>
+                        <constraint firstAttribute="width" constant="60" id="grQ-dF-aDs"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -208,7 +218,9 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Olj-oH-Xus" secondAttribute="trailing" id="RXU-xL-CBS"/>
                 <constraint firstItem="Olj-oH-Xus" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="f97-np-h7u"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="Olj-oH-Xus" secondAttribute="top" constant="-16" id="l2v-8l-LGu"/>
+                <constraint firstItem="tea-XB-h2Y" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="s7b-Jw-Vfl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kfz-UR-2JJ" secondAttribute="bottom" constant="16" id="sas-Hr-5uP"/>
+                <constraint firstItem="tea-XB-h2Y" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="ztz-V7-w2t"/>
             </constraints>
             <point key="canvasLocation" x="176.81159420289856" y="1115.9598214285713"/>
         </view>

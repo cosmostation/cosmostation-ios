@@ -512,6 +512,8 @@ support@cosmostation.io";
 "str_enginer_is_on_msg" = "Engineer mode is currently on.\n\nThere is a very low probability that an account with incompatibility may be created, which may cause inconvenience to users.\n\nBefore use, be sure to consult with the Cosmo Station administrator team before use.";
 "str_rizon_swap_alert_msg" = "Swap Hdac chain assets to Rizon chain.\nDue to the nature of the swap, it is irreversible, and it may take some time until the actual swap is completed due to the asynchronous operation between the two chains.";
 "str_icon_updated" = "Icon updated.";
+"str_ipfs_connect_fail_title" = "Connection Error";
+"str_ipfs_connect_fail_msg" = "Unable to connect to IPFS. Please check the network connection status.";
 
 "clear_all" = "Clear All";
 "delete" = "Delete";
@@ -724,6 +726,10 @@ support@cosmostation.io";
 "error_reserve_1_account" = "Please reserve at least 1 account to displayed.";
 "error_hided_chain" = "Hidden Chain.";
 "error_rizon_swap_finished" = "Rizon Swap Disabled";
+"error_fail_upload_img" = "Image uploading failed";
+"error_no_nft_image" = "Add NFT Image";
+"error_no_nft_title" = "Add NFT Name";
+"error_no_nft_dexcription" = "Add NFT Description";
 
 
 

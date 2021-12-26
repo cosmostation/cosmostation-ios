@@ -902,6 +902,7 @@
 		04615CC5275074A600A693B0 /* WalletBitsongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC3275074A600A693B0 /* WalletBitsongCell.xib */; };
 		04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */; };
 		04615CC92750C7AD00A693B0 /* WalletDesmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */; };
+		046BD22027788723002333B5 /* StationNFTData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD21F27788723002333B5 /* StationNFTData.swift */; };
 		046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
 		046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
@@ -2625,6 +2626,7 @@
 		04615CC3275074A600A693B0 /* WalletBitsongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletBitsongCell.xib; sourceTree = "<group>"; };
 		04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosCell.swift; sourceTree = "<group>"; };
 		04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosCell.xib; sourceTree = "<group>"; };
+		046BD21F27788723002333B5 /* StationNFTData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNFTData.swift; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
 		046E9038268C3F95002CFFE1 /* BinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceModel.swift; sourceTree = "<group>"; };
 		046E903A268C401E002CFFE1 /* BinanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceType.swift; sourceTree = "<group>"; };
@@ -5505,6 +5507,7 @@
 				04D1384C2691C78F00D6AF9F /* IbcPath.swift */,
 				04D1384E2691CAF100D6AF9F /* IbcToken.swift */,
 				0479664F2757409700315D55 /* MintscanProposalDetail.swift */,
+				046BD21F27788723002333B5 /* StationNFTData.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -7342,6 +7345,7 @@
 				040FA7E4275F55C200229F6F /* cosmos_feegrant_v1beta1_genesis.pb.swift in Sources */,
 				283E9472254902F4007A9291 /* TxDeleteAccountCell.swift in Sources */,
 				E1C3C89B23B1E3E400A693C0 /* NotificationView.swift in Sources */,
+				046BD22027788723002333B5 /* StationNFTData.swift in Sources */,
 				285F8C8B25CFB21000317B30 /* OkTicker.swift in Sources */,
 				040FA9C2275F55C300229F6F /* stargaze_mint_v1beta1_mint.pb.swift in Sources */,
 				040FAAF5275F55C400229F6F /* rizon_tokenswap_tx.pb.swift in Sources */,

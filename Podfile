@@ -20,4 +20,5 @@ target 'Cosmostation' do
     pod 'gRPC-Swift', '~> 1.0.0'
     pod 'gRPC-Swift-Plugins'
     pod 'HPParallaxHeader'
+    pod 'IpfsApi'
 end

@@ -151,6 +151,10 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mIBCSendRelayer: IbcPath?
     var mIBCSendPath: Path?
     
+    var mNFTHash: String?
+    var mNFTName: String?
+    var mNFTDescription: String?
+    
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == COSMOS_MSG_TYPE_DELEGATE || mType == IRIS_MSG_TYPE_DELEGATE) {
             if (WUtils.isGRPC(chainType!)) {
