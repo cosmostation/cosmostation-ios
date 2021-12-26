@@ -51,7 +51,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="skO-D8-uMS"/>
+                                <action selector="onClickIBCSend:" destination="-1" eventType="touchUpInside" id="Frr-M6-Bk3"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNd-Ki-bOB">

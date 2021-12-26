@@ -3480,6 +3480,8 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
             } else if (type == TASK_ISSUE_NFT) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
+            } else if (type == TASK_SEND_NFT) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
             }
             
         } else if (chain == ChainType.OSMOSIS_MAIN ) {

@@ -440,6 +440,7 @@ let TASK_RIZON_EVENT_HORIZON                = "rizon_swap";
 let TASK_IBC_TRANSFER                       = "ibc_MsgTransfer";
 
 let TASK_ISSUE_NFT                          = "issue_nft";
+let TASK_SEND_NFT                           = "send_nft";
 
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"

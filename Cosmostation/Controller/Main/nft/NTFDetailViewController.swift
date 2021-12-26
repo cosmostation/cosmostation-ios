@@ -37,9 +37,13 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         self.nftDetailTableView.parallaxHeader.delegate = self
         
         if (chainType == ChainType.IRIS_MAIN) {
-            self.nftImageView.af_setImage(withURL: URL(string: irisResponse?.nft.uri ?? "")!)
+            if let url = URL(string: irisResponse?.nft.uri ?? "") {
+                self.nftImageView.af_setImage(withURL: url)
+            }
         } else if (chainType == ChainType.CRYPTO_MAIN) {
-            self.nftImageView.af_setImage(withURL: URL(string: croResponse?.nft.uri ?? "")!)
+            if let url = URL(string: croResponse?.nft.uri ?? "") {
+                self.nftImageView.af_setImage(withURL: url)
+            }
         }
         
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
@@ -89,9 +93,29 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
 //        print("progress \(parallaxHeader.progress)")
     }
     
-    @IBAction func onClickBack(_ sender: UIButton) {
+    @IBAction func onClickIBCSend(_ sender: UIButton) {
     }
     
     @IBAction func onClickSend(_ sender: UIButton) {
+        if (account?.account_has_private == false) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+
+        let mainDenom = WUtils.getMainDenom(chainType)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_SEND_NFT, 0)
+        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+            return
+        }
+        
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_SEND_NFT
+        txVC.mNFT = mNFT
+        txVC.irisResponse = irisResponse
+        txVC.croResponse = croResponse
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
 }

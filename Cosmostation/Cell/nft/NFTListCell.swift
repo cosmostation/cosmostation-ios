@@ -50,7 +50,10 @@ class NFTListCell: UITableViewCell {
                     if let response = try? Irismod_Nft_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
                             self.irisResponse = response
-                            self.nftImgView.af_setImage(withURL: URL(string: response.nft.uri)!)
+                            if let url = URL(string: response.nft.uri) {
+                                self.nftImgView.af_setImage(withURL: url)
+                            }
+                            
                             self.nftNameLabel.text = response.nft.name
                             self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)
                         });
@@ -69,7 +72,9 @@ class NFTListCell: UITableViewCell {
                     if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
                             self.croResponse = response
-                            self.nftImgView.af_setImage(withURL: URL(string: response.nft.uri)!)
+                            if let url = URL(string: response.nft.uri) {
+                                self.nftImgView.af_setImage(withURL: url)
+                            }
                             self.nftNameLabel.text = response.nft.name
                             self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)
                         });

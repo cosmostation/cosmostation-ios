@@ -903,6 +903,10 @@
 		04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */; };
 		04615CC92750C7AD00A693B0 /* WalletDesmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */; };
 		046BD22027788723002333B5 /* StationNFTData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD21F27788723002333B5 /* StationNFTData.swift */; };
+		046BD2232778B38C002333B5 /* SendNFT0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD2212778B38C002333B5 /* SendNFT0ViewController.swift */; };
+		046BD2242778B38C002333B5 /* SendNFT0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD2222778B38C002333B5 /* SendNFT0ViewController.xib */; };
+		046BD2272778B398002333B5 /* SendNFT3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD2252778B398002333B5 /* SendNFT3ViewController.swift */; };
+		046BD2282778B398002333B5 /* SendNFT3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD2262778B398002333B5 /* SendNFT3ViewController.xib */; };
 		046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
 		046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
@@ -2627,6 +2631,10 @@
 		04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosCell.swift; sourceTree = "<group>"; };
 		04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosCell.xib; sourceTree = "<group>"; };
 		046BD21F27788723002333B5 /* StationNFTData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNFTData.swift; sourceTree = "<group>"; };
+		046BD2212778B38C002333B5 /* SendNFT0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNFT0ViewController.swift; sourceTree = "<group>"; };
+		046BD2222778B38C002333B5 /* SendNFT0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendNFT0ViewController.xib; sourceTree = "<group>"; };
+		046BD2252778B398002333B5 /* SendNFT3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNFT3ViewController.swift; sourceTree = "<group>"; };
+		046BD2262778B398002333B5 /* SendNFT3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendNFT3ViewController.xib; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
 		046E9038268C3F95002CFFE1 /* BinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceModel.swift; sourceTree = "<group>"; };
 		046E903A268C401E002CFFE1 /* BinanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceType.swift; sourceTree = "<group>"; };
@@ -3602,6 +3610,10 @@
 				04E25D4E27749A92009B39BA /* GenNFT0ViewController.xib */,
 				04E25D5127749AA0009B39BA /* GenNFT3ViewController.swift */,
 				04E25D5227749AA0009B39BA /* GenNFT3ViewController.xib */,
+				046BD2212778B38C002333B5 /* SendNFT0ViewController.swift */,
+				046BD2222778B38C002333B5 /* SendNFT0ViewController.xib */,
+				046BD2252778B398002333B5 /* SendNFT3ViewController.swift */,
+				046BD2262778B398002333B5 /* SendNFT3ViewController.xib */,
 			);
 			path = nft;
 			sourceTree = "<group>";
@@ -5821,6 +5833,7 @@
 				289E4DAC26E59263007C7C35 /* WalletUmeeCell.xib in Resources */,
 				04615CC92750C7AD00A693B0 /* WalletDesmosCell.xib in Resources */,
 				2829CEA82627080C0048B52A /* WalletCrytoCell.xib in Resources */,
+				046BD2242778B38C002333B5 /* SendNFT0ViewController.xib in Resources */,
 				282FF36623F533AF0028CC66 /* TxUnknownCell.xib in Resources */,
 				2894105626FDBE97005BCBE4 /* IBCSend1ViewController.xib in Resources */,
 				28D28ACE26CB6BE00074964C /* StartLock3ViewController.xib in Resources */,
@@ -5886,6 +5899,7 @@
 				28641F2D2601959E000AAEB8 /* TxDetailgRPCViewController.xib in Resources */,
 				28440C6C271E7BC800B4A7C3 /* SifExitPool3ViewController.xib in Resources */,
 				282FC71826C3FD62001BE250 /* FarmCell.xib in Resources */,
+				046BD2282778B398002333B5 /* SendNFT3ViewController.xib in Resources */,
 				E126CF7D2387A3E1002A546F /* WalletCosmosCell.xib in Resources */,
 				283EB78226C828AE00B9D28D /* EarnUnbondedCell.xib in Resources */,
 				28DB570225FA3BA900B2F0E5 /* HardPoolWithdraw3ViewController.xib in Resources */,
@@ -7051,6 +7065,7 @@
 				040FA9A1275F55C300229F6F /* ibc_applications_transfer_v2_packet.pb.swift in Sources */,
 				040FA8F0275F55C200229F6F /* injective_oracle_v1beta1_query.grpc.swift in Sources */,
 				040FA889275F55C200229F6F /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */,
+				046BD2272778B398002333B5 /* SendNFT3ViewController.swift in Sources */,
 				040FA7A0275F55C200229F6F /* injective_ocr_v1beta1_query.grpc.swift in Sources */,
 				040FA8B4275F55C200229F6F /* sentinel_mint_v1_genesis.pb.swift in Sources */,
 				040FAA3F275F55C400229F6F /* regen_ecocredit_v1alpha2_tx.grpc.swift in Sources */,
@@ -7349,6 +7364,7 @@
 				285F8C8B25CFB21000317B30 /* OkTicker.swift in Sources */,
 				040FA9C2275F55C300229F6F /* stargaze_mint_v1beta1_mint.pb.swift in Sources */,
 				040FAAF5275F55C400229F6F /* rizon_tokenswap_tx.pb.swift in Sources */,
+				046BD2232778B38C002333B5 /* SendNFT0ViewController.swift in Sources */,
 				040FA7F1275F55C200229F6F /* em_issuer_v1_issuer.pb.swift in Sources */,
 				040FAA84275F55C400229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift in Sources */,
 				E1945E3F222E7E2900A1436F /* Bech32.swift in Sources */,
