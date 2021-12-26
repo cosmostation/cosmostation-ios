@@ -863,6 +863,11 @@ support@cosmostation.io";
 "tx_remove_liquidity" = "Remove Liquidity";
 "tx_despensation_claim" = "Claim Incentive";
 
+"tx_nft_mint" = "Issue NFT";
+"tx_nft_send" = "NFT Send";
+"tx_nft_receive" = "NFT Recieve";
+"tx_nft_transfer" = "NFT Transfer";
+
 "tx_known" = "Unknown";
 
 "chain_title_cosmos" = "Cosmos";

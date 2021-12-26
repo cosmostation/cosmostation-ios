@@ -94,6 +94,7 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func onClickIBCSend(_ sender: UIButton) {
+        self.onShowToast(NSLocalizedString("prepare", comment: ""))
     }
     
     @IBAction func onClickSend(_ sender: UIButton) {
