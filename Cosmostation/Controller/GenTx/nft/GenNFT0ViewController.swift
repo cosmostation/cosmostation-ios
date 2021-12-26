@@ -145,7 +145,7 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     }
     
     func imageUpload(_ imag: UIImage, _ handler: @escaping (Bool)->()) {
-        guard let data = imag.pngData() else { return }
+        guard let data = imag.fixOrientation().pngData() else { return }
         Ipfs.files.add(data: data) { (result) in
             switch result {
             case let .success(moyaResponse):
