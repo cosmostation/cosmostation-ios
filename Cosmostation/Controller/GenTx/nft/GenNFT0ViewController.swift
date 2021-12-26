@@ -144,10 +144,13 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     }
     
     func openPhotoLibrary() {
-        let myPickerController = UIImagePickerController()
-        myPickerController.delegate = self
-        myPickerController.sourceType = .photoLibrary
-        self.present(myPickerController, animated: true, completion: nil)
+        DispatchQueue.main.async(execute: {
+            let myPickerController = UIImagePickerController()
+            myPickerController.delegate = self
+            myPickerController.sourceType = .photoLibrary
+            self.present(myPickerController, animated: true, completion: nil)
+            
+        });
     }
 }
 
