@@ -5973,16 +5973,20 @@ public class WUtils {
     
     
     
-    static func onParseStakeRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ opAddress: String, _ position: Int) -> NSDecimalNumber {
+    static func onParseStakeRewardGrpc(_ chain: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ opAddress: String, _ position: Int) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "withdraw_rewards") {
                 for i in 0...event.attributes.count - 1 {
                     if (event.attributes[i].key == "validator" && event.attributes[i].value == opAddress) {
-                        let amount = event.attributes[i - 1].value.filter{ $0.isNumber }
-                        result = NSDecimalNumber.init(string: amount)
-                        break
+                        let rawValue = event.attributes[i - 1].value
+                        for rawCoin in rawValue.split(separator: ","){
+                            if (String(rawCoin).contains(WUtils.getMainDenom(chain))) {
+                                result = NSDecimalNumber.init(string: String(rawCoin).filter{ $0.isNumber })
+                                break
+                            }
+                        }
                     }
                 }
             }
@@ -5990,16 +5994,20 @@ public class WUtils {
         return result
     }
     
-    static func onParseCommisiondGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> NSDecimalNumber {
+    static func onParseCommisiondGrpc(_ chain: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "withdraw_commission") {
                 for i in 0...event.attributes.count - 1 {
                     if (event.attributes[i].key == "amount") {
-                        let amount = event.attributes[i].value.filter{ $0.isNumber }
-                        result = NSDecimalNumber.init(string: amount)
-                        break
+                        let rawValue = event.attributes[i].value
+                        for rawCoin in rawValue.split(separator: ","){
+                            if (String(rawCoin).contains(WUtils.getMainDenom(chain))) {
+                                result = NSDecimalNumber.init(string: String(rawCoin).filter{ $0.isNumber })
+                                break
+                            }
+                        }
                     }
                 }
             }

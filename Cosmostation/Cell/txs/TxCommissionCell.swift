@@ -39,6 +39,6 @@ class TxCommissionCell: TxCell {
         if let validator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorAddress}).first {
             monikerLabel.text = "(" + validator.description_p.moniker + ")"
         }
-        commissionAmountLabel.attributedText = WUtils.displayAmount2(WUtils.onParseCommisiondGrpc(response, position).stringValue, commissionAmountLabel.font!, decimal, decimal)
+        commissionAmountLabel.attributedText = WUtils.displayAmount2(WUtils.onParseCommisiondGrpc(chain, response, position).stringValue, commissionAmountLabel.font!, decimal, decimal)
     }
 }

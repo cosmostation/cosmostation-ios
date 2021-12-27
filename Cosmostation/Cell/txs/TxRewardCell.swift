@@ -40,6 +40,6 @@ class TxRewardCell: TxCell {
         if let validator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorAddress}).first {
             monikerLabel.text = "(" + validator.description_p.moniker + ")"
         }
-        amountLabel.attributedText = WUtils.displayAmount2(WUtils.onParseStakeRewardGrpc(response, msg.validatorAddress, position).stringValue, amountLabel.font!, decimal, decimal)
+        amountLabel.attributedText = WUtils.displayAmount2(WUtils.onParseStakeRewardGrpc(chain, response, msg.validatorAddress, position).stringValue, amountLabel.font!, decimal, decimal)
     }
 }

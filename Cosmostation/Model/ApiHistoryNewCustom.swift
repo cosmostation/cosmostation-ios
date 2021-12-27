@@ -384,7 +384,11 @@ public struct ApiHistoryNewCustom {
                                     if let rawAttributes = rawEvent.object(forKey: "attributes") as? Array<NSDictionary> {
                                         for rawAttribute in rawAttributes {
                                             if let rawKey = rawAttribute.object(forKey: "key") as? String, rawKey == "amount", let rawValue = rawAttribute.object(forKey: "value") as? String  {
-                                                totalRewardSum = totalRewardSum.adding(NSDecimalNumber.init(string: rawValue.filter{$0.isNumber}))
+                                                for rawCoin in rawValue.split(separator: ","){
+                                                    if (String(rawCoin).contains(WUtils.getMainDenom(chain))) {
+                                                        totalRewardSum = totalRewardSum.adding(NSDecimalNumber.init(string: String(rawCoin).filter{ $0.isNumber }))
+                                                    }
+                                                }
                                             }
                                         }
                                     }
