@@ -679,6 +679,14 @@ final class BaseData : NSObject{
         return false
     }
     
+    func setCustomIcon(_ type: String) {
+        UserDefaults.standard.set(type, forKey: KEY_CUSTOM_ICON)
+    }
+    
+    func getCustomIcon() -> String {
+        return UserDefaults.standard.string(forKey: KEY_PRE_EVENT_HIDE) ?? ICON_DEFAULT
+    }
+    
     func getUserHiddenChains() -> Array<String>? {
         return UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
     }

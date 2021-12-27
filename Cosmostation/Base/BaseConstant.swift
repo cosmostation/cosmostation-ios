@@ -28,6 +28,7 @@ let KEY_USER_HIDEN_CHAINS               = "KEY_USER_HIDEN_CHAINS"
 let KEY_USER_SORTED_CHAINS              = "KEY_USER_SORTED_CHAINS"
 let KEY_USER_EXPENDED_CHAINS            = "KEY_USER_EXPENDED_CHAINS"
 let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
+let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 
 let STATION_URL                         = "https://api-utility.cosmostation.io/";
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
@@ -1367,3 +1368,7 @@ let OK_TX_TYPE_SIDE_RECEIVE    = 4;
 
 let STATION_NFT_DENOM           = "secom";
 
+
+let ICON_DEFAULT            = "ICON_DEFAULT";
+let ICON_SANTA              = "ICON_SANTA";
+let ICON_2002               = "ICON_2002";

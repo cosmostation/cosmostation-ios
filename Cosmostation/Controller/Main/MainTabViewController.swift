@@ -1458,14 +1458,14 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         let xmasStart = Calendar.current.date(from: DateComponents(year: 2021, month: 12, day: 21))!.millisecondsSince1970
         let newYearStart = Calendar.current.date(from: DateComponents(year: 2021, month: 12, day: 28))!.millisecondsSince1970
         let newYearEnd = Calendar.current.date(from: DateComponents(year: 2022, month: 1, day: 5))!.millisecondsSince1970
-        
-        if (nowTime <= newYearEnd && nowTime > newYearStart) {
+
+        if (nowTime <= newYearEnd && nowTime > newYearStart && BaseData.instance.getCustomIcon() != ICON_2002) {
             changeEventIcon("New2022")
             return
-        } else if (nowTime > xmasStart && nowTime <= newYearStart) {
+        } else if (nowTime > xmasStart && nowTime <= newYearStart && BaseData.instance.getCustomIcon() != ICON_SANTA) {
             changeEventIcon("Xmas")
             return
-        } else {
+        } else if (BaseData.instance.getCustomIcon() != ICON_DEFAULT) {
             UIApplication.shared.setAlternateIconName(nil)
             return
         }
