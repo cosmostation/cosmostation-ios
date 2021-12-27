@@ -1461,12 +1461,15 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
 
         if (nowTime <= newYearEnd && nowTime > newYearStart && BaseData.instance.getCustomIcon() != ICON_2002) {
             changeEventIcon("New2022")
+            BaseData.instance.setCustomIcon(ICON_2002)
             return
         } else if (nowTime > xmasStart && nowTime <= newYearStart && BaseData.instance.getCustomIcon() != ICON_SANTA) {
             changeEventIcon("Xmas")
+            BaseData.instance.setCustomIcon(ICON_SANTA)
             return
         } else if (BaseData.instance.getCustomIcon() != ICON_DEFAULT) {
             UIApplication.shared.setAlternateIconName(nil)
+            BaseData.instance.setCustomIcon(ICON_DEFAULT)
             return
         }
     }
