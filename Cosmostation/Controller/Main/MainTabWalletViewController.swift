@@ -344,6 +344,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionNFT = { self.onClickNFT() }
             return cell!
             
         } else if (indexPath.row == 1) {
@@ -707,6 +708,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionNFT = { self.onClickNFT() }
             return cell!
             
         } else if (indexPath.row == 1) {
@@ -1686,11 +1688,17 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickSifDex() {
-        print("onClickSifDex")
         let sifDexDappVC = UIStoryboard(name: "SifChainDex", bundle: nil).instantiateViewController(withIdentifier: "SifDexDAppViewController") as! SifDexDAppViewController
         sifDexDappVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(sifDexDappVC, animated: true)
+    }
+    
+    func onClickNFT() {
+        let nftDappVC = UIStoryboard(name: "Nft", bundle: nil).instantiateViewController(withIdentifier: "NFTsDAppViewController") as! NFTsDAppViewController
+        nftDappVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(nftDappVC, animated: true)
     }
     
     func onClickAprHelp() {

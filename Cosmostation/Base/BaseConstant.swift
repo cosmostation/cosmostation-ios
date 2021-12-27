@@ -32,6 +32,7 @@ let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 let STATION_URL                         = "https://api-utility.cosmostation.io/";
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
+let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
 
 let COSMOS_API                          = "https://api.cosmostation.io/";
 
@@ -437,6 +438,9 @@ let SIF_MSG_TYPE_SWAP_CION                  = "sif/MsgSwap";
 let TASK_RIZON_EVENT_HORIZON                = "rizon_swap";
 
 let TASK_IBC_TRANSFER                       = "ibc_MsgTransfer";
+
+let TASK_ISSUE_NFT                          = "issue_nft";
+let TASK_SEND_NFT                           = "send_nft";
 
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"
@@ -1359,4 +1363,7 @@ let OK_TX_TYPE_SIDE_BUY        = 1;
 let OK_TX_TYPE_SIDE_SELL       = 2;
 let OK_TX_TYPE_SIDE_SEND       = 3;
 let OK_TX_TYPE_SIDE_RECEIVE    = 4;
+
+
+let STATION_NFT_DENOM           = "secom";
 

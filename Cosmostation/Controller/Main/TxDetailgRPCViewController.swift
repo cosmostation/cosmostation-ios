@@ -82,6 +82,10 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxSifRemoveLpCell", bundle: nil), forCellReuseIdentifier: "TxSifRemoveLpCell")
         self.txTableView.register(UINib(nibName: "TxSifSwapCell", bundle: nil), forCellReuseIdentifier: "TxSifSwapCell")
         
+        //for NFT msg type
+        self.txTableView.register(UINib(nibName: "TxIssueNFTCell", bundle: nil), forCellReuseIdentifier: "TxIssueNFTCell")
+        self.txTableView.register(UINib(nibName: "TxSendNFTCell", bundle: nil), forCellReuseIdentifier: "TxSendNFTCell")
+        
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
         
@@ -320,6 +324,18 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 return cell!
                 
             }
+            
+            else if (msg.typeURL.contains(Irismod_Nft_MsgMintNFT.protoMessageName) || msg.typeURL.contains(Chainmain_Nft_V1_MsgMintNFT.protoMessageName)) {
+               let cell = tableView.dequeueReusableCell(withIdentifier:"TxIssueNFTCell") as? TxCell
+               cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+               return cell!
+               
+           } else if (msg.typeURL.contains(Irismod_Nft_MsgTransferNFT.protoMessageName) || msg.typeURL.contains(Chainmain_Nft_V1_MsgTransferNFT.protoMessageName)) {
+               let cell = tableView.dequeueReusableCell(withIdentifier:"TxSendNFTCell") as? TxSendNFTCell
+               cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1, account!.account_address)
+               return cell!
+               
+           }
             
             else if (msg.typeURL.contains(Rizonworld_Rizon_Tokenswap_MsgCreateTokenswapRequest.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxRizonEventHorizonCell") as? TxCell

@@ -147,16 +147,24 @@ public struct ApiHistoryNewCustom {
             
             // iris msg type
             else if (msgType.contains("MsgMintNFT")) {
-                result = "NFT Mint"
+                result = NSLocalizedString("tx_nft_mint", comment: "")
                 
             } else if (msgType.contains("MsgTransferNFT")) {
-                result = "NFT Transfer"
+                if let senderAddr = getMsgs()![0].object(forKey: "sender") as? String, senderAddr == address {
+                    result = NSLocalizedString("tx_nft_send", comment: "")
+                } else if let receiverAddr = getMsgs()![0].object(forKey: "recipient") as? String, receiverAddr == address {
+                    result = NSLocalizedString("tx_nft_receive", comment: "")
+                } else {
+                    result = NSLocalizedString("tx_nft_transfer", comment: "")
+                }
+                return result
+                
                 
             } else if (msgType.contains("MsgEditNFT")) {
                 result = "NFT Edit"
                 
             } else if (msgType.contains("MsgIssueDenom")) {
-                result = "NFT Issue"
+                result = "Issue NFT Denom "
                 
             } else if (msgType.contains("MsgRequestRandom")) {
                 result = "Random Request"

@@ -262,6 +262,7 @@
 "select_keytype_lum_msg" = "Select [Air-Drop Path] to import the address that received the Lum airdrop. If you wish to import a general Lum address, select [Default Path].\nit will not affect your original Lum wallet. Simply press [Import Mnemonics] to re-select your path.";
 "lum_path_0" = "Default PATH (44'/880'/0'/0)";
 "lum_path_1" = "Air-Drop PATH (44'/118'/0'/0)";
+"permission_photo_title" = "Need Permission for Photo Library. Please enable with Settings";
 
 "current_price_format" = "Current %@ Price";
 "liquidation_price_format" = "Liquidation %@ Price";
@@ -481,6 +482,14 @@
 "str_sif_swap_step_3" = "Check transaction detail";
 "str_rizon_swap_step_0" = "Insert mnemonic for Hdac";
 "str_rizon_swap_step_1" = "Check transaction detail";
+"str_issue_nft_step_0" = "Insert NFT Information";
+"str_issue_nft_step_1" = "Insert memo (optional)";
+"str_issue_nft_step_2" = "Select transaction fee";
+"str_issue_nft_step_3" = "Check transaction detail";
+"str_send_nft_step_0" = "Insert Recipient Address";
+"str_send_nft_step_1" = "Insert memo (optional";
+"str_send_nft_step_2" = "Select transaction fee";
+"str_send_nft_step_3" = "Check transaction detail";
 
 "str_description_open_domain" = "Open type in which an account owner is the only entity that can perform actions on the account.";
 "str_description_closed_domain" = "Closed type in which the domain owner has control over accounts too.";
@@ -507,6 +516,8 @@ support@cosmostation.io";
 "str_enginer_is_on_msg" = "Engineer mode is currently on.\n\nThere is a very low probability that an account with incompatibility may be created, which may cause inconvenience to users.\n\nBefore use, be sure to consult with the Cosmo Station administrator team before use.";
 "str_rizon_swap_alert_msg" = "Swap Hdac chain assets to Rizon chain.\nDue to the nature of the swap, it is irreversible, and it may take some time until the actual swap is completed due to the asynchronous operation between the two chains.";
 "str_icon_updated" = "Icon updated.";
+"str_ipfs_connect_fail_title" = "Connection Error";
+"str_ipfs_connect_fail_msg" = "Unable to connect to IPFS. Please check the network connection status.";
 
 "clear_all" = "Clear All";
 "delete" = "Delete";
@@ -600,6 +611,9 @@ support@cosmostation.io";
 "title_sif_dex" = "SifChain Dex";
 "title_sif_incentive" = "Incentive Claim";
 "title_edit_chain" = "Edit Chains";
+"title_nft" = "NFT";
+"title_issue_nft" = "Issue NFT";
+"title_send_nft" = "Send NFT";
 
 
 "proposal_type_basic" = "Basic";
@@ -717,6 +731,10 @@ support@cosmostation.io";
 "error_reserve_1_account" = "Please reserve at least 1 account to displayed.";
 "error_hided_chain" = "Hidden Chain.";
 "error_rizon_swap_finished" = "Rizon Swap Disabled";
+"error_fail_upload_img" = "Image uploading failed";
+"error_no_nft_image" = "Add NFT Image";
+"error_no_nft_title" = "Add NFT Name";
+"error_no_nft_dexcription" = "Add NFT Description";
 
 
 
@@ -844,6 +862,11 @@ support@cosmostation.io";
 "tx_add_liquidity" = "Add Liquidity";
 "tx_remove_liquidity" = "Remove Liquidity";
 "tx_despensation_claim" = "Claim Incentive";
+
+"tx_nft_mint" = "Issue NFT";
+"tx_nft_send" = "NFT Send";
+"tx_nft_receive" = "NFT Recieve";
+"tx_nft_transfer" = "NFT Transfer";
 
 "tx_known" = "Unknown";
 

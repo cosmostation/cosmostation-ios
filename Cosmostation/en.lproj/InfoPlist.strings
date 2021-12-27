@@ -9,4 +9,5 @@
 "CFBundleDisplayName" = "Cosmostation";
 "NSCameraUsageDescription" = "The camera is used to scan QR-Code that expresses a blockchain address or URL of Wallet Connect.";
 "NSFaceIDUsageDescription" = "Face ID is using for unlock app";
+"NSPhotoLibraryUsageDescription" = "Access your photo for generating NFT.";
 

@@ -1,0 +1,90 @@
+//
+//  NFTListCell.swift
+//  Cosmostation
+//
+//  Created by yongjoo jung on 2021/12/19.
+//  Copyright © 2021 wannabit. All rights reserved.
+//
+
+import UIKit
+import GRPC
+import NIO
+import SwiftProtobuf
+
+class NFTListCell: UITableViewCell {
+
+    @IBOutlet weak var nftCardView: CardView!
+    @IBOutlet weak var nftImgView: UIImageView!
+    @IBOutlet weak var nftNameLabel: UILabel!
+    @IBOutlet weak var nftDescriptionLabel: UILabel!
+    
+    var irisResponse: Irismod_Nft_QueryNFTResponse?
+    var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        nftImgView.layer.borderWidth = 1
+        nftImgView.layer.masksToBounds = false
+        nftImgView.layer.borderColor = UIColor(hexString: "#7a7f88").cgColor
+        nftImgView.layer.cornerRadius = 8
+        nftImgView.clipsToBounds = true
+        self.selectionStyle = .none
+        
+//        nftNameLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+//        nftDescriptionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_12_caption1)
+    }
+    
+    override func prepareForReuse() {
+        nftImgView.image = UIImage(named: "iconNftNone")
+        nftNameLabel.text = ""
+        nftDescriptionLabel.text = ""
+    }
+    
+    func onBindNFT(_ chainType: ChainType?, _ nftCollectionId: NFTCollectionId) {
+        nftCardView.backgroundColor = WUtils.getChainBg(chainType)
+        if (chainType == ChainType.IRIS_MAIN) {
+            DispatchQueue.global().async {
+                do {
+                    let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let req = Irismod_Nft_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
+                    if let response = try? Irismod_Nft_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        DispatchQueue.main.async(execute: {
+                            self.irisResponse = response
+                            if let url = URL(string: response.nft.uri) {
+                                self.nftImgView.af_setImage(withURL: url)
+                            }
+                            
+                            self.nftNameLabel.text = response.nft.name
+                            self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)
+                        });
+                    }
+                    try channel.close().wait()
+                } catch {
+                    print("IRIS QueryNFTRequest failed: \(error)")
+                }
+            }
+            
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            DispatchQueue.global().async {
+                do {
+                    let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                    let req = Chainmain_Nft_V1_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
+                    if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        DispatchQueue.main.async(execute: {
+                            self.croResponse = response
+                            if let url = URL(string: response.nft.uri) {
+                                self.nftImgView.af_setImage(withURL: url)
+                            }
+                            self.nftNameLabel.text = response.nft.name
+                            self.nftDescriptionLabel.text = WUtils.getNftDescription(response.nft.data)
+                        });
+                    }
+                    try channel.close().wait()
+                } catch {
+                    print("CRYPTO QueryNFTRequest failed: \(error)")
+                }
+            }
+        }
+    }
+    
+}

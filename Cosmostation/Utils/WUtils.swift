@@ -2684,7 +2684,7 @@ public class WUtils {
         return COLOR_DARK_GRAY
     }
     
-    static func getChainDarkColor(_ chain:ChainType) -> UIColor {
+    static func getChainDarkColor(_ chain:ChainType?) -> UIColor {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.COSMOS_TEST ) {
             return COLOR_ATOM_DARK
         } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
@@ -3478,6 +3478,10 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_COSMOS_EXIT_POOL))
             } else if (type == TASK_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
+            } else if (type == TASK_ISSUE_NFT) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
+            } else if (type == TASK_SEND_NFT) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
             }
             
         } else if (chain == ChainType.OSMOSIS_MAIN ) {

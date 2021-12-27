@@ -32,12 +32,16 @@ class WalletCrytoCell: UITableViewCell {
     
     var actionDelegate: (() -> Void)? = nil
     var actionVote: (() -> Void)? = nil
+    var actionNFT: (() -> Void)? = nil
     
     @IBAction func onClickDelegate(_ sender: Any) {
         actionDelegate?()
     }
     @IBAction func onClickVote(_ sender: Any) {
         actionVote?()
+    }
+    @IBAction func onClickNFT(_ sender: UIButton) {
+        actionNFT?()
     }
     
     override func prepareForReuse() {

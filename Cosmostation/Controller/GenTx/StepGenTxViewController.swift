@@ -151,6 +151,13 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mIBCSendRelayer: IbcPath?
     var mIBCSendPath: Path?
     
+    var mNFTHash: String?
+    var mNFTName: String?
+    var mNFTDescription: String?
+    var mNFT: NFTCollectionId?
+    var irisResponse: Irismod_Nft_QueryNFTResponse?
+    var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
+    
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == COSMOS_MSG_TYPE_DELEGATE || mType == IRIS_MSG_TYPE_DELEGATE) {
             if (WUtils.isGRPC(chainType!)) {
@@ -483,6 +490,18 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     self.newVc(viewController: "StepMemoViewController"),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     SifSwap3ViewController(nibName: "SifSwap3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_ISSUE_NFT) {
+            return [GenNFT0ViewController(nibName: "GenNFT0ViewController", bundle: nil),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    GenNFT3ViewController(nibName: "GenNFT3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_SEND_NFT) {
+            return [SendNFT0ViewController(nibName: "SendNFT0ViewController", bundle: nil),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    SendNFT3ViewController(nibName: "SendNFT3ViewController", bundle: nil)]
             
         }
         

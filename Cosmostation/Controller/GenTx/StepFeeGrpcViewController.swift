@@ -464,6 +464,59 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                       BaseData.instance.getChainId(self.chainType))
         }
         
+        //for NFT
+        else if (pageHolderVC.mType == TASK_ISSUE_NFT) {
+            let stationData = StationNFTData.init(self.pageHolderVC.mNFTName!, self.pageHolderVC.mNFTDescription!, NFT_INFURA + self.pageHolderVC.mNFTHash!,
+                                                  STATION_NFT_DENOM, self.account!.account_address)
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try! jsonEncoder.encode(stationData)
+            
+            if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
+                return Signer.genSimulateIssueNftIrisTxgRPC(auth, self.account!.account_address, self.account!.account_address,
+                                                            self.pageHolderVC.mNFTHash!.lowercased(),
+                                                            STATION_NFT_DENOM,
+                                                            self.pageHolderVC.mNFTName!,
+                                                            NFT_INFURA + self.pageHolderVC.mNFTHash!,
+                                                            String(data: jsonData, encoding: .utf8)!,
+                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                            BaseData.instance.getChainId(self.chainType))
+                
+            } else if (self.chainType == ChainType.CRYPTO_MAIN) {
+                return Signer.genSimulateIssueNftCroTxgRPC(auth, self.account!.account_address, self.account!.account_address,
+                                                           self.pageHolderVC.mNFTHash!.lowercased(),
+                                                           STATION_NFT_DENOM,
+                                                           self.pageHolderVC.mNFTName!,
+                                                           NFT_INFURA + self.pageHolderVC.mNFTHash!,
+                                                           String(data: jsonData, encoding: .utf8)!,
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                           BaseData.instance.getChainId(self.chainType))
+            }
+            
+        } else if (pageHolderVC.mType == TASK_SEND_NFT) {
+            if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
+                return Signer.genSimulateSendNftIrisTxgRPC(auth, self.account!.account_address,
+                                                           self.pageHolderVC.mToSendRecipientAddress!,
+                                                           self.pageHolderVC.mNFT!.token_ids!,
+                                                           self.pageHolderVC.mNFT!.denom_id!,
+                                                           self.pageHolderVC.irisResponse!,
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                           BaseData.instance.getChainId(self.chainType))
+                
+            } else if (self.chainType == ChainType.CRYPTO_MAIN) {
+                return Signer.genSimulateSendNftCroTxgRPC(auth, self.account!.account_address,
+                                                          self.pageHolderVC.mToSendRecipientAddress!,
+                                                          self.pageHolderVC.mNFT!.token_ids!,
+                                                          self.pageHolderVC.mNFT!.denom_id!,
+                                                          self.pageHolderVC.croResponse!,
+                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                          BaseData.instance.getChainId(self.chainType))
+            }
+        }
+        
         return nil
     }
 }

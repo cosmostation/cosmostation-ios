@@ -253,6 +253,7 @@
 "select_keytype_lum_msg" = "Lum 에어드랍을 받은 주소를 사용하시려면 [Air-Drop Path]를, Lum 기본 주소를 사용하시려면 [Default Path]를 선택하세요.\n\nPath를 잘못 선택한 경우에도 기존 Lum 지갑에는 문제가 없으며, [Mnemonic 복원하기]를 통해 Path를 다시 지정하면 됩니다.";
 "lum_path_0" = "Default PATH (44'/880'/0'/0)";
 "lum_path_1" = "Air-Drop PATH (44'/118'/0'/0)";
+"permission_photo_title" = "사진 접근 권한이 없습니다. 설정에서 권한을 활성화시켜 주세요.";
 
 
 "tx_next" = "다음";
@@ -483,6 +484,14 @@
 "str_sif_swap_step_3" = "입력하신 정보를 확인하세요";
 "str_rizon_swap_step_0" = "Hdac의 니모닉을 입력하세요";
 "str_rizon_swap_step_1" = "입력하신 정보를 확인하세요";
+"str_issue_nft_step_0" = "NFT 정보를 입력하세요";
+"str_issue_nft_step_1" = "메모를 입력하세요 (선택사항)";
+"str_issue_nft_step_2" = "Tx 수수료를 선택하세요";
+"str_issue_nft_step_3" = "입력하신 정보를 확인하세요";
+"str_send_nft_step_0" = "받는 주소를 입력하세요";
+"str_send_nft_step_1" = "메모를 입력하세요 (선택사항)";
+"str_send_nft_step_2" = "Tx 수수료를 선택하세요";
+"str_send_nft_step_3" = "입력하신 정보를 확인하세요";
 
 "str_description_open_domain" = "Open 타입은 계정 소유자가 계정에 대한 작업을 수행 할 수있는 유일한 엔티티인 도메인 유형입니다.";
 "str_description_closed_domain" = "Closed 타입은 도메인 소유자가 계정을 제어 할 수있는 도메인 유형입니다.";
@@ -509,6 +518,8 @@ support@cosmostation.io";
 "str_enginer_is_on_msg" = "현재 엔지니어 모드가 켜진 상태 입니다.\n\n극히 낮은 확율로 호환성이 떨어지는 계정이 생성될 수 있으며, 사용자의 불편을 초래할 수 있습니다.\n\n사용하시기전에 반드시 코스모스테이션 관리자 팀과 상의후 이용하세요.";
 "str_rizon_swap_alert_msg" = "에이치닥 체인의 자산을 라이즌 체인으로 스왑을 진행합니다.\n스왑 특성상 되돌릴 수 없으며, 두 체인간의 비동기적 작동으로 인해 실제 스왑 완료시까지 시간이 걸릴 수 있습니다.";
 "str_icon_updated" = "아이콘 업데이트 완료.";
+"str_ipfs_connect_fail_title" = "연결 상태 확인";
+"str_ipfs_connect_fail_msg" = "IPFS에 접속할 수 없습니다. 네트워크 연결 상태를 확인해주세요.";
 
 "clear_all" = "전체 삭제";
 "delete" = "삭제";
@@ -601,6 +612,9 @@ support@cosmostation.io";
 "title_ibc_transfer" = "IBC 전송";
 "title_sif_dex" = "시프 Dex";
 "title_edit_chain" = "체인 관리";
+"title_nft" = "NFT";
+"title_issue_nft" = "NFT 발행";
+"title_send_nft" = "NFT 전송";
 
 
 "proposal_type_basic" = "기본";
@@ -714,6 +728,10 @@ support@cosmostation.io";
 "error_hided_chain" = "비표시 체인 입니다.";
 "error_invalid_private_Key" = "유효하지않는 개인키 입니다.";
 "error_rizon_swap_finished" = "스왑 유효기간이 지났습니다.";
+"error_fail_upload_img" = "이미지 업로드를 실패하였습니다.";
+"error_no_nft_image" = "NFT 이미지를 추가해주세요";
+"error_no_nft_title" = "NFT 이름을 입력하세요";
+"error_no_nft_dexcription" = "NFT 설명을 입력하세요";
 
 
 
@@ -844,6 +862,11 @@ support@cosmostation.io";
 "tx_add_liquidity" = "풀 참가";
 "tx_remove_liquidity" = "풀 나가기";
 "tx_despensation_claim" = "인센티브 받기";
+
+"tx_nft_mint" = "NFT 발행";
+"tx_nft_send" = "NFT 보내기";
+"tx_nft_receive" = "NFT 받기";
+"tx_nft_transfer" = "NFT 전송";
 
 "tx_known" = "알 수 없음";
 

@@ -19,4 +19,6 @@ target 'Cosmostation' do
     pod 'NotificationBannerSwift', '2.0.1'
     pod 'gRPC-Swift', '~> 1.0.0'
     pod 'gRPC-Swift-Plugins'
+    pod 'HPParallaxHeader'
+    pod 'IpfsApi'
 end
