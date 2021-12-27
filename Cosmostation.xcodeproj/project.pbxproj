@@ -907,6 +907,10 @@
 		046BD2242778B38C002333B5 /* SendNFT0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD2222778B38C002333B5 /* SendNFT0ViewController.xib */; };
 		046BD2272778B398002333B5 /* SendNFT3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD2252778B398002333B5 /* SendNFT3ViewController.swift */; };
 		046BD2282778B398002333B5 /* SendNFT3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD2262778B398002333B5 /* SendNFT3ViewController.xib */; };
+		046BD22C27795CC6002333B5 /* TxIssueNFTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD22A27795CC6002333B5 /* TxIssueNFTCell.swift */; };
+		046BD22D27795CC6002333B5 /* TxIssueNFTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD22B27795CC6002333B5 /* TxIssueNFTCell.xib */; };
+		046BD23027795CD4002333B5 /* TxSendNFTCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BD22E27795CD4002333B5 /* TxSendNFTCell.swift */; };
+		046BD23127795CD4002333B5 /* TxSendNFTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046BD22F27795CD4002333B5 /* TxSendNFTCell.xib */; };
 		046E9037268C3F29002CFFE1 /* BinanceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9036268C3F29002CFFE1 /* BinanceMessage.swift */; };
 		046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9038268C3F95002CFFE1 /* BinanceModel.swift */; };
 		046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E903A268C401E002CFFE1 /* BinanceType.swift */; };
@@ -2635,6 +2639,10 @@
 		046BD2222778B38C002333B5 /* SendNFT0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendNFT0ViewController.xib; sourceTree = "<group>"; };
 		046BD2252778B398002333B5 /* SendNFT3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNFT3ViewController.swift; sourceTree = "<group>"; };
 		046BD2262778B398002333B5 /* SendNFT3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendNFT3ViewController.xib; sourceTree = "<group>"; };
+		046BD22A27795CC6002333B5 /* TxIssueNFTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIssueNFTCell.swift; sourceTree = "<group>"; };
+		046BD22B27795CC6002333B5 /* TxIssueNFTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxIssueNFTCell.xib; sourceTree = "<group>"; };
+		046BD22E27795CD4002333B5 /* TxSendNFTCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxSendNFTCell.swift; sourceTree = "<group>"; };
+		046BD22F27795CD4002333B5 /* TxSendNFTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxSendNFTCell.xib; sourceTree = "<group>"; };
 		046E9036268C3F29002CFFE1 /* BinanceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceMessage.swift; sourceTree = "<group>"; };
 		046E9038268C3F95002CFFE1 /* BinanceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceModel.swift; sourceTree = "<group>"; };
 		046E903A268C401E002CFFE1 /* BinanceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceType.swift; sourceTree = "<group>"; };
@@ -3526,6 +3534,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		046BD22927795C9B002333B5 /* nft */ = {
+			isa = PBXGroup;
+			children = (
+				046BD22A27795CC6002333B5 /* TxIssueNFTCell.swift */,
+				046BD22B27795CC6002333B5 /* TxIssueNFTCell.xib */,
+				046BD22E27795CD4002333B5 /* TxSendNFTCell.swift */,
+				046BD22F27795CD4002333B5 /* TxSendNFTCell.xib */,
+			);
+			path = nft;
+			sourceTree = "<group>";
+		};
 		04CFBD4A269226CE0013150B /* ibc */ = {
 			isa = PBXGroup;
 			children = (
@@ -4796,6 +4815,7 @@
 		284D17F32535D69000C364F9 /* txs */ = {
 			isa = PBXGroup;
 			children = (
+				046BD22927795C9B002333B5 /* nft */,
 				288F806B270DDE95009825B5 /* sif */,
 				284FBC7626DBCBC900403FE2 /* starname */,
 				284FBC7526DBCBA400403FE2 /* kava */,
@@ -6047,6 +6067,7 @@
 				282BDFEB24A5BCE000D3A5D4 /* WcTransferPopup.xib in Resources */,
 				28B785B726B7B084009F755F /* SwapStatusCell.xib in Resources */,
 				28A2A4BF271FF9030042ACC4 /* WalletRegenCell.xib in Resources */,
+				046BD23127795CD4002333B5 /* TxSendNFTCell.xib in Resources */,
 				280E1F03254A9B6B0007BA7D /* RenewStarname0ViewController.xib in Resources */,
 				28B2E4D026CFEF8C00ECF960 /* BridgeTokenGrpcViewController.xib in Resources */,
 				E1FD233D233E1C44009327FE /* WalletGuideCell.xib in Resources */,
@@ -6091,6 +6112,7 @@
 				28E8FAEC2716F190005EAA9B /* SelectTextCell.xib in Resources */,
 				28474ED6241E06AF00AF5A81 /* TxCdpDepositCell.xib in Resources */,
 				28B2E4C026CFC66100ECF960 /* IBCTokenGrpcViewController.xib in Resources */,
+				046BD22D27795CC6002333B5 /* TxIssueNFTCell.xib in Resources */,
 				287654742726BFE80071FF96 /* EditHideChainCell.xib in Resources */,
 				288F8077270DDEE8009825B5 /* TxSifSwapCell.xib in Resources */,
 				2868559024989A8F0099D18F /* Bep3SupplyPopup.xib in Resources */,
@@ -6252,6 +6274,7 @@
 				040FA86A275F55C200229F6F /* desmos_posts_v1beta1_report.pb.swift in Sources */,
 				040FA982275F55C300229F6F /* em_inflation_v1_inflation.pb.swift in Sources */,
 				E1945E42222E7FC800A1436F /* MainTabViewController.swift in Sources */,
+				046BD23027795CD4002333B5 /* TxSendNFTCell.swift in Sources */,
 				040FAA58275F55C400229F6F /* rizon_treasury_tx.grpc.swift in Sources */,
 				28B785BB26B808CE009F755F /* StepEventHorizon0ViewController.swift in Sources */,
 				049DAA0127311DEB00658CFB /* WalletGBridgeCell.swift in Sources */,
@@ -6427,6 +6450,7 @@
 				040FA8C3275F55C200229F6F /* juno_mint_genesis.pb.swift in Sources */,
 				04CFBD5D269301780013150B /* TxBeginUnlockTokenCell.swift in Sources */,
 				040FA81E275F55C200229F6F /* persistence_halving_v1beta1_genesis.pb.swift in Sources */,
+				046BD22C27795CC6002333B5 /* TxIssueNFTCell.swift in Sources */,
 				040FAAC3275F55C400229F6F /* persistence_halving_v1beta1_halving.pb.swift in Sources */,
 				040FA7D1275F55C200229F6F /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
 				040FAA9F275F55C400229F6F /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */,

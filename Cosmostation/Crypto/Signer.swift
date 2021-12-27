@@ -1676,14 +1676,14 @@ class Signer {
     static func genSignedSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                           _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let issueNft = Chainmain_Nft_V1_MsgMintNFT.with {
+        let issueNft = Chainmain_Nft_V1_MsgTransferNFT.with {
             $0.sender = signer
             $0.recipient = signer
             $0.id = id
             $0.denomID = denom_id
-            $0.name = croResponse.nft.name
-            $0.uri = croResponse.nft.uri
-            $0.data = croResponse.nft.data
+//            $0.name = croResponse.nft.name
+//            $0.uri = croResponse.nft.uri
+//            $0.data = croResponse.nft.data
         }
         let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/chainmain.nft.v1.MsgTransferNFT"
@@ -1702,14 +1702,14 @@ class Signer {
     static func genSimulateSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                             _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let issueNft = Chainmain_Nft_V1_MsgMintNFT.with {
+        let issueNft = Chainmain_Nft_V1_MsgTransferNFT.with {
             $0.sender = signer
             $0.recipient = signer
             $0.id = id
             $0.denomID = denom_id
-            $0.name = croResponse.nft.name
-            $0.uri = croResponse.nft.uri
-            $0.data = croResponse.nft.data
+//            $0.name = croResponse.nft.name
+//            $0.uri = croResponse.nft.uri
+//            $0.data = croResponse.nft.data
         }
         let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/chainmain.nft.v1.MsgTransferNFT"
