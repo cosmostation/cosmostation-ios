@@ -1365,10 +1365,10 @@ let OK_TX_TYPE_SIDE_SELL       = 2;
 let OK_TX_TYPE_SIDE_SEND       = 3;
 let OK_TX_TYPE_SIDE_RECEIVE    = 4;
 
+//NFT Denom Default config
+let STATION_NFT_DENOM           = "station";
 
-let STATION_NFT_DENOM           = "secom";
-
-
-let ICON_DEFAULT            = "ICON_DEFAULT";
-let ICON_SANTA              = "ICON_SANTA";
-let ICON_2002               = "ICON_2002";
+//Custom Icon config
+let ICON_DEFAULT                = "ICON_DEFAULT";
+let ICON_SANTA                  = "ICON_SANTA";
+let ICON_2002                   = "ICON_2002";
