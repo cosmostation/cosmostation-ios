@@ -154,7 +154,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mNFTHash: String?
     var mNFTName: String?
     var mNFTDescription: String?
-    var mNFT: NFTCollectionId?
+    var mNFTDenomId: String?
+    var mNFTTokenId: String?
     var irisResponse: Irismod_Nft_QueryNFTResponse?
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     

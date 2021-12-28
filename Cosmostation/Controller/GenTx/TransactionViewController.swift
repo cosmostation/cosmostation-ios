@@ -58,7 +58,9 @@ class TransactionViewController: UIViewController {
     
     var mIBCSendDenom: String?
     
-    var mNFT: NFTCollectionId?
+    
+    var mNFTDenomId: String?
+    var mNFTTokenId: String?
     var irisResponse: Irismod_Nft_QueryNFTResponse?
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     
@@ -378,7 +380,8 @@ class TransactionViewController: UIViewController {
             
             StepVc.mSifPool = self.mSifPool
             
-            StepVc.mNFT = self.mNFT
+            StepVc.mNFTDenomId = self.mNFTDenomId
+            StepVc.mNFTTokenId = self.mNFTTokenId
             StepVc.irisResponse = self.irisResponse
             StepVc.croResponse = self.croResponse
         }

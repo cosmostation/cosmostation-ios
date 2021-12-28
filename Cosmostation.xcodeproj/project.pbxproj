@@ -919,6 +919,9 @@
 		046E9041268C4863002CFFE1 /* BinanceInt+VarInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9040268C4863002CFFE1 /* BinanceInt+VarInt.swift */; };
 		046E9043268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */; };
 		046E9049268C7C2B002CFFE1 /* BinanceHexEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */; };
+		046FF00F2779A16500F72C11 /* MyDenomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF00E2779A16500F72C11 /* MyDenomsViewController.swift */; };
+		046FF012277AD0E100F72C11 /* DenomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF010277AD0E100F72C11 /* DenomListCell.swift */; };
+		046FF013277AD0E100F72C11 /* DenomListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF011277AD0E100F72C11 /* DenomListCell.xib */; };
 		047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		047AE7242693378A00C1DD51 /* TxUnlockPeriodLockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */; };
 		047AE7252693378A00C1DD51 /* TxUnlockPeriodLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */; };
@@ -958,7 +961,6 @@
 		04E25D31276F23D9009B39BA /* new2022@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2D276F23D9009B39BA /* new2022@2x.png */; };
 		04E25D34276F6B38009B39BA /* Nft.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D33276F6B38009B39BA /* Nft.storyboard */; };
 		04E25D36276F6C5D009B39BA /* MyNTFsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D35276F6C5D009B39BA /* MyNTFsViewController.swift */; };
-		04E25D38276F6C6C009B39BA /* TopNTFsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D37276F6C6C009B39BA /* TopNTFsViewController.swift */; };
 		04E25D3A276F6CB5009B39BA /* NFTsDAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D39276F6CB5009B39BA /* NFTsDAppViewController.swift */; };
 		04E25D3D276F7574009B39BA /* NFTListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E25D3B276F7574009B39BA /* NFTListCell.swift */; };
 		04E25D3E276F7574009B39BA /* NFTListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D3C276F7574009B39BA /* NFTListCell.xib */; };
@@ -2651,6 +2653,9 @@
 		046E9040268C4863002CFFE1 /* BinanceInt+VarInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BinanceInt+VarInt.swift"; sourceTree = "<group>"; };
 		046E9042268C4995002CFFE1 /* BinanceSegwitAddrCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceSegwitAddrCoder.swift; sourceTree = "<group>"; };
 		046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceHexEncoding.swift; sourceTree = "<group>"; };
+		046FF00E2779A16500F72C11 /* MyDenomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDenomsViewController.swift; sourceTree = "<group>"; };
+		046FF010277AD0E100F72C11 /* DenomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DenomListCell.swift; sourceTree = "<group>"; };
+		046FF011277AD0E100F72C11 /* DenomListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DenomListCell.xib; sourceTree = "<group>"; };
 		0479664F2757409700315D55 /* MintscanProposalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposalDetail.swift; sourceTree = "<group>"; };
 		047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxUnlockPeriodLockCell.swift; sourceTree = "<group>"; };
 		047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxUnlockPeriodLockCell.xib; sourceTree = "<group>"; };
@@ -2691,7 +2696,6 @@
 		04E25D2D276F23D9009B39BA /* new2022@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@2x.png"; sourceTree = "<group>"; };
 		04E25D33276F6B38009B39BA /* Nft.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Nft.storyboard; sourceTree = "<group>"; };
 		04E25D35276F6C5D009B39BA /* MyNTFsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNTFsViewController.swift; sourceTree = "<group>"; };
-		04E25D37276F6C6C009B39BA /* TopNTFsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNTFsViewController.swift; sourceTree = "<group>"; };
 		04E25D39276F6CB5009B39BA /* NFTsDAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTsDAppViewController.swift; sourceTree = "<group>"; };
 		04E25D3B276F7574009B39BA /* NFTListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTListCell.swift; sourceTree = "<group>"; };
 		04E25D3C276F7574009B39BA /* NFTListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NFTListCell.xib; sourceTree = "<group>"; };
@@ -3601,8 +3605,8 @@
 			children = (
 				04E25D33276F6B38009B39BA /* Nft.storyboard */,
 				04E25D39276F6CB5009B39BA /* NFTsDAppViewController.swift */,
+				046FF00E2779A16500F72C11 /* MyDenomsViewController.swift */,
 				04E25D35276F6C5D009B39BA /* MyNTFsViewController.swift */,
-				04E25D37276F6C6C009B39BA /* TopNTFsViewController.swift */,
 				04E25D3F2770C8BE009B39BA /* NTFDetailViewController.swift */,
 				04E25D402770C8BE009B39BA /* NTFDetailViewController.xib */,
 			);
@@ -3612,6 +3616,8 @@
 		04E25D432770D53F009B39BA /* nft */ = {
 			isa = PBXGroup;
 			children = (
+				046FF010277AD0E100F72C11 /* DenomListCell.swift */,
+				046FF011277AD0E100F72C11 /* DenomListCell.xib */,
 				04E25D3B276F7574009B39BA /* NFTListCell.swift */,
 				04E25D3C276F7574009B39BA /* NFTListCell.xib */,
 				04E25D442770D56C009B39BA /* NFTDetailInfoCell.swift */,
@@ -5866,6 +5872,7 @@
 				28EEEC9D26DABA74002DDC4A /* KavaSwap0ViewController.xib in Resources */,
 				282FF34E23F50E010028CC66 /* TxRedelegateCell.xib in Resources */,
 				28474ED1241E06AF00AF5A81 /* TxPostPriceCell.xib in Resources */,
+				046FF013277AD0E100F72C11 /* DenomListCell.xib in Resources */,
 				2876AD5C240CE4A6005B33F4 /* TokenDetailUnbondingDetailCell.xib in Resources */,
 				2845AE50271C7116005AA537 /* SifIncentive0ViewController.xib in Resources */,
 				28E746B825AD76ED004B2C64 /* OkPromotionCell.xib in Resources */,
@@ -6329,6 +6336,7 @@
 				28CFB6A726133C9700A18634 /* StakingTokenDetailViewController.swift in Sources */,
 				040FAA31275F55C400229F6F /* akash_deployment_v1beta2_query.pb.swift in Sources */,
 				040FA900275F55C300229F6F /* cosmos_distribution_v1beta1_query.grpc.swift in Sources */,
+				046FF012277AD0E100F72C11 /* DenomListCell.swift in Sources */,
 				040FAA2A275F55C400229F6F /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				040FA802275F55C200229F6F /* cosmos_bank_v1beta1_query.grpc.swift in Sources */,
 				040FA8C4275F55C200229F6F /* iris_guardian_query.pb.swift in Sources */,
@@ -6460,6 +6468,7 @@
 				28E667072699483E00BA2C68 /* OsmosisDAppViewController.swift in Sources */,
 				E1A82DE32244821D0097CAEE /* PublicKey.swift in Sources */,
 				040FAA05275F55C300229F6F /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */,
+				046FF00F2779A16500F72C11 /* MyDenomsViewController.swift in Sources */,
 				040FA893275F55C200229F6F /* lum_airdrop_params.pb.swift in Sources */,
 				040FA837275F55C200229F6F /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				28D28ADD26CB6C2B0074964C /* StartUnlock3ViewController.swift in Sources */,
@@ -7587,7 +7596,6 @@
 				040FA890275F55C200229F6F /* cosmos_authz_v1beta1_genesis.pb.swift in Sources */,
 				E171A06D225B08A000C5756C /* StepDelegateAmountViewController.swift in Sources */,
 				040FA97B275F55C300229F6F /* ixo_did_diddoc.pb.swift in Sources */,
-				04E25D38276F6C6C009B39BA /* TopNTFsViewController.swift in Sources */,
 				28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */,
 				040FA95A275F55C300229F6F /* comdex_oracle_v1beta1_msg.grpc.swift in Sources */,
 				040FA8C1275F55C200229F6F /* stargaze_alloc_v1beta1_query.pb.swift in Sources */,

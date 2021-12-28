@@ -16,7 +16,8 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     @IBOutlet var nftHeaderView: UIView!
     @IBOutlet weak var nftImageView: UIImageView!
     
-    var mNFT: NFTCollectionId?
+    var denomId: String?
+    var tokenId: String?
     var irisResponse: Irismod_Nft_QueryNFTResponse?
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     
@@ -80,7 +81,7 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"NFTDetailInfoCell") as? NFTDetailInfoCell
-            cell?.onBindNFT(self.chainType, irisResponse, croResponse, mNFT)
+            cell?.onBindNFT(self.chainType, irisResponse, croResponse, denomId, tokenId)
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"NFTDetailRawCell") as? NFTDetailRawCell
@@ -112,7 +113,8 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = TASK_SEND_NFT
-        txVC.mNFT = mNFT
+        txVC.mNFTDenomId = denomId
+        txVC.mNFTTokenId = tokenId
         txVC.irisResponse = irisResponse
         txVC.croResponse = croResponse
         txVC.hidesBottomBarWhenPushed = true

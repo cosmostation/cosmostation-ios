@@ -498,8 +498,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
             if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
                 return Signer.genSimulateSendNftIrisTxgRPC(auth, self.account!.account_address,
                                                            self.pageHolderVC.mToSendRecipientAddress!,
-                                                           self.pageHolderVC.mNFT!.token_ids!,
-                                                           self.pageHolderVC.mNFT!.denom_id!,
+                                                           self.pageHolderVC.mNFTTokenId!,
+                                                           self.pageHolderVC.mNFTDenomId!,
                                                            self.pageHolderVC.irisResponse!,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
@@ -508,8 +508,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
             } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                 return Signer.genSimulateSendNftCroTxgRPC(auth, self.account!.account_address,
                                                           self.pageHolderVC.mToSendRecipientAddress!,
-                                                          self.pageHolderVC.mNFT!.token_ids!,
-                                                          self.pageHolderVC.mNFT!.denom_id!,
+                                                          self.pageHolderVC.mNFTTokenId!,
+                                                          self.pageHolderVC.mNFTDenomId!,
                                                           self.pageHolderVC.croResponse!,
                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,

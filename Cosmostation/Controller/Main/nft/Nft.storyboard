@@ -21,10 +21,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rOn-iu-WZA">
-                                <rect key="frame" x="129.5" y="52" width="155" height="32"/>
+                                <rect key="frame" x="114.5" y="52" width="185" height="32"/>
                                 <segments>
+                                    <segment title="My Denoms"/>
                                     <segment title="My NFTs"/>
-                                    <segment title="Top NTFs"/>
                                 </segments>
                                 <color key="tintColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
@@ -65,8 +65,8 @@
                     </view>
                     <connections>
                         <outlet property="dAppsSegment" destination="rOn-iu-WZA" id="jII-C4-kAD"/>
+                        <outlet property="myDenomsView" destination="Ptb-lY-1aG" id="ZZG-fq-uLH"/>
                         <outlet property="myNFTsView" destination="Eoq-su-ZkE" id="guR-UP-6R9"/>
-                        <outlet property="topNFTsView" destination="Ptb-lY-1aG" id="idy-AB-bMZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -170,22 +170,107 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QO3-oV-mdd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-707.24637681159425" y="843.41517857142856"/>
+            <point key="canvasLocation" x="701" y="912"/>
         </scene>
-        <!--TopNT Fs View Controller-->
+        <!--My Denoms View Controller-->
         <scene sceneID="lwe-C6-3G0">
             <objects>
-                <viewController storyboardIdentifier="TopNTFsViewController" id="TYY-xI-MsT" customClass="TopNTFsViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyDenomsViewController" id="TYY-xI-MsT" customClass="MyDenomsViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YEC-14-VeX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6y-a4-r0t">
+                                <rect key="frame" x="16" y="739" width="382" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="b6Z-Di-oge"/>
+                                </constraints>
+                                <state key="normal" title="  Issue Denom for NFT" image="btnIconNft">
+                                    <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onClickCreateDenom:" destination="TYY-xI-MsT" eventType="touchUpInside" id="BFa-SE-Hap"/>
+                                    <action selector="onClickCreateNFT:" destination="ZSS-ZJ-aCy" eventType="touchUpInside" id="q5Z-Lk-YAu"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Q7-ot-LhQ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="683"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="Y5K-Kl-E48" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
+                                <rect key="frame" x="177" y="312.5" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Xza-l2-9fs"/>
+                                    <constraint firstAttribute="height" constant="60" id="YR8-dK-crq"/>
+                                </constraints>
+                            </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zP9-vD-9vs">
+                                <rect key="frame" x="114.5" y="289.5" width="185" height="106"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="historyNoneImg" translatesAutoresizingMaskIntoConstraints="NO" id="ZDI-3E-2sK">
+                                        <rect key="frame" x="67.5" y="8" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="jBk-dW-KGc"/>
+                                            <constraint firstAttribute="height" constant="50" id="seq-oT-fWl"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No NFT Denom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncs-Gd-ywZ">
+                                        <rect key="frame" x="49.5" y="66" width="86.5" height="14"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="14" id="iqu-vF-pNJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="ZDI-3E-2sK" firstAttribute="top" secondItem="zP9-vD-9vs" secondAttribute="top" constant="8" id="SJw-gZ-G3Y"/>
+                                    <constraint firstItem="ZDI-3E-2sK" firstAttribute="centerX" secondItem="zP9-vD-9vs" secondAttribute="centerX" id="amU-8T-MvA"/>
+                                    <constraint firstAttribute="height" constant="106" id="gkx-0J-tjk"/>
+                                    <constraint firstAttribute="width" constant="185" id="m1w-vd-RsX"/>
+                                    <constraint firstItem="ncs-Gd-ywZ" firstAttribute="centerX" secondItem="zP9-vD-9vs" secondAttribute="centerX" id="rpT-ls-3ZM"/>
+                                    <constraint firstItem="ncs-Gd-ywZ" firstAttribute="top" secondItem="ZDI-3E-2sK" secondAttribute="bottom" constant="8" id="sM8-oF-jzS"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="cjR-CR-qmw"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Y5K-Kl-E48" firstAttribute="centerY" secondItem="YEC-14-VeX" secondAttribute="centerY" constant="-60" id="7Jv-UW-bFB"/>
+                            <constraint firstItem="cjR-CR-qmw" firstAttribute="top" secondItem="3Q7-ot-LhQ" secondAttribute="top" id="7kZ-vg-jUU"/>
+                            <constraint firstItem="cjR-CR-qmw" firstAttribute="trailing" secondItem="C6y-a4-r0t" secondAttribute="trailing" constant="16" id="BnN-7y-i0i"/>
+                            <constraint firstItem="zP9-vD-9vs" firstAttribute="centerY" secondItem="Y5K-Kl-E48" secondAttribute="centerY" id="GWc-b6-ZNl"/>
+                            <constraint firstItem="zP9-vD-9vs" firstAttribute="centerX" secondItem="cjR-CR-qmw" secondAttribute="centerX" id="dLs-Qg-ACw"/>
+                            <constraint firstItem="3Q7-ot-LhQ" firstAttribute="leading" secondItem="cjR-CR-qmw" secondAttribute="leading" id="fWZ-Un-EKy"/>
+                            <constraint firstItem="cjR-CR-qmw" firstAttribute="bottom" secondItem="C6y-a4-r0t" secondAttribute="bottom" constant="16" id="iG0-aU-ffy"/>
+                            <constraint firstItem="cjR-CR-qmw" firstAttribute="leading" secondItem="C6y-a4-r0t" secondAttribute="leading" constant="-16" id="nGo-B5-ws0"/>
+                            <constraint firstItem="C6y-a4-r0t" firstAttribute="top" secondItem="3Q7-ot-LhQ" secondAttribute="bottom" constant="12" id="pH9-Yg-jyr"/>
+                            <constraint firstItem="Y5K-Kl-E48" firstAttribute="centerX" secondItem="cjR-CR-qmw" secondAttribute="centerX" id="ryi-Tl-FMZ"/>
+                            <constraint firstItem="3Q7-ot-LhQ" firstAttribute="trailing" secondItem="cjR-CR-qmw" secondAttribute="trailing" id="xlB-uT-wPM"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emptyView" destination="zP9-vD-9vs" id="mhQ-e2-Qq3"/>
+                        <outlet property="loadingImg" destination="Y5K-Kl-E48" id="jd5-PN-qZY"/>
+                        <outlet property="myDenomTableView" destination="3Q7-ot-LhQ" id="bYZ-Fq-ZD9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V40-Tn-crh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="837"/>
+            <point key="canvasLocation" x="28" y="912"/>
         </scene>
     </scenes>
     <resources>

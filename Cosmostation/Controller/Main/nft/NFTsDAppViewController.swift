@@ -7,17 +7,25 @@
 //
 
 import UIKit
+import GRPC
+import NIO
+import SwiftProtobuf
 
 class NFTsDAppViewController: BaseViewController {
     
     @IBOutlet weak var dAppsSegment: UISegmentedControl!
+    @IBOutlet weak var myDenomsView: UIView!
     @IBOutlet weak var myNFTsView: UIView!
-    @IBOutlet weak var topNFTsView: UIView!
+    
+    var mMyIrisCollections = Array<Irismod_Nft_IDCollection>()
+    var mMyCroCollections = Array<Chainmain_Nft_V1_IDCollection>()
+    var mPageTotalCnt: UInt64 = 0;
+    var mPageKey: Data?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        myNFTsView.alpha = 1
-        topNFTsView.alpha = 0
+        myDenomsView.alpha = 1
+        myNFTsView.alpha = 0
         
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
@@ -33,11 +41,11 @@ class NFTsDAppViewController: BaseViewController {
     
     @IBAction func switchView(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            myNFTsView.alpha = 1
-            topNFTsView.alpha = 0
-        } else if sender.selectedSegmentIndex == 1 {
+            myDenomsView.alpha = 1
             myNFTsView.alpha = 0
-            topNFTsView.alpha = 1
+        } else if sender.selectedSegmentIndex == 1 {
+            myDenomsView.alpha = 0
+            myNFTsView.alpha = 1
         }
     }
     
@@ -49,18 +57,109 @@ class NFTsDAppViewController: BaseViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
-}
-
-struct NFTCollectionId {
-    var denom_id: String?
-    var token_ids:String?
     
-    init(_ denom_id: String?, _ token_ids: String?) {
-        self.denom_id = denom_id
-        self.token_ids = token_ids
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //TODO FIX
+        self.onFetchNFTData()
     }
-}
+    
+    func onFetchFinished() {
+        print("onFetchFinished mMyIrisCollections ", self.mMyIrisCollections.count)
+        print("onFetchFinished mMyCroCollections ", self.mMyCroCollections.count)
+        NotificationCenter.default.post(name: Notification.Name("NftFetchDone"), object: nil, userInfo: nil)
+    }
+    
+    
+    @objc func onFetchNFTData() {
+        if (chainType == ChainType.IRIS_MAIN) {
+            self.onFetchIrisNFT(self.account!.account_address, mPageKey)
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            self.onFetchCroNFT(self.account!.account_address, mPageKey)
+        }
+    }
+    
+    func onFetchIrisNFT(_ owner: String, _ nextKey: Data?) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
+                    $0.countTotal = true
+                    $0.limit = 1000
+                    if let pageKey = nextKey {
+                        $0.key = pageKey
+                    }
+                }
+                let req = Irismod_Nft_QueryOwnerRequest.with {
+                    $0.owner = owner
+                    $0.pagination = page
+                }
+                if let response = try? Irismod_Nft_QueryClient(channel: channel).owner(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    response.owner.idCollections.forEach { id_collection in
+                        self.mMyIrisCollections.append(id_collection)
+                    }
+                    if (nextKey == nil) {
+                        self.mPageTotalCnt = response.pagination.total
+                    }
+                    self.mPageKey = response.pagination.nextKey
+                }
+                try channel.close().wait()
 
+            } catch {
+                print("onFetchIrisNFT failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: {
+                if (self.mPageKey?.count == 0) {
+                    self.onFetchFinished()
+                } else {
+                    self.onFetchIrisNFT(self.account!.account_address, self.mPageKey)
+                }
+            });
+        }
+    }
+    
+    func onFetchCroNFT(_ owner: String, _ nextKey: Data?) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
+                    $0.countTotal = true
+                    $0.limit = 1000
+                    if let pageKey = nextKey {
+                        $0.key = pageKey
+                    }
+                }
+                let req = Chainmain_Nft_V1_QueryOwnerRequest.with {
+                    $0.owner = owner
+                    $0.pagination = page
+                }
+                
+                if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).owner(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    response.owner.idCollections.forEach { id_collection in
+                        self.mMyCroCollections.append(id_collection)
+                    }
+                    if (nextKey == nil) {
+                        self.mPageTotalCnt = response.pagination.total
+                    }
+                    self.mPageKey = response.pagination.nextKey
+                }
+                try channel.close().wait()
+
+            } catch {
+                print("onFetchCroNFT failed: \(error)")
+            }
+            
+            DispatchQueue.main.async(execute: {
+                if (self.mPageKey?.count == 0) {
+                    self.onFetchFinished()
+                } else {
+                    self.onFetchIrisNFT(self.account!.account_address, self.mPageKey)
+                }
+            });
+        }
+    }
+    
+}
 
 extension WUtils {
     static func getNftDescription(_ text: String?) -> String {

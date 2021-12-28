@@ -29,9 +29,6 @@ class NFTListCell: UITableViewCell {
         nftImgView.layer.cornerRadius = 8
         nftImgView.clipsToBounds = true
         self.selectionStyle = .none
-        
-//        nftNameLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
-//        nftDescriptionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_12_caption1)
     }
     
     override func prepareForReuse() {
@@ -40,13 +37,13 @@ class NFTListCell: UITableViewCell {
         nftDescriptionLabel.text = ""
     }
     
-    func onBindNFT(_ chainType: ChainType?, _ nftCollectionId: NFTCollectionId) {
+    func onBindNFT(_ chainType: ChainType?, _ denomId: String, _ tokenId: String) {
         nftCardView.backgroundColor = WUtils.getChainBg(chainType)
         if (chainType == ChainType.IRIS_MAIN) {
             DispatchQueue.global().async {
                 do {
                     let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                    let req = Irismod_Nft_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
+                    let req = Irismod_Nft_QueryNFTRequest.with { $0.denomID = denomId; $0.tokenID = tokenId }
                     if let response = try? Irismod_Nft_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
                             self.irisResponse = response
@@ -68,7 +65,7 @@ class NFTListCell: UITableViewCell {
             DispatchQueue.global().async {
                 do {
                     let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                    let req = Chainmain_Nft_V1_QueryNFTRequest.with { $0.denomID = nftCollectionId.denom_id!; $0.tokenID = nftCollectionId.token_ids! }
+                    let req = Chainmain_Nft_V1_QueryNFTRequest.with { $0.denomID = denomId; $0.tokenID = tokenId }
                     if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).nFT(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         DispatchQueue.main.async(execute: {
                             self.croResponse = response

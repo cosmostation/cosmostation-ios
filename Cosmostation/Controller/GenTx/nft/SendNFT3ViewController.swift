@@ -39,8 +39,8 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
     func onUpdateView() {
         WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
         recipientLabel.text = pageHolderVC.mToSendRecipientAddress
-        denomIdLabel.text = pageHolderVC.mNFT?.denom_id
-        tokenIdLabel.text = pageHolderVC.mNFT?.token_ids
+        denomIdLabel.text = pageHolderVC.mNFTDenomId
+        tokenIdLabel.text = pageHolderVC.mNFTTokenId
         memoLabel.text = pageHolderVC.mMemo
     }
     
@@ -95,8 +95,8 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
                     reqTx = Signer.genSignedSendNftIrisTxgRPC(auth!,
                                                               self.account!.account_address,
                                                               self.pageHolderVC.mToSendRecipientAddress!,
-                                                              self.pageHolderVC.mNFT!.token_ids!,
-                                                              self.pageHolderVC.mNFT!.denom_id!,
+                                                              self.pageHolderVC.mNFTTokenId!,
+                                                              self.pageHolderVC.mNFTDenomId!,
                                                               self.pageHolderVC.irisResponse!,
                                                               self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
@@ -106,8 +106,8 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
                     reqTx = Signer.genSignedSendNftCroTxgRPC(auth!,
                                                              self.account!.account_address,
                                                              self.pageHolderVC.mToSendRecipientAddress!,
-                                                             self.pageHolderVC.mNFT!.token_ids!,
-                                                             self.pageHolderVC.mNFT!.denom_id!,
+                                                             self.pageHolderVC.mNFTTokenId!,
+                                                             self.pageHolderVC.mNFTDenomId!,
                                                              self.pageHolderVC.croResponse!,
                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,

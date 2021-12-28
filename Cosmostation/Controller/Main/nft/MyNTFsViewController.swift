@@ -7,18 +7,16 @@
 //
 
 import UIKit
-import GRPC
-import NIO
-import SwiftProtobuf
 
 class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var myNFTTableView: UITableView!
-    var mMyNFTs = Array<NFTCollectionId>()
-    var mPageTotalCnt: UInt64 = 0;
-    var mPageKey: Data?
+    
+    var pageHolderVC: NFTsDAppViewController!
+    var mMyIrisCollections = Array<Irismod_Nft_IDCollection>()
+    var mMyCroCollections = Array<Chainmain_Nft_V1_IDCollection>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,50 +27,82 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         self.myNFTTableView.delegate = self
         self.myNFTTableView.dataSource = self
         self.myNFTTableView.register(UINib(nibName: "NFTListCell", bundle: nil), forCellReuseIdentifier: "NFTListCell")
-        
-        self.onFetchNFTData()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.pageHolderVC = self.parent as? NFTsDAppViewController
     }
     
-    func updateView() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.onNFTFetchDone(_:)), name: Notification.Name("NftFetchDone"), object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("NftFetchDone"), object: nil)
+    }
+    
+    @objc func onNFTFetchDone(_ notification: NSNotification) {
+        self.mMyIrisCollections = self.pageHolderVC.mMyIrisCollections
+        self.mMyCroCollections = self.pageHolderVC.mMyCroCollections
         self.myNFTTableView.reloadData()
-        self.loadingImg.onStopAnimation()
+        
+        self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
-        if (mMyNFTs.count == 0) {
-            emptyView.isHidden = false
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if (chainType == ChainType.IRIS_MAIN) {
+            return mMyIrisCollections.count
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            return mMyCroCollections.count
         } else {
-            emptyView.isHidden = true
+            return 0
         }
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.mMyNFTs.count
+        if (chainType == ChainType.IRIS_MAIN) {
+            return mMyIrisCollections[section].tokenIds.count
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            return mMyCroCollections[section].tokenIds.count
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        if (chainType == ChainType.IRIS_MAIN) {
+            if (mMyIrisCollections[section].tokenIds.count > 0) { return 30 } else { return 0 }
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            if (mMyCroCollections[section].tokenIds.count > 0) { return 30 } else { return 0 }
+        } else {
+            return 0
+        }
     }
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.headerTitleLabel.text = "NTFs";
-        view.headerCntLabel.text = String(mPageTotalCnt)
+        if (chainType == ChainType.IRIS_MAIN) {
+            view.headerTitleLabel.text = mMyIrisCollections[section].denomID
+            view.headerCntLabel.text = String(mMyIrisCollections[section].tokenIds.count)
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            view.headerTitleLabel.text = mMyCroCollections[section].denomID
+            view.headerCntLabel.text = String(mMyCroCollections[section].tokenIds.count)
+        }
         return view
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"NFTListCell") as? NFTListCell
-        cell?.onBindNFT(self.chainType, mMyNFTs[indexPath.row])
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastRowIndex = tableView.numberOfRows(inSection: 0) - 1
-        if (indexPath.row == lastRowIndex ) {
-            if (mPageTotalCnt > mMyNFTs.count) {
-                self.onFetchNFTData()
-            }
+        if (chainType == ChainType.IRIS_MAIN) {
+            cell?.onBindNFT(self.chainType, mMyIrisCollections[indexPath.section].denomID, mMyIrisCollections[indexPath.section].tokenIds[indexPath.row])
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            cell?.onBindNFT(self.chainType, mMyCroCollections[indexPath.section].denomID, mMyCroCollections[indexPath.section].tokenIds[indexPath.row])
         }
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -80,7 +110,13 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         let nftDetailVC = NTFDetailViewController(nibName: "NTFDetailViewController", bundle: nil)
         nftDetailVC.irisResponse = cell?.irisResponse
         nftDetailVC.croResponse = cell?.croResponse
-        nftDetailVC.mNFT = mMyNFTs[indexPath.row]
+        if (chainType == ChainType.IRIS_MAIN) {
+            nftDetailVC.denomId = mMyIrisCollections[indexPath.section].denomID
+            nftDetailVC.tokenId = mMyIrisCollections[indexPath.section].tokenIds[indexPath.row]
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            nftDetailVC.denomId = mMyCroCollections[indexPath.section].denomID
+            nftDetailVC.tokenId = mMyCroCollections[indexPath.section].tokenIds[indexPath.row]
+        }
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(nftDetailVC, animated: true)
     }
@@ -103,87 +139,5 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
-        
-    }
-    
-    @objc func onFetchNFTData() {
-        if (chainType == ChainType.IRIS_MAIN) {
-            self.onFetchIrisNFT(self.account!.account_address, mPageKey)
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
-            self.onFetchCroNFT(self.account!.account_address, mPageKey)
-        } else {
-            self.updateView()
-        }
-    }
-    
-    func onFetchIrisNFT(_ owner: String, _ nextKey: Data?) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
-                    $0.countTotal = true
-                    $0.limit = 100
-                    if let pageKey = nextKey {
-                        $0.key = pageKey
-                    }
-                }
-                let req = Irismod_Nft_QueryOwnerRequest.with {
-                    $0.owner = owner
-                    $0.pagination = page
-                }
-                if let response = try? Irismod_Nft_QueryClient(channel: channel).owner(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    response.owner.idCollections.forEach { id_collection in
-                        id_collection.tokenIds.forEach { token_id in
-                            self.mMyNFTs.append(NFTCollectionId.init(id_collection.denomID, token_id))
-                        }
-                    }
-                    if (nextKey == nil) {
-                        self.mPageTotalCnt = response.pagination.total
-                    }
-                    self.mPageKey = response.pagination.nextKey
-                }
-                try channel.close().wait()
-
-            } catch {
-                print("onFetchIrisNFT failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.updateView() });
-        }
-    }
-    
-    func onFetchCroNFT(_ owner: String, _ nextKey: Data?) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
-                    $0.countTotal = true
-                    $0.limit = 100
-                    if let pageKey = nextKey {
-                        $0.key = pageKey
-                    }
-                }
-                let req = Chainmain_Nft_V1_QueryOwnerRequest.with {
-                    $0.owner = owner
-                    $0.pagination = page
-                }
-                
-                if let response = try? Chainmain_Nft_V1_QueryClient(channel: channel).owner(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    response.owner.idCollections.forEach { id_collection in
-                        id_collection.tokenIds.forEach { token_id in
-                            self.mMyNFTs.append(NFTCollectionId.init(id_collection.denomID, token_id))
-                        }
-                    }
-                    if (nextKey == nil) {
-                        self.mPageTotalCnt = response.pagination.total
-                    }
-                    self.mPageKey = response.pagination.nextKey
-                }
-                try channel.close().wait()
-
-            } catch {
-                print("onFetchCroNFT failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.updateView() });
-        }
     }
 }

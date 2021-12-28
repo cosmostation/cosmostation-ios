@@ -22,7 +22,7 @@ class NFTDetailInfoCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    func onBindNFT(_ chainType: ChainType?, _ irisRes: Irismod_Nft_QueryNFTResponse?, _ croRes: Chainmain_Nft_V1_QueryNFTResponse?, _ collectionId: NFTCollectionId?) {
+    func onBindNFT(_ chainType: ChainType?, _ irisRes: Irismod_Nft_QueryNFTResponse?, _ croRes: Chainmain_Nft_V1_QueryNFTResponse?, _ denomId: String?, _ tokenId: String?) {
         nftCardView.backgroundColor = WUtils.getChainBg(chainType)
         if (chainType == ChainType.IRIS_MAIN) {
             self.nftNameLabel.text = irisRes?.nft.name
@@ -35,8 +35,8 @@ class NFTDetailInfoCell: UITableViewCell {
             self.nftIssuerLabel.text = WUtils.getNftIssuer(croRes?.nft.data)
             
         }
-        nftDenomLabel.text = collectionId?.denom_id
-        nftTokenLabel.text = collectionId?.token_ids
+        nftDenomLabel.text = denomId
+        nftTokenLabel.text = tokenId
     }
     
 }
