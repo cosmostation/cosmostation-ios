@@ -71,7 +71,7 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         nftDenomNameLabel.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
         nftDenomNameLabel.layer.cornerRadius = 8
         
-        let randomUUID = "station" + UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
+        let randomUUID = STATION_NFT_DENOM + UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
         nftDenomIdLabel.text = randomUUID
         nftDenomNameLabel.text = randomUUID
         print("randomUUID ", randomUUID)

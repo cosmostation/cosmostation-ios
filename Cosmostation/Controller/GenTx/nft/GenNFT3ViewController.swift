@@ -96,7 +96,7 @@ class GenNFT3ViewController: BaseViewController, PasswordViewDelegate {
                 let stationData = StationNFTData.init(self.pageHolderVC.mNFTName!,
                                                       self.pageHolderVC.mNFTDescription!,
                                                       NFT_INFURA + self.pageHolderVC.mNFTHash!,
-                                                      STATION_NFT_DENOM,
+                                                      self.pageHolderVC.mNFTDenomId!,
                                                       self.account!.account_address)
                 let jsonEncoder = JSONEncoder()
                 let jsonData = try jsonEncoder.encode(stationData)
