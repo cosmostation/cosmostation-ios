@@ -51,6 +51,16 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
+        
+        if (chainType == ChainType.IRIS_MAIN) {
+            if (mMyIrisCollections.count <= 0) {
+                self.emptyView.isHidden = false
+            }
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            if (mMyCroCollections.count <= 0) {
+                self.emptyView.isHidden = false
+            }
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -63,21 +73,21 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == ChainType.IRIS_MAIN) {
-            return mMyIrisCollections[section].tokenIds.count
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
-            return mMyCroCollections[section].tokenIds.count
-        } else {
-            return 0
-        }
-    }
-    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (chainType == ChainType.IRIS_MAIN) {
             if (mMyIrisCollections[section].tokenIds.count > 0) { return 30 } else { return 0 }
         } else if (chainType == ChainType.CRYPTO_MAIN) {
             if (mMyCroCollections[section].tokenIds.count > 0) { return 30 } else { return 0 }
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (chainType == ChainType.IRIS_MAIN) {
+            return mMyIrisCollections[section].tokenIds.count
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            return mMyCroCollections[section].tokenIds.count
         } else {
             return 0
         }

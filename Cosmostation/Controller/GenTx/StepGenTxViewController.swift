@@ -155,6 +155,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mNFTName: String?
     var mNFTDescription: String?
     var mNFTDenomId: String?
+    var mNFTDenomName: String?
     var mNFTTokenId: String?
     var irisResponse: Irismod_Nft_QueryNFTResponse?
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
@@ -504,6 +505,11 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     SendNFT3ViewController(nibName: "SendNFT3ViewController", bundle: nil)]
             
+        } else if (mType == TASK_ISSUE_NFT_DENOM) {
+            return [GenDenom0ViewController(nibName: "GenDenom0ViewController", bundle: nil),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    GenDenom3ViewController(nibName: "GenDenom3ViewController", bundle: nil)]
         }
         
         else {

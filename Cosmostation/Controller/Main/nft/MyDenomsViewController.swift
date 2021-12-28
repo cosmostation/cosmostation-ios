@@ -29,7 +29,6 @@ class MyDenomsViewController: BaseViewController, UITableViewDataSource, UITable
         self.myDenomTableView.register(UINib(nibName: "DenomListCell", bundle: nil), forCellReuseIdentifier: "DenomListCell")
     }
     
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.pageHolderVC = self.parent as? NFTsDAppViewController
@@ -52,6 +51,16 @@ class MyDenomsViewController: BaseViewController, UITableViewDataSource, UITable
         
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
+        
+        if (chainType == ChainType.IRIS_MAIN) {
+            if (mMyIrisCollections.count <= 0) {
+                self.emptyView.isHidden = false
+            }
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            if (mMyCroCollections.count <= 0) {
+                self.emptyView.isHidden = false
+            }
+        }
     }
     
     
@@ -66,7 +75,13 @@ class MyDenomsViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        if (chainType == ChainType.IRIS_MAIN) {
+            if (mMyIrisCollections.count > 0) { return 30 } else { return 0 }
+        } else if (chainType == ChainType.CRYPTO_MAIN) {
+            if (mMyCroCollections.count > 0) { return 30 } else { return 0 }
+        } else {
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -93,23 +108,23 @@ class MyDenomsViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     @IBAction func onClickCreateDenom(_ sender: UIButton) {
-//        if (account?.account_has_private == false) {
-//            self.onShowAddMenomicDialog()
-//            return
-//        }
-//
-//        let mainDenom = WUtils.getMainDenom(chainType)
-//        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_ISSUE_NFT, 0)
-//        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
-//            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
-//            return
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = TASK_ISSUE_NFT
-//        txVC.hidesBottomBarWhenPushed = true
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        if (account?.account_has_private == false) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+
+        let mainDenom = WUtils.getMainDenom(chainType)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_ISSUE_NFT_DENOM, 0)
+        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_ISSUE_NFT_DENOM
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
         
     }
 

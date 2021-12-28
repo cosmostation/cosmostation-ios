@@ -490,6 +490,10 @@
 "str_send_nft_step_1" = "Insert memo (optional";
 "str_send_nft_step_2" = "Select transaction fee";
 "str_send_nft_step_3" = "Check transaction detail";
+"str_issue_nft_denom_step_0" = "Insert Denom Information";
+"str_issue_nft_denom_step_1" = "Insert memo (optional)";
+"str_issue_nft_denom_step_2" = "Select transaction fee";
+"str_issue_nft_denom_step_3" = "Check transaction detail";
 
 "str_description_open_domain" = "Open type in which an account owner is the only entity that can perform actions on the account.";
 "str_description_closed_domain" = "Closed type in which the domain owner has control over accounts too.";
@@ -612,6 +616,7 @@ support@cosmostation.io";
 "title_sif_incentive" = "Incentive Claim";
 "title_edit_chain" = "Edit Chains";
 "title_nft" = "NFT";
+"title_issue_nft_denom" = "Issue NFT Denom";
 "title_issue_nft" = "Issue NFT";
 "title_send_nft" = "Send NFT";
 
@@ -735,6 +740,8 @@ support@cosmostation.io";
 "error_no_nft_image" = "Add NFT Image";
 "error_no_nft_title" = "Add NFT Name";
 "error_no_nft_dexcription" = "Add NFT Description";
+"error_nft_denom_count" = "Please Insert 4~20 low char Denom ID";
+"error_nft_denom_exist" = "Denom ID is already exist. please using unique ID";
 
 
 

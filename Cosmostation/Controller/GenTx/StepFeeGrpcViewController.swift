@@ -515,6 +515,24 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                           BaseData.instance.getChainId(self.chainType))
             }
+            
+        } else if (pageHolderVC.mType == TASK_ISSUE_NFT_DENOM) {
+            if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
+                return Signer.genSimulateIssueNftDenomIrisTxgRPC(auth, self.account!.account_address,
+                                                                 self.pageHolderVC.mNFTDenomId!,
+                                                                 self.pageHolderVC.mNFTDenomName!,
+                                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                                 BaseData.instance.getChainId(self.chainType))
+                
+            } else if (self.chainType == ChainType.CRYPTO_MAIN) {
+                return Signer.genSimulateIssueNftDenomCroTxgRPC(auth, self.account!.account_address,
+                                                                self.pageHolderVC.mNFTDenomId!,
+                                                                self.pageHolderVC.mNFTDenomName!,
+                                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                                BaseData.instance.getChainId(self.chainType))
+            }
         }
         
         return nil

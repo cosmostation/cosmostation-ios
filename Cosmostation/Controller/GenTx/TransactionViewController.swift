@@ -314,6 +314,11 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "4StepImg1")
             self.titleLabel.text =  NSLocalizedString("title_send_nft", comment: "")
             
+        } else if (mType == TASK_ISSUE_NFT_DENOM) {
+            stepDescription.text = NSLocalizedString("str_issue_nft_denom_step_0", comment: "")
+            stepImg.image = UIImage.init(named: "4StepImg1")
+            self.titleLabel.text =  NSLocalizedString("title_issue_nft_denom", comment: "")
+            
         }
         
         
@@ -579,6 +584,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_send_nft_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg1")
                     
+                } else if (mType == TASK_ISSUE_NFT_DENOM) {
+                    stepDescription.text = NSLocalizedString("str_issue_nft_denom_step_0", comment: "")
+                    stepImg.image = UIImage.init(named: "4StepImg1")
+                    
                 }
                 
                 
@@ -771,6 +780,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_send_nft_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg2")
                     
+                } else if (mType == TASK_ISSUE_NFT_DENOM) {
+                    stepDescription.text = NSLocalizedString("str_issue_nft_denom_step_1", comment: "")
+                    stepImg.image = UIImage.init(named: "4StepImg2")
+                    
                 }
                 
                 
@@ -959,6 +972,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_send_nft_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg3")
                     
+                } else if (mType == TASK_ISSUE_NFT_DENOM) {
+                    stepDescription.text = NSLocalizedString("str_issue_nft_denom_step_2", comment: "")
+                    stepImg.image = UIImage.init(named: "4StepImg3")
+                    
                 }
                 
                 
@@ -1145,6 +1162,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_SEND_NFT) {
                     stepDescription.text = NSLocalizedString("str_send_nft_step_3", comment: "")
+                    stepImg.image = UIImage.init(named: "4StepImg4")
+                    
+                } else if (mType == TASK_ISSUE_NFT_DENOM) {
+                    stepDescription.text = NSLocalizedString("str_issue_nft_denom_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg4")
                     
                 }

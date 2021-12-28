@@ -492,6 +492,10 @@
 "str_send_nft_step_1" = "메모를 입력하세요 (선택사항)";
 "str_send_nft_step_2" = "Tx 수수료를 선택하세요";
 "str_send_nft_step_3" = "입력하신 정보를 확인하세요";
+"str_issue_nft_denom_step_0" = "NFT Denom 정보를 입력하세요";
+"str_issue_nft_denom_step_1" = "메모를 입력하세요 (선택사항)";
+"str_issue_nft_denom_step_2" = "Tx 수수료를 선택하세요";
+"str_issue_nft_denom_step_3" = "입력하신 정보를 확인하세요";
 
 "str_description_open_domain" = "Open 타입은 계정 소유자가 계정에 대한 작업을 수행 할 수있는 유일한 엔티티인 도메인 유형입니다.";
 "str_description_closed_domain" = "Closed 타입은 도메인 소유자가 계정을 제어 할 수있는 도메인 유형입니다.";
@@ -613,6 +617,7 @@ support@cosmostation.io";
 "title_sif_dex" = "시프 Dex";
 "title_edit_chain" = "체인 관리";
 "title_nft" = "NFT";
+"title_issue_nft_denom" = "NFT Denom 발행";
 "title_issue_nft" = "NFT 발행";
 "title_send_nft" = "NFT 전송";
 
@@ -732,6 +737,8 @@ support@cosmostation.io";
 "error_no_nft_image" = "NFT 이미지를 추가해주세요";
 "error_no_nft_title" = "NFT 이름을 입력하세요";
 "error_no_nft_dexcription" = "NFT 설명을 입력하세요";
+"error_nft_denom_count" = "Denom ID를 숫자,소문자로 4~20자 입력해주세요.";
+"error_nft_denom_exist" = "Denom ID가 이미 존재합니다. 다른 아이디를 입력해주세요.";
 
 
 

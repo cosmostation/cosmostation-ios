@@ -19,8 +19,8 @@ class NFTsDAppViewController: BaseViewController {
     
     var mMyIrisCollections = Array<Irismod_Nft_IDCollection>()
     var mMyCroCollections = Array<Chainmain_Nft_V1_IDCollection>()
-    var mPageTotalCnt: UInt64 = 0;
-    var mPageKey: Data?
+    var mCollectionsPageTotalCnt: UInt64 = 0;
+    var mCollectionsPageKey: Data?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,10 @@ class NFTsDAppViewController: BaseViewController {
             dAppsSegment.selectedSegmentTintColor =  WUtils.getChainDarkColor(self.chainType)
         } else {
             dAppsSegment.tintColor = WUtils.getChainColor(self.chainType)
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
+            self.onFetchNFTData()
         }
     }
     
@@ -58,24 +62,17 @@ class NFTsDAppViewController: BaseViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //TODO FIX
-        self.onFetchNFTData()
-    }
-    
     func onFetchFinished() {
         print("onFetchFinished mMyIrisCollections ", self.mMyIrisCollections.count)
         print("onFetchFinished mMyCroCollections ", self.mMyCroCollections.count)
         NotificationCenter.default.post(name: Notification.Name("NftFetchDone"), object: nil, userInfo: nil)
     }
     
-    
     @objc func onFetchNFTData() {
         if (chainType == ChainType.IRIS_MAIN) {
-            self.onFetchIrisNFT(self.account!.account_address, mPageKey)
+            self.onFetchIrisNFT(self.account!.account_address, mCollectionsPageKey)
         } else if (chainType == ChainType.CRYPTO_MAIN) {
-            self.onFetchCroNFT(self.account!.account_address, mPageKey)
+            self.onFetchCroNFT(self.account!.account_address, mCollectionsPageKey)
         }
     }
     
@@ -99,9 +96,9 @@ class NFTsDAppViewController: BaseViewController {
                         self.mMyIrisCollections.append(id_collection)
                     }
                     if (nextKey == nil) {
-                        self.mPageTotalCnt = response.pagination.total
+                        self.mCollectionsPageTotalCnt = response.pagination.total
                     }
-                    self.mPageKey = response.pagination.nextKey
+                    self.mCollectionsPageKey = response.pagination.nextKey
                 }
                 try channel.close().wait()
 
@@ -109,10 +106,10 @@ class NFTsDAppViewController: BaseViewController {
                 print("onFetchIrisNFT failed: \(error)")
             }
             DispatchQueue.main.async(execute: {
-                if (self.mPageKey?.count == 0) {
+                if (self.mCollectionsPageKey?.count == 0) {
                     self.onFetchFinished()
                 } else {
-                    self.onFetchIrisNFT(self.account!.account_address, self.mPageKey)
+                    self.onFetchIrisNFT(self.account!.account_address, self.mCollectionsPageKey)
                 }
             });
         }
@@ -139,9 +136,9 @@ class NFTsDAppViewController: BaseViewController {
                         self.mMyCroCollections.append(id_collection)
                     }
                     if (nextKey == nil) {
-                        self.mPageTotalCnt = response.pagination.total
+                        self.mCollectionsPageTotalCnt = response.pagination.total
                     }
-                    self.mPageKey = response.pagination.nextKey
+                    self.mCollectionsPageKey = response.pagination.nextKey
                 }
                 try channel.close().wait()
 
@@ -150,10 +147,10 @@ class NFTsDAppViewController: BaseViewController {
             }
             
             DispatchQueue.main.async(execute: {
-                if (self.mPageKey?.count == 0) {
+                if (self.mCollectionsPageKey?.count == 0) {
                     self.onFetchFinished()
                 } else {
-                    self.onFetchIrisNFT(self.account!.account_address, self.mPageKey)
+                    self.onFetchIrisNFT(self.account!.account_address, self.mCollectionsPageKey)
                 }
             });
         }
@@ -198,6 +195,11 @@ extension WUtils {
         return ""
     }
     
+    static func checkNftDenomId(_ denom: String) -> Bool {
+        let denomRegEx = "[a-z0-9]{4,20}"
+        let denomPred = NSPredicate(format:"SELF MATCHES %@", denomRegEx)
+        return denomPred.evaluate(with: denom)
+    }
     
 }
 

@@ -922,6 +922,10 @@
 		046FF00F2779A16500F72C11 /* MyDenomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF00E2779A16500F72C11 /* MyDenomsViewController.swift */; };
 		046FF012277AD0E100F72C11 /* DenomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF010277AD0E100F72C11 /* DenomListCell.swift */; };
 		046FF013277AD0E100F72C11 /* DenomListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF011277AD0E100F72C11 /* DenomListCell.xib */; };
+		046FF016277B43E300F72C11 /* GenDenom0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF014277B43E300F72C11 /* GenDenom0ViewController.swift */; };
+		046FF017277B43E300F72C11 /* GenDenom0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF015277B43E300F72C11 /* GenDenom0ViewController.xib */; };
+		046FF01A277B43F100F72C11 /* GenDenom3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF018277B43F100F72C11 /* GenDenom3ViewController.swift */; };
+		046FF01B277B43F100F72C11 /* GenDenom3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */; };
 		047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		047AE7242693378A00C1DD51 /* TxUnlockPeriodLockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */; };
 		047AE7252693378A00C1DD51 /* TxUnlockPeriodLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */; };
@@ -2656,6 +2660,10 @@
 		046FF00E2779A16500F72C11 /* MyDenomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDenomsViewController.swift; sourceTree = "<group>"; };
 		046FF010277AD0E100F72C11 /* DenomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DenomListCell.swift; sourceTree = "<group>"; };
 		046FF011277AD0E100F72C11 /* DenomListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DenomListCell.xib; sourceTree = "<group>"; };
+		046FF014277B43E300F72C11 /* GenDenom0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDenom0ViewController.swift; sourceTree = "<group>"; };
+		046FF015277B43E300F72C11 /* GenDenom0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenDenom0ViewController.xib; sourceTree = "<group>"; };
+		046FF018277B43F100F72C11 /* GenDenom3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDenom3ViewController.swift; sourceTree = "<group>"; };
+		046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenDenom3ViewController.xib; sourceTree = "<group>"; };
 		0479664F2757409700315D55 /* MintscanProposalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposalDetail.swift; sourceTree = "<group>"; };
 		047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxUnlockPeriodLockCell.swift; sourceTree = "<group>"; };
 		047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxUnlockPeriodLockCell.xib; sourceTree = "<group>"; };
@@ -3639,6 +3647,10 @@
 				046BD2222778B38C002333B5 /* SendNFT0ViewController.xib */,
 				046BD2252778B398002333B5 /* SendNFT3ViewController.swift */,
 				046BD2262778B398002333B5 /* SendNFT3ViewController.xib */,
+				046FF014277B43E300F72C11 /* GenDenom0ViewController.swift */,
+				046FF015277B43E300F72C11 /* GenDenom0ViewController.xib */,
+				046FF018277B43F100F72C11 /* GenDenom3ViewController.swift */,
+				046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */,
 			);
 			path = nft;
 			sourceTree = "<group>";
@@ -6000,6 +6012,7 @@
 				2889FD78260337AD00CA9896 /* TxHardRepayCell.xib in Resources */,
 				28B785BC26B808CE009F755F /* StepEventHorizon0ViewController.xib in Resources */,
 				04CFBD4E2692274B0013150B /* TxIbcReceiveCell.xib in Resources */,
+				046FF01B277B43F100F72C11 /* GenDenom3ViewController.xib in Resources */,
 				2838501D2448A69D00E5DEF2 /* TxHtlcCreateCell.xib in Resources */,
 				28DB56EC25F9DC7A00B2F0E5 /* HardDetailAssetsCell.xib in Resources */,
 				288D2501268326060093121A /* NewHistoryCell.xib in Resources */,
@@ -6111,6 +6124,7 @@
 				E103DAD3228143D0006C2146 /* WalletCheckViewController.xib in Resources */,
 				04CFBD5A269301660013150B /* TxLockTokenCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
+				046FF017277B43E300F72C11 /* GenDenom0ViewController.xib in Resources */,
 				28FA685126D8A53E00CF4C57 /* WalletKavaIncentiveCell.xib in Resources */,
 				2812956F250F81C3007B217E /* SelectCoinCell.xib in Resources */,
 				04394B002744C6FF002334F1 /* ManageChainAccoutsCell.xib in Resources */,
@@ -6279,6 +6293,7 @@
 				040FAA78275F55C400229F6F /* osmosis_txfees_v1beta1_gov.pb.swift in Sources */,
 				28A2A4BE271FF9030042ACC4 /* WalletRegenCell.swift in Sources */,
 				040FA86A275F55C200229F6F /* desmos_posts_v1beta1_report.pb.swift in Sources */,
+				046FF016277B43E300F72C11 /* GenDenom0ViewController.swift in Sources */,
 				040FA982275F55C300229F6F /* em_inflation_v1_inflation.pb.swift in Sources */,
 				E1945E42222E7FC800A1436F /* MainTabViewController.swift in Sources */,
 				046BD23027795CD4002333B5 /* TxSendNFTCell.swift in Sources */,
@@ -6734,6 +6749,7 @@
 				E151B64B224859E10026B8C0 /* StdSignMsg.swift in Sources */,
 				2845D880246FAED7007CD497 /* VoteInfoTableViewCell.swift in Sources */,
 				E191A57D237902C5002577BC /* WalletKavaCell.swift in Sources */,
+				046FF01A277B43F100F72C11 /* GenDenom3ViewController.swift in Sources */,
 				040FA9BB275F55C300229F6F /* cosmos_gov_v1beta2_tx.pb.swift in Sources */,
 				28617A812432944F006D66EA /* StepDepositCdpCheckViewController.swift in Sources */,
 				040FA864275F55C200229F6F /* tendermint_liquidity_v1beta1_genesis.pb.swift in Sources */,
