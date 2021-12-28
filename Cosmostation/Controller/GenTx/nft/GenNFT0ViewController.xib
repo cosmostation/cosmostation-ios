@@ -16,6 +16,8 @@
                 <outlet property="loadingImg" destination="tea-XB-h2Y" id="SRx-s6-jCf"/>
                 <outlet property="nftAddBtn" destination="2IX-gl-Pzy" id="uLQ-5S-8Wo"/>
                 <outlet property="nftDeleteBtn" destination="0U8-8n-F6L" id="Kd5-Dn-jLv"/>
+                <outlet property="nftDenomIdLabel" destination="xuw-HE-IMT" id="W7k-D4-ns6"/>
+                <outlet property="nftDenomNameLabel" destination="rp7-2c-Q9G" id="cdd-Lg-KfK"/>
                 <outlet property="nftDescriptionTextView" destination="Tdc-15-LHr" id="Puf-op-QHY"/>
                 <outlet property="nftImageView" destination="9XS-8n-xSe" id="yaU-yz-iP6"/>
                 <outlet property="nftNameTextView" destination="ZQ9-Sl-Wva" id="Qzq-yB-J8N"/>
@@ -85,7 +87,7 @@
                     <rect key="frame" x="0.0" y="60" width="414" height="720"/>
                     <subviews>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CyF-sG-1V1">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="742.66666666666663"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="911.33333333333337"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9XS-8n-xSe">
                                     <rect key="frame" x="12" y="12" width="390" height="230"/>
@@ -147,7 +149,7 @@
                                         <constraint firstAttribute="height" constant="36" id="pnB-WM-B6g"/>
                                     </constraints>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="NFT Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MsP-8T-6DM">
@@ -164,22 +166,62 @@
                                         <constraint firstAttribute="height" constant="80" id="wAM-YA-XON"/>
                                     </constraints>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
+                                </textView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom ID (Random Unique)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBi-Fe-hjN">
+                                    <rect key="frame" x="12" y="478.66666666666663" width="158" height="14.333333333333314"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xuw-HE-IMT">
+                                    <rect key="frame" x="12" y="497" width="390" height="36"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="bAR-9o-SPK"/>
+                                    </constraints>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
+                                </textView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Denom Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93j-8P-jQn">
+                                    <rect key="frame" x="12" y="557" width="76.333333333333329" height="14.333333333333371"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rp7-2c-Q9G">
+                                    <rect key="frame" x="12" y="575.33333333333337" width="390" height="36"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="Wb4-Su-iVt"/>
+                                    </constraints>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
                                 </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="Tdc-15-LHr" secondAttribute="bottom" constant="300" id="0iw-Ax-m7T"/>
                                 <constraint firstAttribute="trailing" secondItem="9XS-8n-xSe" secondAttribute="trailing" constant="12" id="5SW-Rg-iaT"/>
                                 <constraint firstItem="obC-Zp-rSc" firstAttribute="top" secondItem="9XS-8n-xSe" secondAttribute="bottom" constant="24" id="966-2g-ujW"/>
                                 <constraint firstItem="9XS-8n-xSe" firstAttribute="leading" secondItem="CyF-sG-1V1" secondAttribute="leading" constant="12" id="ANF-L4-JLm"/>
                                 <constraint firstItem="MsP-8T-6DM" firstAttribute="leading" secondItem="obC-Zp-rSc" secondAttribute="leading" id="DuH-9h-Z4O"/>
+                                <constraint firstItem="rp7-2c-Q9G" firstAttribute="leading" secondItem="xuw-HE-IMT" secondAttribute="leading" id="F97-fw-hSK"/>
+                                <constraint firstItem="93j-8P-jQn" firstAttribute="top" secondItem="xuw-HE-IMT" secondAttribute="bottom" constant="24" id="I8Y-VS-LjR"/>
+                                <constraint firstItem="xuw-HE-IMT" firstAttribute="top" secondItem="NBi-Fe-hjN" secondAttribute="bottom" constant="4" id="Klo-Nl-jx7"/>
+                                <constraint firstItem="rp7-2c-Q9G" firstAttribute="top" secondItem="93j-8P-jQn" secondAttribute="bottom" constant="4" id="MQ6-2k-j1N"/>
                                 <constraint firstItem="0U8-8n-F6L" firstAttribute="top" secondItem="9XS-8n-xSe" secondAttribute="top" constant="20" id="QtV-B1-JAQ"/>
                                 <constraint firstItem="Tdc-15-LHr" firstAttribute="top" secondItem="MsP-8T-6DM" secondAttribute="bottom" constant="4" id="XTM-Ug-0gX"/>
+                                <constraint firstItem="93j-8P-jQn" firstAttribute="leading" secondItem="NBi-Fe-hjN" secondAttribute="leading" id="XjM-1u-GBg"/>
                                 <constraint firstItem="ZQ9-Sl-Wva" firstAttribute="leading" secondItem="obC-Zp-rSc" secondAttribute="leading" id="XuS-Xd-Jfl"/>
                                 <constraint firstItem="2IX-gl-Pzy" firstAttribute="centerX" secondItem="9XS-8n-xSe" secondAttribute="centerX" id="afN-ZU-2tc"/>
+                                <constraint firstItem="xuw-HE-IMT" firstAttribute="trailing" secondItem="Tdc-15-LHr" secondAttribute="trailing" id="byv-MB-M1w"/>
                                 <constraint firstAttribute="trailing" secondItem="ZQ9-Sl-Wva" secondAttribute="trailing" constant="12" id="evi-Nn-GnZ"/>
+                                <constraint firstAttribute="bottom" secondItem="rp7-2c-Q9G" secondAttribute="bottom" constant="300" id="fSb-mU-2Qb"/>
                                 <constraint firstItem="Tdc-15-LHr" firstAttribute="leading" secondItem="MsP-8T-6DM" secondAttribute="leading" id="gln-AX-eW9"/>
                                 <constraint firstItem="obC-Zp-rSc" firstAttribute="leading" secondItem="CyF-sG-1V1" secondAttribute="leading" constant="12" id="hiU-sY-Dfd"/>
                                 <constraint firstItem="MsP-8T-6DM" firstAttribute="top" secondItem="ZQ9-Sl-Wva" secondAttribute="bottom" constant="24" id="iLA-fE-W3j"/>
@@ -187,7 +229,11 @@
                                 <constraint firstItem="9XS-8n-xSe" firstAttribute="top" secondItem="CyF-sG-1V1" secondAttribute="top" constant="12" id="mNB-Uu-qZ1"/>
                                 <constraint firstItem="ZQ9-Sl-Wva" firstAttribute="top" secondItem="obC-Zp-rSc" secondAttribute="bottom" constant="4" id="nsN-nB-uyR"/>
                                 <constraint firstAttribute="trailing" secondItem="Tdc-15-LHr" secondAttribute="trailing" constant="12" id="nx4-ys-RfW"/>
+                                <constraint firstItem="NBi-Fe-hjN" firstAttribute="top" secondItem="Tdc-15-LHr" secondAttribute="bottom" constant="36" id="qid-5c-CNR"/>
+                                <constraint firstItem="xuw-HE-IMT" firstAttribute="leading" secondItem="Tdc-15-LHr" secondAttribute="leading" id="qje-Uf-1qb"/>
+                                <constraint firstItem="NBi-Fe-hjN" firstAttribute="leading" secondItem="MsP-8T-6DM" secondAttribute="leading" id="sBk-K0-8oE"/>
                                 <constraint firstItem="2IX-gl-Pzy" firstAttribute="centerY" secondItem="9XS-8n-xSe" secondAttribute="centerY" id="unW-iv-vDf"/>
+                                <constraint firstItem="rp7-2c-Q9G" firstAttribute="trailing" secondItem="xuw-HE-IMT" secondAttribute="trailing" id="zuu-HL-Ifl"/>
                             </constraints>
                         </view>
                     </subviews>

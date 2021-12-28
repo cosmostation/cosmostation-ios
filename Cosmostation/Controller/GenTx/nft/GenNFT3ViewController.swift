@@ -103,9 +103,11 @@ class GenNFT3ViewController: BaseViewController, PasswordViewDelegate {
                 
                 var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest!
                 if (self.chainType == ChainType.IRIS_MAIN) {
-                    reqTx = Signer.genSignedIssueNftIrisTxgRPC(auth!, self.account!.account_address, self.account!.account_address,
+                    reqTx = Signer.genSignedIssueNftIrisTxgRPC(auth!,
+                                                               self.account!.account_address,
+                                                               self.pageHolderVC.mNFTDenomId!,
+                                                               self.pageHolderVC.mNFTDenomName!,
                                                                self.pageHolderVC.mNFTHash!.lowercased(),
-                                                               STATION_NFT_DENOM,
                                                                self.pageHolderVC.mNFTName!,
                                                                NFT_INFURA + self.pageHolderVC.mNFTHash!,
                                                                String(data: jsonData, encoding: .utf8)!,
@@ -114,9 +116,11 @@ class GenNFT3ViewController: BaseViewController, PasswordViewDelegate {
                                                                BaseData.instance.getChainId(self.chainType))
                     
                 } else if (self.chainType == ChainType.CRYPTO_MAIN) {
-                    reqTx = Signer.genSignedIssueNftCroTxgRPC(auth!, self.account!.account_address, self.account!.account_address,
+                    reqTx = Signer.genSignedIssueNftCroTxgRPC(auth!,
+                                                              self.account!.account_address,
+                                                              self.pageHolderVC.mNFTDenomId!,
+                                                              self.pageHolderVC.mNFTDenomName!,
                                                               self.pageHolderVC.mNFTHash!.lowercased(),
-                                                              STATION_NFT_DENOM,
                                                               self.pageHolderVC.mNFTName!,
                                                               NFT_INFURA + self.pageHolderVC.mNFTHash!,
                                                               String(data: jsonData, encoding: .utf8)!,

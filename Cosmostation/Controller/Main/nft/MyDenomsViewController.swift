@@ -20,13 +20,13 @@ class MyDenomsViewController: BaseViewController, UITableViewDataSource, UITable
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.loadingImg.onStartAnimation()
-        
-        self.myDenomTableView.delegate = self
-        self.myDenomTableView.dataSource = self
-        self.myDenomTableView.register(UINib(nibName: "DenomListCell", bundle: nil), forCellReuseIdentifier: "DenomListCell")
+//        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+//        self.chainType = WUtils.getChainType(account!.account_base_chain)
+//        self.loadingImg.onStartAnimation()
+//        
+//        self.myDenomTableView.delegate = self
+//        self.myDenomTableView.dataSource = self
+//        self.myDenomTableView.register(UINib(nibName: "DenomListCell", bundle: nil), forCellReuseIdentifier: "DenomListCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,22 +45,22 @@ class MyDenomsViewController: BaseViewController, UITableViewDataSource, UITable
     }
     
     @objc func onNFTFetchDone(_ notification: NSNotification) {
-        self.mMyIrisCollections = self.pageHolderVC.mMyIrisCollections
-        self.mMyCroCollections = self.pageHolderVC.mMyCroCollections
-        self.myDenomTableView.reloadData()
-        
-        self.loadingImg.stopAnimating()
-        self.loadingImg.isHidden = true
-        
-        if (chainType == ChainType.IRIS_MAIN) {
-            if (mMyIrisCollections.count <= 0) {
-                self.emptyView.isHidden = false
-            }
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
-            if (mMyCroCollections.count <= 0) {
-                self.emptyView.isHidden = false
-            }
-        }
+//        self.mMyIrisCollections = self.pageHolderVC.mMyIrisCollections
+//        self.mMyCroCollections = self.pageHolderVC.mMyCroCollections
+//        self.myDenomTableView.reloadData()
+//
+//        self.loadingImg.stopAnimating()
+//        self.loadingImg.isHidden = true
+//
+//        if (chainType == ChainType.IRIS_MAIN) {
+//            if (mMyIrisCollections.count <= 0) {
+//                self.emptyView.isHidden = false
+//            }
+//        } else if (chainType == ChainType.CRYPTO_MAIN) {
+//            if (mMyCroCollections.count <= 0) {
+//                self.emptyView.isHidden = false
+//            }
+//        }
     }
     
     

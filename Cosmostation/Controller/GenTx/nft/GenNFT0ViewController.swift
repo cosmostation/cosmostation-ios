@@ -22,6 +22,8 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var nftDeleteBtn: UIButton!
     @IBOutlet weak var nftNameTextView: UITextView!
     @IBOutlet weak var nftDescriptionTextView: UITextView!
+    @IBOutlet weak var nftDenomIdLabel: UITextView!
+    @IBOutlet weak var nftDenomNameLabel: UITextView!
     
     var pageHolderVC: StepGenTxViewController!
     var object: ObjectModel?
@@ -62,6 +64,18 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         nftDescriptionTextView.layer.borderWidth = 1.0
         nftDescriptionTextView.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
         nftDescriptionTextView.layer.cornerRadius = 8
+        nftDenomIdLabel.layer.borderWidth = 1.0
+        nftDenomIdLabel.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
+        nftDenomIdLabel.layer.cornerRadius = 8
+        nftDenomNameLabel.layer.borderWidth = 1.0
+        nftDenomNameLabel.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
+        nftDenomNameLabel.layer.cornerRadius = 8
+        
+        let randomUUID = "station" + UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
+        nftDenomIdLabel.text = randomUUID
+        nftDenomNameLabel.text = randomUUID
+        print("randomUUID ", randomUUID)
+        
         onUpdateImgView(nil)
         editRootView.isHidden = false
     }
@@ -194,6 +208,8 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         self.pageHolderVC.mNFTHash = object?.hash!
         self.pageHolderVC.mNFTName = nftNameTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         self.pageHolderVC.mNFTDescription = nftDescriptionTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        self.pageHolderVC.mNFTDenomId = nftDenomIdLabel.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        self.pageHolderVC.mNFTDenomName = nftDenomNameLabel.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
         
         self.btnCancel.isUserInteractionEnabled = false
         self.btnNext.isUserInteractionEnabled = false

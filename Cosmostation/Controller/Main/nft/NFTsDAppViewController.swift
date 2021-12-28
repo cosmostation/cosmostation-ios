@@ -24,20 +24,20 @@ class NFTsDAppViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        myDenomsView.alpha = 1
-        myNFTsView.alpha = 0
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        
-        if #available(iOS 13.0, *) {
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
-            dAppsSegment.selectedSegmentTintColor =  WUtils.getChainDarkColor(self.chainType)
-        } else {
-            dAppsSegment.tintColor = WUtils.getChainColor(self.chainType)
-        }
-        
+//        myDenomsView.alpha = 1
+//        myNFTsView.alpha = 0
+//
+//        if #available(iOS 13.0, *) {
+//            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
+//            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+//            dAppsSegment.selectedSegmentTintColor =  WUtils.getChainDarkColor(self.chainType)
+//        } else {
+//            dAppsSegment.tintColor = WUtils.getChainColor(self.chainType)
+//        }
+        myDenomsView.alpha = 0
+        myNFTsView.alpha = 1
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
             self.onFetchNFTData()
         }

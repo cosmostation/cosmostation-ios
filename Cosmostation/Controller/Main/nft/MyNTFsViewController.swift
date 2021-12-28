@@ -74,13 +74,13 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (chainType == ChainType.IRIS_MAIN) {
-            if (mMyIrisCollections[section].tokenIds.count > 0) { return 30 } else { return 0 }
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
-            if (mMyCroCollections[section].tokenIds.count > 0) { return 30 } else { return 0 }
-        } else {
+//        if (chainType == ChainType.IRIS_MAIN) {
+//            if (mMyIrisCollections[section].tokenIds.count > 0) { return 30 } else { return 0 }
+//        } else if (chainType == ChainType.CRYPTO_MAIN) {
+//            if (mMyCroCollections[section].tokenIds.count > 0) { return 30 } else { return 0 }
+//        } else {
             return 0
-        }
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -20,7 +20,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="fBl-Wx-ipZ">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rOn-iu-WZA">
+                            <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rOn-iu-WZA">
                                 <rect key="frame" x="114.5" y="52" width="185" height="32"/>
                                 <segments>
                                     <segment title="My Denoms"/>
@@ -32,13 +32,13 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eoq-su-ZkE">
-                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
+                                <rect key="frame" x="0.0" y="60" width="414" height="836"/>
                                 <connections>
                                     <segue destination="ZSS-ZJ-aCy" kind="embed" id="ycc-eR-dS9"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptb-lY-1aG">
-                                <rect key="frame" x="0.0" y="91" width="414" height="805"/>
+                                <rect key="frame" x="0.0" y="60" width="414" height="836"/>
                                 <connections>
                                     <segue destination="TYY-xI-MsT" kind="embed" id="53C-4O-BgT"/>
                                 </connections>
@@ -48,6 +48,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Ptb-lY-1aG" firstAttribute="trailing" secondItem="Eoq-su-ZkE" secondAttribute="trailing" id="0RM-Rh-ma7"/>
+                            <constraint firstItem="Eoq-su-ZkE" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="388-AB-Agu"/>
                             <constraint firstAttribute="top" secondItem="fBl-Wx-ipZ" secondAttribute="top" id="CO0-LE-Cu3"/>
                             <constraint firstItem="Ptb-lY-1aG" firstAttribute="bottom" secondItem="Eoq-su-ZkE" secondAttribute="bottom" id="EUq-KU-LTD"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fBl-Wx-ipZ" secondAttribute="trailing" id="IQl-8Z-kvq"/>
@@ -56,7 +57,6 @@
                             <constraint firstItem="fBl-Wx-ipZ" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="YMp-lN-EjE"/>
                             <constraint firstItem="fBl-Wx-ipZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Zgh-K7-ETi"/>
                             <constraint firstItem="Ptb-lY-1aG" firstAttribute="top" secondItem="Eoq-su-ZkE" secondAttribute="top" id="b7w-JW-tL3"/>
-                            <constraint firstItem="Eoq-su-ZkE" firstAttribute="top" secondItem="rOn-iu-WZA" secondAttribute="bottom" constant="8" id="bIn-rO-fmh"/>
                             <constraint firstItem="Eoq-su-ZkE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cNw-iD-Ddi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Eoq-su-ZkE" secondAttribute="trailing" id="fUV-0r-6Bp"/>
                             <constraint firstItem="Eoq-su-ZkE" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="maf-DU-FaT"/>
@@ -78,11 +78,11 @@
             <objects>
                 <viewController storyboardIdentifier="MyNTFsViewController" id="ZSS-ZJ-aCy" customClass="MyNTFsViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gxi-P4-lJm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="836"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vI0-Hy-RJZ">
-                                <rect key="frame" x="16" y="739" width="382" height="50"/>
+                                <rect key="frame" x="16" y="770" width="382" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="G2F-7C-adb"/>
                                 </constraints>
@@ -105,18 +105,18 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mYF-oa-D4R">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="727"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="j4U-Is-UmF" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                                <rect key="frame" x="177" y="312.5" width="60" height="60"/>
+                                <rect key="frame" x="177" y="328" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="iNl-og-Bsc"/>
                                     <constraint firstAttribute="height" constant="60" id="ycT-UF-Hh2"/>
                                 </constraints>
                             </imageView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bgc-Fn-I0x">
-                                <rect key="frame" x="114.5" y="289.5" width="185" height="106"/>
+                                <rect key="frame" x="114.5" y="305" width="185" height="106"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="historyNoneImg" translatesAutoresizingMaskIntoConstraints="NO" id="Dkc-2X-nnK">
                                         <rect key="frame" x="67.5" y="8" width="50" height="50"/>
@@ -177,11 +177,11 @@
             <objects>
                 <viewController storyboardIdentifier="MyDenomsViewController" id="TYY-xI-MsT" customClass="MyDenomsViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="YEC-14-VeX">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="836"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6y-a4-r0t">
-                                <rect key="frame" x="16" y="739" width="382" height="50"/>
+                                <rect key="frame" x="16" y="770" width="382" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="b6Z-Di-oge"/>
                                 </constraints>
@@ -205,18 +205,18 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Q7-ot-LhQ">
-                                <rect key="frame" x="0.0" y="44" width="414" height="683"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="714"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="Y5K-Kl-E48" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                                <rect key="frame" x="177" y="312.5" width="60" height="60"/>
+                                <rect key="frame" x="177" y="328" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="Xza-l2-9fs"/>
                                     <constraint firstAttribute="height" constant="60" id="YR8-dK-crq"/>
                                 </constraints>
                             </imageView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zP9-vD-9vs">
-                                <rect key="frame" x="114.5" y="289.5" width="185" height="106"/>
+                                <rect key="frame" x="114.5" y="305" width="185" height="106"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="historyNoneImg" translatesAutoresizingMaskIntoConstraints="NO" id="ZDI-3E-2sK">
                                         <rect key="frame" x="67.5" y="8" width="50" height="50"/>

@@ -926,6 +926,8 @@
 		046FF017277B43E300F72C11 /* GenDenom0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF015277B43E300F72C11 /* GenDenom0ViewController.xib */; };
 		046FF01A277B43F100F72C11 /* GenDenom3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF018277B43F100F72C11 /* GenDenom3ViewController.swift */; };
 		046FF01B277B43F100F72C11 /* GenDenom3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */; };
+		046FF01E277B766200F72C11 /* TxIssueNFTDenomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF01C277B766200F72C11 /* TxIssueNFTDenomCell.swift */; };
+		046FF01F277B766200F72C11 /* TxIssueNFTDenomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF01D277B766200F72C11 /* TxIssueNFTDenomCell.xib */; };
 		047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		047AE7242693378A00C1DD51 /* TxUnlockPeriodLockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */; };
 		047AE7252693378A00C1DD51 /* TxUnlockPeriodLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */; };
@@ -2664,6 +2666,8 @@
 		046FF015277B43E300F72C11 /* GenDenom0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenDenom0ViewController.xib; sourceTree = "<group>"; };
 		046FF018277B43F100F72C11 /* GenDenom3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenDenom3ViewController.swift; sourceTree = "<group>"; };
 		046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenDenom3ViewController.xib; sourceTree = "<group>"; };
+		046FF01C277B766200F72C11 /* TxIssueNFTDenomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIssueNFTDenomCell.swift; sourceTree = "<group>"; };
+		046FF01D277B766200F72C11 /* TxIssueNFTDenomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxIssueNFTDenomCell.xib; sourceTree = "<group>"; };
 		0479664F2757409700315D55 /* MintscanProposalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposalDetail.swift; sourceTree = "<group>"; };
 		047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxUnlockPeriodLockCell.swift; sourceTree = "<group>"; };
 		047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxUnlockPeriodLockCell.xib; sourceTree = "<group>"; };
@@ -3553,6 +3557,8 @@
 				046BD22B27795CC6002333B5 /* TxIssueNFTCell.xib */,
 				046BD22E27795CD4002333B5 /* TxSendNFTCell.swift */,
 				046BD22F27795CD4002333B5 /* TxSendNFTCell.xib */,
+				046FF01C277B766200F72C11 /* TxIssueNFTDenomCell.swift */,
+				046FF01D277B766200F72C11 /* TxIssueNFTDenomCell.xib */,
 			);
 			path = nft;
 			sourceTree = "<group>";
@@ -6054,6 +6060,7 @@
 				E14BDFFC224CCFE20007DD7D /* MnemonicCell.xib in Resources */,
 				28BB2A922533DA2D00CFF097 /* AccountCell.xib in Resources */,
 				282FF36223F532360028CC66 /* TxVoteCell.xib in Resources */,
+				046FF01F277B766200F72C11 /* TxIssueNFTDenomCell.xib in Resources */,
 				E126CF8C2387A50E002A546F /* WalletBnbCell.xib in Resources */,
 				28D28AD226CB6BFA0074964C /* StartUnbonding0ViewController.xib in Resources */,
 				2839C1FE26A2A47C00638EBC /* Swap3ViewController.xib in Resources */,
@@ -6549,6 +6556,7 @@
 				28D14E6E2418B7F0002CD42E /* ApiHistory.swift in Sources */,
 				2815AA7424349DE2008B23AA /* StepRepayCdpAmountViewController.swift in Sources */,
 				040FAA61275F55C400229F6F /* cosmos_mint_v1beta1_query.grpc.swift in Sources */,
+				046FF01E277B766200F72C11 /* TxIssueNFTDenomCell.swift in Sources */,
 				040FA945275F55C300229F6F /* cosmos_params_v1beta1_params.pb.swift in Sources */,
 				042E0C40273BBE190026CEFB /* WalletComdexCell.swift in Sources */,
 				040FA95C275F55C300229F6F /* shentu_gov_v1alpha1_tx.pb.swift in Sources */,
