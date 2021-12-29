@@ -1782,7 +1782,7 @@ class Signer {
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let issueNft = Chainmain_Nft_V1_MsgTransferNFT.with {
             $0.sender = signer
-            $0.recipient = signer
+            $0.recipient = recipient
             $0.id = id
             $0.denomID = denom_id
 //            $0.name = croResponse.nft.name
@@ -1808,7 +1808,7 @@ class Signer {
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
         let issueNft = Chainmain_Nft_V1_MsgTransferNFT.with {
             $0.sender = signer
-            $0.recipient = signer
+            $0.recipient = recipient
             $0.id = id
             $0.denomID = denom_id
             //            $0.name = croResponse.nft.name

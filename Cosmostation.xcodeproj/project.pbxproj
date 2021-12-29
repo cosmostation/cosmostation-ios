@@ -931,6 +931,10 @@
 		047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		047AE7242693378A00C1DD51 /* TxUnlockPeriodLockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */; };
 		047AE7252693378A00C1DD51 /* TxUnlockPeriodLockCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */; };
+		04877300277C6E0700D9E201 /* new2022@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FE277C6E0700D9E201 /* new2022@1x.png */; };
+		04877301277C6E0700D9E201 /* xmas@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FF277C6E0700D9E201 /* xmas@1x.png */; };
+		04877304277C809200D9E201 /* xmas.png in Resources */ = {isa = PBXBuildFile; fileRef = 04877302277C809200D9E201 /* xmas.png */; };
+		04877305277C809200D9E201 /* new2022.png in Resources */ = {isa = PBXBuildFile; fileRef = 04877303277C809200D9E201 /* new2022.png */; };
 		049DAA0127311DEB00658CFB /* WalletGBridgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */; };
 		049DAA0227311DEB00658CFB /* WalletGBridgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */; };
 		049DAA0527311DFE00658CFB /* WalletStargazeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */; };
@@ -2671,6 +2675,10 @@
 		0479664F2757409700315D55 /* MintscanProposalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposalDetail.swift; sourceTree = "<group>"; };
 		047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxUnlockPeriodLockCell.swift; sourceTree = "<group>"; };
 		047AE7232693378A00C1DD51 /* TxUnlockPeriodLockCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxUnlockPeriodLockCell.xib; sourceTree = "<group>"; };
+		048772FE277C6E0700D9E201 /* new2022@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@1x.png"; sourceTree = "<group>"; };
+		048772FF277C6E0700D9E201 /* xmas@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@1x.png"; sourceTree = "<group>"; };
+		04877302277C809200D9E201 /* xmas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmas.png; sourceTree = "<group>"; };
+		04877303277C809200D9E201 /* new2022.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = new2022.png; sourceTree = "<group>"; };
 		049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletGBridgeCell.swift; sourceTree = "<group>"; };
 		049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletGBridgeCell.xib; sourceTree = "<group>"; };
 		049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStargazeCell.swift; sourceTree = "<group>"; };
@@ -3606,8 +3614,12 @@
 		04E25D29276F23C5009B39BA /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				04877303277C809200D9E201 /* new2022.png */,
+				048772FE277C6E0700D9E201 /* new2022@1x.png */,
 				04E25D2D276F23D9009B39BA /* new2022@2x.png */,
 				04E25D2B276F23D9009B39BA /* new2022@3x.png */,
+				04877302277C809200D9E201 /* xmas.png */,
+				048772FF277C6E0700D9E201 /* xmas@1x.png */,
 				04E25D2C276F23D9009B39BA /* xmas@2x.png */,
 				04E25D2A276F23D9009B39BA /* xmas@3x.png */,
 			);
@@ -5923,6 +5935,7 @@
 				28DB571125FA3BDD00B2F0E5 /* HardPoolRepay0ViewController.xib in Resources */,
 				E103DAB4228127A3006C2146 /* ValidatorDetailMyDetailCell.xib in Resources */,
 				286EB38726035FB00021C79D /* TxCdpLiquidateCell.xib in Resources */,
+				04877300277C6E0700D9E201 /* new2022@1x.png in Resources */,
 				287D746626A52B9C00532E01 /* JoinPool3ViewController.xib in Resources */,
 				282FC72026C3FDAF001BE250 /* FarmDashCell.xib in Resources */,
 				28B4303624F7766200BD7BB2 /* TxOkDirectVoteCell.xib in Resources */,
@@ -5962,6 +5975,7 @@
 				04CFBD52269227680013150B /* TxIbcAcknowledgeCell.xib in Resources */,
 				280E1EFE254A7AD60007BA7D /* DeleteStarname3ViewController.xib in Resources */,
 				283850212448A6B000E5DEF2 /* TxHtlcClaimCell.xib in Resources */,
+				04877304277C809200D9E201 /* xmas.png in Resources */,
 				287E0AA926EDEEE400F8C242 /* WalletEmoneyCell.xib in Resources */,
 				282BDFE324A5992600D3A5D4 /* WcTradePopup.xib in Resources */,
 				2877B8F8240E2A0200EFE369 /* TxDetailViewController.xib in Resources */,
@@ -6004,6 +6018,7 @@
 				28440C58271E7B6800B4A7C3 /* SifSwap0ViewController.xib in Resources */,
 				28A2A4CB2721B9030042ACC4 /* AccountSwitchViewController.xib in Resources */,
 				28E04593269B52290022A366 /* Swap0ViewController.xib in Resources */,
+				04877301277C6E0700D9E201 /* xmas@1x.png in Resources */,
 				283EB77A26C8288400B9D28D /* EarnBondedCell.xib in Resources */,
 				28D7BE7E25F10636006EECD7 /* HardListMyStatusCell.xib in Resources */,
 				283A80C324513F6F008FF813 /* CdpListAllCell.xib in Resources */,
@@ -6041,6 +6056,7 @@
 				28A209E0248897F400C2C078 /* TokenDetailVestingDetailCell.xib in Resources */,
 				E16B70DD229F9A78001D6B9C /* RedelegateCell.xib in Resources */,
 				28FEDCE626DB140A00A43D01 /* KavaIncentiveClaim0ViewController.xib in Resources */,
+				04877305277C809200D9E201 /* new2022.png in Resources */,
 				E126CF912387A55A002A546F /* WalletKavaCell.xib in Resources */,
 				E16D9B202249E9DC0019B7BB /* Password.storyboard in Resources */,
 				E17748F522842628003D8CD1 /* ClaimRewardAllCell.xib in Resources */,
@@ -8166,7 +8182,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 130;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8178,7 +8194,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.30;
+				MARKETING_VERSION = 1.5.31;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -8198,7 +8214,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 130;
+				CURRENT_PROJECT_VERSION = 132;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -8210,7 +8226,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.30;
+				MARKETING_VERSION = 1.5.31;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
