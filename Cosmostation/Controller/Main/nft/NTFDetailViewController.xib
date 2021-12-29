@@ -25,7 +25,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GOf-6z-y3B">
-                    <rect key="frame" x="0.0" y="-6" width="414" height="799"/>
+                    <rect key="frame" x="0.0" y="2" width="414" height="791"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZvR-sf-lde">
@@ -83,7 +83,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="GOf-6z-y3B" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-50" id="5XN-kR-QjW"/>
+                <constraint firstItem="GOf-6z-y3B" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="-42" id="5XN-kR-QjW"/>
                 <constraint firstItem="x0W-rI-ieI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="CSQ-4P-6QR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZvR-sf-lde" secondAttribute="trailing" constant="16" id="H1f-9t-jxR"/>
                 <constraint firstItem="x0W-rI-ieI" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="KKX-Fe-l7X"/>
