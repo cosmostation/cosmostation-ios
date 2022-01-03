@@ -898,6 +898,8 @@
 		04394B002744C6FF002334F1 /* ManageChainAccoutsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */; };
 		04394B032746299F002334F1 /* WalletInjectiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04394B012746299F002334F1 /* WalletInjectiveCell.swift */; };
 		04394B042746299F002334F1 /* WalletInjectiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394B022746299F002334F1 /* WalletInjectiveCell.xib */; };
+		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
+		045E084B2782EB71004A7801 /* WalletChihuahuaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045E08492782EB71004A7801 /* WalletChihuahuaCell.xib */; };
 		04615CC4275074A600A693B0 /* WalletBitsongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC2275074A600A693B0 /* WalletBitsongCell.swift */; };
 		04615CC5275074A600A693B0 /* WalletBitsongCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC3275074A600A693B0 /* WalletBitsongCell.xib */; };
 		04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */; };
@@ -2642,6 +2644,8 @@
 		04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageChainAccoutsCell.xib; sourceTree = "<group>"; };
 		04394B012746299F002334F1 /* WalletInjectiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInjectiveCell.swift; sourceTree = "<group>"; };
 		04394B022746299F002334F1 /* WalletInjectiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletInjectiveCell.xib; sourceTree = "<group>"; };
+		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
+		045E08492782EB71004A7801 /* WalletChihuahuaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletChihuahuaCell.xib; sourceTree = "<group>"; };
 		04615CC2275074A600A693B0 /* WalletBitsongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBitsongCell.swift; sourceTree = "<group>"; };
 		04615CC3275074A600A693B0 /* WalletBitsongCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletBitsongCell.xib; sourceTree = "<group>"; };
 		04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosCell.swift; sourceTree = "<group>"; };
@@ -4695,6 +4699,8 @@
 				04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */,
 				2889C8B9276DC2B90041D68C /* WalletLumCell.swift */,
 				2889C8BA276DC2B90041D68C /* WalletLumCell.xib */,
+				045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */,
+				045E08492782EB71004A7801 /* WalletChihuahuaCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -6010,6 +6016,7 @@
 				E103DACE22813248006C2146 /* WalletDetailViewController.xib in Resources */,
 				2889FD882603485200CA9896 /* TxIncentiveMintingCell.xib in Resources */,
 				288A14E125199C6200E17808 /* WalletCertikCell.xib in Resources */,
+				045E084B2782EB71004A7801 /* WalletChihuahuaCell.xib in Resources */,
 				282FF35223F5172E0028CC66 /* TxTransferCell.xib in Resources */,
 				28C3F50A269DC53700F4A58C /* TxGravityWithdrawBatchCell.xib in Resources */,
 				2842919B264A586B00130651 /* TokenDetailNativeCell.xib in Resources */,
@@ -6488,6 +6495,7 @@
 				040FAA5B275F55C400229F6F /* desmos_profiles_v1beta1_msgs_chain_links.pb.swift in Sources */,
 				046E9049268C7C2B002CFFE1 /* BinanceHexEncoding.swift in Sources */,
 				28474ED5241E06AF00AF5A81 /* TxCdpRepayCell.swift in Sources */,
+				045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */,
 				040FAA50275F55C400229F6F /* iris_mod_service_tx.grpc.swift in Sources */,
 				E171A075225B091300C5756C /* StepGenTxViewController.swift in Sources */,
 				040FAA67275F55C400229F6F /* shentu_gov_v1alpha1_gov.pb.swift in Sources */,

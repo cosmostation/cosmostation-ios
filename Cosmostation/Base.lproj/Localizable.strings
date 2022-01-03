@@ -189,6 +189,8 @@
 "send_guide_msg_desmos" = "A blockchain for decentralized social networks powered by Forbole.";
 "send_guide_title_lum" = "LUM NETWORK";
 "send_guide_msg_lum" = "A Cosmos SDK-based blockchain designed for on-chain user reviews and rewards.";
+"send_guide_title_chihuahua" = "CHIHUAHUA";
+"send_guide_msg_chihuahua" = "Chihuahua chain is the first meme coin in theCosmos ecosystem.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -908,6 +910,7 @@ support@cosmostation.io";
 "chain_title_bitsong" = "Bitsong";
 "chain_title_desmos" = "Desmos";
 "chain_title_lum" = "Lum";
+"chain_title_chihuahua" = "Chiahuahua";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_test_bnb" = "Binance Testnet";

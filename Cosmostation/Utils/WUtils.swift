@@ -2205,9 +2205,9 @@ public class WUtils {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
                 denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel.text = coin.denom.uppercased()
             }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
         }
     }

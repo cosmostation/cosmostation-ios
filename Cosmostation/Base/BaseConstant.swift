@@ -1369,7 +1369,7 @@ let BLOCK_TIME_DESMOS       = NSDecimalNumber.init(string: "6.1605")
 let BLOCK_TIME_COMDEX       = NSDecimalNumber.init(string: "6.1746")
 let BLOCK_TIME_GRAV         = NSDecimalNumber.init(string: "6.4500")
 let BLOCK_TIME_LUM          = NSDecimalNumber.init(string: "5.7210")
-let BLOCK_TIME_CHIHUAHUA    = NSDecimalNumber.init(string: "6.0000")
+let BLOCK_TIME_CHIHUAHUA    = NSDecimalNumber.init(string: "5.8172")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;
