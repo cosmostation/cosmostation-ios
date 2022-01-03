@@ -2185,10 +2185,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
-    func onStartMoonPay(_ url:String) {
-        guard let url = URL(string: url) else { return }
-        let safariViewController = SFSafariViewController(url: url)
-        present(safariViewController, animated: true, completion: nil)
+    func onStartMoonPay(_ url: String) {
+        let urlMoonpay = URL(string: url)
+        if(UIApplication.shared.canOpenURL(urlMoonpay!)) {
+            UIApplication.shared.open(urlMoonpay!, options: [:], completionHandler: nil)
+        }
     }
     
     func onClickMainSend() {
