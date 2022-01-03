@@ -31,6 +31,12 @@ public struct Param {
             let epochPeriod = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.reduction_period_in_epochs)
             let osmoSupply = getMainSupply()
             return epochProvisions.multiplying(by: epochPeriod).dividing(by: osmoSupply, withBehavior: WUtils.handler18)
+            
+        } else if (chainType == ChainType.STARGAZE_MAIN) {
+            let annualProvisions = NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.initial_annual_provisions)
+            let starsSupply = getMainSupply()
+            return annualProvisions.dividing(by: starsSupply, withBehavior: WUtils.handler18)
+            
         }
         return NSDecimalNumber.init(string: params?.minting_inflation)
     }
@@ -76,6 +82,9 @@ public struct Param {
         if (chain == ChainType.OSMOSIS_MAIN) {
             let stakingDistribution = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.distribution_proportions?.staking)
             return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+        } else if (chain == ChainType.STARGAZE_MAIN) {
+            let reductionFactor = NSDecimalNumber.one.subtracting(NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.reduction_factor))
+            return inflation.multiplying(by: calTax).multiplying(by: reductionFactor).dividing(by: bondingRate, withBehavior: WUtils.handler6)
         } else {
             return inflation.multiplying(by: calTax).dividing(by: bondingRate, withBehavior: WUtils.handler6)
         }
@@ -104,6 +113,10 @@ public struct Param {
         }
         
         if let blocks_per_year = params?.minting_params?.blocks_per_year {
+            return NSDecimalNumber.init(string: blocks_per_year)
+        }
+        
+        if let blocks_per_year = params?.stargaze_minting_params?.params?.blocks_per_year {
             return NSDecimalNumber.init(string: blocks_per_year)
         }
         return NSDecimalNumber.zero
@@ -168,6 +181,8 @@ public struct Params {
     var sifchain_token_registry: SifChainTokens?
     
     var rison_swap_enabled: Bool?
+    
+    var stargaze_minting_params: StargazeMintingParam?
     
     init(_ dictionary: NSDictionary?) {
         if let rawIbcParams = dictionary?["ibc_params"] as? NSDictionary {
@@ -264,6 +279,10 @@ public struct Params {
         
         if let rawSwap_enabled = dictionary?["swap_enabled"] as? Bool {
             self.rison_swap_enabled = rawSwap_enabled
+        }
+        
+        if let rawStargazeMintingParam = dictionary?["stargaze_minting_params"] as? NSDictionary {
+            self.stargaze_minting_params = StargazeMintingParam.init(rawStargazeMintingParam)
         }
     }
 }
@@ -694,6 +713,32 @@ public struct GdexStatus {
             for rawCoin in rawCoins {
                 self.token_pair.append(Coin.init(rawCoin))
             }
+        }
+    }
+}
+
+public struct StargazeMintingParam {
+    var params: Params?
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawParams = dictionary?["params"] as? NSDictionary {
+            self.params = Params.init(rawParams)
+        }
+    }
+    
+    public struct Params {
+        var mint_denom: String?
+        var start_time: String?
+        var blocks_per_year: String?
+        var reduction_factor: String?
+        var initial_annual_provisions: String?
+        
+        init(_ dictionary: NSDictionary?) {
+            self.mint_denom = dictionary?["mint_denom"] as? String
+            self.start_time = dictionary?["start_time"] as? String
+            self.blocks_per_year = dictionary?["blocks_per_year"] as? String
+            self.reduction_factor = dictionary?["reduction_factor"] as? String
+            self.initial_annual_provisions = dictionary?["initial_annual_provisions"] as? String
         }
     }
 }

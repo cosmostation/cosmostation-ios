@@ -1708,7 +1708,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let msg3 = NSLocalizedString("str_apr_help_real_msg", comment: "") + "\n"
         var msg4 = ""
         if (param.getDpRealApr(chainType) == NSDecimalNumber.zero) {
-            msg4 = "-"
+            msg4 = "N/A"
         } else {
             msg4 = param.getDpRealApr(chainType).stringValue + "%"
         }
