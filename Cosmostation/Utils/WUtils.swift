@@ -3794,6 +3794,16 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_IBC_SEND))
             }
             
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+                result = getGasAmountForRewards()[valCnt - 1]
+            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REDELEGATE))
+            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REINVEST))
+            } else {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            }
         }
         return result
     }
@@ -3898,6 +3908,11 @@ public class WUtils {
             
         } else if (chain == ChainType.LUM_MAIN) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_LUM)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CHIHUAHUA)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
@@ -4120,6 +4135,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_LUM)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_LUM)
+            }
+            
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CHIHUAHUA)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CHIHUAHUA)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CHIHUAHUA)
             }
             
         }

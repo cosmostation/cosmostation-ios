@@ -607,6 +607,10 @@ let GAS_FEE_RATE_TINY_LUM                   = "0.001";
 let GAS_FEE_RATE_LOW_LUM                    = "0.001";
 let GAS_FEE_RATE_AVERAGE_LUM                = "0.001";
 
+let GAS_FEE_RATE_TINY_CHIHUAHUA             = "0.00035";
+let GAS_FEE_RATE_LOW_CHIHUAHUA              = "0.0035";
+let GAS_FEE_RATE_AVERAGE_CHIHUAHUA          = "0.035";
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
