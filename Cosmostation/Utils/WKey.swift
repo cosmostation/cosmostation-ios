@@ -25,7 +25,7 @@ class WKey {
             chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.KI_MAIN || chainType == ChainType.OSMOSIS_MAIN ||
             chainType == ChainType.EMONEY_MAIN || chainType == ChainType.RIZON_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.REGEN_MAIN ||
             chainType == ChainType.BITCANA_MAIN || chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.GRAVITY_BRIDGE_MAIN || chainType == ChainType.STARGAZE_MAIN ||
-            chainType == ChainType.COMDEX_MAIN ||
+            chainType == ChainType.COMDEX_MAIN || chainType == ChainType.CHIHUAHUA_MAIN ||
             chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.CERTIK_TEST || chainType == ChainType.UMEE_TEST ||
             chainType == ChainType.AXELAR_TEST || chainType == ChainType.RIZON_TEST || chainType == ChainType.ALTHEA_TEST) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
@@ -173,6 +173,8 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "desmos", program: ripemd160)
         } else if (chain == ChainType.LUM_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "lum", program: ripemd160)
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "chihuahua", program: ripemd160)
         }
         return result
     }
@@ -183,7 +185,7 @@ class WKey {
             chain == ChainType.SENTINEL_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.KI_MAIN || chain == ChainType.OSMOSIS_MAIN ||
             chain == ChainType.EMONEY_MAIN || chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.ALTHEA_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.STARGAZE_MAIN ||
-            chain == ChainType.COMDEX_MAIN ||
+            chain == ChainType.COMDEX_MAIN || chain == ChainType.CHIHUAHUA_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.CERTIK_TEST || chain == ChainType.UMEE_TEST ||
             chain == ChainType.AXELAR_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
@@ -374,6 +376,8 @@ class WKey {
             result = bech32.encode("desmos", values: data)
         } else if (chain == ChainType.LUM_MAIN) {
             result = bech32.encode("lum", values: data)
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            result = bech32.encode("chihuahua", values: data)
         }
         return result
     }
