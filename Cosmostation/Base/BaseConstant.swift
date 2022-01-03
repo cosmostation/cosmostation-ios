@@ -144,6 +144,8 @@ let DESMOS_API                          = "https://api-desmos.cosmostation.io/";
 
 let LUM_API                             = "https://api-lum.cosmostation.io/";
 
+let CHIHUAHUA_API                       = "https://api-chihuahua.cosmostation.io/";
+
 
 let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-v5/";
 
@@ -192,6 +194,7 @@ let INJECTIVE_VAL_URL                   = "https://raw.githubusercontent.com/cos
 let BITSONG_VAL_URL                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/bitsong/";
 let DESMOS_VAL_URL                      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/desmos/";
 let LUM_VAL_URL                         = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/lum-network/";
+let CHIHUAHUA_VAL_URL                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/chihuahua/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -231,6 +234,7 @@ let RELAYER_IMG_BITSONG                 = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_DESMOS                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/desmos/relay-desmos-unknown.png"
 let RELAYER_IMG_GRAVITYBRIDGE           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/gravity-bridge/relay-gravitybridge-unknown.png"
 let RELAYER_IMG_LUM                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/lum-network/relay-lum-unknown.png"
+let RELAYER_IMG_CHIHUAHUA               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/chihuahua/relay-chihuahua-unknown.png"
 
 
 
@@ -603,6 +607,10 @@ let GAS_FEE_RATE_TINY_LUM                   = "0.001";
 let GAS_FEE_RATE_LOW_LUM                    = "0.001";
 let GAS_FEE_RATE_AVERAGE_LUM                = "0.001";
 
+let GAS_FEE_RATE_TINY_CHIHUAHUA             = "0.00035";
+let GAS_FEE_RATE_LOW_CHIHUAHUA              = "0.0035";
+let GAS_FEE_RATE_AVERAGE_CHIHUAHUA          = "0.035";
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
@@ -948,6 +956,11 @@ let TRANS_BG_COLOR_LUM2                     = UIColor.init(hexString: "3e68f9", 
 let COLOR_LUM                               = UIColor.init(hexString: "3e68f9")
 let COLOR_LUM_DARK                          = UIColor.init(hexString: "264099")
 
+let TRANS_BG_COLOR_CHIHUAHUA                = UIColor.init(hexString: "ffffff", alpha: 0.15)
+let TRANS_BG_COLOR_CHIHUAHUA2               = UIColor.init(hexString: "ffffff", alpha: 0.4)
+let COLOR_CHIHUAHUA                         = UIColor.init(hexString: "f4b330")
+let COLOR_CHIHUAHUA_DARK                    = UIColor.init(hexString: "8e6d2c")
+
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
@@ -992,6 +1005,7 @@ public enum ChainType: String {
     case DESMOS_MAIN
     case INJECTIVE_MAIN
     case LUM_MAIN
+    case CHIHUAHUA_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1016,6 +1030,7 @@ public enum ChainType: String {
         result.append(BITCANA_MAIN)
         result.append(BITSONG_MAIN)
         result.append(CERTIK_MAIN)
+        result.append(CHIHUAHUA_MAIN)
         result.append(COMDEX_MAIN)
         result.append(CRYPTO_MAIN)
         result.append(DESMOS_MAIN)
@@ -1162,6 +1177,7 @@ let CHAIN_INJECTIVE_S = "SUPPORT_CHAIN_INJECTIVE"
 let CHAIN_BITSONG_S = "SUPPORT_CHAIN_BITSONG"
 let CHAIN_DESMOS_S = "SUPPORT_CHAIN_DESMOS"
 let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
+let CHAIN_CHIHUAHUA_S = "SUPPORT_CHAIN_CHIHUAHUA"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1210,6 +1226,7 @@ let INJECTIVE_MAIN_DENOM = "inj"
 let BITSONG_MAIN_DENOM = "ubtsg"
 let DESMOS_MAIN_DENOM = "udsm"
 let LUM_MAIN_DENOM = "ulum"
+let CHIHUAHUA_MAIN_DENOM = "uhuahua"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1298,6 +1315,7 @@ let EXPLORER_INJECTIVE      = "https://www.mintscan.io/injective/";
 let EXPLORER_BITSONG        = "https://www.mintscan.io/bitsong/";
 let EXPLORER_DESMOS         = "https://www.mintscan.io/desmos/";
 let EXPLORER_LUM            = "https://www.mintscan.io/lum/";
+let EXPLORER_CHIHUAHUA      = "https://www.mintscan.io/chihuahua/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
@@ -1355,6 +1373,7 @@ let BLOCK_TIME_DESMOS       = NSDecimalNumber.init(string: "6.1605")
 let BLOCK_TIME_COMDEX       = NSDecimalNumber.init(string: "6.1746")
 let BLOCK_TIME_GRAV         = NSDecimalNumber.init(string: "6.4500")
 let BLOCK_TIME_LUM          = NSDecimalNumber.init(string: "5.7210")
+let BLOCK_TIME_CHIHUAHUA    = NSDecimalNumber.init(string: "5.8172")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;

@@ -496,6 +496,11 @@ extension BaseViewController {
         })
         lumAction.setValue(UIImage(named: "chainLumnetwork")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let chihuahuaAction = UIAlertAction(title: NSLocalizedString("chain_title_chihuahua", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.CHIHUAHUA_MAIN)
+        })
+        chihuahuaAction.setValue(UIImage(named: "chainChihuahua")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -520,6 +525,7 @@ extension BaseViewController {
         showAlert.addAction(bitcannaAction)
         showAlert.addAction(bitsongAction)
         showAlert.addAction(certikAction)
+        showAlert.addAction(chihuahuaAction)
         showAlert.addAction(comdexAction)
         showAlert.addAction(cryptoAction)
         showAlert.addAction(desmosAction)

@@ -769,6 +769,8 @@ class BaseNetWork {
             result = SENTINEL_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.LUM_MAIN) {
             result = LUM_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            result = CHIHUAHUA_API + "v1/account/new_txs/" + address
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -856,6 +858,8 @@ class BaseNetWork {
             result = SENTINEL_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.LUM_MAIN) {
             result = LUM_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            result = CHIHUAHUA_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -987,6 +991,9 @@ class BaseNetWork {
             
         } else if (chain == ChainType.LUM_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-lum-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-chihuahua-app.cosmostation.io", port: 9090)
             
         }
         

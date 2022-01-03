@@ -2200,6 +2200,15 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
+        } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
+            if (coin.denom == CHIHUAHUA_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel.textColor = .white
+                denomLabel.text = coin.denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
+            
         }
     }
     
@@ -2570,6 +2579,15 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
+        } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
+            if (denom == CHIHUAHUA_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel.textColor = .white
+                denomLabel.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            
         }
             
     }
@@ -2680,6 +2698,8 @@ public class WUtils {
             return COLOR_DESMOS
         } else if (chain == ChainType.LUM_MAIN) {
             return COLOR_LUM
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return COLOR_CHIHUAHUA
         }
         return COLOR_DARK_GRAY
     }
@@ -2751,6 +2771,8 @@ public class WUtils {
             return COLOR_DESMOS_DARK
         } else if (chain == ChainType.LUM_MAIN) {
             return COLOR_LUM_DARK
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return COLOR_CHIHUAHUA_DARK
         }
         return COLOR_DARK_GRAY
     }
@@ -2822,6 +2844,8 @@ public class WUtils {
             return TRANS_BG_COLOR_DESMOS
         } else if (chain == ChainType.LUM_MAIN) {
             return TRANS_BG_COLOR_LUM
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return TRANS_BG_COLOR_CHIHUAHUA
         }
         return COLOR_BG_GRAY
     }
@@ -2897,6 +2921,8 @@ public class WUtils {
             return "DSM"
         } else if (chain == ChainType.LUM_MAIN) {
             return "LUM"
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return "HUAHUA"
         }
         return ""
     }
@@ -2964,6 +2990,8 @@ public class WUtils {
             return DESMOS_MAIN_DENOM
         } else if (chain == ChainType.LUM_MAIN) {
             return LUM_MAIN_DENOM
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return CHIHUAHUA_MAIN_DENOM
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -3143,6 +3171,9 @@ public class WUtils {
         } else if (chain == ChainType.LUM_MAIN) {
             label.text = "LUM"
             label.textColor = COLOR_LUM
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            label.text = "HUAHUA"
+            label.textColor = COLOR_CHIHUAHUA
         }
     }
     
@@ -3209,6 +3240,8 @@ public class WUtils {
             return ChainType.DESMOS_MAIN
         } else if (chainS == CHAIN_LUM_S) {
             return ChainType.LUM_MAIN
+        } else if (chainS == CHAIN_CHIHUAHUA_S) {
+            return ChainType.CHIHUAHUA_MAIN
         }
         
         else if (chainS == CHAIN_COSMOS_TEST_S) {
@@ -3302,6 +3335,8 @@ public class WUtils {
             return CHAIN_DESMOS_S
         } else if (chain == ChainType.LUM_MAIN) {
             return CHAIN_LUM_S
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return CHAIN_CHIHUAHUA_S
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -3759,6 +3794,16 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_IBC_SEND))
             }
             
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+                result = getGasAmountForRewards()[valCnt - 1]
+            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REDELEGATE))
+            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REINVEST))
+            } else {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            }
         }
         return result
     }
@@ -3863,6 +3908,11 @@ public class WUtils {
             
         } else if (chain == ChainType.LUM_MAIN) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_LUM)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CHIHUAHUA)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
@@ -4085,6 +4135,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_LUM)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_LUM)
+            }
+            
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CHIHUAHUA)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CHIHUAHUA)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CHIHUAHUA)
             }
             
         }
@@ -4441,6 +4500,9 @@ public class WUtils {
         } else if (chain == ChainType.LUM_MAIN) {
             return BLOCK_TIME_LUM
             
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return BLOCK_TIME_CHIHUAHUA
+            
         }
         return NSDecimalNumber.zero
     }
@@ -4518,6 +4580,8 @@ public class WUtils {
             return DESMOS_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.LUM_MAIN) {
             return LUM_VAL_URL + opAddress + ".png";
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return CHIHUAHUA_VAL_URL + opAddress + ".png";
         }
         return ""
     }
@@ -4615,6 +4679,9 @@ public class WUtils {
             
         } else if (chain == ChainType.LUM_MAIN) {
             return EXPLORER_LUM + "txs/" + hash
+            
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return EXPLORER_CHIHUAHUA + "txs/" + hash
             
         }
         
@@ -4737,6 +4804,9 @@ public class WUtils {
             
         } else if (chain == ChainType.LUM_MAIN) {
             return EXPLORER_LUM + "account/" + address
+            
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return EXPLORER_CHIHUAHUA + "account/" + address
             
         }
         
@@ -4865,6 +4935,9 @@ public class WUtils {
         } else if (chain == ChainType.LUM_MAIN) {
             return EXPLORER_LUM + "proposals/" + proposalId
             
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return EXPLORER_CHIHUAHUA + "proposals/" + proposalId
+            
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4989,6 +5062,9 @@ public class WUtils {
         } else if (chain == ChainType.LUM_MAIN) {
             return UIImage(named: "tokenLum")
             
+        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+            return UIImage(named: "tokenHuahua")
+            
         }
         
         else if (chain == ChainType.UMEE_TEST) {
@@ -5034,6 +5110,7 @@ public class WUtils {
         else if (chain == ChainType.DESMOS_MAIN) { return UIImage(named: "chainDesmos") }
         else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return UIImage(named: "chainGravitybridge") }
         else if (chain == ChainType.LUM_MAIN) { return UIImage(named: "chainLumnetwork") }
+        else if (chain == ChainType.CHIHUAHUA_MAIN) { return UIImage(named: "chainChihuahua") }
 
         
         else if (chain == ChainType.COSMOS_TEST) { return UIImage(named: "cosmosTestChainImg") }
@@ -5076,6 +5153,7 @@ public class WUtils {
         else if (chain == ChainType.DESMOS_MAIN) { return "desmos" }
         else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "G-BRIDGE" }
         else if (chain == ChainType.LUM_MAIN) { return "lum" }
+        else if (chain == ChainType.CHIHUAHUA_MAIN) { return "Chihuahua" }
         
         else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
         else if (chain == ChainType.OKEX_MAIN) { return "okex" }
@@ -5116,6 +5194,7 @@ public class WUtils {
         else if (chain == ChainType.DESMOS_MAIN) { return "(Desmos Mainnet)" }
         else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "(G-Bridge Mainnet)" }
         else if (chain == ChainType.LUM_MAIN) { return "(Lum Mainnet)" }
+        else if (chain == ChainType.CHIHUAHUA_MAIN) { return "(Chihuahua Mainnet)" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "(StarGate Testnet)" }
         else if (chain == ChainType.IRIS_TEST) { return "(Bifrost Testnet)" }
@@ -5161,6 +5240,7 @@ public class WUtils {
         else if (chain == ChainType.DESMOS_MAIN) { return "DESMOS" }
         else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "G-BRIDGE" }
         else if (chain == ChainType.LUM_MAIN) { return "LUM" }
+        else if (chain == ChainType.CHIHUAHUA_MAIN) { return "CHIHUAHUA" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "STARGATE" }
         else if (chain == ChainType.IRIS_TEST) { return "BIFROST" }
@@ -5202,6 +5282,7 @@ public class WUtils {
         else if (chain == ChainType.DESMOS_MAIN) { return RELAYER_IMG_DESMOS }
         else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return RELAYER_IMG_GRAVITYBRIDGE }
         else if (chain == ChainType.LUM_MAIN) { return RELAYER_IMG_LUM }
+        else if (chain == ChainType.CHIHUAHUA_MAIN) { return RELAYER_IMG_CHIHUAHUA }
 //        else if (chain == ChainType.UMEE_TEST) { return RELAYER_IMG_UMEE }
         return ""
     }
@@ -5263,6 +5344,8 @@ public class WUtils {
             return ChainType.GRAVITY_BRIDGE_MAIN
         } else if (chainId?.contains("lum-") == true) {
             return ChainType.LUM_MAIN
+        } else if (chainId?.contains("chihuahua-") == true) {
+            return ChainType.CHIHUAHUA_MAIN
         }
         
         return nil
@@ -5307,6 +5390,7 @@ public class WUtils {
         else if (address?.starts(with: "desmos1") == true && chain == ChainType.DESMOS_MAIN) { return true }
         else if (address?.starts(with: "gravity1") == true && chain == ChainType.GRAVITY_BRIDGE_MAIN) { return true }
         else if (address?.starts(with: "lum1") == true && chain == ChainType.LUM_MAIN) { return true }
+        else if (address?.starts(with: "chihuahua1") == true && chain == ChainType.CHIHUAHUA_MAIN) { return true }
         
         else if (address?.starts(with: "umee1") == true && chain == ChainType.UMEE_TEST) { return true }
         else if (address?.starts(with: "axelar1") == true && chain == ChainType.AXELAR_TEST) { return true }
@@ -5350,6 +5434,7 @@ public class WUtils {
         else if (address?.starts(with: "desmos1") == true) { return [ChainType.DESMOS_MAIN] }
         else if (address?.starts(with: "gravity1") == true) { return [ChainType.GRAVITY_BRIDGE_MAIN] }
         else if (address?.starts(with: "lum1") == true) { return [ChainType.LUM_MAIN] }
+        else if (address?.starts(with: "chihuahua1") == true) { return [ChainType.CHIHUAHUA_MAIN] }
         
         else if (address?.starts(with: "tbnb1") == true) { return [ChainType.BINANCE_TEST] }
         else if (address?.starts(with: "umee1") == true) { return [ChainType.UMEE_TEST] }

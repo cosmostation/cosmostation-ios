@@ -693,6 +693,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allLum.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(LUM_MAIN_DENOM, allLum, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == CHIHUAHUA_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenHuahua")
+            cell?.tokenSymbol.text = "HUAHUA"
+            cell?.tokenSymbol.textColor = COLOR_CHIHUAHUA
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Chihuahua Staking Token"
+            
+            let allHuahua = WUtils.getAllMainAsset(CHIHUAHUA_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allHuahua.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CHIHUAHUA_MAIN_DENOM, allHuahua, 6, cell!.tokenValue.font)
+            
         }
         
         
