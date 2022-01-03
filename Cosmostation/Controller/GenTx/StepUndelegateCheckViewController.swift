@@ -73,7 +73,7 @@ class StepUndelegateCheckViewController: BaseViewController, PasswordViewDelegat
             
         }
         memoLabel.text = pageHolderVC.mMemo
-        if (chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.CRYPTO_MAIN || chainType == ChainType.JUNO_MAIN) {
+        if (chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.CRYPTO_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.CHIHUAHUA_MAIN) {
             expectedDateLabel.text = WUtils.unbondingDateFromNow(28) + " (28days after)"
         } else if (chainType == ChainType.OSMOSIS_MAIN || chainType == ChainType.BITCANA_MAIN || chainType == ChainType.DESMOS_MAIN || chainType == ChainType.STARGAZE_MAIN) {
             expectedDateLabel.text = WUtils.unbondingDateFromNow(14) + " (14days after)"
