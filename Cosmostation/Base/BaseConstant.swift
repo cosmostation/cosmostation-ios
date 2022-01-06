@@ -141,6 +141,7 @@ let INJECTIVE_API                       = "https://api-inj.cosmostation.io/";
 let BITSONG_API                         = "https://api-bitsong.cosmostation.io/";
 
 let DESMOS_API                          = "https://api-desmos.cosmostation.io/";
+let DESMOS_AIRDROP_URL                  = "https://api.airdrop.desmos.network/";
 
 let LUM_API                             = "https://api-lum.cosmostation.io/";
 

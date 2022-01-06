@@ -888,6 +888,8 @@
 		040FAB0E275F55C400229F6F /* akash_audit_v1beta2_audit.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA79D275F55C100229F6F /* akash_audit_v1beta2_audit.grpc.swift */; };
 		040FAB0F275F55C400229F6F /* osmosis_claim_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA79E275F55C100229F6F /* osmosis_claim_v1beta1_query.grpc.swift */; };
 		040FAB10275F55C400229F6F /* comdex_oracle_v1beta1_querier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA79F275F55C100229F6F /* comdex_oracle_v1beta1_querier.pb.swift */; };
+		041345BB27855F6600DC49AD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041345B927855F6600DC49AD /* ProfileViewController.swift */; };
+		041345BC27855F6600DC49AD /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041345BA27855F6600DC49AD /* ProfileViewController.xib */; };
 		041399EB275C94490013A1BE /* WalletCheckPKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041399E9275C94490013A1BE /* WalletCheckPKeyViewController.swift */; };
 		041399EC275C94490013A1BE /* WalletCheckPKeyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */; };
 		0428ACFE268AD31700EB438F /* BandOracleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428ACFD268AD31700EB438F /* BandOracleStatus.swift */; };
@@ -898,6 +900,8 @@
 		04394B002744C6FF002334F1 /* ManageChainAccoutsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */; };
 		04394B032746299F002334F1 /* WalletInjectiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04394B012746299F002334F1 /* WalletInjectiveCell.swift */; };
 		04394B042746299F002334F1 /* WalletInjectiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394B022746299F002334F1 /* WalletInjectiveCell.xib */; };
+		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
+		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
 		045E084B2782EB71004A7801 /* WalletChihuahuaCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045E08492782EB71004A7801 /* WalletChihuahuaCell.xib */; };
 		04615CC4275074A600A693B0 /* WalletBitsongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC2275074A600A693B0 /* WalletBitsongCell.swift */; };
@@ -2634,6 +2638,8 @@
 		040FA79D275F55C100229F6F /* akash_audit_v1beta2_audit.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_audit_v1beta2_audit.grpc.swift; sourceTree = "<group>"; };
 		040FA79E275F55C100229F6F /* osmosis_claim_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA79F275F55C100229F6F /* comdex_oracle_v1beta1_querier.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_oracle_v1beta1_querier.pb.swift; sourceTree = "<group>"; };
+		041345B927855F6600DC49AD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		041345BA27855F6600DC49AD /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		041399E9275C94490013A1BE /* WalletCheckPKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCheckPKeyViewController.swift; sourceTree = "<group>"; };
 		041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCheckPKeyViewController.xib; sourceTree = "<group>"; };
 		0428ACFD268AD31700EB438F /* BandOracleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandOracleStatus.swift; sourceTree = "<group>"; };
@@ -2644,6 +2650,8 @@
 		04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageChainAccoutsCell.xib; sourceTree = "<group>"; };
 		04394B012746299F002334F1 /* WalletInjectiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInjectiveCell.swift; sourceTree = "<group>"; };
 		04394B022746299F002334F1 /* WalletInjectiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletInjectiveCell.xib; sourceTree = "<group>"; };
+		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
+		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
 		045E08492782EB71004A7801 /* WalletChihuahuaCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletChihuahuaCell.xib; sourceTree = "<group>"; };
 		04615CC2275074A600A693B0 /* WalletBitsongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletBitsongCell.swift; sourceTree = "<group>"; };
@@ -3562,6 +3570,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		041345B427855B0800DC49AD /* desmos */ = {
+			isa = PBXGroup;
+			children = (
+				041345B927855F6600DC49AD /* ProfileViewController.swift */,
+				041345BA27855F6600DC49AD /* ProfileViewController.xib */,
+			);
+			path = desmos;
+			sourceTree = "<group>";
+		};
+		04547BE82786AF0500011984 /* desmos */ = {
+			isa = PBXGroup;
+			children = (
+				04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */,
+				04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */,
+			);
+			path = desmos;
+			sourceTree = "<group>";
+		};
 		046BD22927795C9B002333B5 /* nft */ = {
 			isa = PBXGroup;
 			children = (
@@ -5471,8 +5497,6 @@
 			children = (
 				04E25D29276F23C5009B39BA /* Icons */,
 				282121BA25FDE71C0016ABFE /* ProtoBuff */,
-				28B6AFE023D9863800063D9C /* GoogleService-Info.plist */,
-				E136D8A223039493001BEBB8 /* Cosmostation.entitlements */,
 				E1A82DF12244EC1C0097CAEE /* Cell */,
 				E1A82DE622448E800097CAEE /* Utils */,
 				E1A82DDD224478150097CAEE /* Model */,
@@ -5483,6 +5507,8 @@
 				E1945E39222E7D8E00A1436F /* Base */,
 				E16D9B182248C4880019B7BB /* Assets.xcassets */,
 				E1945E33222E7C0800A1436F /* Info.plist */,
+				28B6AFE023D9863800063D9C /* GoogleService-Info.plist */,
+				E136D8A223039493001BEBB8 /* Cosmostation.entitlements */,
 				E1945E2B222E7C0600A1436F /* Main.storyboard */,
 				E1945E30222E7C0800A1436F /* LaunchScreen.storyboard */,
 				E1271B02224B17230083AF17 /* Localizable.strings */,
@@ -5531,6 +5557,7 @@
 		E1945E40222E7FB000A1436F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				041345B427855B0800DC49AD /* desmos */,
 				04E25D32276F6B25009B39BA /* nft */,
 				28E8FAED2719C20D005EAA9B /* sif */,
 				28A97CAA26DE452F0085FD0E /* gravity */,
@@ -5695,6 +5722,7 @@
 		E1A82DF12244EC1C0097CAEE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				04547BE82786AF0500011984 /* desmos */,
 				04E25D432770D53F009B39BA /* nft */,
 				28B785B326B7B05F009F755F /* rizon */,
 				28D809BA26A177830030B1BE /* osmosis */,
@@ -6063,6 +6091,7 @@
 				28A209E0248897F400C2C078 /* TokenDetailVestingDetailCell.xib in Resources */,
 				E16B70DD229F9A78001D6B9C /* RedelegateCell.xib in Resources */,
 				28FEDCE626DB140A00A43D01 /* KavaIncentiveClaim0ViewController.xib in Resources */,
+				041345BC27855F6600DC49AD /* ProfileViewController.xib in Resources */,
 				04877305277C809200D9E201 /* new2022.png in Resources */,
 				E126CF912387A55A002A546F /* WalletKavaCell.xib in Resources */,
 				E16D9B202249E9DC0019B7BB /* Password.storyboard in Resources */,
@@ -6166,6 +6195,7 @@
 				046BD22D27795CC6002333B5 /* TxIssueNFTCell.xib in Resources */,
 				287654742726BFE80071FF96 /* EditHideChainCell.xib in Resources */,
 				288F8077270DDEE8009825B5 /* TxSifSwapCell.xib in Resources */,
+				04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */,
 				2868559024989A8F0099D18F /* Bep3SupplyPopup.xib in Resources */,
 				286F585B26C7EF3F00478E16 /* FarmingDetailViewController.xib in Resources */,
 				E126CF872387A4B4002A546F /* WalletIrisCell.xib in Resources */,
@@ -6534,6 +6564,7 @@
 				040FA818275F55C200229F6F /* sentinel_deposit_v1_genesis.pb.swift in Sources */,
 				28B4303C24F7EE0C00BD7BB2 /* StepOkDepositAmountViewController.swift in Sources */,
 				E16D9B24224A083E0019B7BB /* KeyboardViewController.swift in Sources */,
+				04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */,
 				040FA83B275F55C200229F6F /* comdex_asset_v1beta1_querier.pb.swift in Sources */,
 				040FA9D6275F55C300229F6F /* lum_beam_query.grpc.swift in Sources */,
 				28E8FAF52719C28F005EAA9B /* SifDexEthPoolViewController.swift in Sources */,
@@ -7601,6 +7632,7 @@
 				E1069B0E22968DF4007517DC /* StepRedelegateToViewController.swift in Sources */,
 				040FA882275F55C200229F6F /* em_inflation_v1_query.pb.swift in Sources */,
 				040FA8A1275F55C200229F6F /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
+				041345BB27855F6600DC49AD /* ProfileViewController.swift in Sources */,
 				040FAA6B275F55C400229F6F /* sentinel_provider_v1_querier.grpc.swift in Sources */,
 				040FA917275F55C300229F6F /* band_oracle_v1_genesis.pb.swift in Sources */,
 				040FA8F4275F55C200229F6F /* gogoproto_gogo.pb.swift in Sources */,

@@ -621,6 +621,7 @@ support@cosmostation.io";
 "title_issue_nft_denom" = "Issue NFT Denom";
 "title_issue_nft" = "Issue NFT";
 "title_send_nft" = "Send NFT";
+"title_profile_detail" = "Profile Detail";
 
 
 "proposal_type_basic" = "Basic";
@@ -910,7 +911,7 @@ support@cosmostation.io";
 "chain_title_bitsong" = "Bitsong";
 "chain_title_desmos" = "Desmos";
 "chain_title_lum" = "Lum";
-"chain_title_chihuahua" = "Chiahuahua";
+"chain_title_chihuahua" = "Chihuahua";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_test_bnb" = "Binance Testnet";
