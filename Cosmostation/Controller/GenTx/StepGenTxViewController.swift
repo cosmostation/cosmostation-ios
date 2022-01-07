@@ -510,6 +510,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     self.newVc(viewController: "StepMemoViewController"),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     GenDenom3ViewController(nibName: "GenDenom3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_GEN_PROFILE) {
+            return [GenProfile0ViewController(nibName: "GenProfile0ViewController", bundle: nil),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    GenProfile3ViewController(nibName: "GenProfile3ViewController", bundle: nil)]
         }
         
         else {

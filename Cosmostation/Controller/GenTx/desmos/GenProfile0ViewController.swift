@@ -7,24 +7,36 @@
 //
 
 import UIKit
+import Photos
+import Ipfs
 
-class GenProfile0ViewController: UIViewController {
-
+class GenProfile0ViewController: BaseViewController {
+    
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var loadingImg: LoadingImageView!
+    @IBOutlet weak var dTagTextView: UITextView!
+    @IBOutlet weak var nickNameTextView: UITextView!
+    @IBOutlet weak var bioTextView: UITextView!
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var profileImageView: UIImageView!
+    
+    var pageHolderVC: StepGenTxViewController!
+    var object: ObjectModel?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.loadingImg.isHidden = true
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    
+    @IBAction func onClickCancel(_ sender: UIButton) {
     }
-    */
-
+    
+    @IBAction func onClickNext(_ sender: UIButton) {
+    }
 }

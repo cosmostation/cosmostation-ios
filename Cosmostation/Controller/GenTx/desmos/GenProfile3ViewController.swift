@@ -8,23 +8,24 @@
 
 import UIKit
 
-class GenProfile3ViewController: UIViewController {
+class GenProfile3ViewController: BaseViewController {
+    
+    @IBOutlet weak var txFeeAmountLabel: UILabel!
+    @IBOutlet weak var txFeeDenomLabel: UILabel!
+    
+    @IBOutlet weak var dTagLabel: UILabel!
+    @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var bioLabel: UILabel!
+    @IBOutlet weak var profileUriLabel: UILabel!
+    @IBOutlet weak var coverUriLabel: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
+    @IBOutlet weak var btnBack: UIButton!
+    @IBOutlet weak var btnConfirm: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -498,6 +498,10 @@
 "str_issue_nft_denom_step_1" = "메모를 입력하세요 (선택사항)";
 "str_issue_nft_denom_step_2" = "Tx 수수료를 선택하세요";
 "str_issue_nft_denom_step_3" = "입력하신 정보를 확인하세요";
+"str_create_profile_step_0" = "프로필 정보를 입력하세요";
+"str_create_profile_step_1" = "메모를 입력하세요 (선택사항)";
+"str_create_profile_step_2" = "Tx 수수료를 선택하세요";
+"str_create_profile_step_3" = "입력하신 정보를 확인하세요";
 
 "str_description_open_domain" = "Open 타입은 계정 소유자가 계정에 대한 작업을 수행 할 수있는 유일한 엔티티인 도메인 유형입니다.";
 "str_description_closed_domain" = "Closed 타입은 도메인 소유자가 계정을 제어 할 수있는 도메인 유형입니다.";
@@ -623,6 +627,7 @@ support@cosmostation.io";
 "title_issue_nft" = "NFT 발행";
 "title_send_nft" = "NFT 전송";
 "title_profile_detail" = "프로필 상세";
+"title_profile_create" = "프로필 작성";
 
 
 "proposal_type_basic" = "기본";

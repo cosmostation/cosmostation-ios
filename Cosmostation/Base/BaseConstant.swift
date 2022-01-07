@@ -449,6 +449,8 @@ let TASK_ISSUE_NFT_DENOM                    = "issue_nft_denom";
 let TASK_ISSUE_NFT                          = "issue_nft";
 let TASK_SEND_NFT                           = "send_nft";
 
+let TASK_GEN_PROFILE                        = "gen_profile";
+
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"
 let PASSWORD_ACTION_SIMPLE_CHECK            = "ACTION_SIMPLE_CHECK"
