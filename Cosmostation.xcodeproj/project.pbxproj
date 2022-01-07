@@ -995,6 +995,10 @@
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
 		280524B5255CDA7D004D6172 /* StarnameWalletConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280524B3255CDA7D004D6172 /* StarnameWalletConnectViewController.xib */; };
 		280524B8255CEEC7004D6172 /* ExportStarname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B7255CEEC7004D6172 /* ExportStarname.swift */; };
+		2807DB392788182000016571 /* GenProfile0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807DB372788182000016571 /* GenProfile0ViewController.swift */; };
+		2807DB3A2788182000016571 /* GenProfile0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807DB382788182000016571 /* GenProfile0ViewController.xib */; };
+		2807DB3D2788182F00016571 /* GenProfile3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2807DB3B2788182F00016571 /* GenProfile3ViewController.swift */; };
+		2807DB3E2788182F00016571 /* GenProfile3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807DB3C2788182F00016571 /* GenProfile3ViewController.xib */; };
 		2808FEE126BBFC4700DE5E9A /* TxMediAddRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808FEDF26BBFC4700DE5E9A /* TxMediAddRecordCell.swift */; };
 		2808FEE226BBFC4700DE5E9A /* TxMediAddRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2808FEE026BBFC4700DE5E9A /* TxMediAddRecordCell.xib */; };
 		2808FEE526BBFC6400DE5E9A /* TxMediCreateDidCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2808FEE326BBFC6400DE5E9A /* TxMediCreateDidCell.swift */; };
@@ -2746,6 +2750,10 @@
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
 		280524B3255CDA7D004D6172 /* StarnameWalletConnectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StarnameWalletConnectViewController.xib; sourceTree = "<group>"; };
 		280524B7255CEEC7004D6172 /* ExportStarname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportStarname.swift; sourceTree = "<group>"; };
+		2807DB372788182000016571 /* GenProfile0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenProfile0ViewController.swift; sourceTree = "<group>"; };
+		2807DB382788182000016571 /* GenProfile0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenProfile0ViewController.xib; sourceTree = "<group>"; };
+		2807DB3B2788182F00016571 /* GenProfile3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenProfile3ViewController.swift; sourceTree = "<group>"; };
+		2807DB3C2788182F00016571 /* GenProfile3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenProfile3ViewController.xib; sourceTree = "<group>"; };
 		2808FEDF26BBFC4700DE5E9A /* TxMediAddRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxMediAddRecordCell.swift; sourceTree = "<group>"; };
 		2808FEE026BBFC4700DE5E9A /* TxMediAddRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxMediAddRecordCell.xib; sourceTree = "<group>"; };
 		2808FEE326BBFC6400DE5E9A /* TxMediCreateDidCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxMediCreateDidCell.swift; sourceTree = "<group>"; };
@@ -3701,6 +3709,17 @@
 				046FF019277B43F100F72C11 /* GenDenom3ViewController.xib */,
 			);
 			path = nft;
+			sourceTree = "<group>";
+		};
+		2807DB36278817D600016571 /* desmos */ = {
+			isa = PBXGroup;
+			children = (
+				2807DB372788182000016571 /* GenProfile0ViewController.swift */,
+				2807DB382788182000016571 /* GenProfile0ViewController.xib */,
+				2807DB3B2788182F00016571 /* GenProfile3ViewController.swift */,
+				2807DB3C2788182F00016571 /* GenProfile3ViewController.xib */,
+			);
+			path = desmos;
 			sourceTree = "<group>";
 		};
 		2808FEDE26BBFC2600DE5E9A /* medi */ = {
@@ -5413,6 +5432,7 @@
 		E171A067225AF71800C5756C /* GenTx */ = {
 			isa = PBXGroup;
 			children = (
+				2807DB36278817D600016571 /* desmos */,
 				04E25D4C27749A70009B39BA /* nft */,
 				2845AE4C271C70EB005AA537 /* sif */,
 				2894104E26FDB30A005BCBE4 /* ibc */,
@@ -6178,6 +6198,7 @@
 				04E25D472770D56C009B39BA /* NFTDetailInfoCell.xib in Resources */,
 				283E94872549333B007A9291 /* AccountDetailViewController.xib in Resources */,
 				E103DAAF22812773006C2146 /* ValidatorDetailHistoryEmpty.xib in Resources */,
+				2807DB3A2788182000016571 /* GenProfile0ViewController.xib in Resources */,
 				28393B8426B9023D00DF2F88 /* HdacBalancePopup.xib in Resources */,
 				283E750026CE247C0097CC04 /* StakingTokenGrpcViewController.xib in Resources */,
 				E103DAD3228143D0006C2146 /* WalletCheckViewController.xib in Resources */,
@@ -6215,6 +6236,7 @@
 				2834399B2531D13C00CCFADE /* StarName.storyboard in Resources */,
 				283E9469254902D4007A9291 /* TxRegisterAccountCell.xib in Resources */,
 				E1945E2D222E7C0600A1436F /* Main.storyboard in Resources */,
+				2807DB3E2788182F00016571 /* GenProfile3ViewController.xib in Resources */,
 				280E1F2B254AD3A80007BA7D /* ResourceChainCell.xib in Resources */,
 				283D2EB024F5742000247424 /* WalletOkCell.xib in Resources */,
 			);
@@ -7641,6 +7663,7 @@
 				040FA9E9275F55C300229F6F /* starname_iov_escrow_v1beta1_types.pb.swift in Sources */,
 				040FA970275F55C300229F6F /* starname_cosmwasm_wasm_v1_ibc.pb.swift in Sources */,
 				040FA7A7275F55C200229F6F /* panacea_burn_v2_query.grpc.swift in Sources */,
+				2807DB392788182000016571 /* GenProfile0ViewController.swift in Sources */,
 				E12D6B8B226DF3A700D07CE4 /* StepSendAmountViewController.swift in Sources */,
 				284FBC8126DBE98500403FE2 /* TxSwapWithdrawCell.swift in Sources */,
 				28474ECD241E06AF00AF5A81 /* TxCdpDepositCell.swift in Sources */,
@@ -7657,6 +7680,7 @@
 				040FAA7D275F55C400229F6F /* sentinel_session_v1_session.pb.swift in Sources */,
 				040FA7B8275F55C200229F6F /* shentu_shield_v1alpha1_query.grpc.swift in Sources */,
 				040FAAB1275F55C400229F6F /* sentinel_node_v1_events.pb.swift in Sources */,
+				2807DB3D2788182F00016571 /* GenProfile3ViewController.swift in Sources */,
 				289DF170242DD90300433CF4 /* CdpDetailViewController.swift in Sources */,
 				2889FD77260337AD00CA9896 /* TxHardRepayCell.swift in Sources */,
 				040FA964275F55C300229F6F /* em_liquidityprovider_v1_query.grpc.swift in Sources */,
