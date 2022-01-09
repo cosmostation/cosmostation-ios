@@ -160,6 +160,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var irisResponse: Irismod_Nft_QueryNFTResponse?
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     
+    var mDesmosDtag: String?
+    var mDesmosNickName: String?
+    var mDesmosBio: String?
+    var mDesmosCoverHash: String?
+    var mDesmosProfileHash: String?
+    
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == COSMOS_MSG_TYPE_DELEGATE || mType == IRIS_MSG_TYPE_DELEGATE) {
             if (WUtils.isGRPC(chainType!)) {

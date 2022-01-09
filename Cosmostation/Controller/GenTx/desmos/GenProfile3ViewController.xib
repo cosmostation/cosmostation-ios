@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
                 <outlet property="btnConfirm" destination="gea-du-IhJ" id="ENU-aQ-IXQ"/>
                 <outlet property="coverUriLabel" destination="Yfz-Lx-yFz" id="Eta-mO-FH0"/>
                 <outlet property="dTagLabel" destination="ePk-o0-BDL" id="354-Ex-o20"/>
-                <outlet property="memoLabel" destination="AIq-ec-kOv" id="1fj-JO-7j3"/>
+                <outlet property="memoLabel" destination="3vt-fy-Jkl" id="kY5-C2-Sfk"/>
                 <outlet property="nickNameLabel" destination="AIq-ec-kOv" id="PjG-aV-mLA"/>
                 <outlet property="profileUriLabel" destination="f6b-XM-RMg" id="7sZ-CG-48C"/>
                 <outlet property="txFeeAmountLabel" destination="HGC-HZ-mAk" id="Ycc-UO-5Sq"/>
@@ -51,6 +51,9 @@
                                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="6ec-Rj-lTB"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gea-du-IhJ">
                             <rect key="frame" x="196" y="0.0" width="186" height="50"/>
@@ -72,6 +75,9 @@
                                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickConfirm:" destination="-1" eventType="touchUpInside" id="GpX-Ne-vav"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>
@@ -111,7 +117,7 @@
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ePk-o0-BDL">
                             <rect key="frame" x="16" y="85.5" width="350" height="14"/>
-                            <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="12"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>

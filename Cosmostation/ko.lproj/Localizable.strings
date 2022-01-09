@@ -747,6 +747,9 @@ support@cosmostation.io";
 "error_no_nft_dexcription" = "NFT 설명을 입력하세요";
 "error_nft_denom_count" = "Denom ID를 숫자,소문자로 4~20자 입력해주세요.";
 "error_nft_denom_exist" = "Denom ID가 이미 존재합니다. 다른 아이디를 입력해주세요.";
+"error_already_registered_dtag" = "이미 등록된 Dtag입니다. 다른값을 입력하세요.";
+"error_insert_dtag" = "Dtag값을 입력하세요.";
+
 
 
 

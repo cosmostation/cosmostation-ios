@@ -449,8 +449,8 @@ let TASK_ISSUE_NFT_DENOM                    = "issue_nft_denom";
 let TASK_ISSUE_NFT                          = "issue_nft";
 let TASK_SEND_NFT                           = "send_nft";
 
-let TASK_GEN_PROFILE                        = "gen_profile";
-
+let TASK_GEN_PROFILE                        = "desmos/MsgSaveProfile";
+let TASK_LINK_CHAIN_ACCOUNT                 = "desmos/MsgLinkChainAccount";
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"
 let PASSWORD_ACTION_SIMPLE_CHECK            = "ACTION_SIMPLE_CHECK"
@@ -620,6 +620,7 @@ let GAS_FEE_AMOUNT_HIGH                     = "300000"
 let GAS_FEE_AMOUNT_REINVEST                 = "220000"
 let GAS_FEE_AMOUNT_REDELE                   = "240000"
 let GAS_FEE_AMOUNT_IBC_SEND                 = "500000"
+let GAS_FEE_AMOUNT_PROFILE                  = "350000"
 
 let GAS_FEE_AMOUNT_COSMOS_SWAP              = "200000"
 let GAS_FEE_AMOUNT_COSMOS_JOIN_POOL         = "300000"

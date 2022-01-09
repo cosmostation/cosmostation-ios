@@ -1876,6 +1876,56 @@ class Signer {
     }
     
     
+    static func genSignedSaveProfileTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                           _ creator: String,_ dtag: String, _ nickname: String, _ bio: String, _ profile_picture: String, _ cover_picture: String,
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let saveProfile = Desmos_Profiles_V1beta1_MsgSaveProfile.with {
+            $0.dtag = dtag
+            $0.nickname = nickname
+            $0.bio = bio
+            $0.profilePicture = profile_picture
+            $0.coverPicture = cover_picture
+            $0.creator = creator
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/desmos.profiles.v1beta1.MsgSaveProfile"
+            $0.value = try! saveProfile.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateSaveProfileTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                             _ creator: String,_ dtag: String, _ nickname: String, _ bio: String, _ profile_picture: String, _ cover_picture: String,
+                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let saveProfile = Desmos_Profiles_V1beta1_MsgSaveProfile.with {
+            $0.dtag = dtag
+            $0.nickname = nickname
+            $0.bio = bio
+            $0.profilePicture = profile_picture
+            $0.coverPicture = cover_picture
+            $0.creator = creator
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/desmos.profiles.v1beta1.MsgSaveProfile"
+            $0.value = try! saveProfile.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
+    
     static func getGrpcTxBody(_ msgAnys: Array<Google_Protobuf2_Any>, _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
             $0.memo = memo

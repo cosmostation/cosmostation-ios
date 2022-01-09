@@ -750,6 +750,8 @@ support@cosmostation.io";
 "error_no_nft_dexcription" = "Add NFT Description";
 "error_nft_denom_count" = "Please Insert 4~20 low char Denom ID";
 "error_nft_denom_exist" = "Denom ID is already exist. please using unique ID";
+"error_already_registered_dtag" = "This Dtag already registered. please use another text for Dtag.";
+"error_insert_dtag" = "Please add Dtag for profile.";
 
 
 
