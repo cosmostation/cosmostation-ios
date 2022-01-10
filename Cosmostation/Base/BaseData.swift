@@ -938,6 +938,17 @@ final class BaseData : NSObject{
         return result;
     }
     
+    public func selectAllAccountsByChainWithKey(_ chain: ChainType) -> Array<Account> {
+        var result = Array<Account>()
+        let allAccounts = selectAllAccounts()
+        for account in allAccounts {
+            if (WUtils.getChainType(account.account_base_chain) == chain && account.account_has_private == true) {
+                result.append(account)
+            }
+        }
+        return result;
+    }
+    
     public func selectAllAccountsByHtlcClaim(_ chain:ChainType?) -> Array<Account> {
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()

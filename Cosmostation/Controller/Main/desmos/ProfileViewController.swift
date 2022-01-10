@@ -74,6 +74,21 @@ class ProfileViewController: BaseViewController, UITableViewDelegate, UITableVie
     func parallaxHeaderDidScroll(_ parallaxHeader: HPParallaxHeader) {
 //        print("progress \(parallaxHeader.progress)")
     }
+    
+    @IBAction func onClickEdit(_ sender: UIButton) {
+    }
+    
+    @IBAction func onClickAccountLink(_ sender: UIButton) {
+        if (account?.account_has_private == false) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_LINK_CHAIN_ACCOUNT
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
+    }
 }
 
 
@@ -92,15 +107,88 @@ extension WUtils {
         return result
     }
     
+    static func getDesmosPrefix(_ chain: ChainType) -> String {
+        if (chain == ChainType.COSMOS_MAIN) { return "cosmos" }
+        else if (chain == ChainType.OSMOSIS_MAIN) { return "osmo" }
+        else if (chain == ChainType.AKASH_MAIN) { return "akash" }
+        else if (chain == ChainType.BAND_MAIN) { return "band" }
+        else if (chain == ChainType.CRYPTO_MAIN) { return "cro" }
+        else if (chain == ChainType.JUNO_MAIN) { return "juno" }
+        else if (chain == ChainType.KAVA_MAIN) { return "kava" }
+        else if (chain == ChainType.EMONEY_MAIN) { return "emoney" }
+        else if (chain == ChainType.REGEN_MAIN) { return "regen" }
+        else { return "" }
+    }
+    
+    static func getDesmosChainconfig(_ chain: ChainType) -> String {
+        if (chain == ChainType.COSMOS_MAIN) { return "cosmos" }
+        else if (chain == ChainType.OSMOSIS_MAIN) { return "osmosis" }
+        else if (chain == ChainType.AKASH_MAIN) { return "akash" }
+        else if (chain == ChainType.BAND_MAIN) { return "band" }
+        else if (chain == ChainType.CRYPTO_MAIN) { return "cro" }
+        else if (chain == ChainType.JUNO_MAIN) { return "juno" }
+        else if (chain == ChainType.KAVA_MAIN) { return "kava" }
+        else if (chain == ChainType.EMONEY_MAIN) { return "emoney" }
+        else if (chain == ChainType.REGEN_MAIN) { return "regen" }
+        else { return "" }
+    }
+    
 }
 
-struct DesmosFeeCheck: Codable{
+struct DesmosFeeCheck: Codable {
     var user_address: String = ""
     var desmos_address: String = ""
     
     init(_ desmos_address: String) {
         self.user_address = "cosmos1603mnk65ny0a6m3fs59s0qmpupm9g93vctsau4"
         self.desmos_address = desmos_address
+    }
+}
+
+struct DesmosAirDrops  {
+    var staking_infos: Array<DesmosAirdropInfo> = Array<DesmosAirdropInfo>()
+    var lp_infos: Array<DesmosAirdropInfo> = Array<DesmosAirdropInfo>()
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawStakingInfos = dictionary?["staking_infos"] as? Array<NSDictionary> {
+            for rawStakingInfo in rawStakingInfos {
+                self.staking_infos.append(DesmosAirdropInfo.init(rawStakingInfo))
+            }
+        }
+        if let rawLpInfos = dictionary?["lp_infos"] as? Array<NSDictionary> {
+            for rawLpInfo in rawLpInfos {
+                self.lp_infos.append(DesmosAirdropInfo.init(rawLpInfo))
+            }
+        }
+    }
+    
+    func getUnclaimedAirdropAmount() -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        staking_infos.forEach { stakingInfo in
+            if (stakingInfo.claimed == false) {
+                result = result.adding(NSDecimalNumber.init(value: stakingInfo.dsm_allotted ?? 0))
+            }
+        }
+        lp_infos.forEach { lpInfo in
+            if (lpInfo.claimed == false) {
+                result = result.adding(NSDecimalNumber.init(value: lpInfo.dsm_allotted ?? 0))
+            }
+        }
+        return result
+    }
+}
+
+struct DesmosAirdropInfo {
+    var address: String?
+    var chain_name: String?
+    var dsm_allotted: Double?
+    var claimed: Bool?
+    
+    init(_ dictionary: NSDictionary?) {
+        self.address = dictionary?["address"] as? String
+        self.chain_name = dictionary?["chain_name"] as? String
+        self.dsm_allotted = dictionary?["dsm_allotted"] as? Double
+        self.claimed = dictionary?["claimed"] as? Bool
     }
 }
 

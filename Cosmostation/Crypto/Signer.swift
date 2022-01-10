@@ -1925,6 +1925,111 @@ class Signer {
         }
     }
     
+    static func genSignedLinkChainTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ signer: String, _ tochain: ChainType, _ toAccount: Account, _ toPrivateKey: Data, _ toPublicKey: Data,
+                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        
+        let plainString = "Link Chain With Cosmostation"
+        let sigbyte = getGrpcByteSingleSignature(toPrivateKey, plainString.data(using: .utf8)!)
+        
+        let desmosBech32 = Desmos_Profiles_V1beta1_Bech32Address.with {
+            $0.value = toAccount.account_address
+            $0.prefix = WUtils.getDesmosPrefix(tochain)
+        }
+        let chainAddress = Google_Protobuf2_Any.with {
+            $0.typeURL = "/desmos.profiles.v1beta1.Bech32Address"
+            $0.value = try! desmosBech32.serializedData()
+        }
+        
+        let toAccountPub = Cosmos_Crypto_Secp256k1_PubKey.with {
+            $0.key = toPublicKey
+        }
+        let toAccountPubKey = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.crypto.secp256k1.PubKey"
+            $0.value = try! toAccountPub.serializedData()
+        }
+        let desmosProof = Desmos_Profiles_V1beta1_Proof.with {
+            $0.signature = sigbyte.toHexString()
+            $0.plainText = plainString.toHexString()
+            $0.pubKey = toAccountPubKey
+        }
+        
+        let desmosChainConfig = Desmos_Profiles_V1beta1_ChainConfig.with {
+            $0.name = WUtils.getDesmosChainconfig(tochain)
+        }
+        
+        let linkchain = Desmos_Profiles_V1beta1_MsgLinkChainAccount.with {
+            $0.chainAddress = chainAddress
+            $0.proof = desmosProof
+            $0.chainConfig = desmosChainConfig
+            $0.signer = signer
+        }
+        
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/desmos.profiles.v1beta1.MsgLinkChainAccount"
+            $0.value = try! linkchain.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateLinkChainTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ signer: String, _ tochain: ChainType, _ toAccount: Account, _ toPrivateKey: Data, _ toPublicKey: Data,
+                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        
+        let plainString = "Link Chain With Cosmostation"
+        let sigbyte = getGrpcByteSingleSignature(toPrivateKey, plainString.data(using: .utf8)!)
+        
+        let desmosBech32 = Desmos_Profiles_V1beta1_Bech32Address.with {
+            $0.value = toAccount.account_address
+            $0.prefix = WUtils.getDesmosPrefix(tochain)
+        }
+        let chainAddress = Google_Protobuf2_Any.with {
+            $0.typeURL = "/desmos.profiles.v1beta1.Bech32Address"
+            $0.value = try! desmosBech32.serializedData()
+        }
+        let toAccountPub = Cosmos_Crypto_Secp256k1_PubKey.with {
+            $0.key = toPublicKey
+        }
+        let toAccountPubKey = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.crypto.secp256k1.PubKey"
+            $0.value = try! toAccountPub.serializedData()
+        }
+        let desmosProof = Desmos_Profiles_V1beta1_Proof.with {
+            $0.signature = sigbyte.toHexString()
+            $0.plainText = plainString.toHexString()
+            $0.pubKey = toAccountPubKey
+        }
+        
+        let desmosChainConfig = Desmos_Profiles_V1beta1_ChainConfig.with {
+            $0.name = WUtils.getDesmosChainconfig(tochain)
+        }
+        let linkchain = Desmos_Profiles_V1beta1_MsgLinkChainAccount.with {
+            $0.chainAddress = chainAddress
+            $0.proof = desmosProof
+            $0.chainConfig = desmosChainConfig
+            $0.signer = signer
+        }
+        
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/desmos.profiles.v1beta1.MsgLinkChainAccount"
+            $0.value = try! linkchain.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
     
     static func getGrpcTxBody(_ msgAnys: Array<Google_Protobuf2_Any>, _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {

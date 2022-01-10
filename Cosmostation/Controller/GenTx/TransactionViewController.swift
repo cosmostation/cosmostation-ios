@@ -323,6 +323,11 @@ class TransactionViewController: UIViewController {
             stepDescription.text = NSLocalizedString("str_create_profile_step_0", comment: "")
             stepImg.image = UIImage.init(named: "4StepImg1")
             self.titleLabel.text =  NSLocalizedString("title_profile_create", comment: "")
+            
+        } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
+            stepDescription.text = NSLocalizedString("str_account_link_step_0", comment: "")
+            stepImg.image = UIImage.init(named: "4StepImg1")
+            self.titleLabel.text =  NSLocalizedString("title_account_chain_link", comment: "")
         }
         
         
@@ -596,6 +601,9 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_create_profile_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg1")
                     
+                } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
+                    stepDescription.text = NSLocalizedString("str_account_link_step_0", comment: "")
+                    stepImg.image = UIImage.init(named: "4StepImg1")
                 }
                 
                 
@@ -796,6 +804,9 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_create_profile_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg2")
                     
+                } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
+                    stepDescription.text = NSLocalizedString("str_account_link_step_1", comment: "")
+                    stepImg.image = UIImage.init(named: "4StepImg2")
                 }
                 
                 
@@ -992,6 +1003,9 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_create_profile_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg3")
                     
+                } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
+                    stepDescription.text = NSLocalizedString("str_account_link_step_2", comment: "")
+                    stepImg.image = UIImage.init(named: "4StepImg3")
                 }
                 
                 
@@ -1188,6 +1202,9 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_create_profile_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg4")
                     
+                } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
+                    stepDescription.text = NSLocalizedString("str_account_link_step_3", comment: "")
+                    stepImg.image = UIImage.init(named: "4StepImg4")
                 }
                 
             } else if (step == 4) {

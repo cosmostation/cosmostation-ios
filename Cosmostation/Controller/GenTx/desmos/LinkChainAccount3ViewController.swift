@@ -1,24 +1,23 @@
 //
-//  GenProfile3ViewController.swift
+//  LinkChainAccount3ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2022/01/07.
+//  Created by yongjoo jung on 2022/01/09.
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import GRPC
 import NIO
+import SwiftKeychainWrapper
 
-class GenProfile3ViewController: BaseViewController, PasswordViewDelegate {
+class LinkChainAccount3ViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var txFeeAmountLabel: UILabel!
     @IBOutlet weak var txFeeDenomLabel: UILabel!
-    @IBOutlet weak var dTagLabel: UILabel!
-    @IBOutlet weak var nickNameLabel: UILabel!
-    @IBOutlet weak var bioLabel: UILabel!
-    @IBOutlet weak var profileUriLabel: UILabel!
-    @IBOutlet weak var coverUriLabel: UILabel!
+    @IBOutlet weak var linkAddressLabel: UILabel!
+    @IBOutlet weak var airdropAmountLabel: UILabel!
+    @IBOutlet weak var airdropDenomLabel: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
@@ -40,11 +39,8 @@ class GenProfile3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onUpdateView() {
         WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
-        dTagLabel.text = pageHolderVC.mDesmosDtag
-        nickNameLabel.text = pageHolderVC.mDesmosNickName
-        bioLabel.text = pageHolderVC.mDesmosBio
-        profileUriLabel.text = (pageHolderVC.mDesmosProfileHash?.isEmpty == true) ? "" :  NFT_INFURA + pageHolderVC.mDesmosProfileHash!
-        coverUriLabel.text = (pageHolderVC.mDesmosCoverHash?.isEmpty == true) ? "" :  NFT_INFURA + pageHolderVC.mDesmosProfileHash!
+        linkAddressLabel.text = BaseData.instance.selectAccountById(id: pageHolderVC.mDesmosToLinkAccountId)?.account_address
+        airdropAmountLabel.text = pageHolderVC.mDesmosAirDropAmount
         memoLabel.text = pageHolderVC.mMemo
     }
     
@@ -93,24 +89,39 @@ class GenProfile3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedSaveProfileTxgRPC(auth!,
-                                                          self.pageHolderVC.mAccount!.account_address,
-                                                          self.pageHolderVC.mDesmosDtag!,
-                                                          self.pageHolderVC.mDesmosNickName!,
-                                                          self.pageHolderVC.mDesmosBio!,
-                                                          (self.pageHolderVC.mDesmosProfileHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosProfileHash!,
-                                                          (self.pageHolderVC.mDesmosCoverHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosCoverHash!,
-                                                          self.pageHolderVC.mFee!,
-                                                          self.pageHolderVC.mMemo!,
-                                                          self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                          BaseData.instance.getChainId(self.chainType))
+            let toAccount = BaseData.instance.selectAccountById(id: self.pageHolderVC.mDesmosToLinkAccountId)!
+            var toPrivateKey: Data!
+            var toPublicKey: Data!
+            if (toAccount.account_from_mnemonic == true) {
+                if let words = KeychainWrapper.standard.string(forKey: toAccount.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                    toPrivateKey = KeyFac.getPrivateRaw(words, toAccount)
+                    toPublicKey = KeyFac.getPublicFromPrivateKey(toPrivateKey)
+                }
+                
+            } else {
+                if let key = KeychainWrapper.standard.string(forKey: toAccount.getPrivateKeySha1()) {
+                    toPrivateKey = KeyFac.getPrivateFromString(key)
+                    toPublicKey = KeyFac.getPublicFromPrivateKey(toPrivateKey)
+                }
+            }
             
+            let reqTx = Signer.genSignedLinkChainTxgRPC(auth!,
+                                                        self.pageHolderVC.mAccount!.account_address,
+                                                        self.pageHolderVC.mDesmosToLinkChain!,
+                                                        toAccount,
+                                                        toPrivateKey,
+                                                        toPublicKey,
+                                                        self.pageHolderVC.mFee!,
+                                                        self.pageHolderVC.mMemo!,
+                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                        BaseData.instance.getChainId(self.chainType))
+
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }
-            
+
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
             defer { try! channel.close().wait() }
-            
+
             do {
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
 //                print("response ", response.txResponse.txhash)
@@ -126,5 +137,4 @@ class GenProfile3ViewController: BaseViewController, PasswordViewDelegate {
             }
         }
     }
-
 }

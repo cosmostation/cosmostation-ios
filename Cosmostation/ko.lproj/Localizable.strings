@@ -298,6 +298,8 @@
 "str_msg_ibc" = "IBC 전송은 거래소 입금을 지원 하지 않습니다.\n거래소로 전송을 원하실 경우 반드시 해당 체인의 본인 계정으로 IBC 전송 후에 다시 일반 전송으로 입금해야합니다.\n\n또한 본 지갑은 현재 활성화된 릴레이어의 IBC 전송을 중계를 지원할뿐 IBC 전송간 일어나는 내제적은 문제에 대해서는 책임을 지지 않습니다.\nIBC 전송 진행하기전에 선택한 릴레이어에 대한 안정성은 사용자가 직접 검토해야 합니다.";
 "str_msg_relayer_unauthed" = "선택하신 릴레이어는 확인되지 않았습니다.\n해당 릴레이어를 통해 IBC 전송을 실행할 경우 자산이 손실될 수 있습니다.(해당 체인의 커뮤니티 등을 통해 안전성을 확인하고 진행하시는것을 권장합니다.)\n계속 진행 하시겠습니까?";
 "str_select_starname_domain" = "도메인을 선택해 주세요.";
+"select_to_link_chain" = "링크하실 체인을 고르세요.";
+"select_to_link_account" = "링크하실 계정을 고르세요.";
 
 "current_price_format" = "현재 %@ 가격";
 "liquidation_price_format" = "청산 %@ 가격";
@@ -502,6 +504,10 @@
 "str_create_profile_step_1" = "메모를 입력하세요 (선택사항)";
 "str_create_profile_step_2" = "Tx 수수료를 선택하세요";
 "str_create_profile_step_3" = "입력하신 정보를 확인하세요";
+"str_account_link_step_0" = "링크하실 체인과 계정을 입력하세요";
+"str_account_link_step_1" = "메모를 입력하세요 (선택사항)";
+"str_account_link_step_2" = "Tx 수수료를 선택하세요";
+"str_account_link_step_3" = "입력하신 정보를 확인하세요";
 
 "str_description_open_domain" = "Open 타입은 계정 소유자가 계정에 대한 작업을 수행 할 수있는 유일한 엔티티인 도메인 유형입니다.";
 "str_description_closed_domain" = "Closed 타입은 도메인 소유자가 계정을 제어 할 수있는 도메인 유형입니다.";
@@ -628,6 +634,7 @@ support@cosmostation.io";
 "title_send_nft" = "NFT 전송";
 "title_profile_detail" = "프로필 상세";
 "title_profile_create" = "프로필 작성";
+"title_account_chain_link" = "계정링크 & 에어드랍";
 
 
 "proposal_type_basic" = "기본";
@@ -749,6 +756,8 @@ support@cosmostation.io";
 "error_nft_denom_exist" = "Denom ID가 이미 존재합니다. 다른 아이디를 입력해주세요.";
 "error_already_registered_dtag" = "이미 등록된 Dtag입니다. 다른값을 입력하세요.";
 "error_insert_dtag" = "Dtag값을 입력하세요.";
+"error_no_account_this_chain" = "선택하신 체인의 연결가능한 계정이 없습니다.";
+"error_select_account_link" = "연결할 계정을 선택해 주세요.";
 
 
 

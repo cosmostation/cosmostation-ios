@@ -50,13 +50,16 @@
                                     <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickEdit:" destination="-1" eventType="touchUpInside" id="31H-tD-4Pn"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zrS-TB-va2">
                             <rect key="frame" x="194" y="0.0" width="188" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="oAa-FF-JVr"/>
                             </constraints>
-                            <state key="normal" title="  Air Drop" image="iconAirdrop">
+                            <state key="normal" title="  Link &amp; Airdrop" image="iconAirdrop">
                                 <color key="titleColor" red="0.0" green="0.73333333329999995" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -70,6 +73,9 @@
                                     <color key="value" red="0.0" green="0.73333333329999995" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickAccountLink:" destination="-1" eventType="touchUpInside" id="o6l-Q9-hB3"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

@@ -165,6 +165,9 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mDesmosBio: String?
     var mDesmosCoverHash: String?
     var mDesmosProfileHash: String?
+    var mDesmosToLinkChain: ChainType?
+    var mDesmosToLinkAccountId: Int64!
+    var mDesmosAirDropAmount: String?
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == COSMOS_MSG_TYPE_DELEGATE || mType == IRIS_MSG_TYPE_DELEGATE) {
@@ -522,6 +525,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     self.newVc(viewController: "StepMemoViewController"),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     GenProfile3ViewController(nibName: "GenProfile3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
+            return [LinkChainAccount0ViewController(nibName: "LinkChainAccount0ViewController", bundle: nil),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    LinkChainAccount3ViewController(nibName: "LinkChainAccount3ViewController", bundle: nil)]
         }
         
         else {

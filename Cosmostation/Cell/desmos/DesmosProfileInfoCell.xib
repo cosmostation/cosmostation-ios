@@ -33,7 +33,7 @@
                                     <constraint firstAttribute="height" constant="120" id="hol-ki-MRS"/>
                                 </constraints>
                                 <color key="textColor" red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
