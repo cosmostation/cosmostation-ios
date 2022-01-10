@@ -82,7 +82,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwJ-of-5ra" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="500"/>
+                    <rect key="frame" x="16" y="60" width="382" height="380"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN2-g0-2ZM">
                             <rect key="frame" x="16" y="16" width="44" height="16.5"/>
@@ -185,7 +185,7 @@
                     <color key="backgroundColor" red="0.18039215689999999" green="0.18039215689999999" blue="0.18039215689999999" alpha="0.39509310790000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="f6b-XM-RMg" firstAttribute="trailing" secondItem="e6D-7h-2f7" secondAttribute="trailing" id="1IU-dk-L85"/>
-                        <constraint firstAttribute="height" constant="500" id="2VX-YJ-3AS"/>
+                        <constraint firstAttribute="height" constant="380" id="2VX-YJ-3AS"/>
                         <constraint firstItem="7IE-oR-Sa7" firstAttribute="leading" secondItem="HGC-HZ-mAk" secondAttribute="trailing" constant="4" id="4xy-0L-uLn"/>
                         <constraint firstItem="AIq-ec-kOv" firstAttribute="leading" secondItem="czl-1A-xk2" secondAttribute="leading" id="8dR-Sn-3ni"/>
                         <constraint firstItem="f6b-XM-RMg" firstAttribute="top" secondItem="cL1-n8-daH" secondAttribute="bottom" constant="4" id="8yb-wK-pPx"/>
