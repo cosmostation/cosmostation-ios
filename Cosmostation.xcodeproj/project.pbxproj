@@ -947,6 +947,10 @@
 		04983C9C278B046D00F913A3 /* LinkChainAccount3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983C9A278B046D00F913A3 /* LinkChainAccount3ViewController.xib */; };
 		04983C9F278B376500F913A3 /* SelectDesmosAirdopAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C9D278B376500F913A3 /* SelectDesmosAirdopAccountCell.swift */; };
 		04983CA0278B376500F913A3 /* SelectDesmosAirdopAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983C9E278B376500F913A3 /* SelectDesmosAirdopAccountCell.xib */; };
+		04983CA4278C24C100F913A3 /* TxSaveProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983CA2278C24C100F913A3 /* TxSaveProfileCell.swift */; };
+		04983CA5278C24C100F913A3 /* TxSaveProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983CA3278C24C100F913A3 /* TxSaveProfileCell.xib */; };
+		04983CA8278C24DC00F913A3 /* TxLinkAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983CA6278C24DC00F913A3 /* TxLinkAccountCell.swift */; };
+		04983CA9278C24DC00F913A3 /* TxLinkAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983CA7278C24DC00F913A3 /* TxLinkAccountCell.xib */; };
 		049DAA0127311DEB00658CFB /* WalletGBridgeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */; };
 		049DAA0227311DEB00658CFB /* WalletGBridgeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */; };
 		049DAA0527311DFE00658CFB /* WalletStargazeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */; };
@@ -2707,6 +2711,10 @@
 		04983C9A278B046D00F913A3 /* LinkChainAccount3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkChainAccount3ViewController.xib; sourceTree = "<group>"; };
 		04983C9D278B376500F913A3 /* SelectDesmosAirdopAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectDesmosAirdopAccountCell.swift; sourceTree = "<group>"; };
 		04983C9E278B376500F913A3 /* SelectDesmosAirdopAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectDesmosAirdopAccountCell.xib; sourceTree = "<group>"; };
+		04983CA2278C24C100F913A3 /* TxSaveProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxSaveProfileCell.swift; sourceTree = "<group>"; };
+		04983CA3278C24C100F913A3 /* TxSaveProfileCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxSaveProfileCell.xib; sourceTree = "<group>"; };
+		04983CA6278C24DC00F913A3 /* TxLinkAccountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxLinkAccountCell.swift; sourceTree = "<group>"; };
+		04983CA7278C24DC00F913A3 /* TxLinkAccountCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxLinkAccountCell.xib; sourceTree = "<group>"; };
 		049DA9FF27311DEB00658CFB /* WalletGBridgeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletGBridgeCell.swift; sourceTree = "<group>"; };
 		049DAA0027311DEB00658CFB /* WalletGBridgeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletGBridgeCell.xib; sourceTree = "<group>"; };
 		049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStargazeCell.swift; sourceTree = "<group>"; };
@@ -3619,6 +3627,17 @@
 				046FF01D277B766200F72C11 /* TxIssueNFTDenomCell.xib */,
 			);
 			path = nft;
+			sourceTree = "<group>";
+		};
+		04983CA1278C24A500F913A3 /* desmos */ = {
+			isa = PBXGroup;
+			children = (
+				04983CA2278C24C100F913A3 /* TxSaveProfileCell.swift */,
+				04983CA3278C24C100F913A3 /* TxSaveProfileCell.xib */,
+				04983CA6278C24DC00F913A3 /* TxLinkAccountCell.swift */,
+				04983CA7278C24DC00F913A3 /* TxLinkAccountCell.xib */,
+			);
+			path = desmos;
 			sourceTree = "<group>";
 		};
 		04CFBD4A269226CE0013150B /* ibc */ = {
@@ -4918,6 +4937,7 @@
 		284D17F32535D69000C364F9 /* txs */ = {
 			isa = PBXGroup;
 			children = (
+				04983CA1278C24A500F913A3 /* desmos */,
 				046BD22927795C9B002333B5 /* nft */,
 				288F806B270DDE95009825B5 /* sif */,
 				284FBC7626DBCBC900403FE2 /* starname */,
@@ -6057,6 +6077,7 @@
 				283A80DC24514AB8008FF813 /* RiskCheckPopupViewController.xib in Resources */,
 				E16B89162341C558003E0922 /* TokenCell.xib in Resources */,
 				2868559424989AA50099D18F /* Bep3WarnPopup.xib in Resources */,
+				04983CA9278C24DC00F913A3 /* TxLinkAccountCell.xib in Resources */,
 				28156E9B2536DE14006FF06C /* HarvestDetailTopCell.xib in Resources */,
 				28A2A4C3271FF9140042ACC4 /* WalletBitcannaCell.xib in Resources */,
 				28DB570725FA3BBC00B2F0E5 /* HardPoolBorrow0ViewController.xib in Resources */,
@@ -6193,6 +6214,7 @@
 				E1FD233D233E1C44009327FE /* WalletGuideCell.xib in Resources */,
 				2845D885246FAEED007CD497 /* VoteTallyTableViewCell.xib in Resources */,
 				28B9B689271DC5DD0067C6AE /* SifPoolCell.xib in Resources */,
+				04983CA5278C24C100F913A3 /* TxSaveProfileCell.xib in Resources */,
 				283E94782549030C007A9291 /* TxReplaceResourceCell.xib in Resources */,
 				2894105A26FDBEA3005BCBE4 /* IBCSend2ViewController.xib in Resources */,
 				280E1F1C254ABB1D0007BA7D /* ResourceEditCell.xib in Resources */,
@@ -7688,10 +7710,12 @@
 				040FA970275F55C300229F6F /* starname_cosmwasm_wasm_v1_ibc.pb.swift in Sources */,
 				040FA7A7275F55C200229F6F /* panacea_burn_v2_query.grpc.swift in Sources */,
 				2807DB392788182000016571 /* GenProfile0ViewController.swift in Sources */,
+				04983CA4278C24C100F913A3 /* TxSaveProfileCell.swift in Sources */,
 				E12D6B8B226DF3A700D07CE4 /* StepSendAmountViewController.swift in Sources */,
 				284FBC8126DBE98500403FE2 /* TxSwapWithdrawCell.swift in Sources */,
 				28474ECD241E06AF00AF5A81 /* TxCdpDepositCell.swift in Sources */,
 				288F8082270DDF25009825B5 /* TxSifIncentiveCell.swift in Sources */,
+				04983CA8278C24DC00F913A3 /* TxLinkAccountCell.swift in Sources */,
 				E151B651224867D60026B8C0 /* Proposal.swift in Sources */,
 				040FA899275F55C200229F6F /* injective_peggy_v1_types.pb.swift in Sources */,
 				040FA7C8275F55C200229F6F /* tendermint_farming_v1beta1_proposal.pb.swift in Sources */,

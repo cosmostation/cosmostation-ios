@@ -51,7 +51,7 @@ class LinkChainAccount0ViewController: BaseViewController, SBCardPopupDelegate {
         if (selectedAccount != nil) {
             self.toAddAccountNameLabel.text = WUtils.getWalletName(selectedAccount)
             self.toAddAccountAddressLabel.text = selectedAccount!.account_address
-            let request = Alamofire.request(BaseNetWork.desmosClaimablecheck(selectedAccount!.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+            let request = Alamofire.request(BaseNetWork.desmosClaimableCheck(selectedAccount!.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
             request.responseJSON { (response) in
                 switch response.result {
                 case .success(let res):

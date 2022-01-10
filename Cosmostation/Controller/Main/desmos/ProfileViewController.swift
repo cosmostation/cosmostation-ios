@@ -145,6 +145,14 @@ struct DesmosFeeCheck: Codable {
     }
 }
 
+struct DesmosClaimAirdrop: Codable {
+    var desmos_address: String = ""
+    
+    init(_ desmos_address: String) {
+        self.desmos_address = desmos_address
+    }
+}
+
 struct DesmosAirDrops  {
     var staking_infos: Array<DesmosAirdropInfo> = Array<DesmosAirdropInfo>()
     var lp_infos: Array<DesmosAirdropInfo> = Array<DesmosAirdropInfo>()

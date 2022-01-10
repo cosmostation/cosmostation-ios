@@ -894,6 +894,9 @@ support@cosmostation.io";
 "tx_nft_receive" = "NFT Recieve";
 "tx_nft_transfer" = "NFT Transfer";
 
+"tx_desmos_save_profile" = "Save Profile";
+"tx_desmos_link_chain_account" = "Link Account";
+
 "tx_known" = "Unknown";
 
 "chain_title_cosmos" = "Cosmos";

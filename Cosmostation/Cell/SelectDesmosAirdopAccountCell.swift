@@ -25,8 +25,8 @@ class SelectDesmosAirdopAccountCell: UITableViewCell {
         self.accountName.text = WUtils.getWalletName(account)
         self.accountAddress.text = account.account_address
         
-        let request = Alamofire.request(BaseNetWork.desmosClaimablecheck(account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        print("url ", BaseNetWork.desmosClaimablecheck(account.account_address))
+        let request = Alamofire.request(BaseNetWork.desmosClaimableCheck(account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("url ", BaseNetWork.desmosClaimableCheck(account.account_address))
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):

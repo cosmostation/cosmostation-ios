@@ -1769,7 +1769,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let desmosFeeCheck = DesmosFeeCheck.init(address)
         let data = try! JSONEncoder().encode(desmosFeeCheck)
         let params = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
-        let request = Alamofire.request(BaseNetWork.desmosFeecheck(), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
+        let request = Alamofire.request(BaseNetWork.desmosFeeCheck(), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
         request.responseString() { response in
             if (self.waitAlert != nil) {
                 self.waitAlert?.dismiss(animated: true, completion: {

@@ -339,6 +339,15 @@ public struct ApiHistoryNewCustom {
                 
             }
             
+            // desmos msg type
+            else if (msgType.contains("MsgSaveProfile")) {
+                result = NSLocalizedString("tx_desmos_save_profile", comment: "")
+                
+            } else if (msgType.contains("MsgLinkChainAccount")) {
+                result = NSLocalizedString("tx_desmos_link_chain_account", comment: "")
+                
+            }
+            
             //common type
             else if (msgType.contains("MsgSubmitProposal")) {
                 result = NSLocalizedString("tx_submit_proposal", comment: "")
