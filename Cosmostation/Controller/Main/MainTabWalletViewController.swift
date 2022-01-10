@@ -80,6 +80,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
         self.walletTableView.register(UINib(nibName: "WalletGuideCell", bundle: nil), forCellReuseIdentifier: "WalletGuideCell")
+        self.walletTableView.register(UINib(nibName: "WalletDesmosEventCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosEventCell")
         
         self.walletTableView.rowHeight = UITableView.automaticDimension
         self.walletTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -207,7 +208,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.SIF_MAIN) {
+        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.DESMOS_MAIN) {
             return 5;
         } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
             return 3;
@@ -1272,6 +1273,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionTapApr = { self.onClickAprHelp() }
             return cell!
 
+        } else if (indexPath.row == 3) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDesmosEventCell") as? WalletDesmosEventCell
+            cell?.actionDownload = { self.onClickDesmosEvent() }
+            return cell!
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
             cell?.updateView(account, chainType)
@@ -1788,6 +1794,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 })
             }
         }
+    }
+    
+    func onClickDesmosEvent() {
+        guard let url = URL(string: "https://dpm.desmos.network/") else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onClickAprHelp() {

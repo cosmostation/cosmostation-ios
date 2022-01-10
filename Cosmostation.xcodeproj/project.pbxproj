@@ -892,6 +892,8 @@
 		041345BC27855F6600DC49AD /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041345BA27855F6600DC49AD /* ProfileViewController.xib */; };
 		041399EB275C94490013A1BE /* WalletCheckPKeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041399E9275C94490013A1BE /* WalletCheckPKeyViewController.swift */; };
 		041399EC275C94490013A1BE /* WalletCheckPKeyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */; };
+		04166118278C2F01001CAF73 /* WalletDesmosEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */; };
+		04166119278C2F01001CAF73 /* WalletDesmosEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */; };
 		0428ACFE268AD31700EB438F /* BandOracleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428ACFD268AD31700EB438F /* BandOracleStatus.swift */; };
 		042E0C40273BBE190026CEFB /* WalletComdexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */; };
 		042E0C41273BBE190026CEFB /* WalletComdexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */; };
@@ -2656,6 +2658,8 @@
 		041345BA27855F6600DC49AD /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		041399E9275C94490013A1BE /* WalletCheckPKeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCheckPKeyViewController.swift; sourceTree = "<group>"; };
 		041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCheckPKeyViewController.xib; sourceTree = "<group>"; };
+		04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosEventCell.swift; sourceTree = "<group>"; };
+		04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosEventCell.xib; sourceTree = "<group>"; };
 		0428ACFD268AD31700EB438F /* BandOracleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandOracleStatus.swift; sourceTree = "<group>"; };
 		042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletComdexCell.swift; sourceTree = "<group>"; };
 		042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletComdexCell.xib; sourceTree = "<group>"; };
@@ -4777,6 +4781,8 @@
 				04615CC3275074A600A693B0 /* WalletBitsongCell.xib */,
 				04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */,
 				04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */,
+				04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */,
+				04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */,
 				2889C8B9276DC2B90041D68C /* WalletLumCell.swift */,
 				2889C8BA276DC2B90041D68C /* WalletLumCell.xib */,
 				045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */,
@@ -6267,6 +6273,7 @@
 				E103DADE22814802006C2146 /* Init.storyboard in Resources */,
 				28DB570C25FA3BC900B2F0E5 /* HardPoolBorrow3ViewController.xib in Resources */,
 				2812CA3F26DD4E160095C6AF /* TxIncentiveDelegatorCell.xib in Resources */,
+				04166119278C2F01001CAF73 /* WalletDesmosEventCell.xib in Resources */,
 				28DB571625FA3BEA00B2F0E5 /* HardPoolRepay3ViewController.xib in Resources */,
 				E126CF962387A5C9002A546F /* WalletIovCell.xib in Resources */,
 				E103DAE322814DFC006C2146 /* GenTx.storyboard in Resources */,
@@ -7277,6 +7284,7 @@
 				284FBC8526DBE9A100403FE2 /* TxIncentiveSwapCell.swift in Sources */,
 				040FA877275F55C200229F6F /* cosmos_upgrade_v1beta1_upgrade.pb.swift in Sources */,
 				28156EA42536DE53006FF06C /* HardDetailViewController.swift in Sources */,
+				04166118278C2F01001CAF73 /* WalletDesmosEventCell.swift in Sources */,
 				040FA862275F55C200229F6F /* akash_provider_v1beta2_query.grpc.swift in Sources */,
 				E1827E18225620D000BC0350 /* VaildatorDetailViewController.swift in Sources */,
 				E1069B0C22968DCA007517DC /* StepRedelegateAmountViewController.swift in Sources */,
