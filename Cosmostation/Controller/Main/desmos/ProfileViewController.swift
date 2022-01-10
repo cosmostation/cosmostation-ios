@@ -125,10 +125,10 @@ extension WUtils {
         else if (chain == ChainType.OSMOSIS_MAIN) { return "osmosis" }
         else if (chain == ChainType.AKASH_MAIN) { return "akash" }
         else if (chain == ChainType.BAND_MAIN) { return "band" }
-        else if (chain == ChainType.CRYPTO_MAIN) { return "cro" }
+        else if (chain == ChainType.CRYPTO_MAIN) { return "crypto.com" }
         else if (chain == ChainType.JUNO_MAIN) { return "juno" }
         else if (chain == ChainType.KAVA_MAIN) { return "kava" }
-        else if (chain == ChainType.EMONEY_MAIN) { return "emoney" }
+        else if (chain == ChainType.EMONEY_MAIN) { return "e-money" }
         else if (chain == ChainType.REGEN_MAIN) { return "regen" }
         else { return "" }
     }
