@@ -80,6 +80,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
         self.walletTableView.register(UINib(nibName: "WalletGuideCell", bundle: nil), forCellReuseIdentifier: "WalletGuideCell")
+        self.walletTableView.register(UINib(nibName: "WalletDesmosEventCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosEventCell")
         
         self.walletTableView.rowHeight = UITableView.automaticDimension
         self.walletTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -207,7 +208,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.SIF_MAIN) {
+        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.DESMOS_MAIN) {
             return 5;
         } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
             return 3;
@@ -1257,6 +1258,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionProfile = { self.onClickProfile() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -1271,6 +1273,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionTapApr = { self.onClickAprHelp() }
             return cell!
 
+        } else if (indexPath.row == 3) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDesmosEventCell") as? WalletDesmosEventCell
+            cell?.actionDownload = { self.onClickDesmosEvent() }
+            return cell!
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
             cell?.updateView(account, chainType)
@@ -1731,6 +1738,67 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         nftDappVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(nftDappVC, animated: true)
+    }
+    
+    func onClickProfile() {
+        if (BaseData.instance.mNodeInfo_gRPC != nil && BaseData.instance.mAccount_gRPC != nil) {
+            if (BaseData.instance.mAccount_gRPC?.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName) == true) {
+                let profileVC = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
+                profileVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(profileVC, animated: true)
+                
+            } else {
+                if (account?.account_has_private == false) {
+                    self.onShowAddMenomicDialog()
+                    return
+                }
+                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+                txVC.mType = TASK_GEN_PROFILE
+                txVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(txVC, animated: true)
+            }
+
+        } else {
+            if (account?.account_has_private == false) {
+                self.onShowAddMenomicDialog()
+                return
+            }
+            self.onDesmosFeeCheck(account!.account_address)
+        }
+    }
+    
+    func onDesmosFeeCheck(_ address: String) {
+        print("onDesmosFeeCheck ", address)
+        self.showWaittingAlert()
+        let desmosFeeCheck = DesmosFeeCheck.init(address)
+        let data = try! JSONEncoder().encode(desmosFeeCheck)
+        let params = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+        let request = Alamofire.request(BaseNetWork.desmosFeeCheck(), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
+        request.responseString() { response in
+            if (self.waitAlert != nil) {
+                self.waitAlert?.dismiss(animated: true, completion: {
+                    let resultAlert = UIAlertController(title: "", message: response.result.value, preferredStyle: .alert)
+                    resultAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
+                        self.dismiss(animated: true, completion:  {
+                            self.showWaittingAlert()
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(8000)) {
+                                self.waitAlert?.dismiss(animated: true, completion: {
+                                    self.onStartMainTab()
+                                })
+                            }
+                        })
+                    }))
+                    self.present(resultAlert, animated: true)
+                })
+            }
+        }
+    }
+    
+    func onClickDesmosEvent() {
+        guard let url = URL(string: "https://dpm.desmos.network/") else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onClickAprHelp() {

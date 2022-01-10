@@ -537,6 +537,47 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                 BaseData.instance.getChainId(self.chainType))
             }
+            
+        } else if (pageHolderVC.mType == TASK_GEN_PROFILE) {
+            return Signer.genSimulateSaveProfileTxgRPC(auth,
+                                                       self.pageHolderVC.mAccount!.account_address,
+                                                       self.pageHolderVC.mDesmosDtag!,
+                                                       self.pageHolderVC.mDesmosNickName!,
+                                                       self.pageHolderVC.mDesmosBio!,
+                                                       (self.pageHolderVC.mDesmosProfileHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosProfileHash!,
+                                                       (self.pageHolderVC.mDesmosCoverHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosCoverHash!,
+                                                       self.pageHolderVC.mFee!,
+                                                       self.pageHolderVC.mMemo!,
+                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                       BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == TASK_LINK_CHAIN_ACCOUNT) {
+            let toAccount = BaseData.instance.selectAccountById(id: self.pageHolderVC.mDesmosToLinkAccountId)!
+            var toPrivateKey: Data!
+            var toPublicKey: Data!
+            if (toAccount.account_from_mnemonic == true) {
+                if let words = KeychainWrapper.standard.string(forKey: toAccount.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                    toPrivateKey = KeyFac.getPrivateRaw(words, toAccount)
+                    toPublicKey = KeyFac.getPublicFromPrivateKey(toPrivateKey)
+                }
+                
+            } else {
+                if let key = KeychainWrapper.standard.string(forKey: toAccount.getPrivateKeySha1()) {
+                    toPrivateKey = KeyFac.getPrivateFromString(key)
+                    toPublicKey = KeyFac.getPublicFromPrivateKey(toPrivateKey)
+                }
+            }
+            return Signer.genSimulateLinkChainTxgRPC(auth,
+                                                     self.pageHolderVC.mAccount!.account_address,
+                                                     self.pageHolderVC.mDesmosToLinkChain!,
+                                                     toAccount,
+                                                     toPrivateKey,
+                                                     toPublicKey,
+                                                     self.pageHolderVC.mFee!,
+                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     BaseData.instance.getChainId(self.chainType))
+            
         }
         
         return nil

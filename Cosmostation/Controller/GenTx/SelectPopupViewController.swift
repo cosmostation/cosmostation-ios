@@ -40,6 +40,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         self.popupTableview.register(UINib(nibName: "SelectCoinCell", bundle: nil), forCellReuseIdentifier: "SelectCoinCell")
         self.popupTableview.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
         self.popupTableview.register(UINib(nibName: "SelectRelayerCell", bundle: nil), forCellReuseIdentifier: "SelectRelayerCell")
+        self.popupTableview.register(UINib(nibName: "SelectDesmosAirdopAccountCell", bundle: nil), forCellReuseIdentifier: "SelectDesmosAirdopAccountCell")
         self.popupTableview.rowHeight = UITableView.automaticDimension
         self.popupTableview.estimatedRowHeight = UITableView.automaticDimension
         
@@ -73,6 +74,15 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_STARNAME_DOMAIN) {
             self.popupTitle.text = NSLocalizedString("str_select_starname_domain", comment: "")
+            
+        } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
+            self.popupTitle.text = NSLocalizedString("select_to_link_chain", comment: "")
+            self.toChainList = WUtils.getDesmosAirDropChains()
+            
+        } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT) {
+            self.popupTitle.text = NSLocalizedString("select_to_link_account", comment: "")
+            self.toAccountList = BaseData.instance.selectAllAccountsByChainWithKey(toChain!)
+            
         }
     }
     
@@ -96,6 +106,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             esHeight = (CGFloat)((toCoinList.count * 55) + 55)
         } else if (type == SELECT_POPUP_SIF_SWAP_OUT) {
             esHeight = (CGFloat)((toCoinList.count * 55) + 55)
+        } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
+            esHeight = (CGFloat)((toChainList.count * 55) + 55)
+        } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT) {
+            esHeight = (CGFloat)((toAccountList.count * 55) + 55)
         }
         esHeight = (esHeight > 350) ? 350 : esHeight
         cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: esHeight)
@@ -122,6 +136,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return ibcRelayer.count
         } else if (type == SELECT_POPUP_STARNAME_DOMAIN) {
             return starnameDomains.count
+        } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
+            return toChainList.count;
+        } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT) {
+            return toAccountList.count;
         }
         return 0
     }
@@ -295,6 +313,18 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let swapInDenom = toCoinList[indexPath.row]
             WUtils.DpSifCoinImg(cell!.coinImg, swapInDenom)
             cell!.coinTitle.text = WUtils.getSifCoinName(swapInDenom)
+            return cell!
+            
+        } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
+            let chain = toChainList[indexPath.row]
+            cell!.chainImg.image = WUtils.getChainImg(chain)
+            cell!.chainTitle.text = WUtils.getChainTitle2(chain)
+            return cell!
+            
+        } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectDesmosAirdopAccountCell") as? SelectDesmosAirdopAccountCell
+            cell?.onBindAccount(toChain, toAccountList[indexPath.row])
             return cell!
             
         } else {

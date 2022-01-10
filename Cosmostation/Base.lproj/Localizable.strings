@@ -326,6 +326,8 @@
 "str_msg_ibc" = "IBC transactions are not supported on centralized exchanges.\nIf you wish to transfer to an exchange, you must send back the asset to its original chain before depositing it via a regular send transaction.\n\nThis wallet only supports the broadcasting of txs through active IBC relayers and therefore is not responsible for intrinsic issues that may exist in IBC txs.\nUser must perform due diligence on the stability and security of the selected relayer before executing IBC txs.";
 "str_msg_relayer_unauthed" = "This is an unconfirmed relayer.\nIBC transfers through an inoperable relayer may result in loss of assets.\nDo you wish to continue?";
 "str_select_starname_domain" = "Select domain for starname.";
+"select_to_link_chain" = "Select Chain To Link";
+"select_to_link_account" = "Select Account To Link";
 
 "creat_cdp_step_0" = "Deposit collateral to borrow USDX";
 "creat_cdp_step_1" = "Insert memo (optional)";
@@ -496,6 +498,14 @@
 "str_issue_nft_denom_step_1" = "Insert memo (optional)";
 "str_issue_nft_denom_step_2" = "Select transaction fee";
 "str_issue_nft_denom_step_3" = "Check transaction detail";
+"str_create_profile_step_0" = "Insert Profile Information";
+"str_create_profile_step_1" = "Insert memo (optional)";
+"str_create_profile_step_2" = "Select transaction fee";
+"str_create_profile_step_3" = "Check transaction detail";
+"str_account_link_step_0" = "Select Chain and Account to Link";
+"str_account_link_step_1" = "Insert memo (optional)";
+"str_account_link_step_2" = "Select transaction fee";
+"str_account_link_step_3" = "Check transaction detail";
 
 "str_description_open_domain" = "Open type in which an account owner is the only entity that can perform actions on the account.";
 "str_description_closed_domain" = "Closed type in which the domain owner has control over accounts too.";
@@ -621,6 +631,9 @@ support@cosmostation.io";
 "title_issue_nft_denom" = "Issue NFT Denom";
 "title_issue_nft" = "Issue NFT";
 "title_send_nft" = "Send NFT";
+"title_profile_detail" = "Profile Detail";
+"title_profile_create" = "Create Profile";
+"title_account_chain_link" = "Account Link & AriDrop";
 
 
 "proposal_type_basic" = "Basic";
@@ -744,6 +757,10 @@ support@cosmostation.io";
 "error_no_nft_dexcription" = "Add NFT Description";
 "error_nft_denom_count" = "Please Insert 4~20 low char Denom ID";
 "error_nft_denom_exist" = "Denom ID is already exist. please using unique ID";
+"error_already_registered_dtag" = "This Dtag already registered. please use another text for Dtag.";
+"error_insert_dtag" = "Please add Dtag for profile.";
+"error_no_account_this_chain" = "No linkable account with this chain";
+"error_select_account_link" = "Please select account to link";
 
 
 
@@ -877,6 +894,9 @@ support@cosmostation.io";
 "tx_nft_receive" = "NFT Recieve";
 "tx_nft_transfer" = "NFT Transfer";
 
+"tx_desmos_save_profile" = "Save Profile";
+"tx_desmos_link_chain_account" = "Link Account";
+
 "tx_known" = "Unknown";
 
 "chain_title_cosmos" = "Cosmos";
@@ -910,7 +930,7 @@ support@cosmostation.io";
 "chain_title_bitsong" = "Bitsong";
 "chain_title_desmos" = "Desmos";
 "chain_title_lum" = "Lum";
-"chain_title_chihuahua" = "Chiahuahua";
+"chain_title_chihuahua" = "Chihuahua";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_test_bnb" = "Binance Testnet";

@@ -87,6 +87,10 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxIssueNFTCell", bundle: nil), forCellReuseIdentifier: "TxIssueNFTCell")
         self.txTableView.register(UINib(nibName: "TxSendNFTCell", bundle: nil), forCellReuseIdentifier: "TxSendNFTCell")
         
+        //for Desmos msg type
+        self.txTableView.register(UINib(nibName: "TxSaveProfileCell", bundle: nil), forCellReuseIdentifier: "TxSaveProfileCell")
+        self.txTableView.register(UINib(nibName: "TxLinkAccountCell", bundle: nil), forCellReuseIdentifier: "TxLinkAccountCell")
+        
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
         
@@ -339,6 +343,18 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
             } else if (msg.typeURL.contains(Irismod_Nft_MsgTransferNFT.protoMessageName) || msg.typeURL.contains(Chainmain_Nft_V1_MsgTransferNFT.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSendNFTCell") as? TxSendNFTCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1, account!.account_address)
+                return cell!
+                
+            }
+            
+            else if (msg.typeURL.contains(Desmos_Profiles_V1beta1_MsgSaveProfile.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxSaveProfileCell") as? TxSaveProfileCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Desmos_Profiles_V1beta1_MsgLinkChainAccount.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxLinkAccountCell") as? TxLinkAccountCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             }

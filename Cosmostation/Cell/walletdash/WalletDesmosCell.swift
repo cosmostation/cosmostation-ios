@@ -31,12 +31,16 @@ class WalletDesmosCell: UITableViewCell {
     
     var actionDelegate: (() -> Void)? = nil
     var actionVote: (() -> Void)? = nil
+    var actionProfile: (() -> Void)? = nil
     
     @IBAction func onClickDelegate(_ sender: Any) {
         actionDelegate?()
     }
     @IBAction func onClickVote(_ sender: Any) {
         actionVote?()
+    }
+    @IBAction func onClickProfile(_ sender: Any) {
+        actionProfile?()
     }
     
     override func prepareForReuse() {

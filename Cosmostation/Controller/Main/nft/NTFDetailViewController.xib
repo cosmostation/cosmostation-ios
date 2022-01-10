@@ -104,7 +104,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.99607843139999996" green="0.99215686270000003" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Lch-e2-1Wt" firstAttribute="trailing" secondItem="J5d-31-6rc" secondAttribute="trailing" id="TRH-TF-9qW"/>
                 <constraint firstItem="Lch-e2-1Wt" firstAttribute="leading" secondItem="J5d-31-6rc" secondAttribute="leading" id="cC0-Li-VX6"/>

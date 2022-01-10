@@ -141,6 +141,7 @@ let INJECTIVE_API                       = "https://api-inj.cosmostation.io/";
 let BITSONG_API                         = "https://api-bitsong.cosmostation.io/";
 
 let DESMOS_API                          = "https://api-desmos.cosmostation.io/";
+let DESMOS_AIRDROP_URL                  = "https://api.airdrop.desmos.network/";
 
 let LUM_API                             = "https://api-lum.cosmostation.io/";
 
@@ -448,6 +449,8 @@ let TASK_ISSUE_NFT_DENOM                    = "issue_nft_denom";
 let TASK_ISSUE_NFT                          = "issue_nft";
 let TASK_SEND_NFT                           = "send_nft";
 
+let TASK_GEN_PROFILE                        = "desmos/MsgSaveProfile";
+let TASK_LINK_CHAIN_ACCOUNT                 = "desmos/MsgLinkChainAccount";
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"
 let PASSWORD_ACTION_SIMPLE_CHECK            = "ACTION_SIMPLE_CHECK"
@@ -617,6 +620,7 @@ let GAS_FEE_AMOUNT_HIGH                     = "300000"
 let GAS_FEE_AMOUNT_REINVEST                 = "220000"
 let GAS_FEE_AMOUNT_REDELE                   = "240000"
 let GAS_FEE_AMOUNT_IBC_SEND                 = "500000"
+let GAS_FEE_AMOUNT_PROFILE                  = "350000"
 
 let GAS_FEE_AMOUNT_COSMOS_SWAP              = "200000"
 let GAS_FEE_AMOUNT_COSMOS_JOIN_POOL         = "300000"
@@ -1281,6 +1285,8 @@ let SELECT_POPUP_IBC_RECIPIENT = 12
 let SELECT_POPUP_STARNAME_DOMAIN = 13
 let SELECT_POPUP_SIF_SWAP_IN = 14
 let SELECT_POPUP_SIF_SWAP_OUT = 15
+let SELECT_POPUP_DESMOS_LINK_CHAIN = 16
+let SELECT_POPUP_DESMOS_LINK_ACCOUNT = 17
 
 
 let EXPLORER_COSMOS_MAIN    = "https://www.mintscan.io/cosmos/";
