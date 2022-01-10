@@ -2215,6 +2215,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.COMDEX_MAIN) {
             guard let url = URL(string: "https://www.coingecko.com/en/coins/comdex") else { return }
             self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.STARGAZE_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/stargaze") else { return }
+            self.onShowSafariWeb(url)
         }
         
     }
