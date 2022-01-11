@@ -71,6 +71,27 @@ class DAppsListViewController: BaseViewController {
 }
 
 extension WUtils {
+    static func getKavaBaseDenom(_ denom: String) -> String {
+        if (denom == KAVA_MAIN_DENOM) {
+            return KAVA_MAIN_DENOM
+        } else if (denom == KAVA_HARD_DENOM) {
+            return KAVA_HARD_DENOM
+        } else if (denom == KAVA_USDX_DENOM) {
+            return KAVA_USDX_DENOM
+        } else if (denom == KAVA_SWAP_DENOM) {
+            return KAVA_SWAP_DENOM
+        } else if (denom == TOKEN_HTLC_KAVA_BNB) {
+            return "bnb"
+        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
+            return "xrp"
+        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
+            return "busd"
+        } else if (denom.contains("btc")) {
+            return "btc"
+        }
+        return ""
+    }
+    
     static func getKavaCoinDecimal(_ denom:String?) -> Int16 {
         if (denom?.caseInsensitiveCompare(KAVA_MAIN_DENOM) == .orderedSame) {
             return 6;
@@ -173,5 +194,11 @@ extension WUtils {
             return NSDecimalNumber.init(string: price)
         }
         return NSDecimalNumber.zero
+    }
+    
+    static func getKavaTokenAll2(_ symbol: String) -> NSDecimalNumber {
+        let available = BaseData.instance.getAvailableAmount_gRPC(symbol)
+        let vesting = BaseData.instance.getVestingAmount_gRPC(symbol)
+        return available.adding(vesting)
     }
 }

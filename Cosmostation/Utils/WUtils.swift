@@ -139,6 +139,7 @@ public class WUtils {
         return result;
     }
     
+    //TODO remove
     static func getBalancesWithKavaAccountInfo(_ account: Account, _ accountInfo: KavaAccountInfo) -> Array<Balance> {
         var result = Array<Balance>()
         if (accountInfo.result.type == COSMOS_AUTH_TYPE_ACCOUNT) {
@@ -1639,27 +1640,6 @@ public class WUtils {
         return amount
     }
     
-    static func getKavaBaseDenom(_ denom: String) -> String {
-        if (denom == KAVA_MAIN_DENOM) {
-            return KAVA_MAIN_DENOM
-        } else if (denom == KAVA_HARD_DENOM) {
-            return KAVA_HARD_DENOM
-        } else if (denom == KAVA_USDX_DENOM) {
-            return KAVA_USDX_DENOM
-        } else if (denom == KAVA_SWAP_DENOM) {
-            return KAVA_SWAP_DENOM
-        } else if (denom == TOKEN_HTLC_KAVA_BNB) {
-            return "bnb"
-        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
-            return "xrp"
-        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
-            return "busd"
-        } else if (denom.contains("btc")) {
-            return "btc"
-        }
-        return ""
-    }
-    
     static func getKavaTokenDollorPrice(_ denom: String) -> NSDecimalNumber {
         let prices = BaseData.instance.mKavaPrice
         if let price = prices["hard:usd"], denom == "hard" {
@@ -1683,24 +1663,24 @@ public class WUtils {
         return NSDecimalNumber.zero
     }
     
-    static func getKavaTokenUserCurrencyPrice(_ denom: String) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        guard let usdtPrice = baseData.getPrice("usdt") else {
-            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler3Down)
-        }
-        if (baseData.getCurrency() == 0) {
-            return getKavaTokenDollorPrice(denom)
-        } else {
-            let priceUSDT = usdtPrice.currencyPrice(baseData.getCurrencyString().lowercased())
-            return getKavaTokenDollorPrice(denom).multiplying(by: priceUSDT, withBehavior: handler3Down)
-        }
-    }
-    
-    static func dpKavaTokenUserCurrencyPrice(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: getKavaTokenUserCurrencyPrice(denom))!
-        return getDpAttributedString(formatted, 3, font)
-    }
+//    static func getKavaTokenUserCurrencyPrice(_ denom: String) -> NSDecimalNumber {
+//        let baseData = BaseData.instance
+//        guard let usdtPrice = baseData.getPrice("usdt") else {
+//            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler3Down)
+//        }
+//        if (baseData.getCurrency() == 0) {
+//            return getKavaTokenDollorPrice(denom)
+//        } else {
+//            let priceUSDT = usdtPrice.currencyPrice(baseData.getCurrencyString().lowercased())
+//            return getKavaTokenDollorPrice(denom).multiplying(by: priceUSDT, withBehavior: handler3Down)
+//        }
+//    }
+//
+//    static func dpKavaTokenUserCurrencyPrice(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
+//        let nf = getNumberFormatter(3)
+//        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: getKavaTokenUserCurrencyPrice(denom))!
+//        return getDpAttributedString(formatted, 3, font)
+//    }
     
     static func getKavaTokenDollorValue(_ denom: String, _ amount: NSDecimalNumber) -> NSDecimalNumber {
         let dpDeciaml = getKavaCoinDecimal(denom)

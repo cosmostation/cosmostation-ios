@@ -304,7 +304,7 @@ final class BaseData : NSObject{
         return amount;
     }
     
-    func getAvailableAmount_gRPC(_ symbol:String) -> NSDecimalNumber {
+    func getAvailableAmount_gRPC(_ symbol: String) -> NSDecimalNumber {
         return WUtils.plainStringToDecimal(getAvailable_gRPC(symbol))
     }
     
