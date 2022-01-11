@@ -409,8 +409,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (indexPath.row == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletKavaIncentiveCell") as? WalletKavaIncentiveCell
-            cell?.updateView()
-            cell?.actionGetIncentive = { self.onClickKavaIncentive() }
+//            cell?.updateView()
+//            cell?.actionGetIncentive = { self.onClickKavaIncentive() }
             return cell!
             
         } else if (indexPath.row == 2) {

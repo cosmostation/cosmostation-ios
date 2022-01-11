@@ -905,19 +905,31 @@ class BaseNetWork {
     
     
     
-    static func getPrices() -> String {
+    static func getPrices(_ chain : ChainType) -> String {
+        if (ChainType.IS_TESTNET(chain)) {
+            return STATION_TEST_URL + "v1/market/prices"
+        }
         return STATION_URL + "v1/market/prices"
     }
     
-    static func getParams(_ chainId: String) -> String {
+    static func getParams(_ chain : ChainType, _ chainId: String) -> String {
+        if (ChainType.IS_TESTNET(chain)) {
+            return STATION_TEST_URL + "v1/params/" + chainId
+        }
         return STATION_URL + "v1/params/" + chainId
     }
     
-    static func getIbcPaths(_ chainId: String) -> String {
+    static func getIbcPaths(_ chain : ChainType, _ chainId: String) -> String {
+        if (ChainType.IS_TESTNET(chain)) {
+            return STATION_TEST_URL + "v1/ibc/paths/" + chainId
+        }
         return STATION_URL + "v1/ibc/paths/" + chainId
     }
     
-    static func getIbcTokens(_ chainId: String) -> String {
+    static func getIbcTokens(_ chain : ChainType, _ chainId: String) -> String {
+        if (ChainType.IS_TESTNET(chain)) {
+            return STATION_TEST_URL + "v1/ibc/tokens/" + chainId
+        }
         return STATION_URL + "v1/ibc/tokens/" + chainId
     }
     
@@ -1010,6 +1022,9 @@ class BaseNetWork {
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-chihuahua-app.cosmostation.io", port: 9090)
             
+        } else if (chain == ChainType.KAVA_MAIN) {
+            //TODO TEMP for test
+            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20300)
         }
         
         

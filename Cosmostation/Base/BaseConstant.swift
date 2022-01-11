@@ -31,6 +31,7 @@ let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 
 let STATION_URL                         = "https://api-utility.cosmostation.io/";
+let STATION_TEST_URL                    = "https://api-office.cosmostation.io/utility/";
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
@@ -50,7 +51,9 @@ let BNB_TEST_URL                        = "https://testnet-dex.binance.org/";
 
 
 let KAVA_URL                            = "https://lcd-kava-app.cosmostation.io/";
-let KAVA_API                            = "https://api-kava.cosmostation.io/";
+//let KAVA_API                            = "https://api-kava.cosmostation.io/";
+//TODO Temp Test
+let KAVA_API                            = "https://api-office.cosmostation.io/kava-testnet-14000/";
 
 let KAVA_TEST_URL                       = "https://lcd-office.cosmostation.io/kava-testnet-12000/";
 let KAVA_TEST_API                       = "https://api-office.cosmostation.io/kava-testnet-12000/";
@@ -1075,6 +1078,13 @@ public enum ChainType: String {
         result.append(UMEE_TEST)
         result.append(AXELAR_TEST)
         return result
+    }
+    
+    static func IS_TESTNET(_ chain: ChainType?) -> Bool {
+        if (chain == UMEE_TEST || chain == AXELAR_TEST || chain == KAVA_MAIN) {
+            return true
+        }
+        return false
     }
     
     static func IS_SUPPORT_CHAIN(_ chainS: String) -> Bool {

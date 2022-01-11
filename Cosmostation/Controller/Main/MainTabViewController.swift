@@ -208,22 +208,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             onFetchBnbTokenTickers()
             onFetchBnbMiniTokenTickers()
             
-        } else if (mChainType == ChainType.KAVA_MAIN || mChainType == ChainType.KAVA_TEST) {
-            self.mFetchCnt = 11
-            onFetchNodeInfo()
-            onFetchTopValidatorsInfo()
-            onFetchUnbondedValidatorsInfo()
-            onFetchUnbondingValidatorsInfo()
-            
-            onFetchAccountInfo(mAccount)
-            onFetchBondingInfo(mAccount)
-            onFetchUnbondingInfo(mAccount)
-            onFetchAllReward(mAccount)
-            
-            onFetchPriceFeedParam()
-            onFetchKavaIncentiveParam()
-            onFetchKavaIncentiveReward(mAccount.account_address)
-            
         } else if (mChainType == ChainType.OKEX_MAIN || mChainType == ChainType.OKEX_TEST) {
             self.mFetchCnt = 8
             onFetchNodeInfo()
@@ -348,6 +332,35 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
 //            self.onFetchgRPCStargazeClaimParam()
 //            self.onFetchgRPCStargazeClaimRecord(self.mAccount.account_address)
 //            self.onFetchgRPCStargazeClaimTotal(self.mAccount.account_address)
+            
+        } else if (mChainType == ChainType.KAVA_MAIN) {
+            self.mFetchCnt = 9
+            self.onFetchgRPCNodeInfo()
+            self.onFetchgRPCAuth(self.mAccount.account_address)
+            self.onFetchgRPCBondedValidators(0)
+            self.onFetchgRPCUnbondedValidators(0)
+            self.onFetchgRPCUnbondingValidators(0)
+            
+            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
+            self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
+            self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
+            self.onFetchgRPCRewards(self.mAccount.account_address, 0)
+            
+//            self.mFetchCnt = 11
+//            onFetchNodeInfo()
+//            onFetchTopValidatorsInfo()
+//            onFetchUnbondedValidatorsInfo()
+//            onFetchUnbondingValidatorsInfo()
+//
+//            onFetchAccountInfo(mAccount)
+//            onFetchBondingInfo(mAccount)
+//            onFetchUnbondingInfo(mAccount)
+//            onFetchAllReward(mAccount)
+//
+//            onFetchPriceFeedParam()
+//            onFetchKavaIncentiveParam()
+//            onFetchKavaIncentiveReward(mAccount.account_address)
+            
         }
         
         else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.RIZON_TEST || self.mChainType == ChainType.ALTHEA_TEST ||
@@ -612,18 +625,20 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithBnbAccountInfo(account, bnbAccountInfo))
                     BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithBnbAccountInfo(account, bnbAccountInfo))
                     
-                } else if (self.mChainType == ChainType.KAVA_MAIN || self.mChainType == ChainType.KAVA_TEST) {
-                    guard let info = res as? [String : Any] else {
-                        _ = BaseData.instance.deleteBalance(account: account)
-                        self.onFetchFinished()
-                        return
-                    }
-                    let kavaAccountInfo = KavaAccountInfo.init(info)
-                    BaseData.instance.mKavaAccountResult = kavaAccountInfo.result
-                    _ = BaseData.instance.updateAccount(WUtils.getAccountWithKavaAccountInfo(account, kavaAccountInfo))
-                    BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithKavaAccountInfo(account, kavaAccountInfo))
-                    
-                } else if (self.mChainType == ChainType.OKEX_MAIN || self.mChainType == ChainType.OKEX_TEST) {
+                }
+//                else if (self.mChainType == ChainType.KAVA_MAIN || self.mChainType == ChainType.KAVA_TEST) {
+//                    guard let info = res as? [String : Any] else {
+//                        _ = BaseData.instance.deleteBalance(account: account)
+//                        self.onFetchFinished()
+//                        return
+//                    }
+//                    let kavaAccountInfo = KavaAccountInfo.init(info)
+//                    BaseData.instance.mKavaAccountResult = kavaAccountInfo.result
+//                    _ = BaseData.instance.updateAccount(WUtils.getAccountWithKavaAccountInfo(account, kavaAccountInfo))
+//                    BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithKavaAccountInfo(account, kavaAccountInfo))
+//
+//                }
+                else if (self.mChainType == ChainType.OKEX_MAIN || self.mChainType == ChainType.OKEX_TEST) {
                     guard let info = res as? NSDictionary else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.onFetchFinished()
@@ -1313,7 +1328,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     
     func onFetchPriceInfo() {
-        let request = Alamofire.request(BaseNetWork.getPrices(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        let request = Alamofire.request(BaseNetWork.getPrices(self.mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1332,8 +1347,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchParams(_ chainId: String) {
-        print("onFetchParams ", chainId, "   ", BaseNetWork.getParams(chainId))
-        let request = Alamofire.request(BaseNetWork.getParams(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchParams ", chainId, "   ", BaseNetWork.getParams(self.mChainType, chainId))
+        let request = Alamofire.request(BaseNetWork.getParams(self.mChainType, chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1350,8 +1365,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchIbcPaths(_ chainId: String) {
-        print("onFetchIbcPaths ", chainId, "   ", BaseNetWork.getIbcPaths(chainId))
-        let request = Alamofire.request(BaseNetWork.getIbcPaths(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchIbcPaths ", chainId, "   ", BaseNetWork.getIbcPaths(self.mChainType, chainId))
+        let request = Alamofire.request(BaseNetWork.getIbcPaths(self.mChainType, chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1371,8 +1386,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchIbcTokens(_ chainId: String) {
-        print("onFetchIbcTokens ", chainId, "   ", BaseNetWork.getIbcTokens(chainId))
-        let request = Alamofire.request(BaseNetWork.getIbcTokens(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchIbcTokens ", chainId, "   ", BaseNetWork.getIbcTokens(self.mChainType, chainId))
+        let request = Alamofire.request(BaseNetWork.getIbcTokens(self.mChainType, chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
