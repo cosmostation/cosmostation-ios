@@ -17,13 +17,14 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     let SECTION_IBC_AUTHED_GRPC         = 1;
     let SECTION_POOL_TOKEN_GRPC         = 2;
     let SECTION_SIF_ETHER_GRPC          = 3;
-    let SECTION_IBC_UNKNOWN_GRPC        = 4;
-    let SECTION_UNKNOWN_GRPC            = 5;
+    let SECTION_KAVA_BEP2_GRPC          = 4;
+    let SECTION_ETC_GRPC                = 5;
+    let SECTION_IBC_UNKNOWN_GRPC        = 6;
+    let SECTION_UNKNOWN_GRPC            = 7;
     
-    let SECTION_NATIVE                  = 6;
-    let SECTION_KAVA_BEP2               = 7;
-    let SECTION_ETC                     = 8;
-    let SECTION_UNKNOWN                 = 9;
+    let SECTION_NATIVE                  = 8;
+    let SECTION_ETC                     = 9;
+    let SECTION_UNKNOWN                 = 10;
     
 
     @IBOutlet weak var titleChainImg: UIImageView!
@@ -50,13 +51,14 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var mIbcAuthed_gRPC = Array<Coin>()             // section 1
     var mPoolToken_gRPC = Array<Coin>()             // section 2
     var mSifEther_gRPC = Array<Coin>()              // section 3
-    var mIbcUnknown_gRPC = Array<Coin>()            // section 4
-    var mUnKnown_gRPC = Array<Coin>()               // section 5
+    var mKavaBep2_gRPC = Array<Coin>()              // section 4
+    var mEtc_gRPC = Array<Coin>()                   // section 5
+    var mIbcUnknown_gRPC = Array<Coin>()            // section 6
+    var mUnKnown_gRPC = Array<Coin>()               // section 7
     
-    var mNative = Array<Balance>()                  // section 6
-    var mKavaBep2 = Array<Balance>()                // section 7
-    var mEtc = Array<Balance>()                     // section 8
-    var mUnKnown = Array<Balance>()                 // section 9
+    var mNative = Array<Balance>()                  // section 8
+    var mEtc = Array<Balance>()                     // section 9
+    var mUnKnown = Array<Balance>()                 // section 10
     
 
     override func viewDidLoad() {
@@ -174,11 +176,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_IBC_AUTHED_GRPC && mIbcAuthed_gRPC.count == 0) { return 0 }
         else if (section == SECTION_POOL_TOKEN_GRPC && mPoolToken_gRPC.count == 0) { return 0 }
         else if (section == SECTION_SIF_ETHER_GRPC && mSifEther_gRPC.count == 0) { return 0 }
+        else if (section == SECTION_KAVA_BEP2_GRPC && mKavaBep2_gRPC.count == 0) { return 0 }
+        else if (section == SECTION_ETC_GRPC && mEtc_gRPC.count == 0) { return 0 }
         else if (section == SECTION_IBC_UNKNOWN_GRPC && mIbcUnknown_gRPC.count == 0) { return 0 }
         else if (section == SECTION_UNKNOWN_GRPC && mUnKnown_gRPC.count == 0) { return 0 }
         
         else if (section == SECTION_NATIVE && mNative.count == 0) { return 0 }
-        else if (section == SECTION_KAVA_BEP2 && mKavaBep2.count == 0) { return 0 }
         else if (section == SECTION_ETC && mEtc.count == 0) { return 0 }
         else if (section == SECTION_UNKNOWN && mUnKnown.count == 0) { return 0 }
         else { return 30 }
@@ -190,11 +193,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_IBC_AUTHED_GRPC) { view.headerTitleLabel.text = "IBC Tokens"; view.headerCntLabel.text = String(self.mIbcAuthed_gRPC.count) }
         else if (section == SECTION_POOL_TOKEN_GRPC) { view.headerTitleLabel.text = "Pool Tokens"; view.headerCntLabel.text = String(self.mPoolToken_gRPC.count)}
         else if (section == SECTION_SIF_ETHER_GRPC) { view.headerTitleLabel.text = "Ether Bridged Tokens"; view.headerCntLabel.text = String(self.mSifEther_gRPC.count) }
+        else if (section == SECTION_KAVA_BEP2_GRPC) { view.headerTitleLabel.text = "BEP2 Tokens"; view.headerCntLabel.text = String(self.mKavaBep2_gRPC.count)}
+        else if (section == SECTION_ETC_GRPC) { view.headerTitleLabel.text = "Etc Tokens"; view.headerCntLabel.text = String(self.mEtc_gRPC.count) }
         else if (section == SECTION_IBC_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown IBC Tokens"; view.headerCntLabel.text = String(self.mIbcUnknown_gRPC.count) }
         else if (section == SECTION_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown Tokens"; view.headerCntLabel.text = String(self.mUnKnown_gRPC.count) }
         
         else if (section == SECTION_NATIVE) { view.headerTitleLabel.text = "Native Tokens"; view.headerCntLabel.text = String(self.mNative.count) }
-        else if (section == SECTION_KAVA_BEP2) { view.headerTitleLabel.text = "BEP2 Tokens"; view.headerCntLabel.text = String(self.mKavaBep2.count) }
         else if (section == SECTION_ETC) { view.headerTitleLabel.text = "Etc Tokens"; view.headerCntLabel.text = String(self.mEtc.count) }
         else if (section == SECTION_UNKNOWN) { view.headerTitleLabel.text = "Unknown Tokens"; view.headerCntLabel.text = String(self.mUnKnown.count) }
         else { view.headerTitleLabel.text = ""; view.headerCntLabel.text = "0" }
@@ -206,11 +210,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_IBC_AUTHED_GRPC) { return mIbcAuthed_gRPC.count }
         else if (section == SECTION_POOL_TOKEN_GRPC) { return mPoolToken_gRPC.count }
         else if (section == SECTION_SIF_ETHER_GRPC) { return mSifEther_gRPC.count }
+        else if (section == SECTION_KAVA_BEP2_GRPC) { return mKavaBep2_gRPC.count }
+        else if (section == SECTION_ETC_GRPC) { return mEtc_gRPC.count }
         else if (section == SECTION_IBC_UNKNOWN_GRPC) { return mIbcUnknown_gRPC.count }
         else if (section == SECTION_UNKNOWN_GRPC) { return mUnKnown_gRPC.count }
         
         else if (section == SECTION_NATIVE) { return mNative.count }
-        else if (section == SECTION_KAVA_BEP2) { return mKavaBep2.count }
         else if (section == SECTION_ETC) { return mEtc.count }
         else if (section == SECTION_UNKNOWN) { return mUnKnown.count }
         else { return 0 }
@@ -230,6 +235,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         } else if (indexPath.section == SECTION_SIF_ETHER_GRPC) {
             onBindSifEtherToken_gRPC(cell, mSifEther_gRPC[indexPath.row])
             
+        } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
+            onBindKavaBep2Token_gRPC(cell, mKavaBep2_gRPC[indexPath.row])
+            
+        } else if (indexPath.section == SECTION_ETC_GRPC) {
+            onBindEtcToken_gRPC(cell, mEtc_gRPC[indexPath.row])
+            
         } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
             onBindIbcToken_gRPC(cell, mIbcUnknown_gRPC[indexPath.row])
             
@@ -238,11 +249,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
         }
         
+        
+        
         else if (indexPath.section == SECTION_NATIVE) {
             onBindNativeToken(cell, mNative[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_KAVA_BEP2) {
-            onBindKavaBep2Token(cell, mKavaBep2[indexPath.row])
             
         } else if (indexPath.section == SECTION_ETC) {
             onBindEtcToken(cell, mEtc[indexPath.row])
@@ -259,86 +269,86 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath.section == SECTION_NATIVE_GRPC) {
-            if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainType)) {
-                let sTokenDetailVC = StakingTokenGrpcViewController(nibName: "StakingTokenGrpcViewController", bundle: nil)
-                sTokenDetailVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
-            } else {
-                let nTokenDetailVC = NativeTokenGrpcViewController(nibName: "NativeTokenGrpcViewController", bundle: nil)
-                nTokenDetailVC.nativeDenom = mNative_gRPC[indexPath.row].denom
-                nTokenDetailVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-            }
-            
-        } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
-            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
-            iTokenDetailVC.ibcDenom = mIbcAuthed_gRPC[indexPath.row].denom
-            iTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
-            
-        } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
-            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
-            iTokenDetailVC.ibcDenom = mIbcUnknown_gRPC[indexPath.row].denom
-            iTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
-            
-        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
-            let pTokenDetailVC = PoolTokenGrpcViewController(nibName: "PoolTokenGrpcViewController", bundle: nil)
-            pTokenDetailVC.poolDenom = mPoolToken_gRPC[indexPath.row].denom
-            pTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(pTokenDetailVC, animated: true)
-            
-        } else if (indexPath.section == SECTION_SIF_ETHER_GRPC) {
-            let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
-            bTokenDetailVC.hidesBottomBarWhenPushed = true
-            bTokenDetailVC.bridgeDenom = mSifEther_gRPC[indexPath.row].denom
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
-            
-        } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
-            return
-        }
-        
-        else if (indexPath.section == SECTION_NATIVE) {
-            if (mNative[indexPath.row].balance_denom == WUtils.getMainDenom(chainType)) {
-                let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
-                sTokenDetailVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
-
-            } else {
-                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-                nTokenDetailVC.hidesBottomBarWhenPushed = true
-                nTokenDetailVC.denom = mNative[indexPath.row].balance_denom
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-            }
-            
-        } else if (indexPath.section == SECTION_KAVA_BEP2) {
-            let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-            nTokenDetailVC.hidesBottomBarWhenPushed = true
-            nTokenDetailVC.denom = mKavaBep2[indexPath.row].balance_denom
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-            
-        } else if (indexPath.section == SECTION_ETC) {
-            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.BINANCE_MAIN || chainType == ChainType.OKEX_MAIN) {
-                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-                nTokenDetailVC.hidesBottomBarWhenPushed = true
-                nTokenDetailVC.denom = mEtc[indexPath.row].balance_denom
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-            }
-            
-        } else if (indexPath.section == SECTION_UNKNOWN) {
-            return
-        }
+//        if (indexPath.section == SECTION_NATIVE_GRPC) {
+//            if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainType)) {
+//                let sTokenDetailVC = StakingTokenGrpcViewController(nibName: "StakingTokenGrpcViewController", bundle: nil)
+//                sTokenDetailVC.hidesBottomBarWhenPushed = true
+//                self.navigationItem.title = ""
+//                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
+//            } else {
+//                let nTokenDetailVC = NativeTokenGrpcViewController(nibName: "NativeTokenGrpcViewController", bundle: nil)
+//                nTokenDetailVC.nativeDenom = mNative_gRPC[indexPath.row].denom
+//                nTokenDetailVC.hidesBottomBarWhenPushed = true
+//                self.navigationItem.title = ""
+//                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+//            }
+//
+//        } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
+//            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
+//            iTokenDetailVC.ibcDenom = mIbcAuthed_gRPC[indexPath.row].denom
+//            iTokenDetailVC.hidesBottomBarWhenPushed = true
+//            self.navigationItem.title = ""
+//            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
+//
+//        } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
+//            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
+//            iTokenDetailVC.ibcDenom = mIbcUnknown_gRPC[indexPath.row].denom
+//            iTokenDetailVC.hidesBottomBarWhenPushed = true
+//            self.navigationItem.title = ""
+//            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
+//
+//        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
+//            let pTokenDetailVC = PoolTokenGrpcViewController(nibName: "PoolTokenGrpcViewController", bundle: nil)
+//            pTokenDetailVC.poolDenom = mPoolToken_gRPC[indexPath.row].denom
+//            pTokenDetailVC.hidesBottomBarWhenPushed = true
+//            self.navigationItem.title = ""
+//            self.navigationController?.pushViewController(pTokenDetailVC, animated: true)
+//
+//        } else if (indexPath.section == SECTION_SIF_ETHER_GRPC) {
+//            let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
+//            bTokenDetailVC.hidesBottomBarWhenPushed = true
+//            bTokenDetailVC.bridgeDenom = mSifEther_gRPC[indexPath.row].denom
+//            self.navigationItem.title = ""
+//            self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
+//
+//        } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
+//            return
+//        }
+//
+//        else if (indexPath.section == SECTION_NATIVE) {
+//            if (mNative[indexPath.row].balance_denom == WUtils.getMainDenom(chainType)) {
+//                let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
+//                sTokenDetailVC.hidesBottomBarWhenPushed = true
+//                self.navigationItem.title = ""
+//                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
+//
+//            } else {
+//                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
+//                nTokenDetailVC.hidesBottomBarWhenPushed = true
+//                nTokenDetailVC.denom = mNative[indexPath.row].balance_denom
+//                self.navigationItem.title = ""
+//                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+//            }
+//
+//        } else if (indexPath.section == SECTION_KAVA_BEP2) {
+//            let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
+//            nTokenDetailVC.hidesBottomBarWhenPushed = true
+//            nTokenDetailVC.denom = mKavaBep2[indexPath.row].balance_denom
+//            self.navigationItem.title = ""
+//            self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+//
+//        } else if (indexPath.section == SECTION_ETC) {
+//            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.BINANCE_MAIN || chainType == ChainType.OKEX_MAIN) {
+//                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
+//                nTokenDetailVC.hidesBottomBarWhenPushed = true
+//                nTokenDetailVC.denom = mEtc[indexPath.row].balance_denom
+//                self.navigationItem.title = ""
+//                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+//            }
+//
+//        } else if (indexPath.section == SECTION_UNKNOWN) {
+//            return
+//        }
     }
     
     //bind native tokens with grpc
@@ -704,6 +714,50 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allHuahua.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CHIHUAHUA_MAIN_DENOM, allHuahua, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == KAVA_MAIN_DENOM) {
+            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + KAVA_MAIN_DENOM + ".png")!)
+            cell?.tokenSymbol.text = "KAVA"
+            cell?.tokenSymbol.textColor = COLOR_KAVA
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Kava Staking Token"
+            
+            let totalKava = WUtils.getAllMainAsset(KAVA_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalKava.stringValue, cell!.tokenAmount.font!, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_MAIN_DENOM, totalKava, 6, cell!.tokenValue.font)
+            
+        } else if (coin.denom == KAVA_HARD_DENOM) {
+            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + KAVA_HARD_DENOM + ".png")!)
+            cell?.tokenSymbol.text = "HARD"
+            cell?.tokenSymbol.textColor = COLOR_HARD
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "HardPool Gov. Token"
+            
+//            let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
+//            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
+//            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_HARD_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
+            
+        } else if (coin.denom == KAVA_USDX_DENOM) {
+            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + KAVA_USDX_DENOM + ".png")!)
+            cell?.tokenSymbol.text = KAVA_USDX_DENOM.uppercased()
+            cell?.tokenSymbol.textColor = COLOR_USDX
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "USD Stable Asset"
+            
+//            let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
+//            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
+//            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_USDX_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
+            
+        } else if (coin.denom == KAVA_SWAP_DENOM) {
+            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + KAVA_SWAP_DENOM + ".png")!)
+            cell?.tokenSymbol.text = KAVA_SWAP_DENOM.uppercased()
+            cell?.tokenSymbol.textColor = COLOR_SWP
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Kava Swap Token"
+            
+//            let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
+//            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
+//            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_SWAP_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
+            
         }
         
         
@@ -801,6 +855,40 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom.substring(from: 1), available, decimal, cell!.tokenValue.font)
     }
     
+    //bind kava bep2 tokens with grpc
+    func onBindKavaBep2Token_gRPC(_ cell: TokenCell?, _ coin: Coin) {
+        cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + coin.denom + ".png")!)
+        cell?.tokenSymbol.text = coin.denom.uppercased()
+        cell?.tokenSymbol.textColor = UIColor.white
+        cell?.tokenTitle.text = ""
+        cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"
+
+//        let baseDenom = WUtils.getKavaBaseDenom(balance.balance_denom)
+//        let decimal = WUtils.getKavaCoinDecimal(balance.balance_denom)
+//        let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
+//        cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(balance.balance_denom), 6)
+//        cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
+    }
+    
+    //bind etc tokens with grpc
+    func onBindEtcToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
+        //bind "btch" for kava
+        if (chainType == ChainType.KAVA_MAIN || coin.denom == "btch") {
+            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + coin.denom + ".png")!)
+            cell?.tokenSymbol.text = coin.denom.uppercased()
+            cell?.tokenSymbol.textColor = UIColor.white
+            cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"
+
+//            let baseDenom = WUtils.getKavaBaseDenom(balance.balance_denom)
+//            let decimal = WUtils.getKavaCoinDecimal(balance.balance_denom)
+//            let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
+//            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(balance.balance_denom), 6)
+//            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
+
+        }
+        
+    }
+    
     
     //bind native tokens
     func onBindNativeToken(_ cell: TokenCell?, _ balance: Balance) {
@@ -816,50 +904,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.tokenAmount.attributedText = WUtils.displayAmount2(amount.stringValue, cell!.tokenAmount.font, 0, 6)
                 cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, amount, 0, cell!.tokenValue.font)
             }
-            
-        } else if (balance.balance_denom == KAVA_MAIN_DENOM) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + KAVA_MAIN_DENOM + ".png")!)
-            cell?.tokenSymbol.text = "KAVA"
-            cell?.tokenSymbol.textColor = COLOR_KAVA
-            cell?.tokenTitle.text = "(" + balance.balance_denom + ")"
-            cell?.tokenDescription.text = "Kava Staking Token"
-            
-            let totalKava = WUtils.getAllMainAssetOld(KAVA_MAIN_DENOM)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalKava.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_MAIN_DENOM, totalKava, 6, cell!.tokenValue.font)
-            
-        } else if (balance.balance_denom == KAVA_HARD_DENOM) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + KAVA_HARD_DENOM + ".png")!)
-            cell?.tokenSymbol.text = "HARD"
-            cell?.tokenSymbol.textColor = COLOR_HARD
-            cell?.tokenTitle.text = "(" + balance.balance_denom + ")"
-            cell?.tokenDescription.text = "HardPool Gov. Token"
-            
-            let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_HARD_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
-            
-        } else if (balance.balance_denom == KAVA_USDX_DENOM) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + KAVA_USDX_DENOM + ".png")!)
-            cell?.tokenSymbol.text = KAVA_USDX_DENOM.uppercased()
-            cell?.tokenSymbol.textColor = COLOR_USDX
-            cell?.tokenTitle.text = "(" + KAVA_USDX_DENOM + ")"
-            cell?.tokenDescription.text = "USD Stable Asset"
-            
-            let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_USDX_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
-            
-        } else if (balance.balance_denom == KAVA_SWAP_DENOM) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + KAVA_SWAP_DENOM + ".png")!)
-            cell?.tokenSymbol.text = KAVA_SWAP_DENOM.uppercased()
-            cell?.tokenSymbol.textColor = COLOR_SWP
-            cell?.tokenTitle.text = "(" + KAVA_SWAP_DENOM + ")"
-            cell?.tokenDescription.text = "Kava Swap Token"
-            
-            let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_SWAP_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
             
         } else if (balance.balance_denom == OKEX_MAIN_DENOM) {
             if let okToken = WUtils.getOkToken(OKEX_MAIN_DENOM) {
@@ -877,37 +921,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    //bind kava bep2 tokens
-    func onBindKavaBep2Token(_ cell: TokenCell?, _ balance: Balance) {
-        cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + balance.balance_denom + ".png")!)
-        cell?.tokenSymbol.text = balance.balance_denom.uppercased()
-        cell?.tokenSymbol.textColor = UIColor.white
-        cell?.tokenTitle.text = "(" + balance.balance_denom + ")"
-        cell?.tokenDescription.text = balance.balance_denom.uppercased() + " on Kava Chain"
-        
-        let baseDenom = WUtils.getKavaBaseDenom(balance.balance_denom)
-        let decimal = WUtils.getKavaCoinDecimal(balance.balance_denom)
-        let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
-        cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(balance.balance_denom), 6)
-        cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
-    }
-    
     //bind Etc tokens (kava, binance, okex)
     func onBindEtcToken(_ cell: TokenCell?, _ balance: Balance) {
-        if (chainType == ChainType.KAVA_MAIN || balance.balance_denom == "btch") {
-            cell?.tokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + balance.balance_denom + ".png")!)
-            cell?.tokenSymbol.text = balance.balance_denom.uppercased()
-            cell?.tokenSymbol.textColor = UIColor.white
-            cell?.tokenTitle.text = "(" + balance.balance_denom + ")"
-            cell?.tokenDescription.text = balance.balance_denom.uppercased() + " on Kava Chain"
-
-            let baseDenom = WUtils.getKavaBaseDenom(balance.balance_denom)
-            let decimal = WUtils.getKavaCoinDecimal(balance.balance_denom)
-            let totalTokenAmount = WUtils.getKavaTokenAll(balance.balance_denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(balance.balance_denom), 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
-
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
             if let bnbToken = WUtils.getBnbToken(balance.balance_denom) {
                 cell?.tokenImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + bnbToken.original_symbol + ".png")!)
                 cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
@@ -944,12 +960,26 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mIbcAuthed_gRPC.removeAll()
         mPoolToken_gRPC.removeAll()
         mSifEther_gRPC.removeAll()
+        mKavaBep2_gRPC.removeAll()
+        mEtc_gRPC.removeAll()
         mIbcUnknown_gRPC.removeAll()
         mUnKnown_gRPC.removeAll()
         
         self.mBalances_gRPC.forEach { balance_gRPC in
             if (WUtils.getMainDenom(chainType) == balance_gRPC.denom) {
                 mNative_gRPC.append(balance_gRPC)
+                
+            } else if (chainType == ChainType.KAVA_MAIN) {
+                if (balance_gRPC.denom == KAVA_HARD_DENOM || balance_gRPC.denom == KAVA_USDX_DENOM || balance_gRPC.denom == KAVA_SWAP_DENOM) {
+                    mNative_gRPC.append(balance_gRPC)
+                    
+                } else if (balance_gRPC.denom == TOKEN_HTLC_KAVA_BNB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BTCB ||
+                           balance_gRPC.denom == TOKEN_HTLC_KAVA_XRPB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BUSD) {
+                    mKavaBep2_gRPC.append(balance_gRPC)
+                    
+                } else if (balance_gRPC.denom == "btch") {
+                    mUnKnown_gRPC.append(balance_gRPC)
+                }
                 
             } else if (balance_gRPC.isIbc()) {
                 guard let ibcToken = BaseData.instance.getIbcToken(balance_gRPC.getIbcHash()) else {
@@ -983,24 +1013,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         mNative.removeAll()
-        mKavaBep2.removeAll()
         mEtc.removeAll()
         mUnKnown.removeAll()
         self.mBalances.forEach { balance in
             if (WUtils.getMainDenom(chainType) == balance.balance_denom) {
                 mNative.append(balance)
-                
-            } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
-                if (balance.balance_denom == KAVA_HARD_DENOM || balance.balance_denom == KAVA_USDX_DENOM || balance.balance_denom == KAVA_SWAP_DENOM) {
-                    mNative.append(balance)
-                    
-                } else if (balance.balance_denom == TOKEN_HTLC_KAVA_BNB || balance.balance_denom == TOKEN_HTLC_KAVA_BTCB ||
-                            balance.balance_denom == TOKEN_HTLC_KAVA_XRPB || balance.balance_denom == TOKEN_HTLC_KAVA_BUSD) {
-                    mKavaBep2.append(balance)
-                    
-                } else if (balance.balance_denom == "btch") {
-                    mEtc.append(balance)
-                }
                 
             } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
                 mEtc.append(balance)
@@ -1018,6 +1035,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mNative_gRPC.sort {
             if ($0.denom == WUtils.getMainDenom(chainType)) { return true }
             if ($1.denom == WUtils.getMainDenom(chainType)) { return false }
+            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+                if ($0.denom == KAVA_HARD_DENOM) { return true }
+                if ($1.denom == KAVA_HARD_DENOM) { return false }
+                if ($0.denom == KAVA_SWAP_DENOM) { return true }
+                if ($1.denom == KAVA_SWAP_DENOM) { return false }
+            }
             return false
         }
         mPoolToken_gRPC.sort {
@@ -1033,12 +1056,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mNative.sort {
             if ($0.balance_denom == WUtils.getMainDenom(chainType)) { return true }
             if ($1.balance_denom == WUtils.getMainDenom(chainType)) { return false }
-            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
-                if ($0.balance_denom == KAVA_HARD_DENOM) { return true }
-                if ($1.balance_denom == KAVA_HARD_DENOM) { return false }
-                if ($0.balance_denom == KAVA_SWAP_DENOM) { return true }
-                if ($1.balance_denom == KAVA_SWAP_DENOM) { return false }
-            }
+            
             return false
         }
         mEtc.sort {
