@@ -38,6 +38,10 @@ class StepSendAmountViewController: BaseViewController, UITextFieldDelegate{
             if (pageHolderVC.chainType! == ChainType.SIF_MAIN) {
                 mDivideDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
                 mDisplayDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
+                
+            } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
+                mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
             }
             
             if (pageHolderVC.mToSendDenom == mainDenom) {
@@ -50,10 +54,6 @@ class StepSendAmountViewController: BaseViewController, UITextFieldDelegate{
             if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
                 mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
                 mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-                
-            } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
-                mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
                 
             } else if (pageHolderVC.chainType! == ChainType.OKEX_MAIN || pageHolderVC.chainType! == ChainType.OKEX_TEST) {
                 mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)

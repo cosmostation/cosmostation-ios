@@ -81,17 +81,18 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
             if (chainType == ChainType.SIF_MAIN) {
                 mDivideDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
                 mDisplayDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
+                
+            } else if (chainType == ChainType.KAVA_MAIN) {
+                mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
+                
             }
             currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
             
-        }  else {
+        } else {
             if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
                 mDivideDecimal = WUtils.mainDivideDecimal(chainType)
                 mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
-                
-            } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
-                mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
                 
             } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
                 mDivideDecimal = WUtils.mainDivideDecimal(chainType)
@@ -162,18 +163,6 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithBnbAccountInfo(account, bnbAccountInfo))
                     BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithBnbAccountInfo(account, bnbAccountInfo))
                     self.onGenBnbSendTx()
-                    
-                } else if (self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.KAVA_TEST) {
-                    guard  let info = res as? [String : Any] else {
-                        _ = BaseData.instance.deleteBalance(account: account)
-                        self.hideWaittingAlert()
-                        self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                        return
-                    }
-                    let accountInfo = KavaAccountInfo.init(info)
-                    _ = BaseData.instance.updateAccount(WUtils.getAccountWithKavaAccountInfo(account, accountInfo))
-                    BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithKavaAccountInfo(account, accountInfo))
-                    self.onGenSendTx()
                     
                 } else if (self.chainType == ChainType.OKEX_MAIN || self.chainType == ChainType.OKEX_TEST) {
                     guard let info = res as? NSDictionary else {
