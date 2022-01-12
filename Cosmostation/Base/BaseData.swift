@@ -41,13 +41,20 @@ final class BaseData : NSObject{
     var mKavaPriceMarkets: Array<KavaPriceMarket> = Array<KavaPriceMarket>()
     var mCdpParam: CdpParam?
     var mHardParam: HardParam?
-    var mIncentiveParam: IncentiveParam?
-    var mIncentiveRewards: IncentiveReward?
     var mMyHardDeposit: Array<HardMyDeposit>?
     var mMyHardBorrow: Array<HardMyBorrow>?
     var mModuleCoins: Array<Coin>?
     var mReserveCoins: Array<Coin>?
     var mKavaSwapParam: SwapParam!
+    
+    //kava gRPC
+    var mKavaPriceMarkets_gRPC: Array<Kava_Pricefeed_V1beta1_Market> = Array<Kava_Pricefeed_V1beta1_Market>()
+    var mIncentiveParam: IncentiveParam?
+    var mIncentiveRewards: IncentiveReward?
+    
+    
+    
+    
     
     var mBnbTokenList = Array<BnbToken>()
     var mBnbTokenTicker = Array<BnbTicker>()

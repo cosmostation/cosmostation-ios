@@ -197,6 +197,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         
         BaseData.instance.mGravityPools_gRPC.removeAll()
         
+        BaseData.instance.mKavaPriceMarkets_gRPC.removeAll()
+        
         
         
         if (mChainType == ChainType.BINANCE_MAIN || mChainType == ChainType.BINANCE_TEST) {
@@ -334,7 +336,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
 //            self.onFetchgRPCStargazeClaimTotal(self.mAccount.account_address)
             
         } else if (mChainType == ChainType.KAVA_MAIN) {
-            self.mFetchCnt = 9
+            self.mFetchCnt = 12
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
             self.onFetchgRPCBondedValidators(0)
@@ -346,24 +348,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-//            self.mFetchCnt = 11
-//            onFetchNodeInfo()
-//            onFetchTopValidatorsInfo()
-//            onFetchUnbondedValidatorsInfo()
-//            onFetchUnbondingValidatorsInfo()
-//
-//            onFetchAccountInfo(mAccount)
-//            onFetchBondingInfo(mAccount)
-//            onFetchUnbondingInfo(mAccount)
-//            onFetchAllReward(mAccount)
-//
-//            onFetchPriceFeedParam()
-//            onFetchKavaIncentiveParam()
-//            onFetchKavaIncentiveReward(mAccount.account_address)
+            self.onFetchgRPCKavaPriceParam()
+            self.onFetchKavaIncentiveParam()
+            self.onFetchKavaIncentiveReward(mAccount.account_address)
             
-        }
-        
-        else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.RIZON_TEST || self.mChainType == ChainType.ALTHEA_TEST ||
+        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.RIZON_TEST || self.mChainType == ChainType.ALTHEA_TEST ||
                     self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.CERTIK_TEST || self.mChainType == ChainType.UMEE_TEST ||
                     self.mChainType == ChainType.AXELAR_TEST) {
             self.mFetchCnt = 9
@@ -625,20 +614,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithBnbAccountInfo(account, bnbAccountInfo))
                     BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithBnbAccountInfo(account, bnbAccountInfo))
                     
-                }
-//                else if (self.mChainType == ChainType.KAVA_MAIN || self.mChainType == ChainType.KAVA_TEST) {
-//                    guard let info = res as? [String : Any] else {
-//                        _ = BaseData.instance.deleteBalance(account: account)
-//                        self.onFetchFinished()
-//                        return
-//                    }
-//                    let kavaAccountInfo = KavaAccountInfo.init(info)
-//                    BaseData.instance.mKavaAccountResult = kavaAccountInfo.result
-//                    _ = BaseData.instance.updateAccount(WUtils.getAccountWithKavaAccountInfo(account, kavaAccountInfo))
-//                    BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithKavaAccountInfo(account, kavaAccountInfo))
-//
-//                }
-                else if (self.mChainType == ChainType.OKEX_MAIN || self.mChainType == ChainType.OKEX_TEST) {
+                } else if (self.mChainType == ChainType.OKEX_MAIN || self.mChainType == ChainType.OKEX_TEST) {
                     guard let info = res as? NSDictionary else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.onFetchFinished()
@@ -813,90 +789,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             case .failure(let error):
                 print("onFetchBnbMiniTokenTickers ", error)
             }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchPriceFeedParam() {
-        let request = Alamofire.request(BaseNetWork.paramPriceFeedUrl(mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("onFetchPriceFeedParam res ", res)
-                guard let responseData = res as? NSDictionary,
-                    let _ = responseData.object(forKey: "height") as? String else {
-                    self.onFetchFinished()
-                    return
-                }
-                BaseData.instance.mKavaPriceMarkets = KavaPriceFeedParam.init(responseData).result.markets
-                print("BaseData.instance.mKavaPriceMarkets ", BaseData.instance.mKavaPriceMarkets.count)
-            
-            case .failure(let error):
-                print("onFetchPriceFeedParam ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchPriceFeedPrice(_ market: String) {
-        let request = Alamofire.request(BaseNetWork.priceFeedUrl(mChainType, market), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("onFetchPriceFeedPrice ", res)
-                guard let responseData = res as? NSDictionary,
-                    let _ = responseData.object(forKey: "height") as? String else {
-                    self.onFetchFinished()
-                    return
-                }
-                let priceParam = KavaPriceFeedPrice.init(responseData)
-                BaseData.instance.mKavaPrice[priceParam.result.market_id] = priceParam
-                
-            case .failure(let error):
-                print("onFetchKavaPrice ", market , " ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchKavaIncentiveParam() {
-        let request = Alamofire.request(BaseNetWork.paramIncentiveUrl(mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-//                    print("IncentiveParam ", res)
-                    guard let responseData = res as? NSDictionary,
-                        let _ = responseData.object(forKey: "height") as? String else {
-                            self.onFetchFinished()
-                            return
-                    }
-                    let kavaIncentiveParam = KavaIncentiveParam.init(responseData)
-                    BaseData.instance.mIncentiveParam = kavaIncentiveParam.result
-//                    print("mIncentiveParam ", BaseData.instance.mIncentiveParam)
-                    
-                case .failure(let error):
-                    print("onFetchIncentiveParam ", error)
-                }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchKavaIncentiveReward(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.incentiveUrl(mChainType), method: .get, parameters: ["owner":address], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
-                    }
-                    let kavaIncentiveReward = KavaIncentiveReward.init(responseData)
-                    BaseData.instance.mIncentiveRewards = kavaIncentiveReward.result
-//                    print("mIncentiveRewards ", BaseData.instance.mIncentiveRewards?.getAllIncentives().count)
-
-                case .failure(let error):
-                    print("onFetchKavaIncentiveReward ", error)
-                }
             self.onFetchFinished()
         }
     }
@@ -1327,6 +1219,70 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     
+    //for KAVA
+    func onFetchgRPCKavaPriceParam() {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Pricefeed_V1beta1_QueryParamsRequest.init()
+                if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    BaseData.instance.mKavaPriceMarkets_gRPC = response.params.markets
+                    print("onFetchgRPCKavaPriceParam ", BaseData.instance.mKavaPriceMarkets_gRPC.count)
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCKavaPriceParam failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    //using lcd cuz no grpc query
+    func onFetchKavaIncentiveParam() {
+        let request = Alamofire.request(BaseNetWork.paramIncentiveUrl(mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
+        request.responseJSON { (response) in
+            switch response.result {
+                case .success(let res):
+//                    print("IncentiveParam ", res)
+                    guard let responseData = res as? NSDictionary,
+                        let _ = responseData.object(forKey: "height") as? String else {
+                            self.onFetchFinished()
+                            return
+                    }
+                    let kavaIncentiveParam = KavaIncentiveParam.init(responseData)
+                    BaseData.instance.mIncentiveParam = kavaIncentiveParam.result
+//                    print("mIncentiveParam ", BaseData.instance.mIncentiveParam)
+                    
+                case .failure(let error):
+                    print("onFetchIncentiveParam ", error)
+                }
+            self.onFetchFinished()
+        }
+    }
+    
+    func onFetchKavaIncentiveReward(_ address: String) {
+        let request = Alamofire.request(BaseNetWork.incentiveUrl(mChainType), method: .get, parameters: ["owner":address], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+                case .success(let res):
+                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
+                        self.onFetchFinished()
+                        return
+                    }
+                    let kavaIncentiveReward = KavaIncentiveReward.init(responseData)
+                    BaseData.instance.mIncentiveRewards = kavaIncentiveReward.result
+//                    print("mIncentiveRewards ", BaseData.instance.mIncentiveRewards?.getAllIncentives().count)
+
+                case .failure(let error):
+                    print("onFetchKavaIncentiveReward ", error)
+                }
+            self.onFetchFinished()
+        }
+    }
+    
+    
+    //fetch for common
     func onFetchPriceInfo() {
         let request = Alamofire.request(BaseNetWork.getPrices(self.mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
