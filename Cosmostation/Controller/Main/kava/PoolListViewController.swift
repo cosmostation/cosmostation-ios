@@ -35,7 +35,7 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.refresher.tintColor = UIColor.white
         self.swapPoolTableView.addSubview(refresher)
         
-        self.onFetchSwapPoolData()
+//        self.onFetchSwapPoolData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

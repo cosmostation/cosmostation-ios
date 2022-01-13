@@ -40,7 +40,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.refresher.tintColor = UIColor.white
         self.hardTableView.addSubview(refresher)
         
-        self.onFetchHardData()
+//        self.onFetchHardData()
     }
     
     var mFetchCnt = 0

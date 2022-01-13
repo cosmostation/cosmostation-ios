@@ -4234,67 +4234,6 @@ public class WUtils {
         return attributedString1
     }
     
-    static func getRiskColor(_ riskRate: NSDecimalNumber) -> UIColor {
-        if (riskRate.doubleValue <= 50) {
-            return COLOR_CDP_SAFE
-        } else if (riskRate.doubleValue < 80) {
-            return COLOR_CDP_STABLE
-        } else {
-            return COLOR_CDP_DANGER
-        }
-    }
-    
-    static func showRiskRate(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _rateIamg:UIImageView?) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
-        if (riskRate.floatValue <= 50) {
-            scoreLabel.textColor = COLOR_CDP_SAFE
-            _rateIamg?.image = UIImage(named: "safe")
-            
-        } else if (riskRate.floatValue < 80) {
-            scoreLabel.textColor = COLOR_CDP_STABLE
-            _rateIamg?.image = UIImage(named: "stable")
-            
-        } else {
-            scoreLabel.textColor = COLOR_CDP_DANGER
-            _rateIamg?.image = UIImage(named: "danger")
-        }
-    }
-    
-    static func showRiskRate2(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
-        if (riskRate.doubleValue <= 50) {
-            scoreLabel.textColor = COLOR_CDP_SAFE
-            textLabel.textColor = COLOR_CDP_SAFE
-            textLabel.text = "SAFE"
-            
-        } else if (riskRate.doubleValue < 80) {
-            scoreLabel.textColor = COLOR_CDP_STABLE
-            textLabel.textColor = COLOR_CDP_STABLE
-            textLabel.text = "STABLE"
-            
-        } else {
-            scoreLabel.textColor = COLOR_CDP_DANGER
-            textLabel.textColor = COLOR_CDP_DANGER
-            textLabel.text = "DANGER"
-        }
-    }
-    
-    static func showRiskRate3(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel, _ cardView:CardView) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
-        if (riskRate.doubleValue <= 50) {
-            textLabel.text = "SAFE"
-            cardView.backgroundColor = COLOR_CDP_SAFE
-            
-        } else if (riskRate.doubleValue < 80) {
-            textLabel.text = "STABLE"
-            cardView.backgroundColor = COLOR_CDP_STABLE
-            
-        } else {
-            textLabel.text = "DANGER"
-            cardView.backgroundColor = COLOR_CDP_DANGER
-        }
-    }
-    
     static func dpChainInfo(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
         if (chain == ChainType.COSMOS_MAIN) {
             label.text = NSLocalizedString("chain_title_cosmos", comment: "")

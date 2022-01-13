@@ -49,6 +49,8 @@ final class BaseData : NSObject{
     
     //kava gRPC
     var mKavaPriceMarkets_gRPC: Array<Kava_Pricefeed_V1beta1_Market> = Array<Kava_Pricefeed_V1beta1_Market>()
+    var mKavaPrices_gRPC: Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse> = Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse>()
+    var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params?
     var mIncentiveParam: IncentiveParam?
     var mIncentiveRewards: IncentiveReward?
     

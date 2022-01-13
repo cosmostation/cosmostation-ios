@@ -348,7 +348,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-            self.onFetchgRPCKavaPriceParam()
+//            self.onFetchgRPCKavaPriceParam()
+            self.onFetchgRPCKavaPrices()
             self.onFetchKavaIncentiveParam()
             self.onFetchKavaIncentiveReward(mAccount.account_address)
             
@@ -1227,12 +1228,30 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Kava_Pricefeed_V1beta1_QueryParamsRequest.init()
                 if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mKavaPriceMarkets_gRPC = response.params.markets
-                    print("onFetchgRPCKavaPriceParam ", BaseData.instance.mKavaPriceMarkets_gRPC.count)
+//                    print("onFetchgRPCKavaPriceParam ", BaseData.instance.mKavaPriceMarkets_gRPC.count)
                 }
                 try channel.close().wait()
                 
             } catch {
                 print("onFetchgRPCKavaPriceParam failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchgRPCKavaPrices() {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Pricefeed_V1beta1_QueryPricesRequest.init()
+                if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).prices(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    print("onFetchgRPCPrices ", response.prices)
+                    BaseData.instance.mKavaPrices_gRPC = response.prices
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCPrices failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }

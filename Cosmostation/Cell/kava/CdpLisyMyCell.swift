@@ -34,4 +34,35 @@ class CdpLisyMyCell: UITableViewCell {
         liquidationPrice.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
+    func onBindMyCdp(_ myCdp: Kava_Cdp_V1beta1_CDPResponse, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam?) {
+        
+        let mCDenom = myCdp.collateral.denom
+        let mPDenom = myCdp.principal.denom
+        let mPrice = BaseData.instance.mKavaPrices_gRPC.filter { $0.marketID == collateralParam?.liquidationMarketID }.first
+        
+        let currentPrices = NSDecimalNumber.init(string: mPrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
+        let liquidationPrices = myCdp.getLiquidationPrice(mCDenom, mPDenom, collateralParam!)
+        let riskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrices.subtracting(liquidationPrices).multiplying(byPowerOf10: 2).dividing(by: currentPrices, withBehavior: WUtils.handler2Down))
+
+        marketType.text = collateralParam?.type.uppercased()
+        marketTitle.text = collateralParam!.getDpMarketId()
+        WUtils.showRiskRate(riskRate, riskScore, _rateIamg: riskRateImg)
+
+        debtValueTitle.text = String(format: NSLocalizedString("debt_value_format", comment: ""), mPDenom.uppercased())
+        debtValue.attributedText = WUtils.getDPRawDollor(myCdp.getDpEstimatedTotalDebtValue(mPDenom, collateralParam!).stringValue, 2, debtValue.font)
+
+        collateralValueTitle.text = String(format: NSLocalizedString("collateral_value_format", comment: ""), mCDenom.uppercased())
+        collateralValue.attributedText = WUtils.getDPRawDollor(myCdp.getDpCollateralValue(mPDenom).stringValue, 2, collateralValue.font)
+
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), mCDenom.uppercased())
+        currentPrice.attributedText = WUtils.getDPRawDollor(currentPrices.stringValue, 4, currentPrice.font)
+
+        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), mCDenom.uppercased())
+        liquidationPrice.attributedText = WUtils.getDPRawDollor(liquidationPrices.stringValue, 4, liquidationPrice.font)
+        liquidationPrice.textColor = WUtils.getRiskColor(riskRate)
+
+        let url = KAVA_CDP_IMG_URL + collateralParam!.getMarketImgPath()! + ".png"
+        marketImg.af_setImage(withURL: URL(string: url)!)
+    }
+    
 }

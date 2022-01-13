@@ -54,7 +54,7 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         self.inputCoinLayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickInput (_:))))
         self.outputCoinLayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickOutput (_:))))
         
-        self.onFetchSwapPoolData()
+//        self.onFetchSwapPoolData()
     }
     
     func updateView() {
