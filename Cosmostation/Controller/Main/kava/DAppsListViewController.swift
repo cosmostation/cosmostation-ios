@@ -112,7 +112,7 @@ extension WUtils {
         } else if (denom?.caseInsensitiveCompare("swp") == .orderedSame) {
             return 6;
         }
-        return 100;
+        return 6;
     }
     
     static func getKavaTokenName(_ denom: String) -> String {
@@ -291,8 +291,6 @@ extension Kava_Cdp_V1beta1_CollateralParam {
         return getLiquidationPenaltyAmount().multiplying(byPowerOf10: 2, withBehavior: WUtils.handler2Down)
     }
     
-    
-    
     public func getDpMarketId() -> String? {
         return denom.uppercased() + " : " + debtLimit.denom.uppercased()
     }
@@ -352,3 +350,20 @@ extension Kava_Cdp_V1beta1_CDPResponse {
         return rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(WUtils.getKavaCoinDecimal(pDenom)))
     }
 }
+
+extension Kava_Hard_V1beta1_Params {
+    public func getLTV(_ denom: String) -> NSDecimalNumber {
+        if let market = moneyMarkets.filter({ $0.denom == denom }).first {
+            return NSDecimalNumber.init(string: market.borrowLimit.loanToValue).multiplying(byPowerOf10: -18)
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    public func getSpotMarketId(_ denom: String) -> String {
+        if let market = moneyMarkets.filter({ $0.denom == denom }).first {
+            return market.spotMarketID
+        }
+        return ""
+    }
+}
+

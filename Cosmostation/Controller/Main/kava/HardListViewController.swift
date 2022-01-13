@@ -7,19 +7,23 @@
 //
 
 import UIKit
+import GRPC
+import NIO
 import Alamofire
+import HDWalletKit
 
 class HardListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var hardTableView: UITableView!
     var refresher: UIRefreshControl!
     
-    var hardParam: HardParam?
-    var interestRates: Array<HardInterestRate>?
-    var totalDeposit: Array<Coin>?
-    var totalBorrow: Array<Coin>?
-    var myDeposit: Array<HardMyDeposit>?
-    var myBorrow: Array<HardMyBorrow>?
+    var mHardParam: Kava_Hard_V1beta1_Params?
+    var mHardInterestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>?
+    var mHardTotalDeposit: Array<Coin>?
+    var mHardTotalBorrow: Array<Coin>?
+    var mHardMyDeposit: Array<Kava_Hard_V1beta1_DepositResponse>?
+    var mHardMyBorrow: Array<Kava_Hard_V1beta1_BorrowResponse>?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +44,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.refresher.tintColor = UIColor.white
         self.hardTableView.addSubview(refresher)
         
-//        self.onFetchHardData()
+        self.onFetchHardData()
     }
     
     var mFetchCnt = 0
@@ -50,18 +54,18 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
             return
         }
         self.mFetchCnt = 6
-        self.interestRates?.removeAll()
-        self.totalDeposit?.removeAll()
-        self.totalBorrow?.removeAll()
-        self.myDeposit?.removeAll()
-        self.myBorrow?.removeAll()
+        self.mHardInterestRates?.removeAll()
+        self.mHardTotalDeposit?.removeAll()
+        self.mHardTotalBorrow?.removeAll()
+        self.mHardMyDeposit?.removeAll()
+        self.mHardMyBorrow?.removeAll()
         
-        self.onFetchHardParam()
-        self.onFetchHardInterestRate()
-        self.onFetchHardTotalDeposit()
-        self.onFetchHardTotalBorrow()
-        self.onFetchHardMyDeposit(account!.account_address)
-        self.onFetchHardMyBorrow(account!.account_address)
+        self.onFetchgRPCHardParam()
+        self.onFetchgRPCHardInterestRate()
+        self.onFetchgRPCHardTotalDeposit()
+        self.onFetchgRPCHardTotalBorrow()
+        self.onFetchgRPCHardMyDeposit(account!.account_address)
+        self.onFetchgRPCHardMyBorrow(account!.account_address)
     }
     
     func onFetchFinished() {
@@ -80,176 +84,137 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
         if (section == 0) {
             return 1
         } else {
-            return hardParam?.money_markets?.count ?? 0
+            return mHardParam?.moneyMarkets.count ?? 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"HardListMyStatusCell") as? HardListMyStatusCell
-            cell?.onBindView(self.hardParam, self.myDeposit, self.myBorrow)
+            cell?.onBindMyHard(self.mHardParam, self.mHardMyDeposit, self.mHardMyBorrow)
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"HardListCell") as? HardListCell
-            cell?.onBindView(indexPath.row, self.hardParam, self.myDeposit, self.myBorrow, self.interestRates)
+            cell?.onBindView(indexPath.row, self.mHardParam, self.mHardMyDeposit, self.mHardMyBorrow, self.mHardInterestRates)
             return cell!
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
-            let hardDetailVC = HardDetailViewController(nibName: "HardDetailViewController", bundle: nil)
-            hardDetailVC.mHardMoneyMarketDenom = hardParam!.money_markets![indexPath.row].denom
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(hardDetailVC, animated: true)
+//            let hardDetailVC = HardDetailViewController(nibName: "HardDetailViewController", bundle: nil)
+//            hardDetailVC.mHardMoneyMarketDenom = hardParam!.money_markets![indexPath.row].denom
+//            self.navigationItem.title = ""
+//            self.navigationController?.pushViewController(hardDetailVC, animated: true)
         }
     }
     
-    func onFetchHardParam() {
-        let request = Alamofire.request(BaseNetWork.paramHardPoolUrl(chainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
-                    }
-                    let kavaHardParam = KavaHardParam.init(responseData)
-                    self.hardParam = kavaHardParam.result
-                    BaseData.instance.mHardParam = kavaHardParam.result
-                    
-                    if let moneyMarkets = kavaHardParam.result?.money_markets {
-                        self.mFetchCnt = self.mFetchCnt + moneyMarkets.count
-                        moneyMarkets.forEach { moneyMarket in
-                            self.onFetchPriceFeedPrice(moneyMarket.spot_market_id!)
-                        }
-                    }
-                    
-                case .failure(let error):
-                    print("onFetchHardInterestRate ", error)
+    func onFetchgRPCHardParam()  {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Hard_V1beta1_QueryParamsRequest.init()
+                if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mHardParam = response.params
+                    BaseData.instance.mKavaHardParams_gRPC = response.params
                 }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchPriceFeedPrice(_ market: String) {
-        let request = Alamofire.request(BaseNetWork.priceFeedUrl(chainType, market), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("onFetchPriceFeedPrice ", res)
-                guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                    self.onFetchFinished()
-                    return
-                }
-                let priceParam = KavaPriceFeedPrice.init(responseData)
-                BaseData.instance.mKavaPrice[priceParam.result.market_id] = priceParam
+                try channel.close().wait()
                 
-            case .failure(let error):
-                print("onFetchKavaPrice ", market , " ", error)
+            } catch {
+                print("onFetchgRPCHardParam failed: \(error)")
             }
-            self.onFetchFinished()
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     
-    func onFetchHardInterestRate() {
-        let request = Alamofire.request(BaseNetWork.interestRateHardPoolUrl(chainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
-                    }
-                    let kavaHardInterestRate = KavaHardInterestRate.init(responseData)
-                    self.interestRates = kavaHardInterestRate.result
-                    
-                case .failure(let error):
-                    print("onFetchHardInterestRate ", error)
+    func onFetchgRPCHardInterestRate()  {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Hard_V1beta1_QueryInterestRateRequest.init()
+                if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).interestRate(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mHardInterestRates = response.interestRates
                 }
-            self.onFetchFinished()
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCHardInterestRate failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     
-    func onFetchHardTotalDeposit() {
-        let request = Alamofire.request(BaseNetWork.totalDepositHardPoolUrl(chainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
+    func onFetchgRPCHardTotalDeposit()  {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Hard_V1beta1_QueryTotalDepositedRequest.init()
+                if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).totalDeposited(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    response.suppliedCoins.forEach {
+                        self.mHardTotalDeposit?.append(Coin.init($0.denom, $0.amount))
                     }
-                    let kavaHardTotalDeposit = KavaHardTotalDeposit.init(responseData)
-                    self.totalDeposit = kavaHardTotalDeposit.result
-                    
-                case .failure(let error):
-                    print("onFetchHardTotalDeposit ", error)
                 }
-            self.onFetchFinished()
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCHardTotalDeposit failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     
-    func onFetchHardTotalBorrow() {
-        let request = Alamofire.request(BaseNetWork.totalBorrowHardPoolUrl(chainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
+    func onFetchgRPCHardTotalBorrow()  {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Hard_V1beta1_QueryTotalBorrowedRequest.init()
+                if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).totalBorrowed(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    response.borrowedCoins.forEach {
+                        self.mHardTotalBorrow?.append(Coin.init($0.denom, $0.amount))
                     }
-                    let kavaHardTotalBorrow = KavaHardTotalBorrow.init(responseData)
-                    self.totalBorrow = kavaHardTotalBorrow.result
-                    
-                case .failure(let error):
-                    print("onFetchHardTotalBorrow ", error)
                 }
-            self.onFetchFinished()
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCHardTotalBorrow failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     
-    func onFetchHardMyDeposit(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.depositHardPoolUrl(chainType), method: .get, parameters: ["owner":address], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-//                    print("onFetchHardMyDeposit ", res)
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
-                    }
-                    let kavaHardMyDeposit = KavaHardMyDeposit.init(responseData)
-                    self.myDeposit = kavaHardMyDeposit.result
-                    BaseData.instance.mMyHardDeposit = kavaHardMyDeposit.result
-//                    print("mMyHardDeposit ", BaseData.instance.mMyHardDeposit?.count)
-                    
-                case .failure(let error):
-                    print("onFetchHardMyDeposit ", error)
+    func onFetchgRPCHardMyDeposit(_ address: String)  {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Hard_V1beta1_QueryDepositsRequest.with { $0.owner = address }
+                if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mHardMyDeposit = response.deposits
+                    BaseData.instance.mHardMyDeposit = response.deposits
                 }
-            self.onFetchFinished()
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCHardMyDeposit failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     
-    func onFetchHardMyBorrow(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.borrowHardPoolUrl(chainType), method: .get, parameters: ["owner":address], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-//                    print("onFetchHardMyBorrow ", res)
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
-                    }
-                    let kavaHardMyBorrow = KavaHardMyBorrow.init(responseData)
-                    self.myBorrow = kavaHardMyBorrow.result
-                    BaseData.instance.mMyHardBorrow = kavaHardMyBorrow.result
-//                    print("mMyHardBorrow ", BaseData.instance.mMyHardBorrow?.count)
-                    
-                case .failure(let error):
-                    print("onFetchHardMyBorrow ", error)
+    func onFetchgRPCHardMyBorrow(_ address: String)  {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Hard_V1beta1_QueryBorrowsRequest.with { $0.owner = address }
+                if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).borrows(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mHardMyBorrow = response.borrows
+                    BaseData.instance.mHardMyBorrow = response.borrows
                 }
-            self.onFetchFinished()
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCHardMyBorrow failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
 }

@@ -3007,6 +3007,8 @@ public class WUtils {
                 return getOsmosisCoinDecimal(denom)
             } else if (chain == ChainType.SIF_MAIN) {
                 return getSifCoinDecimal(denom)
+            } else if (chain == ChainType.KAVA_MAIN) {
+                return getKavaCoinDecimal(denom)
             }
             print("CHECK DECIMAL")
             return 6
