@@ -6196,13 +6196,14 @@ public class WUtils {
     }
     
     static func onProposalStatusTxt(_ proposal: MintscanProposalDetail?) -> String {
-        if (proposal?.proposal_status?.contains("DEPOSIT") == true) {
+        print("onProposalStatusTxt ", proposal?.proposal_status)
+        if (proposal?.proposal_status?.localizedCaseInsensitiveContains("DEPOSIT") == true) {
             return "DepositPeriod"
-        } else if (proposal?.proposal_status?.contains("VOTING") == true) {
+        } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == true) {
             return "VotingPeriod"
-        } else if (proposal?.proposal_status?.contains("PASSED") == true) {
+        } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("PASSED") == true) {
             return "Passed"
-        } else if (proposal?.proposal_status?.contains("REJECTED") == true) {
+        } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("REJECTED") == true) {
             return "Rejected"
         }
         return "unKnown"
@@ -6237,13 +6238,13 @@ public class WUtils {
     }
     
     static func onProposalStatusImg(_ proposal: MintscanProposalDetail?) -> UIImage? {
-        if (proposal?.proposal_status?.contains("DEPOSIT") == true) {
+        if (proposal?.proposal_status?.localizedCaseInsensitiveContains("DEPOSIT") == true) {
             return UIImage.init(named: "depositImg")
-        } else if (proposal?.proposal_status?.contains("VOTING") == true) {
+        } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == true) {
             return UIImage.init(named: "votingImg")
-        } else if (proposal?.proposal_status?.contains("PASSED") == true) {
+        } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("PASSED") == true) {
             return UIImage.init(named: "passedImg")
-        } else if (proposal?.proposal_status?.contains("REJECTED") == true) {
+        } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("REJECTED") == true) {
             return UIImage.init(named: "rejectedImg")
         }
         return nil

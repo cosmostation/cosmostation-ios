@@ -79,7 +79,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         }
 
         let mainDenom = WUtils.getMainDenom(chainType)
-        if (mMintscanProposalDetail?.proposal_status?.contains("VOTING") == false) {
+        if (mMintscanProposalDetail?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == false) {
             self.onShowToast(NSLocalizedString("error_not_voting_period", comment: ""))
             return
         }
