@@ -492,7 +492,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             var publicKey: Data?
             if (self.mHtlcToAccount!.account_from_mnemonic == true) {
                 if let words = KeychainWrapper.standard.string(forKey: self.mHtlcToAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
-                    privateKey = KeyFac.getPrivateRaw(words, self.account!)
+                    privateKey = KeyFac.getPrivateRaw(words, self.mHtlcToAccount!)
                     publicKey = KeyFac.getPublicFromPrivateKey(privateKey!)
                 }
                 
