@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GRPC
+import NIO
 
 class DAppsListViewController: BaseViewController {
     
@@ -15,6 +17,9 @@ class DAppsListViewController: BaseViewController {
     @IBOutlet weak var poolView: UIView!
     @IBOutlet weak var cdpView: UIView!
     @IBOutlet weak var havestView: UIView!
+    
+    var mKavaSwapPools: Array<Kava_Swap_V1beta1_PoolResponse> = Array<Kava_Swap_V1beta1_PoolResponse>()
+    var mMyKavaPoolDeposits: Array<Kava_Swap_V1beta1_DepositResponse> = Array<Kava_Swap_V1beta1_DepositResponse>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +38,8 @@ class DAppsListViewController: BaseViewController {
         } else {
             dAppsSegment.tintColor = COLOR_KAVA
         }
+        
+        self.onFetchKavaSwapPoolData()
     }
     
     @IBAction func switchView(_ sender: UISegmentedControl) {
@@ -66,6 +73,101 @@ class DAppsListViewController: BaseViewController {
         self.navigationItem.title = NSLocalizedString("title_dapp_market", comment: "");
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+    }
+    
+    var mFetchCnt = 0
+    @objc func onFetchKavaSwapPoolData() -> Bool {
+        if (self.mFetchCnt > 0)  {
+            return false
+        }
+        self.mFetchCnt = 4
+        mKavaSwapPools.removeAll()
+        mMyKavaPoolDeposits.removeAll()
+        
+        self.onFetchgRPCSwapPoolParam()
+        self.onFetchgRPCSwapPoolList()
+        self.onFetchgRPCSwapPoolDeposit(account!.account_address)
+        self.onFetchgRPCKavaPrices()
+        return true
+    }
+    
+    func onFetchFinished() {
+        self.mFetchCnt = self.mFetchCnt - 1
+        if (mFetchCnt > 0) { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+            print("onFetchFinished KavaSwapPoolDone")
+            NotificationCenter.default.post(name: Notification.Name("KavaSwapPoolDone"), object: nil, userInfo: nil)
+        })
+    }
+    
+    func onFetchgRPCSwapPoolParam() {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Swap_V1beta1_QueryParamsRequest.init()
+                if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    BaseData.instance.mKavaSwapPoolParam = response.params
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCSwapPoolParam failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchgRPCSwapPoolList() {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Swap_V1beta1_QueryPoolsRequest.init()
+                if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mKavaSwapPools = response.pools
+                    print("self.mKavaSwapPools ", self.mKavaSwapPools.count)
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCSwapPoolList failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchgRPCSwapPoolDeposit(_ address: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Swap_V1beta1_QueryDepositsRequest.with { $0.owner = address }
+                if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mMyKavaPoolDeposits = response.deposits
+                    print("self.mMyKavaPoolDeposits ", self.mMyKavaPoolDeposits.count)
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCSwapPoolDeposit failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchgRPCKavaPrices() {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Pricefeed_V1beta1_QueryPricesRequest.init()
+                if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).prices(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    BaseData.instance.mKavaPrices_gRPC = response.prices
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCPrices failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
     }
 
 }

@@ -57,6 +57,7 @@ final class BaseData : NSObject{
     var mKavaHardParams_gRPC: Kava_Hard_V1beta1_Params?
     var mHardMyDeposit: Array<Kava_Hard_V1beta1_DepositResponse> = Array<Kava_Hard_V1beta1_DepositResponse>()
     var mHardMyBorrow: Array<Kava_Hard_V1beta1_BorrowResponse> = Array<Kava_Hard_V1beta1_BorrowResponse>()
+    var mKavaSwapPoolParam: Kava_Swap_V1beta1_Params?
     
     func getKavaOraclePrice(_ marketId: String?) -> NSDecimalNumber {
         if let price =  mKavaPrices_gRPC.filter({ $0.marketID == marketId }).first {
