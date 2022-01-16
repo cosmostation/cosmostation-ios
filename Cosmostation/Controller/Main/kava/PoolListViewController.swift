@@ -21,7 +21,6 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
     var mOtherKavaSwapPools: Array<Kava_Swap_V1beta1_PoolResponse> = Array<Kava_Swap_V1beta1_PoolResponse>()
     
     override func viewDidLoad() {
-        print("PoolListViewController viewDidLoad")
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
@@ -38,7 +37,6 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print("PoolListViewController viewDidAppear")
         super.viewDidAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onKavaSwapPoolDone(_:)), name: Notification.Name("KavaSwapPoolDone"), object: nil)
     }
@@ -53,7 +51,6 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     @objc func onKavaSwapPoolDone(_ notification: NSNotification) {
-        print("onKavaSwapPoolDone")
         self.mMyKavaSwapPools.removeAll()
         self.mOtherKavaSwapPools.removeAll()
         self.mKavaSwapPoolParam = BaseData.instance.mKavaSwapPoolParam
@@ -88,14 +85,14 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"CommonMyPoolCell") as? CommonMyPoolCell
-//            let pool = mMySwapPools[indexPath.row]
-//            let myDeposit = mMySwapPoolDeposits.filter { $0.pool_id == pool.name }.first!
-//            cell?.onBindKavaPoolView(pool, myDeposit)
+            let pool = mMyKavaSwapPools[indexPath.row]
+            let myDeposit = mMyKavaPoolDeposits.filter { $0.poolID == pool.name }.first!
+            cell?.onBindKavaPoolView(pool, myDeposit)
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"CommonPoolCell") as? CommonPoolCell
-//            let pool = mOtherSwapPools[indexPath.row]
-//            cell?.onBindKavaPoolView(pool)
+            let pool = mOtherKavaSwapPools[indexPath.row]
+            cell?.onBindKavaPoolView(pool)
             return cell!
         }
     }

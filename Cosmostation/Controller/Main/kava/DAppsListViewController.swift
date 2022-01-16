@@ -156,7 +156,7 @@ class DAppsListViewController: BaseViewController {
     func onFetchgRPCKavaPrices() {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Pricefeed_V1beta1_QueryPricesRequest.init()
                 if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).prices(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mKavaPrices_gRPC = response.prices
@@ -195,7 +195,11 @@ extension WUtils {
     }
     
     static func getKavaCoinDecimal(_ denom:String?) -> Int16 {
-        if (denom?.caseInsensitiveCompare(KAVA_MAIN_DENOM) == .orderedSame) {
+        if (denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
+                return deciaml
+            }
+        } else if (denom?.caseInsensitiveCompare(KAVA_MAIN_DENOM) == .orderedSame) {
             return 6;
         } else if (denom?.caseInsensitiveCompare("btc") == .orderedSame) {
             return 8;
@@ -269,7 +273,7 @@ extension WUtils {
     }
     
     
-    static func getKavaPriceFeedSymbol(_ denom: String) -> String {
+    static func getKavaMarketId(_ denom: String) -> String {
         if (denom == KAVA_MAIN_DENOM) {
             return "kava:usd"
         } else if (denom == KAVA_HARD_DENOM) {
@@ -290,12 +294,9 @@ extension WUtils {
         return ""
     }
     
-    static func getKavaPriceFeed(_ denom: String) -> NSDecimalNumber {
-        let feedSymbol = getKavaPriceFeedSymbol(denom)
-        if let price = BaseData.instance.mKavaPrice[feedSymbol]?.result.price {
-            return NSDecimalNumber.init(string: price)
-        }
-        return NSDecimalNumber.zero
+    static func getKavaOraclePriceWithDenom(_ denom: String) -> NSDecimalNumber {
+        let marketId = getKavaMarketId(denom)
+        return BaseData.instance.getKavaOraclePrice(marketId)
     }
     
     static func getKavaTokenAll2(_ symbol: String) -> NSDecimalNumber {

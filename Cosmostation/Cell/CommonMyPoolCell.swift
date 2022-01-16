@@ -104,7 +104,7 @@ class CommonMyPoolCell: UITableViewCell {
     }
     
     
-    func onBindKavaPoolView(_ pool: SwapPool, _ myDeposit: SwapDeposit) {
+    func onBindKavaPoolView(_ pool: Kava_Swap_V1beta1_PoolResponse, _ myDeposit: Kava_Swap_V1beta1_DepositResponse) {
         //dp pool info
         poolCardView.backgroundColor = TRANS_BG_COLOR_KAVA
         poolPairLabel.textColor = COLOR_KAVA
@@ -114,12 +114,12 @@ class CommonMyPoolCell: UITableViewCell {
         let coin1 = pool.coins[1]
         let coin0Decimal = WUtils.getKavaCoinDecimal(coin0.denom)
         let coin1Decimal = WUtils.getKavaCoinDecimal(coin1.denom)
-        let coin0price = WUtils.getKavaPriceFeed(coin0.denom)
-        let coin1price = WUtils.getKavaPriceFeed(coin1.denom)
+        let coin0price = WUtils.getKavaOraclePriceWithDenom(coin0.denom)
+        let coin1price = WUtils.getKavaOraclePriceWithDenom(coin1.denom)
         let coin0Value = NSDecimalNumber.init(string: coin0.amount).multiplying(by: coin0price).multiplying(byPowerOf10: -coin0Decimal, withBehavior: WUtils.handler2)
         let coin1Value = NSDecimalNumber.init(string: coin1.amount).multiplying(by: coin1price).multiplying(byPowerOf10: -coin1Decimal, withBehavior: WUtils.handler2)
 
-        poolPairLabel.text = coin0.denom.uppercased() + " : " + coin1.denom.uppercased()
+        poolPairLabel.text = WUtils.getKavaTokenName(coin0.denom).uppercased() + " : " + WUtils.getKavaTokenName(coin1.denom).uppercased()
 
         let poolValue = coin0Value.adding(coin1Value)
         let poolValueFormatted = "$ " + nf.string(from: poolValue)!
@@ -132,8 +132,8 @@ class CommonMyPoolCell: UITableViewCell {
         
         
         //dp my lp info
-        let my0 = myDeposit.shares_value[0]
-        let my1 = myDeposit.shares_value[1]
+        let my0 = myDeposit.sharesValue[0]
+        let my1 = myDeposit.sharesValue[1]
         let my0Value = NSDecimalNumber.init(string: my0.amount).multiplying(by: coin0price).multiplying(byPowerOf10: -coin0Decimal, withBehavior: WUtils.handler2)
         let my1Value = NSDecimalNumber.init(string: my1.amount).multiplying(by: coin1price).multiplying(byPowerOf10: -coin1Decimal, withBehavior: WUtils.handler2)
         
@@ -148,8 +148,8 @@ class CommonMyPoolCell: UITableViewCell {
         
         
         //dp vailable
-        let availableCoin0 = BaseData.instance.availableAmount(coin0.denom)
-        let availableCoin1 = BaseData.instance.availableAmount(coin1.denom)
+        let availableCoin0 = BaseData.instance.getAvailableAmount_gRPC(coin0.denom)
+        let availableCoin1 = BaseData.instance.getAvailableAmount_gRPC(coin1.denom)
         
         WUtils.DpKavaTokenName(availableCoin0DenomLabel, coin0.denom)
         WUtils.DpKavaTokenName(availableCoin1DenomLabel, coin1.denom)
