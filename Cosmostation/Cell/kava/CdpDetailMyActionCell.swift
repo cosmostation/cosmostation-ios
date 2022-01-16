@@ -105,4 +105,48 @@ class CdpDetailMyActionCell: UITableViewCell {
     @IBAction func onClickRepay(_ sender: UIButton) {
         actionRepay?()
     }
+    
+    func onBindCdpDetailAction(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam?, _ myCdp: Kava_Cdp_V1beta1_CDPResponse?, _ selfDepositAmount: NSDecimalNumber, _ debtAmount: NSDecimalNumber) {
+        if (collateralParam == nil || myCdp == nil) { return }
+        let cDenom = collateralParam!.getcDenom()!
+        let pDenom = collateralParam!.getpDenom()!
+        let cDpDecimal = WUtils.getKavaCoinDecimal(cDenom)
+        let pDpDecimal = WUtils.getKavaCoinDecimal(pDenom)
+        let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
+        
+        collateralDenom.text = WUtils.getKavaTokenName(cDenom)
+        let selfDepositValue = selfDepositAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
+        collateralSelfAmount.attributedText = WUtils.displayAmount2(selfDepositAmount.stringValue, collateralSelfAmount.font!, cDpDecimal, cDpDecimal)
+        collateralSelfValue.attributedText = WUtils.getDPRawDollor(selfDepositValue.stringValue, 2, collateralSelfValue.font)
+
+        let totalDepositAmount = myCdp!.getRawCollateralAmount()
+        let totalDepositValue = totalDepositAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
+        collateralTotalAmount.attributedText = WUtils.displayAmount2(totalDepositAmount.stringValue, collateralTotalAmount.font!, cDpDecimal, cDpDecimal)
+        collateralTotalValue.attributedText = WUtils.getDPRawDollor(totalDepositValue.stringValue, 2, collateralTotalValue.font)
+
+        collateralWithdrawableTitle.text = String(format: NSLocalizedString("withdrawable_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        let maxWithdrawableAmount = myCdp!.getWithdrawableAmount(cDenom, pDenom, collateralParam!, oraclePrice, selfDepositAmount)
+        let maxWithdrawableValue = maxWithdrawableAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
+        collateralWithdrawableAmount.attributedText = WUtils.displayAmount2(maxWithdrawableAmount.stringValue, collateralWithdrawableAmount.font!, cDpDecimal, cDpDecimal)
+        collateralWithdrawableValue.attributedText = WUtils.getDPRawDollor(maxWithdrawableValue.stringValue, 2, collateralWithdrawableValue.font)
+
+        depositBtn.setTitle(String(format: NSLocalizedString("str_deposit", comment: ""), WUtils.getKavaTokenName(cDenom)), for: .normal)
+        withdrawBtn.setTitle(String(format: NSLocalizedString("str_withdraw", comment: ""), WUtils.getKavaTokenName(cDenom)), for: .normal)
+
+        principalDenom.text = WUtils.getKavaTokenName(pDenom)
+        let rawPricipalAmount = myCdp!.getRawPrincipalAmount()
+        principalAmount.attributedText = WUtils.displayAmount2(rawPricipalAmount.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
+        principalValue.attributedText = WUtils.getDPRawDollor(rawPricipalAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, principalValue.font)
+
+        let totalFeeAmount = myCdp!.getEstimatedTotalFee(collateralParam!)
+        interestAmount.attributedText = WUtils.displayAmount2(totalFeeAmount.stringValue, interestAmount.font!, pDpDecimal, pDpDecimal)
+        interestValue.attributedText = WUtils.getDPRawDollor(totalFeeAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, principalValue.font)
+
+        let moreDebtAmount = myCdp!.getMoreLoanableAmount(collateralParam!)
+        remainingAmount.attributedText = WUtils.displayAmount2(moreDebtAmount.stringValue, remainingAmount.font!, pDpDecimal, pDpDecimal)
+        remainingValue.attributedText = WUtils.getDPRawDollor(moreDebtAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, remainingValue.font)
+
+        collateralImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + cDenom + ".png")!)
+        principalImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + pDenom + ".png")!)
+    }
 }

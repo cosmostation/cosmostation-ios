@@ -68,8 +68,8 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
                     self.mOtherCdps_gRPC.append(collateralParam)
                 }
             })
-            print("mMyCdps_gRPC ", mMyCdps_gRPC.count)
-            print("mOtherCdps_gRPC ", mOtherCdps_gRPC.count)
+//            print("mMyCdps_gRPC ", mMyCdps_gRPC.count)
+//            print("mOtherCdps_gRPC ", mOtherCdps_gRPC.count)
             
             self.cdpTableView.reloadData()
             self.refresher.endRefreshing()
@@ -104,21 +104,21 @@ class CdpListViewController: BaseViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if (indexPath.section == 0) {
-//            let myCdp = myCdps[indexPath.row]
-//            let cdpDetailVC = CdpDetailViewController(nibName: "CdpDetailViewController", bundle: nil)
-//            cdpDetailVC.hidesBottomBarWhenPushed = true
-//            cdpDetailVC.mCollateralParamType = myCdp.cdp!.type!
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(cdpDetailVC, animated: true)
-//
-//        } else if (indexPath.section == 1) {
-//            let mCollateralParam = otherCdps[indexPath.row]
-//            let cdpDetailVC = CdpDetailViewController(nibName: "CdpDetailViewController", bundle: nil)
-//            cdpDetailVC.mCollateralParamType = mCollateralParam.type
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(cdpDetailVC, animated: true)
-//        }
+        if (indexPath.section == 0) {
+            let cdpDetailVC = CdpDetailViewController(nibName: "CdpDetailViewController", bundle: nil)
+            cdpDetailVC.hidesBottomBarWhenPushed = true
+            let myCdp = mMyCdps_gRPC[indexPath.row]
+            cdpDetailVC.mCollateralParamType = myCdp.type
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(cdpDetailVC, animated: true)
+
+        } else if (indexPath.section == 1) {
+            let cdpDetailVC = CdpDetailViewController(nibName: "CdpDetailViewController", bundle: nil)
+            let collateralParam = mOtherCdps_gRPC[indexPath.row]
+            cdpDetailVC.mCollateralParamType = collateralParam.type
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(cdpDetailVC, animated: true)
+        }
     }
     
     

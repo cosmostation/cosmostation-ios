@@ -95,7 +95,6 @@ class DAppsListViewController: BaseViewController {
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-            print("onFetchFinished KavaSwapPoolDone")
             NotificationCenter.default.post(name: Notification.Name("KavaSwapPoolDone"), object: nil, userInfo: nil)
         })
     }
@@ -124,7 +123,7 @@ class DAppsListViewController: BaseViewController {
                 let req = Kava_Swap_V1beta1_QueryPoolsRequest.init()
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mKavaSwapPools = response.pools
-                    print("self.mKavaSwapPools ", self.mKavaSwapPools.count)
+//                    print("self.mKavaSwapPools ", self.mKavaSwapPools.count)
                 }
                 try channel.close().wait()
                 
@@ -142,7 +141,7 @@ class DAppsListViewController: BaseViewController {
                 let req = Kava_Swap_V1beta1_QueryDepositsRequest.with { $0.owner = address }
                 if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mMyKavaPoolDeposits = response.deposits
-                    print("self.mMyKavaPoolDeposits ", self.mMyKavaPoolDeposits.count)
+//                    print("self.mMyKavaPoolDeposits ", self.mMyKavaPoolDeposits.count)
                 }
                 try channel.close().wait()
                 
@@ -369,6 +368,20 @@ extension WUtils {
 
 }
 
+extension Kava_Cdp_V1beta1_Params {
+    public func getCollateralParamByDenom(_ denom: String) -> Kava_Cdp_V1beta1_CollateralParam? {
+        return collateralParams.filter { $0.denom == denom}.first
+    }
+    
+    public func getCollateralParamByType(_ type: String) -> Kava_Cdp_V1beta1_CollateralParam? {
+        return collateralParams.filter { $0.type == type}.first
+    }
+    
+    public func getGlobalDebtAmount() -> NSDecimalNumber {
+        return NSDecimalNumber.init(string: globalDebtLimit.amount)
+    }
+}
+
 extension Kava_Cdp_V1beta1_CollateralParam {
     public func getStabilityFeeAmount() -> NSDecimalNumber {
         return NSDecimalNumber.init(string: stabilityFee).multiplying(byPowerOf10: -18)
@@ -395,11 +408,20 @@ extension Kava_Cdp_V1beta1_CollateralParam {
     }
     
     public func getDpMarketId() -> String? {
-        return denom.uppercased() + " : " + debtLimit.denom.uppercased()
+//        return denom.uppercased() + " : " + debtLimit.denom.uppercased()
+        return spotMarketID.replacingOccurrences(of: ":", with: " : ") .uppercased()
     }
     
     public func getMarketImgPath() -> String? {
         return denom + "usd"
+    }
+    
+    func getpDenom() -> String? {
+        return debtLimit.denom
+    }
+    
+    func getcDenom() -> String? {
+        return denom
     }
     
 }
@@ -451,6 +473,31 @@ extension Kava_Cdp_V1beta1_CDPResponse {
             .multiplying(by: collateralParam.getLiquidationRatioAmount())
             .multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(pDenom))
         return rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(WUtils.getKavaCoinDecimal(pDenom)))
+    }
+    
+    public func getWithdrawableAmount(_ cDenom:String, _ pDenom:String, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam, _ cPrice:NSDecimalNumber, _ selfDepositAmount: NSDecimalNumber) -> NSDecimalNumber {
+        let cValue = getRawCollateralAmount()
+        let minCValue = getEstimatedTotalDebt(collateralParam).multiplying(by: collateralParam.getLiquidationRatioAmount()).dividing(by: NSDecimalNumber.init(string: "0.95"), withBehavior:WUtils.handler0Down)
+        let maxWithdrawableValue = cValue.subtracting(minCValue)
+        var maxWithdrawableAmount = maxWithdrawableValue.multiplying(byPowerOf10: WUtils.getKavaCoinDecimal(cDenom) - WUtils.getKavaCoinDecimal(pDenom)).dividing(by: cPrice, withBehavior: WUtils.handler0Down)
+        
+        if (maxWithdrawableAmount.compare(selfDepositAmount).rawValue > 0) {
+            maxWithdrawableAmount = selfDepositAmount
+        }
+        if (maxWithdrawableAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            maxWithdrawableAmount = NSDecimalNumber.zero
+        }
+        return maxWithdrawableAmount
+    }
+    
+    public func getMoreLoanableAmount(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
+        var maxDebtValue = getRawCollateralAmount().dividing(by: collateralParam.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
+        maxDebtValue = maxDebtValue.multiplying(by: NSDecimalNumber.init(string: "0.95"), withBehavior: WUtils.handler0Down)
+        maxDebtValue = maxDebtValue.subtracting(getEstimatedTotalDebt(collateralParam))
+        if (maxDebtValue.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            maxDebtValue = NSDecimalNumber.zero
+        }
+        return maxDebtValue
     }
 }
 
