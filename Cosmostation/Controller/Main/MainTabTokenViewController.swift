@@ -968,18 +968,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             if (WUtils.getMainDenom(chainType) == balance_gRPC.denom) {
                 mNative_gRPC.append(balance_gRPC)
                 
-            } else if (chainType == ChainType.KAVA_MAIN) {
-                if (balance_gRPC.denom == KAVA_HARD_DENOM || balance_gRPC.denom == KAVA_USDX_DENOM || balance_gRPC.denom == KAVA_SWAP_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                    
-                } else if (balance_gRPC.denom == TOKEN_HTLC_KAVA_BNB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BTCB ||
-                           balance_gRPC.denom == TOKEN_HTLC_KAVA_XRPB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BUSD) {
-                    mKavaBep2_gRPC.append(balance_gRPC)
-                    
-                } else if (balance_gRPC.denom == "btch") {
-                    mUnKnown_gRPC.append(balance_gRPC)
-                }
-                
             } else if (balance_gRPC.isIbc()) {
                 guard let ibcToken = BaseData.instance.getIbcToken(balance_gRPC.getIbcHash()) else {
                     mIbcUnknown_gRPC.append(balance_gRPC)
@@ -1006,6 +994,18 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             } else if (chainType == ChainType.SIF_MAIN && balance_gRPC.denom.starts(with: "c")) {
                 mSifEther_gRPC.append(balance_gRPC)
                 
+            } else if (chainType == ChainType.KAVA_MAIN) {
+                if (balance_gRPC.denom == KAVA_HARD_DENOM || balance_gRPC.denom == KAVA_USDX_DENOM || balance_gRPC.denom == KAVA_SWAP_DENOM) {
+                    mNative_gRPC.append(balance_gRPC)
+
+                } else if (balance_gRPC.denom == TOKEN_HTLC_KAVA_BNB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BTCB ||
+                           balance_gRPC.denom == TOKEN_HTLC_KAVA_XRPB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BUSD) {
+                    mKavaBep2_gRPC.append(balance_gRPC)
+
+                } else if (balance_gRPC.denom == "btch") {
+                    mUnKnown_gRPC.append(balance_gRPC)
+                }
+
             } else {
                 mUnKnown_gRPC.append(balance_gRPC)
             }

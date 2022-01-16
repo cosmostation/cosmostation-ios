@@ -561,6 +561,10 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             return
         }
         
+        if (chainType == ChainType.KAVA_MAIN || chainType! == ChainType.FETCH_MAIN) {
+            self.onShowToast("Disabled")
+            return
+        }
         
 //        let mainDenom = WUtils.getMainDenom(chainType)
 //        if (WUtils.isGRPC(chainType!)) {
@@ -571,10 +575,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
 //            }
 //            
 //        } else {
-//            if (chainType == ChainType.KAVA_MAIN || chainType! == ChainType.FETCH_MAIN || chainType == ChainType.KAVA_TEST) {
-//                self.onShowToast("Disabled")
-//                return
-//            }
 //            
 //            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_WITHDRAW_MIDIFY, 0)
 //            if (BaseData.instance.availableAmount(mainDenom).compare(feeAmount).rawValue < 0) {
