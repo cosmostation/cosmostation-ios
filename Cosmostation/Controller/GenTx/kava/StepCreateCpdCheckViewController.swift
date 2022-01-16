@@ -16,6 +16,7 @@ class StepCreateCpdCheckViewController: BaseViewController, PasswordViewDelegate
     @IBOutlet weak var pAmountLabel: UILabel!
     @IBOutlet weak var pDenomLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
+    @IBOutlet weak var feeDenomLabel: UILabel!
     @IBOutlet weak var riskScoreLabel: UILabel!
     @IBOutlet weak var currentPriceTitle: UILabel!
     @IBOutlet weak var currentPrice: UILabel!
@@ -55,29 +56,25 @@ class StepCreateCpdCheckViewController: BaseViewController, PasswordViewDelegate
     }
     
     func onUpdateView() {
-        let cDenom = pageHolderVC.mCDenom
-        let pDenom = pageHolderVC.pDenom
-        let cDpDecimal = WUtils.getKavaCoinDecimal(cDenom!)
-        let pDpDecimal = WUtils.getKavaCoinDecimal(pDenom!)
-
+        let cDenom = pageHolderVC.mCDenom!
+        let pDenom = pageHolderVC.mPDenom!
         let cAmount = NSDecimalNumber.init(string: pageHolderVC.mCollateral.amount)
         let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPrincipal.amount)
-        let fAmount = NSDecimalNumber.init(string: pageHolderVC.mFee!.amount[0].amount)
 
-        cDenomLabel.text = cDenom?.uppercased()
-        cAmountLabel.attributedText = WUtils.displayAmount2(cAmount.stringValue, cAmountLabel.font!, cDpDecimal, cDpDecimal)
+        cDenomLabel.text = cDenom.uppercased()
+        WUtils.showCoinDp(cDenom, cAmount.stringValue, cDenomLabel, cAmountLabel, chainType!)
 
-        pDenomLabel.text = pDenom?.uppercased()
-        pAmountLabel.attributedText = WUtils.displayAmount2(pAmount.stringValue, pAmountLabel.font!, pDpDecimal, pDpDecimal)
+        pDenomLabel.text = pDenom.uppercased()
+        WUtils.showCoinDp(pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel, chainType!)
 
-        feeAmountLabel.attributedText = WUtils.displayAmount2(fAmount.stringValue, feeAmountLabel.font!, 6, 6)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, feeDenomLabel, feeAmountLabel, chainType!)
 
         WUtils.showRiskRate(pageHolderVC.riskRate!, riskScoreLabel, _rateIamg: nil)
         
-        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), cDenom!.uppercased())
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
         currentPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.currentPrice!.stringValue, 4, currentPrice.font)
         
-        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), cDenom!.uppercased())
+        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
         liquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.liquidationPrice!.stringValue, 4, liquidationPrice.font)
         
         memoLabel.text = pageHolderVC.mMemo

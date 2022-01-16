@@ -208,7 +208,7 @@ class StepDrawDebtCdpAmountViewController: BaseViewController, UITextFieldDelega
                 self.pageHolderVC.afterLiquidationPrice = self.afterLiquidationPrice
                 self.pageHolderVC.beforeRiskRate = self.beforeRiskRate
                 self.pageHolderVC.afterRiskRate = self.afterRiskRate
-                self.pageHolderVC.pDenom = self.mPDenom
+                self.pageHolderVC.mPDenom = self.mPDenom
                 self.pageHolderVC.totalLoanAmount = self.sumPAmount
                 self.pageHolderVC.mCollateralParam = self.mCollateralParam
 

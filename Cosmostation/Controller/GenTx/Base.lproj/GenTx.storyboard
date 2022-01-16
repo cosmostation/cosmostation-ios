@@ -9433,6 +9433,7 @@ Some exchanges or wallets may require a specific memo for deposits.</string>
                         <outlet property="currentPrice" destination="IWG-08-Laq" id="0iO-IO-wGw"/>
                         <outlet property="currentPriceTitle" destination="CGl-Xw-xgI" id="0aV-8a-7FI"/>
                         <outlet property="feeAmountLabel" destination="Yp7-cs-WTt" id="AMn-1Y-JpR"/>
+                        <outlet property="feeDenomLabel" destination="GDf-BL-N9l" id="8f1-wM-qPR"/>
                         <outlet property="liquidationPrice" destination="qY8-Cf-zMg" id="6Eh-Ri-c3a"/>
                         <outlet property="liquidationPriceTitle" destination="cyw-1i-XhG" id="zKu-YN-0Vk"/>
                         <outlet property="memoLabel" destination="XcY-eI-FSs" id="MkL-jm-xwS"/>

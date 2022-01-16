@@ -76,7 +76,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     var mCollateralParamType: String?
     var mCDenom: String?
-    var pDenom: String?
+//    var pDenom: String?
+    var mPDenom: String?
     var mMarketID: String?
     var mCollateralParam: CollateralParam?
     var mIncentiveKavaReceivable = NSDecimalNumber.zero
@@ -88,6 +89,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mKavaPool: SwapPool?
     var mKavaDeposit: SwapDeposit?
     var mKavaShareAmount = NSDecimalNumber.zero
+    //for grpc
+    var mKavaCollateralParam: Kava_Cdp_V1beta1_CollateralParam!
     
     
     var mHtlcDenom: String?
@@ -268,31 +271,31 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         } else if (mType == KAVA_MSG_TYPE_CREATE_CDP) {
             return [self.newVc(viewController: "StepCreateCpdAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepCreateCpdCheckViewController")]
             
         } else if (mType == KAVA_MSG_TYPE_DEPOSIT_CDP) {
             return [self.newVc(viewController: "StepDepositCdpAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepDepositCdpCheckViewController")]
             
         } else if (mType == KAVA_MSG_TYPE_WITHDRAW_CDP) {
             return [self.newVc(viewController: "StepWithdrawCdpAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepWithdrawCdpCheckViewController")]
             
         } else if (mType == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
             return [self.newVc(viewController: "StepDrawDebtCdpAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepDrawDebtCdpCheckViewController")]
             
         } else if (mType == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
             return [self.newVc(viewController: "StepRepayCdpAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepRepayCdpCheckViewController")]
             
         } else if (mType == TASK_TYPE_HTLC_SWAP) {

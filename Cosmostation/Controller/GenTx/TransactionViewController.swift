@@ -36,6 +36,10 @@ class TransactionViewController: UIViewController {
     var mKavaPool: SwapPool?
     var mKavaDeposit: SwapDeposit?
     
+    //for grpc
+    var mKavaHardPool: Kava_Swap_V1beta1_PoolResponse?
+    var mKavaHardPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
+    
     var mHtlcDenom: String = BNB_MAIN_DENOM     //now only support bnb bep3
     var mHtlcRefundSwapId: String?
     

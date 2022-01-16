@@ -179,25 +179,26 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     }
     
     @IBAction func onClickCreateCdp(_ sender: UIButton) {
-//        if (!onCommonCheck()) { return }
-//        let debtFloor = NSDecimalNumber.init(string: BaseData.instance.mCdpParam?.debt_param?.debt_floor)
-//        let cMinAmount = debtFloor.multiplying(byPowerOf10: cDpDecimal - pDpDecimal).multiplying(by: NSDecimalNumber.init(string: "1.05263157895")).multiplying(by: mCollateralParam!.getLiquidationRatio()).dividing(by: currentPrice, withBehavior: WUtils.handler0Up)
-//        if (cAvailable.compare(cMinAmount).rawValue < 0) {
-//            self.onShowToast(NSLocalizedString("error_less_than_min_deposit", comment: ""))
-//            return
-//        }
-//        if (BaseData.instance.mCdpParam!.getGlobalDebtAmount().compare(mDebtAmount).rawValue <= 0) {
-//            self.onShowToast(NSLocalizedString("error_no_more_debt_kava", comment: ""))
-//            return
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = KAVA_MSG_TYPE_CREATE_CDP
-//        txVC.mCollateralParamType = self.mCollateralParamType
-//        txVC.mCDenom = self.mCDenom
+        if (!onCommonCheck()) { return }
+        let debtFloor = mKavaCdpParams_gRPC!.getDebtFloorAmount()
+        let cMinAmount = debtFloor.multiplying(byPowerOf10: cDpDecimal - pDpDecimal).multiplying(by: NSDecimalNumber.init(string: "1.05263157895")).multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).dividing(by: currentPrice, withBehavior: WUtils.handler0Up)
+        if (cAvailable.compare(cMinAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_less_than_min_deposit", comment: ""))
+            return
+        }
+        if (mKavaCdpParams_gRPC!.getGlobalDebtAmount().compare(mDebtAmount).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_no_more_debt_kava", comment: ""))
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = KAVA_MSG_TYPE_CREATE_CDP
+        txVC.mCollateralParamType = self.mCollateralParamType
+        txVC.mCDenom = self.mCDenom
 //        txVC.mMarketID = self.mCollateralParam?.liquidation_market_id
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        txVC.mMarketID = self.mCollateralParam.liquidationMarketID
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func onClickDeposit() {

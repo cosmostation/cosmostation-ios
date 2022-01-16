@@ -48,16 +48,16 @@ class CdpLisyMyCell: UITableViewCell {
         marketTitle.text = collateralParam!.getDpMarketId()
         WUtils.showRiskRate(riskRate, riskScore, _rateIamg: riskRateImg)
         
-        debtValueTitle.text = String(format: NSLocalizedString("debt_value_format", comment: ""), mPDenom.uppercased())
+        debtValueTitle.text = String(format: NSLocalizedString("debt_value_format", comment: ""), WUtils.getKavaTokenName(mPDenom))
         debtValue.attributedText = WUtils.getDPRawDollor(myCdp.getDpEstimatedTotalDebtValue(mPDenom, collateralParam!).stringValue, 2, debtValue.font)
         
-        collateralValueTitle.text = String(format: NSLocalizedString("collateral_value_format", comment: ""), mCDenom.uppercased())
+        collateralValueTitle.text = String(format: NSLocalizedString("collateral_value_format", comment: ""), WUtils.getKavaTokenName(mCDenom))
         collateralValue.attributedText = WUtils.getDPRawDollor(myCdp.getDpCollateralValue(mPDenom).stringValue, 2, collateralValue.font)
         
-        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), mCDenom.uppercased())
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaTokenName(mCDenom))
         currentPrice.attributedText = WUtils.getDPRawDollor(marketIdPrice.stringValue, 4, currentPrice.font)
         
-        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), mCDenom.uppercased())
+        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getKavaTokenName(mCDenom))
         liquidationPrice.attributedText = WUtils.getDPRawDollor(liquidationPrices.stringValue, 4, liquidationPrice.font)
         liquidationPrice.textColor = WUtils.getRiskColor(riskRate)
         

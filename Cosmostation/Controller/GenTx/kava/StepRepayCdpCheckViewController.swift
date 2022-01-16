@@ -62,7 +62,7 @@ class StepRepayCdpCheckViewController: BaseViewController, PasswordViewDelegate 
     func onUpdateView() {
         print("onUpdateView")
         let cDenom = pageHolderVC.mCDenom
-        let pDenom = pageHolderVC.pDenom
+        let pDenom = pageHolderVC.mPDenom
         let pDpDecimal = WUtils.getKavaCoinDecimal(pDenom!)
         
         let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPayment.amount)

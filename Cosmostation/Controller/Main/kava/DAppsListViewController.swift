@@ -380,6 +380,10 @@ extension Kava_Cdp_V1beta1_Params {
     public func getGlobalDebtAmount() -> NSDecimalNumber {
         return NSDecimalNumber.init(string: globalDebtLimit.amount)
     }
+    
+    public func getDebtFloorAmount() -> NSDecimalNumber {
+        return NSDecimalNumber.init(string: debtParam.debtFloor).multiplying(byPowerOf10: -18)
+    }
 }
 
 extension Kava_Cdp_V1beta1_CollateralParam {

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GRPC
+import NIO
 import Alamofire
 
 class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate{
@@ -46,10 +48,10 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
     var pDpDecimal:Int16 = 6
     var mMarketID: String = ""
     
-    var mCollateralParamType: String?
-    var mCollateralParam: CollateralParam?
-    var mCdpParam: CdpParam?
-    var mPrice: KavaPriceFeedPrice?
+    var mCollateralParamType: String!
+    var mCollateralParam: Kava_Cdp_V1beta1_CollateralParam!
+    var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params!
+    var mKavaOraclePrice: Kava_Pricefeed_V1beta1_CurrentPriceResponse?
     
     var currentPrice: NSDecimalNumber = NSDecimalNumber.zero
     var liquidationPrice: NSDecimalNumber = NSDecimalNumber.zero
@@ -65,15 +67,19 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        pageHolderVC = self.parent as? StepGenTxViewController
         mCollateralParamType = pageHolderVC.mCollateralParamType
-        mCdpParam = BaseData.instance.mCdpParam
-        mCollateralParam = mCdpParam?.getCollateralParamByType(pageHolderVC.mCollateralParamType!)
-        mMarketID = mCollateralParam!.liquidation_market_id!
+        mKavaCdpParams_gRPC = BaseData.instance.mKavaCdpParams_gRPC
+        mCollateralParam = mKavaCdpParams_gRPC?.getCollateralParamByType(mCollateralParamType)
+        mMarketID = mCollateralParam!.liquidationMarketID
+        
+        print("mCollateralParamType ", mCollateralParamType)
+        print("mKavaCdpParams_gRPC ", mKavaCdpParams_gRPC)
+        print("mCollateralParam ", mCollateralParam)
+        print("mMarketID ", mMarketID)
         
         self.loadingImg.onStartAnimation()
         self.onFetchCdpData()
@@ -112,10 +118,10 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
             toCAmount = WUtils.localeStringToDecimal(cAmountInput.text?.trimmingCharacters(in: .whitespaces)).multiplying(byPowerOf10: cDpDecimal)
             let toCValue = toCAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: currentPrice, withBehavior: WUtils.handler2Down)
             cDepositValue.attributedText = WUtils.getDPRawDollor(toCValue.stringValue, 2, cDepositValue.font)
-            pMaxAmount = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.95")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatio(), withBehavior: WUtils.handler0Down)
-        
-            pAvailabeMinLabel.attributedText = WUtils.displayAmount2(pMinAmount.stringValue, pAvailabeMinLabel.font!, pDpDecimal, pDpDecimal)
-            pAvailabeMaxLabel.attributedText = WUtils.displayAmount2(pMaxAmount.stringValue, pAvailabeMinLabel.font!, pDpDecimal, pDpDecimal)
+            pMaxAmount = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.95")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
+            
+            WUtils.showCoinDp(mPDenom, pMinAmount.stringValue, nil, pAvailabeMinLabel, chainType!)
+            WUtils.showCoinDp(mPDenom, pMaxAmount.stringValue, nil, pAvailabeMaxLabel, chainType!)
             
             cAvailabeMaxLabel.isHidden = true
             cAvailabeDashLabel.isHidden = true
@@ -285,7 +291,7 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
     }
     
     @IBAction func onClickP20(_ sender: UIButton) {
-        var calValue = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.2")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatio(), withBehavior: WUtils.handler0Down)
+        var calValue = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.2")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
         if (calValue.compare(pMinAmount).rawValue < 0) {
             calValue = pMinAmount
             self.onShowToast(NSLocalizedString("error_less_than_min_principal", comment: ""))
@@ -296,7 +302,7 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
     }
     
     @IBAction func onClickP50(_ sender: UIButton) {
-        var calValue = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.5")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatio(), withBehavior: WUtils.handler0Down)
+        var calValue = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.5")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
         if (calValue.compare(pMinAmount).rawValue < 0) {
             calValue = pMinAmount
             self.onShowToast(NSLocalizedString("error_less_than_min_principal", comment: ""))
@@ -308,7 +314,7 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
     }
     
     @IBAction func onClickP70(_ sender: UIButton) {
-        var calValue = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.7")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatio(), withBehavior: WUtils.handler0Down)
+        var calValue = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.7")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
         if (calValue.compare(pMinAmount).rawValue < 0) {
             calValue = pMinAmount
             self.onShowToast(NSLocalizedString("error_less_than_min_principal", comment: ""))
@@ -375,8 +381,8 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
                 self.pageHolderVC.currentPrice = self.currentPrice
                 self.pageHolderVC.liquidationPrice = self.liquidationPrice
                 self.pageHolderVC.riskRate = self.riskRate
-                self.pageHolderVC.pDenom = self.mPDenom
-                self.pageHolderVC.mCollateralParam = self.mCollateralParam
+                self.pageHolderVC.mPDenom = self.mPDenom
+                self.pageHolderVC.mKavaCollateralParam = self.mCollateralParam
 
                 self.btnCancel.isUserInteractionEnabled = false
                 self.btnNext.isUserInteractionEnabled = false
@@ -409,7 +415,7 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
         toPAmount = userInput.multiplying(byPowerOf10: pDpDecimal)
         
         let collateralAmount = toCAmount.multiplying(byPowerOf10: -cDpDecimal)
-        let rawDebtAmount = toPAmount.multiplying(by: mCollateralParam!.getLiquidationRatio()).multiplying(byPowerOf10: -pDpDecimal)
+        let rawDebtAmount = toPAmount.multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).multiplying(byPowerOf10: -pDpDecimal)
         liquidationPrice = rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(pDpDecimal))
         riskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(liquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
         
@@ -457,7 +463,7 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
     var mFetchCnt = 0
     func onFetchCdpData() {
         self.mFetchCnt = 1
-        onFetchKavaPrice(self.mMarketID)
+        self.onFetchgRPCKavaPrice(self.mMarketID)
     }
     
     func onFetchFinished() {
@@ -468,22 +474,22 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
             self.cDpDecimal = WUtils.getKavaCoinDecimal(mCDenom)
             self.pDpDecimal = WUtils.getKavaCoinDecimal(mPDenom)
             
-            pMinAmount = NSDecimalNumber.init(string: mCdpParam!.debt_param?.debt_floor)
-            currentPrice = NSDecimalNumber.init(string: mPrice?.result.price)
-            cMaxAmount = account!.getTokenBalance(mCDenom)
-            cMinAmount = pMinAmount.multiplying(byPowerOf10: cDpDecimal - pDpDecimal).multiplying(by: NSDecimalNumber.init(string: "1.05263157895")).multiplying(by: mCollateralParam!.getLiquidationRatio()).dividing(by: currentPrice, withBehavior: WUtils.handler0Up)
+            pMinAmount = mKavaCdpParams_gRPC.getDebtFloorAmount()
+            currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
+            cMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mCDenom)
+            cMinAmount = pMinAmount.multiplying(byPowerOf10: cDpDecimal - pDpDecimal).multiplying(by: NSDecimalNumber.init(string: "1.05263157895")).multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).dividing(by: currentPrice, withBehavior: WUtils.handler0Up)
             print("currentPrice ", currentPrice)
             print("pMinAmount ", pMinAmount)
             print("cMinAmount ", cMinAmount)
             print("cMaxAmount ", cMaxAmount)
             
-            cAvailabeMinLabel.attributedText = WUtils.displayAmount2(cMinAmount.stringValue, cAvailabeMinLabel.font!, cDpDecimal, cDpDecimal)
-            cAvailabeMaxLabel.attributedText = WUtils.displayAmount2(cMaxAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
+            WUtils.showCoinDp(mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel, chainType!)
+            WUtils.showCoinDp(mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel, chainType!)
             
-            cDenomLabel.text = mCDenom.uppercased()
-            cAvailableDenom.text = mCDenom.uppercased()
-            pDenomLabel.text = mPDenom.uppercased()
-            pAvailableDenom.text = mPDenom.uppercased()
+            cDenomLabel.text = WUtils.getKavaTokenName(mCDenom)
+            cAvailableDenom.text = WUtils.getKavaTokenName(mCDenom)
+            pDenomLabel.text = WUtils.getKavaTokenName(mPDenom)
+            pAvailableDenom.text = WUtils.getKavaTokenName(mPDenom)
             let cUrl = KAVA_COIN_IMG_URL + mCDenom + ".png"
             self.cDenomImg.af_setImage(withURL: URL(string: cUrl)!)
             let pUrl = KAVA_COIN_IMG_URL + mPDenom + ".png"
@@ -496,23 +502,24 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
         }
     }
     
-    func onFetchKavaPrice(_ market:String) {
-        let request = Alamofire.request(BaseNetWork.priceFeedUrl(chainType, market), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-                    guard let responseData = res as? NSDictionary,
-                        let _ = responseData.object(forKey: "height") as? String else {
-                            self.onFetchFinished()
-                            return
-                    }
-                    self.mPrice = KavaPriceFeedPrice.init(responseData)
-                    
-                case .failure(let error):
-                    print("onFetchKavaPrice ", market , " ", error)
+    func onFetchgRPCKavaPrice(_ marketId: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Pricefeed_V1beta1_QueryPriceRequest.with {
+                    $0.marketID = marketId
                 }
-            self.onFetchFinished()
+                if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).price(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mKavaOraclePrice = response.price
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCPrices failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
+        
     }
     
 }
