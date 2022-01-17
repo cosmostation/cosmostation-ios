@@ -9,7 +9,6 @@
 import UIKit
 import GRPC
 import NIO
-import Alamofire
 
 class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate{
     
@@ -76,10 +75,10 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
         mCollateralParam = mKavaCdpParams_gRPC?.getCollateralParamByType(mCollateralParamType)
         mMarketID = mCollateralParam!.liquidationMarketID
         
-        print("mCollateralParamType ", mCollateralParamType)
-        print("mKavaCdpParams_gRPC ", mKavaCdpParams_gRPC)
-        print("mCollateralParam ", mCollateralParam)
-        print("mMarketID ", mMarketID)
+//        print("mCollateralParamType ", mCollateralParamType)
+//        print("mKavaCdpParams_gRPC ", mKavaCdpParams_gRPC)
+//        print("mCollateralParam ", mCollateralParam)
+//        print("mMarketID ", mMarketID)
         
         self.loadingImg.onStartAnimation()
         self.onFetchCdpData()

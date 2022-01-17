@@ -57,6 +57,8 @@ class StepCreateCpdCheckViewController: BaseViewController, PasswordViewDelegate
     }
     
     func onUpdateView() {
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, feeDenomLabel, feeAmountLabel, chainType!)
+        
         let cDenom = pageHolderVC.mCDenom!
         let pDenom = pageHolderVC.mPDenom!
         let cAmount = NSDecimalNumber.init(string: pageHolderVC.mCollateral.amount)
@@ -67,8 +69,6 @@ class StepCreateCpdCheckViewController: BaseViewController, PasswordViewDelegate
 
         pDenomLabel.text = pDenom.uppercased()
         WUtils.showCoinDp(pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel, chainType!)
-
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, feeDenomLabel, feeAmountLabel, chainType!)
 
         WUtils.showRiskRate(pageHolderVC.riskRate!, riskScoreLabel, _rateIamg: nil)
         

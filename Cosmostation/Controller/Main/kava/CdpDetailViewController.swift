@@ -195,90 +195,89 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         txVC.mType = KAVA_MSG_TYPE_CREATE_CDP
         txVC.mCollateralParamType = self.mCollateralParamType
         txVC.mCDenom = self.mCDenom
-//        txVC.mMarketID = self.mCollateralParam?.liquidation_market_id
         txVC.mMarketID = self.mCollateralParam.liquidationMarketID
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func onClickDeposit() {
-//        if (!onCommonCheck()) { return }
-//        if (cAvailable.compare(NSDecimalNumber.zero).rawValue <= 0) {
-//            self.onShowToast(NSLocalizedString("error_not_enought_deposit_asset", comment: ""))
-//            return
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = KAVA_MSG_TYPE_DEPOSIT_CDP
-//        txVC.mCollateralParamType = self.mCollateralParamType
-//        txVC.mCDenom = self.mCDenom
-//        txVC.mMarketID = self.mCollateralParam?.liquidation_market_id
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        if (!onCommonCheck()) { return }
+        if (cAvailable.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enought_deposit_asset", comment: ""))
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = KAVA_MSG_TYPE_DEPOSIT_CDP
+        txVC.mCollateralParamType = self.mCollateralParamType
+        txVC.mCDenom = self.mCDenom
+        txVC.mMarketID = self.mCollateralParam.liquidationMarketID
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func onClickWithdraw() {
-//        if (!onCommonCheck()) { return }
-//        let maxWithdrawableAmount = myCdp!.getWithdrawableAmount(mCDenom, mPDenom, mCollateralParam!, currentPrice, mSelfDepositAmount)
-//        if (maxWithdrawableAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
-//            self.onShowToast(NSLocalizedString("error_not_enought_withdraw_asset", comment: ""))
-//            return
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = KAVA_MSG_TYPE_WITHDRAW_CDP
-//        txVC.mCollateralParamType = self.mCollateralParamType
-//        txVC.mCDenom = self.mCDenom
-//        txVC.mMarketID = self.mCollateralParam?.liquidation_market_id
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        if (!onCommonCheck()) { return }
+        let maxWithdrawableAmount = mKavaMyCdp_gRPC!.getWithdrawableAmount(mCDenom, mPDenom, mCollateralParam!, currentPrice, mSelfDepositAmount)
+        if (maxWithdrawableAmount.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enought_withdraw_asset", comment: ""))
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = KAVA_MSG_TYPE_WITHDRAW_CDP
+        txVC.mCollateralParamType = self.mCollateralParamType
+        txVC.mCDenom = self.mCDenom
+        txVC.mMarketID = self.mCollateralParam.liquidationMarketID
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func onClickDrawDebt() {
-//        if (!onCommonCheck()) { return }
-//        if (myCdp!.getMoreLoanableAmount(mCollateralParam!).compare(NSDecimalNumber.zero).rawValue <= 0) {
-//            self.onShowToast(NSLocalizedString("error_can_not_draw_debt", comment: ""))
-//            return
-//        }
-//        if (BaseData.instance.mCdpParam!.getGlobalDebtAmount().compare(mDebtAmount).rawValue <= 0) {
-//            self.onShowToast(NSLocalizedString("error_no_more_debt_kava", comment: ""))
-//            return
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = KAVA_MSG_TYPE_DRAWDEBT_CDP
-//        txVC.mCollateralParamType = self.mCollateralParamType
-//        txVC.mCDenom = self.mCDenom
-//        txVC.mMarketID = self.mCollateralParam?.liquidation_market_id
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        if (!onCommonCheck()) { return }
+        if (mKavaMyCdp_gRPC!.getMoreLoanableAmount(mCollateralParam!).compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_can_not_draw_debt", comment: ""))
+            return
+        }
+        if (mKavaCdpParams_gRPC!.getGlobalDebtAmount().compare(mDebtAmount).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_no_more_debt_kava", comment: ""))
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = KAVA_MSG_TYPE_DRAWDEBT_CDP
+        txVC.mCollateralParamType = self.mCollateralParamType
+        txVC.mCDenom = self.mCDenom
+        txVC.mMarketID = self.mCollateralParam.liquidationMarketID
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func onClickRepay() {
-//        if (!onCommonCheck()) { return }
-//        if (pAvailable.compare(NSDecimalNumber.zero).rawValue <= 0) {
-//            self.onShowToast(NSLocalizedString("error_not_enought_principal_asset", comment: ""))
-//            return
-//        }
-//        var repayAll = true
-//        var repayPart = true
-//        let debtFloor = NSDecimalNumber.init(string: BaseData.instance.mCdpParam?.debt_param?.debt_floor)
-//        let rawDebt = myCdp!.cdp!.getRawPrincipalAmount()
-//        let totalDebt = myCdp!.cdp!.getEstimatedTotalDebt(mCollateralParam!)
-//        if (totalDebt.compare(pAvailable).rawValue > 0) { repayAll = false }
-//        if (rawDebt.compare(debtFloor).rawValue <= 0) { repayPart = false }
-//        if (!repayAll && !repayPart) {
-//            self.onShowToast(NSLocalizedString("error_can_not_repay", comment: ""))
-//            return
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = KAVA_MSG_TYPE_REPAYDEBT_CDP
-//        txVC.mCollateralParamType = self.mCollateralParamType
-//        txVC.mCDenom = self.mCDenom
-//        txVC.mMarketID = self.mCollateralParam?.liquidation_market_id
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        if (!onCommonCheck()) { return }
+        if (pAvailable.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enought_principal_asset", comment: ""))
+            return
+        }
+        var repayAll = true
+        var repayPart = true
+        let debtFloor = mKavaCdpParams_gRPC!.getDebtFloorAmount()
+        let rawDebt = mKavaMyCdp_gRPC!.getRawPrincipalAmount()
+        let totalDebt = mKavaMyCdp_gRPC!.getEstimatedTotalDebt(mCollateralParam!)
+        if (totalDebt.compare(pAvailable).rawValue > 0) { repayAll = false }
+        if (rawDebt.compare(debtFloor).rawValue <= 0) { repayPart = false }
+        if (!repayAll && !repayPart) {
+            self.onShowToast(NSLocalizedString("error_can_not_repay", comment: ""))
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = KAVA_MSG_TYPE_REPAYDEBT_CDP
+        txVC.mCollateralParamType = self.mCollateralParamType
+        txVC.mCDenom = self.mCDenom
+        txVC.mMarketID = self.mCollateralParam.liquidationMarketID
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     
@@ -325,16 +324,16 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
             self.kAvailable = BaseData.instance.getAvailableAmount_gRPC(KAVA_MAIN_DENOM)
             self.currentPrice = BaseData.instance.getKavaOraclePrice(mCollateralParam?.liquidationMarketID)
             
-            print("mCollateralParam ", mCollateralParam)
-            print("mCDenom ", mCDenom)
-            print("mPDenom ", mPDenom)
-            print("cDpDecimal ", cDpDecimal)
-            print("pDpDecimal ", pDpDecimal)
-            print("kDpDecimal ", kDpDecimal)
-
-            print("cAvailable ", cAvailable)
-            print("pAvailable ", pAvailable)
-            print("kAvailable ", kAvailable)
+//            print("mCollateralParam ", mCollateralParam)
+//            print("mCDenom ", mCDenom)
+//            print("mPDenom ", mPDenom)
+//            print("cDpDecimal ", cDpDecimal)
+//            print("pDpDecimal ", pDpDecimal)
+//            print("kDpDecimal ", kDpDecimal)
+//
+//            print("cAvailable ", cAvailable)
+//            print("pAvailable ", pAvailable)
+//            print("kAvailable ", kAvailable)
             
             if (mKavaMyCdp_gRPC != nil) {
                 emptyConstraint?.isActive = false

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Alamofire
+import GRPC
+import NIO
 
 
 class StepWithdrawCdpCheckViewController: BaseViewController, PasswordViewDelegate {
@@ -59,27 +60,21 @@ class StepWithdrawCdpCheckViewController: BaseViewController, PasswordViewDelega
     }
     
     func onUpdateView() {
-        let cDenom = pageHolderVC.mCDenom
-        let cDpDecimal = WUtils.getKavaCoinDecimal(cDenom!)
-
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, nil, feeAmountLabel, chainType!)
+        
+        let cDenom = pageHolderVC.mCDenom!
         let cAmount = NSDecimalNumber.init(string: pageHolderVC.mCollateral.amount)
-        let fAmount = NSDecimalNumber.init(string: pageHolderVC.mFee!.amount[0].amount)
         
-        cDenomLabel.text = cDenom?.uppercased()
-        cAmountLabel.attributedText = WUtils.displayAmount2(cAmount.stringValue, cAmountLabel.font!, cDpDecimal, cDpDecimal)
-        
-        feeAmountLabel.attributedText = WUtils.displayAmount2(fAmount.stringValue, feeAmountLabel.font!, 6, 6)
+        WUtils.showCoinDp(cDenom, cAmount.stringValue, cDenomLabel, cAmountLabel, chainType!)
+        WUtils.showCoinDp(cDenom, pageHolderVC.totalDepositAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount, chainType!)
 
         WUtils.showRiskRate(pageHolderVC.beforeRiskRate!, beforeRiskRate, _rateIamg: nil)
         WUtils.showRiskRate(pageHolderVC.afterRiskRate!, afterRiskRate, _rateIamg: nil)
         
-        adjuestedcAmount.attributedText = WUtils.displayAmount2(pageHolderVC.totalDepositAmount!.stringValue, adjuestedcAmount.font!, cDpDecimal, cDpDecimal)
-        adjuestedcAmountDenom.text = cDenom?.uppercased()
-        
-        beforeLiquidationPriceTitle.text = String(format: NSLocalizedString("before_liquidation_price_format", comment: ""), cDenom!.uppercased())
+        beforeLiquidationPriceTitle.text = String(format: NSLocalizedString("before_liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
         beforeLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.beforeLiquidationPrice!.stringValue, 4, beforeLiquidationPrice.font)
         
-        afterLiquidationPriceTitle.text = String(format: NSLocalizedString("after_liquidation_price_format", comment: ""), cDenom!.uppercased())
+        afterLiquidationPriceTitle.text = String(format: NSLocalizedString("after_liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
         afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
         
         memo.text = pageHolderVC.mMemo
@@ -87,93 +82,62 @@ class StepWithdrawCdpCheckViewController: BaseViewController, PasswordViewDelega
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            self.onFetchAccountInfo(pageHolderVC.mAccount!)
+            self.onFetchgRPCAuth(account!)
         }
     }
     
-    func onFetchAccountInfo(_ account: Account) {
+    func onFetchgRPCAuth(_ account: Account) {
         self.showWaittingAlert()
-        let request = Alamofire.request(BaseNetWork.accountInfoUrl(chainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("res : ", res)
-                guard let info = res as? [String : Any] else {
-                    _ = BaseData.instance.deleteBalance(account: account)
-                    self.hideWaittingAlert()
-                    self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                    return
-                }
-                let accountInfo = KavaAccountInfo.init(info)
-                _ = BaseData.instance.updateAccount(WUtils.getAccountWithKavaAccountInfo(account, accountInfo))
-                BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithKavaAccountInfo(account, accountInfo))
-                self.onGenWithdrawCdpTx()
-                
-            case .failure( _):
-                self.hideWaittingAlert()
-                self.onShowToast(NSLocalizedString("error_network", comment: ""))
+        DispatchQueue.global().async {
+            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+            defer { try! group.syncShutdownGracefully() }
+            
+            let channel = BaseNetWork.getConnection(self.chainType!, group)!
+            defer { try! channel.close().wait() }
+            
+            let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with {
+                $0.address = account.account_address
+            }
+            do {
+                let response = try Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait()
+                self.onBroadcastGrpcTx(response)
+            } catch {
+                print("onFetchgRPCAuth failed: \(error)")
             }
         }
     }
     
-    func onGenWithdrawCdpTx() {
+    func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let msg = MsgGenerator.genGetWithdrawCdpMsg(self.chainType!,
-                                                        self.pageHolderVC.mAccount!.account_address,
-                                                        self.pageHolderVC.mAccount!.account_address,
+            let reqTx = Signer.genSignedKavaCDPWithdraw(auth!,
+                                                        self.account!.account_address,
+                                                        self.account!.account_address,
                                                         self.pageHolderVC.mCollateral,
-                                                        self.pageHolderVC.mCollateralParam?.type)
-            var msgList = Array<Msg>()
-            msgList.append(msg)
+                                                        self.pageHolderVC.mCollateralParamType!,
+                                                        self.pageHolderVC.mFee!,
+                                                        self.pageHolderVC.mMemo!,
+                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                        BaseData.instance.getChainId(self.chainType))
             
-            let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
-                                                   String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                   String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                   msgList,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!)
+            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+            defer { try! group.syncShutdownGracefully() }
             
-            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                        msgList, stdMsg,
-                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let channel = BaseNetWork.getConnection(self.chainType!, group)!
+            defer { try! channel.close().wait() }
             
-            DispatchQueue.main.async(execute: {
-                let postTx = PostTx.init("sync", stdTx.value)
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .sortedKeys
-                let data = try? encoder.encode(postTx)
-                do {
-                    let params = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-                    let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-                    request.validate().responseJSON { response in
-                        var txResult = [String:Any]()
-                        switch response.result {
-                        case .success(let res):
-                            print("WithdrawCdp ", res)
-                            if let result = res as? [String : Any]  {
-                                txResult = result
-                            }
-                        case .failure(let error):
-                            print("WithdrawCdp error ", error)
-                            if (response.response?.statusCode == 500) {
-                                txResult["net_error"] = 500
-                            }
-                        }
-
-                        if (self.waitAlert != nil) {
-                            self.waitAlert?.dismiss(animated: true, completion: {
-                                txResult["type"] = COSMOS_MSG_TYPE_DELEGATE
-                                self.onStartTxDetail(txResult)
-                            })
-                        }
+            do {
+                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
+//                print("response ", response.txResponse.txhash)
+                DispatchQueue.main.async(execute: {
+                    if (self.waitAlert != nil) {
+                        self.waitAlert?.dismiss(animated: true, completion: {
+                            self.onStartTxDetailgRPC(response)
+                        })
                     }
-
-                } catch {
-                    print(error)
-                }
-            });
+                });
+            } catch {
+                print("onBroadcastGrpcTx failed: \(error)")
+            }
         }
     }
-    
-    
 }

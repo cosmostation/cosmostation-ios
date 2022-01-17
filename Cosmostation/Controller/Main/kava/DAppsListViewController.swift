@@ -435,6 +435,10 @@ extension Kava_Cdp_V1beta1_CDPResponse {
         return NSDecimalNumber.init(string: collateral.amount)
     }
     
+    public func getRawCollateralValueAmount() -> NSDecimalNumber {
+        return NSDecimalNumber.init(string: collateralValue.amount)
+    }
+    
     public func getRawPrincipalAmount() -> NSDecimalNumber {
         return NSDecimalNumber.init(string: principal.amount)
     }
@@ -480,7 +484,7 @@ extension Kava_Cdp_V1beta1_CDPResponse {
     }
     
     public func getWithdrawableAmount(_ cDenom:String, _ pDenom:String, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam, _ cPrice:NSDecimalNumber, _ selfDepositAmount: NSDecimalNumber) -> NSDecimalNumber {
-        let cValue = getRawCollateralAmount()
+        let cValue = getRawCollateralValueAmount()
         let minCValue = getEstimatedTotalDebt(collateralParam).multiplying(by: collateralParam.getLiquidationRatioAmount()).dividing(by: NSDecimalNumber.init(string: "0.95"), withBehavior:WUtils.handler0Down)
         let maxWithdrawableValue = cValue.subtracting(minCValue)
         var maxWithdrawableAmount = maxWithdrawableValue.multiplying(byPowerOf10: WUtils.getKavaCoinDecimal(cDenom) - WUtils.getKavaCoinDecimal(pDenom)).dividing(by: cPrice, withBehavior: WUtils.handler0Down)
@@ -495,7 +499,7 @@ extension Kava_Cdp_V1beta1_CDPResponse {
     }
     
     public func getMoreLoanableAmount(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
-        var maxDebtValue = getRawCollateralAmount().dividing(by: collateralParam.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
+        var maxDebtValue = getRawCollateralValueAmount().dividing(by: collateralParam.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
         maxDebtValue = maxDebtValue.multiplying(by: NSDecimalNumber.init(string: "0.95"), withBehavior: WUtils.handler0Down)
         maxDebtValue = maxDebtValue.subtracting(getEstimatedTotalDebt(collateralParam))
         if (maxDebtValue.compare(NSDecimalNumber.zero).rawValue <= 0) {

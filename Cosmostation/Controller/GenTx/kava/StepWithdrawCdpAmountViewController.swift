@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import GRPC
+import NIO
 import Alamofire
 
 class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate{
@@ -34,12 +36,20 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
     var pDpDecimal:Int16 = 6
     var mMarketID: String = ""
     
-    var mCollateralParamType: String?
-    var mCollateralParam: CollateralParam?
-    var mCdpParam: CdpParam?
-    var myCdp: MyCdp?
+//    var mCollateralParamType: String?
+//    var mCollateralParam: CollateralParam?
+//    var mCdpParam: CdpParam?
+//    var myCdp: MyCdp?
+//    var mSelfDepositAmount: NSDecimalNumber = NSDecimalNumber.zero
+//    var mPrice: KavaPriceFeedPrice?
+    
+    var mCollateralParamType: String!
+    var mCollateralParam: Kava_Cdp_V1beta1_CollateralParam!
+    var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params!
+    var mKavaOraclePrice: Kava_Pricefeed_V1beta1_CurrentPriceResponse?
+    var mKavaMyCdp_gRPC: Kava_Cdp_V1beta1_CDPResponse?
     var mSelfDepositAmount: NSDecimalNumber = NSDecimalNumber.zero
-    var mPrice: KavaPriceFeedPrice?
+    
     
     var currentPrice: NSDecimalNumber = NSDecimalNumber.zero
     var beforeLiquidationPrice: NSDecimalNumber = NSDecimalNumber.zero
@@ -53,15 +63,14 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        pageHolderVC = self.parent as? StepGenTxViewController
         mCollateralParamType = pageHolderVC.mCollateralParamType
-        mCdpParam = BaseData.instance.mCdpParam
-        mCollateralParam = mCdpParam?.getCollateralParamByType(pageHolderVC.mCollateralParamType!)
-        mMarketID = mCollateralParam!.liquidation_market_id!
+        mKavaCdpParams_gRPC = BaseData.instance.mKavaCdpParams_gRPC
+        mCollateralParam = mKavaCdpParams_gRPC?.getCollateralParamByType(mCollateralParamType)
+        mMarketID = mCollateralParam!.liquidationMarketID
         
         self.loadingImg.onStartAnimation()
         self.onFetchCdpData()
@@ -190,7 +199,7 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
                 self.pageHolderVC.afterRiskRate = self.afterRiskRate
                 self.pageHolderVC.mPDenom = self.mPDenom
                 self.pageHolderVC.totalDepositAmount = self.sumCAmount
-                self.pageHolderVC.mCollateralParam = self.mCollateralParam
+                self.pageHolderVC.mKavaCollateralParam = self.mCollateralParam
 
                 self.btnCancel.isUserInteractionEnabled = false
                 self.btnNext.isUserInteractionEnabled = false
@@ -209,9 +218,9 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
             return false
         }
         toCAmount = userInput.multiplying(byPowerOf10: cDpDecimal)
-        sumCAmount = myCdp!.getTotalCollateralAmount().subtracting(toCAmount)
+        sumCAmount = mKavaMyCdp_gRPC!.getRawCollateralAmount().subtracting(toCAmount)
         let collateralAmount = sumCAmount.multiplying(byPowerOf10: -cDpDecimal)
-        let rawDebtAmount = myCdp!.cdp!.getEstimatedTotalDebt(mCollateralParam!).multiplying(by: mCollateralParam!.getLiquidationRatio()).multiplying(byPowerOf10: -pDpDecimal)
+        let rawDebtAmount = mKavaMyCdp_gRPC!.getEstimatedTotalDebt(mCollateralParam!).multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).multiplying(byPowerOf10: -pDpDecimal)
 
         afterLiquidationPrice = rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(pDpDecimal))
         afterRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(afterLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
@@ -255,33 +264,35 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
     var mFetchCnt = 0
     func onFetchCdpData() {
         self.mFetchCnt = 3
-        onFetchKavaPrice(self.mMarketID)
-        onFetchOwenCdp(account!.account_address)
-        onFetchCdpDeposit(account!, self.mCollateralParamType!)
+        self.onFetchgRPCKavaPrice(mMarketID)
+        self.onFetchgRPCMyCdp(account!.account_address, mCollateralParamType)
+        self.onFetchCdpDeposit(account!.account_address, mCollateralParamType!)
     }
     
     func onFetchFinished() {
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt <= 0) {
+            if (mKavaMyCdp_gRPC ==  nil || mKavaOraclePrice == nil) { return }
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
             self.cDpDecimal = WUtils.getKavaCoinDecimal(mCDenom)
             self.pDpDecimal = WUtils.getKavaCoinDecimal(mPDenom)
-            self.currentPrice = NSDecimalNumber.init(string: mPrice?.result.price)
             
-            beforeLiquidationPrice = myCdp!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)
+            currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
+            
+            beforeLiquidationPrice = mKavaMyCdp_gRPC!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
             WUtils.showRiskRate2(beforeRiskRate, beforeSafeRate, beforeSafeTxt)
             
-            cMaxWithdrawableAmount = myCdp!.getWithdrawableAmount(mCDenom, mPDenom, mCollateralParam!, currentPrice, mSelfDepositAmount)
+            cMaxWithdrawableAmount = mKavaMyCdp_gRPC!.getWithdrawableAmount(mCDenom, mPDenom, mCollateralParam!, currentPrice, mSelfDepositAmount)
             cAvailabeMaxLabel.attributedText = WUtils.displayAmount2(cMaxWithdrawableAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
             
 //            print("currentPrice ", currentPrice)
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            cDenomLabel.text = mCDenom.uppercased()
-            cAvailableDenom.text = mCDenom.uppercased()
+            cDenomLabel.text = WUtils.getKavaTokenName(mCDenom)
+            cAvailableDenom.text = WUtils.getKavaTokenName(mCDenom)
             let cUrl = KAVA_COIN_IMG_URL + mCDenom + ".png"
             self.cDenomImg.af_setImage(withURL: URL(string: cUrl)!)
             self.loadingImg.onStopAnimation()
@@ -290,48 +301,46 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
         }
     }
     
-    func onFetchKavaPrice(_ market:String) {
-        let request = Alamofire.request(BaseNetWork.priceFeedUrl(chainType, market), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-                    guard let responseData = res as? NSDictionary,
-                        let _ = responseData.object(forKey: "height") as? String else {
-                            self.onFetchFinished()
-                            return
-                    }
-                    self.mPrice = KavaPriceFeedPrice.init(responseData)
-//                    print("mPrice ", self.mPrice)
-
-                case .failure(let error):
-                    print("onFetchKavaPrice ", market , " ", error)
+    func onFetchgRPCKavaPrice(_ marketId: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Pricefeed_V1beta1_QueryPriceRequest.with {
+                    $0.marketID = marketId
                 }
-            self.onFetchFinished()
+                if let response = try? Kava_Pricefeed_V1beta1_QueryClient(channel: channel).price(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mKavaOraclePrice = response.price
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCPrices failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+        
+    }
+    
+    func onFetchgRPCMyCdp(_ address: String, _ collateralType: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Cdp_V1beta1_QueryCdpRequest.with { $0.owner = address; $0.collateralType = collateralType }
+                if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdp(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+//                    print("onFetchgRPCMyCdp ", response.cdp)
+                    self.mKavaMyCdp_gRPC = response.cdp
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCMyCdp failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     
-    func onFetchOwenCdp(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.owenCdpUrl(chainType), method: .get, parameters: ["owner":address], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-                case .success(let res):
-                    guard let responseData = res as? NSDictionary, let _ = responseData.object(forKey: "height") as? String else {
-                        self.onFetchFinished()
-                        return
-                    }
-                    let myCdps = KavaMyCdps.init(responseData)
-                    self.myCdp = myCdps.result.filter { $0.cdp?.type == self.mCollateralParamType}.first
-//                    print("myCdp ", self.myCdp)
-                    
-                case .failure(let error):
-                    print("onFetchOwenCdp ", error)
-                }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchCdpDeposit(_ account:Account, _ collateralType: String) {
-        let request = Alamofire.request(BaseNetWork.depositCdpUrl(chainType, account.account_address, collateralType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+    func onFetchCdpDeposit(_ address: String, _ collateralType: String) {
+        let request = Alamofire.request(BaseNetWork.depositCdpUrl(chainType, address, collateralType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
