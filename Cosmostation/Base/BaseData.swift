@@ -41,10 +41,10 @@ final class BaseData : NSObject{
     var mKavaPriceMarkets: Array<KavaPriceMarket> = Array<KavaPriceMarket>()
     var mCdpParam: CdpParam?
     var mHardParam: HardParam?
-    var mMyHardDeposit: Array<HardMyDeposit>?
-    var mMyHardBorrow: Array<HardMyBorrow>?
-    var mModuleCoins: Array<Coin>?
-    var mReserveCoins: Array<Coin>?
+//    var mMyHardDeposit: Array<HardMyDeposit>?
+//    var mMyHardBorrow: Array<HardMyBorrow>?
+//    var mModuleCoins: Array<Coin>?
+//    var mReserveCoins: Array<Coin>?
     var mKavaSwapParam: SwapParam!
     
     //kava gRPC
@@ -55,8 +55,14 @@ final class BaseData : NSObject{
     var mIncentiveRewards: IncentiveReward?
     
     var mKavaHardParams_gRPC: Kava_Hard_V1beta1_Params?
-    var mHardMyDeposit: Array<Kava_Hard_V1beta1_DepositResponse> = Array<Kava_Hard_V1beta1_DepositResponse>()
-    var mHardMyBorrow: Array<Kava_Hard_V1beta1_BorrowResponse> = Array<Kava_Hard_V1beta1_BorrowResponse>()
+    var mHardMyDeposit: Array<Coin> = Array<Coin>()
+    var mHardMyBorrow: Array<Coin> = Array<Coin>()
+    var mHardInterestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate> = Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>()
+    var mHardTotalDeposit: Array<Coin> = Array<Coin>()
+    var mHardTotalBorrow: Array<Coin> = Array<Coin>()
+    var mHardModuleCoins: Array<Coin> = Array<Coin>()
+    var mHardReserveCoins: Array<Coin> = Array<Coin>()
+    
     var mKavaSwapPoolParam: Kava_Swap_V1beta1_Params?
     
     func getKavaOraclePrice(_ marketId: String?) -> NSDecimalNumber {

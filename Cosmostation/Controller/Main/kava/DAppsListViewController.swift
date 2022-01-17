@@ -221,7 +221,13 @@ extension WUtils {
     }
     
     static func getKavaTokenName(_ denom: String) -> String {
-        if (denom == KAVA_MAIN_DENOM) {
+        if (denom.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
+                if (ibcToken.auth == true) { return ibcToken.display_denom?.uppercased() ?? "IBC" }
+                else { return "Unknown" }
+            }
+            
+        } else if (denom == KAVA_MAIN_DENOM) {
             return "KAVA"
             
         } else if (denom == KAVA_HARD_DENOM) {
@@ -365,6 +371,73 @@ extension WUtils {
         }
     }
     
+    static func getHardSuppliedAmountByDenom(_ denom: String, _ mydeposit: Array<Coin>?) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        mydeposit?.forEach({ coin in
+            if (coin.denom == denom) {
+                result = NSDecimalNumber.init(string: coin.amount)
+            }
+        })
+        return result
+    }
+    
+    static func getHardBorrowedAmountByDenom(_ denom: String, _ myBorrow: Array<Coin>?) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        myBorrow?.forEach({ coin in
+            if (coin.denom == denom) {
+                result = NSDecimalNumber.init(string: coin.amount)
+            }
+        })
+        return result
+    }
+    
+    static func getHardBorrowableAmountByDenom(_ denom: String, _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?,
+                                               _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) -> NSDecimalNumber {
+        let hardParam = BaseData.instance.mKavaHardParams_gRPC
+        let decimal = WUtils.getKavaCoinDecimal(denom)
+        let oraclePrice = BaseData.instance.getKavaOraclePrice(hardParam?.getSpotMarketId(denom))
+        
+        var totalLTVValue = NSDecimalNumber.zero
+        var totalBorrowedValue = NSDecimalNumber.zero
+        var totalBorrowAbleAmount = NSDecimalNumber.zero
+        var SystemBorrowableAmount = NSDecimalNumber.zero
+        var moduleAmount = NSDecimalNumber.zero
+        var reserveAmount = NSDecimalNumber.zero
+
+        myDeposits?.forEach({ coin in
+            let innnerDecimal   = WUtils.getKavaCoinDecimal(coin.denom)
+            let LTV             = hardParam!.getLTV(coin.denom)
+            let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
+            let depositValue    = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
+            let ltvValue        = depositValue.multiplying(by: LTV)
+            totalLTVValue = totalLTVValue.adding(ltvValue)
+        })
+
+        myBorrows?.forEach({ coin in
+            let innnerDecimal   = WUtils.getKavaCoinDecimal(coin.denom)
+            let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
+            let borrowValue     = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
+            totalBorrowedValue = totalBorrowedValue.adding(borrowValue)
+        })
+        let tempBorrowAbleValue  = totalLTVValue.subtracting(totalBorrowedValue)
+        let totalBorrowAbleValue = tempBorrowAbleValue.compare(NSDecimalNumber.zero).rawValue > 0 ? tempBorrowAbleValue : NSDecimalNumber.zero
+        totalBorrowAbleAmount = totalBorrowAbleValue.multiplying(byPowerOf10: decimal, withBehavior: WUtils.handler12Down).dividing(by: oraclePrice, withBehavior: WUtils.getDivideHandler(decimal))
+
+        if let moduleCoin = moduleCoins?.filter({ $0.denom == denom }).first {
+            moduleAmount = NSDecimalNumber.init(string: moduleCoin.amount)
+        }
+        if let reserveCoin = reservedCoins?.filter({ $0.denom == denom }).first {
+            reserveAmount = NSDecimalNumber.init(string: reserveCoin.amount)
+        }
+        let moduleBorrowable = moduleAmount.subtracting(reserveAmount)
+        if (hardParam?.getHardMoneyMarket(denom)?.borrowLimit.hasMaxLimit_p == true) {
+            let maximum_limit = NSDecimalNumber.init(string: hardParam?.getHardMoneyMarket(denom)?.borrowLimit.maximumLimit).multiplying(byPowerOf10: -18)
+            SystemBorrowableAmount = maximum_limit.compare(moduleBorrowable).rawValue > 0 ? moduleBorrowable : maximum_limit
+        } else {
+            SystemBorrowableAmount = moduleBorrowable
+        }
+        return totalBorrowAbleAmount.compare(SystemBorrowableAmount).rawValue > 0 ? SystemBorrowableAmount : totalBorrowAbleAmount
+    }
 
 }
 
@@ -510,6 +583,11 @@ extension Kava_Cdp_V1beta1_CDPResponse {
 }
 
 extension Kava_Hard_V1beta1_Params {
+    
+    public func getHardMoneyMarket(_ denom: String) -> Kava_Hard_V1beta1_MoneyMarket? {
+        return moneyMarkets.filter { $0.denom == denom }.first
+    }
+    
     public func getLTV(_ denom: String) -> NSDecimalNumber {
         if let market = moneyMarkets.filter({ $0.denom == denom }).first {
             return NSDecimalNumber.init(string: market.borrowLimit.loanToValue).multiplying(byPowerOf10: -18)
@@ -522,6 +600,15 @@ extension Kava_Hard_V1beta1_Params {
             return market.spotMarketID
         }
         return ""
+    }
+}
+
+extension Kava_Hard_V1beta1_MoneyMarketInterestRate {
+    public func getSupplyInterestRate() -> NSDecimalNumber {
+        return NSDecimalNumber.init(string: supplyInterestRate).multiplying(byPowerOf10: -18)
+    }
+    public func getBorrowInterestRate() -> NSDecimalNumber {
+        return NSDecimalNumber.init(string: borrowInterestRate).multiplying(byPowerOf10: -18)
     }
 }
 

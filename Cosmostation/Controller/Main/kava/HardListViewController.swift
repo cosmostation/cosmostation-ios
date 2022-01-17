@@ -18,11 +18,13 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     var refresher: UIRefreshControl!
     
     var mHardParam: Kava_Hard_V1beta1_Params?
-    var mHardInterestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>?
-    var mHardTotalDeposit: Array<Coin>?
-    var mHardTotalBorrow: Array<Coin>?
-    var mHardMyDeposit: Array<Kava_Hard_V1beta1_DepositResponse>?
-    var mHardMyBorrow: Array<Kava_Hard_V1beta1_BorrowResponse>?
+    var mHardInterestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate> = Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>()
+    var mHardTotalDeposit: Array<Coin> = Array<Coin>()
+    var mHardTotalBorrow: Array<Coin> = Array<Coin>()
+//    var mHardMyDeposit: Array<Kava_Hard_V1beta1_DepositResponse> = Array<Kava_Hard_V1beta1_DepositResponse>()
+//    var mHardMyBorrow: Array<Kava_Hard_V1beta1_BorrowResponse> = Array<Kava_Hard_V1beta1_BorrowResponse>()
+    var mHardMyDeposit: Array<Coin> = Array<Coin>()
+    var mHardMyBorrow: Array<Coin> = Array<Coin>()
     
     
     override func viewDidLoad() {
@@ -54,11 +56,11 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
             return
         }
         self.mFetchCnt = 6
-        self.mHardInterestRates?.removeAll()
-        self.mHardTotalDeposit?.removeAll()
-        self.mHardTotalBorrow?.removeAll()
-        self.mHardMyDeposit?.removeAll()
-        self.mHardMyBorrow?.removeAll()
+        self.mHardInterestRates.removeAll()
+        self.mHardTotalDeposit.removeAll()
+        self.mHardTotalBorrow.removeAll()
+        self.mHardMyDeposit.removeAll()
+        self.mHardMyBorrow.removeAll()
         
         self.onFetchgRPCHardParam()
         self.onFetchgRPCHardInterestRate()
@@ -102,10 +104,10 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
-//            let hardDetailVC = HardDetailViewController(nibName: "HardDetailViewController", bundle: nil)
-//            hardDetailVC.mHardMoneyMarketDenom = hardParam!.money_markets![indexPath.row].denom
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(hardDetailVC, animated: true)
+            let hardDetailVC = HardDetailViewController(nibName: "HardDetailViewController", bundle: nil)
+            hardDetailVC.mHardMoneyMarketDenom = mHardParam!.moneyMarkets[indexPath.row].denom
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(hardDetailVC, animated: true)
         }
     }
     
@@ -134,6 +136,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 let req = Kava_Hard_V1beta1_QueryInterestRateRequest.init()
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).interestRate(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     self.mHardInterestRates = response.interestRates
+                    BaseData.instance.mHardInterestRates = response.interestRates
                 }
                 try channel.close().wait()
                 
@@ -151,8 +154,9 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 let req = Kava_Hard_V1beta1_QueryTotalDepositedRequest.init()
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).totalDeposited(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.suppliedCoins.forEach {
-                        self.mHardTotalDeposit?.append(Coin.init($0.denom, $0.amount))
+                        self.mHardTotalDeposit.append(Coin.init($0.denom, $0.amount))
                     }
+                    BaseData.instance.mHardTotalDeposit = self.mHardTotalDeposit
                 }
                 try channel.close().wait()
                 
@@ -170,8 +174,9 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 let req = Kava_Hard_V1beta1_QueryTotalBorrowedRequest.init()
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).totalBorrowed(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.borrowedCoins.forEach {
-                        self.mHardTotalBorrow?.append(Coin.init($0.denom, $0.amount))
+                        self.mHardTotalBorrow.append(Coin.init($0.denom, $0.amount))
                     }
+                    BaseData.instance.mHardTotalBorrow = self.mHardTotalBorrow
                 }
                 try channel.close().wait()
                 
@@ -188,8 +193,13 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Hard_V1beta1_QueryDepositsRequest.with { $0.owner = address }
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).deposits(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.mHardMyDeposit = response.deposits
-                    BaseData.instance.mHardMyDeposit = response.deposits
+                    if (response.deposits.count > 0) {
+                        let depositCoins = response.deposits[0].amount
+                        depositCoins.forEach { rawCoin in
+                            self.mHardMyDeposit.append(Coin.init(rawCoin.denom, rawCoin.amount))
+                        }
+                    }
+                    BaseData.instance.mHardMyDeposit = self.mHardMyDeposit
                 }
                 try channel.close().wait()
                 
@@ -206,8 +216,13 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Hard_V1beta1_QueryBorrowsRequest.with { $0.owner = address }
                 if let response = try? Kava_Hard_V1beta1_QueryClient(channel: channel).borrows(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.mHardMyBorrow = response.borrows
-                    BaseData.instance.mHardMyBorrow = response.borrows
+                    if (response.borrows.count > 0) {
+                        let borrowCoins = response.borrows[0].amount
+                        borrowCoins.forEach { rawCoin in
+                            self.mHardMyBorrow.append(Coin.init(rawCoin.denom, rawCoin.amount))
+                        }
+                    }
+                    BaseData.instance.mHardMyBorrow = self.mHardMyBorrow
                 }
                 try channel.close().wait()
                 

@@ -5395,17 +5395,7 @@ public class WUtils {
         return NSDecimalNumber.zero
     }
     
-    static func getHardSuppliedAmountByDenom(_ denom: String, _ mydeposit: Array<HardMyDeposit>?) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if let deposit = mydeposit?[0], let coins = deposit.amount {
-            for coin in coins {
-                if (coin.denom == denom) {
-                    result = NSDecimalNumber.init(string: coin.amount)
-                }
-            }
-        }
-        return result
-    }
+    
     
     static func getHardBorrowedValueByDenom(_ denom: String, _ mydeposit: Array<HardMyBorrow>?) -> NSDecimalNumber {
         let denomPrice = getKavaPrice(denom)
@@ -5502,13 +5492,6 @@ public class WUtils {
             }
         }
         return result
-    }
-    
-    static func getHardSuppliedValueByDenom(_ denom: String, _ mydeposit: Array<HardMyDeposit>?) -> NSDecimalNumber {
-        let denomPrice = getKavaPrice(denom)
-        let decimal = getKavaCoinDecimal(denom)
-        let amount = getHardSuppliedAmountByDenom(denom, mydeposit)
-        return amount.multiplying(byPowerOf10: -decimal).multiplying(by: denomPrice, withBehavior: WUtils.handler2Down)
     }
     
     static func getHardBorrowedAmountByDenom(_ denom: String, _ myBorrow: Array<HardMyBorrow>?) -> NSDecimalNumber {

@@ -32,7 +32,7 @@ class TransactionViewController: UIViewController {
     var mCollateralParamType: String?
     var mCDenom: String?
     var mMarketID: String?
-    var mHardPoolDenom: String?
+    var mHardMoneyMarketDenom: String?
     var mKavaPool: SwapPool?
     var mKavaDeposit: SwapDeposit?
     
@@ -376,7 +376,7 @@ class TransactionViewController: UIViewController {
             StepVc.mMarketID = self.mMarketID
             StepVc.mHtlcDenom = self.mHtlcDenom
             StepVc.mHtlcRefundSwapId = self.mHtlcRefundSwapId
-            StepVc.mHardPoolDenom = self.mHardPoolDenom
+            StepVc.mHardMoneyMarketDenom = self.mHardMoneyMarketDenom
             StepVc.mCollateralParamType = self.mCollateralParamType
             StepVc.mKavaPool = self.mKavaPool
             StepVc.mKavaDeposit = self.mKavaDeposit

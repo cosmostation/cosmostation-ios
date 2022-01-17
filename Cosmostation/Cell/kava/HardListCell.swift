@@ -28,7 +28,7 @@ class HardListCell: UITableViewCell {
         myBorrowedAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
-    func onBindView(_ position: Int, _ hardParam: Kava_Hard_V1beta1_Params?, _ myDeposits: Array<Kava_Hard_V1beta1_DepositResponse>?, _ myBorrows: Array<Kava_Hard_V1beta1_BorrowResponse>?,
+    func onBindView(_ position: Int, _ hardParam: Kava_Hard_V1beta1_Params?, _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?,
                     _ interestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>?) {
         guard let hardMoneyMarket = hardParam?.moneyMarkets[position] else {
             return
@@ -51,11 +51,9 @@ class HardListCell: UITableViewCell {
         
         //Display supplied amounts
         var myDepositAmount = NSDecimalNumber.zero
-        if (myDeposits != nil && myDeposits!.count > 0) {
-            myDeposits![0].amount.forEach { coin in
-                if (coin.denom == hardMoneyMarket.denom) {
-                    myDepositAmount = NSDecimalNumber.init(string: coin.amount)
-                }
+        myDeposits?.forEach { coin in
+            if (coin.denom == hardMoneyMarket.denom) {
+                myDepositAmount = NSDecimalNumber.init(string: coin.amount)
             }
         }
         let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(hardMoneyMarket.denom))
@@ -66,11 +64,9 @@ class HardListCell: UITableViewCell {
         
         //Display borrowed amounts
         var myBorrowAmount = NSDecimalNumber.zero
-        if (myBorrows != nil && myBorrows!.count > 0) {
-            myBorrows![0].amount.forEach { coin in
-                if (coin.denom == hardMoneyMarket.denom) {
-                    myBorrowAmount = NSDecimalNumber.init(string: coin.amount)
-                }
+        myBorrows?.forEach { coin in
+            if (coin.denom == hardMoneyMarket.denom) {
+                myBorrowAmount = NSDecimalNumber.init(string: coin.amount)
             }
         }
         let myBorrowValue = myBorrowAmount.multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)

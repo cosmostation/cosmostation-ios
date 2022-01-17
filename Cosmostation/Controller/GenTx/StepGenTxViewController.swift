@@ -81,7 +81,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mCollateralParam: CollateralParam?
     var mIncentiveKavaReceivable = NSDecimalNumber.zero
     var mIncentiveHardReceivable = NSDecimalNumber.zero
-    var mHardPoolDenom: String?
+    var mHardMoneyMarketDenom: String?
     var mHardPoolCoins: Array<Coin>?
     var mIncentiveMultiplier: String?
     var mHardPoolCoin = Coin.init()
@@ -312,25 +312,25 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
             return [HardPoolDeposit0ViewController(nibName: "HardPoolDeposit0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     HardPoolDeposit3ViewController(nibName: "HardPoolDeposit3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
             return [HardPoolWithdraw0ViewController(nibName: "HardPoolWithdraw0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     HardPoolWithdraw3ViewController(nibName: "HardPoolWithdraw3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_BORROW_HARD) {
             return [HardPoolBorrow0ViewController(nibName: "HardPoolBorrow0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     HardPoolBorrow3ViewController(nibName: "HardPoolBorrow3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_REPAY_HARD) {
             return [HardPoolRepay0ViewController(nibName: "HardPoolRepay0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     HardPoolRepay3ViewController(nibName: "HardPoolRepay3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {

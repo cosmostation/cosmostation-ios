@@ -24,31 +24,28 @@ class HardListMyStatusCell: UITableViewCell {
         remainingBorrowableValue.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
-    func onBindMyHard(_ hardParam: Kava_Hard_V1beta1_Params?, _ myDeposits: Array<Kava_Hard_V1beta1_DepositResponse>?, _ myBorrows: Array<Kava_Hard_V1beta1_BorrowResponse>?) {
+    func onBindMyHard(_ hardParam: Kava_Hard_V1beta1_Params?, _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?) {
+        if (hardParam == nil) { return }
         var totalDepositValue = NSDecimalNumber.zero
         var totalLTVValue = NSDecimalNumber.zero
-        if (myDeposits != nil && myDeposits!.count > 0) {
-            myDeposits![0].amount.forEach({ coin in
-                let decimal         = WUtils.tokenDivideDecimal(ChainType.KAVA_MAIN, coin.denom)
-                let LTV             = hardParam!.getLTV(coin.denom)
-                let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
-                let depositValue    = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
-                let ltvValue        = depositValue.multiplying(by: LTV)
-                totalDepositValue = totalDepositValue.adding(depositValue)
-                totalLTVValue = totalLTVValue.adding(ltvValue)
-            })
-        }
+        myDeposits?.forEach({ coin in
+            let decimal         = WUtils.tokenDivideDecimal(ChainType.KAVA_MAIN, coin.denom)
+            let LTV             = hardParam!.getLTV(coin.denom)
+            let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
+            let depositValue    = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
+            let ltvValue        = depositValue.multiplying(by: LTV)
+            totalDepositValue = totalDepositValue.adding(depositValue)
+            totalLTVValue = totalLTVValue.adding(ltvValue)
+        })
         totalDepositedValue.attributedText = WUtils.getDPRawDollor(totalDepositValue.stringValue, 2, totalDepositedValue.font)
         maxBorrowableValue.attributedText = WUtils.getDPRawDollor(totalLTVValue.stringValue, 2, maxBorrowableValue.font)
         
         var totalBorroweValue = NSDecimalNumber.zero
-        if (myBorrows != nil && myBorrows!.count > 0) {
-            myBorrows![0].amount.forEach { coin in
-                let decimal         = WUtils.tokenDivideDecimal(ChainType.KAVA_MAIN, coin.denom)
-                let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
-                let borrowValue     = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
-                totalBorroweValue = totalBorroweValue.adding(borrowValue)
-            }
+        myBorrows?.forEach { coin in
+            let decimal         = WUtils.tokenDivideDecimal(ChainType.KAVA_MAIN, coin.denom)
+            let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
+            let borrowValue     = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
+            totalBorroweValue = totalBorroweValue.adding(borrowValue)
         }
         let remainBorrowable = (totalLTVValue.subtracting(totalBorroweValue).compare(NSDecimalNumber.zero).rawValue > 0) ? totalLTVValue.subtracting(totalBorroweValue) : NSDecimalNumber.zero
         totalBorrowedValue.attributedText = WUtils.getDPRawDollor(totalBorroweValue.stringValue, 2, totalBorrowedValue.font)
