@@ -33,12 +33,12 @@ class TransactionViewController: UIViewController {
     var mCDenom: String?
     var mMarketID: String?
     var mHardMoneyMarketDenom: String?
-    var mKavaPool: SwapPool?
-    var mKavaDeposit: SwapDeposit?
+//    var mKavaPool: SwapPool?
+//    var mKavaDeposit: SwapDeposit?
     
     //for grpc
-    var mKavaHardPool: Kava_Swap_V1beta1_PoolResponse?
-    var mKavaHardPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
+    var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse?
+    var mKavaSwapPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
     
     var mHtlcDenom: String = BNB_MAIN_DENOM     //now only support bnb bep3
     var mHtlcRefundSwapId: String?
@@ -378,12 +378,12 @@ class TransactionViewController: UIViewController {
             StepVc.mHtlcRefundSwapId = self.mHtlcRefundSwapId
             StepVc.mHardMoneyMarketDenom = self.mHardMoneyMarketDenom
             StepVc.mCollateralParamType = self.mCollateralParamType
-            StepVc.mKavaPool = self.mKavaPool
-            StepVc.mKavaDeposit = self.mKavaDeposit
+//            StepVc.mKavaPool = self.mKavaPool
+//            StepVc.mKavaDeposit = self.mKavaDeposit
             
             //grpc
-            StepVc.mKavaHardPool = self.mKavaHardPool
-            StepVc.mKavaHardPoolDeposit = self.mKavaHardPoolDeposit
+            StepVc.mKavaSwapPool = self.mKavaSwapPool
+            StepVc.mKavaSwapPoolDeposit = self.mKavaSwapPoolDeposit
             
             StepVc.mStarnameDomain = self.mStarnameDomain
             StepVc.mStarnameAccount = self.mStarnameAccount

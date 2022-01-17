@@ -124,7 +124,7 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = KAVA_MSG_TYPE_SWAP_DEPOSIT
-        txVC.mKavaHardPool = pool
+        txVC.mKavaSwapPool = pool
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
@@ -138,8 +138,8 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = KAVA_MSG_TYPE_SWAP_WITHDRAW
-        txVC.mKavaHardPool = pool
-        txVC.mKavaHardPoolDeposit = myDeposit
+        txVC.mKavaSwapPool = pool
+        txVC.mKavaSwapPoolDeposit = myDeposit
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }

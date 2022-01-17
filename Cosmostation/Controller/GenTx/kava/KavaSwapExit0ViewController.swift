@@ -28,8 +28,8 @@ class KavaSwapExit0ViewController: BaseViewController, UITextFieldDelegate {
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        self.mKavaSwapPool = pageHolderVC.mKavaHardPool
-        self.mMyKavaPoolDeposits = pageHolderVC.mKavaHardPoolDeposit
+        self.mKavaSwapPool = pageHolderVC.mKavaSwapPool
+        self.mMyKavaPoolDeposits = pageHolderVC.mKavaSwapPoolDeposit
         
         availableMaxAmount = NSDecimalNumber.init(string: mMyKavaPoolDeposits.sharesOwned)
         shareAvailableLabel.attributedText = WUtils.displayAmount2(availableMaxAmount.stringValue, shareAvailableLabel.font!, coinDecimal, coinDecimal)

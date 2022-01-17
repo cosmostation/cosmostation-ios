@@ -182,19 +182,18 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
     }
     
     @IBAction func onClickSwap(_ sender: UIButton) {
-//        print("onClickSwap")
-//        if (!account!.account_has_private) {
-//            self.onShowAddMenomicDialog()
-//            return
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = KAVA_MSG_TYPE_SWAP_TOKEN
-//        txVC.mKavaPool = mSelectedPool
-//        txVC.mSwapInDenom = mInputCoinDenom
-//        txVC.mSwapOutDenom = mOutputCoinDenom
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = KAVA_MSG_TYPE_SWAP_TOKEN
+        txVC.mKavaSwapPool = mKavaSelectedPool
+        txVC.mSwapInDenom = mInputCoinDenom
+        txVC.mSwapOutDenom = mOutputCoinDenom
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     

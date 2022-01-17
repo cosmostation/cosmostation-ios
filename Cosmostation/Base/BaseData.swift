@@ -45,7 +45,7 @@ final class BaseData : NSObject{
 //    var mMyHardBorrow: Array<HardMyBorrow>?
 //    var mModuleCoins: Array<Coin>?
 //    var mReserveCoins: Array<Coin>?
-    var mKavaSwapParam: SwapParam!
+//    var mKavaSwapParam: SwapParam!
     
     //kava gRPC
     var mKavaPriceMarkets_gRPC: Array<Kava_Pricefeed_V1beta1_Market> = Array<Kava_Pricefeed_V1beta1_Market>()

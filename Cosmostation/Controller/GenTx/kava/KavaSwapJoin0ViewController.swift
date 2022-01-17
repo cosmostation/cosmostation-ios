@@ -50,7 +50,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         input1TextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         loadingImg.startAnimating()
-        onFetchgRPCSwapPool(pageHolderVC.mKavaHardPool!.name)
+        onFetchgRPCSwapPool(pageHolderVC.mKavaSwapPool!.name)
     }
     
     func onInitView() {
@@ -289,6 +289,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
             let pool1Amount = WUtils.localeStringToDecimal((input1TextFiled.text?.trimmingCharacters(in: .whitespaces))!).multiplying(byPowerOf10: coin1Decimal)
             pageHolderVC.mPoolCoin0 = Coin.init(coin0Denom, pool0Amount.stringValue)
             pageHolderVC.mPoolCoin1 = Coin.init(coin1Denom, pool1Amount.stringValue)
+            pageHolderVC.mKavaSwapPool = self.mKavaSwapPool
             
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()
@@ -326,7 +327,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
                 try channel.close().wait()
                 
             } catch {
-                print("onFetchgRPCSwapPoolList failed: \(error)")
+                print("onFetchgRPCSwapPool failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onInitView() });
         }

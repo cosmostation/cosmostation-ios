@@ -38,8 +38,8 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        self.mKavaSwapPool = pageHolderVC.mKavaHardPool
-        self.mMyKavaPoolDeposits = pageHolderVC.mKavaHardPoolDeposit
+        self.mKavaSwapPool = pageHolderVC.mKavaSwapPool
+        self.mMyKavaPoolDeposits = pageHolderVC.mKavaSwapPoolDeposit
     }
     
     override func enableUserInteraction() {
