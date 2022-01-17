@@ -538,7 +538,10 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                                 BaseData.instance.getChainId(self.chainType))
             }
             
-        } else if (pageHolderVC.mType == TASK_GEN_PROFILE) {
+        }
+        
+        //for desmos
+        else if (pageHolderVC.mType == TASK_GEN_PROFILE) {
             return Signer.genSimulateSaveProfileTxgRPC(auth,
                                                        self.pageHolderVC.mAccount!.account_address,
                                                        self.pageHolderVC.mDesmosDtag!,
@@ -577,6 +580,62 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      BaseData.instance.getChainId(self.chainType))
+            
+        }
+        
+        //for kava
+        else if (pageHolderVC.mType == KAVA_MSG_TYPE_CREATE_CDP) {
+            return Signer.genSimulateKavaCDPCreate(auth,
+                                                   self.account!.account_address,
+                                                   self.pageHolderVC.mCollateral,
+                                                   self.pageHolderVC.mPrincipal,
+                                                   self.pageHolderVC.mCollateralParamType!,
+                                                   self.pageHolderVC.mFee!,
+                                                   self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                   BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DEPOSIT_CDP) {
+            return Signer.genSimulateKavaCDPDeposit(auth,
+                                                    self.account!.account_address,
+                                                    self.account!.account_address,
+                                                    self.pageHolderVC.mCollateral,
+                                                    self.pageHolderVC.mCollateralParamType!,
+                                                    self.pageHolderVC.mFee!,
+                                                    self.pageHolderVC.mMemo!,
+                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                    BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_WITHDRAW_CDP) {
+            return Signer.genSimulateKavaCDPWithdraw(auth,
+                                                     self.account!.account_address,
+                                                     self.account!.account_address,
+                                                     self.pageHolderVC.mCollateral,
+                                                     self.pageHolderVC.mCollateralParamType!,
+                                                     self.pageHolderVC.mFee!,
+                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
+            return Signer.genSimulateKavaCDPDrawDebt(auth,
+                                                     self.account!.account_address,
+                                                     self.pageHolderVC.mPrincipal,
+                                                     self.pageHolderVC.mCollateralParamType!,
+                                                     self.pageHolderVC.mFee!,
+                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
+            return Signer.genSimulateKavaCDPRepay(auth,
+                                                  self.account!.account_address,
+                                                  self.pageHolderVC.mPayment,
+                                                  self.pageHolderVC.mCollateralParamType!,
+                                                  self.pageHolderVC.mFee!,
+                                                  self.pageHolderVC.mMemo!,
+                                                  self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                  BaseData.instance.getChainId(self.chainType))
             
         }
         
