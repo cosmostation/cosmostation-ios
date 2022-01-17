@@ -2326,6 +2326,30 @@ class Signer {
         }
     }
     
+    static func genSimulateKavaHardDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                           _ depositor: String, _ toDepositCoins: Array<Coin>,
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let depositHard = Kava_Hard_V1beta1_MsgDeposit.with {
+            $0.depositor = depositor
+            var convertedCoins = Array<Cosmos_Base_V1beta1_Coin>()
+            toDepositCoins.forEach { coin in
+                convertedCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = coin.denom; $0.amount = coin.amount })
+            }
+            $0.amount = convertedCoins
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.hard.v1beta1.MsgDeposit"
+            $0.value = try! depositHard.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
     static func genSignedKavaHardWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                           _ depositor: String, _ toWithdrawCoins: Array<Coin>,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
@@ -2348,6 +2372,30 @@ class Signer {
         return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
             $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
             $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateKavaHardWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                            _ depositor: String, _ toWithdrawCoins: Array<Coin>,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let withdrawHard = Kava_Hard_V1beta1_MsgWithdraw.with {
+            $0.depositor = depositor
+            var convertedCoins = Array<Cosmos_Base_V1beta1_Coin>()
+            toWithdrawCoins.forEach { coin in
+                convertedCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = coin.denom; $0.amount = coin.amount })
+            }
+            $0.amount = convertedCoins
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.hard.v1beta1.MsgWithdraw"
+            $0.value = try! withdrawHard.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
         }
     }
     
@@ -2376,6 +2424,30 @@ class Signer {
         }
     }
     
+    static func genSimulateKavaHardBorrow(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                          _ borrower: String, _ toBorrowCoins: Array<Coin>,
+                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let borrowHard = Kava_Hard_V1beta1_MsgBorrow.with {
+            $0.borrower = borrower
+            var convertedCoins = Array<Cosmos_Base_V1beta1_Coin>()
+            toBorrowCoins.forEach { coin in
+                convertedCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = coin.denom; $0.amount = coin.amount })
+            }
+            $0.amount = convertedCoins
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.hard.v1beta1.MsgBorrow"
+            $0.value = try! borrowHard.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
     static func genSignedKavaHardRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                        _ sender: String, _ owner: String, _ toRepayCoins: Array<Coin>,
                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
@@ -2399,6 +2471,31 @@ class Signer {
         return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
             $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
             $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateKavaHardRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ sender: String, _ owner: String, _ toRepayCoins: Array<Coin>,
+                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let repayHard = Kava_Hard_V1beta1_MsgRepay.with {
+            $0.sender = sender
+            $0.owner = owner
+            var convertedCoins = Array<Cosmos_Base_V1beta1_Coin>()
+            toRepayCoins.forEach { coin in
+                convertedCoins.append(Cosmos_Base_V1beta1_Coin.with { $0.denom = coin.denom; $0.amount = coin.amount })
+            }
+            $0.amount = convertedCoins
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.hard.v1beta1.MsgRepay"
+            $0.value = try! repayHard.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
         }
     }
     

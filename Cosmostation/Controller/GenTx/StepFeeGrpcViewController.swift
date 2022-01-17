@@ -637,6 +637,43 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                   BaseData.instance.getChainId(self.chainType))
             
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
+            return Signer.genSimulateKavaHardDeposit(auth,
+                                                     self.account!.account_address,
+                                                     self.pageHolderVC.mHardPoolCoins!,
+                                                     self.pageHolderVC.mFee!,
+                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
+            return Signer.genSimulateKavaHardWithdraw(auth,
+                                                      self.account!.account_address,
+                                                      self.pageHolderVC.mHardPoolCoins!,
+                                                      self.pageHolderVC.mFee!,
+                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                      BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_BORROW_HARD) {
+            return Signer.genSimulateKavaHardBorrow(auth,
+                                                    self.account!.account_address,
+                                                    self.pageHolderVC.mHardPoolCoins!,
+                                                    self.pageHolderVC.mFee!,
+                                                    self.pageHolderVC.mMemo!,
+                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                    BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_REPAY_HARD) {
+            return Signer.genSimulateKavaHardRepay(auth,
+                                                   self.account!.account_address,
+                                                   self.account!.account_address,
+                                                   self.pageHolderVC.mHardPoolCoins!,
+                                                   self.pageHolderVC.mFee!,
+                                                   self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                   BaseData.instance.getChainId(self.chainType))
+            
         }
         
         return nil
