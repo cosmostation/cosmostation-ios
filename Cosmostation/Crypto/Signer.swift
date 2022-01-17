@@ -2031,6 +2031,278 @@ class Signer {
     }
     
     
+    //for kava sign
+    static func genSignedKavaCDPCreate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                       _ sender: String, _ collateral: Coin, _ principal: Coin, _ collateral_type: String,
+                                       _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = collateral.denom
+            $0.amount = collateral.amount
+        }
+        let principalCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = principal.denom
+            $0.amount = principal.amount
+        }
+        let createCdp = Kava_Cdp_V1beta1_MsgCreateCDP.with {
+            $0.sender = sender
+            $0.collateral = collateralCoin
+            $0.principal = principalCoin
+            $0.collateralType = collateral_type
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgCreateCDP"
+            $0.value = try! createCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateKavaCDPCreate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ sender: String, _ collateral: Coin, _ principal: Coin, _ collateral_type: String,
+                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = collateral.denom
+            $0.amount = collateral.amount
+        }
+        let principalCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = principal.denom
+            $0.amount = principal.amount
+        }
+        let createCdp = Kava_Cdp_V1beta1_MsgCreateCDP.with {
+            $0.sender = sender
+            $0.collateral = collateralCoin
+            $0.principal = principalCoin
+            $0.collateralType = collateral_type
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgCreateCDP"
+            $0.value = try! createCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
+    static func genSignedKavaCDPDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                        _ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String,
+                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = collateral.denom
+            $0.amount = collateral.amount
+        }
+        let depositCdp = Kava_Cdp_V1beta1_MsgDeposit.with {
+            $0.depositor = depositor
+            $0.owner = owner
+            $0.collateral = collateralCoin
+            $0.collateralType = collateral_type
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgDeposit"
+            $0.value = try! depositCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateKavaCDPDeposit(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                          _ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String,
+                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = collateral.denom
+            $0.amount = collateral.amount
+        }
+        let depositCdp = Kava_Cdp_V1beta1_MsgDeposit.with {
+            $0.depositor = depositor
+            $0.owner = owner
+            $0.collateral = collateralCoin
+            $0.collateralType = collateral_type
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgDeposit"
+            $0.value = try! depositCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
+    static func genSignedKavaCDPWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String,
+                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = collateral.denom
+            $0.amount = collateral.amount
+        }
+        let withdrawCdp = Kava_Cdp_V1beta1_MsgWithdraw.with {
+            $0.depositor = depositor
+            $0.owner = owner
+            $0.collateral = collateralCoin
+            $0.collateralType = collateral_type
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgWithdraw"
+            $0.value = try! withdrawCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateKavaCDPWithdraw(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                           _ owner: String, _ depositor: String, _ collateral: Coin, _ collateral_type: String,
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let collateralCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = collateral.denom
+            $0.amount = collateral.amount
+        }
+        let withdrawCdp = Kava_Cdp_V1beta1_MsgWithdraw.with {
+            $0.depositor = depositor
+            $0.owner = owner
+            $0.collateral = collateralCoin
+            $0.collateralType = collateral_type
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgWithdraw"
+            $0.value = try! withdrawCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
+    static func genSignedKavaCDPDrawDebt(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ sender: String, _ principal: Coin, _ collateral_type: String,
+                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let principalCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = principal.denom
+            $0.amount = principal.amount
+        }
+        let drawdebtCdp = Kava_Cdp_V1beta1_MsgDrawDebt.with {
+            $0.sender = sender
+            $0.collateralType = collateral_type
+            $0.principal = principalCoin
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgDrawDebt"
+            $0.value = try! drawdebtCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateKavaCDPDrawDebt(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                           _ sender: String, _ principal: Coin, _ collateral_type: String,
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let principalCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = principal.denom
+            $0.amount = principal.amount
+        }
+        let drawdebtCdp = Kava_Cdp_V1beta1_MsgDrawDebt.with {
+            $0.sender = sender
+            $0.collateralType = collateral_type
+            $0.principal = principalCoin
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgDrawDebt"
+            $0.value = try! drawdebtCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
+    static func genSignedKavaCDPRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                      _ sender: String, _ payment: Coin, _ collateral_type: String,
+                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let paymentCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = payment.denom
+            $0.amount = payment.amount
+        }
+        let repayCdp = Kava_Cdp_V1beta1_MsgRepayDebt.with {
+            $0.sender = sender
+            $0.collateralType = collateral_type
+            $0.payment = paymentCoin
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgRepayDebt"
+            $0.value = try! repayCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateKavaCDPRepay(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                        _ sender: String, _ payment: Coin, _ collateral_type: String,
+                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let paymentCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = payment.denom
+            $0.amount = payment.amount
+        }
+        let repayCdp = Kava_Cdp_V1beta1_MsgRepayDebt.with {
+            $0.sender = sender
+            $0.collateralType = collateral_type
+            $0.payment = paymentCoin
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.cdp.v1beta1.MsgRepayDebt"
+            $0.value = try! repayCdp.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
+    
+    
     static func getGrpcTxBody(_ msgAnys: Array<Google_Protobuf2_Any>, _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {
         return Cosmos_Tx_V1beta1_TxBody.with {
             $0.memo = memo

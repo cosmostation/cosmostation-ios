@@ -76,7 +76,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     var mCollateralParamType: String?
     var mCDenom: String?
-//    var pDenom: String?
     var mPDenom: String?
     var mMarketID: String?
     var mCollateralParam: CollateralParam?
