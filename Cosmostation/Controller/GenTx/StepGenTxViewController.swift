@@ -88,8 +88,11 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mKavaPool: SwapPool?
     var mKavaDeposit: SwapDeposit?
     var mKavaShareAmount = NSDecimalNumber.zero
+    
     //for grpc
-    var mKavaCollateralParam: Kava_Cdp_V1beta1_CollateralParam!
+    var mKavaCollateralParam: Kava_Cdp_V1beta1_CollateralParam?
+    var mKavaHardPool: Kava_Swap_V1beta1_PoolResponse?
+    var mKavaHardPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
     
     
     var mHtlcDenom: String?
@@ -336,19 +339,19 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
             return [KavaSwap0ViewController(nibName: "KavaSwap0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     KavaSwap3ViewController(nibName: "KavaSwap3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
             return [KavaSwapJoin0ViewController(nibName: "KavaSwapJoin0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     KavaSwapJoin3ViewController(nibName: "KavaSwapJoin3ViewController", bundle: nil)]
 
         } else if (mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
             return [KavaSwapExit0ViewController(nibName: "KavaSwapExit0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     KavaSwapExit3ViewController(nibName: "KavaSwapExit3ViewController", bundle: nil)]
 
         } else if (mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {

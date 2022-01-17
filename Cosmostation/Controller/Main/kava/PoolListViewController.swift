@@ -98,52 +98,50 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if (indexPath.section == 0) {
-//            let noticeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-//            noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("title_pool_join", comment: ""), style: .default, handler: { _ in
-//                self.onCheckPoolJoin(self.mMySwapPools[indexPath.row])
-//            }))
-//            noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("title_pool_exit", comment: ""), style: .default, handler: { _ in
-//                self.onCheckExitJoin(self.mMySwapPools[indexPath.row])
-//            }))
-//            self.present(noticeAlert, animated: true) {
-//                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
-//                noticeAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
-//            }
-//
-//        } else {
-//            self.onCheckPoolJoin(self.mOtherSwapPools[indexPath.row])
-//        }
+        if (indexPath.section == 0) {
+            let noticeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("title_pool_join", comment: ""), style: .default, handler: { _ in
+                self.onCheckPoolJoin(self.mMyKavaSwapPools[indexPath.row])
+            }))
+            noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("title_pool_exit", comment: ""), style: .default, handler: { _ in
+                self.onCheckExitJoin(self.mMyKavaSwapPools[indexPath.row])
+            }))
+            self.present(noticeAlert, animated: true) {
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+                noticeAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+            }
+
+        } else {
+            self.onCheckPoolJoin(self.mOtherKavaSwapPools[indexPath.row])
+        }
     }
     
     func onCheckPoolJoin(_ pool: Kava_Swap_V1beta1_PoolResponse) {
-//        print("onCheckPoolJoin ", pool.name)
-//        if (!account!.account_has_private) {
-//            self.onShowAddMenomicDialog()
-//            return
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = KAVA_MSG_TYPE_SWAP_DEPOSIT
-//        txVC.mKavaPool = pool
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = KAVA_MSG_TYPE_SWAP_DEPOSIT
+        txVC.mKavaHardPool = pool
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func onCheckExitJoin(_ pool: Kava_Swap_V1beta1_PoolResponse) {
-//        print("onCheckExitJoin ", pool.name)
-//        if (!account!.account_has_private) {
-//            self.onShowAddMenomicDialog()
-//            return
-//        }
-//        let myDeposit = mMySwapPoolDeposits.filter { $0.pool_id == pool.name }.first!
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = KAVA_MSG_TYPE_SWAP_WITHDRAW
-//        txVC.mKavaPool = pool
-//        txVC.mKavaDeposit = myDeposit
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        let myDeposit = mMyKavaPoolDeposits.filter { $0.poolID == pool.name }.first!
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = KAVA_MSG_TYPE_SWAP_WITHDRAW
+        txVC.mKavaHardPool = pool
+        txVC.mKavaHardPoolDeposit = myDeposit
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
 }

@@ -381,6 +381,10 @@ class TransactionViewController: UIViewController {
             StepVc.mKavaPool = self.mKavaPool
             StepVc.mKavaDeposit = self.mKavaDeposit
             
+            //grpc
+            StepVc.mKavaHardPool = self.mKavaHardPool
+            StepVc.mKavaHardPoolDeposit = self.mKavaHardPoolDeposit
+            
             StepVc.mStarnameDomain = self.mStarnameDomain
             StepVc.mStarnameAccount = self.mStarnameAccount
             StepVc.mStarnameTime = self.mStarnameTime

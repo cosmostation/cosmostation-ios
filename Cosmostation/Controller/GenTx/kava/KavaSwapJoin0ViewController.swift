@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Alamofire
+import GRPC
+import NIO
 
 class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
     
@@ -26,7 +27,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var input1TextFiled: AmountInputTextField!
     
     var pageHolderVC: StepGenTxViewController!
-    var mPool: SwapPool!
+    var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse!
     var available0MaxAmount = NSDecimalNumber.zero
     var available1MaxAmount = NSDecimalNumber.zero
     var coin0Decimal:Int16 = 6
@@ -49,32 +50,33 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         input1TextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         loadingImg.startAnimating()
-        onFetchSwapPool(pageHolderVC.mKavaPool!.name!)
+        onFetchgRPCSwapPool(pageHolderVC.mKavaHardPool!.name)
     }
     
     func onInitView() {
+        if (mKavaSwapPool == nil) { pageHolderVC.onBeforePage() }
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
         
         let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, KAVA_MSG_TYPE_SWAP_DEPOSIT, 0)
-        coin0Denom = mPool.coins[0].denom
-        coin1Denom = mPool.coins[1].denom
+        coin0Denom = mKavaSwapPool.coins[0].denom
+        coin1Denom = mKavaSwapPool.coins[1].denom
         coin0Decimal = WUtils.getKavaCoinDecimal(coin0Denom)
         coin1Decimal = WUtils.getKavaCoinDecimal(coin1Denom)
         
-        if (mPool.coins[0].denom == coin0Denom) {
-            coin0Amount = NSDecimalNumber.init(string: mPool.coins[0].amount)
-            coin1Amount = NSDecimalNumber.init(string: mPool.coins[1].amount)
+        if (mKavaSwapPool.coins[0].denom == coin0Denom) {
+            coin0Amount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)
+            coin1Amount = NSDecimalNumber.init(string: mKavaSwapPool.coins[1].amount)
         } else {
-            coin0Amount = NSDecimalNumber.init(string: mPool.coins[1].amount)
-            coin1Amount = NSDecimalNumber.init(string: mPool.coins[0].amount)
+            coin0Amount = NSDecimalNumber.init(string: mKavaSwapPool.coins[1].amount)
+            coin1Amount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)
         }
         
-        available0MaxAmount = BaseData.instance.availableAmount(coin0Denom)
+        available0MaxAmount = BaseData.instance.getAvailableAmount_gRPC(coin0Denom)
         if (coin0Denom == KAVA_MAIN_DENOM) {
             available0MaxAmount = available0MaxAmount.subtracting(txFeeAmount)
         }
-        available1MaxAmount = BaseData.instance.availableAmount(coin1Denom)
+        available1MaxAmount = BaseData.instance.getAvailableAmount_gRPC(coin1Denom)
         if (coin1Denom == KAVA_MAIN_DENOM) {
             available1MaxAmount = available1MaxAmount.subtracting(txFeeAmount)
         }
@@ -312,25 +314,21 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         return true
     }
     
-    
-    func onFetchSwapPool(_ poolId: String) {
-        let request = Alamofire.request(BaseNetWork.swapPoolUrl(chainType), method: .get, parameters: ["pool":poolId], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("onFetchSwapPool ", res)
-                guard let responseData = res as? NSDictionary,
-                      let responseResult = responseData.object(forKey: "result") as? NSDictionary,
-                      let _ = responseData.object(forKey: "height") as? String  else {
-                    self.pageHolderVC.onBeforePage()
-                    return
+    func onFetchgRPCSwapPool(_ poolId: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Swap_V1beta1_QueryPoolsRequest.with { $0.poolID = poolId }
+                if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mKavaSwapPool = response.pools[0]
+//                    print("self.mKavaSwapPools ", self.mKavaSwapPools.count)
                 }
-                self.mPool = SwapPool.init(responseResult)
-                self.onInitView()
+                try channel.close().wait()
                 
-            case .failure(let error):
-                print("onFetchSwapPool ", error)
+            } catch {
+                print("onFetchgRPCSwapPoolList failed: \(error)")
             }
+            DispatchQueue.main.async(execute: { self.onInitView() });
         }
     }
 }
