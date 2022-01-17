@@ -163,7 +163,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mBnbTokenList.removeAll()
         BaseData.instance.mBnbTokenTicker.removeAll()
         
-        BaseData.instance.mKavaPriceMarkets.removeAll()
+//        BaseData.instance.mKavaPriceMarkets.removeAll()
         BaseData.instance.mIncentiveParam = nil
         
         BaseData.instance.mOkStaking = nil

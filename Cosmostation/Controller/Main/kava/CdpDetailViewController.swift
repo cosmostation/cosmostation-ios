@@ -287,7 +287,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
             return false
         }
         
-        if (BaseData.instance.mCdpParam?.circuit_breaker == true) {
+        if (BaseData.instance.mKavaCdpParams_gRPC?.circuitBreaker == true) {
             self.onShowToast(NSLocalizedString("error_circuit_breaker", comment: ""))
             return false
         }

@@ -170,7 +170,6 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
             return false
         }
         
-//        let denomPrice  = WUtils.getKavaPrice(hardPoolDenom)
         let hardParam = BaseData.instance.mKavaHardParams_gRPC
         let denomPrice = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(hardPoolDenom))
         let remainAmount = currentBorrowed.subtracting(userInput.multiplying(byPowerOf10: dpDecimal))

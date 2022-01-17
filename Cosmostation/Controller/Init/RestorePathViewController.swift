@@ -177,14 +177,6 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
                                     }
                                 }
                                 
-                            } else if (self.userChain == ChainType.KAVA_MAIN || self.userChain == ChainType.KAVA_TEST) {
-                                if let responseData = res as? NSDictionary {
-                                    let kavaAccountInfo = KavaAccountInfo.init(responseData)
-                                    if let coin = kavaAccountInfo.result.value.coins.filter({$0.denom == WUtils.getMainDenom(self.userChain)}).first {
-                                        cell?.denomAmount.attributedText = WUtils.displayAmount2(coin.amount , cell!.denomAmount.font!, WUtils.mainDivideDecimal(self.userChain), WUtils.mainDisplayDecimal(self.userChain))
-                                    }
-                                }
-                                
                             } else {
                                 if let responseData = res as? NSDictionary, let info = responseData.object(forKey: "result") as? NSDictionary {
                                     let accountInfo = AccountInfo.init(info)
