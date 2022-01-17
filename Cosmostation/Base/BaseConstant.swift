@@ -408,10 +408,10 @@ let KAVA_MSG_TYPE_WITHDRAW_HARD             = "/kava.hard.v1beta1.MsgWithdraw";
 let KAVA_MSG_TYPE_BORROW_HARD               = "/kava.hard.v1beta1.MsgBorrow";
 let KAVA_MSG_TYPE_REPAY_HARD                = "/kava.hard.v1beta1.MsgRepay";
 let KAVA_MSG_TYPE_LIQUIDATE_HARD            = "/kava.hard.v1beta1.MsgLiquidate";
-let KAVA_MSG_TYPE_SWAP_TOKEN                = "swap/MsgSwapExactForTokens";
-let KAVA_MSG_TYPE_SWAP_TOKEN2               = "swap/MsgSwapForExactTokens";
-let KAVA_MSG_TYPE_SWAP_DEPOSIT              = "swap/MsgDeposit";
-let KAVA_MSG_TYPE_SWAP_WITHDRAW             = "swap/MsgWithdraw";
+let KAVA_MSG_TYPE_SWAP_TOKEN                = "/kava.swap.v1beta1.MsgSwapExactForTokens";
+let KAVA_MSG_TYPE_SWAP_TOKEN2               = "/kava.swap.v1beta1.MsgSwapForExactTokens";
+let KAVA_MSG_TYPE_SWAP_DEPOSIT              = "/kava.swap.v1beta1.MsgDeposit";
+let KAVA_MSG_TYPE_SWAP_WITHDRAW             = "/kava.swap.v1beta1.MsgWithdraw";
 
 
 let CERTIK_MSG_TYPE_TRANSFER                = "bank/MsgSend";

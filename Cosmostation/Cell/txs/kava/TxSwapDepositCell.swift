@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TxSwapDepositCell: UITableViewCell {
+class TxSwapDepositCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var txSenderLabel: UILabel!
@@ -20,6 +20,20 @@ class TxSwapDepositCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+    }
+    
+    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
+        txIcon.tintColor = WUtils.getChainColor(chain)
+        
+        if let msg = try? Kava_Swap_V1beta1_MsgDeposit.init(serializedData: response.tx.body.messages[position].value) {
+            txSenderLabel.text = msg.depositor
+
+            let coin0 = Coin.init(msg.tokenA.denom, msg.tokenA.amount)
+            let coin1 = Coin.init(msg.tokenB.denom, msg.tokenB.amount)
+            WUtils.showCoinDp(coin0, txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain)
+            WUtils.showCoinDp(coin1, txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain)
+        }
     }
     
     func onBind(_ chaintype: ChainType, _ msg: Msg, _ tx: TxInfo) {

@@ -254,13 +254,13 @@ public struct ApiHistoryNewCustom {
                 result = NSLocalizedString("tx_kava_hard_swap_incentive", comment: "")
                 
             } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_TOKEN) || msgType.contains(KAVA_MSG_TYPE_SWAP_TOKEN2)) {
-                result = NSLocalizedString("tx_kava_swap_token", comment: "")
+                return NSLocalizedString("tx_kava_swap_token", comment: "")
                 
             } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_DEPOSIT)) {
-                result = NSLocalizedString("tx_kava_swap_deposit", comment: "")
+                return NSLocalizedString("tx_kava_swap_deposit", comment: "")
                 
             } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_WITHDRAW)) {
-                result = NSLocalizedString("tx_kava_swap_withdraw", comment: "")
+                return NSLocalizedString("tx_kava_swap_withdraw", comment: "")
             }
             
             // osmosis msg type

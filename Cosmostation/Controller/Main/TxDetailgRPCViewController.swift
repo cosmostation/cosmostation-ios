@@ -104,6 +104,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxHardBorrowCell", bundle: nil), forCellReuseIdentifier: "TxHardBorrowCell")
         self.txTableView.register(UINib(nibName: "TxHardRepayCell", bundle: nil), forCellReuseIdentifier: "TxHardRepayCell")
         self.txTableView.register(UINib(nibName: "TxHardLiquidateCell", bundle: nil), forCellReuseIdentifier: "TxHardLiquidateCell")
+        self.txTableView.register(UINib(nibName: "TxSwapDepositCell", bundle: nil), forCellReuseIdentifier: "TxSwapDepositCell")
+        self.txTableView.register(UINib(nibName: "TxSwapWithdrawCell", bundle: nil), forCellReuseIdentifier: "TxSwapWithdrawCell")
+        self.txTableView.register(UINib(nibName: "TxSwapTokenCell", bundle: nil), forCellReuseIdentifier: "TxSwapTokenCell")
         
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
@@ -435,6 +438,20 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
+            } else if (msg.typeURL.contains(Kava_Swap_V1beta1_MsgDeposit.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapDepositCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Swap_V1beta1_MsgWithdraw.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapWithdrawCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Swap_V1beta1_MsgSwapExactForTokens.protoMessageName) || msg.typeURL.contains(Kava_Swap_V1beta1_MsgSwapExactForTokensResponse.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapTokenCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
             }
             
             
