@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TxHardLiquidateCell: UITableViewCell {
+class TxHardLiquidateCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var keeper: UILabel!
@@ -17,6 +17,16 @@ class TxHardLiquidateCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+    }
+    
+    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
+        txIcon.tintColor = WUtils.getChainColor(chain)
+        
+        if let msg = try? Kava_Hard_V1beta1_MsgLiquidate.init(serializedData: response.tx.body.messages[position].value) {
+            keeper.text = msg.keeper
+            owener.text = msg.borrower
+        }
     }
     
     func onBind(_ chaintype: ChainType, _ msg: Msg) {

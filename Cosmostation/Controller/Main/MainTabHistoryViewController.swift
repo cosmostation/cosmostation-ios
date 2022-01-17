@@ -142,9 +142,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             onFetchBnbHistory(account!.account_address)
         } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
             onFetchOkHistory(account!.account_address)
-        } else if (chainType == ChainType.MEDI_TEST) {
-            self.comingLabel.text = "Support Soon"
-            self.comingLabel.isHidden = false
         } else {
             onFetchNewApiHistoryCustom(account!.account_address)
         }
