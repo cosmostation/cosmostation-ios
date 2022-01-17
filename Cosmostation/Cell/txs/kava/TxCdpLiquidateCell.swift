@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TxCdpLiquidateCell: UITableViewCell {
+class TxCdpLiquidateCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var keeper: UILabel!
@@ -26,6 +26,17 @@ class TxCdpLiquidateCell: UITableViewCell {
         keeper.text = msg.value.keeper
         owener.text = msg.value.borrower
         type.text = msg.value.collateral_type?.uppercased()
+    }
+    
+    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
+        txIcon.tintColor = WUtils.getChainColor(chain)
+        
+        if let msg = try? Kava_Cdp_V1beta1_MsgLiquidate.init(serializedData: response.tx.body.messages[position].value) {
+            keeper.text = msg.keeper
+            owener.text = msg.borrower
+            type.text = msg.collateralType
+        }
     }
     
 }

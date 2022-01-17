@@ -197,25 +197,25 @@ public struct ApiHistoryNewCustom {
             
             // kava msg type
             else if (msgType.contains(KAVA_MSG_TYPE_POST_PRICE)) {
-                result = NSLocalizedString("tx_kava_post_price", comment: "")
+                return NSLocalizedString("tx_kava_post_price", comment: "")
                 
             } else if (msgType.contains(KAVA_MSG_TYPE_CREATE_CDP)) {
-                result = NSLocalizedString("tx_kava_create_cdp", comment: "")
+                return NSLocalizedString("tx_kava_create_cdp", comment: "")
 
             } else if (msgType.contains(KAVA_MSG_TYPE_DEPOSIT_CDP)) {
-                result = NSLocalizedString("tx_kava_deposit_cdp", comment: "")
+                return NSLocalizedString("tx_kava_deposit_cdp", comment: "")
 
             } else if (msgType.contains(KAVA_MSG_TYPE_WITHDRAW_CDP)) {
-                result = NSLocalizedString("tx_kava_withdraw_cdp", comment: "")
+                return NSLocalizedString("tx_kava_withdraw_cdp", comment: "")
 
             } else if (msgType.contains(KAVA_MSG_TYPE_DRAWDEBT_CDP)) {
-                result = NSLocalizedString("tx_kava_drawdebt_cdp", comment: "")
+                return NSLocalizedString("tx_kava_drawdebt_cdp", comment: "")
 
             } else if (msgType.contains(KAVA_MSG_TYPE_REPAYDEBT_CDP)) {
-                result = NSLocalizedString("tx_kava_repaydebt_cdp", comment: "")
+                return NSLocalizedString("tx_kava_repaydebt_cdp", comment: "")
 
             } else if (msgType.contains(KAVA_MSG_TYPE_LIQUIDATE_CDP)) {
-                result = NSLocalizedString("tx_kava_liquidate_cdp", comment: "")
+                return NSLocalizedString("tx_kava_liquidate_cdp", comment: "")
 
             } else if (msgType.contains(KAVA_MSG_TYPE_CREATE_SWAP)) {
                 result = NSLocalizedString("tx_kava_bep3_create", comment: "")

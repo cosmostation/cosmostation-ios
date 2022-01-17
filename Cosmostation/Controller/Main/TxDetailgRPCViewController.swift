@@ -91,6 +91,15 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxSaveProfileCell", bundle: nil), forCellReuseIdentifier: "TxSaveProfileCell")
         self.txTableView.register(UINib(nibName: "TxLinkAccountCell", bundle: nil), forCellReuseIdentifier: "TxLinkAccountCell")
         
+        //for Kava msg type
+        self.txTableView.register(UINib(nibName: "TxCdpCreateCell", bundle: nil), forCellReuseIdentifier: "TxCdpCreateCell")
+        self.txTableView.register(UINib(nibName: "TxCdpDepositCell", bundle: nil), forCellReuseIdentifier: "TxCdpDepositCell")
+        self.txTableView.register(UINib(nibName: "TxCdpWithdrawCell", bundle: nil), forCellReuseIdentifier: "TxCdpWithdrawCell")
+        self.txTableView.register(UINib(nibName: "TxCdpBorrowCell", bundle: nil), forCellReuseIdentifier: "TxCdpBorrowCell")
+        self.txTableView.register(UINib(nibName: "TxCdpRepayCell", bundle: nil), forCellReuseIdentifier: "TxCdpRepayCell")
+        self.txTableView.register(UINib(nibName: "TxCdpRepayCell", bundle: nil), forCellReuseIdentifier: "TxCdpRepayCell")
+        self.txTableView.register(UINib(nibName: "TxCdpLiquidateCell", bundle: nil), forCellReuseIdentifier: "TxCdpLiquidateCell")
+        
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
         
@@ -365,6 +374,41 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 return cell!
                 
             }
+            
+            else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgCreateCDP.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpCreateCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgDeposit.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpDepositCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgWithdraw.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpWithdrawCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgDrawDebt.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpBorrowCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgRepayDebt.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpRepayCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgLiquidate.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpLiquidateCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            }
+            
+            
+            
             
             return onBindUnknown(tableView)
         }
