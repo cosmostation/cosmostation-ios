@@ -319,6 +319,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
             
         } else if (indexPath.section == SECTION_ETC_GRPC) {
+            return
             
         } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
             return

@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NativeTokenGrpcViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="btnBepSend" destination="wcx-0h-QWi" id="m5b-f2-ztJ"/>
                 <outlet property="btnIbcSend" destination="TJl-Du-PKf" id="Cp9-mx-lFR"/>
                 <outlet property="btnSend" destination="6bu-eH-m8K" id="Of2-IT-POC"/>
                 <outlet property="naviPerPrice" destination="z6t-Ue-hoQ" id="0Y9-8a-fEP"/>
@@ -171,8 +172,31 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Z9m-9A-GIt">
                     <rect key="frame" x="16" y="801" width="382" height="45"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJl-Du-PKf">
-                            <rect key="frame" x="0.0" y="0.0" width="188" height="45"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcx-0h-QWi">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="gRC-E3-eLI"/>
+                            </constraints>
+                            <state key="normal" title="  BEP3 Send" image="icBepsend20">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickBepSend:" destination="-1" eventType="touchUpInside" id="7ga-Ji-1o0"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJl-Du-PKf">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="TP2-zA-LtR"/>
                             </constraints>
@@ -195,7 +219,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bu-eH-m8K">
-                            <rect key="frame" x="194" y="0.0" width="188" height="45"/>
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="R4R-OK-Qb0"/>
                             </constraints>
@@ -250,6 +274,7 @@
     </objects>
     <resources>
         <image name="bg_cosmos" width="360" height="740"/>
+        <image name="icBepsend20" width="20" height="20"/>
         <image name="icIbcsend20" width="20" height="20"/>
         <image name="icSend20" width="20" height="20"/>
         <image name="iconIosBack" width="24" height="24"/>
