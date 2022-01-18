@@ -32,8 +32,6 @@ class TransactionViewController: UIViewController {
     var mCDenom: String?
     var mMarketID: String?
     var mHardMoneyMarketDenom: String?
-    
-    //for grpc
     var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse?
     var mKavaSwapPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
     
