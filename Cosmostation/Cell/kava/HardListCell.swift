@@ -43,8 +43,8 @@ class HardListCell: UITableViewCell {
         var supplyApy = NSDecimalNumber.zero
         var borrowApy = NSDecimalNumber.zero
         if let interestRate = interestRates?.filter({ $0.denom == hardMoneyMarket.denom}).first {
-            supplyApy = NSDecimalNumber.init(string: interestRate.supplyInterestRate).multiplying(byPowerOf10: -18)
-            borrowApy = NSDecimalNumber.init(string: interestRate.borrowInterestRate).multiplying(byPowerOf10: -18)
+            supplyApy = interestRate.getSupplyInterestRate()
+            borrowApy = interestRate.getBorrowInterestRate()
         }
         supplyAPILabel.attributedText = WUtils.displayPercent(supplyApy.multiplying(byPowerOf10: 2), supplyAPILabel.font)
         borrowAPILabel.attributedText = WUtils.displayPercent(borrowApy.multiplying(byPowerOf10: 2), borrowAPILabel.font)

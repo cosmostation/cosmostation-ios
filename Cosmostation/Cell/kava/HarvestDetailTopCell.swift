@@ -33,7 +33,6 @@ class HarvestDetailTopCell: UITableViewCell {
                              _ totalDeposit: Array<Coin>?, _ totalBorrow: Array<Coin>?, _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) {
         if (hardParam == nil) { return }
         harvestImg.af_setImage(withURL: URL(string: KAVA_HARD_POOL_IMG_URL + "lp" + hardMoneyMarketDenom + ".png")!)
-//        harvestTitle.text = hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":", with: " : ").uppercased()
         harvestTitle.text = hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID.replacingOccurrences(of: ":30", with: "").uppercased()
 
         var supplyApy = NSDecimalNumber.zero

@@ -605,10 +605,10 @@ extension Kava_Hard_V1beta1_Params {
 
 extension Kava_Hard_V1beta1_MoneyMarketInterestRate {
     public func getSupplyInterestRate() -> NSDecimalNumber {
-        return NSDecimalNumber.init(string: supplyInterestRate).multiplying(byPowerOf10: -18)
+        return NSDecimalNumber.init(string: supplyInterestRate)
     }
     public func getBorrowInterestRate() -> NSDecimalNumber {
-        return NSDecimalNumber.init(string: borrowInterestRate).multiplying(byPowerOf10: -18)
+        return NSDecimalNumber.init(string: borrowInterestRate)
     }
 }
 
