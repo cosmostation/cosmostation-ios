@@ -19,7 +19,6 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
-    var mProposals = Array<Proposal>()
     var mProposals_gRPC = Array<Cosmos_Gov_V1beta1_Proposal>()
     var mProposals_Certik_gRPC = Array<Shentu_Gov_V1alpha1_Proposal>()
     var mainTabVC: MainTabViewController!
@@ -42,17 +41,17 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.refresher.tintColor = UIColor.white
         self.voteTableView.addSubview(refresher)
         
-        
         self.loadingImg.onStartAnimation()
-        if (chainType == ChainType.CERTIK_MAIN) {
-            self.onFetchCertikProposals_gRPC()
-        } else if (WUtils.isGRPC(chainType!)) {
-            self.onFetchProposals_gRPC()
-        } else {
-            self.onFetchProposals()
-        }
+        self.onFetchProposals()
     }
     
+    @objc func onFetchProposals() {
+        if (chainType == ChainType.CERTIK_MAIN) {
+            self.onFetchCertikProposals_gRPC()
+        } else {
+            self.onFetchProposals_gRPC()
+        }
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -63,7 +62,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onUpdateViews() {
-        if(mProposals.count > 0 || mProposals_gRPC.count > 0 || mProposals_Certik_gRPC.count > 0) {
+        if(mProposals_gRPC.count > 0 || mProposals_Certik_gRPC.count > 0) {
             self.emptyLabel.isHidden = true
             self.voteTableView.reloadData()
         } else {
@@ -79,42 +78,17 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (chainType == ChainType.CERTIK_MAIN) {
             return self.mProposals_Certik_gRPC.count
-        } else if (WUtils.isGRPC(chainType!)) {
+        } else {
             return self.mProposals_gRPC.count
-         } else {
-            return self.mProposals.count
-         }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (chainType == ChainType.CERTIK_MAIN) {
             return onBindCertikProposal_gRPC(tableView, indexPath)
-        } else if (WUtils.isGRPC(chainType!)) {
+        } else {
             return onBindProposal_gRPC(tableView, indexPath)
-        } else {
-            return onBindProposal(tableView, indexPath)
         }
-    }
-    
-    func onBindProposal(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell  {
-        let cell:ProposalCell? = tableView.dequeueReusableCell(withIdentifier:"ProposalCell") as? ProposalCell
-        let proposal = mProposals[indexPath.row]
-        cell?.proposalIdLabel.text = "# ".appending(proposal.id)
-        cell?.proposalTitleLabel.text = proposal.content?.value.title
-        cell?.proposalMsgLabel.text = proposal.content?.value.description
-        cell?.proposalStateLabel.text = proposal.proposal_status
-        if (proposal.proposal_status == "DepositPeriod") {
-            cell?.proposalStateImg.image = UIImage.init(named: "depositImg")
-        } else if (proposal.proposal_status == "VotingPeriod") {
-            cell?.proposalStateImg.image = UIImage.init(named: "votingImg")
-        } else if (proposal.proposal_status == "Rejected") {
-            cell?.proposalStateImg.image = UIImage.init(named: "rejectedImg")
-        } else if (proposal.proposal_status == "Passed") {
-            cell?.proposalStateImg.image = UIImage.init(named: "passedImg")
-        } else {
-            cell?.proposalStateImg.image = nil
-        }
-        return cell!
     }
     
     func onBindProposal_gRPC(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell  {
@@ -155,24 +129,13 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 onExplorerLink(String(proposal.proposalID))
             }
             
-        } else if (WUtils.isGRPC(chainType!)) {
+        } else {
             let proposal = mProposals_gRPC[indexPath.row]
-            if (proposal.status  == Cosmos_Gov_V1beta1_ProposalStatus.passed || proposal.status  == Cosmos_Gov_V1beta1_ProposalStatus.rejected) {
+            if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.passed || proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.rejected) {
                 onExplorerLink(String(proposal.proposalID))
             } else {
                 let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController
                 voteDetailsVC.proposalId = String(proposal.proposalID)
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(voteDetailsVC, animated: true)
-            }
-            
-        } else {
-            let proposal = mProposals[indexPath.row]
-            if (proposal.proposal_status == "Rejected" || proposal.proposal_status == "Passed") {
-                onExplorerLink(proposal.id)
-            } else {
-                let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController
-                voteDetailsVC.proposalId = proposal.id
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(voteDetailsVC, animated: true)
             }
@@ -183,27 +146,6 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         let link = WUtils.getProposalExplorer(self.chainType!, proposalId)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
-    }
-    
-    @objc func onFetchProposals() {
-        let request = Alamofire.request(BaseNetWork.proposalsUrl(chainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let proposals = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                        self.onUpdateViews()
-                        return
-                }
-                self.mProposals.removeAll()
-                for proposal in proposals {
-                    self.mProposals.append(Proposal(proposal as! [String : Any]))
-                }
-            case .failure(let error):
-                print("onFetchProposals ", error)
-            }
-            self.onUpdateViews()
-        }
     }
     
     @objc func onFetchProposals_gRPC() {
@@ -257,14 +199,9 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
                 return $0.proposalID < $1.proposalID ? false : true
             }
             
-        } else  if (WUtils.isGRPC(chainType!)) {
+        } else {
             self.mProposals_gRPC.sort{
                 return $0.proposalID < $1.proposalID ? false : true
-            }
-            
-        } else {
-            self.mProposals.sort{
-                return Int($0.id)! < Int($1.id)! ? false : true
             }
         }
     }

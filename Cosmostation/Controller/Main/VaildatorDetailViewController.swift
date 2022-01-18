@@ -18,17 +18,9 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     @IBOutlet weak var validatorDetailTableView: UITableView!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
-//    var mValidator: Validator?
-//    var mBonding: BondingInfo?
-//    var mUnbonding: UnbondingInfo?
-//    var mRewardCoins = Array<Coin>()
-//    var mApiHistories = Array<ApiHistory.HistoryData>()
-//    var mSelfBondingShare: String?
-    
+    //grpc
     var mFetchCnt = 0
     var mMyValidator = false
-    
-    //grpc
     var mValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mSelfDelegationInfo_gRPC: Cosmos_Staking_V1beta1_DelegationResponse?
     var mApiCustomHistories = Array<ApiHistoryCustom>()
@@ -64,7 +56,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         
         self.loadingImg.onStartAnimation()
         self.onFetch()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +65,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         self.navigationItem.title = NSLocalizedString("title_validator_detail", comment: "")
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        
     }
     
     @objc func onFetch() {
