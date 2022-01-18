@@ -42,6 +42,11 @@ class ClaimRewardAllCell: UITableViewCell {
         delegate?.didTapClaimAll(sender)
     }
     
+    func updateView(_ chainType: ChainType?) {
+        WUtils.setDenomTitle(chainType!, denomLabel)
+        totalRewardLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(WUtils.getMainDenom(chainType)), totalRewardLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+    }
+    
 }
 protocol ClaimRewardAllDelegate: class {
     func didTapClaimAll(_ sender: UIButton)

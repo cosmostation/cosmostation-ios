@@ -32,12 +32,7 @@ class ReInvestAmountViewController: BaseViewController {
         WUtils.setDenomTitle(pageHolderVC.chainType!, rewardDenomLabel)
         
         self.loadingImg.onStartAnimation()
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            self.onFetchRewards_gRPC(pageHolderVC.mAccount!.account_address)
-            
-        } else {
-            self.onFetchReward(pageHolderVC.mAccount!.account_address, pageHolderVC.mTargetValidator!.operator_address)
-        }
+        self.onFetchRewards_gRPC(pageHolderVC.mAccount!.account_address)
     }
     
     @IBAction func onClickCancel(_ sender: Any) {
@@ -60,54 +55,16 @@ class ReInvestAmountViewController: BaseViewController {
     func updateView() {
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            let cReward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(pageHolderVC.chainType), pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
-            rewardAmountLabel.attributedText = WUtils.displayAmount2(cReward.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
-            validatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
-            
-            let coin = Coin(WUtils.getMainDenom(pageHolderVC.chainType), cReward.rounding(accordingToBehavior: WUtils.handler0Down).stringValue)
-            self.pageHolderVC.mReinvestReward = coin
-            
-            self.loadingImg.isHidden = true
-            self.controlLayer.isHidden = false
-            self.cardView.isHidden = false
-            
-        } else if (self.pageHolderVC.mReinvestReward != nil) {
-            rewardAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mReinvestReward!.amount, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
-            validatorLabel.text = pageHolderVC.mTargetValidator?.description.moniker
-            self.loadingImg.isHidden = true
-            self.controlLayer.isHidden = false
-            self.cardView.isHidden = false
-            
-        } else {
-            pageHolderVC.onBeforePage()
-            
-        }
-    }
-
-    func onFetchReward(_ address: String, _ opAddress: String) {
-        let request = Alamofire.request(BaseNetWork.rewardUrl(pageHolderVC.chainType, address, opAddress), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let rawRewards = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                    self.updateView()
-                    return;
-                }
-                for rawReward in rawRewards {
-                    if let mainReward = rawReward.object(forKey: "denom") as? String, mainReward == WUtils.getMainDenom(self.pageHolderVC.chainType!) {
-                        var coin = Coin(rawReward as! [String : Any])
-                        coin.amount = NSDecimalNumber.init(string: coin.amount).rounding(accordingToBehavior: WUtils.handler0Down).stringValue
-                        self.pageHolderVC.mReinvestReward = coin
-                    }
-                }
-                
-            case .failure(let error):
-                print("onFetchEachReward ", error)
-            }
-            self.updateView()
-        }
+        let cReward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(pageHolderVC.chainType), pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
+        rewardAmountLabel.attributedText = WUtils.displayAmount2(cReward.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
+        validatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
+        
+        let coin = Coin(WUtils.getMainDenom(pageHolderVC.chainType), cReward.rounding(accordingToBehavior: WUtils.handler0Down).stringValue)
+        self.pageHolderVC.mReinvestReward = coin
+        
+        self.loadingImg.isHidden = true
+        self.controlLayer.isHidden = false
+        self.cardView.isHidden = false
     }
     
     func onFetchRewards_gRPC(_ address: String) {

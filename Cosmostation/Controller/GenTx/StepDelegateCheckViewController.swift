@@ -65,16 +65,9 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
     
     func onUpdateView() {
         mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        if (WUtils.isGRPC(chainType)) {
-            toDelegateAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mToDelegateAmount?.amount, toDelegateAmountLabel.font, mDpDecimal, mDpDecimal)
-            feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
-            targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
-            
-        } else {
-            toDelegateAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mToDelegateAmount?.amount)!, toDelegateAmountLabel.font, mDpDecimal, mDpDecimal)
-            feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, mDpDecimal, mDpDecimal)
-            targetValidatorLabel.text = pageHolderVC.mTargetValidator?.description.moniker
-        }
+        toDelegateAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mToDelegateAmount?.amount, toDelegateAmountLabel.font, mDpDecimal, mDpDecimal)
+        feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
+        targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
     }
     

@@ -60,18 +60,9 @@ class StepUndelegateCheckViewController: BaseViewController, PasswordViewDelegat
     
     func onUpdateView() {
         mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        
-        if (WUtils.isGRPC(chainType)) {
-            toUnDelegateAmoutLaebl.attributedText = WUtils.displayAmount2(pageHolderVC.mToUndelegateAmount?.amount, toUnDelegateAmoutLaebl.font, mDpDecimal, mDpDecimal)
-            feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
-            targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
-            
-        } else {
-            toUnDelegateAmoutLaebl.attributedText = WUtils.displayAmount2((pageHolderVC.mToUndelegateAmount?.amount)!, toUnDelegateAmoutLaebl.font, mDpDecimal, mDpDecimal)
-            feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, mDpDecimal, mDpDecimal)
-            targetValidatorLabel.text = pageHolderVC.mTargetValidator?.description.moniker
-            
-        }
+        toUnDelegateAmoutLaebl.attributedText = WUtils.displayAmount2(pageHolderVC.mToUndelegateAmount?.amount, toUnDelegateAmoutLaebl.font, mDpDecimal, mDpDecimal)
+        feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
+        targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
         if (chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.CRYPTO_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.CHIHUAHUA_MAIN) {
             expectedDateLabel.text = WUtils.unbondingDateFromNow(28) + " (28days after)"

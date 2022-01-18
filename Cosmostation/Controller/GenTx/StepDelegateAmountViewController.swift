@@ -29,11 +29,7 @@ class StepDelegateAmountViewController: BaseViewController, UITextFieldDelegate{
         
         let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
         let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, COSMOS_MSG_TYPE_DELEGATE, 0)
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            userBalance = BaseData.instance.getDelegatable_gRPC(mainDenom).subtracting(feeAmount)
-        } else {
-            userBalance = BaseData.instance.delegatableAmount(mainDenom).subtracting(feeAmount)
-        }
+        userBalance = BaseData.instance.getDelegatable_gRPC(mainDenom).subtracting(feeAmount)
         availableAmountLabel.attributedText = WUtils.displayAmount2(userBalance.stringValue, availableAmountLabel.font, mDpDecimal, mDpDecimal)
         toDelegateAmountInput.delegate = self
         toDelegateAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

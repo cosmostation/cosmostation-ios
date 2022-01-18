@@ -19,7 +19,6 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
     
     var pageHolderVC: StepGenTxViewController!
     
-    var checkedValidator: Validator?
     var checkedValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var checkedPosition:IndexPath?
     var mDpDecimal:Int16 = 6
@@ -36,77 +35,39 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            return self.pageHolderVC.mToReDelegateValidators_gRPC.count
-        } else {
-            return self.pageHolderVC.mToReDelegateValidators.count
-        }
+        return self.pageHolderVC.mToReDelegateValidators_gRPC.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:RedelegateCell? = tableView.dequeueReusableCell(withIdentifier:"RedelegateCell") as? RedelegateCell
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            if let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row] as? Cosmos_Staking_V1beta1_Validator {
-                cell?.valMonikerLabel.text = validator.description_p.moniker
-                cell?.valMonikerLabel.adjustsFontSizeToFitWidth = true
-                if (validator.jailed == true) {
-                    cell?.valjailedImg.isHidden = false
-                    cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
-                } else {
-                    cell?.valjailedImg.isHidden = true
-                    cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
-                }
-                
-                cell?.valPowerLabel.attributedText = WUtils.displayAmount2(validator.tokens, cell!.valPowerLabel.font, mDpDecimal, mDpDecimal)
-                cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), pageHolderVC.chainType!)
-                cell!.valImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(pageHolderVC.chainType!, validator.operatorAddress))!)
-                cell?.rootCard.needBorderUpdate = false
-                if (validator.operatorAddress == checkedValidator_gRPC?.operatorAddress) {
-                    cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-                    cell?.valCheckedImg.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
-                    cell?.rootCard.backgroundColor = UIColor.clear
-                    cell?.rootCard.layer.borderWidth = 1
-                    cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
-                    cell?.rootCard.clipsToBounds = true
-                } else {
-                    cell?.valCheckedImg.image = UIImage.init(named: "checkOff")
-                    cell?.rootCard.backgroundColor = UIColor.init(hexString: "2E2E2E", alpha: 0.4)
-                    cell?.rootCard.layer.borderWidth = 0
-                    cell?.rootCard.clipsToBounds = true
-                }
+        if let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row] as? Cosmos_Staking_V1beta1_Validator {
+            cell?.valMonikerLabel.text = validator.description_p.moniker
+            cell?.valMonikerLabel.adjustsFontSizeToFitWidth = true
+            if (validator.jailed == true) {
+                cell?.valjailedImg.isHidden = false
+                cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
+            } else {
+                cell?.valjailedImg.isHidden = true
+                cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
             }
             
-        } else {
-            if let validator = self.pageHolderVC.mToReDelegateValidators[indexPath.row] as? Validator {
-                cell?.valMonikerLabel.text = validator.description.moniker
-                if(validator.jailed) {
-                    cell?.valjailedImg.isHidden = false
-                    cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
-                } else {
-                    cell?.valjailedImg.isHidden = true
-                    cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
-                }
-                cell?.valPowerLabel.attributedText  =  WUtils.displayAmount2(validator.tokens, cell!.valPowerLabel.font, mDpDecimal, mDpDecimal)
-                cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, validator.getCommission(), pageHolderVC.chainType!)
-                cell?.valImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(pageHolderVC.chainType!, validator.operator_address))!)
-            
-                cell?.rootCard.needBorderUpdate = false
-                if (validator.operator_address == checkedValidator?.operator_address) {
-                    cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-                    cell?.valCheckedImg.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
-                    cell?.rootCard.backgroundColor = UIColor.clear
-                    cell?.rootCard.layer.borderWidth = 1
-                    cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
-                    cell?.rootCard.clipsToBounds = true
-                    
-                } else {
-                    cell?.valCheckedImg.image = UIImage.init(named: "checkOff")
-                    cell?.rootCard.backgroundColor = UIColor.init(hexString: "2E2E2E", alpha: 0.4)
-                    cell?.rootCard.layer.borderWidth = 0
-                    cell?.rootCard.clipsToBounds = true
-                }
+            cell?.valPowerLabel.attributedText = WUtils.displayAmount2(validator.tokens, cell!.valPowerLabel.font, mDpDecimal, mDpDecimal)
+            cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), pageHolderVC.chainType!)
+            cell!.valImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(pageHolderVC.chainType!, validator.operatorAddress))!)
+            cell?.rootCard.needBorderUpdate = false
+            if (validator.operatorAddress == checkedValidator_gRPC?.operatorAddress) {
+                cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
+                cell?.valCheckedImg.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
+                cell?.rootCard.backgroundColor = UIColor.clear
+                cell?.rootCard.layer.borderWidth = 1
+                cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
+                cell?.rootCard.clipsToBounds = true
+            } else {
+                cell?.valCheckedImg.image = UIImage.init(named: "checkOff")
+                cell?.rootCard.backgroundColor = UIColor.init(hexString: "2E2E2E", alpha: 0.4)
+                cell?.rootCard.layer.borderWidth = 0
+                cell?.rootCard.clipsToBounds = true
             }
-            
         }
         return cell!
     }
@@ -116,36 +77,19 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            if let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row] as? Cosmos_Staking_V1beta1_Validator {
-                self.checkedValidator_gRPC = validator
-                self.checkedPosition = indexPath
-                
-                let cell:RedelegateCell? = tableView.cellForRow(at: indexPath) as? RedelegateCell
-                cell?.rootCard.needBorderUpdate = false
-                cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-                cell?.valCheckedImg.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
-                
-                cell?.rootCard.backgroundColor = UIColor.clear
-                cell?.rootCard.layer.borderWidth = 1
-                cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
-                cell?.rootCard.clipsToBounds = true
-            }
+        if let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row] as? Cosmos_Staking_V1beta1_Validator {
+            self.checkedValidator_gRPC = validator
+            self.checkedPosition = indexPath
             
-        } else {
-            if let validator = self.pageHolderVC.mToReDelegateValidators[indexPath.row] as? Validator {
-                self.checkedValidator = validator
-                self.checkedPosition = indexPath
-                let cell:RedelegateCell? = tableView.cellForRow(at: indexPath) as? RedelegateCell
-                cell?.rootCard.needBorderUpdate = false
-                cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-                cell?.valCheckedImg.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
-                
-                cell?.rootCard.backgroundColor = UIColor.clear
-                cell?.rootCard.layer.borderWidth = 1
-                cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
-                cell?.rootCard.clipsToBounds = true
-            }
+            let cell:RedelegateCell? = tableView.cellForRow(at: indexPath) as? RedelegateCell
+            cell?.rootCard.needBorderUpdate = false
+            cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
+            cell?.valCheckedImg.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
+            
+            cell?.rootCard.backgroundColor = UIColor.clear
+            cell?.rootCard.layer.borderWidth = 1
+            cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
+            cell?.rootCard.clipsToBounds = true
         }
     }
     
@@ -163,7 +107,6 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
         if (self.checkedPosition != nil) {
             self.redelegateToValTableView.selectRow(at: checkedPosition, animated: false, scrollPosition: .middle)
         }
-        self.checkedValidator = pageHolderVC.mToReDelegateValidator
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {
@@ -173,63 +116,18 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            if (self.checkedValidator_gRPC == nil && self.checkedValidator_gRPC?.operatorAddress == nil) {
-                self.onShowToast(NSLocalizedString("error_redelegate_no_to_address", comment: ""))
-                return;
-            }
-            self.onFetchRedelegation_gRPC(pageHolderVC.mAccount!.account_address, pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.checkedValidator_gRPC!.operatorAddress)
-            
-        } else {
-            if (self.checkedValidator == nil && self.checkedValidator?.operator_address == nil) {
-                self.onShowToast(NSLocalizedString("error_redelegate_no_to_address", comment: ""))
-                return;
-            }
-            self.onFetchRedelegateState(pageHolderVC.mAccount!.account_address, pageHolderVC.mTargetValidator!.operator_address, self.checkedValidator!.operator_address)
-            
+        if (self.checkedValidator_gRPC == nil && self.checkedValidator_gRPC?.operatorAddress == nil) {
+            self.onShowToast(NSLocalizedString("error_redelegate_no_to_address", comment: ""))
+            return;
         }
+        self.onFetchRedelegation_gRPC(pageHolderVC.mAccount!.account_address, pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.checkedValidator_gRPC!.operatorAddress)
     }
     
     func goNextPage() {
         self.btnBefore.isUserInteractionEnabled = false
         self.btnNext.isUserInteractionEnabled = false
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            pageHolderVC.mToReDelegateValidator_gRPC = self.checkedValidator_gRPC
-        } else {
-            pageHolderVC.mToReDelegateValidator = self.checkedValidator
-        }
+        pageHolderVC.mToReDelegateValidator_gRPC = self.checkedValidator_gRPC
         pageHolderVC.onNextPage()
-    }
-    
-    
-    func onFetchRedelegateState(_ address: String, _ from: String, _ to: String) {
-        let request = Alamofire.request(BaseNetWork.redelegationsUrl(pageHolderVC.chainType), method: .get, parameters: ["delegator":address, "validator_from":from, "validator_to":to], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("res ", res)
-                if let clearResult = res as? NSDictionary, let msg = clearResult["error"] as? String {
-                    if(clearResult["error"] != nil && msg.contains("no redelegation found")) {
-                        self.goNextPage()
-                        return
-                    }
-                }
-                if let responseData = res as? NSDictionary,
-                    let redelegateHistories = responseData.object(forKey: "result") as? Array<NSDictionary> {
-                    if (redelegateHistories.count >= 7) {
-                        self.onShowToast(NSLocalizedString("error_redelegate_cnt_over", comment: ""))
-                    } else {
-                        self.goNextPage()
-                    }
-                } else {
-                    self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                }
-                
-            case .failure(let error):
-                print("onFetchRedelegateState ", error)
-                self.onShowToast(NSLocalizedString("error_network", comment: ""))
-            }
-        }
     }
     
     func onFetchRedelegation_gRPC(_ address: String, _ fromValAddress: String, _ toValAddress: String) {

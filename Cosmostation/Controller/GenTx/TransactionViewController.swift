@@ -19,10 +19,9 @@ class TransactionViewController: UIViewController {
     
     var mAccount: Account?
     var mUserChain: ChainType?
-    var mTargetValidator: Validator?
-    var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mType: String?
-    var mRewardTargetValidators = Array<Validator>()
+    
+    var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mRewardTargetValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     
     var mProposeId: String?
@@ -33,8 +32,6 @@ class TransactionViewController: UIViewController {
     var mCDenom: String?
     var mMarketID: String?
     var mHardMoneyMarketDenom: String?
-//    var mKavaPool: SwapPool?
-//    var mKavaDeposit: SwapDeposit?
     
     //for grpc
     var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse?
@@ -363,9 +360,7 @@ class TransactionViewController: UIViewController {
             let StepVc = segue.destination as! StepGenTxViewController
             StepVc.topVC = self
             StepVc.mType = self.mType
-            StepVc.mTargetValidator = self.mTargetValidator
             StepVc.mTargetValidator_gRPC = self.mTargetValidator_gRPC
-            StepVc.mRewardTargetValidators = self.mRewardTargetValidators
             StepVc.mRewardTargetValidators_gRPC = self.mRewardTargetValidators_gRPC
             StepVc.mProposeId = self.mProposeId
             StepVc.mProposalTitle = self.mProposalTitle
@@ -378,8 +373,6 @@ class TransactionViewController: UIViewController {
             StepVc.mHtlcRefundSwapId = self.mHtlcRefundSwapId
             StepVc.mHardMoneyMarketDenom = self.mHardMoneyMarketDenom
             StepVc.mCollateralParamType = self.mCollateralParamType
-//            StepVc.mKavaPool = self.mKavaPool
-//            StepVc.mKavaDeposit = self.mKavaDeposit
             
             //grpc
             StepVc.mKavaSwapPool = self.mKavaSwapPool

@@ -36,7 +36,7 @@ class StepRewardViewController: BaseViewController {
         pageHolderVC = self.parent as? StepGenTxViewController
         WUtils.setDenomTitle(pageHolderVC.chainType!, rewardDenomLabel)
         
-        if (pageHolderVC.mRewardTargetValidators.count == 16) {
+        if (pageHolderVC.mRewardTargetValidators_gRPC.count == 16) {
             self.onShowToast(NSLocalizedString("reward_claim_top_16", comment: ""))
         }
         
@@ -48,19 +48,10 @@ class StepRewardViewController: BaseViewController {
         if(self.mFetchCnt > 0)  {
             return
         }
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            mFetchCnt = 2
-            self.onFetchRewards_gRPC(pageHolderVC.mAccount!.account_address)
-            self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
-            
-        } else {
-            pageHolderVC.mRewards.removeAll()
-            mFetchCnt = 1 + pageHolderVC.mRewardTargetValidators.count;
-            for val in pageHolderVC.mRewardTargetValidators {
-                self.onFetchEachReward(pageHolderVC.mAccount!.account_address, val.operator_address)
-            }
-            self.onFetchRewardAddress(pageHolderVC.mAccount!.account_address)
-        }
+        
+        mFetchCnt = 2
+        self.onFetchRewards_gRPC(pageHolderVC.mAccount!.account_address)
+        self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
     }
     
     func onFetchFinished() {
@@ -72,43 +63,22 @@ class StepRewardViewController: BaseViewController {
     
     func updateView() {
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            var selectedRewardSum = NSDecimalNumber.zero
-            for validator in pageHolderVC.mRewardTargetValidators_gRPC {
-                let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(pageHolderVC.chainType), validator.operatorAddress)
-                selectedRewardSum = selectedRewardSum.adding(amount)
-            }
-            rewardAmountLabel.attributedText = WUtils.displayAmount2(selectedRewardSum.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
-            
-            var monikers = ""
-            for validator in pageHolderVC.mRewardTargetValidators_gRPC {
-                if (monikers.count > 0) {
-                    monikers = monikers + ",   " + validator.description_p.moniker
-                } else {
-                    monikers = validator.description_p.moniker
-                }
-            }
-            rewardFromLabel.text = monikers
-            
-        } else {
-            var selectedRewardSum = NSDecimalNumber.zero
-            pageHolderVC.mRewards.forEach { coin in
-                if (coin.denom == WUtils.getMainDenom(pageHolderVC.chainType!)) {
-                    selectedRewardSum = selectedRewardSum.adding(WUtils.plainStringToDecimal(coin.amount))
-                }
-            }
-            rewardAmountLabel.attributedText = WUtils.displayAmount2(selectedRewardSum.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
-            
-            var monikers = ""
-            for validator in pageHolderVC.mRewardTargetValidators {
-                if (monikers.count > 0) {
-                    monikers = monikers + ",   " + validator.description.moniker
-                } else {
-                    monikers = validator.description.moniker
-                }
-            }
-            rewardFromLabel.text = monikers
+        var selectedRewardSum = NSDecimalNumber.zero
+        for validator in pageHolderVC.mRewardTargetValidators_gRPC {
+            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(pageHolderVC.chainType), validator.operatorAddress)
+            selectedRewardSum = selectedRewardSum.adding(amount)
         }
+        rewardAmountLabel.attributedText = WUtils.displayAmount2(selectedRewardSum.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
+        
+        var monikers = ""
+        for validator in pageHolderVC.mRewardTargetValidators_gRPC {
+            if (monikers.count > 0) {
+                monikers = monikers + ",   " + validator.description_p.moniker
+            } else {
+                monikers = validator.description_p.moniker
+            }
+        }
+        rewardFromLabel.text = monikers
         
         rewardToAddressLabel.text = pageHolderVC.mRewardAddress
         rewardToAddressLabel.adjustsFontSizeToFitWidth = true
@@ -142,49 +112,7 @@ class StepRewardViewController: BaseViewController {
         self.cancelBtn.isUserInteractionEnabled = true
         self.nextBtn.isUserInteractionEnabled = true
     }
-    
-    func onFetchEachReward(_ address: String, _ opAddress: String) {
-        let request = Alamofire.request(BaseNetWork.rewardUrl(pageHolderVC.chainType, address, opAddress), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let rawRewards = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                    self.onFetchFinished()
-                    return;
-                }
-                for rawReward in rawRewards {
-                    self.pageHolderVC.mRewards.append(Coin(rawReward))
-                }
-                
-            case .failure(let error):
-                print("onFetchEachReward ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchRewardAddress(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.rewardAddressUrl(pageHolderVC.chainType, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let address = responseData.object(forKey: "result") as? String else {
-                    self.onFetchFinished()
-                    return;
-                }
-                self.pageHolderVC.mRewardAddress = address.replacingOccurrences(of: "\"", with: "")
-                
-            case .failure(let error):
-                print("onFetchRewardAddress ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    
-    
+
     
     func onFetchRewards_gRPC(_ address: String) {
         DispatchQueue.global().async {

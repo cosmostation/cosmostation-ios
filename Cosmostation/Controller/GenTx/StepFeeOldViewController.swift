@@ -56,8 +56,6 @@ class StepFeeOldViewController: BaseViewController {
             if let voted = BaseData.instance.mOkStaking?.validator_address?.count { currentVotedCnt = voted }
             mEstimateGasAmount = WUtils.getEstimateGasAmount(pageHolderVC.chainType!, pageHolderVC.mType!, currentVotedCnt)
             
-        } else {
-            mEstimateGasAmount = WUtils.getEstimateGasAmount(pageHolderVC.chainType!, pageHolderVC.mType!, pageHolderVC.mRewardTargetValidators.count)
         }
         
         onUpdateView()
@@ -124,12 +122,10 @@ class StepFeeOldViewController: BaseViewController {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        if (onCheckValidate()) {
-            onSetFee()
-            btnBefore.isUserInteractionEnabled = false
-            btnNext.isUserInteractionEnabled = false
-            pageHolderVC.onNextPage()
-        }
+        onSetFee()
+        btnBefore.isUserInteractionEnabled = false
+        btnNext.isUserInteractionEnabled = false
+        pageHolderVC.onNextPage()
     }
     
     func onSetFee() {
@@ -154,86 +150,5 @@ class StepFeeOldViewController: BaseViewController {
             pageHolderVC.mFee = fee
         }
         
-    }
-    
-    func onCheckValidate() -> Bool {
-        if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.BAND_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
-            let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
-            if (pageHolderVC.mType == COSMOS_MSG_TYPE_TRANSFER2) {
-                if (pageHolderVC.mToSendDenom == mainDenom) {
-                    let spend = NSDecimalNumber.init(string: pageHolderVC.mToSendAmount[0].amount).adding(mFee)
-                    let available = BaseData.instance.availableAmount(mainDenom)
-                    if (available.compare(spend).rawValue < 0) {
-                        self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                        return false
-                    }
-                }
-                
-            } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_DELEGATE) {
-                let spend = NSDecimalNumber.init(string: pageHolderVC.mToDelegateAmount?.amount).adding(mFee)
-                let available = BaseData.instance.delegatableAmount(mainDenom)
-                if (available.compare(spend).rawValue < 0) {
-                    self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                    return false
-                }
-                
-            } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
-                let available = BaseData.instance.availableAmount(mainDenom)
-                var selectedRewardSum = NSDecimalNumber.zero
-                pageHolderVC.mRewards.forEach { coin in
-                    if (coin.denom == mainDenom) {
-                        selectedRewardSum = selectedRewardSum.adding(WUtils.plainStringToDecimal(coin.amount))
-                    }
-                }
-                if (available.compare(mFee).rawValue < 0) {
-                    self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                    return false
-                }
-                if (selectedRewardSum.compare(mFee).rawValue < 0) {
-                    self.onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
-                    return false
-                }
-                
-            } else if (pageHolderVC.mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
-                let available = BaseData.instance.availableAmount(mainDenom)
-                let reInvestReward = NSDecimalNumber.init(string: pageHolderVC.mReinvestReward?.amount)
-                if (available.compare(mFee).rawValue < 0) {
-                    self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                    return false
-                }
-                if (reInvestReward.compare(mFee).rawValue < 0) {
-                    self.onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
-                    return false
-                }
-                
-            } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
-                let available = BaseData.instance.availableAmount(mainDenom)
-                if (pageHolderVC.mSwapInDenom == mainDenom) {
-                    let spend = pageHolderVC.mSwapInAmount!.adding(mFee)
-                    if (available.compare(spend).rawValue < 0) {
-                        self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                        return false
-                    }
-                }
-                
-            } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
-                let available = BaseData.instance.availableAmount(mainDenom)
-                if (pageHolderVC.mPoolCoin0?.denom == mainDenom) {
-                    let spend = NSDecimalNumber.init(string: pageHolderVC.mPoolCoin0?.amount).adding(mFee)
-                    if (available.compare(spend).rawValue < 0) {
-                        self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                        return false
-                    }
-                }
-                if (pageHolderVC.mPoolCoin1?.denom == mainDenom) {
-                    let spend = NSDecimalNumber.init(string: pageHolderVC.mPoolCoin1?.amount).adding(mFee)
-                    if (available.compare(spend).rawValue < 0) {
-                        self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                        return false
-                    }
-                }
-            }
-        }
-        return true
     }
 }

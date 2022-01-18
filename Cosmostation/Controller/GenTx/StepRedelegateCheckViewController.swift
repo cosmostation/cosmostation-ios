@@ -39,19 +39,11 @@ class StepRedelegateCheckViewController: BaseViewController, PasswordViewDelegat
         mDpDecimal = WUtils.mainDivideDecimal(chainType)
         let toRedelegateAmount = WUtils.localeStringToDecimal(pageHolderVC.mToReDelegateAmount!.amount)
         let feeAmout = WUtils.localeStringToDecimal((pageHolderVC.mFee?.amount[0].amount)!)
-        if (WUtils.isGRPC(chainType)) {
-            redelegateAmountLabel.attributedText = WUtils.displayAmount2(toRedelegateAmount.stringValue, redelegateAmountLabel.font, mDpDecimal, mDpDecimal)
-            redelegateFeeLabel.attributedText = WUtils.displayAmount2(feeAmout.stringValue, redelegateFeeLabel.font, mDpDecimal, mDpDecimal)
-            redelegateFromValLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
-            redelegateToValLabel.text = pageHolderVC.mToReDelegateValidator_gRPC?.description_p.moniker
-            
-        } else {
-            redelegateAmountLabel.attributedText = WUtils.displayAmount2(toRedelegateAmount.stringValue, redelegateAmountLabel.font, mDpDecimal, mDpDecimal)
-            redelegateFeeLabel.attributedText = WUtils.displayAmount2(feeAmout.stringValue, redelegateFeeLabel.font, mDpDecimal, mDpDecimal)
-            redelegateFromValLabel.text = pageHolderVC.mTargetValidator?.description.moniker
-            redelegateToValLabel.text = pageHolderVC.mToReDelegateValidator?.description.moniker
-            
-        }
+        
+        redelegateAmountLabel.attributedText = WUtils.displayAmount2(toRedelegateAmount.stringValue, redelegateAmountLabel.font, mDpDecimal, mDpDecimal)
+        redelegateFeeLabel.attributedText = WUtils.displayAmount2(feeAmout.stringValue, redelegateFeeLabel.font, mDpDecimal, mDpDecimal)
+        redelegateFromValLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
+        redelegateToValLabel.text = pageHolderVC.mToReDelegateValidator_gRPC?.description_p.moniker
         redelegateMemoLabel.text = pageHolderVC.mMemo
     }
     
