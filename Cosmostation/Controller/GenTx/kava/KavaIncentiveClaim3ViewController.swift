@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Alamofire
+import GRPC
+import NIO
 
 class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegate {
     
@@ -86,127 +87,60 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            self.onFetchAccountInfo(pageHolderVC.mAccount!)
+            self.onFetchgRPCAuth(account!)
         }
     }
     
-    func onFetchAccountInfo(_ account: Account) {
+    func onFetchgRPCAuth(_ account: Account) {
         self.showWaittingAlert()
-        let request = Alamofire.request(BaseNetWork.accountInfoUrl(chainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let info = res as? [String : Any] else {
-                    _ = BaseData.instance.deleteBalance(account: account)
-                    self.hideWaittingAlert()
-                    self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                    return
-                }
-                let accountInfo = KavaAccountInfo.init(info)
-                _ = BaseData.instance.updateAccount(WUtils.getAccountWithKavaAccountInfo(account, accountInfo))
-                BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithKavaAccountInfo(account, accountInfo))
-                self.onGenClaimIncentiveAllTx()
-                
-            case .failure( _):
-                self.hideWaittingAlert()
-                self.onShowToast(NSLocalizedString("error_network", comment: ""))
+        DispatchQueue.global().async {
+            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+            defer { try! group.syncShutdownGracefully() }
+            
+            let channel = BaseNetWork.getConnection(self.chainType!, group)!
+            defer { try! channel.close().wait() }
+            
+            let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with {
+                $0.address = account.account_address
+            }
+            do {
+                let response = try Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait()
+                self.onBroadcastGrpcTx(response)
+            } catch {
+                print("onFetchgRPCAuth failed: \(error)")
             }
         }
     }
     
-    func onGenClaimIncentiveAllTx() {
+    func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            var msgList = Array<Msg>()
-            if (self.mIncentiveRewards.getMintingRewardAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
-                let msg = MsgGenerator.genClaimUSDXMintingRewardMsg(self.chainType!,
-                                                                    self.pageHolderVC.mAccount!.account_address,
-                                                                    self.pageHolderVC.mIncentiveMultiplier!)
-                msgList.append(msg)
-            }
-            if (self.mIncentiveRewards.getHardRewardDenoms().count > 0) {
-                var denoms_to_claims = Array<DenomsToClaim>()
-                for denom in self.mIncentiveRewards.getHardRewardDenoms(){
-                    denoms_to_claims.append(DenomsToClaim.init(denom, self.pageHolderVC.mIncentiveMultiplier!))
-                }
-                let msg = MsgGenerator.genClaimHardRewardMsg(self.chainType!,
-                                                             self.pageHolderVC.mAccount!.account_address,
-                                                             self.pageHolderVC.mIncentiveMultiplier!,
-                                                             denoms_to_claims)
-                msgList.append(msg)
-            }
-            if (self.mIncentiveRewards.getDelegatorRewardDenoms().count > 0) {
-                var denoms_to_claims = Array<DenomsToClaim>()
-                for denom in self.mIncentiveRewards.getDelegatorRewardDenoms(){
-                    denoms_to_claims.append(DenomsToClaim.init(denom, self.pageHolderVC.mIncentiveMultiplier!))
-                }
-                let msg = MsgGenerator.genClaimDelegatorRewardMsg(self.chainType!,
-                                                                  self.pageHolderVC.mAccount!.account_address,
-                                                                  self.pageHolderVC.mIncentiveMultiplier!,
-                                                                  denoms_to_claims)
-                msgList.append(msg)
-            }
-            if (self.mIncentiveRewards.getSwapRewardDenoms().count > 0) {
-                var denoms_to_claims = Array<DenomsToClaim>()
-                for denom in self.mIncentiveRewards.getSwapRewardDenoms(){
-                    denoms_to_claims.append(DenomsToClaim.init(denom, self.pageHolderVC.mIncentiveMultiplier!))
-                }
-                let msg = MsgGenerator.genClaimSwapRewardMsg(self.chainType!,
-                                                             self.pageHolderVC.mAccount!.account_address,
-                                                             self.pageHolderVC.mIncentiveMultiplier!,
-                                                             denoms_to_claims)
-                msgList.append(msg)
-            }
+            let reqTx = Signer.genSignedKavaIncentiveAll(auth!,
+                                                         self.account!.account_address,
+                                                         self.pageHolderVC.mIncentiveMultiplier!,
+                                                         self.pageHolderVC.mFee!,
+                                                         self.pageHolderVC.mMemo!,
+                                                         self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                         BaseData.instance.getChainId(self.chainType))
             
+            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+            defer { try! group.syncShutdownGracefully() }
             
+            let channel = BaseNetWork.getConnection(self.chainType!, group)!
+            defer { try! channel.close().wait() }
             
-            
-            let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
-                                                   String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                   String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                   msgList,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!)
-            
-            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                        msgList, stdMsg,
-                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
-            
-            DispatchQueue.main.async(execute: {
-                let postTx = PostTx.init("sync", stdTx.value)
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .sortedKeys
-                let data = try? encoder.encode(postTx)
-                do {
-                    let params = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-                    print("params ", params)
-                    let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-                    request.responseJSON { response in
-                        var txResult = [String:Any]()
-                        switch response.result {
-                        case .success(let res):
-                            print("onGenWithdrawTx ", res)
-                            if let result = res as? [String : Any]  {
-                                txResult = result
-                            }
-                        case .failure(let error):
-                            print("onGenWithdrawTx error ", error)
-                            if (response.response?.statusCode == 500) {
-                                txResult["net_error"] = 500
-                            }
-                        }
-
-                        if (self.waitAlert != nil) {
-                            self.waitAlert?.dismiss(animated: true, completion: {
-                                txResult["type"] = COSMOS_MSG_TYPE_DELEGATE
-                                self.onStartTxDetail(txResult)
-                            })
-                        }
+            do {
+                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
+                //                print("response ", response.txResponse.txhash)
+                DispatchQueue.main.async(execute: {
+                    if (self.waitAlert != nil) {
+                        self.waitAlert?.dismiss(animated: true, completion: {
+                            self.onStartTxDetailgRPC(response)
+                        })
                     }
-
-                } catch {
-                    print(error)
-                }
-            });
+                });
+            } catch {
+                print("onBroadcastGrpcTx failed: \(error)")
+            }
         }
     }
 }

@@ -2640,6 +2640,127 @@ class Signer {
         }
     }
     
+    static func getKavaIncentiveUSDXMinting(_ sender: String, _ multiplier_name: String) -> Google_Protobuf2_Any {
+        let incentiveMint = Kava_Incentive_V1beta1_MsgClaimUSDXMintingReward.with {
+            $0.sender = sender
+            $0.multiplierName = multiplier_name
+        }
+        return Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.incentive.v1beta1.MsgClaimUSDXMintingReward"
+            $0.value = try! incentiveMint.serializedData()
+        }
+    }
+    
+    static func getKavaIncentiveHard(_ sender: String, _ denoms_to_claims: Array<Kava_Incentive_V1beta1_Selection>) -> Google_Protobuf2_Any {
+        let incentiveHard = Kava_Incentive_V1beta1_MsgClaimHardReward.with {
+            $0.sender = sender
+            $0.denomsToClaim = denoms_to_claims
+        }
+        return Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.incentive.v1beta1.MsgClaimHardReward"
+            $0.value = try! incentiveHard.serializedData()
+        }
+    }
+    
+    static func getKavaIncentiveDelegator(_ sender: String, _ denoms_to_claims: Array<Kava_Incentive_V1beta1_Selection>) -> Google_Protobuf2_Any {
+        let incentiveDelegator = Kava_Incentive_V1beta1_MsgClaimDelegatorReward.with {
+            $0.sender = sender
+            $0.denomsToClaim = denoms_to_claims
+        }
+        return Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.incentive.v1beta1.MsgClaimDelegatorReward"
+            $0.value = try! incentiveDelegator.serializedData()
+        }
+    }
+    
+    static func getKavaIncentiveSwap(_ sender: String, _ denoms_to_claims: Array<Kava_Incentive_V1beta1_Selection>) -> Google_Protobuf2_Any {
+        let incentiveSwap = Kava_Incentive_V1beta1_MsgClaimSwapReward.with {
+            $0.sender = sender
+            $0.denomsToClaim = denoms_to_claims
+        }
+        return Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.incentive.v1beta1.MsgClaimSwapReward"
+            $0.value = try! incentiveSwap.serializedData()
+        }
+    }
+    
+    static func genSignedKavaIncentiveAll(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                          _ sender: String, _ multiplier_name: String,
+                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        var anyMsgs = Array<Google_Protobuf2_Any>()
+        let incentiveRewards = BaseData.instance.mIncentiveRewards!
+        if (incentiveRewards.getMintingRewardAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+            anyMsgs.append(getKavaIncentiveUSDXMinting(sender, multiplier_name))
+        }
+        if (incentiveRewards.getHardRewardDenoms().count > 0) {
+            var denoms_to_claims = Array<Kava_Incentive_V1beta1_Selection>()
+            for denom in incentiveRewards.getHardRewardDenoms() {
+                denoms_to_claims.append(Kava_Incentive_V1beta1_Selection.with { $0.denom = denom; $0.multiplierName = multiplier_name })
+            }
+            anyMsgs.append(getKavaIncentiveHard(sender, denoms_to_claims))
+        }
+        if (incentiveRewards.getDelegatorRewardDenoms().count > 0) {
+            var denoms_to_claims = Array<Kava_Incentive_V1beta1_Selection>()
+            for denom in incentiveRewards.getDelegatorRewardDenoms() {
+                denoms_to_claims.append(Kava_Incentive_V1beta1_Selection.with { $0.denom = denom; $0.multiplierName = multiplier_name })
+            }
+            anyMsgs.append(getKavaIncentiveDelegator(sender, denoms_to_claims))
+        }
+        if (incentiveRewards.getSwapRewardDenoms().count > 0) {
+            var denoms_to_claims = Array<Kava_Incentive_V1beta1_Selection>()
+            for denom in incentiveRewards.getSwapRewardDenoms() {
+                denoms_to_claims.append(Kava_Incentive_V1beta1_Selection.with { $0.denom = denom; $0.multiplierName = multiplier_name })
+            }
+            anyMsgs.append(getKavaIncentiveSwap(sender, denoms_to_claims))
+        }
+        let txBody = getGrpcTxBody(anyMsgs, memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateKavaIncentiveAll(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                            _ sender: String, _ multiplier_name: String,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        var anyMsgs = Array<Google_Protobuf2_Any>()
+        let incentiveRewards = BaseData.instance.mIncentiveRewards!
+        if (incentiveRewards.getMintingRewardAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+            anyMsgs.append(getKavaIncentiveUSDXMinting(sender, multiplier_name))
+        }
+        if (incentiveRewards.getHardRewardDenoms().count > 0) {
+            var denoms_to_claims = Array<Kava_Incentive_V1beta1_Selection>()
+            for denom in incentiveRewards.getHardRewardDenoms() {
+                denoms_to_claims.append(Kava_Incentive_V1beta1_Selection.with { $0.denom = denom; $0.multiplierName = multiplier_name })
+            }
+            anyMsgs.append(getKavaIncentiveHard(sender, denoms_to_claims))
+        }
+        if (incentiveRewards.getDelegatorRewardDenoms().count > 0) {
+            var denoms_to_claims = Array<Kava_Incentive_V1beta1_Selection>()
+            for denom in incentiveRewards.getDelegatorRewardDenoms() {
+                denoms_to_claims.append(Kava_Incentive_V1beta1_Selection.with { $0.denom = denom; $0.multiplierName = multiplier_name })
+            }
+            anyMsgs.append(getKavaIncentiveDelegator(sender, denoms_to_claims))
+        }
+        if (incentiveRewards.getSwapRewardDenoms().count > 0) {
+            var denoms_to_claims = Array<Kava_Incentive_V1beta1_Selection>()
+            for denom in incentiveRewards.getSwapRewardDenoms() {
+                denoms_to_claims.append(Kava_Incentive_V1beta1_Selection.with { $0.denom = denom; $0.multiplierName = multiplier_name })
+            }
+            anyMsgs.append(getKavaIncentiveSwap(sender, denoms_to_claims))
+        }
+        let txBody = getGrpcTxBody(anyMsgs, memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
     
     
     static func getGrpcTxBody(_ msgAnys: Array<Google_Protobuf2_Any>, _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {

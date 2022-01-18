@@ -102,7 +102,7 @@ class HardPoolBorrow3ViewController: BaseViewController, PasswordViewDelegate {
             
             do {
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-                //                print("response ", response.txResponse.txhash)
+//                print("response ", response.txResponse.txhash)
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {

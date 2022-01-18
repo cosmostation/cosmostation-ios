@@ -453,6 +453,10 @@
 "str_exit_pool_step_1" = "메모를 입력하세요 (선택사항)";
 "str_exit_pool_step_2" = "Tx 수수료를 선택하세요";
 "str_exit_pool_step_3" = "입력하신 정보를 확인하세요";
+"claim_incentive_step_0" = "인센티브를 확인해주세요";
+"claim_incentive_step_1" = "메모를 입력하세요 (선택사항)";
+"claim_incentive_step_2" = "Tx 수수료를 선택하세요";
+"claim_incentive_step_3" = "입력하신 정보를 확인하세요";
 "str_osmosis_lock_token_step_0" = "락업 수량을 입력해주세요";
 "str_osmosis_lock_token_step_1" = "메모를 입력하세요 (선택사항)";
 "str_osmosis_lock_token_step_2" = "Tx 수수료를 선택하세요";

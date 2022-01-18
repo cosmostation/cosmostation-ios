@@ -726,6 +726,14 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                              BaseData.instance.getChainId(self.chainType))
             
+        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+            return Signer.genSimulateKavaIncentiveAll(auth,
+                                                      self.account!.account_address,
+                                                      self.pageHolderVC.mIncentiveMultiplier!,
+                                                      self.pageHolderVC.mFee!,
+                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                      BaseData.instance.getChainId(self.chainType))
         }
         
         return nil
