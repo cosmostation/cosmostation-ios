@@ -107,6 +107,10 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxSwapDepositCell", bundle: nil), forCellReuseIdentifier: "TxSwapDepositCell")
         self.txTableView.register(UINib(nibName: "TxSwapWithdrawCell", bundle: nil), forCellReuseIdentifier: "TxSwapWithdrawCell")
         self.txTableView.register(UINib(nibName: "TxSwapTokenCell", bundle: nil), forCellReuseIdentifier: "TxSwapTokenCell")
+        self.txTableView.register(UINib(nibName: "TxIncentiveMintingCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveMintingCell")
+        self.txTableView.register(UINib(nibName: "TxIncentiveHardCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveHardCell")
+        self.txTableView.register(UINib(nibName: "TxIncentiveSwapCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveSwapCell")
+        self.txTableView.register(UINib(nibName: "TxIncentiveDelegatorCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveDelegatorCell")
         
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
@@ -452,6 +456,27 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapTokenCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimUSDXMintingReward.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveMintingCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimHardReward.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveHardCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimDelegatorReward.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveDelegatorCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimSwapReward.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveSwapCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
             }
             
             

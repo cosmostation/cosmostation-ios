@@ -240,18 +240,18 @@ public struct ApiHistoryNewCustom {
 
             } else if (msgType.contains(KAVA_MSG_TYPE_LIQUIDATE_HARD)) {
                 return NSLocalizedString("tx_kava_hard_liquidate", comment: "")
-
+                
             } else if (msgType.contains(KAVA_MSG_TYPE_CLAIM_HAVEST) || msgType.contains(KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE) || msgType.contains(KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV)) {
-                result = NSLocalizedString("tx_kava_hard_hard_incentive", comment: "")
-
+                return NSLocalizedString("tx_kava_hard_hard_incentive", comment: "")
+                
             } else if (msgType.contains(KAVA_MSG_TYPE_INCENTIVE_REWARD) || msgType.contains(KAVA_MSG_TYPE_USDX_MINT_INCENTIVE)) {
-                result = NSLocalizedString("tx_kava_hard_mint_incentive", comment: "")
-
+                return NSLocalizedString("tx_kava_hard_mint_incentive", comment: "")
+                
             } else if (msgType.contains(KAVA_MSG_TYPE_DELEGATOR_INCENTIVE)) {
-                result = NSLocalizedString("tx_kava_hard_delegator_incentive", comment: "")
+                return NSLocalizedString("tx_kava_hard_delegator_incentive", comment: "")
                 
             } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_INCENTIVE)) {
-                result = NSLocalizedString("tx_kava_hard_swap_incentive", comment: "")
+                return NSLocalizedString("tx_kava_hard_swap_incentive", comment: "")
                 
             } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_TOKEN) || msgType.contains(KAVA_MSG_TYPE_SWAP_TOKEN2)) {
                 return NSLocalizedString("tx_kava_swap_token", comment: "")
