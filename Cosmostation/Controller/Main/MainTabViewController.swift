@@ -1443,22 +1443,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     
     func checkEventIcon() {
-        let nowTime = Date().millisecondsSince1970
-        let xmasStart = Calendar.current.date(from: DateComponents(year: 2021, month: 12, day: 21))!.millisecondsSince1970
-        let newYearStart = Calendar.current.date(from: DateComponents(year: 2021, month: 12, day: 28))!.millisecondsSince1970
-        let newYearEnd = Calendar.current.date(from: DateComponents(year: 2022, month: 1, day: 15))!.millisecondsSince1970
-
-        if (nowTime <= newYearEnd && nowTime > newYearStart && BaseData.instance.getCustomIcon() != ICON_2002) {
-            changeEventIcon("New2022")
-            BaseData.instance.setCustomIcon(ICON_2002)
-            return
-        } else if (nowTime > xmasStart && nowTime <= newYearStart && BaseData.instance.getCustomIcon() != ICON_SANTA) {
-            changeEventIcon("Xmas")
-            BaseData.instance.setCustomIcon(ICON_SANTA)
-            return
-        } else if (BaseData.instance.getCustomIcon() != ICON_DEFAULT) {
+        BaseData.instance.setCustomIcon(ICON_DEFAULT)
+        if (UIApplication.shared.alternateIconName != nil) {
             UIApplication.shared.setAlternateIconName(nil)
-            BaseData.instance.setCustomIcon(ICON_DEFAULT)
             return
         }
     }
