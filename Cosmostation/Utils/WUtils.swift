@@ -1187,6 +1187,12 @@ public class WUtils {
                     let assetValue = userCurrencyValue(coin.denom, amount, 6)
                     totalValue = totalValue.adding(assetValue)
                     
+                } else if (chainType! == ChainType.KAVA_MAIN) {
+                    let baseDenom = WUtils.getKavaBaseDenom(coin.denom)
+                    let decimal = WUtils.getKavaCoinDecimal(coin.denom)
+                    let amount = WUtils.getKavaTokenAll2(coin.denom)
+                    let assetValue = userCurrencyValue(baseDenom, amount, decimal)
+                    totalValue = totalValue.adding(assetValue)
                 }
                 
                 else if (coin.isIbc()) {
@@ -1211,22 +1217,6 @@ public class WUtils {
                 }
                 let assetValue = userCurrencyValue(getMainDenom(chainType), allBnb, 0)
                 totalValue = totalValue.adding(assetValue)
-            }
-            
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
-            baseData.mBalances.forEach { coin in
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    let amount = WUtils.getAllMainAssetOld(KAVA_MAIN_DENOM)
-                    let assetValue = userCurrencyValue(coin.balance_denom, amount, 6)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                } else {
-                    let baseDenom = WUtils.getKavaBaseDenom(coin.balance_denom)
-                    let decimal = WUtils.getKavaCoinDecimal(coin.balance_denom)
-                    let amount = WUtils.getKavaTokenAll(coin.balance_denom)
-                    let assetValue = userCurrencyValue(baseDenom, amount, decimal)
-                    totalValue = totalValue.adding(assetValue)
-                }
             }
             
         } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
@@ -1254,108 +1244,12 @@ public class WUtils {
         return totalValue
     }
     
-    static func allAssetToBtc(_ chainType: ChainType?) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        var totalValue = NSDecimalNumber.zero
-        if (isGRPC(chainType)) {
-            baseData.mMyBalances_gRPC.forEach { coin in
-                if (coin.denom == getMainDenom(chainType)) {
-                    let amount = getAllMainAsset(coin.denom)
-                    let btcValue = btcValue(coin.denom, amount, mainDivideDecimal(chainType))
-                    totalValue = totalValue.adding(btcValue)
-                    
-                    
-                } else if (chainType == ChainType.OSMOSIS_MAIN && coin.denom == OSMOSIS_ION_DENOM) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let btcValue = btcValue(coin.denom, amount, 6)
-                    totalValue = totalValue.adding(btcValue)
-                    
-                } else if (chainType! == ChainType.SIF_MAIN && coin.denom.starts(with: "c")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getSifCoinDecimal(coin.denom)
-                    totalValue = totalValue.adding(btcValue(coin.denom.substring(from: 1), available, decimal))
-                    
-                } else if (chainType! == ChainType.EMONEY_MAIN && coin.denom.starts(with: "e")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    totalValue = totalValue.adding(btcValue(coin.denom, available, 6))
-                    
-                } else if (coin.isIbc()) {
-                    if let ibcToken = BaseData.instance.getIbcToken(coin.getIbcHash()) {
-                        if (ibcToken.auth == true) {
-                            let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                            let btcValue = btcValue(ibcToken.base_denom!, amount, ibcToken.decimal!)
-                            totalValue = totalValue.adding(btcValue)
-                        }
-                    }
-                }
-            }
-        }
-        else if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
-            baseData.mBalances.forEach { coin in
-                var allBnb = NSDecimalNumber.zero
-                let amount = WUtils.getAllBnbToken(coin.balance_denom)
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    allBnb = allBnb.adding(amount)
-                } else {
-                    allBnb = allBnb.adding(getBnbConvertAmount(coin.balance_denom))
-                }
-                let btcValue = btcValue(getMainDenom(chainType), allBnb, 0)
-                totalValue = totalValue.adding(btcValue)
-            }
-            
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
-            baseData.mBalances.forEach { coin in
-                var allKava = NSDecimalNumber.zero
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    allKava = allKava.adding(getAllMainAssetOld(getMainDenom(chainType)))
-                } else {
-                    allKava = allKava.adding(convertTokenToKava(coin.balance_denom))
-                }
-                let btcValue = btcValue(getMainDenom(chainType), allKava, 6)
-                totalValue = totalValue.adding(btcValue)
-            }
-            
-        } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
-            baseData.mBalances.forEach { coin in
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    let amount = getAllExToken(coin.balance_denom)
-                    let btcValue = btcValue(getMainDenom(chainType), amount, 0)
-                    totalValue = totalValue.adding(btcValue)
-                } else {
-                    let convertAmount = convertTokenToOkt(coin.balance_denom)
-                    let btcValue = btcValue(getMainDenom(chainType), convertAmount, 0)
-                    totalValue = totalValue.adding(btcValue)
-                    
-                }
-            }
-            
-        }
-        
-        else {
-            baseData.mBalances.forEach { coin in
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    let amount = getAllMainAssetOld(getMainDenom(chainType))
-                    totalValue = totalValue.adding(btcValue(coin.balance_denom, amount, mainDivideDecimal(chainType)))
-                }
-            }
-        }
-        return totalValue
-    }
-    
     static func dpAllAssetValueUserCurrency(_ chainType: ChainType?, _ font:UIFont) -> NSMutableAttributedString {
         let totalValue = allAssetToUserCurrency(chainType)
         let nf = getNumberFormatter(3)
         let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: totalValue)!
         return getDpAttributedString(formatted, 3, font)
     }
-    
-    static func dpAllAssetValueBtc(_ chainType: ChainType?, _ font:UIFont) -> NSMutableAttributedString {
-        let totalValue = allAssetToBtc(chainType)
-        let nf = getNumberFormatter(8)
-        let formatted = nf.string(from: totalValue)!
-        return getDpAttributedString(formatted, 8, font)
-    }
-    
     
     static func getNumberFormatter(_ divider: Int) -> NumberFormatter {
         let nf = NumberFormatter()

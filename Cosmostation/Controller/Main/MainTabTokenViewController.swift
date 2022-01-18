@@ -269,86 +269,88 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if (indexPath.section == SECTION_NATIVE_GRPC) {
-//            if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainType)) {
-//                let sTokenDetailVC = StakingTokenGrpcViewController(nibName: "StakingTokenGrpcViewController", bundle: nil)
-//                sTokenDetailVC.hidesBottomBarWhenPushed = true
-//                self.navigationItem.title = ""
-//                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
-//            } else {
-//                let nTokenDetailVC = NativeTokenGrpcViewController(nibName: "NativeTokenGrpcViewController", bundle: nil)
-//                nTokenDetailVC.nativeDenom = mNative_gRPC[indexPath.row].denom
-//                nTokenDetailVC.hidesBottomBarWhenPushed = true
-//                self.navigationItem.title = ""
-//                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-//            }
-//
-//        } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
-//            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
-//            iTokenDetailVC.ibcDenom = mIbcAuthed_gRPC[indexPath.row].denom
-//            iTokenDetailVC.hidesBottomBarWhenPushed = true
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
-//
-//        } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
-//            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
-//            iTokenDetailVC.ibcDenom = mIbcUnknown_gRPC[indexPath.row].denom
-//            iTokenDetailVC.hidesBottomBarWhenPushed = true
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
-//
-//        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
-//            let pTokenDetailVC = PoolTokenGrpcViewController(nibName: "PoolTokenGrpcViewController", bundle: nil)
-//            pTokenDetailVC.poolDenom = mPoolToken_gRPC[indexPath.row].denom
-//            pTokenDetailVC.hidesBottomBarWhenPushed = true
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(pTokenDetailVC, animated: true)
-//
-//        } else if (indexPath.section == SECTION_SIF_ETHER_GRPC) {
-//            let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
-//            bTokenDetailVC.hidesBottomBarWhenPushed = true
-//            bTokenDetailVC.bridgeDenom = mSifEther_gRPC[indexPath.row].denom
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
-//
-//        } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
-//            return
-//        }
-//
-//        else if (indexPath.section == SECTION_NATIVE) {
-//            if (mNative[indexPath.row].balance_denom == WUtils.getMainDenom(chainType)) {
-//                let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
-//                sTokenDetailVC.hidesBottomBarWhenPushed = true
-//                self.navigationItem.title = ""
-//                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
-//
-//            } else {
-//                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-//                nTokenDetailVC.hidesBottomBarWhenPushed = true
-//                nTokenDetailVC.denom = mNative[indexPath.row].balance_denom
-//                self.navigationItem.title = ""
-//                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-//            }
-//
-//        } else if (indexPath.section == SECTION_KAVA_BEP2) {
-//            let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-//            nTokenDetailVC.hidesBottomBarWhenPushed = true
-//            nTokenDetailVC.denom = mKavaBep2[indexPath.row].balance_denom
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-//
-//        } else if (indexPath.section == SECTION_ETC) {
-//            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.BINANCE_MAIN || chainType == ChainType.OKEX_MAIN) {
-//                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-//                nTokenDetailVC.hidesBottomBarWhenPushed = true
-//                nTokenDetailVC.denom = mEtc[indexPath.row].balance_denom
-//                self.navigationItem.title = ""
-//                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-//            }
-//
-//        } else if (indexPath.section == SECTION_UNKNOWN) {
-//            return
-//        }
+        if (indexPath.section == SECTION_NATIVE_GRPC) {
+            if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainType)) {
+                let sTokenDetailVC = StakingTokenGrpcViewController(nibName: "StakingTokenGrpcViewController", bundle: nil)
+                sTokenDetailVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
+            } else {
+                let nTokenDetailVC = NativeTokenGrpcViewController(nibName: "NativeTokenGrpcViewController", bundle: nil)
+                nTokenDetailVC.nativeDenom = mNative_gRPC[indexPath.row].denom
+                nTokenDetailVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+            }
+
+        } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
+            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
+            iTokenDetailVC.ibcDenom = mIbcAuthed_gRPC[indexPath.row].denom
+            iTokenDetailVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
+
+        } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
+            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
+            iTokenDetailVC.ibcDenom = mIbcUnknown_gRPC[indexPath.row].denom
+            iTokenDetailVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
+
+        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
+            let pTokenDetailVC = PoolTokenGrpcViewController(nibName: "PoolTokenGrpcViewController", bundle: nil)
+            pTokenDetailVC.poolDenom = mPoolToken_gRPC[indexPath.row].denom
+            pTokenDetailVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(pTokenDetailVC, animated: true)
+
+        } else if (indexPath.section == SECTION_SIF_ETHER_GRPC) {
+            let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
+            bTokenDetailVC.hidesBottomBarWhenPushed = true
+            bTokenDetailVC.bridgeDenom = mSifEther_gRPC[indexPath.row].denom
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
+
+        } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
+            let nTokenDetailVC = NativeTokenGrpcViewController(nibName: "NativeTokenGrpcViewController", bundle: nil)
+            nTokenDetailVC.nativeDenom = mKavaBep2_gRPC[indexPath.row].denom
+            nTokenDetailVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+            
+        } else if (indexPath.section == SECTION_ETC_GRPC) {
+            
+        } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
+            return
+        }
+
+        else if (indexPath.section == SECTION_NATIVE) {
+            if (mNative[indexPath.row].balance_denom == WUtils.getMainDenom(chainType)) {
+                let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
+                sTokenDetailVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
+
+            } else {
+                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
+                nTokenDetailVC.hidesBottomBarWhenPushed = true
+                nTokenDetailVC.denom = mNative[indexPath.row].balance_denom
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+            }
+
+        } else if (indexPath.section == SECTION_ETC) {
+            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.BINANCE_MAIN || chainType == ChainType.OKEX_MAIN) {
+                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
+                nTokenDetailVC.hidesBottomBarWhenPushed = true
+                nTokenDetailVC.denom = mEtc[indexPath.row].balance_denom
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+            }
+
+        } else if (indexPath.section == SECTION_UNKNOWN) {
+            return
+        }
     }
     
     //bind native tokens with grpc

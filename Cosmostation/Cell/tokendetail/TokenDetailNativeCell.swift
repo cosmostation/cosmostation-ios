@@ -52,9 +52,6 @@ class TokenDetailNativeCell: TokenDetailCell {
         } else if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
             onBindBNBTokens(denom)
             
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
-            onBindKavaTokens(denom)
-            
         } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
             onBindOKTokens(denom)
             
@@ -112,6 +109,9 @@ class TokenDetailNativeCell: TokenDetailCell {
             totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
             availableAmount.attributedText = WUtils.displayAmount2(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
             
+        } else if (chainType! == ChainType.KAVA_MAIN) {
+            onBindKavaTokens(denom)
+            
         }
     }
     
@@ -139,9 +139,10 @@ class TokenDetailNativeCell: TokenDetailCell {
         }
     }
     
-    func onBindKavaTokens(_ denom: String?) {        let dpDecimal = WUtils.getKavaCoinDecimal(denom!)
-        let available = BaseData.instance.availableAmount(denom!)
-        let vesting = BaseData.instance.lockedAmount(denom!)
+    func onBindKavaTokens(_ denom: String?) {
+        let dpDecimal = WUtils.getKavaCoinDecimal(denom!)
+        let available = BaseData.instance.getAvailableAmount_gRPC(denom!)
+        let vesting = BaseData.instance.getVestingAmount_gRPC(denom!)
         
         totalAmount.attributedText = WUtils.displayAmount2(available.adding(vesting).stringValue, totalAmount.font, dpDecimal, dpDecimal)
         availableAmount.attributedText = WUtils.displayAmount2(available.stringValue, availableAmount.font, dpDecimal, dpDecimal)

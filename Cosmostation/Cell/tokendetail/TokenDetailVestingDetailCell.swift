@@ -58,11 +58,7 @@ class TokenDetailVestingDetailCell: TokenDetailCell {
     }
     
     func onBindVestingToken(_ chainType: ChainType, _ denom: String) {
-        if (WUtils.isGRPC(chainType)) {
-            rootCardView.backgroundColor = WUtils.getChainBg(chainType)
-            onBindVesting_gRPC(chainType, denom)
-            
-        } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        if (chainType == ChainType.KAVA_MAIN) {
             if (denom == KAVA_MAIN_DENOM) {
                 rootCardView.backgroundColor = TRANS_BG_COLOR_KAVA
             } else if (denom == KAVA_HARD_DENOM) {
@@ -70,7 +66,12 @@ class TokenDetailVestingDetailCell: TokenDetailCell {
             } else if (denom == KAVA_SWAP_DENOM) {
                 rootCardView.backgroundColor = COLOR_BG_COLOR_SWP
             }
-            onBindVesting(chainType, denom)
+            onBindVesting_gRPC(chainType, denom)
+            
+        } else {
+            rootCardView.backgroundColor = WUtils.getChainBg(chainType)
+            onBindVesting_gRPC(chainType, denom)
+            
         }
     }
     
