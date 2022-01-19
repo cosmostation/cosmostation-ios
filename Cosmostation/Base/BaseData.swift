@@ -34,46 +34,6 @@ final class BaseData : NSObject{
     
     var mHeight: Int = 0
     
-    
-    //kava-7
-    var mKavaAccountResult = KavaAccountInfo.KavaAccountResult.init()
-//    var mKavaPrice = [String:KavaPriceFeedPrice]()
-//    var mKavaPriceMarkets: Array<KavaPriceMarket> = Array<KavaPriceMarket>()
-//    var mCdpParam: CdpParam?
-//    var mHardParam: HardParam?
-//    var mMyHardDeposit: Array<HardMyDeposit>?
-//    var mMyHardBorrow: Array<HardMyBorrow>?
-//    var mModuleCoins: Array<Coin>?
-//    var mReserveCoins: Array<Coin>?
-//    var mKavaSwapParam: SwapParam!
-    
-    //kava gRPC
-    var mKavaPriceMarkets_gRPC: Array<Kava_Pricefeed_V1beta1_Market> = Array<Kava_Pricefeed_V1beta1_Market>()
-    var mKavaPrices_gRPC: Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse> = Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse>()
-    var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params?
-    var mIncentiveParam: IncentiveParam?
-    var mIncentiveRewards: IncentiveReward?
-    
-    var mKavaHardParams_gRPC: Kava_Hard_V1beta1_Params?
-    var mHardMyDeposit: Array<Coin> = Array<Coin>()
-    var mHardMyBorrow: Array<Coin> = Array<Coin>()
-    var mHardInterestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate> = Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>()
-    var mHardTotalDeposit: Array<Coin> = Array<Coin>()
-    var mHardTotalBorrow: Array<Coin> = Array<Coin>()
-    var mHardModuleCoins: Array<Coin> = Array<Coin>()
-    var mHardReserveCoins: Array<Coin> = Array<Coin>()
-    
-    var mKavaSwapPoolParam: Kava_Swap_V1beta1_Params?
-    
-    func getKavaOraclePrice(_ marketId: String?) -> NSDecimalNumber {
-        if let price =  mKavaPrices_gRPC.filter({ $0.marketID == marketId }).first {
-            return NSDecimalNumber.init(string: price.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    
-    
     var mBnbTokenList = Array<BnbToken>()
     var mBnbTokenTicker = Array<BnbTicker>()
     
@@ -115,6 +75,28 @@ final class BaseData : NSObject{
     
     var mSifDexPools_gRPC = Array<Sifnode_Clp_V1_Pool>()
     var mSifDexMyAssets_gRPC = Array<Sifnode_Clp_V1_Asset>()
+    
+    //kava gRPC
+//    var mKavaPriceMarkets_gRPC: Array<Kava_Pricefeed_V1beta1_Market> = Array<Kava_Pricefeed_V1beta1_Market>()
+    var mKavaPrices_gRPC: Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse> = Array<Kava_Pricefeed_V1beta1_CurrentPriceResponse>()
+    var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params?
+    var mIncentiveParam: IncentiveParam?
+    var mIncentiveRewards: IncentiveReward?
+    var mKavaHardParams_gRPC: Kava_Hard_V1beta1_Params?
+    var mHardMyDeposit: Array<Coin> = Array<Coin>()
+    var mHardMyBorrow: Array<Coin> = Array<Coin>()
+    var mHardInterestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate> = Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>()
+    var mHardTotalDeposit: Array<Coin> = Array<Coin>()
+    var mHardTotalBorrow: Array<Coin> = Array<Coin>()
+    var mHardModuleCoins: Array<Coin> = Array<Coin>()
+    var mHardReserveCoins: Array<Coin> = Array<Coin>()
+    var mKavaSwapPoolParam: Kava_Swap_V1beta1_Params?
+    func getKavaOraclePrice(_ marketId: String?) -> NSDecimalNumber {
+        if let price =  mKavaPrices_gRPC.filter({ $0.marketID == marketId }).first {
+            return NSDecimalNumber.init(string: price.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
+        }
+        return NSDecimalNumber.zero
+    }
     
     public override init() {
         super.init();

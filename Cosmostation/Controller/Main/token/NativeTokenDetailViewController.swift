@@ -64,34 +64,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
     
     func onInitView() {
         self.topCard.backgroundColor = WUtils.getChainBg(chainType)
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
-            let baseDenom = WUtils.getKavaBaseDenom(denom)
-            let decimal = WUtils.getKavaCoinDecimal(denom)
-            if (denom == KAVA_HARD_DENOM) {
-                naviTokenSymbol.textColor = COLOR_HARD
-                topCard.backgroundColor = COLOR_BG_COLOR_HARD
-            } else if (denom == KAVA_USDX_DENOM) {
-                naviTokenSymbol.textColor = COLOR_USDX
-                topCard.backgroundColor = COLOR_BG_COLOR_USDX
-            } else if (denom == KAVA_SWAP_DENOM) {
-                naviTokenSymbol.textColor = COLOR_SWP
-                topCard.backgroundColor = COLOR_BG_COLOR_SWP
-            }
-            naviTokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + denom + ".png")!)
-            naviTokenSymbol.text = denom.uppercased()
-            
-            let totalTokenAmount = WUtils.getKavaTokenAll(denom)
-            topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, topValue.font)
-            
-            self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(baseDenom, naviPerPrice.font)
-            self.naviUpdownPercent.attributedText = WUtils.dpValueChange(baseDenom, font: naviUpdownPercent.font)
-            let changeValue = WUtils.valueChange(baseDenom)
-            if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
-            else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
-            else { naviUpdownImg.image = nil }
-            
-
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
             guard let bnbToken = WUtils.getBnbToken(denom) else {
                 self.navigationController?.popViewController(animated: true)
                 return
@@ -150,9 +123,6 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
         if (section == 0) {
             return 1
         } else if (section == 1) {
-            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
-                if (BaseData.instance.mKavaAccountResult.getCalcurateVestingCntByDenom(denom) > 0) { return 1 }
-            }
             return 0
         }
         return 0
