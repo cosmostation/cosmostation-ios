@@ -399,6 +399,10 @@ class BaseNetWork {
         return DESMOS_AIRDROP_URL + "airdrop/claims"
     }
     
+    static func mintscanProposals(_ chain: ChainType) -> String {
+        let chainName = WUtils.getChainNameByBaseChain(chain)
+        return MINTSCAN_API_URL + "v1/" + chainName + "/proposals"
+    }
     
     static func mintscanProposalDetail(_ chain: ChainType, _ proposalId: String) -> String {
         let chainName = WUtils.getChainNameByBaseChain(chain)

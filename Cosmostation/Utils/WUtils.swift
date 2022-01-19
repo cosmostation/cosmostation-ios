@@ -5363,7 +5363,6 @@ public class WUtils {
     }
     
     static func onProposalStatusTxt(_ proposal: MintscanProposalDetail?) -> String {
-        print("onProposalStatusTxt ", proposal?.proposal_status)
         if (proposal?.proposal_status?.localizedCaseInsensitiveContains("DEPOSIT") == true) {
             return "DepositPeriod"
         } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == true) {
