@@ -156,8 +156,6 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
             pageHolderVC.mHardPoolCoins = resultCoins
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()
-        } else {
-            self.onShowToast(NSLocalizedString("error_amount", comment: ""))
         }
     }
     
@@ -167,6 +165,7 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
         let userInput = WUtils.localeStringToDecimal(text!)
         if (userInput == NSDecimalNumber.zero) { return false }
         if (userInput.multiplying(byPowerOf10: dpDecimal).compare(availableMax).rawValue > 0) {
+            self.onShowToast(NSLocalizedString("error_amount", comment: ""))
             return false
         }
         
