@@ -735,7 +735,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "HardPool Gov. Token"
             
-            let totalTokenAmount = WUtils.getKavaTokenAll2(coin.denom)
+            let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_HARD_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
             
@@ -746,7 +746,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "USD Stable Asset"
             
-            let totalTokenAmount = WUtils.getKavaTokenAll2(coin.denom)
+            let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_USDX_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
             
@@ -757,7 +757,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Kava Swap Token"
             
-            let totalTokenAmount = WUtils.getKavaTokenAll2(coin.denom)
+            let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_SWAP_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
             
@@ -868,7 +868,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
 
         let baseDenom = WUtils.getKavaBaseDenom(coin.denom)
         let decimal = WUtils.getKavaCoinDecimal(coin.denom)
-        let totalTokenAmount = WUtils.getKavaTokenAll2(coin.denom)
+        let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
         cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(coin.denom), 6)
         cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
     }

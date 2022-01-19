@@ -932,25 +932,27 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func onClickHtlcRefund(_ sender: UIButton) {
+        self.onShowToast("Pending swap will refund Shortly")
+        return
 //        print("onClickHtlcRefund")
-        if (!account!.account_has_private) {
-            self.onShowAddMenomicDialog()
-            return
-        }
+//        if (!account!.account_has_private) {
+//            self.onShowAddMenomicDialog()
+//            return
+//        }
         
-        let balances = BaseData.instance.selectBalanceById(accountId: self.account!.account_id)
-        if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
-            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue < 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                return
-            }
-        }
-        
-        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = TASK_TYPE_HTLC_REFUND
-        txVC.mHtlcRefundSwapId = self.mSwapId
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(txVC, animated: true)
+//        let balances = BaseData.instance.selectBalanceById(accountId: self.account!.account_id)
+//        if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
+//            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue < 0) {
+//                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+//                return
+//            }
+//        }
+//
+//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+//        txVC.mType = TASK_TYPE_HTLC_REFUND
+//        txVC.mHtlcRefundSwapId = self.mSwapId
+//        self.navigationItem.title = ""
+//        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     

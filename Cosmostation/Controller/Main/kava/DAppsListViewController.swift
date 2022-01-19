@@ -304,7 +304,7 @@ extension WUtils {
         return BaseData.instance.getKavaOraclePrice(marketId)
     }
     
-    static func getKavaTokenAll2(_ symbol: String) -> NSDecimalNumber {
+    static func getKavaTokenAll(_ symbol: String) -> NSDecimalNumber {
         let available = BaseData.instance.getAvailableAmount_gRPC(symbol)
         let vesting = BaseData.instance.getVestingAmount_gRPC(symbol)
         return available.adding(vesting)

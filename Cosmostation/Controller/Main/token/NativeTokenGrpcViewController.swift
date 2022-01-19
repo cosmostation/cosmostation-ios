@@ -88,7 +88,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             naviTokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + nativeDenom + ".png")!)
             nativeDivideDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
             nativeDisplayDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
-            totalAmount = WUtils.getKavaTokenAll2(nativeDenom)
+            totalAmount = WUtils.getKavaTokenAll(nativeDenom)
             
         }
         
