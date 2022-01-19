@@ -10,7 +10,6 @@ import Foundation
 import HDWalletKit
 import secp256k1
 import SwiftProtobuf
-
 class Signer {
     
     static func genSignedSendTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
@@ -2758,6 +2757,55 @@ class Signer {
         let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
         return Cosmos_Tx_V1beta1_SimulateRequest.with {
             $0.tx = simulateTx
+        }
+    }
+    
+    static func genSignedKavaCreateHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                            _ from: String, _ to: String, _ sendCoin: Array<Coin>, _ timeStamp: Int64, _ randomNumberHash: String,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let createAtomicSwap = Kava_Bep3_V1beta1_MsgCreateAtomicSwap.with {
+            $0.from = from
+            $0.to = WUtils.getDuputyAdddress(sendCoin[0].denom).0
+            $0.senderOtherChain = WUtils.getDuputyAdddress(sendCoin[0].denom).1
+            $0.recipientOtherChain = to
+            $0.randomNumberHash = randomNumberHash
+            $0.timestamp = timeStamp
+            $0.amount = [Cosmos_Base_V1beta1_Coin.with { $0.denom = sendCoin[0].denom; $0.amount = sendCoin[0].amount }]
+            $0.heightSpan = 24686
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.bep3.v1beta1.MsgCreateAtomicSwap"
+            $0.value = try! createAtomicSwap.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSignedKavaClaimHTLCSwap(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                           _ from: String, _ swapID: String, _ randomNumber: String,
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let claimAtomicSwap = Kava_Bep3_V1beta1_MsgClaimAtomicSwap.with {
+            $0.from = from
+            $0.swapID = swapID
+            $0.randomNumber = randomNumber
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/kava.bep3.v1beta1.MsgClaimAtomicSwap"
+            $0.value = try! claimAtomicSwap.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo)
+        let signerInfo = getGrpcSignerInfo(auth, publicKey)
+        let authInfo = getGrpcAuthInfo(signerInfo, fee)
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
         }
     }
     

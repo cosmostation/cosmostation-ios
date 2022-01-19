@@ -438,6 +438,19 @@ extension WUtils {
         }
         return totalBorrowAbleAmount.compare(SystemBorrowableAmount).rawValue > 0 ? SystemBorrowableAmount : totalBorrowAbleAmount
     }
+    
+    static func getDuputyAdddress(_ denom: String) -> (String, String) {
+        if (denom == TOKEN_HTLC_KAVA_BNB) {
+            return (KAVA_MAIN_BNB_DEPUTY, BINANCE_MAIN_BNB_DEPUTY)
+        } else if (denom == TOKEN_HTLC_KAVA_BTCB) {
+            return (KAVA_MAIN_BTCB_DEPUTY, BINANCE_MAIN_BTCB_DEPUTY)
+        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
+            return (KAVA_MAIN_XRPB_DEPUTY, BINANCE_MAIN_XRPB_DEPUTY)
+        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
+            return (KAVA_MAIN_BUSD_DEPUTY, BINANCE_MAIN_BUSD_DEPUTY)
+        }
+        return ("", "")
+    }
 
 }
 
