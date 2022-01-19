@@ -59,32 +59,32 @@ class WalletPriceCell: UITableViewCell {
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { updownImg.image = UIImage(named: "priceDown") }
         else { updownImg.image = nil }
         
-//        if (chainType == ChainType.COSMOS_MAIN) {
-//            buyBtn.setTitle(NSLocalizedString("buy_atom", comment: ""), for: .normal)
-//            buySeparator.isHidden = false
-//            buyBtn.isHidden = false
-//            buyConstraint.priority = .defaultHigh
-//            noBuyConstraint.priority = .defaultLow
-//
-//        } else if (chainType == ChainType.BINANCE_MAIN) {
-//            buyBtn.setTitle(NSLocalizedString("buy_bnb", comment: ""), for: .normal)
-//            buySeparator.isHidden = false
-//            buyBtn.isHidden = false
-//            buyConstraint.priority = .defaultHigh
-//            noBuyConstraint.priority = .defaultLow
-//
-//        } else if (chainType == ChainType.KAVA_MAIN) {
-//            buyBtn.setTitle(NSLocalizedString("buy_kava", comment: ""), for: .normal)
-//            buySeparator.isHidden = false
-//            buyBtn.isHidden = false
-//            buyConstraint.priority = .defaultHigh
-//            noBuyConstraint.priority = .defaultLow
-//
-//        } else {
+        if (chainType == ChainType.COSMOS_MAIN) {
+            buyBtn.setTitle(NSLocalizedString("buy_atom", comment: ""), for: .normal)
+            buySeparator.isHidden = false
+            buyBtn.isHidden = false
+            buyConstraint.priority = .defaultHigh
+            noBuyConstraint.priority = .defaultLow
+
+        } else if (chainType == ChainType.BINANCE_MAIN) {
+            buyBtn.setTitle(NSLocalizedString("buy_bnb", comment: ""), for: .normal)
+            buySeparator.isHidden = false
+            buyBtn.isHidden = false
+            buyConstraint.priority = .defaultHigh
+            noBuyConstraint.priority = .defaultLow
+
+        } else if (chainType == ChainType.KAVA_MAIN) {
+            buyBtn.setTitle(NSLocalizedString("buy_kava", comment: ""), for: .normal)
+            buySeparator.isHidden = false
+            buyBtn.isHidden = false
+            buyConstraint.priority = .defaultHigh
+            noBuyConstraint.priority = .defaultLow
+
+        } else {
             buySeparator.isHidden = true
             buyBtn.isHidden = true
             buyConstraint.priority = .defaultLow
             noBuyConstraint.priority = .defaultHigh
-//        }
+        }
     }
 }
