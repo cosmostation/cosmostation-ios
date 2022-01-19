@@ -34,6 +34,7 @@ class TxIncentiveSwapCell: TxCell {
         
         if let msg = try? Kava_Incentive_V1beta1_MsgClaimSwapReward.init(serializedData: response.tx.body.messages[position].value) {
             sender.text = msg.sender
+            multiplier.text = msg.denomsToClaim[0].multiplierName
         }
     }
 
