@@ -33,8 +33,9 @@ class HardListCell: UITableViewCell {
         guard let hardMoneyMarket = hardParam?.moneyMarkets[position] else {
             return
         }
+        let baseDenom = BaseData.instance.getBaseDenom(hardMoneyMarket.denom)
         let decimal = WUtils.tokenDivideDecimal(ChainType.KAVA_MAIN, hardMoneyMarket.denom)
-        let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardMoneyMarket.denom + ".png"
+        let url = KAVA_HARD_POOL_IMG_URL + "lp" + baseDenom + ".png"
         let title = hardMoneyMarket.spotMarketID.replacingOccurrences(of: ":30", with: "")
         harvestImg.af_setImage(withURL: URL(string: url)!)
         harvestTitle.text = title.uppercased()

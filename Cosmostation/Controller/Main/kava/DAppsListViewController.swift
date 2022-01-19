@@ -173,7 +173,15 @@ class DAppsListViewController: BaseViewController {
 
 extension WUtils {
     static func getKavaBaseDenom(_ denom: String) -> String {
-        if (denom == KAVA_MAIN_DENOM) {
+        if (denom.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
+                if (ibcToken.auth == true) { return ibcToken.base_denom ?? "" }
+                else { return "" }
+            } else {
+                return ""
+            }
+            
+        } else if (denom == KAVA_MAIN_DENOM) {
             return KAVA_MAIN_DENOM
         } else if (denom == KAVA_HARD_DENOM) {
             return KAVA_HARD_DENOM
@@ -223,8 +231,10 @@ extension WUtils {
     static func getKavaTokenName(_ denom: String) -> String {
         if (denom.starts(with: "ibc/")) {
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-                if (ibcToken.auth == true) { return ibcToken.display_denom?.uppercased() ?? "IBC" }
+                if (ibcToken.auth == true) { return ibcToken.display_denom?.uppercased() ?? "Unknown IBC" }
                 else { return "Unknown" }
+            } else {
+                return "Unknown" 
             }
             
         } else if (denom == KAVA_MAIN_DENOM) {
@@ -274,6 +284,18 @@ extension WUtils {
             
         } else {
             label.textColor = .white
+        }
+    }
+    
+    static func getKavaCoinImg(_ denom: String) -> String {
+        if (denom.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = ibcToken.moniker {
+                return url
+            } else {
+                return KAVA_COIN_IMG_URL
+            }
+        } else {
+            return KAVA_COIN_IMG_URL + denom + ".png"
         }
     }
     

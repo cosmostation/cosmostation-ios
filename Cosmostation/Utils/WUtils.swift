@@ -1189,6 +1189,12 @@ public class WUtils {
                     amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
                     return
                 }
+                
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = "Unknown"
+                amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
+                return
             }
             
         } else if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.COSMOS_TEST) {
@@ -1574,6 +1580,12 @@ public class WUtils {
                     amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
                     return
                 }
+                
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = "Unknown"
+                amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+                return
             }
             
         } else if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.COSMOS_TEST) {
