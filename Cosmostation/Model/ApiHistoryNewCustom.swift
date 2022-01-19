@@ -317,13 +317,13 @@ public struct ApiHistoryNewCustom {
             } else if (msgType.contains(KAVA_MSG_TYPE_LIQUIDATE_CDP)) {
                 result =  NSLocalizedString("tx_kava_liquidate_cdp", comment: "")
 
-            } else if (msgType.contains(KAVA_MSG_TYPE_CREATE_SWAP)) {
+            } else if (msgType.contains(KAVA_MSG_TYPE_HTLC_CREATE_SWAP)) {
                 result = NSLocalizedString("tx_kava_bep3_create", comment: "")
 
-            } else if (msgType.contains(KAVA_MSG_TYPE_CLAIM_SWAP)) {
+            } else if (msgType.contains(KAVA_MSG_TYPE_HTLC_CLAIM_SWAP)) {
                 result = NSLocalizedString("tx_kava_bep3_claim", comment: "")
 
-            } else if (msgType.contains(KAVA_MSG_TYPE_REFUND_SWAP)) {
+            } else if (msgType.contains(KAVA_MSG_TYPE_HTLC_REFUND_SWAP)) {
                 result = NSLocalizedString("tx_kava_bep3_refund", comment: "")
 
             } else if (msgType.contains(KAVA_MSG_TYPE_DEPOSIT_HAVEST) || msgType.contains(KAVA_MSG_TYPE_DEPOSIT_HARD)) {

@@ -344,7 +344,7 @@ class MsgGenerator {
             } catch { print(error) }
             value.height_span = "250"
         }
-        msg.type = KAVA_MSG_TYPE_CREATE_SWAP
+        msg.type = KAVA_MSG_TYPE_HTLC_CREATE_SWAP
         msg.value = value
         return msg
     }
@@ -356,7 +356,7 @@ class MsgGenerator {
         value.from = from
         value.swap_id = swapId.uppercased()
         value.random_number = randomNumber.uppercased()
-        msg.type = KAVA_MSG_TYPE_CLAIM_SWAP
+        msg.type = KAVA_MSG_TYPE_HTLC_CLAIM_SWAP
         msg.value = value
         return msg
     }
@@ -366,7 +366,7 @@ class MsgGenerator {
         var value = Msg.Value.init()
         value.from = from
         value.swap_id = swapId.uppercased()
-        msg.type = KAVA_MSG_TYPE_REFUND_SWAP
+        msg.type = KAVA_MSG_TYPE_HTLC_REFUND_SWAP
         msg.value = value
         return msg
     }

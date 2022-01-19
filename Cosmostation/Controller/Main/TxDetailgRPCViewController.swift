@@ -111,6 +111,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxIncentiveHardCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveHardCell")
         self.txTableView.register(UINib(nibName: "TxIncentiveSwapCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveSwapCell")
         self.txTableView.register(UINib(nibName: "TxIncentiveDelegatorCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveDelegatorCell")
+        self.txTableView.register(UINib(nibName: "TxHtlcCreateCell", bundle: nil), forCellReuseIdentifier: "TxHtlcCreateCell")
+        self.txTableView.register(UINib(nibName: "TxHtlcClaimCell", bundle: nil), forCellReuseIdentifier: "TxHtlcClaimCell")
+        self.txTableView.register(UINib(nibName: "TxHtlcRefundCell", bundle: nil), forCellReuseIdentifier: "TxHtlcRefundCell")
         
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
@@ -474,6 +477,21 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimSwapReward.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveSwapCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Bep3_V1beta1_MsgCreateAtomicSwap.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxHtlcCreateCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Bep3_V1beta1_MsgClaimAtomicSwap.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxHtlcClaimCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Kava_Bep3_V1beta1_MsgRefundAtomicSwap.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxHtlcRefundCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 

@@ -203,13 +203,13 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             } else if (msg?.type == KAVA_MSG_TYPE_LIQUIDATE_CDP) {
                 return onBindCdpLiquidate(tableView, indexPath.row)
                 
-            } else if (msg?.type == KAVA_MSG_TYPE_CREATE_SWAP || msg?.type == BNB_MSG_TYPE_HTLC) {
+            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_CREATE_SWAP || msg?.type == BNB_MSG_TYPE_HTLC) {
                 return onBindHtlcCreate(tableView, indexPath.row)
                 
-            } else if (msg?.type == KAVA_MSG_TYPE_CLAIM_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_CLIAM) {
+            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_CLAIM_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_CLIAM) {
                 return onBindHtlcClaim(tableView, indexPath.row)
                 
-            } else if (msg?.type == KAVA_MSG_TYPE_REFUND_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_REFUND) {
+            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_REFUND_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_REFUND) {
                 return onBindHtlcRefund(tableView, indexPath.row)
                 
             }else if (msg?.type == KAVA_MSG_TYPE_DEPOSIT_HAVEST || msg?.type == KAVA_MSG_TYPE_DEPOSIT_HARD) {
@@ -1012,7 +1012,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                     }
                     
                 } else if (self.chainType! == ChainType.KAVA_MAIN || self.chainType! == ChainType.KAVA_TEST) {
-                    if (self.mTxInfo?.getMsgs()[0].type == KAVA_MSG_TYPE_CREATE_SWAP) {
+                    if (self.mTxInfo?.getMsgs()[0].type == KAVA_MSG_TYPE_HTLC_CREATE_SWAP) {
                         print("simpleKavaSwapId " , self.mTxInfo?.simpleKavaSwapId())
                         self.onFetchHtlcStatus(self.mTxInfo?.simpleKavaSwapId())
                     } else {
