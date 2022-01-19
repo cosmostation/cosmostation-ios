@@ -18,8 +18,6 @@ class BaseNetWork {
             return BNB_URL + "api/v1/node-info"
         } else if (chain == ChainType.OKEX_MAIN) {
             return OKEX_URL + "node_info"
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "node_info"
         }
         
         else if (chain == ChainType.BINANCE_TEST) {
@@ -41,8 +39,6 @@ class BaseNetWork {
             return BNB_URL + "api/v1/account/" + address
         } else if (chain == ChainType.OKEX_MAIN) {
             return OKEX_URL + "auth/accounts/" + address
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "auth/accounts/" + address
         }
         
         else if (chain == ChainType.BINANCE_TEST) {
@@ -62,8 +58,6 @@ class BaseNetWork {
     static func validatorsUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.OKEX_MAIN) {
             return OKEX_URL + "staking/validators"
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "staking/validators"
         }
         
         else if (chain == ChainType.OKEX_TEST) {
@@ -78,26 +72,11 @@ class BaseNetWork {
         return ""
     }
     
-    static func validatorUrl(_ chain: ChainType?, _ opAddress: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "staking/validators" + "/" + opAddress
-        }
-        
-        if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "staking/validators" + "/" + opAddress
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "staking/validators" + "/" + opAddress
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "staking/validators" + "/" + opAddress
-        }
-        return ""
-    }
-    
     static func bondingsUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/delegators/" + address + "/delegations"
         }
-        
+
         else if (chain == ChainType.KAVA_TEST) {
             return KAVA_TEST_URL + "staking/delegators/" + address + "/delegations"
         } else if (chain == ChainType.CERTIK_TEST) {
@@ -108,62 +87,17 @@ class BaseNetWork {
         return ""
     }
     
-    static func bondingUrl(_ chain: ChainType?, _ address: String, _ opAddress: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "staking/delegators/" + address + "/delegations/" + opAddress
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "staking/delegators/" + address + "/delegations/" + opAddress
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "staking/delegators/" + address + "/delegations/" + opAddress
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "staking/delegators/" + address + "/delegations/" + opAddress
-        }
-        return ""
-    }
-    
     static func unbondingsUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/delegators/" + address + "/unbonding_delegations"
         }
-        
+
         else if (chain == ChainType.KAVA_TEST) {
             return KAVA_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations"
         } else if (chain == ChainType.CERTIK_TEST) {
             return CERTIK_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations"
         } else if (chain == ChainType.MEDI_TEST) {
             return MEDI_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations"
-        }
-        return ""
-    }
-    
-    static func unbondingUrl(_ chain: ChainType?, _ address: String, _ opAddress: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "staking/delegators/" + address + "/unbonding_delegations/" + opAddress
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations/" + opAddress
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations/" + opAddress
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations/" + opAddress
-        }
-        return ""
-    }
-    
-    static func redelegationsUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "staking/redelegations"
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "staking/redelegations"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "staking/redelegations"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "staking/redelegations"
         }
         return ""
     }
@@ -179,126 +113,6 @@ class BaseNetWork {
             return CERTIK_TEST_URL + "distribution/delegators/" + address + "/rewards"
         } else if (chain == ChainType.MEDI_TEST) {
             return MEDI_TEST_URL + "distribution/delegators/" + address + "/rewards"
-        }
-        return ""
-    }
-    
-    static func rewardUrl(_ chain: ChainType?, _ address: String, _ opAddress: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "distribution/delegators/" + address + "/rewards/" + opAddress
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "distribution/delegators/" + address + "/rewards/" + opAddress
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "distribution/delegators/" + address + "/rewards/" + opAddress
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "distribution/delegators/" + address + "/rewards/" + opAddress
-        }
-        return ""
-    }
-    
-    static func rewardAddressUrl(_ chain: ChainType?, _ address: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "distribution/delegators/" + address + "/withdraw_address"
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "distribution/delegators/" + address + "/withdraw_address"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "distribution/delegators/" + address + "/withdraw_address"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "distribution/delegators/" + address + "/withdraw_address"
-        }
-        return ""
-    }
-    
-    static func proposalsUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "gov/proposals"
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "gov/proposals"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "gov/proposals"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "gov/proposals"
-        }
-        return ""
-    }
-    
-    static func proposalUrl(_ chain: ChainType?, _ id: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "gov/proposals" + "/" + id
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "gov/proposals" + "/" + id
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "gov/proposals" + "/" + id
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "gov/proposals" + "/" + id
-        }
-        return ""
-    }
-    
-    static func tallyUrl(_ chain: ChainType?, _ id: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "gov/proposals" + "/" + id + "/tally"
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "gov/proposals" + "/" + id + "/tally"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "gov/proposals" + "/" + id + "/tally"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "gov/proposals" + "/" + id + "/tally"
-        }
-        return ""
-    }
-    
-    static func voteUrl(_ chain: ChainType?, _ id: String, _ address: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "gov/proposals" +  "/" + id + "/votes/" + address
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "gov/proposals" + "/" + id + "/votes/" + address
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "gov/proposals" + "/" + id + "/votes/" + address
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "gov/proposals" + "/" + id + "/votes/" + address
-        }
-        return ""
-    }
-    
-    static func proposerUrl(_ chain: ChainType?, _ id: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "gov/proposals" + "/" + id + "/proposer"
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "gov/proposals" + "/" + id + "/proposer"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "gov/proposals" + "/" + id + "/proposer"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "gov/proposals" + "/" + id + "/proposer"
-        }
-        return ""
-    }
-    
-    static func votesUrl(_ chain: ChainType?, _ id: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "gov/proposals" + "/" + id + "/votes"
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "gov/proposals" + "/" + id + "/votes"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "gov/proposals" + "/" + id + "/votes"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "gov/proposals" + "/" + id + "/votes"
         }
         return ""
     }
@@ -398,48 +212,12 @@ class BaseNetWork {
     }
     
     
-    //for Kava
-    static func paramPriceFeedUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "pricefeed/parameters"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "pricefeed/parameters"
-        }
-        return ""
-    }
-    
-    static func priceFeedUrl(_ chain: ChainType?, _ market: String) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "pricefeed/price/" + market
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "pricefeed/price/" + market
-        }
-        return ""
-    }
-    
+    //for Kava (using cuz kava query limitation)
     static func paramIncentiveUrl(_ chain: ChainType) -> String {
         if (chain == ChainType.KAVA_MAIN ) {
             return KAVA_URL + "incentive/parameters"
         } else if (chain == ChainType.KAVA_TEST) {
             return KAVA_TEST_URL + "incentive/parameters"
-        }
-        return ""
-    }
-    
-    static func paramCdpUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "cdp/parameters"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "cdp/parameters"
-        }
-        return ""
-    }
-    
-    static func owenCdpUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "cdp/cdps"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "cdp/cdps"
         }
         return ""
     }
@@ -453,69 +231,6 @@ class BaseNetWork {
         return ""
     }
     
-    static func paramHardPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "hard/parameters"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "hard/parameters"
-        }
-        return ""
-    }
-    
-    static func interestRateHardPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "hard/interest-rate"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "hard/interest-rate"
-        }
-        return ""
-    }
-    
-    static func totalDepositHardPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "hard/total-deposited"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "hard/total-deposited"
-        }
-        return ""
-    }
-    
-    static func totalBorrowHardPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "hard/total-borrowed"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "hard/total-borrowed"
-        }
-        return ""
-    }
-    
-    static func depositHardPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "hard/deposits"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "hard/deposits"
-        }
-        return ""
-    }
-    
-    static func borrowHardPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "hard/borrows"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "hard/borrows"
-        }
-        return ""
-    }
-    
-    static func reservesHardPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "hard/reserves"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "hard/reserves"
-        }
-        return ""
-    }
-    
     static func managerHardPoolUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.KAVA_MAIN ) {
             return KAVA_URL + "hard/accounts"
@@ -524,48 +239,12 @@ class BaseNetWork {
         }
         return ""
     }
-    
+
     static func incentiveUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.KAVA_MAIN ) {
             return KAVA_URL + "incentive/rewards"
         } else if (chain == ChainType.KAVA_TEST) {
             return KAVA_TEST_URL + "incentive/rewards"
-        }
-        return ""
-    }
-    
-    static func paramSwapPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "swap/parameters"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "swap/parameters"
-        }
-        return ""
-    }
-    
-    static func listSwapPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "swap/pools"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "swap/pools"
-        }
-        return ""
-    }
-    
-    static func swapPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "swap/pool"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "swap/pool"
-        }
-        return ""
-    }
-    
-    static func depositSwapPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "swap/deposits"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "swap/deposits"
         }
         return ""
     }

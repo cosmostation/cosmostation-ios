@@ -59,7 +59,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             self.onFetchRewardAddress_gRPC(account!.account_address)
             self.onFetchgRPCNodeInfo()
         } else {
-            self.onFetchRewardAddress(account!.account_address)
             self.onFetchNodeInfo()
         }
         walletName.text = WUtils.getWalletName(account)
@@ -714,28 +713,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
                 self.onDeleteWallet(self.account!)
             })
             
-        }
-    }
-    
-    func onFetchRewardAddress(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.rewardAddressUrl(chainType, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary, let address = responseData.object(forKey: "result") as? String else {
-                        return;
-                }
-                self.rewardCard.isHidden = false
-                let trimAddress = address.replacingOccurrences(of: "\"", with: "")
-                self.rewardAddress.text = trimAddress
-                if (trimAddress != address) {
-                    self.rewardAddress.textColor = UIColor.init(hexString: "f31963")
-                }
-                self.rewardAddress.adjustsFontSizeToFitWidth = true
-                
-            case .failure(let error):
-                print("onFetchRewardAddress ", error)
-            }
         }
     }
     
