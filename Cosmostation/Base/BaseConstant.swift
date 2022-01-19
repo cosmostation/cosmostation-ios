@@ -9,7 +9,7 @@
 import Foundation
 import SQLite
 
-let SUPPORT_BEP3_SWAP                   = true;
+let SUPPORT_BEP3_SWAP                   = false;
 
 let KEY_RECENT_ACCOUNT                  = "KEY_RECENT_ACCOUNT"
 let KEY_RECENT_CHAIN                    = "KEY_RECENT_CHAIN"
@@ -50,12 +50,8 @@ let BNB_URL                             = "https://dex.binance.org/";
 let BNB_TEST_URL                        = "https://testnet-dex.binance.org/";
 
 
-//let KAVA_URL                            = "https://lcd-kava-app.cosmostation.io/";
-//let KAVA_API                            = "https://api-kava.cosmostation.io/";
-
-//TODO Temp Test
-let KAVA_URL                            = "https://lcd-office.cosmostation.io/kava-testnet-14000/";
-let KAVA_API                            = "https://api-office.cosmostation.io/kava-testnet-14000/";
+let KAVA_URL                            = "https://lcd-kava-app.cosmostation.io/";
+let KAVA_API                            = "https://api-kava.cosmostation.io/";
 
 let KAVA_TEST_URL                       = "https://lcd-office.cosmostation.io/kava-testnet-12000/";
 let KAVA_TEST_API                       = "https://api-office.cosmostation.io/kava-testnet-12000/";
@@ -1084,7 +1080,7 @@ public enum ChainType: String {
     }
     
     static func IS_TESTNET(_ chain: ChainType?) -> Bool {
-        if (chain == UMEE_TEST || chain == AXELAR_TEST || chain == KAVA_MAIN) {
+        if (chain == UMEE_TEST || chain == AXELAR_TEST) {
             return true
         }
         return false

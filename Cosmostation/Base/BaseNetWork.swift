@@ -702,8 +702,7 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-chihuahua-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.KAVA_MAIN) {
-            //TODO TEMP for test
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20300)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-kava-app.cosmostation.io", port: 9090)
         }
         
         

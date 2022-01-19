@@ -196,8 +196,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         
         BaseData.instance.mGravityPools_gRPC.removeAll()
         
-//        BaseData.instance.mKavaPriceMarkets_gRPC.removeAll()
-        
         
         
         if (mChainType == ChainType.BINANCE_MAIN || mChainType == ChainType.BINANCE_TEST) {
