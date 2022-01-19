@@ -2219,6 +2219,19 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.STARGAZE_MAIN) {
             guard let url = URL(string: "https://www.coingecko.com/en/coins/stargaze") else { return }
             self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.LUM_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/lum-network") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.CHIHUAHUA_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/chihuahua-chain") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.DESMOS_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/desmos") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
