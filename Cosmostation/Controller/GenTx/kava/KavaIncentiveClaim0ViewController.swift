@@ -64,7 +64,7 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
         swpIncentiveAmountLabel.attributedText = WUtils.displayAmount2(swpIncentiveCal.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
         
         lockupLabel.text = "1 Month"
-        pageHolderVC.mIncentiveMultiplier = "small"
+        pageHolderVC.mIncentiveMultiplier = "MULTIPLIER_NAME_SMALL"
     }
     
     @IBAction func onClickOption2(_ sender: UIButton) {
@@ -79,7 +79,7 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
         swpIncentiveAmountLabel.attributedText = WUtils.displayAmount2(swpIncentiveCal.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
         
         lockupLabel.text = "12 Month"
-        pageHolderVC.mIncentiveMultiplier = "large"
+        pageHolderVC.mIncentiveMultiplier = "MULTIPLIER_NAME_LARGE"
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {

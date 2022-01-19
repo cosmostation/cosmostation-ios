@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TxHardRepayCell: UITableViewCell {
+class TxHardRepayCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var sender: UILabel!
@@ -21,6 +21,19 @@ class TxHardRepayCell: UITableViewCell {
         self.selectionStyle = .none
         
         repayAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+    }
+    
+    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
+        txIcon.tintColor = WUtils.getChainColor(chain)
+        
+        if let msg = try? Kava_Hard_V1beta1_MsgRepay.init(serializedData: response.tx.body.messages[position].value) {
+            sender.text = msg.sender
+            owener.text = msg.owner
+            
+            let coin = Coin.init(msg.amount[0].denom, msg.amount[0].amount)
+            WUtils.showCoinDp(coin, repayDenom, repayAmount, chain)
+        }
     }
     
     func onBind(_ chaintype: ChainType, _ msg: Msg) {

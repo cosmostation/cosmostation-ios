@@ -29,31 +29,21 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.balances = account!.account_balances
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        pageHolderVC = self.parent as? StepGenTxViewController
-        hardPoolDenom = pageHolderVC.mHardPoolDenom!
+        hardPoolDenom = pageHolderVC.mHardMoneyMarketDenom!
         dpDecimal = WUtils.getKavaCoinDecimal(hardPoolDenom)
         
-        let currentAvailable = account!.getTokenBalance(hardPoolDenom)
-        currentBorrowed = WUtils.getHardBorrowedAmountByDenom(hardPoolDenom, BaseData.instance.mMyHardBorrow).multiplying(by: NSDecimalNumber.init(string: "1.05"), withBehavior: WUtils.handler0 )
+        let currentAvailable = BaseData.instance.getAvailableAmount_gRPC(hardPoolDenom)
+        currentBorrowed = WUtils.getHardBorrowedAmountByDenom(hardPoolDenom, BaseData.instance.mHardMyBorrow).multiplying(by: NSDecimalNumber.init(string: "1.05"), withBehavior: WUtils.handler0 )
         availableMax = currentAvailable.compare(currentBorrowed).rawValue > 0 ? currentBorrowed : currentAvailable
         
         print("currentAvailable ", currentAvailable)
         print("currentBorrowed ", currentBorrowed)
         
-        if (hardPoolDenom == KAVA_MAIN_DENOM) {
-            WUtils.setDenomTitle(chainType!, mCoinLabel)
-        } else if (hardPoolDenom == KAVA_HARD_DENOM) {
-            self.mCoinLabel.textColor = COLOR_HARD
-            self.mCoinLabel.text = hardPoolDenom.uppercased()
-        } else {
-            self.mCoinLabel.textColor = .white
-            self.mCoinLabel.text = hardPoolDenom.uppercased()
-        }
+        WUtils.DpKavaTokenName(mCoinLabel, hardPoolDenom)
         WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
         self.mCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + hardPoolDenom + ".png")!)
         self.loadingImg.isHidden = true
@@ -180,7 +170,8 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
             return false
         }
         
-        let denomPrice  = WUtils.getKavaPrice(hardPoolDenom)
+        let hardParam = BaseData.instance.mKavaHardParams_gRPC
+        let denomPrice = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(hardPoolDenom))
         let remainAmount = currentBorrowed.subtracting(userInput.multiplying(byPowerOf10: dpDecimal))
         let remainValue = remainAmount.multiplying(byPowerOf10: -dpDecimal).multiplying(by: denomPrice)
         if (remainValue.compare(NSDecimalNumber.zero).rawValue > 0 && remainValue.compare(NSDecimalNumber.init(value: 10)).rawValue < 0) {

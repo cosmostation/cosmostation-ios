@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Alamofire
+import GRPC
+import NIO
 
 class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
     
@@ -24,7 +25,7 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
     @IBOutlet weak var outputCoinAmountLabel: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    var mPool: SwapPool!
+    var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse!
     var availableMaxAmount = NSDecimalNumber.zero
     var dpInPutDecimal:Int16 = 6
     var dpOutPutDecimal:Int16 = 6
@@ -43,7 +44,7 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         loadingImg.startAnimating()
-        onFetchSwapPool(pageHolderVC.mKavaPool!.name!)
+        onFetchgRPCSwapPool(pageHolderVC.mKavaSwapPool!.name)
     }
     
     func onInitView() {
@@ -53,18 +54,18 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         let inputCoinDenom = pageHolderVC.mSwapInDenom!
         let outputCoinDenom = pageHolderVC.mSwapOutDenom!
         
-        if (mPool.coins[0].denom == inputCoinDenom) {
-            mInputCoinAmount = NSDecimalNumber.init(string: mPool.coins[0].amount)
-            mOutputCoinAmount = NSDecimalNumber.init(string: mPool.coins[1].amount)
+        if (mKavaSwapPool.coins[0].denom == inputCoinDenom) {
+            mInputCoinAmount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)
+            mOutputCoinAmount = NSDecimalNumber.init(string: mKavaSwapPool.coins[1].amount)
         } else {
-            mInputCoinAmount = NSDecimalNumber.init(string: mPool.coins[1].amount)
-            mOutputCoinAmount = NSDecimalNumber.init(string: mPool.coins[0].amount)
+            mInputCoinAmount = NSDecimalNumber.init(string: mKavaSwapPool.coins[1].amount)
+            mOutputCoinAmount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)
         }
         
         dpInPutDecimal = WUtils.getKavaCoinDecimal(inputCoinDenom)
         dpOutPutDecimal = WUtils.getKavaCoinDecimal(outputCoinDenom)
         
-        availableMaxAmount = BaseData.instance.availableAmount(inputCoinDenom)
+        availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(inputCoinDenom)
         WUtils.showCoinDp(inputCoinDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
         
         swapRate = mOutputCoinAmount.dividing(by: mInputCoinAmount, withBehavior: WUtils.handler18)
@@ -126,7 +127,8 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         }
         inputTextFiled.layer.borderColor = UIColor.white.cgColor
         
-        let padding = (NSDecimalNumber.one).subtracting(BaseData.instance.mKavaSwapParam.swap_fee).subtracting(NSDecimalNumber.init(string: "0.03"))
+        let swapFee = NSDecimalNumber.init(string: BaseData.instance.mKavaSwapPoolParam?.swapFee).multiplying(byPowerOf10: -18)
+        let padding = (NSDecimalNumber.one).subtracting(swapFee).subtracting(NSDecimalNumber.init(string: "0.03"))
         let outputAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal).multiplying(by: padding).multiplying(by: swapRate, withBehavior: WUtils.handler0)
         outputCoinAmountLabel.text = outputAmount.multiplying(byPowerOf10: -dpOutPutDecimal).stringValue
      
@@ -173,7 +175,7 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
             pageHolderVC.mSwapInAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal)
             let userOutput = WUtils.localeStringToDecimal((outputCoinAmountLabel.text?.trimmingCharacters(in: .whitespaces))!)
             pageHolderVC.mSwapOutAmount = userOutput.multiplying(byPowerOf10: dpOutPutDecimal)
-            pageHolderVC.mKavaPool = self.mPool
+            pageHolderVC.mKavaSwapPool = self.mKavaSwapPool
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()
         }
@@ -191,24 +193,20 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
     }
 
     
-    func onFetchSwapPool(_ poolId: String) {
-        let request = Alamofire.request(BaseNetWork.swapPoolUrl(chainType), method: .get, parameters: ["pool":poolId], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("onFetchSwapPool ", res)
-                guard let responseData = res as? NSDictionary,
-                      let responseResult = responseData.object(forKey: "result") as? NSDictionary,
-                      let _ = responseData.object(forKey: "height") as? String  else {
-                    self.pageHolderVC.onBeforePage()
-                    return
+    func onFetchgRPCSwapPool(_ poolId: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Kava_Swap_V1beta1_QueryPoolsRequest.with { $0.poolID = poolId }
+                if let response = try? Kava_Swap_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.mKavaSwapPool = response.pools[0]
                 }
-                self.mPool = SwapPool.init(responseResult)
-                self.onInitView()
+                try channel.close().wait()
                 
-            case .failure(let error):
-                print("onFetchSwapPool ", error)
+            } catch {
+                print("onFetchgRPCSwapPool failed: \(error)")
             }
+            DispatchQueue.main.async(execute: { self.onInitView() });
         }
     }
 }

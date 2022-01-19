@@ -95,98 +95,9 @@ class StepChangeCheckViewController: BaseViewController, PasswordViewDelegate {
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            if (WUtils.isGRPC(chainType)) {
-                self.onFetchgRPCAuth(pageHolderVC.mAccount!)
-            } else {
-                self.onFetchAccountInfo(pageHolderVC.mAccount!)
-            }
+            self.onFetchgRPCAuth(pageHolderVC.mAccount!)
         }
     }
-    
-    func onFetchAccountInfo(_ account: Account) {
-        self.showWaittingAlert()
-        let request = Alamofire.request(BaseNetWork.accountInfoUrl(chainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let info = responseData.object(forKey: "result") as? [String : Any] else {
-                        _ = BaseData.instance.deleteBalance(account: account)
-                        self.hideWaittingAlert()
-                        self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                        return
-                }
-                let accountInfo = AccountInfo.init(info)
-                _ = BaseData.instance.updateAccount(WUtils.getAccountWithAccountInfo(account, accountInfo))
-                BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithAccountInfo(account, accountInfo))
-                self.onGenModifyRewardAddressTx()
-                
-            case .failure( _):
-                self.hideWaittingAlert()
-                self.onShowToast(NSLocalizedString("error_network", comment: ""))
-            }
-        }
-    }
-    
-    func onGenModifyRewardAddressTx() {
-        DispatchQueue.global().async {
-            let msg = MsgGenerator.genGetModifyRewardAddressMsg(self.pageHolderVC.mAccount!.account_address,
-                                                                self.pageHolderVC.mToChangeRewardAddress!,
-                                                                self.chainType!)
-            var msgList = Array<Msg>()
-            msgList.append(msg)
-            
-            let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
-                                                   String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                   String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                   msgList,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!)
-            
-            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                        msgList, stdMsg,
-                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
- 
-            DispatchQueue.main.async(execute: {
-                let postTx = PostTx.init("sync", stdTx.value)
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .sortedKeys
-                let data = try? encoder.encode(postTx)
-                
-                do {
-                    let params = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-                    let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-                    request.responseJSON { response in
-                        var txResult = [String:Any]()
-                        switch response.result {
-                        case .success(let res):
-                            print("AddressChange ", res)
-                            if let result = res as? [String : Any]  {
-                                txResult = result
-                            }
-                        case .failure(let error):
-                            print("AddressChange error ", error)
-                            if (response.response?.statusCode == 500) {
-                                txResult["net_error"] = 500
-                            }
-                        }
-                        
-                        if (self.waitAlert != nil) {
-                            self.waitAlert?.dismiss(animated: true, completion: {
-                                self.onStartTxDetail(txResult)
-                            })
-                        }
-                    }
-                    
-                } catch {
-                    print(error)
-                }
-            });
-        
-        }
-    }
-    
-    
     
     func onFetchgRPCAuth(_ account: Account) {
         self.showWaittingAlert()

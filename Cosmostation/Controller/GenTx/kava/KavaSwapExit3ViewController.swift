@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import Alamofire
+import GRPC
+import NIO
 
 class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
     
@@ -23,12 +24,12 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var btnConfirm: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mKavaPool: SwapPool!
-    var mKavaDeposit: SwapDeposit!
     var coin0Decimal:Int16 = 6
     var coin1Decimal:Int16 = 6
     var coin0: Coin?
     var coin1: Coin?
+    var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse!
+    var mMyKavaPoolDeposits: Kava_Swap_V1beta1_DepositResponse!
     
 
     override func viewDidLoad() {
@@ -37,8 +38,8 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        self.mKavaPool = pageHolderVC.mKavaPool
-        self.mKavaDeposit = pageHolderVC.mKavaDeposit
+        self.mKavaSwapPool = pageHolderVC.mKavaSwapPool
+        self.mMyKavaPoolDeposits = pageHolderVC.mKavaSwapPoolDeposit
     }
     
     override func enableUserInteraction() {
@@ -49,16 +50,17 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onUpdateView() {
         WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
-        
         shareAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mKavaShareAmount.stringValue, shareAmountLabel.font!, 6, 6)
         
-        let depositRate = (pageHolderVC.mKavaShareAmount).dividing(by: mKavaDeposit.shares_owned, withBehavior: WUtils.handler18)
+        let sharesOwned = NSDecimalNumber.init(string: mMyKavaPoolDeposits.sharesOwned)
+        let depositRate = (pageHolderVC.mKavaShareAmount).dividing(by: sharesOwned, withBehavior: WUtils.handler18)
         let padding = NSDecimalNumber(string: "0.97")
-        let coin0Amount = NSDecimalNumber.init(string: mKavaDeposit.shares_value[0].amount).multiplying(by: padding).multiplying(by: depositRate, withBehavior: WUtils.handler0)
-        let coin1Amount = NSDecimalNumber.init(string: mKavaDeposit.shares_value[1].amount).multiplying(by: padding).multiplying(by: depositRate, withBehavior: WUtils.handler0)
-        coin0 = Coin.init(mKavaDeposit.shares_value[0].denom, coin0Amount.stringValue)
-        coin1 = Coin.init(mKavaDeposit.shares_value[1].denom, coin1Amount.stringValue)
-        
+        let sharesValue0 = NSDecimalNumber.init(string: mMyKavaPoolDeposits.sharesValue[0].amount)
+        let sharesValue1 = NSDecimalNumber.init(string: mMyKavaPoolDeposits.sharesValue[1].amount)
+        let coin0Amount = sharesValue0.multiplying(by: padding).multiplying(by: depositRate, withBehavior: WUtils.handler0)
+        let coin1Amount = sharesValue1.multiplying(by: padding).multiplying(by: depositRate, withBehavior: WUtils.handler0)
+        coin0 = Coin.init(mMyKavaPoolDeposits.sharesValue[0].denom, coin0Amount.stringValue)
+        coin1 = Coin.init(mMyKavaPoolDeposits.sharesValue[1].denom, coin1Amount.stringValue)
         WUtils.showCoinDp(coin0!, withdraw0DenomLabel, withdraw0AmountLabel, chainType!)
         WUtils.showCoinDp(coin1!, withdraw1DenomLabel, withdraw1AmountLabel, chainType!)
         memoLabel.text = pageHolderVC.mMemo
@@ -81,93 +83,64 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            self.onFetchAccountInfo(pageHolderVC.mAccount!)
+            self.onFetchgRPCAuth(account!)
         }
     }
     
-    func onFetchAccountInfo(_ account: Account) {
+    func onFetchgRPCAuth(_ account: Account) {
         self.showWaittingAlert()
-        let request = Alamofire.request(BaseNetWork.accountInfoUrl(chainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let info = res as? [String : Any] else {
-                    _ = BaseData.instance.deleteBalance(account: account)
-                    self.hideWaittingAlert()
-                    self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                    return
-                }
-                let accountInfo = KavaAccountInfo.init(info)
-                _ = BaseData.instance.updateAccount(WUtils.getAccountWithKavaAccountInfo(account, accountInfo))
-                BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithKavaAccountInfo(account, accountInfo))
-                self.onGenWithdrawTx()
-                
-            case .failure( _):
-                self.hideWaittingAlert()
-                self.onShowToast(NSLocalizedString("error_network", comment: ""))
+        DispatchQueue.global().async {
+            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+            defer { try! group.syncShutdownGracefully() }
+            
+            let channel = BaseNetWork.getConnection(self.chainType!, group)!
+            defer { try! channel.close().wait() }
+            
+            let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with {
+                $0.address = account.account_address
+            }
+            do {
+                let response = try Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait()
+                self.onBroadcastGrpcTx(response)
+            } catch {
+                print("onFetchgRPCAuth failed: \(error)")
             }
         }
     }
     
-    func onGenWithdrawTx() {
+    func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
-            let msg = MsgGenerator.genSwapWithdrawMsg(self.chainType!,
-                                                     self.pageHolderVC.mAccount!.account_address,
-                                                     self.pageHolderVC.mKavaShareAmount.stringValue,
-                                                     self.coin0!,
-                                                     self.coin1!,
-                                                     String(deadline))
-            var msgList = Array<Msg>()
-            msgList.append(msg)
+            let reqTx = Signer.genSignedKavaSwapWithdraw(auth!,
+                                                         self.account!.account_address,
+                                                         self.pageHolderVC.mKavaShareAmount.stringValue,
+                                                         self.coin0!,
+                                                         self.coin1!,
+                                                         deadline,
+                                                         self.pageHolderVC.mFee!,
+                                                         self.pageHolderVC.mMemo!,
+                                                         self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                         BaseData.instance.getChainId(self.chainType))
             
-            let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
-                                                   String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                   String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                   msgList,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!)
+            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+            defer { try! group.syncShutdownGracefully() }
             
-            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                        msgList, stdMsg,
-                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+            let channel = BaseNetWork.getConnection(self.chainType!, group)!
+            defer { try! channel.close().wait() }
             
-            DispatchQueue.main.async(execute: {
-                let postTx = PostTx.init("sync", stdTx.value)
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .sortedKeys
-                let data = try? encoder.encode(postTx)
-                do {
-                    let params = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-                    print("params ", params)
-                    let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-                    request.responseJSON { response in
-                        var txResult = [String:Any]()
-                        switch response.result {
-                        case .success(let res):
-                            print("onGenWithdrawTx ", res)
-                            if let result = res as? [String : Any]  {
-                                txResult = result
-                            }
-                        case .failure(let error):
-                            print("onGenWithdrawTx error ", error)
-                            if (response.response?.statusCode == 500) {
-                                txResult["net_error"] = 500
-                            }
-                        }
-
-                        if (self.waitAlert != nil) {
-                            self.waitAlert?.dismiss(animated: true, completion: {
-                                txResult["type"] = COSMOS_MSG_TYPE_DELEGATE
-                                self.onStartTxDetail(txResult)
-                            })
-                        }
+            do {
+                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
+//                print("response ", response.txResponse.txhash)
+                DispatchQueue.main.async(execute: {
+                    if (self.waitAlert != nil) {
+                        self.waitAlert?.dismiss(animated: true, completion: {
+                            self.onStartTxDetailgRPC(response)
+                        })
                     }
-
-                } catch {
-                    print(error)
-                }
-            });
+                });
+            } catch {
+                print("onBroadcastGrpcTx failed: \(error)")
+            }
         }
     }
 }

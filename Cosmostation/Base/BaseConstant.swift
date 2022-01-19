@@ -9,7 +9,7 @@
 import Foundation
 import SQLite
 
-let SUPPORT_BEP3_SWAP                   = true;
+let SUPPORT_BEP3_SWAP                   = false;
 
 let KEY_RECENT_ACCOUNT                  = "KEY_RECENT_ACCOUNT"
 let KEY_RECENT_CHAIN                    = "KEY_RECENT_CHAIN"
@@ -31,6 +31,7 @@ let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 
 let STATION_URL                         = "https://api-utility.cosmostation.io/";
+let STATION_TEST_URL                    = "https://api-office.cosmostation.io/utility/";
 let MINTSCAN_API_URL                    = "https://api.mintscan.io/";
 let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
@@ -236,6 +237,7 @@ let RELAYER_IMG_DESMOS                  = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_GRAVITYBRIDGE           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/gravity-bridge/relay-gravitybridge-unknown.png"
 let RELAYER_IMG_LUM                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/lum-network/relay-lum-unknown.png"
 let RELAYER_IMG_CHIHUAHUA               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/chihuahua/relay-chihuahua-unknown.png"
+let RELAYER_IMG_KAVA                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/kava/relay-kava-unknown.png"
 
 
 
@@ -379,34 +381,34 @@ let TASK_TYPE_HTLC_SWAP                     = "htlc_swap";
 let TASK_TYPE_HTLC_REFUND                   = "htlc_refund";
 
 let KAVA_MSG_TYPE_POST_PRICE                = "pricefeed/MsgPostPrice";
-let KAVA_MSG_TYPE_CREATE_CDP                = "cdp/MsgCreateCDP";
-let KAVA_MSG_TYPE_DEPOSIT_CDP               = "cdp/MsgDeposit";
-let KAVA_MSG_TYPE_WITHDRAW_CDP              = "cdp/MsgWithdraw";
-let KAVA_MSG_TYPE_DRAWDEBT_CDP              = "cdp/MsgDrawDebt";
-let KAVA_MSG_TYPE_REPAYDEBT_CDP             = "cdp/MsgRepayDebt";
-let KAVA_MSG_TYPE_LIQUIDATE_CDP             = "cdp/MsgLiquidate";
-let KAVA_MSG_TYPE_CREATE_SWAP               = "bep3/MsgCreateAtomicSwap";
-let KAVA_MSG_TYPE_CLAIM_SWAP                = "bep3/MsgClaimAtomicSwap";
-let KAVA_MSG_TYPE_REFUND_SWAP               = "bep3/MsgRefundAtomicSwap";
+let KAVA_MSG_TYPE_CREATE_CDP                = "/kava.cdp.v1beta1.MsgCreateCDP";
+let KAVA_MSG_TYPE_DEPOSIT_CDP               = "/kava.cdp.v1beta1.MsgDeposit";
+let KAVA_MSG_TYPE_WITHDRAW_CDP              = "/kava.cdp.v1beta1.MsgWithdraw";
+let KAVA_MSG_TYPE_DRAWDEBT_CDP              = "/kava.cdp.v1beta1.MsgDrawDebt";
+let KAVA_MSG_TYPE_REPAYDEBT_CDP             = "/kava.cdp.v1beta1.MsgRepayDebt";
+let KAVA_MSG_TYPE_LIQUIDATE_CDP             = "/kava.cdp.v1beta1.MsgLiquidate";
+let KAVA_MSG_TYPE_HTLC_CREATE_SWAP          = "/kava.bep3.v1beta1.MsgCreateAtomicSwap";
+let KAVA_MSG_TYPE_HTLC_CLAIM_SWAP           = "/kava.bep3.v1beta1.MsgClaimAtomicSwap";
+let KAVA_MSG_TYPE_HTLC_REFUND_SWAP          = "/kava.bep3.v1beta1.MsgRefundAtomicSwap";
 let KAVA_MSG_TYPE_INCENTIVE_REWARD          = "incentive/MsgClaimReward";
 let KAVA_MSG_TYPE_DEPOSIT_HAVEST            = "harvest/MsgDeposit";
 let KAVA_MSG_TYPE_WITHDRAW_HAVEST           = "harvest/MsgWithdraw";
 let KAVA_MSG_TYPE_CLAIM_HAVEST              = "harvest/MsgClaimReward";
-let KAVA_MSG_TYPE_USDX_MINT_INCENTIVE       = "incentive/MsgClaimUSDXMintingReward";
-let KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE      = "incentive/MsgClaimHardReward";
-let KAVA_MSG_TYPE_DELEGATOR_INCENTIVE       = "incentive/MsgClaimDelegatorReward";
-let KAVA_MSG_TYPE_SWAP_INCENTIVE            = "incentive/MsgClaimSwapReward";
+let KAVA_MSG_TYPE_USDX_MINT_INCENTIVE       = "/kava.incentive.v1beta1.MsgClaimUSDXMintingReward";
+let KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE      = "/kava.incentive.v1beta1.MsgClaimHardReward";
+let KAVA_MSG_TYPE_DELEGATOR_INCENTIVE       = "/kava.incentive.v1beta1.MsgClaimDelegatorReward";
+let KAVA_MSG_TYPE_SWAP_INCENTIVE            = "/kava.incentive.v1beta1.MsgClaimSwapReward";
 let KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV   = "incentive/MsgClaimHardRewardVVesting";
 let KAVA_MSG_TYPE_INCENTIVE_ALL             = "incentiveAll";
-let KAVA_MSG_TYPE_DEPOSIT_HARD              = "hard/MsgDeposit";
-let KAVA_MSG_TYPE_WITHDRAW_HARD             = "hard/MsgWithdraw";
-let KAVA_MSG_TYPE_BORROW_HARD               = "hard/MsgBorrow";
-let KAVA_MSG_TYPE_REPAY_HARD                = "hard/MsgRepay";
-let KAVA_MSG_TYPE_LIQUIDATE_HARD            = "hard/MsgLiquidate";
-let KAVA_MSG_TYPE_SWAP_TOKEN                = "swap/MsgSwapExactForTokens";
-let KAVA_MSG_TYPE_SWAP_TOKEN2               = "swap/MsgSwapForExactTokens";
-let KAVA_MSG_TYPE_SWAP_DEPOSIT              = "swap/MsgDeposit";
-let KAVA_MSG_TYPE_SWAP_WITHDRAW             = "swap/MsgWithdraw";
+let KAVA_MSG_TYPE_DEPOSIT_HARD              = "/kava.hard.v1beta1.MsgDeposit";
+let KAVA_MSG_TYPE_WITHDRAW_HARD             = "/kava.hard.v1beta1.MsgWithdraw";
+let KAVA_MSG_TYPE_BORROW_HARD               = "/kava.hard.v1beta1.MsgBorrow";
+let KAVA_MSG_TYPE_REPAY_HARD                = "/kava.hard.v1beta1.MsgRepay";
+let KAVA_MSG_TYPE_LIQUIDATE_HARD            = "/kava.hard.v1beta1.MsgLiquidate";
+let KAVA_MSG_TYPE_SWAP_TOKEN                = "/kava.swap.v1beta1.MsgSwapExactForTokens";
+let KAVA_MSG_TYPE_SWAP_TOKEN2               = "/kava.swap.v1beta1.MsgSwapForExactTokens";
+let KAVA_MSG_TYPE_SWAP_DEPOSIT              = "/kava.swap.v1beta1.MsgDeposit";
+let KAVA_MSG_TYPE_SWAP_WITHDRAW             = "/kava.swap.v1beta1.MsgWithdraw";
 
 
 let CERTIK_MSG_TYPE_TRANSFER                = "bank/MsgSend";
@@ -1075,6 +1077,13 @@ public enum ChainType: String {
         result.append(UMEE_TEST)
         result.append(AXELAR_TEST)
         return result
+    }
+    
+    static func IS_TESTNET(_ chain: ChainType?) -> Bool {
+        if (chain == UMEE_TEST || chain == AXELAR_TEST) {
+            return true
+        }
+        return false
     }
     
     static func IS_SUPPORT_CHAIN(_ chainS: String) -> Bool {

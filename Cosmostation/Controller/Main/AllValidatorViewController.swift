@@ -21,7 +21,6 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
                 
@@ -58,21 +57,12 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        if (WUtils.isGRPC(chainType!)) {
-            self.onSorting()
-            self.refresher.endRefreshing()
-        } else {
-            self.onSorting()
-            self.refresher.endRefreshing()
-        }
+        self.onSorting()
+        self.refresher.endRefreshing()
     }
     
     @objc func onSorting() {
-        if (WUtils.isGRPC(chainType!)) {
-            self.allValidatorCnt.text = String(BaseData.instance.mBondedValidators_gRPC.count)
-        } else {
-            self.allValidatorCnt.text = String(BaseData.instance.mTopValidator.count)
-        }
+        self.allValidatorCnt.text = String(BaseData.instance.mBondedValidators_gRPC.count)
         if (BaseData.instance.getAllValidatorSort() == 0) {
             self.sortType.text = NSLocalizedString("sort_by_power", comment: "")
             sortByPower()
@@ -87,30 +77,19 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     @objc func onRequestFetch() {
-        if(!mainTabVC.onFetchAccountData()) {
+        if (!mainTabVC.onFetchAccountData()) {
             self.refresher.endRefreshing()
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (WUtils.isGRPC(chainType!)) {
-            return BaseData.instance.mBondedValidators_gRPC.count
-        } else {
-            return BaseData.instance.mTopValidator.count
-        }
+        return BaseData.instance.mBondedValidators_gRPC.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:AllValidatorCell? = tableView.dequeueReusableCell(withIdentifier:"AllValidatorCell") as? AllValidatorCell
-        if (WUtils.isGRPC(chainType!)) {
-            if (BaseData.instance.mBondedValidators_gRPC.count > 0) {
-                cell?.updateView(BaseData.instance.mBondedValidators_gRPC[indexPath.row], self.chainType)
-            }
-            
-        } else {
-            if (BaseData.instance.mTopValidator.count > 0) {
-                self.onSetValidatorItem(cell!, BaseData.instance.mTopValidator[indexPath.row])
-            }
+        if (BaseData.instance.mBondedValidators_gRPC.count > 0) {
+            cell?.updateView(BaseData.instance.mBondedValidators_gRPC[indexPath.row], self.chainType)
         }
         return cell!
     }
@@ -120,48 +99,11 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (WUtils.isGRPC(chainType!)) {
-            let validatorDetailVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VaildatorDetailViewController") as! VaildatorDetailViewController
-            validatorDetailVC.mValidator_gRPC = BaseData.instance.mBondedValidators_gRPC[indexPath.row]
-            validatorDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(validatorDetailVC, animated: true)
-            
-        } else {
-            let validatorDetailVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VaildatorDetailViewController") as! VaildatorDetailViewController
-            validatorDetailVC.mValidator = BaseData.instance.mTopValidator[indexPath.row]
-            validatorDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(validatorDetailVC, animated: true)
-        }
-    }
-    
-    func onSetValidatorItem(_ cell: AllValidatorCell, _ validator: Validator) {
-        cell.powerLabel.attributedText =  WUtils.displayAmount2(validator.tokens, cell.powerLabel.font, WUtils.mainDivideDecimal(chainType), 6)
-        cell.commissionLabel.attributedText = WUtils.getDpEstAprCommission(cell.commissionLabel.font, validator.getCommission(), chainType!)
-        cell.validatorImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address))!)
-        cell.monikerLabel.text = validator.description.moniker
-        cell.monikerLabel.adjustsFontSizeToFitWidth = true
-        cell.freeEventImg.isHidden = true
-        
-        if (validator.jailed) {
-            cell.revokedImg.isHidden = false
-            cell.validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
-        } else {
-            cell.revokedImg.isHidden = true
-            cell.validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
-        }
-        
-        if BaseData.instance.mMyValidator.first(where: {$0.operator_address == validator.operator_address}) != nil {
-            cell.cardView.backgroundColor = WUtils.getChainBg(chainType)
-        } else {
-            cell.cardView.backgroundColor = COLOR_BG_GRAY
-        }
-        
-        //temp hide apr for no mint param chain
-        if (chainType == ChainType.ALTHEA_TEST) {
-            cell.commissionLabel.text = "--"
-        }
+        let validatorDetailVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VaildatorDetailViewController") as! VaildatorDetailViewController
+        validatorDetailVC.mValidator_gRPC = BaseData.instance.mBondedValidators_gRPC[indexPath.row]
+        validatorDetailVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(validatorDetailVC, animated: true)
     }
     
     @objc func onStartSort() {
@@ -183,62 +125,32 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func sortByName() {
-        if (WUtils.isGRPC(chainType!)) {
-            BaseData.instance.mBondedValidators_gRPC.sort{
-                if ($0.description_p.moniker == "Cosmostation") { return true }
-                if ($1.description_p.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return $0.description_p.moniker < $1.description_p.moniker
-            }
-        } else {
-            BaseData.instance.mTopValidator.sort{
-                if ($0.description.moniker == "Cosmostation") { return true }
-                if ($1.description.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return $0.description.moniker < $1.description.moniker
-            }
+        BaseData.instance.mBondedValidators_gRPC.sort{
+            if ($0.description_p.moniker == "Cosmostation") { return true }
+            if ($1.description_p.moniker == "Cosmostation") { return false }
+            if ($0.jailed && !$1.jailed) { return false }
+            if (!$0.jailed && $1.jailed) { return true }
+            return $0.description_p.moniker < $1.description_p.moniker
         }
     }
     
     func sortByPower() {
-        if (WUtils.isGRPC(chainType!)) {
-            BaseData.instance.mBondedValidators_gRPC.sort{
-                if ($0.description_p.moniker == "Cosmostation") { return true }
-                if ($1.description_p.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return Double($0.tokens)! > Double($1.tokens)!
-            }
-        } else {
-            BaseData.instance.mTopValidator.sort{
-                if ($0.description.moniker == "Cosmostation") { return true }
-                if ($1.description.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return Double($0.tokens)! > Double($1.tokens)!
-            }
+        BaseData.instance.mBondedValidators_gRPC.sort{
+            if ($0.description_p.moniker == "Cosmostation") { return true }
+            if ($1.description_p.moniker == "Cosmostation") { return false }
+            if ($0.jailed && !$1.jailed) { return false }
+            if (!$0.jailed && $1.jailed) { return true }
+            return Double($0.tokens)! > Double($1.tokens)!
         }
     }
     
     func sortByCommission() {
-        if (WUtils.isGRPC(chainType!)) {
-            BaseData.instance.mBondedValidators_gRPC.sort{
-                if ($0.description_p.moniker == "Cosmostation") { return true }
-                if ($1.description_p.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return Double($0.commission.commissionRates.rate)! < Double($1.commission.commissionRates.rate)!
-            }
-        } else {
-            BaseData.instance.mTopValidator.sort{
-                if ($0.description.moniker == "Cosmostation") { return true }
-                if ($1.description.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return Double(truncating: $0.getCommission()) < Double(truncating: $1.getCommission())
-            }
+        BaseData.instance.mBondedValidators_gRPC.sort{
+            if ($0.description_p.moniker == "Cosmostation") { return true }
+            if ($1.description_p.moniker == "Cosmostation") { return false }
+            if ($0.jailed && !$1.jailed) { return false }
+            if (!$0.jailed && $1.jailed) { return true }
+            return Double($0.commission.commissionRates.rate)! < Double($1.commission.commissionRates.rate)!
         }
     }
 

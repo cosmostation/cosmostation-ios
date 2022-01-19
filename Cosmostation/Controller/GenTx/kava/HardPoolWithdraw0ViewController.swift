@@ -28,28 +28,18 @@ class HardPoolWithdraw0ViewController: BaseViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.balances = account!.account_balances
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        pageHolderVC = self.parent as? StepGenTxViewController
-        hardPoolDenom = pageHolderVC.mHardPoolDenom!
+        hardPoolDenom = pageHolderVC.mHardMoneyMarketDenom!
         dpDecimal = WUtils.getKavaCoinDecimal(hardPoolDenom)
         
-        let depositedCoin = BaseData.instance.mMyHardDeposit?[0].amount?.filter({ $0.denom == hardPoolDenom}).first
+        let depositedCoin = BaseData.instance.mHardMyDeposit.filter({ $0.denom == hardPoolDenom}).first
         availableMax = NSDecimalNumber.init(string: depositedCoin?.amount)
         print("availableMax ", availableMax)
         
-        if (hardPoolDenom == KAVA_MAIN_DENOM) {
-            WUtils.setDenomTitle(chainType!, mCoinLabel)
-        } else if (hardPoolDenom == KAVA_HARD_DENOM) {
-            self.mCoinLabel.textColor = COLOR_HARD
-            self.mCoinLabel.text = hardPoolDenom.uppercased()
-        } else {
-            self.mCoinLabel.textColor = .white
-            self.mCoinLabel.text = hardPoolDenom.uppercased()
-        }
+        WUtils.DpKavaTokenName(mCoinLabel, hardPoolDenom)
         WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
         self.mCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + hardPoolDenom + ".png")!)
         self.loadingImg.isHidden = true

@@ -8,7 +8,6 @@
 
 import UIKit
 import QRCode
-import Alamofire
 import GRPC
 import NIO
 
@@ -24,11 +23,7 @@ class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
-        } else {
-            self.onFetchRewardAddress(pageHolderVC.mAccount!.account_address)
-        }
+        self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
     }
     
     override func enableUserInteraction() {
@@ -42,7 +37,6 @@ class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
         } else {
             self.onShowToast(NSLocalizedString("error_no_clipboard", comment: ""))
         }
-        
     }
     
     @IBAction func onClickQrScan(_ sender: UIButton) {
@@ -84,31 +78,6 @@ class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
         pageHolderVC.mToChangeRewardAddress = userInput
         pageHolderVC.onNextPage()
         
-    }
-    
-    func onFetchRewardAddress(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.rewardAddressUrl(pageHolderVC.chainType, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("res ", res)
-                guard let responseData = res as? NSDictionary,
-                    let address = responseData.object(forKey: "result") as? String else {
-                        self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                        return;
-                }
-                let trimAddress = address.replacingOccurrences(of: "\"", with: "")
-                self.currentRewardAddressLabel.text = trimAddress
-                if (trimAddress != address) {
-                    self.currentRewardAddressLabel.textColor = UIColor.init(hexString: "f31963")
-                }
-                self.currentRewardAddressLabel.adjustsFontSizeToFitWidth = true
-                self.pageHolderVC.mCurrentRewardAddress = trimAddress
-                
-            case .failure(let error):
-                print("onFetchRewardAddress ", error)
-            }
-        }
     }
     
     func onFetchRewardAddress_gRPC(_ address: String) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TxSwapTokenCell: UITableViewCell {
+class TxSwapTokenCell: TxCell {
     
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var txTypeLabel: UILabel!
@@ -21,6 +21,31 @@ class TxSwapTokenCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+    }
+    
+    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
+        txIcon.tintColor = WUtils.getChainColor(chain)
+        
+        if let msg = try? Kava_Swap_V1beta1_MsgSwapExactForTokens.init(serializedData: response.tx.body.messages[position].value) {
+            txTypeLabel.text = "SwapExactForTokens"
+            txSenderLabel.text = msg.requester
+
+            let coin0 = Coin.init(msg.exactTokenA.denom, msg.exactTokenA.amount)
+            let coin1 = Coin.init(msg.tokenB.denom, msg.tokenB.amount)
+            WUtils.showCoinDp(coin0, txPoolInDenomLabel, txPoolInAmountLabel, chain)
+            WUtils.showCoinDp(coin1, txPoolOutDenomLabel, txPoolOutAmountLabel, chain)
+        }
+        
+        if let msg = try? Kava_Swap_V1beta1_MsgSwapForExactTokens.init(serializedData: response.tx.body.messages[position].value) {
+            txTypeLabel.text = "SwapForExactTokens"
+            txSenderLabel.text = msg.requester
+
+            let coin0 = Coin.init(msg.tokenA.denom, msg.tokenA.amount)
+            let coin1 = Coin.init(msg.exactTokenB.denom, msg.exactTokenB.amount)
+            WUtils.showCoinDp(coin0, txPoolInDenomLabel, txPoolInAmountLabel, chain)
+            WUtils.showCoinDp(coin1, txPoolOutDenomLabel, txPoolOutAmountLabel, chain)
+        }
     }
     
     func onBind(_ chaintype: ChainType, _ msg: Msg, _ tx: TxInfo) {

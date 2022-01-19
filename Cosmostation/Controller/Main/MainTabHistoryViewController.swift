@@ -32,8 +32,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     var refresher: UIRefreshControl!
     var mBnbHistories = Array<BnbHistory>()
     var mOkHistories = Array<OkHistory.DataDetail>()
-    var mApiHistories = Array<ApiHistory.HistoryData>()
-    var mApiCustomHistories = Array<ApiHistoryCustom>()
     var mApiCustomNewHistories = Array<ApiHistoryNewCustom>()
     
     
@@ -142,9 +140,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             onFetchBnbHistory(account!.account_address)
         } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
             onFetchOkHistory(account!.account_address)
-        } else if (chainType == ChainType.MEDI_TEST) {
-            self.comingLabel.text = "Support Soon"
-            self.comingLabel.isHidden = false
         } else {
             onFetchNewApiHistoryCustom(account!.account_address)
         }
@@ -334,38 +329,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.refresher.endRefreshing()
     }
     
-    func onFetchLegacyOldApiHistory(_ address:String) {
-        let url = BaseNetWork.accountHistory(chainType!, address)
-        print("onFetchLegacyOldApiHistory url ", url)
-        let request = Alamofire.request(url, method: .get, parameters: ["limit":"50"], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                self.mApiHistories.removeAll()
-                guard let histories = res as? Array<NSDictionary> else {
-                    print("no history!!")
-                    self.emptyLabel.isHidden = false
-                    return;
-                }
-                for rawHistory in histories {
-                    self.mApiHistories.append(ApiHistory.HistoryData.init(rawHistory))
-                }
-                print("onFetchLegacyOldApiHistory ", self.mApiHistories.count)
-                if (self.mApiHistories.count > 0) {
-                    self.historyTableView.reloadData()
-                    self.emptyLabel.isHidden = true
-                } else {
-                    self.emptyLabel.isHidden = false
-                }
-                
-            case .failure(let error):
-                self.emptyLabel.isHidden = false
-                print("onFetchLegacyOldApiHistory ", error)
-            }
-        }
-        self.refresher.endRefreshing()
-    }
-    
     func onFetchNewApiHistoryCustom(_ address:String) {
         let url = BaseNetWork.accountHistory(chainType!, address)
         print("onFetchNewApiHistoryCustom url ", url)
@@ -392,37 +355,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             case .failure(let error):
                 self.emptyLabel.isHidden = false
                 print("onFetchNewApiHistoryCustom ", error)
-            }
-            self.refresher.endRefreshing()
-        }
-    }
-    
-    func onFetchApiHistoryCustom(_ address:String) {
-        let url = BaseNetWork.accountHistory(chainType!, address)
-        print("onFetchApiHistoryCustom url ", url)
-        let request = Alamofire.request(url, method: .get, parameters: ["limit":"50"], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                self.mApiCustomHistories.removeAll()
-                guard let responseDatas = res as? Array<NSDictionary> else {
-                    print("no history!!")
-                    self.emptyLabel.isHidden = false
-                    return;
-                }
-                for responseData in responseDatas {
-                    self.mApiCustomHistories.append(ApiHistoryCustom(responseData))
-                }
-                if (self.mApiCustomHistories.count > 0) {
-                    self.historyTableView.reloadData()
-                    self.emptyLabel.isHidden = true
-                } else {
-                    self.emptyLabel.isHidden = false
-                }
-
-            case .failure(let error):
-                self.emptyLabel.isHidden = false
-                print("onFetchApiHistoryCustom ", error)
             }
             self.refresher.endRefreshing()
         }

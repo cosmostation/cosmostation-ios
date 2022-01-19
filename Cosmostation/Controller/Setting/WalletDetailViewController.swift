@@ -59,7 +59,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             self.onFetchRewardAddress_gRPC(account!.account_address)
             self.onFetchgRPCNodeInfo()
         } else {
-            self.onFetchRewardAddress(account!.account_address)
             self.onFetchNodeInfo()
         }
         walletName.text = WUtils.getWalletName(account)
@@ -561,6 +560,10 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             return
         }
         
+        if (chainType == ChainType.KAVA_MAIN || chainType! == ChainType.FETCH_MAIN) {
+            self.onShowToast("Disabled")
+            return
+        }
         
 //        let mainDenom = WUtils.getMainDenom(chainType)
 //        if (WUtils.isGRPC(chainType!)) {
@@ -571,10 +574,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
 //            }
 //            
 //        } else {
-//            if (chainType == ChainType.KAVA_MAIN || chainType! == ChainType.FETCH_MAIN || chainType == ChainType.KAVA_TEST) {
-//                self.onShowToast("Disabled")
-//                return
-//            }
 //            
 //            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_WITHDRAW_MIDIFY, 0)
 //            if (BaseData.instance.availableAmount(mainDenom).compare(feeAmount).rawValue < 0) {
@@ -714,28 +713,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
                 self.onDeleteWallet(self.account!)
             })
             
-        }
-    }
-    
-    func onFetchRewardAddress(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.rewardAddressUrl(chainType, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary, let address = responseData.object(forKey: "result") as? String else {
-                        return;
-                }
-                self.rewardCard.isHidden = false
-                let trimAddress = address.replacingOccurrences(of: "\"", with: "")
-                self.rewardAddress.text = trimAddress
-                if (trimAddress != address) {
-                    self.rewardAddress.textColor = UIColor.init(hexString: "f31963")
-                }
-                self.rewardAddress.adjustsFontSizeToFitWidth = true
-                
-            case .failure(let error):
-                print("onFetchRewardAddress ", error)
-            }
         }
     }
     

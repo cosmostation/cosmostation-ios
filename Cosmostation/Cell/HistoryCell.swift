@@ -33,12 +33,12 @@ class HistoryCell: UITableViewCell {
     }
     
     func bindHistoryLegacyView(_ history: ApiHistory.HistoryData, _ address: String) {
-        txBlockLabel.text = String(history.height) + " block"
-        txTypeLabel.text = WUtils.historyTitle(history.msg, address)
-        txTimeLabel.text = WUtils.txTimetoString(input: history.time)
-        txTimeGapLabel.text = WUtils.txTimeGap(input: history.time)
-        if (history.isSuccess) { txResultLabel.isHidden = true }
-        else { txResultLabel.isHidden = false }
+//        txBlockLabel.text = String(history.height) + " block"
+//        txTypeLabel.text = WUtils.historyTitle(history.msg, address)
+//        txTimeLabel.text = WUtils.txTimetoString(input: history.time)
+//        txTimeGapLabel.text = WUtils.txTimeGap(input: history.time)
+//        if (history.isSuccess) { txResultLabel.isHidden = true }
+//        else { txResultLabel.isHidden = false }
     }
     
     func bindHistoryCustomView(_ history: ApiHistoryCustom, _ address: String) {

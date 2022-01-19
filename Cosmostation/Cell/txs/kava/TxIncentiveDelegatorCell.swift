@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TxIncentiveDelegatorCell: UITableViewCell {
+class TxIncentiveDelegatorCell: TxCell {
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var sender: UILabel!
     @IBOutlet weak var multiplier: UILabel!
@@ -20,6 +20,21 @@ class TxIncentiveDelegatorCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+    }
+    
+    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
+        txIcon.tintColor = WUtils.getChainColor(chain)
+        
+        //temp
+        kavaAmountLabel.isHidden = true
+        hardAmountLabel.isHidden = true
+        swpAmountLabel.isHidden = true
+        usdxAmountLabel.isHidden = true
+        
+        if let msg = try? Kava_Incentive_V1beta1_MsgClaimDelegatorReward.init(serializedData: response.tx.body.messages[position].value) {
+            sender.text = msg.sender
+        }
     }
     
     func onBind(_ chaintype: ChainType, _ msg: Msg, _ tx: TxInfo, _ position: Int) {

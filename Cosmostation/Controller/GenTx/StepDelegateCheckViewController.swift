@@ -65,16 +65,9 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
     
     func onUpdateView() {
         mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        if (WUtils.isGRPC(chainType)) {
-            toDelegateAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mToDelegateAmount?.amount, toDelegateAmountLabel.font, mDpDecimal, mDpDecimal)
-            feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
-            targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
-            
-        } else {
-            toDelegateAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mToDelegateAmount?.amount)!, toDelegateAmountLabel.font, mDpDecimal, mDpDecimal)
-            feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, mDpDecimal, mDpDecimal)
-            targetValidatorLabel.text = pageHolderVC.mTargetValidator?.description.moniker
-        }
+        toDelegateAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mToDelegateAmount?.amount, toDelegateAmountLabel.font, mDpDecimal, mDpDecimal)
+        feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
+        targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
     }
     
@@ -92,113 +85,9 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            if (WUtils.isGRPC(chainType)) {
-                self.onFetchgRPCAuth(pageHolderVC.mAccount!)
-            } else {
-                self.onFetchAccountInfo(pageHolderVC.mAccount!)
-            }
+            self.onFetchgRPCAuth(pageHolderVC.mAccount!)
         }
     }
-    
-    func onFetchAccountInfo(_ account: Account) {
-        self.showWaittingAlert()
-        let request = Alamofire.request(BaseNetWork.accountInfoUrl(chainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if (self.chainType! == ChainType.KAVA_MAIN || self.chainType! == ChainType.KAVA_TEST) {
-                    guard let info = res as? [String : Any] else {
-                        _ = BaseData.instance.deleteBalance(account: account)
-                        self.hideWaittingAlert()
-                        self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                        return
-                    }
-                    let accountInfo = KavaAccountInfo.init(info)
-                    _ = BaseData.instance.updateAccount(WUtils.getAccountWithKavaAccountInfo(account, accountInfo))
-                    BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithKavaAccountInfo(account, accountInfo))
-                    self.onGenDelegateTx()
-                    
-                } else {
-                    guard let responseData = res as? NSDictionary,
-                        let info = responseData.object(forKey: "result") as? [String : Any] else {
-                            _ = BaseData.instance.deleteBalance(account: account)
-                            self.hideWaittingAlert()
-                            self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                            return
-                    }
-                    let accountInfo = AccountInfo.init(info)
-                    _ = BaseData.instance.updateAccount(WUtils.getAccountWithAccountInfo(account, accountInfo))
-                    BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithAccountInfo(account, accountInfo))
-                    self.onGenDelegateTx()
-                    
-                }
-                
-            case .failure( _):
-                self.hideWaittingAlert()
-                self.onShowToast(NSLocalizedString("error_network", comment: ""))
-            }
-        }
-    }
-    
-    func onGenDelegateTx() {
-        DispatchQueue.global().async {
-            let msg = MsgGenerator.genDelegateMsg(self.pageHolderVC.mAccount!.account_address,
-                                                  self.pageHolderVC.mTargetValidator!.operator_address,
-                                                  self.pageHolderVC.mToDelegateAmount!,
-                                                  self.chainType!)
-            var msgList = Array<Msg>()
-            msgList.append(msg)
-            
-            let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
-                                                   String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                   String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                   msgList,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!)
-            
-            let stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                        msgList, stdMsg,
-                                        self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
-            
-            DispatchQueue.main.async(execute: {
-                let postTx = PostTx.init("sync", stdTx.value)
-                let encoder = JSONEncoder()
-                encoder.outputFormatting = .sortedKeys
-                let data = try? encoder.encode(postTx)
-                do {
-                    let params = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-                    let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-                    request.validate().responseJSON { response in
-                        var txResult = [String:Any]()
-                        switch response.result {
-                        case .success(let res):
-                            print("Delegate ", res)
-                            if let result = res as? [String : Any]  {
-                                txResult = result
-                            }
-                        case .failure(let error):
-                            print("Delegate error ", error)
-                            if (response.response?.statusCode == 500) {
-                                txResult["net_error"] = 500
-                            }
-                        }
-
-                        if (self.waitAlert != nil) {
-                            self.waitAlert?.dismiss(animated: true, completion: {
-                                self.onStartTxDetail(txResult)
-                            })
-                        }
-                    }
-
-                } catch {
-                    print(error)
-                }
-            });
-        }
-    }
-    
-    
-    
     
     func onFetchgRPCAuth(_ account: Account) {
         self.showWaittingAlert()

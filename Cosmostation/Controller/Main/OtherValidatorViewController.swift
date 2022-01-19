@@ -19,7 +19,6 @@ class OtherValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         
@@ -60,12 +59,7 @@ class OtherValidatorViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onSorting() {
-        if (WUtils.isGRPC(chainType!)) {
-            self.otherValidatorCnt.text = String(BaseData.instance.mUnbondValidators_gRPC.count)
-        } else {
-            self.otherValidatorCnt.text = String(BaseData.instance.mOtherValidator.count)
-        }
-        
+        self.otherValidatorCnt.text = String(BaseData.instance.mUnbondValidators_gRPC.count)
         self.sortByPower()
         self.otherValidatorTableView.reloadData()
     }
@@ -77,24 +71,13 @@ class OtherValidatorViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (WUtils.isGRPC(chainType!)) {
-            return BaseData.instance.mUnbondValidators_gRPC.count
-        } else {
-            return BaseData.instance.mOtherValidator.count
-        }
+        return BaseData.instance.mUnbondValidators_gRPC.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:OtherValidatorCell? = tableView.dequeueReusableCell(withIdentifier:"OtherValidatorCell") as? OtherValidatorCell
-        if (WUtils.isGRPC(chainType!)) {
-            if (BaseData.instance.mUnbondValidators_gRPC.count > 0) {
-                cell?.updateView(BaseData.instance.mUnbondValidators_gRPC[indexPath.row], self.chainType)
-            }
-            
-        } else {
-            if (BaseData.instance.mOtherValidator.count > 0) {
-                self.onSetValidatorItem(cell!, BaseData.instance.mOtherValidator[indexPath.row])
-            }
+        if (BaseData.instance.mUnbondValidators_gRPC.count > 0) {
+            cell?.updateView(BaseData.instance.mUnbondValidators_gRPC[indexPath.row], self.chainType)
         }
         return cell!
     }
@@ -104,72 +87,20 @@ class OtherValidatorViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (WUtils.isGRPC(chainType!)) {
-            let validatorDetailVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VaildatorDetailViewController") as! VaildatorDetailViewController
-            validatorDetailVC.mValidator_gRPC = BaseData.instance.mUnbondValidators_gRPC[indexPath.row]
-            validatorDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(validatorDetailVC, animated: true)
-            
-        } else {
-            let validatorDetailVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VaildatorDetailViewController") as! VaildatorDetailViewController
-            validatorDetailVC.mValidator = BaseData.instance.mOtherValidator[indexPath.row]
-            validatorDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(validatorDetailVC, animated: true)
-        }
-    }
-    
-    func onSetValidatorItem(_ cell: OtherValidatorCell, _ validator: Validator) {
-        cell.powerLabel.attributedText = WUtils.displayAmount2(validator.tokens, cell.powerLabel.font!, WUtils.mainDivideDecimal(chainType), 6)
-        cell.commissionLabel.attributedText = WUtils.getDpEstAprCommission(cell.commissionLabel.font, NSDecimalNumber.one, chainType!)
-        cell.validatorImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address))!)
-        cell.monikerLabel.text = validator.description.moniker
-        cell.monikerLabel.adjustsFontSizeToFitWidth = true
-        cell.freeEventImg.isHidden = true
-        
-        if (validator.jailed) {
-            cell.revokedImg.isHidden = false
-            cell.validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
-        } else {
-            cell.revokedImg.isHidden = true
-            cell.validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
-        }
-        
-        if BaseData.instance.mMyValidator.first(where: {$0.operator_address == validator.operator_address}) != nil {
-            cell.cardView.backgroundColor = WUtils.getChainBg(chainType)
-        } else {
-            cell.cardView.backgroundColor = COLOR_BG_GRAY
-        }
-        
-        //band rollback
-        if (chainType == ChainType.BAND_MAIN) {
-            cell.bandOracleOffImg.isHidden = false
-        }
-        
-        //temp hide apr for no mint param chain
-        if (chainType == ChainType.ALTHEA_TEST) {
-            cell.commissionLabel.text = "--"
-        }
+        let validatorDetailVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VaildatorDetailViewController") as! VaildatorDetailViewController
+        validatorDetailVC.mValidator_gRPC = BaseData.instance.mUnbondValidators_gRPC[indexPath.row]
+        validatorDetailVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(validatorDetailVC, animated: true)
     }
     
     func sortByPower() {
-        if (WUtils.isGRPC(chainType!)) {
-            BaseData.instance.mUnbondValidators_gRPC.sort{
-                if ($0.description_p.moniker == "Cosmostation") { return true }
-                if ($1.description_p.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return Double($0.tokens)! > Double($1.tokens)!
-            }
-        } else {
-            BaseData.instance.mOtherValidator.sort{
-                if ($0.description.moniker == "Cosmostation") { return true }
-                if ($1.description.moniker == "Cosmostation") { return false }
-                if ($0.jailed && !$1.jailed) { return false }
-                if (!$0.jailed && $1.jailed) { return true }
-                return Double($0.tokens)! > Double($1.tokens)!
-            }
+        BaseData.instance.mUnbondValidators_gRPC.sort{
+            if ($0.description_p.moniker == "Cosmostation") { return true }
+            if ($1.description_p.moniker == "Cosmostation") { return false }
+            if ($0.jailed && !$1.jailed) { return false }
+            if (!$0.jailed && $1.jailed) { return true }
+            return Double($0.tokens)! > Double($1.tokens)!
         }
     }
 }

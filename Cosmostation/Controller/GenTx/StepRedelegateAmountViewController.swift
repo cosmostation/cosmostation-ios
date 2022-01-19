@@ -27,13 +27,8 @@ class StepRedelegateAmountViewController: BaseViewController, UITextFieldDelegat
         WUtils.setDenomTitle(pageHolderVC.chainType!, availableDenomLabel)
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            userDelegated = BaseData.instance.getDelegated_gRPC(self.pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
-            availableAmountLabel.attributedText = WUtils.displayAmount2(userDelegated.stringValue, availableAmountLabel.font, mDpDecimal, mDpDecimal)
-        } else {
-            userDelegated = BaseData.instance.delegatedAmountByValidator(self.pageHolderVC.mTargetValidator!.operator_address)
-            availableAmountLabel.attributedText = WUtils.displayAmount2(userDelegated.stringValue, availableAmountLabel.font, mDpDecimal, mDpDecimal)
-        }
+        userDelegated = BaseData.instance.getDelegated_gRPC(self.pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
+        availableAmountLabel.attributedText = WUtils.displayAmount2(userDelegated.stringValue, availableAmountLabel.font, mDpDecimal, mDpDecimal)
         
         redelegateInputTextField.delegate = self
         redelegateInputTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

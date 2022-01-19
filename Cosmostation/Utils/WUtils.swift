@@ -11,34 +11,34 @@ import UIKit
 
 public class WUtils {
     
-    static let handler18 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 18, raiseOnExactness: true, raiseOnOverflow: false, raiseOnUnderflow: true, raiseOnDivideByZero: true)
+    static let handler18 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 18, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler12 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 12, raiseOnExactness: true, raiseOnOverflow: false, raiseOnUnderflow: true, raiseOnDivideByZero: true)
+    static let handler12 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 12, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler8 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 8, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler8 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 8, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler6 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 6, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler6 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 6, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler4Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 4, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler4Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 4, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler2 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.bankers, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler2 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.bankers, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler2Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler2Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 2, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler3Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 3, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler3Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 3, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler0 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.bankers, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler0 = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.bankers, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler0Up = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.up, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler0Up = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.up, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler0Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler0Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 0, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
-    static let handler12Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 12, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler12Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 12, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
 
-    static let handler24Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 24, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+    static let handler24Down = NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: 24, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     
     static func getDivideHandler(_ decimal:Int16) -> NSDecimalNumberHandler{
-        return NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: decimal, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: true)
+        return NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: decimal, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     }
 
     
@@ -139,123 +139,6 @@ public class WUtils {
         return result;
     }
     
-    static func getBalancesWithKavaAccountInfo(_ account: Account, _ accountInfo: KavaAccountInfo) -> Array<Balance> {
-        var result = Array<Balance>()
-        if (accountInfo.result.type == COSMOS_AUTH_TYPE_ACCOUNT) {
-            accountInfo.result.value.coins.forEach({ (coin) in
-                result.append(Balance.init(account.account_id, coin.denom, coin.amount, Date().millisecondsSince1970))
-            })
-            
-        } else if (accountInfo.result.type == COSMOS_AUTH_TYPE_V_VESTING_ACCOUNT || accountInfo.result.type == COSMOS_AUTH_TYPE_P_VESTING_ACCOUNT) {
-            var dpBalance = NSDecimalNumber.zero
-            var dpVesting = NSDecimalNumber.zero
-            var originalVesting = NSDecimalNumber.zero
-            var remainVesting = NSDecimalNumber.zero
-            var delegatedVesting = NSDecimalNumber.zero
-            
-            accountInfo.result.value.coins.forEach({ (coin) in
-                if (coin.denom == KAVA_MAIN_DENOM) {
-                    dpBalance = NSDecimalNumber.zero
-                    dpVesting = NSDecimalNumber.zero
-                    originalVesting = NSDecimalNumber.zero
-                    remainVesting = NSDecimalNumber.zero
-                    delegatedVesting = NSDecimalNumber.zero
-                    dpBalance = NSDecimalNumber.init(string: coin.amount)
-                    
-                    accountInfo.result.value.original_vesting.forEach({ (coin) in
-                        if (coin.denom == KAVA_MAIN_DENOM) {
-                            originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                        }
-                    })
-                    
-                    accountInfo.result.value.delegated_vesting.forEach({ (coin) in
-                        if (coin.denom == KAVA_MAIN_DENOM) {
-                            delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                        }
-                    })
-                    
-//                    if (SHOW_LOG) {
-//                        print("Kava dpBalance            ", dpBalance)
-//                        print("Kava originalVesting      ", originalVesting)
-//                        print("Kava delegatedVesting     ", delegatedVesting)
-//                    }
-                    
-                    remainVesting = accountInfo.result.getCalcurateVestingAmountSumByDenom(KAVA_MAIN_DENOM)
-//                    if (SHOW_LOG) { print("Kava remainVesting            ", remainVesting)}
-                    
-                    dpVesting = remainVesting.subtracting(delegatedVesting);
-//                    if (SHOW_LOG) { print("Kava dpVesting      ", dpVesting) }
-                    
-                    if (dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0) {
-                        dpVesting = NSDecimalNumber.zero;
-                    }
-//                    if (SHOW_LOG) { print("Kava dpVesting1      ", dpVesting) }
-                    
-                    if (remainVesting.compare(delegatedVesting).rawValue > 0) {
-                        dpBalance = dpBalance.subtracting(remainVesting).adding(delegatedVesting);
-                    }
-//                    if (SHOW_LOG) { print("Kava dpBalance      ", dpBalance) }
-                    
-                    result.append(Balance.init(account.account_id, coin.denom, dpBalance.stringValue, Date().millisecondsSince1970, delegatedVesting.stringValue, dpVesting.stringValue))
-                    
-                } else if (coin.denom == KAVA_HARD_DENOM) {
-                    dpBalance = NSDecimalNumber.zero
-                    dpVesting = NSDecimalNumber.zero
-                    originalVesting = NSDecimalNumber.zero
-                    remainVesting = NSDecimalNumber.zero
-                    delegatedVesting = NSDecimalNumber.zero
-                    dpBalance = NSDecimalNumber.init(string: coin.amount)
-                    
-                    accountInfo.result.value.original_vesting.forEach({ (coin) in
-                        if (coin.denom == KAVA_HARD_DENOM) {
-                            originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                        }
-                    })
-                    
-//                    if (SHOW_LOG) {
-//                        print("Hard dpBalance            ", dpBalance)
-//                        print("Hard originalVesting      ", originalVesting)
-//                    }
-                    
-                    remainVesting = accountInfo.result.getCalcurateVestingAmountSumByDenom(KAVA_HARD_DENOM)
-//                    if (SHOW_LOG) { print("Hard remainVesting   ", remainVesting)}
-                    
-                    dpBalance = dpBalance.subtracting(remainVesting)
-//                    if (SHOW_LOG) { print("Hard dpBalance      ", dpBalance) }
-                    
-                    result.append(Balance.init(account.account_id, coin.denom, dpBalance.stringValue, Date().millisecondsSince1970, "0", remainVesting.stringValue))
-                    
-                } else if (coin.denom == KAVA_SWAP_DENOM) {
-                    dpBalance = NSDecimalNumber.zero
-                    dpVesting = NSDecimalNumber.zero
-                    originalVesting = NSDecimalNumber.zero
-                    remainVesting = NSDecimalNumber.zero
-                    delegatedVesting = NSDecimalNumber.zero
-                    dpBalance = NSDecimalNumber.init(string: coin.amount)
-                    
-                    accountInfo.result.value.original_vesting.forEach({ (coin) in
-                        if (coin.denom == KAVA_SWAP_DENOM) {
-                            originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                        }
-                    })
-                    
-                    remainVesting = accountInfo.result.getCalcurateVestingAmountSumByDenom(KAVA_SWAP_DENOM)
-                    print("KAVA_SWAP_DENOM remainVesting   ", remainVesting)
-                    
-                    dpBalance = dpBalance.subtracting(remainVesting)
-                    print("KAVA_SWAP_DENOM dpBalance      ", dpBalance)
-                    
-                    result.append(Balance.init(account.account_id, coin.denom, dpBalance.stringValue, Date().millisecondsSince1970, "0", remainVesting.stringValue))
-                    
-                } else {
-                    result.append(Balance.init(account.account_id, coin.denom, coin.amount, Date().millisecondsSince1970))
-                }
-
-            })
-        }
-        return result;
-    }
-    
     static func getBalancesWithOkAccountInfo(_ account: Account, _ accountToken: OkAccountToken) -> Array<Balance> {
         var result = Array<Balance>()
         for okBalance in accountToken.data.currencies {
@@ -263,166 +146,6 @@ public class WUtils {
         }
         return result;
     }
-    
-    //vesting account paring with lcd
-    static func getBalancesWithVestingAccountInfo(_ account: Account, _ accountInfo: VestingAccountInfo) -> Array<Balance> {
-        var result = Array<Balance>()
-        if (accountInfo.result?.type == COSMOS_AUTH_TYPE_ACCOUNT) {
-            accountInfo.result?.value?.coins?.forEach({ (coin) in
-                result.append(Balance.init(account.account_id, coin.denom, coin.amount, Date().millisecondsSince1970))
-            })
-            
-        } else if (accountInfo.result?.type == COSMOS_AUTH_TYPE_P_VESTING_ACCOUNT) {
-            accountInfo.result?.value?.coins?.forEach({ (coin) in
-                var dpBalance = NSDecimalNumber.zero
-                var dpVesting = NSDecimalNumber.zero
-                var originalVesting = NSDecimalNumber.zero
-                var remainVesting = NSDecimalNumber.zero
-                var delegatedVesting = NSDecimalNumber.zero
-                let denom = coin.denom
-                
-                dpBalance = NSDecimalNumber.init(string: coin.amount)
-//                print("P_VESTING_ACCOUNT dpBalance", denom, " ", dpBalance)
-                
-                accountInfo.result?.value?.original_vesting?.forEach({ (coin) in
-                    if (coin.denom == denom) {
-                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                    }
-                })
-//                print("P_VESTING_ACCOUNT originalVesting", denom, " ", originalVesting)
-                
-                accountInfo.result?.value?.delegated_vesting?.forEach({ (coin) in
-                    if (coin.denom == denom) {
-                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                    }
-                })
-//                print("P_VESTING_ACCOUNT delegatedVesting", denom, " ", delegatedVesting)
-                
-                remainVesting = accountInfo.result?.getCalcurateVestingAmountSumByDenom(denom) ?? NSDecimalNumber.zero
-//                print("P_VESTING_ACCOUNT remainVesting", denom, " ", remainVesting)
-                
-                dpVesting = remainVesting.subtracting(delegatedVesting);
-//                print("P_VESTING_ACCOUNT dpVestingA", denom, " ", dpVesting)
-                
-                if (dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0) {
-                    dpVesting = NSDecimalNumber.zero;
-                }
-//                print("P_VESTING_ACCOUNT dpVestingB", denom, " ", dpVesting)
-                
-                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
-                    dpBalance = dpBalance.subtracting(remainVesting).adding(delegatedVesting);
-                }
-//                print("P_VESTING_ACCOUNT dpBalance", denom, " ", dpBalance)
-                
-                result.append(Balance.init(account.account_id, coin.denom, dpBalance.stringValue, Date().millisecondsSince1970, delegatedVesting.stringValue, dpVesting.stringValue))
-                
-            })
-            
-        } else if (accountInfo.result?.type == COSMOS_AUTH_TYPE_C_VESTING_ACCOUNT) {
-            accountInfo.result?.value?.coins?.forEach({ (coin) in
-                var dpBalance = NSDecimalNumber.zero
-                var dpVesting = NSDecimalNumber.zero
-                var originalVesting = NSDecimalNumber.zero
-                var remainVesting = NSDecimalNumber.zero
-                var delegatedVesting = NSDecimalNumber.zero
-                let denom = coin.denom
-                
-                dpBalance = NSDecimalNumber.init(string: coin.amount)
-//                print("C_VESTING_ACCOUNT dpBalance", denom, " ", dpBalance)
-                
-                accountInfo.result?.value?.original_vesting?.forEach({ (coin) in
-                    if (coin.denom == denom) {
-                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                    }
-                })
-//                print("C_VESTING_ACCOUNT originalVesting", denom, " ", originalVesting)
-                
-                accountInfo.result?.value?.delegated_vesting?.forEach({ (coin) in
-                    if (coin.denom == denom) {
-                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                    }
-                })
-//                print("C_VESTING_ACCOUNT delegatedVesting", denom, " ", delegatedVesting)
-                
-                let cTime = Date().millisecondsSince1970
-                let vestingStart = accountInfo.result!.value!.getStartTime() * 1000
-                let vestingEnd = accountInfo.result!.value!.getEndTime() * 1000
-                if (cTime < vestingStart) {
-                    remainVesting = originalVesting
-                } else if (cTime > vestingEnd) {
-                    remainVesting = NSDecimalNumber.zero
-                } else if (cTime < vestingEnd) {
-                    let progress = ((Float)(cTime - vestingStart)) / ((Float)(vestingEnd - vestingStart))
-                    remainVesting = originalVesting.multiplying(by: NSDecimalNumber.init(value: 1 - progress), withBehavior: handler0Up)
-                }
-//                print("C_VESTING_ACCOUNT remainVesting ", denom, "  ", remainVesting)
-                
-                dpVesting = remainVesting.subtracting(delegatedVesting);
-//                print("C_VESTING_ACCOUNT dpVestingA ", denom, "  ", dpVesting)
-                
-                dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
-//                print("C_VESTING_ACCOUNT dpVestingB ", denom, "  ", dpVesting)
-                
-                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
-                    dpBalance = dpBalance.subtracting(remainVesting).adding(delegatedVesting);
-                }
-//                print("C_VESTING_ACCOUNT final dpBalance ", denom, "  ", dpBalance)
-                
-                result.append(Balance.init(account.account_id, coin.denom, dpBalance.stringValue, Date().millisecondsSince1970, delegatedVesting.stringValue, dpVesting.stringValue))
-            })
-            
-        } else if (accountInfo.result?.type == COSMOS_AUTH_TYPE_D_VESTING_ACCOUNT) {
-            accountInfo.result?.value?.coins?.forEach({ (coin) in
-                var dpBalance = NSDecimalNumber.zero
-                var dpVesting = NSDecimalNumber.zero
-                var originalVesting = NSDecimalNumber.zero
-                var remainVesting = NSDecimalNumber.zero
-                var delegatedVesting = NSDecimalNumber.zero
-                let denom = coin.denom
-                
-                dpBalance = NSDecimalNumber.init(string: coin.amount)
-//                print("D_VESTING_ACCOUNT dpBalance", denom, " ", dpBalance)
-                
-                accountInfo.result?.value?.original_vesting?.forEach({ (coin) in
-                    if (coin.denom == denom) {
-                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                    }
-                })
-//                print("D_VESTING_ACCOUNT originalVesting", denom, " ", originalVesting)
-                
-                accountInfo.result?.value?.delegated_vesting?.forEach({ (coin) in
-                    if (coin.denom == denom) {
-                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                    }
-                })
-//                print("D_VESTING_ACCOUNT delegatedVesting", denom, " ", delegatedVesting)
-                
-                let cTime = Date().millisecondsSince1970
-                let vestingEnd = accountInfo.result!.value!.getEndTime() * 1000
-                
-                if (cTime < vestingEnd) {
-                    remainVesting = originalVesting
-                }
-//                print("D_VESTING_ACCOUNT remainVesting ", denom, "  ", remainVesting)
-                
-                dpVesting = remainVesting.subtracting(delegatedVesting);
-//                print("D_VESTING_ACCOUNT dpVestingA ", denom, "  ", dpVesting)
-                
-                dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
-//                print("D_VESTING_ACCOUNT dpVestingB ", denom, "  ", dpVesting)
-                
-                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
-                    dpBalance = dpBalance.subtracting(remainVesting).adding(delegatedVesting);
-                }
-//                print("D_VESTING_ACCOUNT final dpBalance ", denom, "  ", dpBalance)
-                
-                result.append(Balance.init(account.account_id, coin.denom, dpBalance.stringValue, Date().millisecondsSince1970, delegatedVesting.stringValue, dpVesting.stringValue))
-            })
-            
-        }
-        return result
-    }
-    
     
     static func newApiTimeToInt64(_ input: String?) -> Date? {
         if (input == nil) { return nil }
@@ -703,173 +426,6 @@ public class WUtils {
         } else {
             return "(\(secondsLeft / day) days remaining)"
         }
-    }
-    
-    static func historyTitle(_ msgs:Array<Msg>, _ myaddress:String) -> String {
-        var resultMsg = NSLocalizedString("tx_known", comment: "")
-
-        if (msgs == nil || msgs.count <= 0) {
-            return resultMsg
-        }
-        
-        if(msgs.count == 2) {
-            if (msgs[0].type == COSMOS_MSG_TYPE_WITHDRAW_DEL && msgs[1].type == COSMOS_MSG_TYPE_DELEGATE) {
-                resultMsg = NSLocalizedString("tx_reinvest", comment: "")
-                return resultMsg
-            }
-            if (msgs[0].type == IRIS_MSG_TYPE_WITHDRAW && msgs[1].type == IRIS_MSG_TYPE_DELEGATE) {
-                resultMsg = NSLocalizedString("tx_reinvest", comment: "")
-                return resultMsg
-            }
-        }
-        
-        if (msgs[0].type == COSMOS_MSG_TYPE_TRANSFER || msgs[0].type == COSMOS_MSG_TYPE_TRANSFER2 || msgs[0].type == CERTIK_MSG_TYPE_TRANSFER) {
-            if (msgs[0].value.from_address != nil && msgs[0].value.from_address == myaddress) {
-                resultMsg = NSLocalizedString("tx_send", comment: "")
-            } else if (msgs[0].value.to_address != nil && msgs[0].value.to_address == myaddress) {
-                resultMsg = NSLocalizedString("tx_receive", comment: "")
-            } else {
-                if (msgs[0].value.inputs != nil && msgs[0].value.inputs!.count > 0) {
-                    for input in msgs[0].value.inputs! {
-                        if (input.address == myaddress) {
-                            resultMsg = NSLocalizedString("tx_send", comment: "")
-                            return resultMsg
-                        }
-                    }
-                }
-                if (msgs[0].value.outputs != nil && msgs[0].value.outputs!.count > 0) {
-                    for input in msgs[0].value.outputs! {
-                        if (input.address == myaddress) {
-                            resultMsg = NSLocalizedString("tx_receive", comment: "")
-                            return resultMsg
-                        }
-                    }
-                }
-                resultMsg = NSLocalizedString("tx_transfer", comment: "")
-            }
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_DELEGATE || msgs[0].type == IRIS_MSG_TYPE_DELEGATE ) {
-            resultMsg = NSLocalizedString("tx_delegate", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_UNDELEGATE || msgs[0].type == COSMOS_MSG_TYPE_UNDELEGATE2 || msgs[0].type == IRIS_MSG_TYPE_UNDELEGATE) {
-            resultMsg = NSLocalizedString("tx_undelegate", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_REDELEGATE || msgs[0].type == COSMOS_MSG_TYPE_REDELEGATE2 || msgs[0].type == IRIS_MSG_TYPE_REDELEGATE) {
-            resultMsg = NSLocalizedString("tx_redelegate", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_WITHDRAW_DEL || msgs[0].type == IRIS_MSG_TYPE_WITHDRAW) {
-            resultMsg = NSLocalizedString("tx_get_reward", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_WITHDRAW_VAL) {
-            resultMsg = NSLocalizedString("tx_get_commission", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY || msgs[0].type == IRIS_MSG_TYPE_WITHDRAW_MIDIFY) {
-            resultMsg = NSLocalizedString("tx_change_reward_address", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_VOTE || msgs[0].type == IRIS_MSG_TYPE_VOTE) {
-            resultMsg = NSLocalizedString("tx_vote", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_SUBMIT_PROPOSAL || msgs[0].type == IRIS_MSG_TYPE_SUBMIT_PROPOSAL) {
-            resultMsg = NSLocalizedString("tx_submit_proposal", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_DEPOSIT || msgs[0].type == IRIS_MSG_TYPE_DEPOSIT) {
-            resultMsg = NSLocalizedString("tx_deposit", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_CREATE_VALIDATOR || msgs[0].type == IRIS_MSG_TYPE_CREATE_VALIDATOR) {
-            resultMsg = NSLocalizedString("tx_create_validator", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_EDIT_VALIDATOR) {
-            resultMsg = NSLocalizedString("tx_edit_validator", comment: "")
-            
-        } else if (msgs[0].type == IRIS_MSG_TYPE_WITHDRAW_ALL) {
-            resultMsg = NSLocalizedString("tx_get_reward_all", comment: "")
-            
-        } else if (msgs[0].type == IRIS_MSG_TYPE_ISSUE_TOKEN) {
-            resultMsg = NSLocalizedString("tx_issue_token", comment: "")
-            
-        } else if (msgs[0].type == COSMOS_MSG_TYPE_TRANSFER3) {
-            resultMsg = NSLocalizedString("tx_transfer", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_POST_PRICE) {
-            resultMsg = NSLocalizedString("tx_kava_post_price", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_CREATE_CDP) {
-            resultMsg = NSLocalizedString("tx_kava_create_cdp", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_DEPOSIT_CDP) {
-            resultMsg = NSLocalizedString("tx_kava_deposit_cdp", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_WITHDRAW_CDP) {
-            resultMsg = NSLocalizedString("tx_kava_withdraw_cdp", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
-            resultMsg = NSLocalizedString("tx_kava_drawdebt_cdp", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
-            resultMsg = NSLocalizedString("tx_kava_repaydebt_cdp", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_LIQUIDATE_CDP) {
-            resultMsg = NSLocalizedString("tx_kava_liquidate_cdp", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_CREATE_SWAP) {
-            resultMsg = NSLocalizedString("tx_kava_bep3_create", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_CLAIM_SWAP) {
-            resultMsg = NSLocalizedString("tx_kava_bep3_claim", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_REFUND_SWAP) {
-            resultMsg = NSLocalizedString("tx_kava_bep3_refund", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_DEPOSIT_HAVEST || msgs[0].type == KAVA_MSG_TYPE_DEPOSIT_HARD) {
-            resultMsg = NSLocalizedString("tx_kava_hard_deposit", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_WITHDRAW_HAVEST || msgs[0].type == KAVA_MSG_TYPE_WITHDRAW_HARD) {
-            resultMsg = NSLocalizedString("tx_kava_hard_withdraw", comment: "")
-            
-        }else if (msgs[0].type == KAVA_MSG_TYPE_BORROW_HARD) {
-            resultMsg = NSLocalizedString("tx_kava_hard_borrow", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_REPAY_HARD) {
-            resultMsg = NSLocalizedString("tx_kava_hard_repay", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_LIQUIDATE_HARD) {
-            resultMsg = NSLocalizedString("tx_kava_hard_liquidate", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_CLAIM_HAVEST || msgs[0].type == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE || msgs[0].type == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV) {
-            resultMsg = NSLocalizedString("tx_kava_hard_hard_incentive", comment: "")
-            
-        } else if (msgs[0].type == KAVA_MSG_TYPE_INCENTIVE_REWARD || msgs[0].type == KAVA_MSG_TYPE_USDX_MINT_INCENTIVE) {
-            resultMsg = NSLocalizedString("tx_kava_hard_mint_incentive", comment: "")
-            
-        }
-        
-        else if (msgs[0].type == IOV_MSG_TYPE_REGISTER_DOMAIN) {
-            resultMsg = NSLocalizedString("tx_starname_registe_domain", comment: "")
-            
-        } else if (msgs[0].type == IOV_MSG_TYPE_REGISTER_ACCOUNT) {
-            resultMsg = NSLocalizedString("tx_starname_registe_account", comment: "")
-            
-        } else if (msgs[0].type == IOV_MSG_TYPE_DELETE_DOMAIN) {
-            resultMsg = NSLocalizedString("tx_starname_delete_domain", comment: "")
-            
-        } else if (msgs[0].type == IOV_MSG_TYPE_DELETE_ACCOUNT) {
-            resultMsg = NSLocalizedString("tx_starname_delete_account", comment: "")
-            
-        } else if (msgs[0].type == IOV_MSG_TYPE_RENEW_DOMAIN) {
-            resultMsg = NSLocalizedString("tx_starname_renew_domain", comment: "")
-            
-        } else if (msgs[0].type == IOV_MSG_TYPE_RENEW_ACCOUNT) {
-            resultMsg = NSLocalizedString("tx_starname_renew_account", comment: "")
-            
-        } else if (msgs[0].type == IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE) {
-            resultMsg = NSLocalizedString("tx_starname_update_resource", comment: "")
-            
-        }
-        
-        if(msgs.count > 1) {
-            resultMsg = resultMsg +  "\n+ " + String(msgs.count - 1)
-        }
-        return resultMsg
     }
     
     static func bnbHistoryTitle(_ bnbHistory:BnbHistory, _ myaddress:String) -> String {
@@ -1186,6 +742,12 @@ public class WUtils {
                     let assetValue = userCurrencyValue(coin.denom, amount, 6)
                     totalValue = totalValue.adding(assetValue)
                     
+                } else if (chainType! == ChainType.KAVA_MAIN) {
+                    let baseDenom = WUtils.getKavaBaseDenom(coin.denom)
+                    let decimal = WUtils.getKavaCoinDecimal(coin.denom)
+                    let amount = WUtils.getKavaTokenAll(coin.denom)
+                    let assetValue = userCurrencyValue(baseDenom, amount, decimal)
+                    totalValue = totalValue.adding(assetValue)
                 }
                 
                 else if (coin.isIbc()) {
@@ -1210,22 +772,6 @@ public class WUtils {
                 }
                 let assetValue = userCurrencyValue(getMainDenom(chainType), allBnb, 0)
                 totalValue = totalValue.adding(assetValue)
-            }
-            
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
-            baseData.mBalances.forEach { coin in
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    let amount = WUtils.getAllMainAssetOld(KAVA_MAIN_DENOM)
-                    let assetValue = userCurrencyValue(coin.balance_denom, amount, 6)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                } else {
-                    let baseDenom = WUtils.getKavaBaseDenom(coin.balance_denom)
-                    let decimal = WUtils.getKavaCoinDecimal(coin.balance_denom)
-                    let amount = WUtils.getKavaTokenAll(coin.balance_denom)
-                    let assetValue = userCurrencyValue(baseDenom, amount, decimal)
-                    totalValue = totalValue.adding(assetValue)
-                }
             }
             
         } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
@@ -1253,108 +799,12 @@ public class WUtils {
         return totalValue
     }
     
-    static func allAssetToBtc(_ chainType: ChainType?) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        var totalValue = NSDecimalNumber.zero
-        if (isGRPC(chainType)) {
-            baseData.mMyBalances_gRPC.forEach { coin in
-                if (coin.denom == getMainDenom(chainType)) {
-                    let amount = getAllMainAsset(coin.denom)
-                    let btcValue = btcValue(coin.denom, amount, mainDivideDecimal(chainType))
-                    totalValue = totalValue.adding(btcValue)
-                    
-                    
-                } else if (chainType == ChainType.OSMOSIS_MAIN && coin.denom == OSMOSIS_ION_DENOM) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let btcValue = btcValue(coin.denom, amount, 6)
-                    totalValue = totalValue.adding(btcValue)
-                    
-                } else if (chainType! == ChainType.SIF_MAIN && coin.denom.starts(with: "c")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getSifCoinDecimal(coin.denom)
-                    totalValue = totalValue.adding(btcValue(coin.denom.substring(from: 1), available, decimal))
-                    
-                } else if (chainType! == ChainType.EMONEY_MAIN && coin.denom.starts(with: "e")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    totalValue = totalValue.adding(btcValue(coin.denom, available, 6))
-                    
-                } else if (coin.isIbc()) {
-                    if let ibcToken = BaseData.instance.getIbcToken(coin.getIbcHash()) {
-                        if (ibcToken.auth == true) {
-                            let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                            let btcValue = btcValue(ibcToken.base_denom!, amount, ibcToken.decimal!)
-                            totalValue = totalValue.adding(btcValue)
-                        }
-                    }
-                }
-            }
-        }
-        else if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
-            baseData.mBalances.forEach { coin in
-                var allBnb = NSDecimalNumber.zero
-                let amount = WUtils.getAllBnbToken(coin.balance_denom)
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    allBnb = allBnb.adding(amount)
-                } else {
-                    allBnb = allBnb.adding(getBnbConvertAmount(coin.balance_denom))
-                }
-                let btcValue = btcValue(getMainDenom(chainType), allBnb, 0)
-                totalValue = totalValue.adding(btcValue)
-            }
-            
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
-            baseData.mBalances.forEach { coin in
-                var allKava = NSDecimalNumber.zero
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    allKava = allKava.adding(getAllMainAssetOld(getMainDenom(chainType)))
-                } else {
-                    allKava = allKava.adding(convertTokenToKava(coin.balance_denom))
-                }
-                let btcValue = btcValue(getMainDenom(chainType), allKava, 6)
-                totalValue = totalValue.adding(btcValue)
-            }
-            
-        } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
-            baseData.mBalances.forEach { coin in
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    let amount = getAllExToken(coin.balance_denom)
-                    let btcValue = btcValue(getMainDenom(chainType), amount, 0)
-                    totalValue = totalValue.adding(btcValue)
-                } else {
-                    let convertAmount = convertTokenToOkt(coin.balance_denom)
-                    let btcValue = btcValue(getMainDenom(chainType), convertAmount, 0)
-                    totalValue = totalValue.adding(btcValue)
-                    
-                }
-            }
-            
-        }
-        
-        else {
-            baseData.mBalances.forEach { coin in
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    let amount = getAllMainAssetOld(getMainDenom(chainType))
-                    totalValue = totalValue.adding(btcValue(coin.balance_denom, amount, mainDivideDecimal(chainType)))
-                }
-            }
-        }
-        return totalValue
-    }
-    
     static func dpAllAssetValueUserCurrency(_ chainType: ChainType?, _ font:UIFont) -> NSMutableAttributedString {
         let totalValue = allAssetToUserCurrency(chainType)
         let nf = getNumberFormatter(3)
         let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: totalValue)!
         return getDpAttributedString(formatted, 3, font)
     }
-    
-    static func dpAllAssetValueBtc(_ chainType: ChainType?, _ font:UIFont) -> NSMutableAttributedString {
-        let totalValue = allAssetToBtc(chainType)
-        let nf = getNumberFormatter(8)
-        let formatted = nf.string(from: totalValue)!
-        return getDpAttributedString(formatted, 8, font)
-    }
-    
     
     static func getNumberFormatter(_ divider: Int) -> NumberFormatter {
         let nf = NumberFormatter()
@@ -1608,115 +1058,6 @@ public class WUtils {
         return dataBase.availableAmount(symbol).adding(dataBase.frozenAmount(symbol)).adding(dataBase.lockedAmount(symbol))
     }
     
-    static func getKavaTokenAvailable(_ denom: String, _ balances: Array<Balance>) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for balance in balances {
-            if (balance.balance_denom == denom) {
-                amount = localeStringToDecimal(balance.balance_amount)
-            }
-        }
-        return amount
-    }
-    
-    static func getKavaTokenVesting(_ denom: String, _ balances: Array<Balance>) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for balance in balances {
-            if (balance.balance_denom == denom) {
-                amount = localeStringToDecimal(balance.balance_locked)
-            }
-        }
-        return amount
-    }
-    
-    static func getKavaTokenAll(_ denom: String) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for balance in BaseData.instance.mBalances {
-            if (balance.balance_denom == denom) {
-                amount = localeStringToDecimal(balance.balance_amount)
-                amount = amount.adding(localeStringToDecimal(balance.balance_locked))
-            }
-        }
-        return amount
-    }
-    
-    static func getKavaBaseDenom(_ denom: String) -> String {
-        if (denom == KAVA_MAIN_DENOM) {
-            return KAVA_MAIN_DENOM
-        } else if (denom == KAVA_HARD_DENOM) {
-            return KAVA_HARD_DENOM
-        } else if (denom == KAVA_USDX_DENOM) {
-            return KAVA_USDX_DENOM
-        } else if (denom == KAVA_SWAP_DENOM) {
-            return KAVA_SWAP_DENOM
-        } else if (denom == TOKEN_HTLC_KAVA_BNB) {
-            return "bnb"
-        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
-            return "xrp"
-        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
-            return "busd"
-        } else if (denom.contains("btc")) {
-            return "btc"
-        }
-        return ""
-    }
-    
-    static func getKavaTokenDollorPrice(_ denom: String) -> NSDecimalNumber {
-        let prices = BaseData.instance.mKavaPrice
-        if let price = prices["hard:usd"], denom == "hard" {
-            return NSDecimalNumber.init(string: price.result.price)
-        }
-        if let price = prices["btc:usd"], denom.contains("btc") {
-            return NSDecimalNumber.init(string: price.result.price)
-        }
-        if let price = prices["bnb:usd"], denom.contains("bnb") {
-            return NSDecimalNumber.init(string: price.result.price)
-        }
-        if let price = prices["xrp:usd"], denom.contains("xrp") {
-            return NSDecimalNumber.init(string: price.result.price)
-        }
-        if let price = prices["usdx:usd"], denom.contains("usdx") {
-            return NSDecimalNumber.init(string: price.result.price)
-        }
-        if let price = prices["busd:usd"], denom.contains("busd") {
-            return NSDecimalNumber.init(string: price.result.price)
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    static func getKavaTokenUserCurrencyPrice(_ denom: String) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        guard let usdtPrice = baseData.getPrice("usdt") else {
-            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler3Down)
-        }
-        if (baseData.getCurrency() == 0) {
-            return getKavaTokenDollorPrice(denom)
-        } else {
-            let priceUSDT = usdtPrice.currencyPrice(baseData.getCurrencyString().lowercased())
-            return getKavaTokenDollorPrice(denom).multiplying(by: priceUSDT, withBehavior: handler3Down)
-        }
-    }
-    
-    static func dpKavaTokenUserCurrencyPrice(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: getKavaTokenUserCurrencyPrice(denom))!
-        return getDpAttributedString(formatted, 3, font)
-    }
-    
-    static func getKavaTokenDollorValue(_ denom: String, _ amount: NSDecimalNumber) -> NSDecimalNumber {
-        let dpDeciaml = getKavaCoinDecimal(denom)
-        return amount.multiplying(byPowerOf10: -dpDeciaml).multiplying(by: getKavaTokenDollorPrice(denom))
-    }
-    
-    static func convertTokenToKava(_ denom: String) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        let tokenAmount = baseData.availableAmount(denom).adding(baseData.lockedAmount(denom))
-        let totalTokenValue = getKavaTokenDollorValue(denom, tokenAmount)
-        if let kavaUsd = perUsdValue(KAVA_MAIN_DENOM) {
-            return totalTokenValue.multiplying(byPowerOf10: 6).dividing(by: kavaUsd, withBehavior: WUtils.getDivideHandler(6))
-        }
-        return NSDecimalNumber.zero
-    }
-    
     static func getOkexTokenDollorValue(_ okToken: OkToken?, _ amount: NSDecimalNumber) -> NSDecimalNumber {
         if (okToken == nil) { return NSDecimalNumber.zero }
         if (okToken!.original_symbol == "usdt" || okToken!.original_symbol == "usdc" || okToken!.original_symbol == "usdk") {
@@ -1833,18 +1174,18 @@ public class WUtils {
         amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 8, 8)
     }
     
-    static func showCoinDp(_ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel, _ chainType:ChainType) {
+    static func showCoinDp(_ coin: Coin, _ denomLabel: UILabel?, _ amountLabel: UILabel, _ chainType: ChainType) {
         if (isGRPC(chainType) && coin.isIbc()) {
             if let ibcToken = BaseData.instance.getIbcToken(coin.getIbcHash()) {
                 if (ibcToken.auth == true) {
-                    denomLabel.textColor = .white
-                    denomLabel.text = ibcToken.display_denom!.uppercased()
+                    denomLabel?.textColor = .white
+                    denomLabel?.text = ibcToken.display_denom!.uppercased()
                     amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, ibcToken.decimal!, ibcToken.decimal!)
                     return
                     
                 } else {
-                    denomLabel.textColor = .white
-                    denomLabel.text = "Unknown"
+                    denomLabel?.textColor = .white
+                    denomLabel?.text = "Unknown"
                     amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
                     return
                 }
@@ -1854,15 +1195,15 @@ public class WUtils {
             if (coin.denom == COSMOS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (coin.denom.starts(with: "pool")) {
-                denomLabel.textColor = .white
+                denomLabel?.textColor = .white
                 if let poolInfo = BaseData.instance.getGravityPoolByDenom(coin.denom)  {
-                    denomLabel.text = "GDEX-" + String(poolInfo.id)
+                    denomLabel?.text = "GDEX-" + String(poolInfo.id)
                 } else {
-                    denomLabel.text = "UnKnown"
+                    denomLabel?.text = "UnKnown"
                 }
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1870,8 +1211,8 @@ public class WUtils {
             if (coin.denom == IRIS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1879,8 +1220,8 @@ public class WUtils {
             if (coin.denom == BNB_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 0, 8)
             
@@ -1888,11 +1229,17 @@ public class WUtils {
             if (coin.denom == KAVA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (coin.denom == KAVA_HARD_DENOM) {
-                denomLabel.textColor = COLOR_HARD
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = COLOR_HARD
+                denomLabel?.text = coin.denom.uppercased()
+            } else if (coin.denom  == KAVA_USDX_DENOM) {
+                denomLabel?.textColor = COLOR_USDX
+                denomLabel?.text = coin.denom.uppercased()
+            } else if (coin.denom  == KAVA_SWAP_DENOM) {
+                denomLabel?.textColor = COLOR_SWP
+                denomLabel?.text = coin.denom.uppercased()
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, getKavaCoinDecimal(coin.denom), getKavaCoinDecimal(coin.denom))
             
@@ -1900,8 +1247,8 @@ public class WUtils {
             if (coin.denom == BAND_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1909,8 +1256,8 @@ public class WUtils {
             if (coin.denom == SECRET_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1918,8 +1265,8 @@ public class WUtils {
             if (coin.denom == IOV_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1927,8 +1274,8 @@ public class WUtils {
             if (coin.denom == CERTIK_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1936,8 +1283,8 @@ public class WUtils {
             if (coin.denom == IOV_TEST_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1945,8 +1292,8 @@ public class WUtils {
             if (coin.denom == OKEX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 0, 18)
             
@@ -1954,8 +1301,8 @@ public class WUtils {
             if (coin.denom == CERTIK_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1963,8 +1310,8 @@ public class WUtils {
             if (coin.denom == AKASH_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1972,8 +1319,8 @@ public class WUtils {
             if (coin.denom == PERSIS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1981,8 +1328,8 @@ public class WUtils {
             if (coin.denom == SENTINEL_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -1990,8 +1337,8 @@ public class WUtils {
             if (coin.denom == FETCH_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
             
@@ -1999,8 +1346,8 @@ public class WUtils {
             if (coin.denom == CRYPTO_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 8, 8)
             
@@ -2009,11 +1356,11 @@ public class WUtils {
             if (coin.denom == SIF_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (coin.denom.starts(with: "c")) {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.substring(from: 1).uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.substring(from: 1).uppercased()
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, dpDecimal, dpDecimal)
             
@@ -2021,8 +1368,8 @@ public class WUtils {
             if (coin.denom == KI_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2031,16 +1378,16 @@ public class WUtils {
                 WUtils.setDenomTitle(chainType, denomLabel)
                 amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             } else if (coin.denom == OSMOSIS_ION_DENOM) {
-                denomLabel.textColor = COLOR_ION
-                denomLabel.text = "ION"
+                denomLabel?.textColor = COLOR_ION
+                denomLabel?.text = "ION"
                 amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             } else if (coin.isOsmosisAmm()) {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.isOsmosisAmmDpDenom()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.isOsmosisAmmDpDenom()
                 amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
                 amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             }
             
@@ -2048,8 +1395,8 @@ public class WUtils {
             if (coin.denom == IRIS_TEST_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2057,8 +1404,8 @@ public class WUtils {
             if (coin.denom == RIZON_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2066,8 +1413,8 @@ public class WUtils {
             if (coin.denom == MEDI_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2075,8 +1422,8 @@ public class WUtils {
             if (coin.denom == ALTHEA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2084,8 +1431,8 @@ public class WUtils {
             if (coin.denom == UMEE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2093,8 +1440,8 @@ public class WUtils {
             if (coin.denom == AXELAR_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2102,11 +1449,11 @@ public class WUtils {
             if (coin.denom == EMONEY_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (coin.denom.starts(with: "e")) {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2114,8 +1461,8 @@ public class WUtils {
             if (coin.denom == JUNO_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2123,8 +1470,8 @@ public class WUtils {
             if (coin.denom == REGNE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2132,8 +1479,8 @@ public class WUtils {
             if (coin.denom == BITCANA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2141,8 +1488,8 @@ public class WUtils {
             if (coin.denom == GRAVITY_BRIDGE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2150,8 +1497,8 @@ public class WUtils {
             if (coin.denom == STARGAZE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2159,8 +1506,8 @@ public class WUtils {
             if (coin.denom == COMDEX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2168,8 +1515,8 @@ public class WUtils {
             if (coin.denom == INJECTIVE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
             
@@ -2177,8 +1524,8 @@ public class WUtils {
             if (coin.denom == BITSONG_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2186,8 +1533,8 @@ public class WUtils {
             if (coin.denom == DESMOS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2195,8 +1542,8 @@ public class WUtils {
             if (coin.denom == LUM_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
@@ -2204,26 +1551,26 @@ public class WUtils {
             if (coin.denom == CHIHUAHUA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = coin.denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
         }
     }
     
-    static func showCoinDp(_ denom:String, _ amount:String, _ denomLabel:UILabel, _ amountLabel:UILabel, _ chainType:ChainType) {
+    static func showCoinDp(_ denom:String, _ amount:String, _ denomLabel:UILabel?, _ amountLabel:UILabel, _ chainType:ChainType) {
         if (isGRPC(chainType) && denom.starts(with: "ibc/")) {
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
                 if (ibcToken.auth == true) {
-                    denomLabel.textColor = .white
-                    denomLabel.text = ibcToken.display_denom?.uppercased()
+                    denomLabel?.textColor = .white
+                    denomLabel?.text = ibcToken.display_denom?.uppercased()
                     amountLabel.attributedText = displayAmount2(amount, amountLabel.font, ibcToken.decimal!, ibcToken.decimal!)
                     return
                     
                 } else {
-                    denomLabel.textColor = .white
-                    denomLabel.text = "Unknown"
+                    denomLabel?.textColor = .white
+                    denomLabel?.text = "Unknown"
                     amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
                     return
                 }
@@ -2233,15 +1580,15 @@ public class WUtils {
             if (denom == COSMOS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "pool")) {
-                denomLabel.textColor = .white
+                denomLabel?.textColor = .white
                 if let poolInfo = BaseData.instance.getGravityPoolByDenom(denom)  {
-                    denomLabel.text = "GDEX-" + String(poolInfo.id)
+                    denomLabel?.text = "GDEX-" + String(poolInfo.id)
                 } else {
-                    denomLabel.text = "UnKnown"
+                    denomLabel?.text = "UnKnown"
                 }
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2249,8 +1596,8 @@ public class WUtils {
             if (denom == IRIS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2258,20 +1605,26 @@ public class WUtils {
             if (denom == BNB_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 8)
             
         } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
             if (denom == KAVA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
-            }  else if (denom == KAVA_HARD_DENOM) {
-                denomLabel.textColor = COLOR_HARD
-                denomLabel.text = denom.uppercased()
-            }else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+            } else if (denom == KAVA_HARD_DENOM) {
+                denomLabel?.textColor = COLOR_HARD
+                denomLabel?.text = denom.uppercased()
+            } else if (denom == KAVA_USDX_DENOM) {
+                denomLabel?.textColor = COLOR_USDX
+                denomLabel?.text = denom.uppercased()
+            } else if (denom == KAVA_SWAP_DENOM) {
+                denomLabel?.textColor = COLOR_SWP
+                denomLabel?.text = denom.uppercased()
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, getKavaCoinDecimal(denom), getKavaCoinDecimal(denom))
             
@@ -2279,8 +1632,8 @@ public class WUtils {
             if (denom == BAND_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2288,8 +1641,8 @@ public class WUtils {
             if (denom == SECRET_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2297,8 +1650,8 @@ public class WUtils {
             if (denom == IOV_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2306,8 +1659,8 @@ public class WUtils {
             if (denom == CERTIK_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2315,8 +1668,8 @@ public class WUtils {
             if (denom == IOV_TEST_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2324,8 +1677,8 @@ public class WUtils {
             if (denom == OKEX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 18)
             
@@ -2333,8 +1686,8 @@ public class WUtils {
             if (denom == CERTIK_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2342,8 +1695,8 @@ public class WUtils {
             if (denom == AKASH_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2351,8 +1704,8 @@ public class WUtils {
             if (denom == PERSIS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2360,8 +1713,8 @@ public class WUtils {
             if (denom == SENTINEL_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2369,8 +1722,8 @@ public class WUtils {
             if (denom == FETCH_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
             
@@ -2378,8 +1731,8 @@ public class WUtils {
             if (denom == CRYPTO_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 8, 8)
             
@@ -2388,11 +1741,11 @@ public class WUtils {
             if (denom == SIF_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "c")) {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.substring(from: 1).uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.substring(from: 1).uppercased()
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
             
@@ -2400,8 +1753,8 @@ public class WUtils {
             if (denom == KI_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2410,16 +1763,16 @@ public class WUtils {
                 WUtils.setDenomTitle(chainType, denomLabel)
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             } else if (denom == OSMOSIS_ION_DENOM) {
-                denomLabel.textColor = COLOR_ION
-                denomLabel.text = "ION"
+                denomLabel?.textColor = COLOR_ION
+                denomLabel?.text = "ION"
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             } else if (denom.starts(with: "gamm/pool/")) {
-                denomLabel.textColor = .white
-                denomLabel.text = "GAMM-" + String(denom.split(separator: "/").last!)
+                denomLabel?.textColor = .white
+                denomLabel?.text = "GAMM-" + String(denom.split(separator: "/").last!)
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             }
             
@@ -2427,8 +1780,8 @@ public class WUtils {
             if (denom == IRIS_TEST_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2436,8 +1789,8 @@ public class WUtils {
             if (denom == RIZON_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2445,8 +1798,8 @@ public class WUtils {
             if (denom == MEDI_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2454,8 +1807,8 @@ public class WUtils {
             if (denom == ALTHEA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2463,8 +1816,8 @@ public class WUtils {
             if (denom == UMEE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2472,8 +1825,8 @@ public class WUtils {
             if (denom == AXELAR_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2481,11 +1834,11 @@ public class WUtils {
             if (denom == EMONEY_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "e")) {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.substring(from: 1).uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.substring(from: 1).uppercased()
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2493,8 +1846,8 @@ public class WUtils {
             if (denom == JUNO_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2502,8 +1855,8 @@ public class WUtils {
             if (denom == REGNE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2511,8 +1864,8 @@ public class WUtils {
             if (denom == BITCANA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2520,8 +1873,8 @@ public class WUtils {
             if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2529,8 +1882,8 @@ public class WUtils {
             if (denom == STARGAZE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2538,8 +1891,8 @@ public class WUtils {
             if (denom == COMDEX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2547,8 +1900,8 @@ public class WUtils {
             if (denom == INJECTIVE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
             
@@ -2556,8 +1909,8 @@ public class WUtils {
             if (denom == BITSONG_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2565,8 +1918,8 @@ public class WUtils {
             if (denom == DESMOS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2574,8 +1927,8 @@ public class WUtils {
             if (denom == LUM_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -2583,8 +1936,8 @@ public class WUtils {
             if (denom == CHIHUAHUA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel.textColor = .white
-                denomLabel.text = denom.uppercased()
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
@@ -3027,6 +2380,8 @@ public class WUtils {
                 return getOsmosisCoinDecimal(denom)
             } else if (chain == ChainType.SIF_MAIN) {
                 return getSifCoinDecimal(denom)
+            } else if (chain == ChainType.KAVA_MAIN) {
+                return getKavaCoinDecimal(denom)
             }
             print("CHECK DECIMAL")
             return 6
@@ -3065,115 +2420,115 @@ public class WUtils {
         }
     }
     
-    static func setDenomTitle(_ chain: ChainType?, _ label: UILabel) {
+    static func setDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
         if (chain == ChainType.COSMOS_MAIN) {
-            label.text = "ATOM"
-            label.textColor = COLOR_ATOM
+            label?.text = "ATOM"
+            label?.textColor = COLOR_ATOM
         } else if (chain == ChainType.IRIS_MAIN) {
-            label.text = "IRIS"
-            label.textColor = COLOR_IRIS
+            label?.text = "IRIS"
+            label?.textColor = COLOR_IRIS
         } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
-            label.text = "BNB"
-            label.textColor = COLOR_BNB
+            label?.text = "BNB"
+            label?.textColor = COLOR_BNB
         } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
-            label.text = "KAVA"
-            label.textColor = COLOR_KAVA
+            label?.text = "KAVA"
+            label?.textColor = COLOR_KAVA
         } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
-            label.text = "IOV"
-            label.textColor = COLOR_IOV
+            label?.text = "IOV"
+            label?.textColor = COLOR_IOV
         } else if (chain == ChainType.BAND_MAIN) {
-            label.text = "BAND"
-            label.textColor = COLOR_BAND
+            label?.text = "BAND"
+            label?.textColor = COLOR_BAND
         } else if (chain == ChainType.SECRET_MAIN) {
-            label.text = "SCRT"
-            label.textColor = COLOR_SECRET
+            label?.text = "SCRT"
+            label?.textColor = COLOR_SECRET
         } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
-            label.text = "OKT"
-            label.textColor = COLOR_OK
+            label?.text = "OKT"
+            label?.textColor = COLOR_OK
         } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
-            label.text = "CTK"
-            label.textColor = COLOR_CERTIK
+            label?.text = "CTK"
+            label?.textColor = COLOR_CERTIK
         } else if (chain == ChainType.AKASH_MAIN) {
-            label.text = "AKT"
-            label.textColor = COLOR_AKASH
+            label?.text = "AKT"
+            label?.textColor = COLOR_AKASH
         } else if (chain == ChainType.PERSIS_MAIN) {
-            label.text = "XPRT"
-            label.textColor = COLOR_PERSIS
+            label?.text = "XPRT"
+            label?.textColor = COLOR_PERSIS
         } else if (chain == ChainType.SENTINEL_MAIN) {
-            label.text = "DVPN"
-            label.textColor = COLOR_SENTINEL
+            label?.text = "DVPN"
+            label?.textColor = COLOR_SENTINEL
         } else if (chain == ChainType.FETCH_MAIN) {
-            label.text = "FET"
-            label.textColor = COLOR_FETCH
+            label?.text = "FET"
+            label?.textColor = COLOR_FETCH
         } else if (chain == ChainType.CRYPTO_MAIN) {
-            label.text = "CRO"
-            label.textColor = COLOR_CRYPTO
+            label?.text = "CRO"
+            label?.textColor = COLOR_CRYPTO
         } else if (chain == ChainType.SIF_MAIN) {
-            label.text = "ROWAN"
-            label.textColor = COLOR_SIF
+            label?.text = "ROWAN"
+            label?.textColor = COLOR_SIF
         } else if (chain == ChainType.KI_MAIN) {
-            label.text = "XKI"
-            label.textColor = COLOR_KI
+            label?.text = "XKI"
+            label?.textColor = COLOR_KI
         } else if (chain == ChainType.OSMOSIS_MAIN) {
-            label.text = "OSMO"
-            label.textColor = COLOR_OSMOSIS
+            label?.text = "OSMO"
+            label?.textColor = COLOR_OSMOSIS
         } else if (chain == ChainType.COSMOS_TEST) {
-            label.text = "MUON"
-            label.textColor = COLOR_ATOM
+            label?.text = "MUON"
+            label?.textColor = COLOR_ATOM
         } else if (chain == ChainType.IRIS_TEST) {
-            label.text = "BIF"
-            label.textColor = COLOR_IRIS
+            label?.text = "BIF"
+            label?.textColor = COLOR_IRIS
         } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
-            label.text = "ATOLO"
-            label.textColor = COLOR_RIZON
+            label?.text = "ATOLO"
+            label?.textColor = COLOR_RIZON
         } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
-            label.text = "MED"
-            label.textColor = COLOR_MEDI
+            label?.text = "MED"
+            label?.textColor = COLOR_MEDI
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
-            label.text = "ALTG"
-            label.textColor = COLOR_ALTHEA
+            label?.text = "ALTG"
+            label?.textColor = COLOR_ALTHEA
         } else if (chain == ChainType.UMEE_TEST) {
-            label.text = "UMEE"
-            label.textColor = COLOR_UMEE
+            label?.text = "UMEE"
+            label?.textColor = COLOR_UMEE
         } else if (chain == ChainType.AXELAR_TEST) {
-            label.text = "AXL"
-            label.textColor = COLOR_AXELAR
+            label?.text = "AXL"
+            label?.textColor = COLOR_AXELAR
         } else if (chain == ChainType.EMONEY_MAIN) {
-            label.text = "NGM"
-            label.textColor = COLOR_EMONEY
+            label?.text = "NGM"
+            label?.textColor = COLOR_EMONEY
         } else if (chain == ChainType.JUNO_MAIN) {
-            label.text = "JUNO"
-            label.textColor = COLOR_JUNO
+            label?.text = "JUNO"
+            label?.textColor = COLOR_JUNO
         } else if (chain == ChainType.REGEN_MAIN) {
-            label.text = "REGEN"
-            label.textColor = COLOR_REGEN
+            label?.text = "REGEN"
+            label?.textColor = COLOR_REGEN
         } else if (chain == ChainType.BITCANA_MAIN) {
-            label.text = "BCNA"
-            label.textColor = COLOR_BITCANNA
+            label?.text = "BCNA"
+            label?.textColor = COLOR_BITCANNA
         } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            label.text = "GRAVITON"
-            label.textColor = COLOR_GRAVITY_BRIDGE
+            label?.text = "GRAVITON"
+            label?.textColor = COLOR_GRAVITY_BRIDGE
         } else if (chain == ChainType.STARGAZE_MAIN) {
-            label.text = "STARS"
-            label.textColor = COLOR_STARGAZE
+            label?.text = "STARS"
+            label?.textColor = COLOR_STARGAZE
         } else if (chain == ChainType.COMDEX_MAIN) {
-            label.text = "CMDX"
-            label.textColor = COLOR_COMDEX
+            label?.text = "CMDX"
+            label?.textColor = COLOR_COMDEX
         } else if (chain == ChainType.INJECTIVE_MAIN) {
-            label.text = "INJ"
-            label.textColor = COLOR_INJECTIVE
+            label?.text = "INJ"
+            label?.textColor = COLOR_INJECTIVE
         } else if (chain == ChainType.BITSONG_MAIN) {
-            label.text = "BTSG"
-            label.textColor = COLOR_BITSONG
+            label?.text = "BTSG"
+            label?.textColor = COLOR_BITSONG
         } else if (chain == ChainType.DESMOS_MAIN) {
-            label.text = "DSM"
-            label.textColor = COLOR_DESMOS
+            label?.text = "DSM"
+            label?.textColor = COLOR_DESMOS
         } else if (chain == ChainType.LUM_MAIN) {
-            label.text = "LUM"
-            label.textColor = COLOR_LUM
+            label?.text = "LUM"
+            label?.textColor = COLOR_LUM
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            label.text = "HUAHUA"
-            label.textColor = COLOR_CHIHUAHUA
+            label?.text = "HUAHUA"
+            label?.textColor = COLOR_CHIHUAHUA
         }
     }
     
@@ -3918,6 +3273,9 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+            return NSDecimalNumber.zero
+            
         }
         
         else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
@@ -3930,10 +3288,7 @@ public class WUtils {
             
         }
         
-        else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
-            return NSDecimalNumber.zero
-            
-        }
+        
         return NSDecimalNumber.zero
     }
     
@@ -4148,9 +3503,7 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CHIHUAHUA)
             }
             
-        }
-        
-        else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
             if (position == 0) {
                 return NSDecimalNumber.zero
             } else if (position == 1) {
@@ -4252,67 +3605,6 @@ public class WUtils {
         
         attributedString1.append(attributedString2)
         return attributedString1
-    }
-    
-    static func getRiskColor(_ riskRate: NSDecimalNumber) -> UIColor {
-        if (riskRate.doubleValue <= 50) {
-            return COLOR_CDP_SAFE
-        } else if (riskRate.doubleValue < 80) {
-            return COLOR_CDP_STABLE
-        } else {
-            return COLOR_CDP_DANGER
-        }
-    }
-    
-    static func showRiskRate(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _rateIamg:UIImageView?) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
-        if (riskRate.floatValue <= 50) {
-            scoreLabel.textColor = COLOR_CDP_SAFE
-            _rateIamg?.image = UIImage(named: "safe")
-            
-        } else if (riskRate.floatValue < 80) {
-            scoreLabel.textColor = COLOR_CDP_STABLE
-            _rateIamg?.image = UIImage(named: "stable")
-            
-        } else {
-            scoreLabel.textColor = COLOR_CDP_DANGER
-            _rateIamg?.image = UIImage(named: "danger")
-        }
-    }
-    
-    static func showRiskRate2(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
-        if (riskRate.doubleValue <= 50) {
-            scoreLabel.textColor = COLOR_CDP_SAFE
-            textLabel.textColor = COLOR_CDP_SAFE
-            textLabel.text = "SAFE"
-            
-        } else if (riskRate.doubleValue < 80) {
-            scoreLabel.textColor = COLOR_CDP_STABLE
-            textLabel.textColor = COLOR_CDP_STABLE
-            textLabel.text = "STABLE"
-            
-        } else {
-            scoreLabel.textColor = COLOR_CDP_DANGER
-            textLabel.textColor = COLOR_CDP_DANGER
-            textLabel.text = "DANGER"
-        }
-    }
-    
-    static func showRiskRate3(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel, _ cardView:CardView) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
-        if (riskRate.doubleValue <= 50) {
-            textLabel.text = "SAFE"
-            cardView.backgroundColor = COLOR_CDP_SAFE
-            
-        } else if (riskRate.doubleValue < 80) {
-            textLabel.text = "STABLE"
-            cardView.backgroundColor = COLOR_CDP_STABLE
-            
-        } else {
-            textLabel.text = "DANGER"
-            cardView.backgroundColor = COLOR_CDP_DANGER
-        }
     }
     
     static func dpChainInfo(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
@@ -5153,9 +4445,9 @@ public class WUtils {
         else if (chain == ChainType.INJECTIVE_MAIN) { return "injective" }
         else if (chain == ChainType.BITSONG_MAIN) { return "bitsong" }
         else if (chain == ChainType.DESMOS_MAIN) { return "desmos" }
-        else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "G-BRIDGE" }
+        else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "gravity-bridge" }
         else if (chain == ChainType.LUM_MAIN) { return "lum" }
-        else if (chain == ChainType.CHIHUAHUA_MAIN) { return "Chihuahua" }
+        else if (chain == ChainType.CHIHUAHUA_MAIN) { return "chihuahua" }
         
         else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
         else if (chain == ChainType.OKEX_MAIN) { return "okex" }
@@ -5285,6 +4577,7 @@ public class WUtils {
         else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return RELAYER_IMG_GRAVITYBRIDGE }
         else if (chain == ChainType.LUM_MAIN) { return RELAYER_IMG_LUM }
         else if (chain == ChainType.CHIHUAHUA_MAIN) { return RELAYER_IMG_CHIHUAHUA }
+        else if (chain == ChainType.KAVA_MAIN) { return RELAYER_IMG_KAVA }
 //        else if (chain == ChainType.UMEE_TEST) { return RELAYER_IMG_UMEE }
         return ""
     }
@@ -5348,6 +4641,8 @@ public class WUtils {
             return ChainType.LUM_MAIN
         } else if (chainId?.contains("chihuahua-") == true) {
             return ChainType.CHIHUAHUA_MAIN
+        } else if (chainId?.contains("kava-") == true) {
+            return ChainType.KAVA_MAIN
         }
         
         return nil
@@ -5460,134 +4755,6 @@ public class WUtils {
             return BaseData.instance.mParam!.getQuorum()
         }
         return NSDecimalNumber.zero
-    }
-    
-    static func getHardSuppliedAmountByDenom(_ denom: String, _ mydeposit: Array<HardMyDeposit>?) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if let deposit = mydeposit?[0], let coins = deposit.amount {
-            for coin in coins {
-                if (coin.denom == denom) {
-                    result = NSDecimalNumber.init(string: coin.amount)
-                }
-            }
-        }
-        return result
-    }
-    
-    static func getHardBorrowedValueByDenom(_ denom: String, _ mydeposit: Array<HardMyBorrow>?) -> NSDecimalNumber {
-        let denomPrice = getKavaPrice(denom)
-        let decimal = getKavaCoinDecimal(denom)
-        let amount = getHardBorrowedAmountByDenom(denom, mydeposit)
-        return amount.multiplying(byPowerOf10: -decimal).multiplying(by: denomPrice, withBehavior: WUtils.handler2Down)
-    }
-    
-    static func getHardBorrowableAmountByDenom(_ denom: String, _ mydeposit: Array<HardMyDeposit>?, _ myBorrow: Array<HardMyBorrow>?,
-                                               _ moduleCoins: Array<Coin>?, _ reserveCoins: Array<Coin>?) -> NSDecimalNumber {
-        var totalLTVValue = NSDecimalNumber.zero
-        var totalBorrowedValue = NSDecimalNumber.zero
-        var totalBorrowAbleAmount = NSDecimalNumber.zero
-        
-        var SystemBorrowableAmount = NSDecimalNumber.zero
-        var moduleAmount = NSDecimalNumber.zero
-        var reserveAmount = NSDecimalNumber.zero
-        
-        let hardParam = BaseData.instance.mHardParam
-        let hardMoneyMarket = hardParam?.getHardMoneyMarket(denom)
-        let denomPrice = getKavaPrice(denom)
-        let decimal = getKavaCoinDecimal(denom)
-        
-        mydeposit?[0].amount?.forEach({ coin in
-            let innnerDecimal   = getKavaCoinDecimal(coin.denom)
-            let LTV             = hardParam!.getLTV(coin.denom)
-            var depositValue    = NSDecimalNumber.zero
-            var LTVValue        = NSDecimalNumber.zero
-            if (coin.denom == "usdx") {
-                depositValue = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal)
-                
-            } else {
-                let innerPrice = getKavaPrice(coin.denom)
-                depositValue = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal).multiplying(by: innerPrice, withBehavior: WUtils.handler2Down)
-                
-            }
-            LTVValue = depositValue.multiplying(by: LTV)
-            totalLTVValue = totalLTVValue.adding(LTVValue)
-        })
-        
-        myBorrow?[0].amount?.forEach({ coin in
-            let innnerDecimal   = getKavaCoinDecimal(coin.denom)
-            var borrowedValue   = NSDecimalNumber.zero
-            if (coin.denom == "usdx") {
-                borrowedValue = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal)
-                
-            } else {
-                let innerPrice = getKavaPrice(coin.denom)
-                borrowedValue = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal).multiplying(by: innerPrice, withBehavior: WUtils.handler2Down)
-                
-            }
-            totalBorrowedValue = totalBorrowedValue.adding(borrowedValue)
-        })
-        let tempBorrowAbleValue  = totalLTVValue.subtracting(totalBorrowedValue)
-        let totalBorrowAbleValue = tempBorrowAbleValue.compare(NSDecimalNumber.zero).rawValue > 0 ? tempBorrowAbleValue : NSDecimalNumber.zero
-        totalBorrowAbleAmount = totalBorrowAbleValue.multiplying(byPowerOf10: decimal).dividing(by: denomPrice, withBehavior: getDivideHandler(decimal))
-//        print("totalBorrowAbleAmount ", totalBorrowAbleAmount)
-        
-        
-        if let moduleCoin = moduleCoins?.filter({ $0.denom == denom}).first {
-            moduleAmount = NSDecimalNumber.init(string: moduleCoin.amount)
-        }
-        if let reserveCoin = reserveCoins?.filter({ $0.denom == denom}).first {
-            reserveAmount = NSDecimalNumber.init(string: reserveCoin.amount)
-        }
-        let moduleBorrowable = moduleAmount.subtracting(reserveAmount)
-        if (hardMoneyMarket?.borrow_limit?.has_max_limit == true) {
-            let maximum_limit = NSDecimalNumber.init(string: hardParam?.getHardMoneyMarket(denom)?.borrow_limit?.maximum_limit)
-            SystemBorrowableAmount = maximum_limit.compare(moduleBorrowable).rawValue > 0 ? moduleBorrowable : maximum_limit
-        } else {
-            SystemBorrowableAmount = moduleBorrowable
-        }
-//        print("SystemBorrowableAmount ", SystemBorrowableAmount)
-        
-        return totalBorrowAbleAmount.compare(SystemBorrowableAmount).rawValue > 0 ? SystemBorrowableAmount : totalBorrowAbleAmount
-    }
-    
-    static func getHardBorrowableValueByDenom(_ denom: String, _ mydeposit: Array<HardMyDeposit>?, _ myBorrow: Array<HardMyBorrow>?,
-                                              _ moduleCoins: Array<Coin>?, _ reserveCoins: Array<Coin>?) -> NSDecimalNumber {
-        let denomPrice = getKavaPrice(denom)
-        let decimal = getKavaCoinDecimal(denom)
-        let amount = getHardBorrowableAmountByDenom(denom, mydeposit, myBorrow, moduleCoins, reserveCoins)
-        return amount.multiplying(byPowerOf10: -decimal).multiplying(by: denomPrice, withBehavior: WUtils.handler2Down)
-    }
-    
-    static func getKavaPrice(_ denom: String) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if (denom == "usdx") {
-            result = NSDecimalNumber.one
-        } else {
-            let hardParam = BaseData.instance.mHardParam
-            if let price = BaseData.instance.mKavaPrice[hardParam!.getSpotMarketId(denom)!] {
-                result = NSDecimalNumber.init(string: price.result.price)
-            }
-        }
-        return result
-    }
-    
-    static func getHardSuppliedValueByDenom(_ denom: String, _ mydeposit: Array<HardMyDeposit>?) -> NSDecimalNumber {
-        let denomPrice = getKavaPrice(denom)
-        let decimal = getKavaCoinDecimal(denom)
-        let amount = getHardSuppliedAmountByDenom(denom, mydeposit)
-        return amount.multiplying(byPowerOf10: -decimal).multiplying(by: denomPrice, withBehavior: WUtils.handler2Down)
-    }
-    
-    static func getHardBorrowedAmountByDenom(_ denom: String, _ myBorrow: Array<HardMyBorrow>?) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if let borrow = myBorrow?[0], let coins = borrow.amount {
-            for coin in coins {
-                if (coin.denom == denom) {
-                    result = NSDecimalNumber.init(string: coin.amount)
-                }
-            }
-        }
-        return result
     }
     
     
@@ -6382,8 +5549,8 @@ public class WUtils {
     }
     
     public static func isGRPC(_ chain: ChainType?) -> Bool {
-        if (chain == ChainType.BINANCE_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.KAVA_MAIN ||
-            chain == ChainType.BINANCE_TEST || chain == ChainType.OKEX_TEST || chain == ChainType.KAVA_TEST) {
+        if (chain == ChainType.BINANCE_MAIN || chain == ChainType.OKEX_MAIN ||
+            chain == ChainType.BINANCE_TEST || chain == ChainType.OKEX_TEST) {
             return false
         }
         return true

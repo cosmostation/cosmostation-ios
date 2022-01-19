@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TxIncentiveHardCell: UITableViewCell {
+class TxIncentiveHardCell: TxCell {
     @IBOutlet weak var txIcon: UIImageView!
     @IBOutlet weak var sender: UILabel!
     @IBOutlet weak var multiplier: UILabel!
@@ -23,6 +23,21 @@ class TxIncentiveHardCell: UITableViewCell {
         
         kavaAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         hardAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+    }
+    
+    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
+        txIcon.tintColor = WUtils.getChainColor(chain)
+        
+        //temp
+        kavaAmount.isHidden = true
+        kavaDenom.isHidden = true
+        hardAmount.isHidden = true
+        hardDenom.isHidden = true
+        
+        if let msg = try? Kava_Incentive_V1beta1_MsgClaimHardReward.init(serializedData: response.tx.body.messages[position].value) {
+            sender.text = msg.sender
+        }
     }
     
     func onBind(_ chaintype: ChainType, _ msg: Msg, _ tx: TxInfo, _ position: Int) {

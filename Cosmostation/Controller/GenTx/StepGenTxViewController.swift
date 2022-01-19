@@ -25,23 +25,17 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var chainType: ChainType?
     var mBalances = Array<Balance>()
     
-    var mRewards = Array<Coin>()
-    var mRewardAddress: String?
-    
-    var mTargetValidator: Validator?
-    var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
-    var mToDelegateAmount: Coin?
-    var mToUndelegateAmount:Coin?
-    var mRewardTargetValidators = Array<Validator>()
-    var mRewardTargetValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
-    
     var mToSendRecipientAddress:String?
     var mToSendAmount = Array<Coin>()
     
+    var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
+    var mToDelegateAmount: Coin?
+    var mToUndelegateAmount:Coin?
+    var mRewardAddress: String?
+    var mRewardTargetValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
+    
     var mToReDelegateAmount: Coin?
-    var mToReDelegateValidator: Validator?
     var mToReDelegateValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
-    var mToReDelegateValidators = Array<Validator>()
     var mToReDelegateValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
     
     var mCurrentRewardAddress: String?
@@ -76,18 +70,19 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     var mCollateralParamType: String?
     var mCDenom: String?
-    var pDenom: String?
+    var mPDenom: String?
     var mMarketID: String?
     var mCollateralParam: CollateralParam?
     var mIncentiveKavaReceivable = NSDecimalNumber.zero
     var mIncentiveHardReceivable = NSDecimalNumber.zero
-    var mHardPoolDenom: String?
+    var mHardMoneyMarketDenom: String?
     var mHardPoolCoins: Array<Coin>?
     var mIncentiveMultiplier: String?
     var mHardPoolCoin = Coin.init()
-    var mKavaPool: SwapPool?
-    var mKavaDeposit: SwapDeposit?
     var mKavaShareAmount = NSDecimalNumber.zero
+    var mKavaCollateralParam: Kava_Cdp_V1beta1_CollateralParam?
+    var mKavaSwapPool: Kava_Swap_V1beta1_PoolResponse?
+    var mKavaSwapPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
     
     
     var mHtlcDenom: String?
@@ -170,129 +165,89 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mDesmosAirDropAmount: String?
     
     lazy var orderedViewControllers: [UIViewController] = {
-        if (mType == COSMOS_MSG_TYPE_DELEGATE || mType == IRIS_MSG_TYPE_DELEGATE) {
+        if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
             if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "StepDelegateAmountViewController"),
+                return [self.newVc(viewController: "StepSendAddressViewController"),
+                        self.newVc(viewController: "StepSendAmountViewController"),
                         self.newVc(viewController: "StepMemoViewController"),
                         StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "StepDelegateCheckViewController")]
+                        self.newVc(viewController: "StepSendCheckViewController")]
             } else {
-                return [self.newVc(viewController: "StepDelegateAmountViewController"),
+                return [self.newVc(viewController: "StepSendAddressViewController"),
+                        self.newVc(viewController: "StepSendAmountViewController"),
                         self.newVc(viewController: "StepMemoViewController"),
                         StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "StepDelegateCheckViewController")]
+                        self.newVc(viewController: "StepSendCheckViewController")]
             }
+            
+        } else if (mType == COSMOS_MSG_TYPE_DELEGATE || mType == IRIS_MSG_TYPE_DELEGATE) {
+            return [self.newVc(viewController: "StepDelegateAmountViewController"),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    self.newVc(viewController: "StepDelegateCheckViewController")]
             
         } else if (mType == COSMOS_MSG_TYPE_UNDELEGATE2 || mType == IRIS_MSG_TYPE_UNDELEGATE) {
-            if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "StepUndelegateAmountViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "StepUndelegateCheckViewController")]
-            } else {
-                return [self.newVc(viewController: "StepUndelegateAmountViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "StepUndelegateCheckViewController")]
-            }
-            
-        } else if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
-            if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "StepSendAddressViewController"),
-                        self.newVc(viewController: "StepSendAmountViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "StepSendCheckViewController")]
-            } else {
-                return [self.newVc(viewController: "StepSendAddressViewController"),
-                        self.newVc(viewController: "StepSendAmountViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "StepSendCheckViewController")]
-            }
+            return [self.newVc(viewController: "StepUndelegateAmountViewController"),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    self.newVc(viewController: "StepUndelegateCheckViewController")]
             
         } else if (mType == COSMOS_MSG_TYPE_REDELEGATE2 || mType == IRIS_MSG_TYPE_REDELEGATE) {
-            if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "StepRedelegateAmountViewController"),
-                        self.newVc(viewController: "StepRedelegateToViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "StepRedelegateCheckViewController")]
-            } else {
-                return [self.newVc(viewController: "StepRedelegateAmountViewController"),
-                        self.newVc(viewController: "StepRedelegateToViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "StepRedelegateCheckViewController")]
-            }
+            return [self.newVc(viewController: "StepRedelegateAmountViewController"),
+                    self.newVc(viewController: "StepRedelegateToViewController"),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    self.newVc(viewController: "StepRedelegateCheckViewController")]
             
         } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY || mType == IRIS_MSG_TYPE_WITHDRAW_MIDIFY) {
-            if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "StepChangeAddressViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "StepChangeCheckViewController")]
-            } else {
-                return [self.newVc(viewController: "StepChangeAddressViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "StepChangeCheckViewController")]
-            }
+            return [self.newVc(viewController: "StepChangeAddressViewController"),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    self.newVc(viewController: "StepChangeCheckViewController")]
             
         } else if (mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
-            if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "ReInvestAmountViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "ReInvestCheckViewController")]
-            } else {
-                return [self.newVc(viewController: "ReInvestAmountViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "ReInvestCheckViewController")]
-            }
+            return [self.newVc(viewController: "ReInvestAmountViewController"),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    self.newVc(viewController: "ReInvestCheckViewController")]
             
         } else if (mType == TASK_TYPE_VOTE) {
-            if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "VoteSelectViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "VoteCheckViewController")]
-            } else {
-                return [self.newVc(viewController: "VoteSelectViewController"),
-                        self.newVc(viewController: "StepMemoViewController"),
-                        StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "VoteCheckViewController")]
-            }
+            return [self.newVc(viewController: "VoteSelectViewController"),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    self.newVc(viewController: "VoteCheckViewController")]
            
-        } else if (mType == KAVA_MSG_TYPE_CREATE_CDP) {
+        }
+        
+        //KAVA
+        else if (mType == KAVA_MSG_TYPE_CREATE_CDP) {
             return [self.newVc(viewController: "StepCreateCpdAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepCreateCpdCheckViewController")]
             
         } else if (mType == KAVA_MSG_TYPE_DEPOSIT_CDP) {
             return [self.newVc(viewController: "StepDepositCdpAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepDepositCdpCheckViewController")]
             
         } else if (mType == KAVA_MSG_TYPE_WITHDRAW_CDP) {
             return [self.newVc(viewController: "StepWithdrawCdpAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepWithdrawCdpCheckViewController")]
             
         } else if (mType == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
             return [self.newVc(viewController: "StepDrawDebtCdpAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepDrawDebtCdpCheckViewController")]
             
         } else if (mType == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
             return [self.newVc(viewController: "StepRepayCdpAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     self.newVc(viewController: "StepRepayCdpCheckViewController")]
             
         } else if (mType == TASK_TYPE_HTLC_SWAP) {
@@ -310,52 +265,53 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
             return [HardPoolDeposit0ViewController(nibName: "HardPoolDeposit0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     HardPoolDeposit3ViewController(nibName: "HardPoolDeposit3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
             return [HardPoolWithdraw0ViewController(nibName: "HardPoolWithdraw0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     HardPoolWithdraw3ViewController(nibName: "HardPoolWithdraw3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_BORROW_HARD) {
             return [HardPoolBorrow0ViewController(nibName: "HardPoolBorrow0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     HardPoolBorrow3ViewController(nibName: "HardPoolBorrow3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_REPAY_HARD) {
             return [HardPoolRepay0ViewController(nibName: "HardPoolRepay0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     HardPoolRepay3ViewController(nibName: "HardPoolRepay3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
             return [KavaSwap0ViewController(nibName: "KavaSwap0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     KavaSwap3ViewController(nibName: "KavaSwap3ViewController", bundle: nil)]
             
         } else if (mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
             return [KavaSwapJoin0ViewController(nibName: "KavaSwapJoin0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     KavaSwapJoin3ViewController(nibName: "KavaSwapJoin3ViewController", bundle: nil)]
 
         } else if (mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
             return [KavaSwapExit0ViewController(nibName: "KavaSwapExit0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     KavaSwapExit3ViewController(nibName: "KavaSwapExit3ViewController", bundle: nil)]
 
         } else if (mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
             return [KavaIncentiveClaim0ViewController(nibName: "KavaIncentiveClaim0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     KavaIncentiveClaim3ViewController(nibName: "KavaIncentiveClaim3ViewController", bundle: nil)]
         }
         
+        //OEC
         else if (mType == OK_MSG_TYPE_DEPOSIT) {
             return [self.newVc(viewController: "StepOkDepositAmountViewController"),
                     self.newVc(viewController: "StepMemoViewController"),
@@ -374,7 +330,10 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
                     self.newVc(viewController: "StepOkVoteCheckViewController")]
 
-        } else if (mType == IOV_MSG_TYPE_REGISTER_DOMAIN) {
+        }
+        
+        //STARTNAME
+        else if (mType == IOV_MSG_TYPE_REGISTER_DOMAIN) {
             return [RegisterDomain0ViewController(nibName: "RegisterDomain0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
@@ -407,6 +366,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
 
         }
         
+        //OSMOSIS
         else if (mType == OSMOSIS_MSG_TYPE_SWAP) {
             return [Swap0ViewController(nibName: "Swap0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
@@ -442,9 +402,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     self.newVc(viewController: "StepMemoViewController"),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     StartUnlock3ViewController(nibName: "StartUnlock3ViewController", bundle: nil)]
-        }
-        
-        else if (mType == LIQUIDITY_MSG_TYPE_SWAP) {
+            
+        } else if (mType == LIQUIDITY_MSG_TYPE_SWAP) {
             return [GdexSwap0ViewController(nibName: "GdexSwap0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
@@ -464,6 +423,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
             
         }
         
+        //IBC
         else if (mType == TASK_IBC_TRANSFER) {
             return [IBCSend0ViewController(nibName: "IBCSend0ViewController", bundle: nil),
                     IBCSend1ViewController(nibName: "IBCSend1ViewController", bundle: nil),
@@ -473,11 +433,13 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
             
         }
         
+        //RIZON
         else if (mType == TASK_RIZON_EVENT_HORIZON) {
             return [StepEventHorizon0ViewController(nibName: "StepEventHorizon0ViewController", bundle: nil),
                     StepEventHorizon1ViewController(nibName: "StepEventHorizon1ViewController", bundle: nil)]
         }
         
+        //SIF
         else if (mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
             return [SifIncentive0ViewController(nibName: "SifIncentive0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
@@ -502,7 +464,10 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     SifSwap3ViewController(nibName: "SifSwap3ViewController", bundle: nil)]
             
-        } else if (mType == TASK_ISSUE_NFT) {
+        }
+        
+        //NFT
+        else if (mType == TASK_ISSUE_NFT) {
             return [GenNFT0ViewController(nibName: "GenNFT0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
@@ -520,7 +485,10 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     GenDenom3ViewController(nibName: "GenDenom3ViewController", bundle: nil)]
             
-        } else if (mType == TASK_GEN_PROFILE) {
+        }
+        
+        //DESMOS
+        else if (mType == TASK_GEN_PROFILE) {
             return [GenProfile0ViewController(nibName: "GenProfile0ViewController", bundle: nil),
                     self.newVc(viewController: "StepMemoViewController"),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
@@ -563,11 +531,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         self.getKey()
         
         if (mType == COSMOS_MSG_TYPE_REDELEGATE2) {
-            if (WUtils.isGRPC(chainType!)) {
-                onFetchBondedValidators(0)
-            } else {
-                onFetchTopValidatorsInfo()
-            }
+            self.onFetchBondedValidators(0)
             
         } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
             if let votedVals = BaseData.instance.mOkStaking?.validator_address {
@@ -668,31 +632,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         }
     }
     
-    func onFetchTopValidatorsInfo() {
-        let request = Alamofire.request(BaseNetWork.validatorsUrl(chainType), method: .get, parameters: ["status":"bonded"], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let validators = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                         print("no validators!!")
-                        return
-                }
-                self.mToReDelegateValidators.removeAll()
-                for validator in validators {
-                    let tempVal = Validator(validator as! [String : Any])
-                    if(tempVal.operator_address != self.mTargetValidator?.operator_address) {
-                        self.mToReDelegateValidators.append(tempVal)
-                    }
-                }
-                self.sortByPower()
-                
-            case .failure(let error):
-                print("onFetchTopValidatorsInfo ", error)
-            }
-        }
-    }
-    
     func onFetchBondedValidators(_ offset:Int) {
         DispatchQueue.global().async {
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
@@ -702,7 +641,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
             defer { try! channel.close().wait() }
             
             let page = Cosmos_Base_Query_V1beta1_PageRequest.with {
-                $0.limit = 125
+                $0.limit = 300
             }
             let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with {
                 $0.pagination = page
@@ -720,23 +659,13 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
             }
             
             DispatchQueue.main.async(execute: {
-                self.sortByPower_gRPC()
+                self.sortByPower()
             });
         }
         
     }
     
     func sortByPower() {
-        mToReDelegateValidators.sort{
-            if ($0.description.moniker == "Cosmostation") { return true }
-            if ($1.description.moniker == "Cosmostation") {  return false }
-            if ($0.jailed && !$1.jailed) { return false }
-            if (!$0.jailed && $1.jailed) { return true }
-            return Double($0.tokens)! > Double($1.tokens)!
-        }
-    }
-    
-    func sortByPower_gRPC() {
         mToReDelegateValidators_gRPC.sort{
             if ($0.description_p.moniker == "Cosmostation") { return true }
             if ($1.description_p.moniker == "Cosmostation") { return false }

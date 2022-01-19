@@ -22,6 +22,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     @IBOutlet weak var topValue: UILabel!
     
     @IBOutlet weak var tokenTableView: UITableView!
+    @IBOutlet weak var btnBepSend: UIButton!
     @IBOutlet weak var btnIbcSend: UIButton!
     @IBOutlet weak var btnSend: UIButton!
 
@@ -32,7 +33,6 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         
@@ -40,10 +40,17 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tokenTableView.register(UINib(nibName: "TokenDetailNativeCell", bundle: nil), forCellReuseIdentifier: "TokenDetailNativeCell")
+        self.tokenTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
         
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.topCard.addGestureRecognizer(tapTotalCard)
+        
+        if (ChainType.isHtlcSwappableCoin(chainType, nativeDenom)) {
+            self.btnBepSend.isHidden = false
+        } else {
+            self.btnIbcSend.isHidden = false
+        }
         
         self.onInitView()
     }
@@ -75,6 +82,14 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             nativeDivideDecimal = 6
             nativeDisplayDecimal = 6
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
+            
+        } else if (chainType == ChainType.KAVA_MAIN) {
+            WUtils.DpKavaTokenName(naviTokenSymbol, nativeDenom)
+            naviTokenImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + nativeDenom + ".png")!)
+            nativeDivideDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
+            nativeDisplayDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
+            totalAmount = WUtils.getKavaTokenAll(nativeDenom)
+            
         }
         
         self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(nativeDenom, naviPerPrice.font)
@@ -96,12 +111,15 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return 1
+        } else if (section == 1) {
+            if (BaseData.instance.onParseRemainVestingsByDenom_gRPC(nativeDenom).count > 0) { return 1 }
+            else { return 0 }
         }
         return 0
     }
@@ -112,19 +130,19 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             cell?.onBindNativeToken(chainType, nativeDenom)
             return cell!
             
+        } else if (indexPath.section == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailVestingDetailCell") as? TokenDetailVestingDetailCell
+            cell?.onBindVestingToken(chainType!, nativeDenom)
+            return cell!
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
             return cell!
         }
     }
     
-    
     @objc func onClickActionShare() {
-        var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        self.shareAddress(address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {
@@ -186,6 +204,33 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mToSendDenom = nativeDenom
         txVC.mType = COSMOS_MSG_TYPE_TRANSFER2
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+        self.navigationController?.pushViewController(txVC, animated: true)
+    }
+    
+    @IBAction func onClickBepSend(_ sender: Any) {
+        if (!SUPPORT_BEP3_SWAP) {
+            self.onShowToast(NSLocalizedString("error_bep3_swap_temporary_disable", comment: ""))
+            return
+        }
+        
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        
+        let stakingDenom = WUtils.getMainDenom(chainType)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_HTLC_SWAP, 0)
+        if (BaseData.instance.getAvailableAmount_gRPC(stakingDenom).compare(feeAmount).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+            return
+        }
+        
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_HTLC_SWAP
+        txVC.mHtlcDenom = nativeDenom
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;

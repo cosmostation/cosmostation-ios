@@ -100,9 +100,6 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             return 1
             
         } else if (section == 1) {
-            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
-                if (BaseData.instance.mKavaAccountResult.getCalcurateVestingCntByDenom(stakingDenom) > 0) { return 1 }
-            }
             return 0
             
         } else if (section == 2) {

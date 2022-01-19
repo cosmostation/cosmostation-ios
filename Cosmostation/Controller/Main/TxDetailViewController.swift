@@ -203,13 +203,13 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             } else if (msg?.type == KAVA_MSG_TYPE_LIQUIDATE_CDP) {
                 return onBindCdpLiquidate(tableView, indexPath.row)
                 
-            } else if (msg?.type == KAVA_MSG_TYPE_CREATE_SWAP || msg?.type == BNB_MSG_TYPE_HTLC) {
+            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_CREATE_SWAP || msg?.type == BNB_MSG_TYPE_HTLC) {
                 return onBindHtlcCreate(tableView, indexPath.row)
                 
-            } else if (msg?.type == KAVA_MSG_TYPE_CLAIM_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_CLIAM) {
+            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_CLAIM_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_CLIAM) {
                 return onBindHtlcClaim(tableView, indexPath.row)
                 
-            } else if (msg?.type == KAVA_MSG_TYPE_REFUND_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_REFUND) {
+            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_REFUND_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_REFUND) {
                 return onBindHtlcRefund(tableView, indexPath.row)
                 
             }else if (msg?.type == KAVA_MSG_TYPE_DEPOSIT_HAVEST || msg?.type == KAVA_MSG_TYPE_DEPOSIT_HARD) {
@@ -932,25 +932,27 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     @IBAction func onClickHtlcRefund(_ sender: UIButton) {
+        self.onShowToast("Pending swap will refund Shortly")
+        return
 //        print("onClickHtlcRefund")
-        if (!account!.account_has_private) {
-            self.onShowAddMenomicDialog()
-            return
-        }
+//        if (!account!.account_has_private) {
+//            self.onShowAddMenomicDialog()
+//            return
+//        }
         
-        let balances = BaseData.instance.selectBalanceById(accountId: self.account!.account_id)
-        if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
-            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue < 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                return
-            }
-        }
-        
-        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = TASK_TYPE_HTLC_REFUND
-        txVC.mHtlcRefundSwapId = self.mSwapId
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(txVC, animated: true)
+//        let balances = BaseData.instance.selectBalanceById(accountId: self.account!.account_id)
+//        if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
+//            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue < 0) {
+//                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+//                return
+//            }
+//        }
+//
+//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+//        txVC.mType = TASK_TYPE_HTLC_REFUND
+//        txVC.mHtlcRefundSwapId = self.mSwapId
+//        self.navigationItem.title = ""
+//        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     
@@ -1010,7 +1012,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                     }
                     
                 } else if (self.chainType! == ChainType.KAVA_MAIN || self.chainType! == ChainType.KAVA_TEST) {
-                    if (self.mTxInfo?.getMsgs()[0].type == KAVA_MSG_TYPE_CREATE_SWAP) {
+                    if (self.mTxInfo?.getMsgs()[0].type == KAVA_MSG_TYPE_HTLC_CREATE_SWAP) {
                         print("simpleKavaSwapId " , self.mTxInfo?.simpleKavaSwapId())
                         self.onFetchHtlcStatus(self.mTxInfo?.simpleKavaSwapId())
                     } else {

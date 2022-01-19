@@ -64,4 +64,39 @@ class CdpDetailMyTopCell: UITableViewCell {
     @IBAction func onClickRiskScore(_ sender: UIButton) {
         helpRiskScore?()
     }
+    
+    func onBindCdpDetailMy(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam?, _ myCdp: Kava_Cdp_V1beta1_CDPResponse?, _ debtAmount: NSDecimalNumber) {
+        if (collateralParam == nil || myCdp == nil) { return }
+        let cDenom = collateralParam!.getcDenom()!
+        let pDenom = collateralParam!.getpDenom()!
+        
+        let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
+        let liquiPrice = myCdp!.getLiquidationPrice(cDenom, pDenom, collateralParam!)
+        let riskRate = NSDecimalNumber.init(string: "100").subtracting(oraclePrice.subtracting(liquiPrice).multiplying(byPowerOf10: 2).dividing(by: oraclePrice, withBehavior: WUtils.handler2Down))
+
+        print("oraclePrice ", oraclePrice)
+        print("liquiPrice ", liquiPrice)
+        print("riskRate ", riskRate)
+
+        marketTitle.text = collateralParam!.getDpMarketId()
+        marketType.text = collateralParam!.type.uppercased()
+        WUtils.showRiskRate(riskRate, riskScore, _rateIamg: riskRateImg)
+        minCollateralRate.attributedText = WUtils.displayPercent(collateralParam!.getDpLiquidationRatio(), minCollateralRate.font)
+        stabilityFee.attributedText = WUtils.displayPercent(collateralParam!.getDpStabilityFee(), stabilityFee.font)
+        liquidationPenalty.attributedText = WUtils.displayPercent(collateralParam!.getDpLiquidationPenalty(), liquidationPenalty.font)
+
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        currentPrice.attributedText = WUtils.getDPRawDollor(oraclePrice.stringValue, 4, currentPrice.font)
+
+        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        liquidationPrice.attributedText = WUtils.getDPRawDollor(liquiPrice.stringValue, 4, liquidationPrice.font)
+        liquidationPrice.textColor = WUtils.getRiskColor(riskRate)
+
+        let kavaCdpParams_gRPC = BaseData.instance.mKavaCdpParams_gRPC
+        systemMax.attributedText = WUtils.displayAmount2(kavaCdpParams_gRPC!.getGlobalDebtAmount().stringValue, systemMax.font, 6, 6)
+        remainCap.attributedText = WUtils.displayAmount2(kavaCdpParams_gRPC!.getGlobalDebtAmount().subtracting(debtAmount).stringValue, remainCap.font, 6, 6)
+
+        let url = KAVA_CDP_IMG_URL + collateralParam!.getMarketImgPath()! + ".png"
+        marketImg.af_setImage(withURL: URL(string: url)!)
+    }
 }

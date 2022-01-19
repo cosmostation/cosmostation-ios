@@ -21,7 +21,6 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     var proposalId: String?
     var mMintscanProposalDetail: MintscanProposalDetail?
-    var mMyVote: Vote?
     var mMyVote_gRPC: Cosmos_Gov_V1beta1_Vote?
     var mCertikMyVote_gRPC: Shentu_Gov_V1alpha1_Vote?
     
@@ -84,27 +83,14 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             return
         }
         
-        if (WUtils.isGRPC(chainType!)) {
-            if (BaseData.instance.mMyDelegations_gRPC.count <= 0) {
-                self.onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
-                return
-            }
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_VOTE, 0)
-            if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue < 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                return
-            }
-
-        } else {
-            if (BaseData.instance.mMyDelegations.count <= 0) {
-                self.onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
-                return
-            }
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_VOTE, 0)
-            if (BaseData.instance.availableAmount(mainDenom).compare(feeAmount).rawValue < 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                return
-            }
+        if (BaseData.instance.mMyDelegations_gRPC.count <= 0) {
+            self.onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
+            return
+        }
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_VOTE, 0)
+        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
@@ -162,10 +148,8 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         }
         if (chainType == ChainType.CERTIK_MAIN) {
             cell?.onCheckMyVote_gRPC(mCertikMyVote_gRPC?.deposit.option)
-        } else if (WUtils.isGRPC(chainType!)) {
-            cell?.onCheckMyVote_gRPC(mMyVote_gRPC?.option)
         } else {
-            cell?.onCheckMyVote(mMyVote)
+            cell?.onCheckMyVote_gRPC(mMyVote_gRPC?.option)
         }
         return cell!
     }
@@ -176,11 +160,8 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         if (chainType == ChainType.CERTIK_MAIN) {
             onFetchCertikProposalMyVote_gRPC(self.proposalId!, self.account!.account_address)
             
-        } else if (WUtils.isGRPC(chainType!)) {
-            onFetchProposalMyVote_gRPC(self.proposalId!, self.account!.account_address)
-            
         } else {
-            onFetchMyVote(proposalId!, account!.account_address)
+            onFetchProposalMyVote_gRPC(self.proposalId!, self.account!.account_address)
         }
     }
     
@@ -194,6 +175,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func onFetchMintscanProposl(_ id: String) {
         let url = BaseNetWork.mintscanProposalDetail(chainType!, id)
+        print("url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -204,25 +186,6 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
                 
             case .failure(let error):
                 print("onFetchMintscanProposl ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchMyVote(_ id: String, _ address: String) {
-        let request = Alamofire.request(BaseNetWork.voteUrl(chainType, id, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let rawVote = res as? [String : Any], rawVote["error"] == nil else {
-                    self.onFetchFinished()
-                    return
-                }
-                let cosmosVote = CosmosVote.init(rawVote)
-                self.mMyVote = cosmosVote.result
-                
-            case .failure(let error):
-                print("onFetchMyVote ", error)
             }
             self.onFetchFinished()
         }
