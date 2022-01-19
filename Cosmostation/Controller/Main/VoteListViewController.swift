@@ -156,8 +156,9 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             let channel = BaseNetWork.getConnection(self.chainType!, group)!
             defer { try! channel.close().wait() }
             
-            let req = Cosmos_Gov_V1beta1_QueryProposalsRequest.init()
             do {
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
+                let req = Cosmos_Gov_V1beta1_QueryProposalsRequest.with { $0.pagination = page }
                 let response = try Cosmos_Gov_V1beta1_QueryClient(channel: channel).proposals(req).response.wait()
                 self.mProposals_gRPC = response.proposals
                 
@@ -179,7 +180,8 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             defer { try! channel.close().wait() }
             
             do {
-                let req = Shentu_Gov_V1alpha1_QueryProposalsRequest.init()
+                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
+                let req = Shentu_Gov_V1alpha1_QueryProposalsRequest.with { $0.pagination = page }
                 let response = try Shentu_Gov_V1alpha1_QueryClient(channel: channel).proposals(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
                 self.mProposals_Certik_gRPC = response.proposals
 

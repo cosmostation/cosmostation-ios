@@ -175,6 +175,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func onFetchMintscanProposl(_ id: String) {
         let url = BaseNetWork.mintscanProposalDetail(chainType!, id)
+        print("url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {

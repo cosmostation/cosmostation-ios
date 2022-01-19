@@ -4980,9 +4980,9 @@ public class WUtils {
         else if (chain == ChainType.INJECTIVE_MAIN) { return "injective" }
         else if (chain == ChainType.BITSONG_MAIN) { return "bitsong" }
         else if (chain == ChainType.DESMOS_MAIN) { return "desmos" }
-        else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "G-BRIDGE" }
+        else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) { return "gravity-bridge" }
         else if (chain == ChainType.LUM_MAIN) { return "lum" }
-        else if (chain == ChainType.CHIHUAHUA_MAIN) { return "Chihuahua" }
+        else if (chain == ChainType.CHIHUAHUA_MAIN) { return "chihuahua" }
         
         else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
         else if (chain == ChainType.OKEX_MAIN) { return "okex" }
