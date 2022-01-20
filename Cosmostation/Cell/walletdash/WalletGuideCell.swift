@@ -147,7 +147,7 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_umee", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_umee", comment: "")
             
-        } else if (chainType == ChainType.AXELAR_TEST) {
+        } else if (chainType == ChainType.AXELAR_MAIN || chainType == ChainType.AXELAR_TEST) {
             guideImg.image = UIImage(named: "infoiconAxelar")
             guideTitle.text = NSLocalizedString("send_guide_title_axelar", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_axelar", comment: "")

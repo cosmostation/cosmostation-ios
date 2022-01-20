@@ -265,6 +265,11 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
                     guard let url = URL(string: EXPLORER_CHIHUAHUA) else { return }
                     self.onShowSafariWeb(url)
+                    
+                } else if (chainType == ChainType.AXELAR_MAIN) {
+                    guard let url = URL(string: EXPLORER_AXELAR) else { return }
+                    self.onShowSafariWeb(url)
+                    
                 }
                 
                 else if (chainType == ChainType.COSMOS_TEST) {

@@ -166,7 +166,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
             floaty.buttonImage = UIImage.init(named: "btnSendMedi")
             floaty.buttonColor = .white
-        } else if (chainType! == ChainType.AXELAR_TEST) {
+        } else if (chainType! == ChainType.AXELAR_MAIN || chainType! == ChainType.AXELAR_TEST) {
             floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
             floaty.buttonColor = .white
         } else if (chainType! == ChainType.COMDEX_MAIN) {
@@ -283,6 +283,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetLumItems(tableView, indexPath);
         } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
             return onSetChihuahuaItems(tableView, indexPath);
+        } else if (chainType == ChainType.AXELAR_MAIN || chainType == ChainType.AXELAR_TEST) {
+            return onSetAxelarItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -291,8 +293,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetIrisTestItems(tableView, indexPath);
         } else if (chainType == ChainType.UMEE_TEST) {
             return onSetUmeeItems(tableView, indexPath);
-        } else if (chainType == ChainType.AXELAR_TEST) {
-            return onSetAxelarItems(tableView, indexPath);
         } else {
             let cell:WalletAddressCell? = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             return cell!
@@ -1910,7 +1910,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://umee.cc/") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.AXELAR_TEST) {
+        } else if (chainType! == ChainType.AXELAR_MAIN || chainType! == ChainType.AXELAR_TEST) {
             guard let url = URL(string: "https://axelar.network/") else { return }
             self.onShowSafariWeb(url)
             
@@ -2056,7 +2056,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://medium.com/umeeblog") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.AXELAR_TEST) {
+        } else if (chainType! == ChainType.AXELAR_MAIN || chainType! == ChainType.AXELAR_TEST) {
             guard let url = URL(string: "https://axelar.network/blog") else { return }
             self.onShowSafariWeb(url)
             
