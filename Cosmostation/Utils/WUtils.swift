@@ -3184,9 +3184,9 @@ public class WUtils {
     static func getEstimateGasFeeAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
             chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN || chain == ChainType.BITCANA_MAIN ||
-            chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN || chain == ChainType.AXELAR_MAIN ||
+            chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST ||
-            chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
+            chain == ChainType.UMEE_TEST) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
@@ -3292,6 +3292,11 @@ public class WUtils {
         } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
             return NSDecimalNumber.zero
             
+        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_AXELAR)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         
         else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
@@ -3310,9 +3315,9 @@ public class WUtils {
     
     static func getGasRate(_ chain:ChainType, _ position: Int) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
-                chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN || chain == ChainType.AXELAR_MAIN ||
+                chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
                 chain == ChainType.COSMOS_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST ||
-                chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
+                chain == ChainType.UMEE_TEST) {
             if (position == 0) {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY)
             } else if (position == 1) {
@@ -3526,6 +3531,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: KAVA_GAS_RATE_LOW)
             } else {
                 return NSDecimalNumber.init(string: KAVA_GAS_RATE_AVERAGE)
+            }
+            
+        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_AXELAR)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_AXELAR)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_AXELAR)
             }
             
         }
