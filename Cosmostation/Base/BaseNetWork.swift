@@ -469,10 +469,10 @@ class BaseNetWork {
             result = LUM_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
             result = CHIHUAHUA_API + "v1/account/new_txs/" + address
-        }
-        
-        else if (chain == ChainType.KAVA_MAIN) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             result = KAVA_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.AXELAR_MAIN) {
+            result = AXELAR_API + "v1/account/new_txs/" + address
         }
         
         
@@ -558,10 +558,10 @@ class BaseNetWork {
             result = LUM_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
             result = CHIHUAHUA_API + "v1/account/new_txs/" + address + "/" + valAddress
-        }
-        
-        else if (chain == ChainType.KAVA_MAIN) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             result = KAVA_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.AXELAR_MAIN) {
+            result = AXELAR_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -707,6 +707,9 @@ class BaseNetWork {
             
         } else if (chain == ChainType.KAVA_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-kava-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.AXELAR_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-axelar-app.cosmostation.io", port: 9090)
         }
         
         

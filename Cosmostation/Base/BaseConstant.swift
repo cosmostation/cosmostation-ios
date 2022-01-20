@@ -151,6 +151,7 @@ let CHIHUAHUA_API                       = "https://api-chihuahua.cosmostation.io
 
 let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-v5/";
 
+let AXELAR_API                          = "https://api-axelar.cosmostation.io/";
 let AXELAR_TEST_API                     = "https://api-axelar-testnet.cosmostation.io/";
 
 
@@ -238,6 +239,7 @@ let RELAYER_IMG_GRAVITYBRIDGE           = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_LUM                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/lum-network/relay-lum-unknown.png"
 let RELAYER_IMG_CHIHUAHUA               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/chihuahua/relay-chihuahua-unknown.png"
 let RELAYER_IMG_KAVA                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/kava/relay-kava-unknown.png"
+let RELAYER_IMG_AXELAR                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/axelar/relay-axelar-unknown.png"
 
 
 
@@ -1012,6 +1014,7 @@ public enum ChainType: String {
     case INJECTIVE_MAIN
     case LUM_MAIN
     case CHIHUAHUA_MAIN
+    case AXELAR_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1031,6 +1034,7 @@ public enum ChainType: String {
         result.append(COSMOS_MAIN)
         result.append(IRIS_MAIN)
         result.append(AKASH_MAIN)
+        result.append(AXELAR_MAIN)
         result.append(BAND_MAIN)
         result.append(BINANCE_MAIN)
         result.append(BITCANA_MAIN)
@@ -1075,7 +1079,7 @@ public enum ChainType: String {
 //        result.append(MEDI_TEST)
 //        result.append(ALTHEA_TEST)
         result.append(UMEE_TEST)
-        result.append(AXELAR_TEST)
+//        result.append(AXELAR_TEST)
         return result
     }
     
@@ -1191,6 +1195,7 @@ let CHAIN_BITSONG_S = "SUPPORT_CHAIN_BITSONG"
 let CHAIN_DESMOS_S = "SUPPORT_CHAIN_DESMOS"
 let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
 let CHAIN_CHIHUAHUA_S = "SUPPORT_CHAIN_CHIHUAHUA"
+let CHAIN_AXELAR_S = "SUPPORT_CHAIN_AXELAR"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1331,6 +1336,7 @@ let EXPLORER_BITSONG        = "https://www.mintscan.io/bitsong/";
 let EXPLORER_DESMOS         = "https://www.mintscan.io/desmos/";
 let EXPLORER_LUM            = "https://www.mintscan.io/lum/";
 let EXPLORER_CHIHUAHUA      = "https://www.mintscan.io/chihuahua/";
+let EXPLORER_AXELAR         = "https://www.mintscan.io/axelar/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
@@ -1389,6 +1395,7 @@ let BLOCK_TIME_COMDEX       = NSDecimalNumber.init(string: "6.1746")
 let BLOCK_TIME_GRAV         = NSDecimalNumber.init(string: "6.4500")
 let BLOCK_TIME_LUM          = NSDecimalNumber.init(string: "5.7210")
 let BLOCK_TIME_CHIHUAHUA    = NSDecimalNumber.init(string: "5.8172")
+let BLOCK_TIME_AXELAR       = NSDecimalNumber.init(string: "5.5596")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;

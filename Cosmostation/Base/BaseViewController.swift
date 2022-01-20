@@ -501,6 +501,11 @@ extension BaseViewController {
         })
         chihuahuaAction.setValue(UIImage(named: "chainChihuahua")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let axelarAction = UIAlertAction(title: NSLocalizedString("chain_title_axelar", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.AXELAR_MAIN)
+        })
+        axelarAction.setValue(UIImage(named: "chainAxelar")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -520,6 +525,7 @@ extension BaseViewController {
         showAlert.addAction(cosmosAction)
         showAlert.addAction(irisAction)
         showAlert.addAction(akashAction)
+        showAlert.addAction(axelarAction)
         showAlert.addAction(bandAction)
         showAlert.addAction(bnbAction)
         showAlert.addAction(bitcannaAction)
