@@ -24,6 +24,8 @@ class DelegateWarnPopup: BaseViewController, SBCardPopupContent {
             self.warnImg.image = UIImage(named: "imgDelegate3Warning")
         } else if (warnImgType == 28) {
             self.warnImg.image = UIImage(named: "imgDelegate28Warning")
+        } else if (warnImgType == 7) {
+            self.warnImg.image = UIImage(named: "imgDelegate7Warning")
         } else {
             self.warnImg.image = UIImage(named: "imgDelegateWarning")
         }
