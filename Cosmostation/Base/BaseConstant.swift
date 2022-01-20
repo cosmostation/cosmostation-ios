@@ -622,6 +622,10 @@ let GAS_FEE_RATE_TINY_AXELAR                = "0.05";
 let GAS_FEE_RATE_LOW_AXELAR                 = "0.05";
 let GAS_FEE_RATE_AVERAGE_AXELAR             = "0.05";
 
+let GAS_FEE_RATE_TINY_JUNO                  = "0.0025"
+let GAS_FEE_RATE_LOW_JUNO                   = "0.005"
+let GAS_FEE_RATE_AVERAGE_JUNO               = "0.025"
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
