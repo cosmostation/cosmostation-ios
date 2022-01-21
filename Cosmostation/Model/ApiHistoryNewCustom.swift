@@ -280,21 +280,6 @@ public struct ApiHistoryNewCustom {
                 
             }
             
-            //common type
-            else if (msgType.contains("MsgSubmitProposal")) {
-                result = NSLocalizedString("tx_submit_proposal", comment: "")
-                
-            } else if (msgType.contains("MsgVote")) {
-                result = NSLocalizedString("tx_vote", comment: "")
-                
-            } else if (msgType.contains("MsgDeposit")) {
-                result = NSLocalizedString("tx_deposit", comment: "")
-                
-            } else if (msgType.contains("MsgWithdrawValidatorCommission")) {
-                result = NSLocalizedString("tx_get_commission", comment: "")
-                
-            }
-            
             // kava msg type
             else if (msgType.contains(KAVA_MSG_TYPE_POST_PRICE)) {
                 result =  NSLocalizedString("tx_kava_post_price", comment: "")
@@ -361,6 +346,21 @@ public struct ApiHistoryNewCustom {
                 
             } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_WITHDRAW)) {
                 result = NSLocalizedString("tx_kava_swap_withdraw", comment: "")
+            }
+            
+            //common type
+            else if (msgType.contains("MsgSubmitProposal")) {
+                result = NSLocalizedString("tx_submit_proposal", comment: "")
+                
+            } else if (msgType.contains("MsgVote")) {
+                result = NSLocalizedString("tx_vote", comment: "")
+                
+            } else if (msgType.contains("MsgDeposit")) {
+                result = NSLocalizedString("tx_deposit", comment: "")
+                
+            } else if (msgType.contains("MsgWithdrawValidatorCommission")) {
+                result = NSLocalizedString("tx_get_commission", comment: "")
+                
             }
             
             if (getMsgCnt() > 1) {
