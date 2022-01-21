@@ -168,7 +168,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 9
+        return 11
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -341,7 +341,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             }
 
         } else if (indexPath.section == SECTION_ETC) {
-            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.BINANCE_MAIN || chainType == ChainType.OKEX_MAIN) {
+            if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.OKEX_MAIN) {
                 let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
                 nTokenDetailVC.hidesBottomBarWhenPushed = true
                 nTokenDetailVC.denom = mEtc[indexPath.row].balance_denom
@@ -923,7 +923,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    //bind Etc tokens (kava, binance, okex)
+    //bind Etc tokens (binance, okex)
     func onBindEtcToken(_ cell: TokenCell?, _ balance: Balance) {
         if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
             if let bnbToken = WUtils.getBnbToken(balance.balance_denom) {
