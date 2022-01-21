@@ -606,6 +606,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                                                               chainId)
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
                 DispatchQueue.main.async(execute: {
+                    print("onClaimHtlcSwapKava2 response ", response)
                     self.mClaimHash = response.txResponse.txhash
                     self.onFetchSendTx()
                     self.onFetchClaimTx()
@@ -633,7 +634,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     
     
     func onFetchSendTx() {
-//        print("onFetchSendTx")
+        print("onFetchSendTx ", BaseNetWork.txUrl(self.chainType, mSendHash!))
         var request:DataRequest?
         if (self.chainType == ChainType.BINANCE_MAIN) {
             request = Alamofire.request(BaseNetWork.txUrl(self.chainType, mSendHash!), method: .get, parameters: ["format":"json"], encoding: URLEncoding.default, headers: [:])
@@ -661,10 +662,10 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         
     }
     
-    var mClaimTxFetchCnt = 10
+    var mClaimTxFetchCnt = 50
     func onFetchClaimTx() {
         onUpdateProgress(3)
-//        print("onFetchClaimTx")
+        print("onFetchClaimTx ", BaseNetWork.txUrl(self.mHtlcToChain, mClaimHash!))
         var request:DataRequest?
         if (self.mHtlcToChain == ChainType.BINANCE_MAIN) {
             request = Alamofire.request(BaseNetWork.txUrl(self.mHtlcToChain, mClaimHash!), method: .get, parameters: ["format":"json"], encoding: URLEncoding.default, headers: [:])

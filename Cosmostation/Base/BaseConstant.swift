@@ -9,7 +9,7 @@
 import Foundation
 import SQLite
 
-let SUPPORT_BEP3_SWAP                   = false;
+let SUPPORT_BEP3_SWAP                   = true;
 
 let KEY_RECENT_ACCOUNT                  = "KEY_RECENT_ACCOUNT"
 let KEY_RECENT_CHAIN                    = "KEY_RECENT_CHAIN"

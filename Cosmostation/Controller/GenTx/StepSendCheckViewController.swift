@@ -222,6 +222,7 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                     let rawData: Data? = rawResult!.data(using: .utf8)
                     
                     if (self.pageHolderVC.mAccount!.account_new_bip44) {
+                        print("Ether Type")
                         let hash = HDWalletKit.Crypto.sha3keccak256(data: rawData!)
                         let signedData: Data? = try ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
                         
@@ -240,6 +241,7 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                         stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                         
                     } else {
+                        print("Tender Type")
                         let hash = rawData!.sha256()
                         let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
                         

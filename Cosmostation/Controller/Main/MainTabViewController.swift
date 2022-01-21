@@ -482,6 +482,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         print("BaseData.instance.mOtherValidator ", BaseData.instance.mOtherValidator.count)
         print("BaseData.instance.mMyValidator ", BaseData.instance.mMyValidator.count)
         print("BaseData.instance.mBalances ", BaseData.instance.mBalances.count)
+        print("BaseData.instance.mAccount ", mAccount.account_address)
         
         
         if (BaseData.instance.mNodeInfo == nil || BaseData.instance.mAllValidator.count <= 0) {

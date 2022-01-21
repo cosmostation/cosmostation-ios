@@ -305,6 +305,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     
     func onFetchOkHistory(_ address:String) {
         let request = Alamofire.request(BaseNetWork.historyOkUrl(chainType), method: .get, parameters: ["address":address], encoding: URLEncoding.default, headers: [:])
+        print("request ", request)
         request.responseJSON { response in
             switch response.result {
             case .success(let res):
