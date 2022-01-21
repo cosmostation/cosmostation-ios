@@ -90,7 +90,8 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
                 availableDenom.text = "BUSD"
                 availableDenom.textColor = .white
             }
-            maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
+//            maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
+            maxAvailable = BaseData.instance.getAvailableAmount_gRPC(self.pageHolderVC.mHtlcDenom!)
             
             let maxOnce = pageHolderVC.mSwapMaxOnce
             if (maxAvailable.compare(maxOnce).rawValue > 0) {

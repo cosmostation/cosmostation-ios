@@ -129,7 +129,7 @@ class StepHtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
                 sendCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL  + "busd.png")!)
                 self.onSetDpDenom("BUSD")
             }
-            availableAmount = pageHolderVC.mAccount!.getTokenBalance(toSwapDenom!)
+            availableAmount = BaseData.instance.getAvailableAmount_gRPC(toSwapDenom!)
             supplyLimit = kavaSwapParam2!.getSupportedSwapAssetLimit(toSwapDenom!)
             supplyRemain = kavaSwapSupply2!.getRemainCap(toSwapDenom!, supplyLimit)
             onetimeMax = kavaSwapParam2!.getSupportedSwapAssetMaxOnce(toSwapDenom!)
@@ -145,7 +145,7 @@ class StepHtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
                 sendCoinImg.image = UIImage(named: "btconKavaImg")
                 self.onSetDpDenom("BTC")
             }
-            availableAmount = pageHolderVC.mAccount!.getTokenBalance(toSwapDenom!)
+            availableAmount = BaseData.instance.getAvailableAmount_gRPC(toSwapDenom!)
             supplyLimit = kavaSwapParam2!.getSupportedSwapAssetLimit(toSwapDenom!)
             supplyRemain = kavaSwapSupply2!.getRemainCap(toSwapDenom!, supplyLimit)
             onetimeMax = kavaSwapParam2!.getSupportedSwapAssetMaxOnce(toSwapDenom!)
