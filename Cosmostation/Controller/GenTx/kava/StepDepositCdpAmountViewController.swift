@@ -282,8 +282,8 @@ class StepDepositCdpAmountViewController: BaseViewController, UITextFieldDelegat
             
             cDenomLabel.text = WUtils.getKavaTokenName(mCDenom)
             cAvailableDenom.text = WUtils.getKavaTokenName(mCDenom)
-            let cUrl = KAVA_COIN_IMG_URL + mCDenom + ".png"
-            self.cDenomImg.af_setImage(withURL: URL(string: cUrl)!)
+            
+            self.cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
             self.loadingImg.onStopAnimation()
             self.loadingImg.isHidden = true
         }

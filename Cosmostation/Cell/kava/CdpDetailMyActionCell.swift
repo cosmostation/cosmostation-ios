@@ -146,7 +146,7 @@ class CdpDetailMyActionCell: UITableViewCell {
         remainingAmount.attributedText = WUtils.displayAmount2(moreDebtAmount.stringValue, remainingAmount.font!, pDpDecimal, pDpDecimal)
         remainingValue.attributedText = WUtils.getDPRawDollor(moreDebtAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, remainingValue.font)
 
-        collateralImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + cDenom + ".png")!)
-        principalImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + pDenom + ".png")!)
+        collateralImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(cDenom))!)
+        principalImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(pDenom))!)
     }
 }

@@ -108,8 +108,8 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         WUtils.DpKavaTokenName(outputCoinRateDenom, mOutputCoinDenom)
         WUtils.DpKavaTokenName(inputCoinExRateDenom, mInputCoinDenom)
         WUtils.DpKavaTokenName(outputCoinExRateDenom, mOutputCoinDenom)
-        inputCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + mInputCoinDenom + ".png")!)
-        outputCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + mOutputCoinDenom + ".png")!)
+        inputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mInputCoinDenom))!)
+        outputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mOutputCoinDenom))!)
 
         var lpInputAmount = NSDecimalNumber.zero
         var lpOutputAmount = NSDecimalNumber.zero

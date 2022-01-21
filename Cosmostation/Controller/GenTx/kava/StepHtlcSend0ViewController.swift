@@ -120,13 +120,13 @@ class StepHtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
                 sendCoinImg.image = UIImage(named: "bnbonKavaImg")
                 self.onSetDpDenom("BNB")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_BTCB) {
-                sendCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL  + "btcb.png")!)
+                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
                 self.onSetDpDenom("BTC")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_XRPB) {
-                sendCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL  + "xrpb.png")!)
+                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
                 self.onSetDpDenom("XRP")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_BUSD) {
-                sendCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL  + "busd.png")!)
+                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
                 self.onSetDpDenom("BUSD")
             }
             availableAmount = BaseData.instance.getAvailableAmount_gRPC(toSwapDenom!)

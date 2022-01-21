@@ -180,16 +180,16 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
                 
             } else if (chainType! == ChainType.KAVA_MAIN) {
                 if (toSendCoin == TOKEN_HTLC_KAVA_BNB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + "bnb.png")!)
+                    cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
                     cell!.coinTitle.text = "BNB"
                 } else if (toSendCoin == TOKEN_HTLC_KAVA_BTCB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + "btcb.png")!)
+                    cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
                     cell!.coinTitle.text = "BTC"
                 } else if (toSendCoin == TOKEN_HTLC_KAVA_XRPB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL  + "xrpb.png")!)
+                    cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
                     cell!.coinTitle.text = "XRP"
                 } else if (toSendCoin == TOKEN_HTLC_KAVA_BUSD) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL  + "busd.png")!)
+                    cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
                     cell!.coinTitle.text = "BUSD"
                 }
                 
@@ -252,14 +252,14 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_KAVA_SWAP_IN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let swapInDenom = toCoinList[indexPath.row]
-            cell!.coinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + swapInDenom + ".png")!)
+            cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapInDenom))!)
             cell!.coinTitle.text = WUtils.getKavaTokenName(swapInDenom)
             return cell!
             
         } else if (type == SELECT_POPUP_KAVA_SWAP_OUT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let swapOutDenom = toCoinList[indexPath.row]
-            cell!.coinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + swapOutDenom + ".png")!)
+            cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapOutDenom))!)
             cell!.coinTitle.text = WUtils.getKavaTokenName(swapOutDenom)
             return cell!
             

@@ -73,8 +73,8 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         
         WUtils.DpKavaTokenName(inputCoinName, inputCoinDenom)
         WUtils.DpKavaTokenName(outputCoinName, outputCoinDenom)
-        inputCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + inputCoinDenom + ".png")!)
-        outputCoinImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + outputCoinDenom + ".png")!)
+        inputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(inputCoinDenom))!)
+        outputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(outputCoinDenom))!)
     }
     
     override func enableUserInteraction() {

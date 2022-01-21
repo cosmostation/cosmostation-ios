@@ -25,7 +25,7 @@ class HardDetailAssetsCell: UITableViewCell {
     }
     
     func onBindHardDetailAsset(_ hardMoneyMarketDenom: String, _ hardParam: Kava_Hard_V1beta1_Params) {
-        marketImg.af_setImage(withURL: URL(string: KAVA_COIN_IMG_URL + hardMoneyMarketDenom + ".png")!)
+        marketImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardMoneyMarketDenom))!)
         marketDenom.text = WUtils.getKavaTokenName(hardMoneyMarketDenom)
 
         if (hardMoneyMarketDenom == KAVA_MAIN_DENOM) {
