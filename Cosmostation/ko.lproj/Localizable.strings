@@ -785,6 +785,8 @@ support@cosmostation.io";
 "currency_sek" = "SEK";
 "currency_chf" = "CHF";
 "currency_aud" = "AUD";
+"currency_cad" = "CAD";
+"currency_myr" = "MYR";
 "currency_btc" = "BTC";
 "currency_usd_symbol" = "$";
 "currency_eur_symbol" = "€";
@@ -800,7 +802,7 @@ support@cosmostation.io";
 "currency_nok_symbol" = "Kr";
 "currency_sek_symbol" = "Kr";
 "currency_chf_symbol" = "sFr";
-"currency_aud_symbol" = "AU$";
+"currency_cad_symbol" = "$";
 "currency_btc_symbol" = "₿";
 
 "currency_fetch_success" = "가격 정보를 갱신 하였습니다.";

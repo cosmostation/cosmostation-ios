@@ -407,6 +407,12 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         let audAction = UIAlertAction(title: NSLocalizedString("currency_aud", comment: ""), style: .default, handler: { _ in
             self.onSetCurrency(14)
         })
+        let cadAction = UIAlertAction(title: NSLocalizedString("currency_cad", comment: ""), style: .default, handler: { _ in
+            self.onSetCurrency(15)
+        })
+        let myrAction = UIAlertAction(title: NSLocalizedString("currency_myr", comment: ""), style: .default, handler: { _ in
+            self.onSetCurrency(16)
+        })
         
         showAlert.addAction(usdAction)
         showAlert.addAction(eurAction)
@@ -423,6 +429,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         showAlert.addAction(sekAction)
         showAlert.addAction(chfAction)
         showAlert.addAction(audAction)
+        showAlert.addAction(cadAction)
+        showAlert.addAction(myrAction)
         
         self.present(showAlert, animated: true) {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))

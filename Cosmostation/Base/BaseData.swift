@@ -587,6 +587,10 @@ final class BaseData : NSObject{
             return NSLocalizedString("currency_chf", comment: "")
         } else if (getCurrency() == 14) {
             return NSLocalizedString("currency_aud", comment: "")
+        } else if (getCurrency() == 15) {
+            return NSLocalizedString("currency_cad", comment: "")
+        } else if (getCurrency() == 16) {
+            return NSLocalizedString("currency_myr", comment: "")
         }
         return ""
     }
@@ -622,6 +626,10 @@ final class BaseData : NSObject{
             return NSLocalizedString("currency_chf_symbol", comment: "")
         } else if (getCurrency() == 14) {
             return NSLocalizedString("currency_aud_symbol", comment: "")
+        } else if (getCurrency() == 15) {
+            return NSLocalizedString("currency_cad_symbol", comment: "")
+        } else if (getCurrency() == 16) {
+            return NSLocalizedString("currency_myr_symbol", comment: "")
         }
         return ""
     }
