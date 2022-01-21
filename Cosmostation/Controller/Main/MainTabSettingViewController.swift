@@ -34,6 +34,7 @@ class MainTabSettingViewController: BaseViewController, SBCardPopupDelegate {
         if (BaseData.instance.getNeedRefresh()) {
             BaseData.instance.setNeedRefresh(false)
             mainTabVC.onUpdateAccountDB()
+            mainTabVC.onFetchAccountData()
         }
         self.updateTitle()
     }

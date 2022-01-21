@@ -20,7 +20,7 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.selectedChain = BaseData.instance.getRecentChain()
+        self.selectedChain = WUtils.getChainType(account!.account_base_chain)
         self.accountTableView.delegate = self
         self.accountTableView.dataSource = self
         self.accountTableView.separatorStyle = UITableViewCell.SeparatorStyle.none

@@ -36,6 +36,8 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         allChains = Array(ChainType.SUPPRT_CHAIN().dropFirst())
         displayedChains = BaseData.instance.userSortedChains()
         hidedChains = BaseData.instance.userHideChains()
+        
+        BaseData.instance.setNeedRefresh(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

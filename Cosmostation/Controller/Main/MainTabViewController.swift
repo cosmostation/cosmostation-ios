@@ -32,7 +32,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         
         self.onUpdateAccountDB()
         self.onFetchAccountData()
-        
+
         self.delegate = self
         self.selectedIndex = BaseData.instance.getLastTab()
         
