@@ -5272,39 +5272,21 @@ public class WUtils {
         return result
     }
     
-    static func onParseAutoRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ address: String, _ position: Int) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
+    static func onParseAutoRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
+        var result = Array<Coin>()
         if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
-            for i in 0...event.attributes.count - 1 {
-                if (event.attributes[i].key == "recipient" && event.attributes[i].value == address) {
-                    for j in i...event.attributes.count - 1 {
-                        if (event.attributes[j].key == "amount") {
-                            let amount = event.attributes[j].value.filter{ $0.isNumber }
-                            result = NSDecimalNumber.init(string: amount)
-                            break
-                        }
-                    }
-                }
-            }
-        }
-        return result
-    }
-    
-    
-    
-    static func onParseStakeRewardGrpc(_ chain: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ opAddress: String, _ position: Int) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
-        tx.txResponse.logs[position].events.forEach { (event) in
-            if (event.type == "withdraw_rewards") {
+            if (event.type == "transfer") {
                 for i in 0...event.attributes.count - 1 {
-                    if (event.attributes[i].key == "validator" && event.attributes[i].value == opAddress) {
-                        let rawValue = event.attributes[i - 1].value
+                    if (event.attributes[i].key == "amount") {
+                        let rawValue = event.attributes[i].value
                         for rawCoin in rawValue.split(separator: ","){
-                            if (String(rawCoin).contains(WUtils.getMainDenom(chain))) {
-                                result = NSDecimalNumber.init(string: String(rawCoin).filter{ $0.isNumber })
-                                break
+                            let coin = String(rawCoin)
+                            if let range = coin.range(of: "[0-9]*", options: .regularExpression) {
+                                let amount = String(coin[range])
+                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
+                                let denom = String(coin[denomIndex...])
+                                result.append(Coin.init(denom, amount))
                             }
                         }
                     }
@@ -5314,8 +5296,34 @@ public class WUtils {
         return result
     }
     
-    static func onParseCommisiondGrpc(_ chain: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
+    
+    
+    static func onParseStakeRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
+        var result = Array<Coin>()
+        if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
+        tx.txResponse.logs[position].events.forEach { (event) in
+            if (event.type == "withdraw_rewards") {
+                for i in 0...event.attributes.count - 1 {
+                    if (event.attributes[i].key == "amount") {
+                        let rawValue = event.attributes[i].value
+                        for rawCoin in rawValue.split(separator: ","){
+                            let coin = String(rawCoin)
+                            if let range = coin.range(of: "[0-9]*", options: .regularExpression) {
+                                let amount = String(coin[range])
+                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
+                                let denom = String(coin[denomIndex...])
+                                result.append(Coin.init(denom, amount))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
+    static func onParseCommisiondGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
+        var result = Array<Coin>()
         if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
         tx.txResponse.logs[position].events.forEach { (event) in
             if (event.type == "withdraw_commission") {
@@ -5323,9 +5331,36 @@ public class WUtils {
                     if (event.attributes[i].key == "amount") {
                         let rawValue = event.attributes[i].value
                         for rawCoin in rawValue.split(separator: ","){
-                            if (String(rawCoin).contains(WUtils.getMainDenom(chain))) {
-                                result = NSDecimalNumber.init(string: String(rawCoin).filter{ $0.isNumber })
-                                break
+                            let coin = String(rawCoin)
+                            if let range = coin.range(of: "[0-9]*", options: .regularExpression) {
+                                let amount = String(coin[range])
+                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
+                                let denom = String(coin[denomIndex...])
+                                result.append(Coin.init(denom, amount))
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result
+    }
+    
+    static func onParseKavaIncentiveGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
+        var result = Array<Coin>()
+        if (tx.txResponse.logs == nil || tx.txResponse.logs.count <= position || tx.txResponse.logs[position] == nil)  { return result }
+        tx.txResponse.logs[position].events.forEach { (event) in
+            if (event.type == "claim_reward") {
+                for i in 0...event.attributes.count - 1 {
+                    if (event.attributes[i].key == "claim_amount") {
+                        let rawValue = event.attributes[i].value
+                        for rawCoin in rawValue.split(separator: ","){
+                            let coin = String(rawCoin)
+                            if let range = coin.range(of: "[0-9]*", options: .regularExpression) {
+                                let amount = String(coin[range])
+                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
+                                let denom = String(coin[denomIndex...])
+                                result.append(Coin.init(denom, amount))
                             }
                         }
                     }

@@ -360,75 +360,75 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func onBindDelegate(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
         let cell:TxDelegateCell? = tableView.dequeueReusableCell(withIdentifier:"TxDelegateCell") as? TxDelegateCell
-        let msg = mTxInfo!.getMsg(position - 1)
-        let decimal = WUtils.mainDivideDecimal(chainType)
-        cell?.setDenomType(chainType!)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.delegatorLabel.text = msg?.value.delegator_address
-        cell?.validatorLabel.text = msg?.value.validator_address
-        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
-        cell?.delegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.delegateAmountLabel.font!, decimal, decimal)
-        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
-        if (mTxInfo?.getMsgs().count == 1) {
-            cell?.autoRewardLayer.isHidden = false
-            cell?.autoRewardBottomConstraint.priority = .defaultHigh
-            cell?.feeBottomConstraint.priority = .defaultLow
-        } else {
-            cell?.autoRewardLayer.isHidden = true
-            cell?.autoRewardBottomConstraint.priority = .defaultLow
-            cell?.feeBottomConstraint.priority = .defaultHigh
-        }
+//        let msg = mTxInfo!.getMsg(position - 1)
+//        let decimal = WUtils.mainDivideDecimal(chainType)
+//        cell?.setDenomType(chainType!)
+//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
+//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+//        cell?.delegatorLabel.text = msg?.value.delegator_address
+//        cell?.validatorLabel.text = msg?.value.validator_address
+//        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
+//        cell?.delegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.delegateAmountLabel.font!, decimal, decimal)
+//        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
+//        if (mTxInfo?.getMsgs().count == 1) {
+//            cell?.autoRewardLayer.isHidden = false
+//            cell?.autoRewardBottomConstraint.priority = .defaultHigh
+//            cell?.feeBottomConstraint.priority = .defaultLow
+//        } else {
+//            cell?.autoRewardLayer.isHidden = true
+//            cell?.autoRewardBottomConstraint.priority = .defaultLow
+//            cell?.feeBottomConstraint.priority = .defaultHigh
+//        }
         return cell!
     }
     
     func onBindUndelegate(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
         let cell:TxUndelegateCell? = tableView.dequeueReusableCell(withIdentifier:"TxUndelegateCell") as? TxUndelegateCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        let decimal = WUtils.mainDivideDecimal(chainType)
-        cell?.setDenomType(chainType!)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.undelegatorLabel.text = msg?.value.delegator_address
-        cell?.validatorLabel.text = msg?.value.validator_address
-        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
-        cell?.undelegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.undelegateAmountLabel.font!, decimal, decimal)
-        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
-        if (mTxInfo?.getMsgs().count == 1) {
-            cell?.autoRewardLayer.isHidden = false
-            cell?.autoRewardBottomConstraint.priority = .defaultHigh
-            cell?.feeBottomConstraint.priority = .defaultLow
-        } else {
-            cell?.autoRewardLayer.isHidden = true
-            cell?.autoRewardBottomConstraint.priority = .defaultLow
-            cell?.feeBottomConstraint.priority = .defaultHigh
-        }
+//        let msg = mTxInfo?.getMsg(position - 1)
+//        let decimal = WUtils.mainDivideDecimal(chainType)
+//        cell?.setDenomType(chainType!)
+//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
+//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+//        cell?.undelegatorLabel.text = msg?.value.delegator_address
+//        cell?.validatorLabel.text = msg?.value.validator_address
+//        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
+//        cell?.undelegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.undelegateAmountLabel.font!, decimal, decimal)
+//        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
+//        if (mTxInfo?.getMsgs().count == 1) {
+//            cell?.autoRewardLayer.isHidden = false
+//            cell?.autoRewardBottomConstraint.priority = .defaultHigh
+//            cell?.feeBottomConstraint.priority = .defaultLow
+//        } else {
+//            cell?.autoRewardLayer.isHidden = true
+//            cell?.autoRewardBottomConstraint.priority = .defaultLow
+//            cell?.feeBottomConstraint.priority = .defaultHigh
+//        }
         return cell!
     }
     
     func onBindRedelegate(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
         let cell:TxRedelegateCell? = tableView.dequeueReusableCell(withIdentifier:"TxRedelegateCell") as? TxRedelegateCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        let decimal = WUtils.mainDivideDecimal(chainType)
-        cell?.setDenomType(chainType!)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.redelegatorLabel.text = msg?.value.delegator_address
-        cell?.fromValidatorLabel.text = msg?.value.validator_src_address
-        cell?.fromMonikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_src_address!, true)
-        cell?.toValidatorLabel.text = msg?.value.validator_dst_address
-        cell?.toMonikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_dst_address!, true)
-        cell?.redelegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.redelegateAmountLabel.font!, decimal, decimal)
-        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
-        if (mTxInfo?.getMsgs().count == 1) {
-            cell?.autoRewardLayer.isHidden = false
-            cell?.autoRewardBottomConstraint.priority = .defaultHigh
-            cell?.feeBottomConstraint.priority = .defaultLow
-        } else {
-            cell?.autoRewardLayer.isHidden = true
-            cell?.autoRewardBottomConstraint.priority = .defaultLow
-            cell?.feeBottomConstraint.priority = .defaultHigh
-        }
+//        let msg = mTxInfo?.getMsg(position - 1)
+//        let decimal = WUtils.mainDivideDecimal(chainType)
+//        cell?.setDenomType(chainType!)
+//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
+//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+//        cell?.redelegatorLabel.text = msg?.value.delegator_address
+//        cell?.fromValidatorLabel.text = msg?.value.validator_src_address
+//        cell?.fromMonikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_src_address!, true)
+//        cell?.toValidatorLabel.text = msg?.value.validator_dst_address
+//        cell?.toMonikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_dst_address!, true)
+//        cell?.redelegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.redelegateAmountLabel.font!, decimal, decimal)
+//        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
+//        if (mTxInfo?.getMsgs().count == 1) {
+//            cell?.autoRewardLayer.isHidden = false
+//            cell?.autoRewardBottomConstraint.priority = .defaultHigh
+//            cell?.feeBottomConstraint.priority = .defaultLow
+//        } else {
+//            cell?.autoRewardLayer.isHidden = true
+//            cell?.autoRewardBottomConstraint.priority = .defaultLow
+//            cell?.feeBottomConstraint.priority = .defaultHigh
+//        }
         return cell!
     }
     
@@ -517,15 +517,15 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func onBindGetReward(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
         let cell:TxRewardCell? = tableView.dequeueReusableCell(withIdentifier:"TxRewardCell") as? TxRewardCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        let decimal = WUtils.mainDivideDecimal(chainType)
-        cell?.setDenomType(chainType!)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.delegatorLabel.text = msg?.value.delegator_address
-        cell?.validatorLabel.text = msg?.value.validator_address
-        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
-        cell?.amountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleReward(msg!.value.validator_address!, position - 1).stringValue, cell!.amountLabel.font!, decimal, decimal)
+//        let msg = mTxInfo?.getMsg(position - 1)
+//        let decimal = WUtils.mainDivideDecimal(chainType)
+//        cell?.setDenomType(chainType!)
+//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
+//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+//        cell?.delegatorLabel.text = msg?.value.delegator_address
+//        cell?.validatorLabel.text = msg?.value.validator_address
+//        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
+//        cell?.amountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleReward(msg!.value.validator_address!, position - 1).stringValue, cell!.amountLabel.font!, decimal, decimal)
         return cell!
     }
     
@@ -557,14 +557,14 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func onBindCommission(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
         let cell:TxCommissionCell? = tableView.dequeueReusableCell(withIdentifier:"TxCommissionCell") as? TxCommissionCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        let decimal = WUtils.mainDivideDecimal(chainType)
-        cell?.setDenomType(chainType!)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.validatorLabel.text = msg?.value.validator_address
-        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address, true)
-        cell?.commissionAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleCommission(position - 1).stringValue, cell!.commissionAmountLabel.font!, decimal, decimal)
+//        let msg = mTxInfo?.getMsg(position - 1)
+//        let decimal = WUtils.mainDivideDecimal(chainType)
+//        cell?.setDenomType(chainType!)
+//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
+//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+//        cell?.validatorLabel.text = msg?.value.validator_address
+//        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address, true)
+//        cell?.commissionAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleCommission(position - 1).stringValue, cell!.commissionAmountLabel.font!, decimal, decimal)
         return cell!
     }
     

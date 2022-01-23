@@ -50,7 +50,9 @@ class TxJoinPoolCell: TxCell {
                             let inCoin = String(rawInCoin)
                             if let range = inCoin.range(of: "[0-9]*", options: .regularExpression) {
                                 let amount = String(inCoin[range])
-                                inCoins.append(Coin.init(inCoin.replacingOccurrences(of: amount, with: ""), amount))
+                                let denomIndex = inCoin.index(inCoin.startIndex, offsetBy: amount.count)
+                                let denom = String(inCoin[denomIndex...])
+                                inCoins.append(Coin.init(denom, amount))
                             }
                         }
                     }
@@ -77,9 +79,11 @@ class TxJoinPoolCell: TxCell {
                     if (event.attributes.count >= 6) {
                         for rawCoin in event.attributes[5].value.split(separator: ",") {
                             let coin = String(rawCoin)
-                            if let range = coin.range(of: "[0-9]*", options: .regularExpression){
+                            if let range = coin.range(of: "[0-9]*", options: .regularExpression) {
                                 let amount = String(coin[range])
-                                outCoin = Coin.init(coin.replacingOccurrences(of: amount, with: ""), amount)
+                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
+                                let denom = String(coin[denomIndex...])
+                                outCoin = Coin.init(denom, amount)
                             }
                         }
                     }

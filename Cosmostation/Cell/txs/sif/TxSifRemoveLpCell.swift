@@ -43,7 +43,9 @@ class TxSifRemoveLpCell: TxCell {
                             rawCoins.forEach { rawCoin in
                                 if let range = rawCoin.range(of: "[0-9]*", options: .regularExpression) {
                                     let amount = String(rawCoin[range])
-                                    removeCoins.append(Coin.init(rawCoin.replacingOccurrences(of: amount, with: ""), amount))
+                                    let denomIndex = rawCoin.index(rawCoin.startIndex, offsetBy: amount.count)
+                                    let denom = String(rawCoin[denomIndex...])
+                                    removeCoins.append(Coin.init(denom, amount))
                                 }
                             }
                         }

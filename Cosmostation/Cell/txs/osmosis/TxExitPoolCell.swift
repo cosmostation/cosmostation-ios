@@ -50,7 +50,9 @@ class TxExitPoolCell: TxCell {
                             let coin = String(rawCoin)
                             if let range = coin.range(of: "[0-9]*", options: .regularExpression){
                                 let amount = String(coin[range])
-                                inCoin = Coin.init(coin.replacingOccurrences(of: amount, with: ""), amount)
+                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
+                                let denom = String(coin[denomIndex...])
+                                inCoin = Coin.init(denom, amount)
                             }
                         }
                     }
@@ -71,10 +73,12 @@ class TxExitPoolCell: TxCell {
                 if (event.type == "transfer") {
                     if (event.attributes.count >= 6) {
                         for rawInCoin in event.attributes[2].value.split(separator: ",") {
-                            let inCoin = String(rawInCoin)
-                            if let range = inCoin.range(of: "[0-9]*", options: .regularExpression) {
-                                let amount = String(inCoin[range])
-                                outCoins.append(Coin.init(inCoin.replacingOccurrences(of: amount, with: ""), amount))
+                            let outCoin = String(rawInCoin)
+                            if let range = outCoin.range(of: "[0-9]*", options: .regularExpression) {
+                                let amount = String(outCoin[range])
+                                let denomIndex = outCoin.index(outCoin.startIndex, offsetBy: amount.count)
+                                let denom = String(outCoin[denomIndex...])
+                                outCoins.append(Coin.init(denom, amount))
                             }
                         }
                     }

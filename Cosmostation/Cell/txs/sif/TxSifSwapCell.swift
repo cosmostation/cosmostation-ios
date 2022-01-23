@@ -44,7 +44,9 @@ class TxSifSwapCell: TxCell {
                             let coin = String(event.attributes[event.attributes.count - 1].value)
                             if let range = coin.range(of: "[0-9]*", options: .regularExpression){
                                 let amount = String(coin[range])
-                                outCoin = Coin.init(coin.replacingOccurrences(of: amount, with: ""), amount)
+                                let denomIndex = coin.index(coin.startIndex, offsetBy: amount.count)
+                                let denom = String(coin[denomIndex...])
+                                outCoin = Coin.init(denom, amount)
                             }
                         }
                     }

@@ -18,44 +18,68 @@ class TxRedelegateCell: TxCell {
     @IBOutlet weak var toMonikerLabel: UILabel!
     @IBOutlet weak var redelegateAmountLabel: UILabel!
     @IBOutlet weak var redelegateDenomLabel: UILabel!
-    @IBOutlet weak var autoRewardLayer: UIView!
-    @IBOutlet weak var autoRewardAmountLabel: UILabel!
-    @IBOutlet weak var autoRewardDenomLabel: UILabel!
-
-    @IBOutlet weak var autoRewardBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var feeBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var autoRewardLabel: UILabel!
+    @IBOutlet weak var incen0Layer: UIView!
+    @IBOutlet weak var incen0Amount: UILabel!
+    @IBOutlet weak var incen0Denom: UILabel!
+    @IBOutlet weak var incen1Layer: UIView!
+    @IBOutlet weak var incen1Amount: UILabel!
+    @IBOutlet weak var incen1Denom: UILabel!
+    @IBOutlet weak var incen2Layer: UIView!
+    @IBOutlet weak var incen2Amount: UILabel!
+    @IBOutlet weak var incen2Denom: UILabel!
+    @IBOutlet weak var incen3Layer: UIView!
+    @IBOutlet weak var incen3Amount: UILabel!
+    @IBOutlet weak var incen3Denom: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         
         redelegateAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
-        autoRewardAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
-    }
-    
-    func setDenomType(_ chainType:ChainType) {
-        WUtils.setDenomTitle(chainType, redelegateDenomLabel)
-        WUtils.setDenomTitle(chainType, autoRewardDenomLabel)
+        incen0Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        incen1Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        incen2Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        incen3Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
     override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
-        setDenomType(chain)
-        let decimal = WUtils.mainDivideDecimal(chain)
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = WUtils.getChainColor(chain)
         
-        let msg = try! Cosmos_Staking_V1beta1_MsgBeginRedelegate.init(serializedData: response.tx.body.messages[position].value)
-        
-        redelegatorLabel.text = msg.delegatorAddress
-        fromValidatorLabel.text = msg.validatorSrcAddress
-        if let fValidator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorSrcAddress}).first {
-            fromMonikerLabel.text = "(" + fValidator.description_p.moniker + ")"
+        if let msg = try? Cosmos_Staking_V1beta1_MsgBeginRedelegate.init(serializedData: response.tx.body.messages[position].value) {
+            
+            redelegatorLabel.text = msg.delegatorAddress
+            fromValidatorLabel.text = msg.validatorSrcAddress
+            if let fValidator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorSrcAddress}).first {
+                fromMonikerLabel.text = "(" + fValidator.description_p.moniker + ")"
+            }
+            toValidatorLabel.text = msg.validatorDstAddress
+            if let dValidator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorDstAddress}).first {
+                toMonikerLabel.text = "(" + dValidator.description_p.moniker + ")"
+            }
+            WUtils.showCoinDp(msg.amount.denom, msg.amount.amount, redelegateDenomLabel, redelegateAmountLabel, chain)
+            
+            let autoRewardCoins = WUtils.onParseAutoRewardGrpc(response, position)
+            if (autoRewardCoins.count > 0) {
+                autoRewardLabel.isHidden = false
+                incen0Layer.isHidden = false
+                WUtils.showCoinDp(autoRewardCoins[0], incen0Denom, incen0Amount, chain)
+            }
+            if (autoRewardCoins.count > 1) {
+                incen1Layer.isHidden = false
+                WUtils.showCoinDp(autoRewardCoins[1], incen1Denom, incen1Amount, chain)
+            }
+            if (autoRewardCoins.count > 2) {
+                incen2Layer.isHidden = false
+                WUtils.showCoinDp(autoRewardCoins[2], incen2Denom, incen2Amount, chain)
+            }
+            if (autoRewardCoins.count > 3) {
+                incen3Layer.isHidden = false
+                WUtils.showCoinDp(autoRewardCoins[3], incen3Denom, incen3Amount, chain)
+            }
+            
         }
-        toValidatorLabel.text = msg.validatorDstAddress
-        if let dValidator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorDstAddress}).first {
-            toMonikerLabel.text = "(" + dValidator.description_p.moniker + ")"
-        }
-        redelegateAmountLabel.attributedText = WUtils.displayAmount2(msg.amount.amount, redelegateAmountLabel.font!, decimal, decimal)
-        autoRewardAmountLabel.attributedText = WUtils.displayAmount2(WUtils.onParseAutoRewardGrpc(response, msg.delegatorAddress, position).stringValue, autoRewardAmountLabel.font!, decimal, decimal)
     }
 }
