@@ -330,12 +330,20 @@ final class BaseData : NSObject{
     
     func onParseRemainVestingsByDenom_gRPC(_ denom: String) -> Array<Cosmos_Vesting_V1beta1_Period> {
         var results = Array<Cosmos_Vesting_V1beta1_Period>()
-        if (mAccount_gRPC?.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName) == true) {
-            let account = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: mAccount_gRPC!.value)
+        let baseAccount: Google_Protobuf2_Any?
+        if (mAccount_gRPC?.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName) == true) {
+            let profileAccount = try! Desmos_Profiles_V1beta1_Profile.init(serializedData: mAccount_gRPC.value)
+            baseAccount = profileAccount.account
+        } else {
+            baseAccount = mAccount_gRPC
+        }
+        
+        if (baseAccount?.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName) == true) {
+            let account = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: baseAccount!.value)
             return WUtils.onParsePeriodicRemainVestingsByDenom(account, denom)
 
-        } else if (mAccount_gRPC?.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName) == true) {
-            let account = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: mAccount_gRPC!.value)
+        } else if (baseAccount?.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName) == true) {
+            let account = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: baseAccount!.value)
             let cTime = Date().millisecondsSince1970
             let vestingEnd = account.baseVestingAccount.endTime * 1000
             if (cTime < vestingEnd) {
@@ -350,8 +358,8 @@ final class BaseData : NSObject{
                 }
             }
             
-        } else if (mAccount_gRPC?.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName) == true) {
-            let account = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: mAccount_gRPC!.value)
+        } else if (baseAccount?.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName) == true) {
+            let account = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: baseAccount!.value)
             let cTime = Date().millisecondsSince1970
             let vestingEnd = account.baseVestingAccount.endTime * 1000
             if (cTime < vestingEnd) {
@@ -365,7 +373,6 @@ final class BaseData : NSObject{
                     }
                 }
             }
-            
         }
         return results
     }

@@ -4878,13 +4878,13 @@ public class WUtils {
     }
     
     static func onParseVestingAccount(_ chain: ChainType, _ rawAccount: Google_Protobuf2_Any) {
-        print("onParseVestingAccount")
         var sBalace = Array<Coin>()
         BaseData.instance.mMyBalances_gRPC.forEach { coin in
             sBalace.append(coin)
         }
 //        print("sBalace ", sBalace)
         if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
+//            print("PeriodicVestingAccount")
             let vestingAccount = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value)
             sBalace.forEach({ (coin) in
                 let denom = coin.denom
@@ -4941,6 +4941,7 @@ public class WUtils {
             })
             
         } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
+//            print("ContinuousVestingAccount")
             let vestingAccount = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value)
             sBalace.forEach({ (coin) in
                 let denom = coin.denom
@@ -4990,7 +4991,7 @@ public class WUtils {
                 if (remainVesting.compare(delegatedVesting).rawValue > 0) {
                     dpBalance = dpBalance.subtracting(remainVesting).adding(delegatedVesting);
                 }
-                print("final dpBalance ", denom, "  ", dpBalance)
+//                print("final dpBalance ", denom, "  ", dpBalance)
                 
                 if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
                     let vestingCoin = Coin.init(denom, dpVesting.stringValue)
@@ -5009,6 +5010,7 @@ public class WUtils {
             })
             
         } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)) {
+//            print("DelayedVestingAccount")
             let vestingAccount = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value)
             sBalace.forEach({ (coin) in
                 let denom = coin.denom
