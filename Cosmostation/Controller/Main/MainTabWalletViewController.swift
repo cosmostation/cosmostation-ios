@@ -811,7 +811,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
-            cell?.actionSwap = { self.onClickRizonSwap() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -1613,66 +1612,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         okValidatorListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(okValidatorListVC, animated: true)
-    }
-    
-    func onClickRizonSwap() {
-        if (account?.account_has_private == false) {
-            self.onShowAddMenomicDialog()
-            return
-        }
-        if (BaseData.instance.mParam?.params?.rison_swap_enabled != true) {
-            self.onShowToast(NSLocalizedString("error_rizon_swap_finished", comment: ""))
-            return
-        }
-        
-        let rizonSwapAlert = UIAlertController(title: "Event Horizon", message: NSLocalizedString("str_rizon_swap_alert_msg", comment: ""), preferredStyle: .alert)
-        rizonSwapAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default))
-        rizonSwapAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
-            self.onCheckSwapStatus(self.account!.account_address)
-        }))
-        self.present(rizonSwapAlert, animated: true) {
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
-            rizonSwapAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    func onCheckSwapStatus(_ address: String) {
-        print("onCheckSwapStatus ", BaseNetWork.rizonSwapStatus(chainType, address))
-        self.showWaittingAlert()
-        let request = Alamofire.request(BaseNetWork.rizonSwapStatus(chainType, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                var swapInfos = Array<RizonSwapStatus>()
-                if let rawSwapInfos = res as? Array<NSDictionary> {
-                    rawSwapInfos.forEach { rawSwapInfo in
-                        swapInfos.append(RizonSwapStatus.init(rawSwapInfo))
-                    }
-                }
-                print("swapInfos ", swapInfos.count)
-                if (swapInfos.count > 0) {
-                    self.onShowToast(NSLocalizedString("error_alreay_rizon_swap", comment: ""))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                        let swapStatusVC = RizonSwapStatusViewController(nibName: "RizonSwapStatusViewController", bundle: nil)
-                        swapStatusVC.hidesBottomBarWhenPushed = true
-                        self.navigationItem.title = ""
-                        self.navigationController?.pushViewController(swapStatusVC, animated: true)
-                    }
-                } else {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500)) {
-                        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                        txVC.mType = TASK_RIZON_EVENT_HORIZON
-                        txVC.hidesBottomBarWhenPushed = true
-                        self.navigationItem.title = ""
-                        self.navigationController?.pushViewController(txVC, animated: true)
-                    }
-                }
-
-            case .failure(let error):
-                print("onCheckSwapStatus ", error)
-            }
-            self.hideWaittingAlert()
-        }
     }
     
     func onClickOsmosisLab() {
