@@ -26,18 +26,17 @@ class WKey {
             chainType == ChainType.EMONEY_MAIN || chainType == ChainType.RIZON_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.REGEN_MAIN ||
             chainType == ChainType.BITCANA_MAIN || chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.GRAVITY_BRIDGE_MAIN || chainType == ChainType.STARGAZE_MAIN ||
             chainType == ChainType.COMDEX_MAIN || chainType == ChainType.CHIHUAHUA_MAIN || chainType == ChainType.AXELAR_MAIN ||
-            chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.CERTIK_TEST || chainType == ChainType.UMEE_TEST ||
-            chainType == ChainType.AXELAR_TEST || chainType == ChainType.RIZON_TEST || chainType == ChainType.ALTHEA_TEST) {
+            chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.UMEE_TEST || chainType == ChainType.ALTHEA_TEST) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
-        } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        } else if (chainType == ChainType.KAVA_MAIN) {
             if (account.account_new_bip44) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(459)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             } else {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(714)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
         } else if (chainType == ChainType.BAND_MAIN) {
@@ -50,10 +49,10 @@ class WKey {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(529)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
-        } else if (chainType == ChainType.IOV_MAIN || chainType == ChainType.IOV_TEST) {
+        } else if (chainType == ChainType.IOV_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(234)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
         } else if (chainType == ChainType.PERSIS_MAIN) {
@@ -62,7 +61,7 @@ class WKey {
         } else if (chainType == ChainType.CRYPTO_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(394)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
+        } else if (chainType == ChainType.MEDI_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(371)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
         }  else if (chainType == ChainType.FETCH_MAIN) {
@@ -111,19 +110,17 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "iaa", program: ripemd160)
         } else if (chain == ChainType.BINANCE_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "bnb", program: ripemd160)
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "kava", program: ripemd160)
         } else if (chain == ChainType.BAND_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "band", program: ripemd160)
         } else if (chain == ChainType.SECRET_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "secret", program: ripemd160)
-        } else if (chain == ChainType.BINANCE_TEST) {
-            result = try! SegwitAddrCoder.shared.encode2(hrp: "tbnb", program: ripemd160)
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "star", program: ripemd160)
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "ex", program: ripemd160)
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST ) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "certik", program: ripemd160)
         } else if (chain == ChainType.AKASH_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "akash", program: ripemd160)
@@ -139,9 +136,9 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "sif", program: ripemd160)
         } else if (chain == ChainType.KI_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "ki", program: ripemd160)
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "rizon", program: ripemd160)
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "panacea", program: ripemd160)
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "althea", program: ripemd160)
@@ -149,7 +146,7 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "osmo", program: ripemd160)
         } else if (chain == ChainType.UMEE_TEST) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "umee", program: ripemd160)
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "axelar", program: ripemd160)
         } else if (chain == ChainType.EMONEY_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "emoney", program: ripemd160)
@@ -186,14 +183,13 @@ class WKey {
             chain == ChainType.EMONEY_MAIN || chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.ALTHEA_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.STARGAZE_MAIN ||
             chain == ChainType.COMDEX_MAIN || chain == ChainType.CHIHUAHUA_MAIN || chain == ChainType.AXELAR_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.CERTIK_TEST || chain == ChainType.UMEE_TEST ||
-            chain == ChainType.AXELAR_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST) {
+            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.UMEE_TEST || chain == ChainType.ALTHEA_TEST) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(714)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             if (newbip) {
                 childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(459)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             } else {
@@ -210,10 +206,10 @@ class WKey {
                 childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(529)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             }
             
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(234)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         } else if (chain == ChainType.PERSIS_MAIN) {
@@ -222,7 +218,7 @@ class WKey {
         } else if (chain == ChainType.CRYPTO_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(394)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(371)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
@@ -251,7 +247,7 @@ class WKey {
     
     static func getDpAddressPath(_ mnemonic: [String], _ path:Int, _ chain:ChainType, _ newbip:Bool) -> String {
         let masterKey = getMasterKeyFromWords(mnemonic)
-        if ((chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) && newbip) {
+        if ((chain == ChainType.OKEX_MAIN) && newbip) {
             let pKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             return generateAddressFromPriv("ex", pKey.raw)
             
@@ -316,17 +312,17 @@ class WKey {
             result = bech32.encode("cosmos", values: data)
         } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
             result = bech32.encode("iaa", values: data)
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             result = bech32.encode("kava", values: data)
         } else if (chain == ChainType.BAND_MAIN) {
             result = bech32.encode("band", values: data)
         } else if (chain == ChainType.SECRET_MAIN) {
             result = bech32.encode("secret", values: data)
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             result = bech32.encode("star", values: data)
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             result = bech32.encode("ex", values: data)
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             result = bech32.encode("certik", values: data)
         } else if (chain == ChainType.AKASH_MAIN) {
             result = bech32.encode("akash", values: data)
@@ -342,9 +338,9 @@ class WKey {
             result = bech32.encode("sif", values: data)
         } else if (chain == ChainType.KI_MAIN) {
             result = bech32.encode("ki", values: data)
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             result = bech32.encode("rizon", values: data)
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             result = bech32.encode("panacea", values: data)
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             result = bech32.encode("althea", values: data)
@@ -352,7 +348,7 @@ class WKey {
             result = bech32.encode("osmo", values: data)
         } else if (chain == ChainType.UMEE_TEST) {
             result = bech32.encode("umee", values: data)
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             result = bech32.encode("axelar", values: data)
         } else if (chain == ChainType.EMONEY_MAIN) {
             result = bech32.encode("emoney", values: data)
@@ -477,30 +473,6 @@ class WKey {
                 senderData = getDatafromDpAddress(KAVA_MAIN_XRPB_DEPUTY)
             } else if (toSendCoin[0].denom == TOKEN_HTLC_BINANCE_BUSD) {
                 senderData = getDatafromDpAddress(KAVA_MAIN_BUSD_DEPUTY)
-            }
-            let otherSenderData = otherSender.data(using: .utf8)
-            let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
-            let hash = Data.fromHex(add)!.sha256()
-            return hash.hexEncodedString()
-            
-        } else if (toChain == ChainType.BINANCE_TEST) {
-            var senderData: Data?
-            if (toSendCoin[0].denom  == TOKEN_HTLC_KAVA_TEST_BNB) {
-                senderData = getDatafromDpAddress(BINANCE_TEST_BNB_DEPUTY)
-            } else if (toSendCoin[0].denom == TOKEN_HTLC_KAVA_TEST_BTC) {
-                senderData = getDatafromDpAddress(BINANCE_TEST_BTC_DEPUTY)
-            }
-            let otherSenderData = otherSender.data(using: .utf8)
-            let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
-            let hash = Data.fromHex(add)!.sha256()
-            return hash.hexEncodedString()
-            
-        } else if (toChain == ChainType.KAVA_TEST) {
-            var senderData: Data?
-            if (toSendCoin[0].denom == TOKEN_HTLC_BINANCE_TEST_BNB) {
-                senderData = getDatafromDpAddress(KAVA_TEST_BNB_DEPUTY)
-            } else if (toSendCoin[0].denom == TOKEN_HTLC_BINANCE_TEST_BTC) {
-                senderData = getDatafromDpAddress(KAVA_TEST_BTC_DEPUTY)
             }
             let otherSenderData = otherSender.data(using: .utf8)
             let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()

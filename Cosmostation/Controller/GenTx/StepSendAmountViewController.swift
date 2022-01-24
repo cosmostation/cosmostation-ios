@@ -51,11 +51,11 @@ class StepSendAmountViewController: BaseViewController, UITextFieldDelegate{
             }
             
         } else {
-            if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+            if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
                 mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
                 mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
                 
-            } else if (pageHolderVC.chainType! == ChainType.OKEX_MAIN || pageHolderVC.chainType! == ChainType.OKEX_TEST) {
+            } else if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
                 mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
                 mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
                 
@@ -144,7 +144,7 @@ class StepSendAmountViewController: BaseViewController, UITextFieldDelegate{
         let userInput = WUtils.localeStringToDecimal(text!)
         if (userInput == NSDecimalNumber.zero) { return false }
         
-        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
             if (pageHolderVC.mBnbToken?.type == BNB_TOKEN_TYPE_MINI) {
                 if ((userInput.compare(NSDecimalNumber.one).rawValue < 0) && (userInput.compare(maxAvailable).rawValue != 0)) {
                     self.onShowToast(NSLocalizedString("error_bnb_mini_amount", comment: ""))
@@ -169,7 +169,7 @@ class StepSendAmountViewController: BaseViewController, UITextFieldDelegate{
     
     @IBAction func onClickNext(_ sender: Any) {
         if (isValiadAmount()) {
-            if (pageHolderVC.chainType! == ChainType.OKEX_MAIN || pageHolderVC.chainType! == ChainType.OKEX_TEST) {
+            if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
                 let userInput = WUtils.localeStringToDecimal((mTargetAmountTextField.text?.trimmingCharacters(in: .whitespaces))!)
                 let toSendCoin = Coin.init(pageHolderVC.mToSendDenom!, WUtils.getFormattedNumber(userInput, mDisplayDecimal))
                 var tempList = Array<Coin>()

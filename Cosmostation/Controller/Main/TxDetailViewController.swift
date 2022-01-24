@@ -88,7 +88,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         if (mIsGen) {
             self.loadingMsg.isHidden = false
             self.loadingImg.onStartAnimation()
-            if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+            if (chainType == ChainType.BINANCE_MAIN) {
                 guard let txHash = mBroadCaseResult?["hash"] as? String  else {
                     self.onStartMainTab()
                     return
@@ -272,7 +272,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onBindTxCommon(_ tableView: UITableView) -> UITableViewCell {
         let cell:TxCommonCell? = tableView.dequeueReusableCell(withIdentifier:"TxCommonCell") as? TxCommonCell
         cell?.setDenomType(chainType!)
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             cell?.feeLayer.isHidden = false
             cell?.usedFeeLayer.isHidden = true
             cell?.limitFeeLayer.isHidden = true
@@ -291,7 +291,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
             cell?.feeAmountLabel.attributedText = WUtils.displayAmount2(FEE_BNB_TRANSFER, cell!.feeAmountLabel.font!, 0, 8)
             
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             cell?.feeLayer.isHidden = false
             cell?.usedFeeLayer.isHidden = true
             cell?.limitFeeLayer.isHidden = true
@@ -437,7 +437,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let msg = mTxInfo?.getMsg(position - 1)
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
         cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             cell?.fromLabel.text = msg?.value.inputs![0].address
             cell?.toLabel.text = msg?.value.outputs![0].address
             if (self.account?.account_address == msg?.value.inputs![0].address) {
@@ -660,7 +660,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let msg = mTxInfo?.getMsg(position - 1)
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
         cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        if (chainType == ChainType.KAVA_MAIN) {
             WUtils.showCoinDp((msg?.value.getAmounts()![0])!, cell!.sendDenom, cell!.sendAmount, chainType!)
             cell?.senderLabel.text = msg?.value.from
             cell?.recipientLabel.text = msg?.value.recipient_other_chain
@@ -673,7 +673,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 self.mSwapId = self.mTxInfo?.simpleKavaSwapId()
             }
             
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             WUtils.showBNBTxDp((msg?.value.getAmounts()![0])!, cell!.sendDenom, cell!.sendAmount, chainType!)
             if (self.account?.account_address == msg?.value.from) {
                 cell!.txTitle.text = NSLocalizedString("tx_send_htlc2", comment: "")
@@ -708,7 +708,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let msg = mTxInfo?.getMsg(position - 1)
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
         cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        if (chainType == ChainType.KAVA_MAIN) {
             let receiveCoin = mTxInfo!.simpleSwapCoin()
             if (receiveCoin != nil && !receiveCoin!.denom.isEmpty) {
                 cell?.claimAmount.attributedText = WUtils.displayAmount2(receiveCoin!.amount, cell!.claimAmount.font!, WUtils.getKavaCoinDecimal(receiveCoin!.denom), WUtils.getKavaCoinDecimal(receiveCoin!.denom))
@@ -718,7 +718,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.randomNumberLabel.text = msg?.value.random_number
             cell?.swapIdLabel.text = msg?.value.swap_id
             
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             cell?.claimAmount.text = ""
             cell?.claimDenom.text = "-"
             cell?.claimerAddress.text = msg?.value.from
@@ -734,7 +734,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let msg = mTxInfo?.getMsg(position - 1)
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
         cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        if (chainType == ChainType.KAVA_MAIN) {
             cell?.fromAddress.text = msg?.value.from
             cell?.swapIdLabel.text = msg?.value.swap_id
             let refundCoin = mTxInfo?.simpleRefund()
@@ -743,7 +743,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 cell?.refundDenom.text = refundCoin!.denom.uppercased()
             }
             
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             cell?.fromAddress.text = msg?.value.from
             cell?.swapIdLabel.text = msg?.value.swap_id
             
@@ -976,7 +976,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onFetchTx(_ txHash: String) {
         var url = BaseNetWork.txUrl(chainType, txHash)
         var request:DataRequest?
-        if (self.chainType! == ChainType.BINANCE_MAIN || self.chainType! == ChainType.BINANCE_TEST) {
+        if (self.chainType! == ChainType.BINANCE_MAIN) {
             request = Alamofire.request(url, method: .get, parameters: ["format":"json"], encoding: URLEncoding.default, headers: [:])
         } else {
             request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
@@ -1004,14 +1004,14 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 self.mTxInfo = TxInfo.init(info)
                 
                 //Check swap status if Send HTLC Tx
-                if (self.chainType! == ChainType.BINANCE_MAIN || self.chainType! == ChainType.BINANCE_TEST) {
+                if (self.chainType! == ChainType.BINANCE_MAIN) {
                     if (self.mTxInfo?.getMsgs()[0].type == BNB_MSG_TYPE_HTLC && self.account?.account_address == self.mTxInfo?.getMsgs()[0].value.from) {
                         self.onFetchHtlcStatus(self.mTxInfo?.simpleBnbSwapId())
                     } else {
                         self.onUpdateView()
                     }
                     
-                } else if (self.chainType! == ChainType.KAVA_MAIN || self.chainType! == ChainType.KAVA_TEST) {
+                } else if (self.chainType! == ChainType.KAVA_MAIN) {
                     if (self.mTxInfo?.getMsgs()[0].type == KAVA_MSG_TYPE_HTLC_CREATE_SWAP) {
                         print("simpleKavaSwapId " , self.mTxInfo?.simpleKavaSwapId())
                         self.onFetchHtlcStatus(self.mTxInfo?.simpleKavaSwapId())
@@ -1035,7 +1035,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                     } else {
                         self.onShowMoreWait()
                     }
-                } else if (self.chainType! == ChainType.BINANCE_MAIN || self.chainType! == ChainType.BINANCE_TEST) {
+                } else if (self.chainType! == ChainType.BINANCE_MAIN) {
                     if (self.mIsGen) {
                         self.mFetchCnt = self.mFetchCnt - 1
                         if (self.mFetchCnt > 0) {
@@ -1069,13 +1069,13 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             switch response.result {
             case .success(let res):
 //                if(SHOW_LOG) { print("onFetchSwapId ", res) }
-                if (self.chainType! == ChainType.BINANCE_MAIN || self.chainType! == ChainType.BINANCE_TEST) {
+                if (self.chainType! == ChainType.BINANCE_MAIN) {
                     if let info = res as? [String : Any] {
                         self.mBnbSwapInfo = BnbSwapInfo.init(info)
                     }
                     self.onFetchBnbNodeInfo()
                     
-                } else if (self.chainType! == ChainType.KAVA_MAIN || self.chainType! == ChainType.KAVA_TEST) {
+                } else if (self.chainType! == ChainType.KAVA_MAIN) {
                     if let info = res as? [String : Any], info["error"] == nil  {
                         self.mKavaSwapInfo = KavaSwapInfo.init(info)
                     }
@@ -1125,7 +1125,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 return false
             })
             
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
+        } else if (chainType! == ChainType.KAVA_MAIN) {
             return coins.sorted(by: {
                 if ($0.denom == KAVA_MAIN_DENOM) {
                     return true
@@ -1147,7 +1147,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 return false
             })
             
-        } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
+        } else if (chainType! == ChainType.OKEX_MAIN) {
             return coins.sorted(by: {
                 if ($0.denom == OKEX_MAIN_DENOM) {
                     return true

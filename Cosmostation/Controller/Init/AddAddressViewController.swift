@@ -169,83 +169,83 @@ class AddAddressViewController: BaseViewController, QrScannerDelegate {
     
     
     func onShowKavaChainSelect(_ input:String) {
-        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let kavaAction = UIAlertAction(title: NSLocalizedString("chain_title_kava", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.KAVA_MAIN, input)
-        })
-        kavaAction.setValue(UIImage(named: "kavaImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        let kavaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_kava_test", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.KAVA_TEST, input)
-        })
-        kavaTestAction.setValue(UIImage(named: "kavaTestImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        
-        showAlert.addAction(kavaAction)
-        showAlert.addAction(kavaTestAction)
-        self.present(showAlert, animated: true, completion: nil)
+//        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+//        let kavaAction = UIAlertAction(title: NSLocalizedString("chain_title_kava", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.KAVA_MAIN, input)
+//        })
+//        kavaAction.setValue(UIImage(named: "kavaImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//        let kavaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_kava_test", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.KAVA_TEST, input)
+//        })
+//        kavaTestAction.setValue(UIImage(named: "kavaTestImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//
+//        showAlert.addAction(kavaAction)
+//        showAlert.addAction(kavaTestAction)
+//        self.present(showAlert, animated: true, completion: nil)
     }
     
     func onShowIovChainSelect(_ input:String) {
-        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let iovAction = UIAlertAction(title: NSLocalizedString("chain_title_iov", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.IOV_MAIN, input)
-        })
-        iovAction.setValue(UIImage(named: "chainStarname")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        let iovTestAction = UIAlertAction(title: NSLocalizedString("chain_title_iov_test", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.IOV_TEST, input)
-        })
-        iovTestAction.setValue(UIImage(named: "iovTestnetImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        
-        showAlert.addAction(iovAction)
-        showAlert.addAction(iovTestAction)
-        self.present(showAlert, animated: true, completion: nil)
+//        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+//        let iovAction = UIAlertAction(title: NSLocalizedString("chain_title_iov", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.IOV_MAIN, input)
+//        })
+//        iovAction.setValue(UIImage(named: "chainStarname")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//        let iovTestAction = UIAlertAction(title: NSLocalizedString("chain_title_iov_test", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.IOV_TEST, input)
+//        })
+//        iovTestAction.setValue(UIImage(named: "iovTestnetImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//
+//        showAlert.addAction(iovAction)
+//        showAlert.addAction(iovTestAction)
+//        self.present(showAlert, animated: true, completion: nil)
     }
     
     func onShowCertikChainSelect(_ input:String) {
-        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let certikAction = UIAlertAction(title: NSLocalizedString("chain_title_certik", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.CERTIK_MAIN, input)
-        })
-        certikAction.setValue(UIImage(named: "certikChainImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        let certikTestAction = UIAlertAction(title: NSLocalizedString("chain_title_certik_test", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.CERTIK_TEST, input)
-        })
-        certikTestAction.setValue(UIImage(named: "certikTestnetImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        
-        showAlert.addAction(certikAction)
-        showAlert.addAction(certikTestAction)
-        self.present(showAlert, animated: true, completion: nil)
+//        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+//        let certikAction = UIAlertAction(title: NSLocalizedString("chain_title_certik", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.CERTIK_MAIN, input)
+//        })
+//        certikAction.setValue(UIImage(named: "certikChainImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//        let certikTestAction = UIAlertAction(title: NSLocalizedString("chain_title_certik_test", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.CERTIK_TEST, input)
+//        })
+//        certikTestAction.setValue(UIImage(named: "certikTestnetImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//
+//        showAlert.addAction(certikAction)
+//        showAlert.addAction(certikTestAction)
+//        self.present(showAlert, animated: true, completion: nil)
     }
     
     func onShowOkChainSelect(_ input:String) {
-        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("chain_title_okex", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.OKEX_MAIN, input)
-        })
-        okAction.setValue(UIImage(named: "okexChainImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        let okTestAction = UIAlertAction(title: NSLocalizedString("chain_title_okex_test", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.OKEX_TEST, input)
-        })
-        okTestAction.setValue(UIImage(named: "okexTestnetImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        
-        showAlert.addAction(okAction)
-        showAlert.addAction(okTestAction)
-        self.present(showAlert, animated: true, completion: nil)
+//        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: NSLocalizedString("chain_title_okex", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.OKEX_MAIN, input)
+//        })
+//        okAction.setValue(UIImage(named: "okexChainImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//        let okTestAction = UIAlertAction(title: NSLocalizedString("chain_title_okex_test", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.OKEX_TEST, input)
+//        })
+//        okTestAction.setValue(UIImage(named: "okexTestnetImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//
+//        showAlert.addAction(okAction)
+//        showAlert.addAction(okTestAction)
+//        self.present(showAlert, animated: true, completion: nil)
     }
     
     func onShowRizonChainSelect(_ input:String) {
-        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        let rizonAction = UIAlertAction(title: NSLocalizedString("chain_title_rizon", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.RIZON_MAIN, input)
-        })
-        rizonAction.setValue(UIImage(named: "chainRizon")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        let rizonTestAction = UIAlertAction(title: NSLocalizedString("chain_title_rizon_test", comment: ""), style: .default, handler: {_ in
-            self.onGenWatchAccount(ChainType.RIZON_TEST, input)
-        })
-        rizonTestAction.setValue(UIImage(named: "testnetRizon")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        
-        showAlert.addAction(rizonAction)
-        showAlert.addAction(rizonTestAction)
-        self.present(showAlert, animated: true, completion: nil)
+//        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+//        let rizonAction = UIAlertAction(title: NSLocalizedString("chain_title_rizon", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.RIZON_MAIN, input)
+//        })
+//        rizonAction.setValue(UIImage(named: "chainRizon")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//        let rizonTestAction = UIAlertAction(title: NSLocalizedString("chain_title_rizon_test", comment: ""), style: .default, handler: {_ in
+//            self.onGenWatchAccount(ChainType.RIZON_TEST, input)
+//        })
+//        rizonTestAction.setValue(UIImage(named: "testnetRizon")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+//        
+//        showAlert.addAction(rizonAction)
+//        showAlert.addAction(rizonTestAction)
+//        self.present(showAlert, animated: true, completion: nil)
     }
     
     func scannedAddress(result: String) {

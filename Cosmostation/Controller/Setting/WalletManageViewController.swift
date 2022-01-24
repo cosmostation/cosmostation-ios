@@ -98,7 +98,7 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
             }
             cell?.nameLabel.text = WUtils.getWalletName(account)
             var address = account.account_address
-            if (userChain == ChainType.OKEX_MAIN || userChain == ChainType.OKEX_TEST) {
+            if (userChain == ChainType.OKEX_MAIN) {
                 address = WKey.convertAddressOkexToEth(address)
             }
             cell?.address.text = address

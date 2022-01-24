@@ -47,16 +47,16 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
         cell?.rootCardView.backgroundColor = WUtils.getChainBg(userChain!)
         WUtils.setDenomTitle(userChain!, cell!.denomTitle)
         
-        if (userChain == ChainType.BINANCE_MAIN || userChain == ChainType.BINANCE_TEST) {
+        if (userChain == ChainType.BINANCE_MAIN) {
             cell?.pathLabel.text = BNB_BASE_PATH.appending(String(indexPath.row))
             
-        } else if (userChain == ChainType.IOV_MAIN || userChain == ChainType.IOV_TEST) {
+        } else if (userChain == ChainType.IOV_MAIN) {
             cell?.pathLabel.text = IOV_BASE_PATH.appending(String(indexPath.row))
             
         } else if (userChain == ChainType.BAND_MAIN) {
             cell?.pathLabel.text = BAND_BASE_PATH.appending(String(indexPath.row))
             
-        } else if (userChain == ChainType.KAVA_MAIN || userChain == ChainType.KAVA_TEST) {
+        } else if (userChain == ChainType.KAVA_MAIN) {
             if (self.usingBip44) { cell?.pathLabel.text = KAVA_BASE_PATH.appending(String(indexPath.row)) }
             else { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
             
@@ -64,7 +64,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             if (self.usingBip44) { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
             else { cell?.pathLabel.text = SECRET_BASE_PATH.appending(String(indexPath.row)) }
             
-        } else if (userChain == ChainType.OKEX_MAIN || userChain == ChainType.OKEX_TEST) {
+        } else if (userChain == ChainType.OKEX_MAIN) {
             if (self.usingBip44) { cell?.pathLabel.text = "(Ethermint Type) " + OK_BASE_PATH.appending(String(indexPath.row)) }
             else { cell?.pathLabel.text = "(Tendermint Type) " + OK_BASE_PATH.appending(String(indexPath.row)) }
             
@@ -80,7 +80,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             else if (self.customPath == 3) { cell?.pathLabel.text = ETH_LEDGER_LEGACY_PATH.appending(String(indexPath.row)) }
             else { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
             
-        } else if (userChain == ChainType.MEDI_MAIN || userChain == ChainType.MEDI_TEST) {
+        } else if (userChain == ChainType.MEDI_MAIN) {
             cell?.pathLabel.text = MEDI_BASE_PATH.appending(String(indexPath.row))
             
         } else if (userChain == ChainType.INJECTIVE_MAIN) {
@@ -108,7 +108,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
                 address = KeyFac.getDpAddressPath(self.userInputWords!, indexPath.row, self.userChain!, self.usingBip44)
             }
             var dpAddress = address
-            if (self.userChain == ChainType.OKEX_MAIN || self.userChain == ChainType.OKEX_TEST) {
+            if (self.userChain == ChainType.OKEX_MAIN) {
                 dpAddress = WKey.convertAddressOkexToEth(dpAddress)
             }
             DispatchQueue.main.async(execute: {
@@ -161,7 +161,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
                         switch response.result {
                         case .success(let res):
                             self.dispalyTableView()
-                            if (self.userChain == ChainType.BINANCE_MAIN || self.userChain == ChainType.BINANCE_TEST) {
+                            if (self.userChain == ChainType.BINANCE_MAIN) {
                                 if let responseData = res as? NSDictionary {
                                     let bnbAccountInfo = BnbAccountInfo.init(responseData)
                                     if let coin = bnbAccountInfo.balances.filter({$0.symbol == WUtils.getMainDenom(self.userChain)}).first {
@@ -169,7 +169,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
                                     }
                                 }
                                 
-                            } else if (self.userChain == ChainType.OKEX_MAIN || self.userChain == ChainType.OKEX_TEST) {
+                            } else if (self.userChain == ChainType.OKEX_MAIN) {
                                 if let responseData = res as? NSDictionary {
                                     let okAccountInfo = OkAccountInfo.init(responseData)
                                     if let coin = okAccountInfo.value?.coins.filter({$0.denom == WUtils.getMainDenom(self.userChain)}).first {

@@ -35,7 +35,7 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func onUpdateView() {
-        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
             mDpDecimal = 8;
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BNB) {
                 availableDenom.text = "BNB"
@@ -72,7 +72,7 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             minAvailable = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetMin(pageHolderVC.mHtlcDenom!).multiplying(byPowerOf10: -mDpDecimal)
             minAvailableAmount.attributedText = WUtils.displayAmount2(minAvailable.stringValue, minAvailableAmount.font, 0, mDpDecimal)
             
-        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
+        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
             mDpDecimal = WUtils.getKavaCoinDecimal(self.pageHolderVC.mHtlcDenom!)
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
                 availableDenom.text = "BNB"
@@ -135,7 +135,7 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             textField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
             return
         }
-        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
             if (userInput.compare(maxAvailable).rawValue > 0) {
                 textField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
                 return
@@ -145,7 +145,7 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
                 return
             }
             
-        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
+        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
             if (userInput.multiplying(byPowerOf10: mDpDecimal).compare(maxAvailable).rawValue > 0) {
                 textField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
                 return
@@ -163,11 +163,11 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
         if (text == nil || text!.count == 0) { return false }
         let userInput = WUtils.localeStringToDecimal(text!)
         if (userInput == NSDecimalNumber.zero) { return false }
-        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
             if (userInput.compare(maxAvailable).rawValue > 0) { return false }
             if (userInput.compare(minAvailable).rawValue <= 0) {return false}
             
-        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
+        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
             if (userInput.multiplying(byPowerOf10: mDpDecimal).compare(maxAvailable).rawValue > 0) { return false }
             if (userInput.multiplying(byPowerOf10: mDpDecimal).compare(minAvailable).rawValue <= 0) { return false }
         }
@@ -190,10 +190,10 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
         if (isValiadAmount()) {
             let userInput = WUtils.localeStringToDecimal((AmountInput.text?.trimmingCharacters(in: .whitespaces))!)
             var toSendCoin:Coin?
-            if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+            if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
                 toSendCoin = Coin.init(pageHolderVC.mHtlcDenom!, userInput.stringValue)
                 
-            } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
+            } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
                 toSendCoin = Coin.init(pageHolderVC.mHtlcDenom!.lowercased(), userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
                 
             }
@@ -258,11 +258,11 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func onClickHalf(_ sender: UIButton) {
-        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
             let halfValue = maxAvailable.dividing(by: NSDecimalNumber(2), withBehavior: WUtils.getDivideHandler(mDpDecimal))
             AmountInput.text = WUtils.decimalNumberToLocaleString(halfValue, mDpDecimal)
             
-        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
+        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
             let halfValue = maxAvailable.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -mDpDecimal, withBehavior: WUtils.getDivideHandler(mDpDecimal))
             AmountInput.text = WUtils.decimalNumberToLocaleString(halfValue, mDpDecimal)
         }
@@ -270,13 +270,13 @@ class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func onClickMax(_ sender: UIButton) {
-        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
             AmountInput.text = WUtils.decimalNumberToLocaleString(maxAvailable, mDpDecimal)
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BNB) {
                 self.showMaxWarnning()
             }
             
-        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
+        } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
             let maxValue = maxAvailable.multiplying(byPowerOf10: -mDpDecimal, withBehavior: WUtils.getDivideHandler(mDpDecimal))
             AmountInput.text = WUtils.decimalNumberToLocaleString(maxValue, mDpDecimal)
         }

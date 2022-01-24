@@ -51,7 +51,7 @@ class TokenStakingOldCell: UITableViewCell {
         let stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         let stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             vestingLayer.isHidden = true
             delegatedLayer.isHidden = true
             unbondingLayer.isHidden = true
@@ -70,7 +70,7 @@ class TokenStakingOldCell: UITableViewCell {
             lockedAmount.attributedText = WUtils.displayAmount2(locked.stringValue, lockedAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
             frozenAmount.attributedText = WUtils.displayAmount2(frozen.stringValue, frozenAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
             
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             vestingLayer.isHidden = true
             delegatedLayer.isHidden = true
             unbondingLayer.isHidden = true
@@ -112,7 +112,7 @@ class TokenStakingOldCell: UITableViewCell {
             rewardAmount.attributedText = WUtils.displayAmount2(reward.stringValue, rewardAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
             
             let vesting = BaseData.instance.lockedAmount(stakingDenom)
-            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+            if (chainType == ChainType.KAVA_MAIN) {
                 if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
                     vestingLayer.isHidden = false
                     vestingAmount.attributedText = WUtils.displayAmount2(vesting.stringValue, vestingAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)

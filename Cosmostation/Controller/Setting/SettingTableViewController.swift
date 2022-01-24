@@ -154,23 +154,11 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     guard let url = URL(string: EXPLORER_SECRET_MAIN) else { return }
                     self.onShowSafariWeb(url)
                     
-                } else if (chainType == ChainType.BINANCE_TEST) {
-                    guard let url = URL(string: EXPLORER_BINANCE_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.KAVA_TEST) {
-                    guard let url = URL(string: EXPLORER_KAVA_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
                 } else if (chainType == ChainType.OKEX_MAIN) {
                     guard let url = URL(string: EXPLORER_OKEX_MAIN) else { return }
                     self.onShowSafariWeb(url)
                     
-                } else if (chainType == ChainType.OKEX_TEST) {
-                    guard let url = URL(string: EXPLORER_OKEX_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.CERTIK_MAIN || chainType == ChainType.CERTIK_TEST) {
+                } else if (chainType == ChainType.CERTIK_MAIN) {
                     guard let url = URL(string: EXPLORER_CERTIK) else { return }
                     self.onShowSafariWeb(url)
                     
@@ -280,24 +268,12 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     guard let url = URL(string: EXPLORER_IRIS_TEST) else { return }
                     self.onShowSafariWeb(url)
                     
-                } else if (chainType == ChainType.MEDI_TEST) {
-                    guard let url = URL(string: EXPLORER_MEDI_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.RIZON_TEST) {
-                    guard let url = URL(string: EXPLORER_RIZON_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
                 } else if (chainType == ChainType.ALTHEA_TEST) {
                     guard let url = URL(string: EXPLORER_ALTHEA_TEST) else { return }
                     self.onShowSafariWeb(url)
                     
                 } else if (chainType == ChainType.UMEE_TEST) {
                     guard let url = URL(string: EXPLORER_UMEE_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.AXELAR_TEST) {
-                    guard let url = URL(string: EXPLORER_AXELAR_TEST) else { return }
                     self.onShowSafariWeb(url)
                     
                 }

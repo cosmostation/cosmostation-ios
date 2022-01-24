@@ -71,7 +71,7 @@ class MsgGenerator {
     static func genGetSendMsg(_ fromAddress: String, _ toAddress: String, _ amount: Array<Coin>, _ chain: ChainType) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        if (chain == ChainType.OKEX_MAIN) {
             value.from_address = fromAddress
             value.to_address = toAddress
             let data = try? JSONEncoder().encode(amount)
@@ -325,24 +325,6 @@ class MsgGenerator {
 //            value.height_span = "250"
             value.height_span = "24686"
             
-        } else  if (fromChain == ChainType.KAVA_TEST) {
-            if (sendCoin[0].denom == TOKEN_HTLC_KAVA_TEST_BNB) {
-                value.to = KAVA_TEST_BNB_DEPUTY
-                value.sender_other_chain = BINANCE_TEST_BNB_DEPUTY
-            } else if (sendCoin[0].denom  == TOKEN_HTLC_KAVA_TEST_BTC) {
-                value.to = KAVA_TEST_BTC_DEPUTY
-                value.sender_other_chain = BINANCE_TEST_BTC_DEPUTY
-            }
-            value.from = fromAccount.account_address
-            value.recipient_other_chain = toAccount.account_address
-            
-            value.random_number_hash = randomNumberHash.uppercased()
-            value.timestamp = String(timeStamp)
-            let data = try? JSONEncoder().encode(sendCoin)
-            do {
-                value.amount = try JSONDecoder().decode(AmountType.self, from:data!)
-            } catch { print(error) }
-            value.height_span = "250"
         }
         msg.type = KAVA_MSG_TYPE_HTLC_CREATE_SWAP
         msg.value = value
@@ -395,7 +377,7 @@ class MsgGenerator {
     static func genGetDepositHarvestMsg(_ chainType: ChainType, _ depositor: String, _ amount: Coin, _ deposit_type: String?) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        if (chainType == ChainType.KAVA_MAIN) {
             value.depositor = depositor
             let data = try? JSONEncoder().encode(amount)
             do {
@@ -414,7 +396,7 @@ class MsgGenerator {
     static func genGetWithdrawHarvestMsg(_ chainType: ChainType, _ depositor: String, _ amount: Coin, _ deposit_type: String?) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        if (chainType == ChainType.KAVA_MAIN) {
             value.depositor = depositor
             let data = try? JSONEncoder().encode(amount)
             do {

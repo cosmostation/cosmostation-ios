@@ -29,10 +29,6 @@ class HdacUtil {
                     if (satoshis > 0 && confirmations >= 8) {
                         result = result.adding(NSDecimalNumber.init(string: utxo.amount))
                     }
-                } else if (chain == ChainType.RIZON_TEST) {
-                    if (satoshis > 0 && confirmations >= 1) {
-                        result = result.adding(NSDecimalNumber.init(string: utxo.amount))
-                    }
                 }
             }
         }
@@ -48,10 +44,6 @@ class HdacUtil {
                         result.append(utxo)
                     }
                     
-                } else if (chain == ChainType.RIZON_TEST) {
-                    if (satoshis > 0 && confirmations >= 1) {
-                        result.append(utxo)
-                    }
                 }
             }
         }
@@ -62,8 +54,6 @@ class HdacUtil {
         var prefix: Data?
         if (chain == ChainType.RIZON_MAIN) {
             prefix = Data([0x28])
-        } else if (chain == ChainType.RIZON_TEST) {
-            prefix = Data([0x64])
         }
         
         let publicKeyy = publickey.compressedPublicKey
@@ -75,8 +65,6 @@ class HdacUtil {
         
         if (chain == ChainType.RIZON_MAIN) {
             hdacChecksum = dataWithHexString(hex: "48444143")
-        } else  if (chain == ChainType.RIZON_TEST) {
-            hdacChecksum = dataWithHexString(hex: "48545354")
         }
         hdacChecksum = swapUInt32Data(hdacChecksum!)
         var result = Data.getxor(left: checksum, right: hdacChecksum!)

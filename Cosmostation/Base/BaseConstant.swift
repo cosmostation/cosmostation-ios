@@ -37,86 +37,47 @@ let CSS_URL                             = "https://api-wallet.cosmostation.io/";
 let NFT_INFURA                          = "https://ipfs.infura.io/ipfs/";
 
 let COSMOS_API                          = "https://api.cosmostation.io/";
-
 let COSMOS_TEST_API                     = "https://api-office.cosmostation.io/stargate-final/";
 
-
 let IRIS_API                            = "https://api-iris.cosmostation.io/";
-
 let IRIS_TEST_API                       = "https://api-office.cosmostation.io/bifrost/";
 
-
 let BNB_URL                             = "https://dex.binance.org/";
-let BNB_TEST_URL                        = "https://testnet-dex.binance.org/";
 
+let OKEX_URL                            = "https://www.okex.com/okexchain/v1/";
 
 let KAVA_URL                            = "https://lcd-kava-app.cosmostation.io/";
 let KAVA_API                            = "https://api-kava.cosmostation.io/";
 
-let KAVA_TEST_URL                       = "https://lcd-office.cosmostation.io/kava-testnet-12000/";
-let KAVA_TEST_API                       = "https://api-office.cosmostation.io/kava-testnet-12000/";
-
-
 let IOV_API                             = "https://api-iov.cosmostation.io/";
-
-let IOV_TEST_URL                        = "https://api.cluster-stargatenet.iov.one/";
-let IOV_TEST_API                        = "";
-
 
 let BAND_API                            = "https://api-band.cosmostation.io/";
 
-
-let OKEX_URL                            = "https://www.okex.com/okexchain/v1/";
-
-let OKEX_TEST_URL                       = "https://www.okex.com/okexchain-test/v1/";
-
-
 let CERTIK_API                          = "https://api-certik.cosmostation.io/";
-
-let CERTIK_TEST_URL                     = "https://lcd-certik-testnet3.cosmostation.io/";
-let CERTIK_TEST_API                     = "https://api-certik-testnet3.cosmostation.io/";
-
 
 let SECRET_API                          = "https://api-secret.cosmostation.io/";
 
-
 let AKASH_API                           = "https://api-akash.cosmostation.io/";
-
 
 let PERSIS_API                          = "https://api-persistence.cosmostation.io/";
 
-
 let SENTINEL_API                        = "https://api-sentinel.cosmostation.io/";
-
 
 let FETCH_API                           = "https://api-fetchai.cosmostation.io/";
 
-
 let CRYTO_API                           = "https://api-cryptocom.cosmostation.io/";
-
 
 let SIF_URL                             = "https://lcd-sifchain-app.cosmostation.io/";
 let SIF_API                             = "https://api-sifchain.cosmostation.io/";
 let SIF_FINANCE_API                     = "https://api-cryptoeconomics.sifchain.finance/";
 
-
 let KI_API                              = "https://api-kichain.cosmostation.io/";
-
 
 let HDAC_MAINNET                        = "https://insight-api.rizon.world/insight-api/";
 let RIZON_SWAP_STATUS                   = "https://swap-api.rizon.world/";
 let RIZON_API                           = "https://api-rizon.cosmostation.io/";
 
-let HDAC_TESTNET                        = "https://insight-api.testnet.rizon.world/insight-api/";
-let RIZON_SWAP_STATUS_TESTNET           = "https://swap-api.testnet.rizon.world/";
-let RIZON_TEST_API                      = "https://api-rizon-testnet.cosmostation.io/";
-
-
 let MEDI_API                            = "https://api-medibloc.cosmostation.io/";
-
-let MEDI_TEST_URL                       = "https://lcd-medibloc-opentestnet.cosmostation.io/";
-let MEDI_TEST_API                       = "https://api-medibloc-opentestnet.cosmostation.io/";
-
 
 let OSMOSIS_API                         = "https://api-osmosis.cosmostation.io/";
 
@@ -148,11 +109,9 @@ let LUM_API                             = "https://api-lum.cosmostation.io/";
 
 let CHIHUAHUA_API                       = "https://api-chihuahua.cosmostation.io/";
 
-
 let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-v5/";
 
 let AXELAR_API                          = "https://api-axelar.cosmostation.io/";
-let AXELAR_TEST_API                     = "https://api-axelar-testnet.cosmostation.io/";
 
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
@@ -1026,22 +985,16 @@ public enum ChainType: String {
     
     case COSMOS_TEST
     case IRIS_TEST
-    case BINANCE_TEST
-    case KAVA_TEST
-    case IOV_TEST
-    case OKEX_TEST
-    case CERTIK_TEST
-    case RIZON_TEST
-    case MEDI_TEST
     case ALTHEA_TEST
     case UMEE_TEST
-    case AXELAR_TEST
+//    case AXELAR_TEST
     
     static func SUPPRT_CHAIN() -> Array<ChainType> {
         var result = [ChainType]()
         result.append(COSMOS_MAIN)
         result.append(IRIS_MAIN)
         result.append(AKASH_MAIN)
+//        result.append(ALTHEA_MAIN)
         result.append(AXELAR_MAIN)
         result.append(BAND_MAIN)
         result.append(BINANCE_MAIN)
@@ -1072,27 +1025,16 @@ public enum ChainType: String {
         result.append(STARGAZE_MAIN)
         result.append(IOV_MAIN)
         
-        
-//        result.append(ALTHEA_MAIN)
-        
 
 //        result.append(COSMOS_TEST)
 //        result.append(IRIS_TEST)
-//        result.append(BINANCE_TEST)
-//        result.append(KAVA_TEST)
-//        result.append(IOV_TEST)
-//        result.append(OKEX_TEST)
-//        result.append(CERTIK_TEST)
-//        result.append(RIZON_TEST)
-//        result.append(MEDI_TEST)
 //        result.append(ALTHEA_TEST)
         result.append(UMEE_TEST)
-//        result.append(AXELAR_TEST)
         return result
     }
     
     static func IS_TESTNET(_ chain: ChainType?) -> Bool {
-        if (chain == UMEE_TEST || chain == AXELAR_TEST) {
+        if (chain == UMEE_TEST) {
             return true
         }
         return false
@@ -1107,13 +1049,7 @@ public enum ChainType: String {
     
     static func getHtlcSendable(_ chain: ChainType) -> Array<ChainType> {
         var result = Array<ChainType>()
-        if (chain == BINANCE_TEST) {
-            result.append(KAVA_TEST)
-            
-        } else if (chain == KAVA_TEST) {
-            result.append(BINANCE_TEST)
-            
-        } else if (chain == BINANCE_MAIN) {
+        if (chain == BINANCE_MAIN) {
             result.append(KAVA_MAIN)
             
         } else if (chain == KAVA_MAIN) {
@@ -1137,14 +1073,6 @@ public enum ChainType: String {
             result.append(TOKEN_HTLC_KAVA_XRPB)
             result.append(TOKEN_HTLC_KAVA_BUSD)
             
-        } else if (chain == BINANCE_TEST) {
-            result.append(TOKEN_HTLC_BINANCE_TEST_BNB)
-            result.append(TOKEN_HTLC_BINANCE_TEST_BTC)
-            
-        } else if (chain == KAVA_TEST) {
-            result.append(TOKEN_HTLC_KAVA_TEST_BNB)
-            result.append(TOKEN_HTLC_KAVA_TEST_BTC)
-            
         }
         return result
     }
@@ -1160,12 +1088,6 @@ public enum ChainType: String {
             if (denom == TOKEN_HTLC_KAVA_BTCB) { return true }
             if (denom == TOKEN_HTLC_KAVA_XRPB) { return true }
             if (denom == TOKEN_HTLC_KAVA_BUSD) { return true }
-        } else if (chain == BINANCE_TEST) {
-            if (denom == TOKEN_HTLC_BINANCE_TEST_BNB) { return true }
-            if (denom == TOKEN_HTLC_BINANCE_TEST_BTC) { return true }
-        } else if (chain == KAVA_TEST) {
-            if (denom == TOKEN_HTLC_KAVA_TEST_BNB) { return true }
-            if (denom == TOKEN_HTLC_KAVA_TEST_BTC) { return true }
         }
         return false
     }
@@ -1207,16 +1129,8 @@ let CHAIN_AXELAR_S = "SUPPORT_CHAIN_AXELAR"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
-let CHAIN_BINANCE_TEST_S = "SUPPORT_CHAIN_BINANCE_TEST"
-let CHAIN_KAVA_TEST_S = "SUPPORT_CHAIN_KAVA_TEST"
-let CHAIN_IOV_TEST_S = "SUPPORT_CHAIN_IOV_TEST"
-let CHAIN_OKEX_TEST_S = "SUPPORT_CHAIN_OKEX_TEST"
-let CHAIN_CERTIK_TEST_S = "SUPPORT_CHAIN_CERTIK_TEST"
-let CHAIN_RIZON_TEST_S = "SUPPORT_CHAIN_RIZON_TEST2"
-let CHAIN_MEDI_TEST_S = "SUPPORT_CHAIN_MEDI_TEST"
 let CHAIN_ALTHEA_TEST_S = "SUPPORT_CHAIN_ALTHEA_TEST"
 let CHAIN_UMEE_TEST_S = "SUPPORT_CHAIN_UMEE_TEST"
-let CHAIN_AXELAR_TEST_S = "SUPPORT_CHAIN_AXELAR_TEST"
 
 let COSMOS_MAIN_DENOM = "uatom"
 let IRIS_MAIN_DENOM = "uiris"
@@ -1256,7 +1170,6 @@ let CHIHUAHUA_MAIN_DENOM = "uhuahua"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
-let IOV_TEST_DENOM = "uvoi"
 let KAVA_HARD_DENOM = "hard"
 let KAVA_USDX_DENOM = "usdx"
 let KAVA_SWAP_DENOM = "swp"
@@ -1348,14 +1261,8 @@ let EXPLORER_AXELAR         = "https://www.mintscan.io/axelar/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
-let EXPLORER_BINANCE_TEST   = "https://testnet-explorer.binance.org/";
-let EXPLORER_KAVA_TEST      = "https://dev.mintscan.io/kava-testnet/";
-let EXPLORER_OKEX_TEST      = "https://www.oklink.com/okexchain-test/";
-let EXPLORER_MEDI_TEST      = "https://testnet.mintscan.io/medibloc/";
-let EXPLORER_RIZON_TEST     = "https://testnet.mintscan.io/rizon/";
 let EXPLORER_ALTHEA_TEST    = "https://testnet.mintscan.io/althea/";
 let EXPLORER_UMEE_TEST      = "https://testnet.mintscan.io/umee/";
-let EXPLORER_AXELAR_TEST    = "https://testnet.mintscan.io/axelar/";
 let EXPLORER_HDAC_TEST      = "http://test.explorer.hdactech.com/hdac-explorer/";
 
 

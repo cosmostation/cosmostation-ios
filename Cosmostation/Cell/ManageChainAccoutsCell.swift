@@ -149,7 +149,7 @@ class ManageChainAccoutsCell: UITableViewCell {
         nameLabel.text = WUtils.getWalletName(dpAccount)
         
         var address = dpAccount!.account_address
-        if (dpChain == ChainType.OKEX_MAIN || dpChain == ChainType.OKEX_TEST) {
+        if (dpChain == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         addressLabel.text = address

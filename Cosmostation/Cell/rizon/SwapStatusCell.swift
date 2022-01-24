@@ -85,10 +85,6 @@ class SwapStatusCell: UITableViewCell {
                             self.burnStatusImg.isHidden = true
                             self.burnStatusTxtLabel.text = "Success"
                             
-                        } else if (chainType == ChainType.RIZON_TEST && txDetail.confirmations ?? 0 >= 1) {
-                            self.burnStatusImg.isHidden = true
-                            self.burnStatusTxtLabel.text = "Success"
-                            
                         } else {
                             self.burnStatusImg.isHidden = false
                             self.burnStatusTxtLabel.text = "pending"

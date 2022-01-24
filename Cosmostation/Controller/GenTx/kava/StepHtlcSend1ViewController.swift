@@ -31,10 +31,10 @@ class StepHtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
     
     func updateView() {
         toAddressImg.image = toAddressImg.image?.withRenderingMode(.alwaysTemplate)
-        if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN || pageHolderVC.mHtlcToChain == ChainType.BINANCE_TEST) {
+        if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
             self.warnMsg.text = String(format: NSLocalizedString("error_can_not_bep3_account_msg", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
             toAddressImg.tintColor = COLOR_BNB
-        } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN || pageHolderVC.mHtlcToChain == ChainType.KAVA_TEST) {
+        } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN) {
             self.warnMsg.text = String(format: NSLocalizedString("error_can_not_bep3_account_msg2", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
             toAddressImg.tintColor = COLOR_KAVA
         }
@@ -76,9 +76,9 @@ class StepHtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
         } else {
             var msg = ""
             let title = String(format: NSLocalizedString("no_account", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
-            if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN || pageHolderVC.mHtlcToChain == ChainType.BINANCE_TEST) {
+            if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
                 msg = String(format: NSLocalizedString("error_can_not_bep3_account_msg", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
-            } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN || pageHolderVC.mHtlcToChain == ChainType.KAVA_TEST) {
+            } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN) {
                 msg = String(format: NSLocalizedString("error_can_not_bep3_account_msg2", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
             }
             let noAccountAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)

@@ -130,7 +130,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     
     @objc func onClickActionShare() {
         var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         self.shareAddress(address, WUtils.getWalletName(account))

@@ -136,9 +136,9 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onRequestFetch() {
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             onFetchBnbHistory(account!.account_address)
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             onFetchOkHistory(account!.account_address)
         } else {
             onFetchNewApiHistoryCustom(account!.account_address)
@@ -157,9 +157,9 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         view.headerTitleLabel.text = "Recently Histories"
         var cntString = "0"
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             cntString = String(self.mBnbHistories.count)
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             cntString = String(self.mOkHistories.count)
         } else {
             cntString = String(self.mApiCustomNewHistories.count)
@@ -169,9 +169,9 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             return self.mBnbHistories.count
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             return self.mOkHistories.count
         } else {
             return self.mApiCustomNewHistories.count
@@ -179,12 +179,12 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
             cell?.bindHistoryBnbView(mBnbHistories[indexPath.row], account!.account_address)
             return cell!
             
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
             cell?.bindHistoryOkView(mOkHistories[indexPath.row], account!.account_address)
             return cell!
@@ -220,31 +220,9 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
                 present(safariViewController, animated: true, completion: nil)
             }
             
-        } else if (chainType == ChainType.BINANCE_TEST) {
-            let bnbHistory = mBnbHistories[indexPath.row]
-            if (bnbHistory.txType == "HTL_TRANSFER" || bnbHistory.txType == "CLAIM_HTL" || bnbHistory.txType == "REFUND_HTL" || bnbHistory.txType == "TRANSFER") {
-                let txDetailVC = TxDetailViewController(nibName: "TxDetailViewController", bundle: nil)
-                txDetailVC.mIsGen = false
-                txDetailVC.mTxHash = bnbHistory.txHash
-                txDetailVC.mBnbTime = bnbHistory.timeStamp
-                txDetailVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txDetailVC, animated: true)
-            } else {
-                guard let url = URL(string: "https://testnet-explorer.binance.org/tx/" + bnbHistory.txHash) else { return }
-                let safariViewController = SFSafariViewController(url: url)
-                safariViewController.modalPresentationStyle = .popover
-                present(safariViewController, animated: true, completion: nil)
-            }
-            
         } else if (chainType == ChainType.OKEX_MAIN) {
             let okHistory = mOkHistories[indexPath.row]
             guard let url = URL(string: EXPLORER_OKEX_MAIN + "tx/" + okHistory.txhash!) else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType == ChainType.OKEX_TEST) {
-            let okHistory = mOkHistories[indexPath.row]
-            guard let url = URL(string: EXPLORER_OKEX_TEST + "tx/" + okHistory.txhash!) else { return }
             self.onShowSafariWeb(url)
             
         } else {
@@ -418,7 +396,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     
     @objc func onClickActionShare() {
         var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         self.shareAddress(address, WUtils.getWalletName(account))

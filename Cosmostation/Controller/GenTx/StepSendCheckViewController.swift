@@ -90,11 +90,11 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
             currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
             
         } else {
-            if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+            if (chainType == ChainType.BINANCE_MAIN) {
                 mDivideDecimal = WUtils.mainDivideDecimal(chainType)
                 mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
                 
-            } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+            } else if (chainType == ChainType.OKEX_MAIN) {
                 mDivideDecimal = WUtils.mainDivideDecimal(chainType)
                 mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
                 
@@ -127,7 +127,7 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
         WUtils.showCoinDp(toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel, chainType!)
         
         mToAddressLabel.text = pageHolderVC.mToSendRecipientAddress
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             mToAddressLabel.text = WKey.convertAddressOkexToEth(pageHolderVC.mToSendRecipientAddress!)
         }
         mToAddressLabel.adjustsFontSizeToFitWidth = true
@@ -152,7 +152,7 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if (self.chainType == ChainType.BINANCE_MAIN || self.chainType == ChainType.BINANCE_TEST) {
+                if (self.chainType == ChainType.BINANCE_MAIN) {
                     guard let info = res as? [String : Any] else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.hideWaittingAlert()
@@ -164,7 +164,7 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                     BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithBnbAccountInfo(account, bnbAccountInfo))
                     self.onGenBnbSendTx()
                     
-                } else if (self.chainType == ChainType.OKEX_MAIN || self.chainType == ChainType.OKEX_TEST) {
+                } else if (self.chainType == ChainType.OKEX_MAIN) {
                     guard let info = res as? NSDictionary else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.hideWaittingAlert()
@@ -209,7 +209,7 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                 var msgList = Array<Msg>()
                 msgList.append(msg)
                 
-                if (self.chainType == ChainType.OKEX_MAIN || self.chainType == ChainType.OKEX_TEST) {
+                if (self.chainType == ChainType.OKEX_MAIN) {
                     let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
                                                            String(self.pageHolderVC.mAccount!.account_account_numner),
                                                            String(self.pageHolderVC.mAccount!.account_sequence_number),

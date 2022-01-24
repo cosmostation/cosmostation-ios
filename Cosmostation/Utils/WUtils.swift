@@ -761,7 +761,7 @@ public class WUtils {
                 }
             }
         }
-        else if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
+        else if (chainType! == ChainType.BINANCE_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allBnb = NSDecimalNumber.zero
                 let amount = WUtils.getAllBnbToken(coin.balance_denom)
@@ -774,7 +774,7 @@ public class WUtils {
                 totalValue = totalValue.adding(assetValue)
             }
             
-        } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
+        } else if (chainType! == ChainType.OKEX_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allOKT = NSDecimalNumber.zero
                 if (coin.balance_denom == getMainDenom(chainType)) {
@@ -1222,7 +1222,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             if (coin.denom == BNB_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1231,7 +1231,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 0, 8)
             
-        } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        } else if (chainType == ChainType.KAVA_MAIN) {
             if (coin.denom == KAVA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (coin.denom == KAVA_HARD_DENOM) {
@@ -1285,16 +1285,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.IOV_TEST) {
-            if (coin.denom == IOV_TEST_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             if (coin.denom == OKEX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1302,15 +1293,6 @@ public class WUtils {
                 denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 0, 18)
-            
-        } else if (chainType == ChainType.CERTIK_TEST) {
-            if (coin.denom == CERTIK_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.AKASH_MAIN) {
             if (coin.denom == AKASH_MAIN_DENOM) {
@@ -1406,7 +1388,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.RIZON_MAIN || chainType == ChainType.RIZON_TEST) {
+        } else if (chainType == ChainType.RIZON_MAIN) {
             if (coin.denom == RIZON_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1415,7 +1397,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
+        } else if (chainType == ChainType.MEDI_MAIN) {
             if (coin.denom == MEDI_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1442,7 +1424,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.AXELAR_MAIN || chainType == ChainType.AXELAR_TEST) {
+        } else if (chainType == ChainType.AXELAR_MAIN) {
             if (coin.denom == AXELAR_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1613,7 +1595,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             if (denom == BNB_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1622,7 +1604,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 8)
             
-        } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        } else if (chainType == ChainType.KAVA_MAIN) {
             if (denom == KAVA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom == KAVA_HARD_DENOM) {
@@ -1676,16 +1658,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.IOV_TEST) {
-            if (denom == IOV_TEST_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             if (denom == OKEX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1693,15 +1666,6 @@ public class WUtils {
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 18)
-            
-        } else if (chainType == ChainType.CERTIK_TEST) {
-            if (denom == CERTIK_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.AKASH_MAIN) {
             if (denom == AKASH_MAIN_DENOM) {
@@ -1797,7 +1761,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.RIZON_MAIN || chainType == ChainType.RIZON_TEST) {
+        } else if (chainType == ChainType.RIZON_MAIN) {
             if (denom == RIZON_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1806,7 +1770,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
+        } else if (chainType == ChainType.MEDI_MAIN) {
             if (denom == MEDI_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -1833,7 +1797,7 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
-        } else if (chainType == ChainType.AXELAR_MAIN || chainType == ChainType.AXELAR_TEST) {
+        } else if (chainType == ChainType.AXELAR_MAIN) {
             if (denom == AXELAR_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
@@ -2001,19 +1965,19 @@ public class WUtils {
             return COLOR_ATOM
         } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
             return COLOR_IRIS
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             return COLOR_BNB
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             return COLOR_KAVA
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             return COLOR_IOV
         } else if (chain == ChainType.BAND_MAIN) {
             return COLOR_BAND
         } else if (chain == ChainType.SECRET_MAIN) {
             return COLOR_SECRET
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             return COLOR_CERTIK
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return COLOR_OK
         } else if (chain == ChainType.AKASH_MAIN) {
             return COLOR_AKASH
@@ -2031,15 +1995,15 @@ public class WUtils {
             return COLOR_KI
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             return COLOR_OSMOSIS
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             return COLOR_RIZON
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             return COLOR_MEDI
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return COLOR_ALTHEA
         } else if (chain == ChainType.UMEE_TEST) {
             return COLOR_UMEE
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             return COLOR_AXELAR
         } else if (chain == ChainType.EMONEY_MAIN) {
             return COLOR_EMONEY
@@ -2074,21 +2038,21 @@ public class WUtils {
             return COLOR_ATOM_DARK
         } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
             return COLOR_IRIS_DARK
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             return COLOR_BNB_DARK
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             return COLOR_KAVA_DARK
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             return COLOR_IOV_DARK
         } else if (chain == ChainType.BAND_MAIN) {
             return COLOR_BAND_DARK
         } else if (chain == ChainType.SECRET_MAIN) {
             return COLOR_SECRET_DARK
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             return COLOR_CERTIK_DARK
         } else if (chain == ChainType.AKASH_MAIN) {
             return COLOR_AKASH_DARK
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return COLOR_OK_DARK
         } else if (chain == ChainType.PERSIS_MAIN) {
             return COLOR_PERSIS_DARK
@@ -2104,15 +2068,15 @@ public class WUtils {
             return COLOR_KI_DARK
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             return COLOR_OSMOSIS_DARK
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             return COLOR_RIZON_DARK
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             return COLOR_MEDI_DARK
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return COLOR_ALTHEA_DARK
         } else if (chain == ChainType.UMEE_TEST) {
             return COLOR_UMEE_DARK
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             return COLOR_AXELAR_DARK
         } else if (chain == ChainType.EMONEY_MAIN) {
             return COLOR_EMONEY_DARK
@@ -2147,21 +2111,21 @@ public class WUtils {
             return TRANS_BG_COLOR_COSMOS
         } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
             return TRANS_BG_COLOR_IRIS
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             return TRANS_BG_COLOR_BNB
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             return TRANS_BG_COLOR_KAVA
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST ) {
+        } else if (chain == ChainType.IOV_MAIN) {
             return TRANS_BG_COLOR_IOV
         } else if (chain == ChainType.BAND_MAIN) {
             return TRANS_BG_COLOR_BAND
         } else if (chain == ChainType.SECRET_MAIN) {
             return TRANS_BG_COLOR_SECRET
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             return TRANS_BG_COLOR_CERTIK
         } else if (chain == ChainType.AKASH_MAIN) {
             return TRANS_BG_COLOR_AKASH
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return TRANS_BG_COLOR_OK
         } else if (chain == ChainType.PERSIS_MAIN) {
             return TRANS_BG_COLOR_PERSIS
@@ -2177,15 +2141,15 @@ public class WUtils {
             return TRANS_BG_COLOR_KI
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             return TRANS_BG_COLOR_OSMOSIS
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             return TRANS_BG_COLOR_RIZON
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             return TRANS_BG_COLOR_MEDI
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return TRANS_BG_COLOR_ALTHEA
         } else if (chain == ChainType.UMEE_TEST) {
             return TRANS_BG_COLOR_UMEE
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             return TRANS_BG_COLOR_AXELAR
         } else if (chain == ChainType.EMONEY_MAIN) {
             return TRANS_BG_COLOR_EMONEY
@@ -2220,19 +2184,19 @@ public class WUtils {
             return "ATOM"
         } else if (chain == ChainType.IRIS_MAIN) {
             return "IRIS"
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             return "BNB"
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             return "KAVA"
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             return "IOV"
         } else if (chain == ChainType.BAND_MAIN) {
             return "BAND"
         } else if (chain == ChainType.SECRET_MAIN) {
             return "SCRT"
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return "OKT"
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             return "CTK"
         } else if (chain == ChainType.AKASH_MAIN) {
             return "AKT"
@@ -2250,19 +2214,19 @@ public class WUtils {
             return "XKI"
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             return "OSMO"
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             return "MED"
         } else if (chain == ChainType.COSMOS_TEST) {
             return "MUON"
         } else if (chain == ChainType.IRIS_TEST) {
             return "BIF"
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             return "ATOLO"
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return "ALTG"
         } else if (chain == ChainType.UMEE_TEST) {
             return "UMEE"
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             return "AXL"
         } else if (chain == ChainType.EMONEY_MAIN) {
             return "NGM"
@@ -2297,9 +2261,9 @@ public class WUtils {
             return COSMOS_MAIN_DENOM
         } else if (chain == ChainType.IRIS_MAIN) {
             return IRIS_MAIN_DENOM
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             return BNB_MAIN_DENOM
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_MAIN_DENOM
         } else if (chain == ChainType.IOV_MAIN ) {
             return IOV_MAIN_DENOM
@@ -2307,9 +2271,9 @@ public class WUtils {
             return BAND_MAIN_DENOM
         } else if (chain == ChainType.SECRET_MAIN) {
             return SECRET_MAIN_DENOM
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return OKEX_MAIN_DENOM
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             return CERTIK_MAIN_DENOM
         } else if (chain == ChainType.AKASH_MAIN) {
             return AKASH_MAIN_DENOM
@@ -2327,11 +2291,11 @@ public class WUtils {
             return KI_MAIN_DENOM
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             return OSMOSIS_MAIN_DENOM
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             return MEDI_MAIN_DENOM
         } else if (chain == ChainType.EMONEY_MAIN) {
             return EMONEY_MAIN_DENOM
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             return RIZON_MAIN_DENOM
         } else if (chain == ChainType.JUNO_MAIN) {
             return JUNO_MAIN_DENOM
@@ -2357,7 +2321,7 @@ public class WUtils {
             return LUM_MAIN_DENOM
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
             return CHIHUAHUA_MAIN_DENOM
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             return AXELAR_MAIN_DENOM
         }
         
@@ -2365,8 +2329,6 @@ public class WUtils {
             return COSMOS_TEST_DENOM
         } else if (chain == ChainType.IRIS_TEST) {
             return IRIS_TEST_DENOM
-        } else if (chain == ChainType.IOV_TEST) {
-            return IOV_TEST_DENOM
         } else if (chain == ChainType.UMEE_TEST) {
             return UMEE_MAIN_DENOM
         }
@@ -2405,9 +2367,9 @@ public class WUtils {
     }
     
     static func mainDivideDecimal(_ chain:ChainType?) -> Int16 {
-        if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        if (chain == ChainType.BINANCE_MAIN) {
             return 0
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return 0
         } else if (chain == ChainType.FETCH_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.INJECTIVE_MAIN) {
             return 18
@@ -2419,9 +2381,9 @@ public class WUtils {
     }
     
     static func mainDisplayDecimal(_ chain:ChainType?) -> Int16 {
-        if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        if (chain == ChainType.BINANCE_MAIN) {
             return 8
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return 18
         } else if (chain == ChainType.FETCH_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.INJECTIVE_MAIN) {
             return 18
@@ -2439,13 +2401,13 @@ public class WUtils {
         } else if (chain == ChainType.IRIS_MAIN) {
             label?.text = "IRIS"
             label?.textColor = COLOR_IRIS
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             label?.text = "BNB"
             label?.textColor = COLOR_BNB
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             label?.text = "KAVA"
             label?.textColor = COLOR_KAVA
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             label?.text = "IOV"
             label?.textColor = COLOR_IOV
         } else if (chain == ChainType.BAND_MAIN) {
@@ -2454,10 +2416,10 @@ public class WUtils {
         } else if (chain == ChainType.SECRET_MAIN) {
             label?.text = "SCRT"
             label?.textColor = COLOR_SECRET
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             label?.text = "OKT"
             label?.textColor = COLOR_OK
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             label?.text = "CTK"
             label?.textColor = COLOR_CERTIK
         } else if (chain == ChainType.AKASH_MAIN) {
@@ -2490,10 +2452,10 @@ public class WUtils {
         } else if (chain == ChainType.IRIS_TEST) {
             label?.text = "BIF"
             label?.textColor = COLOR_IRIS
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             label?.text = "ATOLO"
             label?.textColor = COLOR_RIZON
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             label?.text = "MED"
             label?.textColor = COLOR_MEDI
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
@@ -2502,7 +2464,7 @@ public class WUtils {
         } else if (chain == ChainType.UMEE_TEST) {
             label?.text = "UMEE"
             label?.textColor = COLOR_UMEE
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             label?.text = "AXL"
             label?.textColor = COLOR_AXELAR
         } else if (chain == ChainType.EMONEY_MAIN) {
@@ -2617,26 +2579,10 @@ public class WUtils {
             return ChainType.COSMOS_TEST
         } else if (chainS == CHAIN_IRIS_TEST_S) {
             return ChainType.IRIS_TEST
-        } else if (chainS == CHAIN_KAVA_TEST_S) {
-            return ChainType.KAVA_TEST
-        } else if (chainS == CHAIN_BINANCE_TEST_S) {
-            return ChainType.BINANCE_TEST
-        } else if (chainS == CHAIN_IOV_TEST_S) {
-            return ChainType.IOV_TEST
-        } else if (chainS == CHAIN_OKEX_TEST_S) {
-            return ChainType.OKEX_TEST
-        } else if (chainS == CHAIN_CERTIK_TEST_S) {
-            return ChainType.CERTIK_TEST
-        } else if (chainS == CHAIN_RIZON_TEST_S) {
-            return ChainType.RIZON_TEST
-        } else if (chainS == CHAIN_MEDI_TEST_S) {
-            return ChainType.MEDI_TEST
         } else if (chainS == CHAIN_ALTHEA_TEST_S) {
             return ChainType.ALTHEA_TEST
         } else if (chainS == CHAIN_UMEE_TEST_S) {
             return ChainType.UMEE_TEST
-        } else if (chainS == CHAIN_AXELAR_TEST_S) {
-            return ChainType.AXELAR_TEST
         }
         return nil
     }
@@ -2714,38 +2660,22 @@ public class WUtils {
             return CHAIN_COSMOS_TEST_S
         } else if (chain == ChainType.IRIS_TEST) {
             return CHAIN_IRIS_TEST_S
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return CHAIN_BINANCE_TEST_S
-        } else if (chain == ChainType.KAVA_TEST) {
-            return CHAIN_KAVA_TEST_S
-        } else if (chain == ChainType.IOV_TEST) {
-            return CHAIN_IOV_TEST_S
-        } else if (chain == ChainType.OKEX_TEST) {
-            return CHAIN_OKEX_TEST_S
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CHAIN_CERTIK_TEST_S
-        } else if (chain == ChainType.RIZON_TEST) {
-            return CHAIN_RIZON_TEST_S
-        } else if (chain == ChainType.MEDI_TEST) {
-            return CHAIN_MEDI_TEST_S
         } else if (chain == ChainType.ALTHEA_TEST) {
             return CHAIN_ALTHEA_TEST_S
         } else if (chain == ChainType.UMEE_TEST) {
             return CHAIN_UMEE_TEST_S
-        } else if (chain == ChainType.AXELAR_TEST) {
-            return CHAIN_AXELAR_TEST_S
         }
         return ""
     }
     
     static func getChainCustomPathS(_ chain: ChainType, _ newBip: Bool, _ customPath: Int, _ endPath: Int) -> String {
-        if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        if (chain == ChainType.BINANCE_MAIN) {
             return BNB_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             return IOV_BASE_PATH + String(endPath)
         } else if (chain == ChainType.BAND_MAIN) {
             return BAND_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return OK_BASE_PATH + String(endPath)
         } else if (chain == ChainType.PERSIS_MAIN) {
             return PERSIS_BASE_PATH + String(endPath)
@@ -2762,7 +2692,7 @@ public class WUtils {
         }
         
         //TODO custom Path
-        else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        else if (chain == ChainType.KAVA_MAIN) {
             if (newBip) {
                 return KAVA_BASE_PATH + String(endPath)
             } else {
@@ -2858,8 +2788,8 @@ public class WUtils {
             chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
             chain == ChainType.INJECTIVE_MAIN || chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN ||
             chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.RIZON_TEST ||
-            chain == ChainType.ALTHEA_TEST || chain == ChainType.UMEE_TEST || chain == ChainType.AXELAR_TEST) {
+            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST ||
+            chain == ChainType.ALTHEA_TEST || chain == ChainType.UMEE_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
             } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
@@ -2928,7 +2858,7 @@ public class WUtils {
             }
         }
         
-        else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        else if (chain == ChainType.KAVA_MAIN) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SEND))
             } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
@@ -2984,7 +2914,7 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_IBC_SEND))
             }
             
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_SEND))
             } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
@@ -3013,7 +2943,7 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_IBC_SEND))
             }
             
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2 || type == TASK_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(OK_GAS_AMOUNT_SEND))
             } else if (type == OK_MSG_TYPE_DEPOSIT || type == OK_MSG_TYPE_WITHDRAW) {
@@ -3022,7 +2952,7 @@ public class WUtils {
                 result = (NSDecimalNumber.init(string: OK_GAS_AMOUNT_VOTE_MUX).multiplying(by: NSDecimalNumber.init(value: valCnt))).adding(NSDecimalNumber.init(string: OK_GAS_AMOUNT_VOTE))
             }
             
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_SEND))
             } else if (type == COSMOS_MSG_TYPE_DELEGATE || type == COSMOS_MSG_TYPE_UNDELEGATE2) {
@@ -3146,7 +3076,7 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_VOTE))
             }
             
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2 || type == TASK_IBC_TRANSFER) {
                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_SEND))
             } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
@@ -3185,8 +3115,7 @@ public class WUtils {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
             chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN || chain == ChainType.BITCANA_MAIN ||
             chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST ||
-            chain == ChainType.UMEE_TEST) {
+            chain == ChainType.COSMOS_TEST || chain == ChainType.ALTHEA_TEST || chain == ChainType.UMEE_TEST) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
@@ -3221,7 +3150,7 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_IOV)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
@@ -3229,12 +3158,12 @@ public class WUtils {
         } else if (chain == ChainType.SIF_MAIN) {
             return NSDecimalNumber.init(string: "100000000000000000")
             
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MEDI)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CERTIK)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
@@ -3289,10 +3218,10 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             return NSDecimalNumber.zero
             
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_AXELAR)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
@@ -3303,25 +3232,13 @@ public class WUtils {
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
         }
-        
-        else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
-            return NSDecimalNumber.init(string: FEE_BNB_TRANSFER).rounding(accordingToBehavior: handler8)
-            
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
-            let gasRate = NSDecimalNumber.init(string: OK_GAS_RATE_AVERAGE)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler18)
-            
-        }
-        
-        
         return NSDecimalNumber.zero
     }
     
     static func getGasRate(_ chain:ChainType, _ position: Int) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
             chain == ChainType.REGEN_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST ||
+            chain == ChainType.COSMOS_TEST || chain == ChainType.ALTHEA_TEST ||
             chain == ChainType.UMEE_TEST) {
             if (position == 0) {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY)
@@ -3385,7 +3302,7 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_BAND)
             }
             
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             if (position == 0) {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_IOV)
             } else if (position == 1) {
@@ -3394,7 +3311,7 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_IOV)
             }
             
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             if (position == 0) {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_MEDI)
             } else if (position == 1) {
@@ -3403,7 +3320,7 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MEDI)
             }
             
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             if (position == 0) {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CERTIK)
             } else if (position == 1) {
@@ -3529,7 +3446,7 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CHIHUAHUA)
             }
             
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             if (position == 0) {
                 return NSDecimalNumber.zero
             } else if (position == 1) {
@@ -3538,7 +3455,7 @@ public class WUtils {
                 return NSDecimalNumber.init(string: KAVA_GAS_RATE_AVERAGE)
             }
             
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             if (position == 0) {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_AXELAR)
             } else if (position == 1) {
@@ -3555,15 +3472,6 @@ public class WUtils {
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_JUNO)
             }
-            
-        }
-        
-        
-        else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
-            return NSDecimalNumber.zero
-            
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
-            return NSDecimalNumber.init(string: OK_GAS_RATE_AVERAGE)
             
         }
         return NSDecimalNumber.zero
@@ -3671,12 +3579,6 @@ public class WUtils {
         } else if (chain == ChainType.BAND_MAIN) {
             label.text = NSLocalizedString("chain_title_band", comment: "")
             img?.image = UIImage(named: "chainBandprotocal")
-        } else if (chain == ChainType.BINANCE_TEST) {
-            label.text = NSLocalizedString("chain_title_test_bnb", comment: "")
-            img?.image = UIImage(named: "binancetestnet")
-        } else if (chain == ChainType.KAVA_TEST) {
-            label.text = NSLocalizedString("chain_title_kava_test", comment: "")
-            img?.image = UIImage(named: "kavaTestImg")
         }
     }
     
@@ -3693,10 +3595,6 @@ public class WUtils {
             return NSLocalizedString("chain_title_iov", comment: "")
         } else if (chain == ChainType.BAND_MAIN) {
             return NSLocalizedString("chain_title_band", comment: "")
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return NSLocalizedString("chain_title_test_bnb", comment: "")
-        } else if (chain == ChainType.KAVA_TEST) {
-            return NSLocalizedString("chain_title_kava_test", comment: "")
         }
         return ""
     }
@@ -3708,12 +3606,6 @@ public class WUtils {
         } else if (chain == ChainType.KAVA_MAIN) {
             label.text = "KAVA"
            img?.image = UIImage(named: "kavaImg")
-        } else if (chain == ChainType.BINANCE_TEST) {
-            label.text = "BINANCE"
-            img?.image = UIImage(named: "binancetestnet")
-        } else if (chain == ChainType.KAVA_TEST) {
-            label.text = "KAVA"
-            img?.image = UIImage(named: "kavaTestImg")
         }
     }
     
@@ -3866,7 +3758,7 @@ public class WUtils {
             return AKASH_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.PERSIS_MAIN) {
             return PERSIS_VAL_URL + opAddress + ".png";
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             return IOV_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.SENTINEL_MAIN) {
             return SENTINEL_VAL_URL + opAddress + ".png";
@@ -3876,21 +3768,21 @@ public class WUtils {
             return CRYPTO_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             return OSMOSIS_VAL_URL + opAddress + ".png";
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             return MEDI_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.EMONEY_MAIN) {
             return EMONEY_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.JUNO_MAIN) {
             return JUNO_VAL_URL + opAddress + ".png";
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.BAND_MAIN) {
             return BAND_VAL_URL + opAddress + ".png";
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             return CERTIK_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.SECRET_MAIN) {
             return SECRET_VAL_URL + opAddress + ".png";
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return OKEX_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.FETCH_MAIN) {
             return FETCH_VAL_URL + opAddress + ".png";
@@ -3898,11 +3790,11 @@ public class WUtils {
             return KI_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
             return ALTHEA_VAL_URL + opAddress + ".png";
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             return RIZON_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.UMEE_TEST) {
             return UMEE_VAL_URL + opAddress + ".png";
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             return AXELAR_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.REGEN_MAIN) {
             return REGEN_VAL_URL + opAddress + ".png";
@@ -3992,7 +3884,7 @@ public class WUtils {
         } else if (chain == ChainType.OKEX_MAIN) {
             return EXPLORER_OKEX_MAIN + "tx/" + hash
             
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             return EXPLORER_CERTIK + "txs/" + hash
             
         } else if (chain == ChainType.SENTINEL_MAIN) {
@@ -4036,20 +3928,11 @@ public class WUtils {
         } else if (chain == ChainType.IRIS_TEST) {
             return EXPLORER_IRIS_TEST + "txs/" + hash
             
-        } else if (chain == ChainType.MEDI_TEST) {
-            return EXPLORER_MEDI_TEST + "txs/" + hash
-            
-        } else if (chain == ChainType.RIZON_TEST) {
-            return EXPLORER_RIZON_TEST + "txs/" + hash
-            
         } else if (chain == ChainType.ALTHEA_TEST) {
             return EXPLORER_ALTHEA_TEST + "txs/" + hash
             
         } else if (chain == ChainType.UMEE_TEST) {
             return EXPLORER_UMEE_TEST + "txs/" + hash
-            
-        } else if (chain == ChainType.AXELAR_TEST) {
-            return EXPLORER_AXELAR_TEST + "txs/" + hash
             
         }
         
@@ -4164,32 +4047,11 @@ public class WUtils {
         } else if (chain == ChainType.IRIS_TEST) {
             return EXPLORER_IRIS_TEST + "address/" + address
             
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return EXPLORER_CERTIK + "account/" + address
-            
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return EXPLORER_BINANCE_TEST + "accounts/" + address
-            
-        } else if (chain == ChainType.OKEX_TEST) {
-            return EXPLORER_OKEX_TEST + "address/" + address
-            
-        } else if (chain == ChainType.KAVA_TEST) {
-            return EXPLORER_KAVA_TEST + "account/" + address
-            
-        } else if (chain == ChainType.MEDI_TEST) {
-            return EXPLORER_MEDI_TEST + "account/" + address
-            
-        } else if (chain == ChainType.RIZON_TEST) {
-            return EXPLORER_RIZON_TEST + "account/" + address
-            
         } else if (chain == ChainType.ALTHEA_TEST) {
             return EXPLORER_ALTHEA_TEST + "account/" + address
             
         } else if (chain == ChainType.UMEE_TEST) {
             return EXPLORER_UMEE_TEST + "account/" + address
-            
-        } else if (chain == ChainType.AXELAR_TEST) {
-            return EXPLORER_AXELAR_TEST + "account/" + address
             
         }
         return ""
@@ -4297,23 +4159,11 @@ public class WUtils {
         } else if (chain == ChainType.IRIS_TEST) {
             return EXPLORER_IRIS_TEST + "proposals/" + proposalId
             
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return EXPLORER_CERTIK + "proposals/" + proposalId
-            
-        } else if (chain == ChainType.MEDI_TEST) {
-            return EXPLORER_MEDI_TEST + "proposals/" + proposalId
-            
-        } else if (chain == ChainType.RIZON_TEST) {
-            return EXPLORER_RIZON_TEST + "proposals/" + proposalId
-            
         } else if (chain == ChainType.ALTHEA_TEST) {
             return EXPLORER_ALTHEA_TEST + "proposals/" + proposalId
             
         } else if (chain == ChainType.UMEE_TEST) {
             return EXPLORER_UMEE_TEST + "proposals/" + proposalId
-            
-        } else if (chain == ChainType.AXELAR_TEST) {
-            return EXPLORER_AXELAR_TEST + "proposals/" + proposalId
             
         }
         return ""
@@ -4326,10 +4176,10 @@ public class WUtils {
         } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
             return UIImage(named: "irisTokenImg")
             
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             return UIImage(named: "bnbTokenImg")
             
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             return UIImage(named: "okexTokenImg")
             
         } else if (chain == ChainType.AKASH_MAIN) {
@@ -4344,7 +4194,7 @@ public class WUtils {
         } else if (chain == ChainType.SECRET_MAIN) {
             return UIImage(named: "secretTokenImg")
             
-        } else if (chain == ChainType.CERTIK_MAIN || chain == ChainType.CERTIK_TEST) {
+        } else if (chain == ChainType.CERTIK_MAIN) {
             return UIImage(named: "certikTokenImg")
             
         } else if (chain == ChainType.IOV_MAIN) {
@@ -4371,13 +4221,13 @@ public class WUtils {
         } else if (chain == ChainType.OSMOSIS_MAIN) {
             return UIImage(named: "tokenOsmosis")
             
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             return UIImage(named: "tokenmedibloc")
             
         } else if (chain == ChainType.EMONEY_MAIN) {
             return UIImage(named: "tokenEmoney")
             
-        } else if (chain == ChainType.RIZON_MAIN || chain == ChainType.RIZON_TEST) {
+        } else if (chain == ChainType.RIZON_MAIN) {
             return UIImage(named: "tokenRizon")
             
         } else if (chain == ChainType.JUNO_MAIN) {
@@ -4416,7 +4266,7 @@ public class WUtils {
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
             return UIImage(named: "tokenHuahua")
             
-        } else if (chain == ChainType.AXELAR_MAIN || chain == ChainType.AXELAR_TEST) {
+        } else if (chain == ChainType.AXELAR_MAIN) {
             return UIImage(named: "tokenAxelar")
             
         }
@@ -4467,12 +4317,8 @@ public class WUtils {
         
         else if (chain == ChainType.COSMOS_TEST) { return UIImage(named: "cosmosTestChainImg") }
         else if (chain == ChainType.IRIS_TEST) { return UIImage(named: "irisTestChainImg") }
-        else if (chain == ChainType.BINANCE_TEST) { return UIImage(named: "binancetestnet") }
-        else if (chain == ChainType.KAVA_TEST) { return UIImage(named: "kavaTestImg") }
-        else if (chain == ChainType.RIZON_TEST) { return UIImage(named: "testnetRizon") }
         else if (chain == ChainType.ALTHEA_TEST) { return UIImage(named: "testnetAlthea") }
         else if (chain == ChainType.UMEE_TEST) { return UIImage(named: "testnetUmee") }
-        else if (chain == ChainType.AXELAR_TEST) { return UIImage(named: "testnetAxelar") }
         return UIImage(named: "defaultChainImg")
     }
     
@@ -4552,12 +4398,8 @@ public class WUtils {
         
         else if (chain == ChainType.COSMOS_TEST) { return "(StarGate Testnet)" }
         else if (chain == ChainType.IRIS_TEST) { return "(Bifrost Testnet)" }
-        else if (chain == ChainType.BINANCE_TEST) { return "(Binance Testnet)" }
-        else if (chain == ChainType.KAVA_TEST) { return "(Kava Testnet)" }
-        else if (chain == ChainType.RIZON_TEST) { return "(Rizon Testnet)" }
         else if (chain == ChainType.ALTHEA_TEST) { return "(Althea Testnet)" }
         else if (chain == ChainType.UMEE_TEST) { return "(Umee Testnet)" }
-        else if (chain == ChainType.AXELAR_TEST) { return "(Axelar Testnet)" }
         
         return "Unknown"
     }
@@ -4599,12 +4441,8 @@ public class WUtils {
         
         else if (chain == ChainType.COSMOS_TEST) { return "STARGATE" }
         else if (chain == ChainType.IRIS_TEST) { return "BIFROST" }
-        else if (chain == ChainType.BINANCE_TEST) { return "BINANCE TEST" }
-        else if (chain == ChainType.KAVA_TEST) { return "KAVA TEST" }
-        else if (chain == ChainType.RIZON_TEST) { return "RIZON TEST" }
         else if (chain == ChainType.ALTHEA_TEST) { return "ALTHEA TEST" }
         else if (chain == ChainType.UMEE_TEST) { return "UMEE TEST" }
-        else if (chain == ChainType.AXELAR_TEST) { return "AXELAR TEST" }
         
         return "Unknown"
     }
@@ -4760,19 +4598,19 @@ public class WUtils {
     
     static func getChainsFromAddress(_ address: String?) -> Array<ChainType>? {
         if (address?.starts(with: "0x") == true) {
-            return [ChainType.OKEX_MAIN, ChainType.OKEX_TEST]
+            return [ChainType.OKEX_MAIN]
         }
         
         if (!WKey.isValidateBech32(address ?? "")) { return nil }
         if (address?.starts(with: "cosmos1") == true) { return [ChainType.COSMOS_MAIN, ChainType.COSMOS_TEST] }
         else if (address?.starts(with: "iaa1") == true) { return [ChainType.IRIS_MAIN, ChainType.IRIS_TEST] }
         else if (address?.starts(with: "bnb1") == true) { return [ChainType.BINANCE_MAIN] }
-        else if (address?.starts(with: "kava1") == true) { return [ChainType.KAVA_MAIN, ChainType.KAVA_TEST] }
-        else if (address?.starts(with: "star1") == true) { return [ChainType.IOV_MAIN, ChainType.IOV_TEST] }
+        else if (address?.starts(with: "kava1") == true) { return [ChainType.KAVA_MAIN] }
+        else if (address?.starts(with: "star1") == true) { return [ChainType.IOV_MAIN] }
         else if (address?.starts(with: "band1") == true) { return [ChainType.BAND_MAIN] }
         else if (address?.starts(with: "secret1") == true) { return [ChainType.SECRET_MAIN] }
-        else if (address?.starts(with: "ex1") == true) { return [ChainType.OKEX_MAIN, ChainType.OKEX_TEST] }
-        else if (address?.starts(with: "certik1") == true) { return [ChainType.CERTIK_MAIN, ChainType.CERTIK_TEST] }
+        else if (address?.starts(with: "ex1") == true) { return [ChainType.OKEX_MAIN] }
+        else if (address?.starts(with: "certik1") == true) { return [ChainType.CERTIK_MAIN] }
         else if (address?.starts(with: "akash1") == true) { return [ChainType.AKASH_MAIN] }
         else if (address?.starts(with: "persistence1") == true) { return [ChainType.PERSIS_MAIN] }
         else if (address?.starts(with: "sent1") == true) { return [ChainType.SENTINEL_MAIN] }
@@ -4796,9 +4634,8 @@ public class WUtils {
         else if (address?.starts(with: "gravity1") == true) { return [ChainType.GRAVITY_BRIDGE_MAIN] }
         else if (address?.starts(with: "lum1") == true) { return [ChainType.LUM_MAIN] }
         else if (address?.starts(with: "chihuahua1") == true) { return [ChainType.CHIHUAHUA_MAIN] }
-        else if (address?.starts(with: "axelar1") == true) { return [ChainType.AXELAR_MAIN, ChainType.AXELAR_TEST] }
+        else if (address?.starts(with: "axelar1") == true) { return [ChainType.AXELAR_MAIN] }
         
-        else if (address?.starts(with: "tbnb1") == true) { return [ChainType.BINANCE_TEST] }
         else if (address?.starts(with: "umee1") == true) { return [ChainType.UMEE_TEST] }
         
         return nil
@@ -5649,8 +5486,7 @@ public class WUtils {
     }
     
     public static func isGRPC(_ chain: ChainType?) -> Bool {
-        if (chain == ChainType.BINANCE_MAIN || chain == ChainType.OKEX_MAIN ||
-            chain == ChainType.BINANCE_TEST || chain == ChainType.OKEX_TEST) {
+        if (chain == ChainType.BINANCE_MAIN || chain == ChainType.OKEX_MAIN) {
             return false
         }
         return true

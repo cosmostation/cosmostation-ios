@@ -64,7 +64,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
         walletName.text = WUtils.getWalletName(account)
         
         var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         walletAddress.text = address
@@ -316,7 +316,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
-        } else if (chainType! == ChainType.AXELAR_MAIN || chainType! == ChainType.AXELAR_TEST) {
+        } else if (chainType! == ChainType.AXELAR_MAIN) {
             chainImg.image = UIImage(named: "chainAxelar")
             keyPath.text = BASE_PATH.appending(account!.account_path)
             cardPush.isHidden = true
@@ -326,63 +326,9 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
         }
         
         
-        else if (chainType == ChainType.BINANCE_TEST) {
-            chainImg.image = UIImage(named: "binancetestnet")
-            keyPath.text = BNB_BASE_PATH.appending(account!.account_path)
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType == ChainType.KAVA_TEST) {
-            chainImg.image = UIImage(named: "kavaTestImg")
-            if (account!.account_new_bip44) {
-                keyPath.text = KAVA_BASE_PATH.appending(account!.account_path)
-            } else {
-                keyPath.text = BASE_PATH.appending(account!.account_path)
-            }
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType == ChainType.OKEX_TEST) {
-            chainImg.image = UIImage(named: "okexTestnetImg")
-            if (account!.account_new_bip44) { keyPath.text = "(Ethermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
-            else { keyPath.text = "(Tendermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType == ChainType.IOV_TEST) {
-            chainImg.image = UIImage(named: "iovTestnetImg")
-            keyPath.text = IOV_BASE_PATH.appending(account!.account_path)
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType == ChainType.CERTIK_TEST) {
-            chainImg.image = UIImage(named: "certikTestnetImg")
-            keyPath.text = BASE_PATH.appending(account!.account_path)
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType == ChainType.COSMOS_TEST) {
+        else if (chainType == ChainType.COSMOS_TEST) {
             chainImg.image = UIImage(named: "cosmosTestChainImg")
             keyPath.text = BASE_PATH.appending(account!.account_path)
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType == ChainType.RIZON_TEST) {
-            chainImg.image = UIImage(named: "testnetRizon")
-            keyPath.text = BASE_PATH.appending(account!.account_path)
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType == ChainType.MEDI_TEST) {
-            chainImg.image = UIImage(named: "testnetMedibloc")
-            keyPath.text = MEDI_BASE_PATH.appending(account!.account_path)
             cardPush.isHidden = true
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
@@ -548,7 +494,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
     
     @IBAction func onClickQrCode(_ sender: Any) {
         var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         self.shareAddress(address, WUtils.getWalletName(account))

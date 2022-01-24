@@ -62,7 +62,7 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_sentinel", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_sentinel", comment: "")
             
-        } else if (chainType == ChainType.CERTIK_MAIN || chainType == ChainType.CERTIK_TEST) {
+        } else if (chainType == ChainType.CERTIK_MAIN) {
             guideImg.image = UIImage(named: "certikImg")
             guideTitle.text = NSLocalizedString("send_guide_title_certik", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_certik", comment: "")
@@ -72,7 +72,7 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_secret", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_secret", comment: "")
             
-        } else if (chainType == ChainType.IOV_MAIN || chainType == ChainType.IOV_TEST) {
+        } else if (chainType == ChainType.IOV_MAIN) {
             guideImg.image = UIImage(named: "iovImg")
             guideTitle.text = NSLocalizedString("send_guide_title_iov", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_iov", comment: "")
@@ -82,19 +82,19 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_band", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_band", comment: "")
             
-        } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        } else if (chainType == ChainType.KAVA_MAIN) {
             guideImg.image = UIImage(named: "kavamainImg")
             guideTitle.text = NSLocalizedString("send_guide_title_kava", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_kava", comment: "")
             
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             guideImg.image = UIImage(named: "binanceImg")
             guideTitle.text = NSLocalizedString("send_guide_title_bnb", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_bnb", comment: "")
             btn1Label.setTitle(NSLocalizedString("send_guide_btn_market", comment: ""), for: .normal)
             btn2Label.setTitle(NSLocalizedString("send_guide_btn_blog", comment: ""), for: .normal)
             
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             guideImg.image = UIImage(named: "okexImg")
             guideTitle.text = NSLocalizedString("send_guide_title_ok", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_ok", comment: "")
@@ -127,12 +127,12 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_osmosis", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_osmosis", comment: "")
             
-        } else if (chainType == ChainType.RIZON_MAIN || chainType == ChainType.RIZON_TEST) {
+        } else if (chainType == ChainType.RIZON_MAIN) {
            guideImg.image = UIImage(named: "infoiconRizon")
            guideTitle.text = NSLocalizedString("send_guide_title_rizon", comment: "")
            guideMsg.text = NSLocalizedString("send_guide_msg_rizon", comment: "")
             
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
+        } else if (chainType == ChainType.MEDI_MAIN) {
             guideImg.image = UIImage(named: "mediblocImg")
             guideTitle.text = NSLocalizedString("send_guide_title_medi", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_medi", comment: "")
@@ -147,7 +147,7 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_umee", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_umee", comment: "")
             
-        } else if (chainType == ChainType.AXELAR_MAIN || chainType == ChainType.AXELAR_TEST) {
+        } else if (chainType == ChainType.AXELAR_MAIN) {
             guideImg.image = UIImage(named: "infoiconAxelar")
             guideTitle.text = NSLocalizedString("send_guide_title_axelar", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_axelar", comment: "")

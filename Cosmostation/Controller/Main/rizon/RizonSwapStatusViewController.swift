@@ -114,10 +114,6 @@ class RizonSwapStatusViewController: BaseViewController, UITableViewDelegate, UI
                 guard let url = URL(string: link) else { return }
                 self.onShowSafariWeb(url)
                 
-            } else if (chainType == ChainType.RIZON_TEST) {
-                let link = EXPLORER_HDAC_TEST + "tx/" + hash
-                guard let url = URL(string: link) else { return }
-                self.onShowSafariWeb(url)
             }
         }
     }
@@ -129,10 +125,6 @@ class RizonSwapStatusViewController: BaseViewController, UITableViewDelegate, UI
                 guard let url = URL(string: link) else { return }
                 self.onShowSafariWeb(url)
                 
-            } else if (chainType == ChainType.RIZON_TEST) {
-                let link = EXPLORER_RIZON_TEST + "txs/" + hash
-                guard let url = URL(string: link) else { return }
-                self.onShowSafariWeb(url)
             }
         }
     }

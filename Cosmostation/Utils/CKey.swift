@@ -26,18 +26,17 @@ class CKey {
             chainType == ChainType.EMONEY_MAIN || chainType == ChainType.RIZON_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.REGEN_MAIN ||
             chainType == ChainType.BITCANA_MAIN || chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.GRAVITY_BRIDGE_MAIN || chainType == ChainType.STARGAZE_MAIN ||
             chainType == ChainType.COMDEX_MAIN || chainType == ChainType.CHIHUAHUA_MAIN || chainType == ChainType.AXELAR_MAIN ||
-            chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.CERTIK_TEST || chainType == ChainType.UMEE_TEST ||
-            chainType == ChainType.AXELAR_TEST || chainType == ChainType.RIZON_TEST || chainType == ChainType.ALTHEA_TEST) {
+            chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.UMEE_TEST || chainType == ChainType.ALTHEA_TEST) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
-        } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        } else if (chainType == ChainType.KAVA_MAIN) {
             if (account.account_new_bip44) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 459, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             } else {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             }
             
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 714, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
         } else if (chainType == ChainType.BAND_MAIN) {
@@ -50,10 +49,10 @@ class CKey {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 529, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             }
             
-        } else if (chainType == ChainType.IOV_MAIN || chainType == ChainType.IOV_TEST) {
+        } else if (chainType == ChainType.IOV_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 234, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
         } else if (chainType == ChainType.PERSIS_MAIN) {
@@ -62,7 +61,7 @@ class CKey {
         } else if (chainType == ChainType.CRYPTO_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 394, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
+        } else if (chainType == ChainType.MEDI_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 371, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
         } else if (chainType == ChainType.FETCH_MAIN) {
@@ -110,14 +109,13 @@ class CKey {
             chain == ChainType.EMONEY_MAIN || chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.ALTHEA_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.STARGAZE_MAIN ||
             chain == ChainType.COMDEX_MAIN || chain == ChainType.CHIHUAHUA_MAIN || chain == ChainType.AXELAR_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.CERTIK_TEST || chain == ChainType.UMEE_TEST ||
-            chain == ChainType.AXELAR_TEST || chain == ChainType.RIZON_TEST || chain == ChainType.ALTHEA_TEST) {
+            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.UMEE_TEST || chain == ChainType.ALTHEA_TEST) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
             
-        } else if (chain == ChainType.BINANCE_MAIN || chain == ChainType.BINANCE_TEST) {
+        } else if (chain == ChainType.BINANCE_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 714, true), 0, true), 0, false), UInt32(path), false)
             
-        } else if (chain == ChainType.KAVA_MAIN || chain == ChainType.KAVA_TEST) {
+        } else if (chain == ChainType.KAVA_MAIN) {
             if (newbip) {
                 childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 459, true), 0, true), 0, false), UInt32(path), false)
             } else {
@@ -134,11 +132,11 @@ class CKey {
                 childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 529, true), 0, true), 0, false), UInt32(path), false)
             }
             
-        } else if (chain == ChainType.IOV_MAIN || chain == ChainType.IOV_TEST) {
+        } else if (chain == ChainType.IOV_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(234)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 234, true), 0, true), 0, false), UInt32(path), false)
             
-        } else if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        } else if (chain == ChainType.OKEX_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(path), false)
             
         } else if (chain == ChainType.PERSIS_MAIN) {
@@ -147,7 +145,7 @@ class CKey {
         } else if (chain == ChainType.CRYPTO_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 394, true), 0, true), 0, false), UInt32(path), false)
             
-        } else if (chain == ChainType.MEDI_MAIN || chain == ChainType.MEDI_TEST) {
+        } else if (chain == ChainType.MEDI_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 371, true), 0, true), 0, false), UInt32(path), false)
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
@@ -175,7 +173,7 @@ class CKey {
     
     static func getDpAddressPath(_ mnemonic: [String], _ path:Int, _ chain:ChainType, _ newbip:Bool) -> String {
         let masterKey = getMasterKeyFromWords(mnemonic)
-        if ((chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) && newbip) {
+        if ((chain == ChainType.OKEX_MAIN) && newbip) {
             let pKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(path), false)
             return WKey.generateAddressFromPriv("ex", pKey.raw)
 

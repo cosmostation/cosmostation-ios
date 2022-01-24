@@ -43,9 +43,6 @@ class StepEventHorizon1ViewController: BaseViewController, PasswordViewDelegate 
         if (chainType == ChainType.RIZON_MAIN) {
             hdacTxtLabel.text = "Hdac Mainnet"
             rizonTxLabel.text = "Rizon Mainnet"
-        } else if (chainType == ChainType.RIZON_TEST) {
-            hdacTxtLabel.text = "Hdac Testnet"
-            rizonTxLabel.text = "Rizon Testnet"
         }
         
         hdacAddressLabel.text = pageHolderVC.mHdacAddress

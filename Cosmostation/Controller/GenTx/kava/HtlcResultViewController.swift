@@ -131,7 +131,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         let msg = mSendTxInfo?.getMsgs()[0]
         cell?.sendImg.image = cell?.sendImg.image?.withRenderingMode(.alwaysTemplate)
         cell?.sendImg.tintColor = WUtils.getChainColor(chainType!)
-        if (self.chainType == ChainType.BINANCE_MAIN || self.chainType == ChainType.BINANCE_TEST) {
+        if (self.chainType == ChainType.BINANCE_MAIN) {
             cell?.blockHeightLabel.text = mSendTxInfo?.height
             cell?.txHashLabel.text = mSendTxInfo?.hash
             cell?.memoLabel.text = mSendTxInfo?.tx?.value.memo
@@ -149,7 +149,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             cell?.recipientLabel.text = msg?.value.recipient_other_chain
             cell?.randomHashLabel.text = msg?.value.random_number_hash
             
-        } else if (self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.KAVA_TEST) {
+        } else if (self.chainType == ChainType.KAVA_MAIN) {
             cell?.blockHeightLabel.text = mSendTxInfo?.height
             cell?.txHashLabel.text = mSendTxInfo?.txhash
             cell?.memoLabel.text = mSendTxInfo?.tx?.value.memo
@@ -175,7 +175,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         let msg = mClaimTxInfo?.getMsgs()[0]
         cell?.claimImg.image = cell?.claimImg.image?.withRenderingMode(.alwaysTemplate)
         cell?.claimImg.tintColor = WUtils.getChainColor(mHtlcToChain!)
-        if (self.mHtlcToChain == ChainType.BINANCE_MAIN || self.mHtlcToChain == ChainType.BINANCE_TEST) {
+        if (self.mHtlcToChain == ChainType.BINANCE_MAIN) {
             cell?.blockHeightLabel.text = mClaimTxInfo?.height
             cell?.txHashLabel.text = mClaimTxInfo?.hash
             cell?.memoLabel.text = mClaimTxInfo?.tx?.value.memo
@@ -191,7 +191,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             cell?.swapIdLabel.text = msg?.value.swap_id
             
             
-        } else if (self.mHtlcToChain == ChainType.KAVA_MAIN || self.mHtlcToChain == ChainType.KAVA_TEST) {
+        } else if (self.mHtlcToChain == ChainType.KAVA_MAIN) {
             cell?.blockHeightLabel.text = mClaimTxInfo?.height
             cell?.txHashLabel.text = mClaimTxInfo?.txhash
             cell?.memoLabel.text = mClaimTxInfo?.tx?.value.memo

@@ -32,7 +32,7 @@ class StepMemoViewController: BaseViewController, UITextViewDelegate, QrScannerD
         (NSClassFromString("UICalloutBarButton")! as! UIButton.Type).appearance().setTitleColor(UIColor.black, for: .normal)
         
         chainType = pageHolderVC.chainType!
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             memoCntLabel.text = "0/100 byte"
         } else {
             memoCntLabel.text = "0/255 byte"
@@ -100,7 +100,7 @@ class StepMemoViewController: BaseViewController, UITextViewDelegate, QrScannerD
     
     func textViewDidChange(_ textView: UITextView) {
         let byteArray = [UInt8](textView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).utf8)
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             memoCntLabel.text = String(byteArray.count) + "/100 byte"
             if (byteArray.count > 100) {
                 self.memoInputTextView.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
@@ -121,7 +121,7 @@ class StepMemoViewController: BaseViewController, UITextViewDelegate, QrScannerD
     
     func isValiadMemoSize() -> Bool {
         let byteArray = [UInt8](memoInputTextView.text.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).utf8)
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             if (byteArray.count > 100) {
                 return false
             }
@@ -159,7 +159,7 @@ class StepMemoViewController: BaseViewController, UITextViewDelegate, QrScannerD
     func SBCardPopupResponse(type:Int, result: Int) {
         if (result == -1) {
             self.memoInputTextView.text = ""
-            if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+            if (chainType == ChainType.BINANCE_MAIN) {
                 memoCntLabel.text = "0/100 byte"
             } else {
                 memoCntLabel.text = "0/255 byte"

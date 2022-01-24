@@ -112,7 +112,7 @@ class StepOkDepositAmountViewController: BaseViewController, UITextFieldDelegate
         if (isValiadAmount()) {
             let userInput = WUtils.localeStringToDecimal((toDepositAmountInput.text?.trimmingCharacters(in: .whitespaces))!)
             var toStakingCoin: Coin?
-            if (pageHolderVC.chainType! == ChainType.OKEX_MAIN || pageHolderVC.chainType! == ChainType.OKEX_TEST) {
+            if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
                 toStakingCoin = Coin.init(OKEX_MAIN_DENOM, WUtils.getFormattedNumber(userInput, mDpDecimal))
             }
             self.pageHolderVC.mOkToStaking = toStakingCoin!

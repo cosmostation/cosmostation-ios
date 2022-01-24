@@ -141,7 +141,7 @@ public class Account : NSObject, Codable, NSItemProviderReading, NSItemProviderW
     }
     
     func dpAddress(_ chain: ChainType?) -> String {
-        if (chain == ChainType.OKEX_MAIN || chain == ChainType.OKEX_TEST) {
+        if (chain == ChainType.OKEX_MAIN) {
             return WKey.convertAddressOkexToEth(account_address)
         } else {
             return account_address

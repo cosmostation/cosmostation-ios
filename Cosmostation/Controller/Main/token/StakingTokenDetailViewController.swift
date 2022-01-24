@@ -80,10 +80,10 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
         self.topDpAddress.text = account?.dpAddress(chainType)
         self.topDpAddress.adjustsFontSizeToFitWidth = true
         
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             totalAmount = WUtils.getAllBnbToken(stakingDenom)
             btnBep3Send.isHidden = false
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             totalAmount = WUtils.getAllExToken(stakingDenom)
         } else {
             totalAmount = WUtils.getAllMainAssetOld(stakingDenom)
@@ -134,7 +134,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     
     @objc func onClickActionShare() {
         var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         self.shareAddress(address, WUtils.getWalletName(account))
@@ -167,7 +167,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     }
     
     @IBAction func onClickBep3Send(_ sender: UIButton) {
-        if (!SUPPORT_BEP3_SWAP || chainType == ChainType.BINANCE_TEST) {
+        if (!SUPPORT_BEP3_SWAP) {
             self.onShowToast(NSLocalizedString("error_bep3_swap_temporary_disable", comment: ""))
             return
         }

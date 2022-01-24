@@ -316,11 +316,11 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
             self.onShowToast(NSLocalizedString("error_recover_mnemonic", comment: ""))
             
         } else {
-            if (self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.KAVA_TEST) {
+            if (self.chainType == ChainType.KAVA_MAIN) {
                 self.onSelectBip44()
             } else if (self.chainType == ChainType.SECRET_MAIN) {
                 self.onSelectBip44Secret()
-            } else if (self.chainType == ChainType.OKEX_MAIN || self.chainType == ChainType.OKEX_TEST)  {
+            } else if (self.chainType == ChainType.OKEX_MAIN)  {
                 self.onSelectKeyTypeForOKex()
             } else if (self.chainType == ChainType.FETCH_MAIN) {
                 self.onSelectKeyTypeForFetch()

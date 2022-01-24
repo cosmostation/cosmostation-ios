@@ -925,7 +925,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     //bind Etc tokens (binance, okex)
     func onBindEtcToken(_ cell: TokenCell?, _ balance: Balance) {
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             if let bnbToken = WUtils.getBnbToken(balance.balance_denom) {
                 cell?.tokenImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + bnbToken.original_symbol + ".png")!)
                 cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
@@ -939,7 +939,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, convertAmount, 0, cell!.tokenValue.font)
             }
             
-        }  else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        }  else if (chainType == ChainType.OKEX_MAIN) {
             if let okToken = WUtils.getOkToken(balance.balance_denom) {
                 cell?.tokenImg.af_setImage(withURL: URL(string: OKEX_COIN_IMG_URL + okToken.original_symbol! + ".png")!)
                 cell?.tokenSymbol.text = okToken.original_symbol?.uppercased()
@@ -1021,10 +1021,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             if (WUtils.getMainDenom(chainType) == balance.balance_denom) {
                 mNative.append(balance)
                 
-            } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+            } else if (chainType == ChainType.BINANCE_MAIN) {
                 mEtc.append(balance)
                 
-            } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+            } else if (chainType == ChainType.OKEX_MAIN) {
                 mEtc.append(balance)
                 
             } else {
@@ -1037,7 +1037,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mNative_gRPC.sort {
             if ($0.denom == WUtils.getMainDenom(chainType)) { return true }
             if ($1.denom == WUtils.getMainDenom(chainType)) { return false }
-            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+            if (chainType == ChainType.KAVA_MAIN) {
                 if ($0.denom == KAVA_HARD_DENOM) { return true }
                 if ($1.denom == KAVA_HARD_DENOM) { return false }
                 if ($0.denom == KAVA_SWAP_DENOM) { return true }
@@ -1126,7 +1126,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     @objc func onClickActionShare() {
         var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         self.shareAddress(address, WUtils.getWalletName(account))

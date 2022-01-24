@@ -198,7 +198,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         
         
         
-        if (mChainType == ChainType.BINANCE_MAIN || mChainType == ChainType.BINANCE_TEST) {
+        if (mChainType == ChainType.BINANCE_MAIN) {
             self.mFetchCnt = 6
             onFetchNodeInfo()
             onFetchAccountInfo(mAccount)
@@ -207,7 +207,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             onFetchBnbTokenTickers()
             onFetchBnbMiniTokenTickers()
             
-        } else if (mChainType == ChainType.OKEX_MAIN || mChainType == ChainType.OKEX_TEST) {
+        } else if (mChainType == ChainType.OKEX_MAIN) {
             self.mFetchCnt = 8
             onFetchNodeInfo()
             onFetchAllValidatorsInfo();
@@ -220,17 +220,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             onFetchOkStakingInfo(mAccount)
             onFetchOkUnbondingInfo(mAccount)
             
-            
-        } else if (mChainType == ChainType.MEDI_TEST) {
-            self.mFetchCnt = 8
-            onFetchNodeInfo()
-            onFetchTopValidatorsInfo()
-            onFetchUnbondedValidatorsInfo()
-            onFetchUnbondingValidatorsInfo()
-            onFetchAccountInfo(mAccount)
-            onFetchBondingInfo(mAccount)
-            onFetchUnbondingInfo(mAccount)
-            onFetchAllReward(mAccount)
             
         }
                 
@@ -270,7 +259,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (self.mChainType == ChainType.IOV_MAIN || self.mChainType == ChainType.IOV_TEST) {
+        } else if (self.mChainType == ChainType.IOV_MAIN) {
             self.mFetchCnt = 11
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -351,9 +340,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchKavaIncentiveParam()
             self.onFetchKavaIncentiveReward(mAccount.account_address)
             
-        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.RIZON_TEST || self.mChainType == ChainType.ALTHEA_TEST ||
-                    self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.CERTIK_TEST || self.mChainType == ChainType.UMEE_TEST ||
-                    self.mChainType == ChainType.AXELAR_TEST) {
+        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.ALTHEA_TEST ||
+                   self.mChainType == ChainType.UMEE_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -412,7 +400,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.checkEventIcon()
             return
             
-        } else if (mChainType == ChainType.BINANCE_MAIN || mChainType == ChainType.BINANCE_TEST) {
+        } else if (mChainType == ChainType.BINANCE_MAIN) {
             mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
             mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
             BaseData.instance.mBalances = mBalances
@@ -422,7 +410,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.checkEventIcon()
             return
             
-        } else if (mChainType == ChainType.OKEX_MAIN || mChainType == ChainType.OKEX_TEST) {
+        } else if (mChainType == ChainType.OKEX_MAIN) {
             mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
             mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
             
@@ -442,38 +430,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             }
             BaseData.instance.mBalances = mBalances
             self.onFetchPriceInfo()
-            
-        } else {
-            mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
-            mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
-            
-            BaseData.instance.mAllValidator.append(contentsOf: BaseData.instance.mTopValidator)
-            BaseData.instance.mAllValidator.append(contentsOf: BaseData.instance.mOtherValidator)
-            
-            for validator in BaseData.instance.mAllValidator {
-                var mine = false;
-                for delegate in BaseData.instance.mMyDelegations {
-                    if (delegate.validator_address == validator.operator_address) {
-                        mine = true;
-                        break;
-                    }
-                }
-                for unbonding in BaseData.instance.mMyUnbondings {
-                    if (unbonding.validator_address == validator.operator_address) {
-                        mine = true;
-                        break;
-                    }
-                }
-                if (mine) {
-                    BaseData.instance.mMyValidator.append(validator)
-                }
-            }
-            BaseData.instance.mBalances = mBalances
-            self.onFetchPriceInfo()
-            
-            print("BaseData.instance.mMyDelegations ", BaseData.instance.mMyDelegations.count)
-            print("BaseData.instance.mMyUnbondings ", BaseData.instance.mMyUnbondings.count)
-            print("BaseData.instance.mMyReward ", BaseData.instance.mMyReward.count)
             
         }
         
@@ -605,7 +561,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if (self.mChainType == ChainType.BINANCE_MAIN || self.mChainType == ChainType.BINANCE_TEST) {
+                if (self.mChainType == ChainType.BINANCE_MAIN) {
                     guard let info = res as? [String : Any] else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.onFetchFinished()
@@ -615,7 +571,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithBnbAccountInfo(account, bnbAccountInfo))
                     BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithBnbAccountInfo(account, bnbAccountInfo))
                     
-                } else if (self.mChainType == ChainType.OKEX_MAIN || self.mChainType == ChainType.OKEX_TEST) {
+                } else if (self.mChainType == ChainType.OKEX_MAIN) {
                     guard let info = res as? NSDictionary else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.onFetchFinished()

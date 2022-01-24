@@ -64,7 +64,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
     
     func onInitView() {
         self.topCard.backgroundColor = WUtils.getChainBg(chainType)
-        if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        if (chainType == ChainType.BINANCE_MAIN) {
             guard let bnbToken = WUtils.getBnbToken(denom) else {
                 self.navigationController?.popViewController(animated: true)
                 return
@@ -79,7 +79,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
             self.naviUpdownPercent.text = ""
             self.naviUpdownImg.image = nil
 
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             guard let okToken = WUtils.getOkToken(denom) else {
                 self.navigationController?.popViewController(animated: true)
                 return
@@ -148,7 +148,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
     
     @objc func onClickActionShare() {
         var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         self.shareAddress(address, WUtils.getWalletName(account))
@@ -159,7 +159,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
     }
     
     @IBAction func onClickBep3Send(_ sender: UIButton) {
-        if (!SUPPORT_BEP3_SWAP || chainType == ChainType.BINANCE_TEST || chainType == ChainType.KAVA_TEST) {
+        if (!SUPPORT_BEP3_SWAP) {
             self.onShowToast(NSLocalizedString("error_bep3_swap_temporary_disable", comment: ""))
             return
         }

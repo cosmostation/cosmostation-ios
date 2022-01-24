@@ -517,11 +517,6 @@ extension BaseViewController {
         })
         umeeTestAction.setValue(UIImage(named: "testnetUmee")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
-        let axelarTestAction = UIAlertAction(title: NSLocalizedString("chain_title_axelar_test", comment: ""), style: .default, handler: { _ in
-            self.onChainSelected(ChainType.AXELAR_TEST)
-        })
-        axelarTestAction.setValue(UIImage(named: "testnetAxelar")?.withRenderingMode(.alwaysOriginal), forKey: "image")
-        
         showAlert.addAction(cosmosAction)
         showAlert.addAction(irisAction)
         showAlert.addAction(akashAction)
@@ -559,9 +554,6 @@ extension BaseViewController {
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {
             showAlert.addAction(altheaTestAction)
-        }
-        if (ChainType.SUPPRT_CHAIN().contains(ChainType.AXELAR_TEST)) {
-            showAlert.addAction(axelarTestAction)
         }
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.UMEE_TEST)) {
             showAlert.addAction(umeeTestAction)

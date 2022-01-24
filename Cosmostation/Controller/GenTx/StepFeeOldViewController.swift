@@ -51,7 +51,7 @@ class StepFeeOldViewController: BaseViewController {
         } else {
             gasSelectSegments.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
         }
-        if (pageHolderVC.chainType! == ChainType.OKEX_MAIN || pageHolderVC.chainType! == ChainType.OKEX_TEST) {
+        if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
             var currentVotedCnt = 0
             if let voted = BaseData.instance.mOkStaking?.validator_address?.count { currentVotedCnt = voted }
             mEstimateGasAmount = WUtils.getEstimateGasAmount(pageHolderVC.chainType!, pageHolderVC.mType!, currentVotedCnt)
@@ -63,10 +63,10 @@ class StepFeeOldViewController: BaseViewController {
     
     func onCalculateFees() {
         mSelectedGasRate = WUtils.getGasRate(pageHolderVC.chainType!, mSelectedGasPosition)
-        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN || pageHolderVC.chainType! == ChainType.BINANCE_TEST) {
+        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
             mFee = NSDecimalNumber.init(string: FEE_BNB_TRANSFER)
             
-        } else if (pageHolderVC.chainType! == ChainType.OKEX_MAIN || pageHolderVC.chainType! == ChainType.OKEX_TEST) {
+        } else if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
             mFee = mSelectedGasRate.multiplying(by: mEstimateGasAmount, withBehavior: WUtils.handler18)
             
         } else {
@@ -84,25 +84,9 @@ class StepFeeOldViewController: BaseViewController {
         gasAmountLabel.text = mEstimateGasAmount.stringValue
         gasFeeLabel.text = mFee.stringValue
         
-        if (pageHolderVC.chainType! == ChainType.KAVA_MAIN || pageHolderVC.chainType! == ChainType.BAND_MAIN || pageHolderVC.chainType! == ChainType.KAVA_TEST) {
-            self.gasSetCard.isHidden = false
-            if (mSelectedGasPosition == 0) {
-                self.speedImg.image = UIImage.init(named: "bycicle")
-                self.speedTxt.text = NSLocalizedString("fee_speed_title_0", comment: "")
-            } else if (mSelectedGasPosition == 1) {
-                self.speedImg.image = UIImage.init(named: "car")
-                self.speedTxt.text = NSLocalizedString("fee_speed_title_1", comment: "")
-            } else {
-                self.speedImg.image = UIImage.init(named: "roket")
-                self.speedTxt.text = NSLocalizedString("fee_speed_title_2", comment: "")
-            }
-            
-        } else {
-            self.gasSetCard.isHidden = true
-            self.speedImg.image = UIImage.init(named: "roket")
-            self.speedTxt.text = NSLocalizedString("fee_speed_title_2", comment: "")
-            
-        }
+        self.gasSetCard.isHidden = true
+        self.speedImg.image = UIImage.init(named: "roket")
+        self.speedTxt.text = NSLocalizedString("fee_speed_title_2", comment: "")
     }
     
     @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {
@@ -129,7 +113,7 @@ class StepFeeOldViewController: BaseViewController {
     }
     
     func onSetFee() {
-        if (pageHolderVC.chainType! == ChainType.OKEX_MAIN || pageHolderVC.chainType! == ChainType.OKEX_TEST) {
+        if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
             let gasCoin = Coin.init(WUtils.getMainDenom(pageHolderVC.chainType), WUtils.getFormattedNumber(mFee, mDisplayDecimal))
             var amount: Array<Coin> = Array<Coin>()
             amount.append(gasCoin)

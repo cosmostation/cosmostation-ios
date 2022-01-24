@@ -36,13 +36,13 @@ class StepHtlcRefund0ViewController: BaseViewController {
     func onUpdateView() {
         self.loadingImg.onStopAnimation()
         self.loadingImg.isHidden = true
-        if (self.chainType! == ChainType.BINANCE_MAIN || self.chainType! == ChainType.BINANCE_TEST) {
+        if (self.chainType! == ChainType.BINANCE_MAIN) {
             swapIdLabel.text = pageHolderVC.mHtlcRefundSwapId!
             refundToLabel.text = mBnbSwapInfo?.fromAddr
             let coin = mBnbSwapInfo?.getSendCoin()
             WUtils.showCoinDp(coin!, refundAmountDenom, refundAmountLabel, chainType!)
             
-        } else if (self.chainType! == ChainType.KAVA_MAIN || self.chainType! == ChainType.KAVA_TEST) {
+        } else if (self.chainType! == ChainType.KAVA_MAIN) {
             swapIdLabel.text = pageHolderVC.mHtlcRefundSwapId!
             refundToLabel.text = mKavaSwapInfo?.result.sender
             let coin = mKavaSwapInfo?.result.amount[0]
@@ -75,13 +75,13 @@ class StepHtlcRefund0ViewController: BaseViewController {
         request.responseJSON { (response) in
             switch response.result {
                 case .success(let res):
-                    if (self.chainType! == ChainType.BINANCE_MAIN || self.chainType! == ChainType.BINANCE_TEST) {
+                    if (self.chainType! == ChainType.BINANCE_MAIN) {
                         if let info = res as? [String : Any] {
                             self.mBnbSwapInfo = BnbSwapInfo.init(info)
                             self.pageHolderVC.mBnbSwapInfo = self.mBnbSwapInfo
                         }
                         
-                    } else if (self.chainType! == ChainType.KAVA_MAIN || self.chainType! == ChainType.KAVA_TEST) {
+                    } else if (self.chainType! == ChainType.KAVA_MAIN) {
                         if let info = res as? [String : Any], info["error"] == nil  {
                             self.mKavaSwapInfo = KavaSwapInfo.init(info)
                             self.pageHolderVC.mKavaSwapInfo = self.mKavaSwapInfo

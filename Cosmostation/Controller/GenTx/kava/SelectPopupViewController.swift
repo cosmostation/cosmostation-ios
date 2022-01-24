@@ -169,15 +169,6 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
                     cell!.coinTitle.text = "BUSD"
                 }
                 
-            } else if (chainType! == ChainType.BINANCE_TEST) {
-                if (toSendCoin == TOKEN_HTLC_BINANCE_TEST_BNB) {
-                    cell!.coinImg.image = UIImage(named: "bnbTokenImg")
-                    cell!.coinTitle.text = "BNB"
-                } else if (toSendCoin == TOKEN_HTLC_BINANCE_TEST_BTC) {
-                    cell!.coinImg.image = UIImage(named: "btcTokenImg")
-                    cell!.coinTitle.text = "BTC"
-                }
-                
             } else if (chainType! == ChainType.KAVA_MAIN) {
                 if (toSendCoin == TOKEN_HTLC_KAVA_BNB) {
                     cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
@@ -193,14 +184,6 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
                     cell!.coinTitle.text = "BUSD"
                 }
                 
-            } else if (chainType! == ChainType.KAVA_TEST) {
-                if (toSendCoin == TOKEN_HTLC_KAVA_TEST_BNB) {
-                    cell!.coinImg.image = UIImage(named: "bnbonKavaImg")
-                    cell!.coinTitle.text = "BNB"
-                } else if (toSendCoin == TOKEN_HTLC_KAVA_TEST_BTC) {
-                    cell!.coinImg.image = UIImage(named: "btconKavaImg")
-                    cell!.coinTitle.text = "BTC"
-                }
             }
             return cell!
             
@@ -210,11 +193,11 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
             cell?.accountAddress.text = account.account_address
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
-            if (toChain == ChainType.BINANCE_MAIN || toChain == ChainType.BINANCE_TEST) {
+            if (toChain == ChainType.BINANCE_MAIN) {
                 cell?.keyStatusImg.tintColor = COLOR_BNB
                 cell!.accountBalance.attributedText = WUtils.displayAmount2(WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).stringValue, cell!.accountBalance.font, 0, 8)
                 
-            } else if (toChain == ChainType.KAVA_MAIN || toChain == ChainType.KAVA_TEST) {
+            } else if (toChain == ChainType.KAVA_MAIN) {
                 cell?.keyStatusImg.tintColor = COLOR_KAVA
                 cell!.accountBalance.attributedText = WUtils.displayAmount2(WUtils.getTokenAmount(account.account_balances, KAVA_MAIN_DENOM).stringValue, cell!.accountBalance.font, 6, 6)
             }

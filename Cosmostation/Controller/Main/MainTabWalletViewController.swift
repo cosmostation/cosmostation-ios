@@ -163,10 +163,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.ALTHEA_MAIN || chainType! == ChainType.ALTHEA_TEST) {
             floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
             floaty.buttonColor = COLOR_ALTHEA
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
+        } else if (chainType == ChainType.MEDI_MAIN) {
             floaty.buttonImage = UIImage.init(named: "btnSendMedi")
             floaty.buttonColor = .white
-        } else if (chainType! == ChainType.AXELAR_MAIN || chainType! == ChainType.AXELAR_TEST) {
+        } else if (chainType! == ChainType.AXELAR_MAIN) {
             floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
             floaty.buttonColor = .white
         } else if (chainType! == ChainType.COMDEX_MAIN) {
@@ -210,9 +210,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.DESMOS_MAIN) {
             return 5;
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             return 3;
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             return 3;
         }
         return 4;
@@ -223,19 +223,19 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetCosmosItems(tableView, indexPath);
         } else if (chainType == ChainType.IRIS_MAIN) {
             return onSetIrisItem(tableView, indexPath);
-        } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+        } else if (chainType == ChainType.BINANCE_MAIN) {
             return onSetBnbItem(tableView, indexPath);
-        } else if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+        } else if (chainType == ChainType.KAVA_MAIN) {
             return onSetKavaItem(tableView, indexPath);
         } else if (chainType == ChainType.BAND_MAIN) {
             return onSetBandItem(tableView, indexPath);
         } else if (chainType == ChainType.SECRET_MAIN) {
             return onSetSecretItem(tableView, indexPath);
-        } else if (chainType == ChainType.IOV_MAIN || chainType == ChainType.IOV_TEST) {
+        } else if (chainType == ChainType.IOV_MAIN) {
             return onSetIovItems(tableView, indexPath);
-        } else if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        } else if (chainType == ChainType.OKEX_MAIN) {
             return onSetOKexItems(tableView, indexPath);
-        } else if (chainType == ChainType.CERTIK_MAIN || chainType == ChainType.CERTIK_TEST) {
+        } else if (chainType == ChainType.CERTIK_MAIN) {
             return onSetCertikItems(tableView, indexPath);
         } else if (chainType == ChainType.AKASH_MAIN) {
             return onSetAkashItems(tableView, indexPath);
@@ -253,11 +253,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetkiItems(tableView, indexPath);
         } else if (chainType == ChainType.OSMOSIS_MAIN) {
             return onSetOsmoItems(tableView, indexPath);
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
+        } else if (chainType == ChainType.MEDI_MAIN) {
             return onSetMediItems(tableView, indexPath);
         } else if (chainType == ChainType.EMONEY_MAIN) {
             return onSetEmoneyItems(tableView, indexPath);
-        } else if (chainType == ChainType.RIZON_MAIN || chainType == ChainType.RIZON_TEST) {
+        } else if (chainType == ChainType.RIZON_MAIN) {
             return onSetRizonItems(tableView, indexPath);
         } else if (chainType == ChainType.JUNO_MAIN) {
             return onSetJunoItems(tableView, indexPath);
@@ -283,7 +283,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetLumItems(tableView, indexPath);
         } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
             return onSetChihuahuaItems(tableView, indexPath);
-        } else if (chainType == ChainType.AXELAR_MAIN || chainType == ChainType.AXELAR_TEST) {
+        } else if (chainType == ChainType.AXELAR_MAIN) {
             return onSetAxelarItems(tableView, indexPath);
         }
         
@@ -1464,7 +1464,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     @objc func onClickActionShare() {
         var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN || chainType == ChainType.OKEX_TEST) {
+        if (chainType == ChainType.OKEX_MAIN) {
             address = WKey.convertAddressOkexToEth(address)
         }
         self.shareAddress(address, WUtils.getWalletName(account))
@@ -1478,9 +1478,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickVoteList() {
-        if (chainType! == ChainType.KAVA_TEST) {
-            return
-        }
         let voteListVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteListViewController") as! VoteListViewController
         voteListVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
@@ -1501,18 +1498,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return
         }
         
-        if (chainType! == ChainType.BINANCE_TEST || chainType! == ChainType.KAVA_TEST) {
-            self.onShowToast(NSLocalizedString("error_bep3_swap_temporary_disable", comment: ""))
-            return
-        }
-        
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
         }
 
         let balances = BaseData.instance.selectBalanceById(accountId: self.account!.account_id)
-        if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
+        if (chainType! == ChainType.BINANCE_MAIN) {
             if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
                 return
@@ -1563,7 +1555,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
+        if (chainType! == ChainType.OKEX_MAIN) {
             if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.1")).rawValue < 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
                 return
@@ -1581,7 +1573,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
+        if (chainType! == ChainType.OKEX_MAIN) {
             if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.1")).rawValue < 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
@@ -1841,7 +1833,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.binance.org") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
+        } else if (chainType! == ChainType.KAVA_MAIN) {
             guard let url = URL(string: "https://www.kava.io/registration/") else { return }
             self.onShowSafariWeb(url)
             
@@ -1853,15 +1845,15 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://scrt.network") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.IOV_MAIN || chainType! == ChainType.IOV_TEST) {
+        } else if (chainType! == ChainType.IOV_MAIN) {
             guard let url = URL(string: "https://iov.one/") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
+        } else if (chainType! == ChainType.OKEX_MAIN) {
             guard let url = URL(string: "https://www.okex.com/") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.CERTIK_MAIN || chainType! == ChainType.CERTIK_TEST) {
+        } else if (chainType! == ChainType.CERTIK_MAIN) {
             guard let url = URL(string: "https://www.certik.foundation/") else { return }
             self.onShowSafariWeb(url)
             
@@ -1897,7 +1889,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://osmosis.zone/") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.MEDI_MAIN || chainType! == ChainType.MEDI_TEST) {
+        } else if (chainType! == ChainType.MEDI_MAIN) {
             if (Locale.current.languageCode == "ko") {
                 guard let url = URL(string: "https://medibloc.com") else { return }
                 self.onShowSafariWeb(url)
@@ -1910,7 +1902,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://umee.cc/") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.AXELAR_MAIN || chainType! == ChainType.AXELAR_TEST) {
+        } else if (chainType! == ChainType.AXELAR_MAIN) {
             guard let url = URL(string: "https://axelar.network/") else { return }
             self.onShowSafariWeb(url)
             
@@ -1988,7 +1980,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://medium.com/@binance") else { return }
             self.onShowSafariWeb(url)
 
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
+        } else if (chainType! == ChainType.KAVA_MAIN) {
             guard let url = URL(string: "https://medium.com/kava-labs") else { return }
             self.onShowSafariWeb(url)
             
@@ -2000,15 +1992,15 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://blog.scrt.network") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.IOV_MAIN || chainType! == ChainType.IOV_TEST) {
+        } else if (chainType! == ChainType.IOV_MAIN) {
             guard let url = URL(string: "https://medium.com/iov-internet-of-values") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
+        } else if (chainType! == ChainType.OKEX_MAIN) {
             guard let url = URL(string: "https://www.okex.com/community") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.CERTIK_MAIN || chainType! == ChainType.CERTIK_TEST) {
+        } else if (chainType! == ChainType.CERTIK_MAIN) {
             guard let url = URL(string: "https://www.certik.foundation/blog") else { return }
             self.onShowSafariWeb(url)
             
@@ -2044,7 +2036,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://medium.com/osmosis") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.MEDI_MAIN || chainType! == ChainType.MEDI_TEST) {
+        } else if (chainType! == ChainType.MEDI_MAIN) {
             if (Locale.current.languageCode == "ko") {
                 guard let url = URL(string: "https://blog.medibloc.org/") else { return }
                 self.onShowSafariWeb(url)
@@ -2056,7 +2048,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://medium.com/umeeblog") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.AXELAR_MAIN || chainType! == ChainType.AXELAR_TEST) {
+        } else if (chainType! == ChainType.AXELAR_MAIN) {
             guard let url = URL(string: "https://axelar.network/blog") else { return }
             self.onShowSafariWeb(url)
             
@@ -2128,7 +2120,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.coingecko.com/en/coins/binancecoin") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.KAVA_MAIN || chainType! == ChainType.KAVA_TEST) {
+        } else if (chainType! == ChainType.KAVA_MAIN) {
             guard let url = URL(string: "https://www.coingecko.com/en/coins/kava") else { return }
             self.onShowSafariWeb(url)
             
@@ -2140,11 +2132,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.coingecko.com/en/coins/secret") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.IOV_MAIN || chainType! == ChainType.IOV_TEST) {
+        } else if (chainType! == ChainType.IOV_MAIN) {
             guard let url = URL(string: "https://www.coingecko.com/en/coins/starname") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType! == ChainType.CERTIK_MAIN || chainType! == ChainType.CERTIK_TEST) {
+        } else if (chainType! == ChainType.CERTIK_MAIN) {
             guard let url = URL(string: "https://www.coingecko.com/en/coins/certik") else { return }
             self.onShowSafariWeb(url)
             
@@ -2180,7 +2172,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.coingecko.com/en/coins/osmosis") else { return }
             self.onShowSafariWeb(url)
             
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.MEDI_TEST) {
+        } else if (chainType == ChainType.MEDI_MAIN) {
             guard let url = URL(string: "https://www.coingecko.com/en/coins/medibloc") else { return }
             self.onShowSafariWeb(url)
             
@@ -2357,7 +2349,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func scannedAddress(result: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
-            if (self.chainType == ChainType.BINANCE_MAIN || self.chainType == ChainType.BINANCE_TEST) {
+            if (self.chainType == ChainType.BINANCE_MAIN) {
                 if (result.contains("wallet-bridge.binance.org")) {
                     self.wcURL = result
                     let wcAlert = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: NSLocalizedString("wc_alert_msg", comment: ""), preferredStyle: .alert)
@@ -2396,7 +2388,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
-                if (self.chainType == ChainType.BINANCE_MAIN || self.chainType == ChainType.BINANCE_TEST) {
+                if (self.chainType == ChainType.BINANCE_MAIN) {
                     let wcVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "WalletConnectViewController") as! WalletConnectViewController
                     wcVC.hidesBottomBarWhenPushed = true
                     wcVC.wcURL = self.wcURL!

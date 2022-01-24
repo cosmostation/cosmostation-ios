@@ -49,10 +49,10 @@ class TokenDetailNativeCell: TokenDetailCell {
         if (WUtils.isGRPC(chainType)) {
             onBindNativeToken_gRPC(chainType, denom)
             
-        } else if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
+        } else if (chainType! == ChainType.BINANCE_MAIN) {
             onBindBNBTokens(denom)
             
-        } else if (chainType! == ChainType.OKEX_MAIN || chainType! == ChainType.OKEX_TEST) {
+        } else if (chainType! == ChainType.OKEX_MAIN) {
             onBindOKTokens(denom)
             
         }

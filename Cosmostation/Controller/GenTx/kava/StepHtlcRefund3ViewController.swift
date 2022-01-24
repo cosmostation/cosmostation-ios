@@ -42,14 +42,14 @@ class StepHtlcRefund3ViewController: BaseViewController, PasswordViewDelegate {
         WUtils.setDenomTitle(chainType!, feeAmountDenom)
         memoLabel.text = pageHolderVC.mMemo
         
-        if (self.chainType! == ChainType.BINANCE_MAIN || self.chainType! == ChainType.BINANCE_TEST) {
+        if (self.chainType! == ChainType.BINANCE_MAIN) {
             feeAmountLabel.attributedText = WUtils.displayAmount2(feeAmount.stringValue, feeAmountLabel.font, 0, 8)
             swapIdLabel.text = pageHolderVC.mHtlcRefundSwapId!
             refundToLabel.text = pageHolderVC.mBnbSwapInfo?.fromAddr
             let coin = pageHolderVC.mBnbSwapInfo?.getSendCoin()
             WUtils.showCoinDp(coin!, refundAmountDenom, refundAmountLabel, chainType!)
             
-        } else if (self.chainType! == ChainType.KAVA_MAIN || self.chainType! == ChainType.KAVA_TEST) {
+        } else if (self.chainType! == ChainType.KAVA_MAIN) {
             feeAmountLabel.attributedText = WUtils.displayAmount2(feeAmount.stringValue, feeAmountLabel.font, 6, 6)
             swapIdLabel.text = pageHolderVC.mHtlcRefundSwapId!
             refundToLabel.text = pageHolderVC.mKavaSwapInfo?.result.sender
@@ -76,9 +76,9 @@ class StepHtlcRefund3ViewController: BaseViewController, PasswordViewDelegate {
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.KAVA_TEST) {
+            if (chainType == ChainType.KAVA_MAIN) {
                 self.onFetchAccountInfo(pageHolderVC.mAccount!)
-            } else if (chainType == ChainType.BINANCE_MAIN || chainType == ChainType.BINANCE_TEST) {
+            } else if (chainType == ChainType.BINANCE_MAIN) {
                 self.onGenBnbRefund()
             }
         }
@@ -150,7 +150,7 @@ class StepHtlcRefund3ViewController: BaseViewController, PasswordViewDelegate {
                         }
                         if (self.waitAlert != nil) {
                             self.waitAlert?.dismiss(animated: true, completion: {
-                                if (self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.KAVA_TEST) {
+                                if (self.chainType == ChainType.KAVA_MAIN) {
                                     txResult["type"] = TASK_TYPE_HTLC_REFUND
                                     self.onStartTxDetail(txResult)
                                 }

@@ -19,18 +19,6 @@ class BaseNetWork {
         } else if (chain == ChainType.OKEX_MAIN) {
             return OKEX_URL + "node_info"
         }
-        
-        else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/node-info"
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "node_info"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "node_info"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "node_info"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "node_info"
-        }
         return ""
     }
     
@@ -40,34 +28,12 @@ class BaseNetWork {
         } else if (chain == ChainType.OKEX_MAIN) {
             return OKEX_URL + "auth/accounts/" + address
         }
-        
-        else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/account/" + address
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "auth/accounts/" + address
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "auth/accounts/" + address
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "auth/accounts/" + address
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "auth/accounts/" + address
-        }
         return ""
     }
     
     static func validatorsUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.OKEX_MAIN) {
             return OKEX_URL + "staking/validators"
-        }
-        
-        else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_URL + "staking/validators"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "staking/validators"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "staking/validators"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "staking/validators"
         }
         return ""
     }
@@ -76,14 +42,6 @@ class BaseNetWork {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/delegators/" + address + "/delegations"
         }
-
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "staking/delegators/" + address + "/delegations"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "staking/delegators/" + address + "/delegations"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "staking/delegators/" + address + "/delegations"
-        }
         return ""
     }
     
@@ -91,28 +49,12 @@ class BaseNetWork {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "staking/delegators/" + address + "/unbonding_delegations"
         }
-
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations"
-        }
         return ""
     }
     
     static func rewardsUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "distribution/delegators/" + address + "/rewards"
-        }
-        
-        else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "distribution/delegators/" + address + "/rewards"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "distribution/delegators/" + address + "/rewards"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "distribution/delegators/" + address + "/rewards"
         }
         return ""
     }
@@ -126,18 +68,6 @@ class BaseNetWork {
         } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "txs/" + txhash
         }
-        
-        else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/tx/" + txhash
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "txs/" + txhash
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "txs/" + txhash
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "txs/" + txhash
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "txs/" + txhash
-        }
         return ""
     }
     
@@ -149,18 +79,6 @@ class BaseNetWork {
         } else if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "txs"
         }
-        
-        else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_URL + "api/v1/broadcast"
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "txs"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "txs"
-        } else if (chain == ChainType.CERTIK_TEST) {
-            return CERTIK_TEST_URL + "txs"
-        } else if (chain == ChainType.MEDI_TEST) {
-            return MEDI_TEST_URL + "txs"
-        }
         return ""
     }
     
@@ -169,8 +87,6 @@ class BaseNetWork {
     static func bnbTokenUrl(_ chain: ChainType) -> String {
         if (chain == ChainType.BINANCE_MAIN ) {
             return BNB_URL + "api/v1/tokens"
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/tokens"
         }
         return ""
     }
@@ -178,8 +94,6 @@ class BaseNetWork {
     static func bnbMiniTokenUrl(_ chain: ChainType) -> String {
         if (chain == ChainType.BINANCE_MAIN ) {
             return BNB_URL + "api/v1/mini/tokens"
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/mini/tokens"
         }
         return ""
     }
@@ -187,8 +101,6 @@ class BaseNetWork {
     static func bnbTicUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.BINANCE_MAIN ) {
             return BNB_URL + "api/v1/ticker/24hr"
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/ticker/24hr"
         }
         return ""
     }
@@ -196,8 +108,6 @@ class BaseNetWork {
     static func bnbMiniTicUrl(_ chain: ChainType) -> String {
         if (chain == ChainType.BINANCE_MAIN ) {
             return BNB_URL + "api/v1/mini/ticker/24hr"
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/mini/ticker/24hr"
         }
         return ""
     }
@@ -205,8 +115,6 @@ class BaseNetWork {
     static func bnbHistoryUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.BINANCE_MAIN ) {
             return BNB_URL + "api/v1/transactions"
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/transactions"
         }
         return ""
     }
@@ -216,8 +124,6 @@ class BaseNetWork {
     static func paramIncentiveUrl(_ chain: ChainType) -> String {
         if (chain == ChainType.KAVA_MAIN ) {
             return KAVA_URL + "incentive/parameters"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "incentive/parameters"
         }
         return ""
     }
@@ -225,8 +131,6 @@ class BaseNetWork {
     static func depositCdpUrl(_ chain: ChainType?, _ address: String, _ collateralType: String) -> String {
         if (chain == ChainType.KAVA_MAIN ) {
             return KAVA_URL + "cdp/cdps/cdp/deposits/" + address + "/" + collateralType
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "cdp/cdps/cdp/deposits/" + address + "/" + collateralType
         }
         return ""
     }
@@ -234,8 +138,6 @@ class BaseNetWork {
     static func managerHardPoolUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.KAVA_MAIN ) {
             return KAVA_URL + "hard/accounts"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "hard/accounts"
         }
         return ""
     }
@@ -243,8 +145,6 @@ class BaseNetWork {
     static func incentiveUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.KAVA_MAIN ) {
             return KAVA_URL + "incentive/rewards"
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "incentive/rewards"
         }
         return ""
     }
@@ -252,8 +152,6 @@ class BaseNetWork {
     static func paramBep3Url(_ chain: ChainType?) -> String {
         if (chain == ChainType.KAVA_MAIN || chain == ChainType.BINANCE_MAIN) {
             return KAVA_URL + "bep3/parameters"
-        } else if (chain == ChainType.KAVA_TEST || chain == ChainType.BINANCE_TEST) {
-            return KAVA_TEST_URL + "bep3/parameters"
         }
         return ""
     }
@@ -261,8 +159,6 @@ class BaseNetWork {
     static func supplyBep3Url(_ chain: ChainType?) -> String {
         if (chain == ChainType.KAVA_MAIN || chain == ChainType.BINANCE_MAIN) {
             return KAVA_URL + "bep3/supplies"
-        } else if (chain == ChainType.KAVA_TEST || chain == ChainType.BINANCE_TEST) {
-            return KAVA_TEST_URL + "bep3/supplies"
         }
         return ""
     }
@@ -270,12 +166,8 @@ class BaseNetWork {
     static func swapIdBep3Url(_ chain: ChainType?, _ id: String) -> String {
         if (chain == ChainType.KAVA_MAIN) {
             return KAVA_URL + "bep3/swap/" + id
-        } else if (chain == ChainType.KAVA_TEST) {
-            return KAVA_TEST_URL + "bep3/swap/" + id
         } else if (chain == ChainType.BINANCE_MAIN) {
             return BNB_URL + "api/v1/atomic-swaps/" + id
-        } else if (chain == ChainType.BINANCE_TEST) {
-            return BNB_TEST_URL + "api/v1/atomic-swaps/" + id
         }
         return ""
     }
@@ -285,8 +177,6 @@ class BaseNetWork {
     static func balanceOkUrl(_ chain: ChainType?, _ address: String) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
             return OKEX_URL + "accounts/" + address
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "accounts/" + address
         }
         return ""
     }
@@ -294,8 +184,6 @@ class BaseNetWork {
     static func stakingOkUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
             return OKEX_URL + "staking/delegators/" + address
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "staking/delegators/" + address
         }
         return ""
     }
@@ -303,8 +191,6 @@ class BaseNetWork {
     static func unbondingOkUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
             return OKEX_URL + "staking/delegators/" + address + "/unbonding_delegations"
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "staking/delegators/" + address + "/unbonding_delegations"
         }
         return ""
     }
@@ -312,8 +198,6 @@ class BaseNetWork {
     static func historyOkUrl(_ chain: ChainType?) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
             return OKEX_URL + "transactions"
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "transactions"
         }
         return ""
     }
@@ -321,8 +205,6 @@ class BaseNetWork {
     static func tokenListOkUrl(_ chain: ChainType) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
             return OKEX_URL + "tokens"
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "tokens"
         }
         return ""
     }
@@ -330,8 +212,6 @@ class BaseNetWork {
     static func tickerListOkUrl(_ chain: ChainType) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
             return OKEX_URL + "tickers"
-        } else if (chain == ChainType.OKEX_TEST) {
-            return OKEX_TEST_URL + "tickers"
         }
         return ""
     }
@@ -350,8 +230,6 @@ class BaseNetWork {
     static func rizonSwapStatus(_ chain: ChainType?, _ address: String) -> String {
         if (chain == ChainType.RIZON_MAIN) {
             return RIZON_SWAP_STATUS + "swaps/rizon/" + address
-        } else if (chain == ChainType.RIZON_TEST) {
-            return RIZON_SWAP_STATUS_TESTNET + "swaps/rizon/" + address
         }
         return ""
     }
@@ -361,8 +239,6 @@ class BaseNetWork {
     static func hdacTxDetail(_ chain: ChainType?, _ hash: String) -> String {
         if (chain == ChainType.RIZON_MAIN) {
             return HDAC_MAINNET + "tx/" + hash
-        } else if (chain == ChainType.RIZON_TEST) {
-            return HDAC_TESTNET + "tx/" + hash
         }
         return ""
     }
@@ -370,8 +246,6 @@ class BaseNetWork {
     static func hdacBalance(_ chain: ChainType?, _ address: String) -> String {
         if (chain == ChainType.RIZON_MAIN) {
             return HDAC_MAINNET + "addr/" + address + "/utxo"
-        } else if (chain == ChainType.RIZON_TEST) {
-            return HDAC_TESTNET + "addr/" + address + "/utxo"
         }
         return ""
     }
@@ -379,8 +253,6 @@ class BaseNetWork {
     static func hdacBroadcast(_ chain: ChainType?) -> String {
         if (chain == ChainType.RIZON_MAIN) {
             return HDAC_MAINNET + "tx/send"
-        } else if (chain == ChainType.RIZON_TEST) {
-            return HDAC_TESTNET + "tx/send"
         }
         return ""
     }
@@ -480,20 +352,10 @@ class BaseNetWork {
             result = COSMOS_TEST_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.IRIS_TEST) {
             result = IRIS_TEST_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.RIZON_TEST) {
-            result = RIZON_TEST_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.KAVA_TEST) {
-            result = KAVA_TEST_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.CERTIK_TEST) {
-            result = CERTIK_TEST_API + "v1/account/txs/" + address
-        } else if (chain == ChainType.MEDI_TEST) {
-            result = MEDI_TEST_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.ALTHEA_TEST) {
             result = ALTHEA_TEST_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.UMEE_TEST) {
             result = UMEE_TEST_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.AXELAR_TEST) {
-            result = AXELAR_TEST_API + "v1/account/new_txs/" + address
         }
         return result
     }
@@ -568,20 +430,10 @@ class BaseNetWork {
             result = COSMOS_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.IRIS_TEST) {
             result = IRIS_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.RIZON_TEST) {
-            result = RIZON_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.KAVA_TEST) {
-            result = KAVA_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.CERTIK_TEST) {
-            result = CERTIK_TEST_API + "v1/account/txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.MEDI_TEST) {
-            result = MEDI_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.ALTHEA_TEST) {
             result = ALTHEA_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.UMEE_TEST) {
             result = UMEE_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.AXELAR_TEST) {
-            result = AXELAR_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         return result
     }
@@ -720,17 +572,11 @@ class BaseNetWork {
         } else if (chain == ChainType.IRIS_TEST) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 9095)
             
-        } else if (chain == ChainType.RIZON_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-rizon-testnet.cosmostation.io", port: 9090)
-            
         } else if (chain == ChainType.ALTHEA_TEST) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20100)
             
         } else if (chain == ChainType.UMEE_TEST) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 40800)
-            
-        } else if (chain == ChainType.AXELAR_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-axelar-testnet.cosmostation.io", port: 9090)
             
         }
         return nil

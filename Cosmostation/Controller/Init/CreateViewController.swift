@@ -141,7 +141,7 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.hideWaittingAlert()
                 var address = self.dpAddress
-                if (self.chainType == ChainType.OKEX_MAIN || self.chainType  == ChainType.OKEX_TEST) {
+                if (self.chainType == ChainType.OKEX_MAIN) {
                     address = WKey.convertAddressOkexToEth(address!)
                 }
                 self.addressLabel.text = address
@@ -224,7 +224,7 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
                 newAccount.account_from_mnemonic = true
                 newAccount.account_m_size = 24
                 newAccount.account_import_time = Date().millisecondsSince1970
-                if (chain == ChainType.KAVA_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.LUM_MAIN || chain == ChainType.KAVA_TEST || chain == ChainType.OKEX_TEST) {
+                if (chain == ChainType.KAVA_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.LUM_MAIN) {
                     newAccount.account_new_bip44 = true
                 }
                 newAccount.account_sort_order = 9999
