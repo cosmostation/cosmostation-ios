@@ -147,12 +147,7 @@ class ManageChainAccoutsCell: UITableViewCell {
             keyImg.tintColor = COLOR_DARK_GRAY
         }
         nameLabel.text = WUtils.getWalletName(dpAccount)
-        
-        var address = dpAccount!.account_address
-        if (dpChain == ChainType.OKEX_MAIN) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        addressLabel.text = address
+        addressLabel.text = dpAccount!.account_address
         
         amountLabel.attributedText = WUtils.displayAmount2(dpAccount?.account_last_total, amountLabel.font, 0, 6)
         WUtils.setDenomTitle(dpChain, denomLabel)

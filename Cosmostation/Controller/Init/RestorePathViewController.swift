@@ -16,7 +16,6 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
 
     var userChain: ChainType?
     var userInputWords: [String]?
-    var usingBip44:Bool = false
     var customPath = 0;
     @IBOutlet weak var restoreTableView: UITableView!
     @IBOutlet weak var loadingImg: LoadingImageView!
@@ -57,16 +56,21 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.pathLabel.text = BAND_BASE_PATH.appending(String(indexPath.row))
             
         } else if (userChain == ChainType.KAVA_MAIN) {
-            if (self.usingBip44) { cell?.pathLabel.text = KAVA_BASE_PATH.appending(String(indexPath.row)) }
-            else { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
+            if (self.customPath == 0) { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
+            else { cell?.pathLabel.text = KAVA_BASE_PATH.appending(String(indexPath.row)) }
             
         } else if (userChain == ChainType.SECRET_MAIN) {
-            if (self.usingBip44) { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
+            if (self.customPath == 0) { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
             else { cell?.pathLabel.text = SECRET_BASE_PATH.appending(String(indexPath.row)) }
             
         } else if (userChain == ChainType.OKEX_MAIN) {
-            if (self.usingBip44) { cell?.pathLabel.text = "(Ethermint Type) " + OK_BASE_PATH.appending(String(indexPath.row)) }
-            else { cell?.pathLabel.text = "(Tendermint Type) " + OK_BASE_PATH.appending(String(indexPath.row)) }
+            if (self.customPath == 0) {
+                cell?.pathLabel.text = OK_BASE_PATH.appending(String(indexPath.row)) + " (Tendermint Type)"
+            } else if (self.customPath == 1) {
+                cell?.pathLabel.text = OK_BASE_PATH.appending(String(indexPath.row)) + " (Ethermint Type)"
+            } else {
+                cell?.pathLabel.text = ETH_NON_LEDGER_PATH.appending(String(indexPath.row)) + " (Ethereum Type)"
+            }
             
         } else if (userChain == ChainType.PERSIS_MAIN) {
             cell?.pathLabel.text = PERSIS_BASE_PATH.appending(String(indexPath.row))
@@ -75,10 +79,10 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.pathLabel.text = CRYPTO_BASE_PATH.appending(String(indexPath.row))
             
         } else if (userChain == ChainType.FETCH_MAIN) {
-            if (self.customPath == 1) { cell?.pathLabel.text = ETH_NON_LEDGER_PATH.appending(String(indexPath.row)) }
+            if (self.customPath == 0) { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
+            else if (self.customPath == 1) { cell?.pathLabel.text = ETH_NON_LEDGER_PATH.appending(String(indexPath.row)) }
             else if (self.customPath == 2) { cell?.pathLabel.text = ETH_LEDGER_LIVE_PATH_1.appending(String(indexPath.row)) + ETH_LEDGER_LIVE_PATH_2 }
-            else if (self.customPath == 3) { cell?.pathLabel.text = ETH_LEDGER_LEGACY_PATH.appending(String(indexPath.row)) }
-            else { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
+            else { cell?.pathLabel.text = ETH_LEDGER_LEGACY_PATH.appending(String(indexPath.row)) }
             
         } else if (userChain == ChainType.MEDI_MAIN) {
             cell?.pathLabel.text = MEDI_BASE_PATH.appending(String(indexPath.row))
@@ -93,26 +97,17 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.pathLabel.text = DESMOS_BASE_PATH.appending(String(indexPath.row))
             
         } else if (userChain == ChainType.LUM_MAIN) {
-            if (self.usingBip44) { cell?.pathLabel.text = LUM_BASE_PATH.appending(String(indexPath.row)) }
-            else { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
+            if (self.customPath == 0) { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
+            else { cell?.pathLabel.text = LUM_BASE_PATH.appending(String(indexPath.row)) }
             
         } else {
             cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row))
         }
         
         DispatchQueue.global().async {
-            var address = ""
-            if (self.userChain == ChainType.FETCH_MAIN) {
-                address = KeyFac.getDpAddressFetchCustomPath(self.userInputWords!, UInt32(indexPath.row), self.userChain!, self.customPath)
-            } else {
-                address = KeyFac.getDpAddressPath(self.userInputWords!, indexPath.row, self.userChain!, self.usingBip44)
-            }
-            var dpAddress = address
-            if (self.userChain == ChainType.OKEX_MAIN) {
-                dpAddress = WKey.convertAddressOkexToEth(dpAddress)
-            }
+            let address = KeyFac.getDpAddressPath(self.userInputWords!, indexPath.row, self.userChain!, self.customPath)
             DispatchQueue.main.async(execute: {
-                cell?.addressLabel.text = dpAddress
+                cell?.addressLabel.text = address
                 let tempAccount = BaseData.instance.selectExistAccount(address, self.userChain)
                 if (tempAccount == nil) {
                     cell?.stateLabel.text = NSLocalizedString("ready", comment: "")
@@ -214,11 +209,11 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             return
         } else if (cell?.stateLabel.text == NSLocalizedString("ready", comment: "")) {
             BaseData.instance.setLastTab(0)
-            self.onGenAccount(self.userInputWords!, self.userChain!, indexPath.row, self.usingBip44, self.customPath)
+            self.onGenAccount(self.userInputWords!, self.userChain!, indexPath.row, self.customPath)
 
         } else {
             BaseData.instance.setLastTab(0)
-            self.onOverrideAccount(self.userInputWords!, self.userChain!, indexPath.row, self.usingBip44, self.customPath)
+            self.onOverrideAccount(self.userInputWords!, self.userChain!, indexPath.row, self.customPath)
         }
     }
     
@@ -226,17 +221,13 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
         return 86;
     }
     
-    func onGenAccount(_ mnemonic: [String], _ chain: ChainType, _ path: Int, _ newBip: Bool, _ customPath: Int) {
+    func onGenAccount(_ mnemonic: [String], _ chain: ChainType, _ path: Int, _ customBipPath: Int) {
         self.showWaittingAlert()
         DispatchQueue.global().async {
             
             let newAccount = Account.init(isNew: true)
             newAccount.account_path = String(path)
-            if (self.userChain == ChainType.FETCH_MAIN) {
-                newAccount.account_address = KeyFac.getDpAddressFetchCustomPath(mnemonic, UInt32(path), chain, customPath)
-            } else {
-                newAccount.account_address = KeyFac.getDpAddressPath(mnemonic, path, chain, newBip)
-            }
+            newAccount.account_address = KeyFac.getDpAddressPath(mnemonic, path, chain, customBipPath)
             newAccount.account_base_chain = WUtils.getChainDBName(chain)
             
             var resource: String = ""
@@ -252,8 +243,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
                 newAccount.account_path = String(path)
                 newAccount.account_m_size = Int64(self.userInputWords!.count)
                 newAccount.account_import_time = Date().millisecondsSince1970
-                newAccount.account_new_bip44 = newBip
-                newAccount.account_custom_path = Int64(customPath)
+                newAccount.account_custom_path = Int64(customBipPath)
                 newAccount.account_sort_order = 9999
                 insertResult = BaseData.instance.insertAccount(newAccount)
                 
@@ -282,19 +272,14 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     
-    func onOverrideAccount(_ mnemonic: [String], _ chain:ChainType, _ path:Int, _ newBip:Bool, _ customPath: Int) {
+    func onOverrideAccount(_ mnemonic: [String], _ chain:ChainType, _ path:Int, _ customBipPath: Int) {
         self.showWaittingAlert()
         DispatchQueue.global().async {
             var resource: String = ""
             for word in self.userInputWords! {
                 resource = resource + " " + word
             }
-            var dpAddress: String
-            if (self.userChain == ChainType.FETCH_MAIN) {
-                dpAddress = KeyFac.getDpAddressFetchCustomPath(mnemonic, UInt32(path), chain, customPath)
-            } else {
-                dpAddress = KeyFac.getDpAddressPath(mnemonic, path, chain, newBip)
-            }
+            let dpAddress = KeyFac.getDpAddressPath(mnemonic, path, chain, customBipPath)
             let existedAccount = BaseData.instance.selectExistAccount(dpAddress, chain)
             let keyResult = KeychainWrapper.standard.set(resource, forKey: existedAccount!.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             var updateResult :Int64 = -1
@@ -303,8 +288,7 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
                 existedAccount!.account_from_mnemonic = true
                 existedAccount!.account_path = String(path)
                 existedAccount!.account_m_size = Int64(self.userInputWords!.count)
-                existedAccount!.account_new_bip44 = newBip
-                existedAccount!.account_custom_path = Int64(customPath)
+                existedAccount!.account_custom_path = Int64(customBipPath)
                 updateResult = BaseData.instance.overrideAccount(existedAccount!)
                 
                 if(updateResult < 0) {

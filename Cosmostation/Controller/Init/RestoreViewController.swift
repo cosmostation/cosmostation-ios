@@ -76,7 +76,6 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
     var filteredMnemonicWords = [String]()
     var userInputWords = [String]()
     var mCurrentPosition = 0;
-    var usingBip44:Bool = false
     var customPath = 0;
     
     override func viewDidLoad() {
@@ -345,11 +344,11 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
         )
         selectAlert.setValue(messageText, forKey: "attributedMessage")
         selectAlert.addAction(UIAlertAction(title: NSLocalizedString("kava_old_path", comment: ""), style: .default, handler: { _ in
-            self.usingBip44 = false
+            self.customPath = 0
             self.onCheckPassword()
         }))
         selectAlert.addAction(UIAlertAction(title: NSLocalizedString("kava_new_path", comment: ""), style: .default, handler: { _ in
-            self.usingBip44 = true
+            self.customPath = 1
             self.onCheckPassword()
         }))
         self.present(selectAlert, animated: true) {
@@ -372,11 +371,11 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
         )
         selectAlert.setValue(messageText, forKey: "attributedMessage")
         selectAlert.addAction(UIAlertAction(title: NSLocalizedString("secret_old_path", comment: ""), style: .default, handler: { _ in
-            self.usingBip44 = true
+            self.customPath = 0
             self.onCheckPassword()
         }))
         selectAlert.addAction(UIAlertAction(title: NSLocalizedString("secret_new_path", comment: ""), style: .default, handler: { _ in
-            self.usingBip44 = false
+            self.customPath = 1
             self.onCheckPassword()
         }))
         self.present(selectAlert, animated: true) {
@@ -398,11 +397,15 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
         )
         selectAlert.setValue(messageText, forKey: "attributedMessage")
         selectAlert.addAction(UIAlertAction(title: NSLocalizedString("keytype_okex_old", comment: ""), style: .default, handler: { _ in
-            self.usingBip44 = false
+            self.customPath = 0
             self.onCheckPassword()
         }))
         selectAlert.addAction(UIAlertAction(title: NSLocalizedString("keytype_okex_new", comment: ""), style: .default, handler: { _ in
-            self.usingBip44 = true
+            self.customPath = 1
+            self.onCheckPassword()
+        }))
+        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("keytype_okex_eth", comment: ""), style: .default, handler: { _ in
+            self.customPath = 2
             self.onCheckPassword()
         }))
         self.present(selectAlert, animated: true) {
@@ -447,12 +450,12 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
             ]
         )
         selectAlert.setValue(messageText, forKey: "attributedMessage")
-        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("lum_path_0", comment: ""), style: .default, handler: { _ in
-            self.usingBip44 = true
+        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("lum_path_default", comment: ""), style: .default, handler: { _ in
+            self.customPath = 1
             self.onCheckPassword()
         }))
-        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("lum_path_1", comment: ""), style: .default, handler: { _ in
-            self.usingBip44 = false
+        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("lum_path_airdrop", comment: ""), style: .default, handler: { _ in
+            self.customPath = 0
             self.onCheckPassword()
         }))
         self.present(selectAlert, animated: true) {
@@ -466,7 +469,7 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
         self.navigationItem.title = ""
         self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
         passwordVC.resultDelegate = self
-        if(!BaseData.instance.hasPassword()) {
+        if (!BaseData.instance.hasPassword()) {
             passwordVC.mTarget = PASSWORD_ACTION_INIT
         } else  {
             passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
@@ -481,7 +484,6 @@ class RestoreViewController: BaseViewController , UICollectionViewDelegate, UICo
                 self.navigationItem.title = ""
                 restorePathVC.userInputWords = self.userInputWords
                 restorePathVC.userChain = self.chainType
-                restorePathVC.usingBip44 = self.usingBip44
                 restorePathVC.customPath = self.customPath
                 self.navigationController?.pushViewController(restorePathVC, animated: true)
             })

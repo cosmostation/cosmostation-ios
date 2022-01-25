@@ -127,9 +127,6 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
         WUtils.showCoinDp(toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel, chainType!)
         
         mToAddressLabel.text = pageHolderVC.mToSendRecipientAddress
-        if (chainType == ChainType.OKEX_MAIN) {
-            mToAddressLabel.text = WKey.convertAddressOkexToEth(pageHolderVC.mToSendRecipientAddress!)
-        }
         mToAddressLabel.adjustsFontSizeToFitWidth = true
         mMemoLabel.text = pageHolderVC.mMemo
         

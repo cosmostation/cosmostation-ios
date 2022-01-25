@@ -81,7 +81,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
             self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
             self.topKeyState.tintColor = WUtils.getChainColor(chainType)
         }
-        self.topDpAddress.text = account?.dpAddress(chainType)
+        self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         self.topValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalToken, stakingDivideDecimal, topValue.font)
@@ -129,11 +129,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     }
     
     @objc func onClickActionShare() {
-        var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        self.shareAddress(address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
     }
     
 

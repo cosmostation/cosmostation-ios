@@ -63,7 +63,7 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
             return
         }
         
-        let publicKey = KeyFac.getPublicFromString(userInput!)
+        let publicKey = KeyFac.getPublicFromStringPrivateKey(userInput!)
         let address = WKey.getPubToDpAddress(publicKey.hexEncodedString(), chainType!)
         print("address ", address)
         
@@ -179,7 +179,7 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            let publicKey = KeyFac.getPublicFromString(userInput!)
+            let publicKey = KeyFac.getPublicFromStringPrivateKey(userInput!)
             let address = WKey.getPubToDpAddress(publicKey.hexEncodedString(), chainType!)
             
             if let existAccount = BaseData.instance.selectExistAccount(address, chainType) {

@@ -10,22 +10,12 @@ import Foundation
 
 class KeyFac {
     
-    static func getDpAddressPath(_ mnemonic: [String], _ path:Int, _ chain:ChainType, _ newbip:Bool) -> String {
+    static func getDpAddressPath(_ mnemonic: [String], _ path: Int, _ chain: ChainType, _ customBipPath: Int) -> String {
         var resultAddress = ""
         if (BaseData.instance.getUsingEnginerMode()) {
-            resultAddress = CKey.getDpAddressPath(mnemonic, path, chain, newbip)
+            resultAddress = CKey.getDpAddressPath(mnemonic, path, chain, customBipPath)
         } else {
-            resultAddress = WKey.getDpAddressPath(mnemonic, path, chain, newbip)
-        }
-        return resultAddress
-    }
-    
-    static func getDpAddressFetchCustomPath(_ mnemonic: [String], _ path: UInt32, _ chain: ChainType, _ pathType: Int) -> String {
-        var resultAddress = ""
-        if (BaseData.instance.getUsingEnginerMode()) {
-            resultAddress = CKey.getDpAddressFetchCustomPath(mnemonic, path, chain, pathType)
-        } else {
-            resultAddress = WKey.getDpAddressFetchCustomPath(mnemonic, path, chain, pathType)
+            resultAddress = WKey.getDpAddressPath(mnemonic, path, chain, customBipPath)
         }
         return resultAddress
     }
@@ -67,13 +57,13 @@ class KeyFac {
         return hexInput.hexadecimal!
     }
     
-    static func getPublicFromString(_ hexInput: String) -> Data {
+    static func getPublicFromStringPrivateKey(_ hexInput: String) -> Data {
         let privateKey = getPrivateFromString(hexInput)
         return getPublicFromPrivateKey(privateKey)
     }
     
     static func getPublicFromPrivateKey(_ dataInput: Data) -> Data {
-        return WKey.getPublicFromString(dataInput)
+        return WKey.getPublicFromPrivateKey(dataInput)
     }
     
 }

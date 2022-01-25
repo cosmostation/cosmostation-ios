@@ -131,20 +131,17 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
     func onUpdateView() {
         self.showWaittingAlert()
         DispatchQueue.global().async {
-            //secret toggle!!!
-            if (self.chainType! == ChainType.SECRET_MAIN) {
-                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, false)
+            if (self.chainType == ChainType.SECRET_MAIN || self.chainType == ChainType.SECRET_MAIN || self.chainType == ChainType.SECRET_MAIN) {
+                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, 1)
+            } else if (self.chainType == ChainType.OKEX_MAIN) {
+                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, 2)
             } else {
-                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, true)
+                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, 0)
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.hideWaittingAlert()
-                var address = self.dpAddress
-                if (self.chainType == ChainType.OKEX_MAIN) {
-                    address = WKey.convertAddressOkexToEth(address!)
-                }
-                self.addressLabel.text = address
+                self.addressLabel.text = self.dpAddress
                 self.mnemonicView.backgroundColor = WUtils.getChainBg(self.chainType!)
                 for i in 0 ... self.mnemonicLabels.count - 1{
                     self.mnemonicLayers[i].layer.borderWidth = 1
@@ -227,6 +224,10 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
                 if (chain == ChainType.KAVA_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.LUM_MAIN) {
                     newAccount.account_new_bip44 = true
                 }
+                if (chain == ChainType.OKEX_MAIN) {
+                    newAccount.account_custom_path = 2
+                }
+                
                 newAccount.account_sort_order = 9999
                 insertResult = BaseData.instance.insertAccount(newAccount)
                 

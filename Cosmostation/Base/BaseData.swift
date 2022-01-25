@@ -1125,12 +1125,67 @@ final class BaseData : NSObject{
     }
     
     
-    public func upgradeAaccountAddressforOk() {
-        let allOkAccount = BaseData.instance.selectAllAccountsByChain(ChainType.OKEX_MAIN)
+    //set custompath 118 - > 0,
+    public func upgradeAaccountAddressforPath() {
+        var allOkAccount = BaseData.instance.selectAllAccountsByChain(ChainType.OKEX_MAIN)
         for account in allOkAccount {
+            // update address with "0x" Eth style
+            if (account.account_new_bip44 == true && account.account_custom_path == 0) {
+                account.account_custom_path = 1
+                updateAccountPathType(account)
+            }
             if (account.account_address.starts(with: "okexchain")) {
-                account.account_address = WKey.getUpgradeOKAddress(account.account_address)
+                account.account_address = WKey.getUpgradeOkexToExAddress(account.account_address)
+            }
+        }
+        
+        allOkAccount = BaseData.instance.selectAllAccountsByChain(ChainType.OKEX_MAIN)
+        for account in allOkAccount {
+            if (account.account_address.starts(with: "ex")) {
+                account.account_address = WKey.convertAddressCosmosToTender(account.account_address)
                 updateAccountAddress(account)
+            }
+        }
+                
+        
+        //set custompath 118 -> 0, 529 -> 1
+        let allSecretAccount = BaseData.instance.selectAllAccountsByChain(ChainType.SECRET_MAIN)
+        for account in allSecretAccount {
+            if (account.account_from_mnemonic) {
+                if (account.account_new_bip44 == true && account.account_custom_path != 0) {
+                    account.account_custom_path = 0
+                    updateAccountPathType(account)
+                }
+                if (account.account_new_bip44 == false && account.account_custom_path != 1) {
+                    account.account_custom_path = 1
+                    updateAccountPathType(account)
+                }
+            }
+        }
+        
+        //set custompath 118 -> 0, 459 -> 1
+        let allKavaAccount = BaseData.instance.selectAllAccountsByChain(ChainType.KAVA_MAIN)
+        for account in allKavaAccount {
+            if (account.account_new_bip44 == true && account.account_custom_path != 1) {
+                account.account_custom_path = 1
+                updateAccountPathType(account)
+            }
+            if (account.account_new_bip44 == false && account.account_custom_path != 0) {
+                account.account_custom_path = 0
+                updateAccountPathType(account)
+            }
+        }
+        
+        //set custompath 118 -> 0, 880 -> 1
+        let allLumAccount = BaseData.instance.selectAllAccountsByChain(ChainType.LUM_MAIN)
+        for account in allLumAccount {
+            if (account.account_new_bip44 == true && account.account_custom_path != 1) {
+                account.account_custom_path = 1
+                updateAccountPathType(account)
+            }
+            if (account.account_new_bip44 == false && account.account_custom_path != 0) {
+                account.account_custom_path = 0
+                updateAccountPathType(account)
             }
         }
     }
@@ -1140,6 +1195,17 @@ final class BaseData : NSObject{
         let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
         do {
             return try Int64(database.run(target.update(DB_ACCOUNT_ADDRESS <- account.account_address)))
+        } catch {
+            print(error)
+            return -1
+        }
+    }
+    
+    //for okchain key custom_path 0 -> tendermint(996), 1 -> ethermint(996), 2 -> etherium(60)
+    public func updateAccountPathType(_ account: Account) -> Int64 {
+        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+        do {
+            return try Int64(database.run(target.update(DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path)))
         } catch {
             print(error)
             return -1

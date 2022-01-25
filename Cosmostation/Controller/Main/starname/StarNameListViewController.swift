@@ -177,7 +177,7 @@ extension WUtils {
                 result.addresses.append(resource)
             } else if (WUtils.getChainType(account.account_base_chain) == ChainType.OKEX_MAIN) {
                 resource.ticker = "okb"
-                resource.address = WKey.convertAddressOkexToEth(account.account_address)
+                resource.address = account.account_address
                 result.addresses.append(resource)
             } else if (WUtils.getChainType(account.account_base_chain) == ChainType.KAVA_MAIN) {
                 resource.ticker = "kava"

@@ -29,32 +29,15 @@ class WKey {
             chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.UMEE_TEST || chainType == ChainType.ALTHEA_TEST) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
-        } else if (chainType == ChainType.KAVA_MAIN) {
-            if (account.account_new_bip44) {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(459)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            } else {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            }
-            
         } else if (chainType == ChainType.BINANCE_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(714)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
         } else if (chainType == ChainType.BAND_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(494)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
-        } else if (chainType == ChainType.SECRET_MAIN) {
-            if (account.account_new_bip44) {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            } else {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(529)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            }
-            
         } else if (chainType == ChainType.IOV_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(234)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
-        } else if (chainType == ChainType.OKEX_MAIN) {
-            return masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-
         } else if (chainType == ChainType.PERSIS_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(750)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
@@ -64,37 +47,56 @@ class WKey {
         } else if (chainType == ChainType.MEDI_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(371)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
-        }  else if (chainType == ChainType.FETCH_MAIN) {
-            if (account.account_custom_path == 1) {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-                
-            } else if (account.account_custom_path == 2) {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(UInt32(account.account_path)!)).derived(at: .notHardened(0)).derived(at: .notHardened(0))
-                
-            } else if (account.account_custom_path == 3) {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-                
-            } else {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-                
-            }
-            
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            
+
         } else if (chainType == ChainType.BITSONG_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(639)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
         } else if (chainType == ChainType.DESMOS_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(852)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
-        } else if (chainType == ChainType.LUM_MAIN) {
-            if (account.account_new_bip44) {
-                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(880)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-            } else {
+        }
+        
+        else if (chainType == ChainType.KAVA_MAIN) {
+            if (account.account_custom_path == 0) {
                 return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            } else {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(459)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             }
             
+        } else if (chainType == ChainType.SECRET_MAIN) {
+            if (account.account_custom_path == 0) {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            } else {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(529)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            }
+            
+        } else if (chainType == ChainType.LUM_MAIN) {
+            if (account.account_custom_path == 0) {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            } else {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(880)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            }
+            
+        } else if (chainType == ChainType.FETCH_MAIN) {
+            if (account.account_custom_path == 0) {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            } else if (account.account_custom_path == 1) {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            } else if (account.account_custom_path == 2) {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(UInt32(account.account_path)!)).derived(at: .notHardened(0)).derived(at: .notHardened(0))
+            } else {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            }
+            
+        } else if (chainType == ChainType.OKEX_MAIN) {
+            if (account.account_custom_path == 0 || account.account_custom_path == 1) {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            } else {
+                return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+            }
+
         } else {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
         }
@@ -118,8 +120,6 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "secret", program: ripemd160)
         } else if (chain == ChainType.IOV_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "star", program: ripemd160)
-        } else if (chain == ChainType.OKEX_MAIN) {
-            result = try! SegwitAddrCoder.shared.encode2(hrp: "ex", program: ripemd160)
         } else if (chain == ChainType.CERTIK_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "certik", program: ripemd160)
         } else if (chain == ChainType.AKASH_MAIN) {
@@ -176,7 +176,7 @@ class WKey {
         return result
     }
 
-    static func getHDKeyDpAddressWithPath(_ masterKey:PrivateKey, path:Int, chain:ChainType, _ newbip:Bool) -> String {
+    static func getHDKeyDpAddressWithPath(_ masterKey: PrivateKey, _ path: Int, _ chain: ChainType, _ customBipPath: Int) -> String {
         var childKey:PrivateKey?
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.IRIS_MAIN || chain == ChainType.CERTIK_MAIN || chain == ChainType.AKASH_MAIN ||
             chain == ChainType.SENTINEL_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.KI_MAIN || chain == ChainType.OSMOSIS_MAIN ||
@@ -189,28 +189,11 @@ class WKey {
         } else if (chain == ChainType.BINANCE_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(714)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
-        } else if (chain == ChainType.KAVA_MAIN) {
-            if (newbip) {
-                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(459)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            } else {
-                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            }
-            
         } else if (chain == ChainType.BAND_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(494)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
-        } else if (chain == ChainType.SECRET_MAIN) {
-            if (newbip) {
-                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            } else {
-                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(529)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            }
-            
         } else if (chain == ChainType.IOV_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(234)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            
-        } else if (chain == ChainType.OKEX_MAIN) {
-            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         } else if (chain == ChainType.PERSIS_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(750)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
@@ -221,23 +204,64 @@ class WKey {
         } else if (chain == ChainType.MEDI_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(371)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            
         } else if (chain == ChainType.BITSONG_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(639)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         } else if (chain == ChainType.DESMOS_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(852)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
-        } else if (chain == ChainType.LUM_MAIN) {
-            if (newbip) {
-                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(880)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            } else {
+        }
+        
+        else if (chain == ChainType.KAVA_MAIN) {
+            if (customBipPath == 0) {
                 childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            } else {
+                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(459)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             }
             
-        } else {
+        } else if (chain == ChainType.SECRET_MAIN) {
+            if (customBipPath == 0) {
+                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            } else {
+                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(529)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            }
+            
+        } else if (chain == ChainType.LUM_MAIN) {
+            if (customBipPath == 0) {
+                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            } else {
+                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(880)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            }
+            
+        } else if (chain == ChainType.FETCH_MAIN) {
+            if (customBipPath == 0) {
+                childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            } else if (customBipPath == 1) {
+                childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            } else if (customBipPath == 2) {
+                childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(UInt32(path))).derived(at: .notHardened(0)).derived(at: .notHardened(0))
+            } else {
+                childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(UInt32(path)))
+            }
+            
+        } else if (chain == ChainType.OKEX_MAIN) {
+            if (customBipPath == 0) {
+                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+                return generateTenderAddressFromPrivateKey(childKey!.raw)
+            } else if (customBipPath == 1) {
+                childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+                return generateEthAddressFromPrivateKey(childKey!.raw)
+            } else {
+                childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+                return generateEthAddressFromPrivateKey(childKey!.raw)
+            }
+            
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            //TODO return
+        }
+        
+        else {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         }
@@ -245,53 +269,9 @@ class WKey {
         
     }
     
-    static func getDpAddressPath(_ mnemonic: [String], _ path:Int, _ chain:ChainType, _ newbip:Bool) -> String {
+    static func getDpAddressPath(_ mnemonic: [String], _ path: Int, _ chain: ChainType, _ customBipPath: Int) -> String {
         let masterKey = getMasterKeyFromWords(mnemonic)
-        if ((chain == ChainType.OKEX_MAIN) && newbip) {
-            let pKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(996)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            return generateAddressFromPriv("ex", pKey.raw)
-            
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            let pKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            return generateAddressFromPriv("inj", pKey.raw)
-            
-        } else {
-            return getHDKeyDpAddressWithPath(masterKey, path: path, chain: chain, newbip)
-        }
-    }
-    
-    static func getDpAddressFetchCustomPath(_ mnemonic: [String], _ path: UInt32, _ chain: ChainType, _ pathType: Int) -> String {
-        let masterKey = getMasterKeyFromWords(mnemonic)
-        if (pathType == 0) {
-            let childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(path))
-            return getPubToDpAddress(childKey.publicKey.data.dataToHexString(), chain)
-            
-        } else if (pathType == 1) {
-            let childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(path))
-            return getPubToDpAddress(childKey.publicKey.data.dataToHexString(), chain)
-            
-        } else if (pathType == 2) {
-            let childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(path)).derived(at: .notHardened(0)).derived(at: .notHardened(0))
-            return getPubToDpAddress(childKey.publicKey.data.dataToHexString(), chain)
-            
-        } else if (pathType == 3) {
-            let childKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(path))
-            return getPubToDpAddress(childKey.publicKey.data.dataToHexString(), chain)
-        }
-        return ""
-    }
-    
-    
-    static func isValidateAddress(_ address:String) -> Bool {
-        if(address.count != 45 && !address.starts(with: "cosmos")) {
-            return false
-        }
-        
-        let bech32 = Bech32()
-        guard let _ = try? bech32.decode(address) else {
-            return false
-        }
-        return true
+        return getHDKeyDpAddressWithPath(masterKey, path, chain, customBipPath)
     }
     
     static func isValidateBech32(_ address:String) -> Bool {
@@ -320,8 +300,6 @@ class WKey {
             result = bech32.encode("secret", values: data)
         } else if (chain == ChainType.IOV_MAIN) {
             result = bech32.encode("star", values: data)
-        } else if (chain == ChainType.OKEX_MAIN) {
-            result = bech32.encode("ex", values: data)
         } else if (chain == ChainType.CERTIK_MAIN) {
             result = bech32.encode("certik", values: data)
         } else if (chain == ChainType.AKASH_MAIN) {
@@ -375,20 +353,14 @@ class WKey {
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
             result = bech32.encode("chihuahua", values: data)
         }
+        
+//        else if (chain == ChainType.OKEX_MAIN) {
+//            result = bech32.encode("ex", values: data)
+//        }
         return result
     }
     
-    static func getUpgradeOKAddress(_ oldAddress: String) -> String {
-        var result = ""
-        let bech32 = Bech32()
-        guard let (_, data) = try? bech32.decode(oldAddress) else {
-            return result
-        }
-        result = bech32.encode("ex", values: data)
-        return result
-    }
-    
-    static func getDatafromDpAddress(_ address:String) -> Data? {
+    static func getDatafromDpAddress(_ address: String) -> Data? {
         let bech32 = Bech32()
         guard let (_, data) = try? bech32.decode(address) else {
             return nil
@@ -484,26 +456,62 @@ class WKey {
         }
     }
     
-    // Ethermint Style address gen (OKex, Injective)
-    static func generateAddressFromPriv(_ prefix: String, _ priKey: Data) -> String {
-        let uncompressedPubKey = HDWalletKit.Crypto.generatePublicKey(data: priKey, compressed: false)
-        var pub = Data(count: 64)
-        pub = uncompressedPubKey.subdata(in: (1..<65))
-        
-        let eth = HDWalletKit.Crypto.sha3keccak256(data: pub)
-        var address = Data(count: 20)
-        address = eth.subdata(in: (12..<32))
-        let ethAddress  = EthereumAddress.init(data: address)
-        
+//    // Ethermint Style address gen (OKex, Injective)
+//    static func generateAddressFromPriv(_ prefix: String, _ priKey: Data) -> String {
+////    static func generateAddressFromPriv(_ priKey: Data) -> String {
+//        let uncompressedPubKey = HDWalletKit.Crypto.generatePublicKey(data: priKey, compressed: false)
+//        var pub = Data(count: 64)
+//        pub = uncompressedPubKey.subdata(in: (1..<65))
+//
+//        let eth = HDWalletKit.Crypto.sha3keccak256(data: pub)
+//        var address = Data(count: 20)
+//        address = eth.subdata(in: (12..<32))
+////        return EthereumAddress.init(data: address)
+//        let ethAddress  = EthereumAddress.init(data: address)
+//        print("ethAddress ", ethAddress)
+//
+//        var result = ""
+//        let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: address)
+//        result = Bech32().encode(prefix, values: convert!)
+//        print("result ", result)
+//        return result
+//    }
+    
+    
+    //update prefix "okexchain" to "ex"
+    static func getUpgradeOkexToExAddress(_ oldAddress: String) -> String {
         var result = ""
-        let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: address)
-        result = Bech32().encode(prefix, values: convert!)
+        let bech32 = Bech32()
+        guard let (_, data) = try? bech32.decode(oldAddress) else {
+            return result
+        }
+        result = bech32.encode("ex", values: data)
         return result
     }
     
-    static func convertAddressOkexToEth(_ exAddress: String) -> String {
+    //update prefix "ex" to "Ox"
+    static func convertAddressCosmosToTender(_ exAddress: String) -> String {
         let data = getDatafromDpAddress(exAddress)
         return EthereumAddress.init(data: data!).string
+    }
+    
+    //gen Ether style address (stat with 0x)
+    static func generateEthAddressFromPrivateKey(_ priKey: Data) -> String {
+        let uncompressedPubKey = HDWalletKit.Crypto.generatePublicKey(data: priKey, compressed: false)
+        var pub = Data(count: 64)
+        pub = uncompressedPubKey.subdata(in: (1..<65))
+        let eth = HDWalletKit.Crypto.sha3keccak256(data: pub)
+        var address = Data(count: 20)
+        address = eth.subdata(in: (12..<32))
+        return EthereumAddress.init(data: address).string
+    }
+    
+    //gen Tender style address (stat with 0x)
+    static func generateTenderAddressFromPrivateKey(_ priKey: Data) -> String {
+        let publicKey = getPublicFromPrivateKey(priKey)
+        let sha256 = publicKey.sha256()
+        let ripemd160 = RIPEMD160.hash(sha256)
+        return EthereumAddress.init(data: ripemd160).string
     }
     
     static func convertAddressEthToOkex(_ ethAddress: String) -> String {
@@ -560,7 +568,7 @@ class WKey {
         return PrivateKey.init(pk: hex, chainCode: chaincode)!
     }
     
-    static func getPublicFromString(_ dataInput: Data) -> Data {
+    static func getPublicFromPrivateKey(_ dataInput: Data) -> Data {
         return Crypto.generatePublicKey(data: dataInput, compressed: true)
     }
     

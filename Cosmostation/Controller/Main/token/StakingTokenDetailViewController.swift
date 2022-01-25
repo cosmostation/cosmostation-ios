@@ -77,7 +77,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
             self.topKeyState.tintColor = WUtils.getChainColor(chainType)
         }
-        self.topDpAddress.text = account?.dpAddress(chainType)
+        self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true
         
         if (chainType == ChainType.BINANCE_MAIN) {
@@ -133,11 +133,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     
     
     @objc func onClickActionShare() {
-        var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        self.shareAddress(address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
     }
     
     

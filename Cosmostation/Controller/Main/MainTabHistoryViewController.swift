@@ -114,7 +114,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
             self.totalKeyState.tintColor = WUtils.getChainColor(chainType)
         }
-        self.totalDpAddress.text = account?.dpAddress(chainType)
+        self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
         self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
         
@@ -395,11 +395,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onClickActionShare() {
-        var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        self.shareAddress(address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
     }
     
 }
