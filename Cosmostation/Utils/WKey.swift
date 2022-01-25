@@ -353,10 +353,6 @@ class WKey {
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
             result = bech32.encode("chihuahua", values: data)
         }
-        
-//        else if (chain == ChainType.OKEX_MAIN) {
-//            result = bech32.encode("ex", values: data)
-//        }
         return result
     }
     
@@ -455,28 +451,6 @@ class WKey {
             return ""
         }
     }
-    
-//    // Ethermint Style address gen (OKex, Injective)
-//    static func generateAddressFromPriv(_ prefix: String, _ priKey: Data) -> String {
-////    static func generateAddressFromPriv(_ priKey: Data) -> String {
-//        let uncompressedPubKey = HDWalletKit.Crypto.generatePublicKey(data: priKey, compressed: false)
-//        var pub = Data(count: 64)
-//        pub = uncompressedPubKey.subdata(in: (1..<65))
-//
-//        let eth = HDWalletKit.Crypto.sha3keccak256(data: pub)
-//        var address = Data(count: 20)
-//        address = eth.subdata(in: (12..<32))
-////        return EthereumAddress.init(data: address)
-//        let ethAddress  = EthereumAddress.init(data: address)
-//        print("ethAddress ", ethAddress)
-//
-//        var result = ""
-//        let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: address)
-//        result = Bech32().encode(prefix, values: convert!)
-//        print("result ", result)
-//        return result
-//    }
-    
     
     //update prefix "okexchain" to "ex"
     static func getUpgradeOkexToExAddress(_ oldAddress: String) -> String {
