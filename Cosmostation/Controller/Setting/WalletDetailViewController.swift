@@ -300,8 +300,8 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
            
        } else if (chainType == ChainType.OKEX_MAIN) {
            chainImg.image = UIImage(named: "okexChainImg")
-           if (account!.account_custom_path == 0) { keyPath.text = "(Tendermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
-           else if (account!.account_custom_path == 1) { keyPath.text = "(Ethermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
+           if (account!.account_custom_path == 0) { keyPath.text = "(Legacy Tendermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
+           else if (account!.account_custom_path == 1) { keyPath.text = "(Legacy Ethermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
            else { keyPath.text = "(Ethereum Type) " + ETH_NON_LEDGER_PATH.appending(String(account!.account_path)) }
            cardPush.isHidden = true
            constraint2.priority = .defaultHigh
@@ -350,6 +350,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             pathTitle.isHidden = true
             keyPath.isHidden = true
             noKeyMsg.isHidden = true
+            if (chainType == ChainType.OKEX_MAIN) {
+                pathTitle.isHidden = false
+                noKeyMsg.isHidden = false
+                pathTitle.text = "Address Type"
+                if (account!.account_custom_path > 0) { noKeyMsg.text = "Ethereum Type Address" }
+                else { noKeyMsg.text = "Legacy Tendermint Type Address" }
+            }
             
         } else {
             actionBtn1.setTitle(NSLocalizedString("import_menmonic", comment: ""), for: .normal)
