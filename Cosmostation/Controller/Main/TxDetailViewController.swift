@@ -665,8 +665,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.senderLabel.text = msg?.value.from
             cell?.recipientLabel.text = msg?.value.recipient_other_chain
             cell?.randomHashLabel.text = msg?.value.random_number_hash
-            cell?.expectedAmountLabel.text = msg?.value.expected_income
-            cell?.statusLabel.text = WUtils.getKavaHtlcStatus(self.mTxInfo!, mKavaSwapInfo)
             
             if (mKavaSwapInfo != nil && mKavaSwapInfo?.result.status == KavaSwapInfo.STATUS_EXPIRED) {
                 self.htlcRefundBtn.isHidden = false
@@ -689,8 +687,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 cell?.recipientLabel.text = msg?.value.to
             }
             cell?.randomHashLabel.text = msg?.value.random_number_hash
-            cell?.expectedAmountLabel.text = msg?.value.expected_income
-            cell?.statusLabel.text = WUtils.getBnbHtlcStatus(mBnbSwapInfo, mBnbNodeInfo)
             
             if (mBnbSwapInfo != nil && mBnbNodeInfo != nil &&
                 mBnbSwapInfo?.status == BnbSwapInfo.BNB_STATUS_OPEN &&

@@ -16,9 +16,7 @@ class TxHtlcCreateCell: TxCell {
     @IBOutlet weak var sendDenom: UILabel!
     @IBOutlet weak var senderLabel: UILabel!
     @IBOutlet weak var recipientLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var randomHashLabel: UILabel!
-    @IBOutlet weak var expectedAmountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,8 +36,6 @@ class TxHtlcCreateCell: TxCell {
             
             let coin = Coin.init(msg.amount[0].denom, msg.amount[0].amount)
             WUtils.showCoinDp(coin, sendDenom, sendAmount, chain)
-            
-            expectedAmountLabel.isHidden = true
         }
     }
     

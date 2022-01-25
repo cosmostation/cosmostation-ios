@@ -32,8 +32,11 @@ class TxHtlcClaimCell: TxCell {
             claimerAddress.text = msg.from
             swapIdLabel.text = msg.swapID
             randomNumberLabel.text = msg.randomNumber
-            claimAmount.isHidden = true
-            claimDenom.isHidden = true
+            
+            let claimedCoins = WUtils.onParseBep3ClaimAmountGrpc(response, position)
+            if (claimedCoins.count > 0) {
+                WUtils.showCoinDp(claimedCoins[0], claimDenom, claimAmount, chain)
+            }
         }
     }
     
