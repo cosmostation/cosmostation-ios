@@ -460,24 +460,6 @@ public class WUtils {
         return resultMsg
     }
     
-    static func okHistoryTitle(_ okHistory: OkHistory.DataDetail) -> String {
-        var resultMsg = NSLocalizedString("tx_known", comment: "")
-        if (okHistory.type! == OK_TX_TYPE_TRANSFER) {
-            if (okHistory.side! == OK_TX_TYPE_SIDE_SEND) {
-                resultMsg = NSLocalizedString("tx_send", comment: "")
-            } else {
-                resultMsg = NSLocalizedString("tx_receive", comment: "")
-            }
-        } else if (okHistory.type! == OK_TX_TYPE_TRANSFER) {
-            resultMsg = NSLocalizedString("tx_new_order", comment: "")
-            
-        } else if (okHistory.type! == OK_TX_TYPE_CANCEL_ORDER) {
-            resultMsg = NSLocalizedString("tx_cancel_order", comment: "")
-        }
-        return resultMsg
-    }
-    
-    
     static func proposalType(_ type:String) -> String {
         if (type == IRIS_PROPOAL_TYPE_BasicProposal) {
             return NSLocalizedString("proposal_type_basic", comment: "")

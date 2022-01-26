@@ -31,7 +31,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     var mainTabVC: MainTabViewController!
     var refresher: UIRefreshControl!
     var mBnbHistories = Array<BnbHistory>()
-    var mOkHistories = Array<OkHistory.DataDetail>()
+    var mOkHistories = Array<OKHistoryHit>()
     var mApiCustomNewHistories = Array<ApiHistoryNewCustom>()
     
     
@@ -222,7 +222,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             let okHistory = mOkHistories[indexPath.row]
-            guard let url = URL(string: EXPLORER_OKEX_MAIN + "tx/" + okHistory.txhash!) else { return }
+            guard let url = URL(string: EXPLORER_OEC_TX + "tx/" + okHistory.hash!) else { return }
             self.onShowSafariWeb(url)
             
         } else {
@@ -281,18 +281,15 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.refresher.endRefreshing()
     }
     
-    func onFetchOkHistory(_ address:String) {
-        let request = Alamofire.request(BaseNetWork.historyOkUrl(chainType), method: .get, parameters: ["address":address], encoding: URLEncoding.default, headers: [:])
-        print("request ", request)
+    func onFetchOkHistory(_ address: String) {
+        let request = Alamofire.request(BaseNetWork.historyOkUrl(chainType, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchOkHistory url ", request.request?.url)
         request.responseJSON { response in
             switch response.result {
             case .success(let res):
                 self.mOkHistories.removeAll()
-                if let historyInfo = res as? NSDictionary {
-                    let okHistory = OkHistory.init(historyInfo)
-                    if let okHistoryDetails = okHistory.data?.dataDetails {
-                        self.mOkHistories = okHistoryDetails
-                    }
+                if let histories = res as? NSDictionary, let hits = OkHistory.init(histories).data?.hits {
+                    self.mOkHistories = hits
                 }
                 if (self.mOkHistories.count > 0) {
                     self.historyTableView.reloadData()
@@ -310,20 +307,17 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     
     func onFetchNewApiHistoryCustom(_ address:String) {
         let url = BaseNetWork.accountHistory(chainType!, address)
-        print("onFetchNewApiHistoryCustom url ", url)
-        let request = Alamofire.request(url, method: .get, parameters: ["limit":"50"], encoding: URLEncoding.default, headers: [:]);
+        let request = Alamofire.request(url, method: .get, parameters: ["limit":"50"], encoding: URLEncoding.default, headers: [:])
+        print("onFetchNewApiHistoryCustom url ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
                 self.mApiCustomNewHistories.removeAll()
-                guard let histories = res as? Array<NSDictionary> else {
-                    self.emptyLabel.isHidden = false
-                    return;
+                if let histories = res as? Array<NSDictionary> {
+                    for rawHistory in histories {
+                        self.mApiCustomNewHistories.append(ApiHistoryNewCustom.init(rawHistory))
+                    }
                 }
-                for rawHistory in histories {
-                    self.mApiCustomNewHistories.append(ApiHistoryNewCustom.init(rawHistory))
-                }
-                print("onFetchNewApiHistoryCustom ", self.mApiCustomNewHistories.count)
                 if (self.mApiCustomNewHistories.count > 0) {
                     self.historyTableView.reloadData()
                     self.emptyLabel.isHidden = true

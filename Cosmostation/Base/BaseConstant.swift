@@ -45,6 +45,7 @@ let IRIS_TEST_API                       = "https://api-office.cosmostation.io/bi
 let BNB_URL                             = "https://dex.binance.org/";
 
 let OKEX_URL                            = "https://www.okex.com/okexchain/v1/";
+let OEC_API                             = "https://www.oklink.com/api/explorer/v1/";
 
 let KAVA_URL                            = "https://lcd-kava-app.cosmostation.io/";
 let KAVA_API                            = "https://api-kava.cosmostation.io/";
@@ -1264,6 +1265,8 @@ let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
 let EXPLORER_ALTHEA_TEST    = "https://testnet.mintscan.io/althea/";
 let EXPLORER_UMEE_TEST      = "https://testnet.mintscan.io/umee/";
 let EXPLORER_HDAC_TEST      = "http://test.explorer.hdactech.com/hdac-explorer/";
+
+let EXPLORER_OEC_TX         = "https://www.oklink.com/oec/"
 
 
 
