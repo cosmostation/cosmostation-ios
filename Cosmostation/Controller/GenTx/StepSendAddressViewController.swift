@@ -86,10 +86,6 @@ class StepSendAddressViewController: BaseViewController, QrScannerDelegate {
         self.CancelBtn.isUserInteractionEnabled = false
         self.NextBtn.isUserInteractionEnabled = false
         pageHolderVC.mToSendRecipientAddress = userInput
-        //TODO
-        if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
-            pageHolderVC.mToSendRecipientAddress = WKey.convertAddressEthToOkex(userInput!)
-        }
         pageHolderVC.onNextPage()
         
     }

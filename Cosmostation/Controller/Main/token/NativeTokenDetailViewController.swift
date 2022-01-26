@@ -182,6 +182,10 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
     }
     
     @IBAction func onClickSend(_ sender: UIButton) {
+        if (chainType == ChainType.OKEX_MAIN) {
+            self.onShowToast("Temporary Disable")
+            return
+        }
         if (!account!.account_has_private) {
             self.onShowAddMenomicDialog()
             return
