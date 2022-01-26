@@ -105,7 +105,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             self.topKeyState.tintColor = WUtils.getChainColor(chainType)
         }
         
-        self.topDpAddress.text = account?.dpAddress(chainType)
+        self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true
         self.topValue.attributedText = WUtils.dpUserCurrencyValue(nativeDenom, totalAmount, nativeDivideDecimal, topValue.font)
     }

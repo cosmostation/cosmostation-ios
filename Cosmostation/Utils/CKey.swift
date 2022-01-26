@@ -29,33 +29,18 @@ class CKey {
             chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.UMEE_TEST || chainType == ChainType.ALTHEA_TEST) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
-        } else if (chainType == ChainType.KAVA_MAIN) {
-            if (account.account_new_bip44) {
-                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 459, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            } else {
-                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            }
-            
         } else if (chainType == ChainType.BINANCE_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 714, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
         } else if (chainType == ChainType.BAND_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 494, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
-        } else if (chainType == ChainType.SECRET_MAIN) {
-            if (account.account_new_bip44) {
-                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            } else {
-                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 529, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            }
-            
         } else if (chainType == ChainType.IOV_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 234, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
-        } else if (chainType == ChainType.OKEX_MAIN) {
-            return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-
-        } else if (chainType == ChainType.PERSIS_MAIN) {
+        }
+        
+        else if (chainType == ChainType.PERSIS_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 750, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
         } else if (chainType == ChainType.CRYPTO_MAIN) {
@@ -64,20 +49,6 @@ class CKey {
         } else if (chainType == ChainType.MEDI_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 371, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
-        } else if (chainType == ChainType.FETCH_MAIN) {
-            if (account.account_custom_path == 1) {
-                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-                
-            } else if (account.account_custom_path == 2) {
-                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), UInt32(account.account_path)!, true), 0, false), 0, false)
-                
-            } else if (account.account_custom_path == 3) {
-                return cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), UInt32(account.account_path)!, false)
-                
-            } else {
-                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            }
-            
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
@@ -87,14 +58,46 @@ class CKey {
         } else if (chainType == ChainType.DESMOS_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 852, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
-        } else if (chainType == ChainType.LUM_MAIN) {
-            if (account.account_new_bip44) {
-                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 880, true), 0, true), 0, false), UInt32(account.account_path)!, false)
-            } else {
+        }
+        
+        else if (chainType == ChainType.KAVA_MAIN) {
+            if (account.account_custom_path == 0) {
                 return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            } else {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 459, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             }
             
-        } else {
+        } else if (chainType == ChainType.SECRET_MAIN) {
+            if (account.account_custom_path == 0) {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            } else {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 529, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            }
+            
+        } else if (chainType == ChainType.LUM_MAIN) {
+            if (account.account_custom_path == 0) {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            } else {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 880, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            }
+            
+        } else if (chainType == ChainType.FETCH_MAIN) {
+            if (account.account_custom_path == 0) {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            } else if (account.account_custom_path == 1) {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+            } else if (account.account_custom_path == 2) {
+                return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), UInt32(account.account_path)!, true), 0, false), 0, false)
+            } else {
+                return cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), UInt32(account.account_path)!, false)
+            }
+            
+        } else if (chainType == ChainType.OKEX_MAIN) {
+            return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+
+        }
+        
+        else {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
         }
     }
@@ -102,7 +105,7 @@ class CKey {
     
 
     
-    static func getHDKeyDpAddressWithPath(_ masterKey:PrivateKey, path:Int, chain:ChainType, _ newbip:Bool) -> String {
+    static func getHDKeyDpAddressWithPath(_ masterKey: PrivateKey, _ path: Int, _ chain: ChainType, _ customBipPath: Int) -> String {
         var childKey:PrivateKey?
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.IRIS_MAIN || chain == ChainType.CERTIK_MAIN || chain == ChainType.AKASH_MAIN ||
             chain == ChainType.SENTINEL_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.KI_MAIN || chain == ChainType.OSMOSIS_MAIN ||
@@ -115,29 +118,11 @@ class CKey {
         } else if (chain == ChainType.BINANCE_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 714, true), 0, true), 0, false), UInt32(path), false)
             
-        } else if (chain == ChainType.KAVA_MAIN) {
-            if (newbip) {
-                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 459, true), 0, true), 0, false), UInt32(path), false)
-            } else {
-                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
-            }
-            
         } else if (chain == ChainType.BAND_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 494, true), 0, true), 0, false), UInt32(path), false)
             
-        } else if (chain == ChainType.SECRET_MAIN) {
-            if (newbip) {
-                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
-            } else {
-                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 529, true), 0, true), 0, false), UInt32(path), false)
-            }
-            
         } else if (chain == ChainType.IOV_MAIN) {
-            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(234)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 234, true), 0, true), 0, false), UInt32(path), false)
-            
-        } else if (chain == ChainType.OKEX_MAIN) {
-            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(path), false)
             
         } else if (chain == ChainType.PERSIS_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 750, true), 0, true), 0, false), UInt32(path), false)
@@ -148,63 +133,73 @@ class CKey {
         } else if (chain == ChainType.MEDI_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 371, true), 0, true), 0, false), UInt32(path), false)
             
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
-            
         } else if (chain == ChainType.BITSONG_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 639, true), 0, true), 0, false), UInt32(path), false)
             
         } else if (chain == ChainType.DESMOS_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 852, true), 0, true), 0, false), UInt32(path), false)
             
-        } else if (chain == ChainType.LUM_MAIN) {
-            if (newbip) {
-                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 880, true), 0, true), 0, false), UInt32(path), false)
-            } else {
+        }
+        
+        else if (chain == ChainType.KAVA_MAIN) {
+            if (customBipPath == 0) {
                 childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
+            } else {
+                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 459, true), 0, true), 0, false), UInt32(path), false)
             }
             
-        } else {
-            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
+        } else if (chain == ChainType.SECRET_MAIN) {
+            if (customBipPath == 0) {
+                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
+            } else {
+                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 529, true), 0, true), 0, false), UInt32(path), false)
+            }
             
+        } else if (chain == ChainType.LUM_MAIN) {
+            if (customBipPath == 0) {
+                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
+            } else {
+                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 880, true), 0, true), 0, false), UInt32(path), false)
+            }
+            
+        } else if (chain == ChainType.FETCH_MAIN) {
+            if (customBipPath == 0) {
+                childKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
+            } else if (customBipPath == 1) {
+                childKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
+            } else if (customBipPath == 2) {
+                childKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), UInt32(path), true), 0, false), 0, false)
+            } else {
+                childKey = cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), UInt32(path), false)
+            }
+            
+        } else if (chain == ChainType.OKEX_MAIN) {
+            if (customBipPath == 0) {
+                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(path), false)
+                return WKey.generateTenderAddressFromPrivateKey(childKey!.raw)
+            } else if (customBipPath == 1) {
+                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(path), false)
+                return WKey.generateEthAddressFromPrivateKey(childKey!.raw)
+            } else {
+                childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
+                return WKey.generateEthAddressFromPrivateKey(childKey!.raw)
+            }
+            
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
+            //TODO return
+
+        }
+        
+        else {
+            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), UInt32(path), false)
         }
         return WKey.getPubToDpAddress(cPublicKey(childKey!)!.data.hexEncodedString(), chain)
     }
     
-    static func getDpAddressPath(_ mnemonic: [String], _ path:Int, _ chain:ChainType, _ newbip:Bool) -> String {
+    static func getDpAddressPath(_ mnemonic: [String], _ path:Int, _ chain:ChainType, _ customBipPath: Int) -> String {
         let masterKey = getMasterKeyFromWords(mnemonic)
-        if ((chain == ChainType.OKEX_MAIN) && newbip) {
-            let pKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 996, true), 0, true), 0, false), UInt32(path), false)
-            return WKey.generateAddressFromPriv("ex", pKey.raw)
-
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            let pKey = masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            return WKey.generateAddressFromPriv("inj", pKey.raw)
-            
-        } else {
-            return getHDKeyDpAddressWithPath(masterKey, path: path, chain: chain, newbip)
-        }
-    }
-    
-    static func getDpAddressFetchCustomPath(_ mnemonic: [String], _ path: UInt32, _ chain: ChainType, _ pathType: Int) -> String {
-        let masterKey = getMasterKeyFromWords(mnemonic)
-        if (pathType == 0) {
-            let childKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 118, true), 0, true), 0, false), path, false)
-            return WKey.getPubToDpAddress(childKey.publicKey.data.dataToHexString(), chain)
-            
-        } else if (pathType == 1) {
-            let childKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), path, false)
-            return WKey.getPubToDpAddress(childKey.publicKey.data.dataToHexString(), chain)
-            
-        } else if (pathType == 2) {
-            let childKey = cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), path, true), 0, false), 0, false)
-            return WKey.getPubToDpAddress(childKey.publicKey.data.dataToHexString(), chain)
-            
-        } else if (pathType == 3) {
-            let childKey = cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), path, false)
-            return WKey.getPubToDpAddress(childKey.publicKey.data.dataToHexString(), chain)
-        }
-        return ""
+        return getHDKeyDpAddressWithPath(masterKey, path, chain, customBipPath)
     }
     
     static func getPrivateRaw(_ mnemonic: [String], _ account: Account) -> Data {

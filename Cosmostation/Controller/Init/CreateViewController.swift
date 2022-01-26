@@ -131,20 +131,17 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
     func onUpdateView() {
         self.showWaittingAlert()
         DispatchQueue.global().async {
-            //secret toggle!!!
-            if (self.chainType! == ChainType.SECRET_MAIN) {
-                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, false)
+            if (self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.SECRET_MAIN || self.chainType == ChainType.LUM_MAIN) {
+                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, 1)
+            } else if (self.chainType == ChainType.OKEX_MAIN) {
+                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, 2)
             } else {
-                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, true)
+                self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, 0)
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.hideWaittingAlert()
-                var address = self.dpAddress
-                if (self.chainType == ChainType.OKEX_MAIN) {
-                    address = WKey.convertAddressOkexToEth(address!)
-                }
-                self.addressLabel.text = address
+                self.addressLabel.text = self.dpAddress
                 self.mnemonicView.backgroundColor = WUtils.getChainBg(self.chainType!)
                 for i in 0 ... self.mnemonicLabels.count - 1{
                     self.mnemonicLayers[i].layer.borderWidth = 1
@@ -224,9 +221,15 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
                 newAccount.account_from_mnemonic = true
                 newAccount.account_m_size = 24
                 newAccount.account_import_time = Date().millisecondsSince1970
-                if (chain == ChainType.KAVA_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.LUM_MAIN) {
-                    newAccount.account_new_bip44 = true
+                
+                if (chain == ChainType.KAVA_MAIN || chain == ChainType.SECRET_MAIN || chain == ChainType.LUM_MAIN) {
+                    newAccount.account_custom_path = 1
+                } else if (chain == ChainType.OKEX_MAIN) {
+                    newAccount.account_custom_path = 2
+                } else {
+                    newAccount.account_custom_path = 0
                 }
+                
                 newAccount.account_sort_order = 9999
                 insertResult = BaseData.instance.insertAccount(newAccount)
                 

@@ -59,10 +59,6 @@ class StepSendAmountViewController: BaseViewController, UITextFieldDelegate{
                 mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
                 mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
                 
-            } else if (pageHolderVC.chainType! == ChainType.SIF_MAIN) {
-                mDivideDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
-                
             } else {
                 mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
                 mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)

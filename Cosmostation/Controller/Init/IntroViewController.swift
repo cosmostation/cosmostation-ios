@@ -44,7 +44,7 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //update okex chain
-        BaseData.instance.upgradeAaccountAddressforOk()
+        BaseData.instance.upgradeAaccountAddressforPath()
         onCheckPassWordState()
 ////        //check for keyway udpate
 //        if (BaseData.instance.onCheckKeyWayUpdated() == false) {

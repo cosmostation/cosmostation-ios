@@ -62,12 +62,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             self.onFetchNodeInfo()
         }
         walletName.text = WUtils.getWalletName(account)
-        
-        var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        walletAddress.text = address
+        walletAddress.text = account!.account_address
         walletAddress.adjustsFontSizeToFitWidth = true
         cardAddress.backgroundColor = WUtils.getChainBg(chainType!)
         cardPush.backgroundColor = WUtils.getChainBg(chainType!)
@@ -92,17 +87,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
-        } else if (chainType == ChainType.KAVA_MAIN) {
-            chainImg.image = UIImage(named: "kavaImg")
-            if (account!.account_new_bip44) {
-                keyPath.text = KAVA_BASE_PATH.appending(account!.account_path)
-            } else {
-                keyPath.text = BASE_PATH.appending(account!.account_path)
-            }
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
         } else if (chainType == ChainType.IOV_MAIN) {
             chainImg.image = UIImage(named: "chainStarname")
             keyPath.text = IOV_BASE_PATH.appending(account!.account_path)
@@ -113,17 +97,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
         } else if (chainType == ChainType.BAND_MAIN) {
             chainImg.image = UIImage(named: "chainBandprotocal")
             keyPath.text = BAND_BASE_PATH.appending(account!.account_path)
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType == ChainType.SECRET_MAIN) {
-            chainImg.image = UIImage(named: "secretChainImg")
-            if (account!.account_new_bip44) {
-                keyPath.text = BASE_PATH.appending(account!.account_path)
-            } else {
-                keyPath.text = SECRET_BASE_PATH.appending(account!.account_path)
-            }
             cardPush.isHidden = true
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
@@ -142,14 +115,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
-        } else if (chainType == ChainType.OKEX_MAIN) {
-            chainImg.image = UIImage(named: "okexChainImg")
-            if (account!.account_new_bip44) { keyPath.text = "(Ethermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
-            else { keyPath.text = "(Tendermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
         } else if (chainType! == ChainType.PERSIS_MAIN) {
             chainImg.image = UIImage(named: "chainpersistence")
             keyPath.text = PERSIS_BASE_PATH.appending(account!.account_path)
@@ -160,21 +125,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
         } else if (chainType! == ChainType.SENTINEL_MAIN) {
             chainImg.image = UIImage(named: "chainsentinel")
             keyPath.text = BASE_PATH.appending(account!.account_path)
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
-        } else if (chainType! == ChainType.FETCH_MAIN) {
-            chainImg.image = UIImage(named: "chainfetchai")
-            if (account!.account_custom_path == 1) {
-                keyPath.text = ETH_NON_LEDGER_PATH.appending(String(account!.account_path))
-            } else if (account!.account_custom_path == 2) {
-                keyPath.text = ETH_LEDGER_LIVE_PATH_1.appending(String(account!.account_path)) + ETH_LEDGER_LIVE_PATH_2
-            } else if (account!.account_custom_path == 3) {
-                keyPath.text = ETH_LEDGER_LEGACY_PATH.appending(String(account!.account_path))
-            } else {
-                keyPath.text = BASE_PATH.appending(String(account!.account_path))
-            }
             cardPush.isHidden = true
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
@@ -298,17 +248,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
-        } else if (chainType == ChainType.LUM_MAIN) {
-            chainImg.image = UIImage(named: "chainLum")
-            if (account!.account_new_bip44) {
-                keyPath.text = LUM_BASE_PATH.appending(account!.account_path)
-            } else {
-                keyPath.text = BASE_PATH.appending(account!.account_path)
-            }
-            cardPush.isHidden = true
-            constraint2.priority = .defaultHigh
-            constraint1.priority = .defaultLow
-            
         } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
             chainImg.image = UIImage(named: "chainChihuahua")
             keyPath.text = BASE_PATH.appending(account!.account_path)
@@ -324,6 +263,51 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint1.priority = .defaultLow
             
         }
+        
+        else if (chainType == ChainType.KAVA_MAIN) {
+            chainImg.image = UIImage(named: "kavaImg")
+            if (account!.account_custom_path == 0) { keyPath.text = BASE_PATH.appending(account!.account_path) }
+            else { keyPath.text = KAVA_BASE_PATH.appending(account!.account_path) }
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
+       } else if (chainType == ChainType.SECRET_MAIN) {
+           chainImg.image = UIImage(named: "secretChainImg")
+           if (account!.account_custom_path == 0) { keyPath.text = BASE_PATH.appending(account!.account_path) }
+           else { keyPath.text = SECRET_BASE_PATH.appending(account!.account_path) }
+           cardPush.isHidden = true
+           constraint2.priority = .defaultHigh
+           constraint1.priority = .defaultLow
+           
+       } else if (chainType == ChainType.LUM_MAIN) {
+           chainImg.image = UIImage(named: "chainLumnetwork")
+           if (account!.account_custom_path == 0) { keyPath.text = BASE_PATH.appending(account!.account_path) }
+           else { keyPath.text = LUM_BASE_PATH.appending(account!.account_path) }
+           cardPush.isHidden = true
+           constraint2.priority = .defaultHigh
+           constraint1.priority = .defaultLow
+           
+       } else if (chainType! == ChainType.FETCH_MAIN) {
+           chainImg.image = UIImage(named: "chainfetchai")
+           if (account!.account_custom_path == 0) { keyPath.text = BASE_PATH.appending(account!.account_path) }
+           else if (account!.account_custom_path == 1) { keyPath.text = ETH_NON_LEDGER_PATH.appending(String(account!.account_path)) }
+           else if (account!.account_custom_path == 2) { keyPath.text = ETH_LEDGER_LIVE_PATH_1.appending(String(account!.account_path)) + ETH_LEDGER_LIVE_PATH_2 }
+           else { keyPath.text = ETH_LEDGER_LEGACY_PATH.appending(String(account!.account_path)) }
+           cardPush.isHidden = true
+           constraint2.priority = .defaultHigh
+           constraint1.priority = .defaultLow
+           
+       } else if (chainType == ChainType.OKEX_MAIN) {
+           chainImg.image = UIImage(named: "okexChainImg")
+           if (account!.account_custom_path == 0) { keyPath.text = "(Legacy Tendermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
+           else if (account!.account_custom_path == 1) { keyPath.text = "(Legacy Ethermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
+           else { keyPath.text = "(Ethereum Type) " + ETH_NON_LEDGER_PATH.appending(String(account!.account_path)) }
+           cardPush.isHidden = true
+           constraint2.priority = .defaultHigh
+           constraint1.priority = .defaultLow
+           
+       }
         
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -366,6 +350,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             pathTitle.isHidden = true
             keyPath.isHidden = true
             noKeyMsg.isHidden = true
+            if (chainType == ChainType.OKEX_MAIN) {
+                pathTitle.isHidden = false
+                noKeyMsg.isHidden = false
+                pathTitle.text = "Address Type"
+                if (account!.account_custom_path > 0) { noKeyMsg.text = "Ethereum Type Address" }
+                else { noKeyMsg.text = "Legacy Tendermint Type Address" }
+            }
             
         } else {
             actionBtn1.setTitle(NSLocalizedString("import_menmonic", comment: ""), for: .normal)
@@ -493,11 +484,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
     
     
     @IBAction func onClickQrCode(_ sender: Any) {
-        var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        self.shareAddress(address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
     }
     
     @IBAction func onClickRewardAddressChange(_ sender: UIButton) {

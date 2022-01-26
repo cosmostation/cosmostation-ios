@@ -97,11 +97,7 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.keyImg.tintColor = COLOR_DARK_GRAY
             }
             cell?.nameLabel.text = WUtils.getWalletName(account)
-            var address = account.account_address
-            if (userChain == ChainType.OKEX_MAIN) {
-                address = WKey.convertAddressOkexToEth(address)
-            }
-            cell?.address.text = address
+            cell?.address.text = account.account_address
             cell?.amount.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.amount.font, 0, 6)
             WUtils.setDenomTitle(userChain, cell!.amountDenom)
             return cell!

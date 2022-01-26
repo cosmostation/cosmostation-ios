@@ -83,7 +83,7 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             self.topKeyState.tintColor = WUtils.getChainColor(chainType)
         }
         
-        self.topDpAddress.text = account?.dpAddress(chainType)
+        self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true
         self.topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalAmount, bridgeDivideDecimal, topValue.font)
     }
@@ -112,11 +112,7 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     @objc func onClickActionShare() {
-        var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        self.shareAddress(address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {

@@ -92,7 +92,7 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
             self.topKeyState.tintColor = WUtils.getChainColor(chainType)
         }
         
-        self.topDpAddress.text = account?.dpAddress(chainType)
+        self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true
         self.topValue.attributedText = WUtils.dpUserCurrencyValue(poolDenom, totalAmount, poolDivideDecimal, topValue.font)
 

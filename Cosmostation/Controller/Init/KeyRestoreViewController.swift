@@ -63,7 +63,12 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
             return
         }
         
-        let publicKey = KeyFac.getPublicFromString(userInput!)
+        let publicKey = KeyFac.getPublicFromStringPrivateKey(userInput!)
+        if (chainType == ChainType.OKEX_MAIN) {
+            self.onSelectKeyTypeForOKex()
+            return
+        }
+        
         let address = WKey.getPubToDpAddress(publicKey.hexEncodedString(), chainType!)
         print("address ", address)
         
@@ -81,7 +86,49 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
     }
     
     
-    func onGenPkeyAccount(_ pKey: String, _ address: String) {
+    var okAddressType = 0;
+    func onSelectKeyTypeForOKex() {
+        let selectAlert = UIAlertController(title: NSLocalizedString("select_address_type_okex_title", comment: ""), message: "", preferredStyle: .alert)
+        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("address_type_okex_old", comment: ""), style: .default, handler: { _ in
+            self.okAddressType = 0
+            self.onCheckOecAddressType()
+        }))
+        selectAlert.addAction(UIAlertAction(title: NSLocalizedString("address_type_okex_new", comment: ""), style: .default, handler: { _ in
+            self.okAddressType = 1
+            self.onCheckOecAddressType()
+        }))
+        self.present(selectAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            selectAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func onCheckOecAddressType () {
+        let privateKeyData = KeyFac.getPrivateFromString(userInput!)
+        var okAddress = ""
+        if (okAddressType == 0) {
+            okAddress = WKey.generateTenderAddressFromPrivateKey(privateKeyData)
+        } else {
+            okAddress = WKey.generateEthAddressFromPrivateKey(privateKeyData)
+        }
+        print("okAddress ", okAddress)
+        
+        if (okAddress.isEmpty) {
+            self.onShowToast(NSLocalizedString("error_invalid_private_Key", comment: ""))
+            return
+        }
+        
+        if let existAccount = BaseData.instance.selectExistAccount(okAddress, chainType) {
+            if (existAccount.account_has_private == true) {
+                self.onShowToast(NSLocalizedString("error_duple_address", comment: ""))
+                return
+            }
+        }
+        self.onCheckPassword()
+    }
+    
+    
+    func onGenPkeyAccount(_ pKey: String, _ address: String, _ customBipPath: Int) {
         self.showWaittingAlert()
         DispatchQueue.global().async {
             let newAccount = Account.init(isNew: true)
@@ -96,9 +143,9 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
                 newAccount.account_from_mnemonic = false
                 newAccount.account_m_size = -1
                 newAccount.account_import_time = Date().millisecondsSince1970
-                newAccount.account_new_bip44 = false
+//                newAccount.account_new_bip44 = false
                 newAccount.account_sort_order = 9999
-                newAccount.account_custom_path = -1
+                newAccount.account_custom_path = Int64(customBipPath)
                 
                 insertResult = BaseData.instance.insertAccount(newAccount)
                 if (insertResult < 0) {
@@ -125,7 +172,7 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
         }
     }
     
-    func onOverridePkeyAccount(_ pKey: String, _ account: Account) {
+    func onOverridePkeyAccount(_ pKey: String, _ account: Account, _ customBipPath: Int) {
         self.showWaittingAlert()
         DispatchQueue.global().async {
             var updateResult :Int64 = -1
@@ -135,8 +182,8 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
                 account.account_has_private = true
                 account.account_from_mnemonic = false
                 account.account_m_size = -1
-                account.account_new_bip44 = false
-                account.account_custom_path = -1
+//                account.account_new_bip44 = false
+                account.account_custom_path = Int64(customBipPath)
                 
                 updateResult = BaseData.instance.overrideAccount(account)
                 if (updateResult < 0) {
@@ -179,13 +226,29 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            let publicKey = KeyFac.getPublicFromString(userInput!)
-            let address = WKey.getPubToDpAddress(publicKey.hexEncodedString(), chainType!)
-            
-            if let existAccount = BaseData.instance.selectExistAccount(address, chainType) {
-                self.onOverridePkeyAccount(userInput!, existAccount)
+            if (chainType == ChainType.OKEX_MAIN) {
+                let privateKeyData = KeyFac.getPrivateFromString(userInput!)
+                var okAddress = ""
+                if (okAddressType == 0) {
+                    okAddress = WKey.generateTenderAddressFromPrivateKey(privateKeyData)
+                } else {
+                    okAddress = WKey.generateEthAddressFromPrivateKey(privateKeyData)
+                }
+                if let existAccount = BaseData.instance.selectExistAccount(okAddress, chainType) {
+                    self.onOverridePkeyAccount(userInput!, existAccount, okAddressType)
+                } else {
+                    self.onGenPkeyAccount(userInput!, okAddress, okAddressType)
+                }
+                
             } else {
-                self.onGenPkeyAccount(userInput!, address)
+                let publicKey = KeyFac.getPublicFromStringPrivateKey(userInput!)
+                let address = WKey.getPubToDpAddress(publicKey.hexEncodedString(), chainType!)
+
+                if let existAccount = BaseData.instance.selectExistAccount(address, chainType) {
+                    self.onOverridePkeyAccount(userInput!, existAccount, -1)
+                } else {
+                    self.onGenPkeyAccount(userInput!, address, -1)
+                }
             }
         }
     }

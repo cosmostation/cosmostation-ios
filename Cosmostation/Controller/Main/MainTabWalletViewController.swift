@@ -34,12 +34,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        
+
         self.walletTableView.delegate = self
         self.walletTableView.dataSource = self
         self.walletTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.walletTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
-        self.walletTableView.register(UINib(nibName: "WalletOkAddressCell", bundle: nil), forCellReuseIdentifier: "WalletOkAddressCell")
         self.walletTableView.register(UINib(nibName: "WalletCosmosCell", bundle: nil), forCellReuseIdentifier: "WalletCosmosCell")
         self.walletTableView.register(UINib(nibName: "WalletIrisCell", bundle: nil), forCellReuseIdentifier: "WalletIrisCell")
         self.walletTableView.register(UINib(nibName: "WalletBnbCell", bundle: nil), forCellReuseIdentifier: "WalletBnbCell")
@@ -127,7 +126,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
             self.totalKeyState.tintColor = WUtils.getChainColor(chainType)
         }
-        self.totalDpAddress.text = account?.dpAddress(chainType)
+        self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
         self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
         
@@ -1462,11 +1461,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     
     @objc func onClickActionShare() {
-        var address = account!.account_address
-        if (chainType == ChainType.OKEX_MAIN) {
-            address = WKey.convertAddressOkexToEth(address)
-        }
-        self.shareAddress(address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
     }
     
     func onClickValidatorList() {
@@ -1550,6 +1545,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickOkDeposit() {
+        self.onShowToast("Temporary Disable")
+        return
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
@@ -1568,6 +1565,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickOkWithdraw() {
+        self.onShowToast("Temporary Disable")
+        return
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
@@ -1594,6 +1593,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     //no need yet
     func onClickOkVoteValMode() {
+        self.onShowToast("Temporary Disable")
+        return
         let okVoteTypeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         okVoteTypeAlert.addAction(UIAlertAction(title: NSLocalizedString("str_vote_direct", comment: ""), style: .default, handler: { _ in
             self.onClickOkVoteVal()
@@ -2249,6 +2250,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickMainSend() {
+        if (chainType == ChainType.OKEX_MAIN) {
+            self.onShowToast("Temporary Disable")
+            return
+        }
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return

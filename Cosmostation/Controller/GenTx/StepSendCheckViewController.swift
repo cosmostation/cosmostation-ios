@@ -127,9 +127,6 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
         WUtils.showCoinDp(toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel, chainType!)
         
         mToAddressLabel.text = pageHolderVC.mToSendRecipientAddress
-        if (chainType == ChainType.OKEX_MAIN) {
-            mToAddressLabel.text = WKey.convertAddressOkexToEth(pageHolderVC.mToSendRecipientAddress!)
-        }
         mToAddressLabel.adjustsFontSizeToFitWidth = true
         mMemoLabel.text = pageHolderVC.mMemo
         
@@ -285,26 +282,27 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                     let params = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
                     print("params ", params)
                     let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-                    request.responseJSON { response in
-                        var txResult = [String:Any]()
-                        switch response.result {
-                        case .success(let res):
-                            print("Send ", res)
-                            if let result = res as? [String : Any]  {
-                                txResult = result
-                            }
-                        case .failure(let error):
-                            print("send error ", error)
-                            if (response.response?.statusCode == 500) {
-                                txResult["net_error"] = 500
-                            }
-                        }
-                        if (self.waitAlert != nil) {
-                            self.waitAlert?.dismiss(animated: true, completion: {
-                                self.onStartTxDetail(txResult)
-                            })
-                        }
-                    }
+                    print("request ", request.request?.url)
+//                    request.responseJSON { response in
+//                        var txResult = [String:Any]()
+//                        switch response.result {
+//                        case .success(let res):
+//                            print("Send ", res)
+//                            if let result = res as? [String : Any]  {
+//                                txResult = result
+//                            }
+//                        case .failure(let error):
+//                            print("send error ", error)
+//                            if (response.response?.statusCode == 500) {
+//                                txResult["net_error"] = 500
+//                            }
+//                        }
+//                        if (self.waitAlert != nil) {
+//                            self.waitAlert?.dismiss(animated: true, completion: {
+//                                self.onStartTxDetail(txResult)
+//                            })
+//                        }
+//                    }
 
                 } catch {
                     print(error)

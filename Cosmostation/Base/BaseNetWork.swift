@@ -195,9 +195,10 @@ class BaseNetWork {
         return ""
     }
     
-    static func historyOkUrl(_ chain: ChainType?) -> String {
+    static func historyOkUrl(_ chain: ChainType?, _ address: String) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
-            return OKEX_URL + "transactions"
+//            return OKEX_URL + "transactions"
+            return OEC_API + "okexchain/addresses/" + address + "/transactions/condition?limit=20"
         }
         return ""
     }

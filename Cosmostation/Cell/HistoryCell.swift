@@ -58,11 +58,11 @@ class HistoryCell: UITableViewCell {
         txResultLabel.isHidden = true
     }
     
-    func bindHistoryOkView(_ history: OkHistory.DataDetail, _ address: String) {
-        txTypeLabel.text = WUtils.okHistoryTitle(history)
-        txTimeLabel.text = WUtils.longTimetoString(history.timestamp! * 1000)
-        txTimeGapLabel.text = WUtils.timeGap2(input: history.timestamp! * 1000)
-        txBlockLabel.text = history.txhash
+    func bindHistoryOkView(_ history: OKHistoryHit, _ address: String) {
+        txTypeLabel.text = history.transactionDataType
+        txTimeLabel.text = WUtils.longTimetoString(history.blocktime!)
+        txTimeGapLabel.text = WUtils.timeGap2(input: history.blocktime!)
+        txBlockLabel.text = history.hash
     }
     
 }

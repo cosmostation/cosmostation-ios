@@ -460,24 +460,6 @@ public class WUtils {
         return resultMsg
     }
     
-    static func okHistoryTitle(_ okHistory: OkHistory.DataDetail) -> String {
-        var resultMsg = NSLocalizedString("tx_known", comment: "")
-        if (okHistory.type! == OK_TX_TYPE_TRANSFER) {
-            if (okHistory.side! == OK_TX_TYPE_SIDE_SEND) {
-                resultMsg = NSLocalizedString("tx_send", comment: "")
-            } else {
-                resultMsg = NSLocalizedString("tx_receive", comment: "")
-            }
-        } else if (okHistory.type! == OK_TX_TYPE_TRANSFER) {
-            resultMsg = NSLocalizedString("tx_new_order", comment: "")
-            
-        } else if (okHistory.type! == OK_TX_TYPE_CANCEL_ORDER) {
-            resultMsg = NSLocalizedString("tx_cancel_order", comment: "")
-        }
-        return resultMsg
-    }
-    
-    
     static func proposalType(_ type:String) -> String {
         if (type == IRIS_PROPOAL_TYPE_BasicProposal) {
             return NSLocalizedString("proposal_type_basic", comment: "")
@@ -3474,6 +3456,10 @@ public class WUtils {
             }
             
         }
+        
+        else if (chain == ChainType.OKEX_MAIN) {
+            return NSDecimalNumber.init(string: OK_GAS_RATE_AVERAGE)
+        }
         return NSDecimalNumber.zero
     }
     
@@ -4565,7 +4551,6 @@ public class WUtils {
         else if (address?.starts(with: "star1") == true && chain == ChainType.IOV_MAIN) { return true }
         else if (address?.starts(with: "band1") == true && chain == ChainType.BAND_MAIN) { return true }
         else if (address?.starts(with: "secret1") == true && chain == ChainType.SECRET_MAIN) { return true }
-        else if (address?.starts(with: "ex1") == true && chain == ChainType.OKEX_MAIN) { return true }
         else if (address?.starts(with: "certik1") == true && chain == ChainType.CERTIK_MAIN) { return true }
         else if (address?.starts(with: "akash1") == true && chain == ChainType.AKASH_MAIN) { return true }
         else if (address?.starts(with: "persistence1") == true && chain == ChainType.PERSIS_MAIN) { return true }
@@ -4598,7 +4583,11 @@ public class WUtils {
     
     static func getChainsFromAddress(_ address: String?) -> Array<ChainType>? {
         if (address?.starts(with: "0x") == true) {
-            return [ChainType.OKEX_MAIN]
+            if (WKey.isValidEthAddress(address!)) {
+                return [ChainType.OKEX_MAIN]
+            } else {
+                return nil
+            }
         }
         
         if (!WKey.isValidateBech32(address ?? "")) { return nil }
@@ -4609,7 +4598,6 @@ public class WUtils {
         else if (address?.starts(with: "star1") == true) { return [ChainType.IOV_MAIN] }
         else if (address?.starts(with: "band1") == true) { return [ChainType.BAND_MAIN] }
         else if (address?.starts(with: "secret1") == true) { return [ChainType.SECRET_MAIN] }
-        else if (address?.starts(with: "ex1") == true) { return [ChainType.OKEX_MAIN] }
         else if (address?.starts(with: "certik1") == true) { return [ChainType.CERTIK_MAIN] }
         else if (address?.starts(with: "akash1") == true) { return [ChainType.AKASH_MAIN] }
         else if (address?.starts(with: "persistence1") == true) { return [ChainType.PERSIS_MAIN] }
