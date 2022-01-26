@@ -133,7 +133,7 @@ public struct Param {
         if let rawQuorum = params?.gov_tallying?.tally_params?.quorum {
             return NSDecimalNumber.init(string: rawQuorum)
         }
-        if let rawQuorum = params?.gov_tallying?.default_tally?.quorum {
+        if let rawQuorum = params?.gov_tallying?.tally_params?.default_tally?.quorum {
             return NSDecimalNumber.init(string: rawQuorum)
         }
         return NSDecimalNumber.zero
@@ -493,7 +493,6 @@ public struct SupplyList {
 
 public struct GovTallying {
     var tally_params: TallyParams?
-    var default_tally: DefaultTally?
     var veto: String?
     var quorum: String?
     var threshold: String?
@@ -501,9 +500,6 @@ public struct GovTallying {
     init(_ dictionary: NSDictionary?) {
         if let rawTallyParams = dictionary?["tally_params"] as? NSDictionary {
             self.tally_params = TallyParams.init(rawTallyParams)
-        }
-        if let rawDefaultTally = dictionary?["DefaultTally"] as? NSDictionary {
-            self.default_tally = DefaultTally.init(rawDefaultTally)
         }
         self.veto = dictionary?["veto"] as? String
         self.quorum = dictionary?["quorum"] as? String
@@ -514,11 +510,15 @@ public struct GovTallying {
         var quorum: String?
         var threshold: String?
         var veto_threshold: String?
+        var default_tally: DefaultTally?
         
         init(_ dictionary: NSDictionary?) {
             self.quorum = dictionary?["quorum"] as? String
             self.threshold = dictionary?["threshold"] as? String
             self.veto_threshold = dictionary?["veto_threshold"] as? String
+            if let rawDefaultTally = dictionary?["default_tally"] as? NSDictionary {
+                self.default_tally = DefaultTally.init(rawDefaultTally)
+            }
         }
     }
     

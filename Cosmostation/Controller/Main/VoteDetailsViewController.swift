@@ -22,7 +22,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     var proposalId: String?
     var mMintscanProposalDetail: MintscanProposalDetail?
     var mMyVote_gRPC: Cosmos_Gov_V1beta1_Vote?
-    var mCertikMyVote_gRPC: Shentu_Gov_V1alpha1_Vote?
+    var mCertikMyVote: CertikVote?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -147,7 +147,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.onUpdateCards(chainType, mMintscanProposalDetail!)
         }
         if (chainType == ChainType.CERTIK_MAIN) {
-            cell?.onCheckMyVote_gRPC(mCertikMyVote_gRPC?.deposit.option)
+            cell?.onCheckMyVote_gRPC(mCertikMyVote?.getMyOption())
         } else {
             cell?.onCheckMyVote_gRPC(mMyVote_gRPC?.option)
         }
@@ -158,10 +158,10 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         mFetchCnt = 2
         onFetchMintscanProposl(proposalId!)
         if (chainType == ChainType.CERTIK_MAIN) {
-            onFetchCertikProposalMyVote_gRPC(self.proposalId!, self.account!.account_address)
+            onFetchCertikMyVote(self.proposalId!, self.account!.account_address)
             
         } else {
-            onFetchProposalMyVote_gRPC(self.proposalId!, self.account!.account_address)
+            onFetchMyVote_gRPC(self.proposalId!, self.account!.account_address)
         }
     }
     
@@ -191,7 +191,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func onFetchProposalMyVote_gRPC(_ proposal_id: String, _ address: String) {
+    func onFetchMyVote_gRPC(_ proposal_id: String, _ address: String) {
         DispatchQueue.global().async {
             do {
                 DispatchQueue.main.async(execute: { self.onFetchFinished() });
@@ -211,23 +211,21 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func onFetchCertikProposalMyVote_gRPC(_ proposal_id: String, _ address: String) {
-        DispatchQueue.global().async {
-            do {
-                DispatchQueue.main.async(execute: { self.onFetchFinished() });
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                defer { try! channel.close().wait() }
-
-                let req = Shentu_Gov_V1alpha1_QueryVoteRequest.with { $0.voter = address; $0.proposalID = UInt64(proposal_id)! }
-                if let response = try? Shentu_Gov_V1alpha1_QueryClient(channel: channel).vote(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-                    self.mCertikMyVote_gRPC = response.vote
+    func onFetchCertikMyVote(_ proposal_id: String, _ address: String) {
+        let request = Alamofire.request(BaseNetWork.myVoteUrl(self.chainType!, proposal_id, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchCertikProposalMyVote ", request.request?.url)
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                print("res ", res)
+                if let data = res as? NSDictionary, let rawVote = data.object(forKey: "vote") as? NSDictionary {
+                    self.mCertikMyVote = CertikVote.init(rawVote)
                 }
-                try channel.close().wait()
                 
-            } catch {
-                print("onFetchCertikProposalMyVote_gRPC failed: \(error)")
+            case .failure(let error):
+                print("onFetchCertikProposalMyVote ", error)
             }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+            self.onFetchFinished()
         }
     }
 }

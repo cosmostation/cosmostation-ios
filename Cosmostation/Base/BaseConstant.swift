@@ -54,6 +54,7 @@ let IOV_API                             = "https://api-iov.cosmostation.io/";
 
 let BAND_API                            = "https://api-band.cosmostation.io/";
 
+let CERTIK_URL                          = "https://lcd-certik.cosmostation.io/";
 let CERTIK_API                          = "https://api-certik.cosmostation.io/";
 
 let SECRET_API                          = "https://api-secret.cosmostation.io/";

@@ -59,6 +59,14 @@ class BaseNetWork {
         return ""
     }
     
+    //handle certick proto parisng error
+    static func myVoteUrl(_ chain: ChainType, _ proposalId: String,  _ address: String) -> String {
+        if (chain == ChainType.CERTIK_MAIN) {
+            return CERTIK_URL + "shentu/gov/v1alpha1/proposals/" + proposalId + "/votes/" + address
+        }
+        return ""
+    }
+    
     
     static func txUrl(_ chain: ChainType?, _ txhash: String) -> String {
         if (chain == ChainType.BINANCE_MAIN) {
