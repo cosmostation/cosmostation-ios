@@ -3474,6 +3474,10 @@ public class WUtils {
             }
             
         }
+        
+        else if (chain == ChainType.OKEX_MAIN) {
+            return NSDecimalNumber.init(string: OK_GAS_RATE_AVERAGE)
+        }
         return NSDecimalNumber.zero
     }
     

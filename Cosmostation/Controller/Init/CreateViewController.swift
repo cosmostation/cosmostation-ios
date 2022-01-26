@@ -131,7 +131,7 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
     func onUpdateView() {
         self.showWaittingAlert()
         DispatchQueue.global().async {
-            if (self.chainType == ChainType.SECRET_MAIN || self.chainType == ChainType.SECRET_MAIN || self.chainType == ChainType.SECRET_MAIN) {
+            if (self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.SECRET_MAIN || self.chainType == ChainType.LUM_MAIN) {
                 self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, 1)
             } else if (self.chainType == ChainType.OKEX_MAIN) {
                 self.dpAddress = WKey.getDpAddressPath(self.mnemonicWords!, 0, self.chainType!, 2)
@@ -221,11 +221,13 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
                 newAccount.account_from_mnemonic = true
                 newAccount.account_m_size = 24
                 newAccount.account_import_time = Date().millisecondsSince1970
-                if (chain == ChainType.KAVA_MAIN || chain == ChainType.OKEX_MAIN || chain == ChainType.LUM_MAIN) {
-                    newAccount.account_new_bip44 = true
-                }
-                if (chain == ChainType.OKEX_MAIN) {
+                
+                if (chain == ChainType.KAVA_MAIN || chain == ChainType.SECRET_MAIN || chain == ChainType.LUM_MAIN) {
+                    newAccount.account_custom_path = 1
+                } else if (chain == ChainType.OKEX_MAIN) {
                     newAccount.account_custom_path = 2
+                } else {
+                    newAccount.account_custom_path = 0
                 }
                 
                 newAccount.account_sort_order = 9999
