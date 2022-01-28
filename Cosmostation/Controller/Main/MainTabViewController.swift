@@ -1325,6 +1325,22 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
+    func onFetchCw20Tokens(_ chainId: String) {
+        print("onFetchCw20Tokens ", chainId, "   ", BaseNetWork.mintscanCw20(self.mChainType))
+        let request = Alamofire.request(BaseNetWork.mintscanCw20(self.mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                print("res ", res)
+            
+            case .failure(let error):
+                print("onFetchIbcTokens ", error)
+            }
+            self.onFetchFinished()
+        }
+        
+    }
+    
     
     func onShowToast(_ text:String) {
         var style = ToastStyle()
