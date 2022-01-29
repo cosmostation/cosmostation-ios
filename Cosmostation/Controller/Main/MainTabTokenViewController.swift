@@ -189,18 +189,18 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        if (section == SECTION_NATIVE_GRPC) { view.headerTitleLabel.text = "Native Tokens"; view.headerCntLabel.text = String(self.mNative_gRPC.count) }
-        else if (section == SECTION_IBC_AUTHED_GRPC) { view.headerTitleLabel.text = "IBC Tokens"; view.headerCntLabel.text = String(self.mIbcAuthed_gRPC.count) }
-        else if (section == SECTION_POOL_TOKEN_GRPC) { view.headerTitleLabel.text = "Pool Tokens"; view.headerCntLabel.text = String(self.mPoolToken_gRPC.count)}
-        else if (section == SECTION_SIF_ETHER_GRPC) { view.headerTitleLabel.text = "Ether Bridged Tokens"; view.headerCntLabel.text = String(self.mSifEther_gRPC.count) }
-        else if (section == SECTION_KAVA_BEP2_GRPC) { view.headerTitleLabel.text = "BEP2 Tokens"; view.headerCntLabel.text = String(self.mKavaBep2_gRPC.count)}
-        else if (section == SECTION_ETC_GRPC) { view.headerTitleLabel.text = "Etc Tokens"; view.headerCntLabel.text = String(self.mEtc_gRPC.count) }
-        else if (section == SECTION_IBC_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown IBC Tokens"; view.headerCntLabel.text = String(self.mIbcUnknown_gRPC.count) }
-        else if (section == SECTION_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown Tokens"; view.headerCntLabel.text = String(self.mUnKnown_gRPC.count) }
+        if (section == SECTION_NATIVE_GRPC) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative_gRPC.count) }
+        else if (section == SECTION_IBC_AUTHED_GRPC) { view.headerTitleLabel.text = "IBC Coins"; view.headerCntLabel.text = String(self.mIbcAuthed_gRPC.count) }
+        else if (section == SECTION_POOL_TOKEN_GRPC) { view.headerTitleLabel.text = "Pool Coins"; view.headerCntLabel.text = String(self.mPoolToken_gRPC.count)}
+        else if (section == SECTION_SIF_ETHER_GRPC) { view.headerTitleLabel.text = "Ether Bridged Coins"; view.headerCntLabel.text = String(self.mSifEther_gRPC.count) }
+        else if (section == SECTION_KAVA_BEP2_GRPC) { view.headerTitleLabel.text = "BEP2 Coins"; view.headerCntLabel.text = String(self.mKavaBep2_gRPC.count)}
+        else if (section == SECTION_ETC_GRPC) { view.headerTitleLabel.text = "Etc Coins"; view.headerCntLabel.text = String(self.mEtc_gRPC.count) }
+        else if (section == SECTION_IBC_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown IBC Coins"; view.headerCntLabel.text = String(self.mIbcUnknown_gRPC.count) }
+        else if (section == SECTION_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown Coins"; view.headerCntLabel.text = String(self.mUnKnown_gRPC.count) }
         
-        else if (section == SECTION_NATIVE) { view.headerTitleLabel.text = "Native Tokens"; view.headerCntLabel.text = String(self.mNative.count) }
-        else if (section == SECTION_ETC) { view.headerTitleLabel.text = "Etc Tokens"; view.headerCntLabel.text = String(self.mEtc.count) }
-        else if (section == SECTION_UNKNOWN) { view.headerTitleLabel.text = "Unknown Tokens"; view.headerCntLabel.text = String(self.mUnKnown.count) }
+        else if (section == SECTION_NATIVE) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative.count) }
+        else if (section == SECTION_ETC) { view.headerTitleLabel.text = "Etc Coins"; view.headerCntLabel.text = String(self.mEtc.count) }
+        else if (section == SECTION_UNKNOWN) { view.headerTitleLabel.text = "Unknown Coins"; view.headerCntLabel.text = String(self.mUnKnown.count) }
         else { view.headerTitleLabel.text = ""; view.headerCntLabel.text = "0" }
         return view
     }
@@ -361,7 +361,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "ATOM"
             cell?.tokenSymbol.textColor = COLOR_ATOM
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Cosmos Staking Token"
+            cell?.tokenDescription.text = "Cosmos Staking Coin"
             
             let allAtom = WUtils.getAllMainAsset(COSMOS_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allAtom.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -372,7 +372,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "IRIS"
             cell?.tokenSymbol.textColor = COLOR_IRIS
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Iris Staking Token"
+            cell?.tokenDescription.text = "Iris Staking Coin"
             
             let allIris = WUtils.getAllMainAsset(IRIS_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allIris.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -383,7 +383,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "AKT"
             cell?.tokenSymbol.textColor = COLOR_AKASH
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Akash Staking Token"
+            cell?.tokenDescription.text = "Akash Staking Coin"
             
             let allAkt = WUtils.getAllMainAsset(AKASH_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allAkt.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -394,7 +394,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "XPRT"
             cell?.tokenSymbol.textColor = COLOR_PERSIS
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Persistence Staking Token"
+            cell?.tokenDescription.text = "Persistence Staking Coin"
             
             let allPersis = WUtils.getAllMainAsset(PERSIS_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allPersis.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -405,7 +405,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "CRO"
             cell?.tokenSymbol.textColor = COLOR_CRYPTO
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Crypto.org Staking Token"
+            cell?.tokenDescription.text = "Crypto.org Staking Coin"
             
             let allCro = WUtils.getAllMainAsset(CRYPTO_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCro.stringValue, cell!.tokenAmount.font, 8, 6)
@@ -416,7 +416,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "DVPN"
             cell?.tokenSymbol.textColor = COLOR_SENTINEL
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Sentinel Staking Token"
+            cell?.tokenDescription.text = "Sentinel Staking Coin"
             
             let allDvpn = WUtils.getAllMainAsset(SENTINEL_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allDvpn.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -427,7 +427,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "OSMO"
             cell?.tokenSymbol.textColor = COLOR_OSMOSIS
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Osmosis Staking Token"
+            cell?.tokenDescription.text = "Osmosis Staking Coin"
             
             let allOsmos = WUtils.getAllMainAsset(OSMOSIS_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allOsmos.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -438,7 +438,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "ION"
             cell?.tokenSymbol.textColor = COLOR_ION
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Ion Token"
+            cell?.tokenDescription.text = "Ion Coin"
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OSMOSIS_ION_DENOM, BaseData.instance.getAvailableAmount_gRPC(OSMOSIS_ION_DENOM), 6, cell!.tokenValue.font)
             
@@ -447,7 +447,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "IOV"
             cell?.tokenSymbol.textColor = COLOR_IOV
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Starname Staking Token"
+            cell?.tokenDescription.text = "Starname Staking Coin"
             
             let allIov = WUtils.getAllMainAsset(IOV_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allIov.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -458,7 +458,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "ROWAN"
             cell?.tokenSymbol.textColor = COLOR_SIF
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Sifchain Staking Token"
+            cell?.tokenDescription.text = "Sifchain Staking Coin"
             
             let allSif = WUtils.getAllMainAsset(SIF_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allSif.stringValue, cell!.tokenAmount.font, 18, 6)
@@ -469,7 +469,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "ATOLO"
             cell?.tokenSymbol.textColor = COLOR_RIZON
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Rizon Staking Token"
+            cell?.tokenDescription.text = "Rizon Staking Coin"
             
             let allCro = WUtils.getAllMainAsset(RIZON_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCro.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -480,7 +480,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "ALTG"
             cell?.tokenSymbol.textColor = COLOR_ALTHEA
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Althea Staking Token"
+            cell?.tokenDescription.text = "Althea Staking Coin"
             
             let allAlthea = WUtils.getAllMainAsset(ALTHEA_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allAlthea.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -491,7 +491,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "MED"
             cell?.tokenSymbol.textColor = COLOR_MEDI
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Medibloc Staking Token"
+            cell?.tokenDescription.text = "Medibloc Staking Coin"
 
             let allMed = WUtils.getAllMainAsset(MEDI_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allMed.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -502,7 +502,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "CTK"
             cell?.tokenSymbol.textColor = COLOR_CERTIK
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Certik Staking Token"
+            cell?.tokenDescription.text = "Certik Staking Coin"
 
             let allCtk = WUtils.getAllMainAsset(CERTIK_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCtk.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -513,7 +513,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "UMEE"
             cell?.tokenSymbol.textColor = COLOR_UMEE
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Umee Staking Token"
+            cell?.tokenDescription.text = "Umee Staking Coin"
             
             let allUmee = WUtils.getAllMainAsset(UMEE_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allUmee.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -524,7 +524,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "AXL"
             cell?.tokenSymbol.textColor = COLOR_AXELAR
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Axelar Staking Token"
+            cell?.tokenDescription.text = "Axelar Staking Coin"
             
             let allAlx = WUtils.getAllMainAsset(AXELAR_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allAlx.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -535,7 +535,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "NGM"
             cell?.tokenSymbol.textColor = COLOR_EMONEY
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "E-Money Staking Token"
+            cell?.tokenDescription.text = "E-Money Staking Coin"
             
             let allNgm = WUtils.getAllMainAsset(EMONEY_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allNgm.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -557,7 +557,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "FET"
             cell?.tokenSymbol.textColor = COLOR_FETCH
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Fetch.ai Staking Token"
+            cell?.tokenDescription.text = "Fetch.ai Staking Coin"
             
             let allFet = WUtils.getAllMainAsset(FETCH_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allFet.stringValue, cell!.tokenAmount.font, 18, 6)
@@ -568,7 +568,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "BAND"
             cell?.tokenSymbol.textColor = COLOR_BAND
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Band Staking Token"
+            cell?.tokenDescription.text = "Band Staking Coin"
             
             let allBand = WUtils.getAllMainAsset(BAND_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBand.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -579,7 +579,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "JUNO"
             cell?.tokenSymbol.textColor = COLOR_JUNO
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Juno Staking Token"
+            cell?.tokenDescription.text = "Juno Staking Coin"
             
             let alljuno = WUtils.getAllMainAsset(JUNO_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(alljuno.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -590,7 +590,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "REGEN"
             cell?.tokenSymbol.textColor = COLOR_REGEN
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Regen Staking Token"
+            cell?.tokenDescription.text = "Regen Staking Coin"
             
             let allRegen = WUtils.getAllMainAsset(REGNE_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allRegen.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -601,7 +601,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "BCNA"
             cell?.tokenSymbol.textColor = COLOR_BITCANNA
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Bitcanna Staking Token"
+            cell?.tokenDescription.text = "Bitcanna Staking Coin"
             
             let allBnca = WUtils.getAllMainAsset(BITCANA_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBnca.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -612,7 +612,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "GRAVITON"
             cell?.tokenSymbol.textColor = COLOR_GRAVITY_BRIDGE
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "G-Bridge Staking Token"
+            cell?.tokenDescription.text = "G-Bridge Staking Coin"
             
             let allGrav = WUtils.getAllMainAsset(GRAVITY_BRIDGE_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allGrav.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -623,7 +623,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "STARS"
             cell?.tokenSymbol.textColor = COLOR_STARGAZE
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Stargaze Staking Token"
+            cell?.tokenDescription.text = "Stargaze Staking Coin"
             
             let allStars = WUtils.getAllMainAsset(STARGAZE_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allStars.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -634,7 +634,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "XKI"
             cell?.tokenSymbol.textColor = COLOR_KI
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "KiChain Staking Token"
+            cell?.tokenDescription.text = "KiChain Staking Coin"
             
             let allKi = WUtils.getAllMainAsset(KI_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allKi.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -645,7 +645,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "CMDX"
             cell?.tokenSymbol.textColor = COLOR_COMDEX
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Comdex Staking Token"
+            cell?.tokenDescription.text = "Comdex Staking Coin"
             
             let allCmdx = WUtils.getAllMainAsset(COMDEX_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCmdx.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -656,7 +656,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "SCRT"
             cell?.tokenSymbol.textColor = COLOR_SECRET
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Secret Staking Token"
+            cell?.tokenDescription.text = "Secret Staking Coin"
             
             let allSecret = WUtils.getAllMainAsset(SECRET_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allSecret.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -667,7 +667,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "INJ"
             cell?.tokenSymbol.textColor = COLOR_INJECTIVE
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Injective Staking Token"
+            cell?.tokenDescription.text = "Injective Staking Coin"
             
             let allInj = WUtils.getAllMainAsset(INJECTIVE_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allInj.stringValue, cell!.tokenAmount.font, 18, 6)
@@ -678,7 +678,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "BTSG"
             cell?.tokenSymbol.textColor = COLOR_BITSONG
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Bitsong Staking Token"
+            cell?.tokenDescription.text = "Bitsong Staking Coin"
             
             let allBtsg = WUtils.getAllMainAsset(BITSONG_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBtsg.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -689,7 +689,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "DSM"
             cell?.tokenSymbol.textColor = COLOR_DESMOS
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Desmos Staking Token"
+            cell?.tokenDescription.text = "Desmos Staking Coin"
             
             let allDsm = WUtils.getAllMainAsset(DESMOS_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allDsm.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -700,7 +700,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "LUM"
             cell?.tokenSymbol.textColor = COLOR_LUM
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Lum Network Staking Token"
+            cell?.tokenDescription.text = "Lum Network Staking Coin"
             
             let allLum = WUtils.getAllMainAsset(LUM_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allLum.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -711,7 +711,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "HUAHUA"
             cell?.tokenSymbol.textColor = COLOR_CHIHUAHUA
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Chihuahua Staking Token"
+            cell?.tokenDescription.text = "Chihuahua Staking Coin"
             
             let allHuahua = WUtils.getAllMainAsset(CHIHUAHUA_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allHuahua.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -722,7 +722,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "KAVA"
             cell?.tokenSymbol.textColor = COLOR_KAVA
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Kava Staking Token"
+            cell?.tokenDescription.text = "Kava Staking Coin"
             
             let totalKava = WUtils.getAllMainAsset(KAVA_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalKava.stringValue, cell!.tokenAmount.font!, 6, 6)
@@ -733,7 +733,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "HARD"
             cell?.tokenSymbol.textColor = COLOR_HARD
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "HardPool Gov. Token"
+            cell?.tokenDescription.text = "HardPool Gov. Coin"
             
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
@@ -755,7 +755,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = KAVA_SWAP_DENOM.uppercased()
             cell?.tokenSymbol.textColor = COLOR_SWP
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Kava Swap Token"
+            cell?.tokenDescription.text = "Kava Swap Coin"
             
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
@@ -770,7 +770,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "MUON"
             cell?.tokenSymbol.textColor = COLOR_ATOM
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Stargate Staking Token"
+            cell?.tokenDescription.text = "Stargate Staking Coin"
             let allAtom = WUtils.getAllMainAsset(COSMOS_TEST_DENOM)
             
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allAtom.stringValue, cell!.tokenAmount.font, 6, 6)
@@ -781,7 +781,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "BIF"
             cell?.tokenSymbol.textColor = COLOR_IRIS
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Bifrost Staking Token"
+            cell?.tokenDescription.text = "Bifrost Staking Coin"
             
             let allIris = WUtils.getAllMainAsset(IRIS_TEST_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allIris.stringValue, cell!.tokenAmount.font, 6, 6)
