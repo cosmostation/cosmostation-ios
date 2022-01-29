@@ -329,7 +329,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
             
         } else if (indexPath.section == SECTION_CW20_GRPC) {
-            //CW20
+            let cTokenDetailVC = ContractTokenGrpcViewController(nibName: "ContractTokenGrpcViewController", bundle: nil)
+            cTokenDetailVC.mCw20Token = mCW20_gRPC[indexPath.row]
+            cTokenDetailVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(cTokenDetailVC, animated: true)
             
         } else if (indexPath.section == SECTION_ETC_GRPC) {
             return
@@ -892,7 +896,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.tokenSymbol.text = token.denom.uppercased()
         cell?.tokenSymbol.textColor = UIColor.white
         cell?.tokenTitle.text = ""
-        cell?.tokenDescription.text = ""
+        cell?.tokenDescription.text = token.contract_address
         
         let decimal = token.decimal
         cell?.tokenAmount.attributedText = WUtils.displayAmount2(token.amount, cell!.tokenAmount.font!, decimal, 6)
