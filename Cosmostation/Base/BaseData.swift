@@ -21,6 +21,7 @@ final class BaseData : NSObject{
     var mParam: Param?
     var mIbcPaths = Array<IbcPath>()
     var mIbcTokens = Array<IbcToken>()
+    var mCw20Infos = Array<StationCw20Info>()
     
     var mNodeInfo: NodeInfo?
     var mBalances = Array<Balance>()
@@ -150,6 +151,24 @@ final class BaseData : NSObject{
                 if (ibcPath.paths.filter { $0.channel_id == ibcToken.channel_id }.first != nil) {
                     result.append(ibcPath)
                 }
+            }
+        }
+        return result
+    }
+    
+    func setCw20Balance(_ contAddress: String, _ amount: String) {
+        mCw20Infos.forEach { cw20Info in
+            if (cw20Info.contract_address == contAddress) {
+                cw20Info.setAmount(amount)
+            }
+        }
+    }
+    
+    func getCw20s_gRPC() -> Array<StationCw20Info> {
+        var result = Array<StationCw20Info>()
+        mCw20Infos.forEach { cw20Info in
+            if (cw20Info.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+                result.append(cw20Info)
             }
         }
         return result

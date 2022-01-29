@@ -148,6 +148,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mParam = nil
         BaseData.instance.mIbcPaths.removeAll()
         BaseData.instance.mIbcTokens.removeAll()
+        BaseData.instance.mCw20Infos.removeAll()
         
         
         BaseData.instance.mNodeInfo = nil
@@ -388,6 +389,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             print("BaseData.instance.mUnbondValidators_gRPC ", BaseData.instance.mUnbondValidators_gRPC.count)
             print("BaseData.instance.mMyValidators_gRPC ", BaseData.instance.mMyValidators_gRPC.count)
             print("BaseData.instance.mMyBalances_gRPC ", BaseData.instance.mMyBalances_gRPC.count)
+            print("BaseData.instance.mCw20Infos ", BaseData.instance.mCw20Infos.count)
+            print("BaseData.instance.getCw20s_gRPC ", BaseData.instance.getCw20s_gRPC().count)
             
             if (BaseData.instance.mNodeInfo_gRPC == nil) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
@@ -865,10 +868,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
-                    self.mFetchCnt = self.mFetchCnt + 3
+                    self.mFetchCnt = self.mFetchCnt + 4
                     self.onFetchParams(BaseData.instance.getChainId(self.mChainType))
                     self.onFetchIbcPaths(BaseData.instance.getChainId(self.mChainType))
                     self.onFetchIbcTokens(BaseData.instance.getChainId(self.mChainType))
+                    self.onFetchCw20Tokens()
                 }
                 try channel.close().wait()
                 
@@ -1275,7 +1279,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 if let params = res as? NSDictionary {
                     BaseData.instance.mParam = Param.init(params)
                 }
-                print("mParam ", BaseData.instance.mParam?.params?.rison_swap_enabled)
             
             case .failure(let error):
                 print("onFetchParams ", error)
@@ -1325,20 +1328,48 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    func onFetchCw20Tokens(_ chainId: String) {
-        print("onFetchCw20Tokens ", chainId, "   ", BaseNetWork.mintscanCw20(self.mChainType))
+    func onFetchCw20Tokens() {
+        print("onFetchCw20Tokens  ", BaseNetWork.mintscanCw20(self.mChainType))
         let request = Alamofire.request(BaseNetWork.mintscanCw20(self.mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                print("res ", res)
+                if let resData = res as? NSDictionary, let ibcCw20Infos = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    ibcCw20Infos.forEach { ibcCw20Info in
+                        let cw20Info = StationCw20Info.init(ibcCw20Info)
+                        BaseData.instance.mCw20Infos.append(cw20Info)
+                        self.mFetchCnt = self.mFetchCnt + 1
+                        self.onFetchgRPCCw20Balance(cw20Info.contract_address!)
+                    }
+                }
+//                print("mCw20Infos ", BaseData.instance.mCw20Infos.count)
             
             case .failure(let error):
                 print("onFetchIbcTokens ", error)
             }
             self.onFetchFinished()
         }
-        
+    }
+    
+    func onFetchgRPCCw20Balance(_ contAddress: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = contAddress
+                    $0.queryData = Cw20BalaceReq.init(self.mAccount.account_address).getEncode()
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    let cw20balance = try? JSONDecoder().decode(Cw20BalaceRes.self, from: response.data)
+                    BaseData.instance.setCw20Balance(contAddress, cw20balance?.balance ?? "0")
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchgRPCCw20Balance failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
     }
     
     
