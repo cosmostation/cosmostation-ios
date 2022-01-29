@@ -2377,11 +2377,11 @@
             </objects>
             <point key="canvasLocation" x="-7097" y="3549"/>
         </scene>
-        <!--TOKENS-->
+        <!--ASSETS-->
         <scene sceneID="wFd-X2-Web">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jCW-id-z93" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="TOKENS" image="tokensDsIc" id="1JO-em-9vw"/>
+                    <tabBarItem key="tabBarItem" title="ASSETS" image="tokensDsIc" id="1JO-em-9vw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="k59-4s-zb9">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

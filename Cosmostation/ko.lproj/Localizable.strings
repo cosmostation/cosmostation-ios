@@ -872,7 +872,7 @@ support@cosmostation.io";
 "tx_kava_hard_delegator_incentive" = "인센티브\n위임";
 "tx_kava_hard_swap_incentive" = "인센티브\n스왑";
 "tx_kava_incentive_claim_all" = "인센티브\n청구";
-"tx_kava_swap_token" = "토큰 스왑";
+"tx_kava_swap_token" = "코인 스왑";
 "tx_kava_swap_deposit" = "스왑풀\n예치";
 "tx_kava_swap_withdraw" = "스왑풀\n출금";
 

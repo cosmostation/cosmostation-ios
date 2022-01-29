@@ -873,7 +873,7 @@ support@cosmostation.io";
 "tx_kava_hard_delegator_incentive" = "Delegator\nIncentive";
 "tx_kava_hard_swap_incentive" = "Swap\nIncentive";
 "tx_kava_incentive_claim_all" = "Claim\nIncentive";
-"tx_kava_swap_token" = "Swap Token";
+"tx_kava_swap_token" = "Swap Coin";
 "tx_kava_swap_deposit" = "Swap Pool\nDeposit";
 "tx_kava_swap_withdraw" = "Swap Pool\nWithdraw";
 
