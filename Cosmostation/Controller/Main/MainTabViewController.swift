@@ -148,7 +148,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mParam = nil
         BaseData.instance.mIbcPaths.removeAll()
         BaseData.instance.mIbcTokens.removeAll()
-        BaseData.instance.mCw20Infos.removeAll()
+        BaseData.instance.mCw20Tokens.removeAll()
         
         
         BaseData.instance.mNodeInfo = nil
@@ -389,7 +389,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             print("BaseData.instance.mUnbondValidators_gRPC ", BaseData.instance.mUnbondValidators_gRPC.count)
             print("BaseData.instance.mMyValidators_gRPC ", BaseData.instance.mMyValidators_gRPC.count)
             print("BaseData.instance.mMyBalances_gRPC ", BaseData.instance.mMyBalances_gRPC.count)
-            print("BaseData.instance.mCw20Infos ", BaseData.instance.mCw20Infos.count)
+            print("BaseData.instance.mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
             print("BaseData.instance.getCw20s_gRPC ", BaseData.instance.getCw20s_gRPC().count)
             
             if (BaseData.instance.mNodeInfo_gRPC == nil) {
@@ -1334,15 +1334,15 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if let resData = res as? NSDictionary, let ibcCw20Infos = resData.object(forKey: "assets") as? Array<NSDictionary> {
-                    ibcCw20Infos.forEach { ibcCw20Info in
-                        let cw20Info = StationCw20Info.init(ibcCw20Info)
-                        BaseData.instance.mCw20Infos.append(cw20Info)
+                if let resData = res as? NSDictionary, let ibcCw20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    ibcCw20Tokens.forEach { ibcCw20Token in
+                        let Cw20Token = Cw20Token.init(ibcCw20Token)
+                        BaseData.instance.mCw20Tokens.append(Cw20Token)
                         self.mFetchCnt = self.mFetchCnt + 1
-                        self.onFetchgRPCCw20Balance(cw20Info.contract_address!)
+                        self.onFetchgRPCCw20Balance(Cw20Token.contract_address!)
                     }
                 }
-//                print("mCw20Infos ", BaseData.instance.mCw20Infos.count)
+//                print("mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
             
             case .failure(let error):
                 print("onFetchIbcTokens ", error)
