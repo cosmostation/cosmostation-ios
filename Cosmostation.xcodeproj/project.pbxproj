@@ -903,6 +903,8 @@
 		04394B032746299F002334F1 /* WalletInjectiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04394B012746299F002334F1 /* WalletInjectiveCell.swift */; };
 		04394B042746299F002334F1 /* WalletInjectiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394B022746299F002334F1 /* WalletInjectiveCell.xib */; };
 		0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */; };
+		0444442C27ABF06900EB093E /* TxExeContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442A27ABF06800EB093E /* TxExeContractCell.swift */; };
+		0444442D27ABF06900EB093E /* TxExeContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444442B27ABF06800EB093E /* TxExeContractCell.xib */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
@@ -2815,6 +2817,8 @@
 		04394B012746299F002334F1 /* WalletInjectiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInjectiveCell.swift; sourceTree = "<group>"; };
 		04394B022746299F002334F1 /* WalletInjectiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletInjectiveCell.xib; sourceTree = "<group>"; };
 		0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20TransferReq.swift; sourceTree = "<group>"; };
+		0444442A27ABF06800EB093E /* TxExeContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxExeContractCell.swift; sourceTree = "<group>"; };
+		0444442B27ABF06800EB093E /* TxExeContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxExeContractCell.xib; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
@@ -5424,6 +5428,8 @@
 				2838501F2448A6B000E5DEF2 /* TxHtlcClaimCell.xib */,
 				283850222448A6C600E5DEF2 /* TxHtlcRefundCell.swift */,
 				283850232448A6C600E5DEF2 /* TxHtlcRefundCell.xib */,
+				0444442A27ABF06800EB093E /* TxExeContractCell.swift */,
+				0444442B27ABF06800EB093E /* TxExeContractCell.xib */,
 			);
 			path = txs;
 			sourceTree = "<group>";
@@ -6604,6 +6610,7 @@
 				284FBC7A26DBE96000403FE2 /* TxSwapTokenCell.xib in Resources */,
 				28156EA52536DE53006FF06C /* HardDetailViewController.xib in Resources */,
 				283F3AF7265FA21800DF1D93 /* WalletMediCell.xib in Resources */,
+				0444442D27ABF06900EB093E /* TxExeContractCell.xib in Resources */,
 				04983C9C278B046D00F913A3 /* LinkChainAccount3ViewController.xib in Resources */,
 				28A209E0248897F400C2C078 /* TokenDetailVestingDetailCell.xib in Resources */,
 				E16B70DD229F9A78001D6B9C /* RedelegateCell.xib in Resources */,
@@ -7097,6 +7104,7 @@
 				040FA837275F55C200229F6F /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
 				28D28ADD26CB6C2B0074964C /* StartUnlock3ViewController.swift in Sources */,
 				040FAA70275F55C400229F6F /* comdex_vault_v1beta1_genesis.pb.swift in Sources */,
+				0444442C27ABF06900EB093E /* TxExeContractCell.swift in Sources */,
 				E1945E50222E842B00A1436F /* BaseViewController.swift in Sources */,
 				040FA801275F55C200229F6F /* sifnode_dispensation_v1_query.grpc.swift in Sources */,
 				040FAA53275F55C400229F6F /* umee_peggy_v1_genesis.pb.swift in Sources */,

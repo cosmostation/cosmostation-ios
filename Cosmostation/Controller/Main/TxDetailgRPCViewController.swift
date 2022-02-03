@@ -115,6 +115,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxHtlcClaimCell", bundle: nil), forCellReuseIdentifier: "TxHtlcClaimCell")
         self.txTableView.register(UINib(nibName: "TxHtlcRefundCell", bundle: nil), forCellReuseIdentifier: "TxHtlcRefundCell")
         
+        //for wasm msg type
+        self.txTableView.register(UINib(nibName: "TxExeContractCell", bundle: nil), forCellReuseIdentifier: "TxExeContractCell")
+        
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
         
@@ -497,6 +500,12 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             }
             
+            else if (msg.typeURL.contains(Cosmwasm_Wasm_V1_MsgExecuteContract.protoMessageName)) {
+               let cell = tableView.dequeueReusableCell(withIdentifier:"TxExeContractCell") as? TxCell
+               cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+               return cell!
+               
+           }
             
             
             
