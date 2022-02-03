@@ -281,7 +281,11 @@ public struct ApiHistoryNewCustom {
             }
             
             // wasm msg type
-            else if (msgType.contains("cosmwasm") && msgType.contains("MsgExecuteContract")) {
+            else if (msgType.contains("cosmwasm") && msgType.contains("MsgStoreCode")) {
+                result = NSLocalizedString("tx_cosmwasm_store_code", comment: "")
+            } else if (msgType.contains("cosmwasm") && msgType.contains("MsgInstantiateContract")) {
+                result = NSLocalizedString("tx_cosmwasm_instantiate", comment: "")
+            } else if (msgType.contains("cosmwasm") && msgType.contains("MsgExecuteContract")) {
                 result = NSLocalizedString("tx_cosmwasm_execontract", comment: "")
             }
             

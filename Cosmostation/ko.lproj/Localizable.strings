@@ -909,7 +909,9 @@ support@cosmostation.io";
 "tx_desmos_save_profile" = "프로필 생성";
 "tx_desmos_link_chain_account" = "계정 연결";
 
-"tx_cosmwasm_execontract" = "컨트랙트 실행";
+"tx_cosmwasm_store_code" = "컨트랙트\n코드 저장";
+"tx_cosmwasm_instantiate" = "컨트랙트\n인스턴트화";
+"tx_cosmwasm_execontract" = "컨트랙트\n실행";
 
 "tx_known" = "알 수 없음";
 

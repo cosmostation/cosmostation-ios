@@ -910,7 +910,9 @@ support@cosmostation.io";
 "tx_desmos_save_profile" = "Save Profile";
 "tx_desmos_link_chain_account" = "Link Account";
 
-"tx_cosmwasm_execontract" = "Execute Contract";
+"tx_cosmwasm_store_code" = "Store\nContract Code";
+"tx_cosmwasm_instantiate" = "Instantiate\nContract";
+"tx_cosmwasm_execontract" = "Execute\nContract";
 
 "tx_known" = "Unknown";
 

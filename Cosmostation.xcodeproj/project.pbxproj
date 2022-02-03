@@ -905,6 +905,10 @@
 		0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */; };
 		0444442C27ABF06900EB093E /* TxExeContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442A27ABF06800EB093E /* TxExeContractCell.swift */; };
 		0444442D27ABF06900EB093E /* TxExeContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444442B27ABF06800EB093E /* TxExeContractCell.xib */; };
+		0444443127AC034000EB093E /* TxInstantContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442F27AC034000EB093E /* TxInstantContractCell.swift */; };
+		0444443227AC034000EB093E /* TxInstantContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444443027AC034000EB093E /* TxInstantContractCell.xib */; };
+		0444443527AC08F100EB093E /* TxStoreContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444443327AC08F100EB093E /* TxStoreContractCell.swift */; };
+		0444443627AC08F100EB093E /* TxStoreContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444443427AC08F100EB093E /* TxStoreContractCell.xib */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
@@ -2819,6 +2823,10 @@
 		0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20TransferReq.swift; sourceTree = "<group>"; };
 		0444442A27ABF06800EB093E /* TxExeContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxExeContractCell.swift; sourceTree = "<group>"; };
 		0444442B27ABF06800EB093E /* TxExeContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxExeContractCell.xib; sourceTree = "<group>"; };
+		0444442F27AC034000EB093E /* TxInstantContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxInstantContractCell.swift; sourceTree = "<group>"; };
+		0444443027AC034000EB093E /* TxInstantContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxInstantContractCell.xib; sourceTree = "<group>"; };
+		0444443327AC08F100EB093E /* TxStoreContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxStoreContractCell.swift; sourceTree = "<group>"; };
+		0444443427AC08F100EB093E /* TxStoreContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxStoreContractCell.xib; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
@@ -3905,6 +3913,19 @@
 				041345BA27855F6600DC49AD /* ProfileViewController.xib */,
 			);
 			path = desmos;
+			sourceTree = "<group>";
+		};
+		0444442E27AC030700EB093E /* wasm */ = {
+			isa = PBXGroup;
+			children = (
+				0444442A27ABF06800EB093E /* TxExeContractCell.swift */,
+				0444442B27ABF06800EB093E /* TxExeContractCell.xib */,
+				0444442F27AC034000EB093E /* TxInstantContractCell.swift */,
+				0444443027AC034000EB093E /* TxInstantContractCell.xib */,
+				0444443327AC08F100EB093E /* TxStoreContractCell.swift */,
+				0444443427AC08F100EB093E /* TxStoreContractCell.xib */,
+			);
+			path = wasm;
 			sourceTree = "<group>";
 		};
 		04547BE82786AF0500011984 /* desmos */ = {
@@ -5387,6 +5408,7 @@
 		284D17F32535D69000C364F9 /* txs */ = {
 			isa = PBXGroup;
 			children = (
+				0444442E27AC030700EB093E /* wasm */,
 				04983CA1278C24A500F913A3 /* desmos */,
 				046BD22927795C9B002333B5 /* nft */,
 				288F806B270DDE95009825B5 /* sif */,
@@ -5428,8 +5450,6 @@
 				2838501F2448A6B000E5DEF2 /* TxHtlcClaimCell.xib */,
 				283850222448A6C600E5DEF2 /* TxHtlcRefundCell.swift */,
 				283850232448A6C600E5DEF2 /* TxHtlcRefundCell.xib */,
-				0444442A27ABF06800EB093E /* TxExeContractCell.swift */,
-				0444442B27ABF06800EB093E /* TxExeContractCell.xib */,
 			);
 			path = txs;
 			sourceTree = "<group>";
@@ -6416,6 +6436,7 @@
 				28663BF0248A4FB000080311 /* WalletBandCell.xib in Resources */,
 				E126CF9B2387A60D002A546F /* WalletPriceCell.xib in Resources */,
 				289E4DB026E5D765007C7C35 /* CommonPoolCell.xib in Resources */,
+				0444443627AC08F100EB093E /* TxStoreContractCell.xib in Resources */,
 				282A9613260DE054000F4CE6 /* StepFeeGrpcViewController.xib in Resources */,
 				28105895262EE638009244B8 /* WalletSifCell.xib in Resources */,
 				E1945E32222E7C0800A1436F /* LaunchScreen.storyboard in Resources */,
@@ -6612,6 +6633,7 @@
 				283F3AF7265FA21800DF1D93 /* WalletMediCell.xib in Resources */,
 				0444442D27ABF06900EB093E /* TxExeContractCell.xib in Resources */,
 				04983C9C278B046D00F913A3 /* LinkChainAccount3ViewController.xib in Resources */,
+				0444443227AC034000EB093E /* TxInstantContractCell.xib in Resources */,
 				28A209E0248897F400C2C078 /* TokenDetailVestingDetailCell.xib in Resources */,
 				E16B70DD229F9A78001D6B9C /* RedelegateCell.xib in Resources */,
 				28FEDCE626DB140A00A43D01 /* KavaIncentiveClaim0ViewController.xib in Resources */,
@@ -8003,6 +8025,7 @@
 				28D7BE4C25F0F782006EECD7 /* KavaHardParam.swift in Sources */,
 				28D7BE0D25F0CE33006EECD7 /* KavaMyCdps.swift in Sources */,
 				280524B8255CEEC7004D6172 /* ExportStarname.swift in Sources */,
+				0444443527AC08F100EB093E /* TxStoreContractCell.swift in Sources */,
 				040FA8EE275F55C200229F6F /* osmosis_gamm_v1beta1_tx.pb.swift in Sources */,
 				E1827E252256293900BC0350 /* ValidatorDetailCell.swift in Sources */,
 				040FAAD9275F55C400229F6F /* em_inflation_v1_query.grpc.swift in Sources */,
@@ -8139,6 +8162,7 @@
 				040FAAC4275F55C400229F6F /* ixo_bonds_query.grpc.swift in Sources */,
 				040FAAC7275F55C400229F6F /* ibc_applications_transfer_v1_query.pb.swift in Sources */,
 				28474ED4241E06AF00AF5A81 /* TxCdpCreateCell.swift in Sources */,
+				0444443127AC034000EB093E /* TxInstantContractCell.swift in Sources */,
 				285A33DE2447633D0052BD3D /* SelectAccountCell.swift in Sources */,
 				040FAA71275F55C400229F6F /* injective_oracle_v1beta1_query.pb.swift in Sources */,
 				040FA8CF275F55C200229F6F /* sentinel_provider_v1_querier.pb.swift in Sources */,

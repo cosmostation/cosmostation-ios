@@ -116,6 +116,8 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxHtlcRefundCell", bundle: nil), forCellReuseIdentifier: "TxHtlcRefundCell")
         
         //for wasm msg type
+        self.txTableView.register(UINib(nibName: "TxStoreContractCell", bundle: nil), forCellReuseIdentifier: "TxStoreContractCell")
+        self.txTableView.register(UINib(nibName: "TxInstantContractCell", bundle: nil), forCellReuseIdentifier: "TxInstantContractCell")
         self.txTableView.register(UINib(nibName: "TxExeContractCell", bundle: nil), forCellReuseIdentifier: "TxExeContractCell")
         
         //for unknown msg type
@@ -500,12 +502,22 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             }
             
-            else if (msg.typeURL.contains(Cosmwasm_Wasm_V1_MsgExecuteContract.protoMessageName)) {
-               let cell = tableView.dequeueReusableCell(withIdentifier:"TxExeContractCell") as? TxCell
-               cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-               return cell!
-               
-           }
+            else if (msg.typeURL.contains(Cosmwasm_Wasm_V1_MsgStoreCode.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxStoreContractCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Cosmwasm_Wasm_V1_MsgInstantiateContract.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxInstantContractCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            } else if (msg.typeURL.contains(Cosmwasm_Wasm_V1_MsgExecuteContract.protoMessageName)) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"TxExeContractCell") as? TxCell
+                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                return cell!
+                
+            }
             
             
             
