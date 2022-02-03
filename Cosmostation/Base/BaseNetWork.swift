@@ -291,6 +291,10 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/" + chainName + "/proposals/" + proposalId
     }
     
+    static func mintscanAssets() -> String {
+        return MINTSCAN_API_URL + "v1/assets"
+    }
+    
     static func mintscanCw20(_ chain: ChainType) -> String {
         let chainName = WUtils.getChainNameByBaseChain(chain)
         return MINTSCAN_API_URL + "v1/assets/" + chainName + "/cw20"

@@ -149,6 +149,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mIbcPaths.removeAll()
         BaseData.instance.mIbcTokens.removeAll()
         BaseData.instance.mCw20Tokens.removeAll()
+        BaseData.instance.mBridgeTokens.removeAll()
         
         
         BaseData.instance.mNodeInfo = nil
@@ -868,10 +869,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
-                    self.mFetchCnt = self.mFetchCnt + 4
+                    self.mFetchCnt = self.mFetchCnt + 5
                     self.onFetchParams(BaseData.instance.getChainId(self.mChainType))
                     self.onFetchIbcPaths(BaseData.instance.getChainId(self.mChainType))
                     self.onFetchIbcTokens(BaseData.instance.getChainId(self.mChainType))
+                    self.onFetchBridgeAssets()
                     self.onFetchCw20Tokens()
                 }
                 try channel.close().wait()
@@ -1328,8 +1330,27 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
+    func onFetchBridgeAssets() {
+        let request = Alamofire.request(BaseNetWork.mintscanAssets(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let resData = res as? NSDictionary, let bridgeAssets = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    bridgeAssets.forEach { bridgeAsset in
+                        BaseData.instance.mBridgeTokens.append(BridgeToken.init(bridgeAsset))
+                    }
+                }
+                print("onFetchBridgeAssets ", BaseData.instance.mBridgeTokens.count)
+                
+            case .failure(let error):
+                print("onFetchBridgeAssets ", error)
+            }
+            self.onFetchFinished()
+        }
+    }
+    
     func onFetchCw20Tokens() {
-        print("onFetchCw20Tokens  ", BaseNetWork.mintscanCw20(self.mChainType))
+//        print("onFetchCw20Tokens  ", BaseNetWork.mintscanCw20(self.mChainType))
         let request = Alamofire.request(BaseNetWork.mintscanCw20(self.mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {

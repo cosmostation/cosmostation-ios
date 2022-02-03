@@ -22,6 +22,7 @@ final class BaseData : NSObject{
     var mIbcPaths = Array<IbcPath>()
     var mIbcTokens = Array<IbcToken>()
     var mCw20Tokens = Array<Cw20Token>()
+    var mBridgeTokens = Array<BridgeToken>()
     
     var mNodeInfo: NodeInfo?
     var mBalances = Array<Balance>()

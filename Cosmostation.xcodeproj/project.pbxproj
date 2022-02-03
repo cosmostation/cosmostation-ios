@@ -909,6 +909,7 @@
 		0444443227AC034000EB093E /* TxInstantContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444443027AC034000EB093E /* TxInstantContractCell.xib */; };
 		0444443527AC08F100EB093E /* TxStoreContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444443327AC08F100EB093E /* TxStoreContractCell.swift */; };
 		0444443627AC08F100EB093E /* TxStoreContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444443427AC08F100EB093E /* TxStoreContractCell.xib */; };
+		0444443827AC27A900EB093E /* BridgeToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444443727AC27A900EB093E /* BridgeToken.swift */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
@@ -2827,6 +2828,7 @@
 		0444443027AC034000EB093E /* TxInstantContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxInstantContractCell.xib; sourceTree = "<group>"; };
 		0444443327AC08F100EB093E /* TxStoreContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxStoreContractCell.swift; sourceTree = "<group>"; };
 		0444443427AC08F100EB093E /* TxStoreContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxStoreContractCell.xib; sourceTree = "<group>"; };
+		0444443727AC27A900EB093E /* BridgeToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeToken.swift; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
@@ -6138,6 +6140,7 @@
 				04D1384E2691CAF100D6AF9F /* IbcToken.swift */,
 				0479664F2757409700315D55 /* MintscanProposalDetail.swift */,
 				046BD21F27788723002333B5 /* StationNFTData.swift */,
+				0444443727AC27A900EB093E /* BridgeToken.swift */,
 				04E2A32227A5787A0045ED21 /* Cw20Token.swift */,
 				04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */,
 				04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */,
@@ -7904,6 +7907,7 @@
 				040FA8FA275F55C300229F6F /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */,
 				040FA87E275F55C200229F6F /* sifnode_tokenregistry_v1_query.pb.swift in Sources */,
 				28B4304024F7EE3B00BD7BB2 /* StepOkWithdrawAmountViewController.swift in Sources */,
+				0444443827AC27A900EB093E /* BridgeToken.swift in Sources */,
 				280E1F02254A9B6B0007BA7D /* RenewStarname0ViewController.swift in Sources */,
 				040FA8B3275F55C200229F6F /* akash_deployment_v1beta2_deploymentmsg.pb.swift in Sources */,
 				2876546B2726B2690071FF96 /* WalletChainEditViewController.swift in Sources */,

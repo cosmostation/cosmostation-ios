@@ -196,7 +196,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == SECTION_NATIVE_GRPC) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative_gRPC.count) }
         else if (section == SECTION_IBC_AUTHED_GRPC) { view.headerTitleLabel.text = "IBC Coins"; view.headerCntLabel.text = String(self.mIbcAuthed_gRPC.count) }
-        else if (section == SECTION_SIF_ETHER_GRPC) { view.headerTitleLabel.text = "Ether Bridged Coins"; view.headerCntLabel.text = String(self.mSifEther_gRPC.count) }
+        else if (section == SECTION_SIF_ETHER_GRPC) { view.headerTitleLabel.text = "Ether Bridged Assets"; view.headerCntLabel.text = String(self.mSifEther_gRPC.count) }
         else if (section == SECTION_KAVA_BEP2_GRPC) { view.headerTitleLabel.text = "BEP2 Coins"; view.headerCntLabel.text = String(self.mKavaBep2_gRPC.count) }
         else if (section == SECTION_CW20_GRPC) { view.headerTitleLabel.text = "CW20 Tokens"; view.headerCntLabel.text = String(self.mCW20_gRPC.count) }
         else if (section == SECTION_POOL_TOKEN_GRPC) { view.headerTitleLabel.text = "Pool Coins"; view.headerCntLabel.text = String(self.mPoolToken_gRPC.count) }
