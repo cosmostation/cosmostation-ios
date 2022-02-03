@@ -910,6 +910,8 @@ support@cosmostation.io";
 "tx_desmos_save_profile" = "Save Profile";
 "tx_desmos_link_chain_account" = "Link Account";
 
+"tx_cosmwasm_execontract" = "Execute Contract";
+
 "tx_known" = "Unknown";
 
 "chain_title_cosmos" = "Cosmos";

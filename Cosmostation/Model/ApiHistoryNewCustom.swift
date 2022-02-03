@@ -280,6 +280,11 @@ public struct ApiHistoryNewCustom {
                 
             }
             
+            // wasm msg type
+            else if (msgType.contains("cosmwasm") && msgType.contains("MsgExecuteContract")) {
+                result = NSLocalizedString("tx_cosmwasm_execontract", comment: "")
+            }
+            
             // kava msg type
             else if (msgType.contains(KAVA_MSG_TYPE_POST_PRICE)) {
                 result =  NSLocalizedString("tx_kava_post_price", comment: "")

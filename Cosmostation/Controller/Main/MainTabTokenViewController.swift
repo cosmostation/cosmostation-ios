@@ -15,16 +15,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     let SECTION_NATIVE_GRPC             = 0;
     let SECTION_IBC_AUTHED_GRPC         = 1;
-    let SECTION_POOL_TOKEN_GRPC         = 2;
-    let SECTION_SIF_ETHER_GRPC          = 3;
-    let SECTION_KAVA_BEP2_GRPC          = 4;
-    let SECTION_ETC_GRPC                = 5;
-    let SECTION_IBC_UNKNOWN_GRPC        = 6;
-    let SECTION_UNKNOWN_GRPC            = 7;
+    let SECTION_SIF_ETHER_GRPC          = 2;
+    let SECTION_KAVA_BEP2_GRPC          = 3;
+    let SECTION_CW20_GRPC               = 4;
+    let SECTION_POOL_TOKEN_GRPC         = 5;
+    let SECTION_ETC_GRPC                = 6;
+    let SECTION_IBC_UNKNOWN_GRPC        = 7;
+    let SECTION_UNKNOWN_GRPC            = 8;
     
-    let SECTION_NATIVE                  = 8;
-    let SECTION_ETC                     = 9;
-    let SECTION_UNKNOWN                 = 10;
+    let SECTION_NATIVE                  = 9;
+    let SECTION_ETC                     = 10;
+    let SECTION_UNKNOWN                 = 11;
     
 
     @IBOutlet weak var titleChainImg: UIImageView!
@@ -49,16 +50,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     var mNative_gRPC = Array<Coin>()                // section 0
     var mIbcAuthed_gRPC = Array<Coin>()             // section 1
-    var mPoolToken_gRPC = Array<Coin>()             // section 2
-    var mSifEther_gRPC = Array<Coin>()              // section 3
-    var mKavaBep2_gRPC = Array<Coin>()              // section 4
-    var mEtc_gRPC = Array<Coin>()                   // section 5
-    var mIbcUnknown_gRPC = Array<Coin>()            // section 6
-    var mUnKnown_gRPC = Array<Coin>()               // section 7
+    var mSifEther_gRPC = Array<Coin>()              // section 2
+    var mKavaBep2_gRPC = Array<Coin>()              // section 3
+    var mCW20_gRPC = Array<Cw20Token>()              // section 4
+    var mPoolToken_gRPC = Array<Coin>()             // section 5
+    var mEtc_gRPC = Array<Coin>()                   // section 6
+    var mIbcUnknown_gRPC = Array<Coin>()            // section 7
+    var mUnKnown_gRPC = Array<Coin>()               // section 8
     
-    var mNative = Array<Balance>()                  // section 8
-    var mEtc = Array<Balance>()                     // section 9
-    var mUnKnown = Array<Balance>()                 // section 10
+    var mNative = Array<Balance>()                  // section 9
+    var mEtc = Array<Balance>()                     // section 10
+    var mUnKnown = Array<Balance>()                 // section 11
     
 
     override func viewDidLoad() {
@@ -85,6 +87,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         self.mBalances = BaseData.instance.mBalances
         self.mBalances_gRPC = BaseData.instance.mMyBalances_gRPC
+        self.mCW20_gRPC = BaseData.instance.getCw20s_gRPC()
         
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.totalCard.addGestureRecognizer(tapTotalCard)
@@ -158,6 +161,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     @objc func onFetchDone(_ notification: NSNotification) {
         self.mBalances = BaseData.instance.mBalances
         self.mBalances_gRPC = BaseData.instance.mMyBalances_gRPC
+        self.mCW20_gRPC = BaseData.instance.getCw20s_gRPC()
         
         self.updateView()
         self.refresher.endRefreshing()
@@ -168,15 +172,16 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 11
+        return 12
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count == 0) { return 0 }
         else if (section == SECTION_IBC_AUTHED_GRPC && mIbcAuthed_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_POOL_TOKEN_GRPC && mPoolToken_gRPC.count == 0) { return 0 }
         else if (section == SECTION_SIF_ETHER_GRPC && mSifEther_gRPC.count == 0) { return 0 }
         else if (section == SECTION_KAVA_BEP2_GRPC && mKavaBep2_gRPC.count == 0) { return 0 }
+        else if (section == SECTION_CW20_GRPC && mCW20_gRPC.count == 0) { return 0 }
+        else if (section == SECTION_POOL_TOKEN_GRPC && mPoolToken_gRPC.count == 0) { return 0 }
         else if (section == SECTION_ETC_GRPC && mEtc_gRPC.count == 0) { return 0 }
         else if (section == SECTION_IBC_UNKNOWN_GRPC && mIbcUnknown_gRPC.count == 0) { return 0 }
         else if (section == SECTION_UNKNOWN_GRPC && mUnKnown_gRPC.count == 0) { return 0 }
@@ -191,9 +196,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == SECTION_NATIVE_GRPC) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative_gRPC.count) }
         else if (section == SECTION_IBC_AUTHED_GRPC) { view.headerTitleLabel.text = "IBC Coins"; view.headerCntLabel.text = String(self.mIbcAuthed_gRPC.count) }
-        else if (section == SECTION_POOL_TOKEN_GRPC) { view.headerTitleLabel.text = "Pool Coins"; view.headerCntLabel.text = String(self.mPoolToken_gRPC.count)}
         else if (section == SECTION_SIF_ETHER_GRPC) { view.headerTitleLabel.text = "Ether Bridged Coins"; view.headerCntLabel.text = String(self.mSifEther_gRPC.count) }
-        else if (section == SECTION_KAVA_BEP2_GRPC) { view.headerTitleLabel.text = "BEP2 Coins"; view.headerCntLabel.text = String(self.mKavaBep2_gRPC.count)}
+        else if (section == SECTION_KAVA_BEP2_GRPC) { view.headerTitleLabel.text = "BEP2 Coins"; view.headerCntLabel.text = String(self.mKavaBep2_gRPC.count) }
+        else if (section == SECTION_CW20_GRPC) { view.headerTitleLabel.text = "CW20 Tokens"; view.headerCntLabel.text = String(self.mCW20_gRPC.count) }
+        else if (section == SECTION_POOL_TOKEN_GRPC) { view.headerTitleLabel.text = "Pool Coins"; view.headerCntLabel.text = String(self.mPoolToken_gRPC.count) }
         else if (section == SECTION_ETC_GRPC) { view.headerTitleLabel.text = "Etc Coins"; view.headerCntLabel.text = String(self.mEtc_gRPC.count) }
         else if (section == SECTION_IBC_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown IBC Coins"; view.headerCntLabel.text = String(self.mIbcUnknown_gRPC.count) }
         else if (section == SECTION_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown Coins"; view.headerCntLabel.text = String(self.mUnKnown_gRPC.count) }
@@ -208,9 +214,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
         else if (section == SECTION_IBC_AUTHED_GRPC) { return mIbcAuthed_gRPC.count }
-        else if (section == SECTION_POOL_TOKEN_GRPC) { return mPoolToken_gRPC.count }
         else if (section == SECTION_SIF_ETHER_GRPC) { return mSifEther_gRPC.count }
         else if (section == SECTION_KAVA_BEP2_GRPC) { return mKavaBep2_gRPC.count }
+        else if (section == SECTION_CW20_GRPC) { return mCW20_gRPC.count }
+        else if (section == SECTION_POOL_TOKEN_GRPC) { return mPoolToken_gRPC.count }
         else if (section == SECTION_ETC_GRPC) { return mEtc_gRPC.count }
         else if (section == SECTION_IBC_UNKNOWN_GRPC) { return mIbcUnknown_gRPC.count }
         else if (section == SECTION_UNKNOWN_GRPC) { return mUnKnown_gRPC.count }
@@ -229,14 +236,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
             onBindIbcToken_gRPC(cell, mIbcAuthed_gRPC[indexPath.row])
             
-        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
-            onBindPoolToken_gRPC(cell, mPoolToken_gRPC[indexPath.row])
-            
         } else if (indexPath.section == SECTION_SIF_ETHER_GRPC) {
             onBindSifEtherToken_gRPC(cell, mSifEther_gRPC[indexPath.row])
             
         } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
             onBindKavaBep2Token_gRPC(cell, mKavaBep2_gRPC[indexPath.row])
+            
+        } else if (indexPath.section == SECTION_CW20_GRPC) {
+            onBindCw20Token_gRPC(cell, mCW20_gRPC[indexPath.row])
+            
+        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
+            onBindPoolToken_gRPC(cell, mPoolToken_gRPC[indexPath.row])
             
         } else if (indexPath.section == SECTION_ETC_GRPC) {
             onBindEtcToken_gRPC(cell, mEtc_gRPC[indexPath.row])
@@ -317,6 +327,13 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             nTokenDetailVC.hidesBottomBarWhenPushed = true
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+            
+        } else if (indexPath.section == SECTION_CW20_GRPC) {
+            let cTokenDetailVC = ContractTokenGrpcViewController(nibName: "ContractTokenGrpcViewController", bundle: nil)
+            cTokenDetailVC.mCw20Token = mCW20_gRPC[indexPath.row]
+            cTokenDetailVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(cTokenDetailVC, animated: true)
             
         } else if (indexPath.section == SECTION_ETC_GRPC) {
             return
@@ -872,6 +889,21 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(coin.denom), 6)
         cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
     }
+    
+    //bind cw20 tokens
+    func onBindCw20Token_gRPC(_ cell: TokenCell?, _ token: Cw20Token) {
+        cell?.tokenImg.af_setImage(withURL: token.getImgUrl())
+        cell?.tokenSymbol.text = token.denom.uppercased()
+        cell?.tokenSymbol.textColor = UIColor.white
+        cell?.tokenTitle.text = ""
+        cell?.tokenDescription.text = token.contract_address
+        
+        let decimal = token.decimal
+        cell?.tokenAmount.attributedText = WUtils.displayAmount2(token.amount, cell!.tokenAmount.font!, decimal, 6)
+        cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(token.denom, token.getAmount(), decimal, cell!.tokenValue.font)
+    }
+    
+    
     
     //bind etc tokens with grpc
     func onBindEtcToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {

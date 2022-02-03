@@ -205,7 +205,6 @@ class BaseNetWork {
     
     static func historyOkUrl(_ chain: ChainType?, _ address: String) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
-//            return OKEX_URL + "transactions"
             return OEC_API + "okexchain/addresses/" + address + "/transactions/condition?limit=20"
         }
         return ""
@@ -280,6 +279,8 @@ class BaseNetWork {
         return DESMOS_AIRDROP_URL + "airdrop/claims"
     }
     
+    
+    //mintscan
     static func mintscanProposals(_ chain: ChainType) -> String {
         let chainName = WUtils.getChainNameByBaseChain(chain)
         return MINTSCAN_API_URL + "v1/" + chainName + "/proposals"
@@ -289,6 +290,14 @@ class BaseNetWork {
         let chainName = WUtils.getChainNameByBaseChain(chain)
         return MINTSCAN_API_URL + "v1/" + chainName + "/proposals/" + proposalId
     }
+    
+    static func mintscanCw20(_ chain: ChainType) -> String {
+        let chainName = WUtils.getChainNameByBaseChain(chain)
+        return MINTSCAN_API_URL + "v1/assets/" + chainName + "/cw20"
+    }
+    
+    
+    
     
     static func accountHistory(_ chain: ChainType, _ address: String) -> String {
         var result = ""

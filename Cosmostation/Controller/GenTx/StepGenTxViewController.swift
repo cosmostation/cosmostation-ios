@@ -145,6 +145,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mIBCRecipient: String?
     var mIBCSendRelayer: IbcPath?
     var mIBCSendPath: Path?
+    var mCw20SendContract: String?
     
     var mNFTHash: String?
     var mNFTName: String?
@@ -163,6 +164,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mDesmosToLinkChain: ChainType?
     var mDesmosToLinkAccountId: Int64!
     var mDesmosAirDropAmount: String?
+    
     
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
@@ -431,6 +433,13 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     IBCSend4ViewController(nibName: "IBCSend4ViewController", bundle: nil)]
             
+        } else if (mType == TASK_CW20_TRANSFER) {
+            return [SendContract0ViewController(nibName: "SendContract0ViewController", bundle: nil),
+                    SendContract1ViewController(nibName: "SendContract1ViewController", bundle: nil),
+                    self.newVc(viewController: "StepMemoViewController"),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    SendContract4ViewController(nibName: "SendContract4ViewController", bundle: nil)]
+            
         }
         
         //RIZON
@@ -586,17 +595,35 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     func onNextPage() {
         disableBounce = false
-        if ((currentIndex <= 3 && (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == COSMOS_MSG_TYPE_REDELEGATE2 || mType == IRIS_MSG_TYPE_REDELEGATE ||
-                                    mType == IOV_MSG_TYPE_REGISTER_ACCOUNT || mType == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV) || mType == TASK_IBC_TRANSFER) || currentIndex <= 2) {
-            setViewControllers([orderedViewControllers[currentIndex + 1]], direction: .forward, animated: true, completion: { (finished) -> Void in
-                self.currentIndex = self.currentIndex + 1
-                let value:[String: Int] = ["step": self.currentIndex ]
-                NotificationCenter.default.post(name: Notification.Name("stepChanged"), object: nil, userInfo: value)
-                let currentVC = self.orderedViewControllers[self.currentIndex] as! BaseViewController
-                currentVC.enableUserInteraction()
-                self.disableBounce = true
-            })
+        if (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == COSMOS_MSG_TYPE_REDELEGATE2 || mType == IRIS_MSG_TYPE_REDELEGATE ||
+            mType == IOV_MSG_TYPE_REGISTER_ACCOUNT || mType == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV || mType == TASK_IBC_TRANSFER ||
+            mType == TASK_CW20_TRANSFER) {
+            if (currentIndex > 3) { return }
+            
+        } else {
+            if (currentIndex > 2) { return }
         }
+        setViewControllers([orderedViewControllers[currentIndex + 1]], direction: .forward, animated: true, completion: { (finished) -> Void in
+            self.currentIndex = self.currentIndex + 1
+            let value:[String: Int] = ["step": self.currentIndex ]
+            NotificationCenter.default.post(name: Notification.Name("stepChanged"), object: nil, userInfo: value)
+            let currentVC = self.orderedViewControllers[self.currentIndex] as! BaseViewController
+            currentVC.enableUserInteraction()
+            self.disableBounce = true
+        })
+        
+        
+//        if ((currentIndex <= 3 && (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == COSMOS_MSG_TYPE_REDELEGATE2 || mType == IRIS_MSG_TYPE_REDELEGATE ||
+//                                    mType == IOV_MSG_TYPE_REGISTER_ACCOUNT || mType == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV) || mType == TASK_IBC_TRANSFER) || currentIndex <= 2) {
+//            setViewControllers([orderedViewControllers[currentIndex + 1]], direction: .forward, animated: true, completion: { (finished) -> Void in
+//                self.currentIndex = self.currentIndex + 1
+//                let value:[String: Int] = ["step": self.currentIndex ]
+//                NotificationCenter.default.post(name: Notification.Name("stepChanged"), object: nil, userInfo: value)
+//                let currentVC = self.orderedViewControllers[self.currentIndex] as! BaseViewController
+//                currentVC.enableUserInteraction()
+//                self.disableBounce = true
+//            })
+//        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {

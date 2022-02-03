@@ -2804,6 +2804,8 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
             } else if (type == TASK_GEN_PROFILE || type == TASK_LINK_CHAIN_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_PROFILE))
+            } else if (type == TASK_CW20_TRANSFER) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.OSMOSIS_MAIN ) {

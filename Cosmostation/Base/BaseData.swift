@@ -21,6 +21,7 @@ final class BaseData : NSObject{
     var mParam: Param?
     var mIbcPaths = Array<IbcPath>()
     var mIbcTokens = Array<IbcToken>()
+    var mCw20Tokens = Array<Cw20Token>()
     
     var mNodeInfo: NodeInfo?
     var mBalances = Array<Balance>()
@@ -153,6 +154,28 @@ final class BaseData : NSObject{
             }
         }
         return result
+    }
+    
+    func setCw20Balance(_ contAddress: String, _ amount: String) {
+        mCw20Tokens.forEach { Cw20Token in
+            if (Cw20Token.contract_address == contAddress) {
+                Cw20Token.setAmount(amount)
+            }
+        }
+    }
+    
+    func getCw20s_gRPC() -> Array<Cw20Token> {
+        var result = Array<Cw20Token>()
+        mCw20Tokens.forEach { cw20Token in
+            if (cw20Token.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+                result.append(cw20Token)
+            }
+        }
+        return result
+    }
+    
+    func getCw20_gRPC(_ contAddress: String) -> Cw20Token? {
+        return mCw20Tokens.filter { $0.contract_address == contAddress }.first
     }
     
     func getBaseDenom(_ denom: String) -> String {
