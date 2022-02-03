@@ -62,7 +62,7 @@ class ContractTokenGrpcViewController: BaseViewController, UITableViewDelegate, 
         self.updownImg.isHidden = true
         
         if (mCw20Token != nil) {
-            tokenImg.af_setImage(withURL: URL(string: mCw20Token!.logo)!)
+            tokenImg.af_setImage(withURL: mCw20Token!.getImgUrl())
             tokenSymbol.text = mCw20Token!.denom.uppercased()
             
             self.mTotalAmount = mCw20Token!.getAmount()
@@ -110,5 +110,24 @@ class ContractTokenGrpcViewController: BaseViewController, UITableViewDelegate, 
     }
     
     @IBAction func onClickSend(_ sender: UIButton) {
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        
+        let stakingDenom = WUtils.getMainDenom(chainType)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
+        if (BaseData.instance.getAvailableAmount_gRPC(stakingDenom).compare(feeAmount).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+            return
+        }
+        
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mCw20SendContract = mCw20Token!.contract_address
+        txVC.mType = TASK_CW20_TRANSFER
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
 }

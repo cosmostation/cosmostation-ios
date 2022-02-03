@@ -402,7 +402,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                             BaseData.instance.getChainId(self.chainType))
         }
         
-        //for IBC Transfer
+        //for IBC Transfer or Cw20
         else if (pageHolderVC.mType == TASK_IBC_TRANSFER) {
             return Signer.genSimulateIbcTransferMsgTxgRPC(auth,
                                                           self.pageHolderVC.mAccount!.account_address,
@@ -415,6 +415,18 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                           IBC_TRANSFER_MEMO,
                                                           privateKey, publicKey,
                                                           BaseData.instance.getChainId(self.chainType))
+            
+        } else if (pageHolderVC.mType == TASK_CW20_TRANSFER) {
+            return Signer.genSignedCw20Send(auth,
+                                            self.account!.account_address,
+                                            self.pageHolderVC.mToSendRecipientAddress!,
+                                            self.pageHolderVC.mCw20SendContract!,
+                                            self.pageHolderVC.mToSendAmount,
+                                            self.pageHolderVC.mFee!,
+                                            self.pageHolderVC.mMemo!,
+                                            privateKey, publicKey,
+                                            BaseData.instance.getChainId(self.chainType))
+            
         }
         
         else if (pageHolderVC.mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {

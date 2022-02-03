@@ -1342,7 +1342,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                         self.onFetchgRPCCw20Balance(Cw20Token.contract_address!)
                     }
                 }
-//                print("mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
+                print("mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
             
             case .failure(let error):
                 print("onFetchIbcTokens ", error)

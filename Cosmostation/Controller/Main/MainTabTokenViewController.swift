@@ -892,7 +892,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     //bind cw20 tokens
     func onBindCw20Token_gRPC(_ cell: TokenCell?, _ token: Cw20Token) {
-        cell?.tokenImg.af_setImage(withURL: URL(string: token.logo)!)
+        cell?.tokenImg.af_setImage(withURL: token.getImgUrl())
         cell?.tokenSymbol.text = token.denom.uppercased()
         cell?.tokenSymbol.textColor = UIColor.white
         cell?.tokenTitle.text = ""

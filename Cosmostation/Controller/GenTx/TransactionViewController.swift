@@ -56,7 +56,7 @@ class TransactionViewController: UIViewController {
     var mSifPool: Sifnode_Clp_V1_Pool?
     
     var mIBCSendDenom: String?
-    
+    var mCw20SendContract: String?
     
     var mNFTDenomId: String?
     var mNFTTokenId: String?
@@ -83,7 +83,7 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "step1Img")
             self.titleLabel.text =  NSLocalizedString("title_redelegate", comment: "")
             
-        } else if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
+        } else if (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == TASK_CW20_TRANSFER) {
             stepDescription.text = NSLocalizedString("send_step_1", comment: "")
             stepImg.image = UIImage.init(named: "step1Img")
             self.titleLabel.text =  NSLocalizedString("title_send", comment: "")
@@ -327,6 +327,7 @@ class TransactionViewController: UIViewController {
             stepDescription.text = NSLocalizedString("str_account_link_step_0", comment: "")
             stepImg.image = UIImage.init(named: "4StepImg1")
             self.titleLabel.text =  NSLocalizedString("title_account_chain_link", comment: "")
+            
         }
         
         
@@ -390,6 +391,7 @@ class TransactionViewController: UIViewController {
             StepVc.mLockups = self.mLockups
             
             StepVc.mIBCSendDenom = self.mIBCSendDenom
+            StepVc.mCw20SendContract = self.mCw20SendContract
             
             StepVc.mSifPool = self.mSifPool
             
@@ -416,7 +418,7 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "step1Img")
                     stepDescription.text = NSLocalizedString("redelegate_step_1", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
+                } else if (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == TASK_CW20_TRANSFER) {
                     stepImg.image = UIImage.init(named: "step1Img")
                     stepDescription.text = NSLocalizedString("send_step_1", comment: "")
                     
@@ -603,6 +605,7 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
                     stepDescription.text = NSLocalizedString("str_account_link_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg1")
+                    
                 }
                 
                 
@@ -619,7 +622,7 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "step2Img")
                     stepDescription.text = NSLocalizedString("redelegate_step_2", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
+                } else if (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == TASK_CW20_TRANSFER) {
                     stepImg.image = UIImage.init(named: "step2Img")
                     stepDescription.text = NSLocalizedString("send_step_2", comment: "")
                     
@@ -806,6 +809,7 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
                     stepDescription.text = NSLocalizedString("str_account_link_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg2")
+                    
                 }
                 
                 
@@ -822,7 +826,7 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "step3Img")
                     stepDescription.text = NSLocalizedString("redelegate_step_3", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
+                } else if (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == TASK_CW20_TRANSFER) {
                     stepImg.image = UIImage.init(named: "step3Img")
                     stepDescription.text = NSLocalizedString("send_step_3", comment: "")
                     
@@ -1005,6 +1009,7 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
                     stepDescription.text = NSLocalizedString("str_account_link_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "4StepImg3")
+                    
                 }
                 
                 
@@ -1021,7 +1026,7 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "step4Img")
                     stepDescription.text = NSLocalizedString("redelegate_step_4", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
+                } else if (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == TASK_CW20_TRANSFER) {
                     stepImg.image = UIImage.init(named: "step4Img")
                     stepDescription.text = NSLocalizedString("send_step_4", comment: "")
                     
@@ -1207,7 +1212,7 @@ class TransactionViewController: UIViewController {
                 }
                 
             } else if (step == 4) {
-                if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
+                if (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == TASK_CW20_TRANSFER) {
                     stepImg.image = UIImage.init(named: "step5Img")
                     stepDescription.text = NSLocalizedString("send_step_5", comment: "")
                     

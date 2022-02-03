@@ -409,6 +409,7 @@ let SIF_MSG_TYPE_SWAP_CION                  = "sif/MsgSwap";
 let TASK_RIZON_EVENT_HORIZON                = "rizon_swap";
 
 let TASK_IBC_TRANSFER                       = "ibc_MsgTransfer";
+let TASK_CW20_TRANSFER                      = "cw20_Transfer";
 
 let TASK_ISSUE_NFT_DENOM                    = "issue_nft_denom";
 let TASK_ISSUE_NFT                          = "issue_nft";

@@ -902,6 +902,7 @@
 		04394B002744C6FF002334F1 /* ManageChainAccoutsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */; };
 		04394B032746299F002334F1 /* WalletInjectiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04394B012746299F002334F1 /* WalletInjectiveCell.swift */; };
 		04394B042746299F002334F1 /* WalletInjectiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04394B022746299F002334F1 /* WalletInjectiveCell.xib */; };
+		0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
@@ -1143,6 +1144,7 @@
 		04E2A32B27A5983C0045ED21 /* ContractTokenGrpcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E2A32927A5983C0045ED21 /* ContractTokenGrpcViewController.xib */; };
 		04E2A32E27A59BB10045ED21 /* TokenDetailCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32C27A59BB10045ED21 /* TokenDetailCommonCell.swift */; };
 		04E2A32F27A59BB10045ED21 /* TokenDetailCommonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E2A32D27A59BB10045ED21 /* TokenDetailCommonCell.xib */; };
+		04E2A33127AB94630045ED21 /* SendContract4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */; };
 		2800CF9624719EC4003C3EF1 /* Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF9524719EC4003C3EF1 /* Tally.swift */; };
 		2800CF982471A004003C3EF1 /* CosmosProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF972471A004003C3EF1 /* CosmosProposer.swift */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -1257,7 +1259,6 @@
 		2830A09D27A6AF8E00CE9D1D /* SendContract0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2830A09B27A6AF8E00CE9D1D /* SendContract0ViewController.xib */; };
 		2830A0A027A6AFA000CE9D1D /* SendContract1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830A09E27A6AFA000CE9D1D /* SendContract1ViewController.swift */; };
 		2830A0A127A6AFA000CE9D1D /* SendContract1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2830A09F27A6AFA000CE9D1D /* SendContract1ViewController.xib */; };
-		2830A0A427A6AFB500CE9D1D /* SendContract4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830A0A227A6AFB500CE9D1D /* SendContract4ViewController.swift */; };
 		2830A0A527A6AFB500CE9D1D /* SendContract4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2830A0A327A6AFB500CE9D1D /* SendContract4ViewController.xib */; };
 		2834399B2531D13C00CCFADE /* StarName.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2834399A2531D13C00CCFADE /* StarName.storyboard */; };
 		2834399E2531D1A200CCFADE /* StarNameListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2834399D2531D1A200CCFADE /* StarNameListViewController.swift */; };
@@ -2813,6 +2814,7 @@
 		04394AFE2744C6FF002334F1 /* ManageChainAccoutsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageChainAccoutsCell.xib; sourceTree = "<group>"; };
 		04394B012746299F002334F1 /* WalletInjectiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletInjectiveCell.swift; sourceTree = "<group>"; };
 		04394B022746299F002334F1 /* WalletInjectiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletInjectiveCell.xib; sourceTree = "<group>"; };
+		0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20TransferReq.swift; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
@@ -3055,6 +3057,7 @@
 		04E2A32927A5983C0045ED21 /* ContractTokenGrpcViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractTokenGrpcViewController.xib; sourceTree = "<group>"; };
 		04E2A32C27A59BB10045ED21 /* TokenDetailCommonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailCommonCell.swift; sourceTree = "<group>"; };
 		04E2A32D27A59BB10045ED21 /* TokenDetailCommonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenDetailCommonCell.xib; sourceTree = "<group>"; };
+		04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendContract4ViewController.swift; sourceTree = "<group>"; };
 		2800CF9524719EC4003C3EF1 /* Tally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tally.swift; sourceTree = "<group>"; };
 		2800CF972471A004003C3EF1 /* CosmosProposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposer.swift; sourceTree = "<group>"; };
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
@@ -3169,7 +3172,6 @@
 		2830A09B27A6AF8E00CE9D1D /* SendContract0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendContract0ViewController.xib; sourceTree = "<group>"; };
 		2830A09E27A6AFA000CE9D1D /* SendContract1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendContract1ViewController.swift; sourceTree = "<group>"; };
 		2830A09F27A6AFA000CE9D1D /* SendContract1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendContract1ViewController.xib; sourceTree = "<group>"; };
-		2830A0A227A6AFB500CE9D1D /* SendContract4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendContract4ViewController.swift; sourceTree = "<group>"; };
 		2830A0A327A6AFB500CE9D1D /* SendContract4ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendContract4ViewController.xib; sourceTree = "<group>"; };
 		2834399A2531D13C00CCFADE /* StarName.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = StarName.storyboard; sourceTree = "<group>"; };
 		2834399D2531D1A200CCFADE /* StarNameListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarNameListViewController.swift; sourceTree = "<group>"; };
@@ -5227,7 +5229,7 @@
 				2830A09B27A6AF8E00CE9D1D /* SendContract0ViewController.xib */,
 				2830A09E27A6AFA000CE9D1D /* SendContract1ViewController.swift */,
 				2830A09F27A6AFA000CE9D1D /* SendContract1ViewController.xib */,
-				2830A0A227A6AFB500CE9D1D /* SendContract4ViewController.swift */,
+				04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */,
 				2830A0A327A6AFB500CE9D1D /* SendContract4ViewController.xib */,
 			);
 			path = contract;
@@ -6113,6 +6115,7 @@
 				04E2A32227A5787A0045ED21 /* Cw20Token.swift */,
 				04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */,
 				04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */,
+				0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */,
 			);
 			path = Dao;
 			sourceTree = "<group>";
@@ -7043,7 +7046,7 @@
 				040FAA49275F55C400229F6F /* iris_mod_random_genesis.pb.swift in Sources */,
 				040FAAE4275F55C400229F6F /* injective_peggy_v1_genesis.pb.swift in Sources */,
 				046E903D268C413A002CFFE1 /* BinanceProto.swift in Sources */,
-				2830A0A427A6AFB500CE9D1D /* SendContract4ViewController.swift in Sources */,
+				04E2A33127AB94630045ED21 /* SendContract4ViewController.swift in Sources */,
 				04B1BE8527A3BD1B00B1236A /* axelar_tss_tofnd_v1beta1_common.pb.swift in Sources */,
 				040FA7DB275F55C200229F6F /* shentu_gov_v1alpha1_query.pb.swift in Sources */,
 				28C3F505269DC52600F4A58C /* TxGravityDepositBatchCell.swift in Sources */,
@@ -7520,6 +7523,7 @@
 				040FAAF7275F55C400229F6F /* shentu_cert_v1alpha1_genesis.pb.swift in Sources */,
 				040FA8AC275F55C200229F6F /* iris_mod_record_tx.pb.swift in Sources */,
 				285A33D624475DC00052BD3D /* SelectPopupViewController.swift in Sources */,
+				0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */,
 				040FA903275F55C300229F6F /* band_oracle_v1_query.pb.swift in Sources */,
 				04B1BE7827A3BD1B00B1236A /* axelar_permission_v1beta1_query.pb.swift in Sources */,
 				040FA7D5275F55C200229F6F /* panacea_aol_v2_tx.pb.swift in Sources */,

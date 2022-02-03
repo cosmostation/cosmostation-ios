@@ -13,8 +13,8 @@
                 <outlet property="btn01" destination="qdd-QU-UFL" id="Zec-ix-TWb"/>
                 <outlet property="btnBack" destination="23r-ib-YnF" id="rAg-4j-Dx2"/>
                 <outlet property="btnNext" destination="BPt-tl-zlH" id="LgQ-Dd-NIc"/>
-                <outlet property="denomTitleLabel" destination="NOL-S5-uAB" id="xVO-lV-yfj"/>
-                <outlet property="mAvailableAmountLabel" destination="gTw-dc-5uC" id="xzl-i8-lAX"/>
+                <outlet property="mAvailableAmountLabel" destination="gTw-dc-5uC" id="mxW-zf-I2t"/>
+                <outlet property="mAvailableDenomLabel" destination="NOL-S5-uAB" id="Atn-ne-pQL"/>
                 <outlet property="mTargetAmountTextField" destination="oCX-GF-MIq" id="bgO-LU-tds"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

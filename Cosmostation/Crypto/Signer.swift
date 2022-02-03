@@ -2809,6 +2809,49 @@ class Signer {
         }
     }
     
+    static func genSignedCw20Send(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                  _ fromAddress: String, _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
+                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = fromAddress
+            $0.contract = contractAddress
+            $0.msg  = Cw20TransferReq.init(toAddress, amount[0].amount).getEncode()
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+            $0.value = try! exeContract.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo);
+        let signerInfo = getGrpcSignerInfo(auth, publicKey);
+        let authInfo = getGrpcAuthInfo(signerInfo, fee);
+        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId);
+        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
+            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
+            $0.txBytes = try! rawTx.serializedData()
+        }
+    }
+    
+    static func genSimulateCw20Send(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                    _ fromAddress: String, _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
+                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = fromAddress
+            $0.contract = contractAddress
+            $0.msg  = Cw20TransferReq.init(toAddress, amount[0].amount).getEncode()
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+            $0.value = try! exeContract.serializedData()
+        }
+        let txBody = getGrpcTxBody([anyMsg], memo);
+        let signerInfo = getGrpcSignerInfo(auth, publicKey);
+        let authInfo = getGrpcAuthInfo(signerInfo, fee);
+        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId);
+        return Cosmos_Tx_V1beta1_SimulateRequest.with {
+            $0.tx = simulateTx
+        }
+    }
+    
     
     
     static func getGrpcTxBody(_ msgAnys: Array<Google_Protobuf2_Any>, _ memo: String) -> Cosmos_Tx_V1beta1_TxBody {
