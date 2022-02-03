@@ -179,6 +179,10 @@ final class BaseData : NSObject{
         return mCw20Tokens.filter { $0.contract_address == contAddress }.first
     }
     
+    func getBridge_gRPC(_ denom: String) -> BridgeToken? {
+        return mBridgeTokens.filter { $0.denom.lowercased() == denom.lowercased() }.first
+    }
+    
     func getBaseDenom(_ denom: String) -> String {
         if (denom.starts(with: "ibc/")) {
             guard let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) else {

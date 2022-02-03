@@ -35,4 +35,20 @@ class TokenCell: UITableViewCell {
         self.tokenValue.text = "-"
     }
     
+    func onBindBridgeToken(_ chain: ChainType, _ coin: Coin) {
+        if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+            tokenImg.af_setImage(withURL: bridgeTokenInfo.getImgUrl())
+            tokenSymbol.text = bridgeTokenInfo.origin_symbol
+            tokenSymbol.textColor = UIColor.white
+            tokenTitle.text = ""
+            tokenDescription.text = bridgeTokenInfo.display_symbol
+            
+            let available = BaseData.instance.getAvailableAmount_gRPC(coin.denom)
+            let decimal = bridgeTokenInfo.decimal
+            
+            tokenAmount.attributedText = WUtils.displayAmount2(available.stringValue, tokenAmount.font!, decimal, 6)
+            tokenValue.attributedText = WUtils.dpUserCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal, tokenValue.font)
+        }
+    }
+    
 }

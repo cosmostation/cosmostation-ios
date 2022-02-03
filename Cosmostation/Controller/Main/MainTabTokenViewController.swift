@@ -15,7 +15,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     let SECTION_NATIVE_GRPC             = 0;
     let SECTION_IBC_AUTHED_GRPC         = 1;
-    let SECTION_SIF_ETHER_GRPC          = 2;
+    let SECTION_BRIDGE_GRPC             = 2;
     let SECTION_KAVA_BEP2_GRPC          = 3;
     let SECTION_CW20_GRPC               = 4;
     let SECTION_POOL_TOKEN_GRPC         = 5;
@@ -43,16 +43,15 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var refresher: UIRefreshControl!
     var mainTabVC: MainTabViewController!
     var mBnbTics = [String : NSMutableDictionary]()
-    var mOrder:Int?
     
     var mBalances = Array<Balance>()
     var mBalances_gRPC = Array<Coin>()
     
     var mNative_gRPC = Array<Coin>()                // section 0
     var mIbcAuthed_gRPC = Array<Coin>()             // section 1
-    var mSifEther_gRPC = Array<Coin>()              // section 2
+    var mBridged_gRPC = Array<Coin>()               // section 2
     var mKavaBep2_gRPC = Array<Coin>()              // section 3
-    var mCW20_gRPC = Array<Cw20Token>()              // section 4
+    var mCW20_gRPC = Array<Cw20Token>()             // section 4
     var mPoolToken_gRPC = Array<Coin>()             // section 5
     var mEtc_gRPC = Array<Coin>()                   // section 6
     var mIbcUnknown_gRPC = Array<Coin>()            // section 7
@@ -178,7 +177,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count == 0) { return 0 }
         else if (section == SECTION_IBC_AUTHED_GRPC && mIbcAuthed_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_SIF_ETHER_GRPC && mSifEther_gRPC.count == 0) { return 0 }
+        else if (section == SECTION_BRIDGE_GRPC && mBridged_gRPC.count == 0) { return 0 }
         else if (section == SECTION_KAVA_BEP2_GRPC && mKavaBep2_gRPC.count == 0) { return 0 }
         else if (section == SECTION_CW20_GRPC && mCW20_gRPC.count == 0) { return 0 }
         else if (section == SECTION_POOL_TOKEN_GRPC && mPoolToken_gRPC.count == 0) { return 0 }
@@ -196,7 +195,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == SECTION_NATIVE_GRPC) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative_gRPC.count) }
         else if (section == SECTION_IBC_AUTHED_GRPC) { view.headerTitleLabel.text = "IBC Coins"; view.headerCntLabel.text = String(self.mIbcAuthed_gRPC.count) }
-        else if (section == SECTION_SIF_ETHER_GRPC) { view.headerTitleLabel.text = "Ether Bridged Assets"; view.headerCntLabel.text = String(self.mSifEther_gRPC.count) }
+        else if (section == SECTION_BRIDGE_GRPC) { view.headerTitleLabel.text = "Ether Bridged Assets"; view.headerCntLabel.text = String(self.mBridged_gRPC.count) }
         else if (section == SECTION_KAVA_BEP2_GRPC) { view.headerTitleLabel.text = "BEP2 Coins"; view.headerCntLabel.text = String(self.mKavaBep2_gRPC.count) }
         else if (section == SECTION_CW20_GRPC) { view.headerTitleLabel.text = "CW20 Tokens"; view.headerCntLabel.text = String(self.mCW20_gRPC.count) }
         else if (section == SECTION_POOL_TOKEN_GRPC) { view.headerTitleLabel.text = "Pool Coins"; view.headerCntLabel.text = String(self.mPoolToken_gRPC.count) }
@@ -214,7 +213,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
         else if (section == SECTION_IBC_AUTHED_GRPC) { return mIbcAuthed_gRPC.count }
-        else if (section == SECTION_SIF_ETHER_GRPC) { return mSifEther_gRPC.count }
+        else if (section == SECTION_BRIDGE_GRPC) { return mBridged_gRPC.count }
         else if (section == SECTION_KAVA_BEP2_GRPC) { return mKavaBep2_gRPC.count }
         else if (section == SECTION_CW20_GRPC) { return mCW20_gRPC.count }
         else if (section == SECTION_POOL_TOKEN_GRPC) { return mPoolToken_gRPC.count }
@@ -236,8 +235,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
             onBindIbcToken_gRPC(cell, mIbcAuthed_gRPC[indexPath.row])
             
-        } else if (indexPath.section == SECTION_SIF_ETHER_GRPC) {
-            onBindSifEtherToken_gRPC(cell, mSifEther_gRPC[indexPath.row])
+        } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
+            onBindEthBridgeToken_gRPC(cell, mBridged_gRPC[indexPath.row])
             
         } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
             onBindKavaBep2Token_gRPC(cell, mKavaBep2_gRPC[indexPath.row])
@@ -314,10 +313,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(pTokenDetailVC, animated: true)
 
-        } else if (indexPath.section == SECTION_SIF_ETHER_GRPC) {
+        } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
             let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
             bTokenDetailVC.hidesBottomBarWhenPushed = true
-            bTokenDetailVC.bridgeDenom = mSifEther_gRPC[indexPath.row].denom
+            bTokenDetailVC.bridgeDenom = mBridged_gRPC[indexPath.row].denom
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
 
@@ -861,18 +860,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    //bind Erc on SifChain with grpc
-    func onBindSifEtherToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        cell?.tokenImg.af_setImage(withURL: URL(string: SIF_COIN_IMG_URL + coin.denom + ".png")!)
-        cell?.tokenSymbol.text = coin.denom.substring(from: 1).uppercased()
-        cell?.tokenSymbol.textColor = UIColor.white
-        cell?.tokenTitle.text = "(" + coin.denom + ")"
-        cell?.tokenDescription.text = coin.denom.substring(from: 1).uppercased() + " on Sifchain"
-        
-        let available = BaseData.instance.getAvailableAmount_gRPC(coin.denom)
-        let decimal = WUtils.getSifCoinDecimal(coin.denom)
-        cell?.tokenAmount.attributedText = WUtils.displayAmount2(available.stringValue, cell!.tokenAmount.font!, decimal, 6)
-        cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom.substring(from: 1), available, decimal, cell!.tokenValue.font)
+    //bind Eth bridged tokens with grpc (SifChain, G-bridge, Injective)
+    func onBindEthBridgeToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
+        cell?.onBindBridgeToken(self.chainType!, coin)
     }
     
     //bind kava bep2 tokens with grpc
@@ -993,7 +983,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mNative_gRPC.removeAll()
         mIbcAuthed_gRPC.removeAll()
         mPoolToken_gRPC.removeAll()
-        mSifEther_gRPC.removeAll()
+        mBridged_gRPC.removeAll()
         mKavaBep2_gRPC.removeAll()
         mEtc_gRPC.removeAll()
         mIbcUnknown_gRPC.removeAll()
@@ -1027,7 +1017,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 mPoolToken_gRPC.append(balance_gRPC)
                 
             } else if (chainType == ChainType.SIF_MAIN && balance_gRPC.denom.starts(with: "c")) {
-                mSifEther_gRPC.append(balance_gRPC)
+                mBridged_gRPC.append(balance_gRPC)
+                
+            } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN && balance_gRPC.denom.starts(with: "gravity0x")) {
+                mBridged_gRPC.append(balance_gRPC)
                 
             } else if (chainType == ChainType.KAVA_MAIN) {
                 if (balance_gRPC.denom == KAVA_HARD_DENOM || balance_gRPC.denom == KAVA_USDX_DENOM || balance_gRPC.denom == KAVA_SWAP_DENOM) {
