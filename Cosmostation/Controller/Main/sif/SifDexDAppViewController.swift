@@ -165,13 +165,30 @@ extension WUtils {
         return UIImage(named: "tokenIc")
     }
     
-    static func getSifCoinDecimal(_ denom:String?) -> Int16 {
-        let sifTokens = BaseData.instance.mParam?.getSifTokens()
-        if (sifTokens != nil) {
-            return sifTokens?.filter({ $0.denom == denom }).first?.decimals ?? 18
+    //using mintscan-api(util-api old)
+    static func getSifCoinDecimal(_ denom: String?) -> Int16 {
+        if (denom == SIF_MAIN_DENOM) {
+            return 18
+        } else {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
+                return bridgeTokenInfo.decimal
+            }
+            return 18
         }
-        return 18
     }
+    
+    //TEMP
+    static func getGBrdigeCoinDecimal(_ denom: String?) -> Int16 {
+        if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
+            return 6
+        } else {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
+                return bridgeTokenInfo.decimal
+            }
+            return 18
+        }
+    }
+    
     
     static func DpSifCoinName(_ label: UILabel, _ denom: String) {
         if (denom == SIF_MAIN_DENOM) {

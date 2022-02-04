@@ -82,6 +82,10 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                 mDivideDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
                 mDisplayDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
                 
+            } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
+                mDivideDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
+                
             } else if (chainType == ChainType.KAVA_MAIN) {
                 mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
                 mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)

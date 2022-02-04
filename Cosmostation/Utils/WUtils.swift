@@ -1327,7 +1327,12 @@ public class WUtils {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (coin.denom.starts(with: "c")) {
                 denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.substring(from: 1).uppercased()
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+                    denomLabel?.text = bridgeTokenInfo.origin_symbol
+                } else {
+                    denomLabel?.text = coin.denom.substring(from: 1).uppercased()
+                }
+                
             } else {
                 denomLabel?.textColor = .white
                 denomLabel?.text = coin.denom.uppercased()
@@ -1455,13 +1460,18 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
+            let dpDecimal = WUtils.getGBrdigeCoinDecimal(coin.denom)
             if (coin.denom == GRAVITY_BRIDGE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
                 denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+                    denomLabel?.text = bridgeTokenInfo.origin_symbol
+                } else {
+                    denomLabel?.text = coin.denom.uppercased()
+                }
             }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, dpDecimal, dpDecimal)
             
         } else if (chainType == ChainType.STARGAZE_MAIN) {
             if (coin.denom == STARGAZE_MAIN_DENOM) {
@@ -1700,7 +1710,11 @@ public class WUtils {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "c")) {
                 denomLabel?.textColor = .white
-                denomLabel?.text = denom.substring(from: 1).uppercased()
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
+                    denomLabel?.text = bridgeTokenInfo.origin_symbol
+                } else {
+                    denomLabel?.text = denom.substring(from: 1).uppercased()
+                }
             } else {
                 denomLabel?.textColor = .white
                 denomLabel?.text = denom.uppercased()
@@ -1828,13 +1842,18 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
+            let dpDecimal = WUtils.getGBrdigeCoinDecimal(denom)
             if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
                 denomLabel?.textColor = .white
-                denomLabel?.text = denom.uppercased()
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
+                    denomLabel?.text = bridgeTokenInfo.origin_symbol
+                } else {
+                    denomLabel?.text = denom.uppercased()
+                }
             }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
             
         } else if (chainType == ChainType.STARGAZE_MAIN) {
             if (denom == STARGAZE_MAIN_DENOM) {
@@ -2336,6 +2355,8 @@ public class WUtils {
                 return getOsmosisCoinDecimal(denom)
             } else if (chain == ChainType.SIF_MAIN) {
                 return getSifCoinDecimal(denom)
+            } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+                return getGBrdigeCoinDecimal(denom)
             } else if (chain == ChainType.KAVA_MAIN) {
                 return getKavaCoinDecimal(denom)
             }
