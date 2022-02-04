@@ -797,10 +797,10 @@ let TRANS_BG_COLOR_BAND2                    = UIColor.init(hexString: "5286FF", 
 let COLOR_BAND                              = UIColor.init(hexString: "516FFA")
 let COLOR_BAND_DARK                         = UIColor.init(hexString: "2A3C8B")
 
-let TRANS_BG_COLOR_OK                       = UIColor.init(hexString: "88bdf3", alpha: 0.15)
-let TRANS_BG_COLOR_OK2                      = UIColor.init(hexString: "88bdf3", alpha: 0.4)
-let COLOR_OK                                = UIColor.init(hexString: "88bdf3")
-let COLOR_OK_DARK                           = UIColor.init(hexString: "45678b")
+let TRANS_BG_COLOR_OK                       = UIColor.init(hexString: "4d87ee", alpha: 0.15)
+let TRANS_BG_COLOR_OK2                      = UIColor.init(hexString: "4d87ee", alpha: 0.4)
+let COLOR_OK                                = UIColor.init(hexString: "4d87ee")
+let COLOR_OK_DARK                           = UIColor.init(hexString: "365fa7")
 
 let TRANS_BG_COLOR_CERTIK                   = UIColor.init(hexString: "E1AA4C", alpha: 0.15)
 let TRANS_BG_COLOR_CERTIK2                  = UIColor.init(hexString: "E1AA4C", alpha: 0.4)

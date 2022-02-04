@@ -206,7 +206,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.47750622034072876" green="0.74372422695159912" blue="0.97303825616836548" alpha="0.1524507705" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.30196078431372547" green="0.52941176470588236" blue="0.93333333333333335" alpha="0.1524507705" colorSpace="deviceRGB"/>
                         <constraints>
                             <constraint firstItem="e9H-aq-wE2" firstAttribute="top" secondItem="Mdv-IF-gYn" secondAttribute="bottom" constant="6" id="0dT-5A-Il4"/>
                             <constraint firstItem="eNV-jC-eCP" firstAttribute="top" secondItem="hWc-50-tvR" secondAttribute="bottom" constant="12" id="5V5-hz-TQb"/>
