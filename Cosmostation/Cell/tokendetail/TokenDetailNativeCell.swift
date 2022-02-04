@@ -79,13 +79,11 @@ class TokenDetailNativeCell: TokenDetailCell {
     }
     
     func onBindBridgeToken(_ chainType: ChainType?, _ denom: String?) {
-        if (chainType! == ChainType.SIF_MAIN) {
-            divideDecimal = WUtils.getSifCoinDecimal(denom)
-            displayDecimal = WUtils.getSifCoinDecimal(denom)
-            
+        if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
             let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-            availableAmount.attributedText = WUtils.displayAmount2(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
+            divideDecimal = bridgeTokenInfo.decimal
+            totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font, divideDecimal, divideDecimal)
+            availableAmount.attributedText = WUtils.displayAmount2(total.stringValue, availableAmount.font, divideDecimal, divideDecimal)
         }
     }
     
@@ -121,21 +119,16 @@ class TokenDetailNativeCell: TokenDetailCell {
         if (balance != nil && bnbToken != nil) {
             frozenLayer.isHidden = false
             lockedLayer.isHidden = false
-//            tokenImg.af_setImage(withURL: URL(string: TOKEN_IMG_URL + bnbToken!.original_symbol + ".png")!)
-//            tokenSymbol.text = bnbToken!.original_symbol.uppercased()
-//            tokenDenom.text = "(" + denom! + ")"
             
             let available = BaseData.instance.availableAmount(denom!)
             let locked = BaseData.instance.lockedAmount(denom!)
             let frozen = BaseData.instance.frozenAmount(denom!)
             let total = available.adding(locked).adding(frozen)
-//            let convertAmount = WUtils.getBnbConvertAmount(denom!)
             
             totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font, 0, 8)
             availableAmount.attributedText = WUtils.displayAmount2(available.stringValue, availableAmount.font, 0, 8)
             lockedAmount.attributedText = WUtils.displayAmount2(locked.stringValue, availableAmount.font, 0, 8)
             fronzenAmount.attributedText = WUtils.displayAmount2(frozen.stringValue, availableAmount.font, 0, 8)
-//            totalValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, convertAmount, 0, totalValue.font)
         }
     }
     
@@ -181,16 +174,4 @@ class TokenDetailNativeCell: TokenDetailCell {
             
         }
     }
-    
-//    func onBindSifTokens(_ denom: String?) {
-////        tokenImg.af_setImage(withURL: URL(string: SIF_COIN_IMG_URL + denom! + ".png")!)
-////        tokenSymbol.text = denom!.substring(from: 1).uppercased()
-////        tokenDenom.text = "(" + denom! + ")"
-//        
-//        let dpDecimal = WUtils.getSifCoinDecimal(denom!)
-//        let available = BaseData.instance.getAvailableAmount_gRPC(denom!)
-//        totalAmount.attributedText = WUtils.displayAmount2(available.stringValue, totalAmount.font, dpDecimal, dpDecimal)
-//        availableAmount.attributedText = WUtils.displayAmount2(available.stringValue, availableAmount.font, dpDecimal, dpDecimal)
-////        totalValue.attributedText = WUtils.dpUserCurrencyValue(denom!.substring(from: 1), available, dpDecimal, totalValue.font)
-//    }
 }

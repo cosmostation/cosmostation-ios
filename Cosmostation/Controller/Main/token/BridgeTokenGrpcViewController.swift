@@ -26,14 +26,16 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     @IBOutlet weak var btnSend: UIButton!
     
     var bridgeDenom = ""
+    var priceDenom = ""
     var bridgeDivideDecimal: Int16 = 6
-    var bridgeDisplayDecimal: Int16 = 6
     var totalAmount = NSDecimalNumber.zero
+    var bridgeToken: BridgeToken!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.bridgeToken = BaseData.instance.getBridge_gRPC(bridgeDenom)
         
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
@@ -52,6 +54,9 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+        if (bridgeToken == nil) {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @objc func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -59,33 +64,29 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onInitView() {
-        var baseDenom = ""
-        if (chainType == ChainType.SIF_MAIN) {
-            baseDenom = bridgeDenom.substring(from: 1)
-            naviTokenImg.af_setImage(withURL: URL(string: SIF_COIN_IMG_URL + bridgeDenom + ".png")!)
-            naviTokenSymbol.text = baseDenom.uppercased()
-            
-            bridgeDivideDecimal = WUtils.getSifCoinDecimal(bridgeDenom)
-            bridgeDisplayDecimal = WUtils.getSifCoinDecimal(bridgeDenom)
-            totalAmount = BaseData.instance.getAvailableAmount_gRPC(bridgeDenom)
-        }
+        naviTokenImg.af_setImage(withURL: bridgeToken.getImgUrl())
+        naviTokenSymbol.text = bridgeToken.origin_symbol
         
-        self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(baseDenom, naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpValueChange(baseDenom, font: naviUpdownPercent.font)
-        let changeValue = WUtils.valueChange(baseDenom)
+        bridgeDivideDecimal = bridgeToken.decimal
+        priceDenom = bridgeToken.origin_symbol!.lowercased()
+        totalAmount = BaseData.instance.getAvailableAmount_gRPC(bridgeDenom)
+        
+        self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(priceDenom, naviPerPrice.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpValueChange(priceDenom, font: naviUpdownPercent.font)
+        let changeValue = WUtils.valueChange(priceDenom)
         if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
-        
+
         self.topCard.backgroundColor = WUtils.getChainBg(chainType)
         if (account?.account_has_private == true) {
             self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
             self.topKeyState.tintColor = WUtils.getChainColor(chainType)
         }
-        
+
         self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true
-        self.topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalAmount, bridgeDivideDecimal, topValue.font)
+        self.topValue.attributedText = WUtils.dpUserCurrencyValue(priceDenom, totalAmount, bridgeDivideDecimal, topValue.font)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
