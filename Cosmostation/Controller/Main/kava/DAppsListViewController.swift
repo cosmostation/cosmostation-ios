@@ -525,7 +525,7 @@ extension Kava_Cdp_V1beta1_CollateralParam {
     }
     
     public func getMarketImgPath() -> String? {
-        return denom + "usd"
+        return type
     }
     
     func getpDenom() -> String? {

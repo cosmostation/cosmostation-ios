@@ -28,7 +28,6 @@ class CdpListAllCell: UITableViewCell {
     
     
     func onBindOtherCdp(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam) {
-        
         marketType.text = collateralParam.type.uppercased()
         marketTitle.text = collateralParam.getDpMarketId()
         minCollateralRate.attributedText = WUtils.displayPercent(collateralParam.getDpLiquidationRatio(), minCollateralRate.font)
