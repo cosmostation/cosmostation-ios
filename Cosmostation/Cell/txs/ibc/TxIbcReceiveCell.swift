@@ -30,7 +30,10 @@ class TxIbcReceiveCell: TxCell {
             senderLabel.text = dicData["sender"] as? String
             receipientLabel.text = dicData["receiver"] as? String
             
-            let receivedCoin = Coin.init(dicData["denom"] as! String, dicData["amount"] as! String)
+            var denom = dicData["denom"] as! String
+            denom = String(denom.split(separator: "/").last!)
+            
+            let receivedCoin = Coin.init(denom, dicData["amount"] as! String)
             WUtils.showCoinDp(receivedCoin, receivedDenomLabel, receivedAmountLabel, chain)
         }
     }
