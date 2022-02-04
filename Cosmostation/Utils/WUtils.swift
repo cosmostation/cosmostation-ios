@@ -708,7 +708,16 @@ public class WUtils {
                 } else if (chainType! == ChainType.SIF_MAIN && coin.denom.starts(with: "c")) {
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
                     let decimal = getSifCoinDecimal(coin.denom)
-                    totalValue = totalValue.adding(userCurrencyValue(coin.denom.substring(from: 1), available, decimal))
+                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
+                    }
+                    
+                } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN && coin.denom.starts(with: "gravity0x")) {
+                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
+                    let decimal = getGBrdigeCoinDecimal(coin.denom)
+                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
+                    }
                     
                 } else if (chainType! == ChainType.EMONEY_MAIN && coin.denom.starts(with: "e")) {
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
@@ -1463,13 +1472,17 @@ public class WUtils {
             let dpDecimal = WUtils.getGBrdigeCoinDecimal(coin.denom)
             if (coin.denom == GRAVITY_BRIDGE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
+            } else if (coin.denom.starts(with: "gravity0x")) {
                 denomLabel?.textColor = .white
                 if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
                     denomLabel?.text = bridgeTokenInfo.origin_symbol
                 } else {
                     denomLabel?.text = coin.denom.uppercased()
                 }
+                
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, dpDecimal, dpDecimal)
             
@@ -1845,13 +1858,16 @@ public class WUtils {
             let dpDecimal = WUtils.getGBrdigeCoinDecimal(denom)
             if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
+            } else if (denom.starts(with: "gravity0x")) {
                 denomLabel?.textColor = .white
                 if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
                     denomLabel?.text = bridgeTokenInfo.origin_symbol
                 } else {
                     denomLabel?.text = denom.uppercased()
                 }
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
             
