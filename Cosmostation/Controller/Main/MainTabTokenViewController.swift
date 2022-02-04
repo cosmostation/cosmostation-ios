@@ -931,7 +931,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             
         } else if (balance.balance_denom == OKEX_MAIN_DENOM) {
             if let okToken = WUtils.getOkToken(OKEX_MAIN_DENOM) {
-                cell?.tokenImg.image = UIImage(named: "okexTokenImg")
+                cell?.tokenImg.image = UIImage(named: "tokenOkx")
                 cell?.tokenSymbol.text = okToken.original_symbol!.uppercased()
                 cell?.tokenSymbol.textColor = COLOR_OK
                 cell?.tokenTitle.text = "(" + okToken.symbol! + ")"

@@ -95,7 +95,7 @@ class WalletGuideCell: UITableViewCell {
             btn2Label.setTitle(NSLocalizedString("send_guide_btn_blog", comment: ""), for: .normal)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
-            guideImg.image = UIImage(named: "okexImg")
+            guideImg.image = UIImage(named: "infoiconOkx")
             guideTitle.text = NSLocalizedString("send_guide_title_ok", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_ok", comment: "")
             btn1Label.setTitle(NSLocalizedString("send_guide_btn_market", comment: ""), for: .normal)

@@ -359,7 +359,7 @@ extension BaseViewController {
         let okexAction = UIAlertAction(title: NSLocalizedString("chain_title_okex", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.OKEX_MAIN)
         })
-        okexAction.setValue(UIImage(named: "okexChainImg")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        okexAction.setValue(UIImage(named: "chainOkex")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
         let cryptoAction = UIAlertAction(title: NSLocalizedString("chain_title_crypto", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.CRYPTO_MAIN)

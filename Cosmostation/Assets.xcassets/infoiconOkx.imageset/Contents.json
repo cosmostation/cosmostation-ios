@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "okexChainImg.png",
+      "filename" : "infoiconOkx.png",
       "scale" : "1x",
       "idiom" : "universal"
     },
     {
-      "scale" : "2x",
-      "filename" : "okexChainImg@2x.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "infoiconOkx@2x.png",
+      "scale" : "2x"
     },
     {
+      "scale" : "3x",
       "idiom" : "universal",
-      "filename" : "okexChainImg@3x.png",
-      "scale" : "3x"
+      "filename" : "infoiconOkx@3x.png"
     }
   ],
   "info" : {

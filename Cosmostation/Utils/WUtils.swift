@@ -4189,7 +4189,7 @@ public class WUtils {
             return UIImage(named: "bnbTokenImg")
             
         } else if (chain == ChainType.OKEX_MAIN) {
-            return UIImage(named: "okexTokenImg")
+            return UIImage(named: "tokenOkx")
             
         } else if (chain == ChainType.AKASH_MAIN) {
             return UIImage(named: "akashTokenImg")
@@ -4292,7 +4292,7 @@ public class WUtils {
         if (chain == ChainType.COSMOS_MAIN) { return UIImage(named: "cosmosWhMain") }
         else if (chain == ChainType.IRIS_MAIN) { return UIImage(named: "irisWh") }
         else if (chain == ChainType.BINANCE_MAIN) { return UIImage(named: "binanceChImg") }
-        else if (chain == ChainType.OKEX_MAIN) { return UIImage(named: "okexChainImg") }
+        else if (chain == ChainType.OKEX_MAIN) { return UIImage(named: "chainOkex") }
         else if (chain == ChainType.AKASH_MAIN) { return UIImage(named: "akashChainImg") }
         else if (chain == ChainType.KAVA_MAIN) { return UIImage(named: "kavaImg") }
         else if (chain == ChainType.BAND_MAIN) { return UIImage(named: "chainBandprotocal") }
