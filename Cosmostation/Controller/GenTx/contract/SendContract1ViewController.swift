@@ -38,6 +38,11 @@ class SendContract1ViewController: BaseViewController, UITextFieldDelegate {
         btn01.setTitle(dp, for: .normal)
     }
     
+    override func enableUserInteraction() {
+        self.btnBack.isUserInteractionEnabled = true
+        self.btnNext.isUserInteractionEnabled = true
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if (textField == mTargetAmountTextField) {
             guard let text = textField.text else { return true }
