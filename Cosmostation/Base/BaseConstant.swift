@@ -593,6 +593,10 @@ let GAS_FEE_RATE_TINY_JUNO                  = "0.0025"
 let GAS_FEE_RATE_LOW_JUNO                   = "0.005"
 let GAS_FEE_RATE_AVERAGE_JUNO               = "0.025"
 
+let GAS_FEE_RATE_TINY_KONSTELLATION         = "0.0001"
+let GAS_FEE_RATE_LOW_KONSTELLATION          = "0.001"
+let GAS_FEE_RATE_AVERAGE_KONSTELLATION      = "0.01"
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
@@ -1331,6 +1335,7 @@ let BLOCK_TIME_GRAV         = NSDecimalNumber.init(string: "6.4500")
 let BLOCK_TIME_LUM          = NSDecimalNumber.init(string: "5.7210")
 let BLOCK_TIME_CHIHUAHUA    = NSDecimalNumber.init(string: "5.8172")
 let BLOCK_TIME_AXELAR       = NSDecimalNumber.init(string: "5.5596")
+let BLOCK_TIME_KONSTEALLTION = NSDecimalNumber.init(string: "5.376")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;
