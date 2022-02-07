@@ -769,11 +769,12 @@ final class BaseData : NSObject{
                 result.append(chain)
             }
         }
-        
         var sorted = Array<ChainType>()
         getUserSortedChainS()?.forEach({ chainName in
-            if (result.contains(WUtils.getChainType(chainName)!)) {
-                sorted.append(WUtils.getChainType(chainName)!)
+            if let checkChain = WUtils.getChainType(chainName) {
+                if (result.contains(checkChain) == true) {
+                    sorted.append(checkChain)
+                }
             }
         })
         result.forEach { chain in
@@ -801,8 +802,10 @@ final class BaseData : NSObject{
         let rawDpChains = userDisplayChains()
         let orderedChainS = getUserHiddenChains()
         orderedChainS?.forEach({ chainS in
-            if (rawDpChains.contains(WUtils.getChainType(chainS)!) == true) {
-                result.append(WUtils.getChainType(chainS)!)
+            if let checkChain = WUtils.getChainType(chainS) {
+                if (rawDpChains.contains(checkChain) == true) {
+                    result.append(checkChain)
+                }
             }
         })
         rawDpChains.forEach { chain in
@@ -819,8 +822,10 @@ final class BaseData : NSObject{
         let rawDpChains = userDisplayChains()
         let orderedChainS = getUserHiddenChains()
         orderedChainS?.forEach({ chainS in
-            if (rawDpChains.contains(WUtils.getChainType(chainS)!) == true) {
-                result.append(WUtils.getChainType(chainS)!)
+            if let checkChain = WUtils.getChainType(chainS) {
+                if (rawDpChains.contains(checkChain) == true) {
+                    result.append(checkChain)
+                }
             }
         })
         rawDpChains.forEach { chain in
@@ -843,7 +848,9 @@ final class BaseData : NSObject{
         var result = Array<ChainType>()
         let expendedChainS = UserDefaults.standard.stringArray(forKey: KEY_USER_EXPENDED_CHAINS) ?? []
         expendedChainS.forEach({ chainS in
-            result.append(WUtils.getChainType(chainS)!)
+            if let checkChain = WUtils.getChainType(chainS) {
+                result.append(checkChain)
+            }
         })
         return result;
     }
