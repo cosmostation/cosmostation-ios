@@ -1125,6 +1125,8 @@
 		04D138582691E25500D6AF9F /* TxJoinPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D138562691E25500D6AF9F /* TxJoinPoolCell.xib */; };
 		04D1385B2691E26700D6AF9F /* TxExitPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D138592691E26700D6AF9F /* TxExitPoolCell.swift */; };
 		04D1385C2691E26700D6AF9F /* TxExitPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D1385A2691E26700D6AF9F /* TxExitPoolCell.xib */; };
+		04D93A5827B1347900F8CE0D /* WalletKonstellationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D93A5627B1347900F8CE0D /* WalletKonstellationCell.swift */; };
+		04D93A5927B1347900F8CE0D /* WalletKonstellationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D93A5727B1347900F8CE0D /* WalletKonstellationCell.xib */; };
 		04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
 		04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
 		04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2C276F23D9009B39BA /* xmas@2x.png */; };
@@ -3045,6 +3047,8 @@
 		04D138562691E25500D6AF9F /* TxJoinPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxJoinPoolCell.xib; sourceTree = "<group>"; };
 		04D138592691E26700D6AF9F /* TxExitPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxExitPoolCell.swift; sourceTree = "<group>"; };
 		04D1385A2691E26700D6AF9F /* TxExitPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxExitPoolCell.xib; sourceTree = "<group>"; };
+		04D93A5627B1347900F8CE0D /* WalletKonstellationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletKonstellationCell.swift; sourceTree = "<group>"; };
+		04D93A5727B1347900F8CE0D /* WalletKonstellationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletKonstellationCell.xib; sourceTree = "<group>"; };
 		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
 		04E25D2B276F23D9009B39BA /* new2022@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@3x.png"; sourceTree = "<group>"; };
 		04E25D2C276F23D9009B39BA /* xmas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@2x.png"; sourceTree = "<group>"; };
@@ -5239,6 +5243,8 @@
 				2889C8BA276DC2B90041D68C /* WalletLumCell.xib */,
 				045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */,
 				045E08492782EB71004A7801 /* WalletChihuahuaCell.xib */,
+				04D93A5627B1347900F8CE0D /* WalletKonstellationCell.swift */,
+				04D93A5727B1347900F8CE0D /* WalletKonstellationCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -6728,6 +6734,7 @@
 				287E0AA526EDC6F300F8C242 /* WalletAxelarCell.xib in Resources */,
 				04E25D472770D56C009B39BA /* NFTDetailInfoCell.xib in Resources */,
 				283E94872549333B007A9291 /* AccountDetailViewController.xib in Resources */,
+				04D93A5927B1347900F8CE0D /* WalletKonstellationCell.xib in Resources */,
 				E103DAAF22812773006C2146 /* ValidatorDetailHistoryEmpty.xib in Resources */,
 				2807DB3A2788182000016571 /* GenProfile0ViewController.xib in Resources */,
 				28393B8426B9023D00DF2F88 /* HdacBalancePopup.xib in Resources */,
@@ -7887,6 +7894,7 @@
 				2852EAF926821084003A5E74 /* SifIncentive.swift in Sources */,
 				04B1BE9227A3BD1B00B1236A /* axelar_vote_v1beta1_types.pb.swift in Sources */,
 				040FAABD275F55C400229F6F /* regen_group_v1alpha1_tx.grpc.swift in Sources */,
+				04D93A5827B1347900F8CE0D /* WalletKonstellationCell.swift in Sources */,
 				284D17D92535572300C364F9 /* DAppsListViewController.swift in Sources */,
 				040FA7F5275F55C200229F6F /* akash_cert_v1beta2_cert.pb.swift in Sources */,
 				04B1BEA227A3BD1B00B1236A /* axelar_nexus_exported_v1beta1_types.pb.swift in Sources */,

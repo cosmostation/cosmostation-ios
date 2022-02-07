@@ -506,6 +506,11 @@ extension BaseViewController {
         })
         axelarAction.setValue(UIImage(named: "chainAxelar")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let konstellationAction = UIAlertAction(title: NSLocalizedString("chain_title_konstellation", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.KONSTELLATION_MAIN)
+        })
+        konstellationAction.setValue(UIImage(named: "chainKonstellation")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -536,6 +541,7 @@ extension BaseViewController {
         showAlert.addAction(junoAction)
         showAlert.addAction(kavaAction)
         showAlert.addAction(kiAction)
+        showAlert.addAction(konstellationAction)
         showAlert.addAction(lumAction)
         showAlert.addAction(mediAction)
         showAlert.addAction(okexAction)

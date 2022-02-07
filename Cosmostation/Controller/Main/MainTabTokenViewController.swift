@@ -777,6 +777,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_SWAP_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == KONSTELLATION_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenKonstellation")
+            cell?.tokenSymbol.text = "DARC"
+            cell?.tokenSymbol.textColor = COLOR_KONSTELLATION
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Konstellation Staking Coin"
+            
+            let allDarc = WUtils.getAllMainAsset(KONSTELLATION_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allDarc.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KONSTELLATION_MAIN_DENOM, allDarc, 6, cell!.tokenValue.font)
+            
         }
         
         

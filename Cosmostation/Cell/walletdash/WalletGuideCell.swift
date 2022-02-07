@@ -212,6 +212,11 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_chihuahua", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_chihuahua", comment: "")
             
+        } else if (chainType == ChainType.KONSTELLATION_MAIN) {
+            guideImg.image = UIImage(named: "infoiconKonstellation")
+            guideTitle.text = NSLocalizedString("send_guide_title_konstellation", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_konstellation", comment: "")
+            
         }
         
     }
