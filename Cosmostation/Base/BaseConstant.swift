@@ -115,6 +115,8 @@ let UMEE_TEST_API                       = "https://api-office.cosmostation.io/um
 
 let AXELAR_API                          = "https://api-axelar.cosmostation.io/";
 
+let KONSTELLATION_API                   = "https://api-konstellation.cosmostation.io/";
+
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
@@ -159,6 +161,7 @@ let BITSONG_VAL_URL                     = "https://raw.githubusercontent.com/cos
 let DESMOS_VAL_URL                      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/desmos/";
 let LUM_VAL_URL                         = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/lum-network/";
 let CHIHUAHUA_VAL_URL                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/chihuahua/";
+let KONSTELLATION_VAL_URL               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/konstellation/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -202,6 +205,7 @@ let RELAYER_IMG_LUM                     = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_CHIHUAHUA               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/chihuahua/relay-chihuahua-unknown.png"
 let RELAYER_IMG_KAVA                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/kava/relay-kava-unknown.png"
 let RELAYER_IMG_AXELAR                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/axelar/relay-axelar-unknown.png"
+let RELAYER_IMG_KONSTELLATION           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/konstellation/relay-konstellation-unknown.png"
 
 
 
@@ -940,6 +944,11 @@ let TRANS_BG_COLOR_CHIHUAHUA2               = UIColor.init(hexString: "ffffff", 
 let COLOR_CHIHUAHUA                         = UIColor.init(hexString: "f4b330")
 let COLOR_CHIHUAHUA_DARK                    = UIColor.init(hexString: "8e6d2c")
 
+let TRANS_BG_COLOR_KONSTELLATION            = UIColor.init(hexString: "9bbffe", alpha: 0.15)
+let TRANS_BG_COLOR_KONSTELLATION2           = UIColor.init(hexString: "9bbffe", alpha: 0.4)
+let COLOR_KONSTELLATION                     = UIColor.init(hexString: "9bbffe")
+let COLOR_KONSTELLATION_DARK                = UIColor.init(hexString: "6279a0")
+
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
@@ -986,6 +995,7 @@ public enum ChainType: String {
     case LUM_MAIN
     case CHIHUAHUA_MAIN
     case AXELAR_MAIN
+    case KONSTELLATION_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1015,6 +1025,7 @@ public enum ChainType: String {
 //        result.append(INJECTIVE_MAIN)
         result.append(JUNO_MAIN)
         result.append(KAVA_MAIN)
+        result.append(KONSTELLATION_MAIN)
         result.append(KI_MAIN)
         result.append(LUM_MAIN)
         result.append(MEDI_MAIN)
@@ -1130,6 +1141,7 @@ let CHAIN_DESMOS_S = "SUPPORT_CHAIN_DESMOS"
 let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
 let CHAIN_CHIHUAHUA_S = "SUPPORT_CHAIN_CHIHUAHUA"
 let CHAIN_AXELAR_S = "SUPPORT_CHAIN_AXELAR"
+let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1171,6 +1183,7 @@ let BITSONG_MAIN_DENOM = "ubtsg"
 let DESMOS_MAIN_DENOM = "udsm"
 let LUM_MAIN_DENOM = "ulum"
 let CHIHUAHUA_MAIN_DENOM = "uhuahua"
+let KONSTELLATION_MAIN_DENOM = "udarc"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1262,6 +1275,7 @@ let EXPLORER_DESMOS         = "https://www.mintscan.io/desmos/";
 let EXPLORER_LUM            = "https://www.mintscan.io/lum/";
 let EXPLORER_CHIHUAHUA      = "https://www.mintscan.io/chihuahua/";
 let EXPLORER_AXELAR         = "https://www.mintscan.io/axelar/";
+let EXPLORER_KONSTELLATION  = "https://www.mintscan.io/konstellation/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
