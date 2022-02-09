@@ -1197,7 +1197,7 @@ final class BaseData : NSObject{
                 }
             }
         }
-        
+
         //set custompath 118 -> 0, 459 -> 1
         let allKavaAccount = BaseData.instance.selectAllAccountsByChain(ChainType.KAVA_MAIN)
         for account in allKavaAccount {
@@ -1210,7 +1210,7 @@ final class BaseData : NSObject{
                 updateAccountPathType(account)
             }
         }
-        
+
         //set custompath 118 -> 0, 880 -> 1
         let allLumAccount = BaseData.instance.selectAllAccountsByChain(ChainType.LUM_MAIN)
         for account in allLumAccount {
@@ -1238,6 +1238,7 @@ final class BaseData : NSObject{
     
     //for okchain key custom_path 0 -> tendermint(996), 1 -> ethermint(996), 2 -> etherium(60)
     public func updateAccountPathType(_ account: Account) -> Int64 {
+        if (account.account_import_time > 1643986800000) { return -1 }
         let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
         do {
             return try Int64(database.run(target.update(DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path)))
