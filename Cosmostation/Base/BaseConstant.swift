@@ -1005,7 +1005,6 @@ public enum ChainType: String {
     case COSMOS_TEST
     case IRIS_TEST
     case ALTHEA_TEST
-//    case UMEE_TEST
 //    case AXELAR_TEST
     
     static func SUPPRT_CHAIN() -> Array<ChainType> {
@@ -1050,7 +1049,6 @@ public enum ChainType: String {
 //        result.append(COSMOS_TEST)
 //        result.append(IRIS_TEST)
 //        result.append(ALTHEA_TEST)
-//        result.append(UMEE_TEST)
         return result
     }
     
@@ -1150,7 +1148,6 @@ let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
 let CHAIN_ALTHEA_TEST_S = "SUPPORT_CHAIN_ALTHEA_TEST"
-//let CHAIN_UMEE_TEST_S = "SUPPORT_CHAIN_UMEE_TEST"
 
 let COSMOS_MAIN_DENOM = "uatom"
 let IRIS_MAIN_DENOM = "uiris"
@@ -1285,7 +1282,6 @@ let EXPLORER_UMEE           = "https://www.mintscan.io/umee/";
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
 let EXPLORER_ALTHEA_TEST    = "https://testnet.mintscan.io/althea/";
-//let EXPLORER_UMEE_TEST      = "https://testnet.mintscan.io/umee/";
 let EXPLORER_HDAC_TEST      = "http://test.explorer.hdactech.com/hdac-explorer/";
 
 let EXPLORER_OEC_TX         = "https://www.oklink.com/oec/"
