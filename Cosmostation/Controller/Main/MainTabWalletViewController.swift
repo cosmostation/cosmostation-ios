@@ -290,14 +290,14 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetAxelarItems(tableView, indexPath);
         } else if (chainType == ChainType.KONSTELLATION_MAIN) {
             return onSetKonstellationItems(tableView, indexPath);
+        } else if (chainType == ChainType.UMEE_MAIN) {
+            return onSetUmeeItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
             return onSetCosmosTestItems(tableView, indexPath);
         } else if (chainType == ChainType.IRIS_TEST) {
             return onSetIrisTestItems(tableView, indexPath);
-        } else if (chainType == ChainType.UMEE_TEST) {
-            return onSetUmeeItems(tableView, indexPath);
         } else {
             let cell:WalletAddressCell? = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             return cell!
@@ -1873,7 +1873,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 self.onShowSafariWeb(url)
             }
             
-        } else if (chainType! == ChainType.UMEE_TEST) {
+        } else if (chainType! == ChainType.UMEE_MAIN) {
             guard let url = URL(string: "https://umee.cc/") else { return }
             self.onShowSafariWeb(url)
             
@@ -2023,7 +2023,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 guard let url = URL(string: "https://medium.com/medibloc/") else { return }
                 self.onShowSafariWeb(url)
             }
-        } else if (chainType! == ChainType.UMEE_TEST) {
+        } else if (chainType! == ChainType.UMEE_MAIN) {
             guard let url = URL(string: "https://medium.com/umeeblog") else { return }
             self.onShowSafariWeb(url)
             
