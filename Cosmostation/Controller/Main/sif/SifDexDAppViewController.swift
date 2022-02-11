@@ -189,6 +189,21 @@ extension WUtils {
         }
     }
     
+    //TEMP
+    static func getInjectiveCoinDecimal(_ denom: String?) -> Int16 {
+        if (denom == INJECTIVE_MAIN_DENOM) {
+            return 18
+        } else if (denom?.starts(with: "share") == true) {
+            return 18
+        } else if (denom?.starts(with: "peggy0x") == true) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
+                return bridgeTokenInfo.decimal
+            }
+        }
+        return 18
+    }
+    
+    
     
     static func DpSifCoinName(_ label: UILabel, _ denom: String) {
         if (denom == SIF_MAIN_DENOM) {

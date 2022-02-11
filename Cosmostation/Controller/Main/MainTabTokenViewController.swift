@@ -913,8 +913,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(token.denom, token.getAmount(), decimal, cell!.tokenValue.font)
     }
     
-    
-    
     //bind etc tokens with grpc
     func onBindEtcToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
         //bind "btch" for kava

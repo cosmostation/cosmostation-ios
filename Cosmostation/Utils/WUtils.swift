@@ -739,6 +739,14 @@ public class WUtils {
                     let amount = WUtils.getKavaTokenAll(coin.denom)
                     let assetValue = userCurrencyValue(baseDenom, amount, decimal)
                     totalValue = totalValue.adding(assetValue)
+                    
+                } else if (chainType! == ChainType.INJECTIVE_MAIN && coin.denom.starts(with: "peggy0x")) {
+                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
+                    let decimal = getInjectiveCoinDecimal(coin.denom)
+                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
+                    }
+                    
                 }
                 
                 else if (coin.isIbc()) {
@@ -1505,13 +1513,22 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            let dpDecimal = WUtils.getInjectiveCoinDecimal(coin.denom)
             if (coin.denom == INJECTIVE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
+            } else if (coin.denom.starts(with: "peggy0x")) {
+                denomLabel?.textColor = .white
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+                    denomLabel?.text = bridgeTokenInfo.origin_symbol
+                } else {
+                    denomLabel?.text = coin.denom.uppercased()
+                }
+                
             } else {
                 denomLabel?.textColor = .white
                 denomLabel?.text = coin.denom.uppercased()
             }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, dpDecimal, dpDecimal)
             
         } else if (chainType == ChainType.BITSONG_MAIN) {
             if (coin.denom == BITSONG_MAIN_DENOM) {
@@ -1899,13 +1916,21 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            let dpDecimal = WUtils.getInjectiveCoinDecimal(denom)
             if (denom == INJECTIVE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
+            } else if (denom.starts(with: "peggy0x")) {
+                denomLabel?.textColor = .white
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
+                    denomLabel?.text = bridgeTokenInfo.origin_symbol
+                } else {
+                    denomLabel?.text = denom.uppercased()
+                }
             } else {
                 denomLabel?.textColor = .white
                 denomLabel?.text = denom.uppercased()
             }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
             
         } else if (chainType == ChainType.BITSONG_MAIN) {
             if (denom == BITSONG_MAIN_DENOM) {
@@ -2403,6 +2428,8 @@ public class WUtils {
                 return getGBrdigeCoinDecimal(denom)
             } else if (chain == ChainType.KAVA_MAIN) {
                 return getKavaCoinDecimal(denom)
+            } else if (chain == ChainType.INJECTIVE_MAIN) {
+                return getInjectiveCoinDecimal(denom)
             }
             print("CHECK DECIMAL")
             return 6
