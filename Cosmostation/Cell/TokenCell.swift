@@ -26,7 +26,7 @@ class TokenCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.tokenImg.image = UIImage(named: "tokenIc")
+        self.tokenImg.af_cancelImageRequest()
         self.tokenSymbol.textColor = UIColor.white
         self.tokenSymbol.text = "-"
         self.tokenTitle.text = "-"
@@ -37,7 +37,11 @@ class TokenCell: UITableViewCell {
     
     func onBindBridgeToken(_ chain: ChainType, _ coin: Coin) {
         if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-            tokenImg.af_setImage(withURL: bridgeTokenInfo.getImgUrl())
+            if let tokenImgeUrl = bridgeTokenInfo.getImgUrl() {
+                tokenImg.af_setImage(withURL: tokenImgeUrl)
+            } else {
+                tokenImg.image = UIImage(named: "tokenIc")
+            }
             tokenSymbol.text = bridgeTokenInfo.origin_symbol
             tokenSymbol.textColor = UIColor.white
             tokenTitle.text = ""

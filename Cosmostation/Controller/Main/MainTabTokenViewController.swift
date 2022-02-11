@@ -874,7 +874,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = coin.denom.uppercased()
             cell?.tokenSymbol.textColor = UIColor.white
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Pool Token"
+            cell?.tokenDescription.text = "Pool Asset"
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
         }

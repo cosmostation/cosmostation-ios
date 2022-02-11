@@ -25,11 +25,11 @@ public struct BridgeToken : Codable {
         self.logo = dictionary?["logo"] as? String ?? ""
     }
     
-    func getImgUrl() -> URL {
+    func getImgUrl() -> URL? {
         if let rawUrl = URL(string: BRIDGE_COIN_IMG_URL + logo) {
             return rawUrl
         }
-        return URL(string: "")!
+        return nil
     }
     
 }
