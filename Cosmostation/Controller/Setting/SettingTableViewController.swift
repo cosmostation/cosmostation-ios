@@ -262,6 +262,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     guard let url = URL(string: EXPLORER_KONSTELLATION) else { return }
                     self.onShowSafariWeb(url)
                     
+                } else if (chainType == ChainType.UMEE_MAIN) {
+                    guard let url = URL(string: EXPLORER_UMEE) else { return }
+                    self.onShowSafariWeb(url)
+                    
                 }
                 
                 else if (chainType == ChainType.COSMOS_TEST) {
@@ -274,10 +278,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     
                 } else if (chainType == ChainType.ALTHEA_TEST) {
                     guard let url = URL(string: EXPLORER_ALTHEA_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.UMEE_TEST) {
-                    guard let url = URL(string: EXPLORER_UMEE_TEST) else { return }
                     self.onShowSafariWeb(url)
                     
                 }

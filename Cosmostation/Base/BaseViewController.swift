@@ -511,16 +511,18 @@ extension BaseViewController {
         })
         konstellationAction.setValue(UIImage(named: "chainKonstellation")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let umeeAction = UIAlertAction(title: NSLocalizedString("chain_title_umee", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.UMEE_MAIN)
+        })
+        umeeAction.setValue(UIImage(named: "chainUmee")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
         })
         altheaTestAction.setValue(UIImage(named: "testnetAlthea")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
-        let umeeTestAction = UIAlertAction(title: NSLocalizedString("chain_title_umee_test", comment: ""), style: .default, handler: { _ in
-            self.onChainSelected(ChainType.UMEE_TEST)
-        })
-        umeeTestAction.setValue(UIImage(named: "testnetUmee")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         showAlert.addAction(cosmosAction)
         showAlert.addAction(irisAction)
@@ -554,15 +556,13 @@ extension BaseViewController {
         showAlert.addAction(sifAction)
         showAlert.addAction(stargazeAction)
         showAlert.addAction(starnameAction)
+        showAlert.addAction(umeeAction)
         
 //        showAlert.addAction(altheaAction)
 //        showAlert.addAction(injectiveAction)
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {
             showAlert.addAction(altheaTestAction)
-        }
-        if (ChainType.SUPPRT_CHAIN().contains(ChainType.UMEE_TEST)) {
-            showAlert.addAction(umeeTestAction)
         }
         
         if (cancleable) {

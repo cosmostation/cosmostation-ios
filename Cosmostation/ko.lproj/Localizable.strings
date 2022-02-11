@@ -951,6 +951,7 @@ support@cosmostation.io";
 "chain_title_chihuahua" = "Chihuahua";
 "chain_title_axelar" = "Axelar";
 "chain_title_konstellation" = "Konstellation";
+"chain_title_umee" = "Umee";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_test_bnb" = "Binance Testnet";

@@ -111,7 +111,7 @@ let LUM_API                             = "https://api-lum.cosmostation.io/";
 
 let CHIHUAHUA_API                       = "https://api-chihuahua.cosmostation.io/";
 
-let UMEE_TEST_API                       = "https://api-office.cosmostation.io/umee-betanet-v5/";
+let UMEE_API                            = "https://api-office.cosmostation.io/umeeverse-party-1/";
 
 let AXELAR_API                          = "https://api-axelar.cosmostation.io/";
 
@@ -1000,11 +1000,12 @@ public enum ChainType: String {
     case CHIHUAHUA_MAIN
     case AXELAR_MAIN
     case KONSTELLATION_MAIN
+    case UMEE_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
     case ALTHEA_TEST
-    case UMEE_TEST
+//    case UMEE_TEST
 //    case AXELAR_TEST
     
     static func SUPPRT_CHAIN() -> Array<ChainType> {
@@ -1043,19 +1044,17 @@ public enum ChainType: String {
         result.append(SIF_MAIN)
         result.append(STARGAZE_MAIN)
         result.append(IOV_MAIN)
+        result.append(UMEE_MAIN)
         
 
 //        result.append(COSMOS_TEST)
 //        result.append(IRIS_TEST)
 //        result.append(ALTHEA_TEST)
-        result.append(UMEE_TEST)
+//        result.append(UMEE_TEST)
         return result
     }
     
     static func IS_TESTNET(_ chain: ChainType?) -> Bool {
-        if (chain == UMEE_TEST) {
-            return true
-        }
         return false
     }
     
@@ -1146,11 +1145,12 @@ let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
 let CHAIN_CHIHUAHUA_S = "SUPPORT_CHAIN_CHIHUAHUA"
 let CHAIN_AXELAR_S = "SUPPORT_CHAIN_AXELAR"
 let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
+let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
 let CHAIN_ALTHEA_TEST_S = "SUPPORT_CHAIN_ALTHEA_TEST"
-let CHAIN_UMEE_TEST_S = "SUPPORT_CHAIN_UMEE_TEST"
+//let CHAIN_UMEE_TEST_S = "SUPPORT_CHAIN_UMEE_TEST"
 
 let COSMOS_MAIN_DENOM = "uatom"
 let IRIS_MAIN_DENOM = "uiris"
@@ -1280,11 +1280,12 @@ let EXPLORER_LUM            = "https://www.mintscan.io/lum/";
 let EXPLORER_CHIHUAHUA      = "https://www.mintscan.io/chihuahua/";
 let EXPLORER_AXELAR         = "https://www.mintscan.io/axelar/";
 let EXPLORER_KONSTELLATION  = "https://www.mintscan.io/konstellation/";
+let EXPLORER_UMEE           = "https://www.mintscan.io/umee/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
 let EXPLORER_ALTHEA_TEST    = "https://testnet.mintscan.io/althea/";
-let EXPLORER_UMEE_TEST      = "https://testnet.mintscan.io/umee/";
+//let EXPLORER_UMEE_TEST      = "https://testnet.mintscan.io/umee/";
 let EXPLORER_HDAC_TEST      = "http://test.explorer.hdactech.com/hdac-explorer/";
 
 let EXPLORER_OEC_TX         = "https://www.oklink.com/oec/"
@@ -1336,6 +1337,7 @@ let BLOCK_TIME_LUM          = NSDecimalNumber.init(string: "5.7210")
 let BLOCK_TIME_CHIHUAHUA    = NSDecimalNumber.init(string: "5.8172")
 let BLOCK_TIME_AXELAR       = NSDecimalNumber.init(string: "5.5596")
 let BLOCK_TIME_KONSTEALLTION = NSDecimalNumber.init(string: "5.376")
+let BLOCK_TIME_UMEE         = NSDecimalNumber.init(string: "5.658")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;

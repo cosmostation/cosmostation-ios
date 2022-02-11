@@ -142,7 +142,7 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_althea", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_althea", comment: "")
             
-        } else if (chainType == ChainType.UMEE_TEST) {
+        } else if (chainType == ChainType.UMEE_MAIN) {
             guideImg.image = UIImage(named: "infoiconUmee")
             guideTitle.text = NSLocalizedString("send_guide_title_umee", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_umee", comment: "")
