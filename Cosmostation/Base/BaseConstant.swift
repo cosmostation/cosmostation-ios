@@ -1026,7 +1026,7 @@ public enum ChainType: String {
         result.append(EMONEY_MAIN)
         result.append(FETCH_MAIN)
         result.append(GRAVITY_BRIDGE_MAIN)
-//        result.append(INJECTIVE_MAIN)
+        result.append(INJECTIVE_MAIN)
         result.append(JUNO_MAIN)
         result.append(KAVA_MAIN)
         result.append(KI_MAIN)

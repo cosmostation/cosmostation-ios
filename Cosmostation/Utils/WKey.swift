@@ -262,7 +262,6 @@ class WKey {
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
-            //TODO return
         }
         
         else {

@@ -4813,6 +4813,15 @@ public class WUtils {
                 onParseVestingAccount(chain, rawAccount)
             }
             
+        } else if (chain == ChainType.INJECTIVE_MAIN && rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)) {
+//            print("rawAccount.typeURL ", rawAccount.typeURL)
+//            if let ethAccount = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
+//                onParseVestingAccount(chain, ethAccount.baseAccount)
+//            } else {
+//                onParseVestingAccount(chain, rawAccount)
+//            }
+            onParseVestingAccount(chain, rawAccount)
+            
         } else {
             onParseVestingAccount(chain, rawAccount)
         }

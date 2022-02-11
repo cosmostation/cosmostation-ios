@@ -189,7 +189,6 @@ class CKey {
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
-            //TODO return
 
         }
         
