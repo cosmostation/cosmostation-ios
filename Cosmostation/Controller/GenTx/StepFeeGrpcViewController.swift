@@ -256,21 +256,28 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                       privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
-            return Signer.genSimulateClaimRewardsTxgRPC(auth, self.pageHolderVC.mRewardTargetValidators_gRPC, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                        BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateClaimRewardsTxgRPC(auth,
+                                                        self.pageHolderVC.mRewardTargetValidators_gRPC,
+                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                        privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
-            return Signer.genSimulateReInvestTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mReinvestReward!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                    BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateReInvestTxgRPC(auth,
+                                                    self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mReinvestReward!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
-            return Signer.genSimulateetRewardAddressTxgRPC(auth, self.pageHolderVC.mToChangeRewardAddress!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                           privateKey,publicKey,BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateetRewardAddressTxgRPC(auth,
+                                                           self.pageHolderVC.mToChangeRewardAddress!,
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_VOTE) {
-            return Signer.genSimulateVoteTxgRPC(auth, self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!, self.pageHolderVC.mFee!,
-                                                self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateVoteTxgRPC(auth,
+                                                self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
+                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                privateKey, publicKey, self.chainType!)
             
         }
         
