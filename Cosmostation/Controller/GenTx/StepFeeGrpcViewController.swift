@@ -233,23 +233,27 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
             return Signer.genSimulateSendTxgRPC(auth,
                                                 self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                privateKey, publicKey,
-                                                self.chainType!)
+                                                privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_DELEGATE) {
-            return Signer.genSimulateDelegateTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                    BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateDelegateTxgRPC(auth,
+                                                    self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_UNDELEGATE2) {
-            return Signer.genSimulateUnDelegateTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToUndelegateAmount!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                      BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateUnDelegateTxgRPC(auth,
+                                                      self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToUndelegateAmount!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      privateKey, publicKey, self.chainType!)
+                  
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_REDELEGATE2) {
-            return Signer.genSimulateReDelegateTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
-                                                      self.pageHolderVC.mToReDelegateAmount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                      BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateReDelegateTxgRPC(auth,
+                                                      self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
+                                                      self.pageHolderVC.mToReDelegateAmount!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
             return Signer.genSimulateClaimRewardsTxgRPC(auth, self.pageHolderVC.mRewardTargetValidators_gRPC, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,

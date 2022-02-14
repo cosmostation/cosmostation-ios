@@ -3194,13 +3194,13 @@ public class WUtils {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
             } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
             } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
             } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
             } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
-                result = getGasAmountForRewards()[valCnt - 1]
+                result = getGasAmountForKavaRewards()[valCnt - 1]
             } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
             } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
