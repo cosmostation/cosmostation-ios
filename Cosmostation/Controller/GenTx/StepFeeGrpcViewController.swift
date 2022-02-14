@@ -230,9 +230,11 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
     
     func genSimulateReq(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ privateKey: Data, _ publicKey: Data, _ height: Ibc_Core_Client_V1_Height?)  -> Cosmos_Tx_V1beta1_SimulateRequest? {
         if (pageHolderVC.mType == COSMOS_MSG_TYPE_TRANSFER2) {
-            return Signer.genSimulateSendTxgRPC(auth, self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
-                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateSendTxgRPC(auth,
+                                                self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
+                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                privateKey, publicKey,
+                                                self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_DELEGATE) {
             return Signer.genSimulateDelegateTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,

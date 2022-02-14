@@ -384,10 +384,11 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedSendTxgRPC(auth!, self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
+            let reqTx = Signer.genSignedSendTxgRPC(auth!,
+                                                   self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                   BaseData.instance.getChainId(self.chainType))
+                                                   self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

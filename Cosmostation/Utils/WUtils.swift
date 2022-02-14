@@ -2867,9 +2867,9 @@ public class WUtils {
             chain == ChainType.PERSIS_MAIN || chain == ChainType.CRYPTO_MAIN || chain == ChainType.EMONEY_MAIN ||
             chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
-            chain == ChainType.INJECTIVE_MAIN || chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN ||
-            chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN ||
-            chain == ChainType.KONSTELLATION_MAIN || chain == ChainType.UMEE_MAIN ||
+            chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN ||
+            chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
+            chain == ChainType.UMEE_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
@@ -3190,6 +3190,25 @@ public class WUtils {
             } else {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
             }
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
+            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+                result = getGasAmountForRewards()[valCnt - 1]
+            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
+            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            } else if (type == TASK_TYPE_VOTE) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            }
+            
         }
         return result
     }
@@ -4814,15 +4833,11 @@ public class WUtils {
             let auth = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value).baseVestingAccount.baseAccount
             return (auth.address, auth.accountNumber, auth.sequence)
             
+        } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)) {
+            let auth = try! Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value).baseAccount
+            return (auth.address, auth.accountNumber, auth.sequence)
         }
         
-//        else if (response.account.typeURL.contains("injective.types.v1beta1.EthAccount")) {
-//            response.account
-//
-//            let auth = try! Cosmos_Auth_V1beta1_ModuleAccount.init(serializedData: response.account.value).baseAccount
-//            return (auth.address, auth.accountNumber, auth.sequence)
-//
-//        }
         return (nil, nil, nil)
     }
     
