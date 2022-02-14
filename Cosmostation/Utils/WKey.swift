@@ -262,6 +262,8 @@ class WKey {
             
         } else if (chain == ChainType.INJECTIVE_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            let ethAddress = generateEthAddressFromPrivateKey(childKey!.raw)
+            return convertAddressEthToCosmos(ethAddress, "inj")
         }
         
         else {
@@ -372,7 +374,6 @@ class WKey {
         }
         return result
     }
-    
     
     static func convertBits(from: Int, to: Int, pad: Bool, idata: Data) throws -> Data {
         var acc: Int = 0
@@ -493,13 +494,14 @@ class WKey {
         return EthereumAddress.init(data: ripemd160).string
     }
     
-    static func convertAddressEthToOkex(_ ethAddress: String) -> String {
+    //Convert eth to Betch style
+    static func convertAddressEthToCosmos(_ ethAddress: String, _ prefix: String) -> String {
         var address = ethAddress
         if (address.starts(with: "0x")) {
             address = address.replacingOccurrences(of: "0x", with: "")
         }
         let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: Data.fromHex(address)!)
-        return Bech32().encode("ex", values: convert!)
+        return Bech32().encode(prefix, values: convert!)
     }
     
     static func isValidEthAddress(_ input: String) -> Bool {
