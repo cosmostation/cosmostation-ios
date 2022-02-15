@@ -593,7 +593,7 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-konstellation-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.UMEE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "61.74.179.193", port: 54300)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-umee-app.cosmostation.io", port: 9090)
             
         }
         

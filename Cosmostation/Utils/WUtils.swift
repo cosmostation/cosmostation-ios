@@ -2772,7 +2772,6 @@ public class WUtils {
             return DESMOS_BASE_PATH + String(endPath)
         }
         
-        //TODO custom Path
         else if (chain == ChainType.KAVA_MAIN) {
             if (newBip) {
                 return KAVA_BASE_PATH + String(endPath)
@@ -3216,7 +3215,7 @@ public class WUtils {
     static func getEstimateGasFeeAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
             chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN || chain == ChainType.BITCANA_MAIN ||
-            chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN || chain == ChainType.UMEE_MAIN ||
+            chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.ALTHEA_TEST) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
@@ -3338,13 +3337,18 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.UMEE_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_UMEE)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         return NSDecimalNumber.zero
     }
     
     static func getGasRate(_ chain:ChainType, _ position: Int) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
-            chain == ChainType.REGEN_MAIN || chain == ChainType.UMEE_MAIN ||
+            chain == ChainType.REGEN_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.ALTHEA_TEST) {
             if (position == 0) {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY)
@@ -3588,6 +3592,14 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_KONSTELLATION)
             }
             
+        } else if (chain == ChainType.UMEE_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_UMEE)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_UMEE)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_UMEE)
+            }
         }
         
         else if (chain == ChainType.OKEX_MAIN) {
@@ -4492,7 +4504,6 @@ public class WUtils {
         else if (chain == ChainType.CHIHUAHUA_MAIN) { return "chihuahua" }
         else if (chain == ChainType.AXELAR_MAIN) { return "axelar" }
         else if (chain == ChainType.KONSTELLATION_MAIN) { return "konstellation" }
-        //TODO
         else if (chain == ChainType.UMEE_MAIN) { return "umee" }
         
         else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
@@ -4691,8 +4702,7 @@ public class WUtils {
             return ChainType.AXELAR_MAIN
         } else if (chainId?.contains("darchub") == true) {
             return ChainType.KONSTELLATION_MAIN
-        } else if (chainId?.contains("umee") == true) {
-            //TODO
+        } else if (chainId?.contains("umee-") == true) {
             return ChainType.UMEE_MAIN
         }
         

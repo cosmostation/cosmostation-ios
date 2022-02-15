@@ -597,6 +597,10 @@ let GAS_FEE_RATE_TINY_KONSTELLATION         = "0.0001"
 let GAS_FEE_RATE_LOW_KONSTELLATION          = "0.001"
 let GAS_FEE_RATE_AVERAGE_KONSTELLATION      = "0.01"
 
+let GAS_FEE_RATE_TINY_UMEE                  = "0.000"
+let GAS_FEE_RATE_LOW_UMEE                   = "0.001"
+let GAS_FEE_RATE_AVERAGE_UMEE               = "0.005"
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
