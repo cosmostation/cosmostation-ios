@@ -560,7 +560,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                        self.pageHolderVC.mFee!,
                                                        self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                       BaseData.instance.getChainId(self.chainType))
+                                                       self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_LINK_CHAIN_ACCOUNT) {
             let toAccount = BaseData.instance.selectAccountById(id: self.pageHolderVC.mDesmosToLinkAccountId)!
@@ -587,7 +587,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      self.pageHolderVC.mFee!,
                                                      self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
             
         }
         
