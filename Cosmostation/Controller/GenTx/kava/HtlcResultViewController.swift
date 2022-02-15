@@ -374,7 +374,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
                                                                self.mHtlcSendFee!,
                                                                SWAP_MEMO_CREATE,
                                                                privateKey!, publicKey!,
-                                                               BaseData.instance.getChainId(self.chainType))
+                                                               self.chainType!)
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
                 DispatchQueue.main.async(execute: {
                     print("response ", response.txResponse.txhash)

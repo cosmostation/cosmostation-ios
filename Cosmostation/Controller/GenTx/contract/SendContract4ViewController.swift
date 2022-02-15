@@ -96,10 +96,9 @@ class SendContract4ViewController: BaseViewController, PasswordViewDelegate {
                                                  self.pageHolderVC.mToSendRecipientAddress!,
                                                  self.pageHolderVC.mCw20SendContract!,
                                                  self.pageHolderVC.mToSendAmount,
-                                                 self.pageHolderVC.mFee!,
-                                                 self.pageHolderVC.mMemo!,
+                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                  self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                 BaseData.instance.getChainId(self.chainType))
+                                                 self.chainType!)
             
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!

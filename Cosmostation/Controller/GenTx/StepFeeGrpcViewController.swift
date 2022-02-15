@@ -426,10 +426,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                               self.pageHolderVC.mToSendRecipientAddress!,
                                               self.pageHolderVC.mCw20SendContract!,
                                               self.pageHolderVC.mToSendAmount,
-                                              self.pageHolderVC.mFee!,
-                                              self.pageHolderVC.mMemo!,
-                                              privateKey, publicKey,
-                                              BaseData.instance.getChainId(self.chainType))
+                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                              privateKey, publicKey, self.chainType!)
             
         }
         
@@ -557,8 +555,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                        self.pageHolderVC.mDesmosBio!,
                                                        (self.pageHolderVC.mDesmosProfileHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosProfileHash!,
                                                        (self.pageHolderVC.mDesmosCoverHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosCoverHash!,
-                                                       self.pageHolderVC.mFee!,
-                                                       self.pageHolderVC.mMemo!,
+                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                        self.chainType!)
             
@@ -584,8 +581,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      toAccount,
                                                      toPrivateKey,
                                                      toPublicKey,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -598,10 +594,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                    self.pageHolderVC.mCollateral,
                                                    self.pageHolderVC.mPrincipal,
                                                    self.pageHolderVC.mCollateralParamType!,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                   BaseData.instance.getChainId(self.chainType))
+                                                   self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DEPOSIT_CDP) {
             return Signer.genSimulateKavaCDPDeposit(auth,
@@ -609,10 +604,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mCollateral,
                                                     self.pageHolderVC.mCollateralParamType!,
-                                                    self.pageHolderVC.mFee!,
-                                                    self.pageHolderVC.mMemo!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                    BaseData.instance.getChainId(self.chainType))
+                                                    self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_WITHDRAW_CDP) {
             return Signer.genSimulateKavaCDPWithdraw(auth,
@@ -620,67 +614,64 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mCollateral,
                                                      self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
             return Signer.genSimulateKavaCDPDrawDebt(auth,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mPrincipal,
                                                      self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
             return Signer.genSimulateKavaCDPRepay(auth,
                                                   self.account!.account_address,
                                                   self.pageHolderVC.mPayment,
                                                   self.pageHolderVC.mCollateralParamType!,
-                                                  self.pageHolderVC.mFee!,
-                                                  self.pageHolderVC.mMemo!,
+                                                  self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                  BaseData.instance.getChainId(self.chainType))
+                                                  self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
             return Signer.genSimulateKavaHardDeposit(auth,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mHardPoolCoins!,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
+               
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
             return Signer.genSimulateKavaHardWithdraw(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mHardPoolCoins!,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.chainType!)
+                
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_BORROW_HARD) {
             return Signer.genSimulateKavaHardBorrow(auth,
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mHardPoolCoins!,
-                                                    self.pageHolderVC.mFee!,
-                                                    self.pageHolderVC.mMemo!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                    BaseData.instance.getChainId(self.chainType))
+                                                    self.chainType!)
+              
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_REPAY_HARD) {
             return Signer.genSimulateKavaHardRepay(auth,
                                                    self.account!.account_address,
                                                    self.account!.account_address,
                                                    self.pageHolderVC.mHardPoolCoins!,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                   BaseData.instance.getChainId(self.chainType))
+                                                   self.chainType!)
+             
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
             let slippage = "300000000000000000"
@@ -691,10 +682,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      self.pageHolderVC.mPoolCoin1!,
                                                      slippage,
                                                      deadline,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
             let sharesOwned = NSDecimalNumber.init(string: pageHolderVC.mKavaSwapPoolDeposit?.sharesOwned)
@@ -713,10 +703,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                       coin0,
                                                       coin1,
                                                       deadline,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
             let inCoin = Coin.init(self.pageHolderVC.mSwapInDenom!, self.pageHolderVC.mSwapInAmount!.stringValue)
@@ -729,19 +718,17 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                              outCoin,
                                                              slippage,
                                                              deadline,
-                                                             self.pageHolderVC.mFee!,
-                                                             self.pageHolderVC.mMemo!,
+                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                             BaseData.instance.getChainId(self.chainType))
+                                                             self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
             return Signer.genSimulateKavaIncentiveAll(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mIncentiveMultiplier!,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.chainType!)
         }
         
         return nil
