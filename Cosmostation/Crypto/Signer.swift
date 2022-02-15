@@ -923,9 +923,24 @@ class Signer {
         return [anyMsg]
     }
     
-    static func genSignedIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ signer: String,
-                                            _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
-                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+    //for IRIS custom msgs
+    //Tx for Iris Issue Nft
+    static func genSignedIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                            _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let irisIssueNft = genIrisIssueNft(signer, denom_id, denom_name, id, name, uri, data)
+        return getGrpcSignedTx(auth, chainType, irisIssueNft, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                              _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
+                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let irisIssueNft = genIrisIssueNft(signer, denom_id, denom_name, id, name, uri, data)
+        return getGrpcSimulateTx(auth, chainType, irisIssueNft, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genIrisIssueNft(_ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String) -> [Google_Protobuf2_Any] {
+        var anyMsgs = Array<Google_Protobuf2_Any>()
         let issueNftDenom = Irismod_Nft_MsgIssueDenom.with {
             $0.id = denom_id
             $0.name = denom_name
@@ -939,7 +954,7 @@ class Signer {
             $0.typeURL = "/irismod.nft.MsgIssueDenom"
             $0.value = try! issueNftDenom.serializedData()
         }
-        
+        anyMsgs.append(issueNftDenomMsg)
         let issueNft = Irismod_Nft_MsgMintNFT.with {
             $0.sender = signer
             $0.recipient = signer
@@ -953,86 +968,26 @@ class Signer {
             $0.typeURL = "/irismod.nft.MsgMintNFT"
             $0.value = try! issueNft.serializedData()
         }
-        let txBody = getGrpcTxBody([issueNftDenomMsg, issueNftMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
-        print("rawTx ", rawTx)
-        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
-            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
-            $0.txBytes = try! rawTx.serializedData()
-        }
+        anyMsgs.append(issueNftMsg)
+        return anyMsgs
     }
     
-    static func genSimulateIssueNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ signer: String,
-                                              _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
-                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let issueNftDenom = Irismod_Nft_MsgIssueDenom.with {
-            $0.id = denom_id
-            $0.name = denom_name
-            $0.schema = ""
-            $0.sender = signer
-            $0.symbol = ""
-            $0.mintRestricted = false
-            $0.updateRestricted = false
-        }
-        let issueNftDenomMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/irismod.nft.MsgIssueDenom"
-            $0.value = try! issueNftDenom.serializedData()
-        }
-        
-        let issueNft = Irismod_Nft_MsgMintNFT.with {
-            $0.sender = signer
-            $0.recipient = signer
-            $0.id = id
-            $0.denomID = denom_id
-            $0.name = name
-            $0.uri = uri
-            $0.data = data
-        }
-        let issueNftMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/irismod.nft.MsgMintNFT"
-            $0.value = try! issueNft.serializedData()
-        }
-        
-        let txBody = getGrpcTxBody([issueNftDenomMsg, issueNftMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_SimulateRequest.with {
-            $0.tx = simulateTx
-        }
-    }
-    
+    //Tx for Iris Send Nft
     static func genSignedSendNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                            _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse,
-                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let issueNft = Irismod_Nft_MsgTransferNFT.with {
-            $0.sender = signer
-            $0.recipient = recipient
-            $0.id = id
-            $0.denomID = denom_id
-            $0.name = irisResponse.nft.name
-            $0.uri = irisResponse.nft.uri
-            $0.data = irisResponse.nft.data
-        }
-        let anyMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/irismod.nft.MsgTransferNFT"
-            $0.value = try! issueNft.serializedData()
-        }
-        let txBody = getGrpcTxBody([anyMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
-            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
-            $0.txBytes = try! rawTx.serializedData()
-        }
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let irisSendNft = genIrisSendNft(signer, recipient, id, denom_id, irisResponse)
+        return getGrpcSignedTx(auth, chainType, irisSendNft, privateKey, publicKey, fee, memo)
     }
     
     static func genSimulateSendNftIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                              _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse,
-                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let irisSendNft = genIrisSendNft(signer, recipient, id, denom_id, irisResponse)
+        return getGrpcSimulateTx(auth, chainType, irisSendNft, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genIrisSendNft(_ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse) -> [Google_Protobuf2_Any] {
         let issueNft = Irismod_Nft_MsgMintNFT.with {
             $0.sender = signer
             $0.recipient = signer
@@ -1046,45 +1001,25 @@ class Signer {
             $0.typeURL = "/irismod.nft.MsgTransferNFT"
             $0.value = try! issueNft.serializedData()
         }
-        
-        let txBody = getGrpcTxBody([anyMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_SimulateRequest.with {
-            $0.tx = simulateTx
-        }
+        return [anyMsg]
     }
     
+    //Tx for Iris Issue Nft Denom
     static func genSignedIssueNftDenomIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                  _ signer: String,_ denom_id: String, _ denom_name: String,
-                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let issueNft = Irismod_Nft_MsgIssueDenom.with {
-            $0.id = denom_id
-            $0.name = denom_name
-            $0.schema = ""
-            $0.sender = signer
-            $0.symbol = ""
-            $0.mintRestricted = false
-            $0.updateRestricted = false
-        }
-        let anyMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/irismod.nft.MsgIssueDenom"
-            $0.value = try! issueNft.serializedData()
-        }
-        let txBody = getGrpcTxBody([anyMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
-            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
-            $0.txBytes = try! rawTx.serializedData()
-        }
+                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let irisIssueNftDenom = genIrisIssueNftDenom(signer, denom_id, denom_name)
+        return getGrpcSignedTx(auth, chainType, irisIssueNftDenom, privateKey, publicKey, fee, memo)
     }
     
     static func genSimulateIssueNftDenomIrisTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                    _ signer: String,_ denom_id: String, _ denom_name: String,
-                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let irisIssueNftDenom = genIrisIssueNftDenom(signer, denom_id, denom_name)
+        return getGrpcSimulateTx(auth, chainType, irisIssueNftDenom, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genIrisIssueNftDenom(_ signer: String,_ denom_id: String, _ denom_name: String) -> [Google_Protobuf2_Any] {
         let issueNft = Irismod_Nft_MsgIssueDenom.with {
             $0.id = denom_id
             $0.name = denom_name
@@ -1098,19 +1033,27 @@ class Signer {
             $0.typeURL = "/irismod.nft.MsgIssueDenom"
             $0.value = try! issueNft.serializedData()
         }
-        
-        let txBody = getGrpcTxBody([anyMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_SimulateRequest.with {
-            $0.tx = simulateTx
-        }
+        return [anyMsg]
     }
     
-    static func genSignedIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ signer: String,
-                                           _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
-                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+    //for CRO custom msgs
+    //Tx for Cro Issue Nft
+    static func genSignedIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                           _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let croIssueNft = genCroIssueNft(signer, denom_id, denom_name, id, name, uri, data)
+        return getGrpcSignedTx(auth, chainType, croIssueNft, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                             _ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
+                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let croIssueNft = genCroIssueNft(signer, denom_id, denom_name, id, name, uri, data)
+        return getGrpcSimulateTx(auth, chainType, croIssueNft, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genCroIssueNft(_ signer: String, _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String) -> [Google_Protobuf2_Any] {
+        var anyMsgs = Array<Google_Protobuf2_Any>()
         let issueNftDenom = Chainmain_Nft_V1_MsgIssueDenom.with {
             $0.id = denom_id
             $0.name = denom_name
@@ -1121,7 +1064,7 @@ class Signer {
             $0.typeURL = "/chainmain.nft.v1.MsgIssueDenom"
             $0.value = try! issueNftDenom.serializedData()
         }
-        
+        anyMsgs.append(issueNftDenomMsg)
         let issueNft = Chainmain_Nft_V1_MsgMintNFT.with {
             $0.sender = signer
             $0.recipient = signer
@@ -1135,132 +1078,55 @@ class Signer {
             $0.typeURL = "/chainmain.nft.v1.MsgMintNFT"
             $0.value = try! issueNft.serializedData()
         }
-        
-        let txBody = getGrpcTxBody([issueNftDenomMsg, issueNftMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
-            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
-            $0.txBytes = try! rawTx.serializedData()
-        }
+        anyMsgs.append(issueNftMsg)
+        return anyMsgs
     }
     
-    static func genSimulateIssueNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ signer: String,
-                                             _ denom_id: String, _ denom_name: String,  _ id: String, _ name: String, _ uri: String, _ data: String,
-                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let issueNftDenom = Chainmain_Nft_V1_MsgIssueDenom.with {
-            $0.id = denom_id
-            $0.name = denom_name
-            $0.schema = ""
-            $0.sender = signer
-        }
-        let issueNftDenomMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/chainmain.nft.v1.MsgIssueDenom"
-            $0.value = try! issueNftDenom.serializedData()
-        }
-        
-        let issueNft = Chainmain_Nft_V1_MsgMintNFT.with {
-            $0.sender = signer
-            $0.recipient = signer
-            $0.id = id
-            $0.denomID = denom_id
-            $0.name = name
-            $0.uri = uri
-            $0.data = data
-        }
-        let issueNftMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/chainmain.nft.v1.MsgMintNFT"
-            $0.value = try! issueNft.serializedData()
-        }
-        
-        let txBody = getGrpcTxBody([issueNftDenomMsg, issueNftMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_SimulateRequest.with {
-            $0.tx = simulateTx
-        }
-    }
-    
+    //Tx for Cro Send Nft
     static func genSignedSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                           _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse,
-                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let issueNft = Chainmain_Nft_V1_MsgTransferNFT.with {
-            $0.sender = signer
-            $0.recipient = recipient
-            $0.id = id
-            $0.denomID = denom_id
-//            $0.name = croResponse.nft.name
-//            $0.uri = croResponse.nft.uri
-//            $0.data = croResponse.nft.data
-        }
-        let anyMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/chainmain.nft.v1.MsgTransferNFT"
-            $0.value = try! issueNft.serializedData()
-        }
-        let txBody = getGrpcTxBody([anyMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
-            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
-            $0.txBytes = try! rawTx.serializedData()
-        }
+                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let croSendNft = genCroSendNft(signer, recipient, id, denom_id, croResponse)
+        return getGrpcSignedTx(auth, chainType, croSendNft, privateKey, publicKey, fee, memo)
     }
     
     static func genSimulateSendNftCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                             _ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse,
-                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let croSendNft = genCroSendNft(signer, recipient, id, denom_id, croResponse)
+        return getGrpcSimulateTx(auth, chainType, croSendNft, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genCroSendNft(_ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ croResponse: Chainmain_Nft_V1_QueryNFTResponse) -> [Google_Protobuf2_Any] {
         let issueNft = Chainmain_Nft_V1_MsgTransferNFT.with {
             $0.sender = signer
             $0.recipient = recipient
             $0.id = id
             $0.denomID = denom_id
-            //            $0.name = croResponse.nft.name
-            //            $0.uri = croResponse.nft.uri
-            //            $0.data = croResponse.nft.data
         }
         let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/chainmain.nft.v1.MsgTransferNFT"
             $0.value = try! issueNft.serializedData()
         }
-        
-        let txBody = getGrpcTxBody([anyMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_SimulateRequest.with {
-            $0.tx = simulateTx
-        }
+        return [anyMsg]
     }
     
+    //Tx for Cro Issue Nft Denom
     static func genSignedIssueNftDenomCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                 _ signer: String,_ denom_id: String, _ denom_name: String,
-                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let issueNft = Chainmain_Nft_V1_MsgIssueDenom.with {
-            $0.id = denom_id
-            $0.name = denom_name
-            $0.schema = ""
-            $0.sender = signer
-        }
-        let anyMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/chainmain.nft.v1.MsgIssueDenom"
-            $0.value = try! issueNft.serializedData()
-        }
-        let txBody = getGrpcTxBody([anyMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let rawTx = getGrpcRawTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_BroadcastTxRequest.with {
-            $0.mode = Cosmos_Tx_V1beta1_BroadcastMode.async
-            $0.txBytes = try! rawTx.serializedData()
-        }
+                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let croIssueNftDenom = genCroIssueNftDenom(signer, denom_id, denom_name)
+        return getGrpcSignedTx(auth, chainType, croIssueNftDenom, privateKey, publicKey, fee, memo)
     }
     
     static func genSimulateIssueNftDenomCroTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                                   _ signer: String,_ denom_id: String, _ denom_name: String,
-                                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_SimulateRequest {
+                                                  _ signer: String,_ denom_id: String, _ denom_name: String,
+                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let croIssueNftDenom = genCroIssueNftDenom(signer, denom_id, denom_name)
+        return getGrpcSimulateTx(auth, chainType, croIssueNftDenom, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genCroIssueNftDenom(_ signer: String,_ denom_id: String, _ denom_name: String) -> [Google_Protobuf2_Any] {
         let issueNft = Chainmain_Nft_V1_MsgIssueDenom.with {
             $0.id = denom_id
             $0.name = denom_name
@@ -1271,17 +1137,11 @@ class Signer {
             $0.typeURL = "/chainmain.nft.v1.MsgIssueDenom"
             $0.value = try! issueNft.serializedData()
         }
-        
-        let txBody = getGrpcTxBody([anyMsg], memo)
-        let signerInfo = getGrpcSignerInfo(auth, publicKey)
-        let authInfo = getGrpcAuthInfo(signerInfo, fee)
-        let simulateTx = getGrpcSimulTx(auth, txBody, authInfo, privateKey, chainId)
-        return Cosmos_Tx_V1beta1_SimulateRequest.with {
-            $0.tx = simulateTx
-        }
+        return [anyMsg]
     }
     
-    
+    //for Desmos custom msgs
+    //Tx for Desmos Save Profile
     static func genSignedSaveProfileTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                            _ creator: String,_ dtag: String, _ nickname: String, _ bio: String, _ profile_picture: String, _ cover_picture: String,
                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainId: String) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {

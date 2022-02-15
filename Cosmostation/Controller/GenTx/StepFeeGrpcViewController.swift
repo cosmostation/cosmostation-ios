@@ -490,7 +490,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                             String(data: jsonData, encoding: .utf8)!,
                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                            BaseData.instance.getChainId(self.chainType))
+                                                            self.chainType!)
                 
             } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                 return Signer.genSimulateIssueNftCroTxgRPC(auth,
@@ -503,7 +503,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                            String(data: jsonData, encoding: .utf8)!,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                           BaseData.instance.getChainId(self.chainType))
+                                                           self.chainType!)
             }
             
         } else if (pageHolderVC.mType == TASK_SEND_NFT) {
@@ -515,7 +515,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                            self.pageHolderVC.irisResponse!,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                           BaseData.instance.getChainId(self.chainType))
+                                                           self.chainType!)
                 
             } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                 return Signer.genSimulateSendNftCroTxgRPC(auth, self.account!.account_address,
@@ -525,7 +525,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                           self.pageHolderVC.croResponse!,
                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                          BaseData.instance.getChainId(self.chainType))
+                                                          self.chainType!)
             }
             
         } else if (pageHolderVC.mType == TASK_ISSUE_NFT_DENOM) {
@@ -535,7 +535,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                                  self.pageHolderVC.mNFTDenomName!,
                                                                  self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                                  self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                                 BaseData.instance.getChainId(self.chainType))
+                                                                 self.chainType!)
                 
             } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                 return Signer.genSimulateIssueNftDenomCroTxgRPC(auth, self.account!.account_address,
@@ -543,7 +543,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                                 self.pageHolderVC.mNFTDenomName!,
                                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                                BaseData.instance.getChainId(self.chainType))
+                                                                self.chainType!)
             }
             
         }

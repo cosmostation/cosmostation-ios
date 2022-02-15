@@ -100,7 +100,7 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
                                                               self.pageHolderVC.irisResponse!,
                                                               self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                              BaseData.instance.getChainId(self.chainType))
+                                                              self.chainType!)
                     
                 } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                     reqTx = Signer.genSignedSendNftCroTxgRPC(auth!,
@@ -111,7 +111,7 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
                                                              self.pageHolderVC.croResponse!,
                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                             BaseData.instance.getChainId(self.chainType))
+                                                             self.chainType!)
                 }
                 
                 let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
