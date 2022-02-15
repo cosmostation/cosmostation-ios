@@ -115,7 +115,7 @@ class SifExitPool3ViewController: BaseViewController, PasswordViewDelegate {
                                                              self.pageHolderVC.mFee!,
                                                              self.pageHolderVC.mMemo!,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                             BaseData.instance.getChainId(self.chainType))
+                                                             self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

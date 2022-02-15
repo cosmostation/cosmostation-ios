@@ -69,65 +69,6 @@ class StartUnlock3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func passwordResponse(result: Int) {
-        if (result == PASSWORD_RESUKT_OK) {
-            self.onFetchgRPCAuth(pageHolderVC.mAccount!)
-        }
-    }
-    
-    func onFetchgRPCAuth(_ account: Account) {
-        self.showWaittingAlert()
-        DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
-            
-            let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with {
-                $0.address = account.account_address
-            }
-            do {
-                let response = try Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait()
-                self.onBroadcastGrpcTx(response)
-            } catch {
-                print("onFetchgRPCAuth failed: \(error)")
-            }
-        }
-    }
-    
-    func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
-        DispatchQueue.global().async {
-            var ids = Array<UInt64>()
-            for lockup in self.pageHolderVC.mLockups! {
-                ids.append(lockup.id)
-            }
-            let reqTx = Signer.genSignedUnlockPeriodLocksMsgTxgRPC(auth!,
-                                                                   ids,
-                                                                   self.pageHolderVC.mFee!,
-                                                                   self.pageHolderVC.mMemo!,
-                                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                                   BaseData.instance.getChainId(self.chainType))
-
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
-
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
-
-            do {
-                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-//                print("response ", response.txResponse.txhash)
-                DispatchQueue.main.async(execute: {
-                    if (self.waitAlert != nil) {
-                        self.waitAlert?.dismiss(animated: true, completion: {
-                            self.onStartTxDetailgRPC(response)
-                        })
-                    }
-                });
-            } catch {
-                print("onBroadcastGrpcTx failed: \(error)")
-            }
-        }
     }
 
 }

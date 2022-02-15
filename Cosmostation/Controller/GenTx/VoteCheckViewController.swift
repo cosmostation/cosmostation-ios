@@ -98,8 +98,7 @@ class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
             let reqTx = Signer.genSignedVoteTxgRPC(auth!,
                                                    self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                   BaseData.instance.getChainId(self.chainType))
+                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

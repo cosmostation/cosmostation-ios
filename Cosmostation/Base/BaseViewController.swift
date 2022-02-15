@@ -540,6 +540,7 @@ extension BaseViewController {
         showAlert.addAction(emoneyAction)
         showAlert.addAction(fetchAction)
         showAlert.addAction(gravityBridgeAction)
+        showAlert.addAction(injectiveAction)
         showAlert.addAction(junoAction)
         showAlert.addAction(kavaAction)
         showAlert.addAction(kiAction)
@@ -559,7 +560,6 @@ extension BaseViewController {
         showAlert.addAction(umeeAction)
         
 //        showAlert.addAction(altheaAction)
-//        showAlert.addAction(injectiveAction)
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {
             showAlert.addAction(altheaTestAction)

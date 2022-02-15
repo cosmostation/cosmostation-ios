@@ -117,10 +117,9 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
                                                          self.coin0!,
                                                          self.coin1!,
                                                          deadline,
-                                                         self.pageHolderVC.mFee!,
-                                                         self.pageHolderVC.mMemo!,
+                                                         self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                          self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                         BaseData.instance.getChainId(self.chainType))
+                                                         self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

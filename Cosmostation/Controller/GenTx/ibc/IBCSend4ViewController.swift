@@ -118,7 +118,7 @@ class IBCSend4ViewController: BaseViewController, PasswordViewDelegate {
                                                              self.pageHolderVC.mFee!,
                                                              IBC_TRANSFER_MEMO,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                             BaseData.instance.getChainId(self.chainType))
+                                                             self.chainType!)
             
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!

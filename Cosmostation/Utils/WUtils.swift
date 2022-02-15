@@ -739,6 +739,14 @@ public class WUtils {
                     let amount = WUtils.getKavaTokenAll(coin.denom)
                     let assetValue = userCurrencyValue(baseDenom, amount, decimal)
                     totalValue = totalValue.adding(assetValue)
+                    
+                } else if (chainType! == ChainType.INJECTIVE_MAIN && coin.denom.starts(with: "peggy0x")) {
+                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
+                    let decimal = getInjectiveCoinDecimal(coin.denom)
+                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
+                    }
+                    
                 }
                 
                 else if (coin.isIbc()) {
@@ -1505,13 +1513,22 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            let dpDecimal = WUtils.getInjectiveCoinDecimal(coin.denom)
             if (coin.denom == INJECTIVE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
+            } else if (coin.denom.starts(with: "peggy0x")) {
+                denomLabel?.textColor = .white
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
+                    denomLabel?.text = bridgeTokenInfo.origin_symbol
+                } else {
+                    denomLabel?.text = coin.denom.uppercased()
+                }
+                
             } else {
                 denomLabel?.textColor = .white
                 denomLabel?.text = coin.denom.uppercased()
             }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, dpDecimal, dpDecimal)
             
         } else if (chainType == ChainType.BITSONG_MAIN) {
             if (coin.denom == BITSONG_MAIN_DENOM) {
@@ -1899,13 +1916,21 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            let dpDecimal = WUtils.getInjectiveCoinDecimal(denom)
             if (denom == INJECTIVE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
+            } else if (denom.starts(with: "peggy0x")) {
+                denomLabel?.textColor = .white
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
+                    denomLabel?.text = bridgeTokenInfo.origin_symbol
+                } else {
+                    denomLabel?.text = denom.uppercased()
+                }
             } else {
                 denomLabel?.textColor = .white
                 denomLabel?.text = denom.uppercased()
             }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
             
         } else if (chainType == ChainType.BITSONG_MAIN) {
             if (denom == BITSONG_MAIN_DENOM) {
@@ -2403,6 +2428,8 @@ public class WUtils {
                 return getGBrdigeCoinDecimal(denom)
             } else if (chain == ChainType.KAVA_MAIN) {
                 return getKavaCoinDecimal(denom)
+            } else if (chain == ChainType.INJECTIVE_MAIN) {
+                return getInjectiveCoinDecimal(denom)
             }
             print("CHECK DECIMAL")
             return 6
@@ -2840,9 +2867,9 @@ public class WUtils {
             chain == ChainType.PERSIS_MAIN || chain == ChainType.CRYPTO_MAIN || chain == ChainType.EMONEY_MAIN ||
             chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
-            chain == ChainType.INJECTIVE_MAIN || chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN ||
-            chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN ||
-            chain == ChainType.KONSTELLATION_MAIN || chain == ChainType.UMEE_MAIN ||
+            chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN ||
+            chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
+            chain == ChainType.UMEE_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
@@ -3163,6 +3190,25 @@ public class WUtils {
             } else {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
             }
+        } else if (chain == ChainType.INJECTIVE_MAIN) {
+            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
+            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
+            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
+            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+                result = getGasAmountForKavaRewards()[valCnt - 1]
+            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
+            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            } else if (type == TASK_TYPE_VOTE) {
+                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+            }
+            
         }
         return result
     }
@@ -4787,15 +4833,11 @@ public class WUtils {
             let auth = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value).baseVestingAccount.baseAccount
             return (auth.address, auth.accountNumber, auth.sequence)
             
+        } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)) {
+            let auth = try! Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value).baseAccount
+            return (auth.address, auth.accountNumber, auth.sequence)
         }
         
-//        else if (response.account.typeURL.contains("injective.types.v1beta1.EthAccount")) {
-//            response.account
-//
-//            let auth = try! Cosmos_Auth_V1beta1_ModuleAccount.init(serializedData: response.account.value).baseAccount
-//            return (auth.address, auth.accountNumber, auth.sequence)
-//
-//        }
         return (nil, nil, nil)
     }
     
@@ -4812,6 +4854,15 @@ public class WUtils {
             } else {
                 onParseVestingAccount(chain, rawAccount)
             }
+            
+        } else if (chain == ChainType.INJECTIVE_MAIN && rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)) {
+//            print("rawAccount.typeURL ", rawAccount.typeURL)
+//            if let ethAccount = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
+//                onParseVestingAccount(chain, ethAccount.baseAccount)
+//            } else {
+//                onParseVestingAccount(chain, rawAccount)
+//            }
+            onParseVestingAccount(chain, rawAccount)
             
         } else {
             onParseVestingAccount(chain, rawAccount)

@@ -102,17 +102,17 @@ class DeleteStarname3ViewController: BaseViewController, PasswordViewDelegate {
                                                                self.pageHolderVC.mFee!,
                                                                self.pageHolderVC.mMemo!,
                                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                               BaseData.instance.getChainId(self.chainType))
+                                                               self.chainType!)
                 
             } else if (self.pageHolderVC.mType == IOV_MSG_TYPE_DELETE_ACCOUNT) {
                 reqTx = Signer.genSignedDeleteAccountMsgTxgRPC (auth!,
-                                                               self.pageHolderVC.mStarnameDomain!,
-                                                               self.pageHolderVC.mStarnameAccount!,
-                                                               self.pageHolderVC.mAccount!.account_address,
-                                                               self.pageHolderVC.mFee!,
-                                                               self.pageHolderVC.mMemo!,
+                                                                self.pageHolderVC.mStarnameDomain!,
+                                                                self.pageHolderVC.mStarnameAccount!,
+                                                                self.pageHolderVC.mAccount!.account_address,
+                                                                self.pageHolderVC.mFee!,
+                                                                self.pageHolderVC.mMemo!,
                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                               BaseData.instance.getChainId(self.chainType))
+                                                                self.chainType!)
             }
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)

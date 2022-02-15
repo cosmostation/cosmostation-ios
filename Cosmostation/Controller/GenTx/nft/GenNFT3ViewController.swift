@@ -113,7 +113,7 @@ class GenNFT3ViewController: BaseViewController, PasswordViewDelegate {
                                                                String(data: jsonData, encoding: .utf8)!,
                                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                               BaseData.instance.getChainId(self.chainType))
+                                                               self.chainType!)
                     
                 } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                     reqTx = Signer.genSignedIssueNftCroTxgRPC(auth!,
@@ -126,7 +126,7 @@ class GenNFT3ViewController: BaseViewController, PasswordViewDelegate {
                                                               String(data: jsonData, encoding: .utf8)!,
                                                               self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                              BaseData.instance.getChainId(self.chainType))
+                                                              self.chainType!)
                     
                 }
                 

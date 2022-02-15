@@ -868,6 +868,15 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.textColor = UIColor.white
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "pool/" + String(poolInfo.id)
+            
+        } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            cell?.tokenImg.image = UIImage(named: "tokenIc")
+            cell?.tokenSymbol.text = coin.denom.uppercased()
+            cell?.tokenSymbol.textColor = UIColor.white
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Pool Asset"
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 18, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
         }
     }
     
@@ -903,8 +912,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.tokenAmount.attributedText = WUtils.displayAmount2(token.amount, cell!.tokenAmount.font!, decimal, 6)
         cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(token.denom, token.getAmount(), decimal, cell!.tokenValue.font)
     }
-    
-    
     
     //bind etc tokens with grpc
     func onBindEtcToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
@@ -1045,6 +1052,13 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                     mUnKnown_gRPC.append(balance_gRPC)
                 }
 
+            } else if (chainType == ChainType.INJECTIVE_MAIN) {
+                if (balance_gRPC.denom.starts(with: "peggy0x")) {
+                    mBridged_gRPC.append(balance_gRPC)
+                } else if (balance_gRPC.denom.starts(with: "share")) {
+                    mPoolToken_gRPC.append(balance_gRPC)
+                }
+                
             } else {
                 mUnKnown_gRPC.append(balance_gRPC)
             }

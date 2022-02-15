@@ -64,7 +64,11 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onInitView() {
-        naviTokenImg.af_setImage(withURL: bridgeToken.getImgUrl())
+        if let tokenImgeUrl = bridgeToken.getImgUrl() {
+            naviTokenImg.af_setImage(withURL: tokenImgeUrl)
+        } else {
+            naviTokenImg.image = UIImage(named: "tokenIc")
+        }
         naviTokenSymbol.text = bridgeToken.origin_symbol
         
         bridgeDivideDecimal = bridgeToken.decimal

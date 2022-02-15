@@ -98,12 +98,12 @@ class StepRedelegateCheckViewController: BaseViewController, PasswordViewDelegat
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedReDelegateTxgRPC(auth!, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+            let reqTx = Signer.genSignedReDelegateTxgRPC(auth!,
+                                                         self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
                                                          self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
                                                          self.pageHolderVC.mToReDelegateAmount!,
                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                         self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                         BaseData.instance.getChainId(self.chainType))
+                                                         self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

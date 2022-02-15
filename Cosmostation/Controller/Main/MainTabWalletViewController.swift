@@ -177,7 +177,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             floaty.buttonColor = COLOR_SECRET_DARK
         } else if (chainType! == ChainType.INJECTIVE_MAIN) {
             floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
-            floaty.buttonColor = COLOR_INJECTIVE_DARK
+            floaty.buttonColor = COLOR_INJECTIVE
         } else if (chainType! == ChainType.KONSTELLATION_MAIN) {
             floaty.buttonImage = UIImage.init(named: "btnSendKonstellation")
             floaty.buttonColor = UIColor.init(hexString: "122951")

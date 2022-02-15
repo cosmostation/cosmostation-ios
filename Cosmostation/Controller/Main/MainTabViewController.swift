@@ -477,66 +477,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    func onFetchTopValidatorsInfo() {
-        let request = Alamofire.request(BaseNetWork.validatorsUrl(mChainType), method: .get, parameters: ["status":"bonded"], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary, let validators = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                    self.onFetchFinished()
-                    return
-                }
-                for validator in validators {
-                    BaseData.instance.mTopValidator.append(Validator(validator as! [String : Any]))
-                }
-                
-            case .failure(let error):
-                print("onFetchTopValidatorsInfo ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchUnbondedValidatorsInfo() {
-        let request = Alamofire.request(BaseNetWork.validatorsUrl(mChainType), method: .get, parameters: ["status":"unbonded"], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary, let validators = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                    self.onFetchFinished()
-                    return
-                }
-                for validator in validators {
-                    BaseData.instance.mOtherValidator.append(Validator(validator as! [String : Any]))
-                }
-                
-            case .failure(let error):
-                print("onFetchUnbondedValidatorsInfo ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchUnbondingValidatorsInfo() {
-        let request = Alamofire.request(BaseNetWork.validatorsUrl(mChainType), method: .get, parameters: ["status":"unbonding"], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary, let validators = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                    self.onFetchFinished()
-                    return
-                }
-                for validator in validators {
-                    BaseData.instance.mOtherValidator.append(Validator(validator as! [String : Any]))
-                }
-                
-            case .failure(let error):
-                print("onFetchUnbondingValidatorsInfo ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
     func onFetchAllValidatorsInfo() {
         let request = Alamofire.request(BaseNetWork.validatorsUrl(mChainType), method: .get, parameters: ["status":"all"], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
@@ -557,7 +497,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchFinished()
         }
     }
-    
     
     func onFetchAccountInfo(_ account: Account) {
         let request = Alamofire.request(BaseNetWork.accountInfoUrl(mChainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
@@ -598,70 +537,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 
             case .failure(let error):
                 print("onFetchAccountInfo ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchBondingInfo(_ account: Account) {
-        let request = Alamofire.request(BaseNetWork.bondingsUrl(mChainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let bondinginfos = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                        self.onFetchFinished()
-                        return;
-                }
-                bondinginfos.forEach { bondinginfo in
-                    BaseData.instance.mMyDelegations.append(BondingInfo.init(bondinginfo))
-                }
-                
-            case .failure(let error):
-                print("onFetchBondingInfo ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchUnbondingInfo(_ account: Account) {
-        let request = Alamofire.request(BaseNetWork.unbondingsUrl(mChainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let unbondinginfos = responseData.object(forKey: "result") as? Array<NSDictionary> else {
-                        self.onFetchFinished()
-                        return
-                }
-                unbondinginfos.forEach { unbondinginfo in
-                    BaseData.instance.mMyUnbondings.append(UnbondingInfo.init(unbondinginfo))
-                }
-                
-            case .failure(let error):
-                print("onFetchUnbondingInfo ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    
-    func onFetchAllReward(_ account: Account) {
-        let request = Alamofire.request(BaseNetWork.rewardsUrl(mChainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:]);
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary,
-                    let rawRewards = responseData.value(forKeyPath: "result.rewards") as? Array<NSDictionary> else {
-                        self.onFetchFinished()
-                        return;
-                }
-                rawRewards.forEach { rawReward in
-                    BaseData.instance.mMyReward.append(RewardInfo.init(rawReward))
-                }
-                
-            case .failure(let error):
-                print("onFetchEachReward ", error)
             }
             self.onFetchFinished()
         }

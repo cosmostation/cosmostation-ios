@@ -99,7 +99,7 @@ class JoinPool3ViewController: BaseViewController, PasswordViewDelegate {
                                                              self.pageHolderVC.mLPCoin!.amount, self.pageHolderVC.mFee!,
                                                              self.pageHolderVC.mMemo!,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                             BaseData.instance.getChainId(self.chainType))
+                                                             self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

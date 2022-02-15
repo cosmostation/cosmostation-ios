@@ -88,10 +88,9 @@ class HardPoolRepay3ViewController: BaseViewController, PasswordViewDelegate {
                                                       self.account!.account_address,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mHardPoolCoins!,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

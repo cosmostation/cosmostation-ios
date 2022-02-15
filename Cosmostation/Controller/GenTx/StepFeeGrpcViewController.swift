@@ -230,73 +230,102 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
     
     func genSimulateReq(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ privateKey: Data, _ publicKey: Data, _ height: Ibc_Core_Client_V1_Height?)  -> Cosmos_Tx_V1beta1_SimulateRequest? {
         if (pageHolderVC.mType == COSMOS_MSG_TYPE_TRANSFER2) {
-            return Signer.genSimulateSendTxgRPC(auth, self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
-                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateSendTxgRPC(auth,
+                                                self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
+                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_DELEGATE) {
-            return Signer.genSimulateDelegateTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                    BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateDelegateTxgRPC(auth,
+                                                    self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_UNDELEGATE2) {
-            return Signer.genSimulateUnDelegateTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToUndelegateAmount!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                      BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateUnDelegateTxgRPC(auth,
+                                                      self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToUndelegateAmount!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      privateKey, publicKey, self.chainType!)
+                  
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_REDELEGATE2) {
-            return Signer.genSimulateReDelegateTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
-                                                      self.pageHolderVC.mToReDelegateAmount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                      BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateReDelegateTxgRPC(auth,
+                                                      self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
+                                                      self.pageHolderVC.mToReDelegateAmount!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
-            return Signer.genSimulateClaimRewardsTxgRPC(auth, self.pageHolderVC.mRewardTargetValidators_gRPC, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                        BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateClaimRewardsTxgRPC(auth,
+                                                        self.pageHolderVC.mRewardTargetValidators_gRPC,
+                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                        privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
-            return Signer.genSimulateReInvestTxgRPC(auth, self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mReinvestReward!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                    BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateReInvestTxgRPC(auth,
+                                                    self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mReinvestReward!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
-            return Signer.genSimulateetRewardAddressTxgRPC(auth, self.pageHolderVC.mToChangeRewardAddress!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                           privateKey,publicKey,BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateetRewardAddressTxgRPC(auth,
+                                                           self.pageHolderVC.mToChangeRewardAddress!,
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_VOTE) {
-            return Signer.genSimulateVoteTxgRPC(auth, self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!, self.pageHolderVC.mFee!,
-                                                self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateVoteTxgRPC(auth,
+                                                self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
+                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                privateKey, publicKey, self.chainType!)
             
         }
         
         //for starname custom msg
         else if (pageHolderVC.mType == IOV_MSG_TYPE_REGISTER_DOMAIN) {
-            return Signer.genSimulateRegisterDomainMsgTxgRPC(auth, self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
-                                                             self.pageHolderVC.mStarnameDomainType!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateRegisterDomainMsgTxgRPC(auth,
+                                                             self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
+                                                             self.pageHolderVC.mStarnameDomainType!,
+                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                             privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == IOV_MSG_TYPE_REGISTER_ACCOUNT) {
-            return Signer.genSimulateRegisterAccountMsgTxgRPC(auth, self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
-                                                              self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mStarnameResources_gRPC, self.pageHolderVC.mFee!,
-                                                              self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateRegisterAccountMsgTxgRPC(auth,
+                                                              self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
+                                                              self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mStarnameResources_gRPC,
+                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == IOV_MSG_TYPE_DELETE_DOMAIN) {
-            return Signer.genSimulateDeleteDomainMsgTxgRPC (auth, self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mFee!,
-                                                            self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateDeleteDomainMsgTxgRPC (auth,
+                                                            self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
+                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == IOV_MSG_TYPE_DELETE_ACCOUNT) {
-            return Signer.genSimulateDeleteAccountMsgTxgRPC (auth, self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
-                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateDeleteAccountMsgTxgRPC (auth,
+                                                             self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
+                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                             privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == IOV_MSG_TYPE_RENEW_DOMAIN) {
-            return Signer.genSimulateRenewDomainMsgTxgRPC (auth, self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mFee!,
-                                                           self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateRenewDomainMsgTxgRPC (auth,
+                                                           self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == IOV_MSG_TYPE_RENEW_ACCOUNT) {
-            return Signer.genSimulateRenewAccountMsgTxgRPC (auth, self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
-                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateRenewAccountMsgTxgRPC (auth,
+                                                            self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
+                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE) {
-            return Signer.genSimulateReplaceResourceMsgTxgRPC(auth, self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount, self.pageHolderVC.mAccount!.account_address,
-                                                              self.pageHolderVC.mStarnameResources_gRPC, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey, BaseData.instance.getChainId(self.chainType))
+            return Signer.genSimulateReplaceResourceMsgTxgRPC(auth,
+                                                              self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount, self.pageHolderVC.mAccount!.account_address,
+                                                              self.pageHolderVC.mStarnameResources_gRPC,
+                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              privateKey, publicKey, self.chainType!)
         }
         
         //for osmosis custom msg
@@ -311,33 +340,29 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      self.pageHolderVC.mSwapInDenom!,
                                                      self.pageHolderVC.mSwapInAmount!.stringValue,
                                                      self.pageHolderVC.mSwapOutAmount!.stringValue,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, privateKey, publicKey,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_JOIN_POOL) {
             return Signer.genSimulateDepositPoolMsgTxgRPC(auth,
                                                           self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
-                                                          self.pageHolderVC.mLPCoin!.amount, self.pageHolderVC.mFee!,
-                                                          self.pageHolderVC.mMemo!,
-                                                          privateKey, publicKey,
-                                                          BaseData.instance.getChainId(self.chainType))
+                                                          self.pageHolderVC.mLPCoin!.amount,
+                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_EXIT_POOL) {
             return Signer.genSimulateWithdrawPoolMsgTxgRPC(auth,
                                                            self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
-                                                           self.pageHolderVC.mLPCoin!.amount, self.pageHolderVC.mFee!,
-                                                           self.pageHolderVC.mMemo!,
-                                                           privateKey, publicKey,
-                                                           BaseData.instance.getChainId(self.chainType))
+                                                           self.pageHolderVC.mLPCoin!.amount,
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_LOCK) {
             return Signer.genSimulateLockTokensMsgTxgRPC(auth,
                                                          self.pageHolderVC.mLPCoin!,
                                                          self.pageHolderVC.mLockupDuration!,
-                                                         self.pageHolderVC.mFee!,
-                                                         self.pageHolderVC.mMemo!,
-                                                         privateKey, publicKey,
-                                                         BaseData.instance.getChainId(self.chainType))
+                                                         self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                         privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_BEGIN_UNLCOK) {
             var ids = Array<UInt64>()
@@ -346,22 +371,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
             }
             return Signer.genSimulateBeginUnlockingsMsgTxgRPC(auth,
                                                               ids,
-                                                              self.pageHolderVC.mFee!,
-                                                              self.pageHolderVC.mMemo!,
-                                                              privateKey, publicKey,
-                                                              BaseData.instance.getChainId(self.chainType))
+                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_PERIOD_UNLOCK) {
-            var ids = Array<UInt64>()
-            for lockup in self.pageHolderVC.mLockups! {
-                ids.append(lockup.id)
-            }
-            return Signer.genSimulateUnlockPeriodLocksMsgTxgRPC(auth,
-                                                                ids,
-                                                                self.pageHolderVC.mFee!,
-                                                                self.pageHolderVC.mMemo!,
-                                                                privateKey, publicKey,
-                                                                BaseData.instance.getChainId(self.chainType))
         }
         
         
@@ -376,30 +388,24 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                         Coin.init(self.pageHolderVC.mSwapInDenom!, offerFee.stringValue),
                                                         self.pageHolderVC.mSwapOutDenom!,
                                                         self.pageHolderVC.mGDexSwapOrderPrice!.stringValue,
-                                                        self.pageHolderVC.mFee!,
-                                                        self.pageHolderVC.mMemo!,
-                                                        privateKey, publicKey,
-                                                        BaseData.instance.getChainId(self.chainType))
+                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                        privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == LIQUIDITY_MSG_TYPE_JOIN_POOL) {
             return Signer.genSimulateDepositBatchMsgTxgRPC(auth,
                                                            self.pageHolderVC.mAccount!.account_address,
                                                            String(self.pageHolderVC.mGDexPool!.id),
                                                            [self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!],
-                                                           self.pageHolderVC.mFee!,
-                                                           self.pageHolderVC.mMemo!,
-                                                           privateKey, publicKey,
-                                                           BaseData.instance.getChainId(self.chainType))
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == LIQUIDITY_MSG_TYPE_EXIT_POOL) {
             return Signer.genSimulateWithdrawBatchMsgTxgRPC(auth,
                                                             self.pageHolderVC.mAccount!.account_address,
                                                             String(self.pageHolderVC.mGDexPool!.id),
                                                             self.pageHolderVC.mLPCoin!,
-                                                            self.pageHolderVC.mFee!,
-                                                            self.pageHolderVC.mMemo!,
-                                                            privateKey, publicKey,
-                                                            BaseData.instance.getChainId(self.chainType))
+                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            privateKey, publicKey, self.chainType!)
         }
         
         //for IBC Transfer or Cw20
@@ -411,10 +417,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                           self.pageHolderVC.mIBCSendAmount!,
                                                           self.pageHolderVC.mIBCSendPath!,
                                                           height!,
-                                                          self.pageHolderVC.mFee!,
-                                                          IBC_TRANSFER_MEMO,
-                                                          privateKey, publicKey,
-                                                          BaseData.instance.getChainId(self.chainType))
+                                                          self.pageHolderVC.mFee!, IBC_TRANSFER_MEMO,
+                                                          privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_CW20_TRANSFER) {
             return Signer.genSimulateCw20Send(auth,
@@ -422,20 +426,16 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                               self.pageHolderVC.mToSendRecipientAddress!,
                                               self.pageHolderVC.mCw20SendContract!,
                                               self.pageHolderVC.mToSendAmount,
-                                              self.pageHolderVC.mFee!,
-                                              self.pageHolderVC.mMemo!,
-                                              privateKey, publicKey,
-                                              BaseData.instance.getChainId(self.chainType))
+                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                              privateKey, publicKey, self.chainType!)
             
         }
         
         else if (pageHolderVC.mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
             return Signer.genSimulateSifIncentiveMsgTxgRPC(auth,
                                                            self.account!.account_address,
-                                                           self.pageHolderVC.mFee!,
-                                                           self.pageHolderVC.mMemo!,
-                                                           privateKey, publicKey,
-                                                           BaseData.instance.getChainId(self.chainType))
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == SIF_MSG_TYPE_ADD_LP) {
             return Signer.genSimulateSifAddLpMsgTxgRPC(auth,
@@ -443,10 +443,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                        self.pageHolderVC.mPoolCoin0!.amount,
                                                        self.pageHolderVC.mPoolCoin1!.denom,
                                                        self.pageHolderVC.mPoolCoin1!.amount,
-                                                       self.pageHolderVC.mFee!,
-                                                       self.pageHolderVC.mMemo!,
-                                                       privateKey, publicKey,
-                                                       BaseData.instance.getChainId(self.chainType))
+                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                       privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == SIF_MSG_TYPE_REMOVE_LP) {
             var basisPoints = ""
@@ -458,10 +456,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                           self.account!.account_address,
                                                           self.pageHolderVC.mSifPool!.externalAsset.symbol,
                                                           basisPoints,
-                                                          self.pageHolderVC.mFee!,
-                                                          self.pageHolderVC.mMemo!,
-                                                          privateKey, publicKey,
-                                                          BaseData.instance.getChainId(self.chainType))
+                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == SIF_MSG_TYPE_SWAP_CION) {
             return Signer.genSimulateSifSwapMsgTxgRPC(auth,
@@ -470,10 +466,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                       self.pageHolderVC.mSwapInAmount!.stringValue,
                                                       self.pageHolderVC.mSwapOutDenom!,
                                                       self.pageHolderVC.mSwapOutAmount!.stringValue,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
-                                                      privateKey, publicKey,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      privateKey, publicKey, self.chainType!)
         }
         
         //for NFT
@@ -494,7 +488,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                             String(data: jsonData, encoding: .utf8)!,
                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                            BaseData.instance.getChainId(self.chainType))
+                                                            self.chainType!)
                 
             } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                 return Signer.genSimulateIssueNftCroTxgRPC(auth,
@@ -507,7 +501,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                            String(data: jsonData, encoding: .utf8)!,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                           BaseData.instance.getChainId(self.chainType))
+                                                           self.chainType!)
             }
             
         } else if (pageHolderVC.mType == TASK_SEND_NFT) {
@@ -519,7 +513,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                            self.pageHolderVC.irisResponse!,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                           BaseData.instance.getChainId(self.chainType))
+                                                           self.chainType!)
                 
             } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                 return Signer.genSimulateSendNftCroTxgRPC(auth, self.account!.account_address,
@@ -529,7 +523,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                           self.pageHolderVC.croResponse!,
                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                          BaseData.instance.getChainId(self.chainType))
+                                                          self.chainType!)
             }
             
         } else if (pageHolderVC.mType == TASK_ISSUE_NFT_DENOM) {
@@ -539,7 +533,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                                  self.pageHolderVC.mNFTDenomName!,
                                                                  self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                                  self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                                 BaseData.instance.getChainId(self.chainType))
+                                                                 self.chainType!)
                 
             } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                 return Signer.genSimulateIssueNftDenomCroTxgRPC(auth, self.account!.account_address,
@@ -547,7 +541,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                                 self.pageHolderVC.mNFTDenomName!,
                                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                                BaseData.instance.getChainId(self.chainType))
+                                                                self.chainType!)
             }
             
         }
@@ -561,10 +555,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                        self.pageHolderVC.mDesmosBio!,
                                                        (self.pageHolderVC.mDesmosProfileHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosProfileHash!,
                                                        (self.pageHolderVC.mDesmosCoverHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosCoverHash!,
-                                                       self.pageHolderVC.mFee!,
-                                                       self.pageHolderVC.mMemo!,
+                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                       BaseData.instance.getChainId(self.chainType))
+                                                       self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_LINK_CHAIN_ACCOUNT) {
             let toAccount = BaseData.instance.selectAccountById(id: self.pageHolderVC.mDesmosToLinkAccountId)!
@@ -588,10 +581,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      toAccount,
                                                      toPrivateKey,
                                                      toPublicKey,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
             
         }
         
@@ -602,10 +594,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                    self.pageHolderVC.mCollateral,
                                                    self.pageHolderVC.mPrincipal,
                                                    self.pageHolderVC.mCollateralParamType!,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                   BaseData.instance.getChainId(self.chainType))
+                                                   self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DEPOSIT_CDP) {
             return Signer.genSimulateKavaCDPDeposit(auth,
@@ -613,10 +604,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mCollateral,
                                                     self.pageHolderVC.mCollateralParamType!,
-                                                    self.pageHolderVC.mFee!,
-                                                    self.pageHolderVC.mMemo!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                    BaseData.instance.getChainId(self.chainType))
+                                                    self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_WITHDRAW_CDP) {
             return Signer.genSimulateKavaCDPWithdraw(auth,
@@ -624,67 +614,64 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mCollateral,
                                                      self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
             return Signer.genSimulateKavaCDPDrawDebt(auth,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mPrincipal,
                                                      self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
             return Signer.genSimulateKavaCDPRepay(auth,
                                                   self.account!.account_address,
                                                   self.pageHolderVC.mPayment,
                                                   self.pageHolderVC.mCollateralParamType!,
-                                                  self.pageHolderVC.mFee!,
-                                                  self.pageHolderVC.mMemo!,
+                                                  self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                  BaseData.instance.getChainId(self.chainType))
+                                                  self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
             return Signer.genSimulateKavaHardDeposit(auth,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mHardPoolCoins!,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
+               
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
             return Signer.genSimulateKavaHardWithdraw(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mHardPoolCoins!,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.chainType!)
+                
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_BORROW_HARD) {
             return Signer.genSimulateKavaHardBorrow(auth,
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mHardPoolCoins!,
-                                                    self.pageHolderVC.mFee!,
-                                                    self.pageHolderVC.mMemo!,
+                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                    BaseData.instance.getChainId(self.chainType))
+                                                    self.chainType!)
+              
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_REPAY_HARD) {
             return Signer.genSimulateKavaHardRepay(auth,
                                                    self.account!.account_address,
                                                    self.account!.account_address,
                                                    self.pageHolderVC.mHardPoolCoins!,
-                                                   self.pageHolderVC.mFee!,
-                                                   self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                   BaseData.instance.getChainId(self.chainType))
+                                                   self.chainType!)
+             
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
             let slippage = "300000000000000000"
@@ -695,10 +682,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                      self.pageHolderVC.mPoolCoin1!,
                                                      slippage,
                                                      deadline,
-                                                     self.pageHolderVC.mFee!,
-                                                     self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     BaseData.instance.getChainId(self.chainType))
+                                                     self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
             let sharesOwned = NSDecimalNumber.init(string: pageHolderVC.mKavaSwapPoolDeposit?.sharesOwned)
@@ -717,10 +703,9 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                       coin0,
                                                       coin1,
                                                       deadline,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
             let inCoin = Coin.init(self.pageHolderVC.mSwapInDenom!, self.pageHolderVC.mSwapInAmount!.stringValue)
@@ -733,19 +718,17 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                              outCoin,
                                                              slippage,
                                                              deadline,
-                                                             self.pageHolderVC.mFee!,
-                                                             self.pageHolderVC.mMemo!,
+                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                             BaseData.instance.getChainId(self.chainType))
+                                                             self.chainType!)
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
             return Signer.genSimulateKavaIncentiveAll(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mIncentiveMultiplier!,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.chainType!)
         }
         
         return nil
