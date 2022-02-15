@@ -111,7 +111,7 @@ let LUM_API                             = "https://api-lum.cosmostation.io/";
 
 let CHIHUAHUA_API                       = "https://api-chihuahua.cosmostation.io/";
 
-let UMEE_API                            = "https://api-office.cosmostation.io/umeeverse-party-1/";
+let UMEE_API                            = "https://api-umee.cosmostation.io/";
 
 let AXELAR_API                          = "https://api-axelar.cosmostation.io/";
 
