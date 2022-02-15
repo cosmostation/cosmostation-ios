@@ -110,12 +110,12 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest = Cosmos_Tx_V1beta1_BroadcastTxRequest.init()
             if (self.pageHolderVC.mType == IOV_MSG_TYPE_RENEW_DOMAIN) {
                 reqTx = Signer.genSignedRenewDomainMsgTxgRPC (auth!,
-                                                               self.pageHolderVC.mStarnameDomain!,
-                                                               self.pageHolderVC.mAccount!.account_address,
-                                                               self.pageHolderVC.mFee!,
-                                                               self.pageHolderVC.mMemo!,
+                                                              self.pageHolderVC.mStarnameDomain!,
+                                                              self.pageHolderVC.mAccount!.account_address,
+                                                              self.pageHolderVC.mFee!,
+                                                              self.pageHolderVC.mMemo!,
                                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                               BaseData.instance.getChainId(self.chainType))
+                                                              self.chainType!)
                 
             } else if (self.pageHolderVC.mType == IOV_MSG_TYPE_RENEW_ACCOUNT) {
                 reqTx = Signer.genSignedRenewAccountMsgTxgRPC (auth!,
@@ -125,7 +125,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
                                                                self.pageHolderVC.mFee!,
                                                                self.pageHolderVC.mMemo!,
                                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                               BaseData.instance.getChainId(self.chainType))
+                                                               self.chainType!)
             }
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
