@@ -46,6 +46,10 @@ class StepSendAmountViewController: BaseViewController, UITextFieldDelegate{
             } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
                 mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
                 mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
+                
+            } else if (pageHolderVC.chainType! == ChainType.INJECTIVE_MAIN) {
+                mDivideDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
             }
             
             if (pageHolderVC.mToSendDenom == mainDenom) {

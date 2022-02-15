@@ -1189,7 +1189,7 @@ class Signer {
     
     static func genLinkChain(_ signer: String, _ tochain: ChainType, _ toAccount: Account, _ toPrivateKey: Data, _ toPublicKey: Data) -> [Google_Protobuf2_Any] {
         let plainString = "Link Chain With Cosmostation"
-        let sigbyte = getGrpcByteSingleSignature(toPrivateKey, plainString.data(using: .utf8)!)
+        let sigbyte = getGrpcByteSingleSignatures(toPrivateKey, plainString.data(using: .utf8)!, nil)
         
         let desmosBech32 = Desmos_Profiles_V1beta1_Bech32Address.with {
             $0.value = toAccount.account_address
