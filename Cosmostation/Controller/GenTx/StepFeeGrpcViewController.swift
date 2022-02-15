@@ -417,10 +417,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                           self.pageHolderVC.mIBCSendAmount!,
                                                           self.pageHolderVC.mIBCSendPath!,
                                                           height!,
-                                                          self.pageHolderVC.mFee!,
-                                                          IBC_TRANSFER_MEMO,
-                                                          privateKey, publicKey,
-                                                          BaseData.instance.getChainId(self.chainType))
+                                                          self.pageHolderVC.mFee!, IBC_TRANSFER_MEMO,
+                                                          privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_CW20_TRANSFER) {
             return Signer.genSimulateCw20Send(auth,
@@ -438,10 +436,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
         else if (pageHolderVC.mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
             return Signer.genSimulateSifIncentiveMsgTxgRPC(auth,
                                                            self.account!.account_address,
-                                                           self.pageHolderVC.mFee!,
-                                                           self.pageHolderVC.mMemo!,
-                                                           privateKey, publicKey,
-                                                           BaseData.instance.getChainId(self.chainType))
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == SIF_MSG_TYPE_ADD_LP) {
             return Signer.genSimulateSifAddLpMsgTxgRPC(auth,
@@ -449,10 +445,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                        self.pageHolderVC.mPoolCoin0!.amount,
                                                        self.pageHolderVC.mPoolCoin1!.denom,
                                                        self.pageHolderVC.mPoolCoin1!.amount,
-                                                       self.pageHolderVC.mFee!,
-                                                       self.pageHolderVC.mMemo!,
-                                                       privateKey, publicKey,
-                                                       BaseData.instance.getChainId(self.chainType))
+                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                       privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == SIF_MSG_TYPE_REMOVE_LP) {
             var basisPoints = ""
@@ -464,10 +458,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                           self.account!.account_address,
                                                           self.pageHolderVC.mSifPool!.externalAsset.symbol,
                                                           basisPoints,
-                                                          self.pageHolderVC.mFee!,
-                                                          self.pageHolderVC.mMemo!,
-                                                          privateKey, publicKey,
-                                                          BaseData.instance.getChainId(self.chainType))
+                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == SIF_MSG_TYPE_SWAP_CION) {
             return Signer.genSimulateSifSwapMsgTxgRPC(auth,
@@ -476,10 +468,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
                                                       self.pageHolderVC.mSwapInAmount!.stringValue,
                                                       self.pageHolderVC.mSwapOutDenom!,
                                                       self.pageHolderVC.mSwapOutAmount!.stringValue,
-                                                      self.pageHolderVC.mFee!,
-                                                      self.pageHolderVC.mMemo!,
-                                                      privateKey, publicKey,
-                                                      BaseData.instance.getChainId(self.chainType))
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      privateKey, publicKey, self.chainType!)
         }
         
         //for NFT
