@@ -97,7 +97,7 @@ class ExitPool3ViewController: BaseViewController, PasswordViewDelegate {
                                                               self.pageHolderVC.mLPCoin!.amount, self.pageHolderVC.mFee!,
                                                               self.pageHolderVC.mMemo!,
                                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                              BaseData.instance.getChainId(self.chainType))
+                                                              self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }
@@ -107,7 +107,7 @@ class ExitPool3ViewController: BaseViewController, PasswordViewDelegate {
             
             do {
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-//                print("response ", response.txResponse.txhash)
+                //                print("response ", response.txResponse.txhash)
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {

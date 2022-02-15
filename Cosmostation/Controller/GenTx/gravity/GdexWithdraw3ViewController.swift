@@ -115,13 +115,13 @@ class GdexWithdraw3ViewController: BaseViewController, PasswordViewDelegate {
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
             let reqTx = Signer.genSignedWithdrawBatchMsgTxgRPC(auth!,
-                                                              self.pageHolderVC.mAccount!.account_address,
-                                                              String(self.pageHolderVC.mGDexPool!.id),
-                                                              self.pageHolderVC.mLPCoin!,
-                                                              self.pageHolderVC.mFee!,
-                                                              self.pageHolderVC.mMemo!,
+                                                               self.pageHolderVC.mAccount!.account_address,
+                                                               String(self.pageHolderVC.mGDexPool!.id),
+                                                               self.pageHolderVC.mLPCoin!,
+                                                               self.pageHolderVC.mFee!,
+                                                               self.pageHolderVC.mMemo!,
                                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                              BaseData.instance.getChainId(self.chainType))
+                                                               self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }
