@@ -788,6 +788,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allDarc.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KONSTELLATION_MAIN_DENOM, allDarc, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == EVMOS_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenEvmos")
+            cell?.tokenSymbol.text = "PHOTON"
+            cell?.tokenSymbol.textColor = COLOR_EVMOS
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Evmos Staking Coin"
+            
+            let allPhoton = WUtils.getAllMainAsset(EVMOS_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allPhoton.stringValue, cell!.tokenAmount.font, 18, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(EVMOS_MAIN_DENOM, allPhoton, 18, cell!.tokenValue.font)
+            
         }
         
         

@@ -269,6 +269,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
+        } else if (chainType! == ChainType.EVMOS_MAIN) {
+            chainImg.image = UIImage(named: "chainEvmos")
+            keyPath.text = ETH_NON_LEDGER_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {
