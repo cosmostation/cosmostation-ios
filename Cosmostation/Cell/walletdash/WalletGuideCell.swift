@@ -217,6 +217,11 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_konstellation", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_konstellation", comment: "")
             
+        } else if (chainType == ChainType.EVMOS_MAIN) {
+            guideImg.image = UIImage(named: "infoiconEvmos")
+            guideTitle.text = NSLocalizedString("send_guide_title_evmos", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_konstellation", comment: "")
+            
         }
         
     }

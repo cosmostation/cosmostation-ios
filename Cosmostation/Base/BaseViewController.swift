@@ -517,7 +517,7 @@ extension BaseViewController {
         umeeAction.setValue(UIImage(named: "chainUmee")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
         let evmosAction = UIAlertAction(title: NSLocalizedString("chain_title_evmos", comment: ""), style: .default, handler: { _ in
-            self.onChainSelected(ChainType.UMEE_MAIN)
+            self.onChainSelected(ChainType.EVMOS_MAIN)
         })
         evmosAction.setValue(UIImage(named: "chainEvmos")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         

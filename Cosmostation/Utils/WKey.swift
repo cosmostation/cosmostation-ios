@@ -48,15 +48,15 @@ class WKey {
         } else if (chainType == ChainType.MEDI_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(371)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
-        } else if (chainType == ChainType.INJECTIVE_MAIN) {
-            return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
-
         } else if (chainType == ChainType.BITSONG_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(639)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
         } else if (chainType == ChainType.DESMOS_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(852)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
+        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN) {
+            return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {
@@ -175,6 +175,8 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "chihuahua", program: ripemd160)
         } else if (chain == ChainType.KONSTELLATION_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "darc", program: ripemd160)
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "evmos", program: ripemd160)
         }
         return result
     }
@@ -264,6 +266,11 @@ class WKey {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             let ethAddress = generateEthAddressFromPrivateKey(childKey!.raw)
             return convertAddressEthToCosmos(ethAddress, "inj")
+            
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            let ethAddress = generateEthAddressFromPrivateKey(childKey!.raw)
+            return convertAddressEthToCosmos(ethAddress, "evmos")
         }
         
         else {
@@ -359,6 +366,8 @@ class WKey {
             result = bech32.encode("chihuahua", values: data)
         } else if (chain == ChainType.KONSTELLATION_MAIN) {
             result = bech32.encode("darc", values: data)
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            result = bech32.encode("evmos", values: data)
         }
         return result
     }

@@ -39,9 +39,7 @@ class CKey {
         } else if (chainType == ChainType.IOV_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 234, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
-        }
-        
-        else if (chainType == ChainType.PERSIS_MAIN) {
+        } else if (chainType == ChainType.PERSIS_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 750, true), 0, true), 0, false), UInt32(account.account_path)!, false)
             
         } else if (chainType == ChainType.CRYPTO_MAIN) {
@@ -50,7 +48,7 @@ class CKey {
         } else if (chainType == ChainType.MEDI_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 371, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
-        } else if (chainType == ChainType.INJECTIVE_MAIN) {
+        } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
         } else if (chainType == ChainType.BITSONG_MAIN) {
@@ -191,6 +189,11 @@ class CKey {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
             let ethAddress = WKey.generateEthAddressFromPrivateKey(childKey!.raw)
             return WKey.convertAddressEthToCosmos(ethAddress, "inj")
+            
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 60, true), 0, true), 0, false), UInt32(path), false)
+            let ethAddress = WKey.generateEthAddressFromPrivateKey(childKey!.raw)
+            return WKey.convertAddressEthToCosmos(ethAddress, "evmos")
         }
         
         else {

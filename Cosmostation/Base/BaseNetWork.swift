@@ -601,7 +601,7 @@ class BaseNetWork {
             
         } else if (chain == ChainType.EVMOS_MAIN) {
 //            return ClientConnection.insecure(group: group).connect(host: "lcd-evmos-app.cosmostation.io", port: 9090)
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 54100)
+            return ClientConnection.insecure(group: group).connect(host: "61.74.179.193", port: 54100)
         }
         
         

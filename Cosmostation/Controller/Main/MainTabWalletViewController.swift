@@ -76,6 +76,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletLumCell", bundle: nil), forCellReuseIdentifier: "WalletLumCell")
         self.walletTableView.register(UINib(nibName: "WalletChihuahuaCell", bundle: nil), forCellReuseIdentifier: "WalletChihuahuaCell")
         self.walletTableView.register(UINib(nibName: "WalletKonstellationCell", bundle: nil), forCellReuseIdentifier: "WalletKonstellationCell")
+        self.walletTableView.register(UINib(nibName: "WalletEvmosCell", bundle: nil), forCellReuseIdentifier: "WalletEvmosCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -181,6 +182,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.KONSTELLATION_MAIN) {
             floaty.buttonImage = UIImage.init(named: "btnSendKonstellation")
             floaty.buttonColor = UIColor.init(hexString: "122951")
+        } else if (chainType! == ChainType.EVMOS_MAIN) {
+            floaty.buttonImage = UIImage.init(named: "btnSendEvmos")
+            floaty.buttonColor = UIColor.init(hexString: "000000")
         } else {
             floaty.buttonImage = UIImage.init(named: "sendImg")
             floaty.buttonColor = WUtils.getChainColor(chainType)
@@ -292,6 +296,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetKonstellationItems(tableView, indexPath);
         } else if (chainType == ChainType.UMEE_MAIN) {
             return onSetUmeeItems(tableView, indexPath);
+        } else if (chainType == ChainType.EVMOS_MAIN) {
+            return onSetEvmosItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -1019,7 +1025,35 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
         }
-        
+    }
+    
+    func onSetEvmosItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletEvmosCell") as? WalletEvmosCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
     }
     
     func onSetAxelarItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
@@ -1937,6 +1971,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://konstellation.tech/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.EVMOS_MAIN) {
+            guard let url = URL(string: "https://evmos.org/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -2085,6 +2123,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.KONSTELLATION_MAIN) {
             guard let url = URL(string: "https://konstellation.medium.com/") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.EVMOS_MAIN) {
+            guard let url = URL(string: "https://evmos.blog/") else { return }
             self.onShowSafariWeb(url)
             
         }

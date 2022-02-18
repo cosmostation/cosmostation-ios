@@ -1026,6 +1026,8 @@
 		048C836B27BF573D00270528 /* provenance_name_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C834527BF573D00270528 /* provenance_name_v1_query.pb.swift */; };
 		048C836C27BF573D00270528 /* provenance_attribute_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C834627BF573D00270528 /* provenance_attribute_v1_genesis.pb.swift */; };
 		048C836D27BF573D00270528 /* provenance_metadata_v1_p8e_p8e.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C834727BF573D00270528 /* provenance_metadata_v1_p8e_p8e.pb.swift */; };
+		048C837027BF7F7800270528 /* WalletEvmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C836E27BF7F7800270528 /* WalletEvmosCell.swift */; };
+		048C837127BF7F7800270528 /* WalletEvmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048C836F27BF7F7800270528 /* WalletEvmosCell.xib */; };
 		04983C97278B046100F913A3 /* LinkChainAccount0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C95278B046100F913A3 /* LinkChainAccount0ViewController.swift */; };
 		04983C98278B046100F913A3 /* LinkChainAccount0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983C96278B046100F913A3 /* LinkChainAccount0ViewController.xib */; };
 		04983C9B278B046D00F913A3 /* LinkChainAccount3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C99278B046D00F913A3 /* LinkChainAccount3ViewController.swift */; };
@@ -3022,6 +3024,8 @@
 		048C834527BF573D00270528 /* provenance_name_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = provenance_name_v1_query.pb.swift; sourceTree = "<group>"; };
 		048C834627BF573D00270528 /* provenance_attribute_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = provenance_attribute_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		048C834727BF573D00270528 /* provenance_metadata_v1_p8e_p8e.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = provenance_metadata_v1_p8e_p8e.pb.swift; sourceTree = "<group>"; };
+		048C836E27BF7F7800270528 /* WalletEvmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletEvmosCell.swift; sourceTree = "<group>"; };
+		048C836F27BF7F7800270528 /* WalletEvmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletEvmosCell.xib; sourceTree = "<group>"; };
 		04983C95278B046100F913A3 /* LinkChainAccount0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkChainAccount0ViewController.swift; sourceTree = "<group>"; };
 		04983C96278B046100F913A3 /* LinkChainAccount0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkChainAccount0ViewController.xib; sourceTree = "<group>"; };
 		04983C99278B046D00F913A3 /* LinkChainAccount3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkChainAccount3ViewController.swift; sourceTree = "<group>"; };
@@ -5470,6 +5474,8 @@
 				045E08492782EB71004A7801 /* WalletChihuahuaCell.xib */,
 				04D93A5627B1347900F8CE0D /* WalletKonstellationCell.swift */,
 				04D93A5727B1347900F8CE0D /* WalletKonstellationCell.xib */,
+				048C836E27BF7F7800270528 /* WalletEvmosCell.swift */,
+				048C836F27BF7F7800270528 /* WalletEvmosCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -6833,6 +6839,7 @@
 				283EB77A26C8288400B9D28D /* EarnBondedCell.xib in Resources */,
 				28D7BE7E25F10636006EECD7 /* HardListMyStatusCell.xib in Resources */,
 				283A80C324513F6F008FF813 /* CdpListAllCell.xib in Resources */,
+				048C837127BF7F7800270528 /* WalletEvmosCell.xib in Resources */,
 				E126CFA02387A643002A546F /* WalletInflationCell.xib in Resources */,
 				28B2E4C826CFC85400ECF960 /* TokenDetailIBCInfoCell.xib in Resources */,
 				284D17A02535558A00C364F9 /* Kava.storyboard in Resources */,
@@ -8606,6 +8613,7 @@
 				040FA9ED275F55C300229F6F /* iris_mod_nft_genesis.pb.swift in Sources */,
 				040FA8DC275F55C200229F6F /* regen_ecocredit_v1alpha2_query.pb.swift in Sources */,
 				048C835927BF573D00270528 /* provenance_attribute_v1_tx.pb.swift in Sources */,
+				048C837027BF7F7800270528 /* WalletEvmosCell.swift in Sources */,
 				2845D87D246FAE16007CD497 /* VoteDetailsViewController.swift in Sources */,
 				040FAB04275F55C400229F6F /* comdex_asset_v1beta1_querier.grpc.swift in Sources */,
 				E1A6995B2366E8CC004CA274 /* WalletIovCell.swift in Sources */,

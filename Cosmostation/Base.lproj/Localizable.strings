@@ -193,6 +193,8 @@
 "send_guide_msg_chihuahua" = "Chihuahua chain is the first meme coin in the Cosmos ecosystem.";
 "send_guide_title_konstellation" = "KONSTELLATION";
 "send_guide_msg_konstellation" = "A Cosmos SDK-based decentralized cross-chain capital markets network.";
+"send_guide_title_evmos" = "EVMOS";
+"send_guide_msg_evmos" = "A Cosmos SDK based IBC & EVM-compatible(Ethereum Virtual Machine) blockchain.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

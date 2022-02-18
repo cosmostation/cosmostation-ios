@@ -248,7 +248,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                    self.mChainType == ChainType.GRAVITY_BRIDGE_MAIN || self.mChainType == ChainType.KI_MAIN || self.mChainType == ChainType.COMDEX_MAIN ||
                    self.mChainType == ChainType.SECRET_MAIN || self.mChainType == ChainType.INJECTIVE_MAIN || self.mChainType == ChainType.BITSONG_MAIN ||
                    self.mChainType == ChainType.DESMOS_MAIN || self.mChainType == ChainType.LUM_MAIN || self.mChainType == ChainType.CHIHUAHUA_MAIN ||
-                   self.mChainType == ChainType.AXELAR_MAIN || self.mChainType == ChainType.KONSTELLATION_MAIN || self.mChainType == ChainType.UMEE_MAIN) {
+                   self.mChainType == ChainType.AXELAR_MAIN || self.mChainType == ChainType.KONSTELLATION_MAIN || self.mChainType == ChainType.UMEE_MAIN ||
+                   self.mChainType == ChainType.EVMOS_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)

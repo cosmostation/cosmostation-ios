@@ -1352,6 +1352,7 @@ let BLOCK_TIME_CHIHUAHUA    = NSDecimalNumber.init(string: "5.8172")
 let BLOCK_TIME_AXELAR       = NSDecimalNumber.init(string: "5.5596")
 let BLOCK_TIME_KONSTEALLTION = NSDecimalNumber.init(string: "5.376")
 let BLOCK_TIME_UMEE         = NSDecimalNumber.init(string: "5.658")
+let BLOCK_TIME_EVMOS        = NSDecimalNumber.init(string: "5.824")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;

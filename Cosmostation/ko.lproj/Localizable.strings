@@ -190,6 +190,8 @@
 "send_guide_msg_chihuahua" = "치와와를 모티브로 만들어진 Cosmos 생태계 내 첫 밈(meme) 코인.";
 "send_guide_title_konstellation" = "KONSTELLATION";
 "send_guide_msg_konstellation" = "탈중앙화된 자본 시장을 위한 인프라를 제공하는 Cosmos SDK 기반 블록체인 프로토콜.";
+"send_guide_title_evmos" = "EVMOS";
+"send_guide_msg_evmos" = "EVM(이더리움 가상 머신) 호환이 가능한 Cosmos SDK 기반 블록체인.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
