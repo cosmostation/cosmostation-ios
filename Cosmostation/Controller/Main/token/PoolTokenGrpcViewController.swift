@@ -77,6 +77,14 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
             poolDivideDecimal = 6
             poolDisplayDecimal = 6
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(poolDenom)
+            
+        }  else if (chainType == ChainType.INJECTIVE_MAIN) {
+            naviTokenImg.image = UIImage(named: "tokenIc")
+            naviTokenSymbol.text = poolDenom.uppercased()
+            
+            poolDivideDecimal = 18
+            poolDisplayDecimal = 18
+            totalAmount = BaseData.instance.getAvailableAmount_gRPC(poolDenom)
         }
         
         self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(poolDenom, naviPerPrice.font)
