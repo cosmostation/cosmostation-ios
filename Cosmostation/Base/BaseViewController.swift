@@ -516,6 +516,11 @@ extension BaseViewController {
         })
         umeeAction.setValue(UIImage(named: "chainUmee")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let evmosAction = UIAlertAction(title: NSLocalizedString("chain_title_evmos", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.UMEE_MAIN)
+        })
+        evmosAction.setValue(UIImage(named: "chainEvmos")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -538,6 +543,7 @@ extension BaseViewController {
         showAlert.addAction(cryptoAction)
         showAlert.addAction(desmosAction)
         showAlert.addAction(emoneyAction)
+        showAlert.addAction(evmosAction)
         showAlert.addAction(fetchAction)
         showAlert.addAction(gravityBridgeAction)
         showAlert.addAction(injectiveAction)

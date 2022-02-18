@@ -371,6 +371,8 @@ class BaseNetWork {
             result = KONSTELLATION_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.UMEE_MAIN) {
             result = UMEE_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            result = EVMOS_API + "v1/account/new_txs/" + address
         }
         
         
@@ -452,6 +454,8 @@ class BaseNetWork {
             result = KONSTELLATION_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.UMEE_MAIN) {
             result = UMEE_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            result = EVMOS_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -595,6 +599,9 @@ class BaseNetWork {
         } else if (chain == ChainType.UMEE_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-umee-app.cosmostation.io", port: 9090)
             
+        } else if (chain == ChainType.EVMOS_MAIN) {
+//            return ClientConnection.insecure(group: group).connect(host: "lcd-evmos-app.cosmostation.io", port: 9090)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 54100)
         }
         
         
