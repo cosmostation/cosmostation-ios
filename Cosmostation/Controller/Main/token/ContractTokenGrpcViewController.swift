@@ -57,16 +57,19 @@ class ContractTokenGrpcViewController: BaseViewController, UITableViewDelegate, 
     }
     
     func onInitView() {
-        self.perPrice.isHidden = true
-        self.updownPercent.isHidden = true
-        self.updownImg.isHidden = true
-        
         if (mCw20Token != nil) {
             tokenImg.af_setImage(withURL: mCw20Token!.getImgUrl())
             tokenSymbol.text = mCw20Token!.denom.uppercased()
             
             self.mTotalAmount = mCw20Token!.getAmount()
             self.topValue.attributedText = WUtils.dpUserCurrencyValue(mCw20Token!.denom, mTotalAmount, mCw20Token!.decimal, topValue.font)
+            
+            self.perPrice.attributedText = WUtils.dpPerUserCurrencyValue(mCw20Token!.denom, perPrice.font)
+            self.updownPercent.attributedText = WUtils.dpValueChange(mCw20Token!.denom, font: updownPercent.font)
+            let changeValue = WUtils.valueChange(mCw20Token!.denom)
+            if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { updownImg.image = UIImage(named: "priceUp") }
+            else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { updownImg.image = UIImage(named: "priceDown") }
+            else { updownImg.image = nil }
         }
         
         self.topCard.backgroundColor = WUtils.getChainBg(chainType)

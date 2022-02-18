@@ -759,6 +759,12 @@ public class WUtils {
                     }
                 }
             }
+            
+            baseData.getCw20s_gRPC().forEach { cw20Token in
+                let available = cw20Token.getAmount()
+                let decimal = cw20Token.decimal
+                totalValue = totalValue.adding(userCurrencyValue(cw20Token.denom, available, decimal))
+            }
         }
         else if (chainType! == ChainType.BINANCE_MAIN) {
             baseData.mBalances.forEach { coin in
