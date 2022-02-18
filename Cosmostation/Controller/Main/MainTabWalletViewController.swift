@@ -2249,6 +2249,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.coingecko.com/en/coins/desmos") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.UMEE_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/umee") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
