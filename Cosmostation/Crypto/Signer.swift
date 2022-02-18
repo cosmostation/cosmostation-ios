@@ -80,14 +80,14 @@ class Signer {
     static func genSignedUnDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                           _ toValAddress: String, _ amount: Coin,
                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let undeleMsg = genDelegateMsg(auth, toValAddress, amount)
+        let undeleMsg = genUndelegateMsg(auth, toValAddress, amount)
         return getGrpcSignedTx(auth, chainType, undeleMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSimulateUnDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                             _ toValAddress: String, _ amount: Coin,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let undeleMsg = genDelegateMsg(auth, toValAddress, amount)
+        let undeleMsg = genUndelegateMsg(auth, toValAddress, amount)
         return getGrpcSimulateTx(auth, chainType, undeleMsg, privateKey, publicKey, fee, memo)
     }
     
