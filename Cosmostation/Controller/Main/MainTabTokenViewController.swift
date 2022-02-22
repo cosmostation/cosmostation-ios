@@ -421,7 +421,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "CRO"
             cell?.tokenSymbol.textColor = COLOR_CRYPTO
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Crypto.org Staking Coin"
+            cell?.tokenDescription.text = "Cronos"
             
             let allCro = WUtils.getAllMainAsset(CRYPTO_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCro.stringValue, cell!.tokenAmount.font, 8, 6)
