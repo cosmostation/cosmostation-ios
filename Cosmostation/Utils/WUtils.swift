@@ -2375,7 +2375,7 @@ public class WUtils {
         } else if (chain == ChainType.KONSTELLATION_MAIN) {
             return "DARC"
         } else if (chain == ChainType.EVMOS_MAIN) {
-            return "PHOTON"
+            return "EVMOS"
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return "HASH"
         }
@@ -2647,7 +2647,7 @@ public class WUtils {
             label?.text = "DARC"
             label?.textColor = COLOR_KONSTELLATION
         } else if (chain == ChainType.EVMOS_MAIN) {
-            label?.text = "PHOTON"
+            label?.text = "EVMOS"
             label?.textColor = COLOR_EVMOS
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             label?.text = "HASH"
@@ -2952,7 +2952,7 @@ public class WUtils {
             chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
             chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN ||
             chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
-            chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN ||
+            chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN || chain == ChainType.EVMOS_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
@@ -3427,7 +3427,12 @@ public class WUtils {
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
         } else if (chain == ChainType.PROVENANCE_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_PROVENANCE)
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_PROVENANCE)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_EVMOS)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
@@ -3697,6 +3702,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_PROVENANCE)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_PROVENANCE)
+            }
+        
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_EVMOS)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_EVMOS)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_EVMOS)
             }
         }
         
@@ -4996,6 +5010,10 @@ public class WUtils {
         } else if (rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)) {
             let auth = try! Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value).baseAccount
             return (auth.address, auth.accountNumber, auth.sequence)
+        
+        } else if (rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)) {
+            let auth = try! Ethermint_Types_V1_EthAccount.init(serializedData: rawAccount.value).baseAccount
+            return (auth.address, auth.accountNumber, auth.sequence)
         }
         
         return (nil, nil, nil)
@@ -5024,6 +5042,8 @@ public class WUtils {
 //            }
             onParseVestingAccount(chain, rawAccount)
             
+        } else if (chain == ChainType.EVMOS_MAIN && rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)) {
+            onParseVestingAccount(chain, rawAccount)
         } else {
             onParseVestingAccount(chain, rawAccount)
         }

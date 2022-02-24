@@ -790,7 +790,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             
         } else if (coin.denom == EVMOS_MAIN_DENOM) {
             cell?.tokenImg.image = UIImage(named: "tokenEvmos")
-            cell?.tokenSymbol.text = "PHOTON"
+            cell?.tokenSymbol.text = "EVMOS"
             cell?.tokenSymbol.textColor = COLOR_EVMOS
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Evmos Staking Coin"
