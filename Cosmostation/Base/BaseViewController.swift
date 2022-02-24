@@ -543,7 +543,7 @@ extension BaseViewController {
         showAlert.addAction(cryptoAction)
         showAlert.addAction(desmosAction)
         showAlert.addAction(emoneyAction)
-//        showAlert.addAction(evmosAction)
+        showAlert.addAction(evmosAction)
         showAlert.addAction(fetchAction)
         showAlert.addAction(gravityBridgeAction)
         showAlert.addAction(injectiveAction)
