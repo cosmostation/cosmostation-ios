@@ -1067,7 +1067,7 @@ public enum ChainType: String {
         result.append(OKEX_MAIN)
         result.append(OSMOSIS_MAIN)
         result.append(PERSIS_MAIN)
-        result.append(PROVENANCE_MAIN)
+//        result.append(PROVENANCE_MAIN)
         result.append(REGEN_MAIN)
         result.append(RIZON_MAIN)
         result.append(SECRET_MAIN)
