@@ -2853,7 +2853,7 @@ public class WUtils {
         } else if (chain == ChainType.EVMOS_MAIN) {
             return ETH_NON_LEDGER_PATH + String(endPath)
         } else if (chain == ChainType.PROVENANCE_MAIN) {
-            return ETH_NON_LEDGER_PATH + String(endPath)
+            return PROVENANCE_BASE_PATH + String(endPath)
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
@@ -4849,7 +4849,7 @@ public class WUtils {
         } else if (chainId?.contains("evmos") == true) {
             return ChainType.EVMOS_MAIN
         } else if (chainId?.contains("pio-mainnet-") == true) {
-            return ChainType.EVMOS_MAIN
+            return ChainType.PROVENANCE_MAIN
         }
         
         return nil
