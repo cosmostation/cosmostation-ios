@@ -2952,7 +2952,7 @@ public class WUtils {
             chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
             chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN ||
             chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
-            chain == ChainType.UMEE_MAIN ||
+            chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
@@ -3426,6 +3426,11 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.PROVENANCE_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_PROVENANCE)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         return NSDecimalNumber.zero
     }
@@ -3683,6 +3688,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_UMEE)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_UMEE)
+            }
+        
+        } else if (chain == ChainType.PROVENANCE_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_PROVENANCE)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_PROVENANCE)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_PROVENANCE)
             }
         }
         

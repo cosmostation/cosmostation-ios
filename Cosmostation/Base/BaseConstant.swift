@@ -167,7 +167,7 @@ let LUM_VAL_URL                         = "https://raw.githubusercontent.com/cos
 let CHIHUAHUA_VAL_URL                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/chihuahua/";
 let KONSTELLATION_VAL_URL               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/konstellation/";
 let EVMOS_VAL_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/evmos/";
-let PROVENANCE_VAL_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/provenance/";
+let PROVENANCE_VAL_URL                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/provenance/";
 
 
 
@@ -606,6 +606,10 @@ let GAS_FEE_RATE_AVERAGE_JUNO               = "0.025"
 let GAS_FEE_RATE_TINY_KONSTELLATION         = "0.0001"
 let GAS_FEE_RATE_LOW_KONSTELLATION          = "0.001"
 let GAS_FEE_RATE_AVERAGE_KONSTELLATION      = "0.01"
+
+let GAS_FEE_RATE_TINY_PROVENANCE            = "2000.00"
+let GAS_FEE_RATE_LOW_PROVENANCE             = "2000.00"
+let GAS_FEE_RATE_AVERAGE_PROVENANCE         = "2000.00"
 
 let GAS_FEE_RATE_TINY_UMEE                  = "0.000"
 let GAS_FEE_RATE_LOW_UMEE                   = "0.001"

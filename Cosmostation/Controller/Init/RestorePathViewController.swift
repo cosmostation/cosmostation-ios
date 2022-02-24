@@ -100,6 +100,9 @@ class RestorePathViewController: BaseViewController, UITableViewDelegate, UITabl
             if (self.customPath == 0) { cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row)) }
             else { cell?.pathLabel.text = LUM_BASE_PATH.appending(String(indexPath.row)) }
             
+        } else if (userChain == ChainType.PROVENANCE_MAIN) {
+            cell?.pathLabel.text = PROVENANCE_BASE_PATH.appending(String(indexPath.row))
+            
         } else {
             cell?.pathLabel.text = BASE_PATH.appending(String(indexPath.row))
         }
