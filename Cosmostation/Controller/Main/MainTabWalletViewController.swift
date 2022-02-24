@@ -416,6 +416,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionCdp = { self.onClickCdp() }
+            cell?.actionWc = { self.onClickWalletConect() }
             return cell!
             
         } else if (indexPath.row == 1) {
@@ -2402,7 +2403,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     }
                 }
                 
-            } else if (self.chainType == ChainType.OSMOSIS_MAIN) {
+            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN) {
                 print("chainType ", self.chainType, "  url ",  result)
                 let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
                 commonWcVC.wcURL = result
