@@ -195,6 +195,8 @@
 "send_guide_msg_konstellation" = "A Cosmos SDK-based decentralized cross-chain capital markets network.";
 "send_guide_title_evmos" = "EVMOS";
 "send_guide_msg_evmos" = "A Cosmos SDK based IBC & EVM-compatible(Ethereum Virtual Machine) blockchain.";
+"send_guide_title_provenance" = "PROVENANCE";
+"send_guide_msg_provenance" = "Provenance is a Tendermint-based blockchain network utilized by $HASH, designed to support financial service industry.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -956,6 +958,7 @@ support@cosmostation.io";
 "chain_title_konstellation" = "Konstellation";
 "chain_title_umee" = "Umee";
 "chain_title_evmos" = "Evmos";
+"chain_title_provenance" = "Provenance";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_axelar_test" = "Axelar Testnet";
