@@ -1,14 +1,14 @@
 //
-//  WalletEvmosCell.swift
+//  WalletCudosCell.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2022/02/18.
+//  Created by 권혁준 on 2022/02/25.
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class WalletEvmosCell: UITableViewCell {
+class WalletCudosCell: UITableViewCell {
     @IBOutlet weak var cardRoot: CardView!
     @IBOutlet weak var totalAmount: UILabel!
     @IBOutlet weak var totalValue: UILabel!
@@ -44,18 +44,18 @@ class WalletEvmosCell: UITableViewCell {
     }
     
     func updateView(_ account: Account?, _ chainType: ChainType?) {
-        let totalToken = WUtils.getAllMainAsset(EVMOS_MAIN_DENOM)
+        let totalToken = WUtils.getAllMainAsset(CUDOS_MAIN_DENOM)
         totalAmount.attributedText = WUtils.displayAmount2(totalToken.stringValue, totalAmount.font!, 18, 6)
-        totalValue.attributedText = WUtils.dpUserCurrencyValue(EVMOS_MAIN_DENOM, totalToken, 18, totalValue.font)
-        availableAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getAvailable_gRPC(EVMOS_MAIN_DENOM), availableAmount.font!, 18, 6)
+        totalValue.attributedText = WUtils.dpUserCurrencyValue(CUDOS_MAIN_DENOM, totalToken, 18, totalValue.font)
+        availableAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getAvailable_gRPC(CUDOS_MAIN_DENOM), availableAmount.font!, 18, 6)
         delegatedAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 18, 6)
         unbondingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 18, 6)
-        rewardAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(EVMOS_MAIN_DENOM), rewardAmount.font, 18, 6)
+        rewardAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(CUDOS_MAIN_DENOM), rewardAmount.font, 18, 6)
         
-        let vesting = BaseData.instance.getVestingAmount_gRPC(EVMOS_MAIN_DENOM)
+        let vesting = BaseData.instance.getVestingAmount_gRPC(CUDOS_MAIN_DENOM)
         if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
             vestingLayer.isHidden = false
-            vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(EVMOS_MAIN_DENOM), vestingAmount.font!, 18, 6)
+            vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(CUDOS_MAIN_DENOM), vestingAmount.font!, 18, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -18).stringValue)
     }

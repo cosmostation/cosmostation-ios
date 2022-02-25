@@ -1599,6 +1599,15 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 9, 9)
             
+        } else if (chainType == ChainType.CUDOS_MAIN) {
+            if (coin.denom == CUDOS_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = coin.denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
+            
         }
     }
     
@@ -2019,6 +2028,15 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 9, 9)
             
+        } else if (chainType == ChainType.CUDOS_MAIN) {
+            if (denom == CUDOS_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
+            
         }
             
     }
@@ -2137,6 +2155,8 @@ public class WUtils {
             return COLOR_EVMOS
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return COLOR_PROVENANCE
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return COLOR_CUDOS
         }
         return COLOR_DARK_GRAY
     }
@@ -2216,6 +2236,8 @@ public class WUtils {
             return COLOR_EVMOS_DARK
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return COLOR_PROVENANCE_DARK
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return COLOR_CUDOS_DARK
         }
         return COLOR_DARK_GRAY
     }
@@ -2295,6 +2317,8 @@ public class WUtils {
             return TRANS_BG_COLOR_EVMOS
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return TRANS_BG_COLOR_PROVENANCE
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return TRANS_BG_COLOR_CUDOS
         }
         return COLOR_BG_GRAY
     }
@@ -2378,6 +2402,8 @@ public class WUtils {
             return "EVMOS"
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return "HASH"
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return "CUDOS"
         }
         return ""
     }
@@ -2457,6 +2483,8 @@ public class WUtils {
             return EVMOS_MAIN_DENOM
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return PROVENANCE_MAIN_DENOM
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return CUDOS_MAIN_DENOM
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -2507,7 +2535,7 @@ public class WUtils {
             return 0
         } else if (chain == ChainType.OKEX_MAIN) {
             return 0
-        } else if (chain == ChainType.FETCH_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.INJECTIVE_MAIN || chain == ChainType.EVMOS_MAIN) {
+        } else if (chain == ChainType.FETCH_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.INJECTIVE_MAIN || chain == ChainType.EVMOS_MAIN || chain == ChainType.CUDOS_MAIN) {
             return 18
         } else if (chain == ChainType.CRYPTO_MAIN) {
             return 8
@@ -2523,7 +2551,7 @@ public class WUtils {
             return 8
         } else if (chain == ChainType.OKEX_MAIN) {
             return 18
-        } else if (chain == ChainType.FETCH_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.INJECTIVE_MAIN || chain == ChainType.EVMOS_MAIN) {
+        } else if (chain == ChainType.FETCH_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.INJECTIVE_MAIN || chain == ChainType.EVMOS_MAIN || chain == ChainType.CUDOS_MAIN) {
             return 18
         } else if (chain == ChainType.CRYPTO_MAIN) {
             return 8
@@ -2652,6 +2680,9 @@ public class WUtils {
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             label?.text = "HASH"
             label?.textColor = COLOR_PROVENANCE
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            label?.text = "CUDOS"
+            label?.textColor = COLOR_CUDOS
         }
     }
     
@@ -2730,6 +2761,8 @@ public class WUtils {
             return ChainType.EVMOS_MAIN
         } else if (chainS == CHAIN_PROVENANCE_S) {
             return ChainType.PROVENANCE_MAIN
+        } else if (chainS == CHAIN_CUDOS_S) {
+            return ChainType.CUDOS_MAIN
         }
         
         else if (chainS == CHAIN_COSMOS_TEST_S) {
@@ -2817,6 +2850,8 @@ public class WUtils {
             return CHAIN_EVMOS_S
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return CHAIN_PROVENANCE_S
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return CHAIN_CUDOS_S
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -2952,7 +2987,7 @@ public class WUtils {
             chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
             chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN ||
             chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
-            chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN || chain == ChainType.EVMOS_MAIN ||
+            chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN || chain == ChainType.EVMOS_MAIN || chain == ChainType.CUDOS_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
@@ -3436,6 +3471,11 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CUDOS)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         return NSDecimalNumber.zero
     }
@@ -3711,6 +3751,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_EVMOS)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_EVMOS)
+            }
+        
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CUDOS)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CUDOS)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CUDOS)
             }
         }
         
@@ -4077,6 +4126,8 @@ public class WUtils {
             return EVMOS_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return PROVENANCE_VAL_URL + opAddress + ".png";
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return CUDOS_VAL_URL + opAddress + ".png";
         }
         return ""
     }
@@ -4192,6 +4243,9 @@ public class WUtils {
             
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return EXPLORER_PROVENANCE + "txs/" + hash
+            
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return EXPLORER_CUDOS + "txs/" + hash
             
         }
         
@@ -4321,6 +4375,9 @@ public class WUtils {
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return EXPLORER_PROVENANCE + "account/" + address
             
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return EXPLORER_CUDOS + "account/" + address
+            
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4441,6 +4498,9 @@ public class WUtils {
             
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return EXPLORER_PROVENANCE + "proposals/" + proposalId
+            
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return EXPLORER_CUDOS + "proposals/" + proposalId
             
         }
         
@@ -4569,6 +4629,9 @@ public class WUtils {
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return UIImage(named: "tokenHash")
         
+        } else if (chain == ChainType.CUDOS_MAIN) {
+            return UIImage(named: "tokenCudos")
+        
         }
         return UIImage(named: "tokenIc")
         
@@ -4612,6 +4675,7 @@ public class WUtils {
         else if (chain == ChainType.UMEE_MAIN) { return UIImage(named: "chainUmee") }
         else if (chain == ChainType.EVMOS_MAIN) { return UIImage(named: "chainEvmos") }
         else if (chain == ChainType.PROVENANCE_MAIN) { return UIImage(named: "chainProvenance") }
+        else if (chain == ChainType.CUDOS_MAIN) { return UIImage(named: "chainCudos") }
 
         
         else if (chain == ChainType.COSMOS_TEST) { return UIImage(named: "cosmosTestChainImg") }
@@ -4655,6 +4719,7 @@ public class WUtils {
         else if (chain == ChainType.UMEE_MAIN) { return "umee" }
         else if (chain == ChainType.EVMOS_MAIN) { return "evmos" }
         else if (chain == ChainType.PROVENANCE_MAIN) { return "provenance" }
+        else if (chain == ChainType.CUDOS_MAIN) { return "cudos" }
         
         else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
         else if (chain == ChainType.OKEX_MAIN) { return "okex" }
@@ -4701,6 +4766,7 @@ public class WUtils {
         else if (chain == ChainType.UMEE_MAIN) { return "(Umee Mainnet)" }
         else if (chain == ChainType.EVMOS_MAIN) { return "(Evmos Mainnet)" }
         else if (chain == ChainType.PROVENANCE_MAIN) { return "(Provenance Mainnet)" }
+        else if (chain == ChainType.CUDOS_MAIN) { return "(Cudos Mainnet)" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "(StarGate Testnet)" }
         else if (chain == ChainType.IRIS_TEST) { return "(Bifrost Testnet)" }
@@ -4747,6 +4813,7 @@ public class WUtils {
         else if (chain == ChainType.UMEE_MAIN) { return "UMEE" }
         else if (chain == ChainType.EVMOS_MAIN) { return "EVMOS" }
         else if (chain == ChainType.PROVENANCE_MAIN) { return "PROVENANCE" }
+        else if (chain == ChainType.CUDOS_MAIN) { return "CUDOS" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "STARGATE" }
         else if (chain == ChainType.IRIS_TEST) { return "BIFROST" }
@@ -4790,6 +4857,7 @@ public class WUtils {
         else if (chain == ChainType.UMEE_MAIN) { return RELAYER_IMG_UMEE }
         else if (chain == ChainType.EVMOS_MAIN) { return RELAYER_IMG_EVMOS }
         else if (chain == ChainType.PROVENANCE_MAIN) { return RELAYER_IMG_PROVENANCE }
+        else if (chain == ChainType.CUDOS_MAIN) { return RELAYER_IMG_CUDOS }
         return ""
     }
     
@@ -4864,6 +4932,8 @@ public class WUtils {
             return ChainType.EVMOS_MAIN
         } else if (chainId?.contains("pio-mainnet-") == true) {
             return ChainType.PROVENANCE_MAIN
+        } else if (chainId?.contains("cudos-") == true) {
+            return ChainType.CUDOS_MAIN
         }
         
         return nil
@@ -4913,6 +4983,7 @@ public class WUtils {
         else if (address?.starts(with: "umee1") == true && chain == ChainType.UMEE_MAIN) { return true }
         else if (address?.starts(with: "evmos1") == true && chain == ChainType.EVMOS_MAIN) { return true }
         else if (address?.starts(with: "pb1") == true && chain == ChainType.PROVENANCE_MAIN) { return true }
+        else if (address?.starts(with: "cudos1") == true && chain == ChainType.CUDOS_MAIN) { return true }
         return false
     }
     
@@ -4962,6 +5033,7 @@ public class WUtils {
         else if (address?.starts(with: "umee1") == true) { return [ChainType.UMEE_MAIN] }
         else if (address?.starts(with: "evmos1") == true) { return [ChainType.EVMOS_MAIN] }
         else if (address?.starts(with: "pb1") == true) { return [ChainType.PROVENANCE_MAIN] }
+        else if (address?.starts(with: "cudos1") == true) { return [ChainType.CUDOS_MAIN] }
         
         return nil
     }

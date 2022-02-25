@@ -274,6 +274,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     guard let url = URL(string: EXPLORER_PROVENANCE) else { return }
                     self.onShowSafariWeb(url)
                     
+                } else if (chainType == ChainType.CUDOS_MAIN) {
+                    guard let url = URL(string: EXPLORER_CUDOS) else { return }
+                    self.onShowSafariWeb(url)
+                    
                 }
                 
                 else if (chainType == ChainType.COSMOS_TEST) {

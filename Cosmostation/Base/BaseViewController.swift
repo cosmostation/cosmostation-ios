@@ -526,6 +526,11 @@ extension BaseViewController {
         })
         provenanceAction.setValue(UIImage(named: "chainProvenance")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let cudosAction = UIAlertAction(title: NSLocalizedString("chain_title_cudos", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.CUDOS_MAIN)
+        })
+        cudosAction.setValue(UIImage(named: "chainCudos")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -546,6 +551,7 @@ extension BaseViewController {
         showAlert.addAction(chihuahuaAction)
         showAlert.addAction(comdexAction)
         showAlert.addAction(cryptoAction)
+//        showAlert.addAction(cudosAction)
         showAlert.addAction(desmosAction)
         showAlert.addAction(emoneyAction)
 //        showAlert.addAction(evmosAction)

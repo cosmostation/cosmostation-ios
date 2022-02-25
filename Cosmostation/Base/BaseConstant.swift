@@ -121,6 +121,9 @@ let EVMOS_API                           = "https://api-evmos.cosmostation.io/";
 
 let PROVENANCE_API                      = "https://api-provenance.cosmostation.io/";
 
+//let CUDOS_API                           = "https://api-cudos.cosmostation.io/";
+let CUDOS_API                           = "https://api-cudos-testnet.cosmostation.io/";
+
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
@@ -168,7 +171,7 @@ let CHIHUAHUA_VAL_URL                   = "https://raw.githubusercontent.com/cos
 let KONSTELLATION_VAL_URL               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/konstellation/";
 let EVMOS_VAL_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/evmos/";
 let PROVENANCE_VAL_URL                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/provenance/";
-
+let CUDOS_VAL_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/cudos/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -215,6 +218,7 @@ let RELAYER_IMG_AXELAR                  = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_KONSTELLATION           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/konstellation/relay-konstellation-unknown.png"
 let RELAYER_IMG_EVMOS                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/evmos/relay-evmos-unknown.png"
 let RELAYER_IMG_PROVENANCE              = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/provenance/relay-provenance-unknown.png"
+let RELAYER_IMG_CUDOS                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cudos-unknown.png"
 
 
 
@@ -611,13 +615,17 @@ let GAS_FEE_RATE_TINY_PROVENANCE            = "2000.00"
 let GAS_FEE_RATE_LOW_PROVENANCE             = "2000.00"
 let GAS_FEE_RATE_AVERAGE_PROVENANCE         = "2000.00"
 
-let GAS_FEE_RATE_TINY_UMEE                  = "0.000"
-let GAS_FEE_RATE_LOW_UMEE                   = "0.001"
-let GAS_FEE_RATE_AVERAGE_UMEE               = "0.005"
-
 let GAS_FEE_RATE_TINY_EVMOS                 = "0.000"
 let GAS_FEE_RATE_LOW_EVMOS                  = "0.000"
 let GAS_FEE_RATE_AVERAGE_EVMOS              = "0.000"
+
+let GAS_FEE_RATE_TINY_CUDOS                 = "0.000"
+let GAS_FEE_RATE_LOW_CUDOS                  = "0.000"
+let GAS_FEE_RATE_AVERAGE_CUDOS              = "0.000"
+
+let GAS_FEE_RATE_TINY_UMEE                  = "0.000"
+let GAS_FEE_RATE_LOW_UMEE                   = "0.001"
+let GAS_FEE_RATE_AVERAGE_UMEE               = "0.005"
 
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
@@ -985,6 +993,10 @@ let TRANS_BG_COLOR_PROVENANCE2              = UIColor.init(hexString: "628ee4", 
 let COLOR_PROVENANCE                        = UIColor.init(hexString: "628ee4")
 let COLOR_PROVENANCE_DARK                   = UIColor.init(hexString: "3257a0")
 
+let TRANS_BG_COLOR_CUDOS                    = UIColor.init(hexString: "10aecc", alpha: 0.15)
+let TRANS_BG_COLOR_CUDOS2                   = UIColor.init(hexString: "10aecc", alpha: 0.4)
+let COLOR_CUDOS                             = UIColor.init(hexString: "10aecc")
+let COLOR_CUDOS_DARK                        = UIColor.init(hexString: "0d697a")
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
@@ -1035,6 +1047,7 @@ public enum ChainType: String {
     case KONSTELLATION_MAIN
     case UMEE_MAIN
     case PROVENANCE_MAIN
+    case CUDOS_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1056,6 +1069,7 @@ public enum ChainType: String {
         result.append(CHIHUAHUA_MAIN)
         result.append(COMDEX_MAIN)
         result.append(CRYPTO_MAIN)
+//        result.append(CUDOS_MAIN)
         result.append(DESMOS_MAIN)
         result.append(EMONEY_MAIN)
 //        result.append(EVMOS_MAIN)
@@ -1182,6 +1196,7 @@ let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
 let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
 let CHAIN_EVMOS_S = "SUPPORT_CHAIN_EVMOS"
 let CHAIN_PROVENANCE_S = "SUPPORT_CHAIN_PROVENANCE"
+let CHAIN_CUDOS_S = "SUPPORT_CHAIN_CUDOS"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1225,6 +1240,7 @@ let CHIHUAHUA_MAIN_DENOM = "uhuahua"
 let KONSTELLATION_MAIN_DENOM = "udarc"
 let EVMOS_MAIN_DENOM = "aevmos"
 let PROVENANCE_MAIN_DENOM = "nhash"
+let CUDOS_MAIN_DENOM = "acudos"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1320,6 +1336,7 @@ let EXPLORER_KONSTELLATION  = "https://www.mintscan.io/konstellation/";
 let EXPLORER_UMEE           = "https://www.mintscan.io/umee/";
 let EXPLORER_EVMOS          = "https://www.mintscan.io/evmos/";
 let EXPLORER_PROVENANCE     = "https://www.mintscan.io/provenance/";
+let EXPLORER_CUDOS          = "https://www.mintscan.io/cudos/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
