@@ -1231,6 +1231,8 @@
 		04E2A32E27A59BB10045ED21 /* TokenDetailCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32C27A59BB10045ED21 /* TokenDetailCommonCell.swift */; };
 		04E2A32F27A59BB10045ED21 /* TokenDetailCommonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E2A32D27A59BB10045ED21 /* TokenDetailCommonCell.xib */; };
 		04E2A33127AB94630045ED21 /* SendContract4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */; };
+		15E40DA927C787F000E7C850 /* WalletProvenanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E40DA727C787F000E7C850 /* WalletProvenanceCell.swift */; };
+		15E40DAA27C787F000E7C850 /* WalletProvenanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E40DA827C787F000E7C850 /* WalletProvenanceCell.xib */; };
 		2800CF9624719EC4003C3EF1 /* Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF9524719EC4003C3EF1 /* Tally.swift */; };
 		2800CF982471A004003C3EF1 /* CosmosProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF972471A004003C3EF1 /* CosmosProposer.swift */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -3230,6 +3232,8 @@
 		04E2A32C27A59BB10045ED21 /* TokenDetailCommonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenDetailCommonCell.swift; sourceTree = "<group>"; };
 		04E2A32D27A59BB10045ED21 /* TokenDetailCommonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenDetailCommonCell.xib; sourceTree = "<group>"; };
 		04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendContract4ViewController.swift; sourceTree = "<group>"; };
+		15E40DA727C787F000E7C850 /* WalletProvenanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletProvenanceCell.swift; sourceTree = "<group>"; };
+		15E40DA827C787F000E7C850 /* WalletProvenanceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletProvenanceCell.xib; sourceTree = "<group>"; };
 		2800CF9524719EC4003C3EF1 /* Tally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tally.swift; sourceTree = "<group>"; };
 		2800CF972471A004003C3EF1 /* CosmosProposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposer.swift; sourceTree = "<group>"; };
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
@@ -5476,6 +5480,8 @@
 				04D93A5727B1347900F8CE0D /* WalletKonstellationCell.xib */,
 				048C836E27BF7F7800270528 /* WalletEvmosCell.swift */,
 				048C836F27BF7F7800270528 /* WalletEvmosCell.xib */,
+				15E40DA727C787F000E7C850 /* WalletProvenanceCell.swift */,
+				15E40DA827C787F000E7C850 /* WalletProvenanceCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -6838,6 +6844,7 @@
 				04877301277C6E0700D9E201 /* xmas@1x.png in Resources */,
 				283EB77A26C8288400B9D28D /* EarnBondedCell.xib in Resources */,
 				28D7BE7E25F10636006EECD7 /* HardListMyStatusCell.xib in Resources */,
+				15E40DAA27C787F000E7C850 /* WalletProvenanceCell.xib in Resources */,
 				283A80C324513F6F008FF813 /* CdpListAllCell.xib in Resources */,
 				048C837127BF7F7800270528 /* WalletEvmosCell.xib in Resources */,
 				E126CFA02387A643002A546F /* WalletInflationCell.xib in Resources */,
@@ -7476,6 +7483,7 @@
 				04C43B54278D5F520022D5DF /* kava_bep3_v1beta1_tx.grpc.swift in Sources */,
 				040FA9D5275F55C300229F6F /* injective_types_v1beta1_account.pb.swift in Sources */,
 				040FA95F275F55C300229F6F /* comdex_vault_v1beta1_msg.grpc.swift in Sources */,
+				15E40DA927C787F000E7C850 /* WalletProvenanceCell.swift in Sources */,
 				E1F1CF0C239F7D8D004EF8A2 /* VoteCheckViewController.swift in Sources */,
 				28641F2C2601959E000AAEB8 /* TxDetailgRPCViewController.swift in Sources */,
 				2812BE15261170810050AE7C /* WalletSentinelCell.swift in Sources */,

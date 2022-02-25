@@ -1829,6 +1829,15 @@ class Signer {
                 $0.value = try! pub.serializedData()
             }
             
+        } else if (chainType == ChainType.EVMOS_MAIN) {
+            let pub = Ethermint_Crypto_V1_Ethsecp256k1_PubKey.with {
+                $0.key = publicKey
+            }
+            pubKey = Google_Protobuf2_Any.with {
+                $0.typeURL = "/ethermint.crypto.v1.ethsecp256k1.PubKey"
+                $0.value = try! pub.serializedData()
+            }
+        
         } else {
             let pub = Cosmos_Crypto_Secp256k1_PubKey.with {
                 $0.key = publicKey
@@ -1908,7 +1917,7 @@ class Signer {
     
     static func getGrpcByteSingleSignatures(_ privateKey: Data, _ toSignByte: Data, _ chainType: ChainType?) -> Data {
         var hash: Data?
-        if (chainType == ChainType.INJECTIVE_MAIN) {
+        if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN) {
             hash = HDWalletKit.Crypto.sha3keccak256(data: toSignByte)
         } else {
             hash = toSignByte.sha256()

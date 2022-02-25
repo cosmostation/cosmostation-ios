@@ -57,6 +57,9 @@ class WKey {
         } else if (chainType == ChainType.INJECTIVE_MAIN || chainType == ChainType.EVMOS_MAIN) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(60)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
 
+        } else if (chainType == ChainType.PROVENANCE_MAIN) {
+            return masterKey.derived(at: .hardened(44)).derived(at: .hardened(505)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
+
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {
@@ -177,6 +180,8 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "darc", program: ripemd160)
         } else if (chain == ChainType.EVMOS_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "evmos", program: ripemd160)
+        } else if (chain == ChainType.PROVENANCE_MAIN) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "pb", program: ripemd160)
         }
         return result
     }
@@ -215,6 +220,9 @@ class WKey {
             
         } else if (chain == ChainType.DESMOS_MAIN) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(852)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
+            
+        } else if (chain == ChainType.PROVENANCE_MAIN) {
+            childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(505)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         }
         
@@ -368,6 +376,8 @@ class WKey {
             result = bech32.encode("darc", values: data)
         } else if (chain == ChainType.EVMOS_MAIN) {
             result = bech32.encode("evmos", values: data)
+        } else if (chain == ChainType.PROVENANCE_MAIN) {
+            result = bech32.encode("pb", values: data)
         }
         return result
     }

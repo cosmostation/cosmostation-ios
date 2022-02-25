@@ -119,6 +119,8 @@ let KONSTELLATION_API                   = "https://api-konstellation.cosmostatio
 
 let EVMOS_API                           = "https://api-evmos.cosmostation.io/";
 
+let PROVENANCE_API                      = "https://api-provenance.cosmostation.io/";
+
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
@@ -165,6 +167,8 @@ let LUM_VAL_URL                         = "https://raw.githubusercontent.com/cos
 let CHIHUAHUA_VAL_URL                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/chihuahua/";
 let KONSTELLATION_VAL_URL               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/konstellation/";
 let EVMOS_VAL_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/evmos/";
+let PROVENANCE_VAL_URL                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/provenance/";
+
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -210,6 +214,7 @@ let RELAYER_IMG_KAVA                    = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_AXELAR                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/axelar/relay-axelar-unknown.png"
 let RELAYER_IMG_KONSTELLATION           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/konstellation/relay-konstellation-unknown.png"
 let RELAYER_IMG_EVMOS                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/evmos/relay-evmos-unknown.png"
+let RELAYER_IMG_PROVENANCE              = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/provenance/relay-provenance-unknown.png"
 
 
 
@@ -459,6 +464,7 @@ let ETH_LEDGER_LEGACY_PATH                  = "m/44'/60'/0'/"
 let BITSONG_BASE_PATH                       = "m/44'/639'/0'/0/"
 let DESMOS_BASE_PATH                        = "m/44'/852'/0'/0/"
 let LUM_BASE_PATH                           = "m/44'/880'/0'/0/"
+let PROVENANCE_BASE_PATH                    = "m/44'/505'/0'/0/"
 
 
 
@@ -601,9 +607,17 @@ let GAS_FEE_RATE_TINY_KONSTELLATION         = "0.0001"
 let GAS_FEE_RATE_LOW_KONSTELLATION          = "0.001"
 let GAS_FEE_RATE_AVERAGE_KONSTELLATION      = "0.01"
 
+let GAS_FEE_RATE_TINY_PROVENANCE            = "2000.00"
+let GAS_FEE_RATE_LOW_PROVENANCE             = "2000.00"
+let GAS_FEE_RATE_AVERAGE_PROVENANCE         = "2000.00"
+
 let GAS_FEE_RATE_TINY_UMEE                  = "0.000"
 let GAS_FEE_RATE_LOW_UMEE                   = "0.001"
 let GAS_FEE_RATE_AVERAGE_UMEE               = "0.005"
+
+let GAS_FEE_RATE_TINY_EVMOS                 = "0.000"
+let GAS_FEE_RATE_LOW_EVMOS                  = "0.000"
+let GAS_FEE_RATE_AVERAGE_EVMOS              = "0.000"
 
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
@@ -966,6 +980,11 @@ let TRANS_BG_COLOR_EVMOS2                   = UIColor.init(hexString: "b8b2db", 
 let COLOR_EVMOS                             = UIColor.init(hexString: "b8b2db")
 let COLOR_EVMOS_DARK                        = UIColor.init(hexString: "6f6c80")
 
+let TRANS_BG_COLOR_PROVENANCE               = UIColor.init(hexString: "628ee4", alpha: 0.15)
+let TRANS_BG_COLOR_PROVENANCE2              = UIColor.init(hexString: "628ee4", alpha: 0.4)
+let COLOR_PROVENANCE                        = UIColor.init(hexString: "628ee4")
+let COLOR_PROVENANCE_DARK                   = UIColor.init(hexString: "3257a0")
+
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
@@ -1015,6 +1034,7 @@ public enum ChainType: String {
     case AXELAR_MAIN
     case KONSTELLATION_MAIN
     case UMEE_MAIN
+    case PROVENANCE_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1051,6 +1071,7 @@ public enum ChainType: String {
         result.append(OKEX_MAIN)
         result.append(OSMOSIS_MAIN)
         result.append(PERSIS_MAIN)
+//        result.append(PROVENANCE_MAIN)
         result.append(REGEN_MAIN)
         result.append(RIZON_MAIN)
         result.append(SECRET_MAIN)
@@ -1160,6 +1181,7 @@ let CHAIN_AXELAR_S = "SUPPORT_CHAIN_AXELAR"
 let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
 let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
 let CHAIN_EVMOS_S = "SUPPORT_CHAIN_EVMOS"
+let CHAIN_PROVENANCE_S = "SUPPORT_CHAIN_PROVENANCE"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1201,7 +1223,8 @@ let DESMOS_MAIN_DENOM = "udsm"
 let LUM_MAIN_DENOM = "ulum"
 let CHIHUAHUA_MAIN_DENOM = "uhuahua"
 let KONSTELLATION_MAIN_DENOM = "udarc"
-let EVMOS_MAIN_DENOM = "aphoton"
+let EVMOS_MAIN_DENOM = "aevmos"
+let PROVENANCE_MAIN_DENOM = "nhash"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1296,6 +1319,7 @@ let EXPLORER_AXELAR         = "https://www.mintscan.io/axelar/";
 let EXPLORER_KONSTELLATION  = "https://www.mintscan.io/konstellation/";
 let EXPLORER_UMEE           = "https://www.mintscan.io/umee/";
 let EXPLORER_EVMOS          = "https://www.mintscan.io/evmos/";
+let EXPLORER_PROVENANCE     = "https://www.mintscan.io/provenance/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
@@ -1353,6 +1377,7 @@ let BLOCK_TIME_AXELAR       = NSDecimalNumber.init(string: "5.5596")
 let BLOCK_TIME_KONSTEALLTION = NSDecimalNumber.init(string: "5.376")
 let BLOCK_TIME_UMEE         = NSDecimalNumber.init(string: "5.658")
 let BLOCK_TIME_EVMOS        = NSDecimalNumber.init(string: "5.824")
+let BLOCK_TIME_PROVENANCE   = NSDecimalNumber.init(string: "6.4148")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;

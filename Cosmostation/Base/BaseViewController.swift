@@ -521,6 +521,11 @@ extension BaseViewController {
         })
         evmosAction.setValue(UIImage(named: "chainEvmos")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let provenanceAction = UIAlertAction(title: NSLocalizedString("chain_title_provenance", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.PROVENANCE_MAIN)
+        })
+        provenanceAction.setValue(UIImage(named: "chainProvenance")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -556,6 +561,7 @@ extension BaseViewController {
         showAlert.addAction(okexAction)
         showAlert.addAction(osmosisAction)
         showAlert.addAction(persisAction)
+//        showAlert.addAction(provenanceAction)
         showAlert.addAction(regenAction)
         showAlert.addAction(rizonAction)
         showAlert.addAction(secretAction)

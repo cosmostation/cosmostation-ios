@@ -41,7 +41,7 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
             popupVC.warnImgType = 28
         } else if (chainType! == ChainType.OSMOSIS_MAIN || chainType! == ChainType.BITCANA_MAIN || chainType! == ChainType.DESMOS_MAIN || chainType! == ChainType.STARGAZE_MAIN || chainType! == ChainType.UMEE_MAIN) {
             popupVC.warnImgType = 14
-        } else if (chainType! == ChainType.AXELAR_MAIN) {
+        } else if (chainType! == ChainType.AXELAR_MAIN || chainType! == ChainType.EVMOS_MAIN) {
             popupVC.warnImgType = 7
         } else {
             popupVC.warnImgType = 21

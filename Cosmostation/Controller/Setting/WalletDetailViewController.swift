@@ -276,6 +276,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
+        } else if (chainType! == ChainType.PROVENANCE_MAIN) {
+            chainImg.image = UIImage(named: "chainProvenance")
+            keyPath.text = PROVENANCE_BASE_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {

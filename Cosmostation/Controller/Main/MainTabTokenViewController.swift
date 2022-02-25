@@ -790,7 +790,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             
         } else if (coin.denom == EVMOS_MAIN_DENOM) {
             cell?.tokenImg.image = UIImage(named: "tokenEvmos")
-            cell?.tokenSymbol.text = "PHOTON"
+            cell?.tokenSymbol.text = "EVMOS"
             cell?.tokenSymbol.textColor = COLOR_EVMOS
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Evmos Staking Coin"
@@ -799,8 +799,18 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allPhoton.stringValue, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(EVMOS_MAIN_DENOM, allPhoton, 18, cell!.tokenValue.font)
             
+        } else if (coin.denom == PROVENANCE_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenHash")
+            cell?.tokenSymbol.text = "HASH"
+            cell?.tokenSymbol.textColor = COLOR_PROVENANCE
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Provenance Staking Coin"
+            
+            let allHash = WUtils.getAllMainAsset(PROVENANCE_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allHash.stringValue, cell!.tokenAmount.font, 9, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(PROVENANCE_MAIN_DENOM, allHash, 18, cell!.tokenValue.font)
+            
         }
-        
         
         
         else if (coin.denom == COSMOS_TEST_DENOM) {

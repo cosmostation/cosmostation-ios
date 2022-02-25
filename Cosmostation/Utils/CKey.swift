@@ -57,6 +57,9 @@ class CKey {
         } else if (chainType == ChainType.DESMOS_MAIN) {
             return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 852, true), 0, true), 0, false), UInt32(account.account_path)!, false)
 
+        } else if (chainType == ChainType.PROVENANCE_MAIN) {
+            return cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 505, true), 0, true), 0, false), UInt32(account.account_path)!, false)
+
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {
@@ -138,6 +141,9 @@ class CKey {
             
         } else if (chain == ChainType.DESMOS_MAIN) {
             childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 852, true), 0, true), 0, false), UInt32(path), false)
+            
+        } else if (chain == ChainType.PROVENANCE_MAIN) {
+            childKey =  cDerived(cDerived(cDerived(cDerived(cDerived(masterKey, 44, true), 505, true), 0, true), 0, false), UInt32(path), false)
             
         }
         
