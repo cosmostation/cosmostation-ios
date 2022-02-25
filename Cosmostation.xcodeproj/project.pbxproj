@@ -1233,6 +1233,8 @@
 		04E2A33127AB94630045ED21 /* SendContract4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */; };
 		15E40DA927C787F000E7C850 /* WalletProvenanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E40DA727C787F000E7C850 /* WalletProvenanceCell.swift */; };
 		15E40DAA27C787F000E7C850 /* WalletProvenanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E40DA827C787F000E7C850 /* WalletProvenanceCell.xib */; };
+		15E40DAD27C8A9E400E7C850 /* WalletCudosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E40DAB27C8A9E400E7C850 /* WalletCudosCell.swift */; };
+		15E40DAE27C8A9E400E7C850 /* WalletCudosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E40DAC27C8A9E400E7C850 /* WalletCudosCell.xib */; };
 		2800CF9624719EC4003C3EF1 /* Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF9524719EC4003C3EF1 /* Tally.swift */; };
 		2800CF982471A004003C3EF1 /* CosmosProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF972471A004003C3EF1 /* CosmosProposer.swift */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -3234,6 +3236,8 @@
 		04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendContract4ViewController.swift; sourceTree = "<group>"; };
 		15E40DA727C787F000E7C850 /* WalletProvenanceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletProvenanceCell.swift; sourceTree = "<group>"; };
 		15E40DA827C787F000E7C850 /* WalletProvenanceCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletProvenanceCell.xib; sourceTree = "<group>"; };
+		15E40DAB27C8A9E400E7C850 /* WalletCudosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCudosCell.swift; sourceTree = "<group>"; };
+		15E40DAC27C8A9E400E7C850 /* WalletCudosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCudosCell.xib; sourceTree = "<group>"; };
 		2800CF9524719EC4003C3EF1 /* Tally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tally.swift; sourceTree = "<group>"; };
 		2800CF972471A004003C3EF1 /* CosmosProposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposer.swift; sourceTree = "<group>"; };
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
@@ -5482,6 +5486,8 @@
 				048C836F27BF7F7800270528 /* WalletEvmosCell.xib */,
 				15E40DA727C787F000E7C850 /* WalletProvenanceCell.swift */,
 				15E40DA827C787F000E7C850 /* WalletProvenanceCell.xib */,
+				15E40DAB27C8A9E400E7C850 /* WalletCudosCell.swift */,
+				15E40DAC27C8A9E400E7C850 /* WalletCudosCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -6834,6 +6840,7 @@
 				288A14E125199C6200E17808 /* WalletCertikCell.xib in Resources */,
 				045E084B2782EB71004A7801 /* WalletChihuahuaCell.xib in Resources */,
 				282FF35223F5172E0028CC66 /* TxTransferCell.xib in Resources */,
+				15E40DAE27C8A9E400E7C850 /* WalletCudosCell.xib in Resources */,
 				28C3F50A269DC53700F4A58C /* TxGravityWithdrawBatchCell.xib in Resources */,
 				2842919B264A586B00130651 /* TokenDetailNativeCell.xib in Resources */,
 				28B325222637FDDD00275AED /* MemoMnemonicPopup.xib in Resources */,
@@ -7422,6 +7429,7 @@
 				040FA9D6275F55C300229F6F /* lum_beam_query.grpc.swift in Sources */,
 				28E8FAF52719C28F005EAA9B /* SifDexEthPoolViewController.swift in Sources */,
 				040FA87F275F55C200229F6F /* tendermint_liquidity_v1beta1_query.pb.swift in Sources */,
+				15E40DAD27C8A9E400E7C850 /* WalletCudosCell.swift in Sources */,
 				040FA888275F55C200229F6F /* sentinel_swap_v1_params.pb.swift in Sources */,
 				040FAA21275F55C300229F6F /* desmos_fees_v1beta1_params.pb.swift in Sources */,
 				284D17DC2535573100C364F9 /* CdpListViewController.swift in Sources */,

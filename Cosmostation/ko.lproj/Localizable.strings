@@ -194,6 +194,8 @@
 "send_guide_msg_evmos" = "EVM(이더리움 가상 머신) 호환이 가능한 Cosmos SDK 기반 블록체인.";
 "send_guide_title_provenance" = "PROVENANCE";
 "send_guide_msg_provenance" = "금융 서비스 산업의 블록체인 기술 도입을 위해 설계된 텐더민트 기반 블록체인입니다.";
+"send_guide_title_cudos" = "CUDOS";
+"send_guide_msg_cudos" = "Cudos는 탈중앙화된 고효율 클라우드 컴퓨팅 네트워크를 위해 설계된 텐더민트 기반 블록체인입니다.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -958,6 +960,7 @@ support@cosmostation.io";
 "chain_title_umee" = "Umee";
 "chain_title_evmos" = "Evmos";
 "chain_title_provenance" = "Provenance";
+"chain_title_cudos" = "Cudos";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_althea_test" = "Althea Testnet";

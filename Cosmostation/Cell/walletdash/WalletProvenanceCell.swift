@@ -46,7 +46,7 @@ class WalletProvenanceCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainType: ChainType?) {
         let totalToken = WUtils.getAllMainAsset(PROVENANCE_MAIN_DENOM)
         totalAmount.attributedText = WUtils.displayAmount2(totalToken.stringValue, totalAmount.font!, 9, 6)
-        totalValue.attributedText = WUtils.dpUserCurrencyValue(PROVENANCE_MAIN_DENOM, totalToken, 18, totalValue.font)
+        totalValue.attributedText = WUtils.dpUserCurrencyValue(PROVENANCE_MAIN_DENOM, totalToken, 9, totalValue.font)
         availableAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getAvailable_gRPC(PROVENANCE_MAIN_DENOM), availableAmount.font!, 9, 6)
         delegatedAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 9, 6)
         unbondingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 9, 6)

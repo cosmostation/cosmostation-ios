@@ -795,9 +795,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Evmos Staking Coin"
             
-            let allPhoton = WUtils.getAllMainAsset(EVMOS_MAIN_DENOM)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allPhoton.stringValue, cell!.tokenAmount.font, 18, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(EVMOS_MAIN_DENOM, allPhoton, 18, cell!.tokenValue.font)
+            let allEvmos = WUtils.getAllMainAsset(EVMOS_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allEvmos.stringValue, cell!.tokenAmount.font, 18, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(EVMOS_MAIN_DENOM, allEvmos, 18, cell!.tokenValue.font)
             
         } else if (coin.denom == PROVENANCE_MAIN_DENOM) {
             cell?.tokenImg.image = UIImage(named: "tokenHash")
@@ -808,7 +808,18 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             
             let allHash = WUtils.getAllMainAsset(PROVENANCE_MAIN_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allHash.stringValue, cell!.tokenAmount.font, 9, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(PROVENANCE_MAIN_DENOM, allHash, 18, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(PROVENANCE_MAIN_DENOM, allHash, 9, cell!.tokenValue.font)
+            
+        } else if (coin.denom == CUDOS_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenCudos")
+            cell?.tokenSymbol.text = "CUDOS"
+            cell?.tokenSymbol.textColor = COLOR_CUDOS
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Cudos Staking Coin"
+            
+            let allCudos = WUtils.getAllMainAsset(CUDOS_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCudos.stringValue, cell!.tokenAmount.font, 18, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CUDOS_MAIN_DENOM, allCudos, 18, cell!.tokenValue.font)
             
         }
         
