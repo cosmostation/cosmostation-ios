@@ -615,13 +615,17 @@ let GAS_FEE_RATE_TINY_PROVENANCE            = "2000.00"
 let GAS_FEE_RATE_LOW_PROVENANCE             = "2000.00"
 let GAS_FEE_RATE_AVERAGE_PROVENANCE         = "2000.00"
 
-let GAS_FEE_RATE_TINY_UMEE                  = "0.000"
-let GAS_FEE_RATE_LOW_UMEE                   = "0.001"
-let GAS_FEE_RATE_AVERAGE_UMEE               = "0.005"
-
 let GAS_FEE_RATE_TINY_EVMOS                 = "0.000"
 let GAS_FEE_RATE_LOW_EVMOS                  = "0.000"
 let GAS_FEE_RATE_AVERAGE_EVMOS              = "0.000"
+
+let GAS_FEE_RATE_TINY_CUDOS                 = "0.000"
+let GAS_FEE_RATE_LOW_CUDOS                  = "0.000"
+let GAS_FEE_RATE_AVERAGE_CUDOS              = "0.000"
+
+let GAS_FEE_RATE_TINY_UMEE                  = "0.000"
+let GAS_FEE_RATE_LOW_UMEE                   = "0.001"
+let GAS_FEE_RATE_AVERAGE_UMEE               = "0.005"
 
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
