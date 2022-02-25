@@ -1069,7 +1069,7 @@ public enum ChainType: String {
         result.append(CHIHUAHUA_MAIN)
         result.append(COMDEX_MAIN)
         result.append(CRYPTO_MAIN)
-        result.append(CUDOS_MAIN)
+//        result.append(CUDOS_MAIN)
         result.append(DESMOS_MAIN)
         result.append(EMONEY_MAIN)
 //        result.append(EVMOS_MAIN)
@@ -1103,9 +1103,6 @@ public enum ChainType: String {
     }
     
     static func IS_TESTNET(_ chain: ChainType?) -> Bool {
-        if (chain == CUDOS_MAIN) {
-            return true
-        }
         return false
     }
     
