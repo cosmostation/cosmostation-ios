@@ -3092,6 +3092,8 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CLAIM_INCENTIVE_ALL))
             } else if (type == TASK_TYPE_HTLC_SWAP) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
+            } else if (type == TASK_IBC_TRANSFER) {
+                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
             }
             
         } else if (chain == ChainType.BAND_MAIN) {
