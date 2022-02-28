@@ -135,7 +135,7 @@ final class BaseData : NSObject{
         return nil
     }
     
-    func getIbcSendableRelayers() -> Array<IbcPath> {
+    func getIbcSendableChains() -> Array<IbcPath> {
         var result = Array<IbcPath>()
         for ibcPath in mIbcPaths {
             if ibcPath.paths.filter({ $0.auth == true }).first != nil {
@@ -145,12 +145,24 @@ final class BaseData : NSObject{
         return result
     }
     
-    func getIbcRollbackRelayer(_ denom: String) -> Array<IbcPath> {
+    func getIbcRollbackChain(_ denom: String) -> Array<IbcPath> {
         var result = Array<IbcPath>()
         if let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
             for ibcPath in mIbcPaths {
                 if (ibcPath.paths.filter { $0.channel_id == ibcToken.channel_id }.first != nil) {
                     result.append(ibcPath)
+                }
+            }
+        }
+        return result
+    }
+    
+    func getIbcRollbackChannel(_ denom: String, _ paths: Array<Path>) -> Array<Path> {
+        var result = Array<Path>()
+        if let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
+            for path in paths {
+                if (path.channel_id == ibcToken.channel_id) {
+                    result.append(path)
                 }
             }
         }
