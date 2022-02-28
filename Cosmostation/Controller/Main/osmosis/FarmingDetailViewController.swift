@@ -99,13 +99,16 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         
         //display ARPs
         if (mPoolGauges.count == 3 && mPoolGauges[0].distributedCoins.count > 0 && mPoolGauges[1].distributedCoins.count > 0 && mPoolGauges[2].distributedCoins.count > 0) {
-            let incentive1Day = NSDecimalNumber.init(string: mPoolGauges[0].coins[0].amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[0].distributedCoins[0].amount))
+            let gauge0Amount = mPoolGauges[0].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
+            let incentive1Day = NSDecimalNumber.init(string: gauge0Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[0].distributedCoins[0].amount))
             let incentiveValue1Day = WUtils.usdValue(BaseData.instance.getBaseDenom(OSMOSIS_MAIN_DENOM), incentive1Day, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
             
-            let incentive7Day = NSDecimalNumber.init(string: mPoolGauges[1].coins[0].amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[1].distributedCoins[0].amount))
+            let gauge1Amount = mPoolGauges[1].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
+            let incentive7Day = NSDecimalNumber.init(string: gauge1Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[1].distributedCoins[0].amount))
             var incentiveValue7Day = WUtils.usdValue(BaseData.instance.getBaseDenom(OSMOSIS_MAIN_DENOM), incentive7Day, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
             
-            let incentive14Day = NSDecimalNumber.init(string: mPoolGauges[2].coins[0].amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[2].distributedCoins[0].amount))
+            let gauge2Amount = mPoolGauges[2].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
+            let incentive14Day = NSDecimalNumber.init(string: gauge2Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[2].distributedCoins[0].amount))
             var incentiveValue14Day = WUtils.usdValue(BaseData.instance.getBaseDenom(OSMOSIS_MAIN_DENOM), incentive14Day, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
             
             incentiveValue14Day = incentiveValue14Day.adding(incentiveValue7Day).adding(incentiveValue1Day)

@@ -25,7 +25,6 @@ class FarmCell: UITableViewCell {
     }
     
     func onBindView(_ pool: Osmosis_Gamm_V1beta1_BalancerPool, _ gauges: Array<Osmosis_Incentives_Gauge>) {
-        print("pool ", pool)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         
@@ -49,10 +48,11 @@ class FarmCell: UITableViewCell {
         gauges.forEach { gauge in
             if (gauge.coins.count > 0 && gauge.distributedCoins.count > 0) {
                 if (gauge.distributedCoins.count > 0) {
-                    let cIncentive = gauge.coins[0]
-                    let dIncentive = gauge.distributedCoins[0]
+//                    let cIncentive = gauge.coins[0]
+                    let cIncentive = gauge.coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
+                    let dIncentive = gauge.distributedCoins[0].amount
                     
-                    let thisIncentive = NSDecimalNumber.init(string: cIncentive.amount).subtracting(NSDecimalNumber.init(string: dIncentive.amount))
+                    let thisIncentive = NSDecimalNumber.init(string: cIncentive).subtracting(NSDecimalNumber.init(string: dIncentive))
                     let thisIncentiveValue = WUtils.usdValue(BaseData.instance.getBaseDenom(OSMOSIS_MAIN_DENOM), thisIncentive, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
                     
                     thisTotalIncentiveValue = thisTotalIncentiveValue.adding(thisIncentiveValue)
