@@ -563,14 +563,14 @@ class Signer {
     static func genSignedWithdrawPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                _ poolId: String, _ withdraw0Coin: Coin, _ withdraw1Coin: Coin, _ shareAmount: String,
                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let withdrawPoolMsg = genDepositPoolMsg(auth, poolId, withdraw0Coin, withdraw1Coin, shareAmount)
+        let withdrawPoolMsg = genWithdrawPoolMsg(auth, poolId, withdraw0Coin, withdraw1Coin, shareAmount)
         return getGrpcSignedTx(auth, chainType, withdrawPoolMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSimulateWithdrawPoolMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                                  _ poolId: String, _ withdraw0Coin: Coin, _ withdraw1Coin: Coin, _ shareAmount: String,
                                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let withdrawPoolMsg = genDepositPoolMsg(auth, poolId, withdraw0Coin, withdraw1Coin, shareAmount)
+        let withdrawPoolMsg = genWithdrawPoolMsg(auth, poolId, withdraw0Coin, withdraw1Coin, shareAmount)
         return getGrpcSimulateTx(auth, chainType, withdrawPoolMsg, privateKey, publicKey, fee, memo)
     }
     
