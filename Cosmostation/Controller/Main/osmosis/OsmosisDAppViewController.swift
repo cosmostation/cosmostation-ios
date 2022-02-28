@@ -96,8 +96,8 @@ extension WUtils {
             
         } else if (denom.starts(with: "ibc/")) {
             label.textColor = .white
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-                label.text = ibcToken.display_denom?.uppercased()
+            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
+                label.text = dpDenom.uppercased()
             } else {
                 label.text = "UnKnown"
             }
@@ -134,8 +134,8 @@ extension WUtils {
             return "GAMM-" + String(denom.split(separator: "/").last!)
             
         } else if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-                return  ibcToken.display_denom!.uppercased()
+            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
+                return dpDenom.uppercased()
             } else {
                 return"UnKnown"
             }

@@ -16,6 +16,7 @@ public class Cw20Token {
     var display: Int64?
     var logo: String = ""
     var amount: String = "0"
+    var chain: String?
     
     init(_ dictionary: NSDictionary?) {
         self.id = dictionary?["id"] as? Int64
@@ -24,6 +25,7 @@ public class Cw20Token {
         self.decimal = dictionary?["decimal"] as? Int16 ?? 6
         self.display = dictionary?["display"] as? Int64
         self.logo = dictionary?["logo"] as? String ?? ""
+        self.chain = dictionary?["chain"] as? String
     }
     
     func setAmount(_ rawAmount: String) {

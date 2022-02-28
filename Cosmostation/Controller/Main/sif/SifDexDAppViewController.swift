@@ -280,7 +280,16 @@ extension WUtils {
                 return denom
             }
             if (ibcToken.auth == true) {
-                return ibcToken.base_denom!
+                if (ibcToken.base_denom?.starts(with: "cw20:") == true) {
+                    let cAddress = ibcToken.base_denom?.replacingOccurrences(of: "cw20:", with: "")
+                    if let cw20Basedenom = BaseData.instance.mCw20Tokens.filter({ $0.contract_address == cAddress }).first {
+                        return cw20Basedenom.denom
+                    } else {
+                        return ibcToken.base_denom!
+                    }
+                } else {
+                    return ibcToken.base_denom!
+                }
             }
             
         } else if (denom.starts(with: "c") || denom.starts(with: "x")) {
