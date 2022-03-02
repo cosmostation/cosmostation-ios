@@ -1790,58 +1790,28 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickProfile() {
-        if (BaseData.instance.mNodeInfo_gRPC != nil && BaseData.instance.mAccount_gRPC != nil) {
-            if (BaseData.instance.mAccount_gRPC?.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName) == true) {
-                let profileVC = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
-                profileVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(profileVC, animated: true)
-                
-            } else {
-                if (account?.account_has_private == false) {
-                    self.onShowAddMenomicDialog()
-                    return
-                }
-                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-                txVC.mType = TASK_GEN_PROFILE
-                txVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txVC, animated: true)
-            }
+        if (BaseData.instance.mAccount_gRPC?.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName) == true) {
+            let profileVC = ProfileViewController(nibName: "ProfileViewController", bundle: nil)
+            profileVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(profileVC, animated: true)
 
         } else {
             if (account?.account_has_private == false) {
                 self.onShowAddMenomicDialog()
                 return
             }
-            self.onDesmosFeeCheck(account!.account_address)
-        }
-    }
-    
-    func onDesmosFeeCheck(_ address: String) {
-        print("onDesmosFeeCheck ", address)
-        self.showWaittingAlert()
-        let desmosFeeCheck = DesmosFeeCheck.init(address)
-        let data = try! JSONEncoder().encode(desmosFeeCheck)
-        let params = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
-        let request = Alamofire.request(BaseNetWork.desmosFeeCheck(), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
-        request.responseString() { response in
-            if (self.waitAlert != nil) {
-                self.waitAlert?.dismiss(animated: true, completion: {
-                    let resultAlert = UIAlertController(title: "", message: response.result.value, preferredStyle: .alert)
-                    resultAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
-                        self.dismiss(animated: true, completion:  {
-                            self.showWaittingAlert()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(8000)) {
-                                self.waitAlert?.dismiss(animated: true, completion: {
-                                    self.onStartMainTab()
-                                })
-                            }
-                        })
-                    }))
-                    self.present(resultAlert, animated: true)
-                })
+            let mainDenom = WUtils.getMainDenom(chainType)
+            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_GEN_PROFILE, 0)
+            if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
+                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                return
             }
+            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+            txVC.mType = TASK_GEN_PROFILE
+            txVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(txVC, animated: true)
         }
     }
     
