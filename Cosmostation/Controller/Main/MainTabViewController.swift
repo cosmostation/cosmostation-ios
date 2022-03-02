@@ -249,7 +249,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                    self.mChainType == ChainType.SECRET_MAIN || self.mChainType == ChainType.INJECTIVE_MAIN || self.mChainType == ChainType.BITSONG_MAIN ||
                    self.mChainType == ChainType.DESMOS_MAIN || self.mChainType == ChainType.LUM_MAIN || self.mChainType == ChainType.CHIHUAHUA_MAIN ||
                    self.mChainType == ChainType.AXELAR_MAIN || self.mChainType == ChainType.KONSTELLATION_MAIN || self.mChainType == ChainType.UMEE_MAIN ||
-                   self.mChainType == ChainType.EVMOS_MAIN || self.mChainType == ChainType.PROVENANCE_MAIN || self.mChainType == ChainType.CUDOS_MAIN) {
+                   self.mChainType == ChainType.EVMOS_MAIN || self.mChainType == ChainType.PROVENANCE_MAIN || self.mChainType == ChainType.CUDOS_MAIN ||
+                   self.mChainType == ChainType.SIF_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -277,21 +278,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
             self.onFetchgRPCStarNameFees()
             self.onFetchgRPCStarNameConfig()
-            
-        } else if (self.mChainType == ChainType.SIF_MAIN) {
-            self.mFetchCnt = 10
-            self.onFetchgRPCNodeInfo()
-            self.onFetchgRPCAuth(self.mAccount.account_address)
-            self.onFetchgRPCBondedValidators(0)
-            self.onFetchgRPCUnbondedValidators(0)
-            self.onFetchgRPCUnbondingValidators(0)
-            
-            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
-            self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
-            self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
-            self.onFetchgRPCRewards(self.mAccount.account_address, 0)
-            
-            self.onFetchSifLmIncentive(self.mAccount.account_address)
             
         } else if (self.mChainType == ChainType.OSMOSIS_MAIN) {
             self.mFetchCnt = 10
@@ -714,27 +700,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
         
     }
-    
-    func onFetchSifLmIncentive(_ address: String) {
-        print("onFetchSifLmIncentive url ", BaseNetWork.lmIncentiveUrl(address))
-        let request = Alamofire.request(BaseNetWork.lmIncentiveUrl(address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let resData = res as? NSDictionary else {
-                    self.onFetchFinished()
-                    return
-                }
-                BaseData.instance.mSifLmIncentive = SifIncentive.init(resData)
-//                print("mSifLmIncentive ", BaseData.instance.mSifLmIncentive?.user?.totalClaimableCommissionsAndClaimableRewards)
-                
-            case .failure(let error):
-                print("onFetchSifLmIncentive ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
     
     //gRPC
     func onFetchgRPCNodeInfo() {

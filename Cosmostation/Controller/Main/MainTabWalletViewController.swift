@@ -55,7 +55,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletFetchCell", bundle: nil), forCellReuseIdentifier: "WalletFetchCell")
         self.walletTableView.register(UINib(nibName: "WalletCrytoCell", bundle: nil), forCellReuseIdentifier: "WalletCrytoCell")
         self.walletTableView.register(UINib(nibName: "WalletSifCell", bundle: nil), forCellReuseIdentifier: "WalletSifCell")
-        self.walletTableView.register(UINib(nibName: "WalletSifIncentiveCell", bundle: nil), forCellReuseIdentifier: "WalletSifIncentiveCell")
+//        self.walletTableView.register(UINib(nibName: "WalletSifIncentiveCell", bundle: nil), forCellReuseIdentifier: "WalletSifIncentiveCell")
         self.walletTableView.register(UINib(nibName: "WalletKiCell", bundle: nil), forCellReuseIdentifier: "WalletKiCell")
         self.walletTableView.register(UINib(nibName: "WalletRizonCell", bundle: nil), forCellReuseIdentifier: "WalletRizonCell")
         self.walletTableView.register(UINib(nibName: "WalletMediCell", bundle: nil), forCellReuseIdentifier: "WalletMediCell")
@@ -217,7 +217,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.DESMOS_MAIN) {
+        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.DESMOS_MAIN) {
             return 5;
         } else if (chainType == ChainType.BINANCE_MAIN) {
             return 3;
@@ -626,7 +626,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide1 = { self.onClickGuide1() }
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
-            
         }
     }
     
@@ -657,7 +656,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide1 = { self.onClickGuide1() }
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
-            
         }
     }
     
@@ -688,7 +686,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide1 = { self.onClickGuide1() }
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
-            
         }
     }
     
@@ -719,7 +716,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide1 = { self.onClickGuide1() }
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
-            
         }
     }
     
@@ -751,7 +747,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide1 = { self.onClickGuide1() }
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
-            
         }
     }
     
@@ -765,19 +760,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletSifIncentiveCell") as? WalletSifIncentiveCell
-            cell?.updateView(account, chainType)
-            cell?.actionGetIncentive = { self.onClickSifIncentive() }
-            return cell!
-            
-        } else if (indexPath.row == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
             cell?.updateView(account, chainType)
             cell?.actionTapPricel = { self.onClickMarketInfo() }
             cell?.actionBuy = { self.onClickBuyCoin() }
             return cell!
             
-        } else if (indexPath.row == 3) {
+        } else if (indexPath.row == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
             cell?.updateView(account, chainType)
             cell?.actionTapApr = { self.onClickAprHelp() }
@@ -789,7 +778,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide1 = { self.onClickGuide1() }
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
-            
         }
     }
     
@@ -879,7 +867,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
         }
-        
     }
     
     func onSetEmoneyItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
@@ -909,7 +896,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
         }
-        
     }
     
     func onSetJunoItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
@@ -939,7 +925,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionGuide2 = { self.onClickGuide2() }
             return cell!
         }
-        
     }
     
     func onSetAltheaItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
