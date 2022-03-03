@@ -85,6 +85,11 @@ public struct Param {
         } else if (chain == ChainType.STARGAZE_MAIN) {
             let reductionFactor = NSDecimalNumber.one.subtracting(NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.reduction_factor))
             return inflation.multiplying(by: calTax).multiplying(by: reductionFactor).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+        }
+        
+        let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
+        if (ap.compare(NSDecimalNumber.zero).rawValue > 0) {
+            return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
         } else {
             return inflation.multiplying(by: calTax).dividing(by: bondingRate, withBehavior: WUtils.handler6)
         }

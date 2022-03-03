@@ -608,7 +608,6 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-umee-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.EVMOS_MAIN) {
-//            return ClientConnection.insecure(group: group).connect(host: "lcd-evmos-app.cosmostation.io", port: 9090)
             return ClientConnection.insecure(group: group).connect(host: "lcd-evmos-app.cosmostation.io", port: 9090)
         
         } else if (chain == ChainType.PROVENANCE_MAIN) {

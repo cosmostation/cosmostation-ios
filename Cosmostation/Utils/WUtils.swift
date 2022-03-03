@@ -4930,7 +4930,7 @@ public class WUtils {
             return ChainType.KONSTELLATION_MAIN
         } else if (chainId?.contains("umee-") == true) {
             return ChainType.UMEE_MAIN
-        } else if (chainId?.contains("evmos") == true) {
+        } else if (chainId?.contains("evmos_") == true) {
             return ChainType.EVMOS_MAIN
         } else if (chainId?.contains("pio-mainnet-") == true) {
             return ChainType.PROVENANCE_MAIN
