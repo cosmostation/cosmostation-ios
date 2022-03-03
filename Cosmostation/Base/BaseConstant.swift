@@ -1072,7 +1072,7 @@ public enum ChainType: String {
 //        result.append(CUDOS_MAIN)
         result.append(DESMOS_MAIN)
         result.append(EMONEY_MAIN)
-//        result.append(EVMOS_MAIN)
+        result.append(EVMOS_MAIN)
         result.append(FETCH_MAIN)
         result.append(GRAVITY_BRIDGE_MAIN)
         result.append(INJECTIVE_MAIN)
