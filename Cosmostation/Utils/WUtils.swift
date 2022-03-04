@@ -5097,10 +5097,7 @@ public class WUtils {
     static func onParseAuthAccount(_ chain: ChainType) {
         print("onParseAuthAccount")
         guard let rawAccount = BaseData.instance.mAccount_gRPC else { return }
-        if (chain == ChainType.PERSIS_MAIN) {
-            onParsePersisVestingAccount(rawAccount)
-            
-        } else if (chain == ChainType.DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
+        if (chain == ChainType.DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
             if let profileAccount = try? Desmos_Profiles_V1beta1_Profile.init(serializedData: rawAccount.value) {
                 onParseVestingAccount(chain, profileAccount.account)
             } else {
@@ -5329,107 +5326,6 @@ public class WUtils {
                 
             })
             
-        }
-    }
-    
-    static func onParsePersisVestingAccount(_ rawAccount: Google_Protobuf2_Any) {
-        print("onParsePersisVestingAccount")
-        var sBalace = Array<Coin>()
-        BaseData.instance.mMyBalances_gRPC.forEach { coin in
-            sBalace.append(coin)
-        }
-//        print("sBalace ", sBalace)
-        if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
-            let vestingAccount = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value)
-            sBalace.forEach({ (coin) in
-                let denom = coin.denom
-                var bankBalance = NSDecimalNumber.zero
-                var dpBalance = NSDecimalNumber.zero
-                var dpVesting = NSDecimalNumber.zero
-                var remainVesting = NSDecimalNumber.zero
-                
-                bankBalance = NSDecimalNumber.init(string: coin.amount)
-//                print("bankBalance ", denom, "  ", bankBalance)
-                
-                remainVesting = WUtils.onParsePeriodicRemainVestingsAmountByDenom(vestingAccount, denom)
-//                print("remainVesting ", denom, "  ", remainVesting)
-                
-                dpBalance = bankBalance.compare(remainVesting).rawValue <= 0 ? NSDecimalNumber.zero : bankBalance.subtracting(remainVesting)
-//                print("final dpBalance ", denom, "  ", dpBalance)
-                
-                dpVesting = bankBalance.subtracting(dpBalance)
-//                print("dpVesting ", denom, "  ", dpVesting)
-                
-                let vestingCoin = Coin.init(denom, dpVesting.stringValue)
-                BaseData.instance.mMyVestings_gRPC.append(vestingCoin)
-                var replace = -1
-                for i in 0..<BaseData.instance.mMyBalances_gRPC.count {
-                    if (BaseData.instance.mMyBalances_gRPC[i].denom == denom) {
-                        replace = i
-                    }
-                }
-                if (replace >= 0) {
-                    BaseData.instance.mMyBalances_gRPC[replace] = Coin.init(denom, dpBalance.stringValue)
-                }
-            })
-            
-        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
-            let vestingAccount = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value)
-            sBalace.forEach({ (coin) in
-                let denom = coin.denom
-                var bankBalance = NSDecimalNumber.zero
-                var dpBalance = NSDecimalNumber.zero
-                var dpVesting = NSDecimalNumber.zero
-                var originalVesting = NSDecimalNumber.zero
-                var remainVesting = NSDecimalNumber.zero
-                
-                bankBalance = NSDecimalNumber.init(string: coin.amount)
-//                print("bankBalance ", denom, "  ", bankBalance)
-                
-                vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
-                    if (coin.denom == denom) {
-                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                    }
-                })
-//                print("originalVesting ", denom, "  ", originalVesting)
-                
-                let cTime = Date().millisecondsSince1970
-                let vestingStart = vestingAccount.startTime * 1000
-                let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
-                
-                if (cTime < vestingStart) {
-                    remainVesting = originalVesting
-                } else if (cTime > vestingEnd) {
-                    remainVesting = NSDecimalNumber.zero
-                } else {
-                    let progress = ((Float)(cTime - vestingStart)) / ((Float)(vestingEnd - vestingStart))
-                    remainVesting = originalVesting.multiplying(by: NSDecimalNumber.init(value: 1 - progress), withBehavior: handler0Up)
-                }
-                
-                if (remainVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
-                    dpBalance = NSDecimalNumber.zero
-                    dpVesting = bankBalance
-                    
-                } else {
-                    dpBalance = bankBalance
-                    dpVesting = NSDecimalNumber.zero
-                    
-                }
-                
-                if (dpVesting.compare(NSDecimalNumber.zero).rawValue > 0) {
-                    let vestingCoin = Coin.init(denom, dpVesting.stringValue)
-                    BaseData.instance.mMyVestings_gRPC.append(vestingCoin)
-                    var replace = -1
-                    for i in 0..<BaseData.instance.mMyBalances_gRPC.count {
-                        if (BaseData.instance.mMyBalances_gRPC[i].denom == denom) {
-                            replace = i
-                        }
-                    }
-                    if (replace >= 0) {
-                        BaseData.instance.mMyBalances_gRPC[replace] = Coin.init(denom, dpBalance.stringValue)
-                    }
-                }
-            })
         }
     }
     
