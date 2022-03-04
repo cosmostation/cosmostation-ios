@@ -37,6 +37,10 @@ public struct Param {
             let starsSupply = getMainSupply()
             return annualProvisions.dividing(by: starsSupply, withBehavior: WUtils.handler18)
             
+        } else if (chainType == ChainType.EVMOS_MAIN) {
+            let annualProvisions = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
+            let evmosSupply = getMainSupply().subtracting(NSDecimalNumber.init(string: "200000000000000000000000000"))
+            return annualProvisions.dividing(by: evmosSupply, withBehavior: WUtils.handler18)
         }
         return NSDecimalNumber.init(string: params?.minting_inflation)
     }
@@ -189,6 +193,9 @@ public struct Params {
     
     var stargaze_minting_params: StargazeMintingParam?
     
+    var evmos_inflation_params: EvmosInflationParam?
+    var evmos_minting_epoch_provisions: String?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawIbcParams = dictionary?["ibc_params"] as? NSDictionary {
             self.ibc_params = IbcParams.init(rawIbcParams)
@@ -288,6 +295,13 @@ public struct Params {
         
         if let rawStargazeMintingParam = dictionary?["stargaze_minting_params"] as? NSDictionary {
             self.stargaze_minting_params = StargazeMintingParam.init(rawStargazeMintingParam)
+        }
+        
+        if let rawEvmosInflationParam = dictionary?["inflation_params"] as? NSDictionary {
+            self.evmos_inflation_params = EvmosInflationParam.init(rawEvmosInflationParam)
+        }
+        if let rawEvmosEpochMintingProvisions = dictionary?["epoch_mint_provision"] as? NSDictionary {
+            self.evmos_minting_epoch_provisions = EvmosEpochMintingProvisions.init(rawEvmosEpochMintingProvisions).epoch_mint_provision
         }
     }
 }
@@ -745,5 +759,47 @@ public struct StargazeMintingParam {
             self.reduction_factor = dictionary?["reduction_factor"] as? String
             self.initial_annual_provisions = dictionary?["initial_annual_provisions"] as? String
         }
+    }
+}
+
+public struct EvmosInflationParam {
+    var params: Params?
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawParams = dictionary?["params"] as? NSDictionary {
+            self.params = Params.init(rawParams)
+        }
+    }
+    
+    public struct Params {
+        var mint_denom: String?
+        var inflation_distribution: InflationDistribution?
+        
+        init(_ dictionary: NSDictionary?) {
+            self.mint_denom = dictionary?["mint_denom"] as? String
+            if let rawInflationDistribution = dictionary?["inflation_distribution"] as? NSDictionary {
+                self.inflation_distribution = InflationDistribution.init(rawInflationDistribution)
+            }
+        }
+    }
+    
+    public struct InflationDistribution {
+        var community_pool = NSDecimalNumber.zero
+        var staking_rewards = NSDecimalNumber.zero
+        var usage_incentives = NSDecimalNumber.zero
+        
+        init(_ dictionary: NSDictionary?) {
+            self.community_pool = NSDecimalNumber.init(string: dictionary?["community_pool"] as? String)
+            self.staking_rewards = NSDecimalNumber.init(string: dictionary?["staking_rewards"] as? String)
+            self.usage_incentives = NSDecimalNumber.init(string: dictionary?["usage_incentives"] as? String)
+        }
+    }
+}
+
+public struct EvmosEpochMintingProvisions {
+    var epoch_mint_provision: String?
+    
+    init(_ dictionary: NSDictionary?) {
+        self.epoch_mint_provision = dictionary?["epoch_mint_provision"] as? String
     }
 }
