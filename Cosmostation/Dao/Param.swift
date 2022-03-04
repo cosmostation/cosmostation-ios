@@ -89,6 +89,10 @@ public struct Param {
         } else if (chain == ChainType.STARGAZE_MAIN) {
             let reductionFactor = NSDecimalNumber.one.subtracting(NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.reduction_factor))
             return inflation.multiplying(by: calTax).multiplying(by: reductionFactor).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+        } else if (chain == ChainType.EVMOS_MAIN) {
+            let ap = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
+            let stakingRewardsFactor = params?.evmos_inflation_params?.params?.inflation_distribution?.staking_rewards ?? NSDecimalNumber.zero
+            return ap.multiplying(by: stakingRewardsFactor).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
         }
         
         let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
