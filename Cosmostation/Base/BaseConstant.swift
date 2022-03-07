@@ -547,8 +547,8 @@ let GAS_FEE_RATE_TINY_CERTIK                = "0.05";
 let GAS_FEE_RATE_LOW_CERTIK                 = "0.05";
 let GAS_FEE_RATE_AVERAGE_CERTIK             = "0.05";
 
-let GAS_FEE_RATE_TINY_EMONEY                = "1";
-let GAS_FEE_RATE_LOW_EMONEY                 = "1";
+let GAS_FEE_RATE_TINY_EMONEY                = "0.10";
+let GAS_FEE_RATE_LOW_EMONEY                 = "0.30";
 let GAS_FEE_RATE_AVERAGE_EMONEY             = "1";
 
 let GAS_FEE_RATE_TINY_FETCH                 = "0.00";
