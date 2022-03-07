@@ -63,16 +63,31 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
             return
         }
         
-        let publicKey = KeyFac.getPublicFromStringPrivateKey(userInput!)
+        let privateKeyData = KeyFac.getPrivateFromString(userInput!)
+        let publickKeyData = KeyFac.getPublicFromStringPrivateKey(userInput!)
+//        print("privateKeyData ", privateKeyData.hexEncodedString())
+//        print("publickKeyData ", publickKeyData.hexEncodedString())
+        
+        var dpAddress = ""
         if (chainType == ChainType.OKEX_MAIN) {
             self.onSelectKeyTypeForOKex()
             return
+            
+        } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            let ethAddress = WKey.generateEthAddressFromPrivateKey(privateKeyData)
+            dpAddress = WKey.convertAddressEthToCosmos(ethAddress, "inj")
+            
+        } else if (chainType == ChainType.EVMOS_MAIN) {
+            let ethAddress = WKey.generateEthAddressFromPrivateKey(privateKeyData)
+            dpAddress = WKey.convertAddressEthToCosmos(ethAddress, "evmos")
+            
+        } else {
+            dpAddress = WKey.getPubToDpAddress(publickKeyData.hexEncodedString(), chainType!)
+            
         }
         
-        let address = WKey.getPubToDpAddress(publicKey.hexEncodedString(), chainType!)
-        print("address ", address)
-        
-        if let existAccount = BaseData.instance.selectExistAccount(address, chainType) {
+//        print("dpAddress ", dpAddress)
+        if let existAccount = BaseData.instance.selectExistAccount(dpAddress, chainType) {
             if (existAccount.account_has_private == true) {
                 self.onShowToast(NSLocalizedString("error_duple_address", comment: ""))
                 return

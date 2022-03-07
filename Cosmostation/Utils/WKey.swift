@@ -166,8 +166,6 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "stars", program: ripemd160)
         } else if (chain == ChainType.COMDEX_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "comdex", program: ripemd160)
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            result = try! SegwitAddrCoder.shared.encode2(hrp: "inj", program: ripemd160)
         } else if (chain == ChainType.BITSONG_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "bitsong", program: ripemd160)
         } else if (chain == ChainType.DESMOS_MAIN) {
@@ -178,13 +176,13 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "chihuahua", program: ripemd160)
         } else if (chain == ChainType.KONSTELLATION_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "darc", program: ripemd160)
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            result = try! SegwitAddrCoder.shared.encode2(hrp: "evmos", program: ripemd160)
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "pb", program: ripemd160)
         } else if (chain == ChainType.CUDOS_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "cudos", program: ripemd160)
         }
+        
+        //Don't support INJECTIVE_MAIN, EVMOS_MAIN, OKEX_MAIN
         return result
     }
 
