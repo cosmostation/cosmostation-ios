@@ -86,7 +86,7 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
             
         }
         
-//        print("dpAddress ", dpAddress)
+        print("dpAddress ", dpAddress)
         if let existAccount = BaseData.instance.selectExistAccount(dpAddress, chainType) {
             if (existAccount.account_has_private == true) {
                 self.onShowToast(NSLocalizedString("error_duple_address", comment: ""))
@@ -126,7 +126,7 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
         } else {
             okAddress = WKey.generateEthAddressFromPrivateKey(privateKeyData)
         }
-        print("okAddress ", okAddress)
+//        print("okAddress ", okAddress)
         
         if (okAddress.isEmpty) {
             self.onShowToast(NSLocalizedString("error_invalid_private_Key", comment: ""))
@@ -253,6 +253,28 @@ class KeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordV
                     self.onOverridePkeyAccount(userInput!, existAccount, okAddressType)
                 } else {
                     self.onGenPkeyAccount(userInput!, okAddress, okAddressType)
+                }
+                
+            } else if (chainType == ChainType.INJECTIVE_MAIN) {
+                let privateKeyData = KeyFac.getPrivateFromString(userInput!)
+                let ethAddress = WKey.generateEthAddressFromPrivateKey(privateKeyData)
+                let dpAddress = WKey.convertAddressEthToCosmos(ethAddress, "inj")
+                
+                if let existAccount = BaseData.instance.selectExistAccount(dpAddress, chainType) {
+                    self.onOverridePkeyAccount(userInput!, existAccount, -1)
+                } else {
+                    self.onGenPkeyAccount(userInput!, dpAddress, -1)
+                }
+                
+            } else if (chainType == ChainType.EVMOS_MAIN) {
+                let privateKeyData = KeyFac.getPrivateFromString(userInput!)
+                let ethAddress = WKey.generateEthAddressFromPrivateKey(privateKeyData)
+                let dpAddress = WKey.convertAddressEthToCosmos(ethAddress, "evmos")
+                
+                if let existAccount = BaseData.instance.selectExistAccount(dpAddress, chainType) {
+                    self.onOverridePkeyAccount(userInput!, existAccount, -1)
+                } else {
+                    self.onGenPkeyAccount(userInput!, dpAddress, -1)
                 }
                 
             } else {
