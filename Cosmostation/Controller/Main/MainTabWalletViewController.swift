@@ -1662,18 +1662,20 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickOkDeposit() {
-//        self.onShowToast("Temporary Disable")
-//        return
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
         }
-        if (chainType! == ChainType.OKEX_MAIN) {
-            if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.1")).rawValue < 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
-                return
-            }
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, OK_MSG_TYPE_DEPOSIT, BaseData.instance.mMyValidator.count)
+        if (BaseData.instance.availableAmount(OKEX_MAIN_DENOM).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
         }
+        if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.01")).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
+            return
+        }
+        
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mType = OK_MSG_TYPE_DEPOSIT
         txVC.hidesBottomBarWhenPushed = true
@@ -1682,22 +1684,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickOkWithdraw() {
-//        self.onShowToast("Temporary Disable")
-//        return
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
         }
-        if (chainType! == ChainType.OKEX_MAIN) {
-            if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.1")).rawValue < 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                return
-            }
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, OK_MSG_TYPE_WITHDRAW, BaseData.instance.mMyValidator.count)
+        if (BaseData.instance.availableAmount(OKEX_MAIN_DENOM).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
         }
         if (WUtils.okDepositAmount(BaseData.instance.mOkStaking).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_withdraw", comment: ""))
             return
-            
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
