@@ -81,7 +81,7 @@ public class WUtils {
     static func getAccountWithOkAccountInfo(_ account: Account, _ accountInfo: OkAccountInfo) -> Account {
         let result = account
         if (accountInfo.type == COSMOS_AUTH_TYPE_OKEX_ACCOUNT) {
-            result.account_address = accountInfo.value!.address!
+            result.account_address = accountInfo.value!.eth_address!
             result.account_sequence_number = Int64(accountInfo.value!.sequence!)!
             result.account_account_numner = Int64(accountInfo.value!.account_number!)!
         }
@@ -3479,6 +3479,13 @@ public class WUtils {
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
         }
+        
+        else if (chain == ChainType.OKEX_MAIN) {
+           let gasRate = NSDecimalNumber.init(string: OK_GAS_RATE_AVERAGE)
+           let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+           return gasRate.multiplying(by: gasAmount, withBehavior: handler18)
+           
+       }
         return NSDecimalNumber.zero
     }
     

@@ -1662,8 +1662,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickOkDeposit() {
-        self.onShowToast("Temporary Disable")
-        return
+//        self.onShowToast("Temporary Disable")
+//        return
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
@@ -1682,8 +1682,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickOkWithdraw() {
-        self.onShowToast("Temporary Disable")
-        return
+//        self.onShowToast("Temporary Disable")
+//        return
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
@@ -1710,8 +1710,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     //no need yet
     func onClickOkVoteValMode() {
-        self.onShowToast("Temporary Disable")
-        return
+//        self.onShowToast("Temporary Disable")
+//        return
         let okVoteTypeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         okVoteTypeAlert.addAction(UIAlertAction(title: NSLocalizedString("str_vote_direct", comment: ""), style: .default, handler: { _ in
             self.onClickOkVoteVal()
@@ -2357,10 +2357,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickMainSend() {
-        if (chainType == ChainType.OKEX_MAIN) {
-            self.onShowToast("Temporary Disable")
-            return
-        }
         if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
@@ -2375,6 +2371,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             }
             
         } else {
+            //checkd ok
             let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
             if (BaseData.instance.availableAmount(mainDenom).compare(feeAmount).rawValue < 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))

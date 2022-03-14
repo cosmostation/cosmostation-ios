@@ -44,39 +44,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.txTableView.dataSource = self
         self.txTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.txTableView.register(UINib(nibName: "TxCommonCell", bundle: nil), forCellReuseIdentifier: "TxCommonCell")
-        self.txTableView.register(UINib(nibName: "TxCommissionCell", bundle: nil), forCellReuseIdentifier: "TxCommissionCell")
-        self.txTableView.register(UINib(nibName: "TxDelegateCell", bundle: nil), forCellReuseIdentifier: "TxDelegateCell")
-        self.txTableView.register(UINib(nibName: "TxUndelegateCell", bundle: nil), forCellReuseIdentifier: "TxUndelegateCell")
-        self.txTableView.register(UINib(nibName: "TxRedelegateCell", bundle: nil), forCellReuseIdentifier: "TxRedelegateCell")
         self.txTableView.register(UINib(nibName: "TxTransferCell", bundle: nil), forCellReuseIdentifier: "TxTransferCell")
         self.txTableView.register(UINib(nibName: "TxMultiTransferCell", bundle: nil), forCellReuseIdentifier: "TxMultiTransferCell")
-        self.txTableView.register(UINib(nibName: "TxRewardCell", bundle: nil), forCellReuseIdentifier: "TxRewardCell")
-        self.txTableView.register(UINib(nibName: "TxRewardAllCell", bundle: nil), forCellReuseIdentifier: "TxRewardAllCell")
-        self.txTableView.register(UINib(nibName: "TxEditRewardAddressCell", bundle: nil), forCellReuseIdentifier: "TxEditRewardAddressCell")
-        self.txTableView.register(UINib(nibName: "TxVoteCell", bundle: nil), forCellReuseIdentifier: "TxVoteCell")
-        
-        self.txTableView.register(UINib(nibName: "TxPostPriceCell", bundle: nil), forCellReuseIdentifier: "TxPostPriceCell")
-        self.txTableView.register(UINib(nibName: "TxCdpCreateCell", bundle: nil), forCellReuseIdentifier: "TxCdpCreateCell")
-        self.txTableView.register(UINib(nibName: "TxCdpDepositCell", bundle: nil), forCellReuseIdentifier: "TxCdpDepositCell")
-        self.txTableView.register(UINib(nibName: "TxCdpWithdrawCell", bundle: nil), forCellReuseIdentifier: "TxCdpWithdrawCell")
-        self.txTableView.register(UINib(nibName: "TxCdpBorrowCell", bundle: nil), forCellReuseIdentifier: "TxCdpBorrowCell")
-        self.txTableView.register(UINib(nibName: "TxCdpRepayCell", bundle: nil), forCellReuseIdentifier: "TxCdpRepayCell")
-        self.txTableView.register(UINib(nibName: "TxCdpLiquidateCell", bundle: nil), forCellReuseIdentifier: "TxCdpLiquidateCell")
-        self.txTableView.register(UINib(nibName: "TxHardDepositCell", bundle: nil), forCellReuseIdentifier: "TxHardDepositCell")
-        self.txTableView.register(UINib(nibName: "TxHardWithdrawCell", bundle: nil), forCellReuseIdentifier: "TxHardWithdrawCell")
-        self.txTableView.register(UINib(nibName: "TxHardBorrowCell", bundle: nil), forCellReuseIdentifier: "TxHardBorrowCell")
-        self.txTableView.register(UINib(nibName: "TxHardRepayCell", bundle: nil), forCellReuseIdentifier: "TxHardRepayCell")
-        self.txTableView.register(UINib(nibName: "TxHardLiquidateCell", bundle: nil), forCellReuseIdentifier: "TxHardLiquidateCell")
-        self.txTableView.register(UINib(nibName: "TxIncentiveMintingCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveMintingCell")
-        self.txTableView.register(UINib(nibName: "TxIncentiveHardCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveHardCell")
-        self.txTableView.register(UINib(nibName: "TxIncentiveSwapCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveSwapCell")
-        self.txTableView.register(UINib(nibName: "TxIncentiveDelegatorCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveDelegatorCell")
-        self.txTableView.register(UINib(nibName: "TxSwapTokenCell", bundle: nil), forCellReuseIdentifier: "TxSwapTokenCell")
-        self.txTableView.register(UINib(nibName: "TxSwapDepositCell", bundle: nil), forCellReuseIdentifier: "TxSwapDepositCell")
-        self.txTableView.register(UINib(nibName: "TxSwapWithdrawCell", bundle: nil), forCellReuseIdentifier: "TxSwapWithdrawCell")
-        self.txTableView.register(UINib(nibName: "TxHtlcCreateCell", bundle: nil), forCellReuseIdentifier: "TxHtlcCreateCell")
-        self.txTableView.register(UINib(nibName: "TxHtlcClaimCell", bundle: nil), forCellReuseIdentifier: "TxHtlcClaimCell")
-        self.txTableView.register(UINib(nibName: "TxHtlcRefundCell", bundle: nil), forCellReuseIdentifier: "TxHtlcRefundCell")
         
         self.txTableView.register(UINib(nibName: "TxOkStakeCell", bundle: nil), forCellReuseIdentifier: "TxOkStakeCell")
         self.txTableView.register(UINib(nibName: "TxOkDirectVoteCell", bundle: nil), forCellReuseIdentifier: "TxOkDirectVoteCell")
@@ -154,106 +123,16 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             return onBindTxCommon(tableView)
         } else {
             let msg = mTxInfo?.getMsg(indexPath.row - 1)
-            if (msg?.type == COSMOS_MSG_TYPE_DELEGATE || msg?.type == IRIS_MSG_TYPE_DELEGATE) {
-                return onBindDelegate(tableView, indexPath.row)
-                
-            } else if (msg?.type == COSMOS_MSG_TYPE_UNDELEGATE || msg?.type == COSMOS_MSG_TYPE_UNDELEGATE2 || msg?.type == IRIS_MSG_TYPE_UNDELEGATE) {
-                return onBindUndelegate(tableView, indexPath.row)
-                
-            } else if (msg?.type == COSMOS_MSG_TYPE_REDELEGATE || msg?.type == COSMOS_MSG_TYPE_REDELEGATE2 || msg?.type == IRIS_MSG_TYPE_REDELEGATE) {
-                return onBindRedelegate(tableView, indexPath.row)
-                
-            } else if (msg?.type == COSMOS_MSG_TYPE_WITHDRAW_DEL || msg?.type == IRIS_MSG_TYPE_WITHDRAW) {
-                return onBindGetReward(tableView, indexPath.row)
-                
-            } else if (msg?.type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY || msg?.type == IRIS_MSG_TYPE_WITHDRAW_MIDIFY) {
-                return onBindEditRewardAddress(tableView, indexPath.row)
-                
-            } else if (msg?.type == COSMOS_MSG_TYPE_VOTE || msg?.type == IRIS_MSG_TYPE_VOTE) {
-                return onBindVote(tableView, indexPath.row)
-                
-            } else if (msg?.type == COSMOS_MSG_TYPE_WITHDRAW_VAL || msg?.type == IRIS_MSG_TYPE_COMMISSION) {
-                return onBindCommission(tableView, indexPath.row)
-                
-            } else if (msg?.type == COSMOS_MSG_TYPE_TRANSFER || msg?.type == COSMOS_MSG_TYPE_TRANSFER2 || msg?.type == COSMOS_MSG_TYPE_TRANSFER3 || msg?.type == OK_MSG_TYPE_TRANSFER || msg?.type == OK_MSG_TYPE_MULTI_TRANSFER || msg?.type == CERTIK_MSG_TYPE_TRANSFER) {
+            if (msg?.type == COSMOS_MSG_TYPE_TRANSFER || msg?.type == COSMOS_MSG_TYPE_TRANSFER2 || msg?.type == COSMOS_MSG_TYPE_TRANSFER3 || msg?.type == OK_MSG_TYPE_TRANSFER || msg?.type == OK_MSG_TYPE_MULTI_TRANSFER || msg?.type == CERTIK_MSG_TYPE_TRANSFER) {
                 if ((msg?.value.inputs != nil && (msg?.value.inputs!.count)! > 1) ||  (msg?.value.outputs != nil && (msg?.value.outputs!.count)! > 1)) {
                     //No case yet!
                     return onBindMultiTransfer(tableView, indexPath.row)
                 } else {
                     return onBindTransfer(tableView, indexPath.row)
                 }
-            } else if (msg?.type == KAVA_MSG_TYPE_POST_PRICE) {
-                return onBindPostPrice(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_CREATE_CDP) {
-                return onBindCdpCreate(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_DEPOSIT_CDP) {
-                return onBindCdpDeposit(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_WITHDRAW_CDP) {
-                return onBindCdpWithdraw(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
-                return onBindCdpBorrow(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
-                return onBindCdpRepay(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_LIQUIDATE_CDP) {
-                return onBindCdpLiquidate(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_CREATE_SWAP || msg?.type == BNB_MSG_TYPE_HTLC) {
-                return onBindHtlcCreate(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_CLAIM_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_CLIAM) {
-                return onBindHtlcClaim(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_HTLC_REFUND_SWAP || msg?.type == BNB_MSG_TYPE_HTLC_REFUND) {
-                return onBindHtlcRefund(tableView, indexPath.row)
-                
-            }else if (msg?.type == KAVA_MSG_TYPE_DEPOSIT_HAVEST || msg?.type == KAVA_MSG_TYPE_DEPOSIT_HARD) {
-                return onBindHardDeposit(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_WITHDRAW_HAVEST || msg?.type == KAVA_MSG_TYPE_WITHDRAW_HARD) {
-                return onBindHardWithdraw(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_BORROW_HARD) {
-                return onBindHardBorrow(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_REPAY_HARD) {
-                return onBindHardRepay(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_LIQUIDATE_HARD) {
-                return onBindHardLiquidate(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_INCENTIVE_REWARD || msg?.type == KAVA_MSG_TYPE_USDX_MINT_INCENTIVE) {
-                return onBindIncentiveMinting(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_CLAIM_HAVEST || msg?.type == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE) {
-                return onBindIncentiveHard(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_SWAP_INCENTIVE) {
-                return onBindIncentiveSwap(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_DELEGATOR_INCENTIVE) {
-                return onBindIncentiveDelegator(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_SWAP_TOKEN || msg?.type == KAVA_MSG_TYPE_SWAP_TOKEN2) {
-                return onBindSwapToken(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
-                return onBindSwapDeposit(tableView, indexPath.row)
-                
-            } else if (msg?.type == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
-                return onBindSwapWithdraw(tableView, indexPath.row)
-                
             }
             
-            else if (msg?.type == IRIS_MSG_TYPE_WITHDRAW_ALL) {
-                return onBindGetRewardAll(tableView, indexPath.row)
-                
-            } else if (msg?.type == OK_MSG_TYPE_DEPOSIT || msg?.type == OK_MSG_TYPE_WITHDRAW) {
+            else if (msg?.type == OK_MSG_TYPE_DEPOSIT || msg?.type == OK_MSG_TYPE_WITHDRAW) {
                 return onBindOkStake(tableView, indexPath.row)
                 
             } else if (msg?.type == OK_MSG_TYPE_DIRECT_VOTE) {
@@ -358,80 +237,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         return cell!
     }
     
-    func onBindDelegate(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell:TxDelegateCell? = tableView.dequeueReusableCell(withIdentifier:"TxDelegateCell") as? TxDelegateCell
-//        let msg = mTxInfo!.getMsg(position - 1)
-//        let decimal = WUtils.mainDivideDecimal(chainType)
-//        cell?.setDenomType(chainType!)
-//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-//        cell?.delegatorLabel.text = msg?.value.delegator_address
-//        cell?.validatorLabel.text = msg?.value.validator_address
-//        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
-//        cell?.delegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.delegateAmountLabel.font!, decimal, decimal)
-//        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
-//        if (mTxInfo?.getMsgs().count == 1) {
-//            cell?.autoRewardLayer.isHidden = false
-//            cell?.autoRewardBottomConstraint.priority = .defaultHigh
-//            cell?.feeBottomConstraint.priority = .defaultLow
-//        } else {
-//            cell?.autoRewardLayer.isHidden = true
-//            cell?.autoRewardBottomConstraint.priority = .defaultLow
-//            cell?.feeBottomConstraint.priority = .defaultHigh
-//        }
-        return cell!
-    }
-    
-    func onBindUndelegate(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell:TxUndelegateCell? = tableView.dequeueReusableCell(withIdentifier:"TxUndelegateCell") as? TxUndelegateCell
-//        let msg = mTxInfo?.getMsg(position - 1)
-//        let decimal = WUtils.mainDivideDecimal(chainType)
-//        cell?.setDenomType(chainType!)
-//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-//        cell?.undelegatorLabel.text = msg?.value.delegator_address
-//        cell?.validatorLabel.text = msg?.value.validator_address
-//        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
-//        cell?.undelegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.undelegateAmountLabel.font!, decimal, decimal)
-//        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
-//        if (mTxInfo?.getMsgs().count == 1) {
-//            cell?.autoRewardLayer.isHidden = false
-//            cell?.autoRewardBottomConstraint.priority = .defaultHigh
-//            cell?.feeBottomConstraint.priority = .defaultLow
-//        } else {
-//            cell?.autoRewardLayer.isHidden = true
-//            cell?.autoRewardBottomConstraint.priority = .defaultLow
-//            cell?.feeBottomConstraint.priority = .defaultHigh
-//        }
-        return cell!
-    }
-    
-    func onBindRedelegate(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell:TxRedelegateCell? = tableView.dequeueReusableCell(withIdentifier:"TxRedelegateCell") as? TxRedelegateCell
-//        let msg = mTxInfo?.getMsg(position - 1)
-//        let decimal = WUtils.mainDivideDecimal(chainType)
-//        cell?.setDenomType(chainType!)
-//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-//        cell?.redelegatorLabel.text = msg?.value.delegator_address
-//        cell?.fromValidatorLabel.text = msg?.value.validator_src_address
-//        cell?.fromMonikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_src_address!, true)
-//        cell?.toValidatorLabel.text = msg?.value.validator_dst_address
-//        cell?.toMonikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_dst_address!, true)
-//        cell?.redelegateAmountLabel.attributedText = WUtils.displayAmount2(msg?.value.getAmount()?.amount, cell!.redelegateAmountLabel.font!, decimal, decimal)
-//        cell?.autoRewardAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleAutoReward(self.account!.account_address, position - 1).stringValue, cell!.autoRewardAmountLabel.font!, decimal, decimal)
-//        if (mTxInfo?.getMsgs().count == 1) {
-//            cell?.autoRewardLayer.isHidden = false
-//            cell?.autoRewardBottomConstraint.priority = .defaultHigh
-//            cell?.feeBottomConstraint.priority = .defaultLow
-//        } else {
-//            cell?.autoRewardLayer.isHidden = true
-//            cell?.autoRewardBottomConstraint.priority = .defaultLow
-//            cell?.feeBottomConstraint.priority = .defaultHigh
-//        }
-        return cell!
-    }
-    
     func onBindTransfer(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
         let cell:TxTransferCell? = tableView.dequeueReusableCell(withIdentifier:"TxTransferCell") as? TxTransferCell
         let msg = mTxInfo?.getMsg(position - 1)
@@ -449,62 +254,25 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.multiAmountStack.isHidden = false
             cell?.multiAmountLayer0.isHidden = false
             WUtils.showBNBTxDp(coins![0], cell!.multiAmountDenom0, cell!.multiAmount0, chainType!)
-        } else {
-            var coins :[Coin]?
-            if (msg?.type == COSMOS_MSG_TYPE_TRANSFER3) {
-                cell?.fromLabel.text = msg?.value.inputs![0].address
-                cell?.toLabel.text = msg?.value.outputs![0].address
-                if (self.account?.account_address == msg?.value.inputs![0].address) {
-                    cell?.txTitleLabel.text = NSLocalizedString("tx_send", comment: "")
-                }
-                if (self.account?.account_address == msg?.value.outputs![0].address) {
-                    cell?.txTitleLabel.text = NSLocalizedString("tx_receive", comment: "")
-                }
-                coins = msg?.value.inputs?[0].coins
-                
-            } else if (msg?.type == OK_MSG_TYPE_MULTI_TRANSFER) {
-                cell?.fromLabel.text = msg?.value.from
-                cell?.toLabel.text = msg?.value.transfers?[0].to
-                if (self.account?.account_address == msg?.value.from) {
-                    cell?.txTitleLabel.text = NSLocalizedString("tx_send", comment: "")
-                }
-                if (self.account?.account_address == msg?.value.transfers?[0].to) {
-                    cell?.txTitleLabel.text = NSLocalizedString("tx_receive", comment: "")
-                }
-                coins = msg?.value.transfers?[0].coins
-                
-            } else {
-                cell?.fromLabel.text = msg?.value.from_address
-                cell?.toLabel.text = msg?.value.to_address
-                if (self.account?.account_address == msg?.value.from_address) {
-                    cell?.txTitleLabel.text = NSLocalizedString("tx_send", comment: "")
-                }
-                if (self.account?.account_address == msg?.value.to_address) {
-                    cell?.txTitleLabel.text = NSLocalizedString("tx_receive", comment: "")
-                }
-                coins = msg?.value.getAmounts()
-                
+            
+        } else if (chainType == ChainType.OKEX_MAIN) {
+            var coins = msg?.value.getAmounts()
+            let convertFromAddress = WKey.convertAddressCosmosToTender(msg?.value.from_address ?? "")
+            let convertToAddress = WKey.convertAddressCosmosToTender(msg?.value.to_address ?? "")
+            
+            cell?.fromLabel.text = convertFromAddress
+            cell?.toLabel.text = convertToAddress
+            
+            if (self.account?.account_address == convertFromAddress) {
+                cell?.txTitleLabel.text = NSLocalizedString("tx_send", comment: "")
+            } else if (self.account?.account_address == convertToAddress) {
+                cell?.txTitleLabel.text = NSLocalizedString("tx_receive", comment: "")
             }
+            
             coins = sortCoins(coins!, chainType!)
             cell?.multiAmountStack.isHidden = false
             cell?.multiAmountLayer0.isHidden = false
             WUtils.showCoinDp(coins![0], cell!.multiAmountDenom0, cell!.multiAmount0, chainType!)
-            if (coins!.count > 1) {
-                cell?.multiAmountLayer1.isHidden = false
-                WUtils.showCoinDp(coins![1], cell!.multiAmountDenom1, cell!.multiAmount1, chainType!)
-            }
-            if (coins!.count > 2) {
-                cell?.multiAmountLayer2.isHidden = false
-                WUtils.showCoinDp(coins![2], cell!.multiAmountDenom2, cell!.multiAmount2, chainType!)
-            }
-            if (coins!.count > 3) {
-                cell?.multiAmountLayer3.isHidden = false
-                WUtils.showCoinDp(coins![3], cell!.multiAmountDenom3, cell!.multiAmount3, chainType!)
-            }
-            if (coins!.count > 4) {
-                cell?.multiAmountLayer4.isHidden = false
-                WUtils.showCoinDp(coins![4], cell!.multiAmountDenom4, cell!.multiAmount4, chainType!)
-            }
         }
         return cell!
     }
@@ -514,335 +282,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let msg = mTxInfo?.getMsg(position - 1)
         return cell!
     }
-    
-    func onBindGetReward(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell:TxRewardCell? = tableView.dequeueReusableCell(withIdentifier:"TxRewardCell") as? TxRewardCell
-//        let msg = mTxInfo?.getMsg(position - 1)
-//        let decimal = WUtils.mainDivideDecimal(chainType)
-//        cell?.setDenomType(chainType!)
-//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-//        cell?.delegatorLabel.text = msg?.value.delegator_address
-//        cell?.validatorLabel.text = msg?.value.validator_address
-//        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address!, true)
-//        cell?.amountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleReward(msg!.value.validator_address!, position - 1).stringValue, cell!.amountLabel.font!, decimal, decimal)
-        return cell!
-    }
-    
-    func onBindGetRewardAll(_ tableView: UITableView,  _ position:Int) -> UITableViewCell {
-        let cell:TxRewardAllCell? = tableView.dequeueReusableCell(withIdentifier:"TxRewardAllCell") as? TxRewardAllCell
-        return cell!
-    }
-    
-    func onBindEditRewardAddress(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell:TxEditRewardAddressCell? = tableView.dequeueReusableCell(withIdentifier:"TxEditRewardAddressCell") as? TxEditRewardAddressCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.delegatorLabel.text = msg?.value.delegator_address
-        cell?.widthrawAddressLabel.text = msg?.value.withdraw_address
-        return cell!
-    }
-    
-    func onBindVote(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell:TxVoteCell? = tableView.dequeueReusableCell(withIdentifier:"TxVoteCell") as? TxVoteCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.voterLabel.text = msg?.value.voter
-        cell?.proposalIdLabel.text = msg?.value.proposal_id
-        cell?.opinionLabel.text = msg?.value.getOption()
-        return cell!
-    }
-    
-    func onBindCommission(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell:TxCommissionCell? = tableView.dequeueReusableCell(withIdentifier:"TxCommissionCell") as? TxCommissionCell
-//        let msg = mTxInfo?.getMsg(position - 1)
-//        let decimal = WUtils.mainDivideDecimal(chainType)
-//        cell?.setDenomType(chainType!)
-//        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-//        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-//        cell?.validatorLabel.text = msg?.value.validator_address
-//        cell?.monikerLabel.text = WUtils.getMonikerName(mAllValidator, msg!.value.validator_address, true)
-//        cell?.commissionAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleCommission(position - 1).stringValue, cell!.commissionAmountLabel.font!, decimal, decimal)
-        return cell!
-    }
-    
-    func onBindPostPrice(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell:TxPostPriceCell? = tableView.dequeueReusableCell(withIdentifier:"TxPostPriceCell") as? TxPostPriceCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.pricePoster.text = msg?.value.from
-        cell?.marketId.text = msg?.value.market_id
-        cell?.postPrice.text = msg?.value.price
-        cell?.validityTime.text = WUtils.txTimetoString(input: msg!.value.expiry!)
-        return cell!
-    }
-    
-    func onBindCdpCreate(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpCreateCell") as? TxCdpCreateCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        let cDenom = msg?.value.collateral!.denom
-        let pDenom = msg?.value.principal!.denom
-        cell?.senderLabel.text = msg?.value.sender
-        cell?.collateralAmount.attributedText = WUtils.displayAmount2(msg?.value.collateral!.amount, cell!.collateralAmount.font!, WUtils.getKavaCoinDecimal(cDenom!), WUtils.getKavaCoinDecimal(cDenom!))
-        cell?.principalAmount.attributedText = WUtils.displayAmount2(msg?.value.principal!.amount, cell!.principalAmount.font!, WUtils.getKavaCoinDecimal(pDenom!), WUtils.getKavaCoinDecimal(pDenom!))
-        cell?.collateralDenom.text = cDenom!.uppercased()
-        cell?.principalDenom.text = pDenom!.uppercased()
-        return cell!
-    }
-    
-    func onBindCdpDeposit(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpDepositCell") as? TxCdpDepositCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        let cDenom = msg?.value.collateral!.denom
-        cell?.owerLabel.text = msg?.value.owner
-        cell?.depositorLabel.text = msg?.value.depositor
-        cell?.collateralAmount.attributedText = WUtils.displayAmount2(msg?.value.collateral!.amount, cell!.collateralAmount.font!, WUtils.getKavaCoinDecimal(cDenom!), WUtils.getKavaCoinDecimal(cDenom!))
-        cell?.collateralDenom.text = cDenom!.uppercased()
-        return cell!
-    }
-    
-    func onBindCdpWithdraw(_ tableView: UITableView,  _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpWithdrawCell") as? TxCdpWithdrawCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        let cDenom = msg?.value.collateral!.denom
-        cell?.ownerLabel.text = msg?.value.owner
-        cell?.depositorLabel.text = msg?.value.depositor
-        cell?.collateralAmount.attributedText = WUtils.displayAmount2(msg?.value.collateral!.amount, cell!.collateralAmount.font!, WUtils.getKavaCoinDecimal(cDenom!), WUtils.getKavaCoinDecimal(cDenom!))
-        cell?.collateralDenom.text = cDenom!.uppercased()
-        return cell!
-    }
-    
-    func onBindCdpBorrow(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpBorrowCell") as? TxCdpBorrowCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.coinTypeLabel.text = msg?.value.collateral_type?.uppercased()
-        let pDenom = msg?.value.principal!.denom
-        cell?.senderLabel.text = msg?.value.sender
-        cell?.principalAmount.attributedText = WUtils.displayAmount2(msg?.value.principal!.amount, cell!.principalAmount.font!, WUtils.getKavaCoinDecimal(pDenom!), WUtils.getKavaCoinDecimal(pDenom!))
-        cell?.principalDenom.text = pDenom!.uppercased()
-        return cell!
-    }
-    
-    func onBindCdpRepay(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpRepayCell") as? TxCdpRepayCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.coinTypeLabel.text = msg?.value.collateral_type?.uppercased()
-        let pDenom = msg?.value.payment!.denom
-        cell?.senderLabel.text = msg?.value.sender
-        cell?.paymentAmount.attributedText = WUtils.displayAmount2(msg?.value.payment!.amount, cell!.paymentAmount.font!, WUtils.getKavaCoinDecimal(pDenom!), WUtils.getKavaCoinDecimal(pDenom!))
-        cell?.paymentDenom.text = pDenom!.uppercased()
-        return cell!
-    }
-    
-    func onBindCdpLiquidate(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpLiquidateCell") as? TxCdpLiquidateCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg)
-        }
-        return cell!
-    }
-    
-    func onBindHtlcCreate(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell:TxHtlcCreateCell? = tableView.dequeueReusableCell(withIdentifier:"TxHtlcCreateCell") as? TxHtlcCreateCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        if (chainType == ChainType.KAVA_MAIN) {
-            WUtils.showCoinDp((msg?.value.getAmounts()![0])!, cell!.sendDenom, cell!.sendAmount, chainType!)
-            cell?.senderLabel.text = msg?.value.from
-            cell?.recipientLabel.text = msg?.value.recipient_other_chain
-            cell?.randomHashLabel.text = msg?.value.random_number_hash
-            
-            if (mKavaSwapInfo != nil && mKavaSwapInfo?.result.status == KavaSwapInfo.STATUS_EXPIRED) {
-                self.htlcRefundBtn.isHidden = false
-                self.mSwapId = self.mTxInfo?.simpleKavaSwapId()
-            }
-            
-        } else if (chainType == ChainType.BINANCE_MAIN) {
-            WUtils.showBNBTxDp((msg?.value.getAmounts()![0])!, cell!.sendDenom, cell!.sendAmount, chainType!)
-            if (self.account?.account_address == msg?.value.from) {
-                cell!.txTitle.text = NSLocalizedString("tx_send_htlc2", comment: "")
-                cell?.senderLabel.text = msg?.value.from
-                cell?.recipientLabel.text = msg?.value.recipient_other_chain
-            } else if (self.account?.account_address == msg?.value.to) {
-                cell!.txTitle.text = NSLocalizedString("tx_receive_htlc2", comment: "")
-                cell?.senderLabel.text = msg?.value.sender_other_chain
-                cell?.recipientLabel.text = msg?.value.to
-            } else {
-                cell!.txTitle.text = NSLocalizedString("tx_create_htlc2", comment: "")
-                cell?.senderLabel.text = msg?.value.from
-                cell?.recipientLabel.text = msg?.value.to
-            }
-            cell?.randomHashLabel.text = msg?.value.random_number_hash
-            
-            if (mBnbSwapInfo != nil && mBnbNodeInfo != nil &&
-                mBnbSwapInfo?.status == BnbSwapInfo.BNB_STATUS_OPEN &&
-                mBnbSwapInfo!.expireHeight < mBnbNodeInfo!.getCHeight()) {
-                self.htlcRefundBtn.isHidden = false
-                self.mSwapId = self.mTxInfo?.simpleBnbSwapId()
-            }
-            
-        }
-        return cell!
-    }
-    
-    func onBindHtlcClaim(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell:TxHtlcClaimCell? = tableView.dequeueReusableCell(withIdentifier:"TxHtlcClaimCell") as? TxHtlcClaimCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        if (chainType == ChainType.KAVA_MAIN) {
-            let receiveCoin = mTxInfo!.simpleSwapCoin()
-            if (receiveCoin != nil && !receiveCoin!.denom.isEmpty) {
-                cell?.claimAmount.attributedText = WUtils.displayAmount2(receiveCoin!.amount, cell!.claimAmount.font!, WUtils.getKavaCoinDecimal(receiveCoin!.denom), WUtils.getKavaCoinDecimal(receiveCoin!.denom))
-                cell?.claimDenom.text = receiveCoin!.denom.uppercased()
-            }
-            cell?.claimerAddress.text = msg?.value.from
-            cell?.randomNumberLabel.text = msg?.value.random_number
-            cell?.swapIdLabel.text = msg?.value.swap_id
-            
-        } else if (chainType == ChainType.BINANCE_MAIN) {
-            cell?.claimAmount.text = ""
-            cell?.claimDenom.text = "-"
-            cell?.claimerAddress.text = msg?.value.from
-            cell?.randomNumberLabel.text = msg?.value.random_number
-            cell?.swapIdLabel.text = msg?.value.swap_id
-            
-        }
-        return cell!
-    }
-    
-    func onBindHtlcRefund(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell:TxHtlcRefundCell? = tableView.dequeueReusableCell(withIdentifier:"TxHtlcRefundCell") as? TxHtlcRefundCell
-        let msg = mTxInfo?.getMsg(position - 1)
-        cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        if (chainType == ChainType.KAVA_MAIN) {
-            cell?.fromAddress.text = msg?.value.from
-            cell?.swapIdLabel.text = msg?.value.swap_id
-            let refundCoin = mTxInfo?.simpleRefund()
-            if (refundCoin != nil) {
-                cell?.refundAmount.attributedText = WUtils.displayAmount2(refundCoin!.amount, cell!.refundAmount.font!, WUtils.getKavaCoinDecimal(refundCoin!.denom), WUtils.getKavaCoinDecimal(refundCoin!.denom))
-                cell?.refundDenom.text = refundCoin!.denom.uppercased()
-            }
-            
-        } else if (chainType == ChainType.BINANCE_MAIN) {
-            cell?.fromAddress.text = msg?.value.from
-            cell?.swapIdLabel.text = msg?.value.swap_id
-            
-        }
-        return cell!
-    }
-    
-    func onBindHardDeposit(_ tableView: UITableView, _ position:Int) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardDepositCell") as? TxHardDepositCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg)
-        }
-        return cell!
-    }
-    
-    func onBindHardWithdraw(_ tableView: UITableView, _ position:Int) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardWithdrawCell") as? TxHardWithdrawCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg)
-        }
-        return cell!
-    }
-    
-    func onBindHardBorrow(_ tableView: UITableView, _ position:Int) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardBorrowCell") as? TxHardBorrowCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg)
-        }
-        return cell!
-    }
-    
-    func onBindHardRepay(_ tableView: UITableView, _ position:Int) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardRepayCell") as? TxHardRepayCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg)
-        }
-        return cell!
-    }
-    
-    func onBindHardLiquidate(_ tableView: UITableView, _ position:Int) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardLiquidateCell") as? TxHardLiquidateCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg)
-        }
-        return cell!
-    }
-    
-    func onBindIncentiveMinting(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveMintingCell") as? TxIncentiveMintingCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg, mTxInfo!, position - 1)
-        }
-        return cell!
-    }
-    
-    func onBindIncentiveHard(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveHardCell") as? TxIncentiveHardCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg, mTxInfo!, position - 1)
-        }
-        return cell!
-    }
-    
-    func onBindIncentiveSwap(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveSwapCell") as? TxIncentiveSwapCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg, mTxInfo!, position - 1)
-        }
-        return cell!
-    }
-    
-    func onBindIncentiveDelegator(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveDelegatorCell") as? TxIncentiveDelegatorCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg, mTxInfo!, position - 1)
-        }
-        return cell!
-    }
-    
-    func onBindSwapToken(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapTokenCell") as? TxSwapTokenCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg, mTxInfo!)
-        }
-        return cell!
-    }
-    
-    func onBindSwapDeposit(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapDepositCell") as? TxSwapDepositCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg, mTxInfo!)
-        }
-        return cell!
-    }
-    
-    func onBindSwapWithdraw(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapWithdrawCell") as? TxSwapWithdrawCell
-        if let msg = mTxInfo?.getMsg(position - 1) {
-            cell?.onBind(chainType!, msg, mTxInfo!)
-        }
-        return cell!
-    }
-    
     
     func onBindOkStake(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
         let cell:TxOkStakeCell? = tableView.dequeueReusableCell(withIdentifier:"TxOkStakeCell") as? TxOkStakeCell

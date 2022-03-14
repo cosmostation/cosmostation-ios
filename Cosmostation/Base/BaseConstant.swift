@@ -44,7 +44,7 @@ let IRIS_TEST_API                       = "https://api-office.cosmostation.io/bi
 
 let BNB_URL                             = "https://dex.binance.org/";
 
-let OKEX_URL                            = "https://www.okex.com/okexchain/v1/";
+let OKEX_URL                            = "https://exchainrpc.okex.org/okexchain/v1/";
 let OEC_API                             = "https://www.oklink.com/api/explorer/v1/";
 
 let KAVA_URL                            = "https://lcd-kava-app.cosmostation.io/";
@@ -686,7 +686,7 @@ let IOV_GAS_AMOUNT_RENEW                        = "300000";
 let IOV_GAS_AMOUNT_REPLACE                      = "300000";
 let IOV_GAS_AMOUNT_IBC_SEND                     = "500000";
 
-let OK_GAS_RATE_AVERAGE                         = "0.000000001";
+let OK_GAS_RATE_AVERAGE                         = "0.0000000001";
 let OK_GAS_AMOUNT_SEND                          = "200000";
 let OK_GAS_AMOUNT_STAKE                         = "200000";
 let OK_GAS_AMOUNT_STAKE_MUX                     = "20000";

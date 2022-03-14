@@ -69,9 +69,9 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {
-//        let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
+//        let txDetailVC = TxDetailViewController(nibName: "TxDetailViewController", bundle: nil)
 //        txDetailVC.mIsGen = false
-//        txDetailVC.mTxHash = "19EFC831F2DCC2B919094B4F32936F01B6F8953980227482FBE4753B10840244"
+//        txDetailVC.mTxHash = "E139E2803B57CDA9BA59751ED398EDDD16B5E8633A71DCF5A78C6E60FEFDE723"
 //        txDetailVC.hidesBottomBarWhenPushed = true
 //        self.navigationItem.title = ""
 //        self.navigationController?.pushViewController(txDetailVC, animated: true)
@@ -204,21 +204,10 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (chainType == ChainType.BINANCE_MAIN) {
             let bnbHistory = mBnbHistories[indexPath.row]
-            if (bnbHistory.txType == "HTL_TRANSFER" || bnbHistory.txType == "CLAIM_HTL" || bnbHistory.txType == "REFUND_HTL" || bnbHistory.txType == "TRANSFER") {
-                let txDetailVC = TxDetailViewController(nibName: "TxDetailViewController", bundle: nil)
-                txDetailVC.mIsGen = false
-                txDetailVC.mTxHash = bnbHistory.txHash
-                txDetailVC.mBnbTime = bnbHistory.timeStamp
-                txDetailVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(txDetailVC, animated: true)
-                
-            } else {
-                guard let url = URL(string: "https://binance.mintscan.io/txs/" + bnbHistory.txHash) else { return }
-                let safariViewController = SFSafariViewController(url: url)
-                safariViewController.modalPresentationStyle = .popover
-                present(safariViewController, animated: true, completion: nil)
-            }
+            guard let url = URL(string: "https://binance.mintscan.io/txs/" + bnbHistory.txHash) else { return }
+            let safariViewController = SFSafariViewController(url: url)
+            safariViewController.modalPresentationStyle = .popover
+            present(safariViewController, animated: true, completion: nil)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             let okHistory = mOkHistories[indexPath.row]
@@ -241,13 +230,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
                     self.navigationItem.title = ""
                     self.navigationController?.pushViewController(txDetailVC, animated: true)
                     
-                } else {
-                    let txDetailVC = TxDetailViewController(nibName: "TxDetailViewController", bundle: nil)
-                    txDetailVC.mIsGen = false
-                    txDetailVC.mTxHash = history.data!.txhash!
-                    txDetailVC.hidesBottomBarWhenPushed = true
-                    self.navigationItem.title = ""
-                    self.navigationController?.pushViewController(txDetailVC, animated: true)
                 }
             }
         }

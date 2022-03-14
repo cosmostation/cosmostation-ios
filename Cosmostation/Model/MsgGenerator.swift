@@ -12,68 +12,12 @@ import HDWalletKit
 
 class MsgGenerator {
     
-    static func genDelegateMsg(_ fromAddress: String, _ toValAddress: String, _ amount: Coin, _ chain: ChainType) -> Msg {
-        var msg = Msg.init()
-        var value = Msg.Value.init()
-        value.delegator_address = fromAddress
-        value.validator_address = toValAddress
-        let data = try? JSONEncoder().encode(amount)
-        do {
-            value.amount = try JSONDecoder().decode(AmountType.self, from:data!)
-        } catch {
-            print(error)
-        }
-        
-        msg.type = COSMOS_MSG_TYPE_DELEGATE
-        msg.value = value
-        return msg
-    }
-    
-    static func genUndelegateMsg(_ fromAddress: String, _ toValAddress: String, _ amount: Coin, _ chain: ChainType) -> Msg {
-        var msg = Msg.init()
-        var value = Msg.Value.init()
-        value.delegator_address = fromAddress
-        value.validator_address = toValAddress
-        let data = try? JSONEncoder().encode(amount)
-        do {
-            value.amount = try JSONDecoder().decode(AmountType.self, from:data!)
-        } catch {
-            print(error)
-        }
-        
-        msg.type = COSMOS_MSG_TYPE_UNDELEGATE2
-        msg.value = value
-        return msg
-    }
-    
-    static func genGetRewardMsg(_ fromAddress: String, _ toValAddress: String, _ chain: ChainType) -> Msg {
-        var msg = Msg.init()
-        var value = Msg.Value.init()
-        value.delegator_address = fromAddress
-        value.validator_address = toValAddress
-        
-        msg.type = COSMOS_MSG_TYPE_WITHDRAW_DEL
-        msg.value = value
-        return msg
-    }
-    
-    static func genIrisGetAllRewardMsg(_ fromAddress: String) -> Msg {
-        var msg = Msg.init()
-        var value = Msg.Value.init()
-        
-        value.delegator_addr = fromAddress
-        msg.type = IRIS_MSG_TYPE_WITHDRAW_ALL
-        msg.value = value
-        
-        return msg
-    }
-    
     static func genGetSendMsg(_ fromAddress: String, _ toAddress: String, _ amount: Array<Coin>, _ chain: ChainType) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
         if (chain == ChainType.OKEX_MAIN) {
-            value.from_address = fromAddress
-            value.to_address = toAddress
+            value.from_address = WKey.convertAddressEthToCosmos(fromAddress, "ex")
+            value.to_address = WKey.convertAddressEthToCosmos(toAddress, "ex")
             let data = try? JSONEncoder().encode(amount)
             do {
                 value.amount = try JSONDecoder().decode(AmountType.self, from:data!)

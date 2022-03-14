@@ -112,6 +112,7 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
             currentAvailable = BaseData.instance.availableAmount(toSendDenom)
             
         }
+        
         if (toSendDenom == mainDenom) {
             remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
             sendValueLabel.attributedText = WUtils.dpUserCurrencyValue(mainDenom, toSendAmount, mDivideDecimal, sendValueLabel.font)
@@ -127,6 +128,10 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
             remainValueLabel.isHidden = true
             
         }
+//        print("currentAvailable ", currentAvailable)
+//        print("feeAmount ", feeAmount)
+//        print("toSendAmount ", toSendAmount)
+//        print("remainAvailable ", remainAvailable)
         
         WUtils.showCoinDp(toSendDenom, toSendAmount.stringValue, sendDenomLabel, sendAmountLabel, chainType!)
         WUtils.showCoinDp(mainDenom, feeAmount.stringValue, feeDenomLabel, feeAmountLabel, chainType!)
@@ -178,20 +183,8 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                     let okAccountInfo = OkAccountInfo.init(info)
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithOkAccountInfo(account, okAccountInfo))
                     BaseData.instance.mOkAccountInfo = okAccountInfo
-                    self.onGenSendTx()
+                    self.onGenOexSendTx()
                     
-                } else {
-                    guard let responseData = res as? NSDictionary,
-                        let info = responseData.object(forKey: "result") as? [String : Any] else {
-                        _ = BaseData.instance.deleteBalance(account: account)
-                        self.hideWaittingAlert()
-                        self.onShowToast(NSLocalizedString("error_network", comment: ""))
-                        return
-                    }
-                    let accountInfo = AccountInfo.init(info)
-                    _ = BaseData.instance.updateAccount(WUtils.getAccountWithAccountInfo(account, accountInfo))
-                    BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithAccountInfo(account, accountInfo))
-                    self.onGenSendTx()
                 }
                 
             case .failure(let error):
@@ -202,7 +195,7 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
         }
     }
     
-    func onGenSendTx() {
+    func onGenOexSendTx() {
         DispatchQueue.global().async {
             var stdTx:StdTx!
             do {
@@ -213,68 +206,55 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                 var msgList = Array<Msg>()
                 msgList.append(msg)
                 
-                if (self.chainType == ChainType.OKEX_MAIN) {
-                    let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
-                                                           String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                           String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                           msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+                let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
+                                                       String(self.pageHolderVC.mAccount!.account_account_numner),
+                                                       String(self.pageHolderVC.mAccount!.account_sequence_number),
+                                                       msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+                
+                let encoder = JSONEncoder()
+                encoder.outputFormatting = .sortedKeys
+                let data = try? encoder.encode(stdMsg)
+                let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
+                let rawData: Data? = rawResult!.data(using: .utf8)
+                
+                if (self.pageHolderVC.mAccount!.account_custom_path == 0) {
+                    print("Tender Type")
+                    let hash = rawData!.sha256()
+                    let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
                     
-                    let encoder = JSONEncoder()
-                    encoder.outputFormatting = .sortedKeys
-                    let data = try? encoder.encode(stdMsg)
-                    let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
-                    let rawData: Data? = rawResult!.data(using: .utf8)
+                    var genedSignature = Signature.init()
+                    var genPubkey =  PublicKey.init()
+                    genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
+                    genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
+                    genedSignature.pub_key = genPubkey
+                    genedSignature.signature = signedData.base64EncodedString()
+                    genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
+                    genedSignature.sequence = String(self.pageHolderVC.mAccount!.account_sequence_number)
                     
-                    if (self.pageHolderVC.mAccount!.account_new_bip44) {
-                        print("Ether Type")
-                        let hash = HDWalletKit.Crypto.sha3keccak256(data: rawData!)
-                        let signedData: Data? = try ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
-                        
-                        var genedSignature = Signature.init()
-                        var genPubkey =  PublicKey.init()
-                        genPubkey.type = ETHERMINT_KEY_TYPE_PUBLIC
-                        genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
-                        genedSignature.pub_key = genPubkey
-                        genedSignature.signature = signedData!.base64EncodedString()
-                        genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
-                        genedSignature.sequence = String(self.pageHolderVC.mAccount!.account_sequence_number)
-                        
-                        var signatures: Array<Signature> = Array<Signature>()
-                        signatures.append(genedSignature)
-                        
-                        stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
-                        
-                    } else {
-                        print("Tender Type")
-                        let hash = rawData!.sha256()
-                        let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
-                        
-                        var genedSignature = Signature.init()
-                        var genPubkey =  PublicKey.init()
-                        genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-                        genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
-                        genedSignature.pub_key = genPubkey
-                        genedSignature.signature = signedData.base64EncodedString()
-                        genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
-                        genedSignature.sequence = String(self.pageHolderVC.mAccount!.account_sequence_number)
-                        
-                        var signatures: Array<Signature> = Array<Signature>()
-                        signatures.append(genedSignature)
-                        
-                        stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
-                    }
+                    var signatures: Array<Signature> = Array<Signature>()
+                    signatures.append(genedSignature)
+                    
+                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                     
                 } else {
-                    let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
-                                                           String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                           String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                           msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
-                
-                    stdTx = KeyFac.getStdTx(self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                            msgList, stdMsg,
-                                            self.pageHolderVC.mAccount!, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+                    print("Ether Type")
+                    let hash = HDWalletKit.Crypto.sha3keccak256(data: rawData!)
+                    let signedData: Data? = try ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
+                    
+                    var genedSignature = Signature.init()
+                    var genPubkey =  PublicKey.init()
+                    genPubkey.type = ETHERMINT_KEY_TYPE_PUBLIC
+                    genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
+                    genedSignature.pub_key = genPubkey
+                    genedSignature.signature = signedData!.base64EncodedString()
+                    genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
+                    genedSignature.sequence = String(self.pageHolderVC.mAccount!.account_sequence_number)
+                    
+                    var signatures: Array<Signature> = Array<Signature>()
+                    signatures.append(genedSignature)
+                    
+                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                 }
-                
                 
             } catch {
                 print(error)
@@ -290,26 +270,26 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
                     print("params ", params)
                     let request = Alamofire.request(BaseNetWork.broadcastUrl(self.chainType), method: .post, parameters: params, encoding: JSONEncoding.default, headers: [:])
                     print("request ", request.request?.url)
-//                    request.responseJSON { response in
-//                        var txResult = [String:Any]()
-//                        switch response.result {
-//                        case .success(let res):
-//                            print("Send ", res)
-//                            if let result = res as? [String : Any]  {
-//                                txResult = result
-//                            }
-//                        case .failure(let error):
-//                            print("send error ", error)
-//                            if (response.response?.statusCode == 500) {
-//                                txResult["net_error"] = 500
-//                            }
-//                        }
-//                        if (self.waitAlert != nil) {
-//                            self.waitAlert?.dismiss(animated: true, completion: {
-//                                self.onStartTxDetail(txResult)
-//                            })
-//                        }
-//                    }
+                    request.responseJSON { response in
+                        var txResult = [String:Any]()
+                        switch response.result {
+                        case .success(let res):
+                            print("Send ", res)
+                            if let result = res as? [String : Any]  {
+                                txResult = result
+                            }
+                        case .failure(let error):
+                            print("send error ", error)
+                            if (response.response?.statusCode == 500) {
+                                txResult["net_error"] = 500
+                            }
+                        }
+                        if (self.waitAlert != nil) {
+                            self.waitAlert?.dismiss(animated: true, completion: {
+                                self.onStartTxDetail(txResult)
+                            })
+                        }
+                    }
 
                 } catch {
                     print(error)
