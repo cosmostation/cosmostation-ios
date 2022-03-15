@@ -295,7 +295,9 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
         cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.delegatorLabel.text = msg?.value.delegator_address
+        
+        let convertDelegaterAddress = WKey.convertAddressCosmosToTender(msg?.value.delegator_address ?? "")
+        cell?.delegatorLabel.text = convertDelegaterAddress
         WUtils.showCoinDp(msg!.value.quantity!, cell!.stakeDenom, cell!.stakeAmount, chainType!)
         return cell!
     }

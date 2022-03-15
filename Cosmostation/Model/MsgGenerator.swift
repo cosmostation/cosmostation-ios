@@ -137,7 +137,7 @@ class MsgGenerator {
     static func genOkDepositMsg(_ delegator: String, _ coin: Coin) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        value.delegator_address = delegator;
+        value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.quantity = coin;
         msg.type = OK_MSG_TYPE_DEPOSIT;
         msg.value = value;
@@ -147,7 +147,7 @@ class MsgGenerator {
     static func genOkWithdarwMsg(_ delegator: String, _ coin: Coin) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        value.delegator_address = delegator;
+        value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.quantity = coin;
         msg.type = OK_MSG_TYPE_WITHDRAW;
         msg.value = value;
