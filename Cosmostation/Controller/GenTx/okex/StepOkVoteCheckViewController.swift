@@ -106,7 +106,10 @@ class StepOkVoteCheckViewController: BaseViewController, PasswordViewDelegate {
                 
                 let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
                                                        String(self.pageHolderVC.mAccount!.account_account_numner),
-                                                       String(self.pageHolderVC.mAccount!.account_sequence_number), msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+                                                       String(self.pageHolderVC.mAccount!.account_sequence_number),
+                                                       msgList,
+                                                       self.pageHolderVC.mFee!,
+                                                       self.pageHolderVC.mMemo!)
                 
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .sortedKeys
@@ -114,7 +117,27 @@ class StepOkVoteCheckViewController: BaseViewController, PasswordViewDelegate {
                 let rawResult = String(data:data!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
                 let rawData: Data? = rawResult!.data(using: .utf8)
                 
-                if (self.pageHolderVC.mAccount!.account_new_bip44) {
+                if (self.pageHolderVC.mAccount!.account_custom_path == 0) {
+                    print("Tender Type")
+                    let hash = rawData!.sha256()
+                    let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
+
+                    var genedSignature = Signature.init()
+                    var genPubkey = PublicKey.init()
+                    genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
+                    genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
+                    genedSignature.pub_key = genPubkey
+                    genedSignature.signature = signedData.base64EncodedString()
+                    genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
+                    genedSignature.sequence = String(self.pageHolderVC.mAccount!.account_sequence_number)
+                    
+                    var signatures: Array<Signature> = Array<Signature>()
+                    signatures.append(genedSignature)
+                    
+                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
+                    
+                } else {
+                    print("Ether Type")
                     let hash = HDWalletKit.Crypto.sha3keccak256(data: rawData!)
                     let signedData: Data? = try ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
                     
@@ -132,23 +155,6 @@ class StepOkVoteCheckViewController: BaseViewController, PasswordViewDelegate {
                     
                     stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                     
-                } else {
-                    let hash = rawData!.sha256()
-                    let signedData = try! ECDSA.compactsign(hash, privateKey: self.pageHolderVC.privateKey!)
-
-                    var genedSignature = Signature.init()
-                    var genPubkey = PublicKey.init()
-                    genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-                    genPubkey.value = self.pageHolderVC.publicKey!.base64EncodedString()
-                    genedSignature.pub_key = genPubkey
-                    genedSignature.signature = signedData.base64EncodedString()
-                    genedSignature.account_number = String(self.pageHolderVC.mAccount!.account_account_numner)
-                    genedSignature.sequence = String(self.pageHolderVC.mAccount!.account_sequence_number)
-                    
-                    var signatures: Array<Signature> = Array<Signature>()
-                    signatures.append(genedSignature)
-                    
-                    stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                 }
                 
             } catch {

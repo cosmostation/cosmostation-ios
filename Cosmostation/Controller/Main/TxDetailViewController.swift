@@ -307,7 +307,9 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let msg = mTxInfo?.getMsg(position - 1)
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
         cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
-        cell?.voterLabel.text = msg?.value.delegator_address
+        
+        let convertDelegaterAddress = WKey.convertAddressCosmosToTender(msg?.value.delegator_address ?? "")
+        cell?.voterLabel.text = convertDelegaterAddress
         
         var monikers = ""
         let validators = msg?.value.validator_addresses

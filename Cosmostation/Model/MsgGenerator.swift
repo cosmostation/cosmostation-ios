@@ -157,7 +157,7 @@ class MsgGenerator {
     static func genOkVote(_ delegator: String, _ toVals: Array<String>) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
-        value.delegator_address = delegator;
+        value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.validator_addresses = toVals;
         msg.type = OK_MSG_TYPE_DIRECT_VOTE;
         msg.value = value;
