@@ -204,7 +204,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown Coins"; view.headerCntLabel.text = String(self.mUnKnown_gRPC.count) }
         
         else if (section == SECTION_NATIVE) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative.count) }
-        else if (section == SECTION_ETC) { view.headerTitleLabel.text = "Etc Coins"; view.headerCntLabel.text = String(self.mEtc.count) }
+        else if (section == SECTION_ETC) {
+            view.headerTitleLabel.text = (chainType! == ChainType.OKEX_MAIN) ? "KIP10 Coins" : "Etc Coins"
+            view.headerCntLabel.text = String(self.mEtc.count)
+        }
         else if (section == SECTION_UNKNOWN) { view.headerTitleLabel.text = "Unknown Coins"; view.headerCntLabel.text = String(self.mUnKnown.count) }
         else { view.headerTitleLabel.text = ""; view.headerCntLabel.text = "0" }
         return view
@@ -986,7 +989,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.tokenSymbol.text = okToken.original_symbol!.uppercased()
                 cell?.tokenSymbol.textColor = COLOR_OK
                 cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
-                cell?.tokenDescription.text = okToken.description
+                cell?.tokenDescription.text = "OEC Staking Coin"
                 
                 let tokenAmount = WUtils.getAllExToken(OKEX_MAIN_DENOM)
                 cell?.tokenAmount.attributedText = WUtils.displayAmount2(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)

@@ -1708,8 +1708,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     //no need yet
     func onClickOkVoteValMode() {
-//        self.onShowToast("Temporary Disable")
-//        return
         let okVoteTypeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
         okVoteTypeAlert.addAction(UIAlertAction(title: NSLocalizedString("str_vote_direct", comment: ""), style: .default, handler: { _ in
             self.onClickOkVoteVal()

@@ -142,7 +142,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     }
     
     @IBAction func onClickSend(_ sender: UIButton) {
-        if (!account!.account_has_private) {
+        if (account?.account_has_private == false) {
             self.onShowAddMenomicDialog()
             return
         }

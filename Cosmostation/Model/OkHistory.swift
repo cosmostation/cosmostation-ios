@@ -52,7 +52,7 @@ public struct OKHistoryHit {
     
     init(_ dictionary: NSDictionary?) {
         self.hash = dictionary?["hash"] as? String
-        self.blocktime = dictionary?["blocktime"] as? Int64
+        self.blocktime = dictionary?["blockTimeU0"] as? Int64
         self.blockHeight = dictionary?["blockHeight"] as? Int64
         self.fromEvmAddress = dictionary?["fromEvmAddress"] as? String
         self.toEvmAddress = dictionary?["toEvmAddress"] as? String
