@@ -90,6 +90,9 @@ struct Osmosis_Lockup_MsgBeginUnlocking {
 
   var id: UInt64 = 0
 
+  /// Amount of unlocking coins. Unlock all if not set.
+  var coins: [Cosmos_Base_V1beta1_Coin] = []
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -256,6 +259,7 @@ extension Osmosis_Lockup_MsgBeginUnlocking: SwiftProtobuf.Message, SwiftProtobuf
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "owner"),
     2: .same(proto: "ID"),
+    3: .same(proto: "coins"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -266,6 +270,7 @@ extension Osmosis_Lockup_MsgBeginUnlocking: SwiftProtobuf.Message, SwiftProtobuf
       switch fieldNumber {
       case 1: try { try decoder.decodeSingularStringField(value: &self.owner) }()
       case 2: try { try decoder.decodeSingularUInt64Field(value: &self.id) }()
+      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.coins) }()
       default: break
       }
     }
@@ -278,12 +283,16 @@ extension Osmosis_Lockup_MsgBeginUnlocking: SwiftProtobuf.Message, SwiftProtobuf
     if self.id != 0 {
       try visitor.visitSingularUInt64Field(value: self.id, fieldNumber: 2)
     }
+    if !self.coins.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.coins, fieldNumber: 3)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Osmosis_Lockup_MsgBeginUnlocking, rhs: Osmosis_Lockup_MsgBeginUnlocking) -> Bool {
     if lhs.owner != rhs.owner {return false}
     if lhs.id != rhs.id {return false}
+    if lhs.coins != rhs.coins {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

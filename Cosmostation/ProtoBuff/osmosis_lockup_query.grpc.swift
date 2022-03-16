@@ -87,6 +87,11 @@ internal protocol Osmosis_Lockup_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Osmosis_Lockup_LockedRequest, Osmosis_Lockup_LockedResponse>
 
+  func syntheticLockupsByLockupID(
+    _ request: Osmosis_Lockup_SyntheticLockupsByLockupIDRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Osmosis_Lockup_SyntheticLockupsByLockupIDRequest, Osmosis_Lockup_SyntheticLockupsByLockupIDResponse>
+
   func accountLockedLongerDuration(
     _ request: Osmosis_Lockup_AccountLockedLongerDurationRequest,
     callOptions: CallOptions?
@@ -307,6 +312,24 @@ extension Osmosis_Lockup_QueryClientProtocol {
     )
   }
 
+  /// Returns synthetic lockups by native lockup id
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to SyntheticLockupsByLockupID.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func syntheticLockupsByLockupID(
+    _ request: Osmosis_Lockup_SyntheticLockupsByLockupIDRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Osmosis_Lockup_SyntheticLockupsByLockupIDRequest, Osmosis_Lockup_SyntheticLockupsByLockupIDResponse> {
+    return self.makeUnaryCall(
+      path: "/osmosis.lockup.Query/SyntheticLockupsByLockupID",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeSyntheticLockupsByLockupIDInterceptors() ?? []
+    )
+  }
+
   /// Returns account locked records with longer duration
   ///
   /// - Parameters:
@@ -398,6 +421,9 @@ internal protocol Osmosis_Lockup_QueryClientInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when invoking 'lockedByID'.
   func makeLockedByIDInterceptors() -> [ClientInterceptor<Osmosis_Lockup_LockedRequest, Osmosis_Lockup_LockedResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'syntheticLockupsByLockupID'.
+  func makeSyntheticLockupsByLockupIDInterceptors() -> [ClientInterceptor<Osmosis_Lockup_SyntheticLockupsByLockupIDRequest, Osmosis_Lockup_SyntheticLockupsByLockupIDResponse>]
+
   /// - Returns: Interceptors to use when invoking 'accountLockedLongerDuration'.
   func makeAccountLockedLongerDurationInterceptors() -> [ClientInterceptor<Osmosis_Lockup_AccountLockedLongerDurationRequest, Osmosis_Lockup_AccountLockedLongerDurationResponse>]
 
@@ -469,6 +495,9 @@ internal protocol Osmosis_Lockup_QueryProvider: CallHandlerProvider {
 
   /// Returns lock record by id
   func lockedByID(request: Osmosis_Lockup_LockedRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_LockedResponse>
+
+  /// Returns synthetic lockups by native lockup id
+  func syntheticLockupsByLockupID(request: Osmosis_Lockup_SyntheticLockupsByLockupIDRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_SyntheticLockupsByLockupIDResponse>
 
   /// Returns account locked records with longer duration
   func accountLockedLongerDuration(request: Osmosis_Lockup_AccountLockedLongerDurationRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Lockup_AccountLockedLongerDurationResponse>
@@ -590,6 +619,15 @@ extension Osmosis_Lockup_QueryProvider {
         userFunction: self.lockedByID(request:context:)
       )
 
+    case "SyntheticLockupsByLockupID":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Osmosis_Lockup_SyntheticLockupsByLockupIDRequest>(),
+        responseSerializer: ProtobufSerializer<Osmosis_Lockup_SyntheticLockupsByLockupIDResponse>(),
+        interceptors: self.interceptors?.makeSyntheticLockupsByLockupIDInterceptors() ?? [],
+        userFunction: self.syntheticLockupsByLockupID(request:context:)
+      )
+
     case "AccountLockedLongerDuration":
       return UnaryServerHandler(
         context: context,
@@ -668,6 +706,10 @@ internal protocol Osmosis_Lockup_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'lockedByID'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeLockedByIDInterceptors() -> [ServerInterceptor<Osmosis_Lockup_LockedRequest, Osmosis_Lockup_LockedResponse>]
+
+  /// - Returns: Interceptors to use when handling 'syntheticLockupsByLockupID'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeSyntheticLockupsByLockupIDInterceptors() -> [ServerInterceptor<Osmosis_Lockup_SyntheticLockupsByLockupIDRequest, Osmosis_Lockup_SyntheticLockupsByLockupIDResponse>]
 
   /// - Returns: Interceptors to use when handling 'accountLockedLongerDuration'.
   ///   Defaults to calling `self.makeInterceptors()`.

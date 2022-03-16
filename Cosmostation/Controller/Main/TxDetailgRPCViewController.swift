@@ -262,7 +262,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             }
             
-            else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgCreateBalancerPool.protoMessageName)) {
+            else if (msg.typeURL.contains(Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCreatePoolCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!

@@ -21,7 +21,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// Params holds parameters for the incentives module
-struct Osmosis_Gamm_Params {
+struct Osmosis_Gamm_V1beta1_Params {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -34,7 +34,7 @@ struct Osmosis_Gamm_Params {
 }
 
 /// GenesisState defines the gamm module's genesis state.
-struct Osmosis_Gamm_GenesisState {
+struct Osmosis_Gamm_V1beta1_GenesisState {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -43,8 +43,8 @@ struct Osmosis_Gamm_GenesisState {
 
   var nextPoolNumber: UInt64 = 0
 
-  var params: Osmosis_Gamm_Params {
-    get {return _params ?? Osmosis_Gamm_Params()}
+  var params: Osmosis_Gamm_V1beta1_Params {
+    get {return _params ?? Osmosis_Gamm_V1beta1_Params()}
     set {_params = newValue}
   }
   /// Returns true if `params` has been explicitly set.
@@ -56,14 +56,14 @@ struct Osmosis_Gamm_GenesisState {
 
   init() {}
 
-  fileprivate var _params: Osmosis_Gamm_Params? = nil
+  fileprivate var _params: Osmosis_Gamm_V1beta1_Params? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "osmosis.gamm"
+fileprivate let _protobuf_package = "osmosis.gamm.v1beta1"
 
-extension Osmosis_Gamm_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_V1beta1_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Params"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "pool_creation_fee"),
@@ -88,14 +88,14 @@ extension Osmosis_Gamm_Params: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Params, rhs: Osmosis_Gamm_Params) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_V1beta1_Params, rhs: Osmosis_Gamm_V1beta1_Params) -> Bool {
     if lhs.poolCreationFee != rhs.poolCreationFee {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Osmosis_Gamm_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_V1beta1_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".GenesisState"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "pools"),
@@ -130,7 +130,7 @@ extension Osmosis_Gamm_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._Messa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_GenesisState, rhs: Osmosis_Gamm_GenesisState) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_V1beta1_GenesisState, rhs: Osmosis_Gamm_V1beta1_GenesisState) -> Bool {
     if lhs.pools != rhs.pools {return false}
     if lhs.nextPoolNumber != rhs.nextPoolNumber {return false}
     if lhs._params != rhs._params {return false}

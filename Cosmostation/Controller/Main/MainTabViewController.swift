@@ -926,7 +926,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Osmosis_Gamm_V1beta1_QueryPoolsRequest.with { $0.pagination = page }
                 if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.pools.forEach { pool in
-                        let rawPool = try! Osmosis_Gamm_V1beta1_BalancerPool.init(serializedData: pool.value)
+                        let rawPool = try! Osmosis_Gamm_Poolmodels_Balancer_Pool.init(serializedData: pool.value)
                         BaseData.instance.mOsmoPools_gRPC.append(rawPool)
                     }
                 }

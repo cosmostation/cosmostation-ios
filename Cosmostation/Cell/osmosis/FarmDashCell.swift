@@ -25,7 +25,7 @@ class FarmDashCell: UITableViewCell {
         nextRewardAmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
-    func onBindView(_ myPools: Array<Osmosis_Gamm_V1beta1_BalancerPool>, _ lockUps: Array<Osmosis_Lockup_PeriodLock>) {
+    func onBindView(_ myPools: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>, _ lockUps: Array<Osmosis_Lockup_PeriodLock>) {
         print("lockedCoins ", lockUps.count)
         let nf = WUtils.getNumberFormatter(2)
         let now = Date.init().millisecondsSince1970

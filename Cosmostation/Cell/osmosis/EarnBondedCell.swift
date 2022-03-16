@@ -29,7 +29,7 @@ class EarnBondedCell: UITableViewCell {
         actionUnbonding?()
     }
     
-    func onBindView(_ lock: Osmosis_Lockup_PeriodLock, _ pool: Osmosis_Gamm_V1beta1_BalancerPool, _ gauges: Array<Osmosis_Incentives_Gauge>) {
+    func onBindView(_ lock: Osmosis_Lockup_PeriodLock, _ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>) {
         let lpCoinPrice = WUtils.getOsmoLpTokenPerUsdPrice(pool)
         let nf = WUtils.getNumberFormatter(2)
         

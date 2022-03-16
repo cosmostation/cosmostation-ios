@@ -43,7 +43,7 @@ struct Osmosis_Incentives_Gauge {
   /// Clears the value of `distributeTo`. Subsequent reads from it will return its default value.
   mutating func clearDistributeTo() {self._distributeTo = nil}
 
-  /// can distribute multiple coins
+  /// total amount of Coins that has been in the gauge.
   var coins: [Cosmos_Base_V1beta1_Coin] = []
 
   /// distribution start time

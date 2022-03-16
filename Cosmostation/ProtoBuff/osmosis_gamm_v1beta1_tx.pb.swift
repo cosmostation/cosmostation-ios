@@ -20,44 +20,6 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-/// ===================== MsgCreatePool
-struct Osmosis_Gamm_V1beta1_MsgCreateBalancerPool {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var sender: String = String()
-
-  var poolParams: Osmosis_Gamm_V1beta1_BalancerPoolParams {
-    get {return _poolParams ?? Osmosis_Gamm_V1beta1_BalancerPoolParams()}
-    set {_poolParams = newValue}
-  }
-  /// Returns true if `poolParams` has been explicitly set.
-  var hasPoolParams: Bool {return self._poolParams != nil}
-  /// Clears the value of `poolParams`. Subsequent reads from it will return its default value.
-  mutating func clearPoolParams() {self._poolParams = nil}
-
-  var poolAssets: [Osmosis_Gamm_V1beta1_PoolAsset] = []
-
-  var futurePoolGovernor: String = String()
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-
-  fileprivate var _poolParams: Osmosis_Gamm_V1beta1_BalancerPoolParams? = nil
-}
-
-struct Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse {
-  // SwiftProtobuf.Message conformance is added in an extension below. See the
-  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
-  // methods supported on all messages.
-
-  var unknownFields = SwiftProtobuf.UnknownStorage()
-
-  init() {}
-}
-
 /// ===================== MsgJoinPool
 struct Osmosis_Gamm_V1beta1_MsgJoinPool {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
@@ -361,75 +323,6 @@ struct Osmosis_Gamm_V1beta1_MsgExitSwapExternAmountOutResponse {
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "osmosis.gamm.v1beta1"
-
-extension Osmosis_Gamm_V1beta1_MsgCreateBalancerPool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgCreateBalancerPool"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "sender"),
-    2: .same(proto: "poolParams"),
-    3: .same(proto: "poolAssets"),
-    4: .standard(proto: "future_pool_governor"),
-  ]
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let fieldNumber = try decoder.nextFieldNumber() {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.sender) }()
-      case 2: try { try decoder.decodeSingularMessageField(value: &self._poolParams) }()
-      case 3: try { try decoder.decodeRepeatedMessageField(value: &self.poolAssets) }()
-      case 4: try { try decoder.decodeSingularStringField(value: &self.futurePoolGovernor) }()
-      default: break
-      }
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.sender.isEmpty {
-      try visitor.visitSingularStringField(value: self.sender, fieldNumber: 1)
-    }
-    if let v = self._poolParams {
-      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
-    }
-    if !self.poolAssets.isEmpty {
-      try visitor.visitRepeatedMessageField(value: self.poolAssets, fieldNumber: 3)
-    }
-    if !self.futurePoolGovernor.isEmpty {
-      try visitor.visitSingularStringField(value: self.futurePoolGovernor, fieldNumber: 4)
-    }
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Osmosis_Gamm_V1beta1_MsgCreateBalancerPool, rhs: Osmosis_Gamm_V1beta1_MsgCreateBalancerPool) -> Bool {
-    if lhs.sender != rhs.sender {return false}
-    if lhs._poolParams != rhs._poolParams {return false}
-    if lhs.poolAssets != rhs.poolAssets {return false}
-    if lhs.futurePoolGovernor != rhs.futurePoolGovernor {return false}
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
-
-extension Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".MsgCreateBalancerPoolResponse"
-  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
-
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
-    while let _ = try decoder.nextFieldNumber() {
-    }
-  }
-
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    try unknownFields.traverse(visitor: &visitor)
-  }
-
-  static func ==(lhs: Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse, rhs: Osmosis_Gamm_V1beta1_MsgCreateBalancerPoolResponse) -> Bool {
-    if lhs.unknownFields != rhs.unknownFields {return false}
-    return true
-  }
-}
 
 extension Osmosis_Gamm_V1beta1_MsgJoinPool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".MsgJoinPool"

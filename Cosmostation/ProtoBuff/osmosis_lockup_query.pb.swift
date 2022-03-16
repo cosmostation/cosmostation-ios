@@ -346,6 +346,30 @@ struct Osmosis_Lockup_LockedResponse {
   fileprivate var _lock: Osmosis_Lockup_PeriodLock? = nil
 }
 
+struct Osmosis_Lockup_SyntheticLockupsByLockupIDRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var lockID: UInt64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Osmosis_Lockup_SyntheticLockupsByLockupIDResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var syntheticLocks: [Osmosis_Lockup_SyntheticLock] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Osmosis_Lockup_AccountLockedLongerDurationRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -1166,6 +1190,70 @@ extension Osmosis_Lockup_LockedResponse: SwiftProtobuf.Message, SwiftProtobuf._M
 
   static func ==(lhs: Osmosis_Lockup_LockedResponse, rhs: Osmosis_Lockup_LockedResponse) -> Bool {
     if lhs._lock != rhs._lock {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Osmosis_Lockup_SyntheticLockupsByLockupIDRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".SyntheticLockupsByLockupIDRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "lock_id"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.lockID) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.lockID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.lockID, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Osmosis_Lockup_SyntheticLockupsByLockupIDRequest, rhs: Osmosis_Lockup_SyntheticLockupsByLockupIDRequest) -> Bool {
+    if lhs.lockID != rhs.lockID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Osmosis_Lockup_SyntheticLockupsByLockupIDResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".SyntheticLockupsByLockupIDResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "synthetic_locks"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.syntheticLocks) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.syntheticLocks.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.syntheticLocks, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Osmosis_Lockup_SyntheticLockupsByLockupIDResponse, rhs: Osmosis_Lockup_SyntheticLockupsByLockupIDResponse) -> Bool {
+    if lhs.syntheticLocks != rhs.syntheticLocks {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

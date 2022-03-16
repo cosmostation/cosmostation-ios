@@ -24,7 +24,7 @@ class Swap3ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var btnConfirm: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mPool: Osmosis_Gamm_V1beta1_BalancerPool!
+    var mPool: Osmosis_Gamm_Poolmodels_Balancer_Pool!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -143,6 +143,58 @@ struct Osmosis_Lockup_QueryCondition {
   fileprivate var _timestamp: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
 }
 
+/// SyntheticLock is a single unit of synthetic lockup
+/// TODO: Change this to have
+/// * underlying_lock_id
+/// * synthetic_coin
+/// * end_time
+/// * duration
+/// * owner
+/// We then index synthetic locks by the denom, just like we do with normal
+/// locks. Ideally we even get an interface, so we can re-use that same logic.
+/// I currently have no idea how reward distribution is supposed to be working...
+/// EVENTUALLY
+/// we make a "constrained_coin" field, which is what the current "coins" field
+/// is. Constrained coin field can be a #post-v7 feature, since we aren't
+/// allowing partial unlocks of synthetic lockups.
+struct Osmosis_Lockup_SyntheticLock {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// underlying native lockup id for this synthetic lockup
+  var underlyingLockID: UInt64 = 0
+
+  var synthDenom: String = String()
+
+  /// used for unbonding synthetic lockups, for active synthetic lockups, this
+  /// value is set to uninitialized value
+  var endTime: SwiftProtobuf.Google_Protobuf_Timestamp {
+    get {return _endTime ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
+    set {_endTime = newValue}
+  }
+  /// Returns true if `endTime` has been explicitly set.
+  var hasEndTime: Bool {return self._endTime != nil}
+  /// Clears the value of `endTime`. Subsequent reads from it will return its default value.
+  mutating func clearEndTime() {self._endTime = nil}
+
+  var duration: SwiftProtobuf.Google_Protobuf_Duration {
+    get {return _duration ?? SwiftProtobuf.Google_Protobuf_Duration()}
+    set {_duration = newValue}
+  }
+  /// Returns true if `duration` has been explicitly set.
+  var hasDuration: Bool {return self._duration != nil}
+  /// Clears the value of `duration`. Subsequent reads from it will return its default value.
+  mutating func clearDuration() {self._duration = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _endTime: SwiftProtobuf.Google_Protobuf_Timestamp? = nil
+  fileprivate var _duration: SwiftProtobuf.Google_Protobuf_Duration? = nil
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "osmosis.lockup"
@@ -255,6 +307,56 @@ extension Osmosis_Lockup_QueryCondition: SwiftProtobuf.Message, SwiftProtobuf._M
     if lhs.denom != rhs.denom {return false}
     if lhs._duration != rhs._duration {return false}
     if lhs._timestamp != rhs._timestamp {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Osmosis_Lockup_SyntheticLock: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".SyntheticLock"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "underlying_lock_id"),
+    2: .standard(proto: "synth_denom"),
+    3: .standard(proto: "end_time"),
+    4: .same(proto: "duration"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularUInt64Field(value: &self.underlyingLockID) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.synthDenom) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._endTime) }()
+      case 4: try { try decoder.decodeSingularMessageField(value: &self._duration) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.underlyingLockID != 0 {
+      try visitor.visitSingularUInt64Field(value: self.underlyingLockID, fieldNumber: 1)
+    }
+    if !self.synthDenom.isEmpty {
+      try visitor.visitSingularStringField(value: self.synthDenom, fieldNumber: 2)
+    }
+    if let v = self._endTime {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    }
+    if let v = self._duration {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Osmosis_Lockup_SyntheticLock, rhs: Osmosis_Lockup_SyntheticLock) -> Bool {
+    if lhs.underlyingLockID != rhs.underlyingLockID {return false}
+    if lhs.synthDenom != rhs.synthDenom {return false}
+    if lhs._endTime != rhs._endTime {return false}
+    if lhs._duration != rhs._duration {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

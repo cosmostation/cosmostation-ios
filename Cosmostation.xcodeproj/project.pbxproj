@@ -17,7 +17,6 @@
 		040FA7A7275F55C200229F6F /* panacea_burn_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA436275F558600229F6F /* panacea_burn_v2_query.grpc.swift */; };
 		040FA7A8275F55C200229F6F /* akash_escrow_v1beta2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA437275F558600229F6F /* akash_escrow_v1beta2_query.pb.swift */; };
 		040FA7A9275F55C200229F6F /* secret_registration_v1beta1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA438275F558600229F6F /* secret_registration_v1beta1_types.pb.swift */; };
-		040FA7AA275F55C200229F6F /* osmosis_incentives_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA439275F558600229F6F /* osmosis_incentives_tx.pb.swift */; };
 		040FA7AB275F55C200229F6F /* sentinel_plan_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43A275F558600229F6F /* sentinel_plan_v1_genesis.pb.swift */; };
 		040FA7AC275F55C200229F6F /* umee_oracle_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43B275F558600229F6F /* umee_oracle_v1beta1_genesis.pb.swift */; };
 		040FA7AD275F55C200229F6F /* desmos_fees_v1beta1_min_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43C275F558700229F6F /* desmos_fees_v1beta1_min_fee.pb.swift */; };
@@ -25,7 +24,6 @@
 		040FA7AF275F55C200229F6F /* panacea_token_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43E275F558700229F6F /* panacea_token_v2_genesis.pb.swift */; };
 		040FA7B0275F55C200229F6F /* panacea_aol_v2_topic.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43F275F558700229F6F /* panacea_aol_v2_topic.pb.swift */; };
 		040FA7B1275F55C200229F6F /* starname_iov_escrow_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA440275F558700229F6F /* starname_iov_escrow_v1beta1_params.pb.swift */; };
-		040FA7B2275F55C200229F6F /* osmosis_claim_v1beta1_claim.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA441275F558700229F6F /* osmosis_claim_v1beta1_claim.pb.swift */; };
 		040FA7B3275F55C200229F6F /* iris_mod_farm_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA442275F558700229F6F /* iris_mod_farm_genesis.pb.swift */; };
 		040FA7B4275F55C200229F6F /* rizon_treasury_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA443275F558700229F6F /* rizon_treasury_query.grpc.swift */; };
 		040FA7B5275F55C200229F6F /* iscn_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA444275F558700229F6F /* iscn_tx.pb.swift */; };
@@ -140,13 +138,11 @@
 		040FA822275F55C200229F6F /* em_issuer_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B1275F558E00229F6F /* em_issuer_v1_tx.grpc.swift */; };
 		040FA823275F55C200229F6F /* em_issuer_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B2275F558E00229F6F /* em_issuer_v1_tx.pb.swift */; };
 		040FA824275F55C200229F6F /* tendermint_crypto_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B3275F558E00229F6F /* tendermint_crypto_keys.pb.swift */; };
-		040FA825275F55C200229F6F /* osmosis_gamm_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B4275F558E00229F6F /* osmosis_gamm_v1beta1_tx.grpc.swift */; };
 		040FA826275F55C200229F6F /* iris_mint_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B5275F558E00229F6F /* iris_mint_genesis.pb.swift */; };
 		040FA827275F55C200229F6F /* iris_mod_nft_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B6275F558E00229F6F /* iris_mod_nft_query.pb.swift */; };
 		040FA828275F55C200229F6F /* bcna_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B7275F558E00229F6F /* bcna_query.grpc.swift */; };
 		040FA829275F55C200229F6F /* konstellation_oracle_admin_addr.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B8275F558E00229F6F /* konstellation_oracle_admin_addr.pb.swift */; };
 		040FA82A275F55C200229F6F /* umee_peggy_v1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4B9275F558E00229F6F /* umee_peggy_v1_events.pb.swift */; };
-		040FA82B275F55C200229F6F /* osmosis_txfees_v1beta1_feetoken.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4BA275F558E00229F6F /* osmosis_txfees_v1beta1_feetoken.pb.swift */; };
 		040FA82C275F55C200229F6F /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4BB275F558E00229F6F /* cosmos_base_tendermint_v1beta1_query.pb.swift */; };
 		040FA82D275F55C200229F6F /* umee_peggy_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4BC275F558E00229F6F /* umee_peggy_v1_query.pb.swift */; };
 		040FA82E275F55C200229F6F /* umee_peggy_v1_msgs.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4BD275F558F00229F6F /* umee_peggy_v1_msgs.grpc.swift */; };
@@ -170,7 +166,6 @@
 		040FA840275F55C200229F6F /* konstellation_oracle_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4CF275F559000229F6F /* konstellation_oracle_params.pb.swift */; };
 		040FA841275F55C200229F6F /* ixo_did_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D0275F559000229F6F /* ixo_did_tx.grpc.swift */; };
 		040FA842275F55C200229F6F /* regen_group_v1alpha1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D1275F559000229F6F /* regen_group_v1alpha1_events.pb.swift */; };
-		040FA843275F55C200229F6F /* osmosis_lockup_lock.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D2275F559000229F6F /* osmosis_lockup_lock.pb.swift */; };
 		040FA844275F55C200229F6F /* umee_peggy_v1_batch.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D3275F559000229F6F /* umee_peggy_v1_batch.pb.swift */; };
 		040FA845275F55C200229F6F /* comdex_oracle_v1beta1_querier.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D4275F559000229F6F /* comdex_oracle_v1beta1_querier.grpc.swift */; };
 		040FA846275F55C200229F6F /* desmos_profiles_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D5275F559000229F6F /* desmos_profiles_v1beta1_query.pb.swift */; };
@@ -185,15 +180,12 @@
 		040FA84F275F55C200229F6F /* shentu_cvm_v1alpha1_cvm.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4DE275F559100229F6F /* shentu_cvm_v1alpha1_cvm.pb.swift */; };
 		040FA850275F55C200229F6F /* comdex_asset_v1beta1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4DF275F559100229F6F /* comdex_asset_v1beta1_events.pb.swift */; };
 		040FA851275F55C200229F6F /* injective_ocr_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E0275F559100229F6F /* injective_ocr_v1beta1_tx.pb.swift */; };
-		040FA852275F55C200229F6F /* osmosis_incentives_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E1275F559100229F6F /* osmosis_incentives_params.pb.swift */; };
 		040FA853275F55C200229F6F /* desmos_profiles_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E2275F559100229F6F /* desmos_profiles_v1beta1_genesis.pb.swift */; };
 		040FA854275F55C200229F6F /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E3275F559100229F6F /* desmos_profiles_v1beta1_models_app_links.pb.swift */; };
-		040FA855275F55C200229F6F /* osmosis_gamm_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E4275F559100229F6F /* osmosis_gamm_v1beta1_query.grpc.swift */; };
 		040FA856275F55C200229F6F /* regen_group_v1alpha1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E5275F559100229F6F /* regen_group_v1alpha1_query.pb.swift */; };
 		040FA857275F55C200229F6F /* sentinel_session_v1_querier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E6275F559100229F6F /* sentinel_session_v1_querier.pb.swift */; };
 		040FA858275F55C200229F6F /* desmos_profiles_v1beta1_msg_server.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E7275F559100229F6F /* desmos_profiles_v1beta1_msg_server.pb.swift */; };
 		040FA859275F55C200229F6F /* stargaze_alloc_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E8275F559100229F6F /* stargaze_alloc_v1beta1_genesis.pb.swift */; };
-		040FA85A275F55C200229F6F /* osmosis_gamm_v1beta1_balancerPool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4E9275F559100229F6F /* osmosis_gamm_v1beta1_balancerPool.pb.swift */; };
 		040FA85B275F55C200229F6F /* cosmos_staking_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4EA275F559100229F6F /* cosmos_staking_v1beta1_tx.pb.swift */; };
 		040FA85C275F55C200229F6F /* desmos_profiles_v1beta1_query_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4EB275F559100229F6F /* desmos_profiles_v1beta1_query_chain_links.pb.swift */; };
 		040FA85D275F55C200229F6F /* starname_iov_configuration_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4EC275F559100229F6F /* starname_iov_configuration_v1beta1_query.pb.swift */; };
@@ -221,7 +213,6 @@
 		040FA873275F55C200229F6F /* desmos_subspaces_v1beta1_msgs.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA502275F559300229F6F /* desmos_subspaces_v1beta1_msgs.grpc.swift */; };
 		040FA874275F55C200229F6F /* sentinel_provider_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA503275F559300229F6F /* sentinel_provider_v1_genesis.pb.swift */; };
 		040FA875275F55C200229F6F /* injective_peggy_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA504275F559300229F6F /* injective_peggy_v1_query.pb.swift */; };
-		040FA876275F55C200229F6F /* osmosis_claim_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA505275F559300229F6F /* osmosis_claim_v1beta1_query.pb.swift */; };
 		040FA877275F55C200229F6F /* cosmos_upgrade_v1beta1_upgrade.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA506275F559300229F6F /* cosmos_upgrade_v1beta1_upgrade.pb.swift */; };
 		040FA878275F55C200229F6F /* comdex_asset_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA507275F559300229F6F /* comdex_asset_v1beta1_genesis.pb.swift */; };
 		040FA879275F55C200229F6F /* injective_types_v1beta1_tx_ext.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA508275F559300229F6F /* injective_types_v1beta1_tx_ext.pb.swift */; };
@@ -235,7 +226,6 @@
 		040FA881275F55C200229F6F /* cosmos_crisis_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA510275F559400229F6F /* cosmos_crisis_v1beta1_genesis.pb.swift */; };
 		040FA882275F55C200229F6F /* em_inflation_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA511275F559400229F6F /* em_inflation_v1_query.pb.swift */; };
 		040FA883275F55C200229F6F /* regen_data_v1alpha2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA512275F559400229F6F /* regen_data_v1alpha2_genesis.pb.swift */; };
-		040FA884275F55C200229F6F /* osmosis_epochs_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA513275F559400229F6F /* osmosis_epochs_query.grpc.swift */; };
 		040FA885275F55C200229F6F /* akash_deployment_v1beta2_groupmsg.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA514275F559400229F6F /* akash_deployment_v1beta2_groupmsg.pb.swift */; };
 		040FA886275F55C200229F6F /* starname_iov_escrow_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA515275F559400229F6F /* starname_iov_escrow_v1beta1_genesis.pb.swift */; };
 		040FA887275F55C200229F6F /* umee_leverage_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA516275F559400229F6F /* umee_leverage_v1beta1_genesis.pb.swift */; };
@@ -253,15 +243,12 @@
 		040FA893275F55C200229F6F /* lum_airdrop_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA522275F559500229F6F /* lum_airdrop_params.pb.swift */; };
 		040FA894275F55C200229F6F /* regen_ecocredit_v1alpha2_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA523275F559500229F6F /* regen_ecocredit_v1alpha2_types.pb.swift */; };
 		040FA895275F55C200229F6F /* gravity_v1_msgs.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA524275F559500229F6F /* gravity_v1_msgs.pb.swift */; };
-		040FA896275F55C200229F6F /* osmosis_epochs_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA525275F559500229F6F /* osmosis_epochs_query.pb.swift */; };
 		040FA897275F55C200229F6F /* ixo_bonds_bonds.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA526275F559500229F6F /* ixo_bonds_bonds.pb.swift */; };
 		040FA898275F55C200229F6F /* comdex_asset_v1beta1_msg.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA527275F559500229F6F /* comdex_asset_v1beta1_msg.grpc.swift */; };
 		040FA899275F55C200229F6F /* injective_peggy_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA528275F559500229F6F /* injective_peggy_v1_types.pb.swift */; };
 		040FA89A275F55C200229F6F /* sentinel_subscription_v1_querier.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA529275F559500229F6F /* sentinel_subscription_v1_querier.grpc.swift */; };
 		040FA89B275F55C200229F6F /* sentinel_vpn_v1_querier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA52A275F559500229F6F /* sentinel_vpn_v1_querier.pb.swift */; };
 		040FA89C275F55C200229F6F /* cosmos_distribution_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA52B275F559500229F6F /* cosmos_distribution_v1beta1_query.pb.swift */; };
-		040FA89D275F55C200229F6F /* osmosis_mint_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA52C275F559500229F6F /* osmosis_mint_v1beta1_query.grpc.swift */; };
-		040FA89E275F55C200229F6F /* osmosis_lockup_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA52D275F559500229F6F /* osmosis_lockup_genesis.pb.swift */; };
 		040FA89F275F55C200229F6F /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA52E275F559500229F6F /* cosmos_slashing_v1beta1_tx.grpc.swift */; };
 		040FA8A0275F55C200229F6F /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA52F275F559600229F6F /* cosmos_staking_v1beta1_genesis.pb.swift */; };
 		040FA8A1275F55C200229F6F /* cosmos_staking_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA530275F559600229F6F /* cosmos_staking_v1beta1_query.pb.swift */; };
@@ -303,7 +290,6 @@
 		040FA8C5275F55C200229F6F /* sentinel_plan_v1_msg.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA554275F559800229F6F /* sentinel_plan_v1_msg.grpc.swift */; };
 		040FA8C6275F55C200229F6F /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA555275F559800229F6F /* cosmos_staking_v1beta1_tx.grpc.swift */; };
 		040FA8C7275F55C200229F6F /* cosmos_base_snapshots_v1beta1_snapshot.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA556275F559800229F6F /* cosmos_base_snapshots_v1beta1_snapshot.pb.swift */; };
-		040FA8C8275F55C200229F6F /* osmosis_incentives_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA557275F559800229F6F /* osmosis_incentives_query.pb.swift */; };
 		040FA8C9275F55C200229F6F /* shentu_oracle_v1alpha1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA558275F559800229F6F /* shentu_oracle_v1alpha1_tx.pb.swift */; };
 		040FA8CA275F55C200229F6F /* tendermint_farming_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA559275F559800229F6F /* tendermint_farming_v1beta1_tx.pb.swift */; };
 		040FA8CB275F55C200229F6F /* injective_ocr_v1beta1_ocr.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA55A275F559800229F6F /* injective_ocr_v1beta1_ocr.pb.swift */; };
@@ -319,7 +305,6 @@
 		040FA8D5275F55C200229F6F /* shentu_shield_v1alpha1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA564275F559900229F6F /* shentu_shield_v1alpha1_query.pb.swift */; };
 		040FA8D6275F55C200229F6F /* cosmos_slashing_v1beta1_slashing.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA565275F559900229F6F /* cosmos_slashing_v1beta1_slashing.pb.swift */; };
 		040FA8D7275F55C200229F6F /* akash_deployment_v1beta2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA566275F559900229F6F /* akash_deployment_v1beta2_genesis.pb.swift */; };
-		040FA8D8275F55C200229F6F /* osmosis_epochs_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA567275F559900229F6F /* osmosis_epochs_genesis.pb.swift */; };
 		040FA8D9275F55C200229F6F /* starname_cosmwasm_wasm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA568275F559900229F6F /* starname_cosmwasm_wasm_v1_query.pb.swift */; };
 		040FA8DA275F55C200229F6F /* akash_provider_v1beta2_provider.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA569275F559900229F6F /* akash_provider_v1beta2_provider.pb.swift */; };
 		040FA8DB275F55C200229F6F /* desmos_profiles_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA56A275F559900229F6F /* desmos_profiles_v1beta1_query.grpc.swift */; };
@@ -340,8 +325,6 @@
 		040FA8EA275F55C200229F6F /* tendermint_farming_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA579275F559A00229F6F /* tendermint_farming_v1beta1_query.pb.swift */; };
 		040FA8EB275F55C200229F6F /* bitsong_fantoken_v1beta1_fantoken.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA57A275F559A00229F6F /* bitsong_fantoken_v1beta1_fantoken.pb.swift */; };
 		040FA8EC275F55C200229F6F /* bitsong_auction_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA57B275F559A00229F6F /* bitsong_auction_v1beta1_tx.grpc.swift */; };
-		040FA8ED275F55C200229F6F /* osmosis_mint_v1beta1_mint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA57C275F559B00229F6F /* osmosis_mint_v1beta1_mint.pb.swift */; };
-		040FA8EE275F55C200229F6F /* osmosis_gamm_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA57D275F559B00229F6F /* osmosis_gamm_v1beta1_tx.pb.swift */; };
 		040FA8EF275F55C200229F6F /* ibc_core_channel_v1_channel.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA57E275F559B00229F6F /* ibc_core_channel_v1_channel.pb.swift */; };
 		040FA8F0275F55C200229F6F /* injective_oracle_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA57F275F559B00229F6F /* injective_oracle_v1beta1_query.grpc.swift */; };
 		040FA8F1275F55C200229F6F /* akash_audit_v1beta2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA580275F559B00229F6F /* akash_audit_v1beta2_genesis.pb.swift */; };
@@ -390,13 +373,11 @@
 		040FA91C275F55C300229F6F /* akash_deployment_v1beta2_service.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5AB275F559E00229F6F /* akash_deployment_v1beta2_service.grpc.swift */; };
 		040FA91D275F55C300229F6F /* rizon_tokenswap_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5AC275F559E00229F6F /* rizon_tokenswap_params.pb.swift */; };
 		040FA91E275F55C300229F6F /* ixo_payments_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5AD275F559E00229F6F /* ixo_payments_query.grpc.swift */; };
-		040FA91F275F55C300229F6F /* osmosis_pool-incentives_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5AE275F559E00229F6F /* osmosis_pool-incentives_v1beta1_query.pb.swift */; };
 		040FA920275F55C300229F6F /* cosmos_base_store_v1beta1_listening.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5AF275F559E00229F6F /* cosmos_base_store_v1beta1_listening.pb.swift */; };
 		040FA921275F55C300229F6F /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B0275F559E00229F6F /* desmos_profiles_v1beta1_models_profile.pb.swift */; };
 		040FA922275F55C300229F6F /* cosmos_authz_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B1275F559E00229F6F /* cosmos_authz_v1beta1_tx.pb.swift */; };
 		040FA923275F55C300229F6F /* umee_leverage_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B2275F559E00229F6F /* umee_leverage_v1beta1_gov.pb.swift */; };
 		040FA924275F55C300229F6F /* cosmos_gov_v1beta2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B3275F559E00229F6F /* cosmos_gov_v1beta2_tx.grpc.swift */; };
-		040FA925275F55C300229F6F /* osmosis_pool-incentives_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B4275F559E00229F6F /* osmosis_pool-incentives_v1beta1_query.grpc.swift */; };
 		040FA926275F55C300229F6F /* comdex_oracle_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B5275F559E00229F6F /* comdex_oracle_v1beta1_params.pb.swift */; };
 		040FA927275F55C300229F6F /* cryptoorg_nft_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B6275F559E00229F6F /* cryptoorg_nft_v1_query.grpc.swift */; };
 		040FA928275F55C300229F6F /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B7275F559E00229F6F /* cosmos_nft_v1beta1_genesis.pb.swift */; };
@@ -412,7 +393,6 @@
 		040FA932275F55C300229F6F /* tendermint_version_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C1275F559F00229F6F /* tendermint_version_types.pb.swift */; };
 		040FA933275F55C300229F6F /* ibc_core_client_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C2275F559F00229F6F /* ibc_core_client_v1_query.pb.swift */; };
 		040FA934275F55C300229F6F /* cosmos_nft_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C3275F559F00229F6F /* cosmos_nft_v1beta1_query.grpc.swift */; };
-		040FA935275F55C300229F6F /* osmosis_pool-incentives_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C4275F559F00229F6F /* osmosis_pool-incentives_v1beta1_gov.pb.swift */; };
 		040FA936275F55C300229F6F /* desmos_profiles_v1beta1_msgs_relationships.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C5275F559F00229F6F /* desmos_profiles_v1beta1_msgs_relationships.pb.swift */; };
 		040FA937275F55C300229F6F /* cosmos_bank_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C6275F559F00229F6F /* cosmos_bank_v1beta1_tx.pb.swift */; };
 		040FA938275F55C300229F6F /* cosmos_slashing_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5C7275F55A000229F6F /* cosmos_slashing_v1beta1_query.pb.swift */; };
@@ -437,7 +417,6 @@
 		040FA94B275F55C300229F6F /* bitsong_auction_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5DA275F55A100229F6F /* bitsong_auction_v1beta1_query.pb.swift */; };
 		040FA94C275F55C300229F6F /* sentinel_swap_v1_msg.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5DB275F55A100229F6F /* sentinel_swap_v1_msg.grpc.swift */; };
 		040FA94D275F55C300229F6F /* iris_mod_oracle_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5DC275F55A100229F6F /* iris_mod_oracle_tx.grpc.swift */; };
-		040FA94E275F55C300229F6F /* osmosis_incentives_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5DD275F55A100229F6F /* osmosis_incentives_query.grpc.swift */; };
 		040FA94F275F55C300229F6F /* bcna_supplychain.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5DE275F55A100229F6F /* bcna_supplychain.pb.swift */; };
 		040FA950275F55C300229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5DF275F55A100229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift */; };
 		040FA951275F55C300229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E0275F55A100229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift */; };
@@ -452,7 +431,6 @@
 		040FA95A275F55C300229F6F /* comdex_oracle_v1beta1_msg.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E9275F55A200229F6F /* comdex_oracle_v1beta1_msg.grpc.swift */; };
 		040FA95B275F55C300229F6F /* ibc_core_client_v1_client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5EA275F55A200229F6F /* ibc_core_client_v1_client.pb.swift */; };
 		040FA95C275F55C300229F6F /* shentu_gov_v1alpha1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5EB275F55A200229F6F /* shentu_gov_v1alpha1_tx.pb.swift */; };
-		040FA95D275F55C300229F6F /* osmosis_pool-incentives_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5EC275F55A200229F6F /* osmosis_pool-incentives_v1beta1_genesis.pb.swift */; };
 		040FA95E275F55C300229F6F /* starname_iov_escrow_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5ED275F55A200229F6F /* starname_iov_escrow_v1beta1_query.grpc.swift */; };
 		040FA95F275F55C300229F6F /* comdex_vault_v1beta1_msg.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5EE275F55A200229F6F /* comdex_vault_v1beta1_msg.grpc.swift */; };
 		040FA960275F55C300229F6F /* sifnode_ethbridge_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5EF275F55A200229F6F /* sifnode_ethbridge_v1_tx.pb.swift */; };
@@ -481,7 +459,6 @@
 		040FA977275F55C300229F6F /* injective_peggy_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA606275F55A400229F6F /* injective_peggy_v1_query.grpc.swift */; };
 		040FA978275F55C300229F6F /* injective_insurance_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA607275F55A400229F6F /* injective_insurance_v1beta1_genesis.pb.swift */; };
 		040FA979275F55C300229F6F /* tendermint_libs_bits_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA608275F55A400229F6F /* tendermint_libs_bits_types.pb.swift */; };
-		040FA97A275F55C300229F6F /* osmosis_gamm_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA609275F55A400229F6F /* osmosis_gamm_v1beta1_query.pb.swift */; };
 		040FA97B275F55C300229F6F /* ixo_did_diddoc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA60A275F55A400229F6F /* ixo_did_diddoc.pb.swift */; };
 		040FA97C275F55C300229F6F /* iris_mod_htlc_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA60B275F55A400229F6F /* iris_mod_htlc_tx.pb.swift */; };
 		040FA97D275F55C300229F6F /* iris_mod_record_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA60C275F55A400229F6F /* iris_mod_record_tx.grpc.swift */; };
@@ -498,7 +475,6 @@
 		040FA988275F55C300229F6F /* iris_mod_oracle_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA617275F55A500229F6F /* iris_mod_oracle_query.pb.swift */; };
 		040FA989275F55C300229F6F /* injective_insurance_v1beta1_insurance.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA618275F55A500229F6F /* injective_insurance_v1beta1_insurance.pb.swift */; };
 		040FA98A275F55C300229F6F /* injective_ocr_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA619275F55A500229F6F /* injective_ocr_v1beta1_tx.grpc.swift */; };
-		040FA98B275F55C300229F6F /* osmosis_pool-incentives_v1beta1_incentives.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA61A275F55A500229F6F /* osmosis_pool-incentives_v1beta1_incentives.pb.swift */; };
 		040FA98C275F55C300229F6F /* ibc_core_channel_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA61B275F55A500229F6F /* ibc_core_channel_v1_genesis.pb.swift */; };
 		040FA98D275F55C300229F6F /* iris_mod_token_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA61C275F55A500229F6F /* iris_mod_token_tx.pb.swift */; };
 		040FA98E275F55C300229F6F /* akash_provider_v1beta2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA61D275F55A500229F6F /* akash_provider_v1beta2_query.pb.swift */; };
@@ -521,7 +497,6 @@
 		040FA99F275F55C300229F6F /* iris_mod_coinswap_coinswap.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA62E275F55A700229F6F /* iris_mod_coinswap_coinswap.pb.swift */; };
 		040FA9A0275F55C300229F6F /* bcna_bitcannaid.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA62F275F55A700229F6F /* bcna_bitcannaid.pb.swift */; };
 		040FA9A1275F55C300229F6F /* ibc_applications_transfer_v2_packet.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA630275F55A700229F6F /* ibc_applications_transfer_v2_packet.pb.swift */; };
-		040FA9A2275F55C300229F6F /* osmosis_incentives_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA631275F55A700229F6F /* osmosis_incentives_tx.grpc.swift */; };
 		040FA9A3275F55C300229F6F /* cosmos_tx_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA632275F55A700229F6F /* cosmos_tx_v1beta1_tx.pb.swift */; };
 		040FA9A4275F55C300229F6F /* cosmos_nft_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA633275F55A700229F6F /* cosmos_nft_v1beta1_query.pb.swift */; };
 		040FA9A5275F55C300229F6F /* shentu_oracle_v1alpha1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA634275F55A700229F6F /* shentu_oracle_v1alpha1_genesis.pb.swift */; };
@@ -565,12 +540,10 @@
 		040FA9CB275F55C300229F6F /* iscn_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA65A275F55AA00229F6F /* iscn_genesis.pb.swift */; };
 		040FA9CC275F55C300229F6F /* ixo_payments_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA65B275F55AA00229F6F /* ixo_payments_tx.pb.swift */; };
 		040FA9CD275F55C300229F6F /* cosmos_crypto_keyring_v1_record.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA65C275F55AA00229F6F /* cosmos_crypto_keyring_v1_record.pb.swift */; };
-		040FA9CE275F55C300229F6F /* osmosis_lockup_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA65D275F55AA00229F6F /* osmosis_lockup_query.pb.swift */; };
 		040FA9CF275F55C300229F6F /* iris_mod_nft_nft.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA65E275F55AA00229F6F /* iris_mod_nft_nft.pb.swift */; };
 		040FA9D0275F55C300229F6F /* em_issuer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA65F275F55AA00229F6F /* em_issuer_v1_query.pb.swift */; };
 		040FA9D1275F55C300229F6F /* regen_ecocredit_v1alpha2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA660275F55AA00229F6F /* regen_ecocredit_v1alpha2_tx.pb.swift */; };
 		040FA9D2275F55C300229F6F /* comdex_asset_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA661275F55AA00229F6F /* comdex_asset_v1beta1_gov.pb.swift */; };
-		040FA9D3275F55C300229F6F /* osmosis_gamm_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA662275F55AA00229F6F /* osmosis_gamm_v1beta1_genesis.pb.swift */; };
 		040FA9D4275F55C300229F6F /* akash_base_v1beta1_resourcevalue.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA663275F55AA00229F6F /* akash_base_v1beta1_resourcevalue.pb.swift */; };
 		040FA9D5275F55C300229F6F /* injective_types_v1beta1_account.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA664275F55AA00229F6F /* injective_types_v1beta1_account.pb.swift */; };
 		040FA9D6275F55C300229F6F /* lum_beam_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA665275F55AA00229F6F /* lum_beam_query.grpc.swift */; };
@@ -601,7 +574,6 @@
 		040FA9EF275F55C300229F6F /* akash_base_v1beta1_resource.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA67E275F55AC00229F6F /* akash_base_v1beta1_resource.pb.swift */; };
 		040FA9F0275F55C300229F6F /* google_api_annotations.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA67F275F55AC00229F6F /* google_api_annotations.pb.swift */; };
 		040FA9F1275F55C300229F6F /* bitsong_auction_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA680275F55AC00229F6F /* bitsong_auction_v1beta1_genesis.pb.swift */; };
-		040FA9F2275F55C300229F6F /* osmosis_lockup_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA681275F55AC00229F6F /* osmosis_lockup_tx.pb.swift */; };
 		040FA9F3275F55C300229F6F /* juno_mint_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA682275F55AC00229F6F /* juno_mint_query.grpc.swift */; };
 		040FA9F4275F55C300229F6F /* em_authority_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA683275F55AC00229F6F /* em_authority_v1_query.pb.swift */; };
 		040FA9F5275F55C300229F6F /* sentinel_plan_v1_querier.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA684275F55AC00229F6F /* sentinel_plan_v1_querier.grpc.swift */; };
@@ -611,7 +583,6 @@
 		040FA9F9275F55C300229F6F /* stargaze_alloc_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA688275F55AD00229F6F /* stargaze_alloc_v1beta1_tx.pb.swift */; };
 		040FA9FA275F55C300229F6F /* stargaze_mint_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA689275F55AD00229F6F /* stargaze_mint_v1beta1_genesis.pb.swift */; };
 		040FA9FB275F55C300229F6F /* sentinel_node_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA68A275F55AD00229F6F /* sentinel_node_v1_genesis.pb.swift */; };
-		040FA9FC275F55C300229F6F /* osmosis_mint_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA68B275F55AD00229F6F /* osmosis_mint_v1beta1_genesis.pb.swift */; };
 		040FA9FD275F55C300229F6F /* akash_base_v1beta2_resource.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA68C275F55AD00229F6F /* akash_base_v1beta2_resource.pb.swift */; };
 		040FA9FE275F55C300229F6F /* panacea_aol_v2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA68D275F55AD00229F6F /* panacea_aol_v2_query.grpc.swift */; };
 		040FA9FF275F55C300229F6F /* iris_mod_random_random.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA68E275F55AD00229F6F /* iris_mod_random_random.pb.swift */; };
@@ -627,7 +598,6 @@
 		040FAA09275F55C300229F6F /* tendermint_farming_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA698275F55AE00229F6F /* tendermint_farming_v1beta1_genesis.pb.swift */; };
 		040FAA0A275F55C300229F6F /* injective_oracle_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA699275F55AE00229F6F /* injective_oracle_v1beta1_tx.grpc.swift */; };
 		040FAA0B275F55C300229F6F /* rizon_treasury_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA69A275F55AE00229F6F /* rizon_treasury_tx.pb.swift */; };
-		040FAA0C275F55C300229F6F /* osmosis_txfees_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA69B275F55AE00229F6F /* osmosis_txfees_v1beta1_query.pb.swift */; };
 		040FAA0D275F55C300229F6F /* secret_registration_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA69C275F55AE00229F6F /* secret_registration_v1beta1_query.grpc.swift */; };
 		040FAA0E275F55C300229F6F /* akash_escrow_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA69D275F55AE00229F6F /* akash_escrow_v1beta1_query.pb.swift */; };
 		040FAA0F275F55C300229F6F /* panacea_did_v2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA69E275F55AE00229F6F /* panacea_did_v2_tx.grpc.swift */; };
@@ -696,7 +666,6 @@
 		040FAA4E275F55C400229F6F /* panacea_aol_v2_writer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6DD275F55B300229F6F /* panacea_aol_v2_writer.pb.swift */; };
 		040FAA4F275F55C400229F6F /* em_issuer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6DE275F55B300229F6F /* em_issuer_v1_query.grpc.swift */; };
 		040FAA50275F55C400229F6F /* iris_mod_service_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6DF275F55B300229F6F /* iris_mod_service_tx.grpc.swift */; };
-		040FAA51275F55C400229F6F /* osmosis_incentives_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E0275F55B300229F6F /* osmosis_incentives_genesis.pb.swift */; };
 		040FAA52275F55C400229F6F /* comdex_vault_v1beta1_querier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E1275F55B300229F6F /* comdex_vault_v1beta1_querier.pb.swift */; };
 		040FAA53275F55C400229F6F /* umee_peggy_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E2275F55B300229F6F /* umee_peggy_v1_genesis.pb.swift */; };
 		040FAA54275F55C400229F6F /* injective_exchange_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E3275F55B300229F6F /* injective_exchange_v1beta1_query.grpc.swift */; };
@@ -726,7 +695,6 @@
 		040FAA6C275F55C400229F6F /* cosmos_crypto_multisig_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6FB275F55B500229F6F /* cosmos_crypto_multisig_keys.pb.swift */; };
 		040FAA6D275F55C400229F6F /* cosmos_gov_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6FC275F55B500229F6F /* cosmos_gov_v1beta1_gov.pb.swift */; };
 		040FAA6E275F55C400229F6F /* panacea_aol_v2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6FD275F55B500229F6F /* panacea_aol_v2_genesis.pb.swift */; };
-		040FAA6F275F55C400229F6F /* osmosis_mint_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6FE275F55B500229F6F /* osmosis_mint_v1beta1_query.pb.swift */; };
 		040FAA70275F55C400229F6F /* comdex_vault_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6FF275F55B500229F6F /* comdex_vault_v1beta1_genesis.pb.swift */; };
 		040FAA71275F55C400229F6F /* injective_oracle_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA700275F55B500229F6F /* injective_oracle_v1beta1_query.pb.swift */; };
 		040FAA72275F55C400229F6F /* sentinel_subscription_v1_msg.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA701275F55B600229F6F /* sentinel_subscription_v1_msg.pb.swift */; };
@@ -735,14 +703,12 @@
 		040FAA75275F55C400229F6F /* rizon_treasury_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA704275F55B600229F6F /* rizon_treasury_params.pb.swift */; };
 		040FAA76275F55C400229F6F /* akash_market_v1beta2_bid.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA705275F55B600229F6F /* akash_market_v1beta2_bid.pb.swift */; };
 		040FAA77275F55C400229F6F /* starname_cosmwasm_wasm_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA706275F55B600229F6F /* starname_cosmwasm_wasm_v1_types.pb.swift */; };
-		040FAA78275F55C400229F6F /* osmosis_txfees_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA707275F55B600229F6F /* osmosis_txfees_v1beta1_gov.pb.swift */; };
 		040FAA79275F55C400229F6F /* akash_provider_v1beta2_provider.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA708275F55B600229F6F /* akash_provider_v1beta2_provider.grpc.swift */; };
 		040FAA7A275F55C400229F6F /* regen_ecocredit_v1alpha2_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA709275F55B600229F6F /* regen_ecocredit_v1alpha2_events.pb.swift */; };
 		040FAA7B275F55C400229F6F /* umee_leverage_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA70A275F55B600229F6F /* umee_leverage_v1beta1_query.pb.swift */; };
 		040FAA7C275F55C400229F6F /* ixo_bonds_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA70B275F55B600229F6F /* ixo_bonds_tx.pb.swift */; };
 		040FAA7D275F55C400229F6F /* sentinel_session_v1_session.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA70C275F55B600229F6F /* sentinel_session_v1_session.pb.swift */; };
 		040FAA7E275F55C400229F6F /* umee_oracle_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA70D275F55B600229F6F /* umee_oracle_v1beta1_query.pb.swift */; };
-		040FAA7F275F55C400229F6F /* osmosis_incentives_gauge.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA70E275F55B600229F6F /* osmosis_incentives_gauge.pb.swift */; };
 		040FAA80275F55C400229F6F /* injective_oracle_v1beta1_oracle.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA70F275F55B700229F6F /* injective_oracle_v1beta1_oracle.pb.swift */; };
 		040FAA81275F55C400229F6F /* cosmos_crypto_hd_v1_hd.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA710275F55B700229F6F /* cosmos_crypto_hd_v1_hd.pb.swift */; };
 		040FAA82275F55C400229F6F /* akash_deployment_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA711275F55B700229F6F /* akash_deployment_v1beta1_query.pb.swift */; };
@@ -750,7 +716,6 @@
 		040FAA84275F55C400229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA713275F55B700229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift */; };
 		040FAA85275F55C400229F6F /* comdex_oracle_v1beta1_oracle.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA714275F55B700229F6F /* comdex_oracle_v1beta1_oracle.pb.swift */; };
 		040FAA86275F55C400229F6F /* iris_mod_service_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA715275F55B700229F6F /* iris_mod_service_query.pb.swift */; };
-		040FAA87275F55C400229F6F /* osmosis_lockup_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA716275F55B700229F6F /* osmosis_lockup_tx.grpc.swift */; };
 		040FAA88275F55C400229F6F /* sentinel_provider_v1_msg.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA717275F55B700229F6F /* sentinel_provider_v1_msg.grpc.swift */; };
 		040FAA89275F55C400229F6F /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA718275F55B700229F6F /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */; };
 		040FAA8A275F55C400229F6F /* sentinel_vpn_v1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA719275F55B700229F6F /* sentinel_vpn_v1_params.pb.swift */; };
@@ -774,9 +739,7 @@
 		040FAA9C275F55C400229F6F /* konstellation_oracle_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA72B275F55B900229F6F /* konstellation_oracle_genesis.pb.swift */; };
 		040FAA9D275F55C400229F6F /* desmos_posts_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA72C275F55B900229F6F /* desmos_posts_v1beta1_params.pb.swift */; };
 		040FAA9E275F55C400229F6F /* regen_ecocredit_v1alpha2_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA72D275F55B900229F6F /* regen_ecocredit_v1alpha2_genesis.pb.swift */; };
-		040FAA9F275F55C400229F6F /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA72E275F55B900229F6F /* osmosis_txfees_v1beta1_genesis.pb.swift */; };
 		040FAAA0275F55C400229F6F /* lum_beam_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA72F275F55B900229F6F /* lum_beam_query.pb.swift */; };
-		040FAAA1275F55C400229F6F /* osmosis_store_v1beta1_tree.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA730275F55B900229F6F /* osmosis_store_v1beta1_tree.pb.swift */; };
 		040FAAA2275F55C400229F6F /* injective_peggy_v1_ethereum_signer.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA731275F55B900229F6F /* injective_peggy_v1_ethereum_signer.pb.swift */; };
 		040FAAA3275F55C400229F6F /* akash_deployment_v1beta1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA732275F55B900229F6F /* akash_deployment_v1beta1_authz.pb.swift */; };
 		040FAAA4275F55C400229F6F /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA733275F55B900229F6F /* cosmos_feegrant_v1beta1_tx.pb.swift */; };
@@ -848,24 +811,20 @@
 		040FAAE6275F55C400229F6F /* ibc_core_connection_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA775275F55BE00229F6F /* ibc_core_connection_v1_tx.grpc.swift */; };
 		040FAAE7275F55C400229F6F /* umee_leverage_v1beta1_leverage.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA776275F55BE00229F6F /* umee_leverage_v1beta1_leverage.pb.swift */; };
 		040FAAE8275F55C400229F6F /* starname_iov_escrow_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA777275F55BE00229F6F /* starname_iov_escrow_v1beta1_query.pb.swift */; };
-		040FAAE9275F55C400229F6F /* osmosis_txfees_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA778275F55BE00229F6F /* osmosis_txfees_v1beta1_query.grpc.swift */; };
 		040FAAEA275F55C400229F6F /* akash_audit_v1beta2_audit.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA779275F55BF00229F6F /* akash_audit_v1beta2_audit.pb.swift */; };
 		040FAAEB275F55C400229F6F /* injective_auction_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA77A275F55BF00229F6F /* injective_auction_v1beta1_genesis.pb.swift */; };
 		040FAAEC275F55C400229F6F /* konstellation_oracle_exchange_rate.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA77B275F55BF00229F6F /* konstellation_oracle_exchange_rate.pb.swift */; };
-		040FAAED275F55C400229F6F /* osmosis_claim_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA77C275F55BF00229F6F /* osmosis_claim_v1beta1_params.pb.swift */; };
 		040FAAEE275F55C400229F6F /* cosmos_vesting_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA77D275F55BF00229F6F /* cosmos_vesting_v1beta1_tx.grpc.swift */; };
 		040FAAEF275F55C400229F6F /* iris_mint_mint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA77E275F55BF00229F6F /* iris_mint_mint.pb.swift */; };
 		040FAAF0275F55C400229F6F /* panacea_aol_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA77F275F55BF00229F6F /* panacea_aol_v2_query.pb.swift */; };
 		040FAAF1275F55C400229F6F /* shentu_bank_v1alpha1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA780275F55BF00229F6F /* shentu_bank_v1alpha1_tx.pb.swift */; };
 		040FAAF2275F55C400229F6F /* ibc_applications_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA781275F55BF00229F6F /* ibc_applications_transfer_v1_query.grpc.swift */; };
 		040FAAF3275F55C400229F6F /* bitsong_fantoken_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA782275F55BF00229F6F /* bitsong_fantoken_v1beta1_query.grpc.swift */; };
-		040FAAF4275F55C400229F6F /* osmosis_claim_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA783275F55BF00229F6F /* osmosis_claim_v1beta1_genesis.pb.swift */; };
 		040FAAF5275F55C400229F6F /* rizon_tokenswap_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA784275F55BF00229F6F /* rizon_tokenswap_tx.pb.swift */; };
 		040FAAF6275F55C400229F6F /* sentinel_node_v1_querier.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA785275F55BF00229F6F /* sentinel_node_v1_querier.grpc.swift */; };
 		040FAAF7275F55C400229F6F /* shentu_cert_v1alpha1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA786275F55C000229F6F /* shentu_cert_v1alpha1_genesis.pb.swift */; };
 		040FAAF8275F55C400229F6F /* em_liquidityprovider_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA787275F55C000229F6F /* em_liquidityprovider_v1_genesis.pb.swift */; };
 		040FAAF9275F55C400229F6F /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA788275F55C000229F6F /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */; };
-		040FAAFA275F55C400229F6F /* osmosis_lockup_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA789275F55C000229F6F /* osmosis_lockup_query.grpc.swift */; };
 		040FAAFB275F55C400229F6F /* sentinel_swap_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA78A275F55C000229F6F /* sentinel_swap_v1_genesis.pb.swift */; };
 		040FAAFC275F55C400229F6F /* panacea_did_v2_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA78B275F55C000229F6F /* panacea_did_v2_query.pb.swift */; };
 		040FAAFD275F55C400229F6F /* cosmos_group_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA78C275F55C000229F6F /* cosmos_group_v1beta1_tx.pb.swift */; };
@@ -886,7 +845,6 @@
 		040FAB0C275F55C400229F6F /* iris_mod_random_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA79B275F55C100229F6F /* iris_mod_random_query.pb.swift */; };
 		040FAB0D275F55C400229F6F /* cryptoorg_supply_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA79C275F55C100229F6F /* cryptoorg_supply_v1_genesis.pb.swift */; };
 		040FAB0E275F55C400229F6F /* akash_audit_v1beta2_audit.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA79D275F55C100229F6F /* akash_audit_v1beta2_audit.grpc.swift */; };
-		040FAB0F275F55C400229F6F /* osmosis_claim_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA79E275F55C100229F6F /* osmosis_claim_v1beta1_query.grpc.swift */; };
 		040FAB10275F55C400229F6F /* comdex_oracle_v1beta1_querier.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA79F275F55C100229F6F /* comdex_oracle_v1beta1_querier.pb.swift */; };
 		041345BB27855F6600DC49AD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041345B927855F6600DC49AD /* ProfileViewController.swift */; };
 		041345BC27855F6600DC49AD /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041345BA27855F6600DC49AD /* ProfileViewController.xib */; };
@@ -910,6 +868,59 @@
 		0444443527AC08F100EB093E /* TxStoreContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444443327AC08F100EB093E /* TxStoreContractCell.swift */; };
 		0444443627AC08F100EB093E /* TxStoreContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444443427AC08F100EB093E /* TxStoreContractCell.xib */; };
 		0444443827AC27A900EB093E /* BridgeToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444443727AC27A900EB093E /* BridgeToken.swift */; };
+		0444D3D927E1E87900819B21 /* osmosis_gamm_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3A427E1E87100819B21 /* osmosis_gamm_v1beta1_genesis.pb.swift */; };
+		0444D3DA27E1E87900819B21 /* osmosis_superfluid_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3A527E1E87200819B21 /* osmosis_superfluid_gov.pb.swift */; };
+		0444D3DB27E1E87900819B21 /* osmosis_epochs_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3A627E1E87200819B21 /* osmosis_epochs_query.pb.swift */; };
+		0444D3DC27E1E87900819B21 /* osmosis_store_v1beta1_tree.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3A727E1E87200819B21 /* osmosis_store_v1beta1_tree.pb.swift */; };
+		0444D3DD27E1E87900819B21 /* osmosis_txfees_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3A827E1E87200819B21 /* osmosis_txfees_v1beta1_query.pb.swift */; };
+		0444D3DE27E1E87900819B21 /* osmosis_superfluid_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3A927E1E87200819B21 /* osmosis_superfluid_genesis.pb.swift */; };
+		0444D3DF27E1E87900819B21 /* osmosis_mint_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3AA27E1E87200819B21 /* osmosis_mint_v1beta1_query.pb.swift */; };
+		0444D3E027E1E87900819B21 /* osmosis_superfluid_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3AB27E1E87200819B21 /* osmosis_superfluid_query.pb.swift */; };
+		0444D3E127E1E87900819B21 /* osmosis_pool-incentives_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3AC27E1E87200819B21 /* osmosis_pool-incentives_v1beta1_genesis.pb.swift */; };
+		0444D3E227E1E87900819B21 /* osmosis_gamm_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3AD27E1E87300819B21 /* osmosis_gamm_v1beta1_tx.pb.swift */; };
+		0444D3E327E1E87900819B21 /* osmosis_lockup_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3AE27E1E87300819B21 /* osmosis_lockup_genesis.pb.swift */; };
+		0444D3E427E1E87900819B21 /* osmosis_gamm_v1beta1_pool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3AF27E1E87300819B21 /* osmosis_gamm_v1beta1_pool.pb.swift */; };
+		0444D3E527E1E87900819B21 /* osmosis_superfluid_superfluid.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B027E1E87300819B21 /* osmosis_superfluid_superfluid.pb.swift */; };
+		0444D3E627E1E87900819B21 /* osmosis_lockup_lock.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B127E1E87300819B21 /* osmosis_lockup_lock.pb.swift */; };
+		0444D3E727E1E87900819B21 /* osmosis_gamm_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B227E1E87300819B21 /* osmosis_gamm_v1beta1_query.pb.swift */; };
+		0444D3E827E1E87900819B21 /* osmosis_incentives_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B327E1E87300819B21 /* osmosis_incentives_tx.grpc.swift */; };
+		0444D3E927E1E87900819B21 /* osmosis_lockup_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B427E1E87400819B21 /* osmosis_lockup_tx.pb.swift */; };
+		0444D3EA27E1E87900819B21 /* osmosis_superfluid_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B527E1E87400819B21 /* osmosis_superfluid_params.pb.swift */; };
+		0444D3EB27E1E87900819B21 /* osmosis_claim_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B627E1E87400819B21 /* osmosis_claim_v1beta1_query.pb.swift */; };
+		0444D3EC27E1E87900819B21 /* osmosis_superfluid_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B727E1E87400819B21 /* osmosis_superfluid_tx.grpc.swift */; };
+		0444D3ED27E1E87900819B21 /* osmosis_gamm_pool-models_balancer_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B827E1E87400819B21 /* osmosis_gamm_pool-models_balancer_tx.pb.swift */; };
+		0444D3EE27E1E87900819B21 /* osmosis_superfluid_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3B927E1E87400819B21 /* osmosis_superfluid_query.grpc.swift */; };
+		0444D3EF27E1E87900819B21 /* osmosis_mint_v1beta1_mint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3BA27E1E87400819B21 /* osmosis_mint_v1beta1_mint.pb.swift */; };
+		0444D3F027E1E87900819B21 /* osmosis_pool-incentives_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3BB27E1E87400819B21 /* osmosis_pool-incentives_v1beta1_query.pb.swift */; };
+		0444D3F127E1E87900819B21 /* osmosis_lockup_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3BC27E1E87500819B21 /* osmosis_lockup_query.pb.swift */; };
+		0444D3F227E1E87900819B21 /* osmosis_mint_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3BD27E1E87500819B21 /* osmosis_mint_v1beta1_genesis.pb.swift */; };
+		0444D3F327E1E87900819B21 /* osmosis_gamm_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3BE27E1E87500819B21 /* osmosis_gamm_v1beta1_query.grpc.swift */; };
+		0444D3F427E1E87900819B21 /* osmosis_superfluid_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3BF27E1E87500819B21 /* osmosis_superfluid_tx.pb.swift */; };
+		0444D3F527E1E87900819B21 /* osmosis_incentives_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C027E1E87500819B21 /* osmosis_incentives_genesis.pb.swift */; };
+		0444D3F627E1E87900819B21 /* osmosis_claim_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C127E1E87500819B21 /* osmosis_claim_v1beta1_genesis.pb.swift */; };
+		0444D3F727E1E87900819B21 /* osmosis_txfees_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C227E1E87500819B21 /* osmosis_txfees_v1beta1_gov.pb.swift */; };
+		0444D3F827E1E87900819B21 /* osmosis_claim_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C327E1E87500819B21 /* osmosis_claim_v1beta1_params.pb.swift */; };
+		0444D3F927E1E87900819B21 /* osmosis_incentives_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C427E1E87600819B21 /* osmosis_incentives_query.pb.swift */; };
+		0444D3FA27E1E87900819B21 /* osmosis_incentives_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C527E1E87600819B21 /* osmosis_incentives_query.grpc.swift */; };
+		0444D3FB27E1E87900819B21 /* osmosis_pool-incentives_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C627E1E87600819B21 /* osmosis_pool-incentives_v1beta1_query.grpc.swift */; };
+		0444D3FC27E1E87900819B21 /* osmosis_claim_v1beta1_claim.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C727E1E87600819B21 /* osmosis_claim_v1beta1_claim.pb.swift */; };
+		0444D3FD27E1E87900819B21 /* osmosis_lockup_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C827E1E87600819B21 /* osmosis_lockup_query.grpc.swift */; };
+		0444D3FE27E1E87900819B21 /* osmosis_pool-incentives_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3C927E1E87700819B21 /* osmosis_pool-incentives_v1beta1_gov.pb.swift */; };
+		0444D3FF27E1E87900819B21 /* osmosis_incentives_gauge.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3CA27E1E87700819B21 /* osmosis_incentives_gauge.pb.swift */; };
+		0444D40027E1E87900819B21 /* osmosis_gamm_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3CB27E1E87700819B21 /* osmosis_gamm_v1beta1_tx.grpc.swift */; };
+		0444D40127E1E87900819B21 /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3CC27E1E87700819B21 /* osmosis_txfees_v1beta1_genesis.pb.swift */; };
+		0444D40227E1E87900819B21 /* osmosis_pool-incentives_v1beta1_incentives.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3CD27E1E87700819B21 /* osmosis_pool-incentives_v1beta1_incentives.pb.swift */; };
+		0444D40327E1E87900819B21 /* osmosis_claim_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3CE27E1E87700819B21 /* osmosis_claim_v1beta1_query.grpc.swift */; };
+		0444D40427E1E87900819B21 /* osmosis_mint_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3CF27E1E87700819B21 /* osmosis_mint_v1beta1_query.grpc.swift */; };
+		0444D40527E1E87900819B21 /* osmosis_incentives_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D027E1E87700819B21 /* osmosis_incentives_params.pb.swift */; };
+		0444D40627E1E87900819B21 /* osmosis_epochs_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D127E1E87800819B21 /* osmosis_epochs_query.grpc.swift */; };
+		0444D40727E1E87900819B21 /* osmosis_txfees_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D227E1E87800819B21 /* osmosis_txfees_v1beta1_query.grpc.swift */; };
+		0444D40827E1E87900819B21 /* osmosis_txfees_v1beta1_feetoken.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D327E1E87800819B21 /* osmosis_txfees_v1beta1_feetoken.pb.swift */; };
+		0444D40927E1E87900819B21 /* osmosis_incentives_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D427E1E87800819B21 /* osmosis_incentives_tx.pb.swift */; };
+		0444D40A27E1E87900819B21 /* osmosis_gamm_pool-models_balancer_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D527E1E87800819B21 /* osmosis_gamm_pool-models_balancer_tx.grpc.swift */; };
+		0444D40B27E1E87900819B21 /* osmosis_lockup_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D627E1E87800819B21 /* osmosis_lockup_tx.grpc.swift */; };
+		0444D40C27E1E87900819B21 /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D727E1E87800819B21 /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift */; };
+		0444D40D27E1E87900819B21 /* osmosis_epochs_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D827E1E87800819B21 /* osmosis_epochs_genesis.pb.swift */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
@@ -2019,7 +2030,6 @@
 		040FA436275F558600229F6F /* panacea_burn_v2_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_burn_v2_query.grpc.swift; sourceTree = "<group>"; };
 		040FA437275F558600229F6F /* akash_escrow_v1beta2_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_escrow_v1beta2_query.pb.swift; sourceTree = "<group>"; };
 		040FA438275F558600229F6F /* secret_registration_v1beta1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = secret_registration_v1beta1_types.pb.swift; sourceTree = "<group>"; };
-		040FA439275F558600229F6F /* osmosis_incentives_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_tx.pb.swift; sourceTree = "<group>"; };
 		040FA43A275F558600229F6F /* sentinel_plan_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_plan_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA43B275F558600229F6F /* umee_oracle_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_oracle_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA43C275F558700229F6F /* desmos_fees_v1beta1_min_fee.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_fees_v1beta1_min_fee.pb.swift; sourceTree = "<group>"; };
@@ -2027,7 +2037,6 @@
 		040FA43E275F558700229F6F /* panacea_token_v2_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_token_v2_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA43F275F558700229F6F /* panacea_aol_v2_topic.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_aol_v2_topic.pb.swift; sourceTree = "<group>"; };
 		040FA440275F558700229F6F /* starname_iov_escrow_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_params.pb.swift; sourceTree = "<group>"; };
-		040FA441275F558700229F6F /* osmosis_claim_v1beta1_claim.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_claim.pb.swift; sourceTree = "<group>"; };
 		040FA442275F558700229F6F /* iris_mod_farm_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_farm_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA443275F558700229F6F /* rizon_treasury_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_query.grpc.swift; sourceTree = "<group>"; };
 		040FA444275F558700229F6F /* iscn_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iscn_tx.pb.swift; sourceTree = "<group>"; };
@@ -2142,13 +2151,11 @@
 		040FA4B1275F558E00229F6F /* em_issuer_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = em_issuer_v1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA4B2275F558E00229F6F /* em_issuer_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = em_issuer_v1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA4B3275F558E00229F6F /* tendermint_crypto_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_crypto_keys.pb.swift; sourceTree = "<group>"; };
-		040FA4B4275F558E00229F6F /* osmosis_gamm_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA4B5275F558E00229F6F /* iris_mint_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mint_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA4B6275F558E00229F6F /* iris_mod_nft_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_nft_query.pb.swift; sourceTree = "<group>"; };
 		040FA4B7275F558E00229F6F /* bcna_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bcna_query.grpc.swift; sourceTree = "<group>"; };
 		040FA4B8275F558E00229F6F /* konstellation_oracle_admin_addr.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = konstellation_oracle_admin_addr.pb.swift; sourceTree = "<group>"; };
 		040FA4B9275F558E00229F6F /* umee_peggy_v1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_peggy_v1_events.pb.swift; sourceTree = "<group>"; };
-		040FA4BA275F558E00229F6F /* osmosis_txfees_v1beta1_feetoken.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_feetoken.pb.swift; sourceTree = "<group>"; };
 		040FA4BB275F558E00229F6F /* cosmos_base_tendermint_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_tendermint_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA4BC275F558E00229F6F /* umee_peggy_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_peggy_v1_query.pb.swift; sourceTree = "<group>"; };
 		040FA4BD275F558F00229F6F /* umee_peggy_v1_msgs.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_peggy_v1_msgs.grpc.swift; sourceTree = "<group>"; };
@@ -2172,7 +2179,6 @@
 		040FA4CF275F559000229F6F /* konstellation_oracle_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = konstellation_oracle_params.pb.swift; sourceTree = "<group>"; };
 		040FA4D0275F559000229F6F /* ixo_did_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ixo_did_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA4D1275F559000229F6F /* regen_group_v1alpha1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = regen_group_v1alpha1_events.pb.swift; sourceTree = "<group>"; };
-		040FA4D2275F559000229F6F /* osmosis_lockup_lock.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_lock.pb.swift; sourceTree = "<group>"; };
 		040FA4D3275F559000229F6F /* umee_peggy_v1_batch.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_peggy_v1_batch.pb.swift; sourceTree = "<group>"; };
 		040FA4D4275F559000229F6F /* comdex_oracle_v1beta1_querier.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_oracle_v1beta1_querier.grpc.swift; sourceTree = "<group>"; };
 		040FA4D5275F559000229F6F /* desmos_profiles_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_query.pb.swift; sourceTree = "<group>"; };
@@ -2187,15 +2193,12 @@
 		040FA4DE275F559100229F6F /* shentu_cvm_v1alpha1_cvm.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shentu_cvm_v1alpha1_cvm.pb.swift; sourceTree = "<group>"; };
 		040FA4DF275F559100229F6F /* comdex_asset_v1beta1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_asset_v1beta1_events.pb.swift; sourceTree = "<group>"; };
 		040FA4E0275F559100229F6F /* injective_ocr_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
-		040FA4E1275F559100229F6F /* osmosis_incentives_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_params.pb.swift; sourceTree = "<group>"; };
 		040FA4E2275F559100229F6F /* desmos_profiles_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA4E3275F559100229F6F /* desmos_profiles_v1beta1_models_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_app_links.pb.swift; sourceTree = "<group>"; };
-		040FA4E4275F559100229F6F /* osmosis_gamm_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA4E5275F559100229F6F /* regen_group_v1alpha1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = regen_group_v1alpha1_query.pb.swift; sourceTree = "<group>"; };
 		040FA4E6275F559100229F6F /* sentinel_session_v1_querier.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_session_v1_querier.pb.swift; sourceTree = "<group>"; };
 		040FA4E7275F559100229F6F /* desmos_profiles_v1beta1_msg_server.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_msg_server.pb.swift; sourceTree = "<group>"; };
 		040FA4E8275F559100229F6F /* stargaze_alloc_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_alloc_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA4E9275F559100229F6F /* osmosis_gamm_v1beta1_balancerPool.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_balancerPool.pb.swift; sourceTree = "<group>"; };
 		040FA4EA275F559100229F6F /* cosmos_staking_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_staking_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA4EB275F559100229F6F /* desmos_profiles_v1beta1_query_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_query_chain_links.pb.swift; sourceTree = "<group>"; };
 		040FA4EC275F559100229F6F /* starname_iov_configuration_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_configuration_v1beta1_query.pb.swift; sourceTree = "<group>"; };
@@ -2223,7 +2226,6 @@
 		040FA502275F559300229F6F /* desmos_subspaces_v1beta1_msgs.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_subspaces_v1beta1_msgs.grpc.swift; sourceTree = "<group>"; };
 		040FA503275F559300229F6F /* sentinel_provider_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_provider_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA504275F559300229F6F /* injective_peggy_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_query.pb.swift; sourceTree = "<group>"; };
-		040FA505275F559300229F6F /* osmosis_claim_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA506275F559300229F6F /* cosmos_upgrade_v1beta1_upgrade.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_upgrade_v1beta1_upgrade.pb.swift; sourceTree = "<group>"; };
 		040FA507275F559300229F6F /* comdex_asset_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_asset_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA508275F559300229F6F /* injective_types_v1beta1_tx_ext.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_types_v1beta1_tx_ext.pb.swift; sourceTree = "<group>"; };
@@ -2237,7 +2239,6 @@
 		040FA510275F559400229F6F /* cosmos_crisis_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_crisis_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA511275F559400229F6F /* em_inflation_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = em_inflation_v1_query.pb.swift; sourceTree = "<group>"; };
 		040FA512275F559400229F6F /* regen_data_v1alpha2_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = regen_data_v1alpha2_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA513275F559400229F6F /* osmosis_epochs_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_epochs_query.grpc.swift; sourceTree = "<group>"; };
 		040FA514275F559400229F6F /* akash_deployment_v1beta2_groupmsg.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_deployment_v1beta2_groupmsg.pb.swift; sourceTree = "<group>"; };
 		040FA515275F559400229F6F /* starname_iov_escrow_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA516275F559400229F6F /* umee_leverage_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_leverage_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
@@ -2255,15 +2256,12 @@
 		040FA522275F559500229F6F /* lum_airdrop_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lum_airdrop_params.pb.swift; sourceTree = "<group>"; };
 		040FA523275F559500229F6F /* regen_ecocredit_v1alpha2_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = regen_ecocredit_v1alpha2_types.pb.swift; sourceTree = "<group>"; };
 		040FA524275F559500229F6F /* gravity_v1_msgs.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gravity_v1_msgs.pb.swift; sourceTree = "<group>"; };
-		040FA525275F559500229F6F /* osmosis_epochs_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_epochs_query.pb.swift; sourceTree = "<group>"; };
 		040FA526275F559500229F6F /* ixo_bonds_bonds.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ixo_bonds_bonds.pb.swift; sourceTree = "<group>"; };
 		040FA527275F559500229F6F /* comdex_asset_v1beta1_msg.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_asset_v1beta1_msg.grpc.swift; sourceTree = "<group>"; };
 		040FA528275F559500229F6F /* injective_peggy_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_types.pb.swift; sourceTree = "<group>"; };
 		040FA529275F559500229F6F /* sentinel_subscription_v1_querier.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_subscription_v1_querier.grpc.swift; sourceTree = "<group>"; };
 		040FA52A275F559500229F6F /* sentinel_vpn_v1_querier.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_vpn_v1_querier.pb.swift; sourceTree = "<group>"; };
 		040FA52B275F559500229F6F /* cosmos_distribution_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_distribution_v1beta1_query.pb.swift; sourceTree = "<group>"; };
-		040FA52C275F559500229F6F /* osmosis_mint_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_mint_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
-		040FA52D275F559500229F6F /* osmosis_lockup_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA52E275F559500229F6F /* cosmos_slashing_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_slashing_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA52F275F559600229F6F /* cosmos_staking_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_staking_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA530275F559600229F6F /* cosmos_staking_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_staking_v1beta1_query.pb.swift; sourceTree = "<group>"; };
@@ -2305,7 +2303,6 @@
 		040FA554275F559800229F6F /* sentinel_plan_v1_msg.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_plan_v1_msg.grpc.swift; sourceTree = "<group>"; };
 		040FA555275F559800229F6F /* cosmos_staking_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_staking_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA556275F559800229F6F /* cosmos_base_snapshots_v1beta1_snapshot.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_snapshots_v1beta1_snapshot.pb.swift; sourceTree = "<group>"; };
-		040FA557275F559800229F6F /* osmosis_incentives_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_query.pb.swift; sourceTree = "<group>"; };
 		040FA558275F559800229F6F /* shentu_oracle_v1alpha1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shentu_oracle_v1alpha1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA559275F559800229F6F /* tendermint_farming_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_farming_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA55A275F559800229F6F /* injective_ocr_v1beta1_ocr.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_ocr.pb.swift; sourceTree = "<group>"; };
@@ -2321,7 +2318,6 @@
 		040FA564275F559900229F6F /* shentu_shield_v1alpha1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shentu_shield_v1alpha1_query.pb.swift; sourceTree = "<group>"; };
 		040FA565275F559900229F6F /* cosmos_slashing_v1beta1_slashing.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_slashing_v1beta1_slashing.pb.swift; sourceTree = "<group>"; };
 		040FA566275F559900229F6F /* akash_deployment_v1beta2_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_deployment_v1beta2_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA567275F559900229F6F /* osmosis_epochs_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_epochs_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA568275F559900229F6F /* starname_cosmwasm_wasm_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_cosmwasm_wasm_v1_query.pb.swift; sourceTree = "<group>"; };
 		040FA569275F559900229F6F /* akash_provider_v1beta2_provider.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_provider_v1beta2_provider.pb.swift; sourceTree = "<group>"; };
 		040FA56A275F559900229F6F /* desmos_profiles_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
@@ -2342,8 +2338,6 @@
 		040FA579275F559A00229F6F /* tendermint_farming_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_farming_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA57A275F559A00229F6F /* bitsong_fantoken_v1beta1_fantoken.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bitsong_fantoken_v1beta1_fantoken.pb.swift; sourceTree = "<group>"; };
 		040FA57B275F559A00229F6F /* bitsong_auction_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bitsong_auction_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
-		040FA57C275F559B00229F6F /* osmosis_mint_v1beta1_mint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_mint_v1beta1_mint.pb.swift; sourceTree = "<group>"; };
-		040FA57D275F559B00229F6F /* osmosis_gamm_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA57E275F559B00229F6F /* ibc_core_channel_v1_channel.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_channel.pb.swift; sourceTree = "<group>"; };
 		040FA57F275F559B00229F6F /* injective_oracle_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA580275F559B00229F6F /* akash_audit_v1beta2_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_audit_v1beta2_genesis.pb.swift; sourceTree = "<group>"; };
@@ -2392,13 +2386,11 @@
 		040FA5AB275F559E00229F6F /* akash_deployment_v1beta2_service.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_deployment_v1beta2_service.grpc.swift; sourceTree = "<group>"; };
 		040FA5AC275F559E00229F6F /* rizon_tokenswap_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_tokenswap_params.pb.swift; sourceTree = "<group>"; };
 		040FA5AD275F559E00229F6F /* ixo_payments_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ixo_payments_query.grpc.swift; sourceTree = "<group>"; };
-		040FA5AE275F559E00229F6F /* osmosis_pool-incentives_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_query.pb.swift"; sourceTree = "<group>"; };
 		040FA5AF275F559E00229F6F /* cosmos_base_store_v1beta1_listening.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_store_v1beta1_listening.pb.swift; sourceTree = "<group>"; };
 		040FA5B0275F559E00229F6F /* desmos_profiles_v1beta1_models_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_profile.pb.swift; sourceTree = "<group>"; };
 		040FA5B1275F559E00229F6F /* cosmos_authz_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_authz_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA5B2275F559E00229F6F /* umee_leverage_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_leverage_v1beta1_gov.pb.swift; sourceTree = "<group>"; };
 		040FA5B3275F559E00229F6F /* cosmos_gov_v1beta2_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_gov_v1beta2_tx.grpc.swift; sourceTree = "<group>"; };
-		040FA5B4275F559E00229F6F /* osmosis_pool-incentives_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_query.grpc.swift"; sourceTree = "<group>"; };
 		040FA5B5275F559E00229F6F /* comdex_oracle_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_oracle_v1beta1_params.pb.swift; sourceTree = "<group>"; };
 		040FA5B6275F559E00229F6F /* cryptoorg_nft_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cryptoorg_nft_v1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA5B7275F559E00229F6F /* cosmos_nft_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_nft_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
@@ -2414,7 +2406,6 @@
 		040FA5C1275F559F00229F6F /* tendermint_version_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_version_types.pb.swift; sourceTree = "<group>"; };
 		040FA5C2275F559F00229F6F /* ibc_core_client_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_query.pb.swift; sourceTree = "<group>"; };
 		040FA5C3275F559F00229F6F /* cosmos_nft_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_nft_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
-		040FA5C4275F559F00229F6F /* osmosis_pool-incentives_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_gov.pb.swift"; sourceTree = "<group>"; };
 		040FA5C5275F559F00229F6F /* desmos_profiles_v1beta1_msgs_relationships.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_msgs_relationships.pb.swift; sourceTree = "<group>"; };
 		040FA5C6275F559F00229F6F /* cosmos_bank_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_bank_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA5C7275F55A000229F6F /* cosmos_slashing_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_slashing_v1beta1_query.pb.swift; sourceTree = "<group>"; };
@@ -2439,7 +2430,6 @@
 		040FA5DA275F55A100229F6F /* bitsong_auction_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bitsong_auction_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA5DB275F55A100229F6F /* sentinel_swap_v1_msg.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_swap_v1_msg.grpc.swift; sourceTree = "<group>"; };
 		040FA5DC275F55A100229F6F /* iris_mod_oracle_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_oracle_tx.grpc.swift; sourceTree = "<group>"; };
-		040FA5DD275F55A100229F6F /* osmosis_incentives_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_query.grpc.swift; sourceTree = "<group>"; };
 		040FA5DE275F55A100229F6F /* bcna_supplychain.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bcna_supplychain.pb.swift; sourceTree = "<group>"; };
 		040FA5DF275F55A100229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_relationships.pb.swift; sourceTree = "<group>"; };
 		040FA5E0275F55A100229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_msg_server.grpc.swift; sourceTree = "<group>"; };
@@ -2454,7 +2444,6 @@
 		040FA5E9275F55A200229F6F /* comdex_oracle_v1beta1_msg.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_oracle_v1beta1_msg.grpc.swift; sourceTree = "<group>"; };
 		040FA5EA275F55A200229F6F /* ibc_core_client_v1_client.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_client.pb.swift; sourceTree = "<group>"; };
 		040FA5EB275F55A200229F6F /* shentu_gov_v1alpha1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shentu_gov_v1alpha1_tx.pb.swift; sourceTree = "<group>"; };
-		040FA5EC275F55A200229F6F /* osmosis_pool-incentives_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_genesis.pb.swift"; sourceTree = "<group>"; };
 		040FA5ED275F55A200229F6F /* starname_iov_escrow_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA5EE275F55A200229F6F /* comdex_vault_v1beta1_msg.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_vault_v1beta1_msg.grpc.swift; sourceTree = "<group>"; };
 		040FA5EF275F55A200229F6F /* sifnode_ethbridge_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_ethbridge_v1_tx.pb.swift; sourceTree = "<group>"; };
@@ -2483,7 +2472,6 @@
 		040FA606275F55A400229F6F /* injective_peggy_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA607275F55A400229F6F /* injective_insurance_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA608275F55A400229F6F /* tendermint_libs_bits_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_libs_bits_types.pb.swift; sourceTree = "<group>"; };
-		040FA609275F55A400229F6F /* osmosis_gamm_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA60A275F55A400229F6F /* ixo_did_diddoc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ixo_did_diddoc.pb.swift; sourceTree = "<group>"; };
 		040FA60B275F55A400229F6F /* iris_mod_htlc_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_htlc_tx.pb.swift; sourceTree = "<group>"; };
 		040FA60C275F55A400229F6F /* iris_mod_record_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_record_tx.grpc.swift; sourceTree = "<group>"; };
@@ -2500,7 +2488,6 @@
 		040FA617275F55A500229F6F /* iris_mod_oracle_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_oracle_query.pb.swift; sourceTree = "<group>"; };
 		040FA618275F55A500229F6F /* injective_insurance_v1beta1_insurance.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_insurance.pb.swift; sourceTree = "<group>"; };
 		040FA619275F55A500229F6F /* injective_ocr_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_ocr_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
-		040FA61A275F55A500229F6F /* osmosis_pool-incentives_v1beta1_incentives.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_incentives.pb.swift"; sourceTree = "<group>"; };
 		040FA61B275F55A500229F6F /* ibc_core_channel_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA61C275F55A500229F6F /* iris_mod_token_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_token_tx.pb.swift; sourceTree = "<group>"; };
 		040FA61D275F55A500229F6F /* akash_provider_v1beta2_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_provider_v1beta2_query.pb.swift; sourceTree = "<group>"; };
@@ -2523,7 +2510,6 @@
 		040FA62E275F55A700229F6F /* iris_mod_coinswap_coinswap.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_coinswap_coinswap.pb.swift; sourceTree = "<group>"; };
 		040FA62F275F55A700229F6F /* bcna_bitcannaid.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bcna_bitcannaid.pb.swift; sourceTree = "<group>"; };
 		040FA630275F55A700229F6F /* ibc_applications_transfer_v2_packet.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v2_packet.pb.swift; sourceTree = "<group>"; };
-		040FA631275F55A700229F6F /* osmosis_incentives_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA632275F55A700229F6F /* cosmos_tx_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_tx_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA633275F55A700229F6F /* cosmos_nft_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_nft_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA634275F55A700229F6F /* shentu_oracle_v1alpha1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shentu_oracle_v1alpha1_genesis.pb.swift; sourceTree = "<group>"; };
@@ -2567,12 +2553,10 @@
 		040FA65A275F55AA00229F6F /* iscn_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iscn_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA65B275F55AA00229F6F /* ixo_payments_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ixo_payments_tx.pb.swift; sourceTree = "<group>"; };
 		040FA65C275F55AA00229F6F /* cosmos_crypto_keyring_v1_record.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_crypto_keyring_v1_record.pb.swift; sourceTree = "<group>"; };
-		040FA65D275F55AA00229F6F /* osmosis_lockup_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_query.pb.swift; sourceTree = "<group>"; };
 		040FA65E275F55AA00229F6F /* iris_mod_nft_nft.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_nft_nft.pb.swift; sourceTree = "<group>"; };
 		040FA65F275F55AA00229F6F /* em_issuer_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = em_issuer_v1_query.pb.swift; sourceTree = "<group>"; };
 		040FA660275F55AA00229F6F /* regen_ecocredit_v1alpha2_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = regen_ecocredit_v1alpha2_tx.pb.swift; sourceTree = "<group>"; };
 		040FA661275F55AA00229F6F /* comdex_asset_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_asset_v1beta1_gov.pb.swift; sourceTree = "<group>"; };
-		040FA662275F55AA00229F6F /* osmosis_gamm_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA663275F55AA00229F6F /* akash_base_v1beta1_resourcevalue.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_base_v1beta1_resourcevalue.pb.swift; sourceTree = "<group>"; };
 		040FA664275F55AA00229F6F /* injective_types_v1beta1_account.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_types_v1beta1_account.pb.swift; sourceTree = "<group>"; };
 		040FA665275F55AA00229F6F /* lum_beam_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lum_beam_query.grpc.swift; sourceTree = "<group>"; };
@@ -2603,7 +2587,6 @@
 		040FA67E275F55AC00229F6F /* akash_base_v1beta1_resource.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_base_v1beta1_resource.pb.swift; sourceTree = "<group>"; };
 		040FA67F275F55AC00229F6F /* google_api_annotations.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = google_api_annotations.pb.swift; sourceTree = "<group>"; };
 		040FA680275F55AC00229F6F /* bitsong_auction_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bitsong_auction_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA681275F55AC00229F6F /* osmosis_lockup_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_tx.pb.swift; sourceTree = "<group>"; };
 		040FA682275F55AC00229F6F /* juno_mint_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = juno_mint_query.grpc.swift; sourceTree = "<group>"; };
 		040FA683275F55AC00229F6F /* em_authority_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = em_authority_v1_query.pb.swift; sourceTree = "<group>"; };
 		040FA684275F55AC00229F6F /* sentinel_plan_v1_querier.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_plan_v1_querier.grpc.swift; sourceTree = "<group>"; };
@@ -2613,7 +2596,6 @@
 		040FA688275F55AD00229F6F /* stargaze_alloc_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_alloc_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA689275F55AD00229F6F /* stargaze_mint_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stargaze_mint_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA68A275F55AD00229F6F /* sentinel_node_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_node_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA68B275F55AD00229F6F /* osmosis_mint_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_mint_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA68C275F55AD00229F6F /* akash_base_v1beta2_resource.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_base_v1beta2_resource.pb.swift; sourceTree = "<group>"; };
 		040FA68D275F55AD00229F6F /* panacea_aol_v2_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_aol_v2_query.grpc.swift; sourceTree = "<group>"; };
 		040FA68E275F55AD00229F6F /* iris_mod_random_random.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_random_random.pb.swift; sourceTree = "<group>"; };
@@ -2629,7 +2611,6 @@
 		040FA698275F55AE00229F6F /* tendermint_farming_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_farming_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA699275F55AE00229F6F /* injective_oracle_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA69A275F55AE00229F6F /* rizon_treasury_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_tx.pb.swift; sourceTree = "<group>"; };
-		040FA69B275F55AE00229F6F /* osmosis_txfees_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA69C275F55AE00229F6F /* secret_registration_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = secret_registration_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA69D275F55AE00229F6F /* akash_escrow_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_escrow_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA69E275F55AE00229F6F /* panacea_did_v2_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_did_v2_tx.grpc.swift; sourceTree = "<group>"; };
@@ -2698,7 +2679,6 @@
 		040FA6DD275F55B300229F6F /* panacea_aol_v2_writer.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_aol_v2_writer.pb.swift; sourceTree = "<group>"; };
 		040FA6DE275F55B300229F6F /* em_issuer_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = em_issuer_v1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA6DF275F55B300229F6F /* iris_mod_service_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_service_tx.grpc.swift; sourceTree = "<group>"; };
-		040FA6E0275F55B300229F6F /* osmosis_incentives_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA6E1275F55B300229F6F /* comdex_vault_v1beta1_querier.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_vault_v1beta1_querier.pb.swift; sourceTree = "<group>"; };
 		040FA6E2275F55B300229F6F /* umee_peggy_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_peggy_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA6E3275F55B300229F6F /* injective_exchange_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_exchange_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
@@ -2728,7 +2708,6 @@
 		040FA6FB275F55B500229F6F /* cosmos_crypto_multisig_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_crypto_multisig_keys.pb.swift; sourceTree = "<group>"; };
 		040FA6FC275F55B500229F6F /* cosmos_gov_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_gov_v1beta1_gov.pb.swift; sourceTree = "<group>"; };
 		040FA6FD275F55B500229F6F /* panacea_aol_v2_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_aol_v2_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA6FE275F55B500229F6F /* osmosis_mint_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_mint_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA6FF275F55B500229F6F /* comdex_vault_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_vault_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA700275F55B500229F6F /* injective_oracle_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA701275F55B600229F6F /* sentinel_subscription_v1_msg.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_subscription_v1_msg.pb.swift; sourceTree = "<group>"; };
@@ -2737,14 +2716,12 @@
 		040FA704275F55B600229F6F /* rizon_treasury_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_params.pb.swift; sourceTree = "<group>"; };
 		040FA705275F55B600229F6F /* akash_market_v1beta2_bid.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_market_v1beta2_bid.pb.swift; sourceTree = "<group>"; };
 		040FA706275F55B600229F6F /* starname_cosmwasm_wasm_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_cosmwasm_wasm_v1_types.pb.swift; sourceTree = "<group>"; };
-		040FA707275F55B600229F6F /* osmosis_txfees_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_gov.pb.swift; sourceTree = "<group>"; };
 		040FA708275F55B600229F6F /* akash_provider_v1beta2_provider.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_provider_v1beta2_provider.grpc.swift; sourceTree = "<group>"; };
 		040FA709275F55B600229F6F /* regen_ecocredit_v1alpha2_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = regen_ecocredit_v1alpha2_events.pb.swift; sourceTree = "<group>"; };
 		040FA70A275F55B600229F6F /* umee_leverage_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_leverage_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA70B275F55B600229F6F /* ixo_bonds_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ixo_bonds_tx.pb.swift; sourceTree = "<group>"; };
 		040FA70C275F55B600229F6F /* sentinel_session_v1_session.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_session_v1_session.pb.swift; sourceTree = "<group>"; };
 		040FA70D275F55B600229F6F /* umee_oracle_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_oracle_v1beta1_query.pb.swift; sourceTree = "<group>"; };
-		040FA70E275F55B600229F6F /* osmosis_incentives_gauge.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_gauge.pb.swift; sourceTree = "<group>"; };
 		040FA70F275F55B700229F6F /* injective_oracle_v1beta1_oracle.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_oracle_v1beta1_oracle.pb.swift; sourceTree = "<group>"; };
 		040FA710275F55B700229F6F /* cosmos_crypto_hd_v1_hd.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_crypto_hd_v1_hd.pb.swift; sourceTree = "<group>"; };
 		040FA711275F55B700229F6F /* akash_deployment_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_deployment_v1beta1_query.pb.swift; sourceTree = "<group>"; };
@@ -2752,7 +2729,6 @@
 		040FA713275F55B700229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_feegrant_v1beta1_feegrant.pb.swift; sourceTree = "<group>"; };
 		040FA714275F55B700229F6F /* comdex_oracle_v1beta1_oracle.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_oracle_v1beta1_oracle.pb.swift; sourceTree = "<group>"; };
 		040FA715275F55B700229F6F /* iris_mod_service_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_service_query.pb.swift; sourceTree = "<group>"; };
-		040FA716275F55B700229F6F /* osmosis_lockup_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA717275F55B700229F6F /* sentinel_provider_v1_msg.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_provider_v1_msg.grpc.swift; sourceTree = "<group>"; };
 		040FA718275F55B700229F6F /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
 		040FA719275F55B700229F6F /* sentinel_vpn_v1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_vpn_v1_params.pb.swift; sourceTree = "<group>"; };
@@ -2776,9 +2752,7 @@
 		040FA72B275F55B900229F6F /* konstellation_oracle_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = konstellation_oracle_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA72C275F55B900229F6F /* desmos_posts_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_posts_v1beta1_params.pb.swift; sourceTree = "<group>"; };
 		040FA72D275F55B900229F6F /* regen_ecocredit_v1alpha2_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = regen_ecocredit_v1alpha2_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA72E275F55B900229F6F /* osmosis_txfees_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA72F275F55B900229F6F /* lum_beam_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lum_beam_query.pb.swift; sourceTree = "<group>"; };
-		040FA730275F55B900229F6F /* osmosis_store_v1beta1_tree.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_store_v1beta1_tree.pb.swift; sourceTree = "<group>"; };
 		040FA731275F55B900229F6F /* injective_peggy_v1_ethereum_signer.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_peggy_v1_ethereum_signer.pb.swift; sourceTree = "<group>"; };
 		040FA732275F55B900229F6F /* akash_deployment_v1beta1_authz.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_deployment_v1beta1_authz.pb.swift; sourceTree = "<group>"; };
 		040FA733275F55B900229F6F /* cosmos_feegrant_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_feegrant_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
@@ -2850,24 +2824,20 @@
 		040FA775275F55BE00229F6F /* ibc_core_connection_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_connection_v1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA776275F55BE00229F6F /* umee_leverage_v1beta1_leverage.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = umee_leverage_v1beta1_leverage.pb.swift; sourceTree = "<group>"; };
 		040FA777275F55BE00229F6F /* starname_iov_escrow_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_query.pb.swift; sourceTree = "<group>"; };
-		040FA778275F55BE00229F6F /* osmosis_txfees_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA779275F55BF00229F6F /* akash_audit_v1beta2_audit.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_audit_v1beta2_audit.pb.swift; sourceTree = "<group>"; };
 		040FA77A275F55BF00229F6F /* injective_auction_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_auction_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA77B275F55BF00229F6F /* konstellation_oracle_exchange_rate.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = konstellation_oracle_exchange_rate.pb.swift; sourceTree = "<group>"; };
-		040FA77C275F55BF00229F6F /* osmosis_claim_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_params.pb.swift; sourceTree = "<group>"; };
 		040FA77D275F55BF00229F6F /* cosmos_vesting_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_vesting_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA77E275F55BF00229F6F /* iris_mint_mint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mint_mint.pb.swift; sourceTree = "<group>"; };
 		040FA77F275F55BF00229F6F /* panacea_aol_v2_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_aol_v2_query.pb.swift; sourceTree = "<group>"; };
 		040FA780275F55BF00229F6F /* shentu_bank_v1alpha1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shentu_bank_v1alpha1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA781275F55BF00229F6F /* ibc_applications_transfer_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA782275F55BF00229F6F /* bitsong_fantoken_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bitsong_fantoken_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
-		040FA783275F55BF00229F6F /* osmosis_claim_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA784275F55BF00229F6F /* rizon_tokenswap_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_tokenswap_tx.pb.swift; sourceTree = "<group>"; };
 		040FA785275F55BF00229F6F /* sentinel_node_v1_querier.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_node_v1_querier.grpc.swift; sourceTree = "<group>"; };
 		040FA786275F55C000229F6F /* shentu_cert_v1alpha1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = shentu_cert_v1alpha1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA787275F55C000229F6F /* em_liquidityprovider_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = em_liquidityprovider_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA788275F55C000229F6F /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_tendermint_v1_tendermint.pb.swift; sourceTree = "<group>"; };
-		040FA789275F55C000229F6F /* osmosis_lockup_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_query.grpc.swift; sourceTree = "<group>"; };
 		040FA78A275F55C000229F6F /* sentinel_swap_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sentinel_swap_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA78B275F55C000229F6F /* panacea_did_v2_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = panacea_did_v2_query.pb.swift; sourceTree = "<group>"; };
 		040FA78C275F55C000229F6F /* cosmos_group_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_group_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
@@ -2888,7 +2858,6 @@
 		040FA79B275F55C100229F6F /* iris_mod_random_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_random_query.pb.swift; sourceTree = "<group>"; };
 		040FA79C275F55C100229F6F /* cryptoorg_supply_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cryptoorg_supply_v1_genesis.pb.swift; sourceTree = "<group>"; };
 		040FA79D275F55C100229F6F /* akash_audit_v1beta2_audit.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = akash_audit_v1beta2_audit.grpc.swift; sourceTree = "<group>"; };
-		040FA79E275F55C100229F6F /* osmosis_claim_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA79F275F55C100229F6F /* comdex_oracle_v1beta1_querier.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = comdex_oracle_v1beta1_querier.pb.swift; sourceTree = "<group>"; };
 		041345B927855F6600DC49AD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		041345BA27855F6600DC49AD /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
@@ -2912,6 +2881,59 @@
 		0444443327AC08F100EB093E /* TxStoreContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxStoreContractCell.swift; sourceTree = "<group>"; };
 		0444443427AC08F100EB093E /* TxStoreContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxStoreContractCell.xib; sourceTree = "<group>"; };
 		0444443727AC27A900EB093E /* BridgeToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeToken.swift; sourceTree = "<group>"; };
+		0444D3A427E1E87100819B21 /* osmosis_gamm_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		0444D3A527E1E87200819B21 /* osmosis_superfluid_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_superfluid_gov.pb.swift; sourceTree = "<group>"; };
+		0444D3A627E1E87200819B21 /* osmosis_epochs_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_epochs_query.pb.swift; sourceTree = "<group>"; };
+		0444D3A727E1E87200819B21 /* osmosis_store_v1beta1_tree.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_store_v1beta1_tree.pb.swift; sourceTree = "<group>"; };
+		0444D3A827E1E87200819B21 /* osmosis_txfees_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0444D3A927E1E87200819B21 /* osmosis_superfluid_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_superfluid_genesis.pb.swift; sourceTree = "<group>"; };
+		0444D3AA27E1E87200819B21 /* osmosis_mint_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_mint_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0444D3AB27E1E87200819B21 /* osmosis_superfluid_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_superfluid_query.pb.swift; sourceTree = "<group>"; };
+		0444D3AC27E1E87200819B21 /* osmosis_pool-incentives_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_genesis.pb.swift"; sourceTree = "<group>"; };
+		0444D3AD27E1E87300819B21 /* osmosis_gamm_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		0444D3AE27E1E87300819B21 /* osmosis_lockup_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_genesis.pb.swift; sourceTree = "<group>"; };
+		0444D3AF27E1E87300819B21 /* osmosis_gamm_v1beta1_pool.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_pool.pb.swift; sourceTree = "<group>"; };
+		0444D3B027E1E87300819B21 /* osmosis_superfluid_superfluid.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_superfluid_superfluid.pb.swift; sourceTree = "<group>"; };
+		0444D3B127E1E87300819B21 /* osmosis_lockup_lock.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_lock.pb.swift; sourceTree = "<group>"; };
+		0444D3B227E1E87300819B21 /* osmosis_gamm_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0444D3B327E1E87300819B21 /* osmosis_incentives_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_tx.grpc.swift; sourceTree = "<group>"; };
+		0444D3B427E1E87400819B21 /* osmosis_lockup_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_tx.pb.swift; sourceTree = "<group>"; };
+		0444D3B527E1E87400819B21 /* osmosis_superfluid_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_superfluid_params.pb.swift; sourceTree = "<group>"; };
+		0444D3B627E1E87400819B21 /* osmosis_claim_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		0444D3B727E1E87400819B21 /* osmosis_superfluid_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_superfluid_tx.grpc.swift; sourceTree = "<group>"; };
+		0444D3B827E1E87400819B21 /* osmosis_gamm_pool-models_balancer_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_gamm_pool-models_balancer_tx.pb.swift"; sourceTree = "<group>"; };
+		0444D3B927E1E87400819B21 /* osmosis_superfluid_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_superfluid_query.grpc.swift; sourceTree = "<group>"; };
+		0444D3BA27E1E87400819B21 /* osmosis_mint_v1beta1_mint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_mint_v1beta1_mint.pb.swift; sourceTree = "<group>"; };
+		0444D3BB27E1E87400819B21 /* osmosis_pool-incentives_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_query.pb.swift"; sourceTree = "<group>"; };
+		0444D3BC27E1E87500819B21 /* osmosis_lockup_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_query.pb.swift; sourceTree = "<group>"; };
+		0444D3BD27E1E87500819B21 /* osmosis_mint_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_mint_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		0444D3BE27E1E87500819B21 /* osmosis_gamm_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0444D3BF27E1E87500819B21 /* osmosis_superfluid_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_superfluid_tx.pb.swift; sourceTree = "<group>"; };
+		0444D3C027E1E87500819B21 /* osmosis_incentives_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_genesis.pb.swift; sourceTree = "<group>"; };
+		0444D3C127E1E87500819B21 /* osmosis_claim_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		0444D3C227E1E87500819B21 /* osmosis_txfees_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_gov.pb.swift; sourceTree = "<group>"; };
+		0444D3C327E1E87500819B21 /* osmosis_claim_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_params.pb.swift; sourceTree = "<group>"; };
+		0444D3C427E1E87600819B21 /* osmosis_incentives_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_query.pb.swift; sourceTree = "<group>"; };
+		0444D3C527E1E87600819B21 /* osmosis_incentives_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_query.grpc.swift; sourceTree = "<group>"; };
+		0444D3C627E1E87600819B21 /* osmosis_pool-incentives_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_query.grpc.swift"; sourceTree = "<group>"; };
+		0444D3C727E1E87600819B21 /* osmosis_claim_v1beta1_claim.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_claim.pb.swift; sourceTree = "<group>"; };
+		0444D3C827E1E87600819B21 /* osmosis_lockup_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_query.grpc.swift; sourceTree = "<group>"; };
+		0444D3C927E1E87700819B21 /* osmosis_pool-incentives_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_gov.pb.swift"; sourceTree = "<group>"; };
+		0444D3CA27E1E87700819B21 /* osmosis_incentives_gauge.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_gauge.pb.swift; sourceTree = "<group>"; };
+		0444D3CB27E1E87700819B21 /* osmosis_gamm_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_gamm_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		0444D3CC27E1E87700819B21 /* osmosis_txfees_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		0444D3CD27E1E87700819B21 /* osmosis_pool-incentives_v1beta1_incentives.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_pool-incentives_v1beta1_incentives.pb.swift"; sourceTree = "<group>"; };
+		0444D3CE27E1E87700819B21 /* osmosis_claim_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_claim_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0444D3CF27E1E87700819B21 /* osmosis_mint_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_mint_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0444D3D027E1E87700819B21 /* osmosis_incentives_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_params.pb.swift; sourceTree = "<group>"; };
+		0444D3D127E1E87800819B21 /* osmosis_epochs_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_epochs_query.grpc.swift; sourceTree = "<group>"; };
+		0444D3D227E1E87800819B21 /* osmosis_txfees_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		0444D3D327E1E87800819B21 /* osmosis_txfees_v1beta1_feetoken.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_txfees_v1beta1_feetoken.pb.swift; sourceTree = "<group>"; };
+		0444D3D427E1E87800819B21 /* osmosis_incentives_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_incentives_tx.pb.swift; sourceTree = "<group>"; };
+		0444D3D527E1E87800819B21 /* osmosis_gamm_pool-models_balancer_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_gamm_pool-models_balancer_tx.grpc.swift"; sourceTree = "<group>"; };
+		0444D3D627E1E87800819B21 /* osmosis_lockup_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_tx.grpc.swift; sourceTree = "<group>"; };
+		0444D3D727E1E87800819B21 /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_gamm_pool-models_balancer_balancerPool.pb.swift"; sourceTree = "<group>"; };
+		0444D3D827E1E87800819B21 /* osmosis_epochs_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_epochs_genesis.pb.swift; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
@@ -4284,6 +4306,59 @@
 		282121BA25FDE71C0016ABFE /* ProtoBuff */ = {
 			isa = PBXGroup;
 			children = (
+				0444D3C727E1E87600819B21 /* osmosis_claim_v1beta1_claim.pb.swift */,
+				0444D3C127E1E87500819B21 /* osmosis_claim_v1beta1_genesis.pb.swift */,
+				0444D3C327E1E87500819B21 /* osmosis_claim_v1beta1_params.pb.swift */,
+				0444D3CE27E1E87700819B21 /* osmosis_claim_v1beta1_query.grpc.swift */,
+				0444D3B627E1E87400819B21 /* osmosis_claim_v1beta1_query.pb.swift */,
+				0444D3D827E1E87800819B21 /* osmosis_epochs_genesis.pb.swift */,
+				0444D3D127E1E87800819B21 /* osmosis_epochs_query.grpc.swift */,
+				0444D3A627E1E87200819B21 /* osmosis_epochs_query.pb.swift */,
+				0444D3D727E1E87800819B21 /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift */,
+				0444D3D527E1E87800819B21 /* osmosis_gamm_pool-models_balancer_tx.grpc.swift */,
+				0444D3B827E1E87400819B21 /* osmosis_gamm_pool-models_balancer_tx.pb.swift */,
+				0444D3A427E1E87100819B21 /* osmosis_gamm_v1beta1_genesis.pb.swift */,
+				0444D3AF27E1E87300819B21 /* osmosis_gamm_v1beta1_pool.pb.swift */,
+				0444D3BE27E1E87500819B21 /* osmosis_gamm_v1beta1_query.grpc.swift */,
+				0444D3B227E1E87300819B21 /* osmosis_gamm_v1beta1_query.pb.swift */,
+				0444D3CB27E1E87700819B21 /* osmosis_gamm_v1beta1_tx.grpc.swift */,
+				0444D3AD27E1E87300819B21 /* osmosis_gamm_v1beta1_tx.pb.swift */,
+				0444D3CA27E1E87700819B21 /* osmosis_incentives_gauge.pb.swift */,
+				0444D3C027E1E87500819B21 /* osmosis_incentives_genesis.pb.swift */,
+				0444D3D027E1E87700819B21 /* osmosis_incentives_params.pb.swift */,
+				0444D3C527E1E87600819B21 /* osmosis_incentives_query.grpc.swift */,
+				0444D3C427E1E87600819B21 /* osmosis_incentives_query.pb.swift */,
+				0444D3B327E1E87300819B21 /* osmosis_incentives_tx.grpc.swift */,
+				0444D3D427E1E87800819B21 /* osmosis_incentives_tx.pb.swift */,
+				0444D3AE27E1E87300819B21 /* osmosis_lockup_genesis.pb.swift */,
+				0444D3B127E1E87300819B21 /* osmosis_lockup_lock.pb.swift */,
+				0444D3C827E1E87600819B21 /* osmosis_lockup_query.grpc.swift */,
+				0444D3BC27E1E87500819B21 /* osmosis_lockup_query.pb.swift */,
+				0444D3D627E1E87800819B21 /* osmosis_lockup_tx.grpc.swift */,
+				0444D3B427E1E87400819B21 /* osmosis_lockup_tx.pb.swift */,
+				0444D3BD27E1E87500819B21 /* osmosis_mint_v1beta1_genesis.pb.swift */,
+				0444D3BA27E1E87400819B21 /* osmosis_mint_v1beta1_mint.pb.swift */,
+				0444D3CF27E1E87700819B21 /* osmosis_mint_v1beta1_query.grpc.swift */,
+				0444D3AA27E1E87200819B21 /* osmosis_mint_v1beta1_query.pb.swift */,
+				0444D3AC27E1E87200819B21 /* osmosis_pool-incentives_v1beta1_genesis.pb.swift */,
+				0444D3C927E1E87700819B21 /* osmosis_pool-incentives_v1beta1_gov.pb.swift */,
+				0444D3CD27E1E87700819B21 /* osmosis_pool-incentives_v1beta1_incentives.pb.swift */,
+				0444D3C627E1E87600819B21 /* osmosis_pool-incentives_v1beta1_query.grpc.swift */,
+				0444D3BB27E1E87400819B21 /* osmosis_pool-incentives_v1beta1_query.pb.swift */,
+				0444D3A727E1E87200819B21 /* osmosis_store_v1beta1_tree.pb.swift */,
+				0444D3A927E1E87200819B21 /* osmosis_superfluid_genesis.pb.swift */,
+				0444D3A527E1E87200819B21 /* osmosis_superfluid_gov.pb.swift */,
+				0444D3B527E1E87400819B21 /* osmosis_superfluid_params.pb.swift */,
+				0444D3B927E1E87400819B21 /* osmosis_superfluid_query.grpc.swift */,
+				0444D3AB27E1E87200819B21 /* osmosis_superfluid_query.pb.swift */,
+				0444D3B027E1E87300819B21 /* osmosis_superfluid_superfluid.pb.swift */,
+				0444D3B727E1E87400819B21 /* osmosis_superfluid_tx.grpc.swift */,
+				0444D3BF27E1E87500819B21 /* osmosis_superfluid_tx.pb.swift */,
+				0444D3D327E1E87800819B21 /* osmosis_txfees_v1beta1_feetoken.pb.swift */,
+				0444D3CC27E1E87700819B21 /* osmosis_txfees_v1beta1_genesis.pb.swift */,
+				0444D3C227E1E87500819B21 /* osmosis_txfees_v1beta1_gov.pb.swift */,
+				0444D3D227E1E87800819B21 /* osmosis_txfees_v1beta1_query.grpc.swift */,
+				0444D3A827E1E87200819B21 /* osmosis_txfees_v1beta1_query.pb.swift */,
 				048C833A27BF573B00270528 /* provenance_attribute_v1_attribute.pb.swift */,
 				048C834627BF573D00270528 /* provenance_attribute_v1_genesis.pb.swift */,
 				048C832827BF573800270528 /* provenance_attribute_v1_query.grpc.swift */,
@@ -5034,48 +5109,6 @@
 				040FA665275F55AA00229F6F /* lum_beam_query.grpc.swift */,
 				040FA72F275F55B900229F6F /* lum_beam_query.pb.swift */,
 				040FA600275F55A300229F6F /* lum_beam_tx.pb.swift */,
-				040FA441275F558700229F6F /* osmosis_claim_v1beta1_claim.pb.swift */,
-				040FA783275F55BF00229F6F /* osmosis_claim_v1beta1_genesis.pb.swift */,
-				040FA77C275F55BF00229F6F /* osmosis_claim_v1beta1_params.pb.swift */,
-				040FA79E275F55C100229F6F /* osmosis_claim_v1beta1_query.grpc.swift */,
-				040FA505275F559300229F6F /* osmosis_claim_v1beta1_query.pb.swift */,
-				040FA567275F559900229F6F /* osmosis_epochs_genesis.pb.swift */,
-				040FA513275F559400229F6F /* osmosis_epochs_query.grpc.swift */,
-				040FA525275F559500229F6F /* osmosis_epochs_query.pb.swift */,
-				040FA4E9275F559100229F6F /* osmosis_gamm_v1beta1_balancerPool.pb.swift */,
-				040FA662275F55AA00229F6F /* osmosis_gamm_v1beta1_genesis.pb.swift */,
-				040FA4E4275F559100229F6F /* osmosis_gamm_v1beta1_query.grpc.swift */,
-				040FA609275F55A400229F6F /* osmosis_gamm_v1beta1_query.pb.swift */,
-				040FA4B4275F558E00229F6F /* osmosis_gamm_v1beta1_tx.grpc.swift */,
-				040FA57D275F559B00229F6F /* osmosis_gamm_v1beta1_tx.pb.swift */,
-				040FA70E275F55B600229F6F /* osmosis_incentives_gauge.pb.swift */,
-				040FA6E0275F55B300229F6F /* osmosis_incentives_genesis.pb.swift */,
-				040FA4E1275F559100229F6F /* osmosis_incentives_params.pb.swift */,
-				040FA5DD275F55A100229F6F /* osmosis_incentives_query.grpc.swift */,
-				040FA557275F559800229F6F /* osmosis_incentives_query.pb.swift */,
-				040FA631275F55A700229F6F /* osmosis_incentives_tx.grpc.swift */,
-				040FA439275F558600229F6F /* osmosis_incentives_tx.pb.swift */,
-				040FA52D275F559500229F6F /* osmosis_lockup_genesis.pb.swift */,
-				040FA4D2275F559000229F6F /* osmosis_lockup_lock.pb.swift */,
-				040FA789275F55C000229F6F /* osmosis_lockup_query.grpc.swift */,
-				040FA65D275F55AA00229F6F /* osmosis_lockup_query.pb.swift */,
-				040FA716275F55B700229F6F /* osmosis_lockup_tx.grpc.swift */,
-				040FA681275F55AC00229F6F /* osmosis_lockup_tx.pb.swift */,
-				040FA68B275F55AD00229F6F /* osmosis_mint_v1beta1_genesis.pb.swift */,
-				040FA57C275F559B00229F6F /* osmosis_mint_v1beta1_mint.pb.swift */,
-				040FA52C275F559500229F6F /* osmosis_mint_v1beta1_query.grpc.swift */,
-				040FA6FE275F55B500229F6F /* osmosis_mint_v1beta1_query.pb.swift */,
-				040FA5EC275F55A200229F6F /* osmosis_pool-incentives_v1beta1_genesis.pb.swift */,
-				040FA5C4275F559F00229F6F /* osmosis_pool-incentives_v1beta1_gov.pb.swift */,
-				040FA61A275F55A500229F6F /* osmosis_pool-incentives_v1beta1_incentives.pb.swift */,
-				040FA5B4275F559E00229F6F /* osmosis_pool-incentives_v1beta1_query.grpc.swift */,
-				040FA5AE275F559E00229F6F /* osmosis_pool-incentives_v1beta1_query.pb.swift */,
-				040FA730275F55B900229F6F /* osmosis_store_v1beta1_tree.pb.swift */,
-				040FA4BA275F558E00229F6F /* osmosis_txfees_v1beta1_feetoken.pb.swift */,
-				040FA72E275F55B900229F6F /* osmosis_txfees_v1beta1_genesis.pb.swift */,
-				040FA707275F55B600229F6F /* osmosis_txfees_v1beta1_gov.pb.swift */,
-				040FA778275F55BE00229F6F /* osmosis_txfees_v1beta1_query.grpc.swift */,
-				040FA69B275F55AE00229F6F /* osmosis_txfees_v1beta1_query.pb.swift */,
 				040FA6FD275F55B500229F6F /* panacea_aol_v2_genesis.pb.swift */,
 				040FA685275F55AD00229F6F /* panacea_aol_v2_owner.pb.swift */,
 				040FA68D275F55AD00229F6F /* panacea_aol_v2_query.grpc.swift */,
@@ -7083,10 +7116,10 @@
 				040FA88A275F55C200229F6F /* comdex_vault_v1beta1_vault.pb.swift in Sources */,
 				040FA9DC275F55C300229F6F /* ixo_did_query.pb.swift in Sources */,
 				E1069B14229698CB007517DC /* StepChangeCheckViewController.swift in Sources */,
-				040FA925275F55C300229F6F /* osmosis_pool-incentives_v1beta1_query.grpc.swift in Sources */,
 				040FA915275F55C300229F6F /* lum_airdrop_query.grpc.swift in Sources */,
 				E1A82DEA2244A20B0097CAEE /* BondingInfo.swift in Sources */,
 				040FAA8B275F55C400229F6F /* sentinel_plan_v1_plan.pb.swift in Sources */,
+				0444D3ED27E1E87900819B21 /* osmosis_gamm_pool-models_balancer_tx.pb.swift in Sources */,
 				040FA9D9275F55C300229F6F /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */,
 				040FA9A5275F55C300229F6F /* shentu_oracle_v1alpha1_genesis.pb.swift in Sources */,
 				040FAA09275F55C300229F6F /* tendermint_farming_v1beta1_genesis.pb.swift in Sources */,
@@ -7117,9 +7150,7 @@
 				040FA82A275F55C200229F6F /* umee_peggy_v1_events.pb.swift in Sources */,
 				E16D9B26224A08510019B7BB /* DecimalViewController.swift in Sources */,
 				E1827E112254C92900BC0350 /* WalletDetailViewController.swift in Sources */,
-				040FA843275F55C200229F6F /* osmosis_lockup_lock.pb.swift in Sources */,
 				040FA89F275F55C200229F6F /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
-				040FA9FC275F55C300229F6F /* osmosis_mint_v1beta1_genesis.pb.swift in Sources */,
 				048C835327BF573D00270528 /* provenance_metadata_v1_query.pb.swift in Sources */,
 				040FAAF1275F55C400229F6F /* shentu_bank_v1alpha1_tx.pb.swift in Sources */,
 				04B1BE2227A3BC4500B1236A /* cosmwasm_wasm_v1_query.grpc.swift in Sources */,
@@ -7129,7 +7160,6 @@
 				E1069B12229698BA007517DC /* StepChangeAddressViewController.swift in Sources */,
 				28EEECAC26DAE9B4002DDC4A /* KavaSwapExit0ViewController.swift in Sources */,
 				040FA94F275F55C300229F6F /* bcna_supplychain.pb.swift in Sources */,
-				040FAAE9275F55C400229F6F /* osmosis_txfees_v1beta1_query.grpc.swift in Sources */,
 				040FA834275F55C200229F6F /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				E1406FC02260643200D9440C /* BlockInfo.swift in Sources */,
 				048C831E27BF572800270528 /* ethermint_crypto_v1_ethsecp256k1_keys.pb.swift in Sources */,
@@ -7138,6 +7168,7 @@
 				284FBC7426DB961A00403FE2 /* DenomsToClaim.swift in Sources */,
 				28E8FAF32719C279005EAA9B /* SifDexSwapViewController.swift in Sources */,
 				04C43B50278D5F520022D5DF /* kava_committee_v1beta1_genesis.pb.swift in Sources */,
+				0444D40027E1E87900819B21 /* osmosis_gamm_v1beta1_tx.grpc.swift in Sources */,
 				28D7BE5325F0FAD0006EECD7 /* KavaHardInterestRate.swift in Sources */,
 				040FA7B5275F55C200229F6F /* iscn_tx.pb.swift in Sources */,
 				040FAAD4275F55C400229F6F /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
@@ -7168,7 +7199,6 @@
 				040FA87C275F55C200229F6F /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				2876AD5A240CDC5A005B33F4 /* TokenDetailUnbondingDetailCell.swift in Sources */,
 				040FA7C5275F55C200229F6F /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */,
-				040FAA78275F55C400229F6F /* osmosis_txfees_v1beta1_gov.pb.swift in Sources */,
 				28A2A4BE271FF9030042ACC4 /* WalletRegenCell.swift in Sources */,
 				040FA86A275F55C200229F6F /* desmos_posts_v1beta1_report.pb.swift in Sources */,
 				046FF016277B43E300F72C11 /* GenDenom0ViewController.swift in Sources */,
@@ -7178,6 +7208,7 @@
 				046BD23027795CD4002333B5 /* TxSendNFTCell.swift in Sources */,
 				040FAA58275F55C400229F6F /* rizon_treasury_tx.grpc.swift in Sources */,
 				28B785BB26B808CE009F755F /* StepEventHorizon0ViewController.swift in Sources */,
+				0444D40927E1E87900819B21 /* osmosis_incentives_tx.pb.swift in Sources */,
 				049DAA0127311DEB00658CFB /* WalletGBridgeCell.swift in Sources */,
 				28156E7F25360B70006FF06C /* HardListCell.swift in Sources */,
 				040FA810275F55C200229F6F /* bitsong_nft_v1beta1_genesis.pb.swift in Sources */,
@@ -7192,20 +7223,22 @@
 				040FAA0A275F55C300229F6F /* injective_oracle_v1beta1_tx.grpc.swift in Sources */,
 				040FAA28275F55C300229F6F /* desmos_profiles_v1beta1_query_app_links.pb.swift in Sources */,
 				283D2EAC24F56AFF00247424 /* OkUnbonding.swift in Sources */,
+				0444D3FE27E1E87900819B21 /* osmosis_pool-incentives_v1beta1_gov.pb.swift in Sources */,
 				048C830C27BF572800270528 /* evmos_erc20_v1_tx.pb.swift in Sources */,
 				040FAB0E275F55C400229F6F /* akash_audit_v1beta2_audit.grpc.swift in Sources */,
+				0444D3F927E1E87900819B21 /* osmosis_incentives_query.pb.swift in Sources */,
 				040FA9A9275F55C300229F6F /* iris_mod_farm_query.pb.swift in Sources */,
 				040FAA80275F55C400229F6F /* injective_oracle_v1beta1_oracle.pb.swift in Sources */,
 				04B1BEA427A3BD1B00B1236A /* axelar_evm_v1beta1_query.pb.swift in Sources */,
 				040FA809275F55C200229F6F /* akash_audit_v1beta2_query.grpc.swift in Sources */,
 				040FA80F275F55C200229F6F /* sentinel_subscription_v1_genesis.pb.swift in Sources */,
 				040FA90B275F55C300229F6F /* rizon_tokenswap_tx.grpc.swift in Sources */,
+				0444D3F827E1E87900819B21 /* osmosis_claim_v1beta1_params.pb.swift in Sources */,
 				040FA833275F55C200229F6F /* em_market_v1_query.pb.swift in Sources */,
 				048C836327BF573D00270528 /* provenance_metadata_v1_query.grpc.swift in Sources */,
 				0428ACFE268AD31700EB438F /* BandOracleStatus.swift in Sources */,
 				040FA907275F55C300229F6F /* stargaze_claim_v1beta1_query.grpc.swift in Sources */,
 				04C43B5D278D5F520022D5DF /* kava_swap_v1beta1_tx.grpc.swift in Sources */,
-				040FAAF4275F55C400229F6F /* osmosis_claim_v1beta1_genesis.pb.swift in Sources */,
 				048C830927BF572800270528 /* evmos_vesting_v1_tx.pb.swift in Sources */,
 				040FA7C4275F55C200229F6F /* iris_mod_oracle_query.grpc.swift in Sources */,
 				2852EAF02681A4CC003A5E74 /* WalletOsmoCell.swift in Sources */,
@@ -7229,6 +7262,7 @@
 				04B1BE9F27A3BD1B00B1236A /* axelar_vote_v1beta1_params.pb.swift in Sources */,
 				040FAA82275F55C400229F6F /* akash_deployment_v1beta1_query.pb.swift in Sources */,
 				040FA93D275F55C300229F6F /* bcna_query.pb.swift in Sources */,
+				0444D3E427E1E87900819B21 /* osmosis_gamm_v1beta1_pool.pb.swift in Sources */,
 				040FA86D275F55C200229F6F /* shentu_cert_v1alpha1_tx.pb.swift in Sources */,
 				040FAA66275F55C400229F6F /* cosmos_authz_v1beta1_query.pb.swift in Sources */,
 				040FA93F275F55C300229F6F /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
@@ -7264,6 +7298,7 @@
 				040FAA8C275F55C400229F6F /* umee_peggy_v1_types.pb.swift in Sources */,
 				040FA96F275F55C300229F6F /* iris_mod_coinswap_query.pb.swift in Sources */,
 				048C835E27BF573D00270528 /* provenance_attribute_v1_query.pb.swift in Sources */,
+				0444D3DA27E1E87900819B21 /* osmosis_superfluid_gov.pb.swift in Sources */,
 				28AABEC525F8CB860019091F /* KavaHardModuleAccount.swift in Sources */,
 				040FA9BA275F55C300229F6F /* tendermint_liquidity_v1beta1_tx.pb.swift in Sources */,
 				E1FD232C233E1BDB009327FE /* WalletCosmosCell.swift in Sources */,
@@ -7291,7 +7326,6 @@
 				04C43B81278D5F530022D5DF /* kava_cdp_v1beta1_cdp.pb.swift in Sources */,
 				28C3F50D269DC54C00F4A58C /* TxGravitySwapCell.swift in Sources */,
 				28FEDCE526DB140A00A43D01 /* KavaIncentiveClaim0ViewController.swift in Sources */,
-				040FAA6F275F55C400229F6F /* osmosis_mint_v1beta1_query.pb.swift in Sources */,
 				040FA85D275F55C200229F6F /* starname_iov_configuration_v1beta1_query.pb.swift in Sources */,
 				04B1BE8927A3BD1B00B1236A /* axelar_evm_v1beta1_service.grpc.swift in Sources */,
 				E151B6492248583F0026B8C0 /* StdTx.swift in Sources */,
@@ -7315,7 +7349,6 @@
 				040FA7F0275F55C200229F6F /* em_liquidityprovider_v1_tx.pb.swift in Sources */,
 				04B1BE6D27A3BD1B00B1236A /* axelar_snapshot_v1beta1_params.pb.swift in Sources */,
 				040FA8A4275F55C200229F6F /* cosmos_vesting_v1beta1_vesting.pb.swift in Sources */,
-				040FA7AA275F55C200229F6F /* osmosis_incentives_tx.pb.swift in Sources */,
 				04C43B82278D5F530022D5DF /* kava_bep3_v1beta1_genesis.pb.swift in Sources */,
 				040FA95E275F55C300229F6F /* starname_iov_escrow_v1beta1_query.grpc.swift in Sources */,
 				E1A82DD3224222E00097CAEE /* Password.swift in Sources */,
@@ -7339,7 +7372,6 @@
 				040FA98C275F55C300229F6F /* ibc_core_channel_v1_genesis.pb.swift in Sources */,
 				048C836427BF573D00270528 /* provenance_marker_v1_proposals.pb.swift in Sources */,
 				040FA86C275F55C200229F6F /* starname_cosmwasm_wasm_v1_query.grpc.swift in Sources */,
-				040FA8C8275F55C200229F6F /* osmosis_incentives_query.pb.swift in Sources */,
 				040FA979275F55C300229F6F /* tendermint_libs_bits_types.pb.swift in Sources */,
 				28D7BE4F25F0F7CA006EECD7 /* HardParam.swift in Sources */,
 				E1827E2A2256298300BC0350 /* ValidatorDetailHistoryHeader.swift in Sources */,
@@ -7393,7 +7425,6 @@
 				046BD22C27795CC6002333B5 /* TxIssueNFTCell.swift in Sources */,
 				040FAAC3275F55C400229F6F /* persistence_halving_v1beta1_halving.pb.swift in Sources */,
 				040FA7D1275F55C200229F6F /* cosmos_mint_v1beta1_mint.pb.swift in Sources */,
-				040FAA9F275F55C400229F6F /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */,
 				040FA7CC275F55C200229F6F /* em_buyback_v1_query.pb.swift in Sources */,
 				289E4DAB26E59263007C7C35 /* WalletUmeeCell.swift in Sources */,
 				040FA8AE275F55C200229F6F /* injective_exchange_v1beta1_query.pb.swift in Sources */,
@@ -7401,6 +7432,7 @@
 				E1A82DE32244821D0097CAEE /* PublicKey.swift in Sources */,
 				048C831627BF572800270528 /* ethermint_types_v1_account.pb.swift in Sources */,
 				040FAA05275F55C300229F6F /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */,
+				0444D3EF27E1E87900819B21 /* osmosis_mint_v1beta1_mint.pb.swift in Sources */,
 				046FF00F2779A16500F72C11 /* MyDenomsViewController.swift in Sources */,
 				040FA893275F55C200229F6F /* lum_airdrop_params.pb.swift in Sources */,
 				040FA837275F55C200229F6F /* cosmos_slashing_v1beta1_query.grpc.swift in Sources */,
@@ -7436,7 +7468,6 @@
 				284D17DC2535573100C364F9 /* CdpListViewController.swift in Sources */,
 				0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */,
 				283E9458254901D9007A9291 /* RegisterDomain0ViewController.swift in Sources */,
-				040FA7B2275F55C200229F6F /* osmosis_claim_v1beta1_claim.pb.swift in Sources */,
 				040FAA98275F55C400229F6F /* cryptoorg_supply_v1_accounts.pb.swift in Sources */,
 				040FA8E2275F55C200229F6F /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
 				040FAB09275F55C400229F6F /* bitsong_auction_v1beta1_tx.pb.swift in Sources */,
@@ -7465,6 +7496,7 @@
 				040FAA8A275F55C400229F6F /* sentinel_vpn_v1_params.pb.swift in Sources */,
 				28B37D2A26D8EAFE008AACD2 /* PoolListViewController.swift in Sources */,
 				040FA8E0275F55C200229F6F /* injective_peggy_v1_attestation.pb.swift in Sources */,
+				0444D3F227E1E87900819B21 /* osmosis_mint_v1beta1_genesis.pb.swift in Sources */,
 				28D372A0254BFCCA0071B136 /* RegisterAccount0ViewController.swift in Sources */,
 				040FA892275F55C200229F6F /* umee_peggy_v1_pool.pb.swift in Sources */,
 				04C43B74278D5F530022D5DF /* kava_swap_v1beta1_query.pb.swift in Sources */,
@@ -7485,6 +7517,7 @@
 				04C43B71278D5F530022D5DF /* kava_pricefeed_v1beta1_query.grpc.swift in Sources */,
 				042E0C40273BBE190026CEFB /* WalletComdexCell.swift in Sources */,
 				040FA95C275F55C300229F6F /* shentu_gov_v1alpha1_tx.pb.swift in Sources */,
+				0444D3FA27E1E87900819B21 /* osmosis_incentives_query.grpc.swift in Sources */,
 				040FA816275F55C200229F6F /* sentinel_deposit_v1_events.pb.swift in Sources */,
 				040FA976275F55C300229F6F /* comdex_asset_v1beta1_pair.pb.swift in Sources */,
 				288F807A270DDEFA009825B5 /* TxSifAddLpCell.swift in Sources */,
@@ -7499,6 +7532,7 @@
 				040FAA7C275F55C400229F6F /* ixo_bonds_tx.pb.swift in Sources */,
 				040FA81B275F55C200229F6F /* cosmos_crisis_v1beta1_tx.grpc.swift in Sources */,
 				040FAA2D275F55C400229F6F /* ibc_core_connection_v1_genesis.pb.swift in Sources */,
+				0444D40427E1E87900819B21 /* osmosis_mint_v1beta1_query.grpc.swift in Sources */,
 				048C82FF27BF572800270528 /* ethermint_evm_v1_genesis.pb.swift in Sources */,
 				040FAA3B275F55C400229F6F /* akash_deployment_v1beta2_service.pb.swift in Sources */,
 				2842AB5D242C2D4D00248EEB /* Cdp.swift in Sources */,
@@ -7511,6 +7545,7 @@
 				040FA9DE275F55C300229F6F /* starname_iov_starname_v1beta1_genesis.pb.swift in Sources */,
 				040FA881275F55C200229F6F /* cosmos_crisis_v1beta1_genesis.pb.swift in Sources */,
 				040FAB06275F55C400229F6F /* sentinel_swap_v1_events.pb.swift in Sources */,
+				0444D3DC27E1E87900819B21 /* osmosis_store_v1beta1_tree.pb.swift in Sources */,
 				283E9468254902D4007A9291 /* TxRegisterAccountCell.swift in Sources */,
 				E1E251DF22A66FC30008F0DB /* OtherValidatorCell.swift in Sources */,
 				040FA821275F55C200229F6F /* ibc_core_connection_v1_tx.pb.swift in Sources */,
@@ -7518,6 +7553,7 @@
 				040FA972275F55C300229F6F /* sentinel_vpn_v1_msg.pb.swift in Sources */,
 				285A33D12446CDAB0052BD3D /* StepHtlcSend2ViewController.swift in Sources */,
 				040FA8E3275F55C200229F6F /* desmos_posts_v1beta1_msgs.grpc.swift in Sources */,
+				0444D3E927E1E87900819B21 /* osmosis_lockup_tx.pb.swift in Sources */,
 				04B1BE9927A3BD1B00B1236A /* axelar_snapshot_exported_v1beta1_types.pb.swift in Sources */,
 				04394AFF2744C6FF002334F1 /* ManageChainAccoutsCell.swift in Sources */,
 				284FF3C225A6C13E00505E7A /* OkAccountInfo.swift in Sources */,
@@ -7525,20 +7561,22 @@
 				040FAADA275F55C400229F6F /* sentinel_session_v1_events.pb.swift in Sources */,
 				04C43B51278D5F520022D5DF /* kava_hard_v1beta1_query.pb.swift in Sources */,
 				2845D884246FAEED007CD497 /* VoteTallyTableViewCell.swift in Sources */,
+				0444D3E727E1E87900819B21 /* osmosis_gamm_v1beta1_query.pb.swift in Sources */,
 				286EB38626035FB00021C79D /* TxCdpLiquidateCell.swift in Sources */,
 				2877013625F78E0E00E9663F /* KavaCdpDeposits.swift in Sources */,
 				040FA922275F55C300229F6F /* cosmos_authz_v1beta1_tx.pb.swift in Sources */,
 				04C43B73278D5F530022D5DF /* kava_hard_v1beta1_genesis.pb.swift in Sources */,
 				040FA940275F55C300229F6F /* sifnode_tokenregistry_v1_query.grpc.swift in Sources */,
+				0444D3DB27E1E87900819B21 /* osmosis_epochs_query.pb.swift in Sources */,
 				280E1F0C254AB5BA0007BA7D /* ReplaceResource0ViewController.swift in Sources */,
 				E1E15FBF2253663600A10C7B /* AccountPopupCell.swift in Sources */,
-				040FA82B275F55C200229F6F /* osmosis_txfees_v1beta1_feetoken.pb.swift in Sources */,
 				04B1BE8F27A3BD1B00B1236A /* axelar_permission_exported_v1beta1_types.pb.swift in Sources */,
 				285A33E2244862670052BD3D /* HtlcResultViewController.swift in Sources */,
 				2812BE1A2611E9F50050AE7C /* VestingAccountInfo.swift in Sources */,
 				E171A06B225B04BD00C5756C /* TransactionViewController.swift in Sources */,
 				2894106826FF1307005BCBE4 /* SelectRelayerCell.swift in Sources */,
 				040FA9AB275F55C300229F6F /* sentinel_swap_v1_swap.pb.swift in Sources */,
+				0444D3E227E1E87900819B21 /* osmosis_gamm_v1beta1_tx.pb.swift in Sources */,
 				04C53944274B41FE00C1EE83 /* CommonWCViewController.swift in Sources */,
 				040FA9B3275F55C300229F6F /* sentinel_session_v1_querier.grpc.swift in Sources */,
 				040FA93C275F55C300229F6F /* tendermint_liquidity_v1beta1_tx.grpc.swift in Sources */,
@@ -7594,7 +7632,6 @@
 				040FA98A275F55C300229F6F /* injective_ocr_v1beta1_tx.grpc.swift in Sources */,
 				040FA9F6275F55C300229F6F /* panacea_aol_v2_owner.pb.swift in Sources */,
 				2834399E2531D1A200CCFADE /* StarNameListViewController.swift in Sources */,
-				040FAA7F275F55C400229F6F /* osmosis_incentives_gauge.pb.swift in Sources */,
 				2827E11123F3896C007CDB6E /* TxDetailViewController.swift in Sources */,
 				040FA7A8275F55C200229F6F /* akash_escrow_v1beta2_query.pb.swift in Sources */,
 				283E947C25490322007A9291 /* TxRenewStarnameCell.swift in Sources */,
@@ -7620,6 +7657,7 @@
 				28D7BDA825F0B792006EECD7 /* ClaimMultiplier.swift in Sources */,
 				040FA92F275F55C300229F6F /* secret_compute_v1beta1_msg.pb.swift in Sources */,
 				040FAA1B275F55C300229F6F /* stargaze_alloc_v1beta1_query.grpc.swift in Sources */,
+				0444D3F727E1E87900819B21 /* osmosis_txfees_v1beta1_gov.pb.swift in Sources */,
 				040FA9D8275F55C300229F6F /* shentu_cvm_v1alpha1_tx.pb.swift in Sources */,
 				04B1BE8427A3BD1B00B1236A /* axelar_nexus_v1beta1_genesis.pb.swift in Sources */,
 				040FA8D4275F55C200229F6F /* desmos_posts_v1beta1_posts.pb.swift in Sources */,
@@ -7627,18 +7665,17 @@
 				040FAA72275F55C400229F6F /* sentinel_subscription_v1_msg.pb.swift in Sources */,
 				04C43B6D278D5F530022D5DF /* kava_cdp_v1beta1_query.pb.swift in Sources */,
 				2894105526FDBE97005BCBE4 /* IBCSend1ViewController.swift in Sources */,
+				0444D3E827E1E87900819B21 /* osmosis_incentives_tx.grpc.swift in Sources */,
 				040FA930275F55C300229F6F /* em_authority_v1_authority.pb.swift in Sources */,
 				040FA914275F55C300229F6F /* sifnode_ethbridge_v1_query.grpc.swift in Sources */,
 				04B1BE2127A3BC4500B1236A /* cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				040FA96A275F55C300229F6F /* shentu_cert_v1alpha1_cert.pb.swift in Sources */,
-				040FAA0C275F55C300229F6F /* osmosis_txfees_v1beta1_query.pb.swift in Sources */,
 				040FAA39275F55C400229F6F /* stargaze_claim_v1beta1_claim_record.pb.swift in Sources */,
 				28EEEC9C26DABA74002DDC4A /* KavaSwap0ViewController.swift in Sources */,
 				E1827E2F225629BF00BC0350 /* ValidatorDetailHistoryEmpty.swift in Sources */,
 				040FA8DD275F55C200229F6F /* shentu_cvm_v1alpha1_query.grpc.swift in Sources */,
 				040FAA59275F55C400229F6F /* iris_mod_token_tx.grpc.swift in Sources */,
 				040FAAD1275F55C400229F6F /* sifnode_ethbridge_v1_query.pb.swift in Sources */,
-				040FA95D275F55C300229F6F /* osmosis_pool-incentives_v1beta1_genesis.pb.swift in Sources */,
 				040FAABC275F55C400229F6F /* juno_mint_query.pb.swift in Sources */,
 				040FA8B6275F55C200229F6F /* desmos_posts_v1beta1_query.grpc.swift in Sources */,
 				040FA932275F55C300229F6F /* tendermint_version_types.pb.swift in Sources */,
@@ -7653,19 +7690,21 @@
 				040FA8B9275F55C200229F6F /* sentinel_provider_v1_events.pb.swift in Sources */,
 				040FA969275F55C300229F6F /* gravity_v1_query.pb.swift in Sources */,
 				040FA960275F55C300229F6F /* sifnode_ethbridge_v1_tx.pb.swift in Sources */,
+				0444D40B27E1E87900819B21 /* osmosis_lockup_tx.grpc.swift in Sources */,
 				04B1BEA827A3BD1B00B1236A /* axelar_bitcoin_v1beta1_service.grpc.swift in Sources */,
 				04B1BE9727A3BD1B00B1236A /* axelar_nexus_v1beta1_types.pb.swift in Sources */,
 				040FA8A9275F55C200229F6F /* ibc_core_types_v1_genesis.pb.swift in Sources */,
 				040FAADE275F55C400229F6F /* cosmos_evidence_v1beta1_genesis.pb.swift in Sources */,
 				040FA9E6275F55C300229F6F /* sifnode_oracle_v1_types.pb.swift in Sources */,
-				040FA9CE275F55C300229F6F /* osmosis_lockup_query.pb.swift in Sources */,
 				28BB2A912533DA2D00CFF097 /* AccountCell.swift in Sources */,
 				28DB56F225FA3B7100B2F0E5 /* HardPoolDeposit0ViewController.swift in Sources */,
 				040FA7EF275F55C200229F6F /* iris_mod_htlc_query.pb.swift in Sources */,
+				0444D3FC27E1E87900819B21 /* osmosis_claim_v1beta1_claim.pb.swift in Sources */,
 				28B4304224F7EE4B00BD7BB2 /* StepOkWithdrawCheckViewController.swift in Sources */,
 				040FA8F1275F55C200229F6F /* akash_audit_v1beta2_genesis.pb.swift in Sources */,
 				040FA866275F55C200229F6F /* desmos_fees_v1beta1_query.grpc.swift in Sources */,
 				040FA84E275F55C200229F6F /* confio_proofs.pb.swift in Sources */,
+				0444D3EC27E1E87900819B21 /* osmosis_superfluid_tx.grpc.swift in Sources */,
 				040FA81D275F55C200229F6F /* cryptoorg_nft_v1_nft.pb.swift in Sources */,
 				E1A82DDC224378D40097CAEE /* CardView.swift in Sources */,
 				040FAA5E275F55C400229F6F /* em_authority_v1_query.grpc.swift in Sources */,
@@ -7676,7 +7715,6 @@
 				040FA961275F55C300229F6F /* sifnode_clp_v1_querier.grpc.swift in Sources */,
 				040FA858275F55C200229F6F /* desmos_profiles_v1beta1_msg_server.pb.swift in Sources */,
 				040FAAF2275F55C400229F6F /* ibc_applications_transfer_v1_query.grpc.swift in Sources */,
-				040FA98B275F55C300229F6F /* osmosis_pool-incentives_v1beta1_incentives.pb.swift in Sources */,
 				040FAA23275F55C300229F6F /* iris_mod_farm_tx.grpc.swift in Sources */,
 				040FAB02275F55C400229F6F /* sentinel_session_v1_msg.grpc.swift in Sources */,
 				040FA9F0275F55C300229F6F /* google_api_annotations.pb.swift in Sources */,
@@ -7723,7 +7761,6 @@
 				040FA7B9275F55C200229F6F /* umee_oracle_v1beta1_tx.grpc.swift in Sources */,
 				040FAA8E275F55C400229F6F /* iscn_tx.grpc.swift in Sources */,
 				040FAAC2275F55C400229F6F /* stargaze_mint_v1beta1_query.grpc.swift in Sources */,
-				040FA8D8275F55C200229F6F /* osmosis_epochs_genesis.pb.swift in Sources */,
 				E151B639224626990026B8C0 /* BorderButton.swift in Sources */,
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
 				040FA7EC275F55C200229F6F /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
@@ -7754,12 +7791,10 @@
 				040FA88C275F55C200229F6F /* panacea_did_v2_query.grpc.swift in Sources */,
 				040FAA14275F55C300229F6F /* akash_inflation_v1beta2_params.pb.swift in Sources */,
 				040FA9A3275F55C300229F6F /* cosmos_tx_v1beta1_tx.pb.swift in Sources */,
-				040FA825275F55C200229F6F /* osmosis_gamm_v1beta1_tx.grpc.swift in Sources */,
 				040FAAD0275F55C400229F6F /* sentinel_deposit_v1_msg.pb.swift in Sources */,
 				04C43B55278D5F520022D5DF /* kava_kavadist_v1beta1_genesis.pb.swift in Sources */,
 				285A33D32446CDB80052BD3D /* StepHtlcSend3ViewController.swift in Sources */,
 				E1F7F63623436B71000E597F /* BnbHistory.swift in Sources */,
-				040FA8ED275F55C200229F6F /* osmosis_mint_v1beta1_mint.pb.swift in Sources */,
 				04D138572691E25500D6AF9F /* TxJoinPoolCell.swift in Sources */,
 				040FA991275F55C300229F6F /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				04C43B5F278D5F530022D5DF /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
@@ -7776,7 +7811,7 @@
 				28248A9425DD3DD4004F3FB0 /* ApiHistoryCustom.swift in Sources */,
 				040FA920275F55C300229F6F /* cosmos_base_store_v1beta1_listening.pb.swift in Sources */,
 				040FAA60275F55C400229F6F /* akash_deployment_v1beta1_group.pb.swift in Sources */,
-				040FA9D3275F55C300229F6F /* osmosis_gamm_v1beta1_genesis.pb.swift in Sources */,
+				0444D40327E1E87900819B21 /* osmosis_claim_v1beta1_query.grpc.swift in Sources */,
 				287E0AA826EDEEE400F8C242 /* WalletEmoneyCell.swift in Sources */,
 				040FAA93275F55C400229F6F /* cosmos_nft_v1beta1_nft.pb.swift in Sources */,
 				040FAAE7275F55C400229F6F /* umee_leverage_v1beta1_leverage.pb.swift in Sources */,
@@ -7803,6 +7838,7 @@
 				040FA990275F55C300229F6F /* bitsong_auction_v1beta1_query.grpc.swift in Sources */,
 				040FA8FB275F55C300229F6F /* desmos_profiles_legacy_v100_models_params.pb.swift in Sources */,
 				040FA938275F55C300229F6F /* cosmos_slashing_v1beta1_query.pb.swift in Sources */,
+				0444D3FF27E1E87900819B21 /* osmosis_incentives_gauge.pb.swift in Sources */,
 				040FA879275F55C200229F6F /* injective_types_v1beta1_tx_ext.pb.swift in Sources */,
 				040FA949275F55C300229F6F /* bitsong_fantoken_v1beta1_tx.grpc.swift in Sources */,
 				040FAAE6275F55C400229F6F /* ibc_core_connection_v1_tx.grpc.swift in Sources */,
@@ -7842,10 +7878,8 @@
 				040FAA47275F55C400229F6F /* akash_market_v1beta2_service.pb.swift in Sources */,
 				040FA88F275F55C200229F6F /* desmos_profiles_v1beta1_models_params.pb.swift in Sources */,
 				048C836D27BF573D00270528 /* provenance_metadata_v1_p8e_p8e.pb.swift in Sources */,
-				040FA935275F55C300229F6F /* osmosis_pool-incentives_v1beta1_gov.pb.swift in Sources */,
 				040FA828275F55C200229F6F /* bcna_query.grpc.swift in Sources */,
 				040FA8DB275F55C200229F6F /* desmos_profiles_v1beta1_query.grpc.swift in Sources */,
-				040FA896275F55C200229F6F /* osmosis_epochs_query.pb.swift in Sources */,
 				28A2A4C2271FF9140042ACC4 /* WalletBitcannaCell.swift in Sources */,
 				E19A321922544EB500A05E41 /* DashedView.swift in Sources */,
 				2888B800246BCA3200B2EB4A /* KavaSwapInfo.swift in Sources */,
@@ -7856,6 +7890,7 @@
 				285A33D624475DC00052BD3D /* SelectPopupViewController.swift in Sources */,
 				0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */,
 				040FA903275F55C300229F6F /* band_oracle_v1_query.pb.swift in Sources */,
+				0444D3F027E1E87900819B21 /* osmosis_pool-incentives_v1beta1_query.pb.swift in Sources */,
 				04B1BE7827A3BD1B00B1236A /* axelar_permission_v1beta1_query.pb.swift in Sources */,
 				040FA7D5275F55C200229F6F /* panacea_aol_v2_tx.pb.swift in Sources */,
 				040FA8EA275F55C200229F6F /* tendermint_farming_v1beta1_query.pb.swift in Sources */,
@@ -7924,6 +7959,7 @@
 				28D7BE6F25F0FDB3006EECD7 /* HardMyBorrow.swift in Sources */,
 				040FA80E275F55C200229F6F /* juno_mint_mint.pb.swift in Sources */,
 				040FAA38275F55C400229F6F /* sentinel_session_v1_msg.pb.swift in Sources */,
+				0444D3EA27E1E87900819B21 /* osmosis_superfluid_params.pb.swift in Sources */,
 				E1FD2328233E1BC4009327FE /* WalletIrisCell.swift in Sources */,
 				040FA8FC275F55C300229F6F /* bitsong_nft_v1beta1_tx.grpc.swift in Sources */,
 				040FA86B275F55C200229F6F /* comdex_vault_v1beta1_events.pb.swift in Sources */,
@@ -7971,6 +8007,7 @@
 				040FA8F7275F55C200229F6F /* starname_iov_starname_v1beta1_types.pb.swift in Sources */,
 				28E3E371266D033100BA89C2 /* HdacUtil.swift in Sources */,
 				047AE7242693378A00C1DD51 /* TxUnlockPeriodLockCell.swift in Sources */,
+				0444D3FB27E1E87900819B21 /* osmosis_pool-incentives_v1beta1_query.grpc.swift in Sources */,
 				040FA8FF275F55C300229F6F /* ixo_project_query.grpc.swift in Sources */,
 				040FAAA6275F55C400229F6F /* em_market_v1_tx.grpc.swift in Sources */,
 				040FA7BE275F55C200229F6F /* stargaze_claim_v1beta1_tx.pb.swift in Sources */,
@@ -7986,7 +8023,6 @@
 				04B1BE7B27A3BD1B00B1236A /* axelar_snapshot_v1beta1_types.pb.swift in Sources */,
 				040FA7FF275F55C200229F6F /* desmos_profiles_legacy_v100_models_app_links.pb.swift in Sources */,
 				040FA9C5275F55C300229F6F /* cosmos_group_v1beta1_types.pb.swift in Sources */,
-				040FA89E275F55C200229F6F /* osmosis_lockup_genesis.pb.swift in Sources */,
 				040FA9E7275F55C300229F6F /* sentinel_swap_v1_querier.grpc.swift in Sources */,
 				040FA8A5275F55C200229F6F /* iris_mod_htlc_genesis.pb.swift in Sources */,
 				040FA9B9275F55C300229F6F /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
@@ -8034,11 +8070,12 @@
 				040FA842275F55C200229F6F /* regen_group_v1alpha1_events.pb.swift in Sources */,
 				28B4303E24F7EE1F00BD7BB2 /* StepOkDepositCheckViewController.swift in Sources */,
 				28156E9A2536DE14006FF06C /* HarvestDetailTopCell.swift in Sources */,
-				040FA97A275F55C300229F6F /* osmosis_gamm_v1beta1_query.pb.swift in Sources */,
 				04E2A32327A5787A0045ED21 /* Cw20Token.swift in Sources */,
+				0444D3E527E1E87900819B21 /* osmosis_superfluid_superfluid.pb.swift in Sources */,
 				040FA8C5275F55C200229F6F /* sentinel_plan_v1_msg.grpc.swift in Sources */,
 				04E25D412770C8BE009B39BA /* NTFDetailViewController.swift in Sources */,
 				28440C63271E7BA300B4A7C3 /* SifJoinPool3ViewController.swift in Sources */,
+				0444D40127E1E87900819B21 /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */,
 				040FAAAB275F55C400229F6F /* injective_peggy_v1_msgs.grpc.swift in Sources */,
 				040FA8D1275F55C200229F6F /* shentu_cert_v1alpha1_query.grpc.swift in Sources */,
 				28B4304624F8B36600BD7BB2 /* OkMyValidatorViewController.swift in Sources */,
@@ -8049,6 +8086,7 @@
 				28429196264A45FB00130651 /* NativeTokenDetailViewController.swift in Sources */,
 				040FA7DF275F55C200229F6F /* ixo_did_tx.pb.swift in Sources */,
 				040FA8CC275F55C200229F6F /* cosmos_base_store_v1beta1_commit_info.pb.swift in Sources */,
+				0444D40D27E1E87900819B21 /* osmosis_epochs_genesis.pb.swift in Sources */,
 				040FA80A275F55C200229F6F /* tendermint_types_types.pb.swift in Sources */,
 				04CFBD552692278C0013150B /* TxIbcUpdateClientCell.swift in Sources */,
 				28A97CB026DE46FD0085FD0E /* GravityPoolViewController.swift in Sources */,
@@ -8062,6 +8100,7 @@
 				04AAD5BD275BBD23002D3A95 /* KeyRestoreViewController.swift in Sources */,
 				040FA9F4275F55C300229F6F /* em_authority_v1_query.pb.swift in Sources */,
 				040FA857275F55C200229F6F /* sentinel_session_v1_querier.pb.swift in Sources */,
+				0444D3FD27E1E87900819B21 /* osmosis_lockup_query.grpc.swift in Sources */,
 				040FAA11275F55C300229F6F /* iris_mod_token_genesis.pb.swift in Sources */,
 				2889FD822603484000CA9896 /* TxIncentiveHardCell.swift in Sources */,
 				28AABECB25F8CBDB0019091F /* HardAccountValue.swift in Sources */,
@@ -8103,7 +8142,6 @@
 				040FAA40275F55C400229F6F /* ibc_applications_transfer_v1_tx.pb.swift in Sources */,
 				E1FD2338233E1C30009327FE /* WalletInflationCell.swift in Sources */,
 				E171A073225B08CE00C5756C /* StepDelegateCheckViewController.swift in Sources */,
-				040FA855275F55C200229F6F /* osmosis_gamm_v1beta1_query.grpc.swift in Sources */,
 				04B1BE2027A3BC4500B1236A /* cosmwasm_wasm_v1_tx.grpc.swift in Sources */,
 				040FA9EB275F55C300229F6F /* cosmos_gov_v1beta1_tx.grpc.swift in Sources */,
 				280E1EFD254A7AD60007BA7D /* DeleteStarname3ViewController.swift in Sources */,
@@ -8112,8 +8150,8 @@
 				28440C57271E7B6800B4A7C3 /* SifSwap0ViewController.swift in Sources */,
 				28B2E4CB26CFEBD300ECF960 /* PoolTokenGrpcViewController.swift in Sources */,
 				040FA7D9275F55C200229F6F /* injective_peggy_v1_msgs.pb.swift in Sources */,
-				040FAA87275F55C400229F6F /* osmosis_lockup_tx.grpc.swift in Sources */,
 				040FA7DA275F55C200229F6F /* ibc_core_channel_v1_query.pb.swift in Sources */,
+				0444D3DE27E1E87900819B21 /* osmosis_superfluid_genesis.pb.swift in Sources */,
 				040FAAFC275F55C400229F6F /* panacea_did_v2_query.pb.swift in Sources */,
 				040FA8F3275F55C200229F6F /* sentinel_session_v1_genesis.pb.swift in Sources */,
 				040FAA07275F55C300229F6F /* akash_deployment_v1beta2_groupspec.pb.swift in Sources */,
@@ -8143,6 +8181,7 @@
 				282FF34D23F50E010028CC66 /* TxRedelegateCell.swift in Sources */,
 				28DB571025FA3BDD00B2F0E5 /* HardPoolRepay0ViewController.swift in Sources */,
 				E1FD233C233E1C44009327FE /* WalletGuideCell.swift in Sources */,
+				0444D3E027E1E87900819B21 /* osmosis_superfluid_query.pb.swift in Sources */,
 				040FAA13275F55C300229F6F /* em_queries_v1_query.pb.swift in Sources */,
 				28E3E3802671BE8D00BA89C2 /* Param.swift in Sources */,
 				040FA977275F55C300229F6F /* injective_peggy_v1_query.grpc.swift in Sources */,
@@ -8188,10 +8227,12 @@
 				28D372AA254BFCE70071B136 /* RegisterAccount4ViewController.swift in Sources */,
 				040FAA16275F55C300229F6F /* desmos_subspaces_v1beta1_query.grpc.swift in Sources */,
 				28D28AD926CB6C1E0074964C /* StartUnlock0ViewController.swift in Sources */,
+				0444D3F327E1E87900819B21 /* osmosis_gamm_v1beta1_query.grpc.swift in Sources */,
 				04B1BEA127A3BD1B00B1236A /* axelar_permission_v1beta1_types.pb.swift in Sources */,
 				280E6CDD2605D78900B3BCBB /* WalletPersisCell.swift in Sources */,
 				040FA9D0275F55C300229F6F /* em_issuer_v1_query.pb.swift in Sources */,
 				2842AB6E242C5C7200248EEB /* CdpLisyMyCell.swift in Sources */,
+				0444D3F427E1E87900819B21 /* osmosis_superfluid_tx.pb.swift in Sources */,
 				2852EAF926821084003A5E74 /* SifIncentive.swift in Sources */,
 				04B1BE9227A3BD1B00B1236A /* axelar_vote_v1beta1_types.pb.swift in Sources */,
 				040FAABD275F55C400229F6F /* regen_group_v1alpha1_tx.grpc.swift in Sources */,
@@ -8202,13 +8243,14 @@
 				E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */,
 				04C43B53278D5F520022D5DF /* kava_committee_v1beta1_tx.pb.swift in Sources */,
 				047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */,
-				040FAB0F275F55C400229F6F /* osmosis_claim_v1beta1_query.grpc.swift in Sources */,
 				040FAAD2275F55C400229F6F /* injective_insurance_v1beta1_query.pb.swift in Sources */,
 				040FA885275F55C200229F6F /* akash_deployment_v1beta2_groupmsg.pb.swift in Sources */,
 				040FA8CB275F55C200229F6F /* injective_ocr_v1beta1_ocr.pb.swift in Sources */,
 				284FBC7926DBE96000403FE2 /* TxSwapTokenCell.swift in Sources */,
 				040FAA12275F55C300229F6F /* cosmos_gov_v1beta1_query.grpc.swift in Sources */,
+				0444D3EE27E1E87900819B21 /* osmosis_superfluid_query.grpc.swift in Sources */,
 				040FA848275F55C200229F6F /* umee_leverage_v1beta1_query.grpc.swift in Sources */,
+				0444D3E327E1E87900819B21 /* osmosis_lockup_genesis.pb.swift in Sources */,
 				040FA7ED275F55C200229F6F /* injective_exchange_v1beta1_tx.grpc.swift in Sources */,
 				040FA85F275F55C200229F6F /* em_buyback_v1_genesis.pb.swift in Sources */,
 				040FA9B5275F55C300229F6F /* em_market_v1_market.pb.swift in Sources */,
@@ -8222,23 +8264,23 @@
 				040FA8B3275F55C200229F6F /* akash_deployment_v1beta2_deploymentmsg.pb.swift in Sources */,
 				2876546B2726B2690071FF96 /* WalletChainEditViewController.swift in Sources */,
 				040FAA1C275F55C300229F6F /* panacea_aol_v2_record.pb.swift in Sources */,
+				0444D3EB27E1E87900819B21 /* osmosis_claim_v1beta1_query.pb.swift in Sources */,
 				040FAAB9275F55C400229F6F /* cryptoorg_chainmain_v1_genesis.pb.swift in Sources */,
 				040FAAEC275F55C400229F6F /* konstellation_oracle_exchange_rate.pb.swift in Sources */,
 				28BB2A812533D9FB00CFF097 /* DomainPromotionCell.swift in Sources */,
 				280E1F16254ABB080007BA7D /* ResourceAddCell.swift in Sources */,
 				040FA92D275F55C300229F6F /* sifnode_tokenregistry_v1_tx.pb.swift in Sources */,
-				040FA876275F55C200229F6F /* osmosis_claim_v1beta1_query.pb.swift in Sources */,
 				04C43B65278D5F530022D5DF /* kava_bep3_v1beta1_query.pb.swift in Sources */,
 				040FA92B275F55C300229F6F /* sifnode_dispensation_v1_query.pb.swift in Sources */,
 				04B1BEA527A3BD1B00B1236A /* axelar_snapshot_v1beta1_genesis.pb.swift in Sources */,
 				040FAA75275F55C400229F6F /* rizon_treasury_params.pb.swift in Sources */,
 				E1FD2334233E1C16009327FE /* WalletPriceCell.swift in Sources */,
 				040FA901275F55C300229F6F /* sifnode_ethbridge_v1_tx.grpc.swift in Sources */,
-				040FA91F275F55C300229F6F /* osmosis_pool-incentives_v1beta1_query.pb.swift in Sources */,
 				048C830827BF572800270528 /* ethermint_evm_v1_tx.pb.swift in Sources */,
 				040FA8A6275F55C200229F6F /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
 				28BB2A8C2533DA1C00CFF097 /* DomainCell.swift in Sources */,
 				04B1BE9B27A3BD1B00B1236A /* axelar_tss_v1beta1_service.pb.swift in Sources */,
+				0444D40C27E1E87900819B21 /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */,
 				04B1BE9C27A3BD1B00B1236A /* axelar_tss_v1beta1_types.pb.swift in Sources */,
 				040FA993275F55C300229F6F /* iris_mod_htlc_query.grpc.swift in Sources */,
 				040FA8AD275F55C200229F6F /* sentinel_subscription_v1_subscription.pb.swift in Sources */,
@@ -8291,7 +8333,6 @@
 				04B1BE7327A3BD1B00B1236A /* axelar_tss_tofnd_v1beta1_tofnd.pb.swift in Sources */,
 				048C835727BF573D00270528 /* provenance_name_v1_genesis.pb.swift in Sources */,
 				04C43B84278D5F530022D5DF /* kava_incentive_v1beta1_tx.grpc.swift in Sources */,
-				040FA884275F55C200229F6F /* osmosis_epochs_query.grpc.swift in Sources */,
 				040FA975275F55C300229F6F /* bitsong_nft_v1beta1_nft.pb.swift in Sources */,
 				040FAA99275F55C400229F6F /* injective_auction_v1beta1_tx.pb.swift in Sources */,
 				2889C8BB276DC2B90041D68C /* WalletLumCell.swift in Sources */,
@@ -8307,7 +8348,6 @@
 				040FA910275F55C300229F6F /* regen_data_v1alpha2_query.pb.swift in Sources */,
 				040FAAC5275F55C400229F6F /* secret_registration_v1beta1_remote_attestation_types.pb.swift in Sources */,
 				040FAA33275F55C400229F6F /* desmos_posts_v1beta1_query.pb.swift in Sources */,
-				040FAAFA275F55C400229F6F /* osmosis_lockup_query.grpc.swift in Sources */,
 				040FA9D7275F55C300229F6F /* sentinel_deposit_v1_deposit.pb.swift in Sources */,
 				E151B632224533DC0026B8C0 /* ClaimRewardAllCell.swift in Sources */,
 				E151B64322484F490026B8C0 /* Fee.swift in Sources */,
@@ -8329,7 +8369,6 @@
 				E1827E212256292900BC0350 /* ValidatorDetailMyActionCell.swift in Sources */,
 				28E0458A269B35480022A366 /* SwapViewController.swift in Sources */,
 				04B1BE7927A3BD1B00B1236A /* axelar_reward_v1beta1_types.pb.swift in Sources */,
-				040FA89D275F55C200229F6F /* osmosis_mint_v1beta1_query.grpc.swift in Sources */,
 				040FA8C0275F55C200229F6F /* konstellation_oracle_query.grpc.swift in Sources */,
 				E16D9B172248BD990019B7BB /* CreateViewController.swift in Sources */,
 				28474ED0241E06AF00AF5A81 /* TxCdpWithdrawCell.swift in Sources */,
@@ -8344,7 +8383,6 @@
 				28D7BE0D25F0CE33006EECD7 /* KavaMyCdps.swift in Sources */,
 				280524B8255CEEC7004D6172 /* ExportStarname.swift in Sources */,
 				0444443527AC08F100EB093E /* TxStoreContractCell.swift in Sources */,
-				040FA8EE275F55C200229F6F /* osmosis_gamm_v1beta1_tx.pb.swift in Sources */,
 				E1827E252256293900BC0350 /* ValidatorDetailCell.swift in Sources */,
 				040FAAD9275F55C400229F6F /* em_inflation_v1_query.grpc.swift in Sources */,
 				283850242448A6C600E5DEF2 /* TxHtlcRefundCell.swift in Sources */,
@@ -8364,7 +8402,7 @@
 				040FA9BE275F55C300229F6F /* ibc_applications_transfer_v1_genesis.pb.swift in Sources */,
 				04B1BE1F27A3BC4500B1236A /* cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				E16D9B1D2248E6A60019B7BB /* WKey.swift in Sources */,
-				040FAA51275F55C400229F6F /* osmosis_incentives_genesis.pb.swift in Sources */,
+				0444D40627E1E87900819B21 /* osmosis_epochs_query.grpc.swift in Sources */,
 				048C836B27BF573D00270528 /* provenance_name_v1_query.pb.swift in Sources */,
 				048C831A27BF572800270528 /* evmos_erc20_v1_erc20.pb.swift in Sources */,
 				040FA956275F55C300229F6F /* cosmos_auth_v1beta1_query.grpc.swift in Sources */,
@@ -8401,10 +8439,8 @@
 				28D7BDA425F0B75F006EECD7 /* IncentiveParam.swift in Sources */,
 				04CFBD61269301880013150B /* TxBeginUnlockAllTokensCell.swift in Sources */,
 				048C836027BF573D00270528 /* provenance_attribute_v1_attribute.pb.swift in Sources */,
-				040FA852275F55C200229F6F /* osmosis_incentives_params.pb.swift in Sources */,
 				280E1EF8254A7AC80007BA7D /* DeleteStarname0ViewController.swift in Sources */,
 				040FA7FB275F55C200229F6F /* ibc_core_port_v1_query.pb.swift in Sources */,
-				040FA85A275F55C200229F6F /* osmosis_gamm_v1beta1_balancerPool.pb.swift in Sources */,
 				040FA999275F55C300229F6F /* google_api_httpbody.pb.swift in Sources */,
 				040FAAFF275F55C400229F6F /* sentinel_deposit_v1_querier.pb.swift in Sources */,
 				04E25D462770D56C009B39BA /* NFTDetailInfoCell.swift in Sources */,
@@ -8413,11 +8449,13 @@
 				040FAAAD275F55C400229F6F /* iris_mint_query.grpc.swift in Sources */,
 				040FA84F275F55C200229F6F /* shentu_cvm_v1alpha1_cvm.pb.swift in Sources */,
 				E1406FC22260654F00D9440C /* TxInfo.swift in Sources */,
+				0444D3E127E1E87900819B21 /* osmosis_pool-incentives_v1beta1_genesis.pb.swift in Sources */,
 				040FA924275F55C300229F6F /* cosmos_gov_v1beta2_tx.grpc.swift in Sources */,
 				040FAB0A275F55C400229F6F /* akash_deployment_v1beta2_params.pb.swift in Sources */,
 				040FAA35275F55C400229F6F /* shentu_shield_v1alpha1_tx.grpc.swift in Sources */,
 				040FA7F3275F55C200229F6F /* iris_mod_random_tx.grpc.swift in Sources */,
 				040FAA20275F55C300229F6F /* iris_mod_htlc_tx.grpc.swift in Sources */,
+				0444D3DD27E1E87900819B21 /* osmosis_txfees_v1beta1_query.pb.swift in Sources */,
 				28CE973625872B7C006DEBEE /* Signer.swift in Sources */,
 				040FA9F8275F55C300229F6F /* desmos_profiles_v1beta1_query_params.pb.swift in Sources */,
 				040FA7AB275F55C200229F6F /* sentinel_plan_v1_genesis.pb.swift in Sources */,
@@ -8426,6 +8464,7 @@
 				040FA962275F55C300229F6F /* iris_mod_service_genesis.pb.swift in Sources */,
 				040FA8D9275F55C200229F6F /* starname_cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */,
+				0444D3DF27E1E87900819B21 /* osmosis_mint_v1beta1_query.pb.swift in Sources */,
 				040FA8EF275F55C200229F6F /* ibc_core_channel_v1_channel.pb.swift in Sources */,
 				040FA7FC275F55C200229F6F /* panacea_aol_v2_tx.grpc.swift in Sources */,
 				283EB78126C828AE00B9D28D /* EarnUnbondedCell.swift in Sources */,
@@ -8439,7 +8478,6 @@
 				2812956B250F52C8007B217E /* KavaSwapSupply2.swift in Sources */,
 				040FA80C275F55C200229F6F /* akash_escrow_v1beta2_genesis.pb.swift in Sources */,
 				040FA811275F55C200229F6F /* cosmos_bank_v1beta1_tx.grpc.swift in Sources */,
-				040FAAED275F55C400229F6F /* osmosis_claim_v1beta1_params.pb.swift in Sources */,
 				040FA9C4275F55C300229F6F /* injective_ocr_v1beta1_genesis.pb.swift in Sources */,
 				283E94862549333B007A9291 /* AccountDetailViewController.swift in Sources */,
 				2848644E24A333CD0046E5C8 /* BottomLineView.swift in Sources */,
@@ -8457,10 +8495,12 @@
 				040FA853275F55C200229F6F /* desmos_profiles_v1beta1_genesis.pb.swift in Sources */,
 				040FA951275F55C300229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */,
 				04D1384F2691CAF100D6AF9F /* IbcToken.swift in Sources */,
+				0444D3E627E1E87900819B21 /* osmosis_lockup_lock.pb.swift in Sources */,
 				E1827E152255E6AE00BC0350 /* WalletCheckViewController.swift in Sources */,
 				28EEEC8926DA548C002DDC4A /* KavaSwapPool.swift in Sources */,
 				04C43B4B278D5F520022D5DF /* kava_auction_v1beta1_auction.pb.swift in Sources */,
 				04B1BE1427A165F000B1236A /* CertikVote.swift in Sources */,
+				0444D3F127E1E87900819B21 /* osmosis_lockup_query.pb.swift in Sources */,
 				28663BEF248A4FB000080311 /* WalletBandCell.swift in Sources */,
 				040FA9B8275F55C300229F6F /* lum_beam_genesis.pb.swift in Sources */,
 				046E903B268C401E002CFFE1 /* BinanceType.swift in Sources */,
@@ -8489,6 +8529,7 @@
 				0444443127AC034000EB093E /* TxInstantContractCell.swift in Sources */,
 				285A33DE2447633D0052BD3D /* SelectAccountCell.swift in Sources */,
 				040FAA71275F55C400229F6F /* injective_oracle_v1beta1_query.pb.swift in Sources */,
+				0444D3D927E1E87900819B21 /* osmosis_gamm_v1beta1_genesis.pb.swift in Sources */,
 				040FA8CF275F55C200229F6F /* sentinel_provider_v1_querier.pb.swift in Sources */,
 				040FA7C9275F55C200229F6F /* bcna_tx.grpc.swift in Sources */,
 				040FAAF8275F55C400229F6F /* em_liquidityprovider_v1_genesis.pb.swift in Sources */,
@@ -8502,13 +8543,13 @@
 				04E2A32727A581720045ED21 /* Cw20BalanceRes.swift in Sources */,
 				280E1F1B254ABB1D0007BA7D /* ResourceEditCell.swift in Sources */,
 				04B1BE7427A3BD1B00B1236A /* axelar_tss_v1beta1_query.pb.swift in Sources */,
-				040FA94E275F55C300229F6F /* osmosis_incentives_query.grpc.swift in Sources */,
 				040FA989275F55C300229F6F /* injective_insurance_v1beta1_insurance.pb.swift in Sources */,
 				E151B63C22467E520026B8C0 /* HistoryCell.swift in Sources */,
 				04B1BE8827A3BD1B00B1236A /* axelar_bitcoin_v1beta1_query.pb.swift in Sources */,
 				283D2EAF24F5742000247424 /* WalletOkCell.swift in Sources */,
 				04B1BE9327A3BD1B00B1236A /* axelar_tss_v1beta1_tx.pb.swift in Sources */,
 				040FA8E7275F55C200229F6F /* shentu_oracle_v1alpha1_tx.grpc.swift in Sources */,
+				0444D40227E1E87900819B21 /* osmosis_pool-incentives_v1beta1_incentives.pb.swift in Sources */,
 				040FAA04275F55C300229F6F /* ixo_payments_query.pb.swift in Sources */,
 				040FAAE5275F55C400229F6F /* cosmos_tx_v1beta1_service.pb.swift in Sources */,
 				040FAAE3275F55C400229F6F /* akash_market_v1beta2_order.pb.swift in Sources */,
@@ -8537,6 +8578,7 @@
 				283F3AF6265FA21800DF1D93 /* WalletMediCell.swift in Sources */,
 				E16D9B222249EA0C0019B7BB /* PasswordViewController.swift in Sources */,
 				040FA859275F55C200229F6F /* stargaze_alloc_v1beta1_genesis.pb.swift in Sources */,
+				0444D40A27E1E87900819B21 /* osmosis_gamm_pool-models_balancer_tx.grpc.swift in Sources */,
 				E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */,
 				04B1BE8627A3BD1B00B1236A /* axelar_axelarnet_v1beta1_genesis.pb.swift in Sources */,
 				040FA996275F55C300229F6F /* cosmos_auth_v1beta1_genesis.pb.swift in Sources */,
@@ -8619,6 +8661,7 @@
 				040FA934275F55C300229F6F /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
 				046E903F268C45DC002CFFE1 /* BinanceHexlify.swift in Sources */,
 				040FA997275F55C300229F6F /* starname_iov_escrow_v1beta1_events.pb.swift in Sources */,
+				0444D40527E1E87900819B21 /* osmosis_incentives_params.pb.swift in Sources */,
 				2827E11523F3DC9B007CDB6E /* TxCommonCell.swift in Sources */,
 				040FA84B275F55C200229F6F /* shentu_cvm_v1alpha1_query.pb.swift in Sources */,
 				040FA7F9275F55C200229F6F /* comdex_oracle_v1beta1_gov.pb.swift in Sources */,
@@ -8642,10 +8685,10 @@
 				289DF178242DDF3800433CF4 /* CdpDetailTopCell.swift in Sources */,
 				04394B032746299F002334F1 /* WalletInjectiveCell.swift in Sources */,
 				040FA94B275F55C300229F6F /* bitsong_auction_v1beta1_query.pb.swift in Sources */,
-				040FA9F2275F55C300229F6F /* osmosis_lockup_tx.pb.swift in Sources */,
 				040FA9C0275F55C300229F6F /* sentinel_session_v1_proof.pb.swift in Sources */,
 				040FA98F275F55C300229F6F /* rizon_tokenswap_tokenswap.pb.swift in Sources */,
 				040FAA57275F55C400229F6F /* tendermint_farming_v1beta1_query.grpc.swift in Sources */,
+				0444D40727E1E87900819B21 /* osmosis_txfees_v1beta1_query.grpc.swift in Sources */,
 				049DAA0527311DFE00658CFB /* WalletStargazeCell.swift in Sources */,
 				048C834B27BF573D00270528 /* provenance_marker_v1_query.pb.swift in Sources */,
 				040FA838275F55C200229F6F /* cryptoorg_supply_v1_query.grpc.swift in Sources */,
@@ -8656,6 +8699,7 @@
 				040FA92A275F55C300229F6F /* ixo_bonds_query.pb.swift in Sources */,
 				040FA807275F55C200229F6F /* cosmos_group_v1beta1_query.pb.swift in Sources */,
 				040FA7DE275F55C200229F6F /* iris_mod_random_query.grpc.swift in Sources */,
+				0444D40827E1E87900819B21 /* osmosis_txfees_v1beta1_feetoken.pb.swift in Sources */,
 				E1069B0E22968DF4007517DC /* StepRedelegateToViewController.swift in Sources */,
 				040FA882275F55C200229F6F /* em_inflation_v1_query.pb.swift in Sources */,
 				040FA8A1275F55C200229F6F /* cosmos_staking_v1beta1_query.pb.swift in Sources */,
@@ -8701,7 +8745,6 @@
 				040FA8D3275F55C200229F6F /* shentu_bank_v1alpha1_tx.grpc.swift in Sources */,
 				282FF35523F518E00028CC66 /* TxMultiTransferCell.swift in Sources */,
 				048C831827BF572800270528 /* ethermint_evm_v1_tx.grpc.swift in Sources */,
-				040FAAA1275F55C400229F6F /* osmosis_store_v1beta1_tree.pb.swift in Sources */,
 				04C43B4D278D5F520022D5DF /* kava_cdp_v1beta1_genesis.pb.swift in Sources */,
 				040FA966275F55C300229F6F /* akash_deployment_v1beta2_resource.pb.swift in Sources */,
 				04C43B4E278D5F520022D5DF /* kava_kavadist_v1beta1_proposal.pb.swift in Sources */,
@@ -8727,13 +8770,14 @@
 				040FA7D3275F55C200229F6F /* konstellation_oracle_query.pb.swift in Sources */,
 				040FA8A0275F55C200229F6F /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
 				287E0AA426EDC6F300F8C242 /* WalletAxelarCell.swift in Sources */,
-				040FA9A2275F55C300229F6F /* osmosis_incentives_tx.grpc.swift in Sources */,
 				040FA88B275F55C200229F6F /* tendermint_p2p_types.pb.swift in Sources */,
 				E1A82DD1224220910097CAEE /* Account.swift in Sources */,
+				0444D3F527E1E87900819B21 /* osmosis_incentives_genesis.pb.swift in Sources */,
 				E1A82DE12244818C0097CAEE /* AccountInfo.swift in Sources */,
 				040FA7E9275F55C200229F6F /* regen_group_v1alpha1_types.pb.swift in Sources */,
 				040FAA06275F55C300229F6F /* shentu_shield_v1alpha1_tx.pb.swift in Sources */,
 				040FA971275F55C300229F6F /* lum_beam_tx.pb.swift in Sources */,
+				0444D3F627E1E87900819B21 /* osmosis_claim_v1beta1_genesis.pb.swift in Sources */,
 				040FAB03275F55C400229F6F /* ibc_core_client_v1_tx.pb.swift in Sources */,
 				E1271B06224B874A0083AF17 /* AddAddressViewController.swift in Sources */,
 				040FA7CE275F55C200229F6F /* panacea_did_v2_did.pb.swift in Sources */,

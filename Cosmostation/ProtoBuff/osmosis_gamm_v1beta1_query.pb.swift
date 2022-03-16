@@ -142,37 +142,20 @@ struct Osmosis_Gamm_V1beta1_QueryPoolParamsResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var params: Osmosis_Gamm_V1beta1_QueryPoolParamsResponse.OneOf_Params? = nil
-
-  var balancerPoolParams: Osmosis_Gamm_V1beta1_BalancerPoolParams {
-    get {
-      if case .balancerPoolParams(let v)? = params {return v}
-      return Osmosis_Gamm_V1beta1_BalancerPoolParams()
-    }
-    set {params = .balancerPoolParams(newValue)}
+  var params: Google_Protobuf2_Any {
+    get {return _params ?? Google_Protobuf2_Any()}
+    set {_params = newValue}
   }
+  /// Returns true if `params` has been explicitly set.
+  var hasParams: Bool {return self._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
+  mutating func clearParams() {self._params = nil}
 
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  enum OneOf_Params: Equatable {
-    case balancerPoolParams(Osmosis_Gamm_V1beta1_BalancerPoolParams)
-
-  #if !swift(>=4.1)
-    static func ==(lhs: Osmosis_Gamm_V1beta1_QueryPoolParamsResponse.OneOf_Params, rhs: Osmosis_Gamm_V1beta1_QueryPoolParamsResponse.OneOf_Params) -> Bool {
-      // The use of inline closures is to circumvent an issue where the compiler
-      // allocates stack space for every case branch when no optimizations are
-      // enabled. https://github.com/apple/swift-protobuf/issues/1034
-      switch (lhs, rhs) {
-      case (.balancerPoolParams, .balancerPoolParams): return {
-        guard case .balancerPoolParams(let l) = lhs, case .balancerPoolParams(let r) = rhs else { preconditionFailure() }
-        return l == r
-      }()
-      }
-    }
-  #endif
-  }
-
   init() {}
+
+  fileprivate var _params: Google_Protobuf2_Any? = nil
 }
 
 ///=============================== TotalShares
@@ -574,7 +557,7 @@ extension Osmosis_Gamm_V1beta1_QueryPoolParamsRequest: SwiftProtobuf.Message, Sw
 extension Osmosis_Gamm_V1beta1_QueryPoolParamsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".QueryPoolParamsResponse"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .same(proto: "balancerPoolParams"),
+    1: .same(proto: "params"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -583,33 +566,21 @@ extension Osmosis_Gamm_V1beta1_QueryPoolParamsResponse: SwiftProtobuf.Message, S
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try {
-        var v: Osmosis_Gamm_V1beta1_BalancerPoolParams?
-        var hadOneofValue = false
-        if let current = self.params {
-          hadOneofValue = true
-          if case .balancerPoolParams(let m) = current {v = m}
-        }
-        try decoder.decodeSingularMessageField(value: &v)
-        if let v = v {
-          if hadOneofValue {try decoder.handleConflictingOneOf()}
-          self.params = .balancerPoolParams(v)
-        }
-      }()
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._params) }()
       default: break
       }
     }
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if case .balancerPoolParams(let v)? = self.params {
+    if let v = self._params {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
   static func ==(lhs: Osmosis_Gamm_V1beta1_QueryPoolParamsResponse, rhs: Osmosis_Gamm_V1beta1_QueryPoolParamsResponse) -> Bool {
-    if lhs.params != rhs.params {return false}
+    if lhs._params != rhs._params {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
