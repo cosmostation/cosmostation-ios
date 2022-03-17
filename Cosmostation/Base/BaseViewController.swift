@@ -579,7 +579,7 @@ extension BaseViewController {
         showAlert.addAction(omniflixAction)
         showAlert.addAction(osmosisAction)
         showAlert.addAction(persisAction)
-//        showAlert.addAction(provenanceAction)
+        showAlert.addAction(provenanceAction)
         showAlert.addAction(regenAction)
         showAlert.addAction(rizonAction)
         showAlert.addAction(secretAction)

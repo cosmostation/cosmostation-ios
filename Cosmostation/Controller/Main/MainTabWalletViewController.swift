@@ -2061,6 +2061,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.omniflix.network/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.PROVENANCE_MAIN) {
+            guard let url = URL(string: "https://www.provenance.io/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -2221,6 +2225,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.OMNIFLIX_MAIN) {
             guard let url = URL(string: "https://blog.omniflix.network/") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.PROVENANCE_MAIN) {
+            guard let url = URL(string: "https://www.provenance.io/blog") else { return }
             self.onShowSafariWeb(url)
             
         }
