@@ -39,6 +39,7 @@ class StepHtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
             toAddressImg.tintColor = COLOR_KAVA
         }
         self.toAccountList = BaseData.instance.selectAllAccountsByHtlcClaim(pageHolderVC.mHtlcToChain)
+        
     }
     
     override func enableUserInteraction() {

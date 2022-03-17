@@ -37,10 +37,6 @@ public class Balance {
         }
     }
     
-    
-    
-    //uKAVA amount = available, frozen = delegated,   locked == vested but delegatable
-    //hard amount = available, frozen == remain vestiing amount
     init(_ accout_id:Int64, _ demon:String, _ amount:String, _ fetch_time:Int64, _ frozen:String?, _ locked:String?) {
         self.balance_account_id = accout_id;
         self.balance_denom = demon;
@@ -64,25 +60,6 @@ public class Balance {
         self.balance_amount = amount;
         self.balance_fetch_time = fetch_time;
     }
-    
-//    func getAllAmountBnbToken() -> NSDecimalNumber {
-//        return WUtils.plainStringToDecimal(self.balance_amount).adding(WUtils.plainStringToDecimal(self.balance_locked))
-//    }
-//    
-//    func exchangeBnbValue(_ tic:NSMutableDictionary?) -> NSDecimalNumber {
-//        if (tic == nil || tic!.object(forKey: "lastPrice") == nil) {
-//            return NSDecimalNumber.zero
-//        }
-//        if (WUtils.isBnbMarketToken(self.balance_denom)) {
-//            return getAllAmountBnbToken().dividing(by: NSDecimalNumber(string: tic!.object(forKey: "lastPrice") as? String), withBehavior: WUtils.handler8)
-//        } else {
-//            return getAllAmountBnbToken().multiplying(by: NSDecimalNumber(string: tic!.object(forKey: "lastPrice") as? String), withBehavior: WUtils.handler8)
-//        }
-//    }
-//    
-//    func getAllAmountOKToken() -> NSDecimalNumber {
-//        return WUtils.plainStringToDecimal(self.balance_amount).adding(WUtils.plainStringToDecimal(self.balance_locked))
-//    }
 }
 
 

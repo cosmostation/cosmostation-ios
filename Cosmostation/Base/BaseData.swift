@@ -1026,7 +1026,6 @@ final class BaseData : NSObject{
         return result;
     }
     
-    //TODO update
     public func selectAllAccountsByHtlcClaim(_ chain:ChainType?) -> Array<Account> {
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()
@@ -1038,7 +1037,9 @@ final class BaseData : NSObject{
                     }
                     
                 } else if (chain == ChainType.KAVA_MAIN) {
-                    result.append(account)
+                    if (WUtils.getTokenAmount(account.account_balances, KAVA_MAIN_DENOM).compare(NSDecimalNumber.init(string: "12500")).rawValue >= 0) {
+                        result.append(account)
+                    }
                 }
             }
         }

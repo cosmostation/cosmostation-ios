@@ -382,7 +382,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             if (BaseData.instance.mNodeInfo_gRPC == nil) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
             } else {
-                WUtils.onParseAuthAccount(self.mChainType)
+                WUtils.onParseAuthAccount(self.mChainType, self.mAccount.account_id)
             }
             self.onFetchPriceInfo()
             NotificationCenter.default.post(name: Notification.Name("onFetchDone"), object: nil, userInfo: nil)

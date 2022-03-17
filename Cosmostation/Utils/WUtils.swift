@@ -3512,6 +3512,9 @@ public class WUtils {
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
         } else if (chain == ChainType.KAVA_MAIN) {
+            if (type == TASK_TYPE_HTLC_SWAP) {
+                return NSDecimalNumber.init(string: "12500")
+            }
             return NSDecimalNumber.zero
             
         } else if (chain == ChainType.AXELAR_MAIN) {
@@ -5252,7 +5255,7 @@ public class WUtils {
     }
     
     
-    static func onParseAuthAccount(_ chain: ChainType) {
+    static func onParseAuthAccount(_ chain: ChainType, _ accountId: Int64) {
         print("onParseAuthAccount")
         guard let rawAccount = BaseData.instance.mAccount_gRPC else { return }
         if (chain == ChainType.DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
@@ -5277,6 +5280,12 @@ public class WUtils {
             onParseVestingAccount(chain, rawAccount)
         }
         
+        //Update local BD for save availabe(balance)to snap (ex kava bep3 swap check)
+        var snapBalance = Array<Balance>()
+        for balance_grpc in BaseData.instance.mMyBalances_gRPC {
+            snapBalance.append(Balance(accountId, balance_grpc.denom, balance_grpc.amount, Date().millisecondsSince1970))
+        }
+        BaseData.instance.updateBalances(accountId, snapBalance)
     }
     
     static func onParseVestingAccount(_ chain: ChainType, _ rawAccount: Google_Protobuf2_Any) {

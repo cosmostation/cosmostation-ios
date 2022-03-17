@@ -189,7 +189,7 @@ class StepHtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBC
             pageHolderVC.mHtlcSendFee = Fee.init("", tempList)
 
         } else if (chainType == ChainType.KAVA_MAIN) {
-            let feeCoin = Coin.init(KAVA_MAIN_DENOM, "0")
+            let feeCoin = Coin.init(KAVA_MAIN_DENOM, "12500")
             var tempList = Array<Coin>()
             tempList.append(feeCoin)
             pageHolderVC.mHtlcSendFee = Fee.init(KAVA_GAS_AMOUNT_BEP3, tempList)
@@ -205,7 +205,7 @@ class StepHtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBC
             pageHolderVC.mHtlcClaimFee = Fee.init("", tempList)
             
         } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN) {
-            let feeCoin = Coin.init(KAVA_MAIN_DENOM, "0")
+            let feeCoin = Coin.init(KAVA_MAIN_DENOM, "12500")
             var tempList = Array<Coin>()
             tempList.append(feeCoin)
             pageHolderVC.mHtlcClaimFee = Fee.init(KAVA_GAS_AMOUNT_BEP3, tempList)
