@@ -3058,7 +3058,7 @@ public class WUtils {
             chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN ||
             chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
             chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN || chain == ChainType.EVMOS_MAIN ||
-            chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN ||
+            chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN || chain == ChainType.OMNIFLIX_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
@@ -3554,6 +3554,11 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.OMNIFLIX_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_OMNIFLIX)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         
         else if (chain == ChainType.OKEX_MAIN) {
@@ -3854,6 +3859,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CERBERUS)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CERBERUS)
+            }
+            
+        } else if (chain == ChainType.OMNIFLIX_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_OMNIFLIX)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_OMNIFLIX)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_OMNIFLIX)
             }
         }
         

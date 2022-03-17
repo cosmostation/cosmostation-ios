@@ -639,6 +639,10 @@ let GAS_FEE_RATE_TINY_CERBERUS              = "0.000"
 let GAS_FEE_RATE_LOW_CERBERUS               = "0.000"
 let GAS_FEE_RATE_AVERAGE_CERBERUS           = "0.000"
 
+let GAS_FEE_RATE_TINY_OMNIFLIX              = "0.001"
+let GAS_FEE_RATE_LOW_OMNIFLIX               = "0.001"
+let GAS_FEE_RATE_AVERAGE_OMNIFLIX           = "0.001"
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
