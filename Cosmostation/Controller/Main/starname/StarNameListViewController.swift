@@ -55,19 +55,19 @@ class StarNameListViewController: BaseViewController {
 
 extension WUtils {
     static func isStarnameValidStarName(_ starname: String) -> Bool {
-        let starNameRegEx = "[0-9a-z.-]{0,64}+\\*[a-z0-9.-]{2,16}"
-        let starNamePred = NSPredicate(format:"SELF MATCHES %@", starNameRegEx)
-        return starNamePred.evaluate(with: starname)
+        let names = starname.split(separator: "*")
+        if (names.count != 2)  { return false }
+        return (isStarnameValidAccount(String(names[0])) && isStarnameValidDomain(String(names[1])))
     }
     
     static func isStarnameValidDomain(_ starname: String) -> Bool {
-        let starNameRegEx = "[a-z0-9]{2,32}"
+        let starNameRegEx = "^[mabcdefghijklnopqrstuvwxy][-a-z0-9_]{0,2}$|^[-a-z0-9_]{4,32}$"
         let starNamePred = NSPredicate(format:"SELF MATCHES %@", starNameRegEx)
         return starNamePred.evaluate(with: starname)
     }
     
     static func isStarnameValidAccount(_ starname: String) -> Bool {
-        let starNameRegEx = "[0-9a-z.-]{1,63}"
+        let starNameRegEx = "^[-.a-z0-9_]{1,63}$"
         let starNamePred = NSPredicate(format:"SELF MATCHES %@", starNameRegEx)
         return starNamePred.evaluate(with: starname)
     }
