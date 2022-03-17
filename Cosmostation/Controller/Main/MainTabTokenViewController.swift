@@ -824,6 +824,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCudos.stringValue, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CUDOS_MAIN_DENOM, allCudos, 18, cell!.tokenValue.font)
             
+        } else if (coin.denom == CERBERUS_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenCerberus")
+            cell?.tokenSymbol.text = "CRBRUS"
+            cell?.tokenSymbol.textColor = COLOR_CERBERUS
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Cerberus Staking Coin"
+            
+            let allCrbrus = WUtils.getAllMainAsset(CERBERUS_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCrbrus.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CERBERUS_MAIN_DENOM, allCrbrus, 6, cell!.tokenValue.font)
+            
         }
         
         

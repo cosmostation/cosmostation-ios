@@ -232,6 +232,11 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_cudos", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_cudos", comment: "")
             
+        } else if (chainType == ChainType.CERBERUS_MAIN) {
+            guideImg.image = UIImage(named: "infoiconCerberus")
+            guideTitle.text = NSLocalizedString("send_guide_title_cerberus", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_cerberus", comment: "")
+            
         }
         
     }

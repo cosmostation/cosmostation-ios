@@ -377,6 +377,8 @@ class BaseNetWork {
             result = PROVENANCE_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.CUDOS_MAIN) {
             result = CUDOS_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.CERBERUS_MAIN) {
+            result = CERBERUS_API + "v1/account/new_txs/" + address
         }
         
         
@@ -464,6 +466,8 @@ class BaseNetWork {
             result = PROVENANCE_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.CUDOS_MAIN) {
             result = CUDOS_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.CERBERUS_MAIN) {
+            result = CERBERUS_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -616,6 +620,9 @@ class BaseNetWork {
         } else if (chain == ChainType.CUDOS_MAIN) {
 //            return ClientConnection.insecure(group: group).connect(host: "lcd-provenance-app.cosmostation.io", port: 9090)
             return ClientConnection.insecure(group: group).connect(host: "lcd-cudos-testnet.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.CERBERUS_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-cerberus-app.cosmostation.io", port: 9090)
             
         }
         

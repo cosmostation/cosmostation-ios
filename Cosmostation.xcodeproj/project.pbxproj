@@ -921,6 +921,8 @@
 		0444D40B27E1E87900819B21 /* osmosis_lockup_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D627E1E87800819B21 /* osmosis_lockup_tx.grpc.swift */; };
 		0444D40C27E1E87900819B21 /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D727E1E87800819B21 /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift */; };
 		0444D40D27E1E87900819B21 /* osmosis_epochs_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D827E1E87800819B21 /* osmosis_epochs_genesis.pb.swift */; };
+		0444D41027E3083300819B21 /* WalletCerberusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D40E27E3083300819B21 /* WalletCerberusCell.swift */; };
+		0444D41127E3083300819B21 /* WalletCerberusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444D40F27E3083300819B21 /* WalletCerberusCell.xib */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
@@ -2934,6 +2936,8 @@
 		0444D3D627E1E87800819B21 /* osmosis_lockup_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_lockup_tx.grpc.swift; sourceTree = "<group>"; };
 		0444D3D727E1E87800819B21 /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_gamm_pool-models_balancer_balancerPool.pb.swift"; sourceTree = "<group>"; };
 		0444D3D827E1E87800819B21 /* osmosis_epochs_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_epochs_genesis.pb.swift; sourceTree = "<group>"; };
+		0444D40E27E3083300819B21 /* WalletCerberusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCerberusCell.swift; sourceTree = "<group>"; };
+		0444D40F27E3083300819B21 /* WalletCerberusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCerberusCell.xib; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
@@ -5521,6 +5525,8 @@
 				15E40DA827C787F000E7C850 /* WalletProvenanceCell.xib */,
 				15E40DAB27C8A9E400E7C850 /* WalletCudosCell.swift */,
 				15E40DAC27C8A9E400E7C850 /* WalletCudosCell.xib */,
+				0444D40E27E3083300819B21 /* WalletCerberusCell.swift */,
+				0444D40F27E3083300819B21 /* WalletCerberusCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -6717,6 +6723,7 @@
 				04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */,
 				28D28ADA26CB6C1E0074964C /* StartUnlock0ViewController.xib in Resources */,
 				28A97CAC26DE45480085FD0E /* Gravity.storyboard in Resources */,
+				0444D41127E3083300819B21 /* WalletCerberusCell.xib in Resources */,
 				283E9473254902F4007A9291 /* TxDeleteAccountCell.xib in Resources */,
 				28663BF0248A4FB000080311 /* WalletBandCell.xib in Resources */,
 				E126CF9B2387A60D002A546F /* WalletPriceCell.xib in Resources */,
@@ -7454,6 +7461,7 @@
 				040FA818275F55C200229F6F /* sentinel_deposit_v1_genesis.pb.swift in Sources */,
 				28B4303C24F7EE0C00BD7BB2 /* StepOkDepositAmountViewController.swift in Sources */,
 				E16D9B24224A083E0019B7BB /* KeyboardViewController.swift in Sources */,
+				0444D41027E3083300819B21 /* WalletCerberusCell.swift in Sources */,
 				04C43B7A278D5F530022D5DF /* kava_auction_v1beta1_tx.grpc.swift in Sources */,
 				04C43B6B278D5F530022D5DF /* kava_swap_v1beta1_query.grpc.swift in Sources */,
 				04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */,

@@ -199,6 +199,8 @@
 "send_guide_msg_provenance" = "Provenance is a Tendermint-based blockchain network utilized by $HASH, designed to support financial service industry.";
 "send_guide_title_cudos" = "CUDOS";
 "send_guide_msg_cudos" = "Cudos aims to build a high-performance, sustainable and decentralized cloud computing network.";
+"send_guide_title_cerberus" = "CERBERUS";
+"send_guide_msg_cerberus" = "Cerberus is a community-led tri-headed dog meme coin in Cosmos ecosystem.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -962,6 +964,7 @@ support@cosmostation.io";
 "chain_title_evmos" = "Evmos";
 "chain_title_provenance" = "Provenance";
 "chain_title_cudos" = "Cudos";
+"chain_title_cerberus" = "Cerberus";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_axelar_test" = "Axelar Testnet";

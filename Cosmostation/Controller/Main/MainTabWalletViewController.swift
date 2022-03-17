@@ -79,6 +79,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletEvmosCell", bundle: nil), forCellReuseIdentifier: "WalletEvmosCell")
         self.walletTableView.register(UINib(nibName: "WalletProvenanceCell", bundle: nil), forCellReuseIdentifier: "WalletProvenanceCell")
         self.walletTableView.register(UINib(nibName: "WalletCudosCell", bundle: nil), forCellReuseIdentifier: "WalletCudosCell")
+        self.walletTableView.register(UINib(nibName: "WalletCerberusCell", bundle: nil), forCellReuseIdentifier: "WalletCerberusCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -304,6 +305,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetProvenanceItems(tableView, indexPath);
         } else if (chainType == ChainType.CUDOS_MAIN) {
             return onSetCudosItems(tableView, indexPath);
+        } else if (chainType == ChainType.CERBERUS_MAIN) {
+            return onSetCerberusItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -1461,6 +1464,35 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    func onSetCerberusItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletCerberusCell") as? WalletCerberusCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+    }
+    
     
     func onSetCosmosTestItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
@@ -1989,6 +2021,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://evmos.org/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.CERBERUS_MAIN) {
+            guard let url = URL(string: "https://cerberus.zone/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -2141,6 +2177,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.EVMOS_MAIN) {
             guard let url = URL(string: "https://evmos.blog/") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.CERBERUS_MAIN) {
+            guard let url = URL(string: "https://medium.com/@cerberus_zone") else { return }
             self.onShowSafariWeb(url)
             
         }
