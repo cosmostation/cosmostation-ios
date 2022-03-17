@@ -239,8 +239,8 @@ class WalletGuideCell: UITableViewCell {
             
         } else if (chainType == ChainType.OMNIFLIX_MAIN) {
             guideImg.image = UIImage(named: "infoiconOmniflix")
-            guideTitle.text = NSLocalizedString("send_guide_title_cerberus", comment: "")
-            guideMsg.text = NSLocalizedString("send_guide_msg_cerberus", comment: "")
+            guideTitle.text = NSLocalizedString("send_guide_title_omniflix", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_omniflix", comment: "")
             
         }
         
