@@ -536,6 +536,11 @@ extension BaseViewController {
         })
         cerberusAction.setValue(UIImage(named: "chainCerberus")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let omniflixAction = UIAlertAction(title: NSLocalizedString("chain_title_omniflix", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.OMNIFLIX_MAIN)
+        })
+        omniflixAction.setValue(UIImage(named: "chainOmniflix")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -571,6 +576,7 @@ extension BaseViewController {
         showAlert.addAction(lumAction)
         showAlert.addAction(mediAction)
         showAlert.addAction(okexAction)
+        showAlert.addAction(omniflixAction)
         showAlert.addAction(osmosisAction)
         showAlert.addAction(persisAction)
 //        showAlert.addAction(provenanceAction)

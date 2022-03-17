@@ -126,6 +126,8 @@ let CUDOS_API                           = "https://api-cudos-testnet.cosmostatio
 
 let CERBERUS_API                        = "https://api-cerberus.cosmostation.io/";
 
+let OMNIFLIX_API                        = "https://api-omniflix.cosmostation.io/";
+
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
@@ -175,6 +177,7 @@ let EVMOS_VAL_URL                       = "https://raw.githubusercontent.com/cos
 let PROVENANCE_VAL_URL                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/provenance/";
 let CUDOS_VAL_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/cudos/";
 let CERBERUS_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/cerberus/";
+let OMNIFLIX_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/omniflix/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -223,6 +226,7 @@ let RELAYER_IMG_EVMOS                   = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_PROVENANCE              = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/provenance/relay-provenance-unknown.png"
 let RELAYER_IMG_CUDOS                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cudos-unknown.png"
 let RELAYER_IMG_CERBERUS                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cerberus-unknown.png"
+let RELAYER_IMG_OMNIFLIX                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-omniflix-unknown.png"
 
 
 
@@ -1011,6 +1015,11 @@ let TRANS_BG_COLOR_CERBERUS2                = UIColor.init(hexString: "d7ad17", 
 let COLOR_CERBERUS                          = UIColor.init(hexString: "d7ad17")
 let COLOR_CERBERUS_DARK                     = UIColor.init(hexString: "7d6610")
 
+let TRANS_BG_COLOR_OMNIFLIX                 = UIColor.init(hexString: "6c63ff", alpha: 0.15)
+let TRANS_BG_COLOR_OMNIFLIX2                = UIColor.init(hexString: "6c63ff", alpha: 0.4)
+let COLOR_OMNIFLIX                          = UIColor.init(hexString: "6c63ff")
+let COLOR_OMNIFLIX_DARK                     = UIColor.init(hexString: "3228ab")
+
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
 let COLOR_CDP_SAFE                          = UIColor.init(hexString: "40F683")
@@ -1062,6 +1071,7 @@ public enum ChainType: String {
     case PROVENANCE_MAIN
     case CUDOS_MAIN
     case CERBERUS_MAIN
+    case OMNIFLIX_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1098,6 +1108,7 @@ public enum ChainType: String {
         result.append(LUM_MAIN)
         result.append(MEDI_MAIN)
         result.append(OKEX_MAIN)
+        result.append(OMNIFLIX_MAIN)
         result.append(OSMOSIS_MAIN)
         result.append(PERSIS_MAIN)
 //        result.append(PROVENANCE_MAIN)
@@ -1213,6 +1224,7 @@ let CHAIN_EVMOS_S = "SUPPORT_CHAIN_EVMOS"
 let CHAIN_PROVENANCE_S = "SUPPORT_CHAIN_PROVENANCE"
 let CHAIN_CUDOS_S = "SUPPORT_CHAIN_CUDOS"
 let CHAIN_CERBERUS_S = "SUPPORT_CHAIN_CERBERUS"
+let CHAIN_OMNIFLIX_S = "SUPPORT_CHAIN_OMNIFLIX"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1258,6 +1270,7 @@ let EVMOS_MAIN_DENOM = "aevmos"
 let PROVENANCE_MAIN_DENOM = "nhash"
 let CUDOS_MAIN_DENOM = "acudos"
 let CERBERUS_MAIN_DENOM = "ucrbrus"
+let OMNIFLIX_MAIN_DENOM = "uflix"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1355,6 +1368,7 @@ let EXPLORER_EVMOS          = "https://www.mintscan.io/evmos/";
 let EXPLORER_PROVENANCE     = "https://www.mintscan.io/provenance/";
 let EXPLORER_CUDOS          = "https://www.mintscan.io/cudos/";
 let EXPLORER_CERBERUS       = "https://www.mintscan.io/cerberus/";
+let EXPLORER_OMNIFLIX       = "https://www.mintscan.io/omniflix/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
@@ -1412,7 +1426,9 @@ let BLOCK_TIME_AXELAR       = NSDecimalNumber.init(string: "5.5596")
 let BLOCK_TIME_KONSTEALLTION = NSDecimalNumber.init(string: "5.376")
 let BLOCK_TIME_UMEE         = NSDecimalNumber.init(string: "5.658")
 let BLOCK_TIME_EVMOS        = NSDecimalNumber.init(string: "5.824")
-let BLOCK_TIME_PROVENANCE   = NSDecimalNumber.init(string: "6.4148")
+let BLOCK_TIME_PROVENANCE   = NSDecimalNumber.init(string: "6.3061")
+let BLOCK_TIME_CERBERUS     = NSDecimalNumber.init(string: "5.9666")
+let BLOCK_TIME_OMNIFLIX     = NSDecimalNumber.init(string: "5.7970")
 
 
 let OK_TX_TYPE_TRANSFER        = 1;

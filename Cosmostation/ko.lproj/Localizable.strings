@@ -198,6 +198,8 @@
 "send_guide_msg_cudos" = "Cudos는 탈중앙화된 고효율 클라우드 컴퓨팅 네트워크를 위해 설계된 텐더민트 기반 블록체인입니다.";
 "send_guide_title_cerberus" = "CERBERUS";
 "send_guide_msg_cerberus" = "지옥의 파수꾼 케르베로스를 모티브로 만들어진 코스모스 생태계 밈 코인입니다.";
+"send_guide_title_omniflix" = "OMNIFLIX";
+"send_guide_msg_omniflix" = "NFT 창작자들과 커뮤니티에게 탈중앙화된 미디어 플랫폼을 제공하는 블록체인 프로젝트.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -964,6 +966,7 @@ support@cosmostation.io";
 "chain_title_provenance" = "Provenance";
 "chain_title_cudos" = "Cudos";
 "chain_title_cerberus" = "Cerberus";
+"chain_title_omniflix" = "Omniflix";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_althea_test" = "Althea Testnet";

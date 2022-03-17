@@ -26,7 +26,7 @@ class WKey {
             chainType == ChainType.EMONEY_MAIN || chainType == ChainType.RIZON_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.REGEN_MAIN ||
             chainType == ChainType.BITCANA_MAIN || chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.GRAVITY_BRIDGE_MAIN || chainType == ChainType.STARGAZE_MAIN ||
             chainType == ChainType.COMDEX_MAIN || chainType == ChainType.CHIHUAHUA_MAIN || chainType == ChainType.AXELAR_MAIN || chainType == ChainType.KONSTELLATION_MAIN ||
-            chainType == ChainType.UMEE_MAIN || chainType == ChainType.CUDOS_MAIN || chainType == ChainType.CERBERUS_MAIN ||
+            chainType == ChainType.UMEE_MAIN || chainType == ChainType.CUDOS_MAIN || chainType == ChainType.CERBERUS_MAIN || chainType == ChainType.OMNIFLIX_MAIN ||
             chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.ALTHEA_TEST) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
@@ -182,6 +182,8 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "cudos", program: ripemd160)
         } else if (chain == ChainType.CERBERUS_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "cerberus", program: ripemd160)
+        } else if (chain == ChainType.OMNIFLIX_MAIN) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "omniflix", program: ripemd160)
         }
         
         //Don't support INJECTIVE_MAIN, EVMOS_MAIN, OKEX_MAIN
@@ -195,7 +197,7 @@ class WKey {
             chain == ChainType.EMONEY_MAIN || chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.ALTHEA_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.STARGAZE_MAIN ||
             chain == ChainType.COMDEX_MAIN || chain == ChainType.CHIHUAHUA_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
-            chain == ChainType.UMEE_MAIN || chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN ||
+            chain == ChainType.UMEE_MAIN || chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN || chain == ChainType.OMNIFLIX_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
@@ -384,6 +386,8 @@ class WKey {
             result = bech32.encode("cudos", values: data)
         } else if (chain == ChainType.CERBERUS_MAIN) {
             result = bech32.encode("cerberus", values: data)
+        } else if (chain == ChainType.OMNIFLIX_MAIN) {
+            result = bech32.encode("omniflix", values: data)
         }
         return result
     }

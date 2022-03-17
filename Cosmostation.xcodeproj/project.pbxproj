@@ -923,6 +923,8 @@
 		0444D40D27E1E87900819B21 /* osmosis_epochs_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D3D827E1E87800819B21 /* osmosis_epochs_genesis.pb.swift */; };
 		0444D41027E3083300819B21 /* WalletCerberusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D40E27E3083300819B21 /* WalletCerberusCell.swift */; };
 		0444D41127E3083300819B21 /* WalletCerberusCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444D40F27E3083300819B21 /* WalletCerberusCell.xib */; };
+		0444D41427E320D200819B21 /* WalletOmniCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444D41227E320D200819B21 /* WalletOmniCell.swift */; };
+		0444D41527E320D200819B21 /* WalletOmniCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444D41327E320D200819B21 /* WalletOmniCell.xib */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
 		045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */; };
@@ -2938,6 +2940,8 @@
 		0444D3D827E1E87800819B21 /* osmosis_epochs_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = osmosis_epochs_genesis.pb.swift; sourceTree = "<group>"; };
 		0444D40E27E3083300819B21 /* WalletCerberusCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCerberusCell.swift; sourceTree = "<group>"; };
 		0444D40F27E3083300819B21 /* WalletCerberusCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCerberusCell.xib; sourceTree = "<group>"; };
+		0444D41227E320D200819B21 /* WalletOmniCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletOmniCell.swift; sourceTree = "<group>"; };
+		0444D41327E320D200819B21 /* WalletOmniCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletOmniCell.xib; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
 		045E08482782EB71004A7801 /* WalletChihuahuaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletChihuahuaCell.swift; sourceTree = "<group>"; };
@@ -5527,6 +5531,8 @@
 				15E40DAC27C8A9E400E7C850 /* WalletCudosCell.xib */,
 				0444D40E27E3083300819B21 /* WalletCerberusCell.swift */,
 				0444D40F27E3083300819B21 /* WalletCerberusCell.xib */,
+				0444D41227E320D200819B21 /* WalletOmniCell.swift */,
+				0444D41327E320D200819B21 /* WalletOmniCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -7042,6 +7048,7 @@
 				288F8077270DDEE8009825B5 /* TxSifSwapCell.xib in Resources */,
 				04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */,
 				2868559024989A8F0099D18F /* Bep3SupplyPopup.xib in Resources */,
+				0444D41527E320D200819B21 /* WalletOmniCell.xib in Resources */,
 				286F585B26C7EF3F00478E16 /* FarmingDetailViewController.xib in Resources */,
 				E126CF872387A4B4002A546F /* WalletIrisCell.xib in Resources */,
 				28429197264A45FB00130651 /* NativeTokenDetailViewController.xib in Resources */,
@@ -8327,6 +8334,7 @@
 				040FA822275F55C200229F6F /* em_issuer_v1_tx.grpc.swift in Sources */,
 				040FA8C6275F55C200229F6F /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
 				040FAAEE275F55C400229F6F /* cosmos_vesting_v1beta1_tx.grpc.swift in Sources */,
+				0444D41427E320D200819B21 /* WalletOmniCell.swift in Sources */,
 				E151B65422486C300026B8C0 /* ProposalCell.swift in Sources */,
 				28C41FEC24A1FF60007C5072 /* TxRewardAllCell.swift in Sources */,
 				040FAA63275F55C400229F6F /* akash_market_v1beta2_query.pb.swift in Sources */,

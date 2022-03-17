@@ -282,6 +282,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     guard let url = URL(string: EXPLORER_CERBERUS) else { return }
                     self.onShowSafariWeb(url)
                     
+                } else if (chainType == ChainType.OMNIFLIX_MAIN) {
+                    guard let url = URL(string: EXPLORER_OMNIFLIX) else { return }
+                    self.onShowSafariWeb(url)
+                    
                 }
                 
                 else if (chainType == ChainType.COSMOS_TEST) {

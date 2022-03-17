@@ -835,6 +835,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCrbrus.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CERBERUS_MAIN_DENOM, allCrbrus, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == OMNIFLIX_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenOmniflix")
+            cell?.tokenSymbol.text = "FLIX"
+            cell?.tokenSymbol.textColor = COLOR_OMNIFLIX
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Omniflix Staking Coin"
+            
+            let allFlix = WUtils.getAllMainAsset(OMNIFLIX_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allFlix.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OMNIFLIX_MAIN_DENOM, allFlix, 6, cell!.tokenValue.font)
+            
         }
         
         

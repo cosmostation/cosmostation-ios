@@ -379,6 +379,8 @@ class BaseNetWork {
             result = CUDOS_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.CERBERUS_MAIN) {
             result = CERBERUS_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.OMNIFLIX_MAIN) {
+            result = OMNIFLIX_API + "v1/account/new_txs/" + address
         }
         
         
@@ -468,6 +470,8 @@ class BaseNetWork {
             result = CUDOS_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.CERBERUS_MAIN) {
             result = CERBERUS_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.OMNIFLIX_MAIN) {
+            result = OMNIFLIX_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -623,6 +627,9 @@ class BaseNetWork {
             
         } else if (chain == ChainType.CERBERUS_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-cerberus-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.OMNIFLIX_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-omniflix-app.cosmostation.io", port: 9090)
             
         }
         
