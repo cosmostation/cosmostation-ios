@@ -27,7 +27,8 @@ class WKey {
             chainType == ChainType.BITCANA_MAIN || chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.GRAVITY_BRIDGE_MAIN || chainType == ChainType.STARGAZE_MAIN ||
             chainType == ChainType.COMDEX_MAIN || chainType == ChainType.CHIHUAHUA_MAIN || chainType == ChainType.AXELAR_MAIN || chainType == ChainType.KONSTELLATION_MAIN ||
             chainType == ChainType.UMEE_MAIN || chainType == ChainType.CUDOS_MAIN || chainType == ChainType.CERBERUS_MAIN || chainType == ChainType.OMNIFLIX_MAIN ||
-            chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.ALTHEA_TEST) {
+            chainType == ChainType.CRESCENT_MAIN ||
+            chainType == ChainType.COSMOS_TEST || chainType == ChainType.IRIS_TEST || chainType == ChainType.ALTHEA_TEST || chainType == ChainType.CRESCENT_TEST) {
             return masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(account.account_path)!))
             
         } else if (chainType == ChainType.BINANCE_MAIN) {
@@ -184,6 +185,8 @@ class WKey {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "cerberus", program: ripemd160)
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "omniflix", program: ripemd160)
+        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
+            result = try! SegwitAddrCoder.shared.encode2(hrp: "cre", program: ripemd160)
         }
         
         //Don't support INJECTIVE_MAIN, EVMOS_MAIN, OKEX_MAIN
@@ -197,8 +200,8 @@ class WKey {
             chain == ChainType.EMONEY_MAIN || chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
             chain == ChainType.BITCANA_MAIN || chain == ChainType.ALTHEA_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN || chain == ChainType.STARGAZE_MAIN ||
             chain == ChainType.COMDEX_MAIN || chain == ChainType.CHIHUAHUA_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
-            chain == ChainType.UMEE_MAIN || chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN || chain == ChainType.OMNIFLIX_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST) {
+            chain == ChainType.UMEE_MAIN || chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN || chain == ChainType.OMNIFLIX_MAIN || chain == ChainType.CRESCENT_MAIN ||
+            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST || chain == ChainType.CRESCENT_TEST) {
             childKey =  masterKey.derived(at: .hardened(44)).derived(at: .hardened(118)).derived(at: .hardened(0)).derived(at: .notHardened(0)).derived(at: .notHardened(UInt32(path)))
             
         } else if (chain == ChainType.BINANCE_MAIN) {
@@ -388,6 +391,8 @@ class WKey {
             result = bech32.encode("cerberus", values: data)
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             result = bech32.encode("omniflix", values: data)
+        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
+            result = bech32.encode("cre", values: data)
         }
         return result
     }

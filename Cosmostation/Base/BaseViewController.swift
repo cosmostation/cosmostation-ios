@@ -541,11 +541,21 @@ extension BaseViewController {
         })
         omniflixAction.setValue(UIImage(named: "chainOmniflix")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let crescentAction = UIAlertAction(title: NSLocalizedString("chain_title_crescent", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.CRESCENT_MAIN)
+        })
+        crescentAction.setValue(UIImage(named: "chainCrescent")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
         })
         altheaTestAction.setValue(UIImage(named: "testnetAlthea")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
+        let crescentTestAction = UIAlertAction(title: NSLocalizedString("chain_title_crescent_test", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.CRESCENT_TEST)
+        })
+        crescentTestAction.setValue(UIImage(named: "testnetCrescent")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
         
         
@@ -561,6 +571,7 @@ extension BaseViewController {
         showAlert.addAction(certikAction)
         showAlert.addAction(chihuahuaAction)
         showAlert.addAction(comdexAction)
+//        showAlert.addAction(crescentAction)
         showAlert.addAction(cryptoAction)
 //        showAlert.addAction(cudosAction)
         showAlert.addAction(desmosAction)
@@ -593,6 +604,10 @@ extension BaseViewController {
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.ALTHEA_TEST)) {
             showAlert.addAction(altheaTestAction)
+        }
+        
+        if (ChainType.SUPPRT_CHAIN().contains(ChainType.CRESCENT_TEST)) {
+            showAlert.addAction(crescentTestAction)
         }
         
         if (cancleable) {
