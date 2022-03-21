@@ -381,6 +381,8 @@ class BaseNetWork {
             result = CERBERUS_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             result = OMNIFLIX_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.CRESCENT_MAIN) {
+            result = CRESCENT_API + "v1/account/new_txs/" + address
         }
         
         
@@ -390,6 +392,8 @@ class BaseNetWork {
             result = IRIS_TEST_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.ALTHEA_TEST) {
             result = ALTHEA_TEST_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.CRESCENT_TEST) {
+            result = CRESCENT_TEST_API + "v1/account/new_txs/" + address
         }
         return result
     }
@@ -472,6 +476,8 @@ class BaseNetWork {
             result = CERBERUS_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             result = OMNIFLIX_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.CRESCENT_MAIN) {
+            result = CRESCENT_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -480,6 +486,8 @@ class BaseNetWork {
             result = IRIS_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.ALTHEA_TEST) {
             result = ALTHEA_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.CRESCENT_TEST) {
+            result = CRESCENT_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         return result
     }
@@ -622,7 +630,6 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-provenance-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.CUDOS_MAIN) {
-//            return ClientConnection.insecure(group: group).connect(host: "lcd-provenance-app.cosmostation.io", port: 9090)
             return ClientConnection.insecure(group: group).connect(host: "lcd-cudos-testnet.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.CERBERUS_MAIN) {
@@ -642,6 +649,9 @@ class BaseNetWork {
             
         } else if (chain == ChainType.ALTHEA_TEST) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20100)
+            
+        } else if (chain == ChainType.CRESCENT_TEST) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20400)
             
         }
         return nil

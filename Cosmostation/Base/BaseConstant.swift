@@ -128,6 +128,9 @@ let CERBERUS_API                        = "https://api-cerberus.cosmostation.io/
 
 let OMNIFLIX_API                        = "https://api-omniflix.cosmostation.io/";
 
+let CRESCENT_API                        = "https://api-crescent.cosmostation.io/";
+let CRESCENT_TEST_API                   = "https://api-office.cosmostation.io/mooncat-1-1/";
+
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
@@ -178,6 +181,7 @@ let PROVENANCE_VAL_URL                  = "https://raw.githubusercontent.com/cos
 let CUDOS_VAL_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/cudos/";
 let CERBERUS_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/cerberus/";
 let OMNIFLIX_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/omniflix/";
+let CRESCENT_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/crescent/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -227,6 +231,7 @@ let RELAYER_IMG_PROVENANCE              = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_CUDOS                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cudos-unknown.png"
 let RELAYER_IMG_CERBERUS                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cerberus-unknown.png"
 let RELAYER_IMG_OMNIFLIX                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-omniflix-unknown.png"
+let RELAYER_IMG_CRESCENT                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/crescent/relay-crescent-unknown.png"
 
 
 
@@ -1024,6 +1029,11 @@ let TRANS_BG_COLOR_OMNIFLIX2                = UIColor.init(hexString: "6c63ff", 
 let COLOR_OMNIFLIX                          = UIColor.init(hexString: "6c63ff")
 let COLOR_OMNIFLIX_DARK                     = UIColor.init(hexString: "3228ab")
 
+let TRANS_BG_COLOR_CRESCENT                 = UIColor.init(hexString: "ac8a5e", alpha: 0.15)
+let TRANS_BG_COLOR_CRESCENT2                = UIColor.init(hexString: "ac8a5e", alpha: 0.4)
+let COLOR_CRESCENT                          = UIColor.init(hexString: "ac8a5e")
+let COLOR_CRESCENT_DARK                     = UIColor.init(hexString: "452318")
+
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
 let COLOR_CDP_SAFE                          = UIColor.init(hexString: "40F683")
@@ -1076,11 +1086,12 @@ public enum ChainType: String {
     case CUDOS_MAIN
     case CERBERUS_MAIN
     case OMNIFLIX_MAIN
+    case CRESCENT_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
     case ALTHEA_TEST
-//    case AXELAR_TEST
+    case CRESCENT_TEST
     
     static func SUPPRT_CHAIN() -> Array<ChainType> {
         var result = [ChainType]()
@@ -1097,6 +1108,7 @@ public enum ChainType: String {
         result.append(CERTIK_MAIN)
         result.append(CHIHUAHUA_MAIN)
         result.append(COMDEX_MAIN)
+//        result.append(CRESCENT_MAIN)
         result.append(CRYPTO_MAIN)
 //        result.append(CUDOS_MAIN)
         result.append(DESMOS_MAIN)
@@ -1129,10 +1141,14 @@ public enum ChainType: String {
 //        result.append(COSMOS_TEST)
 //        result.append(IRIS_TEST)
 //        result.append(ALTHEA_TEST)
+        result.append(CRESCENT_TEST)
         return result
     }
     
     static func IS_TESTNET(_ chain: ChainType?) -> Bool {
+        if (chain == ChainType.CRESCENT_TEST) {
+            return true
+        }
         return false
     }
     
@@ -1229,10 +1245,12 @@ let CHAIN_PROVENANCE_S = "SUPPORT_CHAIN_PROVENANCE"
 let CHAIN_CUDOS_S = "SUPPORT_CHAIN_CUDOS"
 let CHAIN_CERBERUS_S = "SUPPORT_CHAIN_CERBERUS"
 let CHAIN_OMNIFLIX_S = "SUPPORT_CHAIN_OMNIFLIX"
+let CHAIN_CRESENT_S = "SUPPORT_CHAIN_CRESENT"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
 let CHAIN_ALTHEA_TEST_S = "SUPPORT_CHAIN_ALTHEA_TEST"
+let CHAIN_CRESENT_TEST_S = "SUPPORT_CHAIN_CRESENT_TEST"
 
 let COSMOS_MAIN_DENOM = "uatom"
 let IRIS_MAIN_DENOM = "uiris"
@@ -1275,6 +1293,7 @@ let PROVENANCE_MAIN_DENOM = "nhash"
 let CUDOS_MAIN_DENOM = "acudos"
 let CERBERUS_MAIN_DENOM = "ucrbrus"
 let OMNIFLIX_MAIN_DENOM = "uflix"
+let CRESCENT_MAIN_DENOM = "ucre"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1373,11 +1392,13 @@ let EXPLORER_PROVENANCE     = "https://www.mintscan.io/provenance/";
 let EXPLORER_CUDOS          = "https://www.mintscan.io/cudos/";
 let EXPLORER_CERBERUS       = "https://www.mintscan.io/cerberus/";
 let EXPLORER_OMNIFLIX       = "https://www.mintscan.io/omniflix/";
+let EXPLORER_CRESCENT       = "https://www.mintscan.io/crescent/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
 let EXPLORER_ALTHEA_TEST    = "https://testnet.mintscan.io/althea/";
 let EXPLORER_HDAC_TEST      = "http://test.explorer.hdactech.com/hdac-explorer/";
+let EXPLORER_CRESCENT_TEST  = "https://testnet.mintscan.io/crescent/";
 
 let EXPLORER_OEC_TX         = "https://www.oklink.com/oec/"
 
