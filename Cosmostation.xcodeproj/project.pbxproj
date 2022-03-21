@@ -1138,6 +1138,8 @@
 		04D3391C27E8386F00E82AA7 /* injective_insurance_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3391B27E8386E00E82AA7 /* injective_insurance_v1beta1_genesis.pb.swift */; };
 		04D3391E27E8387900E82AA7 /* injective_auction_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3391D27E8387800E82AA7 /* injective_auction_v1beta1_genesis.pb.swift */; };
 		04D3392027E8390400E82AA7 /* gravity_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3391F27E8390400E82AA7 /* gravity_v1_genesis.pb.swift */; };
+		04D3392327E8803000E82AA7 /* WalletCrescentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3392127E8803000E82AA7 /* WalletCrescentCell.swift */; };
+		04D3392427E8803000E82AA7 /* WalletCrescentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D3392227E8803000E82AA7 /* WalletCrescentCell.xib */; };
 		04D93A5827B1347900F8CE0D /* WalletKonstellationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D93A5627B1347900F8CE0D /* WalletKonstellationCell.swift */; };
 		04D93A5927B1347900F8CE0D /* WalletKonstellationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D93A5727B1347900F8CE0D /* WalletKonstellationCell.xib */; };
 		04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
@@ -3077,6 +3079,8 @@
 		04D3391B27E8386E00E82AA7 /* injective_insurance_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_insurance_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		04D3391D27E8387800E82AA7 /* injective_auction_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_auction_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		04D3391F27E8390400E82AA7 /* gravity_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gravity_v1_genesis.pb.swift; sourceTree = "<group>"; };
+		04D3392127E8803000E82AA7 /* WalletCrescentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCrescentCell.swift; sourceTree = "<group>"; };
+		04D3392227E8803000E82AA7 /* WalletCrescentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCrescentCell.xib; sourceTree = "<group>"; };
 		04D93A5627B1347900F8CE0D /* WalletKonstellationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletKonstellationCell.swift; sourceTree = "<group>"; };
 		04D93A5727B1347900F8CE0D /* WalletKonstellationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletKonstellationCell.xib; sourceTree = "<group>"; };
 		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
@@ -5296,6 +5300,8 @@
 				0444D40F27E3083300819B21 /* WalletCerberusCell.xib */,
 				0444D41227E320D200819B21 /* WalletOmniCell.swift */,
 				0444D41327E320D200819B21 /* WalletOmniCell.xib */,
+				04D3392127E8803000E82AA7 /* WalletCrescentCell.swift */,
+				04D3392227E8803000E82AA7 /* WalletCrescentCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -6812,6 +6818,7 @@
 				04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */,
 				2868559024989A8F0099D18F /* Bep3SupplyPopup.xib in Resources */,
 				0444D41527E320D200819B21 /* WalletOmniCell.xib in Resources */,
+				04D3392427E8803000E82AA7 /* WalletCrescentCell.xib in Resources */,
 				286F585B26C7EF3F00478E16 /* FarmingDetailViewController.xib in Resources */,
 				E126CF872387A4B4002A546F /* WalletIrisCell.xib in Resources */,
 				28429197264A45FB00130651 /* NativeTokenDetailViewController.xib in Resources */,
@@ -7177,6 +7184,7 @@
 				28474ED5241E06AF00AF5A81 /* TxCdpRepayCell.swift in Sources */,
 				045E084A2782EB71004A7801 /* WalletChihuahuaCell.swift in Sources */,
 				040FAA50275F55C400229F6F /* iris_mod_service_tx.grpc.swift in Sources */,
+				04D3392327E8803000E82AA7 /* WalletCrescentCell.swift in Sources */,
 				E171A075225B091300C5756C /* StepGenTxViewController.swift in Sources */,
 				040FAA67275F55C400229F6F /* shentu_gov_v1alpha1_gov.pb.swift in Sources */,
 				283439A12531D1CF00CCFADE /* MyDomainViewController.swift in Sources */,

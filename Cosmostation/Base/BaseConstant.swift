@@ -1029,10 +1029,11 @@ let TRANS_BG_COLOR_OMNIFLIX2                = UIColor.init(hexString: "6c63ff", 
 let COLOR_OMNIFLIX                          = UIColor.init(hexString: "6c63ff")
 let COLOR_OMNIFLIX_DARK                     = UIColor.init(hexString: "3228ab")
 
-let TRANS_BG_COLOR_CRESCENT                 = UIColor.init(hexString: "ac8a5e", alpha: 0.15)
-let TRANS_BG_COLOR_CRESCENT2                = UIColor.init(hexString: "ac8a5e", alpha: 0.4)
-let COLOR_CRESCENT                          = UIColor.init(hexString: "ac8a5e")
+let TRANS_BG_COLOR_CRESCENT                 = UIColor.init(hexString: "ffc780", alpha: 0.15)
+let TRANS_BG_COLOR_CRESCENT2                = UIColor.init(hexString: "ffc780", alpha: 0.4)
+let COLOR_CRESCENT                          = UIColor.init(hexString: "ffc780")
 let COLOR_CRESCENT_DARK                     = UIColor.init(hexString: "452318")
+let COLOR_BCRE                              = UIColor.init(hexString: "ac8a5e")
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
@@ -1306,6 +1307,7 @@ let EMONEY_CHF_DENOM = "echf"
 let EMONEY_DKK_DENOM = "edkk"
 let EMONEY_NOK_DENOM = "enok"
 let EMONEY_SEK_DENOM = "esek"
+let CRESCENT_BCRE_DENOM = "ubcre"
 
 
 let BITCOINCASH    = "asset:bch";

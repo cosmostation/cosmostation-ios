@@ -242,6 +242,11 @@ class WalletGuideCell: UITableViewCell {
             guideTitle.text = NSLocalizedString("send_guide_title_omniflix", comment: "")
             guideMsg.text = NSLocalizedString("send_guide_msg_omniflix", comment: "")
             
+        } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
+            guideImg.image = UIImage(named: "infoiconCrescent")
+            guideTitle.text = NSLocalizedString("send_guide_title_crescent", comment: "")
+            guideMsg.text = NSLocalizedString("send_guide_msg_crescent", comment: "")
+            
         }
         
     }

@@ -203,6 +203,8 @@
 "send_guide_msg_cerberus" = "Cerberus is a community-led tri-headed dog meme coin in Cosmos ecosystem.";
 "send_guide_title_omniflix" = "OMNIFLIX";
 "send_guide_msg_omniflix" = "OmniFlix Network is a blockchain specifically designed for creators and communities, powered by NFTs.";
+"send_guide_title_crescent" = "CRESCENT";
+"send_guide_msg_crescent" = "Crescent is a Tendermint-based DeFi hub powered by $CRE tokens & Inter-Blockchain Communication protocol";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

@@ -200,6 +200,8 @@
 "send_guide_msg_cerberus" = "지옥의 파수꾼 케르베로스를 모티브로 만들어진 코스모스 생태계 밈 코인입니다.";
 "send_guide_title_omniflix" = "OMNIFLIX";
 "send_guide_msg_omniflix" = "NFT 창작자들과 커뮤니티에게 탈중앙화된 미디어 플랫폼을 제공하는 블록체인 프로젝트.";
+"send_guide_title_crescent" = "CRESCENT";
+"send_guide_msg_crescent" = "$CRE 토큰과 인터-블록체인 통신기술을 활용한 텐더민트 기반 디파이 허브.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

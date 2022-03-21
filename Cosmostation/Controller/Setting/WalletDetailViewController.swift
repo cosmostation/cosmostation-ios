@@ -297,6 +297,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
+        } else if (chainType! == ChainType.CRESCENT_MAIN) {
+            chainImg.image = UIImage(named: "chainCrescent")
+            keyPath.text = BASE_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
         }
         
         else if (chainType == ChainType.KAVA_MAIN) {
@@ -361,6 +368,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             
         } else if (chainType! == ChainType.ALTHEA_TEST) {
             chainImg.image = UIImage(named: "testnetAlthea")
+            keyPath.text = BASE_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
+        } else if (chainType! == ChainType.CRESCENT_TEST) {
+            chainImg.image = UIImage(named: "testnetCrescent")
             keyPath.text = BASE_PATH.appending(account!.account_path)
             cardPush.isHidden = true
             constraint2.priority = .defaultHigh

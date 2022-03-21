@@ -81,6 +81,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletCudosCell", bundle: nil), forCellReuseIdentifier: "WalletCudosCell")
         self.walletTableView.register(UINib(nibName: "WalletCerberusCell", bundle: nil), forCellReuseIdentifier: "WalletCerberusCell")
         self.walletTableView.register(UINib(nibName: "WalletOmniCell", bundle: nil), forCellReuseIdentifier: "WalletOmniCell")
+        self.walletTableView.register(UINib(nibName: "WalletCrescentCell", bundle: nil), forCellReuseIdentifier: "WalletCrescentCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -189,6 +190,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (chainType! == ChainType.EVMOS_MAIN) {
             floaty.buttonImage = UIImage.init(named: "btnSendEvmos")
             floaty.buttonColor = UIColor.init(hexString: "000000")
+        } else if (chainType! == ChainType.CRESCENT_MAIN || chainType! == ChainType.CRESCENT_TEST) {
+            floaty.buttonImage = UIImage.init(named: "btnSendCrescent")
+            floaty.buttonColor = UIColor.init(hexString: "452318")
         } else {
             floaty.buttonImage = UIImage.init(named: "sendImg")
             floaty.buttonColor = WUtils.getChainColor(chainType)
@@ -310,12 +314,16 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetCerberusItems(tableView, indexPath);
         } else if (chainType == ChainType.OMNIFLIX_MAIN) {
             return onSetOmniItems(tableView, indexPath);
+        } else if (chainType == ChainType.CRESCENT_MAIN) {
+            return onSetCrescentItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
             return onSetCosmosTestItems(tableView, indexPath);
         } else if (chainType == ChainType.IRIS_TEST) {
             return onSetIrisTestItems(tableView, indexPath);
+        } else if (chainType == ChainType.CRESCENT_TEST) {
+            return onSetCrescentItems(tableView, indexPath);
         } else {
             let cell:WalletAddressCell? = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             return cell!
@@ -1525,6 +1533,35 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    func onSetCrescentItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletCrescentCell") as? WalletCrescentCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+    }
+    
     
     func onSetCosmosTestItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
@@ -2065,6 +2102,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.provenance.io/") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.CRESCENT_MAIN || chainType! == ChainType.CRESCENT_TEST) {
+            guard let url = URL(string: "https://crescent.network/") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
@@ -2229,6 +2270,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (chainType! == ChainType.PROVENANCE_MAIN) {
             guard let url = URL(string: "https://www.provenance.io/blog") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.CRESCENT_MAIN || chainType! == ChainType.CRESCENT_TEST) {
+            guard let url = URL(string: "https://crescentnetwork.medium.com/") else { return }
             self.onShowSafariWeb(url)
             
         }

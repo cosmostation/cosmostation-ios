@@ -846,6 +846,28 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allFlix.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OMNIFLIX_MAIN_DENOM, allFlix, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == CRESCENT_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenCrescent")
+            cell?.tokenSymbol.text = "CRE"
+            cell?.tokenSymbol.textColor = COLOR_CRESCENT
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Crescent Staking Coin"
+            
+            let allCre = WUtils.getAllMainAsset(CRESCENT_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allCre.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CRESCENT_MAIN_DENOM, allCre, 6, cell!.tokenValue.font)
+            
+        } else if (coin.denom == CRESCENT_BCRE_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenBcre")
+            cell?.tokenSymbol.text = "BCRE"
+            cell?.tokenSymbol.textColor = COLOR_BCRE
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Liquidated CRE"
+            
+            let allBCre = NSDecimalNumber.init(string: coin.amount)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBCre.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CRESCENT_BCRE_DENOM, allBCre, 6, cell!.tokenValue.font)
+            
         }
         
         
@@ -1117,6 +1139,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                     mPoolToken_gRPC.append(balance_gRPC)
                 }
                 
+            } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
+                if (balance_gRPC.denom == CRESCENT_BCRE_DENOM) {
+                    mNative_gRPC.append(balance_gRPC)
+                }
             } else {
                 mUnKnown_gRPC.append(balance_gRPC)
             }

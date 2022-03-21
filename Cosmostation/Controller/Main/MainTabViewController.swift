@@ -250,7 +250,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                    self.mChainType == ChainType.DESMOS_MAIN || self.mChainType == ChainType.LUM_MAIN || self.mChainType == ChainType.CHIHUAHUA_MAIN ||
                    self.mChainType == ChainType.AXELAR_MAIN || self.mChainType == ChainType.KONSTELLATION_MAIN || self.mChainType == ChainType.UMEE_MAIN ||
                    self.mChainType == ChainType.EVMOS_MAIN || self.mChainType == ChainType.PROVENANCE_MAIN || self.mChainType == ChainType.CUDOS_MAIN ||
-                   self.mChainType == ChainType.SIF_MAIN || self.mChainType == ChainType.CERBERUS_MAIN || self.mChainType == ChainType.OMNIFLIX_MAIN) {
+                   self.mChainType == ChainType.SIF_MAIN || self.mChainType == ChainType.CERBERUS_MAIN || self.mChainType == ChainType.OMNIFLIX_MAIN ||
+                   self.mChainType == ChainType.CRESCENT_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -329,7 +330,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchKavaIncentiveParam()
             self.onFetchKavaIncentiveReward(mAccount.account_address)
             
-        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.ALTHEA_TEST) {
+        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.ALTHEA_TEST || self.mChainType == ChainType.CRESCENT_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
