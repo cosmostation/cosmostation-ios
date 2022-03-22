@@ -41,6 +41,14 @@ public struct Param {
             let annualProvisions = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
             let evmosSupply = getMainSupply().subtracting(NSDecimalNumber.init(string: "200000000000000000000000000"))
             return annualProvisions.dividing(by: evmosSupply, withBehavior: WUtils.handler18)
+            
+        } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
+            let now = Date.init().millisecondsSince1970
+            let creSupply = getMainSupply()
+            if let annualProvisions = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
+                return annualProvisions.dividing(by: creSupply, withBehavior: WUtils.handler18)
+            }
+            
         }
         return NSDecimalNumber.init(string: params?.minting_inflation)
     }
@@ -86,13 +94,21 @@ public struct Param {
         if (chain == ChainType.OSMOSIS_MAIN) {
             let stakingDistribution = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.distribution_proportions?.staking)
             return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+            
         } else if (chain == ChainType.STARGAZE_MAIN) {
             let reductionFactor = NSDecimalNumber.one.subtracting(NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.reduction_factor))
             return inflation.multiplying(by: calTax).multiplying(by: reductionFactor).dividing(by: bondingRate, withBehavior: WUtils.handler6)
+            
         } else if (chain == ChainType.EVMOS_MAIN) {
             let ap = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
             let stakingRewardsFactor = params?.evmos_inflation_params?.params?.inflation_distribution?.staking_rewards ?? NSDecimalNumber.zero
             return ap.multiplying(by: stakingRewardsFactor).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
+            
+        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
+            let now = Date.init().millisecondsSince1970
+            if let ap = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
+                return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
+            }
         }
         
         let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
@@ -200,6 +216,8 @@ public struct Params {
     var evmos_inflation_params: EvmosInflationParam?
     var evmos_minting_epoch_provisions: String?
     
+    var crescent_minting_params: CrescentMintingParam?
+    
     init(_ dictionary: NSDictionary?) {
         if let rawIbcParams = dictionary?["ibc_params"] as? NSDictionary {
             self.ibc_params = IbcParams.init(rawIbcParams)
@@ -306,6 +324,10 @@ public struct Params {
         }
         if let rawEvmosEpochMintingProvisions = dictionary?["epoch_mint_provision"] as? NSDictionary {
             self.evmos_minting_epoch_provisions = EvmosEpochMintingProvisions.init(rawEvmosEpochMintingProvisions).epoch_mint_provision
+        }
+        
+        if let rawCrescentMintingParam = dictionary?["crescent_minting_params"] as? NSDictionary {
+            self.crescent_minting_params = CrescentMintingParam.init(rawCrescentMintingParam)
         }
     }
 }
@@ -805,5 +827,49 @@ public struct EvmosEpochMintingProvisions {
     
     init(_ dictionary: NSDictionary?) {
         self.epoch_mint_provision = dictionary?["epoch_mint_provision"] as? String
+    }
+}
+
+
+
+public struct CrescentMintingParam {
+    var params: Params?
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawParams = dictionary?["params"] as? NSDictionary {
+            self.params = Params.init(rawParams)
+        }
+    }
+    
+    public struct Params {
+        var mint_denom: String?
+        var block_time_threshold: String?
+        var inflation_schedules = Array<CrescentInflationSchdule>()
+        
+        init(_ dictionary: NSDictionary?) {
+            self.mint_denom = dictionary?["mint_denom"] as? String
+            self.block_time_threshold = dictionary?["block_time_threshold"] as? String
+            if let rawInflationSchedules = dictionary?["inflation_schedules"] as? Array<NSDictionary> {
+                for rawInflationSchedule in rawInflationSchedules {
+                    self.inflation_schedules.append(CrescentInflationSchdule.init(rawInflationSchedule))
+                }
+            }
+        }
+    }
+}
+
+public struct CrescentInflationSchdule {
+    var amount = NSDecimalNumber.zero
+    var end_time: Int64 = 0
+    var start_time: Int64 = 0
+    
+    init(_ dictionary: NSDictionary?) {
+        self.amount = NSDecimalNumber.init(string: dictionary?["amount"] as? String)
+        if let endtime = WUtils.newApiTimeToInt64(dictionary?["end_time"] as? String)?.millisecondsSince1970 {
+            self.end_time = endtime
+        }
+        if let starttime = WUtils.newApiTimeToInt64(dictionary?["start_time"] as? String)?.millisecondsSince1970 {
+            self.start_time = starttime
+        }
     }
 }
