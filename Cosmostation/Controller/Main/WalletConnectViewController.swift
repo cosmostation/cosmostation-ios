@@ -68,7 +68,7 @@ class WalletConnectViewController: BaseViewController, SBCardPopupDelegate {
     
     
     func onConnectSession(_ session: WCSession) {
-        let interactor = WCInteractor(session: session, meta: clientMeta)
+        let interactor = WCInteractor(session: session, meta: clientMeta, uuid: UIDevice.current.identifierForVendor ?? UUID())
         configure(interactor: interactor)
         interactor.connect().cauterize()
         self.interactor = interactor
@@ -84,16 +84,16 @@ class WalletConnectViewController: BaseViewController, SBCardPopupDelegate {
 
         interactor.onSessionRequest = { [weak self] (id, peer) in
             self?.interactor?.approveSession(accounts: accounts, chainId: chainId).done { _ in
-                self?.onViewUpdate(peer)
+                self?.onViewUpdate(peer.peerMeta)
             }.cauterize()
-            
+
         }
 
         interactor.onDisconnect = { [weak self] (error) in
             self?.navigationController?.popViewController(animated: false)
         }
-
-        interactor.onBnbSign = { [weak self] (id, order) in
+        
+        interactor.bnb.onSign = { [weak self] (id, order) in
             if (self?.wcPopup?.viewIfLoaded?.window != nil) {
                 self?.wcPopup?.dismiss(animated: true, completion: {
                     self?.onShowPopupForRequest(id: id, order: order)

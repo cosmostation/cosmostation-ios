@@ -6,7 +6,7 @@ target 'Cosmostation' do
     pod 'SwiftyJSON', '~> 4.3'
     pod 'HDWalletKit', :git => 'https://github.com/cosmostation/HDWallet.git', branch: 'develop'
     pod 'Starscream', '~> 3.1.1'
-    pod 'WalletConnect', git: 'https://github.com/WalletConnect/swift-walletconnect-lib', branch: 'master'
+    pod 'WalletConnect', git: 'https://github.com/cosmostation/wallet-connect-swift.git', branch: 'master'
     pod 'AlamofireImage', '~> 3.3'
     pod 'SQLite.swift', '~> 0.11.5'
     pod 'SwiftKeychainWrapper'

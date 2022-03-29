@@ -1913,7 +1913,6 @@
 		E1A82DF02244E0BD0097CAEE /* AllValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DEF2244E0BD0097CAEE /* AllValidatorViewController.swift */; };
 		E1A82DF42244EC440097CAEE /* AllValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DF22244EC440097CAEE /* AllValidatorCell.swift */; };
 		E1A82DF72244FA750097CAEE /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DF62244FA750097CAEE /* UIColor.swift */; };
-		E1BA208E22F8117000EAB87F /* IrisStdSignMsg.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BA208D22F8117000EAB87F /* IrisStdSignMsg.swift */; };
 		E1BDBC08225C705000810D2E /* MsgGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1BDBC07225C705000810D2E /* MsgGenerator.swift */; };
 		E1C3C89923B1E27800A693C0 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1C3C89823B1E27800A693C0 /* NotificationView.xib */; };
 		E1C3C89B23B1E3E400A693C0 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C3C89A23B1E3E400A693C0 /* NotificationView.swift */; };
@@ -1926,7 +1925,6 @@
 		E1E251DF22A66FC30008F0DB /* OtherValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E251DD22A66FC30008F0DB /* OtherValidatorCell.swift */; };
 		E1E251E122A671180008F0DB /* OtherValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1E251E322A671180008F0DB /* OtherValidatorCell.xib */; };
 		E1ECCA7A224CB4AA00BAB623 /* BottomLineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1ECCA79224CB4AA00BAB623 /* BottomLineTextField.swift */; };
-		E1F1CF06239F53C5004EF8A2 /* IrisProposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1CF05239F53C5004EF8A2 /* IrisProposal.swift */; };
 		E1F1CF08239F5737004EF8A2 /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1CF07239F5737004EF8A2 /* Vote.swift */; };
 		E1F1CF0A239F7D7D004EF8A2 /* VoteSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1CF09239F7D7D004EF8A2 /* VoteSelectViewController.swift */; };
 		E1F1CF0C239F7D8D004EF8A2 /* VoteCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1CF0B239F7D8D004EF8A2 /* VoteCheckViewController.swift */; };
@@ -3899,7 +3897,6 @@
 		E1A82DEF2244E0BD0097CAEE /* AllValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllValidatorViewController.swift; sourceTree = "<group>"; };
 		E1A82DF22244EC440097CAEE /* AllValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllValidatorCell.swift; sourceTree = "<group>"; };
 		E1A82DF62244FA750097CAEE /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		E1BA208D22F8117000EAB87F /* IrisStdSignMsg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrisStdSignMsg.swift; sourceTree = "<group>"; };
 		E1BDBC07225C705000810D2E /* MsgGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsgGenerator.swift; sourceTree = "<group>"; };
 		E1C3C89823B1E27800A693C0 /* NotificationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationView.xib; sourceTree = "<group>"; };
 		E1C3C89A23B1E3E400A693C0 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
@@ -3914,7 +3911,6 @@
 		E1E251E222A671180008F0DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/OtherValidatorCell.xib; sourceTree = "<group>"; };
 		E1E251E522A671260008F0DB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/OtherValidatorCell.strings; sourceTree = "<group>"; };
 		E1ECCA79224CB4AA00BAB623 /* BottomLineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomLineTextField.swift; sourceTree = "<group>"; };
-		E1F1CF05239F53C5004EF8A2 /* IrisProposal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IrisProposal.swift; sourceTree = "<group>"; };
 		E1F1CF07239F5737004EF8A2 /* Vote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vote.swift; sourceTree = "<group>"; };
 		E1F1CF09239F7D7D004EF8A2 /* VoteSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteSelectViewController.swift; sourceTree = "<group>"; };
 		E1F1CF0B239F7D8D004EF8A2 /* VoteCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteCheckViewController.swift; sourceTree = "<group>"; };
@@ -6264,9 +6260,7 @@
 				E151B646224850040026B8C0 /* Msg.swift */,
 				E151B6482248583F0026B8C0 /* StdTx.swift */,
 				E151B64A224859E10026B8C0 /* StdSignMsg.swift */,
-				E1BA208D22F8117000EAB87F /* IrisStdSignMsg.swift */,
 				E151B650224867D60026B8C0 /* Proposal.swift */,
-				E1F1CF05239F53C5004EF8A2 /* IrisProposal.swift */,
 				E1F1CF07239F5737004EF8A2 /* Vote.swift */,
 				E1BDBC07225C705000810D2E /* MsgGenerator.swift */,
 				E1317141225F352A00EE5AD0 /* PostTx.swift */,
@@ -7066,7 +7060,6 @@
 				282FF34923F50C540028CC66 /* TxUndelegateCell.swift in Sources */,
 				28D7BE6925F0FCA1006EECD7 /* HardIndex.swift in Sources */,
 				048C830427BF572800270528 /* evmos_epochs_v1_query.pb.swift in Sources */,
-				E1BA208E22F8117000EAB87F /* IrisStdSignMsg.swift in Sources */,
 				040FAA8C275F55C400229F6F /* umee_peggy_v1_types.pb.swift in Sources */,
 				040FA96F275F55C300229F6F /* iris_mod_coinswap_query.pb.swift in Sources */,
 				048C835E27BF573D00270528 /* provenance_attribute_v1_query.pb.swift in Sources */,
@@ -8229,7 +8222,6 @@
 				E123FD3F233E0161004EC348 /* MainTabWalletViewController.swift in Sources */,
 				28FC030C2652662B001C0319 /* Price.swift in Sources */,
 				E16FACB12361ADFA00372052 /* Bytes.swift in Sources */,
-				E1F1CF06239F53C5004EF8A2 /* IrisProposal.swift in Sources */,
 				E12D6B8D226DF3BB00D07CE4 /* StepSendCheckViewController.swift in Sources */,
 				283E9472254902F4007A9291 /* TxDeleteAccountCell.swift in Sources */,
 				E1C3C89B23B1E3E400A693C0 /* NotificationView.swift in Sources */,

@@ -23,3 +23,15 @@ public struct Signature: Codable {
         self.sequence = dictionary["sequence"] as? String ?? ""
     }
 }
+
+public struct TrustSignature: Codable {
+    var pub_key: PublicKey = PublicKey.init()
+    var signature: String = ""
+    
+    init() {}
+    
+    init(_ dictionary: [String: Any]) {
+        self.signature = dictionary["signature"] as? String ?? ""
+        self.pub_key = PublicKey.init(dictionary["pub_key"] as! [String : Any])
+    }
+}

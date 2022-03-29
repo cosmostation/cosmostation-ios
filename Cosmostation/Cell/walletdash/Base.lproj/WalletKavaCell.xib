@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,39 +21,39 @@
                         <rect key="frame" x="12" y="4" width="477" height="409"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="kavaTokenImg" translatesAutoresizingMaskIntoConstraints="NO" id="TIn-UH-AMn">
-                                <rect key="frame" x="12" y="6" width="20" height="20"/>
+                                <rect key="frame" x="12" y="13.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="GVV-8t-tJc"/>
                                     <constraint firstAttribute="width" constant="20" id="Thv-G2-cmw"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="KAVA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uc1-qS-uDK">
-                                <rect key="frame" x="38" y="16" width="31" height="0.0"/>
+                                <rect key="frame" x="38" y="16" width="31" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" red="1" green="0.33725490196078434" blue="0.30980392156862746" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UL9-O3-AK5">
-                                <rect key="frame" x="452" y="16" width="13" height="0.0"/>
+                                <rect key="frame" x="452" y="15" width="13" height="17"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tmz-HF-m7T">
-                                <rect key="frame" x="453.5" y="152" width="11.5" height="14.5"/>
+                                <rect key="frame" x="453.5" y="96" width="11.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxu-1N-Drx">
-                                <rect key="frame" x="12" y="178.5" width="453" height="0.5"/>
+                                <rect key="frame" x="12" y="122.5" width="453" height="0.5"/>
                                 <color key="backgroundColor" red="0.29411764709999999" green="0.30980392159999998" blue="0.3294117647" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="Dzb-2A-urr"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="UdK-1L-ca6">
-                                <rect key="frame" x="12" y="195" width="453" height="90"/>
+                                <rect key="frame" x="12" y="139" width="453" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gqr-bs-3ie">
                                         <rect key="frame" x="0.0" y="0.0" width="453" height="18"/>
@@ -227,7 +227,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Sio-BH-E0Y">
-                                <rect key="frame" x="12" y="301" width="453" height="40"/>
+                                <rect key="frame" x="12" y="245" width="453" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDv-9B-JUU">
                                         <rect key="frame" x="0.0" y="0.0" width="222.5" height="40"/>
@@ -281,42 +281,70 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uI9-ii-54U">
-                                <rect key="frame" x="12" y="349" width="453" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="HDj-6r-dwJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <state key="normal" title="  KAVA DeFi" image="cdpIc">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.69999999999999996"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onClickCdp:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Dfg-UB-TM8"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ZR4-2Z-6hq">
+                                <rect key="frame" x="12" y="297" width="453" height="92"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uI9-ii-54U">
+                                        <rect key="frame" x="0.0" y="0.0" width="453" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="HDj-6r-dwJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <state key="normal" title="  KAVA DeFi" image="cdpIc">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.69999999999999996"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickCdp:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Dfg-UB-TM8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGk-xb-ImE">
+                                        <rect key="frame" x="0.0" y="52" width="453" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="DCX-Pr-ktK"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <state key="normal" title="  Wallet Connect" image="iconWalletconnect">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.69999999999999996"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickWC:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ham-hd-XuV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.33333333333333331" blue="0.30980392156862746" alpha="0.1524507705" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="uI9-ii-54U" firstAttribute="top" secondItem="Sio-BH-E0Y" secondAttribute="bottom" constant="8" id="1Iw-Z1-Qtm"/>
                             <constraint firstItem="lxu-1N-Drx" firstAttribute="leading" secondItem="M0f-EA-WEA" secondAttribute="leading" constant="12" id="23K-iq-aXI"/>
                             <constraint firstAttribute="trailing" secondItem="lxu-1N-Drx" secondAttribute="trailing" constant="12" id="2f6-M3-t2W"/>
                             <constraint firstItem="uc1-qS-uDK" firstAttribute="centerY" secondItem="TIn-UH-AMn" secondAttribute="centerY" id="4cb-Cc-QzR"/>
                             <constraint firstItem="UdK-1L-ca6" firstAttribute="trailing" secondItem="lxu-1N-Drx" secondAttribute="trailing" id="6UB-sz-5G6"/>
-                            <constraint firstAttribute="bottom" secondItem="uI9-ii-54U" secondAttribute="bottom" constant="20" id="7VM-OK-Zq7"/>
+                            <constraint firstAttribute="trailing" secondItem="ZR4-2Z-6hq" secondAttribute="trailing" constant="12" id="9w6-Tm-Rj3"/>
                             <constraint firstAttribute="trailing" secondItem="UL9-O3-AK5" secondAttribute="trailing" constant="12" id="Ci3-VX-AF5"/>
-                            <constraint firstItem="uI9-ii-54U" firstAttribute="leading" secondItem="M0f-EA-WEA" secondAttribute="leading" constant="12" id="Cy0-Kq-MKK"/>
                             <constraint firstItem="uc1-qS-uDK" firstAttribute="leading" secondItem="TIn-UH-AMn" secondAttribute="trailing" constant="6" id="EFq-Fg-ESg"/>
                             <constraint firstItem="Sio-BH-E0Y" firstAttribute="top" secondItem="UdK-1L-ca6" secondAttribute="bottom" constant="16" id="GlE-In-5Hg"/>
                             <constraint firstItem="Tmz-HF-m7T" firstAttribute="top" secondItem="UL9-O3-AK5" secondAttribute="bottom" constant="6" id="QDt-2b-gwD"/>
@@ -329,7 +357,9 @@
                             <constraint firstItem="UL9-O3-AK5" firstAttribute="centerY" secondItem="TIn-UH-AMn" secondAttribute="centerY" id="nQy-Ej-daG"/>
                             <constraint firstAttribute="trailing" secondItem="Tmz-HF-m7T" secondAttribute="trailing" constant="12" id="oVx-FV-xVV"/>
                             <constraint firstItem="uc1-qS-uDK" firstAttribute="top" secondItem="M0f-EA-WEA" secondAttribute="top" constant="16" id="yoo-tv-RP5"/>
-                            <constraint firstAttribute="trailing" secondItem="uI9-ii-54U" secondAttribute="trailing" constant="12" id="zOj-I2-j8c"/>
+                            <constraint firstAttribute="bottom" secondItem="ZR4-2Z-6hq" secondAttribute="bottom" constant="20" id="zED-SN-YDi"/>
+                            <constraint firstItem="ZR4-2Z-6hq" firstAttribute="leading" secondItem="M0f-EA-WEA" secondAttribute="leading" constant="12" id="zEi-PO-vZ1"/>
+                            <constraint firstItem="ZR4-2Z-6hq" firstAttribute="top" secondItem="Sio-BH-E0Y" secondAttribute="bottom" constant="12" id="zsw-qy-r9m"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -381,6 +411,7 @@
     </objects>
     <resources>
         <image name="cdpIc" width="20" height="20"/>
+        <image name="iconWalletconnect" width="20" height="20"/>
         <image name="kavaTokenImg" width="22" height="22"/>
         <image name="rewardIc" width="20" height="20"/>
         <image name="voteIc" width="20" height="20"/>

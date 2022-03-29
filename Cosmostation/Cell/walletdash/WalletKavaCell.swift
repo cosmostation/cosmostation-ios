@@ -40,6 +40,7 @@ class WalletKavaCell: UITableViewCell {
     var actionDelegate: (() -> Void)? = nil
     var actionVote: (() -> Void)? = nil
     var actionCdp: (() -> Void)? = nil
+    var actionWC: (() -> Void)? = nil
     
     @IBAction func onClickDelegate(_ sender: Any) {
         actionDelegate?()
@@ -49,6 +50,9 @@ class WalletKavaCell: UITableViewCell {
     }
     @IBAction func onClickCdp(_ sender: Any) {
         actionCdp?()
+    }
+    @IBAction func onClickWC(_ sender: Any) {
+        actionWC?()
     }
     
     override func prepareForReuse() {

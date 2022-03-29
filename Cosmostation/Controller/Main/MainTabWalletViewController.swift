@@ -436,6 +436,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionCdp = { self.onClickCdp() }
+            cell?.actionWC = { self.onClickWalletConect() }
             return cell!
             
         } else if (indexPath.row == 1) {
@@ -1539,6 +1540,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionWC = { self.onClickWalletConect() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -2525,6 +2527,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func scannedAddress(result: String) {
+        print("scannedAddress ", result)
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
             if (self.chainType == ChainType.BINANCE_MAIN) {
                 if (result.contains("wallet-bridge.binance.org")) {
@@ -2554,6 +2557,22 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(commonWcVC, animated: true)
                 
+                
+            } else if (self.chainType == ChainType.KAVA_MAIN) {
+                print("chainType ", self.chainType, "  url ",  result)
+                let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+                commonWcVC.wcURL = result
+                commonWcVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(commonWcVC, animated: true)
+                
+            } else if (self.chainType == ChainType.CRESCENT_TEST) {
+                print("chainType ", self.chainType, "  url ",  result)
+                let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+                commonWcVC.wcURL = result
+                commonWcVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(commonWcVC, animated: true)
                 
             } else {
                 print("chainType ", self.chainType, "  url ",  result)

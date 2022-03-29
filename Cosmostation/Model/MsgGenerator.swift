@@ -180,6 +180,21 @@ class MsgGenerator {
         return stdTx
     }
     
+    static func genTrustSignedTx(_ msgs: Array<Msg>, _ fee: Fee, _ memo: String, _ signatures: Array<TrustSignature>) -> TrustStdTx {
+        let stdTx = TrustStdTx.init()
+        let value = TrustStdTx.Value.init()
+        
+        value.msg = msgs
+        value.fee = fee
+        value.signatures = signatures
+        value.memo = memo
+        
+        stdTx.type = COSMOS_AUTH_TYPE_STDTX
+        stdTx.value = value
+        
+        return stdTx
+    }
+    
     static func getToSignMsg(_ chain: String, _ accountNum: String, _ sequenceNum: String, _ msgs: Array<Msg>, _ fee: Fee, _ memo: String) -> StdSignMsg {
         var stdSignedMsg = StdSignMsg.init()
         
@@ -192,115 +207,6 @@ class MsgGenerator {
         
         return stdSignedMsg
     }
-    
-    static func getIrisToSignMsg(_ chain: String, _ accountNum: String, _ sequenceNum: String, _ msgs: Array<Msg>, _ fee: Fee, _ memo: String) -> IrisStdSignMsg {
-        var stdSignedMsg = IrisStdSignMsg.init()
-        
-        stdSignedMsg.chain_id = chain
-        stdSignedMsg.account_number = accountNum
-        stdSignedMsg.sequence = sequenceNum
-        var msgValues: Array<Msg.Value> = Array<Msg.Value>()
-        for msg in msgs {
-            msgValues.append(msg.value)
-        }
-        stdSignedMsg.msgs = msgValues
-        stdSignedMsg.fee = fee
-        stdSignedMsg.memo = memo
-        
-        return stdSignedMsg
-    }
-    
-    /*
-    static func genIovSendTx(_ nonce:Int64, _ fromAddr:String, _ toAddr:String, _ sendCoins: Array<Coin>, _ fee:Fee,  _ memo:String, _ key:WKey.Ed25519Key) -> String {
-        let sendAmount = NSDecimalNumber.init(string: sendCoins[0].amount).multiplying(byPowerOf10: -9)
-        let interPart = WUtils.getQuotient(sendAmount.stringValue)
-        let decimalPart = WUtils.getRemainder(sendAmount.stringValue).multiplying(byPowerOf10: 9)
-        
-        //Set send coin
-        var sendCoin = Coin_Coin.init()
-        if (interPart != NSDecimalNumber.zero) {
-            sendCoin.whole = interPart.int64Value
-        }
-        if (decimalPart != NSDecimalNumber.zero) {
-            sendCoin.fractional = decimalPart.int64Value
-        }
-        sendCoin.ticker = IOV_MAIN_DENOM
-        
-        //Set fee
-        var sendFee = Coin_Coin.init()
-        sendFee.fractional = WUtils.getRemainder(GAS_FEE_IOV_TRANSFER).multiplying(byPowerOf10: 9).int64Value
-        sendFee.ticker = IOV_MAIN_DENOM
-        
-        //Set FeeInfo
-        var feeInfo = Cash_FeeInfo.init()
-        feeInfo.payer = WKey.getDatafromDpAddress(fromAddr)!
-        feeInfo.fees = sendFee
-        
-        //Set MetaData
-        var metaData = Weave_Metadata.init()
-        metaData.schema = 1
-        
-        var sendMsg = Cash_SendMsg.init()
-        sendMsg.source = WKey.getDatafromDpAddress(fromAddr)!
-        sendMsg.destination = WKey.getDatafromDpAddress(toAddr)!
-        sendMsg.amount = sendCoin
-        sendMsg.metadata = metaData
-        sendMsg.memo = memo
-        
-        print("sendMsg \n", sendMsg)
-        
-        var sendTx = Bnsd_Tx.init()
-        sendTx.cashSendMsg = sendMsg
-        sendTx.fees = feeInfo
-        
-        print("sendTx \n", sendTx)
-        
-        let inSig = getIovInSig(sendTx, nonce)
-        print("inSig ", bytesConvertToHexstring(byte: inSig))
-        let midSig = Digest.sha512(inSig)
-        print("midSig ", bytesConvertToHexstring(byte: midSig))
-        let genSig = Ed25519.sign(message: midSig, secretKey: key.key)
-        print("genSig ", bytesConvertToHexstring(byte: genSig))
-        
-        var pubKey = Crypto_PublicKey.init()
-        pubKey.ed25519 = Data(bytes: Ed25519.calcPublicKey(secretKey: key.key))
-        
-        var signature = Crypto_Signature.init()
-        signature.ed25519 = Data(genSig)
-        
-        var std_signature = Sigs_StdSignature.init()
-        std_signature.pubkey = pubKey
-        std_signature.signature = signature
-        std_signature.sequence = nonce
-        
-        sendTx.signatures = [std_signature]
-        
-        let sendTxSerial = try? sendTx.serializedData()
-        
-//        return sendTxSerial!.base64EncodedData()
-        
-        return sendTxSerial!.base64EncodedString()
-//        let result = "0x" + bytesConvertToHexstring(byte: sendTxSerial!.bytes)
-//        let result = bytesConvertToHexstring(byte: sendTxSerial!.bytes)
-//
-//        print("result ", result)
-//
-//        return result
-    }
-    
-    static func getIovInSig(_ tx:Bnsd_Tx, _ nonce:Int64) -> [UInt8] {
-        let chainB: [UInt8] = Array("iov-mainnet".utf8)
-        let versionB : [UInt8] = [0, 0xCA, 0xFE, 0]
-        let nonceB = byteArray(from: nonce)
-        let chainSize:UInt8 = UInt8(chainB.count)
-        let chainLenB = byteArray(from: chainSize)
-        let txB = try? tx.serializedData().bytes
-        
-        print("txB ", bytesConvertToHexstring(byte: txB!))
-        
-        return versionB + chainLenB + chainB + nonceB + txB!
-    }
-     */
     
     static func byteArray<T>(from value: T) -> [UInt8] where T: FixedWidthInteger {
         withUnsafeBytes(of: value.bigEndian, Array.init)

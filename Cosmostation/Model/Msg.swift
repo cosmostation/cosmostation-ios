@@ -80,6 +80,14 @@ public struct Msg: Codable {
         self.value = Value.init(dictionary["value"] as! [String : Any])
     }
     
+    init(trustv dictionary: NSDictionary?) {
+        self.type = dictionary?["type"] as? String ?? ""
+        let jsonValue = dictionary?["value"] as? String ?? ""
+        if let rawValue = try? JSONSerialization.jsonObject(with: jsonValue.data(using: .utf8)!, options: .allowFragments) as? NSDictionary {
+            self.value = Value.init(rawValue as! [String : Any])
+        }
+    }
+    
     public struct Value: Codable {
         var inputs: Array<InOutPut>?
         var outputs: Array<InOutPut>?

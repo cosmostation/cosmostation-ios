@@ -31,12 +31,16 @@ class WalletCrescentCell: UITableViewCell {
     
     var actionDelegate: (() -> Void)? = nil
     var actionVote: (() -> Void)? = nil
+    var actionWC: (() -> Void)? = nil
     
     @IBAction func onClickDelegate(_ sender: Any) {
         actionDelegate?()
     }
     @IBAction func onClickVote(_ sender: Any) {
         actionVote?()
+    }
+    @IBAction func onClickWC(_ sender: Any) {
+        actionWC?()
     }
     
     override func prepareForReuse() {

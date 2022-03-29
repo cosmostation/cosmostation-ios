@@ -23,3 +23,19 @@ public struct PostTx: Codable {
         case tx = "tx"
     }
 }
+
+public struct TrustPostTx: Codable {
+    var mode: String = ""
+    var tx: TrustStdTx.Value?
+    
+    init() {}
+    
+    init(_ mode: String, _ tx:TrustStdTx.Value) {
+        self.mode = mode
+        self.tx = tx
+    }
+    enum CodingKeys: String, CodingKey {
+        case mode = "mode"
+        case tx = "tx"
+    }
+}

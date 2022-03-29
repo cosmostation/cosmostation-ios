@@ -57,7 +57,7 @@ class StarnameWalletConnectViewController: BaseViewController {
     
     
     func onConnectSession(_ session: WCSession) {
-        let interactor = WCInteractor(session: session, meta: clientMeta)
+        let interactor = WCInteractor(session: session, meta: clientMeta, uuid: UIDevice.current.identifierForVendor ?? UUID())
         configure(interactor: interactor)
         interactor.connect().cauterize()
         self.interactor = interactor
@@ -65,7 +65,7 @@ class StarnameWalletConnectViewController: BaseViewController {
     
     func configure(interactor: WCInteractor) {
         interactor.onSessionRequest = { [weak self] (id, peer) in
-            self?.onViewUpdate(peer)
+            self?.onViewUpdate(peer.peerMeta)
         }
 
         interactor.onDisconnect = { [weak self] (error) in
