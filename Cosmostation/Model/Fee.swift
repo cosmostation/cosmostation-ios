@@ -22,6 +22,11 @@ public struct Fee: Codable{
                 self.amount.append(Coin(amount as! [String : Any]))
             }
         }
+        if let rawAmounts = dictionary["amounts"] as? Array<NSDictionary>  {
+            for amount in rawAmounts {
+                self.amount.append(Coin(amount as! [String : Any]))
+            }
+        }
     }
     
     init(_ gas:String, _ amount:Array<Coin>) {
