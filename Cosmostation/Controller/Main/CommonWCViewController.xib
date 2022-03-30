@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +16,7 @@
                 <outlet property="wcCardView" destination="ycw-kr-7A8" id="Ukq-Mn-HX5"/>
                 <outlet property="wcDisconnectBtn" destination="cch-dN-UlM" id="y3B-mm-hBS"/>
                 <outlet property="wcImg" destination="Abw-8F-SEH" id="wkS-6k-Bgx"/>
+                <outlet property="wcLoading" destination="sWz-SG-U3y" id="IfL-lb-iZD"/>
                 <outlet property="wcTitle" destination="fBV-dA-3Yg" id="smr-ML-VoJ"/>
                 <outlet property="wcUrl" destination="UFP-hT-GPn" id="dDa-hZ-dzV"/>
             </connections>
@@ -59,6 +60,13 @@
                         <action selector="onClickDisconnect:" destination="-1" eventType="touchUpInside" id="vZe-LI-DOg"/>
                     </connections>
                 </button>
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="connectimg1" translatesAutoresizingMaskIntoConstraints="NO" id="sWz-SG-U3y" customClass="WalletConnectImageView" customModule="Cosmostation" customModuleProvider="target">
+                    <rect key="frame" x="117" y="454" width="180" height="46"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="180" id="atj-T7-Lwp"/>
+                        <constraint firstAttribute="height" constant="46" id="fhU-7e-hpp"/>
+                    </constraints>
+                </imageView>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycw-kr-7A8" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="74" width="382" height="260"/>
                     <subviews>
@@ -161,6 +169,8 @@
                 <constraint firstAttribute="bottom" secondItem="8fX-Sg-dMZ" secondAttribute="bottom" id="FPS-Gs-3F2"/>
                 <constraint firstItem="cch-dN-UlM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="HzA-Lh-mA0"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cch-dN-UlM" secondAttribute="trailing" constant="16" id="SUi-Q4-2Qz"/>
+                <constraint firstItem="sWz-SG-U3y" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Tvo-rY-8It"/>
+                <constraint firstItem="sWz-SG-U3y" firstAttribute="top" secondItem="ycw-kr-7A8" secondAttribute="bottom" constant="120" id="a4p-6f-GX5"/>
                 <constraint firstAttribute="top" secondItem="8fX-Sg-dMZ" secondAttribute="top" id="eGs-eQ-2P5"/>
                 <constraint firstItem="ycw-kr-7A8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="jsw-6b-00T"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cch-dN-UlM" secondAttribute="bottom" constant="16" id="kOP-a7-1kf"/>
@@ -171,6 +181,7 @@
     </objects>
     <resources>
         <image name="bg_cosmos" width="360" height="740"/>
+        <image name="connectimg1" width="177" height="50"/>
         <image name="icWalletconnect20" width="20" height="20"/>
     </resources>
 </document>

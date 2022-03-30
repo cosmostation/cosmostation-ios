@@ -774,6 +774,8 @@
 		041399EC275C94490013A1BE /* WalletCheckPKeyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */; };
 		04166118278C2F01001CAF73 /* WalletDesmosEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */; };
 		04166119278C2F01001CAF73 /* WalletDesmosEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */; };
+		041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */; };
+		041ECDEF27F41DCE00397D37 /* WcSignRequestPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */; };
 		0428ACFE268AD31700EB438F /* BandOracleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428ACFD268AD31700EB438F /* BandOracleStatus.swift */; };
 		042E0C40273BBE190026CEFB /* WalletComdexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */; };
 		042E0C41273BBE190026CEFB /* WalletComdexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */; };
@@ -2712,6 +2714,8 @@
 		041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCheckPKeyViewController.xib; sourceTree = "<group>"; };
 		04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosEventCell.swift; sourceTree = "<group>"; };
 		04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosEventCell.xib; sourceTree = "<group>"; };
+		041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WcSignRequestPopup.swift; sourceTree = "<group>"; };
+		041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WcSignRequestPopup.xib; sourceTree = "<group>"; };
 		0428ACFD268AD31700EB438F /* BandOracleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandOracleStatus.swift; sourceTree = "<group>"; };
 		042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletComdexCell.swift; sourceTree = "<group>"; };
 		042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletComdexCell.xib; sourceTree = "<group>"; };
@@ -5632,6 +5636,8 @@
 				28393B8226B9023D00DF2F88 /* HdacBalancePopup.xib */,
 				28A2A4C427218D0A0042ACC4 /* NewAccountTypePopup.swift */,
 				04AAD5B9275BAD9B002D3A95 /* NewAccountTypePopup.xib */,
+				041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */,
+				041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */,
 			);
 			path = PopUp;
 			sourceTree = "<group>";
@@ -6736,6 +6742,7 @@
 				28474ECC241E06AF00AF5A81 /* TxCdpBorrowCell.xib in Resources */,
 				28EEECA126DABA83002DDC4A /* KavaSwap3ViewController.xib in Resources */,
 				28584B4726E87CD000EE5719 /* GdexSwap3ViewController.xib in Resources */,
+				041ECDEF27F41DCE00397D37 /* WcSignRequestPopup.xib in Resources */,
 				283E750426CE36E40097CC04 /* TokenDetailStakingCell.xib in Resources */,
 				E1E251E122A671180008F0DB /* OtherValidatorCell.xib in Resources */,
 				28B785C026B808DC009F755F /* StepEventHorizon1ViewController.xib in Resources */,
@@ -7650,6 +7657,7 @@
 				040FA9C1275F55C300229F6F /* sifnode_clp_v1_tx.pb.swift in Sources */,
 				040FAA4C275F55C400229F6F /* desmos_profiles_v1beta1_query_relationships.pb.swift in Sources */,
 				04C43B61278D5F530022D5DF /* kava_hard_v1beta1_query.grpc.swift in Sources */,
+				041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */,
 				28D7BE1025F0CE61006EECD7 /* MyCdp.swift in Sources */,
 				287D746526A52B9C00532E01 /* JoinPool3ViewController.swift in Sources */,
 				048C831127BF572800270528 /* evmos_inflation_v1_genesis.pb.swift in Sources */,

@@ -2549,24 +2549,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     }
                 }
                 
-            } else if (self.chainType == ChainType.OSMOSIS_MAIN) {
-                print("chainType ", self.chainType, "  url ",  result)
-                let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-                commonWcVC.wcURL = result
-                commonWcVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(commonWcVC, animated: true)
-                
-                
-            } else if (self.chainType == ChainType.KAVA_MAIN) {
-                print("chainType ", self.chainType, "  url ",  result)
-                let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-                commonWcVC.wcURL = result
-                commonWcVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(commonWcVC, animated: true)
-                
-            } else if (self.chainType == ChainType.CRESCENT_TEST) {
+            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_TEST) {
                 print("chainType ", self.chainType, "  url ",  result)
                 let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
                 commonWcVC.wcURL = result

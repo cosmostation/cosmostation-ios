@@ -21,8 +21,8 @@ class WalletConnectImageView: UIImageView {
     }
     
     func setup() {
-        var imagesName = ["connectImg1", "connectImg2", "connectImg3", "connectImg4", "connectImg5",
-                          "connectImg6", "connectImg7", "connectImg8"]
+        var imagesName = ["connectimg1", "connectimg2", "connectimg3", "connectimg4", "connectimg5",
+                          "connectimg6", "connectimg7", "connectimg8"]
         var images = [UIImage]()
         for i in 0..<imagesName.count {
             images.append(UIImage(named: imagesName[i])!)
@@ -38,5 +38,4 @@ class WalletConnectImageView: UIImageView {
     func onStopAnimation() {
         self.stopAnimating()
     }
-
 }

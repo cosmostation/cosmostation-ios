@@ -222,6 +222,7 @@
 "wc_request_cancel_msg" = "\n내용을 확인하시고 결정해 주시기 바랍니다.\n\n주문 취소.";
 "wc_request_success" = "사인 성공";
 "wc_request_fail" = "사인 실패";
+"wc_request_responsed" = "전송 완료";
 
 "wc_trade_title" = "Place Order 요청";
 "wc_cancel_title" = "Cancel Order 요청";

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -819,7 +819,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xtt-p2-2g7">
                                 <rect key="frame" x="0.0" y="324" width="414" height="460"/>
                                 <subviews>
-                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="connectImg1" translatesAutoresizingMaskIntoConstraints="NO" id="8rv-zF-3hB" customClass="WalletConnectImageView" customModule="Cosmostation" customModuleProvider="target">
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="connectimg1" translatesAutoresizingMaskIntoConstraints="NO" id="8rv-zF-3hB" customClass="WalletConnectImageView" customModule="Cosmostation" customModuleProvider="target">
                                         <rect key="frame" x="117" y="207" width="180" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="IIf-Sh-QdO"/>
@@ -2799,7 +2799,7 @@
         <image name="bnbDex" width="40" height="46"/>
         <image name="btnExplorer" width="24" height="24"/>
         <image name="btnSwitch24" width="24" height="24"/>
-        <image name="connectImg1" width="180.5" height="47"/>
+        <image name="connectimg1" width="177" height="50"/>
         <image name="cosmosWhMain" width="42" height="42"/>
         <image name="key_off" width="20" height="20"/>
         <image name="loading_1" width="144" height="144"/>

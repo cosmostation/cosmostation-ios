@@ -39,6 +39,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        if (url.scheme == "cosmostation") {
+            print("AppDelegate ", url.scheme)
+            let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+            commonWcVC.wcURL = url.query
+            app.topViewController!.present(commonWcVC, animated: true, completion: nil)
+        }
+        return true
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
     }
 

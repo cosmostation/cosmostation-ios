@@ -225,6 +225,7 @@
 "wc_request_cancel_msg" = "\nPlease check the contents and decide.\n\nCancel Order.";
 "wc_request_success" = "Tx Success!";
 "wc_request_fail" = "Tx Fail";
+"wc_request_responsed" = "Responsed for Request";
 
 "wc_trade_title" = "Place Order Request";
 "wc_cancel_title" = "Cancel Order Request";
