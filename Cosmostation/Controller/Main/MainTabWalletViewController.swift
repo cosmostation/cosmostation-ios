@@ -2550,12 +2550,14 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 }
                 
             } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_TEST) {
-                print("chainType ", self.chainType, "  url ",  result)
-                let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-                commonWcVC.wcURL = result
-                commonWcVC.hidesBottomBarWhenPushed = true
+                self.wcURL = result
+                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
-                self.navigationController?.pushViewController(commonWcVC, animated: true)
+                self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+                passwordVC.resultDelegate = self
+                passwordVC.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(passwordVC, animated: false)
                 
             } else {
                 print("chainType ", self.chainType, "  url ",  result)
@@ -2569,13 +2571,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
                 if (self.chainType == ChainType.BINANCE_MAIN) {
                     let wcVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "WalletConnectViewController") as! WalletConnectViewController
-                    wcVC.hidesBottomBarWhenPushed = true
                     wcVC.wcURL = self.wcURL!
+                    wcVC.hidesBottomBarWhenPushed = true
                     self.navigationItem.title = ""
                     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
                     self.navigationController?.pushViewController(wcVC, animated: true)
                     
-                } else if (self.chainType == ChainType.OSMOSIS_MAIN) {
+                } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_TEST) {
                     let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
                     commonWcVC.wcURL = self.wcURL!
                     commonWcVC.hidesBottomBarWhenPushed = true
