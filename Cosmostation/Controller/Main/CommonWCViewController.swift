@@ -39,17 +39,19 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         print("CommonWCViewController isDeepLink ", isDeepLink)
         
         if (isDeepLink) {
+            self.getKeyTemp()
             guard let session = WCSession.from(string: self.wcURL!) else {
                 UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
                 return
             }
             self.onConnectSessionForDeepLink(session)
-            
         } else {
             self.getKey()
         }
     }
+    
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -64,6 +66,9 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         UIApplication.shared.isIdleTimerDisabled = false
+//        if parent == nil {
+//            self.interactor?.killSession().cauterize()
+//        }
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -158,18 +163,23 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         }
         
         interactor.keplr.onEnableKeplrWallet  = { [weak self] (id, chains) in
-            print("DeepLink onEnableKeplrWallet ", chains)
-            //TODO display accounts with chains
+            print("onEnableKeplrWallet ", chains)
+            self?.interactor?.approveRequest(id: id, result: [""]).cauterize()
         }
         
         interactor.keplr.onGetKeplrWallet  = { [weak self] (id, chains) in
-            print("DeepLink onGetKeplrWallet ", chains)
+            print("onGetKeplrWallet ", chains)
+            self?.interactor?.approveRequest(id: id, result: self?.getKeplrAccounts()).cauterize()
         }
         
         interactor.keplr.onSignKeplrAmino = { [weak self] (rawData) in
-            print("DeepLink onSignKeplrAmino ", rawData)
+            print("onSignKeplrAmino ", rawData)
+            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let sigData = try? JSONSerialization.data(withJSONObject:params[2]) {
+                self?.wcId = id
+                self?.wcKeplrRequest = sigData
+                self?.onShowPopupForRequest(WcRequestType.KEPLR_TYPE, sigData)
+            }
         }
-        
     }
     
     func onDeepLinkDismiss() {
@@ -301,6 +311,27 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
     var privateKey: Data?
     var publicKey: Data?
     var tenderAddress: String?
+    
+    //@TOBE move to keplrGetKeyLogic
+    func getKeyTemp() {
+        DispatchQueue.global().async {
+            if (self.account!.account_from_mnemonic == true) {
+                if let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                    self.privateKey = KeyFac.getPrivateRaw(words, self.account!)
+                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    self.tenderAddress = WKey.generateTenderAddressFromPrivateKey(self.privateKey!).replacingOccurrences(of: "0x", with: "")
+                }
+                
+            } else {
+                if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
+                    self.privateKey = KeyFac.getPrivateFromString(key)
+                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    self.tenderAddress = WKey.generateTenderAddressFromPrivateKey(self.privateKey!).replacingOccurrences(of: "0x", with: "")
+                }
+            }
+        }
+    }
+    
     func getKey() {
         DispatchQueue.global().async {
             if (self.account!.account_from_mnemonic == true) {

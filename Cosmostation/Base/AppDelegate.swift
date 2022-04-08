@@ -42,7 +42,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if (url.scheme == "cosmostation") {
             print("AppDelegate ", url.scheme, " ", url.query)
-            if (BaseData.instance.hasPassword()) {
+            if (application.topViewController is CommonWCViewController) {
+                //if walletconnect vc exist skip create vc
+                return false
+            } else if (BaseData.instance.hasPassword()) {
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 passwordVC.mTarget = PASSWORD_ACTION_DEEPLINK_LOCK
                 passwordVC.mWcURL = url.query
