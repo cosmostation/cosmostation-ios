@@ -119,6 +119,7 @@
 "fee_over_title" = "Unable to claim rewards";
 "fee_over_msg" = "Tx fee is higher than your unclaimed rewards. Set your fee to a lower amount or try again when you have more rewards accumulated.";
 "insert_password_app_lock" = "Please type your PIN number for unlock";
+"insert_password_deeplink" = "Please type your PIN number \nfor wallet connect";
 "app_locked" = "App Locked";
 "coingecko" = "CoinGecko";
 "coinmarketcap" = "CoinMarket Cap";

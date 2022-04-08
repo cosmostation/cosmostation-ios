@@ -776,6 +776,8 @@
 		04166119278C2F01001CAF73 /* WalletDesmosEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */; };
 		041ECDEE27F41DCE00397D37 /* WcSignRequestPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */; };
 		041ECDEF27F41DCE00397D37 /* WcSignRequestPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */; };
+		041ECDF227F5750700397D37 /* EmptyWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041ECDF027F5750700397D37 /* EmptyWCViewController.swift */; };
+		041ECDF327F5750700397D37 /* EmptyWCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041ECDF127F5750700397D37 /* EmptyWCViewController.xib */; };
 		0428ACFE268AD31700EB438F /* BandOracleStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428ACFD268AD31700EB438F /* BandOracleStatus.swift */; };
 		042E0C40273BBE190026CEFB /* WalletComdexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */; };
 		042E0C41273BBE190026CEFB /* WalletComdexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */; };
@@ -2716,6 +2718,8 @@
 		04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosEventCell.xib; sourceTree = "<group>"; };
 		041ECDEC27F41DCE00397D37 /* WcSignRequestPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WcSignRequestPopup.swift; sourceTree = "<group>"; };
 		041ECDED27F41DCE00397D37 /* WcSignRequestPopup.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WcSignRequestPopup.xib; sourceTree = "<group>"; };
+		041ECDF027F5750700397D37 /* EmptyWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWCViewController.swift; sourceTree = "<group>"; };
+		041ECDF127F5750700397D37 /* EmptyWCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyWCViewController.xib; sourceTree = "<group>"; };
 		0428ACFD268AD31700EB438F /* BandOracleStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BandOracleStatus.swift; sourceTree = "<group>"; };
 		042E0C3E273BBE190026CEFB /* WalletComdexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletComdexCell.swift; sourceTree = "<group>"; };
 		042E0C3F273BBE190026CEFB /* WalletComdexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletComdexCell.xib; sourceTree = "<group>"; };
@@ -5616,6 +5620,8 @@
 		2868558C24989A5E0099D18F /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
+				285A33D424475DC00052BD3D /* SelectPopupViewController.swift */,
+				285A33D524475DC00052BD3D /* SelectPopupViewController.xib */,
 				2868558D24989A8F0099D18F /* Bep3SupplyPopup.swift */,
 				2868558E24989A8F0099D18F /* Bep3SupplyPopup.xib */,
 				2868559124989AA50099D18F /* Bep3WarnPopup.swift */,
@@ -5848,8 +5854,6 @@
 				285A33CE2446CD9C0052BD3D /* StepHtlcSend1ViewController.swift */,
 				285A33D02446CDAB0052BD3D /* StepHtlcSend2ViewController.swift */,
 				285A33D22446CDB80052BD3D /* StepHtlcSend3ViewController.swift */,
-				285A33D424475DC00052BD3D /* SelectPopupViewController.swift */,
-				285A33D524475DC00052BD3D /* SelectPopupViewController.xib */,
 				285A33E0244862670052BD3D /* HtlcResultViewController.swift */,
 				283A80E8245158FB008FF813 /* HtlcResultViewController.xib */,
 				2888B801246CE35D00B2EB4A /* StepHtlcRefund0ViewController.swift */,
@@ -6185,6 +6189,8 @@
 				28A2A4C92721B9030042ACC4 /* AccountSwitchViewController.xib */,
 				04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */,
 				04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */,
+				041ECDF027F5750700397D37 /* EmptyWCViewController.swift */,
+				041ECDF127F5750700397D37 /* EmptyWCViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -6545,6 +6551,7 @@
 				28E746B825AD76ED004B2C64 /* OkPromotionCell.xib in Resources */,
 				280E1F21254AC6340007BA7D /* ReplaceSelectChainViewController.xib in Resources */,
 				2889FD732603379A00CA9896 /* TxHardBorrowCell.xib in Resources */,
+				041ECDF327F5750700397D37 /* EmptyWCViewController.xib in Resources */,
 				28440C5C271E7B7800B4A7C3 /* SifSwap3ViewController.xib in Resources */,
 				2889FD7D260337C600CA9896 /* TxHardLiquidateCell.xib in Resources */,
 				282FF35A23F52FD40028CC66 /* TxRewardCell.xib in Resources */,
@@ -7609,6 +7616,7 @@
 				040FA9DA275F55C300229F6F /* shentu_shield_v1alpha1_shield.pb.swift in Sources */,
 				28D372B0254C07470071B136 /* RegistAccountCheckCell.swift in Sources */,
 				040FAA97275F55C400229F6F /* cosmos_crypto_ed25519_keys.pb.swift in Sources */,
+				041ECDF227F5750700397D37 /* EmptyWCViewController.swift in Sources */,
 				040FA9FE275F55C300229F6F /* panacea_aol_v2_query.grpc.swift in Sources */,
 				28584B4626E87CD000EE5719 /* GdexSwap3ViewController.swift in Sources */,
 				040FA8BD275F55C200229F6F /* iris_mod_coinswap_tx.pb.swift in Sources */,

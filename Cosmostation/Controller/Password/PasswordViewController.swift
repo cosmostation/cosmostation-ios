@@ -35,6 +35,7 @@ class PasswordViewController: BaseViewController {
         }
     }
     var mUserConfirm: String  = ""
+    var mWcURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,7 @@ class PasswordViewController: BaseViewController {
                                                    selector: #selector(self.onBioAuth),
                                                    name: Notification.Name("ForeGround"),
                                                    object: nil)
-        } else if (mTarget == PASSWORD_ACTION_INTRO_LOCK) {
+        } else if (mTarget == PASSWORD_ACTION_INTRO_LOCK || mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
             self.onBioAuth()
         }
         
@@ -87,6 +88,9 @@ class PasswordViewController: BaseViewController {
             
         } else if (mTarget == PASSWORD_ACTION_APP_LOCK || mTarget ==  PASSWORD_ACTION_INTRO_LOCK) {
             passwordTitleLable.text = NSLocalizedString("password_app_lock", comment: "")
+            
+        } else if (mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
+            passwordTitleLable.text = NSLocalizedString("insert_password_deeplink", comment: "")
             
         }
         passwordTitleLable.adjustsFontSizeToFitWidth = true
@@ -229,7 +233,7 @@ class PasswordViewController: BaseViewController {
         } else if (mTarget == PASSWORD_ACTION_DELETE_ACCOUNT) {
             self.onStartCheckPasswordForDelete(mUserInsert)
             
-        } else if (mTarget == PASSWORD_ACTION_APP_LOCK || mTarget ==  PASSWORD_ACTION_INTRO_LOCK) {
+        } else if (mTarget == PASSWORD_ACTION_APP_LOCK || mTarget == PASSWORD_ACTION_INTRO_LOCK || mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
             self.onStartCheckAppLock(mUserInsert)
         }
         
@@ -312,8 +316,18 @@ class PasswordViewController: BaseViewController {
     }
     
     func onUserSuccessUnlock() {
+        print("onUserSuccessUnlock")
         if (mTarget == PASSWORD_ACTION_INTRO_LOCK) {
             self.sendResultAndPop(PASSWORD_RESUKT_OK)
+            
+        } else if (mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
+            let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+            commonWcVC.wcURL = self.mWcURL
+            commonWcVC.isDeepLink = true
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = commonWcVC
+            self.present(commonWcVC, animated: true, completion: nil)
+            
         } else {
             self.dismiss(animated: true, completion: nil)
             let appDelegate = UIApplication.shared.delegate as! AppDelegate

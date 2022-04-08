@@ -39,17 +39,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if (url.scheme == "cosmostation") {
-            print("AppDelegate ", url.scheme)
-            let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-            commonWcVC.wcURL = url.query
-            app.topViewController!.present(commonWcVC, animated: true, completion: nil)
+            print("AppDelegate ", url.scheme, " ", url.query)
+            if (BaseData.instance.hasPassword()) {
+                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+                passwordVC.mTarget = PASSWORD_ACTION_DEEPLINK_LOCK
+                passwordVC.mWcURL = url.query
+                if #available(iOS 13.0, *) { passwordVC.isModalInPresentation = true }
+                application.topViewController!.present(passwordVC, animated: true, completion: nil)
+
+            } else {
+                let emptyWcVc = EmptyWCViewController(nibName: "EmptyWCViewController", bundle: nil)
+                application.topViewController!.present(emptyWcVc, animated: true, completion: nil)
+            }
+            
         }
-        return true
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
+        return false
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -60,9 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if (BaseData.instance.getUsingAppLock() && BaseData.instance.hasPassword()) {
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 passwordVC.mTarget = PASSWORD_ACTION_APP_LOCK
-                if #available(iOS 13.0, *) {
-                    passwordVC.isModalInPresentation = true
-                }
+                if #available(iOS 13.0, *) { passwordVC.isModalInPresentation = true }
                 application.topViewController!.present(passwordVC, animated: true, completion: nil)
             }
         }
@@ -70,9 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (KeychainWrapper.standard.hasValue(forKey: BaseData.instance.copySalt!)) {
             KeychainWrapper.standard.removeObject(forKey: BaseData.instance.copySalt!)
         }
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
