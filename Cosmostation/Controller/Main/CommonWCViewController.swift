@@ -45,7 +45,7 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
                 return
             }
             
-            self.getKeyTemp(session: session)
+            self.getKeyAndConnect(session: session)
         } else {
             self.getKey()
         }
@@ -120,7 +120,6 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         interactor.keplr.onEnableKeplrWallet  = { [weak self] (id, chains) in
             print("onEnableKeplrWallet ", chains)
             self?.interactor?.approveRequest(id: id, result: [""]).cauterize()
-            self?.jumpBackToPreviousApp()
         }
         
         interactor.keplr.onGetKeplrWallet  = { [weak self] (id, chains) in
@@ -167,7 +166,7 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         interactor.keplr.onEnableKeplrWallet  = { [weak self] (id, chains) in
             print("onEnableKeplrWallet ", chains)
             self?.interactor?.approveRequest(id: id, result: [""]).cauterize()
-            self?.jumpBackToPreviousApp()
+//            self?.jumpBackToPreviousApp()
         }
         
         interactor.keplr.onGetKeplrWallet  = { [weak self] (id, chains) in
@@ -238,7 +237,9 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             
         } else if (result == WcRequestType.KEPLR_TYPE.rawValue) {
             self.approveKeplrRequest()
-            self.jumpBackToPreviousApp()
+            if (isDeepLink) {
+                self.jumpBackToPreviousApp()
+            }
         }
     }
     
@@ -329,7 +330,7 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
     var tenderAddress: String?
     
     //@TOBE move to keplrGetKeyLogic
-    func getKeyTemp(session: WCSession) {
+    func getKeyAndConnect(session: WCSession) {
         DispatchQueue.global().async {
             if (self.account!.account_from_mnemonic == true) {
                 if let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
