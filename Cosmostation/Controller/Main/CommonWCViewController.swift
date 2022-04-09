@@ -39,13 +39,13 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         print("CommonWCViewController isDeepLink ", isDeepLink)
         
         if (isDeepLink) {
-            self.getKeyTemp()
             guard let session = WCSession.from(string: self.wcURL!) else {
                 UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
                 return
             }
-            self.onConnectSessionForDeepLink(session)
+            
+            self.getKeyTemp(session: session)
         } else {
             self.getKey()
         }
@@ -120,6 +120,7 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         interactor.keplr.onEnableKeplrWallet  = { [weak self] (id, chains) in
             print("onEnableKeplrWallet ", chains)
             self?.interactor?.approveRequest(id: id, result: [""]).cauterize()
+            self?.jumpBackToPreviousApp()
         }
         
         interactor.keplr.onGetKeplrWallet  = { [weak self] (id, chains) in
@@ -155,6 +156,7 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             print("DeepLink onSessionRequest ")
             self?.wCPeerMeta = peer.peerMeta
             self?.interactor?.approveSession(accounts: accounts, chainId: chainId).cauterize()
+            self?.jumpBackToPreviousApp()
         }
         
         interactor.onDisconnect = { [weak self] (error) in
@@ -165,6 +167,7 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         interactor.keplr.onEnableKeplrWallet  = { [weak self] (id, chains) in
             print("onEnableKeplrWallet ", chains)
             self?.interactor?.approveRequest(id: id, result: [""]).cauterize()
+            self?.jumpBackToPreviousApp()
         }
         
         interactor.keplr.onGetKeplrWallet  = { [weak self] (id, chains) in
@@ -181,7 +184,19 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             }
         }
     }
-    
+
+    func jumpBackToPreviousApp() -> Bool {
+        guard
+            let sysNavIvar = class_getInstanceVariable(UIApplication.self, "_systemNavigationAction"),
+            let action = object_getIvar(UIApplication.shared, sysNavIvar) as? NSObject,
+            let destinations = action.perform(#selector(getter: PrivateSelectors.destinations)).takeUnretainedValue() as? [NSNumber],
+            let firstDestination = destinations.first
+        else {
+            return false
+        }
+        action.perform(#selector(PrivateSelectors.sendResponseForDestination), with: firstDestination)
+        return true
+    }
     func onDeepLinkDismiss() {
         UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
@@ -223,6 +238,7 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             
         } else if (result == WcRequestType.KEPLR_TYPE.rawValue) {
             self.approveKeplrRequest()
+            self.jumpBackToPreviousApp()
         }
     }
     
@@ -313,7 +329,7 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
     var tenderAddress: String?
     
     //@TOBE move to keplrGetKeyLogic
-    func getKeyTemp() {
+    func getKeyTemp(session: WCSession) {
         DispatchQueue.global().async {
             if (self.account!.account_from_mnemonic == true) {
                 if let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
@@ -329,6 +345,8 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
                     self.tenderAddress = WKey.generateTenderAddressFromPrivateKey(self.privateKey!).replacingOccurrences(of: "0x", with: "")
                 }
             }
+            
+            self.onConnectSessionForDeepLink(session)
         }
     }
     
@@ -357,4 +375,10 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             });
         }
     }
+}
+
+
+@objc private protocol PrivateSelectors: NSObjectProtocol {
+    var destinations: [NSNumber] { get }
+    func sendResponseForDestination(_ destination: NSNumber)
 }
