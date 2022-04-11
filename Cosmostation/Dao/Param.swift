@@ -44,9 +44,13 @@ public struct Param {
             
         } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
             let now = Date.init().millisecondsSince1970
-            let creSupply = getMainSupply()
-            if let annualProvisions = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
-                return annualProvisions.dividing(by: creSupply, withBehavior: WUtils.handler18)
+            var creInitSupply = NSDecimalNumber.init(string: "200000000000000")
+            if let InflationAddeds =  params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time < now}),
+                let thisInfaltion =  params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now}).first?.amount{
+                for InflationAdded in InflationAddeds {
+                    creInitSupply = creInitSupply.adding(InflationAdded.amount)
+                }
+                return thisInfaltion.dividing(by: creInitSupply, withBehavior: WUtils.handler18)
             }
             
         }
@@ -107,7 +111,7 @@ public struct Param {
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             let now = Date.init().millisecondsSince1970
             if let ap = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
-                return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
+                return ap.multiplying(by: getCrescentRewardFact()).multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             }
         }
         
@@ -180,6 +184,12 @@ public struct Param {
         return params?.gdex_status
     }
     
+    func getCrescentRewardFact() -> NSDecimalNumber {
+        let ecosystemIncentive = params?.crescent_budgets.filter { $0.budget?.name == "budget-ecosystem-incentive" }.first?.budget?.rate ?? NSDecimalNumber.zero
+        let devTeam = params?.crescent_budgets.filter { $0.budget?.name == "budget-dev-team" }.first?.budget?.rate ?? NSDecimalNumber.zero
+        return NSDecimalNumber.one.subtracting(ecosystemIncentive).subtracting(devTeam)
+    }
+    
 }
 
 public struct Params {
@@ -217,6 +227,7 @@ public struct Params {
     var evmos_minting_epoch_provisions: String?
     
     var crescent_minting_params: CrescentMintingParam?
+    var crescent_budgets = Array<CrescentBudget>()
     
     init(_ dictionary: NSDictionary?) {
         if let rawIbcParams = dictionary?["ibc_params"] as? NSDictionary {
@@ -328,6 +339,14 @@ public struct Params {
         
         if let rawCrescentMintingParam = dictionary?["crescent_minting_params"] as? NSDictionary {
             self.crescent_minting_params = CrescentMintingParam.init(rawCrescentMintingParam)
+        }
+        
+        if let rawCrescentBudgets = dictionary?["crescent_budgets"] as? NSDictionary {
+            if let rawBudgets = rawCrescentBudgets["budgets"] as? Array<NSDictionary> {
+                for rawBudget in rawBudgets {
+                    self.crescent_budgets.append(CrescentBudget.init(rawBudget))
+                }
+            }
         }
     }
 }
@@ -870,6 +889,44 @@ public struct CrescentInflationSchdule {
         }
         if let starttime = WUtils.newApiTimeToInt64(dictionary?["start_time"] as? String)?.millisecondsSince1970 {
             self.start_time = starttime
+        }
+    }
+}
+
+public struct CrescentBudget {
+    var budget: Budget?
+    var total_collected_coins = Array<Coin>()
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawBudget = dictionary?["budget"] as? NSDictionary {
+            self.budget = Budget.init(rawBudget)
+        }
+        if let rawTotalCollectedCoins = dictionary?["total_collected_coins"] as? Array<NSDictionary> {
+            for rawTotalCollectedCoin in rawTotalCollectedCoins {
+                self.total_collected_coins.append(Coin.init(rawTotalCollectedCoin))
+            }
+        }
+    }
+    
+    public struct Budget {
+        var name = ""
+        var rate: NSDecimalNumber = NSDecimalNumber.zero
+        var start_time: Int64 = 0
+        var end_time: Int64 = 0
+        var source_address = ""
+        var destination_address = ""
+        
+        init(_ dictionary: NSDictionary?) {
+            self.name = dictionary?["name"] as? String ?? ""
+            self.rate = NSDecimalNumber.init(string: dictionary?["rate"] as? String)
+            if let starttime = WUtils.newApiTimeToInt64(dictionary?["start_time"] as? String)?.millisecondsSince1970 {
+                self.start_time = starttime
+            }
+            if let endtime = WUtils.newApiTimeToInt64(dictionary?["end_time"] as? String)?.millisecondsSince1970 {
+                self.end_time = endtime
+            }
+            self.source_address = dictionary?[source_address] as? String ?? ""
+            self.destination_address = dictionary?["destination_address"] as? String ?? ""
         }
     }
 }
