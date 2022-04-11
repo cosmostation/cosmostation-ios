@@ -247,13 +247,6 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             self.interactor?.approveRequest(id: self.wcId!, result: [""]).cauterize()
             
         }
-        
-//        if (result == WcRequestType.KEPLR_TYPE.rawValue) {
-//            self.approveKeplrRequest()
-//            if (isDeepLink) {
-//                self.jumpBackToPreviousApp()
-//            }
-//        }
     }
     
     
