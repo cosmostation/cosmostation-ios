@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Cosmostation
 
@@ -785,6 +785,10 @@ support@cosmostation.io";
 "error_insert_dtag" = "Please add Dtag for profile.";
 "error_no_account_this_chain" = "No linkable account with this chain";
 "error_select_account_link" = "Please select account to link";
+"error_not_support_chain_title" = "Error";
+"error_not_support_chain_msg" = "%@ are not currently supported chain";
+"error_no_accounts_chain_title" = "Error";
+"error_no_accounts_chain_msg" = "No wallet for that chain";
 
 
 
