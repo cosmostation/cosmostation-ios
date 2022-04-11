@@ -83,6 +83,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             self.popupTitle.text = NSLocalizedString("select_to_link_account", comment: "")
             self.toAccountList = BaseData.instance.selectAllAccountsByChainWithKey(toChain!)
             
+        } else if (type == SELECT_POPUP_DEEP_LINK_ACCOUNT) {
+            self.popupTitle.text = NSLocalizedString("select_account", comment: "")
+            self.toAccountList = BaseData.instance.selectAllAccountsByChainWithKey(toChain!)
         }
     }
     
@@ -108,7 +111,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             esHeight = (CGFloat)((toCoinList.count * 55) + 55)
         } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
             esHeight = (CGFloat)((toChainList.count * 55) + 55)
-        } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT) {
+        } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT || type == SELECT_POPUP_DEEP_LINK_ACCOUNT) {
             esHeight = (CGFloat)((toAccountList.count * 55) + 55)
         }
         esHeight = (esHeight > 350) ? 350 : esHeight
@@ -138,7 +141,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return starnameDomains.count
         } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
             return toChainList.count;
-        } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT) {
+        } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT || type == SELECT_POPUP_DEEP_LINK_ACCOUNT) {
             return toAccountList.count;
         }
         return 0
@@ -310,9 +313,21 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             cell?.onBindAccount(toChain, toAccountList[indexPath.row])
             return cell!
             
+        } else if (type == SELECT_POPUP_DEEP_LINK_ACCOUNT) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
+            let account = toAccountList[indexPath.row]
+            WUtils.setDenomTitle(toChain!, cell!.accountDenom)
+            cell?.accountAddress.text = account.account_address
+            cell?.accountName.text = account.getDpName()
+            cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
+            cell?.keyStatusImg.tintColor = WUtils.getChainColor(toChain)
+            cell?.accountBalance.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.accountBalance.font, 0, 6)
+            return cell!
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             return cell!
+            
         }
     }
     

@@ -28,12 +28,12 @@ class WcSignRequestPopup: BaseViewController, SBCardPopupContent {
 
     @IBAction func onClickCancel(_ sender: UIButton) {
         popupViewController?.close()
-        popupViewController?.resultDelegate?.SBCardPopupResponse(type: 0, result: -1)
+        popupViewController?.resultDelegate?.SBCardPopupResponse(type: -1, result: -1)
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
         popupViewController?.close()
-        popupViewController?.resultDelegate?.SBCardPopupResponse(type: 0, result: wcType!.rawValue)
+        popupViewController?.resultDelegate?.SBCardPopupResponse(type: wcType!.rawValue, result: -1)
     }
     
 }

@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Cosmostation
 
@@ -119,6 +119,7 @@
 "fee_over_title" = "Unable to claim rewards";
 "fee_over_msg" = "Tx fee is higher than your unclaimed rewards. Set your fee to a lower amount or try again when you have more rewards accumulated.";
 "insert_password_app_lock" = "Please type your PIN number for unlock";
+"insert_password_deeplink" = "Please type your PIN number \nfor wallet connect";
 "app_locked" = "App Locked";
 "coingecko" = "CoinGecko";
 "coinmarketcap" = "CoinMarket Cap";
@@ -784,6 +785,10 @@ support@cosmostation.io";
 "error_insert_dtag" = "Please add Dtag for profile.";
 "error_no_account_this_chain" = "No linkable account with this chain";
 "error_select_account_link" = "Please select account to link";
+"error_not_support_chain_title" = "Error";
+"error_not_support_chain_msg" = "%@ are not currently supported chain";
+"error_no_accounts_chain_title" = "Error";
+"error_no_accounts_chain_msg" = "No wallet for that chain";
 
 
 
