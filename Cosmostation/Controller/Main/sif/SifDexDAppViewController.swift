@@ -169,12 +169,16 @@ extension WUtils {
     static func getSifCoinDecimal(_ denom: String?) -> Int16 {
         if (denom == SIF_MAIN_DENOM) {
             return 18
+        } else if (denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
+                return deciaml
+            }
         } else {
             if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
                 return bridgeTokenInfo.decimal
             }
-            return 18
         }
+        return 18
     }
     
     //TEMP
@@ -198,6 +202,10 @@ extension WUtils {
         } else if (denom?.starts(with: "peggy0x") == true) {
             if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
                 return bridgeTokenInfo.decimal
+            }
+        } else if (denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
+                return deciaml
             }
         }
         return 18
