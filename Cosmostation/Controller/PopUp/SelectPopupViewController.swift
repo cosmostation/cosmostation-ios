@@ -332,8 +332,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     }
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        popupViewController?.resultDelegate?.SBCardPopupResponse(type: type!, result: indexPath.row)
-        popupViewController?.close()
+         popupViewController?.resultDelegate?.SBCardPopupResponse(type: type!, result: indexPath.row)
+         popupViewController?.close()
     }
 
 }

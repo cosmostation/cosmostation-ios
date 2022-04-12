@@ -41,9 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if (url.scheme == "cosmostation") {
-            print("AppDelegate ", url.scheme, " ", url.query)
-            if (application.topViewController is CommonWCViewController) {
-                //if walletconnect vc exist skip create vc
+            if (application.topViewController is CommonWCViewController || application.topViewController is SBCardPopupViewController) {
                 return false
             } else if (BaseData.instance.hasPassword()) {
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController

@@ -51,8 +51,6 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         }
     }
     
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -145,7 +143,6 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             print("DeepLink onSessionRequest ")
             self?.wCPeerMeta = peer.peerMeta
             self?.interactor?.approveSession(accounts: accounts, chainId: chainId).cauterize()
-//            self?.jumpBackToPreviousApp()
         }
         
         interactor.onDisconnect = { [weak self] (error) in
@@ -173,16 +170,17 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         
         interactor.keplr.onGetKeplrWallet  = { [weak self] (id, chains) in
             print("onGetKeplrWallet ", chains)
+            self?.wcId = id
             self?.getKey()
         }
         
         interactor.keplr.onSignKeplrAmino = { [weak self] (rawData) in
             print("onSignKeplrAmino ", rawData)
-//            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let sigData = try? JSONSerialization.data(withJSONObject:params[2]) {
-//                self?.wcId = id
-//                self?.wcKeplrRequest = sigData
-//                self?.onShowPopupForRequest(WcRequestType.KEPLR_TYPE, sigData)
-//            }
+            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let sigData = try? JSONSerialization.data(withJSONObject:params[2]) {
+                self?.wcId = id
+                self?.wcKeplrRequest = sigData
+                self?.onShowPopupForRequest(WcRequestType.KEPLR_TYPE, sigData)
+            }
         }
     }
 
@@ -235,7 +233,6 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func SBCardPopupResponse(type:Int, result: Int) {
-        print("SBCardPopupResponse ", type,  "   ", result)
         if (type == WcRequestType.TRUST_TYPE.rawValue) {
             self.approveTrustRequest()
             
@@ -320,6 +317,11 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
 //            print("response ", response)
             self.interactor?.approveRequest(id: wcId!, result: [response]).done({ _ in
                 self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
+                if (self.isDeepLink) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                        self.jumpBackToPreviousApp()
+                    })
+                }
             }).cauterize()
         }
     }
@@ -388,7 +390,9 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
                 if (self.isDeepLink) {
                     self.interactor?.approveRequest(id: self.wcId!, result: self.getKeplrAccounts()).done({ _ in
                         self.onViewUpdate(self.wCPeerMeta!)
-                        self.jumpBackToPreviousApp()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
+                            self.jumpBackToPreviousApp()
+                        })
                     }).cauterize()
                     
                 } else {
