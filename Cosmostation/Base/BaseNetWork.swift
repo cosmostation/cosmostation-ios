@@ -638,6 +638,9 @@ class BaseNetWork {
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-omniflix-app.cosmostation.io", port: 9090)
             
+        } else if (chain == ChainType.CRESCENT_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-crescent-app.cosmostation.io", port: 9090)
+            
         }
         
         

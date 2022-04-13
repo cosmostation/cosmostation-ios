@@ -649,6 +649,10 @@ let GAS_FEE_RATE_TINY_OMNIFLIX              = "0.001"
 let GAS_FEE_RATE_LOW_OMNIFLIX               = "0.001"
 let GAS_FEE_RATE_AVERAGE_OMNIFLIX           = "0.001"
 
+let GAS_FEE_RATE_TINY_CRESCENT              = "0.000"
+let GAS_FEE_RATE_LOW_CRESCENT               = "0.000"
+let GAS_FEE_RATE_AVERAGE_CRESCENT           = "0.000"
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
@@ -1110,7 +1114,7 @@ public enum ChainType: String {
         result.append(CERTIK_MAIN)
         result.append(CHIHUAHUA_MAIN)
         result.append(COMDEX_MAIN)
-//        result.append(CRESCENT_MAIN)
+        result.append(CRESCENT_MAIN)
         result.append(CRYPTO_MAIN)
 //        result.append(CUDOS_MAIN)
         result.append(DESMOS_MAIN)
@@ -1143,7 +1147,7 @@ public enum ChainType: String {
 //        result.append(COSMOS_TEST)
 //        result.append(IRIS_TEST)
 //        result.append(ALTHEA_TEST)
-        result.append(CRESCENT_TEST)
+//        result.append(CRESCENT_TEST)
         return result
     }
     

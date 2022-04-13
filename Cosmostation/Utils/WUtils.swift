@@ -3450,7 +3450,7 @@ public class WUtils {
     static func getEstimateGasFeeAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
             chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN || chain == ChainType.BITCANA_MAIN ||
-            chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN || chain == ChainType.CRESCENT_MAIN ||
+            chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.ALTHEA_TEST || chain == ChainType.CRESCENT_TEST) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
@@ -3602,6 +3602,11 @@ public class WUtils {
             
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_OMNIFLIX)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
+        } else if (chain == ChainType.CRESCENT_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CRESCENT)
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
@@ -3914,6 +3919,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_OMNIFLIX)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_OMNIFLIX)
+            }
+            
+        } else if (chain == ChainType.CRESCENT_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CRESCENT)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CRESCENT)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CRESCENT)
             }
         }
         
@@ -5169,6 +5183,8 @@ public class WUtils {
             return ChainType.CERBERUS_MAIN
         } else if (chainId?.contains("omniflixhub-") == true) {
             return ChainType.OMNIFLIX_MAIN
+        } else if (chainId?.contains("crescent-") == true) {
+            return ChainType.CRESCENT_MAIN
         }
         
         else if (chainId?.contains("mooncat-") == true) {
@@ -5225,9 +5241,7 @@ public class WUtils {
         else if (address?.starts(with: "cudos1") == true && chain == ChainType.CUDOS_MAIN) { return true }
         else if (address?.starts(with: "cerberus1") == true && chain == ChainType.CERBERUS_MAIN) { return true }
         else if (address?.starts(with: "omniflix1") == true && chain == ChainType.OMNIFLIX_MAIN) { return true }
-        else if (address?.starts(with: "cre1") == true && chain == ChainType.OMNIFLIX_MAIN) { return true }
-        
-        else if (address?.starts(with: "cre1") == true && chain == ChainType.CRESCENT_TEST) { return true }
+        else if (address?.starts(with: "cre1") == true && chain == ChainType.CRESCENT_MAIN) { return true }
         return false
     }
     
@@ -5280,9 +5294,8 @@ public class WUtils {
         else if (address?.starts(with: "cudos1") == true) { return [ChainType.CUDOS_MAIN] }
         else if (address?.starts(with: "cerberus1") == true) { return [ChainType.CERBERUS_MAIN] }
         else if (address?.starts(with: "omniflix1") == true) { return [ChainType.OMNIFLIX_MAIN] }
-//        else if (address?.starts(with: "cre1") == true) { return [ChainType.OMNIFLIX_MAIN, ChainType.CRESCENT_TEST] }
+        else if (address?.starts(with: "cre1") == true) { return [ChainType.CRESCENT_MAIN] }
         
-        else if (address?.starts(with: "cre1") == true) { return [ChainType.CRESCENT_TEST] }
         return nil
     }
     

@@ -290,6 +290,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
+        } else if (chainType! == ChainType.UMEE_MAIN) {
+            chainImg.image = UIImage(named: "chainUmee")
+            keyPath.text = BASE_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
         } else if (chainType! == ChainType.OMNIFLIX_MAIN) {
             chainImg.image = UIImage(named: "chainOmniflix")
             keyPath.text = BASE_PATH.appending(account!.account_path)
@@ -345,13 +352,6 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
            if (account!.account_custom_path == 0) { keyPath.text = "(Legacy Tendermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
            else if (account!.account_custom_path == 1) { keyPath.text = "(Legacy Ethermint Type) " + OK_BASE_PATH.appending(account!.account_path) }
            else { keyPath.text = "(Ethereum Type) " + ETH_NON_LEDGER_PATH.appending(String(account!.account_path)) }
-           cardPush.isHidden = true
-           constraint2.priority = .defaultHigh
-           constraint1.priority = .defaultLow
-           
-       } else if (chainType! == ChainType.UMEE_MAIN) {
-           chainImg.image = UIImage(named: "chainUmee")
-           keyPath.text = BASE_PATH.appending(account!.account_path)
            cardPush.isHidden = true
            constraint2.priority = .defaultHigh
            constraint1.priority = .defaultLow

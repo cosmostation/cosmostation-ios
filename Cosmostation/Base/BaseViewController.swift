@@ -571,7 +571,7 @@ extension BaseViewController {
         showAlert.addAction(certikAction)
         showAlert.addAction(chihuahuaAction)
         showAlert.addAction(comdexAction)
-//        showAlert.addAction(crescentAction)
+        showAlert.addAction(crescentAction)
         showAlert.addAction(cryptoAction)
 //        showAlert.addAction(cudosAction)
         showAlert.addAction(desmosAction)

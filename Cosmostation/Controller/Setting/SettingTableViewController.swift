@@ -286,6 +286,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     guard let url = URL(string: EXPLORER_OMNIFLIX) else { return }
                     self.onShowSafariWeb(url)
                     
+                } else if (chainType == ChainType.CRESCENT_MAIN) {
+                    guard let url = URL(string: EXPLORER_CRESCENT) else { return }
+                    self.onShowSafariWeb(url)
+                    
                 }
                 
                 else if (chainType == ChainType.COSMOS_TEST) {
@@ -298,6 +302,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     
                 } else if (chainType == ChainType.ALTHEA_TEST) {
                     guard let url = URL(string: EXPLORER_ALTHEA_TEST) else { return }
+                    self.onShowSafariWeb(url)
+                    
+                } else if (chainType == ChainType.CRESCENT_TEST) {
+                    guard let url = URL(string: EXPLORER_CRESCENT_TEST) else { return }
                     self.onShowSafariWeb(url)
                     
                 }
