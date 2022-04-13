@@ -90,6 +90,15 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             nativeDisplayDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
             totalAmount = WUtils.getKavaTokenAll(nativeDenom)
             
+        } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
+            if (nativeDenom == CRESCENT_BCRE_DENOM) {
+                naviTokenSymbol.text = nativeDenom.uppercased()
+                naviTokenImg.image = UIImage(named: "tokenBcre")
+                nativeDivideDecimal = 6
+                nativeDisplayDecimal = 6
+                totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
+            }
+            
         }
         
         self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(nativeDenom, naviPerPrice.font)

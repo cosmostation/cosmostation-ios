@@ -67,7 +67,7 @@ class StepUndelegateCheckViewController: BaseViewController, PasswordViewDelegat
         if (chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.CRYPTO_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.CHIHUAHUA_MAIN) {
             expectedDateLabel.text = WUtils.unbondingDateFromNow(28) + " (28days after)"
         } else if (chainType == ChainType.OSMOSIS_MAIN || chainType == ChainType.BITCANA_MAIN || chainType == ChainType.DESMOS_MAIN || chainType == ChainType.STARGAZE_MAIN ||
-                   chainType == ChainType.UMEE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.CERBERUS_MAIN) {
+                   chainType == ChainType.UMEE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.CERBERUS_MAIN || chainType == ChainType.CRESCENT_MAIN) {
             expectedDateLabel.text = WUtils.unbondingDateFromNow(14) + " (14days after)"
         } else if (chainType == ChainType.AXELAR_MAIN) {
             expectedDateLabel.text = WUtils.unbondingDateFromNow(7) + " (7days after)"

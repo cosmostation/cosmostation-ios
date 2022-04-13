@@ -117,6 +117,13 @@ class TokenDetailNativeCell: TokenDetailCell {
         } else if (chainType! == ChainType.KAVA_MAIN) {
             onBindKavaTokens(denom)
             
+        } else if (chainType! == ChainType.CRESCENT_MAIN || chainType! == ChainType.CRESCENT_TEST) {
+            divideDecimal = 6
+            displayDecimal = 6
+            
+            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
+            totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
+            availableAmount.attributedText = WUtils.displayAmount2(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
         }
     }
     
