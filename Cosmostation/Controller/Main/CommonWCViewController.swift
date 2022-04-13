@@ -142,7 +142,10 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         interactor.onSessionRequest = { [weak self] (id, peer) in
             print("DeepLink onSessionRequest ")
             self?.wCPeerMeta = peer.peerMeta
-            self?.interactor?.approveSession(accounts: accounts, chainId: chainId).cauterize()
+            self?.jumpBackToPreviousApp()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                self?.interactor?.approveSession(accounts: accounts, chainId: chainId).cauterize()
+            })
         }
         
         interactor.onDisconnect = { [weak self] (error) in
@@ -241,7 +244,10 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             
         } else if (type == SELECT_POPUP_DEEP_LINK_ACCOUNT) {
             self.account = BaseData.instance.selectAllAccountsByChainWithKey(self.chainType!)[result]
-            self.interactor?.approveRequest(id: self.wcId!, result: [""]).cauterize()
+            self.jumpBackToPreviousApp()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                self.interactor?.approveRequest(id: self.wcId!, result: [""]).cauterize()
+            })
             
         }
     }
@@ -264,7 +270,6 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
 //        print("getToSignHash ", stdMsg.getToSignHash().toHexString())
         
         if let signature = try? ECDSA.compactsign(stdMsg.getToSignHash(), privateKey: self.privateKey!) {
-//            print("signature ", signature)
             var genedSignature = TrustSignature.init()
             var genPubkey =  PublicKey.init()
             genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
@@ -277,7 +282,6 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             
             let stdTx = MsgGenerator.genTrustSignedTx([], stdMsg.fee, stdMsg.memo, signatures)
             let postTx = TrustPostTx.init("block", stdTx.value)
-//            print("postTx ", postTx)
             
             let encoder = JSONEncoder()
             encoder.outputFormatting = .sortedKeys
@@ -314,19 +318,17 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
 //            print("signature ", signature)
 
             let response: JSON = ["signed" : json!.rawValue, "signature":signature.rawValue]
-//            print("response ", response)
-            self.interactor?.approveRequest(id: wcId!, result: [response]).done({ _ in
+            if (self.isDeepLink) {
+                self.jumpBackToPreviousApp()
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                    self.interactor?.approveRequest(id: self.wcId!, result: [response]).cauterize()
+                })
+            } else {
                 self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
-                if (self.isDeepLink) {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                        self.jumpBackToPreviousApp()
-                    })
-                }
-            }).cauterize()
+                self.interactor?.approveRequest(id: wcId!, result: [response]).cauterize()
+            }
         }
     }
-    
-    
     
     func onShowNotSupportChain(_ chainId: String) {
         let notSupportTitle = NSLocalizedString("error_not_support_chain_title", comment: "")
@@ -388,12 +390,11 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             }
             DispatchQueue.main.async(execute: {
                 if (self.isDeepLink) {
-                    self.interactor?.approveRequest(id: self.wcId!, result: self.getKeplrAccounts()).done({ _ in
-                        self.onViewUpdate(self.wCPeerMeta!)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(500), execute: {
-                            self.jumpBackToPreviousApp()
-                        })
-                    }).cauterize()
+                    self.onViewUpdate(self.wCPeerMeta!)
+                    self.jumpBackToPreviousApp()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                        self.interactor?.approveRequest(id: self.wcId!, result: self.getKeplrAccounts()).cauterize()
+                    })
                     
                 } else {
                     guard let session = WCSession.from(string: self.wcURL!) else {
