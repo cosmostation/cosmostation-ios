@@ -933,6 +933,25 @@ support@cosmostation.io";
 "tx_cosmwasm_instantiate" = "컨트랙트\n인스턴트화";
 "tx_cosmwasm_execontract" = "컨트랙트\n실행";
 
+"tx_crescent_liquid_stake" = "유동성 스테이크";
+"tx_crescent_liquid_unstake" = "유동성 언스테이크";
+"tx_crescent_create_pair" = "유동성 페어 생성";
+"tx_crescent_create_pool" = "유동성 풀 생성";
+"tx_crescent_deposit" = "유동성 공급";
+"tx_crescent_withdraw" = "유동성 회수";
+"tx_crescent_limit_order" = "오더 생성(limit)";
+"tx_crescent_market_order" = "오더 생성(market)";
+"tx_crescent_cancel_order" = "오더 취소";
+"tx_crescent_cancel_all_orders" = "모든 오더 취소";
+"tx_crescent_stake" = "파밍\n스테이크";
+"tx_crescent_unstake" = "파밍\n언스테이크";
+"tx_crescent_harvest" = "파밍\n수확";
+"tx_crescent_create_fixed_amount_plan" = "파밍\n플랜생성(수량)";
+"tx_crescent_create_ratio_plan" = "파밍\n플랜생성(비율)";
+"tx_crescent_remove_plan" = "파밍\n플랜 제거";
+"tx_crescent_advance_epoch" = "파밍\n에포치 관리";
+"tx_crescent_claim" = "에어드랍";
+
 "tx_known" = "알 수 없음";
 
 "chain_title_cosmos" = "Cosmos";

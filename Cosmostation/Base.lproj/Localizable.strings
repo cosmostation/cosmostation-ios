@@ -934,6 +934,25 @@ support@cosmostation.io";
 "tx_cosmwasm_instantiate" = "Instantiate\nContract";
 "tx_cosmwasm_execontract" = "Execute\nContract";
 
+"tx_crescent_liquid_stake" = "Liquid Stake";
+"tx_crescent_liquid_unstake" = "Liquid Unstake";
+"tx_crescent_create_pair" = "Liquidity\nCreate Pair";
+"tx_crescent_create_pool" = "Liquidity\nCreate Pool";
+"tx_crescent_deposit" = "Liquidity\nDeposit";
+"tx_crescent_withdraw" = "Liquidity\nWithdraw";
+"tx_crescent_limit_order" = "Limit Order";
+"tx_crescent_market_order" = "Market Order";
+"tx_crescent_cancel_order" = "Cancel Order";
+"tx_crescent_cancel_all_orders" = "Cancel All Order";
+"tx_crescent_stake" = "Farming Stake";
+"tx_crescent_unstake" = "Farming Unstake";
+"tx_crescent_harvest" = "Farming Harvest";
+"tx_crescent_create_fixed_amount_plan" = "Farming\nCreate Plain(Amount)";
+"tx_crescent_create_ratio_plan" = "Farming\nCreate Plain(Ratio)";
+"tx_crescent_remove_plan" = "Farming\nRemove Plain";
+"tx_crescent_advance_epoch" = "Farming\nEpoch";
+"tx_crescent_claim" = "Airdrop";
+
 "tx_known" = "Unknown";
 
 "chain_title_cosmos" = "Cosmos";

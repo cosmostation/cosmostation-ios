@@ -145,6 +145,65 @@ public struct ApiHistoryNewCustom {
                 
             }
             
+            // crescent msg type
+            else if (msgType.contains("crescent")) {
+                if (msgType.contains("liquidstaking") && msgType.contains("MsgLiquidStake")) {
+                    result = NSLocalizedString("tx_crescent_liquid_stake", comment: "")
+                    
+                } else if (msgType.contains("liquidstaking") && msgType.contains("MsgLiquidUnstake")) {
+                    result = NSLocalizedString("tx_crescent_liquid_unstake", comment: "")
+                    
+                } else if (msgType.contains("liquidity") && msgType.contains("MsgCreatePair")) {
+                    result = NSLocalizedString("tx_crescent_create_pair", comment: "")
+                    
+                } else if (msgType.contains("liquidity") && msgType.contains("MsgCreatePool")) {
+                    result = NSLocalizedString("tx_crescent_create_pool", comment: "")
+                    
+                } else if (msgType.contains("liquidity") && msgType.contains("MsgDeposit")) {
+                    result = NSLocalizedString("tx_crescent_deposit", comment: "")
+                    
+                } else if (msgType.contains("liquidity") && msgType.contains("MsgWithdraw")) {
+                    result = NSLocalizedString("tx_crescent_withdraw", comment: "")
+                    
+                } else if (msgType.contains("liquidity") && msgType.contains("MsgLimitOrder")) {
+                    result = NSLocalizedString("tx_crescent_limit_order", comment: "")
+                    
+                } else if (msgType.contains("liquidity") && msgType.contains("MsgMarketOrder")) {
+                    result = NSLocalizedString("tx_crescent_market_order", comment: "")
+                    
+                } else if (msgType.contains("liquidity") && msgType.contains("MsgCancelOrder")) {
+                    result = NSLocalizedString("tx_crescent_cancel_order", comment: "")
+                    
+                } else if (msgType.contains("liquidity") && msgType.contains("MsgCancelAllOrders")) {
+                    result = NSLocalizedString("tx_crescent_cancel_all_orders", comment: "")
+                    
+                } else if (msgType.contains("farming") && msgType.contains("MsgStake")) {
+                    result = NSLocalizedString("tx_crescent_stake", comment: "")
+                    
+                } else if (msgType.contains("farming") && msgType.contains("MsgUnstake")) {
+                    result = NSLocalizedString("tx_crescent_unstake", comment: "")
+                    
+                } else if (msgType.contains("farming") && msgType.contains("MsgHarvest")) {
+                    result = NSLocalizedString("tx_crescent_harvest", comment: "")
+                    
+                } else if (msgType.contains("farming") && msgType.contains("MsgCreateFixedAmountPlan")) {
+                    result = NSLocalizedString("tx_crescent_create_fixed_amount_plan", comment: "")
+                    
+                } else if (msgType.contains("farming") && msgType.contains("MsgCreateRatioPlan")) {
+                    result = NSLocalizedString("tx_crescent_create_ratio_plan", comment: "")
+                    
+                } else if (msgType.contains("farming") && msgType.contains("MsgRemovePlan")) {
+                    result = NSLocalizedString("tx_crescent_remove_plan", comment: "")
+                    
+                } else if (msgType.contains("farming") && msgType.contains("MsgAdvanceEpoch")) {
+                    result = NSLocalizedString("tx_crescent_advance_epoch", comment: "")
+                    
+                } else if (msgType.contains("claim") && msgType.contains("MsgClaim")) {
+                    result = NSLocalizedString("tx_crescent_claim", comment: "")
+                    
+                }
+            }
+            
             // iris msg type
             else if (msgType.contains("MsgMintNFT")) {
                 result = NSLocalizedString("tx_nft_mint", comment: "")
