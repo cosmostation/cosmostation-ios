@@ -92,4 +92,34 @@ class TxCommonCell: TxCell {
         
     }
     
+//    func onBindHistory(_ chain: ChainType, _ history: ApiHistoryNewCustom) {
+//        setDenomType(chain)
+//        feeLayer.isHidden = false
+//        usedFeeLayer.isHidden = true
+//        limitFeeLayer.isHidden = true
+//        if (history.isSuccess()) {
+//            statusImg.image = UIImage(named: "successIc")
+//            statusLabel.text = NSLocalizedString("tx_success", comment: "")
+//            errorMsg.isHidden = true
+//            errorConstraint.priority = .defaultLow
+//            successConstraint.priority = .defaultHigh
+//        } else {
+//            statusImg.image = UIImage(named: "failIc")
+//            errorMsg.text = history.data?.raw_log
+//            errorMsg.isHidden = false
+//            errorConstraint.priority = .defaultHigh
+//            successConstraint.priority = .defaultLow
+//        }
+//        heightLabel.text = history.data?.height
+//        msgCntLabel.text = String(history.getMsgCnt())
+//        gasAmountLabel.text = (history.data?.gas_used ?? "0") + " / " + (history.data?.gas_wanted ?? "0")
+//        timeLabel.text = WUtils.newApiTimeToString(history.header?.timestamp)
+//        timeGapLabel.text = WUtils.newApiTimeGap(history.header?.timestamp)
+//        hashLabel.text = history.data?.txhash
+//        memoLabel.text = history.data?.tx?.value(forKeyPath: "body.memo") as? String
+//        if let feeValue = history.data?.tx?.value(forKeyPath: "auth_info.fee.amount") as? Array<NSDictionary> {
+//            let feeCoin = Coin.init(feeValue[0])
+//            WUtils.showCoinDp(feeCoin, feeDenomLabel, feeAmountLabel, chain)
+//        }
+//    }
 }

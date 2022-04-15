@@ -838,13 +838,20 @@ support@cosmostation.io";
 "tx_transfer" = "Transfer";
 "tx_delegate" = "Delegate";
 "tx_undelegate" = "Undelegate";
+"tx_cancel_undelegate" = "Cancel Undelegate";
 "tx_redelegate" = "Redelegate";
 "tx_get_reward" = "Get Rewards";
 "tx_get_commission" = "Get Commission";
+"tx_fund_pool" = "Funding\nCommunity Pool";
 "tx_change_reward_address" = "Edit Address";
 "tx_vote" = "Vote";
 "tx_submit_proposal" = "Proposal";
+"tx_proposal_deposit" = "Proposal Deposit";
+"tx_vote_weighted" = "Vote Weighted";
 "tx_deposit" = "Deposit";
+"tx_authz_grant" = "Authz Grant";
+"tx_authz_revoke" = "Authz Revoke";
+"tx_authz_exe" = "Authz Execute";
 "tx_create_validator" = "Create Val";
 "tx_edit_validator" = "Edit Val";
 "tx_unjail_validator" = "Unjail Val";
@@ -892,10 +899,14 @@ support@cosmostation.io";
 "tx_kava_hard_mint_incentive" = "USDX Minting\nIncentive";
 "tx_kava_hard_delegator_incentive" = "Delegator\nIncentive";
 "tx_kava_hard_swap_incentive" = "Swap\nIncentive";
+"tx_kava_hard_save_incentive" = "인센티브\nSaving";
 "tx_kava_incentive_claim_all" = "Claim\nIncentive";
 "tx_kava_swap_token" = "Swap Coin";
 "tx_kava_swap_deposit" = "Swap Pool\nDeposit";
 "tx_kava_swap_withdraw" = "Swap Pool\nWithdraw";
+"tx_kava_auction_bid" = "Auction Bid";
+"tx_kava_save_deposit" = "Saving\nDeposit";
+"tx_kava_save_withdraw" = "Saving\nWithdraw";
 
 "tx_ibc_send" = "IBC Send";
 "tx_ibc_receive" = "IBC Received";
@@ -916,18 +927,29 @@ support@cosmostation.io";
 "tx_rizon_event_horizon" = "Recieve Swap Token";
 
 "tx_med_add_record" = "Add Record";
+"tx_med_create_topic" = "Create Topic";
+"tx_med_add_writer" = "Add Writer";
 "tx_med_create_did" = "Create DID";
 
 "tx_add_liquidity" = "Add Liquidity";
 "tx_remove_liquidity" = "Remove Liquidity";
 "tx_despensation_claim" = "Claim Incentive";
+"tx_distribution_run" = "Distribution Run";
 
 "tx_nft_mint" = "Issue NFT";
 "tx_nft_send" = "NFT Send";
 "tx_nft_receive" = "NFT Recieve";
 "tx_nft_transfer" = "NFT Transfer";
+"tx_nft_edit" = "NFT Edit";
+"tx_nft_issueDenom" = "Issue NFT Denom";
 
 "tx_desmos_save_profile" = "Save Profile";
+"tx_desmos_delete_profile" = "Delete Profile";
+"tx_desmos_create_relation" = "Create Relationship";
+"tx_desmos_delete_relation" = "Delete Relationship";
+"tx_desmos_delete_block_user" = "Block User";
+"tx_desmos_delete_unblock_user" = "Unblock User";
+"tx_desmos_delete_profile" = "Delete Profile";
 "tx_desmos_link_chain_account" = "Link Account";
 
 "tx_cosmwasm_store_code" = "Store\nContract Code";

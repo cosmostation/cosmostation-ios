@@ -216,22 +216,9 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             
         } else {
             let history = mApiCustomNewHistories[indexPath.row]
-            if (history.header?.chain_id != BaseData.instance.getChainId(self.chainType)) {
-                let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
-                guard let url = URL(string: link) else { return }
-                self.onShowSafariWeb(url)
-
-            } else {
-                if (WUtils.isGRPC(self.chainType)) {
-                    let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
-                    txDetailVC.mIsGen = false
-                    txDetailVC.mTxHash = history.data!.txhash!
-                    txDetailVC.hidesBottomBarWhenPushed = true
-                    self.navigationItem.title = ""
-                    self.navigationController?.pushViewController(txDetailVC, animated: true)
-                    
-                }
-            }
+            let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
+            guard let url = URL(string: link) else { return }
+            self.onShowSafariWeb(url)
         }
     }
     

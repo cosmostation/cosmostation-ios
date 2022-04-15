@@ -837,13 +837,20 @@ support@cosmostation.io";
 "tx_transfer" = "전송하기";
 "tx_delegate" = "위임";
 "tx_undelegate" = "위임 철회";
+"tx_cancel_undelegate" = "위임 철회 취소";
 "tx_redelegate" = "재위임";
 "tx_get_reward" = "이자 청구";
 "tx_get_commission" = "수수료 청구";
+"tx_fund_pool" = "커뮤니티 풀 펀딩";
 "tx_change_reward_address" = "이자 주소 변경";
 "tx_vote" = "투표";
 "tx_submit_proposal" = "의제 제안";
+"tx_proposal_deposit" = "의제 디파짓";
+"tx_vote_weighted" = "가중 투표";
 "tx_deposit" = "디파짓";
+"tx_authz_grant" = "권한 위임";
+"tx_authz_revoke" = "권한 위임 취소";
+"tx_authz_exe" = "권한 위임 실행";
 "tx_create_validator" = "검증인 생성";
 "tx_edit_validator" = "검증인 편집";
 "tx_unjail_validator" = "검증인 복원";
@@ -891,10 +898,14 @@ support@cosmostation.io";
 "tx_kava_hard_mint_incentive" = "인센티브\nUSDX 발행";
 "tx_kava_hard_delegator_incentive" = "인센티브\n위임";
 "tx_kava_hard_swap_incentive" = "인센티브\n스왑";
+"tx_kava_hard_save_incentive" = "인센티브\n저축";
 "tx_kava_incentive_claim_all" = "인센티브\n청구";
 "tx_kava_swap_token" = "코인 스왑";
 "tx_kava_swap_deposit" = "스왑풀\n예치";
 "tx_kava_swap_withdraw" = "스왑풀\n출금";
+"tx_kava_auction_bid" = "옥션 비딩";
+"tx_kava_save_deposit" = "저축\n예치";
+"tx_kava_save_withdraw" = "저축\n출금";
 
 "tx_ibc_send" = "IBC 보내기";
 "tx_ibc_receive" = "IBC 받기";
@@ -915,11 +926,14 @@ support@cosmostation.io";
 "tx_rizon_event_horizon" = "스왑 토큰 받기";
 
 "tx_med_add_record" = "기록 추가";
+"tx_med_create_topic" = "토픽 생성";
+"tx_med_add_writer" = "기록자 추가";
 "tx_med_create_did" = "DID 생성";
 
 "tx_add_liquidity" = "풀 참가";
 "tx_remove_liquidity" = "풀 나가기";
 "tx_despensation_claim" = "인센티브 받기";
+"tx_distribution_run" = "인센티브 나눔";
 
 "tx_nft_mint" = "NFT 발행";
 "tx_nft_send" = "NFT 보내기";
@@ -927,6 +941,12 @@ support@cosmostation.io";
 "tx_nft_transfer" = "NFT 전송";
 
 "tx_desmos_save_profile" = "프로필 생성";
+"tx_desmos_delete_profile" = "프로필 삭제";
+"tx_desmos_create_relation" = "친구 추가";
+"tx_desmos_delete_relation" = "친구 삭제";
+"tx_desmos_delete_block_user" = "차단";
+"tx_desmos_delete_unblock_user" = "차단 해제";
+"tx_desmos_delete_profile" = "Delete Profile";
 "tx_desmos_link_chain_account" = "계정 연결";
 
 "tx_cosmwasm_store_code" = "컨트랙트\n코드 저장";

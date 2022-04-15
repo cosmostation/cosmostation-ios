@@ -88,346 +88,559 @@ public struct ApiHistoryNewCustom {
             }
 //            print("msgType ", msgType)
             
-            if (msgType.contains("MsgDelegate")) {
-                result = NSLocalizedString("tx_delegate", comment: "")
-                
-            } else if (msgType.contains("MsgUndelegate")) {
-                result = NSLocalizedString("tx_undelegate", comment: "")
-                
-            } else if (msgType.contains("MsgWithdrawDelegatorReward") || msgType.contains("MsgWithdrawDelegationReward")) {
-                result = NSLocalizedString("tx_get_reward", comment: "")
-                
-            } else if (msgType.contains("MsgSend")) {
-                if let senderAddr = getMsgs()![0].object(forKey: "from_address") as? String, senderAddr == address {
-                    result = NSLocalizedString("tx_send", comment: "")
-                } else if let senderAddr = getMsgs()![0].value(forKeyPath: "value.from_address") as? String, senderAddr == address {
-                    result = NSLocalizedString("tx_send", comment: "")
-                } else if let receiverAddr = getMsgs()![0].object(forKey: "to_address") as? String, receiverAddr == address {
-                    result = NSLocalizedString("tx_receive", comment: "")
-                } else if let receiverAddr = getMsgs()![0].value(forKeyPath: "value.to_address") as? String, receiverAddr == address {
-                    result = NSLocalizedString("tx_receive", comment: "")
-                } else {
-                    result = NSLocalizedString("tx_transfer", comment: "")
+
+            // cosmos default msg type
+            if (msgType.contains("cosmos.") && msgType.contains("staking")) {
+                if (msgType.contains("MsgCreateValidator")) {
+                    result = NSLocalizedString("tx_create_validator", comment: "")
+                    
+                } else if (msgType.contains("MsgEditValidator")) {
+                    result = NSLocalizedString("tx_edit_validator", comment: "")
+                    
+                } else if (msgType.contains("MsgDelegate")) {
+                    result = NSLocalizedString("tx_delegate", comment: "")
+                    
+                } else if (msgType.contains("MsgUndelegate")) {
+                    result = NSLocalizedString("tx_undelegate", comment: "")
+                    
+                } else if (msgType.contains("MsgBeginRedelegate")) {
+                    result = NSLocalizedString("tx_redelegate", comment: "")
+                    
+                } else if (msgType.contains("MsgCancelUnbondingDelegation")) {
+                    result = NSLocalizedString("tx_cancel_undelegate", comment: "")
+                    
                 }
                 
-            } else if (msgType.contains("MsgMultiSend")) {
-                result = NSLocalizedString("tx_transfer", comment: "")
+            } else if (msgType.contains("cosmos.") && msgType.contains("bank")) {
+                if (msgType.contains("MsgSend")) {
+                    if let senderAddr = getMsgs()![0].object(forKey: "from_address") as? String, senderAddr == address {
+                        result = NSLocalizedString("tx_send", comment: "")
+                    } else if let senderAddr = getMsgs()![0].value(forKeyPath: "value.from_address") as? String, senderAddr == address {
+                        result = NSLocalizedString("tx_send", comment: "")
+                    } else if let receiverAddr = getMsgs()![0].object(forKey: "to_address") as? String, receiverAddr == address {
+                        result = NSLocalizedString("tx_receive", comment: "")
+                    } else if let receiverAddr = getMsgs()![0].value(forKeyPath: "value.to_address") as? String, receiverAddr == address {
+                        result = NSLocalizedString("tx_receive", comment: "")
+                    } else {
+                        result = NSLocalizedString("tx_transfer", comment: "")
+                    }
+                    
+                } else if (msgType.contains("MsgMultiSend")) {
+                    result = NSLocalizedString("tx_transfer", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains("MsgBeginRedelegate")) {
-                result = NSLocalizedString("tx_redelegate", comment: "")
+            } else if (msgType.contains("cosmos.") && msgType.contains("distribution")) {
+                if (msgType.contains("MsgSetWithdrawAddress") || msgType.contains("MsgModifyWithdrawAddress")) {
+                    result = NSLocalizedString("tx_change_reward_address", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdrawDelegatorReward") || msgType.contains("MsgWithdrawDelegationReward")) {
+                    result = NSLocalizedString("tx_get_reward", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdrawValidatorCommission")) {
+                    result = NSLocalizedString("tx_get_commission", comment: "")
+                    
+                } else if (msgType.contains("MsgFundCommunityPool")) {
+                    result = NSLocalizedString("tx_fund_pool", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains("MsgSetWithdrawAddress") || msgType.contains("MsgModifyWithdrawAddress")) {
-                result = NSLocalizedString("tx_change_reward_address", comment: "")
+            } else if (msgType.contains("cosmos.") && msgType.contains("gov")) {
+                if (msgType.contains("MsgSubmitProposal")) {
+                    result = NSLocalizedString("tx_submit_proposal", comment: "")
+                    
+                } else if (msgType.contains("MsgDeposit")) {
+                    result = NSLocalizedString("tx_proposal_deposit", comment: "")
+                    
+                } else if (msgType.contains("MsgVote")) {
+                    result = NSLocalizedString("tx_vote", comment: "")
+                    
+                } else if (msgType.contains("MsgVoteWeighted")) {
+                    result = NSLocalizedString("tx_vote_weighted", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains("MsgCreateValidator")) {
-                result = NSLocalizedString("tx_create_validator", comment: "")
+            } else if (msgType.contains("cosmos.") && msgType.contains("authz")) {
+                if (msgType.contains("MsgGrant")) {
+                    result = NSLocalizedString("tx_authz_grant", comment: "")
+                    
+                } else if (msgType.contains("MsgRevoke")) {
+                    result = NSLocalizedString("tx_authz_revoke", comment: "")
+                    
+                } else if (msgType.contains("MsgExec")) {
+                    result = NSLocalizedString("tx_authz_exe", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains("MsgEditValidator")) {
-                result = NSLocalizedString("tx_edit_validator", comment: "")
-                
-            } else if (msgType.contains("MsgUnjail")) {
-                result = NSLocalizedString("tx_unjail_validator", comment: "")
-                
+            } else if (msgType.contains("cosmos.") && msgType.contains("slashing")) {
+                if (msgType.contains("MsgUnjail")) {
+                    result = NSLocalizedString("tx_unjail_validator", comment: "")
+                    
+                }
             }
             
+            
             // ibc msg type
-            else if (msgType.contains("ibc") && msgType.contains("MsgTransfer")) {
-                result = NSLocalizedString("tx_ibc_send", comment: "")
-                
-            } else if (msgType.contains("ibc") && msgType.contains("MsgUpdateClient")) {
-                result = NSLocalizedString("tx_ibc_client_update", comment: "")
-                
-            } else if (msgType.contains("ibc") && msgType.contains("MsgAcknowledgement")) {
-                result = NSLocalizedString("tx_ibc_acknowledgement", comment: "")
-                
-            } else if (msgType.contains("ibc") && msgType.contains("MsgRecvPacket")) {
-                result = NSLocalizedString("tx_ibc_receive", comment: "")
-                
+            else if (msgType.contains("ibc.")) {
+                if (msgType.contains("MsgTransfer")) {
+                    result = NSLocalizedString("tx_ibc_send", comment: "")
+                    
+                } else if (msgType.contains("MsgUpdateClient")) {
+                    result = NSLocalizedString("tx_ibc_client_update", comment: "")
+                    
+                } else if (msgType.contains("MsgAcknowledgement")) {
+                    result = NSLocalizedString("tx_ibc_acknowledgement", comment: "")
+                    
+                } else if (msgType.contains("MsgRecvPacket")) {
+                    result = NSLocalizedString("tx_ibc_receive", comment: "")
+                    
+                }
             }
             
             // crescent msg type
-            else if (msgType.contains("crescent")) {
-                if (msgType.contains("liquidstaking") && msgType.contains("MsgLiquidStake")) {
+            else if (msgType.contains("crescent.") && msgType.contains("liquidstaking")) {
+                if (msgType.contains("MsgLiquidStake")) {
                     result = NSLocalizedString("tx_crescent_liquid_stake", comment: "")
                     
-                } else if (msgType.contains("liquidstaking") && msgType.contains("MsgLiquidUnstake")) {
+                } else if (msgType.contains("MsgLiquidUnstake")) {
                     result = NSLocalizedString("tx_crescent_liquid_unstake", comment: "")
                     
-                } else if (msgType.contains("liquidity") && msgType.contains("MsgCreatePair")) {
+                }
+                
+            } else if (msgType.contains("crescent.") && msgType.contains("liquidity")) {
+                if (msgType.contains("MsgCreatePair")) {
                     result = NSLocalizedString("tx_crescent_create_pair", comment: "")
                     
-                } else if (msgType.contains("liquidity") && msgType.contains("MsgCreatePool")) {
+                } else if (msgType.contains("MsgCreatePool")) {
                     result = NSLocalizedString("tx_crescent_create_pool", comment: "")
                     
-                } else if (msgType.contains("liquidity") && msgType.contains("MsgDeposit")) {
+                } else if (msgType.contains("MsgDeposit")) {
                     result = NSLocalizedString("tx_crescent_deposit", comment: "")
                     
-                } else if (msgType.contains("liquidity") && msgType.contains("MsgWithdraw")) {
+                } else if (msgType.contains("MsgWithdraw")) {
                     result = NSLocalizedString("tx_crescent_withdraw", comment: "")
                     
-                } else if (msgType.contains("liquidity") && msgType.contains("MsgLimitOrder")) {
+                } else if (msgType.contains("MsgLimitOrder")) {
                     result = NSLocalizedString("tx_crescent_limit_order", comment: "")
                     
-                } else if (msgType.contains("liquidity") && msgType.contains("MsgMarketOrder")) {
+                } else if (msgType.contains("MsgMarketOrder")) {
                     result = NSLocalizedString("tx_crescent_market_order", comment: "")
                     
-                } else if (msgType.contains("liquidity") && msgType.contains("MsgCancelOrder")) {
+                } else if (msgType.contains("MsgCancelOrder")) {
                     result = NSLocalizedString("tx_crescent_cancel_order", comment: "")
                     
-                } else if (msgType.contains("liquidity") && msgType.contains("MsgCancelAllOrders")) {
+                } else if (msgType.contains("MsgCancelAllOrders")) {
                     result = NSLocalizedString("tx_crescent_cancel_all_orders", comment: "")
                     
-                } else if (msgType.contains("farming") && msgType.contains("MsgStake")) {
+                }
+                
+            } else if (msgType.contains("crescent.") && msgType.contains("farming")) {
+                if (msgType.contains("MsgStake")) {
                     result = NSLocalizedString("tx_crescent_stake", comment: "")
                     
-                } else if (msgType.contains("farming") && msgType.contains("MsgUnstake")) {
+                } else if (msgType.contains("MsgUnstake")) {
                     result = NSLocalizedString("tx_crescent_unstake", comment: "")
                     
-                } else if (msgType.contains("farming") && msgType.contains("MsgHarvest")) {
+                } else if (msgType.contains("MsgHarvest")) {
                     result = NSLocalizedString("tx_crescent_harvest", comment: "")
                     
-                } else if (msgType.contains("farming") && msgType.contains("MsgCreateFixedAmountPlan")) {
+                } else if (msgType.contains("MsgCreateFixedAmountPlan")) {
                     result = NSLocalizedString("tx_crescent_create_fixed_amount_plan", comment: "")
                     
-                } else if (msgType.contains("farming") && msgType.contains("MsgCreateRatioPlan")) {
+                } else if (msgType.contains("MsgCreateRatioPlan")) {
                     result = NSLocalizedString("tx_crescent_create_ratio_plan", comment: "")
                     
-                } else if (msgType.contains("farming") && msgType.contains("MsgRemovePlan")) {
+                } else if (msgType.contains("MsgRemovePlan")) {
                     result = NSLocalizedString("tx_crescent_remove_plan", comment: "")
                     
-                } else if (msgType.contains("farming") && msgType.contains("MsgAdvanceEpoch")) {
+                } else if (msgType.contains("MsgAdvanceEpoch")) {
                     result = NSLocalizedString("tx_crescent_advance_epoch", comment: "")
                     
-                } else if (msgType.contains("claim") && msgType.contains("MsgClaim")) {
+                }
+                
+            } else if (msgType.contains("crescent.") && msgType.contains("claim")) {
+                if (msgType.contains("MsgClaim")) {
                     result = NSLocalizedString("tx_crescent_claim", comment: "")
                     
                 }
             }
             
-            // iris msg type
-            else if (msgType.contains("MsgMintNFT")) {
-                result = NSLocalizedString("tx_nft_mint", comment: "")
-                
-            } else if (msgType.contains("MsgTransferNFT")) {
-                if let senderAddr = getMsgs()![0].object(forKey: "sender") as? String, senderAddr == address {
-                    result = NSLocalizedString("tx_nft_send", comment: "")
-                } else if let receiverAddr = getMsgs()![0].object(forKey: "recipient") as? String, receiverAddr == address {
-                    result = NSLocalizedString("tx_nft_receive", comment: "")
-                } else {
-                    result = NSLocalizedString("tx_nft_transfer", comment: "")
+            // irismod msg type
+            else if (msgType.contains("irismod.") && msgType.contains("nft")) {
+                if (msgType.contains("MsgMintNFT")) {
+                    result = NSLocalizedString("tx_nft_mint", comment: "")
+                    
+                } else if (msgType.contains("MsgTransferNFT")) {
+                    if let senderAddr = getMsgs()![0].object(forKey: "sender") as? String, senderAddr == address {
+                        result = NSLocalizedString("tx_nft_send", comment: "")
+                    } else if let receiverAddr = getMsgs()![0].object(forKey: "recipient") as? String, receiverAddr == address {
+                        result = NSLocalizedString("tx_nft_receive", comment: "")
+                    } else {
+                        result = NSLocalizedString("tx_nft_transfer", comment: "")
+                    }
+                    
+                } else if (msgType.contains("MsgEditNFT")) {
+                    result = NSLocalizedString("tx_nft_edit", comment: "")
+                    
+                } else if (msgType.contains("MsgIssueDenom")) {
+                    result = NSLocalizedString("tx_nft_issueDenom", comment: "")
+                    
                 }
-                return result
-                
-                
-            } else if (msgType.contains("MsgEditNFT")) {
-                result = "NFT Edit"
-                
-            } else if (msgType.contains("MsgIssueDenom")) {
-                result = "Issue NFT Denom "
-                
-            } else if (msgType.contains("MsgRequestRandom")) {
-                result = "Random Request"
-                
+            }
+            
+            // crypto msg type
+            else if (msgType.contains("chainmain.") && msgType.contains("nft")) {
+                if (msgType.contains("MsgMintNFT")) {
+                    result = NSLocalizedString("tx_nft_mint", comment: "")
+                    
+                } else if (msgType.contains("MsgTransferNFT")) {
+                    if let senderAddr = getMsgs()![0].object(forKey: "sender") as? String, senderAddr == address {
+                        result = NSLocalizedString("tx_nft_send", comment: "")
+                    } else if let receiverAddr = getMsgs()![0].object(forKey: "recipient") as? String, receiverAddr == address {
+                        result = NSLocalizedString("tx_nft_receive", comment: "")
+                    } else {
+                        result = NSLocalizedString("tx_nft_transfer", comment: "")
+                    }
+                    
+                } else if (msgType.contains("MsgEditNFT")) {
+                    result = NSLocalizedString("tx_nft_edit", comment: "")
+                    
+                } else if (msgType.contains("MsgIssueDenom")) {
+                    result = NSLocalizedString("tx_nft_issueDenom", comment: "")
+                    
+                }
             }
             
             // starname msg type
-            else if (msgType.contains("RegisterDomain")) {
-                result = NSLocalizedString("tx_starname_registe_domain", comment: "")
-                
-            } else if (msgType.contains("RegisterAccount")) {
-                result = NSLocalizedString("tx_starname_registe_account", comment: "")
-                
-            } else if (msgType.contains("DeleteDomain")) {
-                result = NSLocalizedString("tx_starname_delete_domain", comment: "")
-                
-            } else if (msgType.contains("DeleteAccount")) {
-                result = NSLocalizedString("tx_starname_delete_account", comment: "")
-                
-            } else if (msgType.contains("RenewDomain")) {
-                result = NSLocalizedString("tx_starname_renew_domain", comment: "")
-                
-            } else if (msgType.contains("RenewAccount")) {
-                result = NSLocalizedString("tx_starname_renew_account", comment: "")
-                
-            } else if (msgType.contains("ReplaceAccountResources")) {
-                result = NSLocalizedString("tx_starname_update_resource", comment: "")
-                
+            else if (msgType.contains("starnamed.") && msgType.contains("starname")) {
+                if (msgType.contains("MsgRegisterDomain")) {
+                    result = NSLocalizedString("tx_starname_registe_domain", comment: "")
+                    
+                } else if (msgType.contains("MsgRegisterAccount")) {
+                    result = NSLocalizedString("tx_starname_registe_account", comment: "")
+                    
+                } else if (msgType.contains("MsgDeleteDomain")) {
+                    result = NSLocalizedString("tx_starname_delete_domain", comment: "")
+                    
+                } else if (msgType.contains("MsgDeleteAccount")) {
+                    result = NSLocalizedString("tx_starname_delete_account", comment: "")
+                    
+                } else if (msgType.contains("MsgRenewDomain")) {
+                    result = NSLocalizedString("tx_starname_renew_domain", comment: "")
+                    
+                } else if (msgType.contains("MsgRenewAccount")) {
+                    result = NSLocalizedString("tx_starname_renew_account", comment: "")
+                    
+                } else if (msgType.contains("MsgReplaceAccountResources")) {
+                    result = NSLocalizedString("tx_starname_update_resource", comment: "")
+                    
+                }
             }
             
             // osmosis msg type
-            else if (msgType.contains("MsgCreatePool")) {
-                result = NSLocalizedString("tx_create_pool", comment: "")
+            else if (msgType.contains("osmosis.") && msgType.contains("gamm")) {
+                if (msgType.contains("MsgSwapExactAmountIn")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                    
+                } else if (msgType.contains("MsgSwapExactAmountOut")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                    
+                } else if (msgType.contains("MsgJoinPool")) {
+                    result = NSLocalizedString("tx_join_pool", comment: "")
+                    
+                } else if (msgType.contains("MsgExitPool")) {
+                    result = NSLocalizedString("tx_exit_pool", comment: "")
+                    
+                } else if (msgType.contains("MsgJoinSwapExternAmountIn")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                    
+                } else if (msgType.contains("MsgJoinSwapShareAmountOut")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                    
+                } else if (msgType.contains("MsgExitSwapExternAmountOut")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                    
+                } else if (msgType.contains("MsgExitSwapShareAmountIn")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                    
+                } else if (msgType.contains("MsgCreatePool")) {
+                    result = NSLocalizedString("tx_create_pool", comment: "")
+                    
+                } else if (msgType.contains("MsgCreateBalancerPool")) {
+                    result = NSLocalizedString("tx_create_pool", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains("MsgJoinPool")) {
-                result = NSLocalizedString("tx_join_pool", comment: "")
-                
-            } else if (msgType.contains("MsgExitPool")) {
-                result = NSLocalizedString("tx_exit_pool", comment: "")
-                
-            } else if (msgType.contains("MsgSwapExactAmountIn") || msgType.contains("MsgSwapExactAmountOut")) {
-                result = NSLocalizedString("tx_coin_swap", comment: "")
-                
-            } else if (msgType.contains("MsgJoinSwapExternAmountIn") || msgType.contains("MsgJoinSwapShareAmountOut") ||
-                        msgType.contains("MsgExitSwapExternAmountOut") || msgType.contains("MsgExitSwapShareAmountIn")) {
-                result = NSLocalizedString("tx_coin_swap", comment: "")
-                
-            } else if (msgType.contains("MsgLockTokens")) {
-                result = NSLocalizedString("tx_osmosis_token_lockup", comment: "")
-                
-            } else if (msgType.split(separator: ".").last == "MsgBeginUnlocking") {
-                result = NSLocalizedString("tx_osmosis_begin_unlucking", comment: "")
-                
-            } else if (msgType.split(separator: ".").last == "MsgBeginUnlockingAll") {
-                result = NSLocalizedString("tx_osmosis_begin_unlucking_all", comment: "")
-                
-            } else if (msgType.contains("MsgUnlockTokens")) {
-                result = NSLocalizedString("tx_osmosis_token_unlock", comment: "")
-
-            } else if (msgType.contains("MsgUnlockPeriodLock")) {
-                result = NSLocalizedString("tx_osmosis_preriodlock_unlock", comment: "")
-
-            }
-            
-            // gravity dex msg type
-            else if (msgType.contains("MsgDepositWithinBatch")) {
-                result = NSLocalizedString("tx_join_pool", comment: "")
-                
-            } else if (msgType.contains("MsgSwapWithinBatch")) {
-                result = NSLocalizedString("tx_coin_swap", comment: "")
-                
-            } else if (msgType.contains("MsgWithdrawWithinBatch")) {
-                result = NSLocalizedString("tx_exit_pool", comment: "")
-                
-            }
-            
-            // rizon msg type
-            else if (msgType.contains("MsgCreateTokenswapRequest")) {
-               result = NSLocalizedString("tx_rizon_event_horizon", comment: "")
-               
+            } else if (msgType.contains("osmosis.") && msgType.contains("lockup")) {
+                if (msgType.contains("MsgLockTokens")) {
+                    result = NSLocalizedString("tx_osmosis_token_lockup", comment: "")
+                    
+                } else if (msgType.contains("MsgBeginUnlockingAll")) {
+                    result = NSLocalizedString("tx_osmosis_begin_unlucking_all", comment: "")
+                    
+                } else if (msgType.contains("MsgBeginUnlocking")) {
+                    result = NSLocalizedString("tx_osmosis_begin_unlucking", comment: "")
+                    
+                }
             }
             
             // medi msg type
-            else if (msgType.contains("MsgAddRecord")) {
-                result = NSLocalizedString("tx_med_add_record", comment: "")
+            else if (msgType.contains("panacea.") && msgType.contains("aol")) {
+                if (msgType.contains("MsgAddRecord")) {
+                    result = NSLocalizedString("tx_med_add_record", comment: "")
+                    
+                } else if (msgType.contains("MsgCreateTopic")) {
+                    result = NSLocalizedString("tx_med_create_topic", comment: "")
+                    
+                } else if (msgType.contains("MsgAddWriter")) {
+                    result = NSLocalizedString("tx_med_add_writer", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains("MsgCreateTokenswapRequest")) {
-                result = NSLocalizedString("tx_med_create_did", comment: "")
-                
+            } else if (msgType.contains("panacea.") && msgType.contains("did")) {
+                if (msgType.contains("MsgCreateDID")) {
+                    result = NSLocalizedString("tx_med_create_did", comment: "")
+                    
+                }
+            }
+            
+            // rizon msg type
+            else if (msgType.contains("rizonworld.") && msgType.contains("tokenswap")) {
+                if (msgType.contains("MsgCreateTokenswapRequest")) {
+                    result = NSLocalizedString("tx_rizon_event_horizon", comment: "")
+                    
+                }
+            }
+            
+            // gravity dex msg type
+            else if (msgType.contains("tendermint.") && msgType.contains("liquidity")) {
+                if (msgType.contains("MsgDepositWithinBatch")) {
+                    result = NSLocalizedString("tx_join_pool", comment: "")
+                    
+                } else if (msgType.contains("MsgSwapWithinBatch")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdrawWithinBatch")) {
+                    result = NSLocalizedString("tx_exit_pool", comment: "")
+                    
+                }
             }
             
             // sif msg type
-            else if (msgType.contains("clp") && msgType.contains("MsgAddLiquidity")) {
-                result = NSLocalizedString("tx_add_liquidity", comment: "")
+            else if (msgType.contains("sifnode.") && msgType.contains("clp")) {
+                if (msgType.contains("MsgRemoveLiquidity")) {
+                    result = NSLocalizedString("tx_remove_liquidity", comment: "")
+                    
+                } else if (msgType.contains("MsgCreatePool")) {
+                    result = NSLocalizedString("tx_create_pool", comment: "")
+                    
+                } else if (msgType.contains("MsgAddLiquidity")) {
+                    result = NSLocalizedString("tx_add_liquidity", comment: "")
+                    
+                } else if (msgType.contains("MsgSwap")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                    
+                } else if (msgType.contains("MsgDecommissionPool")) {
+                    
+                } else if (msgType.contains("MsgUnlockLiquidityRequest")) {
+                    
+                } else if (msgType.contains("MsgUpdateRewardsParamsRequest")) {
+                    
+                } else if (msgType.contains("MsgAddRewardPeriodRequest")) {
+                    
+                } else if (msgType.contains("MsgModifyPmtpRates")) {
+                    
+                } else if (msgType.contains("MsgUpdatePmtpParams")) {
+                    
+                } else if (msgType.contains("MsgUpdateStakingRewardParams")) {
+                    
+                }
                 
-            } else if (msgType.contains("clp") && msgType.contains("MsgRemoveLiquidity")) {
-                result = NSLocalizedString("tx_remove_liquidity", comment: "")
-                
-            } else if (msgType.contains("clp") && msgType.contains("MsgSwap")) {
-                result = NSLocalizedString("tx_coin_swap", comment: "")
-                
-            } else if (msgType.contains("dispensation") && msgType.contains("MsgCreateUserClaim")) {
-                result = NSLocalizedString("tx_despensation_claim", comment: "")
-                
+            } else if (msgType.contains("sifnode.") && msgType.contains("dispensation")) {
+                if (msgType.contains("MsgCreateUserClaim")) {
+                    result = NSLocalizedString("tx_despensation_claim", comment: "")
+                    
+                } else if (msgType.contains("MsgRunDistribution")) {
+                    result = NSLocalizedString("tx_distribution_run", comment: "")
+                    
+                }
             }
             
             // desmos msg type
-            else if (msgType.contains("MsgSaveProfile")) {
-                result = NSLocalizedString("tx_desmos_save_profile", comment: "")
-                
-            } else if (msgType.contains("MsgLinkChainAccount")) {
-                result = NSLocalizedString("tx_desmos_link_chain_account", comment: "")
-                
+            else if (msgType.contains("desmos.") && msgType.contains("profiles")) {
+                if (msgType.contains("MsgSaveProfile")) {
+                    result = NSLocalizedString("tx_desmos_save_profile", comment: "")
+                    
+                } else if (msgType.contains("MsgDeleteProfile")) {
+                    result = NSLocalizedString("tx_desmos_delete_profile", comment: "")
+                    
+                } else if (msgType.contains("MsgCreateRelationship")) {
+                    result = NSLocalizedString("tx_desmos_create_relation", comment: "")
+                    
+                } else if (msgType.contains("MsgDeleteRelationship")) {
+                    result = NSLocalizedString("tx_desmos_delete_relation", comment: "")
+                    
+                } else if (msgType.contains("MsgBlockUser")) {
+                    result = NSLocalizedString("tx_desmos_delete_block_user", comment: "")
+                    
+                } else if (msgType.contains("MsgUnblockUser")) {
+                    result = NSLocalizedString("tx_desmos_delete_unblock_user", comment: "")
+                    
+                } else if (msgType.contains("MsgRequestDTagTransfer")) {
+                    
+                } else if (msgType.contains("MsgCancelDTagTransferRequest")) {
+                    
+                } else if (msgType.contains("MsgAcceptDTagTransferRequest")) {
+                    
+                } else if (msgType.contains("MsgRefuseDTagTransferRequest")) {
+                    
+                } else if (msgType.contains("MsgLinkChainAccount")) {
+                    result = NSLocalizedString("tx_desmos_link_chain_account", comment: "")
+                    
+                } else if (msgType.contains("MsgUnlinkChainAccount")) {
+                    
+                } else if (msgType.contains("MsgLinkApplication")) {
+                    
+                } else if (msgType.contains("MsgUnlinkApplication")) {
+                    
+                } else if (msgType.contains("MsgUnlinkChainAccount")) {
+                    
+                }
             }
             
             // wasm msg type
-            else if (msgType.contains("cosmwasm") && msgType.contains("MsgStoreCode")) {
-                result = NSLocalizedString("tx_cosmwasm_store_code", comment: "")
-            } else if (msgType.contains("cosmwasm") && msgType.contains("MsgInstantiateContract")) {
-                result = NSLocalizedString("tx_cosmwasm_instantiate", comment: "")
-            } else if (msgType.contains("cosmwasm") && msgType.contains("MsgExecuteContract")) {
-                result = NSLocalizedString("tx_cosmwasm_execontract", comment: "")
+            else if (msgType.contains("cosmwasm.")) {
+                if (msgType.contains("MsgStoreCode")) {
+                    result = NSLocalizedString("tx_cosmwasm_store_code", comment: "")
+                    
+                } else if (msgType.contains("MsgInstantiateContract")) {
+                    result = NSLocalizedString("tx_cosmwasm_instantiate", comment: "")
+                    
+                } else if (msgType.contains("MsgExecuteContract")) {
+                    result = NSLocalizedString("tx_cosmwasm_execontract", comment: "")
+                    
+                } else if (msgType.contains("MsgMigrateContract")) {
+                    
+                } else if (msgType.contains("MsgUpdateAdmin")) {
+                    
+                } else if (msgType.contains("MsgClearAdmin")) {
+                    
+                } else if (msgType.contains("PinCodesProposal")) {
+                    
+                } else if (msgType.contains("UnpinCodesProposal")) {
+                    
+                } else if (msgType.contains("StoreCodeProposal")) {
+                    
+                } else if (msgType.contains("InstantiateContractProposal")) {
+                    
+                } else if (msgType.contains("MigrateContractProposal")) {
+                    
+                } else if (msgType.contains("UpdateAdminProposal")) {
+                    
+                } else if (msgType.contains("ClearAdminProposal")) {
+                    
+                }
             }
             
             // kava msg type
-            else if (msgType.contains(KAVA_MSG_TYPE_POST_PRICE)) {
-                result =  NSLocalizedString("tx_kava_post_price", comment: "")
+            else if (msgType.contains("kava.") && msgType.contains("auction")) {
+                if (msgType.contains("MsgPlaceBid")) {
+                    result = NSLocalizedString("tx_kava_auction_bid", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains(KAVA_MSG_TYPE_CREATE_CDP)) {
-                result =  NSLocalizedString("tx_kava_create_cdp", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_DEPOSIT_CDP)) {
-                result =  NSLocalizedString("tx_kava_deposit_cdp", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_WITHDRAW_CDP)) {
-                result =  NSLocalizedString("tx_kava_withdraw_cdp", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_DRAWDEBT_CDP)) {
-                result =  NSLocalizedString("tx_kava_drawdebt_cdp", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_REPAYDEBT_CDP)) {
-                result =  NSLocalizedString("tx_kava_repaydebt_cdp", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_LIQUIDATE_CDP)) {
-                result =  NSLocalizedString("tx_kava_liquidate_cdp", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_HTLC_CREATE_SWAP)) {
-                result = NSLocalizedString("tx_kava_bep3_create", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_HTLC_CLAIM_SWAP)) {
-                result = NSLocalizedString("tx_kava_bep3_claim", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_HTLC_REFUND_SWAP)) {
-                result = NSLocalizedString("tx_kava_bep3_refund", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_DEPOSIT_HAVEST) || msgType.contains(KAVA_MSG_TYPE_DEPOSIT_HARD)) {
-                result = NSLocalizedString("tx_kava_hard_deposit", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_WITHDRAW_HAVEST) || msgType.contains(KAVA_MSG_TYPE_WITHDRAW_HARD)) {
-                result = NSLocalizedString("tx_kava_hard_withdraw", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_BORROW_HARD)) {
-                result = NSLocalizedString("tx_kava_hard_borrow", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_REPAY_HARD)) {
-                result = NSLocalizedString("tx_kava_hard_repay", comment: "")
-
-            } else if (msgType.contains(KAVA_MSG_TYPE_LIQUIDATE_HARD)) {
-                result = NSLocalizedString("tx_kava_hard_liquidate", comment: "")
+            } else if (msgType.contains("kava.") && msgType.contains("cdp")) {
+                if (msgType.contains("MsgCreateCDP")) {
+                    result =  NSLocalizedString("tx_kava_create_cdp", comment: "")
+                    
+                } else if (msgType.contains("MsgDeposit")) {
+                    result =  NSLocalizedString("tx_kava_deposit_cdp", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdraw")) {
+                    result =  NSLocalizedString("tx_kava_withdraw_cdp", comment: "")
+                    
+                } else if (msgType.contains("MsgDrawDebt")) {
+                    result =  NSLocalizedString("tx_kava_drawdebt_cdp", comment: "")
+                    
+                } else if (msgType.contains("MsgRepayDebt")) {
+                    result =  NSLocalizedString("tx_kava_repaydebt_cdp", comment: "")
+                    
+                } else if (msgType.contains("MsgLiquidate")) {
+                    result =  NSLocalizedString("tx_kava_liquidate_cdp", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains(KAVA_MSG_TYPE_CLAIM_HAVEST) || msgType.contains(KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE) || msgType.contains(KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV)) {
-                result = NSLocalizedString("tx_kava_hard_hard_incentive", comment: "")
+            } else if (msgType.contains("kava.") && msgType.contains("swap")) {
+                if (msgType.contains("MsgDeposit")) {
+                    result = NSLocalizedString("tx_kava_swap_deposit", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdraw")) {
+                    result = NSLocalizedString("tx_kava_swap_withdraw", comment: "")
+                    
+                } else if (msgType.contains("MsgSwapExactForTokens")) {
+                    result = NSLocalizedString("tx_kava_swap_token", comment: "")
+                    
+                } else if (msgType.contains("MsgSwapForExactTokens")) {
+                    result = NSLocalizedString("tx_kava_swap_token", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains(KAVA_MSG_TYPE_INCENTIVE_REWARD) || msgType.contains(KAVA_MSG_TYPE_USDX_MINT_INCENTIVE)) {
-                result = NSLocalizedString("tx_kava_hard_mint_incentive", comment: "")
+            } else if (msgType.contains("kava.") && msgType.contains("hard")) {
+                if (msgType.contains("MsgDeposit")) {
+                    result = NSLocalizedString("tx_kava_hard_deposit", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdraw")) {
+                    result = NSLocalizedString("tx_kava_hard_withdraw", comment: "")
+                    
+                } else if (msgType.contains("MsgBorrow")) {
+                    result = NSLocalizedString("tx_kava_hard_borrow", comment: "")
+                    
+                } else if (msgType.contains("MsgRepay")) {
+                    result = NSLocalizedString("tx_kava_hard_repay", comment: "")
+                    
+                } else if (msgType.contains("MsgLiquidate")) {
+                    result = NSLocalizedString("tx_kava_hard_liquidate", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains(KAVA_MSG_TYPE_DELEGATOR_INCENTIVE)) {
-                result = NSLocalizedString("tx_kava_hard_delegator_incentive", comment: "")
+            } else if (msgType.contains("kava.") && msgType.contains("savings")) {
+                if (msgType.contains("MsgDeposit")) {
+                    result = NSLocalizedString("tx_kava_save_deposit", comment: "")
+                    
+                } else if (msgType.contains("MsgWithdraw")) {
+                    result = NSLocalizedString("tx_kava_save_withdraw", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_INCENTIVE)) {
-                result = NSLocalizedString("tx_kava_hard_swap_incentive", comment: "")
+            } else if (msgType.contains("kava.") && msgType.contains("incentive")) {
+                if (msgType.contains("MsgClaimUSDXMintingReward")) {
+                    result = NSLocalizedString("tx_kava_hard_mint_incentive", comment: "")
+                    
+                } else if (msgType.contains("MsgClaimHardReward")) {
+                    result = NSLocalizedString("tx_kava_hard_hard_incentive", comment: "")
+                    
+                } else if (msgType.contains("MsgClaimDelegatorReward")) {
+                    result = NSLocalizedString("tx_kava_hard_delegator_incentive", comment: "")
+                    
+                } else if (msgType.contains("MsgClaimSwapReward")) {
+                    result = NSLocalizedString("tx_kava_hard_swap_incentive", comment: "")
+                    
+                } else if (msgType.contains("MsgClaimSavingsReward")) {
+                    result = NSLocalizedString("tx_kava_hard_save_incentive", comment: "")
+                    
+                }
                 
-            } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_TOKEN) || msgType.contains(KAVA_MSG_TYPE_SWAP_TOKEN2)) {
-                result = NSLocalizedString("tx_kava_swap_token", comment: "")
-                
-            } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_DEPOSIT)) {
-                result = NSLocalizedString("tx_kava_swap_deposit", comment: "")
-                
-            } else if (msgType.contains(KAVA_MSG_TYPE_SWAP_WITHDRAW)) {
-                result = NSLocalizedString("tx_kava_swap_withdraw", comment: "")
-            }
-            
-            //common type
-            else if (msgType.contains("MsgSubmitProposal")) {
-                result = NSLocalizedString("tx_submit_proposal", comment: "")
-                
-            } else if (msgType.contains("MsgVote")) {
-                result = NSLocalizedString("tx_vote", comment: "")
-                
-            } else if (msgType.contains("MsgDeposit")) {
-                result = NSLocalizedString("tx_deposit", comment: "")
-                
-            } else if (msgType.contains("MsgWithdrawValidatorCommission")) {
-                result = NSLocalizedString("tx_get_commission", comment: "")
+            } else if (msgType.contains("kava.") && msgType.contains("bep3")) {
+                if (msgType.contains("MsgCreateAtomicSwap")) {
+                    result = NSLocalizedString("tx_kava_bep3_create", comment: "")
+                    
+                } else if (msgType.contains("MsgCreateAtomicSwap")) {
+                    result = NSLocalizedString("tx_kava_bep3_claim", comment: "")
+                    
+                } else if (msgType.contains("MsgRefundAtomicSwap")) {
+                    result = NSLocalizedString("tx_kava_bep3_refund", comment: "")
+                    
+                }
                 
             }
             

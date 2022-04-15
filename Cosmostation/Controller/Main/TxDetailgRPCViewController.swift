@@ -17,7 +17,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet weak var errorCode: UILabel!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
-    var mIsGen: Bool = false
+    var mIsGen: Bool = true
     var mTxHash: String?
     var mBroadCaseResult: Cosmos_Tx_V1beta1_BroadcastTxResponse?
     var mFetchCnt = 10
@@ -129,8 +129,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
             } else {
                 mTxHash = mBroadCaseResult?.txResponse.txhash
             }
+            self.onFetchgRPCTx(mTxHash!)
+            
         }
-        self.onFetchgRPCTx(mTxHash!)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -156,15 +157,16 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (mTxRespose == nil || mTxRespose!.tx.body.messages.count <= 0) {
-            return 0
-        }
+        if (mTxRespose == nil || mTxRespose!.tx.body.messages.count <= 0) { return 0 }
         return mTxRespose!.tx.body.messages.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
-            return onBindTxCommon(tableView)
+            let cell:TxCommonCell? = tableView.dequeueReusableCell(withIdentifier:"TxCommonCell") as? TxCommonCell
+            cell?.onBind(chainType!, mTxRespose!)
+            return cell!
+            
         } else {
             let msg = mTxRespose!.tx.body.messages[indexPath.row - 1]
             if (msg.typeURL.contains(Cosmos_Bank_V1beta1_MsgSend.protoMessageName)) {
@@ -312,7 +314,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
 //                let cell = tableView.dequeueReusableCell(withIdentifier:"TxUnlockPeriodLockCell") as? TxCell
 //                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
 //                return cell!
-//                
+//
 //            }
             
             else if (msg.typeURL.contains(Tendermint_Liquidity_V1beta1_MsgCreatePool.protoMessageName)) {
@@ -519,28 +521,13 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             }
             
-            
-            
-            return onBindUnknown(tableView)
         }
+        let cell:TxUnknownCell? = tableView.dequeueReusableCell(withIdentifier:"TxUnknownCell") as? TxUnknownCell
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension;
-    }
-
-    
-    // bind tx and msg
-    func onBindTxCommon(_ tableView: UITableView) -> UITableViewCell {
-        let cell:TxCommonCell? = tableView.dequeueReusableCell(withIdentifier:"TxCommonCell") as? TxCommonCell
-        cell?.onBind(chainType!, mTxRespose!)
-        return cell!
-    }
-    
-    func onBindUnknown(_ tableView: UITableView) -> UITableViewCell  {
-        let cell:TxUnknownCell? = tableView.dequeueReusableCell(withIdentifier:"TxUnknownCell") as? TxUnknownCell
-        cell?.onBind(chainType!, mTxRespose!)
-        return cell!
     }
     
     
