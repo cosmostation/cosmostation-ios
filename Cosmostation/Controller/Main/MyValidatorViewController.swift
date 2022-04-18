@@ -188,7 +188,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         
         let mainDenom = WUtils.getMainDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_DELEGATE, 0)
-        if (BaseData.instance.getDelegatable_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
+        if (BaseData.instance.getDelegatable_gRPC(chainType, mainDenom).compare(feeAmount).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }
