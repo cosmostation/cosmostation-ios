@@ -957,6 +957,16 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = "Pool Asset"
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
+            
+        } else if (chainType == ChainType.CRESCENT_MAIN) {
+            cell?.tokenImg.image = UIImage(named: "tokenCrescentpool")
+            cell?.tokenSymbol.text = coin.denom.uppercased()
+            cell?.tokenSymbol.textColor = UIColor.white
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Pool Asset"
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 12, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 12, cell!.tokenValue.font)
+            
         }
     }
     
@@ -1088,6 +1098,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mUnKnown_gRPC.removeAll()
         
         self.mBalances_gRPC.forEach { balance_gRPC in
+            print("denom ", balance_gRPC.denom)
             if (WUtils.getMainDenom(chainType) == balance_gRPC.denom) {
                 mNative_gRPC.append(balance_gRPC)
                 
@@ -1099,8 +1110,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 if (ibcToken.auth == true) { mIbcAuthed_gRPC.append(balance_gRPC) }
                 else { mIbcUnknown_gRPC.append(balance_gRPC) }
                 
-            } else if (chainType == ChainType.OSMOSIS_MAIN && balance_gRPC.denom == OSMOSIS_ION_DENOM) {
-                mNative_gRPC.append(balance_gRPC)
+            } else if (chainType == ChainType.OSMOSIS_MAIN) {
+                if (balance_gRPC.denom == OSMOSIS_ION_DENOM) {
+                    mNative_gRPC.append(balance_gRPC)
+                } else if (balance_gRPC.isOsmosisAmm()) {
+                    mPoolToken_gRPC.append(balance_gRPC)
+                }
                 
             } else if (chainType == ChainType.EMONEY_MAIN) {
                 if (balance_gRPC.denom == EMONEY_EUR_DENOM || balance_gRPC.denom == EMONEY_CHF_DENOM || balance_gRPC.denom == EMONEY_DKK_DENOM ||
@@ -1108,10 +1123,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                     mNative_gRPC.append(balance_gRPC)
                 }
             
-            } else if (chainType == ChainType.OSMOSIS_MAIN && balance_gRPC.isOsmosisAmm()) {
-                mPoolToken_gRPC.append(balance_gRPC)
-                
-            } else if (chainType == ChainType.COSMOS_MAIN && balance_gRPC.isGravityAmm()) {
+            } else if (chainType == ChainType.COSMOS_MAIN && balance_gRPC.isPoolToken()) {
                 mPoolToken_gRPC.append(balance_gRPC)
                 
             } else if (chainType == ChainType.SIF_MAIN && balance_gRPC.denom.starts(with: "c")) {
@@ -1142,11 +1154,18 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
                 if (balance_gRPC.denom == CRESCENT_BCRE_DENOM) {
                     mNative_gRPC.append(balance_gRPC)
+                } else if (balance_gRPC.isPoolToken()) {
+                    mPoolToken_gRPC.append(balance_gRPC)
                 }
+                
             } else {
                 mUnKnown_gRPC.append(balance_gRPC)
             }
         }
+        print("mNative_gRPC ", mNative_gRPC.count)
+        print("mIbcAuthed_gRPC ", mIbcAuthed_gRPC.count)
+        print("mUnKnown_gRPC ", mUnKnown_gRPC.count)
+        
         
         mNative.removeAll()
         mEtc.removeAll()

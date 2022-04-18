@@ -386,12 +386,16 @@ public struct ApiHistoryNewCustom {
             } else if (msgType.contains("osmosis.") && msgType.contains("superfluid")) {
                 if (msgType.contains("MsgSuperfluidDelegate")) {
                     result = NSLocalizedString("tx_osmosis_super_fluid_delegate", comment: "")
+                    
                 } else if (msgType.contains("MsgSuperfluidUndelegate")) {
                     result = NSLocalizedString("tx_osmosis_super_fluid_undelegate", comment: "")
+                    
                 } else if (msgType.contains("MsgSuperfluidUnbondLock")) {
                     result = NSLocalizedString("tx_osmosis_super_fluid_unbondinglock", comment: "")
+                    
                 } else if (msgType.contains("MsgLockAndSuperfluidDelegate")) {
                     result = NSLocalizedString("tx_osmosis_super_fluid_lockanddelegate", comment: "")
+                    
                 }
             }
             

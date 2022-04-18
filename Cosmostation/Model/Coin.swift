@@ -57,8 +57,8 @@ public struct Coin: Codable {
         return Int(id) ?? 0
     }
     
-    func isGravityAmm() -> Bool {
-        if (denom.starts(with: "pool") && denom.count >= 68) {
+    func isPoolToken() -> Bool {
+        if (denom.starts(with: "pool")) {
             return true
         }
         return false
