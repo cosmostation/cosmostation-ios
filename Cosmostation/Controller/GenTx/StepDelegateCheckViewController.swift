@@ -37,16 +37,7 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
 
     @IBAction func onClickConfirm(_ sender: Any) {
         let popupVC = DelegateWarnPopup(nibName: "DelegateWarnPopup", bundle: nil)
-        if (chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.CRYPTO_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.CHIHUAHUA_MAIN) {
-            popupVC.warnImgType = 28
-        } else if (chainType! == ChainType.OSMOSIS_MAIN || chainType! == ChainType.BITCANA_MAIN || chainType! == ChainType.DESMOS_MAIN || chainType! == ChainType.STARGAZE_MAIN ||
-                   chainType! == ChainType.UMEE_MAIN || chainType! == ChainType.EVMOS_MAIN || chainType! == ChainType.CERBERUS_MAIN || chainType! == ChainType.CRESCENT_MAIN) {
-            popupVC.warnImgType = 14
-        } else if (chainType! == ChainType.AXELAR_MAIN) {
-            popupVC.warnImgType = 7
-        } else {
-            popupVC.warnImgType = 21
-        }
+        popupVC.warnImgType = BaseData.instance.mParam?.getUnbondingTime()
         let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
         cardPopup.resultDelegate = self
         cardPopup.show(onViewController: self)

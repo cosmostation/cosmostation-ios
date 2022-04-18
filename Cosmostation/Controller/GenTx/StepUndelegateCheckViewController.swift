@@ -64,16 +64,8 @@ class StepUndelegateCheckViewController: BaseViewController, PasswordViewDelegat
         feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
         targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
-        if (chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.CRYPTO_MAIN || chainType == ChainType.JUNO_MAIN || chainType == ChainType.CHIHUAHUA_MAIN) {
-            expectedDateLabel.text = WUtils.unbondingDateFromNow(28) + " (28days after)"
-        } else if (chainType == ChainType.OSMOSIS_MAIN || chainType == ChainType.BITCANA_MAIN || chainType == ChainType.DESMOS_MAIN || chainType == ChainType.STARGAZE_MAIN ||
-                   chainType == ChainType.UMEE_MAIN || chainType == ChainType.EVMOS_MAIN || chainType == ChainType.CERBERUS_MAIN || chainType == ChainType.CRESCENT_MAIN) {
-            expectedDateLabel.text = WUtils.unbondingDateFromNow(14) + " (14days after)"
-        } else if (chainType == ChainType.AXELAR_MAIN) {
-            expectedDateLabel.text = WUtils.unbondingDateFromNow(7) + " (7days after)"
-        } else {
-            expectedDateLabel.text = WUtils.unbondingDateFromNow(21) + " (21days after)"
-        }
+        let unbondingTime = BaseData.instance.mParam?.getUnbondingTime()
+        expectedDateLabel.text = WUtils.unbondingDateFromNow(unbondingTime!) + " (" + String(unbondingTime!) + "days after)"
     }
 
     func passwordResponse(result: Int) {

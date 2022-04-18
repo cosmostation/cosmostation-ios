@@ -12,7 +12,7 @@ class DelegateWarnPopup: BaseViewController, SBCardPopupContent {
     var popupViewController: SBCardPopupViewController?
     let allowsTapToDismissPopupCard =  true
     let allowsSwipeToDismissPopupCard =  false
-    var warnImgType:Int?
+    var warnImgType: UInt16?
     @IBOutlet weak var warnImg: UIImageView!
     
 

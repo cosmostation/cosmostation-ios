@@ -303,13 +303,13 @@ public class WUtils {
         return localFormatter.string(from: fullDate)
     }
     
-    static func unbondingDateFromNow(_ date:Int) -> String {
+    static func unbondingDateFromNow(_ date:UInt16) -> String {
         let localFormatter = DateFormatter()
         localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
         
         let afterDate = Calendar.current.date(
             byAdding: .day,
-            value: +date,
+            value: Int(+date),
             to: Date())
         return localFormatter.string(from: afterDate!)
     }
