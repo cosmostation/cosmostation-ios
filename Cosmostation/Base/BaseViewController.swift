@@ -546,6 +546,11 @@ extension BaseViewController {
         })
         crescentAction.setValue(UIImage(named: "chainCrescent")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let mantleAction = UIAlertAction(title: NSLocalizedString("chain_title_mantle", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.MANTLE_MAIN)
+        })
+        mantleAction.setValue(UIImage(named: "chainAssetmantle")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         let altheaTestAction = UIAlertAction(title: NSLocalizedString("chain_title_althea_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.ALTHEA_TEST)
@@ -562,6 +567,7 @@ extension BaseViewController {
         showAlert.addAction(cosmosAction)
         showAlert.addAction(irisAction)
         showAlert.addAction(akashAction)
+        showAlert.addAction(mantleAction)
         showAlert.addAction(axelarAction)
         showAlert.addAction(bandAction)
         showAlert.addAction(bnbAction)

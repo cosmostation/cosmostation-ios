@@ -203,6 +203,8 @@
 "send_guide_msg_omniflix" = "NFT 창작자들과 커뮤니티에게 탈중앙화된 미디어 플랫폼을 제공하는 블록체인 프로젝트.";
 "send_guide_title_crescent" = "CRESCENT";
 "send_guide_msg_crescent" = "$CRE 토큰과 인터-블록체인 통신기술을 활용한 텐더민트 기반 디파이 허브.";
+"send_guide_title_mantle" = "ASSET MANTLE";
+"send_guide_msg_mantle" = "Asset Mantle은 Persistence 생태계 내 NFT 창작자와 수집가 모두를 위해 구축된 NFT 마켓플레이스 및 플랫폼입니다.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -1019,6 +1021,7 @@ support@cosmostation.io";
 "chain_title_cerberus" = "Cerberus";
 "chain_title_omniflix" = "Omniflix";
 "chain_title_crescent" = "Crescent";
+"chain_title_mantle" = "Asset Mantle";
 "chain_title_test_cosmos" = "StarGate Testnet";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_althea_test" = "Althea Testnet";

@@ -383,6 +383,8 @@ class BaseNetWork {
             result = OMNIFLIX_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.CRESCENT_MAIN) {
             result = CRESCENT_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            result = MANTLE_API + "v1/account/new_txs/" + address
         }
         
         
@@ -478,6 +480,8 @@ class BaseNetWork {
             result = OMNIFLIX_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.CRESCENT_MAIN) {
             result = CRESCENT_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            result = MANTLE_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -641,6 +645,8 @@ class BaseNetWork {
         } else if (chain == ChainType.CRESCENT_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-crescent-app.cosmostation.io", port: 9090)
             
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-mantle-app.cosmostation.io", port: 9090)
         }
         
         

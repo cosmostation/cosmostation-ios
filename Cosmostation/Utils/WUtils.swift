@@ -1180,462 +1180,7 @@ public class WUtils {
     }
     
     static func showCoinDp(_ coin: Coin, _ denomLabel: UILabel?, _ amountLabel: UILabel, _ chainType: ChainType) {
-        if (isGRPC(chainType) && coin.isIbc()) {
-            if let ibcToken = BaseData.instance.getIbcToken(coin.getIbcHash()) {
-                if (ibcToken.auth == true) {
-                    denomLabel?.textColor = .white
-                    denomLabel?.text = ibcToken.display_denom!.uppercased()
-                    amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, ibcToken.decimal!, ibcToken.decimal!)
-                    return
-                    
-                } else {
-                    denomLabel?.textColor = .white
-                    denomLabel?.text = "Unknown"
-                    amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-                    return
-                }
-                
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = "Unknown"
-                amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-                return
-            }
-            
-        } else if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.COSMOS_TEST) {
-            if (coin.denom == COSMOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (coin.denom.starts(with: "pool")) {
-                denomLabel?.textColor = .white
-                if let poolInfo = BaseData.instance.getGravityPoolByDenom(coin.denom)  {
-                    denomLabel?.text = "GDEX-" + String(poolInfo.id)
-                } else {
-                    denomLabel?.text = "UnKnown"
-                }
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.IRIS_MAIN) {
-            if (coin.denom == IRIS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.BINANCE_MAIN) {
-            if (coin.denom == BNB_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 0, 8)
-            
-        } else if (chainType == ChainType.KAVA_MAIN) {
-            if (coin.denom == KAVA_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (coin.denom == KAVA_HARD_DENOM) {
-                denomLabel?.textColor = COLOR_HARD
-                denomLabel?.text = coin.denom.uppercased()
-            } else if (coin.denom  == KAVA_USDX_DENOM) {
-                denomLabel?.textColor = COLOR_USDX
-                denomLabel?.text = coin.denom.uppercased()
-            } else if (coin.denom  == KAVA_SWAP_DENOM) {
-                denomLabel?.textColor = COLOR_SWP
-                denomLabel?.text = coin.denom.uppercased()
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, getKavaCoinDecimal(coin.denom), getKavaCoinDecimal(coin.denom))
-            
-        } else if (chainType == ChainType.BAND_MAIN) {
-            if (coin.denom == BAND_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.SECRET_MAIN) {
-            if (coin.denom == SECRET_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.IOV_MAIN) {
-            if (coin.denom == IOV_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.CERTIK_MAIN) {
-            if (coin.denom == CERTIK_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.OKEX_MAIN) {
-            if (coin.denom == OKEX_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 0, 18)
-            
-        } else if (chainType == ChainType.AKASH_MAIN) {
-            if (coin.denom == AKASH_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.PERSIS_MAIN) {
-            if (coin.denom == PERSIS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.SENTINEL_MAIN) {
-            if (coin.denom == SENTINEL_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.FETCH_MAIN) {
-            if (coin.denom == FETCH_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
-            
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
-            if (coin.denom == CRYPTO_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 8, 8)
-            
-        } else if (chainType == ChainType.SIF_MAIN) {
-            let dpDecimal = WUtils.getSifCoinDecimal(coin.denom)
-            if (coin.denom == SIF_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (coin.denom.starts(with: "c")) {
-                denomLabel?.textColor = .white
-                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                    denomLabel?.text = bridgeTokenInfo.origin_symbol
-                } else {
-                    denomLabel?.text = coin.denom.substring(from: 1).uppercased()
-                }
-                
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, dpDecimal, dpDecimal)
-            
-        } else if (chainType == ChainType.KI_MAIN) {
-            if (coin.denom == KI_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.OSMOSIS_MAIN) {
-            if (coin.denom == OSMOSIS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-                amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            } else if (coin.denom == OSMOSIS_ION_DENOM) {
-                denomLabel?.textColor = COLOR_ION
-                denomLabel?.text = "ION"
-                amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            } else if (coin.isOsmosisAmm()) {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.isOsmosisAmmDpDenom()
-                amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-                amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            }
-            
-        } else if (chainType == ChainType.IRIS_TEST) {
-            if (coin.denom == IRIS_TEST_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.RIZON_MAIN) {
-            if (coin.denom == RIZON_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.MEDI_MAIN) {
-            if (coin.denom == MEDI_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.ALTHEA_TEST) {
-            if (coin.denom == ALTHEA_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.UMEE_MAIN) {
-            if (coin.denom == UMEE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.AXELAR_MAIN) {
-            if (coin.denom == AXELAR_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.EMONEY_MAIN) {
-            if (coin.denom == EMONEY_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (coin.denom.starts(with: "e")) {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.JUNO_MAIN) {
-            if (coin.denom == JUNO_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.REGEN_MAIN) {
-            if (coin.denom == REGNE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.BITCANA_MAIN) {
-            if (coin.denom == BITCANA_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
-            let dpDecimal = WUtils.getGBrdigeCoinDecimal(coin.denom)
-            if (coin.denom == GRAVITY_BRIDGE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (coin.denom.starts(with: "gravity0x")) {
-                denomLabel?.textColor = .white
-                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                    denomLabel?.text = bridgeTokenInfo.origin_symbol
-                } else {
-                    denomLabel?.text = coin.denom.uppercased()
-                }
-                
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, dpDecimal, dpDecimal)
-            
-        } else if (chainType == ChainType.STARGAZE_MAIN) {
-            if (coin.denom == STARGAZE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.COMDEX_MAIN) {
-            if (coin.denom == COMDEX_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.INJECTIVE_MAIN) {
-            let dpDecimal = WUtils.getInjectiveCoinDecimal(coin.denom)
-            if (coin.denom == INJECTIVE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (coin.denom.starts(with: "peggy0x")) {
-                denomLabel?.textColor = .white
-                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                    denomLabel?.text = bridgeTokenInfo.origin_symbol
-                } else {
-                    denomLabel?.text = coin.denom.uppercased()
-                }
-                
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, dpDecimal, dpDecimal)
-            
-        } else if (chainType == ChainType.BITSONG_MAIN) {
-            if (coin.denom == BITSONG_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.DESMOS_MAIN) {
-            if (coin.denom == DESMOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.LUM_MAIN) {
-            if (coin.denom == LUM_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
-            if (coin.denom == CHIHUAHUA_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.KONSTELLATION_MAIN) {
-            if (coin.denom == KONSTELLATION_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.EVMOS_MAIN) {
-            if (coin.denom == EVMOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
-            
-        } else if (chainType == ChainType.PROVENANCE_MAIN) {
-            if (coin.denom == PROVENANCE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 9, 9)
-            
-        } else if (chainType == ChainType.CUDOS_MAIN) {
-            if (coin.denom == CUDOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 18, 18)
-            
-        } else if (chainType == ChainType.CERBERUS_MAIN) {
-            if (coin.denom == CERBERUS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.OMNIFLIX_MAIN) {
-            if (coin.denom == OMNIFLIX_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
-            if (coin.denom == CRESCENT_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = .white
-                denomLabel?.text = coin.denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 6, 6)
-            
-        }
+        return showCoinDp(coin.denom, coin.amount, denomLabel, amountLabel, chainType)
     }
     
     static func showCoinDp(_ denom:String, _ amount:String, _ denomLabel:UILabel?, _ amountLabel:UILabel, _ chainType:ChainType) {
@@ -2091,6 +1636,15 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
+        } else if (chainType == ChainType.MANTLE_MAIN) {
+            if (denom == MANTLE_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            
         }
             
     }
@@ -2217,6 +1771,8 @@ public class WUtils {
             return COLOR_OMNIFLIX
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             return COLOR_CRESCENT
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return COLOR_MANTLE
         }
         return COLOR_DARK_GRAY
     }
@@ -2304,6 +1860,8 @@ public class WUtils {
             return COLOR_OMNIFLIX_DARK
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             return COLOR_CRESCENT_DARK
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return COLOR_MANTLE_DARK
         }
         return COLOR_DARK_GRAY
     }
@@ -2391,6 +1949,8 @@ public class WUtils {
             return TRANS_BG_COLOR_OMNIFLIX
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             return TRANS_BG_COLOR_CRESCENT
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return TRANS_BG_COLOR_MANTLE
         }
         return COLOR_BG_GRAY
     }
@@ -2482,6 +2042,8 @@ public class WUtils {
             return "FLIX"
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST ) {
             return "CRE"
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return "MANTLE"
         }
         return ""
     }
@@ -2569,6 +2131,8 @@ public class WUtils {
             return OMNIFLIX_MAIN_DENOM
         } else if (chain == ChainType.CRESCENT_MAIN) {
             return CRESCENT_MAIN_DENOM
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return MANTLE_MAIN_DENOM
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -2778,6 +2342,9 @@ public class WUtils {
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             label?.text = "CRE"
             label?.textColor = COLOR_CRESCENT
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            label?.text = "MANTLE"
+            label?.textColor = COLOR_MANTLE
         }
     }
     
@@ -2864,6 +2431,8 @@ public class WUtils {
             return ChainType.OMNIFLIX_MAIN
         } else if (chainS == CHAIN_CRESENT_S) {
             return ChainType.CRESCENT_MAIN
+        } else if (chainS == CHAIN_MANTLE_S) {
+            return ChainType.MANTLE_MAIN
         }
         
         else if (chainS == CHAIN_COSMOS_TEST_S) {
@@ -2961,6 +2530,8 @@ public class WUtils {
             return CHAIN_OMNIFLIX_S
         } else if (chain == ChainType.CRESCENT_MAIN) {
             return CHAIN_CRESENT_S
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return CHAIN_MANTLE_S
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4308,6 +3879,8 @@ public class WUtils {
             return OMNIFLIX_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             return CRESCENT_VAL_URL + opAddress + ".png";
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return MANTLE_VAL_URL + opAddress + ".png";
         }
         return ""
     }
@@ -4435,6 +4008,9 @@ public class WUtils {
             
         } else if (chain == ChainType.CRESCENT_MAIN) {
             return EXPLORER_CRESCENT + "txs/" + hash
+            
+        }else if (chain == ChainType.MANTLE_MAIN) {
+            return EXPLORER_MANTLE + "txs/" + hash
             
         }
         
@@ -4579,6 +4155,9 @@ public class WUtils {
         } else if (chain == ChainType.CRESCENT_MAIN) {
             return EXPLORER_CRESCENT + "account/" + address
             
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return EXPLORER_MANTLE + "account/" + address
+            
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4714,6 +4293,9 @@ public class WUtils {
             
         } else if (chain == ChainType.CRESCENT_MAIN) {
             return EXPLORER_CRESCENT + "proposals/" + proposalId
+            
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return EXPLORER_MANTLE + "proposals/" + proposalId
             
         }
         
@@ -4857,6 +4439,9 @@ public class WUtils {
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             return UIImage(named: "tokenCrescent")
         
+        } else if (chain == ChainType.MANTLE_MAIN) {
+            return UIImage(named: "tokenAssetmantle")
+        
         }
         return UIImage(named: "tokenIc")
         
@@ -4904,6 +4489,7 @@ public class WUtils {
         else if (chain == ChainType.CERBERUS_MAIN) { return UIImage(named: "chainCerberus") }
         else if (chain == ChainType.OMNIFLIX_MAIN) { return UIImage(named: "chainOmniflix") }
         else if (chain == ChainType.CRESCENT_MAIN) { return UIImage(named: "chainCrescent") }
+        else if (chain == ChainType.MANTLE_MAIN) { return UIImage(named: "chainAssetmantle") }
 
         
         else if (chain == ChainType.COSMOS_TEST) { return UIImage(named: "cosmosTestChainImg") }
@@ -4952,6 +4538,7 @@ public class WUtils {
         else if (chain == ChainType.CERBERUS_MAIN) { return "cerberus" }
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "flix" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "crescent" }
+        else if (chain == ChainType.MANTLE_MAIN) { return "asset-mantle" }
         
         else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
         else if (chain == ChainType.OKEX_MAIN) { return "okex" }
@@ -5004,6 +4591,7 @@ public class WUtils {
         else if (chain == ChainType.CERBERUS_MAIN) { return "(Cerberus Mainnet)" }
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "(Omniflix Mainnet)" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "(Crescent Mainnet)" }
+        else if (chain == ChainType.MANTLE_MAIN) { return "(Asset-Mantle Mainnet)" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "(StarGate Testnet)" }
         else if (chain == ChainType.IRIS_TEST) { return "(Bifrost Testnet)" }
@@ -5055,6 +4643,7 @@ public class WUtils {
         else if (chain == ChainType.CERBERUS_MAIN) { return "CERBERUS" }
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "OMNIFLIX" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "CRESCENT" }
+        else if (chain == ChainType.MANTLE_MAIN) { return "ASSET-MANTLE" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "STARGATE" }
         else if (chain == ChainType.IRIS_TEST) { return "BIFROST" }
@@ -5103,6 +4692,7 @@ public class WUtils {
         else if (chain == ChainType.CERBERUS_MAIN) { return RELAYER_IMG_CERBERUS }
         else if (chain == ChainType.OMNIFLIX_MAIN) { return RELAYER_IMG_OMNIFLIX }
         else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) { return RELAYER_IMG_CRESCENT }
+        else if (chain == ChainType.MANTLE_MAIN) { return RELAYER_IMG_MANTLE }
         return ""
     }
     
@@ -5185,6 +4775,8 @@ public class WUtils {
             return ChainType.OMNIFLIX_MAIN
         } else if (chainId?.contains("crescent-") == true) {
             return ChainType.CRESCENT_MAIN
+        } else if (chainId?.contains("mantle-") == true) {
+            return ChainType.MANTLE_MAIN
         }
         
         else if (chainId?.contains("mooncat-") == true) {
@@ -5242,6 +4834,7 @@ public class WUtils {
         else if (address?.starts(with: "cerberus1") == true && chain == ChainType.CERBERUS_MAIN) { return true }
         else if (address?.starts(with: "omniflix1") == true && chain == ChainType.OMNIFLIX_MAIN) { return true }
         else if (address?.starts(with: "cre1") == true && chain == ChainType.CRESCENT_MAIN) { return true }
+        else if (address?.starts(with: "mantle") == true && chain == ChainType.MANTLE_MAIN) { return true }
         return false
     }
     
@@ -5295,6 +4888,7 @@ public class WUtils {
         else if (address?.starts(with: "cerberus1") == true) { return [ChainType.CERBERUS_MAIN] }
         else if (address?.starts(with: "omniflix1") == true) { return [ChainType.OMNIFLIX_MAIN] }
         else if (address?.starts(with: "cre1") == true) { return [ChainType.CRESCENT_MAIN] }
+        else if (address?.starts(with: "mantle1") == true) { return [ChainType.MANTLE_MAIN] }
         
         return nil
     }

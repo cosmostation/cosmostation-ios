@@ -954,6 +954,8 @@
 		048C836D27BF573D00270528 /* provenance_metadata_v1_p8e_p8e.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C834727BF573D00270528 /* provenance_metadata_v1_p8e_p8e.pb.swift */; };
 		048C837027BF7F7800270528 /* WalletEvmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C836E27BF7F7800270528 /* WalletEvmosCell.swift */; };
 		048C837127BF7F7800270528 /* WalletEvmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048C836F27BF7F7800270528 /* WalletEvmosCell.xib */; };
+		048DBCDF280D70460007275E /* WalletMantleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DBCDD280D70460007275E /* WalletMantleCell.swift */; };
+		048DBCE0280D70460007275E /* WalletMantleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DBCDE280D70460007275E /* WalletMantleCell.xib */; };
 		04983C97278B046100F913A3 /* LinkChainAccount0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C95278B046100F913A3 /* LinkChainAccount0ViewController.swift */; };
 		04983C98278B046100F913A3 /* LinkChainAccount0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983C96278B046100F913A3 /* LinkChainAccount0ViewController.xib */; };
 		04983C9B278B046D00F913A3 /* LinkChainAccount3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C99278B046D00F913A3 /* LinkChainAccount3ViewController.swift */; };
@@ -2896,6 +2898,8 @@
 		048C834727BF573D00270528 /* provenance_metadata_v1_p8e_p8e.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = provenance_metadata_v1_p8e_p8e.pb.swift; sourceTree = "<group>"; };
 		048C836E27BF7F7800270528 /* WalletEvmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletEvmosCell.swift; sourceTree = "<group>"; };
 		048C836F27BF7F7800270528 /* WalletEvmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletEvmosCell.xib; sourceTree = "<group>"; };
+		048DBCDD280D70460007275E /* WalletMantleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMantleCell.swift; sourceTree = "<group>"; };
+		048DBCDE280D70460007275E /* WalletMantleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletMantleCell.xib; sourceTree = "<group>"; };
 		04983C95278B046100F913A3 /* LinkChainAccount0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkChainAccount0ViewController.swift; sourceTree = "<group>"; };
 		04983C96278B046100F913A3 /* LinkChainAccount0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkChainAccount0ViewController.xib; sourceTree = "<group>"; };
 		04983C99278B046D00F913A3 /* LinkChainAccount3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkChainAccount3ViewController.swift; sourceTree = "<group>"; };
@@ -5306,6 +5310,8 @@
 				0444D41327E320D200819B21 /* WalletOmniCell.xib */,
 				04D3392127E8803000E82AA7 /* WalletCrescentCell.swift */,
 				04D3392227E8803000E82AA7 /* WalletCrescentCell.xib */,
+				048DBCDD280D70460007275E /* WalletMantleCell.swift */,
+				048DBCDE280D70460007275E /* WalletMantleCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
@@ -6694,6 +6700,7 @@
 				E103DAAA2281274A006C2146 /* ValidatorDetailHistoryHeader.xib in Resources */,
 				28F5534A2641790200590056 /* WalletKiCell.xib in Resources */,
 				289652622624715E0006FC2E /* WalletFetchCell.xib in Resources */,
+				048DBCE0280D70460007275E /* WalletMantleCell.xib in Resources */,
 				2830A0A527A6AFB500CE9D1D /* SendContract4ViewController.xib in Resources */,
 				E17748FA22842689003D8CD1 /* AllValidatorCell.xib in Resources */,
 				28BB2A8D2533DA1C00CFF097 /* DomainCell.xib in Resources */,
@@ -7180,6 +7187,7 @@
 				040FA9AA275F55C300229F6F /* panacea_token_v2_query.grpc.swift in Sources */,
 				040FA998275F55C300229F6F /* iscn_store.pb.swift in Sources */,
 				288243E026E0E74D000B6C37 /* GDexManager.swift in Sources */,
+				048DBCDF280D70460007275E /* WalletMantleCell.swift in Sources */,
 				04B1BE6727A3BD1B00B1236A /* axelar_evm_v1beta1_service.pb.swift in Sources */,
 				040FAAA9275F55C400229F6F /* sentinel_node_v1_msg.pb.swift in Sources */,
 				040FA7CF275F55C200229F6F /* iris_mod_htlc_htlc.pb.swift in Sources */,

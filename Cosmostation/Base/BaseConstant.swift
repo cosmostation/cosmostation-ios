@@ -131,6 +131,8 @@ let OMNIFLIX_API                        = "https://api-omniflix.cosmostation.io/
 let CRESCENT_API                        = "https://api-crescent.cosmostation.io/";
 let CRESCENT_TEST_API                   = "https://api-office.cosmostation.io/mooncat-1-1/";
 
+let MANTLE_API                          = "https://api-mantle.cosmostation.io/";
+
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
@@ -182,6 +184,7 @@ let CUDOS_VAL_URL                       = "https://raw.githubusercontent.com/cos
 let CERBERUS_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/cerberus/";
 let OMNIFLIX_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/omniflix/";
 let CRESCENT_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/crescent/";
+let MANTLE_VAL_URL                      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/asset-mantle/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -232,6 +235,7 @@ let RELAYER_IMG_CUDOS                   = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_CERBERUS                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cerberus-unknown.png"
 let RELAYER_IMG_OMNIFLIX                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-omniflix-unknown.png"
 let RELAYER_IMG_CRESCENT                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/crescent/relay-crescent-unknown.png"
+let RELAYER_IMG_MANTLE                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/asset-mantle/relay-crescent-unknown.png"
 
 
 
@@ -1040,6 +1044,11 @@ let COLOR_CRESCENT                          = UIColor.init(hexString: "ffc780")
 let COLOR_CRESCENT_DARK                     = UIColor.init(hexString: "452318")
 let COLOR_BCRE                              = UIColor.init(hexString: "ac8a5e")
 
+let TRANS_BG_COLOR_MANTLE                   = UIColor.init(hexString: "f3b519", alpha: 0.15)
+let TRANS_BG_COLOR_MANTLE2                  = UIColor.init(hexString: "f3b519", alpha: 0.4)
+let COLOR_MANTLE                            = UIColor.init(hexString: "f3b519")
+let COLOR_MANTLE_DARK                       = UIColor.init(hexString: "a48e59")
+
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
 let COLOR_CDP_SAFE                          = UIColor.init(hexString: "40F683")
@@ -1093,6 +1102,7 @@ public enum ChainType: String {
     case CERBERUS_MAIN
     case OMNIFLIX_MAIN
     case CRESCENT_MAIN
+    case MANTLE_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1105,6 +1115,7 @@ public enum ChainType: String {
         result.append(IRIS_MAIN)
         result.append(AKASH_MAIN)
 //        result.append(ALTHEA_MAIN)
+        result.append(MANTLE_MAIN)
         result.append(AXELAR_MAIN)
         result.append(BAND_MAIN)
         result.append(BINANCE_MAIN)
@@ -1252,6 +1263,7 @@ let CHAIN_CUDOS_S = "SUPPORT_CHAIN_CUDOS"
 let CHAIN_CERBERUS_S = "SUPPORT_CHAIN_CERBERUS"
 let CHAIN_OMNIFLIX_S = "SUPPORT_CHAIN_OMNIFLIX"
 let CHAIN_CRESENT_S = "SUPPORT_CHAIN_CRESENT"
+let CHAIN_MANTLE_S = "SUPPORT_CHAIN_MANTLE"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1300,6 +1312,7 @@ let CUDOS_MAIN_DENOM = "acudos"
 let CERBERUS_MAIN_DENOM = "ucrbrus"
 let OMNIFLIX_MAIN_DENOM = "uflix"
 let CRESCENT_MAIN_DENOM = "ucre"
+let MANTLE_MAIN_DENOM = "umntl"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1401,6 +1414,7 @@ let EXPLORER_CUDOS          = "https://www.mintscan.io/cudos/";
 let EXPLORER_CERBERUS       = "https://www.mintscan.io/cerberus/";
 let EXPLORER_OMNIFLIX       = "https://www.mintscan.io/omniflix/";
 let EXPLORER_CRESCENT       = "https://www.mintscan.io/crescent/";
+let EXPLORER_MANTLE         = "https://www.mintscan.io/asset-mantle/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
