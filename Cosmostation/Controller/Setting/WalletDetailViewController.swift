@@ -542,6 +542,11 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             return
         }
         
+        if (chainType! == ChainType.FETCH_MAIN) {
+            self.onShowToast("Disabled")
+            return
+        }
+        
 //        let mainDenom = WUtils.getMainDenom(chainType)
 //        if (WUtils.isGRPC(chainType!)) {
 //            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_WITHDRAW_MIDIFY, 0)
