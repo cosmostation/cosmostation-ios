@@ -923,6 +923,10 @@ support@cosmostation.io";
 "tx_osmosis_begin_unlucking_all" = "Begin Unlocking All";
 "tx_osmosis_preriodlock_unlock" = "Claim Unlocked Token";
 "tx_osmosis_token_unlock" = "Unlock Tokens";
+"tx_osmosis_super_fluid_delegate" = "SuperFluid\nStaking";
+"tx_osmosis_super_fluid_undelegate" = "SuperFluid\nUnstaking";
+"tx_osmosis_super_fluid_unbondinglock" = "SuperFluid\nUnbonding Lock";
+"tx_osmosis_super_fluid_lockanddelegate" = "SuperFluid\nLock & Staking";
 
 "tx_rizon_event_horizon" = "Recieve Swap Token";
 

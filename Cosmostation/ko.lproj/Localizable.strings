@@ -922,6 +922,10 @@ support@cosmostation.io";
 "tx_osmosis_begin_unlucking" = "토큰 풀기 시작";
 "tx_osmosis_begin_unlucking_all" = "모든 토큰 풀기 시작";
 "tx_osmosis_preriodlock_unlock" = "풀린 토큰 받기";
+"tx_osmosis_super_fluid_delegate" = "수퍼플로이드\n스테이킹";
+"tx_osmosis_super_fluid_undelegate" = "수퍼플로이드\n언스테이킹";
+"tx_osmosis_super_fluid_unbondinglock" = "수퍼플로이드\n언본딩 락";
+"tx_osmosis_super_fluid_lockanddelegate" = "수퍼플로이드\n락 & 스테이킹";
 
 "tx_rizon_event_horizon" = "스왑 토큰 받기";
 
