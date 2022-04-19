@@ -928,11 +928,6 @@ final class BaseData : NSObject{
             do { try self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_CUSTOM_PATH, defaultValue: 0)) }
             catch { print(error) }
             
-//            do { try self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_PUBLIC_KEY, defaultValue: "")) }
-//            catch { print(error) }
-//
-//            do { try self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_FULL_HD_PATH, defaultValue: "")) }
-//            catch { print(error) }
             
             let createBalanceTable = DB_BALANCE.create(ifNotExists: true) { (table) in
                 table.column(DB_BALANCE_ID, primaryKey: true)
