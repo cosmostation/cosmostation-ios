@@ -646,7 +646,7 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-crescent-app.cosmostation.io", port: 9090)
             
         } else if (chain == ChainType.MANTLE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-mantle-app.cosmostation.io", port: 9090)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-asset-mantle-app.cosmostation.io", port: 9090)
         }
         
         

@@ -131,7 +131,7 @@ let OMNIFLIX_API                        = "https://api-omniflix.cosmostation.io/
 let CRESCENT_API                        = "https://api-crescent.cosmostation.io/";
 let CRESCENT_TEST_API                   = "https://api-office.cosmostation.io/mooncat-1-1/";
 
-let MANTLE_API                          = "https://api-mantle.cosmostation.io/";
+let MANTLE_API                          = "https://api-asset-mantle.cosmostation.io/";
 
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
@@ -656,6 +656,10 @@ let GAS_FEE_RATE_AVERAGE_OMNIFLIX           = "0.001"
 let GAS_FEE_RATE_TINY_CRESCENT              = "0.000"
 let GAS_FEE_RATE_LOW_CRESCENT               = "0.000"
 let GAS_FEE_RATE_AVERAGE_CRESCENT           = "0.000"
+
+let GAS_FEE_RATE_TINY_MANTLE                = "0.000"
+let GAS_FEE_RATE_LOW_MANTLE                 = "0.000"
+let GAS_FEE_RATE_AVERAGE_MANTLE             = "0.000"
 
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"

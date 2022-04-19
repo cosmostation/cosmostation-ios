@@ -868,6 +868,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBCre.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CRESCENT_BCRE_DENOM, allBCre, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == MANTLE_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenAssetmantle")
+            cell?.tokenSymbol.text = "MANTLE"
+            cell?.tokenSymbol.textColor = COLOR_MANTLE
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Asset-Mantle Staking Coin"
+            
+            let allMantle = WUtils.getAllMainAsset(MANTLE_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allMantle.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(MANTLE_MAIN_DENOM, allMantle, 6, cell!.tokenValue.font)
+            
         }
         
         
