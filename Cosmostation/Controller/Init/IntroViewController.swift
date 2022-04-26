@@ -45,38 +45,44 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
         super.viewDidAppear(animated)
         //update okex chain
         BaseData.instance.upgradeAaccountAddressforPath()
-        onCheckPassWordState()
-////        //check for keyway udpate
-//        if (BaseData.instance.onCheckKeyWayUpdated() == false) {
-//            onCheckPassWordState()
-//        } else {
-//            onKeyWayUpdate()
-//        }
+        
+//        print("getDBVersion ", BaseData.instance.getDBVersion())
+        if (BaseData.instance.getDBVersion() < DB_VERSION) {
+            onShowDBUpdate2()
+        } else {
+            onCheckPassWordState()
+        }
     }
     
-//    func onKeyWayUpdate() {
-//        DispatchQueue.main.async(execute: {
-//            let dbAlert = UIAlertController(title: "DB Upgrading", message: " ", preferredStyle: .alert)
-//            self.present(dbAlert, animated: true, completion: nil)
-//            
-//            let allAccounts = BaseData.instance.selectAllAccounts()
-//            var progress = 0
-//            dbAlert.message = "\nplease wait\n\n1/" + String(allAccounts.count)
-//            DispatchQueue.global(qos: .background).async(execute: {
-//                for account in allAccounts {
-//                    BaseData.instance.upgradeKeyWay2(account)
-//                    progress += 1
-//                    DispatchQueue.main.async(flags: .barrier, execute: {
-//                        dbAlert.message = "\nplease wait\n\n" + String(progress) + "/" + String(allAccounts.count)
-//                    })
-//                }
-//                DispatchQueue.main.async(execute: {
-//                    dbAlert.dismiss(animated: true, completion: nil);
-//                    self.onCheckPassWordState()
-//                })
-//            })
-//        })
-//    }
+    func onShowDBUpdate2() {
+        DispatchQueue.main.async(execute: {
+            let dbAlert = UIAlertController(title: "DB Upgrading", message: "\nPlease wait for upgrade", preferredStyle: .alert)
+            self.present(dbAlert, animated: true, completion: nil)
+            
+            DispatchQueue.global(qos: .background).async(execute: {
+                BaseData.instance.upgradeMnemonicDB()
+                
+                let allAccounts = BaseData.instance.selectAllAccounts().filter { $0.account_from_mnemonic == true }
+                var progress = 0
+                for tempAccount in allAccounts {
+                    BaseData.instance.setPkeyUpdate(tempAccount)
+                    progress += 1
+                    DispatchQueue.main.async(flags: .barrier, execute: {
+                        dbAlert.message = "\nPlease wait for upgrade\n\n" +
+                        tempAccount.account_address + "\n" +
+                        String(progress) + "/" + String(allAccounts.count)
+                    })
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    BaseData.instance.setDBVersion(DB_VERSION)
+                    dbAlert.dismiss(animated: true) {
+                        self.onCheckPassWordState()
+                    }
+                })
+            })
+        })
+    }
     
     func onCheckPassWordState() {
         if (BaseData.instance.getUsingAppLock() == true && BaseData.instance.hasPassword() && !lockPasses) {

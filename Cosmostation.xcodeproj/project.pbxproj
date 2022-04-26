@@ -956,6 +956,7 @@
 		048C837127BF7F7800270528 /* WalletEvmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048C836F27BF7F7800270528 /* WalletEvmosCell.xib */; };
 		048DBCDF280D70460007275E /* WalletMantleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DBCDD280D70460007275E /* WalletMantleCell.swift */; };
 		048DBCE0280D70460007275E /* WalletMantleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DBCDE280D70460007275E /* WalletMantleCell.xib */; };
+		048DBCE2280EC5E90007275E /* MWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DBCE1280EC5E90007275E /* MWords.swift */; };
 		04983C97278B046100F913A3 /* LinkChainAccount0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C95278B046100F913A3 /* LinkChainAccount0ViewController.swift */; };
 		04983C98278B046100F913A3 /* LinkChainAccount0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983C96278B046100F913A3 /* LinkChainAccount0ViewController.xib */; };
 		04983C9B278B046D00F913A3 /* LinkChainAccount3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983C99278B046D00F913A3 /* LinkChainAccount3ViewController.swift */; };
@@ -2900,6 +2901,7 @@
 		048C836F27BF7F7800270528 /* WalletEvmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletEvmosCell.xib; sourceTree = "<group>"; };
 		048DBCDD280D70460007275E /* WalletMantleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMantleCell.swift; sourceTree = "<group>"; };
 		048DBCDE280D70460007275E /* WalletMantleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletMantleCell.xib; sourceTree = "<group>"; };
+		048DBCE1280EC5E90007275E /* MWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MWords.swift; sourceTree = "<group>"; };
 		04983C95278B046100F913A3 /* LinkChainAccount0ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkChainAccount0ViewController.swift; sourceTree = "<group>"; };
 		04983C96278B046100F913A3 /* LinkChainAccount0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkChainAccount0ViewController.xib; sourceTree = "<group>"; };
 		04983C99278B046D00F913A3 /* LinkChainAccount3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkChainAccount3ViewController.swift; sourceTree = "<group>"; };
@@ -6204,6 +6206,7 @@
 		E1A82DCF224220810097CAEE /* Dao */ = {
 			isa = PBXGroup;
 			children = (
+				048DBCE1280EC5E90007275E /* MWords.swift */,
 				E1A82DD0224220910097CAEE /* Account.swift */,
 				E1A82DD2224222E00097CAEE /* Password.swift */,
 				E1A82DD4224223250097CAEE /* Balance.swift */,
@@ -8093,6 +8096,7 @@
 				040FA7F6275F55C200229F6F /* sentinel_node_v1_params.pb.swift in Sources */,
 				040FA910275F55C300229F6F /* regen_data_v1alpha2_query.pb.swift in Sources */,
 				040FAAC5275F55C400229F6F /* secret_registration_v1beta1_remote_attestation_types.pb.swift in Sources */,
+				048DBCE2280EC5E90007275E /* MWords.swift in Sources */,
 				040FAA33275F55C400229F6F /* desmos_posts_v1beta1_query.pb.swift in Sources */,
 				040FA9D7275F55C300229F6F /* sentinel_deposit_v1_deposit.pb.swift in Sources */,
 				E151B632224533DC0026B8C0 /* ClaimRewardAllCell.swift in Sources */,

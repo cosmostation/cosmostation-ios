@@ -29,6 +29,7 @@ let KEY_USER_SORTED_CHAINS              = "KEY_USER_SORTED_CHAINS"
 let KEY_USER_EXPENDED_CHAINS            = "KEY_USER_EXPENDED_CHAINS"
 let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
+let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 
 let STATION_URL                         = "https://api-utility.cosmostation.io/";
 let STATION_TEST_URL                    = "https://api-office.cosmostation.io/utility/";
@@ -239,6 +240,8 @@ let RELAYER_IMG_MANTLE                  = "https://raw.githubusercontent.com/cos
 
 
 
+let DB_VERSION                      = 2
+
 //DB for Account
 let DB_ACCOUNT = Table("accnt")
 let DB_ACCOUNT_ID                   = Expression<Int64>("id")
@@ -266,6 +269,8 @@ let DB_ACCOUNT_SORT_ORDER           = Expression<Int64>("sortOrder")
 let DB_ACCOUNT_PUSHALARM            = Expression<Bool>("pushAlarm")
 let DB_ACCOUNT_NEW_BIP              = Expression<Bool>("newBip")            //using alternative ket gen path or type(OKex)
 let DB_ACCOUNT_CUSTOM_PATH          = Expression<Int64>("customPath")
+
+let DB_ACCOUNT_MNEMONIC_ID          = Expression<Int64>("mnemonic_id")
 
 ////DB for Password
 //let DB_PASSWORD = Table("passwd")
@@ -305,7 +310,13 @@ let DB_UNBONDING_INITIAL_BALANCE    = Expression<String>("initialBalance")
 let DB_UNBONDING_BALANCE            = Expression<String>("balance")
 let DB_UNBONDING_FETCH_TIME         = Expression<Int64>("fetchTime")
 
-
+//DB for Mnemonic
+let DB_MNEMONIC = Table("mnemonic")
+let DB_MNEMONIC_ID                  = Expression<Int64>("id")
+let DB_MNEMONIC_UUID                = Expression<String>("uuid")
+let DB_MNEMONIC_NICKNAME            = Expression<String>("nickName")
+let DB_MNEMONIC_CNT                 = Expression<Int64>("wordsCnt")
+let DB_MNEMONIC_FAVO                = Expression<Bool>("isFavo")
 
 
 
