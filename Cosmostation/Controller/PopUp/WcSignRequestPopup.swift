@@ -28,17 +28,17 @@ class WcSignRequestPopup: BaseViewController, SBCardPopupContent {
 
     @IBAction func onClickCancel(_ sender: UIButton) {
         popupViewController?.close()
-        popupViewController?.resultDelegate?.SBCardPopupResponse(type: -1, result: -1)
+        popupViewController?.resultDelegate?.SBCardPopupResponse(type: wcType!.rawValue, result: -1)
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
         popupViewController?.close()
-        popupViewController?.resultDelegate?.SBCardPopupResponse(type: wcType!.rawValue, result: -1)
+        popupViewController?.resultDelegate?.SBCardPopupResponse(type: wcType!.rawValue, result: 0)
     }
     
 }
 
 public enum WcRequestType: Int {
     case TRUST_TYPE = 1
-    case KEPLR_TYPE = 2
+    case COSMOS_TYPE = 2
 }

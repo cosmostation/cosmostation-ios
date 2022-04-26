@@ -221,6 +221,9 @@
 "mintscan_explorer" = "Explorer";
 "binanace_explorer" = "Binance Explorer";
 "disconnected" = "Disconnected";
+"wc_peer_name" = "Cosmostation";
+"wc_peer_desc" = "Cosmostation Wallet iOS";
+"wc_peer_url" = "https://cosmostation.io";
 "wc_alert_title" = "Wallet Connect";
 "wc_alert_msg" = "Would you like to link your wallet to Binance Dex Exchange?";
 "wc_request_sign_title" = "Request Transaction Sign";

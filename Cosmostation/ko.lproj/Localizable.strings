@@ -218,6 +218,9 @@
 "mintscan_explorer" = "익스플로러";
 "binanace_explorer" = "바이낸스 익스플로러";
 "disconnected" = "연결 해제됨";
+"wc_peer_name" = "Cosmostation";
+"wc_peer_desc" = "Cosmostation Wallet iOS";
+"wc_peer_url" = "https://cosmostation.io";
 "wc_alert_title" = "지갑 연결";
 "wc_alert_msg" = "바이낸스 덱스 거래소에 지갑을 연결하시겠습니까?";
 "wc_request_sign_title" = "지갑 사인 요청";
