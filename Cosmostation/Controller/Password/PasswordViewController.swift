@@ -36,6 +36,7 @@ class PasswordViewController: BaseViewController {
     }
     var mUserConfirm: String  = ""
     var mWcURL: String?
+    var mDappURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -322,8 +323,16 @@ class PasswordViewController: BaseViewController {
             
         } else if (mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
             let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-            commonWcVC.wcURL = self.mWcURL
-            commonWcVC.isDeepLink = true
+            if let url = self.mWcURL {
+                commonWcVC.wcURL = url
+                commonWcVC.isDeepLink = true
+                commonWcVC.isDapp = false
+            }
+            if let url = self.mDappURL {
+                commonWcVC.dappURL = url
+                commonWcVC.isDapp = true
+                commonWcVC.isDeepLink = false
+            }
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.window?.rootViewController = commonWcVC
             self.present(commonWcVC, animated: true, completion: nil)

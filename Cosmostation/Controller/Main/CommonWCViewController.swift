@@ -11,9 +11,10 @@ import WalletConnect
 import HDWalletKit
 import SwiftKeychainWrapper
 import Alamofire
+import WebKit
 import SwiftyJSON
 
-class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
+class CommonWCViewController: BaseViewController {
     
     @IBOutlet weak var wcLoading: WalletConnectImageView!
     @IBOutlet weak var loadingImg: LoadingImageView!
@@ -23,42 +24,95 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
     @IBOutlet weak var wcUrl: UILabel!
     @IBOutlet weak var wcAddress: UILabel!
     @IBOutlet weak var wcDisconnectBtn: UIButton!
+    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var dappConnectImage: UIImageView!
+    @IBOutlet weak var dappConnectLabel: UILabel!
+    @IBOutlet weak var dappUrl: UILabel!
+    @IBOutlet weak var dappClose: UIButton!
+    @IBOutlet weak var dappView: UIView!
     
     var isDeepLink = false
+    var isDapp = false
     var wcURL: String?
+    var dappURL: String?
     var wCPeerMeta: WCPeerMeta?
     var interactor: WCInteractor?
+    var accountMap: Dictionary<String, Account> = [String:Account]()
+    var baseChain = ""
+    
+    var wcId: Int64?
+    var wcTrustRequest: NSDictionary?
+    var wcCosmosRequest: Data?
+    var wcRequestChainName: String?
+    var accountChainSet = Set<String>()
+    var accountSelectedSet = Set<Account>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.loadingImg.onStartAnimation()
         
-        print("CommonWCViewController wcURL ", wcURL)
-        print("CommonWCViewController isDeepLink ", isDeepLink)
+        if (!isDeepLink ) {
+            account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+            chainType = WUtils.getChainType(account!.account_base_chain)
+            baseChain = WUtils.getChainDBName(chainType)
+            accountMap[baseChain] = account
+        }
         
-        if (isDeepLink) {
-            guard let session = WCSession.from(string: self.wcURL!) else {
-                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
-                return
+        if (isDapp) {
+            initWebView()
+            dappView.isHidden = false
+            connectStatus(connected: false)
+            if let url = dappURL {
+                webView.load(URLRequest(url: URL(string: url)!))
+                dappUrl.text = url
             }
-            self.onConnectSessionForDeepLink(session)
-            
-        } else {
-            self.getKey()
+        } else  {
+            dappView.isHidden = true
+            connectSession()
         }
     }
     
+    func connectStatus(connected: Bool) {
+        if (connected) {
+            dappConnectImage.image = UIImage(named: "passedImg")
+            dappConnectLabel.text = "Connected"
+        } else {
+            dappConnectImage.image = UIImage(named: "passUp")
+            dappConnectLabel.text = "Not Connected"
+        }
+    }
+    
+    func processQuery(query: String?) {
+        if let query = query {
+            wcURL = query
+            connectSession()
+        }
+    }
+    
+    func initWebView() {
+        let configuration = WKWebViewConfiguration()
+        configuration.allowsInlineMediaPlayback = true
+        webView.navigationDelegate = self
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.allowsBackForwardNavigationGestures = true
+        webView.uiDelegate = self
+        webView.allowsLinkPreview = false
+        webView.scrollView.bounces = false
+    }
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.isIdleTimerDisabled = true
+        if (isDapp) {
+            return
+        }
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_wallet_connect", comment: "");
         self.navigationItem.title = NSLocalizedString("title_wallet_connect", comment: "");
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        UIApplication.shared.isIdleTimerDisabled = true
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -66,143 +120,235 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
-    func onConnectSessionForQR(_ session: WCSession) {
-        let interactor = WCInteractor(session: session,
-                                      meta: WCPeerMeta(name: "", url: ""),
-                                      uuid: UIDevice.current.identifierForVendor ?? UUID())
-        self.configureForQR(interactor: interactor)
-        interactor.connect().cauterize()
-        self.interactor = interactor
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if (interactor?.state == .connected) {
+            interactor?.disconnect()
+            interactor?.killSession().done {[weak self] in
+                self?.interactor = nil
+            }.cauterize()
+        }
     }
     
-    func configureForQR(interactor: WCInteractor) {
-        let accounts = [""]
+    func connectSession() {
+        guard let url = wcURL, let session = WCSession.from(string: url) else {
+            if (isDeepLink) {
+                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+            } else {
+                self.navigationController?.popViewController(animated: false)
+            }
+            return
+        }
+        
+        let interactor = WCInteractor(session: session,
+                                      meta: WCPeerMeta(name: NSLocalizedString("wc_peer_name", comment: ""), url: NSLocalizedString("wc_peer_url", comment: ""),
+                                                       description:NSLocalizedString("wc_peer_desc", comment: "")),
+                                      uuid: UIDevice.current.identifierForVendor ?? UUID())
+        self.interactor = interactor
+        configureWalletConnect()
+        interactor.connect().cauterize()
+    }
+    
+    func configureWalletConnect() {
         let chainId = 1
         
+        guard let interactor = self.interactor else { return }
+        
         interactor.onSessionRequest = { [weak self] (id, peer) in
-            print("onSessionRequest ", id, "  ", peer)
-            self?.interactor?.approveSession(accounts: accounts, chainId: chainId).done { _ in
-                self?.onViewUpdate(peer.peerMeta)
-            }.cauterize()
+            guard let self = self else { return }
+            self.wCPeerMeta = peer.peerMeta
+            if (!self.isDeepLink && !self.isDapp) {
+                if let baseAccount = self.accountMap[self.baseChain] {
+                    self.interactor?.approveSession(accounts: [baseAccount.account_address], chainId: chainId).done { _ in
+                            self.onViewUpdate(peer.peerMeta)
+                        }.cauterize()
+                }
+            } else {
+                self.moveToBackgroundIfNeedAndAction {
+                    self.interactor?.approveSession(accounts: [], chainId: chainId).cauterize()
+                }
+            }
+            if (self.isDapp) {
+                self.connectStatus(connected: true)
+            }
         }
         
         interactor.onDisconnect = { [weak self] (error) in
-            print("onDisconnect ")
-            self?.navigationController?.popViewController(animated: false)
+            guard let self = self else { return }
+            if (self.isDeepLink) {
+                self.onDeepLinkDismiss()
+            } else {
+                self.navigationController?.popViewController(animated: false)
+            }
+            if (self.isDapp) {
+                self.connectStatus(connected: false)
+            }
         }
         
         interactor.trust.onGetAccounts = { [weak self] (id) in
-            print("onGetAccounts ", id)
-            self?.interactor?.approveRequest(id: id, result: self?.getTrustAccounts()).cauterize()
+            guard let self = self else { return }
+            self.interactor?.approveRequest(id: id, result: self.getTrustAccounts()).cauterize()
         }
         
         interactor.trust.onTransactionSign = { [weak self] (id, trustTx) in
-            print("onTransactionSign ", trustTx.transaction)
+            guard let self = self else { return }
             if let trustTxParsing = try? JSONSerialization.jsonObject(with: trustTx.transaction.data(using: .utf8)!, options: .allowFragments) as? NSDictionary {
-                self?.wcId = id
-                self?.wcTrustRequest = trustTxParsing
-                self?.onShowPopupForRequest(WcRequestType.TRUST_TYPE, trustTx.transaction.data(using: .utf8)!)
+                self.wcId = id
+                self.wcTrustRequest = trustTxParsing
+                self.wcRequestChainName = self.baseChain
+                self.onShowPopupForRequest(WcRequestType.TRUST_TYPE, trustTx.transaction.data(using: .utf8)!)
             }
         }
         
         interactor.keplr.onEnableKeplrWallet  = { [weak self] (id, chains) in
-            print("onEnableKeplrWallet ", chains)
-            self?.interactor?.approveRequest(id: id, result: [""]).cauterize()
-        }
-        
-        interactor.keplr.onGetKeplrWallet  = { [weak self] (id, chains) in
-            print("onGetKeplrWallet ", chains)
-            self?.interactor?.approveRequest(id: id, result: self?.getKeplrAccounts()).cauterize()
-        }
-        
-        interactor.keplr.onSignKeplrAmino = { [weak self] (rawData) in
-            print("onSignKeplrAmino ", rawData)
-            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let sigData = try? JSONSerialization.data(withJSONObject:params[2]) {
-                self?.wcId = id
-                self?.wcKeplrRequest = sigData
-                self?.onShowPopupForRequest(WcRequestType.KEPLR_TYPE, sigData)
-            }
-        }
-        
-    }
-    
-    func onConnectSessionForDeepLink(_ session: WCSession) {
-        let interactor = WCInteractor(session: session,
-                                      meta: WCPeerMeta(name: "", url: ""),
-                                      uuid: UIDevice.current.identifierForVendor ?? UUID())
-        self.configureForDeepLink(interactor: interactor)
-        interactor.connect().cauterize()
-        self.interactor = interactor
-    }
-    
-    func configureForDeepLink(interactor: WCInteractor) {
-        let accounts = [""]
-        let chainId = 1
-        
-        interactor.onSessionRequest = { [weak self] (id, peer) in
-            print("DeepLink onSessionRequest ")
-            self?.wCPeerMeta = peer.peerMeta
-            self?.jumpBackToPreviousApp()
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                self?.interactor?.approveSession(accounts: accounts, chainId: chainId).cauterize()
-            })
-        }
-        
-        interactor.onDisconnect = { [weak self] (error) in
-            print("DeepLink onDisconnect ")
-            self?.onDeepLinkDismiss()
-        }
-        
-        interactor.keplr.onEnableKeplrWallet  = { [weak self] (id, chains) in
-            print("onEnableKeplrWallet ", chains)
-            if let requestChain = WUtils.getChainTypeByChainId(chains[0]) {
-                let requestChainAccounts = BaseData.instance.selectAllAccountsByChainWithKey(requestChain)
-                if (requestChainAccounts.count > 0) {
-                    self?.wcId = id
-                    self?.chainType = requestChain
-                    self?.onShowPopupAccountSelect(requestChain)
-                    
-                } else {
-                    self?.onShowNoAccountsForChain()
+            guard let self = self else { return }
+            let chainId = chains[0]
+            if (self.hasAccount(chainId: chainId)) {
+                self.moveToBackgroundIfNeedAndAction {
+                    self.interactor?.approveRequest(id: id, result: chains).cauterize()
                 }
-                
-            } else {
-                self?.onShowNotSupportChain(chains[0])
             }
         }
         
         interactor.keplr.onGetKeplrWallet  = { [weak self] (id, chains) in
-            print("onGetKeplrWallet ", chains)
-            self?.wcId = id
-            self?.getKey()
+            guard let self = self else { return }
+            let chainId = chains[0]
+            if let account = self.accountMap[WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId))] {
+                self.moveToBackgroundIfNeedAndAction {
+                    self.getKeplrAccount(account: account, listener: { wallet in
+                        self.interactor?.approveRequest(id: id, result: [wallet]).cauterize()
+                    })
+                }
+            } else {
+                self.showKeplrAccountDialog(id: id, chainId: chainId)
+            }
         }
         
         interactor.keplr.onSignKeplrAmino = { [weak self] (rawData) in
-            print("onSignKeplrAmino ", rawData)
-            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let sigData = try? JSONSerialization.data(withJSONObject:params[2]) {
-                self?.wcId = id
-                self?.wcKeplrRequest = sigData
-                self?.onShowPopupForRequest(WcRequestType.KEPLR_TYPE, sigData)
+            guard let self = self else { return }
+            if let id = rawData["id"] as? Int64,
+               let params = rawData["params"] as? Array<Any>,
+               let sigData = try? JSONSerialization.data(withJSONObject:params[2]),
+               let chainId = params[0] as? String {
+                self.wcId = id
+                self.wcCosmosRequest = sigData
+                self.wcRequestChainName = WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId))
+                self.onShowPopupForRequest(WcRequestType.COSMOS_TYPE, sigData)
             }
         }
+        
+        interactor.cosmostation.onCosmostationAccounts = { [weak self] (id, chains) in
+            guard let self = self else { return }
+            self.wcId = id
+            self.accountChainSet.removeAll()
+            self.accountSelectedSet.removeAll()
+            chains.forEach { chain in
+                self.accountChainSet.insert(chain)
+            }
+            self.showAccountPopup()
+        }
+        
+        interactor.cosmostation.onCosmosatationSignTx = { [weak self] (rawData) in
+            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let chainId = params[0] as? String, let sigData = try? JSONSerialization.data(withJSONObject:params[2]) {
+                self?.wcId = id
+                self?.wcCosmosRequest = sigData
+                self?.wcRequestChainName = WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId))
+                self?.onShowPopupForRequest(WcRequestType.COSMOS_TYPE, sigData)
+            }
+        }
+    }
+    
+    func moveToBackgroundIfNeedAndAction(action : @escaping () -> ()) {
+        if (self.isDeepLink) {
+            self.jumpBackToPreviousApp()
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                action()
+            })
+        } else {
+            action()
+        }
+    }
+    
+    func showKeplrAccountDialog(id: Int64, chainId: String) {
+        if (!hasAccount(chainId: chainId)) {
+            self.moveToBackgroundIfNeedAndAction {
+                self.interactor?.approveRequest(id: id, result: [""]).cauterize()
+            }
+            return
+        }
+        
+        let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
+        
+        guard let chainType = WUtils.getChainTypeByChainId(chainId) else { return }
+        self.wcRequestChainName = WUtils.getChainDBName(chainType)
+        self.wcId = id
+        
+        popupVC.toChain = chainType
+        popupVC.type = SELECT_POPUP_KEPLR_GET_ACCOUNT
+        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+        cardPopup.resultDelegate = self
+        cardPopup.show(onViewController: self)
+    }
+    
+    func hasAccount(chainId: String) -> Bool {
+        if let requestChain = WUtils.getChainTypeByChainId(chainId) {
+            let requestChainAccounts = BaseData.instance.selectAllAccountsByChainWithKey(requestChain)
+            if (requestChainAccounts.count > 0) {
+                return true
+            } else {
+                self.onShowNoAccountsForChain()
+                return false
+            }
+            
+        } else {
+            self.onShowNotSupportChain(chainId)
+            return false
+        }
+    }
+    
+    func showAccountPopup() {
+        if (self.accountChainSet.isEmpty) {
+            DispatchQueue.global().async {
+                let cosmostationAccountSet = self.accountSelectedSet.map { account in
+                    self.getCosmostationAccount(account: account)
+                }
+                DispatchQueue.main.async {
+                    self.moveToBackgroundIfNeedAndAction {
+                        self.interactor?.approveRequest(id: self.wcId!, result: cosmostationAccountSet).cauterize()
+                    }
+                }
+            }
+            return
+        }
+        
+        guard let chainId = self.accountChainSet.popFirst() else { return }
+        if (!hasAccount(chainId: chainId)) {
+            showAccountPopup()
+            return
+        }
+        
+        guard let chainType = WUtils.getChainTypeByChainId(chainId) else { return }
+        self.wcRequestChainName = WUtils.getChainDBName(chainType)
+        self.onShowPopupAccountSelect(chainType)
+    }
+    
+    func onDeepLinkDismiss() {
+        //@TOBE need test
+        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
     }
 
-    func jumpBackToPreviousApp() -> Bool {
+    func jumpBackToPreviousApp() {
         guard
             let sysNavIvar = class_getInstanceVariable(UIApplication.self, "_systemNavigationAction"),
             let action = object_getIvar(UIApplication.shared, sysNavIvar) as? NSObject,
             let destinations = action.perform(#selector(getter: PrivateSelectors.destinations)).takeUnretainedValue() as? [NSNumber],
             let firstDestination = destinations.first
         else {
-            return false
+            return
         }
         action.perform(#selector(PrivateSelectors.sendResponseForDestination), with: firstDestination)
-        return true
-    }
-    
-    func onDeepLinkDismiss() {
-        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
     }
     
     func onViewUpdate(_ peer: WCPeerMeta) {
@@ -211,69 +357,56 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         }
         self.wcTitle.text = peer.name
         self.wcUrl.text = peer.url
-        self.wcAddress.text = account?.account_address
+        self.wcAddress.text = accountMap.values.map { $0.account_address }.joined(separator: "\n")
         self.wcCardView.backgroundColor = WUtils.getChainBg(chainType)
-        self.wcCardView.isHidden = false
-        self.wcLoading.isHidden = false
-        self.wcLoading.onStartAnimation()
-        self.wcDisconnectBtn.isHidden = false
-        self.loadingImg.isHidden = true
+        if (!self.isDapp) {
+            self.wcCardView.isHidden = false
+            self.wcLoading.isHidden = false
+            self.wcLoading.onStartAnimation()
+            self.wcDisconnectBtn.isHidden = false
+            self.loadingImg.isHidden = true
+        }
     }
-    
-    var wcPopup: SBCardPopupViewController?
-    var wcId: Int64?
-    var wcTrustRequest: NSDictionary?
-    var wcKeplrRequest: Data?
     
     
     func onShowPopupForRequest(_ type: WcRequestType, _ request: Data) {
         let popupVC = WcSignRequestPopup(nibName: "WcSignRequestPopup", bundle: nil)
         popupVC.wcType = type
         popupVC.wcMsg = request
-        self.wcPopup = SBCardPopupViewController(contentViewController: popupVC)
-        self.wcPopup?.resultDelegate = self
-        self.wcPopup?.show(onViewController: self)
-    }
-    
-    func SBCardPopupResponse(type:Int, result: Int) {
-        if (type == WcRequestType.TRUST_TYPE.rawValue) {
-            self.approveTrustRequest()
-            
-        } else if (type == WcRequestType.KEPLR_TYPE.rawValue) {
-            self.approveKeplrRequest()
-            
-        } else if (type == SELECT_POPUP_DEEP_LINK_ACCOUNT) {
-            self.account = BaseData.instance.selectAllAccountsByChainWithKey(self.chainType!)[result]
-            self.jumpBackToPreviousApp()
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                self.interactor?.approveRequest(id: self.wcId!, result: [""]).cauterize()
-            })
-            
-        }
+        let wcPopup = SBCardPopupViewController(contentViewController: popupVC)
+        wcPopup.resultDelegate = self
+        wcPopup.show(onViewController: self)
     }
     
     
     func getTrustAccounts() -> Array<WCTrustAccount> {
         var result = Array<WCTrustAccount>()
-        if (self.chainType == ChainType.KAVA_MAIN) {
-            result.append(WCTrustAccount.init(network: 459, address: self.account!.account_address))
-            
-        } else if (self.chainType == ChainType.OSMOSIS_MAIN) {
-            
+        if self.chainType == ChainType.KAVA_MAIN, let account = accountMap[baseChain] {
+            result.append(WCTrustAccount.init(network: 459, address: account.account_address))
         }
         return result
     }
     
     func approveTrustRequest() {
+        getKeyAsync(chainName: baseChain) { tuple in
+            self.signTrust(tuple)
+        }
+    }
+    
+    func rejectRequest() {
+        self.moveToBackgroundIfNeedAndAction {
+            self.interactor?.rejectRequest(id: self.wcId!, message: "Cancel").cauterize()
+            self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
+        }
+    }
+    
+    func signTrust(_ keyTuple: KeyTuple) {
         let stdMsg: StdSignMsg = StdSignMsg.init(trustv: self.wcTrustRequest!)
-//        print("stdMsg ", stdMsg)
-//        print("getToSignHash ", stdMsg.getToSignHash().toHexString())
-        
-        if let signature = try? ECDSA.compactsign(stdMsg.getToSignHash(), privateKey: self.privateKey!) {
+        if let signature = try? ECDSA.compactsign(stdMsg.getToSignHash(), privateKey: keyTuple.privateKey) {
             var genedSignature = TrustSignature.init()
             var genPubkey =  PublicKey.init()
             genPubkey.type = COSMOS_KEY_TYPE_PUBLIC
-            genPubkey.value = self.publicKey!.base64EncodedString()
+            genPubkey.value = keyTuple.publicKey.base64EncodedString()
             genedSignature.pub_key = genPubkey
             genedSignature.signature = signature.base64EncodedString()
             
@@ -286,48 +419,62 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
             let encoder = JSONEncoder()
             encoder.outputFormatting = .sortedKeys
             let data = try? encoder.encode(postTx)
-            self.interactor?.approveRequest(id: wcId!, result: String(data: data!, encoding: .utf8)!).done({ _ in
+            self.interactor?.approveRequest(id: self.wcId!, result: String(data: data!, encoding: .utf8)!).done({ _ in
                 self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
             }).cauterize()
-                
         }
     }
     
-    
-    func getKeplrAccounts() -> Array<WCKeplrWallet> {
-        var result = Array<WCKeplrWallet>()
-        let name = WUtils.getWalletName(self.account!)!
-        let algo = "secp256k1"
-        let pubKey = self.publicKey!.toHexString()
-        let address = self.tenderAddress!
-        let bech32Address = self.account!.account_address
-        let keplrWallet = WCKeplrWallet.init(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address, isNanoLedger: false)
-        result.append(keplrWallet)
-        return result
+    func getKeplrAccount(account: Account, listener: @escaping (WCKeplrWallet) -> ()) {
+        getKeyAsync(chainName: account.account_base_chain) { tuple in
+            let name = WUtils.getWalletName(account)!
+            let algo = "secp256k1"
+            let pubKey = tuple.publicKey.toHexString()
+            let address = tuple.tendermintAddress
+            let bech32Address = account.account_address
+            let wallet = WCKeplrWallet.init(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address, isNanoLedger: false)
+            listener(wallet)
+        }
     }
     
-    func approveKeplrRequest() {
-        let json = try? JSON(data: wcKeplrRequest!)
+    func getCosmostationAccount(account: Account) -> WCCosmostationAccount {
+        let tuple = getKey(chainName: account.account_base_chain)
+        let name = WUtils.getWalletName(account)!
+        let algo = "secp256k1"
+        let pubKey = tuple.publicKey.toHexString()
+        let address = tuple.tendermintAddress
+        let bech32Address = account.account_address
+        let comostationAccount = WCCosmostationAccount(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address)
+        return comostationAccount
+    }
+    
+    func approveCosmosRequest() {
+        let json = try? JSON(data: wcCosmosRequest!)
         let sortedJsonData = try? json!.rawData(options: .sortedKeys)
         let rawOrderdDoc = String(data:sortedJsonData!, encoding:.utf8)?.replacingOccurrences(of: "\\/", with: "/")
         let rawOrderdDocSha = rawOrderdDoc!.data(using: .utf8)!.sha256()
         
-        if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: self.privateKey!) {
-            let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : self.publicKey!.base64EncodedString()]
-            let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
-//            print("signature ", signature)
-
-            let response: JSON = ["signed" : json!.rawValue, "signature":signature.rawValue]
-            if (self.isDeepLink) {
-                self.jumpBackToPreviousApp()
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+        getKeyAsync(chainName: self.wcRequestChainName! ) { tuple in
+            if let signature = try? ECDSA.compactsign(rawOrderdDocSha, privateKey: tuple.privateKey) {
+                let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
+                let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
+                let response: JSON = ["signed" : json!.rawValue, "signature":signature.rawValue]
+                self.moveToBackgroundIfNeedAndAction {
                     self.interactor?.approveRequest(id: self.wcId!, result: [response]).cauterize()
-                })
-            } else {
-                self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
-                self.interactor?.approveRequest(id: wcId!, result: [response]).cauterize()
+                    self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
+                }
             }
         }
+    }
+    
+    func onShowPopupAccountSelect(_ chainType: ChainType) {
+        let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
+        popupVC.type = SELECT_POPUP_COSMOSTATION_GET_ACCOUNT
+        popupVC.toChain = chainType
+        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+        cardPopup.resultDelegate = self
+        cardPopup.show(onViewController: self)
+        
     }
     
     func onShowNotSupportChain(_ chainId: String) {
@@ -335,7 +482,6 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         let notSupportMsg = String(format: NSLocalizedString("error_not_support_chain_msg", comment: ""), chainId)
         let notSupportAlert = UIAlertController(title: notSupportTitle, message: notSupportMsg, preferredStyle: .alert)
         notSupportAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
-            self.onDeepLinkDismiss()
         }))
         self.present(notSupportAlert, animated: true)
     }
@@ -345,71 +491,147 @@ class CommonWCViewController: BaseViewController, SBCardPopupDelegate {
         let notAccountsMsg = NSLocalizedString("error_no_accounts_chain_msg", comment: "")
         let notAccountsAlert = UIAlertController(title: notAccountsTitle, message: notAccountsMsg, preferredStyle: .alert)
         notAccountsAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
-            self.onDeepLinkDismiss()
         }))
         self.present(notAccountsAlert, animated: true)
-        
     }
     
-    func onShowPopupAccountSelect(_ chainType: ChainType) {
-        let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
-        popupVC.type = SELECT_POPUP_DEEP_LINK_ACCOUNT
-        popupVC.toChain = chainType
-        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
-        cardPopup.resultDelegate = self
-        cardPopup.show(onViewController: self)
-        
+    @IBAction func onCloseDapp(_ sender: UIButton) {
+        self.dismiss(animated: true)
     }
-    
     
     @IBAction func onClickDisconnect(_ sender: UIButton) {
+        //@TOBE need refactoring
+        self.interactor?.disconnect()
         self.interactor?.killSession().done {[weak self] in
-            self?.navigationController?.popViewController(animated: false)
+            self?.interactor = nil
+            if (self?.isDeepLink == true) {
+                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+            } else {
+                self?.navigationController?.popViewController(animated: false)
+            }
         }.cauterize()
     }
     
-    var privateKey: Data?
-    var publicKey: Data?
-    var tenderAddress: String?
+    typealias KeyTuple = (privateKey: Data,publicKey: Data, tendermintAddress:String)
     
-    func getKey() {
-        DispatchQueue.global().async {
-            if (self.account!.account_from_mnemonic == true) {
-                if let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
-                    self.privateKey = KeyFac.getPrivateRaw(words, self.account!)
-                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
-                    self.tenderAddress = WKey.generateTenderAddressFromPrivateKey(self.privateKey!).replacingOccurrences(of: "0x", with: "")
-                }
-                
-            } else {
-                if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
-                    self.privateKey = KeyFac.getPrivateFromString(key)
-                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
-                    self.tenderAddress = WKey.generateTenderAddressFromPrivateKey(self.privateKey!).replacingOccurrences(of: "0x", with: "")
-                }
+    func getKey(chainName: String) -> KeyTuple {
+        guard let account = accountMap[chainName] else { return (Data(), Data(), "") }
+        if (account.account_from_mnemonic == true) {
+            if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                let privateKey = KeyFac.getPrivateRaw(words, account)
+                let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
+                let tenderAddress = WKey.generateTenderAddressFromPrivateKey(privateKey).replacingOccurrences(of: "0x", with: "")
+                return (privateKey, publicKey, tenderAddress)
             }
-            DispatchQueue.main.async(execute: {
-                if (self.isDeepLink) {
-                    self.onViewUpdate(self.wCPeerMeta!)
-                    self.jumpBackToPreviousApp()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
-                        self.interactor?.approveRequest(id: self.wcId!, result: self.getKeplrAccounts()).cauterize()
-                    })
-                    
-                } else {
-                    guard let session = WCSession.from(string: self.wcURL!) else {
-                        self.navigationController?.popViewController(animated: false)
-                        return
-                    }
-                    self.onConnectSessionForQR(session)
-                }
-            });
+            
+        } else {
+            if let key = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1()) {
+                let privateKey = KeyFac.getPrivateFromString(key)
+                let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
+                let tenderAddress = WKey.generateTenderAddressFromPrivateKey(privateKey).replacingOccurrences(of: "0x", with: "")
+                return (privateKey, publicKey, tenderAddress)
+            }
+        }
+        return (Data(), Data(), "")
+    }
+    
+    func getKeyAsync(chainName: String, listener: @escaping (_ keyTuple: KeyTuple) -> ()) {
+        DispatchQueue.global().async {
+            let tuple = self.getKey(chainName: chainName)
+            DispatchQueue.main.async {
+                listener(tuple)
+            }
         }
     }
 }
 
-
 @objc private protocol PrivateSelectors: NSObjectProtocol {
     var destinations: [NSNumber] { get }
     func sendResponseForDestination(_ destination: NSNumber)
+}
+
+extension CommonWCViewController: SBCardPopupDelegate {
+    func SBCardPopupResponse(type:Int, result: Int) {
+        if (type == WcRequestType.TRUST_TYPE.rawValue) {
+            if (result == 0) {
+                self.approveTrustRequest()
+            } else {
+                self.rejectRequest()
+            }
+            
+        } else if (type == WcRequestType.COSMOS_TYPE.rawValue) {
+            if (result == 0) {
+                self.approveCosmosRequest()
+            } else {
+                self.rejectRequest()
+            }
+            
+        } else if (type == SELECT_POPUP_KEPLR_GET_ACCOUNT) {
+            if let chainName = wcRequestChainName, let chainType = WUtils.getChainType(chainName) {
+                let selectedAccount = BaseData.instance.selectAllAccountsByChainWithKey(chainType)[result]
+                if let peerMeta = self.wCPeerMeta {
+                    self.onViewUpdate(peerMeta)
+                }
+                getKeplrAccount(account: selectedAccount, listener: { wallet in
+                    self.moveToBackgroundIfNeedAndAction {
+                        self.interactor?.approveRequest(id: self.wcId!, result: [wallet]).cauterize()
+                    }
+                })
+            }
+        } else if (type == SELECT_POPUP_COSMOSTATION_GET_ACCOUNT) {
+            if let chainName = wcRequestChainName, let chainType = WUtils.getChainType(chainName) {
+                let selectedAccount = BaseData.instance.selectAllAccountsByChainWithKey(chainType)[result]
+                if let peerMeta = self.wCPeerMeta {
+                    self.onViewUpdate(peerMeta)
+                }
+                accountSelectedSet.insert(selectedAccount)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
+                    self.showAccountPopup()
+                })
+            }
+        }
+    }
+}
+
+extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url?.absoluteString,
+            (url.starts(with: "http://") || url.starts(with: "https://")) {
+            decisionHandler(.allow)
+            return
+        }
+        
+        if let url = navigationAction.request.url, UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:])
+        }
+        
+        decisionHandler(.cancel)
+    }
+    
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
+            completionHandler()
+        }
+        alertController.addAction(cancelAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel) { _ in
+            completionHandler(false)
+        }
+        let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default) { _ in
+            completionHandler(true)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(okAction)
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
 }
