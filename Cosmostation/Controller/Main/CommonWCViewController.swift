@@ -279,6 +279,11 @@ class CommonWCViewController: BaseViewController {
         }
         
         let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
+        
+        guard let chainType = WUtils.getChainTypeByChainId(chainId) else { return }
+        self.wcRequestChainName = WUtils.getChainDBName(chainType)
+        self.wcId = id
+        
         popupVC.toChain = chainType
         popupVC.type = SELECT_POPUP_KEPLR_GET_ACCOUNT
         let cardPopup = SBCardPopupViewController(contentViewController: popupVC)

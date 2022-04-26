@@ -313,7 +313,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             cell?.onBindAccount(toChain, toAccountList[indexPath.row])
             return cell!
             
-        } else if (type == SELECT_POPUP_COSMOSTATION_GET_ACCOUNT || type == SELECT_POPUP_COSMOSTATION_GET_ACCOUNT) {
+        } else if (type == SELECT_POPUP_KEPLR_GET_ACCOUNT || type == SELECT_POPUP_COSMOSTATION_GET_ACCOUNT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let account = toAccountList[indexPath.row]
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
