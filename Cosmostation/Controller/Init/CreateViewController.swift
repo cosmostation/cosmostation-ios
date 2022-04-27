@@ -200,7 +200,7 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
         }
     }
     
-    func onGenAccount(_ chain:ChainType) {
+    func onGenAccount(_ chain: ChainType) {
         self.showWaittingAlert()
         DispatchQueue.global().async {
             
@@ -214,6 +214,10 @@ class CreateViewController: BaseViewController, PasswordViewDelegate{
                 resource = resource + " " + word
             }
             let mnemonoicResult = KeychainWrapper.standard.set(resource, forKey: newAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            
+            let pKey = WKey.getPrivateRaw(self.mnemonicWords!, newAccount)
+            KeychainWrapper.standard.set(pKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            //TODO add mnemonic foreign key
             
             var insertResult :Int64 = -1
             if (mnemonoicResult) {

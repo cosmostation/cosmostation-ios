@@ -198,9 +198,11 @@
 "rEO-fz-cbK.headerTitle" = "지갑";
 
 /* Class = "UILabel"; text = "Wallet Manage"; ObjectID = "s1Y-7N-iWS"; */
-"s1Y-7N-iWS.text" = "새 지갑 추가";
+"s1Y-7N-iWS.text" = "니모닉 관리";
 
 "Up0-Ck-BHz.text" = "지갑 관리";
+
+"ToR-Yl-K3j.text" = "지갑 추가";
 
 /* Class = "UILabel"; text = "Available"; ObjectID = "tH3-op-17D"; */
 "tH3-op-17D.text" = "사용 가능 수량";
