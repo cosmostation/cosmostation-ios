@@ -396,7 +396,6 @@ class CommonWCViewController: BaseViewController {
     func rejectRequest() {
         self.moveToBackgroundIfNeedAndAction {
             self.interactor?.rejectRequest(id: self.wcId!, message: "Cancel").cauterize()
-            self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
         }
     }
     
