@@ -38,6 +38,9 @@ public struct Param {
             return annualProvisions.dividing(by: starsSupply, withBehavior: WUtils.handler18)
             
         } else if (chainType == ChainType.EVMOS_MAIN) {
+            if (params?.evmos_inflation_params?.params?.enable_inflation == false) {
+                return NSDecimalNumber.zero
+            }
             let annualProvisions = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
             let evmosSupply = getMainSupply().subtracting(NSDecimalNumber.init(string: "200000000000000000000000000"))
             return annualProvisions.dividing(by: evmosSupply, withBehavior: WUtils.handler18)
@@ -342,7 +345,7 @@ public struct Params {
             self.evmos_inflation_params = EvmosInflationParam.init(rawEvmosInflationParam)
         }
         if let rawEvmosEpochMintingProvisions = dictionary?["epoch_mint_provision"] as? NSDictionary {
-            self.evmos_minting_epoch_provisions = EvmosEpochMintingProvisions.init(rawEvmosEpochMintingProvisions).epoch_mint_provision
+            self.evmos_minting_epoch_provisions = rawEvmosEpochMintingProvisions.value(forKeyPath: "epoch_mint_provision.amount") as? String
         }
         
         if let rawCrescentMintingParam = dictionary?["crescent_minting_params"] as? NSDictionary {
@@ -826,10 +829,12 @@ public struct EvmosInflationParam {
     
     public struct Params {
         var mint_denom: String?
+        var enable_inflation: Bool?
         var inflation_distribution: InflationDistribution?
         
         init(_ dictionary: NSDictionary?) {
             self.mint_denom = dictionary?["mint_denom"] as? String
+            self.enable_inflation = dictionary?["enable_inflation"] as? Bool
             if let rawInflationDistribution = dictionary?["inflation_distribution"] as? NSDictionary {
                 self.inflation_distribution = InflationDistribution.init(rawInflationDistribution)
             }
@@ -846,14 +851,6 @@ public struct EvmosInflationParam {
             self.staking_rewards = NSDecimalNumber.init(string: dictionary?["staking_rewards"] as? String)
             self.usage_incentives = NSDecimalNumber.init(string: dictionary?["usage_incentives"] as? String)
         }
-    }
-}
-
-public struct EvmosEpochMintingProvisions {
-    var epoch_mint_provision: String?
-    
-    init(_ dictionary: NSDictionary?) {
-        self.epoch_mint_provision = dictionary?["epoch_mint_provision"] as? String
     }
 }
 
