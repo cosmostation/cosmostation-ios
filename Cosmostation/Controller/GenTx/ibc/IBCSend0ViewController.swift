@@ -148,7 +148,7 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func onAlertUnAuthedChannel() {
-        let unAuthTitle = NSLocalizedString("str_notice", comment: "")
+        let unAuthTitle = NSLocalizedString("str_warning", comment: "")
         let unAuthMsg = NSLocalizedString("str_msg_relayer_unauthed", comment: "")
         let noticeAlert = UIAlertController(title: unAuthTitle, message: unAuthMsg, preferredStyle: .alert)
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: { _ in

@@ -156,7 +156,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onAlertIbcTransfer() {
-        let unAuthTitle = NSLocalizedString("str_notice", comment: "")
+        let unAuthTitle = NSLocalizedString("str_warning", comment: "")
         let unAuthMsg = NSLocalizedString("str_msg_ibc", comment: "")
         let noticeAlert = UIAlertController(title: unAuthTitle, message: unAuthMsg, preferredStyle: .alert)
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
