@@ -1,0 +1,26 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+    
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      XC_WORKSPACE: ${{ 'Cosmostation.xcworkspace' }}
+      XC_SCHEME: ${{ 'CosmostationDev' }}
+      XC_ARCHIVE: ${{ 'Cosmostation.xcarchive' }}
+    steps:
+      - name: Select latest Xcode
+        run: "sudo xcode-select -s /Applications/Xcode.app"
+      - name: Checkout project
+        uses: actions/checkout@v2
+      - name: Archive app
+        run: |
+          pod install --repo-update --clean-install --project-directory=Cosmostation/
+          xcodebuild clean archive -workspace $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE
+      - name: Export app
+        # export 를 통해 ipa 파일 만듦
+        run: |
+          xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
