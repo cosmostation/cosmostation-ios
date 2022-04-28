@@ -1109,7 +1109,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mUnKnown_gRPC.removeAll()
         
         self.mBalances_gRPC.forEach { balance_gRPC in
-            print("denom ", balance_gRPC.denom)
             if (WUtils.getMainDenom(chainType) == balance_gRPC.denom) {
                 mNative_gRPC.append(balance_gRPC)
                 
