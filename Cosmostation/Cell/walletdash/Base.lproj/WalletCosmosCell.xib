@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -65,13 +65,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unbonding" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iFt-o6-mYa">
-                                <rect key="frame" x="12" y="126.5" width="57.5" height="36"/>
+                                <rect key="frame" x="12" y="126.5" width="57.5" height="80"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Reward" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKB-eP-A9y">
-                                <rect key="frame" x="12" y="172.5" width="39" height="13.5"/>
+                                <rect key="frame" x="12" y="216.5" width="39" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
@@ -89,19 +89,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5v-Oq-pLN">
-                                <rect key="frame" x="486.5" y="137.5" width="11.5" height="14.5"/>
+                                <rect key="frame" x="486.5" y="159.5" width="11.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKq-N3-YYY">
-                                <rect key="frame" x="486.5" y="172" width="11.5" height="14.5"/>
+                                <rect key="frame" x="486.5" y="216" width="11.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Rgf-eV-dub">
-                                <rect key="frame" x="12" y="202" width="486" height="40"/>
+                                <rect key="frame" x="12" y="246" width="486" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDU-Gm-YI2">
                                         <rect key="frame" x="0.0" y="0.0" width="239" height="40"/>
@@ -155,66 +155,70 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgA-65-CIB">
-                                <rect key="frame" x="12" y="250" width="486" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="Nff-aR-1Hy"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <state key="normal" title=" Gravity Dex" image="iconGravitydex">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.69999999999999996"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onClickGravityDex:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oy9-KF-tgf"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qq-UW-awu">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="O86-w5-OWz">
                                 <rect key="frame" x="12" y="298" width="486" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="H0E-Pr-Khb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <state key="normal" title=" Wallet Connect" image="icWalletconnect20">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.69999999999999996"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onClickWalletConnect:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7wQ-he-x9F"/>
-                                </connections>
-                            </button>
+                                <subviews>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgA-65-CIB">
+                                        <rect key="frame" x="0.0" y="-40" width="486" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Nff-aR-1Hy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <state key="normal" title=" Gravity Dex" image="iconGravitydex">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.69999999999999996"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickGravityDex:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oy9-KF-tgf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qq-UW-awu">
+                                        <rect key="frame" x="0.0" y="0.0" width="486" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="H0E-Pr-Khb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <state key="normal" title=" Wallet Connect" image="icWalletconnect20">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="0.69999999999999996"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickWalletConnect:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7wQ-he-x9F"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="0.1524507705" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="lk6-mv-Fgl" firstAttribute="leading" secondItem="2kg-U0-aSr" secondAttribute="leading" constant="12" id="0o3-8v-0Mj"/>
                             <constraint firstItem="aLD-UG-K2e" firstAttribute="leading" secondItem="2kg-U0-aSr" secondAttribute="leading" constant="12" id="6i5-La-zfw"/>
                             <constraint firstItem="7hm-tl-rdP" firstAttribute="centerY" secondItem="DjO-Uf-h80" secondAttribute="centerY" id="8wG-yY-5Mg"/>
+                            <constraint firstItem="O86-w5-OWz" firstAttribute="trailing" secondItem="Rgf-eV-dub" secondAttribute="trailing" id="Adn-M7-u2r"/>
                             <constraint firstItem="Rgf-eV-dub" firstAttribute="leading" secondItem="2kg-U0-aSr" secondAttribute="leading" constant="12" id="Bas-gW-BxX"/>
                             <constraint firstItem="MG4-Bu-b0E" firstAttribute="leading" secondItem="lk6-mv-Fgl" secondAttribute="trailing" constant="6" id="DKJ-1m-OUL"/>
-                            <constraint firstItem="vgA-65-CIB" firstAttribute="top" secondItem="Rgf-eV-dub" secondAttribute="bottom" constant="8" id="GRu-Om-cL2"/>
-                            <constraint firstItem="7qq-UW-awu" firstAttribute="top" secondItem="vgA-65-CIB" secondAttribute="bottom" constant="8" id="Jv4-Qc-v9e"/>
                             <constraint firstItem="9e8-4h-du7" firstAttribute="top" secondItem="uvE-lW-F2j" secondAttribute="bottom" constant="6" id="K06-Ci-W8a"/>
                             <constraint firstItem="ZDI-Ok-sF1" firstAttribute="leading" secondItem="2kg-U0-aSr" secondAttribute="leading" constant="12" id="K2N-EK-aRk"/>
                             <constraint firstAttribute="trailing" secondItem="TOL-hl-9Ov" secondAttribute="trailing" constant="12" id="KC0-Fp-sKv"/>
@@ -224,23 +228,21 @@
                             <constraint firstItem="DjO-Uf-h80" firstAttribute="leading" secondItem="aLD-UG-K2e" secondAttribute="leading" id="QqH-2y-pAK"/>
                             <constraint firstAttribute="trailing" secondItem="cKq-N3-YYY" secondAttribute="trailing" constant="12" id="RAe-I4-Ixk"/>
                             <constraint firstItem="uvE-lW-F2j" firstAttribute="centerY" secondItem="lk6-mv-Fgl" secondAttribute="centerY" id="Rt6-bO-b4E"/>
-                            <constraint firstItem="vgA-65-CIB" firstAttribute="leading" secondItem="Rgf-eV-dub" secondAttribute="leading" id="SPe-Ya-jfu"/>
                             <constraint firstAttribute="trailing" secondItem="g5v-Oq-pLN" secondAttribute="trailing" constant="12" id="TTF-31-vQt"/>
                             <constraint firstItem="DjO-Uf-h80" firstAttribute="top" secondItem="aLD-UG-K2e" secondAttribute="bottom" constant="10" id="UtN-V5-I1I"/>
-                            <constraint firstItem="7qq-UW-awu" firstAttribute="trailing" secondItem="vgA-65-CIB" secondAttribute="trailing" id="VNV-Il-eHn"/>
                             <constraint firstAttribute="trailing" secondItem="9e8-4h-du7" secondAttribute="trailing" constant="12" id="a3u-nP-oUJ"/>
                             <constraint firstAttribute="trailing" secondItem="ZDI-Ok-sF1" secondAttribute="trailing" constant="12" id="bGm-X0-R7l"/>
                             <constraint firstItem="cKq-N3-YYY" firstAttribute="centerY" secondItem="UKB-eP-A9y" secondAttribute="centerY" id="bH8-Eo-pmz"/>
                             <constraint firstItem="iFt-o6-mYa" firstAttribute="top" secondItem="DjO-Uf-h80" secondAttribute="bottom" constant="10" id="cG0-1D-3Y1"/>
                             <constraint firstItem="UKB-eP-A9y" firstAttribute="leading" secondItem="aLD-UG-K2e" secondAttribute="leading" id="fLZ-VT-EC3"/>
-                            <constraint firstItem="vgA-65-CIB" firstAttribute="trailing" secondItem="Rgf-eV-dub" secondAttribute="trailing" id="hC8-bt-tdH"/>
-                            <constraint firstAttribute="bottom" secondItem="7qq-UW-awu" secondAttribute="bottom" constant="20" id="iAi-bG-2ua"/>
+                            <constraint firstItem="O86-w5-OWz" firstAttribute="top" secondItem="Rgf-eV-dub" secondAttribute="bottom" constant="12" id="hJl-sf-vLX"/>
+                            <constraint firstItem="O86-w5-OWz" firstAttribute="leading" secondItem="Rgf-eV-dub" secondAttribute="leading" id="iSa-Tm-II4"/>
                             <constraint firstItem="lk6-mv-Fgl" firstAttribute="top" secondItem="2kg-U0-aSr" secondAttribute="top" constant="16" id="kD8-Uu-IMM"/>
                             <constraint firstItem="Rgf-eV-dub" firstAttribute="top" secondItem="UKB-eP-A9y" secondAttribute="bottom" constant="16" id="nDY-3J-kGZ"/>
-                            <constraint firstItem="7qq-UW-awu" firstAttribute="leading" secondItem="vgA-65-CIB" secondAttribute="leading" id="nK8-IH-8dX"/>
                             <constraint firstItem="aLD-UG-K2e" firstAttribute="top" secondItem="ZDI-Ok-sF1" secondAttribute="bottom" constant="12" id="nSn-hJ-rtj"/>
                             <constraint firstItem="MG4-Bu-b0E" firstAttribute="centerY" secondItem="lk6-mv-Fgl" secondAttribute="centerY" id="oRk-vv-h54"/>
                             <constraint firstItem="UKB-eP-A9y" firstAttribute="top" secondItem="iFt-o6-mYa" secondAttribute="bottom" constant="10" id="qpg-Sr-IU6"/>
+                            <constraint firstAttribute="bottom" secondItem="O86-w5-OWz" secondAttribute="bottom" constant="20" id="rcm-E5-jXw"/>
                             <constraint firstItem="ZDI-Ok-sF1" firstAttribute="top" secondItem="9e8-4h-du7" secondAttribute="bottom" constant="12" id="shZ-2K-4YQ"/>
                             <constraint firstAttribute="trailing" secondItem="uvE-lW-F2j" secondAttribute="trailing" constant="12" id="tsL-Lv-FTm"/>
                             <constraint firstItem="iFt-o6-mYa" firstAttribute="leading" secondItem="aLD-UG-K2e" secondAttribute="leading" id="xQh-N4-tjn"/>
