@@ -25,14 +25,14 @@ class TxMediCreateDidCell: TxCell {
     override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = WUtils.getChainColor(chain)
-        
-        let msg = try! Panacea_Did_V2_MsgCreateDID.init(serializedData: response.tx.body.messages[position].value)
-        
-        txDidLabel.text = msg.did
-        txVertificationMethodIdLabel.text = msg.verificationMethodID
-        txSignatureLabel.text = msg.signature.dataToHexString()
-        txFromAddressLabel.text = msg.fromAddress
-        txFromAddressLabel.text = msg.document.contexts.values[0]
+//        
+//        let msg = try! Panacea_Did_V2_MsgCreateDID.init(serializedData: response.tx.body.messages[position].value)
+//        
+//        txDidLabel.text = msg.did
+//        txVertificationMethodIdLabel.text = msg.verificationMethodID
+//        txSignatureLabel.text = msg.signature.dataToHexString()
+//        txFromAddressLabel.text = msg.fromAddress
+//        txFromAddressLabel.text = msg.document.contexts.values[0]
     }
     
 }

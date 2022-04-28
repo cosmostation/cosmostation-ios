@@ -664,9 +664,9 @@ let GAS_FEE_RATE_TINY_OMNIFLIX              = "0.001"
 let GAS_FEE_RATE_LOW_OMNIFLIX               = "0.001"
 let GAS_FEE_RATE_AVERAGE_OMNIFLIX           = "0.001"
 
-let GAS_FEE_RATE_TINY_CRESCENT              = "0.000"
-let GAS_FEE_RATE_LOW_CRESCENT               = "0.000"
-let GAS_FEE_RATE_AVERAGE_CRESCENT           = "0.000"
+let GAS_FEE_RATE_TINY_CRESCENT              = "0.01"
+let GAS_FEE_RATE_LOW_CRESCENT               = "0.02"
+let GAS_FEE_RATE_AVERAGE_CRESCENT           = "0.05"
 
 let GAS_FEE_RATE_TINY_MANTLE                = "0.000"
 let GAS_FEE_RATE_LOW_MANTLE                 = "0.000"

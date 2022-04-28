@@ -37,6 +37,7 @@ class PasswordViewController: BaseViewController {
     var mUserConfirm: String  = ""
     var mWcURL: String?
     var mDappURL: String?
+    var mSchemeURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -320,42 +321,32 @@ class PasswordViewController: BaseViewController {
         print("onUserSuccessUnlock")
         if (mTarget == PASSWORD_ACTION_INTRO_LOCK) {
             self.sendResultAndPop(PASSWORD_RESUKT_OK)
-            
-        } else if (mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
-            let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-            if let url = self.mWcURL {
-                commonWcVC.wcURL = url
-                commonWcVC.isDeepLink = true
-                commonWcVC.isDapp = false
-            }
-            if let url = self.mDappURL {
-                commonWcVC.dappURL = url
-                commonWcVC.isDapp = true
-                commonWcVC.isDeepLink = false
-            }
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = commonWcVC
-            self.present(commonWcVC, animated: true, completion: nil)
-            
         } else {
-            self.dismiss(animated: true, completion: nil)
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            if (appDelegate.userInfo != nil) {
-                if let userInfo = appDelegate.userInfo,
-                    let notifyto = userInfo["notifyto"] as? String {
-                    appDelegate.userInfo = nil
-                    let notiAccount = BaseData.instance.selectAccountByAddress(address: notifyto)
-                    if (notiAccount != nil) {
-                        BaseData.instance.setRecentAccountId(notiAccount!.account_id)
-                        BaseData.instance.setLastTab(2)
-                        DispatchQueue.main.async(execute: {
-                            let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
-                            appDelegate.window?.rootViewController = mainTabVC
-                            self.present(mainTabVC, animated: true, completion: nil)
-                        })
+            self.dismiss(animated: true) {
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                if (self.mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
+                    appDelegate.scheme = self.mSchemeURL
+                    if let mainVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController {
+                        mainVC.processScheme()
+                    }
+                } else if (appDelegate.userInfo != nil) {
+                    if let userInfo = appDelegate.userInfo,
+                        let notifyto = userInfo["notifyto"] as? String {
+                        appDelegate.userInfo = nil
+                        let notiAccount = BaseData.instance.selectAccountByAddress(address: notifyto)
+                        if (notiAccount != nil) {
+                            BaseData.instance.setRecentAccountId(notiAccount!.account_id)
+                            BaseData.instance.setLastTab(2)
+                            DispatchQueue.main.async(execute: {
+                                let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
+                                appDelegate.window?.rootViewController = mainTabVC
+                                self.present(mainTabVC, animated: true, completion: nil)
+                            })
+                        }
                     }
                 }
             }
+            
         }
     }
     

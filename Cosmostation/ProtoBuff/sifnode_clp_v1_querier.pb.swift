@@ -338,6 +338,121 @@ struct Sifnode_Clp_V1_LiquidityProvidersRes {
   fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageResponse? = nil
 }
 
+struct Sifnode_Clp_V1_ParamsReq {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_ParamsRes {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var params: Sifnode_Clp_V1_Params {
+    get {return _params ?? Sifnode_Clp_V1_Params()}
+    set {_params = newValue}
+  }
+  /// Returns true if `params` has been explicitly set.
+  var hasParams: Bool {return self._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
+  mutating func clearParams() {self._params = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _params: Sifnode_Clp_V1_Params? = nil
+}
+
+struct Sifnode_Clp_V1_RewardParamsReq {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_RewardParamsRes {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var params: Sifnode_Clp_V1_RewardParams {
+    get {return _params ?? Sifnode_Clp_V1_RewardParams()}
+    set {_params = newValue}
+  }
+  /// Returns true if `params` has been explicitly set.
+  var hasParams: Bool {return self._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
+  mutating func clearParams() {self._params = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _params: Sifnode_Clp_V1_RewardParams? = nil
+}
+
+struct Sifnode_Clp_V1_PmtpParamsReq {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_PmtpParamsRes {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var params: Sifnode_Clp_V1_PmtpParams {
+    get {return _params ?? Sifnode_Clp_V1_PmtpParams()}
+    set {_params = newValue}
+  }
+  /// Returns true if `params` has been explicitly set.
+  var hasParams: Bool {return self._params != nil}
+  /// Clears the value of `params`. Subsequent reads from it will return its default value.
+  mutating func clearParams() {self._params = nil}
+
+  var pmtpRateParams: Sifnode_Clp_V1_PmtpRateParams {
+    get {return _pmtpRateParams ?? Sifnode_Clp_V1_PmtpRateParams()}
+    set {_pmtpRateParams = newValue}
+  }
+  /// Returns true if `pmtpRateParams` has been explicitly set.
+  var hasPmtpRateParams: Bool {return self._pmtpRateParams != nil}
+  /// Clears the value of `pmtpRateParams`. Subsequent reads from it will return its default value.
+  mutating func clearPmtpRateParams() {self._pmtpRateParams = nil}
+
+  var pmtpEpoch: Sifnode_Clp_V1_PmtpEpoch {
+    get {return _pmtpEpoch ?? Sifnode_Clp_V1_PmtpEpoch()}
+    set {_pmtpEpoch = newValue}
+  }
+  /// Returns true if `pmtpEpoch` has been explicitly set.
+  var hasPmtpEpoch: Bool {return self._pmtpEpoch != nil}
+  /// Clears the value of `pmtpEpoch`. Subsequent reads from it will return its default value.
+  mutating func clearPmtpEpoch() {self._pmtpEpoch = nil}
+
+  var height: Int64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _params: Sifnode_Clp_V1_PmtpParams? = nil
+  fileprivate var _pmtpRateParams: Sifnode_Clp_V1_PmtpRateParams? = nil
+  fileprivate var _pmtpEpoch: Sifnode_Clp_V1_PmtpEpoch? = nil
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "sifnode.clp.v1"
@@ -905,6 +1020,177 @@ extension Sifnode_Clp_V1_LiquidityProvidersRes: SwiftProtobuf.Message, SwiftProt
     if lhs.liquidityProviders != rhs.liquidityProviders {return false}
     if lhs.height != rhs.height {return false}
     if lhs._pagination != rhs._pagination {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_ParamsReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ParamsReq"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_ParamsReq, rhs: Sifnode_Clp_V1_ParamsReq) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_ParamsRes: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".ParamsRes"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "params"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._params) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._params {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_ParamsRes, rhs: Sifnode_Clp_V1_ParamsRes) -> Bool {
+    if lhs._params != rhs._params {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_RewardParamsReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".RewardParamsReq"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_RewardParamsReq, rhs: Sifnode_Clp_V1_RewardParamsReq) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_RewardParamsRes: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".RewardParamsRes"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "params"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._params) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._params {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_RewardParamsRes, rhs: Sifnode_Clp_V1_RewardParamsRes) -> Bool {
+    if lhs._params != rhs._params {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_PmtpParamsReq: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".PmtpParamsReq"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_PmtpParamsReq, rhs: Sifnode_Clp_V1_PmtpParamsReq) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_PmtpParamsRes: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".PmtpParamsRes"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "params"),
+    2: .standard(proto: "pmtp_rate_params"),
+    3: .standard(proto: "pmtp_epoch"),
+    4: .same(proto: "height"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._params) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._pmtpRateParams) }()
+      case 3: try { try decoder.decodeSingularMessageField(value: &self._pmtpEpoch) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.height) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._params {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    }
+    if let v = self._pmtpRateParams {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }
+    if let v = self._pmtpEpoch {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 3)
+    }
+    if self.height != 0 {
+      try visitor.visitSingularInt64Field(value: self.height, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_PmtpParamsRes, rhs: Sifnode_Clp_V1_PmtpParamsRes) -> Bool {
+    if lhs._params != rhs._params {return false}
+    if lhs._pmtpRateParams != rhs._pmtpRateParams {return false}
+    if lhs._pmtpEpoch != rhs._pmtpEpoch {return false}
+    if lhs.height != rhs.height {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

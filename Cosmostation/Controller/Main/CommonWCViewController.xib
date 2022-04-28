@@ -178,20 +178,24 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mkI-9p-rWl">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browswer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdi-mV-E21">
-                                    <rect key="frame" x="15" y="15" width="79.5" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Browser" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bdi-mV-E21">
+                                    <rect key="frame" x="15" y="18" width="66.5" height="21"/>
                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BhS-sQ-2En">
-                                    <rect key="frame" x="15" y="37" width="21" height="19.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <rect key="frame" x="15" y="40" width="341" height="14.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-xM-H7P">
-                                    <rect key="frame" x="361" y="16" width="48" height="38"/>
+                                    <rect key="frame" x="371" y="16" width="38" height="38"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="38" id="1EL-7E-HXa"/>
+                                        <constraint firstAttribute="width" constant="38" id="JQw-iX-DMf"/>
+                                    </constraints>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <buttonConfiguration key="configuration" style="plain" image="close_btn"/>
                                     <connections>
@@ -199,31 +203,32 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MFF-2M-qVe">
-                                    <rect key="frame" x="124.5" y="18.5" width="62" height="14.5"/>
+                                    <rect key="frame" x="105.5" y="21.5" width="62" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="passedImg" translatesAutoresizingMaskIntoConstraints="NO" id="WEt-J9-ZIZ">
-                                    <rect key="frame" x="109.5" y="20.5" width="10" height="10"/>
+                                    <rect key="frame" x="93.5" y="24.5" width="8" height="8"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="10" id="8v3-2w-dMq"/>
-                                        <constraint firstAttribute="width" constant="10" id="AKa-o2-1Gt"/>
+                                        <constraint firstAttribute="height" constant="8" id="8v3-2w-dMq"/>
+                                        <constraint firstAttribute="width" constant="8" id="AKa-o2-1Gt"/>
                                     </constraints>
                                 </imageView>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="WEt-J9-ZIZ" firstAttribute="centerY" secondItem="Bdi-mV-E21" secondAttribute="centerY" id="4sW-fw-bmS"/>
-                                <constraint firstItem="MFF-2M-qVe" firstAttribute="leading" secondItem="WEt-J9-ZIZ" secondAttribute="trailing" constant="5" id="Gc3-2a-TwY"/>
-                                <constraint firstItem="Bdi-mV-E21" firstAttribute="top" secondItem="mkI-9p-rWl" secondAttribute="top" constant="15" id="HWt-A3-CJR"/>
+                                <constraint firstItem="MFF-2M-qVe" firstAttribute="leading" secondItem="WEt-J9-ZIZ" secondAttribute="trailing" constant="4" id="Gc3-2a-TwY"/>
+                                <constraint firstItem="Bdi-mV-E21" firstAttribute="top" secondItem="mkI-9p-rWl" secondAttribute="top" constant="18" id="HWt-A3-CJR"/>
                                 <constraint firstAttribute="height" constant="70" id="Ks0-cY-ZiH"/>
                                 <constraint firstItem="Bdi-mV-E21" firstAttribute="leading" secondItem="mkI-9p-rWl" secondAttribute="leading" constant="15" id="O5c-if-BlD"/>
                                 <constraint firstItem="MFF-2M-qVe" firstAttribute="centerY" secondItem="Bdi-mV-E21" secondAttribute="centerY" id="O9c-p5-RBj"/>
                                 <constraint firstItem="BhS-sQ-2En" firstAttribute="top" secondItem="Bdi-mV-E21" secondAttribute="bottom" constant="1" id="OJZ-AZ-8uE"/>
-                                <constraint firstItem="WEt-J9-ZIZ" firstAttribute="leading" secondItem="Bdi-mV-E21" secondAttribute="trailing" constant="15" id="Ted-27-4jz"/>
+                                <constraint firstItem="WEt-J9-ZIZ" firstAttribute="leading" secondItem="Bdi-mV-E21" secondAttribute="trailing" constant="12" id="Ted-27-4jz"/>
                                 <constraint firstItem="BhS-sQ-2En" firstAttribute="leading" secondItem="mkI-9p-rWl" secondAttribute="leading" constant="15" id="VHH-gT-0jJ"/>
                                 <constraint firstAttribute="trailing" secondItem="EzO-xM-H7P" secondAttribute="trailing" constant="5" id="jy5-Qy-Ymz"/>
                                 <constraint firstItem="EzO-xM-H7P" firstAttribute="centerY" secondItem="mkI-9p-rWl" secondAttribute="centerY" id="pbo-El-9uM"/>
+                                <constraint firstItem="EzO-xM-H7P" firstAttribute="leading" secondItem="BhS-sQ-2En" secondAttribute="trailing" constant="15" id="yJt-aU-uTr"/>
                             </constraints>
                         </view>
                     </subviews>

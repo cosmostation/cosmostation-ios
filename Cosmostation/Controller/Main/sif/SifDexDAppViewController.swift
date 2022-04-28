@@ -267,12 +267,28 @@ extension WUtils {
         }
     }
     
+    static func getPoolLpPrice(_ pool: Sifnode_Clp_V1_Pool, _ denom: String) -> NSDecimalNumber {
+        if (denom == SIF_MAIN_DENOM) {
+            return getNativeLpPrice(pool)
+        } else {
+            return getExternalLpPrice(pool)
+        }
+    }
+    
     static func getNativeLpAmount(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {
         return NSDecimalNumber.init(string: pool.nativeAssetBalance)
     }
     
     static func getExternalLpAmount(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {
         return NSDecimalNumber.init(string: pool.externalAssetBalance)
+    }
+    
+    static func getNativeLpPrice(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {
+        return NSDecimalNumber.init(string: pool.swapPriceNative).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler24Down)
+    }
+    
+    static func getExternalLpPrice(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {
+        return NSDecimalNumber.init(string: pool.swapPriceExternal).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler24Down)
     }
     
     static func getUnitAmount(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {

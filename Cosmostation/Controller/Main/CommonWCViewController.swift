@@ -51,7 +51,7 @@ class CommonWCViewController: BaseViewController {
         super.viewDidLoad()
         self.loadingImg.onStartAnimation()
         
-        if (!isDeepLink ) {
+        if (!isDeepLink && !isDapp) {
             account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
             chainType = WUtils.getChainType(account!.account_base_chain)
             baseChain = WUtils.getChainDBName(chainType)
@@ -76,9 +76,11 @@ class CommonWCViewController: BaseViewController {
         if (connected) {
             dappConnectImage.image = UIImage(named: "passedImg")
             dappConnectLabel.text = "Connected"
+            dappConnectLabel.textColor = UIColor.white
         } else {
             dappConnectImage.image = UIImage(named: "passUp")
             dappConnectLabel.text = "Not Connected"
+            dappConnectLabel.textColor = UIColor.lightGray
         }
     }
     
@@ -334,9 +336,12 @@ class CommonWCViewController: BaseViewController {
     }
     
     func onDeepLinkDismiss() {
-        //@TOBE need test
-        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+        if (self.navigationController != nil) {
+            self.navigationController?.popViewController(animated: false)
+        } else {
+            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+        }
     }
 
     func jumpBackToPreviousApp() {
@@ -495,7 +500,12 @@ class CommonWCViewController: BaseViewController {
     }
     
     @IBAction func onCloseDapp(_ sender: UIButton) {
-        self.dismiss(animated: true)
+        if (self.navigationController != nil) {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+        }
     }
     
     @IBAction func onClickDisconnect(_ sender: UIButton) {
@@ -574,6 +584,7 @@ extension CommonWCViewController: SBCardPopupDelegate {
                 }
                 getKeplrAccount(account: selectedAccount, listener: { wallet in
                     self.moveToBackgroundIfNeedAndAction {
+                        self.accountMap[chainName] = selectedAccount
                         self.interactor?.approveRequest(id: self.wcId!, result: [wallet]).cauterize()
                     }
                 })
@@ -584,6 +595,7 @@ extension CommonWCViewController: SBCardPopupDelegate {
                 if let peerMeta = self.wCPeerMeta {
                     self.onViewUpdate(peerMeta)
                 }
+                self.accountMap[chainName] = selectedAccount
                 accountSelectedSet.insert(selectedAccount)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(600), execute: {
                     self.showAccountPopup()
@@ -595,17 +607,13 @@ extension CommonWCViewController: SBCardPopupDelegate {
 
 extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url?.absoluteString,
-            (url.starts(with: "http://") || url.starts(with: "https://")) {
-            decisionHandler(.allow)
-            return
-        }
-        
-        if let url = navigationAction.request.url, UIApplication.shared.canOpenURL(url) {
+        if let url = navigationAction.request.url, url.scheme == "cosmostation" {
             UIApplication.shared.open(url, options: [:])
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
         }
         
-        decisionHandler(.cancel)
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {

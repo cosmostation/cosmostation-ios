@@ -53,6 +53,26 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         NotificationCenter.default.addObserver(self, selector: #selector(self.showNotificationBanner(_:)), name: Notification.Name("pushNoti"), object: nil)
     }
     
+    func processScheme() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate, let mSchemeURL = delegate.scheme {
+            let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+            
+            if (mSchemeURL.host == "wc") {
+                commonWcVC.wcURL = mSchemeURL.query
+                commonWcVC.isDeepLink = true
+                commonWcVC.isDapp = false
+            } else if (mSchemeURL.host == "dapp") {
+                commonWcVC.dappURL = mSchemeURL.query
+                commonWcVC.isDeepLink = false
+                commonWcVC.isDapp = true
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                self.present(commonWcVC, animated: true, completion: nil)
+            })
+            delegate.scheme = nil
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("pushNoti"), object: nil)
@@ -307,10 +327,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
-            
-//            self.onFetchgRPCStargazeClaimParam()
-//            self.onFetchgRPCStargazeClaimRecord(self.mAccount.account_address)
-//            self.onFetchgRPCStargazeClaimTotal(self.mAccount.account_address)
             
         } else if (mChainType == ChainType.KAVA_MAIN) {
             self.mFetchCnt = 12
@@ -960,57 +976,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    func onFetchgRPCStargazeClaimParam() {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryParamsRequest.init()
-                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Param response ", response)
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCStargazeClaimParam failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
-    
-    func onFetchgRPCStargazeClaimRecord(_ address: String) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryClaimRecordRequest.with { $0.address = address }
-                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).claimRecord(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Record response ", response)
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCStargazeClaimRecord failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
-    
-    func onFetchgRPCStargazeClaimTotal(_ address: String) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryTotalClaimableRequest.with { $0.address = address }
-                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).totalClaimable(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Total response ", response)
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCStargazeClaimTotal failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
-    
     
     //for KAVA
 //    func onFetchgRPCKavaPriceParam() {
@@ -1278,6 +1243,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     public func hideWaittingAlert() {
         if (waitAlert != nil) {
             waitAlert?.dismiss(animated: true, completion: nil)
+            processScheme()
         }
     }
     

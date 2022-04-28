@@ -269,6 +269,27 @@ struct Sifnode_Dispensation_V1_UserClaims {
   init() {}
 }
 
+struct Sifnode_Dispensation_V1_MintController {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var totalCounter: Cosmos_Base_V1beta1_Coin {
+    get {return _totalCounter ?? Cosmos_Base_V1beta1_Coin()}
+    set {_totalCounter = newValue}
+  }
+  /// Returns true if `totalCounter` has been explicitly set.
+  var hasTotalCounter: Bool {return self._totalCounter != nil}
+  /// Clears the value of `totalCounter`. Subsequent reads from it will return its default value.
+  mutating func clearTotalCounter() {self._totalCounter = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _totalCounter: Cosmos_Base_V1beta1_Coin? = nil
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "sifnode.dispensation.v1"
@@ -588,6 +609,38 @@ extension Sifnode_Dispensation_V1_UserClaims: SwiftProtobuf.Message, SwiftProtob
 
   static func ==(lhs: Sifnode_Dispensation_V1_UserClaims, rhs: Sifnode_Dispensation_V1_UserClaims) -> Bool {
     if lhs.userClaims != rhs.userClaims {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Dispensation_V1_MintController: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MintController"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "total_counter"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._totalCounter) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if let v = self._totalCounter {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Dispensation_V1_MintController, rhs: Sifnode_Dispensation_V1_MintController) -> Bool {
+    if lhs._totalCounter != rhs._totalCounter {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
