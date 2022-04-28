@@ -1876,8 +1876,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         commonWcVC.dappURL = "https://wc.dev.cosmostation.io"
         commonWcVC.isDapp = true
         commonWcVC.isDeepLink = false
-        commonWcVC.modalPresentationStyle = .fullScreen
-        self.present(commonWcVC, animated: true, completion: nil)
+        commonWcVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(commonWcVC, animated: true)
     }
     
     func onClickGravityDex() {

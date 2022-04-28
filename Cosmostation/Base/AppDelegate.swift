@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     var userInfo:[AnyHashable : Any]?
+    var scheme: URL?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
@@ -49,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else if (BaseData.instance.hasPassword()) {
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 passwordVC.mTarget = PASSWORD_ACTION_DEEPLINK_LOCK
+                passwordVC.mSchemeURL = url
                 if (url.host == "wc") {
                     passwordVC.mWcURL = url.query
                 } else if (url.host == "dapp") {
@@ -60,7 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let emptyWcVc = EmptyWCViewController(nibName: "EmptyWCViewController", bundle: nil)
                 application.topViewController!.present(emptyWcVc, animated: true, completion: nil)
             }
-            
         }
         return false
     }

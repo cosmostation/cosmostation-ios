@@ -53,6 +53,26 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         NotificationCenter.default.addObserver(self, selector: #selector(self.showNotificationBanner(_:)), name: Notification.Name("pushNoti"), object: nil)
     }
     
+    func processScheme() {
+        if let delegate = UIApplication.shared.delegate as? AppDelegate, let mSchemeURL = delegate.scheme {
+            let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+            
+            if (mSchemeURL.host == "wc") {
+                commonWcVC.wcURL = mSchemeURL.query
+                commonWcVC.isDeepLink = true
+                commonWcVC.isDapp = false
+            } else if (mSchemeURL.host == "dapp") {
+                commonWcVC.dappURL = mSchemeURL.query
+                commonWcVC.isDeepLink = false
+                commonWcVC.isDapp = true
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+                self.present(commonWcVC, animated: true, completion: nil)
+            })
+            delegate.scheme = nil
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("pushNoti"), object: nil)
@@ -1278,6 +1298,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     public func hideWaittingAlert() {
         if (waitAlert != nil) {
             waitAlert?.dismiss(animated: true, completion: nil)
+            processScheme()
         }
     }
     
