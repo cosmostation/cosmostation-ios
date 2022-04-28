@@ -69,9 +69,7 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
         WUtils.DpSifCoinImg(outputCoinImg, swapOutDenom)
         WUtils.DpSifCoinName(outputCoinName, swapOutDenom)
         
-        let lpInputAmount = WUtils.getPoolLpAmount(selectedPool, swapInDenom)
-        let lpOutputAmount = WUtils.getPoolLpAmount(selectedPool, swapOutDenom)
-        swapRate = lpOutputAmount.dividing(by: lpInputAmount, withBehavior: WUtils.handler24Down).multiplying(byPowerOf10: (dpInPutDecimal - dpOutPutDecimal))
+        swapRate = WUtils.getPoolLpPrice(selectedPool, swapInDenom)
         print("swapRate ", swapRate)
         
         self.loadingImg.stopAnimating()
