@@ -328,10 +328,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-//            self.onFetchgRPCStargazeClaimParam()
-//            self.onFetchgRPCStargazeClaimRecord(self.mAccount.account_address)
-//            self.onFetchgRPCStargazeClaimTotal(self.mAccount.account_address)
-            
         } else if (mChainType == ChainType.KAVA_MAIN) {
             self.mFetchCnt = 12
             self.onFetchgRPCNodeInfo()
@@ -975,57 +971,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 
             } catch {
                 print("onFetchgRPCGravityPools failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
-    
-    func onFetchgRPCStargazeClaimParam() {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryParamsRequest.init()
-                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).params(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Param response ", response)
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCStargazeClaimParam failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
-    
-    func onFetchgRPCStargazeClaimRecord(_ address: String) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryClaimRecordRequest.with { $0.address = address }
-                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).claimRecord(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Record response ", response)
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCStargazeClaimRecord failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
-    
-    func onFetchgRPCStargazeClaimTotal(_ address: String) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Publicawesome_Stargaze_Claim_V1beta1_QueryTotalClaimableRequest.with { $0.address = address }
-                if let response = try? Publicawesome_Stargaze_Claim_V1beta1_QueryClient(channel: channel).totalClaimable(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Total response ", response)
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCStargazeClaimTotal failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }

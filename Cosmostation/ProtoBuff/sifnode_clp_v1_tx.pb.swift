@@ -20,6 +20,32 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
+struct Sifnode_Clp_V1_MsgUpdateStakingRewardParams {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var signer: String = String()
+
+  var minter: String = String()
+
+  var params: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Sifnode_Clp_V1_MsgRemoveLiquidity {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -48,6 +74,41 @@ struct Sifnode_Clp_V1_MsgRemoveLiquidity {
 }
 
 struct Sifnode_Clp_V1_MsgRemoveLiquidityResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgRemoveLiquidityUnits {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var signer: String = String()
+
+  var externalAsset: Sifnode_Clp_V1_Asset {
+    get {return _externalAsset ?? Sifnode_Clp_V1_Asset()}
+    set {_externalAsset = newValue}
+  }
+  /// Returns true if `externalAsset` has been explicitly set.
+  var hasExternalAsset: Bool {return self._externalAsset != nil}
+  /// Clears the value of `externalAsset`. Subsequent reads from it will return its default value.
+  mutating func clearExternalAsset() {self._externalAsset = nil}
+
+  var withdrawUnits: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _externalAsset: Sifnode_Clp_V1_Asset? = nil
+}
+
+struct Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -131,6 +192,64 @@ struct Sifnode_Clp_V1_MsgAddLiquidityResponse {
   init() {}
 }
 
+struct Sifnode_Clp_V1_MsgModifyPmtpRates {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var signer: String = String()
+
+  var blockRate: String = String()
+
+  var runningRate: String = String()
+
+  var endPolicy: Bool = false
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgModifyPmtpRatesResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgUpdatePmtpParams {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var signer: String = String()
+
+  var pmtpPeriodGovernanceRate: String = String()
+
+  var pmtpPeriodEpochLength: Int64 = 0
+
+  var pmtpPeriodStartBlock: Int64 = 0
+
+  var pmtpPeriodEndBlock: Int64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 struct Sifnode_Clp_V1_MsgSwap {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
@@ -202,9 +321,159 @@ struct Sifnode_Clp_V1_MsgDecommissionPoolResponse {
   init() {}
 }
 
+struct Sifnode_Clp_V1_MsgUnlockLiquidityRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var signer: String = String()
+
+  var externalAsset: Sifnode_Clp_V1_Asset {
+    get {return _externalAsset ?? Sifnode_Clp_V1_Asset()}
+    set {_externalAsset = newValue}
+  }
+  /// Returns true if `externalAsset` has been explicitly set.
+  var hasExternalAsset: Bool {return self._externalAsset != nil}
+  /// Clears the value of `externalAsset`. Subsequent reads from it will return its default value.
+  mutating func clearExternalAsset() {self._externalAsset = nil}
+
+  var units: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _externalAsset: Sifnode_Clp_V1_Asset? = nil
+}
+
+struct Sifnode_Clp_V1_MsgUnlockLiquidityResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var signer: String = String()
+
+  /// in blocks
+  var liquidityRemovalLockPeriod: UInt64 = 0
+
+  /// in blocks
+  var liquidityRemovalCancelPeriod: UInt64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgAddRewardPeriodRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var signer: String = String()
+
+  var rewardPeriods: [Sifnode_Clp_V1_RewardPeriod] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_MsgAddRewardPeriodResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "sifnode.clp.v1"
+
+extension Sifnode_Clp_V1_MsgUpdateStakingRewardParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdateStakingRewardParams"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .same(proto: "minter"),
+    3: .same(proto: "params"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.minter) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.params) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    if !self.minter.isEmpty {
+      try visitor.visitSingularStringField(value: self.minter, fieldNumber: 2)
+    }
+    if !self.params.isEmpty {
+      try visitor.visitSingularStringField(value: self.params, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgUpdateStakingRewardParams, rhs: Sifnode_Clp_V1_MsgUpdateStakingRewardParams) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs.minter != rhs.minter {return false}
+    if lhs.params != rhs.params {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdateStakingRewardParamsResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse, rhs: Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
 
 extension Sifnode_Clp_V1_MsgRemoveLiquidity: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".MsgRemoveLiquidity"
@@ -270,6 +539,69 @@ extension Sifnode_Clp_V1_MsgRemoveLiquidityResponse: SwiftProtobuf.Message, Swif
   }
 
   static func ==(lhs: Sifnode_Clp_V1_MsgRemoveLiquidityResponse, rhs: Sifnode_Clp_V1_MsgRemoveLiquidityResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgRemoveLiquidityUnits: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgRemoveLiquidityUnits"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .standard(proto: "external_asset"),
+    3: .standard(proto: "withdraw_units"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._externalAsset) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.withdrawUnits) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    if let v = self._externalAsset {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }
+    if !self.withdrawUnits.isEmpty {
+      try visitor.visitSingularStringField(value: self.withdrawUnits, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgRemoveLiquidityUnits, rhs: Sifnode_Clp_V1_MsgRemoveLiquidityUnits) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs._externalAsset != rhs._externalAsset {return false}
+    if lhs.withdrawUnits != rhs.withdrawUnits {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgRemoveLiquidityUnitsResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse, rhs: Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -413,6 +745,150 @@ extension Sifnode_Clp_V1_MsgAddLiquidityResponse: SwiftProtobuf.Message, SwiftPr
   }
 }
 
+extension Sifnode_Clp_V1_MsgModifyPmtpRates: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgModifyPmtpRates"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .standard(proto: "block_rate"),
+    3: .standard(proto: "running_rate"),
+    4: .standard(proto: "end_policy"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.blockRate) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.runningRate) }()
+      case 4: try { try decoder.decodeSingularBoolField(value: &self.endPolicy) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    if !self.blockRate.isEmpty {
+      try visitor.visitSingularStringField(value: self.blockRate, fieldNumber: 2)
+    }
+    if !self.runningRate.isEmpty {
+      try visitor.visitSingularStringField(value: self.runningRate, fieldNumber: 3)
+    }
+    if self.endPolicy != false {
+      try visitor.visitSingularBoolField(value: self.endPolicy, fieldNumber: 4)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgModifyPmtpRates, rhs: Sifnode_Clp_V1_MsgModifyPmtpRates) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs.blockRate != rhs.blockRate {return false}
+    if lhs.runningRate != rhs.runningRate {return false}
+    if lhs.endPolicy != rhs.endPolicy {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgModifyPmtpRatesResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgModifyPmtpRatesResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgModifyPmtpRatesResponse, rhs: Sifnode_Clp_V1_MsgModifyPmtpRatesResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgUpdatePmtpParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdatePmtpParams"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .standard(proto: "pmtp_period_governance_rate"),
+    3: .standard(proto: "pmtp_period_epoch_length"),
+    4: .standard(proto: "pmtp_period_start_block"),
+    5: .standard(proto: "pmtp_period_end_block"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.pmtpPeriodGovernanceRate) }()
+      case 3: try { try decoder.decodeSingularInt64Field(value: &self.pmtpPeriodEpochLength) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.pmtpPeriodStartBlock) }()
+      case 5: try { try decoder.decodeSingularInt64Field(value: &self.pmtpPeriodEndBlock) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    if !self.pmtpPeriodGovernanceRate.isEmpty {
+      try visitor.visitSingularStringField(value: self.pmtpPeriodGovernanceRate, fieldNumber: 2)
+    }
+    if self.pmtpPeriodEpochLength != 0 {
+      try visitor.visitSingularInt64Field(value: self.pmtpPeriodEpochLength, fieldNumber: 3)
+    }
+    if self.pmtpPeriodStartBlock != 0 {
+      try visitor.visitSingularInt64Field(value: self.pmtpPeriodStartBlock, fieldNumber: 4)
+    }
+    if self.pmtpPeriodEndBlock != 0 {
+      try visitor.visitSingularInt64Field(value: self.pmtpPeriodEndBlock, fieldNumber: 5)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgUpdatePmtpParams, rhs: Sifnode_Clp_V1_MsgUpdatePmtpParams) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs.pmtpPeriodGovernanceRate != rhs.pmtpPeriodGovernanceRate {return false}
+    if lhs.pmtpPeriodEpochLength != rhs.pmtpPeriodEpochLength {return false}
+    if lhs.pmtpPeriodStartBlock != rhs.pmtpPeriodStartBlock {return false}
+    if lhs.pmtpPeriodEndBlock != rhs.pmtpPeriodEndBlock {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdatePmtpParamsResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse, rhs: Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
 extension Sifnode_Clp_V1_MsgSwap: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".MsgSwap"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
@@ -540,6 +1016,189 @@ extension Sifnode_Clp_V1_MsgDecommissionPoolResponse: SwiftProtobuf.Message, Swi
   }
 
   static func ==(lhs: Sifnode_Clp_V1_MsgDecommissionPoolResponse, rhs: Sifnode_Clp_V1_MsgDecommissionPoolResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgUnlockLiquidityRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUnlockLiquidityRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .standard(proto: "external_asset"),
+    3: .same(proto: "units"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._externalAsset) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.units) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    if let v = self._externalAsset {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }
+    if !self.units.isEmpty {
+      try visitor.visitSingularStringField(value: self.units, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgUnlockLiquidityRequest, rhs: Sifnode_Clp_V1_MsgUnlockLiquidityRequest) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs._externalAsset != rhs._externalAsset {return false}
+    if lhs.units != rhs.units {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgUnlockLiquidityResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUnlockLiquidityResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgUnlockLiquidityResponse, rhs: Sifnode_Clp_V1_MsgUnlockLiquidityResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdateRewardsParamsRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .standard(proto: "liquidity_removal_lock_period"),
+    3: .standard(proto: "liquidity_removal_cancel_period"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeSingularUInt64Field(value: &self.liquidityRemovalLockPeriod) }()
+      case 3: try { try decoder.decodeSingularUInt64Field(value: &self.liquidityRemovalCancelPeriod) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    if self.liquidityRemovalLockPeriod != 0 {
+      try visitor.visitSingularUInt64Field(value: self.liquidityRemovalLockPeriod, fieldNumber: 2)
+    }
+    if self.liquidityRemovalCancelPeriod != 0 {
+      try visitor.visitSingularUInt64Field(value: self.liquidityRemovalCancelPeriod, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest, rhs: Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs.liquidityRemovalLockPeriod != rhs.liquidityRemovalLockPeriod {return false}
+    if lhs.liquidityRemovalCancelPeriod != rhs.liquidityRemovalCancelPeriod {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgUpdateRewardsParamsResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse, rhs: Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse) -> Bool {
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgAddRewardPeriodRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgAddRewardPeriodRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "signer"),
+    2: .standard(proto: "reward_periods"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.signer) }()
+      case 2: try { try decoder.decodeRepeatedMessageField(value: &self.rewardPeriods) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.signer.isEmpty {
+      try visitor.visitSingularStringField(value: self.signer, fieldNumber: 1)
+    }
+    if !self.rewardPeriods.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.rewardPeriods, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgAddRewardPeriodRequest, rhs: Sifnode_Clp_V1_MsgAddRewardPeriodRequest) -> Bool {
+    if lhs.signer != rhs.signer {return false}
+    if lhs.rewardPeriods != rhs.rewardPeriods {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_MsgAddRewardPeriodResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".MsgAddRewardPeriodResponse"
+  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let _ = try decoder.nextFieldNumber() {
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_MsgAddRewardPeriodResponse, rhs: Sifnode_Clp_V1_MsgAddRewardPeriodResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

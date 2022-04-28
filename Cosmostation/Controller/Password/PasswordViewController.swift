@@ -339,7 +339,6 @@ class PasswordViewController: BaseViewController {
                             BaseData.instance.setLastTab(2)
                             DispatchQueue.main.async(execute: {
                                 let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
-                                mainTabVC.mSchemeURL = self.mSchemeURL
                                 appDelegate.window?.rootViewController = mainTabVC
                                 self.present(mainTabVC, animated: true, completion: nil)
                             })

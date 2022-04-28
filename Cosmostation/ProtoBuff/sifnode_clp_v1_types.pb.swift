@@ -52,6 +52,12 @@ struct Sifnode_Clp_V1_Pool {
 
   var poolUnits: String = String()
 
+  var swapPriceNative: String = String()
+
+  var swapPriceExternal: String = String()
+
+  var rewardPeriodNativeDistributed: String = String()
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -77,11 +83,41 @@ struct Sifnode_Clp_V1_LiquidityProvider {
 
   var liquidityProviderAddress: String = String()
 
+  var unlocks: [Sifnode_Clp_V1_LiquidityUnlock] = []
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
 
   fileprivate var _asset: Sifnode_Clp_V1_Asset? = nil
+}
+
+struct Sifnode_Clp_V1_LiquidityUnlock {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var requestHeight: Int64 = 0
+
+  var units: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Clp_V1_PmtpEpoch {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var epochCounter: Int64 = 0
+
+  var blockCounter: Int64 = 0
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
 }
 
 struct Sifnode_Clp_V1_WhiteList {
@@ -119,6 +155,22 @@ struct Sifnode_Clp_V1_LiquidityProviderData {
   init() {}
 
   fileprivate var _liquidityProvider: Sifnode_Clp_V1_LiquidityProvider? = nil
+}
+
+struct Sifnode_Clp_V1_EventPolicy {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var eventType: String = String()
+
+  var pmtpPeriodStartBlock: String = String()
+
+  var pmtpPeriodEndBlock: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -164,6 +216,9 @@ extension Sifnode_Clp_V1_Pool: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     2: .standard(proto: "native_asset_balance"),
     3: .standard(proto: "external_asset_balance"),
     4: .standard(proto: "pool_units"),
+    5: .standard(proto: "swap_price_native"),
+    6: .standard(proto: "swap_price_external"),
+    7: .standard(proto: "reward_period_native_distributed"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -176,6 +231,9 @@ extension Sifnode_Clp_V1_Pool: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
       case 2: try { try decoder.decodeSingularStringField(value: &self.nativeAssetBalance) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.externalAssetBalance) }()
       case 4: try { try decoder.decodeSingularStringField(value: &self.poolUnits) }()
+      case 5: try { try decoder.decodeSingularStringField(value: &self.swapPriceNative) }()
+      case 6: try { try decoder.decodeSingularStringField(value: &self.swapPriceExternal) }()
+      case 7: try { try decoder.decodeSingularStringField(value: &self.rewardPeriodNativeDistributed) }()
       default: break
       }
     }
@@ -194,6 +252,15 @@ extension Sifnode_Clp_V1_Pool: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if !self.poolUnits.isEmpty {
       try visitor.visitSingularStringField(value: self.poolUnits, fieldNumber: 4)
     }
+    if !self.swapPriceNative.isEmpty {
+      try visitor.visitSingularStringField(value: self.swapPriceNative, fieldNumber: 5)
+    }
+    if !self.swapPriceExternal.isEmpty {
+      try visitor.visitSingularStringField(value: self.swapPriceExternal, fieldNumber: 6)
+    }
+    if !self.rewardPeriodNativeDistributed.isEmpty {
+      try visitor.visitSingularStringField(value: self.rewardPeriodNativeDistributed, fieldNumber: 7)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -202,6 +269,9 @@ extension Sifnode_Clp_V1_Pool: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     if lhs.nativeAssetBalance != rhs.nativeAssetBalance {return false}
     if lhs.externalAssetBalance != rhs.externalAssetBalance {return false}
     if lhs.poolUnits != rhs.poolUnits {return false}
+    if lhs.swapPriceNative != rhs.swapPriceNative {return false}
+    if lhs.swapPriceExternal != rhs.swapPriceExternal {return false}
+    if lhs.rewardPeriodNativeDistributed != rhs.rewardPeriodNativeDistributed {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -213,6 +283,7 @@ extension Sifnode_Clp_V1_LiquidityProvider: SwiftProtobuf.Message, SwiftProtobuf
     1: .same(proto: "asset"),
     2: .standard(proto: "liquidity_provider_units"),
     3: .standard(proto: "liquidity_provider_address"),
+    4: .same(proto: "unlocks"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -224,6 +295,7 @@ extension Sifnode_Clp_V1_LiquidityProvider: SwiftProtobuf.Message, SwiftProtobuf
       case 1: try { try decoder.decodeSingularMessageField(value: &self._asset) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.liquidityProviderUnits) }()
       case 3: try { try decoder.decodeSingularStringField(value: &self.liquidityProviderAddress) }()
+      case 4: try { try decoder.decodeRepeatedMessageField(value: &self.unlocks) }()
       default: break
       }
     }
@@ -239,6 +311,9 @@ extension Sifnode_Clp_V1_LiquidityProvider: SwiftProtobuf.Message, SwiftProtobuf
     if !self.liquidityProviderAddress.isEmpty {
       try visitor.visitSingularStringField(value: self.liquidityProviderAddress, fieldNumber: 3)
     }
+    if !self.unlocks.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.unlocks, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -246,6 +321,83 @@ extension Sifnode_Clp_V1_LiquidityProvider: SwiftProtobuf.Message, SwiftProtobuf
     if lhs._asset != rhs._asset {return false}
     if lhs.liquidityProviderUnits != rhs.liquidityProviderUnits {return false}
     if lhs.liquidityProviderAddress != rhs.liquidityProviderAddress {return false}
+    if lhs.unlocks != rhs.unlocks {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_LiquidityUnlock: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".LiquidityUnlock"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "request_height"),
+    2: .same(proto: "units"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.requestHeight) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.units) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.requestHeight != 0 {
+      try visitor.visitSingularInt64Field(value: self.requestHeight, fieldNumber: 1)
+    }
+    if !self.units.isEmpty {
+      try visitor.visitSingularStringField(value: self.units, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_LiquidityUnlock, rhs: Sifnode_Clp_V1_LiquidityUnlock) -> Bool {
+    if lhs.requestHeight != rhs.requestHeight {return false}
+    if lhs.units != rhs.units {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_PmtpEpoch: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".PmtpEpoch"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "epoch_counter"),
+    2: .standard(proto: "block_counter"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularInt64Field(value: &self.epochCounter) }()
+      case 2: try { try decoder.decodeSingularInt64Field(value: &self.blockCounter) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.epochCounter != 0 {
+      try visitor.visitSingularInt64Field(value: self.epochCounter, fieldNumber: 1)
+    }
+    if self.blockCounter != 0 {
+      try visitor.visitSingularInt64Field(value: self.blockCounter, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_PmtpEpoch, rhs: Sifnode_Clp_V1_PmtpEpoch) -> Bool {
+    if lhs.epochCounter != rhs.epochCounter {return false}
+    if lhs.blockCounter != rhs.blockCounter {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
@@ -322,6 +474,50 @@ extension Sifnode_Clp_V1_LiquidityProviderData: SwiftProtobuf.Message, SwiftProt
     if lhs._liquidityProvider != rhs._liquidityProvider {return false}
     if lhs.nativeAssetBalance != rhs.nativeAssetBalance {return false}
     if lhs.externalAssetBalance != rhs.externalAssetBalance {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Clp_V1_EventPolicy: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".EventPolicy"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "event_type"),
+    2: .standard(proto: "pmtp_period_start_block"),
+    3: .standard(proto: "pmtp_period_end_block"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.eventType) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.pmtpPeriodStartBlock) }()
+      case 3: try { try decoder.decodeSingularStringField(value: &self.pmtpPeriodEndBlock) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.eventType.isEmpty {
+      try visitor.visitSingularStringField(value: self.eventType, fieldNumber: 1)
+    }
+    if !self.pmtpPeriodStartBlock.isEmpty {
+      try visitor.visitSingularStringField(value: self.pmtpPeriodStartBlock, fieldNumber: 2)
+    }
+    if !self.pmtpPeriodEndBlock.isEmpty {
+      try visitor.visitSingularStringField(value: self.pmtpPeriodEndBlock, fieldNumber: 3)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Clp_V1_EventPolicy, rhs: Sifnode_Clp_V1_EventPolicy) -> Bool {
+    if lhs.eventType != rhs.eventType {return false}
+    if lhs.pmtpPeriodStartBlock != rhs.pmtpPeriodStartBlock {return false}
+    if lhs.pmtpPeriodEndBlock != rhs.pmtpPeriodEndBlock {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

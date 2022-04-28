@@ -35,6 +35,11 @@ internal protocol Sifnode_Clp_V1_MsgClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Sifnode_Clp_V1_MsgRemoveLiquidity, Sifnode_Clp_V1_MsgRemoveLiquidityResponse>
 
+  func removeLiquidityUnits(
+    _ request: Sifnode_Clp_V1_MsgRemoveLiquidityUnits,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgRemoveLiquidityUnits, Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse>
+
   func createPool(
     _ request: Sifnode_Clp_V1_MsgCreatePool,
     callOptions: CallOptions?
@@ -54,6 +59,36 @@ internal protocol Sifnode_Clp_V1_MsgClientProtocol: GRPCClient {
     _ request: Sifnode_Clp_V1_MsgDecommissionPool,
     callOptions: CallOptions?
   ) -> UnaryCall<Sifnode_Clp_V1_MsgDecommissionPool, Sifnode_Clp_V1_MsgDecommissionPoolResponse>
+
+  func unlockLiquidity(
+    _ request: Sifnode_Clp_V1_MsgUnlockLiquidityRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgUnlockLiquidityRequest, Sifnode_Clp_V1_MsgUnlockLiquidityResponse>
+
+  func updateRewardsParams(
+    _ request: Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest, Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse>
+
+  func addRewardPeriod(
+    _ request: Sifnode_Clp_V1_MsgAddRewardPeriodRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgAddRewardPeriodRequest, Sifnode_Clp_V1_MsgAddRewardPeriodResponse>
+
+  func modifyPmtpRates(
+    _ request: Sifnode_Clp_V1_MsgModifyPmtpRates,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgModifyPmtpRates, Sifnode_Clp_V1_MsgModifyPmtpRatesResponse>
+
+  func updatePmtpParams(
+    _ request: Sifnode_Clp_V1_MsgUpdatePmtpParams,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgUpdatePmtpParams, Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse>
+
+  func updateStakingRewardParams(
+    _ request: Sifnode_Clp_V1_MsgUpdateStakingRewardParams,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgUpdateStakingRewardParams, Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse>
 }
 
 extension Sifnode_Clp_V1_MsgClientProtocol {
@@ -76,6 +111,24 @@ extension Sifnode_Clp_V1_MsgClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeRemoveLiquidityInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to RemoveLiquidityUnits
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to RemoveLiquidityUnits.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func removeLiquidityUnits(
+    _ request: Sifnode_Clp_V1_MsgRemoveLiquidityUnits,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgRemoveLiquidityUnits, Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Msg/RemoveLiquidityUnits",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeRemoveLiquidityUnitsInterceptors() ?? []
     )
   }
 
@@ -150,12 +203,123 @@ extension Sifnode_Clp_V1_MsgClientProtocol {
       interceptors: self.interceptors?.makeDecommissionPoolInterceptors() ?? []
     )
   }
+
+  /// Unary call to UnlockLiquidity
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UnlockLiquidity.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func unlockLiquidity(
+    _ request: Sifnode_Clp_V1_MsgUnlockLiquidityRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgUnlockLiquidityRequest, Sifnode_Clp_V1_MsgUnlockLiquidityResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Msg/UnlockLiquidity",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnlockLiquidityInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to UpdateRewardsParams
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdateRewardsParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updateRewardsParams(
+    _ request: Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest, Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Msg/UpdateRewardsParams",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateRewardsParamsInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to AddRewardPeriod
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to AddRewardPeriod.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func addRewardPeriod(
+    _ request: Sifnode_Clp_V1_MsgAddRewardPeriodRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgAddRewardPeriodRequest, Sifnode_Clp_V1_MsgAddRewardPeriodResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Msg/AddRewardPeriod",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeAddRewardPeriodInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to ModifyPmtpRates
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to ModifyPmtpRates.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func modifyPmtpRates(
+    _ request: Sifnode_Clp_V1_MsgModifyPmtpRates,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgModifyPmtpRates, Sifnode_Clp_V1_MsgModifyPmtpRatesResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Msg/ModifyPmtpRates",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeModifyPmtpRatesInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to UpdatePmtpParams
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdatePmtpParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updatePmtpParams(
+    _ request: Sifnode_Clp_V1_MsgUpdatePmtpParams,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgUpdatePmtpParams, Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Msg/UpdatePmtpParams",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdatePmtpParamsInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to UpdateStakingRewardParams
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpdateStakingRewardParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func updateStakingRewardParams(
+    _ request: Sifnode_Clp_V1_MsgUpdateStakingRewardParams,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_MsgUpdateStakingRewardParams, Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Msg/UpdateStakingRewardParams",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpdateStakingRewardParamsInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Sifnode_Clp_V1_MsgClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'removeLiquidity'.
   func makeRemoveLiquidityInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgRemoveLiquidity, Sifnode_Clp_V1_MsgRemoveLiquidityResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'removeLiquidityUnits'.
+  func makeRemoveLiquidityUnitsInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgRemoveLiquidityUnits, Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse>]
 
   /// - Returns: Interceptors to use when invoking 'createPool'.
   func makeCreatePoolInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgCreatePool, Sifnode_Clp_V1_MsgCreatePoolResponse>]
@@ -168,6 +332,24 @@ internal protocol Sifnode_Clp_V1_MsgClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'decommissionPool'.
   func makeDecommissionPoolInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgDecommissionPool, Sifnode_Clp_V1_MsgDecommissionPoolResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'unlockLiquidity'.
+  func makeUnlockLiquidityInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgUnlockLiquidityRequest, Sifnode_Clp_V1_MsgUnlockLiquidityResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'updateRewardsParams'.
+  func makeUpdateRewardsParamsInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest, Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'addRewardPeriod'.
+  func makeAddRewardPeriodInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgAddRewardPeriodRequest, Sifnode_Clp_V1_MsgAddRewardPeriodResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'modifyPmtpRates'.
+  func makeModifyPmtpRatesInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgModifyPmtpRates, Sifnode_Clp_V1_MsgModifyPmtpRatesResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'updatePmtpParams'.
+  func makeUpdatePmtpParamsInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgUpdatePmtpParams, Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'updateStakingRewardParams'.
+  func makeUpdateStakingRewardParamsInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_MsgUpdateStakingRewardParams, Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse>]
 }
 
 internal final class Sifnode_Clp_V1_MsgClient: Sifnode_Clp_V1_MsgClientProtocol {
@@ -198,6 +380,8 @@ internal protocol Sifnode_Clp_V1_MsgProvider: CallHandlerProvider {
 
   func removeLiquidity(request: Sifnode_Clp_V1_MsgRemoveLiquidity, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgRemoveLiquidityResponse>
 
+  func removeLiquidityUnits(request: Sifnode_Clp_V1_MsgRemoveLiquidityUnits, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse>
+
   func createPool(request: Sifnode_Clp_V1_MsgCreatePool, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgCreatePoolResponse>
 
   func addLiquidity(request: Sifnode_Clp_V1_MsgAddLiquidity, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgAddLiquidityResponse>
@@ -205,6 +389,18 @@ internal protocol Sifnode_Clp_V1_MsgProvider: CallHandlerProvider {
   func swap(request: Sifnode_Clp_V1_MsgSwap, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgSwapResponse>
 
   func decommissionPool(request: Sifnode_Clp_V1_MsgDecommissionPool, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgDecommissionPoolResponse>
+
+  func unlockLiquidity(request: Sifnode_Clp_V1_MsgUnlockLiquidityRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgUnlockLiquidityResponse>
+
+  func updateRewardsParams(request: Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse>
+
+  func addRewardPeriod(request: Sifnode_Clp_V1_MsgAddRewardPeriodRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgAddRewardPeriodResponse>
+
+  func modifyPmtpRates(request: Sifnode_Clp_V1_MsgModifyPmtpRates, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgModifyPmtpRatesResponse>
+
+  func updatePmtpParams(request: Sifnode_Clp_V1_MsgUpdatePmtpParams, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse>
+
+  func updateStakingRewardParams(request: Sifnode_Clp_V1_MsgUpdateStakingRewardParams, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse>
 }
 
 extension Sifnode_Clp_V1_MsgProvider {
@@ -224,6 +420,15 @@ extension Sifnode_Clp_V1_MsgProvider {
         responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_MsgRemoveLiquidityResponse>(),
         interceptors: self.interceptors?.makeRemoveLiquidityInterceptors() ?? [],
         userFunction: self.removeLiquidity(request:context:)
+      )
+
+    case "RemoveLiquidityUnits":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_MsgRemoveLiquidityUnits>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse>(),
+        interceptors: self.interceptors?.makeRemoveLiquidityUnitsInterceptors() ?? [],
+        userFunction: self.removeLiquidityUnits(request:context:)
       )
 
     case "CreatePool":
@@ -262,6 +467,60 @@ extension Sifnode_Clp_V1_MsgProvider {
         userFunction: self.decommissionPool(request:context:)
       )
 
+    case "UnlockLiquidity":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_MsgUnlockLiquidityRequest>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_MsgUnlockLiquidityResponse>(),
+        interceptors: self.interceptors?.makeUnlockLiquidityInterceptors() ?? [],
+        userFunction: self.unlockLiquidity(request:context:)
+      )
+
+    case "UpdateRewardsParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdateRewardsParamsInterceptors() ?? [],
+        userFunction: self.updateRewardsParams(request:context:)
+      )
+
+    case "AddRewardPeriod":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_MsgAddRewardPeriodRequest>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_MsgAddRewardPeriodResponse>(),
+        interceptors: self.interceptors?.makeAddRewardPeriodInterceptors() ?? [],
+        userFunction: self.addRewardPeriod(request:context:)
+      )
+
+    case "ModifyPmtpRates":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_MsgModifyPmtpRates>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_MsgModifyPmtpRatesResponse>(),
+        interceptors: self.interceptors?.makeModifyPmtpRatesInterceptors() ?? [],
+        userFunction: self.modifyPmtpRates(request:context:)
+      )
+
+    case "UpdatePmtpParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_MsgUpdatePmtpParams>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdatePmtpParamsInterceptors() ?? [],
+        userFunction: self.updatePmtpParams(request:context:)
+      )
+
+    case "UpdateStakingRewardParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_MsgUpdateStakingRewardParams>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse>(),
+        interceptors: self.interceptors?.makeUpdateStakingRewardParamsInterceptors() ?? [],
+        userFunction: self.updateStakingRewardParams(request:context:)
+      )
+
     default:
       return nil
     }
@@ -273,6 +532,10 @@ internal protocol Sifnode_Clp_V1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'removeLiquidity'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeRemoveLiquidityInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgRemoveLiquidity, Sifnode_Clp_V1_MsgRemoveLiquidityResponse>]
+
+  /// - Returns: Interceptors to use when handling 'removeLiquidityUnits'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeRemoveLiquidityUnitsInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgRemoveLiquidityUnits, Sifnode_Clp_V1_MsgRemoveLiquidityUnitsResponse>]
 
   /// - Returns: Interceptors to use when handling 'createPool'.
   ///   Defaults to calling `self.makeInterceptors()`.
@@ -289,4 +552,28 @@ internal protocol Sifnode_Clp_V1_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'decommissionPool'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeDecommissionPoolInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgDecommissionPool, Sifnode_Clp_V1_MsgDecommissionPoolResponse>]
+
+  /// - Returns: Interceptors to use when handling 'unlockLiquidity'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUnlockLiquidityInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgUnlockLiquidityRequest, Sifnode_Clp_V1_MsgUnlockLiquidityResponse>]
+
+  /// - Returns: Interceptors to use when handling 'updateRewardsParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdateRewardsParamsInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgUpdateRewardsParamsRequest, Sifnode_Clp_V1_MsgUpdateRewardsParamsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'addRewardPeriod'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeAddRewardPeriodInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgAddRewardPeriodRequest, Sifnode_Clp_V1_MsgAddRewardPeriodResponse>]
+
+  /// - Returns: Interceptors to use when handling 'modifyPmtpRates'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeModifyPmtpRatesInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgModifyPmtpRates, Sifnode_Clp_V1_MsgModifyPmtpRatesResponse>]
+
+  /// - Returns: Interceptors to use when handling 'updatePmtpParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdatePmtpParamsInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgUpdatePmtpParams, Sifnode_Clp_V1_MsgUpdatePmtpParamsResponse>]
+
+  /// - Returns: Interceptors to use when handling 'updateStakingRewardParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpdateStakingRewardParamsInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_MsgUpdateStakingRewardParams, Sifnode_Clp_V1_MsgUpdateStakingRewardParamsResponse>]
 }

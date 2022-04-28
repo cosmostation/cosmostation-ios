@@ -93,6 +93,8 @@ struct Sifnode_Dispensation_V1_MsgRunDistribution {
 
   var distributionType: Sifnode_Dispensation_V1_DistributionType = .unspecified
 
+  var distributionCount: Int64 = 0
+
   var unknownFields = SwiftProtobuf.UnknownStorage()
 
   init() {}
@@ -253,6 +255,7 @@ extension Sifnode_Dispensation_V1_MsgRunDistribution: SwiftProtobuf.Message, Swi
     1: .standard(proto: "authorized_runner"),
     2: .standard(proto: "distribution_name"),
     3: .standard(proto: "distribution_type"),
+    4: .standard(proto: "distribution_count"),
   ]
 
   mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
@@ -264,6 +267,7 @@ extension Sifnode_Dispensation_V1_MsgRunDistribution: SwiftProtobuf.Message, Swi
       case 1: try { try decoder.decodeSingularStringField(value: &self.authorizedRunner) }()
       case 2: try { try decoder.decodeSingularStringField(value: &self.distributionName) }()
       case 3: try { try decoder.decodeSingularEnumField(value: &self.distributionType) }()
+      case 4: try { try decoder.decodeSingularInt64Field(value: &self.distributionCount) }()
       default: break
       }
     }
@@ -279,6 +283,9 @@ extension Sifnode_Dispensation_V1_MsgRunDistribution: SwiftProtobuf.Message, Swi
     if self.distributionType != .unspecified {
       try visitor.visitSingularEnumField(value: self.distributionType, fieldNumber: 3)
     }
+    if self.distributionCount != 0 {
+      try visitor.visitSingularInt64Field(value: self.distributionCount, fieldNumber: 4)
+    }
     try unknownFields.traverse(visitor: &visitor)
   }
 
@@ -286,6 +293,7 @@ extension Sifnode_Dispensation_V1_MsgRunDistribution: SwiftProtobuf.Message, Swi
     if lhs.authorizedRunner != rhs.authorizedRunner {return false}
     if lhs.distributionName != rhs.distributionName {return false}
     if lhs.distributionType != rhs.distributionType {return false}
+    if lhs.distributionCount != rhs.distributionCount {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

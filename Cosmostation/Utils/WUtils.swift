@@ -5529,21 +5529,6 @@ public class WUtils {
         return "unKnown"
     }
     
-    static func onParseProposalStatusCertikTxt(_ status: Shentu_Gov_V1alpha1_ProposalStatus) -> String {
-        if (status == Shentu_Gov_V1alpha1_ProposalStatus.depositPeriod) {
-            return "DepositPeriod"
-        } else if (status == Shentu_Gov_V1alpha1_ProposalStatus.certifierVotingPeriod || status == Shentu_Gov_V1alpha1_ProposalStatus.validatorVotingPeriod) {
-            return "VotingPeriod"
-        } else if (status == Shentu_Gov_V1alpha1_ProposalStatus.passed) {
-            return "Passed"
-        } else if (status == Shentu_Gov_V1alpha1_ProposalStatus.rejected) {
-            return "Rejected"
-        } else if (status == Shentu_Gov_V1alpha1_ProposalStatus.failed) {
-            return "Failed"
-        }
-        return "unKnown"
-    }
-    
     static func onProposalStatusImg(_ proposal: MintscanProposalDetail?) -> UIImage? {
         if (proposal?.proposal_status?.localizedCaseInsensitiveContains("DEPOSIT") == true) {
             return UIImage.init(named: "depositImg")
@@ -5570,31 +5555,8 @@ public class WUtils {
         return nil
     }
     
-    static func onParseProposalStatusCertikImg(_ status: Shentu_Gov_V1alpha1_ProposalStatus) -> UIImage? {
-        if (status == Shentu_Gov_V1alpha1_ProposalStatus.depositPeriod) {
-            return UIImage.init(named: "depositImg")
-        } else if (status == Shentu_Gov_V1alpha1_ProposalStatus.certifierVotingPeriod || status == Shentu_Gov_V1alpha1_ProposalStatus.validatorVotingPeriod) {
-            return UIImage.init(named: "votingImg")
-        } else if (status == Shentu_Gov_V1alpha1_ProposalStatus.passed) {
-            return UIImage.init(named: "passedImg")
-        } else if (status == Shentu_Gov_V1alpha1_ProposalStatus.rejected) {
-            return UIImage.init(named: "rejectedImg")
-        } else if (status == Shentu_Gov_V1alpha1_ProposalStatus.failed) {
-            return UIImage.init(named: "rejectedImg")
-        }
-        return nil
-    }
-    
     static func onParseProposalStartTime(_ proposal: Cosmos_Gov_V1beta1_Proposal) -> String {
         if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.depositPeriod) {
-            return "Waiting Deposit"
-        } else {
-            return longTimetoString(proposal.votingStartTime.seconds * 1000)
-        }
-    }
-    
-    static func onParseProposalCertikStartTime(_ proposal: Shentu_Gov_V1alpha1_Proposal) -> String {
-        if (proposal.status == Shentu_Gov_V1alpha1_ProposalStatus.depositPeriod) {
             return "Waiting Deposit"
         } else {
             return longTimetoString(proposal.votingStartTime.seconds * 1000)
@@ -5608,15 +5570,6 @@ public class WUtils {
             return longTimetoString(proposal.votingEndTime.seconds * 1000)
         }
     }
-    
-    static func onParseProposalCertikEndTime(_ proposal: Shentu_Gov_V1alpha1_Proposal) -> String {
-        if (proposal.status == Shentu_Gov_V1alpha1_ProposalStatus.depositPeriod) {
-            return "Waiting Deposit"
-        } else {
-            return longTimetoString(proposal.votingEndTime.seconds * 1000)
-        }
-    }
-    
     
     static func getSum(_ tally:Cosmos_Gov_V1beta1_TallyResult) ->NSDecimalNumber {
         var sum = NSDecimalNumber.zero
@@ -5669,19 +5622,6 @@ public class WUtils {
         }
         for vote in votes! {
             if (vote.option == option) {
-                result = result + 1
-            }
-        }
-        return String(result)
-    }
-    
-    static func getCertikVoterTypeCnt_gRPC(_ votes: Array<Shentu_Gov_V1alpha1_Vote>?, _ option: Cosmos_Gov_V1beta1_VoteOption) -> String {
-        var result = 0
-        if (votes == nil) {
-            return String(result)
-        }
-        for vote in votes! {
-            if (vote.deposit.option == option) {
                 result = result + 1
             }
         }
