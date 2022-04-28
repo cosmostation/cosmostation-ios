@@ -9,7 +9,7 @@ jobs:
     runs-on: macos-latest
     env:
       XC_WORKSPACE: ${{ 'Cosmostation.xcworkspace' }}
-      XC_SCHEME: ${{ 'CosmostationDev' }}
+      XC_SCHEME: ${{ 'Cosmostation' }}
       XC_ARCHIVE: ${{ 'Cosmostation.xcarchive' }}
     steps:
       - name: Select latest Xcode
