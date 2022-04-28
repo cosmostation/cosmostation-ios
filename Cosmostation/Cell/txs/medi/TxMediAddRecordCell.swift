@@ -27,14 +27,14 @@ class TxMediAddRecordCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = WUtils.getChainColor(chain)
         
-        let msg = try! Panacea_Aol_V2_MsgAddRecord.init(serializedData: response.tx.body.messages[position].value)
-        
-        txTopicNameLabel.text = msg.topicName
-        txKeyLabel.text = msg.key.dataToHexString()
-        txValueLabel.text = msg.value.dataToHexString()
-        txWriterAddressLabel.text = msg.writerAddress
-        txOwnerAddressLabel.text = msg.ownerAddress
-        txFeePayerAddressLabel.text = msg.feePayerAddress
+//        let msg = try! Panacea_Aol_V2_MsgAddRecord.init(serializedData: response.tx.body.messages[position].value)
+//        
+//        txTopicNameLabel.text = msg.topicName
+//        txKeyLabel.text = msg.key.dataToHexString()
+//        txValueLabel.text = msg.value.dataToHexString()
+//        txWriterAddressLabel.text = msg.writerAddress
+//        txOwnerAddressLabel.text = msg.ownerAddress
+//        txFeePayerAddressLabel.text = msg.feePayerAddress
     }
     
 }

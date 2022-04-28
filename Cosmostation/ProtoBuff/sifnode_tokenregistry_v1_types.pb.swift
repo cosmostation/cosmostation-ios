@@ -68,12 +68,67 @@ extension Sifnode_Tokenregistry_V1_Permission: CaseIterable {
 
 #endif  // swift(>=4.2)
 
+enum Sifnode_Tokenregistry_V1_AdminType: SwiftProtobuf.Enum {
+  typealias RawValue = Int
+  case clpdex // = 0
+  case pmtprewards // = 1
+  case tokenregistry // = 2
+  case ethbridge // = 3
+  case UNRECOGNIZED(Int)
+
+  init() {
+    self = .clpdex
+  }
+
+  init?(rawValue: Int) {
+    switch rawValue {
+    case 0: self = .clpdex
+    case 1: self = .pmtprewards
+    case 2: self = .tokenregistry
+    case 3: self = .ethbridge
+    default: self = .UNRECOGNIZED(rawValue)
+    }
+  }
+
+  var rawValue: Int {
+    switch self {
+    case .clpdex: return 0
+    case .pmtprewards: return 1
+    case .tokenregistry: return 2
+    case .ethbridge: return 3
+    case .UNRECOGNIZED(let i): return i
+    }
+  }
+
+}
+
+#if swift(>=4.2)
+
+extension Sifnode_Tokenregistry_V1_AdminType: CaseIterable {
+  // The compiler won't synthesize support with the UNRECOGNIZED case.
+  static var allCases: [Sifnode_Tokenregistry_V1_AdminType] = [
+    .clpdex,
+    .pmtprewards,
+    .tokenregistry,
+    .ethbridge,
+  ]
+}
+
+#endif  // swift(>=4.2)
+
 struct Sifnode_Tokenregistry_V1_GenesisState {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var adminAccount: String = String()
+  var adminAccounts: Sifnode_Tokenregistry_V1_AdminAccounts {
+    get {return _adminAccounts ?? Sifnode_Tokenregistry_V1_AdminAccounts()}
+    set {_adminAccounts = newValue}
+  }
+  /// Returns true if `adminAccounts` has been explicitly set.
+  var hasAdminAccounts: Bool {return self._adminAccounts != nil}
+  /// Clears the value of `adminAccounts`. Subsequent reads from it will return its default value.
+  mutating func clearAdminAccounts() {self._adminAccounts = nil}
 
   var registry: Sifnode_Tokenregistry_V1_Registry {
     get {return _registry ?? Sifnode_Tokenregistry_V1_Registry()}
@@ -88,6 +143,7 @@ struct Sifnode_Tokenregistry_V1_GenesisState {
 
   init() {}
 
+  fileprivate var _adminAccounts: Sifnode_Tokenregistry_V1_AdminAccounts? = nil
   fileprivate var _registry: Sifnode_Tokenregistry_V1_Registry? = nil
 }
 
@@ -160,6 +216,32 @@ struct Sifnode_Tokenregistry_V1_RegistryEntry {
   init() {}
 }
 
+struct Sifnode_Tokenregistry_V1_AdminAccount {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var adminType: Sifnode_Tokenregistry_V1_AdminType = .clpdex
+
+  var adminAddress: String = String()
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
+struct Sifnode_Tokenregistry_V1_AdminAccounts {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var adminAccounts: [Sifnode_Tokenregistry_V1_AdminAccount] = []
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+}
+
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
 fileprivate let _protobuf_package = "sifnode.tokenregistry.v1"
@@ -173,10 +255,19 @@ extension Sifnode_Tokenregistry_V1_Permission: SwiftProtobuf._ProtoNameProviding
   ]
 }
 
+extension Sifnode_Tokenregistry_V1_AdminType: SwiftProtobuf._ProtoNameProviding {
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    0: .same(proto: "CLPDEX"),
+    1: .same(proto: "PMTPREWARDS"),
+    2: .same(proto: "TOKENREGISTRY"),
+    3: .same(proto: "ETHBRIDGE"),
+  ]
+}
+
 extension Sifnode_Tokenregistry_V1_GenesisState: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".GenesisState"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
-    1: .standard(proto: "admin_account"),
+    1: .standard(proto: "admin_accounts"),
     2: .same(proto: "registry"),
   ]
 
@@ -186,7 +277,7 @@ extension Sifnode_Tokenregistry_V1_GenesisState: SwiftProtobuf.Message, SwiftPro
       // allocates stack space for every case branch when no optimizations are
       // enabled. https://github.com/apple/swift-protobuf/issues/1034
       switch fieldNumber {
-      case 1: try { try decoder.decodeSingularStringField(value: &self.adminAccount) }()
+      case 1: try { try decoder.decodeSingularMessageField(value: &self._adminAccounts) }()
       case 2: try { try decoder.decodeSingularMessageField(value: &self._registry) }()
       default: break
       }
@@ -194,8 +285,8 @@ extension Sifnode_Tokenregistry_V1_GenesisState: SwiftProtobuf.Message, SwiftPro
   }
 
   func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
-    if !self.adminAccount.isEmpty {
-      try visitor.visitSingularStringField(value: self.adminAccount, fieldNumber: 1)
+    if let v = self._adminAccounts {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 1)
     }
     if let v = self._registry {
       try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
@@ -204,7 +295,7 @@ extension Sifnode_Tokenregistry_V1_GenesisState: SwiftProtobuf.Message, SwiftPro
   }
 
   static func ==(lhs: Sifnode_Tokenregistry_V1_GenesisState, rhs: Sifnode_Tokenregistry_V1_GenesisState) -> Bool {
-    if lhs.adminAccount != rhs.adminAccount {return false}
+    if lhs._adminAccounts != rhs._adminAccounts {return false}
     if lhs._registry != rhs._registry {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -360,6 +451,76 @@ extension Sifnode_Tokenregistry_V1_RegistryEntry: SwiftProtobuf.Message, SwiftPr
     if lhs.unitDenom != rhs.unitDenom {return false}
     if lhs.ibcCounterpartyDenom != rhs.ibcCounterpartyDenom {return false}
     if lhs.ibcCounterpartyChainID != rhs.ibcCounterpartyChainID {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Tokenregistry_V1_AdminAccount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".AdminAccount"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "admin_type"),
+    2: .standard(proto: "admin_address"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularEnumField(value: &self.adminType) }()
+      case 2: try { try decoder.decodeSingularStringField(value: &self.adminAddress) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if self.adminType != .clpdex {
+      try visitor.visitSingularEnumField(value: self.adminType, fieldNumber: 1)
+    }
+    if !self.adminAddress.isEmpty {
+      try visitor.visitSingularStringField(value: self.adminAddress, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Tokenregistry_V1_AdminAccount, rhs: Sifnode_Tokenregistry_V1_AdminAccount) -> Bool {
+    if lhs.adminType != rhs.adminType {return false}
+    if lhs.adminAddress != rhs.adminAddress {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Sifnode_Tokenregistry_V1_AdminAccounts: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".AdminAccounts"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .standard(proto: "admin_accounts"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.adminAccounts) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.adminAccounts.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.adminAccounts, fieldNumber: 1)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Sifnode_Tokenregistry_V1_AdminAccounts, rhs: Sifnode_Tokenregistry_V1_AdminAccounts) -> Bool {
+    if lhs.adminAccounts != rhs.adminAccounts {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

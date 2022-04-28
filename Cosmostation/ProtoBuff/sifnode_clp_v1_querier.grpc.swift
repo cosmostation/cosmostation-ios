@@ -64,6 +64,21 @@ internal protocol Sifnode_Clp_V1_QueryClientProtocol: GRPCClient {
     _ request: Sifnode_Clp_V1_LiquidityProviderListReq,
     callOptions: CallOptions?
   ) -> UnaryCall<Sifnode_Clp_V1_LiquidityProviderListReq, Sifnode_Clp_V1_LiquidityProviderListRes>
+
+  func getParams(
+    _ request: Sifnode_Clp_V1_ParamsReq,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_ParamsReq, Sifnode_Clp_V1_ParamsRes>
+
+  func getRewardParams(
+    _ request: Sifnode_Clp_V1_RewardParamsReq,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_RewardParamsReq, Sifnode_Clp_V1_RewardParamsRes>
+
+  func getPmtpParams(
+    _ request: Sifnode_Clp_V1_PmtpParamsReq,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Sifnode_Clp_V1_PmtpParamsReq, Sifnode_Clp_V1_PmtpParamsRes>
 }
 
 extension Sifnode_Clp_V1_QueryClientProtocol {
@@ -196,6 +211,60 @@ extension Sifnode_Clp_V1_QueryClientProtocol {
       interceptors: self.interceptors?.makeGetLiquidityProviderListInterceptors() ?? []
     )
   }
+
+  /// Unary call to GetParams
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getParams(
+    _ request: Sifnode_Clp_V1_ParamsReq,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_ParamsReq, Sifnode_Clp_V1_ParamsRes> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Query/GetParams",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetParamsInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to GetRewardParams
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetRewardParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getRewardParams(
+    _ request: Sifnode_Clp_V1_RewardParamsReq,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_RewardParamsReq, Sifnode_Clp_V1_RewardParamsRes> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Query/GetRewardParams",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetRewardParamsInterceptors() ?? []
+    )
+  }
+
+  /// Unary call to GetPmtpParams
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to GetPmtpParams.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func getPmtpParams(
+    _ request: Sifnode_Clp_V1_PmtpParamsReq,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Sifnode_Clp_V1_PmtpParamsReq, Sifnode_Clp_V1_PmtpParamsRes> {
+    return self.makeUnaryCall(
+      path: "/sifnode.clp.v1.Query/GetPmtpParams",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeGetPmtpParamsInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Sifnode_Clp_V1_QueryClientInterceptorFactoryProtocol {
@@ -220,6 +289,15 @@ internal protocol Sifnode_Clp_V1_QueryClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'getLiquidityProviderList'.
   func makeGetLiquidityProviderListInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_LiquidityProviderListReq, Sifnode_Clp_V1_LiquidityProviderListRes>]
+
+  /// - Returns: Interceptors to use when invoking 'getParams'.
+  func makeGetParamsInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_ParamsReq, Sifnode_Clp_V1_ParamsRes>]
+
+  /// - Returns: Interceptors to use when invoking 'getRewardParams'.
+  func makeGetRewardParamsInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_RewardParamsReq, Sifnode_Clp_V1_RewardParamsRes>]
+
+  /// - Returns: Interceptors to use when invoking 'getPmtpParams'.
+  func makeGetPmtpParamsInterceptors() -> [ClientInterceptor<Sifnode_Clp_V1_PmtpParamsReq, Sifnode_Clp_V1_PmtpParamsRes>]
 }
 
 internal final class Sifnode_Clp_V1_QueryClient: Sifnode_Clp_V1_QueryClientProtocol {
@@ -261,6 +339,12 @@ internal protocol Sifnode_Clp_V1_QueryProvider: CallHandlerProvider {
   func getLiquidityProviders(request: Sifnode_Clp_V1_LiquidityProvidersReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_LiquidityProvidersRes>
 
   func getLiquidityProviderList(request: Sifnode_Clp_V1_LiquidityProviderListReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_LiquidityProviderListRes>
+
+  func getParams(request: Sifnode_Clp_V1_ParamsReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_ParamsRes>
+
+  func getRewardParams(request: Sifnode_Clp_V1_RewardParamsReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_RewardParamsRes>
+
+  func getPmtpParams(request: Sifnode_Clp_V1_PmtpParamsReq, context: StatusOnlyCallContext) -> EventLoopFuture<Sifnode_Clp_V1_PmtpParamsRes>
 }
 
 extension Sifnode_Clp_V1_QueryProvider {
@@ -336,6 +420,33 @@ extension Sifnode_Clp_V1_QueryProvider {
         userFunction: self.getLiquidityProviderList(request:context:)
       )
 
+    case "GetParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_ParamsReq>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_ParamsRes>(),
+        interceptors: self.interceptors?.makeGetParamsInterceptors() ?? [],
+        userFunction: self.getParams(request:context:)
+      )
+
+    case "GetRewardParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_RewardParamsReq>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_RewardParamsRes>(),
+        interceptors: self.interceptors?.makeGetRewardParamsInterceptors() ?? [],
+        userFunction: self.getRewardParams(request:context:)
+      )
+
+    case "GetPmtpParams":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Sifnode_Clp_V1_PmtpParamsReq>(),
+        responseSerializer: ProtobufSerializer<Sifnode_Clp_V1_PmtpParamsRes>(),
+        interceptors: self.interceptors?.makeGetPmtpParamsInterceptors() ?? [],
+        userFunction: self.getPmtpParams(request:context:)
+      )
+
     default:
       return nil
     }
@@ -371,4 +482,16 @@ internal protocol Sifnode_Clp_V1_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'getLiquidityProviderList'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeGetLiquidityProviderListInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_LiquidityProviderListReq, Sifnode_Clp_V1_LiquidityProviderListRes>]
+
+  /// - Returns: Interceptors to use when handling 'getParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetParamsInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_ParamsReq, Sifnode_Clp_V1_ParamsRes>]
+
+  /// - Returns: Interceptors to use when handling 'getRewardParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetRewardParamsInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_RewardParamsReq, Sifnode_Clp_V1_RewardParamsRes>]
+
+  /// - Returns: Interceptors to use when handling 'getPmtpParams'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeGetPmtpParamsInterceptors() -> [ServerInterceptor<Sifnode_Clp_V1_PmtpParamsReq, Sifnode_Clp_V1_PmtpParamsRes>]
 }
