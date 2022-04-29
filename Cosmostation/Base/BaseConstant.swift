@@ -317,6 +317,7 @@ let DB_MNEMONIC_UUID                = Expression<String>("uuid")
 let DB_MNEMONIC_NICKNAME            = Expression<String>("nickName")
 let DB_MNEMONIC_CNT                 = Expression<Int64>("wordsCnt")
 let DB_MNEMONIC_FAVO                = Expression<Bool>("isFavo")
+let DB_MNEMONIC_IMPORT_TIME         = Expression<Int64>("importTime")
 
 
 

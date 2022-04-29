@@ -15,18 +15,21 @@ public class MWords {
     var nickName: String = "";
     var wordsCnt: Int64 = 0;
     var isFavo: Bool = false;
+    var importTime:Int64 = -1;
     var linkedAccountsCnt: UInt16 = 0;
     
     init (isNew: Bool) {
         uuid = UUID().uuidString
+        importTime = Date().millisecondsSince1970
     }
     
-    init (_ id: Int64, _ uuid: String, _ nickName: String, _ wordsCnt: Int64, _ isFavo: Bool) {
+    init (_ id: Int64, _ uuid: String, _ nickName: String, _ wordsCnt: Int64, _ isFavo: Bool, _ importTime: Int64) {
         self.id = id;
         self.uuid = uuid;
         self.nickName = nickName;
         self.wordsCnt = wordsCnt;
         self.isFavo = isFavo;
+        self.importTime = importTime;
     }
     
     func getWords() -> String {

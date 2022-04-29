@@ -969,8 +969,10 @@ final class BaseData : NSObject{
                 table.column(DB_MNEMONIC_NICKNAME)
                 table.column(DB_MNEMONIC_CNT)
                 table.column(DB_MNEMONIC_FAVO)
+                table.column(DB_MNEMONIC_IMPORT_TIME)
             }
             try self.database.run(createMnemonicTable)
+            _ = try? self.database.run(DB_MNEMONIC.addColumn(DB_MNEMONIC_IMPORT_TIME, defaultValue: -1))
             
         } catch {
             print(error)
@@ -982,7 +984,8 @@ final class BaseData : NSObject{
         var result = Array<MWords>()
         do {
             for mnemonicBD in try database.prepare(DB_MNEMONIC) {
-                let mWords = MWords(mnemonicBD[DB_MNEMONIC_ID], mnemonicBD[DB_MNEMONIC_UUID], mnemonicBD[DB_MNEMONIC_NICKNAME], mnemonicBD[DB_MNEMONIC_CNT], mnemonicBD[DB_MNEMONIC_FAVO]);
+                let mWords = MWords(mnemonicBD[DB_MNEMONIC_ID], mnemonicBD[DB_MNEMONIC_UUID], mnemonicBD[DB_MNEMONIC_NICKNAME],
+                                    mnemonicBD[DB_MNEMONIC_CNT], mnemonicBD[DB_MNEMONIC_FAVO], mnemonicBD[DB_MNEMONIC_IMPORT_TIME]);
                 result.append(mWords);
             }
         } catch { print(error) }
@@ -993,7 +996,8 @@ final class BaseData : NSObject{
         let toInsert = DB_MNEMONIC.insert(DB_MNEMONIC_UUID <- mwords.uuid,
                                           DB_MNEMONIC_NICKNAME <- mwords.nickName,
                                           DB_MNEMONIC_CNT <- mwords.wordsCnt,
-                                          DB_MNEMONIC_FAVO <- mwords.isFavo)
+                                          DB_MNEMONIC_FAVO <- mwords.isFavo,
+                                          DB_MNEMONIC_IMPORT_TIME <- mwords.importTime)
         do {
             return try database.run(toInsert)
         } catch {

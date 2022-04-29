@@ -422,6 +422,8 @@
 		047FB6F6281A4C53009D8AAF /* sifnode_oracle_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DF281A4C52009D8AAF /* sifnode_oracle_v1_types.pb.swift */; };
 		047FB6F7281A4C53009D8AAF /* sifnode_dispensation_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6E0281A4C52009D8AAF /* sifnode_dispensation_v1_query.grpc.swift */; };
 		047FB6F9281A5823009D8AAF /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6F8281A5822009D8AAF /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */; };
+		047FB6FC281AA8D7009D8AAF /* MnemonicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6FA281AA8D7009D8AAF /* MnemonicListViewController.swift */; };
+		047FB6FD281AA8D7009D8AAF /* MnemonicListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB6FB281AA8D7009D8AAF /* MnemonicListViewController.xib */; };
 		04877300277C6E0700D9E201 /* new2022@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FE277C6E0700D9E201 /* new2022@1x.png */; };
 		04877301277C6E0700D9E201 /* xmas@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048772FF277C6E0700D9E201 /* xmas@1x.png */; };
 		04877304277C809200D9E201 /* xmas.png in Resources */ = {isa = PBXBuildFile; fileRef = 04877302277C809200D9E201 /* xmas.png */; };
@@ -1817,6 +1819,8 @@
 		047FB6DF281A4C52009D8AAF /* sifnode_oracle_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_oracle_v1_types.pb.swift; sourceTree = "<group>"; };
 		047FB6E0281A4C52009D8AAF /* sifnode_dispensation_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_query.grpc.swift; sourceTree = "<group>"; };
 		047FB6F8281A5822009D8AAF /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift; sourceTree = "<group>"; };
+		047FB6FA281AA8D7009D8AAF /* MnemonicListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicListViewController.swift; sourceTree = "<group>"; };
+		047FB6FB281AA8D7009D8AAF /* MnemonicListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicListViewController.xib; sourceTree = "<group>"; };
 		048772FE277C6E0700D9E201 /* new2022@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@1x.png"; sourceTree = "<group>"; };
 		048772FF277C6E0700D9E201 /* xmas@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@1x.png"; sourceTree = "<group>"; };
 		04877302277C809200D9E201 /* xmas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xmas.png; sourceTree = "<group>"; };
@@ -4348,6 +4352,8 @@
 			isa = PBXGroup;
 			children = (
 				E151B657224873640026B8C0 /* SettingTableViewController.swift */,
+				047FB6FA281AA8D7009D8AAF /* MnemonicListViewController.swift */,
+				047FB6FB281AA8D7009D8AAF /* MnemonicListViewController.xib */,
 				E19A32212254A61E00A05E41 /* WalletManageViewController.swift */,
 				E103DACB228129FD006C2146 /* WalletManageViewController.xib */,
 				E1827E0F2254C92900BC0350 /* WalletDetailViewController.swift */,
@@ -4908,6 +4914,7 @@
 				2876AD5C240CE4A6005B33F4 /* TokenDetailUnbondingDetailCell.xib in Resources */,
 				2845AE50271C7116005AA537 /* SifIncentive0ViewController.xib in Resources */,
 				28E746B825AD76ED004B2C64 /* OkPromotionCell.xib in Resources */,
+				047FB6FD281AA8D7009D8AAF /* MnemonicListViewController.xib in Resources */,
 				280E1F21254AC6340007BA7D /* ReplaceSelectChainViewController.xib in Resources */,
 				2889FD732603379A00CA9896 /* TxHardBorrowCell.xib in Resources */,
 				041ECDF327F5750700397D37 /* EmptyWCViewController.xib in Resources */,
@@ -6027,12 +6034,6 @@
 				E1271B08224B90230083AF17 /* AddressInputTextField.swift in Sources */,
 				E1E15FC22253748B00A10C7B /* DashedButton.swift in Sources */,
 				E1A82DDF2244782B0097CAEE /* Validator.swift in Sources */,
-				040FA7F4275F55C200229F6F /* injective_peggy_v1_events.pb.swift in Sources */,
-				040FA845275F55C200229F6F /* comdex_oracle_v1beta1_querier.grpc.swift in Sources */,
-				040FAA22275F55C300229F6F /* iris_mod_token_query.pb.swift in Sources */,
-				040FA7F6275F55C200229F6F /* sentinel_node_v1_params.pb.swift in Sources */,
-				040FA910275F55C300229F6F /* regen_data_v1alpha2_query.pb.swift in Sources */,
-				040FAAC5275F55C400229F6F /* secret_registration_v1beta1_remote_attestation_types.pb.swift in Sources */,
 				048DBCE2280EC5E90007275E /* MWords.swift in Sources */,
 				040FAA33275F55C400229F6F /* desmos_posts_v1beta1_query.pb.swift in Sources */,
 				E151B632224533DC0026B8C0 /* ClaimRewardAllCell.swift in Sources */,
@@ -6049,6 +6050,7 @@
 				28E0458A269B35480022A366 /* SwapViewController.swift in Sources */,
 				E16D9B172248BD990019B7BB /* CreateViewController.swift in Sources */,
 				28474ED0241E06AF00AF5A81 /* TxCdpWithdrawCell.swift in Sources */,
+				047FB6FC281AA8D7009D8AAF /* MnemonicListViewController.swift in Sources */,
 				2894105126FDBE8A005BCBE4 /* IBCSend0ViewController.swift in Sources */,
 				040FA92C275F55C300229F6F /* desmos_profiles_v1beta1_client_cli.pb.swift in Sources */,
 				040FA96C275F55C300229F6F /* cosmos_gov_v1beta1_tx.pb.swift in Sources */,
