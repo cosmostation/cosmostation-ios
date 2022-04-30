@@ -65,3 +65,10 @@ jobs:
         # export 를 통해 ipa 파일 만듦
         run: |
           xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: testers
+          file: CosmostationDevDev.ipa
