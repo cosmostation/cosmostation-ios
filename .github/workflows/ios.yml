@@ -13,9 +13,9 @@ jobs:
     runs-on: macos-latest
     env:
       # app archive 및 export 에 쓰일 환경 변수 설정
-      XC_WORKSPACE: ${{ 'HappyChuseok/HappyChuseok.xcworkspace' }}
-      XC_SCHEME: ${{ 'HappyChuseok' }}
-      XC_ARCHIVE: ${{ 'HappyChuseok.xcarchive' }}
+      XC_WORKSPACE: ${{ 'Cosmostation.xcworkspace' }}
+      XC_SCHEME: ${{ 'CosmostationDev' }}
+      XC_ARCHIVE: ${{ 'Cosmostation.xcarchive' }}
       
       KEYCHAIN: ${{ 'test.keychain' }}
       
@@ -42,11 +42,11 @@ jobs:
       - name: Make provisioning file
         run: echo "${{ secrets.DEBUG_PROVISIONING_SECRET }}" | base64 -d > dev.mobileprovision
       - name: Make debug
-        run: DEBUG_KEY=`echo '${{ secrets.DEBUG_CERT_EXPORT_KEY }}' | base64 -d`
+        run: DEBUG_KEY=`echo ${{ secrets.DEBUG_CERT_EXPORT_KEY }} | base64 -d`
 
       - name : Configure Code Signing
         run: |
-          security import certs.p12 -k "$KEYCHAIN" -P "${{ secrets.DEBUG_CERT_KEY_SECRET }}" -A
+          security import certs.p12 -k "$KEYCHAIN" -P "$DEBUG_KEY" -A
           security set-key-partition-list -S apple-tool:,apple: -s -k "" "$KEYCHAIN"
           
           # Xcode에서 찾을 수 있는 프로비저닝 프로필 설치하기 위해 우선 프로비저닝 디렉토리를 생성
@@ -56,9 +56,8 @@ jobs:
           UUID=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i dev.mobileprovision)`
           cp dev.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
       - name: Archive app
-        # 빌드 및 아카이브
         run: |
-          pod install --repo-update --clean-install --project-directory=HappyChuseok/
+          pod install --repo-update --clean-install --project-directory=Cosmostation/
           xcodebuild clean archive -workspace $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE
       - name: Export app
         # export 를 통해 ipa 파일 만듦
