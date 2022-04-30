@@ -41,10 +41,12 @@ jobs:
         run: echo ${{ secrets.DEBUG_CERT_SECRET }} | base64 -d > certs.p12
       - name: Make provisioning file
         run: echo "${{ secrets.DEBUG_PROVISIONING_SECRET }}" | base64 -d > dev.mobileprovision
+      - name: Make debug
+        run: DEBUG_KEY=`echo '${{ secrets.DEBUG_CERT_EXPORT_KEY }}' | base64 -d`
 
       - name : Configure Code Signing
         run: |
-          security import certs.p12 -k "$KEYCHAIN" -P "$DEBUG_CERT_EXPORT_KEY" -A
+          security import certs.p12 -k "$KEYCHAIN" -P "$DEBUG_KEY" -A
           security set-key-partition-list -S apple-tool:,apple: -s -k "" "$KEYCHAIN"
           
           # Xcode에서 찾을 수 있는 프로비저닝 프로필 설치하기 위해 우선 프로비저닝 디렉토리를 생성
