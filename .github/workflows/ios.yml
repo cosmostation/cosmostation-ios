@@ -46,7 +46,7 @@ jobs:
 
       - name : Configure Code Signing
         run: |
-          security import certs.p12 -k "$KEYCHAIN" -P "$DEBUG_KEY" -A
+          security import certs.p12 -k "$KEYCHAIN" -P "${{ secrets.DEBUG_CERT_KEY_SECRET }}" -A
           security set-key-partition-list -S apple-tool:,apple: -s -k "" "$KEYCHAIN"
           
           # Xcode에서 찾을 수 있는 프로비저닝 프로필 설치하기 위해 우선 프로비저닝 디렉토리를 생성
