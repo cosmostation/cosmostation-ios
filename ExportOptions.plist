@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>compileBitcode</key>
+	<true/>
+	<key>destination</key>
+	<string>export</string>
+	<key>manifest</key>
+	<dict>
+		<key>appURL</key>
+		<string>https://cosmostation.io</string>
+		<key>displayImageURL</key>
+		<string>https://s3.ap-northeast-2.amazonaws.com/cosmostation.io/header/dark_logo_cosmostation.png</string>
+		<key>fullSizeImageURL</key>
+		<string>https://s3.ap-northeast-2.amazonaws.com/cosmostation.io/header/dark_logo_cosmostation.png</string>
+	</dict>
+	<key>method</key>
+	<string>ad-hoc</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>io.wannabit.cosmostation.debug</key>
+		<string>Cosmostation debug provisioning profile</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Distribution</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>8G562MW56M</string>
+	<key>thinning</key>
+	<string>&lt;none&gt;</string>
+</dict>
+</plist>
