@@ -57,7 +57,7 @@ jobs:
           cp dev.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
       - name: Archive app
         run: |
-          pod install --repo-update --clean-install --project-directory=Cosmostation/
+          pod install --repo-update --clean-install --project-directory=/
           xcodebuild clean archive -workspace $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE
       - name: Export app
         # export 를 통해 ipa 파일 만듦
