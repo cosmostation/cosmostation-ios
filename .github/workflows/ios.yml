@@ -1,35 +1,25 @@
-# workflow 이름 지정
-name: deploy
+name: ios-build
 
 on:
   push:
     branches: [ master ]
     
-# workflow의 실행은 하나 이상의 job으로 구성 됨
 jobs:
-  # 이 workflow 는 "deploy" 라는 single job 으로 구성
-  deploy:
-    # job이 실행될 환경 - 최신 mac os
+  build-ios:
     runs-on: macos-latest
     env:
-      # app archive 및 export 에 쓰일 환경 변수 설정
       XC_WORKSPACE: ${{ 'Cosmostation.xcworkspace' }}
       XC_SCHEME: ${{ 'CosmostationDev' }}
       XC_ARCHIVE: ${{ 'Cosmostation.xcarchive' }}
       
       KEYCHAIN: ${{ 'test.keychain' }}
       
-    # Step은 job의 일부로 실행될 일련의 task들을 나타냄
     steps:
-      # 단계별 task 를 나타낼 이름
       - name: Select latest Xcode
-        # shell 이용해서 하나의 command 수행
         run: "sudo xcode-select -s /Applications/Xcode.app"
       - name: Checkout project
-        # uses 키워드를 통해 Github Actions에서 기본으로 제공하는 액션을 사용 가능. 아래 액션은 repository 에 체크아웃하는 것
         uses: actions/checkout@v2
       - name: Configure Keychain 
-        # 키체인 초기화 - 임시 키체인 생성
         run: |
           security create-keychain -p "" "$KEYCHAIN"
           security list-keychains -s "$KEYCHAIN"
@@ -50,11 +40,7 @@ jobs:
         run: |
           security import certs.p12 -k "$KEYCHAIN" -P "${{ secrets.DEBUG_CERT_KEY_SECRET }}" -A
           security set-key-partition-list -S apple-tool:,apple: -s -k "" "$KEYCHAIN"
-          
-          # Xcode에서 찾을 수 있는 프로비저닝 프로필 설치하기 위해 우선 프로비저닝 디렉토리를 생성
           mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
-          # 디버깅 용 echo 명령어
-
           UUID=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i dev.mobileprovision)`
           cp dev.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
       - name: Archive app
@@ -62,26 +48,25 @@ jobs:
           pod install --repo-update --clean-install
           xcodebuild clean archive -workspace $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE
       - name: Export app
-        # export 를 통해 ipa 파일 만듦
         run: |
           xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
-          name: CosmostationDevDev.ipa
-          path: CosmostationDevDev.ipa # Path to your IPA file will usually be root of the project (if you use Fastlane)
+          name: CosmostationDev.ipa
+          path: CosmostationDev.ipa
   distribute-ios:
-    needs: deploy # This is important
+    needs: build-ios
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
-          name: CosmostationDevDev.ipa
+          name: CosmostationDev.ipa
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
           appId: ${{secrets.FIREBASE_ID}}
           token: ${{secrets.FIREBASE_TOKEN}}
           groups: testers
-          file: CosmostationDevDev.ipa
+          file: CosmostationDev.ipa
