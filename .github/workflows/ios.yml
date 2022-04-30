@@ -65,6 +65,19 @@ jobs:
         # export 를 통해 ipa 파일 만듦
         run: |
           xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: CosmostationDevDev.ipa
+          path: CosmostationDevDev.ipa # Path to your IPA file will usually be root of the project (if you use Fastlane)
+  distribute-ios:
+    needs: deploy # This is important
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: CosmostationDevDev.ipa
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
