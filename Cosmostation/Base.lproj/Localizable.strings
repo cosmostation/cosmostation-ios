@@ -73,6 +73,8 @@
 "import_private_key" = "Import PrivateKey";
 "change_wallet_name" = "Change Wallet Name";
 "wallet_name" = "wallet name";
+"change_mnemonic_name" = "Change Mnemonic Name";
+"mnemonic_name" = "Mnemonic name";
 "share_text" = "Share Text Address";
 "share_qr" = "Share QrCode Image";
 "delete_wallet" = "Delete Wallet";
@@ -585,6 +587,7 @@ support@cosmostation.io";
 
 "title_mnemonic_manage" = "Mnemonic Manage";
 "title_mnemonic_detail" = "Mnemonic Detail";
+"title_mnemonic_create" = "Mnemonic Created";
 "title_wallet_manage" = "Wallet Manage";
 "title_wallet_detail" = "Wallet Detail";
 "title_check_mnemonics" = "Check Mnemonics";

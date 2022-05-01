@@ -71,6 +71,8 @@
 "check_private_key" = "개인키 확인";
 "change_wallet_name" = "지갑 별칭 변경";
 "wallet_name" = "별칭";
+"change_mnemonic_name" = "니모닉 별칭 변경";
+"mnemonic_name" = "별칭";
 "share_text" = "\t\t주소 공유\t\t";
 "share_qr" = "\t\tQR 코드 공유\t\t";
 "delete_wallet" = "지갑 삭제";
@@ -587,6 +589,7 @@ support@cosmostation.io";
 
 "title_mnemonic_manage" = "니모닉 관리";
 "title_mnemonic_detail" = "니모닉 상세";
+"title_mnemonic_create" = "니모닉 생성";
 "title_wallet_manage" = "지갑 관리";
 "title_wallet_detail" = "지갑 상세";
 "title_check_mnemonics" = "복구 단어 확인";

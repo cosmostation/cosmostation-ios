@@ -72,16 +72,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtH-3e-Ci1" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="56" width="390" height="60"/>
+                    <rect key="frame" x="12" y="56" width="390" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mnemonic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCM-4U-baL">
-                            <rect key="frame" x="12" y="20" width="322" height="20"/>
-                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                            <rect key="frame" x="12" y="15.5" width="322" height="17.5"/>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tGa-4k-xCS">
-                            <rect key="frame" x="354" y="18" width="24" height="24"/>
+                            <rect key="frame" x="354" y="12" width="24" height="24"/>
                             <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="24" id="5kN-Vg-fm2"/>
@@ -97,7 +97,7 @@
                     <color key="backgroundColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.1803921568627451" alpha="0.40030505952380951" colorSpace="deviceRGB"/>
                     <constraints>
                         <constraint firstItem="tGa-4k-xCS" firstAttribute="leading" secondItem="qCM-4U-baL" secondAttribute="trailing" constant="20" id="Kpe-TJ-Uap"/>
-                        <constraint firstAttribute="height" constant="60" id="Rth-nH-PFO"/>
+                        <constraint firstAttribute="height" constant="48" id="Rth-nH-PFO"/>
                         <constraint firstItem="qCM-4U-baL" firstAttribute="centerY" secondItem="rtH-3e-Ci1" secondAttribute="centerY" id="al0-rS-CWT"/>
                         <constraint firstAttribute="trailing" secondItem="tGa-4k-xCS" secondAttribute="trailing" constant="12" id="oPS-9h-4gr"/>
                         <constraint firstItem="qCM-4U-baL" firstAttribute="leading" secondItem="rtH-3e-Ci1" secondAttribute="leading" constant="12" id="r3m-cg-Oug"/>
@@ -122,7 +122,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X9o-GE-zN6" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="128" width="390" height="184"/>
+                    <rect key="frame" x="12" y="112" width="390" height="184"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="EYL-j2-GVS">
                             <rect key="frame" x="8" y="8" width="374" height="164"/>
@@ -974,7 +974,7 @@
                 <constraint firstItem="10A-UH-d3s" firstAttribute="trailing" secondItem="Yk5-40-SZY" secondAttribute="trailing" id="UwE-gt-CZJ"/>
                 <constraint firstItem="rtH-3e-Ci1" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="VO7-mt-iSp"/>
                 <constraint firstItem="Uil-U5-l2L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="cF9-lH-ZxH"/>
-                <constraint firstItem="X9o-GE-zN6" firstAttribute="top" secondItem="rtH-3e-Ci1" secondAttribute="bottom" constant="12" id="dU6-H3-6dP"/>
+                <constraint firstItem="X9o-GE-zN6" firstAttribute="top" secondItem="rtH-3e-Ci1" secondAttribute="bottom" constant="8" id="dU6-H3-6dP"/>
                 <constraint firstItem="10A-UH-d3s" firstAttribute="leading" secondItem="Yk5-40-SZY" secondAttribute="leading" id="eQW-tC-Sbg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="X9o-GE-zN6" secondAttribute="trailing" constant="12" id="nJp-pm-rni"/>
                 <constraint firstItem="Yk5-40-SZY" firstAttribute="top" secondItem="10A-UH-d3s" secondAttribute="bottom" constant="8" id="ueD-dC-rOz"/>

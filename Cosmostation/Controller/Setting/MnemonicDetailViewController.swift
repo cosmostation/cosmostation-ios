@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class MnemonicDetailViewController: BaseViewController {
-    
     
     @IBOutlet weak var mnemonicNameLabel: UILabel!
     
@@ -84,8 +84,8 @@ class MnemonicDetailViewController: BaseViewController {
                                self.mnemonic16, self.mnemonic17, self.mnemonic18, self.mnemonic19,
                                self.mnemonic20, self.mnemonic21, self.mnemonic22, self.mnemonic23]
         
-        cardView.backgroundColor = COLOR_BG_GRAY
-        self.onRetriveKey()
+        self.cardView.backgroundColor = COLOR_BG_GRAY
+        self.onRetriveMenmonic()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,7 +96,7 @@ class MnemonicDetailViewController: BaseViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
-    func onRetriveKey() {
+    func onRetriveMenmonic() {
         if let words = BaseData.instance.selectMnemonicById(mnemonicId) {
             mWords = words
             onUpdateView()
@@ -119,13 +119,58 @@ class MnemonicDetailViewController: BaseViewController {
     }
     
     @IBAction func onClickNameEdit(_ sender: UIButton) {
+        self.onNameEditAlert()
     }
+    
     @IBAction func onClickCopy(_ sender: UIButton) {
+        self.onCopyAlert()
     }
+    
     @IBAction func onClickDeriveWallet(_ sender: UIButton) {
     }
+    
     @IBAction func onClickDelete(_ sender: UIButton) {
     }
     
     
+    
+    func onCopyAlert() {
+        let copyAlert = UIAlertController(title: NSLocalizedString("str_safe_copy_title", comment: ""), message: NSLocalizedString("str_safe_copy_msg", comment: ""), preferredStyle: .alert)
+        copyAlert.addAction(UIAlertAction(title: NSLocalizedString("str_raw_copy", comment: ""), style: .destructive, handler: { _ in
+            UIPasteboard.general.string = self.mWords.getWords()
+            self.onShowToast(NSLocalizedString("mnemonic_copied", comment: ""))
+        }))
+        copyAlert.addAction(UIAlertAction(title: NSLocalizedString("str_safe_copy", comment: ""), style: .default, handler: { _ in
+            KeychainWrapper.standard.set(self.mWords.getWords(), forKey: BaseData.instance.copySalt!, withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            self.onShowToast(NSLocalizedString("mnemonic_safe_copied", comment: ""))
+        }))
+        self.present(copyAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            copyAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func onNameEditAlert() {
+        let nameAlert = UIAlertController(title: NSLocalizedString("change_mnemonic_name", comment: ""), message: nil, preferredStyle: .alert)
+        nameAlert.addTextField { (textField) in
+            textField.placeholder = NSLocalizedString("mnemonic_name", comment: "")
+        }
+        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        nameAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { [weak nameAlert] (_) in
+            let textField = nameAlert?.textFields![0]
+            let trimmedString = textField?.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+            if(trimmedString?.count ?? 0 > 0) {
+                self.mWords.nickName = trimmedString!
+                BaseData.instance.updateMnemonic(self.mWords)
+                BaseData.instance.setNeedRefresh(true)
+                self.onUpdateView()
+            }
+        }))
+        self.present(nameAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            nameAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
 }

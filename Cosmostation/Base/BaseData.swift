@@ -1009,6 +1009,16 @@ final class BaseData : NSObject{
         }
     }
     
+    public func updateMnemonic(_ mwords: MWords) -> Int64 {
+        let target = DB_MNEMONIC.filter(DB_MNEMONIC_ID == mwords.id)
+        do {
+            return try Int64(database.run(target.update(DB_MNEMONIC_NICKNAME <- mwords.nickName,
+                                                        DB_MNEMONIC_FAVO <- mwords.isFavo)))
+        } catch {
+            return -1
+        }
+    }
+    
     
     
     

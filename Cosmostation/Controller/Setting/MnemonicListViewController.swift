@@ -22,8 +22,6 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
         self.mnemonicListTableView.register(UINib(nibName: "ManageMnemonicCell", bundle: nil), forCellReuseIdentifier: "ManageMnemonicCell")
         self.mnemonicListTableView.rowHeight = UITableView.automaticDimension
         self.mnemonicListTableView.estimatedRowHeight = UITableView.automaticDimension
-        
-        mMyMnemonics = BaseData.instance.selectAllMnemonics()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +31,9 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
         self.navigationItem.title = NSLocalizedString("title_mnemonic_manage", comment: "");
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
+        
+        self.mMyMnemonics = BaseData.instance.selectAllMnemonics()
+        self.mnemonicListTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -46,7 +47,6 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("didSelectRowAt ", indexPath.row)
         let mnemonicDetailVC = MnemonicDetailViewController(nibName: "MnemonicDetailViewController", bundle: nil)
         mnemonicDetailVC.mnemonicId = mMyMnemonics[indexPath.row].id
         self.navigationItem.title = ""
@@ -54,6 +54,8 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
     }
 
     @IBAction func onClickCreate(_ sender: UIButton) {
-        print("onClickCreate")
+        let mnemonicCreateVC = MnemonicCreateViewController(nibName: "MnemonicCreateViewController", bundle: nil)
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(mnemonicCreateVC, animated: true)
     }
 }
