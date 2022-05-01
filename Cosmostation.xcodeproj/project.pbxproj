@@ -2019,7 +2019,7 @@
 		18FFB7CE281AF533004E65BB /* GenProfile3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807DB3C2788182F00016571 /* GenProfile3ViewController.xib */; };
 		18FFB7CF281AF533004E65BB /* ResourceChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F29254AD3A80007BA7D /* ResourceChainCell.xib */; };
 		18FFB7D0281AF533004E65BB /* WalletOkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283D2EAE24F5742000247424 /* WalletOkCell.xib */; };
-		18FFB7D8281DFDAD004E65BB /* CosmostationDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18FFB7D7281DFDAD004E65BB /* CosmostationDev.plist */; };
+		18FFB7DA281E9C9F004E65BB /* CosmostationDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */; };
 		2800CF9624719EC4003C3EF1 /* Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF9524719EC4003C3EF1 /* Tally.swift */; };
 		2800CF982471A004003C3EF1 /* CosmosProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF972471A004003C3EF1 /* CosmosProposer.swift */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -3419,7 +3419,7 @@
 		15E40DAB27C8A9E400E7C850 /* WalletCudosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCudosCell.swift; sourceTree = "<group>"; };
 		15E40DAC27C8A9E400E7C850 /* WalletCudosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCudosCell.xib; sourceTree = "<group>"; };
 		18FFB7D5281AF533004E65BB /* CosmostationDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CosmostationDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		18FFB7D7281DFDAD004E65BB /* CosmostationDev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = CosmostationDev.plist; path = "../../../cosmostation/cosmostation-ios/Cosmostation/CosmostationDev.plist"; sourceTree = "<group>"; };
+		18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CosmostationDev.plist; sourceTree = "<group>"; };
 		23DC1186B7119D1B4D2EB379 /* Pods-Cosmostation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.release.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.release.xcconfig"; sourceTree = "<group>"; };
 		2800CF9524719EC4003C3EF1 /* Tally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tally.swift; sourceTree = "<group>"; };
 		2800CF972471A004003C3EF1 /* CosmosProposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposer.swift; sourceTree = "<group>"; };
@@ -5873,9 +5873,9 @@
 				E1945E3A222E7DD800A1436F /* Controller */,
 				E1945E39222E7D8E00A1436F /* Base */,
 				E16D9B182248C4880019B7BB /* Assets.xcassets */,
-				18FFB7D7281DFDAD004E65BB /* CosmostationDev.plist */,
 				E1945E33222E7C0800A1436F /* Info.plist */,
 				28B6AFE023D9863800063D9C /* GoogleService-Info.plist */,
+				18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */,
 				E136D8A223039493001BEBB8 /* Cosmostation.entitlements */,
 				E1945E2B222E7C0600A1436F /* Main.storyboard */,
 				E1945E30222E7C0800A1436F /* LaunchScreen.storyboard */,
@@ -6578,7 +6578,7 @@
 				18FFB796281AF533004E65BB /* RegistAccountCheckCell.xib in Resources */,
 				18FFB797281AF533004E65BB /* SifChainDex.storyboard in Resources */,
 				18FFB798281AF533004E65BB /* NFTDetailRawCell.xib in Resources */,
-				18FFB7D8281DFDAD004E65BB /* CosmostationDev.plist in Resources */,
+				18FFB7DA281E9C9F004E65BB /* CosmostationDev.plist in Resources */,
 				18FFB799281AF533004E65BB /* TxHardWithdrawCell.xib in Resources */,
 				18FFB79A281AF533004E65BB /* WcCancelPopup.xib in Resources */,
 				18FFB79B281AF533004E65BB /* RegisterAccount1ViewController.xib in Resources */,
@@ -9598,7 +9598,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = CosmostationDev.plist;
+				INFOPLIST_FILE = Cosmostation/CosmostationDev.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9631,7 +9631,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = CosmostationDev.plist;
+				INFOPLIST_FILE = Cosmostation/CosmostationDev.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
