@@ -583,6 +583,8 @@ support@cosmostation.io";
 "only_USD" = "now only support USD";
 "only_cmc" = "now only support CoinMarketCap";
 
+"title_mnemonic_manage" = "Mnemonic Manage";
+"title_mnemonic_detail" = "Mnemonic Detail";
 "title_wallet_manage" = "Wallet Manage";
 "title_wallet_detail" = "Wallet Detail";
 "title_check_mnemonics" = "Check Mnemonics";

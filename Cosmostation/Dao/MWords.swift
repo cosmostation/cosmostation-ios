@@ -38,4 +38,27 @@ public class MWords {
         }
         return ""
     }
+    
+    func getMnemonicWords() -> Array<String> {
+        return getWords().components(separatedBy: " ")
+    }
+    
+    func getName() -> String {
+        if (self.nickName == "") {
+            return "Mnemonic " + String(id)
+        }
+        return nickName
+    }
+    
+    func getLinkedWalletCnt() -> Int {
+        return BaseData.instance.selectAccountsByMnemonic(id).count
+    }
+    
+    func getWordsCnt() -> Int {
+        return getWords().components(separatedBy: " ").count
+    }
+    
+    func getImportDate() -> String {
+        return WUtils.longTimetoString(importTime)
+    }
 }

@@ -585,6 +585,8 @@ support@cosmostation.io";
 "only_USD" = "현재 USD만 지원합니다.";
 "only_cmc" = "현재 CoinMarketCap만 지원합니다.";
 
+"title_mnemonic_manage" = "니모닉 관리";
+"title_mnemonic_detail" = "니모닉 상세";
 "title_wallet_manage" = "지갑 관리";
 "title_wallet_detail" = "지갑 상세";
 "title_check_mnemonics" = "복구 단어 확인";

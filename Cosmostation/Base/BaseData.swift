@@ -992,6 +992,10 @@ final class BaseData : NSObject{
         return result
     }
     
+    public func selectMnemonicById(_ id: Int64) -> MWords? {
+        return selectAllMnemonics().filter { $0.id == id }.first
+    }
+    
     public func insertMnemonics(_ mwords: MWords) -> Int64 {
         let toInsert = DB_MNEMONIC.insert(DB_MNEMONIC_UUID <- mwords.uuid,
                                           DB_MNEMONIC_NICKNAME <- mwords.nickName,
@@ -1004,6 +1008,8 @@ final class BaseData : NSObject{
             return -1
         }
     }
+    
+    
     
     
     public func selectAllAccounts() -> Array<Account> {
@@ -1029,6 +1035,17 @@ final class BaseData : NSObject{
             }
         }
         return result2;
+    }
+    
+    public func selectAccountsByMnemonic(_ id: Int64) -> Array<Account> {
+        var result = Array<Account>()
+        let allAccounts = selectAllAccounts()
+        for account in allAccounts {
+            if (account.account_mnemonic_id == id) {
+                result.append(account)
+            }
+        }
+        return result;
     }
     
     public func selectAllAccountsByChain(_ chain:ChainType) -> Array<Account> {
