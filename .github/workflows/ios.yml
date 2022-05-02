@@ -1,0 +1,70 @@
+name: ios-build
+
+on:
+  push:
+    branches: [ master ]
+    
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    env:
+      XC_WORKSPACE: ${{ 'Cosmostation.xcworkspace' }}
+      XC_SCHEME: ${{ 'CosmostationDev' }}
+      XC_ARCHIVE: ${{ 'Cosmostation.xcarchive' }}
+      
+      KEYCHAIN: ${{ 'test.keychain' }}
+      
+    steps:
+      - name: Select latest Xcode
+        run: "sudo xcode-select -s /Applications/Xcode.app"
+      - name: Checkout project
+        uses: actions/checkout@v2
+      - name: Configure Keychain 
+        run: |
+          security create-keychain -p "" "$KEYCHAIN"
+          security list-keychains -s "$KEYCHAIN"
+          security default-keychain -s "$KEYCHAIN"
+          security unlock-keychain -p "" "$KEYCHAIN"
+          security set-keychain-settings
+
+      - name: Make cert file
+        run: echo ${{ secrets.DEBUG_CERT_SECRET }} | base64 -d > certs.p12
+      - name: Make provisioning file
+        run: echo "${{ secrets.DEBUG_PROVISIONING_SECRET }}" | base64 -d > dev.mobileprovision
+      - name: Make debug google service file
+        run: echo "${{ secrets.DEBUG_GOOGLE_SERVICE_SECRET }}" | base64 -d > Cosmostation/GoogleService-Info.plist
+
+      - name : Configure Code Signing
+        run: |
+          security import certs.p12 -k "$KEYCHAIN" -P "${{ secrets.DEBUG_CERT_KEY_SECRET }}" -A
+          security set-key-partition-list -S apple-tool:,apple: -s -k "" "$KEYCHAIN"
+          mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
+          UUID=`/usr/libexec/PlistBuddy -c 'Print :UUID' /dev/stdin <<< $(security cms -D -i dev.mobileprovision)`
+          cp dev.mobileprovision "$HOME/Library/MobileDevice/Provisioning Profiles/$UUID.mobileprovision"
+      - name: Archive app
+        run: |
+          pod install --repo-update --clean-install
+          xcodebuild clean archive -workspace $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE
+      - name: Export app
+        run: |
+          xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: CosmostationDev.ipa
+          path: CosmostationDev.ipa
+  distribute-ios:
+    needs: build-ios
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: CosmostationDev.ipa
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{secrets.FIREBASE_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
+          groups: testers
+          file: CosmostationDev.ipa
