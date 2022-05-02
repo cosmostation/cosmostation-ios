@@ -31,8 +31,6 @@ jobs:
         run: echo ${{ secrets.DEBUG_CERT_SECRET }} | base64 -d > certs.p12
       - name: Make provisioning file
         run: echo "${{ secrets.DEBUG_PROVISIONING_SECRET }}" | base64 -d > dev.mobileprovision
-      - name: Make debug
-        run: DEBUG_KEY=`echo ${{ secrets.DEBUG_CERT_EXPORT_KEY }} | base64 -d`
       - name: Make debug google service file
         run: echo "${{ secrets.DEBUG_GOOGLE_SERVICE_SECRET }}" | base64 -d > Cosmostation/GoogleService-Info.plist
 
