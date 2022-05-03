@@ -2452,6 +2452,30 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             guard let url = URL(string: "https://www.coingecko.com/en/coins/umee") else { return }
             self.onShowSafariWeb(url)
             
+        } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/graviton") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.MANTLE_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/assetmantle") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.CERBERUS_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/cerberus") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.EVMOS_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/evmos") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.KONSTELLATION_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/konstellation") else { return }
+            self.onShowSafariWeb(url)
+            
+        } else if (chainType! == ChainType.PROVENANCE_MAIN) {
+            guard let url = URL(string: "https://www.coingecko.com/en/coins/provenance-blockchain") else { return }
+            self.onShowSafariWeb(url)
+            
         }
         
     }
