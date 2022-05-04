@@ -1,8 +1,9 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
-target 'Cosmostation' do
-  # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+# Comment the next line if you don't want to use dynamic frameworks
+use_frameworks!
+
+def shared_pods
     pod 'SwiftyJSON', '~> 4.3'
     pod 'HDWalletKit', :git => 'https://github.com/cosmostation/HDWallet.git', branch: 'develop'
     pod 'Starscream', '~> 3.1.1'
@@ -21,4 +22,12 @@ target 'Cosmostation' do
     pod 'gRPC-Swift-Plugins'
     pod 'HPParallaxHeader'
     pod 'IpfsApi'
+end
+
+target 'Cosmostation' do
+    shared_pods
+end
+
+target 'CosmostationDev' do
+    shared_pods
 end

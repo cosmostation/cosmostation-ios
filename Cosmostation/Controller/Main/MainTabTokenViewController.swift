@@ -1054,7 +1054,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.tokenSymbol.text = okToken.original_symbol!.uppercased()
                 cell?.tokenSymbol.textColor = COLOR_OK
                 cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
-                cell?.tokenDescription.text = "OEC Staking Coin"
+                cell?.tokenDescription.text = "OKC Staking Coin"
                 
                 let tokenAmount = WUtils.getAllExToken(OKEX_MAIN_DENOM)
                 cell?.tokenAmount.attributedText = WUtils.displayAmount2(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)

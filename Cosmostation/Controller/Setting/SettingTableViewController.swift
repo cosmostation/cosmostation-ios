@@ -333,7 +333,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         } else if (indexPath.section == 3) {
             if(indexPath.row == 0) {
                 if(Locale.current.languageCode == "ko") {
-                    guard let url = URL(string: "https://www.cosmostation.io/service_ko.html") else { return }
+                    guard let url = URL(string: "https://www.cosmostation.io/service_kr.html") else { return }
                     self.onShowSafariWeb(url)
                 } else {
                     guard let url = URL(string: "https://www.cosmostation.io/service_en.html") else { return }
