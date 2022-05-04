@@ -308,26 +308,19 @@ extension WUtils {
         }
     }
     
-    
     static func getKavaMarketId(_ denom: String) -> String {
-        if (denom == KAVA_MAIN_DENOM) {
+
+        if denom.starts(with: "ibc/"),
+           let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")),
+           let displayDenom = ibcToken.display_denom {
+            return "\(displayDenom):usd"
+        } else if denom == KAVA_MAIN_DENOM {
             return "kava:usd"
-        } else if (denom == KAVA_HARD_DENOM) {
-            return "hard:usd"
-        } else if (denom == KAVA_USDX_DENOM) {
-            return "usdx:usd"
-        } else if (denom == KAVA_SWAP_DENOM) {
-            return "swp:usd"
-        } else if (denom == TOKEN_HTLC_KAVA_BNB) {
-            return "bnb:usd"
-        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
-            return "xrp:usd"
-        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
-            return "busd:usd"
-        } else if (denom.contains("btc")) {
+        } else if denom.contains("btc") {
             return "btc:usd"
+        } else {
+            return "\(denom):usd"
         }
-        return ""
     }
     
     static func getKavaOraclePriceWithDenom(_ denom: String) -> NSDecimalNumber {

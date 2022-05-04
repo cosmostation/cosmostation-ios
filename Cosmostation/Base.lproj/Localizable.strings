@@ -136,8 +136,8 @@
 "send_guide_msg_iov" = "Built on Tendermint, Starname builds a fast, secure and decentralized universal name service.";
 "send_guide_title_band" = "BAND PROTOCOL";
 "send_guide_msg_band" = "Cross-chain oracle platform based on Tendermint. Aggregates and connects real-world data and APIs to smart contracts.";
-"send_guide_title_ok" = "OEC CHAIN";
-"send_guide_msg_ok" = "OEC Chain is a public decentralized exchange powered by Tendermint.";
+"send_guide_title_ok" = "OKC CHAIN";
+"send_guide_msg_ok" = "OKC Chain is a public decentralized exchange powered by Tendermint.";
 "send_guide_title_certik" = "CERTIK CHAIN";
 "send_guide_msg_certik" = "A public platform based on the Certik Foundation's unique Formal Verification security system.";
 "send_guide_title_secret" = "SECRET CHAIN";
@@ -267,7 +267,7 @@
 "secret_old_path" = "OLD PATH (44'/118'/0'/0)";
 "secret_new_path" = "NEW PATH (44'/529'/0'/0)";
 "select_keytype_okex_title" = "Select Key Type";
-"select_keytype_okex_msg" = "OEC Chain support 3 types keys.\n\nSelect [Tendermint Type] if you want to use the type you used from Test Net, or [Ethermint Type] if you created it later.\nIf you want the latest path select [Ethereum Type] \n\nIf you mistakenly selected the wrong type, it will not affect your original Secret wallet. Simply press [Import Mnemonics] to re-select your type.";
+"select_keytype_okex_msg" = "OKC Chain support 3 types keys.\n\nSelect [Tendermint Type] if you want to use the type you used from Test Net, or [Ethermint Type] if you created it later.\nIf you want the latest path select [Ethereum Type] \n\nIf you mistakenly selected the wrong type, it will not affect your original OKC wallet. Simply press [Import Mnemonics] to re-select your type.";
 "keytype_okex_old" = "Legacy Tendermint Type (44'/996'/0'/0)";
 "keytype_okex_new" = "Legacy Ethermint Type (44'/996'/0'/0)";
 "keytype_okex_eth" = "Ethereum Type (44'/60'/0'/0)";
@@ -996,7 +996,7 @@ support@cosmostation.io";
 "chain_title_secret" = "Secret";
 "chain_title_certik" = "Certik";
 "chain_title_akash" = "Akash";
-"chain_title_okex" = "OEC";
+"chain_title_okex" = "OKC";
 "chain_title_sentinel" = "Sentinel";
 "chain_title_fetch" = "Fetch.ai";
 "chain_title_crypto" = "Crypto.org";
