@@ -2033,6 +2033,8 @@
 		18FFB7DA281E9C9F004E65BB /* CosmostationDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */; };
 		2800CF9624719EC4003C3EF1 /* Tally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF9524719EC4003C3EF1 /* Tally.swift */; };
 		2800CF982471A004003C3EF1 /* CosmosProposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2800CF972471A004003C3EF1 /* CosmosProposer.swift */; };
+		2802B4AD28250A9300B2D9E8 /* DeriveWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802B4AB28250A9300B2D9E8 /* DeriveWalletCell.swift */; };
+		2802B4AE28250A9300B2D9E8 /* DeriveWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2802B4AC28250A9300B2D9E8 /* DeriveWalletCell.xib */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
 		280524B5255CDA7D004D6172 /* StarnameWalletConnectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280524B3255CDA7D004D6172 /* StarnameWalletConnectViewController.xib */; };
 		280524B8255CEEC7004D6172 /* ExportStarname.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B7255CEEC7004D6172 /* ExportStarname.swift */; };
@@ -3445,6 +3447,8 @@
 		23DC1186B7119D1B4D2EB379 /* Pods-Cosmostation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Cosmostation.release.xcconfig"; path = "Target Support Files/Pods-Cosmostation/Pods-Cosmostation.release.xcconfig"; sourceTree = "<group>"; };
 		2800CF9524719EC4003C3EF1 /* Tally.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tally.swift; sourceTree = "<group>"; };
 		2800CF972471A004003C3EF1 /* CosmosProposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosProposer.swift; sourceTree = "<group>"; };
+		2802B4AB28250A9300B2D9E8 /* DeriveWalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeriveWalletCell.swift; sourceTree = "<group>"; };
+		2802B4AC28250A9300B2D9E8 /* DeriveWalletCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeriveWalletCell.xib; sourceTree = "<group>"; };
 		280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarnameWalletConnectViewController.swift; sourceTree = "<group>"; };
 		280524B3255CDA7D004D6172 /* StarnameWalletConnectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StarnameWalletConnectViewController.xib; sourceTree = "<group>"; };
 		280524B7255CEEC7004D6172 /* ExportStarname.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportStarname.swift; sourceTree = "<group>"; };
@@ -6224,6 +6228,8 @@
 				2876546E2726BFD30071FF96 /* EditDisplayChainCell.xib */,
 				287654712726BFE80071FF96 /* EditHideChainCell.swift */,
 				287654722726BFE80071FF96 /* EditHideChainCell.xib */,
+				2802B4AB28250A9300B2D9E8 /* DeriveWalletCell.swift */,
+				2802B4AC28250A9300B2D9E8 /* DeriveWalletCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6731,6 +6737,7 @@
 				28440C5C271E7B7800B4A7C3 /* SifSwap3ViewController.xib in Resources */,
 				2889FD7D260337C600CA9896 /* TxHardLiquidateCell.xib in Resources */,
 				282FF35A23F52FD40028CC66 /* TxRewardCell.xib in Resources */,
+				2802B4AE28250A9300B2D9E8 /* DeriveWalletCell.xib in Resources */,
 				285A33DF2447633D0052BD3D /* SelectAccountCell.xib in Resources */,
 				E103DAC02281296E006C2146 /* QRScanViewController.xib in Resources */,
 				04D138542691E23200D6AF9F /* TxCreatePoolCell.xib in Resources */,
@@ -8971,6 +8978,7 @@
 				0444443527AC08F100EB093E /* TxStoreContractCell.swift in Sources */,
 				E1827E252256293900BC0350 /* ValidatorDetailCell.swift in Sources */,
 				283850242448A6C600E5DEF2 /* TxHtlcRefundCell.swift in Sources */,
+				2802B4AD28250A9300B2D9E8 /* DeriveWalletCell.swift in Sources */,
 				040FAAE2275F55C400229F6F /* cosmos_capability_v1beta1_capability.pb.swift in Sources */,
 				E1ECCA7A224CB4AA00BAB623 /* BottomLineTextField.swift in Sources */,
 				28E46BE424F8FCFF005CE985 /* StepOkVoteToViewController.swift in Sources */,
