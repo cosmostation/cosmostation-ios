@@ -1236,6 +1236,26 @@ public enum ChainType: String {
         }
         return false
     }
+    
+    static func getAllWalletTypeCnt() -> Int {
+        var result = 0
+        SUPPRT_CHAIN().forEach { chain in
+            if (chain == .KAVA_MAIN) {
+                result  = result + 2
+            } else if (chain == .SECRET_MAIN) {
+                result  = result + 2
+            } else if (chain == .LUM_MAIN) {
+                result  = result + 2
+            } else if (chain == .FETCH_MAIN) {
+                result  = result + 4
+            } else if (chain == .OKEX_MAIN) {
+                result  = result + 3
+            } else {
+                result  = result + 1
+            }
+        }
+        return result
+    }
 }
 
 let CHAIN_COSMOS_S = "SUPPORT_CHAIN_COSMOS_MAIN"

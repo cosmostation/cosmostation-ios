@@ -128,6 +128,7 @@ class MnemonicDetailViewController: BaseViewController {
     
     @IBAction func onClickDeriveWallet(_ sender: UIButton) {
         let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
+        walletDeriveVC.mWords = mWords
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(walletDeriveVC, animated: true)
     }

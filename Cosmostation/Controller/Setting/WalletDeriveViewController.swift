@@ -10,8 +10,15 @@ import UIKit
 
 class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var mnemonicNameLabel: UILabel!
+    @IBOutlet weak var walletCntLabel: UILabel!
+    @IBOutlet weak var totalWalletCntLabel: UILabel!
+    @IBOutlet weak var pathCardView: CardView!
     @IBOutlet weak var selectedHDPathLabel: UILabel!
     @IBOutlet weak var derivedWalletTableView: UITableView!
+    
+    var mWords: MWords!
+    var mPath = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,15 +28,36 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         self.derivedWalletTableView.register(UINib(nibName: "DeriveWalletCell", bundle: nil), forCellReuseIdentifier: "DeriveWalletCell")
         self.derivedWalletTableView.rowHeight = UITableView.automaticDimension
         self.derivedWalletTableView.estimatedRowHeight = UITableView.automaticDimension
+        
+        self.mnemonicNameLabel.text = self.mWords.getName()
+        self.walletCntLabel.text = "7"
+        self.totalWalletCntLabel.text = "/ 50"
+        self.selectedHDPathLabel.text = String(mPath)
+        
+        let tapPath = UITapGestureRecognizer(target: self, action: #selector(self.onClickPath))
+        self.pathCardView.addGestureRecognizer(tapPath)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 40
+        return ChainType.getAllWalletTypeCnt()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"DeriveWalletCell") as? DeriveWalletCell
         return cell!
+    }
+    
+    @objc func onClickPath() {
+        print("onClickPath")
+    }
+    
+    @IBAction func onClickBack(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func onClickDerive(_ sender: UIButton) {
