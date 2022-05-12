@@ -107,6 +107,24 @@ class WKey {
         }
     }
     
+    static func getDerivedKey(_ masterKey: PrivateKey, _ fullPath: String) -> PrivateKey {
+        var result = masterKey
+        let paths = fullPath.split(separator: "/")
+        
+        paths.forEach { path in
+            if let intPath = UInt32(path.replacingOccurrences(of: "'", with: "")) {
+                if (path.last == "'") { result = result.derived(at: .hardened(intPath)) }
+                else { result = result.derived(at: .notHardened(intPath)) }
+            }
+        }
+        return result
+    }
+    
+    static func getDpAddress(_ pubkey: HDWalletKit.PublicKey, _ prefix: String) -> String {
+        let ripemd160 = RIPEMD160.hash(pubkey.data.sha256())
+        return try! SegwitAddrCoder.shared.encode2(hrp: prefix, program: ripemd160)
+    }
+    
     static func getPubToDpAddress(_ pubHex:String, _ chain:ChainType) -> String {
         var result = ""
         let sha256 = Data.fromHex(pubHex)!.sha256()

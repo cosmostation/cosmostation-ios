@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import HDWalletKit
 import SwiftKeychainWrapper
 
 public class MWords {
@@ -60,5 +61,9 @@ public class MWords {
     
     func getImportDate() -> String {
         return WUtils.longTimetoString(importTime)
+    }
+    
+    func getMasterKey() -> PrivateKey {
+        return PrivateKey(seed: Mnemonic.createSeed(mnemonic: getWords()), coin: .bitcoin)
     }
 }

@@ -44,11 +44,13 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ChainType.getAllWalletTypeCnt()
+        return ChainFactory().getAllKeyType().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"DeriveWalletCell") as? DeriveWalletCell
+        let baseChain = ChainFactory().getAllKeyType()[indexPath.row]
+        cell?.onBindWallet(mWords, baseChain.0, baseChain.1, mPath)
         return cell!
     }
     
