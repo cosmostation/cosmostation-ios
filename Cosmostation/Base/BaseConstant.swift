@@ -1055,6 +1055,11 @@ let TRANS_BG_COLOR_MANTLE2                  = UIColor.init(hexString: "f3b519", 
 let COLOR_MANTLE                            = UIColor.init(hexString: "f3b519")
 let COLOR_MANTLE_DARK                       = UIColor.init(hexString: "a48e59")
 
+let TRANS_BG_COLOR_STATION                  = UIColor.init(hexString: "05c3cd", alpha: 0.15)
+let TRANS_BG_COLOR_STATION2                 = UIColor.init(hexString: "05c3cd", alpha: 0.4)
+let COLOR_STATION                           = UIColor.init(hexString: "05c3cd")
+let COLOR_STATION_DARK                      = UIColor.init(hexString: "007d84")
+
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
 let COLOR_CDP_SAFE                          = UIColor.init(hexString: "40F683")

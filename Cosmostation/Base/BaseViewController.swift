@@ -565,7 +565,7 @@ extension BaseViewController {
         let stationTestAction = UIAlertAction(title: NSLocalizedString("chain_title_station_test", comment: ""), style: .default, handler: { _ in
             self.onChainSelected(ChainType.STATION_TEST)
         })
-        stationTestAction.setValue(UIImage(named: "testnetCrescent")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        stationTestAction.setValue(UIImage(named: "testnetStation")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
         
         

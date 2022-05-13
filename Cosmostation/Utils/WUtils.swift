@@ -1780,10 +1780,14 @@ public class WUtils {
             return COLOR_CERBERUS
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             return COLOR_OMNIFLIX
-        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST || chain == ChainType.STATION_TEST) {
+        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             return COLOR_CRESCENT
         } else if (chain == ChainType.MANTLE_MAIN) {
             return COLOR_MANTLE
+        }
+        
+        else if (chain == ChainType.STATION_TEST) {
+            return COLOR_STATION
         }
         return COLOR_DARK_GRAY
     }
@@ -1869,10 +1873,14 @@ public class WUtils {
             return COLOR_CERBERUS_DARK
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             return COLOR_OMNIFLIX_DARK
-        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST || chain == ChainType.STATION_TEST) {
+        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             return COLOR_CRESCENT_DARK
         } else if (chain == ChainType.MANTLE_MAIN) {
             return COLOR_MANTLE_DARK
+        }
+        
+        else if (chain == ChainType.STATION_TEST) {
+            return COLOR_STATION_DARK
         }
         return COLOR_DARK_GRAY
     }
@@ -1958,10 +1966,14 @@ public class WUtils {
             return TRANS_BG_COLOR_CERBERUS
         } else if (chain == ChainType.OMNIFLIX_MAIN) {
             return TRANS_BG_COLOR_OMNIFLIX
-        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST || chain == ChainType.STATION_TEST) {
+        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
             return TRANS_BG_COLOR_CRESCENT
         } else if (chain == ChainType.MANTLE_MAIN) {
             return TRANS_BG_COLOR_MANTLE
+        }
+        
+        else if (chain == ChainType.STATION_TEST) {
+            return TRANS_BG_COLOR_STATION
         }
         return COLOR_BG_GRAY
     }
@@ -2366,7 +2378,7 @@ public class WUtils {
         
         else if (chain == ChainType.STATION_TEST) {
             label?.text = "ISS"
-            label?.textColor = COLOR_CRESCENT
+            label?.textColor = COLOR_STATION
         }
     }
     
@@ -4547,7 +4559,7 @@ public class WUtils {
         else if (chain == ChainType.IRIS_TEST) { return UIImage(named: "irisTestChainImg") }
         else if (chain == ChainType.ALTHEA_TEST) { return UIImage(named: "testnetAlthea") }
         else if (chain == ChainType.CRESCENT_TEST) { return UIImage(named: "testnetCrescent") }
-        else if (chain == ChainType.STATION_TEST) { return UIImage(named: "testnetCrescent") }
+        else if (chain == ChainType.STATION_TEST) { return UIImage(named: "testnetStation") }
         return UIImage(named: "defaultChainImg")
     }
     

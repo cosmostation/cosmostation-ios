@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxW-bD-Wvj" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="547" height="345"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testnetCrescent" translatesAutoresizingMaskIntoConstraints="NO" id="vkn-Ob-JgX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIss" translatesAutoresizingMaskIntoConstraints="NO" id="vkn-Ob-JgX">
                                 <rect key="frame" x="12" y="13.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Pad-9v-okr"/>
@@ -30,7 +30,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ISS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRz-DV-al4">
                                 <rect key="frame" x="38" y="16" width="19" height="15"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <color key="textColor" red="1" green="0.78039215689999997" blue="0.50196078430000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" red="0.019607843137254902" green="0.76470588235294112" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsv-cb-9Ts">
@@ -290,7 +290,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.78039215689999997" blue="0.50196078430000002" alpha="0.1480523768" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.019607843137254902" green="0.76470588235294112" blue="0.80392156862745101" alpha="0.1480523768" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2GY-Fe-gwF" firstAttribute="top" secondItem="bsv-cb-9Ts" secondAttribute="bottom" constant="6" id="18T-ok-R0R"/>
                             <constraint firstItem="utm-8Z-ypb" firstAttribute="leading" secondItem="lyQ-pW-258" secondAttribute="leading" id="5Ki-gu-m4O"/>
@@ -362,7 +362,7 @@
         <image name="iconCrescentapp" width="20" height="20"/>
         <image name="iconWalletconnect" width="20" height="20"/>
         <image name="rewardIc" width="20" height="20"/>
-        <image name="testnetCrescent" width="42" height="42"/>
+        <image name="tokenIss" width="22" height="22"/>
         <image name="voteIc" width="20" height="20"/>
     </resources>
 </document>
