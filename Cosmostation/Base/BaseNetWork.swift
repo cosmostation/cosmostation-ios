@@ -665,7 +665,7 @@ class BaseNetWork {
             return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20400)
             
         } else if (chain == ChainType.STATION_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 10400)
+            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 54600)
             
         }
         return nil

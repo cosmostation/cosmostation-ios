@@ -89,6 +89,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
         self.walletTableView.register(UINib(nibName: "WalletGuideCell", bundle: nil), forCellReuseIdentifier: "WalletGuideCell")
         self.walletTableView.register(UINib(nibName: "WalletDesmosEventCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosEventCell")
+        self.walletTableView.register(UINib(nibName: "WalletStationCell", bundle: nil), forCellReuseIdentifier: "WalletStationCell")
         
         self.walletTableView.rowHeight = UITableView.automaticDimension
         self.walletTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -328,6 +329,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetIrisTestItems(tableView, indexPath);
         } else if (chainType == ChainType.CRESCENT_TEST) {
             return onSetCrescentItems(tableView, indexPath);
+        } else if (chainType == ChainType.STATION_TEST) {
+            return onSetStationItems(tableView, indexPath);
         } else {
             let cell:WalletAddressCell? = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             return cell!
@@ -1569,6 +1572,37 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    func onSetStationItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletStationCell") as? WalletStationCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionWC = { self.onClickWalletConect() }
+            cell?.actionDapp = { self.onClickStationApp() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+    }
+    
     func onSetMantleItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletMantleCell") as? WalletMantleCell
@@ -1872,6 +1906,15 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickCrescentApp() {
+        let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+        commonWcVC.dappURL = "https://wc.dev.cosmostation.io"
+        commonWcVC.isDapp = true
+        commonWcVC.isDeepLink = false
+        commonWcVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(commonWcVC, animated: true)
+    }
+    
+    func onClickStationApp() {
         let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
         commonWcVC.dappURL = "https://wc.dev.cosmostation.io"
         commonWcVC.isDapp = true
@@ -2623,7 +2666,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     }
                 }
                 
-            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN) {
+            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.STATION_TEST || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN) {
                 self.wcURL = result
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
@@ -2651,7 +2694,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
                     self.navigationController?.pushViewController(wcVC, animated: true)
                     
-                } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN) {
+                } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN || self.chainType == ChainType.STATION_TEST) {
                     let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
                     commonWcVC.wcURL = self.wcURL!
                     commonWcVC.hidesBottomBarWhenPushed = true

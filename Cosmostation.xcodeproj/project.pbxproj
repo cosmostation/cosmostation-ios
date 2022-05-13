@@ -626,11 +626,13 @@
 		04E2A32F27A59BB10045ED21 /* TokenDetailCommonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E2A32D27A59BB10045ED21 /* TokenDetailCommonCell.xib */; };
 		04E2A33127AB94630045ED21 /* SendContract4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
-		151788ED282E078600A7D7CC /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
 		15E40DA927C787F000E7C850 /* WalletProvenanceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E40DA727C787F000E7C850 /* WalletProvenanceCell.swift */; };
 		15E40DAA27C787F000E7C850 /* WalletProvenanceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E40DA827C787F000E7C850 /* WalletProvenanceCell.xib */; };
 		15E40DAD27C8A9E400E7C850 /* WalletCudosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E40DAB27C8A9E400E7C850 /* WalletCudosCell.swift */; };
 		15E40DAE27C8A9E400E7C850 /* WalletCudosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15E40DAC27C8A9E400E7C850 /* WalletCudosCell.xib */; };
+		18F811B9282E1FC4008AF0D2 /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
+		18F811BA282E1FC5008AF0D2 /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
+		18F811BB282E1FD7008AF0D2 /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
 		18FFB260281AF533004E65BB /* KavaIncentiveParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7BDA025F0B707006EECD7 /* KavaIncentiveParam.swift */; };
 		18FFB261281AF533004E65BB /* tendermint_farming_v1beta1_farming.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5FA275F55A300229F6F /* tendermint_farming_v1beta1_farming.pb.swift */; };
 		18FFB262281AF533004E65BB /* TxDelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282FF34323F5062A0028CC66 /* TxDelegateCell.swift */; };
@@ -6621,6 +6623,7 @@
 				18FFB7BA281AF533004E65BB /* WalletCrescentCell.xib in Resources */,
 				18FFB7BB281AF533004E65BB /* FarmingDetailViewController.xib in Resources */,
 				18FFB7BC281AF533004E65BB /* WalletIrisCell.xib in Resources */,
+				18F811B9282E1FC4008AF0D2 /* WalletStationCell.xib in Resources */,
 				18FFB7BD281AF533004E65BB /* NativeTokenDetailViewController.xib in Resources */,
 				18FFB7BE281AF533004E65BB /* Init.storyboard in Resources */,
 				18FFB7BF281AF533004E65BB /* HardPoolBorrow3ViewController.xib in Resources */,
@@ -6949,7 +6952,7 @@
 				28584B4B26E87CE600EE5719 /* GdexDeposit0ViewController.xib in Resources */,
 				E151B65522486C300026B8C0 /* ProposalCell.xib in Resources */,
 				287E0AA526EDC6F300F8C242 /* WalletAxelarCell.xib in Resources */,
-				151788ED282E078600A7D7CC /* WalletStationCell.xib in Resources */,
+				18F811BA282E1FC5008AF0D2 /* WalletStationCell.xib in Resources */,
 				04E25D472770D56C009B39BA /* NFTDetailInfoCell.xib in Resources */,
 				283E94872549333B007A9291 /* AccountDetailViewController.xib in Resources */,
 				04D93A5927B1347900F8CE0D /* WalletKonstellationCell.xib in Resources */,
@@ -7113,6 +7116,7 @@
 				18FFB275281AF533004E65BB /* cosmos_gov_v1beta1_gov.pb.swift in Sources */,
 				18FFB276281AF533004E65BB /* ValidatorListViewController.swift in Sources */,
 				18FFB277281AF533004E65BB /* DecimalViewController.swift in Sources */,
+				18F811BB282E1FD7008AF0D2 /* WalletStationCell.swift in Sources */,
 				18FFB278281AF533004E65BB /* WalletDetailViewController.swift in Sources */,
 				18FFB279281AF533004E65BB /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				18FFB27A281AF533004E65BB /* cosmwasm_wasm_v1_query.grpc.swift in Sources */,
