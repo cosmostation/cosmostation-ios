@@ -562,6 +562,11 @@ extension BaseViewController {
         })
         crescentTestAction.setValue(UIImage(named: "testnetCrescent")?.withRenderingMode(.alwaysOriginal), forKey: "image")
         
+        let stationTestAction = UIAlertAction(title: NSLocalizedString("chain_title_station_test", comment: ""), style: .default, handler: { _ in
+            self.onChainSelected(ChainType.STATION_TEST)
+        })
+        stationTestAction.setValue(UIImage(named: "testnetCrescent")?.withRenderingMode(.alwaysOriginal), forKey: "image")
+        
         
         
         showAlert.addAction(cosmosAction)
@@ -614,6 +619,10 @@ extension BaseViewController {
         
         if (ChainType.SUPPRT_CHAIN().contains(ChainType.CRESCENT_TEST)) {
             showAlert.addAction(crescentTestAction)
+        }
+        
+        if (ChainType.SUPPRT_CHAIN().contains(ChainType.STATION_TEST)) {
+            showAlert.addAction(stationTestAction)
         }
         
         if (cancleable) {

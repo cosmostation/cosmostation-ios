@@ -1031,6 +1031,7 @@ support@cosmostation.io";
 "chain_title_test_iris" = "Bifrost Testnet";
 "chain_title_althea_test" = "Althea Testnet";
 "chain_title_crescent_test" = "Crescent Testnet";
+"chain_title_station_test" = "Station Testnet";
 
 "date_format" = "yyyy-MM-dd HH:mm:ss";
 "date_format2" = "yyyy-MM-dd";

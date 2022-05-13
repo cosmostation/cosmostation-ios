@@ -133,6 +133,8 @@ let CRESCENT_TEST_API                   = "https://api-office.cosmostation.io/mo
 
 let MANTLE_API                          = "https://api-asset-mantle.cosmostation.io/";
 
+let STATION_TEST_API                    = "https://api-office.cosmostation.io/station-testnet/";
+
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
@@ -1112,6 +1114,7 @@ public enum ChainType: String {
     case IRIS_TEST
     case ALTHEA_TEST
     case CRESCENT_TEST
+    case STATION_TEST
     
     static func SUPPRT_CHAIN() -> Array<ChainType> {
         var result = [ChainType]()
@@ -1163,6 +1166,7 @@ public enum ChainType: String {
 //        result.append(IRIS_TEST)
 //        result.append(ALTHEA_TEST)
 //        result.append(CRESCENT_TEST)
+        result.append(STATION_TEST)
         return result
     }
     
@@ -1273,6 +1277,7 @@ let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
 let CHAIN_ALTHEA_TEST_S = "SUPPORT_CHAIN_ALTHEA_TEST"
 let CHAIN_CRESENT_TEST_S = "SUPPORT_CHAIN_CRESENT_TEST"
+let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 
 let COSMOS_MAIN_DENOM = "uatom"
 let IRIS_MAIN_DENOM = "uiris"
@@ -1320,6 +1325,7 @@ let MANTLE_MAIN_DENOM = "umntl"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
+let STATION_TEST_DENOM = "uiss"
 let KAVA_HARD_DENOM = "hard"
 let KAVA_USDX_DENOM = "usdx"
 let KAVA_SWAP_DENOM = "swp"
@@ -1426,6 +1432,7 @@ let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
 let EXPLORER_ALTHEA_TEST    = "https://testnet.mintscan.io/althea/";
 let EXPLORER_HDAC_TEST      = "http://test.explorer.hdactech.com/hdac-explorer/";
 let EXPLORER_CRESCENT_TEST  = "https://testnet.mintscan.io/crescent/";
+let EXPLORER_STATION_TEST   = "https://testnet.mintscan.io/station/";
 
 let EXPLORER_OEC_TX         = "https://www.oklink.com/oec/"
 
