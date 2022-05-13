@@ -534,6 +534,13 @@ class WKey {
         return EthereumAddress.init(data: ripemd160).string
     }
     
+    static func generateTenderAddressBytesFromPrivateKey(_ priKey: Data) -> Data {
+        let publicKey = getPublicFromPrivateKey(priKey)
+        let sha256 = publicKey.sha256()
+        let ripemd160 = RIPEMD160.hash(sha256)
+        return ripemd160
+    }
+    
     //Convert eth to Betch style
     static func convertAddressEthToCosmos(_ ethAddress: String, _ prefix: String) -> String {
         var address = ethAddress

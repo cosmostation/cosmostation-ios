@@ -433,8 +433,8 @@ class CommonWCViewController: BaseViewController {
         getKeyAsync(chainName: account.account_base_chain) { tuple in
             let name = WUtils.getWalletName(account)!
             let algo = "secp256k1"
-            let pubKey = tuple.publicKey.toHexString()
-            let address = tuple.tendermintAddress
+            let pubKey = [UInt8](tuple.publicKey)
+            let address = [UInt8](tuple.tendermintAddress)
             let bech32Address = account.account_address
             let wallet = WCKeplrWallet.init(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address, isNanoLedger: false)
             listener(wallet)
@@ -445,8 +445,8 @@ class CommonWCViewController: BaseViewController {
         let tuple = getKey(chainName: account.account_base_chain)
         let name = WUtils.getWalletName(account)!
         let algo = "secp256k1"
-        let pubKey = tuple.publicKey.toHexString()
-        let address = tuple.tendermintAddress
+        let pubKey = [UInt8](tuple.publicKey)
+        let address = [UInt8](tuple.tendermintAddress)
         let bech32Address = account.account_address
         let comostationAccount = WCCosmostationAccount(name: name, algo: algo, pubKey: pubKey, address: address, bech32Address: bech32Address)
         return comostationAccount
@@ -522,15 +522,15 @@ class CommonWCViewController: BaseViewController {
         }.cauterize()
     }
     
-    typealias KeyTuple = (privateKey: Data,publicKey: Data, tendermintAddress:String)
+    typealias KeyTuple = (privateKey: Data, publicKey: Data, tendermintAddress:Data)
     
     func getKey(chainName: String) -> KeyTuple {
-        guard let account = accountMap[chainName] else { return (Data(), Data(), "") }
+        guard let account = accountMap[chainName] else { return (Data(), Data(), Data()) }
         if (account.account_from_mnemonic == true) {
             if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
                 let privateKey = KeyFac.getPrivateRaw(words, account)
                 let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-                let tenderAddress = WKey.generateTenderAddressFromPrivateKey(privateKey).replacingOccurrences(of: "0x", with: "")
+                let tenderAddress = WKey.generateTenderAddressBytesFromPrivateKey(privateKey)
                 return (privateKey, publicKey, tenderAddress)
             }
             
@@ -538,11 +538,11 @@ class CommonWCViewController: BaseViewController {
             if let key = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1()) {
                 let privateKey = KeyFac.getPrivateFromString(key)
                 let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-                let tenderAddress = WKey.generateTenderAddressFromPrivateKey(privateKey).replacingOccurrences(of: "0x", with: "")
+                let tenderAddress = WKey.generateTenderAddressBytesFromPrivateKey(privateKey)
                 return (privateKey, publicKey, tenderAddress)
             }
         }
-        return (Data(), Data(), "")
+        return (Data(), Data(), Data())
     }
     
     func getKeyAsync(chainName: String, listener: @escaping (_ keyTuple: KeyTuple) -> ()) {
