@@ -100,6 +100,13 @@ class CommonWCViewController: BaseViewController {
         webView.uiDelegate = self
         webView.allowsLinkPreview = false
         webView.scrollView.bounces = false
+        if let dictionary = Bundle.main.infoDictionary,
+            let version = dictionary["CFBundleShortVersionString"] as? String {
+            webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
+                let originUserAgent = result as! String
+                self.webView.customUserAgent = "\(originUserAgent) Cosmostation/APP/iOS/\(version)"
+            }
+        }
     }
     
     
