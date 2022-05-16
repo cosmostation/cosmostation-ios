@@ -13,6 +13,8 @@ import SwiftKeychainWrapper
 import Alamofire
 import WebKit
 import SwiftyJSON
+import BigInt
+import web3swift
 
 class CommonWCViewController: BaseViewController {
     
@@ -169,9 +171,18 @@ class CommonWCViewController: BaseViewController {
             self.wCPeerMeta = peer.peerMeta
             if (!self.isDeepLink && !self.isDapp) {
                 if let baseAccount = self.accountMap[self.baseChain] {
-                    self.interactor?.approveSession(accounts: [baseAccount.account_address], chainId: chainId).done { _ in
-                            self.onViewUpdate(peer.peerMeta)
-                        }.cauterize()
+                    if self.chainType == ChainType.EVMOS_MAIN {
+                        self.getPrivateKeyAsync(account: baseAccount) { key in
+                            let ethAddress = WKey.generateEthAddressFromPrivateKey(key)
+                            self.interactor?.approveSession(accounts: [ethAddress], chainId: 9001).done { _ in
+                                    self.onViewUpdate(peer.peerMeta)
+                                }.cauterize()
+                        }
+                    } else {
+                        self.interactor?.approveSession(accounts: [baseAccount.account_address], chainId: chainId).done { _ in
+                                self.onViewUpdate(peer.peerMeta)
+                            }.cauterize()
+                    }
                 }
             } else {
                 self.moveToBackgroundIfNeedAndAction {
@@ -192,6 +203,24 @@ class CommonWCViewController: BaseViewController {
             }
             if (self.isDapp) {
                 self.connectStatus(connected: false)
+            }
+        }
+        
+        interactor.eth.onTransaction = { [weak self] (id, event, transaction) in
+            guard let self = self else { return }
+            if event == .ethSendTransaction {
+                if self.chainType == ChainType.EVMOS_MAIN {
+                    let alertController = UIAlertController(title: NSLocalizedString("wc_request_sign_title", comment: ""), message: transaction.data, preferredStyle: .alert)
+                    let confirmAction = UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default) { (_) -> Void in
+                        self.processEthSend(id: id, transaction: transaction)
+                    }
+                    let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
+                    alertController.addAction(cancelAction)
+                    alertController.addAction(confirmAction)
+                    DispatchQueue.main.async {
+                        self.present(alertController, animated: true, completion: nil)
+                    }
+                }
             }
         }
         
@@ -233,6 +262,7 @@ class CommonWCViewController: BaseViewController {
                 self.showKeplrAccountDialog(id: id, chainId: chainId)
             }
         }
+        
         
         interactor.keplr.onSignKeplrAmino = { [weak self] (rawData) in
             guard let self = self else { return }
@@ -276,6 +306,48 @@ class CommonWCViewController: BaseViewController {
             })
         } else {
             action()
+        }
+    }
+    
+    func processEthSend(id: Int64, transaction: WCEthereumTransaction) {
+        guard let baseAccount = self.accountMap[self.baseChain] else {
+            self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
+            return
+        }
+        self.getPrivateKeyAsync(account: baseAccount) { key in
+            let ethAddressString = WKey.generateEthAddressFromPrivateKey(key)
+            let keystore = try? EthereumKeystoreV3(privateKey: key)
+            guard let url = URL(string: "https://eth.bd.evmos.org:8545"),
+                  let provider = Web3HttpProvider(url),
+                  let ethAddress = EthereumAddress(ethAddressString),
+                  let data = transaction.data.data(using: .utf8),
+                  let val = transaction.value,
+                   let bigIntVal = BigUInt(val.replacingOccurrences(of: "0x", with: ""), radix: 16)
+            else {
+                self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
+                return
+            }
+            let web3 = web3(provider: provider)
+            let nounce = try? web3.eth.getTransactionCount(address: ethAddress)
+            var tx = EthereumTransaction(
+                gasPrice: BigUInt(2000000020),
+                gasLimit: BigUInt(500000),
+                to: ethAddress,
+                value: bigIntVal,
+                data: data
+            )
+            guard let nounce = nounce, let keystore = keystore as? AbstractKeystore else {
+                self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
+                return
+            }
+            tx.nonce = nounce
+            try? Web3Signer.signTX(transaction: &tx, keystore: keystore, account: ethAddress, password: "web3swift", useExtraEntropy: false)
+            let result = try? web3.eth.sendRawTransaction(tx)
+            if let result = result {
+                self.interactor?.approveRequest(id: id, result: result.hash).cauterize()
+            } else {
+                self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
+            }
         }
     }
     
@@ -533,23 +605,32 @@ class CommonWCViewController: BaseViewController {
     
     func getKey(chainName: String) -> KeyTuple {
         guard let account = accountMap[chainName] else { return (Data(), Data(), Data()) }
-        if (account.account_from_mnemonic == true) {
+        let privateKey = getPrivateKey(account: account)
+        let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
+        let tenderAddress = WKey.generateTenderAddressBytesFromPrivateKey(privateKey)
+        return (privateKey, publicKey, tenderAddress)
+    }
+    
+    func getPrivateKey(account: Account) -> Data {
+        if account.account_from_mnemonic {
             if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
-                let privateKey = KeyFac.getPrivateRaw(words, account)
-                let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-                let tenderAddress = WKey.generateTenderAddressBytesFromPrivateKey(privateKey)
-                return (privateKey, publicKey, tenderAddress)
+                return KeyFac.getPrivateRaw(words, account)
             }
-            
         } else {
             if let key = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1()) {
-                let privateKey = KeyFac.getPrivateFromString(key)
-                let publicKey = KeyFac.getPublicFromPrivateKey(privateKey)
-                let tenderAddress = WKey.generateTenderAddressBytesFromPrivateKey(privateKey)
-                return (privateKey, publicKey, tenderAddress)
+                return KeyFac.getPrivateFromString(key)
             }
         }
-        return (Data(), Data(), Data())
+        return Data()
+    }
+    
+    func getPrivateKeyAsync(account: Account, listener: @escaping (_ key: Data) -> ()) {
+        DispatchQueue.global().async {
+            let key = self.getPrivateKey(account: account)
+            DispatchQueue.main.async {
+                listener(key)
+            }
+        }
     }
     
     func getKeyAsync(chainName: String, listener: @escaping (_ keyTuple: KeyTuple) -> ()) {

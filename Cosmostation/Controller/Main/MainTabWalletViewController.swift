@@ -1042,6 +1042,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionWc = { self.onClickWalletConect() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -2623,7 +2624,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     }
                 }
                 
-            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN) {
+            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN || self.chainType == ChainType.EVMOS_MAIN) {
                 self.wcURL = result
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
@@ -2651,7 +2652,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
                     self.navigationController?.pushViewController(wcVC, animated: true)
                     
-                } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN) {
+                } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN || self.chainType == ChainType.EVMOS_MAIN) {
                     let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
                     commonWcVC.wcURL = self.wcURL!
                     commonWcVC.hidesBottomBarWhenPushed = true
