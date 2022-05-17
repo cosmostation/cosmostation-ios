@@ -51,6 +51,11 @@ internal protocol Osmosis_Superfluid_MsgClientProtocol: GRPCClient {
     _ request: Osmosis_Superfluid_MsgLockAndSuperfluidDelegate,
     callOptions: CallOptions?
   ) -> UnaryCall<Osmosis_Superfluid_MsgLockAndSuperfluidDelegate, Osmosis_Superfluid_MsgLockAndSuperfluidDelegateResponse>
+
+  func unPoolWhitelistedPool(
+    _ request: Osmosis_Superfluid_MsgUnPoolWhitelistedPool,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Osmosis_Superfluid_MsgUnPoolWhitelistedPool, Osmosis_Superfluid_MsgUnPoolWhitelistedPoolResponse>
 }
 
 extension Osmosis_Superfluid_MsgClientProtocol {
@@ -130,6 +135,24 @@ extension Osmosis_Superfluid_MsgClientProtocol {
       interceptors: self.interceptors?.makeLockAndSuperfluidDelegateInterceptors() ?? []
     )
   }
+
+  /// Unary call to UnPoolWhitelistedPool
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UnPoolWhitelistedPool.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func unPoolWhitelistedPool(
+    _ request: Osmosis_Superfluid_MsgUnPoolWhitelistedPool,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Osmosis_Superfluid_MsgUnPoolWhitelistedPool, Osmosis_Superfluid_MsgUnPoolWhitelistedPoolResponse> {
+    return self.makeUnaryCall(
+      path: "/osmosis.superfluid.Msg/UnPoolWhitelistedPool",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUnPoolWhitelistedPoolInterceptors() ?? []
+    )
+  }
 }
 
 internal protocol Osmosis_Superfluid_MsgClientInterceptorFactoryProtocol {
@@ -145,6 +168,9 @@ internal protocol Osmosis_Superfluid_MsgClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'lockAndSuperfluidDelegate'.
   func makeLockAndSuperfluidDelegateInterceptors() -> [ClientInterceptor<Osmosis_Superfluid_MsgLockAndSuperfluidDelegate, Osmosis_Superfluid_MsgLockAndSuperfluidDelegateResponse>]
+
+  /// - Returns: Interceptors to use when invoking 'unPoolWhitelistedPool'.
+  func makeUnPoolWhitelistedPoolInterceptors() -> [ClientInterceptor<Osmosis_Superfluid_MsgUnPoolWhitelistedPool, Osmosis_Superfluid_MsgUnPoolWhitelistedPoolResponse>]
 }
 
 internal final class Osmosis_Superfluid_MsgClient: Osmosis_Superfluid_MsgClientProtocol {
@@ -187,6 +213,8 @@ internal protocol Osmosis_Superfluid_MsgProvider: CallHandlerProvider {
 
   /// Execute lockup lock and superfluid delegation in a single msg
   func lockAndSuperfluidDelegate(request: Osmosis_Superfluid_MsgLockAndSuperfluidDelegate, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Superfluid_MsgLockAndSuperfluidDelegateResponse>
+
+  func unPoolWhitelistedPool(request: Osmosis_Superfluid_MsgUnPoolWhitelistedPool, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Superfluid_MsgUnPoolWhitelistedPoolResponse>
 }
 
 extension Osmosis_Superfluid_MsgProvider {
@@ -235,6 +263,15 @@ extension Osmosis_Superfluid_MsgProvider {
         userFunction: self.lockAndSuperfluidDelegate(request:context:)
       )
 
+    case "UnPoolWhitelistedPool":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Osmosis_Superfluid_MsgUnPoolWhitelistedPool>(),
+        responseSerializer: ProtobufSerializer<Osmosis_Superfluid_MsgUnPoolWhitelistedPoolResponse>(),
+        interceptors: self.interceptors?.makeUnPoolWhitelistedPoolInterceptors() ?? [],
+        userFunction: self.unPoolWhitelistedPool(request:context:)
+      )
+
     default:
       return nil
     }
@@ -258,4 +295,8 @@ internal protocol Osmosis_Superfluid_MsgServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'lockAndSuperfluidDelegate'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeLockAndSuperfluidDelegateInterceptors() -> [ServerInterceptor<Osmosis_Superfluid_MsgLockAndSuperfluidDelegate, Osmosis_Superfluid_MsgLockAndSuperfluidDelegateResponse>]
+
+  /// - Returns: Interceptors to use when handling 'unPoolWhitelistedPool'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUnPoolWhitelistedPoolInterceptors() -> [ServerInterceptor<Osmosis_Superfluid_MsgUnPoolWhitelistedPool, Osmosis_Superfluid_MsgUnPoolWhitelistedPoolResponse>]
 }

@@ -67,6 +67,11 @@ internal protocol Osmosis_Incentives_QueryClientProtocol: GRPCClient {
     callOptions: CallOptions?
   ) -> UnaryCall<Osmosis_Incentives_UpcomingGaugesRequest, Osmosis_Incentives_UpcomingGaugesResponse>
 
+  func upcomingGaugesPerDenom(
+    _ request: Osmosis_Incentives_UpcomingGaugesPerDenomRequest,
+    callOptions: CallOptions?
+  ) -> UnaryCall<Osmosis_Incentives_UpcomingGaugesPerDenomRequest, Osmosis_Incentives_UpcomingGaugesPerDenomResponse>
+
   func rewardsEst(
     _ request: Osmosis_Incentives_RewardsEstRequest,
     callOptions: CallOptions?
@@ -173,7 +178,7 @@ extension Osmosis_Incentives_QueryClientProtocol {
     )
   }
 
-  /// Unary call to ActiveGaugesPerDenom
+  /// returns active gauges per denom
   ///
   /// - Parameters:
   ///   - request: Request to send to ActiveGaugesPerDenom.
@@ -206,6 +211,24 @@ extension Osmosis_Incentives_QueryClientProtocol {
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeUpcomingGaugesInterceptors() ?? []
+    )
+  }
+
+  /// returns scheduled gauges per denom
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to UpcomingGaugesPerDenom.
+  ///   - callOptions: Call options.
+  /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
+  internal func upcomingGaugesPerDenom(
+    _ request: Osmosis_Incentives_UpcomingGaugesPerDenomRequest,
+    callOptions: CallOptions? = nil
+  ) -> UnaryCall<Osmosis_Incentives_UpcomingGaugesPerDenomRequest, Osmosis_Incentives_UpcomingGaugesPerDenomResponse> {
+    return self.makeUnaryCall(
+      path: "/osmosis.incentives.Query/UpcomingGaugesPerDenom",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makeUpcomingGaugesPerDenomInterceptors() ?? []
     )
   }
 
@@ -271,6 +294,9 @@ internal protocol Osmosis_Incentives_QueryClientInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when invoking 'upcomingGauges'.
   func makeUpcomingGaugesInterceptors() -> [ClientInterceptor<Osmosis_Incentives_UpcomingGaugesRequest, Osmosis_Incentives_UpcomingGaugesResponse>]
 
+  /// - Returns: Interceptors to use when invoking 'upcomingGaugesPerDenom'.
+  func makeUpcomingGaugesPerDenomInterceptors() -> [ClientInterceptor<Osmosis_Incentives_UpcomingGaugesPerDenomRequest, Osmosis_Incentives_UpcomingGaugesPerDenomResponse>]
+
   /// - Returns: Interceptors to use when invoking 'rewardsEst'.
   func makeRewardsEstInterceptors() -> [ClientInterceptor<Osmosis_Incentives_RewardsEstRequest, Osmosis_Incentives_RewardsEstResponse>]
 
@@ -321,10 +347,14 @@ internal protocol Osmosis_Incentives_QueryProvider: CallHandlerProvider {
   /// returns active gauges
   func activeGauges(request: Osmosis_Incentives_ActiveGaugesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Incentives_ActiveGaugesResponse>
 
+  /// returns active gauges per denom
   func activeGaugesPerDenom(request: Osmosis_Incentives_ActiveGaugesPerDenomRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Incentives_ActiveGaugesPerDenomResponse>
 
   /// returns scheduled gauges
   func upcomingGauges(request: Osmosis_Incentives_UpcomingGaugesRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Incentives_UpcomingGaugesResponse>
+
+  /// returns scheduled gauges per denom
+  func upcomingGaugesPerDenom(request: Osmosis_Incentives_UpcomingGaugesPerDenomRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Osmosis_Incentives_UpcomingGaugesPerDenomResponse>
 
   /// RewardsEst returns an estimate of the rewards at a future specific time.
   /// The querier either provides an address or a set of locks
@@ -408,6 +438,15 @@ extension Osmosis_Incentives_QueryProvider {
         userFunction: self.upcomingGauges(request:context:)
       )
 
+    case "UpcomingGaugesPerDenom":
+      return UnaryServerHandler(
+        context: context,
+        requestDeserializer: ProtobufDeserializer<Osmosis_Incentives_UpcomingGaugesPerDenomRequest>(),
+        responseSerializer: ProtobufSerializer<Osmosis_Incentives_UpcomingGaugesPerDenomResponse>(),
+        interceptors: self.interceptors?.makeUpcomingGaugesPerDenomInterceptors() ?? [],
+        userFunction: self.upcomingGaugesPerDenom(request:context:)
+      )
+
     case "RewardsEst":
       return UnaryServerHandler(
         context: context,
@@ -461,6 +500,10 @@ internal protocol Osmosis_Incentives_QueryServerInterceptorFactoryProtocol {
   /// - Returns: Interceptors to use when handling 'upcomingGauges'.
   ///   Defaults to calling `self.makeInterceptors()`.
   func makeUpcomingGaugesInterceptors() -> [ServerInterceptor<Osmosis_Incentives_UpcomingGaugesRequest, Osmosis_Incentives_UpcomingGaugesResponse>]
+
+  /// - Returns: Interceptors to use when handling 'upcomingGaugesPerDenom'.
+  ///   Defaults to calling `self.makeInterceptors()`.
+  func makeUpcomingGaugesPerDenomInterceptors() -> [ServerInterceptor<Osmosis_Incentives_UpcomingGaugesPerDenomRequest, Osmosis_Incentives_UpcomingGaugesPerDenomResponse>]
 
   /// - Returns: Interceptors to use when handling 'rewardsEst'.
   ///   Defaults to calling `self.makeInterceptors()`.
