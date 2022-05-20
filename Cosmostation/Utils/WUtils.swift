@@ -1645,6 +1645,15 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
+        } else if (chainType == ChainType.NYX_MAIN) {
+            if (denom == NYX_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            
         }
             
     }
@@ -1773,6 +1782,8 @@ public class WUtils {
             return COLOR_CRESCENT
         } else if (chain == ChainType.MANTLE_MAIN) {
             return COLOR_MANTLE
+        } else if (chain == ChainType.NYX_MAIN) {
+            return COLOR_NYX
         }
         return COLOR_DARK_GRAY
     }
@@ -1862,6 +1873,8 @@ public class WUtils {
             return COLOR_CRESCENT_DARK
         } else if (chain == ChainType.MANTLE_MAIN) {
             return COLOR_MANTLE_DARK
+        } else if (chain == ChainType.NYX_MAIN) {
+            return COLOR_NYX_DARK
         }
         return COLOR_DARK_GRAY
     }
@@ -1951,6 +1964,8 @@ public class WUtils {
             return TRANS_BG_COLOR_CRESCENT
         } else if (chain == ChainType.MANTLE_MAIN) {
             return TRANS_BG_COLOR_MANTLE
+        } else if (chain == ChainType.NYX_MAIN) {
+            return TRANS_BG_COLOR_NYX
         }
         return COLOR_BG_GRAY
     }
@@ -2044,6 +2059,8 @@ public class WUtils {
             return "CRE"
         } else if (chain == ChainType.MANTLE_MAIN) {
             return "MANTLE"
+        } else if (chain == ChainType.NYX_MAIN) {
+            return "NYX"
         }
         return ""
     }
@@ -2133,6 +2150,8 @@ public class WUtils {
             return CRESCENT_MAIN_DENOM
         } else if (chain == ChainType.MANTLE_MAIN) {
             return MANTLE_MAIN_DENOM
+        } else if (chain == ChainType.NYX_MAIN) {
+            return NYX_MAIN_DENOM
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -2345,6 +2364,9 @@ public class WUtils {
         } else if (chain == ChainType.MANTLE_MAIN) {
             label?.text = "MANTLE"
             label?.textColor = COLOR_MANTLE
+        } else if (chain == ChainType.NYX_MAIN) {
+            label?.text = "NYX"
+            label?.textColor = COLOR_NYX
         }
     }
     
@@ -2433,6 +2455,8 @@ public class WUtils {
             return ChainType.CRESCENT_MAIN
         } else if (chainS == CHAIN_MANTLE_S) {
             return ChainType.MANTLE_MAIN
+        } else if (chainS == CHAIN_NYX_S) {
+            return ChainType.NYX_MAIN
         }
         
         else if (chainS == CHAIN_COSMOS_TEST_S) {
@@ -2532,6 +2556,8 @@ public class WUtils {
             return CHAIN_CRESENT_S
         } else if (chain == ChainType.MANTLE_MAIN) {
             return CHAIN_MANTLE_S
+        } else if (chain == ChainType.NYX_MAIN) {
+            return CHAIN_NYX_S
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -3895,6 +3921,8 @@ public class WUtils {
             return CRESCENT_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.MANTLE_MAIN) {
             return MANTLE_VAL_URL + opAddress + ".png";
+        } else if (chain == ChainType.NYX_MAIN) {
+            return NYX_VAL_URL + opAddress + ".png";
         }
         return ""
     }
@@ -4023,8 +4051,11 @@ public class WUtils {
         } else if (chain == ChainType.CRESCENT_MAIN) {
             return EXPLORER_CRESCENT + "txs/" + hash
             
-        }else if (chain == ChainType.MANTLE_MAIN) {
+        } else if (chain == ChainType.MANTLE_MAIN) {
             return EXPLORER_MANTLE + "txs/" + hash
+            
+        } else if (chain == ChainType.NYX_MAIN) {
+            return EXPLORER_NYX + "txs/" + hash
             
         }
         
@@ -4172,6 +4203,9 @@ public class WUtils {
         } else if (chain == ChainType.MANTLE_MAIN) {
             return EXPLORER_MANTLE + "account/" + address
             
+        } else if (chain == ChainType.NYX_MAIN) {
+            return EXPLORER_NYX + "account/" + address
+            
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4310,6 +4344,9 @@ public class WUtils {
             
         } else if (chain == ChainType.MANTLE_MAIN) {
             return EXPLORER_MANTLE + "proposals/" + proposalId
+            
+        } else if (chain == ChainType.NYX_MAIN) {
+            return EXPLORER_NYX + "proposals/" + proposalId
             
         }
         
@@ -4456,6 +4493,9 @@ public class WUtils {
         } else if (chain == ChainType.MANTLE_MAIN) {
             return UIImage(named: "tokenAssetmantle")
         
+        } else if (chain == ChainType.NYX_MAIN) {
+            return UIImage(named: "tokenNyx")
+        
         }
         return UIImage(named: "tokenIc")
         
@@ -4504,6 +4544,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return UIImage(named: "chainOmniflix") }
         else if (chain == ChainType.CRESCENT_MAIN) { return UIImage(named: "chainCrescent") }
         else if (chain == ChainType.MANTLE_MAIN) { return UIImage(named: "chainAssetmantle") }
+        else if (chain == ChainType.NYX_MAIN) { return UIImage(named: "chainNym") }
 
         
         else if (chain == ChainType.COSMOS_TEST) { return UIImage(named: "cosmosTestChainImg") }
@@ -4553,6 +4594,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "flix" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "crescent" }
         else if (chain == ChainType.MANTLE_MAIN) { return "asset-mantle" }
+        else if (chain == ChainType.NYX_MAIN) { return "nyx" }
         
         else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
         else if (chain == ChainType.OKEX_MAIN) { return "okex" }
@@ -4606,6 +4648,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "(Omniflix Mainnet)" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "(Crescent Mainnet)" }
         else if (chain == ChainType.MANTLE_MAIN) { return "(Asset-Mantle Mainnet)" }
+        else if (chain == ChainType.NYX_MAIN) { return "(Nyx Mainnet)" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "(StarGate Testnet)" }
         else if (chain == ChainType.IRIS_TEST) { return "(Bifrost Testnet)" }
@@ -4658,6 +4701,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "OMNIFLIX" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "CRESCENT" }
         else if (chain == ChainType.MANTLE_MAIN) { return "ASSET-MANTLE" }
+        else if (chain == ChainType.NYX_MAIN) { return "NYX" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "STARGATE" }
         else if (chain == ChainType.IRIS_TEST) { return "BIFROST" }
@@ -4707,6 +4751,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return RELAYER_IMG_OMNIFLIX }
         else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) { return RELAYER_IMG_CRESCENT }
         else if (chain == ChainType.MANTLE_MAIN) { return RELAYER_IMG_MANTLE }
+        else if (chain == ChainType.NYX_MAIN) { return RELAYER_IMG_NYX }
         return ""
     }
     
@@ -4791,6 +4836,8 @@ public class WUtils {
             return ChainType.CRESCENT_MAIN
         } else if (chainId?.contains("mantle-") == true) {
             return ChainType.MANTLE_MAIN
+        } else if (chainId?.contains("nyx") == true) {
+            return ChainType.NYX_MAIN
         }
         
         else if (chainId?.contains("mooncat-") == true) {
@@ -4849,6 +4896,7 @@ public class WUtils {
         else if (address?.starts(with: "omniflix1") == true && chain == ChainType.OMNIFLIX_MAIN) { return true }
         else if (address?.starts(with: "cre1") == true && chain == ChainType.CRESCENT_MAIN) { return true }
         else if (address?.starts(with: "mantle") == true && chain == ChainType.MANTLE_MAIN) { return true }
+        else if (address?.starts(with: "n1") == true && chain == ChainType.NYX_MAIN) { return true }
         return false
     }
     
@@ -4903,6 +4951,7 @@ public class WUtils {
         else if (address?.starts(with: "omniflix1") == true) { return [ChainType.OMNIFLIX_MAIN] }
         else if (address?.starts(with: "cre1") == true) { return [ChainType.CRESCENT_MAIN] }
         else if (address?.starts(with: "mantle1") == true) { return [ChainType.MANTLE_MAIN] }
+        else if (address?.starts(with: "n1") == true) { return [ChainType.NYX_MAIN] }
         
         return nil
     }

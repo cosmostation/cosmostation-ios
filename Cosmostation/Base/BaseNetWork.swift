@@ -385,6 +385,8 @@ class BaseNetWork {
             result = CRESCENT_API + "v1/account/new_txs/" + address
         } else if (chain == ChainType.MANTLE_MAIN) {
             result = MANTLE_API + "v1/account/new_txs/" + address
+        } else if (chain == ChainType.NYX_MAIN) {
+            result = NYX_API + "v1/account/new_txs/" + address
         }
         
         
@@ -482,6 +484,8 @@ class BaseNetWork {
             result = CRESCENT_API + "v1/account/new_txs/" + address + "/" + valAddress
         } else if (chain == ChainType.MANTLE_MAIN) {
             result = MANTLE_API + "v1/account/new_txs/" + address + "/" + valAddress
+        } else if (chain == ChainType.NYX_MAIN) {
+            result = NYX_API + "v1/account/new_txs/" + address + "/" + valAddress
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -647,6 +651,9 @@ class BaseNetWork {
             
         } else if (chain == ChainType.MANTLE_MAIN) {
             return ClientConnection.insecure(group: group).connect(host: "lcd-asset-mantle-app.cosmostation.io", port: 9090)
+            
+        } else if (chain == ChainType.NYX_MAIN) {
+            return ClientConnection.insecure(group: group).connect(host: "lcd-nym-app.cosmostation.io", port: 9090)
         }
         
         
