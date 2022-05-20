@@ -208,6 +208,8 @@
 "send_guide_msg_crescent" = "Crescent is a Tendermint-based DeFi hub powered by $CRE tokens & Inter-Blockchain Communication protocol.";
 "send_guide_title_mantle" = "ASSETMANTLE";
 "send_guide_msg_mantle" = "AssetMantle is a community focused one-for-all NFT platform for creators and collectors, powered by $MNTL token.";
+"send_guide_title_nyx" = "NYX";
+"send_guide_msg_nyx" = "Nyx is a decentralized and incentivized infrastructure providing next generation privacy infrastructure.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

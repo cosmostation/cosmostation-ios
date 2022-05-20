@@ -83,6 +83,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletOmniCell", bundle: nil), forCellReuseIdentifier: "WalletOmniCell")
         self.walletTableView.register(UINib(nibName: "WalletCrescentCell", bundle: nil), forCellReuseIdentifier: "WalletCrescentCell")
         self.walletTableView.register(UINib(nibName: "WalletMantleCell", bundle: nil), forCellReuseIdentifier: "WalletMantleCell")
+        self.walletTableView.register(UINib(nibName: "WalletNyxCell", bundle: nil), forCellReuseIdentifier: "WalletNyxCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -319,6 +320,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetCrescentItems(tableView, indexPath);
         } else if (chainType == ChainType.MANTLE_MAIN) {
             return onSetMantleItems(tableView, indexPath);
+        } else if (chainType == ChainType.NYX_MAIN) {
+            return onSetNyxItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -1572,6 +1575,35 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetMantleItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletMantleCell") as? WalletMantleCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+    }
+    
+    func onSetNyxItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletNyxCell") as? WalletNyxCell
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
