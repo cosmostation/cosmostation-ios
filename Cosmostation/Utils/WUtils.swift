@@ -5365,13 +5365,14 @@ public class WUtils {
         return result
     }
     
-    static func onParseFeeAmountGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse) -> NSDecimalNumber {
-        let result = NSDecimalNumber.zero
+    static func onParseFeeGrpc(_ chainType: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) -> Coin {
         if (tx.tx.authInfo.fee.amount.count > 0) {
-            return NSDecimalNumber.init(string: tx.tx.authInfo.fee.amount[0].amount)
+            return Coin.init(tx.tx.authInfo.fee.amount[0].denom, tx.tx.authInfo.fee.amount[0].amount)
+        } else {
+            return Coin.init(getMainDenom(chainType), "0")
         }
-        return result
     }
+    
     
     static func onParseAutoRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()

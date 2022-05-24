@@ -2616,6 +2616,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return
             }
         }
+        
+        let mainDenom = WUtils.getMainDenom(chainType)
+        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+            return
+        }
+        
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mToSendDenom = WUtils.getMainDenom(chainType)
         txVC.mType = COSMOS_MSG_TYPE_TRANSFER2

@@ -50,12 +50,6 @@ class TxCommonCell: TxCell {
         timeGapLabel.font = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: Font_11_caption2)
     }
     
-//    var actionHashCheck: (() -> Void)? = nil
-//    
-//    @IBAction func onClickHashCheck(_ sender: UIButton) {
-//         actionHashCheck?()
-//    }
-    
     func setDenomType(_ chainType:ChainType) {
         WUtils.setDenomTitle(chainType, feeDenomLabel)
         WUtils.setDenomTitle(chainType, usedFeeDenomLabel)
@@ -63,8 +57,6 @@ class TxCommonCell: TxCell {
     }
     
     override func onBind(_ chain: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) {
-        setDenomType(chain)
-        let decimal = WUtils.mainDivideDecimal(chain)
         feeLayer.isHidden = false
         usedFeeLayer.isHidden = true
         limitFeeLayer.isHidden = true
@@ -88,38 +80,6 @@ class TxCommonCell: TxCell {
         timeGapLabel.text = WUtils.txTimeGap(input: tx.txResponse.timestamp)
         hashLabel.text = tx.txResponse.txhash
         memoLabel.text = tx.tx.body.memo
-        feeAmountLabel.attributedText = WUtils.displayAmount2(WUtils.onParseFeeAmountGrpc(tx).stringValue, feeAmountLabel.font!, decimal, decimal)
-        
+        WUtils.showCoinDp(WUtils.onParseFeeGrpc(chain, tx), feeDenomLabel, feeAmountLabel, chain)
     }
-    
-//    func onBindHistory(_ chain: ChainType, _ history: ApiHistoryNewCustom) {
-//        setDenomType(chain)
-//        feeLayer.isHidden = false
-//        usedFeeLayer.isHidden = true
-//        limitFeeLayer.isHidden = true
-//        if (history.isSuccess()) {
-//            statusImg.image = UIImage(named: "successIc")
-//            statusLabel.text = NSLocalizedString("tx_success", comment: "")
-//            errorMsg.isHidden = true
-//            errorConstraint.priority = .defaultLow
-//            successConstraint.priority = .defaultHigh
-//        } else {
-//            statusImg.image = UIImage(named: "failIc")
-//            errorMsg.text = history.data?.raw_log
-//            errorMsg.isHidden = false
-//            errorConstraint.priority = .defaultHigh
-//            successConstraint.priority = .defaultLow
-//        }
-//        heightLabel.text = history.data?.height
-//        msgCntLabel.text = String(history.getMsgCnt())
-//        gasAmountLabel.text = (history.data?.gas_used ?? "0") + " / " + (history.data?.gas_wanted ?? "0")
-//        timeLabel.text = WUtils.newApiTimeToString(history.header?.timestamp)
-//        timeGapLabel.text = WUtils.newApiTimeGap(history.header?.timestamp)
-//        hashLabel.text = history.data?.txhash
-//        memoLabel.text = history.data?.tx?.value(forKeyPath: "body.memo") as? String
-//        if let feeValue = history.data?.tx?.value(forKeyPath: "auth_info.fee.amount") as? Array<NSDictionary> {
-//            let feeCoin = Coin.init(feeValue[0])
-//            WUtils.showCoinDp(feeCoin, feeDenomLabel, feeAmountLabel, chain)
-//        }
-//    }
 }

@@ -440,7 +440,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (BaseData.instance.getDelegatable_gRPC(chainType).compare(NSDecimalNumber.zero).rawValue < 0) {
+        if (BaseData.instance.getDelegatable_gRPC(chainType).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }
