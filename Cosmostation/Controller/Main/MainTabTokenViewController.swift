@@ -879,6 +879,28 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allMantle.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(MANTLE_MAIN_DENOM, allMantle, 6, cell!.tokenValue.font)
             
+        } else if (coin.denom == NYX_MAIN_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenNyx")
+            cell?.tokenSymbol.text = "NYX"
+            cell?.tokenSymbol.textColor = COLOR_NYX
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Nyx Staking Coin"
+            
+            let allNyx = WUtils.getAllMainAsset(NYX_MAIN_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allNyx.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(NYX_MAIN_DENOM, allNyx, 6, cell!.tokenValue.font)
+            
+        } else if (coin.denom == NYX_NYM_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "tokenNym")
+            cell?.tokenSymbol.text = "NYM"
+            cell?.tokenSymbol.textColor = COLOR_NYM
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Nym Coin"
+            
+            let allNym = NSDecimalNumber.init(string: coin.amount)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allNym.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(NYX_NYM_DENOM, allNym, 6, cell!.tokenValue.font)
+            
         }
         
         
@@ -1166,6 +1188,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                     mNative_gRPC.append(balance_gRPC)
                 } else if (balance_gRPC.isPoolToken()) {
                     mPoolToken_gRPC.append(balance_gRPC)
+                }
+                
+            } else if (chainType == ChainType.NYX_MAIN) {
+                if (balance_gRPC.denom == NYX_NYM_DENOM) {
+                    mNative_gRPC.append(balance_gRPC)
                 }
                 
             } else {

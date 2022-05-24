@@ -1061,6 +1061,7 @@ let TRANS_BG_COLOR_NYX                      = UIColor.init(hexString: "ff6c5a", 
 let TRANS_BG_COLOR_NYX2                     = UIColor.init(hexString: "ff6c5a", alpha: 0.4)
 let COLOR_NYX                               = UIColor.init(hexString: "ff6c5a")
 let COLOR_NYX_DARK                          = UIColor.init(hexString: "ca5345")
+let COLOR_NYM                               = UIColor.init(hexString: "5F82C8")
 
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")

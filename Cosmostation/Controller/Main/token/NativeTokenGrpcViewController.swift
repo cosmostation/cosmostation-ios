@@ -99,6 +99,14 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
                 totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
             }
             
+        } else if (chainType == ChainType.NYX_MAIN) {
+            if (nativeDenom == NYX_NYM_DENOM) {
+                naviTokenSymbol.text = "NYM"
+                naviTokenImg.image = UIImage(named: "tokenNym")
+                nativeDivideDecimal = 6
+                nativeDisplayDecimal = 6
+                totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
+            }
         }
         
         self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(nativeDenom, naviPerPrice.font)
