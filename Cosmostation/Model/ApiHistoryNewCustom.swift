@@ -649,7 +649,7 @@ public struct ApiHistoryNewCustom {
                 if (msgType.contains("MsgCreateAtomicSwap")) {
                     result = NSLocalizedString("tx_kava_bep3_create", comment: "")
                     
-                } else if (msgType.contains("MsgCreateAtomicSwap")) {
+                } else if (msgType.contains("MsgClaimAtomicSwap")) {
                     result = NSLocalizedString("tx_kava_bep3_claim", comment: "")
                     
                 } else if (msgType.contains("MsgRefundAtomicSwap")) {
