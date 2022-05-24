@@ -68,7 +68,7 @@ final class BaseData : NSObject{
     var mStarNameFee_gRPC: Starnamed_X_Configuration_V1beta1_Fees?
     var mStarNameConfig_gRPC: Starnamed_X_Configuration_V1beta1_Config?
     
-    var mOsmoPools_gRPC = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
+    var mOsmoPools_gRPC = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
     
     var mGravityParam_gRPC: Tendermint_Liquidity_V1beta1_Params?
     var mGravityPools_gRPC = Array<Tendermint_Liquidity_V1beta1_Pool>()
@@ -438,11 +438,12 @@ final class BaseData : NSObject{
         return result
     }
     
-    func getDelegatable_gRPC(_ chainType: ChainType?, _ symbol:String) -> NSDecimalNumber {
+    func getDelegatable_gRPC(_ chainType: ChainType?) -> NSDecimalNumber {
+        let mainDenom = WUtils.getMainDenom(chainType)
         if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
-            return getAvailableAmount_gRPC(symbol)
+            return getAvailableAmount_gRPC(mainDenom)
         }
-        return getAvailableAmount_gRPC(symbol).adding(getVestingAmount_gRPC(symbol))
+        return getAvailableAmount_gRPC(mainDenom).adding(getVestingAmount_gRPC(mainDenom))
     }
     
     func getDelegatedSumAmount_gRPC() -> NSDecimalNumber {
@@ -525,7 +526,7 @@ final class BaseData : NSObject{
         return NSDecimalNumber.zero
     }
     
-    func getOsmoPoolByDenom(_ denom: String) -> Osmosis_Gamm_Poolmodels_Balancer_Pool? {
+    func getOsmoPoolByDenom(_ denom: String) -> Osmosis_Gamm_Balancer_V1beta1_Pool? {
         return mOsmoPools_gRPC.filter { $0.totalShares.denom == denom }.first
     }
     

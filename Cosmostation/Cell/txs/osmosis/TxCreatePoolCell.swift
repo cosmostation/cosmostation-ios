@@ -35,7 +35,7 @@ class TxCreatePoolCell: TxCell {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = WUtils.getChainColor(chain)
         
-        let msg = try! Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool.init(serializedData: response.tx.body.messages[position].value)
+        let msg = try! Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool.init(serializedData: response.tx.body.messages[position].value)
         txSenderLabel.text = msg.sender
         txSenderLabel.adjustsFontSizeToFitWidth = true
         

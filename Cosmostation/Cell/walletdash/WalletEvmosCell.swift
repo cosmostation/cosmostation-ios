@@ -31,12 +31,16 @@ class WalletEvmosCell: UITableViewCell {
     
     var actionDelegate: (() -> Void)? = nil
     var actionVote: (() -> Void)? = nil
+    var actionWc: (() -> Void)? = nil
     
     @IBAction func onClickDelegate(_ sender: Any) {
         actionDelegate?()
     }
     @IBAction func onClickVote(_ sender: Any) {
         actionVote?()
+    }
+    @IBAction func onClickWc(_ sender: Any) {
+        actionWc?()
     }
     
     override func prepareForReuse() {

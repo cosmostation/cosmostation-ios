@@ -24,7 +24,7 @@ class FarmCell: UITableViewCell {
         
     }
     
-    func onBindView(_ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>) {
+    func onBindView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>) {
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         

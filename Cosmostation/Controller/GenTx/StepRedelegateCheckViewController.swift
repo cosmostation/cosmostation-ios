@@ -24,24 +24,17 @@ class StepRedelegateCheckViewController: BaseViewController, PasswordViewDelegat
     @IBOutlet weak var btnConfirm: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType, redelegateAmountDenom)
-        WUtils.setDenomTitle(chainType, redelegateFeeDenom)
     }
     
     func onUpdateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        let toRedelegateAmount = WUtils.localeStringToDecimal(pageHolderVC.mToReDelegateAmount!.amount)
-        let feeAmout = WUtils.localeStringToDecimal((pageHolderVC.mFee?.amount[0].amount)!)
-        
-        redelegateAmountLabel.attributedText = WUtils.displayAmount2(toRedelegateAmount.stringValue, redelegateAmountLabel.font, mDpDecimal, mDpDecimal)
-        redelegateFeeLabel.attributedText = WUtils.displayAmount2(feeAmout.stringValue, redelegateFeeLabel.font, mDpDecimal, mDpDecimal)
+        WUtils.showCoinDp(pageHolderVC.mToReDelegateAmount!, redelegateAmountDenom, redelegateAmountLabel, chainType!)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], redelegateFeeDenom, redelegateFeeLabel, chainType!)
         redelegateFromValLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         redelegateToValLabel.text = pageHolderVC.mToReDelegateValidator_gRPC?.description_p.moniker
         redelegateMemoLabel.text = pageHolderVC.mMemo

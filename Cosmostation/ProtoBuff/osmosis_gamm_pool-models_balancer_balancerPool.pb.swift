@@ -31,7 +31,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 ///     w(t) = initial_pool_weights + (t - start_time) *
 ///       (target_pool_weights - initial_pool_weights) / (duration)
 ///   t > start_time + duration: w(t) = target_pool_weights
-struct Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams {
+struct Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -83,7 +83,7 @@ struct Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams {
 /// governance in the future. This params are not managed by the chain
 /// governance. Instead they will be managed by the token holders of the pool.
 /// The pool's token holders are specified in future_pool_governor.
-struct Osmosis_Gamm_Poolmodels_Balancer_PoolParams {
+struct Osmosis_Gamm_Balancer_V1beta1_PoolParams {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -92,8 +92,8 @@ struct Osmosis_Gamm_Poolmodels_Balancer_PoolParams {
 
   var exitFee: String = String()
 
-  var smoothWeightChangeParams: Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams {
-    get {return _smoothWeightChangeParams ?? Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams()}
+  var smoothWeightChangeParams: Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams {
+    get {return _smoothWeightChangeParams ?? Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams()}
     set {_smoothWeightChangeParams = newValue}
   }
   /// Returns true if `smoothWeightChangeParams` has been explicitly set.
@@ -105,10 +105,10 @@ struct Osmosis_Gamm_Poolmodels_Balancer_PoolParams {
 
   init() {}
 
-  fileprivate var _smoothWeightChangeParams: Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams? = nil
+  fileprivate var _smoothWeightChangeParams: Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams? = nil
 }
 
-struct Osmosis_Gamm_Poolmodels_Balancer_Pool {
+struct Osmosis_Gamm_Balancer_V1beta1_Pool {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -117,8 +117,8 @@ struct Osmosis_Gamm_Poolmodels_Balancer_Pool {
 
   var id: UInt64 = 0
 
-  var poolParams: Osmosis_Gamm_Poolmodels_Balancer_PoolParams {
-    get {return _poolParams ?? Osmosis_Gamm_Poolmodels_Balancer_PoolParams()}
+  var poolParams: Osmosis_Gamm_Balancer_V1beta1_PoolParams {
+    get {return _poolParams ?? Osmosis_Gamm_Balancer_V1beta1_PoolParams()}
     set {_poolParams = newValue}
   }
   /// Returns true if `poolParams` has been explicitly set.
@@ -158,15 +158,15 @@ struct Osmosis_Gamm_Poolmodels_Balancer_Pool {
 
   init() {}
 
-  fileprivate var _poolParams: Osmosis_Gamm_Poolmodels_Balancer_PoolParams? = nil
+  fileprivate var _poolParams: Osmosis_Gamm_Balancer_V1beta1_PoolParams? = nil
   fileprivate var _totalShares: Cosmos_Base_V1beta1_Coin? = nil
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "osmosis.gamm.poolmodels.balancer"
+fileprivate let _protobuf_package = "osmosis.gamm.balancer.v1beta1"
 
-extension Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".SmoothWeightChangeParams"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .standard(proto: "start_time"),
@@ -206,7 +206,7 @@ extension Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams: SwiftProtob
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams, rhs: Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams, rhs: Osmosis_Gamm_Balancer_V1beta1_SmoothWeightChangeParams) -> Bool {
     if lhs._startTime != rhs._startTime {return false}
     if lhs._duration != rhs._duration {return false}
     if lhs.initialPoolWeights != rhs.initialPoolWeights {return false}
@@ -216,7 +216,7 @@ extension Osmosis_Gamm_Poolmodels_Balancer_SmoothWeightChangeParams: SwiftProtob
   }
 }
 
-extension Osmosis_Gamm_Poolmodels_Balancer_PoolParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_Balancer_V1beta1_PoolParams: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".PoolParams"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "swapFee"),
@@ -251,7 +251,7 @@ extension Osmosis_Gamm_Poolmodels_Balancer_PoolParams: SwiftProtobuf.Message, Sw
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Poolmodels_Balancer_PoolParams, rhs: Osmosis_Gamm_Poolmodels_Balancer_PoolParams) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_Balancer_V1beta1_PoolParams, rhs: Osmosis_Gamm_Balancer_V1beta1_PoolParams) -> Bool {
     if lhs.swapFee != rhs.swapFee {return false}
     if lhs.exitFee != rhs.exitFee {return false}
     if lhs._smoothWeightChangeParams != rhs._smoothWeightChangeParams {return false}
@@ -260,7 +260,7 @@ extension Osmosis_Gamm_Poolmodels_Balancer_PoolParams: SwiftProtobuf.Message, Sw
   }
 }
 
-extension Osmosis_Gamm_Poolmodels_Balancer_Pool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_Balancer_V1beta1_Pool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".Pool"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "address"),
@@ -315,7 +315,7 @@ extension Osmosis_Gamm_Poolmodels_Balancer_Pool: SwiftProtobuf.Message, SwiftPro
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Poolmodels_Balancer_Pool, rhs: Osmosis_Gamm_Poolmodels_Balancer_Pool) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_Balancer_V1beta1_Pool, rhs: Osmosis_Gamm_Balancer_V1beta1_Pool) -> Bool {
     if lhs.address != rhs.address {return false}
     if lhs.id != rhs.id {return false}
     if lhs._poolParams != rhs._poolParams {return false}

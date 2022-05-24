@@ -134,6 +134,8 @@ let CRESCENT_TEST_API                   = "https://api-office.cosmostation.io/mo
 
 let MANTLE_API                          = "https://api-asset-mantle.cosmostation.io/";
 
+let NYX_API                             = "https://api-nym.cosmostation.io/";
+
 
 let MOON_PAY_URL                        = "https://buy.moonpay.io";
 let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTuuCn";
@@ -186,6 +188,7 @@ let CERBERUS_VAL_URL                    = "https://raw.githubusercontent.com/cos
 let OMNIFLIX_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/omniflix/";
 let CRESCENT_VAL_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/crescent/";
 let MANTLE_VAL_URL                      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/asset-mantle/";
+let NYX_VAL_URL                         = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/nyx/";
 
 
 let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
@@ -236,7 +239,8 @@ let RELAYER_IMG_CUDOS                   = "https://raw.githubusercontent.com/cos
 let RELAYER_IMG_CERBERUS                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cerberus-unknown.png"
 let RELAYER_IMG_OMNIFLIX                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-omniflix-unknown.png"
 let RELAYER_IMG_CRESCENT                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/crescent/relay-crescent-unknown.png"
-let RELAYER_IMG_MANTLE                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/asset-mantle/relay-crescent-unknown.png"
+let RELAYER_IMG_MANTLE                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/asset-mantle/relay-assetmantle-unknown.png"
+let RELAYER_IMG_NYX                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/nyx/relay-nyx-unknown.png"
 
 
 
@@ -673,6 +677,10 @@ let GAS_FEE_RATE_TINY_MANTLE                = "0.000"
 let GAS_FEE_RATE_LOW_MANTLE                 = "0.000"
 let GAS_FEE_RATE_AVERAGE_MANTLE             = "0.000"
 
+let GAS_FEE_RATE_TINY_NYX                   = "0.025"
+let GAS_FEE_RATE_LOW_NYX                    = "0.025"
+let GAS_FEE_RATE_AVERAGE_NYX                = "0.025"
+
 let GAS_FEE_AMOUNT_LOW                      = "100000"
 let GAS_FEE_AMOUNT_MID                      = "200000"
 let GAS_FEE_AMOUNT_HIGH                     = "300000"
@@ -1065,6 +1073,12 @@ let TRANS_BG_COLOR_MANTLE2                  = UIColor.init(hexString: "f3b519", 
 let COLOR_MANTLE                            = UIColor.init(hexString: "f3b519")
 let COLOR_MANTLE_DARK                       = UIColor.init(hexString: "a48e59")
 
+let TRANS_BG_COLOR_NYX                      = UIColor.init(hexString: "ff6c5a", alpha: 0.15)
+let TRANS_BG_COLOR_NYX2                     = UIColor.init(hexString: "ff6c5a", alpha: 0.4)
+let COLOR_NYX                               = UIColor.init(hexString: "ff6c5a")
+let COLOR_NYX_DARK                          = UIColor.init(hexString: "ca5345")
+let COLOR_NYM                               = UIColor.init(hexString: "5F82C8")
+
 let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
 let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
 let COLOR_CDP_SAFE                          = UIColor.init(hexString: "40F683")
@@ -1119,6 +1133,7 @@ public enum ChainType: String {
     case OMNIFLIX_MAIN
     case CRESCENT_MAIN
     case MANTLE_MAIN
+    case NYX_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -1156,6 +1171,7 @@ public enum ChainType: String {
         result.append(KONSTELLATION_MAIN)
         result.append(LUM_MAIN)
         result.append(MEDI_MAIN)
+        result.append(NYX_MAIN)
         result.append(OKEX_MAIN)
         result.append(OMNIFLIX_MAIN)
         result.append(OSMOSIS_MAIN)
@@ -1300,6 +1316,7 @@ let CHAIN_CERBERUS_S = "SUPPORT_CHAIN_CERBERUS"
 let CHAIN_OMNIFLIX_S = "SUPPORT_CHAIN_OMNIFLIX"
 let CHAIN_CRESENT_S = "SUPPORT_CHAIN_CRESENT"
 let CHAIN_MANTLE_S = "SUPPORT_CHAIN_MANTLE"
+let CHAIN_NYX_S = "SUPPORT_CHAIN_NYX"
 
 let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
@@ -1349,6 +1366,7 @@ let CERBERUS_MAIN_DENOM = "ucrbrus"
 let OMNIFLIX_MAIN_DENOM = "uflix"
 let CRESCENT_MAIN_DENOM = "ucre"
 let MANTLE_MAIN_DENOM = "umntl"
+let NYX_MAIN_DENOM = "unyx"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
@@ -1362,6 +1380,7 @@ let EMONEY_DKK_DENOM = "edkk"
 let EMONEY_NOK_DENOM = "enok"
 let EMONEY_SEK_DENOM = "esek"
 let CRESCENT_BCRE_DENOM = "ubcre"
+let NYX_NYM_DENOM = "unym"
 
 
 let BITCOINCASH    = "asset:bch";
@@ -1452,6 +1471,7 @@ let EXPLORER_CERBERUS       = "https://www.mintscan.io/cerberus/";
 let EXPLORER_OMNIFLIX       = "https://www.mintscan.io/omniflix/";
 let EXPLORER_CRESCENT       = "https://www.mintscan.io/crescent/";
 let EXPLORER_MANTLE         = "https://www.mintscan.io/asset-mantle/";
+let EXPLORER_NYX            = "https://www.mintscan.io/nyx/";
 
 let EXPLORER_COSMOS_TEST    = "https://testnet.mintscan.io/";
 let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";

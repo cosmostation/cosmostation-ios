@@ -23,7 +23,6 @@ class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var mFeeDenomTitle: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +33,6 @@ class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
         proposalTitle.text = pageHolderVC.mProposalTitle
         proposalTitle.adjustsFontSizeToFitWidth = true
         proposer.text = pageHolderVC.mProposer
-        WUtils.setDenomTitle(chainType, mFeeDenomTitle)
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {
@@ -59,10 +57,8 @@ class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        let feeAmount = WUtils.localeStringToDecimal((pageHolderVC.mFee?.amount[0].amount)!)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], mFeeDenomTitle, mFeeAmount, chainType!)
         mOpinion.text = pageHolderVC.mVoteOpinion
-        mFeeAmount.attributedText = WUtils.displayAmount2(feeAmount.stringValue, mFeeAmount.font, mDpDecimal, mDpDecimal)
         mMemo.text = pageHolderVC.mMemo
     }
     

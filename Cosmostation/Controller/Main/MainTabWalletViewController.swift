@@ -83,6 +83,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletOmniCell", bundle: nil), forCellReuseIdentifier: "WalletOmniCell")
         self.walletTableView.register(UINib(nibName: "WalletCrescentCell", bundle: nil), forCellReuseIdentifier: "WalletCrescentCell")
         self.walletTableView.register(UINib(nibName: "WalletMantleCell", bundle: nil), forCellReuseIdentifier: "WalletMantleCell")
+        self.walletTableView.register(UINib(nibName: "WalletNyxCell", bundle: nil), forCellReuseIdentifier: "WalletNyxCell")
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
@@ -319,6 +320,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetCrescentItems(tableView, indexPath);
         } else if (chainType == ChainType.MANTLE_MAIN) {
             return onSetMantleItems(tableView, indexPath);
+        } else if (chainType == ChainType.NYX_MAIN) {
+            return onSetNyxItems(tableView, indexPath);
         }
         
         else if (chainType == ChainType.COSMOS_TEST) {
@@ -1042,6 +1045,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionWc = { self.onClickWalletConect() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -1571,6 +1575,35 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetMantleItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletMantleCell") as? WalletMantleCell
+            cell?.updateView(account, chainType)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapPricel = { self.onClickMarketInfo() }
+            return cell!
+
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+            cell?.updateView(account, chainType)
+            cell?.actionTapApr = { self.onClickAprHelp() }
+            return cell!
+
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+            cell?.updateView(account, chainType)
+            cell?.actionGuide1 = { self.onClickGuide1() }
+            cell?.actionGuide2 = { self.onClickGuide2() }
+            return cell!
+        }
+    }
+    
+    func onSetNyxItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletNyxCell") as? WalletNyxCell
             cell?.updateView(account, chainType)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
@@ -2567,10 +2600,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return
         }
         
-        let mainDenom = WUtils.getMainDenom(chainType)
+        let gasDenom = WUtils.getGasDenom(chainType)
         if (WUtils.isGRPC(chainType!)) {
             let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
-            if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
+            if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
                 return
             }
@@ -2578,13 +2611,20 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else {
             //checkd ok
             let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
-            if (BaseData.instance.availableAmount(mainDenom).compare(feeAmount).rawValue < 0) {
+            if (BaseData.instance.availableAmount(gasDenom).compare(feeAmount).rawValue < 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
                 return
             }
         }
+        
+        let mainDenom = WUtils.getMainDenom(chainType)
+        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+            return
+        }
+        
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mToSendDenom = mainDenom
+        txVC.mToSendDenom = WUtils.getMainDenom(chainType)
         txVC.mType = COSMOS_MSG_TYPE_TRANSFER2
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
@@ -2623,7 +2663,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     }
                 }
                 
-            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN) {
+            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN || self.chainType == ChainType.EVMOS_MAIN) {
                 self.wcURL = result
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
@@ -2651,7 +2691,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
                     self.navigationController?.pushViewController(wcVC, animated: true)
                     
-                } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN) {
+                } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN || self.chainType == ChainType.EVMOS_MAIN) {
                     let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
                     commonWcVC.wcURL = self.wcURL!
                     commonWcVC.hidesBottomBarWhenPushed = true

@@ -133,8 +133,9 @@ class StepSendCheckViewController: BaseViewController, PasswordViewDelegate{
 //        print("toSendAmount ", toSendAmount)
 //        print("remainAvailable ", remainAvailable)
         
-        WUtils.showCoinDp(toSendDenom, toSendAmount.stringValue, sendDenomLabel, sendAmountLabel, chainType!)
-        WUtils.showCoinDp(mainDenom, feeAmount.stringValue, feeDenomLabel, feeAmountLabel, chainType!)
+        
+        WUtils.showCoinDp(pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel, chainType!)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel, chainType!)
         WUtils.showCoinDp(toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel, chainType!)
         WUtils.showCoinDp(toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel, chainType!)
         

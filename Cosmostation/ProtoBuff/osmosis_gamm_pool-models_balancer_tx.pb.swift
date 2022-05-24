@@ -21,15 +21,15 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
 }
 
 /// ===================== MsgCreatePool
-struct Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool {
+struct Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
   var sender: String = String()
 
-  var poolParams: Osmosis_Gamm_Poolmodels_Balancer_PoolParams {
-    get {return _poolParams ?? Osmosis_Gamm_Poolmodels_Balancer_PoolParams()}
+  var poolParams: Osmosis_Gamm_Balancer_V1beta1_PoolParams {
+    get {return _poolParams ?? Osmosis_Gamm_Balancer_V1beta1_PoolParams()}
     set {_poolParams = newValue}
   }
   /// Returns true if `poolParams` has been explicitly set.
@@ -45,10 +45,10 @@ struct Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool {
 
   init() {}
 
-  fileprivate var _poolParams: Osmosis_Gamm_Poolmodels_Balancer_PoolParams? = nil
+  fileprivate var _poolParams: Osmosis_Gamm_Balancer_V1beta1_PoolParams? = nil
 }
 
-struct Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPoolResponse {
+struct Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPoolResponse {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -60,9 +60,9 @@ struct Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPoolResponse {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "osmosis.gamm.poolmodels.balancer"
+fileprivate let _protobuf_package = "osmosis.gamm.balancer.v1beta1"
 
-extension Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".MsgCreateBalancerPool"
   static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "sender"),
@@ -102,7 +102,7 @@ extension Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool: SwiftProtobuf.
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool, rhs: Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool, rhs: Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool) -> Bool {
     if lhs.sender != rhs.sender {return false}
     if lhs._poolParams != rhs._poolParams {return false}
     if lhs.poolAssets != rhs.poolAssets {return false}
@@ -112,7 +112,7 @@ extension Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool: SwiftProtobuf.
   }
 }
 
-extension Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPoolResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPoolResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   static let protoMessageName: String = _protobuf_package + ".MsgCreateBalancerPoolResponse"
   static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -125,7 +125,7 @@ extension Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPoolResponse: SwiftP
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPoolResponse, rhs: Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPoolResponse) -> Bool {
+  static func ==(lhs: Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPoolResponse, rhs: Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPoolResponse) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

@@ -23,16 +23,12 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
     @IBOutlet weak var confirmBtn: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        pageHolderVC = self.parent as? StepGenTxViewController
-        
-        WUtils.setDenomTitle(chainType!, toDelegateAmountDenom)
-        WUtils.setDenomTitle(chainType!, feeAmountDenom)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
     }
 
     @IBAction func onClickConfirm(_ sender: Any) {
@@ -43,13 +39,11 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
         cardPopup.show(onViewController: self)
     }
     
-    
     @IBAction func onClickBack(_ sender: Any) {
         self.beforeBtn.isUserInteractionEnabled = false
         self.confirmBtn.isUserInteractionEnabled = false
         pageHolderVC.onBeforePage()
     }
-    
     
     override func enableUserInteraction() {
         self.onUpdateView()
@@ -58,13 +52,11 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
     }
     
     func onUpdateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        toDelegateAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mToDelegateAmount?.amount, toDelegateAmountLabel.font, mDpDecimal, mDpDecimal)
-        feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
+        WUtils.showCoinDp(pageHolderVC.mToDelegateAmount!, toDelegateAmountDenom, toDelegateAmountLabel, chainType!)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeAmountDenom, feeAmountLabel, chainType!)
         targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
     }
-    
     
     func SBCardPopupResponse(type:Int, result: Int) {
         if (result == 1) {

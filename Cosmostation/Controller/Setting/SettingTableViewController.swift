@@ -302,6 +302,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     guard let url = URL(string: EXPLORER_MANTLE) else { return }
                     self.onShowSafariWeb(url)
                     
+                } else if (chainType == ChainType.NYX_MAIN) {
+                    guard let url = URL(string: EXPLORER_NYX) else { return }
+                    self.onShowSafariWeb(url)
+                    
                 }
                 
                 else if (chainType == ChainType.COSMOS_TEST) {
