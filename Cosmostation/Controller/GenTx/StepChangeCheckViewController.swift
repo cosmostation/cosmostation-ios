@@ -23,20 +23,16 @@ class StepChangeCheckViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var memoLabel: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType, rewardAddressChangeDenom)
     }
     
     func onUpdateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        let feeAmout = WUtils.localeStringToDecimal((pageHolderVC.mFee?.amount[0].amount)!)
-        rewardAddressChangeFee.attributedText = WUtils.displayAmount2(feeAmout.stringValue, rewardAddressChangeFee.font, mDpDecimal, mDpDecimal)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], rewardAddressChangeDenom, rewardAddressChangeFee, chainType!)
         currentRewardAddress.text = pageHolderVC.mCurrentRewardAddress
         newRewardAddress.text = pageHolderVC.mToChangeRewardAddress
         currentRewardAddress.adjustsFontSizeToFitWidth = true

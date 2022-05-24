@@ -438,11 +438,12 @@ final class BaseData : NSObject{
         return result
     }
     
-    func getDelegatable_gRPC(_ chainType: ChainType?, _ symbol:String) -> NSDecimalNumber {
+    func getDelegatable_gRPC(_ chainType: ChainType?) -> NSDecimalNumber {
+        let mainDenom = WUtils.getMainDenom(chainType)
         if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
-            return getAvailableAmount_gRPC(symbol)
+            return getAvailableAmount_gRPC(mainDenom)
         }
-        return getAvailableAmount_gRPC(symbol).adding(getVestingAmount_gRPC(symbol))
+        return getAvailableAmount_gRPC(mainDenom).adding(getVestingAmount_gRPC(mainDenom))
     }
     
     func getDelegatedSumAmount_gRPC() -> NSDecimalNumber {

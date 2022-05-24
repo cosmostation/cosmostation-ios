@@ -24,17 +24,13 @@ class StepUndelegateCheckViewController: BaseViewController, PasswordViewDelegat
     @IBOutlet weak var confirmBtn: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType!, toUndelegateDenomLabel)
-        WUtils.setDenomTitle(chainType!, feeDenomLabel)
     }
-    
     
     @IBAction func onClickConfirm(_ sender: Any) {
         let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
@@ -44,7 +40,6 @@ class StepUndelegateCheckViewController: BaseViewController, PasswordViewDelegat
         passwordVC.resultDelegate = self
         self.navigationController?.pushViewController(passwordVC, animated: false)
     }
-    
     
     @IBAction func onClickBack(_ sender: Any) {
         self.beforeBtn.isUserInteractionEnabled = false
@@ -59,9 +54,8 @@ class StepUndelegateCheckViewController: BaseViewController, PasswordViewDelegat
     }
     
     func onUpdateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        toUnDelegateAmoutLaebl.attributedText = WUtils.displayAmount2(pageHolderVC.mToUndelegateAmount?.amount, toUnDelegateAmoutLaebl.font, mDpDecimal, mDpDecimal)
-        feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
+        WUtils.showCoinDp(pageHolderVC.mToUndelegateAmount!, toUndelegateDenomLabel, toUnDelegateAmoutLaebl, chainType!)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel, chainType!)
         targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
         let unbondingTime = BaseData.instance.mParam?.getUnbondingTime()
@@ -73,7 +67,6 @@ class StepUndelegateCheckViewController: BaseViewController, PasswordViewDelegat
             self.onFetchgRPCAuth(pageHolderVC.mAccount!)
         }
     }
-    
     
     func onFetchgRPCAuth(_ account: Account) {
         self.showWaittingAlert()

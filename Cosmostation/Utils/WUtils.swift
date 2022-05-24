@@ -1648,6 +1648,9 @@ public class WUtils {
         } else if (chainType == ChainType.NYX_MAIN) {
             if (denom == NYX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
+            } else if (denom == NYX_NYM_DENOM) {
+                denomLabel?.textColor = COLOR_NYM
+                denomLabel?.text = "NYM"
             } else {
                 denomLabel?.textColor = .white
                 denomLabel?.text = denom.uppercased()
@@ -2165,6 +2168,14 @@ public class WUtils {
 
     }
     
+    static func getGasDenom(_ chain:ChainType?) -> String {
+        if (chain == ChainType.NYX_MAIN) {
+            return NYX_NYM_DENOM
+        } else {
+            return getMainDenom(chain)
+        }
+    }
+    
     static func tokenDivideDecimal(_ chain: ChainType?, _ denom: String) -> Int16 {
         let mainDenom = getMainDenom(chain)
         if (isGRPC(chain)) {
@@ -2367,6 +2378,15 @@ public class WUtils {
         } else if (chain == ChainType.NYX_MAIN) {
             label?.text = "NYX"
             label?.textColor = COLOR_NYX
+        }
+    }
+    
+    static func setGasDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
+        if (chain == ChainType.NYX_MAIN) {
+            label?.text = "NYM"
+            label?.textColor = COLOR_NYM
+        } else {
+            return setDenomTitle(chain, label)
         }
     }
     
@@ -2697,7 +2717,7 @@ public class WUtils {
             chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
             chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN || chain == ChainType.EVMOS_MAIN ||
             chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN || chain == ChainType.OMNIFLIX_MAIN ||
-            chain == ChainType.CRESCENT_MAIN || chain == ChainType.MANTLE_MAIN ||
+            chain == ChainType.CRESCENT_MAIN || chain == ChainType.MANTLE_MAIN || chain == ChainType.NYX_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST ||
             chain == ChainType.CRESCENT_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
@@ -3212,6 +3232,11 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.NYX_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_NYX)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         
         else if (chain == ChainType.OKEX_MAIN) {
@@ -3539,6 +3564,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_MANTLE)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MANTLE)
+            }
+            
+        } else if (chain == ChainType.NYX_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_NYX)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_NYX)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_NYX)
             }
         }
         

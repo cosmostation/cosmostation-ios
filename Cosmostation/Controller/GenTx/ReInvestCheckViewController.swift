@@ -27,29 +27,22 @@ class ReInvestCheckViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var confirmBtn: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType, rewardDenomLabel)
-        WUtils.setDenomTitle(chainType, feeDenomLabel)
-        WUtils.setDenomTitle(chainType, currentDenom)
-        WUtils.setDenomTitle(chainType, expectedDenom)
     }
     
     func onUpdateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(chainType)
-        rewardLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mReinvestReward!.amount, rewardLabel.font, mDpDecimal, mDpDecimal)
-        feeLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeLabel.font, mDpDecimal, mDpDecimal)
+        WUtils.showCoinDp(pageHolderVC.mReinvestReward!, rewardDenomLabel, rewardLabel, chainType!)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeDenomLabel, feeLabel, chainType!)
         
         let currentDelegation = BaseData.instance.getDelegated_gRPC(pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
         let expectedDelegation = currentDelegation.adding(NSDecimalNumber.init(string: pageHolderVC.mReinvestReward!.amount))
-        currentDelegateAmount.attributedText = WUtils.displayAmount2(currentDelegation.stringValue, currentDelegateAmount.font, mDpDecimal, mDpDecimal)
-        expectedDelegateAmount.attributedText = WUtils.displayAmount2(expectedDelegation.stringValue, expectedDelegateAmount.font, mDpDecimal, mDpDecimal)
-        
+        WUtils.showCoinDp(WUtils.getMainDenom(chainType), currentDelegation.stringValue, currentDenom, currentDelegateAmount, chainType!)
+        WUtils.showCoinDp(WUtils.getMainDenom(chainType), expectedDelegation.stringValue, expectedDenom, expectedDelegateAmount, chainType!)
         validatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
     }
