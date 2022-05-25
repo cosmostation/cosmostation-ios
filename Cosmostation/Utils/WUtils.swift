@@ -2187,9 +2187,7 @@ public class WUtils {
             return MANTLE_MAIN_DENOM
         } else if (chain == ChainType.NYX_MAIN) {
             return NYX_MAIN_DENOM
-        }
-        
-        else if (chain == ChainType.COSMOS_TEST) {
+        } else if (chain == ChainType.COSMOS_TEST) {
             return COSMOS_TEST_DENOM
         } else if (chain == ChainType.IRIS_TEST) {
             return IRIS_TEST_DENOM
@@ -2412,6 +2410,9 @@ public class WUtils {
         } else if (chain == ChainType.NYX_MAIN) {
             label?.text = "NYX"
             label?.textColor = COLOR_NYX
+        } else if (chain == ChainType.STATION_TEST) {
+            label?.text = "ISS"
+            label?.textColor = COLOR_STATION
         }
     }
     
@@ -2421,11 +2422,6 @@ public class WUtils {
             label?.textColor = COLOR_NYM
         } else {
             return setDenomTitle(chain, label)
-        }
-        
-        else if (chain == ChainType.STATION_TEST) {
-            label?.text = "ISS"
-            label?.textColor = COLOR_STATION
         }
     }
     
@@ -2516,9 +2512,7 @@ public class WUtils {
             return ChainType.MANTLE_MAIN
         } else if (chainS == CHAIN_NYX_S) {
             return ChainType.NYX_MAIN
-        }
-        
-        else if (chainS == CHAIN_COSMOS_TEST_S) {
+        } else if (chainS == CHAIN_COSMOS_TEST_S) {
             return ChainType.COSMOS_TEST
         } else if (chainS == CHAIN_IRIS_TEST_S) {
             return ChainType.IRIS_TEST
@@ -2619,9 +2613,7 @@ public class WUtils {
             return CHAIN_MANTLE_S
         } else if (chain == ChainType.NYX_MAIN) {
             return CHAIN_NYX_S
-        }
-        
-        else if (chain == ChainType.COSMOS_TEST) {
+        } else if (chain == ChainType.COSMOS_TEST) {
             return CHAIN_COSMOS_TEST_S
         } else if (chain == ChainType.IRIS_TEST) {
             return CHAIN_IRIS_TEST_S

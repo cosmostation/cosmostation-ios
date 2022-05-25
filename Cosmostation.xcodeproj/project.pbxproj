@@ -1119,6 +1119,8 @@
 		1817CC7F283E2CE600523713 /* evmos_erc20_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E727BF572500270528 /* evmos_erc20_v1_tx.pb.swift */; };
 		1817CC80283E2CE600523713 /* kava_issuance_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B44278D5F520022D5DF /* kava_issuance_v1beta1_tx.grpc.swift */; };
 		1817CC81283E2CE600523713 /* crescent_liquidity_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F427E826F000E82AA7 /* crescent_liquidity_v1beta1_query.pb.swift */; };
+		1817CC82283E2DD300523713 /* WalletNyxCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0451FDAC2837364500214FDA /* WalletNyxCell.xib */; };
+		1817CC83283E2DD300523713 /* WalletNyxCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FDAB2837364500214FDA /* WalletNyxCell.swift */; };
 		18F811B9282E1FC4008AF0D2 /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
 		18F811BA282E1FC5008AF0D2 /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
 		18F811BB282E1FD7008AF0D2 /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
@@ -6405,6 +6407,7 @@
 				18FFB6BB281AF533004E65BB /* SifJoinPool3ViewController.xib in Resources */,
 				18FFB6BC281AF533004E65BB /* RestorePathCell.xib in Resources */,
 				18FFB6BD281AF533004E65BB /* ContractTokenGrpcViewController.xib in Resources */,
+				1817CC82283E2DD300523713 /* WalletNyxCell.xib in Resources */,
 				18FFB6BE281AF533004E65BB /* HtlcResultViewController.xib in Resources */,
 				18FFB6BF281AF533004E65BB /* TxBeginUnlockAllTokensCell.xib in Resources */,
 				18FFB6C0281AF533004E65BB /* HardPoolRepay0ViewController.xib in Resources */,
@@ -8073,6 +8076,7 @@
 				18FFB604281AF533004E65BB /* FarmingDetailViewController.swift in Sources */,
 				1817CAB6283E2CE500523713 /* osmosis_claim_v1beta1_claim.pb.swift in Sources */,
 				1817CB25283E2CE500523713 /* ibc_applications_transfer_v1_transfer.pb.swift in Sources */,
+				1817CC83283E2DD300523713 /* WalletNyxCell.swift in Sources */,
 				18FFB606281AF533004E65BB /* KavaPriceFeedParam.swift in Sources */,
 				1817CB79283E2CE500523713 /* cosmos_upgrade_v1beta1_query.pb.swift in Sources */,
 				1817CB65283E2CE500523713 /* cosmos_staking_v1beta1_tx.pb.swift in Sources */,
