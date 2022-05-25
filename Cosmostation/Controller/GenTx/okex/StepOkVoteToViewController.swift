@@ -52,7 +52,9 @@ class StepOkVoteToViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.valjailedImg.isHidden = true
             cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
         }
-        cell?.valImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address))!)
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address)) {
+            cell?.valImg.af_setImage(withURL: url)
+        }
         cell?.valPowerLabel.attributedText =  WUtils.displayAmount2(validator.delegator_shares, cell!.valPowerLabel.font, 0, 0)
         cell?.valCommissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.valCommissionLabel.font)
         
