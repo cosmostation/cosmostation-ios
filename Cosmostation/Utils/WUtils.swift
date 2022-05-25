@@ -5230,14 +5230,6 @@ public class WUtils {
                 })
 //                print("originalVesting ", denom, "  ", originalVesting)
                 
-                //looks bug for delegatedVesting with delayedVesting
-//                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
-//                    if (coin.denom == denom) {
-//                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
-//                    }
-//                })
-//                print("delegatedVesting ", denom, "  ", delegatedVesting)
-                
                 let cTime = Date().millisecondsSince1970
                 let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
                 if (cTime < vestingEnd) {
@@ -5245,14 +5237,11 @@ public class WUtils {
                 }
 //                print("remainVesting ", denom, "  ", remainVesting)
                 
-                if (coin.denom == getMainDenom(chain)) {
-                    let stakedAmount = BaseData.instance.getDelegatedSumAmount_gRPC()
-                    if (remainVesting.compare(stakedAmount).rawValue >= 0){
-                        delegatedVesting = stakedAmount
-                    } else {
-                        delegatedVesting = remainVesting
+                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
                     }
-                }
+                })
 //                print("delegatedVesting ", denom, "  ", delegatedVesting)
                 
                 dpVesting = remainVesting.subtracting(delegatedVesting);
