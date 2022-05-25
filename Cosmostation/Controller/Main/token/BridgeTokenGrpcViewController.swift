@@ -130,9 +130,13 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let stakingDenom = WUtils.getMainDenom(chainType)
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_IBC_TRANSFER, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(stakingDenom).compare(feeAmount).rawValue <= 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (BaseData.instance.getAvailableAmount_gRPC(bridgeDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
             return
         }
@@ -169,9 +173,13 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let stakingDenom = WUtils.getMainDenom(chainType)
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(stakingDenom).compare(feeAmount).rawValue <= 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (BaseData.instance.getAvailableAmount_gRPC(bridgeDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
             return
         }

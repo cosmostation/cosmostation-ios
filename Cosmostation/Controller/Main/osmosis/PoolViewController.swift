@@ -16,8 +16,8 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var poolListTableView: UITableView!
     
-    var mMyPoolList: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool> = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
-    var mOtherPoolList: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool> = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
+    var mMyPoolList: Array<Osmosis_Gamm_Balancer_V1beta1_Pool> = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
+    var mOtherPoolList: Array<Osmosis_Gamm_Balancer_V1beta1_Pool> = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +82,7 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func onCheckPoolJoin(_ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool) {
+    func onCheckPoolJoin(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) {
         print("onCheckPoolJoin")
         if (!account!.account_has_private) {
             self.onShowAddMenomicDialog()
@@ -113,7 +113,7 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-    func onCheckExitJoin(_ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool) {
+    func onCheckExitJoin(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) {
         print("onCheckExitJoin")
         if (!account!.account_has_private) {
             self.onShowAddMenomicDialog()
@@ -170,7 +170,7 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
                 
                 //filter pool
                 response.pools.forEach { pool in
-                    let rawPool = try! Osmosis_Gamm_Poolmodels_Balancer_Pool.init(serializedData: pool.value)
+                    let rawPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: pool.value)
                     if (BaseData.instance.mParam?.isPoolEnabled(Int(rawPool.id)) == true) {
                         if (BaseData.instance.getAvailableAmount_gRPC("gamm/pool/" + String(rawPool.id)) != NSDecimalNumber.zero) {
                             self.mMyPoolList.append(rawPool)

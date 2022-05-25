@@ -99,6 +99,14 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
                 totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
             }
             
+        } else if (chainType == ChainType.NYX_MAIN) {
+            if (nativeDenom == NYX_NYM_DENOM) {
+                naviTokenSymbol.text = "NYM"
+                naviTokenImg.image = UIImage(named: "tokenNym")
+                nativeDivideDecimal = 6
+                nativeDisplayDecimal = 6
+                totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
+            }
         }
         
         self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(nativeDenom, naviPerPrice.font)
@@ -164,9 +172,13 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let stakingDenom = WUtils.getMainDenom(chainType)
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_IBC_TRANSFER, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(stakingDenom).compare(feeAmount).rawValue <= 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (BaseData.instance.getAvailableAmount_gRPC(nativeDenom).compare(NSDecimalNumber.zero).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
             return
         }
@@ -203,9 +215,13 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let stakingDenom = WUtils.getMainDenom(chainType)
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(stakingDenom).compare(feeAmount).rawValue <= 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (BaseData.instance.getAvailableAmount_gRPC(nativeDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
             return
         }

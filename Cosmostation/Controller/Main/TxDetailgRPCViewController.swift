@@ -163,7 +163,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
-            let cell:TxCommonCell? = tableView.dequeueReusableCell(withIdentifier:"TxCommonCell") as? TxCommonCell
+            let cell = tableView.dequeueReusableCell(withIdentifier:"TxCommonCell") as? TxCommonCell
             cell?.onBind(chainType!, mTxRespose!)
             return cell!
             
@@ -264,7 +264,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             }
             
-            else if (msg.typeURL.contains(Osmosis_Gamm_Poolmodels_Balancer_MsgCreateBalancerPool.protoMessageName)) {
+            else if (msg.typeURL.contains(Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCreatePoolCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!

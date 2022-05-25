@@ -37,11 +37,11 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
     @IBOutlet weak var outputCoinExRateAmount: UILabel!
     @IBOutlet weak var outputCoinExRateDenom: UILabel!
     
-    var mPoolList: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool> = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
+    var mPoolList: Array<Osmosis_Gamm_Balancer_V1beta1_Pool> = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
     var mAllDenoms: Array<String> = Array<String>()
-    var mSwapablePools: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool> = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
+    var mSwapablePools: Array<Osmosis_Gamm_Balancer_V1beta1_Pool> = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
     var mSwapableDenoms: Array<String> = Array<String>()
-    var mSelectedPool: Osmosis_Gamm_Poolmodels_Balancer_Pool?
+    var mSelectedPool: Osmosis_Gamm_Balancer_V1beta1_Pool?
     var mInputCoinDenom: String?
     var mOutputCoinDenom: String?
     var mInPutDecimal:Int16 = 6
@@ -240,7 +240,7 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
                 
                 //filter pool
                 response.pools.forEach { pool in
-                    let rawPool = try! Osmosis_Gamm_Poolmodels_Balancer_Pool.init(serializedData: pool.value)
+                    let rawPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: pool.value)
                     if (BaseData.instance.mParam?.isPoolEnabled(Int(rawPool.id)) == true) {
                         self.mPoolList.append(rawPool)
                     }

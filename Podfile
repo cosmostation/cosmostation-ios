@@ -6,7 +6,7 @@ use_frameworks!
 def shared_pods
     pod 'SwiftyJSON', '~> 4.3'
     pod 'HDWalletKit', :git => 'https://github.com/cosmostation/HDWallet.git', branch: 'develop'
-    pod 'Starscream', '~> 3.1.1'
+    pod 'Starscream', '~> 3.1.0'
     pod 'WalletConnect', git: 'https://github.com/cosmostation/wallet-connect-swift.git', branch: 'master'
     pod 'AlamofireImage', '~> 3.3'
     pod 'SQLite.swift', '~> 0.11.5'
@@ -22,6 +22,7 @@ def shared_pods
     pod 'gRPC-Swift-Plugins'
     pod 'HPParallaxHeader'
     pod 'IpfsApi'
+    pod 'web3swift', git: 'https://github.com/cosmostation/web3swift.git', branch: 'cosmostation-evmos' 
 end
 
 target 'Cosmostation' do
@@ -30,4 +31,12 @@ end
 
 target 'CosmostationDev' do
     shared_pods
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+      end
+    end
 end

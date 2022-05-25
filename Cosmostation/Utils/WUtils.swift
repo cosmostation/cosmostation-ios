@@ -747,6 +747,11 @@ public class WUtils {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
                     
+                } else if (chainType! == ChainType.NYX_MAIN && coin.denom == NYX_NYM_DENOM) {
+                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
+                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
+                    totalValue = totalValue.adding(assetValue)
+                    
                 }
                 
                 else if (coin.isIbc()) {
@@ -1645,6 +1650,18 @@ public class WUtils {
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
+        } else if (chainType == ChainType.NYX_MAIN) {
+            if (denom == NYX_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else if (denom == NYX_NYM_DENOM) {
+                denomLabel?.textColor = COLOR_NYM
+                denomLabel?.text = "NYM"
+            } else {
+                denomLabel?.textColor = .white
+                denomLabel?.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+            
         }
         
         else if (chainType == ChainType.STATION_TEST) {
@@ -1784,6 +1801,8 @@ public class WUtils {
             return COLOR_CRESCENT
         } else if (chain == ChainType.MANTLE_MAIN) {
             return COLOR_MANTLE
+        } else if (chain == ChainType.NYX_MAIN) {
+            return COLOR_NYX
         }
         
         else if (chain == ChainType.STATION_TEST) {
@@ -1877,6 +1896,8 @@ public class WUtils {
             return COLOR_CRESCENT_DARK
         } else if (chain == ChainType.MANTLE_MAIN) {
             return COLOR_MANTLE_DARK
+        } else if (chain == ChainType.NYX_MAIN) {
+            return COLOR_NYX_DARK
         }
         
         else if (chain == ChainType.STATION_TEST) {
@@ -1970,6 +1991,8 @@ public class WUtils {
             return TRANS_BG_COLOR_CRESCENT
         } else if (chain == ChainType.MANTLE_MAIN) {
             return TRANS_BG_COLOR_MANTLE
+        } else if (chain == ChainType.NYX_MAIN) {
+            return TRANS_BG_COLOR_NYX
         }
         
         else if (chain == ChainType.STATION_TEST) {
@@ -2067,6 +2090,8 @@ public class WUtils {
             return "CRE"
         } else if (chain == ChainType.MANTLE_MAIN) {
             return "MANTLE"
+        } else if (chain == ChainType.NYX_MAIN) {
+            return "NYX"
         }
         
         else if (chain == ChainType.STATION_TEST) {
@@ -2160,6 +2185,8 @@ public class WUtils {
             return CRESCENT_MAIN_DENOM
         } else if (chain == ChainType.MANTLE_MAIN) {
             return MANTLE_MAIN_DENOM
+        } else if (chain == ChainType.NYX_MAIN) {
+            return NYX_MAIN_DENOM
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -2173,6 +2200,14 @@ public class WUtils {
         }
         return ""
 
+    }
+    
+    static func getGasDenom(_ chain:ChainType?) -> String {
+        if (chain == ChainType.NYX_MAIN) {
+            return NYX_NYM_DENOM
+        } else {
+            return getMainDenom(chain)
+        }
     }
     
     static func tokenDivideDecimal(_ chain: ChainType?, _ denom: String) -> Int16 {
@@ -2374,6 +2409,18 @@ public class WUtils {
         } else if (chain == ChainType.MANTLE_MAIN) {
             label?.text = "MANTLE"
             label?.textColor = COLOR_MANTLE
+        } else if (chain == ChainType.NYX_MAIN) {
+            label?.text = "NYX"
+            label?.textColor = COLOR_NYX
+        }
+    }
+    
+    static func setGasDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
+        if (chain == ChainType.NYX_MAIN) {
+            label?.text = "NYM"
+            label?.textColor = COLOR_NYM
+        } else {
+            return setDenomTitle(chain, label)
         }
         
         else if (chain == ChainType.STATION_TEST) {
@@ -2467,6 +2514,8 @@ public class WUtils {
             return ChainType.CRESCENT_MAIN
         } else if (chainS == CHAIN_MANTLE_S) {
             return ChainType.MANTLE_MAIN
+        } else if (chainS == CHAIN_NYX_S) {
+            return ChainType.NYX_MAIN
         }
         
         else if (chainS == CHAIN_COSMOS_TEST_S) {
@@ -2568,6 +2617,8 @@ public class WUtils {
             return CHAIN_CRESENT_S
         } else if (chain == ChainType.MANTLE_MAIN) {
             return CHAIN_MANTLE_S
+        } else if (chain == ChainType.NYX_MAIN) {
+            return CHAIN_NYX_S
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -2709,7 +2760,7 @@ public class WUtils {
             chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
             chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN || chain == ChainType.EVMOS_MAIN ||
             chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN || chain == ChainType.OMNIFLIX_MAIN ||
-            chain == ChainType.CRESCENT_MAIN || chain == ChainType.MANTLE_MAIN ||
+            chain == ChainType.CRESCENT_MAIN || chain == ChainType.MANTLE_MAIN || chain == ChainType.NYX_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST ||
             chain == ChainType.CRESCENT_TEST || chain == ChainType.STATION_TEST) {
             if (type == COSMOS_MSG_TYPE_TRANSFER2) {
@@ -3224,6 +3275,11 @@ public class WUtils {
             let gasAmount = getEstimateGasAmount(chain, type, valCnt)
             return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             
+        } else if (chain == ChainType.NYX_MAIN) {
+            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_NYX)
+            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+            
         }
         
         else if (chain == ChainType.OKEX_MAIN) {
@@ -3551,6 +3607,15 @@ public class WUtils {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_MANTLE)
             } else {
                 return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MANTLE)
+            }
+            
+        } else if (chain == ChainType.NYX_MAIN) {
+            if (position == 0) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_NYX)
+            } else if (position == 1) {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_NYX)
+            } else {
+                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_NYX)
             }
         }
         
@@ -3933,6 +3998,8 @@ public class WUtils {
             return CRESCENT_VAL_URL + opAddress + ".png";
         } else if (chain == ChainType.MANTLE_MAIN) {
             return MANTLE_VAL_URL + opAddress + ".png";
+        } else if (chain == ChainType.NYX_MAIN) {
+            return NYX_VAL_URL + opAddress + ".png";
         }
         return ""
     }
@@ -4061,8 +4128,11 @@ public class WUtils {
         } else if (chain == ChainType.CRESCENT_MAIN) {
             return EXPLORER_CRESCENT + "txs/" + hash
             
-        }else if (chain == ChainType.MANTLE_MAIN) {
+        } else if (chain == ChainType.MANTLE_MAIN) {
             return EXPLORER_MANTLE + "txs/" + hash
+            
+        } else if (chain == ChainType.NYX_MAIN) {
+            return EXPLORER_NYX + "txs/" + hash
             
         }
         
@@ -4213,6 +4283,9 @@ public class WUtils {
         } else if (chain == ChainType.MANTLE_MAIN) {
             return EXPLORER_MANTLE + "account/" + address
             
+        } else if (chain == ChainType.NYX_MAIN) {
+            return EXPLORER_NYX + "account/" + address
+            
         }
         
         else if (chain == ChainType.COSMOS_TEST) {
@@ -4354,6 +4427,9 @@ public class WUtils {
             
         } else if (chain == ChainType.MANTLE_MAIN) {
             return EXPLORER_MANTLE + "proposals/" + proposalId
+            
+        } else if (chain == ChainType.NYX_MAIN) {
+            return EXPLORER_NYX + "proposals/" + proposalId
             
         }
         
@@ -4502,9 +4578,10 @@ public class WUtils {
         
         } else if (chain == ChainType.MANTLE_MAIN) {
             return UIImage(named: "tokenAssetmantle")
-        
         } else if (chain == ChainType.STATION_TEST) {
-            return UIImage(named: "testnetCrescent")
+            return UIImage(named: "testnetStation")
+        } else if (chain == ChainType.NYX_MAIN) {
+            return UIImage(named: "tokenNyx")
         }
         return UIImage(named: "tokenIc")
         
@@ -4553,6 +4630,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return UIImage(named: "chainOmniflix") }
         else if (chain == ChainType.CRESCENT_MAIN) { return UIImage(named: "chainCrescent") }
         else if (chain == ChainType.MANTLE_MAIN) { return UIImage(named: "chainAssetmantle") }
+        else if (chain == ChainType.NYX_MAIN) { return UIImage(named: "chainNym") }
 
         
         else if (chain == ChainType.COSMOS_TEST) { return UIImage(named: "cosmosTestChainImg") }
@@ -4603,6 +4681,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "flix" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "crescent" }
         else if (chain == ChainType.MANTLE_MAIN) { return "asset-mantle" }
+        else if (chain == ChainType.NYX_MAIN) { return "nyx" }
         
         else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
         else if (chain == ChainType.OKEX_MAIN) { return "okex" }
@@ -4658,6 +4737,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "(Omniflix Mainnet)" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "(Crescent Mainnet)" }
         else if (chain == ChainType.MANTLE_MAIN) { return "(Asset-Mantle Mainnet)" }
+        else if (chain == ChainType.NYX_MAIN) { return "(Nyx Mainnet)" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "(StarGate Testnet)" }
         else if (chain == ChainType.IRIS_TEST) { return "(Bifrost Testnet)" }
@@ -4711,6 +4791,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return "OMNIFLIX" }
         else if (chain == ChainType.CRESCENT_MAIN) { return "CRESCENT" }
         else if (chain == ChainType.MANTLE_MAIN) { return "ASSET-MANTLE" }
+        else if (chain == ChainType.NYX_MAIN) { return "NYX" }
         
         else if (chain == ChainType.COSMOS_TEST) { return "STARGATE" }
         else if (chain == ChainType.IRIS_TEST) { return "BIFROST" }
@@ -4761,6 +4842,7 @@ public class WUtils {
         else if (chain == ChainType.OMNIFLIX_MAIN) { return RELAYER_IMG_OMNIFLIX }
         else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) { return RELAYER_IMG_CRESCENT }
         else if (chain == ChainType.MANTLE_MAIN) { return RELAYER_IMG_MANTLE }
+        else if (chain == ChainType.NYX_MAIN) { return RELAYER_IMG_NYX }
         return ""
     }
     
@@ -4845,6 +4927,8 @@ public class WUtils {
             return ChainType.CRESCENT_MAIN
         } else if (chainId?.contains("mantle-") == true) {
             return ChainType.MANTLE_MAIN
+        } else if (chainId?.contains("nyx") == true) {
+            return ChainType.NYX_MAIN
         }
         
         else if (chainId?.contains("mooncat-") == true) {
@@ -4905,8 +4989,8 @@ public class WUtils {
         else if (address?.starts(with: "omniflix1") == true && chain == ChainType.OMNIFLIX_MAIN) { return true }
         else if (address?.starts(with: "cre1") == true && chain == ChainType.CRESCENT_MAIN) { return true }
         else if (address?.starts(with: "mantle") == true && chain == ChainType.MANTLE_MAIN) { return true }
-        
         else if (address?.starts(with: "station1") == true && chain == ChainType.STATION_TEST) { return true }
+        else if (address?.starts(with: "n1") == true && chain == ChainType.NYX_MAIN) { return true }
         return false
     }
     
@@ -4961,6 +5045,7 @@ public class WUtils {
         else if (address?.starts(with: "omniflix1") == true) { return [ChainType.OMNIFLIX_MAIN] }
         else if (address?.starts(with: "cre1") == true) { return [ChainType.CRESCENT_MAIN] }
         else if (address?.starts(with: "mantle1") == true) { return [ChainType.MANTLE_MAIN] }
+        else if (address?.starts(with: "n1") == true) { return [ChainType.NYX_MAIN] }
         
         else if (address?.starts(with: "station1") == true) { return [ChainType.STATION_TEST] }
         
@@ -5207,14 +5292,6 @@ public class WUtils {
                 })
 //                print("originalVesting ", denom, "  ", originalVesting)
                 
-                //looks bug for delegatedVesting with delayedVesting
-//                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
-//                    if (coin.denom == denom) {
-//                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
-//                    }
-//                })
-//                print("delegatedVesting ", denom, "  ", delegatedVesting)
-                
                 let cTime = Date().millisecondsSince1970
                 let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
                 if (cTime < vestingEnd) {
@@ -5222,14 +5299,11 @@ public class WUtils {
                 }
 //                print("remainVesting ", denom, "  ", remainVesting)
                 
-                if (coin.denom == getMainDenom(chain)) {
-                    let stakedAmount = BaseData.instance.getDelegatedSumAmount_gRPC()
-                    if (remainVesting.compare(stakedAmount).rawValue >= 0){
-                        delegatedVesting = stakedAmount
-                    } else {
-                        delegatedVesting = remainVesting
+                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
                     }
-                }
+                })
 //                print("delegatedVesting ", denom, "  ", delegatedVesting)
                 
                 dpVesting = remainVesting.subtracting(delegatedVesting);
@@ -5342,13 +5416,14 @@ public class WUtils {
         return result
     }
     
-    static func onParseFeeAmountGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse) -> NSDecimalNumber {
-        let result = NSDecimalNumber.zero
+    static func onParseFeeGrpc(_ chainType: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) -> Coin {
         if (tx.tx.authInfo.fee.amount.count > 0) {
-            return NSDecimalNumber.init(string: tx.tx.authInfo.fee.amount[0].amount)
+            return Coin.init(tx.tx.authInfo.fee.amount[0].denom, tx.tx.authInfo.fee.amount[0].amount)
+        } else {
+            return Coin.init(getMainDenom(chainType), "0")
         }
-        return result
     }
+    
     
     static func onParseAutoRewardGrpc(_ tx: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) -> Array<Coin> {
         var result = Array<Coin>()

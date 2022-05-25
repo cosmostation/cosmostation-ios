@@ -189,7 +189,7 @@ extension WUtils {
         return true
     }
     
-    static func getOsmoLpTokenPerUsdPrice(_ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool) -> NSDecimalNumber {
+    static func getOsmoLpTokenPerUsdPrice(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(coin0.denom), NSDecimalNumber.init(string: coin0.amount), WUtils.getOsmosisCoinDecimal(coin0.denom))
@@ -199,7 +199,7 @@ extension WUtils {
         return poolValue.dividing(by: totalShare, withBehavior: handler18)
     }
     
-    static func getPoolValue(_ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool) -> NSDecimalNumber {
+    static func getPoolValue(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         let coin0BaseDenom = BaseData.instance.getBaseDenom(coin0.denom)
@@ -211,7 +211,7 @@ extension WUtils {
         return coin0Value.adding(coin1Value)
     }
     
-    static func getMyShareLpAmount(_ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool, _ denom: String) -> NSDecimalNumber {
+    static func getMyShareLpAmount(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ denom: String) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         let myShare = BaseData.instance.getAvailableAmount_gRPC("gamm/pool/" + String(pool.id))
         if let totalLpCoin = pool.poolAssets.filter { $0.token.denom == denom }.first?.token.amount {
@@ -220,7 +220,7 @@ extension WUtils {
         return result
     }
     
-    static func getNextIncentiveAmount(_ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>, _ position: UInt) -> NSDecimalNumber  {
+    static func getNextIncentiveAmount(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>, _ position: UInt) -> NSDecimalNumber  {
         if (gauges.count != 3 || gauges[0].distributedCoins.count <= 0 || gauges[1].distributedCoins.count <= 0 || gauges[2].distributedCoins.count <= 0) { return NSDecimalNumber.zero }
         let incentive1Day = NSDecimalNumber.init(string: gauges[0].coins[0].amount).subtracting(NSDecimalNumber.init(string: gauges[0].distributedCoins[0].amount))
         let incentive7Day = NSDecimalNumber.init(string: gauges[1].coins[0].amount).subtracting(NSDecimalNumber.init(string: gauges[1].distributedCoins[0].amount))
@@ -234,7 +234,7 @@ extension WUtils {
         }
     }
     
-    static func getPoolArp(_ pool: Osmosis_Gamm_Poolmodels_Balancer_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>, _ position: UInt) -> NSDecimalNumber  {
+    static func getPoolArp(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>, _ position: UInt) -> NSDecimalNumber  {
         let poolValue = getPoolValue(pool)
         let incentiveAmount = getNextIncentiveAmount(pool, gauges, position)
         let incentiveValue = WUtils.usdValue(BaseData.instance.getBaseDenom(OSMOSIS_MAIN_DENOM), incentiveAmount, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))

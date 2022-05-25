@@ -165,9 +165,10 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         } else {
             toClaimValidators = claimAbleValidators
         }
-
+        
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_WITHDRAW_DEL, toClaimValidators.count)
-        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue < 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -186,9 +187,13 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             return
         }
         
-        let mainDenom = WUtils.getMainDenom(chainType)
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_DELEGATE, 0)
-        if (BaseData.instance.getDelegatable_gRPC(chainType, mainDenom).compare(feeAmount).rawValue <= 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (BaseData.instance.getDelegatable_gRPC(chainType).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }

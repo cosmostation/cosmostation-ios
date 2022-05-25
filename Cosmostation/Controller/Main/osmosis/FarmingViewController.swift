@@ -16,9 +16,9 @@ class FarmingViewController: BaseViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var farmListTableView: UITableView!
     
-    var mPoolList: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool> = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
-    var mMyIncentivePoolList: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool> = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
-    var mOtherIncentivePoolList: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool> = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
+    var mPoolList: Array<Osmosis_Gamm_Balancer_V1beta1_Pool> = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
+    var mMyIncentivePoolList: Array<Osmosis_Gamm_Balancer_V1beta1_Pool> = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
+    var mOtherIncentivePoolList: Array<Osmosis_Gamm_Balancer_V1beta1_Pool> = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
     
     var mIncentivizedPool: Array<Osmosis_Poolincentives_V1beta1_IncentivizedPool> = Array<Osmosis_Poolincentives_V1beta1_IncentivizedPool>()
     var mActiveGauges: Array<Osmosis_Incentives_Gauge> = Array<Osmosis_Incentives_Gauge>()
@@ -39,7 +39,7 @@ class FarmingViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.onFetchFarmData()
     }
     
-    func getPoolwithID(_ id: UInt64) -> Osmosis_Gamm_Poolmodels_Balancer_Pool? {
+    func getPoolwithID(_ id: UInt64) -> Osmosis_Gamm_Balancer_V1beta1_Pool? {
         return self.mPoolList.filter { $0.id == id }.first
     }
     
@@ -129,7 +129,7 @@ class FarmingViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt <= 0) {
             
-            var incentivePoolList: Array<Osmosis_Gamm_Poolmodels_Balancer_Pool> = Array<Osmosis_Gamm_Poolmodels_Balancer_Pool>()
+            var incentivePoolList: Array<Osmosis_Gamm_Balancer_V1beta1_Pool> = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
             self.mIncentivizedPool.forEach { incentivizedPool in
                 if (incentivePoolList.filter { $0.id == incentivizedPool.poolID }.first == nil ? true : false) {
                     incentivePoolList.append(getPoolwithID(incentivizedPool.poolID)!)
@@ -172,7 +172,7 @@ class FarmingViewController: BaseViewController, UITableViewDelegate, UITableVie
                 
                 //filter pool
                 response.pools.forEach { pool in
-                    let rawPool = try! Osmosis_Gamm_Poolmodels_Balancer_Pool.init(serializedData: pool.value)
+                    let rawPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: pool.value)
                     self.mPoolList.append(rawPool)
                 }
                 print("mPoolList ", self.mPoolList.count)

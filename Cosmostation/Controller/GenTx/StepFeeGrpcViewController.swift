@@ -46,7 +46,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         feeTotalCard.backgroundColor = WUtils.getChainBg(chainType)
-        WUtils.setDenomTitle(chainType, feeTotalDenom)
+        WUtils.setGasDenomTitle(chainType, feeTotalDenom)
         mDpDecimal = WUtils.mainDivideDecimal(chainType)
         if #available(iOS 13.0, *) {
             gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
@@ -80,7 +80,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
         onCalculateFees()
         
         feeTotalAmount.attributedText = WUtils.displayAmount2(mFee.stringValue, feeTotalAmount.font!, mDpDecimal, mDpDecimal)
-        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(WUtils.getMainDenom(chainType), mFee, WUtils.mainDivideDecimal(chainType), feeTotalValue.font)
+        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(WUtils.getGasDenom(chainType), mFee, WUtils.mainDivideDecimal(chainType), feeTotalValue.font)
         
         gasRateLabel.attributedText = WUtils.displayGasRate(mSelectedGasRate.rounding(accordingToBehavior: WUtils.handler6), font: gasRateLabel.font, 5)
         gasAmountLabel.text = mEstimateGasAmount.stringValue
@@ -135,7 +135,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onSetFee() {
-        let gasCoin = Coin.init(WUtils.getMainDenom(chainType), mFee.stringValue)
+        let gasCoin = Coin.init(WUtils.getGasDenom(chainType), mFee.stringValue)
         var amount: Array<Coin> = Array<Coin>()
         amount.append(gasCoin)
         

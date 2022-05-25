@@ -271,7 +271,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                    self.mChainType == ChainType.AXELAR_MAIN || self.mChainType == ChainType.KONSTELLATION_MAIN || self.mChainType == ChainType.UMEE_MAIN ||
                    self.mChainType == ChainType.EVMOS_MAIN || self.mChainType == ChainType.PROVENANCE_MAIN || self.mChainType == ChainType.CUDOS_MAIN ||
                    self.mChainType == ChainType.SIF_MAIN || self.mChainType == ChainType.CERBERUS_MAIN || self.mChainType == ChainType.OMNIFLIX_MAIN ||
-                   self.mChainType == ChainType.CRESCENT_MAIN || self.mChainType == ChainType.MANTLE_MAIN) {
+                   self.mChainType == ChainType.CRESCENT_MAIN || self.mChainType == ChainType.MANTLE_MAIN || self.mChainType == ChainType.NYX_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -943,7 +943,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Osmosis_Gamm_V1beta1_QueryPoolsRequest.with { $0.pagination = page }
                 if let response = try? Osmosis_Gamm_V1beta1_QueryClient(channel: channel).pools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     response.pools.forEach { pool in
-                        let rawPool = try! Osmosis_Gamm_Poolmodels_Balancer_Pool.init(serializedData: pool.value)
+                        let rawPool = try! Osmosis_Gamm_Balancer_V1beta1_Pool.init(serializedData: pool.value)
                         BaseData.instance.mOsmoPools_gRPC.append(rawPool)
                     }
                 }

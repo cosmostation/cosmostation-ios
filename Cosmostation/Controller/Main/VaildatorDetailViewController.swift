@@ -434,9 +434,13 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let mainDenom = WUtils.getMainDenom(chainType)
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_DELEGATE, 0)
-        if (BaseData.instance.getDelegatable_gRPC(chainType, mainDenom).compare(feeAmount).rawValue <= 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        if (BaseData.instance.getDelegatable_gRPC(chainType).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }
@@ -454,7 +458,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let mainDenom = WUtils.getMainDenom(chainType)
         if (BaseData.instance.mMyDelegations_gRPC.filter { $0.delegation.validatorAddress == mValidator_gRPC?.operatorAddress}.first == nil) {
             self.onShowToast(NSLocalizedString("error_not_undelegate", comment: ""))
             return
@@ -465,9 +468,10 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
                 return
             }
         }
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_UNDELEGATE2, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         
@@ -484,16 +488,17 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let mainDenom = WUtils.getMainDenom(chainType)
         if (BaseData.instance.mMyDelegations_gRPC.filter { $0.delegation.validatorAddress == mValidator_gRPC?.operatorAddress}.first == nil) {
             self.onShowToast(NSLocalizedString("error_not_redelegate", comment: ""))
             return
         }
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_REDELEGATE2, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue < 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        
         self.onFetchRedelegation_gRPC(account!.account_address, mValidator_gRPC!.operatorAddress)
     }
     
@@ -511,15 +516,15 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let mainDenom = WUtils.getMainDenom(chainType)
         let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), mValidator_gRPC?.operatorAddress)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_WITHDRAW_DEL, 1)
-        if (reward.compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
+        if (reward.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
         }
-        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+        let gasDenom = WUtils.getGasDenom(chainType)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_WITHDRAW_DEL, 1)
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         
@@ -538,17 +543,18 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let mainDenom = WUtils.getMainDenom(chainType)
-        let reward = BaseData.instance.getReward_gRPC(mainDenom, mValidator_gRPC?.operatorAddress)
+        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), mValidator_gRPC?.operatorAddress)
+        if (reward.compare(NSDecimalNumber.zero).rawValue <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_reward", comment: ""))
+            return
+        }
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MULTI_MSG_TYPE_REINVEST, 0)
-        if (reward.compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_wasting_fee", comment: ""))
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
-            return
-        }
+        
         self.onFetchRewardsAddress_gRPC(account!.account_address)
     }
     

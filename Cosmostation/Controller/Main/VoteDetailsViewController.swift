@@ -77,18 +77,17 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             return
         }
 
-        let mainDenom = WUtils.getMainDenom(chainType)
         if (mMintscanProposalDetail?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == false) {
             self.onShowToast(NSLocalizedString("error_not_voting_period", comment: ""))
             return
         }
-        
         if (BaseData.instance.mMyDelegations_gRPC.count <= 0) {
             self.onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
             return
         }
+        let gasDenom = WUtils.getGasDenom(chainType)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_VOTE, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue < 0) {
+        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
