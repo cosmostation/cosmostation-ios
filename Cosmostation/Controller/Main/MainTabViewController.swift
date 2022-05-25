@@ -393,7 +393,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             print("BaseData.instance.mUnbondValidators_gRPC ", BaseData.instance.mUnbondValidators_gRPC.count)
             print("BaseData.instance.mMyValidators_gRPC ", BaseData.instance.mMyValidators_gRPC.count)
             print("BaseData.instance.mMyBalances_gRPC ", BaseData.instance.mMyBalances_gRPC.count)
-            print("BaseData.instance.mMyBalances_gRPC ", BaseData.instance.mMyBalances_gRPC)
             print("BaseData.instance.mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
             print("BaseData.instance.getCw20s_gRPC ", BaseData.instance.getCw20s_gRPC().count)
             

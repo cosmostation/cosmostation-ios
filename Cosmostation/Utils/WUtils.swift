@@ -747,6 +747,11 @@ public class WUtils {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
                     
+                } else if (chainType! == ChainType.NYX_MAIN && coin.denom == NYX_NYM_DENOM) {
+                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
+                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
+                    totalValue = totalValue.adding(assetValue)
+                    
                 }
                 
                 else if (coin.isIbc()) {
