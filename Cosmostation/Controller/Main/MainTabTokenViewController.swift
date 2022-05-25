@@ -927,9 +927,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(IRIS_TEST_DENOM, allIris, 6, cell!.tokenValue.font)
         
         } else if (coin.denom == STATION_TEST_DENOM) {
-            cell?.tokenImg.image = UIImage(named: "testnetCrescent")
+            cell?.tokenImg.image = UIImage(named: "testnetStation")
             cell?.tokenSymbol.text = "ISS"
-            cell?.tokenSymbol.textColor = COLOR_CRESCENT
+            cell?.tokenSymbol.textColor = COLOR_STATION
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Station Staking Coin"
             
