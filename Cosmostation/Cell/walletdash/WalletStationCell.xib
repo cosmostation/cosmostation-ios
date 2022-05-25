@@ -244,7 +244,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Cosmostation" image="iconCrescentapp">
+                                        <state key="normal" title="Cosmostation Dapps">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -359,7 +359,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="iconCrescentapp" width="20" height="20"/>
         <image name="iconWalletconnect" width="20" height="20"/>
         <image name="rewardIc" width="20" height="20"/>
         <image name="tokenIss" width="22" height="22"/>
