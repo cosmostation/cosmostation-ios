@@ -1949,7 +1949,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onClickStationApp() {
         let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-        commonWcVC.dappURL = "https://wc.dev.cosmostation.io"
+        commonWcVC.dappURL = "https://dapps.cosmostation.io"
         commonWcVC.isDapp = true
         commonWcVC.isDeepLink = false
         commonWcVC.hidesBottomBarWhenPushed = true
