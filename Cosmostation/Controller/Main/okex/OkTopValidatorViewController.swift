@@ -96,7 +96,9 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         } else {
             cell?.cardView.backgroundColor = COLOR_BG_GRAY
         }
-        cell?.validatorImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address))!)
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address)) {
+            cell?.validatorImg.af_setImage(withURL: url)
+        }
         return cell!
     }
     

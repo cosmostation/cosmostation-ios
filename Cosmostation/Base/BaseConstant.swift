@@ -133,6 +133,7 @@ let CRESCENT_TEST_API                   = "https://api-office.cosmostation.io/mo
 
 let MANTLE_API                          = "https://api-asset-mantle.cosmostation.io/";
 
+let STATION_TEST_API                    = "https://api-office.cosmostation.io/station-testnet/";
 let NYX_API                             = "https://api-nym.cosmostation.io/";
 
 
@@ -1061,6 +1062,10 @@ let TRANS_BG_COLOR_MANTLE2                  = UIColor.init(hexString: "f3b519", 
 let COLOR_MANTLE                            = UIColor.init(hexString: "f3b519")
 let COLOR_MANTLE_DARK                       = UIColor.init(hexString: "a48e59")
 
+let TRANS_BG_COLOR_STATION                  = UIColor.init(hexString: "05c3cd", alpha: 0.15)
+let TRANS_BG_COLOR_STATION2                 = UIColor.init(hexString: "05c3cd", alpha: 0.4)
+let COLOR_STATION                           = UIColor.init(hexString: "05c3cd")
+let COLOR_STATION_DARK                      = UIColor.init(hexString: "007d84")
 let TRANS_BG_COLOR_NYX                      = UIColor.init(hexString: "ff6c5a", alpha: 0.15)
 let TRANS_BG_COLOR_NYX2                     = UIColor.init(hexString: "ff6c5a", alpha: 0.4)
 let COLOR_NYX                               = UIColor.init(hexString: "ff6c5a")
@@ -1127,6 +1132,7 @@ public enum ChainType: String {
     case IRIS_TEST
     case ALTHEA_TEST
     case CRESCENT_TEST
+    case STATION_TEST
     
     static func SUPPRT_CHAIN() -> Array<ChainType> {
         var result = [ChainType]()
@@ -1179,6 +1185,7 @@ public enum ChainType: String {
 //        result.append(IRIS_TEST)
 //        result.append(ALTHEA_TEST)
 //        result.append(CRESCENT_TEST)
+        result.append(STATION_TEST)
         return result
     }
     
@@ -1290,6 +1297,7 @@ let CHAIN_COSMOS_TEST_S = "SUPPORT_CHAIN_COSMOS_TEST"
 let CHAIN_IRIS_TEST_S = "SUPPORT_CHAIN_IRIS_TEST"
 let CHAIN_ALTHEA_TEST_S = "SUPPORT_CHAIN_ALTHEA_TEST"
 let CHAIN_CRESENT_TEST_S = "SUPPORT_CHAIN_CRESENT_TEST"
+let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 
 let COSMOS_MAIN_DENOM = "uatom"
 let IRIS_MAIN_DENOM = "uiris"
@@ -1338,6 +1346,7 @@ let NYX_MAIN_DENOM = "unyx"
 
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
+let STATION_TEST_DENOM = "uiss"
 let KAVA_HARD_DENOM = "hard"
 let KAVA_USDX_DENOM = "usdx"
 let KAVA_SWAP_DENOM = "swp"
@@ -1446,6 +1455,7 @@ let EXPLORER_IRIS_TEST      = "https://testnet.mintscan.io/iris/";
 let EXPLORER_ALTHEA_TEST    = "https://testnet.mintscan.io/althea/";
 let EXPLORER_HDAC_TEST      = "http://test.explorer.hdactech.com/hdac-explorer/";
 let EXPLORER_CRESCENT_TEST  = "https://testnet.mintscan.io/crescent/";
+let EXPLORER_STATION_TEST   = "https://testnet.mintscan.io/station/";
 
 let EXPLORER_OEC_TX         = "https://www.oklink.com/oec/"
 

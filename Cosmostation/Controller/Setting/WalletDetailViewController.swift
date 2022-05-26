@@ -394,6 +394,13 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             constraint2.priority = .defaultHigh
             constraint1.priority = .defaultLow
             
+        } else if (chainType! == ChainType.STATION_TEST) {
+            chainImg.image = UIImage(named: "testnetStation")
+            keyPath.text = BASE_PATH.appending(account!.account_path)
+            cardPush.isHidden = true
+            constraint2.priority = .defaultHigh
+            constraint1.priority = .defaultLow
+            
         }
         
         importDate.text = WUtils.longTimetoString(account!.account_import_time)

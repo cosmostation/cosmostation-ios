@@ -53,7 +53,9 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
             
             cell?.valPowerLabel.attributedText = WUtils.displayAmount2(validator.tokens, cell!.valPowerLabel.font, mDpDecimal, mDpDecimal)
             cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), pageHolderVC.chainType!)
-            cell!.valImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(pageHolderVC.chainType!, validator.operatorAddress))!)
+            if let url = URL(string: WUtils.getMonikerImgUrl(pageHolderVC.chainType!, validator.operatorAddress)) {
+                cell?.valImg.af_setImage(withURL: url)
+            }
             cell?.rootCard.needBorderUpdate = false
             if (validator.operatorAddress == checkedValidator_gRPC?.operatorAddress) {
                 cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)

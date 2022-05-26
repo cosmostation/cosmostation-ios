@@ -49,7 +49,9 @@ class OtherValidatorCell: UITableViewCell {
     func updateView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainType: ChainType?) {
         powerLabel.attributedText = WUtils.displayAmount2(validator.tokens, powerLabel.font!, WUtils.mainDivideDecimal(chainType), 6)
         commissionLabel.attributedText = WUtils.getDpEstAprCommission(commissionLabel.font, NSDecimalNumber.one, chainType!)
-        validatorImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(chainType, validator.operatorAddress))!)
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainType, validator.operatorAddress)) {
+            validatorImg.af_setImage(withURL: url)
+        }
         
         monikerLabel.text = validator.description_p.moniker
         monikerLabel.adjustsFontSizeToFitWidth = true

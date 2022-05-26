@@ -65,7 +65,9 @@ class MyValidatorCell: UITableViewCell {
         rewardAmoutLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), validator.operatorAddress).stringValue, rewardAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
         
         cardView.backgroundColor = WUtils.getChainBg(chainType)
-        validatorImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(chainType, validator.operatorAddress))!)
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainType, validator.operatorAddress)) {
+            validatorImg.af_setImage(withURL: url)
+        }
         
         //display for band oracle status
         if (chainType == ChainType.BAND_MAIN) {

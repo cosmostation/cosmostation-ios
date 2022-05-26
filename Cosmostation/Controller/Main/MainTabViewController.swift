@@ -346,7 +346,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchKavaIncentiveParam()
             self.onFetchKavaIncentiveReward(mAccount.account_address)
             
-        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.ALTHEA_TEST || self.mChainType == ChainType.CRESCENT_TEST) {
+        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.ALTHEA_TEST || self.mChainType == ChainType.CRESCENT_TEST || self.mChainType == ChainType.STATION_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
