@@ -90,44 +90,12 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             }
             
         } else if (indexPath.section == 1) {
-            if (indexPath.row == 0) {
-                self.onShowNotice()
-            } else if (indexPath.row == 3) {
+            if (indexPath.row == 2) {
                 self.onShowCurrenyDialog()
             }
             
         } else if (indexPath.section == 2) {
-            if(indexPath.row == 0) {
-                if(Locale.current.languageCode == "ko") {
-                    guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_ko.html") else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else {
-                    guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_en.html") else { return }
-                    self.onShowSafariWeb(url)
-                }
-                
-            } else if(indexPath.row == 1) {
-                let url = URL(string: "tg://resolve?domain=cosmostation")
-                if(UIApplication.shared.canOpenURL(url!)) {
-                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-                } else {
-                    let alert = UIAlertController(title: NSLocalizedString("warnning", comment: ""), message: NSLocalizedString("error_no_telegram", comment: ""), preferredStyle: .alert)
-                    let action = UIAlertAction(title: "Download And Install", style: .default, handler: { (UIAlertAction) in
-                        let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807")
-                        if(UIApplication.shared.canOpenURL(urlAppStore!))
-                        {
-                            UIApplication.shared.open(urlAppStore!, options: [:], completionHandler: nil)
-                        }
-                        
-                    })
-                    let actionCancel = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
-                    alert.addAction(action)
-                    alert.addAction(actionCancel)
-                    self.present(alert, animated: true, completion: nil)
-                }
-                
-            } else if(indexPath.row == 2) {
+            if (indexPath.row == 0) {
                 if (chainType == ChainType.COSMOS_MAIN) {
                     guard let url = URL(string: EXPLORER_COSMOS_MAIN) else { return }
                     self.onShowSafariWeb(url)
@@ -323,15 +291,48 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     self.onShowSafariWeb(url)
                     
                 }
-                
-            } else if(indexPath.row == 3) {
+            
+            } else if (indexPath.row == 1) {
+                self.onShowNotice()
+            
+            } else if (indexPath.row == 2) {
+                if(Locale.current.languageCode == "ko") {
+                    guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_ko.html") else { return }
+                    self.onShowSafariWeb(url)
+                    
+                } else {
+                    guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_en.html") else { return }
+                    self.onShowSafariWeb(url)
+                }
+            
+            } else if (indexPath.row == 3) {
+                let url = URL(string: "tg://resolve?domain=cosmostation")
+                if(UIApplication.shared.canOpenURL(url!)) {
+                    UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+                } else {
+                    let alert = UIAlertController(title: NSLocalizedString("warnning", comment: ""), message: NSLocalizedString("error_no_telegram", comment: ""), preferredStyle: .alert)
+                    let action = UIAlertAction(title: "Download And Install", style: .default, handler: { (UIAlertAction) in
+                        let urlAppStore = URL(string: "itms-apps://itunes.apple.com/app/id686449807")
+                        if(UIApplication.shared.canOpenURL(urlAppStore!))
+                        {
+                            UIApplication.shared.open(urlAppStore!, options: [:], completionHandler: nil)
+                        }
+                        
+                    })
+                    let actionCancel = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
+                    alert.addAction(action)
+                    alert.addAction(actionCancel)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            
+            } else if(indexPath.row == 4) {
                 guard let url = URL(string: "https://www.cosmostation.io") else { return }
                 self.onShowSafariWeb(url)
                 
-            } else if(indexPath.row == 4) {
+            } else if(indexPath.row == 5) {
                 self.onShowStarnameWcDialog()
             }
-            
+        
         } else if (indexPath.section == 3) {
             if(indexPath.row == 0) {
                 if(Locale.current.languageCode == "ko") {
@@ -357,7 +358,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 1 && indexPath.row == 2) {
+        if (indexPath.section == 1 && indexPath.row == 1) {
             if hideBio {
                 return 0
             } else {
