@@ -3209,8 +3209,11 @@ public class WUtils {
         } else if (chain == ChainType.KAVA_MAIN) {
             if (type == TASK_TYPE_HTLC_SWAP) {
                 return NSDecimalNumber.init(string: "12500")
+            } else {
+                let gasRate = NSDecimalNumber.init(string: KAVA_GAS_RATE_AVERAGE)
+                let gasAmount = getEstimateGasAmount(chain, type, valCnt)
+                return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
             }
-            return NSDecimalNumber.zero
             
         } else if (chain == ChainType.AXELAR_MAIN) {
             let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_AXELAR)
@@ -3495,7 +3498,7 @@ public class WUtils {
             
         } else if (chain == ChainType.KAVA_MAIN) {
             if (position == 0) {
-                return NSDecimalNumber.zero
+                return NSDecimalNumber.init(string: KAVA_GAS_RATE_TINY)
             } else if (position == 1) {
                 return NSDecimalNumber.init(string: KAVA_GAS_RATE_LOW)
             } else {
