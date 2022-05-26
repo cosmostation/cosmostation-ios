@@ -90,7 +90,9 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             }
             
         } else if (indexPath.section == 1) {
-            if (indexPath.row == 2) {
+            if (indexPath.row == 0) {
+                self.onShowNotice()
+            } else if (indexPath.row == 3) {
                 self.onShowCurrenyDialog()
             }
             
@@ -351,7 +353,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 1 && indexPath.row == 1) {
+        if (indexPath.section == 1 && indexPath.row == 2) {
             if hideBio {
                 return 0
             } else {
@@ -374,6 +376,11 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         var style = ToastStyle()
         style.backgroundColor = UIColor.gray
         self.parent?.view.makeToast(text, duration: 2.0, position: .bottom, style: style)
+    }
+    
+    func onShowNotice() {
+        guard let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainType))") else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onShowCurrenyDialog() {

@@ -4635,7 +4635,7 @@ public class WUtils {
         else if (chain == ChainType.MANTLE_MAIN) { return "asset-mantle" }
         else if (chain == ChainType.NYX_MAIN) { return "nyx" }
         
-        else if (chain == ChainType.BINANCE_MAIN) { return "bnb" }
+        else if (chain == ChainType.BINANCE_MAIN) { return "binance" }
         else if (chain == ChainType.OKEX_MAIN) { return "okex" }
         
         else if (chain == ChainType.ALTHEA_MAIN) { return "ALTHEA" }
