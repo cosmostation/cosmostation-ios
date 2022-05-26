@@ -4897,7 +4897,7 @@ public class WUtils {
             return ChainType.LUM_MAIN
         } else if (chainId?.contains("chihuahua-") == true) {
             return ChainType.CHIHUAHUA_MAIN
-        } else if (chainId?.contains("kava-") == true) {
+        } else if (chainId?.contains("kava_") == true) {
             return ChainType.KAVA_MAIN
         } else if (chainId?.contains("axelar-") == true) {
             return ChainType.AXELAR_MAIN
