@@ -5115,14 +5115,14 @@
 				048DBCDE280D70460007275E /* WalletMantleCell.xib */,
 				0451FDAB2837364500214FDA /* WalletNyxCell.swift */,
 				0451FDAC2837364500214FDA /* WalletNyxCell.xib */,
+				151788EA282E078600A7D7CC /* WalletStationCell.swift */,
+				151788EB282E078600A7D7CC /* WalletStationCell.xib */,
 				E1FD2332233E1C16009327FE /* WalletPriceCell.swift */,
 				E126CF9D2387A60D002A546F /* WalletPriceCell.xib */,
 				E1FD2336233E1C30009327FE /* WalletInflationCell.swift */,
 				E126CFA22387A643002A546F /* WalletInflationCell.xib */,
 				E1FD233A233E1C44009327FE /* WalletGuideCell.swift */,
 				E1FD233B233E1C44009327FE /* WalletGuideCell.xib */,
-				151788EA282E078600A7D7CC /* WalletStationCell.swift */,
-				151788EB282E078600A7D7CC /* WalletStationCell.xib */,
 			);
 			path = walletdash;
 			sourceTree = "<group>";
@@ -9847,7 +9847,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 147;
+				CURRENT_PROJECT_VERSION = 148;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9859,7 +9859,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.47;
+				MARKETING_VERSION = 1.5.48;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -9879,7 +9879,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 147;
+				CURRENT_PROJECT_VERSION = 148;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9891,7 +9891,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.47;
+				MARKETING_VERSION = 1.5.48;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
