@@ -925,6 +925,17 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             let allIris = WUtils.getAllMainAsset(IRIS_TEST_DENOM)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(allIris.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(IRIS_TEST_DENOM, allIris, 6, cell!.tokenValue.font)
+        
+        } else if (coin.denom == STATION_TEST_DENOM) {
+            cell?.tokenImg.image = UIImage(named: "testnetStation")
+            cell?.tokenSymbol.text = "ISS"
+            cell?.tokenSymbol.textColor = COLOR_STATION
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = "Station Staking Coin"
+            
+            let allIris = WUtils.getAllMainAsset(STATION_TEST_DENOM)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allIris.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(STATION_TEST_DENOM, allIris, 6, cell!.tokenValue.font)
         }
     }
     

@@ -122,7 +122,9 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.powerLabel.attributedText =  WUtils.displayAmount2(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
             cell?.commissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.commissionLabel.font)
             cell?.cardView.backgroundColor = TRANS_BG_COLOR_OK
-            cell?.validatorImg.af_setImage(withURL: URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address))!)
+            if let url = URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address)) {
+                cell?.validatorImg.af_setImage(withURL: url)
+            }
             return cell!
         }
     }

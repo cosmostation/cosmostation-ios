@@ -106,7 +106,7 @@ class CommonWCViewController: BaseViewController {
             let version = dictionary["CFBundleShortVersionString"] as? String {
             webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
                 let originUserAgent = result as! String
-                self.webView.customUserAgent = "\(originUserAgent) Cosmostation/APP/iOS/\(version)"
+                self.webView.customUserAgent = "Cosmostation/APP/iOS/\(version) \(originUserAgent)"
             }
         }
     }
