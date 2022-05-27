@@ -9,9 +9,22 @@
 import Foundation
 import CryptoSwift
 import HDWalletKit
+import web3swift
 
 
 class WKey {
+    
+    static func getPrivateKeyFromWords(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> PrivateKey {
+        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
+        let hdPath = chainConfig.getHdPath(type, path)
+        let PKeyData = HDNode(seed: seed!)?.derive(path: hdPath, derivePrivateKey: true)
+        return PrivateKey.init(pk: PKeyData!.privateKey!.hexEncodedString(), coin: .bitcoin)!
+    }
+    
+    static func getDpAddress(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> String {
+        let privateKey = getPrivateKeyFromWords(chainConfig, words, type, path)
+        return getDpAddress(privateKey.publicKey, chainConfig.accountPrefix)
+    }
     
     static func getMasterKeyFromWords(_ m: [String]) -> PrivateKey {
         return PrivateKey(seed: Mnemonic.createSeed(mnemonic: m.joined(separator: " ")), coin: .bitcoin)
@@ -127,7 +140,7 @@ class WKey {
     
     static func getPubToDpAddress(_ pubHex:String, _ chain:ChainType) -> String {
         var result = ""
-        let sha256 = Data.fromHex(pubHex)!.sha256()
+        let sha256 = Data.fromHex2(pubHex)!.sha256()
         let ripemd160 = RIPEMD160.hash(sha256)
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.COSMOS_TEST) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "cosmos", program: ripemd160)
@@ -485,7 +498,7 @@ class WKey {
     static func getRandomNumnerHash(_ randomNumner: String, _ timeStamp: Int64) -> String {
         let timeStampData = withUnsafeBytes(of: timeStamp.bigEndian) { Data($0) }
         let originHex = randomNumner + timeStampData.hexEncodedString()
-        let hash = Data.fromHex(originHex)!.sha256()
+        let hash = Data.fromHex2(originHex)!.sha256()
         return hash.hexEncodedString()
     }
     
@@ -503,7 +516,7 @@ class WKey {
             }
             let otherSenderData = otherSender.data(using: .utf8)
             let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
-            let hash = Data.fromHex(add)!.sha256()
+            let hash = Data.fromHex2(add)!.sha256()
             return hash.hexEncodedString()
             
         } else if (toChain == ChainType.KAVA_MAIN) {
@@ -519,7 +532,7 @@ class WKey {
             }
             let otherSenderData = otherSender.data(using: .utf8)
             let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
-            let hash = Data.fromHex(add)!.sha256()
+            let hash = Data.fromHex2(add)!.sha256()
             return hash.hexEncodedString()
             
         } else {
@@ -576,7 +589,7 @@ class WKey {
         if (address.starts(with: "0x")) {
             address = address.replacingOccurrences(of: "0x", with: "")
         }
-        let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: Data.fromHex(address)!)
+        let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: Data.fromHex2(address)!)
         return Bech32().encode(prefix, values: convert!)
     }
     
@@ -587,7 +600,7 @@ class WKey {
         } else {
             return false
         }
-        if (Data.fromHex(address)?.count == 20) {
+        if (Data.fromHex2(address)?.count == 20) {
             return true
         }
         return false
@@ -2718,5 +2731,18 @@ class WKey {
 extension Data {
     var bytes : [UInt8]{
         return [UInt8](self)
+    }
+    
+    public static func fromHex2(_ hex: String) -> Data? {
+        let string = hex.lowercased().stripHexPrefix()
+        let array = Array<UInt8>(hex: string)
+        if (array.count == 0) {
+            if (hex == "0x" || hex == "") {
+                return Data()
+            } else {
+                return nil
+            }
+        }
+        return Data(array)
     }
 }

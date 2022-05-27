@@ -10,6 +10,7 @@ import Foundation
 
 class ChainOkc: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "ex"
     var hdPath0 = "m/44'/996'/0'/0/X"
     var hdPath1 = "m/44'/60'/0'/0/X"
     

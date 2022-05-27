@@ -10,6 +10,7 @@ import Foundation
 
 class ChainSif: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "sif"
     var hdPath0 = "m/44'/118'/0'/0/X"
     
     required init(_ chainType: ChainType) {

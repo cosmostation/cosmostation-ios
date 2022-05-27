@@ -10,6 +10,7 @@ import Foundation
 
 class ChainUmee: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "umee"
     var hdPath0 = "m/44'/118'/0'/0/X"
     
     required init(_ chainType: ChainType) {

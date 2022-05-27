@@ -10,6 +10,7 @@ import Foundation
 
 class ChainPersistence: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "persistence"
     var hdPath0 = "m/44'/750'/0'/0/X"
     
     required init(_ chainType: ChainType) {

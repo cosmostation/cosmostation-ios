@@ -10,6 +10,7 @@ import Foundation
 
 class ChainDesmos: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "desmos"
     var hdPath0 = "m/44'/852'/0'/0/X"
     
     required init(_ chainType: ChainType) {

@@ -10,6 +10,7 @@ import Foundation
 
 class ChainKava: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "kava"
     var hdPath0 = "m/44'/118'/0'/0/X"
     var hdPath1 = "m/44'/459'/0'/0/X"
     

@@ -10,6 +10,7 @@ import Foundation
 
 class ChainInjective: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "inj"
     var hdPath0 = "m/44'/60'/0'/0/X"
     
     required init(_ chainType: ChainType) {

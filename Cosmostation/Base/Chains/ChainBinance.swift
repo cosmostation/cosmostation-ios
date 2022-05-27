@@ -10,6 +10,7 @@ import Foundation
 
 class ChainBinance: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "bnb"
     var hdPath0 = "m/44'/714'/0'/0/X"
     
     required init(_ chainType: ChainType) {

@@ -10,6 +10,7 @@ import Foundation
 
 class ChainBitsong: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "bitsong"
     var hdPath0 = "m/44'/639'/0'/0/X"
     
     required init(_ chainType: ChainType) {

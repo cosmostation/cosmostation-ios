@@ -25,10 +25,16 @@ class DeriveWalletCell: UITableViewCell {
     }
     
     func onBindWallet(_ words: MWords, _ chainType: ChainType,  _ type: Int, _ path: Int) {
-//        rootCardView.backgroundColor = WUtils.getChainBg(chainType)
         let chainConfig = ChainFactory().getChainConfig(chainType)
         rootCardView.backgroundColor = WUtils.getChainBg(chainConfig.chainType)
-        addressLabel.text = chainConfig.getDpAddress(words, type, path)
+        
+        var dpAddress = ""
+        DispatchQueue.global().async {
+            dpAddress = WKey.getDpAddress(chainConfig, words, type, path)
+            DispatchQueue.main.async(execute: {
+                self.addressLabel.text = dpAddress
+            });
+        }
     }
     
 }

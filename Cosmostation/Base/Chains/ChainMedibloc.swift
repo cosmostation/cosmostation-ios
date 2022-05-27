@@ -10,6 +10,7 @@ import Foundation
 
 class ChainMedibloc: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "panacea"
     var hdPath0 = "m/44'/371'/0'/0/X"
     
     required init(_ chainType: ChainType) {

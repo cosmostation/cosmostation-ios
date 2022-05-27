@@ -10,6 +10,7 @@ import Foundation
 
 class ChainProvenance: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "pb"
     var hdPath0 = "m/44'/505'/0'/0/X"
     
     required init(_ chainType: ChainType) {

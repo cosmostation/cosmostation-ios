@@ -10,6 +10,7 @@ import Foundation
 
 class ChainSecret: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "secret"
     var hdPath0 = "m/44'/118'/0'/0/X"
     var hdPath1 = "m/44'/529'/0'/0/X"
     

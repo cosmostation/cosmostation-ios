@@ -10,6 +10,7 @@ import Foundation
 
 class ChainFetchAi: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "fetch"
     var hdPath0 = "m/44'/118'/0'/0/X"
     var hdPath1 = "m/44'/60'/0'/0/X"
     var hdPath2 = "m/44'/60'/X'/0/0"

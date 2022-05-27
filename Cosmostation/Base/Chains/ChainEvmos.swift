@@ -10,6 +10,7 @@ import Foundation
 
 class ChainEvmos: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "evmos"
     var hdPath0 = "m/44'/60'/0'/0/X"
     
     required init(_ chainType: ChainType) {

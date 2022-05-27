@@ -11,11 +11,12 @@ import HDWalletKit
 
 protocol ChainConfig {
     var chainType: ChainType { get set }
+    var accountPrefix: String { get set }
     init (_ chainType: ChainType)
     
     func supportHdPaths() -> Array<String>
     func getHdPath(_ type: Int, _ path: Int) -> String
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String
+//    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String
         
 }
 

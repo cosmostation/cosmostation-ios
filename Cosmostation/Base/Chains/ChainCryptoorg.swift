@@ -10,6 +10,7 @@ import Foundation
 
 class ChainCryptoorg: ChainConfig {
     var chainType: ChainType
+    var accountPrefix = "cro"
     var hdPath0 = "m/44'/394'/0'/0/X"
     
     required init(_ chainType: ChainType) {

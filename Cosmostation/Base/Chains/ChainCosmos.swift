@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import HDWalletKit
 
 class ChainCosmos: ChainConfig {
     var chainType: ChainType
@@ -26,10 +25,5 @@ class ChainCosmos: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-//        let masterKey = words.getMasterKey()
-//        let sPath = getHdPath(type, path)
-        let childKey = WKey.getDerivedKey(words.getMasterKey(), getHdPath(type, path))
-        return WKey.getDpAddress(childKey.publicKey, accountPrefix)
-    }
+
 }
