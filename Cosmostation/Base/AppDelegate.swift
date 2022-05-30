@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (url.scheme == "cosmostation") {
             if (application.topViewController is CommonWCViewController || application.topViewController is SBCardPopupViewController) {
                 if let wcVC = application.topViewController as? CommonWCViewController {
-                    wcVC.processQuery(query: url.query)
+                    wcVC.processQuery(host: url.host, query: url.query)
                 }
                 return false
             } else if (BaseData.instance.hasPassword()) {
