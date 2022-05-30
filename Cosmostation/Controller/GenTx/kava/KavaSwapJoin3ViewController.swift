@@ -90,7 +90,7 @@ class KavaSwapJoin3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let slippage = "300000000000000000"
+            let slippage = "30000000000000000"
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
             let reqTx = Signer.genSignedKavaSwapDeposit(auth!,
                                                         self.account!.account_address,

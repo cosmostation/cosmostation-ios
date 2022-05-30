@@ -96,7 +96,7 @@ class KavaSwap3ViewController: BaseViewController, PasswordViewDelegate {
         DispatchQueue.global().async {
             let inCoin = Coin.init(self.pageHolderVC.mSwapInDenom!, self.pageHolderVC.mSwapInAmount!.stringValue)
             let outCoin = Coin.init(self.pageHolderVC.mSwapOutDenom!, self.pageHolderVC.mSwapOutAmount!.stringValue)
-            let slippage = "300000000000000000"
+            let slippage = "30000000000000000"
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
             let reqTx = Signer.genSignedKavaSwapExactForTokens(auth!,
                                                                self.account!.account_address,
