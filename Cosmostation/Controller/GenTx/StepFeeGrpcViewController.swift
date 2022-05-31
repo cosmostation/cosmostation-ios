@@ -674,7 +674,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
              
             
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
-            let slippage = "300000000000000000"
+            let slippage = "30000000000000000"
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
             return Signer.genSimulateKavaSwapDeposit(auth,
                                                      self.account!.account_address,
@@ -710,7 +710,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
         } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
             let inCoin = Coin.init(self.pageHolderVC.mSwapInDenom!, self.pageHolderVC.mSwapInAmount!.stringValue)
             let outCoin = Coin.init(self.pageHolderVC.mSwapOutDenom!, self.pageHolderVC.mSwapOutAmount!.stringValue)
-            let slippage = "300000000000000000"
+            let slippage = "30000000000000000"
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
             return  Signer.genSimulateKavaSwapExactForTokens(auth,
                                                              self.account!.account_address,

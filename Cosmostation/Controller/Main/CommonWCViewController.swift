@@ -86,10 +86,18 @@ class CommonWCViewController: BaseViewController {
         }
     }
     
-    func processQuery(query: String?) {
-        if let query = query {
-            wcURL = query
-            connectSession()
+    func processQuery(host: String?, query: String?) {
+        if let host = host, let query = query {
+            if host == "wc" {
+                wcURL = query
+                connectSession()
+            } else if host == "dapp" {
+                if webView.isHidden == false {
+                    if let url = URL(string: query) {
+                        webView.load(URLRequest(url: url))
+                    }
+                }
+            }
         }
     }
     
