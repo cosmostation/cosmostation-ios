@@ -22,12 +22,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     @IBOutlet weak var totalKeyState: UIImageView!
     @IBOutlet weak var totalDpAddress: UILabel!
     @IBOutlet weak var totalValue: UILabel!
+    @IBOutlet weak var noticeCard: CardView!
+    @IBOutlet weak var noticeTextLabel: UILabel!
+    @IBOutlet weak var noticeBadgeLabel: UILabel!
+    @IBOutlet weak var noticeBadgeView: UIView!
+    @IBOutlet weak var totalCardTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var walletTableView: UITableView!
     var refresher: UIRefreshControl!
     
     var mainTabVC: MainTabViewController!
     var wcURL:String?
+    var board: Board!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +104,12 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         refresher.tintColor = UIColor.white
         walletTableView.addSubview(refresher)
+        noticeBadgeView.layer.masksToBounds = false
+        noticeBadgeView.layer.cornerRadius = 6
+        noticeBadgeView.clipsToBounds = true
+        
+        let tapNoticeCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickNoticeBoard))
+        self.noticeCard.addGestureRecognizer(tapNoticeCard)
         
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.totalCard.addGestureRecognizer(tapTotalCard)
@@ -111,6 +123,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.navigationController?.navigationBar.topItem?.title = "";
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchDone(_:)), name: Notification.Name("onFetchDone"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.onFetchPrice(_:)), name: Notification.Name("onFetchPrice"), object: nil)
+        self.onFetchNoticeInfo()
         self.updateTitle()
         self.walletTableView.reloadData()
     }
@@ -1778,6 +1791,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
+    @objc func onClickNoticeBoard() {
+        if let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainType))/\(self.noticeCard.tag)") {
+            self.onShowSafariWeb(url)
+        }
+    }
     
     @objc func onClickActionShare() {
         self.shareAddress(account!.account_address, WUtils.getWalletName(account))
@@ -2742,6 +2760,35 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     self.navigationController?.pushViewController(commonWcVC, animated: true)
                 }
             })
+        }
+    }
+    
+    func onFetchNoticeInfo() {
+        self.noticeCard.backgroundColor = WUtils.getChainBg(chainType)
+        let request = Alamofire.request(BaseNetWork.mintscanNoticeInfo(chainType), method: .get, parameters: ["dashboard": "true", "chain": WUtils.getChainNameByBaseChain(chainType)], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let resData = res as? NSDictionary, let boards = resData.object(forKey: "boards") as? Array<NSDictionary> {
+                    if let firstBoard = boards.first {
+                        let board = Board.init(firstBoard)
+                        self.noticeTextLabel.text = board.title
+                        self.noticeBadgeLabel.text = board.type?.capitalized
+                        self.noticeCard.isHidden = false
+                        if let boardId = board.id {
+                            self.noticeCard.tag = boardId
+                        }
+                        self.totalCardTopConstraint.isActive = true
+                    } else {
+                        self.noticeCard.isHidden = true
+                        self.totalCardTopConstraint.isActive = false
+                    }
+                }
+            case .failure(let error):
+                print("onFetchNoticeInfo ", error)
+                self.noticeCard.isHidden = true
+                self.totalCardTopConstraint.isActive = false
+            }
         }
     }
 }
