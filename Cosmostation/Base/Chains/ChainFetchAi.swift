@@ -6,10 +6,18 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainFetchAi: ChainConfig {
-    var chainType: ChainType
+    var chainType = ChainType.FETCH_MAIN
+    var chainImg = UIImage(named: "chainfetchai")
+    var chainInfoImg = UIImage(named: "fetchaiImg")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_fetch", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_fetch", comment: "")
+    var stakeDenomImg = UIImage(named: "tokenfetchai")
+    var stakeDenom = "afet"
+    var stakeSymbol = "FET"
     var accountPrefix = "fetch"
     var hdPath0 = "m/44'/118'/0'/0/X"
     var hdPath1 = "m/44'/60'/0'/0/X"

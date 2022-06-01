@@ -6,11 +6,18 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainAssetMantle: ChainConfig {
-    var chainType: ChainType
-    var accountPrefix = "mantle"
+    var chainType = ChainType.MANTLE_MAIN
+    var chainInfoImg = UIImage(named: "infoiconAssetmantle")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_mantle", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_mantle", comment: "")
+    var stakeDenomImg = UIImage(named: "tokenAssetmantle")
+    var stakeDenom = "uakt"
+    var stakeSymbol = "AKT"
+    var accountPrefix = "MANTLE"
     var hdPath0 = "m/44'/118'/0'/0/X"
     
     required init(_ chainType: ChainType) {

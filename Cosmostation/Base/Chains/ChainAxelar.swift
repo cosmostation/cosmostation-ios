@@ -6,10 +6,17 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainAxelar: ChainConfig {
-    var chainType: ChainType
+    var chainType = ChainType.AXELAR_MAIN
+    var chainInfoImg = UIImage(named: "infoiconAxelar")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_axelar", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_axelar", comment: "")
+    var stakeDenomImg = UIImage(named: "tokenAxelar")
+    var stakeDenom = "uaxl"
+    var stakeSymbol = "AXL"
     var accountPrefix = "axelar"
     var hdPath0 = "m/44'/118'/0'/0/X"
     

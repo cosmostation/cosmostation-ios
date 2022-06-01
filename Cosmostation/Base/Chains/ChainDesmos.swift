@@ -6,10 +6,18 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainDesmos: ChainConfig {
-    var chainType: ChainType
+    var chainType = ChainType.DESMOS_MAIN
+    var chainImg = UIImage(named: "chainDesmos")
+    var chainInfoImg = UIImage(named: "infoiconDesmos")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_desmos", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_desmos", comment: "")
+    var stakeDenomImg = UIImage(named: "tokenDesmos")
+    var stakeDenom = "udsm"
+    var stakeSymbol = "DSM"
     var accountPrefix = "desmos"
     var hdPath0 = "m/44'/852'/0'/0/X"
     

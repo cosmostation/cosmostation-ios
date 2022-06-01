@@ -6,10 +6,18 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainLum: ChainConfig {
-    var chainType: ChainType
+    var chainType = ChainType.LUM_MAIN
+    var chainImg = UIImage(named: "chainLumnetwork")
+    var chainInfoImg = UIImage(named: "infoiconLumnetwork")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_lum", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_lum", comment: "")
+    var stakeDenomImg = UIImage(named: "tokenLum")
+    var stakeDenom = "ulum"
+    var stakeSymbol = "LUM"
     var accountPrefix = "lum"
     var hdPath0 = "m/44'/118'/0'/0/X"
     var hdPath1 = "m/44'/459'/0'/0/X"

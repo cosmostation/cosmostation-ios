@@ -6,10 +6,18 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainIris: ChainConfig {
-    var chainType: ChainType
+    var chainType = ChainType.IRIS_MAIN
+    var chainImg = UIImage(named: "irisWh")
+    var chainInfoImg = UIImage(named: "irisnetImg")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_iris", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_iris", comment: "")
+    var stakeDenomImg = UIImage(named: "irisTokenImg")
+    var stakeDenom = "uiris"
+    var stakeSymbol = "Iris"
     var accountPrefix = "iaa"
     var hdPath0 = "m/44'/118'/0'/0/X"
     

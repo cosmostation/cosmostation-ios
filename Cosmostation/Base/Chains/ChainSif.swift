@@ -6,10 +6,18 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainSif: ChainConfig {
-    var chainType: ChainType
+    var chainType = ChainType.SIF_MAIN
+    var chainImg = UIImage(named: "chainsifchain")
+    var chainInfoImg = UIImage(named: "sifchainImg")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_sif", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_sif", comment: "")
+    var stakeDenomImg = UIImage(named: "tokensifchain")
+    var stakeDenom = "rowan"
+    var stakeSymbol = "ROWAN"
     var accountPrefix = "sif"
     var hdPath0 = "m/44'/118'/0'/0/X"
     

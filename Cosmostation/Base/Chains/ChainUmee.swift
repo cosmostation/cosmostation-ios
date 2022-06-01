@@ -6,10 +6,18 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainUmee: ChainConfig {
-    var chainType: ChainType
+    var chainType = ChainType.UMEE_MAIN
+    var chainImg = UIImage(named: "chainUmee")
+    var chainInfoImg = UIImage(named: "infoiconUmee")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_umee", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_umee", comment: "")
+    var stakeDenomImg = UIImage(named: "tokenUmee")
+    var stakeDenom = "uumee"
+    var stakeSymbol = "UMEE"
     var accountPrefix = "umee"
     var hdPath0 = "m/44'/118'/0'/0/X"
     

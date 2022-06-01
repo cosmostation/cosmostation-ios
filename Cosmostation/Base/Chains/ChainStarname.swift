@@ -6,10 +6,18 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 class ChainStarname: ChainConfig {
-    var chainType: ChainType
+    var chainType = ChainType.IOV_MAIN
+    var chainImg = UIImage(named: "chainStarname")
+    var chainInfoImg = UIImage(named: "iovImg")
+    var chainInfoTitle = NSLocalizedString("send_guide_title_iov", comment: "")
+    var chainInfoMsg = NSLocalizedString("send_guide_msg_iov", comment: "")
+    var stakeDenomImg = UIImage(named: "tokenStarname")
+    var stakeDenom = "uiov"
+    var stakeSymbol = "IOV"
     var accountPrefix = "iov"
     var hdPath0 = "m/44'/234'/0'/0/X"
     
