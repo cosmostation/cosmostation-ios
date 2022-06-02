@@ -10,23 +10,34 @@ import UIKit
 import Foundation
 
 class ChainJuno: ChainConfig {
+    var isGrpc = true
     var chainType = ChainType.JUNO_MAIN
     var chainImg = UIImage(named: "chainJuno")
     var chainInfoImg = UIImage(named: "infoiconJuno")
     var chainInfoTitle = NSLocalizedString("send_guide_title_juno", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_juno", comment: "")
+    
     var stakeDenomImg = UIImage(named: "tokenJuno")
     var stakeDenom = "ujuno"
     var stakeSymbol = "JUNO"
-    var accountPrefix = "juno"
-    var hdPath0 = "m/44'/118'/0'/0/X"
+    
+    var addressPrefix = "juno"
+    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    var grpcUrl = "lcd-juno-app.cosmostation.io"
+    var grpcPort = "9090"
+    var lcdUrl = "https://lcd-juno-app.cosmostation.io"
+    var apiUrl = "https://api-juno.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "juno/"
+    var validatorImgUrl = MonikerUrl + "juno/"
+    var relayerImgUrl = RelayerUrl + "juno/relay-juno-unknown.png"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
     }
     
     func supportHdPaths() -> Array<String> {
-        return [hdPath0]
+        return [addressHdPath0]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

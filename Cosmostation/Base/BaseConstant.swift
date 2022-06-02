@@ -1562,3 +1562,8 @@ let STATION_NFT_DENOM           = "station";
 let ICON_DEFAULT                = "ICON_DEFAULT";
 let ICON_SANTA                  = "ICON_SANTA";
 let ICON_2002                   = "ICON_2002";
+
+
+let MintscanUrl = "https://www.mintscan.io/"
+let MonikerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/"
+let RelayerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/"

@@ -10,23 +10,34 @@ import UIKit
 import Foundation
 
 class ChainEvmos: ChainConfig {
+    var isGrpc = true
     var chainType = ChainType.EVMOS_MAIN
     var chainImg = UIImage(named: "chainEvmos")
     var chainInfoImg = UIImage(named: "infoiconEvmos")
     var chainInfoTitle = NSLocalizedString("send_guide_title_evmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_evmos", comment: "")
+    
     var stakeDenomImg = UIImage(named: "tokenEvmos")
     var stakeDenom = "aevmos"
     var stakeSymbol = "EVMOS"
-    var accountPrefix = "evmos"
-    var hdPath0 = "m/44'/60'/0'/0/X"
+    
+    var addressPrefix = "evmos"
+    let addressHdPath0 = "m/44'/60'/0'/0/X"
+    
+    var grpcUrl = "lcd-evmos-app.cosmostation.io"
+    var grpcPort = "9090"
+    var lcdUrl = "https://lcd-evmos-app.cosmostation.io"
+    var apiUrl = "https://api-evmos.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "evmos/"
+    var validatorImgUrl = MonikerUrl + "evmos/"
+    var relayerImgUrl = RelayerUrl + "evmos/relay-evmos-unknown.png"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
     }
     
     func supportHdPaths() -> Array<String> {
-        return [hdPath0]
+        return [addressHdPath0]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

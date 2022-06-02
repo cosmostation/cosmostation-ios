@@ -10,23 +10,34 @@ import UIKit
 import Foundation
 
 class ChainComdex: ChainConfig {
+    var isGrpc = true
     var chainType = ChainType.COMDEX_MAIN
     var chainImg = UIImage(named: "chainComdex")
     var chainInfoImg = UIImage(named: "infoiconComdex")
     var chainInfoTitle = NSLocalizedString("send_guide_title_comdex", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_comdex", comment: "")
+    
     var stakeDenomImg = UIImage(named: "tokenComdex")
     var stakeDenom = "ucmdx"
     var stakeSymbol = "CMDX"
-    var accountPrefix = "comdex"
-    var hdPath0 = "m/44'/118'/0'/0/X"
+    
+    var addressPrefix = "comdex"
+    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    var grpcUrl = "lcd-comdex-app.cosmostation.io"
+    var grpcPort = "9090"
+    var lcdUrl = "https://lcd-comdex-app.cosmostation.io"
+    var apiUrl = "https://api-comdex.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "comdex/"
+    var validatorImgUrl = MonikerUrl + "comdex/"
+    var relayerImgUrl = RelayerUrl + "comdex/relay-comdex-unknown.png"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
     }
     
     func supportHdPaths() -> Array<String> {
-        return [hdPath0]
+        return [addressHdPath0]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

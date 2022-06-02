@@ -6,14 +6,34 @@
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
+import UIKit
 import Foundation
 import HDWalletKit
 
 protocol ChainConfig {
+    var isGrpc: Bool { get set }
     var chainType: ChainType { get set }
-    var accountPrefix: String { get set }
-    init (_ chainType: ChainType)
+    var chainImg: UIImage? { get set }
+    var chainInfoImg: UIImage? { get set }
+    var chainInfoTitle: String { get set }
+    var chainInfoMsg: String { get set }
     
+    var stakeDenomImg: UIImage? { get set }
+    var stakeDenom: String { get set }
+    var stakeSymbol: String { get set }
+    
+    var addressPrefix: String { get set }
+    
+    var grpcUrl: String { get set }
+    var grpcPort: String { get set }
+    var lcdUrl: String { get set }
+    var apiUrl: String { get set }
+    var explorerUrl: String { get set }
+    var validatorImgUrl: String { get set }
+    var relayerImgUrl: String { get set }
+    
+    
+    init (_ chainType: ChainType)
     func supportHdPaths() -> Array<String>
     func getHdPath(_ type: Int, _ path: Int) -> String
 //    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String
@@ -21,6 +41,7 @@ protocol ChainConfig {
 }
 
 class ChainFactory {
+    
     func getChainConfig(_ chainType: ChainType) -> ChainConfig {
         switch chainType {
         case .COSMOS_MAIN:

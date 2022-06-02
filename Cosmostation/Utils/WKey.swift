@@ -23,7 +23,7 @@ class WKey {
     
     static func getDpAddress(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> String {
         let privateKey = getPrivateKeyFromWords(chainConfig, words, type, path)
-        return getDpAddress(privateKey.publicKey, chainConfig.accountPrefix)
+        return getDpAddress(privateKey.publicKey, chainConfig.addressPrefix)
     }
     
     static func getMasterKeyFromWords(_ m: [String]) -> PrivateKey {

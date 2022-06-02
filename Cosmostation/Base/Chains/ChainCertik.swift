@@ -10,23 +10,34 @@ import UIKit
 import Foundation
 
 class ChainCertik: ChainConfig {
+    var isGrpc = true
     var chainType = ChainType.CERTIK_MAIN
     var chainImg = UIImage(named: "certikChainImg")
     var chainInfoImg = UIImage(named: "certikImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_certik", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_certik", comment: "")
+    
     var stakeDenomImg = UIImage(named: "certikTokenImg")
     var stakeDenom = "uctk"
     var stakeSymbol = "CTK"
-    var accountPrefix = "certik"
-    var hdPath0 = "m/44'/118'/0'/0/X"
+    
+    var addressPrefix = "certik"
+    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    var grpcUrl = "lcd-certik-app.cosmostation.io"
+    var grpcPort = "9090"
+    var lcdUrl = "https://lcd-certik-app.cosmostation.io"
+    var apiUrl = "https://api-certik.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "certik/"
+    var validatorImgUrl = MonikerUrl + "certik/"
+    var relayerImgUrl = RelayerUrl + "certik/relay-certik-unknown.png"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
     }
     
     func supportHdPaths() -> Array<String> {
-        return [hdPath0]
+        return [addressHdPath0]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

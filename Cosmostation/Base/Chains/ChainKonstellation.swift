@@ -10,23 +10,34 @@ import UIKit
 import Foundation
 
 class ChainKonstellation: ChainConfig {
+    var isGrpc = true
     var chainType = ChainType.KONSTELLATION_MAIN
     var chainImg = UIImage(named: "chainKonstellation")
     var chainInfoImg = UIImage(named: "infoiconKonstellation")
     var chainInfoTitle = NSLocalizedString("send_guide_title_konstellation", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_konstellation", comment: "")
+    
     var stakeDenomImg = UIImage(named: "tokenKonstellation")
     var stakeDenom = "udarc"
     var stakeSymbol = "DARC"
-    var accountPrefix = "darc"
-    var hdPath0 = "m/44'/118'/0'/0/X"
+    
+    var addressPrefix = "darc"
+    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    var grpcUrl = "lcd-konstellation-app.cosmostation.io"
+    var grpcPort = "9090"
+    var lcdUrl = "https://lcd-konstellation-app.cosmostation.io"
+    var apiUrl = "https://api-konstellation.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "konstellation/"
+    var validatorImgUrl = MonikerUrl + "konstellation/"
+    var relayerImgUrl = RelayerUrl + "konstellation/relay-konstellation-unknown.png"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
     }
     
     func supportHdPaths() -> Array<String> {
-        return [hdPath0]
+        return [addressHdPath0]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

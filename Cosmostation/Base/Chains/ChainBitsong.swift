@@ -10,23 +10,34 @@ import UIKit
 import Foundation
 
 class ChainBitsong: ChainConfig {
+    var isGrpc = true
     var chainType = ChainType.BITSONG_MAIN
     var chainImg = UIImage(named: "chainBitsong")
     var chainInfoImg = UIImage(named: "infoiconBitsong")
     var chainInfoTitle = NSLocalizedString("send_guide_title_bitsong", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_bitsong", comment: "")
+    
     var stakeDenomImg = UIImage(named: "tokenBitsong")
     var stakeDenom = "ubtsg"
     var stakeSymbol = "BTSG"
-    var accountPrefix = "bitsong"
-    var hdPath0 = "m/44'/639'/0'/0/X"
+    
+    var addressPrefix = "bitsong"
+    let addressHdPath0 = "m/44'/639'/0'/0/X"
+    
+    var grpcUrl = "lcd-bitsong-app.cosmostation.io"
+    var grpcPort = "9090"
+    var lcdUrl = "https://lcd-bitsong-app.cosmostation.io"
+    var apiUrl = "https://api-bitsong.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "bitsong/"
+    var validatorImgUrl = MonikerUrl + "bitsong/"
+    var relayerImgUrl = RelayerUrl + "bitsong/relay-bitsong-unknown.png"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
     }
     
     func supportHdPaths() -> Array<String> {
-        return [hdPath0]
+        return [addressHdPath0]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

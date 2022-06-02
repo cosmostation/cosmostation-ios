@@ -10,23 +10,34 @@ import UIKit
 import Foundation
 
 class ChainUmee: ChainConfig {
+    var isGrpc = true
     var chainType = ChainType.UMEE_MAIN
     var chainImg = UIImage(named: "chainUmee")
     var chainInfoImg = UIImage(named: "infoiconUmee")
     var chainInfoTitle = NSLocalizedString("send_guide_title_umee", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_umee", comment: "")
+    
     var stakeDenomImg = UIImage(named: "tokenUmee")
     var stakeDenom = "uumee"
     var stakeSymbol = "UMEE"
-    var accountPrefix = "umee"
-    var hdPath0 = "m/44'/118'/0'/0/X"
+    
+    var addressPrefix = "umee"
+    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    var grpcUrl = "lcd-umee-app.cosmostation.io"
+    var grpcPort = "9090"
+    var lcdUrl = "https://lcd-umee-app.cosmostation.io"
+    var apiUrl = "https://api-umee.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "umee/"
+    var validatorImgUrl = MonikerUrl + "umee/"
+    var relayerImgUrl = RelayerUrl + "umee/relay-umee-unknown.png"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
     }
     
     func supportHdPaths() -> Array<String> {
-        return [hdPath0]
+        return [addressHdPath0]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {

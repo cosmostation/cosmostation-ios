@@ -10,22 +10,34 @@ import UIKit
 import Foundation
 
 class ChainAssetMantle: ChainConfig {
+    var isGrpc = true
     var chainType = ChainType.MANTLE_MAIN
+    var chainImg = UIImage(named: "chainAssetmantle")
     var chainInfoImg = UIImage(named: "infoiconAssetmantle")
     var chainInfoTitle = NSLocalizedString("send_guide_title_mantle", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_mantle", comment: "")
+    
     var stakeDenomImg = UIImage(named: "tokenAssetmantle")
-    var stakeDenom = "uakt"
-    var stakeSymbol = "AKT"
-    var accountPrefix = "MANTLE"
-    var hdPath0 = "m/44'/118'/0'/0/X"
+    var stakeDenom = "umntl"
+    var stakeSymbol = "MNTL"
+    
+    var addressPrefix = "mantle"
+    let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    var grpcUrl = "lcd-asset-mantle-app.cosmostation.io"
+    var grpcPort = "9090"
+    var lcdUrl = "https://lcd-asset-mantle-app.cosmostation.io"
+    var apiUrl = "https://api-asset-mantle.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "asset-mantle/"
+    var validatorImgUrl = MonikerUrl + "asset-mantle/"
+    var relayerImgUrl = RelayerUrl + "asset-mantle/relay-assetmantle-unknown.png"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
     }
     
     func supportHdPaths() -> Array<String> {
-        return [hdPath0]
+        return [addressHdPath0]
     }
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
