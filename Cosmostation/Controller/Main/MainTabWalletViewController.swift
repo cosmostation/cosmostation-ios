@@ -27,13 +27,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     @IBOutlet weak var noticeBadgeLabel: UILabel!
     @IBOutlet weak var noticeBadgeView: UIView!
     @IBOutlet weak var totalCardTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var noticeTopConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var walletTableView: UITableView!
     var refresher: UIRefreshControl!
     
     var mainTabVC: MainTabViewController!
     var wcURL:String?
-    var board: Board!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -2779,15 +2779,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                             self.noticeCard.tag = boardId
                         }
                         self.totalCardTopConstraint.isActive = true
+                        self.noticeTopConstraint.isActive = true
                     } else {
                         self.noticeCard.isHidden = true
                         self.totalCardTopConstraint.isActive = false
+                        self.noticeTopConstraint.isActive = false
                     }
                 }
             case .failure(let error):
                 print("onFetchNoticeInfo ", error)
                 self.noticeCard.isHidden = true
                 self.totalCardTopConstraint.isActive = false
+                self.noticeTopConstraint.isActive = false
             }
         }
     }

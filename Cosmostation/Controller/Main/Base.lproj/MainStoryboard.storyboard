@@ -99,7 +99,7 @@
                                 <rect key="frame" x="0.0" y="186" width="414" height="539"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTJ-IT-i8e" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cTJ-IT-i8e" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="12" y="54" width="390" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hag-aR-Gc5">
@@ -241,6 +241,7 @@
                         <outlet property="noticeBadgeView" destination="hag-aR-Gc5" id="CKb-Si-tKY"/>
                         <outlet property="noticeCard" destination="cTJ-IT-i8e" id="saG-we-fix"/>
                         <outlet property="noticeTextLabel" destination="8Kp-nI-fP8" id="Bq1-LT-Y3H"/>
+                        <outlet property="noticeTopConstraint" destination="mYQ-ql-KTu" id="zFv-yW-R49"/>
                         <outlet property="titleAlarmBtn" destination="joi-O1-5vn" id="7px-8p-I2d"/>
                         <outlet property="titleChainImg" destination="cYo-Wr-QV9" id="Uqo-uq-mqd"/>
                         <outlet property="titleChainName" destination="fK9-Jn-bGz" id="n7f-fJ-zF7"/>
