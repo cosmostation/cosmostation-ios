@@ -691,7 +691,7 @@ let GAS_FEE_AMOUNT_OSMOS_UNLOCK             = "1500000"
 
 let FEE_BNB_TRANSFER                            = "0.000075"
 
-let KAVA_GAS_RATE_TINY                          = "0.0025";
+let KAVA_GAS_RATE_TINY                          = "0.001";
 let KAVA_GAS_RATE_LOW                           = "0.0025";
 let KAVA_GAS_RATE_AVERAGE                       = "0.025";
 let KAVA_GAS_AMOUNT_SEND                        = "400000";
