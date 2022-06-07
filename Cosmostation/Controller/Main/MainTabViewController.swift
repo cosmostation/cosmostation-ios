@@ -56,7 +56,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func processScheme() {
         if let delegate = UIApplication.shared.delegate as? AppDelegate, let mSchemeURL = delegate.scheme {
             let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-            
+            commonWcVC.modalPresentationStyle = .fullScreen
             if (mSchemeURL.host == "wc") {
                 commonWcVC.wcURL = mSchemeURL.query
                 commonWcVC.isDeepLink = true
