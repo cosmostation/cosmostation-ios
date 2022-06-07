@@ -329,6 +329,7 @@
 "str_select_starname_domain" = "도메인을 선택해 주세요.";
 "select_to_link_chain" = "링크하실 체인을 고르세요.";
 "select_to_link_account" = "링크하실 계정을 고르세요.";
+"select_hd_path" = "지정 경로를 선택 하세요";
 
 "current_price_format" = "현재 %@ 가격";
 "liquidation_price_format" = "청산 %@ 가격";

@@ -149,18 +149,18 @@ class ChainFactory {
 //        return result
 //    }
     
-    func getAllSupportPaths(_ path: Int) -> Array<String> {
-        var result = Array<String>()
-        SUPPRT_CONFIG().forEach { chainConfig in
-            chainConfig.supportHdPaths().forEach { hdPath in
-                let pullPath = hdPath.replacingOccurrences(of: "X", with: String(path))
-                if (!result.contains(pullPath)) {
-                    result.append(pullPath)
-                }
-            }
-        }
-        return result
-    }
+//    func getAllSupportPaths(_ path: Int) -> Array<String> {
+//        var result = Array<String>()
+//        SUPPRT_CONFIG().forEach { chainConfig in
+//            chainConfig.supportHdPaths().forEach { hdPath in
+//                let pullPath = hdPath.replacingOccurrences(of: "X", with: String(path))
+//                if (!result.contains(pullPath)) {
+//                    result.append(pullPath)
+//                }
+//            }
+//        }
+//        return result
+//    }
     
     func getAllKeyType() -> Array<(ChainType, Int)> {
         var result = Array<(ChainType, Int)>()

@@ -13,7 +13,6 @@ import NIO
 
 class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
     @IBOutlet weak var mnemonicNameLabel: UILabel!
     @IBOutlet weak var walletCntLabel: UILabel!
     @IBOutlet weak var totalWalletCntLabel: UILabel!
@@ -69,12 +68,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         let chainConfig = ChainFactory().getChainConfig(derive.chaintype)
         cell?.chainImgView.image = chainConfig.chainImg
         cell?.pathLabel.text = chainConfig.getHdPath(derive.hdpathtype, derive.path)
-        
-        if let address = derive.address {
-            cell!.addressLabel.text = address
-        } else {
-            cell!.addressLabel.text = "loading..."
-        }
+        cell!.addressLabel.text = derive.dpAddress
         
         if let coin = derive.coin {
             WUtils.showCoinDp(coin, cell!.denomLabel, cell!.amountLabel, derive.chaintype)
@@ -115,7 +109,28 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     
+    var tempPath = 0
     @objc func onClickPath() {
+//        print("onClickPath")
+        let alert = UIAlertController(title: NSLocalizedString("select_hd_path", comment: ""), message: "\n\n\n\n\n\n", preferredStyle: .alert)
+        alert.isModalInPopover = true
+        let pickerFrame = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
+        alert.view.addSubview(pickerFrame)
+        pickerFrame.delegate = self
+        pickerFrame.dataSource = self
+        
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { (UIAlertAction) in
+//            print("\(self.mPath)")
+            self.mDerives.removeAll()
+            self.derivedWalletTableView.reloadData()
+            self.showWaittingAlert()
+            DispatchQueue.main.async(execute: {
+                self.onGetAllKeyTypes()
+                self.hideWaittingAlert()
+            })
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -155,12 +170,11 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             self.walletCntLabel.text = String(alreadyCnt + selectedCnt)
             self.walletCntLabel.textColor = UIColor(hexString: "#05D2DD")
             self.totalWalletCntLabel.text = "/ " + String(allKeyCnt)
-            
         }
-        
     }
     
     func getSeedFormWords() {
+//        print("getSeedFormWords ")
         self.showWaittingAlert()
         DispatchQueue.global().async {
             self.mSeed = WKey.getSeedFromWords(self.mWords)
@@ -172,24 +186,29 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onGetAllKeyTypes() {
+//        print("onGetAllKeyTypes ", mPath)
+        self.selectedHDPathLabel.text = String(self.mPath)
         ChainFactory().getAllKeyType().forEach { keyTypes in
             let chainConfig = ChainFactory().getChainConfig(keyTypes.0)
-            self.mDerives.append(Derive.init(chainConfig.chainType, keyTypes.1, self.mPath))
+            let fullPath = chainConfig.getHdPath(keyTypes.1, self.mPath)
+            let pKey = WKey.getPrivateKeyDataFromSeed(self.mSeed, fullPath)
+            let dpAddress = WKey.getDpAddress(chainConfig, pKey, keyTypes.1)
+            var status = -1
+            if let checkAddress = BaseData.instance.selectExistAccount(dpAddress, chainConfig.chainType) {
+                if (checkAddress.account_has_private) { status = 2 }
+                else { status = 1 }
+            } else {
+                status = 0
+            }
+            self.mDerives.append(Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey, status))
         }
         self.derivedWalletTableView.reloadData()
-        self.onDeriveAddress()
-    }
-    
-    func onDeriveAddress() {
-        print("onDeriveAddress", ChainFactory().getAllSupportPaths(mPath).count)
-        print("onDeriveAddress", ChainFactory().getAllSupportPaths(mPath))
+        self.onUpdateCnt()
         
-        let allSupportPaths = ChainFactory().getAllSupportPaths(mPath)
-        DispatchQueue(label: "key Que", attributes: .concurrent).async {
-            allSupportPaths.forEach { fullPath in
-                let pKey = WKey.getPrivateKeyDataFromSeed(self.mSeed, fullPath)
-                print(fullPath, "  ", pKey.hexEncodedString())
-            }
+        for i in 0 ..< self.mDerives.count {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                self.onFetchBalance(i)
+            })
         }
     }
     
@@ -201,7 +220,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             DispatchQueue.global(qos: .background).async {
                 do {
                     let channel = BaseNetWork.getConnection(chainConfig.chainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                    let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = derive.address! }
+                    let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = derive.dpAddress }
                     let response = try Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req).response.wait()
                     self.mDerives[position].coin = Coin.init(chainConfig.stakeDenom, "0")
                     response.balances.forEach { balance in
@@ -217,7 +236,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             }
             
         } else {
-            let request = Alamofire.request(BaseNetWork.accountInfoUrl(chainConfig.chainType, derive.address!), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+            let request = Alamofire.request(BaseNetWork.accountInfoUrl(chainConfig.chainType, derive.dpAddress), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
             request.responseJSON { (response) in
                 switch response.result {
                 case .success(let res):
@@ -261,24 +280,20 @@ struct Derive {
     var chaintype: ChainType
     var hdpathtype: Int
     var path: Int
-    var address: String?
-    var coin: Coin?
+    var fullPath: String
+    var dpAddress: String
+    var pKey: Data
     var status = -1    // 0 == ready, 1 == overide, 2 == already imported
+    var coin: Coin?
     var selected = false
     
-    init(_ chaintype: ChainType, _ hdpathtype: Int, _ path: Int) {
+    init(_ chaintype: ChainType, _ hdpathtype: Int, _ path: Int, _ fullPath: String, _ address: String, _ pKey: Data, _ status: Int) {
         self.chaintype = chaintype
         self.hdpathtype = hdpathtype
         self.path = path
-    }
-}
-
-struct HdKey {
-    var hdfullpath: String
-    var privateKey: Data?
-    
-    init(_ path: String, _ key: Data?) {
-        self.hdfullpath = path
-        self.privateKey = key
+        self.fullPath = fullPath
+        self.dpAddress = address
+        self.pKey = pKey
+        self.status = status
     }
 }

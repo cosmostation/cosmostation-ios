@@ -357,6 +357,7 @@
 "str_select_starname_domain" = "Select domain for starname.";
 "select_to_link_chain" = "Select Chain To Link";
 "select_to_link_account" = "Select Account To Link";
+"select_hd_path" = "Select Custom Path";
 
 "creat_cdp_step_0" = "Deposit collateral to borrow USDX";
 "creat_cdp_step_1" = "Insert memo (optional)";
