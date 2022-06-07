@@ -21,7 +21,7 @@ class ChainStarname: ChainConfig {
     var stakeDenom = "uiov"
     var stakeSymbol = "IOV"
     
-    var addressPrefix = "iov"
+    var addressPrefix = "star"
     let addressHdPath0 = "m/44'/234'/0'/0/X"
     
     var grpcUrl = "lcd-iov-app.cosmostation.io"

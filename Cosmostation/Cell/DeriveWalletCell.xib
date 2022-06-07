@@ -27,14 +27,17 @@
                                     <constraint firstAttribute="height" constant="42" id="zPD-Ax-FVz"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" text="cosmos13kjfhsdkjhfdksjhfksdjhfskjdhfkdjshfkjsdhfkjdshfkj" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYI-iV-9fK">
-                                <rect key="frame" x="50" y="10" width="229" height="18.5"/>
-                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" ambiguous="YES" text="loading..." lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYI-iV-9fK">
+                                <rect key="frame" x="50" y="10" width="277" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Ready" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVb-7X-5oa">
-                                <rect key="frame" x="359" y="11" width="38" height="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Ready" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVb-7X-5oa">
+                                <rect key="frame" x="337" y="11" width="60" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Gog-d3-Vb7"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -45,14 +48,14 @@
                                 <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="12345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRr-Gj-tw0">
-                                <rect key="frame" x="326" y="43.5" width="36.5" height="15"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LRr-Gj-tw0">
+                                <rect key="frame" x="342" y="43.5" width="0.0" height="15"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="COIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaL-2I-nPQ">
-                                <rect key="frame" x="364.5" y="44" width="32.5" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="loading..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaL-2I-nPQ">
+                                <rect key="frame" x="344" y="44" width="53" height="14"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -63,7 +66,7 @@
                             <constraint firstItem="rVb-7X-5oa" firstAttribute="centerY" secondItem="zYI-iV-9fK" secondAttribute="centerY" id="9iV-jy-l1j"/>
                             <constraint firstAttribute="bottom" secondItem="npi-Tp-XEk" secondAttribute="bottom" constant="12" id="EOu-M9-JKr"/>
                             <constraint firstItem="eaL-2I-nPQ" firstAttribute="trailing" secondItem="rVb-7X-5oa" secondAttribute="trailing" id="SzD-ss-QJe"/>
-                            <constraint firstItem="rVb-7X-5oa" firstAttribute="leading" secondItem="zYI-iV-9fK" secondAttribute="trailing" constant="80" id="T11-Pj-dM1"/>
+                            <constraint firstItem="rVb-7X-5oa" firstAttribute="leading" secondItem="zYI-iV-9fK" secondAttribute="trailing" constant="10" id="T11-Pj-dM1"/>
                             <constraint firstItem="npi-Tp-XEk" firstAttribute="top" secondItem="zYI-iV-9fK" secondAttribute="bottom" constant="6" id="YkC-B5-DJw"/>
                             <constraint firstItem="pY1-K1-Wpd" firstAttribute="centerY" secondItem="AAW-IW-W8i" secondAttribute="centerY" id="bdZ-b2-H6f"/>
                             <constraint firstItem="LRr-Gj-tw0" firstAttribute="centerY" secondItem="eaL-2I-nPQ" secondAttribute="centerY" id="ny9-SA-Y9w"/>
@@ -101,7 +104,7 @@
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lb-B0-wjW" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="409" height="70"/>
-                        <color key="backgroundColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.1803921568627451" alpha="0.39532410070022767" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.19215686274509802" green="0.20784313725490194" blue="0.22352941176470587" alpha="0.59948979591836737" colorSpace="calibratedRGB"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
                                 <integer key="value" value="2"/>

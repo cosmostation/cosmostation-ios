@@ -2089,7 +2089,7 @@ public class WUtils {
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST ) {
             return "CRE"
         } else if (chain == ChainType.MANTLE_MAIN) {
-            return "MANTLE"
+            return "MNTL"
         } else if (chain == ChainType.NYX_MAIN) {
             return "NYX"
         }

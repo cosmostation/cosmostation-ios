@@ -14,17 +14,45 @@ import web3swift
 
 class WKey {
     
-    static func getPrivateKeyFromWords(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> PrivateKey {
-        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
-        let hdPath = chainConfig.getHdPath(type, path)
-        let PKeyData = HDNode(seed: seed!)?.derive(path: hdPath, derivePrivateKey: true)
-        return PrivateKey.init(pk: PKeyData!.privateKey!.hexEncodedString(), coin: .bitcoin)!
+    static func getSeedFromWords(_ words: MWords) -> Data? {
+        return BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
     }
     
-    static func getDpAddress(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> String {
-        let privateKey = getPrivateKeyFromWords(chainConfig, words, type, path)
-        return getDpAddress(privateKey.publicKey, chainConfig.addressPrefix)
+    static func getPrivateKeyDataFromSeed(_ seed: Data, _ fullpath: String) -> Data {
+        return (HDNode(seed: seed)?.derive(path: fullpath, derivePrivateKey: true)!.privateKey)!
     }
+    
+    static func getPrivateKeyDataWithFullPath(_ words: MWords, _ fullpath: String) -> Data {
+        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
+        return (HDNode(seed: seed!)?.derive(path: fullpath, derivePrivateKey: true)!.privateKey)!
+    }
+    
+    static func getPrivateKeyDataFromWords(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> Data {
+        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
+        let hdPath = chainConfig.getHdPath(type, path)
+        return (HDNode(seed: seed!)?.derive(path: hdPath, derivePrivateKey: true)!.privateKey)!
+    }
+    
+    static func getDpAddress(_ chainConfig: ChainConfig, _ pkey: Data, _ type: Int) -> String {
+        let privateKey = PrivateKey.init(pk: pkey.hexEncodedString(), coin: .bitcoin)!
+        if (chainConfig.chainType == .OKEX_MAIN) {
+            if (type == 0) { return generateTenderAddressFromPrivateKey(pkey) }
+            else { return generateEthAddressFromPrivateKey(pkey) }
+            
+        } else if (chainConfig.chainType == .INJECTIVE_MAIN) {
+            let ethAddress = generateEthAddressFromPrivateKey(pkey)
+            return convertAddressEthToCosmos(ethAddress, "inj")
+            
+        } else if (chainConfig.chainType == .EVMOS_MAIN) {
+            let ethAddress = generateEthAddressFromPrivateKey(pkey)
+            return convertAddressEthToCosmos(ethAddress, "evmos")
+            
+        } else {
+            return getDpAddress(privateKey.publicKey, chainConfig.addressPrefix)
+        }
+    }
+    
+    
     
     static func getMasterKeyFromWords(_ m: [String]) -> PrivateKey {
         return PrivateKey(seed: Mnemonic.createSeed(mnemonic: m.joined(separator: " ")), coin: .bitcoin)

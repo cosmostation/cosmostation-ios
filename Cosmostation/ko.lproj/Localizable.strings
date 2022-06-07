@@ -78,7 +78,7 @@
 "delete_wallet" = "지갑 삭제";
 "delete_wallet_msg" = "지갑의 모든 정보가 삭제됩니다.\n복구 단어를 백업하지 않았을 경우 해당 지갑을 영구히 다시 복원할 수 없습니다!";
 "ready" = "준비 완료";
-"imported" = "이미 존재함";
+"imported" = "등록됨";
 "override" = "덮어쓰기";
 "validator_address" = "검증인 주소";
 "reward_address_notice_title" = "이자 지급 주소 변경";
