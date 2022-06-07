@@ -165,7 +165,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         ChainFactory().getAllKeyType().forEach { keyTypes in
             let chainConfig = ChainFactory().getChainConfig(keyTypes.0)
             let fullPath = chainConfig.getHdPath(keyTypes.1, self.mPath)
-            let pKey = WKey.getPrivateKeyDataFromSeed(self.mSeed, fullPath)
+            let pKey = KeyFac.getPrivateKeyDataFromSeed(self.mSeed, fullPath)
             let dpAddress = WKey.getDpAddress(chainConfig, pKey, keyTypes.1)
             var status = -1
             if let checkAddress = BaseData.instance.selectExistAccount(dpAddress, chainConfig.chainType) {
@@ -287,6 +287,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         existedAccount.account_from_mnemonic = true
         existedAccount.account_m_size = Int64(self.mWords.getWordsCnt())
         existedAccount.account_custom_path = Int64(derive.hdpathtype)
+        existedAccount.account_mnemonic_id = self.mWords.id
         if (BaseData.instance.overrideAccount(existedAccount) > 0 ) {
             KeychainWrapper.standard.set(self.mWords.getWords(), forKey: existedAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: existedAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
@@ -304,6 +305,8 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         newAccount.account_m_size = Int64(self.mWords.getWordsCnt())
         newAccount.account_import_time = Date().millisecondsSince1970
         newAccount.account_custom_path = Int64(derive.hdpathtype)
+        newAccount.account_mnemonic_id = self.mWords.id
+        newAccount.account_nick_name = self.mWords.getName() + " - " + String(derive.path)
         newAccount.account_sort_order = 9999
         if (BaseData.instance.insertAccount(newAccount) > 0) {
             KeychainWrapper.standard.set(self.mWords.getWords(), forKey: newAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)

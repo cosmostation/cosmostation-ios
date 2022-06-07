@@ -22,16 +22,16 @@ class WKey {
         return (HDNode(seed: seed)?.derive(path: fullpath, derivePrivateKey: true)!.privateKey)!
     }
     
-    static func getPrivateKeyDataWithFullPath(_ words: MWords, _ fullpath: String) -> Data {
-        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
-        return (HDNode(seed: seed!)?.derive(path: fullpath, derivePrivateKey: true)!.privateKey)!
-    }
+//    static func getPrivateKeyDataWithFullPath(_ words: MWords, _ fullpath: String) -> Data {
+//        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
+//        return (HDNode(seed: seed!)?.derive(path: fullpath, derivePrivateKey: true)!.privateKey)!
+//    }
     
-    static func getPrivateKeyDataFromWords(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> Data {
-        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
-        let hdPath = chainConfig.getHdPath(type, path)
-        return (HDNode(seed: seed!)?.derive(path: hdPath, derivePrivateKey: true)!.privateKey)!
-    }
+//    static func getPrivateKeyDataFromWords(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> Data {
+//        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
+//        let hdPath = chainConfig.getHdPath(type, path)
+//        return (HDNode(seed: seed!)?.derive(path: hdPath, derivePrivateKey: true)!.privateKey)!
+//    }
     
     static func getDpAddress(_ chainConfig: ChainConfig, _ pkey: Data, _ type: Int) -> String {
         let privateKey = PrivateKey.init(pk: pkey.hexEncodedString(), coin: .bitcoin)!
