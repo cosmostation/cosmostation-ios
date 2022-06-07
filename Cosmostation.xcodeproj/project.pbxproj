@@ -649,6 +649,8 @@
 		04C43B83278D5F530022D5DF /* kava_pricefeed_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B48278D5F520022D5DF /* kava_pricefeed_v1beta1_query.pb.swift */; };
 		04C43B84278D5F530022D5DF /* kava_incentive_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B49278D5F520022D5DF /* kava_incentive_v1beta1_tx.grpc.swift */; };
 		04C43B85278D5F530022D5DF /* kava_pricefeed_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B4A278D5F520022D5DF /* kava_pricefeed_v1beta1_tx.grpc.swift */; };
+		04C49374284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */; };
+		04C49375284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */; };
 		04C53944274B41FE00C1EE83 /* CommonWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */; };
 		04C53945274B41FE00C1EE83 /* CommonWCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */; };
 		04CFBD482691F8460013150B /* TxTokenSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD462691F8460013150B /* TxTokenSwapCell.swift */; };
@@ -3516,6 +3518,7 @@
 		04C43B48278D5F520022D5DF /* kava_pricefeed_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_pricefeed_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		04C43B49278D5F520022D5DF /* kava_incentive_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_incentive_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		04C43B4A278D5F520022D5DF /* kava_pricefeed_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_pricefeed_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStationTest.swift; sourceTree = "<group>"; };
 		04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWCViewController.swift; sourceTree = "<group>"; };
 		04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonWCViewController.xib; sourceTree = "<group>"; };
 		04CFBD462691F8460013150B /* TxTokenSwapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxTokenSwapCell.swift; sourceTree = "<group>"; };
@@ -4518,6 +4521,7 @@
 				0451FC96282A3B4200214FDA /* ChainStargaze.swift */,
 				0451FC55282A398E00214FDA /* ChainStarname.swift */,
 				0451FCB4282A3BD700214FDA /* ChainUmee.swift */,
+				04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */,
 			);
 			path = Chains;
 			sourceTree = "<group>";
@@ -7639,6 +7643,7 @@
 				1817CC38283E2CE600523713 /* evmos_inflation_v1_query.pb.swift in Sources */,
 				1817CC08283E2CE600523713 /* starname_iov_escrow_v1beta1_events.pb.swift in Sources */,
 				18FFB363281AF533004E65BB /* WalletSentinelCell.swift in Sources */,
+				04C49375284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */,
 				0451FC86282A3AC700214FDA /* ChainMedibloc.swift in Sources */,
 				18FFB367281AF533004E65BB /* Cdp.swift in Sources */,
 				1817CAC8283E2CE500523713 /* osmosis_superfluid_tx.pb.swift in Sources */,
@@ -9285,6 +9290,7 @@
 				283850202448A6B000E5DEF2 /* TxHtlcClaimCell.swift in Sources */,
 				04D3390F27E826F100E82AA7 /* crescent_liquidity_v1beta1_liquidity.pb.swift in Sources */,
 				040FAAC8275F55C400229F6F /* gravity_v1_gravity.pb.swift in Sources */,
+				04C49374284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */,
 				04C43B58278D5F520022D5DF /* kava_incentive_v1beta1_genesis.pb.swift in Sources */,
 				E1827E212256292900BC0350 /* ValidatorDetailMyActionCell.swift in Sources */,
 				28E0458A269B35480022A366 /* SwapViewController.swift in Sources */,

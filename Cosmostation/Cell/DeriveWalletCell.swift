@@ -31,23 +31,47 @@ class DeriveWalletCell: UITableViewCell {
         denomLabel.text = "loading..."
     }
     
-    func onBindWallet(_ words: MWords, _ chainType: ChainType,  _ type: Int, _ path: Int) {
-//        addressLabel.text = "loading..."
-//        amountLabel.text = ""
-//        denomLabel.text = "loading..."
-//        
-//        let chainConfig = ChainFactory().getChainConfig(chainType)
-//        rootCardView.backgroundColor = WUtils.getChainBg(chainConfig.chainType)
-//        chainImgView.image = chainConfig.chainImg
-//        pathLabel.text = chainConfig.getHdPath(type, path)
-//        
-//        var dpAddress = ""
-//        DispatchQueue.global().async {
-//            dpAddress = WKey.getDpAddress(chainConfig, words, type, path)
-//            DispatchQueue.main.async(execute: {
-//                self.addressLabel.text = dpAddress
-//            });
-//        }
+    func onBindWallet(_ derive: Derive) {
+        let chainConfig = ChainFactory().getChainConfig(derive.chaintype)
+        chainImgView.image = chainConfig.chainImg
+        pathLabel.text = chainConfig.getHdPath(derive.hdpathtype, derive.path)
+        addressLabel.text = derive.dpAddress
+        
+        if let coin = derive.coin {
+            WUtils.showCoinDp(coin, denomLabel, amountLabel, derive.chaintype)
+        } else {
+            amountLabel.text = ""
+            denomLabel.text = ""
+        }
+        
+        if (derive.status == -1) {
+            statusLabel.text = ""
+            dimCardView.isHidden = true
+            rootCardView.borderWidth = 0.5
+            rootCardView.borderColor = UIColor(hexString: "#4b4f54")
+            
+        } else if (derive.status == 0) {
+            statusLabel.text = ""
+            dimCardView.isHidden = true
+            rootCardView.borderWidth = 0.5
+            rootCardView.borderColor = UIColor(hexString: "#4b4f54")
+            
+        } else if (derive.status == 1) {
+            statusLabel.text = ""
+            dimCardView.isHidden = true
+            rootCardView.borderWidth = 0.5
+            rootCardView.borderColor = UIColor(hexString: "#4b4f54")
+            
+        } else if (derive.status == 2) {
+            statusLabel.text = "Imported"
+            dimCardView.isHidden = false
+            rootCardView.borderWidth = 0.0
+        }
+        
+        if (derive.selected == true) {
+            rootCardView.borderWidth = 1.2
+            rootCardView.borderColor = .white
+        }
     }
     
 }

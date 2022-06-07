@@ -330,6 +330,8 @@
 "select_to_link_chain" = "링크하실 체인을 고르세요.";
 "select_to_link_account" = "링크하실 계정을 고르세요.";
 "select_hd_path" = "지정 경로를 선택 하세요";
+"import_account_title" = "지갑 추가";
+"import_account_msg" = "%@개의 지갑을 추가하시겠습니까?";
 
 "current_price_format" = "현재 %@ 가격";
 "liquidation_price_format" = "청산 %@ 가격";
@@ -799,6 +801,7 @@ support@cosmostation.io";
 "error_not_support_chain_msg" = "%@는 지원하지 않는 체인입니다.";
 "error_no_accounts_chain_title" = "오류";
 "error_no_accounts_chain_msg" = "해당 체인에 대한 지갑이 없습니다";
+"error_not_selected_to_import" = "등록할 지갑을 골라주세요";
 
 
 

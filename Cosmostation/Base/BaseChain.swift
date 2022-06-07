@@ -126,6 +126,11 @@ class ChainFactory {
             return ChainStarname(chainType)
         case .UMEE_MAIN:
             return ChainUmee(chainType)
+            
+            
+        case .STATION_TEST:
+            return StationTest(chainType)
+            
         default:
             return ChainCosmos(chainType)
         }

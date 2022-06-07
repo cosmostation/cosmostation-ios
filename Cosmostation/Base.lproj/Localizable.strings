@@ -358,6 +358,8 @@
 "select_to_link_chain" = "Select Chain To Link";
 "select_to_link_account" = "Select Account To Link";
 "select_hd_path" = "Select Custom Path";
+"import_account_title" = "Import Wallet";
+"import_account_msg" = "Would you like to add %@ wallet(s)?";
 
 "creat_cdp_step_0" = "Deposit collateral to borrow USDX";
 "creat_cdp_step_1" = "Insert memo (optional)";
@@ -802,6 +804,7 @@ support@cosmostation.io";
 "error_not_support_chain_msg" = "%@ are not currently supported chain";
 "error_no_accounts_chain_title" = "Error";
 "error_no_accounts_chain_msg" = "No wallet for that chain";
+"error_not_selected_to_import" = "Select address to import";
 
 
 

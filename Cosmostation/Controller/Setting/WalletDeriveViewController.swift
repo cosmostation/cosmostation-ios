@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import GRPC
 import NIO
+import SwiftKeychainWrapper
 
 class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -64,47 +65,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"DeriveWalletCell") as? DeriveWalletCell
-        let derive = mDerives[indexPath.row]
-        let chainConfig = ChainFactory().getChainConfig(derive.chaintype)
-        cell?.chainImgView.image = chainConfig.chainImg
-        cell?.pathLabel.text = chainConfig.getHdPath(derive.hdpathtype, derive.path)
-        cell!.addressLabel.text = derive.dpAddress
-        
-        if let coin = derive.coin {
-            WUtils.showCoinDp(coin, cell!.denomLabel, cell!.amountLabel, derive.chaintype)
-        } else {
-            cell!.amountLabel.text = ""
-            cell!.denomLabel.text = ""
-        }
-        
-        if (derive.status == -1) {
-            cell!.statusLabel.text = ""
-            cell?.dimCardView.isHidden = true
-            cell?.rootCardView.borderWidth = 0.5
-            cell?.rootCardView.borderColor = UIColor(hexString: "#4b4f54")
-            
-        } else if (derive.status == 0) {
-            cell!.statusLabel.text = ""
-            cell?.dimCardView.isHidden = true
-            cell?.rootCardView.borderWidth = 0.5
-            cell?.rootCardView.borderColor = UIColor(hexString: "#4b4f54")
-            
-        } else if (derive.status == 1) {
-            cell!.statusLabel.text = ""
-            cell?.dimCardView.isHidden = true
-            cell?.rootCardView.borderWidth = 0.5
-            cell?.rootCardView.borderColor = UIColor(hexString: "#4b4f54")
-            
-        } else if (derive.status == 2) {
-            cell!.statusLabel.text = "Imported"
-            cell?.dimCardView.isHidden = false
-            cell?.rootCardView.borderWidth = 0.0
-        }
-        
-        if (derive.selected == true) {
-            cell?.rootCardView.borderWidth = 1.2
-            cell?.rootCardView.borderColor = .white
-        }
+        cell?.onBindWallet(mDerives[indexPath.row])
         return cell!
     }
     
@@ -122,9 +83,10 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { (UIAlertAction) in
 //            print("\(self.mPath)")
+            self.showWaittingAlert()
+            self.selectedHDPathLabel.text = String(self.mPath)
             self.mDerives.removeAll()
             self.derivedWalletTableView.reloadData()
-            self.showWaittingAlert()
             DispatchQueue.main.async(execute: {
                 self.onGetAllKeyTypes()
                 self.hideWaittingAlert()
@@ -154,6 +116,19 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
 
     @IBAction func onClickDerive(_ sender: UIButton) {
+        let selectedCnt = mDerives.filter { $0.selected == true }.count
+        if (selectedCnt > 0) {
+            let msg = String(format: NSLocalizedString("import_account_msg", comment: ""), String(selectedCnt))
+            let addingAlert = UIAlertController (title: NSLocalizedString("import_account_title", comment: "") , message: msg, preferredStyle: .alert)
+            addingAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil))
+            addingAlert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { (UIAlertAction) in
+                self.onSaveAccount()
+            }))
+            self.present(addingAlert, animated: true, completion: nil)
+            
+        } else {
+            self.onShowToast(NSLocalizedString("error_not_selected_to_import", comment: ""))
+        }
     }
     
     func onUpdateCnt() {
@@ -187,7 +162,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     func onGetAllKeyTypes() {
 //        print("onGetAllKeyTypes ", mPath)
-        self.selectedHDPathLabel.text = String(self.mPath)
         ChainFactory().getAllKeyType().forEach { keyTypes in
             let chainConfig = ChainFactory().getChainConfig(keyTypes.0)
             let fullPath = chainConfig.getHdPath(keyTypes.1, self.mPath)
@@ -200,8 +174,12 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             } else {
                 status = 0
             }
-            self.mDerives.append(Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey, status))
+            let derive = Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey, status)
+            if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress })) {
+                self.mDerives.append(derive)
+            }
         }
+        
         self.derivedWalletTableView.reloadData()
         self.onUpdateCnt()
         
@@ -272,6 +250,64 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                     print(error)
                 }
             }
+        }
+    }
+    
+    func onSaveAccount() {
+        self.showWaittingAlert()
+        DispatchQueue.global().async {
+            self.mDerives.forEach { derive in
+                if (derive.selected == true) {
+                    if (derive.status == 1) {
+                        self.onOverideAccount(derive)
+                    } else {
+                        self.onCreateAccount(derive)
+                    }
+                }
+            }
+            
+            DispatchQueue.main.async(execute: {
+                self.hideWaittingAlert()
+                let initDerive = self.mDerives.filter { $0.selected == true }.first!
+                let initAccount = BaseData.instance.selectExistAccount(initDerive.dpAddress, initDerive.chaintype)!
+                BaseData.instance.setLastTab(0)
+                BaseData.instance.setRecentAccountId(initAccount.account_id)
+                BaseData.instance.setRecentChain(initDerive.chaintype)
+                
+                self.onStartMainTab()
+            });
+        }
+    }
+    
+    func onOverideAccount(_ derive: Derive) {
+        print("onOverideAccount ", derive.dpAddress)
+        let existedAccount = BaseData.instance.selectExistAccount(derive.dpAddress, derive.chaintype)!
+        existedAccount.account_path = String(derive.path)
+        existedAccount.account_has_private = true
+        existedAccount.account_from_mnemonic = true
+        existedAccount.account_m_size = Int64(self.mWords.getWordsCnt())
+        existedAccount.account_custom_path = Int64(derive.hdpathtype)
+        if (BaseData.instance.overrideAccount(existedAccount) > 0 ) {
+            KeychainWrapper.standard.set(self.mWords.getWords(), forKey: existedAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: existedAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+        }
+    }
+    
+    func onCreateAccount(_ derive: Derive) {
+        print("onCreateAccount ", derive.dpAddress)
+        let newAccount = Account.init(isNew: true)
+        newAccount.account_path = String(derive.path)
+        newAccount.account_address = derive.dpAddress
+        newAccount.account_base_chain = WUtils.getChainDBName(derive.chaintype)
+        newAccount.account_has_private = true
+        newAccount.account_from_mnemonic = true
+        newAccount.account_m_size = Int64(self.mWords.getWordsCnt())
+        newAccount.account_import_time = Date().millisecondsSince1970
+        newAccount.account_custom_path = Int64(derive.hdpathtype)
+        newAccount.account_sort_order = 9999
+        if (BaseData.instance.insertAccount(newAccount) > 0) {
+            KeychainWrapper.standard.set(self.mWords.getWords(), forKey: newAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
         }
     }
 }
