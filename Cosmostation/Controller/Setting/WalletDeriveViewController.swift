@@ -14,6 +14,7 @@ import SwiftKeychainWrapper
 
 class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var mnemonicNameLabel: UILabel!
     @IBOutlet weak var walletCntLabel: UILabel!
     @IBOutlet weak var totalWalletCntLabel: UILabel!
@@ -21,6 +22,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet weak var selectedHDPathLabel: UILabel!
     @IBOutlet weak var derivedWalletTableView: UITableView!
     
+    var mBackable = true
     var mWords: MWords!
     var mSeed: Data!
     var mPath = 0
@@ -39,6 +41,12 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         self.walletCntLabel.text = ""
         self.totalWalletCntLabel.text = ""
         self.selectedHDPathLabel.text = String(mPath)
+        
+        if (mBackable) {
+            backBtn.isHidden = false
+        } else {
+            backBtn.isHidden = true
+        }
         
         let tapPath = UITapGestureRecognizer(target: self, action: #selector(self.onClickPath))
         self.pathCardView.addGestureRecognizer(tapPath)

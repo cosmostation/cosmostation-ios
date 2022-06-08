@@ -138,7 +138,9 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
                     let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
                     walletDeriveVC.mWords = BaseData.instance.selectAllMnemonics().filter { $0.getWords() == userInputSum }.first
+                    walletDeriveVC.mBackable = false
                     self.navigationItem.title = ""
+                    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
                     self.navigationController?.pushViewController(walletDeriveVC, animated: true)
                 });
             }
