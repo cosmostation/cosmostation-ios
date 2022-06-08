@@ -35,7 +35,7 @@ class DeriveWalletCell: UITableViewCell {
         let chainConfig = ChainFactory().getChainConfig(derive.chaintype)
         chainImgView.image = chainConfig.chainImg
         if (isPrivateKeyMode) {
-            pathLabel.text = "Hello"
+            pathLabel.text = ""
         } else {
             pathLabel.text = chainConfig.getHdPath(derive.hdpathtype, derive.path)
         }

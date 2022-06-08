@@ -8,11 +8,12 @@
 
 import UIKit
 
-class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, PasswordViewDelegate {
     
     @IBOutlet weak var mnemonicListTableView: UITableView!
     
     var mMyMnemonics = Array<MWords>()
+    var mSelected: Int64?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +48,8 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let mnemonicDetailVC = MnemonicDetailViewController(nibName: "MnemonicDetailViewController", bundle: nil)
-        mnemonicDetailVC.mnemonicId = mMyMnemonics[indexPath.row].id
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(mnemonicDetailVC, animated: true)
+        self.mSelected = mMyMnemonics[indexPath.row].id
+        self.onCheckPassword()
     }
 
     @IBAction func onClickCreate(_ sender: UIButton) {
@@ -63,5 +62,29 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
         let mnemonicImportVC = MnemonicRestoreViewController(nibName: "MnemonicRestoreViewController", bundle: nil)
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(mnemonicImportVC, animated: true)
+    }
+    
+    func onCheckPassword() {
+        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        self.navigationItem.title = ""
+        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+        passwordVC.resultDelegate = self
+        if (!BaseData.instance.hasPassword()) {
+            passwordVC.mTarget = PASSWORD_ACTION_INIT
+        } else  {
+            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+        }
+        self.navigationController?.pushViewController(passwordVC, animated: false)
+    }
+    
+    func passwordResponse(result: Int) {
+        if (result == PASSWORD_RESUKT_OK) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                let mnemonicDetailVC = MnemonicDetailViewController(nibName: "MnemonicDetailViewController", bundle: nil)
+                mnemonicDetailVC.mnemonicId = self.mSelected!
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(mnemonicDetailVC, animated: true)
+            });
+        }
     }
 }
