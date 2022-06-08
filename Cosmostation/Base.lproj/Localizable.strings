@@ -805,6 +805,7 @@ support@cosmostation.io";
 "error_no_accounts_chain_title" = "Error";
 "error_no_accounts_chain_msg" = "No wallet for that chain";
 "error_not_selected_to_import" = "Select address to import";
+"error_alreay_imported_mnemonic" = "Alreay imported menonic";
 
 
 

@@ -58,4 +58,10 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(mnemonicCreateVC, animated: true)
     }
+    
+    @IBAction func onClickimport(_ sender: UIButton) {
+        let mnemonicImportVC = MnemonicRestoreViewController(nibName: "MnemonicRestoreViewController", bundle: nil)
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(mnemonicImportVC, animated: true)
+    }
 }

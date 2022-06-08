@@ -26,45 +26,74 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="736"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZE-Hr-fBR">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uCe-ka-5Gg">
                     <rect key="frame" x="16" y="796" width="382" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="ONc-Mx-UBd"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                    <state key="normal" title="Create Mnemonic">
-                        <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="onClickCreate:" destination="-1" eventType="touchUpInside" id="QLE-ZN-7zL"/>
-                    </connections>
-                </button>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SlT-h2-E5j">
+                            <rect key="frame" x="0.0" y="0.0" width="187" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="KZ8-0p-eq9"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                            <state key="normal" title="Import Mnemonic">
+                                <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickimport:" destination="-1" eventType="touchUpInside" id="RI6-DZ-6Eg"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Skv-jV-730">
+                            <rect key="frame" x="195" y="0.0" width="187" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="AMH-89-YuK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                            <state key="normal" title="Create Mnemonic">
+                                <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickCreate:" destination="-1" eventType="touchUpInside" id="UZn-yL-0wC"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="VSt-kQ-CHq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6cd-d7-Te1"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tZE-Hr-fBR" secondAttribute="bottom" constant="16" id="95m-9d-fh9"/>
                 <constraint firstAttribute="bottom" secondItem="VSt-kQ-CHq" secondAttribute="bottom" id="B2p-vV-LK1"/>
                 <constraint firstItem="Hd5-Ip-IED" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DgK-DU-TPI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uCe-ka-5Gg" secondAttribute="bottom" constant="16" id="Fr9-Xu-sYq"/>
+                <constraint firstItem="uCe-ka-5Gg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="HSr-ll-6Me"/>
+                <constraint firstItem="uCe-ka-5Gg" firstAttribute="top" secondItem="Hd5-Ip-IED" secondAttribute="bottom" constant="16" id="I62-Nn-1hz"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uCe-ka-5Gg" secondAttribute="trailing" constant="16" id="Tmm-O8-8Ze"/>
                 <constraint firstAttribute="top" secondItem="VSt-kQ-CHq" secondAttribute="top" id="Xju-oH-Z0a"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VSt-kQ-CHq" secondAttribute="trailing" id="Y8G-ce-L3k"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tZE-Hr-fBR" secondAttribute="trailing" constant="16" id="dPt-2U-w0m"/>
                 <constraint firstItem="Hd5-Ip-IED" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kHS-Bj-7uv"/>
-                <constraint firstItem="tZE-Hr-fBR" firstAttribute="top" secondItem="Hd5-Ip-IED" secondAttribute="bottom" constant="16" id="nRM-rN-BM5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Hd5-Ip-IED" secondAttribute="trailing" id="s5Y-8s-jCT"/>
-                <constraint firstItem="tZE-Hr-fBR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="uxO-PZ-SpE"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="125.89285714285714"/>
         </view>

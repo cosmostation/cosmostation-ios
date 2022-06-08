@@ -802,6 +802,7 @@ support@cosmostation.io";
 "error_no_accounts_chain_title" = "오류";
 "error_no_accounts_chain_msg" = "해당 체인에 대한 지갑이 없습니다";
 "error_not_selected_to_import" = "등록할 지갑을 골라주세요";
+"error_alreay_imported_mnemonic" = "이미 등록된 니모닉 입니다.";
 
 
 

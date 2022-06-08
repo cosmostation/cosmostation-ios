@@ -651,6 +651,10 @@
 		04C43B85278D5F530022D5DF /* kava_pricefeed_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B4A278D5F520022D5DF /* kava_pricefeed_v1beta1_tx.grpc.swift */; };
 		04C49374284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */; };
 		04C49375284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */; };
+		04C49378284F465D00ECF4D2 /* MnemonicRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C49376284F465D00ECF4D2 /* MnemonicRestoreViewController.swift */; };
+		04C49379284F465D00ECF4D2 /* MnemonicRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C49376284F465D00ECF4D2 /* MnemonicRestoreViewController.swift */; };
+		04C4937A284F465D00ECF4D2 /* MnemonicRestoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C49377284F465D00ECF4D2 /* MnemonicRestoreViewController.xib */; };
+		04C4937B284F465D00ECF4D2 /* MnemonicRestoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C49377284F465D00ECF4D2 /* MnemonicRestoreViewController.xib */; };
 		04C53944274B41FE00C1EE83 /* CommonWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */; };
 		04C53945274B41FE00C1EE83 /* CommonWCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */; };
 		04CFBD482691F8460013150B /* TxTokenSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD462691F8460013150B /* TxTokenSwapCell.swift */; };
@@ -3519,6 +3523,8 @@
 		04C43B49278D5F520022D5DF /* kava_incentive_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_incentive_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		04C43B4A278D5F520022D5DF /* kava_pricefeed_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kava_pricefeed_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStationTest.swift; sourceTree = "<group>"; };
+		04C49376284F465D00ECF4D2 /* MnemonicRestoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicRestoreViewController.swift; sourceTree = "<group>"; };
+		04C49377284F465D00ECF4D2 /* MnemonicRestoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicRestoreViewController.xib; sourceTree = "<group>"; };
 		04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWCViewController.swift; sourceTree = "<group>"; };
 		04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonWCViewController.xib; sourceTree = "<group>"; };
 		04CFBD462691F8460013150B /* TxTokenSwapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxTokenSwapCell.swift; sourceTree = "<group>"; };
@@ -6013,6 +6019,8 @@
 				047FB703281EBA14009D8AAF /* MnemonicDetailViewController.xib */,
 				047FB706281EBA25009D8AAF /* MnemonicCreateViewController.swift */,
 				047FB707281EBA25009D8AAF /* MnemonicCreateViewController.xib */,
+				04C49376284F465D00ECF4D2 /* MnemonicRestoreViewController.swift */,
+				04C49377284F465D00ECF4D2 /* MnemonicRestoreViewController.xib */,
 				E19A32212254A61E00A05E41 /* WalletManageViewController.swift */,
 				E103DACB228129FD006C2146 /* WalletManageViewController.xib */,
 				E1827E0F2254C92900BC0350 /* WalletDetailViewController.swift */,
@@ -6805,6 +6813,7 @@
 				18FFB76E281AF533004E65BB /* TokenDetailStakingCell.xib in Resources */,
 				18FFB76F281AF533004E65BB /* OtherValidatorCell.xib in Resources */,
 				18FFB770281AF533004E65BB /* StepEventHorizon1ViewController.xib in Resources */,
+				04C4937B284F465D00ECF4D2 /* MnemonicRestoreViewController.xib in Resources */,
 				18FFB771281AF533004E65BB /* EditDisplayChainCell.xib in Resources */,
 				18FFB772281AF533004E65BB /* TxMultiTransferCell.xib in Resources */,
 				18FFB773281AF533004E65BB /* Osmosis.storyboard in Resources */,
@@ -7223,6 +7232,7 @@
 				283E94872549333B007A9291 /* AccountDetailViewController.xib in Resources */,
 				04D93A5927B1347900F8CE0D /* WalletKonstellationCell.xib in Resources */,
 				E103DAAF22812773006C2146 /* ValidatorDetailHistoryEmpty.xib in Resources */,
+				04C4937A284F465D00ECF4D2 /* MnemonicRestoreViewController.xib in Resources */,
 				2807DB3A2788182000016571 /* GenProfile0ViewController.xib in Resources */,
 				28393B8426B9023D00DF2F88 /* HdacBalancePopup.xib in Resources */,
 				283E750026CE247C0097CC04 /* StakingTokenGrpcViewController.xib in Resources */,
@@ -8445,6 +8455,7 @@
 				18FFB660281AF533004E65BB /* StepDelegateAmountViewController.swift in Sources */,
 				18FFB664281AF533004E65BB /* StarnameAssets.swift in Sources */,
 				1817CB3D283E2CE500523713 /* cryptoorg_nft_v1_query.grpc.swift in Sources */,
+				04C49379284F465D00ECF4D2 /* MnemonicRestoreViewController.swift in Sources */,
 				18FFB667281AF533004E65BB /* KavaCdpParam.swift in Sources */,
 				18FFB669281AF533004E65BB /* WalletAxelarCell.swift in Sources */,
 				1817CBCF283E2CE600523713 /* ibc_core_client_v1_genesis.pb.swift in Sources */,
@@ -9344,6 +9355,7 @@
 				2815AA70243430D4008B23AA /* StepDrawDebtCdpAmountViewController.swift in Sources */,
 				E19A32232254A61E00A05E41 /* WalletManageViewController.swift in Sources */,
 				E1F7F634234311F8000E597F /* BnbToken.swift in Sources */,
+				04C49378284F465D00ECF4D2 /* MnemonicRestoreViewController.swift in Sources */,
 				E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */,
 				040FA942275F55C300229F6F /* cosmos_auth_v1beta1_auth.pb.swift in Sources */,
 				040FA84A275F55C200229F6F /* cosmos_staking_v1beta1_query.grpc.swift in Sources */,
