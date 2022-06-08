@@ -202,7 +202,9 @@
 
 "Up0-Ck-BHz.text" = "지갑 관리";
 
-"ToR-Yl-K3j.text" = "지갑 추가";
+"ToR-Yl-K3j.text" = "개인키 등록";
+
+"Unv-6D-RIv.text" = "관찰 주소 등록";
 
 /* Class = "UILabel"; text = "Available"; ObjectID = "tH3-op-17D"; */
 "tH3-op-17D.text" = "사용 가능 수량";

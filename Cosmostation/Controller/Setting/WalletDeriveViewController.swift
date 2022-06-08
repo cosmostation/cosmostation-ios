@@ -18,12 +18,15 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet weak var mnemonicNameLabel: UILabel!
     @IBOutlet weak var walletCntLabel: UILabel!
     @IBOutlet weak var totalWalletCntLabel: UILabel!
+    @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var pathCardView: CardView!
     @IBOutlet weak var selectedHDPathLabel: UILabel!
     @IBOutlet weak var derivedWalletTableView: UITableView!
     
+    var mPrivateKeyMode = false
     var mBackable = true
     var mWords: MWords!
+    var mPrivateKey: Data!
     var mSeed: Data!
     var mPath = 0
     var mDerives = Array<Derive>()
@@ -37,21 +40,23 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         self.derivedWalletTableView.rowHeight = UITableView.automaticDimension
         self.derivedWalletTableView.estimatedRowHeight = UITableView.automaticDimension
         
-        self.mnemonicNameLabel.text = self.mWords.getName()
-        self.walletCntLabel.text = ""
-        self.totalWalletCntLabel.text = ""
-        self.selectedHDPathLabel.text = String(mPath)
-        
-        if (mBackable) {
-            backBtn.isHidden = false
-        } else {
-            backBtn.isHidden = true
+        if (!mBackable) {
+            self.backBtn.isHidden = true
         }
         
-        let tapPath = UITapGestureRecognizer(target: self, action: #selector(self.onClickPath))
-        self.pathCardView.addGestureRecognizer(tapPath)
-        
-        self.getSeedFormWords()
+        if (mPrivateKeyMode) {
+            self.mnemonicNameLabel.text = NSLocalizedString("title_restore_privatekey", comment: "")
+            self.pathLabel.isHidden = true
+            self.pathCardView.isHidden = true
+            self.onGetAllKeyTypes()
+            
+        } else {
+            self.mnemonicNameLabel.text = self.mWords.getName()
+            self.selectedHDPathLabel.text = String(mPath)
+            let tapPath = UITapGestureRecognizer(target: self, action: #selector(self.onClickPath))
+            self.pathCardView.addGestureRecognizer(tapPath)
+            self.getSeedFormWords()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,7 +78,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"DeriveWalletCell") as? DeriveWalletCell
-        cell?.onBindWallet(mDerives[indexPath.row])
+        cell?.onBindWallet(mDerives[indexPath.row], mPrivateKeyMode)
         return cell!
     }
     
@@ -169,22 +174,43 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onGetAllKeyTypes() {
-//        print("onGetAllKeyTypes ", mPath)
-        ChainFactory().getAllKeyType().forEach { keyTypes in
-            let chainConfig = ChainFactory().getChainConfig(keyTypes.0)
-            let fullPath = chainConfig.getHdPath(keyTypes.1, self.mPath)
-            let pKey = KeyFac.getPrivateKeyDataFromSeed(self.mSeed, fullPath)
-            let dpAddress = WKey.getDpAddress(chainConfig, pKey, keyTypes.1)
-            var status = -1
-            if let checkAddress = BaseData.instance.selectExistAccount(dpAddress, chainConfig.chainType) {
-                if (checkAddress.account_has_private) { status = 2 }
-                else { status = 1 }
-            } else {
-                status = 0
+        print("onGetAllKeyTypes ", mPath)
+        if (mPrivateKeyMode) {
+            ChainFactory().getAllKeyType().forEach { keyTypes in
+                let chainConfig = ChainFactory().getChainConfig(keyTypes.0)
+                let fullPath = chainConfig.getHdPath(keyTypes.1, self.mPath)
+                let pKey = self.mPrivateKey
+                let dpAddress = WKey.getDpAddress(chainConfig, pKey!, keyTypes.1)
+                var status = -1
+                if let checkAddress = BaseData.instance.selectExistAccount(dpAddress, chainConfig.chainType) {
+                    if (checkAddress.account_has_private) { status = 2 }
+                    else { status = 1 }
+                } else {
+                    status = 0
+                }
+                let derive = Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey!, status)
+                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress })) {
+                    self.mDerives.append(derive)
+                }
             }
-            let derive = Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey, status)
-            if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress })) {
-                self.mDerives.append(derive)
+            
+        } else {
+            ChainFactory().getAllKeyType().forEach { keyTypes in
+                let chainConfig = ChainFactory().getChainConfig(keyTypes.0)
+                let fullPath = chainConfig.getHdPath(keyTypes.1, self.mPath)
+                let pKey = KeyFac.getPrivateKeyDataFromSeed(self.mSeed, fullPath)
+                let dpAddress = WKey.getDpAddress(chainConfig, pKey, keyTypes.1)
+                var status = -1
+                if let checkAddress = BaseData.instance.selectExistAccount(dpAddress, chainConfig.chainType) {
+                    if (checkAddress.account_has_private) { status = 2 }
+                    else { status = 1 }
+                } else {
+                    status = 0
+                }
+                let derive = Derive.init(chainConfig.chainType, keyTypes.1, self.mPath, fullPath, dpAddress, pKey, status)
+                if (!self.mDerives.contains(where: { $0.dpAddress == derive.dpAddress })) {
+                    self.mDerives.append(derive)
+                }
             }
         }
         
@@ -288,37 +314,55 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onOverideAccount(_ derive: Derive) {
-        print("onOverideAccount ", derive.dpAddress)
+//        print("onOverideAccount ", derive.dpAddress)
         let existedAccount = BaseData.instance.selectExistAccount(derive.dpAddress, derive.chaintype)!
         existedAccount.account_path = String(derive.path)
-        existedAccount.account_has_private = true
-        existedAccount.account_from_mnemonic = true
-        existedAccount.account_m_size = Int64(self.mWords.getWordsCnt())
         existedAccount.account_custom_path = Int64(derive.hdpathtype)
-        existedAccount.account_mnemonic_id = self.mWords.id
-        if (BaseData.instance.overrideAccount(existedAccount) > 0 ) {
-            KeychainWrapper.standard.set(self.mWords.getWords(), forKey: existedAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
-            KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: existedAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+        existedAccount.account_has_private = true
+        
+        if (mPrivateKeyMode) {
+            existedAccount.account_from_mnemonic = false
+            if (BaseData.instance.overrideAccount(existedAccount) > 0 ) {
+                KeychainWrapper.standard.set(mPrivateKey.hexEncodedString(), forKey: existedAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            }
+            
+        } else {
+            existedAccount.account_from_mnemonic = true
+            existedAccount.account_m_size = Int64(self.mWords.getWordsCnt())
+            existedAccount.account_mnemonic_id = self.mWords.id
+            if (BaseData.instance.overrideAccount(existedAccount) > 0 ) {
+                KeychainWrapper.standard.set(self.mWords.getWords(), forKey: existedAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+                KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: existedAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            }
         }
     }
     
     func onCreateAccount(_ derive: Derive) {
-        print("onCreateAccount ", derive.dpAddress)
+//        print("onCreateAccount ", derive.dpAddress)
         let newAccount = Account.init(isNew: true)
         newAccount.account_path = String(derive.path)
+        newAccount.account_custom_path = Int64(derive.hdpathtype)
         newAccount.account_address = derive.dpAddress
         newAccount.account_base_chain = WUtils.getChainDBName(derive.chaintype)
         newAccount.account_has_private = true
-        newAccount.account_from_mnemonic = true
-        newAccount.account_m_size = Int64(self.mWords.getWordsCnt())
         newAccount.account_import_time = Date().millisecondsSince1970
-        newAccount.account_custom_path = Int64(derive.hdpathtype)
-        newAccount.account_mnemonic_id = self.mWords.id
-        newAccount.account_nick_name = self.mWords.getName() + " - " + String(derive.path)
         newAccount.account_sort_order = 9999
-        if (BaseData.instance.insertAccount(newAccount) > 0) {
-            KeychainWrapper.standard.set(self.mWords.getWords(), forKey: newAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
-            KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+        
+        if (mPrivateKeyMode) {
+            newAccount.account_from_mnemonic = false
+            if (BaseData.instance.insertAccount(newAccount) > 0) {
+                KeychainWrapper.standard.set(mPrivateKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            }
+            
+        } else {
+            newAccount.account_from_mnemonic = true
+            newAccount.account_m_size = Int64(self.mWords.getWordsCnt())
+            newAccount.account_mnemonic_id = self.mWords.id
+            newAccount.account_nick_name = self.mWords.getName() + " - " + String(derive.path)
+            if (BaseData.instance.insertAccount(newAccount) > 0) {
+                KeychainWrapper.standard.set(self.mWords.getWords(), forKey: newAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+                KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            }
         }
     }
 }

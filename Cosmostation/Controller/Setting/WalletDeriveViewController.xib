@@ -14,6 +14,7 @@
                 <outlet property="derivedWalletTableView" destination="5h5-QG-NvX" id="7RJ-1q-mEZ"/>
                 <outlet property="mnemonicNameLabel" destination="l80-IG-HYS" id="N8y-AA-xE8"/>
                 <outlet property="pathCardView" destination="JPy-W7-6tb" id="j8E-VN-WaN"/>
+                <outlet property="pathLabel" destination="xa8-gy-ihg" id="5c3-2c-lkl"/>
                 <outlet property="selectedHDPathLabel" destination="Syo-2g-U0Z" id="ktI-S3-0Ea"/>
                 <outlet property="totalWalletCntLabel" destination="Tze-yK-1ln" id="YUD-yK-5iR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -50,8 +51,8 @@
                                 <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="h5s-ot-2Uo"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/ 40" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tze-yK-1ln">
-                            <rect key="frame" x="376.5" y="16.5" width="25.5" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tze-yK-1ln">
+                            <rect key="frame" x="402" y="25" width="0.0" height="0.0"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="pAa-hq-yjw"/>
                             </constraints>
@@ -59,8 +60,8 @@
                             <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvd-Ti-dAg">
-                            <rect key="frame" x="357.5" y="16.5" width="15" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvd-Ti-dAg">
+                            <rect key="frame" x="398" y="25" width="0.0" height="0.0"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="Zki-nF-CZi"/>
                             </constraints>

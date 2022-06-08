@@ -127,13 +127,28 @@ class MnemonicDetailViewController: BaseViewController {
     }
     
     @IBAction func onClickDeriveWallet(_ sender: UIButton) {
+        if (BaseData.instance.getUsingEnginerMode()) {
+            let enginerAlert = UIAlertController(title: NSLocalizedString("str_enginer_is_on_title", comment: ""),
+                                                 message: NSLocalizedString("str_enginer_is_on_msg", comment: ""),
+                                                 preferredStyle: .alert)
+            enginerAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default))
+            enginerAlert.addAction(UIAlertAction(title:NSLocalizedString("continue", comment: ""), style: .destructive, handler: { _ in
+                self.onDeriveWallet()
+            }))
+            self.present(enginerAlert, animated: true)
+        } else {
+            self.onDeriveWallet()
+        }
+    }
+    
+    @IBAction func onClickDelete(_ sender: UIButton) {
+    }
+    
+    func onDeriveWallet() {
         let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
         walletDeriveVC.mWords = mWords
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(walletDeriveVC, animated: true)
-    }
-    
-    @IBAction func onClickDelete(_ sender: UIButton) {
     }
     
     

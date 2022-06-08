@@ -83,10 +83,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(mnemonicManageVC, animated: true)
                 
-//                if let parentVC = self.parent as? MainTabSettingViewController {
-//                    parentVC.onShowSelectChainDialog(true)
-//                }
-                
             } else if (indexPath.row == 1) {
                 let accoutManageVC = WalletManageViewController(nibName: "WalletManageViewController", bundle: nil)
                 accoutManageVC.hidesBottomBarWhenPushed = true
@@ -94,6 +90,16 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.navigationController?.pushViewController(accoutManageVC, animated: true)
                 
             } else if (indexPath.row == 2) {
+                let privateKeyRestoreVC = PrivateKeyRestoreViewController(nibName: "PrivateKeyRestoreViewController", bundle: nil)
+                privateKeyRestoreVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(privateKeyRestoreVC, animated: true)
+                
+            } else if (indexPath.row == 3) {
+                let watchingAddressVC = WatchingAddressViewController(nibName: "WatchingAddressViewController", bundle: nil)
+                watchingAddressVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(watchingAddressVC, animated: true)
                 
             }
             

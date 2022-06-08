@@ -26,11 +26,7 @@ class CKey {
                 hardened = true
             }
             let index = UInt32(component.trimmingCharacters(in: CharacterSet(charactersIn: "'")))!
-            if (hardened) {
-                currentKey = currentKey.derived(at: .hardened(index))
-            } else {
-                currentKey = currentKey.derived(at: .notHardened(index))
-            }
+            currentKey = cDerived(currentKey, index, hardened)
         }
         let hexData = checkZeroStartKey(currentKey.raw.hexEncodedString())
         return Data(hex: hexData)

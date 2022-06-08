@@ -31,10 +31,14 @@ class DeriveWalletCell: UITableViewCell {
         denomLabel.text = "loading..."
     }
     
-    func onBindWallet(_ derive: Derive) {
+    func onBindWallet(_ derive: Derive, _ isPrivateKeyMode: Bool) {
         let chainConfig = ChainFactory().getChainConfig(derive.chaintype)
         chainImgView.image = chainConfig.chainImg
-        pathLabel.text = chainConfig.getHdPath(derive.hdpathtype, derive.path)
+        if (isPrivateKeyMode) {
+            pathLabel.text = "Hello"
+        } else {
+            pathLabel.text = chainConfig.getHdPath(derive.hdpathtype, derive.path)
+        }
         addressLabel.text = derive.dpAddress
         
         if let coin = derive.coin {

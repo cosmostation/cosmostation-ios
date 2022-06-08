@@ -655,6 +655,14 @@
 		04C49379284F465D00ECF4D2 /* MnemonicRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C49376284F465D00ECF4D2 /* MnemonicRestoreViewController.swift */; };
 		04C4937A284F465D00ECF4D2 /* MnemonicRestoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C49377284F465D00ECF4D2 /* MnemonicRestoreViewController.xib */; };
 		04C4937B284F465D00ECF4D2 /* MnemonicRestoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C49377284F465D00ECF4D2 /* MnemonicRestoreViewController.xib */; };
+		04C4937E285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C4937C285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift */; };
+		04C4937F285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C4937C285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift */; };
+		04C49380285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C4937D285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib */; };
+		04C49381285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C4937D285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib */; };
+		04C4938428506A0C00ECF4D2 /* WatchingAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C4938228506A0C00ECF4D2 /* WatchingAddressViewController.swift */; };
+		04C4938528506A0C00ECF4D2 /* WatchingAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C4938228506A0C00ECF4D2 /* WatchingAddressViewController.swift */; };
+		04C4938628506A0C00ECF4D2 /* WatchingAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C4938328506A0C00ECF4D2 /* WatchingAddressViewController.xib */; };
+		04C4938728506A0C00ECF4D2 /* WatchingAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C4938328506A0C00ECF4D2 /* WatchingAddressViewController.xib */; };
 		04C53944274B41FE00C1EE83 /* CommonWCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */; };
 		04C53945274B41FE00C1EE83 /* CommonWCViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */; };
 		04CFBD482691F8460013150B /* TxTokenSwapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CFBD462691F8460013150B /* TxTokenSwapCell.swift */; };
@@ -3525,6 +3533,10 @@
 		04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStationTest.swift; sourceTree = "<group>"; };
 		04C49376284F465D00ECF4D2 /* MnemonicRestoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicRestoreViewController.swift; sourceTree = "<group>"; };
 		04C49377284F465D00ECF4D2 /* MnemonicRestoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicRestoreViewController.xib; sourceTree = "<group>"; };
+		04C4937C285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateKeyRestoreViewController.swift; sourceTree = "<group>"; };
+		04C4937D285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivateKeyRestoreViewController.xib; sourceTree = "<group>"; };
+		04C4938228506A0C00ECF4D2 /* WatchingAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchingAddressViewController.swift; sourceTree = "<group>"; };
+		04C4938328506A0C00ECF4D2 /* WatchingAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WatchingAddressViewController.xib; sourceTree = "<group>"; };
 		04C53942274B41FE00C1EE83 /* CommonWCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWCViewController.swift; sourceTree = "<group>"; };
 		04C53943274B41FE00C1EE83 /* CommonWCViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonWCViewController.xib; sourceTree = "<group>"; };
 		04CFBD462691F8460013150B /* TxTokenSwapCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxTokenSwapCell.swift; sourceTree = "<group>"; };
@@ -6033,6 +6045,10 @@
 				041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */,
 				287654692726B2690071FF96 /* WalletChainEditViewController.swift */,
 				2876546A2726B2690071FF96 /* WalletChainEditViewController.xib */,
+				04C4937C285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift */,
+				04C4937D285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib */,
+				04C4938228506A0C00ECF4D2 /* WatchingAddressViewController.swift */,
+				04C4938328506A0C00ECF4D2 /* WatchingAddressViewController.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -6623,6 +6639,7 @@
 				18FFB6B1281AF533004E65BB /* MainStoryboard.storyboard in Resources */,
 				18FFB6B2281AF533004E65BB /* TxEditRewardAddressCell.xib in Resources */,
 				18FFB6B3281AF533004E65BB /* HardPoolDeposit3ViewController.xib in Resources */,
+				04C4938728506A0C00ECF4D2 /* WatchingAddressViewController.xib in Resources */,
 				18FFB6B4281AF533004E65BB /* CommonWCViewController.xib in Resources */,
 				18FFB6B5281AF533004E65BB /* RizonSwapStatusViewController.xib in Resources */,
 				18FFB6B6281AF533004E65BB /* TxCdpCreateCell.xib in Resources */,
@@ -6720,6 +6737,7 @@
 				18FFB711281AF533004E65BB /* TxIncentiveMintingCell.xib in Resources */,
 				18FFB712281AF533004E65BB /* WalletCertikCell.xib in Resources */,
 				18FFB713281AF533004E65BB /* WalletChihuahuaCell.xib in Resources */,
+				04C49381285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib in Resources */,
 				18FFB714281AF533004E65BB /* TxTransferCell.xib in Resources */,
 				18FFB715281AF533004E65BB /* WalletCudosCell.xib in Resources */,
 				18FFB716281AF533004E65BB /* TxGravityWithdrawBatchCell.xib in Resources */,
@@ -7043,6 +7061,7 @@
 				28D372A1254BFCCA0071B136 /* RegisterAccount0ViewController.xib in Resources */,
 				047FB709281EBA25009D8AAF /* MnemonicCreateViewController.xib in Resources */,
 				28BB2A822533D9FB00CFF097 /* DomainPromotionCell.xib in Resources */,
+				04C4938628506A0C00ECF4D2 /* WatchingAddressViewController.xib in Resources */,
 				04CFBD52269227680013150B /* TxIbcAcknowledgeCell.xib in Resources */,
 				280E1EFE254A7AD60007BA7D /* DeleteStarname3ViewController.xib in Resources */,
 				283850212448A6B000E5DEF2 /* TxHtlcClaimCell.xib in Resources */,
@@ -7100,6 +7119,7 @@
 				15E40DAA27C787F000E7C850 /* WalletProvenanceCell.xib in Resources */,
 				283A80C324513F6F008FF813 /* CdpListAllCell.xib in Resources */,
 				048C837127BF7F7800270528 /* WalletEvmosCell.xib in Resources */,
+				04C49380285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib in Resources */,
 				E126CFA02387A643002A546F /* WalletInflationCell.xib in Resources */,
 				28B2E4C826CFC85400ECF960 /* TokenDetailIBCInfoCell.xib in Resources */,
 				284D17A02535558A00C364F9 /* Kava.storyboard in Resources */,
@@ -8010,6 +8030,7 @@
 				18FFB4C2281AF533004E65BB /* HardAccountValue.swift in Sources */,
 				18FFB4C3281AF533004E65BB /* StartUnbonding0ViewController.swift in Sources */,
 				18FFB4C5281AF533004E65BB /* OkTokenList.swift in Sources */,
+				04C4938528506A0C00ECF4D2 /* WatchingAddressViewController.swift in Sources */,
 				0451FCA7282A3B7F00214FDA /* ChainLum.swift in Sources */,
 				1817CC52283E2CE600523713 /* starname_cosmwasm_wasm_v1_query.grpc.swift in Sources */,
 				1817CC54283E2CE600523713 /* desmos_subspaces_v1beta1_query.pb.swift in Sources */,
@@ -8142,6 +8163,7 @@
 				18FFB549281AF533004E65BB /* WalletOmniCell.swift in Sources */,
 				18FFB54A281AF533004E65BB /* ProposalCell.swift in Sources */,
 				1817CBF6283E2CE600523713 /* desmos_profiles_v1beta1_query_params.pb.swift in Sources */,
+				04C4937F285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift in Sources */,
 				18FFB54B281AF533004E65BB /* TxRewardAllCell.swift in Sources */,
 				1817CABC283E2CE500523713 /* band_oracle_v1_tx.pb.swift in Sources */,
 				18FFB54E281AF533004E65BB /* TxVoteCell.swift in Sources */,
@@ -8608,6 +8630,7 @@
 				040FAA32275F55C400229F6F /* band_oracle_v1_query.grpc.swift in Sources */,
 				040FAA41275F55C400229F6F /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */,
 				040FAA65275F55C400229F6F /* cosmos_gov_v1beta2_query.pb.swift in Sources */,
+				04C4937E285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift in Sources */,
 				040FAA9A275F55C400229F6F /* ibc_core_connection_v1_query.grpc.swift in Sources */,
 				04403736284A2B2F004CD7E3 /* ChainNyx.swift in Sources */,
 				28A8401F2605A3D8008C2D61 /* NodeInfo.swift in Sources */,
@@ -9545,6 +9568,7 @@
 				04983CA4278C24C100F913A3 /* TxSaveProfileCell.swift in Sources */,
 				E12D6B8B226DF3A700D07CE4 /* StepSendAmountViewController.swift in Sources */,
 				284FBC8126DBE98500403FE2 /* TxSwapWithdrawCell.swift in Sources */,
+				04C4938428506A0C00ECF4D2 /* WatchingAddressViewController.swift in Sources */,
 				28474ECD241E06AF00AF5A81 /* TxCdpDepositCell.swift in Sources */,
 				288F8082270DDF25009825B5 /* TxSifIncentiveCell.swift in Sources */,
 				04983CA8278C24DC00F913A3 /* TxLinkAccountCell.swift in Sources */,

@@ -86,6 +86,10 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
         
         self.cardView.backgroundColor = COLOR_BG_GRAY
         self.onCreateMenmonic()
+        
+        if (BaseData.instance.getUsingEnginerMode()) {
+            self.onShowEnginerModeDialog()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -146,5 +150,18 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
             }
             
         }
+    }
+    
+    func onShowEnginerModeDialog() {
+        let enginerAlert = UIAlertController(title: NSLocalizedString("str_enginer_is_on_title", comment: ""),
+                                             message: NSLocalizedString("str_enginer_is_on_create_msg", comment: ""),
+                                             preferredStyle: .alert)
+        enginerAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: { _ in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        enginerAlert.addAction(UIAlertAction(title:NSLocalizedString("continue", comment: ""), style: .destructive,  handler: { _ in
+            BaseData.instance.setUsingEnginerMode(false)
+        }))
+        self.present(enginerAlert, animated: true)
     }
 }

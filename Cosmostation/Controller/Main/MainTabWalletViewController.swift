@@ -101,7 +101,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.totalCard.addGestureRecognizer(tapTotalCard)
-        
         self.updateFloaty()
     }
     
