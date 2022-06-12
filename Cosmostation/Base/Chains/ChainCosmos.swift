@@ -24,6 +24,7 @@ class ChainCosmos: ChainConfig {
     var addressPrefix = "cosmos"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    var pushSupport = true
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-cosmos-app.cosmostation.io"

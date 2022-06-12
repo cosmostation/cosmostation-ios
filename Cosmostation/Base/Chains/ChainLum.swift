@@ -25,6 +25,7 @@ class ChainLum: ChainConfig {
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/459'/0'/0/X"
     
+    var pushSupport = false
     var grpcUrl = "lcd-lum-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-lum-app.cosmostation.io"

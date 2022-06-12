@@ -25,6 +25,7 @@ class ChainOkc: ChainConfig {
     let addressHdPath0 = "m/44'/996'/0'/0/X"
     let addressHdPath1 = "m/44'/60'/0'/0/X"
     
+    var pushSupport = false
     var grpcUrl = ""
     var grpcPort = ""
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"

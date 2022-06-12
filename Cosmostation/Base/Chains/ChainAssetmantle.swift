@@ -24,6 +24,7 @@ class ChainAssetMantle: ChainConfig {
     var addressPrefix = "mantle"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    var pushSupport = false
     var grpcUrl = "lcd-asset-mantle-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-asset-mantle-app.cosmostation.io"

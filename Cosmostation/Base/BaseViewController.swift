@@ -118,12 +118,6 @@ class BaseViewController: UIViewController {
                 KeychainWrapper.standard.removeObject(forKey: account.getPrivateKeySha1())
             }
             
-//            if (BaseData.instance.selectAllAccounts().count <= 0) {
-//                //TODO delete password
-//            } else {
-//                BaseData.instance.setRecentAccountId(BaseData.instance.selectAllAccounts()[0].account_id)
-//            }
-            
             for chain in BaseData.instance.dpSortedChains() {
                 let accountNum = BaseData.instance.selectAllAccountsByChain(chain).count
                 if (accountNum > 0) {

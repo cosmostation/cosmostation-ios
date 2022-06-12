@@ -24,6 +24,7 @@ class ChainBinance: ChainConfig {
     var addressPrefix = "bnb"
     let addressHdPath0 = "m/44'/714'/0'/0/X"
     
+    var pushSupport = false
     var grpcUrl = ""
     var grpcPort = ""
     var lcdUrl = "https://dex.binance.org/"

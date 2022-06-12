@@ -24,6 +24,7 @@ protocol ChainConfig {
     
     var addressPrefix: String { get set }
     
+    var pushSupport: Bool { get set }
     var grpcUrl: String { get set }
     var grpcPort: String { get set }
     var lcdUrl: String { get set }

@@ -24,6 +24,7 @@ class ChainEvmos: ChainConfig {
     var addressPrefix = "evmos"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
+    var pushSupport = false
     var grpcUrl = "lcd-evmos-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-evmos-app.cosmostation.io"

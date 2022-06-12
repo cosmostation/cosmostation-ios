@@ -24,6 +24,7 @@ class ChainProvenance: ChainConfig {
     var addressPrefix = "pb"
     let addressHdPath0 = "m/44'/505'/0'/0/X"
     
+    var pushSupport = false
     var grpcUrl = "lcd-provenance-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-provenance-app.cosmostation.io"

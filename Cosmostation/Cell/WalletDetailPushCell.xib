@@ -21,13 +21,13 @@
                         <rect key="frame" x="12" y="4" width="395" height="79"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Push Alarm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7mA-JD-iIM">
-                                <rect key="frame" x="16" y="12" width="61.5" height="14"/>
+                                <rect key="frame" x="16" y="12" width="61.5" height="25.5"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                 <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enabled push alarm for each send &amp; received tx with this address" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rO-3w-Qyy">
-                                <rect key="frame" x="16" y="30" width="299" height="28"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Enabled push alarm for each send &amp; received tx with this address" lineBreakMode="middleTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1rO-3w-Qyy">
+                                <rect key="frame" x="16" y="41.5" width="299" height="25.5"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -43,11 +43,11 @@
                         <color key="backgroundColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="0.1524507705" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="1rO-3w-Qyy" firstAttribute="leading" secondItem="7mA-JD-iIM" secondAttribute="leading" id="HTl-wo-9sp"/>
+                            <constraint firstAttribute="bottom" secondItem="1rO-3w-Qyy" secondAttribute="bottom" constant="12" id="MTQ-ab-mJs"/>
                             <constraint firstItem="1rO-3w-Qyy" firstAttribute="top" secondItem="7mA-JD-iIM" secondAttribute="bottom" constant="4" id="SLI-pi-3Us"/>
                             <constraint firstAttribute="trailing" secondItem="1rO-3w-Qyy" secondAttribute="trailing" constant="80" id="VtS-ZM-8Lg"/>
                             <constraint firstItem="qYs-Cb-x17" firstAttribute="centerY" secondItem="10c-r1-hoD" secondAttribute="centerY" id="cDy-MX-CtQ"/>
                             <constraint firstItem="7mA-JD-iIM" firstAttribute="leading" secondItem="10c-r1-hoD" secondAttribute="leading" constant="16" id="du3-jW-1V5"/>
-                            <constraint firstAttribute="bottom" secondItem="1rO-3w-Qyy" secondAttribute="bottom" constant="12" id="rIh-UE-gfk"/>
                             <constraint firstAttribute="trailing" secondItem="qYs-Cb-x17" secondAttribute="trailing" constant="8" id="w4x-Gl-o7S"/>
                             <constraint firstItem="7mA-JD-iIM" firstAttribute="top" secondItem="10c-r1-hoD" secondAttribute="top" constant="12" id="w50-e6-egI"/>
                         </constraints>

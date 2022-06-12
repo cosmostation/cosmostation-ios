@@ -27,6 +27,7 @@ class ChainFetchAi: ChainConfig {
     let addressHdPath2 = "m/44'/60'/X'/0/0"
     let addressHdPath3 = "m/44'/60'/0'/X"
     
+    var pushSupport = false
     var grpcUrl = "lcd-fetchai-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-fetchai-app.cosmostation.io"

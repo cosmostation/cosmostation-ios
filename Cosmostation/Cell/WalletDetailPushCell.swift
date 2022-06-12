@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class WalletDetailPushCell: UITableViewCell {
     
@@ -14,10 +15,9 @@ class WalletDetailPushCell: UITableViewCell {
     @IBOutlet weak var pushMsgLabel: UILabel!
     @IBOutlet weak var pushSwitch: UISwitch!
     
-    var actionPush: (() -> Void)? = nil
+    var actionPush: ((Bool) -> Void)? = nil
     @IBAction func onClickPush(_ sender: UISwitch) {
-//        actionNickname?()
-        print("onClickPush ", sender.isOn)
+        actionPush?(sender.isOn)
     }
     
     override func awakeFromNib() {
@@ -25,7 +25,26 @@ class WalletDetailPushCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    func onBindView() {
+    func onBindView(_ chainConfig: ChainConfig, _ account: Account) {
+        pushSwitch.onTintColor = WUtils.getChainColor(chainConfig.chainType)
         
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            if settings.authorizationStatus == .authorized {
+                DispatchQueue.main.async {
+                    if (account.account_push_alarm) {
+                        self.pushSwitch.setOn(true, animated: false)
+                        self.pushMsgLabel.text = NSLocalizedString("push_enabled_state_msg", comment: "")
+                    } else {
+                        self.pushSwitch.setOn(false, animated: false)
+                        self.pushMsgLabel.text = NSLocalizedString("push_disabled_state_msg", comment: "")
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.pushSwitch.setOn(false, animated: false)
+                    self.pushMsgLabel.text = NSLocalizedString("push_disabled_state_msg", comment: "")
+                }
+            }
+        }
     }
 }
