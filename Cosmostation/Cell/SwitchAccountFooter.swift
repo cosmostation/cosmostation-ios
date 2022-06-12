@@ -1,16 +1,15 @@
 //
-//  ManageHeader.swift
+//  SwitchAccountFooter.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 03/04/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/10.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
-class ManageHeader: UIView {
-    private let xibName = "ManageHeader"
+class SwitchAccountFooter: UIView {
+    private let xibName = "SwitchAccountFooter"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,8 +30,11 @@ class ManageHeader: UIView {
         let view = Bundle.main.loadNibNamed(xibName, owner: self, options: nil)?.first as! UIView
         view.frame = self.bounds
         self.addSubview(view)
+        
+        rootView.clipsToBounds = true
+        rootView.layer.cornerRadius = 8
+        rootView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
     }
-    @IBOutlet weak var headerLabel: UILabel!
-    @IBOutlet weak var keyImg: UIImageView!
-    
+
+    @IBOutlet weak var rootView: UIView!
 }

@@ -15,7 +15,6 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     var resultDelegate: AccountSwitchDelegate?
     var chainAccounts = Array<ChainAccounts>()
     var selectedChain: ChainType!
-    var toAddChain: ChainType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +23,7 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
         self.accountTableView.delegate = self
         self.accountTableView.dataSource = self
         self.accountTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.accountTableView.register(UINib(nibName: "ManageChainAccoutsCell", bundle: nil), forCellReuseIdentifier: "ManageChainAccoutsCell")
+        self.accountTableView.register(UINib(nibName: "SwitchAccountCell", bundle: nil), forCellReuseIdentifier: "SwitchAccountCell")
         
         let dismissTap1 = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
         self.accountTableView.backgroundView?.addGestureRecognizer(dismissTap1)
@@ -59,32 +58,63 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
         }
         self.accountTableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100), execute: {
-            self.accountTableView.selectRow(at: IndexPath.init(item: self.chainAccounts.firstIndex(where: { $0.chainType ==  self.selectedChain }) ?? 0, section: 0), animated: false, scrollPosition: .middle)
+            let positionSection = self.chainAccounts.firstIndex(where: { $0.chainType == self.selectedChain }) ?? 0
+            self.accountTableView.selectRow(at: IndexPath.init(item: 0, section: positionSection), animated: false, scrollPosition: .middle)
         })
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return chainAccounts.count
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = SwitchAccountHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.rootView.backgroundColor = WUtils.getChainBg(chainAccounts[section].chainType)
+        view.chainImgView.image = WUtils.getChainImg(chainAccounts[section].chainType)
+        view.chainNameLabel.text = WUtils.getChainTitle2(chainAccounts[section].chainType)
+        view.chainAccountsCntLable.text = String(chainAccounts[section].accounts.count)
+        view.actionTapHeader = {
+            self.chainAccounts[section].opened = !self.chainAccounts[section].opened
+            self.accountTableView.beginUpdates()
+            self.accountTableView.reloadSections([section], with: .automatic)
+            self.accountTableView.endUpdates()
+        }
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = SwitchAccountFooter(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        view.rootView.backgroundColor = WUtils.getChainBg(chainAccounts[section].chainType)
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (chainAccounts[section].opened) {
+            return chainAccounts[section].accounts.count
+        } else {
+            return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 18
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"ManageChainAccoutsCell") as? ManageChainAccoutsCell
-        cell?.onBindChainAccounts(self.chainAccounts[indexPath.row], self.account)
-        cell?.actionSelect0 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[0]) }
-        cell?.actionSelect1 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[1]) }
-        cell?.actionSelect2 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[2]) }
-        cell?.actionSelect3 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[3]) }
-        cell?.actionSelect4 = { self.onSelectAccount(self.chainAccounts[indexPath.row].accounts[4]) }
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.chainAccounts[indexPath.row].opened = !self.chainAccounts[indexPath.row].opened
-        self.accountTableView.reloadSections([indexPath.section], with: .automatic)
+        let cell = tableView.dequeueReusableCell(withIdentifier:"SwitchAccountCell") as! SwitchAccountCell
+        cell.onBindChainAccounts(self.chainAccounts[indexPath.section], indexPath.row, self.account)
+        cell.actionTapItem = {
+            self.onSelectAccount(self.chainAccounts[indexPath.section].accounts[indexPath.row])
+        }
+        return cell
     }
     
     @IBAction func onClose(_ sender: UIButton) {
