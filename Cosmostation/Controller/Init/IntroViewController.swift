@@ -17,7 +17,6 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     
     var accounts:Array<Account>?
     var lockPasses = false;
-    var toAddChain: ChainType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,11 +132,6 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     
     
     @IBAction func onClickCreate(_ sender: Any) {
-        self.onShowSelectChainDialog(true)
-    }
-    
-    override func onChainSelected(_ chainType: ChainType) {
-        self.toAddChain = chainType
         let popupVC = NewAccountTypePopup(nibName: "NewAccountTypePopup", bundle: nil)
         let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
         cardPopup.resultDelegate = self
@@ -153,24 +147,12 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     func SBCardPopupResponse(type: Int, result: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(490), execute: {
             var tagetVC:BaseViewController?
-            if (result == 1) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "CreateViewController") as! CreateViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            } else if (result == 2) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            } else if (result == 3) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
-                
-            } else if (result == 4) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "KeyRestoreViewController") as! KeyRestoreViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            }
+            if (result == 1) { tagetVC = MnemonicCreateViewController(nibName: "MnemonicCreateViewController", bundle: nil) }
+            else if (result == 2) { tagetVC = MnemonicRestoreViewController(nibName: "MnemonicRestoreViewController", bundle: nil) }
+            else if (result == 3) { tagetVC = WatchingAddressViewController(nibName: "WatchingAddressViewController", bundle: nil) }
+            else if (result == 4) { tagetVC = PrivateKeyRestoreViewController(nibName: "PrivateKeyRestoreViewController", bundle: nil) }
             if (tagetVC != nil) {
-                tagetVC?.hidesBottomBarWhenPushed = true
+                tagetVC!.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(tagetVC!, animated: true)
             }

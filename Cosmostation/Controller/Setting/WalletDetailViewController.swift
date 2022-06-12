@@ -626,8 +626,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             self.navigationController?.pushViewController(passwordVC, animated: false)
             
         } else {
-            let restoreMnemonicVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
-            restoreMnemonicVC.chainType = self.chainType
+            let restoreMnemonicVC = MnemonicRestoreViewController(nibName: "MnemonicRestoreViewController", bundle: nil)
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(restoreMnemonicVC, animated: true)
         }
@@ -644,8 +643,7 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
             self.navigationController?.pushViewController(passwordVC, animated: false)
             
         } else {
-            let restorePKeyVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "KeyRestoreViewController") as! KeyRestoreViewController
-            restorePKeyVC.chainType = self.chainType
+            let restorePKeyVC = PrivateKeyRestoreViewController(nibName: "PrivateKeyRestoreViewController", bundle: nil)
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(restorePKeyVC, animated: true)
         }

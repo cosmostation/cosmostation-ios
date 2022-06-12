@@ -9,7 +9,7 @@
 import UIKit
 import UserNotifications
 
-class MainTabSettingViewController: BaseViewController, SBCardPopupDelegate {
+class MainTabSettingViewController: BaseViewController {
     
     @IBOutlet weak var chainBg: UIImageView!
     @IBOutlet weak var titleChainImg: UIImageView!
@@ -117,45 +117,5 @@ class MainTabSettingViewController: BaseViewController, SBCardPopupDelegate {
                 }
             }
         }
-    }
-    
-    override func onChainSelected(_ chainType: ChainType) {
-        self.toAddChain = chainType
-        if (BaseData.instance.selectAllAccountsByChain(toAddChain!).count >= MAX_WALLET_PER_CHAIN) {
-            self.onShowToast(NSLocalizedString("error_max_account_number", comment: ""))
-            
-        } else {
-            let popupVC = NewAccountTypePopup(nibName: "NewAccountTypePopup", bundle: nil)
-            let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
-            cardPopup.resultDelegate = self
-            cardPopup.show(onViewController: self)
-        }
-    }
-    
-    func SBCardPopupResponse(type: Int, result: Int) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(490), execute: {
-            var tagetVC:BaseViewController?
-            if (result == 1) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "CreateViewController") as! CreateViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            } else if (result == 2) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            } else if (result == 3) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
-                
-            } else if (result == 4) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "KeyRestoreViewController") as! KeyRestoreViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            }
-            if (tagetVC != nil) {
-                tagetVC?.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(tagetVC!, animated: true)
-            }
-        })
     }
 }

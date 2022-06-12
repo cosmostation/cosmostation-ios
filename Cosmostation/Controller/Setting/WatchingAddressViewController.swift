@@ -73,10 +73,6 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
             self.onShowToast(NSLocalizedString("error_duple_address", comment: ""))
             return
         }
-//        if (BaseData.instance.selectAllAccountsByChain(chain).count >= MAX_WALLET_PER_CHAIN) {
-//            self.onShowToast(NSLocalizedString("error_max_account_number", comment: ""))
-//            return
-//        }
         
         self.showWaittingAlert()
         DispatchQueue.global().async {

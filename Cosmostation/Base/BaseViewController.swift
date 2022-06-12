@@ -79,24 +79,10 @@ class BaseViewController: UIViewController {
     
     
     func onStartImportMnemonic() {
-        let restoreVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
+        let restoreVC = MnemonicRestoreViewController(nibName: "MnemonicRestoreViewController", bundle: nil)
         restoreVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(restoreVC, animated: true)
-    }
-    
-    func onStartImportAddress() {
-        let addAddressVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
-        addAddressVC.hidesBottomBarWhenPushed = true
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(addAddressVC, animated: true)
-    }
-    
-    func onStartCreate() {
-        let createVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "CreateViewController") as! CreateViewController
-        createVC.hidesBottomBarWhenPushed = true
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(createVC, animated: true)
     }
     
     func onStartTxDetail(_ response:[String:Any]) {

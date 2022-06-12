@@ -594,7 +594,6 @@
 		049DAA0527311DFE00658CFB /* WalletStargazeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049DAA0327311DFE00658CFB /* WalletStargazeCell.swift */; };
 		049DAA0627311DFE00658CFB /* WalletStargazeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */; };
 		04AAD5B7275BAD9B002D3A95 /* NewAccountTypePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AAD5B9275BAD9B002D3A95 /* NewAccountTypePopup.xib */; };
-		04AAD5BD275BBD23002D3A95 /* KeyRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAD5BC275BBD23002D3A95 /* KeyRestoreViewController.swift */; };
 		04B1BE1427A165F000B1236A /* CertikVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1327A165F000B1236A /* CertikVote.swift */; };
 		04B1BE1D27A3BC4500B1236A /* cosmwasm_wasm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1527A3BC4400B1236A /* cosmwasm_wasm_v1_tx.pb.swift */; };
 		04B1BE1E27A3BC4500B1236A /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1627A3BC4400B1236A /* cosmwasm_wasm_v1_ibc.pb.swift */; };
@@ -1550,7 +1549,6 @@
 		18FFB4A2281AF533004E65BB /* DelegateWarnPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2868559924989ACD0099D18F /* DelegateWarnPopup.swift */; };
 		18FFB4A3281AF533004E65BB /* EarnUnbondingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283EB77B26C8289900B9D28D /* EarnUnbondingCell.swift */; };
 		18FFB4A5281AF533004E65BB /* SifSwap3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28440C59271E7B7800B4A7C3 /* SifSwap3ViewController.swift */; };
-		18FFB4A8281AF533004E65BB /* RestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1271B09224C943C0083AF17 /* RestoreViewController.swift */; };
 		18FFB4AA281AF533004E65BB /* StepOkDepositCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4303D24F7EE1F00BD7BB2 /* StepOkDepositCheckViewController.swift */; };
 		18FFB4AB281AF533004E65BB /* HarvestDetailTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28156E982536DE14006FF06C /* HarvestDetailTopCell.swift */; };
 		18FFB4AC281AF533004E65BB /* Cw20Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32227A5787A0045ED21 /* Cw20Token.swift */; };
@@ -1563,7 +1561,6 @@
 		18FFB4B9281AF533004E65BB /* GravityPoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A97CAF26DE46FD0085FD0E /* GravityPoolViewController.swift */; };
 		18FFB4BA281AF533004E65BB /* Vote.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1F1CF07239F5737004EF8A2 /* Vote.swift */; };
 		18FFB4BD281AF533004E65BB /* Cw20BalanceReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */; };
-		18FFB4BE281AF533004E65BB /* KeyRestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAD5BC275BBD23002D3A95 /* KeyRestoreViewController.swift */; };
 		18FFB4C1281AF533004E65BB /* TxIncentiveHardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2889FD802603484000CA9896 /* TxIncentiveHardCell.swift */; };
 		18FFB4C2281AF533004E65BB /* HardAccountValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AABECA25F8CBDB0019091F /* HardAccountValue.swift */; };
 		18FFB4C3281AF533004E65BB /* StartUnbonding0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D28ACF26CB6BFA0074964C /* StartUnbonding0ViewController.swift */; };
@@ -1576,7 +1573,6 @@
 		18FFB4D2281AF533004E65BB /* OkPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E746B525AD76ED004B2C64 /* OkPromotionCell.swift */; };
 		18FFB4D3281AF533004E65BB /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE4224482800097CAEE /* Coin.swift */; };
 		18FFB4D4281AF533004E65BB /* SwapStatusCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B785B426B7B084009F755F /* SwapStatusCell.swift */; };
-		18FFB4D6281AF533004E65BB /* RestorePathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14BDFFD224CF0250007DD7D /* RestorePathViewController.swift */; };
 		18FFB4DB281AF533004E65BB /* WalletInflationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FD2336233E1C30009327FE /* WalletInflationCell.swift */; };
 		18FFB4DD281AF533004E65BB /* StepDelegateCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E171A072225B08CE00C5756C /* StepDelegateCheckViewController.swift */; };
 		18FFB4E0281AF533004E65BB /* DeleteStarname3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280E1EFB254A7AD60007BA7D /* DeleteStarname3ViewController.swift */; };
@@ -1657,7 +1653,6 @@
 		18FFB55E281AF533004E65BB /* TxHtlcClaimCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2838501E2448A6B000E5DEF2 /* TxHtlcClaimCell.swift */; };
 		18FFB562281AF533004E65BB /* ValidatorDetailMyActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E1F2256292900BC0350 /* ValidatorDetailMyActionCell.swift */; };
 		18FFB563281AF533004E65BB /* SwapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E04589269B35480022A366 /* SwapViewController.swift */; };
-		18FFB564281AF533004E65BB /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B162248BD990019B7BB /* CreateViewController.swift */; };
 		18FFB565281AF533004E65BB /* TxCdpWithdrawCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28474EC4241E06AF00AF5A81 /* TxCdpWithdrawCell.swift */; };
 		18FFB566281AF533004E65BB /* IBCSend0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2894104F26FDBE8A005BCBE4 /* IBCSend0ViewController.swift */; };
 		18FFB569281AF533004E65BB /* KavaHardParam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7BE4B25F0F782006EECD7 /* KavaHardParam.swift */; };
@@ -1808,7 +1803,6 @@
 		18FFB669281AF533004E65BB /* WalletAxelarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287E0AA226EDC6F300F8C242 /* WalletAxelarCell.swift */; };
 		18FFB66B281AF533004E65BB /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DD0224220910097CAEE /* Account.swift */; };
 		18FFB66C281AF533004E65BB /* AccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A82DE02244818C0097CAEE /* AccountInfo.swift */; };
-		18FFB66F281AF533004E65BB /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1271B05224B874A0083AF17 /* AddAddressViewController.swift */; };
 		18FFB670281AF533004E65BB /* CosmosTally.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2845D888246FBA39007CD497 /* CosmosTally.swift */; };
 		18FFB674281AF533004E65BB /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
 		18FFB675281AF533004E65BB /* StartUnlock0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28D28AD826CB6C1E0074964C /* StartUnlock0ViewController.xib */; };
@@ -2789,9 +2783,7 @@
 		E126CF9B2387A60D002A546F /* WalletPriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E126CF9D2387A60D002A546F /* WalletPriceCell.xib */; };
 		E126CFA02387A643002A546F /* WalletInflationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E126CFA22387A643002A546F /* WalletInflationCell.xib */; };
 		E1271B04224B17230083AF17 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
-		E1271B06224B874A0083AF17 /* AddAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1271B05224B874A0083AF17 /* AddAddressViewController.swift */; };
 		E1271B08224B90230083AF17 /* AddressInputTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1271B07224B90230083AF17 /* AddressInputTextField.swift */; };
-		E1271B0A224C943C0083AF17 /* RestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1271B09224C943C0083AF17 /* RestoreViewController.swift */; };
 		E12D6B89226DF36D00D07CE4 /* StepSendAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D6B88226DF36D00D07CE4 /* StepSendAddressViewController.swift */; };
 		E12D6B8B226DF3A700D07CE4 /* StepSendAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D6B8A226DF3A700D07CE4 /* StepSendAmountViewController.swift */; };
 		E12D6B8D226DF3BB00D07CE4 /* StepSendCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E12D6B8C226DF3BB00D07CE4 /* StepSendCheckViewController.swift */; };
@@ -2806,7 +2798,6 @@
 		E1406FCC2260A11300D9440C /* StepRewardCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1406FCB2260A11300D9440C /* StepRewardCheckViewController.swift */; };
 		E14BDFFB224CCFE20007DD7D /* MnemonicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14BDFF9224CCFE20007DD7D /* MnemonicCell.swift */; };
 		E14BDFFC224CCFE20007DD7D /* MnemonicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E14BDFFA224CCFE20007DD7D /* MnemonicCell.xib */; };
-		E14BDFFE224CF0250007DD7D /* RestorePathViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14BDFFD224CF0250007DD7D /* RestorePathViewController.swift */; };
 		E14F7FB6227ADAA300FDDC75 /* QRScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14F7FB4227ADAA300FDDC75 /* QRScanViewController.swift */; };
 		E14FDC842373C52C00095C06 /* KavaAccountInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E14FDC832373C52C00095C06 /* KavaAccountInfo.swift */; };
 		E151B62E2245248C0026B8C0 /* MyValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E151B62C2245248C0026B8C0 /* MyValidatorCell.swift */; };
@@ -2832,7 +2823,6 @@
 		E16B89152341C558003E0922 /* TokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16B89132341C558003E0922 /* TokenCell.swift */; };
 		E16B89162341C558003E0922 /* TokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16B89142341C558003E0922 /* TokenCell.xib */; };
 		E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroViewController.swift */; };
-		E16D9B172248BD990019B7BB /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B162248BD990019B7BB /* CreateViewController.swift */; };
 		E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B182248C4880019B7BB /* Assets.xcassets */; };
 		E16D9B1B2248D1370019B7BB /* BoarderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1A2248D1370019B7BB /* BoarderLabel.swift */; };
 		E16D9B1D2248E6A60019B7BB /* WKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1C2248E6A60019B7BB /* WKey.swift */; };
@@ -3473,7 +3463,6 @@
 		049DAA0427311DFE00658CFB /* WalletStargazeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStargazeCell.xib; sourceTree = "<group>"; };
 		04AAD5B8275BAD9B002D3A95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/NewAccountTypePopup.xib; sourceTree = "<group>"; };
 		04AAD5BB275BADA2002D3A95 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/NewAccountTypePopup.strings; sourceTree = "<group>"; };
-		04AAD5BC275BBD23002D3A95 /* KeyRestoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyRestoreViewController.swift; sourceTree = "<group>"; };
 		04B1BE1327A165F000B1236A /* CertikVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertikVote.swift; sourceTree = "<group>"; };
 		04B1BE1527A3BC4400B1236A /* cosmwasm_wasm_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_tx.pb.swift; sourceTree = "<group>"; };
 		04B1BE1627A3BC4400B1236A /* cosmwasm_wasm_v1_ibc.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmwasm_wasm_v1_ibc.pb.swift; sourceTree = "<group>"; };
@@ -4299,9 +4288,7 @@
 		E1271B00224B16E20083AF17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		E1271B01224B16E20083AF17 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E1271B03224B17230083AF17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E1271B05224B874A0083AF17 /* AddAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressViewController.swift; sourceTree = "<group>"; };
 		E1271B07224B90230083AF17 /* AddressInputTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressInputTextField.swift; sourceTree = "<group>"; };
-		E1271B09224C943C0083AF17 /* RestoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreViewController.swift; sourceTree = "<group>"; };
 		E12D6B88226DF36D00D07CE4 /* StepSendAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSendAddressViewController.swift; sourceTree = "<group>"; };
 		E12D6B8A226DF3A700D07CE4 /* StepSendAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSendAmountViewController.swift; sourceTree = "<group>"; };
 		E12D6B8C226DF3BB00D07CE4 /* StepSendCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepSendCheckViewController.swift; sourceTree = "<group>"; };
@@ -4318,7 +4305,6 @@
 		E1406FCB2260A11300D9440C /* StepRewardCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRewardCheckViewController.swift; sourceTree = "<group>"; };
 		E14BDFF9224CCFE20007DD7D /* MnemonicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicCell.swift; sourceTree = "<group>"; };
 		E14BDFFA224CCFE20007DD7D /* MnemonicCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MnemonicCell.xib; sourceTree = "<group>"; };
-		E14BDFFD224CF0250007DD7D /* RestorePathViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePathViewController.swift; sourceTree = "<group>"; };
 		E14F7FB4227ADAA300FDDC75 /* QRScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScanViewController.swift; sourceTree = "<group>"; };
 		E14FDC832373C52C00095C06 /* KavaAccountInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaAccountInfo.swift; sourceTree = "<group>"; };
 		E151B62C2245248C0026B8C0 /* MyValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorCell.swift; sourceTree = "<group>"; };
@@ -4347,7 +4333,6 @@
 		E16B89132341C558003E0922 /* TokenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenCell.swift; sourceTree = "<group>"; };
 		E16B89142341C558003E0922 /* TokenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenCell.xib; sourceTree = "<group>"; };
 		E16D9B1422489B030019B7BB /* IntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroViewController.swift; sourceTree = "<group>"; };
-		E16D9B162248BD990019B7BB /* CreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		E16D9B182248C4880019B7BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E16D9B1A2248D1370019B7BB /* BoarderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoarderLabel.swift; sourceTree = "<group>"; };
 		E16D9B1C2248E6A60019B7BB /* WKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKey.swift; sourceTree = "<group>"; };
@@ -6064,11 +6049,6 @@
 			children = (
 				E103DAE022814802006C2146 /* Init.storyboard */,
 				E16D9B1422489B030019B7BB /* IntroViewController.swift */,
-				E16D9B162248BD990019B7BB /* CreateViewController.swift */,
-				E1271B05224B874A0083AF17 /* AddAddressViewController.swift */,
-				E1271B09224C943C0083AF17 /* RestoreViewController.swift */,
-				E14BDFFD224CF0250007DD7D /* RestorePathViewController.swift */,
-				04AAD5BC275BBD23002D3A95 /* KeyRestoreViewController.swift */,
 			);
 			path = Init;
 			sourceTree = "<group>";
@@ -8014,7 +7994,6 @@
 				18FFB4A3281AF533004E65BB /* EarnUnbondingCell.swift in Sources */,
 				1817CBBD283E2CE500523713 /* cryptoorg_supply_v1_query.pb.swift in Sources */,
 				18FFB4A5281AF533004E65BB /* SifSwap3ViewController.swift in Sources */,
-				18FFB4A8281AF533004E65BB /* RestoreViewController.swift in Sources */,
 				18FFB4AA281AF533004E65BB /* StepOkDepositCheckViewController.swift in Sources */,
 				1817CB7B283E2CE500523713 /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				18FFB4AB281AF533004E65BB /* HarvestDetailTopCell.swift in Sources */,
@@ -8034,7 +8013,6 @@
 				18FFB4BA281AF533004E65BB /* Vote.swift in Sources */,
 				1817CAF1283E2CE500523713 /* osmosis_incentives_query.pb.swift in Sources */,
 				18FFB4BD281AF533004E65BB /* Cw20BalanceReq.swift in Sources */,
-				18FFB4BE281AF533004E65BB /* KeyRestoreViewController.swift in Sources */,
 				18FFB4C1281AF533004E65BB /* TxIncentiveHardCell.swift in Sources */,
 				18FFB4C2281AF533004E65BB /* HardAccountValue.swift in Sources */,
 				18FFB4C3281AF533004E65BB /* StartUnbonding0ViewController.swift in Sources */,
@@ -8058,7 +8036,6 @@
 				1817CB4D283E2CE500523713 /* starname_cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				18FFB4D3281AF533004E65BB /* Coin.swift in Sources */,
 				18FFB4D4281AF533004E65BB /* SwapStatusCell.swift in Sources */,
-				18FFB4D6281AF533004E65BB /* RestorePathViewController.swift in Sources */,
 				18FFB4DB281AF533004E65BB /* WalletInflationCell.swift in Sources */,
 				0451FC7A282A3AC700214FDA /* ChainJuno.swift in Sources */,
 				1817CBFA283E2CE600523713 /* tendermint_liquidity_v1beta1_query.grpc.swift in Sources */,
@@ -8197,7 +8174,6 @@
 				1817CC1B283E2CE600523713 /* starname_cosmwasm_wasm_v1_tx.grpc.swift in Sources */,
 				1817CAC0283E2CE500523713 /* desmos_profiles_legacy_v100_models_app_links.pb.swift in Sources */,
 				18FFB563281AF533004E65BB /* SwapViewController.swift in Sources */,
-				18FFB564281AF533004E65BB /* CreateViewController.swift in Sources */,
 				1817CB8F283E2CE500523713 /* cosmos_nft_v1beta1_query.grpc.swift in Sources */,
 				1817CC4A283E2CE600523713 /* cosmos_distribution_v1beta1_query.pb.swift in Sources */,
 				18FFB565281AF533004E65BB /* TxCdpWithdrawCell.swift in Sources */,
@@ -8503,7 +8479,6 @@
 				1817CC24283E2CE600523713 /* starname_cosmwasm_wasm_v1_genesis.pb.swift in Sources */,
 				1817CB52283E2CE500523713 /* desmos_posts_v1beta1_query.pb.swift in Sources */,
 				1817CB7A283E2CE500523713 /* desmos_subspaces_v1beta1_genesis.pb.swift in Sources */,
-				18FFB66F281AF533004E65BB /* AddAddressViewController.swift in Sources */,
 				18FFB670281AF533004E65BB /* CosmosTally.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -9139,7 +9114,6 @@
 				0451FC9A282A3B5000214FDA /* ChainComdex.swift in Sources */,
 				040FAACB275F55C400229F6F /* google_api_http.pb.swift in Sources */,
 				048C830127BF572800270528 /* evmos_epochs_v1_genesis.pb.swift in Sources */,
-				E1271B0A224C943C0083AF17 /* RestoreViewController.swift in Sources */,
 				040FA928275F55C300229F6F /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */,
 				28B4303E24F7EE1F00BD7BB2 /* StepOkDepositCheckViewController.swift in Sources */,
 				28156E9A2536DE14006FF06C /* HarvestDetailTopCell.swift in Sources */,
@@ -9160,7 +9134,6 @@
 				040FAA0B275F55C300229F6F /* rizon_treasury_tx.pb.swift in Sources */,
 				047FB6F1281A4C53009D8AAF /* sifnode_clp_v1_querier.grpc.swift in Sources */,
 				04E2A32527A57D270045ED21 /* Cw20BalanceReq.swift in Sources */,
-				04AAD5BD275BBD23002D3A95 /* KeyRestoreViewController.swift in Sources */,
 				047FB6EB281A4C53009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift in Sources */,
 				2889FD822603484000CA9896 /* TxIncentiveHardCell.swift in Sources */,
 				0451FDA62832370100214FDA /* osmosis_claim_v1beta1_query.grpc.swift in Sources */,
@@ -9185,7 +9158,6 @@
 				E1A82DE5224482800097CAEE /* Coin.swift in Sources */,
 				28B785B626B7B084009F755F /* SwapStatusCell.swift in Sources */,
 				040FA927275F55C300229F6F /* cryptoorg_nft_v1_query.grpc.swift in Sources */,
-				E14BDFFE224CF0250007DD7D /* RestorePathViewController.swift in Sources */,
 				040FA9E2275F55C300229F6F /* desmos_subspaces_v1beta1_genesis.pb.swift in Sources */,
 				04C43B78278D5F530022D5DF /* kava_kavadist_v1beta1_query.pb.swift in Sources */,
 				040FAA4D275F55C400229F6F /* iris_mod_nft_tx.pb.swift in Sources */,
@@ -9339,7 +9311,6 @@
 				E1827E212256292900BC0350 /* ValidatorDetailMyActionCell.swift in Sources */,
 				28E0458A269B35480022A366 /* SwapViewController.swift in Sources */,
 				0451FC8B282A3AEB00214FDA /* ChainRizon.swift in Sources */,
-				E16D9B172248BD990019B7BB /* CreateViewController.swift in Sources */,
 				28474ED0241E06AF00AF5A81 /* TxCdpWithdrawCell.swift in Sources */,
 				047FB6FC281AA8D7009D8AAF /* MnemonicListViewController.swift in Sources */,
 				2894105126FDBE8A005BCBE4 /* IBCSend0ViewController.swift in Sources */,
@@ -9621,7 +9592,6 @@
 				E1A82DE12244818C0097CAEE /* AccountInfo.swift in Sources */,
 				04D3392027E8390400E82AA7 /* gravity_v1_genesis.pb.swift in Sources */,
 				040FAB03275F55C400229F6F /* ibc_core_client_v1_tx.pb.swift in Sources */,
-				E1271B06224B874A0083AF17 /* AddAddressViewController.swift in Sources */,
 				0451FDAA2832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift in Sources */,
 				2845D889246FBA39007CD497 /* CosmosTally.swift in Sources */,
 			);
