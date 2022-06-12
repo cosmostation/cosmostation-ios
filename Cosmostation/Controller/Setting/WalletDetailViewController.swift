@@ -300,7 +300,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                 } else if (self.option == 2) {
                     let walletCheckPkeyVC = WalletCheckPKeyViewController(nibName: "WalletCheckPKeyViewController", bundle: nil)
                     walletCheckPkeyVC.hidesBottomBarWhenPushed = true
-                    walletCheckPkeyVC.accountId = self.selectedAccount.account_id
+                    walletCheckPkeyVC.selectedAccount = self.selectedAccount
                     self.navigationItem.title = ""
                     self.navigationController?.pushViewController(walletCheckPkeyVC, animated: true)
                 }
