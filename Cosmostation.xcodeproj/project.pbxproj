@@ -1720,7 +1720,6 @@
 		18FFB5B6281AF533004E65BB /* BTCMnemonic.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E12282D6AD003D8CD1 /* BTCMnemonic.m */; };
 		18FFB5B8281AF533004E65BB /* KavaIncentiveReward.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D7BE4225F0D304006EECD7 /* KavaIncentiveReward.swift */; };
 		18FFB5BA281AF533004E65BB /* IbcToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D1384E2691CAF100D6AF9F /* IbcToken.swift */; };
-		18FFB5BC281AF533004E65BB /* WalletCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E132255E6AE00BC0350 /* WalletCheckViewController.swift */; };
 		18FFB5BD281AF533004E65BB /* KavaSwapPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28EEEC8826DA548C002DDC4A /* KavaSwapPool.swift */; };
 		18FFB5BF281AF533004E65BB /* CertikVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1327A165F000B1236A /* CertikVote.swift */; };
 		18FFB5C1281AF533004E65BB /* WalletBandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28663BED248A4FB000080311 /* WalletBandCell.swift */; };
@@ -2127,7 +2126,6 @@
 		18FFB7A5281AF533004E65BB /* GenProfile0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807DB382788182000016571 /* GenProfile0ViewController.xib */; };
 		18FFB7A6281AF533004E65BB /* HdacBalancePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28393B8226B9023D00DF2F88 /* HdacBalancePopup.xib */; };
 		18FFB7A7281AF533004E65BB /* StakingTokenGrpcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283E74FE26CE247C0097CC04 /* StakingTokenGrpcViewController.xib */; };
-		18FFB7A8281AF533004E65BB /* WalletCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E103DAD5228143D0006C2146 /* WalletCheckViewController.xib */; };
 		18FFB7A9281AF533004E65BB /* TxLockTokenCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CFBD58269301660013150B /* TxLockTokenCell.xib */; };
 		18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1271B02224B17230083AF17 /* Localizable.strings */; };
 		18FFB7AB281AF533004E65BB /* GenDenom0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF015277B43E300F72C11 /* GenDenom0ViewController.xib */; };
@@ -2775,7 +2773,6 @@
 		E103DAC02281296E006C2146 /* QRScanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E103DAC22281296E006C2146 /* QRScanViewController.xib */; };
 		E103DAC9228129FD006C2146 /* WalletManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E103DACB228129FD006C2146 /* WalletManageViewController.xib */; };
 		E103DACE22813248006C2146 /* WalletDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E103DAD022813248006C2146 /* WalletDetailViewController.xib */; };
-		E103DAD3228143D0006C2146 /* WalletCheckViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E103DAD5228143D0006C2146 /* WalletCheckViewController.xib */; };
 		E103DADE22814802006C2146 /* Init.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E103DAE022814802006C2146 /* Init.storyboard */; };
 		E103DAE322814DFC006C2146 /* GenTx.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E103DAE522814DFC006C2146 /* GenTx.storyboard */; };
 		E10492132347B41000A2980F /* WalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10492122347B41000A2980F /* WalletConnectViewController.swift */; };
@@ -2859,7 +2856,6 @@
 		E17748FA22842689003D8CD1 /* AllValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E17748FC22842689003D8CD1 /* AllValidatorCell.xib */; };
 		E177490122842724003D8CD1 /* MyValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E177490322842724003D8CD1 /* MyValidatorCell.xib */; };
 		E1827E112254C92900BC0350 /* WalletDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E0F2254C92900BC0350 /* WalletDetailViewController.swift */; };
-		E1827E152255E6AE00BC0350 /* WalletCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E132255E6AE00BC0350 /* WalletCheckViewController.swift */; };
 		E1827E18225620D000BC0350 /* VaildatorDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E17225620D000BC0350 /* VaildatorDetailViewController.swift */; };
 		E1827E1B225628FF00BC0350 /* ValidatorDetailMyDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E19225628FF00BC0350 /* ValidatorDetailMyDetailCell.swift */; };
 		E1827E212256292900BC0350 /* ValidatorDetailMyActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E1F2256292900BC0350 /* ValidatorDetailMyActionCell.swift */; };
@@ -4276,8 +4272,6 @@
 		E103DACD22812A17006C2146 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/WalletManageViewController.strings; sourceTree = "<group>"; };
 		E103DACF22813248006C2146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WalletDetailViewController.xib; sourceTree = "<group>"; };
 		E103DAD222813256006C2146 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/WalletDetailViewController.strings; sourceTree = "<group>"; };
-		E103DAD4228143D0006C2146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WalletCheckViewController.xib; sourceTree = "<group>"; };
-		E103DADD2281463E006C2146 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/WalletCheckViewController.strings; sourceTree = "<group>"; };
 		E103DADF22814802006C2146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Init.storyboard; sourceTree = "<group>"; };
 		E103DAE222814815006C2146 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Init.strings; sourceTree = "<group>"; };
 		E103DAE422814DFC006C2146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GenTx.storyboard; sourceTree = "<group>"; };
@@ -4382,7 +4376,6 @@
 		E1774900228426DC003D8CD1 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/AllValidatorCell.strings; sourceTree = "<group>"; };
 		E177490222842724003D8CD1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MyValidatorCell.xib; sourceTree = "<group>"; };
 		E1827E0F2254C92900BC0350 /* WalletDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetailViewController.swift; sourceTree = "<group>"; };
-		E1827E132255E6AE00BC0350 /* WalletCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCheckViewController.swift; sourceTree = "<group>"; };
 		E1827E17225620D000BC0350 /* VaildatorDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VaildatorDetailViewController.swift; sourceTree = "<group>"; };
 		E1827E19225628FF00BC0350 /* ValidatorDetailMyDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailMyDetailCell.swift; sourceTree = "<group>"; };
 		E1827E1F2256292900BC0350 /* ValidatorDetailMyActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailMyActionCell.swift; sourceTree = "<group>"; };
@@ -6054,8 +6047,6 @@
 				E103DAD022813248006C2146 /* WalletDetailViewController.xib */,
 				047FB70E281EC0E8009D8AAF /* WalletDeriveViewController.swift */,
 				047FB70F281EC0E8009D8AAF /* WalletDeriveViewController.xib */,
-				E1827E132255E6AE00BC0350 /* WalletCheckViewController.swift */,
-				E103DAD5228143D0006C2146 /* WalletCheckViewController.xib */,
 				041399E9275C94490013A1BE /* WalletCheckPKeyViewController.swift */,
 				041399EA275C94490013A1BE /* WalletCheckPKeyViewController.xib */,
 				287654692726B2690071FF96 /* WalletChainEditViewController.swift */,
@@ -6912,7 +6903,6 @@
 				18FFB7A5281AF533004E65BB /* GenProfile0ViewController.xib in Resources */,
 				18FFB7A6281AF533004E65BB /* HdacBalancePopup.xib in Resources */,
 				18FFB7A7281AF533004E65BB /* StakingTokenGrpcViewController.xib in Resources */,
-				18FFB7A8281AF533004E65BB /* WalletCheckViewController.xib in Resources */,
 				18FFB7A9281AF533004E65BB /* TxLockTokenCell.xib in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 				18FFB7AB281AF533004E65BB /* GenDenom0ViewController.xib in Resources */,
@@ -7287,7 +7277,6 @@
 				2807DB3A2788182000016571 /* GenProfile0ViewController.xib in Resources */,
 				28393B8426B9023D00DF2F88 /* HdacBalancePopup.xib in Resources */,
 				283E750026CE247C0097CC04 /* StakingTokenGrpcViewController.xib in Resources */,
-				E103DAD3228143D0006C2146 /* WalletCheckViewController.xib in Resources */,
 				04CFBD5A269301660013150B /* TxLockTokenCell.xib in Resources */,
 				E1271B04224B17230083AF17 /* Localizable.strings in Resources */,
 				046FF017277B43E300F72C11 /* GenDenom0ViewController.xib in Resources */,
@@ -8310,7 +8299,6 @@
 				1817CC46283E2CE600523713 /* crescent_farming_v1beta1_tx.pb.swift in Sources */,
 				18FFB5BA281AF533004E65BB /* IbcToken.swift in Sources */,
 				1817CB11283E2CE500523713 /* ibc_core_channel_v1_channel.pb.swift in Sources */,
-				18FFB5BC281AF533004E65BB /* WalletCheckViewController.swift in Sources */,
 				1817CACF283E2CE500523713 /* cosmos_bank_v1beta1_bank.pb.swift in Sources */,
 				18FFB5BD281AF533004E65BB /* KavaSwapPool.swift in Sources */,
 				1817CAFE283E2CE500523713 /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
@@ -9452,7 +9440,6 @@
 				28D7BE4325F0D304006EECD7 /* KavaIncentiveReward.swift in Sources */,
 				040FA951275F55C300229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */,
 				04D1384F2691CAF100D6AF9F /* IbcToken.swift in Sources */,
-				E1827E152255E6AE00BC0350 /* WalletCheckViewController.swift in Sources */,
 				28EEEC8926DA548C002DDC4A /* KavaSwapPool.swift in Sources */,
 				04C43B4B278D5F520022D5DF /* kava_auction_v1beta1_auction.pb.swift in Sources */,
 				04B1BE1427A165F000B1236A /* CertikVote.swift in Sources */,
@@ -9834,15 +9821,6 @@
 				E103DAD222813256006C2146 /* ko */,
 			);
 			name = WalletDetailViewController.xib;
-			sourceTree = "<group>";
-		};
-		E103DAD5228143D0006C2146 /* WalletCheckViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E103DAD4228143D0006C2146 /* Base */,
-				E103DADD2281463E006C2146 /* ko */,
-			);
-			name = WalletCheckViewController.xib;
 			sourceTree = "<group>";
 		};
 		E103DAE022814802006C2146 /* Init.storyboard */ = {
