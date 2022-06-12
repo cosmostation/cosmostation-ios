@@ -13,6 +13,187 @@ import UserNotifications
 import GRPC
 import NIO
 
+class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, PasswordViewDelegate {
+    
+    @IBOutlet weak var walletDetailListTableView: UITableView!
+    @IBOutlet weak var importActionView: UIStackView!
+    @IBOutlet weak var checkActionView: UIStackView!
+    
+    var selectedAccount: Account!
+    var selectedChainType: ChainType!
+    var selectedChainConfig: ChainConfig!
+    var chainId = ""
+    var rewardAddress: String?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.selectedChainType = WUtils.getChainType(selectedAccount.account_base_chain)
+        self.selectedChainConfig = ChainFactory().getChainConfig(selectedChainType)
+        
+        self.walletDetailListTableView.delegate = self
+        self.walletDetailListTableView.dataSource = self
+        self.walletDetailListTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.walletDetailListTableView.register(UINib(nibName: "WalletDetailAddressCell", bundle: nil), forCellReuseIdentifier: "WalletDetailAddressCell")
+        self.walletDetailListTableView.register(UINib(nibName: "WalletDetailPushCell", bundle: nil), forCellReuseIdentifier: "WalletDetailPushCell")
+        self.walletDetailListTableView.register(UINib(nibName: "WalletDetailInfoCell", bundle: nil), forCellReuseIdentifier: "WalletDetailInfoCell")
+        self.walletDetailListTableView.register(UINib(nibName: "WalletDetailRewardCell", bundle: nil), forCellReuseIdentifier: "WalletDetailRewardCell")
+        self.walletDetailListTableView.rowHeight = UITableView.automaticDimension
+        self.walletDetailListTableView.estimatedRowHeight = UITableView.automaticDimension
+        
+        if (selectedChainConfig.isGrpc) {
+            self.onFetchRewardAddress_gRPC(selectedAccount!.account_address)
+            self.onFetchgRPCNodeInfo()
+        } else {
+            self.onFetchNodeInfo()
+        }
+        
+        if (selectedAccount.account_has_private) {
+            self.checkActionView.isHidden = false
+        } else {
+            self.importActionView.isHidden = false
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_wallet_detail", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_wallet_detail", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.stopAvoidingKeyboard()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.row == 1) {
+            return UITableView.automaticDimension
+        } else if (indexPath.row == 3) {
+            if (rewardAddress == nil) { return 0 }
+            else { return UITableView.automaticDimension }
+        }
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDetailAddressCell") as! WalletDetailAddressCell
+            cell.onBindView(selectedChainConfig, selectedAccount)
+            cell.actionNickname = {
+                print("actionNickname")
+            }
+            return cell
+            
+        } else if (indexPath.row == 1) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDetailPushCell") as! WalletDetailPushCell
+            return cell
+            
+        } else if (indexPath.row == 2) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDetailInfoCell") as! WalletDetailInfoCell
+            cell.onBindView(selectedChainConfig, selectedAccount, chainId)
+            cell.actionAddress = {
+                print("actionAddress")
+            }
+            return cell
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDetailRewardCell") as! WalletDetailRewardCell
+            cell.onBindView(selectedChainConfig, selectedAccount, rewardAddress)
+            cell.actionReward = {
+                print("actionReward")
+            }
+            return cell
+        }
+    }
+    
+    func passwordResponse(result: Int) {
+        return
+    }
+    
+    
+    @IBAction func onClickCheckMenmonic(_ sender: UIButton) {
+    }
+    
+    @IBAction func onClickCheckPrivateKey(_ sender: UIButton) {
+    }
+    
+    @IBAction func onClickImportMenmonic(_ sender: UIButton) {
+    }
+    
+    @IBAction func onClickImportPrivateKey(_ sender: UIButton) {
+    }
+    
+    @IBAction func onClickDelete(_ sender: UIButton) {
+    }
+    
+    
+    func onFetchRewardAddress_gRPC(_ address: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.selectedChainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = address }
+                if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegatorWithdrawAddress(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.rewardAddress = response.withdrawAddress.replacingOccurrences(of: "\"", with: "")
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchRewardAddress_gRPC failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: {
+                self.walletDetailListTableView.beginUpdates()
+                self.walletDetailListTableView.reloadRows(at: [IndexPath(row: 3, section: 0)], with: .none)
+                self.walletDetailListTableView.endUpdates()
+            });
+        }
+    }
+    
+    
+    func onFetchNodeInfo() {
+        let request = Alamofire.request(BaseNetWork.nodeInfoUrl(selectedChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                guard let responseData = res as? NSDictionary, let nodeInfo = responseData.object(forKey: "node_info") as? NSDictionary else {
+                    return
+                }
+                self.chainId = NodeInfo.init(nodeInfo).network ?? ""
+                DispatchQueue.main.async(execute: {
+                    self.walletDetailListTableView.beginUpdates()
+                    self.walletDetailListTableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+                    self.walletDetailListTableView.endUpdates()
+                });
+                
+            case .failure(let error):
+                print("onFetchTopValidatorsInfo ", error)
+            }
+        }
+    }
+    
+    func onFetchgRPCNodeInfo() {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.selectedChainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
+                if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.chainId = response.nodeInfo.network
+                }
+                try channel.close().wait()
+            } catch { print("onFetchgRPCNodeInfo failed: \(error)") }
+            
+            DispatchQueue.main.async(execute: {
+                self.walletDetailListTableView.beginUpdates()
+                self.walletDetailListTableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+                self.walletDetailListTableView.endUpdates()
+            });
+        }
+    }
+}
+
+/*
 class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
 
     var accountId: Int64?
@@ -787,3 +968,4 @@ class WalletDetailViewController: BaseViewController, PasswordViewDelegate {
     }
     
 }
+ */

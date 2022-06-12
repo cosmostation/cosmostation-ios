@@ -18,7 +18,6 @@ class MainTabSettingViewController: BaseViewController {
     @IBOutlet weak var titleChainName: UILabel!
     
     var mainTabVC: MainTabViewController!
-    var toAddChain: ChainType?
 
     override func viewDidLoad() {
         super.viewDidLoad()
