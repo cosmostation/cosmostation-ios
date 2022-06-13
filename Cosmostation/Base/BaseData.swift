@@ -1020,6 +1020,16 @@ final class BaseData : NSObject{
         }
     }
     
+    public func deleteMnemonic(_ mwords: MWords) -> Int {
+        let query = DB_MNEMONIC.filter(DB_MNEMONIC_ID == mwords.id)
+        do {
+            return  try database.run(query.delete())
+        } catch {
+            print(error)
+            return -1
+        }
+    }
+    
     
     
     

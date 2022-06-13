@@ -79,6 +79,8 @@
 "share_qr" = "Share QrCode Image";
 "delete_wallet" = "Delete Wallet";
 "delete_wallet_msg" = "All information about this wallet will delete. \nIf you do not backup your mnemonics, you can not find it again!";
+"delete_menmonic" = "Delete Mnemonic";
+"delete_menmonic_msg" = "If you do not backup your mnemonics, you can not find it again!\n\nAnd %@ derived wallets will also be deleted";
 "ready" = "Ready";
 "imported" = "Imported";
 "override" = "Override";

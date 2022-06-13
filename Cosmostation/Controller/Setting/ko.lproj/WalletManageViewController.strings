@@ -12,7 +12,7 @@
 "WUS-3w-tLy.normalTitle" = "지갑 복원";
 
 /* Class = "UILabel"; text = "Mnemonics"; ObjectID = "mzD-3c-jGV"; */
-"mzD-3c-jGV.text" = "복구 단어";
+"mzD-3c-jGV.text" = "니모닉";
 
 /* Class = "UILabel"; text = "import"; ObjectID = "vfA-v0-njz"; */
 "vfA-v0-njz.text" = "복원 하기";

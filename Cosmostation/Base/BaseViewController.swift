@@ -77,6 +77,13 @@ class BaseViewController: UIViewController {
         self.present(mainTabVC, animated: true, completion: nil)
     }
     
+    func onStartIntro() {
+        let introVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "StartNavigation")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = introVC
+        self.present(introVC, animated: true, completion: nil)
+    }
+    
     
     func onStartImportMnemonic() {
         let restoreVC = MnemonicRestoreViewController(nibName: "MnemonicRestoreViewController", bundle: nil)
@@ -103,8 +110,7 @@ class BaseViewController: UIViewController {
         self.navigationController?.pushViewController(txDetailVC, animated: true)
     }
     
-    func onDeleteWallet(_ account:Account) {
-        self.showWaittingAlert()
+    func onDeleteWallet(_ account:Account, completion: @escaping () -> ()) {
         self.onDeleteAlarm(account)
         DispatchQueue.global().async {
             BaseData.instance.deleteAccount(account: account)
@@ -117,28 +123,41 @@ class BaseViewController: UIViewController {
             if (KeychainWrapper.standard.hasValue(forKey: account.getPrivateKeySha1())) {
                 KeychainWrapper.standard.removeObject(forKey: account.getPrivateKeySha1())
             }
-            
-            for chain in BaseData.instance.dpSortedChains() {
-                let accountNum = BaseData.instance.selectAllAccountsByChain(chain).count
-                if (accountNum > 0) {
-                    let account = BaseData.instance.selectAllAccountsByChain(chain)[0]
-                    BaseData.instance.setRecentAccountId(account.account_id)
-                    BaseData.instance.setRecentChain(chain)
-                    break
-                }
-            }
-            
-            DispatchQueue.main.async(execute: {
-                self.hideWaittingAlert()
-                self.onShowToast(NSLocalizedString("wallet_delete_complete", comment: ""))
-                
-                let introVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "StartNavigation")
-                let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                appDelegate.window?.rootViewController = introVC
-                self.present(introVC, animated: true, completion: nil)
-            });
+            completion()
         }
     }
+    
+    func onDeleteMnemonic(_ mwords: MWords, completion: @escaping () -> ()) {
+        DispatchQueue.global().async {
+            let linkedAccounts = BaseData.instance.selectAccountsByMnemonic(mwords.id)
+            linkedAccounts.forEach { account in
+                self.onDeleteWallet(account) { }
+            }
+            
+            BaseData.instance.deleteMnemonic(mwords)
+            if (KeychainWrapper.standard.hasValue(forKey: mwords.uuid.sha1())) {
+                KeychainWrapper.standard.removeObject(forKey: mwords.uuid.sha1())
+            }
+            completion()
+        }
+    }
+    
+    func onSelectNextAccount() {
+        if let nextAccount = BaseData.instance.selectAllAccounts().first {
+            let nextChainType = WUtils.getChainType(nextAccount.account_base_chain)!
+            BaseData.instance.setRecentAccountId(nextAccount.account_id)
+            BaseData.instance.setRecentChain(nextChainType)
+            
+            var hiddenChains = BaseData.instance.userHideChains()
+            if (hiddenChains.contains(nextChainType)) {
+                if let position = hiddenChains.firstIndex(where: { $0 == nextChainType }) {
+                    hiddenChains.remove(at: position)
+                }
+                BaseData.instance.setUserHiddenChains(hiddenChains)
+            }
+        }
+    }
+    
     
     func onShowToast(_ text:String) {
         var style = ToastStyle()

@@ -17,7 +17,6 @@ public class MWords {
     var wordsCnt: Int64 = 0;
     var isFavo: Bool = false;
     var importTime:Int64 = -1;
-    var linkedAccountsCnt: UInt16 = 0;
     
     init (isNew: Bool) {
         uuid = UUID().uuidString

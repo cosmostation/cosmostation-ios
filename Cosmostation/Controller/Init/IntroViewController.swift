@@ -15,7 +15,7 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     @IBOutlet weak var bottomLogoView: UIView!
     @IBOutlet weak var bottomControlView: UIView!
     
-    var accounts:Array<Account>?
+    var accounts: Array<Account>?
     var lockPasses = false;
     
     override func viewDidLoad() {

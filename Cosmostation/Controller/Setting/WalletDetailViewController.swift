@@ -254,16 +254,6 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func onClickDelete(_ sender: UIButton) {
-        let dpChains = BaseData.instance.dpSortedChains()
-        var accountSum = 0;
-        dpChains.forEach { chain in
-            let accountNum = BaseData.instance.selectAllAccountsByChain(chain).count
-            accountSum = accountSum + accountNum
-        }
-        if (accountSum <= 1) {
-            self.onShowToast(NSLocalizedString("error_reserve_1_account", comment: ""))
-            return
-        }
         let deleteAlert = UIAlertController(title: NSLocalizedString("delete_wallet", comment: ""), message: NSLocalizedString("delete_wallet_msg", comment: ""), preferredStyle: .alert)
         deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { _ in
             if (self.selectedAccount.account_has_private) {
@@ -275,7 +265,15 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                 self.navigationController?.pushViewController(passwordVC, animated: false)
                 
             } else {
-                self.onDeleteWallet(self.selectedAccount)
+                self.showWaittingAlert()
+                self.onDeleteWallet(self.selectedAccount) {
+                    DispatchQueue.main.async(execute: {
+                        self.onSelectNextAccount()
+                        self.hideWaittingAlert()
+                        self.onShowToast(NSLocalizedString("wallet_delete_complete", comment: ""))
+                        self.onStartIntro()
+                    });
+                }
             }
         }))
         deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
@@ -308,9 +306,16 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
             
         } else if (result == PASSWORD_RESUKT_OK_FOR_DELETE) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
-                self.onDeleteWallet(self.selectedAccount)
+                self.showWaittingAlert()
+                self.onDeleteWallet(self.selectedAccount) {
+                    DispatchQueue.main.async(execute: {
+                        self.onSelectNextAccount()
+                        self.hideWaittingAlert()
+                        self.onShowToast(NSLocalizedString("wallet_delete_complete", comment: ""))
+                        self.onStartIntro()
+                    });
+                }
             })
-            
         }
     }
     

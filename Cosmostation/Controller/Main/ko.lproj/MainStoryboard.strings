@@ -18,7 +18,7 @@
 "6TF-Qv-8do.text" = "(CoinMarketCap)";
 
 /* Class = "UILabel"; text = "Mnemonic"; ObjectID = "7Wu-Zh-1eV"; */
-"7Wu-Zh-1eV.text" = "복구 단어";
+"7Wu-Zh-1eV.text" = "니모닉";
 
 /* Class = "UILabel"; text = "My Address"; ObjectID = "7XC-g0-Xht"; */
 "7XC-g0-Xht.text" = "내 주소";

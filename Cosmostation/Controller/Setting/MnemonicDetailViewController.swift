@@ -9,7 +9,7 @@
 import UIKit
 import SwiftKeychainWrapper
 
-class MnemonicDetailViewController: BaseViewController {
+class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var mnemonicNameLabel: UILabel!
     
@@ -142,6 +142,24 @@ class MnemonicDetailViewController: BaseViewController {
     }
     
     @IBAction func onClickDelete(_ sender: UIButton) {
+        let deleteAlert = UIAlertController(title: NSLocalizedString("delete_menmonic", comment: ""),
+                                            message: String(format: NSLocalizedString("delete_menmonic_msg", comment: ""), String(self.mWords.getLinkedWalletCnt())),
+                                            preferredStyle: .alert)
+        deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { _ in
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_DELETE_ACCOUNT
+            passwordVC.resultDelegate = self
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }))
+        deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        self.present(deleteAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            deleteAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
     }
     
     func onDeriveWallet() {
@@ -150,8 +168,6 @@ class MnemonicDetailViewController: BaseViewController {
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(walletDeriveVC, animated: true)
     }
-    
-    
     
     func onCopyAlert() {
         let copyAlert = UIAlertController(title: NSLocalizedString("str_safe_copy_title", comment: ""), message: NSLocalizedString("str_safe_copy_msg", comment: ""), preferredStyle: .alert)
@@ -190,6 +206,23 @@ class MnemonicDetailViewController: BaseViewController {
         self.present(nameAlert, animated: true) {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
             nameAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    
+    func passwordResponse(result: Int) {
+        if (result == PASSWORD_RESUKT_OK_FOR_DELETE) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
+                self.showWaittingAlert()
+                self.onDeleteMnemonic(self.mWords) {
+                    DispatchQueue.main.async(execute: {
+                        self.onSelectNextAccount()
+                        self.hideWaittingAlert()
+                        self.onShowToast(NSLocalizedString("wallet_delete_complete", comment: ""))
+                        self.onStartIntro()
+                    });
+                }
+            })
         }
     }
 }
