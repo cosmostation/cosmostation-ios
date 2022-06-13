@@ -46,7 +46,7 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
         BaseData.instance.upgradeAaccountAddressforPath()
         
 //        print("getDBVersion ", BaseData.instance.getDBVersion())
-        if (BaseData.instance.getDBVersion() < DB_VERSION) {
+        if (BaseData.instance.getDBVersion() < DB_VERSION && !BaseData.instance.getUsingEnginerMode()) {
             onShowDBUpdate2()
         } else {
             onCheckPassWordState()
@@ -61,10 +61,21 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
             DispatchQueue.global(qos: .background).async(execute: {
                 BaseData.instance.upgradeMnemonicDB()
                 
+                var wordKeypair = Array<WordSeedPair>()
+                BaseData.instance.selectAllMnemonics().forEach { word in
+                    if (wordKeypair.filter { $0.word == word.getWords() }.first == nil) {
+                        DispatchQueue.main.async(flags: .barrier, execute: {
+                            dbAlert.message = "\nPlease wait for upgrade\n\n Mnemonic deriving : " + String(wordKeypair.count)
+                        })
+                        let seed = WKey.getSeedFromWords(word)!
+                        wordKeypair.append(WordSeedPair(word.getWords(), seed))
+                    }
+                }
+                
                 let allAccounts = BaseData.instance.selectAllAccounts().filter { $0.account_from_mnemonic == true }
                 var progress = 0
                 for tempAccount in allAccounts {
-                    BaseData.instance.setPkeyUpdate(tempAccount)
+                    BaseData.instance.setPkeyUpdate(tempAccount, wordKeypair)
                     progress += 1
                     DispatchQueue.main.async(flags: .barrier, execute: {
                         dbAlert.message = "\nPlease wait for upgrade\n\n" +
@@ -220,5 +231,14 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
         updateAlert.addAction(action)
         self.present(updateAlert, animated: true, completion: nil)
     }
+}
+
+struct WordSeedPair {
+    var word: String
+    var seed: Data
     
+    init(_ word: String, _ seed: Data) {
+        self.word = word
+        self.seed = seed
+    }
 }

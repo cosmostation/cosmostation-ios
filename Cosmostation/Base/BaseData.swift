@@ -1379,9 +1379,13 @@ final class BaseData : NSObject{
         }
     }
     
-    public func setPkeyUpdate(_ account :Account) {
+    public func setPkeyUpdate(_ account :Account, _ wordSeedPairs: Array<WordSeedPair>) {
         if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
-            let pKey = WKey.getPrivateRaw(words.components(separatedBy: " "), account)
+            let seed = wordSeedPairs.filter { $0.word == words }.first!.seed
+            let chainType = WUtils.getChainType(account.account_base_chain)!
+            let chainConfig = ChainFactory().getChainConfig(chainType)
+            let fullPath = chainConfig.getHdPath(Int(account.account_custom_path), Int(account.account_path)!)
+            let pKey = WKey.getPrivateKeyDataFromSeed(seed, fullPath)
             KeychainWrapper.standard.set(pKey.hexEncodedString(), forKey: account.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
         }
     }
