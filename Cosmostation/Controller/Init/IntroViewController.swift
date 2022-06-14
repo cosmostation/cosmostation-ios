@@ -62,10 +62,12 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
                 BaseData.instance.upgradeMnemonicDB()
                 
                 var wordKeypair = Array<WordSeedPair>()
-                BaseData.instance.selectAllMnemonics().forEach { word in
+                let allMnemonics = BaseData.instance.selectAllMnemonics()
+                allMnemonics.forEach { word in
                     if (wordKeypair.filter { $0.word == word.getWords() }.first == nil) {
                         DispatchQueue.main.async(flags: .barrier, execute: {
-                            dbAlert.message = "\nPlease wait for upgrade\n\n Mnemonic deriving : " + String(wordKeypair.count)
+                            dbAlert.message = "\nPlease wait for upgrade\n(Do not close the application)\n\n Mnemonic deriving : " +
+                            String(wordKeypair.count) + "/" + String(allMnemonics.count)
                         })
                         let seed = WKey.getSeedFromWords(word)!
                         wordKeypair.append(WordSeedPair(word.getWords(), seed))

@@ -1355,20 +1355,23 @@ final class BaseData : NSObject{
         }
 
         //insert keychain and db for mnemonic
+        var mnemonicWords = selectAllMnemonics()
         alreadyWords.forEach { alreadyWord in
-            let tempMWords = MWords.init(isNew: true)
-            if (KeychainWrapper.standard.set(alreadyWord, forKey: tempMWords.uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)) {
-                tempMWords.wordsCnt = Int64(alreadyWord.count)
-                _ = insertMnemonics(tempMWords)
+            if (mnemonicWords.filter { $0.getWords() == alreadyWord }.first == nil) {
+                let tempMWords = MWords.init(isNew: true)
+                if (KeychainWrapper.standard.set(alreadyWord, forKey: tempMWords.uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)) {
+                    tempMWords.wordsCnt = Int64(alreadyWord.count)
+                    _ = insertMnemonics(tempMWords)
+                }
             }
         }
         
         //link account and mnemonic id(fkey)
-        let MnemonicWords = selectAllMnemonics()
+        mnemonicWords = selectAllMnemonics()
         selectAllAccounts().forEach { account in
             if (account.account_from_mnemonic) {
                 if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
-                    MnemonicWords.forEach { mnemonicWord in
+                    mnemonicWords.forEach { mnemonicWord in
                         if (mnemonicWord.getWords() == words) {
                             account.account_mnemonic_id = mnemonicWord.id
                             updateMnemonicId(account)
