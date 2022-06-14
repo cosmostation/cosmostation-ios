@@ -101,7 +101,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.totalCard.addGestureRecognizer(tapTotalCard)
-        
         self.updateFloaty()
     }
     
@@ -1754,8 +1753,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                             return
                         }
                         if UIApplication.shared.canOpenURL(settingsUrl) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                            })
+                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
                         }
                     }
                     let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)

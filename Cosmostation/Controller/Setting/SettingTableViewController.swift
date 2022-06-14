@@ -78,15 +78,29 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             if(indexPath.row == 0) {
-                if let parentVC = self.parent as? MainTabSettingViewController {
-                    parentVC.onShowSelectChainDialog(true)
-                }
+                let mnemonicManageVC = MnemonicListViewController(nibName: "MnemonicListViewController", bundle: nil)
+                mnemonicManageVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(mnemonicManageVC, animated: true)
                 
             } else if (indexPath.row == 1) {
                 let accoutManageVC = WalletManageViewController(nibName: "WalletManageViewController", bundle: nil)
                 accoutManageVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(accoutManageVC, animated: true)
+                
+            } else if (indexPath.row == 2) {
+                let privateKeyRestoreVC = PrivateKeyRestoreViewController(nibName: "PrivateKeyRestoreViewController", bundle: nil)
+                privateKeyRestoreVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(privateKeyRestoreVC, animated: true)
+                
+            } else if (indexPath.row == 3) {
+                let watchingAddressVC = WatchingAddressViewController(nibName: "WatchingAddressViewController", bundle: nil)
+                watchingAddressVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(watchingAddressVC, animated: true)
+                
             }
             
         } else if (indexPath.section == 1) {

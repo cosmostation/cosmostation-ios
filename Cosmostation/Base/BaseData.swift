@@ -761,6 +761,14 @@ final class BaseData : NSObject{
         return UserDefaults.standard.string(forKey: KEY_PRE_EVENT_HIDE) ?? ICON_DEFAULT
     }
     
+    func setDBVersion(_ version: Int) {
+        UserDefaults.standard.set(version, forKey: KEY_DB_VERSION)
+    }
+    
+    func getDBVersion() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_DB_VERSION)
+    }
+    
     func getUserHiddenChains() -> Array<String>? {
         return UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
     }
@@ -914,21 +922,12 @@ final class BaseData : NSObject{
                 table.column(DB_ACCOUNT_IMPORT_TIME)
             }
             try self.database.run(createAccountTable)
-            do { try self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_LAST_TOTAL, defaultValue: "")) }
-            catch { print(error) }
-            
-            do { try self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_SORT_ORDER, defaultValue: 0)) }
-            catch { print(error) }
-            
-            do { try self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_PUSHALARM, defaultValue: false)) }
-            catch { print(error) }
-            
-            do { try self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_NEW_BIP, defaultValue: false)) }
-            catch { print(error) }
-            
-            do { try self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_CUSTOM_PATH, defaultValue: 0)) }
-            catch { print(error) }
-            
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_LAST_TOTAL, defaultValue: ""))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_SORT_ORDER, defaultValue: 0))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_PUSHALARM, defaultValue: false))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_NEW_BIP, defaultValue: false))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_CUSTOM_PATH, defaultValue: 0))
+            _ = try? self.database.run(DB_ACCOUNT.addColumn(DB_ACCOUNT_MNEMONIC_ID, defaultValue: -1))
             
             let createBalanceTable = DB_BALANCE.create(ifNotExists: true) { (table) in
                 table.column(DB_BALANCE_ID, primaryKey: true)
@@ -940,16 +939,8 @@ final class BaseData : NSObject{
                 table.column(DB_BALANCE_LOCKED)
             }
             try self.database.run(createBalanceTable)
-            do {
-                try self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
-            } catch {
-                print(error)
-            }
-            do {
-                try self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
-            } catch {
-                print(error)
-            }
+            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
+            _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
 
             
             let createBondingTable = DB_BONDING.create(ifNotExists: true) { (table) in
@@ -973,10 +964,73 @@ final class BaseData : NSObject{
             }
             try self.database.run(createUnBondingTable)
             
+            let createMnemonicTable = DB_MNEMONIC.create(ifNotExists: true) { (table) in
+                table.column(DB_MNEMONIC_ID, primaryKey: true)
+                table.column(DB_MNEMONIC_UUID)
+                table.column(DB_MNEMONIC_NICKNAME)
+                table.column(DB_MNEMONIC_CNT)
+                table.column(DB_MNEMONIC_FAVO)
+                table.column(DB_MNEMONIC_IMPORT_TIME)
+            }
+            try self.database.run(createMnemonicTable)
+            _ = try? self.database.run(DB_MNEMONIC.addColumn(DB_MNEMONIC_IMPORT_TIME, defaultValue: -1))
+            
         } catch {
             print(error)
         }
     }
+    
+    
+    public func selectAllMnemonics() -> Array<MWords> {
+        var result = Array<MWords>()
+        do {
+            for mnemonicBD in try database.prepare(DB_MNEMONIC) {
+                let mWords = MWords(mnemonicBD[DB_MNEMONIC_ID], mnemonicBD[DB_MNEMONIC_UUID], mnemonicBD[DB_MNEMONIC_NICKNAME],
+                                    mnemonicBD[DB_MNEMONIC_CNT], mnemonicBD[DB_MNEMONIC_FAVO], mnemonicBD[DB_MNEMONIC_IMPORT_TIME]);
+                result.append(mWords);
+            }
+        } catch { print(error) }
+        return result
+    }
+    
+    public func selectMnemonicById(_ id: Int64) -> MWords? {
+        return selectAllMnemonics().filter { $0.id == id }.first
+    }
+    
+    public func insertMnemonics(_ mwords: MWords) -> Int64 {
+        let toInsert = DB_MNEMONIC.insert(DB_MNEMONIC_UUID <- mwords.uuid,
+                                          DB_MNEMONIC_NICKNAME <- mwords.nickName,
+                                          DB_MNEMONIC_CNT <- mwords.wordsCnt,
+                                          DB_MNEMONIC_FAVO <- mwords.isFavo,
+                                          DB_MNEMONIC_IMPORT_TIME <- mwords.importTime)
+        do {
+            return try database.run(toInsert)
+        } catch {
+            return -1
+        }
+    }
+    
+    public func updateMnemonic(_ mwords: MWords) -> Int64 {
+        let target = DB_MNEMONIC.filter(DB_MNEMONIC_ID == mwords.id)
+        do {
+            return try Int64(database.run(target.update(DB_MNEMONIC_NICKNAME <- mwords.nickName,
+                                                        DB_MNEMONIC_FAVO <- mwords.isFavo)))
+        } catch {
+            return -1
+        }
+    }
+    
+    public func deleteMnemonic(_ mwords: MWords) -> Int {
+        let query = DB_MNEMONIC.filter(DB_MNEMONIC_ID == mwords.id)
+        do {
+            return  try database.run(query.delete())
+        } catch {
+            print(error)
+            return -1
+        }
+    }
+    
+    
     
     
     public func selectAllAccounts() -> Array<Account> {
@@ -987,7 +1041,8 @@ final class BaseData : NSObject{
                                       accountBD[DB_ACCOUNT_BASECHAIN], accountBD[DB_ACCOUNT_HAS_PRIVATE],  accountBD[DB_ACCOUNT_RESOURCE], accountBD[DB_ACCOUNT_FROM_MNEMONIC],
                                       accountBD[DB_ACCOUNT_PATH], accountBD[DB_ACCOUNT_IS_VALIDATOR], accountBD[DB_ACCOUNT_SEQUENCE_NUMBER], accountBD[DB_ACCOUNT_ACCOUNT_NUMBER],
                                       accountBD[DB_ACCOUNT_FETCH_TIME], accountBD[DB_ACCOUNT_M_SIZE], accountBD[DB_ACCOUNT_IMPORT_TIME], accountBD[DB_ACCOUNT_LAST_TOTAL],
-                                      accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH]);
+                                      accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH],
+                                      accountBD[DB_ACCOUNT_MNEMONIC_ID]);
                 account.setBalances(selectBalanceById(accountId: account.account_id))
                 result.append(account);
             }
@@ -1001,6 +1056,17 @@ final class BaseData : NSObject{
             }
         }
         return result2;
+    }
+    
+    public func selectAccountsByMnemonic(_ id: Int64) -> Array<Account> {
+        var result = Array<Account>()
+        let allAccounts = selectAllAccounts()
+        for account in allAccounts {
+            if (account.account_mnemonic_id == id) {
+                result.append(account)
+            }
+        }
+        return result;
     }
     
     public func selectAllAccountsByChain(_ chain:ChainType) -> Array<Account> {
@@ -1053,7 +1119,8 @@ final class BaseData : NSObject{
                                       accountBD[DB_ACCOUNT_BASECHAIN], accountBD[DB_ACCOUNT_HAS_PRIVATE],  accountBD[DB_ACCOUNT_RESOURCE], accountBD[DB_ACCOUNT_FROM_MNEMONIC],
                                       accountBD[DB_ACCOUNT_PATH], accountBD[DB_ACCOUNT_IS_VALIDATOR], accountBD[DB_ACCOUNT_SEQUENCE_NUMBER], accountBD[DB_ACCOUNT_ACCOUNT_NUMBER],
                                       accountBD[DB_ACCOUNT_FETCH_TIME], accountBD[DB_ACCOUNT_M_SIZE], accountBD[DB_ACCOUNT_IMPORT_TIME], accountBD[DB_ACCOUNT_LAST_TOTAL],
-                                      accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH])
+                                      accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH],
+                                      accountBD[DB_ACCOUNT_MNEMONIC_ID])
                 account.setBalances(selectBalanceById(accountId: account.account_id))
                 if (!ChainType.IS_SUPPORT_CHAIN(account.account_base_chain)) {
                     if (selectAllAccounts().count > 0) {
@@ -1079,7 +1146,8 @@ final class BaseData : NSObject{
                                accountBD[DB_ACCOUNT_BASECHAIN], accountBD[DB_ACCOUNT_HAS_PRIVATE],  accountBD[DB_ACCOUNT_RESOURCE], accountBD[DB_ACCOUNT_FROM_MNEMONIC],
                                accountBD[DB_ACCOUNT_PATH], accountBD[DB_ACCOUNT_IS_VALIDATOR], accountBD[DB_ACCOUNT_SEQUENCE_NUMBER], accountBD[DB_ACCOUNT_ACCOUNT_NUMBER],
                                accountBD[DB_ACCOUNT_FETCH_TIME], accountBD[DB_ACCOUNT_M_SIZE], accountBD[DB_ACCOUNT_IMPORT_TIME], accountBD[DB_ACCOUNT_LAST_TOTAL],
-                               accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH])
+                               accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH],
+                               accountBD[DB_ACCOUNT_MNEMONIC_ID])
             }
             return nil
         } catch {
@@ -1096,7 +1164,8 @@ final class BaseData : NSObject{
                                accountBD[DB_ACCOUNT_BASECHAIN], accountBD[DB_ACCOUNT_HAS_PRIVATE],  accountBD[DB_ACCOUNT_RESOURCE], accountBD[DB_ACCOUNT_FROM_MNEMONIC],
                                accountBD[DB_ACCOUNT_PATH], accountBD[DB_ACCOUNT_IS_VALIDATOR], accountBD[DB_ACCOUNT_SEQUENCE_NUMBER], accountBD[DB_ACCOUNT_ACCOUNT_NUMBER],
                                accountBD[DB_ACCOUNT_FETCH_TIME], accountBD[DB_ACCOUNT_M_SIZE], accountBD[DB_ACCOUNT_IMPORT_TIME], accountBD[DB_ACCOUNT_LAST_TOTAL],
-                               accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH])
+                               accountBD[DB_ACCOUNT_SORT_ORDER], accountBD[DB_ACCOUNT_PUSHALARM], accountBD[DB_ACCOUNT_NEW_BIP], accountBD[DB_ACCOUNT_CUSTOM_PATH],
+                               accountBD[DB_ACCOUNT_MNEMONIC_ID])
             }
             return nil
         } catch {
@@ -1140,7 +1209,8 @@ final class BaseData : NSObject{
                                               DB_ACCOUNT_SORT_ORDER <- account.account_sort_order,
                                               DB_ACCOUNT_PUSHALARM <- account.account_push_alarm,
                                               DB_ACCOUNT_NEW_BIP <- account.account_new_bip44,
-                                              DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path)
+                                              DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path,
+                                              DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id)
         do {
             return try database.run(insertAccount)
         } catch {
@@ -1173,7 +1243,8 @@ final class BaseData : NSObject{
                                                         DB_ACCOUNT_PATH <- account.account_path,
                                                         DB_ACCOUNT_M_SIZE <- account.account_m_size,
                                                         DB_ACCOUNT_NEW_BIP <- account.account_new_bip44,
-                                                        DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path)))
+                                                        DB_ACCOUNT_CUSTOM_PATH <- account.account_custom_path,
+                                                        DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id)))
         } catch {
             print(error)
             return -1
@@ -1269,6 +1340,59 @@ final class BaseData : NSObject{
         }
     }
     
+    
+    public func upgradeMnemonicDB() {
+        //select old mnemonics for accounts
+        var alreadyWords = Array<String>()
+        selectAllAccounts().forEach { account in
+            if (account.account_from_mnemonic) {
+                if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                    if !alreadyWords.contains(words) {
+                        alreadyWords.append(words)
+                    }
+                }
+            }
+        }
+
+        //insert keychain and db for mnemonic
+        var mnemonicWords = selectAllMnemonics()
+        alreadyWords.forEach { alreadyWord in
+            if (mnemonicWords.filter { $0.getWords() == alreadyWord }.first == nil) {
+                let tempMWords = MWords.init(isNew: true)
+                if (KeychainWrapper.standard.set(alreadyWord, forKey: tempMWords.uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)) {
+                    tempMWords.wordsCnt = Int64(alreadyWord.count)
+                    _ = insertMnemonics(tempMWords)
+                }
+            }
+        }
+        
+        //link account and mnemonic id(fkey)
+        mnemonicWords = selectAllMnemonics()
+        selectAllAccounts().forEach { account in
+            if (account.account_from_mnemonic) {
+                if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
+                    mnemonicWords.forEach { mnemonicWord in
+                        if (mnemonicWord.getWords() == words) {
+                            account.account_mnemonic_id = mnemonicWord.id
+                            updateMnemonicId(account)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    public func setPkeyUpdate(_ account :Account, _ wordSeedPairs: Array<WordSeedPair>) {
+        if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            let seed = wordSeedPairs.filter { $0.word == words }.first!.seed
+            let chainType = WUtils.getChainType(account.account_base_chain)!
+            let chainConfig = ChainFactory().getChainConfig(chainType)
+            let fullPath = chainConfig.getHdPath(Int(account.account_custom_path), Int(account.account_path)!)
+            let pKey = WKey.getPrivateKeyDataFromSeed(seed, fullPath)
+            KeychainWrapper.standard.set(pKey.hexEncodedString(), forKey: account.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
+        }
+    }
+    
     public func updateLastTotal(_ account: Account?, _ amount: String) {
         if (account == nil) { return}
         let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account!.account_id)
@@ -1289,6 +1413,15 @@ final class BaseData : NSObject{
             }
         }
    }
+    
+    public func updateMnemonicId(_ account: Account) {
+        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
+        do {
+            try database.run(target.update(DB_ACCOUNT_MNEMONIC_ID <- account.account_mnemonic_id))
+        } catch {
+            print(error)
+        }
+    }
     
     public func updatePushAlarm(_ account: Account, _ enable: Bool){
         let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)

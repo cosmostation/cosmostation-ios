@@ -9,9 +9,50 @@
 import Foundation
 import CryptoSwift
 import HDWalletKit
+import web3swift
 
 
 class WKey {
+    
+    static func getSeedFromWords(_ words: MWords) -> Data? {
+        return BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
+    }
+    
+    static func getPrivateKeyDataFromSeed(_ seed: Data, _ fullpath: String) -> Data {
+        return (HDNode(seed: seed)?.derive(path: fullpath, derivePrivateKey: true)!.privateKey)!
+    }
+    
+//    static func getPrivateKeyDataWithFullPath(_ words: MWords, _ fullpath: String) -> Data {
+//        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
+//        return (HDNode(seed: seed!)?.derive(path: fullpath, derivePrivateKey: true)!.privateKey)!
+//    }
+    
+//    static func getPrivateKeyDataFromWords(_ chainConfig: ChainConfig, _ words: MWords, _ type: Int, _ path: Int) -> Data {
+//        let seed = BIP39.seedFromMmemonics(words.getWords(), password: "", language: .english)
+//        let hdPath = chainConfig.getHdPath(type, path)
+//        return (HDNode(seed: seed!)?.derive(path: hdPath, derivePrivateKey: true)!.privateKey)!
+//    }
+    
+    static func getDpAddress(_ chainConfig: ChainConfig, _ pkey: Data, _ type: Int) -> String {
+        let privateKey = PrivateKey.init(pk: pkey.hexEncodedString(), coin: .bitcoin)!
+        if (chainConfig.chainType == .OKEX_MAIN) {
+            if (type == 0) { return generateTenderAddressFromPrivateKey(pkey) }
+            else { return generateEthAddressFromPrivateKey(pkey) }
+            
+        } else if (chainConfig.chainType == .INJECTIVE_MAIN) {
+            let ethAddress = generateEthAddressFromPrivateKey(pkey)
+            return convertAddressEthToCosmos(ethAddress, "inj")
+            
+        } else if (chainConfig.chainType == .EVMOS_MAIN) {
+            let ethAddress = generateEthAddressFromPrivateKey(pkey)
+            return convertAddressEthToCosmos(ethAddress, "evmos")
+            
+        } else {
+            return getDpAddress(privateKey.publicKey, chainConfig.addressPrefix)
+        }
+    }
+    
+    
     
     static func getMasterKeyFromWords(_ m: [String]) -> PrivateKey {
         return PrivateKey(seed: Mnemonic.createSeed(mnemonic: m.joined(separator: " ")), coin: .bitcoin)
@@ -107,9 +148,27 @@ class WKey {
         }
     }
     
+    static func getDerivedKey(_ masterKey: PrivateKey, _ fullPath: String) -> PrivateKey {
+        var result = masterKey
+        let paths = fullPath.split(separator: "/")
+        
+        paths.forEach { path in
+            if let intPath = UInt32(path.replacingOccurrences(of: "'", with: "")) {
+                if (path.last == "'") { result = result.derived(at: .hardened(intPath)) }
+                else { result = result.derived(at: .notHardened(intPath)) }
+            }
+        }
+        return result
+    }
+    
+    static func getDpAddress(_ pubkey: HDWalletKit.PublicKey, _ prefix: String) -> String {
+        let ripemd160 = RIPEMD160.hash(pubkey.data.sha256())
+        return try! SegwitAddrCoder.shared.encode2(hrp: prefix, program: ripemd160)
+    }
+    
     static func getPubToDpAddress(_ pubHex:String, _ chain:ChainType) -> String {
         var result = ""
-        let sha256 = Data.fromHex(pubHex)!.sha256()
+        let sha256 = Data.fromHex2(pubHex)!.sha256()
         let ripemd160 = RIPEMD160.hash(sha256)
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.COSMOS_TEST) {
             result = try! SegwitAddrCoder.shared.encode2(hrp: "cosmos", program: ripemd160)
@@ -467,7 +526,7 @@ class WKey {
     static func getRandomNumnerHash(_ randomNumner: String, _ timeStamp: Int64) -> String {
         let timeStampData = withUnsafeBytes(of: timeStamp.bigEndian) { Data($0) }
         let originHex = randomNumner + timeStampData.hexEncodedString()
-        let hash = Data.fromHex(originHex)!.sha256()
+        let hash = Data.fromHex2(originHex)!.sha256()
         return hash.hexEncodedString()
     }
     
@@ -485,7 +544,7 @@ class WKey {
             }
             let otherSenderData = otherSender.data(using: .utf8)
             let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
-            let hash = Data.fromHex(add)!.sha256()
+            let hash = Data.fromHex2(add)!.sha256()
             return hash.hexEncodedString()
             
         } else if (toChain == ChainType.KAVA_MAIN) {
@@ -501,7 +560,7 @@ class WKey {
             }
             let otherSenderData = otherSender.data(using: .utf8)
             let add = randomNumnerHash + senderData!.hexEncodedString() + otherSenderData!.hexEncodedString()
-            let hash = Data.fromHex(add)!.sha256()
+            let hash = Data.fromHex2(add)!.sha256()
             return hash.hexEncodedString()
             
         } else {
@@ -558,7 +617,7 @@ class WKey {
         if (address.starts(with: "0x")) {
             address = address.replacingOccurrences(of: "0x", with: "")
         }
-        let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: Data.fromHex(address)!)
+        let convert = try? WKey.convertBits(from: 8, to: 5, pad: true, idata: Data.fromHex2(address)!)
         return Bech32().encode(prefix, values: convert!)
     }
     
@@ -569,7 +628,7 @@ class WKey {
         } else {
             return false
         }
-        if (Data.fromHex(address)?.count == 20) {
+        if (Data.fromHex2(address)?.count == 20) {
             return true
         }
         return false
@@ -2700,5 +2759,18 @@ class WKey {
 extension Data {
     var bytes : [UInt8]{
         return [UInt8](self)
+    }
+    
+    public static func fromHex2(_ hex: String) -> Data? {
+        let string = hex.lowercased().stripHexPrefix()
+        let array = Array<UInt8>(hex: string)
+        if (array.count == 0) {
+            if (hex == "0x" || hex == "") {
+                return Data()
+            } else {
+                return nil
+            }
+        }
+        return Data(array)
     }
 }

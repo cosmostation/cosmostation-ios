@@ -12,13 +12,13 @@
 "password_tx" = "Tx전송을 위해 PIN 번호를 입력하세요.";
 "password_app_lock" = "잠금 해제를 위해 PIN 번호를 입력하세요.";
 "password_init_warnning" = "PIN 번호는 복구하실 방법이 전혀 없습니다.\n신중히 결정하시고 잊지않도록 주의해주세요.";
-"password_msg1" = "복구 단어 분실은 자산 피해로 이어질 수 있습니다.\n오프라인으로 별도 보관하는 것을 강력히 권장하며, 본인 외 접근이 불가능하도록 유의해주세요.";
-"password_msg2" = "고객님의 자산 보호를 위해 \n복구 단어를 반드시 종이에 적어 따로 보관해주세요.\n이 단어들을 이용하여 지갑을 복원할 수 있습니다.\n(지갑관리에서 다시 확인하실 수 있습니다.)";
-"add_address_msg" = "관찰 모드로 복구 단어 입력 없이 지갑의 상태를 확인할 수 있습니다.\n추후 설정에서 복구 단어를 입력하면 송금 등의 활동이 가능합니다.";
+"password_msg1" = "니모닉 분실은 자산 피해로 이어질 수 있습니다.\n오프라인으로 별도 보관하는 것을 강력히 권장하며, 본인 외 접근이 불가능하도록 유의해주세요.";
+"password_msg2" = "고객님의 자산 보호를 위해 \n니모닉을 반드시 종이에 적어 따로 보관해주세요.\n이 단어들을 이용하여 지갑을 복원할 수 있습니다.\n(지갑관리에서 다시 확인하실 수 있습니다.)";
+"add_address_msg" = "관찰 모드로 니모닉 입력 없이 지갑의 상태를 확인할 수 있습니다.\n추후 설정에서 니모닉을 입력하면 송금 등의 활동이 가능합니다.";
 "add_address_hint" = "주소를 입력하세요.";
 
 "create_wallet" = "지갑 생성";
-"show_mnemonics" = "복구 단어 보기";
+"show_mnemonics" = "니모닉 보기";
 "prepare" = "준비중 입니다..";
 "address_copied" = "클립보드에 복사하였습니다.";
 "mnemonic_copied" = "클립보드에 복사하였습니다.";
@@ -52,7 +52,7 @@
 "vote_step_4" = "입력하신 정보를 확인하세요";
 "recipient_address" = "받을 주소";
 "reward_claim_top_16" = "이자량 순서대로 최대 16검증인으로부터 이자를 청구 합니다.";
-"add_mnemonic" = "복구 단어 추가";
+"add_mnemonic" = "니모닉 추가";
 "sort_by_name" = "이름으로 정렬";
 "sort_by_my_delegate" = "내 위임 수량으로 정렬";
 "sort_by_reward" = "내 이자 수량으로 정렬";
@@ -61,26 +61,30 @@
 "sort_by_yield" = "이율로 정렬";
 "sort_by_amount" = "수량으로 정렬";
 "sort_by_value" = "금액으로 정렬";
-"with_mnemonics" = "전송 가능 지갑 (복구단어)";
+"with_mnemonics" = "전송 가능 지갑 (니모닉)";
 "with_private_key" = "전송 가능 지갑 (개인키)";
 "only_address" = "관찰용 지갑";
 "wallet_dash" = "내 지갑 ";
 "with_mnemonic" = "전송 가능 지갑";
 "only_address" = "관찰용 지갑";
-"check_mnemonic" = "복구단어 확인";
+"check_mnemonic" = "니모닉 확인";
 "check_private_key" = "개인키 확인";
 "change_wallet_name" = "지갑 별칭 변경";
 "wallet_name" = "별칭";
+"change_mnemonic_name" = "니모닉 별칭 변경";
+"mnemonic_name" = "별칭";
 "share_text" = "\t\t주소 공유\t\t";
 "share_qr" = "\t\tQR 코드 공유\t\t";
 "delete_wallet" = "지갑 삭제";
-"delete_wallet_msg" = "지갑의 모든 정보가 삭제됩니다.\n복구 단어를 백업하지 않았을 경우 해당 지갑을 영구히 다시 복원할 수 없습니다!";
+"delete_wallet_msg" = "지갑의 모든 정보가 삭제됩니다.\n니모닉을 백업하지 않았을 경우 해당 지갑을 영구히 다시 복원할 수 없습니다!";
+"delete_menmonic" = "니모닉 삭제";
+"delete_menmonic_msg" = "해당 니모닉을 백업하지 않았을 경우 영구히 다시 복원할 수 없습니다!\n\n또한 연결된 %@개의 지갑도 삭제됩니다.";
 "ready" = "준비 완료";
-"imported" = "이미 존재함";
+"imported" = "등록됨";
 "override" = "덮어쓰기";
 "validator_address" = "검증인 주소";
 "reward_address_notice_title" = "이자 지급 주소 변경";
-"reward_address_notice_msg" = "\n이자 지급 주소를 변경하실 수 있습니다.\n주소 변경 후 이자요청시 모든 이자는 변경된 주소로 지급됩니다. 복구 단어로 접근이 가능하신 주소를 변경주소로 선택하셔야 합니다.\n\n";
+"reward_address_notice_msg" = "\n이자 지급 주소를 변경하실 수 있습니다.\n주소 변경 후 이자요청시 모든 이자는 변경된 주소로 지급됩니다. 니모닉으로 접근이 가능하신 주소를 변경주소로 선택하셔야 합니다.\n\n";
 "reward_address_notice_msg2" = "거래소 입금 주소로 설정하지 마세요.";
 "reward_address_warnning_title" = "한번 더 확인!";
 "more_wait_title" = "결과 확인 지연";
@@ -240,8 +244,8 @@
 "vesting_account" = "베스팅 계정";
 "vesting_account_msg" = "베스팅 계정으로 보입니다. 정확한 수량으로 위임 및 위임해재를 하시기 위해서 cli를 이용하시는것을 권장합니다.";
 "waiting_deposit" = "디파짓 대기중";
-"push_enabled_state_msg" = "송금, 수신 Tx확인시 푸시 알람을 받으실 수 있습니다.";
-"push_disabled_state_msg" = "알람을 켜시고 본계정의 송금, 수신에 대한 Tx를 받아보세요.";
+"push_enabled_state_msg" = "푸시 알람이 활성화 상태입니다. 송금, 수신 Tx확인시 푸시 알람을 받으실 수 있습니다.";
+"push_disabled_state_msg" = "알람이 비활성화 상태 입니다. 알람을 켜시면 송금, 수신 Tx확인시 푸시 알람을 받으실 수 있습니다.";
 "permission_push_title" = "알람 설정";
 "permission_push_msg" = "알람이 비활성화 상태 입니다.알람을 허용해주세요.";
 "retry" = "재시도";
@@ -327,6 +331,9 @@
 "str_select_starname_domain" = "도메인을 선택해 주세요.";
 "select_to_link_chain" = "링크하실 체인을 고르세요.";
 "select_to_link_account" = "링크하실 계정을 고르세요.";
+"select_hd_path" = "지정 경로를 선택 하세요";
+"import_account_title" = "지갑 추가";
+"import_account_msg" = "%@개의 지갑을 추가하시겠습니까?";
 
 "current_price_format" = "현재 %@ 가격";
 "liquidation_price_format" = "청산 %@ 가격";
@@ -542,7 +549,7 @@
 
 "str_description_open_domain" = "Open 타입은 계정 소유자가 계정에 대한 작업을 수행 할 수있는 유일한 엔티티인 도메인 유형입니다.";
 "str_description_closed_domain" = "Closed 타입은 도메인 소유자가 계정을 제어 할 수있는 도메인 유형입니다.";
-"str_safe_copy_title" = "복구단어 안전 복사";
+"str_safe_copy_title" = "니모닉 안전 복사";
 "str_safe_copy_msg" = "최근 여러 어플리케이션들이 클립보드 하이재킹을 시도하고 있습니다. 복사 붙여넣기시 클립보드에 임시 저장되는 니모닉은 하이재킹 앱들의 손쉬운 표적이 됩니다. 현재의 니모닉을 이용하여 다른지갑을 생성하시길 원한다면 \"안전 복사\"를 선택하세요. 오직 이 단말기의 코스모스테이션 앱에서만 정상적으로 붙여넣기가 지원됩니다.(앱 종료시 자동적으로 사라집니다.) \n\n다른 이유로 외부에 니모닉을 사용하기 위해서는 \"원본 복사\"를 선택하세요. 이경우 안전에 유의하시길 바랍니다.";
 "str_safe_pkey_copy_title" = "개인키 안전 복사";
 "str_safe_pkey_copy_msg" = "최근 여러 어플리케이션들이 클립보드 하이재킹을 시도하고 있습니다. 복사 붙여넣기시 클립보드에 임시 저장되는 개인키은 하이재킹 앱들의 손쉬운 표적이 됩니다. 현재의 개인키를 이용하여 다른지갑을 생성하시길 원한다면 \"안전 복사\"를 선택하세요. 오직 이 단말기의 코스모스테이션 앱에서만 정상적으로 붙여넣기가 지원됩니다.(앱 종료시 자동적으로 사라집니다.) \n\n다른 이유로 외부에 개인키를 사용하기 위해서는 \"원본 복사\"를 선택하세요. 이경우 안전에 유의하시길 바랍니다.";
@@ -562,7 +569,8 @@ BitcoinKit 라이브러리 v1.0.2로 인해 Cosmostation iOS 앱에서 생성된
 이 기능을 활성화하기 전에 코스모스테이션 지원팀과 상의하시기 바랍니다.\n
 support@cosmostation.io";
 "str_enginer_is_on_title" = "엔지니어 모드 활성화 됨";
-"str_enginer_is_on_msg" = "현재 엔지니어 모드가 켜진 상태 입니다.\n\n극히 낮은 확율로 호환성이 떨어지는 계정이 생성될 수 있으며, 사용자의 불편을 초래할 수 있습니다.\n\n사용하시기전에 반드시 코스모스테이션 관리자 팀과 상의후 이용하세요.";
+"str_enginer_is_on_msg" = "현재 엔지니어 모드가 활성화된 상태 입니다.\n\n극히 낮은 확율로 호환성이 떨어지는 계정이 생성될 수 있으며, 사용자의 불편을 초래할 수 있습니다.\n\n사용하시기전에 반드시 코스모스테이션 관리자 팀과 상의후 이용하세요.";
+"str_enginer_is_on_create_msg" = "현재 엔지니어 모드가 켜진 상태 입니다.\n\n호환성을 위해 엔지니어 모드에서 니모닉 생성은 재한됩니다.\n\n엔지니어 모드를 비활성하고 계속 진행하시겠습니까?";
 "str_rizon_swap_alert_msg" = "에이치닥 체인의 자산을 라이즌 체인으로 스왑을 진행합니다.\n스왑 특성상 되돌릴 수 없으며, 두 체인간의 비동기적 작동으로 인해 실제 스왑 완료시까지 시간이 걸릴 수 있습니다.";
 "str_icon_updated" = "아이콘 업데이트 완료.";
 "str_ipfs_connect_fail_title" = "연결 상태 확인";
@@ -587,14 +595,17 @@ support@cosmostation.io";
 "only_USD" = "현재 USD만 지원합니다.";
 "only_cmc" = "현재 CoinMarketCap만 지원합니다.";
 
+"title_mnemonic_manage" = "니모닉 관리";
+"title_mnemonic_detail" = "니모닉 상세";
+"title_mnemonic_create" = "니모닉 생성";
 "title_wallet_manage" = "지갑 관리";
 "title_wallet_detail" = "지갑 상세";
-"title_check_mnemonics" = "복구 단어 확인";
+"title_check_mnemonics" = "니모닉 확인";
 "title_check_privatekey" = "개인키 확인";
 "title_create" = "지갑 생성";
 "title_watch_wallet" = "관찰 지갑";
 "title_restore_privatekey" = "개인키로 지갑복원";
-"title_restore" = "복구단어로 지갑복원";
+"title_restore" = "니모닉으로 지갑복원";
 "title_path" = "지갑 선택";
 "title_delegate" = "위임하기";
 "title_undelegate" = "위임 철회 하기";
@@ -793,12 +804,14 @@ support@cosmostation.io";
 "error_not_support_chain_msg" = "%@는 지원하지 않는 체인입니다.";
 "error_no_accounts_chain_title" = "오류";
 "error_no_accounts_chain_msg" = "해당 체인에 대한 지갑이 없습니다";
+"error_not_selected_to_import" = "등록할 지갑을 골라주세요";
+"error_alreay_imported_mnemonic" = "이미 등록된 니모닉 입니다.";
 
 
 
 
 "alert_title_no_private_key" = "관찰 모드 지갑";
-"alert_msg_no_private_key" = "관찰만 가능한 지갑입니다.\n모든 트랜잭션은 복구 단어 등록 후 이용 가능합니다.";
+"alert_msg_no_private_key" = "관찰만 가능한 지갑입니다.\n모든 트랜잭션은 니모닉 등록 후 이용 가능합니다.";
 
 
 "currency_usd" = "USD";

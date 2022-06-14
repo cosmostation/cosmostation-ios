@@ -2089,7 +2089,7 @@ public class WUtils {
         } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST ) {
             return "CRE"
         } else if (chain == ChainType.MANTLE_MAIN) {
-            return "MANTLE"
+            return "MNTL"
         } else if (chain == ChainType.NYX_MAIN) {
             return "NYX"
         }
@@ -4574,7 +4574,7 @@ public class WUtils {
         } else if (chain == ChainType.MANTLE_MAIN) {
             return UIImage(named: "tokenAssetmantle")
         } else if (chain == ChainType.STATION_TEST) {
-            return UIImage(named: "testnetStation")
+            return UIImage(named: "tokenIss")
         } else if (chain == ChainType.NYX_MAIN) {
             return UIImage(named: "tokenNyx")
         }

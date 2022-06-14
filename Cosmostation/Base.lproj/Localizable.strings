@@ -73,10 +73,14 @@
 "import_private_key" = "Import PrivateKey";
 "change_wallet_name" = "Change Wallet Name";
 "wallet_name" = "wallet name";
+"change_mnemonic_name" = "Change Mnemonic Name";
+"mnemonic_name" = "Mnemonic name";
 "share_text" = "Share Text Address";
 "share_qr" = "Share QrCode Image";
 "delete_wallet" = "Delete Wallet";
 "delete_wallet_msg" = "All information about this wallet will delete. \nIf you do not backup your mnemonics, you can not find it again!";
+"delete_menmonic" = "Delete Mnemonic";
+"delete_menmonic_msg" = "If you do not backup your mnemonics, you can not find it again!\n\nAnd %@ derived wallets will also be deleted";
 "ready" = "Ready";
 "imported" = "Imported";
 "override" = "Override";
@@ -244,7 +248,7 @@
 "vesting_account_msg" = "Your account looks vesting account, We suggest using cli commnad delegate and undelegate tx for correct amount.";
 "waiting_deposit" = "Waiting Deposit";
 "push_enabled_state_msg" = "You will be notified of incoming and outgoing transactions";
-"push_disabled_state_msg" = "Push notifications are disabled";
+"push_disabled_state_msg" = "Enabled push alarm for each send & received tx with this address";
 "permission_push_title" = "Allow Notification";
 "permission_push_msg" = "Please allow for push notification.";
 "retry" = "Retry";
@@ -355,6 +359,9 @@
 "str_select_starname_domain" = "Select domain for starname.";
 "select_to_link_chain" = "Select Chain To Link";
 "select_to_link_account" = "Select Account To Link";
+"select_hd_path" = "Select Custom Path";
+"import_account_title" = "Import Wallet";
+"import_account_msg" = "Would you like to add %@ wallet(s)?";
 
 "creat_cdp_step_0" = "Deposit collateral to borrow USDX";
 "creat_cdp_step_1" = "Insert memo (optional)";
@@ -561,6 +568,7 @@ Please consult with the Cosmostation support team before enabling this feature.\
 support@cosmostation.io";
 "str_enginer_is_on_title" = "Engineer Mode Enabled";
 "str_enginer_is_on_msg" = "Engineer mode is currently on.\n\nThere is a very low probability that an account with incompatibility may be created, which may cause inconvenience to users.\n\nBefore use, be sure to consult with the Cosmo Station administrator team before use.";
+"str_enginer_is_on_create_msg" = "Engineer mode is currently on.\n\nFor compatibility reasons, mnemonic generation is restricted in engineer mode.\n\nDo you want to disable engineer mode and proceed?";
 "str_rizon_swap_alert_msg" = "Swap Hdac chain assets to Rizon chain.\nDue to the nature of the swap, it is irreversible, and it may take some time until the actual swap is completed due to the asynchronous operation between the two chains.";
 "str_icon_updated" = "Icon updated.";
 "str_ipfs_connect_fail_title" = "Connection Error";
@@ -585,6 +593,9 @@ support@cosmostation.io";
 "only_USD" = "now only support USD";
 "only_cmc" = "now only support CoinMarketCap";
 
+"title_mnemonic_manage" = "Mnemonic Manage";
+"title_mnemonic_detail" = "Mnemonic Detail";
+"title_mnemonic_create" = "Mnemonic Created";
 "title_wallet_manage" = "Wallet Manage";
 "title_wallet_detail" = "Wallet Detail";
 "title_check_mnemonics" = "Check Mnemonics";
@@ -796,6 +807,8 @@ support@cosmostation.io";
 "error_not_support_chain_msg" = "%@ are not currently supported chain";
 "error_no_accounts_chain_title" = "Error";
 "error_no_accounts_chain_msg" = "No wallet for that chain";
+"error_not_selected_to_import" = "Select address to import";
+"error_alreay_imported_mnemonic" = "Alreay imported menonic";
 
 
 

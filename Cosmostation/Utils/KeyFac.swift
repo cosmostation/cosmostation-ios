@@ -10,6 +10,17 @@ import Foundation
 
 class KeyFac {
     
+    static func getPrivateKeyDataFromSeed(_ seed: Data, _ fullpath: String) -> Data {
+        if (BaseData.instance.getUsingEnginerMode()) {
+            return CKey.getPrivateKeyDataFromSeed(seed, fullpath)
+        } else {
+            return WKey.getPrivateKeyDataFromSeed(seed, fullpath)
+        }
+    }
+    
+    
+    
+    
     static func getDpAddressPath(_ mnemonic: [String], _ path: Int, _ chain: ChainType, _ customBipPath: Int) -> String {
         var resultAddress = ""
         if (BaseData.instance.getUsingEnginerMode()) {

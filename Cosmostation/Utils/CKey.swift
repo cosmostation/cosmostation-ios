@@ -13,6 +13,26 @@ import HDWalletKit
 
 class CKey {
     
+    static func getPrivateKeyDataFromSeed(_ seed: Data, _ fullpath: String) -> Data {
+        var currentKey = PrivateKey(seed: seed, coin: .bitcoin)
+        let components = fullpath.components(separatedBy: "/")
+        var firstComponent = 0
+        if fullpath.hasPrefix("m") {
+            firstComponent = 1
+        }
+        for component in components[firstComponent ..< components.count] {
+            var hardened = false
+            if component.hasSuffix("'") {
+                hardened = true
+            }
+            let index = UInt32(component.trimmingCharacters(in: CharacterSet(charactersIn: "'")))!
+            currentKey = cDerived(currentKey, index, hardened)
+        }
+        let hexData = checkZeroStartKey(currentKey.raw.hexEncodedString())
+        return Data(hex: hexData)
+    }
+    
+    
     static func getMasterKeyFromWords(_ m: [String]) -> PrivateKey {
         return PrivateKey(seed: Mnemonic.createSeed(mnemonic: m.joined(separator: " ")), coin: .bitcoin)
     }

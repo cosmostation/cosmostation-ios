@@ -11,8 +11,10 @@ import SwiftKeychainWrapper
 
 class WalletCheckPKeyViewController: BaseViewController {
     
-    var accountId: Int64?
-    var keyString: String?
+    var selectedAccount: Account!
+    var selectedChainType: ChainType!
+    var selectedChainConfig: ChainConfig!
+    var keyString = ""
     
     @IBOutlet weak var keyCardView: CardView!
     @IBOutlet weak var keyLabel: UILabel!
@@ -20,9 +22,9 @@ class WalletCheckPKeyViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.account = BaseData.instance.selectAccountById(id: accountId!)
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.keyCardView.backgroundColor = WUtils.getChainBg(chainType!)
+        self.selectedChainType = WUtils.getChainType(selectedAccount.account_base_chain)
+        self.selectedChainConfig = ChainFactory().getChainConfig(selectedChainType)
+        self.keyCardView.backgroundColor = WUtils.getChainBg(selectedChainConfig.chainType)
         self.onRetriveKey()
     }
     
@@ -50,19 +52,30 @@ class WalletCheckPKeyViewController: BaseViewController {
 
     func onRetriveKey() {
         DispatchQueue.global().async {
-            if (self.account?.account_from_mnemonic == true) {
-                if let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
-                    let privateKey = KeyFac.getPrivateRaw(words, self.account!)
-                    self.keyString = "0x" + privateKey.hexEncodedString()
+            if (BaseData.instance.getUsingEnginerMode()) {
+                if (self.selectedAccount.account_from_mnemonic == true) {
+                    if let words = KeychainWrapper.standard.string(forKey: self.selectedAccount.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                        let privateKey = KeyFac.getPrivateRaw(words, self.selectedAccount)
+                        self.keyString = privateKey.hexEncodedString()
+                    }
+
+                } else {
+                    if let key = KeychainWrapper.standard.string(forKey: self.selectedAccount.getPrivateKeySha1()) {
+                        self.keyString = key
+                    }
                 }
                 
             } else {
-                if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
+                if let key = KeychainWrapper.standard.string(forKey: self.selectedAccount.getPrivateKeySha1()) {
                     self.keyString = key
                 }
+                
             }
             
             DispatchQueue.main.async(execute: {
+                if (!self.keyString.lowercased().starts(with: "0x")) {
+                    self.keyString = "0x" + self.keyString
+                }
                 self.updateView()
             });
         }
@@ -71,11 +84,11 @@ class WalletCheckPKeyViewController: BaseViewController {
     func onCopyAlert() {
         let copyAlert = UIAlertController(title: NSLocalizedString("str_safe_pkey_copy_title", comment: ""), message: NSLocalizedString("str_safe_pkey_copy_msg", comment: ""), preferredStyle: .alert)
         copyAlert.addAction(UIAlertAction(title: NSLocalizedString("str_raw_copy", comment: ""), style: .destructive, handler: { _ in
-            UIPasteboard.general.string = self.keyString!.trimmingCharacters(in: .whitespacesAndNewlines)
+            UIPasteboard.general.string = self.keyString.trimmingCharacters(in: .whitespacesAndNewlines)
             self.onShowToast(NSLocalizedString("pkey_copied", comment: ""))
         }))
         copyAlert.addAction(UIAlertAction(title: NSLocalizedString("str_safe_copy", comment: ""), style: .default, handler: { _ in
-            KeychainWrapper.standard.set(self.keyString!, forKey: BaseData.instance.copySalt!, withAccessibility: .afterFirstUnlockThisDeviceOnly)
+            KeychainWrapper.standard.set(self.keyString, forKey: BaseData.instance.copySalt!, withAccessibility: .afterFirstUnlockThisDeviceOnly)
             self.onShowToast(NSLocalizedString("pkey_safe_copied", comment: ""))
             
         }))

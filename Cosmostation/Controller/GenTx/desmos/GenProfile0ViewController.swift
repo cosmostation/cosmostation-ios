@@ -247,8 +247,8 @@ class GenProfile0ViewController: BaseViewController, UIImagePickerControllerDele
             }
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        settingsAlert .addAction(cancelAction)
-        settingsAlert .addAction(settingsAction)
+        settingsAlert.addAction(cancelAction)
+        settingsAlert.addAction(settingsAction)
         self.present(settingsAlert , animated: true, completion: nil)
     }
     

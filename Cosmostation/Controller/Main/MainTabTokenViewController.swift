@@ -1210,10 +1210,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 mUnKnown_gRPC.append(balance_gRPC)
             }
         }
-        print("mNative_gRPC ", mNative_gRPC.count)
-        print("mIbcAuthed_gRPC ", mIbcAuthed_gRPC.count)
-        print("mUnKnown_gRPC ", mUnKnown_gRPC.count)
-        
         
         mNative.removeAll()
         mEtc.removeAll()

@@ -15,9 +15,8 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     @IBOutlet weak var bottomLogoView: UIView!
     @IBOutlet weak var bottomControlView: UIView!
     
-    var accounts:Array<Account>?
+    var accounts: Array<Account>?
     var lockPasses = false;
-    var toAddChain: ChainType?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,38 +44,57 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
         super.viewDidAppear(animated)
         //update okex chain
         BaseData.instance.upgradeAaccountAddressforPath()
-        onCheckPassWordState()
-////        //check for keyway udpate
-//        if (BaseData.instance.onCheckKeyWayUpdated() == false) {
-//            onCheckPassWordState()
-//        } else {
-//            onKeyWayUpdate()
-//        }
+        
+//        print("getDBVersion ", BaseData.instance.getDBVersion())
+        if (BaseData.instance.getDBVersion() < DB_VERSION && !BaseData.instance.getUsingEnginerMode()) {
+            onShowDBUpdate2()
+        } else {
+            onCheckPassWordState()
+        }
     }
     
-//    func onKeyWayUpdate() {
-//        DispatchQueue.main.async(execute: {
-//            let dbAlert = UIAlertController(title: "DB Upgrading", message: " ", preferredStyle: .alert)
-//            self.present(dbAlert, animated: true, completion: nil)
-//            
-//            let allAccounts = BaseData.instance.selectAllAccounts()
-//            var progress = 0
-//            dbAlert.message = "\nplease wait\n\n1/" + String(allAccounts.count)
-//            DispatchQueue.global(qos: .background).async(execute: {
-//                for account in allAccounts {
-//                    BaseData.instance.upgradeKeyWay2(account)
-//                    progress += 1
-//                    DispatchQueue.main.async(flags: .barrier, execute: {
-//                        dbAlert.message = "\nplease wait\n\n" + String(progress) + "/" + String(allAccounts.count)
-//                    })
-//                }
-//                DispatchQueue.main.async(execute: {
-//                    dbAlert.dismiss(animated: true, completion: nil);
-//                    self.onCheckPassWordState()
-//                })
-//            })
-//        })
-//    }
+    func onShowDBUpdate2() {
+        DispatchQueue.main.async(execute: {
+            let dbAlert = UIAlertController(title: "DB Upgrading", message: "\nPlease wait for upgrade", preferredStyle: .alert)
+            self.present(dbAlert, animated: true, completion: nil)
+            
+            DispatchQueue.global(qos: .background).async(execute: {
+                BaseData.instance.upgradeMnemonicDB()
+                
+                var wordKeypair = Array<WordSeedPair>()
+                let allMnemonics = BaseData.instance.selectAllMnemonics()
+                allMnemonics.forEach { word in
+                    if (wordKeypair.filter { $0.word == word.getWords() }.first == nil) {
+                        DispatchQueue.main.async(flags: .barrier, execute: {
+                            dbAlert.message = "\nPlease wait for upgrade\n(Do not close the application)\n\n Mnemonic deriving : " +
+                            String(wordKeypair.count) + "/" + String(allMnemonics.count)
+                        })
+                        let seed = WKey.getSeedFromWords(word)!
+                        wordKeypair.append(WordSeedPair(word.getWords(), seed))
+                    }
+                }
+                
+                let allAccounts = BaseData.instance.selectAllAccounts().filter { $0.account_from_mnemonic == true }
+                var progress = 0
+                for tempAccount in allAccounts {
+                    BaseData.instance.setPkeyUpdate(tempAccount, wordKeypair)
+                    progress += 1
+                    DispatchQueue.main.async(flags: .barrier, execute: {
+                        dbAlert.message = "\nPlease wait for upgrade\n\n" +
+                        tempAccount.account_address + "\n" +
+                        String(progress) + "/" + String(allAccounts.count)
+                    })
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    BaseData.instance.setDBVersion(DB_VERSION)
+                    dbAlert.dismiss(animated: true) {
+                        self.onCheckPassWordState()
+                    }
+                })
+            })
+        })
+    }
     
     func onCheckPassWordState() {
         if (BaseData.instance.getUsingAppLock() == true && BaseData.instance.hasPassword() && !lockPasses) {
@@ -127,11 +145,6 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     
     
     @IBAction func onClickCreate(_ sender: Any) {
-        self.onShowSelectChainDialog(true)
-    }
-    
-    override func onChainSelected(_ chainType: ChainType) {
-        self.toAddChain = chainType
         let popupVC = NewAccountTypePopup(nibName: "NewAccountTypePopup", bundle: nil)
         let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
         cardPopup.resultDelegate = self
@@ -147,24 +160,12 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
     func SBCardPopupResponse(type: Int, result: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(490), execute: {
             var tagetVC:BaseViewController?
-            if (result == 1) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "CreateViewController") as! CreateViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            } else if (result == 2) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "RestoreViewController") as! RestoreViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            } else if (result == 3) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "AddAddressViewController") as! AddAddressViewController
-                
-            } else if (result == 4) {
-                tagetVC = UIStoryboard(name: "Init", bundle: nil).instantiateViewController(withIdentifier: "KeyRestoreViewController") as! KeyRestoreViewController
-                tagetVC?.chainType = self.toAddChain!
-                
-            }
+            if (result == 1) { tagetVC = MnemonicCreateViewController(nibName: "MnemonicCreateViewController", bundle: nil) }
+            else if (result == 2) { tagetVC = MnemonicRestoreViewController(nibName: "MnemonicRestoreViewController", bundle: nil) }
+            else if (result == 3) { tagetVC = WatchingAddressViewController(nibName: "WatchingAddressViewController", bundle: nil) }
+            else if (result == 4) { tagetVC = PrivateKeyRestoreViewController(nibName: "PrivateKeyRestoreViewController", bundle: nil) }
             if (tagetVC != nil) {
-                tagetVC?.hidesBottomBarWhenPushed = true
+                tagetVC!.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(tagetVC!, animated: true)
             }
@@ -232,5 +233,14 @@ class IntroViewController: BaseViewController, PasswordViewDelegate, SBCardPopup
         updateAlert.addAction(action)
         self.present(updateAlert, animated: true, completion: nil)
     }
+}
+
+struct WordSeedPair {
+    var word: String
+    var seed: Data
     
+    init(_ word: String, _ seed: Data) {
+        self.word = word
+        self.seed = seed
+    }
 }

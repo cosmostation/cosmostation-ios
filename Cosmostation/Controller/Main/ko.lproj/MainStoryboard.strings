@@ -18,7 +18,7 @@
 "6TF-Qv-8do.text" = "(CoinMarketCap)";
 
 /* Class = "UILabel"; text = "Mnemonic"; ObjectID = "7Wu-Zh-1eV"; */
-"7Wu-Zh-1eV.text" = "복구 단어";
+"7Wu-Zh-1eV.text" = "니모닉";
 
 /* Class = "UILabel"; text = "My Address"; ObjectID = "7XC-g0-Xht"; */
 "7XC-g0-Xht.text" = "내 주소";
@@ -198,9 +198,13 @@
 "rEO-fz-cbK.headerTitle" = "지갑";
 
 /* Class = "UILabel"; text = "Wallet Manage"; ObjectID = "s1Y-7N-iWS"; */
-"s1Y-7N-iWS.text" = "새 지갑 추가";
+"s1Y-7N-iWS.text" = "니모닉 관리";
 
 "Up0-Ck-BHz.text" = "지갑 관리";
+
+"ToR-Yl-K3j.text" = "개인키 등록";
+
+"Unv-6D-RIv.text" = "관찰 주소 등록";
 
 /* Class = "UILabel"; text = "Available"; ObjectID = "tH3-op-17D"; */
 "tH3-op-17D.text" = "사용 가능 수량";

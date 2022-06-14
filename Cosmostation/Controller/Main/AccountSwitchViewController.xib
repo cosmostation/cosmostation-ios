@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -49,7 +49,7 @@
                         <constraint firstItem="7Gr-ym-3NM" firstAttribute="centerY" secondItem="8YH-S8-9Ra" secondAttribute="centerY" id="t6q-Xf-5JT"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ytM-en-tlJ">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ytM-en-tlJ">
                     <rect key="frame" x="0.0" y="102" width="414" height="794"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -62,7 +62,7 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8YH-S8-9Ra" secondAttribute="trailing" constant="8" id="4Fy-ih-gRV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="8YH-S8-9Ra" secondAttribute="leading" constant="8" id="G2w-nE-tXf"/>
-                <constraint firstItem="ytM-en-tlJ" firstAttribute="top" secondItem="8YH-S8-9Ra" secondAttribute="bottom" constant="8" symbolic="YES" id="OLo-Ll-646"/>
+                <constraint firstItem="ytM-en-tlJ" firstAttribute="top" secondItem="8YH-S8-9Ra" secondAttribute="bottom" constant="8" id="OLo-Ll-646"/>
                 <constraint firstAttribute="bottom" secondItem="ytM-en-tlJ" secondAttribute="bottom" id="d0d-gu-mW6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ytM-en-tlJ" secondAttribute="trailing" id="fW7-nE-dTs"/>
                 <constraint firstItem="8YH-S8-9Ra" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="hUb-iI-Tyu"/>

@@ -532,7 +532,7 @@
 "acl-iM-CuU.text" = "ATOM";
 
 /* Class = "UILabel"; text = "You can change reward recipient address. After change this, every claimed rewards are going to changed address. Please confirm you have full authority with to change address."; ObjectID = "aqz-q8-hlq"; */
-"aqz-q8-hlq.text" = "이자 지급 주소를 변경하실 수 있습니다. 주소 변경 후 이자요청시 모든 이자는 변경된 주소로 지급됩니다. 복구 단어로 접근이 가능하신 주소를 변경주소로 선택하셔야 합니다.";
+"aqz-q8-hlq.text" = "이자 지급 주소를 변경하실 수 있습니다. 주소 변경 후 이자요청시 모든 이자는 변경된 주소로 지급됩니다. 니모닉으로 접근이 가능하신 주소를 변경주소로 선택하셔야 합니다.";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "bDP-a8-F01"; */
 "bDP-a8-F01.text" = "-";

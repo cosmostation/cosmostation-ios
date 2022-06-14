@@ -29,6 +29,7 @@ let KEY_USER_SORTED_CHAINS              = "KEY_USER_SORTED_CHAINS"
 let KEY_USER_EXPENDED_CHAINS            = "KEY_USER_EXPENDED_CHAINS"
 let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
+let KEY_DB_VERSION                      = "KEY_DB_VERSION"
 
 let STATION_URL                         = "https://api-utility.cosmostation.io/";
 let STATION_TEST_URL                    = "https://api-office.cosmostation.io/utility/";
@@ -244,6 +245,8 @@ let RELAYER_IMG_NYX                     = "https://raw.githubusercontent.com/cos
 
 
 
+let DB_VERSION                      = 2
+
 //DB for Account
 let DB_ACCOUNT = Table("accnt")
 let DB_ACCOUNT_ID                   = Expression<Int64>("id")
@@ -271,6 +274,8 @@ let DB_ACCOUNT_SORT_ORDER           = Expression<Int64>("sortOrder")
 let DB_ACCOUNT_PUSHALARM            = Expression<Bool>("pushAlarm")
 let DB_ACCOUNT_NEW_BIP              = Expression<Bool>("newBip")            //using alternative ket gen path or type(OKex)
 let DB_ACCOUNT_CUSTOM_PATH          = Expression<Int64>("customPath")
+
+let DB_ACCOUNT_MNEMONIC_ID          = Expression<Int64>("mnemonic_id")
 
 ////DB for Password
 //let DB_PASSWORD = Table("passwd")
@@ -310,7 +315,14 @@ let DB_UNBONDING_INITIAL_BALANCE    = Expression<String>("initialBalance")
 let DB_UNBONDING_BALANCE            = Expression<String>("balance")
 let DB_UNBONDING_FETCH_TIME         = Expression<Int64>("fetchTime")
 
-
+//DB for Mnemonic
+let DB_MNEMONIC = Table("mnemonic")
+let DB_MNEMONIC_ID                  = Expression<Int64>("id")
+let DB_MNEMONIC_UUID                = Expression<String>("uuid")
+let DB_MNEMONIC_NICKNAME            = Expression<String>("nickName")
+let DB_MNEMONIC_CNT                 = Expression<Int64>("wordsCnt")
+let DB_MNEMONIC_FAVO                = Expression<Bool>("isFavo")
+let DB_MNEMONIC_IMPORT_TIME         = Expression<Int64>("importTime")
 
 
 
@@ -473,7 +485,6 @@ let PASSWORD_RESUKT_CANCEL                  = 1
 let PASSWORD_RESUKT_FAIL                    = 2
 let PASSWORD_RESUKT_OK_FOR_DELETE           = 3
 
-let MAX_WALLET_PER_CHAIN                    = 5
 let BASE_PATH                               = "m/44'/118'/0'/0/"
 let BNB_BASE_PATH                           = "m/44'/714'/0'/0/"
 let KAVA_BASE_PATH                          = "m/44'/459'/0'/0/"
@@ -1248,6 +1259,26 @@ public enum ChainType: String {
         }
         return false
     }
+    
+    static func getAllWalletTypeCnt() -> Int {
+        var result = 0
+        SUPPRT_CHAIN().forEach { chain in
+            if (chain == .KAVA_MAIN) {
+                result  = result + 2
+            } else if (chain == .SECRET_MAIN) {
+                result  = result + 2
+            } else if (chain == .LUM_MAIN) {
+                result  = result + 2
+            } else if (chain == .FETCH_MAIN) {
+                result  = result + 4
+            } else if (chain == .OKEX_MAIN) {
+                result  = result + 3
+            } else {
+                result  = result + 1
+            }
+        }
+        return result
+    }
 }
 
 let CHAIN_COSMOS_S = "SUPPORT_CHAIN_COSMOS_MAIN"
@@ -1530,3 +1561,8 @@ let STATION_NFT_DENOM           = "station";
 let ICON_DEFAULT                = "ICON_DEFAULT";
 let ICON_SANTA                  = "ICON_SANTA";
 let ICON_2002                   = "ICON_2002";
+
+
+let MintscanUrl = "https://www.mintscan.io/"
+let MonikerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/"
+let RelayerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/"
