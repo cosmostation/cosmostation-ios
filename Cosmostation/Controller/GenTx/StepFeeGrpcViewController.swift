@@ -12,7 +12,7 @@ import HDWalletKit
 import GRPC
 import NIO
 
-class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
+class StepFeeGrpcViewController: BaseViewController {
 
     @IBOutlet weak var feeTotalCard: CardView!
     @IBOutlet weak var feeTotalAmount: UILabel!
@@ -64,6 +64,14 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
         onUpdateView()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        print("automatic gas amount check")
+        if (!BaseData.instance.getUsingEnginerMode()) {
+            self.onSetFee()
+            self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
+        }
+    }
+    
     func onCalculateFees() {
         mSelectedGasRate = WUtils.getGasRate(chainType!, mSelectedGasPosition)
         if (chainType == ChainType.SIF_MAIN) {
@@ -110,13 +118,8 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
     }
     
     @IBAction func onClickCheckGas(_ sender: UIButton) {
-        onSetFee()
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
-        passwordVC.resultDelegate = self
-        self.navigationController?.pushViewController(passwordVC, animated: false)
+        self.onSetFee()
+        self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {
@@ -148,15 +151,6 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
     
     func onCheckValidate() -> Bool {
         return true
-    }
-    
-    
-    func passwordResponse(result: Int) {
-        if (result == PASSWORD_RESUKT_OK) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
-                self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
-            })
-        }
     }
     
     func onFetchgRPCAuth(_ account: Account) {
