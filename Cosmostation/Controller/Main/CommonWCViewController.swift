@@ -625,11 +625,19 @@ class CommonWCViewController: BaseViewController {
     }
     
     func getPrivateKey(account: Account) -> Data {
-        if account.account_from_mnemonic {
-            if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
-                return KeyFac.getPrivateRaw(words, account)
+        if (BaseData.instance.getUsingEnginerMode()) {
+            if account.account_from_mnemonic {
+                if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                    return KeyFac.getPrivateRaw(words, account)
+                }
+            } else {
+                if let key = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1()) {
+                    return KeyFac.getPrivateFromString(key)
+                }
             }
+            
         } else {
+            //Speed-Up for get privatekey with non-enginerMode
             if let key = KeychainWrapper.standard.string(forKey: account.getPrivateKeySha1()) {
                 return KeyFac.getPrivateFromString(key)
             }

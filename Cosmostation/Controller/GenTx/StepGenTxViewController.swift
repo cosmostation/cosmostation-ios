@@ -707,20 +707,27 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var publicKey: Data?
     func getKey() {
         DispatchQueue.global().async {
-            if (self.mAccount?.account_from_mnemonic == true) {
-                if let words = KeychainWrapper.standard.string(forKey: self.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
-                    self.privateKey = KeyFac.getPrivateRaw(words, self.mAccount!)
-                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
-//                    print("Mnemonci private ", self.privateKey!.hexEncodedString())
-//                    print("Mnemonci publicKey ", self.publicKey!.hexEncodedString())
+            if (BaseData.instance.getUsingEnginerMode()) {
+                if (self.mAccount?.account_from_mnemonic == true) {
+                    if let words = KeychainWrapper.standard.string(forKey: self.mAccount!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                        self.privateKey = KeyFac.getPrivateRaw(words, self.mAccount!)
+                        self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    }
+                    
+                } else {
+                    if let key = KeychainWrapper.standard.string(forKey: self.mAccount!.getPrivateKeySha1()) {
+                        self.privateKey = KeyFac.getPrivateFromString(key)
+                        self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    }
                 }
                 
             } else {
+                //Speed up for get privatekey with non-enginerMode
                 if let key = KeychainWrapper.standard.string(forKey: self.mAccount!.getPrivateKeySha1()) {
                     self.privateKey = KeyFac.getPrivateFromString(key)
                     self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
-//                    print("Private private ", self.privateKey!.hexEncodedString())
-//                    print("Private publicKey ", self.publicKey!.hexEncodedString())
+                    print("Private private ", self.privateKey!.hexEncodedString())
+                    print("Private publicKey ", self.publicKey!.hexEncodedString())
                 }
             }
         }
