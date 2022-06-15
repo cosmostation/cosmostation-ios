@@ -332,6 +332,8 @@
 		0443B8942855B9600027A6B9 /* WalletDetailRewardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443B8912855B9600027A6B9 /* WalletDetailRewardCell.swift */; };
 		0443B8952855B9600027A6B9 /* WalletDetailRewardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0443B8922855B9600027A6B9 /* WalletDetailRewardCell.xib */; };
 		0443B8962855B9600027A6B9 /* WalletDetailRewardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0443B8922855B9600027A6B9 /* WalletDetailRewardCell.xib */; };
+		0443B89828589B570027A6B9 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89728589B570027A6B9 /* Color.xcassets */; };
+		0443B89928589B570027A6B9 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89728589B570027A6B9 /* Color.xcassets */; };
 		0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */; };
 		0444442C27ABF06900EB093E /* TxExeContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442A27ABF06800EB093E /* TxExeContractCell.swift */; };
 		0444442D27ABF06900EB093E /* TxExeContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444442B27ABF06800EB093E /* TxExeContractCell.xib */; };
@@ -3244,6 +3246,7 @@
 		0443B88C2855B94E0027A6B9 /* WalletDetailInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDetailInfoCell.xib; sourceTree = "<group>"; };
 		0443B8912855B9600027A6B9 /* WalletDetailRewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetailRewardCell.swift; sourceTree = "<group>"; };
 		0443B8922855B9600027A6B9 /* WalletDetailRewardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDetailRewardCell.xib; sourceTree = "<group>"; };
+		0443B89728589B570027A6B9 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20TransferReq.swift; sourceTree = "<group>"; };
 		0444442A27ABF06800EB093E /* TxExeContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxExeContractCell.swift; sourceTree = "<group>"; };
 		0444442B27ABF06800EB093E /* TxExeContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxExeContractCell.xib; sourceTree = "<group>"; };
@@ -6157,6 +6160,7 @@
 				E1945E3A222E7DD800A1436F /* Controller */,
 				E1945E39222E7D8E00A1436F /* Base */,
 				E16D9B182248C4880019B7BB /* Assets.xcassets */,
+				0443B89728589B570027A6B9 /* Color.xcassets */,
 				E1945E33222E7C0800A1436F /* Info.plist */,
 				28B6AFE023D9863800063D9C /* GoogleService-Info.plist */,
 				18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */,
@@ -6603,6 +6607,7 @@
 				18FFB681281AF533004E65BB /* IBCSend0ViewController.xib in Resources */,
 				18FFB682281AF533004E65BB /* TxMediAddRecordCell.xib in Resources */,
 				18FFB683281AF533004E65BB /* xmas@2x.png in Resources */,
+				0443B89928589B570027A6B9 /* Color.xcassets in Resources */,
 				18FFB684281AF533004E65BB /* DelegateWarnPopup.xib in Resources */,
 				18FFB685281AF533004E65BB /* EarnUnbondingCell.xib in Resources */,
 				18FFB686281AF533004E65BB /* TxRegisterDomainCell.xib in Resources */,
@@ -7264,6 +7269,7 @@
 				282BDFE724A5BCCB00D3A5D4 /* WcCancelPopup.xib in Resources */,
 				28D372A6254BFCD70071B136 /* RegisterAccount1ViewController.xib in Resources */,
 				04CFBD562692278C0013150B /* TxIbcUpdateClientCell.xib in Resources */,
+				0443B89828589B570027A6B9 /* Color.xcassets in Resources */,
 				283A80CD24514194008FF813 /* CdpDetailMyTopCell.xib in Resources */,
 				28584B4B26E87CE600EE5719 /* GdexDeposit0ViewController.xib in Resources */,
 				E151B65522486C300026B8C0 /* ProposalCell.xib in Resources */,
