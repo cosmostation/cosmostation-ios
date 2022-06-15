@@ -27,6 +27,8 @@ class ChainOkc: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenOkx")
     var stakeDenom = "okt"
     var stakeSymbol = "OKT"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "okc")!
     
     var addressPrefix = "ex"
     let addressHdPath0 = "m/44'/996'/0'/0/X"

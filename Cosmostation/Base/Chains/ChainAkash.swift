@@ -27,6 +27,8 @@ class ChainAkash: ChainConfig {
     var stakeDenomImg = UIImage(named: "akashTokenImg")
     var stakeDenom = "uakt"
     var stakeSymbol = "AKT"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "akash")!
     
     var addressPrefix = "akash"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

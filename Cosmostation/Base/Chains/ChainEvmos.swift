@@ -27,6 +27,8 @@ class ChainEvmos: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenEvmos")
     var stakeDenom = "aevmos"
     var stakeSymbol = "EVMOS"
+    var stakeSendImg = UIImage(named: "btnSendEvmos")
+    var stakeSendBg = UIColor.black
     
     var addressPrefix = "evmos"
     let addressHdPath0 = "m/44'/60'/0'/0/X"

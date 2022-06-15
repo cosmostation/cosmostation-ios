@@ -27,6 +27,8 @@ class ChainCertik: ChainConfig {
     var stakeDenomImg = UIImage(named: "certikTokenImg")
     var stakeDenom = "uctk"
     var stakeSymbol = "CTK"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "certik")!
     
     var addressPrefix = "certik"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

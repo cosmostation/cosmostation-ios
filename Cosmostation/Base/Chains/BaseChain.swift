@@ -20,6 +20,10 @@ protocol ChainConfig {
     var chainColor: UIColor { get set }
     var chainColorDark: UIColor? { get set }
     var chainColorBG: UIColor { get set }
+    var chainTitle: String { get set }
+    var chainTitle2: String { get set }
+    var chainDBName: String { get set }
+    var chainAPIName: String { get set }
     
     var stakeDenomImg: UIImage? { get set }
     var stakeDenom: String { get set }

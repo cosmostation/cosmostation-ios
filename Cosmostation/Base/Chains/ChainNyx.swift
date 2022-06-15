@@ -27,6 +27,8 @@ class ChainNyx: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenNyx")
     var stakeDenom = "unyx"
     var stakeSymbol = "NYX"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "nyx")!
     
     var addressPrefix = "n"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

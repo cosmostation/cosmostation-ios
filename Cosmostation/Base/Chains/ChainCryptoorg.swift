@@ -27,6 +27,8 @@ class ChainCryptoorg: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokencrypto")
     var stakeDenom = "basecro"
     var stakeSymbol = "CRO"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "cryptoorg_dark")!
     
     var addressPrefix = "cro"
     let addressHdPath0 = "m/44'/394'/0'/0/X"

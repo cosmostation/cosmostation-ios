@@ -334,6 +334,8 @@
 		0443B8962855B9600027A6B9 /* WalletDetailRewardCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0443B8922855B9600027A6B9 /* WalletDetailRewardCell.xib */; };
 		0443B89828589B570027A6B9 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89728589B570027A6B9 /* Color.xcassets */; };
 		0443B89928589B570027A6B9 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0443B89728589B570027A6B9 /* Color.xcassets */; };
+		0443B89B2859C0770027A6B9 /* ChainAlthea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443B89A2859C0770027A6B9 /* ChainAlthea.swift */; };
+		0443B89C2859C0770027A6B9 /* ChainAlthea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443B89A2859C0770027A6B9 /* ChainAlthea.swift */; };
 		0444442927ABDC5D00EB093E /* Cw20TransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */; };
 		0444442C27ABF06900EB093E /* TxExeContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444442A27ABF06800EB093E /* TxExeContractCell.swift */; };
 		0444442D27ABF06900EB093E /* TxExeContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444442B27ABF06800EB093E /* TxExeContractCell.xib */; };
@@ -3247,6 +3249,7 @@
 		0443B8912855B9600027A6B9 /* WalletDetailRewardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetailRewardCell.swift; sourceTree = "<group>"; };
 		0443B8922855B9600027A6B9 /* WalletDetailRewardCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDetailRewardCell.xib; sourceTree = "<group>"; };
 		0443B89728589B570027A6B9 /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		0443B89A2859C0770027A6B9 /* ChainAlthea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAlthea.swift; sourceTree = "<group>"; };
 		0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20TransferReq.swift; sourceTree = "<group>"; };
 		0444442A27ABF06800EB093E /* TxExeContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxExeContractCell.swift; sourceTree = "<group>"; };
 		0444442B27ABF06800EB093E /* TxExeContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxExeContractCell.xib; sourceTree = "<group>"; };
@@ -4552,6 +4555,7 @@
 				0451FC55282A398E00214FDA /* ChainStarname.swift */,
 				0451FCB4282A3BD700214FDA /* ChainUmee.swift */,
 				04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */,
+				0443B89A2859C0770027A6B9 /* ChainAlthea.swift */,
 			);
 			path = Chains;
 			sourceTree = "<group>";
@@ -8485,6 +8489,7 @@
 				1817CB91283E2CE500523713 /* sifnode_ethbridge_v1_query.pb.swift in Sources */,
 				18FFB64D281AF533004E65BB /* WalletSifIncentiveCell.swift in Sources */,
 				1817CC29283E2CE600523713 /* osmosis_superfluid_superfluid.pb.swift in Sources */,
+				0443B89C2859C0770027A6B9 /* ChainAlthea.swift in Sources */,
 				18FFB64E281AF533004E65BB /* WcTransferPopup.swift in Sources */,
 				18FFB652281AF533004E65BB /* GenProfile3ViewController.swift in Sources */,
 				18FFB653281AF533004E65BB /* CdpDetailViewController.swift in Sources */,
@@ -9512,6 +9517,7 @@
 				040FAA5A275F55C400229F6F /* starname_iov_starname_v1beta1_query.pb.swift in Sources */,
 				2889FD682603377700CA9896 /* TxHardDepositCell.swift in Sources */,
 				28D372A5254BFCD70071B136 /* RegisterAccount1ViewController.swift in Sources */,
+				0443B89B2859C0770027A6B9 /* ChainAlthea.swift in Sources */,
 				28B4304824F8B37600BD7BB2 /* OkTopValidatorViewController.swift in Sources */,
 				0451FDA82832370100214FDA /* osmosis_pool-incentives_v1beta1_query.grpc.swift in Sources */,
 				04C43B7D278D5F530022D5DF /* kava_kavadist_v1beta1_params.pb.swift in Sources */,

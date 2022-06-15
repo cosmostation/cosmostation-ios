@@ -27,6 +27,8 @@ class ChainKava: ChainConfig {
     var stakeDenomImg = UIImage(named: "kavaTokenImg")
     var stakeDenom = "ukava"
     var stakeSymbol = "KAVA"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "kava")!
     
     var addressPrefix = "kava"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

@@ -27,6 +27,8 @@ class ChainCerberus: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenCerberus")
     var stakeDenom = "ucrbrus"
     var stakeSymbol = "CRBRUS"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "cerberus")!
     
     var addressPrefix = "cerberus"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

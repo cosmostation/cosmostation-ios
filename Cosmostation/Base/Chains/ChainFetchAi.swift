@@ -27,6 +27,8 @@ class ChainFetchAi: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenfetchai")
     var stakeDenom = "afet"
     var stakeSymbol = "FET"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "fetchai")!
     
     var addressPrefix = "fetch"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

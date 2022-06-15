@@ -27,6 +27,8 @@ class StationTest: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenIss")
     var stakeDenom = "uiss"
     var stakeSymbol = "ISS"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "station")!
     
     var addressPrefix = "station"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

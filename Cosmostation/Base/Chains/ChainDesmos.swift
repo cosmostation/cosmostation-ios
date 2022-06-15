@@ -27,6 +27,8 @@ class ChainDesmos: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenDesmos")
     var stakeDenom = "udsm"
     var stakeSymbol = "DSM"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "desmos")!
     
     var addressPrefix = "desmos"
     let addressHdPath0 = "m/44'/852'/0'/0/X"

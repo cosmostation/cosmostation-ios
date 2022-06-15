@@ -27,6 +27,8 @@ class ChainStarname: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenStarname")
     var stakeDenom = "uiov"
     var stakeSymbol = "IOV"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "starname")!
     
     var addressPrefix = "star"
     let addressHdPath0 = "m/44'/234'/0'/0/X"

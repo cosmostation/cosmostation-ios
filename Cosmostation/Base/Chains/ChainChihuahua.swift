@@ -27,6 +27,8 @@ class ChainChihuahua: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenHuahua")
     var stakeDenom = "uhuahua"
     var stakeSymbol = "HUAHUA"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "chihuahua")!
     
     var addressPrefix = "chihuahua"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

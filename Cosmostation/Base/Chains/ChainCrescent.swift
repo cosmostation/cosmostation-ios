@@ -27,6 +27,8 @@ class ChainCrescent: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenCrescent")
     var stakeDenom = "ucre"
     var stakeSymbol = "CRE"
+    var stakeSendImg = UIImage(named: "btnSendCrescent")
+    var stakeSendBg = UIColor.init(hexString: "452318")
     
     var addressPrefix = "cre"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

@@ -27,6 +27,8 @@ class ChainEmoney: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenEmoney")
     var stakeDenom = "ungm"
     var stakeSymbol = "NGM"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "emoney")!
     
     var addressPrefix = "emoney"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

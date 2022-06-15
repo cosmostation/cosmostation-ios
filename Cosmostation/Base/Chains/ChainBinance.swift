@@ -27,6 +27,8 @@ class ChainBinance: ChainConfig {
     var stakeDenomImg = UIImage(named: "bnbTokenImg")
     var stakeDenom = "BNB"
     var stakeSymbol = "BNB"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "binance")!
     
     var addressPrefix = "bnb"
     let addressHdPath0 = "m/44'/714'/0'/0/X"

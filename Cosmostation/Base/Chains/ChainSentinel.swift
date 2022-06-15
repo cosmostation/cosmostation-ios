@@ -27,6 +27,8 @@ class ChainSentinel: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokensentinel")
     var stakeDenom = "udvpn"
     var stakeSymbol = "DVPN"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor.init(hexString: "142d51")
     
     var addressPrefix = "sent"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

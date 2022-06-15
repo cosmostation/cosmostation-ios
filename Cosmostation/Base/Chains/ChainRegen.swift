@@ -27,6 +27,8 @@ class ChainRegen: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenRegen")
     var stakeDenom = "uregen"
     var stakeSymbol = "REGEN"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "regen")!
     
     var addressPrefix = "regen"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

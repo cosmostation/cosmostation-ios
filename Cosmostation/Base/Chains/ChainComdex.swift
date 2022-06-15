@@ -27,6 +27,8 @@ class ChainComdex: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenComdex")
     var stakeDenom = "ucmdx"
     var stakeSymbol = "CMDX"
+    var stakeSendImg = UIImage(named: "btnSendComdex")
+    var stakeSendBg = UIColor.init(hexString: "03264a")
     
     var addressPrefix = "comdex"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

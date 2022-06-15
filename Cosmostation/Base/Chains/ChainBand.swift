@@ -27,6 +27,8 @@ class ChainBand: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenBand")
     var stakeDenom = "uband"
     var stakeSymbol = "Band"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "band")!
     
     var addressPrefix = "band"
     let addressHdPath0 = "m/44'/494'/0'/0/X"

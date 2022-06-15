@@ -27,6 +27,8 @@ class ChainKonstellation: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenKonstellation")
     var stakeDenom = "udarc"
     var stakeSymbol = "DARC"
+    var stakeSendImg = UIImage(named: "btnSendKonstellation")
+    var stakeSendBg = UIColor.init(hexString: "122951")
     
     var addressPrefix = "darc"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

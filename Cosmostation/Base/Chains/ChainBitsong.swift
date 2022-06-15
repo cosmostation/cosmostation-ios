@@ -27,6 +27,8 @@ class ChainBitsong: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenBitsong")
     var stakeDenom = "ubtsg"
     var stakeSymbol = "BTSG"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "bitsong")!
     
     var addressPrefix = "bitsong"
     let addressHdPath0 = "m/44'/639'/0'/0/X"

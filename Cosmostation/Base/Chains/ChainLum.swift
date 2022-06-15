@@ -27,6 +27,8 @@ class ChainLum: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenLum")
     var stakeDenom = "ulum"
     var stakeSymbol = "LUM"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "lum")!
     
     var addressPrefix = "lum"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

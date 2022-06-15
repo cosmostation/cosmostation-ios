@@ -27,6 +27,8 @@ class ChainAssetMantle: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenAssetmantle")
     var stakeDenom = "umntl"
     var stakeSymbol = "MNTL"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "assetmantle")!
     
     var addressPrefix = "mantle"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

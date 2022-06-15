@@ -27,6 +27,8 @@ class ChainSif: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokensifchain")
     var stakeDenom = "rowan"
     var stakeSymbol = "ROWAN"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "sif")!
     
     var addressPrefix = "sif"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

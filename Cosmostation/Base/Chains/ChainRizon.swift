@@ -27,6 +27,8 @@ class ChainRizon: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenRizon")
     var stakeDenom = "uatolo"
     var stakeSymbol = "ATOLO"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "rizon")!
     
     var addressPrefix = "rizon"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

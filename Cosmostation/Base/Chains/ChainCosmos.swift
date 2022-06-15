@@ -27,6 +27,8 @@ class ChainCosmos: ChainConfig {
     var stakeDenomImg = UIImage(named: "atom_ic")
     var stakeDenom = "uatom"
     var stakeSymbol = "Atom"
+    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendBg = UIColor(named: "cosmos")!
     
     var addressPrefix = "cosmos"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
