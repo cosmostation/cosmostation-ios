@@ -16,6 +16,9 @@ class ChainAssetMantle: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconAssetmantle")
     var chainInfoTitle = NSLocalizedString("send_guide_title_mantle", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_mantle", comment: "")
+    var chainColor = UIColor(named: "assetmantle")!
+    var chainColorDark = UIColor(named: "assetmantle_dark")
+    var chainColorBG = UIColor(named: "assetmantle")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenAssetmantle")
     var stakeDenom = "umntl"

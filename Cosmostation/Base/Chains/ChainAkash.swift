@@ -16,6 +16,9 @@ class ChainAkash: ChainConfig {
     var chainInfoImg = UIImage(named: "akashImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_akash", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_akash", comment: "")
+    var chainColor = UIColor(named: "akash")!
+    var chainColorDark = UIColor(named: "akash_dark")
+    var chainColorBG = UIColor(named: "akash")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "akashTokenImg")
     var stakeDenom = "uakt"

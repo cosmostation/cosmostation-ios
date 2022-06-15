@@ -16,6 +16,9 @@ class ChainRegen: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconRegen")
     var chainInfoTitle = NSLocalizedString("send_guide_title_regen", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_regen", comment: "")
+    var chainColor = UIColor(named: "regen")!
+    var chainColorDark = UIColor(named: "regen_dark")
+    var chainColorBG = UIColor(named: "regen")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenRegen")
     var stakeDenom = "uregen"

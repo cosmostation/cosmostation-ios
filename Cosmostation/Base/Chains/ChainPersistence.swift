@@ -16,6 +16,9 @@ class ChainPersistence: ChainConfig {
     var chainInfoImg = UIImage(named: "persistenceImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_persis", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_persis", comment: "")
+    var chainColor = UIColor(named: "persistence")!
+    var chainColorDark = UIColor(named: "persistence_dark")
+    var chainColorBG = UIColor.init(hexString: "EDEDED").withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenpersistence")
     var stakeDenom = "uxprt"

@@ -16,6 +16,9 @@ class ChainKi: ChainConfig {
     var chainInfoImg = UIImage(named: "kifoundationImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_ki", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_ki", comment: "")
+    var chainColor = UIColor(named: "ki")!
+    var chainColorDark = UIColor(named: "ki_dark")
+    var chainColorBG = UIColor(named: "ki")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenKifoundation")
     var stakeDenom = "uxki"

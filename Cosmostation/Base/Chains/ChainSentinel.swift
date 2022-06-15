@@ -16,6 +16,9 @@ class ChainSentinel: ChainConfig {
     var chainInfoImg = UIImage(named: "sentinelImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_sentinel", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_sentinel", comment: "")
+    var chainColor = UIColor(named: "sentinel")!
+    var chainColorDark = UIColor(named: "sentinel_dark")
+    var chainColorBG = UIColor(named: "sentinel")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokensentinel")
     var stakeDenom = "udvpn"

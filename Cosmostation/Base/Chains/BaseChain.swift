@@ -17,6 +17,9 @@ protocol ChainConfig {
     var chainInfoImg: UIImage? { get set }
     var chainInfoTitle: String { get set }
     var chainInfoMsg: String { get set }
+    var chainColor: UIColor { get set }
+    var chainColorDark: UIColor? { get set }
+    var chainColorBG: UIColor { get set }
     
     var stakeDenomImg: UIImage? { get set }
     var stakeDenom: String { get set }

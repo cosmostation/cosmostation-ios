@@ -16,6 +16,9 @@ class ChainEmoney: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconEmoney")
     var chainInfoTitle = NSLocalizedString("send_guide_title_emoney", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_emoney", comment: "")
+    var chainColor = UIColor(named: "emoney")!
+    var chainColorDark = UIColor(named: "emoney_dark")
+    var chainColorBG = UIColor(named: "emoney")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenEmoney")
     var stakeDenom = "ungm"

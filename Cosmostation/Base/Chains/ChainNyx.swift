@@ -16,6 +16,9 @@ class ChainNyx: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconNym")
     var chainInfoTitle = NSLocalizedString("send_guide_title_nyx", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_nyx", comment: "")
+    var chainColor = UIColor(named: "nyx")!
+    var chainColorDark = UIColor(named: "nyx_dark")
+    var chainColorBG = UIColor(named: "nyx")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenNyx")
     var stakeDenom = "unyx"

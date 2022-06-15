@@ -16,6 +16,9 @@ class ChainAxelar: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconAxelar")
     var chainInfoTitle = NSLocalizedString("send_guide_title_axelar", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_axelar", comment: "")
+    var chainColor = UIColor(named: "axelar")!
+    var chainColorDark = UIColor(named: "axelar_dark")
+    var chainColorBG = UIColor(named: "axelar")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenAxelar")
     var stakeDenom = "uaxl"

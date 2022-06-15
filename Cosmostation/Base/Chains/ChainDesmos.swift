@@ -16,6 +16,9 @@ class ChainDesmos: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconDesmos")
     var chainInfoTitle = NSLocalizedString("send_guide_title_desmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_desmos", comment: "")
+    var chainColor = UIColor(named: "desmos")!
+    var chainColorDark = UIColor(named: "desmos_dark")
+    var chainColorBG = UIColor(named: "desmos")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenDesmos")
     var stakeDenom = "udsm"

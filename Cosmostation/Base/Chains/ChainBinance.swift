@@ -16,6 +16,9 @@ class ChainBinance: ChainConfig {
     var chainInfoImg = UIImage(named: "binanceImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_bnb", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_bnb", comment: "")
+    var chainColor = UIColor(named: "binance")!
+    var chainColorDark = UIColor(named: "binance_dark")
+    var chainColorBG = UIColor(named: "binance")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "bnbTokenImg")
     var stakeDenom = "BNB"

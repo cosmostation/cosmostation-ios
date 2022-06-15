@@ -4509,6 +4509,7 @@
 		0451FC4A282A38C600214FDA /* Chains */ = {
 			isa = PBXGroup;
 			children = (
+				0451FC48282A117400214FDA /* BaseChain.swift */,
 				0451FC4B282A38E000214FDA /* ChainCosmos.swift */,
 				0451FC51282A397200214FDA /* ChainIris.swift */,
 				0451FC5D282A39D000214FDA /* ChainAkash.swift */,
@@ -6182,7 +6183,6 @@
 				E1945E51223124F000A1436F /* BaseData.swift */,
 				E1945E532231256800A1436F /* BaseConstant.swift */,
 				28592E762580616D00C31460 /* BaseNetWork.swift */,
-				0451FC48282A117400214FDA /* BaseChain.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";

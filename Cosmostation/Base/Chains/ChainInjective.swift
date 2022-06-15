@@ -16,6 +16,9 @@ class ChainInjective: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconInjective")
     var chainInfoTitle = NSLocalizedString("send_guide_title_injective", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_injective", comment: "")
+    var chainColor = UIColor(named: "injective")!
+    var chainColorDark = UIColor(named: "injective_dark")
+    var chainColorBG = UIColor(named: "injective")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenInjective")
     var stakeDenom = "inj"

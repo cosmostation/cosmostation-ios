@@ -16,6 +16,9 @@ class ChainCerberus: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconCerberus")
     var chainInfoTitle = NSLocalizedString("send_guide_title_cerberus", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_cerberus", comment: "")
+    var chainColor = UIColor(named: "cerberus")!
+    var chainColorDark = UIColor(named: "cerberus_dark")
+    var chainColorBG = UIColor(named: "cerberus")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenCerberus")
     var stakeDenom = "ucrbrus"

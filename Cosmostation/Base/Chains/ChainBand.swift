@@ -16,6 +16,9 @@ class ChainBand: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconBandprotocol")
     var chainInfoTitle = NSLocalizedString("send_guide_title_band", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_band", comment: "")
+    var chainColor = UIColor(named: "band")!
+    var chainColorDark = UIColor(named: "band_dark")
+    var chainColorBG = UIColor(named: "band")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenBand")
     var stakeDenom = "uband"

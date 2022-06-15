@@ -16,6 +16,9 @@ class ChainKava: ChainConfig {
     var chainInfoImg = UIImage(named: "kavamainImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_kava", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_kava", comment: "")
+    var chainColor = UIColor(named: "kava")!
+    var chainColorDark = UIColor(named: "kava_dark")
+    var chainColorBG = UIColor(named: "kava")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "kavaTokenImg")
     var stakeDenom = "ukava"

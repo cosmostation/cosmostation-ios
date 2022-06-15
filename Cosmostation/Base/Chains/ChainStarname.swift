@@ -16,6 +16,9 @@ class ChainStarname: ChainConfig {
     var chainInfoImg = UIImage(named: "iovImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_iov", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_iov", comment: "")
+    var chainColor = UIColor(named: "starname")!
+    var chainColorDark = UIColor(named: "starname_dark")
+    var chainColorBG = UIColor(named: "starname")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenStarname")
     var stakeDenom = "uiov"

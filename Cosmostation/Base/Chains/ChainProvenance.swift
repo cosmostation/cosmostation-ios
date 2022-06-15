@@ -16,6 +16,9 @@ class ChainProvenance: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconProvenance")
     var chainInfoTitle = NSLocalizedString("send_guide_title_provenance", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_provenance", comment: "")
+    var chainColor = UIColor(named: "provenance")!
+    var chainColorDark = UIColor(named: "provenance_dark")
+    var chainColorBG = UIColor(named: "provenance")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenHash")
     var stakeDenom = "nhash"

@@ -16,6 +16,9 @@ class ChainGravityBridge: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconGravitybridge")
     var chainInfoTitle = NSLocalizedString("send_guide_title_gbridge", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_gbridge", comment: "")
+    var chainColor = UIColor(named: "gravitybridge")!
+    var chainColorDark = UIColor(named: "gravitybridge_dark")
+    var chainColorBG = UIColor(named: "gravitybridge")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenGravitybridge")
     var stakeDenom = "ugraviton"

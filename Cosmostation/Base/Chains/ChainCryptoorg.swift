@@ -16,6 +16,9 @@ class ChainCryptoorg: ChainConfig {
     var chainInfoImg = UIImage(named: "cryptochainImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_crypto", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_crypto", comment: "")
+    var chainColor = UIColor(named: "cryptoorg")!
+    var chainColorDark = UIColor(named: "cryptoorg_dark")
+    var chainColorBG = UIColor(named: "cryptoorg")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokencrypto")
     var stakeDenom = "basecro"

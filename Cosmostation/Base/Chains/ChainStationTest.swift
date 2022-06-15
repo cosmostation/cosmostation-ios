@@ -16,6 +16,9 @@ class StationTest: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconStation")
     var chainInfoTitle = NSLocalizedString("Station", comment: "")
     var chainInfoMsg = NSLocalizedString("Station", comment: "")
+    var chainColor = UIColor(named: "station")!
+    var chainColorDark = UIColor(named: "station_dark")
+    var chainColorBG = UIColor(named: "station")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenIss")
     var stakeDenom = "uiss"

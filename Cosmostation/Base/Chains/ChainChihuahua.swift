@@ -16,6 +16,9 @@ class ChainChihuahua: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconChihuahua")
     var chainInfoTitle = NSLocalizedString("send_guide_title_chihuahua", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_chihuahua", comment: "")
+    var chainColor = UIColor(named: "chihuahua")!
+    var chainColorDark = UIColor(named: "chihuahua_dark")
+    var chainColorBG = UIColor(named: "chihuahua")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenHuahua")
     var stakeDenom = "uhuahua"

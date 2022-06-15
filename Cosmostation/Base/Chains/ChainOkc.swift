@@ -16,6 +16,9 @@ class ChainOkc: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconOkx")
     var chainInfoTitle = NSLocalizedString("send_guide_title_ok", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_ok", comment: "")
+    var chainColor = UIColor(named: "okc")!
+    var chainColorDark = UIColor(named: "okc_dark")
+    var chainColorBG = UIColor(named: "okc")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenOkx")
     var stakeDenom = "okt"

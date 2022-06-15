@@ -16,6 +16,9 @@ class ChainComdex: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconComdex")
     var chainInfoTitle = NSLocalizedString("send_guide_title_comdex", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_comdex", comment: "")
+    var chainColor = UIColor(named: "comdex")!
+    var chainColorDark = UIColor(named: "comdex_dark")
+    var chainColorBG = UIColor.init(hexString: "005ac5").withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenComdex")
     var stakeDenom = "ucmdx"

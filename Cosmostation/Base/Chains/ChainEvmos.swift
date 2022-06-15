@@ -16,6 +16,9 @@ class ChainEvmos: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconEvmos")
     var chainInfoTitle = NSLocalizedString("send_guide_title_evmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_evmos", comment: "")
+    var chainColor = UIColor(named: "evmos")!
+    var chainColorDark = UIColor(named: "evmos_dark")
+    var chainColorBG = UIColor(named: "evmos")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenEvmos")
     var stakeDenom = "aevmos"

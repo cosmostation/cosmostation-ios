@@ -16,6 +16,9 @@ class ChainCertik: ChainConfig {
     var chainInfoImg = UIImage(named: "certikImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_certik", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_certik", comment: "")
+    var chainColor = UIColor(named: "certik")!
+    var chainColorDark = UIColor(named: "certik_dark")
+    var chainColorBG = UIColor(named: "certik")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "certikTokenImg")
     var stakeDenom = "uctk"

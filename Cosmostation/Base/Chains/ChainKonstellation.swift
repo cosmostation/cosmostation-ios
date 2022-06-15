@@ -16,6 +16,9 @@ class ChainKonstellation: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconKonstellation")
     var chainInfoTitle = NSLocalizedString("send_guide_title_konstellation", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_konstellation", comment: "")
+    var chainColor = UIColor(named: "konstellation")!
+    var chainColorDark = UIColor(named: "konstellation_dark")
+    var chainColorBG = UIColor(named: "konstellation")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenKonstellation")
     var stakeDenom = "udarc"

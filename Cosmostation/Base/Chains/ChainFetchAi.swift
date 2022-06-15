@@ -16,6 +16,9 @@ class ChainFetchAi: ChainConfig {
     var chainInfoImg = UIImage(named: "fetchaiImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_fetch", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_fetch", comment: "")
+    var chainColor = UIColor(named: "fetchai")!
+    var chainColorDark = UIColor(named: "fetchai_dark")
+    var chainColorBG = UIColor(named: "fetchai")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenfetchai")
     var stakeDenom = "afet"

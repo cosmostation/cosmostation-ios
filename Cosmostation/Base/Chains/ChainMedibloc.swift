@@ -16,6 +16,9 @@ class ChainMedibloc: ChainConfig {
     var chainInfoImg = UIImage(named: "mediblocImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_medi", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_medi", comment: "")
+    var chainColor = UIColor(named: "medibloc")!
+    var chainColorDark = UIColor(named: "medibloc_dark")
+    var chainColorBG = UIColor(named: "medibloc")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenmedibloc")
     var stakeDenom = "umed"

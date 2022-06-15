@@ -16,6 +16,9 @@ class ChainBitsong: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconBitsong")
     var chainInfoTitle = NSLocalizedString("send_guide_title_bitsong", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_bitsong", comment: "")
+    var chainColor = UIColor(named: "bitsong")!
+    var chainColorDark = UIColor(named: "bitsong_dark")
+    var chainColorBG = UIColor(named: "bitsong")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenBitsong")
     var stakeDenom = "ubtsg"

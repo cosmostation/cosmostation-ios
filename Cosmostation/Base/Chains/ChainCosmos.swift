@@ -16,6 +16,9 @@ class ChainCosmos: ChainConfig {
     var chainInfoImg = UIImage(named: "guideImg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_cosmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_cosmos", comment: "")
+    var chainColor = UIColor(named: "cosmos")!
+    var chainColorDark = UIColor(named: "cosmos_dark")
+    var chainColorBG = UIColor(named: "cosmos")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "atom_ic")
     var stakeDenom = "uatom"

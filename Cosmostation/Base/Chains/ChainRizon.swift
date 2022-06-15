@@ -16,6 +16,9 @@ class ChainRizon: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconRizon")
     var chainInfoTitle = NSLocalizedString("send_guide_title_rizon", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_rizon", comment: "")
+    var chainColor = UIColor(named: "rizon")!
+    var chainColorDark = UIColor(named: "rizon_dark")
+    var chainColorBG = UIColor(named: "rizon")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenRizon")
     var stakeDenom = "uatolo"

@@ -16,6 +16,9 @@ class ChainOmniflix: ChainConfig {
     var chainInfoImg = UIImage(named: "infoiconOmniflix")
     var chainInfoTitle = NSLocalizedString("send_guide_title_omniflix", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_omniflix", comment: "")
+    var chainColor = UIColor(named: "omniflix")!
+    var chainColorDark = UIColor(named: "omniflix_dark")
+    var chainColorBG = UIColor(named: "omniflix")!.withAlphaComponent(0.15)
     
     var stakeDenomImg = UIImage(named: "tokenOmniflix")
     var stakeDenom = "uflix"
