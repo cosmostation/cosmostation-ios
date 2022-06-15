@@ -19,6 +19,10 @@ class ChainMedibloc: ChainConfig {
     var chainColor = UIColor(named: "medibloc")!
     var chainColorDark = UIColor(named: "medibloc_dark")
     var chainColorBG = UIColor(named: "medibloc")!.withAlphaComponent(0.15)
+    var chainTitle = "(Medibloc Mainnet)"
+    var chainTitle2 = "MEDIBLOC"
+    var chainDBName = "SUPPORT_CHAIN_MEDI"
+    var chainAPIName = "medibloc"
     
     var stakeDenomImg = UIImage(named: "tokenmedibloc")
     var stakeDenom = "umed"

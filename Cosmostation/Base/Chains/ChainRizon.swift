@@ -19,6 +19,10 @@ class ChainRizon: ChainConfig {
     var chainColor = UIColor(named: "rizon")!
     var chainColorDark = UIColor(named: "rizon_dark")
     var chainColorBG = UIColor(named: "rizon")!.withAlphaComponent(0.15)
+    var chainTitle = "(Rizon Mainnet)"
+    var chainTitle2 = "RIZON"
+    var chainDBName = "SUPPORT_CHAIN_RIZON"
+    var chainAPIName = "rizon"
     
     var stakeDenomImg = UIImage(named: "tokenRizon")
     var stakeDenom = "uatolo"

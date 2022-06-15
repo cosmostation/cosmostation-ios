@@ -19,6 +19,10 @@ class ChainAssetMantle: ChainConfig {
     var chainColor = UIColor(named: "assetmantle")!
     var chainColorDark = UIColor(named: "assetmantle_dark")
     var chainColorBG = UIColor(named: "assetmantle")!.withAlphaComponent(0.15)
+    var chainTitle = "(Asset-Mantle Mainnet)"
+    var chainTitle2 = "ASSET-MANTLE"
+    var chainDBName = "SUPPORT_CHAIN_MANTLE"
+    var chainAPIName = "asset-mantle"
     
     var stakeDenomImg = UIImage(named: "tokenAssetmantle")
     var stakeDenom = "umntl"

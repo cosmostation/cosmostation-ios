@@ -19,6 +19,10 @@ class ChainCertik: ChainConfig {
     var chainColor = UIColor(named: "certik")!
     var chainColorDark = UIColor(named: "certik_dark")
     var chainColorBG = UIColor(named: "certik")!.withAlphaComponent(0.15)
+    var chainTitle = "(Certik Mainnet)"
+    var chainTitle2 = "CERTIK"
+    var chainDBName = "SUPPORT_CHAIN_CERTIK_MAIN"
+    var chainAPIName = "certik"
     
     var stakeDenomImg = UIImage(named: "certikTokenImg")
     var stakeDenom = "uctk"

@@ -19,6 +19,10 @@ class ChainOkc: ChainConfig {
     var chainColor = UIColor(named: "okc")!
     var chainColorDark = UIColor(named: "okc_dark")
     var chainColorBG = UIColor(named: "okc")!.withAlphaComponent(0.15)
+    var chainTitle = "(OKC Mainnet)"
+    var chainTitle2 = "OKC"
+    var chainDBName = "SUPPORT_CHAIN_OKEX_MAIN"
+    var chainAPIName = ""
     
     var stakeDenomImg = UIImage(named: "tokenOkx")
     var stakeDenom = "okt"

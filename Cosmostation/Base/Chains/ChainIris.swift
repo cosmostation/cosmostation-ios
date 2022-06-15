@@ -19,6 +19,10 @@ class ChainIris: ChainConfig {
     var chainColor = UIColor(named: "iris")!
     var chainColorDark = UIColor(named: "iris_dark")
     var chainColorBG = UIColor(named: "iris")!.withAlphaComponent(0.15)
+    var chainTitle = "(Iris Mainnet)"
+    var chainTitle2 = "IRIS"
+    var chainDBName = "SUPPORT_CHAIN_IRIS_MAIN"
+    var chainAPIName = "iris"
     
     var stakeDenomImg = UIImage(named: "irisTokenImg")
     var stakeDenom = "uiris"

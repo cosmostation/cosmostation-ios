@@ -19,6 +19,10 @@ class ChainSif: ChainConfig {
     var chainColor = UIColor(named: "sif")!
     var chainColorDark = UIColor(named: "sif_dark")
     var chainColorBG = UIColor(named: "sif")!.withAlphaComponent(0.15)
+    var chainTitle = "(SifChain Mainnet)"
+    var chainTitle2 = "SIF"
+    var chainDBName = "SUPPORT_CHAIN_SIF_MAIN"
+    var chainAPIName = "sifchain"
     
     var stakeDenomImg = UIImage(named: "tokensifchain")
     var stakeDenom = "rowan"

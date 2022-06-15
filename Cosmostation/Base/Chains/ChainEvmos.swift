@@ -19,6 +19,10 @@ class ChainEvmos: ChainConfig {
     var chainColor = UIColor(named: "evmos")!
     var chainColorDark = UIColor(named: "evmos_dark")
     var chainColorBG = UIColor(named: "evmos")!.withAlphaComponent(0.15)
+    var chainTitle = "(Evmos Mainnet)"
+    var chainTitle2 = "EVMOS"
+    var chainDBName = "SUPPORT_CHAIN_EVMOS"
+    var chainAPIName = "evmos"
     
     var stakeDenomImg = UIImage(named: "tokenEvmos")
     var stakeDenom = "aevmos"

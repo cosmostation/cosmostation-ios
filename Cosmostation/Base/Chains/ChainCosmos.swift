@@ -19,6 +19,10 @@ class ChainCosmos: ChainConfig {
     var chainColor = UIColor(named: "cosmos")!
     var chainColorDark = UIColor(named: "cosmos_dark")
     var chainColorBG = UIColor(named: "cosmos")!.withAlphaComponent(0.15)
+    var chainTitle = "(Cosmos Mainnet)"
+    var chainTitle2 = "COSMOS"
+    var chainDBName = "SUPPORT_CHAIN_COSMOS_MAIN"
+    var chainAPIName = "cosmos"
     
     var stakeDenomImg = UIImage(named: "atom_ic")
     var stakeDenom = "uatom"

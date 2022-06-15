@@ -19,6 +19,10 @@ class ChainBitcana: ChainConfig {
     var chainColor = UIColor(named: "bitcanna")!
     var chainColorDark = UIColor(named: "bitcanna_dark")
     var chainColorBG = UIColor(named: "bitcanna")!.withAlphaComponent(0.15)
+    var chainTitle = "(Bitcanna Mainnet)"
+    var chainTitle2 = "BITCANNA"
+    var chainDBName = "SUPPORT_CHAIN_BITCANA"
+    var chainAPIName = "bitcanna"
     
     var stakeDenomImg = UIImage(named: "tokenBitcanna")
     var stakeDenom = "ubcna"

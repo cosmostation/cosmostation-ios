@@ -19,6 +19,10 @@ class ChainAxelar: ChainConfig {
     var chainColor = UIColor(named: "axelar")!
     var chainColorDark = UIColor(named: "axelar_dark")
     var chainColorBG = UIColor(named: "axelar")!.withAlphaComponent(0.15)
+    var chainTitle = "(Axelar Mainnet)"
+    var chainTitle2 = "AXELAR"
+    var chainDBName = "SUPPORT_CHAIN_AXELAR"
+    var chainAPIName = "axelar"
     
     var stakeDenomImg = UIImage(named: "tokenAxelar")
     var stakeDenom = "uaxl"

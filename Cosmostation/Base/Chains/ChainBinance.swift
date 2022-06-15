@@ -19,6 +19,10 @@ class ChainBinance: ChainConfig {
     var chainColor = UIColor(named: "binance")!
     var chainColorDark = UIColor(named: "binance_dark")
     var chainColorBG = UIColor(named: "binance")!.withAlphaComponent(0.15)
+    var chainTitle = "(Binance Mainnet)"
+    var chainTitle2 = "BINANCE"
+    var chainDBName = "SUPPORT_CHAIN_BINANCE_MAIN"
+    var chainAPIName = ""
     
     var stakeDenomImg = UIImage(named: "bnbTokenImg")
     var stakeDenom = "BNB"

@@ -19,6 +19,10 @@ class ChainDesmos: ChainConfig {
     var chainColor = UIColor(named: "desmos")!
     var chainColorDark = UIColor(named: "desmos_dark")
     var chainColorBG = UIColor(named: "desmos")!.withAlphaComponent(0.15)
+    var chainTitle = "(Desmos Mainnet)"
+    var chainTitle2 = "DESMOS"
+    var chainDBName = "SUPPORT_CHAIN_DESMOS"
+    var chainAPIName = "desmos"
     
     var stakeDenomImg = UIImage(named: "tokenDesmos")
     var stakeDenom = "udsm"

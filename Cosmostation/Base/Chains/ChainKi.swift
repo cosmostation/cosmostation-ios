@@ -19,6 +19,10 @@ class ChainKi: ChainConfig {
     var chainColor = UIColor(named: "ki")!
     var chainColorDark = UIColor(named: "ki_dark")
     var chainColorBG = UIColor(named: "ki")!.withAlphaComponent(0.15)
+    var chainTitle = "(KiChain Mainnet)"
+    var chainTitle2 = "KI"
+    var chainDBName = "SUPPORT_CHAIN_KI_MAIN"
+    var chainAPIName = "kichain"
     
     var stakeDenomImg = UIImage(named: "tokenKifoundation")
     var stakeDenom = "uxki"

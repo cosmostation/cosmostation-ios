@@ -19,6 +19,10 @@ class ChainComdex: ChainConfig {
     var chainColor = UIColor(named: "comdex")!
     var chainColorDark = UIColor(named: "comdex_dark")
     var chainColorBG = UIColor.init(hexString: "005ac5").withAlphaComponent(0.15)
+    var chainTitle = "(Comdex Mainnet)"
+    var chainTitle2 = "COMDEX"
+    var chainDBName = "SUPPORT_CHAIN_COMDEX"
+    var chainAPIName = "comdex"
     
     var stakeDenomImg = UIImage(named: "tokenComdex")
     var stakeDenom = "ucmdx"

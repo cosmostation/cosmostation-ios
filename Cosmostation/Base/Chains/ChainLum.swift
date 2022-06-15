@@ -19,6 +19,10 @@ class ChainLum: ChainConfig {
     var chainColor = UIColor(named: "lum")!
     var chainColorDark = UIColor(named: "lum_dark")
     var chainColorBG = UIColor(named: "lum")!.withAlphaComponent(0.15)
+    var chainTitle = "(Lum Mainnet)"
+    var chainTitle2 = "LUM"
+    var chainDBName = "SUPPORT_CHAIN_LUM"
+    var chainAPIName = "lum"
     
     var stakeDenomImg = UIImage(named: "tokenLum")
     var stakeDenom = "ulum"

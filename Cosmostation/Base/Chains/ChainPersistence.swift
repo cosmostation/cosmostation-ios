@@ -19,6 +19,10 @@ class ChainPersistence: ChainConfig {
     var chainColor = UIColor(named: "persistence")!
     var chainColorDark = UIColor(named: "persistence_dark")
     var chainColorBG = UIColor.init(hexString: "EDEDED").withAlphaComponent(0.15)
+    var chainTitle = "(Persistence Mainnet)"
+    var chainTitle2 = "PERSISTENCE"
+    var chainDBName = "SUPPORT_CHAIN_PERSISTENCE_MAIN"
+    var chainAPIName = "persistence"
     
     var stakeDenomImg = UIImage(named: "tokenpersistence")
     var stakeDenom = "uxprt"

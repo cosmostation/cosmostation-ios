@@ -19,6 +19,10 @@ class ChainSentinel: ChainConfig {
     var chainColor = UIColor(named: "sentinel")!
     var chainColorDark = UIColor(named: "sentinel_dark")
     var chainColorBG = UIColor(named: "sentinel")!.withAlphaComponent(0.15)
+    var chainTitle = "(Sentinel Mainnet)"
+    var chainTitle2 = "SENTINEL"
+    var chainDBName = "SUPPORT_CHAIN_SENTINEL_MAIN"
+    var chainAPIName = "sentinel"
     
     var stakeDenomImg = UIImage(named: "tokensentinel")
     var stakeDenom = "udvpn"

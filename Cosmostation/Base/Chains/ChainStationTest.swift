@@ -19,6 +19,10 @@ class StationTest: ChainConfig {
     var chainColor = UIColor(named: "station")!
     var chainColorDark = UIColor(named: "station_dark")
     var chainColorBG = UIColor(named: "station")!.withAlphaComponent(0.15)
+    var chainTitle = "(Station Testnet)"
+    var chainTitle2 = "STATION TEST"
+    var chainDBName = "SUPPORT_CHAIN_STATION_TEST"
+    var chainAPIName = ""
     
     var stakeDenomImg = UIImage(named: "tokenIss")
     var stakeDenom = "uiss"

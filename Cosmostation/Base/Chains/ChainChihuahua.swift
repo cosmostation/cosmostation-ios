@@ -19,6 +19,10 @@ class ChainChihuahua: ChainConfig {
     var chainColor = UIColor(named: "chihuahua")!
     var chainColorDark = UIColor(named: "chihuahua_dark")
     var chainColorBG = UIColor(named: "chihuahua")!.withAlphaComponent(0.15)
+    var chainTitle = "(Chihuahua Mainnet)"
+    var chainTitle2 = "CHIHUAHUA"
+    var chainDBName = "SUPPORT_CHAIN_CHIHUAHUA"
+    var chainAPIName = "chihuahua"
     
     var stakeDenomImg = UIImage(named: "tokenHuahua")
     var stakeDenom = "uhuahua"

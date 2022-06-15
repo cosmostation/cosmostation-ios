@@ -19,6 +19,10 @@ class ChainFetchAi: ChainConfig {
     var chainColor = UIColor(named: "fetchai")!
     var chainColorDark = UIColor(named: "fetchai_dark")
     var chainColorBG = UIColor(named: "fetchai")!.withAlphaComponent(0.15)
+    var chainTitle = "(Fetch.Ai Mainnet)"
+    var chainTitle2 = "FETCH.AI"
+    var chainDBName = "SUPPORT_CHAIN_FETCH_MAIN"
+    var chainAPIName = "fetchai"
     
     var stakeDenomImg = UIImage(named: "tokenfetchai")
     var stakeDenom = "afet"

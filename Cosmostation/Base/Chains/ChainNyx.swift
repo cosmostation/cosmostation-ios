@@ -19,6 +19,10 @@ class ChainNyx: ChainConfig {
     var chainColor = UIColor(named: "nyx")!
     var chainColorDark = UIColor(named: "nyx_dark")
     var chainColorBG = UIColor(named: "nyx")!.withAlphaComponent(0.15)
+    var chainTitle = "(Nyx Mainnet)"
+    var chainTitle2 = "NYX"
+    var chainDBName = "SUPPORT_CHAIN_NYX"
+    var chainAPIName = "nyx"
     
     var stakeDenomImg = UIImage(named: "tokenNyx")
     var stakeDenom = "unyx"

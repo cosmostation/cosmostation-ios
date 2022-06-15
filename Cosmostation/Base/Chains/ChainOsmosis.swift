@@ -19,6 +19,10 @@ class ChainOsmosis: ChainConfig {
     var chainColor = UIColor(named: "osmosis")!
     var chainColorDark = UIColor(named: "osmosis_dark")
     var chainColorBG = UIColor(named: "osmosis")!.withAlphaComponent(0.15)
+    var chainTitle = "(Osmosis Mainnet)"
+    var chainTitle2 = "OSMOSIS"
+    var chainDBName = "SUPPORT_CHAIN_OSMOSIS_MAIN"
+    var chainAPIName = "osmosis"
     
     var stakeDenomImg = UIImage(named: "tokenOsmosis")
     var stakeDenom = "uosmo"

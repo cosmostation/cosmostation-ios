@@ -19,6 +19,10 @@ class ChainStargaze: ChainConfig {
     var chainColor = UIColor(named: "stargaze")!
     var chainColorDark = UIColor(named: "stargaze_dark")
     var chainColorBG = UIColor(named: "stargaze")!.withAlphaComponent(0.15)
+    var chainTitle = "(Stargaze Mainnet)"
+    var chainTitle2 = "STARGAZE"
+    var chainDBName = "SUPPORT_CHAIN_STARGAZE"
+    var chainAPIName = "stargaze"
     
     var stakeDenomImg = UIImage(named: "tokenStargaze")
     var stakeDenom = "ustars"

@@ -19,6 +19,10 @@ class ChainBitsong: ChainConfig {
     var chainColor = UIColor(named: "bitsong")!
     var chainColorDark = UIColor(named: "bitsong_dark")
     var chainColorBG = UIColor(named: "bitsong")!.withAlphaComponent(0.15)
+    var chainTitle = "(Bitsong Mainnet)"
+    var chainTitle2 = "BITSONG"
+    var chainDBName = "SUPPORT_CHAIN_BITSONG"
+    var chainAPIName = "bitsong"
     
     var stakeDenomImg = UIImage(named: "tokenBitsong")
     var stakeDenom = "ubtsg"

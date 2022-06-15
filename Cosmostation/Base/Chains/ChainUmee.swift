@@ -19,6 +19,10 @@ class ChainUmee: ChainConfig {
     var chainColor = UIColor(named: "umee")!
     var chainColorDark = UIColor(named: "umee_dark")
     var chainColorBG = UIColor(named: "umee")!.withAlphaComponent(0.15)
+    var chainTitle = "(Umee Mainnet)"
+    var chainTitle2 = "UMEE"
+    var chainDBName = "SUPPORT_CHAIN_UMEE"
+    var chainAPIName = "umee"
     
     var stakeDenomImg = UIImage(named: "tokenUmee")
     var stakeDenom = "uumee"

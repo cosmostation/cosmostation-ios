@@ -19,6 +19,10 @@ class ChainKonstellation: ChainConfig {
     var chainColor = UIColor(named: "konstellation")!
     var chainColorDark = UIColor(named: "konstellation_dark")
     var chainColorBG = UIColor(named: "konstellation")!.withAlphaComponent(0.15)
+    var chainTitle = "(Konstellation Mainnet)"
+    var chainTitle2 = "KONSTELLATION"
+    var chainDBName = "SUPPORT_CHAIN_KONSTELLATION"
+    var chainAPIName = "konstellation"
     
     var stakeDenomImg = UIImage(named: "tokenKonstellation")
     var stakeDenom = "udarc"
