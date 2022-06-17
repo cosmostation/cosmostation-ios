@@ -17,8 +17,7 @@ class ChainJuno: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_juno", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_juno", comment: "")
     var chainColor = UIColor(named: "juno")!
-    var chainColorDark = UIColor(named: "juno_dark")
-    var chainColorBG = UIColor(named: "juno")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "juno_bg")!
     var chainTitle = "(Juno Mainnet)"
     var chainTitle2 = "JUNO"
     var chainDBName = "SUPPORT_CHAIN_JUNO"

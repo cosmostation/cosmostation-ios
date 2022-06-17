@@ -17,8 +17,7 @@ class ChainEvmos: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_evmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_evmos", comment: "")
     var chainColor = UIColor(named: "evmos")!
-    var chainColorDark = UIColor(named: "evmos_dark")
-    var chainColorBG = UIColor(named: "evmos")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "evmos_bg")!
     var chainTitle = "(Evmos Mainnet)"
     var chainTitle2 = "EVMOS"
     var chainDBName = "SUPPORT_CHAIN_EVMOS"

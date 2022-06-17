@@ -17,8 +17,7 @@ class ChainKi: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_ki", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_ki", comment: "")
     var chainColor = UIColor(named: "ki")!
-    var chainColorDark = UIColor(named: "ki_dark")
-    var chainColorBG = UIColor(named: "ki")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "ki_bg")!
     var chainTitle = "(KiChain Mainnet)"
     var chainTitle2 = "KI"
     var chainDBName = "SUPPORT_CHAIN_KI_MAIN"

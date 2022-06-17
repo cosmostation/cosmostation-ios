@@ -17,8 +17,7 @@ class ChainBand: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_band", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_band", comment: "")
     var chainColor = UIColor(named: "band")!
-    var chainColorDark = UIColor(named: "band_dark")
-    var chainColorBG = UIColor(named: "band")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "band_bg")!
     var chainTitle = "(Band Mainnet)"
     var chainTitle2 = "BAND"
     var chainDBName = "SUPPORT_CHAIN_BAND_MAIN"

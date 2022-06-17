@@ -17,8 +17,7 @@ class ChainAkash: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_akash", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_akash", comment: "")
     var chainColor = UIColor(named: "akash")!
-    var chainColorDark = UIColor(named: "akash_dark")
-    var chainColorBG = UIColor(named: "akash")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "akash_bg")!
     var chainTitle = "(Akash Mainnet)"
     var chainTitle2 = "AKASH"
     var chainDBName = "SUPPORT_CHAIN_AKASH_MAIN"

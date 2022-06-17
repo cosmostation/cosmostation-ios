@@ -17,8 +17,7 @@ class ChainInjective: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_injective", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_injective", comment: "")
     var chainColor = UIColor(named: "injective")!
-    var chainColorDark = UIColor(named: "injective_dark")
-    var chainColorBG = UIColor(named: "injective")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "injective_bg")!
     var chainTitle = "(Injective Mainnet)"
     var chainTitle2 = "INJECTIVE"
     var chainDBName = "SUPPORT_CHAIN_INJECTIVE"

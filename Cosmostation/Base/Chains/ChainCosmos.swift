@@ -17,9 +17,7 @@ class ChainCosmos: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_cosmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_cosmos", comment: "")
     var chainColor = UIColor(named: "cosmos")!
-    
-//    var chainColorDark = UIColor(named: "cosmos_dark")
-    var chainColorBG = UIColor(named: "cosmos_bg")
+    var chainColorBG = UIColor(named: "cosmos_bg")!
     
     var chainTitle = "(Cosmos Mainnet)"
     var chainTitle2 = "COSMOS"

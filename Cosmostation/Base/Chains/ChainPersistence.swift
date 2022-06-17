@@ -17,8 +17,7 @@ class ChainPersistence: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_persis", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_persis", comment: "")
     var chainColor = UIColor(named: "persistence")!
-    var chainColorDark = UIColor(named: "persistence_dark")
-    var chainColorBG = UIColor.init(hexString: "EDEDED").withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "persistence_bg")!
     var chainTitle = "(Persistence Mainnet)"
     var chainTitle2 = "PERSISTENCE"
     var chainDBName = "SUPPORT_CHAIN_PERSISTENCE_MAIN"

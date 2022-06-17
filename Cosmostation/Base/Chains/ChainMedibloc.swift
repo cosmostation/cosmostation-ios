@@ -17,8 +17,7 @@ class ChainMedibloc: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_medi", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_medi", comment: "")
     var chainColor = UIColor(named: "medibloc")!
-    var chainColorDark = UIColor(named: "medibloc_dark")
-    var chainColorBG = UIColor(named: "medibloc")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "medibloc_bg")!
     var chainTitle = "(Medibloc Mainnet)"
     var chainTitle2 = "MEDIBLOC"
     var chainDBName = "SUPPORT_CHAIN_MEDI"

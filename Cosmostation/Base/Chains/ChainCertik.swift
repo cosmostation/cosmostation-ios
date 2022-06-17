@@ -17,8 +17,7 @@ class ChainCertik: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_certik", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_certik", comment: "")
     var chainColor = UIColor(named: "certik")!
-    var chainColorDark = UIColor(named: "certik_dark")
-    var chainColorBG = UIColor(named: "certik")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "certik_bg")!
     var chainTitle = "(Certik Mainnet)"
     var chainTitle2 = "CERTIK"
     var chainDBName = "SUPPORT_CHAIN_CERTIK_MAIN"

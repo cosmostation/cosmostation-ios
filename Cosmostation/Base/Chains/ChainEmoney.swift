@@ -17,8 +17,7 @@ class ChainEmoney: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_emoney", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_emoney", comment: "")
     var chainColor = UIColor(named: "emoney")!
-    var chainColorDark = UIColor(named: "emoney_dark")
-    var chainColorBG = UIColor(named: "emoney")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "emoney_bg")!
     var chainTitle = "(E-Money Mainnet)"
     var chainTitle2 = "E-MONEY"
     var chainDBName = "SUPPORT_CHAIN_EMONEY"

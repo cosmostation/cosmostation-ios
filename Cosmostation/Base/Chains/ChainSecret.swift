@@ -17,8 +17,7 @@ class ChainSecret: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_secret", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_secret", comment: "")
     var chainColor = UIColor(named: "secret")!
-    var chainColorDark = UIColor(named: "secret_dark")
-    var chainColorBG = UIColor(named: "secret")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "secret_bg")!
     var chainTitle = "(Secret Mainnet)"
     var chainTitle2 = "SECRET"
     var chainDBName = "SUPPORT_CHAIN_SECRET_MAIN"

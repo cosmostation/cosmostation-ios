@@ -17,9 +17,7 @@ class ChainAxelar: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_axelar", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_axelar", comment: "")
     var chainColor = UIColor(named: "axelar")!
-    
-//    var chainColorDark = UIColor(named: "axelar_dark")
-    var chainColorBG = UIColor(named: "axelar_bg")
+    var chainColorBG = UIColor(named: "axelar_bg")!
     
     var chainTitle = "(Axelar Mainnet)"
     var chainTitle2 = "AXELAR"

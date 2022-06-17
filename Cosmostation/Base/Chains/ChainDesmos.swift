@@ -17,8 +17,7 @@ class ChainDesmos: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_desmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_desmos", comment: "")
     var chainColor = UIColor(named: "desmos")!
-    var chainColorDark = UIColor(named: "desmos_dark")
-    var chainColorBG = UIColor(named: "desmos")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "desmos_bg")!
     var chainTitle = "(Desmos Mainnet)"
     var chainTitle2 = "DESMOS"
     var chainDBName = "SUPPORT_CHAIN_DESMOS"

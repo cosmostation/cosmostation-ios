@@ -17,8 +17,7 @@ class ChainRegen: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_regen", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_regen", comment: "")
     var chainColor = UIColor(named: "regen")!
-    var chainColorDark = UIColor(named: "regen_dark")
-    var chainColorBG = UIColor(named: "regen")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "regen_bg")!
     var chainTitle = "(Regen Mainnet)"
     var chainTitle2 = "REGEN"
     var chainDBName = "SUPPORT_CHAIN_REGEN"

@@ -17,8 +17,7 @@ class ChainSentinel: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_sentinel", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_sentinel", comment: "")
     var chainColor = UIColor(named: "sentinel")!
-    var chainColorDark = UIColor(named: "sentinel_dark")
-    var chainColorBG = UIColor(named: "sentinel")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "sentinel_bg")!
     var chainTitle = "(Sentinel Mainnet)"
     var chainTitle2 = "SENTINEL"
     var chainDBName = "SUPPORT_CHAIN_SENTINEL_MAIN"
