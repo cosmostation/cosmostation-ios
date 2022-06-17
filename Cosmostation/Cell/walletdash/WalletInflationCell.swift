@@ -17,8 +17,8 @@ class WalletInflationCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        infaltionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
-        yieldLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        infaltionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
+        yieldLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
         
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapApr))
