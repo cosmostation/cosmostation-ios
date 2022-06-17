@@ -33,7 +33,9 @@ class WalletGuideCell: UITableViewCell {
     }
     
     func updateView(_ account: Account?, _ chainType: ChainType?) {
-        let chainConfig = ChainFactory().getChainConfig(chainType!)
+        guard let chainConfig = ChainFactory().getChainConfig(chainType!) else {
+            return
+        }
         btn1Label.setTitle(NSLocalizedString("send_guide_btn_home", comment: ""), for: .normal)
         btn2Label.setTitle(NSLocalizedString("send_guide_btn_blog", comment: ""), for: .normal)
         guideImg.image = chainConfig.chainInfoImg

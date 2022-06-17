@@ -32,7 +32,9 @@ class DeriveWalletCell: UITableViewCell {
     }
     
     func onBindWallet(_ derive: Derive, _ isPrivateKeyMode: Bool) {
-        let chainConfig = ChainFactory().getChainConfig(derive.chaintype)
+        guard let chainConfig = ChainFactory().getChainConfig(derive.chaintype) else {
+            return
+        }
         chainImgView.image = chainConfig.chainImg
         if (isPrivateKeyMode) {
             pathLabel.text = ""

@@ -49,130 +49,109 @@ protocol ChainConfig {
 
 class ChainFactory {
     
-    func getChainConfig(_ chainType: ChainType) -> ChainConfig {
+    func getChainConfig(_ chainType: ChainType?) -> ChainConfig? {
         switch chainType {
         case .COSMOS_MAIN:
-            return ChainCosmos(chainType)
+            return ChainCosmos(chainType!)
         case .IRIS_MAIN:
-            return ChainIris(chainType)
+            return ChainIris(chainType!)
         case .AKASH_MAIN:
-            return ChainAkash(chainType)
+            return ChainAkash(chainType!)
         case .MANTLE_MAIN:
-            return ChainAssetMantle(chainType)
+            return ChainAssetMantle(chainType!)
         case .AXELAR_MAIN:
-            return ChainAxelar(chainType)
+            return ChainAxelar(chainType!)
         case .BAND_MAIN:
-            return ChainBand(chainType)
+            return ChainBand(chainType!)
         case .BINANCE_MAIN:
-            return ChainBinance(chainType)
+            return ChainBinance(chainType!)
         case .BITCANA_MAIN:
-            return ChainBitcana(chainType)
+            return ChainBitcana(chainType!)
         case .BITSONG_MAIN:
-            return ChainBitsong(chainType)
+            return ChainBitsong(chainType!)
         case .CERBERUS_MAIN:
-            return ChainCerberus(chainType)
+            return ChainCerberus(chainType!)
         case .CERTIK_MAIN:
-            return ChainCertik(chainType)
+            return ChainCertik(chainType!)
         case .CHIHUAHUA_MAIN:
-            return ChainChihuahua(chainType)
+            return ChainChihuahua(chainType!)
         case .COMDEX_MAIN:
-            return ChainComdex(chainType)
+            return ChainComdex(chainType!)
         case .CRESCENT_MAIN:
-            return ChainCrescent(chainType)
+            return ChainCrescent(chainType!)
         case .CRYPTO_MAIN:
-            return ChainCryptoorg(chainType)
+            return ChainCryptoorg(chainType!)
         case .DESMOS_MAIN:
-            return ChainDesmos(chainType)
+            return ChainDesmos(chainType!)
         case .EMONEY_MAIN:
-            return ChainEmoney(chainType)
+            return ChainEmoney(chainType!)
         case .EVMOS_MAIN:
-            return ChainEvmos(chainType)
+            return ChainEvmos(chainType!)
         case .FETCH_MAIN:
-            return ChainFetchAi(chainType)
+            return ChainFetchAi(chainType!)
         case .GRAVITY_BRIDGE_MAIN:
-            return ChainGravityBridge(chainType)
+            return ChainGravityBridge(chainType!)
         case .INJECTIVE_MAIN:
-            return ChainInjective(chainType)
+            return ChainInjective(chainType!)
         case .JUNO_MAIN:
-            return ChainJuno(chainType)
+            return ChainJuno(chainType!)
         case .KAVA_MAIN:
-            return ChainKava(chainType)
+            return ChainKava(chainType!)
         case .KI_MAIN:
-            return ChainKi(chainType)
+            return ChainKi(chainType!)
         case .KONSTELLATION_MAIN:
-            return ChainKonstellation(chainType)
+            return ChainKonstellation(chainType!)
         case .LUM_MAIN:
-            return ChainLum(chainType)
+            return ChainLum(chainType!)
         case .MEDI_MAIN:
-            return ChainMedibloc(chainType)
+            return ChainMedibloc(chainType!)
         case .NYX_MAIN:
-            return ChainNyx(chainType)
+            return ChainNyx(chainType!)
         case .OKEX_MAIN:
-            return ChainOkc(chainType)
+            return ChainOkc(chainType!)
         case .OMNIFLIX_MAIN:
-            return ChainOmniflix(chainType)
+            return ChainOmniflix(chainType!)
         case .OSMOSIS_MAIN:
-            return ChainOsmosis(chainType)
+            return ChainOsmosis(chainType!)
         case .PERSIS_MAIN:
-            return ChainPersistence(chainType)
+            return ChainPersistence(chainType!)
         case .PROVENANCE_MAIN:
-            return ChainProvenance(chainType)
+            return ChainProvenance(chainType!)
         case .REGEN_MAIN:
-            return ChainRegen(chainType)
+            return ChainRegen(chainType!)
         case .RIZON_MAIN:
-            return ChainRizon(chainType)
+            return ChainRizon(chainType!)
         case .SECRET_MAIN:
-            return ChainSecret(chainType)
+            return ChainSecret(chainType!)
         case .SENTINEL_MAIN:
-            return ChainSentinel(chainType)
+            return ChainSentinel(chainType!)
         case .SIF_MAIN:
-            return ChainSif(chainType)
+            return ChainSif(chainType!)
         case .STARGAZE_MAIN:
-            return ChainStargaze(chainType)
+            return ChainStargaze(chainType!)
         case .IOV_MAIN:
-            return ChainStarname(chainType)
+            return ChainStarname(chainType!)
         case .UMEE_MAIN:
-            return ChainUmee(chainType)
+            return ChainUmee(chainType!)
             
             
         case .STATION_TEST:
-            return StationTest(chainType)
+            return StationTest(chainType!)
             
         default:
-            return ChainCosmos(chainType)
+            return nil
         }
     }
     
     func SUPPRT_CONFIG() -> Array<ChainConfig> {
         var result = Array<ChainConfig>()
         ChainType.SUPPRT_CHAIN().forEach { chainType in
-            result.append(getChainConfig(chainType))
+            if let chainConfig = getChainConfig(chainType) {
+                result.append(chainConfig)
+            }
         }
         return result
     }
-    
-//    func getAllKeyPath() -> Array<(ChainType, String)> {
-//        var result = Array<(ChainType, String)>()
-//        SUPPRT_CONFIG().forEach { chainConfig in
-//            chainConfig.supportHdPaths().forEach { hdPath in
-//                result.append((chainConfig.chainType, hdPath))
-//            }
-//        }
-//        return result
-//    }
-    
-//    func getAllSupportPaths(_ path: Int) -> Array<String> {
-//        var result = Array<String>()
-//        SUPPRT_CONFIG().forEach { chainConfig in
-//            chainConfig.supportHdPaths().forEach { hdPath in
-//                let pullPath = hdPath.replacingOccurrences(of: "X", with: String(path))
-//                if (!result.contains(pullPath)) {
-//                    result.append(pullPath)
-//                }
-//            }
-//        }
-//        return result
-//    }
     
     func getAllKeyType() -> Array<(ChainType, Int)> {
         var result = Array<(ChainType, Int)>()
