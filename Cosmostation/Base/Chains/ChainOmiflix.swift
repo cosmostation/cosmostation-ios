@@ -13,7 +13,7 @@ class ChainOmniflix: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.OMNIFLIX_MAIN
     var chainImg = UIImage(named: "chainOmniflix")
-    var chainInfoImg = UIImage(named: "infoiconOmniflix")
+    var chainInfoImg = UIImage(named: "infoOmniflix")
     var chainInfoTitle = NSLocalizedString("send_guide_title_omniflix", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_omniflix", comment: "")
     var chainColor = UIColor(named: "omniflix")!

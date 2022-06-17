@@ -13,7 +13,7 @@ class ChainChihuahua: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.CHIHUAHUA_MAIN
     var chainImg = UIImage(named: "chainChihuahua")
-    var chainInfoImg = UIImage(named: "infoiconChihuahua")
+    var chainInfoImg = UIImage(named: "infoChihuahua")
     var chainInfoTitle = NSLocalizedString("send_guide_title_chihuahua", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_chihuahua", comment: "")
     var chainColor = UIColor(named: "chihuahua")!
@@ -23,7 +23,7 @@ class ChainChihuahua: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_CHIHUAHUA"
     var chainAPIName = "chihuahua"
     
-    var stakeDenomImg = UIImage(named: "tokenHuahua")
+    var stakeDenomImg = UIImage(named: "tokenChihuahua")
     var stakeDenom = "uhuahua"
     var stakeSymbol = "HUAHUA"
     var stakeSendImg = UIImage(named: "sendImg")

@@ -12,8 +12,8 @@ import Foundation
 class ChainLum: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.LUM_MAIN
-    var chainImg = UIImage(named: "chainLumnetwork")
-    var chainInfoImg = UIImage(named: "infoiconLumnetwork")
+    var chainImg = UIImage(named: "chainLum")
+    var chainInfoImg = UIImage(named: "infoLum")
     var chainInfoTitle = NSLocalizedString("send_guide_title_lum", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_lum", comment: "")
     var chainColor = UIColor(named: "lum")!

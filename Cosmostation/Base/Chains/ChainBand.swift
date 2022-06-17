@@ -12,8 +12,8 @@ import Foundation
 class ChainBand: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.BAND_MAIN
-    var chainImg = UIImage(named: "chainBandprotocal")
-    var chainInfoImg = UIImage(named: "infoiconBandprotocol")
+    var chainImg = UIImage(named: "chainBand")
+    var chainInfoImg = UIImage(named: "infoBand")
     var chainInfoTitle = NSLocalizedString("send_guide_title_band", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_band", comment: "")
     var chainColor = UIColor(named: "band")!

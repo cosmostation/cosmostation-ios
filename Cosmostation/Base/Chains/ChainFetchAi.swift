@@ -12,8 +12,8 @@ import Foundation
 class ChainFetchAi: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.FETCH_MAIN
-    var chainImg = UIImage(named: "chainfetchai")
-    var chainInfoImg = UIImage(named: "fetchaiImg")
+    var chainImg = UIImage(named: "chainFetchAi")
+    var chainInfoImg = UIImage(named: "infoFetchAi")
     var chainInfoTitle = NSLocalizedString("send_guide_title_fetch", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_fetch", comment: "")
     var chainColor = UIColor(named: "fetchai")!
@@ -23,7 +23,7 @@ class ChainFetchAi: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_FETCH_MAIN"
     var chainAPIName = "fetchai"
     
-    var stakeDenomImg = UIImage(named: "tokenfetchai")
+    var stakeDenomImg = UIImage(named: "tokenFetchAi")
     var stakeDenom = "afet"
     var stakeSymbol = "FET"
     var stakeSendImg = UIImage(named: "sendImg")

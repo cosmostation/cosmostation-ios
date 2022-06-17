@@ -12,8 +12,8 @@ import Foundation
 class ChainCryptoorg: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.CRYPTO_MAIN
-    var chainImg = UIImage(named: "chaincrypto")
-    var chainInfoImg = UIImage(named: "cryptochainImg")
+    var chainImg = UIImage(named: "chainCryptoorg")
+    var chainInfoImg = UIImage(named: "infoCryptoorg")
     var chainInfoTitle = NSLocalizedString("send_guide_title_crypto", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_crypto", comment: "")
     var chainColor = UIColor(named: "cryptoorg")!
@@ -23,7 +23,7 @@ class ChainCryptoorg: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_CRYTO_MAIN"
     var chainAPIName = "cryptoorg"
     
-    var stakeDenomImg = UIImage(named: "tokencrypto")
+    var stakeDenomImg = UIImage(named: "tokenCryptoorg")
     var stakeDenom = "basecro"
     var stakeSymbol = "CRO"
     var stakeSendImg = UIImage(named: "sendImg")

@@ -13,7 +13,7 @@ class ChainComdex: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.COMDEX_MAIN
     var chainImg = UIImage(named: "chainComdex")
-    var chainInfoImg = UIImage(named: "infoiconComdex")
+    var chainInfoImg = UIImage(named: "infoComdex")
     var chainInfoTitle = NSLocalizedString("send_guide_title_comdex", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_comdex", comment: "")
     var chainColor = UIColor(named: "comdex")!

@@ -12,8 +12,8 @@ import Foundation
 class ChainAkash: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.AKASH_MAIN
-    var chainImg = UIImage(named: "akashChainImg")
-    var chainInfoImg = UIImage(named: "akashImg")
+    var chainImg = UIImage(named: "chainAkash")
+    var chainInfoImg = UIImage(named: "infoAkash")
     var chainInfoTitle = NSLocalizedString("send_guide_title_akash", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_akash", comment: "")
     var chainColor = UIColor(named: "akash")!
@@ -23,7 +23,7 @@ class ChainAkash: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_AKASH_MAIN"
     var chainAPIName = "akash"
     
-    var stakeDenomImg = UIImage(named: "akashTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenAkash")
     var stakeDenom = "uakt"
     var stakeSymbol = "AKT"
     var stakeSendImg = UIImage(named: "sendImg")

@@ -13,7 +13,7 @@ class ChainMedibloc: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.MEDI_MAIN
     var chainImg = UIImage(named: "chainMedibloc")
-    var chainInfoImg = UIImage(named: "mediblocImg")
+    var chainInfoImg = UIImage(named: "infoMedibloc")
     var chainInfoTitle = NSLocalizedString("send_guide_title_medi", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_medi", comment: "")
     var chainColor = UIColor(named: "medibloc")!
@@ -23,7 +23,7 @@ class ChainMedibloc: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_MEDI"
     var chainAPIName = "medibloc"
     
-    var stakeDenomImg = UIImage(named: "tokenmedibloc")
+    var stakeDenomImg = UIImage(named: "tokenMedibloc")
     var stakeDenom = "umed"
     var stakeSymbol = "MED"
     var stakeSendImg = UIImage(named: "btnSendMedi")

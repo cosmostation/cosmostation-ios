@@ -12,8 +12,8 @@ import Foundation
 class ChainGravityBridge: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.GRAVITY_BRIDGE_MAIN
-    var chainImg = UIImage(named: "chainGravitybridge")
-    var chainInfoImg = UIImage(named: "infoiconGravitybridge")
+    var chainImg = UIImage(named: "chainGravityBridge")
+    var chainInfoImg = UIImage(named: "infoGravityBridge")
     var chainInfoTitle = NSLocalizedString("send_guide_title_gbridge", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_gbridge", comment: "")
     var chainColor = UIColor(named: "gravitybridge")!
@@ -23,7 +23,7 @@ class ChainGravityBridge: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_GRAVITY_BRIDGE"
     var chainAPIName = "gravity-bridge"
     
-    var stakeDenomImg = UIImage(named: "tokenGravitybridge")
+    var stakeDenomImg = UIImage(named: "tokenGravityBridge")
     var stakeDenom = "ugraviton"
     var stakeSymbol = "GRAVITON"
     var stakeSendImg = UIImage(named: "sendImg")

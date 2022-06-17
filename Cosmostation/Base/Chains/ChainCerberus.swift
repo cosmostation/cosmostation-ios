@@ -13,7 +13,7 @@ class ChainCerberus: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.CERBERUS_MAIN
     var chainImg = UIImage(named: "chainCerberus")
-    var chainInfoImg = UIImage(named: "infoiconCerberus")
+    var chainInfoImg = UIImage(named: "infoCerberus")
     var chainInfoTitle = NSLocalizedString("send_guide_title_cerberus", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_cerberus", comment: "")
     var chainColor = UIColor(named: "cerberus")!

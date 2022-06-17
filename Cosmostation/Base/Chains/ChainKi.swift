@@ -12,8 +12,8 @@ import Foundation
 class ChainKi: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.KI_MAIN
-    var chainImg = UIImage(named: "chainKifoundation")
-    var chainInfoImg = UIImage(named: "kifoundationImg")
+    var chainImg = UIImage(named: "chainKi")
+    var chainInfoImg = UIImage(named: "infoKi")
     var chainInfoTitle = NSLocalizedString("send_guide_title_ki", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_ki", comment: "")
     var chainColor = UIColor(named: "ki")!
@@ -23,7 +23,7 @@ class ChainKi: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_KI_MAIN"
     var chainAPIName = "kichain"
     
-    var stakeDenomImg = UIImage(named: "tokenKifoundation")
+    var stakeDenomImg = UIImage(named: "tokenKi")
     var stakeDenom = "uxki"
     var stakeSymbol = "XKI"
     var stakeSendImg = UIImage(named: "sendImg")

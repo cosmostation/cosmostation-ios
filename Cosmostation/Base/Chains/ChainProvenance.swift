@@ -13,7 +13,7 @@ class ChainProvenance: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.PROVENANCE_MAIN
     var chainImg = UIImage(named: "chainProvenance")
-    var chainInfoImg = UIImage(named: "infoiconProvenance")
+    var chainInfoImg = UIImage(named: "infoProvenance")
     var chainInfoTitle = NSLocalizedString("send_guide_title_provenance", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_provenance", comment: "")
     var chainColor = UIColor(named: "provenance")!
@@ -23,7 +23,7 @@ class ChainProvenance: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_PROVENANCE"
     var chainAPIName = "provenance"
     
-    var stakeDenomImg = UIImage(named: "tokenHash")
+    var stakeDenomImg = UIImage(named: "tokenProvenance")
     var stakeDenom = "nhash"
     var stakeSymbol = "HASH"
     var stakeSendImg = UIImage(named: "sendImg")

@@ -12,8 +12,8 @@ import Foundation
 class ChainCertik: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.CERTIK_MAIN
-    var chainImg = UIImage(named: "certikChainImg")
-    var chainInfoImg = UIImage(named: "certikImg")
+    var chainImg = UIImage(named: "chainCertik")
+    var chainInfoImg = UIImage(named: "infoCertik")
     var chainInfoTitle = NSLocalizedString("send_guide_title_certik", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_certik", comment: "")
     var chainColor = UIColor(named: "certik")!
@@ -23,7 +23,7 @@ class ChainCertik: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_CERTIK_MAIN"
     var chainAPIName = "certik"
     
-    var stakeDenomImg = UIImage(named: "certikTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenCertik")
     var stakeDenom = "uctk"
     var stakeSymbol = "CTK"
     var stakeSendImg = UIImage(named: "sendImg")

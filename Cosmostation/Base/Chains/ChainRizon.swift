@@ -13,7 +13,7 @@ class ChainRizon: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.RIZON_MAIN
     var chainImg = UIImage(named: "chainRizon")
-    var chainInfoImg = UIImage(named: "infoiconRizon")
+    var chainInfoImg = UIImage(named: "infoRizon")
     var chainInfoTitle = NSLocalizedString("send_guide_title_rizon", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_rizon", comment: "")
     var chainColor = UIColor(named: "rizon")!

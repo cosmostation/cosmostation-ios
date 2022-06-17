@@ -13,7 +13,7 @@ class ChainInjective: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.INJECTIVE_MAIN
     var chainImg = UIImage(named: "chainInjective")
-    var chainInfoImg = UIImage(named: "infoiconInjective")
+    var chainInfoImg = UIImage(named: "infoInjective")
     var chainInfoTitle = NSLocalizedString("send_guide_title_injective", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_injective", comment: "")
     var chainColor = UIColor(named: "injective")!

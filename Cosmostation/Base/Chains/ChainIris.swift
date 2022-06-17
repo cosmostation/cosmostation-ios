@@ -12,8 +12,8 @@ import Foundation
 class ChainIris: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.IRIS_MAIN
-    var chainImg = UIImage(named: "irisWh")
-    var chainInfoImg = UIImage(named: "irisnetImg")
+    var chainImg = UIImage(named: "chainIris")
+    var chainInfoImg = UIImage(named: "infoIris")
     var chainInfoTitle = NSLocalizedString("send_guide_title_iris", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_iris", comment: "")
     var chainColor = UIColor(named: "iris")!
@@ -23,7 +23,7 @@ class ChainIris: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_IRIS_MAIN"
     var chainAPIName = "iris"
     
-    var stakeDenomImg = UIImage(named: "irisTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenIris")
     var stakeDenom = "uiris"
     var stakeSymbol = "Iris"
     var stakeSendImg = UIImage(named: "sendImg")

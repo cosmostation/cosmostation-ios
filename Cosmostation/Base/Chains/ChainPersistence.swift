@@ -12,8 +12,8 @@ import Foundation
 class ChainPersistence: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.PERSIS_MAIN
-    var chainImg = UIImage(named: "chainpersistence")
-    var chainInfoImg = UIImage(named: "persistenceImg")
+    var chainImg = UIImage(named: "chainPersistence")
+    var chainInfoImg = UIImage(named: "infoPersistence")
     var chainInfoTitle = NSLocalizedString("send_guide_title_persis", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_persis", comment: "")
     var chainColor = UIColor(named: "persistence")!
@@ -23,7 +23,7 @@ class ChainPersistence: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_PERSISTENCE_MAIN"
     var chainAPIName = "persistence"
     
-    var stakeDenomImg = UIImage(named: "tokenpersistence")
+    var stakeDenomImg = UIImage(named: "tokenPersistence")
     var stakeDenom = "uxprt"
     var stakeSymbol = "XPRT"
     var stakeSendImg = UIImage(named: "btnSendPersistence")

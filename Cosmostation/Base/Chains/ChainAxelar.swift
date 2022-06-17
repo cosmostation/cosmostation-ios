@@ -13,7 +13,7 @@ class ChainAxelar: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.AXELAR_MAIN
     var chainImg = UIImage(named: "chainAxelar")
-    var chainInfoImg = UIImage(named: "infoiconAxelar")
+    var chainInfoImg = UIImage(named: "infoAxelar")
     var chainInfoTitle = NSLocalizedString("send_guide_title_axelar", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_axelar", comment: "")
     var chainColor = UIColor(named: "axelar")!

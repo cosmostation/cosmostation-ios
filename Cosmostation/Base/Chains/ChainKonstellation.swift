@@ -13,7 +13,7 @@ class ChainKonstellation: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.KONSTELLATION_MAIN
     var chainImg = UIImage(named: "chainKonstellation")
-    var chainInfoImg = UIImage(named: "infoiconKonstellation")
+    var chainInfoImg = UIImage(named: "infoKonstellation")
     var chainInfoTitle = NSLocalizedString("send_guide_title_konstellation", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_konstellation", comment: "")
     var chainColor = UIColor(named: "konstellation")!

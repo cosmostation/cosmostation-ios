@@ -12,8 +12,8 @@ import Foundation
 class ChainNyx: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.NYX_MAIN
-    var chainImg = UIImage(named: "chainNym")
-    var chainInfoImg = UIImage(named: "infoiconNym")
+    var chainImg = UIImage(named: "chainNyx")
+    var chainInfoImg = UIImage(named: "infoNyx")
     var chainInfoTitle = NSLocalizedString("send_guide_title_nyx", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_nyx", comment: "")
     var chainColor = UIColor(named: "nyx")!

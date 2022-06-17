@@ -12,8 +12,8 @@ import Foundation
 class ChainBinance: ChainConfig {
     var isGrpc = false
     var chainType = ChainType.BINANCE_MAIN
-    var chainImg = UIImage(named: "binanceChImg")
-    var chainInfoImg = UIImage(named: "binanceImg")
+    var chainImg = UIImage(named: "chainBinance")
+    var chainInfoImg = UIImage(named: "infoBinanace")
     var chainInfoTitle = NSLocalizedString("send_guide_title_bnb", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_bnb", comment: "")
     var chainColor = UIColor(named: "binance")!
@@ -23,7 +23,7 @@ class ChainBinance: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_BINANCE_MAIN"
     var chainAPIName = ""
     
-    var stakeDenomImg = UIImage(named: "bnbTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenBinance")
     var stakeDenom = "BNB"
     var stakeSymbol = "BNB"
     var stakeSendImg = UIImage(named: "sendImg")

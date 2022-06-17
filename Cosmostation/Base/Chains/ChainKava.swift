@@ -12,8 +12,8 @@ import Foundation
 class ChainKava: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.KAVA_MAIN
-    var chainImg = UIImage(named: "kavaImg")
-    var chainInfoImg = UIImage(named: "kavamainImg")
+    var chainImg = UIImage(named: "chainKava")
+    var chainInfoImg = UIImage(named: "infoKava")
     var chainInfoTitle = NSLocalizedString("send_guide_title_kava", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_kava", comment: "")
     var chainColor = UIColor(named: "kava")!
@@ -23,7 +23,7 @@ class ChainKava: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_KAVA_MAIN"
     var chainAPIName = "kava"
     
-    var stakeDenomImg = UIImage(named: "kavaTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenKava")
     var stakeDenom = "ukava"
     var stakeSymbol = "KAVA"
     var stakeSendImg = UIImage(named: "sendImg")

@@ -12,8 +12,8 @@ import Foundation
 class ChainCosmos: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.COSMOS_MAIN
-    var chainImg = UIImage(named: "cosmosWhMain")
-    var chainInfoImg = UIImage(named: "guideImg")
+    var chainImg = UIImage(named: "chainCosmos")
+    var chainInfoImg = UIImage(named: "infoCosmos")
     var chainInfoTitle = NSLocalizedString("send_guide_title_cosmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_cosmos", comment: "")
     var chainColor = UIColor(named: "cosmos")!
@@ -25,7 +25,7 @@ class ChainCosmos: ChainConfig {
     var chainAPIName = "cosmos"
     
     
-    var stakeDenomImg = UIImage(named: "atom_ic")
+    var stakeDenomImg = UIImage(named: "tokenCosmos")
     var stakeDenom = "uatom"
     var stakeSymbol = "Atom"
     var stakeSendImg = UIImage(named: "sendImg")

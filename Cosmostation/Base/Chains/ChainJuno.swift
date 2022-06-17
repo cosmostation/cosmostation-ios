@@ -13,7 +13,7 @@ class ChainJuno: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.JUNO_MAIN
     var chainImg = UIImage(named: "chainJuno")
-    var chainInfoImg = UIImage(named: "infoiconJuno")
+    var chainInfoImg = UIImage(named: "infoJuno")
     var chainInfoTitle = NSLocalizedString("send_guide_title_juno", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_juno", comment: "")
     var chainColor = UIColor(named: "juno")!

@@ -13,7 +13,7 @@ class ChainEvmos: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.EVMOS_MAIN
     var chainImg = UIImage(named: "chainEvmos")
-    var chainInfoImg = UIImage(named: "infoiconEvmos")
+    var chainInfoImg = UIImage(named: "infoEvmos")
     var chainInfoTitle = NSLocalizedString("send_guide_title_evmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_evmos", comment: "")
     var chainColor = UIColor(named: "evmos")!

@@ -12,8 +12,8 @@ import Foundation
 class ChainOkc: ChainConfig {
     var isGrpc = false
     var chainType = ChainType.OKEX_MAIN
-    var chainImg = UIImage(named: "chainOkex")
-    var chainInfoImg = UIImage(named: "infoiconOkx")
+    var chainImg = UIImage(named: "chainOkc")
+    var chainInfoImg = UIImage(named: "infoOkc")
     var chainInfoTitle = NSLocalizedString("send_guide_title_ok", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_ok", comment: "")
     var chainColor = UIColor(named: "okc")!
@@ -23,7 +23,7 @@ class ChainOkc: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_OKEX_MAIN"
     var chainAPIName = ""
     
-    var stakeDenomImg = UIImage(named: "tokenOkx")
+    var stakeDenomImg = UIImage(named: "tokenOkc")
     var stakeDenom = "okt"
     var stakeSymbol = "OKT"
     var stakeSendImg = UIImage(named: "sendImg")
