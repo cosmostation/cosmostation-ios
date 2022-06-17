@@ -17,8 +17,7 @@ class StationTest: ChainConfig {
     var chainInfoTitle = NSLocalizedString("Station", comment: "")
     var chainInfoMsg = NSLocalizedString("Station", comment: "")
     var chainColor = UIColor(named: "station")!
-    var chainColorDark = UIColor(named: "station_dark")
-    var chainColorBG = UIColor(named: "station")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "station_bg")!
     var chainTitle = "(Station Testnet)"
     var chainTitle2 = "STATION TEST"
     var chainDBName = "SUPPORT_CHAIN_STATION_TEST"

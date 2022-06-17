@@ -17,8 +17,7 @@ class ChainOkc: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_ok", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_ok", comment: "")
     var chainColor = UIColor(named: "okc")!
-    var chainColorDark = UIColor(named: "okc_dark")
-    var chainColorBG = UIColor(named: "okc")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "okc_bg")!
     var chainTitle = "(OKC Mainnet)"
     var chainTitle2 = "OKC"
     var chainDBName = "SUPPORT_CHAIN_OKEX_MAIN"

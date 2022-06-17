@@ -17,8 +17,7 @@ class ChainAssetMantle: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_mantle", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_mantle", comment: "")
     var chainColor = UIColor(named: "assetmantle")!
-    var chainColorDark = UIColor(named: "assetmantle_dark")
-    var chainColorBG = UIColor(named: "assetmantle")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "assetmantle_bg")!
     var chainTitle = "(Asset-Mantle Mainnet)"
     var chainTitle2 = "ASSET-MANTLE"
     var chainDBName = "SUPPORT_CHAIN_MANTLE"

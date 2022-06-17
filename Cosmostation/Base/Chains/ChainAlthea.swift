@@ -17,8 +17,7 @@ class ChainAlthea: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_althea", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_althea", comment: "")
     var chainColor = UIColor(named: "althea")!
-    var chainColorDark = UIColor(named: "althea_dark")
-    var chainColorBG = UIColor(named: "althea")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "althea_bg")!
     var chainTitle = "(Althea Mainnet)"
     var chainTitle2 = "ALTHEA"
     var chainDBName = "SUPPORT_CHAIN_ALTHEA"

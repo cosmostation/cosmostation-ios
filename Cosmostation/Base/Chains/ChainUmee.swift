@@ -17,8 +17,7 @@ class ChainUmee: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_umee", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_umee", comment: "")
     var chainColor = UIColor(named: "umee")!
-    var chainColorDark = UIColor(named: "umee_dark")
-    var chainColorBG = UIColor(named: "umee")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "umee_bg")!
     var chainTitle = "(Umee Mainnet)"
     var chainTitle2 = "UMEE"
     var chainDBName = "SUPPORT_CHAIN_UMEE"

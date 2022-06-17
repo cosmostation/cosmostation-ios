@@ -17,8 +17,7 @@ class ChainKonstellation: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_konstellation", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_konstellation", comment: "")
     var chainColor = UIColor(named: "konstellation")!
-    var chainColorDark = UIColor(named: "konstellation_dark")
-    var chainColorBG = UIColor(named: "konstellation")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "konstellation_bg")!
     var chainTitle = "(Konstellation Mainnet)"
     var chainTitle2 = "KONSTELLATION"
     var chainDBName = "SUPPORT_CHAIN_KONSTELLATION"

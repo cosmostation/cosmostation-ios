@@ -17,8 +17,7 @@ class ChainProvenance: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_provenance", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_provenance", comment: "")
     var chainColor = UIColor(named: "provenance")!
-    var chainColorDark = UIColor(named: "provenance_dark")
-    var chainColorBG = UIColor(named: "provenance")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "provenance_bg")!
     var chainTitle = "(Provenance Mainnet)"
     var chainTitle2 = "PROVENANCE"
     var chainDBName = "SUPPORT_CHAIN_PROVENANCE"

@@ -17,8 +17,7 @@ class ChainStargaze: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_stargaze", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_stargaze", comment: "")
     var chainColor = UIColor(named: "stargaze")!
-    var chainColorDark = UIColor(named: "stargaze_dark")
-    var chainColorBG = UIColor(named: "stargaze")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "stargaze_bg")!
     var chainTitle = "(Stargaze Mainnet)"
     var chainTitle2 = "STARGAZE"
     var chainDBName = "SUPPORT_CHAIN_STARGAZE"

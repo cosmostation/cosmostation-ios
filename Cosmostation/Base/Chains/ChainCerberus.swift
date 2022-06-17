@@ -17,8 +17,7 @@ class ChainCerberus: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_cerberus", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_cerberus", comment: "")
     var chainColor = UIColor(named: "cerberus")!
-    var chainColorDark = UIColor(named: "cerberus_dark")
-    var chainColorBG = UIColor(named: "cerberus")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "cerberus_bg")!
     var chainTitle = "(Cerberus Mainnet)"
     var chainTitle2 = "CERBERUS"
     var chainDBName = "SUPPORT_CHAIN_CERBERUS"

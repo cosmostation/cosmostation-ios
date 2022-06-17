@@ -17,8 +17,7 @@ class ChainComdex: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_comdex", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_comdex", comment: "")
     var chainColor = UIColor(named: "comdex")!
-    var chainColorDark = UIColor(named: "comdex_dark")
-    var chainColorBG = UIColor.init(hexString: "005ac5").withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "comdex_bg")!
     var chainTitle = "(Comdex Mainnet)"
     var chainTitle2 = "COMDEX"
     var chainDBName = "SUPPORT_CHAIN_COMDEX"
@@ -28,7 +27,7 @@ class ChainComdex: ChainConfig {
     var stakeDenom = "ucmdx"
     var stakeSymbol = "CMDX"
     var stakeSendImg = UIImage(named: "btnSendComdex")
-    var stakeSendBg = UIColor.init(hexString: "03264a")
+    var stakeSendBg = UIColor(named: "comdex")!
     
     var addressPrefix = "comdex"
     let addressHdPath0 = "m/44'/118'/0'/0/X"

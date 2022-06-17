@@ -17,8 +17,7 @@ class ChainLum: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_lum", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_lum", comment: "")
     var chainColor = UIColor(named: "lum")!
-    var chainColorDark = UIColor(named: "lum_dark")
-    var chainColorBG = UIColor(named: "lum")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "lum_bg")!
     var chainTitle = "(Lum Mainnet)"
     var chainTitle2 = "LUM"
     var chainDBName = "SUPPORT_CHAIN_LUM"

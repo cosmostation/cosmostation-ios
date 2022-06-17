@@ -17,8 +17,7 @@ class ChainCrescent: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_crescent", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_crescent", comment: "")
     var chainColor = UIColor(named: "crescent")!
-    var chainColorDark = UIColor(named: "crescent_dark")
-    var chainColorBG = UIColor(named: "crescent")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "crescent_bg")!
     var chainTitle = "(Crescent Mainnet)"
     var chainTitle2 = "CRESCENT"
     var chainDBName = "SUPPORT_CHAIN_CRESENT"

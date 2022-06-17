@@ -17,8 +17,7 @@ class ChainGravityBridge: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_gbridge", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_gbridge", comment: "")
     var chainColor = UIColor(named: "gravitybridge")!
-    var chainColorDark = UIColor(named: "gravitybridge_dark")
-    var chainColorBG = UIColor(named: "gravitybridge")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "gravitybridge_bg")!
     var chainTitle = "(G-Bridge Mainnet)"
     var chainTitle2 = "G-BRIDGE"
     var chainDBName = "SUPPORT_CHAIN_GRAVITY_BRIDGE"

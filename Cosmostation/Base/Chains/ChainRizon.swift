@@ -17,8 +17,7 @@ class ChainRizon: ChainConfig {
     var chainInfoTitle = NSLocalizedString("send_guide_title_rizon", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_rizon", comment: "")
     var chainColor = UIColor(named: "rizon")!
-    var chainColorDark = UIColor(named: "rizon_dark")
-    var chainColorBG = UIColor(named: "rizon")!.withAlphaComponent(0.15)
+    var chainColorBG = UIColor(named: "rizon_bg")!
     var chainTitle = "(Rizon Mainnet)"
     var chainTitle2 = "RIZON"
     var chainDBName = "SUPPORT_CHAIN_RIZON"
