@@ -41,6 +41,7 @@ class ChainAxelar: ChainConfig {
     var explorerUrl = MintscanUrl + "axelar/"
     var validatorImgUrl = MonikerUrl + "axelar/"
     var relayerImgUrl = RelayerUrl + "axelar/relay-axelar-unknown.png"
+    var priceUrl = CoingeckoUrl + "axelar-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -52,9 +53,5 @@ class ChainAxelar: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

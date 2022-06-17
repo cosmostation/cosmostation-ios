@@ -40,6 +40,7 @@ class ChainIris: ChainConfig {
     var explorerUrl = MintscanUrl + "iris/"
     var validatorImgUrl = MonikerUrl + "irishub/"
     var relayerImgUrl = RelayerUrl + "iris/relay-iris-unknown.png"
+    var priceUrl = CoingeckoUrl + "irisnet"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainIris: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

@@ -41,6 +41,7 @@ class ChainKava: ChainConfig {
     var explorerUrl = MintscanUrl + "kava/"
     var validatorImgUrl = MonikerUrl + "kava/"
     var relayerImgUrl = RelayerUrl + "kava/relay-kava-unknown.png"
+    var priceUrl = CoingeckoUrl + "kava"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -52,9 +53,5 @@ class ChainKava: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

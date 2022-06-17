@@ -40,6 +40,7 @@ class ChainPersistence: ChainConfig {
     var explorerUrl = MintscanUrl + "persistence/"
     var validatorImgUrl = MonikerUrl + "persistence/"
     var relayerImgUrl = RelayerUrl + "persistence/relay-persistence-unknown.png"
+    var priceUrl = CoingeckoUrl + "persistence"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainPersistence: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

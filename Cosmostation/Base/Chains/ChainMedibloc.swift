@@ -40,6 +40,7 @@ class ChainMedibloc: ChainConfig {
     var explorerUrl = MintscanUrl + "medibloc/"
     var validatorImgUrl = MonikerUrl + "medibloc/"
     var relayerImgUrl = RelayerUrl + "medibloc/relay-medibloc-unknown.png"
+    var priceUrl = CoingeckoUrl + "medibloc"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainMedibloc: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

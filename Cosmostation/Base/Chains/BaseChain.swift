@@ -38,12 +38,11 @@ protocol ChainConfig {
     var explorerUrl: String { get set }
     var validatorImgUrl: String { get set }
     var relayerImgUrl: String { get set }
-    
+    var priceUrl: String { get set }
     
     init (_ chainType: ChainType)
     func supportHdPaths() -> Array<String>
     func getHdPath(_ type: Int, _ path: Int) -> String
-//    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String
         
 }
 

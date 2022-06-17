@@ -40,6 +40,7 @@ class ChainOsmosis: ChainConfig {
     var explorerUrl = MintscanUrl + "osmosis/"
     var validatorImgUrl = MonikerUrl + "osmosis/"
     var relayerImgUrl = RelayerUrl + "osmosis/relay-osmosis-unknown.png"
+    var priceUrl = CoingeckoUrl + "osmosis"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainOsmosis: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

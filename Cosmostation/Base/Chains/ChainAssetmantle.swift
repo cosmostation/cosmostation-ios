@@ -40,6 +40,7 @@ class ChainAssetMantle: ChainConfig {
     var explorerUrl = MintscanUrl + "asset-mantle/"
     var validatorImgUrl = MonikerUrl + "asset-mantle/"
     var relayerImgUrl = RelayerUrl + "asset-mantle/relay-assetmantle-unknown.png"
+    var priceUrl = CoingeckoUrl + "assetmantle"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainAssetMantle: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

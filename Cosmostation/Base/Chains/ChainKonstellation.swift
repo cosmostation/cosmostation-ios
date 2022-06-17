@@ -40,6 +40,7 @@ class ChainKonstellation: ChainConfig {
     var explorerUrl = MintscanUrl + "konstellation/"
     var validatorImgUrl = MonikerUrl + "konstellation/"
     var relayerImgUrl = RelayerUrl + "konstellation/relay-konstellation-unknown.png"
+    var priceUrl = CoingeckoUrl + "konstellation"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainKonstellation: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

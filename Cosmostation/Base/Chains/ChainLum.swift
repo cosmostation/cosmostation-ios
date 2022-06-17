@@ -41,6 +41,7 @@ class ChainLum: ChainConfig {
     var explorerUrl = MintscanUrl + "lum/"
     var validatorImgUrl = MonikerUrl + "lum-network/"
     var relayerImgUrl = RelayerUrl + "lum-network/relay-lum-unknown.png"
+    var priceUrl = CoingeckoUrl + "lum-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -52,9 +53,5 @@ class ChainLum: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

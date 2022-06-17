@@ -40,6 +40,7 @@ class ChainKi: ChainConfig {
     var explorerUrl = MintscanUrl + "ki-chain/"
     var validatorImgUrl = MonikerUrl + "ki/"
     var relayerImgUrl = RelayerUrl + "ki/relay-kichain-unknown.png"
+    var priceUrl = CoingeckoUrl + "ki"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainKi: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

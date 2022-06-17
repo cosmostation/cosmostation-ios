@@ -40,6 +40,7 @@ class ChainInjective: ChainConfig {
     var explorerUrl = MintscanUrl + "injective/"
     var validatorImgUrl = MonikerUrl + "injective/"
     var relayerImgUrl = RelayerUrl + "injective/relay-injective-unknown.png"
+    var priceUrl = CoingeckoUrl + "injective-protocol"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainInjective: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

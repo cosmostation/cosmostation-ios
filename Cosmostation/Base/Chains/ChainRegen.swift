@@ -40,6 +40,7 @@ class ChainRegen: ChainConfig {
     var explorerUrl = MintscanUrl + "regen/"
     var validatorImgUrl = MonikerUrl + "regen/"
     var relayerImgUrl = RelayerUrl + "regen/relay-regen-unknown.png"
+    var priceUrl = CoingeckoUrl + "regen"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainRegen: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

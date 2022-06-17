@@ -40,6 +40,7 @@ class ChainStarname: ChainConfig {
     var explorerUrl = MintscanUrl + "starname/"
     var validatorImgUrl = MonikerUrl + "iov/"
     var relayerImgUrl = RelayerUrl + "starname/relay-starname-unknown.png"
+    var priceUrl = CoingeckoUrl + "starname"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainStarname: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

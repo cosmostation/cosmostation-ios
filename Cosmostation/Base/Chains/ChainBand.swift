@@ -40,6 +40,7 @@ class ChainBand: ChainConfig {
     var explorerUrl = MintscanUrl + "band/"
     var validatorImgUrl = MonikerUrl + "bandprotocol/"
     var relayerImgUrl = RelayerUrl + "band/relay-band-unknown.png"
+    var priceUrl = CoingeckoUrl + "band-protocol"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainBand: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

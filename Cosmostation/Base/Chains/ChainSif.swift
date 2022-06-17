@@ -40,6 +40,7 @@ class ChainSif: ChainConfig {
     var explorerUrl = MintscanUrl + "sifchain/"
     var validatorImgUrl = MonikerUrl + "sif/"
     var relayerImgUrl = RelayerUrl + "sifchain/relay-sifchain-unknown.png"
+    var priceUrl = CoingeckoUrl + "sifchain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainSif: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

@@ -40,6 +40,7 @@ class ChainStargaze: ChainConfig {
     var explorerUrl = MintscanUrl + "stargaze/"
     var validatorImgUrl = MonikerUrl + "stargaze/"
     var relayerImgUrl = RelayerUrl + "stargaze/relay-stargaze-unknown.png"
+    var priceUrl = CoingeckoUrl + "stargaze"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainStargaze: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

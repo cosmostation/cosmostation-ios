@@ -41,6 +41,7 @@ class ChainOkc: ChainConfig {
     var explorerUrl = "https://www.oklink.com/okexchain/"
     var validatorImgUrl = MonikerUrl + "okex/"
     var relayerImgUrl = ""
+    var priceUrl = CoingeckoUrl + "okc-token"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -52,9 +53,5 @@ class ChainOkc: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

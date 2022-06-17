@@ -41,6 +41,7 @@ class ChainSecret: ChainConfig {
     var explorerUrl = MintscanUrl + "secret/"
     var validatorImgUrl = MonikerUrl + "secret/"
     var relayerImgUrl = RelayerUrl + "secret/relay-secret-unknown.png"
+    var priceUrl = CoingeckoUrl + "secret"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -52,9 +53,5 @@ class ChainSecret: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

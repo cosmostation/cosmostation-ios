@@ -40,6 +40,7 @@ class ChainSentinel: ChainConfig {
     var explorerUrl = MintscanUrl + "sentinel/"
     var validatorImgUrl = MonikerUrl + "sentinel/"
     var relayerImgUrl = RelayerUrl + "sentinel/relay-sentinel-unknown.png"
+    var priceUrl = CoingeckoUrl + "sentinel"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainSentinel: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

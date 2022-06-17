@@ -40,6 +40,7 @@ class ChainCrescent: ChainConfig {
     var explorerUrl = MintscanUrl + "crescent/"
     var validatorImgUrl = MonikerUrl + "crescent/"
     var relayerImgUrl = RelayerUrl + "crescent/relay-crescent-unknown.png"
+    var priceUrl = CoingeckoUrl + "crescent-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainCrescent: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

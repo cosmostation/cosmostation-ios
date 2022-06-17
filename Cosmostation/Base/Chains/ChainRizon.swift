@@ -40,6 +40,7 @@ class ChainRizon: ChainConfig {
     var explorerUrl = MintscanUrl + "rizon/"
     var validatorImgUrl = MonikerUrl + "rizon/"
     var relayerImgUrl = RelayerUrl + "rizon/relay-rizon-unknown.png"
+    var priceUrl = CoingeckoUrl + "rizon"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainRizon: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

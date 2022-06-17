@@ -42,6 +42,7 @@ class ChainCosmos: ChainConfig {
     var explorerUrl = MintscanUrl + "cosmos/"
     var validatorImgUrl = MonikerUrl + "cosmoshub/"
     var relayerImgUrl = RelayerUrl + "cosmos/relay-cosmos-unknown.png"
+    var priceUrl = CoingeckoUrl + "cosmos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType

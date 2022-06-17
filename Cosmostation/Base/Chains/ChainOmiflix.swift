@@ -40,6 +40,7 @@ class ChainOmniflix: ChainConfig {
     var explorerUrl = MintscanUrl + "omniflix/"
     var validatorImgUrl = MonikerUrl + "omniflix/"
     var relayerImgUrl = RelayerUrl + "omniflix/relay-omniflix-unknown.png"
+    var priceUrl = CoingeckoUrl + "omniflix-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,10 +52,6 @@ class ChainOmniflix: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }
 

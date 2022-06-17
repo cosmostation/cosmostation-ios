@@ -40,6 +40,7 @@ class ChainChihuahua: ChainConfig {
     var explorerUrl = MintscanUrl + "chihuahua/"
     var validatorImgUrl = MonikerUrl + "chihuahua/"
     var relayerImgUrl = RelayerUrl + "chihuahua/relay-chihuahua-unknown.png"
+    var priceUrl = CoingeckoUrl + "chihuahua-chain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainChihuahua: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

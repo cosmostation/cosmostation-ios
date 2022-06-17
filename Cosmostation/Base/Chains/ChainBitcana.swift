@@ -40,6 +40,7 @@ class ChainBitcana: ChainConfig {
     var explorerUrl = MintscanUrl + "bitcanna/"
     var validatorImgUrl = MonikerUrl + "bitcanna/"
     var relayerImgUrl = RelayerUrl + "bitcanna/relay-bitcanna-unknown.png"
+    var priceUrl = CoingeckoUrl + "bitcanna"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,10 +52,6 @@ class ChainBitcana: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }
 

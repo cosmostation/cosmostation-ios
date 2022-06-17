@@ -40,6 +40,7 @@ class ChainCertik: ChainConfig {
     var explorerUrl = MintscanUrl + "certik/"
     var validatorImgUrl = MonikerUrl + "certik/"
     var relayerImgUrl = RelayerUrl + "certik/relay-certik-unknown.png"
+    var priceUrl = CoingeckoUrl + "certik"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainCertik: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

@@ -40,6 +40,7 @@ class ChainComdex: ChainConfig {
     var explorerUrl = MintscanUrl + "comdex/"
     var validatorImgUrl = MonikerUrl + "comdex/"
     var relayerImgUrl = RelayerUrl + "comdex/relay-comdex-unknown.png"
+    var priceUrl = CoingeckoUrl + "comdex"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainComdex: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

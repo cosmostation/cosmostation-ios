@@ -40,6 +40,7 @@ class ChainDesmos: ChainConfig {
     var explorerUrl = MintscanUrl + "desmos/"
     var validatorImgUrl = MonikerUrl + "desmos/"
     var relayerImgUrl = RelayerUrl + "desmos/relay-desmos-unknown.png"
+    var priceUrl = CoingeckoUrl + "desmos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainDesmos: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

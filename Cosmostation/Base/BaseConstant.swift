@@ -1567,3 +1567,4 @@ let ICON_2002                   = "ICON_2002";
 let MintscanUrl = "https://www.mintscan.io/"
 let MonikerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/"
 let RelayerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/"
+let CoingeckoUrl = "https://www.coingecko.com/en/coins/"

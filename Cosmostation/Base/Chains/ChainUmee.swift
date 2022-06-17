@@ -40,6 +40,7 @@ class ChainUmee: ChainConfig {
     var explorerUrl = MintscanUrl + "umee/"
     var validatorImgUrl = MonikerUrl + "umee/"
     var relayerImgUrl = RelayerUrl + "umee/relay-umee-unknown.png"
+    var priceUrl = CoingeckoUrl + "umee"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainUmee: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

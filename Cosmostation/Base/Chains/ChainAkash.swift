@@ -40,6 +40,7 @@ class ChainAkash: ChainConfig {
     var explorerUrl = MintscanUrl + "akash/"
     var validatorImgUrl = MonikerUrl + "akash/"
     var relayerImgUrl = RelayerUrl + "akash/relay-akash-unknown.png"
+    var priceUrl = CoingeckoUrl + "akash-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class ChainAkash: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }

@@ -40,6 +40,7 @@ class StationTest: ChainConfig {
     var explorerUrl = "https://testnet.mintscan.io/station/"
     var validatorImgUrl = ""
     var relayerImgUrl = ""
+    var priceUrl = ""
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -51,9 +52,5 @@ class StationTest: ChainConfig {
     
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
-    }
-    
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
     }
 }
