@@ -122,14 +122,14 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             if settings.authorizationStatus == .authorized {
                 DispatchQueue.main.async {
                     if (self.account!.account_push_alarm) {
-                        self.titleAlarmBtn.setImage(UIImage(named: "notificationsIc"), for: .normal)
+                        self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOn"), for: .normal)
                     } else {
-                        self.titleAlarmBtn.setImage(UIImage(named: "notificationsIcOff"), for: .normal)
+                        self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOff"), for: .normal)
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.titleAlarmBtn.setImage(UIImage(named: "notificationsIcOff"), for: .normal)
+                    self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOff"), for: .normal)
                 }
             }
         }
@@ -314,7 +314,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func onClickAlaram(_ sender: UIButton) {
-        if (sender.imageView?.image == UIImage(named: "notificationsIcOff")) {
+        if (sender.imageView?.image == UIImage(named: "btnAlramOff")) {
             UNUserNotificationCenter.current().getNotificationSettings { (settings) in
                 if settings.authorizationStatus == .authorized {
                     DispatchQueue.main.async {

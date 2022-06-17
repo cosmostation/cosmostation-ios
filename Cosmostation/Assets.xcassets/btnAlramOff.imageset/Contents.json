@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "iconExplorerLight.pdf",
+      "filename" : "iconNotificationsOffLight.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "iconExplorerDark.pdf",
+      "filename" : "iconNotificationsOffDark.pdf",
       "idiom" : "universal"
     }
   ],

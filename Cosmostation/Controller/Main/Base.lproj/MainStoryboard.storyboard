@@ -50,7 +50,7 @@
                                             <constraint firstAttribute="height" constant="24" id="TYX-eU-5RM"/>
                                         </constraints>
                                         <color key="tintColor" name="_font05"/>
-                                        <state key="normal" image="btnSwitch24"/>
+                                        <state key="normal" image="btnSwitch"/>
                                         <connections>
                                             <action selector="onClickSwitchAccount:" destination="G92-8m-qqM" eventType="touchUpInside" id="hZS-b0-XjI"/>
                                         </connections>
@@ -62,7 +62,7 @@
                                             <constraint firstAttribute="height" constant="24" id="xbv-57-qCe"/>
                                         </constraints>
                                         <color key="tintColor" name="_font01"/>
-                                        <state key="normal" image="notificationsIcOff"/>
+                                        <state key="normal" image="btnAlramOff"/>
                                         <connections>
                                             <action selector="onClickAlaram:" destination="G92-8m-qqM" eventType="touchUpInside" id="KW8-pl-Zna"/>
                                         </connections>
@@ -363,7 +363,7 @@
                                             <constraint firstAttribute="width" constant="24" id="O2a-Ee-X89"/>
                                             <constraint firstAttribute="height" constant="24" id="e4f-gt-Frp"/>
                                         </constraints>
-                                        <state key="normal" image="btnSwitch24"/>
+                                        <state key="normal" image="btnSwitch"/>
                                         <connections>
                                             <action selector="onClickSwitchAccount:" destination="t07-dn-E46" eventType="touchUpInside" id="99d-Kg-Qh6"/>
                                         </connections>
@@ -374,7 +374,7 @@
                                             <constraint firstAttribute="width" constant="24" id="aC3-t7-mYN"/>
                                             <constraint firstAttribute="height" constant="24" id="e0j-jX-O2V"/>
                                         </constraints>
-                                        <state key="normal" image="notificationsIcOff"/>
+                                        <state key="normal" image="btnAlramOff"/>
                                         <connections>
                                             <action selector="onClickAlaram:" destination="t07-dn-E46" eventType="touchUpInside" id="z7h-DH-CZ9"/>
                                         </connections>
@@ -502,7 +502,7 @@
                                             <constraint firstAttribute="width" constant="24" id="vsG-Qd-zEk"/>
                                             <constraint firstAttribute="height" constant="24" id="wUz-wh-P4f"/>
                                         </constraints>
-                                        <state key="normal" image="btnSwitch24"/>
+                                        <state key="normal" image="btnSwitch"/>
                                         <connections>
                                             <action selector="onClickSwitchAccount:" destination="oOd-o8-Sem" eventType="touchUpInside" id="BUn-3R-fTc"/>
                                         </connections>
@@ -513,7 +513,7 @@
                                             <constraint firstAttribute="width" constant="24" id="Wd3-Op-lSl"/>
                                             <constraint firstAttribute="height" constant="24" id="sXd-sh-hkm"/>
                                         </constraints>
-                                        <state key="normal" image="notificationsIcOff"/>
+                                        <state key="normal" image="btnAlramOff"/>
                                         <connections>
                                             <action selector="onClickAlaram:" destination="oOd-o8-Sem" eventType="touchUpInside" id="Jn8-6n-i9e"/>
                                         </connections>
@@ -923,7 +923,7 @@
                                             <constraint firstAttribute="width" constant="24" id="hfr-7B-ozd"/>
                                             <constraint firstAttribute="height" constant="24" id="oL2-dT-kJr"/>
                                         </constraints>
-                                        <state key="normal" image="btnSwitch24"/>
+                                        <state key="normal" image="btnSwitch"/>
                                         <connections>
                                             <action selector="onClickSwitchAccount:" destination="1zF-Vz-4uW" eventType="touchUpInside" id="Ud8-2u-LU4"/>
                                         </connections>
@@ -934,7 +934,7 @@
                                             <constraint firstAttribute="height" constant="24" id="9hL-nK-dKZ"/>
                                             <constraint firstAttribute="width" constant="24" id="NRo-V6-8qg"/>
                                         </constraints>
-                                        <state key="normal" image="notificationsIcOff"/>
+                                        <state key="normal" image="btnAlramOff"/>
                                         <connections>
                                             <action selector="onClickAlaram:" destination="1zF-Vz-4uW" eventType="touchUpInside" id="e9M-Tr-vcu"/>
                                         </connections>
@@ -2954,13 +2954,13 @@
         <image name="arrowNextGr" width="24" height="24"/>
         <image name="bg_cosmos" width="360" height="740"/>
         <image name="bnbDex" width="40" height="46"/>
+        <image name="btnAlramOff" width="24" height="24"/>
         <image name="btnExplorer" width="24" height="24"/>
-        <image name="btnSwitch24" width="24" height="24"/>
+        <image name="btnSwitch" width="24" height="24"/>
         <image name="connectimg1" width="177" height="50"/>
         <image name="cosmosWhMain" width="42" height="42"/>
         <image name="key_off" width="20" height="20"/>
         <image name="loading_1" width="144" height="144"/>
-        <image name="notificationsIcOff" width="24" height="24"/>
         <image name="setting_ic" width="24" height="24"/>
         <image name="sortBtn" width="16" height="16"/>
         <image name="tokensDsIc" width="24" height="24"/>
