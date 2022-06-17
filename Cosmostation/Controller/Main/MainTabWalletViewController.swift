@@ -34,6 +34,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+//        self.chainConfig = ChainFactory().getChainConfig(chainType)
 
         self.walletTableView.delegate = self
         self.walletTableView.dataSource = self

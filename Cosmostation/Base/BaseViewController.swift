@@ -28,15 +28,12 @@ class BaseViewController: UIViewController {
     
     var account:Account?
     var chainType:ChainType?
+    var chainConfig: ChainConfig?
     var balances = Array<Balance>()
     var waitAlert: UIAlertController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 
     override func viewWillAppear(_ animated: Bool) {

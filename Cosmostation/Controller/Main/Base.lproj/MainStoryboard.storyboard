@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,9 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="xfL-sX-nZN">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgm-58-EwV">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <subviews>
@@ -35,7 +34,7 @@
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="JPO-8C-fXp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Cosmos Hub)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fK9-Jn-bGz">
@@ -50,6 +49,7 @@
                                             <constraint firstAttribute="width" constant="24" id="HDP-FP-riL"/>
                                             <constraint firstAttribute="height" constant="24" id="TYX-eU-5RM"/>
                                         </constraints>
+                                        <color key="tintColor" name="_font05"/>
                                         <state key="normal" image="btnSwitch24"/>
                                         <connections>
                                             <action selector="onClickSwitchAccount:" destination="G92-8m-qqM" eventType="touchUpInside" id="hZS-b0-XjI"/>
@@ -61,6 +61,7 @@
                                             <constraint firstAttribute="width" constant="24" id="JbD-93-gjA"/>
                                             <constraint firstAttribute="height" constant="24" id="xbv-57-qCe"/>
                                         </constraints>
+                                        <color key="tintColor" name="_font01"/>
                                         <state key="normal" image="notificationsIcOff"/>
                                         <connections>
                                             <action selector="onClickAlaram:" destination="G92-8m-qqM" eventType="touchUpInside" id="KW8-pl-Zna"/>
@@ -72,6 +73,7 @@
                                             <constraint firstAttribute="width" constant="24" id="bxG-Je-2xW"/>
                                             <constraint firstAttribute="height" constant="24" id="rcf-97-2T8"/>
                                         </constraints>
+                                        <color key="tintColor" name="_font01"/>
                                         <state key="normal" image="btnExplorer"/>
                                         <connections>
                                             <action selector="onClickExplorer:" destination="G92-8m-qqM" eventType="touchUpInside" id="WIg-L6-oIv"/>
@@ -157,12 +159,9 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="zmf-w3-i2S"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="xfL-sX-nZN" firstAttribute="top" secondItem="3wT-my-HkK" secondAttribute="top" id="0Zx-wH-8EC"/>
                             <constraint firstItem="zmf-w3-i2S" firstAttribute="trailing" secondItem="09R-vY-lyr" secondAttribute="trailing" id="6X4-2Q-mI2"/>
-                            <constraint firstItem="xfL-sX-nZN" firstAttribute="bottom" secondItem="3wT-my-HkK" secondAttribute="bottom" id="9C9-By-6aB"/>
-                            <constraint firstItem="xfL-sX-nZN" firstAttribute="trailing" secondItem="zmf-w3-i2S" secondAttribute="trailing" id="CAE-h4-0Bg"/>
                             <constraint firstItem="vgm-58-EwV" firstAttribute="trailing" secondItem="zmf-w3-i2S" secondAttribute="trailing" id="EQE-Ia-FNt"/>
                             <constraint firstItem="09R-vY-lyr" firstAttribute="bottom" secondItem="zmf-w3-i2S" secondAttribute="bottom" id="Hou-MZ-Zzk"/>
                             <constraint firstItem="HC1-5b-PB4" firstAttribute="trailing" secondItem="zmf-w3-i2S" secondAttribute="trailing" constant="-12" id="Nbc-P9-Jgb"/>
@@ -172,7 +171,6 @@
                             <constraint firstItem="09R-vY-lyr" firstAttribute="leading" secondItem="zmf-w3-i2S" secondAttribute="leading" id="lim-vL-nu8"/>
                             <constraint firstItem="HC1-5b-PB4" firstAttribute="leading" secondItem="zmf-w3-i2S" secondAttribute="leading" constant="12" id="r8m-Xl-yZg"/>
                             <constraint firstItem="HC1-5b-PB4" firstAttribute="top" secondItem="vgm-58-EwV" secondAttribute="bottom" constant="4" id="rCh-hm-BTQ"/>
-                            <constraint firstItem="xfL-sX-nZN" firstAttribute="leading" secondItem="zmf-w3-i2S" secondAttribute="leading" id="sRE-yz-SBQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Rez-Qd-X9D"/>
@@ -278,9 +276,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="lR6-M3-g2M">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWH-mJ-BRy" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="12" y="54" width="390" height="80"/>
                                 <subviews>
@@ -431,18 +426,14 @@
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cSU-sE-n4m"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cSU-sE-n4m" firstAttribute="trailing" secondItem="lR6-M3-g2M" secondAttribute="trailing" id="5iE-Gg-sgg"/>
                             <constraint firstItem="SWH-mJ-BRy" firstAttribute="top" secondItem="qFY-lo-0IC" secondAttribute="bottom" constant="4" id="ARb-CY-GJd"/>
-                            <constraint firstItem="lR6-M3-g2M" firstAttribute="bottom" secondItem="zcq-nb-U4b" secondAttribute="bottom" id="DKW-6d-o3b"/>
-                            <constraint firstItem="lR6-M3-g2M" firstAttribute="top" secondItem="zcq-nb-U4b" secondAttribute="top" id="JCy-MX-B1b"/>
                             <constraint firstItem="cSU-sE-n4m" firstAttribute="trailing" secondItem="clr-UP-CWo" secondAttribute="trailing" id="Jlp-Do-UEe"/>
                             <constraint firstItem="SWH-mJ-BRy" firstAttribute="leading" secondItem="cSU-sE-n4m" secondAttribute="leading" constant="12" id="TSU-no-rHu"/>
                             <constraint firstItem="XXP-AQ-reI" firstAttribute="centerY" secondItem="cSU-sE-n4m" secondAttribute="centerY" id="Ujz-xx-KpP"/>
                             <constraint firstItem="cSU-sE-n4m" firstAttribute="trailing" secondItem="qFY-lo-0IC" secondAttribute="trailing" id="b5k-rF-ogu"/>
                             <constraint firstAttribute="bottom" secondItem="clr-UP-CWo" secondAttribute="bottom" id="dtL-Jv-v9s"/>
-                            <constraint firstItem="lR6-M3-g2M" firstAttribute="leading" secondItem="cSU-sE-n4m" secondAttribute="leading" id="j78-qw-woP"/>
                             <constraint firstItem="clr-UP-CWo" firstAttribute="leading" secondItem="cSU-sE-n4m" secondAttribute="leading" id="jBt-Ut-cT3"/>
                             <constraint firstItem="TLK-Ns-Awb" firstAttribute="centerY" secondItem="cSU-sE-n4m" secondAttribute="centerY" id="kDu-EU-31S"/>
                             <constraint firstItem="clr-UP-CWo" firstAttribute="top" secondItem="SWH-mJ-BRy" secondAttribute="bottom" constant="8" id="sLf-ey-eA8"/>
@@ -455,7 +446,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="zKv-T3-ZiW"/>
                     <connections>
-                        <outlet property="chainBg" destination="lR6-M3-g2M" id="0CO-W2-aIb"/>
                         <outlet property="comingLabel" destination="XXP-AQ-reI" id="My0-et-lna"/>
                         <outlet property="emptyLabel" destination="TLK-Ns-Awb" id="WEt-to-cJP"/>
                         <outlet property="historyTableView" destination="clr-UP-CWo" id="pah-B7-2Pd"/>
@@ -481,9 +471,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="rD0-jW-7fv">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Al7-NK-Got">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <subviews>
@@ -622,22 +609,18 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jlb-Fr-uKZ"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="fWn-k7-DSA" firstAttribute="top" secondItem="gsx-gt-Y38" secondAttribute="bottom" constant="8" id="20Z-Ym-uyU"/>
                             <constraint firstItem="Al7-NK-Got" firstAttribute="leading" secondItem="jlb-Fr-uKZ" secondAttribute="leading" id="7e8-G9-bPp"/>
                             <constraint firstItem="jlb-Fr-uKZ" firstAttribute="bottom" secondItem="fWn-k7-DSA" secondAttribute="bottom" id="9jA-b2-bZf"/>
-                            <constraint firstItem="rD0-jW-7fv" firstAttribute="bottom" secondItem="Pyz-AK-6Ed" secondAttribute="bottom" id="PJG-LJ-Onw"/>
-                            <constraint firstAttribute="top" secondItem="rD0-jW-7fv" secondAttribute="top" id="VXC-Hg-v51"/>
                             <constraint firstItem="gsx-gt-Y38" firstAttribute="top" secondItem="Al7-NK-Got" secondAttribute="bottom" constant="4" id="Wpp-W0-GjF"/>
                             <constraint firstItem="fWn-k7-DSA" firstAttribute="leading" secondItem="jlb-Fr-uKZ" secondAttribute="leading" id="XZ3-Nu-iEq"/>
                             <constraint firstItem="Al7-NK-Got" firstAttribute="trailing" secondItem="jlb-Fr-uKZ" secondAttribute="trailing" id="Zgk-HF-diZ"/>
                             <constraint firstItem="jlb-Fr-uKZ" firstAttribute="trailing" secondItem="gsx-gt-Y38" secondAttribute="trailing" constant="12" id="aNt-Oq-7jR"/>
                             <constraint firstItem="jlb-Fr-uKZ" firstAttribute="trailing" secondItem="fWn-k7-DSA" secondAttribute="trailing" id="dTl-uz-JrH"/>
                             <constraint firstItem="Al7-NK-Got" firstAttribute="top" secondItem="jlb-Fr-uKZ" secondAttribute="top" id="fFf-db-Gdq"/>
-                            <constraint firstItem="rD0-jW-7fv" firstAttribute="leading" secondItem="jlb-Fr-uKZ" secondAttribute="leading" id="qMo-uN-42L"/>
                             <constraint firstItem="gsx-gt-Y38" firstAttribute="leading" secondItem="jlb-Fr-uKZ" secondAttribute="leading" constant="12" id="rpL-BZ-VS0"/>
-                            <constraint firstItem="rD0-jW-7fv" firstAttribute="trailing" secondItem="jlb-Fr-uKZ" secondAttribute="trailing" id="xVr-RC-893"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="R7R-lj-gXN"/>
@@ -909,9 +892,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="4Ql-ge-Go2">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="725"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bms-CG-fww">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                 <subviews>
@@ -997,24 +977,19 @@
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6xW-gl-kKc"/>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Qd6-af-F3f" firstAttribute="bottom" secondItem="6xW-gl-kKc" secondAttribute="bottom" id="0I4-aF-zfD"/>
                             <constraint firstItem="Bms-CG-fww" firstAttribute="top" secondItem="6xW-gl-kKc" secondAttribute="top" id="6WD-ww-Tmd"/>
                             <constraint firstItem="6xW-gl-kKc" firstAttribute="trailing" secondItem="Bms-CG-fww" secondAttribute="trailing" id="GAX-Ef-0KR"/>
-                            <constraint firstItem="6xW-gl-kKc" firstAttribute="trailing" secondItem="4Ql-ge-Go2" secondAttribute="trailing" id="Gbq-7o-Erj"/>
-                            <constraint firstItem="4Ql-ge-Go2" firstAttribute="top" secondItem="eZu-D4-qDA" secondAttribute="top" id="Pr2-zE-xbe"/>
                             <constraint firstItem="Qd6-af-F3f" firstAttribute="leading" secondItem="6xW-gl-kKc" secondAttribute="leading" id="Qae-Tb-99N"/>
                             <constraint firstItem="Bms-CG-fww" firstAttribute="leading" secondItem="6xW-gl-kKc" secondAttribute="leading" id="gUj-IP-ppa"/>
                             <constraint firstItem="Qd6-af-F3f" firstAttribute="top" secondItem="Bms-CG-fww" secondAttribute="bottom" id="j2Z-2x-ZzB"/>
-                            <constraint firstItem="4Ql-ge-Go2" firstAttribute="bottom" secondItem="eZu-D4-qDA" secondAttribute="bottom" id="mBk-92-hte"/>
                             <constraint firstItem="Qd6-af-F3f" firstAttribute="trailing" secondItem="6xW-gl-kKc" secondAttribute="trailing" id="pEt-3X-opO"/>
-                            <constraint firstItem="4Ql-ge-Go2" firstAttribute="leading" secondItem="6xW-gl-kKc" secondAttribute="leading" id="yU0-CD-Ya6"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="tiQ-UA-kjU"/>
                     <connections>
-                        <outlet property="chainBg" destination="4Ql-ge-Go2" id="qba-ne-14V"/>
                         <outlet property="titleAlarmBtn" destination="N58-4J-qWv" id="Fhb-VY-HWk"/>
                         <outlet property="titleChainImg" destination="rUb-xK-flr" id="0Hr-IV-GLO"/>
                         <outlet property="titleChainName" destination="TB1-BC-2Oc" id="j2D-ey-0QK"/>
@@ -1029,18 +1004,12 @@
         <scene sceneID="hEl-hw-B2u">
             <objects>
                 <tabBarController storyboardIdentifier="MainTabViewController" id="Zlf-k8-rdn" customClass="MainTabViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="X2b-ss-L1h">
+                    <tabBar key="tabBar" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="X2b-ss-L1h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="deviceRGB"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
-                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </userDefinedRuntimeAttribute>
-                            <userDefinedRuntimeAttribute type="color" keyPath="unselectedItemTintColor">
-                                <color key="value" red="0.29411764705882354" green="0.30980392156862746" blue="0.32941176470588235" alpha="1" colorSpace="deviceRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
+                        <color key="backgroundColor" name="_tabbar_bg"/>
+                        <color key="tintColor" name="_tabbar_item"/>
+                        <color key="selectedImageTintColor" name="_tabbar_selected"/>
                     </tabBar>
                     <connections>
                         <segue destination="A62-66-G4a" kind="relationship" relationship="viewControllers" id="uXL-s7-Uje"/>
@@ -1059,7 +1028,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6PU-dL-cQj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="HISTORY" image="ts_ic" id="Pah-Ab-5sf"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="He0-cX-uZk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="He0-cX-uZk">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1088,7 +1057,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ARn-Yi-ZWd" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="SETTING" image="setting_ic" id="hWX-Vb-kcg"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="A24-Xc-evI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="A24-Xc-evI">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2571,7 +2540,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jCW-id-z93" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="ASSETS" image="tokensDsIc" id="1JO-em-9vw"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="k59-4s-zb9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="k59-4s-zb9">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2600,7 +2569,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="A62-66-G4a" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="WALLET" image="wallet_ic" id="QTX-GR-gtF"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="cf1-vj-0j5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="cf1-vj-0j5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2997,5 +2966,23 @@
         <image name="tokensDsIc" width="24" height="24"/>
         <image name="ts_ic" width="24" height="24"/>
         <image name="wallet_ic" width="24" height="24"/>
+        <namedColor name="_font01">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_tabbar_bg">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_tabbar_item">
+            <color red="0.74509803921568629" green="0.77647058823529413" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_tabbar_selected">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
