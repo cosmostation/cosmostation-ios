@@ -12,8 +12,8 @@ import Foundation
 class ChainSif: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.SIF_MAIN
-    var chainImg = UIImage(named: "chainsifchain")
-    var chainInfoImg = UIImage(named: "sifchainImg")
+    var chainImg = UIImage(named: "chainSif")
+    var chainInfoImg = UIImage(named: "infoSif")
     var chainInfoTitle = NSLocalizedString("send_guide_title_sif", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_sif", comment: "")
     var chainColor = UIColor(named: "sif")!
@@ -23,7 +23,7 @@ class ChainSif: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_SIF_MAIN"
     var chainAPIName = "sifchain"
     
-    var stakeDenomImg = UIImage(named: "tokensifchain")
+    var stakeDenomImg = UIImage(named: "tokenSif")
     var stakeDenom = "rowan"
     var stakeSymbol = "ROWAN"
     var stakeSendImg = UIImage(named: "sendImg")

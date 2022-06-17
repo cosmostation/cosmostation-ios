@@ -12,8 +12,8 @@ import Foundation
 class StationTest: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.STATION_TEST
-    var chainImg = UIImage(named: "testnetStation")
-    var chainInfoImg = UIImage(named: "infoiconStation")
+    var chainImg = UIImage(named: "chainStationTest")
+    var chainInfoImg = UIImage(named: "infoStation")
     var chainInfoTitle = NSLocalizedString("Station", comment: "")
     var chainInfoMsg = NSLocalizedString("Station", comment: "")
     var chainColor = UIColor(named: "station")!
@@ -23,7 +23,7 @@ class StationTest: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_STATION_TEST"
     var chainAPIName = ""
     
-    var stakeDenomImg = UIImage(named: "tokenIss")
+    var stakeDenomImg = UIImage(named: "tokenStation")
     var stakeDenom = "uiss"
     var stakeSymbol = "ISS"
     var stakeSendImg = UIImage(named: "sendImg")

@@ -13,7 +13,7 @@ class ChainStarname: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.IOV_MAIN
     var chainImg = UIImage(named: "chainStarname")
-    var chainInfoImg = UIImage(named: "iovImg")
+    var chainInfoImg = UIImage(named: "infoStarname")
     var chainInfoTitle = NSLocalizedString("send_guide_title_iov", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_iov", comment: "")
     var chainColor = UIColor(named: "starname")!

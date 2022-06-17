@@ -13,7 +13,7 @@ class ChainStargaze: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.STARGAZE_MAIN
     var chainImg = UIImage(named: "chainStargaze")
-    var chainInfoImg = UIImage(named: "infoiconStargaze")
+    var chainInfoImg = UIImage(named: "infoStargaze")
     var chainInfoTitle = NSLocalizedString("send_guide_title_stargaze", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_stargaze", comment: "")
     var chainColor = UIColor(named: "stargaze")!

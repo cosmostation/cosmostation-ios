@@ -13,7 +13,7 @@ class ChainUmee: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.UMEE_MAIN
     var chainImg = UIImage(named: "chainUmee")
-    var chainInfoImg = UIImage(named: "infoiconUmee")
+    var chainInfoImg = UIImage(named: "infoUmee")
     var chainInfoTitle = NSLocalizedString("send_guide_title_umee", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_umee", comment: "")
     var chainColor = UIColor(named: "umee")!

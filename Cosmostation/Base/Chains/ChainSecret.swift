@@ -12,8 +12,8 @@ import Foundation
 class ChainSecret: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.SECRET_MAIN
-    var chainImg = UIImage(named: "secretChainImg")
-    var chainInfoImg = UIImage(named: "secretImg")
+    var chainImg = UIImage(named: "chainSecret")
+    var chainInfoImg = UIImage(named: "infoSecret")
     var chainInfoTitle = NSLocalizedString("send_guide_title_secret", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_secret", comment: "")
     var chainColor = UIColor(named: "secret")!
@@ -23,7 +23,7 @@ class ChainSecret: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_SECRET_MAIN"
     var chainAPIName = "secret"
     
-    var stakeDenomImg = UIImage(named: "secretTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenSecret")
     var stakeDenom = "uscrt"
     var stakeSymbol = "SCRT"
     var stakeSendImg = UIImage(named: "sendImg")

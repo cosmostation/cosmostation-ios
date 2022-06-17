@@ -12,8 +12,8 @@ import Foundation
 class ChainSentinel: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.SENTINEL_MAIN
-    var chainImg = UIImage(named: "chainsentinel")
-    var chainInfoImg = UIImage(named: "sentinelImg")
+    var chainImg = UIImage(named: "chainSentinel")
+    var chainInfoImg = UIImage(named: "infoSentinel")
     var chainInfoTitle = NSLocalizedString("send_guide_title_sentinel", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_sentinel", comment: "")
     var chainColor = UIColor(named: "sentinel")!
@@ -23,7 +23,7 @@ class ChainSentinel: ChainConfig {
     var chainDBName = "SUPPORT_CHAIN_SENTINEL_MAIN"
     var chainAPIName = "sentinel"
     
-    var stakeDenomImg = UIImage(named: "tokensentinel")
+    var stakeDenomImg = UIImage(named: "tokenSentinel")
     var stakeDenom = "udvpn"
     var stakeSymbol = "DVPN"
     var stakeSendImg = UIImage(named: "sendImg")
