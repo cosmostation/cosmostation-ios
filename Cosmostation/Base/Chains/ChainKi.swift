@@ -53,4 +53,12 @@ class ChainKi: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        return "https://foundation.ki/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/ki-foundation"
+    }
 }

@@ -54,4 +54,12 @@ class ChainOkc: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        return "https://www.okx.com"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://www.okx.com/academy/en/"
+    }
 }

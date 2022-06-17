@@ -53,4 +53,12 @@ class ChainKonstellation: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        return "https://konstellation.tech/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://konstellation.medium.com/"
+    }
 }

@@ -43,6 +43,8 @@ protocol ChainConfig {
     init (_ chainType: ChainType)
     func supportHdPaths() -> Array<String>
     func getHdPath(_ type: Int, _ path: Int) -> String
+    func getInfoLink1() -> String
+    func getInfoLink2() -> String
         
 }
 

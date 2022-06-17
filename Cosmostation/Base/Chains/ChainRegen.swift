@@ -53,4 +53,12 @@ class ChainRegen: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        return "https://www.regen.network/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/regen-network"
+    }
 }

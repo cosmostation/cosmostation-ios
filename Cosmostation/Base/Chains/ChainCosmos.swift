@@ -56,5 +56,11 @@ class ChainCosmos: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
+    func getInfoLink1() -> String {
+        return "https://cosmos.network/"
+    }
 
+    func getInfoLink2() -> String {
+        return "https://blog.cosmos.network/"
+    }
 }

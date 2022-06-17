@@ -53,4 +53,12 @@ class ChainAssetMantle: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        return "https://assetmantle.one/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://blog.assetmantle.one/"
+    }
 }

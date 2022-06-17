@@ -53,4 +53,12 @@ class ChainIris: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        return "https://www.irisnet.org"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/irisnet-blog"
+    }
 }

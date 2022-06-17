@@ -53,4 +53,12 @@ class ChainComdex: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        return "https://comdex.one/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://blog.comdex.one/"
+    }
 }

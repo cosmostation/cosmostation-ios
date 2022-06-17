@@ -53,4 +53,12 @@ class ChainEmoney: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        return "https://e-money.com/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/e-money-com"
+    }
 }

@@ -53,4 +53,20 @@ class ChainMedibloc: ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
+    
+    func getInfoLink1() -> String {
+        if (Locale.current.languageCode == "ko") {
+            return "https://medibloc.com"
+        } else {
+            return "https://medibloc.com/en/"
+        }
+    }
+
+    func getInfoLink2() -> String {
+        if (Locale.current.languageCode == "ko") {
+            return "https://blog.medibloc.org/"
+        } else {
+            return "https://medium.com/medibloc/"
+        }
+    }
 }
