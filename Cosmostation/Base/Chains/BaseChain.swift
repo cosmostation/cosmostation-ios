@@ -18,8 +18,10 @@ protocol ChainConfig {
     var chainInfoTitle: String { get set }
     var chainInfoMsg: String { get set }
     var chainColor: UIColor { get set }
-    var chainColorDark: UIColor? { get set }
-    var chainColorBG: UIColor { get set }
+    
+//    var chainColorDark: UIColor? { get set }
+//    var chainColorBG: UIColor { get set }
+    
     var chainTitle: String { get set }
     var chainTitle2: String { get set }
     var chainDBName: String { get set }
