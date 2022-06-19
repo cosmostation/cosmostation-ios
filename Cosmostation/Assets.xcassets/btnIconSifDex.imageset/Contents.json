@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "buttoniconNftLight.pdf",
+      "filename" : "buttoniconSifdexLight.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "buttoniconNftDark.pdf",
+      "filename" : "buttoniconSifdexDark.pdf",
       "idiom" : "universal"
     }
   ],

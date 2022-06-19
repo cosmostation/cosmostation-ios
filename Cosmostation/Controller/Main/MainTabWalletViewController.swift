@@ -50,6 +50,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletSifCell", bundle: nil), forCellReuseIdentifier: "WalletSifCell")
         self.walletTableView.register(UINib(nibName: "WalletOsmoCell", bundle: nil), forCellReuseIdentifier: "WalletOsmoCell")
         self.walletTableView.register(UINib(nibName: "WalletDesmosCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosCell")
+        self.walletTableView.register(UINib(nibName: "WalletDesmosEventCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosEventCell")
         self.walletTableView.register(UINib(nibName: "WalletCrescentCell", bundle: nil), forCellReuseIdentifier: "WalletCrescentCell")
         self.walletTableView.register(UINib(nibName: "WalletStationCell", bundle: nil), forCellReuseIdentifier: "WalletStationCell")
         self.walletTableView.register(UINib(nibName: "WalletBaseChainCell", bundle: nil), forCellReuseIdentifier: "WalletBaseChainCell")
@@ -57,7 +58,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
         self.walletTableView.register(UINib(nibName: "WalletGuideCell", bundle: nil), forCellReuseIdentifier: "WalletGuideCell")
-        self.walletTableView.register(UINib(nibName: "WalletDesmosEventCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosEventCell")
         
         self.walletTableView.rowHeight = UITableView.automaticDimension
         self.walletTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -505,36 +505,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
         }
         
-    }
-    
-    func onSetEvmosItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
-        if (indexPath.row == 0) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletEvmosCell") as? WalletEvmosCell
-            cell?.updateView(account, chainType)
-            cell?.actionDelegate = { self.onClickValidatorList() }
-            cell?.actionVote = { self.onClickVoteList() }
-            cell?.actionWc = { self.onClickWalletConect() }
-            return cell!
-
-        } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            return cell!
-
-        } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
-
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
-        }
     }
     
     func onSetDesmosItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {

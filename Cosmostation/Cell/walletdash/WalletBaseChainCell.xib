@@ -179,7 +179,7 @@
                                     </view>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="dNg-4C-4zR">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dNg-4C-4zR">
                                 <rect key="frame" x="12" y="265" width="474" height="40"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hjg-K0-IsC">
@@ -329,7 +329,7 @@
                 <outlet property="vestingAmount" destination="yIn-GR-90f" id="eik-8I-UJH"/>
                 <outlet property="vestingLayer" destination="aLo-kD-OjY" id="U9y-QJ-22U"/>
             </connections>
-            <point key="canvasLocation" x="284.05797101449275" y="248.77232142857142"/>
+            <point key="canvasLocation" x="282.60869565217394" y="248.77232142857142"/>
         </tableViewCell>
     </objects>
     <resources>

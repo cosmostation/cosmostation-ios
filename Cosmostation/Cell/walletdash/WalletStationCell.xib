@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pxW-bD-Wvj" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="547" height="345"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIss" translatesAutoresizingMaskIntoConstraints="NO" id="vkn-Ob-JgX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenStation" translatesAutoresizingMaskIntoConstraints="NO" id="vkn-Ob-JgX">
                                 <rect key="frame" x="12" y="13.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Pad-9v-okr"/>
@@ -30,30 +31,30 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ISS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRz-DV-al4">
                                 <rect key="frame" x="38" y="16" width="19" height="15"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                <color key="textColor" red="0.019607843137254902" green="0.76470588235294112" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="station"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsv-cb-9Ts">
-                                <rect key="frame" x="522" y="21" width="13" height="5"/>
+                                <rect key="frame" x="522" y="13" width="13" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GY-Fe-gwF">
-                                <rect key="frame" x="523.5" y="32" width="11.5" height="14.5"/>
+                                <rect key="frame" x="523.5" y="40" width="11.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wji-74-j1j">
-                                <rect key="frame" x="12" y="58.5" width="523" height="0.5"/>
-                                <color key="backgroundColor" red="0.29411764709999999" green="0.30980392159999998" blue="0.3294117647" alpha="1" colorSpace="deviceRGB"/>
+                                <rect key="frame" x="12" y="66.5" width="523" height="0.5"/>
+                                <color key="backgroundColor" name="_card_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="nlo-cF-Ufv"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="8Uq-o9-kzN">
-                                <rect key="frame" x="12" y="75" width="523" height="90"/>
+                                <rect key="frame" x="12" y="83" width="523" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6W-bb-Ddm">
                                         <rect key="frame" x="0.0" y="0.0" width="523" height="18"/>
@@ -61,13 +62,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZV-aX-5HU">
                                                 <rect key="frame" x="0.0" y="2.5" width="46.5" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdm-Sx-PcU">
                                                 <rect key="frame" x="511.5" y="2" width="11.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -86,13 +87,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Vesting (Delegable)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9a-en-1xh">
                                                 <rect key="frame" x="0.0" y="-6.5" width="103.5" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zP-FK-MJx">
                                                 <rect key="frame" x="511.5" y="-7" width="11.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -110,13 +111,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delegated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-EV-iqF">
                                                 <rect key="frame" x="0.0" y="2.5" width="54" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLo-5L-qei">
                                                 <rect key="frame" x="511.5" y="2" width="11.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -134,13 +135,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Unbonding" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd2-5g-BqU">
                                                 <rect key="frame" x="0.0" y="2.5" width="57.5" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U31-go-Sav">
                                                 <rect key="frame" x="511.5" y="2" width="11.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -158,13 +159,13 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="Staking Reward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVz-b4-cj2">
                                                 <rect key="frame" x="0.0" y="2.5" width="81.5" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUc-fG-Fxc">
                                                 <rect key="frame" x="511.5" y="2" width="11.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -179,7 +180,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lyQ-pW-258">
-                                <rect key="frame" x="12" y="181" width="523" height="40"/>
+                                <rect key="frame" x="12" y="189" width="523" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vy-sS-Nhq">
                                         <rect key="frame" x="0.0" y="0.0" width="257.5" height="40"/>
@@ -188,18 +189,18 @@
                                             <constraint firstAttribute="height" constant="40" id="gG1-eU-xly"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <state key="normal" title="  Delegate" image="rewardIc">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="  Delegate" image="btnIconRewad">
+                                            <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.69999999999999996"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" name="_font05"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -213,18 +214,18 @@
                                             <constraint firstAttribute="height" constant="40" id="Fcz-73-Btx"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <state key="normal" title="  Governance" image="voteIc">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="  Governance" image="btnIconVote">
+                                            <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.69999999999999996"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" name="_font05"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -233,8 +234,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="utm-8Z-ypb">
-                                <rect key="frame" x="12" y="233" width="523" height="92"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="utm-8Z-ypb">
+                                <rect key="frame" x="12" y="237" width="523" height="88"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLx-EK-CYC">
                                         <rect key="frame" x="0.0" y="0.0" width="523" height="40"/>
@@ -244,18 +245,18 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Cosmostation Dapps">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Cosmostation Dapps" image="btnIconDex">
+                                            <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.69999999999999996"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" name="_font05"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -263,24 +264,24 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEi-pg-q22">
-                                        <rect key="frame" x="0.0" y="52" width="523" height="40"/>
+                                        <rect key="frame" x="0.0" y="48" width="523" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Rsl-c6-7tO"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <state key="normal" title="  Wallet Connect" image="iconWalletconnect">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="  Wallet Connect" image="btnIconWalletConnect">
+                                            <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.69999999999999996"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="8"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="value" name="_font05"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -290,7 +291,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.019607843137254902" green="0.76470588235294112" blue="0.80392156862745101" alpha="0.1480523768" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="station_bg"/>
                         <constraints>
                             <constraint firstItem="2GY-Fe-gwF" firstAttribute="top" secondItem="bsv-cb-9Ts" secondAttribute="bottom" constant="6" id="18T-ok-R0R"/>
                             <constraint firstItem="utm-8Z-ypb" firstAttribute="leading" secondItem="lyQ-pW-258" secondAttribute="leading" id="5Ki-gu-m4O"/>
@@ -298,7 +299,7 @@
                             <constraint firstAttribute="trailing" secondItem="Wji-74-j1j" secondAttribute="trailing" constant="12" id="9U5-tp-WgH"/>
                             <constraint firstItem="bsv-cb-9Ts" firstAttribute="centerY" secondItem="vkn-Ob-JgX" secondAttribute="centerY" id="A9q-pl-i18"/>
                             <constraint firstAttribute="trailing" secondItem="bsv-cb-9Ts" secondAttribute="trailing" constant="12" id="LIX-wW-pmI"/>
-                            <constraint firstItem="utm-8Z-ypb" firstAttribute="top" secondItem="lyQ-pW-258" secondAttribute="bottom" constant="12" id="Lbq-eY-ncv"/>
+                            <constraint firstItem="utm-8Z-ypb" firstAttribute="top" secondItem="lyQ-pW-258" secondAttribute="bottom" constant="8" id="Lbq-eY-ncv"/>
                             <constraint firstAttribute="trailing" secondItem="lyQ-pW-258" secondAttribute="trailing" constant="12" id="Nez-mY-bfd"/>
                             <constraint firstItem="Wji-74-j1j" firstAttribute="top" secondItem="2GY-Fe-gwF" secondAttribute="bottom" constant="12" id="Snr-hC-XUE"/>
                             <constraint firstItem="CRz-DV-al4" firstAttribute="centerY" secondItem="vkn-Ob-JgX" secondAttribute="centerY" id="TxT-Gc-aE0"/>
@@ -359,9 +360,25 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="iconWalletconnect" width="20" height="20"/>
-        <image name="rewardIc" width="20" height="20"/>
-        <image name="tokenIss" width="22" height="22"/>
-        <image name="voteIc" width="20" height="20"/>
+        <image name="btnIconDex" width="20" height="20"/>
+        <image name="btnIconRewad" width="20" height="20"/>
+        <image name="btnIconVote" width="20" height="20"/>
+        <image name="btnIconWalletConnect" width="20" height="20"/>
+        <image name="tokenStation" width="22" height="22"/>
+        <namedColor name="_card_divider">
+            <color red="0.74509803921568629" green="0.77647058823529413" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font04">
+            <color red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="station">
+            <color red="0.019999999552965164" green="0.76499998569488525" blue="0.80400002002716064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="station_bg">
+            <color red="0.90196078431372551" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

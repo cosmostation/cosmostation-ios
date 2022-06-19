@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "buttoniconNftLight.pdf",
+      "filename" : "buttoniconWithdrowLight.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "buttoniconNftDark.pdf",
+      "filename" : "buttoniconWithdrowDark.pdf",
       "idiom" : "universal"
     }
   ],
