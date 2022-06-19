@@ -34,6 +34,7 @@ class ChainAxelar: ChainConfig {
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-axelar-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-axelar-app.cosmostation.io"

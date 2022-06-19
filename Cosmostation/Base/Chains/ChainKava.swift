@@ -34,6 +34,7 @@ class ChainKava: ChainConfig {
     var addressaddressHdPath1 = "m/44'/459'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-kava-app.cosmostation.io"

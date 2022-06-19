@@ -33,6 +33,7 @@ class ChainAlthea: ChainConfig {
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"
     var grpcPort = "20100"
     var lcdUrl = ""

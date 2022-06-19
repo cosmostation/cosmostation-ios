@@ -33,6 +33,7 @@ class StationTest: ChainConfig {
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = true
     var grpcUrl = "lcd-office.cosmostation.io"
     var grpcPort = "10400"
     var lcdUrl = "https://lcd-office.cosmostation.io/station-testnet/"

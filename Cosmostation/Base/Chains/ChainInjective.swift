@@ -33,6 +33,7 @@ class ChainInjective: ChainConfig {
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-inj-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-inj-app.cosmostation.io"

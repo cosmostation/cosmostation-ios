@@ -33,6 +33,7 @@ class ChainStarname: ChainConfig {
     let addressHdPath0 = "m/44'/234'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-iov-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-iov-app.cosmostation.io"

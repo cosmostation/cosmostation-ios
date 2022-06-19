@@ -33,6 +33,7 @@ class ChainBitsong: ChainConfig {
     let addressHdPath0 = "m/44'/639'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-bitsong-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-bitsong-app.cosmostation.io"
