@@ -25,7 +25,7 @@ class ChainIris: ChainConfig {
     
     var stakeDenomImg = UIImage(named: "tokenIris")
     var stakeDenom = "uiris"
-    var stakeSymbol = "Iris"
+    var stakeSymbol = "IRIS"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "iris")!
     

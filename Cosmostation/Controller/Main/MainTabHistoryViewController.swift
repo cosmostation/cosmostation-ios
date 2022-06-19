@@ -158,7 +158,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.headerTitleLabel.text = "Recently Histories"
+        view.headerTitleLabel.text = NSLocalizedString("recent_history", comment: "")
         var cntString = "0"
         if (chainType == ChainType.BINANCE_MAIN) {
             cntString = String(self.mBnbHistories.count)

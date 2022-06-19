@@ -91,11 +91,11 @@ extension WUtils {
             label.text = "ION"
             
         } else if (denom.starts(with: "gamm/pool/")) {
-            label.textColor = .white
+            label.textColor = UIColor(named: "_font05")
             label.text = "GAMM-" + String(denom.split(separator: "/").last!)
             
         } else if (denom.starts(with: "ibc/")) {
-            label.textColor = .white
+            label.textColor = UIColor(named: "_font05")
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
                 label.text = dpDenom.uppercased()
             } else {

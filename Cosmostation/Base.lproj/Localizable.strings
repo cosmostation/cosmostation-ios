@@ -359,6 +359,7 @@
 "select_hd_path" = "Select Custom Path";
 "import_account_title" = "Import Wallet";
 "import_account_msg" = "Would you like to add %@ wallet(s)?";
+"recent_history" = "Recently Histories";
 
 "creat_cdp_step_0" = "Deposit collateral to borrow USDX";
 "creat_cdp_step_1" = "Insert memo (optional)";

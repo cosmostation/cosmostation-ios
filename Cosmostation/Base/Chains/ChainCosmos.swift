@@ -27,7 +27,7 @@ class ChainCosmos: ChainConfig {
     
     var stakeDenomImg = UIImage(named: "tokenCosmos")
     var stakeDenom = "uatom"
-    var stakeSymbol = "Atom"
+    var stakeSymbol = "ATOM"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "cosmos")!
     

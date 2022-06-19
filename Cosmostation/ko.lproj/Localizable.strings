@@ -331,6 +331,7 @@
 "select_hd_path" = "지정 경로를 선택 하세요";
 "import_account_title" = "지갑 추가";
 "import_account_msg" = "%@개의 지갑을 추가하시겠습니까?";
+"recent_history" = "최근 기록";
 
 "current_price_format" = "현재 %@ 가격";
 "liquidation_price_format" = "청산 %@ 가격";

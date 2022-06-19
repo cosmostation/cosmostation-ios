@@ -228,7 +228,7 @@ extension WUtils {
             label.text = "ATOM"
             
         } else if (denom.starts(with: "pool")) {
-            label.textColor = .white
+            label.textColor = UIColor(named: "_font05")
             if let poolInfo = BaseData.instance.getGravityPoolByDenom(denom)  {
                 label.text = "GDEX-" + String(poolInfo.id)
             } else {
@@ -236,7 +236,7 @@ extension WUtils {
             }
             
         } else if (denom.starts(with: "ibc/")) {
-            label.textColor = .white
+            label.textColor = UIColor(named: "_font05")
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
                 label.text = dpDenom.uppercased()
             } else {
@@ -244,7 +244,7 @@ extension WUtils {
             }
             
         } else {
-            label.textColor = .white
+            label.textColor = UIColor(named: "_font05")
             label.text = "UnKnown"
         }
     }

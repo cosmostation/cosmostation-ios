@@ -1178,7 +1178,7 @@ public class WUtils {
         if (coin.denom == BNB_MAIN_DENOM) {
             WUtils.setDenomTitle(chainType, denomLabel)
         } else {
-            denomLabel.textColor = .white
+            denomLabel.textColor = UIColor(named: "_font05")
             denomLabel.text = coin.denom.uppercased()
         }
         amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 8, 8)
@@ -1192,20 +1192,20 @@ public class WUtils {
         if (isGRPC(chainType) && denom.starts(with: "ibc/")) {
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
                 if (ibcToken.auth == true) {
-                    denomLabel?.textColor = .white
+                    denomLabel?.textColor = UIColor(named: "_font05")
                     denomLabel?.text = ibcToken.display_denom?.uppercased()
                     amountLabel.attributedText = displayAmount2(amount, amountLabel.font, ibcToken.decimal!, ibcToken.decimal!)
                     return
                     
                 } else {
-                    denomLabel?.textColor = .white
+                    denomLabel?.textColor = UIColor(named: "_font05")
                     denomLabel?.text = "Unknown"
                     amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
                     return
                 }
                 
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = "Unknown"
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
                 return
@@ -1215,14 +1215,14 @@ public class WUtils {
             if (denom == COSMOS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "pool")) {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 if let poolInfo = BaseData.instance.getGravityPoolByDenom(denom)  {
                     denomLabel?.text = "GDEX-" + String(poolInfo.id)
                 } else {
                     denomLabel?.text = "UnKnown"
                 }
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1231,7 +1231,7 @@ public class WUtils {
             if (denom == IRIS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1240,7 +1240,7 @@ public class WUtils {
             if (denom == BNB_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 8)
@@ -1258,7 +1258,7 @@ public class WUtils {
                 denomLabel?.textColor = COLOR_SWP
                 denomLabel?.text = denom.uppercased()
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, getKavaCoinDecimal(denom), getKavaCoinDecimal(denom))
@@ -1267,7 +1267,7 @@ public class WUtils {
             if (denom == BAND_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1276,7 +1276,7 @@ public class WUtils {
             if (denom == SECRET_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1285,7 +1285,7 @@ public class WUtils {
             if (denom == IOV_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1294,7 +1294,7 @@ public class WUtils {
             if (denom == CERTIK_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1303,7 +1303,7 @@ public class WUtils {
             if (denom == OKEX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 18)
@@ -1312,7 +1312,7 @@ public class WUtils {
             if (denom == AKASH_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1321,7 +1321,7 @@ public class WUtils {
             if (denom == PERSIS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1330,7 +1330,7 @@ public class WUtils {
             if (denom == SENTINEL_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1339,7 +1339,7 @@ public class WUtils {
             if (denom == FETCH_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
@@ -1348,7 +1348,7 @@ public class WUtils {
             if (denom == CRYPTO_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 8, 8)
@@ -1358,14 +1358,14 @@ public class WUtils {
             if (denom == SIF_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "c")) {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
                     denomLabel?.text = bridgeTokenInfo.origin_symbol
                 } else {
                     denomLabel?.text = denom.substring(from: 1).uppercased()
                 }
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
@@ -1374,7 +1374,7 @@ public class WUtils {
             if (denom == KI_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1388,11 +1388,11 @@ public class WUtils {
                 denomLabel?.text = "ION"
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             } else if (denom.starts(with: "gamm/pool/")) {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = "GAMM-" + String(denom.split(separator: "/").last!)
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             }
@@ -1401,7 +1401,7 @@ public class WUtils {
             if (denom == IRIS_TEST_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1410,7 +1410,7 @@ public class WUtils {
             if (denom == RIZON_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1419,7 +1419,7 @@ public class WUtils {
             if (denom == MEDI_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1428,7 +1428,7 @@ public class WUtils {
             if (denom == ALTHEA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1437,7 +1437,7 @@ public class WUtils {
             if (denom == UMEE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1446,7 +1446,7 @@ public class WUtils {
             if (denom == AXELAR_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1455,10 +1455,10 @@ public class WUtils {
             if (denom == EMONEY_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "e")) {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.substring(from: 1).uppercased()
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1467,7 +1467,7 @@ public class WUtils {
             if (denom == JUNO_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1476,7 +1476,7 @@ public class WUtils {
             if (denom == REGNE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1485,7 +1485,7 @@ public class WUtils {
             if (denom == BITCANA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1495,14 +1495,14 @@ public class WUtils {
             if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "gravity0x")) {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
                     denomLabel?.text = bridgeTokenInfo.origin_symbol
                 } else {
                     denomLabel?.text = denom.uppercased()
                 }
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
@@ -1511,7 +1511,7 @@ public class WUtils {
             if (denom == STARGAZE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1520,7 +1520,7 @@ public class WUtils {
             if (denom == COMDEX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1530,14 +1530,14 @@ public class WUtils {
             if (denom == INJECTIVE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "peggy0x")) {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
                     denomLabel?.text = bridgeTokenInfo.origin_symbol
                 } else {
                     denomLabel?.text = denom.uppercased()
                 }
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
@@ -1546,7 +1546,7 @@ public class WUtils {
             if (denom == BITSONG_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1555,7 +1555,7 @@ public class WUtils {
             if (denom == DESMOS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1564,7 +1564,7 @@ public class WUtils {
             if (denom == LUM_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1573,7 +1573,7 @@ public class WUtils {
             if (denom == CHIHUAHUA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1582,7 +1582,7 @@ public class WUtils {
             if (denom == KONSTELLATION_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1591,7 +1591,7 @@ public class WUtils {
             if (denom == EVMOS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
@@ -1600,7 +1600,7 @@ public class WUtils {
             if (denom == PROVENANCE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 9, 9)
@@ -1609,7 +1609,7 @@ public class WUtils {
             if (denom == CUDOS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
@@ -1618,7 +1618,7 @@ public class WUtils {
             if (denom == CERBERUS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1627,7 +1627,7 @@ public class WUtils {
             if (denom == OMNIFLIX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1636,7 +1636,7 @@ public class WUtils {
             if (denom == CRESCENT_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1645,7 +1645,7 @@ public class WUtils {
             if (denom == MANTLE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1657,7 +1657,7 @@ public class WUtils {
                 denomLabel?.textColor = COLOR_NYM
                 denomLabel?.text = "NYM"
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
@@ -1668,7 +1668,7 @@ public class WUtils {
             if (denom == STATION_TEST_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else {
-                denomLabel?.textColor = .white
+                denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
