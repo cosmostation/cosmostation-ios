@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,13 +26,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="hEe-up-dNx"/>
                                     <constraint firstAttribute="width" constant="44" id="lqF-8F-P7h"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freeIc" translatesAutoresizingMaskIntoConstraints="NO" id="E8Q-PR-ZqZ">
-                                <rect key="frame" x="44" y="20.5" width="20" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="R5f-2v-Mml"/>
-                                    <constraint firstAttribute="width" constant="20" id="TGh-Ef-6s8"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="EAa-KZ-drG">
@@ -56,52 +50,52 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Moniker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rW-3b-Lm5">
-                                <rect key="frame" x="80" y="10" width="210" height="16"/>
+                                <rect key="frame" x="80" y="10" width="210" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Delegated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cdf-lL-EcX">
-                                <rect key="frame" x="80" y="30" width="58" height="14"/>
+                                <rect key="frame" x="80" y="28.5" width="54" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZI9-I9-znv">
-                                <rect key="frame" x="150" y="30" width="198" height="14"/>
+                                <rect key="frame" x="146" y="28.5" width="202" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Undelegating" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCZ-OT-X4w">
-                                <rect key="frame" x="80" y="44" width="250" height="27"/>
+                                <rect key="frame" x="80" y="42.5" width="250" height="28.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mma-bi-v2Y">
-                                <rect key="frame" x="342" y="50.5" width="6" height="14"/>
+                                <rect key="frame" x="342" y="50" width="6" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Reward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bwg-AL-vPt">
                                 <rect key="frame" x="80" y="71" width="250" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ago-pl-psR">
                                 <rect key="frame" x="342" y="71" width="6" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="bandoracleoffs" translatesAutoresizingMaskIntoConstraints="NO" id="3QV-UH-sKM">
-                                <rect key="frame" x="294" y="11.5" width="58" height="13"/>
+                                <rect key="frame" x="294" y="11" width="58" height="13"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.61176470588235299" green="0.42352941176470588" blue="1" alpha="0.14806292804246582" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
                             <constraint firstItem="ZI9-I9-znv" firstAttribute="centerY" secondItem="Cdf-lL-EcX" secondAttribute="centerY" id="1Aa-mr-Y5v"/>
                             <constraint firstItem="lCZ-OT-X4w" firstAttribute="leading" secondItem="Cdf-lL-EcX" secondAttribute="leading" id="203-iu-Uz6"/>
@@ -124,8 +118,6 @@
                             <constraint firstItem="ago-pl-psR" firstAttribute="leading" secondItem="bwg-AL-vPt" secondAttribute="trailing" constant="12" id="VtT-oV-6zV"/>
                             <constraint firstItem="bwg-AL-vPt" firstAttribute="leading" secondItem="Cdf-lL-EcX" secondAttribute="leading" id="Wug-zr-IDm"/>
                             <constraint firstItem="Cdf-lL-EcX" firstAttribute="top" secondItem="5rW-3b-Lm5" secondAttribute="bottom" constant="4" id="aPJ-Rk-o2k"/>
-                            <constraint firstItem="E8Q-PR-ZqZ" firstAttribute="trailing" secondItem="Hkm-mW-mzq" secondAttribute="trailing" constant="8" id="bvt-fN-hqc"/>
-                            <constraint firstItem="E8Q-PR-ZqZ" firstAttribute="top" secondItem="Hkm-mW-mzq" secondAttribute="top" constant="-4" id="cKf-cA-CjY"/>
                             <constraint firstItem="pMw-eC-UQW" firstAttribute="centerY" secondItem="2Fy-88-G4e" secondAttribute="centerY" id="iQK-Bd-Ed3"/>
                             <constraint firstItem="5rW-3b-Lm5" firstAttribute="top" secondItem="2Fy-88-G4e" secondAttribute="top" constant="10" id="iuY-eX-zNE"/>
                             <constraint firstItem="3QV-UH-sKM" firstAttribute="leading" secondItem="5rW-3b-Lm5" secondAttribute="trailing" constant="4" id="oXA-O6-T5O"/>
@@ -168,7 +160,6 @@
             <connections>
                 <outlet property="bandOracleOffImg" destination="3QV-UH-sKM" id="x62-L2-gSi"/>
                 <outlet property="cardView" destination="2Fy-88-G4e" id="KXc-WM-WHq"/>
-                <outlet property="freeEventImg" destination="E8Q-PR-ZqZ" id="rCe-Nz-Uow"/>
                 <outlet property="monikerLabel" destination="5rW-3b-Lm5" id="0dN-TY-fCB"/>
                 <outlet property="myDelegatedAmoutLabel" destination="ZI9-I9-znv" id="Zm2-Ek-5p7"/>
                 <outlet property="myUndelegatingAmountLabel" destination="Mma-bi-v2Y" id="XDc-Ag-p7l"/>
@@ -182,8 +173,16 @@
     <resources>
         <image name="arrowNextGr" width="24" height="24"/>
         <image name="bandoracleoffs" width="58" height="13"/>
-        <image name="freeIc" width="20" height="20"/>
         <image name="jailedImg" width="44" height="44"/>
         <image name="validatorNoneImg" width="44" height="44"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

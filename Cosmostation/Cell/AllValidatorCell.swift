@@ -12,7 +12,6 @@ class AllValidatorCell: UITableViewCell {
 
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var validatorImg: UIImageView!
-    @IBOutlet weak var freeEventImg: UIImageView!
     @IBOutlet weak var revokedImg: UIImageView!
     @IBOutlet weak var monikerLabel: UILabel!
     @IBOutlet weak var bandOracleOffImg: UIImageView!
@@ -32,11 +31,6 @@ class AllValidatorCell: UITableViewCell {
         powerLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         commissionLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-//        self.addRippleEffect(to: self.cardView)
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -44,20 +38,20 @@ class AllValidatorCell: UITableViewCell {
         self.monikerLabel.text = "-"
         self.powerLabel.text = "-"
         self.commissionLabel.text = "-"
-        self.commissionLabel.textColor = UIColor.init(hexString: "7a7f88")
         self.bandOracleOffImg.isHidden = true
     }
     
-    func updateView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainType: ChainType?) {
+    func updateView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainConfig: ChainConfig?) {
+        if (chainConfig == nil) { return }
+        let chainType = chainConfig!.chainType
         powerLabel.attributedText =  WUtils.displayAmount2(validator.tokens, powerLabel.font, WUtils.mainDivideDecimal(chainType), 6)
-        commissionLabel.attributedText = WUtils.getDpEstAprCommission(commissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), chainType!)
+        commissionLabel.attributedText = WUtils.getDpEstAprCommission(commissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), chainType)
         if let url = URL(string: WUtils.getMonikerImgUrl(chainType, validator.operatorAddress)) {
             validatorImg.af_setImage(withURL: url)
         }
         
         monikerLabel.text = validator.description_p.moniker
         monikerLabel.adjustsFontSizeToFitWidth = true
-        freeEventImg.isHidden = true
         
         if (validator.jailed == true) {
             revokedImg.isHidden = false
@@ -67,10 +61,12 @@ class AllValidatorCell: UITableViewCell {
             validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
         }
         if BaseData.instance.mMyValidators_gRPC.first(where: {$0.operatorAddress == validator.operatorAddress}) != nil {
-            cardView.backgroundColor = WUtils.getChainBg(chainType)
+            cardView.backgroundColor = chainConfig?.chainColorBG
+            
         } else {
-            cardView.backgroundColor = COLOR_BG_GRAY
+            cardView.backgroundColor = UIColor(named: "_card_bg")
         }
+        
         
         //display for band oracle status
         if (chainType == ChainType.BAND_MAIN) {

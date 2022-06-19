@@ -33,10 +33,10 @@ class ClaimRewardAllCell: UITableViewCell {
     }
     
     @objc func startHighlight(sender: UIButton) {
-        claimAllBtn.layer.borderColor = UIColor.gray.cgColor
+        claimAllBtn.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     @objc func stopHighlight(sender: UIButton) {
-        claimAllBtn.layer.borderColor = UIColor.white.cgColor
+        claimAllBtn.layer.borderColor = UIColor(named: "_font05")!.cgColor
     }
     @IBAction func onClickClaimAll(_ sender: UIButton) {
         delegate?.didTapClaimAll(sender)

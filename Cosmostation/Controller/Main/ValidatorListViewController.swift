@@ -17,40 +17,39 @@ class ValidatorListViewController: BaseViewController {
     @IBOutlet weak var allValidatorView: UIView!
     @IBOutlet weak var otherValidatorView: UIView!
     
-    var mainTabVC: MainTabViewController!
-    
     @IBAction func switchView(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            myValidatorView.alpha = 1
-            allValidatorView.alpha = 0
-            otherValidatorView.alpha = 0
+            self.myValidatorView.alpha = 1
+            self.allValidatorView.alpha = 0
+            self.otherValidatorView.alpha = 0
         } else if sender.selectedSegmentIndex == 1 {
-            myValidatorView.alpha = 0
-            allValidatorView.alpha = 1
-            otherValidatorView.alpha = 0
+            self.myValidatorView.alpha = 0
+            self.allValidatorView.alpha = 1
+            self.otherValidatorView.alpha = 0
         } else {
-            myValidatorView.alpha = 0
-            allValidatorView.alpha = 0
-            otherValidatorView.alpha = 1
+            self.myValidatorView.alpha = 0
+            self.allValidatorView.alpha = 0
+            self.otherValidatorView.alpha = 1
         }
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        myValidatorView.alpha = 1
-        allValidatorView.alpha = 0
-        otherValidatorView.alpha = 0
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
-        mainTabVC = (self.parent)?.parent as? MainTabViewController
-        chainType = WUtils.getChainType(mainTabVC.mAccount.account_base_chain)
+        self.myValidatorView.alpha = 1
+        self.allValidatorView.alpha = 0
+        self.otherValidatorView.alpha = 0
         
         if #available(iOS 13.0, *) {
             validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
-            validatorSegment.selectedSegmentTintColor = WUtils.getChainDarkColor(chainType!)
+            validatorSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
-            validatorSegment.tintColor = WUtils.getChainColor(chainType)
+            validatorSegment.tintColor = chainConfig?.chainColor
         }
 
     }
@@ -58,9 +57,7 @@ class ValidatorListViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_validator_list", comment: "");
-        self.navigationItem.title = NSLocalizedString("title_validator_list", comment: "");
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_validator_list", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_validator_list", comment: "")
     }
 }

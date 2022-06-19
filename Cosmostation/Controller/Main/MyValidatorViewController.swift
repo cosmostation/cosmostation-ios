@@ -23,6 +23,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.myValidatorTableView.delegate = self
         self.myValidatorTableView.dataSource = self
@@ -94,31 +95,27 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (BaseData.instance.mMyValidators_gRPC.count < 1) {
-            let cell:PromotionCell? = tableView.dequeueReusableCell(withIdentifier:"PromotionCell") as? PromotionCell
+            let cell = tableView.dequeueReusableCell(withIdentifier:"PromotionCell") as? PromotionCell
             cell?.cardView.backgroundColor = WUtils.getChainBg(chainType)
             return cell!
             
         } else if (BaseData.instance.mMyValidators_gRPC.count == 1) {
-            let cell:MyValidatorCell? = tableView.dequeueReusableCell(withIdentifier:"MyValidatorCell") as? MyValidatorCell
-            cell?.updateView(BaseData.instance.mMyValidators_gRPC[indexPath.row], self.chainType)
+            let cell = tableView.dequeueReusableCell(withIdentifier:"MyValidatorCell") as? MyValidatorCell
+            cell?.updateView(BaseData.instance.mMyValidators_gRPC[indexPath.row], self.chainConfig)
             return cell!
             
         } else {
             if (indexPath.row == BaseData.instance.mMyValidators_gRPC.count) {
-                let cell:ClaimRewardAllCell? = tableView.dequeueReusableCell(withIdentifier:"ClaimRewardAllCell") as? ClaimRewardAllCell
+                let cell = tableView.dequeueReusableCell(withIdentifier:"ClaimRewardAllCell") as? ClaimRewardAllCell
                 cell?.updateView(self.chainType)
                 cell?.delegate = self
                 return cell!
             } else {
-                let cell:MyValidatorCell? = tableView.dequeueReusableCell(withIdentifier:"MyValidatorCell") as? MyValidatorCell
-                cell?.updateView(BaseData.instance.mMyValidators_gRPC[indexPath.row], self.chainType)
+                let cell = tableView.dequeueReusableCell(withIdentifier:"MyValidatorCell") as? MyValidatorCell
+                cell?.updateView(BaseData.instance.mMyValidators_gRPC[indexPath.row], self.chainConfig)
                 return cell!
             }
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

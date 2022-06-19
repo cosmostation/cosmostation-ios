@@ -23,6 +23,7 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
                 
         self.allValidatorTableView.delegate = self
         self.allValidatorTableView.dataSource = self
@@ -87,15 +88,11 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:AllValidatorCell? = tableView.dequeueReusableCell(withIdentifier:"AllValidatorCell") as? AllValidatorCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"AllValidatorCell") as? AllValidatorCell
         if (BaseData.instance.mBondedValidators_gRPC.count > 0) {
-            cell?.updateView(BaseData.instance.mBondedValidators_gRPC[indexPath.row], self.chainType)
+            cell?.updateView(BaseData.instance.mBondedValidators_gRPC[indexPath.row], self.chainConfig)
         }
         return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

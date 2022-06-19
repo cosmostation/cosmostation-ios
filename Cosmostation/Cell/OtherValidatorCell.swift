@@ -12,7 +12,6 @@ class OtherValidatorCell: UITableViewCell {
     
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var validatorImg: UIImageView!
-    @IBOutlet weak var freeEventImg: UIImageView!
     @IBOutlet weak var revokedImg: UIImageView!
     @IBOutlet weak var monikerLabel: UILabel!
     @IBOutlet weak var bandOracleOffImg: UIImageView!
@@ -32,10 +31,6 @@ class OtherValidatorCell: UITableViewCell {
         powerLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         commissionLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     
     override func prepareForReuse() {
         self.validatorImg.image = UIImage(named: "validatorNoneImg")
@@ -46,16 +41,17 @@ class OtherValidatorCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func updateView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainType: ChainType?) {
+    func updateView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainConfig: ChainConfig?) {
+        if (chainConfig == nil) { return }
+        let chainType = chainConfig!.chainType
         powerLabel.attributedText = WUtils.displayAmount2(validator.tokens, powerLabel.font!, WUtils.mainDivideDecimal(chainType), 6)
-        commissionLabel.attributedText = WUtils.getDpEstAprCommission(commissionLabel.font, NSDecimalNumber.one, chainType!)
+        commissionLabel.attributedText = WUtils.getDpEstAprCommission(commissionLabel.font, NSDecimalNumber.one, chainType)
         if let url = URL(string: WUtils.getMonikerImgUrl(chainType, validator.operatorAddress)) {
             validatorImg.af_setImage(withURL: url)
         }
         
         monikerLabel.text = validator.description_p.moniker
         monikerLabel.adjustsFontSizeToFitWidth = true
-        freeEventImg.isHidden = true
         if (validator.jailed == true) {
             revokedImg.isHidden = false
             validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
@@ -64,9 +60,9 @@ class OtherValidatorCell: UITableViewCell {
             validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
         }
         if BaseData.instance.mMyValidators_gRPC.first(where: {$0.operatorAddress == validator.operatorAddress}) != nil {
-            cardView.backgroundColor = WUtils.getChainBg(chainType)
+            cardView.backgroundColor = chainConfig?.chainColorBG
         } else {
-            cardView.backgroundColor = COLOR_BG_GRAY
+            cardView.backgroundColor = UIColor(named: "_card_bg")
         }
         
         //temp hide apr for no mint param chain

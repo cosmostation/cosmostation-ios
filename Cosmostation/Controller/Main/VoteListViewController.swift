@@ -14,19 +14,18 @@ import NIO
 
 class VoteListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var chainBg: UIImageView!
     @IBOutlet weak var voteTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
     var mProposals_Mintscan = Array<MintscanProposalDetail>()
-    var mainTabVC: MainTabViewController!
     var refresher: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mainTabVC = (self.parent)?.parent as? MainTabViewController
-        self.chainType = WUtils.getChainType(mainTabVC.mAccount.account_base_chain)
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.voteTableView.delegate = self
         self.voteTableView.dataSource = self
@@ -51,10 +50,8 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_vote_list", comment: "");
-        self.navigationItem.title = NSLocalizedString("title_vote_list", comment: "");
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_vote_list", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_vote_list", comment: "")
     }
     
     func onUpdateViews() {
@@ -114,7 +111,6 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func onFetchMintscanProposal() {
         let url = BaseNetWork.mintscanProposals(self.chainType!)
-        print("url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {

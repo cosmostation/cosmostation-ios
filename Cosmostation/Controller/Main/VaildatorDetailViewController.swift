@@ -14,7 +14,6 @@ import NIO
 
 class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var chainBg: UIImageView!
     @IBOutlet weak var validatorDetailTableView: UITableView!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
@@ -32,6 +31,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.validatorDetailTableView.delegate = self
         self.validatorDetailTableView.dataSource = self
@@ -63,8 +63,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_validator_detail", comment: "")
         self.navigationItem.title = NSLocalizedString("title_validator_detail", comment: "")
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     @objc func onFetch() {
@@ -127,8 +125,8 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     
     //grpc
     func onSetMyValidatorItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
-        let cell:ValidatorDetailMyDetailCell? = tableView.dequeueReusableCell(withIdentifier:"ValidatorDetailMyDetailCell") as? ValidatorDetailMyDetailCell
-        cell?.updateView(self.mValidator_gRPC, self.mSelfDelegationInfo_gRPC, self.chainType)
+        let cell = tableView.dequeueReusableCell(withIdentifier:"ValidatorDetailMyDetailCell") as? ValidatorDetailMyDetailCell
+        cell?.updateView(self.mValidator_gRPC, self.mSelfDelegationInfo_gRPC, self.chainConfig)
         cell?.actionTapUrl = {
             guard let url = URL(string: self.mValidator_gRPC?.description_p.website ?? "") else { return }
             if (UIApplication.shared.canOpenURL(url)) {
@@ -141,8 +139,8 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onSetOtherValidatorItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
-        let cell:ValidatorDetailCell? = tableView.dequeueReusableCell(withIdentifier:"ValidatorDetailCell") as? ValidatorDetailCell
-        cell?.updateView(self.mValidator_gRPC, self.mSelfDelegationInfo_gRPC, self.chainType)
+        let cell = tableView.dequeueReusableCell(withIdentifier:"ValidatorDetailCell") as? ValidatorDetailCell
+        cell?.updateView(self.mValidator_gRPC, self.mSelfDelegationInfo_gRPC, self.chainConfig)
         cell?.actionTapUrl = {
             guard let url = URL(string: self.mValidator_gRPC?.description_p.website ?? "") else { return }
             if (UIApplication.shared.canOpenURL(url)) {
@@ -163,8 +161,8 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onSetActionItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
-        let cell:ValidatorDetailMyActionCell? = tableView.dequeueReusableCell(withIdentifier:"ValidatorDetailMyActionCell") as? ValidatorDetailMyActionCell
-        cell?.updateView(self.mValidator_gRPC, self.chainType)
+        let cell = tableView.dequeueReusableCell(withIdentifier:"ValidatorDetailMyActionCell") as? ValidatorDetailMyActionCell
+        cell?.updateView(self.mValidator_gRPC, self.chainConfig)
         cell?.actionDelegate = {
             if (self.mValidator_gRPC?.jailed == true) {
                 self.onShowToast(NSLocalizedString("error_jailded_delegate", comment: ""))
