@@ -13,18 +13,27 @@ class ChainComdex: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.COMDEX_MAIN
     var chainImg = UIImage(named: "chainComdex")
-    var chainInfoImg = UIImage(named: "infoiconComdex")
+    var chainInfoImg = UIImage(named: "infoComdex")
     var chainInfoTitle = NSLocalizedString("send_guide_title_comdex", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_comdex", comment: "")
+    var chainColor = UIColor(named: "comdex")!
+    var chainColorBG = UIColor(named: "comdex_bg")!
+    var chainTitle = "(Comdex Mainnet)"
+    var chainTitle2 = "COMDEX"
+    var chainDBName = "SUPPORT_CHAIN_COMDEX"
+    var chainAPIName = "comdex"
     
     var stakeDenomImg = UIImage(named: "tokenComdex")
     var stakeDenom = "ucmdx"
     var stakeSymbol = "CMDX"
+    var stakeSendImg = UIImage(named: "btnSendComdex")!
+    var stakeSendBg = UIColor(named: "comdex")!
     
     var addressPrefix = "comdex"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-comdex-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-comdex-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainComdex: ChainConfig {
     var explorerUrl = MintscanUrl + "comdex/"
     var validatorImgUrl = MonikerUrl + "comdex/"
     var relayerImgUrl = RelayerUrl + "comdex/relay-comdex-unknown.png"
+    var priceUrl = CoingeckoUrl + "comdex"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainComdex: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://comdex.one/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://blog.comdex.one/"
     }
 }

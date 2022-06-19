@@ -12,20 +12,29 @@ import Foundation
 class ChainKava: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.KAVA_MAIN
-    var chainImg = UIImage(named: "kavaImg")
-    var chainInfoImg = UIImage(named: "kavamainImg")
+    var chainImg = UIImage(named: "chainKava")
+    var chainInfoImg = UIImage(named: "infoKava")
     var chainInfoTitle = NSLocalizedString("send_guide_title_kava", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_kava", comment: "")
+    var chainColor = UIColor(named: "kava")!
+    var chainColorBG = UIColor(named: "kava_bg")!
+    var chainTitle = "(Kava Mainnet)"
+    var chainTitle2 = "KAVA"
+    var chainDBName = "SUPPORT_CHAIN_KAVA_MAIN"
+    var chainAPIName = "kava"
     
-    var stakeDenomImg = UIImage(named: "kavaTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenKava")
     var stakeDenom = "ukava"
     var stakeSymbol = "KAVA"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "kava")!
     
     var addressPrefix = "kava"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     var addressaddressHdPath1 = "m/44'/459'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-kava-app.cosmostation.io"
@@ -33,6 +42,7 @@ class ChainKava: ChainConfig {
     var explorerUrl = MintscanUrl + "kava/"
     var validatorImgUrl = MonikerUrl + "kava/"
     var relayerImgUrl = RelayerUrl + "kava/relay-kava-unknown.png"
+    var priceUrl = CoingeckoUrl + "kava"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -46,7 +56,11 @@ class ChainKava: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://www.kava.io/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/kava-labs"
     }
 }

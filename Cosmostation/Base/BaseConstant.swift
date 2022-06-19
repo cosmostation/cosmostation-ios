@@ -1078,6 +1078,7 @@ let TRANS_BG_COLOR_STATION                  = UIColor.init(hexString: "05c3cd", 
 let TRANS_BG_COLOR_STATION2                 = UIColor.init(hexString: "05c3cd", alpha: 0.4)
 let COLOR_STATION                           = UIColor.init(hexString: "05c3cd")
 let COLOR_STATION_DARK                      = UIColor.init(hexString: "007d84")
+
 let TRANS_BG_COLOR_NYX                      = UIColor.init(hexString: "ff6c5a", alpha: 0.15)
 let TRANS_BG_COLOR_NYX2                     = UIColor.init(hexString: "ff6c5a", alpha: 0.4)
 let COLOR_NYX                               = UIColor.init(hexString: "ff6c5a")
@@ -1566,3 +1567,4 @@ let ICON_2002                   = "ICON_2002";
 let MintscanUrl = "https://www.mintscan.io/"
 let MonikerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/"
 let RelayerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/"
+let CoingeckoUrl = "https://www.coingecko.com/en/coins/"

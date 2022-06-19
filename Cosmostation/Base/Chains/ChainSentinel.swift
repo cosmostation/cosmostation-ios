@@ -12,19 +12,28 @@ import Foundation
 class ChainSentinel: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.SENTINEL_MAIN
-    var chainImg = UIImage(named: "chainsentinel")
-    var chainInfoImg = UIImage(named: "sentinelImg")
+    var chainImg = UIImage(named: "chainSentinel")
+    var chainInfoImg = UIImage(named: "infoSentinel")
     var chainInfoTitle = NSLocalizedString("send_guide_title_sentinel", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_sentinel", comment: "")
+    var chainColor = UIColor(named: "sentinel")!
+    var chainColorBG = UIColor(named: "sentinel_bg")!
+    var chainTitle = "(Sentinel Mainnet)"
+    var chainTitle2 = "SENTINEL"
+    var chainDBName = "SUPPORT_CHAIN_SENTINEL_MAIN"
+    var chainAPIName = "sentinel"
     
-    var stakeDenomImg = UIImage(named: "tokensentinel")
+    var stakeDenomImg = UIImage(named: "tokenSentinel")
     var stakeDenom = "udvpn"
     var stakeSymbol = "DVPN"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor.init(hexString: "142d51")
     
     var addressPrefix = "sent"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-sentinel-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-sentinel-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainSentinel: ChainConfig {
     var explorerUrl = MintscanUrl + "sentinel/"
     var validatorImgUrl = MonikerUrl + "sentinel/"
     var relayerImgUrl = RelayerUrl + "sentinel/relay-sentinel-unknown.png"
+    var priceUrl = CoingeckoUrl + "sentinel"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainSentinel: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://sentinel.co/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/sentinel"
     }
 }

@@ -24,6 +24,7 @@ class MainTabSettingViewController: BaseViewController {
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,24 +42,26 @@ class MainTabSettingViewController: BaseViewController {
     func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.titleChainImg.image = WUtils.getChainImg(chainType)
-        self.titleChainName.text = WUtils.getChainTitle(chainType)
-        self.titleChainName.textColor = WUtils.getChainColor(chainType!)
-        self.titleWalletName.text = WUtils.getWalletName(account)
-        self.titleAlarmBtn.isHidden = (chainType! == ChainType.COSMOS_MAIN) ? false : true
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        
+        self.titleChainImg.image = chainConfig?.chainImg
+        self.titleChainName.text = chainConfig?.chainTitle
+        self.titleChainName.textColor = chainConfig?.chainColor
+        self.titleWalletName.text = account?.getDpName()
+        self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 DispatchQueue.main.async {
                     if (self.account!.account_push_alarm) {
-                        self.titleAlarmBtn.setImage(UIImage(named: "notificationsIc"), for: .normal)
+                        self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOn"), for: .normal)
                     } else {
-                        self.titleAlarmBtn.setImage(UIImage(named: "notificationsIcOff"), for: .normal)
+                        self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOff"), for: .normal)
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.titleAlarmBtn.setImage(UIImage(named: "notificationsIcOff"), for: .normal)
+                    self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOff"), for: .normal)
                 }
             }
         }
@@ -75,7 +78,7 @@ class MainTabSettingViewController: BaseViewController {
     }
     
     @IBAction func onClickAlaram(_ sender: UIButton) {
-        if (sender.imageView?.image == UIImage(named: "notificationsIcOff")) {
+        if (sender.imageView?.image == UIImage(named: "btnAlramOff")) {
             UNUserNotificationCenter.current().getNotificationSettings { (settings) in
                 if settings.authorizationStatus == .authorized {
                     DispatchQueue.main.async {

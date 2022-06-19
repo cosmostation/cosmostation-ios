@@ -13,18 +13,27 @@ class ChainCrescent: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.CRESCENT_MAIN
     var chainImg = UIImage(named: "chainCrescent")
-    var chainInfoImg = UIImage(named: "infoiconCrescent")
+    var chainInfoImg = UIImage(named: "infoCrescent")
     var chainInfoTitle = NSLocalizedString("send_guide_title_crescent", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_crescent", comment: "")
+    var chainColor = UIColor(named: "crescent")!
+    var chainColorBG = UIColor(named: "crescent_bg")!
+    var chainTitle = "(Crescent Mainnet)"
+    var chainTitle2 = "CRESCENT"
+    var chainDBName = "SUPPORT_CHAIN_CRESENT"
+    var chainAPIName = "crescent"
     
     var stakeDenomImg = UIImage(named: "tokenCrescent")
     var stakeDenom = "ucre"
     var stakeSymbol = "CRE"
+    var stakeSendImg = UIImage(named: "btnSendCrescent")!
+    var stakeSendBg = UIColor.init(hexString: "452318")
     
     var addressPrefix = "cre"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = true
     var grpcUrl = "lcd-crescent-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-crescent-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainCrescent: ChainConfig {
     var explorerUrl = MintscanUrl + "crescent/"
     var validatorImgUrl = MonikerUrl + "crescent/"
     var relayerImgUrl = RelayerUrl + "crescent/relay-crescent-unknown.png"
+    var priceUrl = CoingeckoUrl + "crescent-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainCrescent: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://crescent.network/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://crescentnetwork.medium.com/"
     }
 }

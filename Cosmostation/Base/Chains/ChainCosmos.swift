@@ -12,19 +12,30 @@ import Foundation
 class ChainCosmos: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.COSMOS_MAIN
-    var chainImg = UIImage(named: "cosmosWhMain")
-    var chainInfoImg = UIImage(named: "guideImg")
+    var chainImg = UIImage(named: "chainCosmos")
+    var chainInfoImg = UIImage(named: "infoCosmos")
     var chainInfoTitle = NSLocalizedString("send_guide_title_cosmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_cosmos", comment: "")
+    var chainColor = UIColor(named: "cosmos")!
+    var chainColorBG = UIColor(named: "cosmos_bg")!
     
-    var stakeDenomImg = UIImage(named: "atom_ic")
+    var chainTitle = "(Cosmos Mainnet)"
+    var chainTitle2 = "COSMOS"
+    var chainDBName = "SUPPORT_CHAIN_COSMOS_MAIN"
+    var chainAPIName = "cosmos"
+    
+    
+    var stakeDenomImg = UIImage(named: "tokenCosmos")
     var stakeDenom = "uatom"
-    var stakeSymbol = "Atom"
+    var stakeSymbol = "ATOM"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "cosmos")!
     
     var addressPrefix = "cosmos"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = true
+    var wcSupoort = false
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-cosmos-app.cosmostation.io"
@@ -32,6 +43,7 @@ class ChainCosmos: ChainConfig {
     var explorerUrl = MintscanUrl + "cosmos/"
     var validatorImgUrl = MonikerUrl + "cosmoshub/"
     var relayerImgUrl = RelayerUrl + "cosmos/relay-cosmos-unknown.png"
+    var priceUrl = CoingeckoUrl + "cosmos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,5 +57,11 @@ class ChainCosmos: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
+    func getInfoLink1() -> String {
+        return "https://cosmos.network/"
+    }
 
+    func getInfoLink2() -> String {
+        return "https://blog.cosmos.network/"
+    }
 }

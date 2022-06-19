@@ -292,7 +292,7 @@ extension WUtils {
             label.textColor = COLOR_SWP
             
         } else {
-            label.textColor = .white
+            label.textColor = UIColor(named: "_font05")
         }
     }
     

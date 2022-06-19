@@ -13,18 +13,27 @@ class ChainProvenance: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.PROVENANCE_MAIN
     var chainImg = UIImage(named: "chainProvenance")
-    var chainInfoImg = UIImage(named: "infoiconProvenance")
+    var chainInfoImg = UIImage(named: "infoProvenance")
     var chainInfoTitle = NSLocalizedString("send_guide_title_provenance", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_provenance", comment: "")
+    var chainColor = UIColor(named: "provenance")!
+    var chainColorBG = UIColor(named: "provenance_bg")!
+    var chainTitle = "(Provenance Mainnet)"
+    var chainTitle2 = "PROVENANCE"
+    var chainDBName = "SUPPORT_CHAIN_PROVENANCE"
+    var chainAPIName = "provenance"
     
-    var stakeDenomImg = UIImage(named: "tokenHash")
+    var stakeDenomImg = UIImage(named: "tokenProvenance")
     var stakeDenom = "nhash"
     var stakeSymbol = "HASH"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "provenance")!
     
     var addressPrefix = "pb"
     let addressHdPath0 = "m/44'/505'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-provenance-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-provenance-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainProvenance: ChainConfig {
     var explorerUrl = MintscanUrl + "provenance/"
     var validatorImgUrl = MonikerUrl + "provenance/"
     var relayerImgUrl = RelayerUrl + "provenance/relay-provenance-unknown.png"
+    var priceUrl = CoingeckoUrl + "provenance-blockchain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainProvenance: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://www.provenance.io/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://www.provenance.io/blog"
     }
 }

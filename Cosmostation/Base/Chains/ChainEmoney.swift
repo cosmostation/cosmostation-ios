@@ -13,18 +13,27 @@ class ChainEmoney: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.EMONEY_MAIN
     var chainImg = UIImage(named: "chainEmoney")
-    var chainInfoImg = UIImage(named: "infoiconEmoney")
+    var chainInfoImg = UIImage(named: "infoEmoney")
     var chainInfoTitle = NSLocalizedString("send_guide_title_emoney", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_emoney", comment: "")
+    var chainColor = UIColor(named: "emoney")!
+    var chainColorBG = UIColor(named: "emoney_bg")!
+    var chainTitle = "(E-Money Mainnet)"
+    var chainTitle2 = "E-MONEY"
+    var chainDBName = "SUPPORT_CHAIN_EMONEY"
+    var chainAPIName = "emoney"
     
     var stakeDenomImg = UIImage(named: "tokenEmoney")
     var stakeDenom = "ungm"
     var stakeSymbol = "NGM"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "emoney")!
     
     var addressPrefix = "emoney"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-emoney-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-emoney-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainEmoney: ChainConfig {
     var explorerUrl = MintscanUrl + "emoney/"
     var validatorImgUrl = MonikerUrl + "emoney/"
     var relayerImgUrl = RelayerUrl + "emoney/relay-emoney-unknown.png"
+    var priceUrl = CoingeckoUrl + "e-money"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainEmoney: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://e-money.com/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/e-money-com"
     }
 }

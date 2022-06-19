@@ -13,18 +13,27 @@ class ChainAssetMantle: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.MANTLE_MAIN
     var chainImg = UIImage(named: "chainAssetmantle")
-    var chainInfoImg = UIImage(named: "infoiconAssetmantle")
+    var chainInfoImg = UIImage(named: "infoAssetmantle")
     var chainInfoTitle = NSLocalizedString("send_guide_title_mantle", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_mantle", comment: "")
+    var chainColor = UIColor(named: "assetmantle")!
+    var chainColorBG = UIColor(named: "assetmantle_bg")!
+    var chainTitle = "(Asset-Mantle Mainnet)"
+    var chainTitle2 = "ASSET-MANTLE"
+    var chainDBName = "SUPPORT_CHAIN_MANTLE"
+    var chainAPIName = "asset-mantle"
     
     var stakeDenomImg = UIImage(named: "tokenAssetmantle")
     var stakeDenom = "umntl"
     var stakeSymbol = "MNTL"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "assetmantle")!
     
     var addressPrefix = "mantle"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-asset-mantle-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-asset-mantle-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainAssetMantle: ChainConfig {
     var explorerUrl = MintscanUrl + "asset-mantle/"
     var validatorImgUrl = MonikerUrl + "asset-mantle/"
     var relayerImgUrl = RelayerUrl + "asset-mantle/relay-assetmantle-unknown.png"
+    var priceUrl = CoingeckoUrl + "assetmantle"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainAssetMantle: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://assetmantle.one/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://blog.assetmantle.one/"
     }
 }

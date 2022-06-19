@@ -13,18 +13,27 @@ class ChainInjective: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.INJECTIVE_MAIN
     var chainImg = UIImage(named: "chainInjective")
-    var chainInfoImg = UIImage(named: "infoiconInjective")
+    var chainInfoImg = UIImage(named: "infoInjective")
     var chainInfoTitle = NSLocalizedString("send_guide_title_injective", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_injective", comment: "")
+    var chainColor = UIColor(named: "injective")!
+    var chainColorBG = UIColor(named: "injective_bg")!
+    var chainTitle = "(Injective Mainnet)"
+    var chainTitle2 = "INJECTIVE"
+    var chainDBName = "SUPPORT_CHAIN_INJECTIVE"
+    var chainAPIName = "injective"
     
     var stakeDenomImg = UIImage(named: "tokenInjective")
     var stakeDenom = "inj"
     var stakeSymbol = "INJ"
+    var stakeSendImg = UIImage(named: "btnSendAlthea")!
+    var stakeSendBg = UIColor(named: "injective")!
     
     var addressPrefix = "inj"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-inj-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-inj-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainInjective: ChainConfig {
     var explorerUrl = MintscanUrl + "injective/"
     var validatorImgUrl = MonikerUrl + "injective/"
     var relayerImgUrl = RelayerUrl + "injective/relay-injective-unknown.png"
+    var priceUrl = CoingeckoUrl + "injective-protocol"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainInjective: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://injectiveprotocol.com/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://blog.injectiveprotocol.com/"
     }
 }

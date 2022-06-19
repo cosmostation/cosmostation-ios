@@ -12,19 +12,28 @@ import Foundation
 class ChainAkash: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.AKASH_MAIN
-    var chainImg = UIImage(named: "akashChainImg")
-    var chainInfoImg = UIImage(named: "akashImg")
+    var chainImg = UIImage(named: "chainAkash")
+    var chainInfoImg = UIImage(named: "infoAkash")
     var chainInfoTitle = NSLocalizedString("send_guide_title_akash", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_akash", comment: "")
+    var chainColor = UIColor(named: "akash")!
+    var chainColorBG = UIColor(named: "akash_bg")!
+    var chainTitle = "(Akash Mainnet)"
+    var chainTitle2 = "AKASH"
+    var chainDBName = "SUPPORT_CHAIN_AKASH_MAIN"
+    var chainAPIName = "akash"
     
-    var stakeDenomImg = UIImage(named: "akashTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenAkash")
     var stakeDenom = "uakt"
     var stakeSymbol = "AKT"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "akash")!
     
     var addressPrefix = "akash"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-akash-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-akash-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainAkash: ChainConfig {
     var explorerUrl = MintscanUrl + "akash/"
     var validatorImgUrl = MonikerUrl + "akash/"
     var relayerImgUrl = RelayerUrl + "akash/relay-akash-unknown.png"
+    var priceUrl = CoingeckoUrl + "akash-network"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainAkash: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://akash.network/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://akash.network/blog/"
     }
 }

@@ -12,19 +12,28 @@ import Foundation
 class ChainNyx: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.NYX_MAIN
-    var chainImg = UIImage(named: "chainNym")
-    var chainInfoImg = UIImage(named: "infoiconNym")
+    var chainImg = UIImage(named: "chainNyx")
+    var chainInfoImg = UIImage(named: "infoNyx")
     var chainInfoTitle = NSLocalizedString("send_guide_title_nyx", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_nyx", comment: "")
+    var chainColor = UIColor(named: "nyx")!
+    var chainColorBG = UIColor(named: "nyx_bg")!
+    var chainTitle = "(Nyx Mainnet)"
+    var chainTitle2 = "NYX"
+    var chainDBName = "SUPPORT_CHAIN_NYX"
+    var chainAPIName = "nyx"
     
     var stakeDenomImg = UIImage(named: "tokenNyx")
     var stakeDenom = "unyx"
     var stakeSymbol = "NYX"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "nyx")!
     
     var addressPrefix = "n"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-nym-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-nym-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainNyx: ChainConfig {
     var explorerUrl = MintscanUrl + "nyx/"
     var validatorImgUrl = MonikerUrl + "nyx/"
     var relayerImgUrl = RelayerUrl + "nyx/relay-nyx-unknown.png"
+    var priceUrl = ""
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainNyx: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://nymtech.net/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://nymtech.net/blog/"
     }
 }

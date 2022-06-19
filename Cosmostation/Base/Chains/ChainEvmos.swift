@@ -13,18 +13,27 @@ class ChainEvmos: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.EVMOS_MAIN
     var chainImg = UIImage(named: "chainEvmos")
-    var chainInfoImg = UIImage(named: "infoiconEvmos")
+    var chainInfoImg = UIImage(named: "infoEvmos")
     var chainInfoTitle = NSLocalizedString("send_guide_title_evmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_evmos", comment: "")
+    var chainColor = UIColor(named: "evmos")!
+    var chainColorBG = UIColor(named: "evmos_bg")!
+    var chainTitle = "(Evmos Mainnet)"
+    var chainTitle2 = "EVMOS"
+    var chainDBName = "SUPPORT_CHAIN_EVMOS"
+    var chainAPIName = "evmos"
     
     var stakeDenomImg = UIImage(named: "tokenEvmos")
     var stakeDenom = "aevmos"
     var stakeSymbol = "EVMOS"
+    var stakeSendImg = UIImage(named: "btnSendEvmos")!
+    var stakeSendBg = UIColor.black
     
     var addressPrefix = "evmos"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = true
     var grpcUrl = "lcd-evmos-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-evmos-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainEvmos: ChainConfig {
     var explorerUrl = MintscanUrl + "evmos/"
     var validatorImgUrl = MonikerUrl + "evmos/"
     var relayerImgUrl = RelayerUrl + "evmos/relay-evmos-unknown.png"
+    var priceUrl = CoingeckoUrl + "evmos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainEvmos: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://evmos.org/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://evmos.blog/"
     }
 }

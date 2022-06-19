@@ -36,13 +36,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         self.delegate = self
         self.selectedIndex = BaseData.instance.getLastTab()
         
-        if #available(iOS 15.0, *) {
-            let appearance = UITabBarAppearance()
-            appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = UIColor.init(hexString: "232526")
-            tabBar.standardAppearance = appearance
-            tabBar.scrollEdgeAppearance = tabBar.standardAppearance
-        }
+        let lineView = UIView(frame: CGRect(x: 0, y: 0, width: tabBar.frame.size.width, height: 1))
+        lineView.backgroundColor = UIColor(named: "_card_divider")!
+        tabBar.addSubview(lineView)
     }
     
     override func viewDidAppear(_ animated: Bool) {

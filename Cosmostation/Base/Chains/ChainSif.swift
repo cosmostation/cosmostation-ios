@@ -12,19 +12,28 @@ import Foundation
 class ChainSif: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.SIF_MAIN
-    var chainImg = UIImage(named: "chainsifchain")
-    var chainInfoImg = UIImage(named: "sifchainImg")
+    var chainImg = UIImage(named: "chainSif")
+    var chainInfoImg = UIImage(named: "infoSif")
     var chainInfoTitle = NSLocalizedString("send_guide_title_sif", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_sif", comment: "")
+    var chainColor = UIColor(named: "sif")!
+    var chainColorBG = UIColor(named: "sif_bg")!
+    var chainTitle = "(SifChain Mainnet)"
+    var chainTitle2 = "SIF"
+    var chainDBName = "SUPPORT_CHAIN_SIF_MAIN"
+    var chainAPIName = "sifchain"
     
-    var stakeDenomImg = UIImage(named: "tokensifchain")
+    var stakeDenomImg = UIImage(named: "tokenSif")
     var stakeDenom = "rowan"
     var stakeSymbol = "ROWAN"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "sif")!
     
     var addressPrefix = "sif"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-sifchain-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-sifchain-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainSif: ChainConfig {
     var explorerUrl = MintscanUrl + "sifchain/"
     var validatorImgUrl = MonikerUrl + "sif/"
     var relayerImgUrl = RelayerUrl + "sifchain/relay-sifchain-unknown.png"
+    var priceUrl = CoingeckoUrl + "sifchain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainSif: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://sifchain.finance/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/sifchain-finance"
     }
 }

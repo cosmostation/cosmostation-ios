@@ -12,19 +12,28 @@ import Foundation
 class ChainIris: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.IRIS_MAIN
-    var chainImg = UIImage(named: "irisWh")
-    var chainInfoImg = UIImage(named: "irisnetImg")
+    var chainImg = UIImage(named: "chainIris")
+    var chainInfoImg = UIImage(named: "infoIris")
     var chainInfoTitle = NSLocalizedString("send_guide_title_iris", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_iris", comment: "")
+    var chainColor = UIColor(named: "iris")!
+    var chainColorBG = UIColor(named: "iris_bg")!
+    var chainTitle = "(Iris Mainnet)"
+    var chainTitle2 = "IRIS"
+    var chainDBName = "SUPPORT_CHAIN_IRIS_MAIN"
+    var chainAPIName = "iris"
     
-    var stakeDenomImg = UIImage(named: "irisTokenImg")
+    var stakeDenomImg = UIImage(named: "tokenIris")
     var stakeDenom = "uiris"
-    var stakeSymbol = "Iris"
+    var stakeSymbol = "IRIS"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "iris")!
     
     var addressPrefix = "iaa"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-iris-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-iris-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainIris: ChainConfig {
     var explorerUrl = MintscanUrl + "iris/"
     var validatorImgUrl = MonikerUrl + "irishub/"
     var relayerImgUrl = RelayerUrl + "iris/relay-iris-unknown.png"
+    var priceUrl = CoingeckoUrl + "irisnet"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainIris: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://www.irisnet.org"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/irisnet-blog"
     }
 }

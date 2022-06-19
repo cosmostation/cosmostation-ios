@@ -17,8 +17,8 @@ class WalletInflationCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        infaltionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
-        yieldLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        infaltionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
+        yieldLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
         
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapApr))
@@ -32,13 +32,14 @@ class WalletInflationCell: UITableViewCell {
         actionTapApr?()
     }
     
-    func updateView(_ account: Account?, _ chainType: ChainType?) {
+    func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
+        if (account == nil || chainConfig == nil) { return }
+        let chainType = chainConfig!.chainType
         guard let param = BaseData.instance.mParam else {
             return
         }
         infaltionLabel.attributedText = WUtils.displayPercent(param.getDpInflation(chainType), infaltionLabel.font)
         yieldLabel.attributedText = WUtils.displayPercent(param.getDpApr(chainType), yieldLabel.font)
-
     }
     
 }

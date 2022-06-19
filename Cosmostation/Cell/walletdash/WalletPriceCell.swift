@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class WalletPriceCell: UITableViewCell {
     
@@ -24,7 +25,7 @@ class WalletPriceCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        perPrice.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        perPrice.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
         updownPercent.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_11_caption2)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapPrice))
@@ -50,7 +51,10 @@ class WalletPriceCell: UITableViewCell {
         buyBtn.isHidden = true
     }
     
-    func updateView(_ account: Account?, _ chainType: ChainType?) {
+    func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
+        if (account == nil || chainConfig == nil) { return }
+        let chainType = chainConfig!.chainType
+        
         sourceSite.text = "(CoinGecko)"
         perPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainType), perPrice.font)
         updownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainType), font: updownPercent.font)

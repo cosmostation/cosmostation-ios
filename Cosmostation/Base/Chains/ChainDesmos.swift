@@ -13,18 +13,27 @@ class ChainDesmos: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.DESMOS_MAIN
     var chainImg = UIImage(named: "chainDesmos")
-    var chainInfoImg = UIImage(named: "infoiconDesmos")
+    var chainInfoImg = UIImage(named: "infoDesmos")
     var chainInfoTitle = NSLocalizedString("send_guide_title_desmos", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_desmos", comment: "")
+    var chainColor = UIColor(named: "desmos")!
+    var chainColorBG = UIColor(named: "desmos_bg")!
+    var chainTitle = "(Desmos Mainnet)"
+    var chainTitle2 = "DESMOS"
+    var chainDBName = "SUPPORT_CHAIN_DESMOS"
+    var chainAPIName = "desmos"
     
     var stakeDenomImg = UIImage(named: "tokenDesmos")
     var stakeDenom = "udsm"
     var stakeSymbol = "DSM"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "desmos")!
     
     var addressPrefix = "desmos"
     let addressHdPath0 = "m/44'/852'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-desmos-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-desmos-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainDesmos: ChainConfig {
     var explorerUrl = MintscanUrl + "desmos/"
     var validatorImgUrl = MonikerUrl + "desmos/"
     var relayerImgUrl = RelayerUrl + "desmos/relay-desmos-unknown.png"
+    var priceUrl = CoingeckoUrl + "desmos"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainDesmos: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://www.desmos.network/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/desmosnetwork"
     }
 }

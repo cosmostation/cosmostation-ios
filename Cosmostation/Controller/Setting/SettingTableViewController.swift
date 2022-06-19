@@ -43,15 +43,15 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.explorerLabel.text = NSLocalizedString("mintscan_explorer", comment: "")
-        
+
         let laContext = LAContext()
         let biometricsPolicy = LAPolicy.deviceOwnerAuthenticationWithBiometrics
         var error: NSError?
-        
+
         appLockSwitch.setOn(BaseData.instance.getUsingAppLock(), animated: false)
         bioSwitch.setOn(BaseData.instance.getUsingBioAuth(), animated: false)
         enginerModeSwitch.setOn(BaseData.instance.getUsingEnginerMode(), animated: false)
-        
+
         if (laContext.canEvaluatePolicy(biometricsPolicy, error: &error)) {
             if error != nil { return }
             if #available(iOS 11.0, *) {
@@ -71,7 +71,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let headerView = view as? UITableViewHeaderFooterView {
-            headerView.textLabel?.textColor = UIColor.init(hexString: "7a7f88")
+            headerView.textLabel?.textColor = UIColor(named: "_font04")
         }
     }
     

@@ -12,19 +12,28 @@ import Foundation
 class ChainKi: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.KI_MAIN
-    var chainImg = UIImage(named: "chainKifoundation")
-    var chainInfoImg = UIImage(named: "kifoundationImg")
+    var chainImg = UIImage(named: "chainKi")
+    var chainInfoImg = UIImage(named: "infoKi")
     var chainInfoTitle = NSLocalizedString("send_guide_title_ki", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_ki", comment: "")
+    var chainColor = UIColor(named: "ki")!
+    var chainColorBG = UIColor(named: "ki_bg")!
+    var chainTitle = "(KiChain Mainnet)"
+    var chainTitle2 = "KI"
+    var chainDBName = "SUPPORT_CHAIN_KI_MAIN"
+    var chainAPIName = "kichain"
     
-    var stakeDenomImg = UIImage(named: "tokenKifoundation")
+    var stakeDenomImg = UIImage(named: "tokenKi")
     var stakeDenom = "uxki"
     var stakeSymbol = "XKI"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "ki")!
     
     var addressPrefix = "ki"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-kichain-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-kichain-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainKi: ChainConfig {
     var explorerUrl = MintscanUrl + "ki-chain/"
     var validatorImgUrl = MonikerUrl + "ki/"
     var relayerImgUrl = RelayerUrl + "ki/relay-kichain-unknown.png"
+    var priceUrl = CoingeckoUrl + "ki"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainKi: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://foundation.ki/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/ki-foundation"
     }
 }

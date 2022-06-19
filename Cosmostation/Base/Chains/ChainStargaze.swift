@@ -13,18 +13,27 @@ class ChainStargaze: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.STARGAZE_MAIN
     var chainImg = UIImage(named: "chainStargaze")
-    var chainInfoImg = UIImage(named: "infoiconStargaze")
+    var chainInfoImg = UIImage(named: "infoStargaze")
     var chainInfoTitle = NSLocalizedString("send_guide_title_stargaze", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_stargaze", comment: "")
+    var chainColor = UIColor(named: "stargaze")!
+    var chainColorBG = UIColor(named: "stargaze_bg")!
+    var chainTitle = "(Stargaze Mainnet)"
+    var chainTitle2 = "STARGAZE"
+    var chainDBName = "SUPPORT_CHAIN_STARGAZE"
+    var chainAPIName = "stargaze"
     
     var stakeDenomImg = UIImage(named: "tokenStargaze")
     var stakeDenom = "ustars"
     var stakeSymbol = "STARS"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "stargaze")!
     
     var addressPrefix = "stars"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-stargaze-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-stargaze-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainStargaze: ChainConfig {
     var explorerUrl = MintscanUrl + "stargaze/"
     var validatorImgUrl = MonikerUrl + "stargaze/"
     var relayerImgUrl = RelayerUrl + "stargaze/relay-stargaze-unknown.png"
+    var priceUrl = CoingeckoUrl + "stargaze"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainStargaze: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://stargaze.zone/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://mirror.xyz/stargazezone.eth"
     }
 }

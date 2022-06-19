@@ -13,18 +13,27 @@ class ChainRegen: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.REGEN_MAIN
     var chainImg = UIImage(named: "chainRegen")
-    var chainInfoImg = UIImage(named: "infoiconRegen")
+    var chainInfoImg = UIImage(named: "infoRegen")
     var chainInfoTitle = NSLocalizedString("send_guide_title_regen", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_regen", comment: "")
+    var chainColor = UIColor(named: "regen")!
+    var chainColorBG = UIColor(named: "regen_bg")!
+    var chainTitle = "(Regen Mainnet)"
+    var chainTitle2 = "REGEN"
+    var chainDBName = "SUPPORT_CHAIN_REGEN"
+    var chainAPIName = "regen"
     
     var stakeDenomImg = UIImage(named: "tokenRegen")
     var stakeDenom = "uregen"
     var stakeSymbol = "REGEN"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "regen")!
     
     var addressPrefix = "regen"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-regen-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-regen-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainRegen: ChainConfig {
     var explorerUrl = MintscanUrl + "regen/"
     var validatorImgUrl = MonikerUrl + "regen/"
     var relayerImgUrl = RelayerUrl + "regen/relay-regen-unknown.png"
+    var priceUrl = CoingeckoUrl + "regen"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainRegen: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://www.regen.network/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/regen-network"
     }
 }

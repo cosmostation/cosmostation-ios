@@ -12,19 +12,28 @@ import Foundation
 class ChainPersistence: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.PERSIS_MAIN
-    var chainImg = UIImage(named: "chainpersistence")
-    var chainInfoImg = UIImage(named: "persistenceImg")
+    var chainImg = UIImage(named: "chainPersistence")
+    var chainInfoImg = UIImage(named: "infoPersistence")
     var chainInfoTitle = NSLocalizedString("send_guide_title_persis", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_persis", comment: "")
+    var chainColor = UIColor(named: "persistence")!
+    var chainColorBG = UIColor(named: "persistence_bg")!
+    var chainTitle = "(Persistence Mainnet)"
+    var chainTitle2 = "PERSISTENCE"
+    var chainDBName = "SUPPORT_CHAIN_PERSISTENCE_MAIN"
+    var chainAPIName = "persistence"
     
-    var stakeDenomImg = UIImage(named: "tokenpersistence")
+    var stakeDenomImg = UIImage(named: "tokenPersistence")
     var stakeDenom = "uxprt"
     var stakeSymbol = "XPRT"
+    var stakeSendImg = UIImage(named: "btnSendPersistence")!
+    var stakeSendBg = UIColor.black
     
     var addressPrefix = "persistence"
     let addressHdPath0 = "m/44'/750'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-persistence-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-persistence-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainPersistence: ChainConfig {
     var explorerUrl = MintscanUrl + "persistence/"
     var validatorImgUrl = MonikerUrl + "persistence/"
     var relayerImgUrl = RelayerUrl + "persistence/relay-persistence-unknown.png"
+    var priceUrl = CoingeckoUrl + "persistence"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainPersistence: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://persistence.one/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://medium.com/persistence-blog"
     }
 }

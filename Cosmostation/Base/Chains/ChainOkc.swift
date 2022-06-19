@@ -12,20 +12,29 @@ import Foundation
 class ChainOkc: ChainConfig {
     var isGrpc = false
     var chainType = ChainType.OKEX_MAIN
-    var chainImg = UIImage(named: "chainOkex")
-    var chainInfoImg = UIImage(named: "infoiconOkx")
+    var chainImg = UIImage(named: "chainOkc")
+    var chainInfoImg = UIImage(named: "infoOkc")
     var chainInfoTitle = NSLocalizedString("send_guide_title_ok", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_ok", comment: "")
+    var chainColor = UIColor(named: "okc")!
+    var chainColorBG = UIColor(named: "okc_bg")!
+    var chainTitle = "(OKC Mainnet)"
+    var chainTitle2 = "OKC"
+    var chainDBName = "SUPPORT_CHAIN_OKEX_MAIN"
+    var chainAPIName = ""
     
-    var stakeDenomImg = UIImage(named: "tokenOkx")
+    var stakeDenomImg = UIImage(named: "tokenOkc")
     var stakeDenom = "okt"
     var stakeSymbol = "OKT"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "okc")!
     
     var addressPrefix = "ex"
     let addressHdPath0 = "m/44'/996'/0'/0/X"
     let addressHdPath1 = "m/44'/60'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = ""
     var grpcPort = ""
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
@@ -33,6 +42,7 @@ class ChainOkc: ChainConfig {
     var explorerUrl = "https://www.oklink.com/okexchain/"
     var validatorImgUrl = MonikerUrl + "okex/"
     var relayerImgUrl = ""
+    var priceUrl = CoingeckoUrl + "okc-token"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -46,7 +56,11 @@ class ChainOkc: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://www.okx.com"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://www.okx.com/academy/en/"
     }
 }

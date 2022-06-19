@@ -13,18 +13,27 @@ class ChainChihuahua: ChainConfig {
     var isGrpc = true
     var chainType = ChainType.CHIHUAHUA_MAIN
     var chainImg = UIImage(named: "chainChihuahua")
-    var chainInfoImg = UIImage(named: "infoiconChihuahua")
+    var chainInfoImg = UIImage(named: "infoChihuahua")
     var chainInfoTitle = NSLocalizedString("send_guide_title_chihuahua", comment: "")
     var chainInfoMsg = NSLocalizedString("send_guide_msg_chihuahua", comment: "")
+    var chainColor = UIColor(named: "chihuahua")!
+    var chainColorBG = UIColor(named: "chihuahua_bg")!
+    var chainTitle = "(Chihuahua Mainnet)"
+    var chainTitle2 = "CHIHUAHUA"
+    var chainDBName = "SUPPORT_CHAIN_CHIHUAHUA"
+    var chainAPIName = "chihuahua"
     
-    var stakeDenomImg = UIImage(named: "tokenHuahua")
+    var stakeDenomImg = UIImage(named: "tokenChihuahua")
     var stakeDenom = "uhuahua"
     var stakeSymbol = "HUAHUA"
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "chihuahua")!
     
     var addressPrefix = "chihuahua"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     var pushSupport = false
+    var wcSupoort = false
     var grpcUrl = "lcd-chihuahua-app.cosmostation.io"
     var grpcPort = "9090"
     var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io"
@@ -32,6 +41,7 @@ class ChainChihuahua: ChainConfig {
     var explorerUrl = MintscanUrl + "chihuahua/"
     var validatorImgUrl = MonikerUrl + "chihuahua/"
     var relayerImgUrl = RelayerUrl + "chihuahua/relay-chihuahua-unknown.png"
+    var priceUrl = CoingeckoUrl + "chihuahua-chain"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
@@ -45,7 +55,11 @@ class ChainChihuahua: ChainConfig {
         supportHdPaths()[type].replacingOccurrences(of: "X", with: String(path))
     }
     
-    func getDpAddress(_ words: MWords, _ type: Int, _ path: Int) -> String {
-        return ""
+    func getInfoLink1() -> String {
+        return "https://chi.huahua.wtf/"
+    }
+
+    func getInfoLink2() -> String {
+        return "https://chi.huahua.wtf/"
     }
 }
