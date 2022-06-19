@@ -58,14 +58,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
         self.walletTableView.register(UINib(nibName: "WalletGuideCell", bundle: nil), forCellReuseIdentifier: "WalletGuideCell")
-        
         self.walletTableView.rowHeight = UITableView.automaticDimension
         self.walletTableView.estimatedRowHeight = UITableView.automaticDimension
         
-        refresher = UIRefreshControl()
-        refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        refresher.tintColor = UIColor.white
-        walletTableView.addSubview(refresher)
+        self.refresher = UIRefreshControl()
+        self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
+        self.refresher.tintColor = UIColor.white
+        self.walletTableView.addSubview(refresher)
         
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.totalCard.addGestureRecognizer(tapTotalCard)
@@ -155,38 +154,36 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == ChainType.KAVA_MAIN || chainType == ChainType.DESMOS_MAIN) {
+        if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN) {
             return 5;
-        } else if (chainType == ChainType.BINANCE_MAIN) {
-            return 3;
-        } else if (chainType == ChainType.OKEX_MAIN) {
+        } else if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
             return 3;
         }
         return 4;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (chainType == ChainType.IRIS_MAIN) {
+        if (chainType == .IRIS_MAIN) {
             return onSetIrisItem(tableView, indexPath);
-        } else if (chainType == ChainType.KAVA_MAIN) {
+        } else if (chainType == .KAVA_MAIN) {
             return onSetKavaItem(tableView, indexPath);
-        } else if (chainType == ChainType.BINANCE_MAIN) {
+        } else if (chainType == .BINANCE_MAIN) {
             return onSetBnbItem(tableView, indexPath);
-        } else if (chainType == ChainType.OKEX_MAIN) {
+        } else if (chainType == .OKEX_MAIN) {
             return onSetOKexItems(tableView, indexPath);
-        } else if (chainType == ChainType.IOV_MAIN) {
+        } else if (chainType == .IOV_MAIN) {
             return onSetIovItems(tableView, indexPath);
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
+        } else if (chainType == .CRYPTO_MAIN) {
             return onSetCrytoItems(tableView, indexPath);
-        } else if (chainType == ChainType.SIF_MAIN) {
+        } else if (chainType == .SIF_MAIN) {
             return onSetSifItems(tableView, indexPath);
-        } else if (chainType == ChainType.OSMOSIS_MAIN) {
+        } else if (chainType == .OSMOSIS_MAIN) {
             return onSetOsmoItems(tableView, indexPath);
-        } else if (chainType == ChainType.DESMOS_MAIN) {
+        } else if (chainType == .DESMOS_MAIN) {
             return onSetDesmosItems(tableView, indexPath);
-        } else if (chainType == ChainType.CRESCENT_MAIN) {
+        } else if (chainType == .CRESCENT_MAIN) {
             return onSetCrescentItems(tableView, indexPath);
-        } else if (chainType == ChainType.STATION_TEST) {
+        } else if (chainType == .STATION_TEST) {
             return onSetStationItems(tableView, indexPath);
         }
         
@@ -195,33 +192,23 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
-    }
-    
     func onSetBaseChainItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletBaseChainCell") as? WalletBaseChainCell
+            cell?.updateView(account, chainConfig)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionWC = { self.onClickWalletConect() }
             return cell!
+            
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            cell?.actionBuy = { self.onClickBuyCoin() }
-            return cell!
+            return onBindPriceCell(tableView)
             
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
     }
     
@@ -235,25 +222,14 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            return cell!
+            return onBindPriceCell(tableView)
             
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
-        
     }
     
     func onSetBnbItem(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
@@ -265,20 +241,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            cell?.actionBuy = { self.onClickBuyCoin() }
-            return cell!
+            return onBindPriceCell(tableView)
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
-        
     }
     
     func onSetKavaItem(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
@@ -298,24 +265,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            cell?.actionBuy = { self.onClickBuyCoin() }
-            return cell!
+            return onBindPriceCell(tableView)
             
         } else if (indexPath.row == 3) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
     }
     
@@ -329,24 +285,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            cell?.actionBuy = { self.onClickBuyCoin() }
-            return cell!
+            return onBindPriceCell(tableView)
             
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
     }
     
@@ -361,18 +306,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            cell?.actionBuy = { self.onClickBuyCoin() }
-            return cell!
+            return onBindPriceCell(tableView)
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
     }
     
@@ -386,24 +323,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            cell?.actionBuy = { self.onClickBuyCoin() }
-            return cell!
+            return onBindPriceCell(tableView)
             
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
     }
     
@@ -417,24 +343,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            cell?.actionBuy = { self.onClickBuyCoin() }
-            return cell!
+            return onBindPriceCell(tableView)
             
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
     }
     
@@ -449,25 +364,14 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
 
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            return cell!
+            return onBindPriceCell(tableView)
 
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
 
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
-        
     }
     
     func onSetDesmosItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
@@ -480,16 +384,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
 
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            return cell!
+            return onBindPriceCell(tableView)
 
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
 
         } else if (indexPath.row == 3) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDesmosEventCell") as? WalletDesmosEventCell
@@ -497,11 +395,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
     }
     
@@ -516,23 +410,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
 
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            return cell!
+            return onBindPriceCell(tableView)
 
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
 
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
     }
     
@@ -547,24 +431,37 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return cell!
 
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapPricel = { self.onClickMarketInfo() }
-            return cell!
+            return onBindPriceCell(tableView)
 
         } else if (indexPath.row == 2) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
-            cell?.updateView(account, chainType)
-            cell?.actionTapApr = { self.onClickAprHelp() }
-            return cell!
+            return onBindMintingCell(tableView)
 
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
-            cell?.updateView(account, chainType)
-            cell?.actionGuide1 = { self.onClickGuide1() }
-            cell?.actionGuide2 = { self.onClickGuide2() }
-            return cell!
+            return onBindGuideCell(tableView)
         }
+    }
+    
+    func onBindPriceCell(_ tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletPriceCell") as? WalletPriceCell
+        cell?.onBindCell(account, chainConfig)
+        cell?.actionTapPricel = { self.onClickMarketInfo() }
+        cell?.actionBuy = { self.onClickBuyCoin() }
+        return cell!
+    }
+    
+    func onBindMintingCell(_ tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
+        cell?.onBindCell(account, chainConfig)
+        cell?.actionTapApr = { self.onClickAprHelp() }
+        return cell!
+    }
+    
+    func onBindGuideCell(_ tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletGuideCell") as? WalletGuideCell
+        cell?.onBindCell(account, chainConfig)
+        cell?.actionGuide1 = { self.onClickGuide1() }
+        cell?.actionGuide2 = { self.onClickGuide2() }
+        return cell!
     }
     
     
@@ -797,42 +694,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.navigationController?.pushViewController(commonWcVC, animated: true)
     }
     
-    func onClickGravityDex() {
-        let gravityDappVC = UIStoryboard(name: "Gravity", bundle: nil).instantiateViewController(withIdentifier: "GravityDAppViewController") as! GravityDAppViewController
-        gravityDappVC.hidesBottomBarWhenPushed = true
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(gravityDappVC, animated: true)
-    }
-    
-    func onClickSifIncentive() {
-        print("onClickSifIncentive")
-        if (account?.account_has_private == false) {
-            self.onShowAddMenomicDialog()
-            return
-        }
-        if let lmCurrentAmount = BaseData.instance.mSifLmIncentive?.user?.totalClaimableCommissionsAndClaimableRewards {
-            if (lmCurrentAmount <= 0) {
-                self.onShowToast(NSLocalizedString("error_no_incentive_to_claim", comment: ""))
-                return
-            }
-            let mainDenom = WUtils.getMainDenom(chainType)
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_MSG_TYPE_CLAIM_INCENTIVE, 0)
-            if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-                return
-            }
-            
-            let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-            txVC.mType = SIF_MSG_TYPE_CLAIM_INCENTIVE
-            txVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(txVC, animated: true)
-            
-        } else {
-            self.onShowToast(NSLocalizedString("error_no_incentive_to_claim", comment: ""))
-        }
-    }
-    
     func onClickSifDex() {
         let sifDexDappVC = UIStoryboard(name: "SifChainDex", bundle: nil).instantiateViewController(withIdentifier: "SifDexDAppViewController") as! SifDexDAppViewController
         sifDexDappVC.hidesBottomBarWhenPushed = true
@@ -901,500 +762,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onClickGuide1() {
-        if (chainType! == ChainType.COSMOS_MAIN || chainType! == ChainType.COSMOS_TEST) {
-            if (Locale.current.languageCode == "ko") {
-                guard let url = URL(string: "https://medium.com/@cosmostation/d7dd26fc88fd") else { return }
-                self.onShowSafariWeb(url)
-            } else {
-                guard let url = URL(string: "https://medium.com/@cosmostation/5fd64aa0a56b") else { return }
-                self.onShowSafariWeb(url)
-            }
-            
-        } else if (chainType! == ChainType.IRIS_MAIN || chainType! == ChainType.IRIS_TEST) {
-            guard let url = URL(string: "https://www.irisnet.org") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BINANCE_MAIN) {
-            guard let url = URL(string: "https://www.binance.org") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.KAVA_MAIN) {
-            guard let url = URL(string: "https://www.kava.io/registration/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BAND_MAIN) {
-            guard let url = URL(string: "https://bandprotocol.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SECRET_MAIN) {
-            guard let url = URL(string: "https://scrt.network") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.IOV_MAIN) {
-            guard let url = URL(string: "https://iov.one/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.OKEX_MAIN) {
-            guard let url = URL(string: "https://www.okex.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CERTIK_MAIN) {
-            guard let url = URL(string: "https://www.certik.foundation/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.AKASH_MAIN) {
-            guard let url = URL(string: "https://akash.network/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.PERSIS_MAIN) {
-            guard let url = URL(string: "https://persistence.one/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SENTINEL_MAIN) {
-            guard let url = URL(string: "https://sentinel.co/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.FETCH_MAIN) {
-            guard let url = URL(string: "https://fetch.ai/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CRYPTO_MAIN) {
-            guard let url = URL(string: "https://crypto.org/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SIF_MAIN) {
-            guard let url = URL(string: "https://sifchain.finance/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.KI_MAIN) {
-            guard let url = URL(string: "https://foundation.ki/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.OSMOSIS_MAIN) {
-            guard let url = URL(string: "https://osmosis.zone/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.MEDI_MAIN) {
-            if (Locale.current.languageCode == "ko") {
-                guard let url = URL(string: "https://medibloc.com") else { return }
-                self.onShowSafariWeb(url)
-            } else {
-                guard let url = URL(string: "https://medibloc.com/en/") else { return }
-                self.onShowSafariWeb(url)
-            }
-            
-        } else if (chainType! == ChainType.UMEE_MAIN) {
-            guard let url = URL(string: "https://umee.cc/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.AXELAR_MAIN) {
-            guard let url = URL(string: "https://axelar.network/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.EMONEY_MAIN) {
-            guard let url = URL(string: "https://e-money.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.JUNO_MAIN) {
-            guard let url = URL(string: "https://junochain.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.REGEN_MAIN) {
-            guard let url = URL(string: "https://www.regen.network/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BITCANA_MAIN) {
-            guard let url = URL(string: "https://www.bitcanna.io/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.ALTHEA_MAIN || chainType! == ChainType.ALTHEA_TEST) {
-            guard let url = URL(string: "https://www.althea.net/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
-            guard let url = URL(string: "https://www.gravitybridge.net/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.STARGAZE_MAIN) {
-            guard let url = URL(string: "https://stargaze.zone/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.COMDEX_MAIN) {
-            guard let url = URL(string: "https://comdex.one/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
-            guard let url = URL(string: "https://injectiveprotocol.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BITSONG_MAIN) {
-            guard let url = URL(string: "http://bitsong.io/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.DESMOS_MAIN) {
-            guard let url = URL(string: "https://www.desmos.network/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.LUM_MAIN) {
-            guard let url = URL(string: "https://lum.network/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CHIHUAHUA_MAIN) {
-            guard let url = URL(string: "https://chi.huahua.wtf/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.KONSTELLATION_MAIN) {
-            guard let url = URL(string: "https://konstellation.tech/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.EVMOS_MAIN) {
-            guard let url = URL(string: "https://evmos.org/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CERBERUS_MAIN) {
-            guard let url = URL(string: "https://cerberus.zone/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.OMNIFLIX_MAIN) {
-            guard let url = URL(string: "https://www.omniflix.network/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.PROVENANCE_MAIN) {
-            guard let url = URL(string: "https://www.provenance.io/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CRESCENT_MAIN || chainType! == ChainType.CRESCENT_TEST) {
-            guard let url = URL(string: "https://crescent.network/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.MANTLE_MAIN) {
-            guard let url = URL(string: "https://assetmantle.one/") else { return }
-            self.onShowSafariWeb(url)
-            
-        }
-        
+        guard let url = URL(string: self.chainConfig?.getInfoLink1() ?? "") else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onClickGuide2() {
-        if (chainType! == ChainType.COSMOS_MAIN || chainType! == ChainType.COSMOS_TEST) {
-            if (Locale.current.languageCode == "ko") {
-                guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_ko.html") else { return }
-                self.onShowSafariWeb(url)
-            } else {
-                guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_en.html") else { return }
-                self.onShowSafariWeb(url)
-            }
-
-        } else if (chainType! == ChainType.IRIS_MAIN || chainType! == ChainType.IRIS_TEST) {
-            guard let url = URL(string: "https://medium.com/irisnet-blog") else { return }
-            self.onShowSafariWeb(url)
-
-        } else if (chainType! == ChainType.BINANCE_MAIN) {
-            guard let url = URL(string: "https://medium.com/@binance") else { return }
-            self.onShowSafariWeb(url)
-
-        } else if (chainType! == ChainType.KAVA_MAIN) {
-            guard let url = URL(string: "https://medium.com/kava-labs") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BAND_MAIN) {
-            guard let url = URL(string: "https://medium.com/bandprotocol") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SECRET_MAIN) {
-            guard let url = URL(string: "https://blog.scrt.network") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.IOV_MAIN) {
-            guard let url = URL(string: "https://medium.com/iov-internet-of-values") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.OKEX_MAIN) {
-            guard let url = URL(string: "https://www.okex.com/community") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CERTIK_MAIN) {
-            guard let url = URL(string: "https://www.certik.foundation/blog") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.AKASH_MAIN) {
-            guard let url = URL(string: "https://akash.network/blog/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.PERSIS_MAIN) {
-            guard let url = URL(string: "https://medium.com/persistence-blog") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SENTINEL_MAIN) {
-            guard let url = URL(string: "https://medium.com/sentinel") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.FETCH_MAIN) {
-            guard let url = URL(string: "https://fetch.ai/blog/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CRYPTO_MAIN) {
-            guard let url = URL(string: "https://crypto.org/community") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SIF_MAIN) {
-            guard let url = URL(string: "https://medium.com/sifchain-finance") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.KI_MAIN) {
-            guard let url = URL(string: "https://medium.com/ki-foundation") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.OSMOSIS_MAIN) {
-            guard let url = URL(string: "https://medium.com/osmosis") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.MEDI_MAIN) {
-            if (Locale.current.languageCode == "ko") {
-                guard let url = URL(string: "https://blog.medibloc.org/") else { return }
-                self.onShowSafariWeb(url)
-            } else {
-                guard let url = URL(string: "https://medium.com/medibloc/") else { return }
-                self.onShowSafariWeb(url)
-            }
-        } else if (chainType! == ChainType.UMEE_MAIN) {
-            guard let url = URL(string: "https://medium.com/umeeblog") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.AXELAR_MAIN) {
-            guard let url = URL(string: "https://axelar.network/blog") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.EMONEY_MAIN) {
-            guard let url = URL(string: "https://medium.com/e-money-com") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.JUNO_MAIN) {
-            guard let url = URL(string: "https://medium.com/@JunoNetwork/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.REGEN_MAIN) {
-            guard let url = URL(string: "https://medium.com/regen-network") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BITCANA_MAIN) {
-            guard let url = URL(string: "https://medium.com/@BitCannaGlobal") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.ALTHEA_MAIN || chainType! == ChainType.ALTHEA_TEST) {
-            guard let url = URL(string: "https://blog.althea.net/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
-            guard let url = URL(string: "https://www.gravitybridge.net/blog") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.STARGAZE_MAIN) {
-            guard let url = URL(string: "https://mirror.xyz/stargazezone.eth") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.COMDEX_MAIN) {
-            guard let url = URL(string: "https://blog.comdex.one/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
-            guard let url = URL(string: "https://blog.injectiveprotocol.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BITSONG_MAIN) {
-            guard let url = URL(string: "https://bitsongofficial.medium.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.DESMOS_MAIN) {
-            guard let url = URL(string: "https://medium.com/desmosnetwork") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.LUM_MAIN) {
-            guard let url = URL(string: "https://medium.com/lum-network") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CHIHUAHUA_MAIN) {
-            guard let url = URL(string: "https://chi.huahua.wtf/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.KONSTELLATION_MAIN) {
-            guard let url = URL(string: "https://konstellation.medium.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.EVMOS_MAIN) {
-            guard let url = URL(string: "https://evmos.blog/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CERBERUS_MAIN) {
-            guard let url = URL(string: "https://medium.com/@cerberus_zone") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.OMNIFLIX_MAIN) {
-            guard let url = URL(string: "https://blog.omniflix.network/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.PROVENANCE_MAIN) {
-            guard let url = URL(string: "https://www.provenance.io/blog") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CRESCENT_MAIN || chainType! == ChainType.CRESCENT_TEST) {
-            guard let url = URL(string: "https://crescentnetwork.medium.com/") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.MANTLE_MAIN) {
-            guard let url = URL(string: "https://blog.assetmantle.one/") else { return }
-            self.onShowSafariWeb(url)
-            
-        }
+        guard let url = URL(string: self.chainConfig?.getInfoLink2() ?? "") else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onClickMarketInfo() {
-        if (chainType! == ChainType.COSMOS_MAIN || chainType! == ChainType.COSMOS_TEST) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/cosmos") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.IRIS_MAIN || chainType! == ChainType.IRIS_TEST) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/irisnet") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BINANCE_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/binancecoin") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.KAVA_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/kava") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BAND_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/band-protocol") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SECRET_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/secret") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.IOV_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/starname") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CERTIK_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/certik") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.AKASH_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/akash-network") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SENTINEL_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/sentinel") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.PERSIS_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/persistence") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.FETCH_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/fetch-ai") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CRYPTO_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/crypto-com-chain") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.SIF_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/sifchain") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.KI_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/ki") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.OSMOSIS_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/osmosis") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType == ChainType.MEDI_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/medibloc") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType == ChainType.MEDI_MAIN || chainType == ChainType.EMONEY_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/e-money") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.REGEN_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/regen") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BITCANA_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/bitcanna") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/injective-protocol") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.BITSONG_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/bitsong") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.RIZON_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/rizon") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.JUNO_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/juno-network") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.COMDEX_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/comdex") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.STARGAZE_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/stargaze") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.LUM_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/lum-network") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CHIHUAHUA_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/chihuahua-chain") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.DESMOS_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/desmos") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.UMEE_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/umee") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/graviton") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.MANTLE_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/assetmantle") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.CERBERUS_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/cerberus") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.EVMOS_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/evmos") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.KONSTELLATION_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/konstellation") else { return }
-            self.onShowSafariWeb(url)
-            
-        } else if (chainType! == ChainType.PROVENANCE_MAIN) {
-            guard let url = URL(string: "https://www.coingecko.com/en/coins/provenance-blockchain") else { return }
-            self.onShowSafariWeb(url)
-            
-        }
-        
+        guard let url = URL(string: self.chainConfig?.priceUrl ?? "") else { return }
+        self.onShowSafariWeb(url)
     }
     
     func onClickBuyCoin() {
@@ -1406,7 +785,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onShowBuyWarnNoKey() {
-        let noKeyAlert = UIAlertController(title: NSLocalizedString("buy_without_key_title", comment: ""), message: NSLocalizedString("buy_without_key_msg", comment: ""), preferredStyle: .alert)
+        let noKeyAlert = UIAlertController(title: NSLocalizedString("buy_without_key_title", comment: ""),
+                                           message: NSLocalizedString("buy_without_key_msg", comment: ""),
+                                           preferredStyle: .alert)
         noKeyAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: {_ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -1420,7 +801,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onShowBuySelectFiat() {
-        let selectFiatAlert = UIAlertController(title: NSLocalizedString("buy_select_fiat_title", comment: ""), message: NSLocalizedString("buy_select_fiat_msg", comment: ""), preferredStyle: .alert)
+        let selectFiatAlert = UIAlertController(title: NSLocalizedString("buy_select_fiat_title", comment: ""),
+                                                message: NSLocalizedString("buy_select_fiat_msg", comment: ""),
+                                                preferredStyle: .alert)
         let usdAction = UIAlertAction(title: "USD", style: .default, handler: { _ in
             self.onStartMoonpaySignature("usd")
         })
@@ -1451,7 +834,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             query = query + "&currencyCode=band"
         }
         query = query + "&walletAddress=" + self.account!.account_address + "&baseCurrencyCode=" + fiat;
-        let param = ["api_key":query] as [String : Any]
+        let param = ["api_key" : query] as [String : Any]
         let request = Alamofire.request(CSS_MOON_PAY, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {
@@ -1529,7 +912,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func scannedAddress(result: String) {
         print("scannedAddress ", result)
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
-            if (self.chainType == ChainType.BINANCE_MAIN) {
+            if (self.chainType == .BINANCE_MAIN) {
                 if (result.contains("wallet-bridge.binance.org")) {
                     self.wcURL = result
                     let wcAlert = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: NSLocalizedString("wc_alert_msg", comment: ""), preferredStyle: .alert)
@@ -1548,7 +931,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                         wcAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
                     }
                 }
-            } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN || self.chainType == ChainType.EVMOS_MAIN || self.chainType == ChainType.STATION_TEST) {
+                
+            } else if (self.chainType == .OSMOSIS_MAIN || self.chainType == .KAVA_MAIN || self.chainType == .CRESCENT_MAIN ||
+                       self.chainType == .EVMOS_MAIN || self.chainType == .STATION_TEST) {
                 self.wcURL = result
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
@@ -1558,9 +943,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 passwordVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(passwordVC, animated: false)
                 
-            } else {
-                print("chainType ", self.chainType, "  url ",  result)
-                
             }
         })
     }
@@ -1568,14 +950,16 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
-                if (self.chainType == ChainType.BINANCE_MAIN) {
+                if (self.chainType == .BINANCE_MAIN) {
                     let wcVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "WalletConnectViewController") as! WalletConnectViewController
                     wcVC.wcURL = self.wcURL!
                     wcVC.hidesBottomBarWhenPushed = true
                     self.navigationItem.title = ""
                     self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
                     self.navigationController?.pushViewController(wcVC, animated: true)
-                } else if (self.chainType == ChainType.OSMOSIS_MAIN || self.chainType == ChainType.KAVA_MAIN || self.chainType == ChainType.CRESCENT_MAIN || self.chainType == ChainType.EVMOS_MAIN || self.chainType == ChainType.STATION_TEST) {
+                    
+                } else if (self.chainType == .OSMOSIS_MAIN || self.chainType == .KAVA_MAIN || self.chainType == .CRESCENT_MAIN ||
+                           self.chainType == .EVMOS_MAIN || self.chainType == .STATION_TEST) {
                     let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
                     commonWcVC.wcURL = self.wcURL!
                     commonWcVC.hidesBottomBarWhenPushed = true

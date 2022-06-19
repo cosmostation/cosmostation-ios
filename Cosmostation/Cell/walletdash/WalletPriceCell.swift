@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class WalletPriceCell: UITableViewCell {
     
@@ -50,7 +51,10 @@ class WalletPriceCell: UITableViewCell {
         buyBtn.isHidden = true
     }
     
-    func updateView(_ account: Account?, _ chainType: ChainType?) {
+    func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
+        if (account == nil || chainConfig == nil) { return }
+        let chainType = chainConfig!.chainType
+        
         sourceSite.text = "(CoinGecko)"
         perPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainType), perPrice.font)
         updownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainType), font: updownPercent.font)

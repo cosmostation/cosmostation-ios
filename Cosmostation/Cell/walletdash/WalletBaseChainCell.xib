@@ -319,6 +319,7 @@
             <connections>
                 <outlet property="availableAmount" destination="AVw-yU-D5Z" id="Emk-jX-MPD"/>
                 <outlet property="btnWalletConnec" destination="Gfd-VU-jvR" id="VfS-R6-aUU"/>
+                <outlet property="cardRoot" destination="kVp-NM-hKB" id="q9d-Os-zCT"/>
                 <outlet property="delegatedAmount" destination="FVl-jR-fwy" id="cE2-p3-srp"/>
                 <outlet property="rewardAmount" destination="00S-yT-6lI" id="rhR-p1-9D4"/>
                 <outlet property="tokenSymbolImg" destination="q8b-yQ-Zj6" id="2Ud-NJ-QoS"/>
@@ -338,10 +339,10 @@
         <image name="iconWalletconnect" width="20" height="20"/>
         <image name="tokenIc" width="22" height="22"/>
         <namedColor name="_card_bg">
-            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
-            <color red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

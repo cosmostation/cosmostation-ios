@@ -32,31 +32,14 @@ class WalletGuideCell: UITableViewCell {
         actionGuide2?()
     }
     
-    func updateView(_ account: Account?, _ chainType: ChainType?) {
-        guard let chainConfig = ChainFactory().getChainConfig(chainType!) else {
-            return
-        }
+    func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
         btn1Label.setTitle(NSLocalizedString("send_guide_btn_home", comment: ""), for: .normal)
         btn2Label.setTitle(NSLocalizedString("send_guide_btn_blog", comment: ""), for: .normal)
-        guideImg.image = chainConfig.chainInfoImg
-        guideTitle.text = chainConfig.chainInfoTitle
-        guideMsg.text = chainConfig.chainInfoMsg
         
-        if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.COSMOS_TEST) {
-            btn1Label.setTitle(NSLocalizedString("send_guide_btn_guide", comment: ""), for: .normal)
-            btn2Label.setTitle(NSLocalizedString("send_guide_btn_qna", comment: ""), for: .normal)
-            
-        } else if (chainType == ChainType.BINANCE_MAIN) {
-            btn1Label.setTitle(NSLocalizedString("send_guide_btn_market", comment: ""), for: .normal)
-            btn2Label.setTitle(NSLocalizedString("send_guide_btn_blog", comment: ""), for: .normal)
-            
-        } else if (chainType == ChainType.OKEX_MAIN) {
-            btn1Label.setTitle(NSLocalizedString("send_guide_btn_market", comment: ""), for: .normal)
-            btn2Label.setTitle(NSLocalizedString("send_guide_btn_communities", comment: ""), for: .normal)
-            
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
-            btn2Label.setTitle(NSLocalizedString("send_guide_btn_communities", comment: ""), for: .normal)
-            
-        }
+        if (account == nil || chainConfig == nil) { return }
+        guideImg.image = chainConfig!.chainInfoImg
+        guideTitle.text = chainConfig!.chainInfoTitle
+        guideMsg.text = chainConfig!.chainInfoMsg
+        
     }
 }
