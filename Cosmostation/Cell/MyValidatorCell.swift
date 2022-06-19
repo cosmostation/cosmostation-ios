@@ -12,7 +12,6 @@ class MyValidatorCell: UITableViewCell {
     
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var validatorImg: UIImageView!
-    @IBOutlet weak var freeEventImg: UIImageView!
     @IBOutlet weak var revokedImg: UIImageView!
     @IBOutlet weak var monikerLabel: UILabel!
     @IBOutlet weak var bandOracleOffImg: UIImageView!
@@ -34,10 +33,6 @@ class MyValidatorCell: UITableViewCell {
         myUndelegatingAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         rewardAmoutLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
     
     override func prepareForReuse() {
         self.validatorImg.image = UIImage(named: "validatorNoneImg")
@@ -48,10 +43,11 @@ class MyValidatorCell: UITableViewCell {
         super.prepareForReuse()
     }
     
-    func updateView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainType: ChainType?) {
+    func updateView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainConfig: ChainConfig?) {
+        if (chainConfig == nil) { return }
+        let chainType = chainConfig!.chainType
         monikerLabel.text = validator.description_p.moniker
         monikerLabel.adjustsFontSizeToFitWidth = true
-        freeEventImg.isHidden = true
         if (validator.jailed == true) {
             revokedImg.isHidden = false
             validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
@@ -64,13 +60,13 @@ class MyValidatorCell: UITableViewCell {
         myUndelegatingAmountLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbonding_gRPC(validator.operatorAddress).stringValue, myUndelegatingAmountLabel.font, WUtils.mainDivideDecimal(chainType), 6)
         rewardAmoutLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), validator.operatorAddress).stringValue, rewardAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
         
-        cardView.backgroundColor = WUtils.getChainBg(chainType)
+        cardView.backgroundColor = chainConfig?.chainColorBG
         if let url = URL(string: WUtils.getMonikerImgUrl(chainType, validator.operatorAddress)) {
             validatorImg.af_setImage(withURL: url)
         }
         
         //display for band oracle status
-        if (chainType == ChainType.BAND_MAIN) {
+        if (chainType == .BAND_MAIN) {
             if (BaseData.instance.mParam?.params?.band_active_validators?.addresses.contains(validator.operatorAddress) == false) {
                 bandOracleOffImg.isHidden = false
             }

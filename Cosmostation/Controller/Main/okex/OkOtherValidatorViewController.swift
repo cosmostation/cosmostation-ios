@@ -81,7 +81,6 @@ class OkOtherValidatorViewController: BaseViewController, UITableViewDelegate, U
         let validator = mOtherValidator[indexPath.row]
         cell?.monikerLabel.text = validator.description.moniker
         cell?.monikerLabel.adjustsFontSizeToFitWidth = true
-        cell?.freeEventImg.isHidden = true
         if (validator.jailed) {
             cell?.revokedImg.isHidden = false
             cell?.validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor

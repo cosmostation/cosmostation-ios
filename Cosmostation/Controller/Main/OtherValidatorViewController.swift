@@ -21,6 +21,7 @@ class OtherValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.otherValidatorTableView.delegate = self
         self.otherValidatorTableView.dataSource = self
@@ -75,15 +76,11 @@ class OtherValidatorViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:OtherValidatorCell? = tableView.dequeueReusableCell(withIdentifier:"OtherValidatorCell") as? OtherValidatorCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"OtherValidatorCell") as? OtherValidatorCell
         if (BaseData.instance.mUnbondValidators_gRPC.count > 0) {
-            cell?.updateView(BaseData.instance.mUnbondValidators_gRPC[indexPath.row], self.chainType)
+            cell?.updateView(BaseData.instance.mUnbondValidators_gRPC[indexPath.row], self.chainConfig)
         }
         return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

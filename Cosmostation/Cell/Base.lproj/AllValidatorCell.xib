@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,13 +26,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="RJC-6i-Bzh"/>
                                     <constraint firstAttribute="width" constant="44" id="XvN-7c-Btk"/>
-                                </constraints>
-                            </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freeIc" translatesAutoresizingMaskIntoConstraints="NO" id="L7e-dz-DE7">
-                                <rect key="frame" x="44" y="10" width="20" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="P9t-oU-Xib"/>
-                                    <constraint firstAttribute="width" constant="20" id="vcE-Xn-LQZ"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jailedImg" translatesAutoresizingMaskIntoConstraints="NO" id="hmo-hQ-aHU">
@@ -58,7 +52,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Moniker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjm-OC-kdP">
                                 <rect key="frame" x="80" y="10" width="120" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="bandoracleoffs" translatesAutoresizingMaskIntoConstraints="NO" id="SWg-PX-qoh">
@@ -67,29 +61,29 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Voting Power" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCK-fO-o03">
                                 <rect key="frame" x="80" y="32" width="160" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Est. Apr" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qu3-wc-OAX">
                                 <rect key="frame" x="80" y="48" width="41.5" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7D-lq-a7d">
                                 <rect key="frame" x="252" y="32" width="6" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMl-wn-8tR">
                                 <rect key="frame" x="252" y="48" width="6" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.1803921568627451" alpha="0.40287885273972601" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="O5H-eg-GqK" secondAttribute="trailing" constant="6" id="4DM-Wa-YIb"/>
                             <constraint firstItem="SWg-PX-qoh" firstAttribute="leading" secondItem="tjm-OC-kdP" secondAttribute="trailing" constant="4" id="7CD-2z-6e0"/>
@@ -102,13 +96,11 @@
                             <constraint firstItem="hmo-hQ-aHU" firstAttribute="leading" secondItem="3kV-jR-rnU" secondAttribute="leading" id="WKn-P3-Afo"/>
                             <constraint firstItem="SWg-PX-qoh" firstAttribute="centerY" secondItem="tjm-OC-kdP" secondAttribute="centerY" id="bon-Ve-tzU"/>
                             <constraint firstItem="tjm-OC-kdP" firstAttribute="leading" secondItem="1Er-7z-ec7" secondAttribute="leading" constant="12" id="dcy-GC-jVI"/>
-                            <constraint firstItem="L7e-dz-DE7" firstAttribute="top" secondItem="3kV-jR-rnU" secondAttribute="top" constant="-4" id="fSt-WS-feK"/>
                             <constraint firstAttribute="bottom" secondItem="qu3-wc-OAX" secondAttribute="bottom" constant="10" id="gbS-zN-9gB"/>
                             <constraint firstItem="3kV-jR-rnU" firstAttribute="leading" secondItem="uAB-cB-2gH" secondAttribute="leading" constant="12" id="hVz-7z-leo"/>
                             <constraint firstItem="1Er-7z-ec7" firstAttribute="top" secondItem="uAB-cB-2gH" secondAttribute="top" constant="12" id="iDn-fl-G0p"/>
                             <constraint firstItem="1Er-7z-ec7" firstAttribute="leading" secondItem="3kV-jR-rnU" secondAttribute="trailing" constant="12" id="iwT-do-Tye"/>
                             <constraint firstItem="qu3-wc-OAX" firstAttribute="top" secondItem="NCK-fO-o03" secondAttribute="bottom" constant="2" id="jkP-x8-xli"/>
-                            <constraint firstItem="L7e-dz-DE7" firstAttribute="trailing" secondItem="3kV-jR-rnU" secondAttribute="trailing" constant="8" id="oF6-pc-A2H"/>
                             <constraint firstItem="JMl-wn-8tR" firstAttribute="centerY" secondItem="qu3-wc-OAX" secondAttribute="centerY" id="oqc-wQ-zqk"/>
                             <constraint firstItem="3kV-jR-rnU" firstAttribute="centerY" secondItem="uAB-cB-2gH" secondAttribute="centerY" id="sdy-5w-woz"/>
                             <constraint firstItem="D7D-lq-a7d" firstAttribute="leading" secondItem="NCK-fO-o03" secondAttribute="trailing" constant="12" id="vaT-fe-oCQ"/>
@@ -151,7 +143,6 @@
                 <outlet property="bandOracleOffImg" destination="SWg-PX-qoh" id="VA8-sx-OxE"/>
                 <outlet property="cardView" destination="uAB-cB-2gH" id="kYF-VI-mlI"/>
                 <outlet property="commissionLabel" destination="JMl-wn-8tR" id="KaI-Jm-1ra"/>
-                <outlet property="freeEventImg" destination="L7e-dz-DE7" id="oqg-Rz-NZY"/>
                 <outlet property="monikerLabel" destination="tjm-OC-kdP" id="3yw-nF-Hnr"/>
                 <outlet property="powerLabel" destination="D7D-lq-a7d" id="vWz-eq-GQJ"/>
                 <outlet property="revokedImg" destination="hmo-hQ-aHU" id="5BX-zo-5jj"/>
@@ -163,8 +154,16 @@
     <resources>
         <image name="arrowNextGr" width="24" height="24"/>
         <image name="bandoracleoffs" width="58" height="13"/>
-        <image name="freeIc" width="20" height="20"/>
         <image name="jailedImg" width="44" height="44"/>
         <image name="validatorNoneImg" width="44" height="44"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
