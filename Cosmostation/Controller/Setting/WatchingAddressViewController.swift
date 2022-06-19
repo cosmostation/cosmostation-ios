@@ -14,6 +14,7 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
     }
@@ -23,8 +24,6 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_watch_wallet", comment: "");
         self.navigationItem.title = NSLocalizedString("title_watch_wallet", comment: "");
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
