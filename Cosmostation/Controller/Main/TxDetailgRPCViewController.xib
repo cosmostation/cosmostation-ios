@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,9 +25,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="kbd-g8-6Ph">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="s9i-xJ-62U">
                     <rect key="frame" x="0.0" y="102" width="414" height="640"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -36,7 +35,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transaction Details" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2t-E0-S7A">
                             <rect key="frame" x="130.5" y="14.5" width="153.5" height="21"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -53,7 +52,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ERROR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rEZ-Xz-t76">
                             <rect key="frame" x="129.5" y="51.5" width="51" height="16.5"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                            <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yre-yz-1jl">
@@ -61,7 +60,7 @@
                             <string key="text">Transaction request failed. 
 Please check the error code and message.</string>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="error code : 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tiJ-ap-5Uh">
@@ -72,7 +71,7 @@ Please check the error code and message.</string>
                         </label>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="Bg4-iG-f2r"/>
-                    <color key="backgroundColor" red="0.18039215689999999" green="0.18039215689999999" blue="0.18039215689999999" alpha="0.39509310790000002" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
                         <constraint firstItem="yre-yz-1jl" firstAttribute="centerX" secondItem="SFc-jI-1fz" secondAttribute="centerX" id="FWa-yC-eFB"/>
                         <constraint firstItem="rEZ-Xz-t76" firstAttribute="centerX" secondItem="SFc-jI-1fz" secondAttribute="centerX" id="QWa-TV-UtE"/>
@@ -109,7 +108,7 @@ Please check the error code and message.</string>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                     <state key="normal" title="Share">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleColor" name="_font05"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -119,7 +118,7 @@ Please check the error code and message.</string>
                                             <real key="value" value="8"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="value" name="_font05"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -133,7 +132,7 @@ Please check the error code and message.</string>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                     <state key="normal" title="Explorer">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleColor" name="_font05"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -143,7 +142,7 @@ Please check the error code and message.</string>
                                             <real key="value" value="8"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="value" name="_font05"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
@@ -159,7 +158,7 @@ Please check the error code and message.</string>
                             </constraints>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="Done">
-                                <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" name="photon"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -169,7 +168,7 @@ Please check the error code and message.</string>
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -186,15 +185,13 @@ Please check the error code and message.</string>
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="s9i-xJ-62U" firstAttribute="top" secondItem="MFb-uh-hye" secondAttribute="bottom" constant="8" id="04z-le-ZtD"/>
                 <constraint firstItem="SFc-jI-1fz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="52" id="1cB-e5-jXc"/>
-                <constraint firstItem="kbd-g8-6Ph" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="9Yb-h8-CXR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="s9i-xJ-62U" secondAttribute="trailing" id="FDJ-cZ-I8b"/>
                 <constraint firstItem="GeO-mN-zYh" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="KHp-IP-KXy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SFc-jI-1fz" secondAttribute="trailing" constant="52" id="KMe-D4-yAc"/>
-                <constraint firstItem="kbd-g8-6Ph" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Krd-Md-WWi"/>
                 <constraint firstItem="SFc-jI-1fz" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="M3w-XQ-vhV"/>
                 <constraint firstItem="MFb-uh-hye" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="QHA-zB-Cq5"/>
                 <constraint firstItem="pLH-ah-hXu" firstAttribute="top" secondItem="s9i-xJ-62U" secondAttribute="bottom" constant="8" id="Ur4-D4-c3t"/>
@@ -204,8 +201,6 @@ Please check the error code and message.</string>
                 <constraint firstItem="pLH-ah-hXu" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-16" id="hIT-ZX-fCD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pLH-ah-hXu" secondAttribute="trailing" constant="12" id="kIN-F3-kRl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="pLH-ah-hXu" secondAttribute="leading" constant="-12" id="p70-wy-5IP"/>
-                <constraint firstAttribute="top" secondItem="kbd-g8-6Ph" secondAttribute="top" id="pbH-zz-hlQ"/>
-                <constraint firstItem="kbd-g8-6Ph" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="wEQ-rF-Cjx"/>
                 <constraint firstItem="SFc-jI-1fz" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="xwZ-6D-Egh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="MFb-uh-hye" secondAttribute="top" id="zWY-C3-M9x"/>
             </constraints>
@@ -213,7 +208,18 @@ Please check the error code and message.</string>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
         <image name="loading_1" width="144" height="144"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
