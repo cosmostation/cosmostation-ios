@@ -11,11 +11,9 @@ import UIKit
 class ValidatorDetailCell: UITableViewCell {
     
     @IBOutlet weak var validatorImg: UIImageView!
-    @IBOutlet weak var freeEventImg: UIImageView!
     @IBOutlet weak var jailedImg: UIImageView!
     @IBOutlet weak var monikerName: UILabel!
     @IBOutlet weak var bandOracleImg: UIImageView!
-    @IBOutlet weak var operatorAddress: UILabel!
     @IBOutlet weak var website: UILabel!
     @IBOutlet weak var descriptionMsg: UILabel!
     @IBOutlet weak var totalBondedAmount: UILabel!
@@ -60,7 +58,9 @@ class ValidatorDetailCell: UITableViewCell {
     
     
     
-    func updateView(_ validator: Cosmos_Staking_V1beta1_Validator?, _ selfDelegation: Cosmos_Staking_V1beta1_DelegationResponse?, _ chainType: ChainType?) {
+    func updateView(_ validator: Cosmos_Staking_V1beta1_Validator?, _ selfDelegation: Cosmos_Staking_V1beta1_DelegationResponse?, _ chainConfig: ChainConfig?) {
+        if (chainConfig == nil) { return }
+        let chainType = chainConfig!.chainType
         monikerName.text = validator?.description_p.moniker
         monikerName.adjustsFontSizeToFitWidth = true
         if (validator?.jailed == true) {
@@ -70,7 +70,6 @@ class ValidatorDetailCell: UITableViewCell {
             jailedImg.isHidden = true
             validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
         }
-        freeEventImg.isHidden = true
         website.text = validator?.description_p.website
         descriptionMsg.text = validator?.description_p.details
         
@@ -78,7 +77,7 @@ class ValidatorDetailCell: UITableViewCell {
         selfBondedRate.attributedText = WUtils.displaySelfBondRate(selfDelegation?.balance.amount, validator?.tokens, selfBondedRate.font)
         commissionRate.attributedText = WUtils.displayCommission(NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18).stringValue, font: commissionRate.font)
         if (validator?.status == Cosmos_Staking_V1beta1_BondStatus.bonded) {
-            avergaeYield.attributedText = WUtils.getDpEstAprCommission(avergaeYield.font, NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18), chainType!)
+            avergaeYield.attributedText = WUtils.getDpEstAprCommission(avergaeYield.font, NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18), chainType)
         } else {
             avergaeYield.attributedText = WUtils.displayCommission(NSDecimalNumber.zero.stringValue, font: avergaeYield.font)
             avergaeYield.textColor = UIColor.init(hexString: "f31963")

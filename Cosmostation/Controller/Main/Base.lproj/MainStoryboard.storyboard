@@ -1156,9 +1156,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="O36-pQ-ghZ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4Mm-R4-ygv">
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1172,22 +1169,17 @@
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MZu-nE-yCY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="O36-pQ-ghZ" firstAttribute="leading" secondItem="MZu-nE-yCY" secondAttribute="leading" id="1sy-Og-ZvC"/>
                             <constraint firstItem="6U4-Wr-uE6" firstAttribute="centerX" secondItem="MZu-nE-yCY" secondAttribute="centerX" id="6Na-z5-caz"/>
                             <constraint firstItem="4Mm-R4-ygv" firstAttribute="leading" secondItem="MZu-nE-yCY" secondAttribute="leading" id="HMQ-MW-kbF"/>
-                            <constraint firstItem="O36-pQ-ghZ" firstAttribute="trailing" secondItem="MZu-nE-yCY" secondAttribute="trailing" id="Icj-Ha-Buy"/>
                             <constraint firstAttribute="bottom" secondItem="4Mm-R4-ygv" secondAttribute="bottom" id="MU2-JY-id1"/>
                             <constraint firstItem="MZu-nE-yCY" firstAttribute="trailing" secondItem="4Mm-R4-ygv" secondAttribute="trailing" id="efN-Tm-6IT"/>
-                            <constraint firstItem="O36-pQ-ghZ" firstAttribute="bottom" secondItem="e36-ti-ucg" secondAttribute="bottom" id="kEH-wd-nsQ"/>
                             <constraint firstItem="4Mm-R4-ygv" firstAttribute="top" secondItem="MZu-nE-yCY" secondAttribute="top" id="sh9-oK-naD"/>
                             <constraint firstItem="6U4-Wr-uE6" firstAttribute="centerY" secondItem="MZu-nE-yCY" secondAttribute="centerY" id="tdd-9Y-0vs"/>
-                            <constraint firstAttribute="top" secondItem="O36-pQ-ghZ" secondAttribute="top" id="tr6-jN-Rka"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="chainBg" destination="O36-pQ-ghZ" id="ZH6-zL-Hha"/>
                         <outlet property="loadingImg" destination="6U4-Wr-uE6" id="1yG-5u-2rm"/>
                         <outlet property="validatorDetailTableView" destination="4Mm-R4-ygv" id="hhh-2k-txL"/>
                     </connections>
