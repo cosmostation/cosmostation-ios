@@ -26,7 +26,7 @@ class ChainOmniflix: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenOmniflix")
     var stakeDenom = "uflix"
     var stakeSymbol = "FLIX"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "omniflix")!
     
     var addressPrefix = "omniflix"

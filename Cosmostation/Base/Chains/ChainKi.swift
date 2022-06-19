@@ -26,7 +26,7 @@ class ChainKi: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenKi")
     var stakeDenom = "uxki"
     var stakeSymbol = "XKI"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "ki")!
     
     var addressPrefix = "ki"

@@ -26,7 +26,7 @@ class ChainUmee: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenUmee")
     var stakeDenom = "uumee"
     var stakeSymbol = "UMEE"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "umee")!
     
     var addressPrefix = "umee"

@@ -26,7 +26,7 @@ class ChainStargaze: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenStargaze")
     var stakeDenom = "ustars"
     var stakeSymbol = "STARS"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "stargaze")!
     
     var addressPrefix = "stars"

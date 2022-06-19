@@ -69,7 +69,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.totalCard.addGestureRecognizer(tapTotalCard)
-        self.updateFloaty()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,20 +90,22 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.titleChainImg.image = WUtils.getChainImg(chainType)
-        self.titleChainName.text = WUtils.getChainTitle(chainType)
-        self.titleChainName.textColor = WUtils.getChainColor(chainType!)
-        self.titleWalletName.text = WUtils.getWalletName(account)
-        self.titleAlarmBtn.isHidden = (chainType! == ChainType.COSMOS_MAIN) ? false : true
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
-        self.totalCard.backgroundColor = WUtils.getChainBg(chainType)
-        if (account?.account_has_private == true) {
-            self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
-            self.totalKeyState.tintColor = WUtils.getChainColor(chainType)
-        }
+        self.titleChainImg.image = chainConfig?.chainImg
+        self.titleChainName.text = chainConfig?.chainTitle
+        self.titleChainName.textColor = chainConfig?.chainColor
+        self.titleWalletName.text = account?.getDpName()
+        self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
+        
+        self.totalCard.backgroundColor = chainConfig?.chainColorBG
         self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
         self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        if (account?.account_has_private == true) {
+            self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
+            self.totalKeyState.tintColor = chainConfig?.chainColor
+        }
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
@@ -121,51 +122,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 }
             }
         }
-        
+        self.updateFloaty()
     }
     
     func updateFloaty() {
         let floaty = Floaty()
-        if (chainType! == ChainType.PERSIS_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "btnSendPersistence")
-            floaty.buttonColor = .black
-        } else if (chainType! == ChainType.SENTINEL_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "sendImg")
-            floaty.buttonColor = COLOR_SENTINEL_DARK2
-        } else if (chainType! == ChainType.CRYPTO_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "sendImg")
-            floaty.buttonColor = COLOR_CRYPTO_DARK
-        } else if (chainType! == ChainType.ALTHEA_MAIN || chainType! == ChainType.ALTHEA_TEST) {
-            floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
-            floaty.buttonColor = COLOR_ALTHEA
-        } else if (chainType == ChainType.MEDI_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "btnSendMedi")
-            floaty.buttonColor = .white
-        } else if (chainType! == ChainType.AXELAR_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
-            floaty.buttonColor = .white
-        } else if (chainType! == ChainType.COMDEX_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "btnSendComdex")
-            floaty.buttonColor = UIColor.init(hexString: "03264a")
-        } else if (chainType! == ChainType.SECRET_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "sendImg")
-            floaty.buttonColor = COLOR_SECRET_DARK
-        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "btnSendAlthea")
-            floaty.buttonColor = COLOR_INJECTIVE
-        } else if (chainType! == ChainType.KONSTELLATION_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "btnSendKonstellation")
-            floaty.buttonColor = UIColor.init(hexString: "122951")
-        } else if (chainType! == ChainType.EVMOS_MAIN) {
-            floaty.buttonImage = UIImage.init(named: "btnSendEvmos")
-            floaty.buttonColor = UIColor.init(hexString: "000000")
-        } else if (chainType! == ChainType.CRESCENT_MAIN || chainType! == ChainType.CRESCENT_TEST) {
-            floaty.buttonImage = UIImage.init(named: "btnSendCrescent")
-            floaty.buttonColor = UIColor.init(hexString: "452318")
-        } else {
-            floaty.buttonImage = UIImage.init(named: "sendImg")
-            floaty.buttonColor = WUtils.getChainColor(chainType)
-        }
+        floaty.buttonImage = chainConfig?.stakeSendImg
+        floaty.buttonColor = chainConfig?.stakeSendBg ?? .black
         floaty.fabDelegate = self
         self.view.addSubview(floaty)
     }

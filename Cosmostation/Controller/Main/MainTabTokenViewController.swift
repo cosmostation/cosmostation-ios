@@ -67,6 +67,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
@@ -113,25 +114,27 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.titleChainImg.image = WUtils.getChainImg(chainType)
-        self.titleChainName.text = WUtils.getChainTitle(chainType)
-        self.titleChainName.textColor = WUtils.getChainColor(chainType!)
-        self.titleWalletName.text = WUtils.getWalletName(account)
-        self.titleAlarmBtn.isHidden = (chainType! == ChainType.COSMOS_MAIN) ? false : true
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
-        self.totalCard.backgroundColor = WUtils.getChainBg(chainType)
-        if (account?.account_has_private == true) {
-            self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
-            self.totalKeyState.tintColor = WUtils.getChainColor(chainType)
-        }
+        self.titleChainImg.image = chainConfig?.chainImg
+        self.titleChainName.text = chainConfig?.chainTitle
+        self.titleChainName.textColor = chainConfig?.chainColor
+        self.titleWalletName.text = account?.getDpName()
+        self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
+        
+        self.totalCard.backgroundColor = chainConfig?.chainColorBG
         self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
         self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        if (account?.account_has_private == true) {
+            self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
+            self.totalKeyState.tintColor = chainConfig?.chainColor
+        }
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 DispatchQueue.main.async {
-                    if (self.account?.account_push_alarm == true) {
+                    if (self.account!.account_push_alarm) {
                         self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOn"), for: .normal)
                     } else {
                         self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOff"), for: .normal)

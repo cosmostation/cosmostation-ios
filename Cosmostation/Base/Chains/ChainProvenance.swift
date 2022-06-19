@@ -26,7 +26,7 @@ class ChainProvenance: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenProvenance")
     var stakeDenom = "nhash"
     var stakeSymbol = "HASH"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "provenance")!
     
     var addressPrefix = "pb"

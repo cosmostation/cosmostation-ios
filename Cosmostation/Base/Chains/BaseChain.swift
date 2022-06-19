@@ -27,6 +27,8 @@ protocol ChainConfig {
     var stakeDenomImg: UIImage? { get set }
     var stakeDenom: String { get set }
     var stakeSymbol: String { get set }
+    var stakeSendImg: UIImage { get set }
+    var stakeSendBg: UIColor { get set }
     
     var addressPrefix: String { get set }
     

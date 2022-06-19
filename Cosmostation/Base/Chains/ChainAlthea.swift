@@ -26,7 +26,7 @@ class ChainAlthea: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenAlthea")
     var stakeDenom = "ualtg"
     var stakeSymbol = "ALTG"
-    var stakeSendImg = UIImage(named: "btnSendAlthea")
+    var stakeSendImg = UIImage(named: "btnSendAlthea")!
     var stakeSendBg = UIColor(named: "cosmos")!
     
     var addressPrefix = "althea"

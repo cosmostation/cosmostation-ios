@@ -26,7 +26,7 @@ class ChainGravityBridge: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenGravityBridge")
     var stakeDenom = "ugraviton"
     var stakeSymbol = "GRAVITON"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "gravitybridge")!
     
     var addressPrefix = "gravity"

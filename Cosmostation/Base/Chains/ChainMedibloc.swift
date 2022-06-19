@@ -26,7 +26,7 @@ class ChainMedibloc: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenMedibloc")
     var stakeDenom = "umed"
     var stakeSymbol = "MED"
-    var stakeSendImg = UIImage(named: "btnSendMedi")
+    var stakeSendImg = UIImage(named: "btnSendMedi")!
     var stakeSendBg = UIColor.white
     
     var addressPrefix = "panacea"

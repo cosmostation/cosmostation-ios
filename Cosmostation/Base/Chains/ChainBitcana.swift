@@ -26,7 +26,7 @@ class ChainBitcana: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenBitcanna")
     var stakeDenom = "ubcna"
     var stakeSymbol = "BCNA"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "bitcanna")!
     
     var addressPrefix = "bcna"

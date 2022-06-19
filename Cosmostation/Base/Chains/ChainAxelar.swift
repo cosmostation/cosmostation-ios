@@ -27,7 +27,7 @@ class ChainAxelar: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenAxelar")
     var stakeDenom = "uaxl"
     var stakeSymbol = "AXL"
-    var stakeSendImg = UIImage(named: "btnSendAlthea")
+    var stakeSendImg = UIImage(named: "btnSendAlthea")!
     var stakeSendBg = UIColor.white
     
     var addressPrefix = "axelar"

@@ -26,7 +26,7 @@ class ChainJuno: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenJuno")
     var stakeDenom = "ujuno"
     var stakeSymbol = "JUNO"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "juno")!
     
     var addressPrefix = "juno"

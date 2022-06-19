@@ -26,7 +26,7 @@ class ChainOkc: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenOkc")
     var stakeDenom = "okt"
     var stakeSymbol = "OKT"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "okc")!
     
     var addressPrefix = "ex"

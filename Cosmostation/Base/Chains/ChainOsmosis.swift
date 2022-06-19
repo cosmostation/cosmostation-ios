@@ -26,7 +26,7 @@ class ChainOsmosis: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenOsmosis")
     var stakeDenom = "uosmo"
     var stakeSymbol = "OSMO"
-    var stakeSendImg = UIImage(named: "sendImg")
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "osmosis")!
     
     var addressPrefix = "osmo"

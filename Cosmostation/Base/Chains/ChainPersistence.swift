@@ -26,7 +26,7 @@ class ChainPersistence: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenPersistence")
     var stakeDenom = "uxprt"
     var stakeSymbol = "XPRT"
-    var stakeSendImg = UIImage(named: "btnSendPersistence")
+    var stakeSendImg = UIImage(named: "btnSendPersistence")!
     var stakeSendBg = UIColor.black
     
     var addressPrefix = "persistence"
