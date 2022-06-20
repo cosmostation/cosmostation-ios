@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "buttoniconCrescentappLight.pdf",
+      "filename" : "buttonStarnameLight.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "buttoniconCrescentappDark.pdf",
+      "filename" : "buttonStarnameDark.pdf",
       "idiom" : "universal"
     }
   ],
