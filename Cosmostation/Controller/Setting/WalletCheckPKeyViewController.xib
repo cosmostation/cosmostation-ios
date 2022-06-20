@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,9 +23,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="JxE-Iz-bbR">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Bf-KW-3gs">
                     <rect key="frame" x="16" y="432" width="288" height="120"/>
                     <subviews>
@@ -35,7 +33,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="OK">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleColor" name="_font05"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -45,7 +43,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -59,7 +57,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="Copy to Clipboard">
-                                <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" name="photon"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -69,7 +67,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="photon"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -94,11 +92,11 @@
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubd-nj-mwU">
                             <rect key="frame" x="16" y="25" width="256" height="14.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.18039215689999999" green="0.18039215689999999" blue="0.18039215689999999" alpha="0.40287885270000001" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
                         <constraint firstItem="ubd-nj-mwU" firstAttribute="centerY" secondItem="3LM-LX-GTD" secondAttribute="centerY" id="7Xb-9j-blb"/>
                         <constraint firstAttribute="trailing" secondItem="ubd-nj-mwU" secondAttribute="trailing" constant="16" id="eGl-we-g2v"/>
@@ -127,14 +125,10 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="JxE-Iz-bbR" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="7kI-Ey-V8I"/>
                 <constraint firstItem="3LM-LX-GTD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="8JZ-I3-Bgd"/>
                 <constraint firstItem="3Bf-KW-3gs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Apo-ne-kj6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3LM-LX-GTD" secondAttribute="trailing" constant="16" id="Jcd-lZ-gA2"/>
                 <constraint firstItem="3LM-LX-GTD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Jfa-3K-4sp"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="JxE-Iz-bbR" secondAttribute="leading" id="MN6-Xi-eSl"/>
-                <constraint firstItem="JxE-Iz-bbR" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="a7Y-q0-rQx"/>
-                <constraint firstAttribute="top" secondItem="JxE-Iz-bbR" secondAttribute="top" id="c1P-yD-s0G"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3Bf-KW-3gs" secondAttribute="trailing" constant="16" id="dj7-t8-XO8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="3Bf-KW-3gs" secondAttribute="bottom" constant="16" id="iLW-wM-CZG"/>
             </constraints>
@@ -142,7 +136,15 @@
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

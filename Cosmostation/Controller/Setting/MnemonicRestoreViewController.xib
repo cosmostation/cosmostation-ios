@@ -15,7 +15,6 @@
                 <outlet property="actionView" destination="Fc7-1C-cXj" id="Zw0-lF-znt"/>
                 <outlet property="cardView" destination="JbH-87-EQi" id="pGv-On-US1"/>
                 <outlet property="keyboardView" destination="SUP-cc-VPr" id="p1h-Aq-fd7"/>
-                <outlet property="mNeminicImg" destination="fQq-y6-4kO" id="O8n-lj-DL8"/>
                 <outlet property="mNemonicInput0" destination="8c1-rK-TaY" id="8dH-mm-JH4"/>
                 <outlet property="mNemonicInput1" destination="DrQ-1D-9LN" id="AG3-D5-sTK"/>
                 <outlet property="mNemonicInput10" destination="lx9-3X-L9L" id="s9F-sf-Ek5"/>
@@ -78,7 +77,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7x-Co-5wU">
                     <rect key="frame" x="0.0" y="44" width="414" height="40"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mnemonicsIc" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-y6-4kO">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconMnemonic" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-y6-4kO">
                             <rect key="frame" x="16" y="7.5" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="25" id="E9T-IQ-Io6"/>
@@ -91,7 +90,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter the recovery phrase. " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zGo-n6-iNI">
                                     <rect key="frame" x="0.0" y="0.0" width="183.5" height="14"/>
                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(12 / 16 / 24 words)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUO-z2-MZb">
@@ -105,7 +104,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 words" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mB-To-59F">
                             <rect key="frame" x="355.5" y="12" width="42.5" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                            <color key="textColor" red="0.95294117649999999" green="0.098039215690000001" blue="0.38823529410000002" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="textColor" name="_warnRed"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -144,7 +143,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8c1-rK-TaY">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -175,7 +174,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DrQ-1D-9LN">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -206,7 +205,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rNZ-sM-TG0">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -237,7 +236,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cic-gL-NIS">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -273,7 +272,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z47-cW-e8y">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -304,7 +303,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b9m-sb-91f">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -335,7 +334,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tiY-rI-ecn">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -366,7 +365,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fg9-Xj-ZoH">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -402,7 +401,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="X6j-fm-ATb">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -433,7 +432,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fKl-ra-Taf">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -464,7 +463,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lx9-3X-L9L">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -495,7 +494,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MfC-tq-gbl">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -531,7 +530,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uvQ-fc-sUa">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -562,7 +561,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NTY-FT-V9G">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -593,7 +592,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2cB-B8-VOI">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -624,7 +623,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9X-eD-lhm">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -660,7 +659,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kWz-5h-Mgz">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -682,7 +681,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FYp-cu-XsJ">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -722,7 +721,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sqs-rj-h3G">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -753,7 +752,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JDL-Y6-1xX">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -789,7 +788,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HPy-i1-ImK">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -820,7 +819,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qj1-wB-fd8">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -851,7 +850,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xsG-2H-pEO">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -882,7 +881,7 @@
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f60-Tt-9Ya">
                                                     <rect key="frame" x="26" y="5" width="64.5" height="14.5"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="tintColor" name="_font05"/>
                                                     <color key="textColor" name="_font05"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -903,7 +902,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="_font02"/>
                     <constraints>
                         <constraint firstItem="0HP-vk-HMU" firstAttribute="top" secondItem="JbH-87-EQi" secondAttribute="top" constant="8" id="4aE-ZX-Gah"/>
                         <constraint firstAttribute="height" constant="177" id="D1u-8l-o5M"/>
@@ -913,25 +912,39 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="1"/>
+                            <real key="value" value="0.5"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="value" name="_font05"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="2Sw-3C-FRd">
+                    <rect key="frame" x="16" y="271" width="382" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="P2v-0Z-E6t"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="cKd-Cq-eKx">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <cells/>
+                </collectionView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Fc7-1C-cXj">
-                    <rect key="frame" x="0.0" y="566.5" width="414" height="45"/>
+                    <rect key="frame" x="0.0" y="600.5" width="414" height="45"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f7p-Fe-DON">
                             <rect key="frame" x="0.0" y="0.0" width="206" height="45"/>
-                            <color key="backgroundColor" red="0.086274509799999996" green="0.094117647060000004" blue="0.098039215690000001" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" name="_font02"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="Paste">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleColor" name="_font05"/>
                             </state>
                             <connections>
                                 <action selector="onPasteClick:" destination="-1" eventType="touchUpInside" id="OQw-sv-8Bw"/>
@@ -939,22 +952,23 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CY0-md-bag">
                             <rect key="frame" x="208" y="0.0" width="206" height="45"/>
-                            <color key="backgroundColor" red="0.086274509799999996" green="0.094117647060000004" blue="0.098039215690000001" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="backgroundColor" name="_font02"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="Confirm">
-                                <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" name="photon"/>
                             </state>
                             <connections>
                                 <action selector="onConfirmClick:" destination="-1" eventType="touchUpInside" id="XMe-u0-4kQ"/>
                             </connections>
                         </button>
                     </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="i8g-IV-Aq9"/>
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SUP-cc-VPr">
-                    <rect key="frame" x="0.0" y="613.5" width="414" height="248.5"/>
+                    <rect key="frame" x="0.0" y="647.5" width="414" height="248.5"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="48T-vW-rpw">
                             <rect key="frame" x="2" y="6" width="410" height="47"/>
@@ -963,7 +977,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="q">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="r7z-xU-tTf"/>
@@ -973,7 +987,7 @@
                                     <rect key="frame" x="41" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="w">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="6Ta-go-N3b"/>
@@ -983,7 +997,7 @@
                                     <rect key="frame" x="82" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="e">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="i7g-T9-cvy"/>
@@ -993,7 +1007,7 @@
                                     <rect key="frame" x="123" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="r">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="8nM-CQ-vg1"/>
@@ -1003,7 +1017,7 @@
                                     <rect key="frame" x="164" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="t">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="XpL-wx-T0y"/>
@@ -1013,7 +1027,7 @@
                                     <rect key="frame" x="205" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="y">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="JUw-LM-LVg"/>
@@ -1023,7 +1037,7 @@
                                     <rect key="frame" x="246" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="u">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="Kt7-bC-35n"/>
@@ -1033,7 +1047,7 @@
                                     <rect key="frame" x="287" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="i">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="I6t-TG-Gyp"/>
@@ -1043,7 +1057,7 @@
                                     <rect key="frame" x="328" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="o">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="ZDg-CA-PbU"/>
@@ -1053,7 +1067,7 @@
                                     <rect key="frame" x="369" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="p">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="wcg-sn-aSI"/>
@@ -1068,7 +1082,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="40.5" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="a">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="WmE-qL-Hhg"/>
@@ -1078,7 +1092,7 @@
                                     <rect key="frame" x="40.5" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="s">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="UdL-fa-lh0"/>
@@ -1088,7 +1102,7 @@
                                     <rect key="frame" x="81.5" y="0.0" width="40.5" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="d">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="Liy-nC-gKB"/>
@@ -1098,7 +1112,7 @@
                                     <rect key="frame" x="122" y="0.0" width="40.5" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="f">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="Mfl-Dh-Aoi"/>
@@ -1108,7 +1122,7 @@
                                     <rect key="frame" x="162.5" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="g">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="Vpp-Na-Eko"/>
@@ -1118,7 +1132,7 @@
                                     <rect key="frame" x="203.5" y="0.0" width="40.5" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="h">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="4Qe-Vu-CpE"/>
@@ -1128,7 +1142,7 @@
                                     <rect key="frame" x="244" y="0.0" width="40.5" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="j">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="zfK-VS-N65"/>
@@ -1138,7 +1152,7 @@
                                     <rect key="frame" x="284.5" y="0.0" width="41" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="k">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="8UN-Y7-aWB"/>
@@ -1148,7 +1162,7 @@
                                     <rect key="frame" x="325.5" y="0.0" width="40.5" height="47"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="l">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="xai-nU-aLq"/>
@@ -1157,73 +1171,73 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="PM7-eA-7BY">
-                            <rect key="frame" x="32" y="118" width="302" height="47"/>
+                            <rect key="frame" x="32" y="118" width="302" height="53.5"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fyc-rc-kl3">
-                                    <rect key="frame" x="0.0" y="0.0" width="43" height="47"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="43" height="53.5"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="z">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="RRu-c8-VdG"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g81-5Y-UZO">
-                                    <rect key="frame" x="43" y="0.0" width="43.5" height="47"/>
+                                    <rect key="frame" x="43" y="0.0" width="43.5" height="53.5"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="x">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="4Ac-Dh-ap7"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ff1-9v-aPK">
-                                    <rect key="frame" x="86.5" y="0.0" width="43" height="47"/>
+                                    <rect key="frame" x="86.5" y="0.0" width="43" height="53.5"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="c">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="wn7-do-z7H"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1C-8C-dd9">
-                                    <rect key="frame" x="129.5" y="0.0" width="43" height="47"/>
+                                    <rect key="frame" x="129.5" y="0.0" width="43" height="53.5"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="v">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="gcg-zN-wgA"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqB-cC-9dj">
-                                    <rect key="frame" x="172.5" y="0.0" width="43" height="47"/>
+                                    <rect key="frame" x="172.5" y="0.0" width="43" height="53.5"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="b">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="1iy-au-zwb"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xJh-D4-W5r">
-                                    <rect key="frame" x="215.5" y="0.0" width="43.5" height="47"/>
+                                    <rect key="frame" x="215.5" y="0.0" width="43.5" height="53.5"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="n">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="z1A-GM-Q8h"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xS-Jq-5EK">
-                                    <rect key="frame" x="259" y="0.0" width="43" height="47"/>
+                                    <rect key="frame" x="259" y="0.0" width="43" height="53.5"/>
                                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="30"/>
                                     <state key="normal" title="m">
-                                        <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="titleColor" name="_font04"/>
                                     </state>
                                     <connections>
                                         <action selector="onKeyClick:" destination="-1" eventType="touchUpInside" id="fsE-8F-E8f"/>
@@ -1232,11 +1246,11 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tdh-Oi-zTk">
-                            <rect key="frame" x="342" y="118" width="64" height="47"/>
+                            <rect key="frame" x="342" y="118" width="64" height="53.5"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="64" id="pXJ-U3-LPv"/>
                             </constraints>
-                            <state key="normal" image="passwordDelete">
+                            <state key="normal" image="keyboardBackWord">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
@@ -1244,21 +1258,29 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pb2-z5-Rqk">
-                            <rect key="frame" x="16" y="174" width="382" height="40"/>
-                            <color key="backgroundColor" red="0.14117647059999999" green="0.14901960780000001" blue="0.1529411765" alpha="1" colorSpace="deviceRGB"/>
+                            <rect key="frame" x="16" y="180.5" width="382" height="40"/>
+                            <color key="backgroundColor" name="_font02"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="QEY-am-nkO"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                             <state key="normal" title="Next Word">
-                                <color key="titleColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="titleColor" name="_font04"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="0.5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" name="_font04"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="onSpaceClick:" destination="-1" eventType="touchUpInside" id="KvB-eb-k1j"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.086274509799999996" green="0.094117647060000004" blue="0.098039215690000001" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" name="_font02"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="48T-vW-rpw" secondAttribute="trailing" constant="2" id="7nv-Kw-7nP"/>
                         <constraint firstAttribute="trailing" secondItem="tdh-Oi-zTk" secondAttribute="trailing" constant="8" id="FUt-xi-1x9"/>
@@ -1267,6 +1289,7 @@
                         <constraint firstAttribute="trailing" secondItem="lQH-nQ-slX" secondAttribute="trailing" constant="24" id="U9n-bP-HHI"/>
                         <constraint firstItem="48T-vW-rpw" firstAttribute="leading" secondItem="SUP-cc-VPr" secondAttribute="leading" constant="2" id="VaD-jd-dmn"/>
                         <constraint firstItem="pb2-z5-Rqk" firstAttribute="leading" secondItem="SUP-cc-VPr" secondAttribute="leading" constant="16" id="adF-nh-RLZ"/>
+                        <constraint firstAttribute="bottom" secondItem="pb2-z5-Rqk" secondAttribute="bottom" constant="28" id="bLd-fL-Mm6"/>
                         <constraint firstItem="tdh-Oi-zTk" firstAttribute="centerY" secondItem="PM7-eA-7BY" secondAttribute="centerY" id="dck-ua-Typ"/>
                         <constraint firstItem="lQH-nQ-slX" firstAttribute="top" secondItem="48T-vW-rpw" secondAttribute="bottom" constant="9" id="fgK-te-fgU"/>
                         <constraint firstAttribute="width" secondItem="SUP-cc-VPr" secondAttribute="height" multiplier="10:6" id="hhg-w4-zQX"/>
@@ -1289,20 +1312,6 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="2Sw-3C-FRd">
-                    <rect key="frame" x="16" y="271" width="382" height="40"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="P2v-0Z-E6t"/>
-                    </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="cKd-Cq-eKx">
-                        <size key="itemSize" width="50" height="50"/>
-                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    </collectionViewFlowLayout>
-                    <cells/>
-                </collectionView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1320,20 +1329,29 @@
                 <constraint firstItem="w7x-Co-5wU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gyb-Zp-EvS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JbH-87-EQi" secondAttribute="trailing" constant="16" id="lqH-5D-7xK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="w7x-Co-5wU" secondAttribute="top" id="pod-8V-ath"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SUP-cc-VPr" secondAttribute="bottom" id="ukr-QH-xUM"/>
+                <constraint firstAttribute="bottom" secondItem="SUP-cc-VPr" secondAttribute="bottom" id="ukr-QH-xUM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2Sw-3C-FRd" secondAttribute="trailing" constant="16" id="zCq-7c-6KK"/>
             </constraints>
             <point key="canvasLocation" x="139" y="145"/>
         </view>
     </objects>
     <resources>
-        <image name="mnemonicsIc" width="25" height="25"/>
-        <image name="passwordDelete" width="33" height="23"/>
+        <image name="iconMnemonic" width="24" height="24"/>
+        <image name="keyboardBackWord" width="28" height="28"/>
+        <namedColor name="_font02">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_font04">
             <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_warnRed">
+            <color red="0.95300000905990601" green="0.097999997437000275" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -82,9 +82,10 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         if (tableView == displayingChainTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"EditDisplayChainCell") as? EditDisplayChainCell
             let chainType = displayedChains[indexPath.row]
-            cell?.chainCardView.backgroundColor = WUtils.getChainBg(chainType)
-            cell?.chainImgView.image = WUtils.getChainImg(chainType)
-            cell?.chainTitleLabel.text = WUtils.getChainTitle2(chainType)
+            let chainConfig = ChainFactory().getChainConfig(chainType)
+            cell?.chainCardView.backgroundColor = chainConfig?.chainColorBG
+            cell?.chainImgView.image = chainConfig?.chainImg
+            cell?.chainTitleLabel.text = chainConfig?.chainTitle2
             cell?.actionRemoveChain = { self.onClickRemoveChain(chainType) }
             cell?.selectionStyle = .none
             return cell!
@@ -92,16 +93,17 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"EditHideChainCell") as? EditHideChainCell
             let chainType = hidedChains[indexPath.row]
-            cell?.chainCardView.backgroundColor = WUtils.getChainBg(chainType)
-            cell?.chainImgView.image = WUtils.getChainImg(chainType)
-            cell?.chainTitleLabel.text = WUtils.getChainTitle2(chainType)
+            let chainConfig = ChainFactory().getChainConfig(chainType)
+            cell?.chainCardView.backgroundColor = chainConfig?.chainColorBG
+            cell?.chainImgView.image = chainConfig?.chainImg
+            cell?.chainTitleLabel.text = chainConfig?.chainTitle2
             cell?.actionAddChain = { self.onClickAddChain(chainType) }
             return cell!
         }
     }
     
     func onClickAddChain(_ chainType: ChainType) {
-        if let hideChainIndex = hidedChains.firstIndex { $0 == chainType } {
+        if let hideChainIndex = hidedChains.firstIndex(where: { $0 == chainType }) {
             hidedChains.remove(at: hideChainIndex)
             displayedChains.append(chainType)
             
@@ -125,7 +127,7 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
             }
         }
         
-        if let displayChainIndex = displayedChains.firstIndex { $0 == chainType } {
+        if let displayChainIndex = displayedChains.firstIndex(where: { $0 == chainType }) {
             displayedChains.remove(at: displayChainIndex)
             hidedChains.append(chainType)
             var tempHide = Array<ChainType>()

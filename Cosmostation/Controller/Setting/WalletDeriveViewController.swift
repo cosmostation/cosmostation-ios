@@ -61,7 +61,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -151,12 +151,12 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         
         if (selectedCnt == 0) {
             self.walletCntLabel.text = String(alreadyCnt)
-            self.walletCntLabel.textColor = UIColor(hexString: "#7a7f88")
+            self.walletCntLabel.textColor = UIColor.init(named: "_font04")
             self.totalWalletCntLabel.text = "/ " + String(allKeyCnt)
             
         } else {
             self.walletCntLabel.text = String(alreadyCnt + selectedCnt)
-            self.walletCntLabel.textColor = UIColor(hexString: "#05D2DD")
+            self.walletCntLabel.textColor = UIColor.init(named: "photon")
             self.totalWalletCntLabel.text = "/ " + String(allKeyCnt)
         }
     }
