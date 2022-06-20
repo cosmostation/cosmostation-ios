@@ -12,8 +12,6 @@ import SwiftKeychainWrapper
 
 class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     
-    @IBOutlet weak var cardView: CardView!
-    
     @IBOutlet weak var mneminicLayer0: UIView!
     @IBOutlet weak var mneminicLayer1: UIView!
     @IBOutlet weak var mneminicLayer2: UIView!
@@ -84,7 +82,6 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
                                self.mnemonic16, self.mnemonic17, self.mnemonic18, self.mnemonic19,
                                self.mnemonic20, self.mnemonic21, self.mnemonic22, self.mnemonic23]
         
-        self.cardView.backgroundColor = COLOR_BG_GRAY
         self.onCreateMenmonic()
         
         if (BaseData.instance.getUsingEnginerMode()) {
@@ -148,7 +145,6 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
                     self.navigationController?.pushViewController(walletDeriveVC, animated: true)
                 });
             }
-            
         }
     }
     
