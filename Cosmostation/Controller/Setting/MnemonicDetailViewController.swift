@@ -13,7 +13,6 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var mnemonicNameLabel: UILabel!
     
-    @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var mneminicLayer0: UIView!
     @IBOutlet weak var mneminicLayer1: UIView!
     @IBOutlet weak var mneminicLayer2: UIView!
@@ -84,7 +83,6 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
                                self.mnemonic16, self.mnemonic17, self.mnemonic18, self.mnemonic19,
                                self.mnemonic20, self.mnemonic21, self.mnemonic22, self.mnemonic23]
         
-        self.cardView.backgroundColor = COLOR_BG_GRAY
         self.onRetriveMenmonic()
     }
     

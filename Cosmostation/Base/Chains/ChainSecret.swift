@@ -27,7 +27,7 @@ class ChainSecret: ChainConfig {
     var stakeDenom = "uscrt"
     var stakeSymbol = "SCRT"
     var stakeSendImg = UIImage(named: "sendImg")!
-    var stakeSendBg = UIColor(named: "secret_dark")!
+    var stakeSendBg = UIColor(named: "secret")!
     
     var addressPrefix = "secret"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
