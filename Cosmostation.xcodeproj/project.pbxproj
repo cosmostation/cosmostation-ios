@@ -597,6 +597,7 @@
 		04983CA5278C24C100F913A3 /* TxSaveProfileCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983CA3278C24C100F913A3 /* TxSaveProfileCell.xib */; };
 		04983CA8278C24DC00F913A3 /* TxLinkAccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04983CA6278C24DC00F913A3 /* TxLinkAccountCell.swift */; };
 		04983CA9278C24DC00F913A3 /* TxLinkAccountCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04983CA7278C24DC00F913A3 /* TxLinkAccountCell.xib */; };
+		04A8E96A2860597A00A5E023 /* MnemonicListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6FA281AA8D7009D8AAF /* MnemonicListViewController.swift */; };
 		04AAD5B7275BAD9B002D3A95 /* NewAccountTypePopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AAD5B9275BAD9B002D3A95 /* NewAccountTypePopup.xib */; };
 		04B1BE1427A165F000B1236A /* CertikVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1327A165F000B1236A /* CertikVote.swift */; };
 		04B1BE1D27A3BC4500B1236A /* cosmwasm_wasm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1527A3BC4400B1236A /* cosmwasm_wasm_v1_tx.pb.swift */; };
@@ -8084,6 +8085,7 @@
 				1817CB3B283E2CE500523713 /* desmos_profiles_v1beta1_query_chain_links.pb.swift in Sources */,
 				1817CC42283E2CE600523713 /* ibc_core_connection_v1_connection.pb.swift in Sources */,
 				18FFB61C281AF533004E65BB /* IBCTokenGrpcViewController.swift in Sources */,
+				04A8E96A2860597A00A5E023 /* MnemonicListViewController.swift in Sources */,
 				1817CC7F283E2CE600523713 /* evmos_erc20_v1_tx.pb.swift in Sources */,
 				18FFB61D281AF533004E65BB /* TxHardBorrowCell.swift in Sources */,
 				1817CC5B283E2CE600523713 /* desmos_profiles_v1beta1_query.grpc.swift in Sources */,

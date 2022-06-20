@@ -92,9 +92,7 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_mnemonic_create", comment: "");
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_mnemonic_create", comment: "")
     }
     
     func onCreateMenmonic() {

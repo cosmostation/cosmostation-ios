@@ -37,10 +37,9 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_wallet_manage", comment: "");
         self.navigationItem.title = NSLocalizedString("title_wallet_manage", comment: "");
-        
-        let rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(onStartEdit))
-        rightBarButtonItem.tintColor = UIColor.init(named: "_font05")
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(onStartEdit))
         
         self.displayChains = BaseData.instance.dpSortedChains()
         self.selectedChain = BaseData.instance.getRecentChain()
