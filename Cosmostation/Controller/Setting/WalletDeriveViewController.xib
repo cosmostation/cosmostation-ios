@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -26,9 +28,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="Mms-Qb-VaF">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgU-dS-4E3">
                     <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                     <subviews>
@@ -38,7 +37,7 @@
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="Y3l-mQ-Z73"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTH-hI-ri0">
@@ -46,7 +45,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="gw6-39-W4Y"/>
                             </constraints>
-                            <state key="normal" image="iconIosBack"/>
+                            <state key="normal" image="btnNaviBack"/>
                             <connections>
                                 <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="h5s-ot-2Uo"/>
                             </connections>
@@ -57,7 +56,7 @@
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="pAa-hq-yjw"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvd-Ti-dAg">
@@ -66,7 +65,7 @@
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="Zki-nF-CZi"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <color key="textColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -87,7 +86,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HD Path :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xa8-gy-ihg">
                     <rect key="frame" x="253" y="110" width="61" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPy-W7-6tb" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
@@ -96,7 +95,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Syo-2g-U0Z">
                             <rect key="frame" x="12" y="8" width="8" height="16.5"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown_btn" translatesAutoresizingMaskIntoConstraints="NO" id="kZe-bu-tQi">
@@ -121,10 +120,10 @@
                             <integer key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="value" name="_font04"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                            <real key="value" value="0.80000000000000004"/>
+                            <real key="value" value="0.5"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                             <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -138,7 +137,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                     <state key="normal" title="Derive Wallets">
-                        <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" name="photon"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -148,7 +147,7 @@
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="value" name="photon"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -164,7 +163,7 @@
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hgU-dS-4E3" secondAttribute="trailing" id="7aO-fR-yi2"/>
                 <constraint firstItem="hgU-dS-4E3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="8in-xn-LF3"/>
@@ -172,15 +171,11 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JPy-W7-6tb" secondAttribute="trailing" constant="12" id="J9I-XO-Eof"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Cu9-nM-TCI" secondAttribute="bottom" constant="16" id="KjR-3V-bnl"/>
                 <constraint firstItem="JPy-W7-6tb" firstAttribute="leading" secondItem="xa8-gy-ihg" secondAttribute="trailing" constant="8" id="Myd-SE-Goj"/>
-                <constraint firstAttribute="top" secondItem="Mms-Qb-VaF" secondAttribute="top" id="Nfl-ac-4Gu"/>
-                <constraint firstAttribute="bottom" secondItem="Mms-Qb-VaF" secondAttribute="bottom" id="QbC-ij-Gr9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Cu9-nM-TCI" secondAttribute="trailing" constant="16" id="QtT-fD-9Dj"/>
                 <constraint firstItem="Cu9-nM-TCI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="V6s-pS-8SA"/>
-                <constraint firstItem="Mms-Qb-VaF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WbH-On-4nZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5h5-QG-NvX" secondAttribute="trailing" id="Ytr-c3-17C"/>
                 <constraint firstItem="Cu9-nM-TCI" firstAttribute="top" secondItem="5h5-QG-NvX" secondAttribute="bottom" constant="12" id="akJ-3E-BWF"/>
                 <constraint firstItem="xa8-gy-ihg" firstAttribute="centerY" secondItem="JPy-W7-6tb" secondAttribute="centerY" id="h2y-GR-z1h"/>
-                <constraint firstItem="Mms-Qb-VaF" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="ix9-Ni-9AY"/>
                 <constraint firstItem="JPy-W7-6tb" firstAttribute="top" secondItem="hgU-dS-4E3" secondAttribute="bottom" constant="8" id="o4q-h6-Zl3"/>
                 <constraint firstItem="hgU-dS-4E3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vop-cr-Qjc"/>
                 <constraint firstItem="5h5-QG-NvX" firstAttribute="top" secondItem="JPy-W7-6tb" secondAttribute="bottom" constant="12" id="ymh-QK-0nh"/>
@@ -189,8 +184,19 @@
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
+        <image name="btnNaviBack" width="24" height="24"/>
         <image name="dropdown_btn" width="24" height="24"/>
-        <image name="iconIosBack" width="24" height="24"/>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
