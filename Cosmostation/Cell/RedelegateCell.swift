@@ -35,7 +35,7 @@ class RedelegateCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.valImg.image = UIImage(named: "validatorNoneImg")
+        self.valImg.image = UIImage(named: "validatorDefault")
     }
     
 }

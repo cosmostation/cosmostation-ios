@@ -50,7 +50,7 @@ To make transaction can add private information with later.</string>
                         <constraint firstAttribute="width" constant="110" id="d4B-Jj-Dqt"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                    <state key="normal" title=" QR Scan" image="iconQrcode">
+                    <state key="normal" title=" QR Scan" image="btnIconScan">
                         <color key="titleColor" name="_font05"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -75,7 +75,7 @@ To make transaction can add private information with later.</string>
                         <constraint firstAttribute="width" constant="110" id="egt-Fe-uCq"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                    <state key="normal" title="Paste" image="copyIc">
+                    <state key="normal" title="Paste" image="btnIconPaste">
                         <color key="titleColor" name="_font05"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -168,8 +168,8 @@ To make transaction can add private information with later.</string>
         </view>
     </objects>
     <resources>
-        <image name="copyIc" width="18" height="18"/>
-        <image name="iconQrcode" width="18" height="18"/>
+        <image name="btnIconPaste" width="24" height="24"/>
+        <image name="btnIconScan" width="24" height="24"/>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

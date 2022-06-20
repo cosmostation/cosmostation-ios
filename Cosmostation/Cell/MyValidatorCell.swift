@@ -35,7 +35,7 @@ class MyValidatorCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        self.validatorImg.image = UIImage(named: "validatorNoneImg")
+        self.validatorImg.image = UIImage(named: "validatorDefault")
         self.myDelegatedAmoutLabel.text = "-"
         self.myUndelegatingAmountLabel.text = "-"
         self.rewardAmoutLabel.text = "-"

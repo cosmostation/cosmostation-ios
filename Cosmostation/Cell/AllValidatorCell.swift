@@ -34,7 +34,7 @@ class AllValidatorCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.validatorImg.image = UIImage(named: "validatorNoneImg")
+        self.validatorImg.image = UIImage(named: "validatorDefault")
         self.monikerLabel.text = "-"
         self.powerLabel.text = "-"
         self.commissionLabel.text = "-"
