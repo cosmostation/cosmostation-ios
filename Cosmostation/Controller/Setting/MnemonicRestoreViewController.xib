@@ -74,9 +74,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="b2b-qJ-RU0">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7x-Co-5wU">
                     <rect key="frame" x="0.0" y="44" width="414" height="40"/>
                     <subviews>
@@ -1319,21 +1316,16 @@
                 <constraint firstItem="JbH-87-EQi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="MTC-kb-K1m"/>
                 <constraint firstItem="JbH-87-EQi" firstAttribute="top" secondItem="w7x-Co-5wU" secondAttribute="bottom" constant="2" id="MTV-iL-nsE"/>
                 <constraint firstItem="Fc7-1C-cXj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Nsb-13-eby"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="b2b-qJ-RU0" secondAttribute="trailing" id="Qec-wq-zmA"/>
-                <constraint firstItem="b2b-qJ-RU0" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="bob-af-naI"/>
                 <constraint firstItem="w7x-Co-5wU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gyb-Zp-EvS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="JbH-87-EQi" secondAttribute="trailing" constant="16" id="lqH-5D-7xK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="w7x-Co-5wU" secondAttribute="top" id="pod-8V-ath"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="b2b-qJ-RU0" secondAttribute="leading" id="rqD-ab-gpA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SUP-cc-VPr" secondAttribute="bottom" id="ukr-QH-xUM"/>
-                <constraint firstAttribute="top" secondItem="b2b-qJ-RU0" secondAttribute="top" id="wIm-gc-NNX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2Sw-3C-FRd" secondAttribute="trailing" constant="16" id="zCq-7c-6KK"/>
             </constraints>
             <point key="canvasLocation" x="139" y="145"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
         <image name="mnemonicsIc" width="25" height="25"/>
         <image name="passwordDelete" width="33" height="23"/>
         <systemColor name="systemBackgroundColor">

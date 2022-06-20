@@ -67,9 +67,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="x2d-bi-zqv">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIC-ui-zeY" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="12" y="56" width="390" height="184"/>
                     <subviews>
@@ -858,21 +855,14 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="x2d-bi-zqv" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="FuI-8c-U2S"/>
                 <constraint firstItem="yIC-ui-zeY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="GgI-Qm-DUU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dZ1-tB-5G6" secondAttribute="trailing" constant="16" id="IaP-nL-Isy"/>
-                <constraint firstAttribute="top" secondItem="x2d-bi-zqv" secondAttribute="top" id="JlG-6r-FwB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yIC-ui-zeY" secondAttribute="trailing" constant="12" id="NF5-sw-gZY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dZ1-tB-5G6" secondAttribute="bottom" constant="16" id="Ueg-kU-BTW"/>
                 <constraint firstItem="yIC-ui-zeY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="XT8-Xa-Eam"/>
-                <constraint firstItem="x2d-bi-zqv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Xx6-XT-c3I"/>
-                <constraint firstItem="x2d-bi-zqv" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="kPs-G6-TUY"/>
                 <constraint firstItem="dZ1-tB-5G6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ypD-1L-mFV"/>
             </constraints>
             <point key="canvasLocation" x="139" y="153"/>
         </view>
     </objects>
-    <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
-    </resources>
 </document>
