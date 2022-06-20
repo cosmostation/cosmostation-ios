@@ -601,7 +601,7 @@ support@cosmostation.io";
 "title_check_mnemonics" = "니모닉 확인";
 "title_check_privatekey" = "개인키 확인";
 "title_create" = "지갑 생성";
-"title_watch_wallet" = "관찰 지갑";
+"title_watch_wallet" = "관찰 지갑 등록";
 "title_restore_privatekey" = "개인키로 지갑복원";
 "title_restore" = "니모닉으로 지갑복원";
 "title_path" = "지갑 선택";

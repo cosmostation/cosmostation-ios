@@ -153,8 +153,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         cell?.setDenomType(chainType!)
         if (chainType == ChainType.BINANCE_MAIN) {
             cell?.feeLayer.isHidden = false
-            cell?.usedFeeLayer.isHidden = true
-            cell?.limitFeeLayer.isHidden = true
             cell?.statusImg.image = UIImage(named: "successIc")
             cell?.statusLabel.text = NSLocalizedString("tx_success", comment: "")
             cell?.errorMsg.isHidden = true
@@ -172,8 +170,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             cell?.feeLayer.isHidden = false
-            cell?.usedFeeLayer.isHidden = true
-            cell?.limitFeeLayer.isHidden = true
             if (mTxInfo!.isSuccess()) {
                 cell?.statusImg.image = UIImage(named: "successIc")
                 cell?.statusLabel.text = NSLocalizedString("tx_success", comment: "")
@@ -199,8 +195,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             
         } else {
             cell?.feeLayer.isHidden = false
-            cell?.usedFeeLayer.isHidden = true
-            cell?.limitFeeLayer.isHidden = true
             let decimal = WUtils.mainDivideDecimal(chainType)
             if (mTxInfo!.isSuccess()) {
                 cell?.statusImg.image = UIImage(named: "successIc")

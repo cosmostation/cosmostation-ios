@@ -12,6 +12,9 @@ import SwiftKeychainWrapper
 class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordViewDelegate {
     
     @IBOutlet weak var keyInputText: AddressInputTextField!
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var btnScan: UIButton!
+    @IBOutlet weak var btnPaste: UIButton!
     var userInput: String?
     
     override func viewDidLoad() {
@@ -24,10 +27,8 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_restore_privatekey", comment: "");
-        self.navigationItem.title = NSLocalizedString("title_restore_privatekey", comment: "");
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_restore_privatekey", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_restore_privatekey", comment: "")
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
@@ -97,6 +98,12 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
             });
             
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnScan.borderColor = UIColor.init(named: "_font05")
+        btnPaste.borderColor = UIColor.init(named: "_font05")
     }
 
 }

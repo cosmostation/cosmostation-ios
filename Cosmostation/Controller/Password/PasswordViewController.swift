@@ -205,9 +205,9 @@ class PasswordViewController: BaseViewController {
     func onUpdatePinImage(count:Int) {
         for i in 0 ..< 5 {
             if (i < count) {
-                pinImgs[i].image = UIImage(named: "passp");
+                pinImgs[i].image = UIImage(named: "pinFill")
             } else {
-                pinImgs[i].image = UIImage(named: "passUp");
+                pinImgs[i].image = UIImage(named: "pinEmpty")
             }
         }
     }

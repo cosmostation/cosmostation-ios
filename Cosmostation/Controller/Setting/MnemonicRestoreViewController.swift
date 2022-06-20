@@ -122,8 +122,6 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_restore", comment: "")
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("clear_all", comment: ""), style: .done, target: self, action: #selector(clearAll))
         self.initViewUpdate()
     }

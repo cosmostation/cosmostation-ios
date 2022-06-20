@@ -28,6 +28,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
         
         self.txTableView.delegate = self
@@ -131,6 +132,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
             }
             self.onFetchgRPCTx(mTxHash!)
             
+        } else {
+            //TODO temp added
+            self.onFetchgRPCTx(mTxHash!)
         }
     }
     
@@ -534,16 +538,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     func onFetchgRPCTx(_ txHash: String) {
         print("onFetchgRPCTx ", txHash)
         DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
-            
-            let req = Cosmos_Tx_V1beta1_GetTxRequest.with {
-                $0.hash = txHash
-            }
             do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmos_Tx_V1beta1_GetTxRequest.with { $0.hash = txHash }
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).getTx(req).response.wait()
                 self.mTxRespose = response
                 DispatchQueue.main.async(execute: { self.onUpdateView() });

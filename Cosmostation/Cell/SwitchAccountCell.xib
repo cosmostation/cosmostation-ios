@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,25 +37,25 @@
                                             <constraint firstAttribute="width" constant="100" id="CKJ-pi-7mJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="13"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cosmosadssa" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ypD-rT-jI1">
                                         <rect key="frame" x="150" y="10" width="190" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATOM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gg0-JM-UcW">
                                         <rect key="frame" x="309" y="30" width="31" height="13"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
-                                        <color key="textColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JF9-Hq-2jq">
                                         <rect key="frame" x="299" y="27" width="8" height="16.5"/>
                                         <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -98,7 +99,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="0.14989902209047615" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
                             <constraint firstItem="XMT-3e-lU2" firstAttribute="centerY" secondItem="x5E-zJ-cTw" secondAttribute="centerY" id="RJ0-nl-3pk"/>
                             <constraint firstItem="XMT-3e-lU2" firstAttribute="leading" secondItem="x5E-zJ-cTw" secondAttribute="leading" constant="16" id="ZXb-gW-syp"/>
@@ -132,5 +133,11 @@
     </objects>
     <resources>
         <image name="key_off" width="20" height="20"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

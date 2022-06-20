@@ -218,10 +218,19 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             self.onShowSafariWeb(url)
             
         } else {
+//            let history = mApiCustomNewHistories[indexPath.row]
+//            let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
+//            guard let url = URL(string: link) else { return }
+//            self.onShowSafariWeb(url)
+            
+            //TODO temp added
             let history = mApiCustomNewHistories[indexPath.row]
-            let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
-            guard let url = URL(string: link) else { return }
-            self.onShowSafariWeb(url)
+            let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
+            txDetailVC.mIsGen = false
+            txDetailVC.mTxHash = history.data!.txhash!
+            self.navigationItem.title = ""
+            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+            self.navigationController?.pushViewController(txDetailVC, animated: true)
         }
     }
     

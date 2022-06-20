@@ -13,7 +13,6 @@ class ManageChainCell: UITableViewCell {
     @IBOutlet weak var chainCard: CardView!
     @IBOutlet weak var chainImg: UIImageView!
     @IBOutlet weak var chainName: UILabel!
-    @IBOutlet weak var chainAll: UILabel!
     
     
     override func awakeFromNib() {
@@ -23,14 +22,12 @@ class ManageChainCell: UITableViewCell {
     
     func onSetView(_ selected: Bool) {
         if (selected) {
-            chainCard.borderColor = UIColor.init(hexString: "#9ca2ac", alpha: 1.0)
-            chainName.textColor = UIColor.white
-            chainAll.textColor = UIColor.white
+            chainCard.borderColor = UIColor.init(named: "_font05")
+            chainName.textColor = UIColor.init(named: "_font05")
             chainImg.alpha = 1.0
         } else {
-            chainCard.borderColor = UIColor.init(hexString: "#9ca2ac", alpha: 0.0)
-            chainName.textColor = UIColor.init(hexString: "#4b4f54")
-            chainAll.textColor = UIColor.init(hexString: "#4b4f54")
+            chainCard.borderColor = UIColor.init(hexString: "#000000", alpha: 0.0)
+            chainName.textColor = UIColor.init(named: "_font04")
             chainImg.alpha = 0.1
         }
     }

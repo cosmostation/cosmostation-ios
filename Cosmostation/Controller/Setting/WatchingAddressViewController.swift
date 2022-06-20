@@ -11,7 +11,10 @@ import UIKit
 class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
     
     @IBOutlet weak var addAddressInputText: AddressInputTextField!
-
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var btnScan: UIButton!
+    @IBOutlet weak var btnPaste: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -102,5 +105,11 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
                 }
             });
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnScan.borderColor = UIColor.init(named: "_font05")
+        btnPaste.borderColor = UIColor.init(named: "_font05")
     }
 }

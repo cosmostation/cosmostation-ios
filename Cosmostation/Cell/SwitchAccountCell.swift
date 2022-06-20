@@ -24,32 +24,29 @@ class SwitchAccountCell: UITableViewCell {
     }
     
     func onBindChainAccounts(_ data: ChainAccounts?, _ accountPosition: Int, _ currentAccount: Account?) {
-        rootview.backgroundColor = WUtils.getChainBg(data?.chainType)
+        guard let dpChainConfig = ChainFactory().getChainConfig(data?.chainType) else {
+            return
+        }
+        rootview.backgroundColor = dpChainConfig.chainColorBG
         
         let dpAccount = data?.accounts[accountPosition]
-        let dpChain = WUtils.getChainType(dpAccount!.account_base_chain)
-        
         if (dpAccount?.account_has_private == true) {
             chainAccountKeyImg.image = chainAccountKeyImg.image!.withRenderingMode(.alwaysTemplate)
-            chainAccountKeyImg.tintColor = WUtils.getChainColor(dpChain)
+            chainAccountKeyImg.tintColor = dpChainConfig.chainColor
         } else {
-            chainAccountKeyImg.tintColor = COLOR_DARK_GRAY
+            chainAccountKeyImg.tintColor = UIColor.init(named: "_font05")
         }
-        chainAccountName.text = WUtils.getWalletName(dpAccount)
+        chainAccountName.text = dpAccount?.getDpName()
         chainAccountAddress.text = dpAccount!.account_address
         
-//        let dpChainConfig = ChainFactory().getChainConfig(dpChain!)
-//        WUtils.showCoinDp(dpChainConfig.stakeDenom, dpAccount!.account_last_total, chainAccountDenom, chainAccountAmount, dpChain)
-        
-        chainAccountAmount.attributedText = WUtils.displayAmount2(dpAccount?.account_last_total, chainAccountAmount.font, 0, 6)
-        WUtils.setDenomTitle(dpChain, chainAccountDenom)
+        WUtils.showCoinDp(dpChainConfig.stakeDenom, dpAccount!.account_last_total, chainAccountDenom, chainAccountAmount, dpChainConfig.chainType)
         
         if (dpAccount?.account_id == currentAccount?.account_id) {
             chainAccountCard.borderWidth = 1.0
-            chainAccountCard.borderColor = .white
+            chainAccountCard.borderColor = UIColor.init(named: "_font05")
         } else {
             chainAccountCard.borderWidth = 0.2
-            chainAccountCard.borderColor = .gray
+            chainAccountCard.borderColor = UIColor.init(named: "_font04")
         }
         
         let tapItem = UITapGestureRecognizer(target: self, action: #selector(self.onTapItem))

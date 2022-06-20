@@ -107,7 +107,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Pza-Vr-W8p">
                                         <rect key="frame" x="12" y="14" width="366" height="22"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key_off" translatesAutoresizingMaskIntoConstraints="NO" id="H7Y-gv-Qle">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="H7Y-gv-Qle">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="22" id="E9l-Ga-UEu"/>
@@ -274,7 +274,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="U3e-9B-ynh">
                                         <rect key="frame" x="12" y="14" width="366" height="22"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key_off" translatesAutoresizingMaskIntoConstraints="NO" id="e6y-CA-e4x">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="e6y-CA-e4x">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="HVF-si-9Xy"/>
@@ -545,7 +545,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="v0o-TD-FSc">
                                         <rect key="frame" x="12" y="14" width="366" height="22"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key_off" translatesAutoresizingMaskIntoConstraints="NO" id="VMl-Vy-pt6">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="VMl-Vy-pt6">
                                                 <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="22" id="G14-Gu-822"/>
@@ -1082,7 +1082,7 @@
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sortBtn" translatesAutoresizingMaskIntoConstraints="NO" id="lFP-dd-Frb">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconOrder" translatesAutoresizingMaskIntoConstraints="NO" id="lFP-dd-Frb">
                                                 <rect key="frame" x="64" y="4" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="AP1-gE-bGR"/>
@@ -1212,7 +1212,7 @@
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sortBtn" translatesAutoresizingMaskIntoConstraints="NO" id="uGv-Vd-d5l">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconOrder" translatesAutoresizingMaskIntoConstraints="NO" id="uGv-Vd-d5l">
                                                 <rect key="frame" x="64" y="4" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="16" id="3hv-Ly-7x8"/>
@@ -2577,7 +2577,7 @@
                                         <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" name="_font05"/>
+                                        <color key="value" name="photon"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -2901,10 +2901,10 @@
         <image name="btnSwitch" width="24" height="24"/>
         <image name="chainDefault" width="42" height="42"/>
         <image name="connectimg1" width="177" height="50"/>
-        <image name="key_off" width="20" height="20"/>
+        <image name="iconKeyEmpty" width="20" height="20"/>
+        <image name="iconOrder" width="16" height="16"/>
         <image name="loading_1" width="144" height="144"/>
         <image name="setting_ic" width="24" height="24"/>
-        <image name="sortBtn" width="16" height="16"/>
         <image name="tokensDsIc" width="24" height="24"/>
         <image name="ts_ic" width="24" height="24"/>
         <image name="wallet_ic" width="24" height="24"/>

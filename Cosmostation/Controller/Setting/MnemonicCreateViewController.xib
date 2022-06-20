@@ -4,13 +4,14 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MnemonicCreateViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="cardView" destination="yIC-ui-zeY" id="0HJ-vm-WlC"/>
                 <outlet property="mneminicLayer0" destination="U4f-tJ-ho8" id="HUb-lH-qKU"/>
                 <outlet property="mneminicLayer1" destination="Wqo-SW-LOu" id="dye-y3-cHB"/>
                 <outlet property="mneminicLayer10" destination="V27-rN-AFk" id="bnq-Jv-YER"/>
@@ -67,9 +68,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="x2d-bi-zqv">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIC-ui-zeY" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="12" y="56" width="390" height="184"/>
                     <subviews>
@@ -88,13 +86,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="diT-j3-R7h"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnR-Li-2Ep">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -117,13 +115,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="ZgY-gr-Euy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="avl-Lr-hyo">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -146,13 +144,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="Z6l-IZ-Cw9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qN3-Cw-oYj">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -175,13 +173,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="e7T-Ig-Ts9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5m-Wh-2HJ">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -209,13 +207,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="zTm-Uc-N2F"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRE-DB-hk2">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -238,13 +236,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="S7A-te-KSV"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1vH-oA-07b">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -267,13 +265,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="ZeP-za-Fel"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOc-6f-hjp">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -296,13 +294,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="yW6-hE-CNs"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rf8-pH-ZFU">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -330,13 +328,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="w9c-Bi-FJy"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Spe-ea-MIq">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -359,13 +357,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="9Z8-Yn-yUm"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvs-bD-uBA">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -388,13 +386,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="K0C-Er-fH8"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GyQ-M0-bAW">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -417,13 +415,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="JDu-5H-3M2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bne-cg-ZKE">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -451,13 +449,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="6O2-z4-ac5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PuO-UZ-KOr">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -480,13 +478,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="Cph-AO-lep"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Yo-CW-BTv">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -509,13 +507,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="enS-fs-HKq"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xSM-fe-1Hk">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -538,13 +536,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="v4J-XP-x5R"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iw0-Ae-VI4">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -572,13 +570,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="eaj-1v-fwo"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaQ-Cb-kGc">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -601,13 +599,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="JAy-qy-EkQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dAN-Hw-fGe">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -630,13 +628,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="Dyn-7X-vmP"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EsL-pW-ZKL">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -659,13 +657,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="VHF-dl-bJT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQu-j0-bt8">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -693,13 +691,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="e4k-Qv-QwE"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7y-wV-BLV">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -722,13 +720,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="cdZ-oG-owj"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gN-0K-qm1">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -751,13 +749,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="NS3-LQ-ZeQ"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B72-bd-Jna">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -780,13 +778,13 @@
                                                         <constraint firstAttribute="width" constant="18" id="rPg-Lj-kpx"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                                    <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="textColor" name="_font04"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tMS-y9-ogu">
                                                     <rect key="frame" x="26" y="12" width="64.5" height="0.0"/>
                                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" name="_font05"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -805,7 +803,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.1803921568627451" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="184" id="HnP-pk-2AH"/>
                         <constraint firstItem="sY0-1T-Vk3" firstAttribute="leading" secondItem="yIC-ui-zeY" secondAttribute="leading" constant="8" id="Us4-gA-BEj"/>
@@ -837,7 +835,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                     <state key="normal" title="Derive Wallet">
-                        <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" name="photon"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -847,7 +845,7 @@
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="value" name="photon"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -856,23 +854,33 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="x2d-bi-zqv" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="FuI-8c-U2S"/>
                 <constraint firstItem="yIC-ui-zeY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="GgI-Qm-DUU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dZ1-tB-5G6" secondAttribute="trailing" constant="16" id="IaP-nL-Isy"/>
-                <constraint firstAttribute="top" secondItem="x2d-bi-zqv" secondAttribute="top" id="JlG-6r-FwB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yIC-ui-zeY" secondAttribute="trailing" constant="12" id="NF5-sw-gZY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dZ1-tB-5G6" secondAttribute="bottom" constant="16" id="Ueg-kU-BTW"/>
                 <constraint firstItem="yIC-ui-zeY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="XT8-Xa-Eam"/>
-                <constraint firstItem="x2d-bi-zqv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Xx6-XT-c3I"/>
-                <constraint firstItem="x2d-bi-zqv" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="kPs-G6-TUY"/>
                 <constraint firstItem="dZ1-tB-5G6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ypD-1L-mFV"/>
             </constraints>
             <point key="canvasLocation" x="139" y="153"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
