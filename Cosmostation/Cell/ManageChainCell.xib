@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,36 +22,28 @@
                         <rect key="frame" x="12" y="4" width="68" height="72"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-4" translatesAutoresizingMaskIntoConstraints="NO" id="acx-Jr-6Vb">
-                                <rect key="frame" x="8" y="4" width="52" height="58.5"/>
+                                <rect key="frame" x="5.5" y="4" width="57" height="58.5"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmosWhMain" translatesAutoresizingMaskIntoConstraints="NO" id="ctP-Bf-VsE">
-                                        <rect key="frame" x="0.0" y="0.0" width="52" height="52"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="ctP-Bf-VsE">
+                                        <rect key="frame" x="2.5" y="0.0" width="52" height="52"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="52" id="cmT-bA-buH"/>
                                             <constraint firstAttribute="width" constant="52" id="jVj-eQ-jGB"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COSMOS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xID-fG-iwv">
-                                        <rect key="frame" x="6" y="48" width="40.5" height="10.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHAIN NAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xID-fG-iwv">
+                                        <rect key="frame" x="0.0" y="48" width="57" height="10.5"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wO1-7e-HmI">
-                                <rect key="frame" x="24.5" y="26" width="19" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="acx-Jr-6Vb" firstAttribute="top" secondItem="7nY-bc-jhC" secondAttribute="top" constant="4" id="LfO-1N-IyF"/>
                             <constraint firstItem="acx-Jr-6Vb" firstAttribute="centerX" secondItem="7nY-bc-jhC" secondAttribute="centerX" id="axk-Lj-SDl"/>
-                            <constraint firstItem="wO1-7e-HmI" firstAttribute="centerX" secondItem="7nY-bc-jhC" secondAttribute="centerX" id="gnB-pr-MhJ"/>
-                            <constraint firstItem="wO1-7e-HmI" firstAttribute="centerY" secondItem="7nY-bc-jhC" secondAttribute="centerY" id="ryE-Ql-IM0"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -87,7 +80,6 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="chainAll" destination="wO1-7e-HmI" id="yTe-BD-uEP"/>
                 <outlet property="chainCard" destination="7nY-bc-jhC" id="g5D-Jw-qwW"/>
                 <outlet property="chainImg" destination="ctP-Bf-VsE" id="wxg-je-zzv"/>
                 <outlet property="chainName" destination="xID-fG-iwv" id="TXw-Ph-8ni"/>
@@ -96,6 +88,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cosmosWhMain" width="42" height="42"/>
+        <image name="chainDefault" width="42" height="42"/>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

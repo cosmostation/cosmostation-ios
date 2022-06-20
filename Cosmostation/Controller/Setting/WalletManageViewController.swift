@@ -37,12 +37,10 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_wallet_manage", comment: "");
         self.navigationItem.title = NSLocalizedString("title_wallet_manage", comment: "");
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         let rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(onStartEdit))
+        rightBarButtonItem.tintColor = UIColor.init(named: "_font05")
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
         
         self.displayChains = BaseData.instance.dpSortedChains()
         self.selectedChain = BaseData.instance.getRecentChain()
@@ -78,28 +76,34 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (tableView == chainTableView) {
-            let cell:ManageChainCell? = tableView.dequeueReusableCell(withIdentifier:"ManageChainCell") as? ManageChainCell
+            let cell = tableView.dequeueReusableCell(withIdentifier:"ManageChainCell") as? ManageChainCell
             let selected = displayChains[indexPath.row]
-            cell?.chainImg.image = WUtils.getChainImg(selected)
-            cell?.chainName.text = WUtils.getChainTitle2(selected)
+            guard let selectedConfig = ChainFactory().getChainConfig(selected) else {
+                return cell!
+            }
+            cell?.chainImg.image = selectedConfig.chainImg
+            cell?.chainName.text = selectedConfig.chainTitle2
+            cell?.chainName.adjustsFontSizeToFitWidth = true
             if (selected == selectedChain) { cell?.onSetView(true) }
             else { cell?.onSetView(false) }
             return cell!
             
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"ManageAccountCell") as? ManageAccountCell
             let account = displayAccounts[indexPath.row]
-            let cell:ManageAccountCell? = tableView.dequeueReusableCell(withIdentifier:"ManageAccountCell") as? ManageAccountCell
             let userChain = WUtils.getChainType(account.account_base_chain)
+            guard let userChainConfig = ChainFactory().getChainConfig(userChain) else {
+                return cell!
+            }
             if (account.account_has_private) {
                 cell?.keyImg.image = cell?.keyImg.image!.withRenderingMode(.alwaysTemplate)
-                cell?.keyImg.tintColor = WUtils.getChainColor(userChain)
+                cell?.keyImg.tintColor = userChainConfig.chainColor
             } else {
-                cell?.keyImg.tintColor = COLOR_DARK_GRAY
+                cell?.keyImg.tintColor = UIColor.init(named: "_font05")
             }
-            cell?.nameLabel.text = WUtils.getWalletName(account)
+            cell?.nameLabel.text = account.getDpName()
             cell?.address.text = account.account_address
-            cell?.amount.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.amount.font, 0, 6)
-            WUtils.setDenomTitle(userChain, cell!.amountDenom)
+            WUtils.showCoinDp(userChainConfig.stakeDenom, account.account_last_total, cell!.amountDenom, cell!.amount, userChainConfig.chainType)
             return cell!
         }
     }
