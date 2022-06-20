@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,9 +21,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="VSt-kQ-CHq">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Hd5-Ip-IED">
                     <rect key="frame" x="0.0" y="44" width="414" height="736"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -36,7 +35,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="Import Mnemonic">
-                                <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" name="photon"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -46,7 +45,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="photon"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -60,7 +59,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="Create Mnemonic">
-                                <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" name="photon"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -70,7 +69,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="photon"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -81,17 +80,13 @@
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="VSt-kQ-CHq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="6cd-d7-Te1"/>
-                <constraint firstAttribute="bottom" secondItem="VSt-kQ-CHq" secondAttribute="bottom" id="B2p-vV-LK1"/>
                 <constraint firstItem="Hd5-Ip-IED" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DgK-DU-TPI"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uCe-ka-5Gg" secondAttribute="bottom" constant="16" id="Fr9-Xu-sYq"/>
                 <constraint firstItem="uCe-ka-5Gg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="HSr-ll-6Me"/>
                 <constraint firstItem="uCe-ka-5Gg" firstAttribute="top" secondItem="Hd5-Ip-IED" secondAttribute="bottom" constant="16" id="I62-Nn-1hz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uCe-ka-5Gg" secondAttribute="trailing" constant="16" id="Tmm-O8-8Ze"/>
-                <constraint firstAttribute="top" secondItem="VSt-kQ-CHq" secondAttribute="top" id="Xju-oH-Z0a"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VSt-kQ-CHq" secondAttribute="trailing" id="Y8G-ce-L3k"/>
                 <constraint firstItem="Hd5-Ip-IED" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kHS-Bj-7uv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Hd5-Ip-IED" secondAttribute="trailing" id="s5Y-8s-jCT"/>
             </constraints>
@@ -99,6 +94,11 @@
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

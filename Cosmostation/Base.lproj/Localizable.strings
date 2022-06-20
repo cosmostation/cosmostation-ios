@@ -599,7 +599,7 @@ support@cosmostation.io";
 "title_check_mnemonics" = "Check Mnemonics";
 "title_check_privatekey" = "Check Private Key";
 "title_create" = "Create Wallet";
-"title_watch_wallet" = "Watch Wallet";
+"title_watch_wallet" = "Add Watch Wallet";
 "title_restore_privatekey" = "Restore With PrivateKey";
 "title_restore" = "Restore With Mnemonic";
 "title_path" = "Select Wallet";
