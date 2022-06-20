@@ -1235,6 +1235,18 @@
 		1817CC7F283E2CE600523713 /* evmos_erc20_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E727BF572500270528 /* evmos_erc20_v1_tx.pb.swift */; };
 		1817CC80283E2CE600523713 /* kava_issuance_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B44278D5F520022D5DF /* kava_issuance_v1beta1_tx.grpc.swift */; };
 		1817CC81283E2CE600523713 /* crescent_liquidity_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338F427E826F000E82AA7 /* crescent_liquidity_v1beta1_query.pb.swift */; };
+		18F41295286062700007E3F2 /* DeriveWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802B4AB28250A9300B2D9E8 /* DeriveWalletCell.swift */; };
+		18F41296286062700007E3F2 /* DeriveWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2802B4AC28250A9300B2D9E8 /* DeriveWalletCell.xib */; };
+		18F412972860628E0007E3F2 /* ManageMnemonicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB6FF281BD85E009D8AAF /* ManageMnemonicCell.xib */; };
+		18F412982860628E0007E3F2 /* ManageMnemonicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6FE281BD85E009D8AAF /* ManageMnemonicCell.swift */; };
+		18F41299286062A70007E3F2 /* BaseChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FC48282A117400214FDA /* BaseChain.swift */; };
+		18F4129A286062FA0007E3F2 /* MWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048DBCE1280EC5E90007275E /* MWords.swift */; };
+		18F4129B2860645A0007E3F2 /* WalletBaseChainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0443B89D285C62E00027A6B9 /* WalletBaseChainCell.swift */; };
+		18F4129C2860649E0007E3F2 /* WalletDeriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB70E281EC0E8009D8AAF /* WalletDeriveViewController.swift */; };
+		18F4129D2860649E0007E3F2 /* WalletDeriveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB70F281EC0E8009D8AAF /* WalletDeriveViewController.xib */; };
+		18F4129E286064A80007E3F2 /* MnemonicListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB6FB281AA8D7009D8AAF /* MnemonicListViewController.xib */; };
+		18F4129F286064AD0007E3F2 /* MnemonicDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB702281EBA14009D8AAF /* MnemonicDetailViewController.swift */; };
+		18F412A0286064AD0007E3F2 /* MnemonicDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047FB703281EBA14009D8AAF /* MnemonicDetailViewController.xib */; };
 		18F811B9282E1FC4008AF0D2 /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
 		18F811BA282E1FC5008AF0D2 /* WalletStationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 151788EB282E078600A7D7CC /* WalletStationCell.xib */; };
 		18F811BB282E1FD7008AF0D2 /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
@@ -6472,6 +6484,7 @@
 				18FFB6FA281AF533004E65BB /* TxCommissionCell.xib in Resources */,
 				18FFB6FB281AF533004E65BB /* GenNFT3ViewController.xib in Resources */,
 				18FFB6FC281AF533004E65BB /* ReplaceResource0ViewController.xib in Resources */,
+				18F412A0286064AD0007E3F2 /* MnemonicDetailViewController.xib in Resources */,
 				18FFB6FD281AF533004E65BB /* ManageAccountAddCell.xib in Resources */,
 				18FFB6FE281AF533004E65BB /* TokenDetailIBCCell.xib in Resources */,
 				18FFB701281AF533004E65BB /* TxSifIncentiveCell.xib in Resources */,
@@ -6506,6 +6519,7 @@
 				18FFB71E281AF533004E65BB /* EarnBondedCell.xib in Resources */,
 				18FFB71F281AF533004E65BB /* HardListMyStatusCell.xib in Resources */,
 				18FFB721281AF533004E65BB /* CdpListAllCell.xib in Resources */,
+				18F4129E286064A80007E3F2 /* MnemonicListViewController.xib in Resources */,
 				18FFB723281AF533004E65BB /* WalletInflationCell.xib in Resources */,
 				18FFB724281AF533004E65BB /* TokenDetailIBCInfoCell.xib in Resources */,
 				18FFB725281AF533004E65BB /* Kava.storyboard in Resources */,
@@ -6598,6 +6612,7 @@
 				18FFB783281AF533004E65BB /* TxSendNFTCell.xib in Resources */,
 				18FFB784281AF533004E65BB /* RenewStarname0ViewController.xib in Resources */,
 				18FFB785281AF533004E65BB /* BridgeTokenGrpcViewController.xib in Resources */,
+				18F412972860628E0007E3F2 /* ManageMnemonicCell.xib in Resources */,
 				18FFB786281AF533004E65BB /* WalletGuideCell.xib in Resources */,
 				18FFB787281AF533004E65BB /* VoteTallyTableViewCell.xib in Resources */,
 				18FFB788281AF533004E65BB /* SifPoolCell.xib in Resources */,
@@ -6643,6 +6658,7 @@
 				18FFB7B4281AF533004E65BB /* TxIssueNFTCell.xib in Resources */,
 				18FFB7B5281AF533004E65BB /* EditHideChainCell.xib in Resources */,
 				18FFB7B6281AF533004E65BB /* TxSifSwapCell.xib in Resources */,
+				18F41296286062700007E3F2 /* DeriveWalletCell.xib in Resources */,
 				18FFB7B7281AF533004E65BB /* DesmosProfileInfoCell.xib in Resources */,
 				18FFB7B8281AF533004E65BB /* Bep3SupplyPopup.xib in Resources */,
 				18FFB7BA281AF533004E65BB /* WalletCrescentCell.xib in Resources */,
@@ -6650,6 +6666,7 @@
 				18FFB7BB281AF533004E65BB /* FarmingDetailViewController.xib in Resources */,
 				18FFB7BC281AF533004E65BB /* WalletIrisCell.xib in Resources */,
 				18F811B9282E1FC4008AF0D2 /* WalletStationCell.xib in Resources */,
+				18F4129D2860649E0007E3F2 /* WalletDeriveViewController.xib in Resources */,
 				18FFB7BD281AF533004E65BB /* NativeTokenDetailViewController.xib in Resources */,
 				18FFB7BE281AF533004E65BB /* Init.storyboard in Resources */,
 				18FFB7BF281AF533004E65BB /* HardPoolBorrow3ViewController.xib in Resources */,
@@ -7308,6 +7325,7 @@
 				1817CBB7283E2CE500523713 /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift in Sources */,
 				18FFB323281AF533004E65BB /* TxIssueNFTCell.swift in Sources */,
 				18FFB326281AF533004E65BB /* OsmosisDAppViewController.swift in Sources */,
+				18F4129F286064AD0007E3F2 /* MnemonicDetailViewController.swift in Sources */,
 				1817CC60283E2CE600523713 /* evmos_incentives_v1_genesis.pb.swift in Sources */,
 				1817CBA0283E2CE500523713 /* crescent_farming_v1beta1_query.grpc.swift in Sources */,
 				18FFB327281AF533004E65BB /* PublicKey.swift in Sources */,
@@ -7354,6 +7372,7 @@
 				18FFB34D281AF533004E65BB /* InOutPut.swift in Sources */,
 				18FFB34E281AF533004E65BB /* WalletAddressCell.swift in Sources */,
 				1817CAB7283E2CE500523713 /* desmos_posts_v1beta1_msgs.grpc.swift in Sources */,
+				18F4129C2860649E0007E3F2 /* WalletDeriveViewController.swift in Sources */,
 				18FFB34F281AF533004E65BB /* PoolListViewController.swift in Sources */,
 				0451FC95282A3B3200214FDA /* ChainGravityBridge.swift in Sources */,
 				18FFB350281AF533004E65BB /* RegisterAccount0ViewController.swift in Sources */,
@@ -7562,6 +7581,7 @@
 				18FFB41B281AF533004E65BB /* Bep3SupplyPopup.swift in Sources */,
 				1817CAC9283E2CE500523713 /* kava_committee_v1beta1_committee.pb.swift in Sources */,
 				18FFB41E281AF533004E65BB /* BinanceSegwitAddrCoder.swift in Sources */,
+				18F4129B2860645A0007E3F2 /* WalletBaseChainCell.swift in Sources */,
 				18FFB420281AF533004E65BB /* AccountSwitchViewController.swift in Sources */,
 				0451FC84282A3AC700214FDA /* ChainOsmosis.swift in Sources */,
 				18FFB421281AF533004E65BB /* OkTransfer.swift in Sources */,
@@ -7749,6 +7769,7 @@
 				18FFB4DB281AF533004E65BB /* WalletInflationCell.swift in Sources */,
 				0451FC7A282A3AC700214FDA /* ChainJuno.swift in Sources */,
 				1817CBFA283E2CE600523713 /* tendermint_liquidity_v1beta1_query.grpc.swift in Sources */,
+				18F4129A286062FA0007E3F2 /* MWords.swift in Sources */,
 				1817CBE7283E2CE600523713 /* kava_pricefeed_v1beta1_query.pb.swift in Sources */,
 				0443B86F2852FAF30027A6B9 /* SwitchAccountHeader.swift in Sources */,
 				1817CC3D283E2CE600523713 /* kava_committee_v1beta1_genesis.pb.swift in Sources */,
@@ -7779,16 +7800,19 @@
 				18FFB4F3281AF533004E65BB /* TxRedelegateCell.swift in Sources */,
 				18FFB4F4281AF533004E65BB /* HardPoolRepay0ViewController.swift in Sources */,
 				0451FC82282A3AC700214FDA /* ChainSif.swift in Sources */,
+				18F412982860628E0007E3F2 /* ManageMnemonicCell.swift in Sources */,
 				18FFB4F5281AF533004E65BB /* WalletGuideCell.swift in Sources */,
 				18FFB4F8281AF533004E65BB /* Param.swift in Sources */,
 				18FFB4F9281AF533004E65BB /* TxGravityWithdrawBatchCell.swift in Sources */,
 				1817CB32283E2CE500523713 /* kava_issuance_v1beta1_query.pb.swift in Sources */,
 				1817CC05283E2CE600523713 /* cosmos_slashing_v1beta1_genesis.pb.swift in Sources */,
+				18F41295286062700007E3F2 /* DeriveWalletCell.swift in Sources */,
 				1817CBD1283E2CE600523713 /* kava_swap_v1beta1_query.pb.swift in Sources */,
 				18FFB4FA281AF533004E65BB /* TxMediCreateDidCell.swift in Sources */,
 				1817CC74283E2CE600523713 /* cosmos_base_reflection_v1beta1_reflection.pb.swift in Sources */,
 				18FFB4FB281AF533004E65BB /* TxGravityCreatePoolCell.swift in Sources */,
 				18FFB4FC281AF533004E65BB /* UIColor.swift in Sources */,
+				18F41299286062A70007E3F2 /* BaseChain.swift in Sources */,
 				1817CC59283E2CE600523713 /* cosmwasm_wasm_v1_query.grpc.swift in Sources */,
 				18FFB4FD281AF533004E65BB /* StepUndelegateCheckViewController.swift in Sources */,
 				1817CB27283E2CE500523713 /* cosmos_base_store_v1beta1_commit_info.pb.swift in Sources */,
