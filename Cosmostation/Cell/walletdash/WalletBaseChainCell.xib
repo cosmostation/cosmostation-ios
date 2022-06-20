@@ -244,7 +244,7 @@
                                             <constraint firstAttribute="height" constant="40" id="1nl-bg-2wJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <state key="normal" title="  Wallet Connect" image="iconWalletconnect">
+                                        <state key="normal" title="  Wallet Connect" image="btnIconWalletConnect">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -318,7 +318,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="AVw-yU-D5Z" id="Emk-jX-MPD"/>
-                <outlet property="btnWalletConnec" destination="Gfd-VU-jvR" id="VfS-R6-aUU"/>
+                <outlet property="btnDelegate" destination="xtp-14-6Kc" id="4Z7-i3-AsL"/>
+                <outlet property="btnProposal" destination="fKu-73-XRh" id="liZ-9u-vZv"/>
+                <outlet property="btnWalletConnect" destination="Gfd-VU-jvR" id="kFb-6f-VgC"/>
                 <outlet property="cardRoot" destination="kVp-NM-hKB" id="q9d-Os-zCT"/>
                 <outlet property="delegatedAmount" destination="FVl-jR-fwy" id="cE2-p3-srp"/>
                 <outlet property="rewardAmount" destination="00S-yT-6lI" id="rhR-p1-9D4"/>
@@ -336,7 +338,7 @@
     <resources>
         <image name="btnIconRewad" width="20" height="20"/>
         <image name="btnIconVote" width="20" height="20"/>
-        <image name="iconWalletconnect" width="20" height="20"/>
+        <image name="btnIconWalletConnect" width="20" height="20"/>
         <image name="tokenIc" width="22" height="22"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

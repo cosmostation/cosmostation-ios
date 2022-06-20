@@ -20,7 +20,9 @@ class WalletBaseChainCell: UITableViewCell {
     @IBOutlet weak var rewardAmount: UILabel!
     @IBOutlet weak var vestingAmount: UILabel!
     @IBOutlet weak var vestingLayer: UIView!
-    @IBOutlet weak var btnWalletConnec: UIButton!
+    @IBOutlet weak var btnDelegate: UIButton!
+    @IBOutlet weak var btnProposal: UIButton!
+    @IBOutlet weak var btnWalletConnect: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,7 +59,7 @@ class WalletBaseChainCell: UITableViewCell {
         tokenSymbolImg.image = chainConfig!.stakeDenomImg
         tokenSymbolLabel.text = chainConfig!.stakeSymbol
         tokenSymbolLabel.textColor = chainConfig!.chainColor
-        btnWalletConnec.isHidden = !chainConfig!.wcSupoort
+        btnWalletConnect.isHidden = !chainConfig!.wcSupoort
 
         totalAmount.attributedText = WUtils.displayAmount2(totalToken.stringValue, totalAmount.font!, divideDecimal, 6)
         totalValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalToken, 6, totalValue.font)
@@ -74,4 +76,9 @@ class WalletBaseChainCell: UITableViewCell {
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -divideDecimal).stringValue)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDelegate.borderColor = UIColor.init(named: "_font05")
+        btnProposal.borderColor = UIColor.init(named: "_font05")
+        btnWalletConnect.borderColor = UIColor.init(named: "_font05")
+    }
 }
