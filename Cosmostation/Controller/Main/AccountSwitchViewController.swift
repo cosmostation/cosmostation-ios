@@ -69,9 +69,10 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = SwitchAccountHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.rootView.backgroundColor = WUtils.getChainBg(chainAccounts[section].chainType)
-        view.chainImgView.image = WUtils.getChainImg(chainAccounts[section].chainType)
-        view.chainNameLabel.text = WUtils.getChainTitle2(chainAccounts[section].chainType)
+        let chainConfig = ChainFactory().getChainConfig(chainAccounts[section].chainType)
+        view.rootView.backgroundColor = chainConfig?.chainColorBG
+        view.chainImgView.image = chainConfig?.chainImg
+        view.chainNameLabel.text = chainConfig?.chainTitle2
         view.chainAccountsCntLable.text = String(chainAccounts[section].accounts.count)
         view.actionTapHeader = {
             self.chainAccounts[section].opened = !self.chainAccounts[section].opened
@@ -84,7 +85,8 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = SwitchAccountFooter(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        view.rootView.backgroundColor = WUtils.getChainBg(chainAccounts[section].chainType)
+        let chainConfig = ChainFactory().getChainConfig(chainAccounts[section].chainType)
+        view.rootView.backgroundColor = chainConfig?.chainColorBG
         return view
     }
     

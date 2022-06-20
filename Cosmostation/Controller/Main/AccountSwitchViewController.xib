@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -25,7 +27,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Switch Wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDg-01-d3c">
                             <rect key="frame" x="153" y="14.5" width="108" height="21"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Gr-ym-3NM">
@@ -34,7 +36,7 @@
                                 <constraint firstAttribute="width" constant="32" id="QS2-XP-TQc"/>
                                 <constraint firstAttribute="height" constant="32" id="aXR-bI-DF2"/>
                             </constraints>
-                            <state key="normal" image="close_btn"/>
+                            <state key="normal" image="btnIconClose"/>
                             <connections>
                                 <action selector="onClose:" destination="-1" eventType="touchUpInside" id="J6T-el-X4T"/>
                             </connections>
@@ -58,7 +60,7 @@
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8YH-S8-9Ra" secondAttribute="trailing" constant="8" id="4Fy-ih-gRV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="8YH-S8-9Ra" secondAttribute="leading" constant="8" id="G2w-nE-tXf"/>
@@ -72,6 +74,12 @@
         </view>
     </objects>
     <resources>
-        <image name="close_btn" width="24" height="24"/>
+        <image name="btnIconClose" width="24" height="24"/>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
