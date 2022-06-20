@@ -53,7 +53,7 @@ class HardDetailViewController: BaseViewController, UITableViewDelegate, UITable
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onFetchHardInfo), for: .valueChanged)
-        self.refresher.tintColor = UIColor.white
+        self.refresher.tintColor = UIColor(named: "_font05")
         self.harvestDetailTableView.addSubview(refresher)
         
         self.loadingImg.onStartAnimation()

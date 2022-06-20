@@ -30,7 +30,7 @@ class RizonSwapStatusViewController: BaseViewController, UITableViewDelegate, UI
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onFetchSwapData), for: .valueChanged)
-        self.refresher.tintColor = UIColor.white
+        self.refresher.tintColor = UIColor(named: "_font05")
         self.swapStatusTableView.addSubview(refresher)
         
         self.loadingImg.onStartAnimation()
