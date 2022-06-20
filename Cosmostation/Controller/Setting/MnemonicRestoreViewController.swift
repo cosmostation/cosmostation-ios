@@ -15,7 +15,6 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var actionView: UIStackView!
     @IBOutlet weak var keyboardView: UIView!
-    @IBOutlet weak var mNeminicImg: UIImageView!
     
     @IBOutlet weak var mNemonicLayer0: BottomLineView!
     @IBOutlet weak var mNemonicLayer1: BottomLineView!
@@ -137,8 +136,6 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
     }
     
     func initViewUpdate() {
-        self.mNeminicImg.image = self.mNeminicImg.image?.withRenderingMode(UIImage.RenderingMode.alwaysTemplate)
-        self.mNeminicImg.tintColor =  .white
         self.topView.isHidden = false
         self.cardView.isHidden = false
         self.actionView.isHidden = false

@@ -31,7 +31,7 @@ class BottomLineView: UIView {
     @IBInspectable var hasFocused: Bool = true {
         didSet {
             if (hasFocused) {
-                bottomBorder.backgroundColor = UIColor(hexString: "#7A7F88")
+                bottomBorder.backgroundColor = UIColor.init(named: "_font04")
                 
             } else {
                 bottomBorder.backgroundColor = UIColor.clear
