@@ -208,7 +208,7 @@ class PasswordViewController: BaseViewController {
                 pinImgs[i].image = UIImage(named: "pinFill")
             } else {
                 pinImgs[i].image = UIImage(named: "pinEmpty")
-            }   
+            }
         }
     }
     

@@ -34,7 +34,7 @@ class SwitchAccountCell: UITableViewCell {
             chainAccountKeyImg.image = chainAccountKeyImg.image!.withRenderingMode(.alwaysTemplate)
             chainAccountKeyImg.tintColor = dpChainConfig.chainColor
         } else {
-            chainAccountKeyImg.tintColor = COLOR_DARK_GRAY
+            chainAccountKeyImg.tintColor = UIColor.init(named: "_font05")
         }
         chainAccountName.text = dpAccount?.getDpName()
         chainAccountAddress.text = dpAccount!.account_address
