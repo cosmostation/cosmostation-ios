@@ -68,12 +68,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxIbcUpdateClientCell", bundle: nil), forCellReuseIdentifier: "TxIbcUpdateClientCell")
         self.txTableView.register(UINib(nibName: "TxIbcAcknowledgeCell", bundle: nil), forCellReuseIdentifier: "TxIbcAcknowledgeCell")
         
-        //for gravity liquidation
-        self.txTableView.register(UINib(nibName: "TxGravityCreatePoolCell", bundle: nil), forCellReuseIdentifier: "TxGravityCreatePoolCell")
-        self.txTableView.register(UINib(nibName: "TxGravityDepositBatchCell", bundle: nil), forCellReuseIdentifier: "TxGravityDepositBatchCell")
-        self.txTableView.register(UINib(nibName: "TxGravityWithdrawBatchCell", bundle: nil), forCellReuseIdentifier: "TxGravityWithdrawBatchCell")
-        self.txTableView.register(UINib(nibName: "TxGravitySwapCell", bundle: nil), forCellReuseIdentifier: "TxGravitySwapCell")
-        
         //for rizon
         self.txTableView.register(UINib(nibName: "TxRizonEventHorizonCell", bundle: nil), forCellReuseIdentifier: "TxRizonEventHorizonCell")
         
@@ -320,28 +314,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
 //                return cell!
 //
 //            }
-            
-            else if (msg.typeURL.contains(Tendermint_Liquidity_V1beta1_MsgCreatePool.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxGravityCreatePoolCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            } else if (msg.typeURL.contains(Tendermint_Liquidity_V1beta1_MsgDepositWithinBatch.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxGravityDepositBatchCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            } else if (msg.typeURL.contains(Tendermint_Liquidity_V1beta1_MsgWithdrawWithinBatch.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxGravityWithdrawBatchCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            } else if (msg.typeURL.contains(Tendermint_Liquidity_V1beta1_MsgSwapWithinBatch.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxGravitySwapCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            }
             
             else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgAddLiquidity.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifAddLpCell") as? TxCell

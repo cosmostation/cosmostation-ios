@@ -251,16 +251,16 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_GRAVITY_SWAP_IN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
-            let swapInDenom = toCoinList[indexPath.row]
-            WUtils.DpCosmosTokenImg(cell!.coinImg, swapInDenom)
-            cell!.coinTitle.text = WUtils.getCosmosTokenName(swapInDenom)
+//            let swapInDenom = toCoinList[indexPath.row]
+//            WUtils.DpCosmosTokenImg(cell!.coinImg, swapInDenom)
+//            cell!.coinTitle.text = WUtils.getCosmosTokenName(swapInDenom)
             return cell!
             
         } else if (type == SELECT_POPUP_GRAVITY_SWAP_OUT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
-            let swapOutDenom = toCoinList[indexPath.row]
-            WUtils.DpCosmosTokenImg(cell!.coinImg, swapOutDenom)
-            cell!.coinTitle.text = WUtils.getCosmosTokenName(swapOutDenom)
+//            let swapOutDenom = toCoinList[indexPath.row]
+//            WUtils.DpCosmosTokenImg(cell!.coinImg, swapOutDenom)
+//            cell!.coinTitle.text = WUtils.getCosmosTokenName(swapOutDenom)
             return cell!
             
         } else if (type == SELECT_POPUP_IBC_CHAIN) {

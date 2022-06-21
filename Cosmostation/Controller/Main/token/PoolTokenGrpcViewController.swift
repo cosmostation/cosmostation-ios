@@ -68,18 +68,7 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
             poolDisplayDecimal = 18
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(poolDenom)
             
-        } else if (chainType == ChainType.COSMOS_MAIN) {
-            guard let poolInfo = BaseData.instance.getGravityPoolByDenom(poolDenom) else {
-                return
-            }
-            naviTokenImg.image = UIImage(named: "tokenGravitydex")
-            naviTokenSymbol.text = "GDEX-" + String(poolInfo.id)
-            
-            poolDivideDecimal = 6
-            poolDisplayDecimal = 6
-            totalAmount = BaseData.instance.getAvailableAmount_gRPC(poolDenom)
-            
-        }  else if (chainType == ChainType.INJECTIVE_MAIN) {
+        } else if (chainType == ChainType.INJECTIVE_MAIN) {
             naviTokenImg.image = UIImage(named: "tokenDefault")
             naviTokenSymbol.text = poolDenom.uppercased()
             

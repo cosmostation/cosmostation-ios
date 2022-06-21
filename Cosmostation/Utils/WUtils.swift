@@ -624,11 +624,6 @@ public class WUtils {
                 return WUtils.getOsmoLpTokenPerUsdPrice(pool)
             }
         }
-        if (denom.starts(with: "pool") && denom.count >= 68) {
-            if let pool = BaseData.instance.getParamGravityPoolByDenom(denom) {
-                return WUtils.getParamGdexLpTokenPerUsdPrice(pool)
-            }
-        }
         if (denom == EMONEY_EUR_DENOM || denom == EMONEY_CHF_DENOM || denom == EMONEY_DKK_DENOM || denom == EMONEY_NOK_DENOM || denom == EMONEY_SEK_DENOM) {
             if let value = BaseData.instance.getPrice("usdt")?.prices.filter{ $0.currency == denom.substring(from: 1) }.first?.current_price {
                 return NSDecimalNumber.one.dividing(by: NSDecimalNumber.init(value: value), withBehavior: handler18)
@@ -1210,22 +1205,6 @@ public class WUtils {
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
                 return
             }
-            
-        } else if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.COSMOS_TEST) {
-            if (denom == COSMOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (denom.starts(with: "pool")) {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                if let poolInfo = BaseData.instance.getGravityPoolByDenom(denom)  {
-                    denomLabel?.text = "GDEX-" + String(poolInfo.id)
-                } else {
-                    denomLabel?.text = "UnKnown"
-                }
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.IRIS_MAIN) {
             if (denom == IRIS_MAIN_DENOM) {
@@ -2220,9 +2199,7 @@ public class WUtils {
                 }
                 return 6
             }
-            if (chain == ChainType.COSMOS_MAIN) {
-                return getCosmosCoinDecimal(denom)
-            } else if (chain == ChainType.OSMOSIS_MAIN) {
+            if (chain == ChainType.OSMOSIS_MAIN) {
                 return getOsmosisCoinDecimal(denom)
             } else if (chain == ChainType.SIF_MAIN) {
                 return getSifCoinDecimal(denom)
@@ -2771,12 +2748,6 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == LIQUIDITY_MSG_TYPE_SWAP) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_COSMOS_SWAP))
-            } else if (type == LIQUIDITY_MSG_TYPE_JOIN_POOL) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_COSMOS_JOIN_POOL))
-            } else if (type == LIQUIDITY_MSG_TYPE_EXIT_POOL) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_COSMOS_EXIT_POOL))
             } else if (type == TASK_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
             } else if (type == TASK_ISSUE_NFT) {

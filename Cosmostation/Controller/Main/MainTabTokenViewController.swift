@@ -511,17 +511,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
             
-        } else if (chainType == .COSMOS_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenGravitydex")
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
-            guard let poolInfo = BaseData.instance.getGravityPoolByDenom(coin.denom) else {
-                return
-            }
-            cell?.tokenSymbol.text = "GDEX-" + String(poolInfo.id)
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "pool/" + String(poolInfo.id)
-            
         } else if (chainType == .INJECTIVE_MAIN) {
             cell?.tokenImg.image = UIImage(named: "tokenDefault")
             cell?.tokenSymbol.text = coin.denom.uppercased()
@@ -772,10 +761,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mPoolToken_gRPC.sort {
             if (chainType == ChainType.OSMOSIS_MAIN) {
                 return $0.osmosisAmmPoolId() < $1.osmosisAmmPoolId()
-            } else if (chainType == .COSMOS_MAIN) {
-                let id0 = BaseData.instance.getGravityPoolByDenom($0.denom)?.id ?? 0
-                let id1 = BaseData.instance.getGravityPoolByDenom($1.denom)?.id ?? 0
-                return id0 < id1
             }
             return false
         }
