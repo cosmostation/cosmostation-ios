@@ -4578,7 +4578,7 @@ public class WUtils {
         } else if (chain == ChainType.NYX_MAIN) {
             return UIImage(named: "tokenNyx")
         }
-        return UIImage(named: "tokenIc")
+        return UIImage(named: "tokenDefault")
         
     }
     

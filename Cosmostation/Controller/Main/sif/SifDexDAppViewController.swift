@@ -159,10 +159,10 @@ extension WUtils {
             if let url = URL(string: SIF_COIN_IMG_URL + denom + ".png"), let data = try? Data(contentsOf: url) {
                 return UIImage(data: data)?.resized(to: CGSize(width: 20, height: 20))
             } else {
-                return UIImage(named: "tokenIc")
+                return UIImage(named: "tokenDefault")
             }
         }
-        return UIImage(named: "tokenIc")
+        return UIImage(named: "tokenDefault")
     }
     
     //using mintscan-api(util-api old)
@@ -251,11 +251,11 @@ extension WUtils {
             if let url = URL(string: SIF_COIN_IMG_URL + denom + ".png") {
                 imgView.af_setImage(withURL: url)
             } else {
-                imgView.image = UIImage(named: "tokenIc")
+                imgView.image = UIImage(named: "tokenDefault")
             }
             
         } else {
-            imgView.image = UIImage(named: "tokenIc")
+            imgView.image = UIImage(named: "tokenDefault")
         }
     }
     

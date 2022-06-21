@@ -68,7 +68,7 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         if let tokenImgeUrl = bridgeToken.getImgUrl() {
             naviTokenImg.af_setImage(withURL: tokenImgeUrl)
         } else {
-            naviTokenImg.image = UIImage(named: "tokenIc")
+            naviTokenImg.image = UIImage(named: "tokenDefault")
         }
         naviTokenSymbol.text = bridgeToken.origin_symbol
         

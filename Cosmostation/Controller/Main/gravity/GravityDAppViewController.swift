@@ -201,7 +201,7 @@ extension WUtils {
                 return UIImage(named: "tokenDefaultIbc")
             }
         }
-        return UIImage(named: "tokenIc")
+        return UIImage(named: "tokenDefault")
     }
     
     
@@ -266,7 +266,7 @@ extension WUtils {
             }
             
         } else {
-            imgView.image = UIImage(named: "tokenIc")
+            imgView.image = UIImage(named: "tokenDefault")
             
         }
     }

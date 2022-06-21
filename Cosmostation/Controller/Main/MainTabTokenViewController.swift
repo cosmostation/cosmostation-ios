@@ -523,7 +523,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = "pool/" + String(poolInfo.id)
             
         } else if (chainType == .INJECTIVE_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenIc")
+            cell?.tokenImg.image = UIImage(named: "tokenDefault")
             cell?.tokenSymbol.text = coin.denom.uppercased()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Pool Asset"
