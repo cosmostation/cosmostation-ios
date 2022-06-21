@@ -393,8 +393,11 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="hCI-8s-Z2b" id="NYc-eF-FGM"/>
+                <outlet property="btnCdp" destination="uI9-ii-54U" id="Urf-aZ-y4d"/>
+                <outlet property="btnDelegate" destination="qDv-9B-JUU" id="6g7-lr-alk"/>
+                <outlet property="btnProposal" destination="C3t-mz-BvV" id="Ar0-9Z-8Wc"/>
+                <outlet property="btnWalletConnect" destination="PGk-xb-ImE" id="QgZ-v7-P7r"/>
                 <outlet property="cardKava" destination="M0f-EA-WEA" id="ihA-cZ-ieQ"/>
-                <outlet property="cdpBtn" destination="uI9-ii-54U" id="JJw-HJ-7j4"/>
                 <outlet property="delegatedAmount" destination="lgL-XM-pQj" id="NuS-dv-wmd"/>
                 <outlet property="havestDepositLayer" destination="Xzj-B5-JPU" id="ize-8a-dRy"/>
                 <outlet property="havestDepositedAmount" destination="dST-je-Agl" id="uxp-vK-d3w"/>

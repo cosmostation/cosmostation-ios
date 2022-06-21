@@ -208,6 +208,7 @@
                 <outlet property="availableAmount" destination="tcf-Me-1A3" id="loI-Dw-RtM"/>
                 <outlet property="bnbCard" destination="6D6-Pu-AfM" id="HFe-tI-IdP"/>
                 <outlet property="btnBep3" destination="YCU-OQ-skY" id="JuO-OI-z1E"/>
+                <outlet property="btnWalletConnect" destination="viC-zz-37S" id="Qt4-qC-0HG"/>
                 <outlet property="frozenAmount" destination="8Q2-5X-HkQ" id="gAu-kn-a0U"/>
                 <outlet property="lockedAmount" destination="fRg-DA-VLt" id="g78-bJ-Acm"/>
                 <outlet property="totalAmount" destination="ejJ-K8-riI" id="bYX-h8-hTE"/>
@@ -221,10 +222,10 @@
         <image name="btnIconWalletConnect" width="20" height="20"/>
         <image name="tokenBinance" width="22" height="22"/>
         <namedColor name="_card_divider">
-            <color red="0.74509803921568629" green="0.77647058823529413" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
-            <color red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -233,7 +234,7 @@
             <color red="0.94099998474121094" green="0.72500002384185791" blue="0.043000001460313797" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="binance_bg">
-            <color red="0.98431372549019602" green="0.96470588235294119" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.98400002717971802" green="0.9649999737739563" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

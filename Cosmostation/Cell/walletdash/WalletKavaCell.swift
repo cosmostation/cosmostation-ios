@@ -23,7 +23,10 @@ class WalletKavaCell: UITableViewCell {
     @IBOutlet weak var vestingLayer: UIView!
     @IBOutlet weak var havestDepositLayer: UIView!
     @IBOutlet weak var unClaimedIncentiveLayer: UIView!
-    @IBOutlet weak var cdpBtn: UIButton!
+    @IBOutlet weak var btnDelegate: UIButton!
+    @IBOutlet weak var btnProposal: UIButton!
+    @IBOutlet weak var btnCdp: UIButton!
+    @IBOutlet weak var btnWalletConnect: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,6 +79,13 @@ class WalletKavaCell: UITableViewCell {
             vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(KAVA_MAIN_DENOM), vestingAmount.font!, 6, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDelegate.borderColor = UIColor.init(named: "_font05")
+        btnProposal.borderColor = UIColor.init(named: "_font05")
+        btnCdp.borderColor = UIColor.init(named: "_font05")
+        btnWalletConnect.borderColor = UIColor.init(named: "_font05")
     }
     
 }

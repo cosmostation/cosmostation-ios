@@ -17,6 +17,10 @@ class WalletOkCell: UITableViewCell {
     @IBOutlet weak var lockedAmount: UILabel!
     @IBOutlet weak var depositAmount: UILabel!
     @IBOutlet weak var withdrawAmount: UILabel!
+    @IBOutlet weak var btnDeposit: UIButton!
+    @IBOutlet weak var btnWithdraw: UIButton!
+    @IBOutlet weak var btnVote: UIButton!
+    @IBOutlet weak var btnProposal: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -59,5 +63,12 @@ class WalletOkCell: UITableViewCell {
         withdrawAmount.attributedText = WUtils.displayAmount2(withdraw.stringValue, withdrawAmount.font, 0, 6)
         totalValue.attributedText = WUtils.dpUserCurrencyValue(OKEX_MAIN_DENOM, total, 0, totalValue.font)
         BaseData.instance.updateLastTotal(account, total.stringValue)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDeposit.borderColor = UIColor.init(named: "_font05")
+        btnWithdraw.borderColor = UIColor.init(named: "_font05")
+        btnVote.borderColor = UIColor.init(named: "_font05")
+        btnProposal.borderColor = UIColor.init(named: "_font05")
     }
 }

@@ -316,6 +316,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="ey4-nz-498" id="EAS-XC-RFr"/>
+                <outlet property="btnDefi" destination="Y4J-Ck-kFL" id="JLS-n7-JPZ"/>
+                <outlet property="btnDelegate" destination="yhf-2u-qmD" id="Z6C-Hn-RWh"/>
+                <outlet property="btnProposal" destination="ul3-lr-8C6" id="fiI-mO-ci9"/>
                 <outlet property="cardRoot" destination="f7h-SE-iVv" id="Uta-Z9-Yis"/>
                 <outlet property="delegatedAmount" destination="G3Z-C3-HHU" id="yZi-nD-XZX"/>
                 <outlet property="rewardAmount" destination="B36-O3-lpM" id="N6R-ch-rv7"/>

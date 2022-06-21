@@ -250,6 +250,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="GIb-Lu-7FJ" id="QAK-2q-2Ef"/>
+                <outlet property="btnDelegate" destination="gCa-Va-kc7" id="Mwc-tp-zEe"/>
+                <outlet property="btnNtf" destination="S8R-X7-SC5" id="J5q-lh-CDQ"/>
+                <outlet property="btnProposal" destination="gPy-C0-3Qt" id="RXl-0a-JSJ"/>
                 <outlet property="delegatedAmount" destination="Q9k-3f-Yt1" id="6SW-GS-s6w"/>
                 <outlet property="denomTitle" destination="8cm-n9-M21" id="W6F-GB-cVC"/>
                 <outlet property="rewardAmount" destination="s6Z-OE-nx4" id="6HM-SD-Mew"/>
@@ -266,10 +269,10 @@
         <image name="btnIconVote" width="20" height="20"/>
         <image name="tokenIris" width="22" height="22"/>
         <namedColor name="_card_divider">
-            <color red="0.74509803921568629" green="0.77647058823529413" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
-            <color red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -278,7 +281,7 @@
             <color red="0.0" green="0.50199997425079346" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="iris_bg">
-            <color red="0.9137254901960784" green="0.96078431372549022" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91399997472763062" green="0.96100002527236938" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
