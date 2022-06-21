@@ -1,12 +1,22 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "connectimg4.pdf"
+      "filename" : "connectimg4Light.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "connectimg4Dark.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

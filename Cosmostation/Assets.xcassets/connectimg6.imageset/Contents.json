@@ -1,12 +1,22 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "filename" : "connectimg6.pdf"
+      "filename" : "connectimg6Light.pdf",
+      "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "connectimg6Dark.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }
