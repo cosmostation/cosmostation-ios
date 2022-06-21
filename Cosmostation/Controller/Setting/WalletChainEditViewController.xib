@@ -54,7 +54,7 @@
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="historyNoneImg" translatesAutoresizingMaskIntoConstraints="NO" id="30X-k5-pBb">
+                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconDataEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="30X-k5-pBb">
                     <rect key="frame" x="182" y="746" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="C1z-jw-420"/>
@@ -83,7 +83,7 @@
         </view>
     </objects>
     <resources>
-        <image name="historyNoneImg" width="36" height="36"/>
+        <image name="iconDataEmpty" width="36" height="36"/>
         <namedColor name="_font04">
             <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

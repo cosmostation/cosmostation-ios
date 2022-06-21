@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,9 +25,9 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95B-4a-b7I">
-                    <rect key="frame" x="87" y="369" width="240" height="168"/>
+                    <rect key="frame" x="87" y="364" width="240" height="168"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="historyNoneImg" translatesAutoresizingMaskIntoConstraints="NO" id="KxQ-8f-EJi">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconDataEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="KxQ-8f-EJi">
                             <rect key="frame" x="95" y="0.0" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="LmP-Lh-Zzk"/>
@@ -57,7 +55,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9Q-Ed-5IQ" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="88"/>
+                    <rect key="frame" x="16" y="16" width="382" height="88"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0qK-QT-V1q">
                             <rect key="frame" x="16" y="12" width="13" height="17"/>
@@ -136,7 +134,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vb1-yx-NZ5">
-                    <rect key="frame" x="16" y="738" width="382" height="50"/>
+                    <rect key="frame" x="16" y="772" width="382" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usa-sx-ud1">
                             <rect key="frame" x="0.0" y="0.0" width="187" height="50"/>
@@ -189,11 +187,11 @@
                     </subviews>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jaa-Ng-Ew4">
-                    <rect key="frame" x="0.0" y="156" width="414" height="574"/>
+                    <rect key="frame" x="0.0" y="112" width="414" height="652"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oCj-Ld-hNf">
-                    <rect key="frame" x="16" y="796" width="382" height="50"/>
+                    <rect key="frame" x="16" y="830" width="382" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="aW5-ln-lXH"/>
                     </constraints>
@@ -247,6 +245,6 @@
     <resources>
         <image name="bg_cosmos" width="360" height="740"/>
         <image name="btnExplorer" width="24" height="24"/>
-        <image name="historyNoneImg" width="36" height="36"/>
+        <image name="iconDataEmpty" width="128" height="128"/>
     </resources>
 </document>
