@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -29,9 +30,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="Jba-wm-7c9">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4DX-9E-lZg" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="12" y="56" width="390" height="125"/>
                     <subviews>
@@ -169,7 +167,7 @@
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" name="_font05"/>
+                            <color key="value" name="photon"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -185,30 +183,25 @@
                 </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="Jba-wm-7c9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="0SA-K0-YAT"/>
                 <constraint firstItem="4DX-9E-lZg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="4XY-ox-QmL"/>
                 <constraint firstItem="Rct-7T-ObP" firstAttribute="top" secondItem="4DX-9E-lZg" secondAttribute="bottom" constant="8" id="8WN-1q-ype"/>
-                <constraint firstItem="Jba-wm-7c9" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="DCs-z3-ZUR"/>
                 <constraint firstItem="Hfg-TM-fyc" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="Gnw-3o-ygA"/>
                 <constraint firstItem="Rct-7T-ObP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NZW-PC-0qz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8gw-eS-0f1" secondAttribute="bottom" constant="16" id="S9j-Pg-I09"/>
                 <constraint firstItem="Hfg-TM-fyc" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="UOm-2O-wjR"/>
-                <constraint firstAttribute="bottom" secondItem="Jba-wm-7c9" secondAttribute="bottom" id="bdo-zc-VNH"/>
                 <constraint firstItem="8gw-eS-0f1" firstAttribute="top" secondItem="Rct-7T-ObP" secondAttribute="bottom" constant="8" id="d7Y-BS-mFc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8gw-eS-0f1" secondAttribute="trailing" constant="16" id="eBu-ZX-U9o"/>
                 <constraint firstItem="8gw-eS-0f1" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="fyH-8d-Im1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Rct-7T-ObP" secondAttribute="trailing" id="gFk-2L-4EQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4DX-9E-lZg" secondAttribute="trailing" constant="12" id="rOR-iX-g3N"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="4DX-9E-lZg" secondAttribute="leading" constant="-12" id="yTH-vZ-QLR"/>
-                <constraint firstItem="Jba-wm-7c9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="zQe-tU-J9V"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="112.5"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
         <namedColor name="_card_divider">
             <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -227,5 +220,8 @@
         <namedColor name="photon">
             <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

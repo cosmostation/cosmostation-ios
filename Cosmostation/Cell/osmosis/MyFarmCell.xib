@@ -57,7 +57,7 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEg-lm-WYu">
                                 <rect key="frame" x="12" y="87" width="455" height="0.5"/>
-                                <color key="backgroundColor" name="_font04"/>
+                                <color key="backgroundColor" name="_card_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="qTU-vm-NvE"/>
                                 </constraints>
