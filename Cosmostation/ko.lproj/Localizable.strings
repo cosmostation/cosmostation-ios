@@ -667,6 +667,7 @@ support@cosmostation.io";
 "title_sif_dex" = "시프 DeFi";
 "title_edit_chain" = "체인 관리";
 "title_nft" = "NFT";
+"title_nft_detail" = "NFT 상세";
 "title_issue_nft_denom" = "NFT Denom 발행";
 "title_issue_nft" = "NFT 발행";
 "title_send_nft" = "NFT 전송";

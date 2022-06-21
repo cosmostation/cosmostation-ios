@@ -666,6 +666,7 @@ support@cosmostation.io";
 "title_sif_incentive" = "Incentive Claim";
 "title_edit_chain" = "Edit Chains";
 "title_nft" = "NFT";
+"title_nft_detail" = "NFT Detail";
 "title_issue_nft_denom" = "Issue NFT Denom";
 "title_issue_nft" = "Issue NFT";
 "title_send_nft" = "Send NFT";

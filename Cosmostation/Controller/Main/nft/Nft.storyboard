@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,14 +15,11 @@
             <objects>
                 <viewController storyboardIdentifier="NFTsDAppViewController" id="Y6W-OH-hqX" customClass="NFTsDAppViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="fBl-Wx-ipZ">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                            </imageView>
                             <segmentedControl hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="rOn-iu-WZA">
-                                <rect key="frame" x="207.5" y="8" width="185" height="32"/>
+                                <rect key="frame" x="114.5" y="52" width="185" height="32"/>
                                 <segments>
                                     <segment title="My Denoms"/>
                                     <segment title="My NFTs"/>
@@ -30,13 +30,13 @@
                                 </connections>
                             </segmentedControl>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eoq-su-ZkE">
-                                <rect key="frame" x="0.0" y="16" width="600" height="584"/>
+                                <rect key="frame" x="0.0" y="60" width="414" height="836"/>
                                 <connections>
                                     <segue destination="ZSS-ZJ-aCy" kind="embed" id="ycc-eR-dS9"/>
                                 </connections>
                             </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ptb-lY-1aG">
-                                <rect key="frame" x="0.0" y="16" width="600" height="584"/>
+                                <rect key="frame" x="0.0" y="60" width="414" height="836"/>
                                 <connections>
                                     <segue destination="TYY-xI-MsT" kind="embed" id="53C-4O-BgT"/>
                                 </connections>
@@ -47,13 +47,9 @@
                         <constraints>
                             <constraint firstItem="Ptb-lY-1aG" firstAttribute="trailing" secondItem="Eoq-su-ZkE" secondAttribute="trailing" id="0RM-Rh-ma7"/>
                             <constraint firstItem="Eoq-su-ZkE" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="16" id="388-AB-Agu"/>
-                            <constraint firstAttribute="top" secondItem="fBl-Wx-ipZ" secondAttribute="top" id="CO0-LE-Cu3"/>
                             <constraint firstItem="Ptb-lY-1aG" firstAttribute="bottom" secondItem="Eoq-su-ZkE" secondAttribute="bottom" id="EUq-KU-LTD"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="fBl-Wx-ipZ" secondAttribute="trailing" id="IQl-8Z-kvq"/>
                             <constraint firstItem="Ptb-lY-1aG" firstAttribute="leading" secondItem="Eoq-su-ZkE" secondAttribute="leading" id="SxC-in-R1B"/>
                             <constraint firstItem="rOn-iu-WZA" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="WGV-cB-ADD"/>
-                            <constraint firstItem="fBl-Wx-ipZ" firstAttribute="bottom" secondItem="5EZ-qb-Rvc" secondAttribute="bottom" id="YMp-lN-EjE"/>
-                            <constraint firstItem="fBl-Wx-ipZ" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="Zgh-K7-ETi"/>
                             <constraint firstItem="Ptb-lY-1aG" firstAttribute="top" secondItem="Eoq-su-ZkE" secondAttribute="top" id="b7w-JW-tL3"/>
                             <constraint firstItem="Eoq-su-ZkE" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cNw-iD-Ddi"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="Eoq-su-ZkE" secondAttribute="trailing" id="fUV-0r-6Bp"/>
@@ -84,8 +80,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="G2F-7C-adb"/>
                                 </constraints>
-                                <state key="normal" title="  Issue NFT" image="btnIconNft">
-                                    <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Issue NFT">
+                                    <color key="titleColor" name="photon"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -95,7 +91,7 @@
                                         <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" name="photon"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -183,8 +179,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="b6Z-Di-oge"/>
                                 </constraints>
-                                <state key="normal" title="  Issue Denom for NFT" image="btnIconNft">
-                                    <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Issue Denom for NFT">
+                                    <color key="titleColor" name="photon"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -194,7 +190,7 @@
                                         <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" name="photon"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -203,7 +199,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Q7-ot-LhQ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="714"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="Y5K-Kl-E48" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
@@ -224,7 +220,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No NFT Denom" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncs-Gd-ywZ">
-                                        <rect key="frame" x="49.5" y="66" width="86.5" height="14"/>
+                                        <rect key="frame" x="49" y="66" width="87" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="iqu-vF-pNJ"/>
                                         </constraints>
@@ -272,10 +268,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
-        <image name="btnIconNft" width="20" height="20"/>
-        <image name="iconDataEmpty" width="128" height="128"/>
+        <image name="iconDataEmpty" width="36" height="36"/>
         <image name="loading_1" width="144" height="144"/>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

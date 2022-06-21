@@ -55,8 +55,8 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = ""
+        self.navigationController?.navigationBar.topItem?.title = "title_nft_detail"
+        self.navigationItem.title = "title_nft_detail"
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
