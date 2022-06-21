@@ -690,9 +690,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="qkp-8m-gqj">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RvF-0e-cRf" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="12" y="52" width="390" height="260"/>
                                 <subviews>
@@ -708,12 +705,12 @@
                                         <string key="text">-
 -</string>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CFz-tN-HNp">
                                         <rect key="frame" x="12" y="128.5" width="366" height="0.5"/>
-                                        <color key="backgroundColor" red="0.29411764709999999" green="0.30980392159999998" blue="0.3294117647" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="backgroundColor" name="_card_divider"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.5" id="agH-A9-THQ"/>
                                         </constraints>
@@ -721,29 +718,29 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connect to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HU-nb-2v1">
                                         <rect key="frame" x="12" y="141" width="58.5" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="textColor" name="_font04"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUc-kA-8ta">
                                         <rect key="frame" x="12" y="165" width="4" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOW-dc-Jjt">
                                         <rect key="frame" x="12" y="193" width="44.5" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="textColor" name="_font04"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NF4-y6-Zs2">
                                         <rect key="frame" x="12" y="217" width="4" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.94117647059999998" green="0.72549019609999998" blue="0.043137254899999998" alpha="0.1524507705" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="binance_bg"/>
                                 <constraints>
                                     <constraint firstItem="zOW-dc-Jjt" firstAttribute="leading" secondItem="6HU-nb-2v1" secondAttribute="leading" id="0JK-aw-Bay"/>
                                     <constraint firstItem="NF4-y6-Zs2" firstAttribute="leading" secondItem="6HU-nb-2v1" secondAttribute="leading" id="0U0-Ey-Ivk"/>
@@ -814,7 +811,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Disconnect">
-                                    <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="photon"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -824,7 +821,7 @@
                                         <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" name="photon"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -833,20 +830,16 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="M1f-cA-1JF"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xtt-p2-2g7" firstAttribute="top" secondItem="RvF-0e-cRf" secondAttribute="bottom" constant="12" id="0kS-cR-PN3"/>
-                            <constraint firstItem="M1f-cA-1JF" firstAttribute="leading" secondItem="qkp-8m-gqj" secondAttribute="leading" id="15e-AA-Xpx"/>
                             <constraint firstItem="pUY-pL-b4r" firstAttribute="leading" secondItem="M1f-cA-1JF" secondAttribute="leading" constant="16" id="2FM-fe-zBg"/>
                             <constraint firstItem="w1C-zP-eig" firstAttribute="centerY" secondItem="M1f-cA-1JF" secondAttribute="centerY" id="6dk-uP-TxN"/>
                             <constraint firstItem="M1f-cA-1JF" firstAttribute="trailing" secondItem="xtt-p2-2g7" secondAttribute="trailing" id="8eW-dz-pWv"/>
                             <constraint firstItem="xtt-p2-2g7" firstAttribute="leading" secondItem="M1f-cA-1JF" secondAttribute="leading" id="DU0-Hr-KiC"/>
-                            <constraint firstItem="qkp-8m-gqj" firstAttribute="bottom" secondItem="IH7-3K-o0F" secondAttribute="bottom" id="F1h-vj-dMN"/>
-                            <constraint firstItem="M1f-cA-1JF" firstAttribute="trailing" secondItem="qkp-8m-gqj" secondAttribute="trailing" id="Gr3-sX-Set"/>
                             <constraint firstItem="M1f-cA-1JF" firstAttribute="trailing" secondItem="RvF-0e-cRf" secondAttribute="trailing" constant="12" id="P0F-fL-yAS"/>
                             <constraint firstItem="RvF-0e-cRf" firstAttribute="top" secondItem="M1f-cA-1JF" secondAttribute="top" constant="8" id="SuK-wl-LXp"/>
                             <constraint firstItem="M1f-cA-1JF" firstAttribute="bottom" secondItem="pUY-pL-b4r" secondAttribute="bottom" constant="16" id="YOD-nB-6bY"/>
-                            <constraint firstAttribute="top" secondItem="qkp-8m-gqj" secondAttribute="top" id="oB3-io-9WR"/>
                             <constraint firstItem="pUY-pL-b4r" firstAttribute="top" secondItem="xtt-p2-2g7" secondAttribute="bottom" constant="12" id="pED-Bh-aPd"/>
                             <constraint firstItem="w1C-zP-eig" firstAttribute="centerX" secondItem="M1f-cA-1JF" secondAttribute="centerX" id="pST-qc-V8y"/>
                             <constraint firstItem="RvF-0e-cRf" firstAttribute="leading" secondItem="M1f-cA-1JF" secondAttribute="leading" constant="12" id="t2J-PX-JHi"/>
@@ -2887,7 +2880,6 @@
     <color key="tintColor" name="_font05"/>
     <resources>
         <image name="arrowNextGr" width="24" height="24"/>
-        <image name="bg_cosmos" width="360" height="740"/>
         <image name="bnbDex" width="40" height="46"/>
         <image name="btnAlramOff" width="24" height="24"/>
         <image name="btnExplorer" width="24" height="24"/>
@@ -2903,6 +2895,9 @@
         <image name="wallet_ic" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_card_divider">
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font01">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2921,6 +2916,9 @@
         </namedColor>
         <namedColor name="_tabbar_selected">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="binance_bg">
+            <color red="0.98400002717971802" green="0.9649999737739563" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
             <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
