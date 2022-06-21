@@ -32,7 +32,7 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onReFetchData), for: .valueChanged)
-        self.refresher.tintColor = UIColor.white
+        self.refresher.tintColor = UIColor(named: "_font05")
         self.swapPoolTableView.addSubview(refresher)
     }
     

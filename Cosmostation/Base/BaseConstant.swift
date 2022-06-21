@@ -359,11 +359,6 @@ let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
 let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";
 let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
 
-let LIQUIDITY_MSG_TYPE_SWAP                 = "liquidity/MsgSwapWithinBatch";
-let LIQUIDITY_MSG_TYPE_JOIN_POOL            = "liquidity/MsgDepositWithinBatch";
-let LIQUIDITY_MSG_TYPE_EXIT_POOL            = "liquidity/MsgWithdrawWithinBatch";
-
-
 let IRIS_MSG_TYPE_TRANSFER                  = "irishub/bank/Send";
 let IRIS_MSG_TYPE_DELEGATE                  = "irishub/stake/MsgDelegate";
 let IRIS_MSG_TYPE_UNDELEGATE                = "irishub/stake/BeginUnbonding";
@@ -457,8 +452,6 @@ let SIF_MSG_TYPE_ADD_LP                     = "sif/MsgAddLiquidity";
 let SIF_MSG_TYPE_REMOVE_LP                  = "sif/MsgRemoveLiquidity";
 let SIF_MSG_TYPE_SWAP_CION                  = "sif/MsgSwap";
 
-
-let TASK_RIZON_EVENT_HORIZON                = "rizon_swap";
 
 let TASK_IBC_TRANSFER                       = "ibc_MsgTransfer";
 let TASK_CW20_TRANSFER                      = "cw20_Transfer";

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,52 +26,49 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="yA8-Im-YPa">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caL-gE-OSn" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="60" width="382" height="107.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgm-h4-tTy">
                             <rect key="frame" x="16" y="12" width="13" height="17"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Domain Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VYn-6x-yL5">
                             <rect key="frame" x="16" y="39" width="68.5" height="13.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                            <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7DL-6p-Wro">
                             <rect key="frame" x="355" y="39" width="11" height="13.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Connected Addresses" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nit-v2-Sm8">
                             <rect key="frame" x="16" y="58.5" width="115.5" height="13.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                            <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySR-u7-iG6">
                             <rect key="frame" x="355" y="58.5" width="11" height="13.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Expire Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPr-9y-6cf">
                             <rect key="frame" x="16" y="78" width="60.5" height="13.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                            <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="textColor" name="_font04"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4b-2D-C79">
                             <rect key="frame" x="355" y="78" width="11" height="13.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9L-TU-UlM">
@@ -85,7 +83,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.43137254899999999" green="0.48627450979999998" blue="0.87058823529999996" alpha="0.14763974469999999" colorSpace="deviceRGB"/>
+                    <color key="backgroundColor" name="starname_bg"/>
                     <constraints>
                         <constraint firstItem="TPr-9y-6cf" firstAttribute="top" secondItem="nit-v2-Sm8" secondAttribute="bottom" constant="6" id="3cY-E9-nYE"/>
                         <constraint firstItem="lgm-h4-tTy" firstAttribute="top" secondItem="caL-gE-OSn" secondAttribute="top" constant="12" id="81z-PC-XRF"/>
@@ -134,7 +132,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                     <state key="normal" title="Connected Address Replace">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="titleColor" name="_font05"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -144,7 +142,7 @@
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="value" name="_font05"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -161,7 +159,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="Delete Starname">
-                                <color key="titleColor" red="0.95294117647058818" green="0.098039215686274508" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" name="_warnRed"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -171,7 +169,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="_warnRed"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -185,7 +183,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                             <state key="normal" title="Renew Starname">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleColor" name="_font05"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -195,7 +193,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -207,7 +205,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NwZ-mk-NLr">
                     <rect key="frame" x="87" y="369" width="240" height="168"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="historyNoneImg" translatesAutoresizingMaskIntoConstraints="NO" id="lQa-mq-1ih">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconDataEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="lQa-mq-1ih">
                             <rect key="frame" x="95" y="0.0" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="HoU-kX-HvX"/>
@@ -220,7 +218,7 @@
                                 <constraint firstAttribute="height" constant="14" id="SDX-me-pqR"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -242,13 +240,10 @@
                 <constraint firstItem="caL-gE-OSn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="2Ad-kA-vmb"/>
                 <constraint firstItem="dhY-Xc-j0D" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="66Q-le-FFV"/>
                 <constraint firstItem="PrO-FY-hQf" firstAttribute="top" secondItem="UmA-3z-ttR" secondAttribute="bottom" constant="8" id="7MF-h5-h81"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="yA8-Im-YPa" secondAttribute="leading" id="7VX-YM-lkY"/>
                 <constraint firstItem="UmA-3z-ttR" firstAttribute="top" secondItem="dhY-Xc-j0D" secondAttribute="bottom" constant="8" id="CZx-JG-3y5"/>
-                <constraint firstItem="yA8-Im-YPa" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="Epd-xs-XLD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dhY-Xc-j0D" secondAttribute="trailing" id="HSO-Zz-lkC"/>
                 <constraint firstItem="caL-gE-OSn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OZc-WM-deU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="PrO-FY-hQf" secondAttribute="bottom" constant="16" id="RrS-HK-JKO"/>
-                <constraint firstAttribute="top" secondItem="yA8-Im-YPa" secondAttribute="top" id="Sy3-ba-KCl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PrO-FY-hQf" secondAttribute="trailing" constant="16" id="WPR-w2-qYp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="caL-gE-OSn" secondAttribute="trailing" constant="16" id="aL2-QH-YNa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UmA-3z-ttR" secondAttribute="trailing" constant="16" id="gMC-yV-lLY"/>
@@ -256,15 +251,25 @@
                 <constraint firstItem="NwZ-mk-NLr" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="mqw-C4-0FA"/>
                 <constraint firstItem="PrO-FY-hQf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="u3G-uq-3oS"/>
                 <constraint firstItem="dhY-Xc-j0D" firstAttribute="top" secondItem="caL-gE-OSn" secondAttribute="bottom" constant="8" id="vPn-zU-6Y4"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yA8-Im-YPa" secondAttribute="trailing" id="xUx-gf-TiJ"/>
             </constraints>
             <point key="canvasLocation" x="140.57971014492756" y="69.642857142857139"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
         <image name="btnExplorer" width="24" height="24"/>
-        <image name="historyNoneImg" width="36" height="36"/>
+        <image name="iconDataEmpty" width="36" height="36"/>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_warnRed">
+            <color red="0.95300000905990601" green="0.097999997437000275" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="starname_bg">
+            <color red="0.89800000190734863" green="0.90600001811981201" blue="0.97600001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

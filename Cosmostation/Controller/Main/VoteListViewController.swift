@@ -36,7 +36,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onFetchProposals), for: .valueChanged)
-        self.refresher.tintColor = UIColor.white
+        self.refresher.tintColor = UIColor(named: "_font05")
         self.voteTableView.addSubview(refresher)
         
         self.loadingImg.onStartAnimation()

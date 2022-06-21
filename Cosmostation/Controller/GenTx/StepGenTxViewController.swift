@@ -125,12 +125,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mLockups: Array<Osmosis_Lockup_PeriodLock>?
     
     
-    var mGDexPool: Tendermint_Liquidity_V1beta1_Pool?
-    var mGDexPoolManager: GDexManager!
-    var mGDexPoolSupply: Coin!
-    var mGDexSwapOrderPrice: NSDecimalNumber?
-    
-    
     var mSifPool: Sifnode_Clp_V1_Pool?
     var mSifMyAllUnitAmount: String?
     var mSifMyWithdrawUnitAmount: String?
@@ -405,24 +399,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     StartUnlock3ViewController(nibName: "StartUnlock3ViewController", bundle: nil)]
             
-        } else if (mType == LIQUIDITY_MSG_TYPE_SWAP) {
-            return [GdexSwap0ViewController(nibName: "GdexSwap0ViewController", bundle: nil),
-                    self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                    GdexSwap3ViewController(nibName: "GdexSwap3ViewController", bundle: nil)]
-            
-        } else if (mType == LIQUIDITY_MSG_TYPE_JOIN_POOL) {
-            return [GdexDeposit0ViewController(nibName: "GdexDeposit0ViewController", bundle: nil),
-                    self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                    GdexDeposit3ViewController(nibName: "GdexDeposit3ViewController", bundle: nil)]
-            
-        } else if (mType == LIQUIDITY_MSG_TYPE_EXIT_POOL) {
-            return [GdexWithdraw0ViewController(nibName: "GdexWithdraw0ViewController", bundle: nil),
-                    self.newVc(viewController: "StepMemoViewController"),
-                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                    GdexWithdraw3ViewController(nibName: "GdexWithdraw3ViewController", bundle: nil)]
-            
         }
         
         //IBC
@@ -440,12 +416,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
                     SendContract4ViewController(nibName: "SendContract4ViewController", bundle: nil)]
             
-        }
-        
-        //RIZON
-        else if (mType == TASK_RIZON_EVENT_HORIZON) {
-            return [StepEventHorizon0ViewController(nibName: "StepEventHorizon0ViewController", bundle: nil),
-                    StepEventHorizon1ViewController(nibName: "StepEventHorizon1ViewController", bundle: nil)]
         }
         
         //SIF

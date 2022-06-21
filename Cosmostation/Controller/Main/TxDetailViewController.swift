@@ -14,7 +14,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet weak var txTableView: UITableView!
     @IBOutlet weak var controlLayer: UIStackView!
-    @IBOutlet weak var htlcRefundBtn: UIButton!
     @IBOutlet weak var errorLayer: CardView!
     @IBOutlet weak var errorCode: UILabel!
     @IBOutlet weak var loadingLayer: UIView!
@@ -38,6 +37,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.mAllValidator = BaseData.instance.mAllValidator
         
         self.txTableView.delegate = self
@@ -123,7 +123,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             return onBindTxCommon(tableView)
         } else {
             let msg = mTxInfo?.getMsg(indexPath.row - 1)
-            if (msg?.type == COSMOS_MSG_TYPE_TRANSFER || msg?.type == COSMOS_MSG_TYPE_TRANSFER2 || msg?.type == COSMOS_MSG_TYPE_TRANSFER3 || msg?.type == OK_MSG_TYPE_TRANSFER || msg?.type == OK_MSG_TYPE_MULTI_TRANSFER || msg?.type == CERTIK_MSG_TYPE_TRANSFER) {
+            if (msg?.type == COSMOS_MSG_TYPE_TRANSFER || msg?.type == COSMOS_MSG_TYPE_TRANSFER2 || msg?.type == COSMOS_MSG_TYPE_TRANSFER3 ||
+                msg?.type == OK_MSG_TYPE_TRANSFER || msg?.type == OK_MSG_TYPE_MULTI_TRANSFER || msg?.type == CERTIK_MSG_TYPE_TRANSFER) {
                 if ((msg?.value.inputs != nil && (msg?.value.inputs!.count)! > 1) ||  (msg?.value.outputs != nil && (msg?.value.outputs!.count)! > 1)) {
                     //No case yet!
                     return onBindMultiTransfer(tableView, indexPath.row)
@@ -364,31 +365,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
     }
     
-    @IBAction func onClickHtlcRefund(_ sender: UIButton) {
-        self.onShowToast("Pending swap will refund Shortly")
-        return
-//        print("onClickHtlcRefund")
-//        if (!account!.account_has_private) {
-//            self.onShowAddMenomicDialog()
-//            return
-//        }
-        
-//        let balances = BaseData.instance.selectBalanceById(accountId: self.account!.account_id)
-//        if (chainType! == ChainType.BINANCE_MAIN || chainType! == ChainType.BINANCE_TEST) {
-//            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue < 0) {
-//                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-//                return
-//            }
-//        }
-//
-//        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-//        txVC.mType = TASK_TYPE_HTLC_REFUND
-//        txVC.mHtlcRefundSwapId = self.mSwapId
-//        self.navigationItem.title = ""
-//        self.navigationController?.pushViewController(txVC, animated: true)
-    }
-    
-    
     func onShowMoreWait() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_title", comment: ""), message: NSLocalizedString("more_wait_msg", comment: ""), preferredStyle: .alert)
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
@@ -547,40 +523,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     
     func sortCoins(_ coins:Array<Coin>, _ chain:ChainType) -> Array<Coin> {
-        if (chainType! == ChainType.COSMOS_MAIN) {
-            return coins.sorted(by: {
-                if ($0.denom == COSMOS_MAIN_DENOM) {
-                    return true
-                }
-                if ($1.denom == COSMOS_MAIN_DENOM) {
-                    return false
-                }
-                return false
-            })
-            
-        } else if (chainType! == ChainType.KAVA_MAIN) {
-            return coins.sorted(by: {
-                if ($0.denom == KAVA_MAIN_DENOM) {
-                    return true
-                }
-                if ($1.denom == KAVA_MAIN_DENOM) {
-                    return false
-                }
-                return false
-            })
-            
-        } else if (chainType! == ChainType.IRIS_MAIN) {
-            return coins.sorted(by: {
-                if ($0.denom == IRIS_MAIN_DENOM) {
-                    return true
-                }
-                if ($1.denom == IRIS_MAIN_DENOM) {
-                    return false
-                }
-                return false
-            })
-            
-        } else if (chainType! == ChainType.OKEX_MAIN) {
+        if (chainType! == ChainType.OKEX_MAIN) {
             return coins.sorted(by: {
                 if ($0.denom == OKEX_MAIN_DENOM) {
                     return true

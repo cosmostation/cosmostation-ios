@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UEl-4g-UdM" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="0.5" width="296" height="72"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="bXY-sd-W4V">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="bXY-sd-W4V">
                                 <rect key="frame" x="12" y="23" width="26" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="26" id="Jx3-CW-5YW"/>
@@ -129,7 +129,7 @@
     </objects>
     <resources>
         <image name="arrowNextGr" width="24" height="24"/>
-        <image name="tokenIc" width="22" height="22"/>
+        <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -20,7 +20,6 @@ class DesmosProfileInfoCell: UITableViewCell {
     }
     
     func onBindProfile(_ chainType: ChainType?, _ profileData: Desmos_Profiles_V1beta1_Profile) {
-        profileCardView.backgroundColor = WUtils.getChainBg(chainType)
         self.profileNicNameLabel.text = profileData.nickname
         
         let data = Data(profileData.bio.utf8)
@@ -29,6 +28,5 @@ class DesmosProfileInfoCell: UITableViewCell {
         } else {
             self.profileBioTextView.text = profileData.bio
         }
-        profileBioTextView.textColor = UIColor(hexString: "#7a7f88")
     }
 }

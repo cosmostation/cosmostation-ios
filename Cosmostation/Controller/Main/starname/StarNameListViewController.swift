@@ -31,14 +31,15 @@ class StarNameListViewController: BaseViewController {
         
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
             myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
-            myStarNameSegment.selectedSegmentTintColor = TRANS_BG_COLOR_IOV2
+            myStarNameSegment.selectedSegmentTintColor = chainConfig?.chainColor
             
         } else {
-            myStarNameSegment.tintColor = COLOR_IOV
+            myStarNameSegment.tintColor = chainConfig?.chainColor
         }
     }
     

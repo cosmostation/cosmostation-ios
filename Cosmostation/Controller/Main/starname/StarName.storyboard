@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +25,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Buy Premium Starname">
-                                    <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="photon"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -33,7 +35,7 @@
                                         <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" name="photon"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -46,13 +48,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owen Premium Starname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10K-aX-vtm">
                                         <rect key="frame" x="0.0" y="5" width="138.5" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="textColor" name="_font04"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nL7-rW-Hay">
                                         <rect key="frame" x="142.5" y="5" width="7" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -109,7 +111,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                                 <state key="normal" title="Buy Basic Starname">
-                                    <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" name="photon"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -119,7 +121,7 @@
                                         <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" name="photon"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -132,13 +134,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Owen Basic Starname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FfI-hs-2id">
                                         <rect key="frame" x="0.0" y="5" width="119.5" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
+                                        <color key="textColor" name="_font04"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2m-ke-gWD">
                                         <rect key="frame" x="123.5" y="5" width="7" height="14"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -188,9 +190,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="CVp-Ea-z7S">
-                                <rect key="frame" x="0.0" y="5" width="414" height="896"/>
-                            </imageView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JBe-jS-fyA">
                                 <rect key="frame" x="86.5" y="52" width="241" height="32"/>
                                 <segments>
@@ -216,18 +215,14 @@
                             </containerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rYS-kd-sBW"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="CVp-Ea-z7S" firstAttribute="centerY" secondItem="rYS-kd-sBW" secondAttribute="centerY" id="1iG-3A-cEP"/>
                             <constraint firstItem="ZLm-pq-1DJ" firstAttribute="top" secondItem="1sB-cY-Ecr" secondAttribute="top" id="Bm6-Bn-Xgw"/>
                             <constraint firstItem="ZLm-pq-1DJ" firstAttribute="height" secondItem="1sB-cY-Ecr" secondAttribute="height" id="HkD-Wy-8O6"/>
                             <constraint firstItem="JBe-jS-fyA" firstAttribute="top" secondItem="rYS-kd-sBW" secondAttribute="top" constant="8" id="Lv8-hb-lBr"/>
                             <constraint firstItem="ZLm-pq-1DJ" firstAttribute="leading" secondItem="1sB-cY-Ecr" secondAttribute="leading" id="LzW-8O-PCl"/>
                             <constraint firstItem="JBe-jS-fyA" firstAttribute="centerX" secondItem="rYS-kd-sBW" secondAttribute="centerX" id="MzN-Px-BU0"/>
-                            <constraint firstItem="CVp-Ea-z7S" firstAttribute="width" secondItem="ok3-77-WUy" secondAttribute="width" id="Pi7-dX-0N9"/>
-                            <constraint firstItem="CVp-Ea-z7S" firstAttribute="centerX" secondItem="rYS-kd-sBW" secondAttribute="centerX" id="Ua4-3j-dPk"/>
                             <constraint firstItem="1sB-cY-Ecr" firstAttribute="top" secondItem="JBe-jS-fyA" secondAttribute="bottom" constant="8" id="bXf-G2-PKb"/>
-                            <constraint firstItem="CVp-Ea-z7S" firstAttribute="height" secondItem="ok3-77-WUy" secondAttribute="height" id="cXe-hE-wqp"/>
                             <constraint firstItem="ZLm-pq-1DJ" firstAttribute="width" secondItem="1sB-cY-Ecr" secondAttribute="width" id="d05-En-bSp"/>
                             <constraint firstItem="1sB-cY-Ecr" firstAttribute="bottom" secondItem="ok3-77-WUy" secondAttribute="bottom" id="fja-FQ-SEi"/>
                             <constraint firstItem="1sB-cY-Ecr" firstAttribute="centerX" secondItem="rYS-kd-sBW" secondAttribute="centerX" id="plC-iD-z3F"/>
@@ -246,6 +241,17 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

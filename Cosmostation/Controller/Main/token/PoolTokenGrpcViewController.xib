@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,16 +32,13 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="yOg-5b-6ME">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK5-f0-RZJ" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="12" y="98" width="390" height="80"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="cof-oI-i1D">
                             <rect key="frame" x="12" y="14" width="366" height="22"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key_off" translatesAutoresizingMaskIntoConstraints="NO" id="cBi-MP-UFs">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="cBi-MP-UFs">
                                     <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="2nv-IE-2fx"/>
@@ -49,7 +48,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycj-i5-J7g">
                                     <rect key="frame" x="26" y="0.0" width="340" height="22"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -57,11 +56,11 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1i-dV-Icq">
                             <rect key="frame" x="193" y="42" width="4.5" height="20.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.18039215689999999" green="0.18039215689999999" blue="0.18039215689999999" alpha="0.39603751180000002" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="cof-oI-i1D" secondAttribute="trailing" constant="12" id="5rR-I7-0sv"/>
                         <constraint firstItem="cof-oI-i1D" firstAttribute="centerX" secondItem="vK5-f0-RZJ" secondAttribute="centerX" id="LrZ-6P-SeR"/>
@@ -92,7 +91,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V08-i7-rOD">
                     <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="Mfj-z0-IfT">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Mfj-z0-IfT">
                             <rect key="frame" x="44" y="12" width="26" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="U0F-tr-Dqr"/>
@@ -105,7 +104,7 @@
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="MsV-Wq-ECR"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRD-HI-yQC">
@@ -114,13 +113,13 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ii4-p1-ei6">
                                     <rect key="frame" x="100.5" y="4" width="9.5" height="14"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6e9-sO-chs">
                                     <rect key="frame" x="101" y="17" width="9" height="13"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="priceDown" translatesAutoresizingMaskIntoConstraints="NO" id="7yD-BP-No6">
@@ -147,7 +146,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="HoD-dL-OXz"/>
                             </constraints>
-                            <state key="normal" image="iconIosBack"/>
+                            <state key="normal" image="btnNaviBack"/>
                             <connections>
                                 <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="uUh-Xp-GX2"/>
                             </connections>
@@ -176,8 +175,8 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="qs9-87-V7z"/>
                             </constraints>
-                            <state key="normal" title="  IBC Send" image="icIbcsend20">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="IBC Send">
+                                <color key="titleColor" name="_font05"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -187,7 +186,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -199,8 +198,8 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="EQy-Af-JBH"/>
                             </constraints>
-                            <state key="normal" title="  Send" image="icSend20">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Send">
+                                <color key="titleColor" name="_font05"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -210,7 +209,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -225,23 +224,19 @@
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="GMW-yt-bBZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1DR-XG-mx0"/>
                 <constraint firstItem="V08-i7-rOD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="31m-22-8q7"/>
                 <constraint firstItem="V08-i7-rOD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KYM-yH-AVm"/>
                 <constraint firstItem="GMW-yt-bBZ" firstAttribute="top" secondItem="vK5-f0-RZJ" secondAttribute="bottom" constant="4" id="KlP-Ep-Nb1"/>
-                <constraint firstItem="yOg-5b-6ME" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Nzq-yu-rev"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RHI-lT-4of" secondAttribute="trailing" constant="16" id="Wmp-9D-dDW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GMW-yt-bBZ" secondAttribute="trailing" id="YAT-eY-nmd"/>
                 <constraint firstItem="vK5-f0-RZJ" firstAttribute="top" secondItem="V08-i7-rOD" secondAttribute="bottom" constant="4" id="bRv-xv-eMq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="V08-i7-rOD" secondAttribute="trailing" id="cfY-Qn-LGR"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="yOg-5b-6ME" secondAttribute="leading" id="kDZ-4u-dw6"/>
                 <constraint firstItem="vK5-f0-RZJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="mDi-Qu-mpj"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yOg-5b-6ME" secondAttribute="trailing" id="pt1-RB-JNg"/>
                 <constraint firstItem="vK5-f0-RZJ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-12" id="q9I-2n-zef"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="RHI-lT-4of" secondAttribute="bottom" constant="16" id="t2E-hC-qaV"/>
-                <constraint firstItem="yOg-5b-6ME" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="tbT-tS-Swz"/>
                 <constraint firstItem="RHI-lT-4of" firstAttribute="top" secondItem="GMW-yt-bBZ" secondAttribute="bottom" constant="8" id="ylc-Rv-atp"/>
                 <constraint firstItem="RHI-lT-4of" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="zlg-jK-aNd"/>
             </constraints>
@@ -249,12 +244,18 @@
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
-        <image name="icIbcsend20" width="20" height="20"/>
-        <image name="icSend20" width="20" height="20"/>
-        <image name="iconIosBack" width="24" height="24"/>
-        <image name="key_off" width="20" height="20"/>
+        <image name="btnNaviBack" width="24" height="24"/>
+        <image name="iconKeyEmpty" width="20" height="20"/>
         <image name="priceDown" width="16" height="16"/>
-        <image name="tokenIc" width="22" height="22"/>
+        <image name="tokenDefault" width="22" height="22"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -39,7 +39,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         self.validatorDetailTableView.register(UINib(nibName: "ValidatorDetailMyDetailCell", bundle: nil), forCellReuseIdentifier: "ValidatorDetailMyDetailCell")
         self.validatorDetailTableView.register(UINib(nibName: "ValidatorDetailMyActionCell", bundle: nil), forCellReuseIdentifier: "ValidatorDetailMyActionCell")
         self.validatorDetailTableView.register(UINib(nibName: "ValidatorDetailCell", bundle: nil), forCellReuseIdentifier: "ValidatorDetailCell")
-        self.validatorDetailTableView.register(UINib(nibName: "ValidatorDetailHistoryEmpty", bundle: nil), forCellReuseIdentifier: "ValidatorDetailHistoryEmpty")
         self.validatorDetailTableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
         self.validatorDetailTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
         self.validatorDetailTableView.rowHeight = UITableView.automaticDimension
@@ -51,7 +50,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onFetch), for: .valueChanged)
-        refresher.tintColor = UIColor.white
+        refresher.tintColor = UIColor(named: "_font05")
         validatorDetailTableView.addSubview(refresher)
         
         self.loadingImg.onStartAnimation()

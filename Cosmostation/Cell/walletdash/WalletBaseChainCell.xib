@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVp-NM-hKB" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="498" height="321"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="q8b-yQ-Zj6">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="q8b-yQ-Zj6">
                                 <rect key="frame" x="12" y="13.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="W0c-4T-AlZ"/>
@@ -339,7 +339,7 @@
         <image name="btnIconRewad" width="20" height="20"/>
         <image name="btnIconVote" width="20" height="20"/>
         <image name="btnIconWalletConnect" width="20" height="20"/>
-        <image name="tokenIc" width="22" height="22"/>
+        <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

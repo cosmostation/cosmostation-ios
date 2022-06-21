@@ -41,7 +41,7 @@
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="changeIc" translatesAutoresizingMaskIntoConstraints="NO" id="m6Z-cJ-flt">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnIconListHandle" translatesAutoresizingMaskIntoConstraints="NO" id="m6Z-cJ-flt">
                                 <rect key="frame" x="426" y="13" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="CiE-wp-Lgq"/>
@@ -99,9 +99,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="btnIconListHandle" width="24" height="24"/>
         <image name="btnIconListRemove" width="20" height="20"/>
         <image name="chainDefault" width="42" height="42"/>
-        <image name="changeIc" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

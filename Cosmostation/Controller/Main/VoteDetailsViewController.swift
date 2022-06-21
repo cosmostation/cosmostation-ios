@@ -40,7 +40,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onFetch), for: .valueChanged)
-        refresher.tintColor = UIColor.white
+        refresher.tintColor = UIColor(named: "_font05")
         voteDetailTableView.addSubview(refresher)
         
         self.loadingImg.onStartAnimation()

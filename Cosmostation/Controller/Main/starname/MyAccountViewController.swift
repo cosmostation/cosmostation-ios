@@ -36,7 +36,7 @@ class MyAccountViewController: BaseViewController, UITableViewDelegate, UITableV
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        self.refresher.tintColor = UIColor.white
+        self.refresher.tintColor = UIColor(named: "_font05")
         self.myAccountTableView.addSubview(refresher)
         self.myAccountTableView.isHidden = true
         

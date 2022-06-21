@@ -40,7 +40,7 @@ class TokenCell: UITableViewCell {
             if let tokenImgeUrl = bridgeTokenInfo.getImgUrl() {
                 tokenImg.af_setImage(withURL: tokenImgeUrl)
             } else {
-                tokenImg.image = UIImage(named: "tokenIc")
+                tokenImg.image = UIImage(named: "tokenDefault")
             }
             tokenSymbol.text = bridgeTokenInfo.origin_symbol
             tokenSymbol.textColor = UIColor(named: "_font05")

@@ -33,6 +33,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.tokenDetailTableView.delegate = self
         self.tokenDetailTableView.dataSource = self
@@ -63,7 +64,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
     }
     
     func onInitView() {
-        self.topCard.backgroundColor = WUtils.getChainBg(chainType)
+        self.topCard.backgroundColor = chainConfig?.chainColorBG
         if (chainType == ChainType.BINANCE_MAIN) {
             guard let bnbToken = WUtils.getBnbToken(denom) else {
                 self.navigationController?.popViewController(animated: true)
@@ -108,7 +109,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
         
         if (account?.account_has_private == true) {
             self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = WUtils.getChainColor(chainType)
+            self.topKeyState.tintColor = chainConfig?.chainColor
         }
         self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true

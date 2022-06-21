@@ -371,37 +371,6 @@ class StepFeeGrpcViewController: BaseViewController {
         }
         
         
-        //for gDex custom msg
-        else if (pageHolderVC.mType == LIQUIDITY_MSG_TYPE_SWAP) {
-            let offerFee = self.pageHolderVC.mSwapInAmount!.multiplying(byPowerOf10: -4).multiplying(by: NSDecimalNumber.init(string: "15"), withBehavior: WUtils.handler0)
-            return Signer.genSimulateSwapBatchMsgTxgRPC(auth,
-                                                        self.pageHolderVC.mAccount!.account_address,
-                                                        String(self.pageHolderVC.mGDexPool!.id),
-                                                        "1",
-                                                        Coin.init(self.pageHolderVC.mSwapInDenom!, self.pageHolderVC.mSwapInAmount!.stringValue),
-                                                        Coin.init(self.pageHolderVC.mSwapInDenom!, offerFee.stringValue),
-                                                        self.pageHolderVC.mSwapOutDenom!,
-                                                        self.pageHolderVC.mGDexSwapOrderPrice!.stringValue,
-                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                        privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == LIQUIDITY_MSG_TYPE_JOIN_POOL) {
-            return Signer.genSimulateDepositBatchMsgTxgRPC(auth,
-                                                           self.pageHolderVC.mAccount!.account_address,
-                                                           String(self.pageHolderVC.mGDexPool!.id),
-                                                           [self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!],
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                           privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == LIQUIDITY_MSG_TYPE_EXIT_POOL) {
-            return Signer.genSimulateWithdrawBatchMsgTxgRPC(auth,
-                                                            self.pageHolderVC.mAccount!.account_address,
-                                                            String(self.pageHolderVC.mGDexPool!.id),
-                                                            self.pageHolderVC.mLPCoin!,
-                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                            privateKey, publicKey, self.chainType!)
-        }
-        
         //for IBC Transfer or Cw20
         else if (pageHolderVC.mType == TASK_IBC_TRANSFER) {
             return Signer.genSimulateIbcTransferMsgTxgRPC(auth,

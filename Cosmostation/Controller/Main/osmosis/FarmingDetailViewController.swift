@@ -89,7 +89,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         //display title
         if (mLockUps.count > 0) {
             topPoolIDLabel.text = "MY EARNING #" + String(mPool.id)
-            topPoolIDLabel.textColor = COLOR_OSMOSIS
+            topPoolIDLabel.textColor = UIColor.init(named: "osmosis")
         } else {
             topPoolIDLabel.text = "EARNING #" + String(mPool.id)
         }

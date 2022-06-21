@@ -20,17 +20,18 @@ class OsmosisDAppViewController: BaseViewController {
         swapView.alpha = 1
         poolView.alpha = 0
         farmingView.alpha = 0
-    
+        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
-            dAppsSegment.selectedSegmentTintColor = TRANS_BG_COLOR_OSMOSIS2
+            dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
             
         } else {
-            dAppsSegment.tintColor = COLOR_OSMOSIS
+            dAppsSegment.tintColor = chainConfig?.chainColor
         }
     }
     
@@ -83,11 +84,11 @@ extension WUtils {
     
     static func DpOsmosisTokenName(_ label: UILabel, _ denom: String) {
         if (denom == OSMOSIS_MAIN_DENOM) {
-            label.textColor = COLOR_OSMOSIS
+            label.textColor = UIColor.init(named: "osmosis")
             label.text = "OSMO"
             
         } else if (denom == OSMOSIS_ION_DENOM) {
-            label.textColor = COLOR_ION
+            label.textColor = UIColor.init(named: "osmosis_ion")
             label.text = "ION"
             
         } else if (denom.starts(with: "gamm/pool/")) {

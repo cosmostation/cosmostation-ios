@@ -43,7 +43,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onFetchHardData), for: .valueChanged)
-        self.refresher.tintColor = UIColor.white
+        self.refresher.tintColor = UIColor(named: "_font05")
         self.hardTableView.addSubview(refresher)
         
         self.onFetchHardData()

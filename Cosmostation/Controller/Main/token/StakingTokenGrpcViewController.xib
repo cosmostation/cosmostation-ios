@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,9 +32,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="tEa-z2-3X8">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tcp-ty-nPt">
                     <rect key="frame" x="0.0" y="182" width="414" height="611"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -40,7 +39,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wt-Xe-e3z">
                     <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="vEx-eU-Vdh">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="vEx-eU-Vdh">
                             <rect key="frame" x="44" y="12" width="26" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="26" id="Wkc-Zx-9HU"/>
@@ -53,7 +52,7 @@
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="fzs-sO-tix"/>
                             </constraints>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znF-LT-P6t">
@@ -62,13 +61,13 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kXL-e1-AkG">
                                     <rect key="frame" x="100.5" y="4" width="9.5" height="14"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lcq-59-Wfn">
                                     <rect key="frame" x="101" y="17" width="9" height="13"/>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="priceDown" translatesAutoresizingMaskIntoConstraints="NO" id="Was-Om-E9B">
@@ -95,7 +94,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="ou2-08-UZT"/>
                             </constraints>
-                            <state key="normal" image="iconIosBack"/>
+                            <state key="normal" image="btnNaviBack"/>
                             <connections>
                                 <action selector="onClickBack:" destination="-1" eventType="touchUpInside" id="g3e-GZ-X7g"/>
                             </connections>
@@ -122,7 +121,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FDa-yy-n3G">
                             <rect key="frame" x="12" y="14" width="366" height="22"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key_off" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-iE-lNH">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-iE-lNH">
                                     <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="22" id="2Ru-bI-aNf"/>
@@ -132,7 +131,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbF-oJ-zAH">
                                     <rect key="frame" x="26" y="0.0" width="340" height="22"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
@@ -140,11 +139,11 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuJ-m0-ZyY">
                             <rect key="frame" x="193" y="42" width="4.5" height="20.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.1803921568627451" green="0.1803921568627451" blue="0.1803921568627451" alpha="0.39603751183715985" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="69D-MD-vA2"/>
                         <constraint firstAttribute="trailing" secondItem="FDa-yy-n3G" secondAttribute="trailing" constant="12" id="8Bj-5s-p5c"/>
@@ -180,8 +179,8 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="0gi-WM-722"/>
                             </constraints>
-                            <state key="normal" title="  IBC Send" image="icIbcsend20">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="IBC Send">
+                                <color key="titleColor" name="_font05"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -191,7 +190,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -203,8 +202,8 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="LIk-2u-KMs"/>
                             </constraints>
-                            <state key="normal" title="  Send" image="icSend20">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal" title="Send">
+                                <color key="titleColor" name="_font05"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -214,7 +213,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="value" name="_font05"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -225,36 +224,38 @@
                 </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="tcp-ty-nPt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5ix-cS-8Yg"/>
-                <constraint firstItem="tEa-z2-3X8" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="7Bg-wO-uvq"/>
-                <constraint firstAttribute="bottom" secondItem="tEa-z2-3X8" secondAttribute="bottom" id="8X8-bI-PrU"/>
                 <constraint firstItem="S6W-vs-13A" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="BN2-07-ZeF"/>
                 <constraint firstItem="6wt-Xe-e3z" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Hog-KS-aCD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6wt-Xe-e3z" secondAttribute="trailing" id="N02-Cp-cJi"/>
                 <constraint firstItem="YcJ-g5-lnw" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-12" id="TOH-DZ-Hh8"/>
                 <constraint firstItem="tcp-ty-nPt" firstAttribute="top" secondItem="YcJ-g5-lnw" secondAttribute="bottom" constant="4" id="Unr-jc-SFn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tcp-ty-nPt" secondAttribute="trailing" id="Wmt-aG-thX"/>
-                <constraint firstItem="tEa-z2-3X8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Wne-q5-18R"/>
                 <constraint firstItem="S6W-vs-13A" firstAttribute="top" secondItem="tcp-ty-nPt" secondAttribute="bottom" constant="8" id="jlf-ou-Rcs"/>
                 <constraint firstItem="6wt-Xe-e3z" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kKQ-zN-X9t"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="S6W-vs-13A" secondAttribute="trailing" constant="16" id="mrx-VO-vO3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="S6W-vs-13A" secondAttribute="bottom" constant="16" id="p6z-cg-RZF"/>
                 <constraint firstItem="YcJ-g5-lnw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="q0H-hy-mDz"/>
                 <constraint firstItem="YcJ-g5-lnw" firstAttribute="top" secondItem="6wt-Xe-e3z" secondAttribute="bottom" constant="4" id="rek-Kx-mi6"/>
-                <constraint firstAttribute="top" secondItem="tEa-z2-3X8" secondAttribute="top" id="s4J-4a-1Q8"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="118.52678571428571"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
-        <image name="icIbcsend20" width="20" height="20"/>
-        <image name="icSend20" width="20" height="20"/>
-        <image name="iconIosBack" width="24" height="24"/>
-        <image name="key_off" width="20" height="20"/>
+        <image name="btnNaviBack" width="24" height="24"/>
+        <image name="iconKeyEmpty" width="20" height="20"/>
         <image name="priceDown" width="16" height="16"/>
-        <image name="tokenIc" width="22" height="22"/>
+        <image name="tokenDefault" width="22" height="22"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

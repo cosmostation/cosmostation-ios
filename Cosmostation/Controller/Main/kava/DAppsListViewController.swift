@@ -30,13 +30,14 @@ class DAppsListViewController: BaseViewController {
     
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
-            dAppsSegment.selectedSegmentTintColor = TRANS_BG_COLOR_KAVA2
+            dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
-            dAppsSegment.tintColor = COLOR_KAVA
+            dAppsSegment.tintColor = chainConfig?.chainColor
         }
         
         self.onFetchKavaSwapPoolData()
@@ -280,16 +281,16 @@ extension WUtils {
     static func DpKavaTokenName(_ label: UILabel, _ denom: String) {
         label.text = getKavaTokenName(denom)
         if (denom == KAVA_MAIN_DENOM) {
-            label.textColor = COLOR_KAVA
+            label.textColor = UIColor.init(named: "kava")
             
         } else if (denom == KAVA_HARD_DENOM) {
-            label.textColor = COLOR_HARD
+            label.textColor = UIColor.init(named: "kava_hard")
             
         } else if (denom == KAVA_USDX_DENOM) {
-            label.textColor = COLOR_USDX
+            label.textColor = UIColor.init(named: "kava_usdx")
             
         } else if (denom == KAVA_SWAP_DENOM) {
-            label.textColor = COLOR_SWP
+            label.textColor = UIColor.init(named: "kava_swp")
             
         } else {
             label.textColor = UIColor(named: "_font05")

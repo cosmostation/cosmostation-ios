@@ -70,11 +70,6 @@ final class BaseData : NSObject{
     
     var mOsmoPools_gRPC = Array<Osmosis_Gamm_Balancer_V1beta1_Pool>()
     
-    var mGravityParam_gRPC: Tendermint_Liquidity_V1beta1_Params?
-    var mGravityPools_gRPC = Array<Tendermint_Liquidity_V1beta1_Pool>()
-    var mGravityPoolTokens_gRPC = Array<Coin>()
-    var mGravityManager_gRPC = Array<GDexManager>()
-    
     var mSifDexPools_gRPC = Array<Sifnode_Clp_V1_Pool>()
     var mSifDexMyAssets_gRPC = Array<Sifnode_Clp_V1_Asset>()
     
@@ -529,19 +524,6 @@ final class BaseData : NSObject{
     func getOsmoPoolByDenom(_ denom: String) -> Osmosis_Gamm_Balancer_V1beta1_Pool? {
         return mOsmoPools_gRPC.filter { $0.totalShares.denom == denom }.first
     }
-    
-    func getGravityPoolByDenom(_ denom: String) -> Tendermint_Liquidity_V1beta1_Pool? {
-        return mGravityPools_gRPC.filter { $0.poolCoinDenom == denom }.first
-    }
-    
-    func getGravityPoolById(_ id: String) -> Tendermint_Liquidity_V1beta1_Pool? {
-        return mGravityPools_gRPC.filter { $0.id == UInt64(id) }.first
-    }
-    
-    func getParamGravityPoolByDenom(_ denom: String) -> GdexStatus? {
-        return mParam?.getGdexList()?.filter { $0.pool_token == denom }.first
-    }
-    
     
     func setRecentAccountId(_ id : Int64) {
         UserDefaults.standard.set(id, forKey: KEY_RECENT_ACCOUNT)

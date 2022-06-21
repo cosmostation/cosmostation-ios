@@ -82,7 +82,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         refresher = UIRefreshControl()
         refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        refresher.tintColor = UIColor.white
+        refresher.tintColor = UIColor(named: "_font05")
         tokenTableView.addSubview(refresher)
         
         self.mBalances = BaseData.instance.mBalances
@@ -511,19 +511,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
             
-        } else if (chainType == .COSMOS_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenGravitydex")
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
-            guard let poolInfo = BaseData.instance.getGravityPoolByDenom(coin.denom) else {
-                return
-            }
-            cell?.tokenSymbol.text = "GDEX-" + String(poolInfo.id)
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "pool/" + String(poolInfo.id)
-            
         } else if (chainType == .INJECTIVE_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenIc")
+            cell?.tokenImg.image = UIImage(named: "tokenDefault")
             cell?.tokenSymbol.text = coin.denom.uppercased()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Pool Asset"
@@ -630,7 +619,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             if let bnbToken = WUtils.getBnbToken(balance.balance_denom) {
                 cell?.tokenImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + bnbToken.original_symbol + ".png")!)
                 cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
-                cell?.tokenSymbol.textColor = .white
+                cell?.tokenSymbol.textColor = UIColor(named: "_font05")
                 cell?.tokenTitle.text = "(" + bnbToken.symbol + ")"
                 cell?.tokenDescription.text = bnbToken.name
                 
@@ -644,7 +633,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             if let okToken = WUtils.getOkToken(balance.balance_denom) {
                 cell?.tokenImg.af_setImage(withURL: URL(string: OKEX_COIN_IMG_URL + okToken.original_symbol! + ".png")!)
                 cell?.tokenSymbol.text = okToken.original_symbol?.uppercased()
-                cell?.tokenSymbol.textColor = .white
+                cell?.tokenSymbol.textColor = UIColor(named: "_font05")
                 cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
                 cell?.tokenDescription.text = okToken.description
                 
@@ -772,10 +761,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mPoolToken_gRPC.sort {
             if (chainType == ChainType.OSMOSIS_MAIN) {
                 return $0.osmosisAmmPoolId() < $1.osmosisAmmPoolId()
-            } else if (chainType == .COSMOS_MAIN) {
-                let id0 = BaseData.instance.getGravityPoolByDenom($0.denom)?.id ?? 0
-                let id1 = BaseData.instance.getGravityPoolByDenom($1.denom)?.id ?? 0
-                return id0 < id1
             }
             return false
         }

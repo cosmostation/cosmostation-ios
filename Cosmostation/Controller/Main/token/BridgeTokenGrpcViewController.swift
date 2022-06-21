@@ -35,6 +35,7 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.bridgeToken = BaseData.instance.getBridge_gRPC(bridgeDenom)
         
         self.tokenTableView.delegate = self
@@ -67,7 +68,7 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         if let tokenImgeUrl = bridgeToken.getImgUrl() {
             naviTokenImg.af_setImage(withURL: tokenImgeUrl)
         } else {
-            naviTokenImg.image = UIImage(named: "tokenIc")
+            naviTokenImg.image = UIImage(named: "tokenDefault")
         }
         naviTokenSymbol.text = bridgeToken.origin_symbol
         
@@ -82,10 +83,10 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
 
-        self.topCard.backgroundColor = WUtils.getChainBg(chainType)
+        self.topCard.backgroundColor = chainConfig?.chainColorBG
         if (account?.account_has_private == true) {
             self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = WUtils.getChainColor(chainType)
+            self.topKeyState.tintColor = chainConfig?.chainColor
         }
 
         self.topDpAddress.text = account?.account_address

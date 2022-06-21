@@ -34,6 +34,7 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
@@ -67,19 +68,8 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
             poolDisplayDecimal = 18
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(poolDenom)
             
-        } else if (chainType == ChainType.COSMOS_MAIN) {
-            guard let poolInfo = BaseData.instance.getGravityPoolByDenom(poolDenom) else {
-                return
-            }
-            naviTokenImg.image = UIImage(named: "tokenGravitydex")
-            naviTokenSymbol.text = "GDEX-" + String(poolInfo.id)
-            
-            poolDivideDecimal = 6
-            poolDisplayDecimal = 6
-            totalAmount = BaseData.instance.getAvailableAmount_gRPC(poolDenom)
-            
-        }  else if (chainType == ChainType.INJECTIVE_MAIN) {
-            naviTokenImg.image = UIImage(named: "tokenIc")
+        } else if (chainType == ChainType.INJECTIVE_MAIN) {
+            naviTokenImg.image = UIImage(named: "tokenDefault")
             naviTokenSymbol.text = poolDenom.uppercased()
             
             poolDivideDecimal = 18
@@ -102,10 +92,10 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
         
-        self.topCard.backgroundColor = WUtils.getChainBg(chainType)
+        self.topCard.backgroundColor = chainConfig?.chainColorBG
         if (account?.account_has_private == true) {
             self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = WUtils.getChainColor(chainType)
+            self.topKeyState.tintColor = chainConfig?.chainColor
         }
         
         self.topDpAddress.text = account?.account_address

@@ -38,7 +38,7 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
 
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        self.refresher.tintColor = UIColor.white
+        self.refresher.tintColor = UIColor(named: "_font05")
         self.okTopValidatorTableView.addSubview(refresher)
     }
     
@@ -91,9 +91,9 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         cell?.powerLabel.attributedText =  WUtils.displayAmount2(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
         cell?.commissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.commissionLabel.font)
         if (self.mMyValidator.contains(where: {$0.operator_address == validator.operator_address})) {
-            cell?.cardView.backgroundColor = TRANS_BG_COLOR_OK
+            cell?.cardView.backgroundColor = UIColor.init(named: "okc_bg")
         } else {
-            cell?.cardView.backgroundColor = COLOR_BG_GRAY
+            cell?.cardView.backgroundColor = UIColor.init(named: "_card_bg")
         }
         if let url = URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address)) {
             cell?.validatorImg.af_setImage(withURL: url)

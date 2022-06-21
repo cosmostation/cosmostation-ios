@@ -212,7 +212,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         
         BaseData.instance.mOsmoPools_gRPC.removeAll()
         
-        BaseData.instance.mGravityPools_gRPC.removeAll()
         
         
         
@@ -242,7 +241,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
                 
         else if (self.mChainType == ChainType.COSMOS_MAIN) {
-            self.mFetchCnt = 10
+            self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
             self.onFetchgRPCBondedValidators(0)
@@ -254,7 +253,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-            self.onFetchgRPCGravityPools()
             
         } else if (self.mChainType == ChainType.IRIS_MAIN || self.mChainType == ChainType.AKASH_MAIN || self.mChainType == ChainType.PERSIS_MAIN ||
                    self.mChainType == ChainType.CRYPTO_MAIN || self.mChainType == ChainType.SENTINEL_MAIN || self.mChainType == ChainType.MEDI_MAIN ||
@@ -952,25 +950,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    func onFetchgRPCGravityPools() {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
-                let req = Tendermint_Liquidity_V1beta1_QueryLiquidityPoolsRequest.with { $0.pagination = page }
-                if let response = try? Tendermint_Liquidity_V1beta1_QueryClient(channel: channel).liquidityPools(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    response.pools.forEach { pool in
-                        BaseData.instance.mGravityPools_gRPC.append(pool)
-                    }
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCGravityPools failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
-        }
-    }
     
     
     //for KAVA

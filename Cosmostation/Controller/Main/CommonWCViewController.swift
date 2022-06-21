@@ -57,6 +57,7 @@ class CommonWCViewController: BaseViewController {
             account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
             chainType = WUtils.getChainType(account!.account_base_chain)
             baseChain = WUtils.getChainDBName(chainType)
+            chainConfig = ChainFactory().getChainConfig(chainType)
             accountMap[baseChain] = account
         }
         
@@ -78,11 +79,11 @@ class CommonWCViewController: BaseViewController {
         if (connected) {
             dappConnectImage.image = UIImage(named: "passedImg")
             dappConnectLabel.text = "Connected"
-            dappConnectLabel.textColor = UIColor.white
+            dappConnectLabel.textColor = UIColor.init(named: "_font05")
         } else {
             dappConnectImage.image = UIImage(named: "passUp")
             dappConnectLabel.text = "Not Connected"
-            dappConnectLabel.textColor = UIColor.lightGray
+            dappConnectLabel.textColor = UIColor.init(named: "_font04")
         }
     }
     
@@ -455,7 +456,7 @@ class CommonWCViewController: BaseViewController {
         self.wcTitle.text = peer.name
         self.wcUrl.text = peer.url
         self.wcAddress.text = accountMap.values.map { $0.account_address }.joined(separator: "\n")
-        self.wcCardView.backgroundColor = WUtils.getChainBg(chainType)
+        self.wcCardView.backgroundColor = chainConfig?.chainColorBG
         if (!self.isDapp) {
             self.wcCardView.isHidden = false
             self.wcLoading.isHidden = false

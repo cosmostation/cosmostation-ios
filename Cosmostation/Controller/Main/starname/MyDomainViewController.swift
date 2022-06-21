@@ -39,7 +39,7 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
-        self.refresher.tintColor = UIColor.white
+        self.refresher.tintColor = UIColor(named: "_font05")
         self.myDomainTableView.addSubview(refresher)
         self.myDomainTableView.isHidden = true
         
@@ -66,9 +66,9 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.starNameLabel.text = "*" + starnameAccount.name
             cell?.domainTypeLabel.text = starnameAccount.type.uppercased()
             if (starnameAccount.type == "open") {
-                cell?.domainTypeLabel.textColor = COLOR_IOV
+                cell?.domainTypeLabel.textColor = UIColor.init(named: "starname")
             } else {
-                cell?.domainTypeLabel.textColor = .white
+                cell?.domainTypeLabel.textColor = UIColor.init(named: "_font05")
             }
             cell?.domainExpireTime.text = WUtils.longTimetoString(starnameAccount.validUntil * 1000)
             let resourceCnt = myDomainResolves_gRPC.filter({ $0.domain == starnameAccount.name}).first?.resources.count ?? 0
