@@ -26,9 +26,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="yA8-Im-YPa">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="caL-gE-OSn" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="60" width="382" height="107.5"/>
                     <subviews>
@@ -172,7 +169,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" name="_font05"/>
+                                    <color key="value" name="_warnRed"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -225,7 +222,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
                         <constraint firstItem="6BS-pP-ea5" firstAttribute="centerX" secondItem="NwZ-mk-NLr" secondAttribute="centerX" id="18Z-uN-EbG"/>
                         <constraint firstAttribute="height" constant="168" id="56H-lV-5bi"/>
@@ -243,13 +240,10 @@
                 <constraint firstItem="caL-gE-OSn" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="2Ad-kA-vmb"/>
                 <constraint firstItem="dhY-Xc-j0D" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="66Q-le-FFV"/>
                 <constraint firstItem="PrO-FY-hQf" firstAttribute="top" secondItem="UmA-3z-ttR" secondAttribute="bottom" constant="8" id="7MF-h5-h81"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="yA8-Im-YPa" secondAttribute="leading" id="7VX-YM-lkY"/>
                 <constraint firstItem="UmA-3z-ttR" firstAttribute="top" secondItem="dhY-Xc-j0D" secondAttribute="bottom" constant="8" id="CZx-JG-3y5"/>
-                <constraint firstItem="yA8-Im-YPa" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="Epd-xs-XLD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dhY-Xc-j0D" secondAttribute="trailing" id="HSO-Zz-lkC"/>
                 <constraint firstItem="caL-gE-OSn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="OZc-WM-deU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="PrO-FY-hQf" secondAttribute="bottom" constant="16" id="RrS-HK-JKO"/>
-                <constraint firstAttribute="top" secondItem="yA8-Im-YPa" secondAttribute="top" id="Sy3-ba-KCl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PrO-FY-hQf" secondAttribute="trailing" constant="16" id="WPR-w2-qYp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="caL-gE-OSn" secondAttribute="trailing" constant="16" id="aL2-QH-YNa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UmA-3z-ttR" secondAttribute="trailing" constant="16" id="gMC-yV-lLY"/>
@@ -257,15 +251,16 @@
                 <constraint firstItem="NwZ-mk-NLr" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="mqw-C4-0FA"/>
                 <constraint firstItem="PrO-FY-hQf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="u3G-uq-3oS"/>
                 <constraint firstItem="dhY-Xc-j0D" firstAttribute="top" secondItem="caL-gE-OSn" secondAttribute="bottom" constant="8" id="vPn-zU-6Y4"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yA8-Im-YPa" secondAttribute="trailing" id="xUx-gf-TiJ"/>
             </constraints>
             <point key="canvasLocation" x="140.57971014492756" y="69.642857142857139"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
         <image name="btnExplorer" width="24" height="24"/>
         <image name="iconDataEmpty" width="36" height="36"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_font04">
             <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

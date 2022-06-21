@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,9 +25,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="o1B-iL-lS0">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95B-4a-b7I">
                     <rect key="frame" x="87" y="369" width="240" height="168"/>
                     <subviews>
@@ -156,7 +154,7 @@
                                     <real key="value" value="8"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" name="_font05"/>
+                                    <color key="value" name="_warnRed"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
@@ -219,7 +217,7 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="I9Q-Ed-5IQ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-16" id="1MN-Ya-qWi"/>
                 <constraint firstItem="95B-4a-b7I" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="32i-Of-yuT"/>
@@ -229,7 +227,6 @@
                 <constraint firstItem="I9Q-Ed-5IQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Kgh-Wu-wo3"/>
                 <constraint firstItem="Vb1-yx-NZ5" firstAttribute="leading" secondItem="oCj-Ld-hNf" secondAttribute="leading" id="PQI-uy-0i2"/>
                 <constraint firstItem="jaa-Ng-Ew4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="UPP-8j-oiR"/>
-                <constraint firstItem="o1B-iL-lS0" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="YXW-RW-7yi"/>
                 <constraint firstItem="oCj-Ld-hNf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ZZn-hs-Np3"/>
                 <constraint firstItem="oCj-Ld-hNf" firstAttribute="top" secondItem="Vb1-yx-NZ5" secondAttribute="bottom" constant="8" id="i2E-nY-FQt"/>
                 <constraint firstItem="oCj-Ld-hNf" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-16" id="iIP-VQ-VTP"/>
@@ -237,16 +234,12 @@
                 <constraint firstItem="I9Q-Ed-5IQ" firstAttribute="trailing" secondItem="oCj-Ld-hNf" secondAttribute="trailing" id="mgZ-Ad-eM7"/>
                 <constraint firstItem="Vb1-yx-NZ5" firstAttribute="top" secondItem="jaa-Ng-Ew4" secondAttribute="bottom" constant="8" id="omK-Th-ABV"/>
                 <constraint firstItem="95B-4a-b7I" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="qzM-CT-bk2"/>
-                <constraint firstItem="o1B-iL-lS0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tAf-oa-mrC"/>
-                <constraint firstItem="o1B-iL-lS0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xff-Ff-Cgi"/>
                 <constraint firstItem="jaa-Ng-Ew4" firstAttribute="top" secondItem="I9Q-Ed-5IQ" secondAttribute="bottom" constant="8" id="xpc-PY-kVT"/>
-                <constraint firstItem="o1B-iL-lS0" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="yZ0-JU-B5c"/>
             </constraints>
             <point key="canvasLocation" x="103" y="70"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
         <image name="btnExplorer" width="24" height="24"/>
         <image name="iconDataEmpty" width="36" height="36"/>
         <namedColor name="_font04">
@@ -261,5 +254,8 @@
         <namedColor name="starname_bg">
             <color red="0.89800000190734863" green="0.90600001811981201" blue="0.97600001096725464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

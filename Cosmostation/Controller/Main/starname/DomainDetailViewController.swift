@@ -176,9 +176,9 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
             myDomainExpireTimeLabel.text = WUtils.longTimetoString(mMyDomainInfo_gRPC!.validUntil * 1000)
             myDomainType.text = mMyDomainInfo_gRPC?.type.uppercased()
             if (mMyDomainInfo_gRPC?.type == "open") {
-                myDomainType.textColor = COLOR_IOV
+                myDomainType.textColor = UIColor.init(named: "starname")
             } else {
-                myDomainType.textColor = .white
+                myDomainType.textColor = UIColor.init(named: "_font05")
             }
         }
     }
