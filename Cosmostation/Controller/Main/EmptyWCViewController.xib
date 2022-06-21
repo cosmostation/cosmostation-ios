@@ -4,7 +4,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,13 +20,10 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_cosmos" translatesAutoresizingMaskIntoConstraints="NO" id="YHX-Ix-lCQ">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Account for Wallet Connect" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IJ-lR-26q">
                     <rect key="frame" x="112" y="445" width="190.5" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vOV-Di-gco">
@@ -34,7 +33,7 @@
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
                     <state key="normal" title="Dismiss">
-                        <color key="titleColor" red="0.019607843140000001" green="0.82352941180000006" blue="0.86666666670000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" name="photon"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -44,7 +43,7 @@
                             <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="value" name="photon"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
@@ -53,22 +52,26 @@
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="YHX-Ix-lCQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="DVO-X1-ZWN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vOV-Di-gco" secondAttribute="trailing" constant="16" id="GvG-aT-eVG"/>
                 <constraint firstItem="8IJ-lR-26q" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="bRP-WC-tOd"/>
                 <constraint firstItem="8IJ-lR-26q" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="c8T-Ne-mjC"/>
-                <constraint firstItem="YHX-Ix-lCQ" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="fa4-ey-sDE"/>
                 <constraint firstItem="vOV-Di-gco" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="jhs-bO-Ng7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="vOV-Di-gco" secondAttribute="bottom" constant="16" id="pXV-xH-FW7"/>
-                <constraint firstAttribute="top" secondItem="YHX-Ix-lCQ" secondAttribute="top" id="vHg-Pz-anU"/>
-                <constraint firstItem="YHX-Ix-lCQ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="xaw-8O-WhD"/>
             </constraints>
             <point key="canvasLocation" x="139" y="138"/>
         </view>
     </objects>
     <resources>
-        <image name="bg_cosmos" width="360" height="740"/>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="photon">
+            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
