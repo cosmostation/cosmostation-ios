@@ -26,13 +26,14 @@ class SifDexDAppViewController: BaseViewController {
         
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
-            dAppsSegment.selectedSegmentTintColor = TRANS_BG_COLOR_SIF2
+            dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
-            dAppsSegment.tintColor = COLOR_SIF
+            dAppsSegment.tintColor = chainConfig?.chainColor
         }
         
         self.onFetchSifDexData()
@@ -146,7 +147,7 @@ extension WUtils {
     
     static func getSifCoinImg(_ denom: String) -> UIImage? {
         if (denom == SIF_MAIN_DENOM) {
-            return UIImage(named: "tokensifchain")
+            return UIImage(named: "tokenSif")
             
         } else if (denom.starts(with: "ibc/")) {
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = URL(string: ibcToken.moniker ?? ""), let data = try? Data(contentsOf: url) {
@@ -215,11 +216,11 @@ extension WUtils {
     
     static func DpSifCoinName(_ label: UILabel, _ denom: String) {
         if (denom == SIF_MAIN_DENOM) {
-            label.textColor = COLOR_SIF
+            label.textColor = UIColor.init(named: "sif")
             label.text = "ROWAN"
             
         } else if (denom.starts(with: "ibc/")) {
-            label.textColor = .white
+            label.textColor = UIColor.init(named: "_font05")
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
                 label.text = dpDenom.uppercased()
             } else {
@@ -227,18 +228,18 @@ extension WUtils {
             }
             
         } else if (denom.starts(with: "c")) {
-            label.textColor = .white
+            label.textColor = UIColor.init(named: "_font05")
             label.text = denom.substring(from: 1).uppercased()
             
         } else {
-            label.textColor = .white
+            label.textColor = UIColor.init(named: "_font05")
             label.text = "UnKnown"
         }
     }
     
     static func DpSifCoinImg(_ imgView: UIImageView, _ denom: String) {
         if (denom == SIF_MAIN_DENOM) {
-            imgView.image = UIImage(named: "tokensifchain")
+            imgView.image = UIImage(named: "tokenSif")
             
         } else if (denom.starts(with: "ibc/")) {
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = URL(string: ibcToken.moniker ?? "") {

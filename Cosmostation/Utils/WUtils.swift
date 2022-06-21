@@ -4491,7 +4491,7 @@ public class WUtils {
             return UIImage(named: "tokencrypto")
             
         } else if (chain == ChainType.SIF_MAIN) {
-            return UIImage(named: "tokensifchain")
+            return UIImage(named: "tokenSif")
             
         } else if (chain == ChainType.KI_MAIN) {
             return UIImage(named: "tokenKifoundation")

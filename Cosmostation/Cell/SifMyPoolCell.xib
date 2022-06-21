@@ -21,14 +21,14 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccw-IF-9Ia" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="572" height="350"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokensifchain" translatesAutoresizingMaskIntoConstraints="NO" id="8Yw-kB-fLa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenSif" translatesAutoresizingMaskIntoConstraints="NO" id="8Yw-kB-fLa">
                                 <rect key="frame" x="15" y="16" width="34" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="34" id="LOq-Vf-rBY"/>
                                     <constraint firstAttribute="height" constant="34" id="h7i-4r-UfB"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="GpY-k1-eKa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="GpY-k1-eKa">
                                 <rect key="frame" x="35" y="16" width="34" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="RrJ-H5-rqU"/>
@@ -284,8 +284,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="tokenIc" width="22" height="22"/>
-        <image name="tokensifchain" width="22" height="22"/>
+        <image name="tokenDefault" width="22" height="22"/>
+        <image name="tokenSif" width="22" height="22"/>
         <namedColor name="_card_divider">
             <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
