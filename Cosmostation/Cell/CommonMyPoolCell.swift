@@ -44,8 +44,8 @@ class CommonMyPoolCell: UITableViewCell {
     
     func onBindOsmoPoolView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) {
         //dp pool info
-        poolCardView.backgroundColor = TRANS_BG_COLOR_OSMOSIS
-        poolPairLabel.textColor = COLOR_OSMOSIS
+        poolCardView.backgroundColor = UIColor.init(named: "osmosis_bg")
+        poolPairLabel.textColor = UIColor.init(named: "osmosis")
         
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
@@ -106,8 +106,8 @@ class CommonMyPoolCell: UITableViewCell {
     
     func onBindKavaPoolView(_ pool: Kava_Swap_V1beta1_PoolResponse, _ myDeposit: Kava_Swap_V1beta1_DepositResponse) {
         //dp pool info
-        poolCardView.backgroundColor = TRANS_BG_COLOR_KAVA
-        poolPairLabel.textColor = COLOR_KAVA
+        poolCardView.backgroundColor = UIColor.init(named: "kava_bg")
+        poolPairLabel.textColor = UIColor.init(named: "kava")
         
         let nf = WUtils.getNumberFormatter(2)
         let coin0 = pool.coins[0]
@@ -158,8 +158,8 @@ class CommonMyPoolCell: UITableViewCell {
     }
     
     func onBindGdexPoolView(_ pool: Tendermint_Liquidity_V1beta1_Pool) {
-        poolCardView.backgroundColor = TRANS_BG_COLOR_COSMOS
-        poolPairLabel.textColor = COLOR_ATOM
+        poolCardView.backgroundColor = UIColor.init(named: "cosmos_bg")
+        poolPairLabel.textColor = UIColor.init(named: "cosmos")
         
         //dp pool info
         let nf = WUtils.getNumberFormatter(2)
