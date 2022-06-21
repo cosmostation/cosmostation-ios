@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dRi-yr-3mD" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="16" y="4" width="367" height="86"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmosWhMain" translatesAutoresizingMaskIntoConstraints="NO" id="mLW-ZL-dq2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="mLW-ZL-dq2">
                                 <rect key="frame" x="12" y="12" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="ZXt-5u-1rW"/>
@@ -103,7 +103,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cosmosWhMain" width="42" height="42"/>
+        <image name="chainDefault" width="42" height="42"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

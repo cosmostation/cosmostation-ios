@@ -208,6 +208,7 @@
                 <outlet property="amountLabel" destination="gsb-mf-EL9" id="TAJ-ff-6HS"/>
                 <outlet property="amountValueLabel" destination="pLp-r9-cGM" id="yJf-0W-5q4"/>
                 <outlet property="aprLabel" destination="GZM-Mb-7AD" id="CI7-rp-zyb"/>
+                <outlet property="btnUnbonding" destination="Vr0-PR-Wfe" id="ijD-aI-HA1"/>
                 <outlet property="lcokStatusLabel" destination="Zpd-0g-bkm" id="fsM-qA-oFF"/>
                 <outlet property="lockIdLabel" destination="iB2-MB-OgD" id="tOa-rk-dEC"/>
                 <outlet property="nextRewardAmountLabel" destination="0d7-hX-00Z" id="qEP-ee-Ieh"/>

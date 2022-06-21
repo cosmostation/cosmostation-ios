@@ -16,7 +16,8 @@ class EarnUnbondedCell: UITableViewCell {
     @IBOutlet weak var amountValueLabel: UILabel!
     @IBOutlet weak var amountDenomLabel: UILabel!
     @IBOutlet weak var nextRewardAmountLabel: UILabel!
-
+    @IBOutlet weak var btnUnlock: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -51,5 +52,9 @@ class EarnUnbondedCell: UITableViewCell {
         amountLabel.attributedText = WUtils.displayAmount2(lpCoin.amount, amountLabel.font, 18, 18)
         amountValueLabel.attributedText = WUtils.getDpAttributedString(lpCoinValueFormatted, 2, amountValueLabel.font)
         nextRewardAmountLabel.attributedText = WUtils.displayAmount2(myReward.stringValue, nextRewardAmountLabel.font, 6, 6)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnUnlock.borderColor = UIColor.init(named: "_font05")
     }
 }
