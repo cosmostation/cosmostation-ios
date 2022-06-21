@@ -662,8 +662,6 @@ support@cosmostation.io";
 "title_lock_token_osmosis" = "토큰 잠그기";
 "title_begin_unbonding_osmosis" = "토큰 풀기 시작";
 "title_unlock_osmosis" = "토큰 풀기";
-"title_rizon_swap_status" = "스왑 상태 확인";
-"title_rizon_swap" = "이벤트 호라이즌";
 "title_dapp_gravity" = "그래비티 덱스";
 "title_ibc_transfer" = "IBC 전송";
 "title_sif_dex" = "시프 DeFi";

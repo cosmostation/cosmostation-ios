@@ -418,12 +418,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
             
         }
         
-        //RIZON
-        else if (mType == TASK_RIZON_EVENT_HORIZON) {
-            return [StepEventHorizon0ViewController(nibName: "StepEventHorizon0ViewController", bundle: nil),
-                    StepEventHorizon1ViewController(nibName: "StepEventHorizon1ViewController", bundle: nil)]
-        }
-        
         //SIF
         else if (mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
             return [SifIncentive0ViewController(nibName: "SifIncentive0ViewController", bundle: nil),

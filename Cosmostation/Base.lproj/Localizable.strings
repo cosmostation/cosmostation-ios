@@ -660,8 +660,6 @@ support@cosmostation.io";
 "title_lock_token_osmosis" = "Lock Token";
 "title_begin_unbonding_osmosis" = "Begin Unbonding";
 "title_unlock_osmosis" = "Unlock Token";
-"title_rizon_swap_status" = "Event Horizon Status";
-"title_rizon_swap" = "Event Horizon";
 "title_dapp_gravity" = "Gravity Dex";
 "title_ibc_transfer" = "IBC Send";
 "title_sif_dex" = "SifChain DeFi";

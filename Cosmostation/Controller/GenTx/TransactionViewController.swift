@@ -278,11 +278,6 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep5_1")
             self.titleLabel.text =  NSLocalizedString("title_ibc_transfer", comment: "")
             
-        } else if (mType == TASK_RIZON_EVENT_HORIZON) {
-            stepDescription.text = NSLocalizedString("str_rizon_swap_step_0", comment: "")
-            stepImg.image = UIImage.init(named: "2step1")
-            self.titleLabel.text =  NSLocalizedString("title_rizon_swap", comment: "")
-            
         } else if (mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
             stepDescription.text = NSLocalizedString("str_sif_incentive_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
@@ -566,10 +561,6 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_ibc_transfer_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_1")
                     
-                } else if (mType == TASK_RIZON_EVENT_HORIZON) {
-                    stepDescription.text = NSLocalizedString("str_rizon_swap_step_0", comment: "")
-                    stepImg.image = UIImage.init(named: "2step1")
-                    
                 } else if (mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
                     stepDescription.text = NSLocalizedString("str_sif_incentive_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
@@ -769,10 +760,6 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_IBC_TRANSFER) {
                     stepDescription.text = NSLocalizedString("str_ibc_transfer_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_2")
-                    
-                } else if (mType == TASK_RIZON_EVENT_HORIZON) {
-                    stepDescription.text = NSLocalizedString("str_rizon_swap_step_1", comment: "")
-                    stepImg.image = UIImage.init(named: "2step2")
                     
                 } else if (mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
                     stepDescription.text = NSLocalizedString("str_sif_incentive_step_1", comment: "")
