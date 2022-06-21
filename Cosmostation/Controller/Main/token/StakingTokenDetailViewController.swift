@@ -33,6 +33,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.stakingDenom = WUtils.getMainDenom(chainType)
         self.stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         self.stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
@@ -64,7 +65,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     
     func onInitView() {
         WUtils.setDenomTitle(chainType, naviTokenSymbol)
-        self.naviTokenImg.image = WUtils.getStakingTokenImg(chainType!)
+        self.naviTokenImg.image = chainConfig?.stakeDenomImg
         self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainType), naviPerPrice.font)
         self.naviUpdownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainType), font: naviUpdownPercent.font)
         let changeValue = WUtils.valueChange(WUtils.getMainDenom(chainType))
@@ -72,10 +73,10 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
         
-        self.topCard.backgroundColor = WUtils.getChainBg(chainType)
+        self.topCard.backgroundColor = chainConfig?.chainColorBG
         if (account?.account_has_private == true) {
             self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = WUtils.getChainColor(chainType)
+            self.topKeyState.tintColor = chainConfig?.chainColor
         }
         self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true

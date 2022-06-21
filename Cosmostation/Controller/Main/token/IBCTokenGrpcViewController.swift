@@ -35,11 +35,11 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-//        self.tokenTableView.register(UINib(nibName: "TokenDetailIBCCell", bundle: nil), forCellReuseIdentifier: "TokenDetailIBCCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailIBCInfoCell", bundle: nil), forCellReuseIdentifier: "TokenDetailIBCInfoCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
         
@@ -97,10 +97,10 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
             self.naviUpdownImg.image = nil
         }
         
-        self.topCard.backgroundColor = WUtils.getChainBg(chainType)
+        self.topCard.backgroundColor = chainConfig?.chainColorBG
         if (account?.account_has_private == true) {
             self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = WUtils.getChainColor(chainType)
+            self.topKeyState.tintColor = chainConfig?.chainColor
         }
         
         self.topDpAddress.text = account?.account_address

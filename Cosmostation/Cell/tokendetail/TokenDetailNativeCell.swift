@@ -177,11 +177,11 @@ class TokenDetailNativeCell: TokenDetailCell {
         }
         
         if (denom == KAVA_HARD_DENOM) {
-            rootCardView.backgroundColor = COLOR_BG_COLOR_HARD
+            rootCardView.backgroundColor = UIColor.init(named: "kava_hard")
         } else if (denom == KAVA_USDX_DENOM) {
-            rootCardView.backgroundColor = COLOR_BG_COLOR_USDX
+            rootCardView.backgroundColor = UIColor.init(named: "kava_usdx")
         } else if (denom == KAVA_SWAP_DENOM) {
-            rootCardView.backgroundColor = COLOR_BG_COLOR_SWP
+            rootCardView.backgroundColor = UIColor.init(named: "kava_swp")
         }
     }
     

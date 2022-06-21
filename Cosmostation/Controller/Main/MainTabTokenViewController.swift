@@ -630,7 +630,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             if let bnbToken = WUtils.getBnbToken(balance.balance_denom) {
                 cell?.tokenImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + bnbToken.original_symbol + ".png")!)
                 cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
-                cell?.tokenSymbol.textColor = .white
+                cell?.tokenSymbol.textColor = UIColor(named: "_font05")
                 cell?.tokenTitle.text = "(" + bnbToken.symbol + ")"
                 cell?.tokenDescription.text = bnbToken.name
                 
@@ -644,7 +644,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             if let okToken = WUtils.getOkToken(balance.balance_denom) {
                 cell?.tokenImg.af_setImage(withURL: URL(string: OKEX_COIN_IMG_URL + okToken.original_symbol! + ".png")!)
                 cell?.tokenSymbol.text = okToken.original_symbol?.uppercased()
-                cell?.tokenSymbol.textColor = .white
+                cell?.tokenSymbol.textColor = UIColor(named: "_font05")
                 cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
                 cell?.tokenDescription.text = okToken.description
                 
