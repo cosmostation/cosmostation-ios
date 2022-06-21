@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="PqC-bQ-eo4"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="c0W-8C-RtA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="c0W-8C-RtA">
                                 <rect key="frame" x="16" y="72.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="5ye-ep-zvB"/>
@@ -169,7 +169,7 @@
                                             <constraint firstAttribute="height" constant="40" id="GMW-Vl-9dW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <state key="normal" title="  Deposit BTC" image="txDepositCdps">
+                                        <state key="normal" title="Deposit BTC">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -194,7 +194,7 @@
                                             <constraint firstAttribute="height" constant="40" id="ZcU-SY-cYt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <state key="normal" title="  Withdraw  BTC" image="txWithdrawCdps">
+                                        <state key="normal" title="Withdraw  BTC">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -214,7 +214,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="kHl-wY-n34">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="kHl-wY-n34">
                                 <rect key="frame" x="16" y="284.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="ABb-mZ-EvE"/>
@@ -342,7 +342,7 @@
                                             <constraint firstAttribute="height" constant="40" id="AvS-93-ujb"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <state key="normal" title="  Borrow more USDX" image="txDrawDebtCdps">
+                                        <state key="normal" title="Borrow more USDX">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -367,7 +367,7 @@
                                             <constraint firstAttribute="height" constant="40" id="cS8-O3-vNH"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <state key="normal" title="  Repay USDX" image="txRepayCdps">
+                                        <state key="normal" title="Repay USDX">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -531,11 +531,7 @@
     <resources>
         <image name="btnIconKavaDefi" width="20" height="20"/>
         <image name="questionIc" width="14" height="14"/>
-        <image name="tokenIc" width="22" height="22"/>
-        <image name="txDepositCdps" width="20" height="20"/>
-        <image name="txDrawDebtCdps" width="20" height="20"/>
-        <image name="txRepayCdps" width="20" height="20"/>
-        <image name="txWithdrawCdps" width="20" height="20"/>
+        <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_card_divider">
             <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

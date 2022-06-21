@@ -41,7 +41,7 @@
                                     <constraint firstAttribute="height" constant="0.5" id="9vH-ih-KLa"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="hm0-Gi-dKC">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="hm0-Gi-dKC">
                                 <rect key="frame" x="16" y="72.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Kgz-xV-JOE"/>
@@ -118,7 +118,7 @@
                                             <constraint firstAttribute="height" constant="40" id="TL0-Vf-SCI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <state key="normal" title="  Deposit" image="txDepositCdps">
+                                        <state key="normal" title="Deposit">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -143,7 +143,7 @@
                                             <constraint firstAttribute="height" constant="40" id="e9O-qt-t5z"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <state key="normal" title="  Withdraw" image="txWithdrawCdps">
+                                        <state key="normal" title="Withdraw">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -173,7 +173,7 @@
                                             <constraint firstAttribute="height" constant="40" id="bDq-3S-RM9"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <state key="normal" title="  Borrow" image="txDrawDebtCdps">
+                                        <state key="normal" title="Borrow">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -198,7 +198,7 @@
                                             <constraint firstAttribute="height" constant="40" id="W2n-2P-Oge"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
-                                        <state key="normal" title="  Repay" image="txRepayCdps">
+                                        <state key="normal" title="Repay">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -306,11 +306,7 @@
     </objects>
     <resources>
         <image name="btnIconKavaDefi" width="20" height="20"/>
-        <image name="tokenIc" width="22" height="22"/>
-        <image name="txDepositCdps" width="20" height="20"/>
-        <image name="txDrawDebtCdps" width="20" height="20"/>
-        <image name="txRepayCdps" width="20" height="20"/>
-        <image name="txWithdrawCdps" width="20" height="20"/>
+        <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_card_divider">
             <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
