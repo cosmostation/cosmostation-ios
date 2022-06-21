@@ -25,36 +25,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95B-4a-b7I">
-                    <rect key="frame" x="87" y="369" width="240" height="168"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconDataEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="KxQ-8f-EJi">
-                            <rect key="frame" x="95" y="0.0" width="50" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="50" id="LmP-Lh-Zzk"/>
-                                <constraint firstAttribute="height" constant="50" id="YXx-vq-vHp"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Connected Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQt-RT-QBv">
-                            <rect key="frame" x="54.5" y="58" width="131" height="14"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="14" id="AtN-M1-e33"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" name="_font05"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="KxQ-8f-EJi" firstAttribute="top" secondItem="95B-4a-b7I" secondAttribute="top" id="0vJ-L4-VIu"/>
-                        <constraint firstItem="XQt-RT-QBv" firstAttribute="centerX" secondItem="95B-4a-b7I" secondAttribute="centerX" id="OlC-8n-fXr"/>
-                        <constraint firstAttribute="width" constant="240" id="VjD-Or-xeg"/>
-                        <constraint firstAttribute="height" constant="168" id="YcE-gO-wsQ"/>
-                        <constraint firstItem="XQt-RT-QBv" firstAttribute="top" secondItem="KxQ-8f-EJi" secondAttribute="bottom" constant="8" id="gYd-Mp-KTi"/>
-                        <constraint firstItem="KxQ-8f-EJi" firstAttribute="centerX" secondItem="95B-4a-b7I" secondAttribute="centerX" id="m3h-C3-4Cy"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I9Q-Ed-5IQ" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="60" width="382" height="88"/>
                     <subviews>
@@ -191,6 +161,36 @@
                     <rect key="frame" x="0.0" y="156" width="414" height="574"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="95B-4a-b7I">
+                    <rect key="frame" x="87" y="369" width="240" height="168"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconDataEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="KxQ-8f-EJi">
+                            <rect key="frame" x="95" y="0.0" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="LmP-Lh-Zzk"/>
+                                <constraint firstAttribute="height" constant="50" id="YXx-vq-vHp"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Connected Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQt-RT-QBv">
+                            <rect key="frame" x="54.5" y="58" width="131" height="14"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="14" id="AtN-M1-e33"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" name="_font05"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="KxQ-8f-EJi" firstAttribute="top" secondItem="95B-4a-b7I" secondAttribute="top" id="0vJ-L4-VIu"/>
+                        <constraint firstItem="XQt-RT-QBv" firstAttribute="centerX" secondItem="95B-4a-b7I" secondAttribute="centerX" id="OlC-8n-fXr"/>
+                        <constraint firstAttribute="width" constant="240" id="VjD-Or-xeg"/>
+                        <constraint firstAttribute="height" constant="168" id="YcE-gO-wsQ"/>
+                        <constraint firstItem="XQt-RT-QBv" firstAttribute="top" secondItem="KxQ-8f-EJi" secondAttribute="bottom" constant="8" id="gYd-Mp-KTi"/>
+                        <constraint firstItem="KxQ-8f-EJi" firstAttribute="centerX" secondItem="95B-4a-b7I" secondAttribute="centerX" id="m3h-C3-4Cy"/>
+                    </constraints>
+                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oCj-Ld-hNf">
                     <rect key="frame" x="16" y="796" width="382" height="50"/>
                     <constraints>
