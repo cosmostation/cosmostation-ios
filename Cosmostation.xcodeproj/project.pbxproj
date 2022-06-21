@@ -11,7 +11,6 @@
 		040FA7AD275F55C200229F6F /* desmos_fees_v1beta1_min_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43C275F558700229F6F /* desmos_fees_v1beta1_min_fee.pb.swift */; };
 		040FA7AE275F55C200229F6F /* tendermint_types_validator.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43D275F558700229F6F /* tendermint_types_validator.pb.swift */; };
 		040FA7B1275F55C200229F6F /* starname_iov_escrow_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA440275F558700229F6F /* starname_iov_escrow_v1beta1_params.pb.swift */; };
-		040FA7B4275F55C200229F6F /* rizon_treasury_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA443275F558700229F6F /* rizon_treasury_query.grpc.swift */; };
 		040FA7BC275F55C200229F6F /* cryptoorg_supply_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA44B275F558800229F6F /* cryptoorg_supply_v1_query.pb.swift */; };
 		040FA7C1275F55C200229F6F /* cosmos_auth_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA450275F558800229F6F /* cosmos_auth_v1beta1_query.pb.swift */; };
 		040FA7C3275F55C200229F6F /* tendermint_types_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA452275F558800229F6F /* tendermint_types_params.pb.swift */; };
@@ -27,7 +26,6 @@
 		040FA7EC275F55C200229F6F /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA47B275F558A00229F6F /* cosmos_distribution_v1beta1_tx.pb.swift */; };
 		040FA7FA275F55C200229F6F /* desmos_posts_v1beta1_reactions.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA489275F558B00229F6F /* desmos_posts_v1beta1_reactions.pb.swift */; };
 		040FA7FB275F55C200229F6F /* ibc_core_port_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA48A275F558B00229F6F /* ibc_core_port_v1_query.pb.swift */; };
-		040FA7FE275F55C200229F6F /* rizon_treasury_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA48D275F558C00229F6F /* rizon_treasury_query.pb.swift */; };
 		040FA7FF275F55C200229F6F /* desmos_profiles_legacy_v100_models_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA48E275F558C00229F6F /* desmos_profiles_legacy_v100_models_app_links.pb.swift */; };
 		040FA802275F55C200229F6F /* cosmos_bank_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA491275F558C00229F6F /* cosmos_bank_v1beta1_query.grpc.swift */; };
 		040FA803275F55C200229F6F /* cosmos_crypto_secp256k1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA492275F558C00229F6F /* cosmos_crypto_secp256k1_keys.pb.swift */; };
@@ -73,7 +71,6 @@
 		040FA86A275F55C200229F6F /* desmos_posts_v1beta1_report.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4F9275F559200229F6F /* desmos_posts_v1beta1_report.pb.swift */; };
 		040FA86C275F55C200229F6F /* starname_cosmwasm_wasm_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4FB275F559200229F6F /* starname_cosmwasm_wasm_v1_query.grpc.swift */; };
 		040FA86E275F55C200229F6F /* ibc_core_channel_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4FD275F559300229F6F /* ibc_core_channel_v1_tx.grpc.swift */; };
-		040FA872275F55C200229F6F /* rizon_treasury_treasury.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA501275F559300229F6F /* rizon_treasury_treasury.pb.swift */; };
 		040FA873275F55C200229F6F /* desmos_subspaces_v1beta1_msgs.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA502275F559300229F6F /* desmos_subspaces_v1beta1_msgs.grpc.swift */; };
 		040FA877275F55C200229F6F /* cosmos_upgrade_v1beta1_upgrade.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA506275F559300229F6F /* cosmos_upgrade_v1beta1_upgrade.pb.swift */; };
 		040FA879275F55C200229F6F /* injective_types_v1beta1_tx_ext.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA508275F559300229F6F /* injective_types_v1beta1_tx_ext.pb.swift */; };
@@ -92,7 +89,6 @@
 		040FA8A1275F55C200229F6F /* cosmos_staking_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA530275F559600229F6F /* cosmos_staking_v1beta1_query.pb.swift */; };
 		040FA8A4275F55C200229F6F /* cosmos_vesting_v1beta1_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA533275F559600229F6F /* cosmos_vesting_v1beta1_vesting.pb.swift */; };
 		040FA8A6275F55C200229F6F /* cosmos_staking_v1beta1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA535275F559600229F6F /* cosmos_staking_v1beta1_authz.pb.swift */; };
-		040FA8AF275F55C200229F6F /* rizon_tokenswap_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA53E275F559600229F6F /* rizon_tokenswap_query.grpc.swift */; };
 		040FA8B0275F55C200229F6F /* gravity_v1_msgs.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA53F275F559700229F6F /* gravity_v1_msgs.grpc.swift */; };
 		040FA8B2275F55C200229F6F /* ibc_lightclients_localhost_v1_localhost.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA541275F559700229F6F /* ibc_lightclients_localhost_v1_localhost.pb.swift */; };
 		040FA8B6275F55C200229F6F /* desmos_posts_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA545275F559700229F6F /* desmos_posts_v1beta1_query.grpc.swift */; };
@@ -123,13 +119,11 @@
 		040FA903275F55C300229F6F /* band_oracle_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA592275F559C00229F6F /* band_oracle_v1_query.pb.swift */; };
 		040FA904275F55C300229F6F /* starname_iov_escrow_v1beta1_test.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA593275F559C00229F6F /* starname_iov_escrow_v1beta1_test.pb.swift */; };
 		040FA90A275F55C300229F6F /* ibc_lightclients_solomachine_v1_solomachine.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA599275F559C00229F6F /* ibc_lightclients_solomachine_v1_solomachine.pb.swift */; };
-		040FA90B275F55C300229F6F /* rizon_tokenswap_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA59A275F559C00229F6F /* rizon_tokenswap_tx.grpc.swift */; };
 		040FA90C275F55C300229F6F /* cosmos_group_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA59B275F559D00229F6F /* cosmos_group_v1beta1_query.grpc.swift */; };
 		040FA90E275F55C300229F6F /* cosmos_mint_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA59D275F559D00229F6F /* cosmos_mint_v1beta1_query.pb.swift */; };
 		040FA912275F55C300229F6F /* ibc_core_channel_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5A1275F559D00229F6F /* ibc_core_channel_v1_tx.pb.swift */; };
 		040FA916275F55C300229F6F /* desmos_profiles_v1beta1_query_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5A5275F559D00229F6F /* desmos_profiles_v1beta1_query_profile.pb.swift */; };
 		040FA918275F55C300229F6F /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5A7275F559D00229F6F /* cosmos_slashing_v1beta1_tx.pb.swift */; };
-		040FA91D275F55C300229F6F /* rizon_tokenswap_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5AC275F559E00229F6F /* rizon_tokenswap_params.pb.swift */; };
 		040FA920275F55C300229F6F /* cosmos_base_store_v1beta1_listening.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5AF275F559E00229F6F /* cosmos_base_store_v1beta1_listening.pb.swift */; };
 		040FA921275F55C300229F6F /* desmos_profiles_v1beta1_models_profile.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B0275F559E00229F6F /* desmos_profiles_v1beta1_models_profile.pb.swift */; };
 		040FA922275F55C300229F6F /* cosmos_authz_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B1275F559E00229F6F /* cosmos_authz_v1beta1_tx.pb.swift */; };
@@ -155,7 +149,6 @@
 		040FA950275F55C300229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5DF275F55A100229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift */; };
 		040FA951275F55C300229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E0275F55A100229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift */; };
 		040FA952275F55C300229F6F /* injective_types_v1beta1_tx_response.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E1275F55A100229F6F /* injective_types_v1beta1_tx_response.pb.swift */; };
-		040FA955275F55C300229F6F /* rizon_tokenswap_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E4275F55A100229F6F /* rizon_tokenswap_query.pb.swift */; };
 		040FA956275F55C300229F6F /* cosmos_auth_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E5275F55A200229F6F /* cosmos_auth_v1beta1_query.grpc.swift */; };
 		040FA957275F55C300229F6F /* band_oracle_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E6275F55A200229F6F /* band_oracle_v1_tx.grpc.swift */; };
 		040FA95B275F55C300229F6F /* ibc_core_client_v1_client.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5EA275F55A200229F6F /* ibc_core_client_v1_client.pb.swift */; };
@@ -175,7 +168,6 @@
 		040FA984275F55C300229F6F /* cosmos_base_store_v1beta1_snapshot.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA613275F55A500229F6F /* cosmos_base_store_v1beta1_snapshot.pb.swift */; };
 		040FA985275F55C300229F6F /* cosmos_gov_v1beta2_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA614275F55A500229F6F /* cosmos_gov_v1beta2_query.grpc.swift */; };
 		040FA98C275F55C300229F6F /* ibc_core_channel_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA61B275F55A500229F6F /* ibc_core_channel_v1_genesis.pb.swift */; };
-		040FA98F275F55C300229F6F /* rizon_tokenswap_tokenswap.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA61E275F55A500229F6F /* rizon_tokenswap_tokenswap.pb.swift */; };
 		040FA991275F55C300229F6F /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA620275F55A600229F6F /* cosmos_distribution_v1beta1_tx.grpc.swift */; };
 		040FA995275F55C300229F6F /* starname_iov_offchain_v1alpha1_offchain.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA624275F55A600229F6F /* starname_iov_offchain_v1alpha1_offchain.pb.swift */; };
 		040FA997275F55C300229F6F /* starname_iov_escrow_v1beta1_events.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA626275F55A600229F6F /* starname_iov_escrow_v1beta1_events.pb.swift */; };
@@ -214,7 +206,6 @@
 		040FAA05275F55C300229F6F /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA694275F55AE00229F6F /* cosmos_base_abci_v1beta1_abci.pb.swift */; };
 		040FAA08275F55C300229F6F /* starname_iov_starname_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA697275F55AE00229F6F /* starname_iov_starname_v1beta1_tx.pb.swift */; };
 		040FAA09275F55C300229F6F /* tendermint_farming_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA698275F55AE00229F6F /* tendermint_farming_v1beta1_genesis.pb.swift */; };
-		040FAA0B275F55C300229F6F /* rizon_treasury_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA69A275F55AE00229F6F /* rizon_treasury_tx.pb.swift */; };
 		040FAA12275F55C300229F6F /* cosmos_gov_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6A1275F55AF00229F6F /* cosmos_gov_v1beta1_query.grpc.swift */; };
 		040FAA16275F55C300229F6F /* desmos_subspaces_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6A5275F55AF00229F6F /* desmos_subspaces_v1beta1_query.grpc.swift */; };
 		040FAA17275F55C300229F6F /* cosmos_feegrant_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6A6275F55AF00229F6F /* cosmos_feegrant_v1beta1_query.grpc.swift */; };
@@ -236,7 +227,6 @@
 		040FAA4D275F55C400229F6F /* iris_mod_nft_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6DC275F55B300229F6F /* iris_mod_nft_tx.pb.swift */; };
 		040FAA55275F55C400229F6F /* cosmos_bank_v1beta1_bank.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E4275F55B300229F6F /* cosmos_bank_v1beta1_bank.pb.swift */; };
 		040FAA57275F55C400229F6F /* tendermint_farming_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E6275F55B400229F6F /* tendermint_farming_v1beta1_query.grpc.swift */; };
-		040FAA58275F55C400229F6F /* rizon_treasury_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E7275F55B400229F6F /* rizon_treasury_tx.grpc.swift */; };
 		040FAA5A275F55C400229F6F /* starname_iov_starname_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E9275F55B400229F6F /* starname_iov_starname_v1beta1_query.pb.swift */; };
 		040FAA5B275F55C400229F6F /* desmos_profiles_v1beta1_msgs_chain_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6EA275F55B400229F6F /* desmos_profiles_v1beta1_msgs_chain_links.pb.swift */; };
 		040FAA61275F55C400229F6F /* cosmos_mint_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6F0275F55B400229F6F /* cosmos_mint_v1beta1_query.grpc.swift */; };
@@ -246,7 +236,6 @@
 		040FAA6D275F55C400229F6F /* cosmos_gov_v1beta1_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6FC275F55B500229F6F /* cosmos_gov_v1beta1_gov.pb.swift */; };
 		040FAA73275F55C400229F6F /* ibc_core_channel_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA702275F55B600229F6F /* ibc_core_channel_v1_query.grpc.swift */; };
 		040FAA74275F55C400229F6F /* starname_iov_configuration_v1beta1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA703275F55B600229F6F /* starname_iov_configuration_v1beta1_types.pb.swift */; };
-		040FAA75275F55C400229F6F /* rizon_treasury_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA704275F55B600229F6F /* rizon_treasury_params.pb.swift */; };
 		040FAA77275F55C400229F6F /* starname_cosmwasm_wasm_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA706275F55B600229F6F /* starname_cosmwasm_wasm_v1_types.pb.swift */; };
 		040FAA81275F55C400229F6F /* cosmos_crypto_hd_v1_hd.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA710275F55B700229F6F /* cosmos_crypto_hd_v1_hd.pb.swift */; };
 		040FAA84275F55C400229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA713275F55B700229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift */; };
@@ -273,7 +262,6 @@
 		040FAAE8275F55C400229F6F /* starname_iov_escrow_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA777275F55BE00229F6F /* starname_iov_escrow_v1beta1_query.pb.swift */; };
 		040FAAEE275F55C400229F6F /* cosmos_vesting_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA77D275F55BF00229F6F /* cosmos_vesting_v1beta1_tx.grpc.swift */; };
 		040FAAF2275F55C400229F6F /* ibc_applications_transfer_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA781275F55BF00229F6F /* ibc_applications_transfer_v1_query.grpc.swift */; };
-		040FAAF5275F55C400229F6F /* rizon_tokenswap_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA784275F55BF00229F6F /* rizon_tokenswap_tx.pb.swift */; };
 		040FAAF9275F55C400229F6F /* ibc_lightclients_tendermint_v1_tendermint.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA788275F55C000229F6F /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */; };
 		040FAAFD275F55C400229F6F /* cosmos_group_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA78C275F55C000229F6F /* cosmos_group_v1beta1_tx.pb.swift */; };
 		040FAB00275F55C400229F6F /* starname_iov_starname_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA78F275F55C000229F6F /* starname_iov_starname_v1beta1_tx.grpc.swift */; };
@@ -786,7 +774,6 @@
 		1817CAC4283E2CE500523713 /* tendermint_types_block.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4A3275F558D00229F6F /* tendermint_types_block.pb.swift */; };
 		1817CAC5283E2CE500523713 /* kava_committee_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B3A278D5F510022D5DF /* kava_committee_v1beta1_query.grpc.swift */; };
 		1817CAC6283E2CE500523713 /* crescent_liquidity_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338FD27E826F100E82AA7 /* crescent_liquidity_v1beta1_tx.pb.swift */; };
-		1817CAC7283E2CE500523713 /* rizon_tokenswap_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA784275F55BF00229F6F /* rizon_tokenswap_tx.pb.swift */; };
 		1817CAC8283E2CE500523713 /* osmosis_superfluid_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD6E2832370000214FDA /* osmosis_superfluid_tx.pb.swift */; };
 		1817CAC9283E2CE500523713 /* kava_committee_v1beta1_committee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B1E278D5F4E0022D5DF /* kava_committee_v1beta1_committee.pb.swift */; };
 		1817CACA283E2CE500523713 /* cosmos_bank_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA721275F55B800229F6F /* cosmos_bank_v1beta1_query.pb.swift */; };
@@ -810,7 +797,6 @@
 		1817CADC283E2CE500523713 /* osmosis_lockup_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD5C283236FE00214FDA /* osmosis_lockup_query.pb.swift */; };
 		1817CADD283E2CE500523713 /* crescent_mint_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E727E826EE00E82AA7 /* crescent_mint_v1beta1_query.pb.swift */; };
 		1817CADE283E2CE500523713 /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B7275F559E00229F6F /* cosmos_nft_v1beta1_genesis.pb.swift */; };
-		1817CADF283E2CE500523713 /* rizon_treasury_treasury.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA501275F559300229F6F /* rizon_treasury_treasury.pb.swift */; };
 		1817CAE0283E2CE500523713 /* cosmos_feegrant_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA668275F55AB00229F6F /* cosmos_feegrant_v1beta1_query.pb.swift */; };
 		1817CAE1283E2CE500523713 /* evmos_vesting_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82FB27BF572800270528 /* evmos_vesting_v1_tx.grpc.swift */; };
 		1817CAE2283E2CE500523713 /* cryptoorg_nft_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6BF275F55B100229F6F /* cryptoorg_nft_v1_tx.pb.swift */; };
@@ -888,7 +874,6 @@
 		1817CB2A283E2CE500523713 /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E0275F55A100229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift */; };
 		1817CB2B283E2CE500523713 /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6D0275F55B200229F6F /* cosmos_feegrant_v1beta1_tx.grpc.swift */; };
 		1817CB2C283E2CE500523713 /* kava_kavadist_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B42278D5F520022D5DF /* kava_kavadist_v1beta1_params.pb.swift */; };
-		1817CB2D283E2CE500523713 /* rizon_tokenswap_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA59A275F559C00229F6F /* rizon_tokenswap_tx.grpc.swift */; };
 		1817CB2E283E2CE500523713 /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1C27A3BC4500B1236A /* cosmwasm_wasm_v1_proposal.pb.swift */; };
 		1817CB2F283E2CE500523713 /* sifnode_tokenregistry_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D4281A4C50009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift */; };
 		1817CB30283E2CE500523713 /* sifnode_tokenregistry_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6D1281A4C50009D8AAF /* sifnode_tokenregistry_v1_tx.pb.swift */; };
@@ -936,10 +921,8 @@
 		1817CB5B283E2CE500523713 /* cosmos_gov_v1beta2_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5B3275F559E00229F6F /* cosmos_gov_v1beta2_tx.grpc.swift */; };
 		1817CB5C283E2CE500523713 /* cosmos_base_tendermint_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4BB275F558E00229F6F /* cosmos_base_tendermint_v1beta1_query.pb.swift */; };
 		1817CB5D283E2CE500523713 /* crescent_liquidstaking_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E227E826EE00E82AA7 /* crescent_liquidstaking_v1beta1_query.pb.swift */; };
-		1817CB5E283E2CE500523713 /* rizon_tokenswap_tokenswap.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA61E275F55A500229F6F /* rizon_tokenswap_tokenswap.pb.swift */; };
 		1817CB5F283E2CE500523713 /* sifnode_oracle_v1_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6DF281A4C52009D8AAF /* sifnode_oracle_v1_types.pb.swift */; };
 		1817CB60283E2CE500523713 /* cosmos_crypto_secp256r1_keys.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA578275F559A00229F6F /* cosmos_crypto_secp256r1_keys.pb.swift */; };
-		1817CB61283E2CE500523713 /* rizon_tokenswap_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5AC275F559E00229F6F /* rizon_tokenswap_params.pb.swift */; };
 		1817CB62283E2CE500523713 /* kava_kavadist_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B3D278D5F510022D5DF /* kava_kavadist_v1beta1_query.pb.swift */; };
 		1817CB63283E2CE500523713 /* kava_auction_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B3F278D5F510022D5DF /* kava_auction_v1beta1_tx.grpc.swift */; };
 		1817CB64283E2CE500523713 /* crescent_claim_v1beta1_claim.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338FC27E826F100E82AA7 /* crescent_claim_v1beta1_claim.pb.swift */; };
@@ -1012,7 +995,6 @@
 		1817CBA8283E2CE500523713 /* gogoproto_gogo.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA583275F559B00229F6F /* gogoproto_gogo.pb.swift */; };
 		1817CBA9283E2CE500523713 /* ibc_core_channel_v1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA61B275F55A500229F6F /* ibc_core_channel_v1_genesis.pb.swift */; };
 		1817CBAA283E2CE500523713 /* iris_mod_nft_nft.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA65E275F55AA00229F6F /* iris_mod_nft_nft.pb.swift */; };
-		1817CBAB283E2CE500523713 /* rizon_treasury_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA69A275F55AE00229F6F /* rizon_treasury_tx.pb.swift */; };
 		1817CBAC283E2CE500523713 /* evmos_erc20_v1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82EE27BF572600270528 /* evmos_erc20_v1_query.grpc.swift */; };
 		1817CBAD283E2CE500523713 /* cosmos_distribution_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA60E275F55A400229F6F /* cosmos_distribution_v1beta1_genesis.pb.swift */; };
 		1817CBAE283E2CE500523713 /* osmosis_superfluid_gov.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD5D283236FE00214FDA /* osmosis_superfluid_gov.pb.swift */; };
@@ -1044,7 +1026,6 @@
 		1817CBC8283E2CE500523713 /* sifnode_dispensation_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CC281A4C4F009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift */; };
 		1817CBC9283E2CE500523713 /* osmosis_superfluid_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD5E283236FE00214FDA /* osmosis_superfluid_query.pb.swift */; };
 		1817CBCA283E2CE500523713 /* cosmos_gov_v1beta2_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA64A275F55A800229F6F /* cosmos_gov_v1beta2_tx.pb.swift */; };
-		1817CBCB283E2CE600523713 /* rizon_treasury_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA443275F558700229F6F /* rizon_treasury_query.grpc.swift */; };
 		1817CBCC283E2CE600523713 /* osmosis_store_v1beta1_tree.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD46283236FB00214FDA /* osmosis_store_v1beta1_tree.pb.swift */; };
 		1817CBCD283E2CE600523713 /* tendermint_types_types.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA499275F558C00229F6F /* tendermint_types_types.pb.swift */; };
 		1817CBCE283E2CE600523713 /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA694275F55AE00229F6F /* cosmos_base_abci_v1beta1_abci.pb.swift */; };
@@ -1080,7 +1061,6 @@
 		1817CBEE283E2CE600523713 /* kava_issuance_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B33278D5F500022D5DF /* kava_issuance_v1beta1_query.grpc.swift */; };
 		1817CBEF283E2CE600523713 /* osmosis_claim_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD712832370100214FDA /* osmosis_claim_v1beta1_query.grpc.swift */; };
 		1817CBF0283E2CE600523713 /* cryptoorg_supply_v1_accounts.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA727275F55B800229F6F /* cryptoorg_supply_v1_accounts.pb.swift */; };
-		1817CBF1283E2CE600523713 /* rizon_treasury_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA704275F55B600229F6F /* rizon_treasury_params.pb.swift */; };
 		1817CBF2283E2CE600523713 /* desmos_profiles_v1beta1_query_app_links.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6B7275F55B000229F6F /* desmos_profiles_v1beta1_query_app_links.pb.swift */; };
 		1817CBF3283E2CE600523713 /* kava_incentive_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B1C278D5F4E0022D5DF /* kava_incentive_v1beta1_params.pb.swift */; };
 		1817CBF4283E2CE600523713 /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6B9275F55B000229F6F /* cosmos_nft_v1beta1_tx.grpc.swift */; };
@@ -1092,7 +1072,6 @@
 		1817CBFB283E2CE600523713 /* kava_swap_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B22278D5F4F0022D5DF /* kava_swap_v1beta1_tx.grpc.swift */; };
 		1817CBFC283E2CE600523713 /* cosmos_gov_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6A1275F55AF00229F6F /* cosmos_gov_v1beta1_query.grpc.swift */; };
 		1817CBFD283E2CE600523713 /* osmosis_gamm_pool-models_balancer_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD752832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift */; };
-		1817CBFE283E2CE600523713 /* rizon_tokenswap_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA53E275F559600229F6F /* rizon_tokenswap_query.grpc.swift */; };
 		1817CBFF283E2CE600523713 /* cosmos_bank_v1beta1_authz.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA763275F55BD00229F6F /* cosmos_bank_v1beta1_authz.pb.swift */; };
 		1817CC00283E2CE600523713 /* starname_iov_escrow_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5ED275F55A200229F6F /* starname_iov_escrow_v1beta1_query.grpc.swift */; };
 		1817CC01283E2CE600523713 /* ethermint_evm_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E827BF572500270528 /* ethermint_evm_v1_query.pb.swift */; };
@@ -1162,7 +1141,6 @@
 		1817CC41283E2CE600523713 /* cosmos_params_v1beta1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5D4275F55A000229F6F /* cosmos_params_v1beta1_params.pb.swift */; };
 		1817CC42283E2CE600523713 /* ibc_core_connection_v1_connection.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA672275F55AB00229F6F /* ibc_core_connection_v1_connection.pb.swift */; };
 		1817CC43283E2CE600523713 /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA60F275F55A400229F6F /* cosmos_distribution_v1beta1_distribution.pb.swift */; };
-		1817CC44283E2CE600523713 /* rizon_treasury_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA48D275F558C00229F6F /* rizon_treasury_query.pb.swift */; };
 		1817CC45283E2CE600523713 /* ethermint_evm_v1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048C82E327BF572500270528 /* ethermint_evm_v1_tx.pb.swift */; };
 		1817CC46283E2CE600523713 /* crescent_farming_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338E927E826EE00E82AA7 /* crescent_farming_v1beta1_tx.pb.swift */; };
 		1817CC47283E2CE600523713 /* iris_mod_nft_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA692275F55AE00229F6F /* iris_mod_nft_query.grpc.swift */; };
@@ -1170,7 +1148,6 @@
 		1817CC49283E2CE600523713 /* tendermint_farming_v1beta1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA457275F558800229F6F /* tendermint_farming_v1beta1_proposal.pb.swift */; };
 		1817CC4A283E2CE600523713 /* cosmos_distribution_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA52B275F559500229F6F /* cosmos_distribution_v1beta1_query.pb.swift */; };
 		1817CC4B283E2CE600523713 /* cosmos_nft_v1beta1_nft.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA722275F55B800229F6F /* cosmos_nft_v1beta1_nft.pb.swift */; };
-		1817CC4C283E2CE600523713 /* rizon_treasury_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA6E7275F55B400229F6F /* rizon_treasury_tx.grpc.swift */; };
 		1817CC4D283E2CE600523713 /* cosmos_vesting_v1beta1_vesting.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA533275F559600229F6F /* cosmos_vesting_v1beta1_vesting.pb.swift */; };
 		1817CC4E283E2CE600523713 /* osmosis_mint_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD62283236FF00214FDA /* osmosis_mint_v1beta1_query.pb.swift */; };
 		1817CC4F283E2CE600523713 /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA518275F559400229F6F /* cosmos_crypto_multisig_v1beta1_multisig.pb.swift */; };
@@ -1215,7 +1192,6 @@
 		1817CC76283E2CE600523713 /* cosmwasm_wasm_v1_ibc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B1BE1627A3BC4400B1236A /* cosmwasm_wasm_v1_ibc.pb.swift */; };
 		1817CC77283E2CE600523713 /* ibc_applications_transfer_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA756275F55BC00229F6F /* ibc_applications_transfer_v1_query.pb.swift */; };
 		1817CC78283E2CE600523713 /* kava_committee_v1beta1_permissions.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B2E278D5F500022D5DF /* kava_committee_v1beta1_permissions.pb.swift */; };
-		1817CC79283E2CE600523713 /* rizon_tokenswap_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5E4275F55A100229F6F /* rizon_tokenswap_query.pb.swift */; };
 		1817CC7A283E2CE600523713 /* kava_bep3_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B23278D5F4F0022D5DF /* kava_bep3_v1beta1_tx.pb.swift */; };
 		1817CC7B283E2CE600523713 /* kava_hard_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C43B3C278D5F510022D5DF /* kava_hard_v1beta1_tx.pb.swift */; };
 		1817CC7C283E2CE600523713 /* osmosis_txfees_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD4E283236FC00214FDA /* osmosis_txfees_v1beta1_query.grpc.swift */; };
@@ -1500,7 +1476,6 @@
 		18FFB486281AF533004E65BB /* HdacUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E3E370266D033100BA89C2 /* HdacUtil.swift */; };
 		18FFB487281AF533004E65BB /* TxUnlockPeriodLockCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047AE7222693378A00C1DD51 /* TxUnlockPeriodLockCell.swift */; };
 		18FFB489281AF533004E65BB /* StepWithdrawCdpAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28617A8224333B90006D66EA /* StepWithdrawCdpAmountViewController.swift */; };
-		18FFB48A281AF533004E65BB /* TxRizonEventHorizonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2816E11826BAADE000408F8E /* TxRizonEventHorizonCell.swift */; };
 		18FFB48B281AF533004E65BB /* HardPoolDeposit3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DB56F525FA3B8800B2F0E5 /* HardPoolDeposit3ViewController.swift */; };
 		18FFB48D281AF533004E65BB /* KavaHardReserves.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AABECD25F8CDAA0019091F /* KavaHardReserves.swift */; };
 		18FFB48E281AF533004E65BB /* CdpDetailMyActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289DF17E242DDF6A00433CF4 /* CdpDetailMyActionCell.swift */; };
@@ -1913,7 +1888,6 @@
 		18FFB736281AF533004E65BB /* SendContract4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2830A0A327A6AFB500CE9D1D /* SendContract4ViewController.xib */; };
 		18FFB737281AF533004E65BB /* AllValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E17748FC22842689003D8CD1 /* AllValidatorCell.xib */; };
 		18FFB738281AF533004E65BB /* DomainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28BB2A8B2533DA1C00CFF097 /* DomainCell.xib */; };
-		18FFB739281AF533004E65BB /* TxRizonEventHorizonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2816E11926BAADE000408F8E /* TxRizonEventHorizonCell.xib */; };
 		18FFB73A281AF533004E65BB /* WalletManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E103DACB228129FD006C2146 /* WalletManageViewController.xib */; };
 		18FFB73C281AF533004E65BB /* PoolTokenGrpcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B2E4CA26CFEBD300ECF960 /* PoolTokenGrpcViewController.xib */; };
 		18FFB73D281AF533004E65BB /* KavaSwapExit0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EEECAB26DAE9B4002DDC4A /* KavaSwapExit0ViewController.xib */; };
@@ -2105,8 +2079,6 @@
 		2815AA72243430E8008B23AA /* StepDrawDebtCdpCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2815AA71243430E8008B23AA /* StepDrawDebtCdpCheckViewController.swift */; };
 		2815AA7424349DE2008B23AA /* StepRepayCdpAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2815AA7324349DE2008B23AA /* StepRepayCdpAmountViewController.swift */; };
 		2815AA7624349DF2008B23AA /* StepRepayCdpCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2815AA7524349DF2008B23AA /* StepRepayCdpCheckViewController.swift */; };
-		2816E11A26BAADE000408F8E /* TxRizonEventHorizonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2816E11826BAADE000408F8E /* TxRizonEventHorizonCell.swift */; };
-		2816E11B26BAADE000408F8E /* TxRizonEventHorizonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2816E11926BAADE000408F8E /* TxRizonEventHorizonCell.xib */; };
 		28248A9425DD3DD4004F3FB0 /* ApiHistoryCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28248A9325DD3DD4004F3FB0 /* ApiHistoryCustom.swift */; };
 		2827E11123F3896C007CDB6E /* TxDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827E10F23F3896C007CDB6E /* TxDetailViewController.swift */; };
 		2827E11523F3DC9B007CDB6E /* TxCommonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827E11323F3DC9B007CDB6E /* TxCommonCell.swift */; };
@@ -2737,7 +2709,6 @@
 		040FA43C275F558700229F6F /* desmos_fees_v1beta1_min_fee.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_fees_v1beta1_min_fee.pb.swift; sourceTree = "<group>"; };
 		040FA43D275F558700229F6F /* tendermint_types_validator.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_types_validator.pb.swift; sourceTree = "<group>"; };
 		040FA440275F558700229F6F /* starname_iov_escrow_v1beta1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_params.pb.swift; sourceTree = "<group>"; };
-		040FA443275F558700229F6F /* rizon_treasury_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_query.grpc.swift; sourceTree = "<group>"; };
 		040FA44B275F558800229F6F /* cryptoorg_supply_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cryptoorg_supply_v1_query.pb.swift; sourceTree = "<group>"; };
 		040FA450275F558800229F6F /* cosmos_auth_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_auth_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA452275F558800229F6F /* tendermint_types_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_types_params.pb.swift; sourceTree = "<group>"; };
@@ -2753,7 +2724,6 @@
 		040FA47B275F558A00229F6F /* cosmos_distribution_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_distribution_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA489275F558B00229F6F /* desmos_posts_v1beta1_reactions.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_posts_v1beta1_reactions.pb.swift; sourceTree = "<group>"; };
 		040FA48A275F558B00229F6F /* ibc_core_port_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_port_v1_query.pb.swift; sourceTree = "<group>"; };
-		040FA48D275F558C00229F6F /* rizon_treasury_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_query.pb.swift; sourceTree = "<group>"; };
 		040FA48E275F558C00229F6F /* desmos_profiles_legacy_v100_models_app_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_legacy_v100_models_app_links.pb.swift; sourceTree = "<group>"; };
 		040FA491275F558C00229F6F /* cosmos_bank_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_bank_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA492275F558C00229F6F /* cosmos_crypto_secp256k1_keys.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_crypto_secp256k1_keys.pb.swift; sourceTree = "<group>"; };
@@ -2799,7 +2769,6 @@
 		040FA4F9275F559200229F6F /* desmos_posts_v1beta1_report.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_posts_v1beta1_report.pb.swift; sourceTree = "<group>"; };
 		040FA4FB275F559200229F6F /* starname_cosmwasm_wasm_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_cosmwasm_wasm_v1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA4FD275F559300229F6F /* ibc_core_channel_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_tx.grpc.swift; sourceTree = "<group>"; };
-		040FA501275F559300229F6F /* rizon_treasury_treasury.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_treasury.pb.swift; sourceTree = "<group>"; };
 		040FA502275F559300229F6F /* desmos_subspaces_v1beta1_msgs.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_subspaces_v1beta1_msgs.grpc.swift; sourceTree = "<group>"; };
 		040FA506275F559300229F6F /* cosmos_upgrade_v1beta1_upgrade.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_upgrade_v1beta1_upgrade.pb.swift; sourceTree = "<group>"; };
 		040FA508275F559300229F6F /* injective_types_v1beta1_tx_ext.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_types_v1beta1_tx_ext.pb.swift; sourceTree = "<group>"; };
@@ -2818,7 +2787,6 @@
 		040FA530275F559600229F6F /* cosmos_staking_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_staking_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA533275F559600229F6F /* cosmos_vesting_v1beta1_vesting.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_vesting_v1beta1_vesting.pb.swift; sourceTree = "<group>"; };
 		040FA535275F559600229F6F /* cosmos_staking_v1beta1_authz.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_staking_v1beta1_authz.pb.swift; sourceTree = "<group>"; };
-		040FA53E275F559600229F6F /* rizon_tokenswap_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_tokenswap_query.grpc.swift; sourceTree = "<group>"; };
 		040FA53F275F559700229F6F /* gravity_v1_msgs.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gravity_v1_msgs.grpc.swift; sourceTree = "<group>"; };
 		040FA541275F559700229F6F /* ibc_lightclients_localhost_v1_localhost.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_localhost_v1_localhost.pb.swift; sourceTree = "<group>"; };
 		040FA545275F559700229F6F /* desmos_posts_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_posts_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
@@ -2849,13 +2817,11 @@
 		040FA592275F559C00229F6F /* band_oracle_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = band_oracle_v1_query.pb.swift; sourceTree = "<group>"; };
 		040FA593275F559C00229F6F /* starname_iov_escrow_v1beta1_test.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_test.pb.swift; sourceTree = "<group>"; };
 		040FA599275F559C00229F6F /* ibc_lightclients_solomachine_v1_solomachine.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_solomachine_v1_solomachine.pb.swift; sourceTree = "<group>"; };
-		040FA59A275F559C00229F6F /* rizon_tokenswap_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_tokenswap_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA59B275F559D00229F6F /* cosmos_group_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_group_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA59D275F559D00229F6F /* cosmos_mint_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_mint_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA5A1275F559D00229F6F /* ibc_core_channel_v1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA5A5275F559D00229F6F /* desmos_profiles_v1beta1_query_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_query_profile.pb.swift; sourceTree = "<group>"; };
 		040FA5A7275F559D00229F6F /* cosmos_slashing_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_slashing_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
-		040FA5AC275F559E00229F6F /* rizon_tokenswap_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_tokenswap_params.pb.swift; sourceTree = "<group>"; };
 		040FA5AF275F559E00229F6F /* cosmos_base_store_v1beta1_listening.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_store_v1beta1_listening.pb.swift; sourceTree = "<group>"; };
 		040FA5B0275F559E00229F6F /* desmos_profiles_v1beta1_models_profile.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_profile.pb.swift; sourceTree = "<group>"; };
 		040FA5B1275F559E00229F6F /* cosmos_authz_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_authz_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
@@ -2881,7 +2847,6 @@
 		040FA5DF275F55A100229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_models_relationships.pb.swift; sourceTree = "<group>"; };
 		040FA5E0275F55A100229F6F /* desmos_profiles_v1beta1_msg_server.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_msg_server.grpc.swift; sourceTree = "<group>"; };
 		040FA5E1275F55A100229F6F /* injective_types_v1beta1_tx_response.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = injective_types_v1beta1_tx_response.pb.swift; sourceTree = "<group>"; };
-		040FA5E4275F55A100229F6F /* rizon_tokenswap_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_tokenswap_query.pb.swift; sourceTree = "<group>"; };
 		040FA5E5275F55A200229F6F /* cosmos_auth_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_auth_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA5E6275F55A200229F6F /* band_oracle_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = band_oracle_v1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA5EA275F55A200229F6F /* ibc_core_client_v1_client.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_client_v1_client.pb.swift; sourceTree = "<group>"; };
@@ -2901,7 +2866,6 @@
 		040FA613275F55A500229F6F /* cosmos_base_store_v1beta1_snapshot.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_store_v1beta1_snapshot.pb.swift; sourceTree = "<group>"; };
 		040FA614275F55A500229F6F /* cosmos_gov_v1beta2_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_gov_v1beta2_query.grpc.swift; sourceTree = "<group>"; };
 		040FA61B275F55A500229F6F /* ibc_core_channel_v1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA61E275F55A500229F6F /* rizon_tokenswap_tokenswap.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_tokenswap_tokenswap.pb.swift; sourceTree = "<group>"; };
 		040FA620275F55A600229F6F /* cosmos_distribution_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_distribution_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA624275F55A600229F6F /* starname_iov_offchain_v1alpha1_offchain.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_offchain_v1alpha1_offchain.pb.swift; sourceTree = "<group>"; };
 		040FA626275F55A600229F6F /* starname_iov_escrow_v1beta1_events.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_events.pb.swift; sourceTree = "<group>"; };
@@ -2940,7 +2904,6 @@
 		040FA694275F55AE00229F6F /* cosmos_base_abci_v1beta1_abci.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_base_abci_v1beta1_abci.pb.swift; sourceTree = "<group>"; };
 		040FA697275F55AE00229F6F /* starname_iov_starname_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_starname_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA698275F55AE00229F6F /* tendermint_farming_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_farming_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
-		040FA69A275F55AE00229F6F /* rizon_treasury_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_tx.pb.swift; sourceTree = "<group>"; };
 		040FA6A1275F55AF00229F6F /* cosmos_gov_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_gov_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA6A5275F55AF00229F6F /* desmos_subspaces_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_subspaces_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA6A6275F55AF00229F6F /* cosmos_feegrant_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_feegrant_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
@@ -2962,7 +2925,6 @@
 		040FA6DC275F55B300229F6F /* iris_mod_nft_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iris_mod_nft_tx.pb.swift; sourceTree = "<group>"; };
 		040FA6E4275F55B300229F6F /* cosmos_bank_v1beta1_bank.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_bank_v1beta1_bank.pb.swift; sourceTree = "<group>"; };
 		040FA6E6275F55B400229F6F /* tendermint_farming_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tendermint_farming_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
-		040FA6E7275F55B400229F6F /* rizon_treasury_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA6E9275F55B400229F6F /* starname_iov_starname_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_starname_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA6EA275F55B400229F6F /* desmos_profiles_v1beta1_msgs_chain_links.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = desmos_profiles_v1beta1_msgs_chain_links.pb.swift; sourceTree = "<group>"; };
 		040FA6F0275F55B400229F6F /* cosmos_mint_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_mint_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
@@ -2972,7 +2934,6 @@
 		040FA6FC275F55B500229F6F /* cosmos_gov_v1beta1_gov.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_gov_v1beta1_gov.pb.swift; sourceTree = "<group>"; };
 		040FA702275F55B600229F6F /* ibc_core_channel_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_core_channel_v1_query.grpc.swift; sourceTree = "<group>"; };
 		040FA703275F55B600229F6F /* starname_iov_configuration_v1beta1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_configuration_v1beta1_types.pb.swift; sourceTree = "<group>"; };
-		040FA704275F55B600229F6F /* rizon_treasury_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_treasury_params.pb.swift; sourceTree = "<group>"; };
 		040FA706275F55B600229F6F /* starname_cosmwasm_wasm_v1_types.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_cosmwasm_wasm_v1_types.pb.swift; sourceTree = "<group>"; };
 		040FA710275F55B700229F6F /* cosmos_crypto_hd_v1_hd.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_crypto_hd_v1_hd.pb.swift; sourceTree = "<group>"; };
 		040FA713275F55B700229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_feegrant_v1beta1_feegrant.pb.swift; sourceTree = "<group>"; };
@@ -2999,7 +2960,6 @@
 		040FA777275F55BE00229F6F /* starname_iov_escrow_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_escrow_v1beta1_query.pb.swift; sourceTree = "<group>"; };
 		040FA77D275F55BF00229F6F /* cosmos_vesting_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_vesting_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
 		040FA781275F55BF00229F6F /* ibc_applications_transfer_v1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_applications_transfer_v1_query.grpc.swift; sourceTree = "<group>"; };
-		040FA784275F55BF00229F6F /* rizon_tokenswap_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = rizon_tokenswap_tx.pb.swift; sourceTree = "<group>"; };
 		040FA788275F55C000229F6F /* ibc_lightclients_tendermint_v1_tendermint.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ibc_lightclients_tendermint_v1_tendermint.pb.swift; sourceTree = "<group>"; };
 		040FA78C275F55C000229F6F /* cosmos_group_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cosmos_group_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
 		040FA78F275F55C000229F6F /* starname_iov_starname_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = starname_iov_starname_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
@@ -3476,8 +3436,6 @@
 		2815AA71243430E8008B23AA /* StepDrawDebtCdpCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepDrawDebtCdpCheckViewController.swift; sourceTree = "<group>"; };
 		2815AA7324349DE2008B23AA /* StepRepayCdpAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRepayCdpAmountViewController.swift; sourceTree = "<group>"; };
 		2815AA7524349DF2008B23AA /* StepRepayCdpCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepRepayCdpCheckViewController.swift; sourceTree = "<group>"; };
-		2816E11826BAADE000408F8E /* TxRizonEventHorizonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxRizonEventHorizonCell.swift; sourceTree = "<group>"; };
-		2816E11926BAADE000408F8E /* TxRizonEventHorizonCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxRizonEventHorizonCell.xib; sourceTree = "<group>"; };
 		28248A9325DD3DD4004F3FB0 /* ApiHistoryCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHistoryCustom.swift; sourceTree = "<group>"; };
 		2827E10F23F3896C007CDB6E /* TxDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxDetailViewController.swift; sourceTree = "<group>"; };
 		2827E11323F3DC9B007CDB6E /* TxCommonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxCommonCell.swift; sourceTree = "<group>"; };
@@ -4420,15 +4378,6 @@
 			path = BinanceUtils;
 			sourceTree = "<group>";
 		};
-		2816E11726BAADAD00408F8E /* rizon */ = {
-			isa = PBXGroup;
-			children = (
-				2816E11826BAADE000408F8E /* TxRizonEventHorizonCell.swift */,
-				2816E11926BAADE000408F8E /* TxRizonEventHorizonCell.xib */,
-			);
-			path = rizon;
-			sourceTree = "<group>";
-		};
 		282121BA25FDE71C0016ABFE /* ProtoBuff */ = {
 			isa = PBXGroup;
 			children = (
@@ -4825,18 +4774,6 @@
 				040FA4B6275F558E00229F6F /* iris_mod_nft_query.pb.swift */,
 				040FA509275F559300229F6F /* iris_mod_nft_tx.grpc.swift */,
 				040FA6DC275F55B300229F6F /* iris_mod_nft_tx.pb.swift */,
-				040FA5AC275F559E00229F6F /* rizon_tokenswap_params.pb.swift */,
-				040FA53E275F559600229F6F /* rizon_tokenswap_query.grpc.swift */,
-				040FA5E4275F55A100229F6F /* rizon_tokenswap_query.pb.swift */,
-				040FA61E275F55A500229F6F /* rizon_tokenswap_tokenswap.pb.swift */,
-				040FA59A275F559C00229F6F /* rizon_tokenswap_tx.grpc.swift */,
-				040FA784275F55BF00229F6F /* rizon_tokenswap_tx.pb.swift */,
-				040FA704275F55B600229F6F /* rizon_treasury_params.pb.swift */,
-				040FA443275F558700229F6F /* rizon_treasury_query.grpc.swift */,
-				040FA48D275F558C00229F6F /* rizon_treasury_query.pb.swift */,
-				040FA501275F559300229F6F /* rizon_treasury_treasury.pb.swift */,
-				040FA6E7275F55B400229F6F /* rizon_treasury_tx.grpc.swift */,
-				040FA69A275F55AE00229F6F /* rizon_treasury_tx.pb.swift */,
 				047FB6DD281A4C52009D8AAF /* sifnode_clp_v1_genesis.pb.swift */,
 				047FB6CB281A4C4F009D8AAF /* sifnode_clp_v1_params.pb.swift */,
 				047FB6DA281A4C51009D8AAF /* sifnode_clp_v1_querier.grpc.swift */,
@@ -5146,7 +5083,6 @@
 				284FBC7626DBCBC900403FE2 /* starname */,
 				284FBC7526DBCBA400403FE2 /* kava */,
 				2808FEDE26BBFC2600DE5E9A /* medi */,
-				2816E11726BAADAD00408F8E /* rizon */,
 				04CFBD4A269226CE0013150B /* ibc */,
 				04D138502691E20D00D6AF9F /* osmosis */,
 				28641F2F2601AD59000AAEB8 /* TxCell.swift */,
@@ -6298,7 +6234,6 @@
 				18FFB736281AF533004E65BB /* SendContract4ViewController.xib in Resources */,
 				18FFB737281AF533004E65BB /* AllValidatorCell.xib in Resources */,
 				18FFB738281AF533004E65BB /* DomainCell.xib in Resources */,
-				18FFB739281AF533004E65BB /* TxRizonEventHorizonCell.xib in Resources */,
 				18FFB73A281AF533004E65BB /* WalletManageViewController.xib in Resources */,
 				18FFB73C281AF533004E65BB /* PoolTokenGrpcViewController.xib in Resources */,
 				18FFB73D281AF533004E65BB /* KavaSwapExit0ViewController.xib in Resources */,
@@ -6623,7 +6558,6 @@
 				2830A0A527A6AFB500CE9D1D /* SendContract4ViewController.xib in Resources */,
 				E17748FA22842689003D8CD1 /* AllValidatorCell.xib in Resources */,
 				28BB2A8D2533DA1C00CFF097 /* DomainCell.xib in Resources */,
-				2816E11B26BAADE000408F8E /* TxRizonEventHorizonCell.xib in Resources */,
 				E103DAC9228129FD006C2146 /* WalletManageViewController.xib in Resources */,
 				28B2E4CC26CFEBD300ECF960 /* PoolTokenGrpcViewController.xib in Resources */,
 				28EEECAD26DAE9B4002DDC4A /* KavaSwapExit0ViewController.xib in Resources */,
@@ -6972,7 +6906,6 @@
 				18FFB2D4281AF533004E65BB /* WalletCosmosCell.swift in Sources */,
 				18FFB2DA281AF533004E65BB /* NodeInfo.swift in Sources */,
 				18FFB2DB281AF533004E65BB /* KavaHardTotalDeposit.swift in Sources */,
-				1817CADF283E2CE500523713 /* rizon_treasury_treasury.pb.swift in Sources */,
 				18FFB2DC281AF533004E65BB /* StepFeeGrpcViewController.swift in Sources */,
 				1817CC75283E2CE600523713 /* starname_iov_starname_v1beta1_query.grpc.swift in Sources */,
 				18FFB2DD281AF533004E65BB /* HardInterestRate.swift in Sources */,
@@ -6987,7 +6920,6 @@
 				18FFB2E5281AF533004E65BB /* WalletKavaIncentiveCell.swift in Sources */,
 				18FFB2E8281AF533004E65BB /* RedelegateCell.swift in Sources */,
 				18FFB2EA281AF533004E65BB /* CollateralParam.swift in Sources */,
-				1817CC44283E2CE600523713 /* rizon_treasury_query.pb.swift in Sources */,
 				18FFB2EB281AF533004E65BB /* ReplaceEditAddressViewController.swift in Sources */,
 				18FFB2EC281AF533004E65BB /* BaseData.swift in Sources */,
 				18FFB2ED281AF533004E65BB /* NFTDetailRawCell.swift in Sources */,
@@ -7114,7 +7046,6 @@
 				18FFB361281AF533004E65BB /* VoteCheckViewController.swift in Sources */,
 				1817CBCA283E2CE500523713 /* cosmos_gov_v1beta2_tx.pb.swift in Sources */,
 				18FFB362281AF533004E65BB /* TxDetailgRPCViewController.swift in Sources */,
-				1817CBCB283E2CE600523713 /* rizon_treasury_query.grpc.swift in Sources */,
 				1817CC38283E2CE600523713 /* evmos_inflation_v1_query.pb.swift in Sources */,
 				1817CC08283E2CE600523713 /* starname_iov_escrow_v1beta1_events.pb.swift in Sources */,
 				04C49375284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */,
@@ -7188,12 +7119,10 @@
 				1817CC36283E2CE600523713 /* crescent_claim_v1beta1_query.pb.swift in Sources */,
 				18FFB3A2281AF533004E65BB /* KavaSwapJoin3ViewController.swift in Sources */,
 				1817CC53283E2CE600523713 /* evmos_claims_v1_query.pb.swift in Sources */,
-				1817CB5E283E2CE500523713 /* rizon_tokenswap_tokenswap.pb.swift in Sources */,
 				18FFB3A6281AF533004E65BB /* StepMemoViewController.swift in Sources */,
 				1817CAE8283E2CE500523713 /* ethermint_evm_v1_query.grpc.swift in Sources */,
 				1817CC15283E2CE600523713 /* desmos_posts_v1beta1_reactions.pb.swift in Sources */,
 				1817CB33283E2CE500523713 /* evmos_claims_v1_claims.pb.swift in Sources */,
-				1817CC79283E2CE600523713 /* rizon_tokenswap_query.pb.swift in Sources */,
 				1817CB14283E2CE500523713 /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
 				18FFB3A7281AF533004E65BB /* IntroViewController.swift in Sources */,
 				1817CBB3283E2CE500523713 /* cosmos_authz_v1beta1_genesis.pb.swift in Sources */,
@@ -7202,7 +7131,6 @@
 				18FFB3A8281AF533004E65BB /* TxIncentiveDelegatorCell.swift in Sources */,
 				18FFB3A9281AF533004E65BB /* ClaimMultiplier.swift in Sources */,
 				18FFB3AD281AF533004E65BB /* IBCSend1ViewController.swift in Sources */,
-				1817CB61283E2CE500523713 /* rizon_tokenswap_params.pb.swift in Sources */,
 				18FFB3B0281AF533004E65BB /* KavaSwap0ViewController.swift in Sources */,
 				1817CAB8283E2CE500523713 /* tendermint_crypto_proof.pb.swift in Sources */,
 				1817CBA8283E2CE500523713 /* gogoproto_gogo.pb.swift in Sources */,
@@ -7399,7 +7327,6 @@
 				18FFB487281AF533004E65BB /* TxUnlockPeriodLockCell.swift in Sources */,
 				18FFB489281AF533004E65BB /* StepWithdrawCdpAmountViewController.swift in Sources */,
 				1817CBF0283E2CE600523713 /* cryptoorg_supply_v1_accounts.pb.swift in Sources */,
-				18FFB48A281AF533004E65BB /* TxRizonEventHorizonCell.swift in Sources */,
 				18FFB48B281AF533004E65BB /* HardPoolDeposit3ViewController.swift in Sources */,
 				18FFB48D281AF533004E65BB /* KavaHardReserves.swift in Sources */,
 				1817CADE283E2CE500523713 /* cosmos_nft_v1beta1_genesis.pb.swift in Sources */,
@@ -7543,7 +7470,6 @@
 				1817CB30283E2CE500523713 /* sifnode_tokenregistry_v1_tx.pb.swift in Sources */,
 				18FFB514281AF533004E65BB /* RegisterAccount4ViewController.swift in Sources */,
 				1817CAB1283E2CE500523713 /* ibc_lightclients_solomachine_v1_solomachine.pb.swift in Sources */,
-				1817CC4C283E2CE600523713 /* rizon_treasury_tx.grpc.swift in Sources */,
 				1817CBB4283E2CE500523713 /* ethermint_evm_v1_evm.pb.swift in Sources */,
 				18FFB516281AF533004E65BB /* StartUnlock0ViewController.swift in Sources */,
 				0451FC92282A3B1C00214FDA /* ChainBitcana.swift in Sources */,
@@ -7567,7 +7493,6 @@
 				1817CB8D283E2CE500523713 /* sifnode_clp_v1_tx.pb.swift in Sources */,
 				1817CBC7283E2CE500523713 /* kava_swap_v1beta1_query.grpc.swift in Sources */,
 				1817CB8A283E2CE500523713 /* osmosis_lockup_tx.grpc.swift in Sources */,
-				1817CBF1283E2CE600523713 /* rizon_treasury_params.pb.swift in Sources */,
 				1817CB12283E2CE500523713 /* ibc_core_commitment_v1_commitment.pb.swift in Sources */,
 				18FFB52C281AF533004E65BB /* DomainPromotionCell.swift in Sources */,
 				1817CBDE283E2CE600523713 /* sifnode_clp_v1_genesis.pb.swift in Sources */,
@@ -7629,7 +7554,6 @@
 				18FFB571281AF533004E65BB /* StepOkVoteToViewController.swift in Sources */,
 				1817CC5C283E2CE600523713 /* cosmos_capability_v1beta1_genesis.pb.swift in Sources */,
 				18FFB576281AF533004E65BB /* OkHistory.swift in Sources */,
-				1817CAC7283E2CE500523713 /* rizon_tokenswap_tx.pb.swift in Sources */,
 				18FFB577281AF533004E65BB /* AccountPromotionCell.swift in Sources */,
 				1817CB68283E2CE500523713 /* ibc_core_port_v1_query.pb.swift in Sources */,
 				18FFB57A281AF533004E65BB /* WKey.swift in Sources */,
@@ -7703,9 +7627,7 @@
 				18FFB5BD281AF533004E65BB /* KavaSwapPool.swift in Sources */,
 				1817CAFE283E2CE500523713 /* cosmos_feegrant_v1beta1_tx.pb.swift in Sources */,
 				18FFB5BF281AF533004E65BB /* CertikVote.swift in Sources */,
-				1817CBAB283E2CE500523713 /* rizon_treasury_tx.pb.swift in Sources */,
 				1817CC5A283E2CE600523713 /* evmos_incentives_v1_incentives.pb.swift in Sources */,
-				1817CBFE283E2CE600523713 /* rizon_tokenswap_query.grpc.swift in Sources */,
 				18FFB5C2281AF533004E65BB /* BinanceType.swift in Sources */,
 				18FFB5C4281AF533004E65BB /* MainTabWalletViewController.swift in Sources */,
 				1817CAB0283E2CE500523713 /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */,
@@ -7728,7 +7650,6 @@
 				18FFB5D1281AF533004E65BB /* TxCdpCreateCell.swift in Sources */,
 				1817CAC5283E2CE500523713 /* kava_committee_v1beta1_query.grpc.swift in Sources */,
 				18FFB5D2281AF533004E65BB /* TxInstantContractCell.swift in Sources */,
-				1817CB2D283E2CE500523713 /* rizon_tokenswap_tx.grpc.swift in Sources */,
 				1817CC68283E2CE600523713 /* cosmos_capability_v1beta1_capability.pb.swift in Sources */,
 				18FFB5D3281AF533004E65BB /* SelectAccountCell.swift in Sources */,
 				18FFB5D7281AF533004E65BB /* CommonHeader.swift in Sources */,
@@ -7953,7 +7874,6 @@
 				04C43B50278D5F520022D5DF /* kava_committee_v1beta1_genesis.pb.swift in Sources */,
 				28D7BE5325F0FAD0006EECD7 /* KavaHardInterestRate.swift in Sources */,
 				040FAAD4275F55C400229F6F /* cosmos_bank_v1beta1_authz.pb.swift in Sources */,
-				040FA955275F55C300229F6F /* rizon_tokenswap_query.pb.swift in Sources */,
 				047FB6E9281A4C53009D8AAF /* sifnode_clp_v1_types.pb.swift in Sources */,
 				E1FEE45B225B1AEF0040FAFD /* MemoTextView.swift in Sources */,
 				04CFBD59269301660013150B /* TxLockTokenCell.swift in Sources */,
@@ -7976,7 +7896,6 @@
 				E1945E42222E7FC800A1436F /* MainTabViewController.swift in Sources */,
 				046BD23027795CD4002333B5 /* TxSendNFTCell.swift in Sources */,
 				0443B88D2855B94E0027A6B9 /* WalletDetailInfoCell.swift in Sources */,
-				040FAA58275F55C400229F6F /* rizon_treasury_tx.grpc.swift in Sources */,
 				0451FD902832370100214FDA /* osmosis_txfees_v1beta1_gov.pb.swift in Sources */,
 				28156E7F25360B70006FF06C /* HardListCell.swift in Sources */,
 				04C43B7B278D5F530022D5DF /* kava_pricefeed_v1beta1_store.pb.swift in Sources */,
@@ -7986,7 +7905,6 @@
 				040FAA28275F55C300229F6F /* desmos_profiles_v1beta1_query_app_links.pb.swift in Sources */,
 				283D2EAC24F56AFF00247424 /* OkUnbonding.swift in Sources */,
 				048C830C27BF572800270528 /* evmos_erc20_v1_tx.pb.swift in Sources */,
-				040FA90B275F55C300229F6F /* rizon_tokenswap_tx.grpc.swift in Sources */,
 				0428ACFE268AD31700EB438F /* BandOracleStatus.swift in Sources */,
 				0451FC9D282A3B5B00214FDA /* ChainBitsong.swift in Sources */,
 				04C43B5D278D5F520022D5DF /* kava_swap_v1beta1_tx.grpc.swift in Sources */,
@@ -8098,7 +8016,6 @@
 				0451FC66282A3A3200214FDA /* ChainSentinel.swift in Sources */,
 				04D3391527E826F100E82AA7 /* crescent_liquidity_v1beta1_query.grpc.swift in Sources */,
 				288243E026E0E74D000B6C37 /* GDexManager.swift in Sources */,
-				040FA872275F55C200229F6F /* rizon_treasury_treasury.pb.swift in Sources */,
 				040FA936275F55C300229F6F /* desmos_profiles_v1beta1_msgs_relationships.pb.swift in Sources */,
 				283D2EA424F52FE700247424 /* OkToken.swift in Sources */,
 				047FB6F4281A4C53009D8AAF /* sifnode_clp_v1_genesis.pb.swift in Sources */,
@@ -8208,7 +8125,6 @@
 				285F8C8E25CFB27D00317B30 /* OkTickerList.swift in Sources */,
 				04C43B66278D5F530022D5DF /* kava_incentive_v1beta1_tx.pb.swift in Sources */,
 				0451FC5E282A39D000214FDA /* ChainAkash.swift in Sources */,
-				040FA7FE275F55C200229F6F /* rizon_treasury_query.pb.swift in Sources */,
 				040FA849275F55C200229F6F /* ibc_core_port_v1_query.grpc.swift in Sources */,
 				040FA99B275F55C300229F6F /* cosmos_authz_v1beta1_tx.grpc.swift in Sources */,
 				040FA8B2275F55C200229F6F /* ibc_lightclients_localhost_v1_localhost.pb.swift in Sources */,
@@ -8257,7 +8173,6 @@
 				040FA895275F55C200229F6F /* gravity_v1_msgs.pb.swift in Sources */,
 				040FA9E8275F55C300229F6F /* band_oracle_v1_oracle.pb.swift in Sources */,
 				048C831327BF572800270528 /* evmos_erc20_v1_query.grpc.swift in Sources */,
-				040FA91D275F55C300229F6F /* rizon_tokenswap_params.pb.swift in Sources */,
 				047FB6F3281A4C53009D8AAF /* sifnode_clp_v1_tx.grpc.swift in Sources */,
 				040FA969275F55C300229F6F /* gravity_v1_query.pb.swift in Sources */,
 				28BB2A912533DA2D00CFF097 /* AccountCell.swift in Sources */,
@@ -8324,7 +8239,6 @@
 				04C43B5F278D5F530022D5DF /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
 				048C830527BF572800270528 /* evmos_inflation_v1_query.pb.swift in Sources */,
 				040FA9DB275F55C300229F6F /* ibc_core_client_v1_genesis.pb.swift in Sources */,
-				040FA8AF275F55C200229F6F /* rizon_tokenswap_query.grpc.swift in Sources */,
 				04E25D3D276F7574009B39BA /* NFTListCell.swift in Sources */,
 				048C830E27BF572800270528 /* evmos_claims_v1_genesis.pb.swift in Sources */,
 				04C43B6C278D5F530022D5DF /* kava_hard_v1beta1_hard.pb.swift in Sources */,
@@ -8471,7 +8385,6 @@
 				28E3E371266D033100BA89C2 /* HdacUtil.swift in Sources */,
 				047AE7242693378A00C1DD51 /* TxUnlockPeriodLockCell.swift in Sources */,
 				28617A8324333B90006D66EA /* StepWithdrawCdpAmountViewController.swift in Sources */,
-				2816E11A26BAADE000408F8E /* TxRizonEventHorizonCell.swift in Sources */,
 				28DB56F725FA3B8800B2F0E5 /* HardPoolDeposit3ViewController.swift in Sources */,
 				040FA918275F55C300229F6F /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				0443B8812855B9280027A6B9 /* WalletDetailAddressCell.swift in Sources */,
@@ -8485,7 +8398,6 @@
 				040FA7FF275F55C200229F6F /* desmos_profiles_legacy_v100_models_app_links.pb.swift in Sources */,
 				040FA9C5275F55C300229F6F /* cosmos_group_v1beta1_types.pb.swift in Sources */,
 				040FA9B9275F55C300229F6F /* cosmos_params_v1beta1_query.grpc.swift in Sources */,
-				040FA7B4275F55C200229F6F /* rizon_treasury_query.grpc.swift in Sources */,
 				282FF35923F52FD40028CC66 /* TxRewardCell.swift in Sources */,
 				04E25D5327749AA0009B39BA /* GenNFT3ViewController.swift in Sources */,
 				28EEEC8D26DA5747002DDC4A /* KavaSwapDeposit.swift in Sources */,
@@ -8523,7 +8435,6 @@
 				040FA80A275F55C200229F6F /* tendermint_types_types.pb.swift in Sources */,
 				04CFBD552692278C0013150B /* TxIbcUpdateClientCell.swift in Sources */,
 				E1F1CF08239F5737004EF8A2 /* Vote.swift in Sources */,
-				040FAA0B275F55C300229F6F /* rizon_treasury_tx.pb.swift in Sources */,
 				047FB6F1281A4C53009D8AAF /* sifnode_clp_v1_querier.grpc.swift in Sources */,
 				04E2A32527A57D270045ED21 /* Cw20BalanceReq.swift in Sources */,
 				047FB6EB281A4C53009D8AAF /* sifnode_tokenregistry_v1_types.pb.swift in Sources */,
@@ -8640,7 +8551,6 @@
 				04D3391927E826F100E82AA7 /* crescent_claim_v1beta1_claim.pb.swift in Sources */,
 				280E1F16254ABB080007BA7D /* ResourceAddCell.swift in Sources */,
 				04C43B65278D5F530022D5DF /* kava_bep3_v1beta1_query.pb.swift in Sources */,
-				040FAA75275F55C400229F6F /* rizon_treasury_params.pb.swift in Sources */,
 				E1FD2334233E1C16009327FE /* WalletPriceCell.swift in Sources */,
 				048C830827BF572800270528 /* ethermint_evm_v1_tx.pb.swift in Sources */,
 				040FA8A6275F55C200229F6F /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
@@ -8796,7 +8706,6 @@
 				E1C3C89B23B1E3E400A693C0 /* NotificationView.swift in Sources */,
 				046BD22027788723002333B5 /* StationNFTData.swift in Sources */,
 				285F8C8B25CFB21000317B30 /* OkTicker.swift in Sources */,
-				040FAAF5275F55C400229F6F /* rizon_tokenswap_tx.pb.swift in Sources */,
 				046BD2232778B38C002333B5 /* SendNFT0ViewController.swift in Sources */,
 				040FAA84275F55C400229F6F /* cosmos_feegrant_v1beta1_feegrant.pb.swift in Sources */,
 				E1945E3F222E7E2900A1436F /* Bech32.swift in Sources */,
@@ -8896,7 +8805,6 @@
 				28D7BE4625F0D338006EECD7 /* IncentiveReward.swift in Sources */,
 				040FAA30275F55C400229F6F /* cryptoorg_nft_v1_tx.pb.swift in Sources */,
 				289DF178242DDF3800433CF4 /* CdpDetailTopCell.swift in Sources */,
-				040FA98F275F55C300229F6F /* rizon_tokenswap_tokenswap.pb.swift in Sources */,
 				040FAA57275F55C400229F6F /* tendermint_farming_v1beta1_query.grpc.swift in Sources */,
 				040FA838275F55C200229F6F /* cryptoorg_supply_v1_query.grpc.swift in Sources */,
 				04E25D4F27749A92009B39BA /* GenNFT0ViewController.swift in Sources */,
