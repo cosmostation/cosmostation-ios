@@ -1,17 +1,16 @@
 //
-//  ReInvestCheckViewController.swift
+//  ReInvest4ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 05/06/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 import GRPC
 import NIO
 
-class ReInvestCheckViewController: BaseViewController, PasswordViewDelegate {
+class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var rewardLabel: UILabel!
     @IBOutlet weak var rewardDenomLabel: UILabel!
@@ -27,7 +26,7 @@ class ReInvestCheckViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var confirmBtn: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -47,24 +46,10 @@ class ReInvestCheckViewController: BaseViewController, PasswordViewDelegate {
         memoLabel.text = pageHolderVC.mMemo
     }
     
-    override func enableUserInteraction() {
-        self.onUpdateView()
-        self.backBtn.isUserInteractionEnabled = true
-        self.confirmBtn.isUserInteractionEnabled = true
-    }
-
     @IBAction func onClickBack(_ sender: UIButton) {
         self.backBtn.isUserInteractionEnabled = false
         self.confirmBtn.isUserInteractionEnabled = false
         pageHolderVC.onBeforePage()
-    }
-    
-    func checkIsWasteFee() -> Bool {
-        let rewardSum = NSDecimalNumber.init(string: pageHolderVC.mReinvestReward!.amount)
-        if (NSDecimalNumber.init(string: pageHolderVC.mFee!.amount[0].amount).compare(rewardSum).rawValue > 0 ) {
-            return true
-        }
-        return false
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
@@ -88,6 +73,19 @@ class ReInvestCheckViewController: BaseViewController, PasswordViewDelegate {
         self.navigationController?.pushViewController(passwordVC, animated: false)
     }
     
+    override func enableUserInteraction() {
+        self.onUpdateView()
+        self.backBtn.isUserInteractionEnabled = true
+        self.confirmBtn.isUserInteractionEnabled = true
+    }
+    
+    func checkIsWasteFee() -> Bool {
+        let rewardSum = NSDecimalNumber.init(string: pageHolderVC.mReinvestReward!.amount)
+        if (NSDecimalNumber.init(string: pageHolderVC.mFee!.amount[0].amount).compare(rewardSum).rawValue > 0 ) {
+            return true
+        }
+        return false
+    }
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             self.onFetchgRPCAuth(pageHolderVC.mAccount!)

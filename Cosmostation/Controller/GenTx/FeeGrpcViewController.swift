@@ -1,5 +1,5 @@
 //
-//  StepFeeGrpcViewController.swift
+//  FeeGrpcViewController.swift
 //  Cosmostation
 //
 //  Created by 정용주 on 2021/03/26.
@@ -12,7 +12,7 @@ import HDWalletKit
 import GRPC
 import NIO
 
-class StepFeeGrpcViewController: BaseViewController {
+class FeeGrpcViewController: BaseViewController {
 
     @IBOutlet weak var feeTotalCard: CardView!
     @IBOutlet weak var feeTotalAmount: UILabel!

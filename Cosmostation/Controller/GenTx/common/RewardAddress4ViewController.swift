@@ -1,19 +1,17 @@
 //
-//  StepChangeCheckViewController.swift
+//  RewardAddress4ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 23/05/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 import GRPC
 import NIO
 
-class StepChangeCheckViewController: BaseViewController, PasswordViewDelegate {
+class RewardAddress4ViewController: BaseViewController, PasswordViewDelegate {
     
-
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
     @IBOutlet weak var rewardAddressChangeFee: UILabel!
@@ -23,7 +21,7 @@ class StepChangeCheckViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var memoLabel: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -38,12 +36,6 @@ class StepChangeCheckViewController: BaseViewController, PasswordViewDelegate {
         currentRewardAddress.adjustsFontSizeToFitWidth = true
         newRewardAddress.adjustsFontSizeToFitWidth = true
         memoLabel.text = pageHolderVC.mMemo
-    }
-    
-    override func enableUserInteraction() {
-        self.onUpdateView()
-        self.btnBack.isUserInteractionEnabled = true
-        self.btnConfirm.isUserInteractionEnabled = true
     }
     
     @IBAction func onClickBefore(_ sender: UIButton) {
@@ -78,6 +70,12 @@ class StepChangeCheckViewController: BaseViewController, PasswordViewDelegate {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
             noticeAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
         }
+    }
+    
+    override func enableUserInteraction() {
+        self.onUpdateView()
+        self.btnBack.isUserInteractionEnabled = true
+        self.btnConfirm.isUserInteractionEnabled = true
     }
     
     func onShowPasswordCheck() {

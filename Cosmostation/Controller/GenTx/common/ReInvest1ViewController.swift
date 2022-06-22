@@ -1,18 +1,17 @@
 //
-//  ReInvestAmountViewController.swift
+//  ReInvest1ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 05/06/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 import GRPC
 import NIO
 
-class ReInvestAmountViewController: BaseViewController {
-
+class ReInvest1ViewController: BaseViewController {
+    
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var rewardAmountLabel: UILabel!
     @IBOutlet weak var rewardDenomLabel: UILabel!
@@ -25,7 +24,7 @@ class ReInvestAmountViewController: BaseViewController {
     
     var pageHolderVC: StepGenTxViewController!
     var mDpDecimal:Int16 = 6
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
@@ -45,11 +44,6 @@ class ReInvestAmountViewController: BaseViewController {
         cancelBtn.isUserInteractionEnabled = false
         nextBtn.isUserInteractionEnabled = false
         pageHolderVC.onNextPage()
-    }
-    
-    override func enableUserInteraction() {
-        self.cancelBtn.isUserInteractionEnabled = true
-        self.nextBtn.isUserInteractionEnabled = true
     }
     
     func updateView() {
@@ -92,5 +86,5 @@ class ReInvestAmountViewController: BaseViewController {
             });
         }
     }
-    
+
 }

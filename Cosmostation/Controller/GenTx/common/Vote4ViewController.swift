@@ -1,29 +1,29 @@
 //
-//  VoteCheckViewController.swift
+//  Vote4ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 10/12/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import GRPC
 import NIO
 
-class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
+class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var proposalTitle: UILabel!
     @IBOutlet weak var proposer: UILabel!
     
     @IBOutlet weak var mOpinion: UILabel!
     @IBOutlet weak var mFeeAmount: UILabel!
+    @IBOutlet weak var mFeeDenomTitle: UILabel!
     @IBOutlet weak var mMemo: UILabel!
     @IBOutlet weak var mBtnBack: UIButton!
     @IBOutlet weak var mBtnConfirm: UIButton!
-    @IBOutlet weak var mFeeDenomTitle: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -117,4 +117,5 @@ class VoteCheckViewController: BaseViewController, PasswordViewDelegate {
             }
         }
     }
+
 }

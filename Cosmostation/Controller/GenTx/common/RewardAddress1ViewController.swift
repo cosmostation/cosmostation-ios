@@ -1,17 +1,16 @@
 //
-//  StepChangeAddressViewController.swift
+//  RewardAddress1ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 23/05/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
-import QRCode
 import GRPC
 import NIO
 
-class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
+class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
     
     @IBOutlet weak var newRewardAddressInput: AddressInputTextField!
     @IBOutlet weak var currentRewardAddressLabel: UILabel!
@@ -19,18 +18,13 @@ class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
     @IBOutlet weak var btnNext: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
     }
     
-    override func enableUserInteraction() {
-        self.btnCancel.isUserInteractionEnabled = true
-        self.btnNext.isUserInteractionEnabled = true
-    }
-
     @IBAction func onClickPaste(_ sender: UIButton) {
         if let myString = UIPasteboard.general.string {
             self.newRewardAddressInput.text = myString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -46,18 +40,16 @@ class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
         self.navigationItem.title = ""
         self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
         self.navigationController?.pushViewController(qrScanVC, animated: false)
-        
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
         self.btnCancel.isUserInteractionEnabled = false
         self.btnNext.isUserInteractionEnabled = false
         pageHolderVC.onBeforePage()
-        
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        if(currentRewardAddressLabel.text == "-") {
+        if (currentRewardAddressLabel.text == "-") {
             self.onShowToast(NSLocalizedString("error_network", comment: ""))
             return;
         }
@@ -77,7 +69,11 @@ class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
         self.btnNext.isUserInteractionEnabled = false
         pageHolderVC.mToChangeRewardAddress = userInput
         pageHolderVC.onNextPage()
-        
+    }
+    
+    override func enableUserInteraction() {
+        self.btnCancel.isUserInteractionEnabled = true
+        self.btnNext.isUserInteractionEnabled = true
     }
     
     func onFetchRewardAddress_gRPC(_ address: String) {
@@ -101,7 +97,7 @@ class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
             DispatchQueue.main.async(execute: {
                 self.currentRewardAddressLabel.text = responseAddress
                 if (responseAddress != address) {
-                    self.currentRewardAddressLabel.textColor = UIColor.init(hexString: "f31963")
+                    self.currentRewardAddressLabel.textColor = UIColor(named: "_warnRed")
                 }
                 self.currentRewardAddressLabel.adjustsFontSizeToFitWidth = true
                 self.pageHolderVC.mCurrentRewardAddress = responseAddress
@@ -109,9 +105,8 @@ class StepChangeAddressViewController: BaseViewController, QrScannerDelegate {
         }
     }
     
-    
-    
     func scannedAddress(result: String) {
         newRewardAddressInput.text = result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
+
 }

@@ -1,5 +1,5 @@
 //
-//  StepFeeOldViewController.swift
+//  FeeLcdViewController.swift
 //  Cosmostation
 //
 //  Created by 정용주 on 2021/05/22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StepFeeOldViewController: BaseViewController {
+class FeeLcdViewController: BaseViewController {
     
     @IBOutlet weak var feeTotalCard: CardView!
     @IBOutlet weak var feeTotalAmount: UILabel!

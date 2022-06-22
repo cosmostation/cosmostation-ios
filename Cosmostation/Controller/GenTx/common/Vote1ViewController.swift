@@ -1,14 +1,14 @@
 //
-//  VoteSelectViewController.swift
+//  Vote1ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 10/12/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class VoteSelectViewController: BaseViewController {
+class Vote1ViewController: BaseViewController {
     
     @IBOutlet weak var proposalTitle: UILabel!
     @IBOutlet weak var proposer: UILabel!
@@ -24,7 +24,7 @@ class VoteSelectViewController: BaseViewController {
     @IBOutlet weak var bntNext: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
@@ -33,7 +33,7 @@ class VoteSelectViewController: BaseViewController {
         proposalTitle.adjustsFontSizeToFitWidth = true
         proposer.text = pageHolderVC.mProposer
     }
-
+    
     @IBAction func onClickCancel(_ sender: UIButton) {
         self.btnCancel.isUserInteractionEnabled = false
         self.bntNext.isUserInteractionEnabled = false
@@ -61,7 +61,6 @@ class VoteSelectViewController: BaseViewController {
         checkYes.image = checkYes.image?.withRenderingMode(.alwaysTemplate)
         checkYes.tintColor = UIColor.white
         pageHolderVC.mVoteOpinion = "Yes"
-        
     }
     
     @IBAction func onClickNo(_ sender: UIButton) {
@@ -70,7 +69,6 @@ class VoteSelectViewController: BaseViewController {
         checkNo.image = checkNo.image?.withRenderingMode(.alwaysTemplate)
         checkNo.tintColor = UIColor.white
         pageHolderVC.mVoteOpinion = "No"
-        
     }
     
     @IBAction func onClickVeto(_ sender: UIButton) {
@@ -79,7 +77,6 @@ class VoteSelectViewController: BaseViewController {
         checkVeto.image = checkVeto.image?.withRenderingMode(.alwaysTemplate)
         checkVeto.tintColor = UIColor.white
         pageHolderVC.mVoteOpinion = "NoWithVeto"
-        
     }
     
     @IBAction func onClickAbstain(_ sender: UIButton) {
@@ -88,7 +85,6 @@ class VoteSelectViewController: BaseViewController {
         checkAbstain.image = checkAbstain.image?.withRenderingMode(.alwaysTemplate)
         checkAbstain.tintColor = UIColor.white
         pageHolderVC.mVoteOpinion = "Abstain"
-        
     }
     
     func initBtns() {
@@ -111,8 +107,5 @@ class VoteSelectViewController: BaseViewController {
         self.btnCancel.isUserInteractionEnabled = true
         self.bntNext.isUserInteractionEnabled = true
     }
-    
-    
-    
-    
+
 }
