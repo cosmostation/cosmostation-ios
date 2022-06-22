@@ -336,14 +336,10 @@ let COSMOS_AUTH_TYPE_D_VESTING_ACCOUNT      = "cosmos-sdk/DelayedVestingAccount"
 let COSMOS_AUTH_TYPE_CERTIK_MANUAL          = "auth/ManualVestingAccount";
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";
 
-let COSMOS_MSG_TYPE_TRANSFER                = "cosmos-sdk/Send";
-let COSMOS_MSG_TYPE_TRANSFER2               = "cosmos-sdk/MsgSend";
-let COSMOS_MSG_TYPE_TRANSFER3               = "cosmos-sdk/MsgMultiSend";
-let COSMOS_MSG_TYPE_DELEGATE                = "cosmos-sdk/MsgDelegate";
-let COSMOS_MSG_TYPE_UNDELEGATE              = "cosmos-sdk/Undelegate";
-let COSMOS_MSG_TYPE_UNDELEGATE2             = "cosmos-sdk/MsgUndelegate";
-let COSMOS_MSG_TYPE_REDELEGATE              = "cosmos-sdk/BeginRedelegate";
-let COSMOS_MSG_TYPE_REDELEGATE2             = "cosmos-sdk/MsgBeginRedelegate";
+let TASK_TYPE_TRANSFER                      = "task_simple_transfer";
+let TASK_TYPE_DELEGATE                      = "task_simple_delegate";
+let TASK_TYPE_UNDELEGATE                    = "task_simple_undelegate";
+let TASK_TYPE_REDELEGATE                    = "task_simple_redelegate";
 let COSMOS_MSG_TYPE_WITHDRAW_DEL            = "cosmos-sdk/MsgWithdrawDelegationReward";
 let COSMOS_MSG_TYPE_WITHDRAW_VAL            = "cosmos-sdk/MsgWithdrawValidatorCommission";
 let COSMOS_MSG_TYPE_WITHDRAW_MIDIFY         = "cosmos-sdk/MsgModifyWithdrawAddress";
@@ -358,29 +354,6 @@ let COSMOS_MSG_TYPE_EDIT_VALIDATOR          = "cosmos-sdk/MsgEditValidator";
 let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
 let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";
 let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
-
-let IRIS_MSG_TYPE_TRANSFER                  = "irishub/bank/Send";
-let IRIS_MSG_TYPE_DELEGATE                  = "irishub/stake/MsgDelegate";
-let IRIS_MSG_TYPE_UNDELEGATE                = "irishub/stake/BeginUnbonding";
-let IRIS_MSG_TYPE_REDELEGATE                = "irishub/stake/BeginRedelegate";
-let IRIS_MSG_TYPE_WITHDRAW                  = "irishub/distr/MsgWithdrawDelegationReward";
-let IRIS_MSG_TYPE_WITHDRAW_ALL              = "irishub/distr/MsgWithdrawDelegationRewardsAll";
-let IRIS_MSG_TYPE_COMMISSION                = "irishub/distr/MsgWithdrawValidatorRewardsAll";
-let IRIS_MSG_TYPE_VOTE                      = "irishub/gov/MsgVote";
-let IRIS_MSG_TYPE_DEPOSIT                   = "irishub/gov/MsgDeposit";
-let IRIS_MSG_TYPE_SUBMIT_PROPOSAL           = "irishub/gov/MsgSubmitProposal";
-let IRIS_MSG_TYPE_CREATE_VALIDATOR          = "irishub/stake/MsgCreateValidator";
-let IRIS_MSG_TYPE_WITHDRAW_MIDIFY           = "irishub/distr/MsgModifyWithdrawAddress";
-let IRIS_MSG_TYPE_ISSUE_TOKEN               = "irishub/asset/MsgIssueToken";
-
-let IRIS_PROPOAL_TYPE_BasicProposal             = "irishub/gov/BasicProposal";
-let IRIS_PROPOAL_TYPE_ParameterProposal         = "irishub/gov/ParameterProposal";
-let IRIS_PROPOAL_TYPE_PlainTextProposal         = "irishub/gov/PlainTextProposal";
-let IRIS_PROPOAL_TYPE_TokenAdditionProposal     = "irishub/gov/TokenAdditionProposal";
-let IRIS_PROPOAL_TYPE_SoftwareUpgradeProposal   = "irishub/gov/SoftwareUpgradeProposal";
-let IRIS_PROPOAL_TYPE_SystemHaltProposal        = "irishub/gov/SystemHaltProposal";
-let IRIS_PROPOAL_TYPE_CommunityTaxUsageProposal = "irishub/gov/CommunityTaxUsageProposal";
-
 
 let BNB_MSG_TYPE_HTLC                       = "tokens/HTLTMsg";
 let BNB_MSG_TYPE_HTLC_CLIAM                 = "tokens/ClaimHTLTMsg";

@@ -28,7 +28,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         pageHolderVC = self.parent as? StepGenTxViewController
         
         let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_TRANSFER, 0)
         if (WUtils.isGRPC(pageHolderVC.chainType!)) {
             mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
             mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)

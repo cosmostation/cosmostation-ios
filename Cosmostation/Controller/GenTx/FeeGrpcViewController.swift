@@ -223,26 +223,26 @@ class FeeGrpcViewController: BaseViewController {
     }
     
     func genSimulateReq(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ privateKey: Data, _ publicKey: Data, _ height: Ibc_Core_Client_V1_Height?)  -> Cosmos_Tx_V1beta1_SimulateRequest? {
-        if (pageHolderVC.mType == COSMOS_MSG_TYPE_TRANSFER2) {
+        if (pageHolderVC.mType == TASK_TYPE_TRANSFER) {
             return Signer.genSimulateSendTxgRPC(auth,
                                                 self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                 privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_DELEGATE) {
+        } else if (pageHolderVC.mType == TASK_TYPE_DELEGATE) {
             return Signer.genSimulateDelegateTxgRPC(auth,
                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                     privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_UNDELEGATE2) {
+        } else if (pageHolderVC.mType == TASK_TYPE_UNDELEGATE) {
             return Signer.genSimulateUnDelegateTxgRPC(auth,
                                                       self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToUndelegateAmount!,
                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       privateKey, publicKey, self.chainType!)
                   
             
-        } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_REDELEGATE2) {
+        } else if (pageHolderVC.mType == TASK_TYPE_REDELEGATE) {
             return Signer.genSimulateReDelegateTxgRPC(auth,
                                                       self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
                                                       self.pageHolderVC.mToReDelegateAmount!,

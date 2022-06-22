@@ -432,7 +432,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         }
         
         let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_DELEGATE, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_DELEGATE, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -443,7 +443,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = COSMOS_MSG_TYPE_DELEGATE
+        txVC.mType = TASK_TYPE_DELEGATE
         txVC.mTargetValidator_gRPC = mValidator_gRPC
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -466,7 +466,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             }
         }
         let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_UNDELEGATE2, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_UNDELEGATE, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -474,7 +474,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mTargetValidator_gRPC = mValidator_gRPC
-        txVC.mType = COSMOS_MSG_TYPE_UNDELEGATE2
+        txVC.mType = TASK_TYPE_UNDELEGATE
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
@@ -490,7 +490,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_REDELEGATE2, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_REDELEGATE, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -502,7 +502,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     func onStartRedelegate() {
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mTargetValidator_gRPC = mValidator_gRPC
-        txVC.mType = COSMOS_MSG_TYPE_REDELEGATE2
+        txVC.mType = TASK_TYPE_REDELEGATE
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }

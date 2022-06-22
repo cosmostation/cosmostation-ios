@@ -148,7 +148,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             return
         }
         
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
         if (BaseData.instance.availableAmount(stakingDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
             return
@@ -156,7 +156,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mToSendDenom = stakingDenom
-        txVC.mType = COSMOS_MSG_TYPE_TRANSFER2
+        txVC.mType = TASK_TYPE_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;

@@ -122,21 +122,22 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         if (indexPath.row == 0) {
             return onBindTxCommon(tableView)
         } else {
-            let msg = mTxInfo?.getMsg(indexPath.row - 1)
-            if (msg?.type == COSMOS_MSG_TYPE_TRANSFER || msg?.type == COSMOS_MSG_TYPE_TRANSFER2 || msg?.type == COSMOS_MSG_TYPE_TRANSFER3 ||
-                msg?.type == OK_MSG_TYPE_TRANSFER || msg?.type == OK_MSG_TYPE_MULTI_TRANSFER || msg?.type == CERTIK_MSG_TYPE_TRANSFER) {
-                if ((msg?.value.inputs != nil && (msg?.value.inputs!.count)! > 1) ||  (msg?.value.outputs != nil && (msg?.value.outputs!.count)! > 1)) {
+            guard let msg = mTxInfo?.getMsg(indexPath.row - 1) else {
+                return onBindUnknown(tableView, indexPath.row)
+            }
+            if (msg.type.contains("Send") || msg.type.contains("MsgSend") || msg.type.contains("MsgMultiSend") ||
+                msg.type == OK_MSG_TYPE_TRANSFER || msg.type == OK_MSG_TYPE_MULTI_TRANSFER || msg.type == CERTIK_MSG_TYPE_TRANSFER) {
+                if ((msg.value.inputs != nil && (msg.value.inputs!.count) > 1) ||  (msg.value.outputs != nil && (msg.value.outputs!.count) > 1)) {
                     //No case yet!
                     return onBindMultiTransfer(tableView, indexPath.row)
                 } else {
                     return onBindTransfer(tableView, indexPath.row)
                 }
             }
-            
-            else if (msg?.type == OK_MSG_TYPE_DEPOSIT || msg?.type == OK_MSG_TYPE_WITHDRAW) {
+            else if (msg.type == OK_MSG_TYPE_DEPOSIT || msg.type == OK_MSG_TYPE_WITHDRAW) {
                 return onBindOkStake(tableView, indexPath.row)
                 
-            } else if (msg?.type == OK_MSG_TYPE_DIRECT_VOTE) {
+            } else if (msg.type == OK_MSG_TYPE_DIRECT_VOTE) {
                 return onBindOkDirectVote(tableView, indexPath.row)
                 
             } else {

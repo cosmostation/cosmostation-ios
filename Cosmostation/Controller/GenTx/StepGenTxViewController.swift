@@ -161,7 +161,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     
     lazy var orderedViewControllers: [UIViewController] = {
-        if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
+        if (mType == TASK_TYPE_TRANSFER) {
             if (WUtils.isGRPC(chainType!)) {
                 return [Transfer1ViewController(nibName: "Transfer1ViewController", bundle: nil),
                         Transfer2ViewController(nibName: "Transfer2ViewController", bundle: nil),
@@ -176,19 +176,19 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                         Transfer5ViewController(nibName: "Transfer5ViewController", bundle: nil)]
             }
             
-        } else if (mType == COSMOS_MSG_TYPE_DELEGATE || mType == IRIS_MSG_TYPE_DELEGATE) {
+        } else if (mType == TASK_TYPE_DELEGATE) {
             return [Delegate1ViewController(nibName: "Delegate1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     Delegate4ViewController(nibName: "Delegate4ViewController", bundle: nil)]
             
-        } else if (mType == COSMOS_MSG_TYPE_UNDELEGATE2 || mType == IRIS_MSG_TYPE_UNDELEGATE) {
+        } else if (mType == TASK_TYPE_UNDELEGATE) {
             return [Undelegate1ViewController(nibName: "Undelegate1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     Undelegate4ViewController(nibName: "Undelegate4ViewController", bundle: nil)]
             
-        } else if (mType == COSMOS_MSG_TYPE_REDELEGATE2 || mType == IRIS_MSG_TYPE_REDELEGATE) {
+        } else if (mType == TASK_TYPE_REDELEGATE) {
             return [Redelegate1ViewController(nibName: "Redelegate1ViewController", bundle: nil),
                     Redelegate2ViewController(nibName: "Redelegate2ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
@@ -201,7 +201,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     ClaimReward4ViewController(nibName: "ClaimReward4ViewController", bundle: nil)]
             
-        } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY || mType == IRIS_MSG_TYPE_WITHDRAW_MIDIFY) {
+        } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
             return [RewardAddress1ViewController(nibName: "RewardAddress1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
@@ -504,7 +504,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         
         self.getKey()
         
-        if (mType == COSMOS_MSG_TYPE_REDELEGATE2) {
+        if (mType == TASK_TYPE_REDELEGATE) {
             self.onFetchBondedValidators(0)
             
         } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
@@ -560,7 +560,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     func onNextPage() {
         disableBounce = false
-        if (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == COSMOS_MSG_TYPE_REDELEGATE2 || mType == IRIS_MSG_TYPE_REDELEGATE ||
+        if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE ||
             mType == IOV_MSG_TYPE_REGISTER_ACCOUNT || mType == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV || mType == TASK_IBC_TRANSFER ||
             mType == TASK_CW20_TRANSFER) {
             if (currentIndex > 3) { return }
@@ -578,7 +578,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         })
         
         
-//        if ((currentIndex <= 3 && (mType == COSMOS_MSG_TYPE_TRANSFER2 || mType == COSMOS_MSG_TYPE_REDELEGATE2 || mType == IRIS_MSG_TYPE_REDELEGATE ||
+//        if ((currentIndex <= 3 && (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE ||
 //                                    mType == IOV_MSG_TYPE_REGISTER_ACCOUNT || mType == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV) || mType == TASK_IBC_TRANSFER) || currentIndex <= 2) {
 //            setViewControllers([orderedViewControllers[currentIndex + 1]], direction: .forward, animated: true, completion: { (finished) -> Void in
 //                self.currentIndex = self.currentIndex + 1

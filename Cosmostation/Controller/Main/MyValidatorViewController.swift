@@ -185,7 +185,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         }
         
         let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_DELEGATE, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_DELEGATE, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -196,7 +196,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = COSMOS_MSG_TYPE_DELEGATE
+        txVC.mType = TASK_TYPE_DELEGATE
         txVC.mTargetValidator_gRPC = validator_gRPC
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)

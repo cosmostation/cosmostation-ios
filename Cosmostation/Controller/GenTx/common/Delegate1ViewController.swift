@@ -25,7 +25,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
         let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, COSMOS_MSG_TYPE_DELEGATE, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_DELEGATE, 0)
         
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         userBalance = BaseData.instance.getDelegatable_gRPC(pageHolderVC.chainType).subtracting(feeAmount)

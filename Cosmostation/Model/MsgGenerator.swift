@@ -38,7 +38,7 @@ class MsgGenerator {
                 print(error)
             }
             
-            msg.type = COSMOS_MSG_TYPE_TRANSFER2
+            msg.type = "cosmos-sdk/MsgSend"
             msg.value = value
         }
         return msg

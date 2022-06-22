@@ -139,7 +139,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
     func isTransfer() -> Bool {
         var result = true
         let type = self.pageHolderVC.mType
-        if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+        if (type == TASK_TYPE_TRANSFER) {
             result = true
         } else {
             result = false
