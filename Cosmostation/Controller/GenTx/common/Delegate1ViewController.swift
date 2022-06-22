@@ -121,7 +121,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     }
     @IBAction func onClickAdd01(_ sender: UIButton) {
         var exist = NSDecimalNumber.zero
-        if(toDelegateAmountInput.text!.count > 0) {
+        if (toDelegateAmountInput.text!.count > 0) {
             exist = NSDecimalNumber(string: toDelegateAmountInput.text!, locale: Locale.current)
         }
         let added = exist.adding(NSDecimalNumber(string: "0.1"))
@@ -130,7 +130,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     }
     @IBAction func onClickAdd1(_ sender: UIButton) {
         var exist = NSDecimalNumber.zero
-        if(toDelegateAmountInput.text!.count > 0) {
+        if (toDelegateAmountInput.text!.count > 0) {
             exist = NSDecimalNumber(string: toDelegateAmountInput.text!, locale: Locale.current)
         }
         let added = exist.adding(NSDecimalNumber(string: "1"))
@@ -139,7 +139,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     }
     @IBAction func onClickAdd10(_ sender: UIButton) {
         var exist = NSDecimalNumber.zero
-        if(toDelegateAmountInput.text!.count > 0) {
+        if (toDelegateAmountInput.text!.count > 0) {
             exist = NSDecimalNumber(string: toDelegateAmountInput.text!, locale: Locale.current)
         }
         let added = exist.adding(NSDecimalNumber(string: "10"))
@@ -148,7 +148,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     }
     @IBAction func onClickAdd100(_ sender: UIButton) {
         var exist = NSDecimalNumber.zero
-        if(toDelegateAmountInput.text!.count > 0) {
+        if (toDelegateAmountInput.text!.count > 0) {
             exist = NSDecimalNumber(string: toDelegateAmountInput.text!, locale: Locale.current)
         }
         let added = exist.adding(NSDecimalNumber(string: "100"))

@@ -1,18 +1,17 @@
 //
-//  StepRedelegateToViewController.swift
+//  Redelegate2ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 23/05/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 import GRPC
 import NIO
 
-class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
-
+class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var redelegateToValTableView: UITableView!
     @IBOutlet weak var btnBefore: UIButton!
     @IBOutlet weak var btnNext: UIButton!
@@ -22,10 +21,11 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
     var checkedValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var checkedPosition:IndexPath?
     var mDpDecimal:Int16 = 6
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
+        chainConfig = ChainFactory().getChainConfig(pageHolderVC.chainType!)
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         
         self.redelegateToValTableView.delegate = self
@@ -39,7 +39,7 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:RedelegateCell? = tableView.dequeueReusableCell(withIdentifier:"RedelegateCell") as? RedelegateCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"RedelegateCell") as? RedelegateCell
         if let validator = self.pageHolderVC.mToReDelegateValidators_gRPC[indexPath.row] as? Cosmos_Staking_V1beta1_Validator {
             cell?.valMonikerLabel.text = validator.description_p.moniker
             cell?.valMonikerLabel.adjustsFontSizeToFitWidth = true
@@ -59,7 +59,7 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
             cell?.rootCard.needBorderUpdate = false
             if (validator.operatorAddress == checkedValidator_gRPC?.operatorAddress) {
                 cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-                cell?.valCheckedImg.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
+                cell?.valCheckedImg.tintColor = chainConfig?.chainColor
                 cell?.rootCard.backgroundColor = UIColor.clear
                 cell?.rootCard.layer.borderWidth = 1
                 cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
@@ -86,8 +86,7 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
             let cell:RedelegateCell? = tableView.cellForRow(at: indexPath) as? RedelegateCell
             cell?.rootCard.needBorderUpdate = false
             cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-            cell?.valCheckedImg.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
-            
+            cell?.valCheckedImg.tintColor = chainConfig?.chainColor
             cell?.rootCard.backgroundColor = UIColor.clear
             cell?.rootCard.layer.borderWidth = 1
             cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
@@ -101,14 +100,6 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
         cell?.rootCard.backgroundColor = UIColor.init(hexString: "2E2E2E", alpha: 0.4)
         cell?.rootCard.layer.borderWidth = 0
         cell?.rootCard.clipsToBounds = true
-    }
-    
-    override func enableUserInteraction() {
-        self.btnBefore.isUserInteractionEnabled = true
-        self.btnNext.isUserInteractionEnabled = true
-        if (self.checkedPosition != nil) {
-            self.redelegateToValTableView.selectRow(at: checkedPosition, animated: false, scrollPosition: .middle)
-        }
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {
@@ -142,8 +133,6 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
             
             let req = Cosmos_Staking_V1beta1_QueryRedelegationsRequest.with {
                 $0.delegatorAddr = address
-//                $0.srcValidatorAddr = fromValAddress
-//                $0.dstValidatorAddr = toValAddress
             }
             do {
                 let response = try Cosmos_Staking_V1beta1_QueryClient(channel: channel).redelegations(req).response.wait()
@@ -164,4 +153,13 @@ class StepRedelegateToViewController: BaseViewController, UITableViewDelegate, U
             }
         }
     }
+    
+    override func enableUserInteraction() {
+        self.btnBefore.isUserInteractionEnabled = true
+        self.btnNext.isUserInteractionEnabled = true
+        if (self.checkedPosition != nil) {
+            self.redelegateToValTableView.selectRow(at: checkedPosition, animated: false, scrollPosition: .middle)
+        }
+    }
+
 }

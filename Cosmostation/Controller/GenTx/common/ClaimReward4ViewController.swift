@@ -1,17 +1,16 @@
 //
-//  StepRewardCheckViewController.swift
+//  ClaimReward4ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 12/04/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 import GRPC
 import NIO
 
-class StepRewardCheckViewController: BaseViewController, PasswordViewDelegate{
+class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var rewardAmoutLaebl: UILabel!
     @IBOutlet weak var rewardDenomLabel: UILabel!
@@ -33,7 +32,7 @@ class StepRewardCheckViewController: BaseViewController, PasswordViewDelegate{
 
     var pageHolderVC: StepGenTxViewController!
     var mDpDecimal:Int16 = 6
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -42,7 +41,6 @@ class StepRewardCheckViewController: BaseViewController, PasswordViewDelegate{
         WUtils.setDenomTitle(chainType!, rewardDenomLabel)
         WUtils.setDenomTitle(chainType!, feeDenomLabel)
         WUtils.setDenomTitle(chainType!, expectedDenomLabel)
-        
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {
@@ -194,4 +192,5 @@ class StepRewardCheckViewController: BaseViewController, PasswordViewDelegate{
             }
         }
     }
+
 }

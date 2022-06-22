@@ -183,17 +183,23 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     Delegate4ViewController(nibName: "Delegate4ViewController", bundle: nil)]
             
         } else if (mType == COSMOS_MSG_TYPE_UNDELEGATE2 || mType == IRIS_MSG_TYPE_UNDELEGATE) {
-            return [self.newVc(viewController: "StepUndelegateAmountViewController"),
+            return [Undelegate1ViewController(nibName: "Undelegate1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                    self.newVc(viewController: "StepUndelegateCheckViewController")]
+                    Undelegate4ViewController(nibName: "Undelegate4ViewController", bundle: nil)]
             
         } else if (mType == COSMOS_MSG_TYPE_REDELEGATE2 || mType == IRIS_MSG_TYPE_REDELEGATE) {
-            return [self.newVc(viewController: "StepRedelegateAmountViewController"),
-                    self.newVc(viewController: "StepRedelegateToViewController"),
+            return [Redelegate1ViewController(nibName: "Redelegate1ViewController", bundle: nil),
+                    Redelegate2ViewController(nibName: "Redelegate2ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                    self.newVc(viewController: "StepRedelegateCheckViewController")]
+                    Redelegate5ViewController(nibName: "Redelegate5ViewController", bundle: nil)]
+            
+        } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            return [ClaimReward1ViewController(nibName: "ClaimReward1ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
+                    ClaimReward4ViewController(nibName: "ClaimReward4ViewController", bundle: nil)]
             
         } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY || mType == IRIS_MSG_TYPE_WITHDRAW_MIDIFY) {
             return [self.newVc(viewController: "StepChangeAddressViewController"),
@@ -481,18 +487,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         }
         
         else {
-            if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "StepRewardViewController"),
-                        MemoViewController(nibName: "MemoViewController", bundle: nil),
-                        StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "StepRewardCheckViewController")]
-            } else {
-                return [self.newVc(viewController: "StepRewardViewController"),
-                        MemoViewController(nibName: "MemoViewController", bundle: nil),
-                        StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "StepRewardCheckViewController")]
-            }
-            
+            return[]
         }
     }()
     

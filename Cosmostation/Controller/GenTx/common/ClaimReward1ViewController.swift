@@ -1,36 +1,32 @@
 //
-//  StepRewardViewController.swift
+//  ClaimReward1ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 12/04/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
-import Alamofire
 import GRPC
 import NIO
 
-class StepRewardViewController: BaseViewController {
-
-    @IBOutlet weak var loadingImg: LoadingImageView!
+class ClaimReward1ViewController: BaseViewController {
     
+    @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var controlLayer: UIStackView!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
-    
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var rewardAmountLabel: UILabel!
     @IBOutlet weak var rewardDenomLabel: UILabel!
     @IBOutlet weak var rewardFromLabel: UILabel!
-    
     @IBOutlet weak var rewardToAddressTitle: UILabel!
     @IBOutlet weak var rewardToAddressLabel: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
+    var mDpDecimal: Int16 = 6
     var mFetchCnt = 0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
@@ -45,10 +41,9 @@ class StepRewardViewController: BaseViewController {
     }
     
     func onFetchRewardsInfoData()  {
-        if(self.mFetchCnt > 0)  {
+        if (self.mFetchCnt > 0)  {
             return
         }
-        
         mFetchCnt = 2
         self.onFetchRewards_gRPC(pageHolderVC.mAccount!.account_address)
         self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
@@ -93,19 +88,16 @@ class StepRewardViewController: BaseViewController {
         self.loadingImg.isHidden = true
         self.controlLayer.isHidden = false
         self.cardView.isHidden = false
-        
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
         sender.isUserInteractionEnabled = false
         pageHolderVC.onBeforePage()
-        
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
         sender.isUserInteractionEnabled = false
         pageHolderVC.onNextPage()
-        
     }
     
     override func enableUserInteraction() {
@@ -164,5 +156,5 @@ class StepRewardViewController: BaseViewController {
             });
         }
     }
-    
+
 }
