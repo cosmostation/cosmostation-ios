@@ -1,18 +1,18 @@
 //
-//  StepDelegateAmountViewController.swift
+//  Delegate1ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 08/04/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class StepDelegateAmountViewController: BaseViewController, UITextFieldDelegate{
-
+class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var toDelegateAmountInput: AmountInputTextField!
     @IBOutlet weak var availableAmountLabel: UILabel!
-    @IBOutlet weak var denomTitleLabel: UILabel!
+    @IBOutlet weak var availableDenomLabel: UILabel!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var btn01: UIButton!
@@ -20,43 +20,36 @@ class StepDelegateAmountViewController: BaseViewController, UITextFieldDelegate{
     var pageHolderVC: StepGenTxViewController!
     var userBalance = NSDecimalNumber.zero
     var mDpDecimal:Int16 = 6
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
-        mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        WUtils.setDenomTitle(pageHolderVC.chainType!, denomTitleLabel)
-        
         let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
         let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, COSMOS_MSG_TYPE_DELEGATE, 0)
+        
+        mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         userBalance = BaseData.instance.getDelegatable_gRPC(pageHolderVC.chainType).subtracting(feeAmount)
-        availableAmountLabel.attributedText = WUtils.displayAmount2(userBalance.stringValue, availableAmountLabel.font, mDpDecimal, mDpDecimal)
+        WUtils.showCoinDp(mainDenom, userBalance.stringValue, availableDenomLabel, availableAmountLabel, pageHolderVC.chainType!)
+        
         toDelegateAmountInput.delegate = self
         toDelegateAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         let dp = "+ " + WUtils.decimalNumberToLocaleString(NSDecimalNumber(string: "0.1"), 1)
         btn01.setTitle(dp, for: .normal)
-        
     }
-    
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if (textField == toDelegateAmountInput) {
             guard let text = textField.text else { return true }
             if (text.contains(".") && string.contains(".") && range.length == 0) { return false }
-            
             if (text.count == 0 && string.starts(with: ".")) { return false }
-            
             if (text.contains(",") && string.contains(",") && range.length == 0) { return false }
-            
             if (text.count == 0 && string.starts(with: ",")) { return false }
-            
             if let index = text.range(of: ".")?.upperBound {
                 if (text.substring(from: index).count > (mDpDecimal - 1) && range.length == 0) {
                     return false
                 }
             }
-            
             if let index = text.range(of: ",")?.upperBound {
                 if (text.substring(from: index).count > (mDpDecimal - 1) && range.length == 0) {
                     return false
@@ -74,27 +67,24 @@ class StepDelegateAmountViewController: BaseViewController, UITextFieldDelegate{
     
     func onUIupdate() {
         guard let text = toDelegateAmountInput.text?.trimmingCharacters(in: .whitespaces) else {
-            self.toDelegateAmountInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        
         if(text.count == 0) {
-            self.toDelegateAmountInput.layer.borderColor = UIColor.white.cgColor
+            self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
-        
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.toDelegateAmountInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        
         if (userInput.multiplying(byPowerOf10: mDpDecimal).compare(userBalance).rawValue > 0) {
-            self.toDelegateAmountInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        self.toDelegateAmountInput.layer.borderColor = UIColor.white.cgColor
+        self.toDelegateAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     
     func isValiadAmount() -> Bool {
@@ -124,17 +114,11 @@ class StepDelegateAmountViewController: BaseViewController, UITextFieldDelegate{
         }
     }
     
-
-    override func enableUserInteraction() {
-        self.cancelBtn.isUserInteractionEnabled = true
-        self.nextBtn.isUserInteractionEnabled = true
-    }
     
     @IBAction func onClickClear(_ sender: UIButton) {
         toDelegateAmountInput.text = ""
         self.onUIupdate()
     }
-    
     @IBAction func onClickAdd01(_ sender: UIButton) {
         var exist = NSDecimalNumber.zero
         if(toDelegateAmountInput.text!.count > 0) {
@@ -184,6 +168,12 @@ class StepDelegateAmountViewController: BaseViewController, UITextFieldDelegate{
         
     }
     
+    
+    override func enableUserInteraction() {
+        self.cancelBtn.isUserInteractionEnabled = true
+        self.nextBtn.isUserInteractionEnabled = true
+    }
+    
     func showMaxWarnning() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("max_spend_title", comment: ""), message: NSLocalizedString("max_spend_msg", comment: ""), preferredStyle: .alert)
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
@@ -209,4 +199,5 @@ class StepDelegateAmountViewController: BaseViewController, UITextFieldDelegate{
         }
         
     }
+
 }

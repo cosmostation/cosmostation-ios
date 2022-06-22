@@ -1,9 +1,9 @@
 //
-//  StepDelegateCheckViewController.swift
+//  Delegate4ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 08/04/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import Alamofire
 import GRPC
 import NIO
 
-class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate, SBCardPopupDelegate {
+class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardPopupDelegate {
     
     @IBOutlet weak var toDelegateAmountLabel: UILabel!
     @IBOutlet weak var toDelegateAmountDenom: UILabel!
@@ -23,14 +23,14 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
     @IBOutlet weak var confirmBtn: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
-
+    
     @IBAction func onClickConfirm(_ sender: Any) {
         let popupVC = DelegateWarnPopup(nibName: "DelegateWarnPopup", bundle: nil)
         popupVC.warnImgType = BaseData.instance.mParam?.getUnbondingTime()
@@ -124,4 +124,5 @@ class StepDelegateCheckViewController: BaseViewController, PasswordViewDelegate,
             }
         }
     }
+
 }

@@ -163,24 +163,24 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == COSMOS_MSG_TYPE_TRANSFER2) {
             if (WUtils.isGRPC(chainType!)) {
-                return [self.newVc(viewController: "StepSendAddressViewController"),
-                        self.newVc(viewController: "StepSendAmountViewController"),
+                return [Transfer1ViewController(nibName: "Transfer1ViewController", bundle: nil),
+                        Transfer2ViewController(nibName: "Transfer2ViewController", bundle: nil),
                         MemoViewController(nibName: "MemoViewController", bundle: nil),
                         StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                        self.newVc(viewController: "StepSendCheckViewController")]
+                        Transfer5ViewController(nibName: "Transfer5ViewController", bundle: nil)]
             } else {
-                return [self.newVc(viewController: "StepSendAddressViewController"),
-                        self.newVc(viewController: "StepSendAmountViewController"),
+                return [Transfer1ViewController(nibName: "Transfer1ViewController", bundle: nil),
+                        Transfer2ViewController(nibName: "Transfer2ViewController", bundle: nil),
                         MemoViewController(nibName: "MemoViewController", bundle: nil),
                         StepFeeOldViewController(nibName: "StepFeeOldViewController", bundle: nil),
-                        self.newVc(viewController: "StepSendCheckViewController")]
+                        Transfer5ViewController(nibName: "Transfer5ViewController", bundle: nil)]
             }
             
         } else if (mType == COSMOS_MSG_TYPE_DELEGATE || mType == IRIS_MSG_TYPE_DELEGATE) {
-            return [self.newVc(viewController: "StepDelegateAmountViewController"),
+            return [Delegate1ViewController(nibName: "Delegate1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     StepFeeGrpcViewController(nibName: "StepFeeGrpcViewController", bundle: nil),
-                    self.newVc(viewController: "StepDelegateCheckViewController")]
+                    Delegate4ViewController(nibName: "Delegate4ViewController", bundle: nil)]
             
         } else if (mType == COSMOS_MSG_TYPE_UNDELEGATE2 || mType == IRIS_MSG_TYPE_UNDELEGATE) {
             return [self.newVc(viewController: "StepUndelegateAmountViewController"),

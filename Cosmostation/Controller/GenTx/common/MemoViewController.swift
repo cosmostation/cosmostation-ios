@@ -24,7 +24,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
         
-        memoInputTextView.tintColor = UIColor.init(hexString: "FFFFFF")
+        memoInputTextView.tintColor = UIColor.init(named: "_font05")
         memoInputTextView.delegate = self
         
         (NSClassFromString("UICalloutBarButton")! as! UIButton.Type).appearance().backgroundColor = UIColor.white

@@ -45,10 +45,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HYQ-dD-7gi">
-                    <rect key="frame" x="222" y="224.5" width="176" height="35"/>
+                    <rect key="frame" x="160" y="224.5" width="238" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1m-Dt-Xhf">
-                            <rect key="frame" x="0.0" y="0.0" width="84" height="35"/>
+                            <rect key="frame" x="0.0" y="0.0" width="115" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="mYS-KE-eS9"/>
                             </constraints>
@@ -72,7 +72,7 @@
                             </connections>
                         </button>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaC-Cb-wIG">
-                            <rect key="frame" x="88" y="0.0" width="0.0" height="35"/>
+                            <rect key="frame" x="119" y="0.0" width="0.0" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="oVY-4y-z0S"/>
                             </constraints>
@@ -93,7 +93,7 @@
                             </userDefinedRuntimeAttributes>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hns-fz-o44">
-                            <rect key="frame" x="92" y="0.0" width="84" height="35"/>
+                            <rect key="frame" x="123" y="0.0" width="115" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="35" id="GAe-4F-Oqn"/>
                             </constraints>
@@ -119,7 +119,7 @@
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ZrK-EO-cs3">
-                    <rect key="frame" x="21" y="752" width="372.5" height="28"/>
+                    <rect key="frame" x="21" y="738.5" width="372" height="41.5"/>
                     <string key="text">Please check your memo.
 Some exchanges or wallets may require a specific memo for deposits.</string>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
@@ -127,7 +127,7 @@ Some exchanges or wallets may require a specific memo for deposits.</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warning_ic" translatesAutoresizingMaskIntoConstraints="NO" id="lU2-Ap-SLQ">
-                    <rect key="frame" x="190" y="714" width="34" height="34"/>
+                    <rect key="frame" x="190" y="700.5" width="34" height="34"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="34" id="Yd8-7C-kTT"/>
                         <constraint firstAttribute="height" constant="34" id="bxD-zU-nN7"/>
@@ -190,7 +190,9 @@ Some exchanges or wallets may require a specific memo for deposits.</string>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="HYQ-dD-7gi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="160" id="EAf-y9-GLM"/>
                 <constraint firstItem="6Bc-Gj-lX5" firstAttribute="top" secondItem="ZrK-EO-cs3" secondAttribute="bottom" constant="16" id="ER1-yX-4EO"/>
+                <constraint firstItem="ZrK-EO-cs3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="21" id="JLE-Zf-Tlv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Dbf-JG-lTA" secondAttribute="trailing" constant="16" id="JOT-kd-XtZ"/>
                 <constraint firstItem="l7R-RN-bjg" firstAttribute="trailing" secondItem="Dbf-JG-lTA" secondAttribute="trailing" id="KH4-1V-NvC"/>
                 <constraint firstItem="ZrK-EO-cs3" firstAttribute="top" secondItem="lU2-Ap-SLQ" secondAttribute="bottom" constant="4" id="Mhk-IA-K0b"/>
@@ -200,6 +202,7 @@ Some exchanges or wallets may require a specific memo for deposits.</string>
                 <constraint firstItem="HYQ-dD-7gi" firstAttribute="top" secondItem="l7R-RN-bjg" secondAttribute="bottom" constant="16" id="cRv-hw-XqT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6Bc-Gj-lX5" secondAttribute="trailing" constant="16" id="dFJ-BV-5qY"/>
                 <constraint firstItem="HYQ-dD-7gi" firstAttribute="trailing" secondItem="l7R-RN-bjg" secondAttribute="trailing" id="k4G-m3-oq1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZrK-EO-cs3" secondAttribute="trailing" constant="21" id="maD-wW-9EQ"/>
                 <constraint firstItem="Dbf-JG-lTA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="pjX-sv-Yei"/>
                 <constraint firstItem="ZrK-EO-cs3" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="s7d-XZ-ETw"/>
                 <constraint firstItem="l7R-RN-bjg" firstAttribute="top" secondItem="Dbf-JG-lTA" secondAttribute="bottom" constant="4" id="vFP-FO-ldQ"/>
