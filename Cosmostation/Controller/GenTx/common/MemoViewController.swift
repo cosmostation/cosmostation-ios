@@ -1,16 +1,15 @@
 //
-//  StepDelegateMemoViewController.swift
+//  MemoViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo on 08/04/2019.
-//  Copyright © 2019 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 
-
-class StepMemoViewController: BaseViewController, UITextViewDelegate, QrScannerDelegate, SBCardPopupDelegate {
-
+class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDelegate, SBCardPopupDelegate {
+    
     @IBOutlet weak var memoInputTextView: MemoTextView!
     @IBOutlet weak var memoCntLabel: UILabel!
     @IBOutlet weak var beforeBtn: UIButton!
@@ -20,7 +19,7 @@ class StepMemoViewController: BaseViewController, UITextViewDelegate, QrScannerD
     @IBOutlet weak var emptyMemoMsg: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
@@ -48,7 +47,7 @@ class StepMemoViewController: BaseViewController, UITextViewDelegate, QrScannerD
             self.emptyMemoMsg.isHidden = true
         }
     }
-
+    
     @IBAction func onClickBack(_ sender: Any) {
         self.beforeBtn.isUserInteractionEnabled = false
         self.nextBtn.isUserInteractionEnabled = false
@@ -177,4 +176,5 @@ class StepMemoViewController: BaseViewController, UITextViewDelegate, QrScannerD
         }
         
     }
+
 }
