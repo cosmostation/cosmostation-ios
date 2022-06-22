@@ -88,17 +88,17 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep5_1")
             self.titleLabel.text =  NSLocalizedString("title_send", comment: "")
             
-        } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+        } else if (mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
             stepDescription.text = NSLocalizedString("withdraw_single_step_1", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_reward", comment: "")
             
-        } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+        } else if (mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
             stepDescription.text = NSLocalizedString("reward_address_step_1", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_reword_address_change", comment: "")
             
-        } else if (mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+        } else if (mType == TASK_TYPE_REINVEST) {
             stepDescription.text = NSLocalizedString("reinvest_step_1", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_reinvest", comment: "")
@@ -414,15 +414,15 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep5_1")
                     stepDescription.text = NSLocalizedString("send_step_1", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+                } else if (mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     stepDescription.text = NSLocalizedString("withdraw_single_step_1", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+                } else if (mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     stepDescription.text = NSLocalizedString("reward_address_step_1", comment: "")
                     
-                } else if (mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+                } else if (mType == TASK_TYPE_REINVEST) {
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     stepDescription.text = NSLocalizedString("reinvest_step_1", comment: "")
                     
@@ -614,15 +614,15 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep5_2")
                     stepDescription.text = NSLocalizedString("send_step_2", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+                } else if (mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     stepDescription.text = NSLocalizedString("delegate_step_2", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+                } else if (mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     stepDescription.text = NSLocalizedString("delegate_step_2", comment: "")
                     
-                } else if (mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+                } else if (mType == TASK_TYPE_REINVEST) {
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     stepDescription.text = NSLocalizedString("delegate_step_2", comment: "")
                     
@@ -814,15 +814,15 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep5_3")
                     stepDescription.text = NSLocalizedString("send_step_3", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+                } else if (mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     stepDescription.text = NSLocalizedString("delegate_step_3", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+                } else if (mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     stepDescription.text = NSLocalizedString("delegate_step_3", comment: "")
                     
-                } else if (mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+                } else if (mType == TASK_TYPE_REINVEST) {
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     stepDescription.text = NSLocalizedString("delegate_step_3", comment: "")
                     
@@ -1014,15 +1014,15 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep5_4")
                     stepDescription.text = NSLocalizedString("send_step_4", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+                } else if (mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     stepDescription.text = NSLocalizedString("withdraw_single_step_4", comment: "")
                     
-                } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+                } else if (mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     stepDescription.text = NSLocalizedString("reward_address_step_4", comment: "")
                     
-                } else if (mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+                } else if (mType == TASK_TYPE_REINVEST) {
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     stepDescription.text = NSLocalizedString("reinvest_step_4", comment: "")
                     

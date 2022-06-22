@@ -126,7 +126,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 return onBindUnknown(tableView, indexPath.row)
             }
             if (msg.type.contains("Send") || msg.type.contains("MsgSend") || msg.type.contains("MsgMultiSend") ||
-                msg.type == OK_MSG_TYPE_TRANSFER || msg.type == OK_MSG_TYPE_MULTI_TRANSFER || msg.type == CERTIK_MSG_TYPE_TRANSFER) {
+                msg.type == OK_MSG_TYPE_TRANSFER || msg.type == OK_MSG_TYPE_MULTI_TRANSFER) {
                 if ((msg.value.inputs != nil && (msg.value.inputs!.count) > 1) ||  (msg.value.outputs != nil && (msg.value.outputs!.count) > 1)) {
                     //No case yet!
                     return onBindMultiTransfer(tableView, indexPath.row)

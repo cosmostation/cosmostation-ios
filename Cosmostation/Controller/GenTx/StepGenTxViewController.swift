@@ -195,19 +195,19 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     Redelegate5ViewController(nibName: "Redelegate5ViewController", bundle: nil)]
             
-        } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+        } else if (mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
             return [ClaimReward1ViewController(nibName: "ClaimReward1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     ClaimReward4ViewController(nibName: "ClaimReward4ViewController", bundle: nil)]
             
-        } else if (mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+        } else if (mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
             return [RewardAddress1ViewController(nibName: "RewardAddress1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     RewardAddress4ViewController(nibName: "RewardAddress4ViewController", bundle: nil)]
             
-        } else if (mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+        } else if (mType == TASK_TYPE_REINVEST) {
             return [ReInvest1ViewController(nibName: "ReInvest1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),

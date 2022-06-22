@@ -519,7 +519,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_WITHDRAW_DEL, 1)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_CLAIM_STAKE_REWARD, 1)
         if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -529,7 +529,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         var validators = Array<Cosmos_Staking_V1beta1_Validator>()
         validators.append(mValidator_gRPC!)
         txVC.mRewardTargetValidators_gRPC = validators
-        txVC.mType = COSMOS_MSG_TYPE_WITHDRAW_DEL
+        txVC.mType = TASK_TYPE_CLAIM_STAKE_REWARD
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
@@ -546,7 +546,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MULTI_MSG_TYPE_REINVEST, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_REINVEST, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -558,7 +558,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     func onStartReInvest() {
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mTargetValidator_gRPC = self.mValidator_gRPC
-        txVC.mType = COSMOS_MULTI_MSG_TYPE_REINVEST
+        txVC.mType = TASK_TYPE_REINVEST
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }

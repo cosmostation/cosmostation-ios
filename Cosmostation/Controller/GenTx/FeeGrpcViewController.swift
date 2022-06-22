@@ -249,19 +249,19 @@ class FeeGrpcViewController: BaseViewController {
                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                       privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+        } else if (pageHolderVC.mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
             return Signer.genSimulateClaimRewardsTxgRPC(auth,
                                                         self.pageHolderVC.mRewardTargetValidators_gRPC,
                                                         self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                         privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+        } else if (pageHolderVC.mType == TASK_TYPE_REINVEST) {
             return Signer.genSimulateReInvestTxgRPC(auth,
                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mReinvestReward!,
                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                     privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+        } else if (pageHolderVC.mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
             return Signer.genSimulateetRewardAddressTxgRPC(auth,
                                                            self.pageHolderVC.mToChangeRewardAddress!,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,

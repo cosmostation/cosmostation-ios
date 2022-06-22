@@ -210,7 +210,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
             BaseData.instance.setRecentAccountId(self.selectedAccount.account_id)
             let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-            txVC.mType = COSMOS_MSG_TYPE_WITHDRAW_MIDIFY
+            txVC.mType = TASK_TYPE_MODIFY_REWARD_ADDRESS
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(txVC, animated: true)
         }))

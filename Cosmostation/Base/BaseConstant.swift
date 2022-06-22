@@ -337,19 +337,14 @@ let COSMOS_AUTH_TYPE_CERTIK_MANUAL          = "auth/ManualVestingAccount";
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";
 
 let TASK_TYPE_TRANSFER                      = "task_simple_transfer";
-let TASK_TYPE_DELEGATE                      = "task_simple_delegate";
-let TASK_TYPE_UNDELEGATE                    = "task_simple_undelegate";
-let TASK_TYPE_REDELEGATE                    = "task_simple_redelegate";
-let COSMOS_MSG_TYPE_WITHDRAW_DEL            = "cosmos-sdk/MsgWithdrawDelegationReward";
-let COSMOS_MSG_TYPE_WITHDRAW_VAL            = "cosmos-sdk/MsgWithdrawValidatorCommission";
-let COSMOS_MSG_TYPE_WITHDRAW_MIDIFY         = "cosmos-sdk/MsgModifyWithdrawAddress";
-let COSMOS_MULTI_MSG_TYPE_REINVEST          = "cosmos-multi-ReInvest";
-
-let COSMOS_MSG_TYPE_VOTE                    = "cosmos-sdk/MsgVote";
-let COSMOS_MSG_TYPE_SUBMIT_PROPOSAL         = "cosmos-sdk/MsgSubmitProposal";
-let COSMOS_MSG_TYPE_DEPOSIT                 = "cosmos-sdk/MsgDeposit";
-let COSMOS_MSG_TYPE_CREATE_VALIDATOR        = "cosmos-sdk/MsgCreateValidator";
-let COSMOS_MSG_TYPE_EDIT_VALIDATOR          = "cosmos-sdk/MsgEditValidator";
+let TASK_TYPE_DELEGATE                      = "task_delegate";
+let TASK_TYPE_UNDELEGATE                    = "task_undelegate";
+let TASK_TYPE_REDELEGATE                    = "task_redelegate";
+let TASK_TYPE_CLAIM_STAKE_REWARD            = "task_claim_stake_reward";
+let TASK_TYPE_CLAIM_COMMISSION              = "task_claim_commission";
+let TASK_TYPE_MODIFY_REWARD_ADDRESS         = "task_modify_reward_address";
+let TASK_TYPE_REINVEST                      = "task_reinvest";
+let TASK_TYPE_VOTE                          = "task_vote";
 
 let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
 let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";
@@ -359,7 +354,7 @@ let BNB_MSG_TYPE_HTLC                       = "tokens/HTLTMsg";
 let BNB_MSG_TYPE_HTLC_CLIAM                 = "tokens/ClaimHTLTMsg";
 let BNB_MSG_TYPE_HTLC_REFUND                = "tokens/RefundHTLTMsg";
 
-let TASK_TYPE_VOTE                          = "vote_task";
+
 let TASK_TYPE_HTLC_SWAP                     = "htlc_swap";
 let TASK_TYPE_HTLC_REFUND                   = "htlc_refund";
 
@@ -393,8 +388,6 @@ let KAVA_MSG_TYPE_SWAP_TOKEN2               = "/kava.swap.v1beta1.MsgSwapForExac
 let KAVA_MSG_TYPE_SWAP_DEPOSIT              = "/kava.swap.v1beta1.MsgDeposit";
 let KAVA_MSG_TYPE_SWAP_WITHDRAW             = "/kava.swap.v1beta1.MsgWithdraw";
 
-
-let CERTIK_MSG_TYPE_TRANSFER                = "bank/MsgSend";
 
 let OK_MSG_TYPE_TRANSFER                    = "okexchain/token/MsgTransfer";
 let OK_MSG_TYPE_MULTI_TRANSFER              = "okexchain/token/MsgMultiTransfer";
