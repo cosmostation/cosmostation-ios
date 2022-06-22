@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pcX-hu-nWX">
-                    <rect key="frame" x="16" y="796" width="382" height="50"/>
+                    <rect key="frame" x="16" y="830" width="382" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f97-Q3-xCp">
                             <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
@@ -83,7 +81,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5U-bN-teW" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="44" width="390" height="120"/>
+                    <rect key="frame" x="12" y="0.0" width="390" height="120"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input Coin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIN-wF-T44">
                             <rect key="frame" x="16" y="10" width="54" height="13.5"/>
@@ -206,7 +204,7 @@
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="done" smartInsertDeleteType="no"/>
                         </textField>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="Muf-KZ-Eod">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Muf-KZ-Eod">
                             <rect key="frame" x="12" y="31.5" width="32" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="CyK-vm-l5g"/>
@@ -225,7 +223,7 @@
                                 <constraint firstAttribute="height" constant="32" id="Fxv-AN-wvd"/>
                                 <constraint firstAttribute="width" constant="32" id="gih-90-1ff"/>
                             </constraints>
-                            <state key="normal" image="close_btn"/>
+                            <state key="normal" image="btnIconClose"/>
                             <connections>
                                 <action selector="onClickClear:" destination="-1" eventType="touchUpInside" id="goP-kX-t0n"/>
                             </connections>
@@ -272,7 +270,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBp-Ut-j7J" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="180" width="390" height="95"/>
+                    <rect key="frame" x="12" y="136" width="390" height="95"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Output Coin (Minimum Guarantee)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ucr-Di-4yE">
                             <rect key="frame" x="16" y="10" width="180.5" height="13.5"/>
@@ -286,7 +284,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="U8i-e4-ect">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="U8i-e4-ect">
                             <rect key="frame" x="12" y="35.5" width="32" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="32" id="Cju-ia-7Mx"/>
@@ -354,7 +352,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sre-lf-AbH" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="177" y="423" width="60" height="60"/>
+                    <rect key="frame" x="177" y="418" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="MJQ-dB-9NB"/>
                         <constraint firstAttribute="width" constant="60" id="vAs-Tc-89U"/>
@@ -380,7 +378,7 @@
         </view>
     </objects>
     <resources>
-        <image name="close_btn" width="24" height="24"/>
-        <image name="tokenIc" width="22" height="22"/>
+        <image name="btnIconClose" width="128" height="128"/>
+        <image name="tokenDefault" width="128" height="128"/>
     </resources>
 </document>

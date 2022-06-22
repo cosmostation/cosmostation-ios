@@ -1,20 +1,19 @@
 //
-//  StepDepositCdpCheckViewController.swift
+//  CdpDrawDebt4ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/03/31.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import GRPC
 import NIO
 
-
-class StepDepositCdpCheckViewController: BaseViewController, PasswordViewDelegate {
-
-    @IBOutlet weak var cAmountLabel: UILabel!
-    @IBOutlet weak var cDenomLabel: UILabel!
+class CdpDrawDebt4ViewController: BaseViewController, PasswordViewDelegate {
+    
+    @IBOutlet weak var pAmountLabel: UILabel!
+    @IBOutlet weak var pDenomLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
     @IBOutlet weak var beforeRiskRate: UILabel!
     @IBOutlet weak var afterRiskRate: UILabel!
@@ -30,7 +29,7 @@ class StepDepositCdpCheckViewController: BaseViewController, PasswordViewDelegat
     @IBOutlet weak var btnConfirm: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -63,10 +62,11 @@ class StepDepositCdpCheckViewController: BaseViewController, PasswordViewDelegat
         WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, nil, feeAmountLabel, chainType!)
         
         let cDenom = pageHolderVC.mCDenom!
-        let cAmount = NSDecimalNumber.init(string: pageHolderVC.mCollateral.amount)
+        let pDenom = pageHolderVC.mPDenom!
+        let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPrincipal.amount)
         
-        WUtils.showCoinDp(cDenom, cAmount.stringValue, cDenomLabel, cAmountLabel, chainType!)
-        WUtils.showCoinDp(cDenom, pageHolderVC.totalDepositAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount, chainType!)
+        WUtils.showCoinDp(pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel, chainType!)
+        WUtils.showCoinDp(pDenom, pageHolderVC.totalLoanAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount, chainType!)
         
         WUtils.showRiskRate(pageHolderVC.beforeRiskRate!, beforeRiskRate, _rateIamg: nil)
         WUtils.showRiskRate(pageHolderVC.afterRiskRate!, afterRiskRate, _rateIamg: nil)
@@ -75,11 +75,11 @@ class StepDepositCdpCheckViewController: BaseViewController, PasswordViewDelegat
         beforeLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.beforeLiquidationPrice!.stringValue, 4, beforeLiquidationPrice.font)
         
         afterLiquidationPriceTitle.text = String(format: NSLocalizedString("after_liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
-        afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, beforeLiquidationPrice.font)
+        afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
         
         memo.text = pageHolderVC.mMemo
     }
-    
+
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             self.onFetchgRPCAuth(account!)
@@ -109,14 +109,13 @@ class StepDepositCdpCheckViewController: BaseViewController, PasswordViewDelegat
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedKavaCDPDeposit(auth!,
-                                                       self.account!.account_address,
-                                                       self.account!.account_address,
-                                                       self.pageHolderVC.mCollateral,
-                                                       self.pageHolderVC.mCollateralParamType!,
-                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                       self.chainType!)
+            let reqTx = Signer.genSignedKavaCDPDrawDebt(auth!,
+                                                        self.account!.account_address,
+                                                        self.pageHolderVC.mPrincipal,
+                                                        self.pageHolderVC.mCollateralParamType!,
+                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                        self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }
@@ -126,7 +125,7 @@ class StepDepositCdpCheckViewController: BaseViewController, PasswordViewDelegat
             
             do {
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-//                print("response ", response.txResponse.txhash)
+                //                print("response ", response.txResponse.txhash)
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {

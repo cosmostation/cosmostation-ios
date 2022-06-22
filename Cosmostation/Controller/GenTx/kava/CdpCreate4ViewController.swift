@@ -1,30 +1,29 @@
 //
-//  StepWithdrawCdpCheckViewController.swift
+//  CdpCreate4ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/03/31.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import GRPC
 import NIO
 
-
-class StepWithdrawCdpCheckViewController: BaseViewController, PasswordViewDelegate {
-
+class CdpCreate4ViewController: BaseViewController, PasswordViewDelegate, SBCardPopupDelegate {
+    
     @IBOutlet weak var cAmountLabel: UILabel!
     @IBOutlet weak var cDenomLabel: UILabel!
+    @IBOutlet weak var pAmountLabel: UILabel!
+    @IBOutlet weak var pDenomLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
-    @IBOutlet weak var beforeRiskRate: UILabel!
-    @IBOutlet weak var afterRiskRate: UILabel!
-    @IBOutlet weak var adjuestedcAmount: UILabel!
-    @IBOutlet weak var adjuestedcAmountDenom: UILabel!
-    @IBOutlet weak var beforeLiquidationPriceTitle: UILabel!
-    @IBOutlet weak var beforeLiquidationPrice: UILabel!
-    @IBOutlet weak var afterLiquidationPriceTitle: UILabel!
-    @IBOutlet weak var afterLiquidationPrice: UILabel!
-    @IBOutlet weak var memo: UILabel!
+    @IBOutlet weak var feeDenomLabel: UILabel!
+    @IBOutlet weak var riskScoreLabel: UILabel!
+    @IBOutlet weak var currentPriceTitle: UILabel!
+    @IBOutlet weak var currentPrice: UILabel!
+    @IBOutlet weak var liquidationPriceTitle: UILabel!
+    @IBOutlet weak var liquidationPrice: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
     
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
@@ -43,14 +42,12 @@ class StepWithdrawCdpCheckViewController: BaseViewController, PasswordViewDelega
         self.btnConfirm.isUserInteractionEnabled = false
         pageHolderVC.onBeforePage()
     }
-    
+
     @IBAction func onClickConfirm(_ sender: UIButton) {
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
-        passwordVC.resultDelegate = self
-        self.navigationController?.pushViewController(passwordVC, animated: false)
+        let popupVC = CdpWarnPopup(nibName: "CdpWarnPopup", bundle: nil)
+        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+        cardPopup.resultDelegate = self
+        cardPopup.show(onViewController: self)
     }
     
     override func enableUserInteraction() {
@@ -60,24 +57,39 @@ class StepWithdrawCdpCheckViewController: BaseViewController, PasswordViewDelega
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, nil, feeAmountLabel, chainType!)
+        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, feeDenomLabel, feeAmountLabel, chainType!)
         
         let cDenom = pageHolderVC.mCDenom!
+        let pDenom = pageHolderVC.mPDenom!
         let cAmount = NSDecimalNumber.init(string: pageHolderVC.mCollateral.amount)
-        
-        WUtils.showCoinDp(cDenom, cAmount.stringValue, cDenomLabel, cAmountLabel, chainType!)
-        WUtils.showCoinDp(cDenom, pageHolderVC.totalDepositAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount, chainType!)
+        let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPrincipal.amount)
 
-        WUtils.showRiskRate(pageHolderVC.beforeRiskRate!, beforeRiskRate, _rateIamg: nil)
-        WUtils.showRiskRate(pageHolderVC.afterRiskRate!, afterRiskRate, _rateIamg: nil)
+        cDenomLabel.text = cDenom.uppercased()
+        WUtils.showCoinDp(cDenom, cAmount.stringValue, cDenomLabel, cAmountLabel, chainType!)
+
+        pDenomLabel.text = pDenom.uppercased()
+        WUtils.showCoinDp(pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel, chainType!)
+
+        WUtils.showRiskRate(pageHolderVC.riskRate!, riskScoreLabel, _rateIamg: nil)
         
-        beforeLiquidationPriceTitle.text = String(format: NSLocalizedString("before_liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
-        beforeLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.beforeLiquidationPrice!.stringValue, 4, beforeLiquidationPrice.font)
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        currentPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.currentPrice!.stringValue, 4, currentPrice.font)
         
-        afterLiquidationPriceTitle.text = String(format: NSLocalizedString("after_liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
-        afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
+        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        liquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.liquidationPrice!.stringValue, 4, liquidationPrice.font)
         
-        memo.text = pageHolderVC.mMemo
+        memoLabel.text = pageHolderVC.mMemo
+    }
+    
+    func SBCardPopupResponse(type:Int, result: Int) {
+        if (result == 1) {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
+            passwordVC.resultDelegate = self
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
     }
     
     func passwordResponse(result: Int) {
@@ -109,14 +121,14 @@ class StepWithdrawCdpCheckViewController: BaseViewController, PasswordViewDelega
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedKavaCDPWithdraw(auth!,
-                                                        self.account!.account_address,
-                                                        self.account!.account_address,
-                                                        self.pageHolderVC.mCollateral,
-                                                        self.pageHolderVC.mCollateralParamType!,
-                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                        self.chainType!)
+            let reqTx = Signer.genSignedKavaCDPCreate(auth!,
+                                                      self.account!.account_address,
+                                                      self.pageHolderVC.mCollateral,
+                                                      self.pageHolderVC.mPrincipal,
+                                                      self.pageHolderVC.mCollateralParamType!,
+                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                      self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }
@@ -139,4 +151,5 @@ class StepWithdrawCdpCheckViewController: BaseViewController, PasswordViewDelega
             }
         }
     }
+
 }

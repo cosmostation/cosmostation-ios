@@ -1,17 +1,17 @@
 //
-//  StepDrawDebtCdpCheckViewController.swift
+//  CdpDrawRepay4ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/04/01.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import GRPC
 import NIO
 
-class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelegate {
-
+class CdpDrawRepay4ViewController: BaseViewController, PasswordViewDelegate {
+    
     @IBOutlet weak var pAmountLabel: UILabel!
     @IBOutlet weak var pDenomLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
@@ -24,6 +24,8 @@ class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelega
     @IBOutlet weak var afterLiquidationPriceTitle: UILabel!
     @IBOutlet weak var afterLiquidationPrice: UILabel!
     @IBOutlet weak var memo: UILabel!
+    @IBOutlet weak var warnImg: UIImageView!
+    @IBOutlet weak var warnMsg: UILabel!
     
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
@@ -36,7 +38,7 @@ class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelega
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
-    
+
     @IBAction func onClickBack(_ sender: UIButton) {
         self.btnBack.isUserInteractionEnabled = false
         self.btnConfirm.isUserInteractionEnabled = false
@@ -63,7 +65,7 @@ class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelega
         
         let cDenom = pageHolderVC.mCDenom!
         let pDenom = pageHolderVC.mPDenom!
-        let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPrincipal.amount)
+        let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPayment.amount)
         
         WUtils.showCoinDp(pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel, chainType!)
         WUtils.showCoinDp(pDenom, pageHolderVC.totalLoanAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount, chainType!)
@@ -75,11 +77,17 @@ class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelega
         beforeLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.beforeLiquidationPrice!.stringValue, 4, beforeLiquidationPrice.font)
         
         afterLiquidationPriceTitle.text = String(format: NSLocalizedString("after_liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
-        afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
-        
+        if (pageHolderVC.totalLoanAmount! != NSDecimalNumber.zero) {
+            afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
+        } else {
+            afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
+            warnImg.isHidden = false
+            warnMsg.isHidden = false
+            
+        }
         memo.text = pageHolderVC.mMemo
     }
-
+    
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             self.onFetchgRPCAuth(account!)
@@ -109,13 +117,13 @@ class StepDrawDebtCdpCheckViewController: BaseViewController, PasswordViewDelega
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedKavaCDPDrawDebt(auth!,
-                                                        self.account!.account_address,
-                                                        self.pageHolderVC.mPrincipal,
-                                                        self.pageHolderVC.mCollateralParamType!,
-                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                        self.chainType!)
+            let reqTx = Signer.genSignedKavaCDPRepay(auth!,
+                                                     self.account!.account_address,
+                                                     self.pageHolderVC.mPayment,
+                                                     self.pageHolderVC.mCollateralParamType!,
+                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }

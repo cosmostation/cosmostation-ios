@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="sgR-wa-1V3">
-                    <rect key="frame" x="16" y="796" width="382" height="50"/>
+                    <rect key="frame" x="16" y="830" width="382" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IbE-Ds-U1l">
                             <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
@@ -77,7 +75,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lFv-ba-0oW" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="54" width="390" height="125"/>
+                    <rect key="frame" x="12" y="10" width="390" height="125"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="19T-tc-vL1">
                             <rect key="frame" x="80" y="76" width="298" height="32"/>
@@ -200,7 +198,7 @@
                                 <constraint firstAttribute="width" constant="32" id="GcA-Qj-yt1"/>
                                 <constraint firstAttribute="height" constant="32" id="Kv1-xD-czg"/>
                             </constraints>
-                            <state key="normal" image="close_btn"/>
+                            <state key="normal" image="btnIconClose"/>
                             <connections>
                                 <action selector="onClickClear:" destination="-1" eventType="touchUpInside" id="dXw-6u-P9V"/>
                             </connections>
@@ -241,7 +239,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eb0-ll-IGV" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="177" y="423" width="60" height="60"/>
+                    <rect key="frame" x="177" y="418" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="Lam-Fh-oK2"/>
                         <constraint firstAttribute="width" constant="60" id="SEU-Ys-uKG"/>
@@ -264,6 +262,6 @@
         </view>
     </objects>
     <resources>
-        <image name="close_btn" width="24" height="24"/>
+        <image name="btnIconClose" width="128" height="128"/>
     </resources>
 </document>

@@ -192,7 +192,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_CREATE_CDP
+        txVC.mType = TASK_TYPE_KAVA_CDP_CREATE
         txVC.mCollateralParamType = self.mCollateralParamType
         txVC.mCDenom = self.mCDenom
         txVC.mMarketID = self.mCollateralParam.liquidationMarketID
@@ -208,7 +208,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_DEPOSIT_CDP
+        txVC.mType = TASK_TYPE_KAVA_CDP_DEPOSIT
         txVC.mCollateralParamType = self.mCollateralParamType
         txVC.mCDenom = self.mCDenom
         txVC.mMarketID = self.mCollateralParam.liquidationMarketID
@@ -225,7 +225,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_WITHDRAW_CDP
+        txVC.mType = TASK_TYPE_KAVA_CDP_WITHDRAW
         txVC.mCollateralParamType = self.mCollateralParamType
         txVC.mCDenom = self.mCDenom
         txVC.mMarketID = self.mCollateralParam.liquidationMarketID
@@ -245,7 +245,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_DRAWDEBT_CDP
+        txVC.mType = TASK_TYPE_KAVA_CDP_DRAWDEBT
         txVC.mCollateralParamType = self.mCollateralParamType
         txVC.mCDenom = self.mCDenom
         txVC.mMarketID = self.mCollateralParam.liquidationMarketID
@@ -272,7 +272,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_REPAYDEBT_CDP
+        txVC.mType = TASK_TYPE_KAVA_CDP_REPAY
         txVC.mCollateralParamType = self.mCollateralParamType
         txVC.mCDenom = self.mCDenom
         txVC.mMarketID = self.mCollateralParam.liquidationMarketID

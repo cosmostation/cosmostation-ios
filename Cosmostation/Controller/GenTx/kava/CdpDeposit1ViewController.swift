@@ -1,9 +1,9 @@
 //
-//  StepDepositCdpAmountViewController.swift
+//  CdpDeposit1ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/03/31.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
@@ -11,7 +11,7 @@ import GRPC
 import NIO
 import Alamofire
 
-class StepDepositCdpAmountViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate{
+class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate {
     
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!

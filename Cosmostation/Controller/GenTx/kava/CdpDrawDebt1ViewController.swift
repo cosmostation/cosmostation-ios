@@ -1,9 +1,9 @@
 //
-//  StepWithdrawCdpAmountViewController.swift
+//  CdpDrawDebt1ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/03/31.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
@@ -11,17 +11,19 @@ import GRPC
 import NIO
 import Alamofire
 
-class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate{
+class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate{
     
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
-    @IBOutlet weak var cDenomImg: UIImageView!
-    @IBOutlet weak var cDenomLabel: UILabel!
-    @IBOutlet weak var cAmountInput: AmountInputTextField!
-    @IBOutlet weak var cAvailabeMaxLabel: UILabel!
-    @IBOutlet weak var cAvailableDenom: UILabel!
+    @IBOutlet weak var pDenomImg: UIImageView!
+    @IBOutlet weak var pDenomLabel: UILabel!
+    @IBOutlet weak var pAmountInput: AmountInputTextField!
+    @IBOutlet weak var btnPAmountClear: UIButton!
+    @IBOutlet weak var pAvailabeMinLabel: UILabel!
+    @IBOutlet weak var pAvailabeMaxLabel: UILabel!
+    @IBOutlet weak var pAvailableDenom: UILabel!
 
     @IBOutlet weak var beforeSafeTxt: UILabel!
     @IBOutlet weak var beforeSafeRate: UILabel!
@@ -36,13 +38,6 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
     var pDpDecimal:Int16 = 6
     var mMarketID: String = ""
     
-//    var mCollateralParamType: String?
-//    var mCollateralParam: CollateralParam?
-//    var mCdpParam: CdpParam?
-//    var myCdp: MyCdp?
-//    var mSelfDepositAmount: NSDecimalNumber = NSDecimalNumber.zero
-//    var mPrice: KavaPriceFeedPrice?
-    
     var mCollateralParamType: String!
     var mCollateralParam: Kava_Cdp_V1beta1_CollateralParam!
     var mKavaCdpParams_gRPC: Kava_Cdp_V1beta1_Params!
@@ -50,17 +45,17 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
     var mKavaMyCdp_gRPC: Kava_Cdp_V1beta1_CDPResponse?
     var mSelfDepositAmount: NSDecimalNumber = NSDecimalNumber.zero
     
-    
     var currentPrice: NSDecimalNumber = NSDecimalNumber.zero
     var beforeLiquidationPrice: NSDecimalNumber = NSDecimalNumber.zero
     var afterLiquidationPrice: NSDecimalNumber = NSDecimalNumber.zero
     var beforeRiskRate: NSDecimalNumber = NSDecimalNumber.zero
     var afterRiskRate: NSDecimalNumber = NSDecimalNumber.zero
     
-    var cMaxWithdrawableAmount: NSDecimalNumber = NSDecimalNumber.zero
-    var toCAmount: NSDecimalNumber = NSDecimalNumber.zero
-    var sumCAmount: NSDecimalNumber = NSDecimalNumber.zero
-
+    var pMaxAmount: NSDecimalNumber = NSDecimalNumber.zero
+    var pMinAmount: NSDecimalNumber = NSDecimalNumber.zero
+    var toPAmount: NSDecimalNumber = NSDecimalNumber.zero
+    var sumPAmount: NSDecimalNumber = NSDecimalNumber.zero
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -75,14 +70,14 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
         self.loadingImg.onStartAnimation()
         self.onFetchCdpData()
         
-        cAmountInput.delegate = self
+        pAmountInput.delegate = self
     }
     
     override func enableUserInteraction() {
         self.btnCancel.isUserInteractionEnabled = true
         self.btnNext.isUserInteractionEnabled = true
     }
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         if (text.contains(".") && string.contains(".") && range.length == 0) { return false }
@@ -90,16 +85,15 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
         if (text.contains(",") && string.contains(",") && range.length == 0) { return false }
         if (text.count == 0 && string.starts(with: ",")) { return false }
         if let index = text.range(of: ".")?.upperBound {
-            if(text.substring(from: index).count > (cDpDecimal - 1) && range.length == 0) { return false }
+            if(text.substring(from: index).count > (pDpDecimal - 1) && range.length == 0) { return false }
         }
         if let index = text.range(of: ",")?.upperBound {
-            if(text.substring(from: index).count > (cDpDecimal - 1) && range.length == 0) { return false }
+            if(text.substring(from: index).count > (pDpDecimal - 1) && range.length == 0) { return false }
         }
         return true
     }
     
-    @IBAction func AmountChanged(_ sender: AmountInputTextField) {
-        onUpdateNextBtn()
+    @IBAction func AmountChangedP(_ sender: AmountInputTextField) {
         guard let text = sender.text?.trimmingCharacters(in: .whitespaces) else {
             sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
             return
@@ -113,51 +107,69 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
             sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
             return
         }
-        if (userInput.multiplying(byPowerOf10: cDpDecimal).compare(cMaxWithdrawableAmount).rawValue > 0) {
+        if (userInput.multiplying(byPowerOf10: pDpDecimal).compare(pMaxAmount).rawValue > 0) {
+            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            return
+        }
+        if (userInput.multiplying(byPowerOf10: pDpDecimal).compare(pMinAmount).rawValue < 0) {
             sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
             return
         }
         sender.layer.borderColor = UIColor.white.cgColor
-    }
-    
-    @IBAction func onClickCAmountClear(_ sender: UIButton) {
-        cAmountInput.text = ""
         onUpdateNextBtn()
     }
     
-    @IBAction func onClickCMin(_ sender: UIButton) {
-        var exist = NSDecimalNumber.zero
-        if (cAmountInput.text!.count > 0) {
-            exist = NSDecimalNumber(string: cAmountInput.text!, locale: Locale.current)
+    @IBAction func onClickPAmountClear(_ sender: UIButton) {
+        pAmountInput.text = ""
+        onUpdateNextBtn()
+    }
+    
+    @IBAction func onClickPMin(_ sender: UIButton) {
+        let calValue = pMinAmount.multiplying(byPowerOf10: -pDpDecimal, withBehavior: WUtils.getDivideHandler(pDpDecimal))
+        pAmountInput.text = WUtils.decimalNumberToLocaleString(calValue, pDpDecimal)
+        AmountChangedP(pAmountInput)
+    }
+    
+    @IBAction func onClickP1_4(_ sender: UIButton) {
+        var calValue = pMaxAmount.multiplying(by: NSDecimalNumber.init(string: "0.25"))
+        if (calValue.compare(pMinAmount).rawValue < 0) {
+            calValue = pMinAmount
+            self.onShowToast(NSLocalizedString("error_less_than_min_principal", comment: ""))
         }
-        let added = exist.adding(NSDecimalNumber(string: "1"))
-        cAmountInput.text = WUtils.decimalNumberToLocaleString(added, cDpDecimal)
-        self.AmountChanged(cAmountInput)
+        calValue = calValue.multiplying(byPowerOf10: -pDpDecimal, withBehavior: WUtils.getDivideHandler(pDpDecimal))
+        pAmountInput.text = WUtils.decimalNumberToLocaleString(calValue, pDpDecimal)
+        AmountChangedP(pAmountInput)
     }
     
-    @IBAction func onClickC1_4(_ sender: UIButton) {
-        let calValue = cMaxWithdrawableAmount.multiplying(by: NSDecimalNumber.init(string: "0.25")).multiplying(byPowerOf10: -cDpDecimal, withBehavior: WUtils.getDivideHandler(cDpDecimal))
-        cAmountInput.text = WUtils.decimalNumberToLocaleString(calValue, cDpDecimal)
-        self.AmountChanged(cAmountInput)
+    @IBAction func onClickPHalf(_ sender: UIButton) {
+        var calValue = pMaxAmount.multiplying(by: NSDecimalNumber.init(string: "0.5"))
+        if (calValue.compare(pMinAmount).rawValue < 0) {
+            calValue = pMinAmount
+            self.onShowToast(NSLocalizedString("error_less_than_min_principal", comment: ""))
+        }
+        calValue = calValue.multiplying(byPowerOf10: -pDpDecimal, withBehavior: WUtils.getDivideHandler(pDpDecimal))
+        pAmountInput.text = WUtils.decimalNumberToLocaleString(calValue, pDpDecimal)
+        AmountChangedP(pAmountInput)
     }
     
-    @IBAction func onClickCHalf(_ sender: UIButton) {
-        let calValue = cMaxWithdrawableAmount.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -cDpDecimal, withBehavior: WUtils.getDivideHandler(cDpDecimal))
-        cAmountInput.text = WUtils.decimalNumberToLocaleString(calValue, cDpDecimal)
-        self.AmountChanged(cAmountInput)
+    @IBAction func onClickPAdd3_4(_ sender: UIButton) {
+        var calValue = pMaxAmount.multiplying(by: NSDecimalNumber.init(string: "0.75"))
+        if (calValue.compare(pMinAmount).rawValue < 0) {
+            calValue = pMinAmount
+            self.onShowToast(NSLocalizedString("error_less_than_min_principal", comment: ""))
+        }
+        calValue = calValue.multiplying(byPowerOf10: -pDpDecimal, withBehavior: WUtils.getDivideHandler(pDpDecimal))
+        pAmountInput.text = WUtils.decimalNumberToLocaleString(calValue, pDpDecimal)
+        AmountChangedP(pAmountInput)
     }
     
-    @IBAction func onClickC3_4(_ sender: UIButton) {
-        let calValue = cMaxWithdrawableAmount.multiplying(by: NSDecimalNumber.init(string: "0.75")).multiplying(byPowerOf10: -cDpDecimal, withBehavior: WUtils.getDivideHandler(cDpDecimal))
-        cAmountInput.text = WUtils.decimalNumberToLocaleString(calValue, cDpDecimal)
-        self.AmountChanged(cAmountInput)
+    @IBAction func onClickPMax(_ sender: UIButton) {
+        let maxValue = pMaxAmount.multiplying(byPowerOf10: -pDpDecimal, withBehavior: WUtils.getDivideHandler(pDpDecimal))
+        pAmountInput.text = WUtils.decimalNumberToLocaleString(maxValue, pDpDecimal)
+        AmountChangedP(pAmountInput)
     }
     
-    @IBAction func onClickCMax(_ sender: UIButton) {
-        let maxValue = cMaxWithdrawableAmount.multiplying(byPowerOf10: -cDpDecimal, withBehavior: WUtils.getDivideHandler(cDpDecimal))
-        cAmountInput.text = WUtils.decimalNumberToLocaleString(maxValue, cDpDecimal)
-        self.AmountChanged(cAmountInput)
-    }
+
     
     @IBAction func onClickCancel(_ sender: UIButton) {
         self.btnCancel.isUserInteractionEnabled = false
@@ -166,7 +178,7 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        if (isValiadCAmount()) {
+        if (isValiadPAmount()) {
             view.endEditing(true)
             let popupVC = RiskCheckPopupViewController(nibName: "RiskCheckPopupViewController", bundle: nil)
             popupVC.type = popupVC.RISK_POPUP_CHANGE
@@ -189,8 +201,8 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
     func SBCardPopupResponse(type:Int, result: Int) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
             if(result == 10) {
-                let cCoin = Coin.init(self.mCDenom, self.toCAmount.stringValue)
-                self.pageHolderVC.mCollateral = cCoin
+                let pCoin = Coin.init(self.mPDenom, self.toPAmount.stringValue)
+                self.pageHolderVC.mPrincipal = pCoin
 
                 self.pageHolderVC.currentPrice = self.currentPrice
                 self.pageHolderVC.beforeLiquidationPrice = self.beforeLiquidationPrice
@@ -198,7 +210,7 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
                 self.pageHolderVC.beforeRiskRate = self.beforeRiskRate
                 self.pageHolderVC.afterRiskRate = self.afterRiskRate
                 self.pageHolderVC.mPDenom = self.mPDenom
-                self.pageHolderVC.totalDepositAmount = self.sumCAmount
+                self.pageHolderVC.totalLoanAmount = self.sumPAmount
                 self.pageHolderVC.mKavaCollateralParam = self.mCollateralParam
 
                 self.btnCancel.isUserInteractionEnabled = false
@@ -208,20 +220,20 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
         })
     }
     
-    func isValiadCAmount() -> Bool {
-        let text = cAmountInput.text?.trimmingCharacters(in: .whitespaces)
+    func isValiadPAmount() -> Bool {
+        let text = pAmountInput.text?.trimmingCharacters(in: .whitespaces)
         if (text == nil || text!.count == 0) { return false }
         let userInput = WUtils.localeStringToDecimal(text!)
         if (userInput == NSDecimalNumber.zero) { return false }
-        if (userInput.multiplying(byPowerOf10: cDpDecimal).compare(cMaxWithdrawableAmount).rawValue > 0 ||
-            userInput.multiplying(byPowerOf10: cDpDecimal).compare(NSDecimalNumber.zero).rawValue < 0) {
+        if (userInput.multiplying(byPowerOf10: pDpDecimal).compare(pMaxAmount).rawValue > 0 ||
+            userInput.multiplying(byPowerOf10: pDpDecimal).compare(pMinAmount).rawValue < 0) {
             return false
         }
-        toCAmount = userInput.multiplying(byPowerOf10: cDpDecimal)
-        sumCAmount = mKavaMyCdp_gRPC!.getRawCollateralAmount().subtracting(toCAmount)
-        let collateralAmount = sumCAmount.multiplying(byPowerOf10: -cDpDecimal)
-        let rawDebtAmount = mKavaMyCdp_gRPC!.getEstimatedTotalDebt(mCollateralParam!).multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).multiplying(byPowerOf10: -pDpDecimal)
-
+        
+        toPAmount = userInput.multiplying(byPowerOf10: pDpDecimal)
+        sumPAmount = mKavaMyCdp_gRPC!.getEstimatedTotalDebt(mCollateralParam!).adding(toPAmount)
+        let collateralAmount = mKavaMyCdp_gRPC!.getRawCollateralAmount().multiplying(byPowerOf10: -cDpDecimal)
+        let rawDebtAmount = sumPAmount.multiplying(by: mCollateralParam!.getLiquidationRatioAmount()).multiplying(byPowerOf10: -pDpDecimal)
         afterLiquidationPrice = rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(pDpDecimal))
         afterRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(afterLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
         
@@ -230,9 +242,10 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
 //        print("afterRiskRate ", afterRiskRate)
         return true
     }
-
+    
+    
     func onUpdateNextBtn() {
-        if (!isValiadCAmount()) {
+        if (!isValiadPAmount()) {
             btnNext.backgroundColor = UIColor.clear
             btnNext.setTitle(NSLocalizedString("tx_next", comment: ""), for: .normal)
             btnNext.setTitleColor(COLOR_PHOTON, for: .normal)
@@ -244,14 +257,17 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
             btnNext.layer.borderWidth = 0.0
             if (afterRiskRate.doubleValue <= 50) {
                 btnNext.backgroundColor = COLOR_CDP_SAFE
+//                btnNext.setTitle(afterRiskRate.stringValue + " SAFE", for: .normal)
                 btnNext.setTitle("SAFE", for: .normal)
                 
             } else if (afterRiskRate.doubleValue < 80) {
                 btnNext.backgroundColor = COLOR_CDP_STABLE
+//                btnNext.setTitle(afterRiskRate.stringValue + " STABLE", for: .normal)
                 btnNext.setTitle("STABLE", for: .normal)
                 
             } else {
                 btnNext.backgroundColor = COLOR_CDP_DANGER
+//                btnNext.setTitle(afterRiskRate.stringValue + " DANGER", for: .normal)
                 btnNext.setTitle("DANGER", for: .normal)
             }
             WUtils.showRiskRate2(afterRiskRate, afterSafeRate, afterSafeTxt)
@@ -259,7 +275,6 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
             afterSafeTxt.isHidden = false
         }
     }
-    
     
     var mFetchCnt = 0
     func onFetchCdpData() {
@@ -277,27 +292,37 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
             self.mPDenom = mCollateralParam!.getpDenom()!
             self.cDpDecimal = WUtils.getKavaCoinDecimal(mCDenom)
             self.pDpDecimal = WUtils.getKavaCoinDecimal(mPDenom)
+            self.currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
             
-            currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
+            let currentPAmount = mKavaMyCdp_gRPC!.getRawPrincipalAmount()
+            let debtFloor = mKavaCdpParams_gRPC!.getDebtFloorAmount()
             
+            if (currentPAmount.compare(debtFloor).rawValue > 0) {
+                pMinAmount = NSDecimalNumber.one
+            } else {
+                pMinAmount = debtFloor.subtracting(currentPAmount)
+            }
+
+            //calculate max debtable amount from current state.
+            pMaxAmount = mKavaMyCdp_gRPC!.getMoreLoanableAmount(mCollateralParam!)
+
+            pAvailabeMinLabel.attributedText = WUtils.displayAmount2(pMinAmount.stringValue, pAvailabeMinLabel.font!, pDpDecimal, pDpDecimal)
+            pAvailabeMaxLabel.attributedText = WUtils.displayAmount2(pMaxAmount.stringValue, pAvailabeMaxLabel.font!, pDpDecimal, pDpDecimal)
+
             beforeLiquidationPrice = mKavaMyCdp_gRPC!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
             WUtils.showRiskRate2(beforeRiskRate, beforeSafeRate, beforeSafeTxt)
-            
-            cMaxWithdrawableAmount = mKavaMyCdp_gRPC!.getWithdrawableAmount(mCDenom, mPDenom, mCollateralParam!, currentPrice, mSelfDepositAmount)
-            cAvailabeMaxLabel.attributedText = WUtils.displayAmount2(cMaxWithdrawableAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
             
 //            print("currentPrice ", currentPrice)
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            cDenomLabel.text = WUtils.getKavaTokenName(mCDenom)
-            cAvailableDenom.text = WUtils.getKavaTokenName(mCDenom)
+            pDenomLabel.text = WUtils.getKavaTokenName(mPDenom)
+            pAvailableDenom.text = WUtils.getKavaTokenName(mPDenom)
             
-            self.cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
+            self.pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             self.loadingImg.onStopAnimation()
             self.loadingImg.isHidden = true
-            
         }
     }
     
@@ -327,7 +352,7 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Kava_Cdp_V1beta1_QueryCdpRequest.with { $0.owner = address; $0.collateralType = collateralType }
                 if let response = try? Kava_Cdp_V1beta1_QueryClient(channel: channel).cdp(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    print("onFetchgRPCMyCdp ", response.cdp)
+                    //                    print("onFetchgRPCMyCdp ", response.cdp)
                     self.mKavaMyCdp_gRPC = response.cdp
                 }
                 try channel.close().wait()
@@ -360,4 +385,6 @@ class StepWithdrawCdpAmountViewController: BaseViewController, UITextFieldDelega
             self.onFetchFinished()
         }
     }
+
 }
+

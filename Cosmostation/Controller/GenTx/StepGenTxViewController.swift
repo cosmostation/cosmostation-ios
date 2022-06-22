@@ -222,35 +222,35 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         }
         
         //KAVA
-        else if (mType == KAVA_MSG_TYPE_CREATE_CDP) {
-            return [self.newVc(viewController: "StepCreateCpdAmountViewController"),
+        else if (mType == TASK_TYPE_KAVA_CDP_CREATE) {
+            return [CdpCreate1ViewController(nibName: "CdpCreate1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    self.newVc(viewController: "StepCreateCpdCheckViewController")]
+                    CdpCreate4ViewController(nibName: "CdpCreate4ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_DEPOSIT_CDP) {
-            return [self.newVc(viewController: "StepDepositCdpAmountViewController"),
+        } else if (mType == TASK_TYPE_KAVA_CDP_DEPOSIT) {
+            return [CdpDeposit1ViewController(nibName: "CdpDeposit1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    self.newVc(viewController: "StepDepositCdpCheckViewController")]
+                    CdpDeposit4ViewController(nibName: "CdpDeposit4ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_WITHDRAW_CDP) {
-            return [self.newVc(viewController: "StepWithdrawCdpAmountViewController"),
+        } else if (mType == TASK_TYPE_KAVA_CDP_WITHDRAW) {
+            return [CdpWithdraw1ViewController(nibName: "CdpWithdraw1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    self.newVc(viewController: "StepWithdrawCdpCheckViewController")]
+                    CdpWithdraw4ViewController(nibName: "CdpWithdraw4ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
-            return [self.newVc(viewController: "StepDrawDebtCdpAmountViewController"),
+        } else if (mType == TASK_TYPE_KAVA_CDP_DRAWDEBT) {
+            return [CdpDrawDebt1ViewController(nibName: "CdpDrawDebt1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    self.newVc(viewController: "StepDrawDebtCdpCheckViewController")]
+                    CdpDrawDebt4ViewController(nibName: "CdpDrawDebt4ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
-            return [self.newVc(viewController: "StepRepayCdpAmountViewController"),
+        } else if (mType == TASK_TYPE_KAVA_CDP_REPAY) {
+            return [CdpDrawRepay1ViewController(nibName: "CdpDrawRepay1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    self.newVc(viewController: "StepRepayCdpCheckViewController")]
+                    CdpDrawRepay4ViewController(nibName: "CdpDrawRepay4ViewController", bundle: nil)]
             
         } else if (mType == TASK_TYPE_HTLC_SWAP) {
             return [self.newVc(viewController: "StepHtlcSend0ViewController"),

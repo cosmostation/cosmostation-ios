@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,7 +30,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6oK-gX-BWR">
-                    <rect key="frame" x="16" y="796" width="382" height="50"/>
+                    <rect key="frame" x="16" y="830" width="382" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DnN-Ge-RvP">
                             <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
@@ -85,9 +83,9 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tiW-I5-KnV" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="44" width="390" height="220"/>
+                    <rect key="frame" x="12" y="0.0" width="390" height="220"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="NoB-Ex-Id3">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="NoB-Ex-Id3">
                             <rect key="frame" x="12" y="10" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="Cao-n1-ZFB"/>
@@ -117,7 +115,7 @@
                                 <constraint firstAttribute="width" constant="32" id="6l8-Ht-vP3"/>
                                 <constraint firstAttribute="height" constant="32" id="UYs-Mq-dRI"/>
                             </constraints>
-                            <state key="normal" image="close_btn"/>
+                            <state key="normal" image="btnIconClose"/>
                             <connections>
                                 <action selector="onClick0Clear:" destination="-1" eventType="touchUpInside" id="2Fp-Jr-Xez"/>
                             </connections>
@@ -226,7 +224,7 @@
                                 <constraint firstAttribute="height" constant="28" id="KRk-Xf-Oca"/>
                             </constraints>
                         </stackView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenIc" translatesAutoresizingMaskIntoConstraints="NO" id="hud-4U-M7k">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="hud-4U-M7k">
                             <rect key="frame" x="12" y="124" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="BHi-T9-Txs"/>
@@ -256,7 +254,7 @@
                                 <constraint firstAttribute="height" constant="32" id="WBL-fh-fJK"/>
                                 <constraint firstAttribute="width" constant="32" id="mZZ-fE-iYn"/>
                             </constraints>
-                            <state key="normal" image="close_btn"/>
+                            <state key="normal" image="btnIconClose"/>
                             <connections>
                                 <action selector="onClick1Clear:" destination="-1" eventType="touchUpInside" id="olr-O9-dhS"/>
                             </connections>
@@ -421,7 +419,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Gi-op-e8a" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="177" y="423" width="60" height="60"/>
+                    <rect key="frame" x="177" y="418" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="pb2-0r-J4U"/>
                         <constraint firstAttribute="height" constant="60" id="rvZ-Sw-lmt"/>
@@ -444,7 +442,7 @@
         </view>
     </objects>
     <resources>
-        <image name="close_btn" width="24" height="24"/>
-        <image name="tokenIc" width="22" height="22"/>
+        <image name="btnIconClose" width="128" height="128"/>
+        <image name="tokenDefault" width="128" height="128"/>
     </resources>
 </document>

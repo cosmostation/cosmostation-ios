@@ -551,7 +551,7 @@ class FeeGrpcViewController: BaseViewController {
         }
         
         //for kava
-        else if (pageHolderVC.mType == KAVA_MSG_TYPE_CREATE_CDP) {
+        else if (pageHolderVC.mType == TASK_TYPE_KAVA_CDP_CREATE) {
             return Signer.genSimulateKavaCDPCreate(auth,
                                                    self.account!.account_address,
                                                    self.pageHolderVC.mCollateral,
@@ -561,7 +561,7 @@ class FeeGrpcViewController: BaseViewController {
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                    self.chainType!)
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DEPOSIT_CDP) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_CDP_DEPOSIT) {
             return Signer.genSimulateKavaCDPDeposit(auth,
                                                     self.account!.account_address,
                                                     self.account!.account_address,
@@ -571,7 +571,7 @@ class FeeGrpcViewController: BaseViewController {
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                     self.chainType!)
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_WITHDRAW_CDP) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_CDP_WITHDRAW) {
             return Signer.genSimulateKavaCDPWithdraw(auth,
                                                      self.account!.account_address,
                                                      self.account!.account_address,
@@ -581,7 +581,7 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DRAWDEBT_CDP) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_CDP_DRAWDEBT) {
             return Signer.genSimulateKavaCDPDrawDebt(auth,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mPrincipal,
@@ -590,7 +590,7 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_CDP_REPAY) {
             return Signer.genSimulateKavaCDPRepay(auth,
                                                   self.account!.account_address,
                                                   self.pageHolderVC.mPayment,

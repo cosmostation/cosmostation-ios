@@ -1,16 +1,16 @@
 //
-//  StepCreateCpdAmountViewController.swift
+//  CdpCreate1ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/03/30.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import GRPC
 import NIO
 
-class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate{
+class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardPopupDelegate {
     
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!
@@ -63,7 +63,7 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
     
     var toCAmount: NSDecimalNumber = NSDecimalNumber.zero
     var toPAmount: NSDecimalNumber = NSDecimalNumber.zero
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -518,5 +518,5 @@ class StepCreateCpdAmountViewController: BaseViewController, UITextFieldDelegate
         }
         
     }
-    
+
 }

@@ -358,12 +358,14 @@ let BNB_MSG_TYPE_HTLC_REFUND                = "tokens/RefundHTLTMsg";
 let TASK_TYPE_HTLC_SWAP                     = "htlc_swap";
 let TASK_TYPE_HTLC_REFUND                   = "htlc_refund";
 
-let KAVA_MSG_TYPE_POST_PRICE                = "pricefeed/MsgPostPrice";
-let KAVA_MSG_TYPE_CREATE_CDP                = "/kava.cdp.v1beta1.MsgCreateCDP";
-let KAVA_MSG_TYPE_DEPOSIT_CDP               = "/kava.cdp.v1beta1.MsgDeposit";
-let KAVA_MSG_TYPE_WITHDRAW_CDP              = "/kava.cdp.v1beta1.MsgWithdraw";
-let KAVA_MSG_TYPE_DRAWDEBT_CDP              = "/kava.cdp.v1beta1.MsgDrawDebt";
-let KAVA_MSG_TYPE_REPAYDEBT_CDP             = "/kava.cdp.v1beta1.MsgRepayDebt";
+
+let TASK_TYPE_KAVA_CDP_CREATE               = "task_kava_cdp_create";
+let TASK_TYPE_KAVA_CDP_DEPOSIT              = "task_kava_cdp_deposit";
+let TASK_TYPE_KAVA_CDP_WITHDRAW             = "task_kava_cdp_withdraw";
+let TASK_TYPE_KAVA_CDP_DRAWDEBT             = "task_kava_cdp_drawdebt";
+let TASK_TYPE_KAVA_CDP_REPAY                = "task_kava_cdp_repay";
+
+
 let KAVA_MSG_TYPE_LIQUIDATE_CDP             = "/kava.cdp.v1beta1.MsgLiquidate";
 let KAVA_MSG_TYPE_HTLC_CREATE_SWAP          = "/kava.bep3.v1beta1.MsgCreateAtomicSwap";
 let KAVA_MSG_TYPE_HTLC_CLAIM_SWAP           = "/kava.bep3.v1beta1.MsgClaimAtomicSwap";

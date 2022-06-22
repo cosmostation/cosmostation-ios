@@ -1,19 +1,19 @@
 //
-//  StepRepayCdpCheckViewController.swift
+//  CdpWithdraw4ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/04/01.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/22.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import GRPC
 import NIO
 
-class StepRepayCdpCheckViewController: BaseViewController, PasswordViewDelegate {
-
-    @IBOutlet weak var pAmountLabel: UILabel!
-    @IBOutlet weak var pDenomLabel: UILabel!
+class CdpWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
+    
+    @IBOutlet weak var cAmountLabel: UILabel!
+    @IBOutlet weak var cDenomLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
     @IBOutlet weak var beforeRiskRate: UILabel!
     @IBOutlet weak var afterRiskRate: UILabel!
@@ -24,8 +24,6 @@ class StepRepayCdpCheckViewController: BaseViewController, PasswordViewDelegate 
     @IBOutlet weak var afterLiquidationPriceTitle: UILabel!
     @IBOutlet weak var afterLiquidationPrice: UILabel!
     @IBOutlet weak var memo: UILabel!
-    @IBOutlet weak var warnImg: UIImageView!
-    @IBOutlet weak var warnMsg: UILabel!
     
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
@@ -38,7 +36,7 @@ class StepRepayCdpCheckViewController: BaseViewController, PasswordViewDelegate 
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
-
+    
     @IBAction func onClickBack(_ sender: UIButton) {
         self.btnBack.isUserInteractionEnabled = false
         self.btnConfirm.isUserInteractionEnabled = false
@@ -64,12 +62,11 @@ class StepRepayCdpCheckViewController: BaseViewController, PasswordViewDelegate 
         WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, nil, feeAmountLabel, chainType!)
         
         let cDenom = pageHolderVC.mCDenom!
-        let pDenom = pageHolderVC.mPDenom!
-        let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPayment.amount)
+        let cAmount = NSDecimalNumber.init(string: pageHolderVC.mCollateral.amount)
         
-        WUtils.showCoinDp(pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel, chainType!)
-        WUtils.showCoinDp(pDenom, pageHolderVC.totalLoanAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount, chainType!)
-        
+        WUtils.showCoinDp(cDenom, cAmount.stringValue, cDenomLabel, cAmountLabel, chainType!)
+        WUtils.showCoinDp(cDenom, pageHolderVC.totalDepositAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount, chainType!)
+
         WUtils.showRiskRate(pageHolderVC.beforeRiskRate!, beforeRiskRate, _rateIamg: nil)
         WUtils.showRiskRate(pageHolderVC.afterRiskRate!, afterRiskRate, _rateIamg: nil)
         
@@ -77,14 +74,8 @@ class StepRepayCdpCheckViewController: BaseViewController, PasswordViewDelegate 
         beforeLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.beforeLiquidationPrice!.stringValue, 4, beforeLiquidationPrice.font)
         
         afterLiquidationPriceTitle.text = String(format: NSLocalizedString("after_liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
-        if (pageHolderVC.totalLoanAmount! != NSDecimalNumber.zero) {
-            afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
-        } else {
-            afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
-            warnImg.isHidden = false
-            warnMsg.isHidden = false
-            
-        }
+        afterLiquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.afterLiquidationPrice!.stringValue, 4, afterLiquidationPrice.font)
+        
         memo.text = pageHolderVC.mMemo
     }
     
@@ -117,13 +108,14 @@ class StepRepayCdpCheckViewController: BaseViewController, PasswordViewDelegate 
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedKavaCDPRepay(auth!,
-                                                     self.account!.account_address,
-                                                     self.pageHolderVC.mPayment,
-                                                     self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                     self.chainType!)
+            let reqTx = Signer.genSignedKavaCDPWithdraw(auth!,
+                                                        self.account!.account_address,
+                                                        self.account!.account_address,
+                                                        self.pageHolderVC.mCollateral,
+                                                        self.pageHolderVC.mCollateralParamType!,
+                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                        self.chainType!)
             
             let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
             defer { try! group.syncShutdownGracefully() }
@@ -133,7 +125,7 @@ class StepRepayCdpCheckViewController: BaseViewController, PasswordViewDelegate 
             
             do {
                 let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-                //                print("response ", response.txResponse.txhash)
+//                print("response ", response.txResponse.txhash)
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {
