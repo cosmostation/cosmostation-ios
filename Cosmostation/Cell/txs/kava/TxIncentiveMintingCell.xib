@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vj-uH-PWQ" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="480" height="351"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="incentiveIc" translatesAutoresizingMaskIntoConstraints="NO" id="HgA-RM-wOJ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconIncentive" translatesAutoresizingMaskIntoConstraints="NO" id="HgA-RM-wOJ">
                                 <rect key="frame" x="16" y="16" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="8cK-iS-zdh"/>
@@ -260,7 +260,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="incentiveIc" width="28" height="28"/>
+        <image name="msgIconIncentive" width="28" height="28"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

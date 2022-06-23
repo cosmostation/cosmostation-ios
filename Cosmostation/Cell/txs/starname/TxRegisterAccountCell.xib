@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dch-eO-IOf" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="452" height="332"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="registerAccountic28" translatesAutoresizingMaskIntoConstraints="NO" id="cQP-AJ-Zfc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconStarname" translatesAutoresizingMaskIntoConstraints="NO" id="cQP-AJ-Zfc">
                                 <rect key="frame" x="16" y="16" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="URO-Dk-yWB"/>
@@ -158,7 +158,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="registerAccountic28" width="28" height="28"/>
+        <image name="msgIconStarname" width="28" height="28"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

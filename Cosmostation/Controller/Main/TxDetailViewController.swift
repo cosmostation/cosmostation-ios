@@ -283,10 +283,10 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let cell:TxOkStakeCell? = tableView.dequeueReusableCell(withIdentifier:"TxOkStakeCell") as? TxOkStakeCell
         let msg = mTxInfo?.getMsg(position - 1)
         if (msg?.type == TASK_TYPE_OK_DEPOSIT) {
-            cell?.txIcon.image = UIImage(named: "txDepositCdp")
+            cell?.txIcon.image = UIImage(named: "msgIconCDP")
             cell?.txLabel.text = NSLocalizedString("title_ok_deposit", comment: "")
         } else {
-            cell?.txIcon.image = UIImage(named: "txWithdrawCdp")
+            cell?.txIcon.image = UIImage(named: "msgIconCDP")
             cell?.txLabel.text = NSLocalizedString("title_ok_withdraw", comment: "")
         }
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)

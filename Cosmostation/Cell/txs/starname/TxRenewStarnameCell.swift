@@ -22,7 +22,6 @@ class TxRenewStarnameCell: TxCell {
     
     override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         if let msg = try? Starnamed_X_Starname_V1beta1_MsgRenewAccount.init(serializedData: response.tx.body.messages[position].value) {
-            txIcon.image = UIImage.init(named: "renewaccountic28")
             txTitleLabel.text = "Renew Account"
             txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
             txIcon.tintColor = WUtils.getChainColor(chain)
@@ -32,7 +31,6 @@ class TxRenewStarnameCell: TxCell {
             return
         }
         if let msg = try? Starnamed_X_Starname_V1beta1_MsgRenewDomain.init(serializedData: response.tx.body.messages[position].value) {
-            txIcon.image = UIImage.init(named: "renewdomainic28")
             txTitleLabel.text = "Renew Domain"
             txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
             txIcon.tintColor = WUtils.getChainColor(chain)

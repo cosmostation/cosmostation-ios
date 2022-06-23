@@ -60,7 +60,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxLockTokenCell", bundle: nil), forCellReuseIdentifier: "TxLockTokenCell")
         self.txTableView.register(UINib(nibName: "TxBeginUnlockTokenCell", bundle: nil), forCellReuseIdentifier: "TxBeginUnlockTokenCell")
         self.txTableView.register(UINib(nibName: "TxBeginUnlockAllTokensCell", bundle: nil), forCellReuseIdentifier: "TxBeginUnlockAllTokensCell")
-        self.txTableView.register(UINib(nibName: "TxUnlockPeriodLockCell", bundle: nil), forCellReuseIdentifier: "TxUnlockPeriodLockCell")
         
         //for ibc msg type
         self.txTableView.register(UINib(nibName: "TxIbcSendCell", bundle: nil), forCellReuseIdentifier: "TxIbcSendCell")
@@ -72,7 +71,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxRizonEventHorizonCell", bundle: nil), forCellReuseIdentifier: "TxRizonEventHorizonCell")
         
         //for sif msg type
-        self.txTableView.register(UINib(nibName: "TxSifIncentiveCell", bundle: nil), forCellReuseIdentifier: "TxSifIncentiveCell")
         self.txTableView.register(UINib(nibName: "TxSifAddLpCell", bundle: nil), forCellReuseIdentifier: "TxSifAddLpCell")
         self.txTableView.register(UINib(nibName: "TxSifRemoveLpCell", bundle: nil), forCellReuseIdentifier: "TxSifRemoveLpCell")
         self.txTableView.register(UINib(nibName: "TxSifSwapCell", bundle: nil), forCellReuseIdentifier: "TxSifSwapCell")
@@ -106,9 +104,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxIncentiveHardCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveHardCell")
         self.txTableView.register(UINib(nibName: "TxIncentiveSwapCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveSwapCell")
         self.txTableView.register(UINib(nibName: "TxIncentiveDelegatorCell", bundle: nil), forCellReuseIdentifier: "TxIncentiveDelegatorCell")
-        self.txTableView.register(UINib(nibName: "TxHtlcCreateCell", bundle: nil), forCellReuseIdentifier: "TxHtlcCreateCell")
-        self.txTableView.register(UINib(nibName: "TxHtlcClaimCell", bundle: nil), forCellReuseIdentifier: "TxHtlcClaimCell")
-        self.txTableView.register(UINib(nibName: "TxHtlcRefundCell", bundle: nil), forCellReuseIdentifier: "TxHtlcRefundCell")
         
         //for wasm msg type
         self.txTableView.register(UINib(nibName: "TxStoreContractCell", bundle: nil), forCellReuseIdentifier: "TxStoreContractCell")
@@ -306,14 +301,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxBeginUnlockAllTokensCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
-                
             }
-//            else if (msg.typeURL.contains(Osmosis_Lockup_MsgUnlockPeriodLock.protoMessageName)) {
-//                let cell = tableView.dequeueReusableCell(withIdentifier:"TxUnlockPeriodLockCell") as? TxCell
-//                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-//                return cell!
-//
-//            }
             
             else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgAddLiquidity.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifAddLpCell") as? TxCell
@@ -327,11 +315,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             } else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgSwap.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifSwapCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            } else if (msg.typeURL.contains(Sifnode_Dispensation_V1_MsgCreateUserClaim.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifIncentiveCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
@@ -453,21 +436,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimSwapReward.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveSwapCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            } else if (msg.typeURL.contains(Kava_Bep3_V1beta1_MsgCreateAtomicSwap.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxHtlcCreateCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            } else if (msg.typeURL.contains(Kava_Bep3_V1beta1_MsgClaimAtomicSwap.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxHtlcClaimCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            } else if (msg.typeURL.contains(Kava_Bep3_V1beta1_MsgRefundAtomicSwap.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxHtlcRefundCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
