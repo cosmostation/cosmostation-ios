@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXb-Eo-rWP" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="470" height="227"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgiconNft" translatesAutoresizingMaskIntoConstraints="NO" id="Idw-QH-tLR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconNft" translatesAutoresizingMaskIntoConstraints="NO" id="Idw-QH-tLR">
                                 <rect key="frame" x="16" y="16" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="28" id="YFJ-VD-lzL"/>
@@ -133,7 +133,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="msgiconNft" width="28" height="28"/>
+        <image name="msgIconNft" width="28" height="28"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

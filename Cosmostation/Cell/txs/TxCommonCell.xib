@@ -43,7 +43,7 @@
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Error Message" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLF-as-eG4" customClass="EdgeInsetLabel" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="16" y="32.5" width="319" height="38"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.37935924530029297" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" name="_warnRed"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -53,7 +53,7 @@
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.45098039215686275" green="0.11372549019607843" blue="0.16470588235294117" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" name="_warnRed"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
                                         <real key="value" value="8"/>
@@ -298,7 +298,7 @@
     </objects>
     <designables>
         <designable name="lLF-as-eG4">
-            <size key="intrinsicContentSize" width="76" height="13.5"/>
+            <size key="intrinsicContentSize" width="92" height="21.5"/>
         </designable>
     </designables>
     <resources>
@@ -314,6 +314,9 @@
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_warnRed">
+            <color red="0.95300000905990601" green="0.097999997437000275" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "msgiconProfileLight.pdf",
+      "filename" : "msgiconInstantiatecontractLight.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "msgiconProfileDark.pdf",
+      "filename" : "msgiconInstantiatecontractDark.pdf",
       "idiom" : "universal"
     }
   ],

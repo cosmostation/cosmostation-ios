@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcZ-rU-82Q" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="434" height="293"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgiconPool" translatesAutoresizingMaskIntoConstraints="NO" id="tQx-uB-di2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconPool" translatesAutoresizingMaskIntoConstraints="NO" id="tQx-uB-di2">
                                 <rect key="frame" x="16" y="16" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="28" id="D4p-6T-YpP"/>
@@ -187,7 +187,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="msgiconPool" width="28" height="28"/>
+        <image name="msgIconPool" width="28" height="28"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1AX-Vk-rxr" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="509" height="369"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgiconInstantiatecontract" translatesAutoresizingMaskIntoConstraints="NO" id="kAp-uh-lGa">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconContract" translatesAutoresizingMaskIntoConstraints="NO" id="kAp-uh-lGa">
                                 <rect key="frame" x="16" y="16" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="UW4-0b-fQK"/>
@@ -195,7 +195,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="msgiconInstantiatecontract" width="28" height="28"/>
+        <image name="msgIconContract" width="28" height="28"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
