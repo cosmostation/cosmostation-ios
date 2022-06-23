@@ -38,6 +38,7 @@ class FeeGrpcViewController: BaseViewController {
     var mEstimateGasAmount = NSDecimalNumber.zero
     var mFee = NSDecimalNumber.zero
     var mDpDecimal:Int16 = 6
+    var mSimulPassed = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,7 @@ class FeeGrpcViewController: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print("automatic gas amount check")
+        self.mSimulPassed = false
         if (!BaseData.instance.getUsingEnginerMode()) {
             self.onSetFee()
             self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
@@ -129,12 +131,15 @@ class FeeGrpcViewController: BaseViewController {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        if (onCheckValidate()) {
-            onSetFee()
-            btnBefore.isUserInteractionEnabled = false
-            btnNext.isUserInteractionEnabled = false
-            pageHolderVC.onNextPage()
+        if (!mSimulPassed) {
+            self.onShowToast(NSLocalizedString("error_simul_error", comment: ""))
+            return
         }
+        
+        onSetFee()
+        btnBefore.isUserInteractionEnabled = false
+        btnNext.isUserInteractionEnabled = false
+        pageHolderVC.onNextPage()
     }
     
     func onSetFee() {
@@ -205,18 +210,20 @@ class FeeGrpcViewController: BaseViewController {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {
                             self.mEstimateGasAmount = NSDecimalNumber.init(value: response.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
+                            self.mSimulPassed = true
                             self.onUpdateView()
                         })
                     }
                 });
             } catch {
                 DispatchQueue.main.async(execute: {
+                    print("onSimulateGrpcTx failed: \(error)")
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {
-                            self.onShowToast(NSLocalizedString("error_network", comment: ""))
+                            self.mSimulPassed = false
+                            self.onShowToast(NSLocalizedString("error_network", comment: "") + "\n" + "\(error)")
                         })
                     }
-                    print("onSimulateGrpcTx failed: \(error)")
                 });
             }
         }

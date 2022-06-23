@@ -737,6 +737,7 @@ support@cosmostation.io";
 "error_min_1_validator" = "Please select more than 1 validator.";
 "error_max_30_validator" = "You can select Max 30 Validators.";
 "error_invalid_private_Key" = "Invalid private key.";
+"error_simul_error" = "This is a non-executable Tx.";
 
 "alert_title_no_private_key" = "No Private Key";
 "alert_msg_no_private_key" = "This account has only address with watch mode.\nYou need add mnemonics for generate transaction.";
