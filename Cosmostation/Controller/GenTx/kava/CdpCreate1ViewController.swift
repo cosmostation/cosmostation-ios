@@ -444,15 +444,15 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
                 btnNext.setTitleColor(UIColor.black, for: .normal)
                 btnNext.layer.borderWidth = 0.0
                 if (riskRate.doubleValue <= 50) {
-                    btnNext.backgroundColor = COLOR_CDP_SAFE
+                    btnNext.backgroundColor = UIColor.init(hexString: "kava_safe")
                     btnNext.setTitle(riskRate.stringValue + " SAFE", for: .normal)
                     
                 } else if (riskRate.doubleValue < 80) {
-                    btnNext.backgroundColor = COLOR_CDP_STABLE
+                    btnNext.backgroundColor = UIColor.init(hexString: "kava_stable")
                     btnNext.setTitle(riskRate.stringValue + " STABLE", for: .normal)
                     
                 } else {
-                    btnNext.backgroundColor = COLOR_CDP_DANGER
+                    btnNext.backgroundColor = UIColor.init(hexString: "kava_danger")
                     btnNext.setTitle(riskRate.stringValue + " DANGER", for: .normal)
                 }
             }

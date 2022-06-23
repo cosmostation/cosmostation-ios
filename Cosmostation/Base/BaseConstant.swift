@@ -1046,9 +1046,6 @@ let COLOR_NYX                               = UIColor.init(hexString: "ff6c5a")
 let COLOR_NYX_DARK                          = UIColor.init(hexString: "ca5345")
 let COLOR_NYM                               = UIColor.init(hexString: "5F82C8")
 
-let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
-let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
-let COLOR_CDP_SAFE                          = UIColor.init(hexString: "40F683")
 
 let COLOR_WC_TRADE_BUY                      = UIColor.init(hexString: "37CC6E")
 let COLOR_WC_TRADE_SELL                     = UIColor.init(hexString: "FF2745")

@@ -235,15 +235,15 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
             btnNext.setTitleColor(UIColor.black, for: .normal)
             btnNext.layer.borderWidth = 0.0
             if (afterRiskRate.doubleValue <= 50) {
-                btnNext.backgroundColor = COLOR_CDP_SAFE
+                btnNext.backgroundColor = UIColor.init(hexString: "kava_safe")
                 btnNext.setTitle("SAFE", for: .normal)
                 
             } else if (afterRiskRate.doubleValue < 80) {
-                btnNext.backgroundColor = COLOR_CDP_STABLE
+                btnNext.backgroundColor = UIColor.init(hexString: "kava_stable")
                 btnNext.setTitle("STABLE", for: .normal)
                 
             } else {
-                btnNext.backgroundColor = COLOR_CDP_DANGER
+                btnNext.backgroundColor = UIColor.init(hexString: "kava_danger")
                 btnNext.setTitle("DANGER", for: .normal)
             }
             WUtils.showRiskRate2(afterRiskRate, afterSafeRate, afterSafeTxt)
