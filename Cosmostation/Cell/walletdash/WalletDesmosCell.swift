@@ -18,6 +18,9 @@ class WalletDesmosCell: UITableViewCell {
     @IBOutlet weak var rewardAmount: UILabel!
     @IBOutlet weak var vestingAmount: UILabel!
     @IBOutlet weak var vestingLayer: UIView!
+    @IBOutlet weak var btnDelegate: UIButton!
+    @IBOutlet weak var btnProposal: UIButton!
+    @IBOutlet weak var btnProfile: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,6 +65,12 @@ class WalletDesmosCell: UITableViewCell {
             vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(DESMOS_MAIN_DENOM), vestingAmount.font!, 6, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDelegate.borderColor = UIColor.init(named: "_font05")
+        btnProposal.borderColor = UIColor.init(named: "_font05")
+        btnProfile.borderColor = UIColor.init(named: "_font05")
     }
     
 }

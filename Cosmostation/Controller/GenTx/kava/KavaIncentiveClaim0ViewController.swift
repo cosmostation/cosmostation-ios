@@ -54,7 +54,7 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
     
     @IBAction func onClickOption1(_ sender: UIButton) {
         initBtns()
-        sender.borderColor = UIColor.white
+        sender.borderColor = UIColor(named: "_font05")
         let kavaIncentiveCal = kavaIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_MAIN_DENOM, 0), withBehavior: WUtils.handler0)
         let hardIncentiveCal = hardIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_HARD_DENOM, 0), withBehavior: WUtils.handler0)
         let swpIncentiveCal = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 0), withBehavior: WUtils.handler0)
@@ -69,7 +69,7 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
     
     @IBAction func onClickOption2(_ sender: UIButton) {
         initBtns()
-        sender.borderColor = UIColor.white
+        sender.borderColor = UIColor(named: "_font05")
         let kavaIncentiveCal = kavaIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_MAIN_DENOM, 1), withBehavior: WUtils.handler0)
         let hardIncentiveCal = hardIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_HARD_DENOM, 1), withBehavior: WUtils.handler0)
         let swpIncentiveCal = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 1), withBehavior: WUtils.handler0)
@@ -101,8 +101,8 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
     }
     
     func initBtns() {
-        option1Btn.borderColor = UIColor(hexString: "#4b4f54")
-        option2Btn.borderColor = UIColor(hexString: "#4b4f54")
+        option1Btn.borderColor = UIColor(named: "_font04")
+        option2Btn.borderColor = UIColor(named: "_font04")
     }
 
 }

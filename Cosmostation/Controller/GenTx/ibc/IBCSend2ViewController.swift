@@ -31,7 +31,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         self.decimal = WUtils.tokenDivideDecimal(chainType, ibcSendDenom)
         
         let mainDenom = WUtils.getMainDenom(chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_IBC_TRANSFER, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_TRANSFER, 0)
         
         maxAvailable = BaseData.instance.getAvailableAmount_gRPC(ibcSendDenom)
         if (ibcSendDenom == mainDenom) {
@@ -79,25 +79,25 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUpdateView() {
         guard let text = mTargetAmountTextField.text?.trimmingCharacters(in: .whitespaces) else {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         
         if (text.count == 0) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.white.cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: decimal).compare(maxAvailable).rawValue > 0) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        self.mTargetAmountTextField.layer.borderColor = UIColor.white.cgColor
+        self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     
     @IBAction func onClickClear(_ sender: UIButton) {

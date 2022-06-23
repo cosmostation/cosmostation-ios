@@ -149,4 +149,11 @@ class CdpDetailMyActionCell: UITableViewCell {
         collateralImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(cDenom))!)
         principalImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(pDenom))!)
     }
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        depositBtn.borderColor = UIColor.init(named: "_font05")
+        withdrawBtn.borderColor = UIColor.init(named: "_font05")
+        darwdebtBtn.borderColor = UIColor.init(named: "_font05")
+        repayBtn.borderColor = UIColor.init(named: "_font05")
+    }
 }

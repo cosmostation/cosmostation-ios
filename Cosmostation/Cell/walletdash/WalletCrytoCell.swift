@@ -19,6 +19,9 @@ class WalletCrytoCell: UITableViewCell {
     @IBOutlet weak var rewardAmount: UILabel!
     @IBOutlet weak var vestingAmount: UILabel!
     @IBOutlet weak var vestingLayer: UIView!
+    @IBOutlet weak var btnDelegate: UIButton!
+    @IBOutlet weak var btnProposal: UIButton!
+    @IBOutlet weak var btnNtf: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,6 +66,12 @@ class WalletCrytoCell: UITableViewCell {
             vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(CRYPTO_MAIN_DENOM), vestingAmount.font!, 8, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -8).stringValue)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDelegate.borderColor = UIColor.init(named: "_font05")
+        btnProposal.borderColor = UIColor.init(named: "_font05")
+        btnNtf.borderColor = UIColor.init(named: "_font05")
     }
     
 }

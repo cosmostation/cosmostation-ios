@@ -25,7 +25,7 @@ class MsgGenerator {
                 print(error)
             }
             
-            msg.type = OK_MSG_TYPE_TRANSFER
+            msg.type = "okexchain/token/MsgTransfer"
             msg.value = value
             
         } else {
@@ -38,7 +38,7 @@ class MsgGenerator {
                 print(error)
             }
             
-            msg.type = COSMOS_MSG_TYPE_TRANSFER2
+            msg.type = "cosmos-sdk/MsgSend"
             msg.value = value
         }
         return msg
@@ -123,23 +123,12 @@ class MsgGenerator {
     }
     
     
-    static func genRefundAtomicSwap(_ from: String, _ swapId: String) -> Msg {
-        var msg = Msg.init()
-        var value = Msg.Value.init()
-        value.from = from
-        value.swap_id = swapId.uppercased()
-        msg.type = KAVA_MSG_TYPE_HTLC_REFUND_SWAP
-        msg.value = value
-        return msg
-    }
-    
-    
     static func genOkDepositMsg(_ delegator: String, _ coin: Coin) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
         value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.quantity = coin;
-        msg.type = OK_MSG_TYPE_DEPOSIT;
+        msg.type = "okexchain/staking/MsgDeposit";
         msg.value = value;
         return msg
     }
@@ -149,7 +138,7 @@ class MsgGenerator {
         var value = Msg.Value.init()
         value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.quantity = coin;
-        msg.type = OK_MSG_TYPE_WITHDRAW;
+        msg.type = "okexchain/staking/MsgWithdraw";
         msg.value = value;
         return msg
     }
@@ -159,7 +148,7 @@ class MsgGenerator {
         var value = Msg.Value.init()
         value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.validator_addresses = toVals;
-        msg.type = OK_MSG_TYPE_DIRECT_VOTE;
+        msg.type = "okexchain/staking/MsgAddShares";
         msg.value = value;
         return msg
     }

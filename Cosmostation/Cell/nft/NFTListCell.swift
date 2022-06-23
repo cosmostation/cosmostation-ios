@@ -38,8 +38,11 @@ class NFTListCell: UITableViewCell {
     }
     
     func onBindNFT(_ chainType: ChainType?, _ denomId: String, _ tokenId: String) {
-        nftCardView.backgroundColor = WUtils.getChainBg(chainType)
-        if (chainType == ChainType.IRIS_MAIN) {
+        guard let chainConfig = ChainFactory().getChainConfig(chainType) else {
+            return
+        }
+        nftCardView.backgroundColor = chainConfig.chainColorBG
+        if (chainType == .IRIS_MAIN) {
             DispatchQueue.global().async {
                 do {
                     let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
@@ -61,7 +64,7 @@ class NFTListCell: UITableViewCell {
                 }
             }
             
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
+        } else if (chainType == .CRYPTO_MAIN) {
             DispatchQueue.global().async {
                 do {
                     let channel = BaseNetWork.getConnection(chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!

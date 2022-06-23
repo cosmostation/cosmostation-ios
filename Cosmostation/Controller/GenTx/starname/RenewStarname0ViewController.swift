@@ -29,14 +29,14 @@ class RenewStarname0ViewController: BaseViewController {
         
         var extendTime: Int64 = 0
         var starnameFee = NSDecimalNumber.zero
-        if (pageHolderVC.mType == IOV_MSG_TYPE_RENEW_DOMAIN) {
+        if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
             starnameLabel.text = "*" + pageHolderVC.mStarnameDomain!
-            extendTime = WUtils.getRenewPeriod(IOV_MSG_TYPE_RENEW_DOMAIN)
+            extendTime = WUtils.getRenewPeriod(TASK_TYPE_STARNAME_RENEW_DOMAIN)
             starnameFee = WUtils.getStarNameRenewDomainFee(pageHolderVC.mStarnameDomain!, pageHolderVC!.mStarnameDomainType!)
             
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_RENEW_ACCOUNT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
             starnameLabel.text = pageHolderVC.mStarnameAccount! + "*" + pageHolderVC.mStarnameDomain!
-            extendTime = WUtils.getRenewPeriod(IOV_MSG_TYPE_RENEW_ACCOUNT)
+            extendTime = WUtils.getRenewPeriod(TASK_TYPE_STARNAME_RENEW_ACCOUNT)
             starnameFee = WUtils.getStarNameRenewAccountFee(pageHolderVC!.mStarnameDomainType!)
         }
         expireDateLabel.text = WUtils.longTimetoString(pageHolderVC.mStarnameTime! * 1000)

@@ -235,7 +235,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onStartNewEaring(_ duration: Int64) {
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OSMOSIS_MSG_TYPE_LOCK
+        txVC.mType = TASK_TYPE_OSMOSIS_LOCK
         txVC.mPool = mPool
         txVC.mLockupDuration = duration
         self.navigationItem.title = ""
@@ -267,7 +267,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onStartUnbonding(_ lockups: Array<Osmosis_Lockup_PeriodLock>) {
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OSMOSIS_MSG_TYPE_BEGIN_UNLCOK
+        txVC.mType = TASK_TYPE_OSMOSIS_BEGIN_UNLCOK
         txVC.mLockups = lockups
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -295,11 +295,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onStartUnLock(_ lockups: Array<Osmosis_Lockup_PeriodLock>) {
-        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OSMOSIS_MSG_TYPE_PERIOD_UNLOCK
-        txVC.mLockups = lockups
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(txVC, animated: true)
+        //deprecated
     }
     
     

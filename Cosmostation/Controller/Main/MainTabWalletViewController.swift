@@ -39,7 +39,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.delegate = self
         self.walletTableView.dataSource = self
         self.walletTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.walletTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.walletTableView.register(UINib(nibName: "WalletIrisCell", bundle: nil), forCellReuseIdentifier: "WalletIrisCell")
         self.walletTableView.register(UINib(nibName: "WalletBnbCell", bundle: nil), forCellReuseIdentifier: "WalletBnbCell")
         self.walletTableView.register(UINib(nibName: "WalletKavaCell", bundle: nil), forCellReuseIdentifier: "WalletKavaCell")
@@ -596,7 +595,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return
         }
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_INCENTIVE_ALL
+        txVC.mType = TASK_TYPE_KAVA_INCENTIVE_ALL
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -607,7 +606,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, OK_MSG_TYPE_DEPOSIT, BaseData.instance.mMyValidator.count)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OK_DEPOSIT, BaseData.instance.mMyValidator.count)
         if (BaseData.instance.availableAmount(OKEX_MAIN_DENOM).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -618,7 +617,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OK_MSG_TYPE_DEPOSIT
+        txVC.mType = TASK_TYPE_OK_DEPOSIT
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -629,7 +628,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, OK_MSG_TYPE_WITHDRAW, BaseData.instance.mMyValidator.count)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OK_WITHDRAW, BaseData.instance.mMyValidator.count)
         if (BaseData.instance.availableAmount(OKEX_MAIN_DENOM).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -640,7 +639,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OK_MSG_TYPE_WITHDRAW
+        txVC.mType = TASK_TYPE_OK_WITHDRAW
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -721,13 +720,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 return
             }
             let mainDenom = WUtils.getMainDenom(chainType)
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_GEN_PROFILE, 0)
+            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_DESMOS_GEN_PROFILE, 0)
             if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
             }
             let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-            txVC.mType = TASK_GEN_PROFILE
+            txVC.mType = TASK_TYPE_DESMOS_GEN_PROFILE
             txVC.hidesBottomBarWhenPushed = true
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(txVC, animated: true)
@@ -870,7 +869,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let gasDenom = WUtils.getGasDenom(chainType)
         let mainDenom = WUtils.getMainDenom(chainType)
         if (WUtils.isGRPC(chainType!)) {
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
+            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
             if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
                 return
@@ -881,7 +880,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             }
             
         } else {
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, COSMOS_MSG_TYPE_TRANSFER2, 0)
+            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
             if (BaseData.instance.availableAmount(gasDenom).compare(feeAmount).rawValue < 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
                 return
@@ -894,7 +893,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mToSendDenom = WUtils.getMainDenom(chainType)
-        txVC.mType = COSMOS_MSG_TYPE_TRANSFER2
+        txVC.mType = TASK_TYPE_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)

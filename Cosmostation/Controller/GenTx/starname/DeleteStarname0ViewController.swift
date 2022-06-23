@@ -24,9 +24,9 @@ class DeleteStarname0ViewController: BaseViewController {
         self.chainType = WUtils.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        if (pageHolderVC.mType == IOV_MSG_TYPE_DELETE_DOMAIN) {
+        if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_DOMAIN) {
             toDeleteStarname.text = "*" + pageHolderVC.mStarnameDomain!
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_DELETE_ACCOUNT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
             toDeleteStarname.text = pageHolderVC.mStarnameAccount! + "*" + pageHolderVC.mStarnameDomain!
         }
         expireDate.text = WUtils.longTimetoString(pageHolderVC.mStarnameTime! * 1000)

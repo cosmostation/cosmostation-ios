@@ -347,6 +347,10 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="Mdm-Sx-PcU" id="E47-1K-gZK"/>
+                <outlet property="btnDapp" destination="GLx-EK-CYC" id="cSN-da-oBP"/>
+                <outlet property="btnDelegate" destination="1Vy-sS-Nhq" id="Xoi-Lw-z1X"/>
+                <outlet property="btnProposal" destination="ivi-rx-b5E" id="vg6-f7-2Qs"/>
+                <outlet property="btnWalletConnect" destination="KEi-pg-q22" id="dh2-SI-bf3"/>
                 <outlet property="cardRoot" destination="pxW-bD-Wvj" id="x99-GX-95m"/>
                 <outlet property="delegatedAmount" destination="dLo-5L-qei" id="jVe-Fr-Ny6"/>
                 <outlet property="rewardAmount" destination="UUc-fG-Fxc" id="hzC-ng-JVa"/>
@@ -366,10 +370,10 @@
         <image name="btnIconWalletConnect" width="20" height="20"/>
         <image name="tokenStation" width="22" height="22"/>
         <namedColor name="_card_divider">
-            <color red="0.74509803921568629" green="0.77647058823529413" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
-            <color red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -378,7 +382,7 @@
             <color red="0.019999999552965164" green="0.76499998569488525" blue="0.80400002002716064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="station_bg">
-            <color red="0.90196078431372551" green="0.97647058823529409" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.90200001001358032" green="0.97600001096725464" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

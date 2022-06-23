@@ -278,6 +278,10 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="cjj-qF-wm9" id="Yas-3f-Jtw"/>
+                <outlet property="btnDeposit" destination="fe0-Rt-TPK" id="yBP-90-Moi"/>
+                <outlet property="btnProposal" destination="FOg-Yh-6N4" id="zbh-hP-FhJ"/>
+                <outlet property="btnVote" destination="HPR-JO-GPD" id="u1X-Cn-XjM"/>
+                <outlet property="btnWithdraw" destination="FtD-An-Ud2" id="Kj3-NJ-pFC"/>
                 <outlet property="depositAmount" destination="cUo-hO-1XL" id="vAW-Y8-wnk"/>
                 <outlet property="lockedAmount" destination="ntP-1C-3h6" id="9hL-MS-Xpv"/>
                 <outlet property="rootCardView" destination="qFm-Bs-yPw" id="w7q-DT-cj9"/>
@@ -295,19 +299,19 @@
         <image name="btnIconWithdraw" width="20" height="20"/>
         <image name="tokenOkc" width="22" height="22"/>
         <namedColor name="_card_divider">
-            <color red="0.74509803921568629" green="0.77647058823529413" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
-            <color red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="okc">
-            <color red="0.30196078431372547" green="0.52941176470588236" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.30199998617172241" green="0.52899998426437378" blue="0.93300002813339233" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="okc_bg">
-            <color red="0.9137254901960784" green="0.94117647058823528" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.91399997472763062" green="0.94099998474121094" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

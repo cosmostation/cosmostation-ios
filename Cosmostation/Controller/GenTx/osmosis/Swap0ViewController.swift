@@ -46,7 +46,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mSwapInDenom!)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, OSMOSIS_MSG_TYPE_SWAP, 0)
+        let txFeeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_OSMOSIS_SWAP, 0)
         print("availableMaxAmount ", availableMaxAmount)
         print("txFeeAmount ", txFeeAmount)
         if (pageHolderVC.mSwapInDenom == OSMOSIS_MAIN_DENOM) {
@@ -107,28 +107,28 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = inputTextFiled.text?.trimmingCharacters(in: .whitespaces) else {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (text.count == 0) {
-            inputTextFiled.layer.borderColor = UIColor.white.cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.compare(NSDecimalNumber.init(string: "0.01")).rawValue < 0) {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: dpInPutDecimal).compare(availableMaxAmount).rawValue > 0) {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        inputTextFiled.layer.borderColor = UIColor.white.cgColor
+        inputTextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
         
         let padding = NSDecimalNumber(string: "0.97")
         let outputAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal - dpOutPutDecimal).multiplying(by: padding).multiplying(by: swapRate, withBehavior: WUtils.handler18)

@@ -74,7 +74,7 @@ class RegisterAccount0ViewController: BaseViewController, SBCardPopupDelegate {
         }
         
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, IOV_MSG_TYPE_REGISTER_ACCOUNT, 0)
+        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_REGISTER_ACCOUNT, 0)
         let starnameFee = WUtils.getStarNameRegisterAccountFee("open")
 //        print("userAvailable ", userAvailable)
 //        print("txFee ", txFee)

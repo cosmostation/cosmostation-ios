@@ -79,24 +79,24 @@ class HardPoolWithdraw0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = mUserInput.text?.trimmingCharacters(in: .whitespaces) else {
-            self.mUserInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mUserInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if(text.count == 0) {
-            self.mUserInput.layer.borderColor = UIColor.white.cgColor
+            self.mUserInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.mUserInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mUserInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: dpDecimal).compare(availableMax).rawValue > 0) {
-            self.mUserInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mUserInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        self.mUserInput.layer.borderColor = UIColor.white.cgColor
+        self.mUserInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     
     @IBAction func onClickAmountClear(_ sender: UIButton) {

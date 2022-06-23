@@ -19,13 +19,16 @@ class NFTDetailRawCell: UITableViewCell {
     }
     
     func onBindNFT(_ chainType: ChainType?, _ irisRes: Irismod_Nft_QueryNFTResponse?, _ croRes: Chainmain_Nft_V1_QueryNFTResponse?) {
-        nftCardView.backgroundColor = WUtils.getChainBg(chainType)
-        if (chainType == ChainType.IRIS_MAIN) {
+        guard let chainConfig = ChainFactory().getChainConfig(chainType) else {
+            return
+        }
+        nftCardView.backgroundColor = chainConfig.chainColorBG
+        if (chainType == .IRIS_MAIN) {
             if let dataString = irisRes?.nft.data.data(using: .utf8) {
                 nftRawLabel.text = dataString.prettyJson?.replacingOccurrences(of: "\\", with: "")
             }
             
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
+        } else if (chainType == .CRYPTO_MAIN) {
             if let dataString = croRes?.nft.data.data(using: .utf8) {
                 nftRawLabel.text = dataString.prettyJson?.replacingOccurrences(of: "\\", with: "")
             }

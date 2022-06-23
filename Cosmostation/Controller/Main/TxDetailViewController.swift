@@ -122,21 +122,22 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         if (indexPath.row == 0) {
             return onBindTxCommon(tableView)
         } else {
-            let msg = mTxInfo?.getMsg(indexPath.row - 1)
-            if (msg?.type == COSMOS_MSG_TYPE_TRANSFER || msg?.type == COSMOS_MSG_TYPE_TRANSFER2 || msg?.type == COSMOS_MSG_TYPE_TRANSFER3 ||
-                msg?.type == OK_MSG_TYPE_TRANSFER || msg?.type == OK_MSG_TYPE_MULTI_TRANSFER || msg?.type == CERTIK_MSG_TYPE_TRANSFER) {
-                if ((msg?.value.inputs != nil && (msg?.value.inputs!.count)! > 1) ||  (msg?.value.outputs != nil && (msg?.value.outputs!.count)! > 1)) {
+            guard let msg = mTxInfo?.getMsg(indexPath.row - 1) else {
+                return onBindUnknown(tableView, indexPath.row)
+            }
+            if (msg.type.contains("Send") || msg.type.contains("MsgSend") || msg.type.contains("MsgMultiSend") ||
+                msg.type.contains("MsgTransfer") || msg.type.contains("MsgMultiTransfer")) {
+                if ((msg.value.inputs != nil && (msg.value.inputs!.count) > 1) ||  (msg.value.outputs != nil && (msg.value.outputs!.count) > 1)) {
                     //No case yet!
                     return onBindMultiTransfer(tableView, indexPath.row)
                 } else {
                     return onBindTransfer(tableView, indexPath.row)
                 }
             }
-            
-            else if (msg?.type == OK_MSG_TYPE_DEPOSIT || msg?.type == OK_MSG_TYPE_WITHDRAW) {
+            else if (msg.type == TASK_TYPE_OK_DEPOSIT || msg.type == TASK_TYPE_OK_WITHDRAW) {
                 return onBindOkStake(tableView, indexPath.row)
                 
-            } else if (msg?.type == OK_MSG_TYPE_DIRECT_VOTE) {
+            } else if (msg.type == TASK_TYPE_OK_DIRECT_VOTE) {
                 return onBindOkDirectVote(tableView, indexPath.row)
                 
             } else {
@@ -281,7 +282,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onBindOkStake(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
         let cell:TxOkStakeCell? = tableView.dequeueReusableCell(withIdentifier:"TxOkStakeCell") as? TxOkStakeCell
         let msg = mTxInfo?.getMsg(position - 1)
-        if (msg?.type == OK_MSG_TYPE_DEPOSIT) {
+        if (msg?.type == TASK_TYPE_OK_DEPOSIT) {
             cell?.txIcon.image = UIImage(named: "txDepositCdp")
             cell?.txLabel.text = NSLocalizedString("title_ok_deposit", comment: "")
         } else {
@@ -414,14 +415,16 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 
                 //Check swap status if Send HTLC Tx
                 if (self.chainType! == ChainType.BINANCE_MAIN) {
-                    if (self.mTxInfo?.getMsgs()[0].type == BNB_MSG_TYPE_HTLC && self.account?.account_address == self.mTxInfo?.getMsgs()[0].value.from) {
+                    if (self.mTxInfo?.getMsgs()[0].type.contains("HTLTMsg") == true &&
+                        self.account?.account_address == self.mTxInfo?.getMsgs()[0].value.from) {
+                        print("simpleKavaSwapId " , self.mTxInfo?.simpleBnbSwapId())
                         self.onFetchHtlcStatus(self.mTxInfo?.simpleBnbSwapId())
                     } else {
                         self.onUpdateView()
                     }
                     
                 } else if (self.chainType! == ChainType.KAVA_MAIN) {
-                    if (self.mTxInfo?.getMsgs()[0].type == KAVA_MSG_TYPE_HTLC_CREATE_SWAP) {
+                    if (self.mTxInfo?.getMsgs()[0].type.contains("MsgCreateAtomicSwap") == true) {
                         print("simpleKavaSwapId " , self.mTxInfo?.simpleKavaSwapId())
                         self.onFetchHtlcStatus(self.mTxInfo?.simpleKavaSwapId())
                     } else {

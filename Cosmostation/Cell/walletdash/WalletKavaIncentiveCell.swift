@@ -13,6 +13,7 @@ class WalletKavaIncentiveCell: UITableViewCell {
     @IBOutlet weak var kavaAmountLabel: UILabel!
     @IBOutlet weak var hardAmountLabel: UILabel!
     @IBOutlet weak var swpAmountLabel: UILabel!
+    @IBOutlet weak var btnClaimIncentive: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,5 +36,9 @@ class WalletKavaIncentiveCell: UITableViewCell {
         kavaAmountLabel.attributedText = WUtils.displayAmount2(kavaAmount.stringValue, kavaAmountLabel.font, 6, 6)
         hardAmountLabel.attributedText = WUtils.displayAmount2(hardAmount.stringValue, hardAmountLabel.font, 6, 6)
         swpAmountLabel.attributedText = WUtils.displayAmount2(swpAmount.stringValue, swpAmountLabel.font, 6, 6)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnClaimIncentive.borderColor = UIColor.init(named: "_font05")
     }
 }

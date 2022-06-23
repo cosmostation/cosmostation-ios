@@ -13,14 +13,13 @@ class AddressInputTextField: UITextField {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.backgroundColor = UIColor(named: "_font02")
         self.layer.borderWidth = 1.0
         self.layer.borderColor = UIColor(named: "_font04")!.cgColor
-        self.backgroundColor = UIColor.clear
+        self.layer.cornerRadius = 8
+        self.layer.masksToBounds = true
         self.setLeftPaddingPoints(2)
         self.setRightPaddingPoints(2)
-        
-        self.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("add_address_hint", comment: ""),
-                                                        attributes: [NSAttributedString.Key.foregroundColor: UIColor(named: "_font04")!])
     }
     
 }

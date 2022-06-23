@@ -55,8 +55,8 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = ""
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_nft_detail", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_nft_detail", comment: "")
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
     }
@@ -105,14 +105,14 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
 
         let mainDenom = WUtils.getMainDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_SEND_NFT, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_NFT_SEND, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
             return
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = TASK_SEND_NFT
+        txVC.mType = TASK_TYPE_NFT_SEND
         txVC.mNFTDenomId = denomId
         txVC.mNFTTokenId = tokenId
         txVC.irisResponse = irisResponse

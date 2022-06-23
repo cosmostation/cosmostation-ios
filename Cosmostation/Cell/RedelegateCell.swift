@@ -22,7 +22,7 @@ class RedelegateCell: UITableViewCell {
         super.awakeFromNib()
         valImg.layer.borderWidth = 1
         valImg.layer.masksToBounds = false
-        valImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+        valImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         valImg.layer.cornerRadius = valImg.frame.height/2
         valImg.clipsToBounds = true
         

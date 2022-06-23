@@ -94,7 +94,7 @@ class MyAccountViewController: BaseViewController, UITableViewDelegate, UITableV
             return
         }
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = IOV_MSG_TYPE_REGISTER_ACCOUNT
+        txVC.mType = TASK_TYPE_STARNAME_REGISTER_ACCOUNT
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }

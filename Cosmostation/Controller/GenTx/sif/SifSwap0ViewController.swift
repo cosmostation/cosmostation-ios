@@ -59,7 +59,7 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(swapInDenom)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_MSG_TYPE_SWAP_CION, 0)
+        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_SIF_SWAP_CION, 0)
         if (swapInDenom == SIF_MAIN_DENOM) {
             availableMaxAmount = availableMaxAmount.subtracting(txFeeAmount)
         }
@@ -99,24 +99,24 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = inputTextFiled.text?.trimmingCharacters(in: .whitespaces) else {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (text.count == 0) {
-            inputTextFiled.layer.borderColor = UIColor.white.cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: dpInPutDecimal).compare(availableMaxAmount).rawValue > 0) {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        inputTextFiled.layer.borderColor = UIColor.white.cgColor
+        inputTextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
         
         //slippage
         let padding = NSDecimalNumber(string: "0.98")

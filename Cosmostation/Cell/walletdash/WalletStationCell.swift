@@ -18,6 +18,10 @@ class WalletStationCell: UITableViewCell {
     @IBOutlet weak var rewardAmount: UILabel!
     @IBOutlet weak var vestingAmount: UILabel!
     @IBOutlet weak var vestingLayer: UIView!
+    @IBOutlet weak var btnDelegate: UIButton!
+    @IBOutlet weak var btnProposal: UIButton!
+    @IBOutlet weak var btnDapp: UIButton!
+    @IBOutlet weak var btnWalletConnect: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,6 +70,13 @@ class WalletStationCell: UITableViewCell {
             vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(STATION_TEST_DENOM), vestingAmount.font!, 6, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDelegate.borderColor = UIColor.init(named: "_font05")
+        btnProposal.borderColor = UIColor.init(named: "_font05")
+        btnDapp.borderColor = UIColor.init(named: "_font05")
+        btnWalletConnect.borderColor = UIColor.init(named: "_font05")
     }
     
 }

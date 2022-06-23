@@ -81,4 +81,11 @@ class HarvestDetailMyActionCell: UITableViewCell {
         borroweableValue.attributedText = WUtils.getDPRawDollor(finalBorrowableValue.stringValue, 2, borroweableValue.font)
     }
     
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        depositBtn.borderColor = UIColor.init(named: "_font05")
+        withdrawBtn.borderColor = UIColor.init(named: "_font05")
+        borrowBtn.borderColor = UIColor.init(named: "_font05")
+        repayBtn.borderColor = UIColor.init(named: "_font05")
+    }
+    
 }

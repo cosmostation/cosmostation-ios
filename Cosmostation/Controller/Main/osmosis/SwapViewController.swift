@@ -163,7 +163,7 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OSMOSIS_MSG_TYPE_SWAP
+        txVC.mType = TASK_TYPE_OSMOSIS_SWAP
         txVC.mPoolId = String(mSelectedPool!.id)
         txVC.mSwapInDenom = mInputCoinDenom
         txVC.mSwapOutDenom = mOutputCoinDenom

@@ -174,6 +174,7 @@
                 <outlet property="amountDenomLabel" destination="COq-Lb-uwp" id="EHl-R0-NeB"/>
                 <outlet property="amountLabel" destination="9GW-ti-wcE" id="Q6r-fz-Txa"/>
                 <outlet property="amountValueLabel" destination="YFh-oV-buY" id="pdx-Lk-rGn"/>
+                <outlet property="btnUnlock" destination="Rg2-dv-Bzm" id="B9p-Qm-zMi"/>
                 <outlet property="lcokStatusLabel" destination="mMz-0T-P0I" id="doV-m8-giO"/>
                 <outlet property="lockIdLabel" destination="1GI-dC-xuD" id="8VX-4n-h6k"/>
                 <outlet property="nextRewardAmountLabel" destination="Nk0-Zq-T9N" id="1ax-w1-clK"/>

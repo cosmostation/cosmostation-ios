@@ -88,7 +88,7 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             self.onShowAddMenomicDialog()
             return
         }
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, OSMOSIS_MSG_TYPE_JOIN_POOL, 0)
+        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OSMOSIS_JOIN_POOL, 0)
         let coin0Denom = pool.poolAssets[0].token.denom
         let coin1Denom = pool.poolAssets[1].token.denom
         var coin0Available = BaseData.instance.getAvailableAmount_gRPC(coin0Denom)
@@ -106,7 +106,7 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OSMOSIS_MSG_TYPE_JOIN_POOL
+        txVC.mType = TASK_TYPE_OSMOSIS_JOIN_POOL
         txVC.mPoolId = String(pool.id)
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -120,14 +120,14 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             return
         }
         let mainBalance = BaseData.instance.getAvailableAmount_gRPC(OSMOSIS_MAIN_DENOM)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, OSMOSIS_MSG_TYPE_EXIT_POOL, 0)
+        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OSMOSIS_EXIT_POOL, 0)
         if (mainBalance.compare(txFeeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OSMOSIS_MSG_TYPE_EXIT_POOL
+        txVC.mType = TASK_TYPE_OSMOSIS_EXIT_POOL
         txVC.mPoolId = String(pool.id)
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)

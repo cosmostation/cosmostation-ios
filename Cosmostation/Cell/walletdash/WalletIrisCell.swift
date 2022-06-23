@@ -17,6 +17,9 @@ class WalletIrisCell: UITableViewCell {
     @IBOutlet weak var delegatedAmount: UILabel!
     @IBOutlet weak var unbondingAmount: UILabel!
     @IBOutlet weak var rewardAmount: UILabel!
+    @IBOutlet weak var btnDelegate: UIButton!
+    @IBOutlet weak var btnProposal: UIButton!
+    @IBOutlet weak var btnNtf: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -64,6 +67,12 @@ class WalletIrisCell: UITableViewCell {
             rewardAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(IRIS_TEST_DENOM), rewardAmount.font, 6, 6)
             BaseData.instance.updateLastTotal(account, totalBif.multiplying(byPowerOf10: -6).stringValue)
         }
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDelegate.borderColor = UIColor.init(named: "_font05")
+        btnProposal.borderColor = UIColor.init(named: "_font05")
+        btnNtf.borderColor = UIColor.init(named: "_font05")
     }
     
 }

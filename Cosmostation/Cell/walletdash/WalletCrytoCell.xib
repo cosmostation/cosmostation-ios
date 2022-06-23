@@ -316,6 +316,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="b5g-FS-V6M" id="e0J-Di-vM0"/>
+                <outlet property="btnDelegate" destination="onp-Up-qEw" id="Wgs-OV-S7n"/>
+                <outlet property="btnNtf" destination="6E0-Vf-syx" id="4ph-M5-xNY"/>
+                <outlet property="btnProposal" destination="RnV-aV-HXv" id="Dcq-py-D5F"/>
                 <outlet property="delegatedAmount" destination="mIT-ku-lQ9" id="f5e-Ad-jXX"/>
                 <outlet property="rewardAmount" destination="NCq-Ss-zLk" id="uYM-s4-CCq"/>
                 <outlet property="rootCardView" destination="v97-AB-9ct" id="OcR-6x-sNi"/>
@@ -334,10 +337,10 @@
         <image name="btnIconVote" width="20" height="20"/>
         <image name="tokenCryptoorg" width="22" height="22"/>
         <namedColor name="_card_divider">
-            <color red="0.74509803921568629" green="0.77647058823529413" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
-            <color red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -346,7 +349,7 @@
             <color red="0.067000001668930054" green="0.60000002384185791" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="cryptoorg_bg">
-            <color red="0.89803921568627454" green="0.95686274509803915" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89800000190734863" green="0.9570000171661377" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -88,7 +88,7 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OK_MSG_TYPE_DIRECT_VOTE
+        txVC.mType = TASK_TYPE_OK_DIRECT_VOTE
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
@@ -113,10 +113,10 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.monikerLabel.adjustsFontSizeToFitWidth = true
             if (validator.jailed) {
                 cell?.revokedImg.isHidden = false
-                cell?.validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
+                cell?.validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             } else {
                 cell?.revokedImg.isHidden = true
-                cell?.validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+                cell?.validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
             }
             cell?.powerLabel.attributedText =  WUtils.displayAmount2(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
             cell?.commissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.commissionLabel.font)

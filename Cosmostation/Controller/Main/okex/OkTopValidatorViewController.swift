@@ -83,10 +83,10 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         cell?.monikerLabel.adjustsFontSizeToFitWidth = true
         if (validator.jailed) {
             cell?.revokedImg.isHidden = false
-            cell?.validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
+            cell?.validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
         } else {
             cell?.revokedImg.isHidden = true
-            cell?.validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+            cell?.validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
         cell?.powerLabel.attributedText =  WUtils.displayAmount2(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
         cell?.commissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.commissionLabel.font)

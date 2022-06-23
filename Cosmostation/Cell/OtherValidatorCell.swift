@@ -22,7 +22,7 @@ class OtherValidatorCell: UITableViewCell {
         super.awakeFromNib()
         validatorImg.layer.borderWidth = 1
         validatorImg.layer.masksToBounds = false
-        validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+        validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         validatorImg.layer.cornerRadius = validatorImg.frame.height/2
         validatorImg.clipsToBounds = true
         
@@ -54,10 +54,10 @@ class OtherValidatorCell: UITableViewCell {
         monikerLabel.adjustsFontSizeToFitWidth = true
         if (validator.jailed == true) {
             revokedImg.isHidden = false
-            validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
+            validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
         } else {
             revokedImg.isHidden = true
-            validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+            validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
         if BaseData.instance.mMyValidators_gRPC.first(where: {$0.operatorAddress == validator.operatorAddress}) != nil {
             cardView.backgroundColor = chainConfig?.chainColorBG

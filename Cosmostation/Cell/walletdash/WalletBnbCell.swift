@@ -16,6 +16,7 @@ class WalletBnbCell: UITableViewCell {
     @IBOutlet weak var availableAmount: UILabel!
     @IBOutlet weak var lockedAmount: UILabel!
     @IBOutlet weak var frozenAmount: UILabel!
+    @IBOutlet weak var btnWalletConnect: UIButton!
     @IBOutlet weak var btnBep3: UIButton!
     
     override func awakeFromNib() {
@@ -49,6 +50,11 @@ class WalletBnbCell: UITableViewCell {
         frozenAmount.attributedText = WUtils.displayAmount2(frozen.stringValue, frozenAmount.font, 0, 6)
         totalValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, total, 0, totalValue.font)
         BaseData.instance.updateLastTotal(account, total.stringValue)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnWalletConnect.borderColor = UIColor.init(named: "_font05")
+        btnBep3.borderColor = UIColor.init(named: "_font05")
     }
     
 }

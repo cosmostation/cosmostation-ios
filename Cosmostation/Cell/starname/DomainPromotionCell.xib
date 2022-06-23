@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BfX-hc-IhN" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="334" height="201"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="starnameImg" translatesAutoresizingMaskIntoConstraints="NO" id="HEg-p4-dAH">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoStarname" translatesAutoresizingMaskIntoConstraints="NO" id="HEg-p4-dAH">
                                 <rect key="frame" x="125" y="16" width="84" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="GRf-io-wP0"/>
@@ -87,7 +87,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="starnameImg" width="60" height="60"/>
+        <image name="infoStarname" width="60" height="60"/>
         <namedColor name="_font04">
             <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

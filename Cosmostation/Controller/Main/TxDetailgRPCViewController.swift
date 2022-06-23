@@ -366,13 +366,6 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             }
             
-            else if (msg.typeURL.contains(Rizonworld_Rizon_Tokenswap_MsgCreateTokenswapRequest.protoMessageName)) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TxRizonEventHorizonCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
-                return cell!
-                
-            }
-            
             else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgCreateCDP.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpCreateCell") as? TxCell
                 cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)

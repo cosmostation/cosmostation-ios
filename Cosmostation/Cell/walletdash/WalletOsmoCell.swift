@@ -18,6 +18,10 @@ class WalletOsmoCell: UITableViewCell {
     @IBOutlet weak var rewardAmount: UILabel!
     @IBOutlet weak var vestingAmount: UILabel!
     @IBOutlet weak var vestingLayer: UIView!
+    @IBOutlet weak var btnDelegate: UIButton!
+    @IBOutlet weak var btnProposal: UIButton!
+    @IBOutlet weak var btnDefi: UIButton!
+    @IBOutlet weak var btnWalletConnect: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -60,6 +64,13 @@ class WalletOsmoCell: UITableViewCell {
         unbondingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
         rewardAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(OSMOSIS_MAIN_DENOM), rewardAmount.font, 6, 6)
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDelegate.borderColor = UIColor.init(named: "_font05")
+        btnProposal.borderColor = UIColor.init(named: "_font05")
+        btnDefi.borderColor = UIColor.init(named: "_font05")
+        btnWalletConnect.borderColor = UIColor.init(named: "_font05")
     }
     
 }

@@ -460,33 +460,6 @@ public class WUtils {
         return resultMsg
     }
     
-    static func proposalType(_ type:String) -> String {
-        if (type == IRIS_PROPOAL_TYPE_BasicProposal) {
-            return NSLocalizedString("proposal_type_basic", comment: "")
-            
-        } else if (type == IRIS_PROPOAL_TYPE_ParameterProposal) {
-            return NSLocalizedString("proposal_type_parameter", comment: "")
-            
-        } else if (type == IRIS_PROPOAL_TYPE_PlainTextProposal) {
-            return NSLocalizedString("proposal_type_plaintext", comment: "")
-                   
-        } else if (type == IRIS_PROPOAL_TYPE_TokenAdditionProposal) {
-            return NSLocalizedString("proposal_type_tokenaddition", comment: "")
-                  
-        } else if (type == IRIS_PROPOAL_TYPE_SoftwareUpgradeProposal) {
-            return NSLocalizedString("proposal_type_softwareupgrade", comment: "")
-                 
-        } else if (type == IRIS_PROPOAL_TYPE_SystemHaltProposal) {
-            return NSLocalizedString("proposal_type_systemhalt", comment: "")
-                
-        } else if (type == IRIS_PROPOAL_TYPE_CommunityTaxUsageProposal) {
-            return NSLocalizedString("proposal_type_communitytaxusage", comment: "")
-               
-        }
-        return ""
-    }
-    
-    
     static func checkNAN(_ check: NSDecimalNumber) -> NSDecimalNumber{
         if(check.isEqual(to: NSDecimalNumber.notANumber)) {
             return NSDecimalNumber.zero
@@ -1206,6 +1179,15 @@ public class WUtils {
                 return
             }
             
+        } else if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.COSMOS_TEST) {
+            if (denom == COSMOS_MAIN_DENOM) {
+                WUtils.setDenomTitle(chainType, denomLabel)
+            } else {
+                denomLabel?.textColor = UIColor(named: "_font05")
+                denomLabel?.text = denom.uppercased()
+            }
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
+
         } else if (chainType == ChainType.IRIS_MAIN) {
             if (denom == IRIS_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
@@ -2732,335 +2714,329 @@ public class WUtils {
             chain == ChainType.CRESCENT_MAIN || chain == ChainType.MANTLE_MAIN || chain == ChainType.NYX_MAIN ||
             chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST ||
             chain == ChainType.CRESCENT_TEST || chain == ChainType.STATION_TEST) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+            if (type == TASK_TYPE_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
-            } else if (type == TASK_ISSUE_NFT) {
+            } else if (type == TASK_TYPE_NFT_ISSUE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_SEND_NFT) {
+            } else if (type == TASK_TYPE_NFT_SEND) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_ISSUE_NFT_DENOM) {
+            } else if (type == TASK_TYPE_NFT_ISSUE_DENOM) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_GEN_PROFILE || type == TASK_LINK_CHAIN_ACCOUNT) {
+            } else if (type == TASK_TYPE_DESMOS_GEN_PROFILE || type == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_PROFILE))
-            } else if (type == TASK_CW20_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_CW20_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.OSMOSIS_MAIN ) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+            if (type == TASK_TYPE_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == OSMOSIS_MSG_TYPE_SWAP) {
+            } else if (type == TASK_TYPE_OSMOSIS_SWAP) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_SWAP))
-            } else if (type == OSMOSIS_MSG_TYPE_JOIN_POOL) {
+            } else if (type == TASK_TYPE_OSMOSIS_JOIN_POOL) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_JOIN_POOL))
-            } else if (type == OSMOSIS_MSG_TYPE_EXIT_POOL) {
+            } else if (type == TASK_TYPE_OSMOSIS_EXIT_POOL) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_EXIT_POOL))
-            } else if (type == OSMOSIS_MSG_TYPE_LOCK) {
+            } else if (type == TASK_TYPE_OSMOSIS_LOCK) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_LOCK))
-            } else if (type == OSMOSIS_MSG_TYPE_BEGIN_UNLCOK) {
+            } else if (type == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_BEGIN_UNBONDING))
-            } else if (type == OSMOSIS_MSG_TYPE_PERIOD_UNLOCK) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_UNLOCK))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
             }
         }
         
         else if (chain == ChainType.KAVA_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+            if (type == TASK_TYPE_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_REINVEST))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_VOTE))
-            } else if (type == KAVA_MSG_TYPE_USDX_MINT_INCENTIVE || type == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE || type == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CLAIM_INCENTIVE))
-            } else if (type == KAVA_MSG_TYPE_CREATE_CDP || type == KAVA_MSG_TYPE_DEPOSIT_CDP || type == KAVA_MSG_TYPE_WITHDRAW_CDP ||
-                        type == KAVA_MSG_TYPE_DRAWDEBT_CDP || type == KAVA_MSG_TYPE_REPAYDEBT_CDP) {
+            } else if (type == TASK_TYPE_KAVA_CDP_CREATE || type == TASK_TYPE_KAVA_CDP_DEPOSIT || type == TASK_TYPE_KAVA_CDP_WITHDRAW ||
+                        type == TASK_TYPE_KAVA_CDP_DRAWDEBT || type == TASK_TYPE_KAVA_CDP_REPAY) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CDP))
-            } else if (type == KAVA_MSG_TYPE_DEPOSIT_HARD || type == KAVA_MSG_TYPE_WITHDRAW_HARD || type == KAVA_MSG_TYPE_BORROW_HARD ||
-                        type == KAVA_MSG_TYPE_REPAY_HARD) {
+            } else if (type == TASK_TYPE_KAVA_HARD_DEPOSIT || type == TASK_TYPE_KAVA_HARD_WITHDRAW || type == TASK_TYPE_KAVA_HARD_BORROW ||
+                        type == TASK_TYPE_KAVA_HARD_REPAY) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_HARD_POOL))
-            } else if (type == KAVA_MSG_TYPE_SWAP_TOKEN) {
+            } else if (type == TASK_TYPE_KAVA_SWAP_TOKEN) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_TOKEN))
-            } else if (type == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+            } else if (type == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_DEPOSIT))
-            } else if (type == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+            } else if (type == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_WITHDRAW))
-            } else if (type == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+            } else if (type == TASK_TYPE_KAVA_INCENTIVE_ALL) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CLAIM_INCENTIVE_ALL))
             } else if (type == TASK_TYPE_HTLC_SWAP) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
             }
             
         } else if (chain == ChainType.BAND_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+            if (type == TASK_TYPE_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = WUtils.getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.IOV_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+            if (type == TASK_TYPE_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = WUtils.getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_VOTE))
-            } else if (type == IOV_MSG_TYPE_REGISTER_DOMAIN || type == IOV_MSG_TYPE_REGISTER_ACCOUNT) {
+            } else if (type == TASK_TYPE_STARNAME_REGISTER_DOMAIN || type == TASK_TYPE_STARNAME_REGISTER_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REGISTER))
-            } else if (type == IOV_MSG_TYPE_DELETE_DOMAIN || type == IOV_MSG_TYPE_DELETE_ACCOUNT) {
+            } else if (type == TASK_TYPE_STARNAME_DELETE_DOMAIN || type == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_DELETE))
-            } else if (type == IOV_MSG_TYPE_RENEW_DOMAIN || type == IOV_MSG_TYPE_RENEW_ACCOUNT) {
+            } else if (type == TASK_TYPE_STARNAME_RENEW_DOMAIN || type == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_RENEW))
-            } else if (type == IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE) {
+            } else if (type == TASK_TYPE_STARNAME_REPLACE_RESOURCE) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REPLACE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.OKEX_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2 || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(OK_GAS_AMOUNT_SEND))
-            } else if (type == OK_MSG_TYPE_DEPOSIT || type == OK_MSG_TYPE_WITHDRAW) {
+            } else if (type == TASK_TYPE_OK_DEPOSIT || type == TASK_TYPE_OK_WITHDRAW) {
                 result = (NSDecimalNumber.init(string: OK_GAS_AMOUNT_STAKE_MUX).multiplying(by: NSDecimalNumber.init(value: valCnt))).adding(NSDecimalNumber.init(string: OK_GAS_AMOUNT_STAKE))
-            } else if (type == OK_MSG_TYPE_DIRECT_VOTE) {
+            } else if (type == TASK_TYPE_OK_DIRECT_VOTE) {
                 result = (NSDecimalNumber.init(string: OK_GAS_AMOUNT_VOTE_MUX).multiplying(by: NSDecimalNumber.init(value: valCnt))).adding(NSDecimalNumber.init(string: OK_GAS_AMOUNT_VOTE))
             }
             
         } else if (chain == ChainType.CERTIK_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+            if (type == TASK_TYPE_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE || type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_DELEGATE || type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.SECRET_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2 || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE || type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_DELEGATE || type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_VOTE))
             }
             
         } else if (chain == ChainType.SENTINEL_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2 || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.FETCH_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2 || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.SIF_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2 || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_IBC_SEND))
-            } else if (type == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_INCENTIVE))
-            } else if (type == SIF_MSG_TYPE_ADD_LP || type == SIF_MSG_TYPE_REMOVE_LP) {
+            } else if (type == TASK_TYPE_SIF_ADD_LP || type == TASK_TYPE_SIF_REMOVE_LP) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_LP))
-            } else if (type == SIF_MSG_TYPE_SWAP_CION) {
+            } else if (type == TASK_TYPE_SIF_SWAP_CION) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_SWAP))
             }
             
         } else if (chain == ChainType.KI_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+            if (type == TASK_TYPE_TRANSFER) {
                result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_VOTE))
             }
             
         } else if (chain == ChainType.MEDI_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2 || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_SEND))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_STAKE))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_REINVEST))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForRewards()[valCnt - 1]
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REDELEGATE))
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REINVEST))
             } else {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
             }
         } else if (chain == ChainType.INJECTIVE_MAIN) {
-            if (type == COSMOS_MSG_TYPE_TRANSFER2) {
+            if (type == TASK_TYPE_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == COSMOS_MSG_TYPE_DELEGATE) {
+            } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == COSMOS_MSG_TYPE_UNDELEGATE2) {
+            } else if (type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == COSMOS_MSG_TYPE_REDELEGATE2) {
+            } else if (type == TASK_TYPE_REDELEGATE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_DEL) {
+            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
                 result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == COSMOS_MULTI_MSG_TYPE_REINVEST) {
+            } else if (type == TASK_TYPE_REINVEST) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == COSMOS_MSG_TYPE_WITHDRAW_MIDIFY) {
+            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
@@ -3677,7 +3653,7 @@ public class WUtils {
     static func dpChainInfo(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
         if (chain == ChainType.COSMOS_MAIN) {
             label.text = NSLocalizedString("chain_title_cosmos", comment: "")
-            img?.image = UIImage(named: "cosmosWhMain")
+            img?.image = UIImage(named: "chainCosmos")
         } else if (chain == ChainType.IRIS_MAIN) {
             label.text = NSLocalizedString("chain_title_iris", comment: "")
             img?.image = UIImage(named: "irisWh")
@@ -4426,7 +4402,7 @@ public class WUtils {
             return UIImage(named: "irisTokenImg")
             
         } else if (chain == ChainType.BINANCE_MAIN) {
-            return UIImage(named: "bnbTokenImg")
+            return UIImage(named: "tokenBinance")
             
         } else if (chain == ChainType.OKEX_MAIN) {
             return UIImage(named: "tokenOkx")
@@ -4554,7 +4530,7 @@ public class WUtils {
     }
     
     static func getChainImg(_ chain: ChainType?) -> UIImage? {
-        if (chain == ChainType.COSMOS_MAIN) { return UIImage(named: "cosmosWhMain") }
+        if (chain == ChainType.COSMOS_MAIN) { return UIImage(named: "chainCosmos") }
         else if (chain == ChainType.IRIS_MAIN) { return UIImage(named: "irisWh") }
         else if (chain == ChainType.BINANCE_MAIN) { return UIImage(named: "binanceChImg") }
         else if (chain == ChainType.OKEX_MAIN) { return UIImage(named: "chainOkex") }

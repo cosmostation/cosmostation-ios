@@ -10,6 +10,8 @@ import UIKit
 
 class WalletDesmosEventCell: UITableViewCell {
 
+    @IBOutlet weak var btnDownload: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -19,6 +21,10 @@ class WalletDesmosEventCell: UITableViewCell {
     
     @IBAction func onClickDownload(_ sender: Any) {
         actionDownload?()
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnDownload.borderColor = UIColor.init(named: "_font05")
     }
     
 }

@@ -336,132 +336,76 @@ let COSMOS_AUTH_TYPE_D_VESTING_ACCOUNT      = "cosmos-sdk/DelayedVestingAccount"
 let COSMOS_AUTH_TYPE_CERTIK_MANUAL          = "auth/ManualVestingAccount";
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";
 
-let COSMOS_MSG_TYPE_TRANSFER                = "cosmos-sdk/Send";
-let COSMOS_MSG_TYPE_TRANSFER2               = "cosmos-sdk/MsgSend";
-let COSMOS_MSG_TYPE_TRANSFER3               = "cosmos-sdk/MsgMultiSend";
-let COSMOS_MSG_TYPE_DELEGATE                = "cosmos-sdk/MsgDelegate";
-let COSMOS_MSG_TYPE_UNDELEGATE              = "cosmos-sdk/Undelegate";
-let COSMOS_MSG_TYPE_UNDELEGATE2             = "cosmos-sdk/MsgUndelegate";
-let COSMOS_MSG_TYPE_REDELEGATE              = "cosmos-sdk/BeginRedelegate";
-let COSMOS_MSG_TYPE_REDELEGATE2             = "cosmos-sdk/MsgBeginRedelegate";
-let COSMOS_MSG_TYPE_WITHDRAW_DEL            = "cosmos-sdk/MsgWithdrawDelegationReward";
-let COSMOS_MSG_TYPE_WITHDRAW_VAL            = "cosmos-sdk/MsgWithdrawValidatorCommission";
-let COSMOS_MSG_TYPE_WITHDRAW_MIDIFY         = "cosmos-sdk/MsgModifyWithdrawAddress";
-let COSMOS_MULTI_MSG_TYPE_REINVEST          = "cosmos-multi-ReInvest";
-
-let COSMOS_MSG_TYPE_VOTE                    = "cosmos-sdk/MsgVote";
-let COSMOS_MSG_TYPE_SUBMIT_PROPOSAL         = "cosmos-sdk/MsgSubmitProposal";
-let COSMOS_MSG_TYPE_DEPOSIT                 = "cosmos-sdk/MsgDeposit";
-let COSMOS_MSG_TYPE_CREATE_VALIDATOR        = "cosmos-sdk/MsgCreateValidator";
-let COSMOS_MSG_TYPE_EDIT_VALIDATOR          = "cosmos-sdk/MsgEditValidator";
 
 let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
 let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";
 let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
 
-let IRIS_MSG_TYPE_TRANSFER                  = "irishub/bank/Send";
-let IRIS_MSG_TYPE_DELEGATE                  = "irishub/stake/MsgDelegate";
-let IRIS_MSG_TYPE_UNDELEGATE                = "irishub/stake/BeginUnbonding";
-let IRIS_MSG_TYPE_REDELEGATE                = "irishub/stake/BeginRedelegate";
-let IRIS_MSG_TYPE_WITHDRAW                  = "irishub/distr/MsgWithdrawDelegationReward";
-let IRIS_MSG_TYPE_WITHDRAW_ALL              = "irishub/distr/MsgWithdrawDelegationRewardsAll";
-let IRIS_MSG_TYPE_COMMISSION                = "irishub/distr/MsgWithdrawValidatorRewardsAll";
-let IRIS_MSG_TYPE_VOTE                      = "irishub/gov/MsgVote";
-let IRIS_MSG_TYPE_DEPOSIT                   = "irishub/gov/MsgDeposit";
-let IRIS_MSG_TYPE_SUBMIT_PROPOSAL           = "irishub/gov/MsgSubmitProposal";
-let IRIS_MSG_TYPE_CREATE_VALIDATOR          = "irishub/stake/MsgCreateValidator";
-let IRIS_MSG_TYPE_WITHDRAW_MIDIFY           = "irishub/distr/MsgModifyWithdrawAddress";
-let IRIS_MSG_TYPE_ISSUE_TOKEN               = "irishub/asset/MsgIssueToken";
-
-let IRIS_PROPOAL_TYPE_BasicProposal             = "irishub/gov/BasicProposal";
-let IRIS_PROPOAL_TYPE_ParameterProposal         = "irishub/gov/ParameterProposal";
-let IRIS_PROPOAL_TYPE_PlainTextProposal         = "irishub/gov/PlainTextProposal";
-let IRIS_PROPOAL_TYPE_TokenAdditionProposal     = "irishub/gov/TokenAdditionProposal";
-let IRIS_PROPOAL_TYPE_SoftwareUpgradeProposal   = "irishub/gov/SoftwareUpgradeProposal";
-let IRIS_PROPOAL_TYPE_SystemHaltProposal        = "irishub/gov/SystemHaltProposal";
-let IRIS_PROPOAL_TYPE_CommunityTaxUsageProposal = "irishub/gov/CommunityTaxUsageProposal";
 
 
-let BNB_MSG_TYPE_HTLC                       = "tokens/HTLTMsg";
-let BNB_MSG_TYPE_HTLC_CLIAM                 = "tokens/ClaimHTLTMsg";
-let BNB_MSG_TYPE_HTLC_REFUND                = "tokens/RefundHTLTMsg";
+let TASK_TYPE_TRANSFER                      = "TASK_TYPE_TRANSFER";
+let TASK_TYPE_DELEGATE                      = "TASK_TYPE_DELEGATE";
+let TASK_TYPE_UNDELEGATE                    = "TASK_TYPE_UNDELEGATE";
+let TASK_TYPE_REDELEGATE                    = "TASK_TYPE_REDELEGATE";
+let TASK_TYPE_CLAIM_STAKE_REWARD            = "TASK_TYPE_CLAIM_STAKE_REWARD";
+let TASK_TYPE_CLAIM_COMMISSION              = "TASK_TYPE_CLAIM_COMMISSION";
+let TASK_TYPE_MODIFY_REWARD_ADDRESS         = "TASK_TYPE_MODIFY_REWARD_ADDRESS";
+let TASK_TYPE_REINVEST                      = "TASK_TYPE_REINVEST";
+let TASK_TYPE_VOTE                          = "TASK_TYPE_VOTE";
 
-let TASK_TYPE_VOTE                          = "vote_task";
-let TASK_TYPE_HTLC_SWAP                     = "htlc_swap";
-let TASK_TYPE_HTLC_REFUND                   = "htlc_refund";
+let TASK_TYPE_KAVA_CDP_CREATE               = "TASK_TYPE_KAVA_CDP_CREATE";
+let TASK_TYPE_KAVA_CDP_DEPOSIT              = "TASK_TYPE_KAVA_CDP_DEPOSIT";
+let TASK_TYPE_KAVA_CDP_WITHDRAW             = "TASK_TYPE_KAVA_CDP_WITHDRAW";
+let TASK_TYPE_KAVA_CDP_DRAWDEBT             = "TASK_TYPE_KAVA_CDP_DRAWDEBT";
+let TASK_TYPE_KAVA_CDP_REPAY                = "TASK_TYPE_KAVA_CDP_REPAY";
+let TASK_TYPE_KAVA_HARD_DEPOSIT             = "TASK_TYPE_KAVA_HARD_DEPOSIT";
+let TASK_TYPE_KAVA_HARD_WITHDRAW            = "TASK_TYPE_KAVA_HARD_WITHDRAW";
+let TASK_TYPE_KAVA_HARD_BORROW              = "TASK_TYPE_KAVA_HARD_BORROW";
+let TASK_TYPE_KAVA_HARD_REPAY               = "TASK_TYPE_KAVA_HARD_REPAY";
+let TASK_TYPE_KAVA_SWAP_TOKEN               = "TASK_TYPE_KAVA_SWAP_TOKEN";
+let TASK_TYPE_KAVA_SWAP_DEPOSIT             = "TASK_TYPE_KAVA_SWAP_DEPOSIT";
+let TASK_TYPE_KAVA_SWAP_WITHDRAW            = "TASK_TYPE_KAVA_SWAP_WITHDRAW";
+let TASK_TYPE_KAVA_INCENTIVE_ALL            = "TASK_TYPE_KAVA_INCENTIVE_ALL";
 
-let KAVA_MSG_TYPE_POST_PRICE                = "pricefeed/MsgPostPrice";
-let KAVA_MSG_TYPE_CREATE_CDP                = "/kava.cdp.v1beta1.MsgCreateCDP";
-let KAVA_MSG_TYPE_DEPOSIT_CDP               = "/kava.cdp.v1beta1.MsgDeposit";
-let KAVA_MSG_TYPE_WITHDRAW_CDP              = "/kava.cdp.v1beta1.MsgWithdraw";
-let KAVA_MSG_TYPE_DRAWDEBT_CDP              = "/kava.cdp.v1beta1.MsgDrawDebt";
-let KAVA_MSG_TYPE_REPAYDEBT_CDP             = "/kava.cdp.v1beta1.MsgRepayDebt";
-let KAVA_MSG_TYPE_LIQUIDATE_CDP             = "/kava.cdp.v1beta1.MsgLiquidate";
-let KAVA_MSG_TYPE_HTLC_CREATE_SWAP          = "/kava.bep3.v1beta1.MsgCreateAtomicSwap";
-let KAVA_MSG_TYPE_HTLC_CLAIM_SWAP           = "/kava.bep3.v1beta1.MsgClaimAtomicSwap";
-let KAVA_MSG_TYPE_HTLC_REFUND_SWAP          = "/kava.bep3.v1beta1.MsgRefundAtomicSwap";
-let KAVA_MSG_TYPE_INCENTIVE_REWARD          = "incentive/MsgClaimReward";
-let KAVA_MSG_TYPE_DEPOSIT_HAVEST            = "harvest/MsgDeposit";
-let KAVA_MSG_TYPE_WITHDRAW_HAVEST           = "harvest/MsgWithdraw";
-let KAVA_MSG_TYPE_CLAIM_HAVEST              = "harvest/MsgClaimReward";
-let KAVA_MSG_TYPE_USDX_MINT_INCENTIVE       = "/kava.incentive.v1beta1.MsgClaimUSDXMintingReward";
-let KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE      = "/kava.incentive.v1beta1.MsgClaimHardReward";
-let KAVA_MSG_TYPE_DELEGATOR_INCENTIVE       = "/kava.incentive.v1beta1.MsgClaimDelegatorReward";
-let KAVA_MSG_TYPE_SWAP_INCENTIVE            = "/kava.incentive.v1beta1.MsgClaimSwapReward";
-let KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV   = "incentive/MsgClaimHardRewardVVesting";
-let KAVA_MSG_TYPE_INCENTIVE_ALL             = "incentiveAll";
-let KAVA_MSG_TYPE_DEPOSIT_HARD              = "/kava.hard.v1beta1.MsgDeposit";
-let KAVA_MSG_TYPE_WITHDRAW_HARD             = "/kava.hard.v1beta1.MsgWithdraw";
-let KAVA_MSG_TYPE_BORROW_HARD               = "/kava.hard.v1beta1.MsgBorrow";
-let KAVA_MSG_TYPE_REPAY_HARD                = "/kava.hard.v1beta1.MsgRepay";
-let KAVA_MSG_TYPE_LIQUIDATE_HARD            = "/kava.hard.v1beta1.MsgLiquidate";
-let KAVA_MSG_TYPE_SWAP_TOKEN                = "/kava.swap.v1beta1.MsgSwapExactForTokens";
-let KAVA_MSG_TYPE_SWAP_TOKEN2               = "/kava.swap.v1beta1.MsgSwapForExactTokens";
-let KAVA_MSG_TYPE_SWAP_DEPOSIT              = "/kava.swap.v1beta1.MsgDeposit";
-let KAVA_MSG_TYPE_SWAP_WITHDRAW             = "/kava.swap.v1beta1.MsgWithdraw";
+let TASK_TYPE_HTLC_SWAP                     = "TASK_TYPE_HTLC_SWAP";
 
+let TASK_TYPE_OK_DEPOSIT                    = "TASK_TYPE_OK_DEPOSIT";
+let TASK_TYPE_OK_WITHDRAW                   = "TASK_TYPE_OK_WITHDRAW";
+let TASK_TYPE_OK_DIRECT_VOTE                = "TASK_TYPE_OK_DIRECT_VOTE";
 
-let CERTIK_MSG_TYPE_TRANSFER                = "bank/MsgSend";
-
-let OK_MSG_TYPE_TRANSFER                    = "okexchain/token/MsgTransfer";
-let OK_MSG_TYPE_MULTI_TRANSFER              = "okexchain/token/MsgMultiTransfer";
-let OK_MSG_TYPE_DEPOSIT                     = "okexchain/staking/MsgDeposit";
-let OK_MSG_TYPE_WITHDRAW                    = "okexchain/staking/MsgWithdraw";
-let OK_MSG_TYPE_DIRECT_VOTE                 = "okexchain/staking/MsgAddShares";
+let TASK_TYPE_STARNAME_REGISTER_DOMAIN      = "TASK_TYPE_STARNAME_REGISTER_DOMAIN";
+let TASK_TYPE_STARNAME_REGISTER_ACCOUNT     = "TASK_TYPE_STARNAME_REGISTER_ACCOUNT";
+let TASK_TYPE_STARNAME_DELETE_DOMAIN        = "TASK_TYPE_STARNAME_DELETE_DOMAIN";
+let TASK_TYPE_STARNAME_DELETE_ACCOUNT       = "TASK_TYPE_STARNAME_DELETE_ACCOUNT";
+let TASK_TYPE_STARNAME_REPLACE_RESOURCE     = "TASK_TYPE_STARNAME_REPLACE_RESOURCE";
+let TASK_TYPE_STARNAME_RENEW_DOMAIN         = "TASK_TYPE_STARNAME_RENEW_DOMAIN";
+let TASK_TYPE_STARNAME_RENEW_ACCOUNT        = "TASK_TYPE_STARNAME_RENEW_ACCOUNT";
 
 
-let IOV_MSG_TYPE_REGISTER_DOMAIN            = "starname/RegisterDomain";
-let IOV_MSG_TYPE_REGISTER_ACCOUNT           = "starname/RegisterAccount";
-let IOV_MSG_TYPE_DELETE_DOMAIN              = "starname/DeleteDomain";
-let IOV_MSG_TYPE_DELETE_ACCOUNT             = "starname/DeleteAccount";
-let IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE   = "starname/ReplaceAccountResources";
-let IOV_MSG_TYPE_RENEW_DOMAIN               = "starname/RenewDomain";
-let IOV_MSG_TYPE_RENEW_ACCOUNT              = "starname/RenewAccount";
+let TASK_TYPE_OSMOSIS_SWAP                  = "TASK_TYPE_OSMOSIS_SWAP";
+let TASK_TYPE_OSMOSIS_JOIN_POOL             = "TASK_TYPE_OSMOSIS_JOIN_POOL";
+let TASK_TYPE_OSMOSIS_EXIT_POOL             = "TASK_TYPE_OSMOSIS_EXIT_POOL";
+let TASK_TYPE_OSMOSIS_LOCK                  = "TASK_TYPE_OSMOSIS_LOCK";
+let TASK_TYPE_OSMOSIS_BEGIN_UNLCOK          = "TASK_TYPE_OSMOSIS_BEGIN_UNLCOK";
 
 
-let OSMOSIS_MSG_TYPE_SWAP                   = "osmosis/MsgSwapExactAmountIn";
-let OSMOSIS_MSG_TYPE_JOIN_POOL              = "osmosis/MsgJoinPool";
-let OSMOSIS_MSG_TYPE_EXIT_POOL              = "osmosis/MsgExitPool";
-let OSMOSIS_MSG_TYPE_LOCK                   = "osmosis/MsgLockTokens";
-let OSMOSIS_MSG_TYPE_BEGIN_UNLCOK           = "osmosis/MsgBeginUnlocking";
-let OSMOSIS_MSG_TYPE_PERIOD_UNLOCK          = "osmosis/MsgUnlockPeriodLock";
+let TASK_TYPE_SIF_ADD_LP                    = "TASK_TYPE_SIF_ADD_LP";
+let TASK_TYPE_SIF_REMOVE_LP                 = "TASK_TYPE_SIF_REMOVE_LP";
+let TASK_TYPE_SIF_SWAP_CION                 = "TASK_TYPE_SIF_SWAP_CION";
 
 
-let SIF_MSG_TYPE_CLAIM_INCENTIVE            = "sif/MsgCreateUserClaim";
-let SIF_MSG_TYPE_ADD_LP                     = "sif/MsgAddLiquidity";
-let SIF_MSG_TYPE_REMOVE_LP                  = "sif/MsgRemoveLiquidity";
-let SIF_MSG_TYPE_SWAP_CION                  = "sif/MsgSwap";
+let TASK_TYPE_DESMOS_GEN_PROFILE            = "TASK_TYPE_DESMOS_GEN_PROFILE";
+let TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT     = "TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT";
+
+let TASK_TYPE_NFT_ISSUE_DENOM               = "TASK_TYPE_NFT_ISSUE_DENOM";
+let TASK_TYPE_NFT_ISSUE                     = "TASK_TYPE_NFT_ISSUE";
+let TASK_TYPE_NFT_SEND                      = "TASK_TYPE_NFT_SEND";
 
 
-let TASK_IBC_TRANSFER                       = "ibc_MsgTransfer";
-let TASK_CW20_TRANSFER                      = "cw20_Transfer";
+let TASK_TYPE_IBC_TRANSFER                  = "TASK_TYPE_IBC_TRANSFER";
+let TASK_TYPE_IBC_CW20_TRANSFER             = "TASK_TYPE_IBC_CW20_TRANSFER";
 
-let TASK_ISSUE_NFT_DENOM                    = "issue_nft_denom";
-let TASK_ISSUE_NFT                          = "issue_nft";
-let TASK_SEND_NFT                           = "send_nft";
 
-let TASK_GEN_PROFILE                        = "desmos/MsgSaveProfile";
-let TASK_LINK_CHAIN_ACCOUNT                 = "desmos/MsgLinkChainAccount";
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"
 let PASSWORD_ACTION_SIMPLE_CHECK            = "ACTION_SIMPLE_CHECK"
@@ -470,7 +414,6 @@ let PASSWORD_ACTION_CHECK_TX                = "ACTION_CHECK_TX"
 let PASSWORD_ACTION_APP_LOCK                = "ACTION_APP_LOCK"
 let PASSWORD_ACTION_INTRO_LOCK              = "ACTION_INTRO_LOCK"
 let PASSWORD_ACTION_DEEPLINK_LOCK           = "ACTION_DEEPLINK_LOCK"
-
 
 
 let PASSWORD_RESUKT_OK                      = 0
@@ -780,7 +723,6 @@ let SIF_GAS_AMOUNT_REINVEST                     = "350000";
 let SIF_GAS_AMOUNT_REWARD_ADDRESS_CHANGE        = "100000";
 let SIF_GAS_AMOUNT_VOTE                         = "100000";
 let SIF_GAS_AMOUNT_IBC_SEND                     = "500000";
-let SIF_GAS_AMOUNT_INCENTIVE                    = "250000";
 let SIF_GAS_AMOUNT_LP                           = "250000";
 let SIF_GAS_AMOUNT_SWAP                         = "250000";
 
@@ -1078,9 +1020,6 @@ let COLOR_NYX                               = UIColor.init(hexString: "ff6c5a")
 let COLOR_NYX_DARK                          = UIColor.init(hexString: "ca5345")
 let COLOR_NYM                               = UIColor.init(hexString: "5F82C8")
 
-let COLOR_CDP_DANGER                        = UIColor.init(hexString: "FF2745")
-let COLOR_CDP_STABLE                        = UIColor.init(hexString: "FFE62B")
-let COLOR_CDP_SAFE                          = UIColor.init(hexString: "40F683")
 
 let COLOR_WC_TRADE_BUY                      = UIColor.init(hexString: "37CC6E")
 let COLOR_WC_TRADE_SELL                     = UIColor.init(hexString: "FF2745")
@@ -1417,8 +1356,8 @@ let SELECT_POPUP_OSMOSIS_COIN_IN = 4
 let SELECT_POPUP_OSMOSIS_COIN_OUT = 5
 let SELECT_POPUP_KAVA_SWAP_IN = 6
 let SELECT_POPUP_KAVA_SWAP_OUT = 7
-let SELECT_POPUP_GRAVITY_SWAP_IN = 8
-let SELECT_POPUP_GRAVITY_SWAP_OUT = 9
+//let SELECT_POPUP_GRAVITY_SWAP_IN = 8
+//let SELECT_POPUP_GRAVITY_SWAP_OUT = 9
 let SELECT_POPUP_IBC_CHAIN = 10
 let SELECT_POPUP_IBC_RELAYER = 11
 let SELECT_POPUP_IBC_RECIPIENT = 12

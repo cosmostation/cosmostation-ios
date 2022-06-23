@@ -120,7 +120,7 @@ class ContractTokenGrpcViewController: BaseViewController, UITableViewDelegate, 
         }
         
         let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_CW20_TRANSFER, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_CW20_TRANSFER, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -128,7 +128,7 @@ class ContractTokenGrpcViewController: BaseViewController, UITableViewDelegate, 
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mCw20SendContract = mCw20Token!.contract_address
-        txVC.mType = TASK_CW20_TRANSFER
+        txVC.mType = TASK_TYPE_IBC_CW20_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;

@@ -13,39 +13,14 @@ class AmountInputTextField: UITextField {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.backgroundColor = UIColor(named: "_font02")
         self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor.white.cgColor
-        self.backgroundColor = UIColor.clear
-//        self.setLeftPaddingPoints(60)
-//        self.setRightPaddingPoints(12)
+        self.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        self.layer.cornerRadius = 8
+        self.layer.masksToBounds = true
+        
+        
         self.setLeftPaddingPoints(8)
         self.setRightPaddingPoints(60)
-        
-//        self.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("add_address_hint", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
     }
-
-    open override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-//        return action == #selector(UIResponderStandardEditActions.cut) ||
-//            action == #selector(UIResponderStandardEditActions.copy) ||
-//            action == #selector(UIResponderStandardEditActions.paste) ||
-//            action == #selector(UIResponderStandardEditActions.select) ||
-//            action == #selector(UIResponderStandardEditActions.selectAll) ||
-//            action == #selector(UIResponderStandardEditActions.delete)
-        return false
-    }
-    
-//    private func getKeyboardLanguage() -> String? {
-//        return "en" // here you can choose keyboard any way you need
-//    }
-//    
-//    override var textInputMode: UITextInputMode? {
-//        if let language = getKeyboardLanguage() {
-//            for tim in UITextInputMode.activeInputModes {
-//                if tim.primaryLanguage!.contains(language) {
-//                    return tim
-//                }
-//            }
-//        }
-//        return super.textInputMode
-//    }
 }

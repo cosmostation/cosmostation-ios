@@ -316,6 +316,9 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="t6v-dj-Y8k" id="rsX-H7-tyh"/>
+                <outlet property="btnDelegate" destination="2fg-vB-8al" id="g8S-vA-QKQ"/>
+                <outlet property="btnProfile" destination="OIq-cQ-1Nv" id="MbT-KN-lGp"/>
+                <outlet property="btnProposal" destination="mFN-Hd-fLQ" id="1WJ-KM-D6V"/>
                 <outlet property="cardRoot" destination="3gb-Jn-LFa" id="5pS-kD-xUH"/>
                 <outlet property="delegatedAmount" destination="WLt-Nh-Y32" id="uVO-eY-62R"/>
                 <outlet property="rewardAmount" destination="6wG-3c-Ug1" id="WPn-vM-eab"/>
@@ -334,10 +337,10 @@
         <image name="btnIconVote" width="20" height="20"/>
         <image name="tokenDesmos" width="22" height="22"/>
         <namedColor name="_card_divider">
-            <color red="0.74509803921568629" green="0.77647058823529413" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
-            <color red="0.47843137254901957" green="0.49803921568627452" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -346,7 +349,7 @@
             <color red="0.92900002002716064" green="0.42399999499320984" blue="0.32499998807907104" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="desmos_bg">
-            <color red="1" green="0.94901960784313721" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.94900000095367432" blue="0.94099998474121094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
