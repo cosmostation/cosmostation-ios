@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -311,7 +311,7 @@ For example, a risk score of 60 and the current token price of your collateraliz
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nnu-q6-DCZ">
                             <rect key="frame" x="0.0" y="373" width="339" height="50"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fle-8Z-Hef">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fle-8Z-Hef">
                                     <rect key="frame" x="0.0" y="0.0" width="164.66666666666666" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="9F3-lx-E1w"/>
@@ -335,7 +335,7 @@ For example, a risk score of 60 and the current token price of your collateraliz
                                         <action selector="onClickCancel:" destination="-1" eventType="touchUpInside" id="IFc-KH-IYD"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJH-By-IC4">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJH-By-IC4">
                                     <rect key="frame" x="174.66666666666663" y="0.0" width="164.33333333333337" height="50"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="cMR-Vh-nFM"/>
@@ -361,7 +361,7 @@ For example, a risk score of 60 and the current token price of your collateraliz
                                 </button>
                             </subviews>
                         </stackView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KT-5N-RPH">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KT-5N-RPH">
                             <rect key="frame" x="0.0" y="373" width="339" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="lwa-iC-FhB"/>
@@ -423,6 +423,7 @@ For example, a risk score of 60 and the current token price of your collateraliz
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="zkh-b0-4FB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="100" id="2eh-N9-dvo"/>
@@ -431,7 +432,6 @@ For example, a risk score of 60 and the current token price of your collateraliz
                 <constraint firstItem="zkh-b0-4FB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="18" id="jog-U0-PQz"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139.85507246376812" y="153.01339285714286"/>
         </view>
     </objects>
