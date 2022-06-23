@@ -61,11 +61,11 @@ class TokenDetailVestingDetailCell: TokenDetailCell {
         let chainConfig = ChainFactory().getChainConfig(chainType)
         if (chainType == ChainType.KAVA_MAIN) {
             if (denom == KAVA_MAIN_DENOM) {
-                rootCardView.backgroundColor = UIColor.init(named: "kava")
+                rootCardView.backgroundColor = chainConfig?.chainColorBG
             } else if (denom == KAVA_HARD_DENOM) {
-                rootCardView.backgroundColor = UIColor.init(named: "kava_hard")
+                rootCardView.backgroundColor = UIColor.init(named: "_card_bg")
             } else if (denom == KAVA_SWAP_DENOM) {
-                rootCardView.backgroundColor = UIColor.init(named: "kava_swp")
+                rootCardView.backgroundColor = UIColor.init(named: "_card_bg")
             }
             onBindVesting_gRPC(chainType, denom)
             

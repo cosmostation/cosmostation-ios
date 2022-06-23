@@ -60,10 +60,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             self.toAccountList = BaseData.instance.selectAllAccountsByChain(toChain!)
             
-        } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN || type == SELECT_POPUP_KAVA_SWAP_IN || type == SELECT_POPUP_GRAVITY_SWAP_IN || type == SELECT_POPUP_SIF_SWAP_IN) {
+        } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN || type == SELECT_POPUP_KAVA_SWAP_IN || type == SELECT_POPUP_SIF_SWAP_IN) {
             self.popupTitle.text = NSLocalizedString("str_select_coin_swap_in", comment: "")
             
-        } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT || type == SELECT_POPUP_KAVA_SWAP_OUT || type == SELECT_POPUP_GRAVITY_SWAP_OUT || type == SELECT_POPUP_SIF_SWAP_OUT) {
+        } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT || type == SELECT_POPUP_KAVA_SWAP_OUT || type == SELECT_POPUP_SIF_SWAP_OUT) {
             self.popupTitle.text = NSLocalizedString("str_select_coin_swap_out", comment: "")
             
         } else if (type == SELECT_POPUP_IBC_CHAIN) {
@@ -129,9 +129,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return toAccountList.count
         } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_IBC_RECIPIENT) {
             return toAccountList.count
-        } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN || type == SELECT_POPUP_KAVA_SWAP_IN || type == SELECT_POPUP_GRAVITY_SWAP_IN || type == SELECT_POPUP_SIF_SWAP_IN) {
+        } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN || type == SELECT_POPUP_KAVA_SWAP_IN || type == SELECT_POPUP_SIF_SWAP_IN) {
             return toCoinList.count
-        } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT || type == SELECT_POPUP_KAVA_SWAP_OUT || type == SELECT_POPUP_GRAVITY_SWAP_OUT || type == SELECT_POPUP_SIF_SWAP_OUT) {
+        } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT || type == SELECT_POPUP_KAVA_SWAP_OUT || type == SELECT_POPUP_SIF_SWAP_OUT) {
             return toCoinList.count
         } else if (type == SELECT_POPUP_IBC_CHAIN) {
             return ibcToChain.count
@@ -197,26 +197,27 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             cell?.accountAddress.text = account.account_address
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
             if (toChain == ChainType.BINANCE_MAIN) {
-                cell?.keyStatusImg.tintColor = COLOR_BNB
+                cell?.keyStatusImg.tintColor = UIColor.init(named: "binance")
                 cell!.accountBalance.attributedText = WUtils.displayAmount2(WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).stringValue, cell!.accountBalance.font, 0, 8)
                 
             } else if (toChain == ChainType.KAVA_MAIN) {
-                cell?.keyStatusImg.tintColor = COLOR_KAVA
+                cell?.keyStatusImg.tintColor = UIColor.init(named: "kava")
                 cell!.accountBalance.attributedText = WUtils.displayAmount2(WUtils.getTokenAmount(account.account_balances, KAVA_MAIN_DENOM).stringValue, cell!.accountBalance.font, 6, 6)
             }
             return cell!
             
         } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_IBC_RECIPIENT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
+            let toChainConfig = ChainFactory().getChainConfig(toChain)
             let account = toAccountList[indexPath.row]
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
             cell?.accountName.text = account.getDpName()
-            cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
             if (account.account_has_private) {
-                cell?.keyStatusImg.tintColor = WUtils.getChainColor(toChain)
+                cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
+                cell?.keyStatusImg.tintColor = toChainConfig?.chainColor
             } else {
-                cell?.keyStatusImg.tintColor = UIColor.init(hexString: "7A7f88")
+                cell?.keyStatusImg.tintColor = UIColor.init(named: "_font05")
             }
             cell?.accountBalance.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.accountBalance.font, 0, 6)
             return cell!
@@ -247,20 +248,6 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let swapOutDenom = toCoinList[indexPath.row]
             cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapOutDenom))!)
             cell!.coinTitle.text = WUtils.getKavaTokenName(swapOutDenom)
-            return cell!
-            
-        } else if (type == SELECT_POPUP_GRAVITY_SWAP_IN) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
-//            let swapInDenom = toCoinList[indexPath.row]
-//            WUtils.DpCosmosTokenImg(cell!.coinImg, swapInDenom)
-//            cell!.coinTitle.text = WUtils.getCosmosTokenName(swapInDenom)
-            return cell!
-            
-        } else if (type == SELECT_POPUP_GRAVITY_SWAP_OUT) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
-//            let swapOutDenom = toCoinList[indexPath.row]
-//            WUtils.DpCosmosTokenImg(cell!.coinImg, swapOutDenom)
-//            cell!.coinTitle.text = WUtils.getCosmosTokenName(swapOutDenom)
             return cell!
             
         } else if (type == SELECT_POPUP_IBC_CHAIN) {
