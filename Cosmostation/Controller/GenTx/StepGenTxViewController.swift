@@ -528,15 +528,10 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         disableBounce = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
     func newVc(viewController: String) ->UIViewController {
         return UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: viewController)
     }
 
-    
     func onBeforePage() {
         disableBounce = false
         if (currentIndex == 0) {
@@ -556,11 +551,9 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     func onNextPage() {
         disableBounce = false
-        if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE ||
-            mType == IOV_MSG_TYPE_REGISTER_ACCOUNT || mType == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV || mType == TASK_IBC_TRANSFER ||
-            mType == TASK_CW20_TRANSFER) {
+        if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == IOV_MSG_TYPE_REGISTER_ACCOUNT ||
+            mType == TASK_IBC_TRANSFER || mType == TASK_CW20_TRANSFER) {
             if (currentIndex > 3) { return }
-            
         } else {
             if (currentIndex > 2) { return }
         }
@@ -572,19 +565,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
             currentVC.enableUserInteraction()
             self.disableBounce = true
         })
-        
-        
-//        if ((currentIndex <= 3 && (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE ||
-//                                    mType == IOV_MSG_TYPE_REGISTER_ACCOUNT || mType == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV) || mType == TASK_IBC_TRANSFER) || currentIndex <= 2) {
-//            setViewControllers([orderedViewControllers[currentIndex + 1]], direction: .forward, animated: true, completion: { (finished) -> Void in
-//                self.currentIndex = self.currentIndex + 1
-//                let value:[String: Int] = ["step": self.currentIndex ]
-//                NotificationCenter.default.post(name: Notification.Name("stepChanged"), object: nil, userInfo: value)
-//                let currentVC = self.orderedViewControllers[self.currentIndex] as! BaseViewController
-//                currentVC.enableUserInteraction()
-//                self.disableBounce = true
-//            })
-//        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {

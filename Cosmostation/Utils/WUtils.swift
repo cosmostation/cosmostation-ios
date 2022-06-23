@@ -2793,8 +2793,6 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_REINVEST))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_VOTE))
-            } else if (type == KAVA_MSG_TYPE_USDX_MINT_INCENTIVE || type == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE || type == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CLAIM_INCENTIVE))
             } else if (type == TASK_TYPE_KAVA_CDP_CREATE || type == TASK_TYPE_KAVA_CDP_DEPOSIT || type == TASK_TYPE_KAVA_CDP_WITHDRAW ||
                         type == TASK_TYPE_KAVA_CDP_DRAWDEBT || type == TASK_TYPE_KAVA_CDP_REPAY) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CDP))

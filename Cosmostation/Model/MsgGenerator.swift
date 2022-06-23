@@ -123,17 +123,6 @@ class MsgGenerator {
     }
     
     
-    static func genRefundAtomicSwap(_ from: String, _ swapId: String) -> Msg {
-        var msg = Msg.init()
-        var value = Msg.Value.init()
-        value.from = from
-        value.swap_id = swapId.uppercased()
-        msg.type = KAVA_MSG_TYPE_HTLC_REFUND_SWAP
-        msg.value = value
-        return msg
-    }
-    
-    
     static func genOkDepositMsg(_ delegator: String, _ coin: Coin) -> Msg {
         var msg = Msg.init()
         var value = Msg.Value.init()
