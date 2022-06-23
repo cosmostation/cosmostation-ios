@@ -387,7 +387,7 @@ For example, a risk score of 60 and the current token price of your collateraliz
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" name="_font02"/>
+                    <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
                         <constraint firstItem="zFG-1H-aof" firstAttribute="width" secondItem="zkh-b0-4FB" secondAttribute="width" id="1fZ-ax-5Py"/>
                         <constraint firstItem="718-H3-GDl" firstAttribute="leading" secondItem="zkh-b0-4FB" secondAttribute="leading" constant="12" id="2Lo-wg-WAU"/>
@@ -439,11 +439,11 @@ For example, a risk score of 60 and the current token price of your collateraliz
     <resources>
         <image name="ImgKavaRiskScore" width="275" height="152"/>
         <image name="iconArrowRight" width="24" height="24"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_card_divider">
             <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="_font02">
-            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
             <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
