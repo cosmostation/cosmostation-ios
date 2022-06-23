@@ -1,16 +1,16 @@
 //
-//  StepOkVoteCheckViewController.swift
+//  OkVote4ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/08/28.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/23.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 import HDWalletKit
 
-class StepOkVoteCheckViewController: BaseViewController, PasswordViewDelegate {
+class OkVote4ViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var feeAmountLabel: UILabel!
     @IBOutlet weak var feeAmountDenom: UILabel!
@@ -198,3 +198,4 @@ class StepOkVoteCheckViewController: BaseViewController, PasswordViewDelegate {
         }
     }
 }
+

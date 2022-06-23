@@ -1,15 +1,15 @@
 //
-//  StepOkWithdrawAmountViewController.swift
+//  OkWithdraw1ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/08/27.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/23.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class StepOkWithdrawAmountViewController: BaseViewController, UITextFieldDelegate {
-
+class OkWithdraw1ViewController: BaseViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var toWithdrawAmountInput: AmountInputTextField!
     @IBOutlet weak var availableAmountLabel: UILabel!
     @IBOutlet weak var denomTitleLabel: UILabel!
@@ -71,9 +71,8 @@ class StepOkWithdrawAmountViewController: BaseViewController, UITextFieldDelegat
             self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        
         if(text.count == 0) {
-            self.toWithdrawAmountInput.layer.borderColor = UIColor.white.cgColor
+            self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
@@ -83,13 +82,11 @@ class StepOkWithdrawAmountViewController: BaseViewController, UITextFieldDelegat
             self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        
         if (userInput.compare(userAvailable).rawValue > 0) {
             self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        
-        self.toWithdrawAmountInput.layer.borderColor = UIColor.white.cgColor
+        self.toWithdrawAmountInput.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     
     func isValiadAmount() -> Bool {

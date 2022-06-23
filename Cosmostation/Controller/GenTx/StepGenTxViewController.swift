@@ -315,22 +315,22 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         
         //OEC
         else if (mType == OK_MSG_TYPE_DEPOSIT) {
-            return [self.newVc(viewController: "StepOkDepositAmountViewController"),
+            return [OkDeposit1ViewController(nibName: "OkDeposit1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeLcdViewController(nibName: "FeeLcdViewController", bundle: nil),
-                    self.newVc(viewController: "StepOkDepositCheckViewController")]
+                    OkDeposit4ViewController(nibName: "OkDeposit4ViewController", bundle: nil)]
             
         } else if (mType == OK_MSG_TYPE_WITHDRAW) {
-            return [self.newVc(viewController: "StepOkWithdrawAmountViewController"),
+            return [OkWithdraw1ViewController(nibName: "OkWithdraw1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeLcdViewController(nibName: "FeeLcdViewController", bundle: nil),
-                    self.newVc(viewController: "StepOkWithdrawCheckViewController")]
+                    OkWithdraw4ViewController(nibName: "OkWithdraw4ViewController", bundle: nil)]
             
         } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
-            return [self.newVc(viewController: "StepOkVoteToViewController"),
+            return [OkVote1ViewController(nibName: "OkVote1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeLcdViewController(nibName: "FeeLcdViewController", bundle: nil),
-                    self.newVc(viewController: "StepOkVoteCheckViewController")]
+                    OkVote4ViewController(nibName: "OkVote4ViewController", bundle: nil)]
 
         }
         

@@ -37,7 +37,7 @@
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Er-7z-ec7">
                                 <rect key="frame" x="68" y="12" width="0.5" height="48"/>
-                                <color key="backgroundColor" red="0.29411764705882354" green="0.30980392156862746" blue="0.32941176470588235" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" name="_font04"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="0.5" id="1Ng-ov-OlS"/>
                                 </constraints>

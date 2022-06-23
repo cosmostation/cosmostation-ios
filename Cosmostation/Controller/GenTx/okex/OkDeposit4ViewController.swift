@@ -1,18 +1,18 @@
 //
-//  StepOkWithdrawCheckViewController.swift
+//  OkDeposit4ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/08/27.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/23.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 import HDWalletKit
 
-class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegate {
-    @IBOutlet weak var toWithdrawAmountLabel: UILabel!
-    @IBOutlet weak var toWithdrawAmountDenom: UILabel!
+class OkDeposit4ViewController: BaseViewController, PasswordViewDelegate, SBCardPopupDelegate {
+    @IBOutlet weak var toDepositAmountLabel: UILabel!
+    @IBOutlet weak var toDepositAmountDenom: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
     @IBOutlet weak var feeAmountDenom: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
@@ -20,24 +20,22 @@ class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegat
     @IBOutlet weak var confirmBtn: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(chainType, toWithdrawAmountDenom)
+        pageHolderVC = self.parent as? StepGenTxViewController
+        WUtils.setDenomTitle(chainType, toDepositAmountDenom)
         WUtils.setDenomTitle(chainType, feeAmountDenom)
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
-        passwordVC.resultDelegate = self
-        self.navigationController?.pushViewController(passwordVC, animated: false)
+        let popupVC = DelegateWarnPopup(nibName: "DelegateWarnPopup", bundle: nil)
+        popupVC.warnImgType = 14
+        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+        cardPopup.resultDelegate = self
+        cardPopup.show(onViewController: self)
     }
     
     
@@ -54,9 +52,20 @@ class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegat
     }
     
     func onUpdateView() {
-        toWithdrawAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mOkToWithdraw.amount, toWithdrawAmountLabel.font, 0, 18)
+        toDepositAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mOkToStaking.amount, toDepositAmountLabel.font, 0, 18)
         feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 0, 18)
         memoLabel.text = pageHolderVC.mMemo
+    }
+    
+    func SBCardPopupResponse(type:Int, result: Int) {
+        if (result == 1) {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
+            passwordVC.resultDelegate = self
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
     }
     
     func passwordResponse(result: Int) {
@@ -65,6 +74,7 @@ class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegat
         }
     }
 
+    
     func onFetchAccountInfo(_ account: Account) {
         self.showWaittingAlert()
         let request = Alamofire.request(BaseNetWork.accountInfoUrl(chainType, account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
@@ -80,7 +90,7 @@ class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegat
                 let okAccountInfo = OkAccountInfo.init(info)
                 _ = BaseData.instance.updateAccount(WUtils.getAccountWithOkAccountInfo(account, okAccountInfo))
                 BaseData.instance.mOkAccountInfo = okAccountInfo
-                self.onGenOkWithdrawTx()
+                self.onGenOkDepositTx()
                 
             case .failure(let error):
                 self.hideWaittingAlert()
@@ -90,18 +100,20 @@ class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegat
         }
     }
     
-    func onGenOkWithdrawTx() {
+    func onGenOkDepositTx() {
         DispatchQueue.global().async {
             var stdTx:StdTx!
             do {
-                let msg = MsgGenerator.genOkWithdarwMsg(self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mOkToWithdraw)
+                let msg = MsgGenerator.genOkDepositMsg(self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mOkToStaking)
                 var msgList = Array<Msg>()
                 msgList.append(msg)
                 
                 let stdMsg = MsgGenerator.getToSignMsg(BaseData.instance.getChainId(self.chainType),
                                                        String(self.pageHolderVC.mAccount!.account_account_numner),
                                                        String(self.pageHolderVC.mAccount!.account_sequence_number),
-                                                       msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!)
+                                                       msgList,
+                                                       self.pageHolderVC.mFee!,
+                                                       self.pageHolderVC.mMemo!)
                 
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = .sortedKeys
@@ -148,9 +160,11 @@ class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegat
                     stdTx = MsgGenerator.genSignedTx(msgList, self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!, signatures)
                 }
                 
+                
             } catch {
                 print(error)
             }
+            
             
             DispatchQueue.main.async(execute: {
                 let postTx = PostTx.init("sync", stdTx.value)
@@ -164,12 +178,12 @@ class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegat
                         var txResult = [String:Any]()
                         switch response.result {
                         case .success(let res):
-                            print("Withdraw ", res)
+                            print("Deposit ", res)
                             if let result = res as? [String : Any]  {
                                 txResult = result
                             }
                         case .failure(let error):
-                            print("Withdraw error ", error)
+                            print("Deposit error ", error)
                             if (response.response?.statusCode == 500) {
                                 txResult["net_error"] = 500
                             }
@@ -187,5 +201,5 @@ class StepOkWithdrawCheckViewController: BaseViewController, PasswordViewDelegat
             });
         }
     }
-
+    
 }

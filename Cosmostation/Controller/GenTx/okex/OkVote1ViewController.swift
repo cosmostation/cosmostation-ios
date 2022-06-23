@@ -1,15 +1,15 @@
 //
-//  StepOkVoteToViewController.swift
+//  OkVote1ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/08/28.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/23.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 
-class StepOkVoteToViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class OkVote1ViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var okToValidatorTableView: UITableView!
     @IBOutlet weak var toValCnt: UILabel!
@@ -61,15 +61,13 @@ class StepOkVoteToViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.rootCard.needBorderUpdate = false
         if (self.pageHolderVC.mOkVoteValidators.contains(where: {$0 == validator.operator_address})) {
             cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
-            cell?.valCheckedImg.tintColor = COLOR_OK
-            cell?.rootCard.backgroundColor = UIColor.clear
+            cell?.valCheckedImg.tintColor = UIColor(named: "okc")
             cell?.rootCard.layer.borderWidth = 1
-            cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
+            cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
             cell?.rootCard.clipsToBounds = true
             
         } else {
             cell?.valCheckedImg.image = UIImage.init(named: "iconCheck")
-            cell?.rootCard.backgroundColor = UIColor.init(hexString: "2E2E2E", alpha: 0.4)
             cell?.rootCard.layer.borderWidth = 0
             cell?.rootCard.clipsToBounds = true
             
