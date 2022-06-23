@@ -23,7 +23,7 @@ class MyValidatorCell: UITableViewCell {
         super.awakeFromNib()
         validatorImg.layer.borderWidth = 1
         validatorImg.layer.masksToBounds = false
-        validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+        validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         validatorImg.layer.cornerRadius = validatorImg.frame.height/2
         validatorImg.clipsToBounds = true
         
@@ -50,10 +50,10 @@ class MyValidatorCell: UITableViewCell {
         monikerLabel.adjustsFontSizeToFitWidth = true
         if (validator.jailed == true) {
             revokedImg.isHidden = false
-            validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
+            validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
         } else {
             revokedImg.isHidden = true
-            validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+            validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
         
         myDelegatedAmoutLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getDelegated_gRPC(validator.operatorAddress).stringValue, myDelegatedAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)

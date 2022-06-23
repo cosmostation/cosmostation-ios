@@ -42,7 +42,7 @@
                                     <constraint firstAttribute="width" constant="0.5" id="k6H-cu-JXf"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkOff" translatesAutoresizingMaskIntoConstraints="NO" id="Fgd-4g-jgX">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="Fgd-4g-jgX">
                                 <rect key="frame" x="262" y="24" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="24" id="ZGC-P0-0Xe"/>
@@ -145,7 +145,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkOff" width="24" height="24"/>
+        <image name="iconCheck" width="22" height="22"/>
         <image name="jailedImg" width="44" height="44"/>
         <image name="validatorDefault" width="44" height="44"/>
         <namedColor name="_card_bg">

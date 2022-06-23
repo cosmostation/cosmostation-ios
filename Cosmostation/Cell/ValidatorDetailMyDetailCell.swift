@@ -26,7 +26,7 @@ class ValidatorDetailMyDetailCell: UITableViewCell {
         super.awakeFromNib()
         validatorImg.layer.borderWidth = 1
         validatorImg.layer.masksToBounds = false
-        validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+        validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         validatorImg.layer.cornerRadius = validatorImg.frame.height/2
         validatorImg.clipsToBounds = true
         self.selectionStyle = .none
@@ -58,10 +58,10 @@ class ValidatorDetailMyDetailCell: UITableViewCell {
         monikerName.adjustsFontSizeToFitWidth = true
         if (validator?.jailed == true) {
             jailedImg.isHidden = false
-            validatorImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
+            validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
         } else {
             jailedImg.isHidden = true
-            validatorImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+            validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
         website.text = validator?.description_p.website
         descriptionMsg.text = validator?.description_p.details

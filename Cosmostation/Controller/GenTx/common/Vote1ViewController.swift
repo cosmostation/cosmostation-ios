@@ -57,49 +57,45 @@ class Vote1ViewController: BaseViewController {
     
     @IBAction func onClickYes(_ sender: UIButton) {
         initBtns()
-        sender.borderColor = UIColor.white
+        sender.borderColor = UIColor(named: "_font05")
         checkYes.image = checkYes.image?.withRenderingMode(.alwaysTemplate)
-        checkYes.tintColor = UIColor.white
+        checkYes.tintColor = UIColor(named: "_font05")
         pageHolderVC.mVoteOpinion = "Yes"
     }
     
     @IBAction func onClickNo(_ sender: UIButton) {
         initBtns()
-        sender.borderColor = UIColor.white
+        sender.borderColor = UIColor(named: "_font05")
         checkNo.image = checkNo.image?.withRenderingMode(.alwaysTemplate)
-        checkNo.tintColor = UIColor.white
+        checkNo.tintColor = UIColor(named: "_font05")
         pageHolderVC.mVoteOpinion = "No"
     }
     
     @IBAction func onClickVeto(_ sender: UIButton) {
         initBtns()
-        sender.borderColor = UIColor.white
+        sender.borderColor = UIColor(named: "_font05")
         checkVeto.image = checkVeto.image?.withRenderingMode(.alwaysTemplate)
-        checkVeto.tintColor = UIColor.white
+        checkVeto.tintColor = UIColor(named: "_font05")
         pageHolderVC.mVoteOpinion = "NoWithVeto"
     }
     
     @IBAction func onClickAbstain(_ sender: UIButton) {
         initBtns()
-        sender.borderColor = UIColor.white
+        sender.borderColor = UIColor(named: "_font05")
         checkAbstain.image = checkAbstain.image?.withRenderingMode(.alwaysTemplate)
-        checkAbstain.tintColor = UIColor.white
+        checkAbstain.tintColor = UIColor(named: "_font05")
         pageHolderVC.mVoteOpinion = "Abstain"
     }
     
     func initBtns() {
-        btnYes.borderColor = UIColor(hexString: "#4b4f54")
-        btnNo.borderColor = UIColor(hexString: "#4b4f54")
-        btnVeto.borderColor = UIColor(hexString: "#4b4f54")
-        btnAbstain.borderColor = UIColor(hexString: "#4b4f54")
-        checkYes.image = checkYes.image?.withRenderingMode(.alwaysTemplate)
-        checkYes.tintColor = UIColor(hexString: "#4b4f54")
-        checkNo.image = checkNo.image?.withRenderingMode(.alwaysTemplate)
-        checkNo.tintColor = UIColor(hexString: "#4b4f54")
-        checkVeto.image = checkVeto.image?.withRenderingMode(.alwaysTemplate)
-        checkVeto.tintColor = UIColor(hexString: "#4b4f54")
-        checkAbstain.image = checkAbstain.image?.withRenderingMode(.alwaysTemplate)
-        checkAbstain.tintColor = UIColor(hexString: "#4b4f54")
+        btnYes.borderColor = UIColor(named: "_font04")
+        btnNo.borderColor = UIColor(named: "_font04")
+        btnVeto.borderColor = UIColor(named: "_font04")
+        btnAbstain.borderColor = UIColor(named: "_font04")
+        checkYes.image = UIImage.init(named: "iconCheck")
+        checkNo.image = UIImage.init(named: "iconCheck")
+        checkVeto.image = UIImage.init(named: "iconCheck")
+        checkAbstain.image = UIImage.init(named: "iconCheck")
     }
     
     

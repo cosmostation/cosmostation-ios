@@ -97,7 +97,7 @@
                         <action selector="onClickYes:" destination="-1" eventType="touchUpInside" id="kkW-Da-P3S"/>
                     </connections>
                 </button>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkOff" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Fw-AX4">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Fw-AX4">
                     <rect key="frame" x="358" y="157" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="45T-EU-F0A"/>
@@ -129,7 +129,7 @@
                         <action selector="onClickNo:" destination="-1" eventType="touchUpInside" id="dRN-Q9-ND0"/>
                     </connections>
                 </button>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkOff" translatesAutoresizingMaskIntoConstraints="NO" id="9Nb-cH-YNV">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="9Nb-cH-YNV">
                     <rect key="frame" x="358" y="219" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="3pt-LX-cM0"/>
@@ -161,7 +161,7 @@
                         <action selector="onClickVeto:" destination="-1" eventType="touchUpInside" id="ysL-WA-1SO"/>
                     </connections>
                 </button>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkOff" translatesAutoresizingMaskIntoConstraints="NO" id="9Ej-jj-FQ3">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="9Ej-jj-FQ3">
                     <rect key="frame" x="358" y="281" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="rcH-Om-Br6"/>
@@ -193,7 +193,7 @@
                         <action selector="onClickAbstain:" destination="-1" eventType="touchUpInside" id="R2E-o2-tvW"/>
                     </connections>
                 </button>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkOff" translatesAutoresizingMaskIntoConstraints="NO" id="4n7-jh-wYV">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="4n7-jh-wYV">
                     <rect key="frame" x="358" y="343" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="0jP-SV-o4X"/>
@@ -288,7 +288,7 @@
         </view>
     </objects>
     <resources>
-        <image name="checkOff" width="24" height="24"/>
+        <image name="iconCheck" width="22" height="22"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -299,7 +299,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71764705882352942" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

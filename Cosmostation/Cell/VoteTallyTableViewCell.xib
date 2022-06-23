@@ -83,7 +83,7 @@
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkRed" translatesAutoresizingMaskIntoConstraints="NO" id="Unv-De-Py7">
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="Unv-De-Py7">
                                                 <rect key="frame" x="159.5" y="12" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="20I-WS-lcx"/>
@@ -166,7 +166,7 @@
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkRed" translatesAutoresizingMaskIntoConstraints="NO" id="pdJ-Y5-Ztb">
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="pdJ-Y5-Ztb">
                                                 <rect key="frame" x="159.5" y="12" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="HKz-wR-I9e"/>
@@ -257,7 +257,7 @@
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkRed" translatesAutoresizingMaskIntoConstraints="NO" id="tWu-V1-Czs">
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="tWu-V1-Czs">
                                                 <rect key="frame" x="159.5" y="12" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="24" id="afj-WN-CyW"/>
@@ -340,7 +340,7 @@
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkRed" translatesAutoresizingMaskIntoConstraints="NO" id="C48-c5-YSl">
+                                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="C48-c5-YSl">
                                                 <rect key="frame" x="159.5" y="12" width="24" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="24" id="0cI-i1-l96"/>
@@ -475,7 +475,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkRed" width="24" height="24"/>
+        <image name="iconCheck" width="22" height="22"/>
         <image name="userIc" width="11" height="11"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -28,7 +28,7 @@ class ProfileViewController: BaseViewController, UITableViewDelegate, UITableVie
         
         self.profileImageView.layer.borderWidth = 1
         self.profileImageView.layer.masksToBounds = false
-        self.profileImageView.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+        self.profileImageView.layer.borderColor = UIColor(named: "_font04")!.cgColor
         self.profileImageView.layer.cornerRadius = profileImageView.frame.height/2
         self.profileImageView.clipsToBounds = true
         

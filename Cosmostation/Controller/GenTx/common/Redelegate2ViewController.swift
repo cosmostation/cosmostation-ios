@@ -45,10 +45,10 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.valMonikerLabel.adjustsFontSizeToFitWidth = true
             if (validator.jailed == true) {
                 cell?.valjailedImg.isHidden = false
-                cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
+                cell?.valjailedImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             } else {
                 cell?.valjailedImg.isHidden = true
-                cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+                cell?.valjailedImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
             }
             
             cell?.valPowerLabel.attributedText = WUtils.displayAmount2(validator.tokens, cell!.valPowerLabel.font, mDpDecimal, mDpDecimal)
@@ -60,13 +60,11 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
             if (validator.operatorAddress == checkedValidator_gRPC?.operatorAddress) {
                 cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
                 cell?.valCheckedImg.tintColor = chainConfig?.chainColor
-                cell?.rootCard.backgroundColor = UIColor.clear
                 cell?.rootCard.layer.borderWidth = 1
-                cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
+                cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
                 cell?.rootCard.clipsToBounds = true
             } else {
-                cell?.valCheckedImg.image = UIImage.init(named: "checkOff")
-                cell?.rootCard.backgroundColor = UIColor.init(hexString: "2E2E2E", alpha: 0.4)
+                cell?.valCheckedImg.image = UIImage.init(named: "iconCheck")
                 cell?.rootCard.layer.borderWidth = 0
                 cell?.rootCard.clipsToBounds = true
             }
@@ -87,17 +85,15 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.rootCard.needBorderUpdate = false
             cell?.valCheckedImg.image = cell?.valCheckedImg.image?.withRenderingMode(.alwaysTemplate)
             cell?.valCheckedImg.tintColor = chainConfig?.chainColor
-            cell?.rootCard.backgroundColor = UIColor.clear
             cell?.rootCard.layer.borderWidth = 1
-            cell?.rootCard.layer.borderColor = UIColor(hexString: "#7A8388").cgColor
+            cell?.rootCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
             cell?.rootCard.clipsToBounds = true
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell:RedelegateCell? = tableView.cellForRow(at: indexPath) as? RedelegateCell
-        cell?.valCheckedImg.image = UIImage.init(named: "checkOff")
-        cell?.rootCard.backgroundColor = UIColor.init(hexString: "2E2E2E", alpha: 0.4)
+        cell?.valCheckedImg.image = UIImage.init(named: "iconCheck")
         cell?.rootCard.layer.borderWidth = 0
         cell?.rootCard.clipsToBounds = true
     }

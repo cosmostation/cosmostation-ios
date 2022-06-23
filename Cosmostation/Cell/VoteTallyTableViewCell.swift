@@ -9,15 +9,6 @@
 import UIKit
 
 class VoteTallyTableViewCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        self.selectionStyle = .none
-        self.cardYes.borderWidth = 1
-        self.cardNo.borderWidth = 1
-        self.cardVeto.borderWidth = 1
-        self.cardAbstain.borderWidth = 1
-    }
     
     @IBOutlet weak var cardYes: CardView!
     @IBOutlet weak var progressYes: UIProgressView!
@@ -52,23 +43,41 @@ class VoteTallyTableViewCell: UITableViewCell {
     @IBOutlet weak var turnoutTitle: UILabel!
     @IBOutlet weak var turnoutRate: UILabel!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.selectionStyle = .none
+        self.cardYes.borderWidth = 1
+        self.cardNo.borderWidth = 1
+        self.cardVeto.borderWidth = 1
+        self.cardAbstain.borderWidth = 1
+        
+        myVoteYes.image = myVoteYes.image?.withRenderingMode(.alwaysTemplate)
+        myVoteYes.tintColor = UIColor(named: "_warnRed")
+        myVoteNo.image = myVoteNo.image?.withRenderingMode(.alwaysTemplate)
+        myVoteNo.tintColor = UIColor(named: "_warnRed")
+        myVoteVeto.image = myVoteVeto.image?.withRenderingMode(.alwaysTemplate)
+        myVoteVeto.tintColor = UIColor(named: "_warnRed")
+        myVoteAbstain.image = myVoteAbstain.image?.withRenderingMode(.alwaysTemplate)
+        myVoteAbstain.tintColor = UIColor(named: "_warnRed")
+    }
+    
     func onCheckMyVote (_ myVote:Vote?) {
         if (myVote == nil) { return }
         if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_YES) == .orderedSame) {
             self.myVoteYes.isHidden = false
-            self.cardYes.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
+            self.cardYes.borderColor = UIColor(named: "_warnRed")
             
         } else if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_NO) == .orderedSame) {
             self.myVoteNo.isHidden = false
-            self.cardNo.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
+            self.cardNo.borderColor = UIColor(named: "_warnRed")
             
         } else if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_VETO) == .orderedSame) {
             self.myVoteVeto.isHidden = false
-            self.cardVeto.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
+            self.cardVeto.borderColor = UIColor(named: "_warnRed")
             
         } else if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_ABSTAIN) == .orderedSame) {
             self.myVoteAbstain.isHidden = false
-            self.cardAbstain.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
+            self.cardAbstain.borderColor = UIColor(named: "_warnRed")
         }
     }
     
@@ -76,19 +85,19 @@ class VoteTallyTableViewCell: UITableViewCell {
         if (option == nil) { return }
         if (option == Cosmos_Gov_V1beta1_VoteOption.yes) {
             self.myVoteYes.isHidden = false
-            self.cardYes.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
+            self.cardYes.borderColor = UIColor(named: "_warnRed")
             
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.no) {
             self.myVoteNo.isHidden = false
-            self.cardNo.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
+            self.cardNo.borderColor = UIColor(named: "_warnRed")
             
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.noWithVeto) {
             self.myVoteVeto.isHidden = false
-            self.cardVeto.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
+            self.cardVeto.borderColor = UIColor(named: "_warnRed")
             
         } else if (option == Cosmos_Gov_V1beta1_VoteOption.abstain) {
             self.myVoteAbstain.isHidden = false
-            self.cardAbstain.borderColor = UIColor.init(hexString: "#e4185d", alpha: 1.0)
+            self.cardAbstain.borderColor = UIColor(named: "_warnRed")
         }
     }
     

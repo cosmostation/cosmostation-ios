@@ -47,10 +47,10 @@ class StepOkVoteToViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.valMonikerLabel.text = validator.description.moniker
         if(validator.jailed) {
             cell?.valjailedImg.isHidden = false
-            cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#f31963").cgColor
+            cell?.valjailedImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
         } else {
             cell?.valjailedImg.isHidden = true
-            cell?.valjailedImg.layer.borderColor = UIColor(hexString: "#4B4F54").cgColor
+            cell?.valjailedImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
         if let url = URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address)) {
             cell?.valImg.af_setImage(withURL: url)
@@ -68,7 +68,7 @@ class StepOkVoteToViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.rootCard.clipsToBounds = true
             
         } else {
-            cell?.valCheckedImg.image = UIImage.init(named: "checkOff")
+            cell?.valCheckedImg.image = UIImage.init(named: "iconCheck")
             cell?.rootCard.backgroundColor = UIColor.init(hexString: "2E2E2E", alpha: 0.4)
             cell?.rootCard.layer.borderWidth = 0
             cell?.rootCard.clipsToBounds = true
