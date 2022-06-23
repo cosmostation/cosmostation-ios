@@ -1,5 +1,5 @@
 //
-//  TxDepositCdpCell.swift
+//  msgIconCDPCell.swift
 //  Cosmostation
 //
 //  Created by 정용주 on 2020/03/12.

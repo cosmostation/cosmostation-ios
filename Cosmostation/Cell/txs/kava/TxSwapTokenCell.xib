@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2s-qd-ffO" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="416" height="252"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgiconKavaswap" translatesAutoresizingMaskIntoConstraints="NO" id="W9F-E9-fNK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconSwap" translatesAutoresizingMaskIntoConstraints="NO" id="W9F-E9-fNK">
                                 <rect key="frame" x="16" y="16" width="28" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="QYv-1f-q6C"/>
@@ -167,7 +167,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="msgiconKavaswap" width="28" height="28"/>
+        <image name="msgIconSwap" width="28" height="28"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
