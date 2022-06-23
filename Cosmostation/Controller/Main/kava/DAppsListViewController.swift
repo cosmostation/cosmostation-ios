@@ -349,15 +349,15 @@ extension WUtils {
         scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.floatValue <= 50) {
             scoreLabel.textColor = UIColor(named: "kava_safe")
-            _rateIamg?.image = UIImage(named: "safe")
+            _rateIamg?.image = UIImage(named: "imgKavaRiskSafe")
             
         } else if (riskRate.floatValue < 80) {
             scoreLabel.textColor = UIColor(named: "kava_stable")
-            _rateIamg?.image = UIImage(named: "stable")
+            _rateIamg?.image = UIImage(named: "imgKavaRiskStable")
             
         } else {
             scoreLabel.textColor = UIColor(named: "kava_danger")
-            _rateIamg?.image = UIImage(named: "danger")
+            _rateIamg?.image = UIImage(named: "imgKavaRiskDanger")
         }
     }
     

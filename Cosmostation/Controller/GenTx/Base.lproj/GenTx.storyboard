@@ -1353,7 +1353,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IBl-ol-uVL" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="16" y="84.5" width="382" height="50"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="key_off" translatesAutoresizingMaskIntoConstraints="NO" id="UJ2-wI-9tU">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="UJ2-wI-9tU">
                                         <rect key="frame" x="8" y="14" width="22" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="bku-vo-HRm"/>
@@ -2893,7 +2893,7 @@ you must create a KAVA account and have history</string>
         <image name="chainDefault" width="42" height="42"/>
         <image name="dropdown_btn" width="24" height="24"/>
         <image name="iconArrowRight" width="24" height="24"/>
-        <image name="key_off" width="20" height="20"/>
+        <image name="iconKeyEmpty" width="20" height="20"/>
         <image name="tokenDefault" width="22" height="22"/>
         <image name="txStep4_1" width="103" height="18"/>
         <image name="warning_ic" width="38" height="38"/>
