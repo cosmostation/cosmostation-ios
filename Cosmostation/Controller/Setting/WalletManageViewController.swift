@@ -102,7 +102,8 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
             }
             cell?.nameLabel.text = account.getDpName()
             cell?.address.text = account.account_address
-            WUtils.showCoinDp(userChainConfig.stakeDenom, account.account_last_total, cell!.amountDenom, cell!.amount, userChainConfig.chainType)
+            cell?.amount.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.amount.font, 0, 6)
+            WUtils.setDenomTitle(userChain, cell!.amountDenom)
             return cell!
         }
     }
