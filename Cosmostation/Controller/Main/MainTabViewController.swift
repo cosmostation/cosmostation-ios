@@ -127,7 +127,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.setLastTab(tabBarController.selectedIndex)
     }
     
-    func onShowAccountSwicth() {
+    func onShowAccountSwicth(completion: @escaping () -> ()) {
         let sourceVC = self.selectedViewController!
         let accountSwitchVC = AccountSwitchViewController(nibName: "AccountSwitchViewController", bundle: nil)
         accountSwitchVC.modalPresentationStyle = .overFullScreen
@@ -138,7 +138,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         UIView.animate(withDuration: 0.3, animations: {
             accountSwitchVC.view.transform = CGAffineTransform(translationX: 0, y: 0)
         }) { _ in
-            sourceVC.present(accountSwitchVC, animated: false, completion: nil)
+            sourceVC.present(accountSwitchVC, animated: false) {
+                completion()
+            }
         }
     }
     

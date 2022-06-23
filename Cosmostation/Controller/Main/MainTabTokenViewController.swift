@@ -779,8 +779,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    @IBAction func onClickSwitchAccount(_ sender: Any) {
-        self.mainTabVC.onShowAccountSwicth()
+    @IBAction func onClickSwitchAccount(_ sender: UIButton) {
+        sender.isUserInteractionEnabled = false
+        self.mainTabVC.onShowAccountSwicth {
+            sender.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {

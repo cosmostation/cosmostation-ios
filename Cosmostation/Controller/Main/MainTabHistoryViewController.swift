@@ -218,19 +218,10 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             self.onShowSafariWeb(url)
             
         } else {
-//            let history = mApiCustomNewHistories[indexPath.row]
-//            let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
-//            guard let url = URL(string: link) else { return }
-//            self.onShowSafariWeb(url)
-            
-            //TODO temp added
             let history = mApiCustomNewHistories[indexPath.row]
-            let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
-            txDetailVC.mIsGen = false
-            txDetailVC.mTxHash = history.data!.txhash!
-            self.navigationItem.title = ""
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
-            self.navigationController?.pushViewController(txDetailVC, animated: true)
+            let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
+            guard let url = URL(string: link) else { return }
+            self.onShowSafariWeb(url)
         }
     }
     
@@ -315,8 +306,11 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     
-    @IBAction func onClickSwitchAccount(_ sender: Any) {
-        self.mainTabVC.onShowAccountSwicth()
+    @IBAction func onClickSwitchAccount(_ sender: UIButton) {
+        sender.isUserInteractionEnabled = false
+        self.mainTabVC.onShowAccountSwicth {
+            sender.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {

@@ -79,9 +79,9 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         } else {
             //TODO TEST HASH for KAVA 
 //            mTxHash = "94C476304818D6B1C47DF0FE9D0ABF2462191912DAA11C847483CC58D4A1452D"
-            self.loadingMsg.isHidden = true
-            self.loadingImg.onStartAnimation()
-            self.onFetchTx(mTxHash!)
+//            self.loadingMsg.isHidden = true
+//            self.loadingImg.onStartAnimation()
+//            self.onFetchTx(mTxHash!)
         }
     }
     

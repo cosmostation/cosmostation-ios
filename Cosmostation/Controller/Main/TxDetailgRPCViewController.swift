@@ -123,7 +123,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
             
         } else {
             //TODO temp added
-            self.onFetchgRPCTx(mTxHash!)
+//            self.onFetchgRPCTx(mTxHash!)
         }
     }
     
