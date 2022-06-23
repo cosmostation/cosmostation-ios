@@ -180,52 +180,52 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
     
     @IBAction func AmountChangedC(_ sender: AmountInputTextField) {
         guard let text = sender.text?.trimmingCharacters(in: .whitespaces) else {
-            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (text.count == 0) {
-            sender.layer.borderColor = UIColor.white.cgColor
+            sender.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: cDpDecimal).compare(cMaxAmount).rawValue > 0) {
-            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: cDpDecimal).compare(cMinAmount).rawValue < 0) {
-            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        sender.layer.borderColor = UIColor.white.cgColor
+        sender.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     
     @IBAction func AmountChangedP(_ sender: AmountInputTextField) {
         guard let text = sender.text?.trimmingCharacters(in: .whitespaces) else {
-            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (text.count == 0) {
-            sender.layer.borderColor = UIColor.white.cgColor
+            sender.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: pDpDecimal).compare(pMaxAmount).rawValue > 0) {
-            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: pDpDecimal).compare(pMinAmount).rawValue < 0) {
-            sender.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            sender.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        sender.layer.borderColor = UIColor.white.cgColor
+        sender.layer.borderColor = UIColor(named: "_font04")!.cgColor
         onUpdateNextBtn()
     }
     

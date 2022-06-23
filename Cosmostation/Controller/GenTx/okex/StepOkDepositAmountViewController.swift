@@ -70,7 +70,7 @@ class StepOkDepositAmountViewController: BaseViewController, UITextFieldDelegate
     
     func onUIupdate() {
         guard let text = toDepositAmountInput.text?.trimmingCharacters(in: .whitespaces) else {
-            self.toDepositAmountInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.toDepositAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         
@@ -82,12 +82,12 @@ class StepOkDepositAmountViewController: BaseViewController, UITextFieldDelegate
         let userInput = WUtils.localeStringToDecimal(text)
         
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.toDepositAmountInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.toDepositAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         
         if (userInput.compare(userAvailable).rawValue > 0) {
-            self.toDepositAmountInput.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.toDepositAmountInput.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         

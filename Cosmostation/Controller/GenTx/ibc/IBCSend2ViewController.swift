@@ -79,7 +79,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUpdateView() {
         guard let text = mTargetAmountTextField.text?.trimmingCharacters(in: .whitespaces) else {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         
@@ -90,11 +90,11 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: decimal).compare(maxAvailable).rawValue > 0) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         self.mTargetAmountTextField.layer.borderColor = UIColor.white.cgColor

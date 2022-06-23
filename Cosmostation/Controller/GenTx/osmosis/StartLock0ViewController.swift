@@ -63,24 +63,24 @@ class StartLock0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate() {
         guard let text = inputTextFiled.text?.trimmingCharacters(in: .whitespaces) else {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (text.count == 0) {
-            inputTextFiled.layer.borderColor = UIColor.white.cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: dpDecimal).compare(availableMaxAmount).rawValue > 0) {
-            inputTextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            inputTextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        inputTextFiled.layer.borderColor = UIColor.white.cgColor
+        inputTextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     
     @IBAction func onClickClear(_ sender: UIButton) {

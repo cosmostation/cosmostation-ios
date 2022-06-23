@@ -102,7 +102,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         if (chainType == ChainType.BINANCE_MAIN) {
             memoCntLabel.text = String(byteArray.count) + "/100 byte"
             if (byteArray.count > 100) {
-                self.memoInputTextView.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+                self.memoInputTextView.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             } else {
                 self.memoInputTextView.layer.borderColor = UIColor.white.cgColor
             }
@@ -110,7 +110,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         } else {
             memoCntLabel.text = String(byteArray.count) + "/255 byte"
             if (byteArray.count > 255) {
-                self.memoInputTextView.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+                self.memoInputTextView.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             } else {
                 self.memoInputTextView.layer.borderColor = UIColor.white.cgColor
             }

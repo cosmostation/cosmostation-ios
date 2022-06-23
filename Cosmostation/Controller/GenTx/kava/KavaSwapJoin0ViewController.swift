@@ -132,89 +132,89 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onUIupdate0() {
         guard let text = input0TextFiled.text?.trimmingCharacters(in: .whitespaces) else {
-            input0TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             input1TextFiled.text = ""
-            input1TextFiled.layer.borderColor = UIColor.white.cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         if (text.count == 0) {
-            input0TextFiled.layer.borderColor = UIColor.white.cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             input1TextFiled.text = ""
-            input1TextFiled.layer.borderColor = UIColor.white.cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            input0TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             input1TextFiled.text = ""
-            input1TextFiled.layer.borderColor = UIColor.white.cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         if (userInput.compare(NSDecimalNumber.zero).rawValue <= 0) {
-            input0TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             input1TextFiled.text = ""
-            input1TextFiled.layer.borderColor = UIColor.white.cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: coin0Decimal).compare(available0MaxAmount).rawValue > 0) {
-            input0TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             input1TextFiled.text = ""
-            input1TextFiled.layer.borderColor = UIColor.white.cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
-        input0TextFiled.layer.borderColor = UIColor.white.cgColor
+        input0TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
         
         let outputAmount = userInput.multiplying(byPowerOf10: coin0Decimal).multiplying(by: depositRate, withBehavior: WUtils.handler0)
         input1TextFiled.text = outputAmount.multiplying(byPowerOf10: -coin1Decimal).stringValue
         if (outputAmount.compare(available1MaxAmount).rawValue > 0) {
-            input1TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
         } else {
-            input1TextFiled.layer.borderColor = UIColor.white.cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
     }
     
     func onUIupdate1() {
         guard let text = input1TextFiled.text?.trimmingCharacters(in: .whitespaces) else {
-            input1TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             input0TextFiled.text = ""
-            input0TextFiled.layer.borderColor = UIColor.white.cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         if (text.count == 0) {
-            input1TextFiled.layer.borderColor = UIColor.white.cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             input0TextFiled.text = ""
-            input0TextFiled.layer.borderColor = UIColor.white.cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
-            input1TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             input0TextFiled.text = ""
-            input0TextFiled.layer.borderColor = UIColor.white.cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         if (userInput.compare(NSDecimalNumber.zero).rawValue <= 0) {
-            input1TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             input0TextFiled.text = ""
-            input0TextFiled.layer.borderColor = UIColor.white.cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         if (userInput.multiplying(byPowerOf10: coin1Decimal).compare(available1MaxAmount).rawValue > 0) {
-            input1TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input1TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             input0TextFiled.text = ""
-            input0TextFiled.layer.borderColor = UIColor.white.cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
-        input1TextFiled.layer.borderColor = UIColor.white.cgColor
+        input1TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
         
         let outputAmount = userInput.multiplying(byPowerOf10: coin1Decimal).dividing(by: depositRate, withBehavior: WUtils.handler0)
         input0TextFiled.text = outputAmount.multiplying(byPowerOf10: -coin0Decimal).stringValue
         if (outputAmount.compare(available0MaxAmount).rawValue > 0) {
-            input0TextFiled.layer.borderColor = UIColor.init(hexString: "f31963").cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
         } else {
-            input0TextFiled.layer.borderColor = UIColor.white.cgColor
+            input0TextFiled.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
     }
     
