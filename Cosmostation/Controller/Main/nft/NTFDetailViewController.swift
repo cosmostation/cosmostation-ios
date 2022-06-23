@@ -105,14 +105,14 @@ class NTFDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         }
 
         let mainDenom = WUtils.getMainDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_SEND_NFT, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_NFT_SEND, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
             return
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = TASK_SEND_NFT
+        txVC.mType = TASK_TYPE_NFT_SEND
         txVC.mNFTDenomId = denomId
         txVC.mNFTTokenId = tokenId
         txVC.irisResponse = irisResponse

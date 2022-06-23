@@ -343,68 +343,69 @@ let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
 
 
 
-let TASK_TYPE_TRANSFER                      = "task_simple_transfer";
-let TASK_TYPE_DELEGATE                      = "task_delegate";
-let TASK_TYPE_UNDELEGATE                    = "task_undelegate";
-let TASK_TYPE_REDELEGATE                    = "task_redelegate";
-let TASK_TYPE_CLAIM_STAKE_REWARD            = "task_claim_stake_reward";
-let TASK_TYPE_CLAIM_COMMISSION              = "task_claim_commission";
-let TASK_TYPE_MODIFY_REWARD_ADDRESS         = "task_modify_reward_address";
-let TASK_TYPE_REINVEST                      = "task_reinvest";
-let TASK_TYPE_VOTE                          = "task_vote";
+let TASK_TYPE_TRANSFER                      = "TASK_TYPE_TRANSFER";
+let TASK_TYPE_DELEGATE                      = "TASK_TYPE_DELEGATE";
+let TASK_TYPE_UNDELEGATE                    = "TASK_TYPE_UNDELEGATE";
+let TASK_TYPE_REDELEGATE                    = "TASK_TYPE_REDELEGATE";
+let TASK_TYPE_CLAIM_STAKE_REWARD            = "TASK_TYPE_CLAIM_STAKE_REWARD";
+let TASK_TYPE_CLAIM_COMMISSION              = "TASK_TYPE_CLAIM_COMMISSION";
+let TASK_TYPE_MODIFY_REWARD_ADDRESS         = "TASK_TYPE_MODIFY_REWARD_ADDRESS";
+let TASK_TYPE_REINVEST                      = "TASK_TYPE_REINVEST";
+let TASK_TYPE_VOTE                          = "TASK_TYPE_VOTE";
 
-let TASK_TYPE_KAVA_CDP_CREATE               = "task_kava_cdp_create";
-let TASK_TYPE_KAVA_CDP_DEPOSIT              = "task_kava_cdp_deposit";
-let TASK_TYPE_KAVA_CDP_WITHDRAW             = "task_kava_cdp_withdraw";
-let TASK_TYPE_KAVA_CDP_DRAWDEBT             = "task_kava_cdp_drawdebt";
-let TASK_TYPE_KAVA_CDP_REPAY                = "task_kava_cdp_repay";
-let TASK_TYPE_KAVA_HARD_DEPOSIT             = "task_kava_hard_deposit";
-let TASK_TYPE_KAVA_HARD_WITHDRAW            = "task_kava_hard_withdraw";
-let TASK_TYPE_KAVA_HARD_BORROW              = "task_kava_hard_borrow";
-let TASK_TYPE_KAVA_HARD_REPAY               = "task_kava_hard_repay";
-let TASK_TYPE_KAVA_SWAP_TOKEN               = "task_kava_swap_token";
-let TASK_TYPE_KAVA_SWAP_DEPOSIT             = "task_kava_swap_deposit";
-let TASK_TYPE_KAVA_SWAP_WITHDRAW            = "task_kava_swap_withdraw";
-let TASK_TYPE_KAVA_INCENTIVE_ALL            = "task_kava_incentive_all";
+let TASK_TYPE_KAVA_CDP_CREATE               = "TASK_TYPE_KAVA_CDP_CREATE";
+let TASK_TYPE_KAVA_CDP_DEPOSIT              = "TASK_TYPE_KAVA_CDP_DEPOSIT";
+let TASK_TYPE_KAVA_CDP_WITHDRAW             = "TASK_TYPE_KAVA_CDP_WITHDRAW";
+let TASK_TYPE_KAVA_CDP_DRAWDEBT             = "TASK_TYPE_KAVA_CDP_DRAWDEBT";
+let TASK_TYPE_KAVA_CDP_REPAY                = "TASK_TYPE_KAVA_CDP_REPAY";
+let TASK_TYPE_KAVA_HARD_DEPOSIT             = "TASK_TYPE_KAVA_HARD_DEPOSIT";
+let TASK_TYPE_KAVA_HARD_WITHDRAW            = "TASK_TYPE_KAVA_HARD_WITHDRAW";
+let TASK_TYPE_KAVA_HARD_BORROW              = "TASK_TYPE_KAVA_HARD_BORROW";
+let TASK_TYPE_KAVA_HARD_REPAY               = "TASK_TYPE_KAVA_HARD_REPAY";
+let TASK_TYPE_KAVA_SWAP_TOKEN               = "TASK_TYPE_KAVA_SWAP_TOKEN";
+let TASK_TYPE_KAVA_SWAP_DEPOSIT             = "TASK_TYPE_KAVA_SWAP_DEPOSIT";
+let TASK_TYPE_KAVA_SWAP_WITHDRAW            = "TASK_TYPE_KAVA_SWAP_WITHDRAW";
+let TASK_TYPE_KAVA_INCENTIVE_ALL            = "TASK_TYPE_KAVA_INCENTIVE_ALL";
 
-let TASK_TYPE_HTLC_SWAP                     = "task_htlc_swap";
+let TASK_TYPE_HTLC_SWAP                     = "TASK_TYPE_HTLC_SWAP";
 
-let TASK_TYPE_OK_DEPOSIT                    = "task_ok_deposit";
-let TASK_TYPE_OK_WITHDRAW                   = "task_ok_withdraw";
-let TASK_TYPE_OK_DIRECT_VOTE                = "task_ok_direct_vote";
+let TASK_TYPE_OK_DEPOSIT                    = "TASK_TYPE_OK_DEPOSIT";
+let TASK_TYPE_OK_WITHDRAW                   = "TASK_TYPE_OK_WITHDRAW";
+let TASK_TYPE_OK_DIRECT_VOTE                = "TASK_TYPE_OK_DIRECT_VOTE";
 
-let IOV_MSG_TYPE_REGISTER_DOMAIN            = "starname/RegisterDomain";
-let IOV_MSG_TYPE_REGISTER_ACCOUNT           = "starname/RegisterAccount";
-let IOV_MSG_TYPE_DELETE_DOMAIN              = "starname/DeleteDomain";
-let IOV_MSG_TYPE_DELETE_ACCOUNT             = "starname/DeleteAccount";
-let IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE   = "starname/ReplaceAccountResources";
-let IOV_MSG_TYPE_RENEW_DOMAIN               = "starname/RenewDomain";
-let IOV_MSG_TYPE_RENEW_ACCOUNT              = "starname/RenewAccount";
-
-
-let OSMOSIS_MSG_TYPE_SWAP                   = "osmosis/MsgSwapExactAmountIn";
-let OSMOSIS_MSG_TYPE_JOIN_POOL              = "osmosis/MsgJoinPool";
-let OSMOSIS_MSG_TYPE_EXIT_POOL              = "osmosis/MsgExitPool";
-let OSMOSIS_MSG_TYPE_LOCK                   = "osmosis/MsgLockTokens";
-let OSMOSIS_MSG_TYPE_BEGIN_UNLCOK           = "osmosis/MsgBeginUnlocking";
-let OSMOSIS_MSG_TYPE_PERIOD_UNLOCK          = "osmosis/MsgUnlockPeriodLock";
+let TASK_TYPE_STARNAME_REGISTER_DOMAIN      = "TASK_TYPE_STARNAME_REGISTER_DOMAIN";
+let TASK_TYPE_STARNAME_REGISTER_ACCOUNT     = "TASK_TYPE_STARNAME_REGISTER_ACCOUNT";
+let TASK_TYPE_STARNAME_DELETE_DOMAIN        = "TASK_TYPE_STARNAME_DELETE_DOMAIN";
+let TASK_TYPE_STARNAME_DELETE_ACCOUNT       = "TASK_TYPE_STARNAME_DELETE_ACCOUNT";
+let TASK_TYPE_STARNAME_REPLACE_RESOURCE     = "TASK_TYPE_STARNAME_REPLACE_RESOURCE";
+let TASK_TYPE_STARNAME_RENEW_DOMAIN         = "TASK_TYPE_STARNAME_RENEW_DOMAIN";
+let TASK_TYPE_STARNAME_RENEW_ACCOUNT        = "TASK_TYPE_STARNAME_RENEW_ACCOUNT";
 
 
-let SIF_MSG_TYPE_CLAIM_INCENTIVE            = "sif/MsgCreateUserClaim";
-let SIF_MSG_TYPE_ADD_LP                     = "sif/MsgAddLiquidity";
-let SIF_MSG_TYPE_REMOVE_LP                  = "sif/MsgRemoveLiquidity";
-let SIF_MSG_TYPE_SWAP_CION                  = "sif/MsgSwap";
+let TASK_TYPE_OSMOSIS_SWAP                  = "TASK_TYPE_OSMOSIS_SWAP";
+let TASK_TYPE_OSMOSIS_JOIN_POOL             = "TASK_TYPE_OSMOSIS_JOIN_POOL";
+let TASK_TYPE_OSMOSIS_EXIT_POOL             = "TASK_TYPE_OSMOSIS_EXIT_POOL";
+let TASK_TYPE_OSMOSIS_LOCK                  = "TASK_TYPE_OSMOSIS_LOCK";
+let TASK_TYPE_OSMOSIS_BEGIN_UNLCOK          = "TASK_TYPE_OSMOSIS_BEGIN_UNLCOK";
 
 
-let TASK_IBC_TRANSFER                       = "ibc_MsgTransfer";
-let TASK_CW20_TRANSFER                      = "cw20_Transfer";
+let TASK_TYPE_SIF_ADD_LP                    = "TASK_TYPE_SIF_ADD_LP";
+let TASK_TYPE_SIF_REMOVE_LP                 = "TASK_TYPE_SIF_REMOVE_LP";
+let TASK_TYPE_SIF_SWAP_CION                 = "TASK_TYPE_SIF_SWAP_CION";
 
-let TASK_ISSUE_NFT_DENOM                    = "issue_nft_denom";
-let TASK_ISSUE_NFT                          = "issue_nft";
-let TASK_SEND_NFT                           = "send_nft";
 
-let TASK_GEN_PROFILE                        = "desmos/MsgSaveProfile";
-let TASK_LINK_CHAIN_ACCOUNT                 = "desmos/MsgLinkChainAccount";
+let TASK_TYPE_DESMOS_GEN_PROFILE            = "TASK_TYPE_DESMOS_GEN_PROFILE";
+let TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT     = "TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT";
+
+let TASK_TYPE_NFT_ISSUE_DENOM               = "TASK_TYPE_NFT_ISSUE_DENOM";
+let TASK_TYPE_NFT_ISSUE                     = "TASK_TYPE_NFT_ISSUE";
+let TASK_TYPE_NFT_SEND                      = "TASK_TYPE_NFT_SEND";
+
+
+let TASK_TYPE_IBC_TRANSFER                  = "TASK_TYPE_IBC_TRANSFER";
+let TASK_TYPE_IBC_CW20_TRANSFER             = "TASK_TYPE_IBC_CW20_TRANSFER";
+
+
 
 let PASSWORD_ACTION_INIT                    = "ACTION_INIT"
 let PASSWORD_ACTION_SIMPLE_CHECK            = "ACTION_SIMPLE_CHECK"
@@ -413,7 +414,6 @@ let PASSWORD_ACTION_CHECK_TX                = "ACTION_CHECK_TX"
 let PASSWORD_ACTION_APP_LOCK                = "ACTION_APP_LOCK"
 let PASSWORD_ACTION_INTRO_LOCK              = "ACTION_INTRO_LOCK"
 let PASSWORD_ACTION_DEEPLINK_LOCK           = "ACTION_DEEPLINK_LOCK"
-
 
 
 let PASSWORD_RESUKT_OK                      = 0
@@ -723,7 +723,6 @@ let SIF_GAS_AMOUNT_REINVEST                     = "350000";
 let SIF_GAS_AMOUNT_REWARD_ADDRESS_CHANGE        = "100000";
 let SIF_GAS_AMOUNT_VOTE                         = "100000";
 let SIF_GAS_AMOUNT_IBC_SEND                     = "500000";
-let SIF_GAS_AMOUNT_INCENTIVE                    = "250000";
 let SIF_GAS_AMOUNT_LP                           = "250000";
 let SIF_GAS_AMOUNT_SWAP                         = "250000";
 

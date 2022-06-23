@@ -31,7 +31,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         self.decimal = WUtils.tokenDivideDecimal(chainType, ibcSendDenom)
         
         let mainDenom = WUtils.getMainDenom(chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_IBC_TRANSFER, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_TRANSFER, 0)
         
         maxAvailable = BaseData.instance.getAvailableAmount_gRPC(ibcSendDenom)
         if (ibcSendDenom == mainDenom) {

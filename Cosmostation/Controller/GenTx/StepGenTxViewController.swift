@@ -218,7 +218,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     Vote4ViewController(nibName: "Vote4ViewController", bundle: nil)]
-           
         }
         
         //KAVA
@@ -327,159 +326,141 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeLcdViewController(nibName: "FeeLcdViewController", bundle: nil),
                     OkVote4ViewController(nibName: "OkVote4ViewController", bundle: nil)]
-
         }
         
         //STARTNAME
-        else if (mType == IOV_MSG_TYPE_REGISTER_DOMAIN) {
+        else if (mType == TASK_TYPE_STARNAME_REGISTER_DOMAIN) {
             return [RegisterDomain0ViewController(nibName: "RegisterDomain0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     RegisterDomain3ViewController(nibName: "RegisterDomain3ViewController", bundle: nil)]
             
-        } else if (mType == IOV_MSG_TYPE_REGISTER_ACCOUNT) {
+        } else if (mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT) {
             return [RegisterAccount0ViewController(nibName: "RegisterAccount0ViewController", bundle: nil),
                     RegisterAccount1ViewController(nibName: "RegisterAccount1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     RegisterAccount4ViewController(nibName: "RegisterAccount4ViewController", bundle: nil)]
 
-        } else if (mType == IOV_MSG_TYPE_DELETE_DOMAIN || mType == IOV_MSG_TYPE_DELETE_ACCOUNT) {
+        } else if (mType == TASK_TYPE_STARNAME_DELETE_DOMAIN || mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
             return [DeleteStarname0ViewController(nibName: "DeleteStarname0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     DeleteStarname3ViewController(nibName: "DeleteStarname3ViewController", bundle: nil)]
 
-        } else if (mType == IOV_MSG_TYPE_RENEW_DOMAIN || mType == IOV_MSG_TYPE_RENEW_ACCOUNT) {
+        } else if (mType == TASK_TYPE_STARNAME_RENEW_DOMAIN || mType == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
             return [RenewStarname0ViewController(nibName: "RenewStarname0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     RenewStarname3ViewController(nibName: "RenewStarname3ViewController", bundle: nil)]
 
-        } else if (mType == IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE) {
+        } else if (mType == TASK_TYPE_STARNAME_REPLACE_RESOURCE) {
             return [ReplaceResource0ViewController(nibName: "ReplaceResource0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     ReplaceResource3ViewController(nibName: "ReplaceResource3ViewController", bundle: nil)]
-
         }
         
         //OSMOSIS
-        else if (mType == OSMOSIS_MSG_TYPE_SWAP) {
+        else if (mType == TASK_TYPE_OSMOSIS_SWAP) {
             return [Swap0ViewController(nibName: "Swap0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     Swap3ViewController(nibName: "Swap3ViewController", bundle: nil)]
             
-        } else if (mType == OSMOSIS_MSG_TYPE_JOIN_POOL) {
+        } else if (mType == TASK_TYPE_OSMOSIS_JOIN_POOL) {
             return [JoinPool0ViewController(nibName: "JoinPool0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     JoinPool3ViewController(nibName: "JoinPool3ViewController", bundle: nil)]
             
-        } else if (mType == OSMOSIS_MSG_TYPE_EXIT_POOL) {
+        } else if (mType == TASK_TYPE_OSMOSIS_EXIT_POOL) {
             return [ExitPool0ViewController(nibName: "ExitPool0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     ExitPool3ViewController(nibName: "ExitPool3ViewController", bundle: nil)]
             
-        } else if (mType == OSMOSIS_MSG_TYPE_LOCK) {
+        } else if (mType == TASK_TYPE_OSMOSIS_LOCK) {
             return [StartLock0ViewController(nibName: "StartLock0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     StartLock3ViewController(nibName: "StartLock3ViewController", bundle: nil)]
             
-        } else if (mType == OSMOSIS_MSG_TYPE_BEGIN_UNLCOK) {
+        } else if (mType == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
             return [StartUnbonding0ViewController(nibName: "StartUnbonding0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     StartUnbonding3ViewController(nibName: "StartUnbonding3ViewController", bundle: nil)]
-            
-        } else if (mType == OSMOSIS_MSG_TYPE_PERIOD_UNLOCK) {
-            return [StartUnlock0ViewController(nibName: "StartUnlock0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    StartUnlock3ViewController(nibName: "StartUnlock3ViewController", bundle: nil)]
-            
         }
         
-        //IBC
-        else if (mType == TASK_IBC_TRANSFER) {
+        //SIF
+        else if (mType == TASK_TYPE_SIF_ADD_LP) {
+            return [SifJoinPool0ViewController(nibName: "SifJoinPool0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    SifJoinPool3ViewController(nibName: "SifJoinPool3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_SIF_REMOVE_LP) {
+            return [SifExitPool0ViewController(nibName: "SifExitPool0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    SifExitPool3ViewController(nibName: "SifExitPool3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_SIF_SWAP_CION) {
+            return [SifSwap0ViewController(nibName: "SifSwap0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    SifSwap3ViewController(nibName: "SifSwap3ViewController", bundle: nil)]
+        }
+        
+        //DESMOS
+        else if (mType == TASK_TYPE_DESMOS_GEN_PROFILE) {
+            return [GenProfile0ViewController(nibName: "GenProfile0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    GenProfile3ViewController(nibName: "GenProfile3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
+            return [LinkChainAccount0ViewController(nibName: "LinkChainAccount0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    LinkChainAccount3ViewController(nibName: "LinkChainAccount3ViewController", bundle: nil)]
+        }
+        
+        //NFT
+        else if (mType == TASK_TYPE_NFT_ISSUE) {
+            return [GenNFT0ViewController(nibName: "GenNFT0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    GenNFT3ViewController(nibName: "GenNFT3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_NFT_SEND) {
+            return [SendNFT0ViewController(nibName: "SendNFT0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    SendNFT3ViewController(nibName: "SendNFT3ViewController", bundle: nil)]
+            
+        } else if (mType == TASK_TYPE_NFT_ISSUE_DENOM) {
+            return [GenDenom0ViewController(nibName: "GenDenom0ViewController", bundle: nil),
+                    MemoViewController(nibName: "MemoViewController", bundle: nil),
+                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                    GenDenom3ViewController(nibName: "GenDenom3ViewController", bundle: nil)]
+        }
+        
+        //COMMON
+        else if (mType == TASK_TYPE_IBC_TRANSFER) {
             return [IBCSend0ViewController(nibName: "IBCSend0ViewController", bundle: nil),
                     IBCSend1ViewController(nibName: "IBCSend1ViewController", bundle: nil),
                     IBCSend2ViewController(nibName: "IBCSend2ViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     IBCSend4ViewController(nibName: "IBCSend4ViewController", bundle: nil)]
             
-        } else if (mType == TASK_CW20_TRANSFER) {
+        } else if (mType == TASK_TYPE_IBC_CW20_TRANSFER) {
             return [SendContract0ViewController(nibName: "SendContract0ViewController", bundle: nil),
                     SendContract1ViewController(nibName: "SendContract1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     SendContract4ViewController(nibName: "SendContract4ViewController", bundle: nil)]
-            
-        }
-        
-        //SIF
-        else if (mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
-            return [SifIncentive0ViewController(nibName: "SifIncentive0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SifIncentive3ViewController(nibName: "SifIncentive3ViewController", bundle: nil)]
-            
-        } else if (mType == SIF_MSG_TYPE_ADD_LP) {
-            return [SifJoinPool0ViewController(nibName: "SifJoinPool0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SifJoinPool3ViewController(nibName: "SifJoinPool3ViewController", bundle: nil)]
-            
-        } else if (mType == SIF_MSG_TYPE_REMOVE_LP) {
-            return [SifExitPool0ViewController(nibName: "SifExitPool0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SifExitPool3ViewController(nibName: "SifExitPool3ViewController", bundle: nil)]
-            
-        } else if (mType == SIF_MSG_TYPE_SWAP_CION) {
-            return [SifSwap0ViewController(nibName: "SifSwap0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SifSwap3ViewController(nibName: "SifSwap3ViewController", bundle: nil)]
-            
-        }
-        
-        //NFT
-        else if (mType == TASK_ISSUE_NFT) {
-            return [GenNFT0ViewController(nibName: "GenNFT0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    GenNFT3ViewController(nibName: "GenNFT3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_SEND_NFT) {
-            return [SendNFT0ViewController(nibName: "SendNFT0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SendNFT3ViewController(nibName: "SendNFT3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_ISSUE_NFT_DENOM) {
-            return [GenDenom0ViewController(nibName: "GenDenom0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    GenDenom3ViewController(nibName: "GenDenom3ViewController", bundle: nil)]
-            
-        }
-        
-        //DESMOS
-        else if (mType == TASK_GEN_PROFILE) {
-            return [GenProfile0ViewController(nibName: "GenProfile0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    GenProfile3ViewController(nibName: "GenProfile3ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_LINK_CHAIN_ACCOUNT) {
-            return [LinkChainAccount0ViewController(nibName: "LinkChainAccount0ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    LinkChainAccount3ViewController(nibName: "LinkChainAccount3ViewController", bundle: nil)]
         }
         
         else {
@@ -522,7 +503,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                 subView.delegate = self
                 subView.isScrollEnabled = false
                 subView.bouncesZoom = false
-
             }
         }
         disableBounce = true
@@ -551,8 +531,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     func onNextPage() {
         disableBounce = false
-        if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == IOV_MSG_TYPE_REGISTER_ACCOUNT ||
-            mType == TASK_IBC_TRANSFER || mType == TASK_CW20_TRANSFER) {
+        if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT ||
+            mType == TASK_TYPE_IBC_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
             if (currentIndex > 3) { return }
         } else {
             if (currentIndex > 2) { return }

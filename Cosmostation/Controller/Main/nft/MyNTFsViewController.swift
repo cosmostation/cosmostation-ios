@@ -139,14 +139,14 @@ class MyNTFsViewController: BaseViewController, UITableViewDataSource, UITableVi
         }
         
         let mainDenom = WUtils.getMainDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_ISSUE_NFT, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_NFT_ISSUE, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
             return
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = TASK_ISSUE_NFT
+        txVC.mType = TASK_TYPE_NFT_ISSUE
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)

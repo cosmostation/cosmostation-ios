@@ -45,14 +45,14 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
         feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 6, 6)
         var extendTime: Int64 = 0
         var starnameFee = NSDecimalNumber.zero
-        if (pageHolderVC.mType == IOV_MSG_TYPE_RENEW_DOMAIN) {
+        if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
             starnameLabel.text = "*" + pageHolderVC.mStarnameDomain!
-            extendTime = WUtils.getRenewPeriod(IOV_MSG_TYPE_RENEW_DOMAIN)
+            extendTime = WUtils.getRenewPeriod(TASK_TYPE_STARNAME_RENEW_DOMAIN)
             starnameFee = WUtils.getStarNameRenewDomainFee(pageHolderVC.mStarnameDomain!, pageHolderVC!.mStarnameDomainType!)
             
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_RENEW_ACCOUNT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
             starnameLabel.text = pageHolderVC.mStarnameAccount! + "*" + pageHolderVC.mStarnameDomain!
-            extendTime = WUtils.getRenewPeriod(IOV_MSG_TYPE_RENEW_ACCOUNT)
+            extendTime = WUtils.getRenewPeriod(TASK_TYPE_STARNAME_RENEW_ACCOUNT)
             starnameFee = WUtils.getStarNameRenewAccountFee(pageHolderVC!.mStarnameDomainType!)
         }
         expireDate.text = WUtils.longTimetoString(pageHolderVC.mStarnameTime! * 1000)
@@ -108,7 +108,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest = Cosmos_Tx_V1beta1_BroadcastTxRequest.init()
-            if (self.pageHolderVC.mType == IOV_MSG_TYPE_RENEW_DOMAIN) {
+            if (self.pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
                 reqTx = Signer.genSignedRenewDomainMsgTxgRPC (auth!,
                                                               self.pageHolderVC.mStarnameDomain!,
                                                               self.pageHolderVC.mAccount!.account_address,
@@ -117,7 +117,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
                                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                               self.chainType!)
                 
-            } else if (self.pageHolderVC.mType == IOV_MSG_TYPE_RENEW_ACCOUNT) {
+            } else if (self.pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
                 reqTx = Signer.genSignedRenewAccountMsgTxgRPC (auth!,
                                                                self.pageHolderVC.mStarnameDomain!,
                                                                self.pageHolderVC.mStarnameAccount!,

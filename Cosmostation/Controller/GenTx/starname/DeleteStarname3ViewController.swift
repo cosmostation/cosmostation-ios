@@ -40,9 +40,9 @@ class DeleteStarname3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onUpdateView() {
         feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 6, 6)
-        if (pageHolderVC.mType == IOV_MSG_TYPE_DELETE_DOMAIN) {
+        if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_DOMAIN) {
             toDeleteStarname.text = "*" + pageHolderVC.mStarnameDomain!
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_DELETE_ACCOUNT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
             toDeleteStarname.text = pageHolderVC.mStarnameAccount! + "*" + pageHolderVC.mStarnameDomain!
         }
         expireDate.text = WUtils.longTimetoString(pageHolderVC.mStarnameTime! * 1000)
@@ -95,7 +95,7 @@ class DeleteStarname3ViewController: BaseViewController, PasswordViewDelegate {
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
             var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest = Cosmos_Tx_V1beta1_BroadcastTxRequest.init()
-            if (self.pageHolderVC.mType == IOV_MSG_TYPE_DELETE_DOMAIN) {
+            if (self.pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_DOMAIN) {
                 reqTx = Signer.genSignedDeleteDomainMsgTxgRPC (auth!,
                                                                self.pageHolderVC.mStarnameDomain!,
                                                                self.pageHolderVC.mAccount!.account_address,
@@ -104,7 +104,7 @@ class DeleteStarname3ViewController: BaseViewController, PasswordViewDelegate {
                                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                self.chainType!)
                 
-            } else if (self.pageHolderVC.mType == IOV_MSG_TYPE_DELETE_ACCOUNT) {
+            } else if (self.pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
                 reqTx = Signer.genSignedDeleteAccountMsgTxgRPC (auth!,
                                                                 self.pageHolderVC.mStarnameDomain!,
                                                                 self.pageHolderVC.mStarnameAccount!,

@@ -146,7 +146,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_IBC_TRANSFER, 0)
+        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_TRANSFER, 0)
         if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
@@ -175,7 +175,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     func onStartIbc() {
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mIBCSendDenom = ibcDenom
-        txVC.mType = TASK_IBC_TRANSFER
+        txVC.mType = TASK_TYPE_IBC_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;

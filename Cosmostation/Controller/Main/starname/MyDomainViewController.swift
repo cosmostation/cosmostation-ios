@@ -107,7 +107,7 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
             return
         }
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = IOV_MSG_TYPE_REGISTER_DOMAIN
+        txVC.mType = TASK_TYPE_STARNAME_REGISTER_DOMAIN
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }

@@ -2730,17 +2730,17 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
-            } else if (type == TASK_ISSUE_NFT) {
+            } else if (type == TASK_TYPE_NFT_ISSUE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_SEND_NFT) {
+            } else if (type == TASK_TYPE_NFT_SEND) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_ISSUE_NFT_DENOM) {
+            } else if (type == TASK_TYPE_NFT_ISSUE_DENOM) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_GEN_PROFILE || type == TASK_LINK_CHAIN_ACCOUNT) {
+            } else if (type == TASK_TYPE_DESMOS_GEN_PROFILE || type == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_PROFILE))
-            } else if (type == TASK_CW20_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_CW20_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
             }
             
@@ -2761,19 +2761,17 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == OSMOSIS_MSG_TYPE_SWAP) {
+            } else if (type == TASK_TYPE_OSMOSIS_SWAP) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_SWAP))
-            } else if (type == OSMOSIS_MSG_TYPE_JOIN_POOL) {
+            } else if (type == TASK_TYPE_OSMOSIS_JOIN_POOL) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_JOIN_POOL))
-            } else if (type == OSMOSIS_MSG_TYPE_EXIT_POOL) {
+            } else if (type == TASK_TYPE_OSMOSIS_EXIT_POOL) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_EXIT_POOL))
-            } else if (type == OSMOSIS_MSG_TYPE_LOCK) {
+            } else if (type == TASK_TYPE_OSMOSIS_LOCK) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_LOCK))
-            } else if (type == OSMOSIS_MSG_TYPE_BEGIN_UNLCOK) {
+            } else if (type == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_BEGIN_UNBONDING))
-            } else if (type == OSMOSIS_MSG_TYPE_PERIOD_UNLOCK) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_UNLOCK))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
             }
         }
@@ -2809,7 +2807,7 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CLAIM_INCENTIVE_ALL))
             } else if (type == TASK_TYPE_HTLC_SWAP) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
             }
             
@@ -2830,7 +2828,7 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_IBC_SEND))
             }
             
@@ -2851,20 +2849,20 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_VOTE))
-            } else if (type == IOV_MSG_TYPE_REGISTER_DOMAIN || type == IOV_MSG_TYPE_REGISTER_ACCOUNT) {
+            } else if (type == TASK_TYPE_STARNAME_REGISTER_DOMAIN || type == TASK_TYPE_STARNAME_REGISTER_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REGISTER))
-            } else if (type == IOV_MSG_TYPE_DELETE_DOMAIN || type == IOV_MSG_TYPE_DELETE_ACCOUNT) {
+            } else if (type == TASK_TYPE_STARNAME_DELETE_DOMAIN || type == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_DELETE))
-            } else if (type == IOV_MSG_TYPE_RENEW_DOMAIN || type == IOV_MSG_TYPE_RENEW_ACCOUNT) {
+            } else if (type == TASK_TYPE_STARNAME_RENEW_DOMAIN || type == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_RENEW))
-            } else if (type == IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE) {
+            } else if (type == TASK_TYPE_STARNAME_REPLACE_RESOURCE) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REPLACE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.OKEX_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(OK_GAS_AMOUNT_SEND))
             } else if (type == TASK_TYPE_OK_DEPOSIT || type == TASK_TYPE_OK_WITHDRAW) {
                 result = (NSDecimalNumber.init(string: OK_GAS_AMOUNT_STAKE_MUX).multiplying(by: NSDecimalNumber.init(value: valCnt))).adding(NSDecimalNumber.init(string: OK_GAS_AMOUNT_STAKE))
@@ -2887,12 +2885,12 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.SECRET_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_SEND))
             } else if (type == TASK_TYPE_DELEGATE || type == TASK_TYPE_UNDELEGATE) {
                 result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_STAKE))
@@ -2909,7 +2907,7 @@ public class WUtils {
             }
             
         } else if (chain == ChainType.SENTINEL_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_SEND))
             } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_STAKE))
@@ -2925,12 +2923,12 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.FETCH_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_SEND))
             } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_STAKE))
@@ -2946,12 +2944,12 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_IBC_SEND))
             }
             
         } else if (chain == ChainType.SIF_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_SEND))
             } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_STAKE))
@@ -2967,13 +2965,11 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_IBC_SEND))
-            } else if (type == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_INCENTIVE))
-            } else if (type == SIF_MSG_TYPE_ADD_LP || type == SIF_MSG_TYPE_REMOVE_LP) {
+            } else if (type == TASK_TYPE_SIF_ADD_LP || type == TASK_TYPE_SIF_REMOVE_LP) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_LP))
-            } else if (type == SIF_MSG_TYPE_SWAP_CION) {
+            } else if (type == TASK_TYPE_SIF_SWAP_CION) {
                 result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_SWAP))
             }
             
@@ -2997,7 +2993,7 @@ public class WUtils {
             }
             
         } else if (chain == ChainType.MEDI_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_IBC_TRANSFER) {
+            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_SEND))
             } else if (type == TASK_TYPE_DELEGATE) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_STAKE))
@@ -3013,7 +3009,7 @@ public class WUtils {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
             } else if (type == TASK_TYPE_VOTE) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_IBC_TRANSFER) {
+            } else if (type == TASK_TYPE_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_IBC_SEND))
             }
             

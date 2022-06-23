@@ -203,7 +203,7 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = SIF_MSG_TYPE_SWAP_CION
+        txVC.mType = TASK_TYPE_SIF_SWAP_CION
         txVC.mSifPool = mSelectedPool
         txVC.mSwapInDenom = mInputCoinDenom
         txVC.mSwapOutDenom = mOutputCoinDenom

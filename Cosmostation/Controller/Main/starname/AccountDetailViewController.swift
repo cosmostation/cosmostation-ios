@@ -74,14 +74,14 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, IOV_MSG_TYPE_DELETE_DOMAIN, 0)
+        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_DELETE_DOMAIN, 0)
         if (userAvailable.compare(txFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
             return
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = IOV_MSG_TYPE_DELETE_ACCOUNT
+        txVC.mType = TASK_TYPE_STARNAME_DELETE_ACCOUNT
         txVC.mStarnameDomain = mMyDomain
         txVC.mStarnameAccount = mMyAccount
         txVC.mStarnameTime = mMyAccountResolve_gRPC!.account.validUntil
@@ -96,7 +96,7 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, IOV_MSG_TYPE_RENEW_ACCOUNT, 0)
+        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_RENEW_ACCOUNT, 0)
         let starnameFee = WUtils.getStarNameRenewAccountFee(mMyDomainInfo_gRPC!.type)
 //        print("userAvailable ", userAvailable)
 //        print("txFee ", txFee)
@@ -108,7 +108,7 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = IOV_MSG_TYPE_RENEW_ACCOUNT
+        txVC.mType = TASK_TYPE_STARNAME_RENEW_ACCOUNT
         txVC.mStarnameDomain = mMyDomain
         txVC.mStarnameAccount = mMyAccount
         txVC.mStarnameTime = mMyAccountResolve_gRPC?.account.validUntil
@@ -124,7 +124,7 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE, 0)
+        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_REPLACE_RESOURCE, 0)
         let starnameFee = WUtils.getReplaceFee()
 //        print("userAvailable ", userAvailable)
 //        print("txFee ", txFee)
@@ -136,7 +136,7 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE
+        txVC.mType = TASK_TYPE_STARNAME_REPLACE_RESOURCE
         txVC.mStarnameDomain = mMyDomain
         txVC.mStarnameAccount = mMyAccount
         txVC.mStarnameTime = mMyAccountResolve_gRPC?.account.validUntil

@@ -59,7 +59,7 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(swapInDenom)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_MSG_TYPE_SWAP_CION, 0)
+        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_SIF_SWAP_CION, 0)
         if (swapInDenom == SIF_MAIN_DENOM) {
             availableMaxAmount = availableMaxAmount.subtracting(txFeeAmount)
         }

@@ -77,14 +77,14 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, IOV_MSG_TYPE_DELETE_DOMAIN, 0)
+        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_DELETE_DOMAIN, 0)
         if (userAvailable.compare(txFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
             return
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = IOV_MSG_TYPE_DELETE_DOMAIN
+        txVC.mType = TASK_TYPE_STARNAME_DELETE_DOMAIN
         txVC.mStarnameDomain = mMyDomain
         txVC.mStarnameTime = mMyDomainInfo_gRPC?.validUntil
         self.navigationItem.title = ""
@@ -98,7 +98,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, IOV_MSG_TYPE_RENEW_DOMAIN, 0)
+        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_RENEW_DOMAIN, 0)
         let starnameFee = WUtils.getStarNameRenewDomainFee(mMyDomain!, mMyDomainInfo_gRPC!.type)
 //        print("userAvailable ", userAvailable)
 //        print("txFee ", txFee)
@@ -110,7 +110,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = IOV_MSG_TYPE_RENEW_DOMAIN
+        txVC.mType = TASK_TYPE_STARNAME_RENEW_DOMAIN
         txVC.mStarnameDomain = mMyDomain
         txVC.mStarnameTime = mMyDomainInfo_gRPC?.validUntil
         txVC.mStarnameDomainType = mMyDomainInfo_gRPC?.type
@@ -125,7 +125,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE, 0)
+        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_REPLACE_RESOURCE, 0)
         let starnameFee = WUtils.getReplaceFee()
 //        print("userAvailable ", userAvailable)
 //        print("txFee ", txFee)
@@ -137,7 +137,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE
+        txVC.mType = TASK_TYPE_STARNAME_REPLACE_RESOURCE
         txVC.mStarnameDomain = mMyDomain
         txVC.mStarnameTime = mMyDomainInfo_gRPC?.validUntil
         txVC.mStarnameDomainType = mMyDomainInfo_gRPC?.type

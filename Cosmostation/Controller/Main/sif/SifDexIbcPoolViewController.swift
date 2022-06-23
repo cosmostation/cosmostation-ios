@@ -115,7 +115,7 @@ class SifDexIbcPoolViewController: BaseViewController, UITableViewDataSource, UI
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = SIF_MSG_TYPE_ADD_LP
+        txVC.mType = TASK_TYPE_SIF_ADD_LP
         txVC.mSifPool = pool
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -136,7 +136,7 @@ class SifDexIbcPoolViewController: BaseViewController, UITableViewDataSource, UI
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = SIF_MSG_TYPE_REMOVE_LP
+        txVC.mType = TASK_TYPE_SIF_REMOVE_LP
         txVC.mSifPool = pool
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)

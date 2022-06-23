@@ -165,7 +165,7 @@ class FeeGrpcViewController: BaseViewController {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait() {
-                    if (self.pageHolderVC.mType == TASK_IBC_TRANSFER) {
+                    if (self.pageHolderVC.mType == TASK_TYPE_IBC_TRANSFER) {
                         self.onFetchIbcClientState(response)
                     } else {
                         self.onSimulateGrpcTx(response, nil)
@@ -283,45 +283,45 @@ class FeeGrpcViewController: BaseViewController {
         }
         
         //for starname custom msg
-        else if (pageHolderVC.mType == IOV_MSG_TYPE_REGISTER_DOMAIN) {
+        else if (pageHolderVC.mType == TASK_TYPE_STARNAME_REGISTER_DOMAIN) {
             return Signer.genSimulateRegisterDomainMsgTxgRPC(auth,
                                                              self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
                                                              self.pageHolderVC.mStarnameDomainType!,
                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                              privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_REGISTER_ACCOUNT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT) {
             return Signer.genSimulateRegisterAccountMsgTxgRPC(auth,
                                                               self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
                                                               self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mStarnameResources_gRPC,
                                                               self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                               privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_DELETE_DOMAIN) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_DOMAIN) {
             return Signer.genSimulateDeleteDomainMsgTxgRPC (auth,
                                                             self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                             privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_DELETE_ACCOUNT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
             return Signer.genSimulateDeleteAccountMsgTxgRPC (auth,
                                                              self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                              privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_RENEW_DOMAIN) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
             return Signer.genSimulateRenewDomainMsgTxgRPC (auth,
                                                            self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_RENEW_ACCOUNT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
             return Signer.genSimulateRenewAccountMsgTxgRPC (auth,
                                                             self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                             privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == IOV_MSG_TYPE_REPLACE_ACCOUNT_RESOURCE) {
+        } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_REPLACE_RESOURCE) {
             return Signer.genSimulateReplaceResourceMsgTxgRPC(auth,
                                                               self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount, self.pageHolderVC.mAccount!.account_address,
                                                               self.pageHolderVC.mStarnameResources_gRPC,
@@ -330,7 +330,7 @@ class FeeGrpcViewController: BaseViewController {
         }
         
         //for osmosis custom msg
-        else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_SWAP) {
+        else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_SWAP) {
             var swapRoutes = Array<Osmosis_Gamm_V1beta1_SwapAmountInRoute>()
             let swapRoute = Osmosis_Gamm_V1beta1_SwapAmountInRoute.with {
                 $0.poolID = self.pageHolderVC.mPool!.id
@@ -344,28 +344,28 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                      privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_JOIN_POOL) {
+        } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_JOIN_POOL) {
             return Signer.genSimulateDepositPoolMsgTxgRPC(auth,
                                                           self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
                                                           self.pageHolderVC.mLPCoin!.amount,
                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                           privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_EXIT_POOL) {
+        } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_EXIT_POOL) {
             return Signer.genSimulateWithdrawPoolMsgTxgRPC(auth,
                                                            self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
                                                            self.pageHolderVC.mLPCoin!.amount,
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_LOCK) {
+        } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_LOCK) {
             return Signer.genSimulateLockTokensMsgTxgRPC(auth,
                                                          self.pageHolderVC.mLPCoin!,
                                                          self.pageHolderVC.mLockupDuration!,
                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                          privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == OSMOSIS_MSG_TYPE_BEGIN_UNLCOK) {
+        } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
             var ids = Array<UInt64>()
             for lockup in self.pageHolderVC.mLockups! {
                 ids.append(lockup.id)
@@ -379,7 +379,7 @@ class FeeGrpcViewController: BaseViewController {
         
         
         //for IBC Transfer or Cw20
-        else if (pageHolderVC.mType == TASK_IBC_TRANSFER) {
+        else if (pageHolderVC.mType == TASK_TYPE_IBC_TRANSFER) {
             return Signer.genSimulateIbcTransferMsgTxgRPC(auth,
                                                           self.pageHolderVC.mAccount!.account_address,
                                                           self.pageHolderVC.mIBCRecipient!,
@@ -390,7 +390,7 @@ class FeeGrpcViewController: BaseViewController {
                                                           self.pageHolderVC.mFee!, IBC_TRANSFER_MEMO,
                                                           privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == TASK_CW20_TRANSFER) {
+        } else if (pageHolderVC.mType == TASK_TYPE_IBC_CW20_TRANSFER) {
             return Signer.genSimulateCw20Send(auth,
                                               self.account!.account_address,
                                               self.pageHolderVC.mToSendRecipientAddress!,
@@ -401,13 +401,7 @@ class FeeGrpcViewController: BaseViewController {
             
         }
         
-        else if (pageHolderVC.mType == SIF_MSG_TYPE_CLAIM_INCENTIVE) {
-            return Signer.genSimulateSifIncentiveMsgTxgRPC(auth,
-                                                           self.account!.account_address,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                           privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == SIF_MSG_TYPE_ADD_LP) {
+        else if (pageHolderVC.mType == TASK_TYPE_SIF_ADD_LP) {
             return Signer.genSimulateSifAddLpMsgTxgRPC(auth,
                                                        self.account!.account_address,
                                                        self.pageHolderVC.mPoolCoin0!.amount,
@@ -416,7 +410,7 @@ class FeeGrpcViewController: BaseViewController {
                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                        privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == SIF_MSG_TYPE_REMOVE_LP) {
+        } else if (pageHolderVC.mType == TASK_TYPE_SIF_REMOVE_LP) {
             var basisPoints = ""
             let myShareAllAmount = NSDecimalNumber.init(string: self.pageHolderVC.mSifMyAllUnitAmount)
             let myShareWithdrawAmount = NSDecimalNumber.init(string: self.pageHolderVC.mSifMyWithdrawUnitAmount)
@@ -429,7 +423,7 @@ class FeeGrpcViewController: BaseViewController {
                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                           privateKey, publicKey, self.chainType!)
             
-        } else if (pageHolderVC.mType == SIF_MSG_TYPE_SWAP_CION) {
+        } else if (pageHolderVC.mType == TASK_TYPE_SIF_SWAP_CION) {
             return Signer.genSimulateSifSwapMsgTxgRPC(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mSwapInDenom!,
@@ -441,7 +435,7 @@ class FeeGrpcViewController: BaseViewController {
         }
         
         //for NFT
-        else if (pageHolderVC.mType == TASK_ISSUE_NFT) {
+        else if (pageHolderVC.mType == TASK_TYPE_NFT_ISSUE) {
             let stationData = StationNFTData.init(self.pageHolderVC.mNFTName!, self.pageHolderVC.mNFTDescription!, NFT_INFURA + self.pageHolderVC.mNFTHash!,
                                                   self.pageHolderVC.mNFTDenomId!, self.account!.account_address)
             let jsonEncoder = JSONEncoder()
@@ -474,7 +468,7 @@ class FeeGrpcViewController: BaseViewController {
                                                            self.chainType!)
             }
             
-        } else if (pageHolderVC.mType == TASK_SEND_NFT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_NFT_SEND) {
             if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
                 return Signer.genSimulateSendNftIrisTxgRPC(auth, self.account!.account_address,
                                                            self.pageHolderVC.mToSendRecipientAddress!,
@@ -496,7 +490,7 @@ class FeeGrpcViewController: BaseViewController {
                                                           self.chainType!)
             }
             
-        } else if (pageHolderVC.mType == TASK_ISSUE_NFT_DENOM) {
+        } else if (pageHolderVC.mType == TASK_TYPE_NFT_ISSUE_DENOM) {
             if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
                 return Signer.genSimulateIssueNftDenomIrisTxgRPC(auth, self.account!.account_address,
                                                                  self.pageHolderVC.mNFTDenomId!,
@@ -517,7 +511,7 @@ class FeeGrpcViewController: BaseViewController {
         }
         
         //for desmos
-        else if (pageHolderVC.mType == TASK_GEN_PROFILE) {
+        else if (pageHolderVC.mType == TASK_TYPE_DESMOS_GEN_PROFILE) {
             return Signer.genSimulateSaveProfileTxgRPC(auth,
                                                        self.pageHolderVC.mAccount!.account_address,
                                                        self.pageHolderVC.mDesmosDtag!,
@@ -529,7 +523,7 @@ class FeeGrpcViewController: BaseViewController {
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                        self.chainType!)
             
-        } else if (pageHolderVC.mType == TASK_LINK_CHAIN_ACCOUNT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
             let toAccount = BaseData.instance.selectAccountById(id: self.pageHolderVC.mDesmosToLinkAccountId)!
             var toPrivateKey: Data!
             var toPublicKey: Data!

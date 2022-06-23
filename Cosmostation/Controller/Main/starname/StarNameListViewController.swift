@@ -134,9 +134,9 @@ extension WUtils {
     
     static public func getRenewPeriod(_ type: String) -> Int64 {
         let starNameConfig = BaseData.instance.mStarNameConfig_gRPC
-        if (type == IOV_MSG_TYPE_RENEW_DOMAIN) {
+        if (type == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
             if let seconds = starNameConfig?.domainRenewalPeriod.seconds { return seconds * 1000 }
-        } else if (type == IOV_MSG_TYPE_RENEW_ACCOUNT) {
+        } else if (type == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
             if let seconds = starNameConfig?.accountRenewalPeriod.seconds { return seconds * 1000 }
         }
         return 0

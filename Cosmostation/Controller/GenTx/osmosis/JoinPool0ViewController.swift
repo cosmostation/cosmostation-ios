@@ -50,7 +50,7 @@ class JoinPool0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func onInitView() {
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, OSMOSIS_MSG_TYPE_JOIN_POOL, 0)
+        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OSMOSIS_JOIN_POOL, 0)
         let coin0Denom = pageHolderVC.mPool!.poolAssets[0].token.denom
         let coin1Denom = pageHolderVC.mPool!.poolAssets[1].token.denom
         
