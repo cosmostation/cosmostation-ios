@@ -58,7 +58,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
         
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, KAVA_MSG_TYPE_SWAP_DEPOSIT, 0)
+        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_KAVA_SWAP_DEPOSIT, 0)
         coin0Denom = mKavaSwapPool.coins[0].denom
         coin1Denom = mKavaSwapPool.coins[1].denom
         coin0Decimal = WUtils.getKavaCoinDecimal(coin0Denom)

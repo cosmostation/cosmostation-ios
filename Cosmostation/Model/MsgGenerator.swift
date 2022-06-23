@@ -25,7 +25,7 @@ class MsgGenerator {
                 print(error)
             }
             
-            msg.type = OK_MSG_TYPE_TRANSFER
+            msg.type = "okexchain/token/MsgTransfer"
             msg.value = value
             
         } else {
@@ -139,7 +139,7 @@ class MsgGenerator {
         var value = Msg.Value.init()
         value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.quantity = coin;
-        msg.type = OK_MSG_TYPE_DEPOSIT;
+        msg.type = "okexchain/staking/MsgDeposit";
         msg.value = value;
         return msg
     }
@@ -149,7 +149,7 @@ class MsgGenerator {
         var value = Msg.Value.init()
         value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.quantity = coin;
-        msg.type = OK_MSG_TYPE_WITHDRAW;
+        msg.type = "okexchain/staking/MsgWithdraw";
         msg.value = value;
         return msg
     }
@@ -159,7 +159,7 @@ class MsgGenerator {
         var value = Msg.Value.init()
         value.delegator_address = WKey.convertAddressEthToCosmos(delegator, "ex")
         value.validator_addresses = toVals;
-        msg.type = OK_MSG_TYPE_DIRECT_VOTE;
+        msg.type = "okexchain/staking/MsgAddShares";
         msg.value = value;
         return msg
     }

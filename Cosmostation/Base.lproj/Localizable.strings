@@ -389,10 +389,6 @@
 "htlc_swap_progress_1" = "2/4 Confirming swapid.";
 "htlc_swap_progress_2" = "3/4 Broadcasting BEP3 claim Tx on receiving chain.";
 "htlc_swap_progress_3" = "4/4 Confirming all Tx on each chain.";
-"htlc_refund_step_0" = "Refunding Expired BEP3 Transfer";
-"htlc_refund_step_1" = "Insert memo (optional)";
-"htlc_refund_step_2" = "Select transaction fee";
-"htlc_refund_step_3" = "Check transaction detail";
 "incentive_participate_step_0" = "Select incentive reward option";
 "incentive_participate_step_1" = "Insert memo (optional)";
 "incentive_participate_step_2" = "Select transaction fee";
@@ -633,7 +629,6 @@ support@cosmostation.io";
 "title_reward_harvest" = "Claim Hard Incentive";
 "title_claim_incentive" = "Claim Incentive";
 "title_interchain_swap" = "BEP3 Send & Claim";
-"title_interchain_refund" = "BEP3 Refund";
 "title_participate_incentive" = "USDX Minting Incentive Claim";
 "title_ok_deposit" = "Deposit";
 "title_ok_withdraw" = "Withdraw";

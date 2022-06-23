@@ -252,81 +252,77 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     CdpDrawRepay4ViewController(nibName: "CdpDrawRepay4ViewController", bundle: nil)]
             
-        } else if (mType == TASK_TYPE_HTLC_SWAP) {
-            return [self.newVc(viewController: "StepHtlcSend0ViewController"),
-                    self.newVc(viewController: "StepHtlcSend1ViewController"),
-                    self.newVc(viewController: "StepHtlcSend2ViewController"),
-                    self.newVc(viewController: "StepHtlcSend3ViewController")]
-            
-        } else if (mType == TASK_TYPE_HTLC_REFUND) {
-            return [self.newVc(viewController: "StepHtlcRefund0ViewController"),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeLcdViewController(nibName: "FeeLcdViewController", bundle: nil),
-                    self.newVc(viewController: "StepHtlcRefund3ViewController")]
-            
-        } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
+        } else if (mType == TASK_TYPE_KAVA_HARD_DEPOSIT) {
             return [HardPoolDeposit0ViewController(nibName: "HardPoolDeposit0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     HardPoolDeposit3ViewController(nibName: "HardPoolDeposit3ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
+        } else if (mType == TASK_TYPE_KAVA_HARD_WITHDRAW) {
             return [HardPoolWithdraw0ViewController(nibName: "HardPoolWithdraw0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     HardPoolWithdraw3ViewController(nibName: "HardPoolWithdraw3ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_BORROW_HARD) {
+        } else if (mType == TASK_TYPE_KAVA_HARD_BORROW) {
             return [HardPoolBorrow0ViewController(nibName: "HardPoolBorrow0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     HardPoolBorrow3ViewController(nibName: "HardPoolBorrow3ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_REPAY_HARD) {
+        } else if (mType == TASK_TYPE_KAVA_HARD_REPAY) {
             return [HardPoolRepay0ViewController(nibName: "HardPoolRepay0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     HardPoolRepay3ViewController(nibName: "HardPoolRepay3ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
+        } else if (mType == TASK_TYPE_KAVA_SWAP_TOKEN) {
             return [KavaSwap0ViewController(nibName: "KavaSwap0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     KavaSwap3ViewController(nibName: "KavaSwap3ViewController", bundle: nil)]
             
-        } else if (mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+        } else if (mType == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
             return [KavaSwapJoin0ViewController(nibName: "KavaSwapJoin0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     KavaSwapJoin3ViewController(nibName: "KavaSwapJoin3ViewController", bundle: nil)]
 
-        } else if (mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+        } else if (mType == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
             return [KavaSwapExit0ViewController(nibName: "KavaSwapExit0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     KavaSwapExit3ViewController(nibName: "KavaSwapExit3ViewController", bundle: nil)]
 
-        } else if (mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+        } else if (mType == TASK_TYPE_KAVA_INCENTIVE_ALL) {
             return [KavaIncentiveClaim0ViewController(nibName: "KavaIncentiveClaim0ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     KavaIncentiveClaim3ViewController(nibName: "KavaIncentiveClaim3ViewController", bundle: nil)]
         }
         
+        //BEP3 Stranfer (KAVA, BINANCE)
+        else if (mType == TASK_TYPE_HTLC_SWAP) {
+            return [HtlcSend0ViewController(nibName: "HtlcSend0ViewController", bundle: nil),
+                    HtlcSend1ViewController(nibName: "HtlcSend1ViewController", bundle: nil),
+                    HtlcSend2ViewController(nibName: "HtlcSend2ViewController", bundle: nil),
+                    HtlcSend3ViewController(nibName: "HtlcSend3ViewController", bundle: nil)]
+        }
+        
         //OEC
-        else if (mType == OK_MSG_TYPE_DEPOSIT) {
+        else if (mType == TASK_TYPE_OK_DEPOSIT) {
             return [OkDeposit1ViewController(nibName: "OkDeposit1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeLcdViewController(nibName: "FeeLcdViewController", bundle: nil),
                     OkDeposit4ViewController(nibName: "OkDeposit4ViewController", bundle: nil)]
             
-        } else if (mType == OK_MSG_TYPE_WITHDRAW) {
+        } else if (mType == TASK_TYPE_OK_WITHDRAW) {
             return [OkWithdraw1ViewController(nibName: "OkWithdraw1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeLcdViewController(nibName: "FeeLcdViewController", bundle: nil),
                     OkWithdraw4ViewController(nibName: "OkWithdraw4ViewController", bundle: nil)]
             
-        } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
+        } else if (mType == TASK_TYPE_OK_DIRECT_VOTE) {
             return [OkVote1ViewController(nibName: "OkVote1ViewController", bundle: nil),
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeLcdViewController(nibName: "FeeLcdViewController", bundle: nil),
@@ -507,7 +503,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         if (mType == TASK_TYPE_REDELEGATE) {
             self.onFetchBondedValidators(0)
             
-        } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
+        } else if (mType == TASK_TYPE_OK_DIRECT_VOTE) {
             if let votedVals = BaseData.instance.mOkStaking?.validator_address {
                 self.mOkVoteValidators = votedVals
             } else {

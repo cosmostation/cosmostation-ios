@@ -188,7 +188,7 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_SWAP_TOKEN
+        txVC.mType = TASK_TYPE_KAVA_SWAP_TOKEN
         txVC.mKavaSwapPool = mKavaSelectedPool
         txVC.mSwapInDenom = mInputCoinDenom
         txVC.mSwapOutDenom = mOutputCoinDenom

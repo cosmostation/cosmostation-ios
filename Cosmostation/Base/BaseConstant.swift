@@ -336,6 +336,13 @@ let COSMOS_AUTH_TYPE_D_VESTING_ACCOUNT      = "cosmos-sdk/DelayedVestingAccount"
 let COSMOS_AUTH_TYPE_CERTIK_MANUAL          = "auth/ManualVestingAccount";
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";
 
+
+let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
+let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";
+let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
+
+
+
 let TASK_TYPE_TRANSFER                      = "task_simple_transfer";
 let TASK_TYPE_DELEGATE                      = "task_delegate";
 let TASK_TYPE_UNDELEGATE                    = "task_undelegate";
@@ -346,57 +353,25 @@ let TASK_TYPE_MODIFY_REWARD_ADDRESS         = "task_modify_reward_address";
 let TASK_TYPE_REINVEST                      = "task_reinvest";
 let TASK_TYPE_VOTE                          = "task_vote";
 
-let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
-let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";
-let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
-
-let BNB_MSG_TYPE_HTLC                       = "tokens/HTLTMsg";
-let BNB_MSG_TYPE_HTLC_CLIAM                 = "tokens/ClaimHTLTMsg";
-let BNB_MSG_TYPE_HTLC_REFUND                = "tokens/RefundHTLTMsg";
-
-
-let TASK_TYPE_HTLC_SWAP                     = "htlc_swap";
-let TASK_TYPE_HTLC_REFUND                   = "htlc_refund";
-
-
 let TASK_TYPE_KAVA_CDP_CREATE               = "task_kava_cdp_create";
 let TASK_TYPE_KAVA_CDP_DEPOSIT              = "task_kava_cdp_deposit";
 let TASK_TYPE_KAVA_CDP_WITHDRAW             = "task_kava_cdp_withdraw";
 let TASK_TYPE_KAVA_CDP_DRAWDEBT             = "task_kava_cdp_drawdebt";
 let TASK_TYPE_KAVA_CDP_REPAY                = "task_kava_cdp_repay";
+let TASK_TYPE_KAVA_HARD_DEPOSIT             = "task_kava_hard_deposit";
+let TASK_TYPE_KAVA_HARD_WITHDRAW            = "task_kava_hard_withdraw";
+let TASK_TYPE_KAVA_HARD_BORROW              = "task_kava_hard_borrow";
+let TASK_TYPE_KAVA_HARD_REPAY               = "task_kava_hard_repay";
+let TASK_TYPE_KAVA_SWAP_TOKEN               = "task_kava_swap_token";
+let TASK_TYPE_KAVA_SWAP_DEPOSIT             = "task_kava_swap_deposit";
+let TASK_TYPE_KAVA_SWAP_WITHDRAW            = "task_kava_swap_withdraw";
+let TASK_TYPE_KAVA_INCENTIVE_ALL            = "task_kava_incentive_all";
 
+let TASK_TYPE_HTLC_SWAP                     = "task_htlc_swap";
 
-let KAVA_MSG_TYPE_LIQUIDATE_CDP             = "/kava.cdp.v1beta1.MsgLiquidate";
-let KAVA_MSG_TYPE_HTLC_CREATE_SWAP          = "/kava.bep3.v1beta1.MsgCreateAtomicSwap";
-let KAVA_MSG_TYPE_HTLC_CLAIM_SWAP           = "/kava.bep3.v1beta1.MsgClaimAtomicSwap";
-let KAVA_MSG_TYPE_HTLC_REFUND_SWAP          = "/kava.bep3.v1beta1.MsgRefundAtomicSwap";
-let KAVA_MSG_TYPE_INCENTIVE_REWARD          = "incentive/MsgClaimReward";
-let KAVA_MSG_TYPE_DEPOSIT_HAVEST            = "harvest/MsgDeposit";
-let KAVA_MSG_TYPE_WITHDRAW_HAVEST           = "harvest/MsgWithdraw";
-let KAVA_MSG_TYPE_CLAIM_HAVEST              = "harvest/MsgClaimReward";
-let KAVA_MSG_TYPE_USDX_MINT_INCENTIVE       = "/kava.incentive.v1beta1.MsgClaimUSDXMintingReward";
-let KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE      = "/kava.incentive.v1beta1.MsgClaimHardReward";
-let KAVA_MSG_TYPE_DELEGATOR_INCENTIVE       = "/kava.incentive.v1beta1.MsgClaimDelegatorReward";
-let KAVA_MSG_TYPE_SWAP_INCENTIVE            = "/kava.incentive.v1beta1.MsgClaimSwapReward";
-let KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV   = "incentive/MsgClaimHardRewardVVesting";
-let KAVA_MSG_TYPE_INCENTIVE_ALL             = "incentiveAll";
-let KAVA_MSG_TYPE_DEPOSIT_HARD              = "/kava.hard.v1beta1.MsgDeposit";
-let KAVA_MSG_TYPE_WITHDRAW_HARD             = "/kava.hard.v1beta1.MsgWithdraw";
-let KAVA_MSG_TYPE_BORROW_HARD               = "/kava.hard.v1beta1.MsgBorrow";
-let KAVA_MSG_TYPE_REPAY_HARD                = "/kava.hard.v1beta1.MsgRepay";
-let KAVA_MSG_TYPE_LIQUIDATE_HARD            = "/kava.hard.v1beta1.MsgLiquidate";
-let KAVA_MSG_TYPE_SWAP_TOKEN                = "/kava.swap.v1beta1.MsgSwapExactForTokens";
-let KAVA_MSG_TYPE_SWAP_TOKEN2               = "/kava.swap.v1beta1.MsgSwapForExactTokens";
-let KAVA_MSG_TYPE_SWAP_DEPOSIT              = "/kava.swap.v1beta1.MsgDeposit";
-let KAVA_MSG_TYPE_SWAP_WITHDRAW             = "/kava.swap.v1beta1.MsgWithdraw";
-
-
-let OK_MSG_TYPE_TRANSFER                    = "okexchain/token/MsgTransfer";
-let OK_MSG_TYPE_MULTI_TRANSFER              = "okexchain/token/MsgMultiTransfer";
-let OK_MSG_TYPE_DEPOSIT                     = "okexchain/staking/MsgDeposit";
-let OK_MSG_TYPE_WITHDRAW                    = "okexchain/staking/MsgWithdraw";
-let OK_MSG_TYPE_DIRECT_VOTE                 = "okexchain/staking/MsgAddShares";
-
+let TASK_TYPE_OK_DEPOSIT                    = "task_ok_deposit";
+let TASK_TYPE_OK_WITHDRAW                   = "task_ok_withdraw";
+let TASK_TYPE_OK_DIRECT_VOTE                = "task_ok_direct_vote";
 
 let IOV_MSG_TYPE_REGISTER_DOMAIN            = "starname/RegisterDomain";
 let IOV_MSG_TYPE_REGISTER_ACCOUNT           = "starname/RegisterAccount";

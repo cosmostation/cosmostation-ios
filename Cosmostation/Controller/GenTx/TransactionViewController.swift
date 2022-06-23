@@ -135,11 +135,6 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_interchain_swap", comment: "")
             
-        } else if (mType == TASK_TYPE_HTLC_REFUND) {
-            stepDescription.text = NSLocalizedString("htlc_refund_step_0", comment: "")
-            stepImg.image = UIImage.init(named: "txStep4_1")
-            self.titleLabel.text =  NSLocalizedString("title_interchain_refund", comment: "")
-            
         } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HAVEST) {
             stepDescription.text = NSLocalizedString("deposit_harvest_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
@@ -150,57 +145,57 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_withdraw_harvest", comment: "")
             
-        } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
+        } else if (mType == TASK_TYPE_KAVA_HARD_DEPOSIT) {
             stepDescription.text = NSLocalizedString("deposit_hardpool_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_deposit_hardpool", comment: "")
             
-        } else if (mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
+        } else if (mType == TASK_TYPE_KAVA_HARD_WITHDRAW) {
             stepDescription.text = NSLocalizedString("withdraw_hardpool_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_withdraw_hardpool", comment: "")
             
-        } else if (mType == KAVA_MSG_TYPE_BORROW_HARD) {
+        } else if (mType == TASK_TYPE_KAVA_HARD_BORROW) {
             stepDescription.text = NSLocalizedString("borrow_hardpool_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_borrow_hardpool", comment: "")
             
-        } else if (mType == KAVA_MSG_TYPE_REPAY_HARD) {
+        } else if (mType == TASK_TYPE_KAVA_HARD_REPAY) {
             stepDescription.text = NSLocalizedString("repay_hardpool_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_repay_hardpool", comment: "")
             
-        } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
+        } else if (mType == TASK_TYPE_KAVA_SWAP_TOKEN) {
             stepDescription.text = NSLocalizedString("str_swap_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_swap_token", comment: "")
             
-        } else if (mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+        } else if (mType == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
             stepDescription.text = NSLocalizedString("str_join_pool_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_pool_join", comment: "")
             
-        } else if (mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+        } else if (mType == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
             stepDescription.text = NSLocalizedString("str_exit_pool_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_pool_exit", comment: "")
             
-        } else if (mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+        } else if (mType == TASK_TYPE_KAVA_INCENTIVE_ALL) {
             stepDescription.text = NSLocalizedString("claim_incentive_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_claim_incentive", comment: "")
             
-        } else if (mType == OK_MSG_TYPE_DEPOSIT) {
+        } else if (mType == TASK_TYPE_OK_DEPOSIT) {
             stepDescription.text = NSLocalizedString("str_ok_stake_deposit_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_ok_deposit", comment: "")
             
-        } else if (mType == OK_MSG_TYPE_WITHDRAW) {
+        } else if (mType == TASK_TYPE_OK_WITHDRAW) {
             stepDescription.text = NSLocalizedString("str_ok_stake_withdraw_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_ok_withdraw", comment: "")
             
-        } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
+        } else if (mType == TASK_TYPE_OK_DIRECT_VOTE) {
             stepDescription.text = NSLocalizedString("str_ok_direct_vote_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_ok_vote", comment: "")
@@ -458,35 +453,35 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("withdraw_harvest_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("deposit_hardpool_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("withdraw_hardpool_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == KAVA_MSG_TYPE_BORROW_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_BORROW) {
                     stepDescription.text = NSLocalizedString("borrow_hardpool_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == KAVA_MSG_TYPE_REPAY_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_REPAY) {
                     stepDescription.text = NSLocalizedString("repay_hardpool_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_TOKEN) {
                     stepDescription.text = NSLocalizedString("str_swap_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("str_join_pool_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("str_exit_pool_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+                } else if (mType == TASK_TYPE_KAVA_INCENTIVE_ALL) {
                     stepDescription.text = NSLocalizedString("claim_incentive_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
@@ -494,19 +489,15 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     stepDescription.text = NSLocalizedString("htlc_swap_step_0", comment: "")
                     
-                } else if (mType == TASK_TYPE_HTLC_REFUND) {
-                    stepImg.image = UIImage.init(named: "txStep4_1")
-                    stepDescription.text = NSLocalizedString("htlc_refund_step_0", comment: "")
-                    
-                } else if (mType == OK_MSG_TYPE_DEPOSIT) {
+                } else if (mType == TASK_TYPE_OK_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("str_ok_stake_deposit_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == OK_MSG_TYPE_WITHDRAW) {
+                } else if (mType == TASK_TYPE_OK_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("str_ok_stake_withdraw_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
+                } else if (mType == TASK_TYPE_OK_DIRECT_VOTE) {
                     stepDescription.text = NSLocalizedString("str_ok_direct_vote_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
@@ -658,35 +649,35 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("withdraw_harvest_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("deposit_hardpool_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("withdraw_hardpool_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == KAVA_MSG_TYPE_BORROW_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_BORROW) {
                     stepDescription.text = NSLocalizedString("borrow_hardpool_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == KAVA_MSG_TYPE_REPAY_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_REPAY) {
                     stepDescription.text = NSLocalizedString("repay_hardpool_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_TOKEN) {
                     stepDescription.text = NSLocalizedString("str_swap_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("str_join_pool_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("str_exit_pool_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+                } else if (mType == TASK_TYPE_KAVA_INCENTIVE_ALL) {
                     stepDescription.text = NSLocalizedString("claim_incentive_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
@@ -694,19 +685,15 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     stepDescription.text = NSLocalizedString("htlc_swap_step_1", comment: "")
                     
-                } else if (mType == TASK_TYPE_HTLC_REFUND) {
-                    stepImg.image = UIImage.init(named: "txStep4_2")
-                    stepDescription.text = NSLocalizedString("htlc_refund_step_1", comment: "")
-                    
-                } else if (mType == OK_MSG_TYPE_DEPOSIT) {
+                } else if (mType == TASK_TYPE_OK_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("str_ok_stake_deposit_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == OK_MSG_TYPE_WITHDRAW) {
+                } else if (mType == TASK_TYPE_OK_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("str_ok_stake_withdraw_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
+                } else if (mType == TASK_TYPE_OK_DIRECT_VOTE) {
                     stepDescription.text = NSLocalizedString("str_ok_direct_vote_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
@@ -858,35 +845,35 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("withdraw_harvest_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("deposit_hardpool_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("withdraw_hardpool_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == KAVA_MSG_TYPE_BORROW_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_BORROW) {
                     stepDescription.text = NSLocalizedString("borrow_hardpool_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == KAVA_MSG_TYPE_REPAY_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_REPAY) {
                     stepDescription.text = NSLocalizedString("repay_hardpool_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_TOKEN) {
                     stepDescription.text = NSLocalizedString("str_swap_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("str_join_pool_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("str_exit_pool_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+                } else if (mType == TASK_TYPE_KAVA_INCENTIVE_ALL) {
                     stepDescription.text = NSLocalizedString("claim_incentive_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
@@ -894,19 +881,15 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     stepDescription.text = NSLocalizedString("htlc_swap_step_2", comment: "")
                     
-                } else if (mType == TASK_TYPE_HTLC_REFUND) {
-                    stepImg.image = UIImage.init(named: "txStep4_3")
-                    stepDescription.text = NSLocalizedString("htlc_refund_step_2", comment: "")
-                    
-                } else if (mType == OK_MSG_TYPE_DEPOSIT) {
+                } else if (mType == TASK_TYPE_OK_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("str_ok_stake_deposit_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == OK_MSG_TYPE_WITHDRAW) {
+                } else if (mType == TASK_TYPE_OK_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("str_ok_stake_withdraw_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
+                } else if (mType == TASK_TYPE_OK_DIRECT_VOTE) {
                     stepDescription.text = NSLocalizedString("str_ok_direct_vote_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
@@ -1058,35 +1041,35 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("withdraw_harvest_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("deposit_hardpool_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("withdraw_hardpool_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == KAVA_MSG_TYPE_BORROW_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_BORROW) {
                     stepDescription.text = NSLocalizedString("borrow_hardpool_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == KAVA_MSG_TYPE_REPAY_HARD) {
+                } else if (mType == TASK_TYPE_KAVA_HARD_REPAY) {
                     stepDescription.text = NSLocalizedString("repay_hardpool_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_TOKEN) {
                     stepDescription.text = NSLocalizedString("str_swap_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("str_join_pool_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+                } else if (mType == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("str_exit_pool_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+                } else if (mType == TASK_TYPE_KAVA_INCENTIVE_ALL) {
                     stepDescription.text = NSLocalizedString("claim_incentive_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
@@ -1094,19 +1077,15 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     stepDescription.text = NSLocalizedString("htlc_swap_step_3", comment: "")
                     
-                } else if (mType == TASK_TYPE_HTLC_REFUND) {
-                    stepImg.image = UIImage.init(named: "txStep4_4")
-                    stepDescription.text = NSLocalizedString("htlc_refund_step_3", comment: "")
-                    
-                } else if (mType == OK_MSG_TYPE_DEPOSIT) {
+                } else if (mType == TASK_TYPE_OK_DEPOSIT) {
                     stepDescription.text = NSLocalizedString("str_ok_stake_deposit_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == OK_MSG_TYPE_WITHDRAW) {
+                } else if (mType == TASK_TYPE_OK_WITHDRAW) {
                     stepDescription.text = NSLocalizedString("str_ok_stake_withdraw_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == OK_MSG_TYPE_DIRECT_VOTE) {
+                } else if (mType == TASK_TYPE_OK_DIRECT_VOTE) {
                     stepDescription.text = NSLocalizedString("str_ok_direct_vote_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     

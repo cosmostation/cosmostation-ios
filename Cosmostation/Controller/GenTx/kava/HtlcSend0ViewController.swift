@@ -1,15 +1,15 @@
 //
-//  StepHtlcSend0ViewController.swift
+//  HtlcSend0ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/04/15.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/23.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 import Alamofire
 
-class StepHtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
+class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
     
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!
@@ -79,7 +79,7 @@ class StepHtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
             RelayerMaxLayer.isHidden = false
             RelayerReaminLayer.isHidden = false
             if (toSwapDenom == TOKEN_HTLC_BINANCE_BNB) {
-                sendCoinImg.image = UIImage(named: "bnbTokenImg")
+                sendCoinImg.image = UIImage(named: "tokenBinance")
                 self.onSetDpDenom("BNB")
             } else if (toSwapDenom == TOKEN_HTLC_BINANCE_BTCB) {
                 sendCoinImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + "BTCB.png")!)
@@ -252,3 +252,4 @@ class StepHtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
     }
     
 }
+

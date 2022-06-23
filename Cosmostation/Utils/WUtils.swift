@@ -2798,16 +2798,16 @@ public class WUtils {
             } else if (type == TASK_TYPE_KAVA_CDP_CREATE || type == TASK_TYPE_KAVA_CDP_DEPOSIT || type == TASK_TYPE_KAVA_CDP_WITHDRAW ||
                         type == TASK_TYPE_KAVA_CDP_DRAWDEBT || type == TASK_TYPE_KAVA_CDP_REPAY) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CDP))
-            } else if (type == KAVA_MSG_TYPE_DEPOSIT_HARD || type == KAVA_MSG_TYPE_WITHDRAW_HARD || type == KAVA_MSG_TYPE_BORROW_HARD ||
-                        type == KAVA_MSG_TYPE_REPAY_HARD) {
+            } else if (type == TASK_TYPE_KAVA_HARD_DEPOSIT || type == TASK_TYPE_KAVA_HARD_WITHDRAW || type == TASK_TYPE_KAVA_HARD_BORROW ||
+                        type == TASK_TYPE_KAVA_HARD_REPAY) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_HARD_POOL))
-            } else if (type == KAVA_MSG_TYPE_SWAP_TOKEN) {
+            } else if (type == TASK_TYPE_KAVA_SWAP_TOKEN) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_TOKEN))
-            } else if (type == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+            } else if (type == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_DEPOSIT))
-            } else if (type == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+            } else if (type == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_WITHDRAW))
-            } else if (type == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+            } else if (type == TASK_TYPE_KAVA_INCENTIVE_ALL) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CLAIM_INCENTIVE_ALL))
             } else if (type == TASK_TYPE_HTLC_SWAP) {
                 result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
@@ -2868,9 +2868,9 @@ public class WUtils {
         } else if (chain == ChainType.OKEX_MAIN) {
             if (type == TASK_TYPE_TRANSFER || type == TASK_IBC_TRANSFER) {
                 result = NSDecimalNumber.init(string: String(OK_GAS_AMOUNT_SEND))
-            } else if (type == OK_MSG_TYPE_DEPOSIT || type == OK_MSG_TYPE_WITHDRAW) {
+            } else if (type == TASK_TYPE_OK_DEPOSIT || type == TASK_TYPE_OK_WITHDRAW) {
                 result = (NSDecimalNumber.init(string: OK_GAS_AMOUNT_STAKE_MUX).multiplying(by: NSDecimalNumber.init(value: valCnt))).adding(NSDecimalNumber.init(string: OK_GAS_AMOUNT_STAKE))
-            } else if (type == OK_MSG_TYPE_DIRECT_VOTE) {
+            } else if (type == TASK_TYPE_OK_DIRECT_VOTE) {
                 result = (NSDecimalNumber.init(string: OK_GAS_AMOUNT_VOTE_MUX).multiplying(by: NSDecimalNumber.init(value: valCnt))).adding(NSDecimalNumber.init(string: OK_GAS_AMOUNT_VOTE))
             }
             
@@ -4408,7 +4408,7 @@ public class WUtils {
             return UIImage(named: "irisTokenImg")
             
         } else if (chain == ChainType.BINANCE_MAIN) {
-            return UIImage(named: "bnbTokenImg")
+            return UIImage(named: "tokenBinance")
             
         } else if (chain == ChainType.OKEX_MAIN) {
             return UIImage(named: "tokenOkx")

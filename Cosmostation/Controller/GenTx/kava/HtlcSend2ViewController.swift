@@ -1,14 +1,14 @@
 //
-//  StepHtlcSend2ViewController.swift
+//  HtlcSend2ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/04/15.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/23.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class StepHtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
+class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     

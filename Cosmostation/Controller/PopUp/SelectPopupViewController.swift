@@ -159,7 +159,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let toSendCoin = toCoinList[indexPath.row]
             if (chainType! == ChainType.BINANCE_MAIN) {
                 if (toSendCoin == TOKEN_HTLC_BINANCE_BNB) {
-                    cell!.coinImg.image = UIImage(named: "bnbTokenImg")
+                    cell!.coinImg.image = UIImage(named: "tokenBinance")
                     cell!.coinTitle.text = "BNB"
                 } else if (toSendCoin == TOKEN_HTLC_BINANCE_BTCB) {
                     cell?.coinImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + "BTCB.png")!)

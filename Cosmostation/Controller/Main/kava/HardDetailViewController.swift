@@ -114,7 +114,7 @@ class HardDetailViewController: BaseViewController, UITableViewDelegate, UITable
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_DEPOSIT_HARD
+        txVC.mType = TASK_TYPE_KAVA_HARD_DEPOSIT
         txVC.mHardMoneyMarketDenom = mHardMoneyMarketDenom
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -128,7 +128,7 @@ class HardDetailViewController: BaseViewController, UITableViewDelegate, UITable
             return
         }
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_WITHDRAW_HARD
+        txVC.mType = TASK_TYPE_KAVA_HARD_WITHDRAW
         txVC.mHardMoneyMarketDenom = mHardMoneyMarketDenom
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -142,7 +142,7 @@ class HardDetailViewController: BaseViewController, UITableViewDelegate, UITable
             return
         }
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_BORROW_HARD
+        txVC.mType = TASK_TYPE_KAVA_HARD_BORROW
         txVC.mHardMoneyMarketDenom = mHardMoneyMarketDenom
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -161,7 +161,7 @@ class HardDetailViewController: BaseViewController, UITableViewDelegate, UITable
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_REPAY_HARD
+        txVC.mType = TASK_TYPE_KAVA_HARD_REPAY
         txVC.mHardMoneyMarketDenom = mHardMoneyMarketDenom
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)

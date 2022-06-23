@@ -123,7 +123,7 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_SWAP_DEPOSIT
+        txVC.mType = TASK_TYPE_KAVA_SWAP_DEPOSIT
         txVC.mKavaSwapPool = pool
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -137,7 +137,7 @@ class PoolListViewController: BaseViewController, UITableViewDelegate, UITableVi
         let myDeposit = mMyKavaPoolDeposits.filter { $0.poolID == pool.name }.first!
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = KAVA_MSG_TYPE_SWAP_WITHDRAW
+        txVC.mType = TASK_TYPE_KAVA_SWAP_WITHDRAW
         txVC.mKavaSwapPool = pool
         txVC.mKavaSwapPoolDeposit = myDeposit
         self.navigationItem.title = ""

@@ -389,10 +389,6 @@
 "htlc_swap_progress_1" = "2/4 스왑아이디를 확인 중 입니다.";
 "htlc_swap_progress_2" = "3/4 받는 체인에서 BEP3 수신 트랜잭션을 발송 중 입니다.";
 "htlc_swap_progress_3" = "4/4 양쪽 체인에서 각각의 트랜잭션을 확인중 입니다.";
-"htlc_refund_step_0" = "BEP3 환불 요청";
-"htlc_refund_step_1" = "메모를 입력하세요 (선택사항)";
-"htlc_refund_step_2" = "Tx 수수료를 선택하세요";
-"htlc_refund_step_3" = "입력하신 정보를 확인하세요";
 "incentive_participate_step_0" = "인센티브 보상 방법 선택";
 "incentive_participate_step_1" = "메모를 입력하세요 (선택사항)";
 "incentive_participate_step_2" = "Tx 수수료를 선택하세요";
@@ -635,7 +631,6 @@ support@cosmostation.io";
 "title_reward_harvest" = "하드 대출 인센티브 받기";
 "title_claim_incentive" = "인센티브 받기";
 "title_interchain_swap" = "BEP3 보내기 & 받기";
-"title_interchain_refund" = "BEP3 환불하기";
 "title_participate_incentive" = "USDX 발행 인센티브 받기";
 "title_ok_deposit" = "디파짓 입금";
 "title_ok_withdraw" = "디파짓 출금";

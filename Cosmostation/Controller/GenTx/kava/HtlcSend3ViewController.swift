@@ -1,14 +1,14 @@
 //
-//  StepHtlcSend3ViewController.swift
+//  HtlcSend3ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/04/15.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/23.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class StepHtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardPopupDelegate {
+class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardPopupDelegate {
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
     

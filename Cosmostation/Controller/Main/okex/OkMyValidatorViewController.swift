@@ -88,7 +88,7 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mType = OK_MSG_TYPE_DIRECT_VOTE
+        txVC.mType = TASK_TYPE_OK_DIRECT_VOTE
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }

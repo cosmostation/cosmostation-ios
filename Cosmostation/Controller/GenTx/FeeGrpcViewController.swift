@@ -606,7 +606,7 @@ class FeeGrpcViewController: BaseViewController {
                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                   self.chainType!)
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_DEPOSIT_HARD) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_HARD_DEPOSIT) {
             return Signer.genSimulateKavaHardDeposit(auth,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mHardPoolCoins!,
@@ -615,7 +615,7 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.chainType!)
                
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_WITHDRAW_HARD) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_HARD_WITHDRAW) {
             return Signer.genSimulateKavaHardWithdraw(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mHardPoolCoins!,
@@ -624,7 +624,7 @@ class FeeGrpcViewController: BaseViewController {
                                                       self.chainType!)
                 
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_BORROW_HARD) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_HARD_BORROW) {
             return Signer.genSimulateKavaHardBorrow(auth,
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mHardPoolCoins!,
@@ -633,7 +633,7 @@ class FeeGrpcViewController: BaseViewController {
                                                     self.chainType!)
               
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_REPAY_HARD) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_HARD_REPAY) {
             return Signer.genSimulateKavaHardRepay(auth,
                                                    self.account!.account_address,
                                                    self.account!.account_address,
@@ -643,7 +643,7 @@ class FeeGrpcViewController: BaseViewController {
                                                    self.chainType!)
              
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_DEPOSIT) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
             let slippage = "30000000000000000"
             let deadline = (Date().millisecondsSince1970 / 1000) + 300
             return Signer.genSimulateKavaSwapDeposit(auth,
@@ -656,7 +656,7 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_WITHDRAW) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
             let sharesOwned = NSDecimalNumber.init(string: pageHolderVC.mKavaSwapPoolDeposit?.sharesOwned)
             let depositRate = (pageHolderVC.mKavaShareAmount).dividing(by: sharesOwned, withBehavior: WUtils.handler18)
             let padding = NSDecimalNumber(string: "0.97")
@@ -677,7 +677,7 @@ class FeeGrpcViewController: BaseViewController {
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_SWAP_TOKEN) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_SWAP_TOKEN) {
             let inCoin = Coin.init(self.pageHolderVC.mSwapInDenom!, self.pageHolderVC.mSwapInAmount!.stringValue)
             let outCoin = Coin.init(self.pageHolderVC.mSwapOutDenom!, self.pageHolderVC.mSwapOutAmount!.stringValue)
             let slippage = "30000000000000000"
@@ -692,7 +692,7 @@ class FeeGrpcViewController: BaseViewController {
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                              self.chainType!)
             
-        } else if (pageHolderVC.mType == KAVA_MSG_TYPE_INCENTIVE_ALL) {
+        } else if (pageHolderVC.mType == TASK_TYPE_KAVA_INCENTIVE_ALL) {
             return Signer.genSimulateKavaIncentiveAll(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mIncentiveMultiplier!,

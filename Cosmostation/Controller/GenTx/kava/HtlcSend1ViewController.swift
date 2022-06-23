@@ -1,14 +1,14 @@
 //
-//  StepHtlcSend1ViewController.swift
+//  HtlcSend1ViewController.swift
 //  Cosmostation
 //
-//  Created by 정용주 on 2020/04/15.
-//  Copyright © 2020 wannabit. All rights reserved.
+//  Created by yongjoo jung on 2022/06/23.
+//  Copyright © 2022 wannabit. All rights reserved.
 //
 
 import UIKit
 
-class StepHtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
+class HtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
     
     @IBOutlet weak var btnBack: UIButton!
     @IBOutlet weak var btnNext: UIButton!
@@ -99,3 +99,4 @@ class StepHtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
         self.toAddressTxt.text = self.toAccount?.account_address
     }
 }
+
