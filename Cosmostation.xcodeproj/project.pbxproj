@@ -5318,6 +5318,8 @@
 		2868558C24989A5E0099D18F /* PopUp */ = {
 			isa = PBXGroup;
 			children = (
+				28DB28B62437ADC8002B01A0 /* RiskCheckPopupViewController.swift */,
+				283A80DE24514AB8008FF813 /* RiskCheckPopupViewController.xib */,
 				285A33D424475DC00052BD3D /* SelectPopupViewController.swift */,
 				285A33D524475DC00052BD3D /* SelectPopupViewController.xib */,
 				2868558D24989A8F0099D18F /* Bep3SupplyPopup.swift */,
@@ -5531,8 +5533,6 @@
 				28FEDCE426DB140A00A43D01 /* KavaIncentiveClaim0ViewController.xib */,
 				28FEDCE726DB141900A43D01 /* KavaIncentiveClaim3ViewController.swift */,
 				28FEDCE826DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib */,
-				28DB28B62437ADC8002B01A0 /* RiskCheckPopupViewController.swift */,
-				283A80DE24514AB8008FF813 /* RiskCheckPopupViewController.xib */,
 				285A33CC2446CD8C0052BD3D /* StepHtlcSend0ViewController.swift */,
 				285A33CE2446CD9C0052BD3D /* StepHtlcSend1ViewController.swift */,
 				285A33D02446CDAB0052BD3D /* StepHtlcSend2ViewController.swift */,
