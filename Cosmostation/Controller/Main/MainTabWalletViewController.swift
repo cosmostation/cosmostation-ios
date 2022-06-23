@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import Floaty
 import SafariServices
+import StoreKit
 
 class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, FloatyDelegate, QrScannerDelegate, PasswordViewDelegate {
 
@@ -67,6 +68,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.totalCard.addGestureRecognizer(tapTotalCard)
+        
+        #if RELEASE
+        SKStoreReviewController.requestReview()
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
