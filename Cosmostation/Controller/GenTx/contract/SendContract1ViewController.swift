@@ -75,24 +75,21 @@ class SendContract1ViewController: BaseViewController, UITextFieldDelegate {
             self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        
         if(text.count == 0) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.white.cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
         let userInput = WUtils.localeStringToDecimal(text)
-        
         if (text.count > 1 && userInput == NSDecimalNumber.zero) {
             self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        
         if (userInput.multiplying(byPowerOf10: decimal).compare(maxAvailable).rawValue > 0) {
             self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        self.mTargetAmountTextField.layer.borderColor = UIColor.white.cgColor
+        self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     
     func isValiadAmount() -> Bool {

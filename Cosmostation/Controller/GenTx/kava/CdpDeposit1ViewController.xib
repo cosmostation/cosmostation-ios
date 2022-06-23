@@ -228,7 +228,7 @@
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="riskArrow" translatesAutoresizingMaskIntoConstraints="NO" id="U1D-3R-Qqt">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="U1D-3R-Qqt">
                             <rect key="frame" x="271" y="20" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="3EW-h7-Wu1"/>
@@ -352,7 +352,7 @@
     </objects>
     <resources>
         <image name="btnIconClose" width="24" height="24"/>
-        <image name="riskArrow" width="20" height="20"/>
+        <image name="iconArrowRight" width="24" height="24"/>
         <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

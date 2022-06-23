@@ -84,7 +84,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         }
         
         if (text.count == 0) {
-            self.mTargetAmountTextField.layer.borderColor = UIColor.white.cgColor
+            self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
             return
         }
         
@@ -97,7 +97,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
             self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        self.mTargetAmountTextField.layer.borderColor = UIColor.white.cgColor
+        self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_font04")!.cgColor
     }
     
     @IBAction func onClickClear(_ sender: UIButton) {

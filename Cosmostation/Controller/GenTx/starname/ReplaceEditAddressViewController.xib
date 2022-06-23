@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -33,7 +33,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZqX-Qt-kma" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="112" width="382" height="50"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultChainImg" translatesAutoresizingMaskIntoConstraints="NO" id="Cdx-Rd-ybl">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Cdx-Rd-ybl">
                             <rect key="frame" x="12" y="12" width="26" height="26"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="26" id="WrA-Z5-kJt"/>
@@ -92,7 +92,7 @@
                                 <constraint firstAttribute="height" constant="35" id="r3Q-WV-yQ6"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="  Wallet" image="listIc">
+                            <state key="normal" title="  Wallet" image="btnIconList">
                                 <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -118,7 +118,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="tintColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="  Scan" image="iconQrcode">
+                            <state key="normal" title="  Scan" image="btnIconScan">
                                 <color key="titleColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -143,7 +143,7 @@
                                 <constraint firstAttribute="height" constant="35" id="woU-wT-SQQ"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="  Paste" image="copyIc">
+                            <state key="normal" title="  Paste" image="btnIconPaste">
                                 <color key="titleColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -238,9 +238,9 @@
         </view>
     </objects>
     <resources>
-        <image name="copyIc" width="18" height="18"/>
-        <image name="defaultChainImg" width="42" height="42"/>
-        <image name="iconQrcode" width="18" height="18"/>
-        <image name="listIc" width="18" height="18"/>
+        <image name="btnIconList" width="18" height="18"/>
+        <image name="btnIconPaste" width="24" height="24"/>
+        <image name="btnIconScan" width="24" height="24"/>
+        <image name="chainDefault" width="42" height="42"/>
     </resources>
 </document>

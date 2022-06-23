@@ -3659,7 +3659,7 @@ public class WUtils {
     static func dpChainInfo(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
         if (chain == ChainType.COSMOS_MAIN) {
             label.text = NSLocalizedString("chain_title_cosmos", comment: "")
-            img?.image = UIImage(named: "cosmosWhMain")
+            img?.image = UIImage(named: "chainCosmos")
         } else if (chain == ChainType.IRIS_MAIN) {
             label.text = NSLocalizedString("chain_title_iris", comment: "")
             img?.image = UIImage(named: "irisWh")
@@ -4536,7 +4536,7 @@ public class WUtils {
     }
     
     static func getChainImg(_ chain: ChainType?) -> UIImage? {
-        if (chain == ChainType.COSMOS_MAIN) { return UIImage(named: "cosmosWhMain") }
+        if (chain == ChainType.COSMOS_MAIN) { return UIImage(named: "chainCosmos") }
         else if (chain == ChainType.IRIS_MAIN) { return UIImage(named: "irisWh") }
         else if (chain == ChainType.BINANCE_MAIN) { return UIImage(named: "binanceChImg") }
         else if (chain == ChainType.OKEX_MAIN) { return UIImage(named: "chainOkex") }

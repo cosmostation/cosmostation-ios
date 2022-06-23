@@ -36,6 +36,7 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.ibcSendDenom = self.pageHolderVC.mIBCSendDenom
         
@@ -77,19 +78,20 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func onUpdateView() {
-        self.fromChainImg.image = WUtils.getChainImg(chainType)
-        self.fromChainTxt.text = WUtils.getChainTitle2(chainType)
+        self.fromChainImg.image = chainConfig?.chainImg
+        self.fromChainTxt.text = chainConfig?.chainTitle2
         
         let toChain = WUtils.getChainTypeByChainId(ibcSelectedChain.chain_id)
-        self.toChainImg.image = WUtils.getChainImg(toChain)
-        self.toChainText.text = WUtils.getChainTitle2(toChain)
+        let toChainConfig = ChainFactory().getChainConfig(toChain)
+        self.toChainImg.image = toChainConfig?.chainImg
+        self.toChainText.text = toChainConfig?.chainTitle2
         
         self.relayerTxt.text = ibcSendableChannel.channel_id
         self.relayerMsg.text = ""
         if (ibcSendableChannel.auth == true) {
-            self.relayerImg.image = UIImage(named: "ibcauthed")
+            self.relayerImg.image = UIImage(named: "imgIbcWellKnown")
         } else {
-            self.relayerImg.image = UIImage(named: "ibcunknown")
+            self.relayerImg.image = UIImage(named: "imgIbcUnKnown")
         }
     }
     

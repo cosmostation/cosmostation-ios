@@ -20,7 +20,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DWE-HG-cOW" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="315" height="50"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmosWhMain" translatesAutoresizingMaskIntoConstraints="NO" id="V2N-dt-3bN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="V2N-dt-3bN">
                                 <rect key="frame" x="4" y="4" width="42" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="MLO-Dg-ZfI"/>
@@ -87,6 +87,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cosmosWhMain" width="42" height="42"/>
+        <image name="chainDefault" width="42" height="42"/>
     </resources>
 </document>

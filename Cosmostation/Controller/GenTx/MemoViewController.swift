@@ -104,7 +104,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
             if (byteArray.count > 100) {
                 self.memoInputTextView.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             } else {
-                self.memoInputTextView.layer.borderColor = UIColor.white.cgColor
+                self.memoInputTextView.layer.borderColor = UIColor(named: "_font04")!.cgColor
             }
             
         } else {
@@ -112,7 +112,7 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
             if (byteArray.count > 255) {
                 self.memoInputTextView.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             } else {
-                self.memoInputTextView.layer.borderColor = UIColor.white.cgColor
+                self.memoInputTextView.layer.borderColor = UIColor(named: "_font04")!.cgColor
             }
             
         }

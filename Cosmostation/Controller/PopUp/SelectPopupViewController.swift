@@ -276,9 +276,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             cell!.channelTitle.text = path.channel_id
             cell!.channelMsg.text = ""
             if (path.auth == true) {
-                cell!.channelStausImg.image = UIImage(named: "ibcauthed")
+                cell!.channelStausImg.image = UIImage(named: "imgIbcWellKnown")
             } else {
-                cell!.channelStausImg.image = UIImage(named: "ibcunknown")
+                cell!.channelStausImg.image = UIImage(named: "imgIbcUnKnown")
             }
             return cell!
             

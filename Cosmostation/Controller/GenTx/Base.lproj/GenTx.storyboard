@@ -110,7 +110,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Zg-FP-kLo" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="16" y="84.5" width="175" height="42"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmosWhMain" translatesAutoresizingMaskIntoConstraints="NO" id="o1Z-lv-85P">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="o1Z-lv-85P">
                                         <rect key="frame" x="6" y="5" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="gE3-6V-mxx"/>
@@ -138,7 +138,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="interchainArrow" translatesAutoresizingMaskIntoConstraints="NO" id="A4b-I2-SBX">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="A4b-I2-SBX">
                                 <rect key="frame" x="197" y="95.5" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="DOf-SU-Ugl"/>
@@ -154,7 +154,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lG5-Ue-qTU" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="223" y="84.5" width="175" height="42"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cosmosWhMain" translatesAutoresizingMaskIntoConstraints="NO" id="wJm-5a-toj">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="wJm-5a-toj">
                                         <rect key="frame" x="6" y="5" width="32" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="3s4-SK-PVZ"/>
@@ -2890,9 +2890,9 @@ you must create a KAVA account and have history</string>
         <image name="bepclaimIc" width="24" height="24"/>
         <image name="bepsendIc" width="24" height="24"/>
         <image name="btnIconClose" width="24" height="24"/>
-        <image name="cosmosWhMain" width="42" height="42"/>
+        <image name="chainDefault" width="42" height="42"/>
         <image name="dropdown_btn" width="24" height="24"/>
-        <image name="interchainArrow" width="20" height="20"/>
+        <image name="iconArrowRight" width="24" height="24"/>
         <image name="key_off" width="20" height="20"/>
         <image name="tokenDefault" width="22" height="22"/>
         <image name="txStep4_1" width="103" height="18"/>
