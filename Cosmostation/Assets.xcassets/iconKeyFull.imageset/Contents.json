@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "iconKeyoffLight.pdf",
+      "filename" : "iconKeyonLight.pdf",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "iconKeyoffDark-1.pdf",
+      "filename" : "iconKeyonDark.pdf",
       "idiom" : "universal"
     }
   ],

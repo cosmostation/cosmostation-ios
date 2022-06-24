@@ -75,8 +75,11 @@ class ContractTokenGrpcViewController: BaseViewController, UITableViewDelegate, 
         
         self.topCard.backgroundColor = chainConfig?.chainColorBG
         if (account?.account_has_private == true) {
-            self.topKeyState.image = topKeyState.image?.withRenderingMode(.alwaysTemplate)
+            self.topKeyState.image = UIImage.init(named: "iconKeyFull")
+            self.topKeyState.image = self.topKeyState.image!.withRenderingMode(.alwaysTemplate)
             self.topKeyState.tintColor = chainConfig?.chainColor
+        } else {
+            self.topKeyState.image = UIImage.init(named: "iconKeyEmpty")
         }
         self.topDpAddress.text = account?.account_address
         self.topDpAddress.adjustsFontSizeToFitWidth = true

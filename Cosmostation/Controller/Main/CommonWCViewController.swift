@@ -77,7 +77,7 @@ class CommonWCViewController: BaseViewController {
     
     func connectStatus(connected: Bool) {
         if (connected) {
-            dappConnectImage.image = UIImage(named: "passedImg")
+            dappConnectImage.image = UIImage(named: "ImgGovPassed")
             dappConnectLabel.text = "Connected"
             dappConnectLabel.textColor = UIColor.init(named: "_font05")
         } else {

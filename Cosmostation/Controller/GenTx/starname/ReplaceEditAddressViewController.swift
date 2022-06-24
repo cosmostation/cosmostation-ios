@@ -25,21 +25,21 @@ class ReplaceEditAddressViewController: BaseViewController, QrScannerDelegate, S
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addressInput.layer.borderWidth = 1
-        self.addressInput.layer.borderColor = UIColor.init(hexString: "ebecee").cgColor
+//        self.addressInput.layer.borderWidth = 1
+//        self.addressInput.layer.borderColor = UIColor.init(hexString: "ebecee").cgColor
         self.addressInput.setLeftPaddingPoints(8)
         
-        let walletImg = self.btnWallet.imageView?.image!.withRenderingMode(.alwaysTemplate)
-        self.btnWallet.setImage(walletImg, for: .normal)
-        self.btnWallet.tintColor = UIColor.init(hexString: "222222")
-        
-        let qrImg = self.btnQrScan.imageView?.image!.withRenderingMode(.alwaysTemplate)
-        self.btnQrScan.setImage(qrImg, for: .normal)
-        self.btnQrScan.tintColor = UIColor.init(hexString: "222222")
-        
-        let pasteImg = self.btnPaste.imageView?.image!.withRenderingMode(.alwaysTemplate)
-        self.btnPaste.setImage(pasteImg, for: .normal)
-        self.btnPaste.tintColor = UIColor.init(hexString: "222222")
+//        let walletImg = self.btnWallet.imageView?.image!.withRenderingMode(.alwaysTemplate)
+//        self.btnWallet.setImage(walletImg, for: .normal)
+//        self.btnWallet.tintColor = UIColor.init(hexString: "222222")
+//
+//        let qrImg = self.btnQrScan.imageView?.image!.withRenderingMode(.alwaysTemplate)
+//        self.btnQrScan.setImage(qrImg, for: .normal)
+//        self.btnQrScan.tintColor = UIColor.init(hexString: "222222")
+//
+//        let pasteImg = self.btnPaste.imageView?.image!.withRenderingMode(.alwaysTemplate)
+//        self.btnPaste.setImage(pasteImg, for: .normal)
+//        self.btnPaste.tintColor = UIColor.init(hexString: "222222")
         
         chainImg.af_setImage(withURL: getStarNameChainImgUrl(chainNameResource))
         chainNameLabel.text = getStarNameChainName(chainNameResource)

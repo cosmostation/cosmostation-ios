@@ -117,8 +117,11 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
         self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
         if (account?.account_has_private == true) {
-            self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
+            self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
+            self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
             self.totalKeyState.tintColor = chainConfig?.chainColor
+        } else {
+            self.totalKeyState.image = UIImage.init(named: "iconKeyEmpty")
         }
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in

@@ -5589,6 +5589,8 @@ public class WUtils {
             return "Passed"
         } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("REJECTED") == true) {
             return "Rejected"
+        } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("FAILED") == true) {
+            return "Failed"
         }
         return "unKnown"
     }
@@ -5602,34 +5604,36 @@ public class WUtils {
             return "Passed"
         } else if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.rejected) {
             return "Rejected"
+        } else if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.failed) {
+            return "Failed"
         }
         return "unKnown"
     }
     
     static func onProposalStatusImg(_ proposal: MintscanProposalDetail?) -> UIImage? {
         if (proposal?.proposal_status?.localizedCaseInsensitiveContains("DEPOSIT") == true) {
-            return UIImage.init(named: "depositImg")
+            return UIImage.init(named: "ImgGovDoposit")
         } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == true) {
             return UIImage.init(named: "votingImg")
         } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("PASSED") == true) {
-            return UIImage.init(named: "passedImg")
+            return UIImage.init(named: "ImgGovPassed")
         } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("REJECTED") == true) {
-            return UIImage.init(named: "rejectedImg")
+            return UIImage.init(named: "ImgGovRejected")
         }
-        return nil
+        return UIImage.init(named: "ImgGovFailed")
     }
     
     static func onParseProposalStatusImg(_ proposal: Cosmos_Gov_V1beta1_Proposal) -> UIImage? {
         if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.depositPeriod) {
-            return UIImage.init(named: "depositImg")
+            return UIImage.init(named: "ImgGovDoposit")
         } else if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.votingPeriod) {
             return UIImage.init(named: "votingImg")
         } else if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.passed) {
-            return UIImage.init(named: "passedImg")
+            return UIImage.init(named: "ImgGovPassed")
         } else if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.rejected) {
-            return UIImage.init(named: "rejectedImg")
+            return UIImage.init(named: "ImgGovRejected")
         }
-        return nil
+        return UIImage.init(named: "ImgGovFailed")
     }
     
     static func onParseProposalStartTime(_ proposal: Cosmos_Gov_V1beta1_Proposal) -> String {
