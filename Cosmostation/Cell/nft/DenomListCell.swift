@@ -22,7 +22,10 @@ class DenomListCell: UITableViewCell {
     }
     
     func onBindDenom(_ chainType: ChainType?, _ irisCollection: Irismod_Nft_IDCollection?, _ croCollection: Chainmain_Nft_V1_IDCollection?) {
-        denomCardView.backgroundColor = WUtils.getChainBg(chainType)
+        guard let chainConfig = ChainFactory().getChainConfig(chainType) else {
+            return
+        }
+        denomCardView.backgroundColor = chainConfig.chainColorBG
         if (chainType == ChainType.IRIS_MAIN) {
             DispatchQueue.global().async {
                 do {

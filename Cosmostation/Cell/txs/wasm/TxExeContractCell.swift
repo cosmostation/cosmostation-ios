@@ -25,8 +25,11 @@ class TxExeContractCell: TxCell {
     }
     
     override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+        guard let chainConfig = ChainFactory().getChainConfig(chain) else {
+            return
+        }
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Cosmwasm_Wasm_V1_MsgExecuteContract.init(serializedData: response.tx.body.messages[position].value) {
             executorLabel.text = msg.sender

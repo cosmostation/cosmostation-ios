@@ -24,7 +24,7 @@ class WalletCheckPKeyViewController: BaseViewController {
         super.viewDidLoad()
         self.selectedChainType = WUtils.getChainType(selectedAccount.account_base_chain)
         self.selectedChainConfig = ChainFactory().getChainConfig(selectedChainType)
-        self.keyCardView.backgroundColor = WUtils.getChainBg(selectedChainConfig.chainType)
+        self.keyCardView.backgroundColor = selectedChainConfig.chainColorBG
         self.onRetriveKey()
     }
     
