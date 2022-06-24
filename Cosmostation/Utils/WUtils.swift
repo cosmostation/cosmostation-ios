@@ -5614,7 +5614,7 @@ public class WUtils {
         if (proposal?.proposal_status?.localizedCaseInsensitiveContains("DEPOSIT") == true) {
             return UIImage.init(named: "ImgGovDoposit")
         } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("VOTING") == true) {
-            return UIImage.init(named: "votingImg")
+            return UIImage.init(named: "ImgGovVoting")
         } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("PASSED") == true) {
             return UIImage.init(named: "ImgGovPassed")
         } else if (proposal?.proposal_status?.localizedCaseInsensitiveContains("REJECTED") == true) {
@@ -5627,7 +5627,7 @@ public class WUtils {
         if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.depositPeriod) {
             return UIImage.init(named: "ImgGovDoposit")
         } else if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.votingPeriod) {
-            return UIImage.init(named: "votingImg")
+            return UIImage.init(named: "ImgGovVoting")
         } else if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.passed) {
             return UIImage.init(named: "ImgGovPassed")
         } else if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.rejected) {

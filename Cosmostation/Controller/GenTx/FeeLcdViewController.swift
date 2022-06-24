@@ -21,9 +21,6 @@ class FeeLcdViewController: BaseViewController {
     @IBOutlet weak var gasFeeLabel: UILabel!
     @IBOutlet weak var gasSelectSegments: UISegmentedControl!
     
-    @IBOutlet weak var speedImg: UIImageView!
-    @IBOutlet weak var speedTxt: UILabel!
-    
     @IBOutlet weak var btnBefore: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     
@@ -38,23 +35,26 @@ class FeeLcdViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
-        feeTotalCard.backgroundColor = WUtils.getChainBg(pageHolderVC.chainType!)
-        WUtils.setDenomTitle(pageHolderVC.chainType!, feeTotalDenom)
-        mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
+        feeTotalCard.backgroundColor = chainConfig?.chainColorBG
+        WUtils.setDenomTitle(chainType!, feeTotalDenom)
+        mDivideDecimal = WUtils.mainDivideDecimal(chainType)
+        mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         if #available(iOS 13.0, *) {
             gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
-            gasSelectSegments.selectedSegmentTintColor = WUtils.getChainColor(pageHolderVC.chainType!)
+            gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
-            gasSelectSegments.tintColor = WUtils.getChainColor(pageHolderVC.chainType!)
+            gasSelectSegments.tintColor = chainConfig?.chainColor
         }
-        if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
+        if (chainType! == ChainType.OKEX_MAIN) {
             var currentVotedCnt = 0
             if let voted = BaseData.instance.mOkStaking?.validator_address?.count { currentVotedCnt = voted }
-            mEstimateGasAmount = WUtils.getEstimateGasAmount(pageHolderVC.chainType!, pageHolderVC.mType!, currentVotedCnt)
+            mEstimateGasAmount = WUtils.getEstimateGasAmount(chainType!, pageHolderVC.mType!, currentVotedCnt)
             
         }
         
@@ -62,11 +62,11 @@ class FeeLcdViewController: BaseViewController {
     }
     
     func onCalculateFees() {
-        mSelectedGasRate = WUtils.getGasRate(pageHolderVC.chainType!, mSelectedGasPosition)
-        if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
+        mSelectedGasRate = WUtils.getGasRate(chainType!, mSelectedGasPosition)
+        if (chainType == .BINANCE_MAIN) {
             mFee = NSDecimalNumber.init(string: FEE_BNB_TRANSFER)
             
-        } else if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
+        } else if (chainType == .OKEX_MAIN) {
             mFee = mSelectedGasRate.multiplying(by: mEstimateGasAmount, withBehavior: WUtils.handler18)
             
         } else {
@@ -76,17 +76,14 @@ class FeeLcdViewController: BaseViewController {
     
     func onUpdateView() {
         onCalculateFees()
-        
         feeTotalAmount.attributedText = WUtils.displayAmount2(mFee.stringValue, feeTotalAmount.font!, mDivideDecimal, mDisplayDecimal)
-        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(WUtils.getMainDenom(pageHolderVC.chainType), mFee, mDivideDecimal, feeTotalValue.font)
+        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(WUtils.getMainDenom(chainType), mFee, mDivideDecimal, feeTotalValue.font)
         
         gasRateLabel.attributedText = WUtils.displayGasRate(mSelectedGasRate.rounding(accordingToBehavior: WUtils.handler6), font: gasRateLabel.font, 4)
         gasAmountLabel.text = mEstimateGasAmount.stringValue
         gasFeeLabel.text = mFee.stringValue
         
         self.gasSetCard.isHidden = true
-        self.speedImg.image = UIImage.init(named: "roket")
-        self.speedTxt.text = NSLocalizedString("fee_speed_title_2", comment: "")
     }
     
     @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {
@@ -113,8 +110,8 @@ class FeeLcdViewController: BaseViewController {
     }
     
     func onSetFee() {
-        if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
-            let gasCoin = Coin.init(WUtils.getMainDenom(pageHolderVC.chainType), WUtils.getFormattedNumber(mFee, mDisplayDecimal))
+        if (chainType == .OKEX_MAIN) {
+            let gasCoin = Coin.init(WUtils.getMainDenom(chainType), WUtils.getFormattedNumber(mFee, mDisplayDecimal))
             var amount: Array<Coin> = Array<Coin>()
             amount.append(gasCoin)
             
@@ -124,7 +121,7 @@ class FeeLcdViewController: BaseViewController {
             pageHolderVC.mFee = fee
             
         } else {
-            let gasCoin = Coin.init(WUtils.getMainDenom(pageHolderVC.chainType), mFee.stringValue)
+            let gasCoin = Coin.init(WUtils.getMainDenom(chainType), mFee.stringValue)
             var amount: Array<Coin> = Array<Coin>()
             amount.append(gasCoin)
             

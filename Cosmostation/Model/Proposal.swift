@@ -40,7 +40,7 @@ public class Proposal {
         if (proposal_status == Proposal.PROPOSAL_DEPOSIT) {
             return UIImage.init(named: "ImgGovDoposit")
         } else if (proposal_status == Proposal.PROPOSAL_VOTING) {
-            return UIImage.init(named: "votingImg")
+            return UIImage.init(named: "ImgGovVoting")
         } else if (proposal_status == Proposal.PROPOSAL_REJECTED) {
             return UIImage.init(named: "ImgGovRejected")
         } else if (proposal_status == Proposal.PROPOSAL_PASSED) {
