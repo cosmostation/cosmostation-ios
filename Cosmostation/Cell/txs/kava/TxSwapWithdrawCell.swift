@@ -22,17 +22,17 @@ class TxSwapWithdrawCell: TxCell {
         self.selectionStyle = .none
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Kava_Swap_V1beta1_MsgWithdraw.init(serializedData: response.tx.body.messages[position].value) {
             txSenderLabel.text = msg.from
 
             let coin0 = Coin.init(msg.minTokenA.denom, msg.minTokenA.amount)
             let coin1 = Coin.init(msg.minTokenB.denom, msg.minTokenB.amount)
-            WUtils.showCoinDp(coin0, txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain)
-            WUtils.showCoinDp(coin1, txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain)
+            WUtils.showCoinDp(coin0, txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain.chainType)
+            WUtils.showCoinDp(coin1, txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain.chainType)
         }
     }
     

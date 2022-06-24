@@ -19,9 +19,9 @@ class TxEditRewardAddressCell: TxCell {
         self.selectionStyle = .none
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         let msg = try! Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress.init(serializedData: response.tx.body.messages[position].value)
         delegatorLabel.text = msg.delegatorAddress

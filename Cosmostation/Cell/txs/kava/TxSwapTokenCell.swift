@@ -23,9 +23,9 @@ class TxSwapTokenCell: TxCell {
         self.selectionStyle = .none
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Kava_Swap_V1beta1_MsgSwapExactForTokens.init(serializedData: response.tx.body.messages[position].value) {
             txTypeLabel.text = "SwapExactForTokens"
@@ -33,8 +33,8 @@ class TxSwapTokenCell: TxCell {
 
             let coin0 = Coin.init(msg.exactTokenA.denom, msg.exactTokenA.amount)
             let coin1 = Coin.init(msg.tokenB.denom, msg.tokenB.amount)
-            WUtils.showCoinDp(coin0, txPoolInDenomLabel, txPoolInAmountLabel, chain)
-            WUtils.showCoinDp(coin1, txPoolOutDenomLabel, txPoolOutAmountLabel, chain)
+            WUtils.showCoinDp(coin0, txPoolInDenomLabel, txPoolInAmountLabel, chain.chainType)
+            WUtils.showCoinDp(coin1, txPoolOutDenomLabel, txPoolOutAmountLabel, chain.chainType)
         }
         
         if let msg = try? Kava_Swap_V1beta1_MsgSwapForExactTokens.init(serializedData: response.tx.body.messages[position].value) {
@@ -43,8 +43,8 @@ class TxSwapTokenCell: TxCell {
 
             let coin0 = Coin.init(msg.tokenA.denom, msg.tokenA.amount)
             let coin1 = Coin.init(msg.exactTokenB.denom, msg.exactTokenB.amount)
-            WUtils.showCoinDp(coin0, txPoolInDenomLabel, txPoolInAmountLabel, chain)
-            WUtils.showCoinDp(coin1, txPoolOutDenomLabel, txPoolOutAmountLabel, chain)
+            WUtils.showCoinDp(coin0, txPoolInDenomLabel, txPoolInAmountLabel, chain.chainType)
+            WUtils.showCoinDp(coin1, txPoolOutDenomLabel, txPoolOutAmountLabel, chain.chainType)
         }
     }
     

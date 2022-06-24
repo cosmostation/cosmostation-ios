@@ -25,9 +25,9 @@ class TxSifRemoveLpCell: TxCell {
         txWithdraw2AmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         let msg = try! Sifnode_Clp_V1_MsgRemoveLiquidity.init(serializedData: response.tx.body.messages[position].value)
         txSignerLabel.text = msg.signer
@@ -57,14 +57,14 @@ class TxSifRemoveLpCell: TxCell {
         
         let removeRowan = removeCoins.filter { $0.denom == SIF_MAIN_DENOM }.first
         if (removeRowan != nil) {
-            WUtils.showCoinDp(removeRowan!, txWithdraw1DenomLabel, txWithdraw1AmountLabel, chain)
+            WUtils.showCoinDp(removeRowan!, txWithdraw1DenomLabel, txWithdraw1AmountLabel, chain.chainType)
         } else {
-            WUtils.showCoinDp(SIF_MAIN_DENOM, "0", txWithdraw1DenomLabel, txWithdraw1AmountLabel, chain)
+            WUtils.showCoinDp(SIF_MAIN_DENOM, "0", txWithdraw1DenomLabel, txWithdraw1AmountLabel, chain.chainType)
         }
         
         let removeOther = removeCoins.filter { $0.denom != SIF_MAIN_DENOM }.first
         if (removeOther != nil) {
-            WUtils.showCoinDp(removeOther!, txWithdraw2DenomLabel, txWithdraw2AmountLabel, chain)
+            WUtils.showCoinDp(removeOther!, txWithdraw2DenomLabel, txWithdraw2AmountLabel, chain.chainType)
         } else {
             txWithdraw2DenomLabel.isHidden = true
             txWithdraw2AmountLabel.isHidden = true

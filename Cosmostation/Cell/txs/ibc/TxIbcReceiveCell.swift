@@ -21,9 +21,9 @@ class TxIbcReceiveCell: TxCell {
         receivedAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         let msg = try! Ibc_Core_Channel_V1_MsgRecvPacket.init(serializedData: response.tx.body.messages[position].value)
         if let dicData = try! JSONSerialization.jsonObject(with: msg.packet.data, options: []) as? [String: Any] {
@@ -34,7 +34,7 @@ class TxIbcReceiveCell: TxCell {
             denom = String(denom.split(separator: "/").last!)
             
             let receivedCoin = Coin.init(denom, dicData["amount"] as! String)
-            WUtils.showCoinDp(receivedCoin, receivedDenomLabel, receivedAmountLabel, chain)
+            WUtils.showCoinDp(receivedCoin, receivedDenomLabel, receivedAmountLabel, chain.chainType)
         }
     }
 }

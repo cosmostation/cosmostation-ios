@@ -19,7 +19,7 @@ class TxUnknownCell: TxCell {
     
     override func onBind(_ chain: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+//        txIcon.tintColor = chain.chainColor
     }
     
 }

@@ -23,18 +23,18 @@ class TxIssueNFTDenomCell: TxCell {
         txSchemaLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
-        if (chain == ChainType.IRIS_MAIN) {
+        if (chain.chainType == .IRIS_MAIN) {
             let msg = try! Irismod_Nft_MsgIssueDenom.init(serializedData: response.tx.body.messages[position].value)
             txDenomIdLabel.text = msg.id
             txDenomNameLabel.text = msg.name
             txSchemaLabel.text = msg.schema
             
             
-        } else if (chain == ChainType.CRYPTO_MAIN) {
+        } else if (chain.chainType == .CRYPTO_MAIN) {
             let msg = try! Chainmain_Nft_V1_MsgIssueDenom.init(serializedData: response.tx.body.messages[position].value)
             txDenomIdLabel.text = msg.id
             txDenomNameLabel.text = msg.name

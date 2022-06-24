@@ -28,9 +28,9 @@ class TxCdpLiquidateCell: TxCell {
         type.text = msg.value.collateral_type?.uppercased()
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Kava_Cdp_V1beta1_MsgLiquidate.init(serializedData: response.tx.body.messages[position].value) {
             keeper.text = msg.keeper
