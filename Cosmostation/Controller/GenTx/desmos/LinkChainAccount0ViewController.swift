@@ -31,6 +31,7 @@ class LinkChainAccount0ViewController: BaseViewController, SBCardPopupDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.selectedChain = WUtils.getDesmosAirDropChains()[0]
@@ -45,11 +46,12 @@ class LinkChainAccount0ViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func updateView() {
-        toAddChainImg.image = WUtils.getChainImg(selectedChain)
-        toAddChainLabel.text = WUtils.getChainTitle2(selectedChain)
+        let selectedChainConfig = ChainFactory().getChainConfig(selectedChain)
+        toAddChainImg.image = selectedChainConfig?.chainImg
+        toAddChainLabel.text = selectedChainConfig?.chainTitle2
         
         if (selectedAccount != nil) {
-            self.toAddAccountNameLabel.text = WUtils.getWalletName(selectedAccount)
+            self.toAddAccountNameLabel.text = selectedAccount?.getDpName()
             self.toAddAccountAddressLabel.text = selectedAccount!.account_address
             let request = Alamofire.request(BaseNetWork.desmosClaimableCheck(selectedAccount!.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
             request.responseJSON { (response) in

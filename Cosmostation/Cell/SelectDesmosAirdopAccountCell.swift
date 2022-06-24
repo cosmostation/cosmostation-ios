@@ -22,7 +22,7 @@ class SelectDesmosAirdopAccountCell: UITableViewCell {
     }
     
     func onBindAccount(_ chainType: ChainType?, _ account: Account) {
-        self.accountName.text = WUtils.getWalletName(account)
+        self.accountName.text = account.getDpName()
         self.accountAddress.text = account.account_address
         
         let request = Alamofire.request(BaseNetWork.desmosClaimableCheck(account.account_address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])

@@ -34,17 +34,4 @@ class TxHardWithdrawCell: TxCell {
         }
     }
     
-    func onBind(_ chaintype: ChainType, _ msg: Msg) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        depositor.text = msg.value.depositor
-        if let depostAmounts = msg.value.getAmounts() {
-            WUtils.showCoinDp(depostAmounts[0], depositDenom, depositAmount, chaintype)
-        }
-        //support old version
-        if let depostAmount = msg.value.getAmount() {
-            WUtils.showCoinDp(depostAmount, depositDenom, depositAmount, chaintype)
-        }
-    }
-    
 }

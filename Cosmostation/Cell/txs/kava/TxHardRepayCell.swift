@@ -36,14 +36,4 @@ class TxHardRepayCell: TxCell {
         }
     }
     
-    func onBind(_ chaintype: ChainType, _ msg: Msg) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        sender.text = msg.value.sender
-        owener.text = msg.value.owner
-        if let repayamount = msg.value.getAmounts() {
-            WUtils.showCoinDp(repayamount[0], repayDenom, repayAmount, chaintype)
-        }
-    }
-    
 }

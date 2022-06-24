@@ -152,7 +152,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
     
     
     @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, account?.getDpName())
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {

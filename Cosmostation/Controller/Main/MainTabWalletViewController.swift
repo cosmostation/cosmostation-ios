@@ -480,7 +480,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        let link = WUtils.getAccountExplorer(chainType!, account!.account_address)
+        let link = WUtils.getAccountExplorer(chainConfig, account!.account_address)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }
@@ -529,7 +529,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, account?.getDpName())
     }
     
     func onClickValidatorList() {

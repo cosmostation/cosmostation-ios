@@ -53,7 +53,7 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
             
             cell?.valPowerLabel.attributedText = WUtils.displayAmount2(validator.tokens, cell!.valPowerLabel.font, mDpDecimal, mDpDecimal)
             cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), pageHolderVC.chainType!)
-            if let url = URL(string: WUtils.getMonikerImgUrl(pageHolderVC.chainType!, validator.operatorAddress)) {
+            if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
                 cell?.valImg.af_setImage(withURL: url)
             }
             cell?.rootCard.needBorderUpdate = false

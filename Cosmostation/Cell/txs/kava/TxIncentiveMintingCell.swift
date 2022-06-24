@@ -62,17 +62,4 @@ class TxIncentiveMintingCell: TxCell {
             }
         }
     }
-    
-    
-    func onBind(_ chaintype: ChainType, _ msg: Msg, _ tx: TxInfo, _ position: Int) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        
-        sender.text = msg.value.sender
-        multiplier.text = msg.value.multiplier_name
-        
-//        if let coin = tx.simpleIncentive(position) {
-//            WUtils.showCoinDp(coin, kavaDenom, kavaAmount, chaintype)
-//        }
-    }
 }

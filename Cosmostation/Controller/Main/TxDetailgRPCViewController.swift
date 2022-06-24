@@ -515,7 +515,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     
     @IBAction func onClickShare(_ sender: UIButton) {
         if (self.errorLayer.isHidden) {
-            let link = WUtils.getTxExplorer(self.chainType!, self.mTxHash!)
+            let link = WUtils.getTxExplorer(chainConfig, self.mTxHash!)
             let textToShare = [ link ]
             let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
@@ -524,7 +524,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        let link = WUtils.getTxExplorer(self.chainType!, self.mTxHash!)
+        let link = WUtils.getTxExplorer(chainConfig, self.mTxHash!)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }

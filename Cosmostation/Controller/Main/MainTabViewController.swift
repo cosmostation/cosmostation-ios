@@ -1133,8 +1133,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchCw20Tokens() {
-//        print("onFetchCw20Tokens  ", BaseNetWork.mintscanCw20(self.mChainType))
-        let request = Alamofire.request(BaseNetWork.mintscanCw20(self.mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+//        print("onFetchCw20Tokens  ", BaseNetWork.mintscanCw20())
+        let request = Alamofire.request(BaseNetWork.mintscanCw20(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):

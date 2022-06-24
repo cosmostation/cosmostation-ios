@@ -104,13 +104,13 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onExplorerLink(_ proposalId: String) {
-        let link = WUtils.getProposalExplorer(self.chainType!, proposalId)
+        let link = WUtils.getProposalExplorer(chainConfig, proposalId)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }
     
     func onFetchMintscanProposal() {
-        let url = BaseNetWork.mintscanProposals(self.chainType!)
+        let url = BaseNetWork.mintscanProposals(self.chainConfig!)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {

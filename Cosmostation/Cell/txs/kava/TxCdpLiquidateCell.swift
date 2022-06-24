@@ -20,14 +20,6 @@ class TxCdpLiquidateCell: TxCell {
         self.selectionStyle = .none
     }
     
-    func onBind(_ chaintype: ChainType, _ msg: Msg) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        keeper.text = msg.value.keeper
-        owener.text = msg.value.borrower
-        type.text = msg.value.collateral_type?.uppercased()
-    }
-    
     override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
         txIcon.tintColor = chain.chainColor

@@ -63,24 +63,4 @@ class TxIncentiveHardCell: TxCell {
             }
         }
     }
-    
-    func onBind(_ chaintype: ChainType, _ msg: Msg, _ tx: TxInfo, _ position: Int) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        
-        sender.text = msg.value.sender
-        multiplier.text = msg.value.denoms_to_claim?[0].multiplier_name
-        
-//        let incentiveCoins = tx.simpleIncentives(position)
-//        if let kavaToken = incentiveCoins.filter({ $0.denom == KAVA_MAIN_DENOM }).first {
-//            kavaAmount.attributedText = WUtils.displayAmount2(kavaToken.amount, kavaAmount.font!, 6, 6)
-//        } else {
-//            kavaAmount.attributedText = WUtils.displayAmount2("0", kavaAmount.font!, 6, 6)
-//        }
-//        if let hardToken = incentiveCoins.filter({ $0.denom == KAVA_HARD_DENOM }).first {
-//            hardAmount.attributedText = WUtils.displayAmount2(hardToken.amount, hardAmount.font!, 6, 6)
-//        } else {
-//            hardAmount.attributedText = WUtils.displayAmount2("0", hardAmount.font!, 6, 6)
-//        }
-    }
 }

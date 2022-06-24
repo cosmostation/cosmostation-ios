@@ -33,13 +33,4 @@ class TxHardBorrowCell: TxCell {
             WUtils.showCoinDp(coin, borrowDenom, borrowAmount, chain.chainType)
         }
     }
-    
-    func onBind(_ chaintype: ChainType, _ msg: Msg) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        borrower.text = msg.value.borrower
-        if let borrowamount = msg.value.getAmounts() {
-            WUtils.showCoinDp(borrowamount[0], borrowDenom, borrowAmount, chaintype)
-        }
-    }
 }

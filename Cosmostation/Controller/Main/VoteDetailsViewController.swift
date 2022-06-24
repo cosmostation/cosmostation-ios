@@ -66,7 +66,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onClickLink() {
-        let link = WUtils.getProposalExplorer(self.chainType!, proposalId!)
+        let link = WUtils.getProposalExplorer(chainConfig, proposalId!)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }
@@ -174,7 +174,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchMintscanProposl(_ id: String) {
-        let url = BaseNetWork.mintscanProposalDetail(chainType!, id)
+        let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
         print("url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in

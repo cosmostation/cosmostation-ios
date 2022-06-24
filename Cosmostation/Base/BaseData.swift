@@ -120,11 +120,11 @@ final class BaseData : NSObject{
         return nil
     }
     
-    func getIbcRlayerImg(_ chainType: ChainType?, _ channelId: String?) -> URL? {
+    func getIbcRlayerImg(_ chainConfig: ChainConfig?, _ channelId: String?) -> URL? {
         if let url = URL(string: getIbcPath(channelId)?.relayer_img ?? "") {
             return url
         }
-        if let url = URL(string: WUtils.getDefaultRlayerImg(chainType)) {
+        if let url = URL(string: WUtils.getDefaultRlayerImg(chainConfig)) {
             return url
         }
         return nil

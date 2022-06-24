@@ -29,11 +29,4 @@ class TxHardLiquidateCell: TxCell {
         }
     }
     
-    func onBind(_ chaintype: ChainType, _ msg: Msg) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        keeper.text = msg.value.keeper
-        owener.text = msg.value.borrower
-    }
-    
 }

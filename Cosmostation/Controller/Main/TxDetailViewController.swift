@@ -237,7 +237,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let cell:TxTransferCell? = tableView.dequeueReusableCell(withIdentifier:"TxTransferCell") as? TxTransferCell
         let msg = mTxInfo?.getMsg(position - 1)
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+        cell?.txIcon.tintColor = chainConfig?.chainColor
         if (chainType == ChainType.BINANCE_MAIN) {
             cell?.fromLabel.text = msg?.value.inputs![0].address
             cell?.toLabel.text = msg?.value.outputs![0].address
@@ -290,7 +290,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.txLabel.text = NSLocalizedString("title_ok_withdraw", comment: "")
         }
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+        cell?.txIcon.tintColor = chainConfig?.chainColor
         
         let convertDelegaterAddress = WKey.convertAddressCosmosToTender(msg?.value.delegator_address ?? "")
         cell?.delegatorLabel.text = convertDelegaterAddress
@@ -302,7 +302,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         let cell:TxOkDirectVoteCell? = tableView.dequeueReusableCell(withIdentifier:"TxOkDirectVoteCell") as? TxOkDirectVoteCell
         let msg = mTxInfo?.getMsg(position - 1)
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+        cell?.txIcon.tintColor = chainConfig?.chainColor
         
         let convertDelegaterAddress = WKey.convertAddressCosmosToTender(msg?.value.delegator_address ?? "")
         cell?.voterLabel.text = convertDelegaterAddress
@@ -325,7 +325,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onBindUnknown(_ tableView: UITableView, _ position:Int) -> UITableViewCell  {
         let cell:TxUnknownCell? = tableView.dequeueReusableCell(withIdentifier:"TxUnknownCell") as? TxUnknownCell
         cell?.txIcon.image = cell?.txIcon.image?.withRenderingMode(.alwaysTemplate)
-        cell?.txIcon.tintColor = WUtils.getChainColor(chainType!)
+        cell?.txIcon.tintColor = chainConfig?.chainColor
         return cell!
     }
     
@@ -337,7 +337,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         } else if (mTxInfo?.txhash != nil) {
             hash = mTxInfo!.txhash!
         }
-        let link = WUtils.getTxExplorer(self.chainType!, hash)
+        let link = WUtils.getTxExplorer(chainConfig, hash)
         let textToShare = [ link ]
         let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
@@ -352,7 +352,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         } else if (mTxInfo?.txhash != nil) {
             hash = mTxInfo!.txhash!
         }
-        let link = WUtils.getTxExplorer(self.chainType!, hash)
+        let link = WUtils.getTxExplorer(chainConfig, hash)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }

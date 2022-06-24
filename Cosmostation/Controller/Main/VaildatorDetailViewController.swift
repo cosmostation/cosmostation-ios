@@ -193,7 +193,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
             let history = mApiCustomNewHistories[indexPath.row]
-            let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
+            let link = WUtils.getTxExplorer(chainConfig, history.data!.txhash!)
             guard let url = URL(string: link) else { return }
             self.onShowSafariWeb(url)
         }

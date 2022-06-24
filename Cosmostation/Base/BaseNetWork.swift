@@ -281,13 +281,13 @@ class BaseNetWork {
     
     
     //mintscan
-    static func mintscanProposals(_ chain: ChainType) -> String {
-        let chainName = WUtils.getChainNameByBaseChain(chain)
+    static func mintscanProposals(_ chainConfig: ChainConfig) -> String {
+        let chainName = WUtils.getChainNameByBaseChain(chainConfig)
         return MINTSCAN_API_URL + "v1/" + chainName + "/proposals"
     }
     
-    static func mintscanProposalDetail(_ chain: ChainType, _ proposalId: String) -> String {
-        let chainName = WUtils.getChainNameByBaseChain(chain)
+    static func mintscanProposalDetail(_ chainConfig: ChainConfig, _ proposalId: String) -> String {
+        let chainName = WUtils.getChainNameByBaseChain(chainConfig)
         return MINTSCAN_API_URL + "v1/" + chainName + "/proposals/" + proposalId
     }
     
@@ -295,8 +295,7 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/assets"
     }
     
-    static func mintscanCw20(_ chain: ChainType) -> String {
-        let chainName = WUtils.getChainNameByBaseChain(chain)
+    static func mintscanCw20() -> String {
         return MINTSCAN_API_URL + "v1/assets/cw20"
     }
     

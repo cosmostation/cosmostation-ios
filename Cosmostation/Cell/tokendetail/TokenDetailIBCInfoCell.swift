@@ -32,7 +32,7 @@ class TokenDetailIBCInfoCell: TokenDetailCell {
             ibcDivideDecimal = ibcToken.decimal ?? 6
             ibcDisplayDecimal = ibcToken.decimal ?? 6
             
-            if let url = BaseData.instance.getIbcRlayerImg(chainType, ibcToken.channel_id) {
+            if let url = BaseData.instance.getIbcRlayerImg(ChainFactory().getChainConfig(chainType), ibcToken.channel_id) {
                 relayerImg.af_setImage(withURL: url)
             }
             denomLabel.text = ibcDenom

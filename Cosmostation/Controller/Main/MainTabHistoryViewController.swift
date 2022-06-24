@@ -222,7 +222,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             
         } else {
             let history = mApiCustomNewHistories[indexPath.row]
-            let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
+            let link = WUtils.getTxExplorer(chainConfig, history.data!.txhash!)
             guard let url = URL(string: link) else { return }
             self.onShowSafariWeb(url)
         }
@@ -317,7 +317,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        let link = WUtils.getAccountExplorer(chainType!, account!.account_address)
+        let link = WUtils.getAccountExplorer(chainConfig, account!.account_address)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }
@@ -367,7 +367,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, account?.getDpName())
     }
     
 }

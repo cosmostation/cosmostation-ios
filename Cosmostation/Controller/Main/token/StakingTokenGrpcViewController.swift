@@ -132,7 +132,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     }
     
     @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, account?.getDpName())
     }
     
 
