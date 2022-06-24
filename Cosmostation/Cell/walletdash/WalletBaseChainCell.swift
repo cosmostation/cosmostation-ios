@@ -62,7 +62,7 @@ class WalletBaseChainCell: UITableViewCell {
         btnWalletConnect.isHidden = !chainConfig!.wcSupoort
 
         totalAmount.attributedText = WUtils.displayAmount2(totalToken.stringValue, totalAmount.font!, divideDecimal, 6)
-        totalValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalToken, 6, totalValue.font)
+        totalValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalToken, divideDecimal, totalValue.font)
         availableAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, divideDecimal, 6)
         delegatedAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, divideDecimal, 6)
         unbondingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, divideDecimal, 6)
