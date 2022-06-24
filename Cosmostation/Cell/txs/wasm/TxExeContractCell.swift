@@ -24,9 +24,9 @@ class TxExeContractCell: TxCell {
         fundAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Cosmwasm_Wasm_V1_MsgExecuteContract.init(serializedData: response.tx.body.messages[position].value) {
             executorLabel.text = msg.sender
@@ -40,7 +40,7 @@ class TxExeContractCell: TxCell {
             }
             
             if (msg.funds.count > 0) {
-                WUtils.showCoinDp(msg.funds[0].denom, msg.funds[0].amount, fundAmountDenom, fundAmountLabel, chain)
+                WUtils.showCoinDp(msg.funds[0].denom, msg.funds[0].amount, fundAmountDenom, fundAmountLabel, chain.chainType)
             } else {
                 fundAmountLabel.text = ""
                 fundAmountDenom.text = ""

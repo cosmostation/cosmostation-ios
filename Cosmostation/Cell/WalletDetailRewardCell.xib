@@ -51,10 +51,10 @@
                         <constraints>
                             <constraint firstItem="Ois-tV-Wj3" firstAttribute="leading" secondItem="8er-yM-E9m" secondAttribute="leading" constant="16" id="3ij-gs-PBz"/>
                             <constraint firstAttribute="trailing" secondItem="rhX-oJ-xDs" secondAttribute="trailing" constant="8" id="QQK-93-75H"/>
-                            <constraint firstAttribute="bottom" secondItem="hsT-o1-h28" secondAttribute="bottom" constant="12" id="QkJ-J7-fki"/>
+                            <constraint firstAttribute="bottom" secondItem="hsT-o1-h28" secondAttribute="bottom" constant="16" id="QkJ-J7-fki"/>
                             <constraint firstItem="rhX-oJ-xDs" firstAttribute="leading" secondItem="hsT-o1-h28" secondAttribute="trailing" constant="8" id="Vui-Fv-PcH"/>
                             <constraint firstItem="Ois-tV-Wj3" firstAttribute="top" secondItem="8er-yM-E9m" secondAttribute="top" constant="12" id="lJZ-GQ-Es9"/>
-                            <constraint firstItem="hsT-o1-h28" firstAttribute="top" secondItem="Ois-tV-Wj3" secondAttribute="bottom" constant="4" id="s38-l9-35a"/>
+                            <constraint firstItem="hsT-o1-h28" firstAttribute="top" secondItem="Ois-tV-Wj3" secondAttribute="bottom" constant="6" id="s38-l9-35a"/>
                             <constraint firstItem="hsT-o1-h28" firstAttribute="leading" secondItem="8er-yM-E9m" secondAttribute="leading" constant="16" id="vdE-XF-Uly"/>
                             <constraint firstItem="rhX-oJ-xDs" firstAttribute="centerY" secondItem="8er-yM-E9m" secondAttribute="centerY" id="y45-vy-W9G"/>
                         </constraints>

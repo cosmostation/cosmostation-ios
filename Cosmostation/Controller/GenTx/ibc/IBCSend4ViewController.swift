@@ -41,8 +41,11 @@ class IBCSend4ViewController: BaseViewController, PasswordViewDelegate {
         WUtils.showCoinDp(pageHolderVC.mIBCSendDenom!, pageHolderVC.mIBCSendAmount!, toSendDenomLabel, toSendAmountLabel, chainType!)
         
         let toChain = WUtils.getChainTypeByChainId(pageHolderVC.mIBCSendRelayer?.chain_id)
-        self.destinationChainLabel.text = WUtils.getChainTitle(toChain)
-        self.destinationChainLabel.textColor = WUtils.getChainColor(toChain)
+        guard let toChainConfig = ChainFactory().getChainConfig(toChain) else {
+            return
+        }
+        self.destinationChainLabel.text = toChainConfig.chainTitle
+        self.destinationChainLabel.textColor = toChainConfig.chainColor
         self.destinationAddressLabel.text = pageHolderVC.mIBCRecipient
         self.destinationAddressLabel.adjustsFontSizeToFitWidth = true
     }

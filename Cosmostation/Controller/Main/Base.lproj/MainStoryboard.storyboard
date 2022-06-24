@@ -52,7 +52,7 @@
                                         <color key="tintColor" name="_font05"/>
                                         <state key="normal" image="btnSwitch"/>
                                         <connections>
-                                            <action selector="onClickSwitchAccount:" destination="G92-8m-qqM" eventType="touchUpInside" id="hZS-b0-XjI"/>
+                                            <action selector="onClickSwitchAccount:" destination="G92-8m-qqM" eventType="touchUpInside" id="HZu-sm-dTH"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="joi-O1-5vn">
@@ -357,7 +357,7 @@
                                         </constraints>
                                         <state key="normal" image="btnSwitch"/>
                                         <connections>
-                                            <action selector="onClickSwitchAccount:" destination="t07-dn-E46" eventType="touchUpInside" id="99d-Kg-Qh6"/>
+                                            <action selector="onClickSwitchAccount:" destination="t07-dn-E46" eventType="touchUpInside" id="tiw-wu-Yqp"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zcu-1U-k6P">
@@ -496,7 +496,7 @@
                                         </constraints>
                                         <state key="normal" image="btnSwitch"/>
                                         <connections>
-                                            <action selector="onClickSwitchAccount:" destination="oOd-o8-Sem" eventType="touchUpInside" id="BUn-3R-fTc"/>
+                                            <action selector="onClickSwitchAccount:" destination="oOd-o8-Sem" eventType="touchUpInside" id="Qwy-cl-ocI"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yab-cK-eWf">
@@ -902,7 +902,7 @@
                                         </constraints>
                                         <state key="normal" image="btnSwitch"/>
                                         <connections>
-                                            <action selector="onClickSwitchAccount:" destination="1zF-Vz-4uW" eventType="touchUpInside" id="Ud8-2u-LU4"/>
+                                            <action selector="onClickSwitchAccount:" destination="1zF-Vz-4uW" eventType="touchUpInside" id="cbI-Mz-cWP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N58-4J-qWv">
@@ -2921,7 +2921,7 @@
             <color red="0.98400002717971802" green="0.9649999737739563" blue="0.89800000190734863" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

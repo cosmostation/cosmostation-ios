@@ -59,7 +59,10 @@ class TokenDetailUnbondingDetailCell: UITableViewCell {
     }
     
     func onBindUnbondingToken(_ chainType: ChainType) {
-        unBondingCard.backgroundColor = WUtils.getChainBg(chainType)
+        guard let chainConfig = ChainFactory().getChainConfig(chainType) else {
+            return
+        }
+        unBondingCard.backgroundColor = chainConfig.chainColorBG
         if (WUtils.isGRPC(chainType)) {
             onBindUnbonding_gRPC(chainType)
         } else {

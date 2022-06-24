@@ -22,32 +22,17 @@ class TxSwapDepositCell: TxCell {
         self.selectionStyle = .none
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Kava_Swap_V1beta1_MsgDeposit.init(serializedData: response.tx.body.messages[position].value) {
             txSenderLabel.text = msg.depositor
 
             let coin0 = Coin.init(msg.tokenA.denom, msg.tokenA.amount)
             let coin1 = Coin.init(msg.tokenB.denom, msg.tokenB.amount)
-            WUtils.showCoinDp(coin0, txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain)
-            WUtils.showCoinDp(coin1, txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain)
+            WUtils.showCoinDp(coin0, txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain.chainType)
+            WUtils.showCoinDp(coin1, txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain.chainType)
         }
     }
-    
-    func onBind(_ chaintype: ChainType, _ msg: Msg, _ tx: TxInfo) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        
-        txSenderLabel.text = msg.value.depositor
-        let depositCoins = tx.simpleDeposits()
-        if (depositCoins.count > 0) {
-            WUtils.showCoinDp(depositCoins[0], txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chaintype)
-        }
-        if (depositCoins.count > 1) {
-            WUtils.showCoinDp(depositCoins[1], txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chaintype)
-        }
-    }
-    
 }

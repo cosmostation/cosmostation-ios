@@ -130,7 +130,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         let cell:HtlcResultSentCell? = tableView.dequeueReusableCell(withIdentifier:"HtlcResultSentCell") as? HtlcResultSentCell
         let msg = mSendTxInfo?.getMsgs()[0]
         cell?.sendImg.image = cell?.sendImg.image?.withRenderingMode(.alwaysTemplate)
-        cell?.sendImg.tintColor = WUtils.getChainColor(chainType!)
+        cell?.sendImg.tintColor = ChainFactory().getChainConfig(chainType!)?.chainColor
         if (self.chainType == ChainType.BINANCE_MAIN) {
             cell?.blockHeightLabel.text = mSendTxInfo?.height
             cell?.txHashLabel.text = mSendTxInfo?.hash
@@ -174,7 +174,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         let cell:HtlcResultClaimCell? = tableView.dequeueReusableCell(withIdentifier:"HtlcResultClaimCell") as? HtlcResultClaimCell
         let msg = mClaimTxInfo?.getMsgs()[0]
         cell?.claimImg.image = cell?.claimImg.image?.withRenderingMode(.alwaysTemplate)
-        cell?.claimImg.tintColor = WUtils.getChainColor(mHtlcToChain!)
+        cell?.claimImg.tintColor = ChainFactory().getChainConfig(mHtlcToChain!)?.chainColor
         if (self.mHtlcToChain == ChainType.BINANCE_MAIN) {
             cell?.blockHeightLabel.text = mClaimTxInfo?.height
             cell?.txHashLabel.text = mClaimTxInfo?.hash

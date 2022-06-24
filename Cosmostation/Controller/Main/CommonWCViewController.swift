@@ -77,7 +77,7 @@ class CommonWCViewController: BaseViewController {
     
     func connectStatus(connected: Bool) {
         if (connected) {
-            dappConnectImage.image = UIImage(named: "passedImg")
+            dappConnectImage.image = UIImage(named: "ImgGovPassed")
             dappConnectLabel.text = "Connected"
             dappConnectLabel.textColor = UIColor.init(named: "_font05")
         } else {
@@ -524,7 +524,7 @@ class CommonWCViewController: BaseViewController {
     
     func getKeplrAccount(account: Account, listener: @escaping (WCKeplrWallet) -> ()) {
         getKeyAsync(chainName: account.account_base_chain) { tuple in
-            let name = WUtils.getWalletName(account)!
+            let name = account.getDpName()
             let algo = "secp256k1"
             let pubKey = [UInt8](tuple.publicKey)
             let address = [UInt8](tuple.tendermintAddress)
@@ -536,7 +536,7 @@ class CommonWCViewController: BaseViewController {
     
     func getCosmostationAccount(account: Account) -> WCCosmostationAccount {
         let tuple = getKey(chainName: account.account_base_chain)
-        let name = WUtils.getWalletName(account)!
+        let name = account.getDpName()
         let algo = "secp256k1"
         let pubKey = [UInt8](tuple.publicKey)
         let address = [UInt8](tuple.tendermintAddress)

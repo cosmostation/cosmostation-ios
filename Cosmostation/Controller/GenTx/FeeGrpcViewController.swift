@@ -25,9 +25,6 @@ class FeeGrpcViewController: BaseViewController {
     @IBOutlet weak var gasFeeLabel: UILabel!
     @IBOutlet weak var gasSelectSegments: UISegmentedControl!
     
-    @IBOutlet weak var speedImg: UIImageView!
-    @IBOutlet weak var speedTxt: UILabel!
-    
     @IBOutlet weak var btnGasCheck: UIButton!
     @IBOutlet weak var btnBefore: UIButton!
     @IBOutlet weak var btnNext: UIButton!
@@ -44,20 +41,21 @@ class FeeGrpcViewController: BaseViewController {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        feeTotalCard.backgroundColor = WUtils.getChainBg(chainType)
+        feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         WUtils.setGasDenomTitle(chainType, feeTotalDenom)
         mDpDecimal = WUtils.mainDivideDecimal(chainType)
         if #available(iOS 13.0, *) {
             gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
-            gasSelectSegments.selectedSegmentTintColor = WUtils.getChainColor(chainType)
+            gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
-            gasSelectSegments.tintColor = WUtils.getChainColor(chainType!)
+            gasSelectSegments.tintColor = chainConfig?.chainColor
         }
         
-        if (chainType == ChainType.SIF_MAIN) {
+        if (chainType == .SIF_MAIN) {
             gasDetailCard.isHidden = true
         }
         
@@ -76,7 +74,7 @@ class FeeGrpcViewController: BaseViewController {
     
     func onCalculateFees() {
         mSelectedGasRate = WUtils.getGasRate(chainType!, mSelectedGasPosition)
-        if (chainType == ChainType.SIF_MAIN) {
+        if (chainType == .SIF_MAIN) {
             mFee = NSDecimalNumber.init(string: "100000000000000000")
         } else {
             mFee = mSelectedGasRate.multiplying(by: mEstimateGasAmount, withBehavior: WUtils.handler0Up)
@@ -95,18 +93,6 @@ class FeeGrpcViewController: BaseViewController {
         gasRateLabel.attributedText = WUtils.displayGasRate(mSelectedGasRate.rounding(accordingToBehavior: WUtils.handler6), font: gasRateLabel.font, 5)
         gasAmountLabel.text = mEstimateGasAmount.stringValue
         gasFeeLabel.text = mFee.stringValue
-        
-        if (mSelectedGasPosition == 0) {
-            self.speedImg.image = UIImage.init(named: "bycicle")
-            self.speedTxt.text = NSLocalizedString("fee_speed_title_0", comment: "")
-        } else if (mSelectedGasPosition == 1) {
-            self.speedImg.image = UIImage.init(named: "car")
-            self.speedTxt.text = NSLocalizedString("fee_speed_title_1", comment: "")
-        } else {
-            self.speedImg.image = UIImage.init(named: "roket")
-            self.speedTxt.text = NSLocalizedString("fee_speed_title_2", comment: "")
-        }
-        
     }
 
     @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {
@@ -441,7 +427,7 @@ class FeeGrpcViewController: BaseViewController {
             let jsonEncoder = JSONEncoder()
             let jsonData = try! jsonEncoder.encode(stationData)
             
-            if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
+            if (pageHolderVC.chainType == .IRIS_MAIN) {
                 return Signer.genSimulateIssueNftIrisTxgRPC(auth,
                                                             self.account!.account_address,
                                                             self.pageHolderVC.mNFTDenomId!,
@@ -454,7 +440,7 @@ class FeeGrpcViewController: BaseViewController {
                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                             self.chainType!)
                 
-            } else if (self.chainType == ChainType.CRYPTO_MAIN) {
+            } else if (self.chainType == .CRYPTO_MAIN) {
                 return Signer.genSimulateIssueNftCroTxgRPC(auth,
                                                            self.account!.account_address,
                                                            self.pageHolderVC.mNFTDenomId!,
@@ -479,7 +465,7 @@ class FeeGrpcViewController: BaseViewController {
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                            self.chainType!)
                 
-            } else if (self.chainType == ChainType.CRYPTO_MAIN) {
+            } else if (self.chainType == .CRYPTO_MAIN) {
                 return Signer.genSimulateSendNftCroTxgRPC(auth, self.account!.account_address,
                                                           self.pageHolderVC.mToSendRecipientAddress!,
                                                           self.pageHolderVC.mNFTTokenId!,
@@ -491,7 +477,7 @@ class FeeGrpcViewController: BaseViewController {
             }
             
         } else if (pageHolderVC.mType == TASK_TYPE_NFT_ISSUE_DENOM) {
-            if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
+            if (pageHolderVC.chainType == .IRIS_MAIN) {
                 return Signer.genSimulateIssueNftDenomIrisTxgRPC(auth, self.account!.account_address,
                                                                  self.pageHolderVC.mNFTDenomId!,
                                                                  self.pageHolderVC.mNFTDenomName!,
@@ -499,7 +485,7 @@ class FeeGrpcViewController: BaseViewController {
                                                                  self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                  self.chainType!)
                 
-            } else if (self.chainType == ChainType.CRYPTO_MAIN) {
+            } else if (self.chainType == .CRYPTO_MAIN) {
                 return Signer.genSimulateIssueNftDenomCroTxgRPC(auth, self.account!.account_address,
                                                                 self.pageHolderVC.mNFTDenomId!,
                                                                 self.pageHolderVC.mNFTDenomName!,

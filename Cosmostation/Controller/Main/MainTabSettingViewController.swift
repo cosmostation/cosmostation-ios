@@ -67,12 +67,15 @@ class MainTabSettingViewController: BaseViewController {
         }
     }
     
-    @IBAction func onClickSwitchAccount(_ sender: Any) {
-        self.mainTabVC.onShowAccountSwicth()
+    @IBAction func onClickSwitchAccount(_ sender: UIButton) {
+        sender.isUserInteractionEnabled = false
+        self.mainTabVC.onShowAccountSwicth {
+            sender.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        let link = WUtils.getAccountExplorer(chainType!, account!.account_address)
+        let link = WUtils.getAccountExplorer(chainConfig, account!.account_address)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }

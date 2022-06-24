@@ -127,8 +127,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
         self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
         if (account?.account_has_private == true) {
-            self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
+            self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
+            self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
             self.totalKeyState.tintColor = chainConfig?.chainColor
+        } else {
+            self.totalKeyState.image = UIImage.init(named: "iconKeyEmpty")
         }
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
@@ -779,12 +782,15 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    @IBAction func onClickSwitchAccount(_ sender: Any) {
-        self.mainTabVC.onShowAccountSwicth()
+    @IBAction func onClickSwitchAccount(_ sender: UIButton) {
+        sender.isUserInteractionEnabled = false
+        self.mainTabVC.onShowAccountSwicth {
+            sender.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        let link = WUtils.getAccountExplorer(chainType!, account!.account_address)
+        let link = WUtils.getAccountExplorer(chainConfig, account!.account_address)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }
@@ -834,6 +840,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, account?.getDpName())
     }
 }

@@ -20,9 +20,9 @@ class TxDeleteAccountCell: TxCell {
         self.selectionStyle = .none
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Starnamed_X_Starname_V1beta1_MsgDeleteAccount.init(serializedData: response.tx.body.messages[position].value) {
             accountLabel.text = msg.name + "*" + msg.domain

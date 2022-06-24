@@ -33,7 +33,7 @@ class WalletDetailInfoCell: UITableViewCell {
     }
     
     func onBindView(_ chainConfig: ChainConfig, _ account: Account, _ chainId: String) {
-        rootView.backgroundColor = WUtils.getChainBg(chainConfig.chainType)
+        rootView.backgroundColor = chainConfig.chainColorBG
         addressLabel.text = account.account_address
         addressLabel.adjustsFontSizeToFitWidth = true
         chainIdLabel.text = chainId

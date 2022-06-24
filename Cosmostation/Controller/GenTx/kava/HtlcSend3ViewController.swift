@@ -57,7 +57,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         
         //set Send layer's data
         sendImg.image = sendImg.image?.withRenderingMode(.alwaysTemplate)
-        sendImg.tintColor = WUtils.getChainColor(chainType)
+        sendImg.tintColor = ChainFactory().getChainConfig(chainType)?.chainColor
         WUtils.setDenomTitle(chainType, sendFeeDenom)
         if (chainType == ChainType.BINANCE_MAIN) {
             mDpDecimal = 8;
@@ -102,7 +102,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         
         //set Claim layer's data
         claimImg.image = claimImg.image?.withRenderingMode(.alwaysTemplate)
-        claimImg.tintColor = WUtils.getChainColor(pageHolderVC.mHtlcToChain!)
+        claimImg.tintColor = ChainFactory().getChainConfig(pageHolderVC.mHtlcToChain)?.chainColor
         if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
             receiveAmountDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()
             relayFeeDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()

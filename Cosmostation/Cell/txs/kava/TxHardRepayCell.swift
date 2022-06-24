@@ -23,26 +23,16 @@ class TxHardRepayCell: TxCell {
         repayAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Kava_Hard_V1beta1_MsgRepay.init(serializedData: response.tx.body.messages[position].value) {
             sender.text = msg.sender
             owener.text = msg.owner
             
             let coin = Coin.init(msg.amount[0].denom, msg.amount[0].amount)
-            WUtils.showCoinDp(coin, repayDenom, repayAmount, chain)
-        }
-    }
-    
-    func onBind(_ chaintype: ChainType, _ msg: Msg) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        sender.text = msg.value.sender
-        owener.text = msg.value.owner
-        if let repayamount = msg.value.getAmounts() {
-            WUtils.showCoinDp(repayamount[0], repayDenom, repayAmount, chaintype)
+            WUtils.showCoinDp(coin, repayDenom, repayAmount, chain.chainType)
         }
     }
     

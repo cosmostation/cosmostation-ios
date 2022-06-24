@@ -38,15 +38,15 @@ public class Proposal {
     
     public func getStatusImg() -> UIImage? {
         if (proposal_status == Proposal.PROPOSAL_DEPOSIT) {
-            return UIImage.init(named: "depositImg")
+            return UIImage.init(named: "ImgGovDoposit")
         } else if (proposal_status == Proposal.PROPOSAL_VOTING) {
-            return UIImage.init(named: "votingImg")
+            return UIImage.init(named: "ImgGovVoting")
         } else if (proposal_status == Proposal.PROPOSAL_REJECTED) {
-            return UIImage.init(named: "rejectedImg")
+            return UIImage.init(named: "ImgGovRejected")
         } else if (proposal_status == Proposal.PROPOSAL_PASSED) {
-            return UIImage.init(named: "passedImg")
+            return UIImage.init(named: "ImgGovPassed")
         }
-        return nil
+        return UIImage.init(named: "ImgGovFailed")
     }
     
     public func getTitle() -> String? {

@@ -213,11 +213,12 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
             cell?.accountName.text = account.getDpName()
-            if (account.account_has_private) {
-                cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
+            if (account.account_has_private == true) {
+                cell?.keyStatusImg.image = UIImage.init(named: "iconKeyFull")
+                cell?.keyStatusImg.image = cell?.keyStatusImg.image!.withRenderingMode(.alwaysTemplate)
                 cell?.keyStatusImg.tintColor = toChainConfig?.chainColor
             } else {
-                cell?.keyStatusImg.tintColor = UIColor.init(named: "_font05")
+                cell?.keyStatusImg.image = UIImage.init(named: "iconKeyEmpty")
             }
             cell?.accountBalance.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.accountBalance.font, 0, 6)
             return cell!
@@ -253,8 +254,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_IBC_CHAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
             let toChain = WUtils.getChainTypeByChainId(ibcToChain[indexPath.row].chain_id)
-            cell!.chainImg.image = WUtils.getChainImg(toChain)
-            cell!.chainTitle.text = WUtils.getChainTitle2(toChain)
+            let toChainConfig = ChainFactory().getChainConfig(toChain)
+            cell!.chainImg.image = toChainConfig?.chainImg
+            cell!.chainTitle.text = toChainConfig?.chainTitle2
             return cell!
             
         } else if (type == SELECT_POPUP_IBC_RELAYER) {
@@ -291,8 +293,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
             let chain = toChainList[indexPath.row]
-            cell!.chainImg.image = WUtils.getChainImg(chain)
-            cell!.chainTitle.text = WUtils.getChainTitle2(chain)
+            let chainConfig = ChainFactory().getChainConfig(chain)
+            cell!.chainImg.image = chainConfig?.chainImg
+            cell!.chainTitle.text = chainConfig?.chainTitle2
             return cell!
             
         } else if (type == SELECT_POPUP_DESMOS_LINK_ACCOUNT) {
@@ -303,11 +306,12 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_KEPLR_GET_ACCOUNT || type == SELECT_POPUP_COSMOSTATION_GET_ACCOUNT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let account = toAccountList[indexPath.row]
+            let toChainConfig = ChainFactory().getChainConfig(toChain)
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
             cell?.accountName.text = account.getDpName()
             cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
-            cell?.keyStatusImg.tintColor = WUtils.getChainColor(toChain)
+            cell?.keyStatusImg.tintColor = toChainConfig?.chainColor
             cell?.accountBalance.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.accountBalance.font, 0, 6)
             return cell!
             

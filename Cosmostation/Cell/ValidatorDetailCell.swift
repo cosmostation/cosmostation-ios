@@ -82,7 +82,7 @@ class ValidatorDetailCell: UITableViewCell {
             avergaeYield.attributedText = WUtils.displayCommission(NSDecimalNumber.zero.stringValue, font: avergaeYield.font)
             avergaeYield.textColor = UIColor.init(hexString: "f31963")
         }
-        if let url = URL(string: WUtils.getMonikerImgUrl(chainType, validator!.operatorAddress)) {
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator!.operatorAddress)) {
             validatorImg.af_setImage(withURL: url)
         }
         

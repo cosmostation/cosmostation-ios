@@ -25,7 +25,7 @@ class WalletDetailAddressCell: UITableViewCell {
     }
     
     func onBindView(_ chainConfig: ChainConfig, _ account: Account) {
-        rootView.backgroundColor = WUtils.getChainBg(chainConfig.chainType)
+        rootView.backgroundColor = chainConfig.chainColorBG
         chainImg.image = chainConfig.chainImg
         walletName.text = account.getDpName()
     }

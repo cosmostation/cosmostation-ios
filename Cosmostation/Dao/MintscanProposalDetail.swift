@@ -138,5 +138,17 @@ public struct MintscanContent {
                 self.amount?.append(Coin(rawAmount as! [String : Any]))
             }
         }
+        
+        //for injective custom
+        if let rawProposals = dictionary?["proposals"] as? Array<NSDictionary> {
+            if (rawProposals.count > 0) {
+                if let rawAmounts = rawProposals[0]["amount"] as? Array<NSDictionary> {
+                    self.amount = Array<Coin>()
+                    for rawAmount in rawAmounts {
+                        self.amount?.append(Coin(rawAmount as! [String : Any]))
+                    }
+                }
+            }
+        }
     }
 }

@@ -15,6 +15,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
 
     var mAccount: Account!
     var chainType: ChainType!
+    var chainConfig: ChainConfig!
     
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var currecyLabel: UILabel!
@@ -30,6 +31,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         super.viewDidLoad()
         mAccount = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         chainType = WUtils.getChainType(mAccount.account_base_chain)
+        chainConfig = ChainFactory().getChainConfig(chainType)
         
         if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
             self.versionLabel.text = "v " + appVersion
@@ -110,201 +112,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
-                if (chainType == ChainType.COSMOS_MAIN) {
-                    guard let url = URL(string: EXPLORER_COSMOS_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.IRIS_MAIN) {
-                    guard let url = URL(string: EXPLORER_IRIS_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.BINANCE_MAIN) {
-                    guard let url = URL(string: EXPLORER_BINANCE_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.IOV_MAIN) {
-                    guard let url = URL(string: EXPLORER_IOV_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.KAVA_MAIN) {
-                    guard let url = URL(string: EXPLORER_KAVA_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.BAND_MAIN) {
-                    guard let url = URL(string: EXPLORER_BAND_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.SECRET_MAIN) {
-                    guard let url = URL(string: EXPLORER_SECRET_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.OKEX_MAIN) {
-                    guard let url = URL(string: EXPLORER_OKEX_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.CERTIK_MAIN) {
-                    guard let url = URL(string: EXPLORER_CERTIK) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.AKASH_MAIN) {
-                    guard let url = URL(string: EXPLORER_AKASH_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.PERSIS_MAIN) {
-                    guard let url = URL(string: EXPLORER_PERSIS_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.SENTINEL_MAIN) {
-                    guard let url = URL(string: EXPLORER_SENTINEL_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.FETCH_MAIN) {
-                    guard let url = URL(string: EXPLORER_FETCH_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.SIF_MAIN) {
-                    guard let url = URL(string: EXPLORER_SIF_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.CRYPTO_MAIN) {
-                    guard let url = URL(string: EXPLORER_CRYPTO_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.KI_MAIN) {
-                    guard let url = URL(string: EXPLORER_KI_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.OSMOSIS_MAIN) {
-                    guard let url = URL(string: EXPLORER_OSMOSIS_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.MEDI_MAIN) {
-                    guard let url = URL(string: EXPLORER_MEDI_MAIN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.EMONEY_MAIN) {
-                    guard let url = URL(string: EXPLORER_EMONEY) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.RIZON_MAIN) {
-                    guard let url = URL(string: EXPLORER_RIZON) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.JUNO_MAIN) {
-                    guard let url = URL(string: EXPLORER_JUNO) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.REGEN_MAIN) {
-                    guard let url = URL(string: EXPLORER_REGEN) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.BITCANA_MAIN) {
-                    guard let url = URL(string: EXPLORER_BITCANNA) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.ALTHEA_MAIN) {
-                    guard let url = URL(string: EXPLORER_ALTHEA) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
-                    guard let url = URL(string: EXPLORER_GRAVITY_BRIDGE) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.STARGAZE_MAIN) {
-                    guard let url = URL(string: EXPLORER_STARGAZE) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.COMDEX_MAIN) {
-                    guard let url = URL(string: EXPLORER_COMDEX) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.INJECTIVE_MAIN) {
-                    guard let url = URL(string: EXPLORER_INJECTIVE) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.BITSONG_MAIN) {
-                    guard let url = URL(string: EXPLORER_BITSONG) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.DESMOS_MAIN) {
-                    guard let url = URL(string: EXPLORER_DESMOS) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.LUM_MAIN) {
-                    guard let url = URL(string: EXPLORER_LUM) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
-                    guard let url = URL(string: EXPLORER_CHIHUAHUA) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.AXELAR_MAIN) {
-                    guard let url = URL(string: EXPLORER_AXELAR) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.KONSTELLATION_MAIN) {
-                    guard let url = URL(string: EXPLORER_KONSTELLATION) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.UMEE_MAIN) {
-                    guard let url = URL(string: EXPLORER_UMEE) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.EVMOS_MAIN) {
-                    guard let url = URL(string: EXPLORER_EVMOS) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.PROVENANCE_MAIN) {
-                    guard let url = URL(string: EXPLORER_PROVENANCE) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.CUDOS_MAIN) {
-                    guard let url = URL(string: EXPLORER_CUDOS) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.CERBERUS_MAIN) {
-                    guard let url = URL(string: EXPLORER_CERBERUS) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.OMNIFLIX_MAIN) {
-                    guard let url = URL(string: EXPLORER_OMNIFLIX) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.CRESCENT_MAIN) {
-                    guard let url = URL(string: EXPLORER_CRESCENT) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.MANTLE_MAIN) {
-                    guard let url = URL(string: EXPLORER_MANTLE) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.NYX_MAIN) {
-                    guard let url = URL(string: EXPLORER_NYX) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                }
-                
-                else if (chainType == ChainType.COSMOS_TEST) {
-                    guard let url = URL(string: EXPLORER_COSMOS_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.IRIS_TEST) {
-                    guard let url = URL(string: EXPLORER_IRIS_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.ALTHEA_TEST) {
-                    guard let url = URL(string: EXPLORER_ALTHEA_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.CRESCENT_TEST) {
-                    guard let url = URL(string: EXPLORER_CRESCENT_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else if (chainType == ChainType.STATION_TEST) {
-                    guard let url = URL(string: EXPLORER_STATION_TEST) else { return }
-                    self.onShowSafariWeb(url)
-                    
-                }
+                guard let url = URL(string: chainConfig.explorerUrl) else { return }
+                self.onShowSafariWeb(url)
             
             } else if (indexPath.row == 1) {
                 self.onShowNotice()
@@ -398,7 +207,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     func onShowNotice() {
-        guard let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainType))") else { return }
+        guard let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainConfig))") else { return }
         self.onShowSafariWeb(url)
     }
     

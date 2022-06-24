@@ -26,6 +26,7 @@ class OkVote1ViewController: BaseViewController, UITableViewDelegate, UITableVie
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         
         self.mAllValidator = BaseData.instance.mAllValidator
         self.sortOkValidator()
@@ -52,7 +53,7 @@ class OkVote1ViewController: BaseViewController, UITableViewDelegate, UITableVie
             cell?.valjailedImg.isHidden = true
             cell?.valjailedImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
-        if let url = URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address)) {
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operator_address)) {
             cell?.valImg.af_setImage(withURL: url)
         }
         cell?.valPowerLabel.attributedText =  WUtils.displayAmount2(validator.delegator_shares, cell!.valPowerLabel.font, 0, 0)

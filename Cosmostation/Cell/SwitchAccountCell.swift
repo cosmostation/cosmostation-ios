@@ -31,10 +31,11 @@ class SwitchAccountCell: UITableViewCell {
         
         let dpAccount = data?.accounts[accountPosition]
         if (dpAccount?.account_has_private == true) {
+            chainAccountKeyImg.image = UIImage.init(named: "iconKeyFull")
             chainAccountKeyImg.image = chainAccountKeyImg.image!.withRenderingMode(.alwaysTemplate)
             chainAccountKeyImg.tintColor = dpChainConfig.chainColor
         } else {
-            chainAccountKeyImg.tintColor = UIColor.init(named: "_font05")
+            chainAccountKeyImg.image = UIImage.init(named: "iconKeyEmpty")
         }
         chainAccountName.text = dpAccount?.getDpName()
         chainAccountAddress.text = dpAccount!.account_address

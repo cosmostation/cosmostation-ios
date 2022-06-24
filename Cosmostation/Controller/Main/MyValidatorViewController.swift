@@ -96,7 +96,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (BaseData.instance.mMyValidators_gRPC.count < 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"PromotionCell") as? PromotionCell
-            cell?.cardView.backgroundColor = WUtils.getChainBg(chainType)
+            cell?.cardView.backgroundColor = chainConfig?.chainColorBG
             return cell!
             
         } else if (BaseData.instance.mMyValidators_gRPC.count == 1) {

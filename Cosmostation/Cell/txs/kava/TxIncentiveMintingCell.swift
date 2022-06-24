@@ -35,9 +35,9 @@ class TxIncentiveMintingCell: TxCell {
         incen3Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Kava_Incentive_V1beta1_MsgClaimUSDXMintingReward.init(serializedData: response.tx.body.messages[position].value) {
             sender.text = msg.sender
@@ -46,33 +46,20 @@ class TxIncentiveMintingCell: TxCell {
             let incentiveCoins = WUtils.onParseKavaIncentiveGrpc(response, position)
             if (incentiveCoins.count > 0) {
                 incen0Layer.isHidden = false
-                WUtils.showCoinDp(incentiveCoins[0], incen0Denom, incen0Amount, chain)
+                WUtils.showCoinDp(incentiveCoins[0], incen0Denom, incen0Amount, chain.chainType)
             }
             if (incentiveCoins.count > 1) {
                 incen1Layer.isHidden = false
-                WUtils.showCoinDp(incentiveCoins[1], incen1Denom, incen1Amount, chain)
+                WUtils.showCoinDp(incentiveCoins[1], incen1Denom, incen1Amount, chain.chainType)
             }
             if (incentiveCoins.count > 2) {
                 incen2Layer.isHidden = false
-                WUtils.showCoinDp(incentiveCoins[2], incen2Denom, incen2Amount, chain)
+                WUtils.showCoinDp(incentiveCoins[2], incen2Denom, incen2Amount, chain.chainType)
             }
             if (incentiveCoins.count > 3) {
                 incen3Layer.isHidden = false
-                WUtils.showCoinDp(incentiveCoins[3], incen3Denom, incen3Amount, chain)
+                WUtils.showCoinDp(incentiveCoins[3], incen3Denom, incen3Amount, chain.chainType)
             }
         }
-    }
-    
-    
-    func onBind(_ chaintype: ChainType, _ msg: Msg, _ tx: TxInfo, _ position: Int) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        
-        sender.text = msg.value.sender
-        multiplier.text = msg.value.multiplier_name
-        
-//        if let coin = tx.simpleIncentive(position) {
-//            WUtils.showCoinDp(coin, kavaDenom, kavaAmount, chaintype)
-//        }
     }
 }

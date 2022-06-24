@@ -22,24 +22,15 @@ class TxHardBorrowCell: TxCell {
         borrowAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         if let msg = try? Kava_Hard_V1beta1_MsgBorrow.init(serializedData: response.tx.body.messages[position].value) {
             borrower.text = msg.borrower
             
             let coin = Coin.init(msg.amount[0].denom, msg.amount[0].amount)
-            WUtils.showCoinDp(coin, borrowDenom, borrowAmount, chain)
-        }
-    }
-    
-    func onBind(_ chaintype: ChainType, _ msg: Msg) {
-        txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chaintype)
-        borrower.text = msg.value.borrower
-        if let borrowamount = msg.value.getAmounts() {
-            WUtils.showCoinDp(borrowamount[0], borrowDenom, borrowAmount, chaintype)
+            WUtils.showCoinDp(coin, borrowDenom, borrowAmount, chain.chainType)
         }
     }
 }

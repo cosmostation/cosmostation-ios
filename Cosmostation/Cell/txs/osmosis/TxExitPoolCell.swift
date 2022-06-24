@@ -29,9 +29,9 @@ class TxExitPoolCell: TxCell {
         txPoolAsset2AmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         let msg = try! Osmosis_Gamm_V1beta1_MsgExitPool.init(serializedData: response.tx.body.messages[position].value)
         txSenderLabel.text = msg.sender
@@ -61,7 +61,7 @@ class TxExitPoolCell: TxCell {
         }
         print("inCoin ", inCoin)
         if (inCoin != nil) {
-            WUtils.showCoinDp(inCoin!, txPoolInDenomLabel, txPoolInAmountLabel, chain)
+            WUtils.showCoinDp(inCoin!, txPoolInDenomLabel, txPoolInAmountLabel, chain.chainType)
         } else {
             txPoolInAmountLabel.text = ""
             txPoolInDenomLabel.text = ""
@@ -87,8 +87,8 @@ class TxExitPoolCell: TxCell {
         }
         print("outCoins ", outCoins)
         if (outCoins.count == 2) {
-            WUtils.showCoinDp(outCoins[0], txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain)
-            WUtils.showCoinDp(outCoins[1], txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain)
+            WUtils.showCoinDp(outCoins[0], txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain.chainType)
+            WUtils.showCoinDp(outCoins[1], txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain.chainType)
         } else {
             txPoolAsset1AmountLabel.text = ""
             txPoolAsset1DenomLabel.text = ""

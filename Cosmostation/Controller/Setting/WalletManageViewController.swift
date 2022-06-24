@@ -94,15 +94,17 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
             guard let userChainConfig = ChainFactory().getChainConfig(userChain) else {
                 return cell!
             }
-            if (account.account_has_private) {
+            if (account.account_has_private == true) {
+                cell?.keyImg.image = UIImage.init(named: "iconKeyFull")
                 cell?.keyImg.image = cell?.keyImg.image!.withRenderingMode(.alwaysTemplate)
                 cell?.keyImg.tintColor = userChainConfig.chainColor
             } else {
-                cell?.keyImg.tintColor = UIColor.init(named: "_font05")
+                cell?.keyImg.image = UIImage.init(named: "iconKeyEmpty")
             }
             cell?.nameLabel.text = account.getDpName()
             cell?.address.text = account.account_address
-            WUtils.showCoinDp(userChainConfig.stakeDenom, account.account_last_total, cell!.amountDenom, cell!.amount, userChainConfig.chainType)
+            cell?.amount.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.amount.font, 0, 6)
+            WUtils.setDenomTitle(userChain, cell!.amountDenom)
             return cell!
         }
     }

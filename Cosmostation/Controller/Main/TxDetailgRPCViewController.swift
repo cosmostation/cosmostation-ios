@@ -123,7 +123,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
             
         } else {
             //TODO temp added
-            self.onFetchgRPCTx(mTxHash!)
+//            self.onFetchgRPCTx(mTxHash!)
         }
     }
     
@@ -164,117 +164,117 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
             let msg = mTxRespose!.tx.body.messages[indexPath.row - 1]
             if (msg.typeURL.contains(Cosmos_Bank_V1beta1_MsgSend.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxTransferCell") as? TxTransferCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1, account!.account_address)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1, account!.account_address)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmos_Staking_V1beta1_MsgDelegate.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxDelegateCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmos_Staking_V1beta1_MsgUndelegate.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxUndelegateCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmos_Staking_V1beta1_MsgBeginRedelegate.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxRedelegateCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxRewardCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCommissionCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmos_Distribution_V1beta1_MsgSetWithdrawAddress.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxEditRewardAddressCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmos_Gov_V1beta1_MsgVote.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxVoteCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             }
             
             else if (msg.typeURL.contains(Ibc_Applications_Transfer_V1_MsgTransfer.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIbcSendCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Ibc_Core_Channel_V1_MsgRecvPacket.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIbcReceiveCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Ibc_Core_Client_V1_MsgUpdateClient.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIbcUpdateClientCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Ibc_Core_Channel_V1_MsgAcknowledgement.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIbcAcknowledgeCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
             }
             
             else if (msg.typeURL.contains(Starnamed_X_Starname_V1beta1_MsgRegisterDomain.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxRegisterDomainCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Starnamed_X_Starname_V1beta1_MsgRegisterAccount.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxRegisterAccountCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Starnamed_X_Starname_V1beta1_MsgDeleteDomain.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxDeleteDomainCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Starnamed_X_Starname_V1beta1_MsgDeleteAccount.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxDeleteAccountCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Starnamed_X_Starname_V1beta1_MsgRenewDomain.protoMessageName) || msg.typeURL.contains(Starnamed_X_Starname_V1beta1_MsgRenewAccount.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxRenewStarnameCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Starnamed_X_Starname_V1beta1_MsgReplaceAccountResources.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxReplaceResourceCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             }
             
             else if (msg.typeURL.contains(Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCreatePoolCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgJoinPool.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxJoinPoolCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgExitPool.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxExitPoolCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn.protoMessageName) || msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgSwapExactAmountOut.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxTokenSwapCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Osmosis_Gamm_V1beta1_MsgJoinSwapExternAmountIn.protoMessageName)) {
@@ -289,171 +289,171 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
             
             else if (msg.typeURL.contains(Osmosis_Lockup_MsgLockTokens.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxLockTokenCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL == ("/" + Osmosis_Lockup_MsgBeginUnlocking.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxBeginUnlockTokenCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL == ("/" + Osmosis_Lockup_MsgBeginUnlockingAll.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxBeginUnlockAllTokensCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
             }
             
             else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgAddLiquidity.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifAddLpCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgRemoveLiquidity.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifRemoveLpCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Sifnode_Clp_V1_MsgSwap.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSifSwapCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             }
             
             else if (msg.typeURL.contains(Irismod_Nft_MsgIssueDenom.protoMessageName) || msg.typeURL.contains(Chainmain_Nft_V1_MsgIssueDenom.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIssueNFTDenomCell") as? TxIssueNFTDenomCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Irismod_Nft_MsgMintNFT.protoMessageName) || msg.typeURL.contains(Chainmain_Nft_V1_MsgMintNFT.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIssueNFTCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Irismod_Nft_MsgTransferNFT.protoMessageName) || msg.typeURL.contains(Chainmain_Nft_V1_MsgTransferNFT.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSendNFTCell") as? TxSendNFTCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1, account!.account_address)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1, account!.account_address)
                 return cell!
                 
             }
             
             else if (msg.typeURL.contains(Desmos_Profiles_V1beta1_MsgSaveProfile.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSaveProfileCell") as? TxSaveProfileCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Desmos_Profiles_V1beta1_MsgLinkChainAccount.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxLinkAccountCell") as? TxLinkAccountCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             }
             
             else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgCreateCDP.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpCreateCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgDeposit.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpDepositCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgWithdraw.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpWithdrawCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgDrawDebt.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpBorrowCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgRepayDebt.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpRepayCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Cdp_V1beta1_MsgLiquidate.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxCdpLiquidateCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Hard_V1beta1_MsgDeposit.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardDepositCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Hard_V1beta1_MsgWithdraw.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardWithdrawCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Hard_V1beta1_MsgBorrow.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardBorrowCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Hard_V1beta1_MsgRepay.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardRepayCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Hard_V1beta1_MsgLiquidate.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxHardLiquidateCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Swap_V1beta1_MsgDeposit.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapDepositCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Swap_V1beta1_MsgWithdraw.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapWithdrawCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Swap_V1beta1_MsgSwapExactForTokens.protoMessageName) || msg.typeURL.contains(Kava_Swap_V1beta1_MsgSwapExactForTokensResponse.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxSwapTokenCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimUSDXMintingReward.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveMintingCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimHardReward.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveHardCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimDelegatorReward.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveDelegatorCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Kava_Incentive_V1beta1_MsgClaimSwapReward.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxIncentiveSwapCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             }
             
             else if (msg.typeURL.contains(Cosmwasm_Wasm_V1_MsgStoreCode.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxStoreContractCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmwasm_Wasm_V1_MsgInstantiateContract.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxInstantContractCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             } else if (msg.typeURL.contains(Cosmwasm_Wasm_V1_MsgExecuteContract.protoMessageName)) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TxExeContractCell") as? TxCell
-                cell?.onBindMsg(chainType!, mTxRespose!, indexPath.row - 1)
+                cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
                 return cell!
                 
             }
@@ -515,7 +515,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     
     @IBAction func onClickShare(_ sender: UIButton) {
         if (self.errorLayer.isHidden) {
-            let link = WUtils.getTxExplorer(self.chainType!, self.mTxHash!)
+            let link = WUtils.getTxExplorer(chainConfig, self.mTxHash!)
             let textToShare = [ link ]
             let activityViewController = UIActivityViewController(activityItems: textToShare, applicationActivities: nil)
             activityViewController.popoverPresentationController?.sourceView = self.view
@@ -524,7 +524,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        let link = WUtils.getTxExplorer(self.chainType!, self.mTxHash!)
+        let link = WUtils.getTxExplorer(chainConfig, self.mTxHash!)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }

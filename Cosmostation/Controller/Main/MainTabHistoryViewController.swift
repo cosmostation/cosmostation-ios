@@ -117,8 +117,11 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
         self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
         if (account?.account_has_private == true) {
-            self.totalKeyState.image = totalKeyState.image?.withRenderingMode(.alwaysTemplate)
+            self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
+            self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
             self.totalKeyState.tintColor = chainConfig?.chainColor
+        } else {
+            self.totalKeyState.image = UIImage.init(named: "iconKeyEmpty")
         }
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
@@ -218,19 +221,10 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             self.onShowSafariWeb(url)
             
         } else {
-//            let history = mApiCustomNewHistories[indexPath.row]
-//            let link = WUtils.getTxExplorer(self.chainType!, history.data!.txhash!)
-//            guard let url = URL(string: link) else { return }
-//            self.onShowSafariWeb(url)
-            
-            //TODO temp added
             let history = mApiCustomNewHistories[indexPath.row]
-            let txDetailVC = TxDetailgRPCViewController(nibName: "TxDetailgRPCViewController", bundle: nil)
-            txDetailVC.mIsGen = false
-            txDetailVC.mTxHash = history.data!.txhash!
-            self.navigationItem.title = ""
-            self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
-            self.navigationController?.pushViewController(txDetailVC, animated: true)
+            let link = WUtils.getTxExplorer(chainConfig, history.data!.txhash!)
+            guard let url = URL(string: link) else { return }
+            self.onShowSafariWeb(url)
         }
     }
     
@@ -315,12 +309,15 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     
-    @IBAction func onClickSwitchAccount(_ sender: Any) {
-        self.mainTabVC.onShowAccountSwicth()
+    @IBAction func onClickSwitchAccount(_ sender: UIButton) {
+        sender.isUserInteractionEnabled = false
+        self.mainTabVC.onShowAccountSwicth {
+            sender.isUserInteractionEnabled = true
+        }
     }
     
     @IBAction func onClickExplorer(_ sender: UIButton) {
-        let link = WUtils.getAccountExplorer(chainType!, account!.account_address)
+        let link = WUtils.getAccountExplorer(chainConfig, account!.account_address)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
     }
@@ -370,7 +367,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, WUtils.getWalletName(account))
+        self.shareAddress(account!.account_address, account?.getDpName())
     }
     
 }

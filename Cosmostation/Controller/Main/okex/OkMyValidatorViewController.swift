@@ -22,6 +22,7 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.mMyValidator = BaseData.instance.mMyValidator
         self.sortOkValidator()
         
@@ -121,7 +122,7 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.powerLabel.attributedText =  WUtils.displayAmount2(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
             cell?.commissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.commissionLabel.font)
             cell?.cardView.backgroundColor = TRANS_BG_COLOR_OK
-            if let url = URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address)) {
+            if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operator_address)) {
                 cell?.validatorImg.af_setImage(withURL: url)
             }
             return cell!

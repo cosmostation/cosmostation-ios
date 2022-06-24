@@ -23,6 +23,7 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory().getChainConfig(chainType)
         self.mTopValidator = BaseData.instance.mTopValidator
         self.mMyValidator = BaseData.instance.mMyValidator
         self.sortOkValidator()
@@ -95,7 +96,7 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         } else {
             cell?.cardView.backgroundColor = UIColor.init(named: "_card_bg")
         }
-        if let url = URL(string: WUtils.getMonikerImgUrl(chainType!, validator.operator_address)) {
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operator_address)) {
             cell?.validatorImg.af_setImage(withURL: url)
         }
         return cell!

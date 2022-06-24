@@ -31,9 +31,9 @@ class TxCreatePoolCell: TxCell {
         txPoolAsset2AmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainType, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = WUtils.getChainColor(chain)
+        txIcon.tintColor = chain.chainColor
         
         let msg = try! Osmosis_Gamm_Balancer_V1beta1_MsgCreateBalancerPool.init(serializedData: response.tx.body.messages[position].value)
         txSenderLabel.text = msg.sender
@@ -45,8 +45,8 @@ class TxCreatePoolCell: TxCell {
         let coin0 = Coin.init(msg.poolAssets[0].token.denom, msg.poolAssets[0].token.amount)
         let coin1 = Coin.init(msg.poolAssets[1].token.denom, msg.poolAssets[1].token.amount)
         
-        WUtils.showCoinDp(coin0, txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain)
-        WUtils.showCoinDp(coin1, txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain)
+        WUtils.showCoinDp(coin0, txPoolAsset1DenomLabel, txPoolAsset1AmountLabel, chain.chainType)
+        WUtils.showCoinDp(coin1, txPoolAsset2DenomLabel, txPoolAsset2AmountLabel, chain.chainType)
         
         txPoolFutureGovernaceLabel.text = msg.futurePoolGovernor
         

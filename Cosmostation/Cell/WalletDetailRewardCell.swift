@@ -24,7 +24,7 @@ class WalletDetailRewardCell: UITableViewCell {
     }
     
     func onBindView(_ chainConfig: ChainConfig, _ account: Account, _ rewardAddress: String?) {
-        rootView.backgroundColor = WUtils.getChainBg(chainConfig.chainType)
+        rootView.backgroundColor = chainConfig.chainColorBG
         rewardAddressLabel.text = rewardAddress
         rewardAddressLabel.adjustsFontSizeToFitWidth = true
         if (account.account_address != rewardAddress) {

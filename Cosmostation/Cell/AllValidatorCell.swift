@@ -46,7 +46,7 @@ class AllValidatorCell: UITableViewCell {
         let chainType = chainConfig!.chainType
         powerLabel.attributedText =  WUtils.displayAmount2(validator.tokens, powerLabel.font, WUtils.mainDivideDecimal(chainType), 6)
         commissionLabel.attributedText = WUtils.getDpEstAprCommission(commissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), chainType)
-        if let url = URL(string: WUtils.getMonikerImgUrl(chainType, validator.operatorAddress)) {
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
             validatorImg.af_setImage(withURL: url)
         }
         
