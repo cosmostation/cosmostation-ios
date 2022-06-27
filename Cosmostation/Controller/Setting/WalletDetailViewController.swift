@@ -16,8 +16,12 @@ import NIO
 class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, PasswordViewDelegate {
     
     @IBOutlet weak var walletDetailListTableView: UITableView!
-    @IBOutlet weak var importActionView: UIStackView!
-    @IBOutlet weak var checkActionView: UIStackView!
+//    @IBOutlet weak var importActionView: UIStackView!
+//    @IBOutlet weak var checkActionView: UIStackView!
+    @IBOutlet weak var btnImportPKey: UIButton!
+    @IBOutlet weak var btnImportMnemonic: UIButton!
+    @IBOutlet weak var btnCheckPkey: UIButton!
+    @IBOutlet weak var btnCheckMnemonic: UIButton!
     
     var selectedAccount: Account!
     var selectedChainType: ChainType!
@@ -48,9 +52,17 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         if (selectedAccount.account_has_private) {
-            self.checkActionView.isHidden = false
+            self.btnImportPKey.isHidden = true
+            self.btnImportMnemonic.isHidden = true
+            self.btnCheckPkey.isHidden = false
+            self.btnCheckMnemonic.isHidden = false
+            
         } else {
-            self.importActionView.isHidden = false
+            self.btnImportPKey.isHidden = false
+            self.btnImportMnemonic.isHidden = false
+            self.btnCheckPkey.isHidden = true
+            self.btnCheckMnemonic.isHidden = true
+            
         }
     }
     
@@ -222,6 +234,11 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     
     var option: Int?
     @IBAction func onClickCheckMenmonic(_ sender: UIButton) {
+        if (!selectedAccount.account_from_mnemonic) {
+            self.onShowToast(NSLocalizedString("error_no_mnemonic", comment: ""))
+            return
+        }
+        
         self.option = 1
         let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
         self.navigationItem.title = ""

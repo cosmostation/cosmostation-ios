@@ -12,8 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletDetailViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="checkActionView" destination="VRf-gq-V1b" id="d4s-FG-XCO"/>
-                <outlet property="importActionView" destination="dRo-H3-3BR" id="gem-jx-hif"/>
+                <outlet property="btnCheckMnemonic" destination="7YT-6H-gLA" id="BKp-Vj-bgI"/>
+                <outlet property="btnCheckPkey" destination="MxZ-HF-5CB" id="UTy-aj-nDe"/>
+                <outlet property="btnImportMnemonic" destination="eBb-v7-e4l" id="RI7-ye-Pey"/>
+                <outlet property="btnImportPKey" destination="4Ba-OU-4vB" id="eD3-VS-gxS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="walletDetailListTableView" destination="yH3-fh-dh8" id="BzH-8q-XaW"/>
             </connections>
@@ -30,41 +32,17 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojd-Vn-gHM">
                     <rect key="frame" x="0.0" y="674" width="390" height="120"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkh-oe-cma">
-                            <rect key="frame" x="16" y="70" width="358" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="SFb-Hv-TjH"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                            <state key="normal" title="Delete Wallet">
-                                <color key="titleColor" name="_warnRed"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="8"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" name="_warnRed"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="onClickDelete:" destination="-1" eventType="touchUpInside" id="Jhb-y7-joK"/>
-                            </connections>
-                        </button>
-                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="dRo-H3-3BR">
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uOe-A3-0xK">
                             <rect key="frame" x="16" y="12" width="358" height="50"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBb-v7-e4l">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lkh-oe-cma">
                                     <rect key="frame" x="0.0" y="0.0" width="175" height="50"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="KJW-Z7-PcT"/>
+                                        <constraint firstAttribute="height" constant="50" id="SFb-Hv-TjH"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                                    <state key="normal" title="Import Mnemonic">
-                                        <color key="titleColor" name="photon"/>
+                                    <state key="normal" title="Delete Wallet">
+                                        <color key="titleColor" name="_warnRed"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -74,65 +52,11 @@
                                             <real key="value" value="8"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" name="photon"/>
+                                            <color key="value" name="_warnRed"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
-                                        <action selector="onClickImportMenmonic:" destination="-1" eventType="touchUpInside" id="Rfb-qg-era"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ba-OU-4vB">
-                                    <rect key="frame" x="183" y="0.0" width="175" height="50"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="zvW-ex-uUV"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                                    <state key="normal" title="Import Private Key">
-                                        <color key="titleColor" name="photon"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="1"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="8"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" name="photon"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="onClickImportPrivateKey:" destination="-1" eventType="touchUpInside" id="Tyv-vX-ij1"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </stackView>
-                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="VRf-gq-V1b">
-                            <rect key="frame" x="16" y="12" width="358" height="50"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YT-6H-gLA">
-                                    <rect key="frame" x="0.0" y="0.0" width="175" height="50"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="MBH-Sq-8Wr"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                                    <state key="normal" title="Check Mnemonic">
-                                        <color key="titleColor" name="photon"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="1"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="8"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" name="photon"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="onClickCheckMenmonic:" destination="-1" eventType="touchUpInside" id="iRQ-GK-D01"/>
+                                        <action selector="onClickDelete:" destination="-1" eventType="touchUpInside" id="Jhb-y7-joK"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MxZ-HF-5CB">
@@ -159,22 +83,93 @@
                                         <action selector="onClickCheckPrivateKey:" destination="-1" eventType="touchUpInside" id="Y5Z-CJ-0rg"/>
                                     </connections>
                                 </button>
+                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ba-OU-4vB">
+                                    <rect key="frame" x="358" y="0.0" width="0.0" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="zvW-ex-uUV"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                    <state key="normal" title="Import Private Key">
+                                        <color key="titleColor" name="photon"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="8"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" name="photon"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="onClickImportPrivateKey:" destination="-1" eventType="touchUpInside" id="Tyv-vX-ij1"/>
+                                    </connections>
+                                </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </stackView>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBb-v7-e4l">
+                            <rect key="frame" x="16" y="70" width="358" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="KJW-Z7-PcT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                            <state key="normal" title="Import Mnemonic">
+                                <color key="titleColor" name="photon"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" name="photon"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickImportMenmonic:" destination="-1" eventType="touchUpInside" id="Rfb-qg-era"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YT-6H-gLA">
+                            <rect key="frame" x="16" y="70" width="358" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="MBH-Sq-8Wr"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                            <state key="normal" title="Check Mnemonic">
+                                <color key="titleColor" name="photon"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" name="photon"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickCheckMenmonic:" destination="-1" eventType="touchUpInside" id="iRQ-GK-D01"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="lkh-oe-cma" secondAttribute="bottom" id="3Hq-mq-iix"/>
-                        <constraint firstItem="lkh-oe-cma" firstAttribute="top" secondItem="VRf-gq-V1b" secondAttribute="bottom" constant="8" id="4Qo-6V-zCQ"/>
-                        <constraint firstItem="dRo-H3-3BR" firstAttribute="centerY" secondItem="VRf-gq-V1b" secondAttribute="centerY" id="CVH-Vy-bBT"/>
+                        <constraint firstAttribute="trailing" secondItem="uOe-A3-0xK" secondAttribute="trailing" constant="16" id="1nf-dZ-qdG"/>
+                        <constraint firstAttribute="trailing" secondItem="eBb-v7-e4l" secondAttribute="trailing" constant="16" id="4Ho-AZ-x4z"/>
+                        <constraint firstItem="7YT-6H-gLA" firstAttribute="top" secondItem="uOe-A3-0xK" secondAttribute="bottom" constant="8" id="D3W-ec-Sma"/>
+                        <constraint firstAttribute="trailing" secondItem="7YT-6H-gLA" secondAttribute="trailing" constant="16" id="Lew-8N-4rN"/>
                         <constraint firstAttribute="height" constant="120" id="M4x-1f-8Ip"/>
-                        <constraint firstItem="dRo-H3-3BR" firstAttribute="leading" secondItem="VRf-gq-V1b" secondAttribute="leading" id="aBr-st-KLT"/>
-                        <constraint firstAttribute="trailing" secondItem="lkh-oe-cma" secondAttribute="trailing" constant="16" id="c9N-Ox-ZJb"/>
-                        <constraint firstItem="lkh-oe-cma" firstAttribute="leading" secondItem="ojd-Vn-gHM" secondAttribute="leading" constant="16" id="eJR-7P-mNh"/>
-                        <constraint firstAttribute="trailing" secondItem="VRf-gq-V1b" secondAttribute="trailing" constant="16" id="jhq-F2-baI"/>
-                        <constraint firstItem="dRo-H3-3BR" firstAttribute="trailing" secondItem="VRf-gq-V1b" secondAttribute="trailing" id="kFa-6E-WAW"/>
-                        <constraint firstItem="VRf-gq-V1b" firstAttribute="leading" secondItem="ojd-Vn-gHM" secondAttribute="leading" constant="16" id="qk7-eX-r2n"/>
+                        <constraint firstItem="uOe-A3-0xK" firstAttribute="leading" secondItem="ojd-Vn-gHM" secondAttribute="leading" constant="16" id="aSV-ZK-tg0"/>
+                        <constraint firstItem="eBb-v7-e4l" firstAttribute="leading" secondItem="ojd-Vn-gHM" secondAttribute="leading" constant="16" id="b9F-e9-Cgq"/>
+                        <constraint firstAttribute="bottom" secondItem="eBb-v7-e4l" secondAttribute="bottom" id="ciP-EU-efu"/>
+                        <constraint firstAttribute="bottom" secondItem="7YT-6H-gLA" secondAttribute="bottom" id="nI2-Fl-0Gu"/>
+                        <constraint firstItem="7YT-6H-gLA" firstAttribute="leading" secondItem="ojd-Vn-gHM" secondAttribute="leading" constant="16" id="w7K-g0-nRM"/>
                     </constraints>
                 </view>
             </subviews>
@@ -197,7 +192,7 @@
             <color red="0.95300000905990601" green="0.097999997437000275" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
