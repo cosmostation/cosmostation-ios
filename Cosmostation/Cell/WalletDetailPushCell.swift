@@ -26,7 +26,8 @@ class WalletDetailPushCell: UITableViewCell {
     }
     
     func onBindView(_ chainConfig: ChainConfig, _ account: Account) {
-        pushSwitch.onTintColor = chainConfig.chainColorBG
+        rootView.backgroundColor = chainConfig.chainColorBG
+        pushSwitch.onTintColor = chainConfig.chainColor
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 DispatchQueue.main.async {
