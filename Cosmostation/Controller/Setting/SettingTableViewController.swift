@@ -185,7 +185,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             if hideBio {
                 return 0
             } else {
-                return 44
+                return 50
             }
         }
         return super.tableView(tableView, heightForRowAt: indexPath)
