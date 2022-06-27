@@ -3272,19 +3272,19 @@ public class WUtils {
             img?.image = UIImage(named: "chainCosmos")
         } else if (chain == ChainType.IRIS_MAIN) {
             label.text = NSLocalizedString("chain_title_iris", comment: "")
-            img?.image = UIImage(named: "irisWh")
+            img?.image = UIImage(named: "chainIris")
         } else if (chain == ChainType.BINANCE_MAIN) {
             label.text = NSLocalizedString("chain_title_bnb", comment: "")
-            img?.image = UIImage(named: "binanceChImg")
+            img?.image = UIImage(named: "chainBinance")
         } else if (chain == ChainType.KAVA_MAIN) {
             label.text = NSLocalizedString("chain_title_kava", comment: "")
-           img?.image = UIImage(named: "kavaImg")
+           img?.image = UIImage(named: "chainKava")
         } else if (chain == ChainType.IOV_MAIN) {
             label.text = NSLocalizedString("chain_title_iov", comment: "")
-            img?.image = UIImage(named: "iovImg")
+            img?.image = UIImage(named: "chainStarname")
         } else if (chain == ChainType.BAND_MAIN) {
             label.text = NSLocalizedString("chain_title_band", comment: "")
-            img?.image = UIImage(named: "chainBandprotocal")
+            img?.image = UIImage(named: "chainBand")
         }
     }
     
@@ -3308,10 +3308,10 @@ public class WUtils {
     static func onDpSwapChain(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
         if (chain == ChainType.BINANCE_MAIN) {
             label.text = "BINANCE"
-            img?.image = UIImage(named: "binanceChImg")
+            img?.image = UIImage(named: "chainBinance")
         } else if (chain == ChainType.KAVA_MAIN) {
             label.text = "KAVA"
-           img?.image = UIImage(named: "kavaImg")
+           img?.image = UIImage(named: "chainKava")
         }
     }
     
