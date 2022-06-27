@@ -25,7 +25,7 @@ class ChainBand: ChainConfig {
     
     var stakeDenomImg = UIImage(named: "tokenBand")
     var stakeDenom = "uband"
-    var stakeSymbol = "Band"
+    var stakeSymbol = "BAND"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "band")!
     
