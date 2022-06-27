@@ -20,7 +20,7 @@ class ChainCertik: ChainConfig {
     var chainColorBG = UIColor(named: "certik_bg")!
     var chainTitle = "(Certik Mainnet)"
     var chainTitle2 = "CERTIK"
-    var chainDBName = "SUPPORT_CHAIN_CERTIK_MAIN"
+    var chainDBName = CHAIN_CERTIK_S
     var chainAPIName = "certik"
     
     var stakeDenomImg = UIImage(named: "tokenCertik")

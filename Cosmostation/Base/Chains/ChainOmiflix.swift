@@ -20,7 +20,7 @@ class ChainOmniflix: ChainConfig {
     var chainColorBG = UIColor(named: "omniflix_bg")!
     var chainTitle = "(Omniflix Mainnet)"
     var chainTitle2 = "OMNIFLIX"
-    var chainDBName = "SUPPORT_CHAIN_OMNIFLIX"
+    var chainDBName = CHAIN_OMNIFLIX_S
     var chainAPIName = "flix"
     
     var stakeDenomImg = UIImage(named: "tokenOmniflix")

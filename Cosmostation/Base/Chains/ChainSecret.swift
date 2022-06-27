@@ -20,7 +20,7 @@ class ChainSecret: ChainConfig {
     var chainColorBG = UIColor(named: "secret_bg")!
     var chainTitle = "(Secret Mainnet)"
     var chainTitle2 = "SECRET"
-    var chainDBName = "SUPPORT_CHAIN_SECRET_MAIN"
+    var chainDBName = CHAIN_SECRET_S
     var chainAPIName = "secret"
     
     var stakeDenomImg = UIImage(named: "tokenSecret")

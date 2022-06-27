@@ -82,7 +82,7 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         if (tableView == displayingChainTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"EditDisplayChainCell") as? EditDisplayChainCell
             let chainType = displayedChains[indexPath.row]
-            let chainConfig = ChainFactory().getChainConfig(chainType)
+            let chainConfig = ChainFactory.getChainConfig(chainType)
             cell?.chainCardView.backgroundColor = chainConfig?.chainColorBG
             cell?.chainImgView.image = chainConfig?.chainImg
             cell?.chainTitleLabel.text = chainConfig?.chainTitle2
@@ -93,7 +93,7 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"EditHideChainCell") as? EditHideChainCell
             let chainType = hidedChains[indexPath.row]
-            let chainConfig = ChainFactory().getChainConfig(chainType)
+            let chainConfig = ChainFactory.getChainConfig(chainType)
             cell?.chainCardView.backgroundColor = chainConfig?.chainColorBG
             cell?.chainImgView.image = chainConfig?.chainImg
             cell?.chainTitleLabel.text = chainConfig?.chainTitle2

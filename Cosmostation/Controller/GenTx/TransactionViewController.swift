@@ -66,7 +66,7 @@ class TransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mAccount = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        mUserChain = WUtils.getChainType(mAccount!.account_base_chain)
+        mUserChain = ChainFactory.getChainType(mAccount!.account_base_chain)
         
         if (mType == TASK_TYPE_DELEGATE) {
             stepDescription.text = NSLocalizedString("delegate_step_1", comment: "")

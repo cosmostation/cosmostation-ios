@@ -34,8 +34,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
 
         self.walletTableView.delegate = self
         self.walletTableView.dataSource = self
@@ -92,8 +92,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.titleChainImg.image = chainConfig?.chainImg
         self.titleChainName.text = chainConfig?.chainTitle

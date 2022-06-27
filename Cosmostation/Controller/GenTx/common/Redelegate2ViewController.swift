@@ -25,7 +25,7 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
-        chainConfig = ChainFactory().getChainConfig(pageHolderVC.chainType!)
+        chainConfig = ChainFactory.getChainConfig(pageHolderVC.chainType!)
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         
         self.redelegateToValTableView.delegate = self

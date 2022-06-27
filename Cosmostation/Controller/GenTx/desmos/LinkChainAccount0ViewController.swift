@@ -30,8 +30,8 @@ class LinkChainAccount0ViewController: BaseViewController, SBCardPopupDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.selectedChain = WUtils.getDesmosAirDropChains()[0]
@@ -46,7 +46,7 @@ class LinkChainAccount0ViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func updateView() {
-        let selectedChainConfig = ChainFactory().getChainConfig(selectedChain)
+        let selectedChainConfig = ChainFactory.getChainConfig(selectedChain)
         toAddChainImg.image = selectedChainConfig?.chainImg
         toAddChainLabel.text = selectedChainConfig?.chainTitle2
         

@@ -20,7 +20,7 @@ class ChainLum: ChainConfig {
     var chainColorBG = UIColor(named: "lum_bg")!
     var chainTitle = "(Lum Mainnet)"
     var chainTitle2 = "LUM"
-    var chainDBName = "SUPPORT_CHAIN_LUM"
+    var chainDBName = CHAIN_LUM_S
     var chainAPIName = "lum"
     
     var stakeDenomImg = UIImage(named: "tokenLum")

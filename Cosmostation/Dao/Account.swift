@@ -103,11 +103,11 @@ public class Account : NSObject, Codable, NSItemProviderReading, NSItemProviderW
         
     }
     
+    var account_balances = Array<Balance>()
+    
     func getPrivateKeySha1() -> String {
         return (account_uuid + "privateKey").sha1()
     }
-    
-    var account_balances = Array<Balance>()
     
     func getDpName() -> String {
         var nickName:String?
@@ -128,17 +128,6 @@ public class Account : NSObject, Codable, NSItemProviderReading, NSItemProviderW
         for balance in self.account_balances {
             if (balance.balance_denom == symbol) {
                 result = WUtils.plainStringToDecimal(balance.balance_amount)
-            }
-        }
-        return result
-    }
-
-    func getTokenCoin(_ symbol:String) -> Coin {
-        var result = Coin.init()
-        for balance in self.account_balances {
-            if (balance.balance_denom == symbol) {
-                result.amount = balance.balance_amount
-                result.denom = balance.balance_denom
             }
         }
         return result

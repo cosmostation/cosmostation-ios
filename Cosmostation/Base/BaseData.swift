@@ -531,7 +531,7 @@ final class BaseData : NSObject{
     
     func getRecentAccountId() -> Int64 {
         let account = selectAccountById(id: Int64(UserDefaults.standard.integer(forKey: KEY_RECENT_ACCOUNT)))
-        let chainType = WUtils.getChainType(account!.account_base_chain)!
+        let chainType = ChainFactory.getChainType(account!.account_base_chain)!
         if (dpSortedChains().contains(chainType))  {
             return Int64(UserDefaults.standard.integer(forKey: KEY_RECENT_ACCOUNT))
             
@@ -550,7 +550,7 @@ final class BaseData : NSObject{
     }
     
     func getRecentChain() -> ChainType {
-        let chain = WUtils.getChainType(UserDefaults.standard.string(forKey: KEY_RECENT_CHAIN_S) ?? CHAIN_COSMOS_S)!
+        let chain = ChainFactory.getChainType(UserDefaults.standard.string(forKey: KEY_RECENT_CHAIN_S) ?? CHAIN_COSMOS_S)!
         if (userSortedChains().contains(chain)) {
             return chain
         } else {
@@ -786,7 +786,7 @@ final class BaseData : NSObject{
         }
         var sorted = Array<ChainType>()
         getUserSortedChainS()?.forEach({ chainName in
-            if let checkChain = WUtils.getChainType(chainName) {
+            if let checkChain = ChainFactory.getChainType(chainName) {
                 if (result.contains(checkChain) == true) {
                     sorted.append(checkChain)
                 }
@@ -817,7 +817,7 @@ final class BaseData : NSObject{
         let rawDpChains = userDisplayChains()
         let orderedChainS = getUserHiddenChains()
         orderedChainS?.forEach({ chainS in
-            if let checkChain = WUtils.getChainType(chainS) {
+            if let checkChain = ChainFactory.getChainType(chainS) {
                 if (rawDpChains.contains(checkChain) == true) {
                     result.append(checkChain)
                 }
@@ -837,7 +837,7 @@ final class BaseData : NSObject{
         let rawDpChains = userDisplayChains()
         let orderedChainS = getUserHiddenChains()
         orderedChainS?.forEach({ chainS in
-            if let checkChain = WUtils.getChainType(chainS) {
+            if let checkChain = ChainFactory.getChainType(chainS) {
                 if (rawDpChains.contains(checkChain) == true) {
                     result.append(checkChain)
                 }
@@ -863,7 +863,7 @@ final class BaseData : NSObject{
         var result = Array<ChainType>()
         let expendedChainS = UserDefaults.standard.stringArray(forKey: KEY_USER_EXPENDED_CHAINS) ?? []
         expendedChainS.forEach({ chainS in
-            if let checkChain = WUtils.getChainType(chainS) {
+            if let checkChain = ChainFactory.getChainType(chainS) {
                 result.append(checkChain)
             }
         })
@@ -1055,7 +1055,7 @@ final class BaseData : NSObject{
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()
         for account in allAccounts {
-            if (WUtils.getChainType(account.account_base_chain) == chain) {
+            if (ChainFactory.getChainType(account.account_base_chain) == chain) {
                 result.append(account)
             }
         }
@@ -1066,7 +1066,7 @@ final class BaseData : NSObject{
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()
         for account in allAccounts {
-            if (WUtils.getChainType(account.account_base_chain) == chain && account.account_has_private == true) {
+            if (ChainFactory.getChainType(account.account_base_chain) == chain && account.account_has_private == true) {
                 result.append(account)
             }
         }
@@ -1077,7 +1077,7 @@ final class BaseData : NSObject{
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()
         for account in allAccounts {
-            if (WUtils.getChainType(account.account_base_chain) == chain && account.account_has_private) {
+            if (ChainFactory.getChainType(account.account_base_chain) == chain && account.account_has_private) {
                 if (chain == ChainType.BINANCE_MAIN) {
                     if (WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue >= 0) {
                         result.append(account)
@@ -1367,8 +1367,8 @@ final class BaseData : NSObject{
     public func setPkeyUpdate(_ account :Account, _ wordSeedPairs: Array<WordSeedPair>) {
         if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
             let seed = wordSeedPairs.filter { $0.word == words }.first!.seed
-            let chainType = WUtils.getChainType(account.account_base_chain)!
-            let chainConfig = ChainFactory().getChainConfig(chainType)!
+            let chainType = ChainFactory.getChainType(account.account_base_chain)!
+            let chainConfig = ChainFactory.getChainConfig(chainType)!
             let fullPath = chainConfig.getHdPath(Int(account.account_custom_path), Int(account.account_path)!)
             let pKey = WKey.getPrivateKeyDataFromSeed(seed, fullPath)
             KeychainWrapper.standard.set(pKey.hexEncodedString(), forKey: account.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)

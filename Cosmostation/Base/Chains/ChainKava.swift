@@ -20,7 +20,7 @@ class ChainKava: ChainConfig {
     var chainColorBG = UIColor(named: "kava_bg")!
     var chainTitle = "(Kava Mainnet)"
     var chainTitle2 = "KAVA"
-    var chainDBName = "SUPPORT_CHAIN_KAVA_MAIN"
+    var chainDBName = CHAIN_KAVA_S
     var chainAPIName = "kava"
     
     var stakeDenomImg = UIImage(named: "tokenKava")

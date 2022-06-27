@@ -20,7 +20,7 @@ class ChainCrescent: ChainConfig {
     var chainColorBG = UIColor(named: "crescent_bg")!
     var chainTitle = "(Crescent Mainnet)"
     var chainTitle2 = "CRESCENT"
-    var chainDBName = "SUPPORT_CHAIN_CRESENT"
+    var chainDBName = CHAIN_CRESENT_S
     var chainAPIName = "crescent"
     
     var stakeDenomImg = UIImage(named: "tokenCrescent")

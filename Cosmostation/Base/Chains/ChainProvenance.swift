@@ -20,7 +20,7 @@ class ChainProvenance: ChainConfig {
     var chainColorBG = UIColor(named: "provenance_bg")!
     var chainTitle = "(Provenance Mainnet)"
     var chainTitle2 = "PROVENANCE"
-    var chainDBName = "SUPPORT_CHAIN_PROVENANCE"
+    var chainDBName = CHAIN_PROVENANCE_S
     var chainAPIName = "provenance"
     
     var stakeDenomImg = UIImage(named: "tokenProvenance")

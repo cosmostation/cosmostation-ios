@@ -32,7 +32,7 @@ class WalletConnectViewController: BaseViewController, SBCardPopupDelegate {
         super.viewDidLoad()
         self.wcWaitting.onStartAnimation()
         account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        chainType = WUtils.getChainType(account!.account_base_chain)
+        chainType = ChainFactory.getChainType(account!.account_base_chain)
     }
     
     override func viewWillAppear(_ animated: Bool) {

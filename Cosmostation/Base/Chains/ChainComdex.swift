@@ -20,7 +20,7 @@ class ChainComdex: ChainConfig {
     var chainColorBG = UIColor(named: "comdex_bg")!
     var chainTitle = "(Comdex Mainnet)"
     var chainTitle2 = "COMDEX"
-    var chainDBName = "SUPPORT_CHAIN_COMDEX"
+    var chainDBName = CHAIN_COMDEX_S
     var chainAPIName = "comdex"
     
     var stakeDenomImg = UIImage(named: "tokenComdex")

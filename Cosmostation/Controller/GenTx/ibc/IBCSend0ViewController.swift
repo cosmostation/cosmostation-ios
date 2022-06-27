@@ -35,8 +35,8 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.ibcSendDenom = self.pageHolderVC.mIBCSendDenom
         
@@ -82,7 +82,7 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
         self.fromChainTxt.text = chainConfig?.chainTitle2
         
         let toChain = WUtils.getChainTypeByChainId(ibcSelectedChain.chain_id)
-        let toChainConfig = ChainFactory().getChainConfig(toChain)
+        let toChainConfig = ChainFactory.getChainConfig(toChain)
         self.toChainImg.image = toChainConfig?.chainImg
         self.toChainText.text = toChainConfig?.chainTitle2
         

@@ -20,7 +20,7 @@ class ChainCosmos: ChainConfig {
     var chainColorBG = UIColor(named: "cosmos_bg")!
     var chainTitle = "(Cosmos Mainnet)"
     var chainTitle2 = "COSMOS"
-    var chainDBName = "SUPPORT_CHAIN_COSMOS_MAIN"
+    var chainDBName = CHAIN_COSMOS_S
     var chainAPIName = "cosmos"
     
     

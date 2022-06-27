@@ -30,8 +30,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func viewDidLoad() {
         super.viewDidLoad()
         mAccount = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        chainType = WUtils.getChainType(mAccount.account_base_chain)
-        chainConfig = ChainFactory().getChainConfig(chainType)
+        chainType = ChainFactory.getChainType(mAccount.account_base_chain)
+        chainConfig = ChainFactory.getChainConfig(chainType)
         
         if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
             self.versionLabel.text = "v " + appVersion

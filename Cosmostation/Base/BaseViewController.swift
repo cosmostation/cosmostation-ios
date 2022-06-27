@@ -141,7 +141,7 @@ class BaseViewController: UIViewController {
     
     func onSelectNextAccount() {
         if let nextAccount = BaseData.instance.selectAllAccounts().first {
-            let nextChainType = WUtils.getChainType(nextAccount.account_base_chain)!
+            let nextChainType = ChainFactory.getChainType(nextAccount.account_base_chain)!
             BaseData.instance.setRecentAccountId(nextAccount.account_id)
             BaseData.instance.setRecentChain(nextChainType)
             

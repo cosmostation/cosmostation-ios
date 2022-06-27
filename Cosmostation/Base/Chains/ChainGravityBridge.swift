@@ -20,7 +20,7 @@ class ChainGravityBridge: ChainConfig {
     var chainColorBG = UIColor(named: "gravitybridge_bg")!
     var chainTitle = "(G-Bridge Mainnet)"
     var chainTitle2 = "G-BRIDGE"
-    var chainDBName = "SUPPORT_CHAIN_GRAVITY_BRIDGE"
+    var chainDBName = CHAIN_GRAVITY_BRIDGE_S
     var chainAPIName = "gravity-bridge"
     
     var stakeDenomImg = UIImage(named: "tokenGravityBridge")

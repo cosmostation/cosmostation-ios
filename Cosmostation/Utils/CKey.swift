@@ -39,7 +39,7 @@ class CKey {
     
     static func getHDKeyFromWords(_ m: [String], _ account:Account) -> PrivateKey {
         let masterKey = getMasterKeyFromWords(m)
-        let chainType = WUtils.getChainType(account.account_base_chain)
+        let chainType = ChainFactory.getChainType(account.account_base_chain)
         
         if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.IRIS_MAIN || chainType == ChainType.CERTIK_MAIN || chainType == ChainType.AKASH_MAIN ||
             chainType == ChainType.SENTINEL_MAIN || chainType == ChainType.SIF_MAIN || chainType == ChainType.KI_MAIN || chainType == ChainType.OSMOSIS_MAIN ||

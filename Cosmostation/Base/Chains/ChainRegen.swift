@@ -20,7 +20,7 @@ class ChainRegen: ChainConfig {
     var chainColorBG = UIColor(named: "regen_bg")!
     var chainTitle = "(Regen Mainnet)"
     var chainTitle2 = "REGEN"
-    var chainDBName = "SUPPORT_CHAIN_REGEN"
+    var chainDBName = CHAIN_REGEN_S
     var chainAPIName = "regen"
     
     var stakeDenomImg = UIImage(named: "tokenRegen")

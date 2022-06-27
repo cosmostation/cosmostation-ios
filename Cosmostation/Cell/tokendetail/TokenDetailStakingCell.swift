@@ -34,7 +34,7 @@ class TokenDetailStakingCell: UITableViewCell {
     }
     
     func onBindStakingToken(_ chainType: ChainType) {
-        let chainConfig = ChainFactory().getChainConfig(chainType)
+        let chainConfig = ChainFactory.getChainConfig(chainType)
         let stakingDenom = WUtils.getMainDenom(chainType)
         let stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         let stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)

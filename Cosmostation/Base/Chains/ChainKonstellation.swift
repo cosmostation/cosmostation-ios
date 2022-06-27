@@ -20,7 +20,7 @@ class ChainKonstellation: ChainConfig {
     var chainColorBG = UIColor(named: "konstellation_bg")!
     var chainTitle = "(Konstellation Mainnet)"
     var chainTitle2 = "KONSTELLATION"
-    var chainDBName = "SUPPORT_CHAIN_KONSTELLATION"
+    var chainDBName = CHAIN_KONSTELLATION_S
     var chainAPIName = "konstellation"
     
     var stakeDenomImg = UIImage(named: "tokenKonstellation")

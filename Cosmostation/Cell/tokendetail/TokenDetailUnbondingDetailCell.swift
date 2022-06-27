@@ -59,7 +59,7 @@ class TokenDetailUnbondingDetailCell: UITableViewCell {
     }
     
     func onBindUnbondingToken(_ chainType: ChainType) {
-        guard let chainConfig = ChainFactory().getChainConfig(chainType) else {
+        guard let chainConfig = ChainFactory.getChainConfig(chainType) else {
             return
         }
         unBondingCard.backgroundColor = chainConfig.chainColorBG

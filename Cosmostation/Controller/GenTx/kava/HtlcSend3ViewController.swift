@@ -37,7 +37,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -57,7 +57,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         
         //set Send layer's data
         sendImg.image = sendImg.image?.withRenderingMode(.alwaysTemplate)
-        sendImg.tintColor = ChainFactory().getChainConfig(chainType)?.chainColor
+        sendImg.tintColor = ChainFactory.getChainConfig(chainType)?.chainColor
         WUtils.setDenomTitle(chainType, sendFeeDenom)
         if (chainType == ChainType.BINANCE_MAIN) {
             mDpDecimal = 8;
@@ -102,7 +102,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         
         //set Claim layer's data
         claimImg.image = claimImg.image?.withRenderingMode(.alwaysTemplate)
-        claimImg.tintColor = ChainFactory().getChainConfig(pageHolderVC.mHtlcToChain)?.chainColor
+        claimImg.tintColor = ChainFactory.getChainConfig(pageHolderVC.mHtlcToChain)?.chainColor
         if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
             receiveAmountDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()
             relayFeeDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()

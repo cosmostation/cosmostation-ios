@@ -20,7 +20,7 @@ class ChainCerberus: ChainConfig {
     var chainColorBG = UIColor(named: "cerberus_bg")!
     var chainTitle = "(Cerberus Mainnet)"
     var chainTitle2 = "CERBERUS"
-    var chainDBName = "SUPPORT_CHAIN_CERBERUS"
+    var chainDBName = CHAIN_CERBERUS_S
     var chainAPIName = "cerberus"
     
     var stakeDenomImg = UIImage(named: "tokenCerberus")

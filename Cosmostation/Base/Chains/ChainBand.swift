@@ -20,7 +20,7 @@ class ChainBand: ChainConfig {
     var chainColorBG = UIColor(named: "band_bg")!
     var chainTitle = "(Band Mainnet)"
     var chainTitle2 = "BAND"
-    var chainDBName = "SUPPORT_CHAIN_BAND_MAIN"
+    var chainDBName = CHAIN_BAND_S
     var chainAPIName = "band"
     
     var stakeDenomImg = UIImage(named: "tokenBand")

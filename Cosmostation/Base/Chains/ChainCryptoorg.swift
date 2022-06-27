@@ -20,7 +20,7 @@ class ChainCryptoorg: ChainConfig {
     var chainColorBG = UIColor(named: "cryptoorg_bg")!
     var chainTitle = "(Crypto.org Mainnet)"
     var chainTitle2 = "CRYPTO.ORG"
-    var chainDBName = "SUPPORT_CHAIN_CRYTO_MAIN"
+    var chainDBName = CHAIN_CRYPTO_S
     var chainAPIName = "cryptoorg"
     
     var stakeDenomImg = UIImage(named: "tokenCryptoorg")

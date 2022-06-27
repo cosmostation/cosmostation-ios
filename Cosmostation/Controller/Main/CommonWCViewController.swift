@@ -55,9 +55,9 @@ class CommonWCViewController: BaseViewController {
         
         if (!isDeepLink && !isDapp) {
             account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-            chainType = WUtils.getChainType(account!.account_base_chain)
+            chainType = ChainFactory.getChainType(account!.account_base_chain)
             baseChain = WUtils.getChainDBName(chainType)
-            chainConfig = ChainFactory().getChainConfig(chainType)
+            chainConfig = ChainFactory.getChainConfig(chainType)
             accountMap[baseChain] = account
         }
         
@@ -687,7 +687,7 @@ extension CommonWCViewController: SBCardPopupDelegate {
             }
             
         } else if (type == SELECT_POPUP_KEPLR_GET_ACCOUNT) {
-            if let chainName = wcRequestChainName, let chainType = WUtils.getChainType(chainName) {
+            if let chainName = wcRequestChainName, let chainType = ChainFactory.getChainType(chainName) {
                 let selectedAccount = BaseData.instance.selectAllAccountsByChainWithKey(chainType)[result]
                 if let peerMeta = self.wCPeerMeta {
                     self.onViewUpdate(peerMeta)
@@ -700,7 +700,7 @@ extension CommonWCViewController: SBCardPopupDelegate {
                 })
             }
         } else if (type == SELECT_POPUP_COSMOSTATION_GET_ACCOUNT) {
-            if let chainName = wcRequestChainName, let chainType = WUtils.getChainType(chainName) {
+            if let chainName = wcRequestChainName, let chainType = ChainFactory.getChainType(chainName) {
                 let selectedAccount = BaseData.instance.selectAllAccountsByChainWithKey(chainType)[result]
                 if let peerMeta = self.wCPeerMeta {
                     self.onViewUpdate(peerMeta)

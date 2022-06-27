@@ -20,7 +20,7 @@ class ChainInjective: ChainConfig {
     var chainColorBG = UIColor(named: "injective_bg")!
     var chainTitle = "(Injective Mainnet)"
     var chainTitle2 = "INJECTIVE"
-    var chainDBName = "SUPPORT_CHAIN_INJECTIVE"
+    var chainDBName = CHAIN_INJECTIVE_S
     var chainAPIName = "injective"
     
     var stakeDenomImg = UIImage(named: "tokenInjective")

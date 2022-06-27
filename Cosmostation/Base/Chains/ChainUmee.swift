@@ -20,7 +20,7 @@ class ChainUmee: ChainConfig {
     var chainColorBG = UIColor(named: "umee_bg")!
     var chainTitle = "(Umee Mainnet)"
     var chainTitle2 = "UMEE"
-    var chainDBName = "SUPPORT_CHAIN_UMEE"
+    var chainDBName = CHAIN_UMEE_S
     var chainAPIName = "umee"
     
     var stakeDenomImg = UIImage(named: "tokenUmee")

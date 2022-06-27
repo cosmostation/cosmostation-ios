@@ -24,7 +24,7 @@ class SwitchAccountCell: UITableViewCell {
     }
     
     func onBindChainAccounts(_ data: ChainAccounts?, _ accountPosition: Int, _ currentAccount: Account?) {
-        guard let dpChainConfig = ChainFactory().getChainConfig(data?.chainType) else {
+        guard let dpChainConfig = ChainFactory.getChainConfig(data?.chainType) else {
             return
         }
         rootview.backgroundColor = dpChainConfig.chainColorBG

@@ -21,7 +21,7 @@ class ChainAxelar: ChainConfig {
     
     var chainTitle = "(Axelar Mainnet)"
     var chainTitle2 = "AXELAR"
-    var chainDBName = "SUPPORT_CHAIN_AXELAR"
+    var chainDBName = CHAIN_AXELAR_S
     var chainAPIName = "axelar"
     
     var stakeDenomImg = UIImage(named: "tokenAxelar")

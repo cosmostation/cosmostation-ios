@@ -20,7 +20,7 @@ class ChainKi: ChainConfig {
     var chainColorBG = UIColor(named: "ki_bg")!
     var chainTitle = "(KiChain Mainnet)"
     var chainTitle2 = "KI"
-    var chainDBName = "SUPPORT_CHAIN_KI_MAIN"
+    var chainDBName = CHAIN_KI_S
     var chainAPIName = "kichain"
     
     var stakeDenomImg = UIImage(named: "tokenKi")

@@ -20,7 +20,7 @@ class StationTest: ChainConfig {
     var chainColorBG = UIColor(named: "station_bg")!
     var chainTitle = "(Station Testnet)"
     var chainTitle2 = "STATION TEST"
-    var chainDBName = "SUPPORT_CHAIN_STATION_TEST"
+    var chainDBName = CHAIN_STATION_TEST_S
     var chainAPIName = ""
     
     var stakeDenomImg = UIImage(named: "tokenStation")

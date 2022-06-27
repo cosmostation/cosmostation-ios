@@ -20,7 +20,7 @@ class ChainStarname: ChainConfig {
     var chainColorBG = UIColor(named: "starname_bg")!
     var chainTitle = "(Starname Mainnet)"
     var chainTitle2 = "STARNAME"
-    var chainDBName = "SUPPORT_CHAIN_IOV_MAIN"
+    var chainDBName = CHAIN_IOV_S
     var chainAPIName = "starname"
     
     var stakeDenomImg = UIImage(named: "tokenStarname")

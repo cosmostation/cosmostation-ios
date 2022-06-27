@@ -20,7 +20,7 @@ class ChainRizon: ChainConfig {
     var chainColorBG = UIColor(named: "rizon_bg")!
     var chainTitle = "(Rizon Mainnet)"
     var chainTitle2 = "RIZON"
-    var chainDBName = "SUPPORT_CHAIN_RIZON"
+    var chainDBName = CHAIN_RIZON_S
     var chainAPIName = "rizon"
     
     var stakeDenomImg = UIImage(named: "tokenRizon")

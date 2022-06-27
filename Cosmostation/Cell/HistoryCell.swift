@@ -21,25 +21,6 @@ class HistoryCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.txRootCard.backgroundColor = COLOR_BG_GRAY
-        self.txTypeLabel.textColor = .white
-    }
-    
-    func bindHistoryLegacyView(_ history: ApiHistory.HistoryData, _ address: String) {
-//        txBlockLabel.text = String(history.height) + " block"
-//        txTypeLabel.text = WUtils.historyTitle(history.msg, address)
-//        txTimeLabel.text = WUtils.txTimetoString(input: history.time)
-//        txTimeGapLabel.text = WUtils.txTimeGap(input: history.time)
-//        if (history.isSuccess) { txResultLabel.isHidden = true }
-//        else { txResultLabel.isHidden = false }
-    }
     
     func bindHistoryCustomView(_ history: ApiHistoryCustom, _ address: String) {
         txTimeLabel.text = WUtils.txTimetoString(input: history.timestamp)
@@ -54,7 +35,7 @@ class HistoryCell: UITableViewCell {
         txTimeLabel.text = WUtils.nodeTimetoString(input: history.timeStamp)
         txTimeGapLabel.text = WUtils.timeGap(input: history.timeStamp)
         txBlockLabel.text = String(history.blockHeight) + " block"
-        txTypeLabel.text = WUtils.bnbHistoryTitle(history, address)
+        txTypeLabel.text = history.getTitle(address)
         txResultLabel.isHidden = true
     }
     

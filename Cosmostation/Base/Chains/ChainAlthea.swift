@@ -20,7 +20,7 @@ class ChainAlthea: ChainConfig {
     var chainColorBG = UIColor(named: "althea_bg")!
     var chainTitle = "(Althea Mainnet)"
     var chainTitle2 = "ALTHEA"
-    var chainDBName = "SUPPORT_CHAIN_ALTHEA"
+    var chainDBName = CHAIN_ALTHEA_S
     var chainAPIName = "althea"
     
     var stakeDenomImg = UIImage(named: "tokenAlthea")

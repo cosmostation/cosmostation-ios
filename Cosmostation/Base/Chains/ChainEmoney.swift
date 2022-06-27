@@ -20,7 +20,7 @@ class ChainEmoney: ChainConfig {
     var chainColorBG = UIColor(named: "emoney_bg")!
     var chainTitle = "(E-Money Mainnet)"
     var chainTitle2 = "E-MONEY"
-    var chainDBName = "SUPPORT_CHAIN_EMONEY"
+    var chainDBName = CHAIN_EMONEY_S
     var chainAPIName = "emoney"
     
     var stakeDenomImg = UIImage(named: "tokenEmoney")

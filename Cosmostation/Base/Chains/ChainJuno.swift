@@ -20,7 +20,7 @@ class ChainJuno: ChainConfig {
     var chainColorBG = UIColor(named: "juno_bg")!
     var chainTitle = "(Juno Mainnet)"
     var chainTitle2 = "JUNO"
-    var chainDBName = "SUPPORT_CHAIN_JUNO"
+    var chainDBName = CHAIN_JUNO_S
     var chainAPIName = "juno"
     
     var stakeDenomImg = UIImage(named: "tokenJuno")

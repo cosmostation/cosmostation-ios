@@ -20,7 +20,7 @@ class ChainBinance: ChainConfig {
     var chainColorBG = UIColor(named: "binance_bg")!
     var chainTitle = "(Binance Mainnet)"
     var chainTitle2 = "BINANCE"
-    var chainDBName = "SUPPORT_CHAIN_BINANCE_MAIN"
+    var chainDBName = CHAIN_BINANCE_S
     var chainAPIName = ""
     
     var stakeDenomImg = UIImage(named: "tokenBinance")

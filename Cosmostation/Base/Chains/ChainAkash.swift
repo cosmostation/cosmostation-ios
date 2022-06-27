@@ -20,7 +20,7 @@ class ChainAkash: ChainConfig {
     var chainColorBG = UIColor(named: "akash_bg")!
     var chainTitle = "(Akash Mainnet)"
     var chainTitle2 = "AKASH"
-    var chainDBName = "SUPPORT_CHAIN_AKASH_MAIN"
+    var chainDBName = CHAIN_AKASH_S
     var chainAPIName = "akash"
     
     var stakeDenomImg = UIImage(named: "tokenAkash")
