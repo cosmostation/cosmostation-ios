@@ -265,7 +265,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
         if (!isValiadPAmount()) {
             btnNext.backgroundColor = UIColor.clear
             btnNext.setTitle(NSLocalizedString("tx_next", comment: ""), for: .normal)
-            btnNext.setTitleColor(COLOR_PHOTON, for: .normal)
+            btnNext.setTitleColor(UIColor.init(named: "photon"), for: .normal)
             btnNext.layer.borderWidth = 1.0
             afterSafeRate.isHidden = true
             afterSafeTxt.isHidden = true

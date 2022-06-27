@@ -63,16 +63,16 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             mDpDecimal = 8;
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BNB) {
                 sendAmountDenom.text = "BNB"
-                sendAmountDenom.textColor = COLOR_BNB
+                sendAmountDenom.textColor = UIColor.init(named: "binance")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BTC) {
                 sendAmountDenom.text = "BTC"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_XRPB) {
                 sendAmountDenom.text = "XRP"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BUSD) {
                 sendAmountDenom.text = "BUSD"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             }
             sendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, sendAmountLabel.font, 0, 8)
             sendFeeLabel.attributedText = WUtils.displayAmount2(sendFeeAmount.stringValue, sendFeeLabel.font, 0, 8)
@@ -83,16 +83,16 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             mDpDecimal = WUtils.getKavaCoinDecimal(self.pageHolderVC.mHtlcDenom!)
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
                 sendAmountDenom.text = "BNB"
-                sendAmountDenom.textColor = COLOR_BNB
+                sendAmountDenom.textColor = UIColor.init(named: "binance")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BTC) {
                 sendAmountDenom.text = "BTC"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_XRPB) {
                 sendAmountDenom.text = "XRP"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BUSD) {
                 sendAmountDenom.text = "BUSD"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             }
             sendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, sendAmountLabel.font, mDpDecimal, mDpDecimal)
             sendFeeLabel.attributedText = WUtils.displayAmount2(sendFeeAmount.stringValue, sendFeeLabel.font, 6, 6)
@@ -107,8 +107,8 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             receiveAmountDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()
             relayFeeDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
-                receiveAmountDenom.textColor = COLOR_BNB
-                relayFeeDenom.textColor = COLOR_BNB
+                receiveAmountDenom.textColor = UIColor.init(named: "binance")
+                relayFeeDenom.textColor = UIColor.init(named: "binance")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BTC) {
                 receiveAmountDenom.text = "BTC"
                 relayFeeDenom.text = "BTC"

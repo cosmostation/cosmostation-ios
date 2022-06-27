@@ -44,8 +44,8 @@ class SifMyPoolCell: UITableViewCell {
     }
     
     func onBindSifPoolView(_ pool: Sifnode_Clp_V1_Pool, _ myLp: Sifnode_Clp_V1_LiquidityProviderRes?) {
-        poolCardView.backgroundColor = TRANS_BG_COLOR_SIF
-        poolPairLabel.textColor = COLOR_SIF
+        poolCardView.backgroundColor = UIColor.init(named: "sif_bg")
+        poolPairLabel.textColor = UIColor.init(named: "sif")
         
         let nf = WUtils.getNumberFormatter(2)
         let rowanDecimal = WUtils.getSifCoinDecimal(SIF_MAIN_DENOM)

@@ -33,10 +33,10 @@ class HtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
         toAddressImg.image = toAddressImg.image?.withRenderingMode(.alwaysTemplate)
         if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
             self.warnMsg.text = String(format: NSLocalizedString("error_can_not_bep3_account_msg", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
-            toAddressImg.tintColor = COLOR_BNB
+            toAddressImg.tintColor = UIColor.init(named: "binance")
         } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN) {
             self.warnMsg.text = String(format: NSLocalizedString("error_can_not_bep3_account_msg2", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
-            toAddressImg.tintColor = COLOR_KAVA
+            toAddressImg.tintColor = UIColor.init(named: "kava")
         }
         self.toAccountList = BaseData.instance.selectAllAccountsByHtlcClaim(pageHolderVC.mHtlcToChain)
         

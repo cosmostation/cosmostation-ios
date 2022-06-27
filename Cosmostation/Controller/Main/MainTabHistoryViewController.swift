@@ -210,14 +210,14 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (chainType == ChainType.BINANCE_MAIN) {
             let bnbHistory = mBnbHistories[indexPath.row]
-            guard let url = URL(string: "https://binance.mintscan.io/txs/" + bnbHistory.txHash) else { return }
-            let safariViewController = SFSafariViewController(url: url)
-            safariViewController.modalPresentationStyle = .popover
-            present(safariViewController, animated: true, completion: nil)
+            let link = WUtils.getTxExplorer(chainConfig, bnbHistory.txHash)
+            guard let url = URL(string: link) else { return }
+            self.onShowSafariWeb(url)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             let okHistory = mOkHistories[indexPath.row]
-            guard let url = URL(string: EXPLORER_OEC_TX + "tx/" + okHistory.hash!) else { return }
+            let link = WUtils.getTxExplorer(chainConfig, okHistory.hash!)
+            guard let url = URL(string: link) else { return }
             self.onShowSafariWeb(url)
             
         } else {

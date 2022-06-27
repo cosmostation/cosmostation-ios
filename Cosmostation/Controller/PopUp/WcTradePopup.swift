@@ -52,7 +52,7 @@ class WcTradePopup: BaseViewController, SBCardPopupContent {
         
         if (firstMsg!.side == 1) {
             WcSideLabel.text = "BUY"
-            WcSideLabel.textColor = COLOR_WC_TRADE_BUY
+            WcSideLabel.textColor = UIColor.init(hexString: "37CC6E")
             
             let fromUrl = BINANCE_TOKEN_IMG_URL + pair_denom[1] + ".png"
             WcFromIcon.af_setImage(withURL: URL(string: fromUrl)!)
@@ -68,7 +68,7 @@ class WcTradePopup: BaseViewController, SBCardPopupContent {
             
         } else {
             WcSideLabel.text = "SELL"
-            WcSideLabel.textColor = COLOR_WC_TRADE_SELL
+            WcSideLabel.textColor = UIColor.init(hexString: "FF2745")
             
             let fromUrl = BINANCE_TOKEN_IMG_URL + pair_denom[0] + ".png"
             WcFromIcon.af_setImage(withURL: URL(string: fromUrl)!)

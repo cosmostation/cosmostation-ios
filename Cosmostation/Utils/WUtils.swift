@@ -1178,13 +1178,13 @@ public class WUtils {
             if (denom == KAVA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom == KAVA_HARD_DENOM) {
-                denomLabel?.textColor = COLOR_HARD
+                denomLabel?.textColor = UIColor.init(named: "kava_hard")
                 denomLabel?.text = denom.uppercased()
             } else if (denom == KAVA_USDX_DENOM) {
-                denomLabel?.textColor = COLOR_USDX
+                denomLabel?.textColor = UIColor.init(named: "kava_usdx")
                 denomLabel?.text = denom.uppercased()
             } else if (denom == KAVA_SWAP_DENOM) {
-                denomLabel?.textColor = COLOR_SWP
+                denomLabel?.textColor = UIColor.init(named: "kava_swp")
                 denomLabel?.text = denom.uppercased()
             } else {
                 denomLabel?.textColor = UIColor(named: "_font05")
@@ -1313,7 +1313,7 @@ public class WUtils {
                 WUtils.setDenomTitle(chainType, denomLabel)
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             } else if (denom == OSMOSIS_ION_DENOM) {
-                denomLabel?.textColor = COLOR_ION
+                denomLabel?.textColor = UIColor.init(named: "osmosis_ion")
                 denomLabel?.text = "ION"
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             } else if (denom.starts(with: "gamm/pool/")) {
@@ -1583,7 +1583,7 @@ public class WUtils {
             if (denom == NYX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom == NYX_NYM_DENOM) {
-                denomLabel?.textColor = COLOR_NYM
+                denomLabel?.textColor = UIColor.init(named: "nyx_nym")
                 denomLabel?.text = "NYM"
             } else {
                 denomLabel?.textColor = UIColor(named: "_font05")
@@ -1730,7 +1730,7 @@ public class WUtils {
     static func setGasDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
         if (chain == ChainType.NYX_MAIN) {
             label?.text = "NYM"
-            label?.textColor = COLOR_NYM
+            label?.textColor = UIColor.init(named: "nyx_nym")
         } else {
             return setDenomTitle(chain, label)
         }
@@ -2941,7 +2941,7 @@ public class WUtils {
         if (chainConfig?.chainType == .OKEX_MAIN) {
             return chainConfig!.explorerUrl + "address/" + address
         }
-        return chainConfig!.explorerUrl + "address/" + address
+        return chainConfig!.explorerUrl + "account/" + address
     }
     
     static func getProposalExplorer(_ chainConfig: ChainConfig?, _ proposalId: String) -> String {
@@ -3085,7 +3085,7 @@ public class WUtils {
         else if (address?.starts(with: "bcna1") == true && chain == ChainType.BITCANA_MAIN) { return true }
         else if (address?.starts(with: "althea1") == true && chain == ChainType.ALTHEA_MAIN) { return true }
         else if (address?.starts(with: "stars1") == true && chain == ChainType.STARGAZE_MAIN) { return true }
-        else if (address?.starts(with: "comdex1") == true && chain == ChainType.COMDEX_MAIN) { return true }
+        else if (address?.starts(with: "comdex1") == true && chain == ChainType.COMDEX_MAIN)  { return true }
         else if (address?.starts(with: "inj1") == true && chain == ChainType.INJECTIVE_MAIN) { return true }
         else if (address?.starts(with: "bitsong1") == true && chain == ChainType.BITSONG_MAIN) { return true }
         else if (address?.starts(with: "desmos1") == true && chain == ChainType.DESMOS_MAIN) { return true }
