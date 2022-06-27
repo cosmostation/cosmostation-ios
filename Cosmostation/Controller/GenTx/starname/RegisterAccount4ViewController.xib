@@ -76,14 +76,14 @@
                     </subviews>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Suu-ZS-ErA">
-                    <rect key="frame" x="0.0" y="60" width="414" height="724"/>
+                    <rect key="frame" x="0.0" y="54" width="414" height="730"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="Suu-ZS-ErA" secondAttribute="top" constant="-16" id="2DZ-pB-ePF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="Suu-ZS-ErA" secondAttribute="top" constant="-10" id="2DZ-pB-ePF"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DTF-cM-oDe" secondAttribute="bottom" constant="16" id="7fZ-bq-yiI"/>
                 <constraint firstItem="DTF-cM-oDe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="PBD-Cr-yOn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DTF-cM-oDe" secondAttribute="trailing" constant="16" id="Xu5-p2-6fv"/>
@@ -99,7 +99,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

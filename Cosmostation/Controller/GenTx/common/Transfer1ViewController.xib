@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="StarName or Recipient Address" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ff0-9U-jko" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="50"/>
+                    <rect key="frame" x="16" y="54" width="382" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -36,7 +36,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="gFu-WM-Fk2">
-                    <rect key="frame" x="160" y="126" width="238" height="35"/>
+                    <rect key="frame" x="160" y="120" width="238" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bp4-Vf-7aA">
                             <rect key="frame" x="0.0" y="0.0" width="115" height="35"/>
@@ -209,7 +209,7 @@
                 <constraint firstItem="2Zy-uZ-ZHP" firstAttribute="top" secondItem="J69-rE-yfD" secondAttribute="bottom" constant="24" id="A9K-5P-IbO"/>
                 <constraint firstItem="2Zy-uZ-ZHP" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-16" id="EPD-rR-VTR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="J69-rE-yfD" secondAttribute="leading" constant="-16" id="HQK-yB-uje"/>
-                <constraint firstItem="Ff0-9U-jko" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="J9L-n9-m27"/>
+                <constraint firstItem="Ff0-9U-jko" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="J9L-n9-m27"/>
                 <constraint firstItem="gFu-WM-Fk2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="160" id="Jq2-HX-yRf"/>
                 <constraint firstItem="2Zy-uZ-ZHP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="LC3-ho-1bm"/>
                 <constraint firstItem="gFu-WM-Fk2" firstAttribute="top" secondItem="Ff0-9U-jko" secondAttribute="bottom" constant="16" id="M5d-2B-RDo"/>
@@ -233,7 +233,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="starname">
             <color red="0.4309999942779541" green="0.48600000143051147" blue="0.87099999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

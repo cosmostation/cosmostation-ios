@@ -127,7 +127,7 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             return
         }
         if (text.count == 0) {
-            textField.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
+            textField.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
             return
         }
         let userInput = WUtils.localeStringToDecimal(text)
@@ -155,7 +155,7 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
                 return
             }
         }
-        textField.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
+        textField.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
     }
     
     func isValiadAmount() -> Bool {

@@ -35,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kwp-NT-9b9" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="320"/>
+                    <rect key="frame" x="16" y="54" width="382" height="320"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Additional Loan Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hz-nM-T2g">
                             <rect key="frame" x="16" y="16" width="148" height="16.5"/>
@@ -208,7 +208,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -271,7 +271,7 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kDI-rn-gHk" secondAttribute="bottom" constant="16" id="G8U-12-wbJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kDI-rn-gHk" secondAttribute="trailing" constant="16" id="MG0-ic-XLM"/>
-                <constraint firstItem="kwp-NT-9b9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="MZh-1F-EDV"/>
+                <constraint firstItem="kwp-NT-9b9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="MZh-1F-EDV"/>
                 <constraint firstItem="kwp-NT-9b9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Okf-1s-eLd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kwp-NT-9b9" secondAttribute="trailing" constant="16" id="iwy-yG-fgT"/>
                 <constraint firstItem="kDI-rn-gHk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="lyQ-bO-RBz"/>
@@ -297,7 +297,7 @@
             <color red="1" green="0.33300000429153442" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

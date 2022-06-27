@@ -83,7 +83,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwJ-of-5ra" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="380"/>
+                    <rect key="frame" x="16" y="54" width="382" height="380"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KN2-g0-2ZM">
                             <rect key="frame" x="16" y="16" width="44" height="16.5"/>
@@ -228,7 +228,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -238,7 +238,7 @@
             <constraints>
                 <constraint firstItem="3an-E9-XQF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="495-Mc-X0A"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3an-E9-XQF" secondAttribute="trailing" constant="16" id="7Mf-pQ-UIg"/>
-                <constraint firstItem="wwJ-of-5ra" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Gow-P1-YHM"/>
+                <constraint firstItem="wwJ-of-5ra" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Gow-P1-YHM"/>
                 <constraint firstItem="wwJ-of-5ra" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="aOk-90-ffq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wwJ-of-5ra" secondAttribute="trailing" constant="16" id="qM4-yq-DHV"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="3an-E9-XQF" secondAttribute="bottom" constant="16" id="tqY-Ra-K1G"/>

@@ -35,7 +35,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35k-dL-Rrm" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="380"/>
+                    <rect key="frame" x="16" y="54" width="382" height="380"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDm-vf-VFq">
                             <rect key="frame" x="16" y="16" width="100" height="16.5"/>
@@ -188,7 +188,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -252,7 +252,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="35k-dL-Rrm" secondAttribute="trailing" constant="16" id="0PD-eX-MMB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Hek-bo-sHa" secondAttribute="bottom" constant="16" id="SJ8-P7-Y5V"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="35k-dL-Rrm" secondAttribute="leading" constant="-16" id="alj-3m-BAD"/>
-                <constraint firstItem="35k-dL-Rrm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="cOs-SO-Y2m"/>
+                <constraint firstItem="35k-dL-Rrm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="cOs-SO-Y2m"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Hek-bo-sHa" secondAttribute="trailing" constant="16" id="ntF-GW-iA7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="Hek-bo-sHa" secondAttribute="leading" constant="-16" id="o30-Nb-heq"/>
             </constraints>
@@ -273,7 +273,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -30,13 +30,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Link Chain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMR-tA-yl7">
-                    <rect key="frame" x="16" y="60" width="85" height="16.5"/>
+                    <rect key="frame" x="16" y="54" width="85" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MQy-aO-rmG" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="84.5" width="382" height="50"/>
+                    <rect key="frame" x="16" y="78.5" width="382" height="50"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="f8l-Ew-Ve3">
                             <rect key="frame" x="6" y="9" width="32" height="32"/>
@@ -76,13 +76,13 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Link Account" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YwV-0O-UYr">
-                    <rect key="frame" x="16" y="158.5" width="98.5" height="16.5"/>
+                    <rect key="frame" x="16" y="152.5" width="98.5" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vDL-Ob-qIi" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="183" width="382" height="50"/>
+                    <rect key="frame" x="16" y="177" width="382" height="50"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z5S-cN-2In">
                             <rect key="frame" x="12" y="8" width="354" height="0.0"/>
@@ -123,19 +123,19 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AirDrop Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tg0-Hw-Qt0">
-                    <rect key="frame" x="16" y="257" width="99" height="16.5"/>
+                    <rect key="frame" x="16" y="251" width="99" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DSM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTo-aV-JMp">
-                    <rect key="frame" x="371" y="281.5" width="27" height="14"/>
+                    <rect key="frame" x="371" y="275.5" width="27" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" red="0.92941176469999998" green="0.42352941179999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6as-ZB-MVz">
-                    <rect key="frame" x="359" y="280.5" width="8" height="16.5"/>
+                    <rect key="frame" x="359" y="274.5" width="8" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="14"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -212,7 +212,7 @@
                 <constraint firstItem="MQy-aO-rmG" firstAttribute="top" secondItem="wMR-tA-yl7" secondAttribute="bottom" constant="8" id="Fa1-cl-y3h"/>
                 <constraint firstItem="yvy-N8-fux" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="HU8-p6-LcZ"/>
                 <constraint firstItem="tg0-Hw-Qt0" firstAttribute="top" secondItem="vDL-Ob-qIi" secondAttribute="bottom" constant="24" id="OQ1-9T-gDU"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="wMR-tA-yl7" secondAttribute="top" constant="-16" id="UkI-z0-oyw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="wMR-tA-yl7" secondAttribute="top" constant="-10" id="UkI-z0-oyw"/>
                 <constraint firstItem="qTo-aV-JMp" firstAttribute="top" secondItem="tg0-Hw-Qt0" secondAttribute="bottom" constant="8" id="WuQ-MK-g1f"/>
                 <constraint firstItem="YwV-0O-UYr" firstAttribute="leading" secondItem="wMR-tA-yl7" secondAttribute="leading" id="XTl-SR-WSi"/>
                 <constraint firstItem="MQy-aO-rmG" firstAttribute="leading" secondItem="wMR-tA-yl7" secondAttribute="leading" id="Y13-lX-Pbx"/>

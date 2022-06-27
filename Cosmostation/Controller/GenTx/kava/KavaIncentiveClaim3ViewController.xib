@@ -82,7 +82,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xAD-oI-uNF" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="56" width="390" height="300"/>
+                    <rect key="frame" x="12" y="54" width="390" height="300"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aPH-LG-xg1">
                             <rect key="frame" x="16" y="16" width="44" height="16.5"/>
@@ -226,7 +226,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -236,7 +236,7 @@
             <constraints>
                 <constraint firstItem="xAD-oI-uNF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="McE-nY-HAp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="sef-1l-cWZ" secondAttribute="bottom" constant="16" id="SWe-wc-ZHS"/>
-                <constraint firstItem="xAD-oI-uNF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="df6-Jk-o4F"/>
+                <constraint firstItem="xAD-oI-uNF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="df6-Jk-o4F"/>
                 <constraint firstItem="sef-1l-cWZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="f2E-TA-v8M"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xAD-oI-uNF" secondAttribute="trailing" constant="12" id="oMQ-Eo-3OJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sef-1l-cWZ" secondAttribute="trailing" constant="16" id="qrO-GW-jQa"/>

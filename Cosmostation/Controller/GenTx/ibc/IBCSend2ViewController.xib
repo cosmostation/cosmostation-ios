@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kkj-yk-plX" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="383" height="50"/>
+                    <rect key="frame" x="16" y="54" width="383" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -37,7 +37,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JV-rV-bCr">
-                    <rect key="frame" x="359" y="69" width="32" height="32"/>
+                    <rect key="frame" x="359" y="63" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="jg7-cC-hJ1"/>
                         <constraint firstAttribute="height" constant="32" id="qTx-fu-szg"/>
@@ -48,25 +48,25 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="994-Qf-mob">
-                    <rect key="frame" x="361" y="118" width="4" height="14"/>
+                    <rect key="frame" x="361" y="112" width="4" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Available : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9T-kb-ScL">
-                    <rect key="frame" x="277" y="118" width="84" height="14"/>
+                    <rect key="frame" x="277" y="112" width="84" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CS0-QX-jrC">
-                    <rect key="frame" x="369" y="118" width="30" height="14"/>
+                    <rect key="frame" x="369" y="112" width="30" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="l3c-it-wrF">
-                    <rect key="frame" x="16" y="144" width="383" height="35"/>
+                    <rect key="frame" x="16" y="138" width="383" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8G7-rm-kb6">
                             <rect key="frame" x="0.0" y="0.0" width="59" height="35"/>
@@ -263,7 +263,7 @@
                 <constraint firstItem="CS0-QX-jrC" firstAttribute="trailing" secondItem="Kkj-yk-plX" secondAttribute="trailing" id="C6Y-X3-nL6"/>
                 <constraint firstItem="994-Qf-mob" firstAttribute="leading" secondItem="z9T-kb-ScL" secondAttribute="trailing" id="Ttl-jD-dfD"/>
                 <constraint firstItem="4JV-rV-bCr" firstAttribute="leading" secondItem="Kkj-yk-plX" secondAttribute="trailing" constant="-40" id="U9K-Kc-97I"/>
-                <constraint firstItem="Kkj-yk-plX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="ZLI-bL-4Jq"/>
+                <constraint firstItem="Kkj-yk-plX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="ZLI-bL-4Jq"/>
                 <constraint firstItem="l3c-it-wrF" firstAttribute="trailing" secondItem="Kkj-yk-plX" secondAttribute="trailing" id="akp-x7-WYd"/>
                 <constraint firstItem="l3c-it-wrF" firstAttribute="leading" secondItem="Kkj-yk-plX" secondAttribute="leading" id="b8w-19-BpF"/>
                 <constraint firstItem="kp5-pG-sHf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="bcV-6w-UoW"/>
@@ -289,7 +289,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019607843137254902" green="0.82352941176470584" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -85,7 +85,7 @@
                     </subviews>
                 </stackView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Olj-oH-Xus">
-                    <rect key="frame" x="0.0" y="60" width="414" height="720"/>
+                    <rect key="frame" x="0.0" y="54" width="414" height="726"/>
                     <subviews>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CyF-sG-1V1">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="911.33333333333337"/>
@@ -265,7 +265,7 @@
                 <constraint firstItem="kfz-UR-2JJ" firstAttribute="top" secondItem="Olj-oH-Xus" secondAttribute="bottom" constant="16" id="PhX-ii-dIy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Olj-oH-Xus" secondAttribute="trailing" id="RXU-xL-CBS"/>
                 <constraint firstItem="Olj-oH-Xus" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="f97-np-h7u"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="Olj-oH-Xus" secondAttribute="top" constant="-16" id="l2v-8l-LGu"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="Olj-oH-Xus" secondAttribute="top" constant="-10" id="l2v-8l-LGu"/>
                 <constraint firstItem="tea-XB-h2Y" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="s7b-Jw-Vfl"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kfz-UR-2JJ" secondAttribute="bottom" constant="16" id="sas-Hr-5uP"/>
                 <constraint firstItem="tea-XB-h2Y" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="ztz-V7-w2t"/>
@@ -289,7 +289,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.0" green="0.71764705882352942" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

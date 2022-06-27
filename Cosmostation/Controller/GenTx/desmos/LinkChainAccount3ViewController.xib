@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -80,7 +80,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FfD-mb-z2G" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="18" y="60" width="380" height="250"/>
+                    <rect key="frame" x="18" y="54" width="380" height="250"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7hT-lU-lxc">
                             <rect key="frame" x="16" y="16" width="44" height="16.5"/>
@@ -194,7 +194,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Xjo-Aw-0NF" secondAttribute="bottom" constant="16" id="SBg-d0-Vx2"/>
                 <constraint firstItem="FfD-mb-z2G" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="18" id="r57-TX-eAp"/>
                 <constraint firstItem="Xjo-Aw-0NF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="rNo-hd-Gez"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="FfD-mb-z2G" secondAttribute="top" constant="-16" id="wDZ-Jk-1Vc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="FfD-mb-z2G" secondAttribute="top" constant="-10" id="wDZ-Jk-1Vc"/>
             </constraints>
             <point key="canvasLocation" x="139" y="141"/>
         </view>

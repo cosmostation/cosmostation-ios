@@ -31,7 +31,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ya-R7-gL0" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="300"/>
+                    <rect key="frame" x="16" y="54" width="382" height="300"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAn-Ks-XBg">
                             <rect key="frame" x="16" y="16" width="100" height="16.5"/>
@@ -108,7 +108,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -194,7 +194,7 @@ The actual amount of rewards you receive may be equal to or greater than what is
                 <constraint firstItem="1Tt-1C-RFN" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="-16" id="9l8-CE-Ja6"/>
                 <constraint firstItem="7ya-R7-gL0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Rlk-2e-xOl"/>
                 <constraint firstItem="1Tt-1C-RFN" firstAttribute="top" secondItem="AhF-1b-FCy" secondAttribute="bottom" constant="16" id="Rrf-FX-jyF"/>
-                <constraint firstItem="7ya-R7-gL0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Rs8-nj-WVY"/>
+                <constraint firstItem="7ya-R7-gL0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Rs8-nj-WVY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1Tt-1C-RFN" secondAttribute="trailing" constant="16" id="ZBS-8v-DKX"/>
                 <constraint firstItem="1Tt-1C-RFN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="bdX-ID-fZ1"/>
                 <constraint firstItem="AhF-1b-FCy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="c1p-hQ-ZdO"/>
@@ -227,7 +227,7 @@ The actual amount of rewards you receive may be equal to or greater than what is
             <color red="0.95300000905990601" green="0.097999997437000275" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

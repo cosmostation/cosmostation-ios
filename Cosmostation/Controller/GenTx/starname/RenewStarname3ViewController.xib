@@ -83,7 +83,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OtP-6T-yP5" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="44" width="382" height="298.5"/>
+                    <rect key="frame" x="16" y="54" width="382" height="298.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="To1-23-jho">
                             <rect key="frame" x="16" y="16" width="21" height="14"/>
@@ -217,7 +217,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -225,7 +225,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="OtP-6T-yP5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5Ed-mt-nq0"/>
+                <constraint firstItem="OtP-6T-yP5" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="5Ed-mt-nq0"/>
                 <constraint firstItem="OtP-6T-yP5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="8RM-mm-VYD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="OtP-6T-yP5" secondAttribute="trailing" constant="16" id="H2V-y3-ed6"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="Sjb-v9-gJg" secondAttribute="leading" constant="-16" id="OD9-Ne-ZBo"/>
@@ -249,7 +249,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="starname">
             <color red="0.4309999942779541" green="0.48600000143051147" blue="0.87099999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

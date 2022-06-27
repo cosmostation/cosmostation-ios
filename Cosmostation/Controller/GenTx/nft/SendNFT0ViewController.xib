@@ -25,13 +25,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DvU-fx-Vso">
-                    <rect key="frame" x="16" y="60" width="113" height="16.5"/>
+                    <rect key="frame" x="16" y="54" width="113" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert Address" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xjB-Gn-DnE" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="84.5" width="382" height="50"/>
+                    <rect key="frame" x="16" y="78.5" width="382" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -42,7 +42,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0oB-Pk-rG6">
-                    <rect key="frame" x="230" y="146.5" width="168" height="35"/>
+                    <rect key="frame" x="230" y="140.5" width="168" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srk-2c-pPU">
                             <rect key="frame" x="0.0" y="0.0" width="80" height="35"/>
@@ -161,7 +161,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pbH-6f-5D6" secondAttribute="bottom" constant="16" id="Amc-zZ-4KM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pbH-6f-5D6" secondAttribute="trailing" constant="16" id="Dho-0a-2fW"/>
                 <constraint firstItem="xjB-Gn-DnE" firstAttribute="top" secondItem="DvU-fx-Vso" secondAttribute="bottom" constant="8" id="WkI-w0-UJM"/>
-                <constraint firstItem="DvU-fx-Vso" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="kqW-9w-OwX"/>
+                <constraint firstItem="DvU-fx-Vso" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="kqW-9w-OwX"/>
                 <constraint firstItem="0oB-Pk-rG6" firstAttribute="trailing" secondItem="xjB-Gn-DnE" secondAttribute="trailing" id="sY9-Rf-veu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xjB-Gn-DnE" secondAttribute="trailing" constant="16" id="zs3-wz-Pr3"/>
             </constraints>
@@ -181,7 +181,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

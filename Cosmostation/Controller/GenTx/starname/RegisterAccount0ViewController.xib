@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Starname" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K5v-qf-99J" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="194" height="50"/>
+                    <rect key="frame" x="16" y="54" width="194" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -92,7 +92,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7K-CF-AdS" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="238" y="64" width="160" height="42"/>
+                    <rect key="frame" x="238" y="58" width="160" height="42"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iov" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mry-dH-Q1o">
                             <rect key="frame" x="8" y="7" width="118" height="28"/>
@@ -131,25 +131,25 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IOV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9P-pi-8iZ">
-                    <rect key="frame" x="373.5" y="117" width="24.5" height="16.5"/>
+                    <rect key="frame" x="373.5" y="111" width="24.5" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="starname"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jF-J1-4AT">
-                    <rect key="frame" x="364.5" y="117" width="5" height="16.5"/>
+                    <rect key="frame" x="364.5" y="111" width="5" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1~63 lowercase alphabet or number" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="I8q-kB-ABR">
-                    <rect key="frame" x="16" y="118" width="192" height="14"/>
+                    <rect key="frame" x="16" y="112" width="192" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D5M-hB-c2Z">
-                    <rect key="frame" x="214" y="71.5" width="20" height="43"/>
+                    <rect key="frame" x="214" y="65.5" width="20" height="43"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="geT-dh-JNm"/>
                     </constraints>
@@ -170,7 +170,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="U7K-CF-AdS" secondAttribute="trailing" constant="16" id="JCn-zG-KfA"/>
                 <constraint firstItem="O9P-pi-8iZ" firstAttribute="centerY" secondItem="I8q-kB-ABR" secondAttribute="centerY" id="MIX-v7-ze2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O9P-pi-8iZ" secondAttribute="trailing" constant="16" id="P4s-eR-XfF"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="K5v-qf-99J" secondAttribute="top" constant="-16" id="Qkd-oo-Pbs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="K5v-qf-99J" secondAttribute="top" constant="-10" id="Qkd-oo-Pbs"/>
                 <constraint firstItem="4jF-J1-4AT" firstAttribute="firstBaseline" secondItem="O9P-pi-8iZ" secondAttribute="firstBaseline" id="acG-12-lhD"/>
                 <constraint firstItem="I8q-kB-ABR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="fGv-NH-d9g"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Vcm-fs-t3Q" secondAttribute="bottom" constant="16" id="m0P-1C-oMr"/>
@@ -196,7 +196,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="starname">
             <color red="0.4309999942779541" green="0.48600000143051147" blue="0.87099999189376831" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -79,7 +79,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wgW-ZX-aJH" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="240"/>
+                    <rect key="frame" x="16" y="54" width="382" height="240"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deposit Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LAz-U2-IEk">
                             <rect key="frame" x="16" y="16" width="99" height="16.5"/>
@@ -163,7 +163,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -174,7 +174,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pBe-Mi-hcr" secondAttribute="trailing" constant="16" id="8pH-PH-9q1"/>
                 <constraint firstItem="pBe-Mi-hcr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="AzV-KP-mzm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wgW-ZX-aJH" secondAttribute="trailing" constant="16" id="NdL-JM-OAW"/>
-                <constraint firstItem="wgW-ZX-aJH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="UlR-f7-wE8"/>
+                <constraint firstItem="wgW-ZX-aJH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="UlR-f7-wE8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pBe-Mi-hcr" secondAttribute="bottom" constant="16" id="Wkb-I5-GaB"/>
                 <constraint firstItem="wgW-ZX-aJH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="yy6-U7-Baz"/>
             </constraints>
@@ -198,7 +198,7 @@
             <color red="1" green="0.33300000429153442" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

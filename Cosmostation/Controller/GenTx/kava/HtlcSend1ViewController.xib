@@ -26,13 +26,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Address" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7S-B2-cs9">
-                    <rect key="frame" x="16" y="60" width="113" height="16.5"/>
+                    <rect key="frame" x="16" y="54" width="113" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xx3-Lj-bnV" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="84.5" width="382" height="50"/>
+                    <rect key="frame" x="16" y="78.5" width="382" height="50"/>
                     <subviews>
                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyFull" translatesAutoresizingMaskIntoConstraints="NO" id="bCr-tm-xqu">
                             <rect key="frame" x="8" y="14" width="22" height="22"/>
@@ -159,7 +159,7 @@ you must create a KAVA account and have history</string>
                 <constraint firstItem="MXX-92-0cl" firstAttribute="top" secondItem="bDs-TC-gfm" secondAttribute="bottom" constant="4" id="VDe-jM-Jhe"/>
                 <constraint firstItem="MXX-92-0cl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="X31-LJ-lOC"/>
                 <constraint firstItem="fEV-6p-Swo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="eeo-cQ-Mr9"/>
-                <constraint firstItem="a7S-B2-cs9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="gTK-Uv-ldC"/>
+                <constraint firstItem="a7S-B2-cs9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="gTK-Uv-ldC"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xx3-Lj-bnV" secondAttribute="trailing" constant="16" id="i6P-Ff-BO9"/>
                 <constraint firstItem="xx3-Lj-bnV" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ntA-dF-Qu1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fEV-6p-Swo" secondAttribute="trailing" constant="16" id="qrh-v9-HhZ"/>

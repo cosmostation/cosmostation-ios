@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="a8B-hg-un8" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="50"/>
+                    <rect key="frame" x="16" y="54" width="382" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -38,7 +38,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="37Q-r6-NMh">
-                    <rect key="frame" x="358" y="69" width="32" height="32"/>
+                    <rect key="frame" x="358" y="63" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="PPw-5T-IEd"/>
                         <constraint firstAttribute="width" constant="32" id="Q9u-gf-TwI"/>
@@ -49,25 +49,25 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Available : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cqj-W1-5ST">
-                    <rect key="frame" x="276" y="118" width="84" height="14"/>
+                    <rect key="frame" x="276" y="112" width="84" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GEU-au-Xm8">
-                    <rect key="frame" x="360" y="118" width="4" height="14"/>
+                    <rect key="frame" x="360" y="112" width="4" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j39-5r-UF1">
-                    <rect key="frame" x="368" y="118" width="30" height="14"/>
+                    <rect key="frame" x="368" y="112" width="30" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ZMp-KJ-Fnv">
-                    <rect key="frame" x="16" y="144" width="382" height="35"/>
+                    <rect key="frame" x="16" y="138" width="382" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84e-9g-maV">
                             <rect key="frame" x="0.0" y="0.0" width="58.5" height="35"/>
@@ -264,7 +264,7 @@
                 <constraint firstItem="j39-5r-UF1" firstAttribute="trailing" secondItem="a8B-hg-un8" secondAttribute="trailing" id="Bvd-Oj-ukl"/>
                 <constraint firstItem="GEU-au-Xm8" firstAttribute="leading" secondItem="Cqj-W1-5ST" secondAttribute="trailing" id="Iwq-5h-7Yc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZMp-KJ-Fnv" secondAttribute="trailing" constant="16" id="Kzm-ZF-c02"/>
-                <constraint firstItem="a8B-hg-un8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="LzD-Vn-G84"/>
+                <constraint firstItem="a8B-hg-un8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="LzD-Vn-G84"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="u1j-MD-f0I" secondAttribute="trailing" constant="16" id="Sei-Iq-KTP"/>
                 <constraint firstItem="u1j-MD-f0I" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="TVw-jx-v5H"/>
                 <constraint firstItem="GEU-au-Xm8" firstAttribute="firstBaseline" secondItem="j39-5r-UF1" secondAttribute="firstBaseline" id="Vlr-eX-4BQ"/>
@@ -290,7 +290,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

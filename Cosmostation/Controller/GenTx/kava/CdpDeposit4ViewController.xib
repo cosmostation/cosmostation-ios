@@ -88,7 +88,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NvF-X3-7OC" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="320"/>
+                    <rect key="frame" x="16" y="54" width="382" height="320"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collateral Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Igd-vY-ziD">
                             <rect key="frame" x="16" y="16" width="111" height="16.5"/>
@@ -261,7 +261,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -273,7 +273,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Tas-ve-I8a" secondAttribute="trailing" constant="16" id="eEj-lW-De8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Tas-ve-I8a" secondAttribute="bottom" constant="16" id="oaS-Ly-22y"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="NvF-X3-7OC" secondAttribute="trailing" constant="16" id="rbV-q7-SQI"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="NvF-X3-7OC" secondAttribute="top" constant="-16" id="tpf-hm-O7q"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="NvF-X3-7OC" secondAttribute="top" constant="-10" id="tpf-hm-O7q"/>
                 <constraint firstItem="Tas-ve-I8a" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="xoY-Db-vQe"/>
             </constraints>
             <point key="canvasLocation" x="139" y="154"/>
@@ -297,7 +297,7 @@
             <color red="1" green="0.33300000429153442" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

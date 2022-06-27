@@ -76,7 +76,7 @@
                     </subviews>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="x3l-gW-tK9">
-                    <rect key="frame" x="0.0" y="60" width="414" height="724"/>
+                    <rect key="frame" x="0.0" y="54" width="414" height="730"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -84,7 +84,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ots-gP-2L5" secondAttribute="trailing" constant="16" id="3RN-U5-FWp"/>
-                <constraint firstItem="x3l-gW-tK9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Oz5-fl-vUB"/>
+                <constraint firstItem="x3l-gW-tK9" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Oz5-fl-vUB"/>
                 <constraint firstItem="ots-gP-2L5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="QIt-Pi-jAB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ots-gP-2L5" secondAttribute="bottom" constant="16" id="Uar-7N-Xcp"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x3l-gW-tK9" secondAttribute="trailing" id="YJH-Fi-5Op"/>
@@ -99,7 +99,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

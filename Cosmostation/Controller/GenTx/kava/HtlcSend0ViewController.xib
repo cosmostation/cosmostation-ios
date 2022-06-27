@@ -40,13 +40,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source Chain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6x5-nE-EqW">
-                    <rect key="frame" x="16" y="56" width="85" height="16.5"/>
+                    <rect key="frame" x="16" y="54" width="85" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mdh-gh-2R9" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="80.5" width="175" height="42"/>
+                    <rect key="frame" x="16" y="78.5" width="175" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="0Xa-vu-msL">
                             <rect key="frame" x="6" y="5" width="32" height="32"/>
@@ -72,25 +72,25 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="AQt-nN-38I">
-                    <rect key="frame" x="197" y="91.5" width="20" height="20"/>
+                    <rect key="frame" x="197" y="89.5" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="MuO-co-cDk"/>
                         <constraint firstAttribute="height" constant="20" id="b1W-jB-H8L"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination Chain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRT-W2-8fT">
-                    <rect key="frame" x="223" y="56" width="111" height="16.5"/>
+                    <rect key="frame" x="223" y="54" width="111" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aul-An-57V" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="223" y="80.5" width="175" height="42"/>
+                    <rect key="frame" x="223" y="78.5" width="175" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="B9D-5r-7VZ">
                             <rect key="frame" x="6" y="5" width="32" height="32"/>
@@ -125,7 +125,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                             <color key="value" name="_font05"/>
@@ -136,13 +136,13 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Coin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0g-u1-e1S">
-                    <rect key="frame" x="16" y="146.5" width="65.5" height="16.5"/>
+                    <rect key="frame" x="16" y="144.5" width="65.5" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bqc-eN-b7h" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="171" width="382" height="42"/>
+                    <rect key="frame" x="16" y="169" width="382" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="biS-fK-XD7">
                             <rect key="frame" x="12" y="11" width="20" height="20"/>
@@ -204,13 +204,13 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Relayer Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJT-w0-8Gd">
-                    <rect key="frame" x="16" y="237" width="92" height="16.5"/>
+                    <rect key="frame" x="16" y="235" width="92" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCT-xm-laP" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="261.5" width="382" height="84"/>
+                    <rect key="frame" x="16" y="259.5" width="382" height="84"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="Vd6-zI-ht0">
                             <rect key="frame" x="12" y="12" width="360" height="60"/>
@@ -410,7 +410,7 @@
                 <constraint firstItem="n0g-u1-e1S" firstAttribute="top" secondItem="Mdh-gh-2R9" secondAttribute="bottom" constant="24" id="XDW-7O-fc6"/>
                 <constraint firstItem="Aul-An-57V" firstAttribute="top" secondItem="rRT-W2-8fT" secondAttribute="bottom" constant="8" id="Xrr-b3-2H7"/>
                 <constraint firstItem="Mdh-gh-2R9" firstAttribute="top" secondItem="6x5-nE-EqW" secondAttribute="bottom" constant="8" id="bDV-mg-aL8"/>
-                <constraint firstItem="6x5-nE-EqW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="dz0-vb-8sL"/>
+                <constraint firstItem="6x5-nE-EqW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="dz0-vb-8sL"/>
                 <constraint firstItem="Mdh-gh-2R9" firstAttribute="leading" secondItem="6x5-nE-EqW" secondAttribute="leading" id="eOD-rF-zuJ"/>
                 <constraint firstItem="AQt-nN-38I" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="eca-i0-w1c"/>
                 <constraint firstItem="AQt-nN-38I" firstAttribute="centerY" secondItem="Mdh-gh-2R9" secondAttribute="centerY" id="lPK-tY-OwB"/>

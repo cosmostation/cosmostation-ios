@@ -28,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dbf-JG-lTA" customClass="MemoTextView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="128"/>
+                    <rect key="frame" x="16" y="54" width="382" height="128"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -39,13 +39,13 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/255" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7R-RN-bjg">
-                    <rect key="frame" x="362.5" y="192" width="35.5" height="16.5"/>
+                    <rect key="frame" x="362.5" y="186" width="35.5" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HYQ-dD-7gi">
-                    <rect key="frame" x="160" y="224.5" width="238" height="35"/>
+                    <rect key="frame" x="160" y="218.5" width="238" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1m-Dt-Xhf">
                             <rect key="frame" x="0.0" y="0.0" width="115" height="35"/>
@@ -206,7 +206,7 @@ Some exchanges or wallets may require a specific memo for deposits.</string>
                 <constraint firstItem="Dbf-JG-lTA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="pjX-sv-Yei"/>
                 <constraint firstItem="ZrK-EO-cs3" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="s7d-XZ-ETw"/>
                 <constraint firstItem="l7R-RN-bjg" firstAttribute="top" secondItem="Dbf-JG-lTA" secondAttribute="bottom" constant="4" id="vFP-FO-ldQ"/>
-                <constraint firstItem="Dbf-JG-lTA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="vNl-3D-fOB"/>
+                <constraint firstItem="Dbf-JG-lTA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="vNl-3D-fOB"/>
             </constraints>
             <point key="canvasLocation" x="139" y="154"/>
         </view>
@@ -225,7 +225,7 @@ Some exchanges or wallets may require a specific memo for deposits.</string>
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
