@@ -15,7 +15,7 @@
             <objects>
                 <viewController id="G92-8m-qqM" customClass="MainTabWalletViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3wT-my-HkK">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vgm-58-EwV">
@@ -265,7 +265,7 @@
             <objects>
                 <viewController id="t07-dn-E46" customClass="MainTabHistoryViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zcq-nb-U4b">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SWH-mJ-BRy" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
@@ -460,7 +460,7 @@
             <objects>
                 <viewController id="oOd-o8-Sem" customClass="MainTabTokenViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pyz-AK-6Ed">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Al7-NK-Got">
@@ -866,7 +866,7 @@
             <objects>
                 <viewController id="1zF-Vz-4uW" customClass="MainTabSettingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eZu-D4-qDA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bms-CG-fww">
@@ -1003,10 +1003,9 @@
         <scene sceneID="9A2-0D-p3l">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6PU-dL-cQj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="HISTORY" image="ts_ic" id="Pah-Ab-5sf"/>
+                    <tabBarItem key="tabBarItem" title="HISTORY" image="mainTabHistory" id="Pah-Ab-5sf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="He0-cX-uZk">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -1025,10 +1024,9 @@
         <scene sceneID="S0Y-sR-QHR">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ARn-Yi-ZWd" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="SETTING" image="setting_ic" id="hWX-Vb-kcg"/>
+                    <tabBarItem key="tabBarItem" title="SETTING" image="mainTabSetting" id="hWX-Vb-kcg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A24-Xc-evI">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -1048,7 +1046,7 @@
             <objects>
                 <viewController id="ktg-GO-6fF" customClass="MyValidatorViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qnt-Rf-GI9">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qja-ad-aQz">
@@ -1178,7 +1176,7 @@
             <objects>
                 <viewController id="TPk-7b-ccf" customClass="AllValidatorViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JeS-cB-dvk">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5r-sD-zNO">
@@ -1268,7 +1266,7 @@
             <objects>
                 <tableViewController id="k2t-NI-3vK" customClass="SettingTableViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="6WZ-p9-dW0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="675"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2435,7 +2433,7 @@
             <objects>
                 <viewController id="QXN-Be-TMt" customClass="OtherValidatorViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tps-Ma-pY6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gec-G7-NYf">
@@ -2493,10 +2491,9 @@
         <scene sceneID="wFd-X2-Web">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jCW-id-z93" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="ASSETS" image="tokensDsIc" id="1JO-em-9vw"/>
+                    <tabBarItem key="tabBarItem" title="ASSETS" image="mainTabAssets" id="1JO-em-9vw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="k59-4s-zb9">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -2515,10 +2512,9 @@
         <scene sceneID="KyC-jT-qDp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="A62-66-G4a" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="WALLET" image="wallet_ic" id="QTX-GR-gtF"/>
+                    <tabBarItem key="tabBarItem" title="WALLET" image="mainTabWallet" id="QTX-GR-gtF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cf1-vj-0j5">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -2607,7 +2603,7 @@
             <objects>
                 <viewController storyboardIdentifier="OkMyValidatorViewController" id="XGO-ki-xrP" customClass="OkMyValidatorViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wCT-xa-HJl">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjQ-Uy-xg3">
@@ -2693,7 +2689,7 @@
             <objects>
                 <viewController storyboardIdentifier="OkTopValidatorViewController" id="tIw-sS-HFb" customClass="OkTopValidatorViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ei8-hz-1qb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6d8-wQ-OTL">
@@ -2752,7 +2748,7 @@
             <objects>
                 <viewController storyboardIdentifier="OkOtherValidatorViewController" id="KJV-mn-rFc" customClass="OkOtherValidatorViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="c0U-7X-KgQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="810"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n53-vA-3Ev">
@@ -2889,10 +2885,10 @@
         <image name="iconKeyEmpty" width="20" height="20"/>
         <image name="iconOrder" width="16" height="16"/>
         <image name="loading_1" width="144" height="144"/>
-        <image name="setting_ic" width="24" height="24"/>
-        <image name="tokensDsIc" width="24" height="24"/>
-        <image name="ts_ic" width="24" height="24"/>
-        <image name="wallet_ic" width="24" height="24"/>
+        <image name="mainTabAssets" width="24" height="24"/>
+        <image name="mainTabHistory" width="24" height="24"/>
+        <image name="mainTabSetting" width="24" height="24"/>
+        <image name="mainTabWallet" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
