@@ -51,8 +51,8 @@
                                         <constraint firstAttribute="width" constant="120" id="PxM-Ye-IEN"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" title="Add Image" image="photo.artframe" catalog="system">
+                                    <color key="tintColor" name="_font05"/>
+                                    <state key="normal" title="Add Image" image="btnIconPicture">
                                         <color key="titleColor" name="_font05"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -254,7 +254,7 @@
         </view>
     </objects>
     <resources>
-        <image name="photo.artframe" catalog="system" width="128" height="93"/>
+        <image name="btnIconPicture" width="24" height="24"/>
         <image name="profileimgNone" width="48" height="48"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
