@@ -40,21 +40,6 @@ public class WUtils {
     static func getDivideHandler(_ decimal:Int16) -> NSDecimalNumberHandler{
         return NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: decimal, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     }
-
-    
-    static func getAccountWithAccountInfo(_ account: Account, _ accountInfo: AccountInfo) -> Account {
-        let result = account
-        if (accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT || accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT_LEGACY || accountInfo.type == COSMOS_AUTH_TYPE_CERTIK_MANUAL) {
-            result.account_address = accountInfo.value.address
-            result.account_sequence_number = Int64(accountInfo.value.sequence) ?? 0
-            result.account_account_numner = Int64(accountInfo.value.account_number) ?? 0
-        } else {
-            result.account_address = accountInfo.value.BaseVestingAccount.BaseAccount.address
-            result.account_sequence_number = Int64(accountInfo.value.BaseVestingAccount.BaseAccount.sequence) ?? 0
-            result.account_account_numner = Int64(accountInfo.value.BaseVestingAccount.BaseAccount.account_number) ?? 0
-        }
-        return result
-    }
     
     static func getAccountWithBnbAccountInfo(_ account: Account, _ accountInfo: BnbAccountInfo) -> Account {
         let result = account
@@ -64,18 +49,12 @@ public class WUtils {
         return result
     }
     
-    static func getAccountWithKavaAccountInfo(_ account: Account, _ accountInfo: KavaAccountInfo) -> Account {
-        let result = account
-        if (accountInfo.result.type == COSMOS_AUTH_TYPE_ACCOUNT) {
-            result.account_address = accountInfo.result.value.address
-            result.account_sequence_number = Int64(accountInfo.result.value.sequence)!
-            result.account_account_numner = Int64(accountInfo.result.value.account_number)!
-        } else if (accountInfo.result.type == COSMOS_AUTH_TYPE_V_VESTING_ACCOUNT || accountInfo.result.type == COSMOS_AUTH_TYPE_P_VESTING_ACCOUNT) {
-            result.account_address = accountInfo.result.value.address
-            result.account_sequence_number = Int64(accountInfo.result.value.sequence)!
-            result.account_account_numner = Int64(accountInfo.result.value.account_number)!
+    static func getBalancesWithBnbAccountInfo(_ account: Account, _ accountInfo: BnbAccountInfo) -> Array<Balance> {
+        var result = Array<Balance>()
+        for bnbBalance in accountInfo.balances {
+            result.append(Balance(account.account_id, bnbBalance.symbol, bnbBalance.free, Date().millisecondsSince1970, bnbBalance.frozen, bnbBalance.locked))
         }
-        return result
+        return result;
     }
     
     static func getAccountWithOkAccountInfo(_ account: Account, _ accountInfo: OkAccountInfo) -> Account {
@@ -86,57 +65,6 @@ public class WUtils {
             result.account_account_numner = Int64(accountInfo.value!.account_number!)!
         }
         return result
-    }
-    
-    static func getAccountWithVestingAccountInfo(_ account: Account, _ accountInfo: VestingAccountInfo) -> Account {
-        let result = account
-        result.account_address = account.account_address
-        result.account_sequence_number = Int64(accountInfo.result!.value!.sequence!)!
-        result.account_account_numner = Int64(accountInfo.result!.value!.account_number!)!
-        return result
-    }
-    
-    static func getBalancesWithAccountInfo(_ account: Account, _ accountInfo: AccountInfo) -> Array<Balance> {
-        var result = Array<Balance>()
-        if (accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT || accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT_LEGACY ||
-            accountInfo.type == COSMOS_AUTH_TYPE_CERTIK_MANUAL) {
-            for coin in accountInfo.value.coins {
-                result.append(Balance.init(account.account_id, coin.denom, coin.amount, Date().millisecondsSince1970))
-            }
-            
-        } else {
-            for coin in accountInfo.value.BaseVestingAccount.BaseAccount.coins {
-                result.append(Balance.init(account.account_id, coin.denom, coin.amount, Date().millisecondsSince1970))
-            }
-        }
-        return result
-    }
-    
-    static func getBalancesWithAccountInfo(_ accountInfo: AccountInfo) -> Array<Balance> {
-        var result = Array<Balance>()
-        if(accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT ||
-            accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT_LEGACY ||
-            accountInfo.type == COSMOS_AUTH_TYPE_CERTIK_MANUAL) {
-            for coin in accountInfo.value.coins {
-                result.append(Balance.init(-1, coin.denom, coin.amount, Date().millisecondsSince1970))
-            }
-
-        } else {
-            for coin in accountInfo.value.BaseVestingAccount.BaseAccount.coins {
-                result.append(Balance.init(-1, coin.denom, coin.amount, Date().millisecondsSince1970))
-            }
-        }
-        return result
-    }
-    
-    
-    
-    static func getBalancesWithBnbAccountInfo(_ account: Account, _ accountInfo: BnbAccountInfo) -> Array<Balance> {
-        var result = Array<Balance>()
-        for bnbBalance in accountInfo.balances {
-            result.append(Balance(account.account_id, bnbBalance.symbol, bnbBalance.free, Date().millisecondsSince1970, bnbBalance.frozen, bnbBalance.locked))
-        }
-        return result;
     }
     
     static func getBalancesWithOkAccountInfo(_ account: Account, _ accountToken: OkAccountToken) -> Array<Balance> {
@@ -253,21 +181,6 @@ public class WUtils {
         }
     }
     
-    static func txTimetoShortString(input: String?) -> String {
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format2", comment: "")
-        if (input != nil) {
-            let fullDate = nodeFormatter.date(from: input!)
-            return localFormatter.string(from: fullDate!)
-        } else {
-            return ""
-        }
-    }
-    
     
     static func longTimetoString(_ input: Int64) -> String {
         let localFormatter = DateFormatter()
@@ -291,16 +204,6 @@ public class WUtils {
         nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         let date = nodeFormatter.date(from: input) ?? Date.init()
         return longTimetoString3(date.millisecondsSince1970)
-    }
-    
-    
-    static func vestingTimeToString(_ startTime:Int64, _ vesting: KavaAccountInfo.VestingPeriod) -> String {
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-        let unlockTime = (startTime + vesting.length) * 1000
-        
-        let fullDate = Date.init(milliseconds: Int(unlockTime))
-        return localFormatter.string(from: fullDate)
     }
     
     static func unbondingDateFromNow(_ date:UInt16) -> String {
@@ -410,24 +313,6 @@ public class WUtils {
         }
     }
     
-    static func vestingTimeGap(_ startTime:Int64, _ vesting: KavaAccountInfo.VestingPeriod) -> String {
-        let unlockTime = (startTime + vesting.length) * 1000
-        let secondsLeft = Int(Date().timeIntervalSince(Date.init(milliseconds: Int(unlockTime)))) * -1
-        
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-        if secondsLeft < minute {
-            return "Soon"
-        } else if secondsLeft < hour {
-            return "(\(secondsLeft / minute) minutes remaining)"
-        } else if secondsLeft < day {
-            return "(\(secondsLeft / hour) hours remaining)"
-        } else {
-            return "(\(secondsLeft / day) days remaining)"
-        }
-    }
-    
     static func checkNAN(_ check: NSDecimalNumber) -> NSDecimalNumber{
         if(check.isEqual(to: NSDecimalNumber.notANumber)) {
             return NSDecimalNumber.zero
@@ -506,34 +391,6 @@ public class WUtils {
         
         let formatted = nf.string(from: amount)?.replacingOccurrences(of: ",", with: "" )
         return formatted!
-    }
-    
-    static func availableAmount(_ balances:Array<Balance>, _ symbol:String) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for balance in balances {
-            if (balance.balance_denom == symbol) {
-                amount = plainStringToDecimal(balance.balance_amount)
-            }
-        }
-        return amount;
-    }
-    
-    static func lockedAmount(_ balances:Array<Balance>, _ symbol:String) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for balance in balances {
-            if (balance.balance_denom == symbol) {
-                amount = plainStringToDecimal(balance.balance_locked)
-            }
-        }
-        return amount;
-    }
-    
-    static func okDepositAmount(_ deposit: OkStaking?) -> NSDecimalNumber {
-        return plainStringToDecimal(deposit?.tokens)
-    }
-    
-    static func okWithdrawAmount(_ withdraw: OkUnbonding?) -> NSDecimalNumber {
-        return plainStringToDecimal(withdraw?.quantity)
     }
     
     //price displaying

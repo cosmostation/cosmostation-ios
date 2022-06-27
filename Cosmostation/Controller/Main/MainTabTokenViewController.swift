@@ -268,7 +268,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             if (denomText.count > 4) { cell?.tokenSymbol.text = denomText.substring(to: 4) }
             else { cell?.tokenSymbol.text = denomText }
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = ""
+            cell?.tokenDescription.text = " "
             cell!.tokenValue.text = ""
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
         }

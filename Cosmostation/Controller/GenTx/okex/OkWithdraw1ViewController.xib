@@ -11,6 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OkWithdraw1ViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="availableAmountLabel" destination="rF4-BM-PwR" id="OTl-td-Y8f"/>
+                <outlet property="btn01" destination="msv-LD-va8" id="1sC-TK-G2b"/>
+                <outlet property="cancelBtn" destination="gsT-Su-bj9" id="kp6-lq-xiO"/>
+                <outlet property="denomTitleLabel" destination="lmy-Ol-nXk" id="TrV-S8-dJS"/>
+                <outlet property="nextBtn" destination="3ze-C7-Bqe" id="kY4-Eq-xEw"/>
+                <outlet property="toWithdrawAmountInput" destination="q0T-4d-Oci" id="Hz7-5d-7SW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
