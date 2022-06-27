@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -40,20 +42,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="MZZ-pd-kjf">
-                    <rect key="frame" x="18" y="20" width="32" height="32"/>
+                    <rect key="frame" x="18" y="54" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="l6F-Ua-A8q"/>
                         <constraint firstAttribute="height" constant="32" id="odM-2J-AjT"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LON-hv-IJt">
-                    <rect key="frame" x="31.5" y="56" width="5.5" height="13.5"/>
+                    <rect key="frame" x="31.5" y="90" width="5.5" height="13.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0kU-0U-Sh8" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="62" y="18" width="336" height="50"/>
+                    <rect key="frame" x="62" y="52" width="336" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -67,7 +69,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xfd-e9-kJC">
-                    <rect key="frame" x="358" y="27" width="32" height="32"/>
+                    <rect key="frame" x="358" y="61" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="NjV-8i-Rau"/>
                         <constraint firstAttribute="height" constant="32" id="cmb-M9-3yT"/>
@@ -78,67 +80,67 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repay Partially : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxI-pC-Wha">
-                    <rect key="frame" x="245.5" y="76" width="91" height="14"/>
+                    <rect key="frame" x="245.5" y="110" width="91" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c5n-qW-b5h">
-                    <rect key="frame" x="340.5" y="76" width="4" height="14"/>
+                    <rect key="frame" x="340.5" y="110" width="4" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1X-ea-J5t">
-                    <rect key="frame" x="348.5" y="76" width="7.5" height="14"/>
+                    <rect key="frame" x="348.5" y="110" width="7.5" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5TP-sS-8HL">
-                    <rect key="frame" x="360" y="76" width="4" height="14"/>
+                    <rect key="frame" x="360" y="110" width="4" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Js4-fG-icT">
-                    <rect key="frame" x="368" y="76" width="30" height="14"/>
+                    <rect key="frame" x="368" y="110" width="30" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cannot repay partially" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r7F-Kc-x4e">
-                    <rect key="frame" x="281" y="76" width="117" height="14"/>
+                    <rect key="frame" x="281" y="110" width="117" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repay All : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="STj-3M-KZ9" userLabel="Repay All :">
-                    <rect key="frame" x="295" y="98" width="61" height="14"/>
+                    <rect key="frame" x="295" y="132" width="61" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zwc-37-bNJ">
-                    <rect key="frame" x="360" y="98" width="4" height="14"/>
+                    <rect key="frame" x="360" y="132" width="4" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kyi-gn-bTd">
-                    <rect key="frame" x="368" y="98" width="30" height="14"/>
+                    <rect key="frame" x="368" y="132" width="30" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cannot repay all" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QX9-C6-VPJ">
-                    <rect key="frame" x="310.5" y="98" width="87.5" height="14"/>
+                    <rect key="frame" x="310.5" y="132" width="87.5" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="TAt-CL-vxK">
-                    <rect key="frame" x="16" y="122" width="382" height="35"/>
+                    <rect key="frame" x="16" y="156" width="382" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWL-EI-dOK">
                             <rect key="frame" x="0.0" y="0.0" width="91" height="35"/>
@@ -230,7 +232,7 @@
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRx-uk-Ke3" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="169" width="382" height="60"/>
+                    <rect key="frame" x="16" y="203" width="382" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Risk Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nrP-2A-TYx">
                             <rect key="frame" x="8" y="22" width="68" height="16.5"/>
@@ -288,12 +290,12 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="yJs-6r-mvA">
-                    <rect key="frame" x="16" y="830" width="382" height="50"/>
+                    <rect key="frame" x="16" y="796" width="382" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8kA-vJ-lTz">
                             <rect key="frame" x="0.0" y="0.0" width="186" height="50"/>
@@ -346,7 +348,7 @@
                     </subviews>
                 </stackView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Jf-fI-TfQ" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="177" y="418" width="60" height="60"/>
+                    <rect key="frame" x="177" y="423" width="60" height="60"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="Rx1-Tm-NHG"/>
                         <constraint firstAttribute="height" constant="60" id="y8P-4A-hTT"/>
@@ -361,7 +363,7 @@
                 <constraint firstItem="Js4-fG-icT" firstAttribute="trailing" secondItem="0kU-0U-Sh8" secondAttribute="trailing" id="6yK-qr-X7x"/>
                 <constraint firstItem="Js4-fG-icT" firstAttribute="leading" secondItem="5TP-sS-8HL" secondAttribute="trailing" constant="4" id="8CJ-AB-gjT"/>
                 <constraint firstItem="LxI-pC-Wha" firstAttribute="centerY" secondItem="Js4-fG-icT" secondAttribute="centerY" id="8mS-U6-OBH"/>
-                <constraint firstItem="MZZ-pd-kjf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="A0n-ax-A0h"/>
+                <constraint firstItem="MZZ-pd-kjf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="A0n-ax-A0h"/>
                 <constraint firstItem="8Jf-fI-TfQ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="CHy-Gy-wC8"/>
                 <constraint firstItem="LON-hv-IJt" firstAttribute="centerX" secondItem="MZZ-pd-kjf" secondAttribute="centerX" id="DK7-vr-Xxm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tRx-uk-Ke3" secondAttribute="trailing" constant="16" id="Iic-4K-Zlg"/>
@@ -402,7 +404,7 @@
     </objects>
     <resources>
         <image name="btnIconClose" width="24" height="24"/>
-        <image name="iconArrowRight" width="128" height="128"/>
+        <image name="iconArrowRight" width="24" height="24"/>
         <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -417,7 +419,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

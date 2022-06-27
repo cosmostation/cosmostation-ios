@@ -46,6 +46,11 @@ class ReInvest1ViewController: BaseViewController {
         pageHolderVC.onNextPage()
     }
     
+    override func enableUserInteraction() {
+        self.cancelBtn.isUserInteractionEnabled = true
+        self.nextBtn.isUserInteractionEnabled = true
+    }
+    
     func updateView() {
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         

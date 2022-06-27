@@ -37,7 +37,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o6c-zs-gbj" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="210"/>
+                    <rect key="frame" x="16" y="54" width="382" height="210"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconBep3Send" translatesAutoresizingMaskIntoConstraints="NO" id="LqN-u1-L6R">
                             <rect key="frame" x="12" y="12" width="28" height="28"/>
@@ -154,12 +154,12 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0jI-Vu-9gx" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="282" width="382" height="195"/>
+                    <rect key="frame" x="16" y="276" width="382" height="195"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msgIconBep3Claim" translatesAutoresizingMaskIntoConstraints="NO" id="0HX-dk-jdl">
                             <rect key="frame" x="12" y="12" width="28" height="28"/>
@@ -284,7 +284,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -350,7 +350,7 @@
                 <constraint firstItem="0jI-Vu-9gx" firstAttribute="top" secondItem="o6c-zs-gbj" secondAttribute="bottom" constant="12" id="KDM-5j-EuD"/>
                 <constraint firstItem="0jI-Vu-9gx" firstAttribute="trailing" secondItem="o6c-zs-gbj" secondAttribute="trailing" id="Zh8-J3-Yg1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="o6c-zs-gbj" secondAttribute="trailing" constant="16" id="cfC-CR-jDD"/>
-                <constraint firstItem="o6c-zs-gbj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="fJL-Oi-eE8"/>
+                <constraint firstItem="o6c-zs-gbj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="fJL-Oi-eE8"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dka-qs-zHp" secondAttribute="bottom" constant="16" id="mvm-OL-Qkc"/>
                 <constraint firstItem="dka-qs-zHp" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="nQt-pg-ZOq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dka-qs-zHp" secondAttribute="trailing" constant="16" id="opK-vd-OpT"/>

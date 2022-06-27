@@ -26,7 +26,7 @@ class ChainComdex: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenComdex")
     var stakeDenom = "ucmdx"
     var stakeSymbol = "CMDX"
-    var stakeSendImg = UIImage(named: "btnSendComdex")!
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "comdex")!
     
     var addressPrefix = "comdex"

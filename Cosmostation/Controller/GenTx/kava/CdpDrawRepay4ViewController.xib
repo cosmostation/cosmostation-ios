@@ -37,7 +37,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xuf-fb-uLF" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="320"/>
+                    <rect key="frame" x="16" y="54" width="382" height="320"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repayment Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEu-6z-ywW">
                             <rect key="frame" x="16" y="16" width="123" height="16.5"/>
@@ -210,7 +210,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -287,7 +287,7 @@ All deposits will be returned to each depositor.</string>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="aGY-tM-uK3" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="3U0-yL-KwH"/>
-                <constraint firstItem="xuf-fb-uLF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="BK7-sh-FLg"/>
+                <constraint firstItem="xuf-fb-uLF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="BK7-sh-FLg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xuf-fb-uLF" secondAttribute="trailing" constant="16" id="Cj4-z1-t40"/>
                 <constraint firstItem="qEE-9B-mrd" firstAttribute="top" secondItem="aGY-tM-uK3" secondAttribute="bottom" constant="16" id="LPW-pk-sER"/>
                 <constraint firstItem="qEE-9B-mrd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Oxf-t4-2bN"/>
@@ -321,7 +321,7 @@ All deposits will be returned to each depositor.</string>
             <color red="1" green="0.33300000429153442" blue="0.31000000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

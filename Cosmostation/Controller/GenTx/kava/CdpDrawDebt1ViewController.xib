@@ -35,20 +35,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tokenDefault" translatesAutoresizingMaskIntoConstraints="NO" id="e1P-HG-6N4">
-                    <rect key="frame" x="18" y="64" width="32" height="32"/>
+                    <rect key="frame" x="18" y="54" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="St5-c1-19z"/>
                         <constraint firstAttribute="height" constant="32" id="W1Y-nG-Mr4"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ue-b2-DCg">
-                    <rect key="frame" x="31.5" y="100" width="5.5" height="13.5"/>
+                    <rect key="frame" x="31.5" y="90" width="5.5" height="13.5"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cfK-Me-Z1p" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="62" y="62" width="336" height="50"/>
+                    <rect key="frame" x="62" y="52" width="336" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -62,7 +62,7 @@
                     </connections>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PsF-Fr-okE">
-                    <rect key="frame" x="358" y="71" width="32" height="32"/>
+                    <rect key="frame" x="358" y="61" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="WTi-wM-Naw"/>
                         <constraint firstAttribute="width" constant="32" id="oFb-MR-9jw"/>
@@ -73,31 +73,31 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uA4-gO-fu2">
-                    <rect key="frame" x="340.5" y="120" width="4" height="14"/>
+                    <rect key="frame" x="340.5" y="110" width="4" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOM-IJ-HOM">
-                    <rect key="frame" x="348.5" y="120" width="7.5" height="14"/>
+                    <rect key="frame" x="348.5" y="110" width="7.5" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAN-1C-tJa">
-                    <rect key="frame" x="360" y="120" width="4" height="14"/>
+                    <rect key="frame" x="360" y="110" width="4" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icT-4F-Bgl">
-                    <rect key="frame" x="368" y="120" width="30" height="14"/>
+                    <rect key="frame" x="368" y="110" width="30" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="p5p-fs-yAH">
-                    <rect key="frame" x="16" y="140" width="382" height="35"/>
+                    <rect key="frame" x="16" y="130" width="382" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eHQ-ey-Ha9">
                             <rect key="frame" x="0.0" y="0.0" width="71.5" height="35"/>
@@ -210,7 +210,7 @@
                     </constraints>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41S-0b-JsF" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="187" width="382" height="60"/>
+                    <rect key="frame" x="16" y="177" width="382" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Risk Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWz-z4-snC">
                             <rect key="frame" x="8" y="22" width="68" height="16.5"/>
@@ -268,7 +268,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -359,7 +359,7 @@
                 <constraint firstItem="7Ue-b2-DCg" firstAttribute="centerX" secondItem="e1P-HG-6N4" secondAttribute="centerX" id="f2u-Mi-2p4"/>
                 <constraint firstItem="cfK-Me-Z1p" firstAttribute="leading" secondItem="e1P-HG-6N4" secondAttribute="trailing" constant="12" id="f62-VL-xkG"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sCv-ys-hw3" secondAttribute="trailing" constant="16" id="fwJ-ex-r0H"/>
-                <constraint firstItem="e1P-HG-6N4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="gZL-eC-DxL"/>
+                <constraint firstItem="e1P-HG-6N4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="gZL-eC-DxL"/>
                 <constraint firstItem="pAN-1C-tJa" firstAttribute="centerY" secondItem="icT-4F-Bgl" secondAttribute="centerY" id="k4J-w1-Prq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="sCv-ys-hw3" secondAttribute="bottom" constant="16" id="lt0-fu-fhg"/>
                 <constraint firstItem="41S-0b-JsF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="qSi-zk-t8v"/>
@@ -382,7 +382,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -37,7 +37,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yew-uP-0wl" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="380"/>
+                    <rect key="frame" x="16" y="54" width="382" height="380"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hhi-Ej-Zn9">
                             <rect key="frame" x="16" y="16" width="84.5" height="16.5"/>
@@ -228,7 +228,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -292,7 +292,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="yew-uP-0wl" secondAttribute="leading" constant="-16" id="4hY-Xz-8CM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ne6-YZ-M7r" secondAttribute="trailing" constant="16" id="9ke-CQ-JwN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yew-uP-0wl" secondAttribute="trailing" constant="16" id="Fd2-xa-Qcz"/>
-                <constraint firstItem="yew-uP-0wl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="G1B-7h-H3S"/>
+                <constraint firstItem="yew-uP-0wl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="G1B-7h-H3S"/>
                 <constraint firstItem="ne6-YZ-M7r" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="NL2-MY-rlg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ne6-YZ-M7r" secondAttribute="bottom" constant="16" id="k9Y-5u-Lvj"/>
             </constraints>
@@ -313,7 +313,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

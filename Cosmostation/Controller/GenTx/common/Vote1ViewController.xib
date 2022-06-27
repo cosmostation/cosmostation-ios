@@ -33,7 +33,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FmR-Tt-ixr" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="60"/>
+                    <rect key="frame" x="16" y="54" width="382" height="60"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3P-Ua-h5v">
                             <rect key="frame" x="16" y="12" width="350" height="16.5"/>
@@ -68,12 +68,12 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mDF-Ye-4i4">
-                    <rect key="frame" x="16" y="144" width="382" height="50"/>
+                    <rect key="frame" x="16" y="138" width="382" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="kCL-Fc-0eb"/>
                     </constraints>
@@ -98,14 +98,14 @@
                     </connections>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="4bo-Fw-AX4">
-                    <rect key="frame" x="358" y="157" width="24" height="24"/>
+                    <rect key="frame" x="358" y="151" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="45T-EU-F0A"/>
                         <constraint firstAttribute="height" constant="24" id="U5a-yg-0hX"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhO-jk-wOJ">
-                    <rect key="frame" x="16" y="206" width="382" height="50"/>
+                    <rect key="frame" x="16" y="200" width="382" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="rq4-Q5-v2Y"/>
                     </constraints>
@@ -130,14 +130,14 @@
                     </connections>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="9Nb-cH-YNV">
-                    <rect key="frame" x="358" y="219" width="24" height="24"/>
+                    <rect key="frame" x="358" y="213" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="3pt-LX-cM0"/>
                         <constraint firstAttribute="height" constant="24" id="QiZ-nv-ggB"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eiR-AV-7ra">
-                    <rect key="frame" x="16" y="268" width="382" height="50"/>
+                    <rect key="frame" x="16" y="262" width="382" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="gPT-16-9fO"/>
                     </constraints>
@@ -162,14 +162,14 @@
                     </connections>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="9Ej-jj-FQ3">
-                    <rect key="frame" x="358" y="281" width="24" height="24"/>
+                    <rect key="frame" x="358" y="275" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="rcH-Om-Br6"/>
                         <constraint firstAttribute="width" constant="24" id="w53-Rv-qCx"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFv-32-yg1">
-                    <rect key="frame" x="16" y="330" width="382" height="50"/>
+                    <rect key="frame" x="16" y="324" width="382" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="6SE-b7-83w"/>
                     </constraints>
@@ -194,7 +194,7 @@
                     </connections>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconCheck" translatesAutoresizingMaskIntoConstraints="NO" id="4n7-jh-wYV">
-                    <rect key="frame" x="358" y="343" width="24" height="24"/>
+                    <rect key="frame" x="358" y="337" width="24" height="24"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="24" id="0jP-SV-o4X"/>
                         <constraint firstAttribute="height" constant="24" id="aSX-LU-Lok"/>
@@ -270,7 +270,7 @@
                 <constraint firstItem="cFv-32-yg1" firstAttribute="trailing" secondItem="mDF-Ye-4i4" secondAttribute="trailing" id="RLk-sf-ZjX"/>
                 <constraint firstItem="OhO-jk-wOJ" firstAttribute="trailing" secondItem="mDF-Ye-4i4" secondAttribute="trailing" id="Uf2-h2-KRO"/>
                 <constraint firstItem="eiR-AV-7ra" firstAttribute="leading" secondItem="mDF-Ye-4i4" secondAttribute="leading" id="Wiq-cu-iY8"/>
-                <constraint firstItem="FmR-Tt-ixr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Zzv-aQ-pgJ"/>
+                <constraint firstItem="FmR-Tt-ixr" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Zzv-aQ-pgJ"/>
                 <constraint firstItem="4n7-jh-wYV" firstAttribute="centerY" secondItem="cFv-32-yg1" secondAttribute="centerY" id="aSj-Dv-2ml"/>
                 <constraint firstItem="4bo-Fw-AX4" firstAttribute="trailing" secondItem="mDF-Ye-4i4" secondAttribute="trailing" constant="-16" id="ahV-YL-Law"/>
                 <constraint firstItem="9Nb-cH-YNV" firstAttribute="centerY" secondItem="OhO-jk-wOJ" secondAttribute="centerY" id="bOR-5G-u7E"/>
@@ -299,7 +299,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.0" green="0.71764705882352942" blue="0.75294117647058822" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

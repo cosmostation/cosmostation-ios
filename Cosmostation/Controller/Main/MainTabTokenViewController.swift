@@ -263,7 +263,13 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             onBindIbcToken_gRPC(cell, mIbcUnknown_gRPC[indexPath.row])
             
         } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
-            cell?.tokenSymbol.text = mUnKnown_gRPC[indexPath.row].denom.uppercased()
+            cell?.tokenImg.image = UIImage(named: "tokenDefault")
+            let denomText = mUnKnown_gRPC[indexPath.row].denom.uppercased()
+            if (denomText.count > 4) { cell?.tokenSymbol.text = denomText.substring(to: 4) }
+            else { cell?.tokenSymbol.text = denomText }
+            cell?.tokenTitle.text = ""
+            cell?.tokenDescription.text = ""
+            cell!.tokenValue.text = ""
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
         }
         
@@ -685,9 +691,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                     mNative_gRPC.append(balance_gRPC)
                 }
             
-            } else if (chainType == .COSMOS_MAIN && balance_gRPC.isPoolToken()) {
-                mPoolToken_gRPC.append(balance_gRPC)
-                
             } else if (chainType == .SIF_MAIN && balance_gRPC.denom.starts(with: "c")) {
                 mBridged_gRPC.append(balance_gRPC)
                 

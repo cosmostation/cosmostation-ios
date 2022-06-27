@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RtO-xa-tq0" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="117"/>
+                    <rect key="frame" x="16" y="54" width="382" height="117"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To Delete Starname" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPe-XT-ka8">
                             <rect key="frame" x="16" y="16" width="106.5" height="14"/>
@@ -67,7 +67,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -128,7 +128,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="RtO-xa-tq0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="9II-Y1-bPa"/>
+                <constraint firstItem="RtO-xa-tq0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="9II-Y1-bPa"/>
                 <constraint firstItem="RtO-xa-tq0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="FjS-XI-0oY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RtO-xa-tq0" secondAttribute="trailing" constant="16" id="Ks2-Ya-rhT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pzp-cw-OBE" secondAttribute="bottom" constant="16" id="Tjl-Uw-Fd1"/>
@@ -149,7 +149,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

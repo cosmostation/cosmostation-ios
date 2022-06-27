@@ -79,7 +79,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyu-zC-ih4" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="240"/>
+                    <rect key="frame" x="16" y="54" width="382" height="240"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Repay Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAy-hz-6vZ">
                             <rect key="frame" x="16" y="16" width="92" height="16.5"/>
@@ -163,7 +163,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -176,7 +176,7 @@
                 <constraint firstItem="nyu-zC-ih4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="gIt-CQ-bfz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ysw-S1-Xhy" secondAttribute="bottom" constant="16" id="m4U-dc-GHS"/>
                 <constraint firstItem="ysw-S1-Xhy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="oCR-2n-HKc"/>
-                <constraint firstItem="nyu-zC-ih4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="qNb-9X-hHf"/>
+                <constraint firstItem="nyu-zC-ih4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="qNb-9X-hHf"/>
             </constraints>
             <point key="canvasLocation" x="29" y="96"/>
         </view>

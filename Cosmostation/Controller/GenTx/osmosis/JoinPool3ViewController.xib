@@ -84,7 +84,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="slx-Ec-uPs" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="56" width="390" height="255"/>
+                    <rect key="frame" x="12" y="54" width="390" height="255"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DMy-mu-9yb">
                             <rect key="frame" x="16" y="16" width="44" height="16.5"/>
@@ -208,7 +208,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -216,7 +216,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="slx-Ec-uPs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="QiD-Dx-c0l"/>
+                <constraint firstItem="slx-Ec-uPs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="QiD-Dx-c0l"/>
                 <constraint firstItem="slx-Ec-uPs" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="Utx-Vy-8qd"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="t0q-JZ-oDY" secondAttribute="bottom" constant="16" id="Vmp-1J-1Qg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="t0q-JZ-oDY" secondAttribute="trailing" constant="16" id="jE1-rQ-ue2"/>
@@ -243,7 +243,7 @@
             <color red="0.57300001382827759" green="0.28200000524520874" blue="0.85900002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

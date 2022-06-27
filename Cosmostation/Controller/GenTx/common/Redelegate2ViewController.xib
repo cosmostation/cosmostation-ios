@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Z0G-GP-bJy">
-                    <rect key="frame" x="0.0" y="56" width="414" height="732"/>
+                    <rect key="frame" x="0.0" y="54" width="414" height="734"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="w8I-by-73D">
@@ -87,7 +87,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Z0G-GP-bJy" secondAttribute="trailing" id="5yM-7o-wUo"/>
                 <constraint firstItem="w8I-by-73D" firstAttribute="top" secondItem="Z0G-GP-bJy" secondAttribute="bottom" constant="8" id="Ohy-sd-k7j"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="Z0G-GP-bJy" secondAttribute="leading" id="V8x-ch-rEe"/>
-                <constraint firstItem="Z0G-GP-bJy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="WKY-i5-xrg"/>
+                <constraint firstItem="Z0G-GP-bJy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="WKY-i5-xrg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="w8I-by-73D" secondAttribute="trailing" constant="16" id="YB6-9x-RoD"/>
                 <constraint firstItem="w8I-by-73D" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ZSQ-qP-yKM"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="w8I-by-73D" secondAttribute="bottom" constant="16" id="mxc-j1-1gZ"/>
@@ -100,7 +100,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -93,13 +93,13 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let proposal = mProposals_Mintscan[indexPath.row]
-        if (proposal.proposal_status!.localizedCaseInsensitiveContains("PASSED") || proposal.proposal_status!.localizedCaseInsensitiveContains("REJECTED")) {
-            onExplorerLink(proposal.id!)
-        } else {
+        if (proposal.proposal_status!.localizedCaseInsensitiveContains("VOTING")) {
             let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController
             voteDetailsVC.proposalId = proposal.id!
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(voteDetailsVC, animated: true)
+        } else {
+            onExplorerLink(proposal.id!)
         }
     }
     

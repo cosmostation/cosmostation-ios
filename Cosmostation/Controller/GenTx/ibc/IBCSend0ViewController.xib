@@ -31,13 +31,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source Chain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6I-FB-aUg">
-                    <rect key="frame" x="16" y="60" width="85" height="16.5"/>
+                    <rect key="frame" x="16" y="54" width="85" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OlG-Ns-eIK" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="84.5" width="175" height="42"/>
+                    <rect key="frame" x="16" y="78.5" width="175" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Mpq-9E-GTO">
                             <rect key="frame" x="6" y="5" width="32" height="32"/>
@@ -68,13 +68,13 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Destination Chain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zb5-ES-rOI">
-                    <rect key="frame" x="223" y="60" width="111" height="16.5"/>
+                    <rect key="frame" x="223" y="54" width="111" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1t1-6v-sSL" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="223" y="84.5" width="175" height="42"/>
+                    <rect key="frame" x="223" y="78.5" width="175" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="jaG-lb-NSk">
                             <rect key="frame" x="6" y="5" width="32" height="32"/>
@@ -120,7 +120,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconArrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="D9M-5a-kZK">
-                    <rect key="frame" x="197" y="95.5" width="20" height="20"/>
+                    <rect key="frame" x="197" y="89.5" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="6ph-ug-IBt"/>
                         <constraint firstAttribute="width" constant="20" id="h61-Pp-OzI"/>
@@ -180,24 +180,24 @@
                     </subviews>
                 </stackView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Relayer Channel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xhX-4p-qq9">
-                    <rect key="frame" x="16" y="150.5" width="104.5" height="16.5"/>
+                    <rect key="frame" x="16" y="144.5" width="104.5" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbI-Ka-BJV" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="175" width="382" height="42"/>
+                    <rect key="frame" x="16" y="169" width="382" height="42"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel-14" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lTj-Uz-CKX">
                             <rect key="frame" x="12" y="13" width="72.5" height="16.5"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
-                            <color key="textColor" name="_font04"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Description)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPG-R3-VC7">
                             <rect key="frame" x="92.5" y="15" width="68.5" height="14"/>
                             <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                            <color key="textColor" name="_font04"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropdown_btn" translatesAutoresizingMaskIntoConstraints="NO" id="UVb-3J-Kcg">
@@ -253,7 +253,7 @@
                 <constraint firstItem="1t1-6v-sSL" firstAttribute="leading" secondItem="D9M-5a-kZK" secondAttribute="trailing" constant="6" id="X8K-6t-lkF"/>
                 <constraint firstItem="1t1-6v-sSL" firstAttribute="top" secondItem="Zb5-ES-rOI" secondAttribute="bottom" constant="8" id="XWH-Pm-SEy"/>
                 <constraint firstItem="cbI-Ka-BJV" firstAttribute="top" secondItem="xhX-4p-qq9" secondAttribute="bottom" constant="8" id="Z90-SD-ELb"/>
-                <constraint firstItem="K6I-FB-aUg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="ZOx-yZ-vKK"/>
+                <constraint firstItem="K6I-FB-aUg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="ZOx-yZ-vKK"/>
                 <constraint firstItem="cbI-Ka-BJV" firstAttribute="leading" secondItem="OlG-Ns-eIK" secondAttribute="leading" id="dbt-y9-weM"/>
                 <constraint firstItem="xhX-4p-qq9" firstAttribute="top" secondItem="OlG-Ns-eIK" secondAttribute="bottom" constant="24" id="eEt-SL-1qz"/>
                 <constraint firstItem="cbI-Ka-BJV" firstAttribute="trailing" secondItem="1t1-6v-sSL" secondAttribute="trailing" id="igA-qx-fEz"/>
@@ -279,7 +279,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019607843137254902" green="0.82352941176470584" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

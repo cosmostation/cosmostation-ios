@@ -26,13 +26,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address to Connect" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jy0-Xp-hvg">
-                    <rect key="frame" x="16" y="79" width="128" height="17"/>
+                    <rect key="frame" x="16" y="54" width="128" height="17"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZqX-Qt-kma" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="112" width="382" height="50"/>
+                    <rect key="frame" x="16" y="87" width="382" height="50"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="Cdx-Rd-ybl">
                             <rect key="frame" x="12" y="12" width="26" height="26"/>
@@ -73,7 +73,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert Address" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="15H-6s-s9q" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="170" width="382" height="50"/>
+                    <rect key="frame" x="16" y="145" width="382" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -84,7 +84,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="a4s-ed-pMd">
-                    <rect key="frame" x="142" y="232" width="256" height="35"/>
+                    <rect key="frame" x="142" y="207" width="256" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X5R-uF-1eY">
                             <rect key="frame" x="0.0" y="0.0" width="80" height="35"/>
@@ -222,7 +222,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yWS-GG-F7g" secondAttribute="trailing" constant="16" id="Aod-8m-XLc"/>
-                <constraint firstItem="Jy0-Xp-hvg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="35" id="BSs-Pv-dDk"/>
+                <constraint firstItem="Jy0-Xp-hvg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="BSs-Pv-dDk"/>
                 <constraint firstItem="yWS-GG-F7g" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="CoC-dX-med"/>
                 <constraint firstItem="15H-6s-s9q" firstAttribute="top" secondItem="ZqX-Qt-kma" secondAttribute="bottom" constant="8" id="HKh-8P-TMH"/>
                 <constraint firstItem="15H-6s-s9q" firstAttribute="leading" secondItem="ZqX-Qt-kma" secondAttribute="leading" id="QOG-UY-ajf"/>

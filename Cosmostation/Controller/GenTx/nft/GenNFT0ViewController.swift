@@ -59,16 +59,16 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     func inInitView() {
         nftAddBtn.alignTextBelow()
         nftNameTextView.layer.borderWidth = 1.0
-        nftNameTextView.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
+        nftNameTextView.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
         nftNameTextView.layer.cornerRadius = 8
         nftDescriptionTextView.layer.borderWidth = 1.0
-        nftDescriptionTextView.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
+        nftDescriptionTextView.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
         nftDescriptionTextView.layer.cornerRadius = 8
         nftDenomIdLabel.layer.borderWidth = 1.0
-        nftDenomIdLabel.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
+        nftDenomIdLabel.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
         nftDenomIdLabel.layer.cornerRadius = 8
         nftDenomNameLabel.layer.borderWidth = 1.0
-        nftDenomNameLabel.layer.borderColor = UIColor(hexString: "#7A7F88").cgColor
+        nftDenomNameLabel.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
         nftDenomNameLabel.layer.cornerRadius = 8
         
         let randomUUID = STATION_NFT_DENOM + UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
@@ -127,7 +127,7 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
             nftImageView.clipsToBounds = true
             nftImageView.layer.cornerRadius = 8
             let dashBorder = CAShapeLayer()
-            dashBorder.strokeColor = UIColor(hexString: "#7A7F88").cgColor
+            dashBorder.strokeColor = UIColor.init(named: "_font05")!.cgColor
             dashBorder.lineWidth = 1
             dashBorder.lineDashPattern = [2, 4]
             dashBorder.fillColor = nil

@@ -78,7 +78,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ALl-x2-MDX" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="140"/>
+                    <rect key="frame" x="16" y="54" width="382" height="140"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGi-3B-bgZ">
                             <rect key="frame" x="332" y="58" width="4" height="14"/>
@@ -248,7 +248,7 @@
                 <constraint firstItem="ALl-x2-MDX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="27z-rW-pec"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6Gv-CB-ryn" secondAttribute="trailing" constant="16" id="AVY-83-abj"/>
                 <constraint firstItem="6Gv-CB-ryn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="H5y-zs-TKH"/>
-                <constraint firstItem="ALl-x2-MDX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Umg-KM-6I7"/>
+                <constraint firstItem="ALl-x2-MDX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="Umg-KM-6I7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="6Gv-CB-ryn" secondAttribute="bottom" constant="16" id="n0e-sS-n7T"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ALl-x2-MDX" secondAttribute="trailing" constant="16" id="rV1-jx-Jq1"/>
             </constraints>
@@ -270,7 +270,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

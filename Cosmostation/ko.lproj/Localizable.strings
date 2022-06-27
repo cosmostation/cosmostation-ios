@@ -774,6 +774,7 @@ support@cosmostation.io";
 "error_not_selected_to_import" = "등록할 지갑을 골라주세요";
 "error_alreay_imported_mnemonic" = "이미 등록된 니모닉 입니다.";
 "error_simul_error" = "실행할 수 없는 Tx입니다.";
+"error_no_mnemonic" = "개인키만 존재합니다.";
 
 
 

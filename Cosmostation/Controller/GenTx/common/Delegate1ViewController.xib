@@ -27,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q6B-nn-7w2" customClass="AmountInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="50"/>
+                    <rect key="frame" x="16" y="54" width="382" height="50"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -38,7 +38,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="decimalPad" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AqZ-eY-5F3">
-                    <rect key="frame" x="358" y="69" width="32" height="32"/>
+                    <rect key="frame" x="358" y="63" width="32" height="32"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="32" id="2Ag-JA-e2y"/>
                         <constraint firstAttribute="height" constant="32" id="mSn-pi-yZq"/>
@@ -49,25 +49,25 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Delegable : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dJC-YY-xYs">
-                    <rect key="frame" x="269.5" y="118" width="90.5" height="14"/>
+                    <rect key="frame" x="269.5" y="112" width="90.5" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqP-MO-hZZ">
-                    <rect key="frame" x="360" y="118" width="4" height="14"/>
+                    <rect key="frame" x="360" y="112" width="4" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4F8-tt-gQx">
-                    <rect key="frame" x="368" y="118" width="30" height="14"/>
+                    <rect key="frame" x="368" y="112" width="30" height="14"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <color key="textColor" name="_font05"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="b1y-4g-EKb">
-                    <rect key="frame" x="16" y="144" width="382" height="35"/>
+                    <rect key="frame" x="16" y="138" width="382" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HaN-Z0-WQL">
                             <rect key="frame" x="0.0" y="0.0" width="58.5" height="35"/>
@@ -261,7 +261,7 @@
                 <constraint firstItem="dJC-YY-xYs" firstAttribute="top" secondItem="q6B-nn-7w2" secondAttribute="bottom" constant="8" id="IcF-WT-lWJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="b1y-4g-EKb" secondAttribute="trailing" constant="16" id="J1p-uE-bnz"/>
                 <constraint firstItem="EqP-MO-hZZ" firstAttribute="leading" secondItem="dJC-YY-xYs" secondAttribute="trailing" id="VY1-Dx-mkv"/>
-                <constraint firstItem="q6B-nn-7w2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="WSo-da-GM2"/>
+                <constraint firstItem="q6B-nn-7w2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="WSo-da-GM2"/>
                 <constraint firstItem="AqZ-eY-5F3" firstAttribute="leading" secondItem="q6B-nn-7w2" secondAttribute="trailing" constant="-40" id="Zvx-0y-XrS"/>
                 <constraint firstItem="b1y-4g-EKb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="b12-gu-Goa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yGj-Zd-y0t" secondAttribute="trailing" constant="16" id="djQ-mv-RuA"/>
@@ -290,7 +290,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

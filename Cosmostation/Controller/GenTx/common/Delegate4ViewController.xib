@@ -29,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBO-l7-eK8" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="60" width="382" height="230"/>
+                    <rect key="frame" x="16" y="54" width="382" height="230"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delegate Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjK-G5-tdZ">
                             <rect key="frame" x="16" y="16" width="107.5" height="16.5"/>
@@ -129,7 +129,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -212,7 +212,7 @@
                 <constraint firstItem="RdJ-jz-gii" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="32" id="PHL-9R-rOf"/>
                 <constraint firstItem="RdJ-jz-gii" firstAttribute="top" secondItem="S26-U6-JVZ" secondAttribute="bottom" constant="4" id="SQI-S0-PVd"/>
                 <constraint firstItem="NFP-5r-vMb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="TRZ-WM-0dC"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="BBO-l7-eK8" secondAttribute="top" constant="-16" id="X41-go-PXG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="BBO-l7-eK8" secondAttribute="top" constant="-10" id="X41-go-PXG"/>
                 <constraint firstItem="RdJ-jz-gii" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-32" id="kXg-cW-TYj"/>
                 <constraint firstItem="RdJ-jz-gii" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ro2-x9-52N"/>
                 <constraint firstItem="S26-U6-JVZ" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="ymV-7D-h8T"/>
@@ -235,7 +235,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

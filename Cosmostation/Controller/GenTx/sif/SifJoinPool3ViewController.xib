@@ -82,7 +82,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jbJ-uu-a9s" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="44" width="390" height="255"/>
+                    <rect key="frame" x="12" y="54" width="390" height="255"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RDb-qC-YRF">
                             <rect key="frame" x="16" y="16" width="44" height="16.5"/>
@@ -182,7 +182,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="0.0"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -195,7 +195,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XG9-vv-LAm" secondAttribute="trailing" constant="16" id="mos-C3-Gub"/>
                 <constraint firstItem="XG9-vv-LAm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="rRz-6F-JiZ"/>
                 <constraint firstItem="jbJ-uu-a9s" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="u5d-XF-Csj"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="jbJ-uu-a9s" secondAttribute="top" id="vkU-P8-2co"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="jbJ-uu-a9s" secondAttribute="top" constant="-10" id="vkU-P8-2co"/>
             </constraints>
             <point key="canvasLocation" x="139" y="130"/>
         </view>
@@ -214,7 +214,7 @@
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="sif">
             <color red="0.75700002908706665" green="0.62400001287460327" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

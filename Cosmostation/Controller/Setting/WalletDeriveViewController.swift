@@ -335,6 +335,13 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: existedAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             }
         }
+        var hiddenChains = BaseData.instance.userHideChains()
+        if (hiddenChains.contains(derive.chaintype)) {
+            if let position = hiddenChains.firstIndex(where: { $0 == derive.chaintype }) {
+                hiddenChains.remove(at: position)
+            }
+            BaseData.instance.setUserHiddenChains(hiddenChains)
+        }
     }
     
     func onCreateAccount(_ derive: Derive) {
@@ -363,6 +370,13 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 KeychainWrapper.standard.set(self.mWords.getWords(), forKey: newAccount.account_uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
                 KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             }
+        }
+        var hiddenChains = BaseData.instance.userHideChains()
+        if (hiddenChains.contains(derive.chaintype)) {
+            if let position = hiddenChains.firstIndex(where: { $0 == derive.chaintype }) {
+                hiddenChains.remove(at: position)
+            }
+            BaseData.instance.setUserHiddenChains(hiddenChains)
         }
     }
 }
