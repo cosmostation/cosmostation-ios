@@ -89,8 +89,6 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             btnBep3Send.isHidden = false
         } else if (chainType == ChainType.OKEX_MAIN) {
             totalAmount = WUtils.getAllExToken(stakingDenom)
-        } else {
-            totalAmount = WUtils.getAllMainAssetOld(stakingDenom)
         }
         self.topValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalAmount, stakingDivideDecimal, topValue.font)
     }
@@ -107,7 +105,6 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             return 0
             
         } else if (section == 2) {
-            if (BaseData.instance.unbondingSumAmount().compare(NSDecimalNumber.zero).rawValue > 0) { return 1 }
             return 0
         }
         return 0

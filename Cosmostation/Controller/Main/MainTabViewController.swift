@@ -177,9 +177,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mOtherValidator.removeAll()
         BaseData.instance.mMyValidator.removeAll()
         BaseData.instance.mBalances.removeAll()
-        BaseData.instance.mMyDelegations.removeAll()
-        BaseData.instance.mMyUnbondings.removeAll()
-        BaseData.instance.mMyReward.removeAll()
         
         BaseData.instance.mBnbTokenList.removeAll()
         BaseData.instance.mBnbTokenTicker.removeAll()

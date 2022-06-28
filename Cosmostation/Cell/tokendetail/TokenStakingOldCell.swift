@@ -92,34 +92,6 @@ class TokenStakingOldCell: UITableViewCell {
             okStakingAmount.attributedText = WUtils.displayAmount2(deposit.stringValue, okStakingAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
             okUnbondingAmount.attributedText = WUtils.displayAmount2(withdraw.stringValue, okUnbondingAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
             
-        } else {
-            delegatedLayer.isHidden = false
-            unbondingLayer.isHidden = false
-            rewardLayer.isHidden = false
-            lockedLayer.isHidden = true
-            frozenLayer.isHidden = true
-            okStakingLayer.isHidden = true
-            okUnbondingLayer.isHidden = true
-            
-            let total = WUtils.getAllMainAssetOld(stakingDenom)
-            let available = BaseData.instance.availableAmount(stakingDenom)
-            let delegated = BaseData.instance.delegatedSumAmount()
-            let unbonding = BaseData.instance.unbondingSumAmount()
-            let reward = BaseData.instance.rewardAmount(stakingDenom)
-            totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
-            availableAmount.attributedText = WUtils.displayAmount2(available.stringValue, availableAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            delegatedAmount.attributedText = WUtils.displayAmount2(delegated.stringValue, delegatedAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            unbondingAmount.attributedText = WUtils.displayAmount2(unbonding.stringValue, unbondingAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            rewardAmount.attributedText = WUtils.displayAmount2(reward.stringValue, rewardAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            
-            let vesting = BaseData.instance.lockedAmount(stakingDenom)
-            if (chainType == ChainType.KAVA_MAIN) {
-                if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
-                    vestingLayer.isHidden = false
-                    vestingAmount.attributedText = WUtils.displayAmount2(vesting.stringValue, vestingAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
-                }
-            }
-            
         }
         cardRoot.backgroundColor = chainConfig?.chainColorBG
     }
