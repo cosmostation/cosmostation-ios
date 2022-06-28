@@ -22,7 +22,6 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     var mMyValidator = false
     var mValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mSelfDelegationInfo_gRPC: Cosmos_Staking_V1beta1_DelegationResponse?
-    var mApiCustomHistories = Array<ApiHistoryCustom>()
     var mApiCustomNewHistories = Array<ApiHistoryNewCustom>()
         
     var refresher: UIRefreshControl!

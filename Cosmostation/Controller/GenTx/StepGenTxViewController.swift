@@ -129,11 +129,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mSifMyAllUnitAmount: String?
     var mSifMyWithdrawUnitAmount: String?
     
-    var mHdacKey: HDWalletKit.PrivateKey?
-    var mHdacAddress: String?
-    var mHdacBalance: NSDecimalNumber?
-    var mHdacUTXOs: Array<HdacUtxo>?
-    
     var mIBCSendDenom: String?
     var mIBCSendAmount: String?
     var mIBCRecipient: String?

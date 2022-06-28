@@ -22,15 +22,6 @@ class HistoryCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    func bindHistoryCustomView(_ history: ApiHistoryCustom, _ address: String) {
-        txTimeLabel.text = WUtils.txTimetoString(input: history.timestamp)
-        txTimeGapLabel.text = WUtils.txTimeGap(input: history.timestamp)
-        txBlockLabel.text = String(history.height!) + " block"
-        txTypeLabel.text = history.getMsgType(address)
-        if (history.isSuccess()) { txResultLabel.isHidden = true }
-        else { txResultLabel.isHidden = false }
-    }
-    
     func bindHistoryBnbView(_ history: BnbHistory, _ address: String) {
         txTimeLabel.text = WUtils.nodeTimetoString(input: history.timeStamp)
         txTimeGapLabel.text = WUtils.timeGap(input: history.timeStamp)
