@@ -194,7 +194,6 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchMyVote_gRPC(_ proposal_id: String, _ address: String) {
         DispatchQueue.global().async {
             do {
-                DispatchQueue.main.async(execute: { self.onFetchFinished() });
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 defer { try! channel.close().wait() }
 

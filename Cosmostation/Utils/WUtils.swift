@@ -2603,40 +2603,6 @@ public class WUtils {
         }
     }
     
-    static func getKavaHtlcStatus(_ txInfo:TxInfo, _ swap:KavaSwapInfo?) -> String {
-        if (!txInfo.isSuccess()) {
-            return NSLocalizedString("bep3_status_open", comment: "")
-        }
-        
-        if (swap == nil) {
-            return NSLocalizedString("bep3_status_completed", comment: "")
-        }
-        
-        if (swap?.result.status == KavaSwapInfo.STATUS_EXPIRED) {
-            return NSLocalizedString("bep3_status_expired", comment: "")
-        } else if (swap?.result.status == KavaSwapInfo.STATUS_OPEN) {
-            return NSLocalizedString("bep3_status_open", comment: "")
-        } else {
-            return NSLocalizedString("bep3_status_completed", comment: "")
-        }
-    }
-    
-    static func getBnbHtlcStatus(_ swap:BnbSwapInfo?, _ node:BnbNodeInfo?) -> String {
-        if (swap == nil || node == nil) {
-            return "-"
-        }
-        
-        if (swap?.status == BnbSwapInfo.BNB_STATUS_REFUNDED) {
-            return NSLocalizedString("bep3_status_refunded", comment: "")
-        } else if (swap?.status == BnbSwapInfo.BNB_STATUS_COMPLETED) {
-            return NSLocalizedString("bep3_status_completed", comment: "")
-        } else if (swap?.status == BnbSwapInfo.BNB_STATUS_OPEN && swap!.expireHeight < node!.getCHeight()) {
-            return NSLocalizedString("bep3_status_expired", comment: "")
-        }
-        return NSLocalizedString("bep3_status_open", comment: "")
-    }
-
-    
     static func getRealBlockTime(_ chain: ChainType?) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.COSMOS_TEST) {
             return BLOCK_TIME_COSMOS

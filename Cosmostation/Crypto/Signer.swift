@@ -700,33 +700,6 @@ class Signer {
     }
     
     //for SIF custom msgs
-    //Tx for Sif Incentive
-    static func genSignedSifIncentiveMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                               _ userClaimAddress: String,
-                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let sifIncentiveMsg = genSifIncentiveMsg(userClaimAddress)
-        return getGrpcSignedTx(auth, chainType, sifIncentiveMsg, privateKey, publicKey, fee, memo)
-    }
-    
-    static func genSimulateSifIncentiveMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                                 _ userClaimAddress: String,
-                                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let sifIncentiveMsg = genSifIncentiveMsg(userClaimAddress)
-        return getGrpcSimulateTx(auth, chainType, sifIncentiveMsg, privateKey, publicKey, fee, memo)
-    }
-    
-    static func genSifIncentiveMsg(_ userClaimAddress: String) -> [Google_Protobuf2_Any] {
-        let claimIncentiveMsg = Sifnode_Dispensation_V1_MsgCreateUserClaim.with {
-            $0.userClaimAddress = userClaimAddress
-            $0.userClaimType = Sifnode_Dispensation_V1_DistributionType.liquidityMining
-        }
-        let anyMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/sifnode.dispensation.v1.MsgCreateUserClaim"
-            $0.value = try! claimIncentiveMsg.serializedData()
-        }
-        return [anyMsg]
-    }
-    
     //Tx for Sif Swap
     static func genSignedSifSwapMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                           _ signer: String, _ inputDenom: String, _ inputAmount: String, _ outputDenom: String, _ outputAmount: String,

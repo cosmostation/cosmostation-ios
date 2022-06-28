@@ -29,9 +29,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     var mAllValidator = Array<Validator>()
     
     var mBnbNodeInfo: BnbNodeInfo?
-    var mBnbSwapInfo: BnbSwapInfo?
-    var mKavaSwapInfo: KavaSwapInfo?
-    var mSwapId: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -413,29 +410,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                 }
                 self.mTxInfo = TxInfo.init(info)
                 
-                //Check swap status if Send HTLC Tx
-                if (self.chainType! == ChainType.BINANCE_MAIN) {
-                    if (self.mTxInfo?.getMsgs()[0].type.contains("HTLTMsg") == true &&
-                        self.account?.account_address == self.mTxInfo?.getMsgs()[0].value.from) {
-                        print("simpleKavaSwapId " , self.mTxInfo?.simpleBnbSwapId())
-                        self.onFetchHtlcStatus(self.mTxInfo?.simpleBnbSwapId())
-                    } else {
-                        self.onUpdateView()
-                    }
-                    
-                } else if (self.chainType! == ChainType.KAVA_MAIN) {
-                    if (self.mTxInfo?.getMsgs()[0].type.contains("MsgCreateAtomicSwap") == true) {
-                        print("simpleKavaSwapId " , self.mTxInfo?.simpleKavaSwapId())
-                        self.onFetchHtlcStatus(self.mTxInfo?.simpleKavaSwapId())
-                    } else {
-                        self.onUpdateView()
-                    }
-                    
-                } else {
-                    self.onUpdateView()
-                }
-                
-                
             case .failure(let error):
                 print("onFetchTx failure", error)
                 if (self.chainType! == ChainType.IRIS_MAIN) {
@@ -467,40 +441,6 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             
         }
         
-    }
-    
-    func onFetchHtlcStatus(_ swapId: String?) {
-        print("onFetchHtlcStatus ", swapId)
-        if (swapId == nil) {
-            self.onUpdateView()
-            return
-        }
-        let url = BaseNetWork.swapIdBep3Url(self.chainType, swapId!)
-        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                if(SHOW_LOG) { print("onFetchSwapId ", res) }
-                if (self.chainType! == ChainType.BINANCE_MAIN) {
-                    if let info = res as? [String : Any] {
-                        self.mBnbSwapInfo = BnbSwapInfo.init(info)
-                    }
-                    self.onFetchBnbNodeInfo()
-                    
-                } else if (self.chainType! == ChainType.KAVA_MAIN) {
-                    if let info = res as? [String : Any], info["error"] == nil  {
-                        self.mKavaSwapInfo = KavaSwapInfo.init(info)
-                    }
-                    self.onUpdateView()
-                    
-                }
-                
-            case .failure(let error):
-                print("onFetchSwapId", error)
-                self.onUpdateView()
-                return
-            }
-        }
     }
     
     func onFetchBnbNodeInfo() {

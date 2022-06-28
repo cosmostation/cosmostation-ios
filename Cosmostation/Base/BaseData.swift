@@ -42,9 +42,6 @@ final class BaseData : NSObject{
     var mOkStaking: OkStaking?
     var mOkUnbonding: OkUnbonding?
     var mOKBPrice: NSDecimalNumber = NSDecimalNumber.zero
-        
-    var mSifVsIncentive: SifIncentive?
-    var mSifLmIncentive: SifIncentive?
     
     
     //For ProtoBuf and gRPC
