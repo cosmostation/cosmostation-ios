@@ -36,7 +36,7 @@ class ChainComdex: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-comdex-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-comdex-app.cosmostation.io"
+    var lcdUrl = "https://lcd-comdex-app.cosmostation.io/"
     var apiUrl = "https://api-comdex.cosmostation.io/"
     var explorerUrl = MintscanUrl + "comdex/"
     var validatorImgUrl = MonikerUrl + "comdex/"

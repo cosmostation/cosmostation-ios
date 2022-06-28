@@ -39,7 +39,7 @@ class ChainFetchAi: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-fetchai-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-fetchai-app.cosmostation.io"
+    var lcdUrl = "https://lcd-fetchai-app.cosmostation.io/"
     var apiUrl = "https://api-fetchai.cosmostation.io/"
     var explorerUrl = MintscanUrl + "fetchai/"
     var validatorImgUrl = MonikerUrl + "fetchai/"

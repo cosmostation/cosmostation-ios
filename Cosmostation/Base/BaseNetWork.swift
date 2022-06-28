@@ -25,69 +25,59 @@ class BaseNetWork {
     }
     
     static func accountInfoUrl(_ chain: ChainType?, _ address: String) -> String {
-        if (chain == ChainType.BINANCE_MAIN) {
-            return BNB_URL + "api/v1/account/" + address
-        } else if (chain == ChainType.OKEX_MAIN) {
-            return OKEX_URL + "auth/accounts/" + address
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/account/" + address
+            } else if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "auth/accounts/" + address
+            }
         }
         return ""
     }
     
     static func validatorsUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.OKEX_MAIN) {
-            return OKEX_URL + "staking/validators"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "staking/validators"
+            }
         }
         return ""
     }
     
-    static func bondingsUrl(_ chain: ChainType, _ address: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "staking/delegators/" + address + "/delegations"
-        }
-        return ""
-    }
-    
-    static func unbondingsUrl(_ chain: ChainType, _ address: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "staking/delegators/" + address + "/unbonding_delegations"
-        }
-        return ""
-    }
-    
-    static func rewardsUrl(_ chain: ChainType, _ address: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "distribution/delegators/" + address + "/rewards"
-        }
-        return ""
-    }
     
     //handle certick proto parisng error
     static func myVoteUrl(_ chain: ChainType, _ proposalId: String,  _ address: String) -> String {
-        if (chain == ChainType.CERTIK_MAIN) {
-            return CERTIK_URL + "shentu/gov/v1alpha1/proposals/" + proposalId + "/votes/" + address
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .CERTIK_MAIN) {
+                return chainConfig.lcdUrl + "shentu/gov/v1alpha1/proposals/" + proposalId + "/votes/" + address
+            }
         }
         return ""
     }
     
     
     static func txUrl(_ chain: ChainType?, _ txhash: String) -> String {
-        if (chain == ChainType.BINANCE_MAIN) {
-            return BNB_URL + "api/v1/tx/" + txhash
-        } else if (chain == ChainType.OKEX_MAIN) {
-            return OKEX_URL + "txs/" + txhash
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "txs/" + txhash
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/tx/" + txhash
+            } else if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "txs/" + txhash
+            } else if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "txs/" + txhash
+            }
         }
         return ""
     }
     
     static func broadcastUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.BINANCE_MAIN) {
-            return BNB_URL + "api/v1/broadcast"
-        } else if (chain == ChainType.OKEX_MAIN) {
-            return OKEX_URL + "txs"
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "txs"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/broadcast"
+            } else if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "txs"
+            } else if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "txs"
+            }
         }
         return ""
     }
@@ -95,81 +85,103 @@ class BaseNetWork {
     
     //for Binance
     static func bnbTokenUrl(_ chain: ChainType) -> String {
-        if (chain == ChainType.BINANCE_MAIN ) {
-            return BNB_URL + "api/v1/tokens"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/tokens"
+            }
         }
         return ""
     }
     
     static func bnbMiniTokenUrl(_ chain: ChainType) -> String {
-        if (chain == ChainType.BINANCE_MAIN ) {
-            return BNB_URL + "api/v1/mini/tokens"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/mini/tokens"
+            }
         }
         return ""
     }
     
     static func bnbTicUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.BINANCE_MAIN ) {
-            return BNB_URL + "api/v1/ticker/24hr"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/ticker/24hr"
+            }
         }
         return ""
     }
     
     static func bnbMiniTicUrl(_ chain: ChainType) -> String {
-        if (chain == ChainType.BINANCE_MAIN ) {
-            return BNB_URL + "api/v1/mini/ticker/24hr"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/mini/ticker/24hr"
+            }
         }
         return ""
     }
     
     //for Kava (using cuz kava query limitation)
     static func paramIncentiveUrl(_ chain: ChainType) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "incentive/parameters"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "incentive/parameters"
+            }
         }
         return ""
     }
     
     static func depositCdpUrl(_ chain: ChainType?, _ address: String, _ collateralType: String) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "cdp/cdps/cdp/deposits/" + address + "/" + collateralType
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "cdp/cdps/cdp/deposits/" + address + "/" + collateralType
+            }
         }
         return ""
     }
     
     static func managerHardPoolUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "hard/accounts"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "hard/accounts"
+            }
         }
         return ""
     }
 
     static func incentiveUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN ) {
-            return KAVA_URL + "incentive/rewards"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "incentive/rewards"
+            }
         }
         return ""
     }
     
     static func paramBep3Url(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN || chain == ChainType.BINANCE_MAIN) {
-            return KAVA_URL + "bep3/parameters"
+        if let chainConfig = ChainFactory.getChainConfig(.KAVA_MAIN) {
+            if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "bep3/parameters"
+            }
         }
         return ""
     }
     
     static func supplyBep3Url(_ chain: ChainType?) -> String {
-        if (chain == ChainType.KAVA_MAIN || chain == ChainType.BINANCE_MAIN) {
-            return KAVA_URL + "bep3/supplies"
+        if let chainConfig = ChainFactory.getChainConfig(.KAVA_MAIN) {
+            if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "bep3/supplies"
+            }
         }
         return ""
     }
     
     static func swapIdBep3Url(_ chain: ChainType?, _ id: String) -> String {
-        if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_URL + "bep3/swap/" + id
-        } else if (chain == ChainType.BINANCE_MAIN) {
-            return BNB_URL + "api/v1/atomic-swaps/" + id
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/atomic-swaps/" + id
+            } else if (chainConfig.chainType == .KAVA_MAIN) {
+                return chainConfig.lcdUrl + "bep3/swap/" + id
+            }
         }
         return ""
     }
@@ -177,77 +189,46 @@ class BaseNetWork {
     
     //for Okex
     static func balanceOkUrl(_ chain: ChainType?, _ address: String) -> String {
-        if (chain == ChainType.OKEX_MAIN ) {
-            return OKEX_URL + "accounts/" + address
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "accounts/" + address
+            }
         }
         return ""
     }
     
     static func stakingOkUrl(_ chain: ChainType, _ address: String) -> String {
-        if (chain == ChainType.OKEX_MAIN ) {
-            return OKEX_URL + "staking/delegators/" + address
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "staking/delegators/" + address
+            }
         }
         return ""
     }
     
     static func unbondingOkUrl(_ chain: ChainType, _ address: String) -> String {
-        if (chain == ChainType.OKEX_MAIN ) {
-            return OKEX_URL + "staking/delegators/" + address + "/unbonding_delegations"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "staking/delegators/" + address + "/unbonding_delegations"
+            }
         }
         return ""
     }
     
     static func tokenListOkUrl(_ chain: ChainType) -> String {
-        if (chain == ChainType.OKEX_MAIN ) {
-            return OKEX_URL + "tokens"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "tokens"
+            }
         }
         return ""
     }
     
     static func tickerListOkUrl(_ chain: ChainType) -> String {
-        if (chain == ChainType.OKEX_MAIN ) {
-            return OKEX_URL + "tickers"
-        }
-        return ""
-    }
-    
-    //sif
-//    static func vsIncentiveUrl(_ address: String) -> String {
-//        return SIF_FINANCE_API + "api/vs?key=userData&address=" + address + "&timestamp=now"
-//    }
-//    
-//    static func lmIncentiveUrl(_ address: String) -> String {
-//        return SIF_FINANCE_API + "api/lm?key=userData&address=" + address + "&timestamp=now"
-//    }
-
-    
-    //rizon
-    static func rizonSwapStatus(_ chain: ChainType?, _ address: String) -> String {
-        if (chain == ChainType.RIZON_MAIN) {
-            return RIZON_SWAP_STATUS + "swaps/rizon/" + address
-        }
-        return ""
-    }
-    
-    
-    //hdac
-    static func hdacTxDetail(_ chain: ChainType?, _ hash: String) -> String {
-        if (chain == ChainType.RIZON_MAIN) {
-            return HDAC_MAINNET + "tx/" + hash
-        }
-        return ""
-    }
-    
-    static func hdacBalance(_ chain: ChainType?, _ address: String) -> String {
-        if (chain == ChainType.RIZON_MAIN) {
-            return HDAC_MAINNET + "addr/" + address + "/utxo"
-        }
-        return ""
-    }
-    
-    static func hdacBroadcast(_ chain: ChainType?) -> String {
-        if (chain == ChainType.RIZON_MAIN) {
-            return HDAC_MAINNET + "tx/send"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "tickers"
+            }
         }
         return ""
     }
@@ -287,8 +268,7 @@ class BaseNetWork {
     }
     
     
-    
-    
+    //API
     static func accountHistory(_ chain: ChainType, _ address: String) -> String {
         guard let chainConfig = ChainFactory.getChainConfig(chain) else {
             return ""

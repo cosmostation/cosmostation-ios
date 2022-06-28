@@ -36,7 +36,7 @@ class ChainCertik: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-certik-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-certik-app.cosmostation.io"
+    var lcdUrl = "https://lcd-certik-app.cosmostation.io/"
     var apiUrl = "https://api-certik.cosmostation.io/"
     var explorerUrl = MintscanUrl + "certik/"
     var validatorImgUrl = MonikerUrl + "certik/"

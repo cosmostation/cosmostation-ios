@@ -36,7 +36,7 @@ class ChainChihuahua: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-chihuahua-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io"
+    var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io/"
     var apiUrl = "https://api-chihuahua.cosmostation.io/"
     var explorerUrl = MintscanUrl + "chihuahua/"
     var validatorImgUrl = MonikerUrl + "chihuahua/"

@@ -36,7 +36,7 @@ class ChainAkash: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-akash-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-akash-app.cosmostation.io"
+    var lcdUrl = "https://lcd-akash-app.cosmostation.io/"
     var apiUrl = "https://api-akash.cosmostation.io/"
     var explorerUrl = MintscanUrl + "akash/"
     var validatorImgUrl = MonikerUrl + "akash/"

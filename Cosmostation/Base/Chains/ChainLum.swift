@@ -37,7 +37,7 @@ class ChainLum: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-lum-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-lum-app.cosmostation.io"
+    var lcdUrl = "https://lcd-lum-app.cosmostation.io/"
     var apiUrl = "https://api-lum.cosmostation.io/"
     var explorerUrl = MintscanUrl + "lum/"
     var validatorImgUrl = MonikerUrl + "lum-network/"

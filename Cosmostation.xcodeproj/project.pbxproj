@@ -1449,7 +1449,6 @@
 		18FFB309281AF533004E65BB /* SendContract4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2A33027AB94620045ED21 /* SendContract4ViewController.swift */; };
 		18FFB310281AF533004E65BB /* Swap0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E04590269B52290022A366 /* Swap0ViewController.swift */; };
 		18FFB311281AF533004E65BB /* StartLock3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D28ACB26CB6BE00074964C /* StartLock3ViewController.swift */; };
-		18FFB313281AF533004E65BB /* GDexManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288243DF26E0E74D000B6C37 /* GDexManager.swift */; };
 		18FFB317281AF533004E65BB /* OkToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA324F52FE700247424 /* OkToken.swift */; };
 		18FFB31A281AF533004E65BB /* BinanceHexEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */; };
 		18FFB31B281AF533004E65BB /* TxCdpRepayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28474EC9241E06AF00AF5A81 /* TxCdpRepayCell.swift */; };
@@ -1503,7 +1502,6 @@
 		18FFB388281AF533004E65BB /* OkTickerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285F8C8D25CFB27D00317B30 /* OkTickerList.swift */; };
 		18FFB38E281AF533004E65BB /* CommonMyPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 289E4DB126E5D777007C7C35 /* CommonMyPoolCell.swift */; };
 		18FFB390281AF533004E65BB /* NativeTokenGrpcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B2E4B926CFB94800ECF960 /* NativeTokenGrpcViewController.swift */; };
-		18FFB392281AF533004E65BB /* RizonSwapStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B785AC26B3E7CA009F755F /* RizonSwapStatus.swift */; };
 		18FFB393281AF533004E65BB /* CdpListAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2842AB70242C7C8A00248EEB /* CdpListAllCell.swift */; };
 		18FFB394281AF533004E65BB /* StartUnbonding3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28D28AD326CB6C070074964C /* StartUnbonding3ViewController.swift */; };
 		18FFB395281AF533004E65BB /* OkAccountToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283D2EA724F5388C00247424 /* OkAccountToken.swift */; };
@@ -2359,7 +2357,6 @@
 		287D746A26A52BB800532E01 /* ExitPool0ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287D746826A52BB800532E01 /* ExitPool0ViewController.xib */; };
 		287D746D26A52BC500532E01 /* ExitPool3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287D746B26A52BC500532E01 /* ExitPool3ViewController.swift */; };
 		287D746E26A52BC500532E01 /* ExitPool3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 287D746C26A52BC500532E01 /* ExitPool3ViewController.xib */; };
-		288243E026E0E74D000B6C37 /* GDexManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288243DF26E0E74D000B6C37 /* GDexManager.swift */; };
 		2888B7FC246BC17300B2EB4A /* BnbNodeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888B7FB246BC17300B2EB4A /* BnbNodeInfo.swift */; };
 		2888B7FE246BC83A00B2EB4A /* BnbSwapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888B7FD246BC83A00B2EB4A /* BnbSwapInfo.swift */; };
 		2888B800246BCA3200B2EB4A /* KavaSwapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2888B7FF246BCA3200B2EB4A /* KavaSwapInfo.swift */; };
@@ -2446,7 +2443,6 @@
 		28B4304824F8B37600BD7BB2 /* OkTopValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304724F8B37500BD7BB2 /* OkTopValidatorViewController.swift */; };
 		28B4304A24F8B38500BD7BB2 /* OkOtherValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304924F8B38500BD7BB2 /* OkOtherValidatorViewController.swift */; };
 		28B6AFE123D9863800063D9C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28B6AFE023D9863800063D9C /* GoogleService-Info.plist */; };
-		28B785AD26B3E7CA009F755F /* RizonSwapStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B785AC26B3E7CA009F755F /* RizonSwapStatus.swift */; };
 		28B9B688271DC5DD0067C6AE /* SifPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9B686271DC5DD0067C6AE /* SifPoolCell.swift */; };
 		28B9B689271DC5DD0067C6AE /* SifPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B9B687271DC5DD0067C6AE /* SifPoolCell.xib */; };
 		28B9B68C271DC5F60067C6AE /* SifMyPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9B68A271DC5F60067C6AE /* SifMyPoolCell.swift */; };
@@ -3729,7 +3725,6 @@
 		287D746826A52BB800532E01 /* ExitPool0ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExitPool0ViewController.xib; sourceTree = "<group>"; };
 		287D746B26A52BC500532E01 /* ExitPool3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitPool3ViewController.swift; sourceTree = "<group>"; };
 		287D746C26A52BC500532E01 /* ExitPool3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExitPool3ViewController.xib; sourceTree = "<group>"; };
-		288243DF26E0E74D000B6C37 /* GDexManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GDexManager.swift; sourceTree = "<group>"; };
 		2888B7FB246BC17300B2EB4A /* BnbNodeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BnbNodeInfo.swift; sourceTree = "<group>"; };
 		2888B7FD246BC83A00B2EB4A /* BnbSwapInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BnbSwapInfo.swift; sourceTree = "<group>"; };
 		2888B7FF246BCA3200B2EB4A /* KavaSwapInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaSwapInfo.swift; sourceTree = "<group>"; };
@@ -3817,7 +3812,6 @@
 		28B4304724F8B37500BD7BB2 /* OkTopValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkTopValidatorViewController.swift; sourceTree = "<group>"; };
 		28B4304924F8B38500BD7BB2 /* OkOtherValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkOtherValidatorViewController.swift; sourceTree = "<group>"; };
 		28B6AFE023D9863800063D9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		28B785AC26B3E7CA009F755F /* RizonSwapStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RizonSwapStatus.swift; sourceTree = "<group>"; };
 		28B9B686271DC5DD0067C6AE /* SifPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifPoolCell.swift; sourceTree = "<group>"; };
 		28B9B687271DC5DD0067C6AE /* SifPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifPoolCell.xib; sourceTree = "<group>"; };
 		28B9B68A271DC5F60067C6AE /* SifMyPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifMyPoolCell.swift; sourceTree = "<group>"; };
@@ -5848,8 +5842,6 @@
 				28A8401E2605A3D8008C2D61 /* NodeInfo.swift */,
 				2852EAF826821084003A5E74 /* SifIncentive.swift */,
 				0428ACFD268AD31700EB438F /* BandOracleStatus.swift */,
-				28B785AC26B3E7CA009F755F /* RizonSwapStatus.swift */,
-				288243DF26E0E74D000B6C37 /* GDexManager.swift */,
 				04B1BE1327A165F000B1236A /* CertikVote.swift */,
 			);
 			path = Model;
@@ -7010,7 +7002,6 @@
 				1817CC25283E2CE600523713 /* desmos_profiles_v1beta1_msgs_relationships.pb.swift in Sources */,
 				18FFB310281AF533004E65BB /* Swap0ViewController.swift in Sources */,
 				18FFB311281AF533004E65BB /* StartLock3ViewController.swift in Sources */,
-				18FFB313281AF533004E65BB /* GDexManager.swift in Sources */,
 				18FFB317281AF533004E65BB /* OkToken.swift in Sources */,
 				1817CB04283E2CE500523713 /* desmos_fees_v1beta1_query.grpc.swift in Sources */,
 				1817CBC0283E2CE500523713 /* cosmos_slashing_v1beta1_query.pb.swift in Sources */,
@@ -7141,7 +7132,6 @@
 				1817CBB9283E2CE500523713 /* kava_auction_v1beta1_tx.pb.swift in Sources */,
 				1817CB94283E2CE500523713 /* desmos_profiles_v1beta1_msgs_chain_links.pb.swift in Sources */,
 				18FFB390281AF533004E65BB /* NativeTokenGrpcViewController.swift in Sources */,
-				18FFB392281AF533004E65BB /* RizonSwapStatus.swift in Sources */,
 				1817CAB4283E2CE500523713 /* evmos_incentives_v1_query.pb.swift in Sources */,
 				18FFB393281AF533004E65BB /* CdpListAllCell.swift in Sources */,
 				18FFB394281AF533004E65BB /* StartUnbonding3ViewController.swift in Sources */,
@@ -8044,7 +8034,6 @@
 				28D28ACD26CB6BE00074964C /* StartLock3ViewController.swift in Sources */,
 				0451FC66282A3A3200214FDA /* ChainSentinel.swift in Sources */,
 				04D3391527E826F100E82AA7 /* crescent_liquidity_v1beta1_query.grpc.swift in Sources */,
-				288243E026E0E74D000B6C37 /* GDexManager.swift in Sources */,
 				040FA936275F55C300229F6F /* desmos_profiles_v1beta1_msgs_relationships.pb.swift in Sources */,
 				283D2EA424F52FE700247424 /* OkToken.swift in Sources */,
 				047FB6F4281A4C53009D8AAF /* sifnode_clp_v1_genesis.pb.swift in Sources */,
@@ -8158,7 +8147,6 @@
 				28B2E4BB26CFB94800ECF960 /* NativeTokenGrpcViewController.swift in Sources */,
 				0451FC8E282A3B0800214FDA /* ChainRegen.swift in Sources */,
 				04C43B72278D5F530022D5DF /* kava_cdp_v1beta1_tx.grpc.swift in Sources */,
-				28B785AD26B3E7CA009F755F /* RizonSwapStatus.swift in Sources */,
 				2842AB72242C7C8A00248EEB /* CdpListAllCell.swift in Sources */,
 				28D28AD526CB6C070074964C /* StartUnbonding3ViewController.swift in Sources */,
 				283D2EA824F5388C00247424 /* OkAccountToken.swift in Sources */,

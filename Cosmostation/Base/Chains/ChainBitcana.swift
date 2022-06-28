@@ -36,7 +36,7 @@ class ChainBitcana: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-bitcanna-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-bitcanna-app.cosmostation.io"
+    var lcdUrl = "https://lcd-bitcanna-app.cosmostation.io/"
     var apiUrl = "https://api-bitcanna.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitcanna/"
     var validatorImgUrl = MonikerUrl + "bitcanna/"

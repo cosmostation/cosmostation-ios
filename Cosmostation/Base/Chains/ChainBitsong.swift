@@ -36,7 +36,7 @@ class ChainBitsong: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-bitsong-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-bitsong-app.cosmostation.io"
+    var lcdUrl = "https://lcd-bitsong-app.cosmostation.io/"
     var apiUrl = "https://api-bitsong.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitsong/"
     var validatorImgUrl = MonikerUrl + "bitsong/"

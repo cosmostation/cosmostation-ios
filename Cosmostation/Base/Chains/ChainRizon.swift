@@ -36,7 +36,7 @@ class ChainRizon: ChainConfig {
     var wcSupoort = false
     var grpcUrl = "lcd-rizon-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-rizon-app.cosmostation.io"
+    var lcdUrl = "https://lcd-rizon-app.cosmostation.io/"
     var apiUrl = "https://api-rizon.cosmostation.io/"
     var explorerUrl = MintscanUrl + "rizon/"
     var validatorImgUrl = MonikerUrl + "rizon/"

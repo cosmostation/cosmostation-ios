@@ -36,7 +36,7 @@ class ChainOsmosis: ChainConfig {
     var wcSupoort = true
     var grpcUrl = "lcd-osmosis-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-osmosis-app.cosmostation.io"
+    var lcdUrl = "https://lcd-osmosis-app.cosmostation.io/"
     var apiUrl = "https://api-osmosis.cosmostation.io/"
     var explorerUrl = MintscanUrl + "osmosis/"
     var validatorImgUrl = MonikerUrl + "osmosis/"
