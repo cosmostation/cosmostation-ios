@@ -35,7 +35,7 @@ protocol ChainConfig {
     var pushSupport: Bool { get set }
     var wcSupoort: Bool { get set }
     var grpcUrl: String { get set }
-    var grpcPort: String { get set }
+    var grpcPort: Int { get set }
     var lcdUrl: String { get set }
     var apiUrl: String { get set }
     var explorerUrl: String { get set }

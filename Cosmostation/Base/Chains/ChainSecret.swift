@@ -36,7 +36,7 @@ class ChainSecret: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-secret-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-secret.cosmostation.io"
     var apiUrl = "https://api-secret.cosmostation.io/"
     var explorerUrl = MintscanUrl + "secret/"

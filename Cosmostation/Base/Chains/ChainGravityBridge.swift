@@ -35,7 +35,7 @@ class ChainGravityBridge: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-gravity-bridge-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-gravity-bridge-app.cosmostation.io"
     var apiUrl = "https://api-gravity-bridge.cosmostation.io/"
     var explorerUrl = MintscanUrl + "gravity-bridge/"

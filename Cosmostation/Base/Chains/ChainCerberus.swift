@@ -35,7 +35,7 @@ class ChainCerberus: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-cerberus-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-cerberus-app.cosmostation.io"
     var apiUrl = "https://api-cerberus.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cerberus/"

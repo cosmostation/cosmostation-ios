@@ -35,7 +35,7 @@ class ChainMedibloc: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-medibloc-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-medibloc-app.cosmostation.io"
     var apiUrl = "https://api-medibloc.cosmostation.io/"
     var explorerUrl = MintscanUrl + "medibloc/"

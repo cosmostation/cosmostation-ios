@@ -35,7 +35,7 @@ class ChainAssetMantle: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-asset-mantle-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-asset-mantle-app.cosmostation.io"
     var apiUrl = "https://api-asset-mantle.cosmostation.io/"
     var explorerUrl = MintscanUrl + "asset-mantle/"

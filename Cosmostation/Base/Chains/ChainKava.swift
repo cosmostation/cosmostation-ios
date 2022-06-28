@@ -36,7 +36,7 @@ class ChainKava: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-kava-app.cosmostation.io"
     var apiUrl = "https://api-kava.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kava/"

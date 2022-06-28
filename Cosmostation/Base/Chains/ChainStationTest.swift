@@ -35,7 +35,7 @@ class StationTest: ChainConfig {
     var pushSupport = false
     var wcSupoort = true
     var grpcUrl = "lcd-office.cosmostation.io"
-    var grpcPort = "10400"
+    var grpcPort = 10400
     var lcdUrl = "https://lcd-office.cosmostation.io/station-testnet/"
     var apiUrl = "https://api-office.cosmostation.io/station-testnet/"
     var explorerUrl = "https://testnet.mintscan.io/station/"

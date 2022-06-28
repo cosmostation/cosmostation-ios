@@ -36,7 +36,7 @@ class ChainCosmos: ChainConfig {
     var pushSupport = true
     var wcSupoort = false
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-cosmos-app.cosmostation.io"
     var apiUrl = "https://api.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cosmos/"

@@ -35,7 +35,7 @@ class ChainBand: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-band-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-band-app.cosmostation.io"
     var apiUrl = "https://api-band.cosmostation.io/"
     var explorerUrl = MintscanUrl + "band/"

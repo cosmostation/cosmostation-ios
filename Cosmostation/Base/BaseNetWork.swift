@@ -14,10 +14,12 @@ import NIO
 class BaseNetWork {
     
     static func nodeInfoUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.BINANCE_MAIN) {
-            return BNB_URL + "api/v1/node-info"
-        } else if (chain == ChainType.OKEX_MAIN) {
-            return OKEX_URL + "node_info"
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            if (chainConfig.chainType == .BINANCE_MAIN) {
+                return chainConfig.lcdUrl + "api/v1/node-info"
+            } else if (chainConfig.chainType == .OKEX_MAIN) {
+                return chainConfig.lcdUrl + "node_info"
+            }
         }
         return ""
     }
@@ -120,14 +122,6 @@ class BaseNetWork {
         return ""
     }
     
-    static func bnbHistoryUrl(_ chain: ChainType?) -> String {
-        if (chain == ChainType.BINANCE_MAIN ) {
-            return BNB_URL + "api/v1/transactions"
-        }
-        return ""
-    }
-    
-    
     //for Kava (using cuz kava query limitation)
     static func paramIncentiveUrl(_ chain: ChainType) -> String {
         if (chain == ChainType.KAVA_MAIN ) {
@@ -199,13 +193,6 @@ class BaseNetWork {
     static func unbondingOkUrl(_ chain: ChainType, _ address: String) -> String {
         if (chain == ChainType.OKEX_MAIN ) {
             return OKEX_URL + "staking/delegators/" + address + "/unbonding_delegations"
-        }
-        return ""
-    }
-    
-    static func historyOkUrl(_ chain: ChainType?, _ address: String) -> String {
-        if (chain == ChainType.OKEX_MAIN ) {
-            return OEC_API + "okexchain/addresses/" + address + "/transactions/condition?limit=20"
         }
         return ""
     }
@@ -303,202 +290,23 @@ class BaseNetWork {
     
     
     static func accountHistory(_ chain: ChainType, _ address: String) -> String {
-        var result = ""
-        if (chain == ChainType.COSMOS_MAIN) {
-            result = COSMOS_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.IRIS_MAIN) {
-            result = IRIS_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.AKASH_MAIN) {
-            result = AKASH_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            result = PERSIS_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            result = CRYTO_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
-            result = OSMOSIS_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.BAND_MAIN) {
-            result = BAND_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.IOV_MAIN) {
-            result = IOV_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.SIF_MAIN) {
-            result = SIF_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.MEDI_MAIN) {
-            result = MEDI_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            result = CERTIK_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.EMONEY_MAIN) {
-            result = EMONEY_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.FETCH_MAIN) {
-            result = FETCH_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.RIZON_MAIN) {
-            result = RIZON_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.JUNO_MAIN) {
-            result = JUNO_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.REGEN_MAIN) {
-            result = REGEN_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.BITCANA_MAIN) {
-            result = BITCANNA_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.ALTHEA_MAIN) {
-            result = ALTHEA_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            result = GRAVITY_BRIDGE_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.STARGAZE_MAIN) {
-            result = STATGAZE_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.KI_MAIN) {
-            result = KI_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.COMDEX_MAIN) {
-            result = COMDEX_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.SECRET_MAIN) {
-            result = SECRET_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            result = INJECTIVE_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            result = BITSONG_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            result = DESMOS_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            result = SENTINEL_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.LUM_MAIN) {
-            result = LUM_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            result = CHIHUAHUA_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.KAVA_MAIN) {
-            result = KAVA_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.AXELAR_MAIN) {
-            result = AXELAR_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
-            result = KONSTELLATION_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.UMEE_MAIN) {
-            result = UMEE_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            result = EVMOS_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            result = PROVENANCE_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.CUDOS_MAIN) {
-            result = CUDOS_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.CERBERUS_MAIN) {
-            result = CERBERUS_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
-            result = OMNIFLIX_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.CRESCENT_MAIN) {
-            result = CRESCENT_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.MANTLE_MAIN) {
-            result = MANTLE_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.NYX_MAIN) {
-            result = NYX_API + "v1/account/new_txs/" + address
+        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
+            return ""
         }
-        
-        
-        else if (chain == ChainType.COSMOS_TEST) {
-            result = COSMOS_TEST_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.IRIS_TEST) {
-            result = IRIS_TEST_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.ALTHEA_TEST) {
-            result = ALTHEA_TEST_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.CRESCENT_TEST) {
-            result = CRESCENT_TEST_API + "v1/account/new_txs/" + address
-        } else if (chain == ChainType.STATION_TEST) {
-            result = STATION_TEST_API + "v1/account/new_txs/" + address
+        if (chainConfig.chainType == .BINANCE_MAIN) {
+            return chainConfig.apiUrl + "api/v1/transactions"
+        } else if (chainConfig.chainType == .OKEX_MAIN) {
+            return chainConfig.apiUrl + "okexchain/addresses/" + address + "/transactions/condition?limit=20"
+        } else {
+            return chainConfig.apiUrl + "v1/account/new_txs/" + address
         }
-        return result
     }
     
     static func accountStakingHistory(_ chain: ChainType, _ address: String, _ valAddress: String) -> String {
-        var result = ""
-        if (chain == ChainType.COSMOS_MAIN) {
-            result = COSMOS_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.IRIS_MAIN) {
-            result = IRIS_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.AKASH_MAIN) {
-            result = AKASH_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            result = PERSIS_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            result = CRYTO_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
-            result = OSMOSIS_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.BAND_MAIN) {
-            result = BAND_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.IOV_MAIN) {
-            result = IOV_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.SIF_MAIN) {
-            result = SIF_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.MEDI_MAIN) {
-            result = MEDI_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            result = CERTIK_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.EMONEY_MAIN) {
-            result = EMONEY_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.FETCH_MAIN) {
-            result = FETCH_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.RIZON_MAIN) {
-            result = RIZON_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.JUNO_MAIN) {
-            result = JUNO_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.REGEN_MAIN) {
-            result = REGEN_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.BITCANA_MAIN) {
-            result = BITCANNA_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.ALTHEA_MAIN) {
-            result = ALTHEA_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            result = GRAVITY_BRIDGE_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.STARGAZE_MAIN) {
-            result = STATGAZE_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.KI_MAIN) {
-            result = KI_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.COMDEX_MAIN) {
-            result = COMDEX_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.SECRET_MAIN) {
-            result = SECRET_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            result = INJECTIVE_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            result = BITSONG_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            result = DESMOS_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            result = SENTINEL_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.LUM_MAIN) {
-            result = LUM_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            result = CHIHUAHUA_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.KAVA_MAIN) {
-            result = KAVA_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.AXELAR_MAIN) {
-            result = AXELAR_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
-            result = KONSTELLATION_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.UMEE_MAIN) {
-            result = UMEE_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            result = EVMOS_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            result = PROVENANCE_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.CUDOS_MAIN) {
-            result = CUDOS_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.CERBERUS_MAIN) {
-            result = CERBERUS_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
-            result = OMNIFLIX_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.CRESCENT_MAIN) {
-            result = CRESCENT_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.MANTLE_MAIN) {
-            result = MANTLE_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.NYX_MAIN) {
-            result = NYX_API + "v1/account/new_txs/" + address + "/" + valAddress
+        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
+            return ""
         }
-        
-        else if (chain == ChainType.COSMOS_TEST) {
-            result = COSMOS_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.IRIS_TEST) {
-            result = IRIS_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.ALTHEA_TEST) {
-            result = ALTHEA_TEST_API + "v1/account/new_txs/" + address + "/" + valAddress
-        } else if (chain == ChainType.STATION_TEST) {
-            result = STATION_TEST_API + "v1/account/new_txs/" + address
-        }
-        return result
+        return chainConfig.apiUrl + "v1/account/new_txs/" + address + "/" + valAddress
     }
     
     
@@ -532,149 +340,10 @@ class BaseNetWork {
     }
     
     static func getConnection(_ chain: ChainType, _ group: MultiThreadedEventLoopGroup) -> ClientConnection? {
-        if (chain == ChainType.COSMOS_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-cosmos-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.IRIS_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-iris-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.AKASH_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-akash-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-persistence-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-cryptocom-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-sentinel-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-osmosis-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.IOV_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-iov-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.BAND_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-band-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.SIF_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-sifchain-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.MEDI_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-medibloc-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-certik-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.EMONEY_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-emoney-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.FETCH_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-fetchai-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.RIZON_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-rizon-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.JUNO_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-juno-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.REGEN_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-regen-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.BITCANA_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-bitcanna-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.ALTHEA_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20100)
-//            return ClientConnection.insecure(group: group).connect(host: "lcd-althea-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-gravity-bridge-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.STARGAZE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-stargaze-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.KI_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-kichain-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.COMDEX_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-comdex-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-secret.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-inj-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-bitsong-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-desmos-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.LUM_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-lum-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-chihuahua-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-kava-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.AXELAR_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-axelar-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-konstellation-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.UMEE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-umee-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-evmos-app.cosmostation.io", port: 9090)
-        
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-provenance-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.CUDOS_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-cudos-testnet.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.CERBERUS_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-cerberus-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-omniflix-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.CRESCENT_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-crescent-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.MANTLE_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-asset-mantle-app.cosmostation.io", port: 9090)
-            
-        } else if (chain == ChainType.NYX_MAIN) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-nym-app.cosmostation.io", port: 9090)
+        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
+            return nil
         }
-        
-        
-        else if (chain == ChainType.COSMOS_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 10000)
-            
-        } else if (chain == ChainType.IRIS_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 9095)
-            
-        } else if (chain == ChainType.ALTHEA_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20100)
-            
-        } else if (chain == ChainType.CRESCENT_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 20400)
-            
-        } else if (chain == ChainType.STATION_TEST) {
-            return ClientConnection.insecure(group: group).connect(host: "lcd-office.cosmostation.io", port: 10400)
-            
-        }
-        return nil
+        return ClientConnection.insecure(group: group).connect(host: chainConfig.grpcUrl, port: chainConfig.grpcPort)
     }
     
     static func getCallOptions() -> CallOptions {

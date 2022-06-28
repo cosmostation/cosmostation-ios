@@ -35,7 +35,7 @@ class ChainEvmos: ChainConfig {
     var pushSupport = false
     var wcSupoort = true
     var grpcUrl = "lcd-evmos-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-evmos-app.cosmostation.io"
     var apiUrl = "https://api-evmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "evmos/"

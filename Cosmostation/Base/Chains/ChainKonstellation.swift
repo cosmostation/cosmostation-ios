@@ -35,7 +35,7 @@ class ChainKonstellation: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-konstellation-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-konstellation-app.cosmostation.io"
     var apiUrl = "https://api-konstellation.cosmostation.io/"
     var explorerUrl = MintscanUrl + "konstellation/"

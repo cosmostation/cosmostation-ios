@@ -35,7 +35,7 @@ class ChainRegen: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-regen-app.cosmostation.io"
-    var grpcPort = "9090"
+    var grpcPort = 9090
     var lcdUrl = "https://lcd-regen-app.cosmostation.io"
     var apiUrl = "https://api-regen.cosmostation.io/"
     var explorerUrl = MintscanUrl + "regen/"

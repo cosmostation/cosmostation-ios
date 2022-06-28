@@ -36,7 +36,7 @@ class ChainOkc: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = ""
-    var grpcPort = ""
+    var grpcPort = -1
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
     var apiUrl = "https://www.oklink.com/api/explorer/v1/"
     var explorerUrl = "https://www.oklink.com/okexchain/"
