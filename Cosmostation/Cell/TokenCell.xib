@@ -28,13 +28,6 @@
                                     <constraint firstAttribute="height" constant="26" id="bPM-kq-Ae0"/>
                                 </constraints>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowNextGr" translatesAutoresizingMaskIntoConstraints="NO" id="TG1-pz-YZe">
-                                <rect key="frame" x="264" y="24" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="Ube-ys-uxG"/>
-                                    <constraint firstAttribute="height" constant="24" id="umX-74-2W6"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="-" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08K-3z-ccE">
                                 <rect key="frame" x="50" y="12" width="6" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
@@ -42,7 +35,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GU-wf-7Um">
-                                <rect key="frame" x="250" y="12" width="6" height="14.5"/>
+                                <rect key="frame" x="278" y="12" width="6" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -57,7 +50,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Xa-f4-eN0">
-                                <rect key="frame" x="250" y="30.5" width="6" height="14"/>
+                                <rect key="frame" x="278" y="38.5" width="6" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -72,16 +65,14 @@
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
                             <constraint firstItem="3sf-gI-6rG" firstAttribute="top" secondItem="08K-3z-ccE" secondAttribute="bottom" constant="4" id="2Db-0F-CER"/>
-                            <constraint firstAttribute="trailing" secondItem="TG1-pz-YZe" secondAttribute="trailing" constant="8" id="89q-wL-gUQ"/>
                             <constraint firstItem="fhF-Xr-C8Y" firstAttribute="leading" secondItem="08K-3z-ccE" secondAttribute="trailing" constant="4" id="FGD-mv-Roh"/>
+                            <constraint firstItem="4Xa-f4-eN0" firstAttribute="centerY" secondItem="3sf-gI-6rG" secondAttribute="centerY" id="G9f-7R-RM9"/>
                             <constraint firstItem="08K-3z-ccE" firstAttribute="leading" secondItem="bXY-sd-W4V" secondAttribute="trailing" constant="12" id="GbV-qo-6c7"/>
-                            <constraint firstItem="4Xa-f4-eN0" firstAttribute="firstBaseline" secondItem="3sf-gI-6rG" secondAttribute="firstBaseline" id="KEP-mj-ym9"/>
                             <constraint firstItem="bXY-sd-W4V" firstAttribute="leading" secondItem="UEl-4g-UdM" secondAttribute="leading" constant="12" id="Kf0-QP-D7H"/>
                             <constraint firstAttribute="bottom" secondItem="3sf-gI-6rG" secondAttribute="bottom" constant="12" id="LXz-WO-67q"/>
-                            <constraint firstItem="TG1-pz-YZe" firstAttribute="centerY" secondItem="UEl-4g-UdM" secondAttribute="centerY" id="Mqm-pG-GyX"/>
+                            <constraint firstAttribute="trailing" secondItem="9GU-wf-7Um" secondAttribute="trailing" constant="12" id="UiF-NM-C0q"/>
                             <constraint firstItem="08K-3z-ccE" firstAttribute="top" secondItem="UEl-4g-UdM" secondAttribute="top" constant="12" id="e7D-Wb-nMo"/>
                             <constraint firstItem="bXY-sd-W4V" firstAttribute="centerY" secondItem="UEl-4g-UdM" secondAttribute="centerY" id="eS2-v7-aFW"/>
-                            <constraint firstItem="TG1-pz-YZe" firstAttribute="leading" secondItem="9GU-wf-7Um" secondAttribute="trailing" constant="8" id="hBL-GV-NUL"/>
                             <constraint firstItem="3sf-gI-6rG" firstAttribute="leading" secondItem="08K-3z-ccE" secondAttribute="leading" id="kgz-Ia-Zu7"/>
                             <constraint firstItem="fhF-Xr-C8Y" firstAttribute="centerY" secondItem="08K-3z-ccE" secondAttribute="centerY" id="lCK-hS-oX7"/>
                             <constraint firstItem="9GU-wf-7Um" firstAttribute="firstBaseline" secondItem="08K-3z-ccE" secondAttribute="firstBaseline" id="sXU-c4-M7I"/>
@@ -128,7 +119,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrowNextGr" width="24" height="24"/>
         <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

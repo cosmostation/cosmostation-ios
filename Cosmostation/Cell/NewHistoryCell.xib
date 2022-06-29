@@ -40,33 +40,26 @@
                                     <constraint firstAttribute="width" constant="0.5" id="y2b-QD-5bi"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowNextGr" translatesAutoresizingMaskIntoConstraints="NO" id="t9U-Og-rfC">
-                                <rect key="frame" x="417" y="30.5" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="I0e-ua-DcW"/>
-                                    <constraint firstAttribute="width" constant="24" id="lyw-Fw-FDT"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQ2-fM-daw">
-                                <rect key="frame" x="403" y="12" width="6" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KQ2-fM-daw">
+                                <rect key="frame" x="429" y="12" width="6" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2W-3l-cw9">
-                                <rect key="frame" x="403.5" y="28" width="5.5" height="27.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2W-3l-cw9">
+                                <rect key="frame" x="429.5" y="28" width="5.5" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COIN" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ev2-wC-0p7">
-                                <rect key="frame" x="381" y="61.5" width="28" height="13.5"/>
+                                <rect key="frame" x="407" y="61.5" width="28" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jjg-p6-Zmb">
-                                <rect key="frame" x="372" y="61.5" width="7" height="13.5"/>
+                                <rect key="frame" x="398" y="61.5" width="7" height="13.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -75,22 +68,21 @@
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="aIT-pP-Yoh" secondAttribute="bottom" constant="10" id="3OD-RB-IqQ"/>
-                            <constraint firstItem="t9U-Og-rfC" firstAttribute="leading" secondItem="KQ2-fM-daw" secondAttribute="trailing" constant="8" id="3fS-O0-uxd"/>
+                            <constraint firstAttribute="trailing" secondItem="KQ2-fM-daw" secondAttribute="trailing" constant="12" id="5Fw-1u-O6F"/>
+                            <constraint firstItem="ev2-wC-0p7" firstAttribute="top" secondItem="A2W-3l-cw9" secondAttribute="bottom" constant="6" id="7KY-Ex-xqL"/>
                             <constraint firstItem="A2W-3l-cw9" firstAttribute="trailing" secondItem="KQ2-fM-daw" secondAttribute="trailing" id="7rU-0F-1aP"/>
                             <constraint firstItem="ev2-wC-0p7" firstAttribute="leading" secondItem="Jjg-p6-Zmb" secondAttribute="trailing" constant="2" id="Agy-bm-rML"/>
                             <constraint firstItem="aIT-pP-Yoh" firstAttribute="centerY" secondItem="ev2-wC-0p7" secondAttribute="centerY" id="D7v-hj-Z8f"/>
-                            <constraint firstItem="ymb-vi-rrd" firstAttribute="centerY" secondItem="KQ2-fM-daw" secondAttribute="centerY" id="EkX-uQ-U73"/>
                             <constraint firstItem="aIT-pP-Yoh" firstAttribute="leading" secondItem="ymb-vi-rrd" secondAttribute="leading" id="EmG-y5-8eT"/>
-                            <constraint firstAttribute="trailing" secondItem="t9U-Og-rfC" secondAttribute="trailing" constant="6" id="Jhr-Cg-Lak"/>
                             <constraint firstItem="ymb-vi-rrd" firstAttribute="leading" secondItem="F2E-wf-Kqu" secondAttribute="leading" constant="12" id="Jjl-ue-5Ja"/>
                             <constraint firstItem="vFu-7u-Ysp" firstAttribute="top" secondItem="F2E-wf-Kqu" secondAttribute="top" constant="12" id="QxS-Ic-Hqo"/>
                             <constraint firstItem="ev2-wC-0p7" firstAttribute="trailing" secondItem="A2W-3l-cw9" secondAttribute="trailing" id="Ra7-fA-TK6"/>
                             <constraint firstItem="vFu-7u-Ysp" firstAttribute="leading" secondItem="ymb-vi-rrd" secondAttribute="trailing" constant="4" id="RkG-9t-wRh"/>
-                            <constraint firstItem="ev2-wC-0p7" firstAttribute="top" secondItem="A2W-3l-cw9" secondAttribute="bottom" constant="6" id="dOC-Fz-SZ3"/>
+                            <constraint firstAttribute="bottom" secondItem="ev2-wC-0p7" secondAttribute="bottom" constant="10" id="WlU-oK-1mY"/>
                             <constraint firstItem="ymb-vi-rrd" firstAttribute="top" secondItem="F2E-wf-Kqu" secondAttribute="top" constant="12" id="f1R-UI-t93"/>
-                            <constraint firstItem="t9U-Og-rfC" firstAttribute="centerY" secondItem="F2E-wf-Kqu" secondAttribute="centerY" id="nDN-KE-W0P"/>
                             <constraint firstItem="Jjg-p6-Zmb" firstAttribute="centerY" secondItem="ev2-wC-0p7" secondAttribute="centerY" id="p80-kt-aBb"/>
                             <constraint firstItem="vFu-7u-Ysp" firstAttribute="leading" secondItem="F2E-wf-Kqu" secondAttribute="leading" constant="115" id="uuK-jY-XjM"/>
+                            <constraint firstItem="KQ2-fM-daw" firstAttribute="top" secondItem="F2E-wf-Kqu" secondAttribute="top" constant="12" id="vVc-jn-K2B"/>
                             <constraint firstItem="A2W-3l-cw9" firstAttribute="top" secondItem="KQ2-fM-daw" secondAttribute="bottom" constant="2" id="vyM-aZ-D5e"/>
                             <constraint firstAttribute="bottom" secondItem="vFu-7u-Ysp" secondAttribute="bottom" constant="12" id="zUN-1Q-HBJ"/>
                         </constraints>
@@ -135,7 +127,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrowNextGr" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
