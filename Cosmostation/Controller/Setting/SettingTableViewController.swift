@@ -80,16 +80,16 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             if(indexPath.row == 0) {
-                let mnemonicManageVC = MnemonicListViewController(nibName: "MnemonicListViewController", bundle: nil)
-                mnemonicManageVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(mnemonicManageVC, animated: true)
-                
-            } else if (indexPath.row == 1) {
                 let accoutManageVC = WalletManageViewController(nibName: "WalletManageViewController", bundle: nil)
                 accoutManageVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(accoutManageVC, animated: true)
+                
+            } else if (indexPath.row == 1) {
+                let mnemonicManageVC = MnemonicListViewController(nibName: "MnemonicListViewController", bundle: nil)
+                mnemonicManageVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(mnemonicManageVC, animated: true)
                 
             } else if (indexPath.row == 2) {
                 let privateKeyRestoreVC = PrivateKeyRestoreViewController(nibName: "PrivateKeyRestoreViewController", bundle: nil)
