@@ -94,9 +94,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mKavaSwapSupply2: KavaSwapSupply2?
     
     
-    var mHtlcRefundSwapId: String?
-    var mBnbSwapInfo: BnbSwapInfo?
-    var mKavaSwapInfo: KavaSwapInfo?
     var mSwapRemainCap: NSDecimalNumber = NSDecimalNumber.zero
     var mSwapMaxOnce: NSDecimalNumber = NSDecimalNumber.zero
     
@@ -128,11 +125,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mSifPool: Sifnode_Clp_V1_Pool?
     var mSifMyAllUnitAmount: String?
     var mSifMyWithdrawUnitAmount: String?
-    
-    var mHdacKey: HDWalletKit.PrivateKey?
-    var mHdacAddress: String?
-    var mHdacBalance: NSDecimalNumber?
-    var mHdacUTXOs: Array<HdacUtxo>?
     
     var mIBCSendDenom: String?
     var mIBCSendAmount: String?
@@ -476,7 +468,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         super.viewDidLoad()
         mAccount        = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         mBalances       = mAccount!.account_balances
-        chainType       = WUtils.getChainType(mAccount!.account_base_chain)
+        chainType       = ChainFactory.getChainType(mAccount!.account_base_chain)
         mBnbToken       = WUtils.getBnbToken(mToSendDenom)
         
         self.getKey()

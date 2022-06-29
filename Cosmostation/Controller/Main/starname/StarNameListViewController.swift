@@ -30,8 +30,8 @@ class StarNameListViewController: BaseViewController {
         myAccountView.alpha = 0
         
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
             myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
@@ -164,107 +164,107 @@ extension WUtils {
         result.type = "starname"
         accounts.forEach { (account) in
             var resource = ExportStarname.ExportResource.init()
-            if (WUtils.getChainType(account.account_base_chain) == ChainType.COSMOS_MAIN) {
+            if (ChainFactory.getChainType(account.account_base_chain) == ChainType.COSMOS_MAIN) {
                 resource.ticker = "atom"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.IRIS_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.IRIS_MAIN) {
                 resource.ticker = "iris"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.BINANCE_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.BINANCE_MAIN) {
                 resource.ticker = "bnb"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.OKEX_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.OKEX_MAIN) {
                 resource.ticker = "okb"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.KAVA_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.KAVA_MAIN) {
                 resource.ticker = "kava"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.BAND_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.BAND_MAIN) {
                 resource.ticker = "band"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.PERSIS_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.PERSIS_MAIN) {
                 resource.ticker = "xprt"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.IOV_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.IOV_MAIN) {
                 resource.ticker = "iov"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.CERTIK_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.CERTIK_MAIN) {
                 resource.ticker = "ctk"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.AKASH_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.AKASH_MAIN) {
                 resource.ticker = "akt"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.SENTINEL_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.SENTINEL_MAIN) {
                 resource.ticker = "dvpn"
                 resource.address = account.account_address
                 result.addresses.append(resource)
             }
-//            else if (WUtils.getChainType(account.account_base_chain) == ChainType.FETCH_MAIN) {
+//            else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.FETCH_MAIN) {
 //                resource.ticker = "dvpn"
 //                resource.address = account.account_address
 //                result.addresses.append(resource)
 //            }
-            else if (WUtils.getChainType(account.account_base_chain) == ChainType.CRYPTO_MAIN) {
+            else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.CRYPTO_MAIN) {
                 resource.ticker = "cro"
                 resource.address = account.account_address
                 result.addresses.append(resource)
-            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.SIF_MAIN) {
+            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.SIF_MAIN) {
                 resource.ticker = "rowan"
                 resource.address = account.account_address
                 result.addresses.append(resource)
             }
-//            else if (WUtils.getChainType(account.account_base_chain) == ChainType.KI_MAIN) {
+//            else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.KI_MAIN) {
 //                resource.ticker = "rowan"
 //                resource.address = account.account_address
 //                result.addresses.append(resource)
-//            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.RIZON_MAIN) {
+//            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.RIZON_MAIN) {
 //                resource.ticker = "rowan"
 //                resource.address = account.account_address
 //                result.addresses.append(resource)
 //            }
-            else if (WUtils.getChainType(account.account_base_chain) == ChainType.OSMOSIS_MAIN) {
+            else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.OSMOSIS_MAIN) {
                 resource.ticker = "osmo"
                 resource.address = account.account_address
                 result.addresses.append(resource)
             }
-//            else if (WUtils.getChainType(account.account_base_chain) == ChainType.MEDI_MAIN) {
+//            else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.MEDI_MAIN) {
 //                resource.ticker = "osmo"
 //                resource.address = account.account_address
 //                result.addresses.append(resource)
-//            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.EMONEY_MAIN) {
+//            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.EMONEY_MAIN) {
 //                resource.ticker = "osmo"
 //                resource.address = account.account_address
 //                result.addresses.append(resource)
 //            }
-            else if (WUtils.getChainType(account.account_base_chain) == ChainType.REGEN_MAIN) {
+            else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.REGEN_MAIN) {
                 resource.ticker = "regen"
                 resource.address = account.account_address
                 result.addresses.append(resource)
             }
-//            else if (WUtils.getChainType(account.account_base_chain) == ChainType.JUNO_MAIN) {
+//            else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.JUNO_MAIN) {
 //                resource.ticker = "regen"
 //                resource.address = account.account_address
 //                result.addresses.append(resource)
-//            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.BITCANA_MAIN) {
+//            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.BITCANA_MAIN) {
 //                resource.ticker = "regen"
 //                resource.address = account.account_address
 //                result.addresses.append(resource)
-//            } else if (WUtils.getChainType(account.account_base_chain) == ChainType.STARGAZE_MAIN) {
+//            } else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.STARGAZE_MAIN) {
 //                resource.ticker = "regen"
 //                resource.address = account.account_address
 //                result.addresses.append(resource)
 //            }
-            else if (WUtils.getChainType(account.account_base_chain) == ChainType.SECRET_MAIN) {
+            else if (ChainFactory.getChainType(account.account_base_chain) == ChainType.SECRET_MAIN) {
                resource.ticker = "scrt"
                resource.address = account.account_address
                result.addresses.append(resource)

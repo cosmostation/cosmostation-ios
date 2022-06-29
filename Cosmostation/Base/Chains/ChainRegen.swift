@@ -20,7 +20,7 @@ class ChainRegen: ChainConfig {
     var chainColorBG = UIColor(named: "regen_bg")!
     var chainTitle = "(Regen Mainnet)"
     var chainTitle2 = "REGEN"
-    var chainDBName = "SUPPORT_CHAIN_REGEN"
+    var chainDBName = CHAIN_REGEN_S
     var chainAPIName = "regen"
     
     var stakeDenomImg = UIImage(named: "tokenRegen")
@@ -35,8 +35,8 @@ class ChainRegen: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-regen-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-regen-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-regen-app.cosmostation.io/"
     var apiUrl = "https://api-regen.cosmostation.io/"
     var explorerUrl = MintscanUrl + "regen/"
     var validatorImgUrl = MonikerUrl + "regen/"

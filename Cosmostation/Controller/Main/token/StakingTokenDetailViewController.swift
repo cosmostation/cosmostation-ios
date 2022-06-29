@@ -32,8 +32,8 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.stakingDenom = WUtils.getMainDenom(chainType)
         self.stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         self.stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
@@ -89,8 +89,6 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             btnBep3Send.isHidden = false
         } else if (chainType == ChainType.OKEX_MAIN) {
             totalAmount = WUtils.getAllExToken(stakingDenom)
-        } else {
-            totalAmount = WUtils.getAllMainAssetOld(stakingDenom)
         }
         self.topValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalAmount, stakingDivideDecimal, topValue.font)
     }
@@ -107,7 +105,6 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             return 0
             
         } else if (section == 2) {
-            if (BaseData.instance.unbondingSumAmount().compare(NSDecimalNumber.zero).rawValue > 0) { return 1 }
             return 0
         }
         return 0

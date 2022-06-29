@@ -31,8 +31,8 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.selectedChainType = WUtils.getChainType(selectedAccount.account_base_chain)
-        self.selectedChainConfig = ChainFactory().getChainConfig(selectedChainType)
+        self.selectedChainType = ChainFactory.getChainType(selectedAccount.account_base_chain)
+        self.selectedChainConfig = ChainFactory.getChainConfig(selectedChainType)
         
         self.walletDetailListTableView.delegate = self
         self.walletDetailListTableView.dataSource = self

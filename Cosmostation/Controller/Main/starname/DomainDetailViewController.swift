@@ -29,7 +29,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.balances = account!.account_balances
         
         self.myDomainResourceTableView.delegate = self

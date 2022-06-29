@@ -37,7 +37,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -57,22 +57,22 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         
         //set Send layer's data
         sendImg.image = sendImg.image?.withRenderingMode(.alwaysTemplate)
-        sendImg.tintColor = ChainFactory().getChainConfig(chainType)?.chainColor
+        sendImg.tintColor = ChainFactory.getChainConfig(chainType)?.chainColor
         WUtils.setDenomTitle(chainType, sendFeeDenom)
         if (chainType == ChainType.BINANCE_MAIN) {
             mDpDecimal = 8;
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BNB) {
                 sendAmountDenom.text = "BNB"
-                sendAmountDenom.textColor = COLOR_BNB
+                sendAmountDenom.textColor = UIColor.init(named: "binance")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BTC) {
                 sendAmountDenom.text = "BTC"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_XRPB) {
                 sendAmountDenom.text = "XRP"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BUSD) {
                 sendAmountDenom.text = "BUSD"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             }
             sendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, sendAmountLabel.font, 0, 8)
             sendFeeLabel.attributedText = WUtils.displayAmount2(sendFeeAmount.stringValue, sendFeeLabel.font, 0, 8)
@@ -83,16 +83,16 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             mDpDecimal = WUtils.getKavaCoinDecimal(self.pageHolderVC.mHtlcDenom!)
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
                 sendAmountDenom.text = "BNB"
-                sendAmountDenom.textColor = COLOR_BNB
+                sendAmountDenom.textColor = UIColor.init(named: "binance")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BTC) {
                 sendAmountDenom.text = "BTC"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_XRPB) {
                 sendAmountDenom.text = "XRP"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BUSD) {
                 sendAmountDenom.text = "BUSD"
-                sendAmountDenom.textColor = .white
+                sendAmountDenom.textColor = UIColor.init(named: "_font05")
             }
             sendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, sendAmountLabel.font, mDpDecimal, mDpDecimal)
             sendFeeLabel.attributedText = WUtils.displayAmount2(sendFeeAmount.stringValue, sendFeeLabel.font, 6, 6)
@@ -102,13 +102,13 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         
         //set Claim layer's data
         claimImg.image = claimImg.image?.withRenderingMode(.alwaysTemplate)
-        claimImg.tintColor = ChainFactory().getChainConfig(pageHolderVC.mHtlcToChain)?.chainColor
+        claimImg.tintColor = ChainFactory.getChainConfig(pageHolderVC.mHtlcToChain)?.chainColor
         if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
             receiveAmountDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()
             relayFeeDenom.text = self.pageHolderVC.mHtlcDenom!.uppercased()
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
-                receiveAmountDenom.textColor = COLOR_BNB
-                relayFeeDenom.textColor = COLOR_BNB
+                receiveAmountDenom.textColor = UIColor.init(named: "binance")
+                relayFeeDenom.textColor = UIColor.init(named: "binance")
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BTC) {
                 receiveAmountDenom.text = "BTC"
                 relayFeeDenom.text = "BTC"

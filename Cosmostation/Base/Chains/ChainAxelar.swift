@@ -21,7 +21,7 @@ class ChainAxelar: ChainConfig {
     
     var chainTitle = "(Axelar Mainnet)"
     var chainTitle2 = "AXELAR"
-    var chainDBName = "SUPPORT_CHAIN_AXELAR"
+    var chainDBName = CHAIN_AXELAR_S
     var chainAPIName = "axelar"
     
     var stakeDenomImg = UIImage(named: "tokenAxelar")
@@ -36,8 +36,8 @@ class ChainAxelar: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-axelar-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-axelar-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-axelar-app.cosmostation.io/"
     var apiUrl = "https://api-axelar.cosmostation.io/"
     var explorerUrl = MintscanUrl + "axelar/"
     var validatorImgUrl = MonikerUrl + "axelar/"

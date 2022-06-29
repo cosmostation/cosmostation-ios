@@ -20,7 +20,7 @@ class ChainEmoney: ChainConfig {
     var chainColorBG = UIColor(named: "emoney_bg")!
     var chainTitle = "(E-Money Mainnet)"
     var chainTitle2 = "E-MONEY"
-    var chainDBName = "SUPPORT_CHAIN_EMONEY"
+    var chainDBName = CHAIN_EMONEY_S
     var chainAPIName = "emoney"
     
     var stakeDenomImg = UIImage(named: "tokenEmoney")
@@ -35,8 +35,8 @@ class ChainEmoney: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-emoney-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-emoney-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-emoney-app.cosmostation.io/"
     var apiUrl = "https://api-emoney.cosmostation.io/"
     var explorerUrl = MintscanUrl + "emoney/"
     var validatorImgUrl = MonikerUrl + "emoney/"

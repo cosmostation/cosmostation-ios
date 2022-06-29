@@ -39,22 +39,22 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             mDpDecimal = 8;
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BNB) {
                 availableDenom.text = "BNB"
-                availableDenom.textColor = COLOR_BNB
+                availableDenom.textColor = UIColor.init(named: "binance")
                 maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!).subtracting(WUtils.plainStringToDecimal(FEE_BNB_TRANSFER))
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BTC) {
                 availableDenom.text = "BTC"
-                availableDenom.textColor = .white
+                availableDenom.textColor = UIColor.init(named: "_font05")
                 maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_XRPB) {
                 availableDenom.text = "XRP"
-                availableDenom.textColor = .white
+                availableDenom.textColor = UIColor.init(named: "_font05")
                 maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BUSD) {
                 availableDenom.text = "BUSD"
-                availableDenom.textColor = .white
+                availableDenom.textColor = UIColor.init(named: "_font05")
                 maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
                 
             }
@@ -76,19 +76,19 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             mDpDecimal = WUtils.getKavaCoinDecimal(self.pageHolderVC.mHtlcDenom!)
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
                 availableDenom.text = "BNB"
-                availableDenom.textColor = COLOR_BNB
+                availableDenom.textColor = UIColor.init(named: "binance")
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BTC) {
                 availableDenom.text = "BTC"
-                availableDenom.textColor = .white
+                availableDenom.textColor = UIColor.init(named: "_font05")
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_XRPB) {
                 availableDenom.text = "XRP"
-                availableDenom.textColor = .white
+                availableDenom.textColor = UIColor.init(named: "_font05")
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BUSD) {
                 availableDenom.text = "BUSD"
-                availableDenom.textColor = .white
+                availableDenom.textColor = UIColor.init(named: "_font05")
             }
 //            maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!)
             maxAvailable = BaseData.instance.getAvailableAmount_gRPC(self.pageHolderVC.mHtlcDenom!)

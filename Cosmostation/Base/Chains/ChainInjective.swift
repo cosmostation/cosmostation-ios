@@ -20,7 +20,7 @@ class ChainInjective: ChainConfig {
     var chainColorBG = UIColor(named: "injective_bg")!
     var chainTitle = "(Injective Mainnet)"
     var chainTitle2 = "INJECTIVE"
-    var chainDBName = "SUPPORT_CHAIN_INJECTIVE"
+    var chainDBName = CHAIN_INJECTIVE_S
     var chainAPIName = "injective"
     
     var stakeDenomImg = UIImage(named: "tokenInjective")
@@ -35,8 +35,8 @@ class ChainInjective: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-inj-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-inj-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-inj-app.cosmostation.io/"
     var apiUrl = "https://api-inj.cosmostation.io/"
     var explorerUrl = MintscanUrl + "injective/"
     var validatorImgUrl = MonikerUrl + "injective/"

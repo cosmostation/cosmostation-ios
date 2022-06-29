@@ -176,8 +176,8 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     func onGetAllKeyTypes() {
         print("onGetAllKeyTypes ", mPath)
         if (mPrivateKeyMode) {
-            ChainFactory().getAllKeyType().forEach { keyTypes in
-                let chainConfig = ChainFactory().getChainConfig(keyTypes.0)!
+            ChainFactory.getAllKeyType().forEach { keyTypes in
+                let chainConfig = ChainFactory.getChainConfig(keyTypes.0)!
                 let fullPath = chainConfig.getHdPath(keyTypes.1, self.mPath)
                 let pKey = self.mPrivateKey
                 let dpAddress = WKey.getDpAddress(chainConfig, pKey!, keyTypes.1)
@@ -195,8 +195,8 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             }
             
         } else {
-            ChainFactory().getAllKeyType().forEach { keyTypes in
-                let chainConfig = ChainFactory().getChainConfig(keyTypes.0)!
+            ChainFactory.getAllKeyType().forEach { keyTypes in
+                let chainConfig = ChainFactory.getChainConfig(keyTypes.0)!
                 let fullPath = chainConfig.getHdPath(keyTypes.1, self.mPath)
                 let pKey = KeyFac.getPrivateKeyDataFromSeed(self.mSeed, fullPath)
                 let dpAddress = WKey.getDpAddress(chainConfig, pKey, keyTypes.1)
@@ -226,7 +226,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     func onFetchBalance(_ position: Int) {
         let derive = self.mDerives[position]
-        guard let chainConfig = ChainFactory().getChainConfig(derive.chaintype) else { return }
+        guard let chainConfig = ChainFactory.getChainConfig(derive.chaintype) else { return }
         
         if (chainConfig.isGrpc) {
             DispatchQueue.global(qos: .background).async {

@@ -20,7 +20,7 @@ class ChainBand: ChainConfig {
     var chainColorBG = UIColor(named: "band_bg")!
     var chainTitle = "(Band Mainnet)"
     var chainTitle2 = "BAND"
-    var chainDBName = "SUPPORT_CHAIN_BAND_MAIN"
+    var chainDBName = CHAIN_BAND_S
     var chainAPIName = "band"
     
     var stakeDenomImg = UIImage(named: "tokenBand")
@@ -35,8 +35,8 @@ class ChainBand: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-band-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-band-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-band-app.cosmostation.io/"
     var apiUrl = "https://api-band.cosmostation.io/"
     var explorerUrl = MintscanUrl + "band/"
     var validatorImgUrl = MonikerUrl + "bandprotocol/"

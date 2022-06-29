@@ -20,7 +20,7 @@ class ChainSentinel: ChainConfig {
     var chainColorBG = UIColor(named: "sentinel_bg")!
     var chainTitle = "(Sentinel Mainnet)"
     var chainTitle2 = "SENTINEL"
-    var chainDBName = "SUPPORT_CHAIN_SENTINEL_MAIN"
+    var chainDBName = CHAIN_SENTINEL_S
     var chainAPIName = "sentinel"
     
     var stakeDenomImg = UIImage(named: "tokenSentinel")
@@ -35,8 +35,8 @@ class ChainSentinel: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-sentinel-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-sentinel-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-sentinel-app.cosmostation.io/"
     var apiUrl = "https://api-sentinel.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sentinel/"
     var validatorImgUrl = MonikerUrl + "sentinel/"

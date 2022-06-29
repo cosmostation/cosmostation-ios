@@ -30,7 +30,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        chainType = WUtils.getChainType(account!.account_base_chain)
+        chainType = ChainFactory.getChainType(account!.account_base_chain)
         
         self.popupTableview.delegate = self
         self.popupTableview.dataSource = self
@@ -208,7 +208,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_IBC_RECIPIENT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
-            let toChainConfig = ChainFactory().getChainConfig(toChain)
+            let toChainConfig = ChainFactory.getChainConfig(toChain)
             let account = toAccountList[indexPath.row]
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
@@ -254,7 +254,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_IBC_CHAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
             let toChain = WUtils.getChainTypeByChainId(ibcToChain[indexPath.row].chain_id)
-            let toChainConfig = ChainFactory().getChainConfig(toChain)
+            let toChainConfig = ChainFactory.getChainConfig(toChain)
             cell!.chainImg.image = toChainConfig?.chainImg
             cell!.chainTitle.text = toChainConfig?.chainTitle2
             return cell!
@@ -293,7 +293,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
             let chain = toChainList[indexPath.row]
-            let chainConfig = ChainFactory().getChainConfig(chain)
+            let chainConfig = ChainFactory.getChainConfig(chain)
             cell!.chainImg.image = chainConfig?.chainImg
             cell!.chainTitle.text = chainConfig?.chainTitle2
             return cell!
@@ -306,7 +306,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_KEPLR_GET_ACCOUNT || type == SELECT_POPUP_COSMOSTATION_GET_ACCOUNT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let account = toAccountList[indexPath.row]
-            let toChainConfig = ChainFactory().getChainConfig(toChain)
+            let toChainConfig = ChainFactory.getChainConfig(toChain)
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
             cell?.accountAddress.text = account.account_address
             cell?.accountName.text = account.getDpName()

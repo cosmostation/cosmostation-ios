@@ -20,7 +20,7 @@ class ChainKava: ChainConfig {
     var chainColorBG = UIColor(named: "kava_bg")!
     var chainTitle = "(Kava Mainnet)"
     var chainTitle2 = "KAVA"
-    var chainDBName = "SUPPORT_CHAIN_KAVA_MAIN"
+    var chainDBName = CHAIN_KAVA_S
     var chainAPIName = "kava"
     
     var stakeDenomImg = UIImage(named: "tokenKava")
@@ -36,8 +36,8 @@ class ChainKava: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-kava-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-kava-app.cosmostation.io/"
     var apiUrl = "https://api-kava.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kava/"
     var validatorImgUrl = MonikerUrl + "kava/"

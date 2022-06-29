@@ -20,7 +20,7 @@ class ChainStargaze: ChainConfig {
     var chainColorBG = UIColor(named: "stargaze_bg")!
     var chainTitle = "(Stargaze Mainnet)"
     var chainTitle2 = "STARGAZE"
-    var chainDBName = "SUPPORT_CHAIN_STARGAZE"
+    var chainDBName = CHAIN_STARGAZE_S
     var chainAPIName = "stargaze"
     
     var stakeDenomImg = UIImage(named: "tokenStargaze")
@@ -35,8 +35,8 @@ class ChainStargaze: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-stargaze-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-stargaze-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-stargaze-app.cosmostation.io/"
     var apiUrl = "https://api-stargaze.cosmostation.io/"
     var explorerUrl = MintscanUrl + "stargaze/"
     var validatorImgUrl = MonikerUrl + "stargaze/"

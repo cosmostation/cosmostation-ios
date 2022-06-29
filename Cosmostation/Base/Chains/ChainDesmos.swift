@@ -20,7 +20,7 @@ class ChainDesmos: ChainConfig {
     var chainColorBG = UIColor(named: "desmos_bg")!
     var chainTitle = "(Desmos Mainnet)"
     var chainTitle2 = "DESMOS"
-    var chainDBName = "SUPPORT_CHAIN_DESMOS"
+    var chainDBName = CHAIN_DESMOS_S
     var chainAPIName = "desmos"
     
     var stakeDenomImg = UIImage(named: "tokenDesmos")
@@ -35,8 +35,8 @@ class ChainDesmos: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-desmos-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-desmos-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-desmos-app.cosmostation.io/"
     var apiUrl = "https://api-desmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "desmos/"
     var validatorImgUrl = MonikerUrl + "desmos/"

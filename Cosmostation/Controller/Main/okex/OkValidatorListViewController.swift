@@ -39,8 +39,8 @@ class OkValidatorListViewController: BaseViewController {
         okOtherValidatorView.alpha = 0
         
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
             validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)

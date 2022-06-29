@@ -20,7 +20,7 @@ class ChainComdex: ChainConfig {
     var chainColorBG = UIColor(named: "comdex_bg")!
     var chainTitle = "(Comdex Mainnet)"
     var chainTitle2 = "COMDEX"
-    var chainDBName = "SUPPORT_CHAIN_COMDEX"
+    var chainDBName = CHAIN_COMDEX_S
     var chainAPIName = "comdex"
     
     var stakeDenomImg = UIImage(named: "tokenComdex")
@@ -35,8 +35,8 @@ class ChainComdex: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-comdex-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-comdex-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-comdex-app.cosmostation.io/"
     var apiUrl = "https://api-comdex.cosmostation.io/"
     var explorerUrl = MintscanUrl + "comdex/"
     var validatorImgUrl = MonikerUrl + "comdex/"

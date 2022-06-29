@@ -23,8 +23,8 @@ class MainTabSettingViewController: BaseViewController {
         super.viewDidLoad()
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,8 +41,8 @@ class MainTabSettingViewController: BaseViewController {
     
     func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.titleChainImg.image = chainConfig?.chainImg
         self.titleChainName.text = chainConfig?.chainTitle

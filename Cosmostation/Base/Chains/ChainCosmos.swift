@@ -20,7 +20,7 @@ class ChainCosmos: ChainConfig {
     var chainColorBG = UIColor(named: "cosmos_bg")!
     var chainTitle = "(Cosmos Mainnet)"
     var chainTitle2 = "COSMOS"
-    var chainDBName = "SUPPORT_CHAIN_COSMOS_MAIN"
+    var chainDBName = CHAIN_COSMOS_S
     var chainAPIName = "cosmos"
     
     
@@ -36,8 +36,8 @@ class ChainCosmos: ChainConfig {
     var pushSupport = true
     var wcSupoort = false
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-cosmos-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-cosmos-app.cosmostation.io/"
     var apiUrl = "https://api.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cosmos/"
     var validatorImgUrl = MonikerUrl + "cosmoshub/"

@@ -20,7 +20,7 @@ class StationTest: ChainConfig {
     var chainColorBG = UIColor(named: "station_bg")!
     var chainTitle = "(Station Testnet)"
     var chainTitle2 = "STATION TEST"
-    var chainDBName = "SUPPORT_CHAIN_STATION_TEST"
+    var chainDBName = CHAIN_STATION_TEST_S
     var chainAPIName = ""
     
     var stakeDenomImg = UIImage(named: "tokenStation")
@@ -35,7 +35,7 @@ class StationTest: ChainConfig {
     var pushSupport = false
     var wcSupoort = true
     var grpcUrl = "lcd-office.cosmostation.io"
-    var grpcPort = "10400"
+    var grpcPort = 10400
     var lcdUrl = "https://lcd-office.cosmostation.io/station-testnet/"
     var apiUrl = "https://api-office.cosmostation.io/station-testnet/"
     var explorerUrl = "https://testnet.mintscan.io/station/"

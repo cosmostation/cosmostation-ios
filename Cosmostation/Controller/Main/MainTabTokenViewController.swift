@@ -66,8 +66,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
@@ -113,8 +113,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.titleChainImg.image = chainConfig?.chainImg
         self.titleChainName.text = chainConfig?.chainTitle
@@ -268,7 +268,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             if (denomText.count > 4) { cell?.tokenSymbol.text = denomText.substring(to: 4) }
             else { cell?.tokenSymbol.text = denomText }
             cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = ""
+            cell?.tokenDescription.text = " "
             cell!.tokenValue.text = ""
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
         }

@@ -20,7 +20,7 @@ class ChainBitcana: ChainConfig {
     var chainColorBG = UIColor(named: "bitcanna_bg")!
     var chainTitle = "(Bitcanna Mainnet)"
     var chainTitle2 = "BITCANNA"
-    var chainDBName = "SUPPORT_CHAIN_BITCANA"
+    var chainDBName = CHAIN_BITCANA_S
     var chainAPIName = "bitcanna"
     
     var stakeDenomImg = UIImage(named: "tokenBitcanna")
@@ -35,8 +35,8 @@ class ChainBitcana: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-bitcanna-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-bitcanna-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-bitcanna-app.cosmostation.io/"
     var apiUrl = "https://api-bitcanna.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitcanna/"
     var validatorImgUrl = MonikerUrl + "bitcanna/"

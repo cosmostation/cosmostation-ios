@@ -132,16 +132,17 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         let accountSwitchVC = AccountSwitchViewController(nibName: "AccountSwitchViewController", bundle: nil)
         accountSwitchVC.modalPresentationStyle = .overFullScreen
         accountSwitchVC.resultDelegate = self
-        
+
         sourceVC.view.superview?.insertSubview(accountSwitchVC.view, aboveSubview: sourceVC.view)
         accountSwitchVC.view.transform = CGAffineTransform(translationX: 0, y: -sourceVC.view.frame.size.height)
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3) {
             accountSwitchVC.view.transform = CGAffineTransform(translationX: 0, y: 0)
-        }) { _ in
+        } completion: { _ in
             sourceVC.present(accountSwitchVC, animated: false) {
                 completion()
             }
         }
+
     }
     
     func onUpdateAccountDB() {
@@ -155,7 +156,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             print("NO ACCOUNT ERROR!!!!")
             return
         }
-        mChainType = WUtils.getChainType(mAccount.account_base_chain)
+        mChainType = ChainFactory.getChainType(mAccount.account_base_chain)
     }
     
     func onFetchAccountData() -> Bool {
@@ -176,9 +177,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mOtherValidator.removeAll()
         BaseData.instance.mMyValidator.removeAll()
         BaseData.instance.mBalances.removeAll()
-        BaseData.instance.mMyDelegations.removeAll()
-        BaseData.instance.mMyUnbondings.removeAll()
-        BaseData.instance.mMyReward.removeAll()
         
         BaseData.instance.mBnbTokenList.removeAll()
         BaseData.instance.mBnbTokenTicker.removeAll()
@@ -189,9 +187,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mOkUnbonding = nil
         BaseData.instance.mOkTokenList = nil
         BaseData.instance.mOkTickerList = nil
-                
-        BaseData.instance.mSifVsIncentive = nil
-        BaseData.instance.mSifLmIncentive = nil
         
         
         
@@ -523,16 +518,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithOkAccountInfo(account, okAccountInfo))
                     BaseData.instance.mOkAccountInfo = okAccountInfo
                     
-                } else {
-                    guard let responseData = res as? NSDictionary,
-                        let info = responseData.object(forKey: "result") as? [String : Any] else {
-                            _ = BaseData.instance.deleteBalance(account: account)
-                            self.onFetchFinished()
-                            return
-                    }
-                    let accountInfo = AccountInfo.init(info)
-                    _ = BaseData.instance.updateAccount(WUtils.getAccountWithAccountInfo(account, accountInfo))
-                    BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithAccountInfo(account, accountInfo))
                 }
                 
             case .failure(let error):

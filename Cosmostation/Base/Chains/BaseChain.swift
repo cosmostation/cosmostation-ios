@@ -35,7 +35,7 @@ protocol ChainConfig {
     var pushSupport: Bool { get set }
     var wcSupoort: Bool { get set }
     var grpcUrl: String { get set }
-    var grpcPort: String { get set }
+    var grpcPort: Int { get set }
     var lcdUrl: String { get set }
     var apiUrl: String { get set }
     var explorerUrl: String { get set }
@@ -52,8 +52,102 @@ protocol ChainConfig {
 }
 
 class ChainFactory {
+
+    static func getChainType(_ chainS: String) -> ChainType? {
+        switch chainS {
+        case CHAIN_COSMOS_S:
+            return .COSMOS_MAIN
+        case CHAIN_IRIS_S:
+            return .IRIS_MAIN
+        case CHAIN_AKASH_S:
+            return .AKASH_MAIN
+        case CHAIN_MANTLE_S:
+            return .MANTLE_MAIN
+        case CHAIN_AXELAR_S:
+            return .AXELAR_MAIN
+        case CHAIN_BAND_S:
+            return .BAND_MAIN
+        case CHAIN_BINANCE_S:
+            return .BINANCE_MAIN
+        case CHAIN_BITCANA_S:
+            return .BITCANA_MAIN
+        case CHAIN_BITSONG_S:
+            return .BITSONG_MAIN
+        case CHAIN_CERBERUS_S:
+            return .CERBERUS_MAIN
+        case CHAIN_CERTIK_S:
+            return .CERTIK_MAIN
+        case CHAIN_CHIHUAHUA_S:
+            return .CHIHUAHUA_MAIN
+        case CHAIN_COMDEX_S:
+            return .COMDEX_MAIN
+        case CHAIN_CRESENT_S:
+            return .CRESCENT_MAIN
+        case CHAIN_CRYPTO_S:
+            return .CRYPTO_MAIN
+        case CHAIN_DESMOS_S:
+            return .DESMOS_MAIN
+        case CHAIN_EMONEY_S:
+            return .EMONEY_MAIN
+        case CHAIN_EVMOS_S:
+            return .EVMOS_MAIN
+        case CHAIN_FETCH_S:
+            return .FETCH_MAIN
+        case CHAIN_GRAVITY_BRIDGE_S:
+            return .GRAVITY_BRIDGE_MAIN
+        case CHAIN_INJECTIVE_S:
+            return .INJECTIVE_MAIN
+        case CHAIN_JUNO_S:
+            return .JUNO_MAIN
+        case CHAIN_KAVA_S:
+            return .KAVA_MAIN
+        case CHAIN_KI_S:
+            return .KI_MAIN
+        case CHAIN_KONSTELLATION_S:
+            return .KONSTELLATION_MAIN
+        case CHAIN_LUM_S:
+            return .LUM_MAIN
+        case CHAIN_MEDI_S:
+            return .MEDI_MAIN
+        case CHAIN_NYX_S:
+            return .NYX_MAIN
+        case CHAIN_OKEX_S:
+            return .OKEX_MAIN
+        case CHAIN_OMNIFLIX_S:
+            return .OMNIFLIX_MAIN
+        case CHAIN_OSMOSIS_S:
+            return .OSMOSIS_MAIN
+        case CHAIN_PERSIS_S:
+            return .PERSIS_MAIN
+        case CHAIN_PROVENANCE_S:
+            return .PROVENANCE_MAIN
+        case CHAIN_REGEN_S:
+            return .REGEN_MAIN
+        case CHAIN_RIZON_S:
+            return .RIZON_MAIN
+        case CHAIN_SECRET_S:
+            return .SECRET_MAIN
+        case CHAIN_SENTINEL_S:
+            return .SENTINEL_MAIN
+        case CHAIN_SIF_S:
+            return .SIF_MAIN
+        case CHAIN_STARGAZE_S:
+            return .STARGAZE_MAIN
+        case CHAIN_IOV_S:
+            return .IOV_MAIN
+        case CHAIN_UMEE_S:
+            return .UMEE_MAIN
+            
+            
+        case CHAIN_STATION_TEST_S:
+            return .STATION_TEST
+            
+        default:
+            return nil
+        }
+    }
     
-    func getChainConfig(_ chainType: ChainType?) -> ChainConfig? {
+    static func getChainConfig(_ chainType: ChainType?) -> ChainConfig? {
         switch chainType {
         case .COSMOS_MAIN:
             return ChainCosmos(chainType!)
@@ -147,7 +241,7 @@ class ChainFactory {
         }
     }
     
-    func SUPPRT_CONFIG() -> Array<ChainConfig> {
+    static func SUPPRT_CONFIG() -> Array<ChainConfig> {
         var result = Array<ChainConfig>()
         ChainType.SUPPRT_CHAIN().forEach { chainType in
             if let chainConfig = getChainConfig(chainType) {
@@ -157,7 +251,7 @@ class ChainFactory {
         return result
     }
     
-    func getAllKeyType() -> Array<(ChainType, Int)> {
+    static func getAllKeyType() -> Array<(ChainType, Int)> {
         var result = Array<(ChainType, Int)>()
         SUPPRT_CONFIG().forEach { chainConfig in
             for i in 0 ..< chainConfig.supportHdPaths().count {
@@ -175,6 +269,52 @@ class ChainFactory {
 
 
 
+let CHAIN_COSMOS_S = "SUPPORT_CHAIN_COSMOS_MAIN"
+let CHAIN_IRIS_S = "SUPPORT_CHAIN_IRIS_MAIN"
+let CHAIN_AKASH_S = "SUPPORT_CHAIN_AKASH_MAIN"
+let CHAIN_MANTLE_S = "SUPPORT_CHAIN_MANTLE"
+let CHAIN_AXELAR_S = "SUPPORT_CHAIN_AXELAR"
+let CHAIN_BAND_S = "SUPPORT_CHAIN_BAND_MAIN"
+let CHAIN_BINANCE_S = "SUPPORT_CHAIN_BINANCE_MAIN"
+let CHAIN_BITCANA_S = "SUPPORT_CHAIN_BITCANA"
+let CHAIN_BITSONG_S = "SUPPORT_CHAIN_BITSONG"
+let CHAIN_CERBERUS_S = "SUPPORT_CHAIN_CERBERUS"
+let CHAIN_CERTIK_S = "SUPPORT_CHAIN_CERTIK_MAIN"
+let CHAIN_CHIHUAHUA_S = "SUPPORT_CHAIN_CHIHUAHUA"
+let CHAIN_COMDEX_S = "SUPPORT_CHAIN_COMDEX"
+let CHAIN_CRESENT_S = "SUPPORT_CHAIN_CRESENT"
+let CHAIN_CRYPTO_S = "SUPPORT_CHAIN_CRYTO_MAIN"
+let CHAIN_DESMOS_S = "SUPPORT_CHAIN_DESMOS"
+let CHAIN_EMONEY_S = "SUPPORT_CHAIN_EMONEY"
+let CHAIN_EVMOS_S = "SUPPORT_CHAIN_EVMOS"
+let CHAIN_FETCH_S = "SUPPORT_CHAIN_FETCH_MAIN"
+let CHAIN_GRAVITY_BRIDGE_S = "SUPPORT_CHAIN_GRAVITY_BRIDGE"
+let CHAIN_INJECTIVE_S = "SUPPORT_CHAIN_INJECTIVE"
+let CHAIN_JUNO_S = "SUPPORT_CHAIN_JUNO"
+let CHAIN_KAVA_S = "SUPPORT_CHAIN_KAVA_MAIN"
+let CHAIN_KI_S = "SUPPORT_CHAIN_KI_MAIN"
+let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
+let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
+let CHAIN_MEDI_S = "SUPPORT_CHAIN_MEDI"
+let CHAIN_NYX_S = "SUPPORT_CHAIN_NYX"
+let CHAIN_OKEX_S = "SUPPORT_CHAIN_OKEX_MAIN"
+let CHAIN_OMNIFLIX_S = "SUPPORT_CHAIN_OMNIFLIX"
+let CHAIN_OSMOSIS_S = "SUPPORT_CHAIN_OSMOSIS_MAIN"
+let CHAIN_PERSIS_S = "SUPPORT_CHAIN_PERSISTENCE_MAIN"
+let CHAIN_PROVENANCE_S = "SUPPORT_CHAIN_PROVENANCE"
+let CHAIN_REGEN_S = "SUPPORT_CHAIN_REGEN"
+let CHAIN_RIZON_S = "SUPPORT_CHAIN_RIZON"
+let CHAIN_SECRET_S = "SUPPORT_CHAIN_SECRET_MAIN"
+let CHAIN_SENTINEL_S = "SUPPORT_CHAIN_SENTINEL_MAIN"
+let CHAIN_SIF_S = "SUPPORT_CHAIN_SIF_MAIN"
+let CHAIN_STARGAZE_S = "SUPPORT_CHAIN_STARGAZE"
+let CHAIN_IOV_S = "SUPPORT_CHAIN_IOV_MAIN"
+let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
 
+let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
+
+
+let CHAIN_ALTHEA_S = "SUPPORT_CHAIN_ALTHEA"
+let CHAIN_CUDOS_S = "SUPPORT_CHAIN_CUDOS"
 
 

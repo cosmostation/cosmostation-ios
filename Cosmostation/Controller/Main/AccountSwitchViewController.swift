@@ -19,7 +19,7 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.selectedChain = WUtils.getChainType(account!.account_base_chain)
+        self.selectedChain = ChainFactory.getChainType(account!.account_base_chain)
         self.accountTableView.delegate = self
         self.accountTableView.dataSource = self
         self.accountTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
@@ -69,7 +69,7 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = SwitchAccountHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        let chainConfig = ChainFactory().getChainConfig(chainAccounts[section].chainType)
+        let chainConfig = ChainFactory.getChainConfig(chainAccounts[section].chainType)
         view.rootView.backgroundColor = chainConfig?.chainColorBG
         view.chainImgView.image = chainConfig?.chainImg
         view.chainNameLabel.text = chainConfig?.chainTitle2
@@ -85,7 +85,7 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = SwitchAccountFooter(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        let chainConfig = ChainFactory().getChainConfig(chainAccounts[section].chainType)
+        let chainConfig = ChainFactory.getChainConfig(chainAccounts[section].chainType)
         view.rootView.backgroundColor = chainConfig?.chainColorBG
         return view
     }
@@ -124,7 +124,7 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func onSelectAccount(_ account: Account) {
-        BaseData.instance.setRecentChain(WUtils.getChainType(account.account_base_chain)!)
+        BaseData.instance.setRecentChain(ChainFactory.getChainType(account.account_base_chain)!)
         self.resultDelegate?.accountSelected(account.account_id)
         self.dismiss(animated: false, completion: nil)
     }

@@ -20,7 +20,7 @@ class ChainPersistence: ChainConfig {
     var chainColorBG = UIColor(named: "persistence_bg")!
     var chainTitle = "(Persistence Mainnet)"
     var chainTitle2 = "PERSISTENCE"
-    var chainDBName = "SUPPORT_CHAIN_PERSISTENCE_MAIN"
+    var chainDBName = CHAIN_PERSIS_S
     var chainAPIName = "persistence"
     
     var stakeDenomImg = UIImage(named: "tokenPersistence")
@@ -35,8 +35,8 @@ class ChainPersistence: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-persistence-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-persistence-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-persistence-app.cosmostation.io/"
     var apiUrl = "https://api-persistence.cosmostation.io/"
     var explorerUrl = MintscanUrl + "persistence/"
     var validatorImgUrl = MonikerUrl + "persistence/"

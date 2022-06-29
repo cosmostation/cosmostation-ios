@@ -42,24 +42,17 @@
                                     <constraint firstAttribute="width" constant="0.5" id="1Ng-ov-OlS"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowNextGr" translatesAutoresizingMaskIntoConstraints="NO" id="O5H-eg-GqK">
-                                <rect key="frame" x="266" y="24" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="faj-Qr-td8"/>
-                                    <constraint firstAttribute="width" constant="24" id="z2Q-eo-8mV"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Moniker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tjm-OC-kdP">
-                                <rect key="frame" x="80" y="10" width="120" height="18"/>
+                                <rect key="frame" x="80" y="10" width="144" height="18"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" image="bandoracleoffs" translatesAutoresizingMaskIntoConstraints="NO" id="SWg-PX-qoh">
-                                <rect key="frame" x="204" y="12.5" width="58" height="13"/>
+                                <rect key="frame" x="228" y="12.5" width="58" height="13"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Voting Power" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCK-fO-o03">
-                                <rect key="frame" x="80" y="32" width="160" height="14"/>
+                                <rect key="frame" x="80" y="32" width="186" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -71,13 +64,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7D-lq-a7d">
-                                <rect key="frame" x="252" y="32" width="6" height="14"/>
+                                <rect key="frame" x="278" y="32" width="6" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JMl-wn-8tR">
-                                <rect key="frame" x="252" y="48" width="6" height="14"/>
+                                <rect key="frame" x="278" y="48" width="6" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -85,14 +78,13 @@
                         </subviews>
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="O5H-eg-GqK" secondAttribute="trailing" constant="6" id="4DM-Wa-YIb"/>
+                            <constraint firstItem="D7D-lq-a7d" firstAttribute="trailing" secondItem="JMl-wn-8tR" secondAttribute="trailing" id="1et-1y-JYs"/>
                             <constraint firstItem="SWg-PX-qoh" firstAttribute="leading" secondItem="tjm-OC-kdP" secondAttribute="trailing" constant="4" id="7CD-2z-6e0"/>
                             <constraint firstItem="NCK-fO-o03" firstAttribute="top" secondItem="tjm-OC-kdP" secondAttribute="bottom" constant="4" id="E7B-sn-ehA"/>
                             <constraint firstItem="qu3-wc-OAX" firstAttribute="leading" secondItem="NCK-fO-o03" secondAttribute="leading" id="JoU-Nt-7qF"/>
                             <constraint firstItem="NCK-fO-o03" firstAttribute="leading" secondItem="tjm-OC-kdP" secondAttribute="leading" id="M2B-VP-cd5"/>
-                            <constraint firstItem="O5H-eg-GqK" firstAttribute="centerY" secondItem="uAB-cB-2gH" secondAttribute="centerY" id="MaY-Fo-541"/>
-                            <constraint firstItem="O5H-eg-GqK" firstAttribute="leading" secondItem="JMl-wn-8tR" secondAttribute="trailing" constant="8" id="Op8-pY-efb"/>
                             <constraint firstItem="tjm-OC-kdP" firstAttribute="top" secondItem="uAB-cB-2gH" secondAttribute="top" constant="10" id="PCE-hf-qvh"/>
+                            <constraint firstAttribute="trailing" secondItem="SWg-PX-qoh" secondAttribute="trailing" constant="10" id="Rpy-HW-21l"/>
                             <constraint firstItem="hmo-hQ-aHU" firstAttribute="leading" secondItem="3kV-jR-rnU" secondAttribute="leading" id="WKn-P3-Afo"/>
                             <constraint firstItem="SWg-PX-qoh" firstAttribute="centerY" secondItem="tjm-OC-kdP" secondAttribute="centerY" id="bon-Ve-tzU"/>
                             <constraint firstItem="tjm-OC-kdP" firstAttribute="leading" secondItem="1Er-7z-ec7" secondAttribute="leading" constant="12" id="dcy-GC-jVI"/>
@@ -104,8 +96,7 @@
                             <constraint firstItem="JMl-wn-8tR" firstAttribute="centerY" secondItem="qu3-wc-OAX" secondAttribute="centerY" id="oqc-wQ-zqk"/>
                             <constraint firstItem="3kV-jR-rnU" firstAttribute="centerY" secondItem="uAB-cB-2gH" secondAttribute="centerY" id="sdy-5w-woz"/>
                             <constraint firstItem="D7D-lq-a7d" firstAttribute="leading" secondItem="NCK-fO-o03" secondAttribute="trailing" constant="12" id="vaT-fe-oCQ"/>
-                            <constraint firstItem="O5H-eg-GqK" firstAttribute="leading" secondItem="SWg-PX-qoh" secondAttribute="trailing" constant="4" id="vbS-i7-Uhw"/>
-                            <constraint firstItem="O5H-eg-GqK" firstAttribute="leading" secondItem="D7D-lq-a7d" secondAttribute="trailing" constant="8" id="wCo-H2-WRs"/>
+                            <constraint firstAttribute="trailing" secondItem="JMl-wn-8tR" secondAttribute="trailing" constant="12" id="vpm-ge-jP2"/>
                             <constraint firstItem="D7D-lq-a7d" firstAttribute="centerY" secondItem="NCK-fO-o03" secondAttribute="centerY" id="xLu-69-1B3"/>
                             <constraint firstAttribute="bottom" secondItem="1Er-7z-ec7" secondAttribute="bottom" constant="12" id="yAc-5T-bH9"/>
                             <constraint firstItem="hmo-hQ-aHU" firstAttribute="top" secondItem="3kV-jR-rnU" secondAttribute="top" id="znz-mL-CKr"/>
@@ -152,7 +143,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="arrowNextGr" width="24" height="24"/>
         <image name="bandoracleoffs" width="58" height="13"/>
         <image name="jailedImg" width="44" height="44"/>
         <image name="validatorDefault" width="44" height="44"/>

@@ -30,8 +30,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func viewDidLoad() {
         super.viewDidLoad()
         mAccount = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        chainType = WUtils.getChainType(mAccount.account_base_chain)
-        chainConfig = ChainFactory().getChainConfig(chainType)
+        chainType = ChainFactory.getChainType(mAccount.account_base_chain)
+        chainConfig = ChainFactory.getChainConfig(chainType)
         
         if let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String {
             self.versionLabel.text = "v " + appVersion
@@ -80,16 +80,16 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             if(indexPath.row == 0) {
-                let mnemonicManageVC = MnemonicListViewController(nibName: "MnemonicListViewController", bundle: nil)
-                mnemonicManageVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(mnemonicManageVC, animated: true)
-                
-            } else if (indexPath.row == 1) {
                 let accoutManageVC = WalletManageViewController(nibName: "WalletManageViewController", bundle: nil)
                 accoutManageVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(accoutManageVC, animated: true)
+                
+            } else if (indexPath.row == 1) {
+                let mnemonicManageVC = MnemonicListViewController(nibName: "MnemonicListViewController", bundle: nil)
+                mnemonicManageVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(mnemonicManageVC, animated: true)
                 
             } else if (indexPath.row == 2) {
                 let privateKeyRestoreVC = PrivateKeyRestoreViewController(nibName: "PrivateKeyRestoreViewController", bundle: nil)

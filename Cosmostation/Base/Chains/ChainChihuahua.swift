@@ -20,7 +20,7 @@ class ChainChihuahua: ChainConfig {
     var chainColorBG = UIColor(named: "chihuahua_bg")!
     var chainTitle = "(Chihuahua Mainnet)"
     var chainTitle2 = "CHIHUAHUA"
-    var chainDBName = "SUPPORT_CHAIN_CHIHUAHUA"
+    var chainDBName = CHAIN_CHIHUAHUA_S
     var chainAPIName = "chihuahua"
     
     var stakeDenomImg = UIImage(named: "tokenChihuahua")
@@ -35,8 +35,8 @@ class ChainChihuahua: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-chihuahua-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io/"
     var apiUrl = "https://api-chihuahua.cosmostation.io/"
     var explorerUrl = MintscanUrl + "chihuahua/"
     var validatorImgUrl = MonikerUrl + "chihuahua/"

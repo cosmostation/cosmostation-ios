@@ -58,7 +58,7 @@ class TokenDetailVestingDetailCell: TokenDetailCell {
     }
     
     func onBindVestingToken(_ chainType: ChainType, _ denom: String) {
-        let chainConfig = ChainFactory().getChainConfig(chainType)
+        let chainConfig = ChainFactory.getChainConfig(chainType)
         if (chainType == ChainType.KAVA_MAIN) {
             if (denom == KAVA_MAIN_DENOM) {
                 rootCardView.backgroundColor = chainConfig?.chainColorBG

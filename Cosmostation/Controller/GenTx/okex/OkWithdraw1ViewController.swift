@@ -28,7 +28,7 @@ class OkWithdraw1ViewController: BaseViewController, UITextFieldDelegate {
         
         if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
             mDpDecimal = 18
-            userAvailable = WUtils.okDepositAmount(BaseData.instance.mOkStaking)
+            userAvailable = BaseData.instance.okDepositAmount()
             availableAmountLabel.attributedText = WUtils.displayAmount2(userAvailable.stringValue, availableAmountLabel.font, 0, mDpDecimal)
         }
         toWithdrawAmountInput.delegate = self

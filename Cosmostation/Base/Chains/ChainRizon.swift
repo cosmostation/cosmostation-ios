@@ -20,7 +20,7 @@ class ChainRizon: ChainConfig {
     var chainColorBG = UIColor(named: "rizon_bg")!
     var chainTitle = "(Rizon Mainnet)"
     var chainTitle2 = "RIZON"
-    var chainDBName = "SUPPORT_CHAIN_RIZON"
+    var chainDBName = CHAIN_RIZON_S
     var chainAPIName = "rizon"
     
     var stakeDenomImg = UIImage(named: "tokenRizon")
@@ -35,8 +35,8 @@ class ChainRizon: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-rizon-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-rizon-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-rizon-app.cosmostation.io/"
     var apiUrl = "https://api-rizon.cosmostation.io/"
     var explorerUrl = MintscanUrl + "rizon/"
     var validatorImgUrl = MonikerUrl + "rizon/"

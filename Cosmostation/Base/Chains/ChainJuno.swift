@@ -20,7 +20,7 @@ class ChainJuno: ChainConfig {
     var chainColorBG = UIColor(named: "juno_bg")!
     var chainTitle = "(Juno Mainnet)"
     var chainTitle2 = "JUNO"
-    var chainDBName = "SUPPORT_CHAIN_JUNO"
+    var chainDBName = CHAIN_JUNO_S
     var chainAPIName = "juno"
     
     var stakeDenomImg = UIImage(named: "tokenJuno")
@@ -35,8 +35,8 @@ class ChainJuno: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-juno-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-juno-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-juno-app.cosmostation.io/"
     var apiUrl = "https://api-juno.cosmostation.io/"
     var explorerUrl = MintscanUrl + "juno/"
     var validatorImgUrl = MonikerUrl + "juno/"

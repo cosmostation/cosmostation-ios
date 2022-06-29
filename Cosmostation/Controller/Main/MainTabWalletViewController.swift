@@ -34,8 +34,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
 
         self.walletTableView.delegate = self
         self.walletTableView.dataSource = self
@@ -92,8 +92,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.titleChainImg.image = chainConfig?.chainImg
         self.titleChainName.text = chainConfig?.chainTitle
@@ -133,6 +133,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func updateFloaty() {
         let floaty = Floaty()
+        floaty.buttonShadowColor = UIColor.init(named: "_font01")!
         floaty.buttonImage = chainConfig?.stakeSendImg
         floaty.buttonColor = chainConfig?.stakeSendBg ?? .black
         floaty.fabDelegate = self
@@ -644,7 +645,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (WUtils.okDepositAmount(BaseData.instance.mOkStaking).compare(NSDecimalNumber.zero).rawValue <= 0) {
+        if (BaseData.instance.okDepositAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_withdraw", comment: ""))
             return
         }

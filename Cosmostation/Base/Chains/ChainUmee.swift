@@ -20,7 +20,7 @@ class ChainUmee: ChainConfig {
     var chainColorBG = UIColor(named: "umee_bg")!
     var chainTitle = "(Umee Mainnet)"
     var chainTitle2 = "UMEE"
-    var chainDBName = "SUPPORT_CHAIN_UMEE"
+    var chainDBName = CHAIN_UMEE_S
     var chainAPIName = "umee"
     
     var stakeDenomImg = UIImage(named: "tokenUmee")
@@ -35,8 +35,8 @@ class ChainUmee: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-umee-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-umee-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-umee-app.cosmostation.io/"
     var apiUrl = "https://api-umee.cosmostation.io/"
     var explorerUrl = MintscanUrl + "umee/"
     var validatorImgUrl = MonikerUrl + "umee/"

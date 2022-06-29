@@ -26,9 +26,6 @@ final class BaseData : NSObject{
     
     var mNodeInfo: NodeInfo?
     var mBalances = Array<Balance>()
-    var mMyDelegations = Array<BondingInfo>()
-    var mMyUnbondings = Array<UnbondingInfo>()
-    var mMyReward = Array<RewardInfo>()
     var mAllValidator = Array<Validator>()
     var mTopValidator = Array<Validator>()
     var mOtherValidator = Array<Validator>()
@@ -45,13 +42,9 @@ final class BaseData : NSObject{
     var mOkStaking: OkStaking?
     var mOkUnbonding: OkUnbonding?
     var mOKBPrice: NSDecimalNumber = NSDecimalNumber.zero
-        
-    var mSifVsIncentive: SifIncentive?
-    var mSifLmIncentive: SifIncentive?
     
     
     //For ProtoBuf and gRPC
-    var mVestingAccountInfoResult: VestingAccountInfo.VestingAccountInfoResult?
     var mNodeInfo_gRPC: Tendermint_P2p_NodeInfo?
     var mAccount_gRPC: Google_Protobuf2_Any!
     var mAllValidators_gRPC = Array<Cosmos_Staking_V1beta1_Validator>()
@@ -259,81 +252,6 @@ final class BaseData : NSObject{
         return availableAmount(symbol).adding(lockedAmount(symbol))
     }
     
-    func delegatedSumAmount() -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for bonding in mMyDelegations {
-            amount = amount.adding(bonding.getAmount())
-        }
-        return amount
-    }
-    
-    func delegatedAmountByValidator(_ opAddress: String) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for bonding in mMyDelegations {
-            if (bonding.validator_address == opAddress) {
-                amount = amount.adding(bonding.getAmount())
-            }
-        }
-        return amount
-    }
-    
-    func unbondingSumAmount() -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        mMyUnbondings.forEach { unbondingInfo in
-            unbondingInfo.entries.forEach { entry in
-                amount = amount.adding(NSDecimalNumber.init(string: entry.balance))
-            }
-        }
-        return amount
-    }
-    
-    func getUnbondingEntrie() -> Array<UnbondingInfo.Entry> {
-        var result = Array<UnbondingInfo.Entry>()
-        mMyUnbondings.forEach { unbondingInfo in
-            unbondingInfo.entries.forEach { entry in
-                result.append(entry)
-            }
-        }
-        result.sort{ return Int($0.creation_height)! < Int($1.creation_height)! }
-        return result
-    }
-    
-    func unbondingAmountByValidator(_ opAddress: String) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for unbonding in mMyUnbondings {
-            if (unbonding.validator_address == opAddress) {
-                unbonding.entries.forEach { entry in
-                    amount = amount.adding(NSDecimalNumber.init(string: entry.balance))
-                }
-            }
-        }
-        return amount
-    }
-    
-    
-    func rewardAmount(_ symbol: String) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for reward in mMyReward {
-            for coin in reward.reward {
-                if (coin.denom == symbol) {
-                    amount = amount.adding(NSDecimalNumber.init(string: coin.amount).rounding(accordingToBehavior: WUtils.handler0Down))
-                }
-            }
-        }
-        return amount
-    }
-    
-    func rewardAmountByValidator(_ symbol: String, _ opAddress: String) -> NSDecimalNumber {
-        if let reward = BaseData.instance.mMyReward.filter({ $0.validator_address == opAddress}).first {
-            for coin in reward.reward {
-                if (coin.denom == symbol) {
-                    return NSDecimalNumber.init(string:coin.amount).rounding(accordingToBehavior: WUtils.handler0Down)
-                }
-            }
-        }
-        return NSDecimalNumber.zero
-    }
-    
     func okDepositAmount() -> NSDecimalNumber {
         return WUtils.plainStringToDecimal(mOkStaking?.tokens)
     }
@@ -531,7 +449,7 @@ final class BaseData : NSObject{
     
     func getRecentAccountId() -> Int64 {
         let account = selectAccountById(id: Int64(UserDefaults.standard.integer(forKey: KEY_RECENT_ACCOUNT)))
-        let chainType = WUtils.getChainType(account!.account_base_chain)!
+        let chainType = ChainFactory.getChainType(account!.account_base_chain)!
         if (dpSortedChains().contains(chainType))  {
             return Int64(UserDefaults.standard.integer(forKey: KEY_RECENT_ACCOUNT))
             
@@ -550,7 +468,7 @@ final class BaseData : NSObject{
     }
     
     func getRecentChain() -> ChainType {
-        let chain = WUtils.getChainType(UserDefaults.standard.string(forKey: KEY_RECENT_CHAIN_S) ?? CHAIN_COSMOS_S)!
+        let chain = ChainFactory.getChainType(UserDefaults.standard.string(forKey: KEY_RECENT_CHAIN_S) ?? CHAIN_COSMOS_S)!
         if (userSortedChains().contains(chain)) {
             return chain
         } else {
@@ -786,7 +704,7 @@ final class BaseData : NSObject{
         }
         var sorted = Array<ChainType>()
         getUserSortedChainS()?.forEach({ chainName in
-            if let checkChain = WUtils.getChainType(chainName) {
+            if let checkChain = ChainFactory.getChainType(chainName) {
                 if (result.contains(checkChain) == true) {
                     sorted.append(checkChain)
                 }
@@ -817,7 +735,7 @@ final class BaseData : NSObject{
         let rawDpChains = userDisplayChains()
         let orderedChainS = getUserHiddenChains()
         orderedChainS?.forEach({ chainS in
-            if let checkChain = WUtils.getChainType(chainS) {
+            if let checkChain = ChainFactory.getChainType(chainS) {
                 if (rawDpChains.contains(checkChain) == true) {
                     result.append(checkChain)
                 }
@@ -837,7 +755,7 @@ final class BaseData : NSObject{
         let rawDpChains = userDisplayChains()
         let orderedChainS = getUserHiddenChains()
         orderedChainS?.forEach({ chainS in
-            if let checkChain = WUtils.getChainType(chainS) {
+            if let checkChain = ChainFactory.getChainType(chainS) {
                 if (rawDpChains.contains(checkChain) == true) {
                     result.append(checkChain)
                 }
@@ -863,7 +781,7 @@ final class BaseData : NSObject{
         var result = Array<ChainType>()
         let expendedChainS = UserDefaults.standard.stringArray(forKey: KEY_USER_EXPENDED_CHAINS) ?? []
         expendedChainS.forEach({ chainS in
-            if let checkChain = WUtils.getChainType(chainS) {
+            if let checkChain = ChainFactory.getChainType(chainS) {
                 result.append(checkChain)
             }
         })
@@ -1055,7 +973,7 @@ final class BaseData : NSObject{
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()
         for account in allAccounts {
-            if (WUtils.getChainType(account.account_base_chain) == chain) {
+            if (ChainFactory.getChainType(account.account_base_chain) == chain) {
                 result.append(account)
             }
         }
@@ -1066,7 +984,7 @@ final class BaseData : NSObject{
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()
         for account in allAccounts {
-            if (WUtils.getChainType(account.account_base_chain) == chain && account.account_has_private == true) {
+            if (ChainFactory.getChainType(account.account_base_chain) == chain && account.account_has_private == true) {
                 result.append(account)
             }
         }
@@ -1077,7 +995,7 @@ final class BaseData : NSObject{
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()
         for account in allAccounts {
-            if (WUtils.getChainType(account.account_base_chain) == chain && account.account_has_private) {
+            if (ChainFactory.getChainType(account.account_base_chain) == chain && account.account_has_private) {
                 if (chain == ChainType.BINANCE_MAIN) {
                     if (WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue >= 0) {
                         result.append(account)
@@ -1367,8 +1285,8 @@ final class BaseData : NSObject{
     public func setPkeyUpdate(_ account :Account, _ wordSeedPairs: Array<WordSeedPair>) {
         if let words = KeychainWrapper.standard.string(forKey: account.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines) {
             let seed = wordSeedPairs.filter { $0.word == words }.first!.seed
-            let chainType = WUtils.getChainType(account.account_base_chain)!
-            let chainConfig = ChainFactory().getChainConfig(chainType)!
+            let chainType = ChainFactory.getChainType(account.account_base_chain)!
+            let chainConfig = ChainFactory.getChainConfig(chainType)!
             let fullPath = chainConfig.getHdPath(Int(account.account_custom_path), Int(account.account_path)!)
             let pKey = WKey.getPrivateKeyDataFromSeed(seed, fullPath)
             KeychainWrapper.standard.set(pKey.hexEncodedString(), forKey: account.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
@@ -1551,193 +1469,6 @@ final class BaseData : NSObject{
             _ = self.insertBalance(balance: balance)
         }
     }
-    
-    
-    
-    /*
-    public func selectAllBondings() -> Array<Bonding> {
-        var result = Array<Bonding>()
-        do {
-            for bondingBD in try database.prepare(DB_BONDING) {
-                let bonding = Bonding(bondingBD[DB_BONDING_ID], bondingBD[DB_BONDING_ACCOUNT_ID],
-                                      bondingBD[DB_BONDING_V_Address], bondingBD[DB_BONDING_SHARES],
-                                      bondingBD[DB_BONDING_FETCH_TIME])
-                result.append(bonding);
-            }
-        } catch {
-            if(SHOW_LOG) { print(error) }
-        }
-        return result;
-    }
-
-    public func selectBondingById(accountId: Int64) -> Array<Bonding> {
-        var result = Array<Bonding>()
-        do {
-            for bondingBD in try database.prepare(DB_BONDING.filter(DB_BONDING_ACCOUNT_ID == accountId)) {
-                let bonding = Bonding(bondingBD[DB_BONDING_ID], bondingBD[DB_BONDING_ACCOUNT_ID],
-                                      bondingBD[DB_BONDING_V_Address], bondingBD[DB_BONDING_SHARES],
-                                      bondingBD[DB_BONDING_FETCH_TIME])
-                result.append(bonding);
-            }
-        } catch {
-            if(SHOW_LOG) { print(error) }
-        }
-        return result
-    }
-
-    public func selectBondingWithValAdd(_ accountId: Int64, _ valAddr: String) -> Bonding? {
-        do {
-            for bondingBD in try database.prepare(DB_BONDING.filter(DB_BONDING_ACCOUNT_ID == accountId && DB_BONDING_V_Address == valAddr)) {
-                let bonding = Bonding(bondingBD[DB_BONDING_ID], bondingBD[DB_BONDING_ACCOUNT_ID],
-                                      bondingBD[DB_BONDING_V_Address], bondingBD[DB_BONDING_SHARES],
-                                      bondingBD[DB_BONDING_FETCH_TIME])
-                return bonding
-            }
-        } catch {
-            return nil
-        }
-        return nil
-    }
-
-    public func deleteBonding(account: Account) -> Int {
-        let query = DB_BONDING.filter(DB_BONDING_ACCOUNT_ID == account.account_id)
-        do {
-            return  try database.run(query.delete())
-        } catch {
-            if(SHOW_LOG) { print(error) }
-            return -1
-        }
-    }
-
-    public func deleteBondingById(accountId: Int64) -> Int {
-        let query = DB_BONDING.filter(DB_BONDING_ACCOUNT_ID == accountId)
-        do {
-            return  try database.run(query.delete())
-        } catch {
-            if(SHOW_LOG) { print(error) }
-            return -1
-        }
-    }
-
-    public func insertBonding(bonding: Bonding) -> Int64 {
-        let insertBonding = DB_BONDING.insert(DB_BONDING_ACCOUNT_ID <- bonding.bonding_account_id,
-                                              DB_BONDING_V_Address <- bonding.bonding_v_address,
-                                              DB_BONDING_SHARES <- bonding.bonding_shares,
-                                              DB_BONDING_FETCH_TIME <- bonding.bonding_fetch_time)
-        do {
-            return try database.run(insertBonding)
-        } catch {
-            if(SHOW_LOG) { print(error) }
-            return -1
-        }
-    }
-
-    public func updateBondings(_ newBondings: Array<Bonding>) {
-        if (newBondings.count > 0) {
-            _ = deleteBondingById(accountId: newBondings[0].bonding_account_id)
-            for bonding in newBondings {
-                _ = self.insertBonding(bonding: bonding)
-            }
-        }
-    }
-
-
-
-
-    public func selectAllUnbondings() -> Array<Unbonding> {
-        var result = Array<Unbonding>()
-        do {
-            for unbondingBD in try database.prepare(DB_UNBONDING) {
-                let unbonding = Unbonding(unbondingBD[DB_UNBONDING_ID], unbondingBD[DB_UNBONDING_ACCOUNT_ID],
-                                      unbondingBD[DB_UNBONDING_V_Address], unbondingBD[DB_UNBONDING_CREATE_HEIGHT],
-                                      unbondingBD[DB_UNBONDING_COMPLETE_TIME], unbondingBD[DB_UNBONDING_INITIAL_BALANCE],
-                                      unbondingBD[DB_UNBONDING_BALANCE], unbondingBD[DB_UNBONDING_FETCH_TIME])
-                result.append(unbonding);
-            }
-        } catch {
-            if(SHOW_LOG) { print(error) }
-        }
-        return result;
-    }
-
-    public func selectUnbondingById(accountId: Int64) -> Array<Unbonding> {
-        var result = Array<Unbonding>()
-        do {
-            for unbondingBD in try database.prepare(DB_UNBONDING.filter(DB_UNBONDING_ACCOUNT_ID == accountId)) {
-                let unbonding = Unbonding(unbondingBD[DB_UNBONDING_ID], unbondingBD[DB_UNBONDING_ACCOUNT_ID],
-                                          unbondingBD[DB_UNBONDING_V_Address], unbondingBD[DB_UNBONDING_CREATE_HEIGHT],
-                                          unbondingBD[DB_UNBONDING_COMPLETE_TIME], unbondingBD[DB_UNBONDING_INITIAL_BALANCE],
-                                          unbondingBD[DB_UNBONDING_BALANCE], unbondingBD[DB_UNBONDING_FETCH_TIME])
-                result.append(unbonding);
-            }
-        } catch {
-            if(SHOW_LOG) { print(error) }
-        }
-        return result
-    }
-
-    public func selectUnBondingWithValAdd(_ accountId: Int64, _ valAddr: String) -> Array<Unbonding> {
-        var result = Array<Unbonding>()
-        do {
-            for unbondingBD in try database.prepare(DB_UNBONDING.filter(DB_UNBONDING_ACCOUNT_ID == accountId && DB_UNBONDING_V_Address == valAddr)) {
-                let unbonding = Unbonding(unbondingBD[DB_UNBONDING_ID], unbondingBD[DB_UNBONDING_ACCOUNT_ID],
-                                          unbondingBD[DB_UNBONDING_V_Address], unbondingBD[DB_UNBONDING_CREATE_HEIGHT],
-                                          unbondingBD[DB_UNBONDING_COMPLETE_TIME], unbondingBD[DB_UNBONDING_INITIAL_BALANCE],
-                                          unbondingBD[DB_UNBONDING_BALANCE], unbondingBD[DB_UNBONDING_FETCH_TIME])
-                result.append(unbonding);
-            }
-        } catch {
-            if(SHOW_LOG) { print(error) }
-        }
-
-        return result
-    }
-
-    public func deleteUnbonding(account: Account) -> Int {
-        let query = DB_UNBONDING.filter(DB_UNBONDING_ACCOUNT_ID == account.account_id)
-        do {
-            return  try database.run(query.delete())
-        } catch {
-            if(SHOW_LOG) { print(error) }
-            return -1
-        }
-    }
-
-    public func deleteUnbondingById(accountId: Int64) -> Int {
-        let query = DB_UNBONDING.filter(DB_UNBONDING_ACCOUNT_ID == accountId)
-        do {
-            return  try database.run(query.delete())
-        } catch {
-            if(SHOW_LOG) { print(error) }
-            return -1
-        }
-    }
-
-    public func insertUnbonding(unbonding: Unbonding) -> Int64 {
-        let insertUnbonding = DB_UNBONDING.insert(DB_UNBONDING_ACCOUNT_ID <- unbonding.unbonding_account_id,
-                                                  DB_UNBONDING_V_Address <- unbonding.unbonding_v_address,
-                                                  DB_UNBONDING_CREATE_HEIGHT <- unbonding.unbonding_create_height,
-                                                  DB_UNBONDING_COMPLETE_TIME <- unbonding.unbonding_complete_time,
-                                                  DB_UNBONDING_INITIAL_BALANCE <- unbonding.unbonding_inital_balance,
-                                                  DB_UNBONDING_BALANCE <- unbonding.unbonding_balance,
-                                                  DB_UNBONDING_FETCH_TIME <- unbonding.unbonding_fetch_time)
-        do {
-            return try database.run(insertUnbonding)
-        } catch {
-            if(SHOW_LOG) { print(error) }
-            return -1
-        }
-    }
-
-    public func updateUnbondings(_ accountId: Int64, _ newUnbondings: Array<Unbonding>) {
-        _ = deleteUnbondingById(accountId: accountId)
-        if (newUnbondings.count > 0) {
-            for unbonding in newUnbondings {
-                _ = self.insertUnbonding(unbonding: unbonding)
-            }
-        }
-    }
-    */
     
 }
 

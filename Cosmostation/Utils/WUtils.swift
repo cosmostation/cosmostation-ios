@@ -40,21 +40,6 @@ public class WUtils {
     static func getDivideHandler(_ decimal:Int16) -> NSDecimalNumberHandler{
         return NSDecimalNumberHandler(roundingMode: NSDecimalNumber.RoundingMode.down, scale: decimal, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
     }
-
-    
-    static func getAccountWithAccountInfo(_ account: Account, _ accountInfo: AccountInfo) -> Account {
-        let result = account
-        if (accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT || accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT_LEGACY || accountInfo.type == COSMOS_AUTH_TYPE_CERTIK_MANUAL) {
-            result.account_address = accountInfo.value.address
-            result.account_sequence_number = Int64(accountInfo.value.sequence) ?? 0
-            result.account_account_numner = Int64(accountInfo.value.account_number) ?? 0
-        } else {
-            result.account_address = accountInfo.value.BaseVestingAccount.BaseAccount.address
-            result.account_sequence_number = Int64(accountInfo.value.BaseVestingAccount.BaseAccount.sequence) ?? 0
-            result.account_account_numner = Int64(accountInfo.value.BaseVestingAccount.BaseAccount.account_number) ?? 0
-        }
-        return result
-    }
     
     static func getAccountWithBnbAccountInfo(_ account: Account, _ accountInfo: BnbAccountInfo) -> Account {
         let result = account
@@ -64,18 +49,12 @@ public class WUtils {
         return result
     }
     
-    static func getAccountWithKavaAccountInfo(_ account: Account, _ accountInfo: KavaAccountInfo) -> Account {
-        let result = account
-        if (accountInfo.result.type == COSMOS_AUTH_TYPE_ACCOUNT) {
-            result.account_address = accountInfo.result.value.address
-            result.account_sequence_number = Int64(accountInfo.result.value.sequence)!
-            result.account_account_numner = Int64(accountInfo.result.value.account_number)!
-        } else if (accountInfo.result.type == COSMOS_AUTH_TYPE_V_VESTING_ACCOUNT || accountInfo.result.type == COSMOS_AUTH_TYPE_P_VESTING_ACCOUNT) {
-            result.account_address = accountInfo.result.value.address
-            result.account_sequence_number = Int64(accountInfo.result.value.sequence)!
-            result.account_account_numner = Int64(accountInfo.result.value.account_number)!
+    static func getBalancesWithBnbAccountInfo(_ account: Account, _ accountInfo: BnbAccountInfo) -> Array<Balance> {
+        var result = Array<Balance>()
+        for bnbBalance in accountInfo.balances {
+            result.append(Balance(account.account_id, bnbBalance.symbol, bnbBalance.free, Date().millisecondsSince1970, bnbBalance.frozen, bnbBalance.locked))
         }
-        return result
+        return result;
     }
     
     static func getAccountWithOkAccountInfo(_ account: Account, _ accountInfo: OkAccountInfo) -> Account {
@@ -86,57 +65,6 @@ public class WUtils {
             result.account_account_numner = Int64(accountInfo.value!.account_number!)!
         }
         return result
-    }
-    
-    static func getAccountWithVestingAccountInfo(_ account: Account, _ accountInfo: VestingAccountInfo) -> Account {
-        let result = account
-        result.account_address = account.account_address
-        result.account_sequence_number = Int64(accountInfo.result!.value!.sequence!)!
-        result.account_account_numner = Int64(accountInfo.result!.value!.account_number!)!
-        return result
-    }
-    
-    static func getBalancesWithAccountInfo(_ account: Account, _ accountInfo: AccountInfo) -> Array<Balance> {
-        var result = Array<Balance>()
-        if (accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT || accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT_LEGACY ||
-            accountInfo.type == COSMOS_AUTH_TYPE_CERTIK_MANUAL) {
-            for coin in accountInfo.value.coins {
-                result.append(Balance.init(account.account_id, coin.denom, coin.amount, Date().millisecondsSince1970))
-            }
-            
-        } else {
-            for coin in accountInfo.value.BaseVestingAccount.BaseAccount.coins {
-                result.append(Balance.init(account.account_id, coin.denom, coin.amount, Date().millisecondsSince1970))
-            }
-        }
-        return result
-    }
-    
-    static func getBalancesWithAccountInfo(_ accountInfo: AccountInfo) -> Array<Balance> {
-        var result = Array<Balance>()
-        if(accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT ||
-            accountInfo.type == COSMOS_AUTH_TYPE_ACCOUNT_LEGACY ||
-            accountInfo.type == COSMOS_AUTH_TYPE_CERTIK_MANUAL) {
-            for coin in accountInfo.value.coins {
-                result.append(Balance.init(-1, coin.denom, coin.amount, Date().millisecondsSince1970))
-            }
-
-        } else {
-            for coin in accountInfo.value.BaseVestingAccount.BaseAccount.coins {
-                result.append(Balance.init(-1, coin.denom, coin.amount, Date().millisecondsSince1970))
-            }
-        }
-        return result
-    }
-    
-    
-    
-    static func getBalancesWithBnbAccountInfo(_ account: Account, _ accountInfo: BnbAccountInfo) -> Array<Balance> {
-        var result = Array<Balance>()
-        for bnbBalance in accountInfo.balances {
-            result.append(Balance(account.account_id, bnbBalance.symbol, bnbBalance.free, Date().millisecondsSince1970, bnbBalance.frozen, bnbBalance.locked))
-        }
-        return result;
     }
     
     static func getBalancesWithOkAccountInfo(_ account: Account, _ accountToken: OkAccountToken) -> Array<Balance> {
@@ -253,21 +181,6 @@ public class WUtils {
         }
     }
     
-    static func txTimetoShortString(input: String?) -> String {
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format2", comment: "")
-        if (input != nil) {
-            let fullDate = nodeFormatter.date(from: input!)
-            return localFormatter.string(from: fullDate!)
-        } else {
-            return ""
-        }
-    }
-    
     
     static func longTimetoString(_ input: Int64) -> String {
         let localFormatter = DateFormatter()
@@ -291,16 +204,6 @@ public class WUtils {
         nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
         let date = nodeFormatter.date(from: input) ?? Date.init()
         return longTimetoString3(date.millisecondsSince1970)
-    }
-    
-    
-    static func vestingTimeToString(_ startTime:Int64, _ vesting: KavaAccountInfo.VestingPeriod) -> String {
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-        let unlockTime = (startTime + vesting.length) * 1000
-        
-        let fullDate = Date.init(milliseconds: Int(unlockTime))
-        return localFormatter.string(from: fullDate)
     }
     
     static func unbondingDateFromNow(_ date:UInt16) -> String {
@@ -410,56 +313,6 @@ public class WUtils {
         }
     }
     
-    static func vestingTimeGap(_ startTime:Int64, _ vesting: KavaAccountInfo.VestingPeriod) -> String {
-        let unlockTime = (startTime + vesting.length) * 1000
-        let secondsLeft = Int(Date().timeIntervalSince(Date.init(milliseconds: Int(unlockTime)))) * -1
-        
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-        if secondsLeft < minute {
-            return "Soon"
-        } else if secondsLeft < hour {
-            return "(\(secondsLeft / minute) minutes remaining)"
-        } else if secondsLeft < day {
-            return "(\(secondsLeft / hour) hours remaining)"
-        } else {
-            return "(\(secondsLeft / day) days remaining)"
-        }
-    }
-    
-    static func bnbHistoryTitle(_ bnbHistory:BnbHistory, _ myaddress:String) -> String {
-        var resultMsg = NSLocalizedString("tx_known", comment: "")
-        if (bnbHistory.txType == "NEW_ORDER") {
-            resultMsg = NSLocalizedString("tx_new_order", comment: "")
-            
-        } else if (bnbHistory.txType == "CANCEL_ORDER") {
-            resultMsg = NSLocalizedString("tx_cancel_order", comment: "")
-            
-        } else if (bnbHistory.txType == "TRANSFER") {
-            if (bnbHistory.fromAddr == myaddress) {
-                resultMsg = NSLocalizedString("tx_send", comment: "")
-            } else {
-                resultMsg = NSLocalizedString("tx_receive", comment: "")
-            }
-        } else if (bnbHistory.txType == "HTL_TRANSFER") {
-            if (bnbHistory.fromAddr == myaddress) {
-                resultMsg = NSLocalizedString("tx_send_htlc", comment: "")
-            } else if (bnbHistory.toAddr == myaddress) {
-                resultMsg = NSLocalizedString("tx_receive_htlc", comment: "")
-            } else {
-                resultMsg = NSLocalizedString("tx_create_htlc", comment: "")
-            }
-            
-        } else if (bnbHistory.txType == "CLAIM_HTL") {
-            resultMsg = NSLocalizedString("tx_claim_htlc", comment: "")
-            
-        } else if (bnbHistory.txType == "REFUND_HTL") {
-            resultMsg = NSLocalizedString("tx_refund_htlc", comment: "")
-        }
-        return resultMsg
-    }
-    
     static func checkNAN(_ check: NSDecimalNumber) -> NSDecimalNumber{
         if(check.isEqual(to: NSDecimalNumber.notANumber)) {
             return NSDecimalNumber.zero
@@ -538,34 +391,6 @@ public class WUtils {
         
         let formatted = nf.string(from: amount)?.replacingOccurrences(of: ",", with: "" )
         return formatted!
-    }
-    
-    static func availableAmount(_ balances:Array<Balance>, _ symbol:String) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for balance in balances {
-            if (balance.balance_denom == symbol) {
-                amount = plainStringToDecimal(balance.balance_amount)
-            }
-        }
-        return amount;
-    }
-    
-    static func lockedAmount(_ balances:Array<Balance>, _ symbol:String) -> NSDecimalNumber {
-        var amount = NSDecimalNumber.zero
-        for balance in balances {
-            if (balance.balance_denom == symbol) {
-                amount = plainStringToDecimal(balance.balance_locked)
-            }
-        }
-        return amount;
-    }
-    
-    static func okDepositAmount(_ deposit: OkStaking?) -> NSDecimalNumber {
-        return plainStringToDecimal(deposit?.tokens)
-    }
-    
-    static func okWithdrawAmount(_ withdraw: OkUnbonding?) -> NSDecimalNumber {
-        return plainStringToDecimal(withdraw?.quantity)
     }
     
     //price displaying
@@ -764,15 +589,6 @@ public class WUtils {
                 totalValue = totalValue.adding(assetValue)
             }
             
-        }
-        
-        else {
-            baseData.mBalances.forEach { coin in
-                if (coin.balance_denom == getMainDenom(chainType)) {
-                    let amount = getAllMainAssetOld(getMainDenom(chainType))
-                    totalValue = totalValue.adding(userCurrencyValue(coin.balance_denom, amount, mainDivideDecimal(chainType)))
-                }
-            }
         }
         return totalValue
     }
@@ -1012,16 +828,6 @@ public class WUtils {
         return amount
     }
     
-    static func getAllMainAssetOld(_ denom: String) -> NSDecimalNumber {
-        let available = BaseData.instance.availableAmount(denom)
-        let lock = BaseData.instance.lockedAmount(denom)
-        let delegated = BaseData.instance.delegatedSumAmount()
-        let unbonding = BaseData.instance.unbondingSumAmount()
-        let reward = BaseData.instance.rewardAmount(denom)
-        
-        return available.adding(lock).adding(delegated).adding(unbonding).adding(reward)
-    }
-    
     static func getAllExToken(_ symbol: String) -> NSDecimalNumber {
         let dataBase = BaseData.instance
         if (symbol == OKEX_MAIN_DENOM) {
@@ -1210,13 +1016,13 @@ public class WUtils {
             if (denom == KAVA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom == KAVA_HARD_DENOM) {
-                denomLabel?.textColor = COLOR_HARD
+                denomLabel?.textColor = UIColor.init(named: "kava_hard")
                 denomLabel?.text = denom.uppercased()
             } else if (denom == KAVA_USDX_DENOM) {
-                denomLabel?.textColor = COLOR_USDX
+                denomLabel?.textColor = UIColor.init(named: "kava_usdx")
                 denomLabel?.text = denom.uppercased()
             } else if (denom == KAVA_SWAP_DENOM) {
-                denomLabel?.textColor = COLOR_SWP
+                denomLabel?.textColor = UIColor.init(named: "kava_swp")
                 denomLabel?.text = denom.uppercased()
             } else {
                 denomLabel?.textColor = UIColor(named: "_font05")
@@ -1345,7 +1151,7 @@ public class WUtils {
                 WUtils.setDenomTitle(chainType, denomLabel)
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             } else if (denom == OSMOSIS_ION_DENOM) {
-                denomLabel?.textColor = COLOR_ION
+                denomLabel?.textColor = UIColor.init(named: "osmosis_ion")
                 denomLabel?.text = "ION"
                 amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             } else if (denom.starts(with: "gamm/pool/")) {
@@ -1615,7 +1421,7 @@ public class WUtils {
             if (denom == NYX_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom == NYX_NYM_DENOM) {
-                denomLabel?.textColor = COLOR_NYM
+                denomLabel?.textColor = UIColor.init(named: "nyx_nym")
                 denomLabel?.text = "NYM"
             } else {
                 denomLabel?.textColor = UIColor(named: "_font05")
@@ -1678,103 +1484,10 @@ public class WUtils {
     }
     
     static func getMainDenom(_ chain:ChainType?) -> String {
-        if (chain == ChainType.COSMOS_MAIN) {
-            return COSMOS_MAIN_DENOM
-        } else if (chain == ChainType.IRIS_MAIN) {
-            return IRIS_MAIN_DENOM
-        } else if (chain == ChainType.BINANCE_MAIN) {
-            return BNB_MAIN_DENOM
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return KAVA_MAIN_DENOM
-        } else if (chain == ChainType.IOV_MAIN ) {
-            return IOV_MAIN_DENOM
-        } else if (chain == ChainType.BAND_MAIN) {
-            return BAND_MAIN_DENOM
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return SECRET_MAIN_DENOM
-        } else if (chain == ChainType.OKEX_MAIN) {
-            return OKEX_MAIN_DENOM
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            return CERTIK_MAIN_DENOM
-        } else if (chain == ChainType.AKASH_MAIN) {
-            return AKASH_MAIN_DENOM
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            return PERSIS_MAIN_DENOM
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            return SENTINEL_MAIN_DENOM
-        } else if (chain == ChainType.FETCH_MAIN) {
-            return FETCH_MAIN_DENOM
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            return CRYPTO_MAIN_DENOM
-        } else if (chain == ChainType.SIF_MAIN) {
-            return SIF_MAIN_DENOM
-        } else if (chain == ChainType.KI_MAIN) {
-            return KI_MAIN_DENOM
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
-            return OSMOSIS_MAIN_DENOM
-        } else if (chain == ChainType.MEDI_MAIN) {
-            return MEDI_MAIN_DENOM
-        } else if (chain == ChainType.EMONEY_MAIN) {
-            return EMONEY_MAIN_DENOM
-        } else if (chain == ChainType.RIZON_MAIN) {
-            return RIZON_MAIN_DENOM
-        } else if (chain == ChainType.JUNO_MAIN) {
-            return JUNO_MAIN_DENOM
-        } else if (chain == ChainType.REGEN_MAIN) {
-            return REGNE_MAIN_DENOM
-        } else if (chain == ChainType.BITCANA_MAIN) {
-            return BITCANA_MAIN_DENOM
-        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
-            return ALTHEA_MAIN_DENOM
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            return GRAVITY_BRIDGE_MAIN_DENOM
-        } else if (chain == ChainType.STARGAZE_MAIN) {
-            return STARGAZE_MAIN_DENOM
-        } else if (chain == ChainType.COMDEX_MAIN) {
-            return COMDEX_MAIN_DENOM
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            return INJECTIVE_MAIN_DENOM
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            return BITSONG_MAIN_DENOM
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            return DESMOS_MAIN_DENOM
-        } else if (chain == ChainType.LUM_MAIN) {
-            return LUM_MAIN_DENOM
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            return CHIHUAHUA_MAIN_DENOM
-        } else if (chain == ChainType.AXELAR_MAIN) {
-            return AXELAR_MAIN_DENOM
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
-            return KONSTELLATION_MAIN_DENOM
-        } else if (chain == ChainType.UMEE_MAIN) {
-            return UMEE_MAIN_DENOM
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            return EVMOS_MAIN_DENOM
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            return PROVENANCE_MAIN_DENOM
-        } else if (chain == ChainType.CUDOS_MAIN) {
-            return CUDOS_MAIN_DENOM
-        } else if (chain == ChainType.CERBERUS_MAIN) {
-            return CERBERUS_MAIN_DENOM
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
-            return OMNIFLIX_MAIN_DENOM
-        } else if (chain == ChainType.CRESCENT_MAIN) {
-            return CRESCENT_MAIN_DENOM
-        } else if (chain == ChainType.MANTLE_MAIN) {
-            return MANTLE_MAIN_DENOM
-        } else if (chain == ChainType.NYX_MAIN) {
-            return NYX_MAIN_DENOM
-        } else if (chain == ChainType.COSMOS_TEST) {
-            return COSMOS_TEST_DENOM
-        } else if (chain == ChainType.IRIS_TEST) {
-            return IRIS_TEST_DENOM
-        } else if (chain == ChainType.CRESCENT_TEST) {
-            return CRESCENT_MAIN_DENOM
-        } else if (chain == ChainType.STATION_TEST) {
-            return STATION_TEST_DENOM
+        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
+            return ""
         }
-        return ""
-
+        return chainConfig.stakeDenom
     }
     
     static func getGasDenom(_ chain:ChainType?) -> String {
@@ -1818,457 +1531,55 @@ public class WUtils {
     }
     
     static func mainDivideDecimal(_ chain:ChainType?) -> Int16 {
-        if (chain == ChainType.BINANCE_MAIN) {
-            return 0
-        } else if (chain == ChainType.OKEX_MAIN) {
-            return 0
-        } else if (chain == ChainType.FETCH_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.INJECTIVE_MAIN || chain == ChainType.EVMOS_MAIN || chain == ChainType.CUDOS_MAIN) {
+        if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
+            chain == .EVMOS_MAIN || chain == .CUDOS_MAIN) {
             return 18
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            return 8
         } else if (chain == ChainType.PROVENANCE_MAIN) {
             return 9
+        } else if (chain == ChainType.CRYPTO_MAIN) {
+            return 8
+        } else if (chain == .BINANCE_MAIN || chain == .OKEX_MAIN) {
+            return 0
         } else {
             return 6
         }
     }
     
     static func mainDisplayDecimal(_ chain:ChainType?) -> Int16 {
-        if (chain == ChainType.BINANCE_MAIN) {
-            return 8
-        } else if (chain == ChainType.OKEX_MAIN) {
+        if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
+            chain == .EVMOS_MAIN || chain == .CUDOS_MAIN || chain == .OKEX_MAIN) {
             return 18
-        } else if (chain == ChainType.FETCH_MAIN || chain == ChainType.SIF_MAIN || chain == ChainType.INJECTIVE_MAIN || chain == ChainType.EVMOS_MAIN || chain == ChainType.CUDOS_MAIN) {
-            return 18
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            return 8
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
+        } else if (chain == .PROVENANCE_MAIN) {
             return 9
+        } else if (chain == .BINANCE_MAIN || chain == .CRYPTO_MAIN) {
+            return 8
         } else {
             return 6
         }
     }
     
     static func setDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
-        if (chain == ChainType.COSMOS_MAIN) {
-            label?.text = "ATOM"
-            label?.textColor = COLOR_ATOM
-        } else if (chain == ChainType.IRIS_MAIN) {
-            label?.text = "IRIS"
-            label?.textColor = COLOR_IRIS
-        } else if (chain == ChainType.BINANCE_MAIN) {
-            label?.text = "BNB"
-            label?.textColor = COLOR_BNB
-        } else if (chain == ChainType.KAVA_MAIN) {
-            label?.text = "KAVA"
-            label?.textColor = COLOR_KAVA
-        } else if (chain == ChainType.IOV_MAIN) {
-            label?.text = "IOV"
-            label?.textColor = COLOR_IOV
-        } else if (chain == ChainType.BAND_MAIN) {
-            label?.text = "BAND"
-            label?.textColor = COLOR_BAND
-        } else if (chain == ChainType.SECRET_MAIN) {
-            label?.text = "SCRT"
-            label?.textColor = COLOR_SECRET
-        } else if (chain == ChainType.OKEX_MAIN) {
-            label?.text = "OKT"
-            label?.textColor = COLOR_OK
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            label?.text = "CTK"
-            label?.textColor = COLOR_CERTIK
-        } else if (chain == ChainType.AKASH_MAIN) {
-            label?.text = "AKT"
-            label?.textColor = COLOR_AKASH
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            label?.text = "XPRT"
-            label?.textColor = COLOR_PERSIS
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            label?.text = "DVPN"
-            label?.textColor = COLOR_SENTINEL
-        } else if (chain == ChainType.FETCH_MAIN) {
-            label?.text = "FET"
-            label?.textColor = COLOR_FETCH
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            label?.text = "CRO"
-            label?.textColor = COLOR_CRYPTO
-        } else if (chain == ChainType.SIF_MAIN) {
-            label?.text = "ROWAN"
-            label?.textColor = COLOR_SIF
-        } else if (chain == ChainType.KI_MAIN) {
-            label?.text = "XKI"
-            label?.textColor = COLOR_KI
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
-            label?.text = "OSMO"
-            label?.textColor = COLOR_OSMOSIS
-        } else if (chain == ChainType.COSMOS_TEST) {
-            label?.text = "MUON"
-            label?.textColor = COLOR_ATOM
-        } else if (chain == ChainType.IRIS_TEST) {
-            label?.text = "BIF"
-            label?.textColor = COLOR_IRIS
-        } else if (chain == ChainType.RIZON_MAIN) {
-            label?.text = "ATOLO"
-            label?.textColor = COLOR_RIZON
-        } else if (chain == ChainType.MEDI_MAIN) {
-            label?.text = "MED"
-            label?.textColor = COLOR_MEDI
-        } else if (chain == ChainType.ALTHEA_MAIN || chain == ChainType.ALTHEA_TEST) {
-            label?.text = "ALTG"
-            label?.textColor = COLOR_ALTHEA
-        } else if (chain == ChainType.UMEE_MAIN) {
-            label?.text = "UMEE"
-            label?.textColor = COLOR_UMEE
-        } else if (chain == ChainType.AXELAR_MAIN) {
-            label?.text = "AXL"
-            label?.textColor = COLOR_AXELAR
-        } else if (chain == ChainType.EMONEY_MAIN) {
-            label?.text = "NGM"
-            label?.textColor = COLOR_EMONEY
-        } else if (chain == ChainType.JUNO_MAIN) {
-            label?.text = "JUNO"
-            label?.textColor = COLOR_JUNO
-        } else if (chain == ChainType.REGEN_MAIN) {
-            label?.text = "REGEN"
-            label?.textColor = COLOR_REGEN
-        } else if (chain == ChainType.BITCANA_MAIN) {
-            label?.text = "BCNA"
-            label?.textColor = COLOR_BITCANNA
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            label?.text = "GRAVITON"
-            label?.textColor = COLOR_GRAVITY_BRIDGE
-        } else if (chain == ChainType.STARGAZE_MAIN) {
-            label?.text = "STARS"
-            label?.textColor = COLOR_STARGAZE
-        } else if (chain == ChainType.COMDEX_MAIN) {
-            label?.text = "CMDX"
-            label?.textColor = COLOR_COMDEX
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            label?.text = "INJ"
-            label?.textColor = COLOR_INJECTIVE
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            label?.text = "BTSG"
-            label?.textColor = COLOR_BITSONG
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            label?.text = "DSM"
-            label?.textColor = COLOR_DESMOS
-        } else if (chain == ChainType.LUM_MAIN) {
-            label?.text = "LUM"
-            label?.textColor = COLOR_LUM
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            label?.text = "HUAHUA"
-            label?.textColor = COLOR_CHIHUAHUA
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
-            label?.text = "DARC"
-            label?.textColor = COLOR_KONSTELLATION
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            label?.text = "EVMOS"
-            label?.textColor = COLOR_EVMOS
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            label?.text = "HASH"
-            label?.textColor = COLOR_PROVENANCE
-        } else if (chain == ChainType.CUDOS_MAIN) {
-            label?.text = "CUDOS"
-            label?.textColor = COLOR_CUDOS
-        } else if (chain == ChainType.CERBERUS_MAIN) {
-            label?.text = "CRBRUS"
-            label?.textColor = COLOR_CERBERUS
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
-            label?.text = "FLIX"
-            label?.textColor = COLOR_OMNIFLIX
-        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
-            label?.text = "CRE"
-            label?.textColor = COLOR_CRESCENT
-        } else if (chain == ChainType.MANTLE_MAIN) {
-            label?.text = "MANTLE"
-            label?.textColor = COLOR_MANTLE
-        } else if (chain == ChainType.NYX_MAIN) {
-            label?.text = "NYX"
-            label?.textColor = COLOR_NYX
-        } else if (chain == ChainType.STATION_TEST) {
-            label?.text = "ISS"
-            label?.textColor = COLOR_STATION
+        if let chainConfig = ChainFactory.getChainConfig(chain) {
+            label?.text = chainConfig.stakeSymbol
+            label?.textColor = chainConfig.chainColor
         }
     }
     
     static func setGasDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
         if (chain == ChainType.NYX_MAIN) {
             label?.text = "NYM"
-            label?.textColor = COLOR_NYM
+            label?.textColor = UIColor.init(named: "nyx_nym")
         } else {
             return setDenomTitle(chain, label)
         }
     }
     
-    static func getChainType(_ chainS:String) -> ChainType? {
-        if (chainS == CHAIN_COSMOS_S ) {
-            return ChainType.COSMOS_MAIN
-        } else if (chainS == CHAIN_IRIS_S) {
-            return ChainType.IRIS_MAIN
-        } else if (chainS == CHAIN_BINANCE_S) {
-            return ChainType.BINANCE_MAIN
-        } else if (chainS == CHAIN_KAVA_S) {
-           return ChainType.KAVA_MAIN
-        } else if (chainS == CHAIN_IOV_S) {
-            return ChainType.IOV_MAIN
-        } else if (chainS == CHAIN_BAND_S) {
-            return ChainType.BAND_MAIN
-        } else if (chainS == CHAIN_SECRET_S) {
-            return ChainType.SECRET_MAIN
-        } else if (chainS == CHAIN_CERTIK_S) {
-            return ChainType.CERTIK_MAIN
-        } else if (chainS == CHAIN_AKASH_S) {
-            return ChainType.AKASH_MAIN
-        } else if (chainS == CHAIN_OKEX_S) {
-            return ChainType.OKEX_MAIN
-        } else if (chainS == CHAIN_PERSIS_S) {
-            return ChainType.PERSIS_MAIN
-        } else if (chainS == CHAIN_SENTINEL_S) {
-            return ChainType.SENTINEL_MAIN
-        } else if (chainS == CHAIN_FETCH_S) {
-            return ChainType.FETCH_MAIN
-        } else if (chainS == CHAIN_CRYPTO_S) {
-            return ChainType.CRYPTO_MAIN
-        } else if (chainS == CHAIN_SIF_S) {
-            return ChainType.SIF_MAIN
-        } else if (chainS == CHAIN_KI_S) {
-            return ChainType.KI_MAIN
-        } else if (chainS == CHAIN_OSMOSIS_S) {
-            return ChainType.OSMOSIS_MAIN
-        } else if (chainS == CHAIN_MEDI_S) {
-            return ChainType.MEDI_MAIN
-        } else if (chainS == CHAIN_EMONEY_S) {
-            return ChainType.EMONEY_MAIN
-        } else if (chainS == CHAIN_RIZON_S) {
-            return ChainType.RIZON_MAIN
-        } else if (chainS == CHAIN_JUNO_S) {
-            return ChainType.JUNO_MAIN
-        } else if (chainS == CHAIN_REGEN_S) {
-            return ChainType.REGEN_MAIN
-        } else if (chainS == CHAIN_BITCANA_S) {
-            return ChainType.BITCANA_MAIN
-        } else if (chainS == CHAIN_ALTHEA_S) {
-            return ChainType.ALTHEA_MAIN
-        } else if (chainS == CHAIN_GRAVITY_BRIDGE_S) {
-            return ChainType.GRAVITY_BRIDGE_MAIN
-        } else if (chainS == CHAIN_STARGAZE_S) {
-            return ChainType.STARGAZE_MAIN
-        } else if (chainS == CHAIN_COMDEX_S) {
-            return ChainType.COMDEX_MAIN
-        } else if (chainS == CHAIN_INJECTIVE_S) {
-            return ChainType.INJECTIVE_MAIN
-        } else if (chainS == CHAIN_BITSONG_S) {
-            return ChainType.BITSONG_MAIN
-        } else if (chainS == CHAIN_DESMOS_S) {
-            return ChainType.DESMOS_MAIN
-        } else if (chainS == CHAIN_LUM_S) {
-            return ChainType.LUM_MAIN
-        } else if (chainS == CHAIN_CHIHUAHUA_S) {
-            return ChainType.CHIHUAHUA_MAIN
-        } else if (chainS == CHAIN_AXELAR_S) {
-            return ChainType.AXELAR_MAIN
-        } else if (chainS == CHAIN_KONSTELLATION_S) {
-            return ChainType.KONSTELLATION_MAIN
-        } else if (chainS == CHAIN_UMEE_S) {
-            return ChainType.UMEE_MAIN
-        } else if (chainS == CHAIN_EVMOS_S) {
-            return ChainType.EVMOS_MAIN
-        } else if (chainS == CHAIN_PROVENANCE_S) {
-            return ChainType.PROVENANCE_MAIN
-        } else if (chainS == CHAIN_CUDOS_S) {
-            return ChainType.CUDOS_MAIN
-        } else if (chainS == CHAIN_CERBERUS_S) {
-            return ChainType.CERBERUS_MAIN
-        } else if (chainS == CHAIN_OMNIFLIX_S) {
-            return ChainType.OMNIFLIX_MAIN
-        } else if (chainS == CHAIN_CRESENT_S) {
-            return ChainType.CRESCENT_MAIN
-        } else if (chainS == CHAIN_MANTLE_S) {
-            return ChainType.MANTLE_MAIN
-        } else if (chainS == CHAIN_NYX_S) {
-            return ChainType.NYX_MAIN
-        } else if (chainS == CHAIN_COSMOS_TEST_S) {
-            return ChainType.COSMOS_TEST
-        } else if (chainS == CHAIN_IRIS_TEST_S) {
-            return ChainType.IRIS_TEST
-        } else if (chainS == CHAIN_ALTHEA_TEST_S) {
-            return ChainType.ALTHEA_TEST
-        } else if (chainS == CHAIN_CRESENT_TEST_S) {
-            return ChainType.CRESCENT_TEST
-        } else if (chainS == CHAIN_STATION_TEST_S) {
-            return ChainType.STATION_TEST
-        }
-        return nil
-    }
-    
     static func getChainDBName(_ chain:ChainType?) -> String {
-        if (chain == ChainType.COSMOS_MAIN) {
-            return CHAIN_COSMOS_S
-        } else if (chain == ChainType.IRIS_MAIN) {
-            return CHAIN_IRIS_S
-        } else if (chain == ChainType.BINANCE_MAIN) {
-            return CHAIN_BINANCE_S
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return CHAIN_KAVA_S
-        } else if (chain == ChainType.IOV_MAIN) {
-            return CHAIN_IOV_S
-        } else if (chain == ChainType.BAND_MAIN) {
-            return CHAIN_BAND_S
-        } else if (chain == ChainType.SECRET_MAIN) {
-            return CHAIN_SECRET_S
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            return CHAIN_CERTIK_S
-        } else if (chain == ChainType.AKASH_MAIN) {
-            return CHAIN_AKASH_S
-        } else if (chain == ChainType.OKEX_MAIN) {
-            return CHAIN_OKEX_S
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            return CHAIN_PERSIS_S
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            return CHAIN_SENTINEL_S
-        } else if (chain == ChainType.FETCH_MAIN) {
-            return CHAIN_FETCH_S
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            return CHAIN_CRYPTO_S
-        } else if (chain == ChainType.SIF_MAIN) {
-            return CHAIN_SIF_S
-        } else if (chain == ChainType.KI_MAIN) {
-            return CHAIN_KI_S
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
-            return CHAIN_OSMOSIS_S
-        } else if (chain == ChainType.MEDI_MAIN) {
-            return CHAIN_MEDI_S
-        } else if (chain == ChainType.EMONEY_MAIN) {
-            return CHAIN_EMONEY_S
-        } else if (chain == ChainType.RIZON_MAIN) {
-            return CHAIN_RIZON_S
-        } else if (chain == ChainType.JUNO_MAIN) {
-            return CHAIN_JUNO_S
-        } else if (chain == ChainType.REGEN_MAIN) {
-            return CHAIN_REGEN_S
-        } else if (chain == ChainType.BITCANA_MAIN) {
-            return CHAIN_BITCANA_S
-        } else if (chain == ChainType.ALTHEA_MAIN) {
-            return CHAIN_ALTHEA_S
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            return CHAIN_GRAVITY_BRIDGE_S
-        } else if (chain == ChainType.STARGAZE_MAIN) {
-            return CHAIN_STARGAZE_S
-        } else if (chain == ChainType.COMDEX_MAIN) {
-            return CHAIN_COMDEX_S
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            return CHAIN_INJECTIVE_S
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            return CHAIN_BITSONG_S
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            return CHAIN_DESMOS_S
-        } else if (chain == ChainType.LUM_MAIN) {
-            return CHAIN_LUM_S
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            return CHAIN_CHIHUAHUA_S
-        } else if (chain == ChainType.AXELAR_MAIN) {
-            return CHAIN_AXELAR_S
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
-            return CHAIN_KONSTELLATION_S
-        } else if (chain == ChainType.UMEE_MAIN) {
-            return CHAIN_UMEE_S
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            return CHAIN_EVMOS_S
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            return CHAIN_PROVENANCE_S
-        } else if (chain == ChainType.CUDOS_MAIN) {
-            return CHAIN_CUDOS_S
-        } else if (chain == ChainType.CERBERUS_MAIN) {
-            return CHAIN_CERBERUS_S
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
-            return CHAIN_OMNIFLIX_S
-        } else if (chain == ChainType.CRESCENT_MAIN) {
-            return CHAIN_CRESENT_S
-        } else if (chain == ChainType.MANTLE_MAIN) {
-            return CHAIN_MANTLE_S
-        } else if (chain == ChainType.NYX_MAIN) {
-            return CHAIN_NYX_S
-        } else if (chain == ChainType.COSMOS_TEST) {
-            return CHAIN_COSMOS_TEST_S
-        } else if (chain == ChainType.IRIS_TEST) {
-            return CHAIN_IRIS_TEST_S
-        } else if (chain == ChainType.ALTHEA_TEST) {
-            return CHAIN_ALTHEA_TEST_S
-        } else if (chain == ChainType.CRESCENT_TEST) {
-            return CHAIN_CRESENT_TEST_S
-        } else if (chain == ChainType.STATION_TEST) {
-            return CHAIN_STATION_TEST_S
+        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
+            return ""
         }
-        return ""
+        return chainConfig.chainDBName
     }
-    
-    static func getChainCustomPathS(_ chain: ChainType, _ newBip: Bool, _ customPath: Int, _ endPath: Int) -> String {
-        if (chain == ChainType.BINANCE_MAIN) {
-            return BNB_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.IOV_MAIN) {
-            return IOV_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.BAND_MAIN) {
-            return BAND_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.OKEX_MAIN) {
-            return OK_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            return PERSIS_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            return CRYPTO_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.MEDI_MAIN) {
-            return MEDI_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            return ETH_NON_LEDGER_PATH + String(endPath)
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            return BITSONG_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            return DESMOS_BASE_PATH + String(endPath)
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            return ETH_NON_LEDGER_PATH + String(endPath)
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            return PROVENANCE_BASE_PATH + String(endPath)
-        }
-        
-        else if (chain == ChainType.KAVA_MAIN) {
-            if (newBip) {
-                return KAVA_BASE_PATH + String(endPath)
-            } else {
-                return BASE_PATH + String(endPath)
-            }
-            
-        } else if (chain == ChainType.SECRET_MAIN) {
-            if (newBip) {
-                return BASE_PATH + String(endPath)
-            } else {
-                return SECRET_BASE_PATH + String(endPath)
-            }
-            
-        } else if (chain == ChainType.FETCH_MAIN) {
-            if (customPath == 1) {
-                return ETH_NON_LEDGER_PATH + String(endPath)
-                
-            } else if (customPath == 2) {
-                return ETH_LEDGER_LIVE_PATH_1 + String(endPath) + ETH_LEDGER_LIVE_PATH_2
-                
-            } else if (customPath == 3) {
-                return ETH_LEDGER_LEGACY_PATH + String(endPath)
-                
-            } else {
-                return BASE_PATH + String(endPath)
-            }
-            
-        } else if (chain == ChainType.LUM_MAIN) {
-            if (newBip) {
-                return LUM_BASE_PATH + String(endPath)
-            } else {
-                return BASE_PATH + String(endPath)
-            }
-            
-        }
-        return BASE_PATH + String(endPath)
-    }
-    
-    
     
     static func getChainTypeInt(_ chainS:String) -> Int {
         if (chainS == CHAIN_COSMOS_S ) {
@@ -2279,19 +1590,6 @@ public class WUtils {
             return 3
         }
         return 0
-    }
-    
-    static func getMonikerName(_ validators: Array<Validator>,  _ opAddr: String?, _ bracket:Bool) -> String {
-        for val in validators {
-            if (val.operator_address == opAddr) {
-                if (bracket) {
-                    return "(" + val.description.moniker + ")"
-                } else {
-                    return val.description.moniker
-                }
-            }
-        }
-        return ""
     }
     
     static func clearBackgroundColor(of view: UIView) {
@@ -3231,16 +2529,6 @@ public class WUtils {
         return gasAmounts
     }
     
-    static func getVoterTypeCnt(_ votes: Array<Vote>, _ type: String) -> String {
-        var result = 0
-        for vote in votes {
-            if (vote.option == type) {
-                result = result + 1
-            }
-        }
-        return String(result)
-    }
-    
     static func getDPRawDollor(_ price:String, _ scale:Int, _ font:UIFont) -> NSMutableAttributedString {
         let nf = NumberFormatter()
         nf.minimumFractionDigits = scale
@@ -3314,40 +2602,6 @@ public class WUtils {
            img?.image = UIImage(named: "chainKava")
         }
     }
-    
-    static func getKavaHtlcStatus(_ txInfo:TxInfo, _ swap:KavaSwapInfo?) -> String {
-        if (!txInfo.isSuccess()) {
-            return NSLocalizedString("bep3_status_open", comment: "")
-        }
-        
-        if (swap == nil) {
-            return NSLocalizedString("bep3_status_completed", comment: "")
-        }
-        
-        if (swap?.result.status == KavaSwapInfo.STATUS_EXPIRED) {
-            return NSLocalizedString("bep3_status_expired", comment: "")
-        } else if (swap?.result.status == KavaSwapInfo.STATUS_OPEN) {
-            return NSLocalizedString("bep3_status_open", comment: "")
-        } else {
-            return NSLocalizedString("bep3_status_completed", comment: "")
-        }
-    }
-    
-    static func getBnbHtlcStatus(_ swap:BnbSwapInfo?, _ node:BnbNodeInfo?) -> String {
-        if (swap == nil || node == nil) {
-            return "-"
-        }
-        
-        if (swap?.status == BnbSwapInfo.BNB_STATUS_REFUNDED) {
-            return NSLocalizedString("bep3_status_refunded", comment: "")
-        } else if (swap?.status == BnbSwapInfo.BNB_STATUS_COMPLETED) {
-            return NSLocalizedString("bep3_status_completed", comment: "")
-        } else if (swap?.status == BnbSwapInfo.BNB_STATUS_OPEN && swap!.expireHeight < node!.getCHeight()) {
-            return NSLocalizedString("bep3_status_expired", comment: "")
-        }
-        return NSLocalizedString("bep3_status_open", comment: "")
-    }
-
     
     static func getRealBlockTime(_ chain: ChainType?) -> NSDecimalNumber {
         if (chain == ChainType.COSMOS_MAIN || chain == ChainType.COSMOS_TEST) {
@@ -3491,7 +2745,7 @@ public class WUtils {
         if (chainConfig?.chainType == .OKEX_MAIN) {
             return chainConfig!.explorerUrl + "address/" + address
         }
-        return chainConfig!.explorerUrl + "address/" + address
+        return chainConfig!.explorerUrl + "account/" + address
     }
     
     static func getProposalExplorer(_ chainConfig: ChainConfig?, _ proposalId: String) -> String {
@@ -3635,7 +2889,7 @@ public class WUtils {
         else if (address?.starts(with: "bcna1") == true && chain == ChainType.BITCANA_MAIN) { return true }
         else if (address?.starts(with: "althea1") == true && chain == ChainType.ALTHEA_MAIN) { return true }
         else if (address?.starts(with: "stars1") == true && chain == ChainType.STARGAZE_MAIN) { return true }
-        else if (address?.starts(with: "comdex1") == true && chain == ChainType.COMDEX_MAIN) { return true }
+        else if (address?.starts(with: "comdex1") == true && chain == ChainType.COMDEX_MAIN)  { return true }
         else if (address?.starts(with: "inj1") == true && chain == ChainType.INJECTIVE_MAIN) { return true }
         else if (address?.starts(with: "bitsong1") == true && chain == ChainType.BITSONG_MAIN) { return true }
         else if (address?.starts(with: "desmos1") == true && chain == ChainType.DESMOS_MAIN) { return true }
@@ -4312,8 +3566,20 @@ extension String {
             finalString.append(Character.init(decimalString))
         }
         return finalString
-        
     }
+    
+    var hexadecimal: Data? {
+        var data = Data(capacity: count / 2)
+        let regex = try! NSRegularExpression(pattern: "[0-9a-f]{1,2}", options: .caseInsensitive)
+        regex.enumerateMatches(in: self, range: NSRange(startIndex..., in: self)) { match, _, _ in
+            let byteString = (self as NSString).substring(with: match!.range)
+            let num = UInt8(byteString, radix: 16)!
+            data.append(num)
+        }
+        guard data.count > 0 else { return nil }
+        return data
+    }
+
     
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
@@ -4321,6 +3587,35 @@ extension String {
 
     mutating func capitalizeFirstLetter() {
         self = self.capitalizingFirstLetter()
+    }
+}
+
+extension UIColor {
+    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        self.init(red:red, green:green, blue:blue, alpha:alpha)
+    }
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return String(format:"#%06x", rgb)
     }
 }
 

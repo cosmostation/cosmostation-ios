@@ -20,7 +20,7 @@ class ChainLum: ChainConfig {
     var chainColorBG = UIColor(named: "lum_bg")!
     var chainTitle = "(Lum Mainnet)"
     var chainTitle2 = "LUM"
-    var chainDBName = "SUPPORT_CHAIN_LUM"
+    var chainDBName = CHAIN_LUM_S
     var chainAPIName = "lum"
     
     var stakeDenomImg = UIImage(named: "tokenLum")
@@ -36,8 +36,8 @@ class ChainLum: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-lum-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-lum-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-lum-app.cosmostation.io/"
     var apiUrl = "https://api-lum.cosmostation.io/"
     var explorerUrl = MintscanUrl + "lum/"
     var validatorImgUrl = MonikerUrl + "lum-network/"

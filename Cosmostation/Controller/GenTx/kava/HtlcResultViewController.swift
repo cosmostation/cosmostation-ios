@@ -48,7 +48,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         
         self.htlcResultTableView.delegate = self
         self.htlcResultTableView.dataSource = self
@@ -130,7 +130,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         let cell:HtlcResultSentCell? = tableView.dequeueReusableCell(withIdentifier:"HtlcResultSentCell") as? HtlcResultSentCell
         let msg = mSendTxInfo?.getMsgs()[0]
         cell?.sendImg.image = cell?.sendImg.image?.withRenderingMode(.alwaysTemplate)
-        cell?.sendImg.tintColor = ChainFactory().getChainConfig(chainType!)?.chainColor
+        cell?.sendImg.tintColor = ChainFactory.getChainConfig(chainType!)?.chainColor
         if (self.chainType == ChainType.BINANCE_MAIN) {
             cell?.blockHeightLabel.text = mSendTxInfo?.height
             cell?.txHashLabel.text = mSendTxInfo?.hash
@@ -174,7 +174,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         let cell:HtlcResultClaimCell? = tableView.dequeueReusableCell(withIdentifier:"HtlcResultClaimCell") as? HtlcResultClaimCell
         let msg = mClaimTxInfo?.getMsgs()[0]
         cell?.claimImg.image = cell?.claimImg.image?.withRenderingMode(.alwaysTemplate)
-        cell?.claimImg.tintColor = ChainFactory().getChainConfig(mHtlcToChain!)?.chainColor
+        cell?.claimImg.tintColor = ChainFactory.getChainConfig(mHtlcToChain!)?.chainColor
         if (self.mHtlcToChain == ChainType.BINANCE_MAIN) {
             cell?.blockHeightLabel.text = mClaimTxInfo?.height
             cell?.txHashLabel.text = mClaimTxInfo?.hash
@@ -219,7 +219,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func onClickReceivedWallet(_ sender: UIButton) {
-        if (BaseData.instance.dpSortedChains().contains(WUtils.getChainType(mHtlcToAccount!.account_base_chain)!)) {
+        if (BaseData.instance.dpSortedChains().contains(ChainFactory.getChainType(mHtlcToAccount!.account_base_chain)!)) {
             BaseData.instance.setRecentAccountId(mHtlcToAccount!.account_id)
             BaseData.instance.setLastTab(1)
             self.onStartMainTab()

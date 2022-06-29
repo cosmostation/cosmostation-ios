@@ -77,7 +77,7 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
         if (tableView == chainTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ManageChainCell") as? ManageChainCell
             let selected = displayChains[indexPath.row]
-            guard let selectedConfig = ChainFactory().getChainConfig(selected) else {
+            guard let selectedConfig = ChainFactory.getChainConfig(selected) else {
                 return cell!
             }
             cell?.chainImg.image = selectedConfig.chainImg
@@ -90,8 +90,8 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ManageAccountCell") as? ManageAccountCell
             let account = displayAccounts[indexPath.row]
-            let userChain = WUtils.getChainType(account.account_base_chain)
-            guard let userChainConfig = ChainFactory().getChainConfig(userChain) else {
+            let userChain = ChainFactory.getChainType(account.account_base_chain)
+            guard let userChainConfig = ChainFactory.getChainConfig(userChain) else {
                 return cell!
             }
             if (account.account_has_private == true) {

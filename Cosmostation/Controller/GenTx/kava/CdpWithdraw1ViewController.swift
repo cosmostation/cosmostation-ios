@@ -64,7 +64,7 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -235,7 +235,7 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
         if (!isValiadCAmount()) {
             btnNext.backgroundColor = UIColor.clear
             btnNext.setTitle(NSLocalizedString("tx_next", comment: ""), for: .normal)
-            btnNext.setTitleColor(COLOR_PHOTON, for: .normal)
+            btnNext.setTitleColor(UIColor.init(named: "photon"), for: .normal)
             btnNext.layer.borderWidth = 1.0
             afterSafeRate.isHidden = true
             afterSafeTxt.isHidden = true

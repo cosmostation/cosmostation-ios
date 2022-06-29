@@ -20,7 +20,7 @@ class ChainStarname: ChainConfig {
     var chainColorBG = UIColor(named: "starname_bg")!
     var chainTitle = "(Starname Mainnet)"
     var chainTitle2 = "STARNAME"
-    var chainDBName = "SUPPORT_CHAIN_IOV_MAIN"
+    var chainDBName = CHAIN_IOV_S
     var chainAPIName = "starname"
     
     var stakeDenomImg = UIImage(named: "tokenStarname")
@@ -35,8 +35,8 @@ class ChainStarname: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-iov-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-iov-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-iov-app.cosmostation.io/"
     var apiUrl = "https://api-iov.cosmostation.io/"
     var explorerUrl = MintscanUrl + "starname/"
     var validatorImgUrl = MonikerUrl + "iov/"

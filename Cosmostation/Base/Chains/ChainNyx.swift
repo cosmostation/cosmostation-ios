@@ -20,7 +20,7 @@ class ChainNyx: ChainConfig {
     var chainColorBG = UIColor(named: "nyx_bg")!
     var chainTitle = "(Nyx Mainnet)"
     var chainTitle2 = "NYX"
-    var chainDBName = "SUPPORT_CHAIN_NYX"
+    var chainDBName = CHAIN_NYX_S
     var chainAPIName = "nyx"
     
     var stakeDenomImg = UIImage(named: "tokenNyx")
@@ -35,8 +35,8 @@ class ChainNyx: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-nym-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-nym-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-nym-app.cosmostation.io/"
     var apiUrl = "https://api-nym.cosmostation.io/"
     var explorerUrl = MintscanUrl + "nyx/"
     var validatorImgUrl = MonikerUrl + "nyx/"

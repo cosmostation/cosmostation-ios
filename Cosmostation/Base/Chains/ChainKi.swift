@@ -20,7 +20,7 @@ class ChainKi: ChainConfig {
     var chainColorBG = UIColor(named: "ki_bg")!
     var chainTitle = "(KiChain Mainnet)"
     var chainTitle2 = "KI"
-    var chainDBName = "SUPPORT_CHAIN_KI_MAIN"
+    var chainDBName = CHAIN_KI_S
     var chainAPIName = "kichain"
     
     var stakeDenomImg = UIImage(named: "tokenKi")
@@ -35,8 +35,8 @@ class ChainKi: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-kichain-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-kichain-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-kichain-app.cosmostation.io/"
     var apiUrl = "https://api-kichain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "ki-chain/"
     var validatorImgUrl = MonikerUrl + "ki/"

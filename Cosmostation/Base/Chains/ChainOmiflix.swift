@@ -20,7 +20,7 @@ class ChainOmniflix: ChainConfig {
     var chainColorBG = UIColor(named: "omniflix_bg")!
     var chainTitle = "(Omniflix Mainnet)"
     var chainTitle2 = "OMNIFLIX"
-    var chainDBName = "SUPPORT_CHAIN_OMNIFLIX"
+    var chainDBName = CHAIN_OMNIFLIX_S
     var chainAPIName = "flix"
     
     var stakeDenomImg = UIImage(named: "tokenOmniflix")
@@ -35,8 +35,8 @@ class ChainOmniflix: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-omniflix-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-omniflix-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-omniflix-app.cosmostation.io/"
     var apiUrl = "https://api-omniflix.cosmostation.io/"
     var explorerUrl = MintscanUrl + "omniflix/"
     var validatorImgUrl = MonikerUrl + "omniflix/"

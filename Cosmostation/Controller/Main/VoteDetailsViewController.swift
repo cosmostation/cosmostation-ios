@@ -27,8 +27,8 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.voteDetailTableView.delegate = self
         self.voteDetailTableView.dataSource = self
@@ -194,7 +194,6 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     func onFetchMyVote_gRPC(_ proposal_id: String, _ address: String) {
         DispatchQueue.global().async {
             do {
-                DispatchQueue.main.async(execute: { self.onFetchFinished() });
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 defer { try! channel.close().wait() }
 

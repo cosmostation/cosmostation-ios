@@ -36,7 +36,6 @@ class TransactionViewController: UIViewController {
     var mKavaSwapPoolDeposit: Kava_Swap_V1beta1_DepositResponse?
     
     var mHtlcDenom: String = BNB_MAIN_DENOM     //now only support bnb bep3
-    var mHtlcRefundSwapId: String?
     
     var mStarnameDomain: String?
     var mStarnameAccount: String?
@@ -66,7 +65,7 @@ class TransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         mAccount = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        mUserChain = WUtils.getChainType(mAccount!.account_base_chain)
+        mUserChain = ChainFactory.getChainType(mAccount!.account_base_chain)
         
         if (mType == TASK_TYPE_DELEGATE) {
             stepDescription.text = NSLocalizedString("delegate_step_1", comment: "")
@@ -336,7 +335,6 @@ class TransactionViewController: UIViewController {
             StepVc.mCDenom = self.mCDenom
             StepVc.mMarketID = self.mMarketID
             StepVc.mHtlcDenom = self.mHtlcDenom
-            StepVc.mHtlcRefundSwapId = self.mHtlcRefundSwapId
             StepVc.mHardMoneyMarketDenom = self.mHardMoneyMarketDenom
             StepVc.mCollateralParamType = self.mCollateralParamType
             

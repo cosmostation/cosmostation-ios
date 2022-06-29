@@ -20,7 +20,7 @@ class ChainCryptoorg: ChainConfig {
     var chainColorBG = UIColor(named: "cryptoorg_bg")!
     var chainTitle = "(Crypto.org Mainnet)"
     var chainTitle2 = "CRYPTO.ORG"
-    var chainDBName = "SUPPORT_CHAIN_CRYTO_MAIN"
+    var chainDBName = CHAIN_CRYPTO_S
     var chainAPIName = "cryptoorg"
     
     var stakeDenomImg = UIImage(named: "tokenCryptoorg")
@@ -35,8 +35,8 @@ class ChainCryptoorg: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-cryptocom-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-cryptocom-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-cryptocom-app.cosmostation.io/"
     var apiUrl = "https://api-cryptocom.cosmostation.io/"
     var explorerUrl = MintscanUrl + "crypto-org/"
     var validatorImgUrl = MonikerUrl + "cryto/"

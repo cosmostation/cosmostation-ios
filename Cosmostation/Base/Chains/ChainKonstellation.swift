@@ -20,7 +20,7 @@ class ChainKonstellation: ChainConfig {
     var chainColorBG = UIColor(named: "konstellation_bg")!
     var chainTitle = "(Konstellation Mainnet)"
     var chainTitle2 = "KONSTELLATION"
-    var chainDBName = "SUPPORT_CHAIN_KONSTELLATION"
+    var chainDBName = CHAIN_KONSTELLATION_S
     var chainAPIName = "konstellation"
     
     var stakeDenomImg = UIImage(named: "tokenKonstellation")
@@ -35,8 +35,8 @@ class ChainKonstellation: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-konstellation-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-konstellation-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-konstellation-app.cosmostation.io/"
     var apiUrl = "https://api-konstellation.cosmostation.io/"
     var explorerUrl = MintscanUrl + "konstellation/"
     var validatorImgUrl = MonikerUrl + "konstellation/"

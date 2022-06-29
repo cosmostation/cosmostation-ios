@@ -56,44 +56,6 @@ class VoteTallyTableViewCell: UITableViewCell {
         myVoteAbstain.tintColor = UIColor(named: "_font05")
     }
     
-    func onCheckMyVote (_ myVote:Vote?) {
-        if (myVote == nil) { return }
-        onCheckDim()
-        if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_YES) == .orderedSame) {
-            cardYes.layer.borderWidth = 1
-            myVoteYes.isHidden = false
-            titleYes.textColor = UIColor.init(named: "_voteYes")
-            progressYes.tintColor = UIColor(named: "_voteYes")
-            percentYes.textColor = UIColor.init(named: "_font05")
-            cntYes.textColor = UIColor.init(named: "_font05")
-            
-        } else if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_NO) == .orderedSame) {
-            cardNo.layer.borderWidth = 1
-            myVoteNo.isHidden = false
-            titleNo.textColor = UIColor.init(named: "_voteNo")
-            progressNo.tintColor = UIColor(named: "_voteNo")
-            percentVeto.textColor = UIColor.init(named: "_font05")
-            cntNo.textColor = UIColor.init(named: "_font05")
-            
-        } else if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_VETO) == .orderedSame) {
-            self.cardVeto.layer.borderWidth = 1
-            self.myVoteVeto.isHidden = false
-            
-            titleVeto.textColor = UIColor.init(named: "_voteVeto")
-            progressVeto.tintColor = UIColor(named: "_voteVeto")
-            percentVeto.textColor = UIColor.init(named: "_font05")
-            cntVeto.textColor = UIColor.init(named: "_font05")
-            
-        } else if (myVote?.option.caseInsensitiveCompare(Vote.OPTION_ABSTAIN) == .orderedSame) {
-            cardAbstain.layer.borderWidth = 1
-            myVoteAbstain.isHidden = false
-            titleAbstain.textColor = UIColor.init(named: "_voteAbstain")
-            propressAbstain.tintColor = UIColor(named: "_voteAbstain")
-            percentAbstain.textColor = UIColor.init(named: "_font05")
-            cntAbstain.textColor = UIColor.init(named: "_font05")
-        }
-    }
-    
     func onCheckMyVote_gRPC(_ option: Cosmos_Gov_V1beta1_VoteOption?) {
         if (option == nil) { return }
         onCheckDim()

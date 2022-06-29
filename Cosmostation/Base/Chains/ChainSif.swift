@@ -20,7 +20,7 @@ class ChainSif: ChainConfig {
     var chainColorBG = UIColor(named: "sif_bg")!
     var chainTitle = "(SifChain Mainnet)"
     var chainTitle2 = "SIF"
-    var chainDBName = "SUPPORT_CHAIN_SIF_MAIN"
+    var chainDBName = CHAIN_SIF_S
     var chainAPIName = "sifchain"
     
     var stakeDenomImg = UIImage(named: "tokenSif")
@@ -35,8 +35,8 @@ class ChainSif: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-sifchain-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-sifchain-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-sifchain-app.cosmostation.io/"
     var apiUrl = "https://api-sifchain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sifchain/"
     var validatorImgUrl = MonikerUrl + "sif/"

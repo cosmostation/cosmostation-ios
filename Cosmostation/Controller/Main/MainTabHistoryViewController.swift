@@ -39,8 +39,8 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
         self.mainTabVC = (self.parent)?.parent as? MainTabViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.historyTableView.delegate = self
         self.historyTableView.dataSource = self
@@ -103,8 +103,8 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     
     func updateTitle() {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory().getChainConfig(chainType)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.titleChainImg.image = chainConfig?.chainImg
         self.titleChainName.text = chainConfig?.chainTitle
@@ -210,14 +210,14 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (chainType == ChainType.BINANCE_MAIN) {
             let bnbHistory = mBnbHistories[indexPath.row]
-            guard let url = URL(string: "https://binance.mintscan.io/txs/" + bnbHistory.txHash) else { return }
-            let safariViewController = SFSafariViewController(url: url)
-            safariViewController.modalPresentationStyle = .popover
-            present(safariViewController, animated: true, completion: nil)
+            let link = WUtils.getTxExplorer(chainConfig, bnbHistory.txHash)
+            guard let url = URL(string: link) else { return }
+            self.onShowSafariWeb(url)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             let okHistory = mOkHistories[indexPath.row]
-            guard let url = URL(string: EXPLORER_OEC_TX + "tx/" + okHistory.hash!) else { return }
+            let link = WUtils.getTxExplorer(chainConfig, okHistory.hash!)
+            guard let url = URL(string: link) else { return }
             self.onShowSafariWeb(url)
             
         } else {
@@ -229,7 +229,8 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func onFetchBnbHistory(_ address:String) {
-        let request = Alamofire.request(BaseNetWork.bnbHistoryUrl(chainType), method: .get, parameters: ["address":address, "startTime":Date().Stringmilli3MonthAgo, "endTime":Date().millisecondsSince1970], encoding: URLEncoding.default, headers: [:])
+        let url = BaseNetWork.accountHistory(chainType!, address)
+        let request = Alamofire.request(url, method: .get, parameters: ["address":address, "startTime":Date().Stringmilli3MonthAgo, "endTime":Date().millisecondsSince1970], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { response in
             switch response.result {
             case .success(let res):
@@ -257,7 +258,8 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func onFetchOkHistory(_ address: String) {
-        let request = Alamofire.request(BaseNetWork.historyOkUrl(chainType, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        let url = BaseNetWork.accountHistory(chainType!, address)
+        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         print("onFetchOkHistory url ", request.request?.url)
         request.responseJSON { response in
             switch response.result {

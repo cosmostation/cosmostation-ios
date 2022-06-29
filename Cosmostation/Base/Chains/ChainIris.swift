@@ -20,7 +20,7 @@ class ChainIris: ChainConfig {
     var chainColorBG = UIColor(named: "iris_bg")!
     var chainTitle = "(Iris Mainnet)"
     var chainTitle2 = "IRIS"
-    var chainDBName = "SUPPORT_CHAIN_IRIS_MAIN"
+    var chainDBName = CHAIN_IRIS_S
     var chainAPIName = "iris"
     
     var stakeDenomImg = UIImage(named: "tokenIris")
@@ -35,8 +35,8 @@ class ChainIris: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-iris-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-iris-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-iris-app.cosmostation.io/"
     var apiUrl = "https://api-iris.cosmostation.io/"
     var explorerUrl = MintscanUrl + "iris/"
     var validatorImgUrl = MonikerUrl + "irishub/"

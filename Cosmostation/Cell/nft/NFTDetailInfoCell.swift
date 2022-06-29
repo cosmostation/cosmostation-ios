@@ -23,7 +23,7 @@ class NFTDetailInfoCell: UITableViewCell {
     }
     
     func onBindNFT(_ chainType: ChainType?, _ irisRes: Irismod_Nft_QueryNFTResponse?, _ croRes: Chainmain_Nft_V1_QueryNFTResponse?, _ denomId: String?, _ tokenId: String?) {
-        guard let chainConfig = ChainFactory().getChainConfig(chainType) else {
+        guard let chainConfig = ChainFactory.getChainConfig(chainType) else {
             return
         }
         nftCardView.backgroundColor = chainConfig.chainColorBG

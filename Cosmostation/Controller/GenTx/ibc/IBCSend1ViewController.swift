@@ -27,7 +27,7 @@ class IBCSend1ViewController: BaseViewController, QrScannerDelegate, SBCardPopup
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -39,7 +39,7 @@ class IBCSend1ViewController: BaseViewController, QrScannerDelegate, SBCardPopup
     
     func onUpdateView() {
         self.toChain = WUtils.getChainTypeByChainId(pageHolderVC.mIBCSendRelayer?.chain_id)
-        guard let toChainConfig = ChainFactory().getChainConfig(toChain) else {
+        guard let toChainConfig = ChainFactory.getChainConfig(toChain) else {
             return
         }
         self.detinationChainLabel.text = toChainConfig.chainTitle

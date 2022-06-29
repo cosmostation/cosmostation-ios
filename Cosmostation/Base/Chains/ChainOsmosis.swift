@@ -20,7 +20,7 @@ class ChainOsmosis: ChainConfig {
     var chainColorBG = UIColor(named: "osmosis_bg")!
     var chainTitle = "(Osmosis Mainnet)"
     var chainTitle2 = "OSMOSIS"
-    var chainDBName = "SUPPORT_CHAIN_OSMOSIS_MAIN"
+    var chainDBName = CHAIN_OSMOSIS_S
     var chainAPIName = "osmosis"
     
     var stakeDenomImg = UIImage(named: "tokenOsmosis")
@@ -35,8 +35,8 @@ class ChainOsmosis: ChainConfig {
     var pushSupport = false
     var wcSupoort = true
     var grpcUrl = "lcd-osmosis-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-osmosis-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-osmosis-app.cosmostation.io/"
     var apiUrl = "https://api-osmosis.cosmostation.io/"
     var explorerUrl = MintscanUrl + "osmosis/"
     var validatorImgUrl = MonikerUrl + "osmosis/"

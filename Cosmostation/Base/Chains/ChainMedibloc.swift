@@ -20,7 +20,7 @@ class ChainMedibloc: ChainConfig {
     var chainColorBG = UIColor(named: "medibloc_bg")!
     var chainTitle = "(Medibloc Mainnet)"
     var chainTitle2 = "MEDIBLOC"
-    var chainDBName = "SUPPORT_CHAIN_MEDI"
+    var chainDBName = CHAIN_MEDI_S
     var chainAPIName = "medibloc"
     
     var stakeDenomImg = UIImage(named: "tokenMedibloc")
@@ -35,8 +35,8 @@ class ChainMedibloc: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-medibloc-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-medibloc-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-medibloc-app.cosmostation.io/"
     var apiUrl = "https://api-medibloc.cosmostation.io/"
     var explorerUrl = MintscanUrl + "medibloc/"
     var validatorImgUrl = MonikerUrl + "medibloc/"

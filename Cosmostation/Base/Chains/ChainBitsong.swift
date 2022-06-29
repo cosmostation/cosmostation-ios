@@ -20,7 +20,7 @@ class ChainBitsong: ChainConfig {
     var chainColorBG = UIColor(named: "bitsong_bg")!
     var chainTitle = "(Bitsong Mainnet)"
     var chainTitle2 = "BITSONG"
-    var chainDBName = "SUPPORT_CHAIN_BITSONG"
+    var chainDBName = CHAIN_BITSONG_S
     var chainAPIName = "bitsong"
     
     var stakeDenomImg = UIImage(named: "tokenBitsong")
@@ -35,8 +35,8 @@ class ChainBitsong: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-bitsong-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-bitsong-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-bitsong-app.cosmostation.io/"
     var apiUrl = "https://api-bitsong.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitsong/"
     var validatorImgUrl = MonikerUrl + "bitsong/"

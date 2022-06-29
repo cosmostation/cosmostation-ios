@@ -20,7 +20,7 @@ class ChainFetchAi: ChainConfig {
     var chainColorBG = UIColor(named: "fetchai_bg")!
     var chainTitle = "(Fetch.Ai Mainnet)"
     var chainTitle2 = "FETCH.AI"
-    var chainDBName = "SUPPORT_CHAIN_FETCH_MAIN"
+    var chainDBName = CHAIN_FETCH_S
     var chainAPIName = "fetchai"
     
     var stakeDenomImg = UIImage(named: "tokenFetchAi")
@@ -38,8 +38,8 @@ class ChainFetchAi: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-fetchai-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-fetchai-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-fetchai-app.cosmostation.io/"
     var apiUrl = "https://api-fetchai.cosmostation.io/"
     var explorerUrl = MintscanUrl + "fetchai/"
     var validatorImgUrl = MonikerUrl + "fetchai/"

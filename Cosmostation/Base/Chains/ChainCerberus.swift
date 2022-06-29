@@ -20,7 +20,7 @@ class ChainCerberus: ChainConfig {
     var chainColorBG = UIColor(named: "cerberus_bg")!
     var chainTitle = "(Cerberus Mainnet)"
     var chainTitle2 = "CERBERUS"
-    var chainDBName = "SUPPORT_CHAIN_CERBERUS"
+    var chainDBName = CHAIN_CERBERUS_S
     var chainAPIName = "cerberus"
     
     var stakeDenomImg = UIImage(named: "tokenCerberus")
@@ -35,8 +35,8 @@ class ChainCerberus: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-cerberus-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-cerberus-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-cerberus-app.cosmostation.io/"
     var apiUrl = "https://api-cerberus.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cerberus/"
     var validatorImgUrl = MonikerUrl + "cerberus/"

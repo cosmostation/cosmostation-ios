@@ -28,7 +28,7 @@ class RegisterDomain0ViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = WUtils.getChainType(account!.account_base_chain)
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.balances = account!.account_balances
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.userInput.layer.borderWidth = 0
@@ -65,12 +65,12 @@ class RegisterDomain0ViewController: BaseViewController {
         if (sender.isOn) {
             typeMsg.text = NSLocalizedString("str_description_open_domain", comment: "")
             typeTitle.text = "OPEN"
-            typeTitle.textColor = COLOR_IOV
+            typeTitle.textColor = UIColor.init(named: "starname")
             
         } else {
             typeMsg.text = NSLocalizedString("str_description_closed_domain", comment: "")
             typeTitle.text = "CLOSED"
-            typeTitle.textColor = .white
+            typeTitle.textColor = UIColor.init(named: "_font05")
         }
         onUpdateStarnameFee()
     }

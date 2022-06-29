@@ -20,7 +20,7 @@ class ChainCertik: ChainConfig {
     var chainColorBG = UIColor(named: "certik_bg")!
     var chainTitle = "(Certik Mainnet)"
     var chainTitle2 = "CERTIK"
-    var chainDBName = "SUPPORT_CHAIN_CERTIK_MAIN"
+    var chainDBName = CHAIN_CERTIK_S
     var chainAPIName = "certik"
     
     var stakeDenomImg = UIImage(named: "tokenCertik")
@@ -35,8 +35,8 @@ class ChainCertik: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-certik-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-certik-app.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-certik-app.cosmostation.io/"
     var apiUrl = "https://api-certik.cosmostation.io/"
     var explorerUrl = MintscanUrl + "certik/"
     var validatorImgUrl = MonikerUrl + "certik/"

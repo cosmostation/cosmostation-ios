@@ -20,7 +20,7 @@ class ChainSecret: ChainConfig {
     var chainColorBG = UIColor(named: "secret_bg")!
     var chainTitle = "(Secret Mainnet)"
     var chainTitle2 = "SECRET"
-    var chainDBName = "SUPPORT_CHAIN_SECRET_MAIN"
+    var chainDBName = CHAIN_SECRET_S
     var chainAPIName = "secret"
     
     var stakeDenomImg = UIImage(named: "tokenSecret")
@@ -36,8 +36,8 @@ class ChainSecret: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-secret-app.cosmostation.io"
-    var grpcPort = "9090"
-    var lcdUrl = "https://lcd-secret.cosmostation.io"
+    var grpcPort = 9090
+    var lcdUrl = "https://lcd-secret.cosmostation.io/"
     var apiUrl = "https://api-secret.cosmostation.io/"
     var explorerUrl = MintscanUrl + "secret/"
     var validatorImgUrl = MonikerUrl + "secret/"
