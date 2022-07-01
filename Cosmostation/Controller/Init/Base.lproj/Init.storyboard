@@ -40,7 +40,7 @@
                                 <rect key="frame" x="0.0" y="586" width="390" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqM-8h-gAN">
-                                        <rect key="frame" x="16" y="70" width="36" height="50"/>
+                                        <rect key="frame" x="16" y="70" width="358" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="bHF-YG-cst"/>
                                         </constraints>
@@ -69,6 +69,7 @@
                                     <constraint firstItem="yqM-8h-gAN" firstAttribute="leading" secondItem="lJg-IO-0Tm" secondAttribute="leading" constant="16" id="U8g-6Q-uA2"/>
                                     <constraint firstAttribute="height" constant="120" id="W3c-rR-BUC"/>
                                     <constraint firstAttribute="bottom" secondItem="yqM-8h-gAN" secondAttribute="bottom" id="ag8-7c-Ziy"/>
+                                    <constraint firstAttribute="trailing" secondItem="yqM-8h-gAN" secondAttribute="trailing" constant="16" id="glc-El-udh"/>
                                 </constraints>
                             </view>
                         </subviews>
