@@ -2516,6 +2516,8 @@
 		28EEECB126DAE9C2002DDC4A /* KavaSwapExit3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28EEECAF26DAE9C2002DDC4A /* KavaSwapExit3ViewController.xib */; };
 		28F1E8B9286B172100A08024 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F1E8B8286B172000A08024 /* Validator.swift */; };
 		28F1E8BA286B172100A08024 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28F1E8B8286B172000A08024 /* Validator.swift */; };
+		28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */; };
+		28F8EFB2286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */; };
 		28FA685026D8A53E00CF4C57 /* WalletKavaIncentiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FA684E26D8A53E00CF4C57 /* WalletKavaIncentiveCell.swift */; };
 		28FA685126D8A53E00CF4C57 /* WalletKavaIncentiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FA684F26D8A53E00CF4C57 /* WalletKavaIncentiveCell.xib */; };
 		28FC030C2652662B001C0319 /* Price.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28FC030B2652662B001C0319 /* Price.swift */; };
@@ -3859,6 +3861,7 @@
 		28EEECAE26DAE9C2002DDC4A /* KavaSwapExit3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KavaSwapExit3ViewController.swift; sourceTree = "<group>"; };
 		28EEECAF26DAE9C2002DDC4A /* KavaSwapExit3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KavaSwapExit3ViewController.xib; sourceTree = "<group>"; };
 		28F1E8B8286B172000A08024 /* Validator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RobotoMono-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		28FA684E26D8A53E00CF4C57 /* WalletKavaIncentiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletKavaIncentiveCell.swift; sourceTree = "<group>"; };
 		28FA684F26D8A53E00CF4C57 /* WalletKavaIncentiveCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletKavaIncentiveCell.xib; sourceTree = "<group>"; };
 		28FC030B2652662B001C0319 /* Price.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Price.swift; sourceTree = "<group>"; };
@@ -5419,6 +5422,14 @@
 			path = sif;
 			sourceTree = "<group>";
 		};
+		28F8EFA3286EC19700162FC1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				28F8EFB0286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		51090F06A9DC4E886F628890 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -5547,6 +5558,7 @@
 		E1945E26222E7C0600A1436F /* Cosmostation */ = {
 			isa = PBXGroup;
 			children = (
+				28F8EFA3286EC19700162FC1 /* Fonts */,
 				04E25D29276F23C5009B39BA /* Icons */,
 				282121BA25FDE71C0016ABFE /* ProtoBuff */,
 				E1A82DF12244EC1C0097CAEE /* Cell */,
@@ -6012,6 +6024,7 @@
 				0443B8A3285C7F050027A6B9 /* Chain.xcassets in Resources */,
 				18FFB6BD281AF533004E65BB /* ContractTokenGrpcViewController.xib in Resources */,
 				18FFB6BE281AF533004E65BB /* HtlcResultViewController.xib in Resources */,
+				28F8EFB2286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				18FFB6BF281AF533004E65BB /* TxBeginUnlockAllTokensCell.xib in Resources */,
 				04E6ABB228635854008DC3C7 /* CdpDeposit4ViewController.xib in Resources */,
 				18FFB6C0281AF533004E65BB /* HardPoolRepay0ViewController.xib in Resources */,
@@ -6354,6 +6367,7 @@
 				28440C64271E7BA300B4A7C3 /* SifJoinPool3ViewController.xib in Resources */,
 				04E2A32B27A5983C0045ED21 /* ContractTokenGrpcViewController.xib in Resources */,
 				283A80E6245158FB008FF813 /* HtlcResultViewController.xib in Resources */,
+				28F8EFB1286EC29200162FC1 /* RobotoMono-VariableFont_wght.ttf in Resources */,
 				04CFBD62269301880013150B /* TxBeginUnlockAllTokensCell.xib in Resources */,
 				04E6ABB128635854008DC3C7 /* CdpDeposit4ViewController.xib in Resources */,
 				28DB571125FA3BDD00B2F0E5 /* HardPoolRepay0ViewController.xib in Resources */,

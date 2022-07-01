@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="RobotoMono-VariableFont_wght.ttf">
+            <string>RobotoMono-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -38,26 +43,29 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOW-p5-I9r">
                                 <rect key="frame" x="38" y="16.5" width="100" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="2cF-Xu-aWN"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="2cF-Xu-aWN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oOW-aD-ypC">
-                                <rect key="frame" x="150" y="18" width="120" height="14"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <rect key="frame" x="150" y="17" width="120" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="vlc-R6-jNa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="12"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATOM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ur-BE-HOo">
-                                <rect key="frame" x="239" y="40" width="31" height="13"/>
+                                <rect key="frame" x="239" y="41" width="31" height="13"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rr8-qv-ETZ">
-                                <rect key="frame" x="229" y="37" width="8" height="16.5"/>
+                                <rect key="frame" x="229" y="38" width="8" height="16.5"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -68,10 +76,10 @@
                             <constraint firstItem="oOW-aD-ypC" firstAttribute="centerY" secondItem="aIv-MD-gpe" secondAttribute="centerY" id="1P8-FJ-Pbt"/>
                             <constraint firstItem="aIv-MD-gpe" firstAttribute="leading" secondItem="DsT-af-h7f" secondAttribute="leading" constant="12" id="1e0-Fa-k0r"/>
                             <constraint firstItem="rwd-M5-B34" firstAttribute="centerY" secondItem="DsT-af-h7f" secondAttribute="centerY" id="4Og-kN-jOT"/>
-                            <constraint firstItem="oOW-aD-ypC" firstAttribute="leading" secondItem="MOW-p5-I9r" secondAttribute="trailing" constant="12" id="LGn-Nv-2Iy"/>
                             <constraint firstItem="aIv-MD-gpe" firstAttribute="top" secondItem="DsT-af-h7f" secondAttribute="top" constant="14" id="LTi-15-vR6"/>
                             <constraint firstItem="MOW-p5-I9r" firstAttribute="centerY" secondItem="aIv-MD-gpe" secondAttribute="centerY" id="MIL-tX-pKX"/>
                             <constraint firstAttribute="trailing" secondItem="rwd-M5-B34" secondAttribute="trailing" constant="4" id="QXo-Ai-Ro5"/>
+                            <constraint firstItem="oOW-aD-ypC" firstAttribute="leading" secondItem="MOW-p5-I9r" secondAttribute="trailing" constant="12" id="VNr-AU-cfy"/>
                             <constraint firstItem="MOW-p5-I9r" firstAttribute="leading" secondItem="aIv-MD-gpe" secondAttribute="trailing" constant="4" id="VWz-wW-iNX"/>
                             <constraint firstItem="rwd-M5-B34" firstAttribute="leading" secondItem="oOW-aD-ypC" secondAttribute="trailing" constant="4" id="ctl-bK-Xeu"/>
                             <constraint firstItem="1ur-BE-HOo" firstAttribute="top" secondItem="oOW-aD-ypC" secondAttribute="bottom" constant="8" id="foR-t5-no2"/>
