@@ -1856,7 +1856,6 @@
 		18FFB6C7281AF533004E65BB /* TxOkDirectVoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B4303424F7766200BD7BB2 /* TxOkDirectVoteCell.xib */; };
 		18FFB6C8281AF533004E65BB /* KavaIncentiveClaim3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28FEDCE826DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib */; };
 		18FFB6C9281AF533004E65BB /* ReplaceEditAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F24254AC6460007BA7D /* ReplaceEditAddressViewController.xib */; };
-		18FFB6CB281AF533004E65BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28B6AFE023D9863800063D9C /* GoogleService-Info.plist */; };
 		18FFB6CC281AF533004E65BB /* RenewStarname3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F06254A9B780007BA7D /* RenewStarname3ViewController.xib */; };
 		18FFB6CD281AF533004E65BB /* HtlcResultClaimCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 285A33E924486DB60052BD3D /* HtlcResultClaimCell.xib */; };
 		18FFB6CE281AF533004E65BB /* CdpDetailAssetsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283A80D92451436A008FF813 /* CdpDetailAssetsCell.xib */; };
@@ -2401,7 +2400,6 @@
 		28B4304624F8B36600BD7BB2 /* OkMyValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304524F8B36600BD7BB2 /* OkMyValidatorViewController.swift */; };
 		28B4304824F8B37600BD7BB2 /* OkTopValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304724F8B37500BD7BB2 /* OkTopValidatorViewController.swift */; };
 		28B4304A24F8B38500BD7BB2 /* OkOtherValidatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B4304924F8B38500BD7BB2 /* OkOtherValidatorViewController.swift */; };
-		28B6AFE123D9863800063D9C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28B6AFE023D9863800063D9C /* GoogleService-Info.plist */; };
 		28B9B688271DC5DD0067C6AE /* SifPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9B686271DC5DD0067C6AE /* SifPoolCell.swift */; };
 		28B9B689271DC5DD0067C6AE /* SifPoolCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28B9B687271DC5DD0067C6AE /* SifPoolCell.xib */; };
 		28B9B68C271DC5F60067C6AE /* SifMyPoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28B9B68A271DC5F60067C6AE /* SifMyPoolCell.swift */; };
@@ -2574,6 +2572,7 @@
 		E151B65422486C300026B8C0 /* ProposalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E151B65222486C300026B8C0 /* ProposalCell.swift */; };
 		E151B65522486C300026B8C0 /* ProposalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E151B65322486C300026B8C0 /* ProposalCell.xib */; };
 		E151B658224873640026B8C0 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E151B657224873640026B8C0 /* SettingTableViewController.swift */; };
+		E1525DCB286FED4D001B84D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1525DCA286FED4D001B84D2 /* GoogleService-Info.plist */; };
 		E15DA48122F1738C000557FC /* PromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15DA48322F1738C000557FC /* PromotionCell.xib */; };
 		E16B70DD229F9A78001D6B9C /* RedelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16B70DF229F9A78001D6B9C /* RedelegateCell.xib */; };
 		E16B89152341C558003E0922 /* TokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16B89132341C558003E0922 /* TokenCell.swift */; };
@@ -3747,7 +3746,6 @@
 		28B4304524F8B36600BD7BB2 /* OkMyValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkMyValidatorViewController.swift; sourceTree = "<group>"; };
 		28B4304724F8B37500BD7BB2 /* OkTopValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkTopValidatorViewController.swift; sourceTree = "<group>"; };
 		28B4304924F8B38500BD7BB2 /* OkOtherValidatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OkOtherValidatorViewController.swift; sourceTree = "<group>"; };
-		28B6AFE023D9863800063D9C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		28B9B686271DC5DD0067C6AE /* SifPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifPoolCell.swift; sourceTree = "<group>"; };
 		28B9B687271DC5DD0067C6AE /* SifPoolCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SifPoolCell.xib; sourceTree = "<group>"; };
 		28B9B68A271DC5F60067C6AE /* SifMyPoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SifMyPoolCell.swift; sourceTree = "<group>"; };
@@ -3937,6 +3935,7 @@
 		E151B65222486C300026B8C0 /* ProposalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalCell.swift; sourceTree = "<group>"; };
 		E151B65322486C300026B8C0 /* ProposalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProposalCell.xib; sourceTree = "<group>"; };
 		E151B657224873640026B8C0 /* SettingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewController.swift; sourceTree = "<group>"; };
+		E1525DCA286FED4D001B84D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E15DA48222F1738C000557FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PromotionCell.xib; sourceTree = "<group>"; };
 		E15DA48522F1738F000557FC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PromotionCell.strings; sourceTree = "<group>"; };
 		E16B70DC229E619A001D6B9C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/GenTx.strings; sourceTree = "<group>"; };
@@ -5573,7 +5572,7 @@
 				0443B89728589B570027A6B9 /* Color.xcassets */,
 				0443B8A1285C7F050027A6B9 /* Chain.xcassets */,
 				E1945E33222E7C0800A1436F /* Info.plist */,
-				28B6AFE023D9863800063D9C /* GoogleService-Info.plist */,
+				E1525DCA286FED4D001B84D2 /* GoogleService-Info.plist */,
 				18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */,
 				E136D8A223039493001BEBB8 /* Cosmostation.entitlements */,
 				E1945E2B222E7C0600A1436F /* Main.storyboard */,
@@ -6038,7 +6037,6 @@
 				18FFB6C7281AF533004E65BB /* TxOkDirectVoteCell.xib in Resources */,
 				18FFB6C8281AF533004E65BB /* KavaIncentiveClaim3ViewController.xib in Resources */,
 				18FFB6C9281AF533004E65BB /* ReplaceEditAddressViewController.xib in Resources */,
-				18FFB6CB281AF533004E65BB /* GoogleService-Info.plist in Resources */,
 				18FFB6CC281AF533004E65BB /* RenewStarname3ViewController.xib in Resources */,
 				18FFB6CD281AF533004E65BB /* HtlcResultClaimCell.xib in Resources */,
 				18FFB6CE281AF533004E65BB /* CdpDetailAssetsCell.xib in Resources */,
@@ -6343,6 +6341,7 @@
 				280E1F21254AC6340007BA7D /* ReplaceSelectChainViewController.xib in Resources */,
 				2889FD732603379A00CA9896 /* TxHardBorrowCell.xib in Resources */,
 				041ECDF327F5750700397D37 /* EmptyWCViewController.xib in Resources */,
+				E1525DCB286FED4D001B84D2 /* GoogleService-Info.plist in Resources */,
 				28440C5C271E7B7800B4A7C3 /* SifSwap3ViewController.xib in Resources */,
 				04C5AE6D28631727007627EA /* Undelegate1ViewController.xib in Resources */,
 				2889FD7D260337C600CA9896 /* TxHardLiquidateCell.xib in Resources */,
@@ -6382,7 +6381,6 @@
 				28B4303624F7766200BD7BB2 /* TxOkDirectVoteCell.xib in Resources */,
 				28FEDCEA26DB141900A43D01 /* KavaIncentiveClaim3ViewController.xib in Resources */,
 				280E1F26254AC6460007BA7D /* ReplaceEditAddressViewController.xib in Resources */,
-				28B6AFE123D9863800063D9C /* GoogleService-Info.plist in Resources */,
 				280E1F08254A9B780007BA7D /* RenewStarname3ViewController.xib in Resources */,
 				047FB711281EC0E8009D8AAF /* WalletDeriveViewController.xib in Resources */,
 				285A33EB24486DB60052BD3D /* HtlcResultClaimCell.xib in Resources */,
