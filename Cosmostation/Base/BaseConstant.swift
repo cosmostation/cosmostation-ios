@@ -59,50 +59,6 @@ let SIF_COIN_IMG_URL                    = "https://raw.githubusercontent.com/cos
 let EMONEY_COIN_IMG_URL                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/emoney/";
 let BRIDGE_COIN_IMG_URL                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/assets/images/ethereum/";
 
-
-let RELAYER_IMG_COSMOS                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cosmos/relay-cosmos-unknown.png"
-let RELAYER_IMG_IRIS                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/iris/relay-iris-unknown.png"
-let RELAYER_IMG_BAND                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/band/relay-band-unknown.png"
-let RELAYER_IMG_IOV                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/starname/relay-starname-unknown.png"
-let RELAYER_IMG_CERTIK                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/certik/relay-certik-unknown.png"
-let RELAYER_IMG_AKASH                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/akash/relay-akash-unknown.png"
-let RELAYER_IMG_PERSIS                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/persistence/relay-persistence-unknown.png"
-let RELAYER_IMG_SENTINEL                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/sentinel/relay-sentinel-unknown.png"
-let RELAYER_IMG_FETCH                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/fetchai/relay-fetchai-unknown.png"
-let RELAYER_IMG_CRYPTO                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cryptoorg/relay-cryptoorg-unknown.png"
-let RELAYER_IMG_SIF                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/sifchain/relay-sifchain-unknown.png"
-let RELAYER_IMG_OSMOSIS                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/osmosis/relay-osmosis-unknown.png"
-let RELAYER_IMG_EMONEY                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/emoney/relay-emoney-unknown.png"
-let RELAYER_IMG_JUNO                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/juno/relay-juno-unknown.png"
-let RELAYER_IMG_REGEN                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/regen/relay-regen-unknown.png"
-let RELAYER_IMG_INJECTIVE               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/injective/relay-injective-unknown.png"
-let RELAYER_IMG_KI                      = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/ki/relay-kichain-unknown.png"
-let RELAYER_IMG_SECRET                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/secret/relay-secret-unknown.png"
-let RELAYER_IMG_BITCANNA                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/bitcanna/relay-bitcanna-unknown.png"
-let RELAYER_IMG_COMDEX                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/comdex/relay-comdex-unknown.png"
-let RELAYER_IMG_STARGAZE                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/stargaze/relay-stargaze-unknown.png"
-let RELAYER_IMG_RIZON                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/rizon/relay-rizon-unknown.png"
-let RELAYER_IMG_MEDI                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/medibloc/relay-medibloc-unknown.png"
-let RELAYER_IMG_UMEE                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/umee/relay-umee-unknown.png"
-let RELAYER_IMG_BITSONG                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/bitsong/relay-bitsong-unknown.png"
-let RELAYER_IMG_DESMOS                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/desmos/relay-desmos-unknown.png"
-let RELAYER_IMG_GRAVITYBRIDGE           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/gravity-bridge/relay-gravitybridge-unknown.png"
-let RELAYER_IMG_LUM                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/lum-network/relay-lum-unknown.png"
-let RELAYER_IMG_CHIHUAHUA               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/chihuahua/relay-chihuahua-unknown.png"
-let RELAYER_IMG_KAVA                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/kava/relay-kava-unknown.png"
-let RELAYER_IMG_AXELAR                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/axelar/relay-axelar-unknown.png"
-let RELAYER_IMG_KONSTELLATION           = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/konstellation/relay-konstellation-unknown.png"
-let RELAYER_IMG_EVMOS                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/evmos/relay-evmos-unknown.png"
-let RELAYER_IMG_PROVENANCE              = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/provenance/relay-provenance-unknown.png"
-let RELAYER_IMG_CUDOS                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cudos-unknown.png"
-let RELAYER_IMG_CERBERUS                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-cerberus-unknown.png"
-let RELAYER_IMG_OMNIFLIX                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/cudos/relay-omniflix-unknown.png"
-let RELAYER_IMG_CRESCENT                = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/crescent/relay-crescent-unknown.png"
-let RELAYER_IMG_MANTLE                  = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/asset-mantle/relay-assetmantle-unknown.png"
-let RELAYER_IMG_NYX                     = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/nyx/relay-nyx-unknown.png"
-
-
-
 let DB_VERSION                      = 2
 
 //DB for Account
@@ -155,23 +111,11 @@ let DB_BALANCE_LOCKED               = Expression<String?>("locked")
 
 //DB for Bonding
 let DB_BONDING = Table("bondi")
-let DB_BONDING_ID                   = Expression<Int64>("id")
-let DB_BONDING_ACCOUNT_ID           = Expression<Int64>("accountId")
-let DB_BONDING_V_Address            = Expression<String>("validatorAddress")
-let DB_BONDING_SHARES               = Expression<String>("shares")
-let DB_BONDING_FETCH_TIME           = Expression<Int64>("fetchTime")
 
 
 //DB for UnBonding
 let DB_UNBONDING = Table("unbond")
-let DB_UNBONDING_ID                 = Expression<Int64>("id")
-let DB_UNBONDING_ACCOUNT_ID         = Expression<Int64>("accountId")
-let DB_UNBONDING_V_Address          = Expression<String>("validatorAddress")
-let DB_UNBONDING_CREATE_HEIGHT      = Expression<String>("creationHeight")
-let DB_UNBONDING_COMPLETE_TIME      = Expression<Int64>("completionTime")
-let DB_UNBONDING_INITIAL_BALANCE    = Expression<String>("initialBalance")
-let DB_UNBONDING_BALANCE            = Expression<String>("balance")
-let DB_UNBONDING_FETCH_TIME         = Expression<Int64>("fetchTime")
+
 
 //DB for Mnemonic
 let DB_MNEMONIC = Table("mnemonic")

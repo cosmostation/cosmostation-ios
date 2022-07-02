@@ -842,27 +842,10 @@ final class BaseData : NSObject{
             _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
             _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
 
+            //delete LCD used old table 
+            try self.database.run(DB_BONDING.drop(ifExists: true))
+            try self.database.run(DB_UNBONDING.drop(ifExists: true))
             
-            let createBondingTable = DB_BONDING.create(ifNotExists: true) { (table) in
-                table.column(DB_BONDING_ID, primaryKey: true)
-                table.column(DB_BONDING_ACCOUNT_ID)
-                table.column(DB_BONDING_V_Address)
-                table.column(DB_BONDING_SHARES)
-                table.column(DB_BONDING_FETCH_TIME)
-            }
-            try self.database.run(createBondingTable)
-            
-            let createUnBondingTable = DB_UNBONDING.create(ifNotExists: true) { (table) in
-                table.column(DB_UNBONDING_ID, primaryKey: true)
-                table.column(DB_UNBONDING_ACCOUNT_ID)
-                table.column(DB_UNBONDING_V_Address)
-                table.column(DB_UNBONDING_CREATE_HEIGHT)
-                table.column(DB_UNBONDING_COMPLETE_TIME)
-                table.column(DB_UNBONDING_INITIAL_BALANCE)
-                table.column(DB_UNBONDING_BALANCE)
-                table.column(DB_UNBONDING_FETCH_TIME)
-            }
-            try self.database.run(createUnBondingTable)
             
             let createMnemonicTable = DB_MNEMONIC.create(ifNotExists: true) { (table) in
                 table.column(DB_MNEMONIC_ID, primaryKey: true)
