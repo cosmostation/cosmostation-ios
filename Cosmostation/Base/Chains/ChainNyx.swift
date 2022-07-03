@@ -32,6 +32,8 @@ class ChainNyx: ChainConfig {
     var addressPrefix = "n"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.025unyx"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-nym-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainNyx: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://nymtech.net/blog/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

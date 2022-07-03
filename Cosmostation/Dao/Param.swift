@@ -20,24 +20,24 @@ public struct Param {
     }
     
     func getInflation(_ chainType: ChainType?) -> NSDecimalNumber {
-        if (chainType == ChainType.EMONEY_MAIN) {
+        if (chainType == .EMONEY_MAIN) {
             return NSDecimalNumber.init(string: params?.emoney_minting_inflation?.assets.filter { $0.denom == EMONEY_MAIN_DENOM }.first?.inflation)
             
-        } else if (chainType == ChainType.IRIS_MAIN || chainType == ChainType.IRIS_TEST) {
+        } else if (chainType == .IRIS_MAIN || chainType == .IRIS_TEST) {
             return NSDecimalNumber.init(string: params?.minting_params?.inflation)
             
-        } else if (chainType == ChainType.OSMOSIS_MAIN) {
+        } else if (chainType == .OSMOSIS_MAIN) {
             let epochProvisions = NSDecimalNumber.init(string: params?.osmosis_minting_epoch_provisions)
             let epochPeriod = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.reduction_period_in_epochs)
             let osmoSupply = getMainSupply()
             return epochProvisions.multiplying(by: epochPeriod).dividing(by: osmoSupply, withBehavior: WUtils.handler18)
             
-        } else if (chainType == ChainType.STARGAZE_MAIN) {
+        } else if (chainType == .STARGAZE_MAIN) {
             let annualProvisions = NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.initial_annual_provisions)
             let starsSupply = getMainSupply()
             return annualProvisions.dividing(by: starsSupply, withBehavior: WUtils.handler18)
             
-        } else if (chainType == ChainType.EVMOS_MAIN) {
+        } else if (chainType == .EVMOS_MAIN) {
             if (params?.evmos_inflation_params?.params?.enable_inflation == false) {
                 return NSDecimalNumber.zero
             }
@@ -45,7 +45,7 @@ public struct Param {
             let evmosSupply = getMainSupply().subtracting(NSDecimalNumber.init(string: "200000000000000000000000000"))
             return annualProvisions.dividing(by: evmosSupply, withBehavior: WUtils.handler18)
             
-        } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
+        } else if (chainType == .CRESCENT_MAIN || chainType == .CRESCENT_TEST) {
             let now = Date.init().millisecondsSince1970
             var creInitSupply = NSDecimalNumber.init(string: "200000000000000")
             if let InflationAddeds =  params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time < now}),
@@ -98,20 +98,20 @@ public struct Param {
         if (getMainSupply() == NSDecimalNumber.zero) { return NSDecimalNumber.zero}
         let bondingRate = getBondedAmount().dividing(by: getMainSupply(), withBehavior: WUtils.handler6)
         if (bondingRate == NSDecimalNumber.zero) { return NSDecimalNumber.zero}
-        if (chain == ChainType.OSMOSIS_MAIN) {
+        if (chain == .OSMOSIS_MAIN) {
             let stakingDistribution = NSDecimalNumber.init(string: params?.osmosis_minting_params?.params?.distribution_proportions?.staking)
             return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             
-        } else if (chain == ChainType.STARGAZE_MAIN) {
+        } else if (chain == .STARGAZE_MAIN) {
             let reductionFactor = NSDecimalNumber.one.subtracting(NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.reduction_factor))
             return inflation.multiplying(by: calTax).multiplying(by: reductionFactor).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             
-        } else if (chain == ChainType.EVMOS_MAIN) {
+        } else if (chain == .EVMOS_MAIN) {
             let ap = NSDecimalNumber.init(string: params?.evmos_minting_epoch_provisions).multiplying(by: NSDecimalNumber.init(string: "365"))
             let stakingRewardsFactor = params?.evmos_inflation_params?.params?.inflation_distribution?.staking_rewards ?? NSDecimalNumber.zero
             return ap.multiplying(by: stakingRewardsFactor).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             
-        } else if (chain == ChainType.CRESCENT_MAIN || chain == ChainType.CRESCENT_TEST) {
+        } else if (chain == .CRESCENT_MAIN || chain == .CRESCENT_TEST) {
             let now = Date.init().millisecondsSince1970
             if let ap = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
                 return ap.multiplying(by: getCrescentRewardFact()).multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)

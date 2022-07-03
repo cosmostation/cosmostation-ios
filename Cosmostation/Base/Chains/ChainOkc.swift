@@ -33,6 +33,8 @@ class ChainOkc: ChainConfig {
     let addressHdPath0 = "m/44'/996'/0'/0/X"
     let addressHdPath1 = "m/44'/60'/0'/0/X"
     
+    let gasRate0 = "0.0000000001okt"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = ""
@@ -62,5 +64,9 @@ class ChainOkc: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.okx.com/academy/en/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

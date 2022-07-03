@@ -32,6 +32,8 @@ class ChainBitcana: ChainConfig {
     var addressPrefix = "bcna"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.025ubcna"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-bitcanna-app.cosmostation.io"
@@ -61,6 +63,10 @@ class ChainBitcana: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@BitCannaGlobal"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }
 

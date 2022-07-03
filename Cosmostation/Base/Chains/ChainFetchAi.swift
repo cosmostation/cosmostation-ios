@@ -35,6 +35,8 @@ class ChainFetchAi: ChainConfig {
     let addressHdPath2 = "m/44'/60'/X'/0/0"
     let addressHdPath3 = "m/44'/60'/0'/X"
     
+    let gasRate0 = "0.0afet"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-fetchai-app.cosmostation.io"
@@ -64,5 +66,9 @@ class ChainFetchAi: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://fetch.ai/blog/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

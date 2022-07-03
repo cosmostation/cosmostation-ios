@@ -1614,6 +1614,31 @@ public class WUtils {
         return transition
     }
     
+    static func getFeeInfos(_ chainConfig: ChainConfig?) -> Array<FeeInfo> {
+        var result = Array<FeeInfo>()
+        chainConfig?.getGasRates().forEach { gasInfo in
+            result.append(FeeInfo.init(gasInfo))
+        }
+        if (result.count == 1) {
+            result[0].title = "Fixed"
+        } else if (result.count == 2) {
+            result[1].title = "Average"
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = "Zero"
+            } else {
+                result[0].title = "Tiny"
+            }
+        } else if (result.count == 3) {
+            result[2].title = "Average"
+            result[1].title = "Low"
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = "Zero"
+            } else {
+                result[0].title = "Tiny"
+            }
+        }
+        return result
+    }
 
     static func getEstimateGasAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero

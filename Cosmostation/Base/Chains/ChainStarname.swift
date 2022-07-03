@@ -32,6 +32,9 @@ class ChainStarname: ChainConfig {
     var addressPrefix = "star"
     let addressHdPath0 = "m/44'/234'/0'/0/X"
     
+    let gasRate0 = "0.1uiov"
+    let gasRate1 = "1.0uiov"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-iov-app.cosmostation.io"
@@ -61,5 +64,9 @@ class ChainStarname: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/iov-internet-of-values"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1]
     }
 }

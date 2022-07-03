@@ -33,6 +33,10 @@ class ChainKava: ChainConfig {
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     var addressaddressHdPath1 = "m/44'/459'/0'/0/X"
     
+    let gasRate0 = "0.001ukava"
+    let gasRate1 = "0.0025ukava"
+    let gasRate2 = "0.025ukava"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"
@@ -62,5 +66,9 @@ class ChainKava: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/kava-labs"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

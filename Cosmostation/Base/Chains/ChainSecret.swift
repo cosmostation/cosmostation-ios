@@ -33,6 +33,8 @@ class ChainSecret: ChainConfig {
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/529'/0'/0/X"
     
+    let gasRate0 = "0.25uscrt"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-secret.cosmostation.io"
@@ -62,5 +64,9 @@ class ChainSecret: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.scrt.network"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

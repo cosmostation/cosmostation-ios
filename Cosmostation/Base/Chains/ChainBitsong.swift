@@ -32,6 +32,8 @@ class ChainBitsong: ChainConfig {
     var addressPrefix = "bitsong"
     let addressHdPath0 = "m/44'/639'/0'/0/X"
     
+    let gasRate0 = "0.025ubtsg"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-bitsong-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainBitsong: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://bitsongofficial.medium.com/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

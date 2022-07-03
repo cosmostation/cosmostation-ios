@@ -32,6 +32,8 @@ class ChainOmniflix: ChainConfig {
     var addressPrefix = "omniflix"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.001uflix"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-omniflix-app.cosmostation.io"
@@ -61,6 +63,10 @@ class ChainOmniflix: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.omniflix.network/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }
 

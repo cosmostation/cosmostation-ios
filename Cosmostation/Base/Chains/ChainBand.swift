@@ -32,6 +32,10 @@ class ChainBand: ChainConfig {
     var addressPrefix = "band"
     let addressHdPath0 = "m/44'/494'/0'/0/X"
     
+    let gasRate0 = "0.00025uband"
+    let gasRate1 = "0.0025uband"
+    let gasRate2 = "0.025uband"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-band-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainBand: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/bandprotocol"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

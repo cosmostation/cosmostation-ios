@@ -32,6 +32,10 @@ class ChainEmoney: ChainConfig {
     var addressPrefix = "emoney"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.1ungm"
+    let gasRate1 = "0.3ungm"
+    let gasRate2 = "1ungm"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-emoney-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainEmoney: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/e-money-com"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

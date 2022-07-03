@@ -62,4 +62,8 @@ class ChainAlthea: ChainConfig {
     func getInfoLink2() -> String {
         return "https://blog.althea.net/"
     }
+    
+    func getGasRates() -> Array<String> {
+        return []
+    }
 }

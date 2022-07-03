@@ -32,6 +32,9 @@ class ChainStargaze: ChainConfig {
     var addressPrefix = "stars"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.0ustars"
+    let gasRate1 = "0.0025ustars"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-stargaze-app.cosmostation.io"
@@ -61,5 +64,9 @@ class ChainStargaze: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://mirror.xyz/stargazezone.eth"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1]
     }
 }

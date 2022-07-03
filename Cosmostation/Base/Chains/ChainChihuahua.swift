@@ -32,6 +32,10 @@ class ChainChihuahua: ChainConfig {
     var addressPrefix = "chihuahua"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.00035uhuahua"
+    let gasRate1 = "0.0035uhuahua"
+    let gasRate2 = "0.035uhuahua"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-chihuahua-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainChihuahua: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://chi.huahua.wtf/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

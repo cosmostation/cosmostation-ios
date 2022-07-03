@@ -32,6 +32,8 @@ class ChainEvmos: ChainConfig {
     var addressPrefix = "evmos"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
+    let gasRate0 = "0.0aevmos"
+    
     var pushSupport = false
     var wcSupoort = true
     var grpcUrl = "lcd-evmos-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainEvmos: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://evmos.blog/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

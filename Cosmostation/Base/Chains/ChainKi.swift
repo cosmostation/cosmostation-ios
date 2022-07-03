@@ -32,6 +32,8 @@ class ChainKi: ChainConfig {
     var addressPrefix = "ki"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.025uxki"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-kichain-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainKi: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/ki-foundation"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

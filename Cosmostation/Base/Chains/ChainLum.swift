@@ -33,6 +33,8 @@ class ChainLum: ChainConfig {
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/459'/0'/0/X"
     
+    let gasRate0 = "0.001ulum"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-lum-app.cosmostation.io"
@@ -62,5 +64,9 @@ class ChainLum: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/lum-network"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

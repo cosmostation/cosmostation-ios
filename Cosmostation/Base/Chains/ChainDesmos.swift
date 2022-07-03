@@ -32,6 +32,10 @@ class ChainDesmos: ChainConfig {
     var addressPrefix = "desmos"
     let addressHdPath0 = "m/44'/852'/0'/0/X"
     
+    let gasRate0 = "0.001udsm"
+    let gasRate1 = "0.01udsm"
+    let gasRate2 = "0.025udsm"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-desmos-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainDesmos: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/desmosnetwork"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

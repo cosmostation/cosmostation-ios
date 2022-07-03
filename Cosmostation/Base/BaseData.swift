@@ -841,11 +841,6 @@ final class BaseData : NSObject{
             try self.database.run(createBalanceTable)
             _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
             _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
-
-            //delete LCD used old table 
-            try self.database.run(DB_BONDING.drop(ifExists: true))
-            try self.database.run(DB_UNBONDING.drop(ifExists: true))
-            
             
             let createMnemonicTable = DB_MNEMONIC.create(ifNotExists: true) { (table) in
                 table.column(DB_MNEMONIC_ID, primaryKey: true)
@@ -857,6 +852,10 @@ final class BaseData : NSObject{
             }
             try self.database.run(createMnemonicTable)
             _ = try? self.database.run(DB_MNEMONIC.addColumn(DB_MNEMONIC_IMPORT_TIME, defaultValue: -1))
+            
+            //delete LCD used old table
+            try self.database.run(DB_BONDING.drop(ifExists: true))
+            try self.database.run(DB_UNBONDING.drop(ifExists: true))
             
         } catch {
             print(error)

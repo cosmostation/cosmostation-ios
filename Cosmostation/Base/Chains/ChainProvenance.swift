@@ -32,6 +32,8 @@ class ChainProvenance: ChainConfig {
     var addressPrefix = "pb"
     let addressHdPath0 = "m/44'/505'/0'/0/X"
     
+    let gasRate0 = "2000nhash"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-provenance-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainProvenance: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.provenance.io/blog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

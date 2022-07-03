@@ -32,6 +32,10 @@ class ChainRegen: ChainConfig {
     var addressPrefix = "regen"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.00025uregen"
+    let gasRate1 = "0.0025uregen"
+    let gasRate2 = "0.025uregen"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-regen-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainRegen: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/regen-network"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

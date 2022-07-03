@@ -32,6 +32,10 @@ class ChainCrescent: ChainConfig {
     var addressPrefix = "cre"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.01ucre,0.01ubcre"
+    let gasRate1 = "0.02ucre,0.02ubcre"
+    let gasRate2 = "0.05ucre,0.05ubcre"
+    
     var pushSupport = false
     var wcSupoort = true
     var grpcUrl = "lcd-crescent-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainCrescent: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://crescentnetwork.medium.com/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

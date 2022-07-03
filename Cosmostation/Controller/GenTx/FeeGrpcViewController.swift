@@ -37,12 +37,17 @@ class FeeGrpcViewController: BaseViewController {
     var mDpDecimal:Int16 = 6
     var mSimulPassed = false
     
+    var mFeeInfo = Array<FeeInfo>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
+        self.mFeeInfo = WUtils.getFeeInfos(chainConfig)
+        print("mFeeInfo ", mFeeInfo)
         
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         WUtils.setGasDenomTitle(chainType, feeTotalDenom)

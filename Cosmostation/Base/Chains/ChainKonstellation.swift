@@ -32,6 +32,10 @@ class ChainKonstellation: ChainConfig {
     var addressPrefix = "darc"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.0001udarc"
+    let gasRate1 = "0.001udarc"
+    let gasRate2 = "0.01udarc"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-konstellation-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainKonstellation: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://konstellation.medium.com/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

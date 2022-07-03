@@ -48,6 +48,7 @@ protocol ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String
     func getInfoLink1() -> String
     func getInfoLink2() -> String
+    func getGasRates() -> Array<String>
         
 }
 

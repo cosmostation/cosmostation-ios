@@ -32,6 +32,10 @@ class ChainUmee: ChainConfig {
     var addressPrefix = "umee"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.000uumee"
+    let gasRate1 = "0.001uumee"
+    let gasRate2 = "0.005uumee"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-umee-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainUmee: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/umeeblog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }

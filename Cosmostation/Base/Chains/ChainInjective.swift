@@ -32,6 +32,8 @@ class ChainInjective: ChainConfig {
     var addressPrefix = "inj"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
+    let gasRate0 = "500000000inj"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-inj-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainInjective: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.injectiveprotocol.com/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

@@ -32,6 +32,8 @@ class ChainSif: ChainConfig {
     var addressPrefix = "sif"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.0rowan"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-sifchain-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainSif: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/sifchain-finance"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

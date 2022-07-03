@@ -32,6 +32,9 @@ class ChainSentinel: ChainConfig {
     var addressPrefix = "sent"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.01udvpn"
+    let gasRate1 = "0.1udvpn"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-sentinel-app.cosmostation.io"
@@ -61,5 +64,9 @@ class ChainSentinel: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/sentinel"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1]
     }
 }

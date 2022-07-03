@@ -32,6 +32,8 @@ class ChainCerberus: ChainConfig {
     var addressPrefix = "cerberus"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.0ucrbrus"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-cerberus-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainCerberus: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@cerberus_zone"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

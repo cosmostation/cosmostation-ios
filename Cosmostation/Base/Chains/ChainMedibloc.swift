@@ -32,6 +32,8 @@ class ChainMedibloc: ChainConfig {
     var addressPrefix = "panacea"
     let addressHdPath0 = "m/44'/371'/0'/0/X"
     
+    let gasRate0 = "5umed"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-medibloc-app.cosmostation.io"
@@ -69,5 +71,9 @@ class ChainMedibloc: ChainConfig {
         } else {
             return "https://medium.com/medibloc/"
         }
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

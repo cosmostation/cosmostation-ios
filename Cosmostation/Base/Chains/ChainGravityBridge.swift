@@ -32,6 +32,8 @@ class ChainGravityBridge: ChainConfig {
     var addressPrefix = "gravity"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.0ugraviton"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-gravity-bridge-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainGravityBridge: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.gravitybridge.net/blog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

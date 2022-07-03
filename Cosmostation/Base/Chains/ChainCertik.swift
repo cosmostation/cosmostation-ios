@@ -32,6 +32,8 @@ class ChainCertik: ChainConfig {
     var addressPrefix = "certik"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.05uctk"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-certik-app.cosmostation.io"
@@ -61,5 +63,9 @@ class ChainCertik: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.certik.foundation/blog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
     }
 }

@@ -32,6 +32,10 @@ class ChainAkash: ChainConfig {
     var addressPrefix = "akash"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.00025uakt"
+    let gasRate1 = "0.0025uakt"
+    let gasRate2 = "0.025uakt"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-akash-app.cosmostation.io"
@@ -61,5 +65,9 @@ class ChainAkash: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://akash.network/blog/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
     }
 }
