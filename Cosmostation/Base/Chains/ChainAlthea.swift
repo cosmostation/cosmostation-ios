@@ -32,6 +32,8 @@ class ChainAlthea: ChainConfig {
     var addressPrefix = "althea"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
+    let gasRate0 = "0.0ualtg"
+    
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"
@@ -64,6 +66,10 @@ class ChainAlthea: ChainConfig {
     }
     
     func getGasRates() -> Array<String> {
-        return []
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

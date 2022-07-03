@@ -66,9 +66,9 @@ class JoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         coin1Decimal = WUtils.getOsmosisCoinDecimal(coin1Denom)
         
         WUtils.DpOsmosisTokenImg(inputCoin0Img, coin0Denom)
-        WUtils.DpOsmosisTokenName(inputCoin0Name, coin0Denom)
+        WUtils.DpOsmosisSymbol(inputCoin0Name, coin0Denom)
         WUtils.DpOsmosisTokenImg(inputCoin1Img, coin1Denom)
-        WUtils.DpOsmosisTokenName(inputCoin1Name, coin1Denom)
+        WUtils.DpOsmosisSymbol(inputCoin1Name, coin1Denom)
         WUtils.showCoinDp(coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel, chainType!)
         WUtils.showCoinDp(coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel, chainType!)
         

@@ -70,4 +70,8 @@ class ChainRegen: ChainConfig {
     func getGasRates() -> Array<String> {
         return [gasRate0, gasRate1, gasRate2]
     }
+    
+    func getGasDefault() -> Int {
+        return 1
+    }
 }

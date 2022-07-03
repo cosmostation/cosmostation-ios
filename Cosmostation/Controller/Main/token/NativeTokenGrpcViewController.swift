@@ -69,7 +69,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     
     func onInitView() {
         if (chainType == ChainType.OSMOSIS_MAIN) {
-            WUtils.DpOsmosisTokenName(naviTokenSymbol, nativeDenom)
+            WUtils.DpOsmosisSymbol(naviTokenSymbol, nativeDenom)
             WUtils.DpOsmosisTokenImg(naviTokenImg, nativeDenom)
             if (nativeDenom == OSMOSIS_ION_DENOM) {
                 nativeDivideDecimal = 6
@@ -85,7 +85,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
             
         } else if (chainType == ChainType.KAVA_MAIN) {
-            WUtils.DpKavaTokenName(naviTokenSymbol, nativeDenom)
+            WUtils.DpKavaSymbol(naviTokenSymbol, nativeDenom)
             naviTokenImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(nativeDenom))!)
             nativeDivideDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
             nativeDisplayDecimal = WUtils.getKavaCoinDecimal(nativeDenom)

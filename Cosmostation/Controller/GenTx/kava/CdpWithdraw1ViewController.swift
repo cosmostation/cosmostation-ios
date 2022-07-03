@@ -291,8 +291,8 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            cDenomLabel.text = WUtils.getKavaTokenName(mCDenom)
-            cAvailableDenom.text = WUtils.getKavaTokenName(mCDenom)
+            cDenomLabel.text = WUtils.getKavaSymbol(mCDenom)
+            cAvailableDenom.text = WUtils.getKavaSymbol(mCDenom)
             
             self.cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
             self.loadingImg.onStopAnimation()

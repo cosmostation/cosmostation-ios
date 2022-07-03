@@ -69,4 +69,8 @@ class ChainStarname: ChainConfig {
     func getGasRates() -> Array<String> {
         return [gasRate0, gasRate1]
     }
+    
+    func getGasDefault() -> Int {
+        return 0
+    }
 }

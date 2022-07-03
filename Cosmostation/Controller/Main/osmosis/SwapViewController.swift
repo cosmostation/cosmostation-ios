@@ -71,12 +71,12 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         
         WUtils.DpOsmosisTokenImg(inputCoinImg, mInputCoinDenom!)
         WUtils.DpOsmosisTokenImg(outputCoinImg, mOutputCoinDenom!)
-        WUtils.DpOsmosisTokenName(inputCoinName, mInputCoinDenom!)
-        WUtils.DpOsmosisTokenName(outputCoinName, mOutputCoinDenom!)
-        WUtils.DpOsmosisTokenName(inputCoinRateDenom, mInputCoinDenom!)
-        WUtils.DpOsmosisTokenName(outputCoinRateDenom, mOutputCoinDenom!)
-        WUtils.DpOsmosisTokenName(inputCoinExRateDenom, mInputCoinDenom!)
-        WUtils.DpOsmosisTokenName(outputCoinExRateDenom, mOutputCoinDenom!)
+        WUtils.DpOsmosisSymbol(inputCoinName, mInputCoinDenom!)
+        WUtils.DpOsmosisSymbol(outputCoinName, mOutputCoinDenom!)
+        WUtils.DpOsmosisSymbol(inputCoinRateDenom, mInputCoinDenom!)
+        WUtils.DpOsmosisSymbol(outputCoinRateDenom, mOutputCoinDenom!)
+        WUtils.DpOsmosisSymbol(inputCoinExRateDenom, mInputCoinDenom!)
+        WUtils.DpOsmosisSymbol(outputCoinExRateDenom, mOutputCoinDenom!)
         
         inputCoinRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, mInPutDecimal)
         inputCoinExRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, mInPutDecimal)

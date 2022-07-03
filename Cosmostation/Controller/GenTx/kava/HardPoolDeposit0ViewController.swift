@@ -36,7 +36,7 @@ class HardPoolDeposit0ViewController: BaseViewController, UITextFieldDelegate {
         dpDecimal = WUtils.getKavaCoinDecimal(hardPoolDenom)
         availableMax = BaseData.instance.getAvailableAmount_gRPC(hardPoolDenom)
         
-        WUtils.DpKavaTokenName(mCoinLabel, hardPoolDenom)
+        WUtils.DpKavaSymbol(mCoinLabel, hardPoolDenom)
         WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
         self.mCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardPoolDenom))!)
         self.loadingImg.isHidden = true

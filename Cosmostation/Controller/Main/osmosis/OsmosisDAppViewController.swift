@@ -82,7 +82,7 @@ extension WUtils {
         }
     }
     
-    static func DpOsmosisTokenName(_ label: UILabel, _ denom: String) {
+    static func DpOsmosisSymbol(_ label: UILabel, _ denom: String) {
         if (denom == OSMOSIS_MAIN_DENOM) {
             label.textColor = UIColor.init(named: "osmosis")
             label.text = "OSMO"
@@ -124,7 +124,7 @@ extension WUtils {
             
     }
     
-    static func getOsmosisTokenName(_ denom: String) -> String {
+    static func getOsmosisSymbol(_ denom: String) -> String {
         if (denom == OSMOSIS_MAIN_DENOM) {
             return "OSMO"
             

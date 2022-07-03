@@ -238,7 +238,7 @@ extension WUtils {
         return 6;
     }
     
-    static func getKavaTokenName(_ denom: String) -> String {
+    static func getKavaSymbol(_ denom: String) -> String {
         if (denom.starts(with: "ibc/")) {
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
                 if (ibcToken.auth == true) { return ibcToken.display_denom?.uppercased() ?? "Unknown IBC" }
@@ -278,8 +278,8 @@ extension WUtils {
         return denom.uppercased()
     }
     
-    static func DpKavaTokenName(_ label: UILabel, _ denom: String) {
-        label.text = getKavaTokenName(denom)
+    static func DpKavaSymbol(_ label: UILabel, _ denom: String) {
+        label.text = getKavaSymbol(denom)
         if (denom == KAVA_MAIN_DENOM) {
             label.textColor = UIColor.init(named: "kava")
             

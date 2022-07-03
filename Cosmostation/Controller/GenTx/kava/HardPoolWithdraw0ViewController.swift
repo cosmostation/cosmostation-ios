@@ -39,7 +39,7 @@ class HardPoolWithdraw0ViewController: BaseViewController, UITextFieldDelegate {
         availableMax = NSDecimalNumber.init(string: depositedCoin?.amount)
         print("availableMax ", availableMax)
         
-        WUtils.DpKavaTokenName(mCoinLabel, hardPoolDenom)
+        WUtils.DpKavaSymbol(mCoinLabel, hardPoolDenom)
         WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
         self.mCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardPoolDenom))!)
         self.loadingImg.isHidden = true

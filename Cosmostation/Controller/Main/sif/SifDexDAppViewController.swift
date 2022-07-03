@@ -127,7 +127,7 @@ class SifDexDAppViewController: BaseViewController {
 }
 
 extension WUtils {
-    static func getSifCoinName(_ denom: String) -> String {
+    static func getSifSymbol(_ denom: String) -> String {
         if (denom == SIF_MAIN_DENOM) {
             return "ROWAN"
             

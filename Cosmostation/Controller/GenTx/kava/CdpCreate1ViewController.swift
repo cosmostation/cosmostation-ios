@@ -485,10 +485,10 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
             WUtils.showCoinDp(mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel, chainType!)
             WUtils.showCoinDp(mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel, chainType!)
             
-            cDenomLabel.text = WUtils.getKavaTokenName(mCDenom)
-            cAvailableDenom.text = WUtils.getKavaTokenName(mCDenom)
-            pDenomLabel.text = WUtils.getKavaTokenName(mPDenom)
-            pAvailableDenom.text = WUtils.getKavaTokenName(mPDenom)
+            cDenomLabel.text = WUtils.getKavaSymbol(mCDenom)
+            cAvailableDenom.text = WUtils.getKavaSymbol(mCDenom)
+            pDenomLabel.text = WUtils.getKavaSymbol(mPDenom)
+            pAvailableDenom.text = WUtils.getKavaSymbol(mPDenom)
             cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
             pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             

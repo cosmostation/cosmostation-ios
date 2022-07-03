@@ -49,18 +49,18 @@ class CdpLisyMyCell: UITableViewCell {
             let riskRate = NSDecimalNumber.init(string: "100").subtracting(marketIdPrice.subtracting(liquidationPrices).multiplying(byPowerOf10: 2).dividing(by: marketIdPrice, withBehavior: WUtils.handler2Down))
             WUtils.showRiskRate(riskRate, riskScore, _rateIamg: riskRateImg)
             
-            liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getKavaTokenName(mCDenom))
+            liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getKavaSymbol(mCDenom))
             liquidationPrice.attributedText = WUtils.getDPRawDollor(liquidationPrices.stringValue, 4, liquidationPrice.font)
             liquidationPrice.textColor = WUtils.getRiskColor(riskRate)
         }
         
-        debtValueTitle.text = String(format: NSLocalizedString("debt_value_format", comment: ""), WUtils.getKavaTokenName(mPDenom))
+        debtValueTitle.text = String(format: NSLocalizedString("debt_value_format", comment: ""), WUtils.getKavaSymbol(mPDenom))
         debtValue.attributedText = WUtils.getDPRawDollor(myCdp.getDpEstimatedTotalDebtValue(mPDenom, collateralParam!).stringValue, 2, debtValue.font)
         
-        collateralValueTitle.text = String(format: NSLocalizedString("collateral_value_format", comment: ""), WUtils.getKavaTokenName(mCDenom))
+        collateralValueTitle.text = String(format: NSLocalizedString("collateral_value_format", comment: ""), WUtils.getKavaSymbol(mCDenom))
         collateralValue.attributedText = WUtils.getDPRawDollor(myCdp.getDpCollateralValue(mPDenom).stringValue, 2, collateralValue.font)
         
-        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaTokenName(mCDenom))
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaSymbol(mCDenom))
         currentPrice.attributedText = WUtils.getDPRawDollor(marketIdPrice.stringValue, 4, currentPrice.font)
         
         let url = KAVA_CDP_IMG_URL + collateralParam!.getMarketImgPath()! + ".png"

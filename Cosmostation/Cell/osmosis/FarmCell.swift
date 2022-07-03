@@ -29,14 +29,14 @@ class FarmCell: UITableViewCell {
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         
         poolIDLabel.text =  "#" + String(pool.id) + " EARNING"
-        poolPairLabel.text = WUtils.getOsmosisTokenName(coin0.denom) + " / " + WUtils.getOsmosisTokenName(coin1.denom)
+        poolPairLabel.text = WUtils.getOsmosisSymbol(coin0.denom) + " / " + WUtils.getOsmosisSymbol(coin1.denom)
         
         if let lpCoin = BaseData.instance.mMyBalances_gRPC.filter({ $0.denom == "gamm/pool/" + String(pool.id) }).first {
             availableAmountLabel.attributedText = WUtils.displayAmount2(lpCoin.amount, availableAmountLabel.font, 18, 6)
-            availableDenomLabel.text = WUtils.getOsmosisTokenName(lpCoin.denom)
+            availableDenomLabel.text = WUtils.getOsmosisSymbol(lpCoin.denom)
         } else {
             availableAmountLabel.attributedText = WUtils.displayAmount2("0", availableAmountLabel.font, 18, 6)
-            availableDenomLabel.text = WUtils.getOsmosisTokenName("gamm/pool/" + String(pool.id))
+            availableDenomLabel.text = WUtils.getOsmosisSymbol("gamm/pool/" + String(pool.id))
         }
         
         let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(coin0.denom), NSDecimalNumber.init(string: coin0.amount), WUtils.getOsmosisCoinDecimal(coin0.denom))

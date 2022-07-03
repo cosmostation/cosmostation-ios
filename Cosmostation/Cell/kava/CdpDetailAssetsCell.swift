@@ -47,12 +47,12 @@ class CdpDetailAssetsCell: UITableViewCell {
         let kAvailable = BaseData.instance.getAvailableAmount_gRPC(KAVA_MAIN_DENOM)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
         
-        collateralDenom.text = WUtils.getKavaTokenName(cDenom)
+        collateralDenom.text = WUtils.getKavaSymbol(cDenom)
         collateralAmount.attributedText = WUtils.displayAmount2(cAvailable.stringValue, collateralAmount.font!, cDpDecimal, cDpDecimal)
         let collateralValues = cAvailable.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
         collateralValue.attributedText = WUtils.getDPRawDollor(collateralValues.stringValue, 2, collateralValue.font)
 
-        principalDenom.text = WUtils.getKavaTokenName(pDenom)
+        principalDenom.text = WUtils.getKavaSymbol(pDenom)
         principalAmount.attributedText = WUtils.displayAmount2(pAvailable.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
         let principalValues = pAvailable.multiplying(byPowerOf10: -pDpDecimal)
         principalValue.attributedText = WUtils.getDPRawDollor(principalValues.stringValue, 2, principalValue.font)

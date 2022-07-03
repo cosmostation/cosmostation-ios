@@ -57,7 +57,7 @@ class SifMyPoolCell: UITableViewCell {
         let poolValueFormatted = "$ " + nf.string(from: poolValue)!
         WUtils.DpSifCoinImg(poolPairTokenImg, exteranlDenom)
         
-        poolPairLabel.text = "ROWAN : " + WUtils.getSifCoinName(exteranlDenom).uppercased()
+        poolPairLabel.text = "ROWAN : " + WUtils.getSifSymbol(exteranlDenom).uppercased()
         totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(poolValueFormatted, 2, totalLiquidityValueLabel.font)
         WUtils.DpSifCoinName(liquidity1DenomLabel, SIF_MAIN_DENOM)
         WUtils.DpSifCoinName(liquidity2DenomLabel, exteranlDenom)

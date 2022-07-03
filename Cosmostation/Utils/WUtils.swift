@@ -1639,6 +1639,70 @@ public class WUtils {
         }
         return result
     }
+    
+    static func getSymbol(_ chainConfig: ChainConfig?, _ denom: String?) -> String {
+        if (chainConfig == nil || denom?.isEmpty == true) { return "Unknown" }
+        if (chainConfig!.stakeDenom == denom) {
+            return chainConfig!.stakeSymbol
+        }
+        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
+               ibcToken.auth == true {
+                return ibcToken.display_denom?.uppercased() ?? "Unknown"
+            } else {
+                return "Unknown"
+            }
+        }
+        if (chainConfig!.chainType == .KAVA_MAIN) {
+            return getKavaSymbol(denom!)
+            
+        } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
+            return getOsmosisSymbol(denom!)
+            
+        } else if (chainConfig!.chainType == .SIF_MAIN) {
+            return getSifSymbol(denom!)
+            
+        } else if (chainConfig!.chainType == .CRESCENT_MAIN) {
+            if (denom == CRESCENT_BCRE_DENOM) { return "BCRE" }
+            else if (denom!.starts(with: "pool")) { return denom!.uppercased() }
+            
+        } else if (chainConfig!.chainType == .EMONEY_MAIN) {
+            if (denom == EMONEY_EUR_DENOM) { return denom!.uppercased() }
+            else if (denom == EMONEY_CHF_DENOM) { return denom!.uppercased() }
+            else if (denom == EMONEY_DKK_DENOM) { return denom!.uppercased() }
+            else if (denom == EMONEY_NOK_DENOM) { return denom!.uppercased() }
+            else if (denom == EMONEY_SEK_DENOM) { return denom!.uppercased() }
+            
+        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                return bridgeTokenInfo.origin_symbol ?? "Unknown"
+            }
+            
+        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                return bridgeTokenInfo.origin_symbol ?? "Unknown"
+            } else if (denom!.starts(with: "share")) { return denom!.uppercased() }
+            
+        } else if (chainConfig!.chainType == .NYX_MAIN) {
+            if (denom == NYX_NYM_DENOM) { return "NYM" }
+            
+        }
+        else if (chainConfig!.chainType == .BINANCE_MAIN) {
+            if let bnbTokenInfo = getBnbToken(denom!) {
+                return bnbTokenInfo.original_symbol.uppercased()
+            }
+            
+        } else if (chainConfig!.chainType == .OKEX_MAIN) {
+            if let okTokenInfo = getOkToken(denom!) {
+                return okTokenInfo.original_symbol!.uppercased()
+            }
+        }
+        return "Unknown"
+    }
+    
+    static func dpSymbol(_ chainConfig: ChainConfig?, _ denom: String?, _ denomLabel: UILabel?) {
+        
+    }
 
     static func getEstimateGasAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero

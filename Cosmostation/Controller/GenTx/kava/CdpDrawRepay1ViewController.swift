@@ -359,9 +359,9 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
             WUtils.showRiskRate2(beforeRiskRate, beforeSafeRate, beforeSafeTxt)
 
-            pDenomLabel.text = WUtils.getKavaTokenName(mPDenom)
-            pParticalDenom.text = WUtils.getKavaTokenName(mPDenom)
-            pAllDenom.text = WUtils.getKavaTokenName(mPDenom)
+            pDenomLabel.text = WUtils.getKavaSymbol(mPDenom)
+            pParticalDenom.text = WUtils.getKavaSymbol(mPDenom)
+            pAllDenom.text = WUtils.getKavaSymbol(mPDenom)
             
             self.pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             self.loadingImg.onStopAnimation()

@@ -54,9 +54,9 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         }
         WUtils.showCoinDp(pageHolderVC.mSwapInDenom!, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
         WUtils.DpOsmosisTokenImg(inputCoinImg, pageHolderVC.mSwapInDenom!)
-        WUtils.DpOsmosisTokenName(inputCoinName, pageHolderVC.mSwapInDenom!)
+        WUtils.DpOsmosisSymbol(inputCoinName, pageHolderVC.mSwapInDenom!)
         WUtils.DpOsmosisTokenImg(outputCoinImg, pageHolderVC.mSwapOutDenom!)
-        WUtils.DpOsmosisTokenName(outputCoinName, pageHolderVC.mSwapOutDenom!)
+        WUtils.DpOsmosisSymbol(outputCoinName, pageHolderVC.mSwapOutDenom!)
         
         dpInPutDecimal = WUtils.getOsmosisCoinDecimal(pageHolderVC.mSwapInDenom)
         dpOutPutDecimal = WUtils.getOsmosisCoinDecimal(pageHolderVC.mSwapOutDenom)

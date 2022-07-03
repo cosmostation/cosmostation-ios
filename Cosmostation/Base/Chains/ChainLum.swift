@@ -69,4 +69,8 @@ class ChainLum: ChainConfig {
     func getGasRates() -> Array<String> {
         return [gasRate0]
     }
+    
+    func getGasDefault() -> Int {
+        return 0
+    }
 }

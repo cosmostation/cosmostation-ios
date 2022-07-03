@@ -49,6 +49,7 @@ protocol ChainConfig {
     func getInfoLink1() -> String
     func getInfoLink2() -> String
     func getGasRates() -> Array<String>
+    func getGasDefault() -> Int
         
 }
 

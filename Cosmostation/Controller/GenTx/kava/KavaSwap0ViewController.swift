@@ -71,8 +71,8 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         swapRate = mOutputCoinAmount.dividing(by: mInputCoinAmount, withBehavior: WUtils.handler18)
         print("swapRate ", swapRate)
         
-        WUtils.DpKavaTokenName(inputCoinName, inputCoinDenom)
-        WUtils.DpKavaTokenName(outputCoinName, outputCoinDenom)
+        WUtils.DpKavaSymbol(inputCoinName, inputCoinDenom)
+        WUtils.DpKavaSymbol(outputCoinName, outputCoinDenom)
         inputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(inputCoinDenom))!)
         outputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(outputCoinDenom))!)
     }

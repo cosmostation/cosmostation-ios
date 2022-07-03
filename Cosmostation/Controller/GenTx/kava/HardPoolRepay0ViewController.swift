@@ -43,7 +43,7 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
         print("currentAvailable ", currentAvailable)
         print("currentBorrowed ", currentBorrowed)
         
-        WUtils.DpKavaTokenName(mCoinLabel, hardPoolDenom)
+        WUtils.DpKavaSymbol(mCoinLabel, hardPoolDenom)
         WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
         self.mCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardPoolDenom))!)
         self.loadingImg.isHidden = true

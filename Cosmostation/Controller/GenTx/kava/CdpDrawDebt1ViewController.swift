@@ -317,8 +317,8 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            pDenomLabel.text = WUtils.getKavaTokenName(mPDenom)
-            pAvailableDenom.text = WUtils.getKavaTokenName(mPDenom)
+            pDenomLabel.text = WUtils.getKavaSymbol(mPDenom)
+            pAvailableDenom.text = WUtils.getKavaSymbol(mPDenom)
             
             self.pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             self.loadingImg.onStopAnimation()

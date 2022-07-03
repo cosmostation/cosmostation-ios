@@ -102,12 +102,12 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         slippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "3"), swapFeeLabel.font)
         inputCoinAvailableAmountLabel.attributedText = WUtils.displayAmount2(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, inputCoinDecimal, inputCoinDecimal)
 
-        WUtils.DpKavaTokenName(inputCoinName, mInputCoinDenom)
-        WUtils.DpKavaTokenName(outputCoinName, mOutputCoinDenom)
-        WUtils.DpKavaTokenName(inputCoinRateDenom, mInputCoinDenom)
-        WUtils.DpKavaTokenName(outputCoinRateDenom, mOutputCoinDenom)
-        WUtils.DpKavaTokenName(inputCoinExRateDenom, mInputCoinDenom)
-        WUtils.DpKavaTokenName(outputCoinExRateDenom, mOutputCoinDenom)
+        WUtils.DpKavaSymbol(inputCoinName, mInputCoinDenom)
+        WUtils.DpKavaSymbol(outputCoinName, mOutputCoinDenom)
+        WUtils.DpKavaSymbol(inputCoinRateDenom, mInputCoinDenom)
+        WUtils.DpKavaSymbol(outputCoinRateDenom, mOutputCoinDenom)
+        WUtils.DpKavaSymbol(inputCoinExRateDenom, mInputCoinDenom)
+        WUtils.DpKavaSymbol(outputCoinExRateDenom, mOutputCoinDenom)
         inputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mInputCoinDenom))!)
         outputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mOutputCoinDenom))!)
 
