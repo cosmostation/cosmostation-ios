@@ -84,8 +84,8 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         
         WDP.dpSymbol(chainConfig, coin0Denom, inputCoin0Name)
         WDP.dpSymbol(chainConfig, coin1Denom, inputCoin1Name)
-        self.inputCoin0Img.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(coin0Denom))!)
-        self.inputCoin1Img.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(coin1Denom))!)
+        WDP.dpSymbolImg(chainConfig, coin0Denom, inputCoin0Img)
+        WDP.dpSymbolImg(chainConfig, coin1Denom, inputCoin1Img)
         WUtils.showCoinDp(coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel, chainType!)
         WUtils.showCoinDp(coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel, chainType!)
         

@@ -39,7 +39,7 @@ class HardPoolDeposit0ViewController: BaseViewController, UITextFieldDelegate {
         
         WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)
         WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
-        self.mCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardPoolDenom))!)
+        WDP.dpSymbolImg(chainConfig, hardPoolDenom, mCoinImg)
         self.loadingImg.isHidden = true
         
         let dp = "+ " + WUtils.decimalNumberToLocaleString(NSDecimalNumber(string: "0.1"), 1)

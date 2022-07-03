@@ -238,18 +238,6 @@ extension WUtils {
         return 6;
     }
     
-    static func getKavaCoinImg(_ denom: String) -> String {
-        if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = ibcToken.moniker {
-                return url
-            } else {
-                return KAVA_COIN_IMG_URL
-            }
-        } else {
-            return KAVA_COIN_IMG_URL + denom + ".png"
-        }
-    }
-    
     static func getKavaMarketId(_ denom: String) -> String {
 
         if denom.starts(with: "ibc/"),

@@ -408,7 +408,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, BaseData.instance.getAvailableAmount_gRPC(coin.denom), 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_HARD_DENOM) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(KAVA_HARD_DENOM))!)
+            WDP.dpSymbolImg(chainConfig, KAVA_HARD_DENOM, cell?.tokenImg)
             cell?.tokenSymbol.text = "HARD"
             cell?.tokenSymbol.textColor = UIColor(named: "kava_hard")
             cell?.tokenTitle.text = ""
@@ -419,7 +419,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_HARD_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_USDX_DENOM) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(KAVA_USDX_DENOM))!)
+            WDP.dpSymbolImg(chainConfig, KAVA_USDX_DENOM, cell?.tokenImg)
             cell?.tokenSymbol.text = KAVA_USDX_DENOM.uppercased()
             cell?.tokenSymbol.textColor = UIColor(named: "kava_usdx")
             cell?.tokenTitle.text = ""
@@ -430,7 +430,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_USDX_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_SWAP_DENOM) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(KAVA_SWAP_DENOM))!)
+            WDP.dpSymbolImg(chainConfig, KAVA_SWAP_DENOM, cell?.tokenImg)
             cell?.tokenSymbol.text = KAVA_SWAP_DENOM.uppercased()
             cell?.tokenSymbol.textColor = UIColor(named: "kava_swp")
             cell?.tokenTitle.text = ""
@@ -546,7 +546,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     //bind kava bep2 tokens with grpc
     func onBindKavaBep2Token_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        cell?.tokenImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(coin.denom))!)
+        WDP.dpSymbolImg(chainConfig, coin.denom, cell?.tokenImg)
         cell?.tokenSymbol.text = coin.denom.uppercased()
         cell?.tokenSymbol.textColor = UIColor(named: "_font05")
         cell?.tokenTitle.text = ""
@@ -576,7 +576,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func onBindEtcToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
         //bind "btch" for kava
         if (chainType == .KAVA_MAIN || coin.denom == "btch") {
-            cell?.tokenImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(coin.denom))!)
+            WDP.dpSymbolImg(chainConfig, coin.denom, cell?.tokenImg)
             cell?.tokenSymbol.text = coin.denom.uppercased()
             cell?.tokenSymbol.textColor = UIColor(named: "_font05")
             cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"

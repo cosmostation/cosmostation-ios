@@ -32,6 +32,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         super.viewDidLoad()
         account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         chainType = ChainFactory.getChainType(account!.account_base_chain)
+        chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.popupTableview.delegate = self
         self.popupTableview.dataSource = self
@@ -182,16 +183,16 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
                 
             } else if (chainType! == ChainType.KAVA_MAIN) {
                 if (toSendCoin == TOKEN_HTLC_KAVA_BNB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
+                    WDP.dpSymbolImg(chainConfig, toSendCoin, cell!.coinImg)
                     cell!.coinTitle.text = "BNB"
                 } else if (toSendCoin == TOKEN_HTLC_KAVA_BTCB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
+                    WDP.dpSymbolImg(chainConfig, toSendCoin, cell!.coinImg)
                     cell!.coinTitle.text = "BTC"
                 } else if (toSendCoin == TOKEN_HTLC_KAVA_XRPB) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
+                    WDP.dpSymbolImg(chainConfig, toSendCoin, cell!.coinImg)
                     cell!.coinTitle.text = "XRP"
                 } else if (toSendCoin == TOKEN_HTLC_KAVA_BUSD) {
-                    cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSendCoin))!)
+                    WDP.dpSymbolImg(chainConfig, toSendCoin, cell!.coinImg)
                     cell!.coinTitle.text = "BUSD"
                 }
                 
@@ -247,18 +248,16 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_KAVA_SWAP_IN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
-            let chainConfig = ChainKava.init(.KAVA_MAIN)
             let swapInDenom = toCoinList[indexPath.row]
-            cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapInDenom))!)
-            cell!.coinTitle.text = WUtils.getSymbol(chainConfig, swapInDenom)
+            WDP.dpSymbolImg(chainConfig, swapInDenom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, swapInDenom, cell!.coinTitle)
             return cell!
             
         } else if (type == SELECT_POPUP_KAVA_SWAP_OUT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
-            let chainConfig = ChainKava.init(.KAVA_MAIN)
             let swapOutDenom = toCoinList[indexPath.row]
-            cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapOutDenom))!)
-            cell!.coinTitle.text = WUtils.getSymbol(chainConfig, swapOutDenom)
+            WDP.dpSymbolImg(chainConfig, swapOutDenom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, swapOutDenom, cell!.coinTitle)
             return cell!
             
         } else if (type == SELECT_POPUP_IBC_CHAIN) {

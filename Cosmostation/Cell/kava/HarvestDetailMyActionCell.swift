@@ -57,8 +57,8 @@ class HarvestDetailMyActionCell: UITableViewCell {
                                 _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?, _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) {
         if (hardParam == nil) { return }
         let chainConfig = ChainKava.init(.KAVA_MAIN)
-
-        depositImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardMoneyMarketDenom))!)
+        
+        WDP.dpSymbolImg(chainConfig, hardMoneyMarketDenom, depositImg)
         WDP.dpSymbol(chainConfig, hardMoneyMarketDenom, depositSymbol)
         
         let decimal = WUtils.getKavaCoinDecimal(hardMoneyMarketDenom)

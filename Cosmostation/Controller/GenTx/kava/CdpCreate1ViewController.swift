@@ -486,12 +486,13 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
             WUtils.showCoinDp(mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel, chainType!)
             WUtils.showCoinDp(mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel, chainType!)
             
-            cDenomLabel.text = WUtils.getSymbol(chainConfig, mCDenom)
-            cAvailableDenom.text = WUtils.getSymbol(chainConfig, mCDenom)
-            pDenomLabel.text = WUtils.getSymbol(chainConfig, mPDenom)
-            pAvailableDenom.text = WUtils.getSymbol(chainConfig, mPDenom)
-            cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
-            pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
+            WDP.dpSymbol(chainConfig, mCDenom, cDenomLabel)
+            WDP.dpSymbol(chainConfig, mCDenom, cAvailableDenom)
+            WDP.dpSymbol(chainConfig, mPDenom, pDenomLabel)
+            WDP.dpSymbol(chainConfig, mPDenom, pAvailableDenom)
+            
+            WDP.dpSymbolImg(chainConfig, mCDenom, cDenomImg)
+            WDP.dpSymbolImg(chainConfig, mPDenom, pDenomImg)
             
             onUpdateView()
             self.loadingImg.onStopAnimation()

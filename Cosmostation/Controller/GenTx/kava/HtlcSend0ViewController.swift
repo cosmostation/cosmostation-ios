@@ -98,19 +98,20 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
             sendCoinAvailable.attributedText = WUtils.displayAmount2(availableAmount.stringValue, sendCoinAvailable.font, 0, 8)
             
         } else if (pageHolderVC.chainType == ChainType.KAVA_MAIN && kavaSwapParam2 != nil && kavaSwapSupply2 != nil) {
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
             RelayerMaxLayer.isHidden = true
             RelayerReaminLayer.isHidden = true
             if (toSwapDenom == TOKEN_HTLC_KAVA_BNB) {
                 sendCoinImg.image = UIImage(named: "bnbonKavaImg")
                 self.onSetDpDenom("BNB")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_BTCB) {
-                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
+                WDP.dpSymbolImg(chainConfig, toSwapDenom, sendCoinImg)
                 self.onSetDpDenom("BTC")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_XRPB) {
-                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
+                WDP.dpSymbolImg(chainConfig, toSwapDenom, sendCoinImg)
                 self.onSetDpDenom("XRP")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_BUSD) {
-                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
+                WDP.dpSymbolImg(chainConfig, toSwapDenom, sendCoinImg)
                 self.onSetDpDenom("BUSD")
             }
             availableAmount = BaseData.instance.getAvailableAmount_gRPC(toSwapDenom!)

@@ -109,8 +109,9 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinRateDenom)
         WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinExRateDenom)
         WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinExRateDenom)
-        inputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mInputCoinDenom))!)
-        outputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mOutputCoinDenom))!)
+        
+        WDP.dpSymbolImg(chainConfig, mInputCoinDenom, inputCoinImg)
+        WDP.dpSymbolImg(chainConfig, mOutputCoinDenom, outputCoinImg)
 
         var lpInputAmount = NSDecimalNumber.zero
         var lpOutputAmount = NSDecimalNumber.zero

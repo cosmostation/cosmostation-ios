@@ -48,12 +48,12 @@ class CdpDetailAssetsCell: UITableViewCell {
         let kAvailable = BaseData.instance.getAvailableAmount_gRPC(KAVA_MAIN_DENOM)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
         
-        collateralDenom.text = WUtils.getSymbol(chainConfig, cDenom)
+        WDP.dpSymbol(chainConfig, cDenom, collateralDenom)
         collateralAmount.attributedText = WUtils.displayAmount2(cAvailable.stringValue, collateralAmount.font!, cDpDecimal, cDpDecimal)
         let collateralValues = cAvailable.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
         collateralValue.attributedText = WUtils.getDPRawDollor(collateralValues.stringValue, 2, collateralValue.font)
 
-        principalDenom.text = WUtils.getSymbol(chainConfig, pDenom)
+        WDP.dpSymbol(chainConfig, pDenom, principalDenom)
         principalAmount.attributedText = WUtils.displayAmount2(pAvailable.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
         let principalValues = pAvailable.multiplying(byPowerOf10: -pDpDecimal)
         principalValue.attributedText = WUtils.getDPRawDollor(principalValues.stringValue, 2, principalValue.font)
@@ -62,8 +62,8 @@ class CdpDetailAssetsCell: UITableViewCell {
         let kavaValues = kAvailable.multiplying(byPowerOf10: -kDpDecimal).multiplying(by: WUtils.perUsdValue(KAVA_MAIN_DENOM)!, withBehavior: WUtils.handler2Down)
         kavaValue.attributedText = WUtils.getDPRawDollor(kavaValues.stringValue, 2, kavaValue.font)
         
-        collateralImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(cDenom))!)
-        principalImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(pDenom))!)
+        WDP.dpSymbolImg(chainConfig, cDenom, collateralImg)
+        WDP.dpSymbolImg(chainConfig, pDenom, principalImg)
     }
     
 }

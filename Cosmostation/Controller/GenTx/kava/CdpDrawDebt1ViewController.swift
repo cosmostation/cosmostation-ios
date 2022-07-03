@@ -318,10 +318,10 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            pDenomLabel.text = WUtils.getSymbol(chainConfig, mPDenom)
-            pAvailableDenom.text = WUtils.getSymbol(chainConfig, mPDenom)
+            WDP.dpSymbol(chainConfig, mPDenom, pDenomLabel)
+            WDP.dpSymbol(chainConfig, mPDenom, pAvailableDenom)
+            WDP.dpSymbolImg(chainConfig, mPDenom, pDenomImg)
             
-            self.pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             self.loadingImg.onStopAnimation()
             self.loadingImg.isHidden = true
         }

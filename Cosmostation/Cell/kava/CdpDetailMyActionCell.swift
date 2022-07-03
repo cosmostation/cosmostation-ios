@@ -115,7 +115,7 @@ class CdpDetailMyActionCell: UITableViewCell {
         let pDpDecimal = WUtils.getKavaCoinDecimal(pDenom)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
         
-        collateralDenom.text = WUtils.getSymbol(chainConfig, cDenom)
+       WDP.dpSymbol(chainConfig, cDenom, collateralDenom)
         let selfDepositValue = selfDepositAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
         collateralSelfAmount.attributedText = WUtils.displayAmount2(selfDepositAmount.stringValue, collateralSelfAmount.font!, cDpDecimal, cDpDecimal)
         collateralSelfValue.attributedText = WUtils.getDPRawDollor(selfDepositValue.stringValue, 2, collateralSelfValue.font)
@@ -134,7 +134,7 @@ class CdpDetailMyActionCell: UITableViewCell {
         depositBtn.setTitle(String(format: NSLocalizedString("str_deposit", comment: ""), WUtils.getSymbol(chainConfig, cDenom)), for: .normal)
         withdrawBtn.setTitle(String(format: NSLocalizedString("str_withdraw", comment: ""), WUtils.getSymbol(chainConfig, cDenom)), for: .normal)
 
-        principalDenom.text = WUtils.getSymbol(chainConfig, pDenom)
+        WDP.dpSymbol(chainConfig, pDenom, principalDenom)
         let rawPricipalAmount = myCdp!.getRawPrincipalAmount()
         principalAmount.attributedText = WUtils.displayAmount2(rawPricipalAmount.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
         principalValue.attributedText = WUtils.getDPRawDollor(rawPricipalAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, principalValue.font)
@@ -147,8 +147,8 @@ class CdpDetailMyActionCell: UITableViewCell {
         remainingAmount.attributedText = WUtils.displayAmount2(moreDebtAmount.stringValue, remainingAmount.font!, pDpDecimal, pDpDecimal)
         remainingValue.attributedText = WUtils.getDPRawDollor(moreDebtAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, remainingValue.font)
 
-        collateralImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(cDenom))!)
-        principalImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(pDenom))!)
+        WDP.dpSymbolImg(chainConfig, cDenom, collateralImg)
+        WDP.dpSymbolImg(chainConfig, pDenom, principalImg)
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
