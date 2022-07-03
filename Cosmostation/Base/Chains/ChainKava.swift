@@ -82,3 +82,7 @@ let KAVA_MAIN_DENOM = "ukava"
 let KAVA_HARD_DENOM = "hard"
 let KAVA_USDX_DENOM = "usdx"
 let KAVA_SWAP_DENOM = "swp"
+
+let KAVA_CDP_IMG_URL        = ResourceBase + "kava/cdp/";
+let KAVA_HARD_POOL_IMG_URL  = ResourceBase + "kava/hard/";
+let KAVA_COIN_IMG_URL       = ResourceBase + "coin_image/kava/";

@@ -75,3 +75,5 @@ class ChainSif: ChainConfig {
 }
 
 let SIF_MAIN_DENOM = "rowan"
+
+let SIF_COIN_IMG_URL = ResourceBase + "sif/";

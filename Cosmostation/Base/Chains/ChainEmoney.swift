@@ -83,3 +83,5 @@ let EMONEY_CHF_DENOM = "echf"
 let EMONEY_DKK_DENOM = "edkk"
 let EMONEY_NOK_DENOM = "enok"
 let EMONEY_SEK_DENOM = "esek"
+
+let EMONEY_COIN_IMG_URL = ResourceBase + "coin_image/emoney/";

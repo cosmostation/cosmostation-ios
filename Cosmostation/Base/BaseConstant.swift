@@ -47,17 +47,10 @@ let CSS_PUSH_UPDATE                     = CSS_URL + "v1/account/update";
 let CSS_MOON_PAY                        = CSS_URL + "v1/sign/moonpay";
 
 
-let CHAIN_IMG_URL                       = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/chains/logo/"
-
-
-let KAVA_CDP_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/cdp/";
-let KAVA_HARD_POOL_IMG_URL              = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/kava/hard/";
-let BINANCE_TOKEN_IMG_URL               = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/binance/"
-let KAVA_COIN_IMG_URL                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/kava/";
-let OKEX_COIN_IMG_URL                   = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/okex/";
-let SIF_COIN_IMG_URL                    = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/sif/";
-let EMONEY_COIN_IMG_URL                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/emoney/";
-let BRIDGE_COIN_IMG_URL                 = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/assets/images/ethereum/";
+let CHAIN_IMG_URL                       = ResourceBase + "chains/logo/"
+let BINANCE_TOKEN_IMG_URL               = ResourceBase + "coin_image/binance/";
+let OKEX_COIN_IMG_URL                   = ResourceBase + "coin_image/okex/";
+let BRIDGE_COIN_IMG_URL                 = ResourceBase + "assets/images/ethereum/";
 
 let DB_VERSION                      = 2
 
@@ -883,6 +876,7 @@ let ICON_2002                   = "ICON_2002";
 
 
 let MintscanUrl = "https://www.mintscan.io/"
-let MonikerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/moniker/"
-let RelayerUrl = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/relayer/"
+let ResourceBase = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/"
+let MonikerUrl =  ResourceBase + "moniker/"
+let RelayerUrl = ResourceBase + "relayer/"
 let CoingeckoUrl = "https://www.coingecko.com/en/coins/"
