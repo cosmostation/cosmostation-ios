@@ -108,13 +108,14 @@ class CdpDetailMyActionCell: UITableViewCell {
     
     func onBindCdpDetailAction(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam?, _ myCdp: Kava_Cdp_V1beta1_CDPResponse?, _ selfDepositAmount: NSDecimalNumber, _ debtAmount: NSDecimalNumber) {
         if (collateralParam == nil || myCdp == nil) { return }
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         let cDenom = collateralParam!.getcDenom()!
         let pDenom = collateralParam!.getpDenom()!
         let cDpDecimal = WUtils.getKavaCoinDecimal(cDenom)
         let pDpDecimal = WUtils.getKavaCoinDecimal(pDenom)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
         
-        collateralDenom.text = WUtils.getKavaSymbol(cDenom)
+        collateralDenom.text = WUtils.getSymbol(chainConfig, cDenom)
         let selfDepositValue = selfDepositAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
         collateralSelfAmount.attributedText = WUtils.displayAmount2(selfDepositAmount.stringValue, collateralSelfAmount.font!, cDpDecimal, cDpDecimal)
         collateralSelfValue.attributedText = WUtils.getDPRawDollor(selfDepositValue.stringValue, 2, collateralSelfValue.font)
@@ -124,16 +125,16 @@ class CdpDetailMyActionCell: UITableViewCell {
         collateralTotalAmount.attributedText = WUtils.displayAmount2(totalDepositAmount.stringValue, collateralTotalAmount.font!, cDpDecimal, cDpDecimal)
         collateralTotalValue.attributedText = WUtils.getDPRawDollor(totalDepositValue.stringValue, 2, collateralTotalValue.font)
 
-        collateralWithdrawableTitle.text = String(format: NSLocalizedString("withdrawable_format", comment: ""), WUtils.getKavaSymbol(cDenom))
+        collateralWithdrawableTitle.text = String(format: NSLocalizedString("withdrawable_format", comment: ""), WUtils.getSymbol(chainConfig, cDenom))
         let maxWithdrawableAmount = myCdp!.getWithdrawableAmount(cDenom, pDenom, collateralParam!, oraclePrice, selfDepositAmount)
         let maxWithdrawableValue = maxWithdrawableAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
         collateralWithdrawableAmount.attributedText = WUtils.displayAmount2(maxWithdrawableAmount.stringValue, collateralWithdrawableAmount.font!, cDpDecimal, cDpDecimal)
         collateralWithdrawableValue.attributedText = WUtils.getDPRawDollor(maxWithdrawableValue.stringValue, 2, collateralWithdrawableValue.font)
 
-        depositBtn.setTitle(String(format: NSLocalizedString("str_deposit", comment: ""), WUtils.getKavaSymbol(cDenom)), for: .normal)
-        withdrawBtn.setTitle(String(format: NSLocalizedString("str_withdraw", comment: ""), WUtils.getKavaSymbol(cDenom)), for: .normal)
+        depositBtn.setTitle(String(format: NSLocalizedString("str_deposit", comment: ""), WUtils.getSymbol(chainConfig, cDenom)), for: .normal)
+        withdrawBtn.setTitle(String(format: NSLocalizedString("str_withdraw", comment: ""), WUtils.getSymbol(chainConfig, cDenom)), for: .normal)
 
-        principalDenom.text = WUtils.getKavaSymbol(pDenom)
+        principalDenom.text = WUtils.getSymbol(chainConfig, pDenom)
         let rawPricipalAmount = myCdp!.getRawPrincipalAmount()
         principalAmount.attributedText = WUtils.displayAmount2(rawPricipalAmount.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
         principalValue.attributedText = WUtils.getDPRawDollor(rawPricipalAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, principalValue.font)

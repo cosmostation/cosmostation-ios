@@ -75,3 +75,6 @@ class ChainOsmosis: ChainConfig {
         return 0
     }
 }
+
+let OSMOSIS_MAIN_DENOM = "uosmo"
+let OSMOSIS_ION_DENOM = "uion"

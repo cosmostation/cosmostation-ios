@@ -38,6 +38,7 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         inputTextFiled.delegate = self
@@ -71,8 +72,8 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         swapRate = mOutputCoinAmount.dividing(by: mInputCoinAmount, withBehavior: WUtils.handler18)
         print("swapRate ", swapRate)
         
-        WUtils.DpKavaSymbol(inputCoinName, inputCoinDenom)
-        WUtils.DpKavaSymbol(outputCoinName, outputCoinDenom)
+        WDP.dpSymbol(chainConfig, inputCoinDenom, inputCoinName)
+        WDP.dpSymbol(chainConfig, outputCoinDenom, outputCoinName)
         inputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(inputCoinDenom))!)
         outputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(outputCoinDenom))!)
     }

@@ -56,8 +56,10 @@ class HarvestDetailMyActionCell: UITableViewCell {
     func onBindHardDetailAction(_ hardMoneyMarketDenom: String, _ hardParam: Kava_Hard_V1beta1_Params?,
                                 _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?, _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) {
         if (hardParam == nil) { return }
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+
         depositImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardMoneyMarketDenom))!)
-        WUtils.DpKavaSymbol(depositSymbol, hardMoneyMarketDenom)
+        WDP.dpSymbol(chainConfig, hardMoneyMarketDenom, depositSymbol)
         
         let decimal = WUtils.getKavaCoinDecimal(hardMoneyMarketDenom)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(hardParam?.getSpotMarketId(hardMoneyMarketDenom))

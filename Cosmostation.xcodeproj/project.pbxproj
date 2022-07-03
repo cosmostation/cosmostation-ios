@@ -2638,6 +2638,8 @@
 		E1D279632297B40D00C49B2D /* RedelegateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D279612297B40D00C49B2D /* RedelegateCell.swift */; };
 		E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
 		E1D4EA592871584B005C1ECF /* FeeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA572871584B005C1ECF /* FeeInfo.swift */; };
+		E1D4EA5B2871BCDE005C1ECF /* WDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA5A2871BCDE005C1ECF /* WDP.swift */; };
+		E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D4EA5A2871BCDE005C1ECF /* WDP.swift */; };
 		E1E15FC22253748B00A10C7B /* DashedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E15FC12253748B00A10C7B /* DashedButton.swift */; };
 		E1E251DF22A66FC30008F0DB /* OtherValidatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E251DD22A66FC30008F0DB /* OtherValidatorCell.swift */; };
 		E1E251E122A671180008F0DB /* OtherValidatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1E251E322A671180008F0DB /* OtherValidatorCell.xib */; };
@@ -4012,6 +4014,7 @@
 		E1CF42EF23598AFE00907F45 /* ManageChainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageChainCell.xib; sourceTree = "<group>"; };
 		E1D279612297B40D00C49B2D /* RedelegateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedelegateCell.swift; sourceTree = "<group>"; };
 		E1D4EA572871584B005C1ECF /* FeeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeInfo.swift; sourceTree = "<group>"; };
+		E1D4EA5A2871BCDE005C1ECF /* WDP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WDP.swift; sourceTree = "<group>"; };
 		E1E15FC12253748B00A10C7B /* DashedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashedButton.swift; sourceTree = "<group>"; };
 		E1E251DC22A66B860008F0DB /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/MyValidatorCell.strings; sourceTree = "<group>"; };
 		E1E251DD22A66FC30008F0DB /* OtherValidatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherValidatorCell.swift; sourceTree = "<group>"; };
@@ -5764,6 +5767,7 @@
 				E16D9B1C2248E6A60019B7BB /* WKey.swift */,
 				285ADF0C272EE35F0023651F /* CKey.swift */,
 				E1A82DE722448E940097CAEE /* WUtils.swift */,
+				E1D4EA5A2871BCDE005C1ECF /* WDP.swift */,
 				E16FACB02361ADFA00372052 /* Bytes.swift */,
 				E17748D82282C612003D8CD1 /* Cosmostation-Bridging-Header.h */,
 				28D765A1271585FA00730F47 /* StarnameAssets.swift */,
@@ -7499,6 +7503,7 @@
 				18FFB5A6281AF533004E65BB /* EarnUnbondedCell.swift in Sources */,
 				18FFB5A7281AF533004E65BB /* SendContract0ViewController.swift in Sources */,
 				1817CB07283E2CE500523713 /* cosmos_bank_v1beta1_genesis.pb.swift in Sources */,
+				E1D4EA5C2871BCDE005C1ECF /* WDP.swift in Sources */,
 				0451FC7D282A3AC700214FDA /* ChainCryptoorg.swift in Sources */,
 				18FFB5AA281AF533004E65BB /* ManageAccountAddCell.swift in Sources */,
 				1817CACC283E2CE500523713 /* tendermint_farming_v1beta1_query.pb.swift in Sources */,
@@ -8277,6 +8282,7 @@
 				28592E772580616D00C31460 /* BaseNetWork.swift in Sources */,
 				2889FD872603485200CA9896 /* TxIncentiveMintingCell.swift in Sources */,
 				2868559724989AB80099D18F /* CdpWarnPopup.swift in Sources */,
+				E1D4EA5B2871BCDE005C1ECF /* WDP.swift in Sources */,
 				04D1385B2691E26700D6AF9F /* TxExitPoolCell.swift in Sources */,
 				048C831C27BF572800270528 /* evmos_claims_v1_query.grpc.swift in Sources */,
 				048C831227BF572800270528 /* ethermint_feemarket_v1_feemarket.pb.swift in Sources */,

@@ -68,6 +68,7 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -485,10 +486,10 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
             WUtils.showCoinDp(mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel, chainType!)
             WUtils.showCoinDp(mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel, chainType!)
             
-            cDenomLabel.text = WUtils.getKavaSymbol(mCDenom)
-            cAvailableDenom.text = WUtils.getKavaSymbol(mCDenom)
-            pDenomLabel.text = WUtils.getKavaSymbol(mPDenom)
-            pAvailableDenom.text = WUtils.getKavaSymbol(mPDenom)
+            cDenomLabel.text = WUtils.getSymbol(chainConfig, mCDenom)
+            cAvailableDenom.text = WUtils.getSymbol(chainConfig, mCDenom)
+            pDenomLabel.text = WUtils.getSymbol(chainConfig, mPDenom)
+            pAvailableDenom.text = WUtils.getSymbol(chainConfig, mPDenom)
             cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
             pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             

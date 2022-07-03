@@ -73,3 +73,5 @@ class ChainNyx: ChainConfig {
         return 0
     }
 }
+
+let NYX_NYM_DENOM = "unym"

@@ -76,3 +76,9 @@ class ChainKava: ChainConfig {
         return 1
     }
 }
+
+
+let KAVA_MAIN_DENOM = "ukava"
+let KAVA_HARD_DENOM = "hard"
+let KAVA_USDX_DENOM = "usdx"
+let KAVA_SWAP_DENOM = "swp"

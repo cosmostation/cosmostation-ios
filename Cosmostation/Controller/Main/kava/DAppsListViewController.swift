@@ -238,65 +238,6 @@ extension WUtils {
         return 6;
     }
     
-    static func getKavaSymbol(_ denom: String) -> String {
-        if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-                if (ibcToken.auth == true) { return ibcToken.display_denom?.uppercased() ?? "Unknown IBC" }
-                else { return "Unknown" }
-            } else {
-                return "Unknown" 
-            }
-            
-        } else if (denom == KAVA_MAIN_DENOM) {
-            return "KAVA"
-            
-        } else if (denom == KAVA_HARD_DENOM) {
-            return "HARD"
-            
-        } else if (denom == KAVA_USDX_DENOM) {
-            return "USDX"
-            
-        } else if (denom == KAVA_SWAP_DENOM) {
-            return "SWP"
-            
-        } else if (denom == TOKEN_HTLC_KAVA_BNB) {
-            return "BNB"
-            
-        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
-            return "XRPB"
-            
-        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
-            return "BUSD"
-            
-        } else if (denom == TOKEN_HTLC_KAVA_BTCB) {
-            return "BTCB"
-            
-        } else if (denom == "btch") {
-            return "BTCH"
-            
-        }
-        return denom.uppercased()
-    }
-    
-    static func DpKavaSymbol(_ label: UILabel, _ denom: String) {
-        label.text = getKavaSymbol(denom)
-        if (denom == KAVA_MAIN_DENOM) {
-            label.textColor = UIColor.init(named: "kava")
-            
-        } else if (denom == KAVA_HARD_DENOM) {
-            label.textColor = UIColor.init(named: "kava_hard")
-            
-        } else if (denom == KAVA_USDX_DENOM) {
-            label.textColor = UIColor.init(named: "kava_usdx")
-            
-        } else if (denom == KAVA_SWAP_DENOM) {
-            label.textColor = UIColor.init(named: "kava_swp")
-            
-        } else {
-            label.textColor = UIColor(named: "_font05")
-        }
-    }
-    
     static func getKavaCoinImg(_ denom: String) -> String {
         if (denom.starts(with: "ibc/")) {
             if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = ibcToken.moniker {

@@ -75,3 +75,11 @@ class ChainEmoney: ChainConfig {
         return 1
     }
 }
+
+
+let EMONEY_MAIN_DENOM = "ungm"
+let EMONEY_EUR_DENOM = "eeur"
+let EMONEY_CHF_DENOM = "echf"
+let EMONEY_DKK_DENOM = "edkk"
+let EMONEY_NOK_DENOM = "enok"
+let EMONEY_SEK_DENOM = "esek"

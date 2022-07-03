@@ -247,16 +247,18 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_KAVA_SWAP_IN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
             let swapInDenom = toCoinList[indexPath.row]
             cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapInDenom))!)
-            cell!.coinTitle.text = WUtils.getKavaSymbol(swapInDenom)
+            cell!.coinTitle.text = WUtils.getSymbol(chainConfig, swapInDenom)
             return cell!
             
         } else if (type == SELECT_POPUP_KAVA_SWAP_OUT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
             let swapOutDenom = toCoinList[indexPath.row]
             cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapOutDenom))!)
-            cell!.coinTitle.text = WUtils.getKavaSymbol(swapOutDenom)
+            cell!.coinTitle.text = WUtils.getSymbol(chainConfig, swapOutDenom)
             return cell!
             
         } else if (type == SELECT_POPUP_IBC_CHAIN) {
@@ -327,7 +329,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let feeDenom = feeData[indexPath.row].denom
 //            cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapOutDenom))!)
-//            cell!.coinTitle.text = WUtils.getKavaSymbol(swapOutDenom)
+//            cell!.coinTitle.text = WUtils.getSymbol(chainConfig, swapOutDenom)
             cell!.coinTitle.text = feeDenom
             return cell!
             

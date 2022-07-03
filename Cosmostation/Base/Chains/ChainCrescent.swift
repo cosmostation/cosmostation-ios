@@ -75,3 +75,5 @@ class ChainCrescent: ChainConfig {
         return 1
     }
 }
+
+let CRESCENT_BCRE_DENOM = "ubcre"

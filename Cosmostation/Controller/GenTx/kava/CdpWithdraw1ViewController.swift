@@ -65,6 +65,7 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -291,8 +292,8 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            cDenomLabel.text = WUtils.getKavaSymbol(mCDenom)
-            cAvailableDenom.text = WUtils.getKavaSymbol(mCDenom)
+            cDenomLabel.text = WUtils.getSymbol(chainConfig, mCDenom)
+            cAvailableDenom.text = WUtils.getSymbol(chainConfig, mCDenom)
             
             self.cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
             self.loadingImg.onStopAnimation()

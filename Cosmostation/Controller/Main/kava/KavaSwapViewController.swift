@@ -49,6 +49,7 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
         
         self.inputCoinLayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickInput (_:))))
@@ -102,12 +103,12 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         slippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "3"), swapFeeLabel.font)
         inputCoinAvailableAmountLabel.attributedText = WUtils.displayAmount2(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, inputCoinDecimal, inputCoinDecimal)
 
-        WUtils.DpKavaSymbol(inputCoinName, mInputCoinDenom)
-        WUtils.DpKavaSymbol(outputCoinName, mOutputCoinDenom)
-        WUtils.DpKavaSymbol(inputCoinRateDenom, mInputCoinDenom)
-        WUtils.DpKavaSymbol(outputCoinRateDenom, mOutputCoinDenom)
-        WUtils.DpKavaSymbol(inputCoinExRateDenom, mInputCoinDenom)
-        WUtils.DpKavaSymbol(outputCoinExRateDenom, mOutputCoinDenom)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinName)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinName)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinExRateDenom)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinExRateDenom)
         inputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mInputCoinDenom))!)
         outputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mOutputCoinDenom))!)
 

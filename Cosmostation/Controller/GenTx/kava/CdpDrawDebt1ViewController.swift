@@ -60,6 +60,7 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -317,8 +318,8 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            pDenomLabel.text = WUtils.getKavaSymbol(mPDenom)
-            pAvailableDenom.text = WUtils.getKavaSymbol(mPDenom)
+            pDenomLabel.text = WUtils.getSymbol(chainConfig, mPDenom)
+            pAvailableDenom.text = WUtils.getSymbol(chainConfig, mPDenom)
             
             self.pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             self.loadingImg.onStopAnimation()

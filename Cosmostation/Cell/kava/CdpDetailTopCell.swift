@@ -51,6 +51,7 @@ class CdpDetailTopCell: UITableViewCell {
     
     func onBindCdpDetailTop(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam?, _ debtAmount: NSDecimalNumber) {
         if (collateralParam == nil) { return }
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         let cDenom = collateralParam!.getcDenom()!
         let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
         
@@ -60,7 +61,7 @@ class CdpDetailTopCell: UITableViewCell {
         stabilityFee.attributedText = WUtils.displayPercent(collateralParam!.getDpStabilityFee(), stabilityFee.font)
         liquidationPenalty.attributedText = WUtils.displayPercent(collateralParam!.getDpLiquidationPenalty(), liquidationPenalty.font)
 
-        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaSymbol(cDenom))
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getSymbol(chainConfig, cDenom))
         currentPrice.attributedText = WUtils.getDPRawDollor(oraclePrice.stringValue, 4, currentPrice.font)
 
         let kavaCdpParams_gRPC = BaseData.instance.mKavaCdpParams_gRPC

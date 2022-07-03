@@ -75,6 +75,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -359,9 +360,9 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
             WUtils.showRiskRate2(beforeRiskRate, beforeSafeRate, beforeSafeTxt)
 
-            pDenomLabel.text = WUtils.getKavaSymbol(mPDenom)
-            pParticalDenom.text = WUtils.getKavaSymbol(mPDenom)
-            pAllDenom.text = WUtils.getKavaSymbol(mPDenom)
+            pDenomLabel.text = WUtils.getSymbol(chainConfig, mPDenom)
+            pParticalDenom.text = WUtils.getSymbol(chainConfig, mPDenom)
+            pAllDenom.text = WUtils.getSymbol(chainConfig, mPDenom)
             
             self.pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             self.loadingImg.onStopAnimation()

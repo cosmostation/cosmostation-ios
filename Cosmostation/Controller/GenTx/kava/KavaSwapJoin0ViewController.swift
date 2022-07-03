@@ -42,6 +42,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         input0TextFiled.delegate = self
@@ -81,8 +82,8 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
             available1MaxAmount = available1MaxAmount.subtracting(txFeeAmount)
         }
         
-        WUtils.DpKavaSymbol(inputCoin0Name, coin0Denom)
-        WUtils.DpKavaSymbol(inputCoin1Name, coin1Denom)
+        WDP.dpSymbol(chainConfig, coin0Denom, inputCoin0Name)
+        WDP.dpSymbol(chainConfig, coin1Denom, inputCoin1Name)
         self.inputCoin0Img.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(coin0Denom))!)
         self.inputCoin1Img.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(coin1Denom))!)
         WUtils.showCoinDp(coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel, chainType!)

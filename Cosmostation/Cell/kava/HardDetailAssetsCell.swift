@@ -25,8 +25,9 @@ class HardDetailAssetsCell: UITableViewCell {
     }
     
     func onBindHardDetailAsset(_ hardMoneyMarketDenom: String, _ hardParam: Kava_Hard_V1beta1_Params) {
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         marketImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardMoneyMarketDenom))!)
-        marketDenom.text = WUtils.getKavaSymbol(hardMoneyMarketDenom)
+        marketDenom.text = WUtils.getSymbol(chainConfig, hardMoneyMarketDenom)
 
         if (hardMoneyMarketDenom == KAVA_MAIN_DENOM) {
             marketLayer.isHidden = true

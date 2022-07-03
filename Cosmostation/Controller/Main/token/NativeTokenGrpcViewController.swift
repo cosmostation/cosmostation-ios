@@ -85,7 +85,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
             
         } else if (chainType == ChainType.KAVA_MAIN) {
-            WUtils.DpKavaSymbol(naviTokenSymbol, nativeDenom)
+            WDP.dpSymbol(chainConfig, nativeDenom, naviTokenSymbol)
             naviTokenImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(nativeDenom))!)
             nativeDivideDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
             nativeDisplayDecimal = WUtils.getKavaCoinDecimal(nativeDenom)

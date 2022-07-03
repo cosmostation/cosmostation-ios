@@ -73,3 +73,5 @@ class ChainSif: ChainConfig {
         return 0
     }
 }
+
+let SIF_MAIN_DENOM = "rowan"

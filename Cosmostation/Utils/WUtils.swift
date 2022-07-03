@@ -1654,7 +1654,14 @@ public class WUtils {
             }
         }
         if (chainConfig!.chainType == .KAVA_MAIN) {
-            return getKavaSymbol(denom!)
+            if (denom == KAVA_HARD_DENOM) { return "HARD" }
+            else if (denom == KAVA_USDX_DENOM) { return "USDX" }
+            else if (denom == KAVA_SWAP_DENOM) { return "SWP" }
+            else if (denom == TOKEN_HTLC_KAVA_BNB) { return "BNB" }
+            else if (denom == TOKEN_HTLC_KAVA_XRPB) { return "XRPB" }
+            else if (denom == TOKEN_HTLC_KAVA_BUSD) { return "BUSD" }
+            else if (denom == TOKEN_HTLC_KAVA_BTCB) { return "BTCB" }
+            else if (denom == "btch") { return "BTCH" }
             
         } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
             return getOsmosisSymbol(denom!)
@@ -1687,6 +1694,7 @@ public class WUtils {
             if (denom == NYX_NYM_DENOM) { return "NYM" }
             
         }
+        
         else if (chainConfig!.chainType == .BINANCE_MAIN) {
             if let bnbTokenInfo = getBnbToken(denom!) {
                 return bnbTokenInfo.original_symbol.uppercased()
@@ -1700,8 +1708,85 @@ public class WUtils {
         return "Unknown"
     }
     
-    static func dpSymbol(_ chainConfig: ChainConfig?, _ denom: String?, _ denomLabel: UILabel?) {
+    static func getSymbolImg(_ chainConfig: ChainConfig?, _ denom: String?) -> UIImage? {
+        if (chainConfig == nil || denom?.isEmpty == true) { return UIImage(named: "tokenDefault")! }
+        if (chainConfig!.stakeDenom == denom) {
+            return chainConfig!.stakeDenomImg
+        }
+        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
+                let url = URL(string: ibcToken.moniker!),
+                let data = try? Data(contentsOf: url) {
+                return UIImage(data: data)
+            } else {
+                return UIImage(named: "tokenDefaultIbc")
+            }
+        }
         
+        if (chainConfig!.chainType == .KAVA_MAIN) {
+            if let url = URL(string: KAVA_COIN_IMG_URL + denom! + ".png"),
+               let data = try? Data(contentsOf: url) {
+                return UIImage(data: data)
+            }
+            
+        } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
+            if (denom == OSMOSIS_ION_DENOM) { return  UIImage(named: "tokenIon") }
+            else if (denom!.starts(with: "gamm/pool/")) { return UIImage(named: "tokenPool") }
+            
+        } else if (chainConfig!.chainType == .SIF_MAIN) {
+            if let url = URL(string: SIF_COIN_IMG_URL + denom! + ".png"),
+                let data = try? Data(contentsOf: url) {
+                return UIImage(data: data)
+            }
+            
+        } else if (chainConfig!.chainType == .CRESCENT_MAIN) {
+            if (denom == CRESCENT_BCRE_DENOM) { return UIImage(named: "tokenBcre") }
+            
+        } else if (chainConfig!.chainType == .EMONEY_MAIN) {
+            if let url = URL(string: EMONEY_COIN_IMG_URL + denom! + ".png"),
+               let data = try? Data(contentsOf: url) {
+                return UIImage(data: data)
+            }
+            
+        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                if let url = bridgeTokenInfo.getImgUrl(),
+                   let data = try? Data(contentsOf: url) {
+                    return UIImage(data: data)
+                }
+            }
+            
+        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
+            if (denom!.starts(with: "share")) { return UIImage(named: "tokenDefault") }
+            else if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                if let url = bridgeTokenInfo.getImgUrl(),
+                   let data = try? Data(contentsOf: url) {
+                    return UIImage(data: data)
+                }
+            }
+            
+        } else if (chainConfig!.chainType == .NYX_MAIN) {
+            if (denom == NYX_NYM_DENOM) { return UIImage(named: "nyx_nym") }
+            
+        }
+        
+        else if (chainConfig!.chainType == .BINANCE_MAIN) {
+            if let bnbTokenInfo = getBnbToken(denom!) {
+                if let url = URL(string: BINANCE_TOKEN_IMG_URL + bnbTokenInfo.original_symbol + ".png"),
+                    let data = try? Data(contentsOf: url) {
+                    return UIImage(data: data)
+                }
+            }
+            
+        } else if (chainConfig!.chainType == .OKEX_MAIN) {
+            if let okTokenInfo = getOkToken(denom!) {
+                if let url = URL(string: OKEX_COIN_IMG_URL + okTokenInfo.original_symbol! + ".png"),
+                    let data = try? Data(contentsOf: url) {
+                    return UIImage(data: data)
+                }
+            }
+        }
+        return UIImage(named: "tokenDefault")!
     }
 
     static func getEstimateGasAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {

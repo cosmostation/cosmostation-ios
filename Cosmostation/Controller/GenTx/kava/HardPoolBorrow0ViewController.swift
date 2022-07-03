@@ -30,6 +30,7 @@ class HardPoolBorrow0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         hardPoolDenom = pageHolderVC.mHardMoneyMarketDenom!
@@ -38,7 +39,7 @@ class HardPoolBorrow0ViewController: BaseViewController, UITextFieldDelegate {
                                                              BaseData.instance.mHardModuleCoins, BaseData.instance.mHardReserveCoins)
         print("availableMax ", availableMax)
         
-        WUtils.DpKavaSymbol(mCoinLabel, hardPoolDenom)
+        WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)
         WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
         self.mCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardPoolDenom))!)
         self.loadingImg.isHidden = true
