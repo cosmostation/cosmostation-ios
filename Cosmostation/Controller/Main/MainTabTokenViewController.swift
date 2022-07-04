@@ -491,7 +491,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             return
         }
         if (ibcToken.auth == true) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: ibcToken.moniker!)!)
+            WDP.dpSymbolImg(chainConfig, coin.denom, cell?.tokenImg)
             cell?.tokenSymbol.text = ibcToken.display_denom?.uppercased()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = ibcToken.channel_id

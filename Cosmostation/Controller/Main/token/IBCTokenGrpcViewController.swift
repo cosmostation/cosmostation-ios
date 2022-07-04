@@ -74,7 +74,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         print("ibcToken ", ibcToken)
         
         if (ibcToken.auth == true) {
-            naviTokenImg.af_setImage(withURL: URL(string: ibcToken.moniker!)!)
+            WDP.dpSymbolImg(chainConfig, ibcDenom, naviTokenImg)
             naviTokenSymbol.text = ibcToken.display_denom?.uppercased()
             naviTokenChannel.text = "(" + ibcToken.channel_id! + ")"
             topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalAmount, ibcDivideDecimal, topValue.font)

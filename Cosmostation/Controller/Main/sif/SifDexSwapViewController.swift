@@ -47,6 +47,7 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
         
         self.inputCoinLayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickInput (_:))))
@@ -71,14 +72,19 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
         self.slippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "2"), swapFeeLabel.font)
         self.inputCoinAvailableAmountLabel.attributedText = WUtils.displayAmount2(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, mInPutDecimal, mInPutDecimal)
         
-        WUtils.DpSifCoinImg(inputCoinImg, mInputCoinDenom!)
-        WUtils.DpSifCoinName(inputCoinName, mInputCoinDenom!)
-        WUtils.DpSifCoinName(inputCoinRateDenom, mInputCoinDenom!)
-        WUtils.DpSifCoinName(inputCoinExRateDenom, mInputCoinDenom!)
-        WUtils.DpSifCoinImg(outputCoinImg, mOutputCoinDenom!)
-        WUtils.DpSifCoinName(outputCoinName, mOutputCoinDenom!)
-        WUtils.DpSifCoinName(outputCoinRateDenom, mOutputCoinDenom!)
-        WUtils.DpSifCoinName(outputCoinExRateDenom, mOutputCoinDenom!)
+        print("chainConfig ", chainConfig)
+        
+        print("mInputCoinDenom ", mInputCoinDenom)
+        WDP.dpSymbolImg(chainConfig, mInputCoinDenom!, inputCoinImg)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinName)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinExRateDenom)
+        
+        print("mOutputCoinDenom ", mOutputCoinDenom)
+        WDP.dpSymbolImg(chainConfig, mOutputCoinDenom!, outputCoinImg)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom!, outputCoinName)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom!, outputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom!, outputCoinExRateDenom)
         
         self.inputCoinRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, 6)
         self.inputCoinExRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)

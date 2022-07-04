@@ -64,10 +64,10 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
             availableMaxAmount = availableMaxAmount.subtracting(txFeeAmount)
         }
         WUtils.showCoinDp(swapInDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
-        WUtils.DpSifCoinImg(inputCoinImg, swapInDenom)
-        WUtils.DpSifCoinName(inputCoinName, swapInDenom)
-        WUtils.DpSifCoinImg(outputCoinImg, swapOutDenom)
-        WUtils.DpSifCoinName(outputCoinName, swapOutDenom)
+        WDP.dpSymbolImg(chainConfig, swapInDenom, inputCoinImg)
+        WDP.dpSymbol(chainConfig, swapInDenom, inputCoinName)
+        WDP.dpSymbolImg(chainConfig, swapOutDenom, outputCoinImg)
+        WDP.dpSymbol(chainConfig, swapOutDenom, outputCoinName)
         
         swapRate = WUtils.getPoolLpPrice(selectedPool, swapInDenom)
         print("swapRate ", swapRate)

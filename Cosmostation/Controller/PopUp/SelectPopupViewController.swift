@@ -288,15 +288,16 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_SIF_SWAP_IN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let swapInDenom = toCoinList[indexPath.row]
-            WUtils.DpSifCoinImg(cell!.coinImg, swapInDenom)
-            cell!.coinTitle.text = WUtils.getSifSymbol(swapInDenom)
+            WDP.dpSymbolImg(chainConfig, swapInDenom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, swapInDenom, cell!.coinTitle)
+            
             return cell!
             
         } else if (type == SELECT_POPUP_SIF_SWAP_OUT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
-            let swapInDenom = toCoinList[indexPath.row]
-            WUtils.DpSifCoinImg(cell!.coinImg, swapInDenom)
-            cell!.coinTitle.text = WUtils.getSifSymbol(swapInDenom)
+            let swapOutDenom = toCoinList[indexPath.row]
+            WDP.dpSymbolImg(chainConfig, swapOutDenom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, swapOutDenom, cell!.coinTitle)
             return cell!
             
         } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
