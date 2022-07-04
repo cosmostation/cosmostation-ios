@@ -26,9 +26,10 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.ibcSendDenom = self.pageHolderVC.mIBCSendDenom
-        self.decimal = WUtils.tokenDivideDecimal(chainType, ibcSendDenom)
+        self.decimal = WUtils.getDenomDecimal(chainConfig, ibcSendDenom)
         
         let mainDenom = WUtils.getMainDenom(chainType!)
         let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_TRANSFER, 0)

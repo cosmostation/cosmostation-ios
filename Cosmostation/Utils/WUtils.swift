@@ -1499,36 +1499,53 @@ public class WUtils {
         }
     }
     
-    static func tokenDivideDecimal(_ chain: ChainType?, _ denom: String) -> Int16 {
-        let mainDenom = getMainDenom(chain)
-        if (isGRPC(chain)) {
-            if (denom == mainDenom) {
-                return mainDivideDecimal(chain)
+    static func getDenomDecimal(_ chainConfig: ChainConfig?, _ denom: String?) -> Int16 {
+        if (chainConfig == nil || denom == nil) { return 6 }
+        if (denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
+                let decimal = ibcToken.decimal  {
+                return decimal
             }
-            if (denom.starts(with: "ibc/")) {
-                if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let decimal = ibcToken.decimal  {
-                    return decimal
-                }
-                return 6
-            }
-            if (chain == ChainType.OSMOSIS_MAIN) {
-                return getOsmosisCoinDecimal(denom)
-            } else if (chain == ChainType.SIF_MAIN) {
-                return getSifCoinDecimal(denom)
-            } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-                return getGBrdigeCoinDecimal(denom)
-            } else if (chain == ChainType.KAVA_MAIN) {
-                return getKavaCoinDecimal(denom)
-            } else if (chain == ChainType.INJECTIVE_MAIN) {
-                return getInjectiveCoinDecimal(denom)
-            }
-            print("CHECK DECIMAL")
+        }
+        if (chainConfig!.stakeDenom == denom) {
+            return mainDivideDecimal(chainConfig!.chainType)
+        }
+        if (chainConfig!.chainType == .OSMOSIS_MAIN) {
+            if (denom?.caseInsensitiveCompare(OSMOSIS_ION_DENOM) == .orderedSame) { return 6; }
+            else if (denom!.starts(with: "gamm/pool/")) { return 18; }
             return 6
             
-        } else {
-            //NO need without gRPC
-            return 6
+        } else if (chainConfig!.chainType == .SIF_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                return bridgeTokenInfo.decimal
+            }
+            return 18
+            
+        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                return bridgeTokenInfo.decimal
+            }
+            return 18
+            
+        } else if (chainConfig!.chainType == .KAVA_MAIN) {
+            if (denom?.caseInsensitiveCompare("btc") == .orderedSame) { return 8; }
+            else if (denom?.caseInsensitiveCompare("bnb") == .orderedSame) { return 8; }
+            else if (denom?.caseInsensitiveCompare("btcb") == .orderedSame || denom?.caseInsensitiveCompare("hbtc") == .orderedSame) { return 8; }
+            else if (denom?.caseInsensitiveCompare("busd") == .orderedSame) { return 8; }
+            else if (denom?.caseInsensitiveCompare("xrpb") == .orderedSame || denom?.caseInsensitiveCompare("xrbp") == .orderedSame) { return 8; }
+            return 6;
+            
+        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
+            if (denom?.starts(with: "share") == true) { return 18 }
+            else if (denom?.starts(with: "peggy0x") == true) {
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
+                    return bridgeTokenInfo.decimal
+                }
+            }
+            return 18
+            
         }
+        return mainDivideDecimal(chainConfig!.chainType)
     }
     
     static func mainDivideDecimal(_ chain:ChainType?) -> Int16 {
