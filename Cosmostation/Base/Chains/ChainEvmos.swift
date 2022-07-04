@@ -32,7 +32,7 @@ class ChainEvmos: ChainConfig {
     var addressPrefix = "evmos"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
-    let gasRate0 = "0.0aevmos"
+    let gasRate0 = "20000000000aevmos"
     
     var pushSupport = false
     var wcSupoort = true
