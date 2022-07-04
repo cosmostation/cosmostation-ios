@@ -30,16 +30,10 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     @IBOutlet weak var btnNext: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-//    var mSelectedGasRate = NSDecimalNumber.zero
-//    var mEstimateGasAmount = NSDecimalNumber.zero
-//    var mFee = NSDecimalNumber.zero
-//    var mDpDecimal:Int16 = 6
     var mSimulPassed = false
-    
     var mFee: Fee!
     var mFeeCoin: Coin!
-//    var mFeeGasAmount = NSDecimalNumber.init(string: "500000")
-    var mFeeGasAmount = NSDecimalNumber.init(string: "1")
+    var mFeeGasAmount = NSDecimalNumber.init(string: "500000")
     
     var mFeeInfo = Array<FeeInfo>()
     var mSelectedFeeInfo = 1
