@@ -62,8 +62,8 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func updateView() {
-        mInPutDecimal = WUtils.getOsmosisCoinDecimal(mInputCoinDenom)
-        mOutPutDecimal = WUtils.getOsmosisCoinDecimal(mOutputCoinDenom)
+        mInPutDecimal = WUtils.getDenomDecimal(chainConfig, mInputCoinDenom)
+        mOutPutDecimal = WUtils.getDenomDecimal(chainConfig, mOutputCoinDenom)
         mAvailableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mInputCoinDenom!)
         
         self.swapFeeLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: mSelectedPool?.poolParams.swapFee).multiplying(byPowerOf10: -16), swapFeeLabel.font)
@@ -79,8 +79,8 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinExRateDenom)
         WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinExRateDenom)
         
-        inputCoinRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, mInPutDecimal)
-        inputCoinExRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, mInPutDecimal)
+        inputCoinRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, 6)
+        inputCoinExRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
         
         //display swap rate with this pool
         var inputAssetAmount = NSDecimalNumber.zero
@@ -97,11 +97,11 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
                 outputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
             }
         }
-        inputAssetAmount = inputAssetAmount.multiplying(byPowerOf10: -WUtils.getOsmosisCoinDecimal(mInputCoinDenom))
-        outputAssetAmount = outputAssetAmount.multiplying(byPowerOf10: -WUtils.getOsmosisCoinDecimal(mOutputCoinDenom))
+        inputAssetAmount = inputAssetAmount.multiplying(byPowerOf10: -mInPutDecimal)
+        outputAssetAmount = outputAssetAmount.multiplying(byPowerOf10: -mOutPutDecimal)
         let poolSwapRate = outputAssetAmount.multiplying(by: inputAssetWeight).dividing(by: inputAssetAmount, withBehavior: WUtils.handler18).dividing(by: outputAssetWeight, withBehavior: WUtils.handler6)
         print("poolSwapRate ", poolSwapRate)
-        outputCoinRateAmount.attributedText = WUtils.displayAmount2(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, mOutPutDecimal)
+        outputCoinRateAmount.attributedText = WUtils.displayAmount2(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
         
         //display swap rate with market price
         let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom!)) ?? NSDecimalNumber.zero
@@ -110,7 +110,7 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
             self.outputCoinExRateAmount.text = "?.??????"
         } else {
             let priceRate = priceInput.dividing(by: priceOutput, withBehavior: WUtils.handler6)
-            self.outputCoinExRateAmount.attributedText = WUtils.displayAmount2(priceRate.stringValue, outputCoinExRateAmount.font, 0, mOutPutDecimal)
+            self.outputCoinExRateAmount.attributedText = WUtils.displayAmount2(priceRate.stringValue, outputCoinExRateAmount.font, 0, 6)
         }
     }
     

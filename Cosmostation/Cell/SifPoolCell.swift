@@ -36,9 +36,9 @@ class SifPoolCell: UITableViewCell {
     func onBindSifPoolView(_ pool: Sifnode_Clp_V1_Pool) {
         let chainConfig = ChainSif.init(.SIF_MAIN)
         let nf = WUtils.getNumberFormatter(2)
-        let rowanDecimal = WUtils.getSifCoinDecimal(SIF_MAIN_DENOM)
+        let rowanDecimal = WUtils.getDenomDecimal(chainConfig, SIF_MAIN_DENOM)
         let rowanAmount = NSDecimalNumber.init(string: pool.nativeAssetBalance)
-        let externalDecimal = WUtils.getSifCoinDecimal(pool.externalAsset.symbol)
+        let externalDecimal = WUtils.getDenomDecimal(chainConfig, pool.externalAsset.symbol)
         let externalAmount = NSDecimalNumber.init(string: pool.externalAssetBalance)
         let exteranlDenom = pool.externalAsset.symbol
         let poolValue = WUtils.getSifPoolValue(pool)

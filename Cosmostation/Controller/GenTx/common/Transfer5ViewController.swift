@@ -39,6 +39,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         WUtils.setDenomTitle(chainType, sendDenomLabel)
         WUtils.setDenomTitle(chainType, availableDenomLabel)
@@ -78,20 +79,20 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             mDivideDecimal = WUtils.mainDivideDecimal(chainType)
             mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
             if (chainType == ChainType.SIF_MAIN) {
-                mDivideDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
+                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
                 
             } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
-                mDivideDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
+                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
                 
             } else if (chainType == ChainType.KAVA_MAIN) {
                 mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
                 mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
                 
             } else if (pageHolderVC.chainType! == ChainType.INJECTIVE_MAIN) {
-                mDivideDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
+                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
             }
             currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
             

@@ -25,7 +25,10 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
         let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
         let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_TRANSFER, 0)
@@ -33,20 +36,20 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
             mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
             mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
             if (pageHolderVC.chainType! == ChainType.SIF_MAIN) {
-                mDivideDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
+                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
 
             } else if (pageHolderVC.chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
-                mDivideDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
+                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
                 
             } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
                 mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
                 mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
                 
             } else if (pageHolderVC.chainType! == ChainType.INJECTIVE_MAIN) {
-                mDivideDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
+                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
             }
             
             if (pageHolderVC.mToSendDenom == mainDenom) {

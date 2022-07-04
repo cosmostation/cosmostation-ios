@@ -38,6 +38,7 @@ class JoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         pageHolderVC = self.parent as? StepGenTxViewController
         input0TextFiled.delegate = self
@@ -62,8 +63,8 @@ class JoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         if (coin1Denom == OSMOSIS_MAIN_DENOM) {
             available1MaxAmount = available1MaxAmount.subtracting(txFeeAmount)
         }
-        coin0Decimal = WUtils.getOsmosisCoinDecimal(coin0Denom)
-        coin1Decimal = WUtils.getOsmosisCoinDecimal(coin1Denom)
+        coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0Denom)
+        coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1Denom)
         
         WDP.dpSymbolImg(chainConfig, coin0Denom, inputCoin0Img)
         WDP.dpSymbol(chainConfig, coin0Denom, inputCoin0Name)

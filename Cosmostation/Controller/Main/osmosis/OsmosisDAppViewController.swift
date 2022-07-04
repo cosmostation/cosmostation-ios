@@ -63,18 +63,6 @@ class OsmosisDAppViewController: BaseViewController {
 }
 
 extension WUtils {
-    static func getOsmosisCoinDecimal(_ denom: String?) -> Int16 {
-        if (denom?.caseInsensitiveCompare(OSMOSIS_MAIN_DENOM) == .orderedSame) { return 6; }
-        else if (denom?.caseInsensitiveCompare(OSMOSIS_ION_DENOM) == .orderedSame) { return 6; }
-        else if (denom!.starts(with: "gamm/pool/")) { return 18; }
-        else if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
-                return deciaml
-            }
-        }
-        return 6;
-    }
-    
     static func getGaugesByPoolId(_ poolId: UInt64, _ incentivizedPools: Array<Osmosis_Poolincentives_V1beta1_IncentivizedPool>, _ allGauge: Array<Osmosis_Incentives_Gauge>) -> Array<Osmosis_Incentives_Gauge> {
         var gaugeIds = Array<UInt64>()
         var result = Array<Osmosis_Incentives_Gauge>()

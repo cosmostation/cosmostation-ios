@@ -65,22 +65,18 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func updateView() {
-        mInPutDecimal = WUtils.getSifCoinDecimal(mInputCoinDenom!)
-        mOutPutDecimal = WUtils.getSifCoinDecimal(mOutputCoinDenom!)
+        mInPutDecimal = WUtils.getDenomDecimal(chainConfig, mInputCoinDenom!)
+        mOutPutDecimal = WUtils.getDenomDecimal(chainConfig, mOutputCoinDenom!)
         mAvailableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mInputCoinDenom!)
         
         self.slippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "2"), swapFeeLabel.font)
         self.inputCoinAvailableAmountLabel.attributedText = WUtils.displayAmount2(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, mInPutDecimal, mInPutDecimal)
-        
-        print("chainConfig ", chainConfig)
-        
-        print("mInputCoinDenom ", mInputCoinDenom)
+                
         WDP.dpSymbolImg(chainConfig, mInputCoinDenom!, inputCoinImg)
         WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinName)
         WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinRateDenom)
         WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinExRateDenom)
         
-        print("mOutputCoinDenom ", mOutputCoinDenom)
         WDP.dpSymbolImg(chainConfig, mOutputCoinDenom!, outputCoinImg)
         WDP.dpSymbol(chainConfig, mOutputCoinDenom!, outputCoinName)
         WDP.dpSymbol(chainConfig, mOutputCoinDenom!, outputCoinRateDenom)

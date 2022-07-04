@@ -38,12 +38,14 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
         self.selectedPool = self.pageHolderVC.mSifPool
         self.swapInDenom = self.pageHolderVC.mSwapInDenom!
         self.swapOutDenom = self.pageHolderVC.mSwapOutDenom!
-        self.dpInPutDecimal = WUtils.getSifCoinDecimal(swapInDenom)
-        self.dpOutPutDecimal = WUtils.getSifCoinDecimal(swapOutDenom)
+        self.dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, swapInDenom)
+        self.dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, swapOutDenom)
         
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

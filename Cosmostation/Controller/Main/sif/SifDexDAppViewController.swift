@@ -128,52 +128,6 @@ class SifDexDAppViewController: BaseViewController {
 
 extension WUtils {
     
-    //using mintscan-api(util-api old)
-    static func getSifCoinDecimal(_ denom: String?) -> Int16 {
-        if (denom == SIF_MAIN_DENOM) {
-            return 18
-        } else if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
-                return deciaml
-            }
-        } else {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
-                return bridgeTokenInfo.decimal
-            }
-        }
-        return 18
-    }
-    
-    //TEMP
-    static func getGBrdigeCoinDecimal(_ denom: String?) -> Int16 {
-        if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
-            return 6
-        } else {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
-                return bridgeTokenInfo.decimal
-            }
-            return 18
-        }
-    }
-    
-    //TEMP
-    static func getInjectiveCoinDecimal(_ denom: String?) -> Int16 {
-        if (denom == INJECTIVE_MAIN_DENOM) {
-            return 18
-        } else if (denom?.starts(with: "share") == true) {
-            return 18
-        } else if (denom?.starts(with: "peggy0x") == true) {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
-                return bridgeTokenInfo.decimal
-            }
-        } else if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
-                return deciaml
-            }
-        }
-        return 18
-    }
-    
     static func getPoolLpAmount(_ pool: Sifnode_Clp_V1_Pool, _ denom: String) -> NSDecimalNumber {
         if (denom == SIF_MAIN_DENOM) {
             return getNativeLpAmount(pool)
@@ -212,11 +166,11 @@ extension WUtils {
     
     static func getSifPoolValue(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {
         let chainConfig = ChainSif.init(.SIF_MAIN)
-        let rowanDecimal = getSifCoinDecimal(SIF_MAIN_DENOM)
+        let rowanDecimal = getDenomDecimal(chainConfig, SIF_MAIN_DENOM)
         let rowanAmount = NSDecimalNumber.init(string: pool.nativeAssetBalance)
         let rowanPrice = perUsdValue(SIF_MAIN_DENOM) ?? NSDecimalNumber.zero
         
-        let externalDecimal = getSifCoinDecimal(pool.externalAsset.symbol)
+        let externalDecimal = getDenomDecimal(chainConfig, pool.externalAsset.symbol)
         let externalAmount = NSDecimalNumber.init(string: pool.externalAssetBalance)
         let exteranlBaseDenom = BaseData.instance.getBaseDenom(chainConfig, pool.externalAsset.symbol)
         let exteranlPrice = perUsdValue(exteranlBaseDenom) ?? NSDecimalNumber.zero

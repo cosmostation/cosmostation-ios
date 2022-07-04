@@ -62,7 +62,7 @@ class SifJoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         rowanMaxAmount = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
         rowanMaxAmount = rowanMaxAmount.subtracting(txFeeAmount)
         externalMaxAmount = BaseData.instance.getAvailableAmount_gRPC(selectedPool.externalAsset.symbol)
-        externalDecimal = WUtils.getSifCoinDecimal(selectedPool.externalAsset.symbol)
+        externalDecimal = WUtils.getDenomDecimal(chainConfig, selectedPool.externalAsset.symbol)
         
         WDP.dpSymbolImg(chainConfig, SIF_MAIN_DENOM, inputCoin0Img)
         WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, inputCoin0Name)

@@ -35,6 +35,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         pageHolderVC = self.parent as? StepGenTxViewController
         inputTextFiled.delegate = self
@@ -58,8 +59,8 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinImg)
         WDP.dpSymbol(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinName)
         
-        dpInPutDecimal = WUtils.getOsmosisCoinDecimal(pageHolderVC.mSwapInDenom)
-        dpOutPutDecimal = WUtils.getOsmosisCoinDecimal(pageHolderVC.mSwapOutDenom)
+        dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapInDenom)
+        dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapOutDenom)
         
         var inputAssetAmount = NSDecimalNumber.zero
         var inputAssetWeight = NSDecimalNumber.zero

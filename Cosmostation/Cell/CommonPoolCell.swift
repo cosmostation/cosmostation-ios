@@ -39,8 +39,8 @@ class CommonPoolCell: UITableViewCell {
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
         let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
-        let coin0Decimal = WUtils.getOsmosisCoinDecimal(coin0.denom)
-        let coin1Decimal = WUtils.getOsmosisCoinDecimal(coin1.denom)
+        let coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0.denom)
+        let coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1.denom)
         
         poolPairLabel.text = "#" + String(pool.id) + " " + coin0Symbol + " : " + coin1Symbol
         

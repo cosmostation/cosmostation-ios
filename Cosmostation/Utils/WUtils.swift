@@ -501,15 +501,17 @@ public class WUtils {
                     totalValue = totalValue.adding(assetValue)
                     
                 } else if (chainType! == ChainType.SIF_MAIN && coin.denom.starts(with: "c")) {
+                    let chainConfig = ChainSif.init(.SIF_MAIN)
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getSifCoinDecimal(coin.denom)
+                    let decimal = getDenomDecimal(chainConfig, coin.denom)
                     if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
                     
                 } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN && coin.denom.starts(with: "gravity0x")) {
+                    let chainConfig = ChainGravityBridge.init(.GRAVITY_BRIDGE_MAIN)
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getGBrdigeCoinDecimal(coin.denom)
+                    let decimal = getDenomDecimal(chainConfig, coin.denom)
                     if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
@@ -537,8 +539,9 @@ public class WUtils {
                     totalValue = totalValue.adding(assetValue)
                     
                 } else if (chainType! == ChainType.INJECTIVE_MAIN && coin.denom.starts(with: "peggy0x")) {
+                    let chainConfig = ChainInjective.init(.INJECTIVE_MAIN)
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getInjectiveCoinDecimal(coin.denom)
+                    let decimal = getDenomDecimal(chainConfig, coin.denom)
                     if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
@@ -1124,7 +1127,8 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 8, 8)
             
         } else if (chainType == ChainType.SIF_MAIN) {
-            let dpDecimal = WUtils.getSifCoinDecimal(denom)
+            let chainConfig = ChainSif.init(.SIF_MAIN)
+            let dpDecimal = WUtils.getDenomDecimal(chainConfig, denom)
             if (denom == SIF_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "c")) {
@@ -1261,7 +1265,8 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
-            let dpDecimal = WUtils.getGBrdigeCoinDecimal(denom)
+            let chainConfig = ChainGravityBridge.init(.GRAVITY_BRIDGE_MAIN)
+            let dpDecimal = WUtils.getDenomDecimal(chainConfig, denom)
             if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "gravity0x")) {
@@ -1296,7 +1301,8 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
             
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
-            let dpDecimal = WUtils.getInjectiveCoinDecimal(denom)
+            let chainConfig = ChainInjective.init(.INJECTIVE_MAIN)
+            let dpDecimal = WUtils.getDenomDecimal(chainConfig, denom)
             if (denom == INJECTIVE_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom.starts(with: "peggy0x")) {
