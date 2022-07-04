@@ -62,7 +62,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     
     func onInitView() {
         let ibcHash = ibcDenom.replacingOccurrences(of: "ibc/", with: "")
-        let baseDenom = BaseData.instance.getBaseDenom(ibcDenom)
+        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, ibcDenom)
         guard let ibcToken = BaseData.instance.getIbcToken(ibcHash) else {
             self.navigationController?.popViewController(animated: true)
             return

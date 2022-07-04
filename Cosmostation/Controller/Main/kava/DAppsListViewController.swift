@@ -33,8 +33,8 @@ class DAppsListViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")], for: .normal)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")!], for: .selected)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")!], for: .normal)
             dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
             dAppsSegment.tintColor = chainConfig?.chainColor
@@ -173,43 +173,6 @@ class DAppsListViewController: BaseViewController {
 }
 
 extension WUtils {
-    static func getKavaBaseDenom(_ denom: String) -> String {
-        if (denom.starts(with: "ibc/")) {
-            guard let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) else {
-                return denom
-            }
-            if (ibcToken.auth == true) {
-                if (ibcToken.base_denom?.starts(with: "cw20:") == true) {
-                    let cAddress = ibcToken.base_denom?.replacingOccurrences(of: "cw20:", with: "")
-                    if let cw20Basedenom = BaseData.instance.mCw20Tokens.filter({ $0.contract_address == cAddress }).first {
-                        return cw20Basedenom.denom
-                    } else {
-                        return ibcToken.base_denom!
-                    }
-                } else {
-                    return ibcToken.base_denom!
-                }
-            }
-            
-        } else if (denom == KAVA_MAIN_DENOM) {
-            return KAVA_MAIN_DENOM
-        } else if (denom == KAVA_HARD_DENOM) {
-            return KAVA_HARD_DENOM
-        } else if (denom == KAVA_USDX_DENOM) {
-            return KAVA_USDX_DENOM
-        } else if (denom == KAVA_SWAP_DENOM) {
-            return KAVA_SWAP_DENOM
-        } else if (denom == TOKEN_HTLC_KAVA_BNB) {
-            return "bnb"
-        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
-            return "xrp"
-        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
-            return "busd"
-        } else if (denom.contains("btc")) {
-            return "btc"
-        }
-        return ""
-    }
     
     static func getKavaCoinDecimal(_ denom:String?) -> Int16 {
         if (denom!.starts(with: "ibc/")) {

@@ -527,7 +527,8 @@ public class WUtils {
                     totalValue = totalValue.adding(assetValue)
                     
                 } else if (chainType! == ChainType.KAVA_MAIN) {
-                    let baseDenom = WUtils.getKavaBaseDenom(coin.denom)
+                    let chainConfig = ChainKava.init(.KAVA_MAIN)
+                    let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
                     let decimal = WUtils.getKavaCoinDecimal(coin.denom)
                     let amount = WUtils.getKavaTokenAll(coin.denom)
                     let assetValue = userCurrencyValue(baseDenom, amount, decimal)

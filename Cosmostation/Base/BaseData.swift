@@ -183,7 +183,7 @@ final class BaseData : NSObject{
         return mBridgeTokens.filter { $0.denom.lowercased() == denom.lowercased() }.first
     }
     
-    func getBaseDenom(_ denom: String) -> String {
+    func getBaseDenom(_ chainConfig: ChainConfig?, _ denom: String) -> String {
         if (denom.starts(with: "ibc/")) {
             guard let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) else {
                 return denom
@@ -200,6 +200,16 @@ final class BaseData : NSObject{
                     return ibcToken.base_denom!
                 }
             }
+        }
+        if (chainConfig?.chainType == .SIF_MAIN) {
+            if (denom.starts(with: "c") || denom.starts(with: "x")) {
+                return denom.substring(from: 1).uppercased()
+            }
+        } else if (chainConfig?.chainType == .KAVA_MAIN) {
+            if (denom == TOKEN_HTLC_KAVA_BNB) { return "bnb" }
+            else if (denom == TOKEN_HTLC_KAVA_XRPB) { return "xrp" }
+            else if (denom == TOKEN_HTLC_KAVA_BUSD) { return "busd" }
+            else if (denom.contains("btc")) { return "btc" }
         }
         return denom
     }

@@ -101,8 +101,8 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
         self.outputCoinRateAmount.attributedText = WUtils.displayAmount2(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
         
         //display swap rate with market price
-        let priceInput = WUtils.perUsdValue(WUtils.getBaseDenom(mInputCoinDenom!)) ?? NSDecimalNumber.zero
-        let priceOutput = WUtils.perUsdValue(WUtils.getBaseDenom(mOutputCoinDenom!)) ?? NSDecimalNumber.zero
+        let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom!)) ?? NSDecimalNumber.zero
+        let priceOutput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom!)) ?? NSDecimalNumber.zero
         if (priceInput == NSDecimalNumber.zero || priceOutput == NSDecimalNumber.zero) {
             self.outputCoinExRateAmount.text = "?.??????"
         } else {

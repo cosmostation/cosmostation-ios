@@ -110,20 +110,22 @@ extension WUtils {
     }
     
     static func getOsmoLpTokenPerUsdPrice(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(coin0.denom), NSDecimalNumber.init(string: coin0.amount), WUtils.getOsmosisCoinDecimal(coin0.denom))
-        let coin1Value = WUtils.usdValue(BaseData.instance.getBaseDenom(coin1.denom), NSDecimalNumber.init(string: coin1.amount), WUtils.getOsmosisCoinDecimal(coin1.denom))
+        let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(chainConfig, coin0.denom), NSDecimalNumber.init(string: coin0.amount), WUtils.getOsmosisCoinDecimal(coin0.denom))
+        let coin1Value = WUtils.usdValue(BaseData.instance.getBaseDenom(chainConfig, coin1.denom), NSDecimalNumber.init(string: coin1.amount), WUtils.getOsmosisCoinDecimal(coin1.denom))
         let poolValue = coin0Value.adding(coin1Value)
         let totalShare = NSDecimalNumber.init(string: pool.totalShares.amount).multiplying(byPowerOf10: -18, withBehavior: handler18)
         return poolValue.dividing(by: totalShare, withBehavior: handler18)
     }
     
     static func getPoolValue(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0BaseDenom = BaseData.instance.getBaseDenom(coin0.denom)
-        let coin1BaseDenom = BaseData.instance.getBaseDenom(coin1.denom)
+        let coin0BaseDenom = BaseData.instance.getBaseDenom(chainConfig, coin0.denom)
+        let coin1BaseDenom = BaseData.instance.getBaseDenom(chainConfig, coin1.denom)
         let coin0Decimal = getOsmosisCoinDecimal(coin0.denom)
         let coin1Decimal = getOsmosisCoinDecimal(coin1.denom)
         let coin0Value = usdValue(coin0BaseDenom, NSDecimalNumber.init(string: coin0.amount), coin0Decimal)
@@ -155,9 +157,10 @@ extension WUtils {
     }
     
     static func getPoolArp(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>, _ position: UInt) -> NSDecimalNumber  {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let poolValue = getPoolValue(pool)
         let incentiveAmount = getNextIncentiveAmount(pool, gauges, position)
-        let incentiveValue = WUtils.usdValue(BaseData.instance.getBaseDenom(OSMOSIS_MAIN_DENOM), incentiveAmount, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
+        let incentiveValue = WUtils.usdValue(BaseData.instance.getBaseDenom(chainConfig, OSMOSIS_MAIN_DENOM), incentiveAmount, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
         return incentiveValue.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
     }
     

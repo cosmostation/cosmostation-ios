@@ -496,7 +496,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = ibcToken.channel_id
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, ibcToken.decimal!, 6)
-            let basedenom = BaseData.instance.getBaseDenom(coin.denom)
+            let basedenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(basedenom, NSDecimalNumber.init(string: coin.amount), ibcToken.decimal!, cell!.tokenValue.font)
             
         } else {
@@ -552,7 +552,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.tokenTitle.text = ""
         cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"
 
-        let baseDenom = WUtils.getKavaBaseDenom(coin.denom)
+        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
         let decimal = WUtils.getKavaCoinDecimal(coin.denom)
         let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
         cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(coin.denom), 6)
@@ -580,8 +580,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = coin.denom.uppercased()
             cell?.tokenSymbol.textColor = UIColor(named: "_font05")
             cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"
-
-            let baseDenom = WUtils.getKavaBaseDenom(coin.denom)
+            
+            let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
             let decimal = WUtils.getKavaCoinDecimal(coin.denom)
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(coin.denom), 6)

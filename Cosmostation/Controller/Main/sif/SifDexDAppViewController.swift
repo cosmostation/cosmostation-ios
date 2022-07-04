@@ -210,42 +210,15 @@ extension WUtils {
         return NSDecimalNumber.init(string: pool.poolUnits)
     }
     
-    static func getBaseDenom(_ denom: String)  -> String {
-        if (denom == SIF_MAIN_DENOM) {
-            return SIF_MAIN_DENOM
-            
-        } else if (denom.starts(with: "ibc/")) {
-            guard let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) else {
-                return denom
-            }
-            if (ibcToken.auth == true) {
-                if (ibcToken.base_denom?.starts(with: "cw20:") == true) {
-                    let cAddress = ibcToken.base_denom?.replacingOccurrences(of: "cw20:", with: "")
-                    if let cw20Basedenom = BaseData.instance.mCw20Tokens.filter({ $0.contract_address == cAddress }).first {
-                        return cw20Basedenom.denom
-                    } else {
-                        return ibcToken.base_denom!
-                    }
-                } else {
-                    return ibcToken.base_denom!
-                }
-            }
-            
-        } else if (denom.starts(with: "c") || denom.starts(with: "x")) {
-            return denom.substring(from: 1).uppercased()
-            
-        }
-        return denom
-    }
-    
     static func getSifPoolValue(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {
+        let chainConfig = ChainSif.init(.SIF_MAIN)
         let rowanDecimal = getSifCoinDecimal(SIF_MAIN_DENOM)
         let rowanAmount = NSDecimalNumber.init(string: pool.nativeAssetBalance)
         let rowanPrice = perUsdValue(SIF_MAIN_DENOM) ?? NSDecimalNumber.zero
         
         let externalDecimal = getSifCoinDecimal(pool.externalAsset.symbol)
         let externalAmount = NSDecimalNumber.init(string: pool.externalAssetBalance)
-        let exteranlBaseDenom = getBaseDenom(pool.externalAsset.symbol)
+        let exteranlBaseDenom = BaseData.instance.getBaseDenom(chainConfig, pool.externalAsset.symbol)
         let exteranlPrice = perUsdValue(exteranlBaseDenom) ?? NSDecimalNumber.zero
         
         let rowanValue = rowanAmount.multiplying(by: rowanPrice).multiplying(byPowerOf10: -rowanDecimal, withBehavior: WUtils.handler2)
