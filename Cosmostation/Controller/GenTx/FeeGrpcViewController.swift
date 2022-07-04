@@ -23,21 +23,23 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     @IBOutlet weak var feeTypeDenom: UILabel!
     
     @IBOutlet weak var gasDetailCard: CardView!
-    @IBOutlet weak var gasAmountLabel: UILabel!
-    @IBOutlet weak var gasRateLabel: UILabel!
-    @IBOutlet weak var gasFeeLabel: UILabel!
     @IBOutlet weak var gasSelectSegments: UISegmentedControl!
+    @IBOutlet weak var gasDescriptionLabel: UILabel!
     
-    @IBOutlet weak var btnGasCheck: UIButton!
     @IBOutlet weak var btnBefore: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mSelectedGasRate = NSDecimalNumber.zero
-    var mEstimateGasAmount = NSDecimalNumber.zero
-    var mFee = NSDecimalNumber.zero
-    var mDpDecimal:Int16 = 6
+//    var mSelectedGasRate = NSDecimalNumber.zero
+//    var mEstimateGasAmount = NSDecimalNumber.zero
+//    var mFee = NSDecimalNumber.zero
+//    var mDpDecimal:Int16 = 6
     var mSimulPassed = false
+    
+    var mFee: Fee!
+    var mFeeCoin: Coin!
+//    var mFeeGasAmount = NSDecimalNumber.init(string: "500000")
+    var mFeeGasAmount = NSDecimalNumber.init(string: "1")
     
     var mFeeInfo = Array<FeeInfo>()
     var mSelectedFeeInfo = 1
@@ -50,17 +52,18 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        
         self.mFeeInfo = WUtils.getFeeInfos(chainConfig)
-        print("mFeeInfo ", mFeeInfo)
+//        print("mFeeInfo ", mFeeInfo)
         
         gasSelectSegments.removeAllSegments()
         for i in 0..<mFeeInfo.count {
             gasSelectSegments.insertSegment(withTitle: mFeeInfo[i].title, at: i, animated: false)
         }
+        
+        feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         if #available(iOS 13.0, *) {
-            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")!], for: .selected)
+            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")!], for: .normal)
             gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
             gasSelectSegments.tintColor = chainConfig?.chainColor
@@ -68,87 +71,69 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         mSelectedFeeInfo = chainConfig!.getGasDefault()
         gasSelectSegments.selectedSegmentIndex = mSelectedFeeInfo
         
-        
-        
-        self.feeTypeCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickFeeDenom (_:))))
-//
-        
-//        gasSelectSegments.segmentIndex(identifiedBy: <#T##UIAction.Identifier#>)
-        
-//        feeTotalCard.backgroundColor = chainConfig?.chainColorBG
-//        WUtils.setGasDenomTitle(chainType, feeTotalDenom)
-//        mDpDecimal = WUtils.mainDivideDecimal(chainType)
-//
-//        if (chainType == .SIF_MAIN) {
-//            gasDetailCard.isHidden = true
-//        }
-//
-//        mEstimateGasAmount = WUtils.getEstimateGasAmount(chainType!, pageHolderVC.mType!, pageHolderVC.mRewardTargetValidators_gRPC.count)
-//        onUpdateView()
+        feeTypeCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickFeeDenom (_:))))
+    }
+    
+    @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {
+        self.mSelectedFeeInfo = sender.selectedSegmentIndex
+        self.onCalculateFees()
+        self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
     }
     
     @objc func onClickFeeDenom (_ onClickDenom: UITapGestureRecognizer) {
         let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
         popupVC.type = SELECT_POPUP_FEE_DENOM
-        
+        popupVC.feeData = mFeeInfo[mSelectedFeeInfo].FeeDatas
         let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
         cardPopup.resultDelegate = self
         cardPopup.show(onViewController: self)
     }
     
     func SBCardPopupResponse(type: Int, result: Int) {
-        print("SBCardPopupResponse ", result)
+        self.mSelectedFeeData = result
+        self.onCalculateFees()
+        self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        print("automatic gas amount check")
-//        self.mSimulPassed = false
-//        if (!BaseData.instance.getUsingEnginerMode()) {
-//            self.onSetFee()
-//            self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
-//        }
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        print("automatic gas amount check")
+        self.mSimulPassed = false
+        if (!BaseData.instance.getUsingEnginerMode()) {
+            self.onCalculateFees()
+            self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
+        }
+    }
     
     func onCalculateFees() {
-//        mSelectedGasRate = WUtils.getGasRate(chainType!, mSelectedGasPosition)
-//        if (chainType == .SIF_MAIN) {
-//            mFee = NSDecimalNumber.init(string: "100000000000000000")
-//        } else {
-//            mFee = mSelectedGasRate.multiplying(by: mEstimateGasAmount, withBehavior: WUtils.handler0Up)
-//        }
-//        print("mSelectedGasRate ", mSelectedGasRate)
-//        print("mEstimateGasAmount ", mEstimateGasAmount)
+        self.mFeeData = mFeeInfo[mSelectedFeeInfo].FeeDatas[mSelectedFeeData]
+        if (chainType == .SIF_MAIN) {
+            mFeeCoin = Coin.init(mFeeData.denom!, "100000000000000000")
+        } else {
+            let amount = (mFeeData.gasRate)!.multiplying(by: mFeeGasAmount, withBehavior: WUtils.handler0Up)
+            mFeeCoin = Coin.init(mFeeData.denom!, amount.stringValue)
+        }
+        mFee = Fee.init(mFeeGasAmount.stringValue, [mFeeCoin])
 //        print("mFee ", mFee)
     }
     
     func onUpdateView() {
-        let selectedFeeInfo = mFeeInfo[mSelectedFeeInfo]
-        self.mFeeData = selectedFeeInfo.FeeDatas[mSelectedFeeData]
-        print("mFeeData ", mFeeData)
+        self.onCalculateFees()
+        print("mFee ", mFee)
         
-//        onCalculateFees()
-//
-//        feeTotalAmount.attributedText = WUtils.displayAmount2(mFee.stringValue, feeTotalAmount.font!, mDpDecimal, mDpDecimal)
-//        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(WUtils.getGasDenom(chainType), mFee, WUtils.mainDivideDecimal(chainType), feeTotalValue.font)
-//
-//        gasRateLabel.attributedText = WUtils.displayGasRate(mSelectedGasRate.rounding(accordingToBehavior: WUtils.handler6), font: gasRateLabel.font, 5)
-//        gasAmountLabel.text = mEstimateGasAmount.stringValue
-//        gasFeeLabel.text = mFee.stringValue
-    }
-
-    @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {
-//        mSelectedGasPosition = sender.selectedSegmentIndex
-//        onUpdateView()
+        WDP.dpSymbolImg(chainConfig, mFeeData.denom, feeTypeImg)
+        WDP.dpSymbol(chainConfig, mFeeData.denom, feeTypeDenom)
+        
+        WUtils.showCoinDp(mFee.amount[0], feeTotalDenom, feeTotalAmount, chainType!)
+        
+        //TODO fixit decimal
+//        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(mFeeData.denom!, NSDecimalNumber.init(string: mFee.amount[0].amount), 6, feeTotalValue.font)
+        
+        gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
     }
     
     override func enableUserInteraction() {
         btnBefore.isUserInteractionEnabled = true
         btnNext.isUserInteractionEnabled = true
-    }
-    
-    @IBAction func onClickCheckGas(_ sender: UIButton) {
-//        self.onSetFee()
-//        self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {
@@ -158,31 +143,14 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-//        if (!mSimulPassed) {
-//            self.onShowToast(NSLocalizedString("error_simul_error", comment: ""))
-//            return
-//        }
-//
-//        onSetFee()
-//        btnBefore.isUserInteractionEnabled = false
-//        btnNext.isUserInteractionEnabled = false
-//        pageHolderVC.onNextPage()
-    }
-    
-    func onSetFee() {
-//        let gasCoin = Coin.init(WUtils.getGasDenom(chainType), mFee.stringValue)
-//        var amount: Array<Coin> = Array<Coin>()
-//        amount.append(gasCoin)
-//
-//        var fee = Fee.init()
-//        fee.amount = amount
-//        fee.gas = mEstimateGasAmount.stringValue
-//
-//        pageHolderVC.mFee = fee
-    }
-    
-    func onCheckValidate() -> Bool {
-        return true
+        if (!mSimulPassed) {
+            self.onShowToast(NSLocalizedString("error_simul_error", comment: ""))
+            return
+        }
+        btnBefore.isUserInteractionEnabled = false
+        btnNext.isUserInteractionEnabled = false
+        pageHolderVC.mFee = mFee
+        pageHolderVC.onNextPage()
     }
     
     func onFetchgRPCAuth(_ account: Account) {
@@ -236,7 +204,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 DispatchQueue.main.async(execute: {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {
-                            self.mEstimateGasAmount = NSDecimalNumber.init(value: response.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
+                            self.mFeeGasAmount = NSDecimalNumber.init(value: response.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
                             self.mSimulPassed = true
                             self.onUpdateView()
                         })
@@ -248,6 +216,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                     if (self.waitAlert != nil) {
                         self.waitAlert?.dismiss(animated: true, completion: {
                             self.mSimulPassed = false
+                            self.onUpdateView()
                             self.onShowToast(NSLocalizedString("error_network", comment: "") + "\n" + "\(error)")
                         })
                     }
@@ -260,19 +229,19 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         if (pageHolderVC.mType == TASK_TYPE_TRANSFER) {
             return Signer.genSimulateSendTxgRPC(auth,
                                                 self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
-                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                self.mFee, self.pageHolderVC.mMemo!,
                                                 privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_DELEGATE) {
             return Signer.genSimulateDelegateTxgRPC(auth,
                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    self.mFee, self.pageHolderVC.mMemo!,
                                                     privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_UNDELEGATE) {
             return Signer.genSimulateUnDelegateTxgRPC(auth,
                                                       self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToUndelegateAmount!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       privateKey, publicKey, self.chainType!)
                   
             
@@ -280,31 +249,31 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             return Signer.genSimulateReDelegateTxgRPC(auth,
                                                       self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
                                                       self.pageHolderVC.mToReDelegateAmount!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
             return Signer.genSimulateClaimRewardsTxgRPC(auth,
                                                         self.pageHolderVC.mRewardTargetValidators_gRPC,
-                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                        self.mFee, self.pageHolderVC.mMemo!,
                                                         privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_REINVEST) {
             return Signer.genSimulateReInvestTxgRPC(auth,
                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mReinvestReward!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    self.mFee, self.pageHolderVC.mMemo!,
                                                     privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
             return Signer.genSimulateetRewardAddressTxgRPC(auth,
                                                            self.pageHolderVC.mToChangeRewardAddress!,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_VOTE) {
             return Signer.genSimulateVoteTxgRPC(auth,
                                                 self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
-                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                self.mFee, self.pageHolderVC.mMemo!,
                                                 privateKey, publicKey, self.chainType!)
             
         }
@@ -314,45 +283,45 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             return Signer.genSimulateRegisterDomainMsgTxgRPC(auth,
                                                              self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
                                                              self.pageHolderVC.mStarnameDomainType!,
-                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                             self.mFee, self.pageHolderVC.mMemo!,
                                                              privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT) {
             return Signer.genSimulateRegisterAccountMsgTxgRPC(auth,
                                                               self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
                                                               self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mStarnameResources_gRPC,
-                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              self.mFee, self.pageHolderVC.mMemo!,
                                                               privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_DOMAIN) {
             return Signer.genSimulateDeleteDomainMsgTxgRPC (auth,
                                                             self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
-                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            self.mFee, self.pageHolderVC.mMemo!,
                                                             privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
             return Signer.genSimulateDeleteAccountMsgTxgRPC (auth,
                                                              self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
-                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                             self.mFee, self.pageHolderVC.mMemo!,
                                                              privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
             return Signer.genSimulateRenewDomainMsgTxgRPC (auth,
                                                            self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
             return Signer.genSimulateRenewAccountMsgTxgRPC (auth,
                                                             self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
-                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            self.mFee, self.pageHolderVC.mMemo!,
                                                             privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_REPLACE_RESOURCE) {
             return Signer.genSimulateReplaceResourceMsgTxgRPC(auth,
                                                               self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount, self.pageHolderVC.mAccount!.account_address,
                                                               self.pageHolderVC.mStarnameResources_gRPC,
-                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              self.mFee, self.pageHolderVC.mMemo!,
                                                               privateKey, publicKey, self.chainType!)
         }
         
@@ -368,28 +337,28 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                      self.pageHolderVC.mSwapInDenom!,
                                                      self.pageHolderVC.mSwapInAmount!.stringValue,
                                                      self.pageHolderVC.mSwapOutAmount!.stringValue,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_JOIN_POOL) {
             return Signer.genSimulateDepositPoolMsgTxgRPC(auth,
                                                           self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
                                                           self.pageHolderVC.mLPCoin!.amount,
-                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          self.mFee, self.pageHolderVC.mMemo!,
                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_EXIT_POOL) {
             return Signer.genSimulateWithdrawPoolMsgTxgRPC(auth,
                                                            self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
                                                            self.pageHolderVC.mLPCoin!.amount,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_LOCK) {
             return Signer.genSimulateLockTokensMsgTxgRPC(auth,
                                                          self.pageHolderVC.mLPCoin!,
                                                          self.pageHolderVC.mLockupDuration!,
-                                                         self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                         self.mFee, self.pageHolderVC.mMemo!,
                                                          privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
@@ -399,7 +368,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             }
             return Signer.genSimulateBeginUnlockingsMsgTxgRPC(auth,
                                                               ids,
-                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              self.mFee, self.pageHolderVC.mMemo!,
                                                               privateKey, publicKey, self.chainType!)
             
         }
@@ -414,7 +383,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                           self.pageHolderVC.mIBCSendAmount!,
                                                           self.pageHolderVC.mIBCSendPath!,
                                                           height!,
-                                                          self.pageHolderVC.mFee!, IBC_TRANSFER_MEMO,
+                                                          self.mFee, IBC_TRANSFER_MEMO,
                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_IBC_CW20_TRANSFER) {
@@ -423,7 +392,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                               self.pageHolderVC.mToSendRecipientAddress!,
                                               self.pageHolderVC.mCw20SendContract!,
                                               self.pageHolderVC.mToSendAmount,
-                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                              self.mFee, self.pageHolderVC.mMemo!,
                                               privateKey, publicKey, self.chainType!)
             
         }
@@ -434,7 +403,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                        self.pageHolderVC.mPoolCoin0!.amount,
                                                        self.pageHolderVC.mPoolCoin1!.denom,
                                                        self.pageHolderVC.mPoolCoin1!.amount,
-                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                        privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_SIF_REMOVE_LP) {
@@ -447,7 +416,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                           self.account!.account_address,
                                                           self.pageHolderVC.mSifPool!.externalAsset.symbol,
                                                           basisPoints,
-                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          self.mFee, self.pageHolderVC.mMemo!,
                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_SIF_SWAP_CION) {
@@ -457,7 +426,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                       self.pageHolderVC.mSwapInAmount!.stringValue,
                                                       self.pageHolderVC.mSwapOutDenom!,
                                                       self.pageHolderVC.mSwapOutAmount!.stringValue,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       privateKey, publicKey, self.chainType!)
         }
         
@@ -477,7 +446,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                             self.pageHolderVC.mNFTName!,
                                                             NFT_INFURA + self.pageHolderVC.mNFTHash!,
                                                             String(data: jsonData, encoding: .utf8)!,
-                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            self.mFee, self.pageHolderVC.mMemo!,
                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                             self.chainType!)
                 
@@ -490,7 +459,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                            self.pageHolderVC.mNFTName!,
                                                            NFT_INFURA + self.pageHolderVC.mNFTHash!,
                                                            String(data: jsonData, encoding: .utf8)!,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                            self.chainType!)
             }
@@ -502,7 +471,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                            self.pageHolderVC.mNFTTokenId!,
                                                            self.pageHolderVC.mNFTDenomId!,
                                                            self.pageHolderVC.irisResponse!,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                            self.chainType!)
                 
@@ -512,7 +481,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                           self.pageHolderVC.mNFTTokenId!,
                                                           self.pageHolderVC.mNFTDenomId!,
                                                           self.pageHolderVC.croResponse!,
-                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          self.mFee, self.pageHolderVC.mMemo!,
                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                           self.chainType!)
             }
@@ -522,7 +491,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 return Signer.genSimulateIssueNftDenomIrisTxgRPC(auth, self.account!.account_address,
                                                                  self.pageHolderVC.mNFTDenomId!,
                                                                  self.pageHolderVC.mNFTDenomName!,
-                                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                                 self.mFee, self.pageHolderVC.mMemo!,
                                                                  self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                  self.chainType!)
                 
@@ -530,7 +499,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 return Signer.genSimulateIssueNftDenomCroTxgRPC(auth, self.account!.account_address,
                                                                 self.pageHolderVC.mNFTDenomId!,
                                                                 self.pageHolderVC.mNFTDenomName!,
-                                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                                self.mFee, self.pageHolderVC.mMemo!,
                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                 self.chainType!)
             }
@@ -546,7 +515,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                        self.pageHolderVC.mDesmosBio!,
                                                        (self.pageHolderVC.mDesmosProfileHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosProfileHash!,
                                                        (self.pageHolderVC.mDesmosCoverHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosCoverHash!,
-                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                        self.chainType!)
             
@@ -572,7 +541,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                      toAccount,
                                                      toPrivateKey,
                                                      toPublicKey,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -585,7 +554,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                    self.pageHolderVC.mCollateral,
                                                    self.pageHolderVC.mPrincipal,
                                                    self.pageHolderVC.mCollateralParamType!,
-                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                   self.mFee, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                    self.chainType!)
             
@@ -595,7 +564,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mCollateral,
                                                     self.pageHolderVC.mCollateralParamType!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    self.mFee, self.pageHolderVC.mMemo!,
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                     self.chainType!)
             
@@ -605,7 +574,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mCollateral,
                                                      self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -614,7 +583,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mPrincipal,
                                                      self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -623,7 +592,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                   self.account!.account_address,
                                                   self.pageHolderVC.mPayment,
                                                   self.pageHolderVC.mCollateralParamType!,
-                                                  self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                  self.mFee, self.pageHolderVC.mMemo!,
                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                   self.chainType!)
             
@@ -631,7 +600,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             return Signer.genSimulateKavaHardDeposit(auth,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mHardPoolCoins!,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
                
@@ -640,7 +609,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             return Signer.genSimulateKavaHardWithdraw(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mHardPoolCoins!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
                 
@@ -649,7 +618,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             return Signer.genSimulateKavaHardBorrow(auth,
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mHardPoolCoins!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    self.mFee, self.pageHolderVC.mMemo!,
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                     self.chainType!)
               
@@ -659,7 +628,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                    self.account!.account_address,
                                                    self.account!.account_address,
                                                    self.pageHolderVC.mHardPoolCoins!,
-                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                   self.mFee, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                    self.chainType!)
              
@@ -673,7 +642,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                      self.pageHolderVC.mPoolCoin1!,
                                                      slippage,
                                                      deadline,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -694,7 +663,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                       coin0,
                                                       coin1,
                                                       deadline,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
             
@@ -709,7 +678,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                              outCoin,
                                                              slippage,
                                                              deadline,
-                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                             self.mFee, self.pageHolderVC.mMemo!,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                              self.chainType!)
             
@@ -717,7 +686,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             return Signer.genSimulateKavaIncentiveAll(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mIncentiveMultiplier!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
         }
@@ -939,19 +908,19 @@ class FeeGrpcViewController: BaseViewController {
         if (pageHolderVC.mType == TASK_TYPE_TRANSFER) {
             return Signer.genSimulateSendTxgRPC(auth,
                                                 self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
-                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                self.mFee, self.pageHolderVC.mMemo!,
                                                 privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_DELEGATE) {
             return Signer.genSimulateDelegateTxgRPC(auth,
                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    self.mFee, self.pageHolderVC.mMemo!,
                                                     privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_UNDELEGATE) {
             return Signer.genSimulateUnDelegateTxgRPC(auth,
                                                       self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToUndelegateAmount!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       privateKey, publicKey, self.chainType!)
                   
             
@@ -959,31 +928,31 @@ class FeeGrpcViewController: BaseViewController {
             return Signer.genSimulateReDelegateTxgRPC(auth,
                                                       self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
                                                       self.pageHolderVC.mToReDelegateAmount!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_CLAIM_STAKE_REWARD) {
             return Signer.genSimulateClaimRewardsTxgRPC(auth,
                                                         self.pageHolderVC.mRewardTargetValidators_gRPC,
-                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                        self.mFee, self.pageHolderVC.mMemo!,
                                                         privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_REINVEST) {
             return Signer.genSimulateReInvestTxgRPC(auth,
                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mReinvestReward!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    self.mFee, self.pageHolderVC.mMemo!,
                                                     privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
             return Signer.genSimulateetRewardAddressTxgRPC(auth,
                                                            self.pageHolderVC.mToChangeRewardAddress!,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_VOTE) {
             return Signer.genSimulateVoteTxgRPC(auth,
                                                 self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
-                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                self.mFee, self.pageHolderVC.mMemo!,
                                                 privateKey, publicKey, self.chainType!)
             
         }
@@ -993,45 +962,45 @@ class FeeGrpcViewController: BaseViewController {
             return Signer.genSimulateRegisterDomainMsgTxgRPC(auth,
                                                              self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
                                                              self.pageHolderVC.mStarnameDomainType!,
-                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                             self.mFee, self.pageHolderVC.mMemo!,
                                                              privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT) {
             return Signer.genSimulateRegisterAccountMsgTxgRPC(auth,
                                                               self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
                                                               self.pageHolderVC.mAccount!.account_address, self.pageHolderVC.mStarnameResources_gRPC,
-                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              self.mFee, self.pageHolderVC.mMemo!,
                                                               privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_DOMAIN) {
             return Signer.genSimulateDeleteDomainMsgTxgRPC (auth,
                                                             self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
-                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            self.mFee, self.pageHolderVC.mMemo!,
                                                             privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
             return Signer.genSimulateDeleteAccountMsgTxgRPC (auth,
                                                              self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
-                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                             self.mFee, self.pageHolderVC.mMemo!,
                                                              privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
             return Signer.genSimulateRenewDomainMsgTxgRPC (auth,
                                                            self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mAccount!.account_address,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
             return Signer.genSimulateRenewAccountMsgTxgRPC (auth,
                                                             self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount!, self.pageHolderVC.mAccount!.account_address,
-                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            self.mFee, self.pageHolderVC.mMemo!,
                                                             privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_REPLACE_RESOURCE) {
             return Signer.genSimulateReplaceResourceMsgTxgRPC(auth,
                                                               self.pageHolderVC.mStarnameDomain!, self.pageHolderVC.mStarnameAccount, self.pageHolderVC.mAccount!.account_address,
                                                               self.pageHolderVC.mStarnameResources_gRPC,
-                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              self.mFee, self.pageHolderVC.mMemo!,
                                                               privateKey, publicKey, self.chainType!)
         }
         
@@ -1047,28 +1016,28 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.pageHolderVC.mSwapInDenom!,
                                                      self.pageHolderVC.mSwapInAmount!.stringValue,
                                                      self.pageHolderVC.mSwapOutAmount!.stringValue,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_JOIN_POOL) {
             return Signer.genSimulateDepositPoolMsgTxgRPC(auth,
                                                           self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
                                                           self.pageHolderVC.mLPCoin!.amount,
-                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          self.mFee, self.pageHolderVC.mMemo!,
                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_EXIT_POOL) {
             return Signer.genSimulateWithdrawPoolMsgTxgRPC(auth,
                                                            self.pageHolderVC.mPoolId!, self.pageHolderVC.mPoolCoin0!, self.pageHolderVC.mPoolCoin1!,
                                                            self.pageHolderVC.mLPCoin!.amount,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_LOCK) {
             return Signer.genSimulateLockTokensMsgTxgRPC(auth,
                                                          self.pageHolderVC.mLPCoin!,
                                                          self.pageHolderVC.mLockupDuration!,
-                                                         self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                         self.mFee, self.pageHolderVC.mMemo!,
                                                          privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
@@ -1078,7 +1047,7 @@ class FeeGrpcViewController: BaseViewController {
             }
             return Signer.genSimulateBeginUnlockingsMsgTxgRPC(auth,
                                                               ids,
-                                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                              self.mFee, self.pageHolderVC.mMemo!,
                                                               privateKey, publicKey, self.chainType!)
             
         }
@@ -1093,7 +1062,7 @@ class FeeGrpcViewController: BaseViewController {
                                                           self.pageHolderVC.mIBCSendAmount!,
                                                           self.pageHolderVC.mIBCSendPath!,
                                                           height!,
-                                                          self.pageHolderVC.mFee!, IBC_TRANSFER_MEMO,
+                                                          self.mFee, IBC_TRANSFER_MEMO,
                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_IBC_CW20_TRANSFER) {
@@ -1102,7 +1071,7 @@ class FeeGrpcViewController: BaseViewController {
                                               self.pageHolderVC.mToSendRecipientAddress!,
                                               self.pageHolderVC.mCw20SendContract!,
                                               self.pageHolderVC.mToSendAmount,
-                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                              self.mFee, self.pageHolderVC.mMemo!,
                                               privateKey, publicKey, self.chainType!)
             
         }
@@ -1113,7 +1082,7 @@ class FeeGrpcViewController: BaseViewController {
                                                        self.pageHolderVC.mPoolCoin0!.amount,
                                                        self.pageHolderVC.mPoolCoin1!.denom,
                                                        self.pageHolderVC.mPoolCoin1!.amount,
-                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                        privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_SIF_REMOVE_LP) {
@@ -1126,7 +1095,7 @@ class FeeGrpcViewController: BaseViewController {
                                                           self.account!.account_address,
                                                           self.pageHolderVC.mSifPool!.externalAsset.symbol,
                                                           basisPoints,
-                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          self.mFee, self.pageHolderVC.mMemo!,
                                                           privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_SIF_SWAP_CION) {
@@ -1136,7 +1105,7 @@ class FeeGrpcViewController: BaseViewController {
                                                       self.pageHolderVC.mSwapInAmount!.stringValue,
                                                       self.pageHolderVC.mSwapOutDenom!,
                                                       self.pageHolderVC.mSwapOutAmount!.stringValue,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       privateKey, publicKey, self.chainType!)
         }
         
@@ -1156,7 +1125,7 @@ class FeeGrpcViewController: BaseViewController {
                                                             self.pageHolderVC.mNFTName!,
                                                             NFT_INFURA + self.pageHolderVC.mNFTHash!,
                                                             String(data: jsonData, encoding: .utf8)!,
-                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                            self.mFee, self.pageHolderVC.mMemo!,
                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                             self.chainType!)
                 
@@ -1169,7 +1138,7 @@ class FeeGrpcViewController: BaseViewController {
                                                            self.pageHolderVC.mNFTName!,
                                                            NFT_INFURA + self.pageHolderVC.mNFTHash!,
                                                            String(data: jsonData, encoding: .utf8)!,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                            self.chainType!)
             }
@@ -1181,7 +1150,7 @@ class FeeGrpcViewController: BaseViewController {
                                                            self.pageHolderVC.mNFTTokenId!,
                                                            self.pageHolderVC.mNFTDenomId!,
                                                            self.pageHolderVC.irisResponse!,
-                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.mFee, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                            self.chainType!)
                 
@@ -1191,7 +1160,7 @@ class FeeGrpcViewController: BaseViewController {
                                                           self.pageHolderVC.mNFTTokenId!,
                                                           self.pageHolderVC.mNFTDenomId!,
                                                           self.pageHolderVC.croResponse!,
-                                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                          self.mFee, self.pageHolderVC.mMemo!,
                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                           self.chainType!)
             }
@@ -1201,7 +1170,7 @@ class FeeGrpcViewController: BaseViewController {
                 return Signer.genSimulateIssueNftDenomIrisTxgRPC(auth, self.account!.account_address,
                                                                  self.pageHolderVC.mNFTDenomId!,
                                                                  self.pageHolderVC.mNFTDenomName!,
-                                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                                 self.mFee, self.pageHolderVC.mMemo!,
                                                                  self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                  self.chainType!)
                 
@@ -1209,7 +1178,7 @@ class FeeGrpcViewController: BaseViewController {
                 return Signer.genSimulateIssueNftDenomCroTxgRPC(auth, self.account!.account_address,
                                                                 self.pageHolderVC.mNFTDenomId!,
                                                                 self.pageHolderVC.mNFTDenomName!,
-                                                                self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                                self.mFee, self.pageHolderVC.mMemo!,
                                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                                 self.chainType!)
             }
@@ -1225,7 +1194,7 @@ class FeeGrpcViewController: BaseViewController {
                                                        self.pageHolderVC.mDesmosBio!,
                                                        (self.pageHolderVC.mDesmosProfileHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosProfileHash!,
                                                        (self.pageHolderVC.mDesmosCoverHash?.isEmpty == true) ? "" :  NFT_INFURA + self.pageHolderVC.mDesmosCoverHash!,
-                                                       self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                        self.chainType!)
             
@@ -1251,7 +1220,7 @@ class FeeGrpcViewController: BaseViewController {
                                                      toAccount,
                                                      toPrivateKey,
                                                      toPublicKey,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -1264,7 +1233,7 @@ class FeeGrpcViewController: BaseViewController {
                                                    self.pageHolderVC.mCollateral,
                                                    self.pageHolderVC.mPrincipal,
                                                    self.pageHolderVC.mCollateralParamType!,
-                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                   self.mFee, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                    self.chainType!)
             
@@ -1274,7 +1243,7 @@ class FeeGrpcViewController: BaseViewController {
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mCollateral,
                                                     self.pageHolderVC.mCollateralParamType!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    self.mFee, self.pageHolderVC.mMemo!,
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                     self.chainType!)
             
@@ -1284,7 +1253,7 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mCollateral,
                                                      self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -1293,7 +1262,7 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mPrincipal,
                                                      self.pageHolderVC.mCollateralParamType!,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -1302,7 +1271,7 @@ class FeeGrpcViewController: BaseViewController {
                                                   self.account!.account_address,
                                                   self.pageHolderVC.mPayment,
                                                   self.pageHolderVC.mCollateralParamType!,
-                                                  self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                  self.mFee, self.pageHolderVC.mMemo!,
                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                   self.chainType!)
             
@@ -1310,7 +1279,7 @@ class FeeGrpcViewController: BaseViewController {
             return Signer.genSimulateKavaHardDeposit(auth,
                                                      self.account!.account_address,
                                                      self.pageHolderVC.mHardPoolCoins!,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
                
@@ -1319,7 +1288,7 @@ class FeeGrpcViewController: BaseViewController {
             return Signer.genSimulateKavaHardWithdraw(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mHardPoolCoins!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
                 
@@ -1328,7 +1297,7 @@ class FeeGrpcViewController: BaseViewController {
             return Signer.genSimulateKavaHardBorrow(auth,
                                                     self.account!.account_address,
                                                     self.pageHolderVC.mHardPoolCoins!,
-                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                    self.mFee, self.pageHolderVC.mMemo!,
                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                     self.chainType!)
               
@@ -1338,7 +1307,7 @@ class FeeGrpcViewController: BaseViewController {
                                                    self.account!.account_address,
                                                    self.account!.account_address,
                                                    self.pageHolderVC.mHardPoolCoins!,
-                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                   self.mFee, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                    self.chainType!)
              
@@ -1352,7 +1321,7 @@ class FeeGrpcViewController: BaseViewController {
                                                      self.pageHolderVC.mPoolCoin1!,
                                                      slippage,
                                                      deadline,
-                                                     self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                      self.chainType!)
             
@@ -1373,7 +1342,7 @@ class FeeGrpcViewController: BaseViewController {
                                                       coin0,
                                                       coin1,
                                                       deadline,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
             
@@ -1388,7 +1357,7 @@ class FeeGrpcViewController: BaseViewController {
                                                              outCoin,
                                                              slippage,
                                                              deadline,
-                                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                             self.mFee, self.pageHolderVC.mMemo!,
                                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                              self.chainType!)
             
@@ -1396,7 +1365,7 @@ class FeeGrpcViewController: BaseViewController {
             return Signer.genSimulateKavaIncentiveAll(auth,
                                                       self.account!.account_address,
                                                       self.pageHolderVC.mIncentiveMultiplier!,
-                                                      self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
         }

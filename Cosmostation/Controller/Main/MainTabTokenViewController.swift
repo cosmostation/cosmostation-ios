@@ -513,7 +513,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func onBindPoolToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
         cell?.tokenSymbol.textColor = UIColor(named: "_font05")
         if (chainType == .OSMOSIS_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenPool")
+            cell?.tokenImg.image = UIImage(named: "tokenOsmosisPool")
             cell?.tokenSymbol.text = coin.isOsmosisAmmDpDenom()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = coin.denom

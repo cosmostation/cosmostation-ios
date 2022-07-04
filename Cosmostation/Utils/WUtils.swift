@@ -1621,20 +1621,28 @@ public class WUtils {
         }
         if (result.count == 1) {
             result[0].title = "Fixed"
+            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
         } else if (result.count == 2) {
             result[1].title = "Average"
+            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
             if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
                 result[0].title = "Zero"
+                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
             } else {
                 result[0].title = "Tiny"
+                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
             }
         } else if (result.count == 3) {
             result[2].title = "Average"
+            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
             result[1].title = "Low"
+            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
             if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
                 result[0].title = "Zero"
+                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
             } else {
                 result[0].title = "Tiny"
+                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
             }
         }
         return result

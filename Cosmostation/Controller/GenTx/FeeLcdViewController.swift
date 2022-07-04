@@ -45,8 +45,8 @@ class FeeLcdViewController: BaseViewController {
         mDivideDecimal = WUtils.mainDivideDecimal(chainType)
         mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         if #available(iOS 13.0, *) {
-            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")], for: .selected)
+            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")], for: .normal)
             gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
             gasSelectSegments.tintColor = chainConfig?.chainColor

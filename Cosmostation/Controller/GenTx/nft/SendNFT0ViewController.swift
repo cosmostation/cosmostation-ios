@@ -23,7 +23,7 @@ class SendNFT0ViewController: BaseViewController, QrScannerDelegate {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        self.addressInput.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+        self.addressInput.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(named: "_font03")])
     }
     
     override func enableUserInteraction() {

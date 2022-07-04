@@ -28,19 +28,19 @@ public class WDP {
                 denomLabel?.textColor = UIColor.init(named: "kava_swp")
                 return
             }
-            
+
         } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
             if (denom == OSMOSIS_ION_DENOM) {
                 denomLabel?.textColor = UIColor.init(named: "osmosis_ion")
                 return
             }
-            
+
         } else if (chainConfig!.chainType == .CRESCENT_MAIN) {
             if (denom == CRESCENT_BCRE_DENOM) {
                 denomLabel?.textColor = UIColor.init(named: "crescent_bcre")
                 return
             }
-            
+
         } else if (chainConfig!.chainType == .NYX_MAIN) {
             if (denom == NYX_NYM_DENOM) {
                 denomLabel?.textColor = UIColor.init(named: "nyx_nym")
@@ -78,7 +78,7 @@ public class WDP {
                 imgView?.image = UIImage(named: "tokenIon")
                 return
             } else if (denom!.starts(with: "gamm/pool/")) {
-                imgView?.image =  UIImage(named: "tokenPool")
+                imgView?.image =  UIImage(named: "tokenOsmosisPool")
                 return
             }
             
@@ -112,7 +112,7 @@ public class WDP {
             
         } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
             if (denom!.starts(with: "share")) {
-                imgView?.image = UIImage(named: "tokenDefault")
+                imgView?.image = UIImage(named: "tokenInjectivePool")
                 return
                 
             } else if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {

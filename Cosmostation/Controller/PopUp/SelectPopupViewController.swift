@@ -328,9 +328,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_FEE_DENOM) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let feeDenom = feeData[indexPath.row].denom
-//            cell?.coinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(swapOutDenom))!)
-//            cell!.coinTitle.text = WUtils.getSymbol(chainConfig, swapOutDenom)
-            cell!.coinTitle.text = feeDenom
+            WDP.dpSymbolImg(chainConfig, feeDenom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, feeDenom, cell!.coinTitle)
             return cell!
             
         } else {
