@@ -50,8 +50,6 @@ class CommonMyPoolCell: UITableViewCell {
         
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0BaseDenom = BaseData.instance.getBaseDenom(chainConfig, coin0.denom)
-        let coin1BaseDenom = BaseData.instance.getBaseDenom(chainConfig, coin1.denom)
         let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
         let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
         let coin0Decimal = WUtils.getOsmosisCoinDecimal(coin0.denom)
@@ -59,8 +57,8 @@ class CommonMyPoolCell: UITableViewCell {
         
         poolPairLabel.text = "#" + String(pool.id) + " " + coin0Symbol + " : " + coin1Symbol
         
-        let coin0Value = WUtils.usdValue(coin0BaseDenom, NSDecimalNumber.init(string: coin0.amount), coin0Decimal)
-        let coin1Value = WUtils.usdValue(coin1BaseDenom, NSDecimalNumber.init(string: coin1.amount), coin1Decimal)
+        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
         let poolValue = coin0Value.adding(coin1Value)
         let nf = WUtils.getNumberFormatter(2)
         let formatted = "$ " + nf.string(from: poolValue)!

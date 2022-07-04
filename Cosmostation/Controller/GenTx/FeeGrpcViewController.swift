@@ -122,12 +122,11 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         
         WDP.dpSymbolImg(chainConfig, mFeeData.denom, feeTypeImg)
         WDP.dpSymbol(chainConfig, mFeeData.denom, feeTypeDenom)
-        
         WUtils.showCoinDp(mFee.amount[0], feeTotalDenom, feeTotalAmount, chainType!)
         
-        //TODO fixit decimal
-//        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(mFeeData.denom!, NSDecimalNumber.init(string: mFee.amount[0].amount), 6, feeTotalValue.font)
-        
+        let denomDecimal = WUtils.getDenomDecimal(chainConfig, mFeeData.denom)
+        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(mFeeData.denom!, NSDecimalNumber.init(string: mFee.amount[0].amount), denomDecimal, feeTotalValue.font)
+    
         gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
     }
     

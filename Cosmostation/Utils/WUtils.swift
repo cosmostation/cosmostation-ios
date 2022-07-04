@@ -433,9 +433,11 @@ public class WUtils {
         return nil
     }
     
-    static func usdValue(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
-        if let perUsdValue = perUsdValue(denom) {
-            return perUsdValue.multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler3Down)
+    static func usdValue(_ chainConfig: ChainConfig, _ denom: String, _ amount: NSDecimalNumber) -> NSDecimalNumber {
+        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, denom)
+        let decimalDenom = getDenomDecimal(chainConfig, denom)
+        if let perUsdValue = perUsdValue(baseDenom) {
+            return perUsdValue.multiplying(by: amount).multiplying(byPowerOf10: -decimalDenom, withBehavior: handler3Down)
         }
         return NSDecimalNumber.zero
     }

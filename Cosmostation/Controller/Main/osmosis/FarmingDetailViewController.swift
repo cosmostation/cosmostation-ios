@@ -32,12 +32,8 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     var coin0: Coin!
     var coin1: Coin!
-    var coin0BaseDenom: String!
-    var coin1BaseDenom: String!
     var coin0Symbol: String!
     var coin1Symbol: String!
-    var coin0Decimal: Int16!
-    var coin1Decimal: Int16!
     var lpCoinPrice = NSDecimalNumber.zero
     var poolValue = NSDecimalNumber.zero
     var nf: NumberFormatter!
@@ -72,17 +68,13 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         
         coin0 = Coin.init(mPool.poolAssets[0].token.denom, mPool.poolAssets[0].token.amount)
         coin1 = Coin.init(mPool.poolAssets[1].token.denom, mPool.poolAssets[1].token.amount)
-        coin0BaseDenom = BaseData.instance.getBaseDenom(chainConfig, coin0.denom)
-        coin1BaseDenom = BaseData.instance.getBaseDenom(chainConfig, coin1.denom)
         let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
         let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
-        coin0Decimal = WUtils.getOsmosisCoinDecimal(coin0.denom)
-        coin1Decimal = WUtils.getOsmosisCoinDecimal(coin1.denom)
         lpCoinPrice = WUtils.getOsmoLpTokenPerUsdPrice(mPool)
         nf = WUtils.getNumberFormatter(2)
         
-        let coin0Value = WUtils.usdValue(coin0BaseDenom, NSDecimalNumber.init(string: coin0.amount), coin0Decimal)
-        let coin1Value = WUtils.usdValue(coin1BaseDenom, NSDecimalNumber.init(string: coin1.amount), coin1Decimal)
+        let coin0Value = WUtils.usdValue(chainConfig!, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+        let coin1Value = WUtils.usdValue(chainConfig!, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
         poolValue = coin0Value.adding(coin1Value)
         
         
@@ -101,15 +93,16 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         if (mPoolGauges.count == 3 && mPoolGauges[0].distributedCoins.count > 0 && mPoolGauges[1].distributedCoins.count > 0 && mPoolGauges[2].distributedCoins.count > 0) {
             let gauge0Amount = mPoolGauges[0].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
             let incentive1Day = NSDecimalNumber.init(string: gauge0Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[0].distributedCoins[0].amount))
-            let incentiveValue1Day = WUtils.usdValue(BaseData.instance.getBaseDenom(chainConfig, OSMOSIS_MAIN_DENOM), incentive1Day, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
+            let incentiveValue1Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive1Day)
             
             let gauge1Amount = mPoolGauges[1].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
             let incentive7Day = NSDecimalNumber.init(string: gauge1Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[1].distributedCoins[0].amount))
-            var incentiveValue7Day = WUtils.usdValue(BaseData.instance.getBaseDenom(chainConfig, OSMOSIS_MAIN_DENOM), incentive7Day, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
+            var incentiveValue7Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive7Day)
             
             let gauge2Amount = mPoolGauges[2].coins.filter { $0.denom == OSMOSIS_MAIN_DENOM }.first?.amount ?? "0"
             let incentive14Day = NSDecimalNumber.init(string: gauge2Amount).subtracting(NSDecimalNumber.init(string: mPoolGauges[2].distributedCoins[0].amount))
-            var incentiveValue14Day = WUtils.usdValue(BaseData.instance.getBaseDenom(chainConfig, OSMOSIS_MAIN_DENOM), incentive14Day, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
+            var incentiveValue14Day = WUtils.usdValue(chainConfig!, OSMOSIS_MAIN_DENOM, incentive14Day)
+            
             
             incentiveValue14Day = incentiveValue14Day.adding(incentiveValue7Day).adding(incentiveValue1Day)
             incentiveValue7Day = incentiveValue7Day.adding(incentiveValue1Day)
