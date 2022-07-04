@@ -53,7 +53,7 @@ class HarvestDetailTopCell: UITableViewCell {
         systemBorrowedValue.attributedText = WUtils.getDPRawDollor("0", 2, systemBorrowedValue.font)
         systemRemainBorrowableValue.attributedText = WUtils.getDPRawDollor("0", 2, systemRemainBorrowableValue.font)
 
-        let dpDecimal = WUtils.getKavaCoinDecimal(hardMoneyMarketDenom)
+        let dpDecimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarketDenom)
         let targetPrice = BaseData.instance.getKavaOraclePrice(hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID)
 
         // display system total supplied

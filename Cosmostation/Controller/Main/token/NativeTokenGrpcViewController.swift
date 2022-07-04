@@ -87,8 +87,8 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         } else if (chainType == ChainType.KAVA_MAIN) {
             WDP.dpSymbol(chainConfig, nativeDenom, naviTokenSymbol)
             WDP.dpSymbolImg(chainConfig, nativeDenom, naviTokenImg)
-            nativeDivideDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
-            nativeDisplayDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
+            nativeDivideDecimal = WUtils.getDenomDecimal(chainConfig, nativeDenom)
+            nativeDisplayDecimal = WUtils.getDenomDecimal(chainConfig, nativeDenom)
             totalAmount = WUtils.getKavaTokenAll(nativeDenom)
             
         } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {

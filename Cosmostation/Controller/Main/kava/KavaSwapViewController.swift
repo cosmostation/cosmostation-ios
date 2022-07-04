@@ -94,8 +94,8 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
     }
     
     func updateView() {
-        let inputCoinDecimal = WUtils.getKavaCoinDecimal(mInputCoinDenom)
-        let outputCoinDecimal = WUtils.getKavaCoinDecimal(mOutputCoinDenom)
+        let inputCoinDecimal = WUtils.getDenomDecimal(chainConfig, mInputCoinDenom)
+        let outputCoinDecimal = WUtils.getDenomDecimal(chainConfig, mOutputCoinDenom)
         mAvailableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mInputCoinDenom!)
 
         let swapFee = NSDecimalNumber.init(string: mKavaSwapPoolParam?.swapFee).multiplying(byPowerOf10: -16)

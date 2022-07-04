@@ -34,10 +34,15 @@ class HardListCell: UITableViewCell {
             return
         }
         let chainConfig = ChainKava.init(.KAVA_MAIN)
-        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, hardMoneyMarket.denom)
+        var hardImgDenom = ""
+        if (hardMoneyMarket.denom.starts(with: "ibc/")) {
+            hardImgDenom = BaseData.instance.getBaseDenom(chainConfig, hardMoneyMarket.denom)
+        } else {
+            hardImgDenom = hardMoneyMarket.denom
+        }
         let decimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarket.denom)
-        let url = KAVA_HARD_POOL_IMG_URL + "lp" + baseDenom + ".png"
-        let title = hardMoneyMarket.spotMarketID.replacingOccurrences(of: ":30", with: "")
+        let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom + ".png"
+        let title = hardMoneyMarket.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "")
         harvestImg.af_setImage(withURL: URL(string: url)!)
         harvestTitle.text = title.uppercased()
         

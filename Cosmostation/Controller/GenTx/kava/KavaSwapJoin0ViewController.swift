@@ -62,8 +62,8 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_KAVA_SWAP_DEPOSIT, 0)
         coin0Denom = mKavaSwapPool.coins[0].denom
         coin1Denom = mKavaSwapPool.coins[1].denom
-        coin0Decimal = WUtils.getKavaCoinDecimal(coin0Denom)
-        coin1Decimal = WUtils.getKavaCoinDecimal(coin1Denom)
+        coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0Denom)
+        coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1Denom)
         
         if (mKavaSwapPool.coins[0].denom == coin0Denom) {
             coin0Amount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)

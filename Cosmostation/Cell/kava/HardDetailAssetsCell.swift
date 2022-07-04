@@ -33,7 +33,7 @@ class HardDetailAssetsCell: UITableViewCell {
             marketLayer.isHidden = true
         }
 
-        let dpDecimal = WUtils.getKavaCoinDecimal(hardMoneyMarketDenom)
+        let dpDecimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarketDenom)
         let targetAvailable = BaseData.instance.getAvailableAmount_gRPC(hardMoneyMarketDenom)
         let targetPrice = BaseData.instance.getKavaOraclePrice(hardParam.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID)
         let marketValue = targetAvailable.multiplying(byPowerOf10: -dpDecimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)

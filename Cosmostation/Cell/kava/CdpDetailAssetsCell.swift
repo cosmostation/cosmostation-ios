@@ -40,9 +40,9 @@ class CdpDetailAssetsCell: UITableViewCell {
         let chainConfig = ChainKava.init(.KAVA_MAIN)
         let cDenom = collateralParam!.getcDenom()!
         let pDenom = collateralParam!.getpDenom()!
-        let cDpDecimal = WUtils.getKavaCoinDecimal(cDenom)
-        let pDpDecimal = WUtils.getKavaCoinDecimal(pDenom)
-        let kDpDecimal = WUtils.getKavaCoinDecimal(KAVA_MAIN_DENOM)
+        let cDpDecimal = WUtils.getDenomDecimal(chainConfig, cDenom)
+        let pDpDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
+        let kDpDecimal = WUtils.getDenomDecimal(chainConfig, KAVA_MAIN_DENOM)
         let cAvailable = BaseData.instance.getAvailableAmount_gRPC(cDenom)
         let pAvailable = BaseData.instance.getAvailableAmount_gRPC(pDenom)
         let kAvailable = BaseData.instance.getAvailableAmount_gRPC(KAVA_MAIN_DENOM)

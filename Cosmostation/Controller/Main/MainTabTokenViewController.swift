@@ -553,9 +553,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"
 
         let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-        let decimal = WUtils.getKavaCoinDecimal(coin.denom)
+        let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
         let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-        cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(coin.denom), 6)
+        cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
         cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
     }
     
@@ -582,9 +582,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"
             
             let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-            let decimal = WUtils.getKavaCoinDecimal(coin.denom)
+            let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, WUtils.getKavaCoinDecimal(coin.denom), 6)
+            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
         }
         

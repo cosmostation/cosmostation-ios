@@ -61,7 +61,7 @@ class HarvestDetailMyActionCell: UITableViewCell {
         WDP.dpSymbolImg(chainConfig, hardMoneyMarketDenom, depositImg)
         WDP.dpSymbol(chainConfig, hardMoneyMarketDenom, depositSymbol)
         
-        let decimal = WUtils.getKavaCoinDecimal(hardMoneyMarketDenom)
+        let decimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarketDenom)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(hardParam?.getSpotMarketId(hardMoneyMarketDenom))
         let myDeposit = myDeposits?.filter { $0.denom == hardMoneyMarketDenom }.first
         let myBorrow = myBorrows?.filter { $0.denom == hardMoneyMarketDenom }.first

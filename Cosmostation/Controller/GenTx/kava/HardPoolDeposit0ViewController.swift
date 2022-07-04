@@ -34,7 +34,7 @@ class HardPoolDeposit0ViewController: BaseViewController, UITextFieldDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         hardPoolDenom = pageHolderVC.mHardMoneyMarketDenom!
-        dpDecimal = WUtils.getKavaCoinDecimal(hardPoolDenom)
+        dpDecimal = WUtils.getDenomDecimal(chainConfig, hardPoolDenom)
         availableMax = BaseData.instance.getAvailableAmount_gRPC(hardPoolDenom)
         
         WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)

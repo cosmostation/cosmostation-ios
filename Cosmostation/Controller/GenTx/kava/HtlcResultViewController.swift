@@ -150,12 +150,14 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             cell?.randomHashLabel.text = msg?.value.random_number_hash
             
         } else if (self.chainType == ChainType.KAVA_MAIN) {
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
             cell?.blockHeightLabel.text = mSendTxInfo?.height
             cell?.txHashLabel.text = mSendTxInfo?.txhash
             cell?.memoLabel.text = mSendTxInfo?.tx?.value.memo
             
             let sendCoin = msg?.value.getAmounts()![0]
-            cell?.sentAmountLabel.attributedText = WUtils.displayAmount2(sendCoin?.amount, cell!.sentAmountLabel.font!, WUtils.getKavaCoinDecimal(sendCoin!.denom), WUtils.getKavaCoinDecimal(sendCoin!.denom))
+            let sendCoinDecimal = WUtils.getDenomDecimal(chainConfig, sendCoin!.denom)
+            cell?.sentAmountLabel.attributedText = WUtils.displayAmount2(sendCoin?.amount, cell!.sentAmountLabel.font!, sendCoinDecimal, sendCoinDecimal)
             cell?.sentDenom.text = sendCoin?.denom.uppercased()
             
             cell?.feeLabel.attributedText = WUtils.displayAmount2(mSendTxInfo!.simpleFee().stringValue, cell!.feeLabel.font!, 6, 6)
@@ -192,13 +194,15 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             
             
         } else if (self.mHtlcToChain == ChainType.KAVA_MAIN) {
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
             cell?.blockHeightLabel.text = mClaimTxInfo?.height
             cell?.txHashLabel.text = mClaimTxInfo?.txhash
             cell?.memoLabel.text = mClaimTxInfo?.tx?.value.memo
             
             let receiveCoin = mClaimTxInfo!.simpleSwapCoin()
+            let receiveCoinDecimal = WUtils.getDenomDecimal(chainConfig, receiveCoin!.denom)
             if (receiveCoin != nil && !receiveCoin!.denom.isEmpty) {
-                cell?.receivedAmountLabel.attributedText = WUtils.displayAmount2(receiveCoin!.amount, cell!.receivedAmountLabel.font!, WUtils.getKavaCoinDecimal(receiveCoin!.denom), WUtils.getKavaCoinDecimal(receiveCoin!.denom))
+                cell?.receivedAmountLabel.attributedText = WUtils.displayAmount2(receiveCoin!.amount, cell!.receivedAmountLabel.font!, receiveCoinDecimal, receiveCoinDecimal)
                 cell?.receivedDenom.text = receiveCoin!.denom.uppercased()
             }
             

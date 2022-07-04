@@ -34,7 +34,7 @@ class HardPoolWithdraw0ViewController: BaseViewController, UITextFieldDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         hardPoolDenom = pageHolderVC.mHardMoneyMarketDenom!
-        dpDecimal = WUtils.getKavaCoinDecimal(hardPoolDenom)
+        dpDecimal = WUtils.getDenomDecimal(chainConfig, hardPoolDenom)
         
         let depositedCoin = BaseData.instance.mHardMyDeposit.filter({ $0.denom == hardPoolDenom}).first
         availableMax = NSDecimalNumber.init(string: depositedCoin?.amount)

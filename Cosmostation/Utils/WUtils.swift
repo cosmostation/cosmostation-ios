@@ -533,7 +533,7 @@ public class WUtils {
                 } else if (chainType! == ChainType.KAVA_MAIN) {
                     let chainConfig = ChainKava.init(.KAVA_MAIN)
                     let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-                    let decimal = WUtils.getKavaCoinDecimal(coin.denom)
+                    let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
                     let amount = WUtils.getKavaTokenAll(coin.denom)
                     let assetValue = userCurrencyValue(baseDenom, amount, decimal)
                     totalValue = totalValue.adding(assetValue)
@@ -1019,6 +1019,8 @@ public class WUtils {
             amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 8)
             
         } else if (chainType == ChainType.KAVA_MAIN) {
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
+            let decimal = WUtils.getDenomDecimal(chainConfig, denom)
             if (denom == KAVA_MAIN_DENOM) {
                 WUtils.setDenomTitle(chainType, denomLabel)
             } else if (denom == KAVA_HARD_DENOM) {
@@ -1034,7 +1036,7 @@ public class WUtils {
                 denomLabel?.textColor = UIColor(named: "_font05")
                 denomLabel?.text = denom.uppercased()
             }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, getKavaCoinDecimal(denom), getKavaCoinDecimal(denom))
+            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, decimal, decimal)
             
         } else if (chainType == ChainType.BAND_MAIN) {
             if (denom == BAND_MAIN_DENOM) {

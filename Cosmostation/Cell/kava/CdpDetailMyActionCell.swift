@@ -111,8 +111,8 @@ class CdpDetailMyActionCell: UITableViewCell {
         let chainConfig = ChainKava.init(.KAVA_MAIN)
         let cDenom = collateralParam!.getcDenom()!
         let pDenom = collateralParam!.getpDenom()!
-        let cDpDecimal = WUtils.getKavaCoinDecimal(cDenom)
-        let pDpDecimal = WUtils.getKavaCoinDecimal(pDenom)
+        let cDpDecimal = WUtils.getDenomDecimal(chainConfig, cDenom)
+        let pDpDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
         
        WDP.dpSymbol(chainConfig, cDenom, collateralDenom)

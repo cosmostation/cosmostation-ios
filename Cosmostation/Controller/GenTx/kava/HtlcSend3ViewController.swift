@@ -80,7 +80,8 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             recipientAddressLabel.text = pageHolderVC.mHtlcToAccount?.account_address
             
         } else if (chainType == ChainType.KAVA_MAIN) {
-            mDpDecimal = WUtils.getKavaCoinDecimal(self.pageHolderVC.mHtlcDenom!)
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
+            mDpDecimal = WUtils.getDenomDecimal(chainConfig, self.pageHolderVC.mHtlcDenom!)
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
                 sendAmountDenom.text = "BNB"
                 sendAmountDenom.textColor = UIColor.init(named: "binance")

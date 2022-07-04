@@ -76,24 +76,8 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         var remainAvailable = NSDecimalNumber.zero
         
         if (WUtils.isGRPC(chainType)) {
-            mDivideDecimal = WUtils.mainDivideDecimal(chainType)
-            mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
-            if (chainType == ChainType.SIF_MAIN) {
-                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                
-            } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
-                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                
-            } else if (chainType == ChainType.KAVA_MAIN) {
-                mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                
-            } else if (pageHolderVC.chainType! == ChainType.INJECTIVE_MAIN) {
-                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-            }
+            mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+            mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
             currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
             
         } else {

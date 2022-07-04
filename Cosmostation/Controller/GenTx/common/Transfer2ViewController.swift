@@ -33,24 +33,8 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
         let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_TRANSFER, 0)
         if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-            mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-            if (pageHolderVC.chainType! == ChainType.SIF_MAIN) {
-                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-
-            } else if (pageHolderVC.chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
-                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                
-            } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
-                mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                
-            } else if (pageHolderVC.chainType! == ChainType.INJECTIVE_MAIN) {
-                mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-            }
+            mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+            mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
             
             if (pageHolderVC.mToSendDenom == mainDenom) {
                 maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(feeAmount)

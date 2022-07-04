@@ -165,7 +165,8 @@ class TokenDetailNativeCell: TokenDetailCell {
     }
     
     func onBindKavaTokens(_ denom: String?) {
-        let dpDecimal = WUtils.getKavaCoinDecimal(denom!)
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let dpDecimal = WUtils.getDenomDecimal(chainConfig, denom!)
         let available = BaseData.instance.getAvailableAmount_gRPC(denom!)
         let vesting = BaseData.instance.getVestingAmount_gRPC(denom!)
         

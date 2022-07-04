@@ -77,8 +77,8 @@ class CommonPoolCell: UITableViewCell {
         let nf = WUtils.getNumberFormatter(2)
         let coin0 = pool.coins[0]
         let coin1 = pool.coins[1]
-        let coin0Decimal = WUtils.getKavaCoinDecimal(coin0.denom)
-        let coin1Decimal = WUtils.getKavaCoinDecimal(coin1.denom)
+        let coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0.denom)
+        let coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1.denom)
         let coin0price = WUtils.getKavaOraclePriceWithDenom(coin0.denom)
         let coin1price = WUtils.getKavaOraclePriceWithDenom(coin1.denom)
         let coin0Value = NSDecimalNumber.init(string: coin0.amount).multiplying(by: coin0price).multiplying(byPowerOf10: -coin0Decimal, withBehavior: WUtils.handler2)

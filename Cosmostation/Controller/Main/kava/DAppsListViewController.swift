@@ -174,35 +174,7 @@ class DAppsListViewController: BaseViewController {
 
 extension WUtils {
     
-    static func getKavaCoinDecimal(_ denom:String?) -> Int16 {
-        if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
-                return deciaml
-            }
-        } else if (denom?.caseInsensitiveCompare(KAVA_MAIN_DENOM) == .orderedSame) {
-            return 6;
-        } else if (denom?.caseInsensitiveCompare("btc") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("usdx") == .orderedSame) {
-            return 6;
-        } else if (denom?.caseInsensitiveCompare("bnb") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("btcb") == .orderedSame || denom?.caseInsensitiveCompare("hbtc") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("busd") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("xrpb") == .orderedSame || denom?.caseInsensitiveCompare("xrbp") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("hard") == .orderedSame) {
-            return 6;
-        } else if (denom?.caseInsensitiveCompare("swp") == .orderedSame) {
-            return 6;
-        }
-        return 6;
-    }
-    
     static func getKavaMarketId(_ denom: String) -> String {
-
         if denom.starts(with: "ibc/"),
            let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")),
            let displayDenom = ibcToken.display_denom {
@@ -310,8 +282,9 @@ extension WUtils {
     
     static func getHardBorrowableAmountByDenom(_ denom: String, _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?,
                                                _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) -> NSDecimalNumber {
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         let hardParam = BaseData.instance.mKavaHardParams_gRPC
-        let decimal = WUtils.getKavaCoinDecimal(denom)
+        let decimal = WUtils.getDenomDecimal(chainConfig, denom)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(hardParam?.getSpotMarketId(denom))
         
         var totalLTVValue = NSDecimalNumber.zero
@@ -322,7 +295,7 @@ extension WUtils {
         var reserveAmount = NSDecimalNumber.zero
 
         myDeposits?.forEach({ coin in
-            let innnerDecimal   = WUtils.getKavaCoinDecimal(coin.denom)
+            let innnerDecimal   = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let LTV             = hardParam!.getLTV(coin.denom)
             let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
             let depositValue    = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
@@ -331,7 +304,7 @@ extension WUtils {
         })
 
         myBorrows?.forEach({ coin in
-            let innnerDecimal   = WUtils.getKavaCoinDecimal(coin.denom)
+            let innnerDecimal   = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
             let borrowValue     = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
             totalBorrowedValue = totalBorrowedValue.adding(borrowValue)
@@ -451,7 +424,9 @@ extension Kava_Cdp_V1beta1_CDPResponse {
     }
     
     public func getDpCollateralValue(_ pDenom:String) -> NSDecimalNumber {
-        return NSDecimalNumber.init(string: collateralValue.amount).multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(pDenom))
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let pDenomDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
+        return NSDecimalNumber.init(string: collateralValue.amount).multiplying(byPowerOf10: -pDenomDecimal)
     }
     
     public func getHiddenFee(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
@@ -475,22 +450,30 @@ extension Kava_Cdp_V1beta1_CDPResponse {
     }
     
     public func getDpEstimatedTotalDebtValue(_ pDenom: String, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
-        return getEstimatedTotalDebt(collateralParam).multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(pDenom))
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let pDenomDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
+        return getEstimatedTotalDebt(collateralParam).multiplying(byPowerOf10: -pDenomDecimal)
     }
     
     public func getLiquidationPrice(_ cDenom:String, _ pDenom:String, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
-        let collateralAmount = getRawCollateralAmount().multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(cDenom))
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let cDenomDecimal = WUtils.getDenomDecimal(chainConfig, cDenom)
+        let pDenomDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
+        let collateralAmount = getRawCollateralAmount().multiplying(byPowerOf10: -cDenomDecimal)
         let rawDebtAmount = getEstimatedTotalDebt(collateralParam)
             .multiplying(by: collateralParam.getLiquidationRatioAmount())
-            .multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(pDenom))
-        return rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(WUtils.getKavaCoinDecimal(pDenom)))
+            .multiplying(byPowerOf10: -pDenomDecimal)
+        return rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(pDenomDecimal))
     }
     
     public func getWithdrawableAmount(_ cDenom:String, _ pDenom:String, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam, _ cPrice:NSDecimalNumber, _ selfDepositAmount: NSDecimalNumber) -> NSDecimalNumber {
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let cDenomDecimal = WUtils.getDenomDecimal(chainConfig, cDenom)
+        let pDenomDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
         let cValue = getRawCollateralValueAmount()
         let minCValue = getEstimatedTotalDebt(collateralParam).multiplying(by: collateralParam.getLiquidationRatioAmount()).dividing(by: NSDecimalNumber.init(string: "0.95"), withBehavior:WUtils.handler0Down)
         let maxWithdrawableValue = cValue.subtracting(minCValue)
-        var maxWithdrawableAmount = maxWithdrawableValue.multiplying(byPowerOf10: WUtils.getKavaCoinDecimal(cDenom) - WUtils.getKavaCoinDecimal(pDenom)).dividing(by: cPrice, withBehavior: WUtils.handler0Down)
+        var maxWithdrawableAmount = maxWithdrawableValue.multiplying(byPowerOf10: cDenomDecimal - pDenomDecimal).dividing(by: cPrice, withBehavior: WUtils.handler0Down)
         
         if (maxWithdrawableAmount.compare(selfDepositAmount).rawValue > 0) {
             maxWithdrawableAmount = selfDepositAmount
