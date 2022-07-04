@@ -61,8 +61,8 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onInitView() {
         if (chainType == ChainType.OSMOSIS_MAIN) {
-            WUtils.DpOsmosisSymbol(naviTokenSymbol, poolDenom)
-            WUtils.DpOsmosisTokenImg(naviTokenImg, poolDenom)
+            WDP.dpSymbol(chainConfig, poolDenom, naviTokenSymbol)
+            WDP.dpSymbolImg(chainConfig, poolDenom, naviTokenImg)
             
             poolDivideDecimal = 18
             poolDisplayDecimal = 18

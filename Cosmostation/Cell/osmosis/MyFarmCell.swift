@@ -40,6 +40,7 @@ class MyFarmCell: UITableViewCell {
     }
     
     func onBindView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ lockUps: Array<Osmosis_Lockup_PeriodLock>, _ gauges: Array<Osmosis_Incentives_Gauge>) {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         let lpCoinPrice = WUtils.getOsmoLpTokenPerUsdPrice(pool)
@@ -48,7 +49,7 @@ class MyFarmCell: UITableViewCell {
         let totalShares = NSDecimalNumber.init(string: pool.totalShares.amount)
         
         poolIDLabel.text = "#" + String(pool.id) + " MY EARNING"
-        poolPairLabel.text = WUtils.getOsmosisSymbol(coin0.denom) + " / " + WUtils.getOsmosisSymbol(coin1.denom)
+        poolPairLabel.text = WUtils.getSymbol(chainConfig, coin0.denom) + " / " + WUtils.getSymbol(chainConfig, coin1.denom)
         poolArpLabel.attributedText = WUtils.displayPercent(apr, poolArpLabel.font)
         
         

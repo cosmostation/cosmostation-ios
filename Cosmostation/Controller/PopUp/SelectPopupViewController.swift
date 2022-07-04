@@ -235,15 +235,15 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let swapInDenom = toCoinList[indexPath.row]
-            WUtils.DpOsmosisTokenImg(cell!.coinImg, swapInDenom)
-            cell!.coinTitle.text = WUtils.getOsmosisSymbol(swapInDenom)
+            WDP.dpSymbolImg(chainConfig, swapInDenom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, swapInDenom, cell!.coinTitle)
             return cell!
             
         } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
             let swapOutDenom = toCoinList[indexPath.row]
-            WUtils.DpOsmosisTokenImg(cell!.coinImg, swapOutDenom)
-            cell!.coinTitle.text = WUtils.getOsmosisSymbol(swapOutDenom)
+            WDP.dpSymbolImg(chainConfig, swapOutDenom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, swapOutDenom, cell!.coinTitle)
             return cell!
             
         } else if (type == SELECT_POPUP_KAVA_SWAP_IN) {

@@ -69,8 +69,8 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     
     func onInitView() {
         if (chainType == ChainType.OSMOSIS_MAIN) {
-            WUtils.DpOsmosisSymbol(naviTokenSymbol, nativeDenom)
-            WUtils.DpOsmosisTokenImg(naviTokenImg, nativeDenom)
+            WDP.dpSymbol(chainConfig, nativeDenom, naviTokenSymbol)
+            WDP.dpSymbolImg(chainConfig, nativeDenom, naviTokenImg)
             if (nativeDenom == OSMOSIS_ION_DENOM) {
                 nativeDivideDecimal = 6
                 nativeDisplayDecimal = 6

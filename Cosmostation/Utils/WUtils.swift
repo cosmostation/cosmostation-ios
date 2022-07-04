@@ -1664,7 +1664,10 @@ public class WUtils {
             else if (denom == "btch") { return "BTCH" }
             
         } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
-            return getOsmosisSymbol(denom!)
+            if (denom == OSMOSIS_ION_DENOM) { return "ION" }
+            else if (denom!.starts(with: "gamm/pool/")) {
+                return "GAMM-" + String(denom!.split(separator: "/").last!)
+            }
             
         } else if (chainConfig!.chainType == .SIF_MAIN) {
             return getSifSymbol(denom!)

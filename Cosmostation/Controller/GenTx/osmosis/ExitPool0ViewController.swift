@@ -42,8 +42,8 @@ class ExitPool0ViewController: BaseViewController, UITextFieldDelegate {
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mPool!.totalShares.denom)
         WUtils.showCoinDp(pageHolderVC.mPool!.totalShares.denom, availableMaxAmount.stringValue, lpAvailableDenomLabel, lpAvailableLabel, chainType!)
-        WUtils.DpOsmosisTokenImg(lpCoinImg, pageHolderVC.mPool!.totalShares.denom)
-        WUtils.DpOsmosisSymbol(lpCoinName, pageHolderVC.mPool!.totalShares.denom)
+        WDP.dpSymbolImg(chainConfig, pageHolderVC.mPool!.totalShares.denom, lpCoinImg)
+        WDP.dpSymbol(chainConfig, pageHolderVC.mPool!.totalShares.denom, lpCoinName)
         
     }
     

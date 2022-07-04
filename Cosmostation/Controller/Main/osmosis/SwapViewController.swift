@@ -52,6 +52,7 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
         
         //init for pool pair osmos/atom
@@ -69,14 +70,14 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         self.slippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "3"), swapFeeLabel.font)
         self.inputCoinAvailableAmountLabel.attributedText = WUtils.displayAmount2(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, mInPutDecimal, mInPutDecimal)
         
-        WUtils.DpOsmosisTokenImg(inputCoinImg, mInputCoinDenom!)
-        WUtils.DpOsmosisTokenImg(outputCoinImg, mOutputCoinDenom!)
-        WUtils.DpOsmosisSymbol(inputCoinName, mInputCoinDenom!)
-        WUtils.DpOsmosisSymbol(outputCoinName, mOutputCoinDenom!)
-        WUtils.DpOsmosisSymbol(inputCoinRateDenom, mInputCoinDenom!)
-        WUtils.DpOsmosisSymbol(outputCoinRateDenom, mOutputCoinDenom!)
-        WUtils.DpOsmosisSymbol(inputCoinExRateDenom, mInputCoinDenom!)
-        WUtils.DpOsmosisSymbol(outputCoinExRateDenom, mOutputCoinDenom!)
+        WDP.dpSymbolImg(chainConfig, mInputCoinDenom!, inputCoinImg)
+        WDP.dpSymbolImg(chainConfig, mOutputCoinDenom!, outputCoinImg)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinName)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinName)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinExRateDenom)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinExRateDenom)
         
         inputCoinRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, mInPutDecimal)
         inputCoinExRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, mInPutDecimal)

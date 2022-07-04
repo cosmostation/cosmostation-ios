@@ -49,7 +49,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
-        self.balances = account!.account_balances
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         topApr1dayLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         topArp7dayLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
@@ -74,8 +74,8 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         coin1 = Coin.init(mPool.poolAssets[1].token.denom, mPool.poolAssets[1].token.amount)
         coin0BaseDenom = BaseData.instance.getBaseDenom(coin0.denom)
         coin1BaseDenom = BaseData.instance.getBaseDenom(coin1.denom)
-        coin0Symbol = WUtils.getOsmosisSymbol(coin0.denom)
-        coin1Symbol = WUtils.getOsmosisSymbol(coin1.denom)
+        let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
+        let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
         coin0Decimal = WUtils.getOsmosisCoinDecimal(coin0.denom)
         coin1Decimal = WUtils.getOsmosisCoinDecimal(coin1.denom)
         lpCoinPrice = WUtils.getOsmoLpTokenPerUsdPrice(mPool)

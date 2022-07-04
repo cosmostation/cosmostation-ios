@@ -34,12 +34,13 @@ class CommonPoolCell: UITableViewCell {
     
     func onBindOsmoPoolView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) {
         //dp pool info
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         let coin0BaseDenom = BaseData.instance.getBaseDenom(coin0.denom)
         let coin1BaseDenom = BaseData.instance.getBaseDenom(coin1.denom)
-        let coin0Symbol = WUtils.getOsmosisSymbol(coin0.denom)
-        let coin1Symbol = WUtils.getOsmosisSymbol(coin1.denom)
+        let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
+        let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
         let coin0Decimal = WUtils.getOsmosisCoinDecimal(coin0.denom)
         let coin1Decimal = WUtils.getOsmosisCoinDecimal(coin1.denom)
         
@@ -52,9 +53,9 @@ class CommonPoolCell: UITableViewCell {
         let formatted = "$ " + nf.string(from: poolValue)!
         totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(formatted, 2, totalLiquidityValueLabel.font)
         
-        WUtils.DpOsmosisSymbol(liquidity1DenomLabel, coin0.denom)
+        WDP.dpSymbol(chainConfig, coin0.denom, liquidity1DenomLabel)
         liquidity1DenomLabel.adjustsFontSizeToFitWidth = true
-        WUtils.DpOsmosisSymbol(liquidity2DenomLabel, coin1.denom)
+        WDP.dpSymbol(chainConfig, coin0.denom, liquidity2DenomLabel)
         liquidity2DenomLabel.adjustsFontSizeToFitWidth = true
         liquidity1AmountLabel.attributedText = WUtils.displayAmount2(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
         liquidity2AmountLabel.attributedText = WUtils.displayAmount2(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
@@ -64,9 +65,9 @@ class CommonPoolCell: UITableViewCell {
         let availableCoin0 = BaseData.instance.getAvailable_gRPC(coin0.denom)
         let availableCoin1 = BaseData.instance.getAvailable_gRPC(coin1.denom)
         
-        WUtils.DpOsmosisSymbol(availableCoin0DenomLabel, coin0.denom)
+        WDP.dpSymbol(chainConfig, coin0.denom, availableCoin0DenomLabel)
         availableCoin0DenomLabel.adjustsFontSizeToFitWidth = true
-        WUtils.DpOsmosisSymbol(availableCoin1DenomLabel, coin1.denom)
+        WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
         availableCoin1DenomLabel.adjustsFontSizeToFitWidth = true
         availableCoin0AmountLabel.attributedText = WUtils.displayAmount2(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
         availableCoin1AmountLabel.attributedText = WUtils.displayAmount2(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
