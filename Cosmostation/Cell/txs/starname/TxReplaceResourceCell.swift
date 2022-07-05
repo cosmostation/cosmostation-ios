@@ -25,15 +25,15 @@ class TxReplaceResourceCell: TxCell {
         starnameFeeAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Starnamed_X_Starname_V1beta1_MsgReplaceAccountResources.init(serializedData: response.tx.body.messages[position].value) {
             starnameLabel.text = msg.name + "*" + msg.domain
             
             let starnameFee = WUtils.getReplaceFee()
-            WUtils.showCoinDp(IOV_MAIN_DENOM, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel, chain.chainType)
+            WDP.dpCoin(chainConfig, IOV_MAIN_DENOM, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel)
             
             resourceCntLabel.text = String(msg.newResources.count)
             var resourceString = ""

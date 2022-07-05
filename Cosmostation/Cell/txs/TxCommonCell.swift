@@ -42,11 +42,11 @@ class TxCommonCell: TxCell {
         timeGapLabel.font = UIFontMetrics(forTextStyle: .caption2).scaledFont(for: Font_11_caption2)
     }
     
-    func setDenomType(_ chainType:ChainType) {
-        WUtils.setDenomTitle(chainType, feeDenomLabel)
+    func setDenomType(_ chainConfig: ChainConfig) {
+        WUtils.setDenomTitle(chainConfig.chainType, feeDenomLabel)
     }
     
-    override func onBind(_ chain: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) {
+    override func onBind(_ chainConfig: ChainConfig, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) {
         feeLayer.isHidden = false
         if (tx.txResponse.code != 0) {
             statusImg.image = UIImage(named: "failIc")
@@ -68,6 +68,6 @@ class TxCommonCell: TxCell {
         timeGapLabel.text = WUtils.txTimeGap(input: tx.txResponse.timestamp)
         hashLabel.text = tx.txResponse.txhash
         memoLabel.text = tx.tx.body.memo
-        WUtils.showCoinDp(WUtils.onParseFeeGrpc(chain, tx), feeDenomLabel, feeAmountLabel, chain)
+        WDP.dpCoin(chainConfig, WUtils.onParseFeeGrpc(chainConfig.chainType, tx), feeDenomLabel, feeAmountLabel)
     }
 }

@@ -157,7 +157,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TxCommonCell") as? TxCommonCell
-            cell?.onBind(chainType!, mTxRespose!)
+            cell?.onBind(chainConfig!, mTxRespose!)
             return cell!
             
         } else {

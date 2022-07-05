@@ -51,7 +51,7 @@ class TokenCell: UITableViewCell {
             let available = BaseData.instance.getAvailableAmount_gRPC(coin.denom)
             let decimal = bridgeTokenInfo.decimal
             
-            tokenAmount.attributedText = WUtils.displayAmount2(available.stringValue, tokenAmount.font!, decimal, 6)
+            tokenAmount.attributedText = WDP.dpAmount(available.stringValue, tokenAmount.font!, decimal, 6)
             tokenValue.attributedText = WUtils.dpUserCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal, tokenValue.font)
         }
     }

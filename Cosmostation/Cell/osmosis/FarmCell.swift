@@ -33,10 +33,10 @@ class FarmCell: UITableViewCell {
         poolPairLabel.text = WUtils.getSymbol(chainConfig, coin0.denom) + " / " + WUtils.getSymbol(chainConfig, coin1.denom)
         
         if let lpCoin = BaseData.instance.mMyBalances_gRPC.filter({ $0.denom == "gamm/pool/" + String(pool.id) }).first {
-            availableAmountLabel.attributedText = WUtils.displayAmount2(lpCoin.amount, availableAmountLabel.font, 18, 6)
+            availableAmountLabel.attributedText = WDP.dpAmount(lpCoin.amount, availableAmountLabel.font, 18, 6)
             WDP.dpSymbol(chainConfig, lpCoin.denom, availableDenomLabel)
         } else {
-            availableAmountLabel.attributedText = WUtils.displayAmount2("0", availableAmountLabel.font, 18, 6)
+            availableAmountLabel.attributedText = WDP.dpAmount("0", availableAmountLabel.font, 18, 6)
             WDP.dpSymbol(chainConfig, "gamm/pool/" + String(pool.id), availableDenomLabel)
         }
         

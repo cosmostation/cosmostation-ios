@@ -44,10 +44,10 @@ class WalletBnbCell: UITableViewCell {
         let frozen = BaseData.instance.frozenAmount(BNB_MAIN_DENOM)
         let total = available.adding(locked).adding(frozen)
         
-        totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font, 0, 6)
-        availableAmount.attributedText = WUtils.displayAmount2(available.stringValue, availableAmount.font, 0, 6)
-        lockedAmount.attributedText = WUtils.displayAmount2(locked.stringValue, lockedAmount.font, 0, 6)
-        frozenAmount.attributedText = WUtils.displayAmount2(frozen.stringValue, frozenAmount.font, 0, 6)
+        totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, 0, 6)
+        availableAmount.attributedText = WDP.dpAmount(available.stringValue, availableAmount.font, 0, 6)
+        lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, lockedAmount.font, 0, 6)
+        frozenAmount.attributedText = WDP.dpAmount(frozen.stringValue, frozenAmount.font, 0, 6)
         totalValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, total, 0, totalValue.font)
         BaseData.instance.updateLastTotal(account, total.stringValue)
     }

@@ -68,8 +68,8 @@ class CommonMyPoolCell: UITableViewCell {
         liquidity1DenomLabel.adjustsFontSizeToFitWidth = true
         WDP.dpSymbol(chainConfig, coin1.denom, liquidity2DenomLabel)
         liquidity2DenomLabel.adjustsFontSizeToFitWidth = true
-        liquidity1AmountLabel.attributedText = WUtils.displayAmount2(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
-        liquidity2AmountLabel.attributedText = WUtils.displayAmount2(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
+        liquidity1AmountLabel.attributedText = WDP.dpAmount(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
+        liquidity2AmountLabel.attributedText = WDP.dpAmount(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
         
         
         //dp my lp info
@@ -86,8 +86,8 @@ class CommonMyPoolCell: UITableViewCell {
         
         let coin0MyShareAmount = WUtils.getMyShareLpAmount(pool, coin0.denom)
         let coin1MyShareAmount = WUtils.getMyShareLpAmount(pool, coin1.denom)
-        myDepositCoin0AmountLabel.attributedText = WUtils.displayAmount2(coin0MyShareAmount.stringValue , myDepositCoin0AmountLabel.font, coin0Decimal, 6)
-        myDepositCoin1AmountLabel.attributedText = WUtils.displayAmount2(coin1MyShareAmount.stringValue , myDepositCoin1AmountLabel.font, coin1Decimal, 6)
+        myDepositCoin0AmountLabel.attributedText = WDP.dpAmount(coin0MyShareAmount.stringValue , myDepositCoin0AmountLabel.font, coin0Decimal, 6)
+        myDepositCoin1AmountLabel.attributedText = WDP.dpAmount(coin1MyShareAmount.stringValue , myDepositCoin1AmountLabel.font, coin1Decimal, 6)
         
         
         //dp vailable
@@ -98,8 +98,8 @@ class CommonMyPoolCell: UITableViewCell {
         availableCoin0DenomLabel.adjustsFontSizeToFitWidth = true
         WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
         availableCoin1DenomLabel.adjustsFontSizeToFitWidth = true
-        availableCoin0AmountLabel.attributedText = WUtils.displayAmount2(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
-        availableCoin1AmountLabel.attributedText = WUtils.displayAmount2(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
+        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
+        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
     }
     
     
@@ -127,8 +127,8 @@ class CommonMyPoolCell: UITableViewCell {
 
         WDP.dpSymbol(chainConfig, coin0.denom, liquidity1DenomLabel)
         WDP.dpSymbol(chainConfig, coin1.denom, liquidity2DenomLabel)
-        liquidity1AmountLabel.attributedText = WUtils.displayAmount2(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
-        liquidity2AmountLabel.attributedText = WUtils.displayAmount2(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
+        liquidity1AmountLabel.attributedText = WDP.dpAmount(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
+        liquidity2AmountLabel.attributedText = WDP.dpAmount(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
         
         
         //dp my lp info
@@ -143,8 +143,8 @@ class CommonMyPoolCell: UITableViewCell {
         
         WDP.dpSymbol(chainConfig, my0.denom, myDepositCoin0DenomLabel)
         WDP.dpSymbol(chainConfig, my1.denom, myDepositCoin1DenomLabel)
-        myDepositCoin0AmountLabel.attributedText = WUtils.displayAmount2(my0.amount, myDepositCoin0AmountLabel.font, coin0Decimal, 6)
-        myDepositCoin1AmountLabel.attributedText = WUtils.displayAmount2(my1.amount, myDepositCoin1AmountLabel.font, coin1Decimal, 6)
+        myDepositCoin0AmountLabel.attributedText = WDP.dpAmount(my0.amount, myDepositCoin0AmountLabel.font, coin0Decimal, 6)
+        myDepositCoin1AmountLabel.attributedText = WDP.dpAmount(my1.amount, myDepositCoin1AmountLabel.font, coin1Decimal, 6)
         
         
         //dp vailable
@@ -153,7 +153,7 @@ class CommonMyPoolCell: UITableViewCell {
         
         WDP.dpSymbol(chainConfig, coin0.denom, availableCoin0DenomLabel)
         WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
-        availableCoin0AmountLabel.attributedText = WUtils.displayAmount2(availableCoin0.stringValue, availableCoin0AmountLabel.font, coin0Decimal, 6)
-        availableCoin1AmountLabel.attributedText = WUtils.displayAmount2(availableCoin1.stringValue, availableCoin1AmountLabel.font, coin1Decimal, 6)
+        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0.stringValue, availableCoin0AmountLabel.font, coin0Decimal, 6)
+        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1.stringValue, availableCoin1AmountLabel.font, coin1Decimal, 6)
     }
 }

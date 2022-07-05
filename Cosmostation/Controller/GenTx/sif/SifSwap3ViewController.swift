@@ -31,6 +31,7 @@ class SifSwap3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.selectedPool = self.pageHolderVC.mSifPool
     }
@@ -42,9 +43,9 @@ class SifSwap3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mSwapInDenom!, pageHolderVC.mSwapInAmount!.stringValue, swapInDenomLabel, swapInAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mSwapOutDenom!, pageHolderVC.mSwapOutAmount!.stringValue, swapOutDenomLabel, swapOutAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mSwapInDenom!, pageHolderVC.mSwapInAmount!.stringValue, swapInDenomLabel, swapInAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mSwapOutDenom!, pageHolderVC.mSwapOutAmount!.stringValue, swapOutDenomLabel, swapOutAmountLabel)
         mMemoLabel.text = pageHolderVC.mMemo
         
         let lpInputAmount = WUtils.getPoolLpAmount(selectedPool, pageHolderVC.mSwapInDenom!)
@@ -54,7 +55,7 @@ class SifSwap3ViewController: BaseViewController, PasswordViewDelegate {
         let divider = input.adding(lpInputAmount)
         let denominator = divider.multiplying(by: divider)
         let lpFee = numerator.dividing(by: denominator, withBehavior: WUtils.handler0)
-        WUtils.showCoinDp(pageHolderVC.mSwapOutDenom!, lpFee.stringValue, swapFeeDenomLabel, swapFeeLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mSwapOutDenom!, lpFee.stringValue, swapFeeDenomLabel, swapFeeLabel)
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {

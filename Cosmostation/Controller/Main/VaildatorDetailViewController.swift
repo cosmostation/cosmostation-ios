@@ -185,7 +185,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     
     func onSetHistoryItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-        cell?.bindHistoryView(chainType!, mApiCustomNewHistories[indexPath.row], account!.account_address)
+        cell?.bindHistoryView(chainConfig!, mApiCustomNewHistories[indexPath.row], account!.account_address)
         return cell!
     }
     

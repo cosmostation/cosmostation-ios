@@ -65,7 +65,7 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
         if (swapInDenom == SIF_MAIN_DENOM) {
             availableMaxAmount = availableMaxAmount.subtracting(mainDenomFee)
         }
-        WUtils.showCoinDp(swapInDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, swapInDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)
         WDP.dpSymbolImg(chainConfig, swapInDenom, inputCoinImg)
         WDP.dpSymbol(chainConfig, swapInDenom, inputCoinName)
         WDP.dpSymbolImg(chainConfig, swapOutDenom, outputCoinImg)

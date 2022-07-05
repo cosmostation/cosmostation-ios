@@ -57,9 +57,9 @@ class TxTransferCell: UITableViewCell {
         
     }
     
-    func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int, _ myAddress: String) {
+    func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int, _ myAddress: String) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         let msg = try! Cosmos_Bank_V1beta1_MsgSend.init(serializedData: response.tx.body.messages[position].value)
         fromLabel.text = msg.fromAddress
@@ -79,22 +79,22 @@ class TxTransferCell: UITableViewCell {
         }
 //        print("coins size", coins.count)
         multiAmountLayer0.isHidden = false
-        WUtils.showCoinDp(coins[0], multiAmountDenom0, multiAmount0, chain.chainType)
+        WDP.dpCoin(chainConfig, coins[0], multiAmountDenom0, multiAmount0)
         if (coins.count > 1) {
             multiAmountLayer1.isHidden = false
-            WUtils.showCoinDp(coins[1], multiAmountDenom1, multiAmount1, chain.chainType)
+            WDP.dpCoin(chainConfig, coins[1], multiAmountDenom1, multiAmount1)
         }
         if (coins.count > 2) {
             multiAmountLayer2.isHidden = false
-            WUtils.showCoinDp(coins[2], multiAmountDenom2, multiAmount2, chain.chainType)
+            WDP.dpCoin(chainConfig, coins[2], multiAmountDenom2, multiAmount2)
         }
         if (coins.count > 3) {
             multiAmountLayer3.isHidden = false
-            WUtils.showCoinDp(coins[3], multiAmountDenom3, multiAmount3, chain.chainType)
+            WDP.dpCoin(chainConfig, coins[3], multiAmountDenom3, multiAmount3)
         }
         if (coins.count > 4) {
             multiAmountLayer4.isHidden = false
-            WUtils.showCoinDp(coins[4], multiAmountDenom4, multiAmount4, chain.chainType)
+            WDP.dpCoin(chainConfig, coins[4], multiAmountDenom4, multiAmount4)
         }
         
     }

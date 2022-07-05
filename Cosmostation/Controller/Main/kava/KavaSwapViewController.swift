@@ -101,7 +101,7 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         let swapFee = NSDecimalNumber.init(string: mKavaSwapPoolParam?.swapFee).multiplying(byPowerOf10: -16)
         swapFeeLabel.attributedText = WUtils.displayPercent(swapFee, swapFeeLabel.font)
         slippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "3"), swapFeeLabel.font)
-        inputCoinAvailableAmountLabel.attributedText = WUtils.displayAmount2(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, inputCoinDecimal, inputCoinDecimal)
+        inputCoinAvailableAmountLabel.attributedText = WDP.dpAmount(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, inputCoinDecimal, inputCoinDecimal)
 
         WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinName)
         WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinName)
@@ -126,12 +126,12 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
         print("poolSwapRate ", poolSwapRate)
 
         //display swap rate with this pool
-        inputCoinRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, 6)
-        outputCoinRateAmount.attributedText = WUtils.displayAmount2(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
+        inputCoinRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, 6)
+        outputCoinRateAmount.attributedText = WDP.dpAmount(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
 
 
         //display swap rate with market price
-        inputCoinExRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
+        inputCoinExRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
         let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom)) ?? NSDecimalNumber.zero
         let priceOutput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom)) ?? NSDecimalNumber.zero
         
@@ -139,7 +139,7 @@ class KavaSwapViewController: BaseViewController, SBCardPopupDelegate{
             self.outputCoinExRateAmount.text = "?.??????"
         } else {
             let priceRate = priceInput.dividing(by: priceOutput, withBehavior: WUtils.handler6)
-            self.outputCoinExRateAmount.attributedText = WUtils.displayAmount2(priceRate.stringValue, outputCoinExRateAmount.font, 0, 6)
+            self.outputCoinExRateAmount.attributedText = WDP.dpAmount(priceRate.stringValue, outputCoinExRateAmount.font, 0, 6)
         }
     }
 

@@ -46,12 +46,12 @@ class WalletIovCell: UITableViewCell {
     
     func updateView(_ account: Account?, _ chainType: ChainType?) {
         let totalToken = WUtils.getAllMainAsset(IOV_MAIN_DENOM)
-        totalAmount.attributedText = WUtils.displayAmount2(totalToken.stringValue, totalAmount.font!, 6, 6)
+        totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 6, 6)
         totalValue.attributedText = WUtils.dpUserCurrencyValue(IOV_MAIN_DENOM, totalToken, 6, totalValue.font)
-        availableAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getAvailable_gRPC(IOV_MAIN_DENOM), availableAmount.font!, 6, 6)
-        delegatedAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
-        unbondingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
-        rewardAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(IOV_MAIN_DENOM), rewardAmount.font, 6, 6)
+        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(IOV_MAIN_DENOM), availableAmount.font!, 6, 6)
+        delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
+        unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
+        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(IOV_MAIN_DENOM), rewardAmount.font, 6, 6)
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -6).stringValue)
     }
     

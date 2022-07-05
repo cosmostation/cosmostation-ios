@@ -66,9 +66,9 @@ class ValidatorDetailMyActionCell: UITableViewCell {
         let delegation = BaseData.instance.getDelegated_gRPC(validator!.operatorAddress)
         let unbonding = BaseData.instance.getUnbonding_gRPC(validator!.operatorAddress)
         let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), validator!.operatorAddress)
-        myDelegateAmount.attributedText =  WUtils.displayAmount2(delegation.stringValue, myDelegateAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
-        myUndelegateAmount.attributedText =  WUtils.displayAmount2(unbonding.stringValue, myUndelegateAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
-        myRewardAmount.attributedText = WUtils.displayAmount2(reward.stringValue, myRewardAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
+        myDelegateAmount.attributedText =  WDP.dpAmount(delegation.stringValue, myDelegateAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
+        myUndelegateAmount.attributedText =  WDP.dpAmount(unbonding.stringValue, myUndelegateAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
+        myRewardAmount.attributedText = WDP.dpAmount(reward.stringValue, myRewardAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
         
         if (validator?.status == Cosmos_Staking_V1beta1_BondStatus.bonded) {
             myDailyReturns.attributedText =  WUtils.getDailyReward(myDailyReturns.font, NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18), delegation, chainType)

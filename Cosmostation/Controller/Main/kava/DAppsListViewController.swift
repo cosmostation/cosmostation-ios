@@ -274,7 +274,7 @@ extension WUtils {
     }
     
     static func showRiskRate(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _rateIamg:UIImageView?) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
+        scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.floatValue <= 50) {
             scoreLabel.textColor = UIColor(named: "kava_safe")
             _rateIamg?.image = UIImage(named: "imgKavaRiskSafe")
@@ -290,7 +290,7 @@ extension WUtils {
     }
     
     static func showRiskRate2(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
+        scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.doubleValue <= 50) {
             scoreLabel.textColor = UIColor(named: "kava_safe")
             textLabel.textColor = UIColor(named: "kava_safe")
@@ -309,7 +309,7 @@ extension WUtils {
     }
     
     static func showRiskRate3(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel, _ cardView:CardView) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
+        scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.doubleValue <= 50) {
             textLabel.text = "SAFE"
             cardView.backgroundColor = UIColor(named: "kava_safe")

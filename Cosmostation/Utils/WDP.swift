@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 public class WDP {
-    
     static func dpSymbol(_ chainConfig: ChainConfig?, _ denom: String?, _ denomLabel: UILabel?) {
         denomLabel?.text = WUtils.getSymbol(chainConfig, denom)
         if (chainConfig!.stakeDenom == denom) {
@@ -147,5 +146,66 @@ public class WDP {
             }
         }
         imgView?.image = UIImage(named: "tokenDefault")!
+    }
+    
+    static func dpCoin(_ chainConfig: ChainConfig?, _ coin: Coin?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
+        return dpCoin(chainConfig, coin?.denom, coin?.amount, denomLabel, amountLabel)
+    }
+    
+    static func dpCoin(_ chainConfig: ChainConfig?, _ denom: String?, _ amount: String?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
+        dpSymbol(chainConfig, denom, denomLabel)
+        if (amountLabel == nil ) { return }
+        var divideDecimal: Int16 = 6
+        var displayDecimal: Int16 = 6
+        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
+               ibcToken.auth == true {
+                divideDecimal = ibcToken.decimal!
+                displayDecimal = ibcToken.decimal!
+            }
+            amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, divideDecimal, displayDecimal)
+            return
+        }
+        
+        if (chainConfig?.chainType == .BINANCE_MAIN || chainConfig?.chainType == .OKEX_MAIN ) {
+            divideDecimal = 0
+            displayDecimal = WUtils.mainDisplayDecimal(chainConfig?.chainType)
+        } else {
+            divideDecimal = WUtils.getDenomDecimal(chainConfig, denom)
+            displayDecimal = WUtils.getDenomDecimal(chainConfig, denom)
+        }
+        amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, divideDecimal, displayDecimal)
+    }
+    
+    static func dpAmount(_ amount: String?, _ font: UIFont, _ inputPoint: Int16, _ dpPoint: Int16) -> NSMutableAttributedString {
+        let nf = NumberFormatter()
+        nf.minimumFractionDigits = Int(dpPoint)
+        nf.maximumFractionDigits = Int(dpPoint)
+        nf.roundingMode = .floor
+        nf.numberStyle = .decimal
+        
+        let amount = WUtils.plainStringToDecimal(amount)
+        var formatted: String?
+        if (amount == NSDecimalNumber.zero) {
+            formatted = nf.string(from: NSDecimalNumber.zero)
+        } else {
+            let calAmount = amount.multiplying(byPowerOf10: -Int16(inputPoint))
+            formatted = nf.string(from: calAmount)
+        }
+        
+        let added       = formatted
+        let endIndex    = added!.index(added!.endIndex, offsetBy: -dpPoint)
+        
+        let preString   = added![..<endIndex]
+        let postString  = added![endIndex...]
+        
+        let preAttrs = [NSAttributedString.Key.font : font]
+        let postAttrs = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]
+        
+        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
+        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
+        
+        attributedString1.append(attributedString2)
+        return attributedString1
     }
 }

@@ -32,7 +32,7 @@ class OkDeposit1ViewController: BaseViewController, UITextFieldDelegate {
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
         userAvailable = BaseData.instance.availableAmount(mainDenom).subtracting(mainDenomFee)
-        WUtils.showCoinDp(mainDenom, userAvailable.stringValue, denomTitleLabel, availableAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, mainDenom, userAvailable.stringValue, denomTitleLabel, availableAmountLabel)
         
         toDepositAmountInput.delegate = self
         toDepositAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

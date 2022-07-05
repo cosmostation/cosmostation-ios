@@ -74,8 +74,8 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
                 sendAmountDenom.text = "BUSD"
                 sendAmountDenom.textColor = UIColor.init(named: "_font05")
             }
-            sendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, sendAmountLabel.font, 0, 8)
-            sendFeeLabel.attributedText = WUtils.displayAmount2(sendFeeAmount.stringValue, sendFeeLabel.font, 0, 8)
+            sendAmountLabel.attributedText = WDP.dpAmount(toSendAmount.stringValue, sendAmountLabel.font, 0, 8)
+            sendFeeLabel.attributedText = WDP.dpAmount(sendFeeAmount.stringValue, sendFeeLabel.font, 0, 8)
             recipientChainLabel.text = WUtils.dpBepSwapChainName(pageHolderVC.mHtlcToChain!)
             recipientAddressLabel.text = pageHolderVC.mHtlcToAccount?.account_address
             
@@ -95,8 +95,8 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
                 sendAmountDenom.text = "BUSD"
                 sendAmountDenom.textColor = UIColor.init(named: "_font05")
             }
-            sendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, sendAmountLabel.font, mDpDecimal, mDpDecimal)
-            sendFeeLabel.attributedText = WUtils.displayAmount2(sendFeeAmount.stringValue, sendFeeLabel.font, 6, 6)
+            sendAmountLabel.attributedText = WDP.dpAmount(toSendAmount.stringValue, sendAmountLabel.font, mDpDecimal, mDpDecimal)
+            sendFeeLabel.attributedText = WDP.dpAmount(sendFeeAmount.stringValue, sendFeeLabel.font, 6, 6)
             recipientChainLabel.text = WUtils.dpBepSwapChainName(pageHolderVC.mHtlcToChain!)
             claimAddress.text = pageHolderVC.mHtlcToAccount?.account_address
         }
@@ -126,9 +126,9 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             WUtils.setDenomTitle(pageHolderVC.mHtlcToChain!, claimFeeDenom)
             
             relayerFee = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetFee(pageHolderVC.mHtlcDenom!)
-            receiveAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.subtracting(relayerFee).stringValue , receiveAmountLabel.font, mDpDecimal, mDpDecimal)
-            relayFeeLabel.attributedText = WUtils.displayAmount2(relayerFee.stringValue, relayFeeLabel.font, mDpDecimal, mDpDecimal)
-            claimFeeLabel.attributedText = WUtils.displayAmount2(claimFeeAmount.stringValue, claimFeeLabel.font, 0, mDpDecimal)
+            receiveAmountLabel.attributedText = WDP.dpAmount(toSendAmount.subtracting(relayerFee).stringValue , receiveAmountLabel.font, mDpDecimal, mDpDecimal)
+            relayFeeLabel.attributedText = WDP.dpAmount(relayerFee.stringValue, relayFeeLabel.font, mDpDecimal, mDpDecimal)
+            claimFeeLabel.attributedText = WDP.dpAmount(claimFeeAmount.stringValue, claimFeeLabel.font, 0, mDpDecimal)
             recipientAddressLabel.text = pageHolderVC.mHtlcToAccount?.account_address
             
         } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN) {
@@ -148,9 +148,9 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             WUtils.setDenomTitle(pageHolderVC.mHtlcToChain!, claimFeeDenom)
             
             relayerFee = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetFee(pageHolderVC.mHtlcDenom!).multiplying(byPowerOf10: -8)
-            receiveAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.subtracting(relayerFee).stringValue , receiveAmountLabel.font, 0, 8)
-            relayFeeLabel.attributedText = WUtils.displayAmount2(relayerFee.stringValue, relayFeeLabel.font, 0, 8)
-            claimFeeLabel.attributedText = WUtils.displayAmount2(claimFeeAmount.stringValue, claimFeeLabel.font, 6, 6)
+            receiveAmountLabel.attributedText = WDP.dpAmount(toSendAmount.subtracting(relayerFee).stringValue , receiveAmountLabel.font, 0, 8)
+            relayFeeLabel.attributedText = WDP.dpAmount(relayerFee.stringValue, relayFeeLabel.font, 0, 8)
+            claimFeeLabel.attributedText = WDP.dpAmount(claimFeeAmount.stringValue, claimFeeLabel.font, 6, 6)
             claimAddress.text = pageHolderVC.mHtlcToAccount?.account_address
         }
     }

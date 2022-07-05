@@ -207,11 +207,11 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             WUtils.setDenomTitle(toChain!, cell!.accountDenom)
             if (toChain == ChainType.BINANCE_MAIN) {
                 cell?.keyStatusImg.tintColor = UIColor.init(named: "binance")
-                cell!.accountBalance.attributedText = WUtils.displayAmount2(WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).stringValue, cell!.accountBalance.font, 0, 8)
+                cell!.accountBalance.attributedText = WDP.dpAmount(WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).stringValue, cell!.accountBalance.font, 0, 8)
                 
             } else if (toChain == ChainType.KAVA_MAIN) {
                 cell?.keyStatusImg.tintColor = UIColor.init(named: "kava")
-                cell!.accountBalance.attributedText = WUtils.displayAmount2(WUtils.getTokenAmount(account.account_balances, KAVA_MAIN_DENOM).stringValue, cell!.accountBalance.font, 6, 6)
+                cell!.accountBalance.attributedText = WDP.dpAmount(WUtils.getTokenAmount(account.account_balances, KAVA_MAIN_DENOM).stringValue, cell!.accountBalance.font, 6, 6)
             }
             return cell!
             
@@ -229,7 +229,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             } else {
                 cell?.keyStatusImg.image = UIImage.init(named: "iconKeyEmpty")
             }
-            cell?.accountBalance.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.accountBalance.font, 0, 6)
+            cell?.accountBalance.attributedText = WDP.dpAmount(account.account_last_total, cell!.accountBalance.font, 0, 6)
             return cell!
             
         } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN) {
@@ -322,7 +322,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             cell?.accountName.text = account.getDpName()
             cell?.keyStatusImg.image = cell?.keyStatusImg.image?.withRenderingMode(.alwaysTemplate)
             cell?.keyStatusImg.tintColor = toChainConfig?.chainColor
-            cell?.accountBalance.attributedText = WUtils.displayAmount2(account.account_last_total, cell!.accountBalance.font, 0, 6)
+            cell?.accountBalance.attributedText = WDP.dpAmount(account.account_last_total, cell!.accountBalance.font, 0, 6)
             return cell!
             
         } else if (type == SELECT_POPUP_FEE_DENOM) {

@@ -33,7 +33,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
         
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         userBalance = BaseData.instance.getDelegatable_gRPC(pageHolderVC.chainType).subtracting(mainDenomFee)
-        WUtils.showCoinDp(mainDenom, userBalance.stringValue, availableDenomLabel, availableAmountLabel, pageHolderVC.chainType!)
+        WDP.dpCoin(chainConfig, mainDenom, userBalance.stringValue, availableDenomLabel, availableAmountLabel)
         
         toDelegateAmountInput.delegate = self
         toDelegateAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

@@ -39,8 +39,8 @@ class JoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        pageHolderVC = self.parent as? StepGenTxViewController
         input0TextFiled.delegate = self
         input0TextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         input1TextFiled.delegate = self
@@ -70,8 +70,8 @@ class JoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         WDP.dpSymbol(chainConfig, coin0Denom, inputCoin0Name)
         WDP.dpSymbolImg(chainConfig, coin1Denom, inputCoin1Img)
         WDP.dpSymbol(chainConfig, coin1Denom, inputCoin1Name)
-        WUtils.showCoinDp(coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel, chainType!)
-        WUtils.showCoinDp(coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel)
+        WDP.dpCoin(chainConfig, coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel)
         
         
         let coin0Amount = NSDecimalNumber.init(string: pageHolderVC.mPool!.poolAssets[0].token.amount)

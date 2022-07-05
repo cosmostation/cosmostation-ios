@@ -38,7 +38,7 @@ class HardPoolDeposit0ViewController: BaseViewController, UITextFieldDelegate {
         availableMax = BaseData.instance.getAvailableAmount_gRPC(hardPoolDenom)
         
         WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)
-        WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
+        WDP.dpCoin(chainConfig, hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel)
         WDP.dpSymbolImg(chainConfig, hardPoolDenom, mCoinImg)
         self.loadingImg.isHidden = true
         

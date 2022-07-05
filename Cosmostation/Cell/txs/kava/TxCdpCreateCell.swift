@@ -24,18 +24,18 @@ class TxCdpCreateCell: TxCell {
         principalAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Kava_Cdp_V1beta1_MsgCreateCDP.init(serializedData: response.tx.body.messages[position].value) {
             senderLabel.text = msg.sender
             
             let collateralCoin = Coin.init(msg.collateral.denom, msg.collateral.amount)
-            WUtils.showCoinDp(collateralCoin, collateralDenom, collateralAmount, chain.chainType)
+            WDP.dpCoin(chainConfig, collateralCoin, collateralDenom, collateralAmount)
             
             let principalCoin = Coin.init(msg.principal.denom, msg.principal.amount)
-            WUtils.showCoinDp(principalCoin, principalDenom, principalAmount, chain.chainType)
+            WDP.dpCoin(chainConfig, principalCoin, principalDenom, principalAmount)
         }
     }
     

@@ -38,7 +38,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         if (ibcSendDenom == mainDenom) {
             maxAvailable = maxAvailable.subtracting(mainDenomFee)
         }
-        WUtils.showCoinDp(ibcSendDenom, maxAvailable.stringValue, denomTitleLabel, mAvailableAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, ibcSendDenom, maxAvailable.stringValue, denomTitleLabel, mAvailableAmountLabel)
         
         mTargetAmountTextField.delegate = self
         mTargetAmountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

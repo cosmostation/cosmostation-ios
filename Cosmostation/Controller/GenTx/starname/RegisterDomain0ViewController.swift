@@ -58,7 +58,7 @@ class RegisterDomain0ViewController: BaseViewController {
         let userInputData = self.userInput.text?.trimmingCharacters(in: .whitespaces)
         let domainType = typeSwitch.isOn ? "open" : "closed"
         let starnameFee = WUtils.getStarNameRegisterDomainFee(userInputData!, domainType)
-        starnameFeeAmount.attributedText = WUtils.displayAmount2(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
+        starnameFeeAmount.attributedText = WDP.dpAmount(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
     }
     
     @IBAction func onToggleSwitch(_ sender: UISwitch) {

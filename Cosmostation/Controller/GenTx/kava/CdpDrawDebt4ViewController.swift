@@ -60,14 +60,14 @@ class CdpDrawDebt4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, nil, feeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, nil, feeAmountLabel)
         
         let cDenom = pageHolderVC.mCDenom!
         let pDenom = pageHolderVC.mPDenom!
         let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPrincipal.amount)
         
-        WUtils.showCoinDp(pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel, chainType!)
-        WUtils.showCoinDp(pDenom, pageHolderVC.totalLoanAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount, chainType!)
+        WDP.dpCoin(chainConfig, pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel)
+        WDP.dpCoin(chainConfig, pDenom, pageHolderVC.totalLoanAmount!.stringValue, adjuestedcAmountDenom, adjuestedcAmount)
         
         WUtils.showRiskRate(pageHolderVC.beforeRiskRate!, beforeRiskRate, _rateIamg: nil)
         WUtils.showRiskRate(pageHolderVC.afterRiskRate!, afterRiskRate, _rateIamg: nil)

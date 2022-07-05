@@ -41,6 +41,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
         WUtils.setDenomTitle(chainType, sendDenomLabel)
         WUtils.setDenomTitle(chainType, availableDenomLabel)
         WUtils.setDenomTitle(chainType, remainDenomLabel)
@@ -118,10 +119,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
 //        print("remainAvailable ", remainAvailable)
         
         
-        WUtils.showCoinDp(pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel, chainType!)
-        WUtils.showCoinDp(toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel, chainType!)
-        WUtils.showCoinDp(toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
+        WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
+        WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
         
         mToAddressLabel.text = pageHolderVC.mToSendRecipientAddress
         mToAddressLabel.adjustsFontSizeToFitWidth = true

@@ -28,6 +28,7 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         proposalTitle.text = pageHolderVC.mProposalTitle
@@ -57,7 +58,7 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], mFeeDenomTitle, mFeeAmount, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], mFeeDenomTitle, mFeeAmount)
         mOpinion.text = pageHolderVC.mVoteOpinion
         mMemo.text = pageHolderVC.mMemo
     }

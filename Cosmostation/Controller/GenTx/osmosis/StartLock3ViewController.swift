@@ -27,6 +27,7 @@ class StartLock3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -37,8 +38,8 @@ class StartLock3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mLPCoin!, toLocklDenomLabel, toLockAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mLPCoin!, toLocklDenomLabel, toLockAmountLabel)
         memoLabel.text = pageHolderVC.mMemo
         
         if (pageHolderVC.mLockupDuration == 86400) {

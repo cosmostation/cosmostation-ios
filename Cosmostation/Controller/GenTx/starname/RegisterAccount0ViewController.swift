@@ -57,7 +57,7 @@ class RegisterAccount0ViewController: BaseViewController, SBCardPopupDelegate {
     
     func onUpdateStarnameFee() {
         let starnameFee = WUtils.getStarNameRegisterAccountFee("open")
-        starnameFeeAmount.attributedText = WUtils.displayAmount2(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
+        starnameFeeAmount.attributedText = WDP.dpAmount(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {

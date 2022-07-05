@@ -65,7 +65,7 @@ class HardListCell: UITableViewCell {
         }
         let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(hardMoneyMarket.denom))
         let myDepositValue = myDepositAmount.multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
-        WUtils.showCoinDp(hardMoneyMarket.denom, myDepositAmount.stringValue, mySuppliedDenom, mySuppliedAmount, ChainType.KAVA_MAIN)
+        WDP.dpCoin(chainConfig, hardMoneyMarket.denom, myDepositAmount.stringValue, mySuppliedDenom, mySuppliedAmount)
         mySuppliedValue.attributedText = WUtils.getDPRawDollor(myDepositValue.stringValue, 2, mySuppliedValue.font)
         
         
@@ -77,7 +77,7 @@ class HardListCell: UITableViewCell {
             }
         }
         let myBorrowValue = myBorrowAmount.multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
-        WUtils.showCoinDp(hardMoneyMarket.denom, myBorrowAmount.stringValue, myBorrowedDenom, myBorrowedAmount, ChainType.KAVA_MAIN)
+        WDP.dpCoin(chainConfig, hardMoneyMarket.denom, myBorrowAmount.stringValue, myBorrowedDenom, myBorrowedAmount)
         myBorrowedValue.attributedText = WUtils.getDPRawDollor(myBorrowValue.stringValue, 2, myBorrowedValue.font)
     }
     

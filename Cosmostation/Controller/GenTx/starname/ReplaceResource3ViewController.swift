@@ -41,8 +41,8 @@ class ReplaceResource3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onUpdateView() {
         let starnameFee = WUtils.getReplaceFee()
-        feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 6, 6)
-        starnameFeeAmount.attributedText = WUtils.displayAmount2(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
+        feeAmountLabel.attributedText = WDP.dpAmount((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 6, 6)
+        starnameFeeAmount.attributedText = WDP.dpAmount(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
         expireDate.text = WUtils.longTimetoString(pageHolderVC.mStarnameTime! * 1000)
         memoLabel.text = pageHolderVC.mMemo
         

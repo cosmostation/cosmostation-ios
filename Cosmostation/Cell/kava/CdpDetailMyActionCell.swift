@@ -117,18 +117,18 @@ class CdpDetailMyActionCell: UITableViewCell {
         
        WDP.dpSymbol(chainConfig, cDenom, collateralDenom)
         let selfDepositValue = selfDepositAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        collateralSelfAmount.attributedText = WUtils.displayAmount2(selfDepositAmount.stringValue, collateralSelfAmount.font!, cDpDecimal, cDpDecimal)
+        collateralSelfAmount.attributedText = WDP.dpAmount(selfDepositAmount.stringValue, collateralSelfAmount.font!, cDpDecimal, cDpDecimal)
         collateralSelfValue.attributedText = WUtils.getDPRawDollor(selfDepositValue.stringValue, 2, collateralSelfValue.font)
 
         let totalDepositAmount = myCdp!.getRawCollateralAmount()
         let totalDepositValue = totalDepositAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        collateralTotalAmount.attributedText = WUtils.displayAmount2(totalDepositAmount.stringValue, collateralTotalAmount.font!, cDpDecimal, cDpDecimal)
+        collateralTotalAmount.attributedText = WDP.dpAmount(totalDepositAmount.stringValue, collateralTotalAmount.font!, cDpDecimal, cDpDecimal)
         collateralTotalValue.attributedText = WUtils.getDPRawDollor(totalDepositValue.stringValue, 2, collateralTotalValue.font)
 
         collateralWithdrawableTitle.text = String(format: NSLocalizedString("withdrawable_format", comment: ""), WUtils.getSymbol(chainConfig, cDenom))
         let maxWithdrawableAmount = myCdp!.getWithdrawableAmount(cDenom, pDenom, collateralParam!, oraclePrice, selfDepositAmount)
         let maxWithdrawableValue = maxWithdrawableAmount.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        collateralWithdrawableAmount.attributedText = WUtils.displayAmount2(maxWithdrawableAmount.stringValue, collateralWithdrawableAmount.font!, cDpDecimal, cDpDecimal)
+        collateralWithdrawableAmount.attributedText = WDP.dpAmount(maxWithdrawableAmount.stringValue, collateralWithdrawableAmount.font!, cDpDecimal, cDpDecimal)
         collateralWithdrawableValue.attributedText = WUtils.getDPRawDollor(maxWithdrawableValue.stringValue, 2, collateralWithdrawableValue.font)
 
         depositBtn.setTitle(String(format: NSLocalizedString("str_deposit", comment: ""), WUtils.getSymbol(chainConfig, cDenom)), for: .normal)
@@ -136,15 +136,15 @@ class CdpDetailMyActionCell: UITableViewCell {
 
         WDP.dpSymbol(chainConfig, pDenom, principalDenom)
         let rawPricipalAmount = myCdp!.getRawPrincipalAmount()
-        principalAmount.attributedText = WUtils.displayAmount2(rawPricipalAmount.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
+        principalAmount.attributedText = WDP.dpAmount(rawPricipalAmount.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
         principalValue.attributedText = WUtils.getDPRawDollor(rawPricipalAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, principalValue.font)
 
         let totalFeeAmount = myCdp!.getEstimatedTotalFee(collateralParam!)
-        interestAmount.attributedText = WUtils.displayAmount2(totalFeeAmount.stringValue, interestAmount.font!, pDpDecimal, pDpDecimal)
+        interestAmount.attributedText = WDP.dpAmount(totalFeeAmount.stringValue, interestAmount.font!, pDpDecimal, pDpDecimal)
         interestValue.attributedText = WUtils.getDPRawDollor(totalFeeAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, principalValue.font)
 
         let moreDebtAmount = myCdp!.getMoreLoanableAmount(collateralParam!)
-        remainingAmount.attributedText = WUtils.displayAmount2(moreDebtAmount.stringValue, remainingAmount.font!, pDpDecimal, pDpDecimal)
+        remainingAmount.attributedText = WDP.dpAmount(moreDebtAmount.stringValue, remainingAmount.font!, pDpDecimal, pDpDecimal)
         remainingValue.attributedText = WUtils.getDPRawDollor(moreDebtAmount.multiplying(byPowerOf10: -pDpDecimal).stringValue, 2, remainingValue.font)
 
         WDP.dpSymbolImg(chainConfig, cDenom, collateralImg)

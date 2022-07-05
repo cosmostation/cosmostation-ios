@@ -38,7 +38,7 @@ class WcTransferPopup: BaseViewController, SBCardPopupContent {
         WcRecipientAddress.text = firstMsg?.outputs[0].address
         WcRecipientAddress.adjustsFontSizeToFitWidth = true
         WcSendCoinSymbol.text = String(dpDenom!)
-        WcSendCoinAmount.attributedText = WUtils.displayAmount2(dpAmount.stringValue, WcSendCoinAmount.font, 0, 8)
+        WcSendCoinAmount.attributedText = WDP.dpAmount(dpAmount.stringValue, WcSendCoinAmount.font, 0, 8)
         WcMemo.text = bnbOrder?.memo
         
     }

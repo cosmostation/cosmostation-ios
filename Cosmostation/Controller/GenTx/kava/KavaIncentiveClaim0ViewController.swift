@@ -39,9 +39,9 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
         hardIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_HARD_DENOM)
         swpIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_SWAP_DENOM)
         
-        kavaIncentiveAmountLabel.attributedText = WUtils.displayAmount2(kavaIncentiveAmount.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
-        hardIncentiveAmountLabel.attributedText = WUtils.displayAmount2(hardIncentiveAmount.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
-        swpIncentiveAmountLabel.attributedText = WUtils.displayAmount2(swpIncentiveAmount.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
+        kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveAmount.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
+        hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveAmount.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
+        swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveAmount.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
     }
     
     override func enableUserInteraction() {
@@ -59,9 +59,9 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
         let hardIncentiveCal = hardIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_HARD_DENOM, 0), withBehavior: WUtils.handler0)
         let swpIncentiveCal = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 0), withBehavior: WUtils.handler0)
         
-        kavaIncentiveAmountLabel.attributedText = WUtils.displayAmount2(kavaIncentiveCal.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
-        hardIncentiveAmountLabel.attributedText = WUtils.displayAmount2(hardIncentiveCal.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
-        swpIncentiveAmountLabel.attributedText = WUtils.displayAmount2(swpIncentiveCal.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
+        kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveCal.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
+        hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveCal.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
+        swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveCal.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
         
         lockupLabel.text = "1 Month"
         pageHolderVC.mIncentiveMultiplier = "small"
@@ -74,9 +74,9 @@ class KavaIncentiveClaim0ViewController: BaseViewController {
         let hardIncentiveCal = hardIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_HARD_DENOM, 1), withBehavior: WUtils.handler0)
         let swpIncentiveCal = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 1), withBehavior: WUtils.handler0)
         
-        kavaIncentiveAmountLabel.attributedText = WUtils.displayAmount2(kavaIncentiveCal.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
-        hardIncentiveAmountLabel.attributedText = WUtils.displayAmount2(hardIncentiveCal.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
-        swpIncentiveAmountLabel.attributedText = WUtils.displayAmount2(swpIncentiveCal.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
+        kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveCal.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
+        hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveCal.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
+        swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveCal.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
         
         lockupLabel.text = "12 Month"
         pageHolderVC.mIncentiveMultiplier = "large"

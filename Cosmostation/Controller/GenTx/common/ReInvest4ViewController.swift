@@ -31,17 +31,18 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mReinvestReward!, rewardDenomLabel, rewardLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeDenomLabel, feeLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mReinvestReward!, rewardDenomLabel, rewardLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeLabel)
         
         let currentDelegation = BaseData.instance.getDelegated_gRPC(pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
         let expectedDelegation = currentDelegation.adding(NSDecimalNumber.init(string: pageHolderVC.mReinvestReward!.amount))
-        WUtils.showCoinDp(WUtils.getMainDenom(chainType), currentDelegation.stringValue, currentDenom, currentDelegateAmount, chainType!)
-        WUtils.showCoinDp(WUtils.getMainDenom(chainType), expectedDelegation.stringValue, expectedDenom, expectedDelegateAmount, chainType!)
+        WDP.dpCoin(chainConfig, WUtils.getMainDenom(chainType), currentDelegation.stringValue, currentDenom, currentDelegateAmount!)
+        WDP.dpCoin(chainConfig, WUtils.getMainDenom(chainType), expectedDelegation.stringValue, expectedDenom, expectedDelegateAmount)
         validatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
     }

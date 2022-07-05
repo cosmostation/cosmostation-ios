@@ -307,8 +307,8 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
             //calculate max debtable amount from current state.
             pMaxAmount = mKavaMyCdp_gRPC!.getMoreLoanableAmount(mCollateralParam!)
 
-            pAvailabeMinLabel.attributedText = WUtils.displayAmount2(pMinAmount.stringValue, pAvailabeMinLabel.font!, pDpDecimal, pDpDecimal)
-            pAvailabeMaxLabel.attributedText = WUtils.displayAmount2(pMaxAmount.stringValue, pAvailabeMaxLabel.font!, pDpDecimal, pDpDecimal)
+            pAvailabeMinLabel.attributedText = WDP.dpAmount(pMinAmount.stringValue, pAvailabeMinLabel.font!, pDpDecimal, pDpDecimal)
+            pAvailabeMaxLabel.attributedText = WDP.dpAmount(pMaxAmount.stringValue, pAvailabeMaxLabel.font!, pDpDecimal, pDpDecimal)
 
             beforeLiquidationPrice = mKavaMyCdp_gRPC!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))

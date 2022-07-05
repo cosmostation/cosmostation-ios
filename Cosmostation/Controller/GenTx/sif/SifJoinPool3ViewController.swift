@@ -29,6 +29,7 @@ class SifJoinPool3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.selectedPool = self.pageHolderVC.mSifPool
     }
@@ -40,9 +41,9 @@ class SifJoinPool3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mPoolCoin0!, deposit0DenomLabel, deposit0AmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mPoolCoin1!, deposit1DenomLabel, deposit1AmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mPoolCoin0!, deposit0DenomLabel, deposit0AmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mPoolCoin1!, deposit1DenomLabel, deposit1AmountLabel)
         memoLabel.text = pageHolderVC.mMemo
     }
     

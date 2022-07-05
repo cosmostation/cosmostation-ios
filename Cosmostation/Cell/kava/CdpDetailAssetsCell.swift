@@ -49,16 +49,16 @@ class CdpDetailAssetsCell: UITableViewCell {
         let oraclePrice = BaseData.instance.getKavaOraclePrice(collateralParam!.liquidationMarketID)
         
         WDP.dpSymbol(chainConfig, cDenom, collateralDenom)
-        collateralAmount.attributedText = WUtils.displayAmount2(cAvailable.stringValue, collateralAmount.font!, cDpDecimal, cDpDecimal)
+        collateralAmount.attributedText = WDP.dpAmount(cAvailable.stringValue, collateralAmount.font!, cDpDecimal, cDpDecimal)
         let collateralValues = cAvailable.multiplying(byPowerOf10: -cDpDecimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
         collateralValue.attributedText = WUtils.getDPRawDollor(collateralValues.stringValue, 2, collateralValue.font)
 
         WDP.dpSymbol(chainConfig, pDenom, principalDenom)
-        principalAmount.attributedText = WUtils.displayAmount2(pAvailable.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
+        principalAmount.attributedText = WDP.dpAmount(pAvailable.stringValue, principalAmount.font!, pDpDecimal, pDpDecimal)
         let principalValues = pAvailable.multiplying(byPowerOf10: -pDpDecimal)
         principalValue.attributedText = WUtils.getDPRawDollor(principalValues.stringValue, 2, principalValue.font)
 
-        kavaAmount.attributedText = WUtils.displayAmount2(kAvailable.stringValue, kavaAmount.font!, kDpDecimal, kDpDecimal)
+        kavaAmount.attributedText = WDP.dpAmount(kAvailable.stringValue, kavaAmount.font!, kDpDecimal, kDpDecimal)
         let kavaValues = kAvailable.multiplying(byPowerOf10: -kDpDecimal).multiplying(by: WUtils.perUsdValue(KAVA_MAIN_DENOM)!, withBehavior: WUtils.handler2Down)
         kavaValue.attributedText = WUtils.getDPRawDollor(kavaValues.stringValue, 2, kavaValue.font)
         

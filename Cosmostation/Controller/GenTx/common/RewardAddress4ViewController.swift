@@ -26,11 +26,12 @@ class RewardAddress4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], rewardAddressChangeDenom, rewardAddressChangeFee, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], rewardAddressChangeDenom, rewardAddressChangeFee)
         currentRewardAddress.text = pageHolderVC.mCurrentRewardAddress
         newRewardAddress.text = pageHolderVC.mToChangeRewardAddress
         currentRewardAddress.adjustsFontSizeToFitWidth = true

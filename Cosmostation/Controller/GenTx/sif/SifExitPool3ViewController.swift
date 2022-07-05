@@ -30,6 +30,7 @@ class SifExitPool3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.selectedPool = self.pageHolderVC.mSifPool
     }
@@ -41,7 +42,7 @@ class SifExitPool3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
         memoLabel.text = pageHolderVC.mMemo
         
         let lpRowanAmount = WUtils.getNativeLpAmount(selectedPool)
@@ -51,9 +52,9 @@ class SifExitPool3ViewController: BaseViewController, PasswordViewDelegate {
         let rowanWithdrawAmount = lpRowanAmount.multiplying(by: myShareAmount).dividing(by: lpUnitAmount, withBehavior: WUtils.handler0)
         let externalWithdrawAmount = lpExternalAmount.multiplying(by: myShareAmount).dividing(by: lpUnitAmount, withBehavior: WUtils.handler0)
         
-        lpAmountLabel.attributedText = WUtils.displayAmount2(lpUnitAmount.stringValue, lpAmountLabel.font, 18, 18)
-        WUtils.showCoinDp(SIF_MAIN_DENOM, rowanWithdrawAmount.stringValue, withdraw0DenomLabel, withdraw0AmountLabel, chainType!)
-        WUtils.showCoinDp(selectedPool.externalAsset.symbol, externalWithdrawAmount.stringValue, withdraw1DenomLabel, withdraw1AmountLabel, chainType!)
+        lpAmountLabel.attributedText = WDP.dpAmount(lpUnitAmount.stringValue, lpAmountLabel.font, 18, 18)
+        WDP.dpCoin(chainConfig, SIF_MAIN_DENOM, rowanWithdrawAmount.stringValue, withdraw0DenomLabel, withdraw0AmountLabel)
+        WDP.dpCoin(chainConfig, selectedPool.externalAsset.symbol, externalWithdrawAmount.stringValue, withdraw1DenomLabel, withdraw1AmountLabel)
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {

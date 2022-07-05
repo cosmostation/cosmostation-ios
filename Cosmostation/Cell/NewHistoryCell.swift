@@ -28,7 +28,7 @@ class NewHistoryCell: UITableViewCell {
         txAmountLabel.isHidden = false
     }
     
-    func bindHistoryView(_ chainType: ChainType, _ history: ApiHistoryNewCustom, _ address: String) {
+    func bindHistoryView(_ chainConfig: ChainConfig, _ history: ApiHistoryNewCustom, _ address: String) {
         txTypeLabel.text = history.getMsgType(address)
         txResultLabel.isHidden = history.isSuccess()
         txTimeLabel.text = WUtils.newApiTimeToString(history.header?.timestamp)
@@ -41,14 +41,14 @@ class NewHistoryCell: UITableViewCell {
             return
         }
         
-        guard let dpCoin = history.getDpCoin(chainType) else {
+        guard let dpCoin = history.getDpCoin(chainConfig.chainType) else {
             txDenomLabel.isHidden = true
             txAmountLabel.isHidden = true
             return
         }
         txDenomLabel.isHidden = false
         txAmountLabel.isHidden = false
-        WUtils.showCoinDp(dpCoin, txDenomLabel, txAmountLabel, chainType)
+        WDP.dpCoin(chainConfig, dpCoin, txDenomLabel, txAmountLabel)
     }
     
 }

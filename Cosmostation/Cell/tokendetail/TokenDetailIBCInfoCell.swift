@@ -44,6 +44,6 @@ class TokenDetailIBCInfoCell: TokenDetailCell {
         }
         
         let total = BaseData.instance.getAvailableAmount_gRPC(ibcDenom)
-        availableLabel.attributedText = WUtils.displayAmount2(total.stringValue, availableLabel.font, ibcDivideDecimal, ibcDisplayDecimal)
+        availableLabel.attributedText = WDP.dpAmount(total.stringValue, availableLabel.font, ibcDivideDecimal, ibcDisplayDecimal)
     }
 }

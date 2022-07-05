@@ -44,7 +44,7 @@ class ClaimRewardAllCell: UITableViewCell {
     
     func updateView(_ chainType: ChainType?) {
         WUtils.setDenomTitle(chainType!, denomLabel)
-        totalRewardLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(WUtils.getMainDenom(chainType)), totalRewardLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        totalRewardLabel.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(WUtils.getMainDenom(chainType)), totalRewardLabel.font, WUtils.mainDivideDecimal(chainType), 6)
     }
     
 }

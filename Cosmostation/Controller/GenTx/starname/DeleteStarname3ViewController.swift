@@ -39,7 +39,7 @@ class DeleteStarname3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 6, 6)
+        feeAmountLabel.attributedText = WDP.dpAmount((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 6, 6)
         if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_DOMAIN) {
             toDeleteStarname.text = "*" + pageHolderVC.mStarnameDomain!
         } else if (pageHolderVC.mType == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {

@@ -41,7 +41,7 @@ class RenewStarname0ViewController: BaseViewController {
         }
         expireDateLabel.text = WUtils.longTimetoString(pageHolderVC.mStarnameTime! * 1000)
         renewExpireDate.text = WUtils.longTimetoString((pageHolderVC.mStarnameTime! * 1000) + extendTime)
-        starnameFeeAmount.attributedText = WUtils.displayAmount2(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
+        starnameFeeAmount.attributedText = WDP.dpAmount(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
     }
     
     override func enableUserInteraction() {

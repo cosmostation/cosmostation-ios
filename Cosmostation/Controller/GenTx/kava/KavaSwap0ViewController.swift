@@ -67,7 +67,7 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, outputCoinDenom)
         
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(inputCoinDenom)
-        WUtils.showCoinDp(inputCoinDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, inputCoinDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)
         
         swapRate = mOutputCoinAmount.dividing(by: mInputCoinAmount, withBehavior: WUtils.handler18)
         print("swapRate ", swapRate)

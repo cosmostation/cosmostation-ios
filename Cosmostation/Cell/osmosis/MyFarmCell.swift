@@ -96,11 +96,11 @@ class MyFarmCell: UITableViewCell {
             }
         }
         
-        farmingAmountLabel.attributedText = WUtils.displayAmount2(bondedAmount.stringValue, farmingAmountLabel.font, 18, 6)
+        farmingAmountLabel.attributedText = WDP.dpAmount(bondedAmount.stringValue, farmingAmountLabel.font, 18, 6)
         farmingDenomLabel.text = "GAMM-" + String(pool.id)
-        unbondingAmountLabel.attributedText = WUtils.displayAmount2(unbondingAmount.stringValue, unbondingAmountLabel.font, 18, 6)
+        unbondingAmountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unbondingAmountLabel.font, 18, 6)
         unbondingDenomLabel.text = "GAMM-" + String(pool.id)
-        unbondedAmountLabel.attributedText = WUtils.displayAmount2(unbondedAmount.stringValue, unbondedAmountLabel.font, 18, 6)
+        unbondedAmountLabel.attributedText = WDP.dpAmount(unbondedAmount.stringValue, unbondedAmountLabel.font, 18, 6)
         unbondedDenomLabel.text = "GAMM-" + String(pool.id)
         
         let farmingCoinValue = bondedAmount.multiplying(by: lpCoinPrice).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler2)
@@ -121,9 +121,9 @@ class MyFarmCell: UITableViewCell {
         let formattedLpCoinValue = "$ " + nf.string(from: lpCoinValue)!
         availableDenomLabel.text = "GAMM-" + String(pool.id)
         availableDenomLabel.adjustsFontSizeToFitWidth = true
-        availableAmountLabel.attributedText = WUtils.displayAmount2(lpCoin, availableAmountLabel.font, 18, 6)
+        availableAmountLabel.attributedText = WDP.dpAmount(lpCoin, availableAmountLabel.font, 18, 6)
         availableValueLabel.attributedText = WUtils.getDpAttributedString(formattedLpCoinValue, 2, availableValueLabel.font)
         
-        nextRewardAmountLabel.attributedText = WUtils.displayAmount2(myRewards.stringValue, nextRewardAmountLabel.font, 6, 6)
+        nextRewardAmountLabel.attributedText = WDP.dpAmount(myRewards.stringValue, nextRewardAmountLabel.font, 6, 6)
     }
 }

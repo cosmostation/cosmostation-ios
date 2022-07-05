@@ -68,18 +68,18 @@ class HarvestDetailMyActionCell: UITableViewCell {
 
         let mySuppliedAmount = NSDecimalNumber.init(string: myDeposit?.amount)
         let mySuppliedValue = mySuppliedAmount.multiplying(byPowerOf10: -decimal, withBehavior: WUtils.handler12Down).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        depositAmount.attributedText = WUtils.displayAmount2(mySuppliedAmount.stringValue, depositAmount.font, decimal, decimal)
+        depositAmount.attributedText = WDP.dpAmount(mySuppliedAmount.stringValue, depositAmount.font, decimal, decimal)
         depositValue.attributedText = WUtils.getDPRawDollor(mySuppliedValue.stringValue, 2, depositValue.font)
 
         let myBorrowedAmount = NSDecimalNumber.init(string: myBorrow?.amount)
         let myBorrowedValue = myBorrowedAmount.multiplying(byPowerOf10: -decimal, withBehavior: WUtils.handler12Down).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        borrowedAmount.attributedText = WUtils.displayAmount2(myBorrowedAmount.stringValue, borrowedAmount.font, decimal, decimal)
+        borrowedAmount.attributedText = WDP.dpAmount(myBorrowedAmount.stringValue, borrowedAmount.font, decimal, decimal)
         borrowedValue.attributedText = WUtils.getDPRawDollor(myBorrowedValue.stringValue, 2, borrowedValue.font)
         
     
         let finalBorrowableAmount = WUtils.getHardBorrowableAmountByDenom(hardMoneyMarketDenom, myDeposits, myBorrows, moduleCoins, reservedCoins)
         let finalBorrowableValue = finalBorrowableAmount.multiplying(byPowerOf10: -decimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        borroweableAmount.attributedText = WUtils.displayAmount2(finalBorrowableAmount.stringValue, borroweableAmount.font, decimal, decimal)
+        borroweableAmount.attributedText = WDP.dpAmount(finalBorrowableAmount.stringValue, borroweableAmount.font, decimal, decimal)
         borroweableValue.attributedText = WUtils.getDPRawDollor(finalBorrowableValue.stringValue, 2, borroweableValue.font)
     }
     

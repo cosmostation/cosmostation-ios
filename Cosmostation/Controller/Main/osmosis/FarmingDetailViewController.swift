@@ -122,7 +122,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         let formattedLpCoinValue = "$ " + nf.string(from: lpCoinValue)!
         
         topAvailableDenomLabel.text = "GAMM-" + String(mPool.id)
-        topAvailableAmountLabel.attributedText = WUtils.displayAmount2(lpCoin, topAvailableAmountLabel.font, 18, 18)
+        topAvailableAmountLabel.attributedText = WDP.dpAmount(lpCoin, topAvailableAmountLabel.font, 18, 18)
         topAvailableValueLabel.attributedText = WUtils.getDpAttributedString(formattedLpCoinValue, 2, topAvailableValueLabel.font)
         
         

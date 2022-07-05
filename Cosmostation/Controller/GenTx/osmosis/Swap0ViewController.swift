@@ -36,8 +36,8 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        pageHolderVC = self.parent as? StepGenTxViewController
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
@@ -53,7 +53,7 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         if (pageHolderVC.mSwapInDenom == OSMOSIS_MAIN_DENOM) {
             availableMaxAmount = availableMaxAmount.subtracting(mainDenomFee)
         }
-        WUtils.showCoinDp(pageHolderVC.mSwapInDenom!, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mSwapInDenom!, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)
         WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapInDenom!, inputCoinImg)
         WDP.dpSymbol(chainConfig, pageHolderVC.mSwapInDenom!, inputCoinName)
         WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinImg)

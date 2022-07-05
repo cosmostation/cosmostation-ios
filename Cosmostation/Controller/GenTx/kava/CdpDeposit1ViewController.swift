@@ -270,7 +270,7 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
             self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
             self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
             self.cMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mCDenom)
-            cAvailabeMaxLabel.attributedText = WUtils.displayAmount2(cMaxAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
+            cAvailabeMaxLabel.attributedText = WDP.dpAmount(cMaxAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
             
             currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
             beforeLiquidationPrice = mKavaMyCdp_gRPC!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)

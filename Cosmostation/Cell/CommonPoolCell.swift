@@ -55,8 +55,8 @@ class CommonPoolCell: UITableViewCell {
         liquidity1DenomLabel.adjustsFontSizeToFitWidth = true
         WDP.dpSymbol(chainConfig, coin0.denom, liquidity2DenomLabel)
         liquidity2DenomLabel.adjustsFontSizeToFitWidth = true
-        liquidity1AmountLabel.attributedText = WUtils.displayAmount2(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
-        liquidity2AmountLabel.attributedText = WUtils.displayAmount2(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
+        liquidity1AmountLabel.attributedText = WDP.dpAmount(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
+        liquidity2AmountLabel.attributedText = WDP.dpAmount(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
         
         
         //dp available
@@ -67,8 +67,8 @@ class CommonPoolCell: UITableViewCell {
         availableCoin0DenomLabel.adjustsFontSizeToFitWidth = true
         WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
         availableCoin1DenomLabel.adjustsFontSizeToFitWidth = true
-        availableCoin0AmountLabel.attributedText = WUtils.displayAmount2(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
-        availableCoin1AmountLabel.attributedText = WUtils.displayAmount2(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
+        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
+        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
     }
     
     func onBindKavaPoolView(_ pool: Kava_Swap_V1beta1_PoolResponse) {
@@ -92,8 +92,8 @@ class CommonPoolCell: UITableViewCell {
 
         WDP.dpSymbol(chainConfig, coin0.denom, liquidity1DenomLabel)
         WDP.dpSymbol(chainConfig, coin1.denom, liquidity2DenomLabel)
-        liquidity1AmountLabel.attributedText = WUtils.displayAmount2(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
-        liquidity2AmountLabel.attributedText = WUtils.displayAmount2(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
+        liquidity1AmountLabel.attributedText = WDP.dpAmount(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
+        liquidity2AmountLabel.attributedText = WDP.dpAmount(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
 
 
         //dp available
@@ -102,7 +102,7 @@ class CommonPoolCell: UITableViewCell {
 
         WDP.dpSymbol(chainConfig, coin0.denom, availableCoin0DenomLabel)
         WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
-        availableCoin0AmountLabel.attributedText = WUtils.displayAmount2(availableCoin0.stringValue, availableCoin0AmountLabel.font, coin0Decimal, 6)
-        availableCoin1AmountLabel.attributedText = WUtils.displayAmount2(availableCoin1.stringValue, availableCoin1AmountLabel.font, coin1Decimal, 6)
+        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0.stringValue, availableCoin0AmountLabel.font, coin0Decimal, 6)
+        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1.stringValue, availableCoin1AmountLabel.font, coin1Decimal, 6)
     }
 }

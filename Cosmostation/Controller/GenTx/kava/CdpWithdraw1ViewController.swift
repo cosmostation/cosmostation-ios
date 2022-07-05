@@ -286,7 +286,7 @@ class CdpWithdraw1ViewController: BaseViewController, UITextFieldDelegate, SBCar
             WUtils.showRiskRate2(beforeRiskRate, beforeSafeRate, beforeSafeTxt)
             
             cMaxWithdrawableAmount = mKavaMyCdp_gRPC!.getWithdrawableAmount(mCDenom, mPDenom, mCollateralParam!, currentPrice, mSelfDepositAmount)
-            cAvailabeMaxLabel.attributedText = WUtils.displayAmount2(cMaxWithdrawableAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
+            cAvailabeMaxLabel.attributedText = WDP.dpAmount(cMaxWithdrawableAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
             
 //            print("currentPrice ", currentPrice)
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)

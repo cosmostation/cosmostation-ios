@@ -33,9 +33,9 @@ class WalletKavaIncentiveCell: UITableViewCell {
         let hardAmount = BaseData.instance.mIncentiveRewards?.getIncentiveAmount(KAVA_HARD_DENOM) ?? NSDecimalNumber.zero
         let swpAmount = BaseData.instance.mIncentiveRewards?.getIncentiveAmount(KAVA_SWAP_DENOM) ?? NSDecimalNumber.zero
         
-        kavaAmountLabel.attributedText = WUtils.displayAmount2(kavaAmount.stringValue, kavaAmountLabel.font, 6, 6)
-        hardAmountLabel.attributedText = WUtils.displayAmount2(hardAmount.stringValue, hardAmountLabel.font, 6, 6)
-        swpAmountLabel.attributedText = WUtils.displayAmount2(swpAmount.stringValue, swpAmountLabel.font, 6, 6)
+        kavaAmountLabel.attributedText = WDP.dpAmount(kavaAmount.stringValue, kavaAmountLabel.font, 6, 6)
+        hardAmountLabel.attributedText = WDP.dpAmount(hardAmount.stringValue, hardAmountLabel.font, 6, 6)
+        swpAmountLabel.attributedText = WDP.dpAmount(swpAmount.stringValue, swpAmountLabel.font, 6, 6)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -41,7 +41,7 @@ class HardPoolWithdraw0ViewController: BaseViewController, UITextFieldDelegate {
         print("availableMax ", availableMax)
         
         WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)
-        WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
+        WDP.dpCoin(chainConfig, hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel)
         WDP.dpSymbolImg(chainConfig, hardPoolDenom, mCoinImg)
         self.loadingImg.isHidden = true
         

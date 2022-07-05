@@ -95,7 +95,7 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
             supplyLimit = kavaSwapParam2!.getSupportedSwapAssetLimit(toSwapDenom!)
             supplyRemain = kavaSwapSupply2!.getRemainCap(toSwapDenom!, supplyLimit)
             onetimeMax = kavaSwapParam2!.getSupportedSwapAssetMaxOnce(toSwapDenom!)
-            sendCoinAvailable.attributedText = WUtils.displayAmount2(availableAmount.stringValue, sendCoinAvailable.font, 0, 8)
+            sendCoinAvailable.attributedText = WDP.dpAmount(availableAmount.stringValue, sendCoinAvailable.font, 0, 8)
             
         } else if (pageHolderVC.chainType == ChainType.KAVA_MAIN && kavaSwapParam2 != nil && kavaSwapSupply2 != nil) {
             let chainConfig = ChainKava.init(.KAVA_MAIN)
@@ -118,7 +118,7 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
             supplyLimit = kavaSwapParam2!.getSupportedSwapAssetLimit(toSwapDenom!)
             supplyRemain = kavaSwapSupply2!.getRemainCap(toSwapDenom!, supplyLimit)
             onetimeMax = kavaSwapParam2!.getSupportedSwapAssetMaxOnce(toSwapDenom!)
-            sendCoinAvailable.attributedText = WUtils.displayAmount2(availableAmount.stringValue, sendCoinAvailable.font, 8, 8)
+            sendCoinAvailable.attributedText = WDP.dpAmount(availableAmount.stringValue, sendCoinAvailable.font, 8, 8)
             
         }
 //        print("availableAmount ", availableAmount)
@@ -126,9 +126,9 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
 //        print("supplyRemain ", supplyRemain)
 //        print("onetimeMax ", onetimeMax)
         
-        oneTimeLimitAmount.attributedText = WUtils.displayAmount2(onetimeMax.stringValue, oneTimeLimitAmount.font, 8, 8)
-        systemMaxAmount.attributedText = WUtils.displayAmount2(supplyLimit.stringValue, systemMaxAmount.font, 8, 8)
-        systemReaminAmount.attributedText = WUtils.displayAmount2(supplyRemain.stringValue, systemReaminAmount.font, 8, 8)
+        oneTimeLimitAmount.attributedText = WDP.dpAmount(onetimeMax.stringValue, oneTimeLimitAmount.font, 8, 8)
+        systemMaxAmount.attributedText = WDP.dpAmount(supplyLimit.stringValue, systemMaxAmount.font, 8, 8)
+        systemReaminAmount.attributedText = WDP.dpAmount(supplyRemain.stringValue, systemReaminAmount.font, 8, 8)
     }
     
     func onSetDpDenom(_ denom: String) {

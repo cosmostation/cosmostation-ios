@@ -25,7 +25,7 @@ class TokenDetailCommonCell: TokenDetailCell {
         let decimal = cw20Token.decimal
         let total = cw20Token.getAmount()
         
-        totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font, decimal, decimal)
-        availableAmount.attributedText = WUtils.displayAmount2(total.stringValue, availableAmount.font, decimal, decimal)
+        totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, decimal, decimal)
+        availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, decimal, decimal)
     }
 }

@@ -120,8 +120,8 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
             cDepositValue.attributedText = WUtils.getDPRawDollor(toCValue.stringValue, 2, cDepositValue.font)
             pMaxAmount = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.95")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
             
-            WUtils.showCoinDp(mPDenom, pMinAmount.stringValue, nil, pAvailabeMinLabel, chainType!)
-            WUtils.showCoinDp(mPDenom, pMaxAmount.stringValue, nil, pAvailabeMaxLabel, chainType!)
+            WDP.dpCoin(chainConfig, mPDenom, pMinAmount.stringValue, nil, pAvailabeMinLabel)
+            WDP.dpCoin(chainConfig, mPDenom, pMaxAmount.stringValue, nil, pAvailabeMaxLabel)
             
             cAvailabeMaxLabel.isHidden = true
             cAvailabeDashLabel.isHidden = true
@@ -483,8 +483,8 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
             print("cMinAmount ", cMinAmount)
             print("cMaxAmount ", cMaxAmount)
             
-            WUtils.showCoinDp(mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel, chainType!)
-            WUtils.showCoinDp(mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel, chainType!)
+            WDP.dpCoin(chainConfig, mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel)
+            WDP.dpCoin(chainConfig, mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel)
             
             WDP.dpSymbol(chainConfig, mCDenom, cDenomLabel)
             WDP.dpSymbol(chainConfig, mCDenom, cAvailableDenom)

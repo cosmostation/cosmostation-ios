@@ -27,6 +27,7 @@ class IBCSend4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -37,8 +38,8 @@ class IBCSend4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mIBCSendDenom!, pageHolderVC.mIBCSendAmount!, toSendDenomLabel, toSendAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mIBCSendDenom!, pageHolderVC.mIBCSendAmount!, toSendDenomLabel, toSendAmountLabel)
         
         let toChain = WUtils.getChainTypeByChainId(pageHolderVC.mIBCSendRelayer?.chain_id)
         guard let toChainConfig = ChainFactory.getChainConfig(toChain) else {

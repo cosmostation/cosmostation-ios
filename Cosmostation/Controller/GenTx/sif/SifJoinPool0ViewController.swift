@@ -69,8 +69,8 @@ class SifJoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         WDP.dpSymbolImg(chainConfig, selectedPool.externalAsset.symbol, inputCoin1Img)
         WDP.dpSymbol(chainConfig, selectedPool.externalAsset.symbol, inputCoin1Name)
         
-        WUtils.showCoinDp(SIF_MAIN_DENOM, rowanMaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel, chainType!)
-        WUtils.showCoinDp(selectedPool.externalAsset.symbol, externalMaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, SIF_MAIN_DENOM, rowanMaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel)
+        WDP.dpCoin(chainConfig, selectedPool.externalAsset.symbol, externalMaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel)
         
         let lpNativeAmount = WUtils.getPoolLpAmount(selectedPool, SIF_MAIN_DENOM)
         let lpExternalAmount = WUtils.getPoolLpAmount(selectedPool, selectedPool.externalAsset.symbol)

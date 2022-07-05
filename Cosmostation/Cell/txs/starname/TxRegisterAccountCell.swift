@@ -24,9 +24,9 @@ class TxRegisterAccountCell: TxCell {
         starnameFeeAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Starnamed_X_Starname_V1beta1_MsgRegisterAccount.init(serializedData: response.tx.body.messages[position].value) {
             accountLabel.text = msg.name + "*" + msg.domain
@@ -34,7 +34,7 @@ class TxRegisterAccountCell: TxCell {
             registerLabel.text = msg.registerer
             
             let starnameFee = WUtils.getStarNameRegisterAccountFee("open")
-            WUtils.showCoinDp(IOV_MAIN_DENOM, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel, chain.chainType)
+            WDP.dpCoin(chainConfig, IOV_MAIN_DENOM, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel)
         }
         
     }

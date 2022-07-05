@@ -32,7 +32,7 @@ class KavaSwapExit0ViewController: BaseViewController, UITextFieldDelegate {
         self.mMyKavaPoolDeposits = pageHolderVC.mKavaSwapPoolDeposit
         
         availableMaxAmount = NSDecimalNumber.init(string: mMyKavaPoolDeposits.sharesOwned)
-        shareAvailableLabel.attributedText = WUtils.displayAmount2(availableMaxAmount.stringValue, shareAvailableLabel.font!, coinDecimal, coinDecimal)
+        shareAvailableLabel.attributedText = WDP.dpAmount(availableMaxAmount.stringValue, shareAvailableLabel.font!, coinDecimal, coinDecimal)
         
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

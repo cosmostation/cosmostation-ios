@@ -75,9 +75,9 @@ class EarnBondedCell: UITableViewCell {
         }
         
         amountDenomLabel.text = "GAMM-" + String(pool.id)
-        amountLabel.attributedText = WUtils.displayAmount2(lpCoin.amount, amountLabel.font, 18, 18)
+        amountLabel.attributedText = WDP.dpAmount(lpCoin.amount, amountLabel.font, 18, 18)
         amountValueLabel.attributedText = WUtils.getDpAttributedString(lpCoinValueFormatted, 2, amountValueLabel.font)
-        nextRewardAmountLabel.attributedText = WUtils.displayAmount2(myReward.stringValue, nextRewardAmountLabel.font, 6, 6)
+        nextRewardAmountLabel.attributedText = WDP.dpAmount(myReward.stringValue, nextRewardAmountLabel.font, 6, 6)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

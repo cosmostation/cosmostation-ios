@@ -270,7 +270,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = " "
             cell!.tokenValue.text = ""
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
         }
         
         
@@ -393,7 +393,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.textColor = UIColor(named: "osmosis_ion")
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Ion Coin"
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OSMOSIS_ION_DENOM, BaseData.instance.getAvailableAmount_gRPC(OSMOSIS_ION_DENOM), 6, cell!.tokenValue.font)
 
         } else if (coin.denom == EMONEY_EUR_DENOM || coin.denom == EMONEY_CHF_DENOM || coin.denom == EMONEY_DKK_DENOM ||
@@ -404,7 +404,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = coin.denom.substring(from: 1).uppercased() + " on E-Money Network"
 
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, BaseData.instance.getAvailableAmount_gRPC(coin.denom), 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_HARD_DENOM) {
@@ -415,7 +415,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = "HardPool Gov. Coin"
 
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_HARD_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_USDX_DENOM) {
@@ -426,7 +426,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = "USDX Stable Asset"
 
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_USDX_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_SWAP_DENOM) {
@@ -437,7 +437,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = "Kava Swap Coin"
 
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_SWAP_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == CRESCENT_BCRE_DENOM) {
@@ -448,7 +448,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = "Liquidated CRE"
 
             let allBCre = NSDecimalNumber.init(string: coin.amount)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allBCre.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(allBCre.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CRESCENT_BCRE_DENOM, allBCre, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == NYX_NYM_DENOM) {
@@ -459,7 +459,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = "Nym Coin"
 
             let allNym = NSDecimalNumber.init(string: coin.amount)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(allNym.stringValue, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(allNym.stringValue, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(NYX_NYM_DENOM, allNym, 6, cell!.tokenValue.font)
 
         } else {
@@ -472,7 +472,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.tokenDescription.text = (chainConfig?.chainAPIName.capitalizingFirstLetter() ?? "Base") + " Staking Coin"
                 
                 let allStakingCoin = WUtils.getAllMainAsset(coin.denom)
-                cell?.tokenAmount.attributedText = WUtils.displayAmount2(allStakingCoin.stringValue, cell!.tokenAmount.font, divideDecimal, 6)
+                cell?.tokenAmount.attributedText = WDP.dpAmount(allStakingCoin.stringValue, cell!.tokenAmount.font, divideDecimal, 6)
                 cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, allStakingCoin, divideDecimal, cell!.tokenValue.font)
             }
         }
@@ -486,7 +486,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "UnKnown"
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = ""
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
             return
         }
@@ -495,7 +495,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = ibcToken.display_denom?.uppercased()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = ibcToken.channel_id
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, ibcToken.decimal!, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, ibcToken.decimal!, 6)
             let basedenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(basedenom, NSDecimalNumber.init(string: coin.amount), ibcToken.decimal!, cell!.tokenValue.font)
             
@@ -504,7 +504,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = "UnKnown"
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = ibcToken.channel_id
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 6, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
         }
     }
@@ -517,7 +517,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = coin.isOsmosisAmmDpDenom()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = coin.denom
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 18, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
             
         } else if (chainType == .INJECTIVE_MAIN) {
@@ -525,7 +525,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = coin.denom.uppercased()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Pool Asset"
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 18, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 18, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
             
         } else if (chainType == .CRESCENT_MAIN) {
@@ -533,7 +533,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenSymbol.text = coin.denom.uppercased()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Pool Asset"
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(coin.amount, cell!.tokenAmount.font, 12, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 12, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 12, cell!.tokenValue.font)
             
         }
@@ -555,7 +555,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
         let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
         let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-        cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
+        cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
         cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
     }
     
@@ -568,7 +568,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         cell?.tokenDescription.text = token.contract_address
         
         let decimal = token.decimal
-        cell?.tokenAmount.attributedText = WUtils.displayAmount2(token.amount, cell!.tokenAmount.font!, decimal, 6)
+        cell?.tokenAmount.attributedText = WDP.dpAmount(token.amount, cell!.tokenAmount.font!, decimal, 6)
         cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(token.denom, token.getAmount(), decimal, cell!.tokenValue.font)
     }
     
@@ -584,7 +584,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
             let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WUtils.displayAmount2(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
+            cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
         }
         
@@ -602,7 +602,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.tokenDescription.text = bnbToken.name
                 
                 let amount = WUtils.getAllBnbToken(BNB_MAIN_DENOM)
-                cell?.tokenAmount.attributedText = WUtils.displayAmount2(amount.stringValue, cell!.tokenAmount.font, 0, 6)
+                cell?.tokenAmount.attributedText = WDP.dpAmount(amount.stringValue, cell!.tokenAmount.font, 0, 6)
                 cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, amount, 0, cell!.tokenValue.font)
             }
             
@@ -615,7 +615,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 cell?.tokenDescription.text = "OKC Staking Coin"
                 
                 let tokenAmount = WUtils.getAllExToken(OKEX_MAIN_DENOM)
-                cell?.tokenAmount.attributedText = WUtils.displayAmount2(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
+                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
                 cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OKEX_MAIN_DENOM, tokenAmount, 0, cell!.tokenValue.font)
             }
             
@@ -634,7 +634,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 
                 let tokenAmount = WUtils.getAllBnbToken(balance.balance_denom)
                 let convertAmount = WUtils.getBnbConvertAmount(balance.balance_denom)
-                cell?.tokenAmount.attributedText = WUtils.displayAmount2(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
+                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
                 cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, convertAmount, 0, cell!.tokenValue.font)
             }
             
@@ -648,7 +648,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 
                 let tokenAmount = WUtils.getAllExToken(balance.balance_denom)
                 let convertedAmount = WUtils.convertTokenToOkt(balance.balance_denom)
-                cell?.tokenAmount.attributedText = WUtils.displayAmount2(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
+                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
                 cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OKEX_MAIN_DENOM, convertedAmount, 0, cell!.tokenValue.font)
             }
         }

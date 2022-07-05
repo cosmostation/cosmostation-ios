@@ -28,6 +28,7 @@ class Undelegate4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -52,8 +53,8 @@ class Undelegate4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mToUndelegateAmount!, toUndelegateDenomLabel, toUnDelegateAmoutLaebl, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mToUndelegateAmount!, toUndelegateDenomLabel, toUnDelegateAmoutLaebl)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
         targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
         let unbondingTime = BaseData.instance.mParam?.getUnbondingTime()

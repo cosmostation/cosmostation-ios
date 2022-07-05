@@ -336,7 +336,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
             }
             
             if (pAllAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
-                pAllLabel.attributedText = WUtils.displayAmount2(pAllAmount.stringValue, pAllLabel.font!, pDpDecimal, pDpDecimal)
+                pAllLabel.attributedText = WDP.dpAmount(pAllAmount.stringValue, pAllLabel.font!, pDpDecimal, pDpDecimal)
             } else {
                 pAllTitle.isHidden = true
                 pAllLabel.isHidden = true
@@ -345,8 +345,8 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
                 pDisableAll.text = String(format: NSLocalizedString("str_cannot_repay_all", comment: ""), self.mPDenom.uppercased())
             }
             if (pMaxAmount.compare(NSDecimalNumber.zero).rawValue > 0 && pMinAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
-                pParticalMaxLabel.attributedText = WUtils.displayAmount2(pMaxAmount.stringValue, pParticalMaxLabel.font!, pDpDecimal, pDpDecimal)
-                pParticalMinLabel.attributedText = WUtils.displayAmount2(pMinAmount.stringValue, pParticalMinLabel.font!, pDpDecimal, pDpDecimal)
+                pParticalMaxLabel.attributedText = WDP.dpAmount(pMaxAmount.stringValue, pParticalMaxLabel.font!, pDpDecimal, pDpDecimal)
+                pParticalMinLabel.attributedText = WDP.dpAmount(pMinAmount.stringValue, pParticalMinLabel.font!, pDpDecimal, pDpDecimal)
             } else {
                 pParticalTitle.isHidden = true
                 pParticalMinLabel.isHidden = true

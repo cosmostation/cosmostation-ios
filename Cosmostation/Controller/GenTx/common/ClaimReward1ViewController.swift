@@ -63,7 +63,7 @@ class ClaimReward1ViewController: BaseViewController {
             let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(pageHolderVC.chainType), validator.operatorAddress)
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
-        rewardAmountLabel.attributedText = WUtils.displayAmount2(selectedRewardSum.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
+        rewardAmountLabel.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
         
         var monikers = ""
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {

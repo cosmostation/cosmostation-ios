@@ -67,10 +67,10 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             if (maxAvailable.compare(maxOnce).rawValue > 0) {
                 maxAvailable = maxOnce
             }
-            maxAvailableAmount.attributedText = WUtils.displayAmount2(maxAvailable.stringValue, maxAvailableAmount.font, 0, mDpDecimal)
+            maxAvailableAmount.attributedText = WDP.dpAmount(maxAvailable.stringValue, maxAvailableAmount.font, 0, mDpDecimal)
             
             minAvailable = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetMin(pageHolderVC.mHtlcDenom!).multiplying(byPowerOf10: -mDpDecimal)
-            minAvailableAmount.attributedText = WUtils.displayAmount2(minAvailable.stringValue, minAvailableAmount.font, 0, mDpDecimal)
+            minAvailableAmount.attributedText = WDP.dpAmount(minAvailable.stringValue, minAvailableAmount.font, 0, mDpDecimal)
             
         } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
             let chainConfig = ChainKava.init(.KAVA_MAIN)
@@ -98,10 +98,10 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             if (maxAvailable.compare(maxOnce).rawValue > 0) {
                 maxAvailable = maxOnce
             }
-            maxAvailableAmount.attributedText = WUtils.displayAmount2(maxAvailable.stringValue, maxAvailableAmount.font, mDpDecimal, mDpDecimal)
+            maxAvailableAmount.attributedText = WDP.dpAmount(maxAvailable.stringValue, maxAvailableAmount.font, mDpDecimal, mDpDecimal)
             
             minAvailable = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetMin(pageHolderVC.mHtlcDenom!)
-            minAvailableAmount.attributedText = WUtils.displayAmount2(minAvailable.stringValue, minAvailableAmount.font, mDpDecimal, mDpDecimal)
+            minAvailableAmount.attributedText = WDP.dpAmount(minAvailable.stringValue, minAvailableAmount.font, mDpDecimal, mDpDecimal)
 
             print("minAvailable ", minAvailable)
         }

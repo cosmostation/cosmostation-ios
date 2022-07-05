@@ -46,7 +46,7 @@ class SifExitPool0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         unitAmount = NSDecimalNumber.init(string: myProvider.liquidityProvider.liquidityProviderUnits)
-        lpAvailableLabel.attributedText = WUtils.displayAmount2(unitAmount.stringValue, lpAvailableLabel.font, unitDecimal, unitDecimal)
+        lpAvailableLabel.attributedText = WDP.dpAmount(unitAmount.stringValue, lpAvailableLabel.font, unitDecimal, unitDecimal)
         
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true

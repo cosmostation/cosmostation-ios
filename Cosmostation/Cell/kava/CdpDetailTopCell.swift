@@ -65,8 +65,8 @@ class CdpDetailTopCell: UITableViewCell {
         currentPrice.attributedText = WUtils.getDPRawDollor(oraclePrice.stringValue, 4, currentPrice.font)
 
         let kavaCdpParams_gRPC = BaseData.instance.mKavaCdpParams_gRPC
-        systemMax.attributedText = WUtils.displayAmount2(kavaCdpParams_gRPC!.getGlobalDebtAmount().stringValue, systemMax.font, 6, 6)
-        remainCap.attributedText = WUtils.displayAmount2(kavaCdpParams_gRPC!.getGlobalDebtAmount().subtracting(debtAmount).stringValue, remainCap.font, 6, 6)
+        systemMax.attributedText = WDP.dpAmount(kavaCdpParams_gRPC!.getGlobalDebtAmount().stringValue, systemMax.font, 6, 6)
+        remainCap.attributedText = WDP.dpAmount(kavaCdpParams_gRPC!.getGlobalDebtAmount().subtracting(debtAmount).stringValue, remainCap.font, 6, 6)
 
         let url = KAVA_CDP_IMG_URL + collateralParam!.getMarketImgPath()! + ".png"
         marketImg.af_setImage(withURL: URL(string: url)!)

@@ -30,8 +30,9 @@ class ExitPool0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        pageHolderVC = self.parent as? StepGenTxViewController
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
@@ -41,7 +42,7 @@ class ExitPool0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mPool!.totalShares.denom)
-        WUtils.showCoinDp(pageHolderVC.mPool!.totalShares.denom, availableMaxAmount.stringValue, lpAvailableDenomLabel, lpAvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mPool!.totalShares.denom, availableMaxAmount.stringValue, lpAvailableDenomLabel, lpAvailableLabel)
         WDP.dpSymbolImg(chainConfig, pageHolderVC.mPool!.totalShares.denom, lpCoinImg)
         WDP.dpSymbol(chainConfig, pageHolderVC.mPool!.totalShares.denom, lpCoinName)
         

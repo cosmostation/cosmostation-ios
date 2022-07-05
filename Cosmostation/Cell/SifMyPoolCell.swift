@@ -62,8 +62,8 @@ class SifMyPoolCell: UITableViewCell {
         totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(poolValueFormatted, 2, totalLiquidityValueLabel.font)
         WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, liquidity1DenomLabel)
         WDP.dpSymbol(chainConfig, exteranlDenom, liquidity2DenomLabel)
-        liquidity1AmountLabel.attributedText = WUtils.displayAmount2(rowanAmount.stringValue, liquidity1AmountLabel.font, rowanDecimal, 6)
-        liquidity2AmountLabel.attributedText = WUtils.displayAmount2(externalAmount.stringValue, liquidity2AmountLabel.font, externalDecimal, 6)
+        liquidity1AmountLabel.attributedText = WDP.dpAmount(rowanAmount.stringValue, liquidity1AmountLabel.font, rowanDecimal, 6)
+        liquidity2AmountLabel.attributedText = WDP.dpAmount(externalAmount.stringValue, liquidity2AmountLabel.font, externalDecimal, 6)
         
         //dp my lp info
         if (myLp != nil) {
@@ -72,8 +72,8 @@ class SifMyPoolCell: UITableViewCell {
             myShareValueLabel.attributedText = WUtils.getDpAttributedString(myShareValueFormatted, 2, myShareValueLabel.font)
             WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, myDepositCoin0DenomLabel)
             WDP.dpSymbol(chainConfig, exteranlDenom, myDepositCoin1DenomLabel)
-            myDepositCoin0AmountLabel.attributedText = WUtils.displayAmount2(myLp!.nativeAssetBalance, myDepositCoin0AmountLabel.font, rowanDecimal, 6)
-            myDepositCoin1AmountLabel.attributedText = WUtils.displayAmount2(myLp?.externalAssetBalance, myDepositCoin1AmountLabel.font, externalDecimal, 6)
+            myDepositCoin0AmountLabel.attributedText = WDP.dpAmount(myLp!.nativeAssetBalance, myDepositCoin0AmountLabel.font, rowanDecimal, 6)
+            myDepositCoin1AmountLabel.attributedText = WDP.dpAmount(myLp?.externalAssetBalance, myDepositCoin1AmountLabel.font, externalDecimal, 6)
         }
         
         //dp available
@@ -81,7 +81,7 @@ class SifMyPoolCell: UITableViewCell {
         let availableExternal = BaseData.instance.getAvailable_gRPC(exteranlDenom)
         WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, availableCoin0DenomLabel)
         WDP.dpSymbol(chainConfig, exteranlDenom, availableCoin1DenomLabel)
-        availableCoin0AmountLabel.attributedText = WUtils.displayAmount2(availableRowan, availableCoin0AmountLabel.font, rowanDecimal, 6)
-        availableCoin1AmountLabel.attributedText = WUtils.displayAmount2(availableExternal, availableCoin1AmountLabel.font, externalDecimal, 6)
+        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableRowan, availableCoin0AmountLabel.font, rowanDecimal, 6)
+        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableExternal, availableCoin1AmountLabel.font, externalDecimal, 6)
     }
 }

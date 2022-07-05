@@ -109,12 +109,12 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
         
-        rewardAmoutLaebl.attributedText = WUtils.displayAmount2(selectedRewardSum.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
-        feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
+        rewardAmoutLaebl.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
+        feeAmountLabel.attributedText = WDP.dpAmount(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
         
         let userBalance: NSDecimalNumber = BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainType))
         let expectedAmount = userBalance.adding(selectedRewardSum).subtracting(WUtils.plainStringToDecimal(pageHolderVC.mFee?.amount[0].amount))
-        expectedAmountLabel.attributedText = WUtils.displayAmount2(expectedAmount.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
+        expectedAmountLabel.attributedText = WDP.dpAmount(expectedAmount.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
         
         if (pageHolderVC.mAccount?.account_address == pageHolderVC.mRewardAddress) {
             recipientTitleLabel.isHidden = true

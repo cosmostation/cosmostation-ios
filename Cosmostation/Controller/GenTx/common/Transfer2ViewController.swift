@@ -51,7 +51,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
                 maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!)
             }
         }
-        WUtils.showCoinDp(self.pageHolderVC.mToSendDenom!, maxAvailable.stringValue, mAvailableDenomLabel, mAvailableAmountLabel, pageHolderVC.chainType!)
+        WDP.dpCoin(chainConfig, self.pageHolderVC.mToSendDenom!, maxAvailable.stringValue, mAvailableDenomLabel, mAvailableAmountLabel)
         
         mTargetAmountTextField.delegate = self
         mTargetAmountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

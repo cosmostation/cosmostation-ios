@@ -124,7 +124,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.voteEndTime.text = WUtils.sifNodeTimeToString(mMintscanProposalDetail?.voting_end_time)
             cell?.voteDescription.text = mMintscanProposalDetail?.description
             if let requestCoin = mMintscanProposalDetail?.content?.amount?[0] {
-                WUtils.showCoinDp(requestCoin, cell!.requestAmountDenom, cell!.requestAmount, chainType!)
+                WDP.dpCoin(chainConfig, requestCoin, cell!.requestAmountDenom, cell!.requestAmount)
             } else {
                 cell!.requestAmountDenom.text = "N/A"
             }

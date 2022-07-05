@@ -23,12 +23,16 @@ class Undelegate1ViewController: BaseViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        
         let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
         
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         userDelegated = BaseData.instance.getDelegated_gRPC(self.pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
-        WUtils.showCoinDp(mainDenom, userDelegated.stringValue, availableDenomLabel, availableAmountLabel, pageHolderVC.chainType!)
+        WDP.dpCoin(chainConfig, mainDenom, userDelegated.stringValue, availableDenomLabel, availableAmountLabel)
         
         toUndelegateAmountInput.delegate = self
         toUndelegateAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

@@ -149,7 +149,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     func onBindTxCommon(_ tableView: UITableView) -> UITableViewCell {
         let cell:TxCommonCell? = tableView.dequeueReusableCell(withIdentifier:"TxCommonCell") as? TxCommonCell
-        cell?.setDenomType(chainType!)
+        cell?.setDenomType(chainConfig!)
         if (chainType == ChainType.BINANCE_MAIN) {
             cell?.feeLayer.isHidden = false
             cell?.statusImg.image = UIImage(named: "successIc")
@@ -165,7 +165,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.timeGapLabel.text = WUtils.timeGap(input: mBnbTime)
             cell?.hashLabel.text = mTxInfo!.hash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
-            cell?.feeAmountLabel.attributedText = WUtils.displayAmount2(FEE_BINANCE_BASE, cell!.feeAmountLabel.font!, 0, 8)
+            cell?.feeAmountLabel.attributedText = WDP.dpAmount(FEE_BINANCE_BASE, cell!.feeAmountLabel.font!, 0, 8)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             cell?.feeLayer.isHidden = false
@@ -190,7 +190,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.timeGapLabel.text = WUtils.txTimeGap(input: mTxInfo!.timestamp!)
             cell?.hashLabel.text = mTxInfo!.txhash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
-            cell?.feeAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleFee().stringValue, cell!.feeAmountLabel.font!, 0, 8)
+            cell?.feeAmountLabel.attributedText = WDP.dpAmount(mTxInfo?.simpleFee().stringValue, cell!.feeAmountLabel.font!, 0, 8)
             
         } else {
             cell?.feeLayer.isHidden = false
@@ -220,7 +220,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.timeGapLabel.text = WUtils.txTimeGap(input: mTxInfo!.timestamp!)
             cell?.hashLabel.text = mTxInfo!.txhash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
-            cell?.feeAmountLabel.attributedText = WUtils.displayAmount2(mTxInfo?.simpleFee().stringValue, cell!.feeAmountLabel.font!, decimal, decimal)
+            cell?.feeAmountLabel.attributedText = WDP.dpAmount(mTxInfo?.simpleFee().stringValue, cell!.feeAmountLabel.font!, decimal, decimal)
             
         }
 //        cell?.actionHashCheck = {
@@ -265,7 +265,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             coins = sortCoins(coins!, chainType!)
             cell?.multiAmountStack.isHidden = false
             cell?.multiAmountLayer0.isHidden = false
-            WUtils.showCoinDp(coins![0], cell!.multiAmountDenom0, cell!.multiAmount0, chainType!)
+            WDP.dpCoin(chainConfig, coins![0], cell!.multiAmountDenom0, cell!.multiAmount0)
         }
         return cell!
     }
@@ -291,7 +291,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         let convertDelegaterAddress = WKey.convertAddressCosmosToTender(msg?.value.delegator_address ?? "")
         cell?.delegatorLabel.text = convertDelegaterAddress
-        WUtils.showCoinDp(msg!.value.quantity!, cell!.stakeDenom, cell!.stakeAmount, chainType!)
+        WDP.dpCoin(chainConfig, msg!.value.quantity!, cell!.stakeDenom, cell!.stakeAmount)
         return cell!
     }
     

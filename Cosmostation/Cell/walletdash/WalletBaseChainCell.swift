@@ -61,17 +61,17 @@ class WalletBaseChainCell: UITableViewCell {
         tokenSymbolLabel.textColor = chainConfig!.chainColor
         btnWalletConnect.isHidden = !chainConfig!.wcSupoort
 
-        totalAmount.attributedText = WUtils.displayAmount2(totalToken.stringValue, totalAmount.font!, divideDecimal, 6)
+        totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, divideDecimal, 6)
         totalValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalToken, divideDecimal, totalValue.font)
-        availableAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, divideDecimal, 6)
-        delegatedAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, divideDecimal, 6)
-        unbondingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, divideDecimal, 6)
-        rewardAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, divideDecimal, 6)
+        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, divideDecimal, 6)
+        delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, divideDecimal, 6)
+        unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, divideDecimal, 6)
+        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, divideDecimal, 6)
         
         let vesting = BaseData.instance.getVestingAmount_gRPC(stakingDenom)
         if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
             vestingLayer.isHidden = false
-            vestingAmount.attributedText = WUtils.displayAmount2(BaseData.instance.getVesting_gRPC(stakingDenom), vestingAmount.font!, divideDecimal, 6)
+            vestingAmount.attributedText = WDP.dpAmount(BaseData.instance.getVesting_gRPC(stakingDenom), vestingAmount.font!, divideDecimal, 6)
         }
         BaseData.instance.updateLastTotal(account, totalToken.multiplying(byPowerOf10: -divideDecimal).stringValue)
     }

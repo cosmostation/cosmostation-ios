@@ -86,8 +86,8 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         WDP.dpSymbol(chainConfig, coin1Denom, inputCoin1Name)
         WDP.dpSymbolImg(chainConfig, coin0Denom, inputCoin0Img)
         WDP.dpSymbolImg(chainConfig, coin1Denom, inputCoin1Img)
-        WUtils.showCoinDp(coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel, chainType!)
-        WUtils.showCoinDp(coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel)
+        WDP.dpCoin(chainConfig, coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel)
         
         depositRate = coin1Amount.dividing(by: coin0Amount, withBehavior: WUtils.handler18)
         print("depositRate ", depositRate)

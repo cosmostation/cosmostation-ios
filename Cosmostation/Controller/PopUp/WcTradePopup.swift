@@ -48,7 +48,7 @@ class WcTradePopup: BaseViewController, SBCardPopupContent {
         
         let dpPrice = NSDecimalNumber.init(value: firstMsg!.price).multiplying(byPowerOf10: -8, withBehavior: WUtils.handler8)
         let dpAmount = NSDecimalNumber.init(value: firstMsg!.quantity).multiplying(byPowerOf10: -8, withBehavior: WUtils.handler8)
-        WcPriceLabel.attributedText = WUtils.displayAmount2(dpPrice.stringValue, WcPriceLabel.font, 0, 8)
+        WcPriceLabel.attributedText = WDP.dpAmount(dpPrice.stringValue, WcPriceLabel.font, 0, 8)
         
         if (firstMsg!.side == 1) {
             WcSideLabel.text = "BUY"
@@ -63,8 +63,8 @@ class WcTradePopup: BaseViewController, SBCardPopupContent {
             WcFromSymbol.text = String(pair_denom[1].split(separator: "-")[0])
             WcToSymbol.text = String(pair_denom[0].split(separator: "-")[0])
             
-            WcFromAmount.attributedText = WUtils.displayAmount2(dpPrice.multiplying(by: dpAmount, withBehavior: WUtils.handler8).stringValue, WcPriceLabel.font, 0, 8)
-            WcToAmount.attributedText = WUtils.displayAmount2(dpAmount.stringValue, WcPriceLabel.font, 0, 8)
+            WcFromAmount.attributedText = WDP.dpAmount(dpPrice.multiplying(by: dpAmount, withBehavior: WUtils.handler8).stringValue, WcPriceLabel.font, 0, 8)
+            WcToAmount.attributedText = WDP.dpAmount(dpAmount.stringValue, WcPriceLabel.font, 0, 8)
             
         } else {
             WcSideLabel.text = "SELL"
@@ -79,8 +79,8 @@ class WcTradePopup: BaseViewController, SBCardPopupContent {
             WcFromSymbol.text = String(pair_denom[0].split(separator: "-")[0])
             WcToSymbol.text = String(pair_denom[1].split(separator: "-")[0])
             
-            WcFromAmount.attributedText = WUtils.displayAmount2(dpAmount.stringValue, WcPriceLabel.font, 0, 8)
-            WcToAmount.attributedText = WUtils.displayAmount2(dpPrice.multiplying(by: dpAmount, withBehavior: WUtils.handler8).stringValue, WcPriceLabel.font, 0, 8)
+            WcFromAmount.attributedText = WDP.dpAmount(dpAmount.stringValue, WcPriceLabel.font, 0, 8)
+            WcToAmount.attributedText = WDP.dpAmount(dpPrice.multiplying(by: dpAmount, withBehavior: WUtils.handler8).stringValue, WcPriceLabel.font, 0, 8)
             
         }
     }
