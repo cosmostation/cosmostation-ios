@@ -41,7 +41,7 @@ class NewHistoryCell: UITableViewCell {
             return
         }
         
-        guard let dpCoin = history.getDpCoin(chainConfig.chainType) else {
+        guard let dpCoin = history.getDpCoin(chainConfig) else {
             txDenomLabel.isHidden = true
             txAmountLabel.isHidden = true
             return

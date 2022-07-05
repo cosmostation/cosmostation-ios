@@ -434,7 +434,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (BaseData.instance.getDelegatable_gRPC(chainType).compare(NSDecimalNumber.zero).rawValue <= 0) {
+        if (BaseData.instance.getDelegatable_gRPC(chainConfig).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }
@@ -506,7 +506,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), mValidator_gRPC?.operatorAddress)
+        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), mValidator_gRPC?.operatorAddress)
         if (reward.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
@@ -531,7 +531,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), mValidator_gRPC?.operatorAddress)
+        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), mValidator_gRPC?.operatorAddress)
         if (reward.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return

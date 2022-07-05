@@ -29,7 +29,10 @@ class ClaimReward1ViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         WUtils.setDenomTitle(pageHolderVC.chainType!, rewardDenomLabel)
         
         if (pageHolderVC.mRewardTargetValidators_gRPC.count == 16) {
@@ -60,7 +63,7 @@ class ClaimReward1ViewController: BaseViewController {
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         var selectedRewardSum = NSDecimalNumber.zero
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {
-            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(pageHolderVC.chainType), validator.operatorAddress)
+            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress)
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
         rewardAmountLabel.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)

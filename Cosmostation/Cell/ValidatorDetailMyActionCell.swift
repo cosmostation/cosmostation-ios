@@ -65,7 +65,7 @@ class ValidatorDetailMyActionCell: UITableViewCell {
         cardView.backgroundColor = chainConfig?.chainColorBG
         let delegation = BaseData.instance.getDelegated_gRPC(validator!.operatorAddress)
         let unbonding = BaseData.instance.getUnbonding_gRPC(validator!.operatorAddress)
-        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), validator!.operatorAddress)
+        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator!.operatorAddress)
         myDelegateAmount.attributedText =  WDP.dpAmount(delegation.stringValue, myDelegateAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
         myUndelegateAmount.attributedText =  WDP.dpAmount(unbonding.stringValue, myUndelegateAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
         myRewardAmount.attributedText = WDP.dpAmount(reward.stringValue, myRewardAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))

@@ -46,7 +46,10 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
         self.mFeeInfo = WUtils.getFeeInfos(chainConfig)
+        WDP.dpSymbolImg(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeImg)
+        WDP.dpSymbol(chainConfig, WUtils.getMainDenom(chainConfig), feeTypeDenom)
 //        print("mFeeInfo ", mFeeInfo)
         
         gasSelectSegments.removeAllSegments()

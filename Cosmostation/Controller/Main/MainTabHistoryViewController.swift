@@ -98,7 +98,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
     }
     
     func updateTitle() {
@@ -115,7 +115,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.totalCard.backgroundColor = chainConfig?.chainColorBG
         self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         if (account?.account_has_private == true) {
             self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
             self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)

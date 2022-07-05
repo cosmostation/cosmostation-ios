@@ -104,7 +104,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.totalCard.backgroundColor = chainConfig?.chainColorBG
         self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         if (account?.account_has_private == true) {
             self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
             self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
@@ -147,13 +147,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         self.walletTableView.reloadData()
         self.refresher.endRefreshing()
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         self.walletTableView.reloadData()
     }
     
@@ -896,7 +896,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mToSendDenom = WUtils.getMainDenom(chainType)
+        txVC.mToSendDenom = WUtils.getMainDenom(chainConfig)
         txVC.mType = TASK_TYPE_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""

@@ -37,7 +37,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        self.stakingDenom = WUtils.getMainDenom(chainType)
+        self.stakingDenom = WUtils.getMainDenom(chainConfig)
         self.stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         self.stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
@@ -69,9 +69,9 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     func onInitView() {
         WUtils.setDenomTitle(chainType, naviTokenSymbol)
         self.naviTokenImg.image = chainConfig?.stakeDenomImg
-        self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainType), naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainType), font: naviUpdownPercent.font)
-        let changeValue = WUtils.valueChange(WUtils.getMainDenom(chainType))
+        self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainConfig), naviPerPrice.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainConfig), font: naviUpdownPercent.font)
+        let changeValue = WUtils.valueChange(WUtils.getMainDenom(chainConfig))
         if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
@@ -173,7 +173,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     
     func onStartIbc() {
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mIBCSendDenom = WUtils.getMainDenom(chainType)
+        txVC.mIBCSendDenom = WUtils.getMainDenom(chainConfig)
         txVC.mType = TASK_TYPE_IBC_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""

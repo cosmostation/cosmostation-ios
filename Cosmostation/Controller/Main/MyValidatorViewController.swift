@@ -107,7 +107,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         } else {
             if (indexPath.row == BaseData.instance.mMyValidators_gRPC.count) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"ClaimRewardAllCell") as? ClaimRewardAllCell
-                cell?.updateView(self.chainType)
+                cell?.updateView(chainConfig)
                 cell?.delegate = self
                 return cell!
             } else {
@@ -185,7 +185,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (BaseData.instance.getDelegatable_gRPC(chainType).compare(NSDecimalNumber.zero).rawValue <= 0) {
+        if (BaseData.instance.getDelegatable_gRPC(chainConfig).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }
@@ -243,8 +243,8 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             if ($1.description_p.moniker == "Cosmostation") { return false }
             if ($0.jailed && !$1.jailed) { return false }
             if (!$0.jailed && $1.jailed) { return true }
-            let firstVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainType), $0.operatorAddress)
-            let seconVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainType), $1.operatorAddress)
+            let firstVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainConfig), $0.operatorAddress)
+            let seconVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainConfig), $1.operatorAddress)
             return firstVal.compare(seconVal).rawValue > 0 ? true : false
         }
     }

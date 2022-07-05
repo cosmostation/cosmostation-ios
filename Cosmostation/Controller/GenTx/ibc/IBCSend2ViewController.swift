@@ -155,7 +155,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func onClickMax(_ sender: UIButton) {
         let maxValue = maxAvailable.multiplying(byPowerOf10: -decimal, withBehavior: WUtils.getDivideHandler(decimal))
         mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(maxValue, decimal)
-        if (ibcSendDenom == WUtils.getMainDenom(chainType!)) {
+        if (ibcSendDenom == WUtils.getMainDenom(chainConfig)) {
             self.showMaxWarnning()
         }
         self.onUpdateView()

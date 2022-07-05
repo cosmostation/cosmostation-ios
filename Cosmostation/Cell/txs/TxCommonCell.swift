@@ -68,6 +68,6 @@ class TxCommonCell: TxCell {
         timeGapLabel.text = WUtils.txTimeGap(input: tx.txResponse.timestamp)
         hashLabel.text = tx.txResponse.txhash
         memoLabel.text = tx.tx.body.memo
-        WDP.dpCoin(chainConfig, WUtils.onParseFeeGrpc(chainConfig.chainType, tx), feeDenomLabel, feeAmountLabel)
+        WDP.dpCoin(chainConfig, WUtils.onParseFeeGrpc(chainConfig, tx), feeDenomLabel, feeAmountLabel)
     }
 }

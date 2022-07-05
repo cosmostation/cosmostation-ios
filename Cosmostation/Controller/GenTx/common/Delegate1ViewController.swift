@@ -32,7 +32,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        userBalance = BaseData.instance.getDelegatable_gRPC(pageHolderVC.chainType).subtracting(mainDenomFee)
+        userBalance = BaseData.instance.getDelegatable_gRPC(chainConfig).subtracting(mainDenomFee)
         WDP.dpCoin(chainConfig, mainDenom, userBalance.stringValue, availableDenomLabel, availableAmountLabel)
         
         toDelegateAmountInput.delegate = self
@@ -108,7 +108,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func onClickNext(_ sender: UIButton) {
         if (isValiadAmount()) {
             let userInput = WUtils.localeStringToDecimal((toDelegateAmountInput.text?.trimmingCharacters(in: .whitespaces))!)
-            let coin = Coin.init(WUtils.getMainDenom(pageHolderVC.chainType), userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
+            let coin = Coin.init(WUtils.getMainDenom(chainConfig), userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
             pageHolderVC.mToDelegateAmount = coin
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()

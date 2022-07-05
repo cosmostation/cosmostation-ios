@@ -69,7 +69,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     }
     
     func onUpdateView() {
-        let mainDenom = WUtils.getMainDenom(chainType)
+        let mainDenom = WUtils.getMainDenom(chainConfig)
         let toSendDenom = pageHolderVC.mToSendAmount[0].denom
         let toSendAmount = WUtils.plainStringToDecimal(pageHolderVC.mToSendAmount[0].amount)
         let feeAmount = WUtils.plainStringToDecimal((pageHolderVC.mFee?.amount[0].amount)!)

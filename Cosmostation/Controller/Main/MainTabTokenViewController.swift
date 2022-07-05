@@ -125,7 +125,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.totalCard.backgroundColor = chainConfig?.chainColorBG
         self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         if (account?.account_has_private == true) {
             self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
             self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
@@ -154,7 +154,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func updateView() {
         self.onClassifyTokens()
         self.tokenTableView.reloadData()
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
     }
     
     @objc func onRequestFetch() {
@@ -294,7 +294,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == SECTION_NATIVE_GRPC) {
-            if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainType)) {
+            if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainConfig)) {
                 let sTokenDetailVC = StakingTokenGrpcViewController(nibName: "StakingTokenGrpcViewController", bundle: nil)
                 sTokenDetailVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
@@ -357,7 +357,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
 
         else if (indexPath.section == SECTION_NATIVE) {
-            if (mNative[indexPath.row].balance_denom == WUtils.getMainDenom(chainType)) {
+            if (mNative[indexPath.row].balance_denom == WUtils.getMainDenom(chainConfig)) {
                 let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
                 sTokenDetailVC.hidesBottomBarWhenPushed = true
                 self.navigationItem.title = ""
@@ -667,7 +667,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mUnKnown_gRPC.removeAll()
         
         self.mBalances_gRPC.forEach { balance_gRPC in
-            if (WUtils.getMainDenom(chainType) == balance_gRPC.denom) {
+            if (WUtils.getMainDenom(chainConfig) == balance_gRPC.denom) {
                 mNative_gRPC.append(balance_gRPC)
                 
             } else if (balance_gRPC.isIbc()) {
@@ -737,7 +737,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mEtc.removeAll()
         mUnKnown.removeAll()
         self.mBalances.forEach { balance in
-            if (WUtils.getMainDenom(chainType) == balance.balance_denom) {
+            if (WUtils.getMainDenom(chainConfig) == balance.balance_denom) {
                 mNative.append(balance)
                 
             } else if (chainType == .BINANCE_MAIN) {
@@ -754,8 +754,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         
         mNative_gRPC.sort {
-            if ($0.denom == WUtils.getMainDenom(chainType)) { return true }
-            if ($1.denom == WUtils.getMainDenom(chainType)) { return false }
+            if ($0.denom == WUtils.getMainDenom(chainConfig)) { return true }
+            if ($1.denom == WUtils.getMainDenom(chainConfig)) { return false }
             if (chainType == .KAVA_MAIN) {
                 if ($0.denom == KAVA_HARD_DENOM) { return true }
                 if ($1.denom == KAVA_HARD_DENOM) { return false }
@@ -771,8 +771,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             return false
         }
         mNative.sort {
-            if ($0.balance_denom == WUtils.getMainDenom(chainType)) { return true }
-            if ($1.balance_denom == WUtils.getMainDenom(chainType)) { return false }
+            if ($0.balance_denom == WUtils.getMainDenom(chainConfig)) { return true }
+            if ($1.balance_denom == WUtils.getMainDenom(chainConfig)) { return false }
             
             return false
         }
