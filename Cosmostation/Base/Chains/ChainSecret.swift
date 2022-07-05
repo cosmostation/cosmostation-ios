@@ -22,6 +22,7 @@ class ChainSecret: ChainConfig {
     var chainTitle2 = "SECRET"
     var chainDBName = CHAIN_SECRET_S
     var chainAPIName = "secret"
+    var chainIdPrefix = "secret-"
     
     var stakeDenomImg = UIImage(named: "tokenSecret")
     var stakeDenom = "uscrt"

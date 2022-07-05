@@ -22,6 +22,7 @@ class ChainCertik: ChainConfig {
     var chainTitle2 = "CERTIK"
     var chainDBName = CHAIN_CERTIK_S
     var chainAPIName = "certik"
+    var chainIdPrefix = "shentu-"
     
     var stakeDenomImg = UIImage(named: "tokenCertik")
     var stakeDenom = "uctk"

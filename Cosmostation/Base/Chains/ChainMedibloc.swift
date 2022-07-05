@@ -22,6 +22,7 @@ class ChainMedibloc: ChainConfig {
     var chainTitle2 = "MEDIBLOC"
     var chainDBName = CHAIN_MEDI_S
     var chainAPIName = "medibloc"
+    var chainIdPrefix = "panacea-"
     
     var stakeDenomImg = UIImage(named: "tokenMedibloc")
     var stakeDenom = "umed"

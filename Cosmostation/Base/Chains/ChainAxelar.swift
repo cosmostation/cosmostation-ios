@@ -18,11 +18,11 @@ class ChainAxelar: ChainConfig {
     var chainInfoMsg = NSLocalizedString("send_guide_msg_axelar", comment: "")
     var chainColor = UIColor(named: "axelar")!
     var chainColorBG = UIColor(named: "axelar_bg")!
-    
     var chainTitle = "(Axelar Mainnet)"
     var chainTitle2 = "AXELAR"
     var chainDBName = CHAIN_AXELAR_S
     var chainAPIName = "axelar"
+    var chainIdPrefix = "axelar-"
     
     var stakeDenomImg = UIImage(named: "tokenAxelar")
     var stakeDenom = "uaxl"

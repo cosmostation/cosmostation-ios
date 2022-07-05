@@ -1982,96 +1982,12 @@ public class WUtils {
     }
     
     static func getChainTypeByChainId(_ chainId: String?) -> ChainType? {
-        if (chainId?.contains("cosmoshub-") == true) {
-            return ChainType.COSMOS_MAIN
-        } else if (chainId?.contains("irishub-") == true) {
-            return ChainType.IRIS_MAIN
-        } else if (chainId?.contains("iov-") == true) {
-            return ChainType.IOV_MAIN
-        } else if (chainId?.contains("akashnet-") == true) {
-            return ChainType.AKASH_MAIN
-        } else if (chainId?.contains("sentinelhub-") == true) {
-            return ChainType.SENTINEL_MAIN
-        } else if (chainId?.contains("core-") == true) {
-            return ChainType.PERSIS_MAIN
-        } else if (chainId?.contains("sifchain-") == true) {
-            return ChainType.SIF_MAIN
-        } else if (chainId?.contains("osmosis-") == true) {
-            return ChainType.OSMOSIS_MAIN
-        } else if (chainId?.contains("crypto-org-") == true) {
-            return ChainType.CRYPTO_MAIN
-        } else if (chainId?.contains("laozi-mainnet") == true) {
-            return ChainType.BAND_MAIN
-        } else if (chainId?.contains("shentu-") == true) {
-            return ChainType.CERTIK_MAIN
-        } else if (chainId?.contains("fetchhub-") == true) {
-            return ChainType.FETCH_MAIN
-        } else if (chainId?.contains("panacea-") == true) {
-            return ChainType.MEDI_MAIN
-        } else if (chainId?.contains("emoney-") == true) {
-            return ChainType.EMONEY_MAIN
-        } else if (chainId?.contains("titan-") == true) {
-            return ChainType.RIZON_MAIN
-        } else if (chainId?.contains("juno-") == true) {
-            return ChainType.JUNO_MAIN
-        } else if (chainId?.contains("regen-") == true) {
-            return ChainType.REGEN_MAIN
-        } else if (chainId?.contains("bitcanna-") == true) {
-            return ChainType.BITCANA_MAIN
-        } else if (chainId?.contains("althea-") == true) {
-            return ChainType.ALTHEA_MAIN
-        } else if (chainId?.contains("stargaze-") == true) {
-            return ChainType.STARGAZE_MAIN
-        } else if (chainId?.contains("comdex-") == true) {
-            return ChainType.COMDEX_MAIN
-        } else if (chainId?.contains("injective-") == true) {
-            return ChainType.INJECTIVE_MAIN
-        } else if (chainId?.contains("kichain-") == true) {
-            return ChainType.KI_MAIN
-        } else if (chainId?.contains("secret-") == true) {
-            return ChainType.SECRET_MAIN
-        } else if (chainId?.contains("bitsong-") == true) {
-            return ChainType.BITSONG_MAIN
-        } else if (chainId?.contains("desmos-") == true) {
-            return ChainType.DESMOS_MAIN
-        } else if (chainId?.contains("gravity-bridge-") == true) {
-            return ChainType.GRAVITY_BRIDGE_MAIN
-        } else if (chainId?.contains("lum-") == true) {
-            return ChainType.LUM_MAIN
-        } else if (chainId?.contains("chihuahua-") == true) {
-            return ChainType.CHIHUAHUA_MAIN
-        } else if (chainId?.contains("kava_") == true) {
-            return ChainType.KAVA_MAIN
-        } else if (chainId?.contains("axelar-") == true) {
-            return ChainType.AXELAR_MAIN
-        } else if (chainId?.contains("darchub") == true) {
-            return ChainType.KONSTELLATION_MAIN
-        } else if (chainId?.contains("umee-") == true) {
-            return ChainType.UMEE_MAIN
-        } else if (chainId?.contains("evmos_") == true) {
-            return ChainType.EVMOS_MAIN
-        } else if (chainId?.contains("pio-mainnet-") == true) {
-            return ChainType.PROVENANCE_MAIN
-        } else if (chainId?.contains("cudos-") == true) {
-            return ChainType.CUDOS_MAIN
-        } else if (chainId?.contains("cerberus-") == true) {
-            return ChainType.CERBERUS_MAIN
-        } else if (chainId?.contains("omniflixhub-") == true) {
-            return ChainType.OMNIFLIX_MAIN
-        } else if (chainId?.contains("crescent-") == true) {
-            return ChainType.CRESCENT_MAIN
-        } else if (chainId?.contains("mantle-") == true) {
-            return ChainType.MANTLE_MAIN
-        } else if (chainId?.contains("nyx") == true) {
-            return ChainType.NYX_MAIN
+        let allConfigs = ChainFactory.SUPPRT_CONFIG()
+        for i in 0..<allConfigs.count {
+            if (chainId?.contains(allConfigs[i].chainIdPrefix) == true) {
+                return allConfigs[i].chainType
+            }
         }
-        
-        else if (chainId?.contains("mooncat-") == true) {
-            return ChainType.CRESCENT_TEST
-        } else if (chainId?.contains("station") == true) {
-            return ChainType.STATION_TEST
-        }
-        
         return nil
     }
     
@@ -2086,7 +2002,6 @@ public class WUtils {
         if (address?.starts(with: addressPrfix) == true) { return true }
         return false
     }
-    
     
     static func getChainsFromAddress(_ address: String?) -> ChainType? {
         if (address?.starts(with: "0x") == true) {

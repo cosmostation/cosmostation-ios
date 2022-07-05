@@ -22,6 +22,7 @@ class ChainStargaze: ChainConfig {
     var chainTitle2 = "STARGAZE"
     var chainDBName = CHAIN_STARGAZE_S
     var chainAPIName = "stargaze"
+    var chainIdPrefix = "stargaze-"
     
     var stakeDenomImg = UIImage(named: "tokenStargaze")
     var stakeDenom = "ustars"

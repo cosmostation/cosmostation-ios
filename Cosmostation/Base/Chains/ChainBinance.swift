@@ -22,6 +22,7 @@ class ChainBinance: ChainConfig {
     var chainTitle2 = "BINANCE"
     var chainDBName = CHAIN_BINANCE_S
     var chainAPIName = ""
+    var chainIdPrefix = "binance-chain-tigris"
     
     var stakeDenomImg = UIImage(named: "tokenBinance")
     var stakeDenom = "BNB"

@@ -22,6 +22,7 @@ class ChainIris: ChainConfig {
     var chainTitle2 = "IRIS"
     var chainDBName = CHAIN_IRIS_S
     var chainAPIName = "iris"
+    var chainIdPrefix = "irishub-"
     
     var stakeDenomImg = UIImage(named: "tokenIris")
     var stakeDenom = "uiris"

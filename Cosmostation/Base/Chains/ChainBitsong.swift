@@ -22,6 +22,7 @@ class ChainBitsong: ChainConfig {
     var chainTitle2 = "BITSONG"
     var chainDBName = CHAIN_BITSONG_S
     var chainAPIName = "bitsong"
+    var chainIdPrefix = "bitsong-"
     
     var stakeDenomImg = UIImage(named: "tokenBitsong")
     var stakeDenom = "ubtsg"

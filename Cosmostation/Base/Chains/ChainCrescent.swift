@@ -22,6 +22,7 @@ class ChainCrescent: ChainConfig {
     var chainTitle2 = "CRESCENT"
     var chainDBName = CHAIN_CRESENT_S
     var chainAPIName = "crescent"
+    var chainIdPrefix = "crescent-"
     
     var stakeDenomImg = UIImage(named: "tokenCrescent")
     var stakeDenom = "ucre"

@@ -22,6 +22,7 @@ class ChainUmee: ChainConfig {
     var chainTitle2 = "UMEE"
     var chainDBName = CHAIN_UMEE_S
     var chainAPIName = "umee"
+    var chainIdPrefix = "umee-"
     
     var stakeDenomImg = UIImage(named: "tokenUmee")
     var stakeDenom = "uumee"

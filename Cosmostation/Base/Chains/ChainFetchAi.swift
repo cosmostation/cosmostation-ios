@@ -22,6 +22,7 @@ class ChainFetchAi: ChainConfig {
     var chainTitle2 = "FETCH.AI"
     var chainDBName = CHAIN_FETCH_S
     var chainAPIName = "fetchai"
+    var chainIdPrefix = "fetchhub-"
     
     var stakeDenomImg = UIImage(named: "tokenFetchAi")
     var stakeDenom = "afet"

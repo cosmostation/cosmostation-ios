@@ -22,6 +22,7 @@ class ChainCosmos: ChainConfig {
     var chainTitle2 = "COSMOS"
     var chainDBName = CHAIN_COSMOS_S
     var chainAPIName = "cosmos"
+    var chainIdPrefix = "cosmoshub-"
     
     
     var stakeDenomImg = UIImage(named: "tokenCosmos")

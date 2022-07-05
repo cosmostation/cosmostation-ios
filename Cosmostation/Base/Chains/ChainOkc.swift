@@ -22,6 +22,7 @@ class ChainOkc: ChainConfig {
     var chainTitle2 = "OKC"
     var chainDBName = CHAIN_OKEX_S
     var chainAPIName = ""
+    var chainIdPrefix = "exchain-"
     
     var stakeDenomImg = UIImage(named: "tokenOkc")
     var stakeDenom = "okt"

@@ -22,6 +22,7 @@ class ChainCryptoorg: ChainConfig {
     var chainTitle2 = "CRYPTO.ORG"
     var chainDBName = CHAIN_CRYPTO_S
     var chainAPIName = "cryptoorg"
+    var chainIdPrefix = "crypto-org-"
     
     var stakeDenomImg = UIImage(named: "tokenCryptoorg")
     var stakeDenom = "basecro"

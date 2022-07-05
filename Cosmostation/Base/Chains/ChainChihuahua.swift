@@ -22,6 +22,7 @@ class ChainChihuahua: ChainConfig {
     var chainTitle2 = "CHIHUAHUA"
     var chainDBName = CHAIN_CHIHUAHUA_S
     var chainAPIName = "chihuahua"
+    var chainIdPrefix = "chihuahua-"
     
     var stakeDenomImg = UIImage(named: "tokenChihuahua")
     var stakeDenom = "uhuahua"
