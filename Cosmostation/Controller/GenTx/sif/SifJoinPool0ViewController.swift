@@ -58,9 +58,9 @@ class SifJoinPool0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func onInitView() {
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_GAS_AMOUNT_LP, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         rowanMaxAmount = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
-        rowanMaxAmount = rowanMaxAmount.subtracting(txFeeAmount)
+        rowanMaxAmount = rowanMaxAmount.subtracting(mainDenomFee)
         externalMaxAmount = BaseData.instance.getAvailableAmount_gRPC(selectedPool.externalAsset.symbol)
         externalDecimal = WUtils.getDenomDecimal(chainConfig, selectedPool.externalAsset.symbol)
         

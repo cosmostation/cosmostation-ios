@@ -217,6 +217,9 @@ let PASSWORD_RESUKT_FAIL                    = 2
 let PASSWORD_RESUKT_OK_FOR_DELETE           = 3
 
 
+let BASE_GAS_AMOUNT                         = "500000"
+
+
 let FEE_REWARD_GAS_1                        = "150000";
 let FEE_REWARD_GAS_2                        = "220000";
 let FEE_REWARD_GAS_3                        = "280000";
@@ -411,7 +414,9 @@ let GAS_FEE_AMOUNT_OSMOS_LOCK               = "1500000"
 let GAS_FEE_AMOUNT_OSMOS_BEGIN_UNBONDING    = "1500000"
 let GAS_FEE_AMOUNT_OSMOS_UNLOCK             = "1500000"
 
-let FEE_BNB_TRANSFER                            = "0.000075"
+let FEE_BINANCE_BASE                            = "0.000075"
+let FEE_OKC_BASE                                = "0.00002"
+
 
 let KAVA_GAS_RATE_TINY                          = "0.001";
 let KAVA_GAS_RATE_LOW                           = "0.0025";

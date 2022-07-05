@@ -165,7 +165,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.timeGapLabel.text = WUtils.timeGap(input: mBnbTime)
             cell?.hashLabel.text = mTxInfo!.hash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
-            cell?.feeAmountLabel.attributedText = WUtils.displayAmount2(FEE_BNB_TRANSFER, cell!.feeAmountLabel.font!, 0, 8)
+            cell?.feeAmountLabel.attributedText = WUtils.displayAmount2(FEE_BINANCE_BASE, cell!.feeAmountLabel.font!, 0, 8)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             cell?.feeLayer.isHidden = false

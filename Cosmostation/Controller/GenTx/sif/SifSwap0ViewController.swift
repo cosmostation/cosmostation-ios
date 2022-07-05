@@ -61,9 +61,9 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(swapInDenom)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_SIF_SWAP_CION, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         if (swapInDenom == SIF_MAIN_DENOM) {
-            availableMaxAmount = availableMaxAmount.subtracting(txFeeAmount)
+            availableMaxAmount = availableMaxAmount.subtracting(mainDenomFee)
         }
         WUtils.showCoinDp(swapInDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
         WDP.dpSymbolImg(chainConfig, swapInDenom, inputCoinImg)

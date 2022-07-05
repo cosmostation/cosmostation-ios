@@ -184,7 +184,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     
     func onInitSendFee() {
         if (chainType == ChainType.BINANCE_MAIN) {
-            let feeCoin = Coin.init(BNB_MAIN_DENOM, FEE_BNB_TRANSFER)
+            let feeCoin = Coin.init(BNB_MAIN_DENOM, FEE_BINANCE_BASE)
             var tempList = Array<Coin>()
             tempList.append(feeCoin)
             pageHolderVC.mHtlcSendFee = Fee.init("", tempList)
@@ -200,7 +200,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     
     func onInitClaimFee() {
         if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
-            let feeCoin = Coin.init(BNB_MAIN_DENOM, FEE_BNB_TRANSFER)
+            let feeCoin = Coin.init(BNB_MAIN_DENOM, FEE_BINANCE_BASE)
             var tempList = Array<Coin>()
             tempList.append(feeCoin)
             pageHolderVC.mHtlcClaimFee = Fee.init("", tempList)

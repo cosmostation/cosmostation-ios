@@ -30,34 +30,23 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_TRANSFER, 0)
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
+        let mainDenom = chainConfig!.stakeDenom
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
+        if (chainConfig?.isGrpc == true) {
             mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
             mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-            
             if (pageHolderVC.mToSendDenom == mainDenom) {
-                maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(feeAmount)
+                maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
             } else {
                 maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!)
             }
             
         } else {
-            if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
-                mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-                
-            } else if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
-                mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-                
-            } else {
-                mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-            }
+            mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+            mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
             
             if (pageHolderVC.mToSendDenom == mainDenom) {
-                maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!).subtracting(feeAmount)
+                maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
             } else {
                 maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!)
             }

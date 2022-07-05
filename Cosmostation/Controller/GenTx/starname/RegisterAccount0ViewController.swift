@@ -73,14 +73,14 @@ class RegisterAccount0ViewController: BaseViewController, SBCardPopupDelegate {
             return
         }
         
-        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_REGISTER_ACCOUNT, 0)
-        let starnameFee = WUtils.getStarNameRegisterAccountFee("open")
-//        print("userAvailable ", userAvailable)
-//        print("txFee ", txFee)
-//        print("starnameFee ", starnameFee)
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         
-        if (userAvailable.compare(starnameFee.adding(txFee)).rawValue < 0) {
+        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
+        let starnameFee = WUtils.getStarNameRegisterAccountFee("open")
+        if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
             return
         }

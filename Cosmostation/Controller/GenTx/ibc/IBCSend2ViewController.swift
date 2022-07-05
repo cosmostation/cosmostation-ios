@@ -31,12 +31,12 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         self.ibcSendDenom = self.pageHolderVC.mIBCSendDenom
         self.decimal = WUtils.getDenomDecimal(chainConfig, ibcSendDenom)
         
-        let mainDenom = WUtils.getMainDenom(chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_TRANSFER, 0)
+        let mainDenom = chainConfig!.stakeDenom
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
         maxAvailable = BaseData.instance.getAvailableAmount_gRPC(ibcSendDenom)
         if (ibcSendDenom == mainDenom) {
-            maxAvailable = maxAvailable.subtracting(feeAmount)
+            maxAvailable = maxAvailable.subtracting(mainDenomFee)
         }
         WUtils.showCoinDp(ibcSendDenom, maxAvailable.stringValue, denomTitleLabel, mAvailableAmountLabel, chainType!)
         

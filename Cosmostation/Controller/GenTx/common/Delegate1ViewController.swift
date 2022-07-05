@@ -23,12 +23,16 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
-        let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_DELEGATE, 0)
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        
+        let mainDenom = chainConfig!.stakeDenom
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        userBalance = BaseData.instance.getDelegatable_gRPC(pageHolderVC.chainType).subtracting(feeAmount)
+        userBalance = BaseData.instance.getDelegatable_gRPC(pageHolderVC.chainType).subtracting(mainDenomFee)
         WUtils.showCoinDp(mainDenom, userBalance.stringValue, availableDenomLabel, availableAmountLabel, pageHolderVC.chainType!)
         
         toDelegateAmountInput.delegate = self

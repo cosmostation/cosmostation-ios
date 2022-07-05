@@ -17,11 +17,6 @@
                 <outlet property="feeTotalCard" destination="n1f-fn-AV6" id="qHP-EP-WFG"/>
                 <outlet property="feeTotalDenom" destination="GF9-Ft-JnH" id="IYB-q5-Pf1"/>
                 <outlet property="feeTotalValue" destination="Vbg-Fu-M3G" id="k8v-a3-eCo"/>
-                <outlet property="gasAmountLabel" destination="pJa-kM-alr" id="R5Y-bf-XNe"/>
-                <outlet property="gasFeeLabel" destination="aLN-YS-jJN" id="FEG-jX-DFS"/>
-                <outlet property="gasRateLabel" destination="vKo-D6-p2i" id="LsK-dY-9N2"/>
-                <outlet property="gasSelectSegments" destination="9Vx-MW-aq7" id="6uN-ic-CgN"/>
-                <outlet property="gasSetCard" destination="9r8-Dn-2rG" id="hOa-t6-z7I"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -83,124 +78,6 @@
                         </button>
                     </subviews>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9r8-Dn-2rG" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="138.5" width="382" height="114.5"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwA-S1-VAB">
-                            <rect key="frame" x="24" y="16" width="342" height="30.5"/>
-                            <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="kXu-p5-0Q8">
-                                    <rect key="frame" x="0.0" y="2.5" width="50" height="25.5"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pJa-kM-alr">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="14"/>
-                                            <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="12"/>
-                                            <color key="textColor" name="_font05"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gas Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JrU-fh-4st">
-                                            <rect key="frame" x="0.0" y="15" width="50" height="10.5"/>
-                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                            <color key="textColor" name="_font04"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </stackView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F1-Bo-lXy">
-                                    <rect key="frame" x="74" y="6" width="11" height="18.5"/>
-                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
-                                    <color key="textColor" name="_font04"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="PUe-nf-4BM">
-                                    <rect key="frame" x="109" y="3" width="38.5" height="24.5"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.025" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vKo-D6-p2i">
-                                            <rect key="frame" x="0.0" y="0.0" width="38.5" height="14"/>
-                                            <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="12"/>
-                                            <color key="textColor" name="_font05"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gas Rate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="HsL-t0-3GM">
-                                            <rect key="frame" x="0.0" y="14" width="38.5" height="10.5"/>
-                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="9"/>
-                                            <color key="textColor" name="_font04"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </stackView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="=" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oIZ-xj-v1p">
-                                    <rect key="frame" x="178.5" y="2" width="13.5" height="26.5"/>
-                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="23"/>
-                                    <color key="textColor" name="_font04"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="-2" translatesAutoresizingMaskIntoConstraints="NO" id="De9-vJ-S1l">
-                                    <rect key="frame" x="204" y="0.0" width="138" height="30.5"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aLN-YS-jJN">
-                                            <rect key="frame" x="54" y="0.0" width="30.5" height="21"/>
-                                            <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="18"/>
-                                            <color key="textColor" name="_font05"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tx Fee Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wPo-Yf-3lf">
-                                            <rect key="frame" x="35.5" y="19" width="67.5" height="11.5"/>
-                                            <fontDescription key="fontDescription" name="Helvetica-Light" family="Helvetica" pointSize="10"/>
-                                            <color key="textColor" name="_font04"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </stackView>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstItem="kXu-p5-0Q8" firstAttribute="leading" secondItem="cwA-S1-VAB" secondAttribute="leading" id="JWB-Ig-x5D"/>
-                                <constraint firstItem="PUe-nf-4BM" firstAttribute="leading" secondItem="6F1-Bo-lXy" secondAttribute="trailing" constant="24" id="NBy-UG-d16"/>
-                                <constraint firstItem="6F1-Bo-lXy" firstAttribute="centerY" secondItem="cwA-S1-VAB" secondAttribute="centerY" id="XWh-b2-eTV"/>
-                                <constraint firstAttribute="trailing" secondItem="De9-vJ-S1l" secondAttribute="trailing" id="Xy6-B3-Zc1"/>
-                                <constraint firstItem="De9-vJ-S1l" firstAttribute="centerY" secondItem="cwA-S1-VAB" secondAttribute="centerY" id="fI7-M7-81v"/>
-                                <constraint firstItem="PUe-nf-4BM" firstAttribute="centerY" secondItem="cwA-S1-VAB" secondAttribute="centerY" id="gaa-pg-719"/>
-                                <constraint firstItem="oIZ-xj-v1p" firstAttribute="centerY" secondItem="cwA-S1-VAB" secondAttribute="centerY" id="jeM-FT-uBR"/>
-                                <constraint firstItem="kXu-p5-0Q8" firstAttribute="centerY" secondItem="cwA-S1-VAB" secondAttribute="centerY" id="lDq-QC-kfN"/>
-                                <constraint firstItem="6F1-Bo-lXy" firstAttribute="leading" secondItem="kXu-p5-0Q8" secondAttribute="trailing" constant="24" id="mfd-8l-HVy"/>
-                                <constraint firstAttribute="height" constant="30.5" id="nHI-Kz-I1R"/>
-                                <constraint firstItem="oIZ-xj-v1p" firstAttribute="leading" secondItem="PUe-nf-4BM" secondAttribute="trailing" constant="31" id="p5l-UH-n9W"/>
-                                <constraint firstItem="De9-vJ-S1l" firstAttribute="leading" secondItem="oIZ-xj-v1p" secondAttribute="trailing" constant="12" id="vum-YJ-PnJ"/>
-                            </constraints>
-                        </view>
-                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="9Vx-MW-aq7">
-                            <rect key="frame" x="24" y="62.5" width="334" height="37"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="36" id="zFS-NW-vY8"/>
-                            </constraints>
-                            <segments>
-                                <segment title="Tiny"/>
-                                <segment title="Low"/>
-                                <segment title="Average"/>
-                            </segments>
-                            <color key="tintColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
-                            <connections>
-                                <action selector="onSwitchGasRate:" destination="-1" eventType="valueChanged" id="r4o-oA-Ktg"/>
-                            </connections>
-                        </segmentedControl>
-                    </subviews>
-                    <color key="backgroundColor" name="_card_bg"/>
-                    <constraints>
-                        <constraint firstItem="cwA-S1-VAB" firstAttribute="leading" secondItem="9r8-Dn-2rG" secondAttribute="leading" constant="24" id="Aeg-Uo-CNK"/>
-                        <constraint firstItem="9Vx-MW-aq7" firstAttribute="top" secondItem="cwA-S1-VAB" secondAttribute="bottom" constant="16" id="IJ8-VB-GFz"/>
-                        <constraint firstAttribute="trailing" secondItem="cwA-S1-VAB" secondAttribute="trailing" constant="16" id="OM4-Cq-M5K"/>
-                        <constraint firstItem="cwA-S1-VAB" firstAttribute="top" secondItem="9r8-Dn-2rG" secondAttribute="top" constant="16" id="Ouv-ew-6N1"/>
-                        <constraint firstAttribute="bottom" secondItem="9Vx-MW-aq7" secondAttribute="bottom" constant="16" id="ilK-do-E5l"/>
-                        <constraint firstItem="9Vx-MW-aq7" firstAttribute="leading" secondItem="9r8-Dn-2rG" secondAttribute="leading" constant="24" id="o00-ex-WYV"/>
-                        <constraint firstAttribute="trailing" secondItem="9Vx-MW-aq7" secondAttribute="trailing" constant="24" id="wfk-Fy-hk3"/>
-                    </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n1f-fn-AV6" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="16" y="54" width="382" height="72.5"/>
                     <subviews>
@@ -266,12 +143,9 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="9r8-Dn-2rG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="3So-8Q-jIU"/>
                 <constraint firstItem="n1f-fn-AV6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="51D-db-gsj"/>
-                <constraint firstItem="9r8-Dn-2rG" firstAttribute="top" secondItem="n1f-fn-AV6" secondAttribute="bottom" constant="12" id="KJR-Oo-K1V"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9XM-mt-M48" secondAttribute="trailing" constant="16" id="LZm-o3-a81"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9XM-mt-M48" secondAttribute="bottom" constant="16" id="TPU-Yu-iON"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9r8-Dn-2rG" secondAttribute="trailing" constant="16" id="Vco-Nf-EJ8"/>
                 <constraint firstItem="n1f-fn-AV6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="fXf-Pt-3o5"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="n1f-fn-AV6" secondAttribute="trailing" constant="16" id="qA4-1k-uXM"/>
                 <constraint firstItem="9XM-mt-M48" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="tOs-Iy-OLy"/>

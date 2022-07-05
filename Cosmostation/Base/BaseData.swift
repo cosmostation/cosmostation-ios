@@ -453,6 +453,57 @@ final class BaseData : NSObject{
         return mOsmoPools_gRPC.filter { $0.totalShares.denom == denom }.first
     }
     
+    
+    func isTxFeePayable(_ chainConfig: ChainConfig?) -> Bool {
+        if (chainConfig?.chainType == .SIF_MAIN) {
+            if (getAvailableAmount_gRPC(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: "100000000000000000")).rawValue >= 0) {
+                return true
+            }
+            return false
+        } else if (chainConfig?.chainType == .BINANCE_MAIN) {
+            if (availableAmount(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: FEE_BINANCE_BASE)).rawValue >= 0) {
+                return true
+            }
+            return false
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+            if (availableAmount(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: FEE_OKC_BASE)).rawValue >= 0) {
+                return true
+            }
+            return false
+        }
+        var result = false
+        getMinTxFeeAmounts(chainConfig).forEach { minFee in
+            if (getAvailableAmount_gRPC(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                result = true
+            }
+        }
+        return result
+    }
+    
+    func getMinTxFeeAmounts(_ chainConfig: ChainConfig?) -> Array<Coin> {
+        var result = Array<Coin>()
+        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+        let feeDatas = WUtils.getFeeInfos(chainConfig)[0].FeeDatas
+        
+        feeDatas.forEach { feeData in
+            let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: WUtils.handler0Up)
+            result.append(Coin.init(feeData.denom!, amount.stringValue))
+        }
+        return result
+    }
+    
+    func getMainDenomFee(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
+        if (chainConfig?.chainType == .SIF_MAIN) {
+            return NSDecimalNumber.init(string: "100000000000000000")
+        } else if (chainConfig?.chainType == .BINANCE_MAIN) {
+            return NSDecimalNumber.init(string: FEE_BINANCE_BASE)
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+            return NSDecimalNumber.init(string: FEE_OKC_BASE)
+        }
+        let feeAmount = getMinTxFeeAmounts(chainConfig).filter { $0.denom == chainConfig?.stakeDenom }.first?.amount
+        return NSDecimalNumber.init(string: feeAmount)
+    }
+    
     func setRecentAccountId(_ id : Int64) {
         UserDefaults.standard.set(id, forKey: KEY_RECENT_ACCOUNT)
     }
@@ -989,7 +1040,7 @@ final class BaseData : NSObject{
         for account in allAccounts {
             if (ChainFactory.getChainType(account.account_base_chain) == chain && account.account_has_private) {
                 if (chain == ChainType.BINANCE_MAIN) {
-                    if (WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue >= 0) {
+                    if (WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BINANCE_BASE)).rawValue >= 0) {
                         result.append(account)
                     }
                     

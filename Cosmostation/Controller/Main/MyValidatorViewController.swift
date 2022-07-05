@@ -140,11 +140,10 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         }
         var claimAbleValidators = Array<Cosmos_Staking_V1beta1_Validator>()
         var toClaimValidators  = Array<Cosmos_Staking_V1beta1_Validator>()
-        let feeAmountSingle = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_CLAIM_STAKE_REWARD, 1)
-        let mainDenom = WUtils.getMainDenom(chainType)
+        let mainDenom = chainConfig!.stakeDenom
         
         BaseData.instance.mMyValidators_gRPC.forEach { validator in
-            if (BaseData.instance.getReward_gRPC(mainDenom, validator.operatorAddress).compare(feeAmountSingle).rawValue > 0) {
+            if (BaseData.instance.getReward_gRPC(mainDenom, validator.operatorAddress).compare(NSDecimalNumber.init(string: "0.001")).rawValue > 0) {
                 claimAbleValidators.append(validator)
             }
         }
@@ -163,9 +162,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             toClaimValidators = claimAbleValidators
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_CLAIM_STAKE_REWARD, toClaimValidators.count)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -184,9 +181,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             return
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_DELEGATE, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }

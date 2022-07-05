@@ -51,17 +51,17 @@ class JoinPool0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func onInitView() {
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OSMOSIS_JOIN_POOL, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         let coin0Denom = pageHolderVC.mPool!.poolAssets[0].token.denom
         let coin1Denom = pageHolderVC.mPool!.poolAssets[1].token.denom
         
         available0MaxAmount = BaseData.instance.getAvailableAmount_gRPC(coin0Denom)
         if (coin0Denom == OSMOSIS_MAIN_DENOM) {
-            available0MaxAmount = available0MaxAmount.subtracting(txFeeAmount)
+            available0MaxAmount = available0MaxAmount.subtracting(mainDenomFee)
         }
         available1MaxAmount = BaseData.instance.getAvailableAmount_gRPC(coin1Denom)
         if (coin1Denom == OSMOSIS_MAIN_DENOM) {
-            available1MaxAmount = available1MaxAmount.subtracting(txFeeAmount)
+            available1MaxAmount = available1MaxAmount.subtracting(mainDenomFee)
         }
         coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0Denom)
         coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1Denom)

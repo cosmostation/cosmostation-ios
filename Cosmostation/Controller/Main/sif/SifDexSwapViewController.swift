@@ -191,10 +191,8 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
             return
         }
         
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_GAS_AMOUNT_SWAP, 0)
-        let mainBalance = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
-        if (mainBalance.compare(txFeeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         

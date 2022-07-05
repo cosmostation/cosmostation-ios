@@ -59,7 +59,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
         
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_KAVA_SWAP_DEPOSIT, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         coin0Denom = mKavaSwapPool.coins[0].denom
         coin1Denom = mKavaSwapPool.coins[1].denom
         coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0Denom)
@@ -75,11 +75,11 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         
         available0MaxAmount = BaseData.instance.getAvailableAmount_gRPC(coin0Denom)
         if (coin0Denom == KAVA_MAIN_DENOM) {
-            available0MaxAmount = available0MaxAmount.subtracting(txFeeAmount)
+            available0MaxAmount = available0MaxAmount.subtracting(mainDenomFee)
         }
         available1MaxAmount = BaseData.instance.getAvailableAmount_gRPC(coin1Denom)
         if (coin1Denom == KAVA_MAIN_DENOM) {
-            available1MaxAmount = available1MaxAmount.subtracting(txFeeAmount)
+            available1MaxAmount = available1MaxAmount.subtracting(mainDenomFee)
         }
         
         WDP.dpSymbol(chainConfig, coin0Denom, inputCoin0Name)

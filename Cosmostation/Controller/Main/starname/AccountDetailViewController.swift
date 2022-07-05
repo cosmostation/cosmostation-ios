@@ -72,11 +72,8 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        
-        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_DELETE_DOMAIN, 0)
-        if (userAvailable.compare(txFee).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         
@@ -95,14 +92,13 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
             return
         }
         
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_RENEW_ACCOUNT, 0)
         let starnameFee = WUtils.getStarNameRenewAccountFee(mMyDomainInfo_gRPC!.type)
-//        print("userAvailable ", userAvailable)
-//        print("txFee ", txFee)
-//        print("starnameFee ", starnameFee)
-        
-        if (userAvailable.compare(txFee.adding(starnameFee)).rawValue < 0) {
+        if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
             return
         }
@@ -123,14 +119,13 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
             return
         }
         
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_REPLACE_RESOURCE, 0)
         let starnameFee = WUtils.getReplaceFee()
-//        print("userAvailable ", userAvailable)
-//        print("txFee ", txFee)
-//        print("starnameFee ", starnameFee)
-        
-        if (userAvailable.compare(txFee.adding(starnameFee)).rawValue < 0) {
+        if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
             return
         }

@@ -568,7 +568,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
 
         let balances = BaseData.instance.selectBalanceById(accountId: self.account!.account_id)
         if (chainType! == ChainType.BINANCE_MAIN) {
-            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue <= 0) {
+            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BINANCE_BASE)).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
                 return
             }
@@ -618,11 +618,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OK_DEPOSIT, BaseData.instance.mMyValidator.count)
-        if (BaseData.instance.availableAmount(OKEX_MAIN_DENOM).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+                    self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                    return
+                }
         if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.01")).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
             return
@@ -640,8 +639,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OK_WITHDRAW, BaseData.instance.mMyValidator.count)
-        if (BaseData.instance.availableAmount(OKEX_MAIN_DENOM).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -731,9 +729,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 self.onShowAddMenomicDialog()
                 return
             }
-            let mainDenom = WUtils.getMainDenom(chainType)
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_DESMOS_GEN_PROFILE, 0)
-            if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
+            if (!BaseData.instance.isTxFeePayable(chainConfig)) {
                 self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
             }
@@ -878,27 +874,25 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let mainDenom = WUtils.getMainDenom(chainType)
-        if (WUtils.isGRPC(chainType!)) {
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
-            if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
-                return
-            }
+//        let gasDenom = WUtils.getGasDenom(chainType)
+        let mainDenom = chainConfig!.stakeDenom
+        if (chainConfig?.isGrpc == true) {
             if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
                 return
             }
-            
-        } else {
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
-            if (BaseData.instance.availableAmount(gasDenom).compare(feeAmount).rawValue < 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+            if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
             }
+            
+        } else {
             if (BaseData.instance.availableAmount(mainDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+                return
+            }
+            if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
             }
         }

@@ -47,11 +47,11 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mSwapInDenom!)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_OSMOSIS_SWAP, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         print("availableMaxAmount ", availableMaxAmount)
-        print("txFeeAmount ", txFeeAmount)
+        print("mainDenomFee ", mainDenomFee)
         if (pageHolderVC.mSwapInDenom == OSMOSIS_MAIN_DENOM) {
-            availableMaxAmount = availableMaxAmount.subtracting(txFeeAmount)
+            availableMaxAmount = availableMaxAmount.subtracting(mainDenomFee)
         }
         WUtils.showCoinDp(pageHolderVC.mSwapInDenom!, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
         WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapInDenom!, inputCoinImg)
