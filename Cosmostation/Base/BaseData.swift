@@ -500,8 +500,11 @@ final class BaseData : NSObject{
         } else if (chainConfig?.chainType == .OKEX_MAIN) {
             return NSDecimalNumber.init(string: FEE_OKC_BASE)
         }
-        let feeAmount = getMinTxFeeAmounts(chainConfig).filter { $0.denom == chainConfig?.stakeDenom }.first?.amount
-        return NSDecimalNumber.init(string: feeAmount)
+        if let feeAmount = getMinTxFeeAmounts(chainConfig).filter { $0.denom == chainConfig?.stakeDenom }.first?.amount {
+            return NSDecimalNumber.init(string: feeAmount)
+        } else {
+            return NSDecimalNumber.zero
+        }
     }
     
     func setRecentAccountId(_ id : Int64) {
