@@ -126,10 +126,9 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             cell?.onBindUnbondingToken(chainType!)
             return cell!
             
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-            return cell!
         }
+        let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
+        return cell!
     }
     
     

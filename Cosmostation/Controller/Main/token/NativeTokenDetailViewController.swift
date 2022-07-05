@@ -40,7 +40,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
         self.tokenDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tokenDetailTableView.register(UINib(nibName: "TokenDetailNativeCell", bundle: nil), forCellReuseIdentifier: "TokenDetailNativeCell")
         self.tokenDetailTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
-        self.tokenDetailTableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
+        self.tokenDetailTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
         
         if (WUtils.isHtlcSwappableCoin(chainType, denom)) {
             self.bntBep3Send.isHidden = false
@@ -145,7 +145,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
             return cell!
             
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
         return cell!
     }
     
