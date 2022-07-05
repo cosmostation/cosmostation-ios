@@ -813,6 +813,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                     
                 } else {
                     let alertController = UIAlertController(title: NSLocalizedString("permission_push_title", comment: ""), message: NSLocalizedString("permission_push_msg", comment: ""), preferredStyle: .alert)
+                    if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
                     let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (_) -> Void in
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return

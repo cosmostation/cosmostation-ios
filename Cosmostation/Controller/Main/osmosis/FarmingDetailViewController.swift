@@ -294,6 +294,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onShowUnbondingDuration() {
         let selectLockupAlert = UIAlertController(title: NSLocalizedString("str_select_osmo_lockup_duration_title", comment: ""), message: "", preferredStyle: .alert)
+        if #available(iOS 13.0, *) { selectLockupAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let day1Action = UIAlertAction(title: "1 Day", style: .default, handler: { _ in
             self.onStartNewEaring(86400)
         })
@@ -319,6 +320,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         msg = msg + "\n\n" + amount.multiplying(byPowerOf10: -18, withBehavior: WUtils.handler2).stringValue
         let askUnbondingAllAlert = UIAlertController(title: NSLocalizedString("str_select_osmo_unbonding_all", comment: ""), message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { askUnbondingAllAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let unbondingSingleAction = UIAlertAction(title: NSLocalizedString("Unbonding This One", comment: ""), style: .default) { (_) -> Void in
             self.onStartUnbonding([lockup])
         }
@@ -340,6 +342,7 @@ class FarmingDetailViewController: BaseViewController, UITableViewDelegate, UITa
         }
         msg = msg + "\n\n" + amount.multiplying(byPowerOf10: -18, withBehavior: WUtils.handler2).stringValue
         let askUnlockAllAlert = UIAlertController(title: NSLocalizedString("str_select_osmo_unlock_all", comment: ""), message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { askUnlockAllAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let unlockSingleAction = UIAlertAction(title: NSLocalizedString("Unlock This One", comment: ""), style: .default) { (_) -> Void in
             self.onStartUnLock([lockup])
         }

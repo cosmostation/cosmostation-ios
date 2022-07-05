@@ -767,6 +767,9 @@ support@cosmostation.io";
 "alert_title_no_private_key" = "관찰 모드 지갑";
 "alert_msg_no_private_key" = "관찰만 가능한 지갑입니다.\n모든 트랜잭션은 니모닉 등록 후 이용 가능합니다.";
 
+"theme_system" = "시스템";
+"theme_light" = "라이트";
+"theme_dark" = "다크";
 
 "currency_usd" = "USD";
 "currency_eur" = "EUR";

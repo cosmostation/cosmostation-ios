@@ -554,6 +554,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     
     func onShowReInvsetFailDialog() {
         let alert = UIAlertController(title: NSLocalizedString("error_reward_address_changed_title", comment: ""), message: NSLocalizedString("error_reward_address_changed_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

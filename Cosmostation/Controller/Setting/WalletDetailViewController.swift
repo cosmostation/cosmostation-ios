@@ -126,6 +126,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     
     func onNicknameChange() {
         let nameAlert = UIAlertController(title: NSLocalizedString("change_wallet_name", comment: ""), message: nil, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { nameAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         nameAlert.addTextField { (textField) in textField.placeholder = NSLocalizedString("wallet_name", comment: "") }
         nameAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: { _ in
             self.dismiss(animated: true, completion: nil)
@@ -162,6 +163,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                     
                 } else {
                     let alertController = UIAlertController(title: NSLocalizedString("permission_push_title", comment: ""), message: NSLocalizedString("permission_push_msg", comment: ""), preferredStyle: .alert)
+                    if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
                     let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (_) -> Void in
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
@@ -208,6 +210,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         let msg = msg1 + msg2
         let range = (msg as NSString).range(of: msg2)
         let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(
             string: msg,
             attributes: [
@@ -272,6 +275,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     
     @IBAction func onClickDelete(_ sender: UIButton) {
         let deleteAlert = UIAlertController(title: NSLocalizedString("delete_wallet", comment: ""), message: NSLocalizedString("delete_wallet_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { deleteAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         deleteAlert.addAction(UIAlertAction(title: NSLocalizedString("delete", comment: ""), style: .destructive, handler: { _ in
             if (self.selectedAccount.account_has_private) {
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController

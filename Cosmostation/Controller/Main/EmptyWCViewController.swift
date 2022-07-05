@@ -12,6 +12,7 @@ class EmptyWCViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
     }
 
     @IBAction func onClickDismiss(_ sender: UIButton) {

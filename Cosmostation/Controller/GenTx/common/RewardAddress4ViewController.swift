@@ -52,6 +52,7 @@ class RewardAddress4ViewController: BaseViewController, PasswordViewDelegate {
         let msg = msg1 + msg2
         let range = (msg as NSString).range(of: msg2)
         let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(
             string: msg,
             attributes: [

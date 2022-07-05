@@ -569,6 +569,33 @@ final class BaseData : NSObject{
         return UserDefaults.standard.bool(forKey: KEY_ACCOUNT_REFRESH_ALL)
     }
     
+    func setTheme(_ theme : Int) {
+        UserDefaults.standard.set(theme, forKey: KEY_THEME)
+    }
+
+    func getTheme() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_THEME)
+    }
+    
+    func getThemeType() -> UIUserInterfaceStyle {
+        if (getTheme() == 1) {
+            return UIUserInterfaceStyle.light
+        } else if (getTheme() == 1) {
+            return UIUserInterfaceStyle.dark
+        } else {
+            return UIUserInterfaceStyle.unspecified
+        }
+    }
+    
+    func getThemeString() -> String {
+        if (getTheme() == 1) {
+            return NSLocalizedString("theme_light", comment: "")
+        } else if (getTheme() == 2) {
+            return NSLocalizedString("theme_dark", comment: "")
+        }
+        return NSLocalizedString("theme_system", comment: "")
+    }
+    
     func setCurrency(_ currency : Int) {
         UserDefaults.standard.set(currency, forKey: KEY_CURRENCY)
     }

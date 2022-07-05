@@ -501,6 +501,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     
                 } else {
                     let alertController = UIAlertController(title: NSLocalizedString("permission_push_title", comment: ""), message: NSLocalizedString("permission_push_msg", comment: ""), preferredStyle: .alert)
+                    if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
                     let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (_) -> Void in
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
@@ -659,6 +660,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     //no need yet
     func onClickOkVoteValMode() {
         let okVoteTypeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { okVoteTypeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         okVoteTypeAlert.addAction(UIAlertAction(title: NSLocalizedString("str_vote_direct", comment: ""), style: .default, handler: { _ in
             self.onClickOkVoteVal()
         }))
@@ -759,6 +761,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let helpAlert = UIAlertController(title: "", message: msg1 + msg2 + msg3 + msg4, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { helpAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         helpAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -795,6 +798,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let noKeyAlert = UIAlertController(title: NSLocalizedString("buy_without_key_title", comment: ""),
                                            message: NSLocalizedString("buy_without_key_msg", comment: ""),
                                            preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noKeyAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noKeyAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: {_ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -811,6 +815,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let selectFiatAlert = UIAlertController(title: NSLocalizedString("buy_select_fiat_title", comment: ""),
                                                 message: NSLocalizedString("buy_select_fiat_msg", comment: ""),
                                                 preferredStyle: .alert)
+        if #available(iOS 13.0, *) { selectFiatAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let usdAction = UIAlertAction(title: "USD", style: .default, handler: { _ in
             self.onStartMoonpaySignature("usd")
         })
@@ -919,6 +924,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 if (result.contains("wallet-bridge.binance.org")) {
                     self.wcURL = result
                     let wcAlert = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: NSLocalizedString("wc_alert_msg", comment: ""), preferredStyle: .alert)
+                    if #available(iOS 13.0, *) { wcAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
                     wcAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil))
                     wcAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
                         let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController

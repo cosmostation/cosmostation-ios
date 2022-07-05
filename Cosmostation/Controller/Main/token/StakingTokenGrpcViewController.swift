@@ -162,6 +162,7 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         let unAuthTitle = NSLocalizedString("str_notice", comment: "")
         let unAuthMsg = NSLocalizedString("str_msg_ibc", comment: "")
         let noticeAlert = UIAlertController(title: unAuthTitle, message: unAuthMsg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
             self.onStartIbc()
         }))

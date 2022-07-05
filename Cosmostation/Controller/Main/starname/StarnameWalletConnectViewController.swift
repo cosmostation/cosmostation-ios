@@ -103,6 +103,7 @@ class StarnameWalletConnectViewController: BaseViewController {
     func onShowConfirmDialog(_ count: Int, _ json: String) {
         let confirmMsg = String(format: NSLocalizedString("str_starname_walletconnect_alert_msg2", comment: ""), String(count))
         let starnameWCAlert = UIAlertController(title: NSLocalizedString("str_starname_walletconnect_alert_title", comment: ""), message: confirmMsg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { starnameWCAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         starnameWCAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))

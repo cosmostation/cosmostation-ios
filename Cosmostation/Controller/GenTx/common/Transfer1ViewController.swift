@@ -128,6 +128,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate {
     func onShowMatchedStarName(_ starname: String, _ matchedAddress: String) {
         let msg = String(format: NSLocalizedString("str_starname_confirm_msg", comment: ""), starname, matchedAddress)
         let alertController = UIAlertController(title: NSLocalizedString("str_starname_confirm_title", comment: ""), message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let settingsAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { (_) -> Void in
             self.CancelBtn.isUserInteractionEnabled = false
             self.NextBtn.isUserInteractionEnabled = false

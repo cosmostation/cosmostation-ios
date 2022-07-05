@@ -760,7 +760,9 @@ support@cosmostation.io";
 "error_simul_error" = "This Tx not executable.";
 "error_no_mnemonic" = "Only private key imported";
 
-
+"theme_system" = "System";
+"theme_light" = "Light";
+"theme_dark" = "Dark";
 
 "currency_usd" = "USD";
 "currency_eur" = "EUR";

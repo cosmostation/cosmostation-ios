@@ -150,6 +150,7 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
         let enginerAlert = UIAlertController(title: NSLocalizedString("str_enginer_is_on_title", comment: ""),
                                              message: NSLocalizedString("str_enginer_is_on_create_msg", comment: ""),
                                              preferredStyle: .alert)
+        if #available(iOS 13.0, *) { enginerAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         enginerAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: { _ in
             self.navigationController?.popViewController(animated: true)
         }))
