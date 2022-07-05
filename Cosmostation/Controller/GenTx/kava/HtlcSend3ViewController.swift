@@ -193,7 +193,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             let feeCoin = Coin.init(KAVA_MAIN_DENOM, "12500")
             var tempList = Array<Coin>()
             tempList.append(feeCoin)
-            pageHolderVC.mHtlcSendFee = Fee.init(KAVA_GAS_AMOUNT_BEP3, tempList)
+            pageHolderVC.mHtlcSendFee = Fee.init(BASE_GAS_AMOUNT, tempList)
 
         }
     }
@@ -209,7 +209,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             let feeCoin = Coin.init(KAVA_MAIN_DENOM, "12500")
             var tempList = Array<Coin>()
             tempList.append(feeCoin)
-            pageHolderVC.mHtlcClaimFee = Fee.init(KAVA_GAS_AMOUNT_BEP3, tempList)
+            pageHolderVC.mHtlcClaimFee = Fee.init(BASE_GAS_AMOUNT, tempList)
             
         }
     }

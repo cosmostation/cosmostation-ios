@@ -70,7 +70,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
                 self.navigationController?.popViewController(animated: true)
                 return
             }
-            naviTokenImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + bnbToken.original_symbol + ".png")!)
+            naviTokenImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + bnbToken.original_symbol + ".png")!)
             naviTokenSymbol.text = bnbToken.original_symbol.uppercased()
             
             let convertedBnbAmount = WUtils.getBnbConvertAmount(denom!)
@@ -85,7 +85,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
                 self.navigationController?.popViewController(animated: true)
                 return
             }
-            naviTokenImg.af_setImage(withURL: URL(string: OKEX_COIN_IMG_URL + okToken.original_symbol! + ".png")!)
+            naviTokenImg.af_setImage(withURL: URL(string: OKTokenImgUrl + okToken.original_symbol! + ".png")!)
             naviTokenSymbol.text = okToken.original_symbol!.uppercased()
             
             let convertedOktAmount = WUtils.convertTokenToOkt(denom!)

@@ -191,7 +191,7 @@ class TokenDetailNativeCell: TokenDetailCell {
         let okToken = WUtils.getOkToken(denom)
         if (balance != nil && okToken != nil) {
             lockedLayer.isHidden = false
-//            tokenImg.af_setImage(withURL: URL(string: OKEX_COIN_IMG_URL + okToken!.original_symbol! + ".png")!)
+//            tokenImg.af_setImage(withURL: URL(string: OKTokenImgUrl + okToken!.original_symbol! + ".png")!)
 //            tokenSymbol.text = okToken!.original_symbol!.uppercased()
 //            tokenDenom.text = "(" + denom! + ")"
             

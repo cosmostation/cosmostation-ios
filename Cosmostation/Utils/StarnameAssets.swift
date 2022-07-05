@@ -12,7 +12,7 @@ public func getStarNameChainImgUrl(_ uri: String?) -> URL {
     if let asset = getStarnameAssets().filter { $0.uri == uri }.first {
         return URL(string: asset.chainImg ?? "")!
     }
-    return URL(string: CHAIN_IMG_URL + "unknown.png")!
+    return URL(string: ChainImgStarnameUrl + "unknown.png")!
 }
 
 public func getStarNameChainName(_ uri: String?) -> String {
@@ -93,9 +93,9 @@ public struct StarnameAsset {
         self.chainType = chainType
         
         if (chainImg == nil) {
-            self.chainImg = CHAIN_IMG_URL + "unknown.png"
+            self.chainImg = ChainImgStarnameUrl + "unknown.png"
         } else {
-            self.chainImg = CHAIN_IMG_URL + chainImg!
+            self.chainImg = ChainImgStarnameUrl + chainImg!
         }
     }
 }

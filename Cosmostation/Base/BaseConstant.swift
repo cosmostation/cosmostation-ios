@@ -47,11 +47,6 @@ let CSS_PUSH_UPDATE                     = CSS_URL + "v1/account/update";
 let CSS_MOON_PAY                        = CSS_URL + "v1/sign/moonpay";
 
 
-let CHAIN_IMG_URL                       = ResourceBase + "chains/logo/"
-let BINANCE_TOKEN_IMG_URL               = ResourceBase + "coin_image/binance/";
-let OKEX_COIN_IMG_URL                   = ResourceBase + "coin_image/okex/";
-let BRIDGE_COIN_IMG_URL                 = ResourceBase + "assets/images/ethereum/";
-
 let DB_VERSION                      = 2
 
 //DB for Account
@@ -120,18 +115,7 @@ let DB_MNEMONIC_FAVO                = Expression<Bool>("isFavo")
 let DB_MNEMONIC_IMPORT_TIME         = Expression<Int64>("importTime")
 
 
-
-let COSMOS_AUTH_TYPE_DELAYEDACCOUNT         = "cosmos-sdk/DelayedVestingAccount";
-let COSMOS_AUTH_TYPE_ACCOUNT                = "cosmos-sdk/Account";
-let COSMOS_AUTH_TYPE_ACCOUNT_LEGACY         = "auth/Account";
-let COSMOS_AUTH_TYPE_V_VESTING_ACCOUNT      = "cosmos-sdk/ValidatorVestingAccount";
-let COSMOS_AUTH_TYPE_P_VESTING_ACCOUNT      = "cosmos-sdk/PeriodicVestingAccount";
-let COSMOS_AUTH_TYPE_C_VESTING_ACCOUNT      = "cosmos-sdk/ContinuousVestingAccount";
-let COSMOS_AUTH_TYPE_D_VESTING_ACCOUNT      = "cosmos-sdk/DelayedVestingAccount";
-let COSMOS_AUTH_TYPE_CERTIK_MANUAL          = "auth/ManualVestingAccount";
 let COSMOS_AUTH_TYPE_OKEX_ACCOUNT           = "okexchain/EthAccount";
-
-
 let COSMOS_KEY_TYPE_PUBLIC                  = "tendermint/PubKeySecp256k1";
 let ETHERMINT_KEY_TYPE_PUBLIC               = "ethermint/PubKeyEthSecp256k1";
 let COSMOS_AUTH_TYPE_STDTX                  = "auth/StdTx";
@@ -218,311 +202,8 @@ let PASSWORD_RESUKT_OK_FOR_DELETE           = 3
 
 
 let BASE_GAS_AMOUNT                         = "500000"
-
-
-let FEE_REWARD_GAS_1                        = "150000";
-let FEE_REWARD_GAS_2                        = "220000";
-let FEE_REWARD_GAS_3                        = "280000";
-let FEE_REWARD_GAS_4                        = "320000";
-let FEE_REWARD_GAS_5                        = "380000";
-let FEE_REWARD_GAS_6                        = "440000";
-let FEE_REWARD_GAS_7                        = "500000";
-let FEE_REWARD_GAS_8                        = "560000";
-let FEE_REWARD_GAS_9                        = "620000";
-let FEE_REWARD_GAS_10                       = "680000";
-let FEE_REWARD_GAS_11                       = "740000";
-let FEE_REWARD_GAS_12                       = "820000";
-let FEE_REWARD_GAS_13                       = "900000";
-let FEE_REWARD_GAS_14                       = "980000";
-let FEE_REWARD_GAS_15                       = "1020000";
-let FEE_REWARD_GAS_16                       = "1080000";
-
-let FEE_KAVA_REWARD_GAS_1                   = "300000";
-let FEE_KAVA_REWARD_GAS_2                   = "380000";
-let FEE_KAVA_REWARD_GAS_3                   = "460000";
-let FEE_KAVA_REWARD_GAS_4                   = "540000";
-let FEE_KAVA_REWARD_GAS_5                   = "620000";
-let FEE_KAVA_REWARD_GAS_6                   = "700000";
-let FEE_KAVA_REWARD_GAS_7                   = "800000";
-let FEE_KAVA_REWARD_GAS_8                   = "880000";
-let FEE_KAVA_REWARD_GAS_9                   = "960000";
-let FEE_KAVA_REWARD_GAS_10                  = "1040000";
-let FEE_KAVA_REWARD_GAS_11                  = "1120000";
-let FEE_KAVA_REWARD_GAS_12                  = "1200000";
-let FEE_KAVA_REWARD_GAS_13                  = "1300000";
-let FEE_KAVA_REWARD_GAS_14                  = "1380000";
-let FEE_KAVA_REWARD_GAS_15                  = "1460000";
-let FEE_KAVA_REWARD_GAS_16                  = "1540000";
-
-
-let GAS_FEE_RATE_TINY                       = "0.00025"
-let GAS_FEE_RATE_LOW                        = "0.0025"
-let GAS_FEE_RATE_AVERAGE                    = "0.025"
-
-let GAS_FEE_RATE_TINY_IRIS                  = "0.002"
-let GAS_FEE_RATE_LOW_IRIS                   = "0.02"
-let GAS_FEE_RATE_AVERAGE_IRIS               = "0.2"
-
-let GAS_FEE_RATE_TINY_PERSIS                = "0.000"
-let GAS_FEE_RATE_LOW_PERSIS                 = "0.000"
-let GAS_FEE_RATE_AVERAGE_PERSIS             = "0.000"
-
-let GAS_FEE_RATE_TINY_CRYPTO                = "0.025"
-let GAS_FEE_RATE_LOW_CRYPTO                 = "0.05"
-let GAS_FEE_RATE_AVERAGE_CRYPTO             = "0.075"
-
-let GAS_FEE_RATE_TINY_SENTINEL              = "0.01"
-let GAS_FEE_RATE_LOW_SENTINEL               = "0.1"
-let GAS_FEE_RATE_AVERAGE_SENTINEL           = "0.1"
-
-let GAS_FEE_RATE_TINY_OSMOSIS               = "0.000"
-let GAS_FEE_RATE_LOW_OSMOSIS                = "0.0025"
-let GAS_FEE_RATE_AVERAGE_OSMOSIS            = "0.025"
-
-let GAS_FEE_RATE_TINY_BAND                  = "0.000"
-let GAS_FEE_RATE_LOW_BAND                   = "0.0025"
-let GAS_FEE_RATE_AVERAGE_BAND               = "0.025"
-
-let GAS_FEE_RATE_TINY_IOV                   = "0.10"
-let GAS_FEE_RATE_LOW_IOV                    = "1.00"
-let GAS_FEE_RATE_AVERAGE_IOV                = "1.00"
-
-let GAS_FEE_RATE_TINY_MEDI                  = "5";
-let GAS_FEE_RATE_LOW_MEDI                   = "5";
-let GAS_FEE_RATE_AVERAGE_MEDI               = "5";
-
-let GAS_FEE_RATE_TINY_CERTIK                = "0.05";
-let GAS_FEE_RATE_LOW_CERTIK                 = "0.05";
-let GAS_FEE_RATE_AVERAGE_CERTIK             = "0.05";
-
-let GAS_FEE_RATE_TINY_EMONEY                = "0.10";
-let GAS_FEE_RATE_LOW_EMONEY                 = "0.30";
-let GAS_FEE_RATE_AVERAGE_EMONEY             = "1";
-
-let GAS_FEE_RATE_TINY_FETCH                 = "0.00";
-let GAS_FEE_RATE_LOW_FETCH                  = "0.00";
-let GAS_FEE_RATE_AVERAGE_FETCH              = "0.00";
-
-let GAS_FEE_RATE_TINY_BITCANNA              = "0.025"
-let GAS_FEE_RATE_LOW_BITCANNA               = "0.025"
-let GAS_FEE_RATE_AVERAGE_BITCANNA           = "0.025"
-
-let GAS_FEE_RATE_TINY_STARGAZER             = "0.000"
-let GAS_FEE_RATE_LOW_STARGAZER              = "0.000"
-let GAS_FEE_RATE_AVERAGE_STARGAZER          = "0.000"
-
-let GAS_FEE_RATE_TINY_KI                    = "0.025";
-let GAS_FEE_RATE_LOW_KI                     = "0.025";
-let GAS_FEE_RATE_AVERAGE_KI                 = "0.025";
-
-let GAS_FEE_RATE_TINY_COMDEX                = "0.25";
-let GAS_FEE_RATE_LOW_COMDEX                 = "0.25";
-let GAS_FEE_RATE_AVERAGE_COMDEX             = "0.25";
-
-let GAS_FEE_RATE_TINY_SECRET                = "0.25";
-let GAS_FEE_RATE_LOW_SECRET                 = "0.25";
-let GAS_FEE_RATE_AVERAGE_SECRET             = "0.25";
-
-let GAS_FEE_RATE_TINY_INJECTIVE             = "500000000";
-let GAS_FEE_RATE_LOW_INJECTIVE              = "500000000";
-let GAS_FEE_RATE_AVERAGE_INJECTIVE          = "500000000";
-
-let GAS_FEE_RATE_TINY_BITSONG               = "0.025";
-let GAS_FEE_RATE_LOW_BITSONG                = "0.025";
-let GAS_FEE_RATE_AVERAGE_BITSONG            = "0.025";
-
-let GAS_FEE_RATE_TINY_DESMOS                = "0.001";
-let GAS_FEE_RATE_LOW_DESMOS                 = "0.010";
-let GAS_FEE_RATE_AVERAGE_DESMOS             = "0.025";
-
-let GAS_FEE_RATE_TINY_GRAV                  = "0.00";
-let GAS_FEE_RATE_LOW_GRAV                   = "0.00";
-let GAS_FEE_RATE_AVERAGE_GRAV               = "0.00";
-
-let GAS_FEE_RATE_TINY_LUM                   = "0.001";
-let GAS_FEE_RATE_LOW_LUM                    = "0.001";
-let GAS_FEE_RATE_AVERAGE_LUM                = "0.001";
-
-let GAS_FEE_RATE_TINY_CHIHUAHUA             = "0.00035";
-let GAS_FEE_RATE_LOW_CHIHUAHUA              = "0.0035";
-let GAS_FEE_RATE_AVERAGE_CHIHUAHUA          = "0.035";
-
-let GAS_FEE_RATE_TINY_AXELAR                = "0.05";
-let GAS_FEE_RATE_LOW_AXELAR                 = "0.05";
-let GAS_FEE_RATE_AVERAGE_AXELAR             = "0.05";
-
-let GAS_FEE_RATE_TINY_JUNO                  = "0.0025"
-let GAS_FEE_RATE_LOW_JUNO                   = "0.005"
-let GAS_FEE_RATE_AVERAGE_JUNO               = "0.025"
-
-let GAS_FEE_RATE_TINY_KONSTELLATION         = "0.0001"
-let GAS_FEE_RATE_LOW_KONSTELLATION          = "0.001"
-let GAS_FEE_RATE_AVERAGE_KONSTELLATION      = "0.01"
-
-let GAS_FEE_RATE_TINY_PROVENANCE            = "2000.00"
-let GAS_FEE_RATE_LOW_PROVENANCE             = "2000.00"
-let GAS_FEE_RATE_AVERAGE_PROVENANCE         = "2000.00"
-
-let GAS_FEE_RATE_TINY_EVMOS                 = "0.000"
-let GAS_FEE_RATE_LOW_EVMOS                  = "0.000"
-let GAS_FEE_RATE_AVERAGE_EVMOS              = "0.000"
-
-let GAS_FEE_RATE_TINY_CUDOS                 = "0.000"
-let GAS_FEE_RATE_LOW_CUDOS                  = "0.000"
-let GAS_FEE_RATE_AVERAGE_CUDOS              = "0.000"
-
-let GAS_FEE_RATE_TINY_UMEE                  = "0.000"
-let GAS_FEE_RATE_LOW_UMEE                   = "0.001"
-let GAS_FEE_RATE_AVERAGE_UMEE               = "0.005"
-
-let GAS_FEE_RATE_TINY_CERBERUS              = "0.000"
-let GAS_FEE_RATE_LOW_CERBERUS               = "0.000"
-let GAS_FEE_RATE_AVERAGE_CERBERUS           = "0.000"
-
-let GAS_FEE_RATE_TINY_OMNIFLIX              = "0.001"
-let GAS_FEE_RATE_LOW_OMNIFLIX               = "0.001"
-let GAS_FEE_RATE_AVERAGE_OMNIFLIX           = "0.001"
-
-let GAS_FEE_RATE_TINY_CRESCENT              = "0.01"
-let GAS_FEE_RATE_LOW_CRESCENT               = "0.02"
-let GAS_FEE_RATE_AVERAGE_CRESCENT           = "0.05"
-
-let GAS_FEE_RATE_TINY_MANTLE                = "0.000"
-let GAS_FEE_RATE_LOW_MANTLE                 = "0.000"
-let GAS_FEE_RATE_AVERAGE_MANTLE             = "0.000"
-
-let GAS_FEE_RATE_TINY_NYX                   = "0.025"
-let GAS_FEE_RATE_LOW_NYX                    = "0.025"
-let GAS_FEE_RATE_AVERAGE_NYX                = "0.025"
-
-let GAS_FEE_AMOUNT_LOW                      = "100000"
-let GAS_FEE_AMOUNT_MID                      = "200000"
-let GAS_FEE_AMOUNT_HIGH                     = "300000"
-let GAS_FEE_AMOUNT_REINVEST                 = "220000"
-let GAS_FEE_AMOUNT_REDELE                   = "240000"
-let GAS_FEE_AMOUNT_IBC_SEND                 = "500000"
-let GAS_FEE_AMOUNT_PROFILE                  = "350000"
-
-let GAS_FEE_AMOUNT_COSMOS_SWAP              = "200000"
-let GAS_FEE_AMOUNT_COSMOS_JOIN_POOL         = "300000"
-let GAS_FEE_AMOUNT_COSMOS_EXIT_POOL         = "300000"
-
-let GAS_FEE_AMOUNT_OSMOS_SWAP               = "500000"
-let GAS_FEE_AMOUNT_OSMOS_JOIN_POOL          = "1500000"
-let GAS_FEE_AMOUNT_OSMOS_EXIT_POOL          = "1500000"
-let GAS_FEE_AMOUNT_OSMOS_LOCK               = "1500000"
-let GAS_FEE_AMOUNT_OSMOS_BEGIN_UNBONDING    = "1500000"
-let GAS_FEE_AMOUNT_OSMOS_UNLOCK             = "1500000"
-
-let FEE_BINANCE_BASE                            = "0.000075"
-let FEE_OKC_BASE                                = "0.00002"
-
-
-let KAVA_GAS_RATE_TINY                          = "0.001";
-let KAVA_GAS_RATE_LOW                           = "0.0025";
-let KAVA_GAS_RATE_AVERAGE                       = "0.025";
-let KAVA_GAS_AMOUNT_SEND                        = "400000";
-let KAVA_GAS_AMOUNT_STAKE                       = "800000";
-let KAVA_GAS_AMOUNT_REINVEST                    = "800000";
-let KAVA_GAS_AMOUNT_REDELEGATE                  = "800000";
-let KAVA_GAS_AMOUNT_VOTE                        = "300000";
-let KAVA_GAS_AMOUNT_CLAIM_INCENTIVE             = "800000";
-let KAVA_GAS_AMOUNT_CDP                         = "2000000";
-let KAVA_GAS_AMOUNT_HARD_POOL                   = "800000";
-let KAVA_GAS_AMOUNT_SWAP_TOKEN                  = "800000";
-let KAVA_GAS_AMOUNT_SWAP_DEPOSIT                = "800000";
-let KAVA_GAS_AMOUNT_SWAP_WITHDRAW               = "800000";
-let KAVA_GAS_AMOUNT_CLAIM_INCENTIVE_ALL         = "2000000";
-let KAVA_GAS_AMOUNT_BEP3                        = "500000";
-
-
-let BAND_GAS_AMOUNT_SEND                        = "100000";
-let BAND_GAS_AMOUNT_STAKE                       = "200000";
-let BAND_GAS_AMOUNT_REDELEGATE                  = "240000";
-let BAND_GAS_AMOUNT_REINVEST                    = "220000";
-let BAND_GAS_AMOUNT_ADDRESS_CHANGE              = "100000";
-let BAND_GAS_AMOUNT_VOTE                        = "100000";
-let BAND_GAS_AMOUNT_IBC_SEND                    = "500000";
-
-
-let IOV_GAS_AMOUNT_SEND                         = "100000";
-let IOV_GAS_AMOUNT_STAKE                        = "200000";
-let IOV_GAS_AMOUNT_REDELEGATE                   = "300000";
-let IOV_GAS_AMOUNT_REINVEST                     = "300000";
-let IOV_GAS_AMOUNT_ADDRESS_CHANGE               = "100000";
-let IOV_GAS_AMOUNT_VOTE                         = "100000";
-let IOV_GAS_AMOUNT_REGISTER                     = "300000";
-let IOV_GAS_AMOUNT_DELETE                       = "150000";
-let IOV_GAS_AMOUNT_RENEW                        = "300000";
-let IOV_GAS_AMOUNT_REPLACE                      = "300000";
-let IOV_GAS_AMOUNT_IBC_SEND                     = "500000";
-
-let OK_GAS_RATE_AVERAGE                         = "0.0000000001";
-let OK_GAS_AMOUNT_SEND                          = "200000";
-let OK_GAS_AMOUNT_STAKE                         = "200000";
-let OK_GAS_AMOUNT_STAKE_MUX                     = "20000";
-let OK_GAS_AMOUNT_VOTE                          = "200000";
-let OK_GAS_AMOUNT_VOTE_MUX                      = "50000";
-
-let CERTIK_GAS_AMOUNT_SEND                      = "100000";
-let CERTIK_GAS_AMOUNT_STAKE                     = "200000";
-let CERTIK_GAS_AMOUNT_REDELEGATE                = "300000";
-let CERTIK_GAS_AMOUNT_REINVEST                  = "300000";
-let CERTIK_GAS_AMOUNT_REWARD_ADDRESS_CHANGE     = "100000";
-let CERTIK_GAS_AMOUNT_VOTE                      = "100000";
-let CERTIK_GAS_AMOUNT_IBC_SEND                  = "500000";
-
-let SECRET_GAS_AMOUNT_SEND                      = "80000";
-let SECRET_GAS_AMOUNT_STAKE                     = "200000";
-let SECRET_GAS_AMOUNT_REDELEGATE                = "300000";
-let SECRET_GAS_AMOUNT_REINVEST                  = "350000";
-let SECRET_GAS_AMOUNT_REWARD_ADDRESS_CHANGE     = "80000";
-let SECRET_GAS_AMOUNT_VOTE                      = "100000";
-
-let SENTINEL_GAS_AMOUNT_SEND                    = "100000";
-let SENTINEL_GAS_AMOUNT_STAKE                   = "200000";
-let SENTINEL_GAS_AMOUNT_REDELEGATE              = "300000";
-let SENTINEL_GAS_AMOUNT_REINVEST                = "350000";
-let SENTINEL_GAS_AMOUNT_REWARD_ADDRESS_CHANGE   = "100000";
-let SENTINEL_GAS_AMOUNT_VOTE                    = "100000";
-let SENTINEL_GAS_AMOUNT_IBC_SEND                = "500000";
-
-let FETCH_GAS_AMOUNT_SEND                       = "100000";
-let FETCH_GAS_AMOUNT_STAKE                      = "200000";
-let FETCH_GAS_AMOUNT_REDELEGATE                 = "300000";
-let FETCH_GAS_AMOUNT_REINVEST                   = "350000";
-let FETCH_GAS_AMOUNT_REWARD_ADDRESS_CHANGE      = "100000";
-let FETCH_GAS_AMOUNT_VOTE                       = "100000";
-let FETCH_GAS_AMOUNT_IBC_SEND                   = "500000";
-
-
-let SIF_GAS_AMOUNT_SEND                         = "100000";
-let SIF_GAS_AMOUNT_STAKE                        = "200000";
-let SIF_GAS_AMOUNT_REDELEGATE                   = "300000";
-let SIF_GAS_AMOUNT_REINVEST                     = "350000";
-let SIF_GAS_AMOUNT_REWARD_ADDRESS_CHANGE        = "100000";
-let SIF_GAS_AMOUNT_VOTE                         = "100000";
-let SIF_GAS_AMOUNT_IBC_SEND                     = "500000";
-let SIF_GAS_AMOUNT_LP                           = "250000";
-let SIF_GAS_AMOUNT_SWAP                         = "250000";
-
-let KI_GAS_AMOUNT_SEND                          = "100000";
-let KI_GAS_AMOUNT_STAKE                         = "200000";
-let KI_GAS_AMOUNT_REDELEGATE                    = "300000";
-let KI_GAS_AMOUNT_REINVEST                      = "350000";
-let KI_GAS_AMOUNT_REWARD_ADDRESS_CHANGE         = "100000";
-let KI_GAS_AMOUNT_VOTE                          = "100000";
-
-let MEDI_GAS_AMOUNT_SEND                        = "100000";
-let MEDI_GAS_AMOUNT_STAKE                       = "200000";
-let MEDI_GAS_AMOUNT_REDELEGATE                  = "300000";
-let MEDI_GAS_AMOUNT_REINVEST                    = "350000";
-let MEDI_GAS_AMOUNT_REWARD_ADDRESS_CHANGE       = "100000";
-let MEDI_GAS_AMOUNT_VOTE                        = "100000";
-let MEDI_GAS_AMOUNT_IBC_SEND                    = "500000";
-
-
-
+let FEE_BINANCE_BASE                        = "0.000075"
+let FEE_OKC_BASE                            = "0.00002"
 
 
 // Constant for BEP3-Swap
@@ -880,8 +561,12 @@ let ICON_SANTA                  = "ICON_SANTA";
 let ICON_2002                   = "ICON_2002";
 
 
-let MintscanUrl = "https://www.mintscan.io/"
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/"
 let MonikerUrl =  ResourceBase + "moniker/"
 let RelayerUrl = ResourceBase + "relayer/"
+let ChainImgStarnameUrl  = ResourceBase + "chains/logo/"
+let BinanceTokenImgUrl = ResourceBase + "coin_image/binance/";
+let OKTokenImgUrl = ResourceBase + "coin_image/okex/";
+let BridgeTokenImgUrl = ResourceBase + "assets/images/ethereum/";
+let MintscanUrl = "https://www.mintscan.io/"
 let CoingeckoUrl = "https://www.coingecko.com/en/coins/"

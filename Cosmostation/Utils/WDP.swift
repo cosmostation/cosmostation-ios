@@ -132,7 +132,7 @@ public class WDP {
         
         else if (chainConfig!.chainType == .BINANCE_MAIN) {
             if let bnbTokenInfo = WUtils.getBnbToken(denom!) {
-                if let url = URL(string: BINANCE_TOKEN_IMG_URL + bnbTokenInfo.original_symbol + ".png") {
+                if let url = URL(string: BinanceTokenImgUrl + bnbTokenInfo.original_symbol + ".png") {
                     imgView?.af_setImage(withURL: url)
                     return
                 }
@@ -140,7 +140,7 @@ public class WDP {
             
         } else if (chainConfig!.chainType == .OKEX_MAIN) {
             if let okTokenInfo = WUtils.getOkToken(denom!) {
-                if let url = URL(string: OKEX_COIN_IMG_URL + okTokenInfo.original_symbol! + ".png") {
+                if let url = URL(string: OKTokenImgUrl + okTokenInfo.original_symbol! + ".png") {
                     imgView?.af_setImage(withURL: url)
                     return
                 }

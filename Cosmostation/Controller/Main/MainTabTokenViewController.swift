@@ -626,7 +626,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func onBindEtcToken(_ cell: TokenCell?, _ balance: Balance) {
         if (chainType == .BINANCE_MAIN) {
             if let bnbToken = WUtils.getBnbToken(balance.balance_denom) {
-                cell?.tokenImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + bnbToken.original_symbol + ".png")!)
+                cell?.tokenImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + bnbToken.original_symbol + ".png")!)
                 cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
                 cell?.tokenSymbol.textColor = UIColor(named: "_font05")
                 cell?.tokenTitle.text = "(" + bnbToken.symbol + ")"
@@ -640,7 +640,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             
         }  else if (chainType == .OKEX_MAIN) {
             if let okToken = WUtils.getOkToken(balance.balance_denom) {
-                cell?.tokenImg.af_setImage(withURL: URL(string: OKEX_COIN_IMG_URL + okToken.original_symbol! + ".png")!)
+                cell?.tokenImg.af_setImage(withURL: URL(string: OKTokenImgUrl + okToken.original_symbol! + ".png")!)
                 cell?.tokenSymbol.text = okToken.original_symbol?.uppercased()
                 cell?.tokenSymbol.textColor = UIColor(named: "_font05")
                 cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
