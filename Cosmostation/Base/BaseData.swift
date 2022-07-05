@@ -580,7 +580,7 @@ final class BaseData : NSObject{
     func getThemeType() -> UIUserInterfaceStyle {
         if (getTheme() == 1) {
             return UIUserInterfaceStyle.light
-        } else if (getTheme() == 1) {
+        } else if (getTheme() == 2) {
             return UIUserInterfaceStyle.dark
         } else {
             return UIUserInterfaceStyle.unspecified
