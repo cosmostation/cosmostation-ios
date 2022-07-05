@@ -38,6 +38,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
     var mEstimateGasAmount = NSDecimalNumber.zero
     var mFee = NSDecimalNumber.zero
     var mDpDecimal:Int16 = 6
+    var waitInputPassword = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,20 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
         
         mEstimateGasAmount = WUtils.getEstimateGasAmount(chainType!, pageHolderVC.mType!, pageHolderVC.mRewardTargetValidators_gRPC.count)
         onUpdateView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (waitInputPassword) {
+            waitInputPassword = false
+            return
+        }
+        
+        if (!BaseData.instance.getUsingEnginerMode()) {
+            if (self.chainType == .EVMOS_MAIN) {
+                self.onSetFee()
+                self.onFetchgRPCAuth(self.pageHolderVC.mAccount!)
+            }
+        }
     }
     
     func onCalculateFees() {
@@ -116,6 +131,7 @@ class StepFeeGrpcViewController: BaseViewController, PasswordViewDelegate {
         self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
         passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
         passwordVC.resultDelegate = self
+        waitInputPassword = true
         self.navigationController?.pushViewController(passwordVC, animated: false)
     }
     
