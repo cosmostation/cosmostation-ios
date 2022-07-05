@@ -33,7 +33,7 @@ class ChainNyx: ChainConfig {
     var addressPrefix = "n"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.025unyx"
+    let gasRate0 = "0.025unym"
     
     var pushSupport = false
     var wcSupoort = false

@@ -55,14 +55,14 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
         
         self.toChainCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToChain (_:))))
         self.sendCoinCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToSendCoin (_:))))
-        self.toChainList = ChainType.getHtlcSendable(pageHolderVC.chainType!)
+        self.toChainList = WUtils.getHtlcSendable(pageHolderVC.chainType!)
         if (self.toChainList.count <= 0) {
             pageHolderVC.onBeforePage()
             return
         }
         self.toChain = self.toChainList[0]
         
-        self.toSwapableCoinList = ChainType.getHtlcSwappableCoin(pageHolderVC.chainType!)
+        self.toSwapableCoinList = WUtils.getHtlcSwappableCoin(pageHolderVC.chainType!)
         if (self.toSwapableCoinList.count <= 0) { pageHolderVC.onBeforePage() }
         self.toSwapDenom = pageHolderVC.mHtlcDenom;
         print("toSwapDenom ", toSwapDenom)
@@ -72,8 +72,8 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func updateView() {
-        WUtils.onDpSwapChain(pageHolderVC.chainType!, fromChainImg, fromChainTxt)
-        WUtils.onDpSwapChain(toChain!, toChainImg, toChainText)
+        WUtils.dpBepSwapChainInfo(pageHolderVC.chainType!, fromChainImg, fromChainTxt)
+        WUtils.dpBepSwapChainInfo(toChain!, toChainImg, toChainText)
         sendCoinDenom.text = "(" + toSwapDenom! + ")"
         if (pageHolderVC.chainType == ChainType.BINANCE_MAIN && kavaSwapParam2 != nil && kavaSwapSupply2 != nil) {
             RelayerMaxLayer.isHidden = false

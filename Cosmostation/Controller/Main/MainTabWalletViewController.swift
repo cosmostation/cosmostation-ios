@@ -873,8 +873,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        
-//        let gasDenom = WUtils.getGasDenom(chainType)
         let mainDenom = chainConfig!.stakeDenom
         if (chainConfig?.isGrpc == true) {
             if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {

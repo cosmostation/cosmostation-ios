@@ -365,51 +365,6 @@ public enum ChainType: String {
         }
         return false
     }
-    
-    static func getHtlcSendable(_ chain: ChainType) -> Array<ChainType> {
-        var result = Array<ChainType>()
-        if (chain == BINANCE_MAIN) {
-            result.append(KAVA_MAIN)
-            
-        } else if (chain == KAVA_MAIN) {
-            result.append(BINANCE_MAIN)
-            
-        }
-        return result
-    }
-    
-    static func getHtlcSwappableCoin(_ chain: ChainType) -> Array<String> {
-        var result = Array<String>()
-        if (chain == BINANCE_MAIN) {
-            result.append(TOKEN_HTLC_BINANCE_BNB)
-            result.append(TOKEN_HTLC_BINANCE_BTCB)
-            result.append(TOKEN_HTLC_BINANCE_XRPB)
-            result.append(TOKEN_HTLC_BINANCE_BUSD)
-            
-        } else if (chain == KAVA_MAIN) {
-            result.append(TOKEN_HTLC_KAVA_BNB)
-            result.append(TOKEN_HTLC_KAVA_BTCB)
-            result.append(TOKEN_HTLC_KAVA_XRPB)
-            result.append(TOKEN_HTLC_KAVA_BUSD)
-            
-        }
-        return result
-    }
-    
-    static func isHtlcSwappableCoin(_ chain: ChainType?, _ denom: String?) -> Bool {
-        if (chain == BINANCE_MAIN) {
-            if (denom == TOKEN_HTLC_BINANCE_BNB) { return true }
-            if (denom == TOKEN_HTLC_BINANCE_BTCB) { return true }
-            if (denom == TOKEN_HTLC_BINANCE_XRPB) { return true }
-            if (denom == TOKEN_HTLC_BINANCE_BUSD) { return true }
-        } else if (chain == KAVA_MAIN) {
-            if (denom == TOKEN_HTLC_KAVA_BNB) { return true }
-            if (denom == TOKEN_HTLC_KAVA_BTCB) { return true }
-            if (denom == TOKEN_HTLC_KAVA_XRPB) { return true }
-            if (denom == TOKEN_HTLC_KAVA_BUSD) { return true }
-        }
-        return false
-    }
 }
 
 

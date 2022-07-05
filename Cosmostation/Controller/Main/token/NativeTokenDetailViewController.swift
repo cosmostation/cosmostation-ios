@@ -42,7 +42,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
         self.tokenDetailTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
         self.tokenDetailTableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
         
-        if (ChainType.isHtlcSwappableCoin(chainType, denom)) {
+        if (WUtils.isHtlcSwappableCoin(chainType, denom)) {
             self.bntBep3Send.isHidden = false
         }
         

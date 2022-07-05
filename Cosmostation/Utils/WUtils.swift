@@ -941,19 +941,6 @@ public class WUtils {
         return result
     }
     
-    static func getDelegableAmount(_ balances:Array<Balance>?, _ symbol:String) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if (balances != nil) {
-            balances!.forEach({ (balance) in
-                if (balance.balance_denom.caseInsensitiveCompare(symbol) == .orderedSame) {
-                    result = result.adding(WUtils.plainStringToDecimal(balance.balance_amount))
-                    result = result.adding(WUtils.plainStringToDecimal(balance.balance_locked))
-                }
-            })
-        }
-        return result
-    }
-    
     static func showBNBTxDp(_ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel, _ chainType:ChainType) {
         if (coin.denom == BNB_MAIN_DENOM) {
             WUtils.setDenomTitle(chainType, denomLabel)
@@ -1501,14 +1488,6 @@ public class WUtils {
         return chainConfig.stakeDenom
     }
     
-    static func getGasDenom(_ chain:ChainType?) -> String {
-        if (chain == ChainType.NYX_MAIN) {
-            return NYX_NYM_DENOM
-        } else {
-            return getMainDenom(chain)
-        }
-    }
-    
     static func getDenomDecimal(_ chainConfig: ChainConfig?, _ denom: String?) -> Int16 {
         if (chainConfig == nil || denom == nil) { return 6 }
         if (denom!.starts(with: "ibc/")) {
@@ -1770,55 +1749,6 @@ public class WUtils {
         
         attributedString1.append(attributedString2)
         return attributedString1
-    }
-    
-    static func dpChainInfo(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
-        if (chain == ChainType.COSMOS_MAIN) {
-            label.text = NSLocalizedString("chain_title_cosmos", comment: "")
-            img?.image = UIImage(named: "chainCosmos")
-        } else if (chain == ChainType.IRIS_MAIN) {
-            label.text = NSLocalizedString("chain_title_iris", comment: "")
-            img?.image = UIImage(named: "chainIris")
-        } else if (chain == ChainType.BINANCE_MAIN) {
-            label.text = NSLocalizedString("chain_title_bnb", comment: "")
-            img?.image = UIImage(named: "chainBinance")
-        } else if (chain == ChainType.KAVA_MAIN) {
-            label.text = NSLocalizedString("chain_title_kava", comment: "")
-           img?.image = UIImage(named: "chainKava")
-        } else if (chain == ChainType.IOV_MAIN) {
-            label.text = NSLocalizedString("chain_title_iov", comment: "")
-            img?.image = UIImage(named: "chainStarname")
-        } else if (chain == ChainType.BAND_MAIN) {
-            label.text = NSLocalizedString("chain_title_band", comment: "")
-            img?.image = UIImage(named: "chainBand")
-        }
-    }
-    
-    static func dpChainName(_ chain: ChainType) -> String {
-        if (chain == ChainType.COSMOS_MAIN) {
-            return NSLocalizedString("chain_title_cosmos", comment: "")
-        } else if (chain == ChainType.IRIS_MAIN) {
-            return NSLocalizedString("chain_title_iris", comment: "")
-        } else if (chain == ChainType.BINANCE_MAIN) {
-            return NSLocalizedString("chain_title_bnb", comment: "")
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return NSLocalizedString("chain_title_kava", comment: "")
-        } else if (chain == ChainType.IOV_MAIN) {
-            return NSLocalizedString("chain_title_iov", comment: "")
-        } else if (chain == ChainType.BAND_MAIN) {
-            return NSLocalizedString("chain_title_band", comment: "")
-        }
-        return ""
-    }
-    
-    static func onDpSwapChain(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
-        if (chain == ChainType.BINANCE_MAIN) {
-            label.text = "BINANCE"
-            img?.image = UIImage(named: "chainBinance")
-        } else if (chain == ChainType.KAVA_MAIN) {
-            label.text = "KAVA"
-           img?.image = UIImage(named: "chainKava")
-        }
     }
     
     static func getRealBlockTime(_ chain: ChainType?) -> NSDecimalNumber {

@@ -48,11 +48,11 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         
         if (type == SELECT_POPUP_HTLC_TO_CHAIN) {
             self.popupTitle.text = NSLocalizedString("select_destination_chain", comment: "")
-            self.toChainList = ChainType.getHtlcSendable(chainType!)
+            self.toChainList = WUtils.getHtlcSendable(chainType!)
             
         } else if (type == SELECT_POPUP_HTLC_TO_COIN) {
             self.popupTitle.text = NSLocalizedString("str_select_to_send_coin", comment: "")
-            self.toCoinList = ChainType.getHtlcSwappableCoin(chainType!)
+            self.toCoinList = WUtils.getHtlcSwappableCoin(chainType!)
             
         } else if (type == SELECT_POPUP_HTLC_TO_ACCOUNT) {
             self.popupTitle.text = NSLocalizedString("select_account", comment: "")
@@ -160,7 +160,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         if (type == SELECT_POPUP_HTLC_TO_CHAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
             let chain = toChainList[indexPath.row]
-            WUtils.dpChainInfo(chain, cell!.chainImg, cell!.chainTitle)
+            WUtils.dpBepSwapChainInfo(chain, cell!.chainImg, cell!.chainTitle)
             return cell!
             
         } else if (type == SELECT_POPUP_HTLC_TO_COIN) {

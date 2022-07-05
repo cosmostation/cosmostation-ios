@@ -76,7 +76,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             }
             sendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, sendAmountLabel.font, 0, 8)
             sendFeeLabel.attributedText = WUtils.displayAmount2(sendFeeAmount.stringValue, sendFeeLabel.font, 0, 8)
-            recipientChainLabel.text = WUtils.dpChainName(pageHolderVC.mHtlcToChain!)
+            recipientChainLabel.text = WUtils.dpBepSwapChainName(pageHolderVC.mHtlcToChain!)
             recipientAddressLabel.text = pageHolderVC.mHtlcToAccount?.account_address
             
         } else if (chainType == ChainType.KAVA_MAIN) {
@@ -97,7 +97,7 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
             }
             sendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, sendAmountLabel.font, mDpDecimal, mDpDecimal)
             sendFeeLabel.attributedText = WUtils.displayAmount2(sendFeeAmount.stringValue, sendFeeLabel.font, 6, 6)
-            recipientChainLabel.text = WUtils.dpChainName(pageHolderVC.mHtlcToChain!)
+            recipientChainLabel.text = WUtils.dpBepSwapChainName(pageHolderVC.mHtlcToChain!)
             claimAddress.text = pageHolderVC.mHtlcToAccount?.account_address
         }
         

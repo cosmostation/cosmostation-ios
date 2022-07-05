@@ -47,7 +47,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.topCard.addGestureRecognizer(tapTotalCard)
         
-        if (ChainType.isHtlcSwappableCoin(chainType, nativeDenom)) {
+        if (WUtils.isHtlcSwappableCoin(chainType, nativeDenom)) {
             self.btnBepSend.isHidden = false
         } else {
             self.btnIbcSend.isHidden = false

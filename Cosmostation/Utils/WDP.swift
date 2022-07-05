@@ -124,7 +124,7 @@ public class WDP {
             
         } else if (chainConfig!.chainType == .NYX_MAIN) {
             if (denom == NYX_NYM_DENOM) {
-                imgView?.image = UIImage(named: "nyx_nym")
+                imgView?.image = UIImage(named: "tokenNym")
                 return
             }
             
