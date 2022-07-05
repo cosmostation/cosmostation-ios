@@ -2075,115 +2075,32 @@ public class WUtils {
         return nil
     }
     
-    static func isValidChainAddress(_ chain: ChainType?, _ address: String?) -> Bool {
+    static func isValidChainAddress(_ chainConfig: ChainConfig?, _ address: String?) -> Bool {
+        if (chainConfig == nil) { return false }
         if (address?.starts(with: "0x") == true) {
-            if (!WKey.isValidEthAddress(address!)) { return false }
-            if (chain == ChainType.OKEX_MAIN) { return true }
+            if (WKey.isValidEthAddress(address!) && chainConfig?.chainType == .OKEX_MAIN) { return true }
             return false
         }
-        
         if (!WKey.isValidateBech32(address ?? "")) { return false }
-        if (address?.starts(with: "cosmos1") == true && chain == ChainType.COSMOS_MAIN) { return true }
-        else if (address?.starts(with: "iaa1") == true && chain == ChainType.IRIS_MAIN) { return true }
-        else if (address?.starts(with: "bnb1") == true && chain == ChainType.BINANCE_MAIN) { return true }
-        else if (address?.starts(with: "kava1") == true && chain == ChainType.KAVA_MAIN) { return true }
-        else if (address?.starts(with: "star1") == true && chain == ChainType.IOV_MAIN) { return true }
-        else if (address?.starts(with: "band1") == true && chain == ChainType.BAND_MAIN) { return true }
-        else if (address?.starts(with: "secret1") == true && chain == ChainType.SECRET_MAIN) { return true }
-        else if (address?.starts(with: "certik1") == true && chain == ChainType.CERTIK_MAIN) { return true }
-        else if (address?.starts(with: "akash1") == true && chain == ChainType.AKASH_MAIN) { return true }
-        else if (address?.starts(with: "persistence1") == true && chain == ChainType.PERSIS_MAIN) { return true }
-        else if (address?.starts(with: "sent1") == true && chain == ChainType.SENTINEL_MAIN) { return true }
-        else if (address?.starts(with: "fetch1") == true && chain == ChainType.FETCH_MAIN) { return true }
-        else if (address?.starts(with: "cro1") == true && chain == ChainType.CRYPTO_MAIN) { return true }
-        else if (address?.starts(with: "sif1") == true && chain == ChainType.SIF_MAIN) { return true }
-        else if (address?.starts(with: "ki1") == true && chain == ChainType.KI_MAIN) { return true }
-        else if (address?.starts(with: "panacea1") == true && chain == ChainType.MEDI_MAIN) { return true }
-        else if (address?.starts(with: "osmo1") == true && chain == ChainType.OSMOSIS_MAIN) { return true }
-        else if (address?.starts(with: "emoney1") == true && chain == ChainType.EMONEY_MAIN) { return true }
-        else if (address?.starts(with: "rizon1") == true && chain == ChainType.RIZON_MAIN) { return true }
-        else if (address?.starts(with: "juno1") == true && chain == ChainType.JUNO_MAIN) { return true }
-        else if (address?.starts(with: "regen1") == true && chain == ChainType.REGEN_MAIN) { return true }
-        else if (address?.starts(with: "bcna1") == true && chain == ChainType.BITCANA_MAIN) { return true }
-        else if (address?.starts(with: "althea1") == true && chain == ChainType.ALTHEA_MAIN) { return true }
-        else if (address?.starts(with: "stars1") == true && chain == ChainType.STARGAZE_MAIN) { return true }
-        else if (address?.starts(with: "comdex1") == true && chain == ChainType.COMDEX_MAIN)  { return true }
-        else if (address?.starts(with: "inj1") == true && chain == ChainType.INJECTIVE_MAIN) { return true }
-        else if (address?.starts(with: "bitsong1") == true && chain == ChainType.BITSONG_MAIN) { return true }
-        else if (address?.starts(with: "desmos1") == true && chain == ChainType.DESMOS_MAIN) { return true }
-        else if (address?.starts(with: "gravity1") == true && chain == ChainType.GRAVITY_BRIDGE_MAIN) { return true }
-        else if (address?.starts(with: "lum1") == true && chain == ChainType.LUM_MAIN) { return true }
-        else if (address?.starts(with: "chihuahua1") == true && chain == ChainType.CHIHUAHUA_MAIN) { return true }
-        else if (address?.starts(with: "axelar1") == true && chain == ChainType.AXELAR_MAIN) { return true }
-        else if (address?.starts(with: "darc1") == true && chain == ChainType.KONSTELLATION_MAIN) { return true }
-        else if (address?.starts(with: "umee1") == true && chain == ChainType.UMEE_MAIN) { return true }
-        else if (address?.starts(with: "evmos1") == true && chain == ChainType.EVMOS_MAIN) { return true }
-        else if (address?.starts(with: "pb1") == true && chain == ChainType.PROVENANCE_MAIN) { return true }
-        else if (address?.starts(with: "cudos1") == true && chain == ChainType.CUDOS_MAIN) { return true }
-        else if (address?.starts(with: "cerberus1") == true && chain == ChainType.CERBERUS_MAIN) { return true }
-        else if (address?.starts(with: "omniflix1") == true && chain == ChainType.OMNIFLIX_MAIN) { return true }
-        else if (address?.starts(with: "cre1") == true && chain == ChainType.CRESCENT_MAIN) { return true }
-        else if (address?.starts(with: "mantle") == true && chain == ChainType.MANTLE_MAIN) { return true }
-        else if (address?.starts(with: "station1") == true && chain == ChainType.STATION_TEST) { return true }
-        else if (address?.starts(with: "n1") == true && chain == ChainType.NYX_MAIN) { return true }
+        let addressPrfix = chainConfig!.addressPrefix + "1"
+        if (address?.starts(with: addressPrfix) == true) { return true }
         return false
     }
     
-    static func getChainsFromAddress(_ address: String?) -> Array<ChainType>? {
+    
+    static func getChainsFromAddress(_ address: String?) -> ChainType? {
         if (address?.starts(with: "0x") == true) {
-            if (WKey.isValidEthAddress(address!)) {
-                return [ChainType.OKEX_MAIN]
-            } else {
-                return nil
+            if (WKey.isValidEthAddress(address!)) { return .OKEX_MAIN }
+            return nil
+        }
+        if (!WKey.isValidateBech32(address ?? "")) { return nil }
+        let allConfigs = ChainFactory.SUPPRT_CONFIG()
+        for i in 0..<allConfigs.count {
+            let addressPrfix = allConfigs[i].addressPrefix + "1"
+            if (address?.starts(with: addressPrfix) == true) {
+                return allConfigs[i].chainType
             }
         }
-        
-        if (!WKey.isValidateBech32(address ?? "")) { return nil }
-        if (address?.starts(with: "cosmos1") == true) { return [ChainType.COSMOS_MAIN, ChainType.COSMOS_TEST] }
-        else if (address?.starts(with: "iaa1") == true) { return [ChainType.IRIS_MAIN, ChainType.IRIS_TEST] }
-        else if (address?.starts(with: "bnb1") == true) { return [ChainType.BINANCE_MAIN] }
-        else if (address?.starts(with: "kava1") == true) { return [ChainType.KAVA_MAIN] }
-        else if (address?.starts(with: "star1") == true) { return [ChainType.IOV_MAIN] }
-        else if (address?.starts(with: "band1") == true) { return [ChainType.BAND_MAIN] }
-        else if (address?.starts(with: "secret1") == true) { return [ChainType.SECRET_MAIN] }
-        else if (address?.starts(with: "certik1") == true) { return [ChainType.CERTIK_MAIN] }
-        else if (address?.starts(with: "akash1") == true) { return [ChainType.AKASH_MAIN] }
-        else if (address?.starts(with: "persistence1") == true) { return [ChainType.PERSIS_MAIN] }
-        else if (address?.starts(with: "sent1") == true) { return [ChainType.SENTINEL_MAIN] }
-        else if (address?.starts(with: "fetch1") == true) { return [ChainType.FETCH_MAIN] }
-        else if (address?.starts(with: "cro1") == true) { return [ChainType.CRYPTO_MAIN] }
-        else if (address?.starts(with: "sif1") == true) { return [ChainType.SIF_MAIN] }
-        else if (address?.starts(with: "ki1") == true) { return [ChainType.KI_MAIN] }
-        else if (address?.starts(with: "panacea1") == true) { return [ChainType.MEDI_MAIN] }
-        else if (address?.starts(with: "osmo1") == true) { return [ChainType.OSMOSIS_MAIN] }
-        else if (address?.starts(with: "emoney1") == true) { return [ChainType.EMONEY_MAIN] }
-        else if (address?.starts(with: "rizon1") == true) { return [ChainType.RIZON_MAIN] }
-        else if (address?.starts(with: "juno1") == true) { return [ChainType.JUNO_MAIN] }
-        else if (address?.starts(with: "regen1") == true) { return [ChainType.REGEN_MAIN] }
-        else if (address?.starts(with: "bcna1") == true) { return [ChainType.BITCANA_MAIN] }
-        else if (address?.starts(with: "althea1") == true) { return [ChainType.ALTHEA_MAIN] }
-        else if (address?.starts(with: "stars1") == true) { return [ChainType.STARGAZE_MAIN] }
-        else if (address?.starts(with: "comdex1") == true) { return [ChainType.COMDEX_MAIN] }
-        else if (address?.starts(with: "inj1") == true) { return [ChainType.INJECTIVE_MAIN] }
-        else if (address?.starts(with: "bitsong1") == true) { return [ChainType.BITSONG_MAIN] }
-        else if (address?.starts(with: "desmos1") == true) { return [ChainType.DESMOS_MAIN] }
-        else if (address?.starts(with: "gravity1") == true) { return [ChainType.GRAVITY_BRIDGE_MAIN] }
-        else if (address?.starts(with: "lum1") == true) { return [ChainType.LUM_MAIN] }
-        else if (address?.starts(with: "chihuahua1") == true) { return [ChainType.CHIHUAHUA_MAIN] }
-        else if (address?.starts(with: "axelar1") == true) { return [ChainType.AXELAR_MAIN] }
-        else if (address?.starts(with: "darc1") == true) { return [ChainType.KONSTELLATION_MAIN] }
-        else if (address?.starts(with: "umee1") == true) { return [ChainType.UMEE_MAIN] }
-        else if (address?.starts(with: "evmos1") == true) { return [ChainType.EVMOS_MAIN] }
-        else if (address?.starts(with: "pb1") == true) { return [ChainType.PROVENANCE_MAIN] }
-        else if (address?.starts(with: "cudos1") == true) { return [ChainType.CUDOS_MAIN] }
-        else if (address?.starts(with: "cerberus1") == true) { return [ChainType.CERBERUS_MAIN] }
-        else if (address?.starts(with: "omniflix1") == true) { return [ChainType.OMNIFLIX_MAIN] }
-        else if (address?.starts(with: "cre1") == true) { return [ChainType.CRESCENT_MAIN] }
-        else if (address?.starts(with: "mantle1") == true) { return [ChainType.MANTLE_MAIN] }
-        else if (address?.starts(with: "n1") == true) { return [ChainType.NYX_MAIN] }
-        
-        else if (address?.starts(with: "station1") == true) { return [ChainType.STATION_TEST] }
-        
         return nil
     }
     

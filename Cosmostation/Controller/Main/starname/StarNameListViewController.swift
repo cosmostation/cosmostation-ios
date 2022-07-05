@@ -152,8 +152,10 @@ extension WUtils {
     
     static func checkStarnameWithResource(_ chainType: ChainType, _ response: Starnamed_X_Starname_V1beta1_QueryStarnameResponse) -> String? {
         for resource in response.account.resources {
-            if (isValidChainAddress(chainType, resource.resource)) {
-                return resource.resource
+            if let chainConfig = ChainFactory.getChainConfig(chainType) {
+                if (isValidChainAddress(chainConfig, resource.resource)) {
+                    return resource.resource
+                }
             }
         }
         return nil

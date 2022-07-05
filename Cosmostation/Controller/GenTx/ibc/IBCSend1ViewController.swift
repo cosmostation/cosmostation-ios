@@ -26,9 +26,10 @@ class IBCSend1ViewController: BaseViewController, QrScannerDelegate, SBCardPopup
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
-        self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
     }
     
     override func enableUserInteraction() {
@@ -97,16 +98,19 @@ class IBCSend1ViewController: BaseViewController, QrScannerDelegate, SBCardPopup
             self.onCheckNameservice(userInputRecipient!.lowercased())
             return;
         }
-        if (WUtils.isValidChainAddress(toChain, userInputRecipient)) {
-            btnBack.isUserInteractionEnabled = true
-            btnNext.isUserInteractionEnabled = true
-            pageHolderVC.mIBCRecipient = userInputRecipient
-            pageHolderVC.onNextPage()
-            
-        } else {
+        guard let toChainConfig = ChainFactory.getChainConfig(toChain) else {
+            self.onShowToast(NSLocalizedString("error_invalid_address_or_pubkey", comment: ""))
+            return
+        }
+        if (!WUtils.isValidChainAddress(toChainConfig, userInputRecipient)) {
             self.onShowToast(NSLocalizedString("error_invalid_address_or_pubkey", comment: ""))
             return;
+            
         }
+        btnBack.isUserInteractionEnabled = true
+        btnNext.isUserInteractionEnabled = true
+        pageHolderVC.mIBCRecipient = userInputRecipient
+        pageHolderVC.onNextPage()
     }
     
     func onCheckNameservice(_ userInput: String) {

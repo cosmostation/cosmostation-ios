@@ -24,23 +24,11 @@ class ReplaceEditAddressViewController: BaseViewController, QrScannerDelegate, S
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
-//        self.addressInput.layer.borderWidth = 1
-//        self.addressInput.layer.borderColor = UIColor.init(hexString: "ebecee").cgColor
         self.addressInput.setLeftPaddingPoints(8)
-        
-//        let walletImg = self.btnWallet.imageView?.image!.withRenderingMode(.alwaysTemplate)
-//        self.btnWallet.setImage(walletImg, for: .normal)
-//        self.btnWallet.tintColor = UIColor.init(hexString: "222222")
-//
-//        let qrImg = self.btnQrScan.imageView?.image!.withRenderingMode(.alwaysTemplate)
-//        self.btnQrScan.setImage(qrImg, for: .normal)
-//        self.btnQrScan.tintColor = UIColor.init(hexString: "222222")
-//
-//        let pasteImg = self.btnPaste.imageView?.image!.withRenderingMode(.alwaysTemplate)
-//        self.btnPaste.setImage(pasteImg, for: .normal)
-//        self.btnPaste.tintColor = UIColor.init(hexString: "222222")
-        
         chainImg.af_setImage(withURL: getStarNameChainImgUrl(chainNameResource))
         chainNameLabel.text = getStarNameChainName(chainNameResource)
         addressInput.text = addressResource
@@ -99,8 +87,10 @@ class ReplaceEditAddressViewController: BaseViewController, QrScannerDelegate, S
             return;
             
         } else {
-            if let asset = getStarnameAssets().filter({ $0.uri == chainNameResource}).first, let chainType = asset.chainType {
-                if (!WUtils.isValidChainAddress(chainType, userInput)) {
+            if let asset = getStarnameAssets().filter({ $0.uri == chainNameResource}).first,
+               let chainType = asset.chainType,
+               let chainConfig = ChainFactory.getChainConfig(chainType) {
+                if (!WUtils.isValidChainAddress(chainConfig, userInput)) {
                     self.onShowToast(NSLocalizedString("error_invalid_address_or_pubkey", comment: ""))
                     return
                 }

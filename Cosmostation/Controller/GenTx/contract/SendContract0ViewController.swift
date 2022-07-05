@@ -22,9 +22,10 @@ class SendContract0ViewController: BaseViewController, QrScannerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
-        self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
     }
     
     override func enableUserInteraction() {
@@ -67,7 +68,7 @@ class SendContract0ViewController: BaseViewController, QrScannerDelegate {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return;
         }
-        if (!WUtils.isValidChainAddress(chainType, userInputRecipient)) {
+        if (!WUtils.isValidChainAddress(chainConfig, userInputRecipient)) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }

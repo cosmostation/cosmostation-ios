@@ -56,8 +56,8 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
     
     @IBAction func onClickNext(_ sender: UIButton) {
         let userInput = self.addAddressInputText.text?.trimmingCharacters(in: .whitespaces) ?? ""
-        if let chains = WUtils.getChainsFromAddress(userInput) {
-            self.onGenWatchAccount(chains[0], userInput)
+        if let chain = WUtils.getChainsFromAddress(userInput) {
+            self.onGenWatchAccount(chain, userInput)
             
         } else {
             self.onShowToast(NSLocalizedString("error_invalid_address_or_pubkey", comment: ""))
