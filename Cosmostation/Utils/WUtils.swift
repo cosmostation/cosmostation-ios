@@ -198,14 +198,6 @@ public class WUtils {
         return localFormatter.string(from: fullDate)
     }
     
-    static func nodeTimetoString3(_ input: String) -> String {
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        let date = nodeFormatter.date(from: input) ?? Date.init()
-        return longTimetoString3(date.millisecondsSince1970)
-    }
-    
     static func unbondingDateFromNow(_ date:UInt16) -> String {
         let localFormatter = DateFormatter()
         localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
@@ -219,28 +211,6 @@ public class WUtils {
     
     static func getUnbondingTimeleft(_ input: Int64) -> String {
         let secondsLeft = Int(Date().timeIntervalSince(Date.init(milliseconds: Int(input)))) * -1
-        
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-        if secondsLeft < minute {
-            return "Soon"
-        } else if secondsLeft < hour {
-            return "(\(secondsLeft / minute) minutes remaining)"
-        } else if secondsLeft < day {
-            return "(\(secondsLeft / hour) hours remaining)"
-        } else {
-            return "(\(secondsLeft / day) days remaining)"
-        }
-    }
-    
-    static func getUnbondingTimeleft2(_ input: String) -> String {
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        let date = nodeFormatter.date(from: input) ?? Date.init()
-        
-        let secondsLeft = Int(Date().timeIntervalSince(date)) * -1
         
         let minute = 60
         let hour = 60 * minute
@@ -349,40 +319,6 @@ public class WUtils {
         }
     }
     
-    static func displayAmount2(_ amount: String?, _ font:UIFont, _ inputPoint:Int16, _ dpPoint:Int16) -> NSMutableAttributedString {
-        let nf = NumberFormatter()
-        nf.minimumFractionDigits = Int(dpPoint)
-        nf.maximumFractionDigits = Int(dpPoint)
-//        nf.maximumSignificantDigits = Int(dpPoint) - 1
-//        nf.minimumSignificantDigits = Int(dpPoint) - 1
-        nf.roundingMode = .floor
-        nf.numberStyle = .decimal
-        
-        let amount = plainStringToDecimal(amount)
-        var formatted: String?
-        if (amount == NSDecimalNumber.zero) {
-            formatted = nf.string(from: NSDecimalNumber.zero)
-        } else {
-            let calAmount = amount.multiplying(byPowerOf10: -Int16(inputPoint))
-            formatted = nf.string(from: calAmount)
-        }
-        
-        let added       = formatted
-        let endIndex    = added!.index(added!.endIndex, offsetBy: -dpPoint)
-        
-        let preString   = added![..<endIndex]
-        let postString  = added![endIndex...]
-        
-        let preAttrs = [NSAttributedString.Key.font : font]
-        let postAttrs = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]
-        
-        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
-        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
-        
-        attributedString1.append(attributedString2)
-        return attributedString1
-    }
-    
     static func getFormattedNumber(_ amount: NSDecimalNumber, _ dpPoint:Int16) -> String {
         let nf = NumberFormatter()
         nf.minimumFractionDigits = Int(dpPoint)
@@ -433,9 +369,11 @@ public class WUtils {
         return nil
     }
     
-    static func usdValue(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
-        if let perUsdValue = perUsdValue(denom) {
-            return perUsdValue.multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler3Down)
+    static func usdValue(_ chainConfig: ChainConfig, _ denom: String, _ amount: NSDecimalNumber) -> NSDecimalNumber {
+        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, denom)
+        let decimalDenom = getDenomDecimal(chainConfig, denom)
+        if let perUsdValue = perUsdValue(baseDenom) {
+            return perUsdValue.multiplying(by: amount).multiplying(byPowerOf10: -decimalDenom, withBehavior: handler3Down)
         }
         return NSDecimalNumber.zero
     }
@@ -483,64 +421,65 @@ public class WUtils {
         return perBtcValue(denom).multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler8)
     }
     
-    static func allAssetToUserCurrency(_ chainType: ChainType?) -> NSDecimalNumber {
+    static func allAssetToUserCurrency(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
         let baseData = BaseData.instance
         var totalValue = NSDecimalNumber.zero
-        if (isGRPC(chainType)) {
+        if (chainConfig?.isGrpc == true) {
             baseData.mMyBalances_gRPC.forEach { coin in
-                if (coin.denom == getMainDenom(chainType)) {
+                if (coin.denom == getMainDenom(chainConfig)) {
                     let amount = getAllMainAsset(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, mainDivideDecimal(chainType))
+                    let assetValue = userCurrencyValue(coin.denom, amount, mainDivideDecimal(chainConfig?.chainType))
                     totalValue = totalValue.adding(assetValue)
                     
-                } else if (chainType == ChainType.OSMOSIS_MAIN && coin.denom == OSMOSIS_ION_DENOM) {
+                } else if (chainConfig?.chainType == .OSMOSIS_MAIN && coin.denom == OSMOSIS_ION_DENOM) {
                     let amount = baseData.getAvailableAmount_gRPC(coin.denom)
                     let assetValue = userCurrencyValue(coin.denom, amount, 6)
                     totalValue = totalValue.adding(assetValue)
                     
-                } else if (chainType! == ChainType.SIF_MAIN && coin.denom.starts(with: "c")) {
+                } else if (chainConfig?.chainType == .SIF_MAIN && coin.denom.starts(with: "c")) {
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getSifCoinDecimal(coin.denom)
+                    let decimal = getDenomDecimal(chainConfig, coin.denom)
                     if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
                     
-                } else if (chainType! == ChainType.GRAVITY_BRIDGE_MAIN && coin.denom.starts(with: "gravity0x")) {
+                } else if (chainConfig?.chainType == .GRAVITY_BRIDGE_MAIN && coin.denom.starts(with: "gravity0x")) {
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getGBrdigeCoinDecimal(coin.denom)
+                    let decimal = getDenomDecimal(chainConfig, coin.denom)
                     if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
                     
-                } else if (chainType! == ChainType.EMONEY_MAIN && coin.denom.starts(with: "e")) {
+                } else if (chainConfig?.chainType == .EMONEY_MAIN && coin.denom.starts(with: "e")) {
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
                     totalValue = totalValue.adding(userCurrencyValue(coin.denom, available, 6))
                     
-                } else if (chainType == ChainType.OSMOSIS_MAIN && coin.denom.contains("gamm/pool/")) {
+                } else if (chainConfig?.chainType == .OSMOSIS_MAIN && coin.denom.contains("gamm/pool/")) {
                     let amount = baseData.getAvailableAmount_gRPC(coin.denom)
                     let assetValue = userCurrencyValue(coin.denom, amount, 18)
                     totalValue = totalValue.adding(assetValue)
                     
-                }  else if (chainType == ChainType.COSMOS_MAIN && coin.denom.starts(with: "pool") && coin.denom.count >= 68) {
+                }  else if (chainConfig?.chainType == .COSMOS_MAIN && coin.denom.starts(with: "pool") && coin.denom.count >= 68) {
                     let amount = baseData.getAvailableAmount_gRPC(coin.denom)
                     let assetValue = userCurrencyValue(coin.denom, amount, 6)
                     totalValue = totalValue.adding(assetValue)
                     
-                } else if (chainType! == ChainType.KAVA_MAIN) {
-                    let baseDenom = WUtils.getKavaBaseDenom(coin.denom)
-                    let decimal = WUtils.getKavaCoinDecimal(coin.denom)
+                } else if (chainConfig?.chainType == .KAVA_MAIN) {
+                    let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
+                    let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
                     let amount = WUtils.getKavaTokenAll(coin.denom)
                     let assetValue = userCurrencyValue(baseDenom, amount, decimal)
                     totalValue = totalValue.adding(assetValue)
                     
-                } else if (chainType! == ChainType.INJECTIVE_MAIN && coin.denom.starts(with: "peggy0x")) {
+                } else if (chainConfig?.chainType == .INJECTIVE_MAIN && coin.denom.starts(with: "peggy0x")) {
+                    let chainConfig = ChainInjective.init(.INJECTIVE_MAIN)
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getInjectiveCoinDecimal(coin.denom)
+                    let decimal = getDenomDecimal(chainConfig, coin.denom)
                     if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
                     
-                } else if (chainType! == ChainType.NYX_MAIN && coin.denom == NYX_NYM_DENOM) {
+                } else if (chainConfig?.chainType == .NYX_MAIN && coin.denom == NYX_NYM_DENOM) {
                     let amount = baseData.getAvailableAmount_gRPC(coin.denom)
                     let assetValue = userCurrencyValue(coin.denom, amount, 6)
                     totalValue = totalValue.adding(assetValue)
@@ -564,28 +503,28 @@ public class WUtils {
                 totalValue = totalValue.adding(userCurrencyValue(cw20Token.denom, available, decimal))
             }
         }
-        else if (chainType! == ChainType.BINANCE_MAIN) {
+        else if (chainConfig?.chainType == .BINANCE_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allBnb = NSDecimalNumber.zero
                 let amount = WUtils.getAllBnbToken(coin.balance_denom)
-                if (coin.balance_denom == getMainDenom(chainType)) {
+                if (coin.balance_denom == getMainDenom(chainConfig)) {
                     allBnb = allBnb.adding(amount)
                 } else {
                     allBnb = allBnb.adding(getBnbConvertAmount(coin.balance_denom))
                 }
-                let assetValue = userCurrencyValue(getMainDenom(chainType), allBnb, 0)
+                let assetValue = userCurrencyValue(getMainDenom(chainConfig), allBnb, 0)
                 totalValue = totalValue.adding(assetValue)
             }
             
-        } else if (chainType! == ChainType.OKEX_MAIN) {
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allOKT = NSDecimalNumber.zero
-                if (coin.balance_denom == getMainDenom(chainType)) {
+                if (coin.balance_denom == getMainDenom(chainConfig)) {
                     allOKT = allOKT.adding(getAllExToken(coin.balance_denom))
                 } else {
                     allOKT = allOKT.adding(convertTokenToOkt(coin.balance_denom))
                 }
-                let assetValue = userCurrencyValue(getMainDenom(chainType), allOKT, 0)
+                let assetValue = userCurrencyValue(getMainDenom(chainConfig), allOKT, 0)
                 totalValue = totalValue.adding(assetValue)
             }
             
@@ -593,8 +532,8 @@ public class WUtils {
         return totalValue
     }
     
-    static func dpAllAssetValueUserCurrency(_ chainType: ChainType?, _ font:UIFont) -> NSMutableAttributedString {
-        let totalValue = allAssetToUserCurrency(chainType)
+    static func dpAllAssetValueUserCurrency(_ chainConfig: ChainConfig?, _ font:UIFont) -> NSMutableAttributedString {
+        let totalValue = allAssetToUserCurrency(chainConfig)
         let nf = getNumberFormatter(3)
         let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: totalValue)!
         return getDpAttributedString(formatted, 3, font)
@@ -723,7 +662,7 @@ public class WUtils {
     
     static func getDailyReward(_ font: UIFont, _ commission: NSDecimalNumber, _ delegated: NSDecimalNumber?, _ chain: ChainType) -> NSMutableAttributedString {
         guard let param = BaseData.instance.mParam, let bondingAmount = delegated else {
-            return displayAmount2(NSDecimalNumber.zero.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
+            return WDP.dpAmount(NSDecimalNumber.zero.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
         }
         var apr = NSDecimalNumber.zero
         if (param.getRealApr(chain) == NSDecimalNumber.zero) { apr = param.getApr(chain) }
@@ -731,12 +670,12 @@ public class WUtils {
         let calCommission = NSDecimalNumber.one.subtracting(commission)
         let aprCommission = apr.multiplying(by: calCommission, withBehavior: handler6)
         let dayReward = bondingAmount.multiplying(by: aprCommission).dividing(by: NSDecimalNumber.init(string: "365"), withBehavior: WUtils.handler0)
-        return displayAmount2(dayReward.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
+        return WDP.dpAmount(dayReward.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
     }
     
     static func getMonthlyReward(_ font: UIFont, _ commission: NSDecimalNumber, _ delegated: NSDecimalNumber?, _ chain: ChainType) -> NSMutableAttributedString {
         guard let param = BaseData.instance.mParam, let bondingAmount = delegated else {
-            return displayAmount2(NSDecimalNumber.zero.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
+            return WDP.dpAmount(NSDecimalNumber.zero.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
         }
         var apr = NSDecimalNumber.zero
         if (param.getRealApr(chain) == NSDecimalNumber.zero) { apr = param.getApr(chain) }
@@ -744,7 +683,7 @@ public class WUtils {
         let calCommission = NSDecimalNumber.one.subtracting(commission)
         let aprCommission = apr.multiplying(by: calCommission, withBehavior: handler6)
         let dayReward = bondingAmount.multiplying(by: aprCommission).dividing(by: NSDecimalNumber.init(string: "12"), withBehavior: WUtils.handler0)
-        return displayAmount2(dayReward.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
+        return WDP.dpAmount(dayReward.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
     }
     
     static func displayCommission(_ rate:String?, font:UIFont ) -> NSMutableAttributedString {
@@ -935,19 +874,6 @@ public class WUtils {
         return result
     }
     
-    static func getDelegableAmount(_ balances:Array<Balance>?, _ symbol:String) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if (balances != nil) {
-            balances!.forEach({ (balance) in
-                if (balance.balance_denom.caseInsensitiveCompare(symbol) == .orderedSame) {
-                    result = result.adding(WUtils.plainStringToDecimal(balance.balance_amount))
-                    result = result.adding(WUtils.plainStringToDecimal(balance.balance_locked))
-                }
-            })
-        }
-        return result
-    }
-    
     static func showBNBTxDp(_ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel, _ chainType:ChainType) {
         if (coin.denom == BNB_MAIN_DENOM) {
             WUtils.setDenomTitle(chainType, denomLabel)
@@ -955,493 +881,7 @@ public class WUtils {
             denomLabel.textColor = UIColor(named: "_font05")
             denomLabel.text = coin.denom.uppercased()
         }
-        amountLabel.attributedText = displayAmount2(coin.amount, amountLabel.font, 8, 8)
-    }
-    
-    static func showCoinDp(_ coin: Coin, _ denomLabel: UILabel?, _ amountLabel: UILabel, _ chainType: ChainType) {
-        return showCoinDp(coin.denom, coin.amount, denomLabel, amountLabel, chainType)
-    }
-    
-    static func showCoinDp(_ denom:String, _ amount:String, _ denomLabel:UILabel?, _ amountLabel:UILabel, _ chainType:ChainType) {
-        if (isGRPC(chainType) && denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-                if (ibcToken.auth == true) {
-                    denomLabel?.textColor = UIColor(named: "_font05")
-                    denomLabel?.text = ibcToken.display_denom?.uppercased()
-                    amountLabel.attributedText = displayAmount2(amount, amountLabel.font, ibcToken.decimal!, ibcToken.decimal!)
-                    return
-                    
-                } else {
-                    denomLabel?.textColor = UIColor(named: "_font05")
-                    denomLabel?.text = "Unknown"
-                    amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-                    return
-                }
-                
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = "Unknown"
-                amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-                return
-            }
-            
-        } else if (chainType == ChainType.COSMOS_MAIN || chainType == ChainType.COSMOS_TEST) {
-            if (denom == COSMOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-
-        } else if (chainType == ChainType.IRIS_MAIN) {
-            if (denom == IRIS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.BINANCE_MAIN) {
-            if (denom == BNB_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 8)
-            
-        } else if (chainType == ChainType.KAVA_MAIN) {
-            if (denom == KAVA_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (denom == KAVA_HARD_DENOM) {
-                denomLabel?.textColor = UIColor.init(named: "kava_hard")
-                denomLabel?.text = denom.uppercased()
-            } else if (denom == KAVA_USDX_DENOM) {
-                denomLabel?.textColor = UIColor.init(named: "kava_usdx")
-                denomLabel?.text = denom.uppercased()
-            } else if (denom == KAVA_SWAP_DENOM) {
-                denomLabel?.textColor = UIColor.init(named: "kava_swp")
-                denomLabel?.text = denom.uppercased()
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, getKavaCoinDecimal(denom), getKavaCoinDecimal(denom))
-            
-        } else if (chainType == ChainType.BAND_MAIN) {
-            if (denom == BAND_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.SECRET_MAIN) {
-            if (denom == SECRET_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.IOV_MAIN) {
-            if (denom == IOV_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.CERTIK_MAIN) {
-            if (denom == CERTIK_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.OKEX_MAIN) {
-            if (denom == OKEX_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 0, 18)
-            
-        } else if (chainType == ChainType.AKASH_MAIN) {
-            if (denom == AKASH_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.PERSIS_MAIN) {
-            if (denom == PERSIS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.SENTINEL_MAIN) {
-            if (denom == SENTINEL_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.FETCH_MAIN) {
-            if (denom == FETCH_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
-            
-        } else if (chainType == ChainType.CRYPTO_MAIN) {
-            if (denom == CRYPTO_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 8, 8)
-            
-        } else if (chainType == ChainType.SIF_MAIN) {
-            let dpDecimal = WUtils.getSifCoinDecimal(denom)
-            if (denom == SIF_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (denom.starts(with: "c")) {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
-                    denomLabel?.text = bridgeTokenInfo.origin_symbol
-                } else {
-                    denomLabel?.text = denom.substring(from: 1).uppercased()
-                }
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
-            
-        } else if (chainType == ChainType.KI_MAIN) {
-            if (denom == KI_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.OSMOSIS_MAIN) {
-            if (denom == OSMOSIS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-                amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            } else if (denom == OSMOSIS_ION_DENOM) {
-                denomLabel?.textColor = UIColor.init(named: "osmosis_ion")
-                denomLabel?.text = "ION"
-                amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            } else if (denom.starts(with: "gamm/pool/")) {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = "GAMM-" + String(denom.split(separator: "/").last!)
-                amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-                amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            }
-            
-        } else if (chainType == ChainType.IRIS_TEST) {
-            if (denom == IRIS_TEST_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.RIZON_MAIN) {
-            if (denom == RIZON_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.MEDI_MAIN) {
-            if (denom == MEDI_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.ALTHEA_MAIN || chainType == ChainType.ALTHEA_TEST) {
-            if (denom == ALTHEA_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.UMEE_MAIN) {
-            if (denom == UMEE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.AXELAR_MAIN) {
-            if (denom == AXELAR_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.EMONEY_MAIN) {
-            if (denom == EMONEY_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (denom.starts(with: "e")) {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.substring(from: 1).uppercased()
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.JUNO_MAIN) {
-            if (denom == JUNO_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.REGEN_MAIN) {
-            if (denom == REGNE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.BITCANA_MAIN) {
-            if (denom == BITCANA_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
-            let dpDecimal = WUtils.getGBrdigeCoinDecimal(denom)
-            if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (denom.starts(with: "gravity0x")) {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
-                    denomLabel?.text = bridgeTokenInfo.origin_symbol
-                } else {
-                    denomLabel?.text = denom.uppercased()
-                }
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
-            
-        } else if (chainType == ChainType.STARGAZE_MAIN) {
-            if (denom == STARGAZE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.COMDEX_MAIN) {
-            if (denom == COMDEX_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.INJECTIVE_MAIN) {
-            let dpDecimal = WUtils.getInjectiveCoinDecimal(denom)
-            if (denom == INJECTIVE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (denom.starts(with: "peggy0x")) {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom) {
-                    denomLabel?.text = bridgeTokenInfo.origin_symbol
-                } else {
-                    denomLabel?.text = denom.uppercased()
-                }
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, dpDecimal, dpDecimal)
-            
-        } else if (chainType == ChainType.BITSONG_MAIN) {
-            if (denom == BITSONG_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.DESMOS_MAIN) {
-            if (denom == DESMOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.LUM_MAIN) {
-            if (denom == LUM_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.CHIHUAHUA_MAIN) {
-            if (denom == CHIHUAHUA_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.KONSTELLATION_MAIN) {
-            if (denom == KONSTELLATION_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.EVMOS_MAIN) {
-            if (denom == EVMOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
-            
-        } else if (chainType == ChainType.PROVENANCE_MAIN) {
-            if (denom == PROVENANCE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 9, 9)
-            
-        } else if (chainType == ChainType.CUDOS_MAIN) {
-            if (denom == CUDOS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 18, 18)
-            
-        } else if (chainType == ChainType.CERBERUS_MAIN) {
-            if (denom == CERBERUS_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.OMNIFLIX_MAIN) {
-            if (denom == OMNIFLIX_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
-            if (denom == CRESCENT_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.MANTLE_MAIN) {
-            if (denom == MANTLE_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        } else if (chainType == ChainType.NYX_MAIN) {
-            if (denom == NYX_MAIN_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else if (denom == NYX_NYM_DENOM) {
-                denomLabel?.textColor = UIColor.init(named: "nyx_nym")
-                denomLabel?.text = "NYM"
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        }
-        
-        else if (chainType == ChainType.STATION_TEST) {
-            if (denom == STATION_TEST_DENOM) {
-                WUtils.setDenomTitle(chainType, denomLabel)
-            } else {
-                denomLabel?.textColor = UIColor(named: "_font05")
-                denomLabel?.text = denom.uppercased()
-            }
-            amountLabel.attributedText = displayAmount2(amount, amountLabel.font, 6, 6)
-            
-        }
-            
+        amountLabel.attributedText = WDP.dpAmount(coin.amount, amountLabel.font, 8, 8)
     }
     
     static func isBnbMarketToken(_ symbol:String?) ->Bool {
@@ -1483,60 +923,66 @@ public class WUtils {
         }
     }
     
-    static func getMainDenom(_ chain:ChainType?) -> String {
-        guard let chainConfig = ChainFactory.getChainConfig(chain) else {
-            return ""
-        }
-        return chainConfig.stakeDenom
+    static func getMainDenom(_ chainConfig: ChainConfig?) -> String {
+        return chainConfig?.stakeDenom ?? ""
     }
     
-    static func getGasDenom(_ chain:ChainType?) -> String {
-        if (chain == ChainType.NYX_MAIN) {
-            return NYX_NYM_DENOM
-        } else {
-            return getMainDenom(chain)
+    static func getDenomDecimal(_ chainConfig: ChainConfig?, _ denom: String?) -> Int16 {
+        if (chainConfig == nil || denom == nil) { return 6 }
+        if (denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
+                let decimal = ibcToken.decimal  {
+                return decimal
+            }
         }
-    }
-    
-    static func tokenDivideDecimal(_ chain: ChainType?, _ denom: String) -> Int16 {
-        let mainDenom = getMainDenom(chain)
-        if (isGRPC(chain)) {
-            if (denom == mainDenom) {
-                return mainDivideDecimal(chain)
-            }
-            if (denom.starts(with: "ibc/")) {
-                if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let decimal = ibcToken.decimal  {
-                    return decimal
-                }
-                return 6
-            }
-            if (chain == ChainType.OSMOSIS_MAIN) {
-                return getOsmosisCoinDecimal(denom)
-            } else if (chain == ChainType.SIF_MAIN) {
-                return getSifCoinDecimal(denom)
-            } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-                return getGBrdigeCoinDecimal(denom)
-            } else if (chain == ChainType.KAVA_MAIN) {
-                return getKavaCoinDecimal(denom)
-            } else if (chain == ChainType.INJECTIVE_MAIN) {
-                return getInjectiveCoinDecimal(denom)
-            }
-            print("CHECK DECIMAL")
+        if (chainConfig!.stakeDenom == denom) {
+            return mainDivideDecimal(chainConfig!.chainType)
+        }
+        if (chainConfig!.chainType == .OSMOSIS_MAIN) {
+            if (denom?.caseInsensitiveCompare(OSMOSIS_ION_DENOM) == .orderedSame) { return 6; }
+            else if (denom!.starts(with: "gamm/pool/")) { return 18; }
             return 6
             
-        } else {
-            //NO need without gRPC
-            return 6
+        } else if (chainConfig!.chainType == .SIF_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                return bridgeTokenInfo.decimal
+            }
+            return 18
+            
+        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                return bridgeTokenInfo.decimal
+            }
+            return 18
+            
+        } else if (chainConfig!.chainType == .KAVA_MAIN) {
+            if (denom?.caseInsensitiveCompare("btc") == .orderedSame) { return 8; }
+            else if (denom?.caseInsensitiveCompare("bnb") == .orderedSame) { return 8; }
+            else if (denom?.caseInsensitiveCompare("btcb") == .orderedSame || denom?.caseInsensitiveCompare("hbtc") == .orderedSame) { return 8; }
+            else if (denom?.caseInsensitiveCompare("busd") == .orderedSame) { return 8; }
+            else if (denom?.caseInsensitiveCompare("xrpb") == .orderedSame || denom?.caseInsensitiveCompare("xrbp") == .orderedSame) { return 8; }
+            return 6;
+            
+        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
+            if (denom?.starts(with: "share") == true) { return 18 }
+            else if (denom?.starts(with: "peggy0x") == true) {
+                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
+                    return bridgeTokenInfo.decimal
+                }
+            }
+            return 18
+            
         }
+        return mainDivideDecimal(chainConfig!.chainType)
     }
     
     static func mainDivideDecimal(_ chain:ChainType?) -> Int16 {
         if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
             chain == .EVMOS_MAIN || chain == .CUDOS_MAIN) {
             return 18
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
+        } else if (chain == .PROVENANCE_MAIN) {
             return 9
-        } else if (chain == ChainType.CRYPTO_MAIN) {
+        } else if (chain == .CRYPTO_MAIN) {
             return 8
         } else if (chain == .BINANCE_MAIN || chain == .OKEX_MAIN) {
             return 0
@@ -1562,15 +1008,6 @@ public class WUtils {
         if let chainConfig = ChainFactory.getChainConfig(chain) {
             label?.text = chainConfig.stakeSymbol
             label?.textColor = chainConfig.chainColor
-        }
-    }
-    
-    static func setGasDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
-        if (chain == ChainType.NYX_MAIN) {
-            label?.text = "NYM"
-            label?.textColor = UIColor.init(named: "nyx_nym")
-        } else {
-            return setDenomTitle(chain, label)
         }
     }
     
@@ -1614,919 +1051,109 @@ public class WUtils {
         return transition
     }
     
-
-    static func getEstimateGasAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if (chain == ChainType.COSMOS_MAIN || chain == ChainType.IRIS_MAIN || chain == ChainType.AKASH_MAIN ||
-            chain == ChainType.PERSIS_MAIN || chain == ChainType.CRYPTO_MAIN || chain == ChainType.EMONEY_MAIN ||
-            chain == ChainType.RIZON_MAIN || chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN ||
-            chain == ChainType.BITCANA_MAIN || chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
-            chain == ChainType.BITSONG_MAIN || chain == ChainType.DESMOS_MAIN || chain == ChainType.GRAVITY_BRIDGE_MAIN ||
-            chain == ChainType.LUM_MAIN || chain == ChainType.AXELAR_MAIN || chain == ChainType.KONSTELLATION_MAIN ||
-            chain == ChainType.UMEE_MAIN || chain == ChainType.PROVENANCE_MAIN || chain == ChainType.EVMOS_MAIN ||
-            chain == ChainType.CUDOS_MAIN || chain == ChainType.CERBERUS_MAIN || chain == ChainType.OMNIFLIX_MAIN ||
-            chain == ChainType.CRESCENT_MAIN || chain == ChainType.MANTLE_MAIN || chain == ChainType.NYX_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.IRIS_TEST || chain == ChainType.ALTHEA_TEST ||
-            chain == ChainType.CRESCENT_TEST || chain == ChainType.STATION_TEST) {
-            if (type == TASK_TYPE_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
-            } else if (type == TASK_TYPE_NFT_ISSUE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_NFT_SEND) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_TYPE_NFT_ISSUE_DENOM) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_TYPE_DESMOS_GEN_PROFILE || type == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_PROFILE))
-            } else if (type == TASK_TYPE_IBC_CW20_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
-            }
-            
-        } else if (chain == ChainType.OSMOSIS_MAIN ) {
-            if (type == TASK_TYPE_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_LOW))
-            } else if (type == TASK_TYPE_OSMOSIS_SWAP) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_SWAP))
-            } else if (type == TASK_TYPE_OSMOSIS_JOIN_POOL) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_JOIN_POOL))
-            } else if (type == TASK_TYPE_OSMOSIS_EXIT_POOL) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_EXIT_POOL))
-            } else if (type == TASK_TYPE_OSMOSIS_LOCK) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_LOCK))
-            } else if (type == TASK_TYPE_OSMOSIS_BEGIN_UNLCOK) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_OSMOS_BEGIN_UNBONDING))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_IBC_SEND))
-            }
+    static func getFeeInfos(_ chainConfig: ChainConfig?) -> Array<FeeInfo> {
+        var result = Array<FeeInfo>()
+        chainConfig?.getGasRates().forEach { gasInfo in
+            result.append(FeeInfo.init(gasInfo))
         }
-        
-        else if (chain == ChainType.KAVA_MAIN) {
-            if (type == TASK_TYPE_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_TYPE_KAVA_CDP_CREATE || type == TASK_TYPE_KAVA_CDP_DEPOSIT || type == TASK_TYPE_KAVA_CDP_WITHDRAW ||
-                        type == TASK_TYPE_KAVA_CDP_DRAWDEBT || type == TASK_TYPE_KAVA_CDP_REPAY) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CDP))
-            } else if (type == TASK_TYPE_KAVA_HARD_DEPOSIT || type == TASK_TYPE_KAVA_HARD_WITHDRAW || type == TASK_TYPE_KAVA_HARD_BORROW ||
-                        type == TASK_TYPE_KAVA_HARD_REPAY) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_HARD_POOL))
-            } else if (type == TASK_TYPE_KAVA_SWAP_TOKEN) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_TOKEN))
-            } else if (type == TASK_TYPE_KAVA_SWAP_DEPOSIT) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_DEPOSIT))
-            } else if (type == TASK_TYPE_KAVA_SWAP_WITHDRAW) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_SWAP_WITHDRAW))
-            } else if (type == TASK_TYPE_KAVA_INCENTIVE_ALL) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_CLAIM_INCENTIVE_ALL))
-            } else if (type == TASK_TYPE_HTLC_SWAP) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(KAVA_GAS_AMOUNT_BEP3))
-            }
-            
-        } else if (chain == ChainType.BAND_MAIN) {
-            if (type == TASK_TYPE_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = WUtils.getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(BAND_GAS_AMOUNT_IBC_SEND))
-            }
-            
-        } else if (chain == ChainType.IOV_MAIN) {
-            if (type == TASK_TYPE_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = WUtils.getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_TYPE_STARNAME_REGISTER_DOMAIN || type == TASK_TYPE_STARNAME_REGISTER_ACCOUNT) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REGISTER))
-            } else if (type == TASK_TYPE_STARNAME_DELETE_DOMAIN || type == TASK_TYPE_STARNAME_DELETE_ACCOUNT) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_DELETE))
-            } else if (type == TASK_TYPE_STARNAME_RENEW_DOMAIN || type == TASK_TYPE_STARNAME_RENEW_ACCOUNT) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_RENEW))
-            } else if (type == TASK_TYPE_STARNAME_REPLACE_RESOURCE) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_REPLACE))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(IOV_GAS_AMOUNT_IBC_SEND))
-            }
-            
-        } else if (chain == ChainType.OKEX_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(OK_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_OK_DEPOSIT || type == TASK_TYPE_OK_WITHDRAW) {
-                result = (NSDecimalNumber.init(string: OK_GAS_AMOUNT_STAKE_MUX).multiplying(by: NSDecimalNumber.init(value: valCnt))).adding(NSDecimalNumber.init(string: OK_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_OK_DIRECT_VOTE) {
-                result = (NSDecimalNumber.init(string: OK_GAS_AMOUNT_VOTE_MUX).multiplying(by: NSDecimalNumber.init(value: valCnt))).adding(NSDecimalNumber.init(string: OK_GAS_AMOUNT_VOTE))
-            }
-            
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            if (type == TASK_TYPE_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE || type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_IBC_SEND))
-            }
-            
-        } else if (chain == ChainType.SECRET_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE || type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(SECRET_GAS_AMOUNT_VOTE))
-            }
-            
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(SENTINEL_GAS_AMOUNT_IBC_SEND))
-            }
-            
-        } else if (chain == ChainType.FETCH_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(FETCH_GAS_AMOUNT_IBC_SEND))
-            }
-            
-        } else if (chain == ChainType.SIF_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_IBC_SEND))
-            } else if (type == TASK_TYPE_SIF_ADD_LP || type == TASK_TYPE_SIF_REMOVE_LP) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_LP))
-            } else if (type == TASK_TYPE_SIF_SWAP_CION) {
-                result = NSDecimalNumber.init(string: String(SIF_GAS_AMOUNT_SWAP))
-            }
-            
-        } else if (chain == ChainType.KI_MAIN) {
-            if (type == TASK_TYPE_TRANSFER) {
-               result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(KI_GAS_AMOUNT_VOTE))
-            }
-            
-        } else if (chain == ChainType.MEDI_MAIN) {
-            if (type == TASK_TYPE_TRANSFER || type == TASK_TYPE_IBC_TRANSFER) {
-               result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_SEND))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_STAKE))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_REINVEST))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_REWARD_ADDRESS_CHANGE))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_VOTE))
-            } else if (type == TASK_TYPE_IBC_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(MEDI_GAS_AMOUNT_IBC_SEND))
-            }
-            
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REDELEGATE))
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(CERTIK_GAS_AMOUNT_REINVEST))
+        if (result.count == 1) {
+            result[0].title = "Fixed"
+            result[0].msg = NSLocalizedString("fee_speed_title_fixed", comment: "")
+        } else if (result.count == 2) {
+            result[1].title = "Average"
+            result[1].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = "Zero"
+                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
             } else {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+                result[0].title = "Tiny"
+                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
             }
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            if (type == TASK_TYPE_TRANSFER) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_TYPE_DELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_UNDELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_REDELEGATE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_CLAIM_STAKE_REWARD) {
-                result = getGasAmountForKavaRewards()[valCnt - 1]
-            } else if (type == TASK_TYPE_REINVEST) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_HIGH))
-            } else if (type == TASK_TYPE_MODIFY_REWARD_ADDRESS) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
-            } else if (type == TASK_TYPE_VOTE) {
-                result = NSDecimalNumber.init(string: String(GAS_FEE_AMOUNT_MID))
+        } else if (result.count == 3) {
+            result[2].title = "Average"
+            result[2].msg = NSLocalizedString("fee_speed_title_average", comment: "")
+            result[1].title = "Low"
+            result[1].msg = NSLocalizedString("fee_speed_title_low", comment: "")
+            if (result[0].FeeDatas[0].gasRate == NSDecimalNumber.zero) {
+                result[0].title = "Zero"
+                result[0].msg = NSLocalizedString("fee_speed_title_zero", comment: "")
+            } else {
+                result[0].title = "Tiny"
+                result[0].msg = NSLocalizedString("fee_speed_title_tiny", comment: "")
             }
-            
         }
         return result
     }
     
-    static func getEstimateGasFeeAmount(_ chain:ChainType, _ type:String,  _ valCnt:Int) -> NSDecimalNumber {
-        if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
-            chain == ChainType.JUNO_MAIN || chain == ChainType.REGEN_MAIN || chain == ChainType.BITCANA_MAIN ||
-            chain == ChainType.STARGAZE_MAIN || chain == ChainType.COMDEX_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.ALTHEA_TEST || chain == ChainType.CRESCENT_TEST || chain == ChainType.STATION_TEST) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_IRIS)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_PERSIS)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CRYPTO)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_SENTINEL)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_OSMOSIS)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.BAND_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_BAND)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.IOV_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_IOV)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.SIF_MAIN) {
-            return NSDecimalNumber.init(string: "100000000000000000")
-            
-        } else if (chain == ChainType.MEDI_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MEDI)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CERTIK)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.EMONEY_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_EMONEY)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.FETCH_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_FETCH)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.KI_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_KI)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.SECRET_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_SECRET)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_INJECTIVE)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_BITSONG)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_DESMOS)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_GRAV)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.LUM_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_LUM)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CHIHUAHUA)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.KAVA_MAIN) {
-            if (type == TASK_TYPE_HTLC_SWAP) {
-                return NSDecimalNumber.init(string: "12500")
+    static func getSymbol(_ chainConfig: ChainConfig?, _ denom: String?) -> String {
+        if (chainConfig == nil || denom?.isEmpty == true) { return "Unknown" }
+        if (chainConfig!.stakeDenom == denom) {
+            return chainConfig!.stakeSymbol
+        }
+        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
+            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
+               ibcToken.auth == true {
+                return ibcToken.display_denom?.uppercased() ?? "Unknown"
             } else {
-                let gasRate = NSDecimalNumber.init(string: KAVA_GAS_RATE_AVERAGE)
-                let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-                return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+                return "Unknown"
+            }
+        }
+        if (chainConfig!.chainType == .KAVA_MAIN) {
+            if (denom == KAVA_HARD_DENOM) { return "HARD" }
+            else if (denom == KAVA_USDX_DENOM) { return "USDX" }
+            else if (denom == KAVA_SWAP_DENOM) { return "SWP" }
+            else if (denom == TOKEN_HTLC_KAVA_BNB) { return "BNB" }
+            else if (denom == TOKEN_HTLC_KAVA_XRPB) { return "XRPB" }
+            else if (denom == TOKEN_HTLC_KAVA_BUSD) { return "BUSD" }
+            else if (denom == TOKEN_HTLC_KAVA_BTCB) { return "BTCB" }
+            else if (denom == "btch") { return "BTCH" }
+            
+        } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
+            if (denom == OSMOSIS_ION_DENOM) { return "ION" }
+            else if (denom!.starts(with: "gamm/pool/")) {
+                return "GAMM-" + String(denom!.split(separator: "/").last!)
             }
             
-        } else if (chain == ChainType.AXELAR_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_AXELAR)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+        } else if (chainConfig!.chainType == .SIF_MAIN) {
+            if (denom!.starts(with: "c")) { return denom!.substring(from: 1).uppercased() }
             
-        } else if (chain == ChainType.JUNO_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_JUNO)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+        } else if (chainConfig!.chainType == .CRESCENT_MAIN) {
+            if (denom == CRESCENT_BCRE_DENOM) { return "BCRE" }
+            else if (denom!.starts(with: "pool")) { return denom!.uppercased() }
             
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_KONSTELLATION)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+        } else if (chainConfig!.chainType == .EMONEY_MAIN) {
+            if (denom == EMONEY_EUR_DENOM) { return denom!.uppercased() }
+            else if (denom == EMONEY_CHF_DENOM) { return denom!.uppercased() }
+            else if (denom == EMONEY_DKK_DENOM) { return denom!.uppercased() }
+            else if (denom == EMONEY_NOK_DENOM) { return denom!.uppercased() }
+            else if (denom == EMONEY_SEK_DENOM) { return denom!.uppercased() }
             
-        } else if (chain == ChainType.UMEE_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_UMEE)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                return bridgeTokenInfo.origin_symbol ?? "Unknown"
+            }
             
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_PROVENANCE)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
+            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
+                return bridgeTokenInfo.origin_symbol ?? "Unknown"
+            } else if (denom!.starts(with: "share")) { return denom!.uppercased() }
             
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_EVMOS)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.CUDOS_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CUDOS)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.CERBERUS_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CERBERUS)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_OMNIFLIX)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.CRESCENT_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CRESCENT)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.MANTLE_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MANTLE)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
-            
-        } else if (chain == ChainType.NYX_MAIN) {
-            let gasRate = NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_NYX)
-            let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-            return gasRate.multiplying(by: gasAmount, withBehavior: handler0)
+        } else if (chainConfig!.chainType == .NYX_MAIN) {
+            if (denom == NYX_NYM_DENOM) { return "NYM" }
             
         }
         
-        else if (chain == ChainType.OKEX_MAIN) {
-           let gasRate = NSDecimalNumber.init(string: OK_GAS_RATE_AVERAGE)
-           let gasAmount = getEstimateGasAmount(chain, type, valCnt)
-           return gasRate.multiplying(by: gasAmount, withBehavior: handler18)
-           
-       }
-        return NSDecimalNumber.zero
-    }
-    
-    static func getGasRate(_ chain:ChainType, _ position: Int) -> NSDecimalNumber {
-        if (chain == ChainType.COSMOS_MAIN || chain == ChainType.AKASH_MAIN || chain == ChainType.RIZON_MAIN ||
-            chain == ChainType.REGEN_MAIN ||
-            chain == ChainType.COSMOS_TEST || chain == ChainType.ALTHEA_TEST || chain == ChainType.CRESCENT_TEST || chain == ChainType.STATION_TEST) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE)
+        else if (chainConfig!.chainType == .BINANCE_MAIN) {
+            if let bnbTokenInfo = getBnbToken(denom!) {
+                return bnbTokenInfo.original_symbol.uppercased()
             }
             
-        } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_IRIS)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_IRIS)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_IRIS)
-            }
-            
-        } else if (chain == ChainType.PERSIS_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_PERSIS)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_PERSIS)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_PERSIS)
-            }
-            
-        } else if (chain == ChainType.CRYPTO_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CRYPTO)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CRYPTO)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CRYPTO)
-            }
-            
-        } else if (chain == ChainType.SENTINEL_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_SENTINEL)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_SENTINEL)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_SENTINEL)
-            }
-            
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_OSMOSIS)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_OSMOSIS)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_OSMOSIS)
-            }
-            
-        } else if (chain == ChainType.BAND_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_BAND)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_BAND)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_BAND)
-            }
-            
-        } else if (chain == ChainType.IOV_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_IOV)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_IOV)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_IOV)
-            }
-            
-        } else if (chain == ChainType.MEDI_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_MEDI)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_MEDI)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MEDI)
-            }
-            
-        } else if (chain == ChainType.CERTIK_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CERTIK)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CERTIK)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CERTIK)
-            }
-            
-        } else if (chain == ChainType.EMONEY_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_EMONEY)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_EMONEY)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_EMONEY)
-            }
-            
-        } else if (chain == ChainType.FETCH_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_FETCH)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_FETCH)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_FETCH)
-            }
-            
-        } else if (chain == ChainType.BITCANA_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_BITCANNA)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_BITCANNA)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_BITCANNA)
-            }
-            
-        } else if (chain == ChainType.STARGAZE_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_STARGAZER)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_STARGAZER)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_STARGAZER)
-            }
-            
-        } else if (chain == ChainType.KI_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_KI)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_KI)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_KI)
-            }
-            
-        } else if (chain == ChainType.COMDEX_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_COMDEX)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_COMDEX)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_COMDEX)
-            }
-            
-        } else if (chain == ChainType.SECRET_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_SECRET)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_SECRET)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_SECRET)
-            }
-            
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_INJECTIVE)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_INJECTIVE)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_INJECTIVE)
-            }
-            
-        } else if (chain == ChainType.BITSONG_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_BITSONG)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_BITSONG)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_BITSONG)
-            }
-            
-        } else if (chain == ChainType.DESMOS_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_DESMOS)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_DESMOS)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_DESMOS)
-            }
-            
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_GRAV)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_GRAV)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_GRAV)
-            }
-            
-        } else if (chain == ChainType.LUM_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_LUM)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_LUM)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_LUM)
-            }
-            
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CHIHUAHUA)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CHIHUAHUA)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CHIHUAHUA)
-            }
-            
-        } else if (chain == ChainType.KAVA_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: KAVA_GAS_RATE_TINY)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: KAVA_GAS_RATE_LOW)
-            } else {
-                return NSDecimalNumber.init(string: KAVA_GAS_RATE_AVERAGE)
-            }
-            
-        } else if (chain == ChainType.AXELAR_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_AXELAR)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_AXELAR)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_AXELAR)
-            }
-            
-        } else if (chain == ChainType.JUNO_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_JUNO)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_JUNO)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_JUNO)
-            }
-            
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_KONSTELLATION)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_KONSTELLATION)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_KONSTELLATION)
-            }
-            
-        } else if (chain == ChainType.UMEE_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_UMEE)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_UMEE)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_UMEE)
-            }
-        
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_PROVENANCE)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_PROVENANCE)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_PROVENANCE)
-            }
-        
-        } else if (chain == ChainType.EVMOS_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_EVMOS)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_EVMOS)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_EVMOS)
-            }
-        
-        } else if (chain == ChainType.CUDOS_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CUDOS)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CUDOS)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CUDOS)
-            }
-            
-        } else if (chain == ChainType.CERBERUS_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CERBERUS)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CERBERUS)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CERBERUS)
-            }
-            
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_OMNIFLIX)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_OMNIFLIX)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_OMNIFLIX)
-            }
-            
-        } else if (chain == ChainType.CRESCENT_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_CRESCENT)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_CRESCENT)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_CRESCENT)
-            }
-            
-        } else if (chain == ChainType.MANTLE_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_MANTLE)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_MANTLE)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_MANTLE)
-            }
-            
-        } else if (chain == ChainType.NYX_MAIN) {
-            if (position == 0) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_TINY_NYX)
-            } else if (position == 1) {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_LOW_NYX)
-            } else {
-                return NSDecimalNumber.init(string: GAS_FEE_RATE_AVERAGE_NYX)
+        } else if (chainConfig!.chainType == .OKEX_MAIN) {
+            if let okTokenInfo = getOkToken(denom!) {
+                return okTokenInfo.original_symbol!.uppercased()
             }
         }
-        
-        else if (chain == ChainType.OKEX_MAIN) {
-            return NSDecimalNumber.init(string: OK_GAS_RATE_AVERAGE)
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    static func getGasAmountForRewards() -> Array<NSDecimalNumber> {
-        var gasAmounts = Array<NSDecimalNumber>()
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_1))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_2))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_3))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_4))
-        
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_5))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_6))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_7))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_8))
-        
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_9))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_10))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_11))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_12))
-        
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_13))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_14))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_15))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_REWARD_GAS_16))
-        return gasAmounts
-    }
-    
-    static func getGasAmountForKavaRewards() -> Array<NSDecimalNumber> {
-        var gasAmounts = Array<NSDecimalNumber>()
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_1))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_2))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_3))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_4))
-        
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_5))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_6))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_7))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_8))
-        
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_9))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_10))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_11))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_12))
-        
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_13))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_14))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_15))
-        gasAmounts.append(NSDecimalNumber.init(string: FEE_KAVA_REWARD_GAS_16))
-        return gasAmounts
+        return "Unknown"
     }
     
     static func getDPRawDollor(_ price:String, _ scale:Int, _ font:UIFont) -> NSMutableAttributedString {
@@ -2554,165 +1181,116 @@ public class WUtils {
         return attributedString1
     }
     
-    static func dpChainInfo(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
-        if (chain == ChainType.COSMOS_MAIN) {
-            label.text = NSLocalizedString("chain_title_cosmos", comment: "")
-            img?.image = UIImage(named: "chainCosmos")
-        } else if (chain == ChainType.IRIS_MAIN) {
-            label.text = NSLocalizedString("chain_title_iris", comment: "")
-            img?.image = UIImage(named: "chainIris")
-        } else if (chain == ChainType.BINANCE_MAIN) {
-            label.text = NSLocalizedString("chain_title_bnb", comment: "")
-            img?.image = UIImage(named: "chainBinance")
-        } else if (chain == ChainType.KAVA_MAIN) {
-            label.text = NSLocalizedString("chain_title_kava", comment: "")
-           img?.image = UIImage(named: "chainKava")
-        } else if (chain == ChainType.IOV_MAIN) {
-            label.text = NSLocalizedString("chain_title_iov", comment: "")
-            img?.image = UIImage(named: "chainStarname")
-        } else if (chain == ChainType.BAND_MAIN) {
-            label.text = NSLocalizedString("chain_title_band", comment: "")
-            img?.image = UIImage(named: "chainBand")
-        }
-    }
-    
-    static func dpChainName(_ chain: ChainType) -> String {
-        if (chain == ChainType.COSMOS_MAIN) {
-            return NSLocalizedString("chain_title_cosmos", comment: "")
-        } else if (chain == ChainType.IRIS_MAIN) {
-            return NSLocalizedString("chain_title_iris", comment: "")
-        } else if (chain == ChainType.BINANCE_MAIN) {
-            return NSLocalizedString("chain_title_bnb", comment: "")
-        } else if (chain == ChainType.KAVA_MAIN) {
-            return NSLocalizedString("chain_title_kava", comment: "")
-        } else if (chain == ChainType.IOV_MAIN) {
-            return NSLocalizedString("chain_title_iov", comment: "")
-        } else if (chain == ChainType.BAND_MAIN) {
-            return NSLocalizedString("chain_title_band", comment: "")
-        }
-        return ""
-    }
-    
-    static func onDpSwapChain(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
-        if (chain == ChainType.BINANCE_MAIN) {
-            label.text = "BINANCE"
-            img?.image = UIImage(named: "chainBinance")
-        } else if (chain == ChainType.KAVA_MAIN) {
-            label.text = "KAVA"
-           img?.image = UIImage(named: "chainKava")
-        }
-    }
-    
     static func getRealBlockTime(_ chain: ChainType?) -> NSDecimalNumber {
-        if (chain == ChainType.COSMOS_MAIN || chain == ChainType.COSMOS_TEST) {
+        if (chain == .COSMOS_MAIN || chain == .COSMOS_TEST) {
             return BLOCK_TIME_COSMOS
             
-        } else if (chain == ChainType.IRIS_MAIN || chain == ChainType.IRIS_TEST) {
+        } else if (chain == .IRIS_MAIN || chain == .IRIS_TEST) {
             return BLOCK_TIME_IRIS
             
-        } else if (chain == ChainType.IOV_MAIN) {
+        } else if (chain == .IOV_MAIN) {
             return BLOCK_TIME_IOV
             
-        } else if (chain == ChainType.KAVA_MAIN) {
+        } else if (chain == .KAVA_MAIN) {
             return BLOCK_TIME_KAVA
             
-        } else if (chain == ChainType.BAND_MAIN) {
+        } else if (chain == .BAND_MAIN) {
             return BLOCK_TIME_BAND
             
-        } else if (chain == ChainType.CERTIK_MAIN) {
+        } else if (chain == .CERTIK_MAIN) {
             return BLOCK_TIME_CERTIK
             
-        } else if (chain == ChainType.SECRET_MAIN) {
+        } else if (chain == .SECRET_MAIN) {
             return BLOCK_TIME_SECRET
             
-        } else if (chain == ChainType.AKASH_MAIN) {
+        } else if (chain == .AKASH_MAIN) {
             return BLOCK_TIME_AKASH
             
-        } else if (chain == ChainType.SENTINEL_MAIN) {
+        } else if (chain == .SENTINEL_MAIN) {
             return BLOCK_TIME_SENTINEL
             
-        } else if (chain == ChainType.PERSIS_MAIN) {
+        } else if (chain == .PERSIS_MAIN) {
             return BLOCK_TIME_PERSISTENCE
             
-        } else if (chain == ChainType.FETCH_MAIN) {
+        } else if (chain == .FETCH_MAIN) {
             return BLOCK_TIME_FETCH
             
-        } else if (chain == ChainType.CRYPTO_MAIN) {
+        } else if (chain == .CRYPTO_MAIN) {
             return BLOCK_TIME_CRYPTO
             
-        } else if (chain == ChainType.SIF_MAIN) {
+        } else if (chain == .SIF_MAIN) {
             return BLOCK_TIME_SIF
             
-        } else if (chain == ChainType.KI_MAIN) {
+        } else if (chain == .KI_MAIN) {
             return BLOCK_TIME_KI
             
-        } else if (chain == ChainType.MEDI_MAIN) {
+        } else if (chain == .MEDI_MAIN) {
             return BLOCK_TIME_MEDI
             
-        } else if (chain == ChainType.OSMOSIS_MAIN) {
+        } else if (chain == .OSMOSIS_MAIN) {
             return BLOCK_TIME_OSMOSIS
             
-        } else if (chain == ChainType.EMONEY_MAIN) {
+        } else if (chain == .EMONEY_MAIN) {
             return BLOCK_TIME_EMONEY
             
-        } else if (chain == ChainType.EMONEY_MAIN) {
+        } else if (chain == .EMONEY_MAIN) {
             return BLOCK_TIME_EMONEY
             
-        } else if (chain == ChainType.RIZON_MAIN) {
+        } else if (chain == .RIZON_MAIN) {
             return BLOCK_TIME_RIZON
             
-        } else if (chain == ChainType.JUNO_MAIN) {
+        } else if (chain == .JUNO_MAIN) {
             return BLOCK_TIME_JUNO
             
-        } else if (chain == ChainType.BITCANA_MAIN) {
+        } else if (chain == .BITCANA_MAIN) {
             return BLOCK_TIME_BITCANNA
             
-        } else if (chain == ChainType.REGEN_MAIN) {
+        } else if (chain == .REGEN_MAIN) {
             return BLOCK_TIME_REGEN
             
-        } else if (chain == ChainType.STARGAZE_MAIN) {
+        } else if (chain == .STARGAZE_MAIN) {
             return BLOCK_TIME_STARGAZE
             
-        } else if (chain == ChainType.INJECTIVE_MAIN) {
+        } else if (chain == .INJECTIVE_MAIN) {
             return BLOCK_TIME_INJECTIVE
             
-        } else if (chain == ChainType.BITSONG_MAIN) {
+        } else if (chain == .BITSONG_MAIN) {
             return BLOCK_TIME_BITSONG
             
-        } else if (chain == ChainType.DESMOS_MAIN) {
+        } else if (chain == .DESMOS_MAIN) {
             return BLOCK_TIME_DESMOS
             
-        } else if (chain == ChainType.COMDEX_MAIN) {
+        } else if (chain == .COMDEX_MAIN) {
             return BLOCK_TIME_COMDEX
             
-        } else if (chain == ChainType.GRAVITY_BRIDGE_MAIN) {
+        } else if (chain == .GRAVITY_BRIDGE_MAIN) {
             return BLOCK_TIME_GRAV
             
-        } else if (chain == ChainType.LUM_MAIN) {
+        } else if (chain == .LUM_MAIN) {
             return BLOCK_TIME_LUM
             
-        } else if (chain == ChainType.CHIHUAHUA_MAIN) {
+        } else if (chain == .CHIHUAHUA_MAIN) {
             return BLOCK_TIME_CHIHUAHUA
             
-        } else if (chain == ChainType.AXELAR_MAIN) {
+        } else if (chain == .AXELAR_MAIN) {
             return BLOCK_TIME_AXELAR
             
-        } else if (chain == ChainType.KONSTELLATION_MAIN) {
+        } else if (chain == .KONSTELLATION_MAIN) {
             return BLOCK_TIME_KONSTEALLTION
             
-        } else if (chain == ChainType.UMEE_MAIN) {
+        } else if (chain == .UMEE_MAIN) {
             return BLOCK_TIME_UMEE
             
-        } else if (chain == ChainType.EVMOS_MAIN) {
+        } else if (chain == .EVMOS_MAIN) {
             return BLOCK_TIME_EVMOS
             
-        } else if (chain == ChainType.PROVENANCE_MAIN) {
+        } else if (chain == .PROVENANCE_MAIN) {
             return BLOCK_TIME_PROVENANCE
             
-        } else if (chain == ChainType.CERBERUS_MAIN) {
+        } else if (chain == .CERBERUS_MAIN) {
             return BLOCK_TIME_CERBERUS
             
-        } else if (chain == ChainType.OMNIFLIX_MAIN) {
+        } else if (chain == .OMNIFLIX_MAIN) {
             return BLOCK_TIME_OMNIFLIX
             
         }
@@ -2764,208 +1342,40 @@ public class WUtils {
     }
     
     static func getChainTypeByChainId(_ chainId: String?) -> ChainType? {
-        if (chainId?.contains("cosmoshub-") == true) {
-            return ChainType.COSMOS_MAIN
-        } else if (chainId?.contains("irishub-") == true) {
-            return ChainType.IRIS_MAIN
-        } else if (chainId?.contains("iov-") == true) {
-            return ChainType.IOV_MAIN
-        } else if (chainId?.contains("akashnet-") == true) {
-            return ChainType.AKASH_MAIN
-        } else if (chainId?.contains("sentinelhub-") == true) {
-            return ChainType.SENTINEL_MAIN
-        } else if (chainId?.contains("core-") == true) {
-            return ChainType.PERSIS_MAIN
-        } else if (chainId?.contains("sifchain-") == true) {
-            return ChainType.SIF_MAIN
-        } else if (chainId?.contains("osmosis-") == true) {
-            return ChainType.OSMOSIS_MAIN
-        } else if (chainId?.contains("crypto-org-") == true) {
-            return ChainType.CRYPTO_MAIN
-        } else if (chainId?.contains("laozi-mainnet") == true) {
-            return ChainType.BAND_MAIN
-        } else if (chainId?.contains("shentu-") == true) {
-            return ChainType.CERTIK_MAIN
-        } else if (chainId?.contains("fetchhub-") == true) {
-            return ChainType.FETCH_MAIN
-        } else if (chainId?.contains("panacea-") == true) {
-            return ChainType.MEDI_MAIN
-        } else if (chainId?.contains("emoney-") == true) {
-            return ChainType.EMONEY_MAIN
-        } else if (chainId?.contains("titan-") == true) {
-            return ChainType.RIZON_MAIN
-        } else if (chainId?.contains("juno-") == true) {
-            return ChainType.JUNO_MAIN
-        } else if (chainId?.contains("regen-") == true) {
-            return ChainType.REGEN_MAIN
-        } else if (chainId?.contains("bitcanna-") == true) {
-            return ChainType.BITCANA_MAIN
-        } else if (chainId?.contains("althea-") == true) {
-            return ChainType.ALTHEA_MAIN
-        } else if (chainId?.contains("stargaze-") == true) {
-            return ChainType.STARGAZE_MAIN
-        } else if (chainId?.contains("comdex-") == true) {
-            return ChainType.COMDEX_MAIN
-        } else if (chainId?.contains("injective-") == true) {
-            return ChainType.INJECTIVE_MAIN
-        } else if (chainId?.contains("kichain-") == true) {
-            return ChainType.KI_MAIN
-        } else if (chainId?.contains("secret-") == true) {
-            return ChainType.SECRET_MAIN
-        } else if (chainId?.contains("bitsong-") == true) {
-            return ChainType.BITSONG_MAIN
-        } else if (chainId?.contains("desmos-") == true) {
-            return ChainType.DESMOS_MAIN
-        } else if (chainId?.contains("gravity-bridge-") == true) {
-            return ChainType.GRAVITY_BRIDGE_MAIN
-        } else if (chainId?.contains("lum-") == true) {
-            return ChainType.LUM_MAIN
-        } else if (chainId?.contains("chihuahua-") == true) {
-            return ChainType.CHIHUAHUA_MAIN
-        } else if (chainId?.contains("kava_") == true) {
-            return ChainType.KAVA_MAIN
-        } else if (chainId?.contains("axelar-") == true) {
-            return ChainType.AXELAR_MAIN
-        } else if (chainId?.contains("darchub") == true) {
-            return ChainType.KONSTELLATION_MAIN
-        } else if (chainId?.contains("umee-") == true) {
-            return ChainType.UMEE_MAIN
-        } else if (chainId?.contains("evmos_") == true) {
-            return ChainType.EVMOS_MAIN
-        } else if (chainId?.contains("pio-mainnet-") == true) {
-            return ChainType.PROVENANCE_MAIN
-        } else if (chainId?.contains("cudos-") == true) {
-            return ChainType.CUDOS_MAIN
-        } else if (chainId?.contains("cerberus-") == true) {
-            return ChainType.CERBERUS_MAIN
-        } else if (chainId?.contains("omniflixhub-") == true) {
-            return ChainType.OMNIFLIX_MAIN
-        } else if (chainId?.contains("crescent-") == true) {
-            return ChainType.CRESCENT_MAIN
-        } else if (chainId?.contains("mantle-") == true) {
-            return ChainType.MANTLE_MAIN
-        } else if (chainId?.contains("nyx") == true) {
-            return ChainType.NYX_MAIN
+        let allConfigs = ChainFactory.SUPPRT_CONFIG()
+        for i in 0..<allConfigs.count {
+            if (chainId?.contains(allConfigs[i].chainIdPrefix) == true) {
+                return allConfigs[i].chainType
+            }
         }
-        
-        else if (chainId?.contains("mooncat-") == true) {
-            return ChainType.CRESCENT_TEST
-        } else if (chainId?.contains("station") == true) {
-            return ChainType.STATION_TEST
-        }
-        
         return nil
     }
     
-    static func isValidChainAddress(_ chain: ChainType?, _ address: String?) -> Bool {
+    static func isValidChainAddress(_ chainConfig: ChainConfig?, _ address: String?) -> Bool {
+        if (chainConfig == nil) { return false }
         if (address?.starts(with: "0x") == true) {
-            if (!WKey.isValidEthAddress(address!)) { return false }
-            if (chain == ChainType.OKEX_MAIN) { return true }
+            if (WKey.isValidEthAddress(address!) && chainConfig?.chainType == .OKEX_MAIN) { return true }
             return false
         }
-        
         if (!WKey.isValidateBech32(address ?? "")) { return false }
-        if (address?.starts(with: "cosmos1") == true && chain == ChainType.COSMOS_MAIN) { return true }
-        else if (address?.starts(with: "iaa1") == true && chain == ChainType.IRIS_MAIN) { return true }
-        else if (address?.starts(with: "bnb1") == true && chain == ChainType.BINANCE_MAIN) { return true }
-        else if (address?.starts(with: "kava1") == true && chain == ChainType.KAVA_MAIN) { return true }
-        else if (address?.starts(with: "star1") == true && chain == ChainType.IOV_MAIN) { return true }
-        else if (address?.starts(with: "band1") == true && chain == ChainType.BAND_MAIN) { return true }
-        else if (address?.starts(with: "secret1") == true && chain == ChainType.SECRET_MAIN) { return true }
-        else if (address?.starts(with: "certik1") == true && chain == ChainType.CERTIK_MAIN) { return true }
-        else if (address?.starts(with: "akash1") == true && chain == ChainType.AKASH_MAIN) { return true }
-        else if (address?.starts(with: "persistence1") == true && chain == ChainType.PERSIS_MAIN) { return true }
-        else if (address?.starts(with: "sent1") == true && chain == ChainType.SENTINEL_MAIN) { return true }
-        else if (address?.starts(with: "fetch1") == true && chain == ChainType.FETCH_MAIN) { return true }
-        else if (address?.starts(with: "cro1") == true && chain == ChainType.CRYPTO_MAIN) { return true }
-        else if (address?.starts(with: "sif1") == true && chain == ChainType.SIF_MAIN) { return true }
-        else if (address?.starts(with: "ki1") == true && chain == ChainType.KI_MAIN) { return true }
-        else if (address?.starts(with: "panacea1") == true && chain == ChainType.MEDI_MAIN) { return true }
-        else if (address?.starts(with: "osmo1") == true && chain == ChainType.OSMOSIS_MAIN) { return true }
-        else if (address?.starts(with: "emoney1") == true && chain == ChainType.EMONEY_MAIN) { return true }
-        else if (address?.starts(with: "rizon1") == true && chain == ChainType.RIZON_MAIN) { return true }
-        else if (address?.starts(with: "juno1") == true && chain == ChainType.JUNO_MAIN) { return true }
-        else if (address?.starts(with: "regen1") == true && chain == ChainType.REGEN_MAIN) { return true }
-        else if (address?.starts(with: "bcna1") == true && chain == ChainType.BITCANA_MAIN) { return true }
-        else if (address?.starts(with: "althea1") == true && chain == ChainType.ALTHEA_MAIN) { return true }
-        else if (address?.starts(with: "stars1") == true && chain == ChainType.STARGAZE_MAIN) { return true }
-        else if (address?.starts(with: "comdex1") == true && chain == ChainType.COMDEX_MAIN)  { return true }
-        else if (address?.starts(with: "inj1") == true && chain == ChainType.INJECTIVE_MAIN) { return true }
-        else if (address?.starts(with: "bitsong1") == true && chain == ChainType.BITSONG_MAIN) { return true }
-        else if (address?.starts(with: "desmos1") == true && chain == ChainType.DESMOS_MAIN) { return true }
-        else if (address?.starts(with: "gravity1") == true && chain == ChainType.GRAVITY_BRIDGE_MAIN) { return true }
-        else if (address?.starts(with: "lum1") == true && chain == ChainType.LUM_MAIN) { return true }
-        else if (address?.starts(with: "chihuahua1") == true && chain == ChainType.CHIHUAHUA_MAIN) { return true }
-        else if (address?.starts(with: "axelar1") == true && chain == ChainType.AXELAR_MAIN) { return true }
-        else if (address?.starts(with: "darc1") == true && chain == ChainType.KONSTELLATION_MAIN) { return true }
-        else if (address?.starts(with: "umee1") == true && chain == ChainType.UMEE_MAIN) { return true }
-        else if (address?.starts(with: "evmos1") == true && chain == ChainType.EVMOS_MAIN) { return true }
-        else if (address?.starts(with: "pb1") == true && chain == ChainType.PROVENANCE_MAIN) { return true }
-        else if (address?.starts(with: "cudos1") == true && chain == ChainType.CUDOS_MAIN) { return true }
-        else if (address?.starts(with: "cerberus1") == true && chain == ChainType.CERBERUS_MAIN) { return true }
-        else if (address?.starts(with: "omniflix1") == true && chain == ChainType.OMNIFLIX_MAIN) { return true }
-        else if (address?.starts(with: "cre1") == true && chain == ChainType.CRESCENT_MAIN) { return true }
-        else if (address?.starts(with: "mantle") == true && chain == ChainType.MANTLE_MAIN) { return true }
-        else if (address?.starts(with: "station1") == true && chain == ChainType.STATION_TEST) { return true }
-        else if (address?.starts(with: "n1") == true && chain == ChainType.NYX_MAIN) { return true }
+        let addressPrfix = chainConfig!.addressPrefix + "1"
+        if (address?.starts(with: addressPrfix) == true) { return true }
         return false
     }
     
-    static func getChainsFromAddress(_ address: String?) -> Array<ChainType>? {
+    static func getChainsFromAddress(_ address: String?) -> ChainType? {
         if (address?.starts(with: "0x") == true) {
-            if (WKey.isValidEthAddress(address!)) {
-                return [ChainType.OKEX_MAIN]
-            } else {
-                return nil
+            if (WKey.isValidEthAddress(address!)) { return .OKEX_MAIN }
+            return nil
+        }
+        if (!WKey.isValidateBech32(address ?? "")) { return nil }
+        let allConfigs = ChainFactory.SUPPRT_CONFIG()
+        for i in 0..<allConfigs.count {
+            let addressPrfix = allConfigs[i].addressPrefix + "1"
+            if (address?.starts(with: addressPrfix) == true) {
+                return allConfigs[i].chainType
             }
         }
-        
-        if (!WKey.isValidateBech32(address ?? "")) { return nil }
-        if (address?.starts(with: "cosmos1") == true) { return [ChainType.COSMOS_MAIN, ChainType.COSMOS_TEST] }
-        else if (address?.starts(with: "iaa1") == true) { return [ChainType.IRIS_MAIN, ChainType.IRIS_TEST] }
-        else if (address?.starts(with: "bnb1") == true) { return [ChainType.BINANCE_MAIN] }
-        else if (address?.starts(with: "kava1") == true) { return [ChainType.KAVA_MAIN] }
-        else if (address?.starts(with: "star1") == true) { return [ChainType.IOV_MAIN] }
-        else if (address?.starts(with: "band1") == true) { return [ChainType.BAND_MAIN] }
-        else if (address?.starts(with: "secret1") == true) { return [ChainType.SECRET_MAIN] }
-        else if (address?.starts(with: "certik1") == true) { return [ChainType.CERTIK_MAIN] }
-        else if (address?.starts(with: "akash1") == true) { return [ChainType.AKASH_MAIN] }
-        else if (address?.starts(with: "persistence1") == true) { return [ChainType.PERSIS_MAIN] }
-        else if (address?.starts(with: "sent1") == true) { return [ChainType.SENTINEL_MAIN] }
-        else if (address?.starts(with: "fetch1") == true) { return [ChainType.FETCH_MAIN] }
-        else if (address?.starts(with: "cro1") == true) { return [ChainType.CRYPTO_MAIN] }
-        else if (address?.starts(with: "sif1") == true) { return [ChainType.SIF_MAIN] }
-        else if (address?.starts(with: "ki1") == true) { return [ChainType.KI_MAIN] }
-        else if (address?.starts(with: "panacea1") == true) { return [ChainType.MEDI_MAIN] }
-        else if (address?.starts(with: "osmo1") == true) { return [ChainType.OSMOSIS_MAIN] }
-        else if (address?.starts(with: "emoney1") == true) { return [ChainType.EMONEY_MAIN] }
-        else if (address?.starts(with: "rizon1") == true) { return [ChainType.RIZON_MAIN] }
-        else if (address?.starts(with: "juno1") == true) { return [ChainType.JUNO_MAIN] }
-        else if (address?.starts(with: "regen1") == true) { return [ChainType.REGEN_MAIN] }
-        else if (address?.starts(with: "bcna1") == true) { return [ChainType.BITCANA_MAIN] }
-        else if (address?.starts(with: "althea1") == true) { return [ChainType.ALTHEA_MAIN] }
-        else if (address?.starts(with: "stars1") == true) { return [ChainType.STARGAZE_MAIN] }
-        else if (address?.starts(with: "comdex1") == true) { return [ChainType.COMDEX_MAIN] }
-        else if (address?.starts(with: "inj1") == true) { return [ChainType.INJECTIVE_MAIN] }
-        else if (address?.starts(with: "bitsong1") == true) { return [ChainType.BITSONG_MAIN] }
-        else if (address?.starts(with: "desmos1") == true) { return [ChainType.DESMOS_MAIN] }
-        else if (address?.starts(with: "gravity1") == true) { return [ChainType.GRAVITY_BRIDGE_MAIN] }
-        else if (address?.starts(with: "lum1") == true) { return [ChainType.LUM_MAIN] }
-        else if (address?.starts(with: "chihuahua1") == true) { return [ChainType.CHIHUAHUA_MAIN] }
-        else if (address?.starts(with: "axelar1") == true) { return [ChainType.AXELAR_MAIN] }
-        else if (address?.starts(with: "darc1") == true) { return [ChainType.KONSTELLATION_MAIN] }
-        else if (address?.starts(with: "umee1") == true) { return [ChainType.UMEE_MAIN] }
-        else if (address?.starts(with: "evmos1") == true) { return [ChainType.EVMOS_MAIN] }
-        else if (address?.starts(with: "pb1") == true) { return [ChainType.PROVENANCE_MAIN] }
-        else if (address?.starts(with: "cudos1") == true) { return [ChainType.CUDOS_MAIN] }
-        else if (address?.starts(with: "cerberus1") == true) { return [ChainType.CERBERUS_MAIN] }
-        else if (address?.starts(with: "omniflix1") == true) { return [ChainType.OMNIFLIX_MAIN] }
-        else if (address?.starts(with: "cre1") == true) { return [ChainType.CRESCENT_MAIN] }
-        else if (address?.starts(with: "mantle1") == true) { return [ChainType.MANTLE_MAIN] }
-        else if (address?.starts(with: "n1") == true) { return [ChainType.NYX_MAIN] }
-        
-        else if (address?.starts(with: "station1") == true) { return [ChainType.STATION_TEST] }
-        
         return nil
     }
     
@@ -3017,14 +1427,14 @@ public class WUtils {
     static func onParseAuthAccount(_ chain: ChainType, _ accountId: Int64) {
         print("onParseAuthAccount")
         guard let rawAccount = BaseData.instance.mAccount_gRPC else { return }
-        if (chain == ChainType.DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
+        if (chain == .DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
             if let profileAccount = try? Desmos_Profiles_V1beta1_Profile.init(serializedData: rawAccount.value) {
                 onParseVestingAccount(chain, profileAccount.account)
             } else {
                 onParseVestingAccount(chain, rawAccount)
             }
             
-        } else if (chain == ChainType.INJECTIVE_MAIN && rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)) {
+        } else if (chain == .INJECTIVE_MAIN && rawAccount.typeURL.contains(Injective_Types_V1beta1_EthAccount.protoMessageName)) {
 //            print("rawAccount.typeURL ", rawAccount.typeURL)
 //            if let ethAccount = try? Injective_Types_V1beta1_EthAccount.init(serializedData: rawAccount.value) {
 //                onParseVestingAccount(chain, ethAccount.baseAccount)
@@ -3033,7 +1443,7 @@ public class WUtils {
 //            }
             onParseVestingAccount(chain, rawAccount)
             
-        } else if (chain == ChainType.EVMOS_MAIN && rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)) {
+        } else if (chain == .EVMOS_MAIN && rawAccount.typeURL.contains(Ethermint_Types_V1_EthAccount.protoMessageName)) {
             onParseVestingAccount(chain, rawAccount)
         } else {
             onParseVestingAccount(chain, rawAccount)
@@ -3324,11 +1734,11 @@ public class WUtils {
         return result
     }
     
-    static func onParseFeeGrpc(_ chainType: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) -> Coin {
+    static func onParseFeeGrpc(_ chainConfig: ChainConfig, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) -> Coin {
         if (tx.tx.authInfo.fee.amount.count > 0) {
             return Coin.init(tx.tx.authInfo.fee.amount[0].denom, tx.tx.authInfo.fee.amount[0].amount)
         } else {
-            return Coin.init(getMainDenom(chainType), "0")
+            return Coin.init(getMainDenom(chainConfig), "0")
         }
     }
     
@@ -3508,7 +1918,7 @@ public class WUtils {
     }
     
     public static func isGRPC(_ chain: ChainType?) -> Bool {
-        if (chain == ChainType.BINANCE_MAIN || chain == ChainType.OKEX_MAIN) {
+        if (chain == .BINANCE_MAIN || chain == .OKEX_MAIN) {
             return false
         }
         return true

@@ -28,6 +28,7 @@ class StartUnbonding3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -38,7 +39,7 @@ class StartUnbonding3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
         
         let toUnbondingDuration  = pageHolderVC.mLockups![0].duration.seconds
         let toUnbondingDenom = String(pageHolderVC.mLockups![0].coins[0].denom)
@@ -57,7 +58,7 @@ class StartUnbonding3ViewController: BaseViewController, PasswordViewDelegate {
         } else if (toUnbondingDuration == 1209600) {
             toUnbondingDurationLabel.text = "14 Days"
         }
-        WUtils.showCoinDp(toUnbondingDenom, toUnbondingAmount.stringValue, toUnbondingDenomLabel, toUnbondingAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, toUnbondingDenom, toUnbondingAmount.stringValue, toUnbondingDenomLabel, toUnbondingAmountLabel)
         memoLabel.text = pageHolderVC.mMemo
     }
     

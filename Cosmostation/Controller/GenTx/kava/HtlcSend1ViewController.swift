@@ -32,10 +32,10 @@ class HtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
     func updateView() {
         toAddressImg.image = toAddressImg.image?.withRenderingMode(.alwaysTemplate)
         if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
-            self.warnMsg.text = String(format: NSLocalizedString("error_can_not_bep3_account_msg", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
+            self.warnMsg.text = String(format: NSLocalizedString("error_can_not_bep3_account_msg", comment: ""), WUtils.dpBepSwapChainName(pageHolderVC!.mHtlcToChain!))
             toAddressImg.tintColor = UIColor.init(named: "binance")
         } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN) {
-            self.warnMsg.text = String(format: NSLocalizedString("error_can_not_bep3_account_msg2", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
+            self.warnMsg.text = String(format: NSLocalizedString("error_can_not_bep3_account_msg2", comment: ""), WUtils.dpBepSwapChainName(pageHolderVC!.mHtlcToChain!))
             toAddressImg.tintColor = UIColor.init(named: "kava")
         }
         self.toAccountList = BaseData.instance.selectAllAccountsByHtlcClaim(pageHolderVC.mHtlcToChain)
@@ -76,13 +76,14 @@ class HtlcSend1ViewController: BaseViewController, SBCardPopupDelegate {
 
         } else {
             var msg = ""
-            let title = String(format: NSLocalizedString("no_account", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
+            let title = String(format: NSLocalizedString("no_account", comment: ""), WUtils.dpBepSwapChainName(pageHolderVC!.mHtlcToChain!))
             if (pageHolderVC.mHtlcToChain == ChainType.BINANCE_MAIN) {
-                msg = String(format: NSLocalizedString("error_can_not_bep3_account_msg", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
+                msg = String(format: NSLocalizedString("error_can_not_bep3_account_msg", comment: ""), WUtils.dpBepSwapChainName(pageHolderVC!.mHtlcToChain!))
             } else if (pageHolderVC.mHtlcToChain == ChainType.KAVA_MAIN) {
-                msg = String(format: NSLocalizedString("error_can_not_bep3_account_msg2", comment: ""), WUtils.dpChainName(pageHolderVC!.mHtlcToChain!))
+                msg = String(format: NSLocalizedString("error_can_not_bep3_account_msg2", comment: ""), WUtils.dpBepSwapChainName(pageHolderVC!.mHtlcToChain!))
             }
             let noAccountAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+            if #available(iOS 13.0, *) { noAccountAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
             noAccountAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
                 self.dismiss(animated: true, completion: nil)
             }))

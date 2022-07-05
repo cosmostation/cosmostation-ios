@@ -22,6 +22,7 @@ class ChainStarname: ChainConfig {
     var chainTitle2 = "STARNAME"
     var chainDBName = CHAIN_IOV_S
     var chainAPIName = "starname"
+    var chainIdPrefix = "iov-"
     
     var stakeDenomImg = UIImage(named: "tokenStarname")
     var stakeDenom = "uiov"
@@ -31,6 +32,9 @@ class ChainStarname: ChainConfig {
     
     var addressPrefix = "star"
     let addressHdPath0 = "m/44'/234'/0'/0/X"
+    
+    let gasRate0 = "0.1uiov"
+    let gasRate1 = "1.0uiov"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +65,13 @@ class ChainStarname: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/iov-internet-of-values"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

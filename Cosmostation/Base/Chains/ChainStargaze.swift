@@ -22,6 +22,7 @@ class ChainStargaze: ChainConfig {
     var chainTitle2 = "STARGAZE"
     var chainDBName = CHAIN_STARGAZE_S
     var chainAPIName = "stargaze"
+    var chainIdPrefix = "stargaze-"
     
     var stakeDenomImg = UIImage(named: "tokenStargaze")
     var stakeDenom = "ustars"
@@ -31,6 +32,9 @@ class ChainStargaze: ChainConfig {
     
     var addressPrefix = "stars"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.0ustars"
+    let gasRate1 = "0.0025ustars"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +65,13 @@ class ChainStargaze: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://mirror.xyz/stargazezone.eth"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
     }
 }

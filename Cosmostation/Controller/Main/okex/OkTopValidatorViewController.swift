@@ -89,7 +89,7 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
             cell?.revokedImg.isHidden = true
             cell?.validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
-        cell?.powerLabel.attributedText =  WUtils.displayAmount2(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
+        cell?.powerLabel.attributedText =  WDP.dpAmount(validator.delegator_shares, cell!.powerLabel.font, 0, 0)
         cell?.commissionLabel.attributedText = WUtils.displayCommission("0", font: cell!.commissionLabel.font)
         if (self.mMyValidator.contains(where: {$0.operator_address == validator.operator_address})) {
             cell?.cardView.backgroundColor = UIColor.init(named: "okc_bg")

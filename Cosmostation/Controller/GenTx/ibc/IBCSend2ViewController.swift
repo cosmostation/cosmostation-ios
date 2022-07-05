@@ -26,18 +26,19 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.ibcSendDenom = self.pageHolderVC.mIBCSendDenom
-        self.decimal = WUtils.tokenDivideDecimal(chainType, ibcSendDenom)
+        self.decimal = WUtils.getDenomDecimal(chainConfig, ibcSendDenom)
         
-        let mainDenom = WUtils.getMainDenom(chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_TRANSFER, 0)
+        let mainDenom = chainConfig!.stakeDenom
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
         maxAvailable = BaseData.instance.getAvailableAmount_gRPC(ibcSendDenom)
         if (ibcSendDenom == mainDenom) {
-            maxAvailable = maxAvailable.subtracting(feeAmount)
+            maxAvailable = maxAvailable.subtracting(mainDenomFee)
         }
-        WUtils.showCoinDp(ibcSendDenom, maxAvailable.stringValue, denomTitleLabel, mAvailableAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, ibcSendDenom, maxAvailable.stringValue, denomTitleLabel, mAvailableAmountLabel)
         
         mTargetAmountTextField.delegate = self
         mTargetAmountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -154,7 +155,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func onClickMax(_ sender: UIButton) {
         let maxValue = maxAvailable.multiplying(byPowerOf10: -decimal, withBehavior: WUtils.getDivideHandler(decimal))
         mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(maxValue, decimal)
-        if (ibcSendDenom == WUtils.getMainDenom(chainType!)) {
+        if (ibcSendDenom == WUtils.getMainDenom(chainConfig)) {
             self.showMaxWarnning()
         }
         self.onUpdateView()
@@ -191,6 +192,7 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
     
     func showMaxWarnning() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("max_spend_title", comment: ""), message: NSLocalizedString("max_spend_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))

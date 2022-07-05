@@ -22,6 +22,7 @@ class ChainKava: ChainConfig {
     var chainTitle2 = "KAVA"
     var chainDBName = CHAIN_KAVA_S
     var chainAPIName = "kava"
+    var chainIdPrefix = "kava_"
     
     var stakeDenomImg = UIImage(named: "tokenKava")
     var stakeDenom = "ukava"
@@ -32,6 +33,10 @@ class ChainKava: ChainConfig {
     var addressPrefix = "kava"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     var addressaddressHdPath1 = "m/44'/459'/0'/0/X"
+    
+    let gasRate0 = "0.001ukava"
+    let gasRate1 = "0.0025ukava"
+    let gasRate2 = "0.025ukava"
     
     var pushSupport = false
     var wcSupoort = false
@@ -63,4 +68,21 @@ class ChainKava: ChainConfig {
     func getInfoLink2() -> String {
         return "https://medium.com/kava-labs"
     }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
+    }
 }
+
+let KAVA_MAIN_DENOM = "ukava"
+let KAVA_HARD_DENOM = "hard"
+let KAVA_USDX_DENOM = "usdx"
+let KAVA_SWAP_DENOM = "swp"
+
+let KAVA_CDP_IMG_URL        = ResourceBase + "kava/cdp/";
+let KAVA_HARD_POOL_IMG_URL  = ResourceBase + "kava/hard/";
+let KAVA_COIN_IMG_URL       = ResourceBase + "coin_image/kava/";

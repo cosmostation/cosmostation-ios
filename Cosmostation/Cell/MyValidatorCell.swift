@@ -56,9 +56,9 @@ class MyValidatorCell: UITableViewCell {
             validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
         
-        myDelegatedAmoutLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getDelegated_gRPC(validator.operatorAddress).stringValue, myDelegatedAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
-        myUndelegatingAmountLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getUnbonding_gRPC(validator.operatorAddress).stringValue, myUndelegatingAmountLabel.font, WUtils.mainDivideDecimal(chainType), 6)
-        rewardAmoutLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), validator.operatorAddress).stringValue, rewardAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        myDelegatedAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getDelegated_gRPC(validator.operatorAddress).stringValue, myDelegatedAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        myUndelegatingAmountLabel.attributedText = WDP.dpAmount(BaseData.instance.getUnbonding_gRPC(validator.operatorAddress).stringValue, myUndelegatingAmountLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        rewardAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress).stringValue, rewardAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
         
         cardView.backgroundColor = chainConfig?.chainColorBG
         if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {

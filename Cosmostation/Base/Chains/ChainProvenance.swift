@@ -22,6 +22,7 @@ class ChainProvenance: ChainConfig {
     var chainTitle2 = "PROVENANCE"
     var chainDBName = CHAIN_PROVENANCE_S
     var chainAPIName = "provenance"
+    var chainIdPrefix = "pio-mainnet-"
     
     var stakeDenomImg = UIImage(named: "tokenProvenance")
     var stakeDenom = "nhash"
@@ -31,6 +32,8 @@ class ChainProvenance: ChainConfig {
     
     var addressPrefix = "pb"
     let addressHdPath0 = "m/44'/505'/0'/0/X"
+    
+    let gasRate0 = "2000nhash"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +64,13 @@ class ChainProvenance: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.provenance.io/blog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

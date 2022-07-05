@@ -22,6 +22,7 @@ class ChainIris: ChainConfig {
     var chainTitle2 = "IRIS"
     var chainDBName = CHAIN_IRIS_S
     var chainAPIName = "iris"
+    var chainIdPrefix = "irishub-"
     
     var stakeDenomImg = UIImage(named: "tokenIris")
     var stakeDenom = "uiris"
@@ -31,6 +32,10 @@ class ChainIris: ChainConfig {
     
     var addressPrefix = "iaa"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.002uiris"
+    let gasRate1 = "0.02uiris"
+    let gasRate2 = "0.2uiris"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +66,13 @@ class ChainIris: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/irisnet-blog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
     }
 }

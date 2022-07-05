@@ -33,8 +33,8 @@ class DAppsListViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")!], for: .selected)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")!], for: .normal)
             dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
             dAppsSegment.tintColor = chainConfig?.chainColor
@@ -173,144 +173,72 @@ class DAppsListViewController: BaseViewController {
 }
 
 extension WUtils {
-    static func getKavaBaseDenom(_ denom: String) -> String {
-        if (denom.starts(with: "ibc/")) {
-            guard let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) else {
-                return denom
-            }
-            if (ibcToken.auth == true) {
-                if (ibcToken.base_denom?.starts(with: "cw20:") == true) {
-                    let cAddress = ibcToken.base_denom?.replacingOccurrences(of: "cw20:", with: "")
-                    if let cw20Basedenom = BaseData.instance.mCw20Tokens.filter({ $0.contract_address == cAddress }).first {
-                        return cw20Basedenom.denom
-                    } else {
-                        return ibcToken.base_denom!
-                    }
-                } else {
-                    return ibcToken.base_denom!
-                }
-            }
-            
-        } else if (denom == KAVA_MAIN_DENOM) {
-            return KAVA_MAIN_DENOM
-        } else if (denom == KAVA_HARD_DENOM) {
-            return KAVA_HARD_DENOM
-        } else if (denom == KAVA_USDX_DENOM) {
-            return KAVA_USDX_DENOM
-        } else if (denom == KAVA_SWAP_DENOM) {
-            return KAVA_SWAP_DENOM
-        } else if (denom == TOKEN_HTLC_KAVA_BNB) {
-            return "bnb"
-        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
-            return "xrp"
-        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
-            return "busd"
-        } else if (denom.contains("btc")) {
-            return "btc"
+    
+    static func dpBepSwapChainInfo(_ chain: ChainType, _ img: UIImageView?, _ label: UILabel) {
+        if (chain == ChainType.BINANCE_MAIN) {
+            label.text = NSLocalizedString("chain_title_bnb", comment: "")
+            img?.image = UIImage(named: "chainBinance")
+        } else if (chain == ChainType.KAVA_MAIN) {
+            label.text = NSLocalizedString("chain_title_kava", comment: "")
+            img?.image = UIImage(named: "chainKava")
+        }
+    }
+    
+    static func dpBepSwapChainName(_ chain: ChainType) -> String {
+        if (chain == ChainType.BINANCE_MAIN) {
+            return NSLocalizedString("chain_title_bnb", comment: "")
+        } else if (chain == ChainType.KAVA_MAIN) {
+            return NSLocalizedString("chain_title_kava", comment: "")
         }
         return ""
     }
     
-    static func getKavaCoinDecimal(_ denom:String?) -> Int16 {
-        if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
-                return deciaml
-            }
-        } else if (denom?.caseInsensitiveCompare(KAVA_MAIN_DENOM) == .orderedSame) {
-            return 6;
-        } else if (denom?.caseInsensitiveCompare("btc") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("usdx") == .orderedSame) {
-            return 6;
-        } else if (denom?.caseInsensitiveCompare("bnb") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("btcb") == .orderedSame || denom?.caseInsensitiveCompare("hbtc") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("busd") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("xrpb") == .orderedSame || denom?.caseInsensitiveCompare("xrbp") == .orderedSame) {
-            return 8;
-        } else if (denom?.caseInsensitiveCompare("hard") == .orderedSame) {
-            return 6;
-        } else if (denom?.caseInsensitiveCompare("swp") == .orderedSame) {
-            return 6;
+    static func getHtlcSendable(_ chain: ChainType) -> Array<ChainType> {
+        var result = Array<ChainType>()
+        if (chain == .BINANCE_MAIN) {
+            result.append(.KAVA_MAIN)
+            
+        } else if (chain == .KAVA_MAIN) {
+            result.append(.BINANCE_MAIN)
+            
         }
-        return 6;
+        return result
     }
     
-    static func getKavaTokenName(_ denom: String) -> String {
-        if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-                if (ibcToken.auth == true) { return ibcToken.display_denom?.uppercased() ?? "Unknown IBC" }
-                else { return "Unknown" }
-            } else {
-                return "Unknown" 
-            }
+    static func getHtlcSwappableCoin(_ chain: ChainType) -> Array<String> {
+        var result = Array<String>()
+        if (chain == .BINANCE_MAIN) {
+            result.append(TOKEN_HTLC_BINANCE_BNB)
+            result.append(TOKEN_HTLC_BINANCE_BTCB)
+            result.append(TOKEN_HTLC_BINANCE_XRPB)
+            result.append(TOKEN_HTLC_BINANCE_BUSD)
             
-        } else if (denom == KAVA_MAIN_DENOM) {
-            return "KAVA"
-            
-        } else if (denom == KAVA_HARD_DENOM) {
-            return "HARD"
-            
-        } else if (denom == KAVA_USDX_DENOM) {
-            return "USDX"
-            
-        } else if (denom == KAVA_SWAP_DENOM) {
-            return "SWP"
-            
-        } else if (denom == TOKEN_HTLC_KAVA_BNB) {
-            return "BNB"
-            
-        } else if (denom == TOKEN_HTLC_KAVA_XRPB) {
-            return "XRPB"
-            
-        } else if (denom == TOKEN_HTLC_KAVA_BUSD) {
-            return "BUSD"
-            
-        } else if (denom == TOKEN_HTLC_KAVA_BTCB) {
-            return "BTCB"
-            
-        } else if (denom == "btch") {
-            return "BTCH"
+        } else if (chain == .KAVA_MAIN) {
+            result.append(TOKEN_HTLC_KAVA_BNB)
+            result.append(TOKEN_HTLC_KAVA_BTCB)
+            result.append(TOKEN_HTLC_KAVA_XRPB)
+            result.append(TOKEN_HTLC_KAVA_BUSD)
             
         }
-        return denom.uppercased()
+        return result
     }
     
-    static func DpKavaTokenName(_ label: UILabel, _ denom: String) {
-        label.text = getKavaTokenName(denom)
-        if (denom == KAVA_MAIN_DENOM) {
-            label.textColor = UIColor.init(named: "kava")
-            
-        } else if (denom == KAVA_HARD_DENOM) {
-            label.textColor = UIColor.init(named: "kava_hard")
-            
-        } else if (denom == KAVA_USDX_DENOM) {
-            label.textColor = UIColor.init(named: "kava_usdx")
-            
-        } else if (denom == KAVA_SWAP_DENOM) {
-            label.textColor = UIColor.init(named: "kava_swp")
-            
-        } else {
-            label.textColor = UIColor(named: "_font05")
+    static func isHtlcSwappableCoin(_ chain: ChainType?, _ denom: String?) -> Bool {
+        if (chain == .BINANCE_MAIN) {
+            if (denom == TOKEN_HTLC_BINANCE_BNB) { return true }
+            if (denom == TOKEN_HTLC_BINANCE_BTCB) { return true }
+            if (denom == TOKEN_HTLC_BINANCE_XRPB) { return true }
+            if (denom == TOKEN_HTLC_BINANCE_BUSD) { return true }
+        } else if (chain == .KAVA_MAIN) {
+            if (denom == TOKEN_HTLC_KAVA_BNB) { return true }
+            if (denom == TOKEN_HTLC_KAVA_BTCB) { return true }
+            if (denom == TOKEN_HTLC_KAVA_XRPB) { return true }
+            if (denom == TOKEN_HTLC_KAVA_BUSD) { return true }
         }
-    }
-    
-    static func getKavaCoinImg(_ denom: String) -> String {
-        if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = ibcToken.moniker {
-                return url
-            } else {
-                return KAVA_COIN_IMG_URL
-            }
-        } else {
-            return KAVA_COIN_IMG_URL + denom + ".png"
-        }
+        return false
     }
     
     static func getKavaMarketId(_ denom: String) -> String {
-
         if denom.starts(with: "ibc/"),
            let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")),
            let displayDenom = ibcToken.display_denom {
@@ -346,7 +274,7 @@ extension WUtils {
     }
     
     static func showRiskRate(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _rateIamg:UIImageView?) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
+        scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.floatValue <= 50) {
             scoreLabel.textColor = UIColor(named: "kava_safe")
             _rateIamg?.image = UIImage(named: "imgKavaRiskSafe")
@@ -362,7 +290,7 @@ extension WUtils {
     }
     
     static func showRiskRate2(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
+        scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.doubleValue <= 50) {
             scoreLabel.textColor = UIColor(named: "kava_safe")
             textLabel.textColor = UIColor(named: "kava_safe")
@@ -381,7 +309,7 @@ extension WUtils {
     }
     
     static func showRiskRate3(_ riskRate: NSDecimalNumber, _ scoreLabel: UILabel, _ textLabel:UILabel, _ cardView:CardView) {
-        scoreLabel.attributedText = displayAmount2(riskRate.stringValue, scoreLabel.font, 0, 2)
+        scoreLabel.attributedText = WDP.dpAmount(riskRate.stringValue, scoreLabel.font, 0, 2)
         if (riskRate.doubleValue <= 50) {
             textLabel.text = "SAFE"
             cardView.backgroundColor = UIColor(named: "kava_safe")
@@ -418,8 +346,9 @@ extension WUtils {
     
     static func getHardBorrowableAmountByDenom(_ denom: String, _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?,
                                                _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) -> NSDecimalNumber {
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         let hardParam = BaseData.instance.mKavaHardParams_gRPC
-        let decimal = WUtils.getKavaCoinDecimal(denom)
+        let decimal = WUtils.getDenomDecimal(chainConfig, denom)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(hardParam?.getSpotMarketId(denom))
         
         var totalLTVValue = NSDecimalNumber.zero
@@ -430,7 +359,7 @@ extension WUtils {
         var reserveAmount = NSDecimalNumber.zero
 
         myDeposits?.forEach({ coin in
-            let innnerDecimal   = WUtils.getKavaCoinDecimal(coin.denom)
+            let innnerDecimal   = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let LTV             = hardParam!.getLTV(coin.denom)
             let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
             let depositValue    = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
@@ -439,7 +368,7 @@ extension WUtils {
         })
 
         myBorrows?.forEach({ coin in
-            let innnerDecimal   = WUtils.getKavaCoinDecimal(coin.denom)
+            let innnerDecimal   = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
             let borrowValue     = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -innnerDecimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
             totalBorrowedValue = totalBorrowedValue.adding(borrowValue)
@@ -559,7 +488,9 @@ extension Kava_Cdp_V1beta1_CDPResponse {
     }
     
     public func getDpCollateralValue(_ pDenom:String) -> NSDecimalNumber {
-        return NSDecimalNumber.init(string: collateralValue.amount).multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(pDenom))
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let pDenomDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
+        return NSDecimalNumber.init(string: collateralValue.amount).multiplying(byPowerOf10: -pDenomDecimal)
     }
     
     public func getHiddenFee(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
@@ -583,22 +514,30 @@ extension Kava_Cdp_V1beta1_CDPResponse {
     }
     
     public func getDpEstimatedTotalDebtValue(_ pDenom: String, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
-        return getEstimatedTotalDebt(collateralParam).multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(pDenom))
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let pDenomDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
+        return getEstimatedTotalDebt(collateralParam).multiplying(byPowerOf10: -pDenomDecimal)
     }
     
     public func getLiquidationPrice(_ cDenom:String, _ pDenom:String, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam) -> NSDecimalNumber {
-        let collateralAmount = getRawCollateralAmount().multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(cDenom))
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let cDenomDecimal = WUtils.getDenomDecimal(chainConfig, cDenom)
+        let pDenomDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
+        let collateralAmount = getRawCollateralAmount().multiplying(byPowerOf10: -cDenomDecimal)
         let rawDebtAmount = getEstimatedTotalDebt(collateralParam)
             .multiplying(by: collateralParam.getLiquidationRatioAmount())
-            .multiplying(byPowerOf10: -WUtils.getKavaCoinDecimal(pDenom))
-        return rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(WUtils.getKavaCoinDecimal(pDenom)))
+            .multiplying(byPowerOf10: -pDenomDecimal)
+        return rawDebtAmount.dividing(by: collateralAmount, withBehavior: WUtils.getDivideHandler(pDenomDecimal))
     }
     
     public func getWithdrawableAmount(_ cDenom:String, _ pDenom:String, _ collateralParam: Kava_Cdp_V1beta1_CollateralParam, _ cPrice:NSDecimalNumber, _ selfDepositAmount: NSDecimalNumber) -> NSDecimalNumber {
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let cDenomDecimal = WUtils.getDenomDecimal(chainConfig, cDenom)
+        let pDenomDecimal = WUtils.getDenomDecimal(chainConfig, pDenom)
         let cValue = getRawCollateralValueAmount()
         let minCValue = getEstimatedTotalDebt(collateralParam).multiplying(by: collateralParam.getLiquidationRatioAmount()).dividing(by: NSDecimalNumber.init(string: "0.95"), withBehavior:WUtils.handler0Down)
         let maxWithdrawableValue = cValue.subtracting(minCValue)
-        var maxWithdrawableAmount = maxWithdrawableValue.multiplying(byPowerOf10: WUtils.getKavaCoinDecimal(cDenom) - WUtils.getKavaCoinDecimal(pDenom)).dividing(by: cPrice, withBehavior: WUtils.handler0Down)
+        var maxWithdrawableAmount = maxWithdrawableValue.multiplying(byPowerOf10: cDenomDecimal - pDenomDecimal).dividing(by: cPrice, withBehavior: WUtils.handler0Down)
         
         if (maxWithdrawableAmount.compare(selfDepositAmount).rawValue > 0) {
             maxWithdrawableAmount = selfDepositAmount

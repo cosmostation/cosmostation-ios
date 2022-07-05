@@ -22,6 +22,7 @@ class ChainSif: ChainConfig {
     var chainTitle2 = "SIF"
     var chainDBName = CHAIN_SIF_S
     var chainAPIName = "sifchain"
+    var chainIdPrefix = "sifchain-"
     
     var stakeDenomImg = UIImage(named: "tokenSif")
     var stakeDenom = "rowan"
@@ -31,6 +32,8 @@ class ChainSif: ChainConfig {
     
     var addressPrefix = "sif"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.0rowan"
     
     var pushSupport = false
     var wcSupoort = false
@@ -62,4 +65,14 @@ class ChainSif: ChainConfig {
     func getInfoLink2() -> String {
         return "https://medium.com/sifchain-finance"
     }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
+    }
 }
+
+let SIF_MAIN_DENOM = "rowan"

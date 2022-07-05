@@ -22,6 +22,7 @@ class ChainMedibloc: ChainConfig {
     var chainTitle2 = "MEDIBLOC"
     var chainDBName = CHAIN_MEDI_S
     var chainAPIName = "medibloc"
+    var chainIdPrefix = "panacea-"
     
     var stakeDenomImg = UIImage(named: "tokenMedibloc")
     var stakeDenom = "umed"
@@ -31,6 +32,8 @@ class ChainMedibloc: ChainConfig {
     
     var addressPrefix = "panacea"
     let addressHdPath0 = "m/44'/371'/0'/0/X"
+    
+    let gasRate0 = "5umed"
     
     var pushSupport = false
     var wcSupoort = false
@@ -69,5 +72,13 @@ class ChainMedibloc: ChainConfig {
         } else {
             return "https://medium.com/medibloc/"
         }
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

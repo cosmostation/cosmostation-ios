@@ -22,9 +22,10 @@ class SendContract0ViewController: BaseViewController, QrScannerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
-        self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
     }
     
     override func enableUserInteraction() {
@@ -67,7 +68,7 @@ class SendContract0ViewController: BaseViewController, QrScannerDelegate {
             self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
             return;
         }
-        if (!WUtils.isValidChainAddress(chainType, userInputRecipient)) {
+        if (!WUtils.isValidChainAddress(chainConfig, userInputRecipient)) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }
@@ -109,6 +110,7 @@ class SendContract0ViewController: BaseViewController, QrScannerDelegate {
     func onShowMatchedStarName(_ starname: String, _ matchedAddress: String) {
         let msg = String(format: NSLocalizedString("str_starname_confirm_msg", comment: ""), starname, matchedAddress)
         let alertController = UIAlertController(title: NSLocalizedString("str_starname_confirm_title", comment: ""), message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let settingsAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { (_) -> Void in
             self.btnBack.isUserInteractionEnabled = false
             self.btnNext.isUserInteractionEnabled = false

@@ -22,9 +22,9 @@ class TxLockTokenCell: TxCell {
         txLockAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         let msg = try! Osmosis_Lockup_MsgLockTokens.init(serializedData: response.tx.body.messages[position].value)
         
@@ -35,7 +35,7 @@ class TxLockTokenCell: TxCell {
         txDurationLabel.text = String(durationDay) + " days"
         
         let coinLock = Coin.init(msg.coins[0].denom, msg.coins[0].amount)
-        WUtils.showCoinDp(coinLock, txLockDenomLabel, txLockAmountLabel, chain.chainType)
+        WDP.dpCoin(chainConfig, coinLock, txLockDenomLabel, txLockAmountLabel)
     }
     
 }

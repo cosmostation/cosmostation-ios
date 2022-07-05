@@ -22,6 +22,7 @@ class ChainNyx: ChainConfig {
     var chainTitle2 = "NYX"
     var chainDBName = CHAIN_NYX_S
     var chainAPIName = "nyx"
+    var chainIdPrefix = "nyx"
     
     var stakeDenomImg = UIImage(named: "tokenNyx")
     var stakeDenom = "unyx"
@@ -31,6 +32,8 @@ class ChainNyx: ChainConfig {
     
     var addressPrefix = "n"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.025unym"
     
     var pushSupport = false
     var wcSupoort = false
@@ -62,4 +65,14 @@ class ChainNyx: ChainConfig {
     func getInfoLink2() -> String {
         return "https://nymtech.net/blog/"
     }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
+    }
 }
+
+let NYX_NYM_DENOM = "unym"

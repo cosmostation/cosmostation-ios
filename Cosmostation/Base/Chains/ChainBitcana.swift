@@ -22,6 +22,7 @@ class ChainBitcana: ChainConfig {
     var chainTitle2 = "BITCANNA"
     var chainDBName = CHAIN_BITCANA_S
     var chainAPIName = "bitcanna"
+    var chainIdPrefix = "bitcanna-"
     
     var stakeDenomImg = UIImage(named: "tokenBitcanna")
     var stakeDenom = "ubcna"
@@ -31,6 +32,8 @@ class ChainBitcana: ChainConfig {
     
     var addressPrefix = "bcna"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.025ubcna"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,6 +64,14 @@ class ChainBitcana: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@BitCannaGlobal"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }
 

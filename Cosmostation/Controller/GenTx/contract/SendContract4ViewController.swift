@@ -29,7 +29,9 @@ class SendContract4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
         self.cw20Token = BaseData.instance.getCw20_gRPC(pageHolderVC.mCw20SendContract!)
         self.decimal = cw20Token.decimal
     }
@@ -41,11 +43,11 @@ class SendContract4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
         
         let toSendAmount = WUtils.plainStringToDecimal(pageHolderVC.mToSendAmount[0].amount)
         self.toSendDenomLabel.text = cw20Token.denom.uppercased()
-        self.toSendAmountLabel.attributedText = WUtils.displayAmount2(toSendAmount.stringValue, toSendAmountLabel.font!, decimal, decimal)
+        self.toSendAmountLabel.attributedText = WDP.dpAmount(toSendAmount.stringValue, toSendAmountLabel.font!, decimal, decimal)
         self.destinationAddressLabel.text = pageHolderVC.mToSendRecipientAddress
         self.destinationAddressLabel.adjustsFontSizeToFitWidth = true
         self.memoLabel.text = pageHolderVC.mMemo

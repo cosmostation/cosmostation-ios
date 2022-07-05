@@ -34,6 +34,7 @@ class CdpCreate4ViewController: BaseViewController, PasswordViewDelegate, SBCard
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -57,7 +58,7 @@ class CdpCreate4ViewController: BaseViewController, PasswordViewDelegate, SBCard
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, feeDenomLabel, feeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, feeDenomLabel, feeAmountLabel)
         
         let cDenom = pageHolderVC.mCDenom!
         let pDenom = pageHolderVC.mPDenom!
@@ -65,17 +66,17 @@ class CdpCreate4ViewController: BaseViewController, PasswordViewDelegate, SBCard
         let pAmount = NSDecimalNumber.init(string: pageHolderVC.mPrincipal.amount)
 
         cDenomLabel.text = cDenom.uppercased()
-        WUtils.showCoinDp(cDenom, cAmount.stringValue, cDenomLabel, cAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, cDenom, cAmount.stringValue, cDenomLabel, cAmountLabel)
 
         pDenomLabel.text = pDenom.uppercased()
-        WUtils.showCoinDp(pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pDenom, pAmount.stringValue, pDenomLabel, pAmountLabel)
 
         WUtils.showRiskRate(pageHolderVC.riskRate!, riskScoreLabel, _rateIamg: nil)
         
-        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getSymbol(chainConfig, cDenom))
         currentPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.currentPrice!.stringValue, 4, currentPrice.font)
         
-        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getSymbol(chainConfig, cDenom))
         liquidationPrice.attributedText = WUtils.getDPRawDollor(pageHolderVC.liquidationPrice!.stringValue, 4, liquidationPrice.font)
         
         memoLabel.text = pageHolderVC.mMemo

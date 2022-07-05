@@ -25,57 +25,33 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_TRANSFER, 0)
-        if (WUtils.isGRPC(pageHolderVC.chainType!)) {
-            mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-            mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-            if (pageHolderVC.chainType! == ChainType.SIF_MAIN) {
-                mDivideDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
-
-            } else if (pageHolderVC.chainType! == ChainType.GRAVITY_BRIDGE_MAIN) {
-                mDivideDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
-                
-            } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
-                mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                
-            } else if (pageHolderVC.chainType! == ChainType.INJECTIVE_MAIN) {
-                mDivideDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
-            }
-            
+        let mainDenom = chainConfig!.stakeDenom
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
+        if (chainConfig?.isGrpc == true) {
+            mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+            mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
             if (pageHolderVC.mToSendDenom == mainDenom) {
-                maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(feeAmount)
+                maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
             } else {
                 maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!)
             }
             
         } else {
-            if (pageHolderVC.chainType! == ChainType.BINANCE_MAIN) {
-                mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-                
-            } else if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
-                mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-                
-            } else {
-                mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-            }
+            mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+            mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
             
             if (pageHolderVC.mToSendDenom == mainDenom) {
-                maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!).subtracting(feeAmount)
+                maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
             } else {
                 maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!)
             }
         }
-        WUtils.showCoinDp(self.pageHolderVC.mToSendDenom!, maxAvailable.stringValue, mAvailableDenomLabel, mAvailableAmountLabel, pageHolderVC.chainType!)
+        WDP.dpCoin(chainConfig, self.pageHolderVC.mToSendDenom!, maxAvailable.stringValue, mAvailableDenomLabel, mAvailableAmountLabel)
         
         mTargetAmountTextField.delegate = self
         mTargetAmountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -243,7 +219,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
     @IBAction func onClickMax(_ sender: UIButton) {
         let maxValue = maxAvailable.multiplying(byPowerOf10: -mDivideDecimal, withBehavior: WUtils.getDivideHandler(mDisplayDecimal))
         mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(maxValue, mDisplayDecimal)
-        if (pageHolderVC.mToSendDenom == WUtils.getMainDenom(pageHolderVC.chainType!)) {
+        if (pageHolderVC.mToSendDenom == WUtils.getMainDenom(chainConfig)) {
             self.showMaxWarnning()
         }
         self.onUIupdate()
@@ -256,6 +232,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
     
     func showMaxWarnning() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("max_spend_title", comment: ""), message: NSLocalizedString("max_spend_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))

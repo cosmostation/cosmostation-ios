@@ -22,6 +22,7 @@ class ChainRizon: ChainConfig {
     var chainTitle2 = "RIZON"
     var chainDBName = CHAIN_RIZON_S
     var chainAPIName = "rizon"
+    var chainIdPrefix = "titan-"
     
     var stakeDenomImg = UIImage(named: "tokenRizon")
     var stakeDenom = "uatolo"
@@ -31,6 +32,10 @@ class ChainRizon: ChainConfig {
     
     var addressPrefix = "rizon"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.00025uatolo"
+    let gasRate1 = "0.0025uatolo"
+    let gasRate2 = "0.025uatolo"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +66,13 @@ class ChainRizon: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@hdac-rizon"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
     }
 }

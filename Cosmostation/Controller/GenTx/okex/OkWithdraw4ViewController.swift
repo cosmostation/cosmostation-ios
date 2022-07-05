@@ -53,8 +53,8 @@ class OkWithdraw4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        toWithdrawAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mOkToWithdraw.amount, toWithdrawAmountLabel.font, 0, 18)
-        feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 0, 18)
+        toWithdrawAmountLabel.attributedText = WDP.dpAmount(pageHolderVC.mOkToWithdraw.amount, toWithdrawAmountLabel.font, 0, 18)
+        feeAmountLabel.attributedText = WDP.dpAmount((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 0, 18)
         memoLabel.text = pageHolderVC.mMemo
     }
     

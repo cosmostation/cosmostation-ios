@@ -22,6 +22,7 @@ class ChainInjective: ChainConfig {
     var chainTitle2 = "INJECTIVE"
     var chainDBName = CHAIN_INJECTIVE_S
     var chainAPIName = "injective"
+    var chainIdPrefix = "injective-"
     
     var stakeDenomImg = UIImage(named: "tokenInjective")
     var stakeDenom = "inj"
@@ -31,6 +32,8 @@ class ChainInjective: ChainConfig {
     
     var addressPrefix = "inj"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
+    
+    let gasRate0 = "500000000inj"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +64,13 @@ class ChainInjective: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.injectiveprotocol.com/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

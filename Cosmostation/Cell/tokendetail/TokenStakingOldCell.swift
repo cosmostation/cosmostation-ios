@@ -48,7 +48,7 @@ class TokenStakingOldCell: UITableViewCell {
     
     func onBindStakingToken(_ chainType: ChainType) {
         let chainConfig = ChainFactory.getChainConfig(chainType)
-        let stakingDenom = WUtils.getMainDenom(chainType)
+        let stakingDenom = WUtils.getMainDenom(chainConfig)
         let stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         let stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
@@ -66,10 +66,10 @@ class TokenStakingOldCell: UITableViewCell {
             let available = BaseData.instance.availableAmount(stakingDenom)
             let locked = BaseData.instance.lockedAmount(stakingDenom)
             let frozen = BaseData.instance.frozenAmount(stakingDenom)
-            totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
-            availableAmount.attributedText = WUtils.displayAmount2(available.stringValue, availableAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            lockedAmount.attributedText = WUtils.displayAmount2(locked.stringValue, lockedAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            frozenAmount.attributedText = WUtils.displayAmount2(frozen.stringValue, frozenAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
+            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
+            availableAmount.attributedText = WDP.dpAmount(available.stringValue, availableAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
+            lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, lockedAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
+            frozenAmount.attributedText = WDP.dpAmount(frozen.stringValue, frozenAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
             
         } else if (chainType == ChainType.OKEX_MAIN) {
             vestingLayer.isHidden = true
@@ -86,11 +86,11 @@ class TokenStakingOldCell: UITableViewCell {
             let locked = BaseData.instance.lockedAmount(stakingDenom)
             let deposit = BaseData.instance.okDepositAmount()
             let withdraw = BaseData.instance.okWithdrawAmount()
-            totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
-            availableAmount.attributedText = WUtils.displayAmount2(available.stringValue, availableAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            lockedAmount.attributedText = WUtils.displayAmount2(locked.stringValue, lockedAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            okStakingAmount.attributedText = WUtils.displayAmount2(deposit.stringValue, okStakingAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-            okUnbondingAmount.attributedText = WUtils.displayAmount2(withdraw.stringValue, okUnbondingAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
+            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
+            availableAmount.attributedText = WDP.dpAmount(available.stringValue, availableAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
+            lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, lockedAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
+            okStakingAmount.attributedText = WDP.dpAmount(deposit.stringValue, okStakingAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
+            okUnbondingAmount.attributedText = WDP.dpAmount(withdraw.stringValue, okUnbondingAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
             
         }
         cardRoot.backgroundColor = chainConfig?.chainColorBG

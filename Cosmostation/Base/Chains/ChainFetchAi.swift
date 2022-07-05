@@ -22,6 +22,7 @@ class ChainFetchAi: ChainConfig {
     var chainTitle2 = "FETCH.AI"
     var chainDBName = CHAIN_FETCH_S
     var chainAPIName = "fetchai"
+    var chainIdPrefix = "fetchhub-"
     
     var stakeDenomImg = UIImage(named: "tokenFetchAi")
     var stakeDenom = "afet"
@@ -34,6 +35,8 @@ class ChainFetchAi: ChainConfig {
     let addressHdPath1 = "m/44'/60'/0'/0/X"
     let addressHdPath2 = "m/44'/60'/X'/0/0"
     let addressHdPath3 = "m/44'/60'/0'/X"
+    
+    let gasRate0 = "0.0afet"
     
     var pushSupport = false
     var wcSupoort = false
@@ -64,5 +67,13 @@ class ChainFetchAi: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://fetch.ai/blog/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

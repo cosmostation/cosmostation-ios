@@ -466,6 +466,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        
         mAccount        = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         mBalances       = mAccount!.account_balances
         chainType       = ChainFactory.getChainType(mAccount!.account_base_chain)

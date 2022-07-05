@@ -57,6 +57,7 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -266,10 +267,10 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
             if (mKavaMyCdp_gRPC ==  nil || mKavaOraclePrice == nil) { return }
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getKavaCoinDecimal(mCDenom)
-            self.pDpDecimal = WUtils.getKavaCoinDecimal(mPDenom)
+            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
+            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
             self.cMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mCDenom)
-            cAvailabeMaxLabel.attributedText = WUtils.displayAmount2(cMaxAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
+            cAvailabeMaxLabel.attributedText = WDP.dpAmount(cMaxAmount.stringValue, cAvailabeMaxLabel.font!, cDpDecimal, cDpDecimal)
             
             currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
             beforeLiquidationPrice = mKavaMyCdp_gRPC!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)
@@ -280,10 +281,11 @@ class CdpDeposit1ViewController: BaseViewController, UITextFieldDelegate, SBCard
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            cDenomLabel.text = WUtils.getKavaTokenName(mCDenom)
-            cAvailableDenom.text = WUtils.getKavaTokenName(mCDenom)
+            WDP.dpSymbol(chainConfig, mCDenom, cDenomLabel)
+            WDP.dpSymbol(chainConfig, mCDenom, cAvailableDenom)
+            WDP.dpSymbolImg(chainConfig, mCDenom, cDenomImg)
             
-            self.cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
+            
             self.loadingImg.onStopAnimation()
             self.loadingImg.isHidden = true
         }

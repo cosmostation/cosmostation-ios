@@ -22,6 +22,7 @@ class ChainCrescent: ChainConfig {
     var chainTitle2 = "CRESCENT"
     var chainDBName = CHAIN_CRESENT_S
     var chainAPIName = "crescent"
+    var chainIdPrefix = "crescent-"
     
     var stakeDenomImg = UIImage(named: "tokenCrescent")
     var stakeDenom = "ucre"
@@ -31,6 +32,10 @@ class ChainCrescent: ChainConfig {
     
     var addressPrefix = "cre"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.01ucre,0.01ubcre"
+    let gasRate1 = "0.02ucre,0.02ubcre"
+    let gasRate2 = "0.05ucre,0.05ubcre"
     
     var pushSupport = false
     var wcSupoort = true
@@ -62,4 +67,14 @@ class ChainCrescent: ChainConfig {
     func getInfoLink2() -> String {
         return "https://crescentnetwork.medium.com/"
     }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
+    }
 }
+
+let CRESCENT_BCRE_DENOM = "ubcre"

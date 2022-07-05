@@ -667,7 +667,7 @@ public struct ApiHistoryNewCustom {
         return result
     }
     
-    public func getDpCoin(_ chain: ChainType) -> Coin? {
+    func getDpCoin(_ chainConfig: ChainConfig) -> Coin? {
         //display staking reward amount
         if (getMsgCnt() > 0) {
             var allReward = true
@@ -690,7 +690,7 @@ public struct ApiHistoryNewCustom {
                                         for rawAttribute in rawAttributes {
                                             if let rawKey = rawAttribute.object(forKey: "key") as? String, rawKey == "amount", let rawValue = rawAttribute.object(forKey: "value") as? String  {
                                                 for rawCoin in rawValue.split(separator: ","){
-                                                    if (String(rawCoin).contains(WUtils.getMainDenom(chain))) {
+                                                    if (String(rawCoin).contains(WUtils.getMainDenom(chainConfig))) {
                                                         totalRewardSum = totalRewardSum.adding(NSDecimalNumber.init(string: String(rawCoin).filter{ $0.isNumber }))
                                                     }
                                                 }
@@ -701,7 +701,7 @@ public struct ApiHistoryNewCustom {
                             }
                         }
                     }
-                    return Coin.init(WUtils.getMainDenom(chain), totalRewardSum.stringValue)
+                    return Coin.init(WUtils.getMainDenom(chainConfig), totalRewardSum.stringValue)
                 }
             }
         }

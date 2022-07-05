@@ -44,9 +44,9 @@ class TxRedelegateCell: TxCell {
         incen3Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Cosmos_Staking_V1beta1_MsgBeginRedelegate.init(serializedData: response.tx.body.messages[position].value) {
             
@@ -59,25 +59,25 @@ class TxRedelegateCell: TxCell {
             if let dValidator = BaseData.instance.mAllValidators_gRPC.filter({ $0.operatorAddress == msg.validatorDstAddress}).first {
                 toMonikerLabel.text = "(" + dValidator.description_p.moniker + ")"
             }
-            WUtils.showCoinDp(msg.amount.denom, msg.amount.amount, redelegateDenomLabel, redelegateAmountLabel, chain.chainType)
+            WDP.dpCoin(chainConfig, msg.amount.denom, msg.amount.amount, redelegateDenomLabel, redelegateAmountLabel)
             
             let autoRewardCoins = WUtils.onParseAutoRewardGrpc(response, position)
             if (autoRewardCoins.count > 0) {
                 autoRewardLabel.isHidden = false
                 incen0Layer.isHidden = false
-                WUtils.showCoinDp(autoRewardCoins[0], incen0Denom, incen0Amount, chain.chainType)
+                WDP.dpCoin(chainConfig, autoRewardCoins[0], incen0Denom, incen0Amount)
             }
             if (autoRewardCoins.count > 1) {
                 incen1Layer.isHidden = false
-                WUtils.showCoinDp(autoRewardCoins[1], incen1Denom, incen1Amount, chain.chainType)
+                WDP.dpCoin(chainConfig, autoRewardCoins[1], incen1Denom, incen1Amount)
             }
             if (autoRewardCoins.count > 2) {
                 incen2Layer.isHidden = false
-                WUtils.showCoinDp(autoRewardCoins[2], incen2Denom, incen2Amount, chain.chainType)
+                WDP.dpCoin(chainConfig, autoRewardCoins[2], incen2Denom, incen2Amount)
             }
             if (autoRewardCoins.count > 3) {
                 incen3Layer.isHidden = false
-                WUtils.showCoinDp(autoRewardCoins[3], incen3Denom, incen3Amount, chain.chainType)
+                WDP.dpCoin(chainConfig, autoRewardCoins[3], incen3Denom, incen3Amount)
             }
             
         }

@@ -47,7 +47,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
         self.topCard.addGestureRecognizer(tapTotalCard)
         
-        if (ChainType.isHtlcSwappableCoin(chainType, nativeDenom)) {
+        if (WUtils.isHtlcSwappableCoin(chainType, nativeDenom)) {
             self.btnBepSend.isHidden = false
         } else {
             self.btnIbcSend.isHidden = false
@@ -69,8 +69,8 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     
     func onInitView() {
         if (chainType == ChainType.OSMOSIS_MAIN) {
-            WUtils.DpOsmosisTokenName(naviTokenSymbol, nativeDenom)
-            WUtils.DpOsmosisTokenImg(naviTokenImg, nativeDenom)
+            WDP.dpSymbol(chainConfig, nativeDenom, naviTokenSymbol)
+            WDP.dpSymbolImg(chainConfig, nativeDenom, naviTokenImg)
             if (nativeDenom == OSMOSIS_ION_DENOM) {
                 nativeDivideDecimal = 6
                 nativeDisplayDecimal = 6
@@ -85,10 +85,10 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
             
         } else if (chainType == ChainType.KAVA_MAIN) {
-            WUtils.DpKavaTokenName(naviTokenSymbol, nativeDenom)
-            naviTokenImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(nativeDenom))!)
-            nativeDivideDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
-            nativeDisplayDecimal = WUtils.getKavaCoinDecimal(nativeDenom)
+            WDP.dpSymbol(chainConfig, nativeDenom, naviTokenSymbol)
+            WDP.dpSymbolImg(chainConfig, nativeDenom, naviTokenImg)
+            nativeDivideDecimal = WUtils.getDenomDecimal(chainConfig, nativeDenom)
+            nativeDisplayDecimal = WUtils.getDenomDecimal(chainConfig, nativeDenom)
             totalAmount = WUtils.getKavaTokenAll(nativeDenom)
             
         } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
@@ -176,9 +176,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_TRANSFER, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -194,6 +192,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         let unAuthTitle = NSLocalizedString("str_notice", comment: "")
         let unAuthMsg = NSLocalizedString("str_msg_ibc", comment: "")
         let noticeAlert = UIAlertController(title: unAuthTitle, message: unAuthMsg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
             self.onStartIbc()
         }))
@@ -219,9 +218,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -250,10 +247,8 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let stakingDenom = WUtils.getMainDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_HTLC_SWAP, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(stakingDenom).compare(feeAmount).rawValue <= 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         

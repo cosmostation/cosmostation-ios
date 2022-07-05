@@ -75,6 +75,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -308,8 +309,8 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
             if (mKavaMyCdp_gRPC ==  nil || mKavaOraclePrice == nil) { return }
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getKavaCoinDecimal(mCDenom)
-            self.pDpDecimal = WUtils.getKavaCoinDecimal(mPDenom)
+            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
+            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
             self.currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
             
             self.pAvailable = BaseData.instance.getAvailableAmount_gRPC(mPDenom)
@@ -335,7 +336,7 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
             }
             
             if (pAllAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
-                pAllLabel.attributedText = WUtils.displayAmount2(pAllAmount.stringValue, pAllLabel.font!, pDpDecimal, pDpDecimal)
+                pAllLabel.attributedText = WDP.dpAmount(pAllAmount.stringValue, pAllLabel.font!, pDpDecimal, pDpDecimal)
             } else {
                 pAllTitle.isHidden = true
                 pAllLabel.isHidden = true
@@ -344,8 +345,8 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
                 pDisableAll.text = String(format: NSLocalizedString("str_cannot_repay_all", comment: ""), self.mPDenom.uppercased())
             }
             if (pMaxAmount.compare(NSDecimalNumber.zero).rawValue > 0 && pMinAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
-                pParticalMaxLabel.attributedText = WUtils.displayAmount2(pMaxAmount.stringValue, pParticalMaxLabel.font!, pDpDecimal, pDpDecimal)
-                pParticalMinLabel.attributedText = WUtils.displayAmount2(pMinAmount.stringValue, pParticalMinLabel.font!, pDpDecimal, pDpDecimal)
+                pParticalMaxLabel.attributedText = WDP.dpAmount(pMaxAmount.stringValue, pParticalMaxLabel.font!, pDpDecimal, pDpDecimal)
+                pParticalMinLabel.attributedText = WDP.dpAmount(pMinAmount.stringValue, pParticalMinLabel.font!, pDpDecimal, pDpDecimal)
             } else {
                 pParticalTitle.isHidden = true
                 pParticalMinLabel.isHidden = true
@@ -358,12 +359,11 @@ class CdpDrawRepay1ViewController: BaseViewController, UITextFieldDelegate, SBCa
             beforeLiquidationPrice = mKavaMyCdp_gRPC!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
             WUtils.showRiskRate2(beforeRiskRate, beforeSafeRate, beforeSafeTxt)
-
-            pDenomLabel.text = WUtils.getKavaTokenName(mPDenom)
-            pParticalDenom.text = WUtils.getKavaTokenName(mPDenom)
-            pAllDenom.text = WUtils.getKavaTokenName(mPDenom)
+            WDP.dpSymbol(chainConfig, mPDenom, pDenomLabel)
+            WDP.dpSymbol(chainConfig, mPDenom, pParticalDenom)
+            WDP.dpSymbol(chainConfig, mPDenom, pAllDenom)
+            WDP.dpSymbolImg(chainConfig, mPDenom, pDenomImg)
             
-            self.pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             self.loadingImg.onStopAnimation()
             self.loadingImg.isHidden = true
         }

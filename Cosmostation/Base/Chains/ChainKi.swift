@@ -22,6 +22,7 @@ class ChainKi: ChainConfig {
     var chainTitle2 = "KI"
     var chainDBName = CHAIN_KI_S
     var chainAPIName = "kichain"
+    var chainIdPrefix = "kichain-"
     
     var stakeDenomImg = UIImage(named: "tokenKi")
     var stakeDenom = "uxki"
@@ -31,6 +32,8 @@ class ChainKi: ChainConfig {
     
     var addressPrefix = "ki"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.025uxki"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +64,13 @@ class ChainKi: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/ki-foundation"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

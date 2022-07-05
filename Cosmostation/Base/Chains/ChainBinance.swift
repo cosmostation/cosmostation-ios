@@ -22,6 +22,7 @@ class ChainBinance: ChainConfig {
     var chainTitle2 = "BINANCE"
     var chainDBName = CHAIN_BINANCE_S
     var chainAPIName = ""
+    var chainIdPrefix = "binance-chain-tigris"
     
     var stakeDenomImg = UIImage(named: "tokenBinance")
     var stakeDenom = "BNB"
@@ -31,6 +32,8 @@ class ChainBinance: ChainConfig {
     
     var addressPrefix = "bnb"
     let addressHdPath0 = "m/44'/714'/0'/0/X"
+    
+    let gasRate0 = "0.0BNB"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +64,13 @@ class ChainBinance: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.bnbchain.org/en/blog/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

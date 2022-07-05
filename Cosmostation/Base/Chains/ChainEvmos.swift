@@ -22,6 +22,7 @@ class ChainEvmos: ChainConfig {
     var chainTitle2 = "EVMOS"
     var chainDBName = CHAIN_EVMOS_S
     var chainAPIName = "evmos"
+    var chainIdPrefix = "evmos_"
     
     var stakeDenomImg = UIImage(named: "tokenEvmos")
     var stakeDenom = "aevmos"
@@ -31,6 +32,8 @@ class ChainEvmos: ChainConfig {
     
     var addressPrefix = "evmos"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
+    
+    let gasRate0 = "20000000000aevmos"
     
     var pushSupport = false
     var wcSupoort = true
@@ -61,5 +64,13 @@ class ChainEvmos: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://evmos.blog/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

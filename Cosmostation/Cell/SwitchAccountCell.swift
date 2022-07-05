@@ -40,7 +40,7 @@ class SwitchAccountCell: UITableViewCell {
         chainAccountName.text = dpAccount?.getDpName()
         chainAccountAddress.text = dpAccount!.account_address
         
-        chainAccountAmount.attributedText = WUtils.displayAmount2(dpAccount?.account_last_total, chainAccountAmount.font, 0, 6)
+        chainAccountAmount.attributedText = WDP.dpAmount(dpAccount?.account_last_total, chainAccountAmount.font, 0, 6)
         WUtils.setDenomTitle(dpChainConfig.chainType, chainAccountDenom)
         
         if (dpAccount?.account_id == currentAccount?.account_id) {

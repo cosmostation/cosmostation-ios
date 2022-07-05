@@ -29,8 +29,8 @@ class SifDexDAppViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")!], for: .selected)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")!], for: .normal)
             dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
             dAppsSegment.tintColor = chainConfig?.chainColor
@@ -127,138 +127,6 @@ class SifDexDAppViewController: BaseViewController {
 }
 
 extension WUtils {
-    static func getSifCoinName(_ denom: String) -> String {
-        if (denom == SIF_MAIN_DENOM) {
-            return "ROWAN"
-            
-        } else if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
-                return dpDenom.uppercased()
-            } else {
-                return"UnKnown"
-            }
-            
-        } else if (denom.starts(with: "c")) {
-            return denom.substring(from: 1).uppercased()
-            
-        }
-        return denom
-    }
-    
-    static func getSifCoinImg(_ denom: String) -> UIImage? {
-        if (denom == SIF_MAIN_DENOM) {
-            return UIImage(named: "tokenSif")
-            
-        } else if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = URL(string: ibcToken.moniker ?? ""), let data = try? Data(contentsOf: url) {
-                return UIImage(data: data)?.resized(to: CGSize(width: 20, height: 20))
-            } else {
-                return UIImage(named: "tokenDefaultIbc")
-            }
-            
-        } else if (denom.starts(with: "c")) {
-            if let url = URL(string: SIF_COIN_IMG_URL + denom + ".png"), let data = try? Data(contentsOf: url) {
-                return UIImage(data: data)?.resized(to: CGSize(width: 20, height: 20))
-            } else {
-                return UIImage(named: "tokenDefault")
-            }
-        }
-        return UIImage(named: "tokenDefault")
-    }
-    
-    //using mintscan-api(util-api old)
-    static func getSifCoinDecimal(_ denom: String?) -> Int16 {
-        if (denom == SIF_MAIN_DENOM) {
-            return 18
-        } else if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
-                return deciaml
-            }
-        } else {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
-                return bridgeTokenInfo.decimal
-            }
-        }
-        return 18
-    }
-    
-    //TEMP
-    static func getGBrdigeCoinDecimal(_ denom: String?) -> Int16 {
-        if (denom == GRAVITY_BRIDGE_MAIN_DENOM) {
-            return 6
-        } else {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
-                return bridgeTokenInfo.decimal
-            }
-            return 18
-        }
-    }
-    
-    //TEMP
-    static func getInjectiveCoinDecimal(_ denom: String?) -> Int16 {
-        if (denom == INJECTIVE_MAIN_DENOM) {
-            return 18
-        } else if (denom?.starts(with: "share") == true) {
-            return 18
-        } else if (denom?.starts(with: "peggy0x") == true) {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
-                return bridgeTokenInfo.decimal
-            }
-        } else if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
-                return deciaml
-            }
-        }
-        return 18
-    }
-    
-    
-    
-    static func DpSifCoinName(_ label: UILabel, _ denom: String) {
-        if (denom == SIF_MAIN_DENOM) {
-            label.textColor = UIColor.init(named: "sif")
-            label.text = "ROWAN"
-            
-        } else if (denom.starts(with: "ibc/")) {
-            label.textColor = UIColor.init(named: "_font05")
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
-                label.text = dpDenom.uppercased()
-            } else {
-                label.text = "UnKnown"
-            }
-            
-        } else if (denom.starts(with: "c")) {
-            label.textColor = UIColor.init(named: "_font05")
-            label.text = denom.substring(from: 1).uppercased()
-            
-        } else {
-            label.textColor = UIColor.init(named: "_font05")
-            label.text = "UnKnown"
-        }
-    }
-    
-    static func DpSifCoinImg(_ imgView: UIImageView, _ denom: String) {
-        if (denom == SIF_MAIN_DENOM) {
-            imgView.image = UIImage(named: "tokenSif")
-            
-        } else if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = URL(string: ibcToken.moniker ?? "") {
-                imgView.af_setImage(withURL: url)
-            } else {
-                imgView.image = UIImage(named: "tokenDefaultIbc")
-            }
-            
-        } else if (denom.starts(with: "c")) {
-            if let url = URL(string: SIF_COIN_IMG_URL + denom + ".png") {
-                imgView.af_setImage(withURL: url)
-            } else {
-                imgView.image = UIImage(named: "tokenDefault")
-            }
-            
-        } else {
-            imgView.image = UIImage(named: "tokenDefault")
-        }
-    }
     
     static func getPoolLpAmount(_ pool: Sifnode_Clp_V1_Pool, _ denom: String) -> NSDecimalNumber {
         if (denom == SIF_MAIN_DENOM) {
@@ -296,42 +164,15 @@ extension WUtils {
         return NSDecimalNumber.init(string: pool.poolUnits)
     }
     
-    static func getBaseDenom(_ denom: String)  -> String {
-        if (denom == SIF_MAIN_DENOM) {
-            return SIF_MAIN_DENOM
-            
-        } else if (denom.starts(with: "ibc/")) {
-            guard let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) else {
-                return denom
-            }
-            if (ibcToken.auth == true) {
-                if (ibcToken.base_denom?.starts(with: "cw20:") == true) {
-                    let cAddress = ibcToken.base_denom?.replacingOccurrences(of: "cw20:", with: "")
-                    if let cw20Basedenom = BaseData.instance.mCw20Tokens.filter({ $0.contract_address == cAddress }).first {
-                        return cw20Basedenom.denom
-                    } else {
-                        return ibcToken.base_denom!
-                    }
-                } else {
-                    return ibcToken.base_denom!
-                }
-            }
-            
-        } else if (denom.starts(with: "c") || denom.starts(with: "x")) {
-            return denom.substring(from: 1).uppercased()
-            
-        }
-        return denom
-    }
-    
     static func getSifPoolValue(_ pool: Sifnode_Clp_V1_Pool) -> NSDecimalNumber {
-        let rowanDecimal = getSifCoinDecimal(SIF_MAIN_DENOM)
+        let chainConfig = ChainSif.init(.SIF_MAIN)
+        let rowanDecimal = getDenomDecimal(chainConfig, SIF_MAIN_DENOM)
         let rowanAmount = NSDecimalNumber.init(string: pool.nativeAssetBalance)
         let rowanPrice = perUsdValue(SIF_MAIN_DENOM) ?? NSDecimalNumber.zero
         
-        let externalDecimal = getSifCoinDecimal(pool.externalAsset.symbol)
+        let externalDecimal = getDenomDecimal(chainConfig, pool.externalAsset.symbol)
         let externalAmount = NSDecimalNumber.init(string: pool.externalAssetBalance)
-        let exteranlBaseDenom = getBaseDenom(pool.externalAsset.symbol)
+        let exteranlBaseDenom = BaseData.instance.getBaseDenom(chainConfig, pool.externalAsset.symbol)
         let exteranlPrice = perUsdValue(exteranlBaseDenom) ?? NSDecimalNumber.zero
         
         let rowanValue = rowanAmount.multiplying(by: rowanPrice).multiplying(byPowerOf10: -rowanDecimal, withBehavior: WUtils.handler2)

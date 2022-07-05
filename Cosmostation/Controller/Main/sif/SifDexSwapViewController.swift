@@ -47,6 +47,7 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
         
         self.inputCoinLayer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickInput (_:))))
@@ -64,44 +65,45 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func updateView() {
-        mInPutDecimal = WUtils.getSifCoinDecimal(mInputCoinDenom!)
-        mOutPutDecimal = WUtils.getSifCoinDecimal(mOutputCoinDenom!)
+        mInPutDecimal = WUtils.getDenomDecimal(chainConfig, mInputCoinDenom!)
+        mOutPutDecimal = WUtils.getDenomDecimal(chainConfig, mOutputCoinDenom!)
         mAvailableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mInputCoinDenom!)
         
         self.slippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "2"), swapFeeLabel.font)
-        self.inputCoinAvailableAmountLabel.attributedText = WUtils.displayAmount2(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, mInPutDecimal, mInPutDecimal)
+        self.inputCoinAvailableAmountLabel.attributedText = WDP.dpAmount(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, mInPutDecimal, mInPutDecimal)
+                
+        WDP.dpSymbolImg(chainConfig, mInputCoinDenom!, inputCoinImg)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinName)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom!, inputCoinExRateDenom)
         
-        WUtils.DpSifCoinImg(inputCoinImg, mInputCoinDenom!)
-        WUtils.DpSifCoinName(inputCoinName, mInputCoinDenom!)
-        WUtils.DpSifCoinName(inputCoinRateDenom, mInputCoinDenom!)
-        WUtils.DpSifCoinName(inputCoinExRateDenom, mInputCoinDenom!)
-        WUtils.DpSifCoinImg(outputCoinImg, mOutputCoinDenom!)
-        WUtils.DpSifCoinName(outputCoinName, mOutputCoinDenom!)
-        WUtils.DpSifCoinName(outputCoinRateDenom, mOutputCoinDenom!)
-        WUtils.DpSifCoinName(outputCoinExRateDenom, mOutputCoinDenom!)
+        WDP.dpSymbolImg(chainConfig, mOutputCoinDenom!, outputCoinImg)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom!, outputCoinName)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom!, outputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom!, outputCoinExRateDenom)
         
-        self.inputCoinRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, 6)
-        self.inputCoinExRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
+        self.inputCoinRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, 6)
+        self.inputCoinExRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
         
         //display swap rate with this pool
 //        let lpInputAmount = WUtils.getPoolLpAmount(mSelectedPool!, mInputCoinDenom!)
 //        let lpOutputAmount = WUtils.getPoolLpAmount(mSelectedPool!, mOutputCoinDenom!)
 //        let poolSwapRate = lpOutputAmount.dividing(by: lpInputAmount, withBehavior: WUtils.handler24Down).multiplying(byPowerOf10: (mInPutDecimal - mOutPutDecimal))
-//        self.outputCoinRateAmount.attributedText = WUtils.displayAmount2(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
+//        self.outputCoinRateAmount.attributedText = WDP.dpAmount(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
         let lpPrice = WUtils.getPoolLpPrice(mSelectedPool!, mInputCoinDenom!)
         print("lpPrice ", lpPrice)
         let poolSwapRate = lpPrice.rounding(accordingToBehavior: WUtils.handler24Down)
         print("poolSwapRate ", poolSwapRate)
-        self.outputCoinRateAmount.attributedText = WUtils.displayAmount2(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
+        self.outputCoinRateAmount.attributedText = WDP.dpAmount(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
         
         //display swap rate with market price
-        let priceInput = WUtils.perUsdValue(WUtils.getBaseDenom(mInputCoinDenom!)) ?? NSDecimalNumber.zero
-        let priceOutput = WUtils.perUsdValue(WUtils.getBaseDenom(mOutputCoinDenom!)) ?? NSDecimalNumber.zero
+        let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom!)) ?? NSDecimalNumber.zero
+        let priceOutput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom!)) ?? NSDecimalNumber.zero
         if (priceInput == NSDecimalNumber.zero || priceOutput == NSDecimalNumber.zero) {
             self.outputCoinExRateAmount.text = "?.??????"
         } else {
             let priceRate = priceInput.dividing(by: priceOutput, withBehavior: WUtils.handler6)
-            self.outputCoinExRateAmount.attributedText = WUtils.displayAmount2(priceRate.stringValue, outputCoinExRateAmount.font, 0, 6)
+            self.outputCoinExRateAmount.attributedText = WDP.dpAmount(priceRate.stringValue, outputCoinExRateAmount.font, 0, 6)
         }
         
         self.loadingImg.onStopAnimation()
@@ -120,7 +122,7 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
         }
         if (mSelectedPool == nil || mInputCoinDenom == nil || mOutputCoinDenom == nil) {
             mSelectedPool = BaseData.instance.mSifDexPools_gRPC[0]
-            mInputCoinDenom = WUtils.getMainDenom(chainType)
+            mInputCoinDenom = WUtils.getMainDenom(chainConfig)
             mOutputCoinDenom = mSelectedPool?.externalAsset.symbol
         }
         self.updateView()
@@ -189,10 +191,8 @@ class SifDexSwapViewController: BaseViewController, SBCardPopupDelegate {
             return
         }
         
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_GAS_AMOUNT_SWAP, 0)
-        let mainBalance = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
-        if (mainBalance.compare(txFeeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         

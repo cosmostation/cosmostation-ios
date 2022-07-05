@@ -36,7 +36,7 @@ class OkVote4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        self.feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 0, 18)
+        self.feeAmountLabel.attributedText = WDP.dpAmount((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 0, 18)
         var monikers = ""
         let validators = pageHolderVC.mOkVoteValidators
         for validator in validators {

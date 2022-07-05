@@ -42,6 +42,7 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         input0TextFiled.delegate = self
@@ -58,11 +59,11 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
         
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_KAVA_SWAP_DEPOSIT, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         coin0Denom = mKavaSwapPool.coins[0].denom
         coin1Denom = mKavaSwapPool.coins[1].denom
-        coin0Decimal = WUtils.getKavaCoinDecimal(coin0Denom)
-        coin1Decimal = WUtils.getKavaCoinDecimal(coin1Denom)
+        coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0Denom)
+        coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1Denom)
         
         if (mKavaSwapPool.coins[0].denom == coin0Denom) {
             coin0Amount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)
@@ -74,19 +75,19 @@ class KavaSwapJoin0ViewController: BaseViewController, UITextFieldDelegate {
         
         available0MaxAmount = BaseData.instance.getAvailableAmount_gRPC(coin0Denom)
         if (coin0Denom == KAVA_MAIN_DENOM) {
-            available0MaxAmount = available0MaxAmount.subtracting(txFeeAmount)
+            available0MaxAmount = available0MaxAmount.subtracting(mainDenomFee)
         }
         available1MaxAmount = BaseData.instance.getAvailableAmount_gRPC(coin1Denom)
         if (coin1Denom == KAVA_MAIN_DENOM) {
-            available1MaxAmount = available1MaxAmount.subtracting(txFeeAmount)
+            available1MaxAmount = available1MaxAmount.subtracting(mainDenomFee)
         }
         
-        WUtils.DpKavaTokenName(inputCoin0Name, coin0Denom)
-        WUtils.DpKavaTokenName(inputCoin1Name, coin1Denom)
-        self.inputCoin0Img.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(coin0Denom))!)
-        self.inputCoin1Img.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(coin1Denom))!)
-        WUtils.showCoinDp(coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel, chainType!)
-        WUtils.showCoinDp(coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel, chainType!)
+        WDP.dpSymbol(chainConfig, coin0Denom, inputCoin0Name)
+        WDP.dpSymbol(chainConfig, coin1Denom, inputCoin1Name)
+        WDP.dpSymbolImg(chainConfig, coin0Denom, inputCoin0Img)
+        WDP.dpSymbolImg(chainConfig, coin1Denom, inputCoin1Img)
+        WDP.dpCoin(chainConfig, coin0Denom, available0MaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel)
+        WDP.dpCoin(chainConfig, coin1Denom, available1MaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel)
         
         depositRate = coin1Amount.dividing(by: coin0Amount, withBehavior: WUtils.handler18)
         print("depositRate ", depositRate)

@@ -22,6 +22,7 @@ class ChainComdex: ChainConfig {
     var chainTitle2 = "COMDEX"
     var chainDBName = CHAIN_COMDEX_S
     var chainAPIName = "comdex"
+    var chainIdPrefix = "comdex-"
     
     var stakeDenomImg = UIImage(named: "tokenComdex")
     var stakeDenom = "ucmdx"
@@ -31,6 +32,8 @@ class ChainComdex: ChainConfig {
     
     var addressPrefix = "comdex"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.25ucmdx"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +64,13 @@ class ChainComdex: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.comdex.one/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

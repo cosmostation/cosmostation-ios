@@ -35,6 +35,7 @@ class QRScanViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
 
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
         
@@ -76,6 +77,7 @@ class QRScanViewController: UIViewController {
         } catch {
             print(error)
             let permissionAlert = UIAlertController(title: NSLocalizedString("error_access_camera_title", comment: ""), message: NSLocalizedString("error_access_camera_msg", comment: ""), preferredStyle: .alert)
+            if #available(iOS 13.0, *) { permissionAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
             
             let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
             let settingAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (action) in

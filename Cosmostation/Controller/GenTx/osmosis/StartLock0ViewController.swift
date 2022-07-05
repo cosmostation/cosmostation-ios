@@ -25,11 +25,12 @@ class StartLock0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         lpDenom = "gamm/pool/" + String(pageHolderVC.mPool!.id)
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(lpDenom)
-        WUtils.showCoinDp(lpDenom, availableMaxAmount.stringValue, lpAvailableDenomLabel, lpAvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, lpDenom, availableMaxAmount.stringValue, lpAvailableDenomLabel, lpAvailableLabel)
         
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

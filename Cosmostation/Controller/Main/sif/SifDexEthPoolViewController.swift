@@ -81,6 +81,7 @@ class SifDexEthPoolViewController: BaseViewController, UITableViewDataSource, UI
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             let noticeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
             noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("title_pool_join", comment: ""), style: .default, handler: { _ in
                 self.onCheckPoolJoin(self.mMyEthPools[indexPath.row])
             }))
@@ -103,12 +104,14 @@ class SifDexEthPoolViewController: BaseViewController, UITableViewDataSource, UI
             self.onShowAddMenomicDialog()
             return
         }
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_GAS_AMOUNT_LP, 0)
-        let externalDenom = pool.externalAsset.symbol
-        var rowanAvailable = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
-        rowanAvailable = rowanAvailable.subtracting(txFeeAmount)
-        let externalAvailable = BaseData.instance.getAvailableAmount_gRPC(externalDenom)
         
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let externalDenom = pool.externalAsset.symbol
+        let rowanAvailable = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
+        let externalAvailable = BaseData.instance.getAvailableAmount_gRPC(externalDenom)
         if (rowanAvailable.compare(NSDecimalNumber.zero).rawValue <= 0 || externalAvailable.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
             return
@@ -127,10 +130,13 @@ class SifDexEthPoolViewController: BaseViewController, UITableViewDataSource, UI
             self.onShowAddMenomicDialog()
             return
         }
-        let rowanAvailable = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_GAS_AMOUNT_LP, 0)
         
-        if (rowanAvailable.compare(txFeeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let rowanAvailable = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
+        if (rowanAvailable.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }

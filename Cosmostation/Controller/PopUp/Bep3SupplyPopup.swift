@@ -26,9 +26,9 @@ class Bep3SupplyPopup: BaseViewController, SBCardPopupContent {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        maxAmount.attributedText = WUtils.displayAmount2(swapSupply.getLimitAmount().stringValue, maxAmount.font, 8, 8)
-//        currentAmount.attributedText = WUtils.displayAmount2(swapSupply.getCurrentCapAmount().stringValue, currentAmount.font, 8, 8)
-//        remainAmount.attributedText = WUtils.displayAmount2(swapSupply.getRemainAmount().stringValue, remainAmount.font, 8, 8)
+//        maxAmount.attributedText = WDP.dpAmount(swapSupply.getLimitAmount().stringValue, maxAmount.font, 8, 8)
+//        currentAmount.attributedText = WDP.dpAmount(swapSupply.getCurrentCapAmount().stringValue, currentAmount.font, 8, 8)
+//        remainAmount.attributedText = WDP.dpAmount(swapSupply.getRemainAmount().stringValue, remainAmount.font, 8, 8)
 //        
 //        if (swapSupply.getRemainAmount().compare(NSDecimalNumber.zero).rawValue <= 0) {
 //            supplyTitle.text = NSLocalizedString("str_bep3_unavailable_title", comment: "")

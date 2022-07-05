@@ -104,7 +104,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.totalCard.backgroundColor = chainConfig?.chainColorBG
         self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         if (account?.account_has_private == true) {
             self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
             self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
@@ -147,13 +147,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         self.walletTableView.reloadData()
         self.refresher.endRefreshing()
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         self.walletTableView.reloadData()
     }
     
@@ -501,6 +501,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                     
                 } else {
                     let alertController = UIAlertController(title: NSLocalizedString("permission_push_title", comment: ""), message: NSLocalizedString("permission_push_msg", comment: ""), preferredStyle: .alert)
+                    if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
                     let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (_) -> Void in
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return
@@ -568,7 +569,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
 
         let balances = BaseData.instance.selectBalanceById(accountId: self.account!.account_id)
         if (chainType! == ChainType.BINANCE_MAIN) {
-            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue <= 0) {
+            if (WUtils.getTokenAmount(balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BINANCE_BASE)).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
                 return
             }
@@ -618,11 +619,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OK_DEPOSIT, BaseData.instance.mMyValidator.count)
-        if (BaseData.instance.availableAmount(OKEX_MAIN_DENOM).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
-            return
-        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+                    self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+                    return
+                }
         if (WUtils.getTokenAmount(mainTabVC.mBalances, OKEX_MAIN_DENOM).compare(NSDecimalNumber(string: "0.01")).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
             return
@@ -640,8 +640,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OK_WITHDRAW, BaseData.instance.mMyValidator.count)
-        if (BaseData.instance.availableAmount(OKEX_MAIN_DENOM).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -661,6 +660,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     //no need yet
     func onClickOkVoteValMode() {
         let okVoteTypeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { okVoteTypeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         okVoteTypeAlert.addAction(UIAlertAction(title: NSLocalizedString("str_vote_direct", comment: ""), style: .default, handler: { _ in
             self.onClickOkVoteVal()
         }))
@@ -731,9 +731,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 self.onShowAddMenomicDialog()
                 return
             }
-            let mainDenom = WUtils.getMainDenom(chainType)
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_DESMOS_GEN_PROFILE, 0)
-            if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(feeAmount).rawValue <= 0) {
+            if (!BaseData.instance.isTxFeePayable(chainConfig)) {
                 self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
             }
@@ -763,6 +761,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         }
         
         let helpAlert = UIAlertController(title: "", message: msg1 + msg2 + msg3 + msg4, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { helpAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         helpAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -799,6 +798,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let noKeyAlert = UIAlertController(title: NSLocalizedString("buy_without_key_title", comment: ""),
                                            message: NSLocalizedString("buy_without_key_msg", comment: ""),
                                            preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noKeyAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noKeyAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: {_ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -815,6 +815,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let selectFiatAlert = UIAlertController(title: NSLocalizedString("buy_select_fiat_title", comment: ""),
                                                 message: NSLocalizedString("buy_select_fiat_msg", comment: ""),
                                                 preferredStyle: .alert)
+        if #available(iOS 13.0, *) { selectFiatAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let usdAction = UIAlertAction(title: "USD", style: .default, handler: { _ in
             self.onStartMoonpaySignature("usd")
         })
@@ -877,34 +878,30 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowAddMenomicDialog()
             return
         }
-        
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let mainDenom = WUtils.getMainDenom(chainType)
-        if (WUtils.isGRPC(chainType!)) {
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
-            if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
-                return
-            }
+        let mainDenom = chainConfig!.stakeDenom
+        if (chainConfig?.isGrpc == true) {
             if (BaseData.instance.getAvailableAmount_gRPC(mainDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
                 return
             }
-            
-        } else {
-            let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
-            if (BaseData.instance.availableAmount(gasDenom).compare(feeAmount).rawValue < 0) {
-                self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+            if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
             }
+            
+        } else {
             if (BaseData.instance.availableAmount(mainDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
                 self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+                return
+            }
+            if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+                self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
                 return
             }
         }
         
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mToSendDenom = WUtils.getMainDenom(chainType)
+        txVC.mToSendDenom = WUtils.getMainDenom(chainConfig)
         txVC.mType = TASK_TYPE_TRANSFER
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
@@ -927,6 +924,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 if (result.contains("wallet-bridge.binance.org")) {
                     self.wcURL = result
                     let wcAlert = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: NSLocalizedString("wc_alert_msg", comment: ""), preferredStyle: .alert)
+                    if #available(iOS 13.0, *) { wcAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
                     wcAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil))
                     wcAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
                         let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController

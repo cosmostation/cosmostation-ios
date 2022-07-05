@@ -37,6 +37,7 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         WUtils.setDenomTitle(chainType!, rewardDenomLabel)
         WUtils.setDenomTitle(chainType!, feeDenomLabel)
@@ -46,6 +47,7 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     @IBAction func onClickConfirm(_ sender: Any) {
         if (checkIsWasteFee()) {
             let disableAlert = UIAlertController(title: NSLocalizedString("fee_over_title", comment: ""), message: NSLocalizedString("fee_over_msg", comment: ""), preferredStyle: .alert)
+            if #available(iOS 13.0, *) { disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
             disableAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { [weak disableAlert] (_) in
                 self.dismiss(animated: true, completion: nil)
             }))
@@ -79,7 +81,7 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     func checkIsWasteFee() -> Bool {
         var selectedRewardSum = NSDecimalNumber.zero
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {
-            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), validator.operatorAddress)
+            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress)
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
         if (NSDecimalNumber.init(string: pageHolderVC.mFee?.amount[0].amount).compare(selectedRewardSum).rawValue > 0 ) {
@@ -105,16 +107,16 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
         
         var selectedRewardSum = NSDecimalNumber.zero
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {
-            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), validator.operatorAddress)
+            let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress)
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
         
-        rewardAmoutLaebl.attributedText = WUtils.displayAmount2(selectedRewardSum.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
-        feeAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
+        rewardAmoutLaebl.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
+        feeAmountLabel.attributedText = WDP.dpAmount(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
         
-        let userBalance: NSDecimalNumber = BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainType))
+        let userBalance: NSDecimalNumber = BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainConfig))
         let expectedAmount = userBalance.adding(selectedRewardSum).subtracting(WUtils.plainStringToDecimal(pageHolderVC.mFee?.amount[0].amount))
-        expectedAmountLabel.attributedText = WUtils.displayAmount2(expectedAmount.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
+        expectedAmountLabel.attributedText = WDP.dpAmount(expectedAmount.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
         
         if (pageHolderVC.mAccount?.account_address == pageHolderVC.mRewardAddress) {
             recipientTitleLabel.isHidden = true

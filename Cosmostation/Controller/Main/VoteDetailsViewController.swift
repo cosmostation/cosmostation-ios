@@ -86,9 +86,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             self.onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
             return
         }
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_VOTE, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -126,7 +124,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.voteEndTime.text = WUtils.sifNodeTimeToString(mMintscanProposalDetail?.voting_end_time)
             cell?.voteDescription.text = mMintscanProposalDetail?.description
             if let requestCoin = mMintscanProposalDetail?.content?.amount?[0] {
-                WUtils.showCoinDp(requestCoin, cell!.requestAmountDenom, cell!.requestAmount, chainType!)
+                WDP.dpCoin(chainConfig, requestCoin, cell!.requestAmountDenom, cell!.requestAmount)
             } else {
                 cell!.requestAmountDenom.text = "N/A"
             }

@@ -22,6 +22,7 @@ class ChainSecret: ChainConfig {
     var chainTitle2 = "SECRET"
     var chainDBName = CHAIN_SECRET_S
     var chainAPIName = "secret"
+    var chainIdPrefix = "secret-"
     
     var stakeDenomImg = UIImage(named: "tokenSecret")
     var stakeDenom = "uscrt"
@@ -32,6 +33,8 @@ class ChainSecret: ChainConfig {
     var addressPrefix = "secret"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/529'/0'/0/X"
+    
+    let gasRate0 = "0.25uscrt"
     
     var pushSupport = false
     var wcSupoort = false
@@ -62,5 +65,13 @@ class ChainSecret: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.scrt.network"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

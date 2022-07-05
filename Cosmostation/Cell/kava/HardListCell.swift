@@ -33,10 +33,16 @@ class HardListCell: UITableViewCell {
         guard let hardMoneyMarket = hardParam?.moneyMarkets[position] else {
             return
         }
-        let baseDenom = BaseData.instance.getBaseDenom(hardMoneyMarket.denom)
-        let decimal = WUtils.tokenDivideDecimal(ChainType.KAVA_MAIN, hardMoneyMarket.denom)
-        let url = KAVA_HARD_POOL_IMG_URL + "lp" + baseDenom + ".png"
-        let title = hardMoneyMarket.spotMarketID.replacingOccurrences(of: ":30", with: "")
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        var hardImgDenom = ""
+        if (hardMoneyMarket.denom.starts(with: "ibc/")) {
+            hardImgDenom = BaseData.instance.getBaseDenom(chainConfig, hardMoneyMarket.denom)
+        } else {
+            hardImgDenom = hardMoneyMarket.denom
+        }
+        let decimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarket.denom)
+        let url = KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom + ".png"
+        let title = hardMoneyMarket.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "")
         harvestImg.af_setImage(withURL: URL(string: url)!)
         harvestTitle.text = title.uppercased()
         
@@ -59,7 +65,7 @@ class HardListCell: UITableViewCell {
         }
         let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(hardMoneyMarket.denom))
         let myDepositValue = myDepositAmount.multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
-        WUtils.showCoinDp(hardMoneyMarket.denom, myDepositAmount.stringValue, mySuppliedDenom, mySuppliedAmount, ChainType.KAVA_MAIN)
+        WDP.dpCoin(chainConfig, hardMoneyMarket.denom, myDepositAmount.stringValue, mySuppliedDenom, mySuppliedAmount)
         mySuppliedValue.attributedText = WUtils.getDPRawDollor(myDepositValue.stringValue, 2, mySuppliedValue.font)
         
         
@@ -71,7 +77,7 @@ class HardListCell: UITableViewCell {
             }
         }
         let myBorrowValue = myBorrowAmount.multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
-        WUtils.showCoinDp(hardMoneyMarket.denom, myBorrowAmount.stringValue, myBorrowedDenom, myBorrowedAmount, ChainType.KAVA_MAIN)
+        WDP.dpCoin(chainConfig, hardMoneyMarket.denom, myBorrowAmount.stringValue, myBorrowedDenom, myBorrowedAmount)
         myBorrowedValue.attributedText = WUtils.getDPRawDollor(myBorrowValue.stringValue, 2, myBorrowedValue.font)
     }
     

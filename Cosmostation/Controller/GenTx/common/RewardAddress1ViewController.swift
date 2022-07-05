@@ -22,6 +22,10 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        
         self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
     }
     
@@ -60,7 +64,7 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
             return;
         }
         
-        if (!WUtils.isValidChainAddress(pageHolderVC.chainType, userInput)) {
+        if (!WUtils.isValidChainAddress(chainConfig, userInput)) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }

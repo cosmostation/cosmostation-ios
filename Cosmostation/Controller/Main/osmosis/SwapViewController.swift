@@ -52,6 +52,7 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
         
         //init for pool pair osmos/atom
@@ -61,25 +62,25 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func updateView() {
-        mInPutDecimal = WUtils.getOsmosisCoinDecimal(mInputCoinDenom)
-        mOutPutDecimal = WUtils.getOsmosisCoinDecimal(mOutputCoinDenom)
+        mInPutDecimal = WUtils.getDenomDecimal(chainConfig, mInputCoinDenom)
+        mOutPutDecimal = WUtils.getDenomDecimal(chainConfig, mOutputCoinDenom)
         mAvailableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(mInputCoinDenom!)
         
         self.swapFeeLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: mSelectedPool?.poolParams.swapFee).multiplying(byPowerOf10: -16), swapFeeLabel.font)
         self.slippageLabel.attributedText = WUtils.displayPercent(NSDecimalNumber.init(string: "3"), swapFeeLabel.font)
-        self.inputCoinAvailableAmountLabel.attributedText = WUtils.displayAmount2(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, mInPutDecimal, mInPutDecimal)
+        self.inputCoinAvailableAmountLabel.attributedText = WDP.dpAmount(mAvailableMaxAmount.stringValue, inputCoinAvailableAmountLabel.font!, mInPutDecimal, mInPutDecimal)
         
-        WUtils.DpOsmosisTokenImg(inputCoinImg, mInputCoinDenom!)
-        WUtils.DpOsmosisTokenImg(outputCoinImg, mOutputCoinDenom!)
-        WUtils.DpOsmosisTokenName(inputCoinName, mInputCoinDenom!)
-        WUtils.DpOsmosisTokenName(outputCoinName, mOutputCoinDenom!)
-        WUtils.DpOsmosisTokenName(inputCoinRateDenom, mInputCoinDenom!)
-        WUtils.DpOsmosisTokenName(outputCoinRateDenom, mOutputCoinDenom!)
-        WUtils.DpOsmosisTokenName(inputCoinExRateDenom, mInputCoinDenom!)
-        WUtils.DpOsmosisTokenName(outputCoinExRateDenom, mOutputCoinDenom!)
+        WDP.dpSymbolImg(chainConfig, mInputCoinDenom!, inputCoinImg)
+        WDP.dpSymbolImg(chainConfig, mOutputCoinDenom!, outputCoinImg)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinName)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinName)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinRateDenom)
+        WDP.dpSymbol(chainConfig, mInputCoinDenom, inputCoinExRateDenom)
+        WDP.dpSymbol(chainConfig, mOutputCoinDenom, outputCoinExRateDenom)
         
-        inputCoinRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, mInPutDecimal)
-        inputCoinExRateAmount.attributedText = WUtils.displayAmount2(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, mInPutDecimal)
+        inputCoinRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinRateAmount.font, 0, 6)
+        inputCoinExRateAmount.attributedText = WDP.dpAmount(NSDecimalNumber.one.stringValue, inputCoinExRateAmount.font, 0, 6)
         
         //display swap rate with this pool
         var inputAssetAmount = NSDecimalNumber.zero
@@ -96,20 +97,20 @@ class SwapViewController: BaseViewController, SBCardPopupDelegate {
                 outputAssetWeight = NSDecimalNumber.init(string: poolAsset.weight)
             }
         }
-        inputAssetAmount = inputAssetAmount.multiplying(byPowerOf10: -WUtils.getOsmosisCoinDecimal(mInputCoinDenom))
-        outputAssetAmount = outputAssetAmount.multiplying(byPowerOf10: -WUtils.getOsmosisCoinDecimal(mOutputCoinDenom))
+        inputAssetAmount = inputAssetAmount.multiplying(byPowerOf10: -mInPutDecimal)
+        outputAssetAmount = outputAssetAmount.multiplying(byPowerOf10: -mOutPutDecimal)
         let poolSwapRate = outputAssetAmount.multiplying(by: inputAssetWeight).dividing(by: inputAssetAmount, withBehavior: WUtils.handler18).dividing(by: outputAssetWeight, withBehavior: WUtils.handler6)
         print("poolSwapRate ", poolSwapRate)
-        outputCoinRateAmount.attributedText = WUtils.displayAmount2(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, mOutPutDecimal)
+        outputCoinRateAmount.attributedText = WDP.dpAmount(poolSwapRate.stringValue, outputCoinRateAmount.font, 0, 6)
         
         //display swap rate with market price
-        let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(mInputCoinDenom!)) ?? NSDecimalNumber.zero
-        let priceOutput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(mOutputCoinDenom!)) ?? NSDecimalNumber.zero
+        let priceInput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mInputCoinDenom!)) ?? NSDecimalNumber.zero
+        let priceOutput = WUtils.perUsdValue(BaseData.instance.getBaseDenom(chainConfig, mOutputCoinDenom!)) ?? NSDecimalNumber.zero
         if (priceInput == NSDecimalNumber.zero || priceOutput == NSDecimalNumber.zero) {
             self.outputCoinExRateAmount.text = "?.??????"
         } else {
             let priceRate = priceInput.dividing(by: priceOutput, withBehavior: WUtils.handler6)
-            self.outputCoinExRateAmount.attributedText = WUtils.displayAmount2(priceRate.stringValue, outputCoinExRateAmount.font, 0, mOutPutDecimal)
+            self.outputCoinExRateAmount.attributedText = WDP.dpAmount(priceRate.stringValue, outputCoinExRateAmount.font, 0, 6)
         }
     }
     

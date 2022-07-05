@@ -26,9 +26,9 @@ class TxTokenSwapCell: TxCell {
         txSwapOutAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn.init(serializedData: response.tx.body.messages[position].value) {
             print("Osmosis_Gamm_V1beta1_MsgSwapExactAmountIn")
@@ -56,7 +56,7 @@ class TxTokenSwapCell: TxCell {
                 }
             }
             if (inCoin != nil) {
-                WUtils.showCoinDp(inCoin!, txSwapInDenomLabel, txSwapInAmountLabel, chain.chainType)
+                WDP.dpCoin(chainConfig, inCoin!, txSwapInDenomLabel, txSwapInAmountLabel)
             } else {
                 txSwapInAmountLabel.text = ""
                 txSwapInDenomLabel.text = ""
@@ -83,7 +83,7 @@ class TxTokenSwapCell: TxCell {
             }
             print("outCoin ", outCoin)
             if (outCoin != nil) {
-                WUtils.showCoinDp(outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel, chain.chainType)
+                WDP.dpCoin(chainConfig, outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel)
             } else {
                 txSwapOutAmountLabel.text = ""
                 txSwapOutDenomLabel.text = ""
@@ -117,7 +117,7 @@ class TxTokenSwapCell: TxCell {
                 }
             }
             if (inCoin != nil) {
-                WUtils.showCoinDp(inCoin!, txSwapInDenomLabel, txSwapInAmountLabel, chain.chainType)
+                WDP.dpCoin(chainConfig, inCoin!, txSwapInDenomLabel, txSwapInAmountLabel)
             } else {
                 txSwapInAmountLabel.text = ""
                 txSwapInDenomLabel.text = ""
@@ -144,7 +144,7 @@ class TxTokenSwapCell: TxCell {
             }
             print("outCoin ", outCoin)
             if (outCoin != nil) {
-                WUtils.showCoinDp(outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel, chain.chainType)
+                WDP.dpCoin(chainConfig, outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel)
             } else {
                 txSwapOutAmountLabel.text = ""
                 txSwapOutDenomLabel.text = ""

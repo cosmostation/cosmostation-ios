@@ -56,9 +56,9 @@ class WalletPriceCell: UITableViewCell {
         let chainType = chainConfig!.chainType
         
         sourceSite.text = "(CoinGecko)"
-        perPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainType), perPrice.font)
-        updownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainType), font: updownPercent.font)
-        let changeValue = WUtils.valueChange(WUtils.getMainDenom(chainType))
+        perPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainConfig), perPrice.font)
+        updownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainConfig), font: updownPercent.font)
+        let changeValue = WUtils.valueChange(WUtils.getMainDenom(chainConfig))
         if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { updownImg.image = UIImage(named: "priceUp") }
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { updownImg.image = UIImage(named: "priceDown") }
         else { updownImg.image = nil }

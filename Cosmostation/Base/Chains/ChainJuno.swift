@@ -22,6 +22,7 @@ class ChainJuno: ChainConfig {
     var chainTitle2 = "JUNO"
     var chainDBName = CHAIN_JUNO_S
     var chainAPIName = "juno"
+    var chainIdPrefix = "juno-"
     
     var stakeDenomImg = UIImage(named: "tokenJuno")
     var stakeDenom = "ujuno"
@@ -31,6 +32,10 @@ class ChainJuno: ChainConfig {
     
     var addressPrefix = "juno"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.0025ujuno"
+    let gasRate1 = "0.005ujuno"
+    let gasRate2 = "0.025ujuno"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +66,13 @@ class ChainJuno: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@JunoNetwork/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
     }
 }

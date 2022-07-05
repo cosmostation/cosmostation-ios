@@ -22,6 +22,7 @@ class ChainSentinel: ChainConfig {
     var chainTitle2 = "SENTINEL"
     var chainDBName = CHAIN_SENTINEL_S
     var chainAPIName = "sentinel"
+    var chainIdPrefix = "sentinelhub-"
     
     var stakeDenomImg = UIImage(named: "tokenSentinel")
     var stakeDenom = "udvpn"
@@ -31,6 +32,9 @@ class ChainSentinel: ChainConfig {
     
     var addressPrefix = "sent"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.01udvpn"
+    let gasRate1 = "0.1udvpn"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +65,13 @@ class ChainSentinel: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/sentinel"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

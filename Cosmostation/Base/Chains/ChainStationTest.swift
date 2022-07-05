@@ -22,6 +22,7 @@ class StationTest: ChainConfig {
     var chainTitle2 = "STATION TEST"
     var chainDBName = CHAIN_STATION_TEST_S
     var chainAPIName = ""
+    var chainIdPrefix = "station"
     
     var stakeDenomImg = UIImage(named: "tokenStation")
     var stakeDenom = "uiss"
@@ -31,6 +32,10 @@ class StationTest: ChainConfig {
     
     var addressPrefix = "station"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.00025uiss"
+    let gasRate1 = "0.0025uiss"
+    let gasRate2 = "0.025uiss"
     
     var pushSupport = false
     var wcSupoort = true
@@ -61,5 +66,13 @@ class StationTest: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/cosmostation"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

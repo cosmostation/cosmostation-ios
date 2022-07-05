@@ -60,6 +60,7 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -290,8 +291,8 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
             if (mKavaMyCdp_gRPC ==  nil || mKavaOraclePrice == nil) { return }
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getKavaCoinDecimal(mCDenom)
-            self.pDpDecimal = WUtils.getKavaCoinDecimal(mPDenom)
+            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
+            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
             self.currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
             
             let currentPAmount = mKavaMyCdp_gRPC!.getRawPrincipalAmount()
@@ -306,8 +307,8 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
             //calculate max debtable amount from current state.
             pMaxAmount = mKavaMyCdp_gRPC!.getMoreLoanableAmount(mCollateralParam!)
 
-            pAvailabeMinLabel.attributedText = WUtils.displayAmount2(pMinAmount.stringValue, pAvailabeMinLabel.font!, pDpDecimal, pDpDecimal)
-            pAvailabeMaxLabel.attributedText = WUtils.displayAmount2(pMaxAmount.stringValue, pAvailabeMaxLabel.font!, pDpDecimal, pDpDecimal)
+            pAvailabeMinLabel.attributedText = WDP.dpAmount(pMinAmount.stringValue, pAvailabeMinLabel.font!, pDpDecimal, pDpDecimal)
+            pAvailabeMaxLabel.attributedText = WDP.dpAmount(pMaxAmount.stringValue, pAvailabeMaxLabel.font!, pDpDecimal, pDpDecimal)
 
             beforeLiquidationPrice = mKavaMyCdp_gRPC!.getLiquidationPrice(mCDenom, mPDenom, mCollateralParam!)
             beforeRiskRate = NSDecimalNumber.init(string: "100").subtracting(currentPrice.subtracting(beforeLiquidationPrice).multiplying(byPowerOf10: 2).dividing(by: currentPrice, withBehavior: WUtils.handler2Down))
@@ -317,10 +318,10 @@ class CdpDrawDebt1ViewController: BaseViewController, UITextFieldDelegate, SBCar
 //            print("beforeLiquidationPrice ", beforeLiquidationPrice)
 //            print("beforeRiskRate ", beforeRiskRate)
             
-            pDenomLabel.text = WUtils.getKavaTokenName(mPDenom)
-            pAvailableDenom.text = WUtils.getKavaTokenName(mPDenom)
+            WDP.dpSymbol(chainConfig, mPDenom, pDenomLabel)
+            WDP.dpSymbol(chainConfig, mPDenom, pAvailableDenom)
+            WDP.dpSymbolImg(chainConfig, mPDenom, pDenomImg)
             
-            self.pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
             self.loadingImg.onStopAnimation()
             self.loadingImg.isHidden = true
         }

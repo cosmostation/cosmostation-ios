@@ -52,8 +52,8 @@ class OkDeposit4ViewController: BaseViewController, PasswordViewDelegate, SBCard
     }
     
     func onUpdateView() {
-        toDepositAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mOkToStaking.amount, toDepositAmountLabel.font, 0, 18)
-        feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 0, 18)
+        toDepositAmountLabel.attributedText = WDP.dpAmount(pageHolderVC.mOkToStaking.amount, toDepositAmountLabel.font, 0, 18)
+        feeAmountLabel.attributedText = WDP.dpAmount((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 0, 18)
         memoLabel.text = pageHolderVC.mMemo
     }
     

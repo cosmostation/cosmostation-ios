@@ -225,6 +225,7 @@ class CommonWCViewController: BaseViewController {
             if event == .ethSendTransaction {
                 if self.chainType == ChainType.EVMOS_MAIN {
                     let alertController = UIAlertController(title: NSLocalizedString("wc_request_sign_title", comment: ""), message: transaction.data, preferredStyle: .alert)
+                    if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
                     let confirmAction = UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default) { (_) -> Void in
                         self.processEthSend(id: id, transaction: transaction)
                     }
@@ -578,6 +579,7 @@ class CommonWCViewController: BaseViewController {
         let notSupportTitle = NSLocalizedString("error_not_support_chain_title", comment: "")
         let notSupportMsg = String(format: NSLocalizedString("error_not_support_chain_msg", comment: ""), chainId)
         let notSupportAlert = UIAlertController(title: notSupportTitle, message: notSupportMsg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { notSupportAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         notSupportAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
         }))
         self.present(notSupportAlert, animated: true)
@@ -587,6 +589,7 @@ class CommonWCViewController: BaseViewController {
         let notAccountsTitle = NSLocalizedString("error_no_accounts_chain_title", comment: "")
         let notAccountsMsg = NSLocalizedString("error_no_accounts_chain_msg", comment: "")
         let notAccountsAlert = UIAlertController(title: notAccountsTitle, message: notAccountsMsg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { notAccountsAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         notAccountsAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
         }))
         self.present(notAccountsAlert, animated: true)
@@ -728,6 +731,7 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
             completionHandler()
         }
@@ -739,6 +743,7 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel) { _ in
             completionHandler(false)
         }

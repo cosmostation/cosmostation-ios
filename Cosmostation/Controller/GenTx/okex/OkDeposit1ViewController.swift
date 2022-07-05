@@ -23,16 +23,17 @@ class OkDeposit1ViewController: BaseViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
-        WUtils.setDenomTitle(pageHolderVC.chainType!, denomTitleLabel)
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        mDpDecimal = 18
-        var currentVotedCnt = 0
-        if let voted = BaseData.instance.mOkStaking?.validator_address?.count { currentVotedCnt = voted }
-        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, pageHolderVC.mType!, currentVotedCnt)
+        let mainDenom = chainConfig!.stakeDenom
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
-        userAvailable = WUtils.getTokenAmount(pageHolderVC.mBalances, OKEX_MAIN_DENOM).subtracting(feeAmount)
-        availableAmountLabel.attributedText = WUtils.displayAmount2(userAvailable.stringValue, availableAmountLabel.font, 0, 18)
+        userAvailable = BaseData.instance.availableAmount(mainDenom).subtracting(mainDenomFee)
+        WDP.dpCoin(chainConfig, mainDenom, userAvailable.stringValue, denomTitleLabel, availableAmountLabel)
+        
         toDepositAmountInput.delegate = self
         toDepositAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
@@ -181,6 +182,7 @@ class OkDeposit1ViewController: BaseViewController, UITextFieldDelegate {
     
     func showMaxWarnning() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("max_spend_title", comment: ""), message: NSLocalizedString("max_spend_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))

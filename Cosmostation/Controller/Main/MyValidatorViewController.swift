@@ -107,7 +107,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         } else {
             if (indexPath.row == BaseData.instance.mMyValidators_gRPC.count) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"ClaimRewardAllCell") as? ClaimRewardAllCell
-                cell?.updateView(self.chainType)
+                cell?.updateView(chainConfig)
                 cell?.delegate = self
                 return cell!
             } else {
@@ -140,11 +140,10 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         }
         var claimAbleValidators = Array<Cosmos_Staking_V1beta1_Validator>()
         var toClaimValidators  = Array<Cosmos_Staking_V1beta1_Validator>()
-        let feeAmountSingle = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_CLAIM_STAKE_REWARD, 1)
-        let mainDenom = WUtils.getMainDenom(chainType)
+        let mainDenom = chainConfig!.stakeDenom
         
         BaseData.instance.mMyValidators_gRPC.forEach { validator in
-            if (BaseData.instance.getReward_gRPC(mainDenom, validator.operatorAddress).compare(feeAmountSingle).rawValue > 0) {
+            if (BaseData.instance.getReward_gRPC(mainDenom, validator.operatorAddress).compare(NSDecimalNumber.init(string: "0.001")).rawValue > 0) {
                 claimAbleValidators.append(validator)
             }
         }
@@ -163,9 +162,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             toClaimValidators = claimAbleValidators
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_CLAIM_STAKE_REWARD, toClaimValidators.count)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -184,13 +181,11 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             return
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_DELEGATE, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (BaseData.instance.getDelegatable_gRPC(chainType).compare(NSDecimalNumber.zero).rawValue <= 0) {
+        if (BaseData.instance.getDelegatable_gRPC(chainConfig).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }
@@ -204,6 +199,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     
     @objc func onStartSort() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("sort_by_name", comment: ""), style: UIAlertAction.Style.default, handler: { (action) in
             BaseData.instance.setMyValidatorSort(1)
@@ -248,8 +244,8 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             if ($1.description_p.moniker == "Cosmostation") { return false }
             if ($0.jailed && !$1.jailed) { return false }
             if (!$0.jailed && $1.jailed) { return true }
-            let firstVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainType), $0.operatorAddress)
-            let seconVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainType), $1.operatorAddress)
+            let firstVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainConfig), $0.operatorAddress)
+            let seconVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainConfig), $1.operatorAddress)
             return firstVal.compare(seconVal).rawValue > 0 ? true : false
         }
     }

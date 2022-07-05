@@ -183,7 +183,7 @@ final class BaseData : NSObject{
         return mBridgeTokens.filter { $0.denom.lowercased() == denom.lowercased() }.first
     }
     
-    func getBaseDenom(_ denom: String) -> String {
+    func getBaseDenom(_ chainConfig: ChainConfig?, _ denom: String) -> String {
         if (denom.starts(with: "ibc/")) {
             guard let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) else {
                 return denom
@@ -200,6 +200,16 @@ final class BaseData : NSObject{
                     return ibcToken.base_denom!
                 }
             }
+        }
+        if (chainConfig?.chainType == .SIF_MAIN) {
+            if (denom.starts(with: "c") || denom.starts(with: "x")) {
+                return denom.substring(from: 1).uppercased()
+            }
+        } else if (chainConfig?.chainType == .KAVA_MAIN) {
+            if (denom == TOKEN_HTLC_KAVA_BNB) { return "bnb" }
+            else if (denom == TOKEN_HTLC_KAVA_XRPB) { return "xrp" }
+            else if (denom == TOKEN_HTLC_KAVA_BUSD) { return "busd" }
+            else if (denom.contains("btc")) { return "btc" }
         }
         return denom
     }
@@ -351,9 +361,9 @@ final class BaseData : NSObject{
         return result
     }
     
-    func getDelegatable_gRPC(_ chainType: ChainType?) -> NSDecimalNumber {
-        let mainDenom = WUtils.getMainDenom(chainType)
-        if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
+    func getDelegatable_gRPC(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
+        let mainDenom = WUtils.getMainDenom(chainConfig)
+        if (chainConfig?.chainType == ChainType.CRESCENT_MAIN || chainConfig?.chainType == ChainType.CRESCENT_TEST) {
             return getAvailableAmount_gRPC(mainDenom)
         }
         return getAvailableAmount_gRPC(mainDenom).adding(getVestingAmount_gRPC(mainDenom))
@@ -443,6 +453,57 @@ final class BaseData : NSObject{
         return mOsmoPools_gRPC.filter { $0.totalShares.denom == denom }.first
     }
     
+    
+    func isTxFeePayable(_ chainConfig: ChainConfig?) -> Bool {
+        if (chainConfig?.chainType == .SIF_MAIN) {
+            if (getAvailableAmount_gRPC(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: "100000000000000000")).rawValue >= 0) {
+                return true
+            }
+            return false
+        } else if (chainConfig?.chainType == .BINANCE_MAIN) {
+            if (availableAmount(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: FEE_BINANCE_BASE)).rawValue >= 0) {
+                return true
+            }
+            return false
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+            if (availableAmount(chainConfig!.stakeDenom).compare(NSDecimalNumber.init(string: FEE_OKC_BASE)).rawValue >= 0) {
+                return true
+            }
+            return false
+        }
+        var result = false
+        getMinTxFeeAmounts(chainConfig).forEach { minFee in
+            if (getAvailableAmount_gRPC(minFee.denom).compare(NSDecimalNumber.init(string: minFee.amount)).rawValue >= 0) {
+                result = true
+            }
+        }
+        return result
+    }
+    
+    func getMinTxFeeAmounts(_ chainConfig: ChainConfig?) -> Array<Coin> {
+        var result = Array<Coin>()
+        let gasAmount = NSDecimalNumber.init(string: BASE_GAS_AMOUNT)
+        let feeDatas = WUtils.getFeeInfos(chainConfig)[0].FeeDatas
+        
+        feeDatas.forEach { feeData in
+            let amount = (feeData.gasRate)!.multiplying(by: gasAmount, withBehavior: WUtils.handler0Up)
+            result.append(Coin.init(feeData.denom!, amount.stringValue))
+        }
+        return result
+    }
+    
+    func getMainDenomFee(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
+        if (chainConfig?.chainType == .SIF_MAIN) {
+            return NSDecimalNumber.init(string: "100000000000000000")
+        } else if (chainConfig?.chainType == .BINANCE_MAIN) {
+            return NSDecimalNumber.init(string: FEE_BINANCE_BASE)
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+            return NSDecimalNumber.init(string: FEE_OKC_BASE)
+        }
+        let feeAmount = getMinTxFeeAmounts(chainConfig).filter { $0.denom == chainConfig?.stakeDenom }.first?.amount
+        return NSDecimalNumber.init(string: feeAmount)
+    }
+    
     func setRecentAccountId(_ id : Int64) {
         UserDefaults.standard.set(id, forKey: KEY_RECENT_ACCOUNT)
     }
@@ -506,6 +567,33 @@ final class BaseData : NSObject{
     
     func getNeedRefresh() -> Bool {
         return UserDefaults.standard.bool(forKey: KEY_ACCOUNT_REFRESH_ALL)
+    }
+    
+    func setTheme(_ theme : Int) {
+        UserDefaults.standard.set(theme, forKey: KEY_THEME)
+    }
+
+    func getTheme() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_THEME)
+    }
+    
+    func getThemeType() -> UIUserInterfaceStyle {
+        if (getTheme() == 1) {
+            return UIUserInterfaceStyle.light
+        } else if (getTheme() == 1) {
+            return UIUserInterfaceStyle.dark
+        } else {
+            return UIUserInterfaceStyle.unspecified
+        }
+    }
+    
+    func getThemeString() -> String {
+        if (getTheme() == 1) {
+            return NSLocalizedString("theme_light", comment: "")
+        } else if (getTheme() == 2) {
+            return NSLocalizedString("theme_dark", comment: "")
+        }
+        return NSLocalizedString("theme_system", comment: "")
     }
     
     func setCurrency(_ currency : Int) {
@@ -841,28 +929,6 @@ final class BaseData : NSObject{
             try self.database.run(createBalanceTable)
             _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_FROZEN, defaultValue: ""))
             _ = try? self.database.run(DB_BALANCE.addColumn(DB_BALANCE_LOCKED, defaultValue: ""))
-
-            
-            let createBondingTable = DB_BONDING.create(ifNotExists: true) { (table) in
-                table.column(DB_BONDING_ID, primaryKey: true)
-                table.column(DB_BONDING_ACCOUNT_ID)
-                table.column(DB_BONDING_V_Address)
-                table.column(DB_BONDING_SHARES)
-                table.column(DB_BONDING_FETCH_TIME)
-            }
-            try self.database.run(createBondingTable)
-            
-            let createUnBondingTable = DB_UNBONDING.create(ifNotExists: true) { (table) in
-                table.column(DB_UNBONDING_ID, primaryKey: true)
-                table.column(DB_UNBONDING_ACCOUNT_ID)
-                table.column(DB_UNBONDING_V_Address)
-                table.column(DB_UNBONDING_CREATE_HEIGHT)
-                table.column(DB_UNBONDING_COMPLETE_TIME)
-                table.column(DB_UNBONDING_INITIAL_BALANCE)
-                table.column(DB_UNBONDING_BALANCE)
-                table.column(DB_UNBONDING_FETCH_TIME)
-            }
-            try self.database.run(createUnBondingTable)
             
             let createMnemonicTable = DB_MNEMONIC.create(ifNotExists: true) { (table) in
                 table.column(DB_MNEMONIC_ID, primaryKey: true)
@@ -874,6 +940,10 @@ final class BaseData : NSObject{
             }
             try self.database.run(createMnemonicTable)
             _ = try? self.database.run(DB_MNEMONIC.addColumn(DB_MNEMONIC_IMPORT_TIME, defaultValue: -1))
+            
+            //delete LCD used old table
+            try self.database.run(DB_BONDING.drop(ifExists: true))
+            try self.database.run(DB_UNBONDING.drop(ifExists: true))
             
         } catch {
             print(error)
@@ -997,7 +1067,7 @@ final class BaseData : NSObject{
         for account in allAccounts {
             if (ChainFactory.getChainType(account.account_base_chain) == chain && account.account_has_private) {
                 if (chain == ChainType.BINANCE_MAIN) {
-                    if (WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BNB_TRANSFER)).rawValue >= 0) {
+                    if (WUtils.getTokenAmount(account.account_balances, BNB_MAIN_DENOM).compare(NSDecimalNumber.init(string: FEE_BINANCE_BASE)).rawValue >= 0) {
                         result.append(account)
                     }
                     

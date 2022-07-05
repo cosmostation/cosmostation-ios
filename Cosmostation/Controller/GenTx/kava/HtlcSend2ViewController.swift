@@ -40,7 +40,7 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BNB) {
                 availableDenom.text = "BNB"
                 availableDenom.textColor = UIColor.init(named: "binance")
-                maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!).subtracting(WUtils.plainStringToDecimal(FEE_BNB_TRANSFER))
+                maxAvailable = WUtils.getTokenAmount(self.pageHolderVC.mAccount?.account_balances, self.pageHolderVC.mHtlcDenom!).subtracting(WUtils.plainStringToDecimal(FEE_BINANCE_BASE))
                 
             } else if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_BTCB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_BINANCE_TEST_BTC) {
                 availableDenom.text = "BTC"
@@ -67,13 +67,14 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             if (maxAvailable.compare(maxOnce).rawValue > 0) {
                 maxAvailable = maxOnce
             }
-            maxAvailableAmount.attributedText = WUtils.displayAmount2(maxAvailable.stringValue, maxAvailableAmount.font, 0, mDpDecimal)
+            maxAvailableAmount.attributedText = WDP.dpAmount(maxAvailable.stringValue, maxAvailableAmount.font, 0, mDpDecimal)
             
             minAvailable = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetMin(pageHolderVC.mHtlcDenom!).multiplying(byPowerOf10: -mDpDecimal)
-            minAvailableAmount.attributedText = WUtils.displayAmount2(minAvailable.stringValue, minAvailableAmount.font, 0, mDpDecimal)
+            minAvailableAmount.attributedText = WDP.dpAmount(minAvailable.stringValue, minAvailableAmount.font, 0, mDpDecimal)
             
         } else if (pageHolderVC.chainType! == ChainType.KAVA_MAIN) {
-            mDpDecimal = WUtils.getKavaCoinDecimal(self.pageHolderVC.mHtlcDenom!)
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
+            mDpDecimal = WUtils.getDenomDecimal(chainConfig, self.pageHolderVC.mHtlcDenom!)
             if (pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_BNB || pageHolderVC.mHtlcDenom == TOKEN_HTLC_KAVA_TEST_BNB) {
                 availableDenom.text = "BNB"
                 availableDenom.textColor = UIColor.init(named: "binance")
@@ -97,10 +98,10 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
             if (maxAvailable.compare(maxOnce).rawValue > 0) {
                 maxAvailable = maxOnce
             }
-            maxAvailableAmount.attributedText = WUtils.displayAmount2(maxAvailable.stringValue, maxAvailableAmount.font, mDpDecimal, mDpDecimal)
+            maxAvailableAmount.attributedText = WDP.dpAmount(maxAvailable.stringValue, maxAvailableAmount.font, mDpDecimal, mDpDecimal)
             
             minAvailable = self.pageHolderVC.mKavaSwapParam2!.getSupportedSwapAssetMin(pageHolderVC.mHtlcDenom!)
-            minAvailableAmount.attributedText = WUtils.displayAmount2(minAvailable.stringValue, minAvailableAmount.font, mDpDecimal, mDpDecimal)
+            minAvailableAmount.attributedText = WDP.dpAmount(minAvailable.stringValue, minAvailableAmount.font, mDpDecimal, mDpDecimal)
 
             print("minAvailable ", minAvailable)
         }
@@ -285,6 +286,7 @@ class HtlcSend2ViewController: BaseViewController, UITextFieldDelegate {
     
     func showMaxWarnning() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("max_spend_title", comment: ""), message: NSLocalizedString("max_spend_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))

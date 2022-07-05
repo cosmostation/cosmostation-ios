@@ -18,11 +18,11 @@ class ChainAxelar: ChainConfig {
     var chainInfoMsg = NSLocalizedString("send_guide_msg_axelar", comment: "")
     var chainColor = UIColor(named: "axelar")!
     var chainColorBG = UIColor(named: "axelar_bg")!
-    
     var chainTitle = "(Axelar Mainnet)"
     var chainTitle2 = "AXELAR"
     var chainDBName = CHAIN_AXELAR_S
     var chainAPIName = "axelar"
+    var chainIdPrefix = "axelar-"
     
     var stakeDenomImg = UIImage(named: "tokenAxelar")
     var stakeDenom = "uaxl"
@@ -32,6 +32,8 @@ class ChainAxelar: ChainConfig {
     
     var addressPrefix = "axelar"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.05axelar"
     
     var pushSupport = false
     var wcSupoort = false
@@ -62,5 +64,13 @@ class ChainAxelar: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://axelar.network/blog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

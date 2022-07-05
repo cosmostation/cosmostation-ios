@@ -98,7 +98,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
     }
     
     func updateTitle() {
@@ -115,7 +115,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.totalCard.backgroundColor = chainConfig?.chainColorBG
         self.totalDpAddress.text = account?.account_address
         self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainType, totalValue.font)
+        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         if (account?.account_has_private == true) {
             self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
             self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
@@ -197,7 +197,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-            cell?.bindHistoryView(chainType!, mApiCustomNewHistories[indexPath.row], account!.account_address)
+            cell?.bindHistoryView(chainConfig!, mApiCustomNewHistories[indexPath.row], account!.account_address)
             return cell!
         }
     }
@@ -339,6 +339,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
                     
                 } else {
                     let alertController = UIAlertController(title: NSLocalizedString("permission_push_title", comment: ""), message: NSLocalizedString("permission_push_msg", comment: ""), preferredStyle: .alert)
+                    if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
                     let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (_) -> Void in
                         guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                             return

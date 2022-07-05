@@ -31,10 +31,11 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         hardPoolDenom = pageHolderVC.mHardMoneyMarketDenom!
-        dpDecimal = WUtils.getKavaCoinDecimal(hardPoolDenom)
+        dpDecimal = WUtils.getDenomDecimal(chainConfig, hardPoolDenom)
         
         let currentAvailable = BaseData.instance.getAvailableAmount_gRPC(hardPoolDenom)
         currentBorrowed = WUtils.getHardBorrowedAmountByDenom(hardPoolDenom, BaseData.instance.mHardMyBorrow).multiplying(by: NSDecimalNumber.init(string: "1.05"), withBehavior: WUtils.handler0 )
@@ -43,9 +44,9 @@ class HardPoolRepay0ViewController: BaseViewController, UITextFieldDelegate {
         print("currentAvailable ", currentAvailable)
         print("currentBorrowed ", currentBorrowed)
         
-        WUtils.DpKavaTokenName(mCoinLabel, hardPoolDenom)
-        WUtils.showCoinDp(hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel, chainType!)
-        self.mCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardPoolDenom))!)
+        WDP.dpSymbol(chainConfig, hardPoolDenom, mCoinLabel)
+        WDP.dpCoin(chainConfig, hardPoolDenom, availableMax.stringValue, mAvailabeDenom, mAvailabeLabel)
+        WDP.dpSymbolImg(chainConfig, hardPoolDenom, mCoinImg)
         self.loadingImg.isHidden = true
         
         let dp = "+ " + WUtils.decimalNumberToLocaleString(NSDecimalNumber(string: "0.1"), 1)

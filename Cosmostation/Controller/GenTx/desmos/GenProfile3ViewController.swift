@@ -29,6 +29,7 @@ class GenProfile3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -39,7 +40,7 @@ class GenProfile3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
         dTagLabel.text = pageHolderVC.mDesmosDtag
         nickNameLabel.text = pageHolderVC.mDesmosNickName
         bioLabel.text = pageHolderVC.mDesmosBio

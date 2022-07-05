@@ -25,22 +25,23 @@ class FarmCell: UITableViewCell {
     }
     
     func onBindView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>) {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         
         poolIDLabel.text =  "#" + String(pool.id) + " EARNING"
-        poolPairLabel.text = WUtils.getOsmosisTokenName(coin0.denom) + " / " + WUtils.getOsmosisTokenName(coin1.denom)
+        poolPairLabel.text = WUtils.getSymbol(chainConfig, coin0.denom) + " / " + WUtils.getSymbol(chainConfig, coin1.denom)
         
         if let lpCoin = BaseData.instance.mMyBalances_gRPC.filter({ $0.denom == "gamm/pool/" + String(pool.id) }).first {
-            availableAmountLabel.attributedText = WUtils.displayAmount2(lpCoin.amount, availableAmountLabel.font, 18, 6)
-            availableDenomLabel.text = WUtils.getOsmosisTokenName(lpCoin.denom)
+            availableAmountLabel.attributedText = WDP.dpAmount(lpCoin.amount, availableAmountLabel.font, 18, 6)
+            WDP.dpSymbol(chainConfig, lpCoin.denom, availableDenomLabel)
         } else {
-            availableAmountLabel.attributedText = WUtils.displayAmount2("0", availableAmountLabel.font, 18, 6)
-            availableDenomLabel.text = WUtils.getOsmosisTokenName("gamm/pool/" + String(pool.id))
+            availableAmountLabel.attributedText = WDP.dpAmount("0", availableAmountLabel.font, 18, 6)
+            WDP.dpSymbol(chainConfig, "gamm/pool/" + String(pool.id), availableDenomLabel)
         }
         
-        let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(coin0.denom), NSDecimalNumber.init(string: coin0.amount), WUtils.getOsmosisCoinDecimal(coin0.denom))
-        let coin1Value = WUtils.usdValue(BaseData.instance.getBaseDenom(coin1.denom), NSDecimalNumber.init(string: coin1.amount), WUtils.getOsmosisCoinDecimal(coin1.denom))
+        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
         let poolValue = coin0Value.adding(coin1Value)
 //        print("poolValue ", poolValue)
         
@@ -53,7 +54,7 @@ class FarmCell: UITableViewCell {
                     let dIncentive = gauge.distributedCoins[0].amount
                     
                     let thisIncentive = NSDecimalNumber.init(string: cIncentive).subtracting(NSDecimalNumber.init(string: dIncentive))
-                    let thisIncentiveValue = WUtils.usdValue(BaseData.instance.getBaseDenom(OSMOSIS_MAIN_DENOM), thisIncentive, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
+                    let thisIncentiveValue = WUtils.usdValue(chainConfig, OSMOSIS_MAIN_DENOM, thisIncentive)
                     
                     thisTotalIncentiveValue = thisTotalIncentiveValue.adding(thisIncentiveValue)
                     

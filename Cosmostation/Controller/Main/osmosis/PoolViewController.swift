@@ -65,6 +65,7 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 0) {
             let noticeAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
             noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("title_pool_join", comment: ""), style: .default, handler: { _ in
                 self.onCheckPoolJoin(self.mMyPoolList[indexPath.row])
             }))
@@ -88,18 +89,15 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             self.onShowAddMenomicDialog()
             return
         }
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OSMOSIS_JOIN_POOL, 0)
+        
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let coin0Denom = pool.poolAssets[0].token.denom
         let coin1Denom = pool.poolAssets[1].token.denom
-        var coin0Available = BaseData.instance.getAvailableAmount_gRPC(coin0Denom)
-        var coin1Available = BaseData.instance.getAvailableAmount_gRPC(coin1Denom)
-        if (coin0Denom == OSMOSIS_MAIN_DENOM) {
-            coin0Available = coin0Available.subtracting(txFeeAmount)
-        }
-        if (coin1Denom == OSMOSIS_MAIN_DENOM) {
-            coin1Available = coin1Available.subtracting(txFeeAmount)
-        }
-        
+        let coin0Available = BaseData.instance.getAvailableAmount_gRPC(coin0Denom)
+        let coin1Available = BaseData.instance.getAvailableAmount_gRPC(coin1Denom)
         if (coin0Available.compare(NSDecimalNumber.zero).rawValue <= 0 || coin1Available.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_to_deposit", comment: ""))
             return
@@ -119,10 +117,9 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
             self.onShowAddMenomicDialog()
             return
         }
-        let mainBalance = BaseData.instance.getAvailableAmount_gRPC(OSMOSIS_MAIN_DENOM)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_OSMOSIS_EXIT_POOL, 0)
-        if (mainBalance.compare(txFeeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
+        
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         

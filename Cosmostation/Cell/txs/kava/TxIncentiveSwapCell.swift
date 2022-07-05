@@ -35,9 +35,9 @@ class TxIncentiveSwapCell: TxCell {
         incen3Amount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Kava_Incentive_V1beta1_MsgClaimSwapReward.init(serializedData: response.tx.body.messages[position].value) {
             sender.text = msg.sender
@@ -46,19 +46,19 @@ class TxIncentiveSwapCell: TxCell {
             let incentiveCoins = WUtils.onParseKavaIncentiveGrpc(response, position)
             if (incentiveCoins.count > 0) {
                 incen0Layer.isHidden = false
-                WUtils.showCoinDp(incentiveCoins[0], incen0Denom, incen0Amount, chain.chainType)
+                WDP.dpCoin(chainConfig, incentiveCoins[0], incen0Denom, incen0Amount)
             }
             if (incentiveCoins.count > 1) {
                 incen1Layer.isHidden = false
-                WUtils.showCoinDp(incentiveCoins[1], incen1Denom, incen1Amount, chain.chainType)
+                WDP.dpCoin(chainConfig, incentiveCoins[1], incen1Denom, incen1Amount)
             }
             if (incentiveCoins.count > 2) {
                 incen2Layer.isHidden = false
-                WUtils.showCoinDp(incentiveCoins[2], incen2Denom, incen2Amount, chain.chainType)
+                WDP.dpCoin(chainConfig, incentiveCoins[2], incen2Denom, incen2Amount)
             }
             if (incentiveCoins.count > 3) {
                 incen3Layer.isHidden = false
-                WUtils.showCoinDp(incentiveCoins[3], incen3Denom, incen3Amount, chain.chainType)
+                WDP.dpCoin(chainConfig, incentiveCoins[3], incen3Denom, incen3Amount)
             }
         }
     }

@@ -26,8 +26,8 @@ class OsmosisDAppViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")], for: .selected)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")], for: .normal)
             dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
             
         } else {
@@ -63,99 +63,6 @@ class OsmosisDAppViewController: BaseViewController {
 }
 
 extension WUtils {
-    static func DpOsmosisTokenImg(_ imgView: UIImageView, _ denom: String) {
-        if (denom == OSMOSIS_MAIN_DENOM) {
-            imgView.image = UIImage(named: "tokenOsmosis")
-            
-        } else if (denom == OSMOSIS_ION_DENOM) {
-            imgView.image = UIImage(named: "tokenIon")
-            
-        } else if (denom.starts(with: "gamm/pool/")) {
-            imgView.image = UIImage(named: "tokenPool")
-            
-        } else if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-                imgView.af_setImage(withURL: URL(string: ibcToken.moniker!)!)
-            } else {
-                imgView.image = UIImage(named: "tokenDefaultIbc")
-            }
-        }
-    }
-    
-    static func DpOsmosisTokenName(_ label: UILabel, _ denom: String) {
-        if (denom == OSMOSIS_MAIN_DENOM) {
-            label.textColor = UIColor.init(named: "osmosis")
-            label.text = "OSMO"
-            
-        } else if (denom == OSMOSIS_ION_DENOM) {
-            label.textColor = UIColor.init(named: "osmosis_ion")
-            label.text = "ION"
-            
-        } else if (denom.starts(with: "gamm/pool/")) {
-            label.textColor = UIColor(named: "_font05")
-            label.text = "GAMM-" + String(denom.split(separator: "/").last!)
-            
-        } else if (denom.starts(with: "ibc/")) {
-            label.textColor = UIColor(named: "_font05")
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
-                label.text = dpDenom.uppercased()
-            } else {
-                label.text = "UnKnown"
-            }
-        }
-    }
-    
-    static func getOsmosisTokenImg(_ denom: String) -> UIImage? {
-        if (denom == OSMOSIS_MAIN_DENOM) {
-            return UIImage(named: "tokenOsmosis")
-            
-        } else if (denom == OSMOSIS_ION_DENOM) {
-            return UIImage(named: "tokenIon")
-            
-        } else if (denom.starts(with: "gamm/pool/")) {
-            return UIImage(named: "tokenPool")
-            
-        } else if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let url = URL(string: ibcToken.moniker!), let data = try? Data(contentsOf: url) {
-                return UIImage(data: data)?.resized(to: CGSize(width: 20, height: 20))
-            }
-        }
-        return UIImage(named: "tokenDefaultIbc")
-            
-    }
-    
-    static func getOsmosisTokenName(_ denom: String) -> String {
-        if (denom == OSMOSIS_MAIN_DENOM) {
-            return "OSMO"
-            
-        } else if (denom == OSMOSIS_ION_DENOM) {
-            return "ION"
-            
-        } else if (denom.starts(with: "gamm/pool/")) {
-            return "GAMM-" + String(denom.split(separator: "/").last!)
-            
-        } else if (denom.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")), let dpDenom = ibcToken.display_denom {
-                return dpDenom.uppercased()
-            } else {
-                return"UnKnown"
-            }
-        }
-        return denom
-    }
-    
-    static func getOsmosisCoinDecimal(_ denom: String?) -> Int16 {
-        if (denom?.caseInsensitiveCompare(OSMOSIS_MAIN_DENOM) == .orderedSame) { return 6; }
-        else if (denom?.caseInsensitiveCompare(OSMOSIS_ION_DENOM) == .orderedSame) { return 6; }
-        else if (denom!.starts(with: "gamm/pool/")) { return 18; }
-        else if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")), let deciaml = ibcToken.decimal {
-                return deciaml
-            }
-        }
-        return 6;
-    }
-    
     static func getGaugesByPoolId(_ poolId: UInt64, _ incentivizedPools: Array<Osmosis_Poolincentives_V1beta1_IncentivizedPool>, _ allGauge: Array<Osmosis_Incentives_Gauge>) -> Array<Osmosis_Incentives_Gauge> {
         var gaugeIds = Array<UInt64>()
         var result = Array<Osmosis_Incentives_Gauge>()
@@ -191,24 +98,23 @@ extension WUtils {
     }
     
     static func getOsmoLpTokenPerUsdPrice(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(coin0.denom), NSDecimalNumber.init(string: coin0.amount), WUtils.getOsmosisCoinDecimal(coin0.denom))
-        let coin1Value = WUtils.usdValue(BaseData.instance.getBaseDenom(coin1.denom), NSDecimalNumber.init(string: coin1.amount), WUtils.getOsmosisCoinDecimal(coin1.denom))
+        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
+        
         let poolValue = coin0Value.adding(coin1Value)
         let totalShare = NSDecimalNumber.init(string: pool.totalShares.amount).multiplying(byPowerOf10: -18, withBehavior: handler18)
         return poolValue.dividing(by: totalShare, withBehavior: handler18)
     }
     
     static func getPoolValue(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) -> NSDecimalNumber {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0BaseDenom = BaseData.instance.getBaseDenom(coin0.denom)
-        let coin1BaseDenom = BaseData.instance.getBaseDenom(coin1.denom)
-        let coin0Decimal = getOsmosisCoinDecimal(coin0.denom)
-        let coin1Decimal = getOsmosisCoinDecimal(coin1.denom)
-        let coin0Value = usdValue(coin0BaseDenom, NSDecimalNumber.init(string: coin0.amount), coin0Decimal)
-        let coin1Value = usdValue(coin1BaseDenom, NSDecimalNumber.init(string: coin1.amount), coin1Decimal)
+        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
         return coin0Value.adding(coin1Value)
     }
     
@@ -236,9 +142,10 @@ extension WUtils {
     }
     
     static func getPoolArp(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ gauges: Array<Osmosis_Incentives_Gauge>, _ position: UInt) -> NSDecimalNumber  {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let poolValue = getPoolValue(pool)
         let incentiveAmount = getNextIncentiveAmount(pool, gauges, position)
-        let incentiveValue = WUtils.usdValue(BaseData.instance.getBaseDenom(OSMOSIS_MAIN_DENOM), incentiveAmount, WUtils.getOsmosisCoinDecimal(OSMOSIS_MAIN_DENOM))
+        let incentiveValue = WUtils.usdValue(chainConfig, OSMOSIS_MAIN_DENOM, incentiveAmount)
         return incentiveValue.multiplying(by: NSDecimalNumber.init(value: 36500)).dividing(by: poolValue, withBehavior: WUtils.handler12)
     }
     

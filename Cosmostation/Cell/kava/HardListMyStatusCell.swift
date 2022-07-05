@@ -26,10 +26,11 @@ class HardListMyStatusCell: UITableViewCell {
     
     func onBindMyHard(_ hardParam: Kava_Hard_V1beta1_Params?, _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?) {
         if (hardParam == nil) { return }
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         var totalDepositValue = NSDecimalNumber.zero
         var totalLTVValue = NSDecimalNumber.zero
         myDeposits?.forEach({ coin in
-            let decimal         = WUtils.tokenDivideDecimal(ChainType.KAVA_MAIN, coin.denom)
+            let decimal         = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let LTV             = hardParam!.getLTV(coin.denom)
             let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
             let depositValue    = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
@@ -42,7 +43,7 @@ class HardListMyStatusCell: UITableViewCell {
         
         var totalBorroweValue = NSDecimalNumber.zero
         myBorrows?.forEach { coin in
-            let decimal         = WUtils.tokenDivideDecimal(ChainType.KAVA_MAIN, coin.denom)
+            let decimal         = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let marketIdPrice   = BaseData.instance.getKavaOraclePrice(hardParam!.getSpotMarketId(coin.denom))
             let borrowValue     = NSDecimalNumber.init(string: coin.amount).multiplying(byPowerOf10: -decimal).multiplying(by: marketIdPrice, withBehavior: WUtils.handler12Down)
             totalBorroweValue = totalBorroweValue.adding(borrowValue)

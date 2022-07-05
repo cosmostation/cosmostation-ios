@@ -22,6 +22,7 @@ class ChainEmoney: ChainConfig {
     var chainTitle2 = "E-MONEY"
     var chainDBName = CHAIN_EMONEY_S
     var chainAPIName = "emoney"
+    var chainIdPrefix = "emoney-"
     
     var stakeDenomImg = UIImage(named: "tokenEmoney")
     var stakeDenom = "ungm"
@@ -31,6 +32,10 @@ class ChainEmoney: ChainConfig {
     
     var addressPrefix = "emoney"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.1ungm"
+    let gasRate1 = "0.3ungm"
+    let gasRate2 = "1ungm"
     
     var pushSupport = false
     var wcSupoort = false
@@ -62,4 +67,22 @@ class ChainEmoney: ChainConfig {
     func getInfoLink2() -> String {
         return "https://medium.com/e-money-com"
     }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
+    }
 }
+
+
+let EMONEY_MAIN_DENOM = "ungm"
+let EMONEY_EUR_DENOM = "eeur"
+let EMONEY_CHF_DENOM = "echf"
+let EMONEY_DKK_DENOM = "edkk"
+let EMONEY_NOK_DENOM = "enok"
+let EMONEY_SEK_DENOM = "esek"
+
+let EMONEY_COIN_IMG_URL = ResourceBase + "coin_image/emoney/";

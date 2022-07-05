@@ -22,6 +22,7 @@ class ChainCryptoorg: ChainConfig {
     var chainTitle2 = "CRYPTO.ORG"
     var chainDBName = CHAIN_CRYPTO_S
     var chainAPIName = "cryptoorg"
+    var chainIdPrefix = "crypto-org-"
     
     var stakeDenomImg = UIImage(named: "tokenCryptoorg")
     var stakeDenom = "basecro"
@@ -31,6 +32,10 @@ class ChainCryptoorg: ChainConfig {
     
     var addressPrefix = "cro"
     let addressHdPath0 = "m/44'/394'/0'/0/X"
+    
+    let gasRate0 = "0.025basecro"
+    let gasRate1 = "0.05basecro"
+    let gasRate2 = "0.075basecro"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +66,13 @@ class ChainCryptoorg: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.crypto.com/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
     }
 }

@@ -30,6 +30,7 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mIncentiveParam = BaseData.instance.mIncentiveParam
@@ -43,7 +44,7 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
         
         var kavaIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_MAIN_DENOM)
         var hardIncentiveAmount = mIncentiveRewards.getIncentiveAmount(KAVA_HARD_DENOM)
@@ -62,9 +63,9 @@ class KavaIncentiveClaim3ViewController: BaseViewController, PasswordViewDelegat
             swpIncentiveAmount = swpIncentiveAmount.multiplying(by: mIncentiveParam.getFactor(KAVA_SWAP_DENOM, 1), withBehavior: WUtils.handler0)
         }
         
-        kavaIncentiveAmountLabel.attributedText = WUtils.displayAmount2(kavaIncentiveAmount.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
-        hardIncentiveAmountLabel.attributedText = WUtils.displayAmount2(hardIncentiveAmount.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
-        swpIncentiveAmountLabel.attributedText = WUtils.displayAmount2(swpIncentiveAmount.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
+        kavaIncentiveAmountLabel.attributedText = WDP.dpAmount(kavaIncentiveAmount.stringValue, kavaIncentiveAmountLabel.font!, 6, 6)
+        hardIncentiveAmountLabel.attributedText = WDP.dpAmount(hardIncentiveAmount.stringValue, hardIncentiveAmountLabel.font!, 6, 6)
+        swpIncentiveAmountLabel.attributedText = WDP.dpAmount(swpIncentiveAmount.stringValue, swpIncentiveAmountLabel.font!, 6, 6)
         
         memoLabel.text = pageHolderVC.mMemo
     }

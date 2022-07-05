@@ -58,7 +58,7 @@ class RegisterDomain0ViewController: BaseViewController {
         let userInputData = self.userInput.text?.trimmingCharacters(in: .whitespaces)
         let domainType = typeSwitch.isOn ? "open" : "closed"
         let starnameFee = WUtils.getStarNameRegisterDomainFee(userInputData!, domainType)
-        starnameFeeAmount.attributedText = WUtils.displayAmount2(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
+        starnameFeeAmount.attributedText = WDP.dpAmount(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
     }
     
     @IBAction func onToggleSwitch(_ sender: UISwitch) {
@@ -89,14 +89,15 @@ class RegisterDomain0ViewController: BaseViewController {
             return
         }
         
-        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
-        let txFee = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_STARNAME_REGISTER_DOMAIN, 0)
-        let starnameFee = WUtils.getStarNameRegisterDomainFee(userInputData!, domainType)
-//        print("userAvailable ", userAvailable)
-//        print("txFee ", txFee)
-//        print("starnameFee ", starnameFee)
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         
-        if (userAvailable.compare(starnameFee.adding(txFee)).rawValue < 0) {
+        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
+        let starnameFee = WUtils.getStarNameRegisterDomainFee(userInputData!, domainType)
+        
+        if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
             return
         }

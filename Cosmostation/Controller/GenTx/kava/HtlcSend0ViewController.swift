@@ -55,14 +55,14 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
         
         self.toChainCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToChain (_:))))
         self.sendCoinCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToSendCoin (_:))))
-        self.toChainList = ChainType.getHtlcSendable(pageHolderVC.chainType!)
+        self.toChainList = WUtils.getHtlcSendable(pageHolderVC.chainType!)
         if (self.toChainList.count <= 0) {
             pageHolderVC.onBeforePage()
             return
         }
         self.toChain = self.toChainList[0]
         
-        self.toSwapableCoinList = ChainType.getHtlcSwappableCoin(pageHolderVC.chainType!)
+        self.toSwapableCoinList = WUtils.getHtlcSwappableCoin(pageHolderVC.chainType!)
         if (self.toSwapableCoinList.count <= 0) { pageHolderVC.onBeforePage() }
         self.toSwapDenom = pageHolderVC.mHtlcDenom;
         print("toSwapDenom ", toSwapDenom)
@@ -72,8 +72,8 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     func updateView() {
-        WUtils.onDpSwapChain(pageHolderVC.chainType!, fromChainImg, fromChainTxt)
-        WUtils.onDpSwapChain(toChain!, toChainImg, toChainText)
+        WUtils.dpBepSwapChainInfo(pageHolderVC.chainType!, fromChainImg, fromChainTxt)
+        WUtils.dpBepSwapChainInfo(toChain!, toChainImg, toChainText)
         sendCoinDenom.text = "(" + toSwapDenom! + ")"
         if (pageHolderVC.chainType == ChainType.BINANCE_MAIN && kavaSwapParam2 != nil && kavaSwapSupply2 != nil) {
             RelayerMaxLayer.isHidden = false
@@ -82,42 +82,43 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
                 sendCoinImg.image = UIImage(named: "tokenBinance")
                 self.onSetDpDenom("BNB")
             } else if (toSwapDenom == TOKEN_HTLC_BINANCE_BTCB) {
-                sendCoinImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + "BTCB.png")!)
+                sendCoinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "BTCB.png")!)
                 self.onSetDpDenom("BTC")
             } else if (toSwapDenom == TOKEN_HTLC_BINANCE_XRPB) {
-                sendCoinImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + "XRP.png")!)
+                sendCoinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "XRP.png")!)
                 self.onSetDpDenom("XRP")
             } else if (toSwapDenom == TOKEN_HTLC_BINANCE_BUSD) {
-                sendCoinImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + "BUSD.png")!)
+                sendCoinImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + "BUSD.png")!)
                 self.onSetDpDenom("BUSD")
             }
             availableAmount = pageHolderVC.mAccount!.getTokenBalance(toSwapDenom!)
             supplyLimit = kavaSwapParam2!.getSupportedSwapAssetLimit(toSwapDenom!)
             supplyRemain = kavaSwapSupply2!.getRemainCap(toSwapDenom!, supplyLimit)
             onetimeMax = kavaSwapParam2!.getSupportedSwapAssetMaxOnce(toSwapDenom!)
-            sendCoinAvailable.attributedText = WUtils.displayAmount2(availableAmount.stringValue, sendCoinAvailable.font, 0, 8)
+            sendCoinAvailable.attributedText = WDP.dpAmount(availableAmount.stringValue, sendCoinAvailable.font, 0, 8)
             
         } else if (pageHolderVC.chainType == ChainType.KAVA_MAIN && kavaSwapParam2 != nil && kavaSwapSupply2 != nil) {
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
             RelayerMaxLayer.isHidden = true
             RelayerReaminLayer.isHidden = true
             if (toSwapDenom == TOKEN_HTLC_KAVA_BNB) {
                 sendCoinImg.image = UIImage(named: "bnbonKavaImg")
                 self.onSetDpDenom("BNB")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_BTCB) {
-                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
+                WDP.dpSymbolImg(chainConfig, toSwapDenom, sendCoinImg)
                 self.onSetDpDenom("BTC")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_XRPB) {
-                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
+                WDP.dpSymbolImg(chainConfig, toSwapDenom, sendCoinImg)
                 self.onSetDpDenom("XRP")
             } else if (toSwapDenom == TOKEN_HTLC_KAVA_BUSD) {
-                sendCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(toSwapDenom!))!)
+                WDP.dpSymbolImg(chainConfig, toSwapDenom, sendCoinImg)
                 self.onSetDpDenom("BUSD")
             }
             availableAmount = BaseData.instance.getAvailableAmount_gRPC(toSwapDenom!)
             supplyLimit = kavaSwapParam2!.getSupportedSwapAssetLimit(toSwapDenom!)
             supplyRemain = kavaSwapSupply2!.getRemainCap(toSwapDenom!, supplyLimit)
             onetimeMax = kavaSwapParam2!.getSupportedSwapAssetMaxOnce(toSwapDenom!)
-            sendCoinAvailable.attributedText = WUtils.displayAmount2(availableAmount.stringValue, sendCoinAvailable.font, 8, 8)
+            sendCoinAvailable.attributedText = WDP.dpAmount(availableAmount.stringValue, sendCoinAvailable.font, 8, 8)
             
         }
 //        print("availableAmount ", availableAmount)
@@ -125,9 +126,9 @@ class HtlcSend0ViewController: BaseViewController, SBCardPopupDelegate {
 //        print("supplyRemain ", supplyRemain)
 //        print("onetimeMax ", onetimeMax)
         
-        oneTimeLimitAmount.attributedText = WUtils.displayAmount2(onetimeMax.stringValue, oneTimeLimitAmount.font, 8, 8)
-        systemMaxAmount.attributedText = WUtils.displayAmount2(supplyLimit.stringValue, systemMaxAmount.font, 8, 8)
-        systemReaminAmount.attributedText = WUtils.displayAmount2(supplyRemain.stringValue, systemReaminAmount.font, 8, 8)
+        oneTimeLimitAmount.attributedText = WDP.dpAmount(onetimeMax.stringValue, oneTimeLimitAmount.font, 8, 8)
+        systemMaxAmount.attributedText = WDP.dpAmount(supplyLimit.stringValue, systemMaxAmount.font, 8, 8)
+        systemReaminAmount.attributedText = WDP.dpAmount(supplyRemain.stringValue, systemReaminAmount.font, 8, 8)
     }
     
     func onSetDpDenom(_ denom: String) {

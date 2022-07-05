@@ -22,6 +22,7 @@ class ChainAssetMantle: ChainConfig {
     var chainTitle2 = "ASSET-MANTLE"
     var chainDBName = "SUPPORT_CHAIN_MANTLE"
     var chainAPIName = "asset-mantle"
+    var chainIdPrefix = "mantle-"
     
     var stakeDenomImg = UIImage(named: "tokenAssetmantle")
     var stakeDenom = "umntl"
@@ -31,6 +32,8 @@ class ChainAssetMantle: ChainConfig {
     
     var addressPrefix = "mantle"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.0umntl"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +64,13 @@ class ChainAssetMantle: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.assetmantle.one/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

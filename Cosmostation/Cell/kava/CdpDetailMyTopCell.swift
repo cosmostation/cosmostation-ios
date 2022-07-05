@@ -67,6 +67,7 @@ class CdpDetailMyTopCell: UITableViewCell {
     
     func onBindCdpDetailMy(_ collateralParam: Kava_Cdp_V1beta1_CollateralParam?, _ myCdp: Kava_Cdp_V1beta1_CDPResponse?, _ debtAmount: NSDecimalNumber) {
         if (collateralParam == nil || myCdp == nil) { return }
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         let cDenom = collateralParam!.getcDenom()!
         let pDenom = collateralParam!.getpDenom()!
         
@@ -85,16 +86,16 @@ class CdpDetailMyTopCell: UITableViewCell {
         stabilityFee.attributedText = WUtils.displayPercent(collateralParam!.getDpStabilityFee(), stabilityFee.font)
         liquidationPenalty.attributedText = WUtils.displayPercent(collateralParam!.getDpLiquidationPenalty(), liquidationPenalty.font)
 
-        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        currentPriceTitle.text = String(format: NSLocalizedString("current_price_format", comment: ""), WUtils.getSymbol(chainConfig, cDenom))
         currentPrice.attributedText = WUtils.getDPRawDollor(oraclePrice.stringValue, 4, currentPrice.font)
 
-        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getKavaTokenName(cDenom))
+        liquidationPriceTitle.text = String(format: NSLocalizedString("liquidation_price_format", comment: ""), WUtils.getSymbol(chainConfig, cDenom))
         liquidationPrice.attributedText = WUtils.getDPRawDollor(liquiPrice.stringValue, 4, liquidationPrice.font)
         liquidationPrice.textColor = WUtils.getRiskColor(riskRate)
 
         let kavaCdpParams_gRPC = BaseData.instance.mKavaCdpParams_gRPC
-        systemMax.attributedText = WUtils.displayAmount2(kavaCdpParams_gRPC!.getGlobalDebtAmount().stringValue, systemMax.font, 6, 6)
-        remainCap.attributedText = WUtils.displayAmount2(kavaCdpParams_gRPC!.getGlobalDebtAmount().subtracting(debtAmount).stringValue, remainCap.font, 6, 6)
+        systemMax.attributedText = WDP.dpAmount(kavaCdpParams_gRPC!.getGlobalDebtAmount().stringValue, systemMax.font, 6, 6)
+        remainCap.attributedText = WDP.dpAmount(kavaCdpParams_gRPC!.getGlobalDebtAmount().subtracting(debtAmount).stringValue, remainCap.font, 6, 6)
 
         let url = KAVA_CDP_IMG_URL + collateralParam!.getMarketImgPath()! + ".png"
         marketImg.af_setImage(withURL: URL(string: url)!)

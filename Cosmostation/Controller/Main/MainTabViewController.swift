@@ -28,6 +28,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        
         self.notiView = NotificationView()
         
         self.onUpdateAccountDB()
@@ -812,8 +814,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                             BaseData.instance.mMyBalances_gRPC.append(Coin.init(balance.denom, balance.amount))
                         }
                     }
-                    if (BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(self.mChainType)).compare(NSDecimalNumber.zero).rawValue <= 0) {
-                        BaseData.instance.mMyBalances_gRPC.append(Coin.init(WUtils.getMainDenom(self.mChainType), "0"))
+                    let chainConfig = ChainFactory.getChainConfig(self.mChainType)
+                    if (BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainConfig)).compare(NSDecimalNumber.zero).rawValue <= 0) {
+                        BaseData.instance.mMyBalances_gRPC.append(Coin.init(WUtils.getMainDenom(chainConfig), "0"))
                     }
                 }
                 try channel.close().wait()

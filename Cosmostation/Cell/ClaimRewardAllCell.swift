@@ -25,12 +25,6 @@ class ClaimRewardAllCell: UITableViewCell {
         claimAllBtn.addTarget(self, action: #selector(stopHighlight), for: .touchUpInside)
         claimAllBtn.addTarget(self, action: #selector(stopHighlight), for: .touchUpOutside)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     @objc func startHighlight(sender: UIButton) {
         claimAllBtn.layer.borderColor = UIColor(named: "_font04")!.cgColor
@@ -42,9 +36,10 @@ class ClaimRewardAllCell: UITableViewCell {
         delegate?.didTapClaimAll(sender)
     }
     
-    func updateView(_ chainType: ChainType?) {
-        WUtils.setDenomTitle(chainType!, denomLabel)
-        totalRewardLabel.attributedText = WUtils.displayAmount2(BaseData.instance.getRewardSum_gRPC(WUtils.getMainDenom(chainType)), totalRewardLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+    func updateView(_ chainConfig: ChainConfig?) {
+        let mainDenom = WUtils.getMainDenom(chainConfig)
+        let rewardSum = BaseData.instance.getRewardSum_gRPC(mainDenom)
+        WDP.dpCoin(chainConfig, mainDenom, rewardSum, denomLabel, totalRewardLabel)
     }
     
 }

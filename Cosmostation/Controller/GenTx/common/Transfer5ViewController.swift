@@ -39,7 +39,9 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
         WUtils.setDenomTitle(chainType, sendDenomLabel)
         WUtils.setDenomTitle(chainType, availableDenomLabel)
         WUtils.setDenomTitle(chainType, remainDenomLabel)
@@ -67,7 +69,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     }
     
     func onUpdateView() {
-        let mainDenom = WUtils.getMainDenom(chainType)
+        let mainDenom = WUtils.getMainDenom(chainConfig)
         let toSendDenom = pageHolderVC.mToSendAmount[0].denom
         let toSendAmount = WUtils.plainStringToDecimal(pageHolderVC.mToSendAmount[0].amount)
         let feeAmount = WUtils.plainStringToDecimal((pageHolderVC.mFee?.amount[0].amount)!)
@@ -75,24 +77,8 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         var remainAvailable = NSDecimalNumber.zero
         
         if (WUtils.isGRPC(chainType)) {
-            mDivideDecimal = WUtils.mainDivideDecimal(chainType)
-            mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
-            if (chainType == ChainType.SIF_MAIN) {
-                mDivideDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getSifCoinDecimal(pageHolderVC.mToSendDenom)
-                
-            } else if (chainType == ChainType.GRAVITY_BRIDGE_MAIN) {
-                mDivideDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getGBrdigeCoinDecimal(pageHolderVC.mToSendDenom)
-                
-            } else if (chainType == ChainType.KAVA_MAIN) {
-                mDivideDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getKavaCoinDecimal(pageHolderVC.mToSendDenom)
-                
-            } else if (pageHolderVC.chainType! == ChainType.INJECTIVE_MAIN) {
-                mDivideDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
-                mDisplayDecimal = WUtils.getInjectiveCoinDecimal(pageHolderVC.mToSendDenom)
-            }
+            mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
+            mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
             currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
             
         } else {
@@ -133,10 +119,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
 //        print("remainAvailable ", remainAvailable)
         
         
-        WUtils.showCoinDp(pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel, chainType!)
-        WUtils.showCoinDp(toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel, chainType!)
-        WUtils.showCoinDp(toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
+        WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
+        WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
         
         mToAddressLabel.text = pageHolderVC.mToSendRecipientAddress
         mToAddressLabel.adjustsFontSizeToFitWidth = true

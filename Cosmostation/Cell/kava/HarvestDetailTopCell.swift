@@ -32,7 +32,8 @@ class HarvestDetailTopCell: UITableViewCell {
     func onBindHardDetailTop(_ hardMoneyMarketDenom: String, _ hardParam: Kava_Hard_V1beta1_Params?, _ interestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>?,
                              _ totalDeposit: Array<Coin>?, _ totalBorrow: Array<Coin>?, _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) {
         if (hardParam == nil) { return }
-        let baseDenom = BaseData.instance.getBaseDenom(hardMoneyMarketDenom)
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
+        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, hardMoneyMarketDenom)
         harvestImg.af_setImage(withURL: URL(string: KAVA_HARD_POOL_IMG_URL + "lp" + baseDenom + ".png")!)
         harvestTitle.text = hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID.replacingOccurrences(of: ":30", with: "").uppercased()
 
@@ -45,26 +46,26 @@ class HarvestDetailTopCell: UITableViewCell {
         supplyAPILabel.attributedText = WUtils.displayPercent(supplyApy.multiplying(byPowerOf10: 2), supplyAPILabel.font)
         borrowAPILabel.attributedText = WUtils.displayPercent(borrowApy.multiplying(byPowerOf10: 2), borrowAPILabel.font)
 
-        WUtils.showCoinDp(hardMoneyMarketDenom, "0", systemSuppliedDenom, systemSuppliedAmount, ChainType.KAVA_MAIN)
-        WUtils.showCoinDp(hardMoneyMarketDenom, "0", systemBorrowedDenom, systemBorrowedAmount, ChainType.KAVA_MAIN)
-        WUtils.showCoinDp(hardMoneyMarketDenom, "0", systemRemainBorrowableDenom, systemRemainBorrowableAmount, ChainType.KAVA_MAIN)
+        WDP.dpCoin(chainConfig, hardMoneyMarketDenom, "0", systemSuppliedDenom, systemSuppliedAmount)
+        WDP.dpCoin(chainConfig, hardMoneyMarketDenom, "0", systemBorrowedDenom, systemBorrowedAmount)
+        WDP.dpCoin(chainConfig, hardMoneyMarketDenom, "0", systemRemainBorrowableDenom, systemRemainBorrowableAmount)
         systemSuppliedValue.attributedText = WUtils.getDPRawDollor("0", 2, systemSuppliedValue.font)
         systemBorrowedValue.attributedText = WUtils.getDPRawDollor("0", 2, systemBorrowedValue.font)
         systemRemainBorrowableValue.attributedText = WUtils.getDPRawDollor("0", 2, systemRemainBorrowableValue.font)
 
-        let dpDecimal = WUtils.getKavaCoinDecimal(hardMoneyMarketDenom)
+        let dpDecimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarketDenom)
         let targetPrice = BaseData.instance.getKavaOraclePrice(hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID)
 
         // display system total supplied
         if let totalDepositCoin = totalDeposit?.filter({ $0.denom == hardMoneyMarketDenom }).first {
-            WUtils.showCoinDp(hardMoneyMarketDenom, totalDepositCoin.amount, systemSuppliedDenom, systemSuppliedAmount, ChainType.KAVA_MAIN)
+            WDP.dpCoin(chainConfig, hardMoneyMarketDenom, totalDepositCoin.amount, systemSuppliedDenom, systemSuppliedAmount)
             let supplyValue = NSDecimalNumber.init(string: totalDepositCoin.amount).multiplying(byPowerOf10: -dpDecimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
             systemSuppliedValue.attributedText = WUtils.getDPRawDollor(supplyValue.stringValue, 2, systemSuppliedValue.font)
         }
 
         // display system total borrowed
         if let totalBorrowedCoin = totalBorrow?.filter({ $0.denom == hardMoneyMarketDenom }).first {
-            WUtils.showCoinDp(hardMoneyMarketDenom, totalBorrowedCoin.amount, systemBorrowedDenom, systemBorrowedAmount, ChainType.KAVA_MAIN)
+            WDP.dpCoin(chainConfig, hardMoneyMarketDenom, totalBorrowedCoin.amount, systemBorrowedDenom, systemBorrowedAmount)
             let BorrowedValue = NSDecimalNumber.init(string: totalBorrowedCoin.amount).multiplying(byPowerOf10: -dpDecimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
             systemBorrowedValue.attributedText = WUtils.getDPRawDollor(BorrowedValue.stringValue, 2, systemBorrowedValue.font)
         }
@@ -88,7 +89,7 @@ class HarvestDetailTopCell: UITableViewCell {
         } else {
             SystemBorrowableAmount = moduleBorrowable
         }
-        WUtils.showCoinDp(hardMoneyMarketDenom, SystemBorrowableAmount.stringValue, systemRemainBorrowableDenom, systemRemainBorrowableAmount, ChainType.KAVA_MAIN)
+        WDP.dpCoin(chainConfig, hardMoneyMarketDenom, SystemBorrowableAmount.stringValue, systemRemainBorrowableDenom, systemRemainBorrowableAmount)
         SystemBorrowableValue = SystemBorrowableAmount.multiplying(byPowerOf10: -dpDecimal).multiplying(by: targetPrice, withBehavior: WUtils.handler2Down)
         systemRemainBorrowableValue.attributedText = WUtils.getDPRawDollor(SystemBorrowableValue.stringValue, 2, systemRemainBorrowableValue.font)
     }

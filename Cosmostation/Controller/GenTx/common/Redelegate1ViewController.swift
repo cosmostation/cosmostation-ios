@@ -23,12 +23,15 @@ class Redelegate1ViewController: BaseViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
-        let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        let mainDenom = WUtils.getMainDenom(chainConfig)
         
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         userDelegated = BaseData.instance.getDelegated_gRPC(self.pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
-        WUtils.showCoinDp(mainDenom, userDelegated.stringValue, availableDenomLabel, availableAmountLabel, pageHolderVC.chainType!)
+        WDP.dpCoin(chainConfig, mainDenom, userDelegated.stringValue, availableDenomLabel, availableAmountLabel)
         
         redelegateInputTextField.delegate = self
         redelegateInputTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -105,7 +108,7 @@ class Redelegate1ViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func onClickNext(_ sender: UIButton) {
         if (isValiadAmount()) {
             let userInput = WUtils.localeStringToDecimal((redelegateInputTextField.text?.trimmingCharacters(in: .whitespaces))!)
-            let coin = Coin.init(WUtils.getMainDenom(pageHolderVC.chainType), userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
+            let coin = Coin.init(WUtils.getMainDenom(chainConfig), userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
             pageHolderVC.mToReDelegateAmount = coin
             self.btnCancel.isUserInteractionEnabled = false
             self.btnNext.isUserInteractionEnabled = false

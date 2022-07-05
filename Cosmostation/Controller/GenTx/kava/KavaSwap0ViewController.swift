@@ -38,6 +38,7 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         inputTextFiled.delegate = self
@@ -62,19 +63,19 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
             mOutputCoinAmount = NSDecimalNumber.init(string: mKavaSwapPool.coins[0].amount)
         }
         
-        dpInPutDecimal = WUtils.getKavaCoinDecimal(inputCoinDenom)
-        dpOutPutDecimal = WUtils.getKavaCoinDecimal(outputCoinDenom)
+        dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, inputCoinDenom)
+        dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, outputCoinDenom)
         
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(inputCoinDenom)
-        WUtils.showCoinDp(inputCoinDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, inputCoinDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)
         
         swapRate = mOutputCoinAmount.dividing(by: mInputCoinAmount, withBehavior: WUtils.handler18)
         print("swapRate ", swapRate)
         
-        WUtils.DpKavaTokenName(inputCoinName, inputCoinDenom)
-        WUtils.DpKavaTokenName(outputCoinName, outputCoinDenom)
-        inputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(inputCoinDenom))!)
-        outputCoinImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(outputCoinDenom))!)
+        WDP.dpSymbol(chainConfig, inputCoinDenom, inputCoinName)
+        WDP.dpSymbol(chainConfig, outputCoinDenom, outputCoinName)
+        WDP.dpSymbolImg(chainConfig, inputCoinDenom, inputCoinImg)
+        WDP.dpSymbolImg(chainConfig, outputCoinDenom, outputCoinImg)
     }
     
     override func enableUserInteraction() {

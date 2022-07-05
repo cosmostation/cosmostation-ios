@@ -22,15 +22,15 @@ class TxHardBorrowCell: TxCell {
         borrowAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Kava_Hard_V1beta1_MsgBorrow.init(serializedData: response.tx.body.messages[position].value) {
             borrower.text = msg.borrower
             
             let coin = Coin.init(msg.amount[0].denom, msg.amount[0].amount)
-            WUtils.showCoinDp(coin, borrowDenom, borrowAmount, chain.chainType)
+            WDP.dpCoin(chainConfig, coin, borrowDenom, borrowAmount)
         }
     }
 }

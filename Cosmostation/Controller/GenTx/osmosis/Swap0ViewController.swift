@@ -35,8 +35,9 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        pageHolderVC = self.parent as? StepGenTxViewController
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
@@ -46,20 +47,20 @@ class Swap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mSwapInDenom!)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_OSMOSIS_SWAP, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         print("availableMaxAmount ", availableMaxAmount)
-        print("txFeeAmount ", txFeeAmount)
+        print("mainDenomFee ", mainDenomFee)
         if (pageHolderVC.mSwapInDenom == OSMOSIS_MAIN_DENOM) {
-            availableMaxAmount = availableMaxAmount.subtracting(txFeeAmount)
+            availableMaxAmount = availableMaxAmount.subtracting(mainDenomFee)
         }
-        WUtils.showCoinDp(pageHolderVC.mSwapInDenom!, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
-        WUtils.DpOsmosisTokenImg(inputCoinImg, pageHolderVC.mSwapInDenom!)
-        WUtils.DpOsmosisTokenName(inputCoinName, pageHolderVC.mSwapInDenom!)
-        WUtils.DpOsmosisTokenImg(outputCoinImg, pageHolderVC.mSwapOutDenom!)
-        WUtils.DpOsmosisTokenName(outputCoinName, pageHolderVC.mSwapOutDenom!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mSwapInDenom!, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)
+        WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapInDenom!, inputCoinImg)
+        WDP.dpSymbol(chainConfig, pageHolderVC.mSwapInDenom!, inputCoinName)
+        WDP.dpSymbolImg(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinImg)
+        WDP.dpSymbol(chainConfig, pageHolderVC.mSwapOutDenom!, outputCoinName)
         
-        dpInPutDecimal = WUtils.getOsmosisCoinDecimal(pageHolderVC.mSwapInDenom)
-        dpOutPutDecimal = WUtils.getOsmosisCoinDecimal(pageHolderVC.mSwapOutDenom)
+        dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapInDenom)
+        dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mSwapOutDenom)
         
         var inputAssetAmount = NSDecimalNumber.zero
         var inputAssetWeight = NSDecimalNumber.zero

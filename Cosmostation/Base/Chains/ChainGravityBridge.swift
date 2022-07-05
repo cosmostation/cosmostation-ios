@@ -22,6 +22,7 @@ class ChainGravityBridge: ChainConfig {
     var chainTitle2 = "G-BRIDGE"
     var chainDBName = CHAIN_GRAVITY_BRIDGE_S
     var chainAPIName = "gravity-bridge"
+    var chainIdPrefix = "gravity-bridge-"
     
     var stakeDenomImg = UIImage(named: "tokenGravityBridge")
     var stakeDenom = "ugraviton"
@@ -31,6 +32,8 @@ class ChainGravityBridge: ChainConfig {
     
     var addressPrefix = "gravity"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.0ugraviton"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +64,13 @@ class ChainGravityBridge: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.gravitybridge.net/blog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

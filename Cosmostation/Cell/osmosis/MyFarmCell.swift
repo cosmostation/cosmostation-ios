@@ -40,6 +40,7 @@ class MyFarmCell: UITableViewCell {
     }
     
     func onBindView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool, _ lockUps: Array<Osmosis_Lockup_PeriodLock>, _ gauges: Array<Osmosis_Incentives_Gauge>) {
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
         let lpCoinPrice = WUtils.getOsmoLpTokenPerUsdPrice(pool)
@@ -48,7 +49,7 @@ class MyFarmCell: UITableViewCell {
         let totalShares = NSDecimalNumber.init(string: pool.totalShares.amount)
         
         poolIDLabel.text = "#" + String(pool.id) + " MY EARNING"
-        poolPairLabel.text = WUtils.getOsmosisTokenName(coin0.denom) + " / " + WUtils.getOsmosisTokenName(coin1.denom)
+        poolPairLabel.text = WUtils.getSymbol(chainConfig, coin0.denom) + " / " + WUtils.getSymbol(chainConfig, coin1.denom)
         poolArpLabel.attributedText = WUtils.displayPercent(apr, poolArpLabel.font)
         
         
@@ -95,11 +96,11 @@ class MyFarmCell: UITableViewCell {
             }
         }
         
-        farmingAmountLabel.attributedText = WUtils.displayAmount2(bondedAmount.stringValue, farmingAmountLabel.font, 18, 6)
+        farmingAmountLabel.attributedText = WDP.dpAmount(bondedAmount.stringValue, farmingAmountLabel.font, 18, 6)
         farmingDenomLabel.text = "GAMM-" + String(pool.id)
-        unbondingAmountLabel.attributedText = WUtils.displayAmount2(unbondingAmount.stringValue, unbondingAmountLabel.font, 18, 6)
+        unbondingAmountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, unbondingAmountLabel.font, 18, 6)
         unbondingDenomLabel.text = "GAMM-" + String(pool.id)
-        unbondedAmountLabel.attributedText = WUtils.displayAmount2(unbondedAmount.stringValue, unbondedAmountLabel.font, 18, 6)
+        unbondedAmountLabel.attributedText = WDP.dpAmount(unbondedAmount.stringValue, unbondedAmountLabel.font, 18, 6)
         unbondedDenomLabel.text = "GAMM-" + String(pool.id)
         
         let farmingCoinValue = bondedAmount.multiplying(by: lpCoinPrice).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler2)
@@ -120,9 +121,9 @@ class MyFarmCell: UITableViewCell {
         let formattedLpCoinValue = "$ " + nf.string(from: lpCoinValue)!
         availableDenomLabel.text = "GAMM-" + String(pool.id)
         availableDenomLabel.adjustsFontSizeToFitWidth = true
-        availableAmountLabel.attributedText = WUtils.displayAmount2(lpCoin, availableAmountLabel.font, 18, 6)
+        availableAmountLabel.attributedText = WDP.dpAmount(lpCoin, availableAmountLabel.font, 18, 6)
         availableValueLabel.attributedText = WUtils.getDpAttributedString(formattedLpCoinValue, 2, availableValueLabel.font)
         
-        nextRewardAmountLabel.attributedText = WUtils.displayAmount2(myRewards.stringValue, nextRewardAmountLabel.font, 6, 6)
+        nextRewardAmountLabel.attributedText = WDP.dpAmount(myRewards.stringValue, nextRewardAmountLabel.font, 6, 6)
     }
 }

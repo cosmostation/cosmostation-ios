@@ -21,6 +21,8 @@ class KeyboardViewController: UIPageViewController, UIPageViewControllerDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        
         self.dataSource = self
         if let firstViewController = orderedViewControllers.first {
             setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)

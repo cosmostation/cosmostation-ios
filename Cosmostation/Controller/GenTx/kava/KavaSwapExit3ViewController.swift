@@ -36,6 +36,7 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.mKavaSwapPool = pageHolderVC.mKavaSwapPool
@@ -49,8 +50,8 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel, chainType!)
-        shareAmountLabel.attributedText = WUtils.displayAmount2(pageHolderVC.mKavaShareAmount.stringValue, shareAmountLabel.font!, 6, 6)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
+        shareAmountLabel.attributedText = WDP.dpAmount(pageHolderVC.mKavaShareAmount.stringValue, shareAmountLabel.font!, 6, 6)
         
         let sharesOwned = NSDecimalNumber.init(string: mMyKavaPoolDeposits.sharesOwned)
         let depositRate = (pageHolderVC.mKavaShareAmount).dividing(by: sharesOwned, withBehavior: WUtils.handler18)
@@ -61,8 +62,8 @@ class KavaSwapExit3ViewController: BaseViewController, PasswordViewDelegate {
         let coin1Amount = sharesValue1.multiplying(by: padding).multiplying(by: depositRate, withBehavior: WUtils.handler0)
         coin0 = Coin.init(mMyKavaPoolDeposits.sharesValue[0].denom, coin0Amount.stringValue)
         coin1 = Coin.init(mMyKavaPoolDeposits.sharesValue[1].denom, coin1Amount.stringValue)
-        WUtils.showCoinDp(coin0!, withdraw0DenomLabel, withdraw0AmountLabel, chainType!)
-        WUtils.showCoinDp(coin1!, withdraw1DenomLabel, withdraw1AmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, coin0!, withdraw0DenomLabel, withdraw0AmountLabel)
+        WDP.dpCoin(chainConfig, coin1!, withdraw1DenomLabel, withdraw1AmountLabel)
         memoLabel.text = pageHolderVC.mMemo
     }
 

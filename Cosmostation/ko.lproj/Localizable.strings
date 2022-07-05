@@ -91,27 +91,11 @@
 "more_wait_msg" = "요청하신 트랜잭션은 블럭체인에 정확히 전달하였습니다. 하지만 결과값을 보여주는데 시간이 지연되고 있습니다. \"기다리기\" 버튼을 눌러 현재 화면에서 결과값을 확인하거나, \"닫기\" 버튼을 눌러 잠시 후에 History 탭에서 결과를 확인하세요.";
 "more_wait_swap_title" = "스왑아이디 확인 지연";
 "more_wait_swap_msg" = "보내는 체인에서 정상적으로 스왑을 시도하였지만, 스왑아이디가 검색되지 않습니다. \"기다리기\" 버튼을 누르시면 계속해서 스왑아이디를 검색하며 스왑 기능을 진행합니다. \"닫기\" 버튼을 누르시면 일정 시간 이후 원래 지갑으로 토큰이 반환됩니다.";
-"fee_speed_title_0" = "소수의 검증인들만 처리해 줄 것입니다.";
-"fee_speed_title_1" = "일부의 검증인들만 처리해 줄 것입니다.";
-"fee_speed_title_2" = "대부분의 검증인들이 처리해 줄 것입니다.";
-"fee_speed_iris_title" = "현재 아이리스는 고정 Tx 수수료를 지원합니다.\n아이리스는 사용후 남은 가스비를 전액 반환합니다.";
-"fee_speed_bnb_title" = "현재 바이낸스는 고정 수수료를 지원합니다.";
-"fee_speed_kava_title" = "현재 카바는 고정 전송 수수료를 지원합니다.";
-"fee_speed_iov_title" = "현재 스타네임은 고정 전송 수수료를 지원합니다.";
-"fee_speed_ok_title" = "현재 오케이이엑스 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_certik_title" = "현재 써틱 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_secret_title" = "현재 시크릿 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_akash_title" = "현재 아카시 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_sentinel_title" = "현재 센티넬 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_fetch_title" = "현재 페치에이아이 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_sif_title" = "현재 시프 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_ki_title" = "현재 키 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_stargate_title" = "현재 스타게이트 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_cosmos_title" = "현재 코스모스 체인은 고정 전송 수수료를 지원합니다.";
-"fee_speed_fixed_fee" = "거래 수수료는 네트워크를 안전하게 유지하고 스팸 공격 등을 방지하기 위해 존재합니다. \n지불하시는 Tx 수수료는, 모든 검증인과 위임자들 그리고 커뮤니티 풀에 분배됩니다.";
-"fee_description_msg_0" = "\n이 Tx 는 소수의 검증인들만 처리해 줄 것입니다. 해당 Tx가 처리되기 위해선, 최소 Tx 수수료를 0.000001 ATOM 또는 그 이하로 설정해 놓은 검증인 노드가 블록을 생성해야 합니다. Tx 요청시 어떤 검증인이 블록을 생성하고 있는가에 따라, 해당 Tx가 실제 블록에 반영되는 데 까지 시간이 지연될 수 있습니다.\n\n최소 Tx 수수료는 각 검증인이 임의로 설정할 수 있는 값입니다. 만약 검증인이 높은 노드 Tx 수수료를 설정해 놓았다면, 해당 검증인이 생성하는 블록에 Tx 를 포함시키기 위해 더 높은 Tx 수수료가 필요하다는 의미입니다.\n\n현재 0.000001 ATOM Tx 수수료를 처리해주는 검증인: Polychain Labs, jackzampolin, Forbole, Cryptium Labs, BouBouNode.";
-"fee_description_msg_1" = "\n이 Tx 는 코스모스테이션을 포함하여 최소 Tx 수수료를 0.0025 또는 그 이하로 설정해 놓은 검증인들이 처리해 줄 것입니다. Tx 요청시 어떤 검증인이 블록을 생성하고 있는가에 따라, 해당 Tx 가 실제 블록에 반영되는 데 까지 시간이 지연될 수 있습니다.\n\n최소 Tx 수수료는 각 검증인이 임의로 설정할 수 있는 값입니다. 만약 검증인이 높은 노드 Tx 수수료를 설정해 놓았다면, 해당 검증인이 생성하는 블록에 Tx 를 포함시키기 위해 더 높은 Tx 수수료가 필요하다는 의미입니다.\n\n현재 Tx 수수료 비율 0.0025 를 처리해주는 검증인: Cosmostation, Polychain Labs, jackzampolin, Forbole, Cryptium Labs, BouBouNode.";
-"fee_description_msg_2" = "\n대부분의 검증인들은 최소 Tx 수수료 비율을 0.025 또는 그 이상으로 설정해 놓았습니다. 이 Tx 는 대부분의 검증인들이 처리해 줄 것입니다. 그러므로, Tx 수수료 비율을 0.025로 지불하면 해당 Tx 가 1 블록 타임(~7초) 안에 처리되어 블록체인에 반영될 가능성이 높습니다.\n\n최소 Tx 수수료는 각 검증인이 임의로 설정할 수 있는 값입니다. 만약 검증인이 높은 노드 Tx 수수료를 설정해 놓았다면, 해당 검증인이 생성하는 블록에 Tx 를 포함시키기 위해 더 높은 거래 수수료가 필요하다는 의미입니다.\n\n현재 거래 수수료 비율 0.025 를 처리해주는 검증인: 몇몇 검증인을 제외한 대부분의 검증인";
+"fee_speed_title_zero" = "이 체인은 무료 전송 수수료를 지원합니다.";
+"fee_speed_title_fixed" = "이 체인은 고정 전송 수수료를 지원합니다.";
+"fee_speed_title_tiny" = "소수의 검증인들만 처리해 줄 것입니다.";
+"fee_speed_title_low" = "일부의 검증인들만 처리해 줄 것입니다.";
+"fee_speed_title_average" = "대부분의 검증인들이 처리해 줄 것입니다.";
 "max_spend_title" = "주의";
 "max_spend_msg" = "이 Tx 이후 사용 가능 금액이 0 이 됩니다. 다음 Tx 요청시 사용할 수수료가 남아있지 않아 전송이 불가 할 수 있습니다.";
 "fee_over_title" = "이자 지급 불가";
@@ -332,6 +316,7 @@
 "import_account_title" = "지갑 추가";
 "import_account_msg" = "%@개의 지갑을 추가하시겠습니까?";
 "recent_history" = "최근 기록";
+"select_fee_denom" = "수수료 지불할 코인을 고르세요.";
 
 "current_price_format" = "현재 %@ 가격";
 "liquidation_price_format" = "청산 %@ 가격";
@@ -782,6 +767,9 @@ support@cosmostation.io";
 "alert_title_no_private_key" = "관찰 모드 지갑";
 "alert_msg_no_private_key" = "관찰만 가능한 지갑입니다.\n모든 트랜잭션은 니모닉 등록 후 이용 가능합니다.";
 
+"theme_system" = "시스템";
+"theme_light" = "라이트";
+"theme_dark" = "다크";
 
 "currency_usd" = "USD";
 "currency_eur" = "EUR";

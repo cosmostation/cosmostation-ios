@@ -22,6 +22,7 @@ class ChainPersistence: ChainConfig {
     var chainTitle2 = "PERSISTENCE"
     var chainDBName = CHAIN_PERSIS_S
     var chainAPIName = "persistence"
+    var chainIdPrefix = "core-"
     
     var stakeDenomImg = UIImage(named: "tokenPersistence")
     var stakeDenom = "uxprt"
@@ -31,6 +32,10 @@ class ChainPersistence: ChainConfig {
     
     var addressPrefix = "persistence"
     let addressHdPath0 = "m/44'/750'/0'/0/X"
+    
+    let gasRate0 = "0.0uxprt"
+    let gasRate1 = "0.025uxprt"
+    
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +66,13 @@ class ChainPersistence: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/persistence-blog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

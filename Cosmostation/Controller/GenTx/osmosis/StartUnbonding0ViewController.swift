@@ -23,6 +23,7 @@ class StartUnbonding0ViewController: BaseViewController {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         let toUnbondingDuration  = pageHolderVC.mLockups![0].duration.seconds
@@ -42,7 +43,7 @@ class StartUnbonding0ViewController: BaseViewController {
         } else if (toUnbondingDuration == 1209600) {
             toUnbondingDurationLabel.text = "14 Days"
         }
-        WUtils.showCoinDp(toUnbondingDenom, toUnbondingAmount.stringValue, toUnbondingDenomLabel, toUnbondingAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, toUnbondingDenom, toUnbondingAmount.stringValue, toUnbondingDenomLabel, toUnbondingAmountLabel)
     }
     
     override func enableUserInteraction() {

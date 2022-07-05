@@ -30,7 +30,7 @@ class SendContract1ViewController: BaseViewController, UITextFieldDelegate {
         self.maxAvailable = cw20Token.getAmount()
         
         self.mAvailableDenomLabel.text = cw20Token.denom.uppercased()
-        self.mAvailableAmountLabel.attributedText = WUtils.displayAmount2(maxAvailable.stringValue, mAvailableAmountLabel.font!, decimal, decimal)
+        self.mAvailableAmountLabel.attributedText = WDP.dpAmount(maxAvailable.stringValue, mAvailableAmountLabel.font!, decimal, decimal)
         
         mTargetAmountTextField.delegate = self
         mTargetAmountTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

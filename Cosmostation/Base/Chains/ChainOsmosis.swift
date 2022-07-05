@@ -22,6 +22,7 @@ class ChainOsmosis: ChainConfig {
     var chainTitle2 = "OSMOSIS"
     var chainDBName = CHAIN_OSMOSIS_S
     var chainAPIName = "osmosis"
+    var chainIdPrefix = "osmosis-"
     
     var stakeDenomImg = UIImage(named: "tokenOsmosis")
     var stakeDenom = "uosmo"
@@ -31,6 +32,10 @@ class ChainOsmosis: ChainConfig {
     
     var addressPrefix = "osmo"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.0uosmo"
+    let gasRate1 = "0.0025uosmo"
+    let gasRate2 = "0.025uosmo"
     
     var pushSupport = false
     var wcSupoort = true
@@ -62,4 +67,15 @@ class ChainOsmosis: ChainConfig {
     func getInfoLink2() -> String {
         return "https://medium.com/osmosis"
     }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
+    }
 }
+
+let OSMOSIS_MAIN_DENOM = "uosmo"
+let OSMOSIS_ION_DENOM = "uion"

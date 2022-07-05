@@ -62,7 +62,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     
     func onInitView() {
         let ibcHash = ibcDenom.replacingOccurrences(of: "ibc/", with: "")
-        let baseDenom = BaseData.instance.getBaseDenom(ibcDenom)
+        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, ibcDenom)
         guard let ibcToken = BaseData.instance.getIbcToken(ibcHash) else {
             self.navigationController?.popViewController(animated: true)
             return
@@ -74,7 +74,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         print("ibcToken ", ibcToken)
         
         if (ibcToken.auth == true) {
-            naviTokenImg.af_setImage(withURL: URL(string: ibcToken.moniker!)!)
+            WDP.dpSymbolImg(chainConfig, ibcDenom, naviTokenImg)
             naviTokenSymbol.text = ibcToken.display_denom?.uppercased()
             naviTokenChannel.text = "(" + ibcToken.channel_id! + ")"
             topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalAmount, ibcDivideDecimal, topValue.font)
@@ -148,9 +148,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
             return
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_IBC_TRANSFER, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -166,6 +164,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         let unAuthTitle = NSLocalizedString("str_notice", comment: "")
         let unAuthMsg = NSLocalizedString("str_msg_ibc", comment: "")
         let noticeAlert = UIAlertController(title: unAuthTitle, message: unAuthMsg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default, handler: { _ in
             self.onStartIbc()
         }))
@@ -191,9 +190,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
             return
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }

@@ -185,7 +185,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     
     func onSetHistoryItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-        cell?.bindHistoryView(chainType!, mApiCustomNewHistories[indexPath.row], account!.account_address)
+        cell?.bindHistoryView(chainConfig!, mApiCustomNewHistories[indexPath.row], account!.account_address)
         return cell!
     }
     
@@ -430,13 +430,11 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_DELEGATE, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue <= 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        if (BaseData.instance.getDelegatable_gRPC(chainType).compare(NSDecimalNumber.zero).rawValue <= 0) {
+        if (BaseData.instance.getDelegatable_gRPC(chainConfig).compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_available", comment: ""))
             return
         }
@@ -464,9 +462,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
                 return
             }
         }
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_UNDELEGATE, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -488,9 +484,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             self.onShowToast(NSLocalizedString("error_not_redelegate", comment: ""))
             return
         }
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_REDELEGATE, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -512,14 +506,12 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), mValidator_gRPC?.operatorAddress)
+        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), mValidator_gRPC?.operatorAddress)
         if (reward.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
         }
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_CLAIM_STAKE_REWARD, 1)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -539,14 +531,12 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
             return
         }
         
-        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainType), mValidator_gRPC?.operatorAddress)
+        let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), mValidator_gRPC?.operatorAddress)
         if (reward.compare(NSDecimalNumber.zero).rawValue <= 0) {
             self.onShowToast(NSLocalizedString("error_not_reward", comment: ""))
             return
         }
-        let gasDenom = WUtils.getGasDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_REINVEST, 0)
-        if (BaseData.instance.getAvailableAmount_gRPC(gasDenom).compare(feeAmount).rawValue < 0) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
@@ -564,6 +554,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     
     func onShowReInvsetFailDialog() {
         let alert = UIAlertController(title: NSLocalizedString("error_reward_address_changed_title", comment: ""), message: NSLocalizedString("error_reward_address_changed_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }

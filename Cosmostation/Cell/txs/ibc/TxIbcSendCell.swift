@@ -22,16 +22,16 @@ class TxIbcSendCell: TxCell {
         sendAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         let msg = try! Ibc_Applications_Transfer_V1_MsgTransfer.init(serializedData: response.tx.body.messages[position].value)
         senderLabel.text = msg.sender
         receipientLabel.text = msg.receiver
         
         let sendCoin = Coin.init(msg.token.denom, msg.token.amount)
-        WUtils.showCoinDp(sendCoin, sendDenom, sendAmount, chain.chainType)
+        WDP.dpCoin(chainConfig, sendCoin, sendDenom, sendAmount)
     }
     
 }

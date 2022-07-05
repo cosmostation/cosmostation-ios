@@ -26,9 +26,9 @@ class TxInstantContractCell: TxCell {
     }
     
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         if let msg = try? Cosmwasm_Wasm_V1_MsgInstantiateContract.init(serializedData: response.tx.body.messages[position].value) {
             adminLabel.text = msg.admin
@@ -41,7 +41,7 @@ class TxInstantContractCell: TxCell {
             }
             
             if (msg.funds.count > 0) {
-                WUtils.showCoinDp(msg.funds[0].denom, msg.funds[0].amount, fundAmountDenom, fundAmountLabel, chain.chainType)
+                WDP.dpCoin(chainConfig, msg.funds[0].denom, msg.funds[0].amount, fundAmountDenom, fundAmountLabel)
             } else {
                 fundAmountLabel.text = ""
                 fundAmountDenom.text = ""

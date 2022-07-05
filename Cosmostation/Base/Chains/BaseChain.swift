@@ -23,6 +23,7 @@ protocol ChainConfig {
     var chainTitle2: String { get set }
     var chainDBName: String { get set }
     var chainAPIName: String { get set }
+    var chainIdPrefix: String { get set }
     
     var stakeDenomImg: UIImage? { get set }
     var stakeDenom: String { get set }
@@ -48,6 +49,8 @@ protocol ChainConfig {
     func getHdPath(_ type: Int, _ path: Int) -> String
     func getInfoLink1() -> String
     func getInfoLink2() -> String
+    func getGasRates() -> Array<String>
+    func getGasDefault() -> Int
         
 }
 

@@ -22,6 +22,7 @@ class ChainOkc: ChainConfig {
     var chainTitle2 = "OKC"
     var chainDBName = CHAIN_OKEX_S
     var chainAPIName = ""
+    var chainIdPrefix = "exchain-"
     
     var stakeDenomImg = UIImage(named: "tokenOkc")
     var stakeDenom = "okt"
@@ -32,6 +33,8 @@ class ChainOkc: ChainConfig {
     var addressPrefix = "ex"
     let addressHdPath0 = "m/44'/996'/0'/0/X"
     let addressHdPath1 = "m/44'/60'/0'/0/X"
+    
+    let gasRate0 = "0.0000000001okt"
     
     var pushSupport = false
     var wcSupoort = false
@@ -62,5 +65,13 @@ class ChainOkc: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://www.okx.com/academy/en/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

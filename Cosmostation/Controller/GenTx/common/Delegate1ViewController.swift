@@ -23,13 +23,17 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
-        let mainDenom = WUtils.getMainDenom(pageHolderVC.chainType!)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(pageHolderVC.chainType!, TASK_TYPE_DELEGATE, 0)
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        
+        let mainDenom = chainConfig!.stakeDenom
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
         mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        userBalance = BaseData.instance.getDelegatable_gRPC(pageHolderVC.chainType).subtracting(feeAmount)
-        WUtils.showCoinDp(mainDenom, userBalance.stringValue, availableDenomLabel, availableAmountLabel, pageHolderVC.chainType!)
+        userBalance = BaseData.instance.getDelegatable_gRPC(chainConfig).subtracting(mainDenomFee)
+        WDP.dpCoin(chainConfig, mainDenom, userBalance.stringValue, availableDenomLabel, availableAmountLabel)
         
         toDelegateAmountInput.delegate = self
         toDelegateAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -104,7 +108,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     @IBAction func onClickNext(_ sender: UIButton) {
         if (isValiadAmount()) {
             let userInput = WUtils.localeStringToDecimal((toDelegateAmountInput.text?.trimmingCharacters(in: .whitespaces))!)
-            let coin = Coin.init(WUtils.getMainDenom(pageHolderVC.chainType), userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
+            let coin = Coin.init(WUtils.getMainDenom(chainConfig), userInput.multiplying(byPowerOf10: mDpDecimal).stringValue)
             pageHolderVC.mToDelegateAmount = coin
             sender.isUserInteractionEnabled = false
             pageHolderVC.onNextPage()
@@ -176,6 +180,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     
     func showMaxWarnning() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("max_spend_title", comment: ""), message: NSLocalizedString("max_spend_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
@@ -187,6 +192,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     
     func showVestingWarnning() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("vesting_account", comment: ""), message: NSLocalizedString("vesting_account_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: { _ in
             self.navigationController?.popViewController(animated: true)
         }))

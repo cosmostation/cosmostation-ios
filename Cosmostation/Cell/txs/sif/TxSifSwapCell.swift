@@ -24,16 +24,16 @@ class TxSifSwapCell: TxCell {
         txSwapOutAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         let msg = try! Sifnode_Clp_V1_MsgSwap.init(serializedData: response.tx.body.messages[position].value)
         txSingerLabel.text = msg.signer
         txSingerLabel.adjustsFontSizeToFitWidth = true
         
         let inCoin = Coin.init(msg.sentAsset.symbol, msg.sentAmount)
-        WUtils.showCoinDp(inCoin, txSwapInDenomLabel, txSwapInAmountLabel, chain.chainType)
+        WDP.dpCoin(chainConfig, inCoin, txSwapInDenomLabel, txSwapInAmountLabel)
         
         var outCoin: Coin?
         if response.txResponse.logs.count > position {
@@ -54,7 +54,7 @@ class TxSifSwapCell: TxCell {
             }
         }
         if (outCoin != nil) {
-            WUtils.showCoinDp(outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel, chain.chainType)
+            WDP.dpCoin(chainConfig, outCoin!, txSwapOutDenomLabel, txSwapOutAmountLabel)
         } else {
             txSwapOutAmountLabel.text = ""
             txSwapOutDenomLabel.text = ""

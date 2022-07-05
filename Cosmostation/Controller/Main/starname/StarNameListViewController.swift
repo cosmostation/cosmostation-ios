@@ -34,8 +34,8 @@ class StarNameListViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
-            myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
-            myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.gray], for: .normal)
+            myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")], for: .selected)
+            myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")], for: .normal)
             myStarNameSegment.selectedSegmentTintColor = chainConfig?.chainColor
             
         } else {
@@ -152,8 +152,10 @@ extension WUtils {
     
     static func checkStarnameWithResource(_ chainType: ChainType, _ response: Starnamed_X_Starname_V1beta1_QueryStarnameResponse) -> String? {
         for resource in response.account.resources {
-            if (isValidChainAddress(chainType, resource.resource)) {
-                return resource.resource
+            if let chainConfig = ChainFactory.getChainConfig(chainType) {
+                if (isValidChainAddress(chainConfig, resource.resource)) {
+                    return resource.resource
+                }
             }
         }
         return nil

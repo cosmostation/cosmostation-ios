@@ -22,6 +22,7 @@ class ChainCosmos: ChainConfig {
     var chainTitle2 = "COSMOS"
     var chainDBName = CHAIN_COSMOS_S
     var chainAPIName = "cosmos"
+    var chainIdPrefix = "cosmoshub-"
     
     
     var stakeDenomImg = UIImage(named: "tokenCosmos")
@@ -32,6 +33,10 @@ class ChainCosmos: ChainConfig {
     
     var addressPrefix = "cosmos"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.00025uatom"
+    let gasRate1 = "0.0025uatom"
+    let gasRate2 = "0.025uatom"
     
     var pushSupport = true
     var wcSupoort = false
@@ -62,5 +67,13 @@ class ChainCosmos: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.cosmos.network/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
     }
 }

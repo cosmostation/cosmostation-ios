@@ -22,6 +22,7 @@ class ChainOmniflix: ChainConfig {
     var chainTitle2 = "OMNIFLIX"
     var chainDBName = CHAIN_OMNIFLIX_S
     var chainAPIName = "flix"
+    var chainIdPrefix = "omniflixhub-"
     
     var stakeDenomImg = UIImage(named: "tokenOmniflix")
     var stakeDenom = "uflix"
@@ -31,6 +32,8 @@ class ChainOmniflix: ChainConfig {
     
     var addressPrefix = "omniflix"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.001uflix"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,6 +64,14 @@ class ChainOmniflix: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://blog.omniflix.network/"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }
 

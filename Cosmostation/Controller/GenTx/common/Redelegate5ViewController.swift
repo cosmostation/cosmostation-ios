@@ -28,12 +28,13 @@ class Redelegate5ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mToReDelegateAmount!, redelegateAmountDenom, redelegateAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], redelegateFeeDenom, redelegateFeeLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mToReDelegateAmount!, redelegateAmountDenom, redelegateAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], redelegateFeeDenom, redelegateFeeLabel)
         redelegateFromValLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         redelegateToValLabel.text = pageHolderVC.mToReDelegateValidator_gRPC?.description_p.moniker
         redelegateMemoLabel.text = pageHolderVC.mMemo

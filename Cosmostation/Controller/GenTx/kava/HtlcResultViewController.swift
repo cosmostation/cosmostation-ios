@@ -137,10 +137,10 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             cell?.memoLabel.text = mSendTxInfo?.tx?.value.memo
             
             let sendCoin = msg?.value.getAmounts()![0]
-            cell?.sentAmountLabel.attributedText = WUtils.displayAmount2(sendCoin?.amount, cell!.sentAmountLabel.font!, 8, 8)
+            cell?.sentAmountLabel.attributedText = WDP.dpAmount(sendCoin?.amount, cell!.sentAmountLabel.font!, 8, 8)
             WUtils.setDenomTitle(chainType!, cell!.sentDenom)
             
-            cell?.feeLabel.attributedText = WUtils.displayAmount2(FEE_BNB_TRANSFER, cell!.feeLabel.font!, 0, 8)
+            cell?.feeLabel.attributedText = WDP.dpAmount(FEE_BINANCE_BASE, cell!.feeLabel.font!, 0, 8)
             WUtils.setDenomTitle(chainType!, cell!.feeDenom)
             
             cell?.senderLabel.text = msg?.value.from
@@ -150,15 +150,17 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             cell?.randomHashLabel.text = msg?.value.random_number_hash
             
         } else if (self.chainType == ChainType.KAVA_MAIN) {
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
             cell?.blockHeightLabel.text = mSendTxInfo?.height
             cell?.txHashLabel.text = mSendTxInfo?.txhash
             cell?.memoLabel.text = mSendTxInfo?.tx?.value.memo
             
             let sendCoin = msg?.value.getAmounts()![0]
-            cell?.sentAmountLabel.attributedText = WUtils.displayAmount2(sendCoin?.amount, cell!.sentAmountLabel.font!, WUtils.getKavaCoinDecimal(sendCoin!.denom), WUtils.getKavaCoinDecimal(sendCoin!.denom))
+            let sendCoinDecimal = WUtils.getDenomDecimal(chainConfig, sendCoin!.denom)
+            cell?.sentAmountLabel.attributedText = WDP.dpAmount(sendCoin?.amount, cell!.sentAmountLabel.font!, sendCoinDecimal, sendCoinDecimal)
             cell?.sentDenom.text = sendCoin?.denom.uppercased()
             
-            cell?.feeLabel.attributedText = WUtils.displayAmount2(mSendTxInfo!.simpleFee().stringValue, cell!.feeLabel.font!, 6, 6)
+            cell?.feeLabel.attributedText = WDP.dpAmount(mSendTxInfo!.simpleFee().stringValue, cell!.feeLabel.font!, 6, 6)
             WUtils.setDenomTitle(chainType!, cell!.feeDenom)
             
             cell?.senderLabel.text = msg?.value.from
@@ -183,7 +185,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             cell?.receivedAmountLabel.text = ""
             cell?.receivedDenom.text = ""
             
-            cell?.feeLabel.attributedText = WUtils.displayAmount2(FEE_BNB_TRANSFER, cell!.feeLabel.font!, 0, 8)
+            cell?.feeLabel.attributedText = WDP.dpAmount(FEE_BINANCE_BASE, cell!.feeLabel.font!, 0, 8)
             WUtils.setDenomTitle(mHtlcToChain!, cell!.feeDenomLabel)
             
             cell?.claimerAddress.text = msg?.value.from
@@ -192,17 +194,19 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
             
             
         } else if (self.mHtlcToChain == ChainType.KAVA_MAIN) {
+            let chainConfig = ChainKava.init(.KAVA_MAIN)
             cell?.blockHeightLabel.text = mClaimTxInfo?.height
             cell?.txHashLabel.text = mClaimTxInfo?.txhash
             cell?.memoLabel.text = mClaimTxInfo?.tx?.value.memo
             
             let receiveCoin = mClaimTxInfo!.simpleSwapCoin()
+            let receiveCoinDecimal = WUtils.getDenomDecimal(chainConfig, receiveCoin!.denom)
             if (receiveCoin != nil && !receiveCoin!.denom.isEmpty) {
-                cell?.receivedAmountLabel.attributedText = WUtils.displayAmount2(receiveCoin!.amount, cell!.receivedAmountLabel.font!, WUtils.getKavaCoinDecimal(receiveCoin!.denom), WUtils.getKavaCoinDecimal(receiveCoin!.denom))
+                cell?.receivedAmountLabel.attributedText = WDP.dpAmount(receiveCoin!.amount, cell!.receivedAmountLabel.font!, receiveCoinDecimal, receiveCoinDecimal)
                 cell?.receivedDenom.text = receiveCoin!.denom.uppercased()
             }
             
-            cell?.feeLabel.attributedText = WUtils.displayAmount2(mClaimTxInfo!.simpleFee().stringValue, cell!.feeLabel.font!, 6, 6)
+            cell?.feeLabel.attributedText = WDP.dpAmount(mClaimTxInfo!.simpleFee().stringValue, cell!.feeLabel.font!, 6, 6)
             WUtils.setDenomTitle(mHtlcToChain!, cell!.feeDenomLabel)
             
             cell?.claimerAddress.text = msg?.value.from
@@ -621,6 +625,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     
     func onShowMoreSwapWait() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_swap_title", comment: ""), message: NSLocalizedString("more_wait_swap_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
             self.onStartMainTab()

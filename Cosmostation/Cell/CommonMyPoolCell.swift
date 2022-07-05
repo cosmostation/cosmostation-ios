@@ -44,39 +44,38 @@ class CommonMyPoolCell: UITableViewCell {
     
     func onBindOsmoPoolView(_ pool: Osmosis_Gamm_Balancer_V1beta1_Pool) {
         //dp pool info
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         poolCardView.backgroundColor = UIColor.init(named: "osmosis_bg")
         poolPairLabel.textColor = UIColor.init(named: "osmosis")
         
         let coin0 = Coin.init(pool.poolAssets[0].token.denom, pool.poolAssets[0].token.amount)
         let coin1 = Coin.init(pool.poolAssets[1].token.denom, pool.poolAssets[1].token.amount)
-        let coin0BaseDenom = BaseData.instance.getBaseDenom(coin0.denom)
-        let coin1BaseDenom = BaseData.instance.getBaseDenom(coin1.denom)
-        let coin0Symbol = WUtils.getOsmosisTokenName(coin0.denom)
-        let coin1Symbol = WUtils.getOsmosisTokenName(coin1.denom)
-        let coin0Decimal = WUtils.getOsmosisCoinDecimal(coin0.denom)
-        let coin1Decimal = WUtils.getOsmosisCoinDecimal(coin1.denom)
+        let coin0Symbol =  WUtils.getSymbol(chainConfig, coin0.denom)
+        let coin1Symbol = WUtils.getSymbol(chainConfig, coin1.denom)
+        let coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0.denom)
+        let coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1.denom)
         
         poolPairLabel.text = "#" + String(pool.id) + " " + coin0Symbol + " : " + coin1Symbol
         
-        let coin0Value = WUtils.usdValue(coin0BaseDenom, NSDecimalNumber.init(string: coin0.amount), coin0Decimal)
-        let coin1Value = WUtils.usdValue(coin1BaseDenom, NSDecimalNumber.init(string: coin1.amount), coin1Decimal)
+        let coin0Value = WUtils.usdValue(chainConfig, coin0.denom, NSDecimalNumber.init(string: coin0.amount))
+        let coin1Value = WUtils.usdValue(chainConfig, coin1.denom, NSDecimalNumber.init(string: coin1.amount))
         let poolValue = coin0Value.adding(coin1Value)
         let nf = WUtils.getNumberFormatter(2)
         let formatted = "$ " + nf.string(from: poolValue)!
         totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(formatted, 2, totalLiquidityValueLabel.font)
         
-        WUtils.DpOsmosisTokenName(liquidity1DenomLabel, coin0.denom)
+        WDP.dpSymbol(chainConfig, coin0.denom, liquidity1DenomLabel)
         liquidity1DenomLabel.adjustsFontSizeToFitWidth = true
-        WUtils.DpOsmosisTokenName(liquidity2DenomLabel, coin1.denom)
+        WDP.dpSymbol(chainConfig, coin1.denom, liquidity2DenomLabel)
         liquidity2DenomLabel.adjustsFontSizeToFitWidth = true
-        liquidity1AmountLabel.attributedText = WUtils.displayAmount2(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
-        liquidity2AmountLabel.attributedText = WUtils.displayAmount2(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
+        liquidity1AmountLabel.attributedText = WDP.dpAmount(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
+        liquidity2AmountLabel.attributedText = WDP.dpAmount(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
         
         
         //dp my lp info
-        WUtils.DpOsmosisTokenName(myDepositCoin0DenomLabel, coin0.denom)
+        WDP.dpSymbol(chainConfig, coin0.denom, myDepositCoin0DenomLabel)
         myDepositCoin0DenomLabel.adjustsFontSizeToFitWidth = true
-        WUtils.DpOsmosisTokenName(myDepositCoin1DenomLabel, coin1.denom)
+        WDP.dpSymbol(chainConfig, coin1.denom, myDepositCoin1DenomLabel)
         myDepositCoin1DenomLabel.adjustsFontSizeToFitWidth = true
         
         let lpCoin = BaseData.instance.getAvailable_gRPC("gamm/pool/" + String(pool.id))
@@ -87,20 +86,20 @@ class CommonMyPoolCell: UITableViewCell {
         
         let coin0MyShareAmount = WUtils.getMyShareLpAmount(pool, coin0.denom)
         let coin1MyShareAmount = WUtils.getMyShareLpAmount(pool, coin1.denom)
-        myDepositCoin0AmountLabel.attributedText = WUtils.displayAmount2(coin0MyShareAmount.stringValue , myDepositCoin0AmountLabel.font, coin0Decimal, 6)
-        myDepositCoin1AmountLabel.attributedText = WUtils.displayAmount2(coin1MyShareAmount.stringValue , myDepositCoin1AmountLabel.font, coin1Decimal, 6)
+        myDepositCoin0AmountLabel.attributedText = WDP.dpAmount(coin0MyShareAmount.stringValue , myDepositCoin0AmountLabel.font, coin0Decimal, 6)
+        myDepositCoin1AmountLabel.attributedText = WDP.dpAmount(coin1MyShareAmount.stringValue , myDepositCoin1AmountLabel.font, coin1Decimal, 6)
         
         
         //dp vailable
         let availableCoin0 = BaseData.instance.getAvailable_gRPC(coin0.denom)
         let availableCoin1 = BaseData.instance.getAvailable_gRPC(coin1.denom)
         
-        WUtils.DpOsmosisTokenName(availableCoin0DenomLabel, coin0.denom)
+        WDP.dpSymbol(chainConfig, coin0.denom, availableCoin0DenomLabel)
         availableCoin0DenomLabel.adjustsFontSizeToFitWidth = true
-        WUtils.DpOsmosisTokenName(availableCoin1DenomLabel, coin1.denom)
+        WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
         availableCoin1DenomLabel.adjustsFontSizeToFitWidth = true
-        availableCoin0AmountLabel.attributedText = WUtils.displayAmount2(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
-        availableCoin1AmountLabel.attributedText = WUtils.displayAmount2(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
+        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0, availableCoin0AmountLabel.font, coin0Decimal, 6)
+        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1, availableCoin1AmountLabel.font, coin1Decimal, 6)
     }
     
     
@@ -109,26 +108,27 @@ class CommonMyPoolCell: UITableViewCell {
         poolCardView.backgroundColor = UIColor.init(named: "kava_bg")
         poolPairLabel.textColor = UIColor.init(named: "kava")
         
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         let nf = WUtils.getNumberFormatter(2)
         let coin0 = pool.coins[0]
         let coin1 = pool.coins[1]
-        let coin0Decimal = WUtils.getKavaCoinDecimal(coin0.denom)
-        let coin1Decimal = WUtils.getKavaCoinDecimal(coin1.denom)
+        let coin0Decimal = WUtils.getDenomDecimal(chainConfig, coin0.denom)
+        let coin1Decimal = WUtils.getDenomDecimal(chainConfig, coin1.denom)
         let coin0price = WUtils.getKavaOraclePriceWithDenom(coin0.denom)
         let coin1price = WUtils.getKavaOraclePriceWithDenom(coin1.denom)
         let coin0Value = NSDecimalNumber.init(string: coin0.amount).multiplying(by: coin0price).multiplying(byPowerOf10: -coin0Decimal, withBehavior: WUtils.handler2)
         let coin1Value = NSDecimalNumber.init(string: coin1.amount).multiplying(by: coin1price).multiplying(byPowerOf10: -coin1Decimal, withBehavior: WUtils.handler2)
 
-        poolPairLabel.text = WUtils.getKavaTokenName(coin0.denom).uppercased() + " : " + WUtils.getKavaTokenName(coin1.denom).uppercased()
+        poolPairLabel.text = WUtils.getSymbol(chainConfig, coin0.denom).uppercased() + " : " + WUtils.getSymbol(chainConfig, coin1.denom).uppercased()
 
         let poolValue = coin0Value.adding(coin1Value)
         let poolValueFormatted = "$ " + nf.string(from: poolValue)!
         totalLiquidityValueLabel.attributedText = WUtils.getDpAttributedString(poolValueFormatted, 2, totalLiquidityValueLabel.font)
 
-        WUtils.DpKavaTokenName(liquidity1DenomLabel, coin0.denom)
-        WUtils.DpKavaTokenName(liquidity2DenomLabel, coin1.denom)
-        liquidity1AmountLabel.attributedText = WUtils.displayAmount2(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
-        liquidity2AmountLabel.attributedText = WUtils.displayAmount2(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
+        WDP.dpSymbol(chainConfig, coin0.denom, liquidity1DenomLabel)
+        WDP.dpSymbol(chainConfig, coin1.denom, liquidity2DenomLabel)
+        liquidity1AmountLabel.attributedText = WDP.dpAmount(coin0.amount, liquidity1AmountLabel.font, coin0Decimal, 6)
+        liquidity2AmountLabel.attributedText = WDP.dpAmount(coin1.amount, liquidity2AmountLabel.font, coin1Decimal, 6)
         
         
         //dp my lp info
@@ -141,19 +141,19 @@ class CommonMyPoolCell: UITableViewCell {
         let myShareValueFormatted = "$ " + nf.string(from: myShareValue)!
         myShareValueLabel.attributedText = WUtils.getDpAttributedString(myShareValueFormatted, 2, myShareValueLabel.font)
         
-        WUtils.DpKavaTokenName(myDepositCoin0DenomLabel, my0.denom)
-        WUtils.DpKavaTokenName(myDepositCoin1DenomLabel, my1.denom)
-        myDepositCoin0AmountLabel.attributedText = WUtils.displayAmount2(my0.amount, myDepositCoin0AmountLabel.font, coin0Decimal, 6)
-        myDepositCoin1AmountLabel.attributedText = WUtils.displayAmount2(my1.amount, myDepositCoin1AmountLabel.font, coin1Decimal, 6)
+        WDP.dpSymbol(chainConfig, my0.denom, myDepositCoin0DenomLabel)
+        WDP.dpSymbol(chainConfig, my1.denom, myDepositCoin1DenomLabel)
+        myDepositCoin0AmountLabel.attributedText = WDP.dpAmount(my0.amount, myDepositCoin0AmountLabel.font, coin0Decimal, 6)
+        myDepositCoin1AmountLabel.attributedText = WDP.dpAmount(my1.amount, myDepositCoin1AmountLabel.font, coin1Decimal, 6)
         
         
         //dp vailable
         let availableCoin0 = BaseData.instance.getAvailableAmount_gRPC(coin0.denom)
         let availableCoin1 = BaseData.instance.getAvailableAmount_gRPC(coin1.denom)
         
-        WUtils.DpKavaTokenName(availableCoin0DenomLabel, coin0.denom)
-        WUtils.DpKavaTokenName(availableCoin1DenomLabel, coin1.denom)
-        availableCoin0AmountLabel.attributedText = WUtils.displayAmount2(availableCoin0.stringValue, availableCoin0AmountLabel.font, coin0Decimal, 6)
-        availableCoin1AmountLabel.attributedText = WUtils.displayAmount2(availableCoin1.stringValue, availableCoin1AmountLabel.font, coin1Decimal, 6)
+        WDP.dpSymbol(chainConfig, coin0.denom, availableCoin0DenomLabel)
+        WDP.dpSymbol(chainConfig, coin1.denom, availableCoin1DenomLabel)
+        availableCoin0AmountLabel.attributedText = WDP.dpAmount(availableCoin0.stringValue, availableCoin0AmountLabel.font, coin0Decimal, 6)
+        availableCoin1AmountLabel.attributedText = WDP.dpAmount(availableCoin1.stringValue, availableCoin1AmountLabel.font, coin1Decimal, 6)
     }
 }

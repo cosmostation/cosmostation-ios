@@ -68,6 +68,7 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         mCollateralParamType = pageHolderVC.mCollateralParamType
@@ -119,8 +120,8 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
             cDepositValue.attributedText = WUtils.getDPRawDollor(toCValue.stringValue, 2, cDepositValue.font)
             pMaxAmount = toCAmount.multiplying(byPowerOf10: pDpDecimal - cDpDecimal).multiplying(by: NSDecimalNumber.init(string: "0.95")).multiplying(by: currentPrice).dividing(by: mCollateralParam!.getLiquidationRatioAmount(), withBehavior: WUtils.handler0Down)
             
-            WUtils.showCoinDp(mPDenom, pMinAmount.stringValue, nil, pAvailabeMinLabel, chainType!)
-            WUtils.showCoinDp(mPDenom, pMaxAmount.stringValue, nil, pAvailabeMaxLabel, chainType!)
+            WDP.dpCoin(chainConfig, mPDenom, pMinAmount.stringValue, nil, pAvailabeMinLabel)
+            WDP.dpCoin(chainConfig, mPDenom, pMaxAmount.stringValue, nil, pAvailabeMaxLabel)
             
             cAvailabeMaxLabel.isHidden = true
             cAvailabeDashLabel.isHidden = true
@@ -470,8 +471,8 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
         if (mFetchCnt <= 0) {
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getKavaCoinDecimal(mCDenom)
-            self.pDpDecimal = WUtils.getKavaCoinDecimal(mPDenom)
+            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
+            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
             
             pMinAmount = mKavaCdpParams_gRPC.getDebtFloorAmount()
             currentPrice = NSDecimalNumber.init(string: mKavaOraclePrice?.price).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler6)
@@ -482,15 +483,16 @@ class CdpCreate1ViewController: BaseViewController, UITextFieldDelegate, SBCardP
             print("cMinAmount ", cMinAmount)
             print("cMaxAmount ", cMaxAmount)
             
-            WUtils.showCoinDp(mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel, chainType!)
-            WUtils.showCoinDp(mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel, chainType!)
+            WDP.dpCoin(chainConfig, mCDenom, cMinAmount.stringValue, nil, cAvailabeMinLabel)
+            WDP.dpCoin(chainConfig, mCDenom, cMaxAmount.stringValue, nil, cAvailabeMaxLabel)
             
-            cDenomLabel.text = WUtils.getKavaTokenName(mCDenom)
-            cAvailableDenom.text = WUtils.getKavaTokenName(mCDenom)
-            pDenomLabel.text = WUtils.getKavaTokenName(mPDenom)
-            pAvailableDenom.text = WUtils.getKavaTokenName(mPDenom)
-            cDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mCDenom))!)
-            pDenomImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(mPDenom))!)
+            WDP.dpSymbol(chainConfig, mCDenom, cDenomLabel)
+            WDP.dpSymbol(chainConfig, mCDenom, cAvailableDenom)
+            WDP.dpSymbol(chainConfig, mPDenom, pDenomLabel)
+            WDP.dpSymbol(chainConfig, mPDenom, pAvailableDenom)
+            
+            WDP.dpSymbolImg(chainConfig, mCDenom, cDenomImg)
+            WDP.dpSymbolImg(chainConfig, mPDenom, pDenomImg)
             
             onUpdateView()
             self.loadingImg.onStopAnimation()

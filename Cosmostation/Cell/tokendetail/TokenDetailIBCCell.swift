@@ -30,8 +30,8 @@ class TokenDetailIBCCell: TokenDetailCell {
         }
         
         let total = BaseData.instance.getAvailableAmount_gRPC(ibcDenom)
-        totalAmount.attributedText = WUtils.displayAmount2(total.stringValue, totalAmount.font, ibcDivideDecimal, ibcDisplayDecimal)
-        availableAmount.attributedText = WUtils.displayAmount2(total.stringValue, availableAmount.font, ibcDivideDecimal, ibcDisplayDecimal)
+        totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, ibcDivideDecimal, ibcDisplayDecimal)
+        availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, ibcDivideDecimal, ibcDisplayDecimal)
     }
     
 }

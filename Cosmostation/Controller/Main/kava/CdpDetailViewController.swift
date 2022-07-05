@@ -45,6 +45,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.cdpDetailTableView.delegate = self
         self.cdpDetailTableView.dataSource = self
@@ -316,9 +317,9 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
             self.mCollateralParam = BaseData.instance.mKavaCdpParams_gRPC?.getCollateralParamByType(mCollateralParamType)
             self.mCDenom = mCollateralParam!.getcDenom()!
             self.mPDenom = mCollateralParam!.getpDenom()!
-            self.cDpDecimal = WUtils.getKavaCoinDecimal(mCDenom)
-            self.pDpDecimal = WUtils.getKavaCoinDecimal(mPDenom)
-            self.kDpDecimal = WUtils.getKavaCoinDecimal(KAVA_MAIN_DENOM)
+            self.cDpDecimal = WUtils.getDenomDecimal(chainConfig, mCDenom)
+            self.pDpDecimal = WUtils.getDenomDecimal(chainConfig, mPDenom)
+            self.kDpDecimal = WUtils.getDenomDecimal(chainConfig, KAVA_MAIN_DENOM)
             self.cAvailable = BaseData.instance.getAvailableAmount_gRPC(mCDenom)
             self.pAvailable = BaseData.instance.getAvailableAmount_gRPC(mPDenom)
             self.kAvailable = BaseData.instance.getAvailableAmount_gRPC(KAVA_MAIN_DENOM)
@@ -354,6 +355,7 @@ class CdpDetailViewController: BaseViewController, UITableViewDelegate, UITableV
     
     func onShowSimpleHelp(_ title:String, _ msg:String) {
         let helpAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { helpAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.left
         let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(

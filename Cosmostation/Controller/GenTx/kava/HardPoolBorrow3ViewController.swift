@@ -26,6 +26,7 @@ class HardPoolBorrow3ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -36,8 +37,8 @@ class HardPoolBorrow3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, nil, feeAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mHardPoolCoins![0], targetDenomLabel, targetAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, nil, feeAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mHardPoolCoins![0], targetDenomLabel, targetAmountLabel)
         memo.text = pageHolderVC.mMemo
     }
     

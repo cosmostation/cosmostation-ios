@@ -42,7 +42,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        feeAmountLabel.attributedText = WUtils.displayAmount2((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 6, 6)
+        feeAmountLabel.attributedText = WDP.dpAmount((pageHolderVC.mFee?.amount[0].amount)!, feeAmountLabel.font, 6, 6)
         var extendTime: Int64 = 0
         var starnameFee = NSDecimalNumber.zero
         if (pageHolderVC.mType == TASK_TYPE_STARNAME_RENEW_DOMAIN) {
@@ -57,7 +57,7 @@ class RenewStarname3ViewController: BaseViewController, PasswordViewDelegate {
         }
         expireDate.text = WUtils.longTimetoString(pageHolderVC.mStarnameTime! * 1000)
         renewExpireDate.text = WUtils.longTimetoString((pageHolderVC.mStarnameTime! * 1000) + extendTime)
-        starnameFeeAmount.attributedText = WUtils.displayAmount2(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
+        starnameFeeAmount.attributedText = WDP.dpAmount(starnameFee.stringValue, starnameFeeAmount.font, 6, 6)
         memoLabel.text = pageHolderVC.mMemo
     }
 

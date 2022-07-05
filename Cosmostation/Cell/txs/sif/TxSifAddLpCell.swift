@@ -25,9 +25,9 @@ class TxSifAddLpCell: TxCell {
         txDeposit2AmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
-    override func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    override func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
         txIcon.image = txIcon.image?.withRenderingMode(.alwaysTemplate)
-        txIcon.tintColor = chain.chainColor
+        txIcon.tintColor = chainConfig.chainColor
         
         let msg = try! Sifnode_Clp_V1_MsgAddLiquidity.init(serializedData: response.tx.body.messages[position].value)
         txSingerLabel.text = msg.signer
@@ -35,8 +35,8 @@ class TxSifAddLpCell: TxCell {
         
         let depositRowan = Coin.init(SIF_MAIN_DENOM, msg.nativeAssetAmount)
         let depositOther = Coin.init(msg.externalAsset.symbol, msg.externalAssetAmount)
-        WUtils.showCoinDp(depositRowan, txDeposit1DenomLabel, txDeposit1AmountLabel, chain.chainType)
-        WUtils.showCoinDp(depositOther, txDeposit2DenomLabel, txDeposit2AmountLabel, chain.chainType)
+        WDP.dpCoin(chainConfig, depositRowan, txDeposit1DenomLabel, txDeposit1AmountLabel)
+        WDP.dpCoin(chainConfig, depositOther, txDeposit2DenomLabel, txDeposit2AmountLabel)
         
     }
     

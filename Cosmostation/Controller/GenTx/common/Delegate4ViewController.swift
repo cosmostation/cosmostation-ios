@@ -28,6 +28,7 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
@@ -52,8 +53,8 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mToDelegateAmount!, toDelegateAmountDenom, toDelegateAmountLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeAmountDenom, feeAmountLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mToDelegateAmount!, toDelegateAmountDenom, toDelegateAmountLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeAmountDenom, feeAmountLabel)
         targetValidatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
     }

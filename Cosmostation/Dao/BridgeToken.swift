@@ -26,7 +26,7 @@ public struct BridgeToken : Codable {
     }
     
     func getImgUrl() -> URL? {
-        if let rawUrl = URL(string: BRIDGE_COIN_IMG_URL + logo) {
+        if let rawUrl = URL(string: BridgeTokenImgUrl + logo) {
             return rawUrl
         }
         return nil

@@ -40,9 +40,9 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
         self.tokenDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tokenDetailTableView.register(UINib(nibName: "TokenDetailNativeCell", bundle: nil), forCellReuseIdentifier: "TokenDetailNativeCell")
         self.tokenDetailTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
-        self.tokenDetailTableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
+        self.tokenDetailTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
         
-        if (ChainType.isHtlcSwappableCoin(chainType, denom)) {
+        if (WUtils.isHtlcSwappableCoin(chainType, denom)) {
             self.bntBep3Send.isHidden = false
         }
         
@@ -70,7 +70,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
                 self.navigationController?.popViewController(animated: true)
                 return
             }
-            naviTokenImg.af_setImage(withURL: URL(string: BINANCE_TOKEN_IMG_URL + bnbToken.original_symbol + ".png")!)
+            naviTokenImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + bnbToken.original_symbol + ".png")!)
             naviTokenSymbol.text = bnbToken.original_symbol.uppercased()
             
             let convertedBnbAmount = WUtils.getBnbConvertAmount(denom!)
@@ -85,7 +85,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
                 self.navigationController?.popViewController(animated: true)
                 return
             }
-            naviTokenImg.af_setImage(withURL: URL(string: OKEX_COIN_IMG_URL + okToken.original_symbol! + ".png")!)
+            naviTokenImg.af_setImage(withURL: URL(string: OKTokenImgUrl + okToken.original_symbol! + ".png")!)
             naviTokenSymbol.text = okToken.original_symbol!.uppercased()
             
             let convertedOktAmount = WUtils.convertTokenToOkt(denom!)
@@ -145,7 +145,7 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
             return cell!
             
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
         return cell!
     }
     
@@ -170,10 +170,8 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
             return
         }
         
-        //no gRPC case
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_HTLC_SWAP, 0)
-        if (BaseData.instance.availableAmount(WUtils.getMainDenom(chainType)).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         
@@ -192,10 +190,8 @@ class NativeTokenDetailViewController: BaseViewController, UITableViewDelegate, 
             return
         }
         
-        let stakingDenom = WUtils.getMainDenom(chainType)
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
-        if (BaseData.instance.availableAmount(stakingDenom).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         

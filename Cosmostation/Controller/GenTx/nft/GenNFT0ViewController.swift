@@ -242,6 +242,7 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
     
     func showAlertForSettings() {
         let settingsAlert = UIAlertController (title: NSLocalizedString("permission_photo_title", comment: "") , message: nil, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { settingsAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let settingsAction = UIAlertAction(title: "Settings", style: .destructive) { (_) -> Void in
             let settingsUrl = NSURL(string:UIApplication.openSettingsURLString)
             if let url = settingsUrl {
@@ -267,6 +268,7 @@ class GenNFT0ViewController: BaseViewController, UIImagePickerControllerDelegate
         let title = NSLocalizedString("str_ipfs_connect_fail_title", comment: "")
         let msg = NSLocalizedString("str_ipfs_connect_fail_msg", comment: "")
         let noticeAlert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { _ in
             self.pageHolderVC.onBeforePage()
         }))

@@ -21,7 +21,11 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        
         mTargetAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(named: "_font04")])
     }
     
@@ -71,7 +75,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate {
             return;
         }
         
-        if (!WUtils.isValidChainAddress(pageHolderVC.chainType, userInput)) {
+        if (!WUtils.isValidChainAddress(chainConfig, userInput)) {
             self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             return;
         }
@@ -124,6 +128,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate {
     func onShowMatchedStarName(_ starname: String, _ matchedAddress: String) {
         let msg = String(format: NSLocalizedString("str_starname_confirm_msg", comment: ""), starname, matchedAddress)
         let alertController = UIAlertController(title: NSLocalizedString("str_starname_confirm_title", comment: ""), message: msg, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let settingsAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { (_) -> Void in
             self.CancelBtn.isUserInteractionEnabled = false
             self.NextBtn.isUserInteractionEnabled = false

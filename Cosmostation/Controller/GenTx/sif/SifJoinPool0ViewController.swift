@@ -39,6 +39,7 @@ class SifJoinPool0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         self.selectedPool = self.pageHolderVC.mSifPool
         
@@ -57,19 +58,19 @@ class SifJoinPool0ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func onInitView() {
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, SIF_GAS_AMOUNT_LP, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         rowanMaxAmount = BaseData.instance.getAvailableAmount_gRPC(SIF_MAIN_DENOM)
-        rowanMaxAmount = rowanMaxAmount.subtracting(txFeeAmount)
+        rowanMaxAmount = rowanMaxAmount.subtracting(mainDenomFee)
         externalMaxAmount = BaseData.instance.getAvailableAmount_gRPC(selectedPool.externalAsset.symbol)
-        externalDecimal = WUtils.getSifCoinDecimal(selectedPool.externalAsset.symbol)
+        externalDecimal = WUtils.getDenomDecimal(chainConfig, selectedPool.externalAsset.symbol)
         
-        WUtils.DpSifCoinImg(inputCoin0Img, SIF_MAIN_DENOM)
-        WUtils.DpSifCoinName(inputCoin0Name, SIF_MAIN_DENOM)
-        WUtils.DpSifCoinImg(inputCoin1Img, selectedPool.externalAsset.symbol)
-        WUtils.DpSifCoinName(inputCoin1Name, selectedPool.externalAsset.symbol)
+        WDP.dpSymbolImg(chainConfig, SIF_MAIN_DENOM, inputCoin0Img)
+        WDP.dpSymbol(chainConfig, SIF_MAIN_DENOM, inputCoin0Name)
+        WDP.dpSymbolImg(chainConfig, selectedPool.externalAsset.symbol, inputCoin1Img)
+        WDP.dpSymbol(chainConfig, selectedPool.externalAsset.symbol, inputCoin1Name)
         
-        WUtils.showCoinDp(SIF_MAIN_DENOM, rowanMaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel, chainType!)
-        WUtils.showCoinDp(selectedPool.externalAsset.symbol, externalMaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel, chainType!)
+        WDP.dpCoin(chainConfig, SIF_MAIN_DENOM, rowanMaxAmount.stringValue, inputCoin0AvailableDenomLabel, inputCoin0AvailableLabel)
+        WDP.dpCoin(chainConfig, selectedPool.externalAsset.symbol, externalMaxAmount.stringValue, inputCoin1AvailableDenomLabel, inputCoin1AvailableLabel)
         
         let lpNativeAmount = WUtils.getPoolLpAmount(selectedPool, SIF_MAIN_DENOM)
         let lpExternalAmount = WUtils.getPoolLpAmount(selectedPool, selectedPool.externalAsset.symbol)

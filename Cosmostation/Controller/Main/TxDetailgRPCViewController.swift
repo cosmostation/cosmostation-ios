@@ -157,7 +157,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TxCommonCell") as? TxCommonCell
-            cell?.onBind(chainType!, mTxRespose!)
+            cell?.onBind(chainConfig!, mTxRespose!)
             return cell!
             
         } else {
@@ -499,6 +499,7 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
     
     func onShowMoreWait() {
         let noticeAlert = UIAlertController(title: NSLocalizedString("more_wait_title", comment: ""), message: NSLocalizedString("more_wait_msg", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { noticeAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         noticeAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
             self.onStartMainTab()

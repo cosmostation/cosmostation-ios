@@ -14,8 +14,8 @@ class TxCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func onBind(_ chain: ChainType, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) {
+    func onBind(_ chainConfig: ChainConfig, _ tx: Cosmos_Tx_V1beta1_GetTxResponse) {
     }
-    func onBindMsg(_ chain: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
+    func onBindMsg(_ chainConfig: ChainConfig, _ response: Cosmos_Tx_V1beta1_GetTxResponse, _ position: Int) {
     }
 }

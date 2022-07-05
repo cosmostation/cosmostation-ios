@@ -38,12 +38,14 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
         self.selectedPool = self.pageHolderVC.mSifPool
         self.swapInDenom = self.pageHolderVC.mSwapInDenom!
         self.swapOutDenom = self.pageHolderVC.mSwapOutDenom!
-        self.dpInPutDecimal = WUtils.getSifCoinDecimal(swapInDenom)
-        self.dpOutPutDecimal = WUtils.getSifCoinDecimal(swapOutDenom)
+        self.dpInPutDecimal = WUtils.getDenomDecimal(chainConfig, swapInDenom)
+        self.dpOutPutDecimal = WUtils.getDenomDecimal(chainConfig, swapOutDenom)
         
         inputTextFiled.delegate = self
         inputTextFiled.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
@@ -59,15 +61,15 @@ class SifSwap0ViewController: BaseViewController, UITextFieldDelegate {
     
     func onInitView() {
         availableMaxAmount = BaseData.instance.getAvailableAmount_gRPC(swapInDenom)
-        let txFeeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_SIF_SWAP_CION, 0)
+        let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         if (swapInDenom == SIF_MAIN_DENOM) {
-            availableMaxAmount = availableMaxAmount.subtracting(txFeeAmount)
+            availableMaxAmount = availableMaxAmount.subtracting(mainDenomFee)
         }
-        WUtils.showCoinDp(swapInDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel, chainType!)
-        WUtils.DpSifCoinImg(inputCoinImg, swapInDenom)
-        WUtils.DpSifCoinName(inputCoinName, swapInDenom)
-        WUtils.DpSifCoinImg(outputCoinImg, swapOutDenom)
-        WUtils.DpSifCoinName(outputCoinName, swapOutDenom)
+        WDP.dpCoin(chainConfig, swapInDenom, availableMaxAmount.stringValue, inputCoinAvailableDenomLabel, inputCoinAvailableLabel)
+        WDP.dpSymbolImg(chainConfig, swapInDenom, inputCoinImg)
+        WDP.dpSymbol(chainConfig, swapInDenom, inputCoinName)
+        WDP.dpSymbolImg(chainConfig, swapOutDenom, outputCoinImg)
+        WDP.dpSymbol(chainConfig, swapOutDenom, outputCoinName)
         
         swapRate = WUtils.getPoolLpPrice(selectedPool, swapInDenom)
         print("swapRate ", swapRate)

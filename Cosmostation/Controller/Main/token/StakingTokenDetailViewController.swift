@@ -34,7 +34,7 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
-        self.stakingDenom = WUtils.getMainDenom(chainType)
+        self.stakingDenom = WUtils.getMainDenom(chainConfig)
         self.stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         self.stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
@@ -66,9 +66,9 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     func onInitView() {
         WUtils.setDenomTitle(chainType, naviTokenSymbol)
         self.naviTokenImg.image = chainConfig?.stakeDenomImg
-        self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainType), naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainType), font: naviUpdownPercent.font)
-        let changeValue = WUtils.valueChange(WUtils.getMainDenom(chainType))
+        self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainConfig), naviPerPrice.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainConfig), font: naviUpdownPercent.font)
+        let changeValue = WUtils.valueChange(WUtils.getMainDenom(chainConfig))
         if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
@@ -126,10 +126,9 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             cell?.onBindUnbondingToken(chainType!)
             return cell!
             
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-            return cell!
         }
+        let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
+        return cell!
     }
     
     
@@ -148,9 +147,8 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             return
         }
         
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_TRANSFER, 0)
-        if (BaseData.instance.availableAmount(stakingDenom).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         
@@ -173,10 +171,8 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
             self.onShowAddMenomicDialog()
             return
         }
-        
-        let feeAmount = WUtils.getEstimateGasFeeAmount(chainType!, TASK_TYPE_HTLC_SWAP, 0)
-        if (BaseData.instance.availableAmount(WUtils.getMainDenom(chainType)).compare(feeAmount).rawValue < 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_balance_to_send", comment: ""))
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
         

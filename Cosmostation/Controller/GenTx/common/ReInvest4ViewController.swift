@@ -31,17 +31,18 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
     }
     
     func onUpdateView() {
-        WUtils.showCoinDp(pageHolderVC.mReinvestReward!, rewardDenomLabel, rewardLabel, chainType!)
-        WUtils.showCoinDp(pageHolderVC.mFee!.amount[0], feeDenomLabel, feeLabel, chainType!)
+        WDP.dpCoin(chainConfig, pageHolderVC.mReinvestReward!, rewardDenomLabel, rewardLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeLabel)
         
         let currentDelegation = BaseData.instance.getDelegated_gRPC(pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
         let expectedDelegation = currentDelegation.adding(NSDecimalNumber.init(string: pageHolderVC.mReinvestReward!.amount))
-        WUtils.showCoinDp(WUtils.getMainDenom(chainType), currentDelegation.stringValue, currentDenom, currentDelegateAmount, chainType!)
-        WUtils.showCoinDp(WUtils.getMainDenom(chainType), expectedDelegation.stringValue, expectedDenom, expectedDelegateAmount, chainType!)
+        WDP.dpCoin(chainConfig, WUtils.getMainDenom(chainConfig), currentDelegation.stringValue, currentDenom, currentDelegateAmount!)
+        WDP.dpCoin(chainConfig, WUtils.getMainDenom(chainConfig), expectedDelegation.stringValue, expectedDenom, expectedDelegateAmount)
         validatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         memoLabel.text = pageHolderVC.mMemo
     }
@@ -55,6 +56,7 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
     @IBAction func onClickConfirm(_ sender: UIButton) {
         if (checkIsWasteFee()) {
             let disableAlert = UIAlertController(title: NSLocalizedString("fee_over_title", comment: ""), message: NSLocalizedString("fee_over_msg", comment: ""), preferredStyle: .alert)
+            if #available(iOS 13.0, *) { disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
             disableAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { [weak disableAlert] (_) in
                 self.dismiss(animated: true, completion: nil)
             }))

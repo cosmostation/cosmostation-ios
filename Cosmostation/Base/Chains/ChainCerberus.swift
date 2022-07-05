@@ -22,6 +22,7 @@ class ChainCerberus: ChainConfig {
     var chainTitle2 = "CERBERUS"
     var chainDBName = CHAIN_CERBERUS_S
     var chainAPIName = "cerberus"
+    var chainIdPrefix = "cerberus-"
     
     var stakeDenomImg = UIImage(named: "tokenCerberus")
     var stakeDenom = "ucrbrus"
@@ -31,6 +32,8 @@ class ChainCerberus: ChainConfig {
     
     var addressPrefix = "cerberus"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.0ucrbrus"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +64,13 @@ class ChainCerberus: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/@cerberus_zone"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0]
+    }
+    
+    func getGasDefault() -> Int {
+        return 0
     }
 }

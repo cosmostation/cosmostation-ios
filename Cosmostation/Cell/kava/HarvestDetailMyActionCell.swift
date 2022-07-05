@@ -56,28 +56,30 @@ class HarvestDetailMyActionCell: UITableViewCell {
     func onBindHardDetailAction(_ hardMoneyMarketDenom: String, _ hardParam: Kava_Hard_V1beta1_Params?,
                                 _ myDeposits: Array<Coin>?, _ myBorrows: Array<Coin>?, _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) {
         if (hardParam == nil) { return }
-        depositImg.af_setImage(withURL: URL(string: WUtils.getKavaCoinImg(hardMoneyMarketDenom))!)
-        WUtils.DpKavaTokenName(depositSymbol, hardMoneyMarketDenom)
+        let chainConfig = ChainKava.init(.KAVA_MAIN)
         
-        let decimal = WUtils.getKavaCoinDecimal(hardMoneyMarketDenom)
+        WDP.dpSymbolImg(chainConfig, hardMoneyMarketDenom, depositImg)
+        WDP.dpSymbol(chainConfig, hardMoneyMarketDenom, depositSymbol)
+        
+        let decimal = WUtils.getDenomDecimal(chainConfig, hardMoneyMarketDenom)
         let oraclePrice = BaseData.instance.getKavaOraclePrice(hardParam?.getSpotMarketId(hardMoneyMarketDenom))
         let myDeposit = myDeposits?.filter { $0.denom == hardMoneyMarketDenom }.first
         let myBorrow = myBorrows?.filter { $0.denom == hardMoneyMarketDenom }.first
 
         let mySuppliedAmount = NSDecimalNumber.init(string: myDeposit?.amount)
         let mySuppliedValue = mySuppliedAmount.multiplying(byPowerOf10: -decimal, withBehavior: WUtils.handler12Down).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        depositAmount.attributedText = WUtils.displayAmount2(mySuppliedAmount.stringValue, depositAmount.font, decimal, decimal)
+        depositAmount.attributedText = WDP.dpAmount(mySuppliedAmount.stringValue, depositAmount.font, decimal, decimal)
         depositValue.attributedText = WUtils.getDPRawDollor(mySuppliedValue.stringValue, 2, depositValue.font)
 
         let myBorrowedAmount = NSDecimalNumber.init(string: myBorrow?.amount)
         let myBorrowedValue = myBorrowedAmount.multiplying(byPowerOf10: -decimal, withBehavior: WUtils.handler12Down).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        borrowedAmount.attributedText = WUtils.displayAmount2(myBorrowedAmount.stringValue, borrowedAmount.font, decimal, decimal)
+        borrowedAmount.attributedText = WDP.dpAmount(myBorrowedAmount.stringValue, borrowedAmount.font, decimal, decimal)
         borrowedValue.attributedText = WUtils.getDPRawDollor(myBorrowedValue.stringValue, 2, borrowedValue.font)
         
     
         let finalBorrowableAmount = WUtils.getHardBorrowableAmountByDenom(hardMoneyMarketDenom, myDeposits, myBorrows, moduleCoins, reservedCoins)
         let finalBorrowableValue = finalBorrowableAmount.multiplying(byPowerOf10: -decimal).multiplying(by: oraclePrice, withBehavior: WUtils.handler2Down)
-        borroweableAmount.attributedText = WUtils.displayAmount2(finalBorrowableAmount.stringValue, borroweableAmount.font, decimal, decimal)
+        borroweableAmount.attributedText = WDP.dpAmount(finalBorrowableAmount.stringValue, borroweableAmount.font, decimal, decimal)
         borroweableValue.attributedText = WUtils.getDPRawDollor(finalBorrowableValue.stringValue, 2, borroweableValue.font)
     }
     

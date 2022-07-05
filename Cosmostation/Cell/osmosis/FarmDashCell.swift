@@ -27,6 +27,7 @@ class FarmDashCell: UITableViewCell {
     
     func onBindView(_ myPools: Array<Osmosis_Gamm_Balancer_V1beta1_Pool>, _ lockUps: Array<Osmosis_Lockup_PeriodLock>) {
         print("lockedCoins ", lockUps.count)
+        let chainConfig = ChainOsmosis.init(.OSMOSIS_MAIN)
         let nf = WUtils.getNumberFormatter(2)
         let now = Date.init().millisecondsSince1970
         
@@ -46,8 +47,8 @@ class FarmDashCell: UITableViewCell {
                 let poolAmount1 = NSDecimalNumber.init(string: matchedPool.poolAssets[1].token.amount)
                 let withdrawableAmount0 = poolAmount0.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
                 let withdrawableAmount1 = poolAmount1.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(denom0), withdrawableAmount0, WUtils.getOsmosisCoinDecimal(denom0))
-                let coin1Value = WUtils.usdValue(BaseData.instance.getBaseDenom(denom1), withdrawableAmount1, WUtils.getOsmosisCoinDecimal(denom1))
+                let coin0Value = WUtils.usdValue(chainConfig, denom0, withdrawableAmount0)
+                let coin1Value = WUtils.usdValue(chainConfig, denom1, withdrawableAmount1)
                 lpCoinValue = coin0Value.adding(coin1Value)
             }
             
@@ -70,77 +71,6 @@ class FarmDashCell: UITableViewCell {
         
         let formattedUnbonded = "$ " + nf.string(from: totalUnbondedValue)!
         totalUnbondedValueLabel.attributedText = WUtils.getDpAttributedString(formattedUnbonded, 2, totalUnbondedValueLabel.font)
-        
-        
-        /*
-        var totalBondedValue = NSDecimalNumber.zero
-        lockedCoins.forEach { lpCoin in
-            if let matchedPool = myPools.filter{ $0.id == lpCoin.osmosisAmmPoolId() }.first {
-                
-                let totalShares = NSDecimalNumber.init(string: matchedPool.totalShares.amount)
-                let myShare = NSDecimalNumber.init(string: lpCoin.amount)
-                let denom0 = matchedPool.poolAssets[0].token.denom
-                let denom1 = matchedPool.poolAssets[1].token.denom
-                let poolAmount0 = NSDecimalNumber.init(string: matchedPool.poolAssets[0].token.amount)
-                let poolAmount1 = NSDecimalNumber.init(string: matchedPool.poolAssets[1].token.amount)
-                let withdrawableAmount0 = poolAmount0.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                let withdrawableAmount1 = poolAmount1.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                
-                let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(denom0), withdrawableAmount0, WUtils.getOsmosisCoinDecimal(denom0))
-                let coin1Value = WUtils.usdValue(BaseData.instance.getBaseDenom(denom1), withdrawableAmount1, WUtils.getOsmosisCoinDecimal(denom1))
-                totalBondedValue = totalBondedValue.adding(coin0Value).adding(coin1Value)
-            }
-        }
-        print("totalBondedValue ", totalBondedValue)
-        let formattedBonded = "$ " + nf.string(from: totalBondedValue)!
-        totalFarmValueLabel.attributedText = WUtils.getDpAttributedString(formattedBonded, 2, totalFarmValueLabel.font)
-        
-        
-        var totalUnbondingValue = NSDecimalNumber.zero
-        unlockingCoins.forEach { lpCoin in
-            if let matchedPool = myPools.filter{ $0.id == lpCoin.osmosisAmmPoolId() }.first {
-                
-                let totalShares = NSDecimalNumber.init(string: matchedPool.totalShares.amount)
-                let myShare = NSDecimalNumber.init(string: lpCoin.amount)
-                let denom0 = matchedPool.poolAssets[0].token.denom
-                let denom1 = matchedPool.poolAssets[1].token.denom
-                let poolAmount0 = NSDecimalNumber.init(string: matchedPool.poolAssets[0].token.amount)
-                let poolAmount1 = NSDecimalNumber.init(string: matchedPool.poolAssets[1].token.amount)
-                let withdrawableAmount0 = poolAmount0.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                let withdrawableAmount1 = poolAmount1.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                
-                let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(denom0), withdrawableAmount0, WUtils.getOsmosisCoinDecimal(denom0))
-                let coin1Value = WUtils.usdValue(BaseData.instance.getBaseDenom(denom1), withdrawableAmount1, WUtils.getOsmosisCoinDecimal(denom1))
-                totalUnbondingValue = totalUnbondingValue.adding(coin0Value).adding(coin1Value)
-            }
-        }
-        print("totalUnbondingValue ", totalUnbondingValue)
-        let formattedUnbonding = "$ " + nf.string(from: totalUnbondingValue)!
-        totalUnbondingValueLabe.attributedText = WUtils.getDpAttributedString(formattedUnbonding, 2, totalUnbondingValueLabe.font)
-        
-        
-        var totalUnbondedValue = NSDecimalNumber.zero
-        unlockableCoins.forEach { lpCoin in
-            if let matchedPool = myPools.filter{ $0.id == lpCoin.osmosisAmmPoolId() }.first {
-                
-                let totalShares = NSDecimalNumber.init(string: matchedPool.totalShares.amount)
-                let myShare = NSDecimalNumber.init(string: lpCoin.amount)
-                let denom0 = matchedPool.poolAssets[0].token.denom
-                let denom1 = matchedPool.poolAssets[1].token.denom
-                let poolAmount0 = NSDecimalNumber.init(string: matchedPool.poolAssets[0].token.amount)
-                let poolAmount1 = NSDecimalNumber.init(string: matchedPool.poolAssets[1].token.amount)
-                let withdrawableAmount0 = poolAmount0.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                let withdrawableAmount1 = poolAmount1.multiplying(by: myShare).dividing(by: totalShares, withBehavior: WUtils.handler0)
-                
-                let coin0Value = WUtils.usdValue(BaseData.instance.getBaseDenom(denom0), withdrawableAmount0, WUtils.getOsmosisCoinDecimal(denom0))
-                let coin1Value = WUtils.usdValue(BaseData.instance.getBaseDenom(denom1), withdrawableAmount1, WUtils.getOsmosisCoinDecimal(denom1))
-                totalUnbondedValue = totalUnbondedValue.adding(coin0Value).adding(coin1Value)
-            }
-        }
-        print("totalUnbondedValue ", totalUnbondedValue)
-        let formattedUnbonded = "$ " + nf.string(from: totalUnbondedValue)!
-        totalUnbondedValueLabel.attributedText = WUtils.getDpAttributedString(formattedUnbonded, 2, totalUnbondedValueLabel.font)
-         */
         
     }
     

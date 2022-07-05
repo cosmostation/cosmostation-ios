@@ -22,6 +22,7 @@ class ChainUmee: ChainConfig {
     var chainTitle2 = "UMEE"
     var chainDBName = CHAIN_UMEE_S
     var chainAPIName = "umee"
+    var chainIdPrefix = "umee-"
     
     var stakeDenomImg = UIImage(named: "tokenUmee")
     var stakeDenom = "uumee"
@@ -31,6 +32,10 @@ class ChainUmee: ChainConfig {
     
     var addressPrefix = "umee"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
+    
+    let gasRate0 = "0.000uumee"
+    let gasRate1 = "0.001uumee"
+    let gasRate2 = "0.005uumee"
     
     var pushSupport = false
     var wcSupoort = false
@@ -61,5 +66,13 @@ class ChainUmee: ChainConfig {
 
     func getInfoLink2() -> String {
         return "https://medium.com/umeeblog"
+    }
+    
+    func getGasRates() -> Array<String> {
+        return [gasRate0, gasRate1, gasRate2]
+    }
+    
+    func getGasDefault() -> Int {
+        return 1
     }
 }
