@@ -45,6 +45,14 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         WUtils.setDenomTitle(chainType, sendDenomLabel)
         WUtils.setDenomTitle(chainType, availableDenomLabel)
         WUtils.setDenomTitle(chainType, remainDenomLabel)
+        
+        backBtn.borderColor = UIColor.init(named: "_font05")
+        confirmBtn.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        backBtn.borderColor = UIColor.init(named: "_font05")
+        confirmBtn.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {

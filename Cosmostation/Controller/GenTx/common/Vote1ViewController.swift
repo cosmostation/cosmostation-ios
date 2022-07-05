@@ -32,6 +32,14 @@ class Vote1ViewController: BaseViewController {
         proposalTitle.text = pageHolderVC.mProposalTitle
         proposalTitle.adjustsFontSizeToFitWidth = true
         proposer.text = pageHolderVC.mProposer
+        
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        bntNext.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        bntNext.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {

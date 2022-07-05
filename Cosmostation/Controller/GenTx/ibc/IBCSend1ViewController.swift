@@ -30,6 +30,14 @@ class IBCSend1ViewController: BaseViewController, QrScannerDelegate, SBCardPopup
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
+        
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     override func enableUserInteraction() {

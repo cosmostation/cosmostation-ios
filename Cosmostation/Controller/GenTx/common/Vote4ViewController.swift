@@ -34,6 +34,14 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
         proposalTitle.text = pageHolderVC.mProposalTitle
         proposalTitle.adjustsFontSizeToFitWidth = true
         proposer.text = pageHolderVC.mProposer
+        
+        mBtnBack.borderColor = UIColor.init(named: "_font05")
+        mBtnConfirm.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        mBtnBack.borderColor = UIColor.init(named: "_font05")
+        mBtnConfirm.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {

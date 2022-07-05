@@ -29,9 +29,6 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
         memoInputTextView.clipsToBounds = true
         memoInputTextView.delegate = self
         
-        (NSClassFromString("UICalloutBarButton")! as! UIButton.Type).appearance().backgroundColor = UIColor.white
-        (NSClassFromString("UICalloutBarButton")! as! UIButton.Type).appearance().setTitleColor(UIColor.black, for: .normal)
-        
         chainType = pageHolderVC.chainType!
         if (chainType == ChainType.BINANCE_MAIN) {
             memoCntLabel.text = "0/100 byte"
@@ -48,6 +45,14 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
             self.emptyMemoIcon.isHidden = true
             self.emptyMemoMsg.isHidden = true
         }
+        
+        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        nextBtn.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        nextBtn.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onClickBack(_ sender: Any) {

@@ -27,6 +27,14 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         mTargetAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(named: "_font04")])
+        
+        CancelBtn.borderColor = UIColor.init(named: "_font05")
+        NextBtn.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        CancelBtn.borderColor = UIColor.init(named: "_font05")
+        NextBtn.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onClickQrCode(_ sender: Any) {

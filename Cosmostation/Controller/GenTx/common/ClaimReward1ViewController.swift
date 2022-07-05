@@ -41,6 +41,14 @@ class ClaimReward1ViewController: BaseViewController {
         
         self.loadingImg.onStartAnimation()
         self.onFetchRewardsInfoData()
+        
+        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        nextBtn.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        cancelBtn.borderColor = UIColor.init(named: "_font05")
+        nextBtn.borderColor = UIColor.init(named: "photon")
     }
     
     func onFetchRewardsInfoData()  {

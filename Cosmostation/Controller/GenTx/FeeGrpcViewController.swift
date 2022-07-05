@@ -69,6 +69,14 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         gasSelectSegments.selectedSegmentIndex = mSelectedFeeInfo
         
         feeTypeCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickFeeDenom (_:))))
+        
+        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {

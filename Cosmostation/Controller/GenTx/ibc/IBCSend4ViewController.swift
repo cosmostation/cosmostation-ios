@@ -29,6 +29,14 @@ class IBCSend4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnConfirm.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnConfirm.borderColor = UIColor.init(named: "photon")
     }
     
     override func enableUserInteraction() {

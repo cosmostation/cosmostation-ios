@@ -42,6 +42,14 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
         WUtils.setDenomTitle(chainType!, rewardDenomLabel)
         WUtils.setDenomTitle(chainType!, feeDenomLabel)
         WUtils.setDenomTitle(chainType!, expectedDenomLabel)
+        
+        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        confirmBtn.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        confirmBtn.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onClickConfirm(_ sender: Any) {
