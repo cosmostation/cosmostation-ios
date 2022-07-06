@@ -208,4 +208,40 @@ public class WDP {
         attributedString1.append(attributedString2)
         return attributedString1
     }
+    
+    static func dpTime(_ timeString: String?) -> String {
+        if (timeString == nil) { return "-" }
+        guard let date = WUtils.timeStringToDate(timeString!) else {
+            return "-"
+        }
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("date_format4", comment: "")
+        return localFormatter.string(from: date)
+    }
+    
+    static func dpTime(_ timeInt: Int64?) -> String {
+        if (timeInt == nil) { return "-" }
+        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
+            return "-"
+        }
+        let localFormatter = DateFormatter()
+        localFormatter.dateFormat = NSLocalizedString("date_format4", comment: "")
+        return localFormatter.string(from: date)
+    }
+    
+    static func dpTimeGap(_ timeString: String?) -> String {
+        if (timeString == nil) { return "" }
+        guard let date = WUtils.timeStringToDate(timeString!) else {
+            return ""
+        }
+        return WUtils.getGapTime(date)
+    }
+    
+    static func dpTimeGap(_ timeInt: Int64?) -> String {
+        if (timeInt == nil) { return "" }
+        guard let date = WUtils.timeInt64ToDate(timeInt!) else {
+            return ""
+        }
+        return WUtils.getGapTime(date)
+    }
 }

@@ -75,6 +75,55 @@ public class WUtils {
         return result;
     }
     
+    static func timeStringToDate(_ input: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        if let result = dateFormatter.date(from: input) {
+            return result
+        }
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+        if let result = dateFormatter.date(from: input) {
+            return result
+        }
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
+        if let result = dateFormatter.date(from: input) {
+            return result
+        }
+        return nil
+    }
+    
+    static func timeInt64ToDate(_ input: Int64) -> Date? {
+        return Date.init(milliseconds: Int(input))
+    }
+    
+    static func getGapTime(_ date: Date) -> String {
+        let minute = 60
+        let hour = 60 * minute
+        let day = 24 * hour
+        var gapTime = Int(Date().timeIntervalSince(date))
+        if (gapTime > 0) {
+            if gapTime < minute {
+                return "(\(gapTime) seconds ago)"
+            } else if gapTime < hour {
+                return "(\(gapTime / minute) minutes ago)"
+            } else if gapTime < day {
+                return "(\(gapTime / hour) hours ago)"
+            } else {
+                return "(\(gapTime / day) days ago)"
+            }
+            
+        } else {
+            gapTime = gapTime * -1
+            if gapTime < day {
+                return "(D-day)"
+            } else {
+                return "(D-\(gapTime / day))"
+            }
+        }
+    }
+    
     static func newApiTimeToInt64(_ input: String?) -> Date? {
         if (input == nil) { return nil }
         let nodeFormatter = DateFormatter()
@@ -119,18 +168,18 @@ public class WUtils {
     }
     
     
-    static func sifNodeTimeToString(_ input: String?) -> String {
-        if (input == nil) { return ""}
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-        
-        guard let fullDate = nodeFormatter.date(from: input!) else { return "" }
-        return localFormatter.string(from: fullDate)
-    }
+//    static func sifNodeTimeToString(_ input: String?) -> String {
+//        if (input == nil) { return ""}
+//        let nodeFormatter = DateFormatter()
+//        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+//        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+//        
+//        let localFormatter = DateFormatter()
+//        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
+//
+//        guard let fullDate = nodeFormatter.date(from: input!) else { return "" }
+//        return localFormatter.string(from: fullDate)
+//    }
     
     static func nodeTimeToInt64(input: String) -> Date {
         let nodeFormatter = DateFormatter()
@@ -281,13 +330,6 @@ public class WUtils {
         } else {
             return "(\(secondsAgo / day) days ago)"
         }
-    }
-    
-    static func checkNAN(_ check: NSDecimalNumber) -> NSDecimalNumber{
-        if(check.isEqual(to: NSDecimalNumber.notANumber)) {
-            return NSDecimalNumber.zero
-        }
-        return check
     }
     
     static func decimalNumberToLocaleString(_ input: NSDecimalNumber, _ deciaml:Int16) -> String {

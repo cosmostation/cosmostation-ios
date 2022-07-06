@@ -18,8 +18,12 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
-    var mProposals_Mintscan = Array<MintscanProposalDetail>()
     var refresher: UIRefreshControl!
+    
+//    var mProposals_Mintscan = Array<MintscanProposalDetail>()
+    var mVotingPeriods = Array<MintscanProposalDetail>()
+    var mEtcPeriods = Array<MintscanProposalDetail>()
+    var isVotingMode = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,8 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.voteTableView.delegate = self
         self.voteTableView.dataSource = self
         self.voteTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.voteTableView.register(UINib(nibName: "ProposalCell", bundle: nil), forCellReuseIdentifier: "ProposalCell")
+        self.voteTableView.register(UINib(nibName: "ProposalVotingPeriodCell", bundle: nil), forCellReuseIdentifier: "ProposalVotingPeriodCell")
+        self.voteTableView.register(UINib(nibName: "ProposalEtcPeriodCell", bundle: nil), forCellReuseIdentifier: "ProposalEtcPeriodCell")
         self.voteTableView.rowHeight = UITableView.automaticDimension
         self.voteTableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -44,7 +49,8 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     @objc func onFetchProposals() {
-        self.mProposals_Mintscan.removeAll()
+        self.mVotingPeriods.removeAll()
+        self.mEtcPeriods.removeAll()
         self.onFetchMintscanProposal()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +61,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onUpdateViews() {
-        if (mProposals_Mintscan.count > 0) {
+        if (mVotingPeriods.count > 0 || mEtcPeriods.count > 0) {
             self.emptyLabel.isHidden = true
             self.voteTableView.reloadData()
         } else {
@@ -68,8 +74,32 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        if (section == 0) {
+            view.headerTitleLabel.text = "Voting Period Proposals";
+            view.headerCntLabel.text = String(mVotingPeriods.count)
+        } else if (section == 1) {
+            view.headerTitleLabel.text = "Proposals";
+            view.headerCntLabel.text = String(mEtcPeriods.count)
+        }
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0 && mVotingPeriods.count <= 0) { return 0 }
+        if (section == 1 && mEtcPeriods.count <= 0) { return 0 }
+        return 30
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return mProposals_Mintscan.count
+        if (section == 0) { return mVotingPeriods.count }
+        else if (section == 1) { return mEtcPeriods.count }
+        else { return 0 }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,14 +107,15 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onBindProposal(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell  {
-        let cell:ProposalCell? = tableView.dequeueReusableCell(withIdentifier:"ProposalCell") as? ProposalCell
-        let proposal = mProposals_Mintscan[indexPath.row]
-        cell?.proposalIdLabel.text = "# ".appending(proposal.id!)
-        cell?.proposalTitleLabel.text = proposal.title
-        cell?.proposalMsgLabel.text = proposal.description
-        cell?.proposalStateLabel.text = WUtils.onProposalStatusTxt(proposal)
-        cell?.proposalStateImg.image = WUtils.onProposalStatusImg(proposal)
-        return cell!
+        if (indexPath.section == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalVotingPeriodCell") as? ProposalVotingPeriodCell
+            cell?.onBindView(chainConfig, mVotingPeriods[indexPath.row], account!.account_address, isVotingMode)
+            return cell!
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalEtcPeriodCell") as? ProposalEtcPeriodCell
+            cell?.onBindView(chainConfig, mEtcPeriods[indexPath.row], account!.account_address)
+            return cell!
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -92,13 +123,15 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let proposal = mProposals_Mintscan[indexPath.row]
-        if (proposal.proposal_status!.localizedCaseInsensitiveContains("VOTING")) {
+        
+        if (indexPath.section == 0) {
+            let proposal = mVotingPeriods[indexPath.row]
             let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController
             voteDetailsVC.proposalId = proposal.id!
             self.navigationItem.title = ""
             self.navigationController?.pushViewController(voteDetailsVC, animated: true)
         } else {
+            let proposal = mEtcPeriods[indexPath.row]
             onExplorerLink(proposal.id!)
         }
     }
@@ -117,7 +150,12 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             case .success(let res):
                 if let responseDatas = res as? Array<NSDictionary> {
                     responseDatas.forEach { rawProposal in
-                        self.mProposals_Mintscan.append(MintscanProposalDetail.init(rawProposal))
+                        let tempProposal = MintscanProposalDetail.init(rawProposal)
+                        if (tempProposal.proposal_status!.localizedCaseInsensitiveContains("VOTING")) {
+                            self.mVotingPeriods.append(tempProposal)
+                        } else {
+                            self.mEtcPeriods.append(tempProposal)
+                        }
                     }
                 }
             case .failure(let error):
@@ -128,7 +166,10 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func sortProposals() {
-        self.mProposals_Mintscan.sort {
+        self.mVotingPeriods.sort {
+            return Int($0.id!)! < Int($1.id!)! ? false : true
+        }
+        self.mEtcPeriods.sort {
             return Int($0.id!)! < Int($1.id!)! ? false : true
         }
     }
