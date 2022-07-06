@@ -52,7 +52,6 @@ class ProposalVotingPeriodCell: UITableViewCell {
                 }
                 
             } else {
-                print("bb ", proposal.id!)
                 DispatchQueue.global().async {
                     do {
                         var myVoted: Cosmos_Gov_V1beta1_Vote?
@@ -61,7 +60,6 @@ class ProposalVotingPeriodCell: UITableViewCell {
                         let req = Cosmos_Gov_V1beta1_QueryVoteRequest.with { $0.voter = address; $0.proposalID = UInt64(proposal.id!)! }
                         if let response = try? Cosmos_Gov_V1beta1_QueryClient(channel: channel).vote(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                             myVoted = response.vote
-                            print("bb myVoted ", myVoted)
                         }
                         try channel.close().wait()
                         DispatchQueue.main.async(execute: {

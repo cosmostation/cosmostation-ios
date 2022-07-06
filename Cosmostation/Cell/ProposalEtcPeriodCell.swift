@@ -48,7 +48,7 @@ class ProposalEtcPeriodCell: UITableViewCell {
 //                    print("onFetchCertikProposalMyVote ", error)
 //                }
 //            }
-//            
+//
 //        } else {
 //            print("aa ", proposal.id!)
 //            DispatchQueue.global().async {
@@ -65,7 +65,7 @@ class ProposalEtcPeriodCell: UITableViewCell {
 //                    DispatchQueue.main.async(execute: {
 //                        self.onBindMyVote(myVoted?.option)
 //                    });
-//                    
+//
 //                } catch {
 //                    print("onFetchProposalMyVote_gRPC failed: \(error)")
 //                }
@@ -74,7 +74,6 @@ class ProposalEtcPeriodCell: UITableViewCell {
     }
     
     func onBindMyVote(_ option: Cosmos_Gov_V1beta1_VoteOption?) {
-        print("onBindMyVote ", option)
         if (option == Cosmos_Gov_V1beta1_VoteOption.yes) {
             self.myVoteStatusImg.image = UIImage.init(named: "imgVoteYes")
             self.myVoteStatusImg.isHidden = false
