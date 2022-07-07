@@ -192,6 +192,8 @@
 "send_guide_msg_mantle" = "AssetMantle은 Persistence 생태계 내 NFT 창작자와 수집가 모두를 위해 구축된 NFT 마켓플레이스 및 플랫폼입니다.";
 "send_guide_title_nyx" = "NYX";
 "send_guide_msg_nyx" = "차세대 개인 정보 보호 인프라를 제공하는 분산형 및 인센티브 인프라 네트워크.";
+"send_guide_title_cudos" = "CUDOS";
+"send_guide_msg_cudos" = "Cudos는 탈중앙화된 고효율 클라우드 컴퓨팅 네트워크를 위해 설계된 텐더민트 기반 블록체인입니다.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

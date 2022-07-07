@@ -195,6 +195,8 @@
 "send_guide_msg_mantle" = "AssetMantle is a community focused one-for-all NFT platform for creators and collectors, powered by $MNTL token.";
 "send_guide_title_nyx" = "NYX";
 "send_guide_msg_nyx" = "Nyx is a decentralized and incentivized infrastructure providing next generation privacy infrastructure.";
+"send_guide_title_cudos" = "CUDOS";
+"send_guide_msg_cudos" = "Cudos aims to build a high-performance, sustainable and decentralized cloud computing network.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

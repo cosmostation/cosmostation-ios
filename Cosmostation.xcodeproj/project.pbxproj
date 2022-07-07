@@ -533,6 +533,8 @@
 		046FA6E42876995600F6318A /* VoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FA6E12876995600F6318A /* VoteCell.swift */; };
 		046FA6E52876995600F6318A /* VoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FA6E22876995600F6318A /* VoteCell.xib */; };
 		046FA6E62876995600F6318A /* VoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FA6E22876995600F6318A /* VoteCell.xib */; };
+		046FA6E82876C3FF00F6318A /* ChainCudos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FA6E72876C3FF00F6318A /* ChainCudos.swift */; };
+		046FA6E92876C3FF00F6318A /* ChainCudos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FA6E72876C3FF00F6318A /* ChainCudos.swift */; };
 		046FF00F2779A16500F72C11 /* MyDenomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF00E2779A16500F72C11 /* MyDenomsViewController.swift */; };
 		046FF012277AD0E100F72C11 /* DenomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF010277AD0E100F72C11 /* DenomListCell.swift */; };
 		046FF013277AD0E100F72C11 /* DenomListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF011277AD0E100F72C11 /* DenomListCell.xib */; };
@@ -3110,6 +3112,7 @@
 		046E9048268C7C2B002CFFE1 /* BinanceHexEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceHexEncoding.swift; sourceTree = "<group>"; };
 		046FA6E12876995600F6318A /* VoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteCell.swift; sourceTree = "<group>"; };
 		046FA6E22876995600F6318A /* VoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteCell.xib; sourceTree = "<group>"; };
+		046FA6E72876C3FF00F6318A /* ChainCudos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCudos.swift; sourceTree = "<group>"; };
 		046FF00E2779A16500F72C11 /* MyDenomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDenomsViewController.swift; sourceTree = "<group>"; };
 		046FF010277AD0E100F72C11 /* DenomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DenomListCell.swift; sourceTree = "<group>"; };
 		046FF011277AD0E100F72C11 /* DenomListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DenomListCell.xib; sourceTree = "<group>"; };
@@ -4157,6 +4160,7 @@
 				0451FC99282A3B5000214FDA /* ChainComdex.swift */,
 				0451FCC0282A3C5000214FDA /* ChainCrescent.swift */,
 				0451FC67282A3A5200214FDA /* ChainCryptoorg.swift */,
+				046FA6E72876C3FF00F6318A /* ChainCudos.swift */,
 				0451FC9F282A3B6800214FDA /* ChainDesmos.swift */,
 				0451FC71282A3AAE00214FDA /* ChainEmoney.swift */,
 				0451FC87282A3AE000214FDA /* ChainEvmos.swift */,
@@ -7673,6 +7677,7 @@
 				18FFB620281AF533004E65BB /* ResourceCell.swift in Sources */,
 				1817CB75283E2CE500523713 /* starname_iov_escrow_v1beta1_params.pb.swift in Sources */,
 				1817CBB5283E2CE500523713 /* osmosis_incentives_gauge.pb.swift in Sources */,
+				046FA6E92876C3FF00F6318A /* ChainCudos.swift in Sources */,
 				18FFB621281AF533004E65BB /* IBCSend2ViewController.swift in Sources */,
 				0451FCB3282A3BC900214FDA /* ChainKonstellation.swift in Sources */,
 				1817CB2C283E2CE500523713 /* kava_kavadist_v1beta1_params.pb.swift in Sources */,
@@ -8383,6 +8388,7 @@
 				0451FD812832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.pb.swift in Sources */,
 				283E94772549030C007A9291 /* TxReplaceResourceCell.swift in Sources */,
 				E123FD3D233DEFE1004EC348 /* BnbAccountInfo.swift in Sources */,
+				046FA6E82876C3FF00F6318A /* ChainCudos.swift in Sources */,
 				040FAA55275F55C400229F6F /* cosmos_bank_v1beta1_bank.pb.swift in Sources */,
 				047FB6EF281A4C53009D8AAF /* sifnode_clp_v1_tx.pb.swift in Sources */,
 				28D7BE0425F0BBC1006EECD7 /* CdpParam.swift in Sources */,

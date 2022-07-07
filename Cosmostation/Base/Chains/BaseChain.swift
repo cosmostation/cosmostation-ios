@@ -88,6 +88,8 @@ class ChainFactory {
             return .CRESCENT_MAIN
         case CHAIN_CRYPTO_S:
             return .CRYPTO_MAIN
+        case CHAIN_CUDOS_S:
+            return .CUDOS_MAIN
         case CHAIN_DESMOS_S:
             return .DESMOS_MAIN
         case CHAIN_EMONEY_S:
@@ -182,6 +184,8 @@ class ChainFactory {
             return ChainCrescent(chainType!)
         case .CRYPTO_MAIN:
             return ChainCryptoorg(chainType!)
+        case .CUDOS_MAIN:
+            return ChainCudos(chainType!)
         case .DESMOS_MAIN:
             return ChainDesmos(chainType!)
         case .EMONEY_MAIN:
@@ -287,6 +291,7 @@ let CHAIN_CHIHUAHUA_S = "SUPPORT_CHAIN_CHIHUAHUA"
 let CHAIN_COMDEX_S = "SUPPORT_CHAIN_COMDEX"
 let CHAIN_CRESENT_S = "SUPPORT_CHAIN_CRESENT"
 let CHAIN_CRYPTO_S = "SUPPORT_CHAIN_CRYTO_MAIN"
+let CHAIN_CUDOS_S = "SUPPORT_CHAIN_CUDOS"
 let CHAIN_DESMOS_S = "SUPPORT_CHAIN_DESMOS"
 let CHAIN_EMONEY_S = "SUPPORT_CHAIN_EMONEY"
 let CHAIN_EVMOS_S = "SUPPORT_CHAIN_EVMOS"
@@ -318,6 +323,5 @@ let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"
 
 
 let CHAIN_ALTHEA_S = "SUPPORT_CHAIN_ALTHEA"
-let CHAIN_CUDOS_S = "SUPPORT_CHAIN_CUDOS"
 
 

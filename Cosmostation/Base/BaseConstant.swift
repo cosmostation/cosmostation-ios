@@ -316,7 +316,7 @@ public enum ChainType: String {
         result.append(COMDEX_MAIN)
         result.append(CRESCENT_MAIN)
         result.append(CRYPTO_MAIN)
-//        result.append(CUDOS_MAIN)
+        result.append(CUDOS_MAIN)
         result.append(DESMOS_MAIN)
         result.append(EMONEY_MAIN)
         result.append(EVMOS_MAIN)
@@ -374,7 +374,6 @@ let COSMOS_MAIN_DENOM = "uatom"
 let IRIS_MAIN_DENOM = "uiris"
 let BNB_MAIN_DENOM = "BNB"
 let IOV_MAIN_DENOM = "uiov"
-//let KAVA_MAIN_DENOM = "ukava"
 let BAND_MAIN_DENOM = "uband"
 let SECRET_MAIN_DENOM = "uscrt"
 let CERTIK_MAIN_DENOM = "uctk"
@@ -415,9 +414,6 @@ let NYX_MAIN_DENOM = "unyx"
 let COSMOS_TEST_DENOM = "umuon"
 let IRIS_TEST_DENOM = "ubif"
 let STATION_TEST_DENOM = "uiss"
-//let KAVA_HARD_DENOM = "hard"
-//let KAVA_USDX_DENOM = "usdx"
-//let KAVA_SWAP_DENOM = "swp"
 
 
 let BITCOINCASH    = "asset:bch";
