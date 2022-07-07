@@ -27,6 +27,7 @@ class TransactionViewController: UIViewController {
     var mProposeId: String?
     var mProposalTitle: String?
     var mProposer: String?
+    var mProposals = Array<MintscanProposalDetail>()
     
     var mCollateralParamType: String?
     var mCDenom: String?
@@ -332,6 +333,7 @@ class TransactionViewController: UIViewController {
             StepVc.mProposeId = self.mProposeId
             StepVc.mProposalTitle = self.mProposalTitle
             StepVc.mProposer = self.mProposer
+            StepVc.mProposals = self.mProposals
             StepVc.mToSendDenom = self.mToSendDenom
             
             StepVc.mCDenom = self.mCDenom

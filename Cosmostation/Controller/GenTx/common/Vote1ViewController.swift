@@ -8,30 +8,30 @@
 
 import UIKit
 
-class Vote1ViewController: BaseViewController {
+class Vote1ViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var proposalTitle: UILabel!
-    @IBOutlet weak var proposer: UILabel!
-    @IBOutlet weak var btnYes: UIButton!
-    @IBOutlet weak var btnNo: UIButton!
-    @IBOutlet weak var btnVeto: UIButton!
-    @IBOutlet weak var btnAbstain: UIButton!
-    @IBOutlet weak var checkYes: UIImageView!
-    @IBOutlet weak var checkNo: UIImageView!
-    @IBOutlet weak var checkVeto: UIImageView!
-    @IBOutlet weak var checkAbstain: UIImageView!
+    @IBOutlet weak var proposalsTableView: UITableView!
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var bntNext: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
+    var toVoteProposals = Array<MintscanProposalDetail>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pageHolderVC = self.parent as? StepGenTxViewController
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        proposalTitle.text = pageHolderVC.mProposalTitle
-        proposalTitle.adjustsFontSizeToFitWidth = true
-        proposer.text = pageHolderVC.mProposer
+        self.proposalsTableView.delegate = self
+        self.proposalsTableView.dataSource = self
+        self.proposalsTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.proposalsTableView.register(UINib(nibName: "VoteCell", bundle: nil), forCellReuseIdentifier: "VoteCell")
+        self.proposalsTableView.rowHeight = UITableView.automaticDimension
+        self.proposalsTableView.estimatedRowHeight = UITableView.automaticDimension
+        
+        self.toVoteProposals = pageHolderVC.mProposals
         
         btnCancel.borderColor = UIColor.init(named: "_font05")
         bntNext.borderColor = UIColor.init(named: "photon")
@@ -42,6 +42,34 @@ class Vote1ViewController: BaseViewController {
         bntNext.borderColor = UIColor.init(named: "photon")
     }
     
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toVoteProposals.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"VoteCell") as? VoteCell
+        let proposal = toVoteProposals[indexPath.row]
+        cell?.onBindView(chainConfig, proposal)
+        cell?.actionYes = {
+            self.toVoteProposals[indexPath.row].setMyVote("Yes")
+            self.proposalsTableView.reloadRows(at: [indexPath], with: .none)
+        }
+        cell?.actionNo =   {
+            self.toVoteProposals[indexPath.row].setMyVote("No")
+            self.proposalsTableView.reloadRows(at: [indexPath], with: .none)
+        }
+        cell?.actionVeto = {
+            self.toVoteProposals[indexPath.row].setMyVote("NoWithVeto")
+            self.proposalsTableView.reloadRows(at: [indexPath], with: .none)
+        }
+        cell?.actionAbstain = {
+            self.toVoteProposals[indexPath.row].setMyVote("Abstain")
+            self.proposalsTableView.reloadRows(at: [indexPath], with: .none)
+        }
+        return cell!
+    }
+    
     @IBAction func onClickCancel(_ sender: UIButton) {
         self.btnCancel.isUserInteractionEnabled = false
         self.bntNext.isUserInteractionEnabled = false
@@ -49,63 +77,21 @@ class Vote1ViewController: BaseViewController {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        if (pageHolderVC.mVoteOpinion == "Yes" ||
-            pageHolderVC.mVoteOpinion == "No" ||
-            pageHolderVC.mVoteOpinion == "NoWithVeto" ||
-            pageHolderVC.mVoteOpinion == "Abstain") {
-            self.btnCancel.isUserInteractionEnabled = false
-            self.bntNext.isUserInteractionEnabled = false
-            pageHolderVC.onNextPage()
-            
-        } else {
+        var allVoted = true
+        toVoteProposals.forEach { proposal in
+            if (proposal.getMyVote() == nil) {
+                allVoted = false
+            }
+        }
+        if (!allVoted) {
             self.onShowToast(NSLocalizedString("error_no_opinion", comment: ""))
             return
         }
+        self.pageHolderVC.mProposals = self.toVoteProposals
+        self.btnCancel.isUserInteractionEnabled = false
+        self.bntNext.isUserInteractionEnabled = false
+        pageHolderVC.onNextPage()
     }
-    
-    @IBAction func onClickYes(_ sender: UIButton) {
-        initBtns()
-        sender.borderColor = UIColor(named: "_font05")
-        checkYes.image = checkYes.image?.withRenderingMode(.alwaysTemplate)
-        checkYes.tintColor = UIColor(named: "_font05")
-        pageHolderVC.mVoteOpinion = "Yes"
-    }
-    
-    @IBAction func onClickNo(_ sender: UIButton) {
-        initBtns()
-        sender.borderColor = UIColor(named: "_font05")
-        checkNo.image = checkNo.image?.withRenderingMode(.alwaysTemplate)
-        checkNo.tintColor = UIColor(named: "_font05")
-        pageHolderVC.mVoteOpinion = "No"
-    }
-    
-    @IBAction func onClickVeto(_ sender: UIButton) {
-        initBtns()
-        sender.borderColor = UIColor(named: "_font05")
-        checkVeto.image = checkVeto.image?.withRenderingMode(.alwaysTemplate)
-        checkVeto.tintColor = UIColor(named: "_font05")
-        pageHolderVC.mVoteOpinion = "NoWithVeto"
-    }
-    
-    @IBAction func onClickAbstain(_ sender: UIButton) {
-        initBtns()
-        sender.borderColor = UIColor(named: "_font05")
-        checkAbstain.image = checkAbstain.image?.withRenderingMode(.alwaysTemplate)
-        checkAbstain.tintColor = UIColor(named: "_font05")
-        pageHolderVC.mVoteOpinion = "Abstain"
-    }
-    
-    func initBtns() {
-        btnYes.borderColor = UIColor(named: "_font04")
-        btnNo.borderColor = UIColor(named: "_font04")
-        btnVeto.borderColor = UIColor(named: "_font04")
-        btnAbstain.borderColor = UIColor(named: "_font04")
-        checkYes.image = UIImage.init(named: "iconCheck")
-        checkNo.image = UIImage.init(named: "iconCheck")
-        checkVeto.image = UIImage.init(named: "iconCheck")
-        checkAbstain.image = UIImage.init(named: "iconCheck")
-    }
-    
     
     override func enableUserInteraction() {
         self.btnCancel.isUserInteractionEnabled = true

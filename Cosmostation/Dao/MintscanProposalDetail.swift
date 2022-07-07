@@ -25,6 +25,8 @@ public struct MintscanProposalDetail {
     var voteMeta: MintscanVoteMeta?
     var content: MintscanContent?
     
+    var myVote: String?
+    
     init(_ dictionary: NSDictionary?) {
         self.id = dictionary?["id"] as? String
         self.tx_hash = dictionary?["tx_hash"] as? String
@@ -44,6 +46,14 @@ public struct MintscanProposalDetail {
         if let rawContent = dictionary?["content"] as? NSDictionary  {
             self.content = MintscanContent.init(rawContent)
         }
+    }
+    
+    public mutating func setMyVote(_ option: String) {
+        self.myVote = option
+    }
+    
+    public func getMyVote() -> String? {
+        return self.myVote
     }
     
     public func getSum() ->NSDecimalNumber {

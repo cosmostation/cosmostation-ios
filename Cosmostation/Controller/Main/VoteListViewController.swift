@@ -17,13 +17,15 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var voteTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
     @IBOutlet weak var loadingImg: LoadingImageView!
+    @IBOutlet weak var layerMultiVote: UIView!
+    @IBOutlet weak var layerMultiVoteAction: UIStackView!
+    @IBOutlet weak var btnMultiVote: UIButton!
     
     var refresher: UIRefreshControl!
-    
-//    var mProposals_Mintscan = Array<MintscanProposalDetail>()
     var mVotingPeriods = Array<MintscanProposalDetail>()
     var mEtcPeriods = Array<MintscanProposalDetail>()
-    var isVotingMode = false;
+    var mSelectedProposalId = Array<String>()
+    var isSelectMode = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +63,20 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func onUpdateViews() {
+        if (mVotingPeriods.count > 1) {
+            self.layerMultiVote.isHidden = false
+        } else {
+            self.layerMultiVote.isHidden = true
+        }
+        if (isSelectMode) {
+            btnMultiVote.isHidden = true
+            layerMultiVoteAction.isHidden = false
+            
+        } else {
+            btnMultiVote.isHidden = false
+            layerMultiVoteAction.isHidden = true
+        }
+        
         if (mVotingPeriods.count > 0 || mEtcPeriods.count > 0) {
             self.emptyLabel.isHidden = true
             self.voteTableView.reloadData()
@@ -71,6 +87,51 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.refresher.endRefreshing()
         self.loadingImg.onStopAnimation()
         self.loadingImg.isHidden = true
+    }
+    
+    @IBAction func onClickStartSelect(_ sender: UIButton) {
+        isSelectMode = true
+        onUpdateViews()
+    }
+    
+    @IBAction func onClickCancel(_ sender: UIButton) {
+        mSelectedProposalId.removeAll()
+        isSelectMode = false
+        onUpdateViews()
+    }
+    
+    @IBAction func onClickNext(_ sender: UIButton) {
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        if (mSelectedProposalId.count <= 0) {
+            self.onShowToast(NSLocalizedString("error_no_selected_proposal", comment: ""))
+            return
+        }
+        if (BaseData.instance.mMyDelegations_gRPC.count <= 0) {
+            self.onShowToast(NSLocalizedString("error_no_bonding_no_vote", comment: ""))
+            return
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        
+        var selected = Array<MintscanProposalDetail>()
+        mVotingPeriods.forEach { proposal in
+            if (mSelectedProposalId.contains(proposal.id!)) {
+                selected.append(proposal)
+            }
+        }
+        
+        mSelectedProposalId.removeAll()
+        isSelectMode = false
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mProposals = selected
+        txVC.mType = TASK_TYPE_VOTE
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     
@@ -109,7 +170,18 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     func onBindProposal(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell  {
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalVotingPeriodCell") as? ProposalVotingPeriodCell
-            cell?.onBindView(chainConfig, mVotingPeriods[indexPath.row], account!.account_address, isVotingMode)
+            let proposal = mVotingPeriods[indexPath.row]
+            cell?.onBindView(chainConfig, proposal, account!.account_address, isSelectMode, self.mSelectedProposalId.contains(proposal.id!))
+            cell?.actionMultiVote = {
+                if (self.mSelectedProposalId.contains(proposal.id!)) {
+                    if let index = self.mSelectedProposalId.firstIndex(of: proposal.id!) {
+                        self.mSelectedProposalId.remove(at: index)
+                    }
+                } else {
+                    self.mSelectedProposalId.append(proposal.id!)
+                }
+                self.voteTableView.reloadRows(at: [indexPath], with: .none)
+            }
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalEtcPeriodCell") as? ProposalEtcPeriodCell
@@ -123,7 +195,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if (isSelectMode) { return }
         if (indexPath.section == 0) {
             let proposal = mVotingPeriods[indexPath.row]
             let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController

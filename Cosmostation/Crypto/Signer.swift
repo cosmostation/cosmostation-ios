@@ -217,38 +217,61 @@ class Signer {
     
     //Tx for Common Vote
     static func genSignedVoteTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                    _ proposalId: String, _ opinion: String,
+                                    _ proposals: Array<MintscanProposalDetail>,
                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let voteMsg = genVoteMsg(auth, proposalId, opinion)
+        let voteMsg = genVoteMsg(auth, proposals)
         return getGrpcSignedTx(auth, chainType, voteMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSimulateVoteTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                      _ proposalId: String, _ opinion: String,
+                                      _ proposals: Array<MintscanProposalDetail>,
                                       _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let voteMsg = genVoteMsg(auth, proposalId, opinion)
+        let voteMsg = genVoteMsg(auth, proposals)
         return getGrpcSimulateTx(auth, chainType, voteMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genVoteMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ proposalId: String, _ opinion: String) -> [Google_Protobuf2_Any] {
-        let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
-            $0.voter = WUtils.onParseAuthGrpc(auth).0!
-            $0.proposalID = UInt64(proposalId)!
-            if (opinion == "Yes") {
-                $0.option = Cosmos_Gov_V1beta1_VoteOption.yes
-            } else if (opinion == "No") {
-                $0.option = Cosmos_Gov_V1beta1_VoteOption.no
-            } else if (opinion == "NoWithVeto") {
-                $0.option = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
-            } else if (opinion == "Abstain") {
-                $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
+    static func genVoteMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ proposals: Array<MintscanProposalDetail>) -> [Google_Protobuf2_Any] {
+        var anyMsgs = Array<Google_Protobuf2_Any>()
+        proposals.forEach { proposal in
+            let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
+                $0.voter = WUtils.onParseAuthGrpc(auth).0!
+                $0.proposalID = UInt64(proposal.id!)!
+                if (proposal.getMyVote() == "Yes") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.yes
+                } else if (proposal.getMyVote() == "No") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.no
+                } else if (proposal.getMyVote() == "NoWithVeto") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
+                } else if (proposal.getMyVote() == "Abstain") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
+                }
             }
+            let anyMsg = Google_Protobuf2_Any.with {
+                $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
+                $0.value = try! voteMsg.serializedData()
+            }
+            anyMsgs.append(anyMsg)
         }
-        let anyMsg = Google_Protobuf2_Any.with {
-            $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
-            $0.value = try! voteMsg.serializedData()
-        }
-        return [anyMsg]
+        return anyMsgs
+        
+//        let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
+//            $0.voter = WUtils.onParseAuthGrpc(auth).0!
+//            $0.proposalID = UInt64(proposalId)!
+//            if (opinion == "Yes") {
+//                $0.option = Cosmos_Gov_V1beta1_VoteOption.yes
+//            } else if (opinion == "No") {
+//                $0.option = Cosmos_Gov_V1beta1_VoteOption.no
+//            } else if (opinion == "NoWithVeto") {
+//                $0.option = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
+//            } else if (opinion == "Abstain") {
+//                $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
+//            }
+//        }
+//        let anyMsg = Google_Protobuf2_Any.with {
+//            $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
+//            $0.value = try! voteMsg.serializedData()
+//        }
+//        return [anyMsg]
     }
     
     //Tx for Common Reward Address Change

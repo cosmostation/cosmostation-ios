@@ -652,9 +652,107 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cgw-Hd-L7W">
-                                <rect key="frame" x="0.0" y="52" width="414" height="844"/>
+                                <rect key="frame" x="0.0" y="52" width="414" height="794"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fv7-CO-xZV">
+                                <rect key="frame" x="0.0" y="796" width="414" height="50"/>
+                                <subviews>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="boy-xT-bEE">
+                                        <rect key="frame" x="16" y="0.0" width="382" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaP-ND-mpZ">
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="GJG-ul-EVU"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" name="_font05"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" name="_font05"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onClickCancel:" destination="jY2-JE-lP2" eventType="touchUpInside" id="cs1-Fp-ulI"/>
+                                                    <action selector="onClickVote:" destination="Fla-s9-miw" eventType="touchUpInside" id="vlZ-70-XEY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tzd-Xz-vPF">
+                                                <rect key="frame" x="195" y="0.0" width="187" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="Tit-lW-2lq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <state key="normal" title="Next">
+                                                    <color key="titleColor" name="photon"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="8"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" name="photon"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="onClickNext:" destination="jY2-JE-lP2" eventType="touchUpInside" id="oaR-XX-9jb"/>
+                                                    <action selector="onClickVote:" destination="Fla-s9-miw" eventType="touchUpInside" id="tYe-Yh-lOM"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7J7-If-CgV">
+                                        <rect key="frame" x="16" y="0.0" width="382" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="uvL-Jb-ccm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <state key="normal" title="Multi Vote">
+                                            <color key="titleColor" name="photon"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="8"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" name="photon"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onClickStartSelect:" destination="jY2-JE-lP2" eventType="touchUpInside" id="ulo-er-7Oe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="boy-xT-bEE" firstAttribute="top" secondItem="fv7-CO-xZV" secondAttribute="top" id="Fzf-Ms-dzT"/>
+                                    <constraint firstItem="7J7-If-CgV" firstAttribute="top" secondItem="fv7-CO-xZV" secondAttribute="top" id="JpJ-Rl-VdV"/>
+                                    <constraint firstAttribute="bottom" secondItem="boy-xT-bEE" secondAttribute="bottom" id="Zw4-bH-XRj"/>
+                                    <constraint firstAttribute="bottom" secondItem="7J7-If-CgV" secondAttribute="bottom" id="gEp-6B-SMC"/>
+                                    <constraint firstItem="boy-xT-bEE" firstAttribute="leading" secondItem="fv7-CO-xZV" secondAttribute="leading" constant="16" id="jrT-LZ-9E5"/>
+                                    <constraint firstAttribute="trailing" secondItem="boy-xT-bEE" secondAttribute="trailing" constant="16" id="mlP-Z1-2Ci"/>
+                                    <constraint firstItem="7J7-If-CgV" firstAttribute="leading" secondItem="fv7-CO-xZV" secondAttribute="leading" constant="16" id="pu4-Ab-hLW"/>
+                                    <constraint firstAttribute="trailing" secondItem="7J7-If-CgV" secondAttribute="trailing" constant="16" id="rEC-8a-Rp0"/>
+                                </constraints>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="C5K-UD-pK1" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
                                 <rect key="frame" x="177" y="423" width="60" height="60"/>
                                 <constraints>
@@ -667,25 +765,31 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="cgw-Hd-L7W" firstAttribute="top" secondItem="Du9-Qj-Mbj" secondAttribute="top" constant="8" id="2X3-4E-T8A"/>
+                            <constraint firstItem="fv7-CO-xZV" firstAttribute="leading" secondItem="Du9-Qj-Mbj" secondAttribute="leading" id="7Jz-xC-9ng"/>
+                            <constraint firstItem="Du9-Qj-Mbj" firstAttribute="trailing" secondItem="fv7-CO-xZV" secondAttribute="trailing" id="9uh-PB-Qb3"/>
+                            <constraint firstItem="cgw-Hd-L7W" firstAttribute="bottom" secondItem="fv7-CO-xZV" secondAttribute="bottom" id="NWa-og-Y5D"/>
                             <constraint firstItem="cgw-Hd-L7W" firstAttribute="leading" secondItem="Du9-Qj-Mbj" secondAttribute="leading" id="SBi-Gg-Mf4"/>
                             <constraint firstItem="a3x-sr-rPq" firstAttribute="centerX" secondItem="Du9-Qj-Mbj" secondAttribute="centerX" id="Y5M-PS-BS7"/>
                             <constraint firstItem="C5K-UD-pK1" firstAttribute="centerY" secondItem="Du9-Qj-Mbj" secondAttribute="centerY" id="auv-nT-Du6"/>
-                            <constraint firstAttribute="bottom" secondItem="cgw-Hd-L7W" secondAttribute="bottom" id="d1n-r5-m3x"/>
                             <constraint firstItem="Du9-Qj-Mbj" firstAttribute="trailing" secondItem="cgw-Hd-L7W" secondAttribute="trailing" id="iYo-gg-eGH"/>
+                            <constraint firstItem="Du9-Qj-Mbj" firstAttribute="bottom" secondItem="fv7-CO-xZV" secondAttribute="bottom" constant="16" id="jIC-6q-tmm"/>
                             <constraint firstItem="a3x-sr-rPq" firstAttribute="centerY" secondItem="Du9-Qj-Mbj" secondAttribute="centerY" id="mp8-yA-K2Z"/>
                             <constraint firstItem="C5K-UD-pK1" firstAttribute="centerX" secondItem="Du9-Qj-Mbj" secondAttribute="centerX" id="zEr-PE-1JA"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="E0Q-yY-xu0"/>
                     <connections>
+                        <outlet property="btnMultiVote" destination="7J7-If-CgV" id="G08-wq-A05"/>
                         <outlet property="emptyLabel" destination="a3x-sr-rPq" id="mph-OM-gFY"/>
+                        <outlet property="layerMultiVote" destination="fv7-CO-xZV" id="LV0-Q6-Bs9"/>
+                        <outlet property="layerMultiVoteAction" destination="boy-xT-bEE" id="ubc-h0-HYf"/>
                         <outlet property="loadingImg" destination="C5K-UD-pK1" id="7Sl-jK-SoI"/>
                         <outlet property="voteTableView" destination="cgw-Hd-L7W" id="pSt-0J-Ci3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmi-gg-Yva" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5631" y="2556"/>
+            <point key="canvasLocation" x="-5631.884057971015" y="2555.3571428571427"/>
         </scene>
         <!--Wallet Connect View Controller-->
         <scene sceneID="PN7-M1-zpY">

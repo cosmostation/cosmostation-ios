@@ -12,9 +12,6 @@ import NIO
 
 class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     
-    @IBOutlet weak var proposalTitle: UILabel!
-    @IBOutlet weak var proposer: UILabel!
-    
     @IBOutlet weak var mOpinion: UILabel!
     @IBOutlet weak var mFeeAmount: UILabel!
     @IBOutlet weak var mFeeDenomTitle: UILabel!
@@ -30,10 +27,6 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        
-        proposalTitle.text = pageHolderVC.mProposalTitle
-        proposalTitle.adjustsFontSizeToFitWidth = true
-        proposer.text = pageHolderVC.mProposer
         
         mBtnBack.borderColor = UIColor.init(named: "_font05")
         mBtnConfirm.borderColor = UIColor.init(named: "photon")
@@ -67,7 +60,11 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     
     func onUpdateView() {
         WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], mFeeDenomTitle, mFeeAmount)
-        mOpinion.text = pageHolderVC.mVoteOpinion
+        var myOptions = ""
+        pageHolderVC.mProposals.forEach { proposal in
+            myOptions = myOptions + "# ".appending(proposal.id!).appending("  -  ").appending(proposal.getMyVote()!) + "\n"
+        }
+        mOpinion.text = myOptions
         mMemo.text = pageHolderVC.mMemo
     }
     
@@ -101,7 +98,7 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
             let reqTx = Signer.genSignedVoteTxgRPC(auth!,
-                                                   self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
+                                                   self.pageHolderVC.mProposals,
                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
             

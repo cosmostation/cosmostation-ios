@@ -16,20 +16,39 @@ class ProposalVotingPeriodCell: UITableViewCell {
     @IBOutlet weak var proposalTitleLabel: UILabel!
     @IBOutlet weak var votingEndTimeLabel: UILabel!
     @IBOutlet weak var myVoteStatusImg: UIImageView!
+    @IBOutlet weak var btnCheckVote: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
     }
     
-    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanProposalDetail, _ address: String, _ voteMode: Bool) {
+    var actionMultiVote: (() -> Void)? = nil
+    
+    @IBAction func onMultiVoteClick(_ sender: UIButton) {
+        actionMultiVote?()
+    }
+    
+    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanProposalDetail, _ address: String, _ selectMode: Bool, _ selected: Bool) {
         let title = "# ".appending(proposal.id!).appending("  ").appending(proposal.title ?? "")
         let time = WDP.dpTime(proposal.voting_end_time).appending(" ").appending(WDP.dpTimeGap(proposal.voting_end_time))
         proposalTitleLabel.text = title
         votingEndTimeLabel.text = time
         myVoteStatusImg.isHidden = true
+        btnCheckVote.isHidden = true
         
-        if (voteMode) {
+        if (selectMode) {
+            btnCheckVote.isHidden = false
+            btnCheckVote.titleLabel?.text = ""
+            if (selected) {
+                btnCheckVote.imageView?.image = btnCheckVote.imageView?.image?.withRenderingMode(.alwaysTemplate)
+                btnCheckVote.imageView?.tintColor = chainConfig?.chainColor
+
+            } else {
+                btnCheckVote.imageView?.image = btnCheckVote.imageView?.image?.withRenderingMode(.alwaysTemplate)
+                btnCheckVote.imageView?.tintColor = UIColor.init(named: "_font03")
+
+            }
             
         } else {
             if (chainConfig?.chainType == .CERTIK_MAIN) {

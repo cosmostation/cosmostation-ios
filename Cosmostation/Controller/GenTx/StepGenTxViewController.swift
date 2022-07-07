@@ -67,6 +67,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mProposalTitle: String?
     var mProposer: String?
     var mVoteOpinion: String?
+    var mProposals = Array<MintscanProposalDetail>()
     
     var mCollateralParamType: String?
     var mCDenom: String?
