@@ -345,8 +345,8 @@ class CommonWCViewController: BaseViewController {
             let web3 = web3(provider: provider)
             let nounce = try? web3.eth.getTransactionCount(address: ethAddress)
             var tx = EthereumTransaction(
-                gasPrice: BigUInt(2000000020),
-                gasLimit: BigUInt(500000),
+                gasPrice: BigUInt(20000000000),
+                gasLimit: BigUInt(1000000),
                 to: ethAddress,
                 value: bigIntVal,
                 data: data
@@ -356,6 +356,7 @@ class CommonWCViewController: BaseViewController {
                 return
             }
             tx.nonce = nounce
+            tx.UNSAFE_setChainID(BigUInt(9001))
             try? Web3Signer.signTX(transaction: &tx, keystore: keystore, account: ethAddress, password: "web3swift", useExtraEntropy: false)
             let result = try? web3.eth.sendRawTransaction(tx)
             if let result = result {
