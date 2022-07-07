@@ -92,9 +92,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         }
 
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mProposeId = proposalId
-        txVC.mProposalTitle = mMintscanProposalDetail?.title
-        txVC.mProposer = WUtils.onProposalProposer(mMintscanProposalDetail)
+        txVC.mProposals = [mMintscanProposalDetail!]
         txVC.mType = TASK_TYPE_VOTE
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
@@ -173,7 +171,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func onFetchMintscanProposl(_ id: String) {
         let url = BaseNetWork.mintscanProposalDetail(chainConfig!, id)
-        print("url ", url)
+//        print("url ", url)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
