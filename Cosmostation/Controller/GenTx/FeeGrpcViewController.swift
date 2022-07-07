@@ -69,6 +69,16 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         gasSelectSegments.selectedSegmentIndex = mSelectedFeeInfo
         
         feeTypeCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickFeeDenom (_:))))
+        
+        feeTypeCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
+        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        feeTypeCard.layer.borderColor = UIColor(named: "_font05")!.cgColor
+        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onSwitchGasRate(_ sender: UISegmentedControl) {
@@ -267,8 +277,12 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_VOTE) {
+//            return Signer.genSimulateVoteTxgRPC(auth,
+//                                                self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
+//                                                self.mFee, self.pageHolderVC.mMemo!,
+//                                                privateKey, publicKey, self.chainType!)
             return Signer.genSimulateVoteTxgRPC(auth,
-                                                self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
+                                                self.pageHolderVC.mProposals,
                                                 self.mFee, self.pageHolderVC.mMemo!,
                                                 privateKey, publicKey, self.chainType!)
             

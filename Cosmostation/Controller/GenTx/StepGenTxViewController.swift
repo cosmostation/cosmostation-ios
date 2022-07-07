@@ -67,6 +67,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mProposalTitle: String?
     var mProposer: String?
     var mVoteOpinion: String?
+    var mProposals = Array<MintscanProposalDetail>()
     
     var mCollateralParamType: String?
     var mCDenom: String?
@@ -466,7 +467,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+//        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         
         mAccount        = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         mBalances       = mAccount!.account_balances

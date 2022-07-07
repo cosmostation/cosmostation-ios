@@ -120,8 +120,8 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.proposalTitle.text = mMintscanProposalDetail?.title
             cell?.proposerLabel.text = WUtils.onProposalProposer(mMintscanProposalDetail)
             cell?.proposalTypeLabel.text = mMintscanProposalDetail?.proposal_type
-            cell?.voteStartTime.text = WUtils.sifNodeTimeToString(mMintscanProposalDetail?.voting_start_time)
-            cell?.voteEndTime.text = WUtils.sifNodeTimeToString(mMintscanProposalDetail?.voting_end_time)
+            cell?.voteStartTime.text = WDP.dpTime(mMintscanProposalDetail?.voting_start_time)
+            cell?.voteEndTime.text = WDP.dpTime(mMintscanProposalDetail?.voting_end_time)
             cell?.voteDescription.text = mMintscanProposalDetail?.description
             if let requestCoin = mMintscanProposalDetail?.content?.amount?[0] {
                 WDP.dpCoin(chainConfig, requestCoin, cell!.requestAmountDenom, cell!.requestAmount)
@@ -209,8 +209,8 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchCertikMyVote(_ proposal_id: String, _ address: String) {
-        let request = Alamofire.request(BaseNetWork.myVoteUrl(self.chainType!, proposal_id, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        print("onFetchCertikProposalMyVote ", request.request?.url)
+        let request = Alamofire.request(BaseNetWork.myVoteUrl(self.chainConfig, proposal_id, address), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+//        print("onFetchCertikProposalMyVote ", request.request?.url)
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):

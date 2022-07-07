@@ -34,6 +34,14 @@ class SendContract4ViewController: BaseViewController, PasswordViewDelegate {
         
         self.cw20Token = BaseData.instance.getCw20_gRPC(pageHolderVC.mCw20SendContract!)
         self.decimal = cw20Token.decimal
+        
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnConfirm.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBack.borderColor = UIColor.init(named: "_font05")
+        btnConfirm.borderColor = UIColor.init(named: "photon")
     }
     
     override func enableUserInteraction() {

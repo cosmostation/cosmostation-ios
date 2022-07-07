@@ -27,6 +27,7 @@ class TransactionViewController: UIViewController {
     var mProposeId: String?
     var mProposalTitle: String?
     var mProposer: String?
+    var mProposals = Array<MintscanProposalDetail>()
     
     var mCollateralParamType: String?
     var mCDenom: String?
@@ -64,7 +65,7 @@ class TransactionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+//        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         
         mAccount = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         mUserChain = ChainFactory.getChainType(mAccount!.account_base_chain)
@@ -332,6 +333,7 @@ class TransactionViewController: UIViewController {
             StepVc.mProposeId = self.mProposeId
             StepVc.mProposalTitle = self.mProposalTitle
             StepVc.mProposer = self.mProposer
+            StepVc.mProposals = self.mProposals
             StepVc.mToSendDenom = self.mToSendDenom
             
             StepVc.mCDenom = self.mCDenom

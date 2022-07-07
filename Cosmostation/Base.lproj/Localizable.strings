@@ -759,6 +759,7 @@ support@cosmostation.io";
 "error_alreay_imported_mnemonic" = "Alreay imported menonic";
 "error_simul_error" = "This Tx not executable.";
 "error_no_mnemonic" = "Only private key imported";
+"error_no_selected_proposal" = "Please select proposals to vote";
 
 "theme_system" = "System";
 "theme_light" = "Light";
@@ -1005,3 +1006,4 @@ support@cosmostation.io";
 "date_format" = "MMM d, yyyy HH:mm:ss";
 "date_format2" = "MMM d, yyyy";
 "date_format3" = "MMM d, yyyy HH:mm";
+"date_format4" = "MMM d, yy HH:mm";

@@ -32,6 +32,14 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
         self.redelegateToValTableView.dataSource = self
         self.redelegateToValTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.redelegateToValTableView.register(UINib(nibName: "RedelegateCell", bundle: nil), forCellReuseIdentifier: "RedelegateCell")
+        
+        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

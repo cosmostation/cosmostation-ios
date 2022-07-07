@@ -760,6 +760,7 @@ support@cosmostation.io";
 "error_alreay_imported_mnemonic" = "이미 등록된 니모닉 입니다.";
 "error_simul_error" = "실행할 수 없는 Tx입니다.";
 "error_no_mnemonic" = "개인키만 존재합니다.";
+"error_no_selected_proposal" = "투표하실 프로포절을 선택하세요.";
 
 
 
@@ -1011,3 +1012,4 @@ support@cosmostation.io";
 "date_format" = "yyyy-MM-dd HH:mm:ss";
 "date_format2" = "yyyy-MM-dd";
 "date_format3" = "yyyy-MM-dd HH:mm";
+"date_format4" = "yy-MM-dd HH:mm";

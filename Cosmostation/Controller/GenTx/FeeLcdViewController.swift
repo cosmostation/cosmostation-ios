@@ -38,6 +38,14 @@ class FeeLcdViewController: BaseViewController {
         mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
         onUpdateView()
+        
+        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnBefore.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     func onUpdateView() {

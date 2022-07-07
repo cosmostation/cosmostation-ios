@@ -27,6 +27,14 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.onFetchRewardAddress_gRPC(pageHolderVC.mAccount!.account_address)
+        
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     @IBAction func onClickPaste(_ sender: UIButton) {
