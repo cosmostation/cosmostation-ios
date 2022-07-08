@@ -26,6 +26,18 @@ class SendNFT0ViewController: BaseViewController, QrScannerDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.addressInput.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(named: "_font03")])
+        
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
+        btnQrScan.borderColor = UIColor.init(named: "_font05")
+        btnPaste.borderColor = UIColor.init(named: "_font05")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnCancel.borderColor = UIColor.init(named: "_font05")
+        btnNext.borderColor = UIColor.init(named: "photon")
+        btnQrScan.borderColor = UIColor.init(named: "_font05")
+        btnPaste.borderColor = UIColor.init(named: "_font05")
     }
     
     override func enableUserInteraction() {

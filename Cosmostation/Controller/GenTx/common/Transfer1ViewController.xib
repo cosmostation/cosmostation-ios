@@ -14,6 +14,8 @@
             <connections>
                 <outlet property="CancelBtn" destination="6fS-8p-nJk" id="kNs-WZ-jlW"/>
                 <outlet property="NextBtn" destination="dUc-34-fki" id="aa2-2c-opA"/>
+                <outlet property="PasteBtn" destination="W64-YM-CA7" id="3yy-6X-6Fl"/>
+                <outlet property="ScanBtn" destination="Bp4-Vf-7aA" id="RvP-Ck-fQb"/>
                 <outlet property="mTargetAddressTextField" destination="Ff0-9U-jko" id="JXJ-5w-lBF"/>
                 <outlet property="startNameLayer" destination="J69-rE-yfD" id="xDZ-Tc-ahN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

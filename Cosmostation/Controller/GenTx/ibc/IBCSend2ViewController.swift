@@ -16,6 +16,11 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var mAvailableAmountLabel: UILabel!
     @IBOutlet weak var denomTitleLabel: UILabel!
     @IBOutlet weak var btn01: UIButton!
+    @IBOutlet weak var btn1: UIButton!
+    @IBOutlet weak var btn10: UIButton!
+    @IBOutlet weak var btn100: UIButton!
+    @IBOutlet weak var btnHalf: UIButton!
+    @IBOutlet weak var btnMax: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
     var ibcSendDenom: String!
@@ -47,11 +52,23 @@ class IBCSend2ViewController: BaseViewController, UITextFieldDelegate {
         
         btnBack.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
+        btn01.borderColor = UIColor.init(named: "_font05")
+        btn1.borderColor = UIColor.init(named: "_font05")
+        btn10.borderColor = UIColor.init(named: "_font05")
+        btn100.borderColor = UIColor.init(named: "_font05")
+        btnHalf.borderColor = UIColor.init(named: "_font05")
+        btnMax.borderColor = UIColor.init(named: "_font05")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnBack.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
+        btn01.borderColor = UIColor.init(named: "_font05")
+        btn1.borderColor = UIColor.init(named: "_font05")
+        btn10.borderColor = UIColor.init(named: "_font05")
+        btn100.borderColor = UIColor.init(named: "_font05")
+        btnHalf.borderColor = UIColor.init(named: "_font05")
+        btnMax.borderColor = UIColor.init(named: "_font05")
     }
     
     override func enableUserInteraction() {

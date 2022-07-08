@@ -15,6 +15,11 @@
                 <outlet property="availableAmountLabel" destination="GEU-au-Xm8" id="THQ-fZ-Aui"/>
                 <outlet property="availableDenomLabel" destination="j39-5r-UF1" id="uds-e7-JE4"/>
                 <outlet property="btn01" destination="84e-9g-maV" id="ywn-dN-Wxi"/>
+                <outlet property="btn1" destination="e1Q-jI-cRL" id="8CC-hu-vx7"/>
+                <outlet property="btn10" destination="BZF-VN-pko" id="BRy-n5-8sX"/>
+                <outlet property="btn100" destination="IKq-Am-EAY" id="yrA-W7-T7I"/>
+                <outlet property="btnHalf" destination="u9h-po-O4P" id="rTP-DE-MfG"/>
+                <outlet property="btnMax" destination="F7V-Vw-VZG" id="LKr-At-sQc"/>
                 <outlet property="cancelBtn" destination="xno-r8-uYE" id="t9P-5r-Yup"/>
                 <outlet property="nextBtn" destination="YBT-6M-MKh" id="dH5-i7-sm7"/>
                 <outlet property="toUndelegateAmountInput" destination="a8B-hg-un8" id="SYb-TP-ZMF"/>

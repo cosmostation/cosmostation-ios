@@ -193,11 +193,11 @@
                             <color key="textColor" name="starname"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hOG-bn-FnJ">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hOG-bn-FnJ">
                             <rect key="frame" x="12" y="94.5" width="358" height="42"/>
                             <string key="text">Your universal username for the blockchain world. Insert a *starname in the address field instead of a long complicated crypto address.</string>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                            <color key="textColor" name="_font04"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>

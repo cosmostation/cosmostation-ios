@@ -71,11 +71,15 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
         self.toChainCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToChain (_:))))
         self.relayerCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickRelayer (_:))))
         
+        toChainCard.borderColor = UIColor.init(named: "_font05")
+        relayerCard.borderColor = UIColor.init(named: "_font05")
         btnCancel.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        toChainCard.borderColor = UIColor.init(named: "_font05")
+        relayerCard.borderColor = UIColor.init(named: "_font05")
         btnCancel.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
     }

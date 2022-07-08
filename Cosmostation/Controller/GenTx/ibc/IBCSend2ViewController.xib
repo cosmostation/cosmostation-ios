@@ -12,7 +12,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IBCSend2ViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="btn01" destination="8G7-rm-kb6" id="XFP-N8-2f7"/>
+                <outlet property="btn1" destination="4o3-VX-0bd" id="p7G-N0-ec1"/>
+                <outlet property="btn10" destination="wIl-jd-Kxd" id="FRe-5F-2TJ"/>
+                <outlet property="btn100" destination="W3F-xZ-Bxi" id="vkc-lS-hcL"/>
                 <outlet property="btnBack" destination="565-hu-zb9" id="V2h-E3-rSE"/>
+                <outlet property="btnHalf" destination="oCJ-AJ-jy9" id="tNP-OD-1ir"/>
+                <outlet property="btnMax" destination="hSa-gR-un3" id="pEh-uj-XXu"/>
                 <outlet property="btnNext" destination="p3d-P5-sZ3" id="KcK-K0-zpO"/>
                 <outlet property="denomTitleLabel" destination="CS0-QX-jrC" id="L85-3h-nEF"/>
                 <outlet property="mAvailableAmountLabel" destination="994-Qf-mob" id="Io1-xl-guu"/>

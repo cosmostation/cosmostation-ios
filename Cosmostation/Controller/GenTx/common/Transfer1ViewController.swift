@@ -16,6 +16,8 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate {
     @IBOutlet weak var startNameLayer: UIView!
     @IBOutlet weak var CancelBtn: UIButton!
     @IBOutlet weak var NextBtn: UIButton!
+    @IBOutlet weak var ScanBtn: UIButton!
+    @IBOutlet weak var PasteBtn: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
 
@@ -30,11 +32,15 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate {
         
         CancelBtn.borderColor = UIColor.init(named: "_font05")
         NextBtn.borderColor = UIColor.init(named: "photon")
+        ScanBtn.borderColor = UIColor.init(named: "_font05")
+        PasteBtn.borderColor = UIColor.init(named: "_font05")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         CancelBtn.borderColor = UIColor.init(named: "_font05")
         NextBtn.borderColor = UIColor.init(named: "photon")
+        ScanBtn.borderColor = UIColor.init(named: "_font05")
+        PasteBtn.borderColor = UIColor.init(named: "_font05")
     }
     
     @IBAction func onClickQrCode(_ sender: Any) {

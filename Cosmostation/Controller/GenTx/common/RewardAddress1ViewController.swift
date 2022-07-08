@@ -16,6 +16,8 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
     @IBOutlet weak var currentRewardAddressLabel: UILabel!
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!
+    @IBOutlet weak var btnScan: UIButton!
+    @IBOutlet weak var btnPaste: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
 
@@ -30,11 +32,15 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
         
         btnCancel.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
+        btnScan.borderColor = UIColor.init(named: "_font05")
+        btnPaste.borderColor = UIColor.init(named: "_font05")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnCancel.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
+        btnScan.borderColor = UIColor.init(named: "_font05")
+        btnPaste.borderColor = UIColor.init(named: "_font05")
     }
     
     @IBAction func onClickPaste(_ sender: UIButton) {
