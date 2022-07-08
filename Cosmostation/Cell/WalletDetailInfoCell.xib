@@ -50,14 +50,14 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpS-dk-yhe">
-                                <rect key="frame" x="12" y="77.5" width="456" height="0.5"/>
+                                <rect key="frame" x="12" y="69.5" width="456" height="0.5"/>
                                 <color key="backgroundColor" name="_card_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="ha5-6w-kV2"/>
                                 </constraints>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="AMe-cI-2i0">
-                                <rect key="frame" x="16" y="94" width="452" height="94"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="AMe-cI-2i0">
+                                <rect key="frame" x="16" y="86" width="452" height="102"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XWA-Sd-EQ3">
                                         <rect key="frame" x="0.0" y="0.0" width="452" height="14"/>
@@ -85,7 +85,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGr-UL-HyT">
-                                        <rect key="frame" x="0.0" y="20" width="452" height="14"/>
+                                        <rect key="frame" x="0.0" y="22" width="452" height="14"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Imported Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e6Q-2N-gtz">
                                                 <rect key="frame" x="0.0" y="0.0" width="76.5" height="14"/>
@@ -110,7 +110,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvc-u7-mxZ">
-                                        <rect key="frame" x="0.0" y="40" width="452" height="14"/>
+                                        <rect key="frame" x="0.0" y="44" width="452" height="14"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Imported State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HU9-Mb-Yo3">
                                                 <rect key="frame" x="0.0" y="0.0" width="79" height="14"/>
@@ -135,7 +135,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kq1-nn-UOs">
-                                        <rect key="frame" x="0.0" y="60" width="452" height="14"/>
+                                        <rect key="frame" x="0.0" y="66" width="452" height="14"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Menemonic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBl-Rg-why">
                                                 <rect key="frame" x="0.0" y="0.0" width="62.5" height="14"/>
@@ -160,7 +160,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YCF-QS-oTy">
-                                        <rect key="frame" x="0.0" y="80" width="452" height="14"/>
+                                        <rect key="frame" x="0.0" y="88" width="452" height="14"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key Path" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="psY-o7-ZOD">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="14"/>
