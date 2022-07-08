@@ -34,18 +34,9 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isK-gg-3xf">
-                                        <rect key="frame" x="50" y="16.5" width="63.5" height="17"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="JPO-8C-fXp"/>
-                                        </constraints>
+                                        <rect key="frame" x="50" y="16.5" width="234" height="17"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" name="_font05"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Cosmos Hub)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fK9-Jn-bGz">
-                                        <rect key="frame" x="117.5" y="19.5" width="76" height="13.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                        <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s5Q-iv-Wwg">
@@ -87,12 +78,11 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="fK9-Jn-bGz" firstAttribute="firstBaseline" secondItem="isK-gg-3xf" secondAttribute="firstBaseline" id="14h-Ev-HpC"/>
                                     <constraint firstItem="joi-O1-5vn" firstAttribute="centerY" secondItem="vgm-58-EwV" secondAttribute="centerY" id="6Ms-5Z-Pwu"/>
                                     <constraint firstItem="cYo-Wr-QV9" firstAttribute="centerY" secondItem="vgm-58-EwV" secondAttribute="centerY" id="7Hs-Iy-hUY"/>
                                     <constraint firstItem="s5Q-iv-Wwg" firstAttribute="leading" secondItem="Whz-T8-65p" secondAttribute="trailing" constant="10" id="EDl-Ly-Sor"/>
+                                    <constraint firstItem="joi-O1-5vn" firstAttribute="leading" secondItem="isK-gg-3xf" secondAttribute="trailing" constant="16" id="FXI-97-AhF"/>
                                     <constraint firstAttribute="height" constant="50" id="H3O-sR-Rf9"/>
-                                    <constraint firstItem="fK9-Jn-bGz" firstAttribute="leading" secondItem="isK-gg-3xf" secondAttribute="trailing" constant="4" id="LQ7-7V-7bY"/>
                                     <constraint firstItem="isK-gg-3xf" firstAttribute="centerY" secondItem="vgm-58-EwV" secondAttribute="centerY" id="Pxm-5n-i83"/>
                                     <constraint firstAttribute="trailing" secondItem="s5Q-iv-Wwg" secondAttribute="trailing" constant="22" id="Twv-7e-3IW"/>
                                     <constraint firstItem="Whz-T8-65p" firstAttribute="leading" secondItem="joi-O1-5vn" secondAttribute="trailing" constant="10" id="Y5u-FU-LQO"/>
@@ -182,7 +172,6 @@
                     <connections>
                         <outlet property="titleAlarmBtn" destination="joi-O1-5vn" id="7px-8p-I2d"/>
                         <outlet property="titleChainImg" destination="cYo-Wr-QV9" id="Uqo-uq-mqd"/>
-                        <outlet property="titleChainName" destination="fK9-Jn-bGz" id="n7f-fJ-zF7"/>
                         <outlet property="titleWalletName" destination="isK-gg-3xf" id="LrW-0Q-jGg"/>
                         <outlet property="totalCard" destination="HC1-5b-PB4" id="24E-4z-73l"/>
                         <outlet property="totalDpAddress" destination="Ifg-0Z-hk7" id="zOP-mT-6A5"/>
@@ -340,18 +329,9 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4N-0h-U3Y">
-                                        <rect key="frame" x="50" y="16.5" width="63.5" height="17"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="J9j-Dh-4yU"/>
-                                        </constraints>
+                                        <rect key="frame" x="50" y="16.5" width="234" height="17"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" name="_font05"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Cosmos Hub)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NCH-6t-2hM">
-                                        <rect key="frame" x="117.5" y="19.5" width="76" height="13.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                        <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L12-Fw-3v9">
@@ -391,17 +371,16 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="552-ZV-WU3" firstAttribute="centerY" secondItem="L12-Fw-3v9" secondAttribute="centerY" id="8O1-AO-7qh"/>
+                                    <constraint firstItem="zcu-1U-k6P" firstAttribute="leading" secondItem="D4N-0h-U3Y" secondAttribute="trailing" constant="16" id="Gnr-Og-f9Q"/>
                                     <constraint firstItem="D4N-0h-U3Y" firstAttribute="leading" secondItem="MeZ-yr-C1Y" secondAttribute="trailing" id="Jpu-Wc-Asq"/>
                                     <constraint firstItem="MeZ-yr-C1Y" firstAttribute="leading" secondItem="qFY-lo-0IC" secondAttribute="leading" constant="8" id="LsW-Mj-qKc"/>
                                     <constraint firstItem="L12-Fw-3v9" firstAttribute="leading" secondItem="552-ZV-WU3" secondAttribute="trailing" constant="10" id="Nup-mE-MSA"/>
                                     <constraint firstItem="zcu-1U-k6P" firstAttribute="centerY" secondItem="qFY-lo-0IC" secondAttribute="centerY" id="P8O-vp-F2P"/>
                                     <constraint firstItem="MeZ-yr-C1Y" firstAttribute="centerY" secondItem="qFY-lo-0IC" secondAttribute="centerY" id="aMs-VY-dy8"/>
-                                    <constraint firstItem="NCH-6t-2hM" firstAttribute="firstBaseline" secondItem="D4N-0h-U3Y" secondAttribute="firstBaseline" id="kgu-5H-lIV"/>
                                     <constraint firstItem="552-ZV-WU3" firstAttribute="leading" secondItem="zcu-1U-k6P" secondAttribute="trailing" constant="10" id="oeY-4S-HQk"/>
                                     <constraint firstItem="L12-Fw-3v9" firstAttribute="centerY" secondItem="qFY-lo-0IC" secondAttribute="centerY" id="pU2-rg-1oy"/>
                                     <constraint firstItem="D4N-0h-U3Y" firstAttribute="centerY" secondItem="qFY-lo-0IC" secondAttribute="centerY" id="ro8-kP-K0l"/>
                                     <constraint firstAttribute="trailing" secondItem="L12-Fw-3v9" secondAttribute="trailing" constant="22" id="ut1-Bk-CAA"/>
-                                    <constraint firstItem="NCH-6t-2hM" firstAttribute="leading" secondItem="D4N-0h-U3Y" secondAttribute="trailing" constant="4" id="yXn-Mq-qcf"/>
                                     <constraint firstAttribute="height" constant="50" id="zuM-6F-LgI"/>
                                 </constraints>
                             </view>
@@ -448,7 +427,6 @@
                         <outlet property="historyTableView" destination="clr-UP-CWo" id="pah-B7-2Pd"/>
                         <outlet property="titleAlarmBtn" destination="zcu-1U-k6P" id="uci-XX-AoF"/>
                         <outlet property="titleChainImg" destination="MeZ-yr-C1Y" id="0AT-rU-YD7"/>
-                        <outlet property="titleChainName" destination="NCH-6t-2hM" id="nKX-0Y-AMx"/>
                         <outlet property="titleWalletName" destination="D4N-0h-U3Y" id="UT2-NV-Dbf"/>
                         <outlet property="totalCard" destination="SWH-mJ-BRy" id="xOp-kN-TmH"/>
                         <outlet property="totalDpAddress" destination="iTx-Cq-fUI" id="3Gc-Z5-uM7"/>
@@ -479,18 +457,9 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWl-YX-k4d">
-                                        <rect key="frame" x="50" y="16.5" width="63.5" height="17"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="qEh-Mc-ONL"/>
-                                        </constraints>
+                                        <rect key="frame" x="50" y="16.5" width="234" height="17"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" name="_font05"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Cosmos Hub)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Roh-LO-TJo">
-                                        <rect key="frame" x="117.5" y="19.5" width="76" height="13.5"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                        <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qin-kp-r78">
@@ -537,9 +506,8 @@
                                     <constraint firstItem="qWl-YX-k4d" firstAttribute="leading" secondItem="Dfj-wA-gmt" secondAttribute="trailing" id="RiQ-ev-IV8"/>
                                     <constraint firstItem="CEL-sa-h7I" firstAttribute="centerY" secondItem="qin-kp-r78" secondAttribute="centerY" id="SlW-WZ-QD9"/>
                                     <constraint firstAttribute="trailing" secondItem="qin-kp-r78" secondAttribute="trailing" constant="22" id="Yyo-4r-5d6"/>
-                                    <constraint firstItem="Roh-LO-TJo" firstAttribute="leading" secondItem="qWl-YX-k4d" secondAttribute="trailing" constant="4" id="iLV-HQ-Aff"/>
+                                    <constraint firstItem="Yab-cK-eWf" firstAttribute="leading" secondItem="qWl-YX-k4d" secondAttribute="trailing" constant="16" id="mtp-6b-1xh"/>
                                     <constraint firstItem="CEL-sa-h7I" firstAttribute="leading" secondItem="Yab-cK-eWf" secondAttribute="trailing" constant="10" id="odJ-Tl-Xt8"/>
-                                    <constraint firstItem="Roh-LO-TJo" firstAttribute="firstBaseline" secondItem="qWl-YX-k4d" secondAttribute="firstBaseline" id="w8d-Ci-xyH"/>
                                     <constraint firstItem="Dfj-wA-gmt" firstAttribute="centerY" secondItem="Al7-NK-Got" secondAttribute="centerY" id="xuV-if-Yoq"/>
                                     <constraint firstItem="Dfj-wA-gmt" firstAttribute="leading" secondItem="Al7-NK-Got" secondAttribute="leading" constant="8" id="xz5-Yf-NWe"/>
                                 </constraints>
@@ -624,7 +592,6 @@
                     <connections>
                         <outlet property="titleAlarmBtn" destination="Yab-cK-eWf" id="jcY-xO-nZY"/>
                         <outlet property="titleChainImg" destination="Dfj-wA-gmt" id="yfl-VR-PQS"/>
-                        <outlet property="titleChainName" destination="Roh-LO-TJo" id="UBw-Em-4Ml"/>
                         <outlet property="titleWalletName" destination="qWl-YX-k4d" id="SEr-G8-QFx"/>
                         <outlet property="tokenTableView" destination="fWn-k7-DSA" id="O35-yg-Wtz"/>
                         <outlet property="totalCard" destination="gsx-gt-Y38" id="mxA-ny-Etd"/>
@@ -989,18 +956,9 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="imU-di-2sz">
-                                        <rect key="frame" x="50" y="16.5" width="63.5" height="17"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="120" id="Qgg-XH-UDK"/>
-                                        </constraints>
+                                        <rect key="frame" x="50" y="16.5" width="234" height="17"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" name="_font05"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Cosmos Hub)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TB1-BC-2Oc">
-                                        <rect key="frame" x="117.5" y="19.5" width="76" height="14"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
-                                        <color key="textColor" red="0.47843137250000001" green="0.49803921569999998" blue="0.53333333329999999" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4XV-sy-kce">
@@ -1039,16 +997,15 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="TB1-BC-2Oc" firstAttribute="firstBaseline" secondItem="imU-di-2sz" secondAttribute="firstBaseline" id="6Q3-zV-flv"/>
                                     <constraint firstAttribute="trailing" secondItem="4XV-sy-kce" secondAttribute="trailing" constant="22" id="G4q-7K-uRh"/>
                                     <constraint firstItem="9xk-no-QlA" firstAttribute="centerY" secondItem="4XV-sy-kce" secondAttribute="centerY" id="Mf8-tl-WAt"/>
                                     <constraint firstItem="rUb-xK-flr" firstAttribute="centerY" secondItem="Bms-CG-fww" secondAttribute="centerY" id="PMr-q4-rk9"/>
                                     <constraint firstItem="imU-di-2sz" firstAttribute="centerY" secondItem="Bms-CG-fww" secondAttribute="centerY" id="SIV-Sb-wam"/>
-                                    <constraint firstItem="TB1-BC-2Oc" firstAttribute="leading" secondItem="imU-di-2sz" secondAttribute="trailing" constant="4" id="Y8i-rm-W68"/>
                                     <constraint firstItem="4XV-sy-kce" firstAttribute="centerY" secondItem="Bms-CG-fww" secondAttribute="centerY" id="b3I-Hc-cGv"/>
                                     <constraint firstItem="4XV-sy-kce" firstAttribute="leading" secondItem="9xk-no-QlA" secondAttribute="trailing" constant="10" id="bxY-HM-wwt"/>
                                     <constraint firstAttribute="height" constant="50" id="d61-q2-OeP"/>
                                     <constraint firstItem="rUb-xK-flr" firstAttribute="leading" secondItem="Bms-CG-fww" secondAttribute="leading" constant="8" id="elQ-Lt-3Gg"/>
+                                    <constraint firstItem="N58-4J-qWv" firstAttribute="leading" secondItem="imU-di-2sz" secondAttribute="trailing" constant="16" id="iSD-06-lUV"/>
                                     <constraint firstItem="9xk-no-QlA" firstAttribute="leading" secondItem="N58-4J-qWv" secondAttribute="trailing" constant="10" id="qxf-jR-dUf"/>
                                     <constraint firstItem="imU-di-2sz" firstAttribute="leading" secondItem="rUb-xK-flr" secondAttribute="trailing" id="srX-0G-FsO"/>
                                     <constraint firstItem="N58-4J-qWv" firstAttribute="centerY" secondItem="Bms-CG-fww" secondAttribute="centerY" id="xkd-XP-IYZ"/>
@@ -1078,7 +1035,6 @@
                     <connections>
                         <outlet property="titleAlarmBtn" destination="N58-4J-qWv" id="Fhb-VY-HWk"/>
                         <outlet property="titleChainImg" destination="rUb-xK-flr" id="0Hr-IV-GLO"/>
-                        <outlet property="titleChainName" destination="TB1-BC-2Oc" id="j2D-ey-0QK"/>
                         <outlet property="titleWalletName" destination="imU-di-2sz" id="blD-aa-sI3"/>
                     </connections>
                 </viewController>

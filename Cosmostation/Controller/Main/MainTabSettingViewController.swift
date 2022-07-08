@@ -11,11 +11,9 @@ import UserNotifications
 
 class MainTabSettingViewController: BaseViewController {
     
-    @IBOutlet weak var chainBg: UIImageView!
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
     @IBOutlet weak var titleAlarmBtn: UIButton!
-    @IBOutlet weak var titleChainName: UILabel!
     
     var mainTabVC: MainTabViewController!
 
@@ -45,8 +43,6 @@ class MainTabSettingViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.titleChainImg.image = chainConfig?.chainImg
-        self.titleChainName.text = chainConfig?.chainTitle
-        self.titleChainName.textColor = chainConfig?.chainColor
         self.titleWalletName.text = account?.getDpName()
         self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
         
