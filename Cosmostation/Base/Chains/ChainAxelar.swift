@@ -27,13 +27,13 @@ class ChainAxelar: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenAxelar")
     var stakeDenom = "uaxl"
     var stakeSymbol = "AXL"
-    var stakeSendImg = UIImage(named: "btnSendAlthea")!
-    var stakeSendBg = UIColor.white
+    var stakeSendImg = UIImage(named: "sendImg")!
+    var stakeSendBg = UIColor(named: "axelar")!
     
     var addressPrefix = "axelar"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.05axelar"
+    let gasRate0 = "0.05uaxl"
     
     var pushSupport = false
     var wcSupoort = false
