@@ -212,6 +212,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                         self.waitAlert?.dismiss(animated: true, completion: {
                             self.mFeeGasAmount = NSDecimalNumber.init(value: response.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
                             self.mSimulPassed = true
+                            self.onShowToast(NSLocalizedString("gas_checked", comment: ""))
                             self.onUpdateView()
                         })
                     }

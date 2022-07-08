@@ -342,6 +342,7 @@
 "import_account_msg" = "Would you like to add %@ wallet(s)?";
 "recent_history" = "Recently Histories";
 "select_fee_denom" = "Select coin for Tx fee pay.";
+"gas_checked" = "Gas amount checked successfully";
 
 "creat_cdp_step_0" = "Deposit collateral to borrow USDX";
 "creat_cdp_step_1" = "Insert memo (optional)";
