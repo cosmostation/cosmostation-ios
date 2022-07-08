@@ -46,7 +46,7 @@ class ValidatorListViewController: BaseViewController {
         
         if #available(iOS 13.0, *) {
             validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")], for: .selected)
-            validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")], for: .normal)
+            validatorSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font04")], for: .normal)
             validatorSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
             validatorSegment.tintColor = chainConfig?.chainColor

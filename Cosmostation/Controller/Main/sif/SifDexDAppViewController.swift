@@ -30,7 +30,7 @@ class SifDexDAppViewController: BaseViewController {
         
         if #available(iOS 13.0, *) {
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")!], for: .selected)
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font03")!], for: .normal)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font04")!], for: .normal)
             dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {
             dAppsSegment.tintColor = chainConfig?.chainColor
