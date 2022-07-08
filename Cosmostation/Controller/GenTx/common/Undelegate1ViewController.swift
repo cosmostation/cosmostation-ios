@@ -16,6 +16,11 @@ class Undelegate1ViewController: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var btn01: UIButton!
+    @IBOutlet weak var btn1: UIButton!
+    @IBOutlet weak var btn10: UIButton!
+    @IBOutlet weak var btn100: UIButton!
+    @IBOutlet weak var btnHalf: UIButton!
+    @IBOutlet weak var btnMax: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
     var userDelegated = NSDecimalNumber.zero
@@ -42,11 +47,23 @@ class Undelegate1ViewController: BaseViewController, UITextFieldDelegate {
         
         cancelBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
+        btn01.borderColor = UIColor.init(named: "_font05")
+        btn1.borderColor = UIColor.init(named: "_font05")
+        btn10.borderColor = UIColor.init(named: "_font05")
+        btn100.borderColor = UIColor.init(named: "_font05")
+        btnHalf.borderColor = UIColor.init(named: "_font05")
+        btnMax.borderColor = UIColor.init(named: "_font05")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         cancelBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
+        btn01.borderColor = UIColor.init(named: "_font05")
+        btn1.borderColor = UIColor.init(named: "_font05")
+        btn10.borderColor = UIColor.init(named: "_font05")
+        btn100.borderColor = UIColor.init(named: "_font05")
+        btnHalf.borderColor = UIColor.init(named: "_font05")
+        btnMax.borderColor = UIColor.init(named: "_font05")
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

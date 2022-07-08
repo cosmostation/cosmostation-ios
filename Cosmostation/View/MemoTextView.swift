@@ -15,7 +15,7 @@ class MemoTextView: UITextView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.init(named: "_font05")!.cgColor
+        self.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
         self.backgroundColor = UIColor.init(named: "_font02")
         self.tintColor = UIColor.init(named: "_font05")
     }

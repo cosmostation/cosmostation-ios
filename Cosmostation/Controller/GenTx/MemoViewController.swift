@@ -12,6 +12,8 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
     
     @IBOutlet weak var memoInputTextView: MemoTextView!
     @IBOutlet weak var memoCntLabel: UILabel!
+    @IBOutlet weak var scanBtn: UIButton!
+    @IBOutlet weak var pasteBtn: UIButton!
     @IBOutlet weak var beforeBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var memoControlLayer: UIStackView!
@@ -46,11 +48,17 @@ class MemoViewController: BaseViewController, UITextViewDelegate, QrScannerDeleg
             self.emptyMemoMsg.isHidden = true
         }
         
+        memoInputTextView.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
+        scanBtn.borderColor = UIColor.init(named: "_font05")
+        pasteBtn.borderColor = UIColor.init(named: "_font05")
         beforeBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        memoInputTextView.layer.borderColor = UIColor.init(named: "_font04")!.cgColor
+        scanBtn.borderColor = UIColor.init(named: "_font05")
+        pasteBtn.borderColor = UIColor.init(named: "_font05")
         beforeBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
     }

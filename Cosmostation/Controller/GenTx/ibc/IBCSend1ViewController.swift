@@ -33,11 +33,17 @@ class IBCSend1ViewController: BaseViewController, QrScannerDelegate, SBCardPopup
         
         btnBack.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
+        btnWallet.borderColor = UIColor.init(named: "_font05")
+        btnQrScan.borderColor = UIColor.init(named: "_font05")
+        btnPaste.borderColor = UIColor.init(named: "_font05")
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnBack.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
+        btnWallet.borderColor = UIColor.init(named: "_font05")
+        btnQrScan.borderColor = UIColor.init(named: "_font05")
+        btnPaste.borderColor = UIColor.init(named: "_font05")
     }
     
     override func enableUserInteraction() {

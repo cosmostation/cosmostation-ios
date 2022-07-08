@@ -14,8 +14,13 @@
             <connections>
                 <outlet property="availableAmountLabel" destination="2ND-at-e1Z" id="oVZ-WA-Pji"/>
                 <outlet property="availableDenomLabel" destination="7hN-KJ-tJX" id="5R4-ZH-21N"/>
+                <outlet property="btn1" destination="N7d-f7-VGD" id="LpC-hM-NXE"/>
+                <outlet property="btn10" destination="Q5r-IM-sIF" id="5Nf-mJ-ZKT"/>
+                <outlet property="btn100" destination="uvO-ai-C1c" id="aKk-jG-WLt"/>
                 <outlet property="btnAdd01" destination="c89-at-qIn" id="14Z-oH-Z6a"/>
                 <outlet property="btnCancel" destination="JaA-rK-6gt" id="TlZ-2f-Pyf"/>
+                <outlet property="btnHalf" destination="KsL-A3-wt7" id="iQS-ex-Lzw"/>
+                <outlet property="btnMax" destination="VA1-b9-2uZ" id="ZDE-7P-VIE"/>
                 <outlet property="btnNext" destination="1Gs-Ky-jI4" id="mY8-ag-xVR"/>
                 <outlet property="redelegateInputTextField" destination="na0-Ny-hkV" id="f4d-SN-IK8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

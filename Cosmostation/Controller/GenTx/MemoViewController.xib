@@ -19,6 +19,8 @@
                 <outlet property="memoControlLayer" destination="HYQ-dD-7gi" id="rqr-4Q-g7m"/>
                 <outlet property="memoInputTextView" destination="Dbf-JG-lTA" id="9M1-V3-Kb7"/>
                 <outlet property="nextBtn" destination="crk-n3-hTX" id="qgS-vR-hVA"/>
+                <outlet property="pasteBtn" destination="hns-fz-o44" id="eJM-vm-B3R"/>
+                <outlet property="scanBtn" destination="E1m-Dt-Xhf" id="00O-wA-zdc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

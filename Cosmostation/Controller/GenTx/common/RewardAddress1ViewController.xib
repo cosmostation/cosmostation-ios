@@ -14,6 +14,8 @@
             <connections>
                 <outlet property="btnCancel" destination="qDP-zn-U0J" id="cXA-TL-Uts"/>
                 <outlet property="btnNext" destination="Rea-SY-0na" id="dW8-gE-54W"/>
+                <outlet property="btnPaste" destination="6yX-JB-eH3" id="AQU-Uk-EsB"/>
+                <outlet property="btnScan" destination="7Zd-y9-ePP" id="dw8-QT-pNQ"/>
                 <outlet property="currentRewardAddressLabel" destination="AG8-iM-GgH" id="qBG-7q-VLg"/>
                 <outlet property="newRewardAddressInput" destination="pYe-6X-7MT" id="MPK-2R-q4r"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

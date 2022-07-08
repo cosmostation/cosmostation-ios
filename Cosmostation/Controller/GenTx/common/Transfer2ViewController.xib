@@ -14,6 +14,11 @@
             <connections>
                 <outlet property="backBtn" destination="ImZ-MD-xat" id="TLX-9u-cug"/>
                 <outlet property="btn01" destination="Wcv-Rb-Nk9" id="f32-B1-9PN"/>
+                <outlet property="btn1" destination="hva-ve-Be8" id="0wP-n2-U22"/>
+                <outlet property="btn10" destination="7RZ-Ua-54D" id="TRI-0w-lqG"/>
+                <outlet property="btn100" destination="2ed-1z-CD1" id="xDH-DW-Igf"/>
+                <outlet property="btnHalf" destination="vOt-LX-voj" id="dvT-Tg-wNC"/>
+                <outlet property="btnMax" destination="byx-om-LtD" id="qEF-RO-kgR"/>
                 <outlet property="mAvailableAmountLabel" destination="Ufv-mZ-beQ" id="eGH-AN-04E"/>
                 <outlet property="mAvailableDenomLabel" destination="rzz-ow-nxi" id="AY5-Q1-rvg"/>
                 <outlet property="mTargetAmountTextField" destination="jN0-d1-CsF" id="KRc-3o-Qyb"/>
