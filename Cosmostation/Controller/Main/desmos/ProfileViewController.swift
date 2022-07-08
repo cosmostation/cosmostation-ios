@@ -17,6 +17,7 @@ class ProfileViewController: BaseViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var profileInfoView: UIView!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileDTagLabel: UILabel!
+    @IBOutlet weak var btnStartEdit: UIButton!
     
     var profileAccount: Desmos_Profiles_V1beta1_Profile!
 
@@ -50,6 +51,12 @@ class ProfileViewController: BaseViewController, UITableViewDelegate, UITableVie
         }
         self.profileDTagLabel.text = profileAccount.dtag
         self.profileHeaderView.bringSubviewToFront(profileInfoView)
+        
+        btnStartEdit.borderColor = UIColor.init(named: "_font05")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        btnStartEdit.borderColor = UIColor.init(named: "_font05")
     }
     
     override func viewWillAppear(_ animated: Bool) {
