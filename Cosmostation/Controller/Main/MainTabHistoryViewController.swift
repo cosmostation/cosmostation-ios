@@ -13,11 +13,9 @@ import UserNotifications
 
 class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var chainBg: UIImageView!
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
     @IBOutlet weak var titleAlarmBtn: UIButton!
-    @IBOutlet weak var titleChainName: UILabel!
     
     @IBOutlet weak var totalCard: CardView!
     @IBOutlet weak var totalKeyState: UIImageView!
@@ -107,8 +105,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.titleChainImg.image = chainConfig?.chainImg
-        self.titleChainName.text = chainConfig?.chainTitle
-        self.titleChainName.textColor = chainConfig?.chainColor
         self.titleWalletName.text = account?.getDpName()
         self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
         

@@ -27,7 +27,7 @@ class ChainInjective: ChainConfig {
     var stakeDenomImg = UIImage(named: "tokenInjective")
     var stakeDenom = "inj"
     var stakeSymbol = "INJ"
-    var stakeSendImg = UIImage(named: "btnSendAlthea")!
+    var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "injective")!
     
     var addressPrefix = "inj"

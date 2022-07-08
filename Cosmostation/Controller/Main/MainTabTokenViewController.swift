@@ -31,13 +31,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
     @IBOutlet weak var titleAlarmBtn: UIButton!
-    @IBOutlet weak var titleChainName: UILabel!
     
     @IBOutlet weak var totalCard: CardView!
     @IBOutlet weak var totalKeyState: UIImageView!
     @IBOutlet weak var totalDpAddress: UILabel!
     @IBOutlet weak var totalValue: UILabel!
-    @IBOutlet weak var totalBtcValue: UILabel!
     
     @IBOutlet weak var tokenTableView: UITableView!
     var refresher: UIRefreshControl!
@@ -117,8 +115,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.titleChainImg.image = chainConfig?.chainImg
-        self.titleChainName.text = chainConfig?.chainTitle
-        self.titleChainName.textColor = chainConfig?.chainColor
         self.titleWalletName.text = account?.getDpName()
         self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
         
@@ -521,7 +517,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
             
         } else if (chainType == .INJECTIVE_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenDefault")
+            cell?.tokenImg.image = UIImage(named: "tokenInjectivePool")
             cell?.tokenSymbol.text = coin.denom.uppercased()
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Pool Asset"

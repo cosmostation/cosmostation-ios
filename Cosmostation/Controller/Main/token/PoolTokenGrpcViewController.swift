@@ -69,7 +69,7 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
             totalAmount = BaseData.instance.getAvailableAmount_gRPC(poolDenom)
             
         } else if (chainType == ChainType.INJECTIVE_MAIN) {
-            naviTokenImg.image = UIImage(named: "tokenDefault")
+            naviTokenImg.image = UIImage(named: "tokenInjectivePool")
             naviTokenSymbol.text = poolDenom.uppercased()
             
             poolDivideDecimal = 18
