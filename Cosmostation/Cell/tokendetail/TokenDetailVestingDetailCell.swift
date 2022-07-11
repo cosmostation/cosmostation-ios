@@ -80,34 +80,33 @@ class TokenDetailVestingDetailCell: TokenDetailCell {
         let baseData = BaseData.instance
         let vps = baseData.onParseRemainVestingsByDenom_gRPC(denom)
         vestingCntLabel.text = String(vps.count)
-//        vestingTotalAmount.attributedText = WDP.dpAmount(baseData.onParseRemainVestingsAmountSumByDenom_gRPC(denom).stringValue, vestingTotalAmount.font!, 6, 6)
         
-        vestingTime0.text = WUtils.longTimetoString3(vps[0].length)
-        vestingGap0.text = WUtils.getUnbondingTimeleft(vps[0].length)
+        vestingTime0.text = WDP.dpTime(vps[0].length)
+        vestingGap0.text = WDP.dpTimeGap(vps[0].length)
         vestingAmount0.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[0], denom).stringValue, vestingAmount0.font!, 6, 6)
         
         if (vps.count > 1) {
             vestingLayer1.isHidden = false
-            vestingTime1.text = WUtils.longTimetoString3(vps[1].length)
-            vestingGap1.text = WUtils.getUnbondingTimeleft(vps[1].length)
+            vestingTime1.text = WDP.dpTime(vps[1].length)
+            vestingGap1.text = WDP.dpTimeGap(vps[1].length)
             vestingAmount1.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[1], denom).stringValue, vestingAmount0.font!, 6, 6)
         }
         if (vps.count > 2) {
             vestingLayer2.isHidden = false
-            vestingTime2.text = WUtils.longTimetoString3(vps[2].length)
-            vestingGap2.text = WUtils.getUnbondingTimeleft(vps[2].length)
+            vestingTime2.text = WDP.dpTime(vps[2].length)
+            vestingGap2.text = WDP.dpTimeGap(vps[2].length)
             vestingAmount2.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[2], denom).stringValue, vestingAmount0.font!, 6, 6)
         }
         if (vps.count > 3) {
             vestingLayer3.isHidden = false
-            vestingTime3.text = WUtils.longTimetoString3(vps[3].length)
-            vestingGap3.text = WUtils.getUnbondingTimeleft(vps[3].length)
+            vestingTime3.text = WDP.dpTime(vps[3].length)
+            vestingGap3.text = WDP.dpTimeGap(vps[3].length)
             vestingAmount3.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[3], denom).stringValue, vestingAmount0.font!, 6, 6)
         }
         if (vps.count > 4) {
             vestingLayer4.isHidden = false
-            vestingTime4.text = WUtils.longTimetoString3(vps[4].length)
-            vestingGap4.text = WUtils.getUnbondingTimeleft(vps[4].length)
+            vestingTime4.text = WDP.dpTime(vps[4].length)
+            vestingGap4.text = WDP.dpTimeGap(vps[4].length)
             vestingAmount4.attributedText = WDP.dpAmount(WUtils.getAmountVp(vps[4], denom).stringValue, vestingAmount0.font!, 6, 6)
         }
     }

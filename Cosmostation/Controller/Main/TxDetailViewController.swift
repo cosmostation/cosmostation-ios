@@ -75,7 +75,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
 
         } else {
             //TODO TEST HASH for KAVA 
-//            mTxHash = "94C476304818D6B1C47DF0FE9D0ABF2462191912DAA11C847483CC58D4A1452D"
+//            mTxHash = "83D7BCB9D3F686ECF164C00388DFC052FD2D88F499532C58131C35630F79DF2F"
 //            self.loadingMsg.isHidden = true
 //            self.loadingImg.onStartAnimation()
 //            self.onFetchTx(mTxHash!)
@@ -131,10 +131,10 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                     return onBindTransfer(tableView, indexPath.row)
                 }
             }
-            else if (msg.type == TASK_TYPE_OK_DEPOSIT || msg.type == TASK_TYPE_OK_WITHDRAW) {
+            else if (msg.type == "okexchain/staking/MsgDeposit" || msg.type == "okexchain/staking/MsgWithdraw") {
                 return onBindOkStake(tableView, indexPath.row)
                 
-            } else if (msg.type == TASK_TYPE_OK_DIRECT_VOTE) {
+            } else if (msg.type == "okexchain/staking/MsgAddShares") {
                 return onBindOkDirectVote(tableView, indexPath.row)
                 
             } else {
@@ -161,8 +161,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.heightLabel.text = mTxInfo!.height
             cell?.msgCntLabel.text = String(mTxInfo!.getMsgs().count)
             cell?.gasAmountLabel.text = "-"
-            cell?.timeLabel.text = WUtils.nodeTimetoString(input: mBnbTime)
-            cell?.timeGapLabel.text = WUtils.timeGap(input: mBnbTime)
+            cell?.timeLabel.text = WDP.dpTime(mBnbTime)
+            cell?.timeGapLabel.text = WDP.dpTimeGap(mBnbTime)
             cell?.hashLabel.text = mTxInfo!.hash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
             cell?.feeAmountLabel.attributedText = WDP.dpAmount(FEE_BINANCE_BASE, cell!.feeAmountLabel.font!, 0, 8)
@@ -186,8 +186,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.heightLabel.text = mTxInfo!.height
             cell?.msgCntLabel.text = String(mTxInfo!.getMsgs().count)
             cell?.gasAmountLabel.text = mTxInfo!.gas_used! + " / " + mTxInfo!.gas_wanted!
-            cell?.timeLabel.text = WUtils.txTimetoString(input: mTxInfo!.timestamp!)
-            cell?.timeGapLabel.text = WUtils.txTimeGap(input: mTxInfo!.timestamp!)
+            cell?.timeLabel.text = WDP.dpTime(mTxInfo?.timestamp)
+            cell?.timeGapLabel.text = WDP.dpTimeGap(mTxInfo?.timestamp)
             cell?.hashLabel.text = mTxInfo!.txhash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
             cell?.feeAmountLabel.attributedText = WDP.dpAmount(mTxInfo?.simpleFee().stringValue, cell!.feeAmountLabel.font!, 0, 8)
@@ -216,8 +216,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.heightLabel.text = mTxInfo!.height
             cell?.msgCntLabel.text = String(mTxInfo!.getMsgs().count)
             cell?.gasAmountLabel.text = mTxInfo!.gas_used! + " / " + mTxInfo!.gas_wanted!
-            cell?.timeLabel.text = WUtils.txTimetoString(input: mTxInfo!.timestamp!)
-            cell?.timeGapLabel.text = WUtils.txTimeGap(input: mTxInfo!.timestamp!)
+            cell?.timeLabel.text = WDP.dpTime(mTxInfo?.timestamp)
+            cell?.timeGapLabel.text = WDP.dpTimeGap(mTxInfo?.timestamp)
             cell?.hashLabel.text = mTxInfo!.txhash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
             cell?.feeAmountLabel.attributedText = WDP.dpAmount(mTxInfo?.simpleFee().stringValue, cell!.feeAmountLabel.font!, decimal, decimal)
@@ -410,6 +410,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                     return
                 }
                 self.mTxInfo = TxInfo.init(info)
+                self.onUpdateView()
                 
             case .failure(let error):
                 print("onFetchTx failure", error)

@@ -27,9 +27,9 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.balances = account!.account_balances
         
         self.myDomainResourceTableView.delegate = self
@@ -170,7 +170,9 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
                 self.myDomainEmptyView.isHidden = false
                 self.myDomainAddressCntLael.text = "0"
             }
-            myDomainExpireTimeLabel.text = WUtils.longTimetoString(mMyDomainInfo_gRPC!.validUntil * 1000)
+            let expireTime = mMyDomainInfo_gRPC!.validUntil * 1000
+            myDomainExpireTimeLabel.text = WDP.dpTime(expireTime)
+            
             myDomainType.text = mMyDomainInfo_gRPC?.type.uppercased()
             if (mMyDomainInfo_gRPC?.type == "open") {
                 myDomainType.textColor = UIColor.init(named: "starname")

@@ -64,8 +64,8 @@ class TxCommonCell: TxCell {
         heightLabel.text = String(tx.txResponse.height)
         msgCntLabel.text = String(tx.tx.body.messages.count)
         gasAmountLabel.text = String(tx.txResponse.gasUsed) + " / " + String(tx.txResponse.gasWanted)
-        timeLabel.text = WUtils.txTimetoString(input: tx.txResponse.timestamp)
-        timeGapLabel.text = WUtils.txTimeGap(input: tx.txResponse.timestamp)
+        timeLabel.text = WDP.dpTime(tx.txResponse.timestamp)
+        timeGapLabel.text = WDP.dpTimeGap(tx.txResponse.timestamp)
         hashLabel.text = tx.txResponse.txhash
         memoLabel.text = tx.tx.body.memo
         WDP.dpCoin(chainConfig, WUtils.onParseFeeGrpc(chainConfig, tx), feeDenomLabel, feeAmountLabel)

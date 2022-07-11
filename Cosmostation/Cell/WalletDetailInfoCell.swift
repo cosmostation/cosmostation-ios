@@ -37,7 +37,7 @@ class WalletDetailInfoCell: UITableViewCell {
         addressLabel.text = account.account_address
         addressLabel.adjustsFontSizeToFitWidth = true
         chainIdLabel.text = chainId
-        importedDateLabel.text = WUtils.longTimetoString(account.account_import_time)
+        importedDateLabel.text = WDP.dpTime(account.account_import_time)
         
         if (account.account_has_private) {
             if (account.account_from_mnemonic) {

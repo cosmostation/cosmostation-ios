@@ -51,11 +51,9 @@ class TxBeginUnlockTokenCell: TxCell {
             }
         }
         
-        if duration != nil, let timeStamp = WUtils.newApiTimeToInt64(response.txResponse.timestamp)?.millisecondsSince1970 {
+        if duration != nil, let timeStamp = WUtils.timeStringToDate(response.txResponse.timestamp)?.millisecondsSince1970 {
             let completeTime = timeStamp + duration!
-            let localFormatter = DateFormatter()
-            localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-            txCompleteLabel.text = localFormatter.string(from: Date.init(milliseconds: Int(completeTime)))
+            txCompleteLabel.text = WDP.dpTime(completeTime)
         } else {
             txCompleteLabel.text = "--"
         }

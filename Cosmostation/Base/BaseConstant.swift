@@ -204,7 +204,7 @@ let PASSWORD_RESUKT_OK_FOR_DELETE           = 3
 
 let BASE_GAS_AMOUNT                         = "500000"
 let FEE_BINANCE_BASE                        = "0.000075"
-let FEE_OKC_BASE                            = "0.00002"
+let FEE_OKC_BASE                            = "0.00005"
 
 
 // Constant for BEP3-Swap

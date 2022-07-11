@@ -23,8 +23,8 @@ class HistoryCell: UITableViewCell {
     }
     
     func bindHistoryBnbView(_ history: BnbHistory, _ address: String) {
-        txTimeLabel.text = WUtils.nodeTimetoString(input: history.timeStamp)
-        txTimeGapLabel.text = WUtils.timeGap(input: history.timeStamp)
+        txTimeLabel.text = WDP.dpTime(history.timeStamp)
+        txTimeGapLabel.text = WDP.dpTimeGap(history.timeStamp)
         txBlockLabel.text = String(history.blockHeight) + " block"
         txTypeLabel.text = history.getTitle(address)
         txResultLabel.isHidden = true
@@ -32,8 +32,8 @@ class HistoryCell: UITableViewCell {
     
     func bindHistoryOkView(_ history: OKHistoryHit, _ address: String) {
         txTypeLabel.text = history.transactionDataType
-        txTimeLabel.text = WUtils.longTimetoString(history.blocktime!)
-        txTimeGapLabel.text = WUtils.timeGap2(input: history.blocktime!)
+        txTimeLabel.text = WDP.dpTime(history.blocktime)
+        txTimeGapLabel.text = WDP.dpTimeGap(history.blocktime)
         txBlockLabel.text = history.hash
     }
     

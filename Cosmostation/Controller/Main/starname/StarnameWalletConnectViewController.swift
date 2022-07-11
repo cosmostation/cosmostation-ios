@@ -24,8 +24,9 @@ class StarnameWalletConnectViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
     }
     

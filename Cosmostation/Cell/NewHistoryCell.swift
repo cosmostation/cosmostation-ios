@@ -20,6 +20,8 @@ class NewHistoryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        txTimeLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        txTimeGapLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_11_caption2)
         txAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
@@ -31,8 +33,8 @@ class NewHistoryCell: UITableViewCell {
     func bindHistoryView(_ chainConfig: ChainConfig, _ history: ApiHistoryNewCustom, _ address: String) {
         txTypeLabel.text = history.getMsgType(address)
         txResultLabel.isHidden = history.isSuccess()
-        txTimeLabel.text = WUtils.newApiTimeToString(history.header?.timestamp)
-        txTimeGapLabel.text = WUtils.newApiTimeGap(history.header?.timestamp)
+        txTimeLabel.text = WDP.dpTime(history.header?.timestamp)
+        txTimeGapLabel.text = WDP.dpTimeGap(history.header?.timestamp)
         
         if (NSLocalizedString("tx_vote", comment: "") == history.getMsgType(address)) {
             txDenomLabel.textColor = .white

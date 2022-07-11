@@ -53,8 +53,8 @@ class EarnUnbondingCell: UITableViewCell {
         
         //DP UI
         lockIdLabel.text = "# " + String(lock.id)
-        unBondingCompleteTimeLabel.text = WUtils.longTimetoString(lock.endTime.date.millisecondsSince1970)
-        unBondingCompleteGapLabel.text = WUtils.getUnbondingTimeleft(lock.endTime.date.millisecondsSince1970)
+        unBondingCompleteTimeLabel.text = WDP.dpTime(lock.endTime.date.millisecondsSince1970)
+        unBondingCompleteGapLabel.text = WDP.dpTimeGap(lock.endTime.date.millisecondsSince1970)
         
         amountDenomLabel.text = "GAMM-" + String(pool.id)
         amountLabel.attributedText = WDP.dpAmount(lpCoin.amount, amountLabel.font, 18, 18)

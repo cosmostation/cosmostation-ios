@@ -23,6 +23,7 @@ class PoolViewController: BaseViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.loadingImg.onStartAnimation()
         
         self.poolListTableView.delegate = self

@@ -74,32 +74,37 @@ class TokenDetailUnbondingDetailCell: UITableViewCell {
         let unbondingEntries = BaseData.instance.getUnbondingEntrie_gRPC()
         unBondingCnt.text = String(unbondingEntries.count)
         
-        unBondingTime0.text = WUtils.longTimetoString3(unbondingEntries[0].completionTime.seconds * 1000)
-        unBondingMoniker0.text = WUtils.getUnbondingTimeleft(unbondingEntries[0].completionTime.seconds * 1000)
+        let unbondingTime0 = unbondingEntries[0].completionTime.seconds * 1000
+        unBondingTime0.text = WDP.dpTime(unbondingTime0)
+        unBondingMoniker0.text = WDP.dpTimeGap(unbondingTime0)
         unBondingAmount0.attributedText = WDP.dpAmount(unbondingEntries[0].balance, unBondingAmount0.font!, stakingDivideDecimal, stakingDisplayDecimal)
         
         if (unbondingEntries.count > 1) {
             unBondingLayer1.isHidden = false
-            unBondingTime1.text = WUtils.longTimetoString3(unbondingEntries[1].completionTime.seconds * 1000)
-            unBondingMoniker1.text = WUtils.getUnbondingTimeleft(unbondingEntries[1].completionTime.seconds * 1000)
+            let unbondingTime1 = unbondingEntries[1].completionTime.seconds * 1000
+            unBondingTime1.text = WDP.dpTime(unbondingTime1)
+            unBondingMoniker1.text = WDP.dpTimeGap(unbondingTime1)
             unBondingAmount1.attributedText = WDP.dpAmount(unbondingEntries[1].balance, unBondingAmount1.font!, stakingDivideDecimal, stakingDisplayDecimal)
         }
         if (unbondingEntries.count > 2) {
             unBondingLayer2.isHidden = false
-            unBondingTime2.text = WUtils.longTimetoString3(unbondingEntries[2].completionTime.seconds * 1000)
-            unBondingMoniker2.text = WUtils.getUnbondingTimeleft(unbondingEntries[2].completionTime.seconds * 1000)
+            let unbondingTime2 = unbondingEntries[2].completionTime.seconds * 1000
+            unBondingTime2.text = WDP.dpTime(unbondingTime2)
+            unBondingMoniker2.text = WDP.dpTimeGap(unbondingTime2)
             unBondingAmount2.attributedText = WDP.dpAmount(unbondingEntries[2].balance, unBondingAmount2.font!, stakingDivideDecimal, stakingDisplayDecimal)
         }
         if (unbondingEntries.count > 3) {
             unBondingLayer3.isHidden = false
-            unBondingTime3.text = WUtils.longTimetoString3(unbondingEntries[3].completionTime.seconds * 1000)
-            unBondingMoniker3.text = WUtils.getUnbondingTimeleft(unbondingEntries[3].completionTime.seconds * 1000)
+            let unbondingTime3 = unbondingEntries[3].completionTime.seconds * 1000
+            unBondingTime3.text = WDP.dpTime(unbondingTime3)
+            unBondingMoniker3.text = WDP.dpTimeGap(unbondingTime3)
             unBondingAmount3.attributedText = WDP.dpAmount(unbondingEntries[3].balance, unBondingAmount3.font!, stakingDivideDecimal, stakingDisplayDecimal)
         }
         if (unbondingEntries.count > 4) {
             unBondingLayer4.isHidden = false
-            unBondingTime4.text = WUtils.longTimetoString3(unbondingEntries[4].completionTime.seconds * 1000)
-            unBondingMoniker4.text = WUtils.getUnbondingTimeleft(unbondingEntries[4].completionTime.seconds * 1000)
+            let unbondingTime4 = unbondingEntries[4].completionTime.seconds * 1000
+            unBondingTime4.text = WDP.dpTime(unbondingTime4)
+            unBondingMoniker4.text = WDP.dpTimeGap(unbondingTime4)
             unBondingAmount4.attributedText = WDP.dpAmount(unbondingEntries[4].balance, unBondingAmount4.font!, stakingDivideDecimal, stakingDisplayDecimal)
         }
     }
