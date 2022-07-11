@@ -70,7 +70,9 @@ class MyDomainViewController: BaseViewController, UITableViewDelegate, UITableVi
             } else {
                 cell?.domainTypeLabel.textColor = UIColor.init(named: "_font05")
             }
-            cell?.domainExpireTime.text = WUtils.longTimetoString(starnameAccount.validUntil * 1000)
+            let expireTime = starnameAccount.validUntil * 1000
+            cell?.domainExpireTime.text = WDP.dpTime(expireTime)
+            
             let resourceCnt = myDomainResolves_gRPC.filter({ $0.domain == starnameAccount.name}).first?.resources.count ?? 0
             cell?.domainResourcesLabel.text = String(resourceCnt)
             return cell!

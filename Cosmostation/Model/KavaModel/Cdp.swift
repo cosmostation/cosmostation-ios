@@ -96,7 +96,7 @@ public struct Cdp: Codable {
     public func getHiddenFee(_ cParam:CollateralParam) -> NSDecimalNumber {
         let rawDebtAmount = getRawDebtAmount()
         let now = Date().millisecondsSince1970
-        let start = WUtils.nodeTimeToInt64(input: fees_updated!).millisecondsSince1970
+        let start = WUtils.timeStringToDate(fees_updated!)?.millisecondsSince1970 ?? 0
         let gap = (now - start)/1000 + 30
         
         let doubel1 = Double(cParam.stability_fee!)

@@ -168,7 +168,8 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
                 self.myAccountEmptyView.isHidden = false
                 self.myAccountAddressCntLabel.text = "0"
             }
-            myAccountExpireTimeLabel.text = WUtils.longTimetoString(mMyAccountResolve_gRPC!.account.validUntil * 1000)
+            let expireTime = mMyAccountResolve_gRPC!.account.validUntil * 1000
+            myAccountExpireTimeLabel.text = WDP.dpTime(expireTime)
         }
     }
     

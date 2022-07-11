@@ -161,8 +161,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.heightLabel.text = mTxInfo!.height
             cell?.msgCntLabel.text = String(mTxInfo!.getMsgs().count)
             cell?.gasAmountLabel.text = "-"
-            cell?.timeLabel.text = WUtils.nodeTimetoString(input: mBnbTime)
-            cell?.timeGapLabel.text = WUtils.timeGap(input: mBnbTime)
+            cell?.timeLabel.text = WDP.dpTime(mBnbTime)
+            cell?.timeGapLabel.text = WDP.dpTimeGap(mBnbTime)
             cell?.hashLabel.text = mTxInfo!.hash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
             cell?.feeAmountLabel.attributedText = WDP.dpAmount(FEE_BINANCE_BASE, cell!.feeAmountLabel.font!, 0, 8)
@@ -186,8 +186,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.heightLabel.text = mTxInfo!.height
             cell?.msgCntLabel.text = String(mTxInfo!.getMsgs().count)
             cell?.gasAmountLabel.text = mTxInfo!.gas_used! + " / " + mTxInfo!.gas_wanted!
-            cell?.timeLabel.text = WUtils.txTimetoString(input: mTxInfo!.timestamp!)
-            cell?.timeGapLabel.text = WUtils.txTimeGap(input: mTxInfo!.timestamp!)
+            cell?.timeLabel.text = WDP.dpTime(mTxInfo?.timestamp)
+            cell?.timeGapLabel.text = WDP.dpTimeGap(mTxInfo?.timestamp)
             cell?.hashLabel.text = mTxInfo!.txhash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
             cell?.feeAmountLabel.attributedText = WDP.dpAmount(mTxInfo?.simpleFee().stringValue, cell!.feeAmountLabel.font!, 0, 8)
@@ -216,8 +216,8 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
             cell?.heightLabel.text = mTxInfo!.height
             cell?.msgCntLabel.text = String(mTxInfo!.getMsgs().count)
             cell?.gasAmountLabel.text = mTxInfo!.gas_used! + " / " + mTxInfo!.gas_wanted!
-            cell?.timeLabel.text = WUtils.txTimetoString(input: mTxInfo!.timestamp!)
-            cell?.timeGapLabel.text = WUtils.txTimeGap(input: mTxInfo!.timestamp!)
+            cell?.timeLabel.text = WDP.dpTime(mTxInfo?.timestamp)
+            cell?.timeGapLabel.text = WDP.dpTimeGap(mTxInfo?.timestamp)
             cell?.hashLabel.text = mTxInfo!.txhash
             cell?.memoLabel.text = mTxInfo!.tx?.value.memo
             cell?.feeAmountLabel.attributedText = WDP.dpAmount(mTxInfo?.simpleFee().stringValue, cell!.feeAmountLabel.font!, decimal, decimal)

@@ -124,130 +124,7 @@ public class WUtils {
         }
     }
     
-//    static func newApiTimeToInt64(_ input: String?) -> Date? {
-//        if (input == nil) { return nil }
-//        let nodeFormatter = DateFormatter()
-//        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-//        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-//        return nodeFormatter.date(from: input!)
-//    }
-//    
-//    static func newApiTimeToString(_ input: String?) -> String {
-//        if (input == nil) { return "" }
-//        let nodeFormatter = DateFormatter()
-//        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-//        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-//
-//        let localFormatter = DateFormatter()
-//        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-//
-//        guard let fullDate = nodeFormatter.date(from: input!) else {
-//            return ""
-//        }
-//        return localFormatter.string(from: fullDate)
-//
-//    }
-    
-//    static func newApiTimeGap(_ input: String?) -> String {
-//        if (input == nil || newApiTimeToInt64(input!) == nil) { return "-" }
-//        let secondsAgo = Int(Date().timeIntervalSince(newApiTimeToInt64(input!)!))
-//
-//        let minute = 60
-//        let hour = 60 * minute
-//        let day = 24 * hour
-//
-//        if secondsAgo < minute {
-//            return "(\(secondsAgo) seconds ago)"
-//        } else if secondsAgo < hour {
-//            return "(\(secondsAgo / minute) minutes ago)"
-//        } else if secondsAgo < day {
-//            return "(\(secondsAgo / hour) hours ago)"
-//        } else {
-//            return "(\(secondsAgo / day) days ago)"
-//        }
-//    }
-    
-    
-//    static func sifNodeTimeToString(_ input: String?) -> String {
-//        if (input == nil) { return ""}
-//        let nodeFormatter = DateFormatter()
-//        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-//        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-//        
-//        let localFormatter = DateFormatter()
-//        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-//
-//        guard let fullDate = nodeFormatter.date(from: input!) else { return "" }
-//        return localFormatter.string(from: fullDate)
-//    }
-    
-    static func nodeTimeToInt64(input: String) -> Date {
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        return nodeFormatter.date(from: input) ?? Date.init()
-    }
-    
-    static func nodeTimetoString(input: String?) -> String {
-        if (input == nil) { return ""}
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-        
-        if (input != nil) {
-            let fullDate = nodeFormatter.date(from: input!)
-            return localFormatter.string(from: fullDate!)
-        } else {
-            return ""
-        }
-    }
-    
-    static func txTimeToInt64(input: String) -> Date {
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        return nodeFormatter.date(from: input) ?? Date.init()
-    }
-    
-    static func txTimetoString(input: String?) -> String {
-        if (input == nil || input!.count == 0) {
-            return "??"
-        }
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-        if (input != nil) {
-            let fullDate = nodeFormatter.date(from: input!)
-            return localFormatter.string(from: fullDate!)
-        } else {
-            return ""
-        }
-    }
-    
-    
-    static func longTimetoString(_ input: Int64) -> String {
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-        
-        let fullDate = Date.init(milliseconds: Int(input))
-        return localFormatter.string(from: fullDate)
-    }
-    
-    static func longTimetoString3(_ input: Int64) -> String {
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format3", comment: "")
-        
-        let fullDate = Date.init(milliseconds: Int(input))
-        return localFormatter.string(from: fullDate)
-    }
-    
-    static func unbondingDateFromNow(_ date:UInt16) -> String {
+    static func unbondingDateFromNow(_ date: UInt16) -> String {
         let localFormatter = DateFormatter()
         localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
         
@@ -256,61 +133,6 @@ public class WUtils {
             value: Int(+date),
             to: Date())
         return localFormatter.string(from: afterDate!)
-    }
-    
-    static func getUnbondingTimeleft(_ input: Int64) -> String {
-        let secondsLeft = Int(Date().timeIntervalSince(Date.init(milliseconds: Int(input)))) * -1
-        
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-        if secondsLeft < minute {
-            return "Soon"
-        } else if secondsLeft < hour {
-            return "(\(secondsLeft / minute) minutes remaining)"
-        } else if secondsLeft < day {
-            return "(\(secondsLeft / hour) hours remaining)"
-        } else {
-            return "(\(secondsLeft / day) days remaining)"
-        }
-    }
-    
-    static func timeGap(input: String?) -> String {
-        if (input == nil) { return "-"}
-        let secondsAgo = Int(Date().timeIntervalSince(nodeTimeToInt64(input: input!)))
-        
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-        
-        if secondsAgo < minute {
-            return "(\(secondsAgo) seconds ago)"
-        } else if secondsAgo < hour {
-            return "(\(secondsAgo / minute) minutes ago)"
-        } else if secondsAgo < day {
-            return "(\(secondsAgo / hour) hours ago)"
-        } else {
-            return "(\(secondsAgo / day) days ago)"
-        }
-    }
-    
-    static func txTimeGap(input: String?) -> String {
-        if (input == nil || input!.count == 0) { return "??" }
-        let secondsAgo = Int(Date().timeIntervalSince(txTimeToInt64(input: input!)))
-        
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-        
-        if secondsAgo < minute {
-            return "(\(secondsAgo) seconds ago)"
-        } else if secondsAgo < hour {
-            return "(\(secondsAgo / minute) minutes ago)"
-        } else if secondsAgo < day {
-            return "(\(secondsAgo / hour) hours ago)"
-        } else {
-            return "(\(secondsAgo / day) days ago)"
-        }
     }
     
     static func decimalNumberToLocaleString(_ input: NSDecimalNumber, _ deciaml:Int16) -> String {
@@ -1922,22 +1744,6 @@ public class WUtils {
             return UIImage.init(named: "ImgGovRejected")
         }
         return UIImage.init(named: "ImgGovFailed")
-    }
-    
-    static func onParseProposalStartTime(_ proposal: Cosmos_Gov_V1beta1_Proposal) -> String {
-        if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.depositPeriod) {
-            return "Waiting Deposit"
-        } else {
-            return longTimetoString(proposal.votingStartTime.seconds * 1000)
-        }
-    }
-    
-    static func onParseProposalEndTime(_ proposal: Cosmos_Gov_V1beta1_Proposal) -> String {
-        if (proposal.status == Cosmos_Gov_V1beta1_ProposalStatus.depositPeriod) {
-            return "Waiting Deposit"
-        } else {
-            return longTimetoString(proposal.votingEndTime.seconds * 1000)
-        }
     }
     
     public static func isGRPC(_ chain: ChainType?) -> Bool {

@@ -59,7 +59,7 @@ public class MWords {
     }
     
     func getImportDate() -> String {
-        return WUtils.longTimetoString(importTime)
+        return WDP.dpTime(importTime)
     }
     
     func getMasterKey() -> PrivateKey {
