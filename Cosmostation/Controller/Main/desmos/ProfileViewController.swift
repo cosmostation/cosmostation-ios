@@ -25,6 +25,7 @@ class ProfileViewController: BaseViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.profileAccount = try! Desmos_Profiles_V1beta1_Profile.init(serializedData: BaseData.instance.mAccount_gRPC.value)
         
         self.profileImageView.layer.borderWidth = 1

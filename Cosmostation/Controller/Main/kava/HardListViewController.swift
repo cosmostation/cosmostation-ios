@@ -21,8 +21,6 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
     var mHardInterestRates: Array<Kava_Hard_V1beta1_MoneyMarketInterestRate> = Array<Kava_Hard_V1beta1_MoneyMarketInterestRate>()
     var mHardTotalDeposit: Array<Coin> = Array<Coin>()
     var mHardTotalBorrow: Array<Coin> = Array<Coin>()
-//    var mHardMyDeposit: Array<Kava_Hard_V1beta1_DepositResponse> = Array<Kava_Hard_V1beta1_DepositResponse>()
-//    var mHardMyBorrow: Array<Kava_Hard_V1beta1_BorrowResponse> = Array<Kava_Hard_V1beta1_BorrowResponse>()
     var mHardMyDeposit: Array<Coin> = Array<Coin>()
     var mHardMyBorrow: Array<Coin> = Array<Coin>()
     
@@ -31,6 +29,7 @@ class HardListViewController: BaseViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.hardTableView.delegate = self
         self.hardTableView.dataSource = self

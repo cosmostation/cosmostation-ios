@@ -27,9 +27,9 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.balances = account!.account_balances
         
         self.myAccountResourceTableView.delegate = self
