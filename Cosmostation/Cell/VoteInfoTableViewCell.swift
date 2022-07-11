@@ -13,7 +13,10 @@ class VoteInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        
+        proposalTitle.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        proposalTypeLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        voteStartTime.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        voteEndTime.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         requestAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
  

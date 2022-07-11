@@ -889,10 +889,10 @@ public struct CrescentInflationSchdule {
     
     init(_ dictionary: NSDictionary?) {
         self.amount = NSDecimalNumber.init(string: dictionary?["amount"] as? String)
-        if let endtime = WUtils.newApiTimeToInt64(dictionary?["end_time"] as? String)?.millisecondsSince1970 {
+        if let endtime = WUtils.timeStringToDate(dictionary?["end_time"] as? String ?? "")?.millisecondsSince1970 {
             self.end_time = endtime
         }
-        if let starttime = WUtils.newApiTimeToInt64(dictionary?["start_time"] as? String)?.millisecondsSince1970 {
+        if let starttime = WUtils.timeStringToDate(dictionary?["start_time"] as? String ?? "")?.millisecondsSince1970 {
             self.start_time = starttime
         }
     }
@@ -924,10 +924,10 @@ public struct CrescentBudget {
         init(_ dictionary: NSDictionary?) {
             self.name = dictionary?["name"] as? String ?? ""
             self.rate = NSDecimalNumber.init(string: dictionary?["rate"] as? String)
-            if let starttime = WUtils.newApiTimeToInt64(dictionary?["start_time"] as? String)?.millisecondsSince1970 {
+            if let starttime = WUtils.timeStringToDate(dictionary?["start_time"] as? String ?? "")?.millisecondsSince1970 {
                 self.start_time = starttime
             }
-            if let endtime = WUtils.newApiTimeToInt64(dictionary?["end_time"] as? String)?.millisecondsSince1970 {
+            if let endtime = WUtils.timeStringToDate(dictionary?["end_time"] as? String ?? "")?.millisecondsSince1970 {
                 self.end_time = endtime
             }
             self.source_address = dictionary?[source_address] as? String ?? ""

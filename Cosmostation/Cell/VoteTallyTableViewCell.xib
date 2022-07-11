@@ -8,11 +8,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="RobotoMono-VariableFont_wght.ttf">
-            <string>RobotoMono-Bold</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -32,9 +27,9 @@
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtC-Vc-U4a">
-                                <rect key="frame" x="439.5" y="12" width="10.5" height="17"/>
-                                <fontDescription key="fontDescription" name="RobotoMono-Bold" family="Roboto Mono" pointSize="17"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="43.11%" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtC-Vc-U4a">
+                                <rect key="frame" x="383.5" y="12" width="66.5" height="17"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -44,9 +39,9 @@
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mn7-3O-gde">
-                                <rect key="frame" x="439.5" y="40.5" width="10.5" height="17"/>
-                                <fontDescription key="fontDescription" name="RobotoMono-Bold" family="Roboto Mono" pointSize="17"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="11.22%" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mn7-3O-gde">
+                                <rect key="frame" x="383.5" y="40.5" width="66.5" height="17"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -381,7 +376,7 @@
                             <constraint firstItem="Rad-M2-mdd" firstAttribute="leading" secondItem="yPS-oS-6mh" secondAttribute="leading" id="BfU-Dk-zik"/>
                             <constraint firstItem="Mn7-3O-gde" firstAttribute="centerY" secondItem="Rad-M2-mdd" secondAttribute="centerY" id="DyX-Ie-3T8"/>
                             <constraint firstItem="1ec-Kn-URN" firstAttribute="top" secondItem="04i-Aq-EcK" secondAttribute="bottom" constant="16" id="GfK-gf-iF3"/>
-                            <constraint firstItem="yPS-oS-6mh" firstAttribute="top" secondItem="kyi-if-zcI" secondAttribute="top" constant="12" id="IGw-y5-MSZ"/>
+                            <constraint firstItem="yPS-oS-6mh" firstAttribute="top" secondItem="kyi-if-zcI" secondAttribute="top" constant="16" id="IGw-y5-MSZ"/>
                             <constraint firstItem="Zgi-hi-Z9P" firstAttribute="top" secondItem="1ec-Kn-URN" secondAttribute="bottom" constant="16" id="M3d-jI-mYg"/>
                             <constraint firstItem="Zgi-hi-Z9P" firstAttribute="leading" secondItem="1ec-Kn-URN" secondAttribute="leading" id="PrK-SC-lUK"/>
                             <constraint firstAttribute="bottom" secondItem="Zgi-hi-Z9P" secondAttribute="bottom" constant="20" id="QTF-Kb-cqS"/>

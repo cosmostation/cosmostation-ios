@@ -124,48 +124,48 @@ public class WUtils {
         }
     }
     
-    static func newApiTimeToInt64(_ input: String?) -> Date? {
-        if (input == nil) { return nil }
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        return nodeFormatter.date(from: input!)
-    }
+//    static func newApiTimeToInt64(_ input: String?) -> Date? {
+//        if (input == nil) { return nil }
+//        let nodeFormatter = DateFormatter()
+//        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+//        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+//        return nodeFormatter.date(from: input!)
+//    }
+//    
+//    static func newApiTimeToString(_ input: String?) -> String {
+//        if (input == nil) { return "" }
+//        let nodeFormatter = DateFormatter()
+//        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+//        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+//
+//        let localFormatter = DateFormatter()
+//        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
+//
+//        guard let fullDate = nodeFormatter.date(from: input!) else {
+//            return ""
+//        }
+//        return localFormatter.string(from: fullDate)
+//
+//    }
     
-    static func newApiTimeToString(_ input: String?) -> String {
-        if (input == nil) { return "" }
-        let nodeFormatter = DateFormatter()
-        nodeFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-        nodeFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
-        
-        let localFormatter = DateFormatter()
-        localFormatter.dateFormat = NSLocalizedString("date_format", comment: "")
-        
-        guard let fullDate = nodeFormatter.date(from: input!) else {
-            return ""
-        }
-        return localFormatter.string(from: fullDate)
-        
-    }
-    
-    static func newApiTimeGap(_ input: String?) -> String {
-        if (input == nil || newApiTimeToInt64(input!) == nil) { return "-" }
-        let secondsAgo = Int(Date().timeIntervalSince(newApiTimeToInt64(input!)!))
-        
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-        
-        if secondsAgo < minute {
-            return "(\(secondsAgo) seconds ago)"
-        } else if secondsAgo < hour {
-            return "(\(secondsAgo / minute) minutes ago)"
-        } else if secondsAgo < day {
-            return "(\(secondsAgo / hour) hours ago)"
-        } else {
-            return "(\(secondsAgo / day) days ago)"
-        }
-    }
+//    static func newApiTimeGap(_ input: String?) -> String {
+//        if (input == nil || newApiTimeToInt64(input!) == nil) { return "-" }
+//        let secondsAgo = Int(Date().timeIntervalSince(newApiTimeToInt64(input!)!))
+//
+//        let minute = 60
+//        let hour = 60 * minute
+//        let day = 24 * hour
+//
+//        if secondsAgo < minute {
+//            return "(\(secondsAgo) seconds ago)"
+//        } else if secondsAgo < hour {
+//            return "(\(secondsAgo / minute) minutes ago)"
+//        } else if secondsAgo < day {
+//            return "(\(secondsAgo / hour) hours ago)"
+//        } else {
+//            return "(\(secondsAgo / day) days ago)"
+//        }
+//    }
     
     
 //    static func sifNodeTimeToString(_ input: String?) -> String {
@@ -278,25 +278,6 @@ public class WUtils {
     static func timeGap(input: String?) -> String {
         if (input == nil) { return "-"}
         let secondsAgo = Int(Date().timeIntervalSince(nodeTimeToInt64(input: input!)))
-        
-        let minute = 60
-        let hour = 60 * minute
-        let day = 24 * hour
-        
-        if secondsAgo < minute {
-            return "(\(secondsAgo) seconds ago)"
-        } else if secondsAgo < hour {
-            return "(\(secondsAgo / minute) minutes ago)"
-        } else if secondsAgo < day {
-            return "(\(secondsAgo / hour) hours ago)"
-        } else {
-            return "(\(secondsAgo / day) days ago)"
-        }
-    }
-    
-    static func timeGap2(input: Int64) -> String {
-        if (input == nil) { return "-"}
-        let secondsAgo = (Int(Date().millisecondsSince1970 - input) / 1000)
         
         let minute = 60
         let hour = 60 * minute
