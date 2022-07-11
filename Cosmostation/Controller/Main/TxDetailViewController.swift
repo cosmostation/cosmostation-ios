@@ -75,7 +75,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
 
         } else {
             //TODO TEST HASH for KAVA 
-//            mTxHash = "94C476304818D6B1C47DF0FE9D0ABF2462191912DAA11C847483CC58D4A1452D"
+//            mTxHash = "83D7BCB9D3F686ECF164C00388DFC052FD2D88F499532C58131C35630F79DF2F"
 //            self.loadingMsg.isHidden = true
 //            self.loadingImg.onStartAnimation()
 //            self.onFetchTx(mTxHash!)
@@ -131,10 +131,10 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                     return onBindTransfer(tableView, indexPath.row)
                 }
             }
-            else if (msg.type == TASK_TYPE_OK_DEPOSIT || msg.type == TASK_TYPE_OK_WITHDRAW) {
+            else if (msg.type == "okexchain/staking/MsgDeposit" || msg.type == "okexchain/staking/MsgWithdraw") {
                 return onBindOkStake(tableView, indexPath.row)
                 
-            } else if (msg.type == TASK_TYPE_OK_DIRECT_VOTE) {
+            } else if (msg.type == "okexchain/staking/MsgAddShares") {
                 return onBindOkDirectVote(tableView, indexPath.row)
                 
             } else {
@@ -410,6 +410,7 @@ class TxDetailViewController: BaseViewController, UITableViewDelegate, UITableVi
                     return
                 }
                 self.mTxInfo = TxInfo.init(info)
+                self.onUpdateView()
                 
             case .failure(let error):
                 print("onFetchTx failure", error)

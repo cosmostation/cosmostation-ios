@@ -70,7 +70,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     @objc func testClick(tapGestureRecognizer: UITapGestureRecognizer) {
 //        let txDetailVC = TxDetailViewController(nibName: "TxDetailViewController", bundle: nil)
 //        txDetailVC.mIsGen = false
-//        txDetailVC.mTxHash = "E139E2803B57CDA9BA59751ED398EDDD16B5E8633A71DCF5A78C6E60FEFDE723"
+//        txDetailVC.mTxHash = "83D7BCB9D3F686ECF164C00388DFC052FD2D88F499532C58131C35630F79DF2F"
 //        txDetailVC.hidesBottomBarWhenPushed = true
 //        self.navigationItem.title = ""
 //        self.navigationController?.pushViewController(txDetailVC, animated: true)
