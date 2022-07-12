@@ -59,7 +59,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         if #available(iOS 13.0, *) {
-            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")!], for: .selected)
+            gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             gasSelectSegments.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font04")!], for: .normal)
             gasSelectSegments.selectedSegmentTintColor = chainConfig?.chainColor
         } else {

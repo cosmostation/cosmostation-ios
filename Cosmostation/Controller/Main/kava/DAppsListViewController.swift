@@ -33,7 +33,7 @@ class DAppsListViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
-            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")!], for: .selected)
+            dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             dAppsSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font04")!], for: .normal)
             dAppsSegment.selectedSegmentTintColor = chainConfig?.chainColor
         } else {

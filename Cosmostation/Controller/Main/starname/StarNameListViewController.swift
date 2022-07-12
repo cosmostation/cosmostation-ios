@@ -34,7 +34,7 @@ class StarNameListViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         if #available(iOS 13.0, *) {
-            myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font05")], for: .selected)
+            myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.white], for: .selected)
             myStarNameSegment.setTitleTextAttributes([.foregroundColor: UIColor.init(named: "_font04")], for: .normal)
             myStarNameSegment.selectedSegmentTintColor = chainConfig?.chainColor
             
