@@ -135,14 +135,38 @@ public class WUtils {
         return localFormatter.string(from: afterDate!)
     }
     
-    static func decimalNumberToLocaleString(_ input: NSDecimalNumber, _ deciaml:Int16) -> String {
+    static func decimalNumberToLocaleString(_ input: NSDecimalNumber, _ deciaml: Int16) -> String {
         let nf = NumberFormatter()
-        nf.minimumFractionDigits = 0
-        nf.maximumFractionDigits = Int(deciaml)
+        nf.roundingMode = .floor
         nf.numberStyle = .decimal
-        nf.locale = Locale.current
-        nf.groupingSeparator = ""
-        return nf.string(from: input)!
+        
+        var formatted: String?
+        if (input == NSDecimalNumber.zero) {
+            nf.minimumSignificantDigits = Int(deciaml) + 1
+            nf.maximumSignificantDigits = Int(deciaml) + 1
+            formatted = nf.string(from: NSDecimalNumber.zero)
+            
+        } else {
+            if (input.compare(NSDecimalNumber.one).rawValue < 0) {
+                var temp = ""
+                let decimal = Array(String(input.stringValue.split(separator: ".")[1]))
+                for i in 0 ..< Int(deciaml) {
+                    if (decimal.count > i) {
+                        temp = temp.appending(String(decimal[i]))
+                    } else {
+                        temp = temp.appending("0")
+                    }
+                }
+                formatted = "0" + nf.decimalSeparator! + temp
+                
+            } else {
+                let count = input.multiplying(by: NSDecimalNumber.one, withBehavior: WUtils.handler0).stringValue.count
+                nf.minimumSignificantDigits = Int(deciaml) + count
+                nf.maximumSignificantDigits = Int(deciaml) + count
+                formatted = nf.string(from: input)
+            }
+        }
+        return formatted ?? "0"
     }
     
     static func localeStringToDecimal(_ input: String?) -> NSDecimalNumber {

@@ -890,7 +890,7 @@ class Signer {
     static func genIrisSendNft(_ signer: String, _ recipient: String, _ id: String, _ denom_id: String, _ irisResponse: Irismod_Nft_QueryNFTResponse) -> [Google_Protobuf2_Any] {
         let issueNft = Irismod_Nft_MsgMintNFT.with {
             $0.sender = signer
-            $0.recipient = signer
+            $0.recipient = recipient
             $0.id = id
             $0.denomID = denom_id
             $0.name = irisResponse.nft.name

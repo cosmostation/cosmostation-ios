@@ -179,20 +179,42 @@ public class WDP {
     
     static func dpAmount(_ amount: String?, _ font: UIFont, _ inputPoint: Int16, _ dpPoint: Int16) -> NSMutableAttributedString {
         let nf = NumberFormatter()
-        nf.minimumFractionDigits = Int(dpPoint)
-        nf.maximumFractionDigits = Int(dpPoint)
         nf.roundingMode = .floor
         nf.numberStyle = .decimal
         
-        let amount = WUtils.plainStringToDecimal(amount)
+        let number = WUtils.plainStringToDecimal(amount)
+//        print("number ", number)
         var formatted: String?
-        if (amount == NSDecimalNumber.zero) {
+        if (number == NSDecimalNumber.zero) {
+            nf.minimumSignificantDigits = Int(dpPoint) + 1
+            nf.maximumSignificantDigits = Int(dpPoint) + 1
             formatted = nf.string(from: NSDecimalNumber.zero)
+            
         } else {
-            let calAmount = amount.multiplying(byPowerOf10: -Int16(inputPoint))
-            formatted = nf.string(from: calAmount)
+            let calNumber = number.multiplying(byPowerOf10: -Int16(inputPoint))
+//            print("calNumber ", calNumber)
+            if (calNumber.compare(NSDecimalNumber.one).rawValue < 0) {
+                var temp = ""
+                let decimal = Array(String(calNumber.stringValue.split(separator: ".")[1]))
+                for i in 0 ..< Int(dpPoint) {
+                    if (decimal.count > i) {
+                        temp = temp.appending(String(decimal[i]))
+                    } else {
+                        temp = temp.appending("0")
+                    }
+                }
+                formatted = "0" + nf.decimalSeparator! + temp
+                
+            } else {
+                let count = calNumber.multiplying(by: NSDecimalNumber.one, withBehavior: WUtils.handler0).stringValue.count
+                nf.minimumSignificantDigits = Int(dpPoint) + count
+                nf.maximumSignificantDigits = Int(dpPoint) + count
+                formatted = nf.string(from: calNumber)
+            }
+            
         }
-        
+//        print("formatted ", formatted)
+
         let added       = formatted
         let endIndex    = added!.index(added!.endIndex, offsetBy: -dpPoint)
         

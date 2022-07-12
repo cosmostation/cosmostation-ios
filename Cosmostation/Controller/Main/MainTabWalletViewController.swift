@@ -130,7 +130,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func updateFloaty() {
         let floaty = Floaty()
-        floaty.buttonShadowColor = UIColor.init(named: "_font01")!
+        floaty.buttonShadowColor = UIColor.init(named: "floating_shadow")!
         floaty.buttonImage = chainConfig?.stakeSendImg
         floaty.buttonColor = chainConfig?.stakeSendBg ?? .black
         floaty.fabDelegate = self
