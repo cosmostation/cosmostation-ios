@@ -37,7 +37,7 @@ class NewHistoryCell: UITableViewCell {
         txTimeGapLabel.text = WDP.dpTimeGap(history.header?.timestamp)
         
         if (NSLocalizedString("tx_vote", comment: "") == history.getMsgType(address)) {
-            txDenomLabel.textColor = .white
+            txDenomLabel.textColor = UIColor.init(named: "_font05")
             txDenomLabel.text = history.getVoteOption()
             txAmountLabel.isHidden = true
             return
