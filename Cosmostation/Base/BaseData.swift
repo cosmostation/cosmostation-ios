@@ -150,7 +150,9 @@ final class BaseData : NSObject{
         if let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
             for path in paths {
                 if (path.channel_id == ibcToken.channel_id) {
-                    result.append(path)
+                    if (path.auth == true) {
+                        result.append(path)
+                    }
                 }
             }
         }
