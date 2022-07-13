@@ -2548,6 +2548,10 @@
 		E103DAE322814DFC006C2146 /* GenTx.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E103DAE522814DFC006C2146 /* GenTx.storyboard */; };
 		E10492132347B41000A2980F /* WalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10492122347B41000A2980F /* WalletConnectViewController.swift */; };
 		E10492152347C5D900A2980F /* WalletConnectImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10492142347C5D900A2980F /* WalletConnectImageView.swift */; };
+		E10A7560287E612100BC66BC /* WalletMediblocEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10A755E287E612100BC66BC /* WalletMediblocEventCell.swift */; };
+		E10A7561287E612100BC66BC /* WalletMediblocEventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10A755E287E612100BC66BC /* WalletMediblocEventCell.swift */; };
+		E10A7562287E612100BC66BC /* WalletMediblocEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10A755F287E612100BC66BC /* WalletMediblocEventCell.xib */; };
+		E10A7563287E612100BC66BC /* WalletMediblocEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10A755F287E612100BC66BC /* WalletMediblocEventCell.xib */; };
 		E11338FD235D70D20011B61D /* ManageAccountAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11338FB235D70D20011B61D /* ManageAccountAddCell.swift */; };
 		E11338FE235D70D20011B61D /* ManageAccountAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11338FC235D70D20011B61D /* ManageAccountAddCell.xib */; };
 		E123FD3B233CCBF3004EC348 /* MainTabTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123FD3A233CCBF3004EC348 /* MainTabTokenViewController.swift */; };
@@ -3910,6 +3914,8 @@
 		E103DAE422814DFC006C2146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GenTx.storyboard; sourceTree = "<group>"; };
 		E10492122347B41000A2980F /* WalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectViewController.swift; sourceTree = "<group>"; };
 		E10492142347C5D900A2980F /* WalletConnectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectImageView.swift; sourceTree = "<group>"; };
+		E10A755E287E612100BC66BC /* WalletMediblocEventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMediblocEventCell.swift; sourceTree = "<group>"; };
+		E10A755F287E612100BC66BC /* WalletMediblocEventCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletMediblocEventCell.xib; sourceTree = "<group>"; };
 		E11338FB235D70D20011B61D /* ManageAccountAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountAddCell.swift; sourceTree = "<group>"; };
 		E11338FC235D70D20011B61D /* ManageAccountAddCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManageAccountAddCell.xib; sourceTree = "<group>"; };
 		E123FD3A233CCBF3004EC348 /* MainTabTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabTokenViewController.swift; sourceTree = "<group>"; };
@@ -4872,6 +4878,8 @@
 				04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */,
 				04166116278C2F01001CAF73 /* WalletDesmosEventCell.swift */,
 				04166117278C2F01001CAF73 /* WalletDesmosEventCell.xib */,
+				E10A755E287E612100BC66BC /* WalletMediblocEventCell.swift */,
+				E10A755F287E612100BC66BC /* WalletMediblocEventCell.xib */,
 				04D3392127E8803000E82AA7 /* WalletCrescentCell.swift */,
 				04D3392227E8803000E82AA7 /* WalletCrescentCell.xib */,
 				151788EA282E078600A7D7CC /* WalletStationCell.swift */,
@@ -6286,6 +6294,7 @@
 				18FFB7B2281AF533004E65BB /* TxCdpDepositCell.xib in Resources */,
 				18FFB7B3281AF533004E65BB /* IBCTokenGrpcViewController.xib in Resources */,
 				04DEAF382864768700F23233 /* HtlcSend0ViewController.xib in Resources */,
+				E10A7563287E612100BC66BC /* WalletMediblocEventCell.xib in Resources */,
 				18FFB7B4281AF533004E65BB /* TxIssueNFTCell.xib in Resources */,
 				18FFB7B5281AF533004E65BB /* EditHideChainCell.xib in Resources */,
 				18FFB7B6281AF533004E65BB /* TxSifSwapCell.xib in Resources */,
@@ -6591,6 +6600,7 @@
 				282BDFEB24A5BCE000D3A5D4 /* WcTransferPopup.xib in Resources */,
 				2830A0A127A6AFA000CE9D1D /* SendContract1ViewController.xib in Resources */,
 				046BD23127795CD4002333B5 /* TxSendNFTCell.xib in Resources */,
+				E10A7562287E612100BC66BC /* WalletMediblocEventCell.xib in Resources */,
 				04C5AEA3286336C7007627EA /* RewardAddress1ViewController.xib in Resources */,
 				280E1F03254A9B6B0007BA7D /* RenewStarname0ViewController.xib in Resources */,
 				28B2E4D026CFEF8C00ECF960 /* BridgeTokenGrpcViewController.xib in Resources */,
@@ -7445,6 +7455,7 @@
 				18FFB534281AF533004E65BB /* DomainCell.swift in Sources */,
 				1817CB2F283E2CE500523713 /* sifnode_tokenregistry_v1_types.pb.swift in Sources */,
 				1817CAD3283E2CE500523713 /* cosmos_nft_v1beta1_event.pb.swift in Sources */,
+				E10A7561287E612100BC66BC /* WalletMediblocEventCell.swift in Sources */,
 				1817CAF3283E2CE500523713 /* kava_bep3_v1beta1_query.pb.swift in Sources */,
 				18FFB539281AF533004E65BB /* SendContract1ViewController.swift in Sources */,
 				18FFB53C281AF533004E65BB /* TokenDetailCell.swift in Sources */,
@@ -8632,6 +8643,7 @@
 				283439A42531D1DF00CCFADE /* MyAccountViewController.swift in Sources */,
 				28B37D2C26D8EB42008AACD2 /* KavaSwapViewController.swift in Sources */,
 				040FA7C3275F55C200229F6F /* tendermint_types_params.pb.swift in Sources */,
+				E10A7560287E612100BC66BC /* WalletMediblocEventCell.swift in Sources */,
 				283E9463254902BA007A9291 /* TxRegisterDomainCell.swift in Sources */,
 				E16D9B222249EA0C0019B7BB /* PasswordViewController.swift in Sources */,
 				E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */,
