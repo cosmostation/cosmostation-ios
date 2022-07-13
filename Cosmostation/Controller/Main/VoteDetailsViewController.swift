@@ -115,7 +115,7 @@ class VoteDetailsViewController: BaseViewController, UITableViewDelegate, UITabl
         if (mMintscanProposalDetail != nil) {
             cell?.statusImg.image = WUtils.onProposalStatusImg(mMintscanProposalDetail)
             cell?.statusTitle.text = WUtils.onProposalStatusTxt(mMintscanProposalDetail)
-            cell?.proposalTitle.text = mMintscanProposalDetail?.title
+            cell?.proposalTitle.text = "# ".appending(mMintscanProposalDetail!.id!).appending("  ").appending(mMintscanProposalDetail!.title!)
             cell?.proposerLabel.text = WUtils.onProposalProposer(mMintscanProposalDetail)
             cell?.proposalTypeLabel.text = mMintscanProposalDetail?.proposal_type
             cell?.voteStartTime.text = WDP.dpTime(mMintscanProposalDetail?.voting_start_time)

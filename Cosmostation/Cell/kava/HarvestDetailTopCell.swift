@@ -33,9 +33,14 @@ class HarvestDetailTopCell: UITableViewCell {
                              _ totalDeposit: Array<Coin>?, _ totalBorrow: Array<Coin>?, _ moduleCoins: Array<Coin>?, _ reservedCoins: Array<Coin>?) {
         if (hardParam == nil) { return }
         let chainConfig = ChainKava.init(.KAVA_MAIN)
-        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, hardMoneyMarketDenom)
-        harvestImg.af_setImage(withURL: URL(string: KAVA_HARD_POOL_IMG_URL + "lp" + baseDenom + ".png")!)
-        harvestTitle.text = hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID.replacingOccurrences(of: ":30", with: "").uppercased()
+        var hardImgDenom = ""
+        if (hardMoneyMarketDenom.starts(with: "ibc/")) {
+            hardImgDenom = BaseData.instance.getBaseDenom(chainConfig, hardMoneyMarketDenom)
+        } else {
+            hardImgDenom = hardMoneyMarketDenom
+        }
+        harvestImg.af_setImage(withURL: URL(string: KAVA_HARD_POOL_IMG_URL + "lp" + hardImgDenom + ".png")!)
+        harvestTitle.text = hardParam!.getHardMoneyMarket(hardMoneyMarketDenom)?.spotMarketID.replacingOccurrences(of: ":30", with: "").replacingOccurrences(of: ":720", with: "").uppercased()
 
         var supplyApy = NSDecimalNumber.zero
         var borrowApy = NSDecimalNumber.zero

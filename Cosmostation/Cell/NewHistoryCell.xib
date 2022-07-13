@@ -48,7 +48,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A2W-3l-cw9">
                                 <rect key="frame" x="429.5" y="28" width="5.5" height="13.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -83,7 +83,7 @@
                             <constraint firstItem="Jjg-p6-Zmb" firstAttribute="centerY" secondItem="ev2-wC-0p7" secondAttribute="centerY" id="p80-kt-aBb"/>
                             <constraint firstItem="vFu-7u-Ysp" firstAttribute="leading" secondItem="F2E-wf-Kqu" secondAttribute="leading" constant="115" id="uuK-jY-XjM"/>
                             <constraint firstItem="KQ2-fM-daw" firstAttribute="top" secondItem="F2E-wf-Kqu" secondAttribute="top" constant="12" id="vVc-jn-K2B"/>
-                            <constraint firstItem="A2W-3l-cw9" firstAttribute="top" secondItem="KQ2-fM-daw" secondAttribute="bottom" constant="2" id="vyM-aZ-D5e"/>
+                            <constraint firstItem="A2W-3l-cw9" firstAttribute="top" secondItem="KQ2-fM-daw" secondAttribute="bottom" constant="4" id="vyM-aZ-D5e"/>
                             <constraint firstAttribute="bottom" secondItem="vFu-7u-Ysp" secondAttribute="bottom" constant="12" id="zUN-1Q-HBJ"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>

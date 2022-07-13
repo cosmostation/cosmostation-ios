@@ -139,6 +139,7 @@ public class WUtils {
         let nf = NumberFormatter()
         nf.roundingMode = .floor
         nf.numberStyle = .decimal
+        nf.groupingSeparator = ""
         
         var formatted: String?
         if (input == NSDecimalNumber.zero) {
