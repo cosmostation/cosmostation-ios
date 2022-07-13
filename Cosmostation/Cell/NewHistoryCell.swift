@@ -21,7 +21,7 @@ class NewHistoryCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         txTimeLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
-        txTimeGapLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_11_caption2)
+        txTimeGapLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         txAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
     
