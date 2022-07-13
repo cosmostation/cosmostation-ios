@@ -24,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cHa-ua-BDZ">
-                    <rect key="frame" x="0.0" y="36" width="414" height="752"/>
+                    <rect key="frame" x="0.0" y="54" width="414" height="734"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kwA-FN-yLH">
@@ -88,7 +88,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cHa-ua-BDZ" secondAttribute="trailing" id="B4J-B7-wN9"/>
                 <constraint firstItem="kwA-FN-yLH" firstAttribute="top" secondItem="cHa-ua-BDZ" secondAttribute="bottom" constant="8" id="Eyl-1U-N2M"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="cHa-ua-BDZ" secondAttribute="leading" id="H18-6i-aZ7"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="cHa-ua-BDZ" secondAttribute="top" constant="8" id="Wba-yD-L90"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="cHa-ua-BDZ" secondAttribute="top" constant="-10" id="Wba-yD-L90"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kwA-FN-yLH" secondAttribute="trailing" constant="16" id="hHc-pH-l6w"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kwA-FN-yLH" secondAttribute="bottom" constant="16" id="jPZ-vk-nYC"/>
             </constraints>
