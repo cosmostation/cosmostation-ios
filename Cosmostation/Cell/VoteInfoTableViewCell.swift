@@ -13,11 +13,13 @@ class VoteInfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        proposalTitle.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        proposalTitle.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        proposerLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         proposalTypeLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         voteStartTime.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         voteEndTime.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         requestAmount.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        requestAmountDenom.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
     }
  
     @IBOutlet weak var statusImg: UIImageView!

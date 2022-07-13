@@ -22,26 +22,26 @@
                         <rect key="frame" x="12" y="4" width="468" height="409"/>
                         <subviews>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Quorum" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPS-oS-6mh">
-                                <rect key="frame" x="16" y="12" width="51" height="16.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <rect key="frame" x="16" y="12" width="42" height="16.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="43.11%" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FtC-Vc-U4a">
-                                <rect key="frame" x="383.5" y="12" width="66.5" height="17"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
+                                <rect key="frame" x="396.5" y="12" width="53.5" height="17"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Current Turnout" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rad-M2-mdd">
-                                <rect key="frame" x="16" y="40.5" width="98.5" height="16.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <rect key="frame" x="16" y="40.5" width="84" height="16.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="11.22%" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mn7-3O-gde">
-                                <rect key="frame" x="383.5" y="40.5" width="66.5" height="17"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="20"/>
+                                <rect key="frame" x="396.5" y="40.5" width="53.5" height="17"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -380,7 +380,7 @@
                             <constraint firstItem="Zgi-hi-Z9P" firstAttribute="top" secondItem="1ec-Kn-URN" secondAttribute="bottom" constant="16" id="M3d-jI-mYg"/>
                             <constraint firstItem="Zgi-hi-Z9P" firstAttribute="leading" secondItem="1ec-Kn-URN" secondAttribute="leading" id="PrK-SC-lUK"/>
                             <constraint firstAttribute="bottom" secondItem="Zgi-hi-Z9P" secondAttribute="bottom" constant="20" id="QTF-Kb-cqS"/>
-                            <constraint firstItem="Rad-M2-mdd" firstAttribute="top" secondItem="yPS-oS-6mh" secondAttribute="bottom" constant="12" id="bVb-jv-Jtl"/>
+                            <constraint firstItem="Rad-M2-mdd" firstAttribute="top" secondItem="yPS-oS-6mh" secondAttribute="bottom" constant="10" id="bVb-jv-Jtl"/>
                             <constraint firstItem="1ec-Kn-URN" firstAttribute="leading" secondItem="kyi-if-zcI" secondAttribute="leading" constant="16" id="d0m-D7-MFZ"/>
                             <constraint firstAttribute="trailing" secondItem="FtC-Vc-U4a" secondAttribute="trailing" constant="18" id="dcB-jD-KBw"/>
                             <constraint firstItem="FtC-Vc-U4a" firstAttribute="centerY" secondItem="yPS-oS-6mh" secondAttribute="centerY" id="e2e-Hz-1eP"/>
