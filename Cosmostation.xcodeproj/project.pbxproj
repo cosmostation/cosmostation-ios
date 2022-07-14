@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04099A13287FC7D200D86999 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1525DCA286FED4D001B84D2 /* GoogleService-Info.plist */; };
 		040FA7A2275F55C200229F6F /* cosmos_base_reflection_v2alpha1_reflection.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA431275F558600229F6F /* cosmos_base_reflection_v2alpha1_reflection.pb.swift */; };
 		040FA7AD275F55C200229F6F /* desmos_fees_v1beta1_min_fee.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43C275F558700229F6F /* desmos_fees_v1beta1_min_fee.pb.swift */; };
 		040FA7AE275F55C200229F6F /* tendermint_types_validator.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA43D275F558700229F6F /* tendermint_types_validator.pb.swift */; };
@@ -2069,7 +2070,6 @@
 		18FFB7CE281AF533004E65BB /* GenProfile3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2807DB3C2788182F00016571 /* GenProfile3ViewController.xib */; };
 		18FFB7CF281AF533004E65BB /* ResourceChainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 280E1F29254AD3A80007BA7D /* ResourceChainCell.xib */; };
 		18FFB7D0281AF533004E65BB /* WalletOkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 283D2EAE24F5742000247424 /* WalletOkCell.xib */; };
-		18FFB7DA281E9C9F004E65BB /* CosmostationDev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */; };
 		2802B4AD28250A9300B2D9E8 /* DeriveWalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2802B4AB28250A9300B2D9E8 /* DeriveWalletCell.swift */; };
 		2802B4AE28250A9300B2D9E8 /* DeriveWalletCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2802B4AC28250A9300B2D9E8 /* DeriveWalletCell.xib */; };
 		280524B4255CDA7D004D6172 /* StarnameWalletConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280524B2255CDA7D004D6172 /* StarnameWalletConnectViewController.swift */; };
@@ -6269,7 +6269,6 @@
 				18FFB796281AF533004E65BB /* RegistAccountCheckCell.xib in Resources */,
 				18FFB797281AF533004E65BB /* SifChainDex.storyboard in Resources */,
 				18FFB798281AF533004E65BB /* NFTDetailRawCell.xib in Resources */,
-				18FFB7DA281E9C9F004E65BB /* CosmostationDev.plist in Resources */,
 				18FFB799281AF533004E65BB /* TxHardWithdrawCell.xib in Resources */,
 				0443746A2862E9BD00C6A4ED /* Transfer2ViewController.xib in Resources */,
 				18FFB79A281AF533004E65BB /* WcCancelPopup.xib in Resources */,
@@ -6284,6 +6283,7 @@
 				18FFB7A5281AF533004E65BB /* GenProfile0ViewController.xib in Resources */,
 				04E6ABD0286358B4008DC3C7 /* CdpDrawRepay1ViewController.xib in Resources */,
 				18FFB7A7281AF533004E65BB /* StakingTokenGrpcViewController.xib in Resources */,
+				04099A13287FC7D200D86999 /* GoogleService-Info.plist in Resources */,
 				18FFB7A9281AF533004E65BB /* TxLockTokenCell.xib in Resources */,
 				18FFB7AA281AF533004E65BB /* Localizable.strings in Resources */,
 				18FFB7AB281AF533004E65BB /* GenDenom0ViewController.xib in Resources */,
@@ -9317,7 +9317,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 150;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9329,7 +9329,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.50;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -9349,7 +9349,7 @@
 				CODE_SIGN_ENTITLEMENTS = Cosmostation/Cosmostation.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 150;
+				CURRENT_PROJECT_VERSION = 160;
 				DEVELOPMENT_TEAM = 8G562MW56M;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -9361,7 +9361,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5.50;
+				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.wannabit.cosmostation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

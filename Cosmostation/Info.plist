@@ -75,6 +75,10 @@
 	<string>Face ID is using for unlock app</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Access your photo for generating NFT.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>RobotoMono-VariableFont_wght.ttf</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
@@ -89,10 +93,6 @@
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>RobotoMono-VariableFont_wght.ttf</string>
-	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
