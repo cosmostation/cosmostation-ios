@@ -347,8 +347,8 @@ class CommonWCViewController: BaseViewController {
             let web3 = web3(provider: provider)
             let nounce = try? web3.eth.getTransactionCount(address: ethAddress)
             var tx = EthereumTransaction(
-                gasPrice: BigUInt(20000000000),
-                gasLimit: BigUInt(9000000),
+                gasPrice: BigUInt(27500000000),
+                gasLimit: BigUInt(900000),
                 to: toAddress,
                 value: bigIntVal,
                 data: data
