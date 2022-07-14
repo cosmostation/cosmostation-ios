@@ -50,6 +50,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletOsmoCell", bundle: nil), forCellReuseIdentifier: "WalletOsmoCell")
         self.walletTableView.register(UINib(nibName: "WalletDesmosCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosCell")
         self.walletTableView.register(UINib(nibName: "WalletDesmosEventCell", bundle: nil), forCellReuseIdentifier: "WalletDesmosEventCell")
+        self.walletTableView.register(UINib(nibName: "WalletMediblocEventCell", bundle: nil), forCellReuseIdentifier: "WalletMediblocEventCell")
         self.walletTableView.register(UINib(nibName: "WalletCrescentCell", bundle: nil), forCellReuseIdentifier: "WalletCrescentCell")
         self.walletTableView.register(UINib(nibName: "WalletStationCell", bundle: nil), forCellReuseIdentifier: "WalletStationCell")
         self.walletTableView.register(UINib(nibName: "WalletBaseChainCell", bundle: nil), forCellReuseIdentifier: "WalletBaseChainCell")
@@ -159,7 +160,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN) {
+        if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN || chainType == .MEDI_MAIN) {
             return 5;
         } else if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
             return 3;
@@ -186,6 +187,8 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return onSetOsmoItems(tableView, indexPath);
         } else if (chainType == .DESMOS_MAIN) {
             return onSetDesmosItems(tableView, indexPath);
+        } else if (chainType == .MEDI_MAIN) {
+            return onSetMediblocItems(tableView, indexPath);
         } else if (chainType == .CRESCENT_MAIN) {
             return onSetCrescentItems(tableView, indexPath);
         } else if (chainType == .STATION_TEST) {
@@ -397,6 +400,31 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (indexPath.row == 3) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDesmosEventCell") as? WalletDesmosEventCell
             cell?.actionDownload = { self.onClickDesmosEvent() }
+            return cell!
+            
+        } else {
+            return onBindGuideCell(tableView)
+        }
+    }
+    
+    func onSetMediblocItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
+        if (indexPath.row == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletBaseChainCell") as? WalletBaseChainCell
+            cell?.updateView(account, chainConfig)
+            cell?.actionDelegate = { self.onClickValidatorList() }
+            cell?.actionVote = { self.onClickVoteList() }
+            cell?.actionWC = { self.onClickWalletConect() }
+            return cell!
+
+        } else if (indexPath.row == 1) {
+            return onBindPriceCell(tableView)
+
+        } else if (indexPath.row == 2) {
+            return onBindMintingCell(tableView)
+
+        } else if (indexPath.row == 3) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletMediblocEventCell") as? WalletMediblocEventCell
+            cell?.actionDownload = { self.onClickMediblocEvent() }
             return cell!
             
         } else {
@@ -742,6 +770,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onClickDesmosEvent() {
         guard let url = URL(string: "https://dpm.desmos.network/") else { return }
+        self.onShowSafariWeb(url)
+    }
+    
+    func onClickMediblocEvent() {
+        guard let url = URL(string: "https://web.medipass.me/") else { return }
         self.onShowSafariWeb(url)
     }
     
