@@ -130,8 +130,8 @@ class KavaSwap0ViewController: BaseViewController, UITextFieldDelegate{
         
         let swapFee = NSDecimalNumber.init(string: BaseData.instance.mKavaSwapPoolParam?.swapFee).multiplying(byPowerOf10: -18)
         let padding = (NSDecimalNumber.one).subtracting(swapFee).subtracting(NSDecimalNumber.init(string: "0.03"))
-        let outputAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal).multiplying(by: padding).multiplying(by: swapRate, withBehavior: WUtils.handler0)
-        outputCoinAmountLabel.text = outputAmount.multiplying(byPowerOf10: -dpOutPutDecimal).stringValue
+        let outputAmount = userInput.multiplying(byPowerOf10: dpInPutDecimal - dpOutPutDecimal).multiplying(by: padding).multiplying(by: swapRate, withBehavior: WUtils.handler18)
+        outputCoinAmountLabel.text = WUtils.decimalNumberToLocaleString(outputAmount, dpOutPutDecimal)
      
     }
     
