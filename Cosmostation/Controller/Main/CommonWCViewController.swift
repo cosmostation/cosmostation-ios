@@ -337,7 +337,6 @@ class CommonWCViewController: BaseViewController {
                   let ethAddress = EthereumAddress(ethAddressString),
                   let to = transaction.to,
                   let toAddress = EthereumAddress(to),
-                  let data = transaction.data.data(using: .utf8),
                   let val = transaction.value,
                    let bigIntVal = BigUInt(val.replacingOccurrences(of: "0x", with: ""), radix: 16)
             else {
@@ -351,7 +350,7 @@ class CommonWCViewController: BaseViewController {
                 gasLimit: BigUInt(900000),
                 to: toAddress,
                 value: bigIntVal,
-                data: data
+                data: Data(hex: transaction.data)
             )
             guard let nounce = nounce, let keystore = keystore as? AbstractKeystore else {
                 self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
