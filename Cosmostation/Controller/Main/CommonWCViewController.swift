@@ -335,6 +335,8 @@ class CommonWCViewController: BaseViewController {
             guard let url = URL(string: "https://eth.bd.evmos.org:8545"),
                   let provider = Web3HttpProvider(url),
                   let ethAddress = EthereumAddress(ethAddressString),
+                  let to = transaction.to,
+                  let toAddress = EthereumAddress(to),
                   let data = transaction.data.data(using: .utf8),
                   let val = transaction.value,
                    let bigIntVal = BigUInt(val.replacingOccurrences(of: "0x", with: ""), radix: 16)
@@ -346,8 +348,8 @@ class CommonWCViewController: BaseViewController {
             let nounce = try? web3.eth.getTransactionCount(address: ethAddress)
             var tx = EthereumTransaction(
                 gasPrice: BigUInt(20000000000),
-                gasLimit: BigUInt(1000000),
-                to: ethAddress,
+                gasLimit: BigUInt(9000000),
+                to: toAddress,
                 value: bigIntVal,
                 data: data
             )
