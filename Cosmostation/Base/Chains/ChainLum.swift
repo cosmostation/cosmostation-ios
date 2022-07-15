@@ -32,7 +32,7 @@ class ChainLum: ChainConfig {
     
     var addressPrefix = "lum"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
-    let addressHdPath1 = "m/44'/459'/0'/0/X"
+    let addressHdPath1 = "m/44'/880'/0'/0/X"
     
     let gasRate0 = "0.001ulum"
     
