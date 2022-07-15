@@ -70,7 +70,7 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
         BaseData.instance.mMyReward_gRPC.removeAll()
         
         onFetchSingleValidator_gRPC(mValidator_gRPC!.operatorAddress)
-        onFetchValidatorSelfBond_gRPC(WKey.getAddressFromOpAddress(mValidator_gRPC!.operatorAddress, chainType!), mValidator_gRPC!.operatorAddress)
+        onFetchValidatorSelfBond_gRPC(WKey.getAddressFromOpAddress(mValidator_gRPC!.operatorAddress, chainConfig), mValidator_gRPC!.operatorAddress)
         onFetchDelegations_gRPC(account!.account_address, 0)
         onFetchUndelegations_gRPC(account!.account_address, 0)
         onFetchRewards_gRPC(account!.account_address)
