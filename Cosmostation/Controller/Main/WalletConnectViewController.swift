@@ -31,8 +31,11 @@ class WalletConnectViewController: BaseViewController, SBCardPopupDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.wcWaitting.onStartAnimation()
-        account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        
+        self.getKey()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -185,10 +188,7 @@ class WalletConnectViewController: BaseViewController, SBCardPopupDelegate {
     
     func signBnbOrder() {
         do {
-            guard let words = KeychainWrapper.standard.string(forKey: account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") else {
-                return
-            }
-            let pKey = WKey.getHDKeyFromWords(words, account!)
+            let pKey = PrivateKey.init(pk: self.privateKey!.hexEncodedString(), coin: .bitcoin)!
             let pubKeyString = pKey.publicKey.uncompressedPublicKey.dataToHexString()
             let signature = try ECDSA.compactsign(self.cOrder!.encoded.sha256(), privateKey: pKey.raw)
             let signed = WCBinanceOrderSignature(
@@ -217,5 +217,36 @@ class WalletConnectViewController: BaseViewController, SBCardPopupDelegate {
         self.interactor?.killSession().done {[weak self] in
             self?.navigationController?.popViewController(animated: false)
         }.cauterize()
+    }
+    
+    
+    var privateKey: Data?
+    var publicKey: Data?
+    func getKey() {
+        DispatchQueue.global().async {
+            if (BaseData.instance.getUsingEnginerMode()) {
+                if (self.account?.account_from_mnemonic == true) {
+                    if let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                        self.privateKey = KeyFac.getPrivateRaw(words, self.account!)
+                        self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    }
+                    
+                } else {
+                    if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
+                        self.privateKey = KeyFac.getPrivateFromString(key)
+                        self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    }
+                }
+                
+            } else {
+                //Speed up for get privatekey with non-enginerMode
+                if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
+                    self.privateKey = KeyFac.getPrivateFromString(key)
+                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    print("Private private ", self.privateKey!.hexEncodedString())
+                    print("Private publicKey ", self.publicKey!.hexEncodedString())
+                }
+            }
+        }
     }
 }
