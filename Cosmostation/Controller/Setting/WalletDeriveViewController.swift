@@ -40,9 +40,9 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         self.derivedWalletTableView.rowHeight = UITableView.automaticDimension
         self.derivedWalletTableView.estimatedRowHeight = UITableView.automaticDimension
         
-        if (!mBackable) {
-            self.backBtn.isHidden = true
-        }
+//        if (!mBackable) {
+//            self.backBtn.isHidden = true
+//        }
         
         if (mPrivateKeyMode) {
             self.mnemonicNameLabel.text = NSLocalizedString("title_restore_privatekey", comment: "")
@@ -169,8 +169,8 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         DispatchQueue.global().async {
             self.mSeed = WKey.getSeedFromWords(self.mWords)
             DispatchQueue.main.async(execute: {
-                self.hideWaittingAlert()
                 self.onGetAllKeyTypes()
+                self.hideWaittingAlert()
             });
         }
     }
@@ -235,7 +235,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 do {
                     let channel = BaseNetWork.getConnection(chainConfig.chainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                     let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = derive.dpAddress }
-                    let response = try Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req).response.wait()
+                    let response = try Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait()
                     self.mDerives[position].coin = Coin.init(chainConfig.stakeDenom, "0")
                     response.balances.forEach { balance in
                         if (balance.denom == chainConfig.stakeDenom) {
