@@ -22,7 +22,7 @@
                         <rect key="frame" x="12" y="4" width="349" height="68"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="#1 Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUn-vz-uy9">
-                                <rect key="frame" x="16" y="14" width="317" height="14.5"/>
+                                <rect key="frame" x="16" y="14" width="277" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -56,9 +56,9 @@
                             <constraint firstItem="C24-yl-7fC" firstAttribute="centerY" secondItem="iNY-sx-e14" secondAttribute="centerY" id="Y7h-dl-WlE"/>
                             <constraint firstAttribute="trailing" secondItem="C24-yl-7fC" secondAttribute="trailing" constant="8" id="ZGo-ax-AbK"/>
                             <constraint firstItem="NIu-su-4pa" firstAttribute="leading" secondItem="Jty-qu-dJl" secondAttribute="trailing" constant="4" id="ZaT-W7-mVw"/>
-                            <constraint firstAttribute="trailing" secondItem="HUn-vz-uy9" secondAttribute="trailing" constant="16" id="cIL-qX-EA4"/>
                             <constraint firstItem="Jty-qu-dJl" firstAttribute="leading" secondItem="iNY-sx-e14" secondAttribute="leading" constant="16" id="iEc-LI-pLm"/>
                             <constraint firstItem="Jty-qu-dJl" firstAttribute="centerY" secondItem="NIu-su-4pa" secondAttribute="centerY" id="pyA-Vg-yKZ"/>
+                            <constraint firstItem="C24-yl-7fC" firstAttribute="leading" secondItem="HUn-vz-uy9" secondAttribute="trailing" constant="8" id="qIv-WE-n2k"/>
                             <constraint firstItem="HUn-vz-uy9" firstAttribute="leading" secondItem="iNY-sx-e14" secondAttribute="leading" constant="16" id="shT-ck-XT0"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
