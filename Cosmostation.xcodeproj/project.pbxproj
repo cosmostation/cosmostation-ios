@@ -546,6 +546,8 @@
 		046FF01E277B766200F72C11 /* TxIssueNFTDenomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046FF01C277B766200F72C11 /* TxIssueNFTDenomCell.swift */; };
 		046FF01F277B766200F72C11 /* TxIssueNFTDenomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046FF01D277B766200F72C11 /* TxIssueNFTDenomCell.xib */; };
 		047966502757409700315D55 /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
+		047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
+		047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047DCEE128855F4800253CAA /* MintscanMyVote.swift */; };
 		047FB6E1281A4C52009D8AAF /* sifnode_dispensation_v1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CA281A4C4F009D8AAF /* sifnode_dispensation_v1_query.pb.swift */; };
 		047FB6E2281A4C52009D8AAF /* sifnode_clp_v1_params.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CB281A4C4F009D8AAF /* sifnode_clp_v1_params.pb.swift */; };
 		047FB6E3281A4C52009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047FB6CC281A4C4F009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift */; };
@@ -3128,6 +3130,7 @@
 		046FF01C277B766200F72C11 /* TxIssueNFTDenomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxIssueNFTDenomCell.swift; sourceTree = "<group>"; };
 		046FF01D277B766200F72C11 /* TxIssueNFTDenomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxIssueNFTDenomCell.xib; sourceTree = "<group>"; };
 		0479664F2757409700315D55 /* MintscanProposalDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanProposalDetail.swift; sourceTree = "<group>"; };
+		047DCEE128855F4800253CAA /* MintscanMyVote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanMyVote.swift; sourceTree = "<group>"; };
 		047FB6CA281A4C4F009D8AAF /* sifnode_dispensation_v1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_query.pb.swift; sourceTree = "<group>"; };
 		047FB6CB281A4C4F009D8AAF /* sifnode_clp_v1_params.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_clp_v1_params.pb.swift; sourceTree = "<group>"; };
 		047FB6CC281A4C4F009D8AAF /* sifnode_dispensation_v1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sifnode_dispensation_v1_tx.grpc.swift; sourceTree = "<group>"; };
@@ -5707,6 +5710,7 @@
 				04D1384C2691C78F00D6AF9F /* IbcPath.swift */,
 				04D1384E2691CAF100D6AF9F /* IbcToken.swift */,
 				0479664F2757409700315D55 /* MintscanProposalDetail.swift */,
+				047DCEE128855F4800253CAA /* MintscanMyVote.swift */,
 				046BD21F27788723002333B5 /* StationNFTData.swift */,
 				0444443727AC27A900EB093E /* BridgeToken.swift */,
 				04E2A32227A5787A0045ED21 /* Cw20Token.swift */,
@@ -7171,6 +7175,7 @@
 				18FFB3F0281AF533004E65BB /* BnbHistory.swift in Sources */,
 				0451FC74282A3AB700214FDA /* ChainCosmos.swift in Sources */,
 				1817CBB1283E2CE500523713 /* cosmos_nft_v1beta1_tx.pb.swift in Sources */,
+				047DCEE328855F4800253CAA /* MintscanMyVote.swift in Sources */,
 				18FFB3F1281AF533004E65BB /* TxJoinPoolCell.swift in Sources */,
 				1817CBE0283E2CE600523713 /* sifnode_clp_v1_params.pb.swift in Sources */,
 				18FFB3F7281AF533004E65BB /* NFTListCell.swift in Sources */,
@@ -8739,6 +8744,7 @@
 				040FA7C8275F55C200229F6F /* tendermint_farming_v1beta1_proposal.pb.swift in Sources */,
 				040FAAE8275F55C400229F6F /* starname_iov_escrow_v1beta1_query.pb.swift in Sources */,
 				282BDFEA24A5BCE000D3A5D4 /* WcTransferPopup.swift in Sources */,
+				047DCEE228855F4800253CAA /* MintscanMyVote.swift in Sources */,
 				040FAA77275F55C400229F6F /* starname_cosmwasm_wasm_v1_types.pb.swift in Sources */,
 				040FA9B6275F55C300229F6F /* desmos_profiles_v1beta1_msgs_dtag_requests.pb.swift in Sources */,
 				048C830327BF572800270528 /* evmos_inflation_v1_inflation.pb.swift in Sources */,

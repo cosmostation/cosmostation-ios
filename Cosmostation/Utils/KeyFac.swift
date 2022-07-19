@@ -20,17 +20,6 @@ class KeyFac {
     
     
     
-    
-    static func getDpAddressPath(_ mnemonic: [String], _ path: Int, _ chain: ChainType, _ customBipPath: Int) -> String {
-        var resultAddress = ""
-        if (BaseData.instance.getUsingEnginerMode()) {
-            resultAddress = CKey.getDpAddressPath(mnemonic, path, chain, customBipPath)
-        } else {
-            resultAddress = WKey.getDpAddressPath(mnemonic, path, chain, customBipPath)
-        }
-        return resultAddress
-    }
-    
     static func getPrivateRaw(_ mnemonic: [String], _ account: Account) -> Data {
         if (BaseData.instance.getUsingEnginerMode()) {
             return CKey.getPrivateRaw(mnemonic, account)
