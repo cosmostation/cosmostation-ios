@@ -164,12 +164,12 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func getSeedFormWords() {
-//        print("getSeedFormWords ")
+        print("getSeedFormWords ")
         self.showWaittingAlert()
         DispatchQueue.global().async {
             self.mSeed = WKey.getSeedFromWords(self.mWords)
+            self.onGetAllKeyTypes()
             DispatchQueue.main.async(execute: {
-                self.onGetAllKeyTypes()
                 self.hideWaittingAlert()
             });
         }
@@ -215,9 +215,10 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 }
             }
         }
-        
-        self.derivedWalletTableView.reloadData()
-        self.onUpdateCnt()
+        DispatchQueue.main.async(execute: {
+            self.derivedWalletTableView.reloadData()
+            self.onUpdateCnt()
+        })
         
         for i in 0 ..< self.mDerives.count {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
