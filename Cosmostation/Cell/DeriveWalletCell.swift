@@ -75,7 +75,7 @@ class DeriveWalletCell: UITableViewCell {
         }
         
         if (derive.selected == true) {
-            rootCardView.borderWidth = 1.2
+            rootCardView.borderWidth = 1.5
             rootCardView.borderColor = UIColor.init(named: "_font05")
         }
     }

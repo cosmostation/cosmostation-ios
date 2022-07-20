@@ -153,6 +153,7 @@ public class WDP {
     }
     
     static func dpCoin(_ chainConfig: ChainConfig?, _ denom: String?, _ amount: String?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
+        if (chainConfig == nil || denom == nil || amount == nil ) { return }
         dpSymbol(chainConfig, denom, denomLabel)
         if (amountLabel == nil ) { return }
         var divideDecimal: Int16 = 6

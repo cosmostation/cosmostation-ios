@@ -956,7 +956,7 @@ public class WUtils {
     }
     
     static func getSymbol(_ chainConfig: ChainConfig?, _ denom: String?) -> String {
-        if (chainConfig == nil || denom?.isEmpty == true) { return "Unknown" }
+        if (chainConfig == nil || denom == nil || denom?.isEmpty == true) { return "Unknown" }
         if (chainConfig!.stakeDenom == denom) {
             return chainConfig!.stakeSymbol
         }

@@ -40,10 +40,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         self.derivedWalletTableView.rowHeight = UITableView.automaticDimension
         self.derivedWalletTableView.estimatedRowHeight = UITableView.automaticDimension
         
-//        if (!mBackable) {
-//            self.backBtn.isHidden = true
-//        }
-        
         if (mPrivateKeyMode) {
             self.mnemonicNameLabel.text = NSLocalizedString("title_restore_privatekey", comment: "")
             self.pathLabel.isHidden = true
@@ -93,6 +89,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         alert.view.addSubview(pickerFrame)
         pickerFrame.delegate = self
         pickerFrame.dataSource = self
+        pickerFrame.selectRow(self.mPath, inComponent: 0, animated: false)
         
         alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil))
         alert.addAction(UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default, handler: { (UIAlertAction) in
@@ -103,7 +100,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             self.derivedWalletTableView.reloadData()
             DispatchQueue.main.async(execute: {
                 self.onGetAllKeyTypes()
-                self.hideWaittingAlert()
             })
         }))
         self.present(alert, animated: true, completion: nil)
@@ -169,9 +165,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         DispatchQueue.global().async {
             self.mSeed = WKey.getSeedFromWords(self.mWords)
             self.onGetAllKeyTypes()
-            DispatchQueue.main.async(execute: {
-                self.hideWaittingAlert()
-            });
         }
     }
     
@@ -215,38 +208,43 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 }
             }
         }
+        
         DispatchQueue.main.async(execute: {
+            self.hideWaittingAlert()
             self.derivedWalletTableView.reloadData()
             self.onUpdateCnt()
-        })
-        
-        for i in 0 ..< self.mDerives.count {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+            
+            for i in 0 ..< self.mDerives.count {
                 self.onFetchBalance(i)
-            })
-        }
+            }
+        })
     }
     
     func onFetchBalance(_ position: Int) {
         let derive = self.mDerives[position]
         guard let chainConfig = ChainFactory.getChainConfig(derive.chaintype) else { return }
         
+        var tempCoin = Coin.init(chainConfig.stakeDenom, "0")
         if (chainConfig.isGrpc) {
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global().async {
                 do {
                     let channel = BaseNetWork.getConnection(chainConfig.chainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                     let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = derive.dpAddress }
-                    let response = try Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait()
-                    self.mDerives[position].coin = Coin.init(chainConfig.stakeDenom, "0")
-                    response.balances.forEach { balance in
-                        if (balance.denom == chainConfig.stakeDenom) {
-                            self.mDerives[position].coin = Coin.init(balance.denom, balance.amount)
+                    if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        response.balances.forEach { balance in
+                            if (balance.denom == chainConfig.stakeDenom) {
+                                tempCoin = Coin.init(balance.denom, balance.amount)
+                            }
                         }
                     }
+                    try channel.close().wait()
                     
                 } catch { }
                 DispatchQueue.main.async(execute: {
+                    self.mDerives[position].coin = tempCoin
+                    self.derivedWalletTableView.beginUpdates()
                     self.derivedWalletTableView.reloadRows(at: [IndexPath(row: position, section: 0)], with: .none)
+                    self.derivedWalletTableView.endUpdates()
                 });
             }
             
@@ -255,7 +253,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             request.responseJSON { (response) in
                 switch response.result {
                 case .success(let res):
-                    var tempCoin = Coin.init(chainConfig.stakeDenom, "0")
                     if (chainConfig.chainType == .BINANCE_MAIN) {
                         if let responseData = res as? NSDictionary {
                             if let balances = responseData.object(forKey: "balances") as? Array<NSDictionary> {
@@ -278,14 +275,14 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                             }
                         }
                     }
-                    DispatchQueue.main.async(execute: {
-                        self.mDerives[position].coin = tempCoin
-                        self.derivedWalletTableView.reloadRows(at: [IndexPath(row: position, section: 0)], with: .none)
-                    });
                     
                 case .failure(let error):
                     print(error)
                 }
+                self.mDerives[position].coin = tempCoin
+                self.derivedWalletTableView.beginUpdates()
+                self.derivedWalletTableView.reloadRows(at: [IndexPath(row: position, section: 0)], with: .none)
+                self.derivedWalletTableView.endUpdates()
             }
         }
     }
