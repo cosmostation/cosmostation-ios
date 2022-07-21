@@ -163,6 +163,7 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     func onDeriveWallet() {
         let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
         walletDeriveVC.mWords = mWords
+        walletDeriveVC.mBackable = true
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(walletDeriveVC, animated: true)
     }

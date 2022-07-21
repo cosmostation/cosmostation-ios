@@ -40,6 +40,10 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         self.derivedWalletTableView.rowHeight = UITableView.automaticDimension
         self.derivedWalletTableView.estimatedRowHeight = UITableView.automaticDimension
         
+        if (!mBackable) {
+            self.backBtn.isHidden = true
+        }
+        
         if (mPrivateKeyMode) {
             self.mnemonicNameLabel.text = NSLocalizedString("title_restore_privatekey", comment: "")
             self.pathLabel.isHidden = true

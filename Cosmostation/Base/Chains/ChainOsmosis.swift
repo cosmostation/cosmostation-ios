@@ -33,7 +33,7 @@ class ChainOsmosis: ChainConfig {
     var addressPrefix = "osmo"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0uosmo"
+    let gasRate0 = "0.00025uosmo"
     let gasRate1 = "0.0025uosmo"
     let gasRate2 = "0.025uosmo"
     
