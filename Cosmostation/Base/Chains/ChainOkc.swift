@@ -39,6 +39,7 @@ class ChainOkc: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = ""
     var grpcPort = -1
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"

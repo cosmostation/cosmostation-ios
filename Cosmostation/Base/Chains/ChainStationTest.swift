@@ -40,6 +40,7 @@ class StationTest: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = true
+    var authzSupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"
     var grpcPort = 10400
     var lcdUrl = "https://lcd-office.cosmostation.io/station-testnet/"

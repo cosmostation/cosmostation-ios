@@ -38,6 +38,7 @@ class ChainBinance: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = ""
     var grpcPort = -1
     var lcdUrl = "https://dex.binance.org/"

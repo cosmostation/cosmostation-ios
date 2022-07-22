@@ -36,6 +36,7 @@ protocol ChainConfig {
     var etherAddressSupport: Bool { get set }
     var pushSupport: Bool { get set }
     var wcSupoort: Bool { get set }
+    var authzSupoort: Bool { get set }
     var grpcUrl: String { get set }
     var grpcPort: Int { get set }
     var lcdUrl: String { get set }

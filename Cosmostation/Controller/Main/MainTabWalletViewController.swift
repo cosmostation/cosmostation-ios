@@ -53,6 +53,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
+        self.walletTableView.register(UINib(nibName: "WalletAuthzCell", bundle: nil), forCellReuseIdentifier: "WalletAuthzCell")
         self.walletTableView.register(UINib(nibName: "WalletGuideCell", bundle: nil), forCellReuseIdentifier: "WalletGuideCell")
         self.walletTableView.rowHeight = UITableView.automaticDimension
         self.walletTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -147,12 +148,17 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return 1;
             
         } else {
-            if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN || chainType == .MEDI_MAIN) {
-                return 5;
-            } else if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
+            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
                 return 3;
             }
-            return 4;
+            if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN || chainType == .MEDI_MAIN) {
+                return 5;
+            }
+            if (chainConfig!.authzSupoort) {
+                return 5
+            } else {
+                return 4
+            }
         }
     }
     
@@ -214,6 +220,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
+        }
+        
+        if (indexPath.row == 3 && chainConfig!.authzSupoort) {
+            return onBindAuthzCell(tableView)
             
         } else {
             return onBindGuideCell(tableView)
@@ -486,6 +496,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
         cell?.onBindCell(account, chainConfig)
         cell?.actionTapApr = { self.onClickAprHelp() }
+        return cell!
+    }
+    
+    func onBindAuthzCell(_ tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAuthzCell") as? WalletAuthzCell
+        cell?.onBindCell(chainConfig)
+        cell?.actionAuthz = { self.onClickAuthz() }
         return cell!
     }
     
@@ -795,6 +812,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
             helpAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
         }
+    }
+    
+    func onClickAuthz() {
+        print("onClickAuthz")
     }
     
     func onClickGuide1() {

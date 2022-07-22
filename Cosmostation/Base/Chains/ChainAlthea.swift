@@ -38,6 +38,7 @@ class ChainAlthea: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"
     var grpcPort = 20100
     var lcdUrl = ""

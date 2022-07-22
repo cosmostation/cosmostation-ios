@@ -38,6 +38,7 @@ class ChainGravityBridge: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-gravity-bridge-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-gravity-bridge-app.cosmostation.io/"
