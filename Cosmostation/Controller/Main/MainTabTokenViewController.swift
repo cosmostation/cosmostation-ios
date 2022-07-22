@@ -13,30 +13,24 @@ import SafariServices
 
 class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let SECTION_NATIVE_GRPC             = 0;
-    let SECTION_IBC_AUTHED_GRPC         = 1;
-    let SECTION_BRIDGE_GRPC             = 2;
-    let SECTION_KAVA_BEP2_GRPC          = 3;
-    let SECTION_CW20_GRPC               = 4;
-    let SECTION_POOL_TOKEN_GRPC         = 5;
-    let SECTION_ETC_GRPC                = 6;
-    let SECTION_IBC_UNKNOWN_GRPC        = 7;
-    let SECTION_UNKNOWN_GRPC            = 8;
+    let SECTION_NATIVE_GRPC             = 1;
+    let SECTION_IBC_AUTHED_GRPC         = 2;
+    let SECTION_BRIDGE_GRPC             = 3;
+    let SECTION_KAVA_BEP2_GRPC          = 4;
+    let SECTION_CW20_GRPC               = 5;
+    let SECTION_POOL_TOKEN_GRPC         = 6;
+    let SECTION_ETC_GRPC                = 7;
+    let SECTION_IBC_UNKNOWN_GRPC        = 8;
+    let SECTION_UNKNOWN_GRPC            = 9;
     
-    let SECTION_NATIVE                  = 9;
-    let SECTION_ETC                     = 10;
-    let SECTION_UNKNOWN                 = 11;
+    let SECTION_NATIVE                  = 10;
+    let SECTION_ETC                     = 11;
+    let SECTION_UNKNOWN                 = 12;
     
 
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
     @IBOutlet weak var titleAlarmBtn: UIButton!
-    
-    @IBOutlet weak var totalCard: CardView!
-    @IBOutlet weak var totalKeyState: UIImageView!
-    @IBOutlet weak var totalDpAddress: UILabel!
-    @IBOutlet weak var totalValue: UILabel!
-    
     @IBOutlet weak var tokenTableView: UITableView!
     var refresher: UIRefreshControl!
     var mainTabVC: MainTabViewController!
@@ -45,19 +39,19 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var mBalances = Array<Balance>()
     var mBalances_gRPC = Array<Coin>()
     
-    var mNative_gRPC = Array<Coin>()                // section 0
-    var mIbcAuthed_gRPC = Array<Coin>()             // section 1
-    var mBridged_gRPC = Array<Coin>()               // section 2
-    var mKavaBep2_gRPC = Array<Coin>()              // section 3
-    var mCW20_gRPC = Array<Cw20Token>()             // section 4
-    var mPoolToken_gRPC = Array<Coin>()             // section 5
-    var mEtc_gRPC = Array<Coin>()                   // section 6
-    var mIbcUnknown_gRPC = Array<Coin>()            // section 7
-    var mUnKnown_gRPC = Array<Coin>()               // section 8
+    var mNative_gRPC = Array<Coin>()                // section 1
+    var mIbcAuthed_gRPC = Array<Coin>()             // section 2
+    var mBridged_gRPC = Array<Coin>()               // section 3
+    var mKavaBep2_gRPC = Array<Coin>()              // section 4
+    var mCW20_gRPC = Array<Cw20Token>()             // section 5
+    var mPoolToken_gRPC = Array<Coin>()             // section 6
+    var mEtc_gRPC = Array<Coin>()                   // section 7
+    var mIbcUnknown_gRPC = Array<Coin>()            // section 8
+    var mUnKnown_gRPC = Array<Coin>()               // section 9
     
-    var mNative = Array<Balance>()                  // section 9
-    var mEtc = Array<Balance>()                     // section 10
-    var mUnKnown = Array<Balance>()                 // section 11
+    var mNative = Array<Balance>()                  // section 10
+    var mEtc = Array<Balance>()                     // section 11
+    var mUnKnown = Array<Balance>()                 // section 12
     
 
     override func viewDidLoad() {
@@ -70,6 +64,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "TokenCell", bundle: nil), forCellReuseIdentifier: "TokenCell")
         self.tokenTableView.rowHeight = UITableView.automaticDimension
         self.tokenTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -86,9 +81,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.mBalances = BaseData.instance.mBalances
         self.mBalances_gRPC = BaseData.instance.mMyBalances_gRPC
         self.mCW20_gRPC = BaseData.instance.getCw20s_gRPC()
-        
-        let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
-        self.totalCard.addGestureRecognizer(tapTotalCard)
         
         self.updateView()
     }
@@ -118,18 +110,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.titleWalletName.text = account?.getDpName()
         self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
         
-        self.totalCard.backgroundColor = chainConfig?.chainColorBG
-        self.totalDpAddress.text = account?.account_address
-        self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
-        if (account?.account_has_private == true) {
-            self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
-            self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
-            self.totalKeyState.tintColor = chainConfig?.chainColor
-        } else {
-            self.totalKeyState.image = UIImage.init(named: "iconKeyEmpty")
-        }
-        
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 DispatchQueue.main.async {
@@ -150,7 +130,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func updateView() {
         self.onClassifyTokens()
         self.tokenTableView.reloadData()
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
     }
     
     @objc func onRequestFetch() {
@@ -173,11 +152,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 12
+        return 13
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count == 0) { return 0 }
+        if (section == 0) { return 0 }
+        else if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count == 0) { return 0 }
         else if (section == SECTION_IBC_AUTHED_GRPC && mIbcAuthed_gRPC.count == 0) { return 0 }
         else if (section == SECTION_BRIDGE_GRPC && mBridged_gRPC.count == 0) { return 0 }
         else if (section == SECTION_KAVA_BEP2_GRPC && mKavaBep2_gRPC.count == 0) { return 0 }
@@ -216,7 +196,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
+        if (section == 0) { return 1}
+        else if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
         else if (section == SECTION_IBC_AUTHED_GRPC) { return mIbcAuthed_gRPC.count }
         else if (section == SECTION_BRIDGE_GRPC) { return mBridged_gRPC.count }
         else if (section == SECTION_KAVA_BEP2_GRPC) { return mKavaBep2_gRPC.count }
@@ -233,59 +214,61 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
-        if (indexPath.section == SECTION_NATIVE_GRPC) {
-            onBindNativeToken_gRPC(cell, mNative_gRPC[indexPath.row])
+        if (indexPath.section == 0) {
+            return onSetAddressItems(tableView, indexPath);
             
-        } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
-            onBindIbcToken_gRPC(cell, mIbcAuthed_gRPC[indexPath.row])
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
+            if (indexPath.section == SECTION_NATIVE_GRPC) {
+                onBindNativeToken_gRPC(cell, mNative_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
+                onBindIbcToken_gRPC(cell, mIbcAuthed_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
+                onBindEthBridgeToken_gRPC(cell, mBridged_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
+                onBindKavaBep2Token_gRPC(cell, mKavaBep2_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_CW20_GRPC) {
+                onBindCw20Token_gRPC(cell, mCW20_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
+                onBindPoolToken_gRPC(cell, mPoolToken_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_ETC_GRPC) {
+                onBindEtcToken_gRPC(cell, mEtc_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
+                onBindIbcToken_gRPC(cell, mIbcUnknown_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
+                cell?.tokenImg.image = UIImage(named: "tokenDefault")
+                let denomText = mUnKnown_gRPC[indexPath.row].denom.uppercased()
+                if (denomText.count > 4) { cell?.tokenSymbol.text = denomText.substring(to: 4) }
+                else { cell?.tokenSymbol.text = denomText }
+                cell?.tokenTitle.text = ""
+                cell?.tokenDescription.text = " "
+                cell!.tokenValue.text = ""
+                cell?.tokenAmount.attributedText = WDP.dpAmount(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
+            }
             
-        } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-            onBindEthBridgeToken_gRPC(cell, mBridged_gRPC[indexPath.row])
             
-        } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
-            onBindKavaBep2Token_gRPC(cell, mKavaBep2_gRPC[indexPath.row])
             
-        } else if (indexPath.section == SECTION_CW20_GRPC) {
-            onBindCw20Token_gRPC(cell, mCW20_gRPC[indexPath.row])
+            else if (indexPath.section == SECTION_NATIVE) {
+                onBindNativeToken(cell, mNative[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_ETC) {
+                onBindEtcToken(cell, mEtc[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_UNKNOWN) {
+                cell?.tokenSymbol.text = mUnKnown[indexPath.row].balance_denom.uppercased()
+                
+            }
+            return cell!
             
-        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
-            onBindPoolToken_gRPC(cell, mPoolToken_gRPC[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_ETC_GRPC) {
-            onBindEtcToken_gRPC(cell, mEtc_gRPC[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
-            onBindIbcToken_gRPC(cell, mIbcUnknown_gRPC[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
-            cell?.tokenImg.image = UIImage(named: "tokenDefault")
-            let denomText = mUnKnown_gRPC[indexPath.row].denom.uppercased()
-            if (denomText.count > 4) { cell?.tokenSymbol.text = denomText.substring(to: 4) }
-            else { cell?.tokenSymbol.text = denomText }
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = " "
-            cell!.tokenValue.text = ""
-            cell?.tokenAmount.attributedText = WDP.dpAmount(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
         }
-        
-        
-        
-        else if (indexPath.section == SECTION_NATIVE) {
-            onBindNativeToken(cell, mNative[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_ETC) {
-            onBindEtcToken(cell, mEtc[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_UNKNOWN) {
-            cell?.tokenSymbol.text = mUnKnown[indexPath.row].balance_denom.uppercased()
-            
-        }
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -381,6 +364,13 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
+    func onSetAddressItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
+        cell?.updateView(account, chainConfig)
+        cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
+        return cell!
+    }
+    
     //bind native tokens with grpc
     func onBindNativeToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
         if (coin.denom == OSMOSIS_ION_DENOM) {
@@ -390,7 +380,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Ion Coin"
             cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OSMOSIS_ION_DENOM, BaseData.instance.getAvailableAmount_gRPC(OSMOSIS_ION_DENOM), 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(OSMOSIS_ION_DENOM, BaseData.instance.getAvailableAmount_gRPC(OSMOSIS_ION_DENOM), 6, cell!.tokenValue.font)
 
         } else if (coin.denom == EMONEY_EUR_DENOM || coin.denom == EMONEY_CHF_DENOM || coin.denom == EMONEY_DKK_DENOM ||
                     coin.denom == EMONEY_NOK_DENOM || coin.denom == EMONEY_SEK_DENOM) {
@@ -401,7 +391,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = coin.denom.substring(from: 1).uppercased() + " on E-Money Network"
 
             cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, BaseData.instance.getAvailableAmount_gRPC(coin.denom), 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, BaseData.instance.getAvailableAmount_gRPC(coin.denom), 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_HARD_DENOM) {
             WDP.dpSymbolImg(chainConfig, KAVA_HARD_DENOM, cell?.tokenImg)
@@ -412,7 +402,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
 
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_HARD_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(KAVA_HARD_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_USDX_DENOM) {
             WDP.dpSymbolImg(chainConfig, KAVA_USDX_DENOM, cell?.tokenImg)
@@ -423,7 +413,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
 
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_USDX_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(KAVA_USDX_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == KAVA_SWAP_DENOM) {
             WDP.dpSymbolImg(chainConfig, KAVA_SWAP_DENOM, cell?.tokenImg)
@@ -434,7 +424,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
 
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(KAVA_SWAP_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(KAVA_SWAP_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == CRESCENT_BCRE_DENOM) {
             cell?.tokenImg.image = UIImage(named: "tokenBcre")
@@ -445,7 +435,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
 
             let allBCre = NSDecimalNumber.init(string: coin.amount)
             cell?.tokenAmount.attributedText = WDP.dpAmount(allBCre.stringValue, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(CRESCENT_BCRE_DENOM, allBCre, 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(CRESCENT_BCRE_DENOM, allBCre, 6, cell!.tokenValue.font)
 
         } else if (coin.denom == NYX_NYM_DENOM) {
             cell?.tokenImg.image = UIImage(named: "tokenNym")
@@ -456,7 +446,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
 
             let allNym = NSDecimalNumber.init(string: coin.amount)
             cell?.tokenAmount.attributedText = WDP.dpAmount(allNym.stringValue, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(NYX_NYM_DENOM, allNym, 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(NYX_NYM_DENOM, allNym, 6, cell!.tokenValue.font)
 
         } else {
             let divideDecimal = WUtils.mainDivideDecimal(chainType)
@@ -469,7 +459,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 
                 let allStakingCoin = WUtils.getAllMainAsset(coin.denom)
                 cell?.tokenAmount.attributedText = WDP.dpAmount(allStakingCoin.stringValue, cell!.tokenAmount.font, divideDecimal, 6)
-                cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, allStakingCoin, divideDecimal, cell!.tokenValue.font)
+                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, allStakingCoin, divideDecimal, cell!.tokenValue.font)
             }
         }
     }
@@ -483,7 +473,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = ""
             cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
             return
         }
         if (ibcToken.auth == true) {
@@ -493,7 +483,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenDescription.text = ibcToken.channel_id
             cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, ibcToken.decimal!, 6)
             let basedenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(basedenom, NSDecimalNumber.init(string: coin.amount), ibcToken.decimal!, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(basedenom, NSDecimalNumber.init(string: coin.amount), ibcToken.decimal!, cell!.tokenValue.font)
             
         } else {
             cell?.tokenImg.image = UIImage(named: "tokenDefaultIbc")
@@ -501,7 +491,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = ibcToken.channel_id
             cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
         }
     }
     
@@ -514,7 +504,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = coin.denom
             cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 18, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
             
         } else if (chainType == .INJECTIVE_MAIN) {
             cell?.tokenImg.image = UIImage(named: "tokenInjectivePool")
@@ -522,7 +512,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Pool Asset"
             cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 18, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
             
         } else if (chainType == .CRESCENT_MAIN) {
             cell?.tokenImg.image = UIImage(named: "tokenCrescentpool")
@@ -530,7 +520,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cell?.tokenTitle.text = ""
             cell?.tokenDescription.text = "Pool Asset"
             cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 12, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(coin.denom, NSDecimalNumber.init(string: coin.amount), 12, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 12, cell!.tokenValue.font)
             
         }
     }
@@ -552,7 +542,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
         let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
         cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
-        cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
+        cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
     }
     
     //bind cw20 tokens
@@ -565,7 +555,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         let decimal = token.decimal
         cell?.tokenAmount.attributedText = WDP.dpAmount(token.amount, cell!.tokenAmount.font!, decimal, 6)
-        cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(token.denom, token.getAmount(), decimal, cell!.tokenValue.font)
+        cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(token.denom, token.getAmount(), decimal, cell!.tokenValue.font)
     }
     
     //bind etc tokens with grpc
@@ -581,7 +571,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
             let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
             cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
-            cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
+            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
         }
         
     }
@@ -599,7 +589,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 
                 let amount = WUtils.getAllBnbToken(BNB_MAIN_DENOM)
                 cell?.tokenAmount.attributedText = WDP.dpAmount(amount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, amount, 0, cell!.tokenValue.font)
+                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, amount, 0, cell!.tokenValue.font)
             }
             
         } else if (balance.balance_denom == OKEX_MAIN_DENOM) {
@@ -612,7 +602,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 
                 let tokenAmount = WUtils.getAllExToken(OKEX_MAIN_DENOM)
                 cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OKEX_MAIN_DENOM, tokenAmount, 0, cell!.tokenValue.font)
+                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, tokenAmount, 0, cell!.tokenValue.font)
             }
             
         }
@@ -631,7 +621,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 let tokenAmount = WUtils.getAllBnbToken(balance.balance_denom)
                 let convertAmount = WUtils.getBnbConvertAmount(balance.balance_denom)
                 cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(BNB_MAIN_DENOM, convertAmount, 0, cell!.tokenValue.font)
+                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, convertAmount, 0, cell!.tokenValue.font)
             }
             
         }  else if (chainType == .OKEX_MAIN) {
@@ -645,7 +635,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 let tokenAmount = WUtils.getAllExToken(balance.balance_denom)
                 let convertedAmount = WUtils.convertTokenToOkt(balance.balance_denom)
                 cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpUserCurrencyValue(OKEX_MAIN_DENOM, convertedAmount, 0, cell!.tokenValue.font)
+                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, convertedAmount, 0, cell!.tokenValue.font)
             }
         }
         
@@ -837,9 +827,5 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 }
             }
         }
-    }
-    
-    @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, account?.getDpName())
     }
 }

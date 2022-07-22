@@ -9,11 +9,6 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="RobotoMono-VariableFont_wght.ttf">
-            <string>RobotoMono-Regular</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PoolTokenGrpcViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
@@ -25,10 +20,6 @@
                 <outlet property="naviUpdownImg" destination="7yD-BP-No6" id="pfF-H1-ujj"/>
                 <outlet property="naviUpdownPercent" destination="6e9-sO-chs" id="t6F-fj-d11"/>
                 <outlet property="tokenTableView" destination="GMW-yt-bBZ" id="RFD-J4-ehZ"/>
-                <outlet property="topCard" destination="vK5-f0-RZJ" id="m7V-7S-QoQ"/>
-                <outlet property="topDpAddress" destination="Ycj-i5-J7g" id="C5X-Sr-i0L"/>
-                <outlet property="topKeyState" destination="cBi-MP-UFs" id="MrK-Kf-M00"/>
-                <outlet property="topValue" destination="Q1i-dV-Icq" id="bgt-gY-rnx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,62 +28,6 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vK5-f0-RZJ" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="98" width="390" height="80"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="cof-oI-i1D">
-                            <rect key="frame" x="12" y="14" width="366" height="22"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="cBi-MP-UFs">
-                                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="22" id="2nv-IE-2fx"/>
-                                        <constraint firstAttribute="width" constant="22" id="Bga-IP-DXq"/>
-                                    </constraints>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycj-i5-J7g">
-                                    <rect key="frame" x="26" y="0.0" width="340" height="22"/>
-                                    <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="13"/>
-                                    <color key="textColor" name="_font05"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1i-dV-Icq">
-                            <rect key="frame" x="193" y="42" width="4.5" height="20.5"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                            <color key="textColor" name="_font05"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" name="_card_bg"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="cof-oI-i1D" secondAttribute="trailing" constant="12" id="5rR-I7-0sv"/>
-                        <constraint firstItem="cof-oI-i1D" firstAttribute="centerX" secondItem="vK5-f0-RZJ" secondAttribute="centerX" id="LrZ-6P-SeR"/>
-                        <constraint firstItem="cof-oI-i1D" firstAttribute="top" secondItem="vK5-f0-RZJ" secondAttribute="top" constant="14" id="M4z-XD-DeD"/>
-                        <constraint firstItem="Q1i-dV-Icq" firstAttribute="top" secondItem="cof-oI-i1D" secondAttribute="bottom" constant="6" id="bdo-QG-hCH"/>
-                        <constraint firstItem="Q1i-dV-Icq" firstAttribute="centerX" secondItem="vK5-f0-RZJ" secondAttribute="centerX" id="gVP-ns-181"/>
-                        <constraint firstAttribute="height" constant="80" id="kdd-13-OT3"/>
-                        <constraint firstItem="cof-oI-i1D" firstAttribute="leading" secondItem="vK5-f0-RZJ" secondAttribute="leading" constant="12" id="xiF-Um-Hh0"/>
-                    </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
-                            <integer key="value" value="2"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                            <real key="value" value="0.29999999999999999"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
-                            <integer key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V08-i7-rOD">
                     <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                     <subviews>
@@ -224,7 +159,7 @@
                     </subviews>
                 </stackView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="GMW-yt-bBZ">
-                    <rect key="frame" x="0.0" y="182" width="414" height="611"/>
+                    <rect key="frame" x="0.0" y="94" width="414" height="699"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -234,13 +169,10 @@
                 <constraint firstItem="GMW-yt-bBZ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="1DR-XG-mx0"/>
                 <constraint firstItem="V08-i7-rOD" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="31m-22-8q7"/>
                 <constraint firstItem="V08-i7-rOD" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="KYM-yH-AVm"/>
-                <constraint firstItem="GMW-yt-bBZ" firstAttribute="top" secondItem="vK5-f0-RZJ" secondAttribute="bottom" constant="4" id="KlP-Ep-Nb1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RHI-lT-4of" secondAttribute="trailing" constant="16" id="Wmp-9D-dDW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GMW-yt-bBZ" secondAttribute="trailing" id="YAT-eY-nmd"/>
-                <constraint firstItem="vK5-f0-RZJ" firstAttribute="top" secondItem="V08-i7-rOD" secondAttribute="bottom" constant="4" id="bRv-xv-eMq"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="V08-i7-rOD" secondAttribute="trailing" id="cfY-Qn-LGR"/>
-                <constraint firstItem="vK5-f0-RZJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="mDi-Qu-mpj"/>
-                <constraint firstItem="vK5-f0-RZJ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-12" id="q9I-2n-zef"/>
+                <constraint firstItem="GMW-yt-bBZ" firstAttribute="top" secondItem="V08-i7-rOD" secondAttribute="bottom" id="l9b-JI-4pj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="RHI-lT-4of" secondAttribute="bottom" constant="16" id="t2E-hC-qaV"/>
                 <constraint firstItem="RHI-lT-4of" firstAttribute="top" secondItem="GMW-yt-bBZ" secondAttribute="bottom" constant="8" id="ylc-Rv-atp"/>
                 <constraint firstItem="RHI-lT-4of" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="zlg-jK-aNd"/>
@@ -250,12 +182,8 @@
     </objects>
     <resources>
         <image name="btnNaviBack" width="24" height="24"/>
-        <image name="iconKeyEmpty" width="20" height="20"/>
         <image name="priceDown" width="16" height="16"/>
         <image name="tokenDefault" width="22" height="22"/>
-        <namedColor name="_card_bg">
-            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

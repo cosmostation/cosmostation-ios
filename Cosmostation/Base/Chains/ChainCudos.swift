@@ -35,6 +35,7 @@ class ChainCudos: ChainConfig {
     
     let gasRate0 = "5000000000000acudos"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-cudos-app.cosmostation.io"

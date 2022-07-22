@@ -9,11 +9,6 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="RobotoMono-VariableFont_wght.ttf">
-            <string>RobotoMono-Regular</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StakingTokenGrpcViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
@@ -25,10 +20,6 @@
                 <outlet property="naviUpdownImg" destination="Was-Om-E9B" id="DuN-Ts-OH5"/>
                 <outlet property="naviUpdownPercent" destination="lcq-59-Wfn" id="AQY-Gg-Xt7"/>
                 <outlet property="tokenTableView" destination="tcp-ty-nPt" id="bJ0-nj-uU4"/>
-                <outlet property="topCard" destination="YcJ-g5-lnw" id="EqF-sY-9Fx"/>
-                <outlet property="topDpAddress" destination="IbF-oJ-zAH" id="mgL-LN-U2R"/>
-                <outlet property="topKeyState" destination="OTj-iE-lNH" id="U5u-yI-aM6"/>
-                <outlet property="topValue" destination="YuJ-m0-ZyY" id="MoV-rd-oBo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -38,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tcp-ty-nPt">
-                    <rect key="frame" x="0.0" y="182" width="414" height="611"/>
+                    <rect key="frame" x="0.0" y="94" width="414" height="699"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6wt-Xe-e3z">
@@ -120,62 +111,6 @@
                         <constraint firstAttribute="height" constant="50" id="z8D-TY-cem"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YcJ-g5-lnw" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="98" width="390" height="80"/>
-                    <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="FDa-yy-n3G">
-                            <rect key="frame" x="12" y="14" width="366" height="22"/>
-                            <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconKeyEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="OTj-iE-lNH">
-                                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="22" id="2Ru-bI-aNf"/>
-                                        <constraint firstAttribute="width" constant="22" id="Gnr-8T-T1V"/>
-                                    </constraints>
-                                </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IbF-oJ-zAH">
-                                    <rect key="frame" x="26" y="0.0" width="340" height="22"/>
-                                    <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="13"/>
-                                    <color key="textColor" name="_font05"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                        </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YuJ-m0-ZyY">
-                            <rect key="frame" x="193" y="42" width="4.5" height="20.5"/>
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                            <color key="textColor" name="_font05"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" name="_card_bg"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="80" id="69D-MD-vA2"/>
-                        <constraint firstAttribute="trailing" secondItem="FDa-yy-n3G" secondAttribute="trailing" constant="12" id="8Bj-5s-p5c"/>
-                        <constraint firstItem="YuJ-m0-ZyY" firstAttribute="centerX" secondItem="YcJ-g5-lnw" secondAttribute="centerX" id="Aw0-mr-fMA"/>
-                        <constraint firstItem="YuJ-m0-ZyY" firstAttribute="top" secondItem="FDa-yy-n3G" secondAttribute="bottom" constant="6" id="OvV-zc-lq1"/>
-                        <constraint firstItem="FDa-yy-n3G" firstAttribute="centerX" secondItem="YcJ-g5-lnw" secondAttribute="centerX" id="df0-5a-3Kl"/>
-                        <constraint firstItem="FDa-yy-n3G" firstAttribute="top" secondItem="YcJ-g5-lnw" secondAttribute="top" constant="14" id="gxH-kz-1ee"/>
-                        <constraint firstItem="FDa-yy-n3G" firstAttribute="leading" secondItem="YcJ-g5-lnw" secondAttribute="leading" constant="12" id="zXv-6U-Jec"/>
-                    </constraints>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
-                            <integer key="value" value="2"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                            <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="8"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                            <real key="value" value="0.29999999999999999"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
-                            <integer key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="S6W-vs-13A">
                     <rect key="frame" x="16" y="801" width="382" height="45"/>
                     <subviews>
@@ -233,29 +168,22 @@
             <constraints>
                 <constraint firstItem="tcp-ty-nPt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5ix-cS-8Yg"/>
                 <constraint firstItem="S6W-vs-13A" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="BN2-07-ZeF"/>
+                <constraint firstItem="tcp-ty-nPt" firstAttribute="top" secondItem="6wt-Xe-e3z" secondAttribute="bottom" id="FdX-ki-cYg"/>
                 <constraint firstItem="6wt-Xe-e3z" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Hog-KS-aCD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6wt-Xe-e3z" secondAttribute="trailing" id="N02-Cp-cJi"/>
-                <constraint firstItem="YcJ-g5-lnw" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-12" id="TOH-DZ-Hh8"/>
-                <constraint firstItem="tcp-ty-nPt" firstAttribute="top" secondItem="YcJ-g5-lnw" secondAttribute="bottom" constant="4" id="Unr-jc-SFn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tcp-ty-nPt" secondAttribute="trailing" id="Wmt-aG-thX"/>
                 <constraint firstItem="S6W-vs-13A" firstAttribute="top" secondItem="tcp-ty-nPt" secondAttribute="bottom" constant="8" id="jlf-ou-Rcs"/>
                 <constraint firstItem="6wt-Xe-e3z" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="kKQ-zN-X9t"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="S6W-vs-13A" secondAttribute="trailing" constant="16" id="mrx-VO-vO3"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="S6W-vs-13A" secondAttribute="bottom" constant="16" id="p6z-cg-RZF"/>
-                <constraint firstItem="YcJ-g5-lnw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="q0H-hy-mDz"/>
-                <constraint firstItem="YcJ-g5-lnw" firstAttribute="top" secondItem="6wt-Xe-e3z" secondAttribute="bottom" constant="4" id="rek-Kx-mi6"/>
             </constraints>
             <point key="canvasLocation" x="137.68115942028987" y="118.52678571428571"/>
         </view>
     </objects>
     <resources>
         <image name="btnNaviBack" width="24" height="24"/>
-        <image name="iconKeyEmpty" width="20" height="20"/>
         <image name="priceDown" width="16" height="16"/>
         <image name="tokenDefault" width="22" height="22"/>
-        <namedColor name="_card_bg">
-            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -37,6 +37,7 @@ class ChainCrescent: ChainConfig {
     let gasRate1 = "0.02ucre,0.02ubcre"
     let gasRate2 = "0.05ucre,0.05ubcre"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = true
     var grpcUrl = "lcd-crescent-app.cosmostation.io"

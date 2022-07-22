@@ -12,6 +12,7 @@ class WalletDetailInfoCell: UITableViewCell {
     
     @IBOutlet weak var rootView: CardView!
     @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var ethAddressLabel: UILabel!
     @IBOutlet weak var chainIdLabel: UILabel!
     @IBOutlet weak var importedDateLabel: UILabel!
     @IBOutlet weak var importStateLabel: UILabel!
@@ -38,6 +39,14 @@ class WalletDetailInfoCell: UITableViewCell {
         addressLabel.adjustsFontSizeToFitWidth = true
         chainIdLabel.text = chainId
         importedDateLabel.text = WDP.dpTime(account.account_import_time)
+        
+        if (chainConfig.etherAddressSupport == true) {
+            ethAddressLabel.isHidden = false
+            ethAddressLabel.text = "(" + WKey.convertAddressCosmosToTender(account.account_address) + ")"
+            
+        } else {
+            ethAddressLabel.isHidden = true
+        }
         
         if (account.account_has_private) {
             if (account.account_from_mnemonic) {

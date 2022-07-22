@@ -35,6 +35,7 @@ class ChainCerberus: ChainConfig {
     
     let gasRate0 = "0.0ucrbrus"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-cerberus-app.cosmostation.io"

@@ -38,6 +38,7 @@ class ChainCosmos: ChainConfig {
     let gasRate1 = "0.0025uatom"
     let gasRate2 = "0.025uatom"
     
+    var etherAddressSupport = false
     var pushSupport = true
     var wcSupoort = false
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"

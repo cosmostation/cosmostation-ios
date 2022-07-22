@@ -52,7 +52,7 @@ class TokenCell: UITableViewCell {
             let decimal = bridgeTokenInfo.decimal
             
             tokenAmount.attributedText = WDP.dpAmount(available.stringValue, tokenAmount.font!, decimal, 6)
-            tokenValue.attributedText = WUtils.dpUserCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal, tokenValue.font)
+            tokenValue.attributedText = WUtils.dpValueUserCurrency(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal, tokenValue.font)
         }
     }
     

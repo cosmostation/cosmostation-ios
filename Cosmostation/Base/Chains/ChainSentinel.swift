@@ -36,6 +36,7 @@ class ChainSentinel: ChainConfig {
     let gasRate0 = "0.01udvpn"
     let gasRate1 = "0.1udvpn"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-sentinel-app.cosmostation.io"

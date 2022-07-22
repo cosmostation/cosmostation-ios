@@ -35,6 +35,7 @@ class ChainMedibloc: ChainConfig {
     
     let gasRate0 = "5umed"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-medibloc-app.cosmostation.io"

@@ -35,6 +35,7 @@ class ChainBitsong: ChainConfig {
     
     let gasRate0 = "0.025ubtsg"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-bitsong-app.cosmostation.io"

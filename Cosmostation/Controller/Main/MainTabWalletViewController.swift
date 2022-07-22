@@ -18,11 +18,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     @IBOutlet weak var titleAlarmBtn: UIButton!
     @IBOutlet weak var titleWalletName: UILabel!
     
-    @IBOutlet weak var totalCard: CardView!
-    @IBOutlet weak var totalKeyState: UIImageView!
-    @IBOutlet weak var totalDpAddress: UILabel!
-    @IBOutlet weak var totalValue: UILabel!
-    
     @IBOutlet weak var walletTableView: UITableView!
     var refresher: UIRefreshControl!
     
@@ -39,6 +34,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.delegate = self
         self.walletTableView.dataSource = self
         self.walletTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.walletTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.walletTableView.register(UINib(nibName: "WalletIrisCell", bundle: nil), forCellReuseIdentifier: "WalletIrisCell")
         self.walletTableView.register(UINib(nibName: "WalletBnbCell", bundle: nil), forCellReuseIdentifier: "WalletBnbCell")
         self.walletTableView.register(UINib(nibName: "WalletKavaCell", bundle: nil), forCellReuseIdentifier: "WalletKavaCell")
@@ -65,9 +61,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         self.refresher.tintColor = UIColor(named: "_font05")
         self.walletTableView.addSubview(refresher)
-        
-        let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
-        self.totalCard.addGestureRecognizer(tapTotalCard)
         
         #if RELEASE
         SKStoreReviewController.requestReview()
@@ -98,18 +91,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.titleChainImg.image = chainConfig?.chainImg
         self.titleWalletName.text = account?.getDpName()
         self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
-        
-        self.totalCard.backgroundColor = chainConfig?.chainColorBG
-        self.totalDpAddress.text = account?.account_address
-        self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
-        if (account?.account_has_private == true) {
-            self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
-            self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
-            self.totalKeyState.tintColor = chainConfig?.chainColor
-        } else {
-            self.totalKeyState.image = UIImage.init(named: "iconKeyEmpty")
-        }
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
@@ -145,13 +126,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     }
     
     @objc func onFetchDone(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         self.walletTableView.reloadData()
         self.refresher.endRefreshing()
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
         self.walletTableView.reloadData()
     }
     
@@ -159,45 +138,66 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.onClickMainSend()
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN || chainType == .MEDI_MAIN) {
-            return 5;
-        } else if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
-            return 3;
+        if (section == 0) {
+            return 1;
+            
+        } else {
+            if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN || chainType == .MEDI_MAIN) {
+                return 5;
+            } else if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
+                return 3;
+            }
+            return 4;
         }
-        return 4;
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (chainType == .IRIS_MAIN) {
-            return onSetIrisItem(tableView, indexPath);
-        } else if (chainType == .KAVA_MAIN) {
-            return onSetKavaItem(tableView, indexPath);
-        } else if (chainType == .BINANCE_MAIN) {
-            return onSetBnbItem(tableView, indexPath);
-        } else if (chainType == .OKEX_MAIN) {
-            return onSetOKexItems(tableView, indexPath);
-        } else if (chainType == .IOV_MAIN) {
-            return onSetIovItems(tableView, indexPath);
-        } else if (chainType == .CRYPTO_MAIN) {
-            return onSetCrytoItems(tableView, indexPath);
-        } else if (chainType == .SIF_MAIN) {
-            return onSetSifItems(tableView, indexPath);
-        } else if (chainType == .OSMOSIS_MAIN) {
-            return onSetOsmoItems(tableView, indexPath);
-        } else if (chainType == .DESMOS_MAIN) {
-            return onSetDesmosItems(tableView, indexPath);
-        } else if (chainType == .MEDI_MAIN) {
-            return onSetMediblocItems(tableView, indexPath);
-        } else if (chainType == .CRESCENT_MAIN) {
-            return onSetCrescentItems(tableView, indexPath);
-        } else if (chainType == .STATION_TEST) {
-            return onSetStationItems(tableView, indexPath);
+        if (indexPath.section == 0) {
+            return onSetAddressItems(tableView, indexPath);
+            
+        } else {
+            if (chainType == .IRIS_MAIN) {
+                return onSetIrisItem(tableView, indexPath);
+            } else if (chainType == .KAVA_MAIN) {
+                return onSetKavaItem(tableView, indexPath);
+            } else if (chainType == .BINANCE_MAIN) {
+                return onSetBnbItem(tableView, indexPath);
+            } else if (chainType == .OKEX_MAIN) {
+                return onSetOKexItems(tableView, indexPath);
+            } else if (chainType == .IOV_MAIN) {
+                return onSetIovItems(tableView, indexPath);
+            } else if (chainType == .CRYPTO_MAIN) {
+                return onSetCrytoItems(tableView, indexPath);
+            } else if (chainType == .SIF_MAIN) {
+                return onSetSifItems(tableView, indexPath);
+            } else if (chainType == .OSMOSIS_MAIN) {
+                return onSetOsmoItems(tableView, indexPath);
+            } else if (chainType == .DESMOS_MAIN) {
+                return onSetDesmosItems(tableView, indexPath);
+            } else if (chainType == .MEDI_MAIN) {
+                return onSetMediblocItems(tableView, indexPath);
+            } else if (chainType == .CRESCENT_MAIN) {
+                return onSetCrescentItems(tableView, indexPath);
+            } else if (chainType == .STATION_TEST) {
+                return onSetStationItems(tableView, indexPath);
+            }
+            
+            else {
+                return onSetBaseChainItems(tableView, indexPath);
+            }
         }
-        
-        else {
-            return onSetBaseChainItems(tableView, indexPath);
-        }
+    }
+    
+    func onSetAddressItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
+        cell?.updateView(account, chainConfig)
+        cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
+        return cell!
     }
     
     func onSetBaseChainItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
@@ -553,10 +553,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
                 }
             }
         }
-    }
-    
-    @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, account?.getDpName())
     }
     
     func onClickValidatorList() {

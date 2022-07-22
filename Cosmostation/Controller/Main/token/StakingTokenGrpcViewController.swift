@@ -16,11 +16,6 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     @IBOutlet weak var naviUpdownPercent: UILabel!
     @IBOutlet weak var naviUpdownImg: UIImageView!
     
-    @IBOutlet weak var topCard: CardView!
-    @IBOutlet weak var topKeyState: UIImageView!
-    @IBOutlet weak var topDpAddress: UILabel!
-    @IBOutlet weak var topValue: UILabel!
-    
     @IBOutlet weak var tokenTableView: UITableView!
     @IBOutlet weak var btnIbcSend: UIButton!
     @IBOutlet weak var btnSend: UIButton!
@@ -28,9 +23,9 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     var stakingDenom = ""
     var stakingDivideDecimal: Int16 = 6
     var stakingDisplayDecimal: Int16 = 6
+    var totalAmount = NSDecimalNumber.zero
     var hasVesting = false
     var hasUnbonding = false
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,18 +36,16 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         self.stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         self.stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
+        self.onInitView()
+        
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailStakingCell", bundle: nil), forCellReuseIdentifier: "TokenDetailStakingCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailUnbondingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailUnbondingDetailCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
-        
-        let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
-        self.topCard.addGestureRecognizer(tapTotalCard)
-        
-        self.onInitView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,22 +69,11 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
         
-        self.topCard.backgroundColor = chainConfig?.chainColorBG
-        if (account?.account_has_private == true) {
-            self.topKeyState.image = UIImage.init(named: "iconKeyFull")
-            self.topKeyState.image = self.topKeyState.image!.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = chainConfig?.chainColor
-        } else {
-            self.topKeyState.image = UIImage.init(named: "iconKeyEmpty")
-        }
-        self.topDpAddress.text = account?.account_address
-        self.topDpAddress.adjustsFontSizeToFitWidth = true
-        let totalToken = WUtils.getAllMainAsset(stakingDenom)
-        self.topValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalToken, stakingDivideDecimal, topValue.font)
+        totalAmount = WUtils.getAllMainAsset(stakingDenom)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -99,10 +81,13 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
             return 1
             
         } else if (section == 1) {
+            return 1
+            
+        } else if (section == 2) {
             if (BaseData.instance.onParseRemainVestingsByDenom_gRPC(stakingDenom).count > 0) { return 1 }
             else { return 0 }
             
-        } else if (section == 2) {
+        } else if (section == 3) {
             if (BaseData.instance.getUnbondingSumAmount_gRPC().compare(NSDecimalNumber.zero).rawValue > 0) { return 1 }
             else { return 0 }
         }
@@ -111,16 +96,23 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
+            cell?.onBindTokenDetail(account, chainConfig)
+            cell?.onBindValue(stakingDenom, totalAmount, stakingDivideDecimal)
+            cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
+            return cell!
+            
+        } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailStakingCell") as? TokenDetailStakingCell
             cell?.onBindStakingToken(chainType!)
             return cell!
             
-        } else if (indexPath.section == 1) {
+        } else if (indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailVestingDetailCell") as? TokenDetailVestingDetailCell
             cell?.onBindVestingToken(chainType!, stakingDenom)
             return cell!
             
-        } else if (indexPath.section == 2) {
+        } else if (indexPath.section == 3) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailUnbondingDetailCell") as? TokenDetailUnbondingDetailCell
             cell?.onBindUnbondingToken(chainType!)
             return cell!
@@ -129,10 +121,6 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
             let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
             return cell!
         }
-    }
-    
-    @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, account?.getDpName())
     }
     
 

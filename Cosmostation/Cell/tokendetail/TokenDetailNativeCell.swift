@@ -203,7 +203,7 @@ class TokenDetailNativeCell: TokenDetailCell {
             totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, 0, 18)
             availableAmount.attributedText = WDP.dpAmount(available.stringValue, availableAmount.font, 0, 18)
             lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, availableAmount.font, 0, 18)
-//            totalValue.attributedText = WUtils.dpUserCurrencyValue(OKEX_MAIN_DENOM, convertedAmount, 0, totalValue.font)
+//            totalValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, convertedAmount, 0, totalValue.font)
             
         }
     }

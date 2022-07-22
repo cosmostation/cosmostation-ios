@@ -54,7 +54,7 @@ class WalletSifCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainType: ChainType?) {
         let totalToken = WUtils.getAllMainAsset(SIF_MAIN_DENOM)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 18, 6)
-        totalValue.attributedText = WUtils.dpUserCurrencyValue(SIF_MAIN_DENOM, totalToken, 18, totalValue.font)
+        totalValue.attributedText = WUtils.dpValueUserCurrency(SIF_MAIN_DENOM, totalToken, 18, totalValue.font)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(SIF_MAIN_DENOM), availableAmount.font!, 18, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 18, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 18, 6)

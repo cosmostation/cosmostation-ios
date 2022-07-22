@@ -35,6 +35,7 @@ class ChainBinance: ChainConfig {
     
     let gasRate0 = "0.0BNB"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = ""

@@ -35,6 +35,7 @@ class ChainEvmos: ChainConfig {
     
     let gasRate0 = "20000000000aevmos"
     
+    var etherAddressSupport = true
     var pushSupport = false
     var wcSupoort = true
     var grpcUrl = "lcd-evmos-app.cosmostation.io"

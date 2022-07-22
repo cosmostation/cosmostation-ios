@@ -37,6 +37,7 @@ class ChainIris: ChainConfig {
     let gasRate1 = "0.02uiris"
     let gasRate2 = "0.2uiris"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-iris-app.cosmostation.io"

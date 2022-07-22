@@ -53,7 +53,7 @@ class WalletDesmosCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainType: ChainType?) {
         let totalToken = WUtils.getAllMainAsset(DESMOS_MAIN_DENOM)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 6, 6)
-        totalValue.attributedText = WUtils.dpUserCurrencyValue(DESMOS_MAIN_DENOM, totalToken, 6, totalValue.font)
+        totalValue.attributedText = WUtils.dpValueUserCurrency(DESMOS_MAIN_DENOM, totalToken, 6, totalValue.font)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(DESMOS_MAIN_DENOM), availableAmount.font!, 6, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)

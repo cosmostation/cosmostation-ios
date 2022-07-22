@@ -16,11 +16,6 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
     @IBOutlet weak var naviUpdownPercent: UILabel!
     @IBOutlet weak var naviUpdownImg: UIImageView!
     
-    @IBOutlet weak var topCard: CardView!
-    @IBOutlet weak var topKeyState: UIImageView!
-    @IBOutlet weak var topDpAddress: UILabel!
-    @IBOutlet weak var topValue: UILabel!
-    
     @IBOutlet weak var tokenTableView: UITableView!
     @IBOutlet weak var btnIbcSend: UIButton!
     @IBOutlet weak var btnSend: UIButton!
@@ -36,16 +31,14 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
+        self.onInitView()
+        
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailNativeCell", bundle: nil), forCellReuseIdentifier: "TokenDetailNativeCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
-        
-        let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
-        self.topCard.addGestureRecognizer(tapTotalCard)
-        
-        self.onInitView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,28 +84,16 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
         if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
-        
-        self.topCard.backgroundColor = chainConfig?.chainColorBG
-        if (account?.account_has_private == true) {
-            self.topKeyState.image = UIImage.init(named: "iconKeyFull")
-            self.topKeyState.image = self.topKeyState.image!.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = chainConfig?.chainColor
-        } else {
-            self.topKeyState.image = UIImage.init(named: "iconKeyEmpty")
-        }
-        
-        self.topDpAddress.text = account?.account_address
-        self.topDpAddress.adjustsFontSizeToFitWidth = true
-        self.topValue.attributedText = WUtils.dpUserCurrencyValue(poolDenom, totalAmount, poolDivideDecimal, topValue.font)
-
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
+            return 1
+        } else if (section == 1) {
             return 1
         }
         return 0
@@ -120,6 +101,13 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
+            cell?.onBindTokenDetail(account, chainConfig)
+            cell?.onBindValue(poolDenom, totalAmount, poolDivideDecimal)
+            cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
+            return cell!
+            
+        } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailNativeCell") as? TokenDetailNativeCell
             cell?.onBindPoolToken(chainType, poolDenom)
             return cell!
@@ -128,11 +116,6 @@ class PoolTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITa
             let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
             return cell!
         }
-    }
-    
-    
-    @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, account?.getDpName())
     }
     
     

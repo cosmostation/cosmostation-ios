@@ -37,6 +37,7 @@ class ChainAkash: ChainConfig {
     let gasRate1 = "0.0025uakt"
     let gasRate2 = "0.025uakt"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-akash-app.cosmostation.io"

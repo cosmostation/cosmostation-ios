@@ -36,7 +36,7 @@ class ChainPersistence: ChainConfig {
     let gasRate0 = "0.0uxprt"
     let gasRate1 = "0.025uxprt"
     
-    
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-persistence-app.cosmostation.io"

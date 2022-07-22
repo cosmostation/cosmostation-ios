@@ -16,8 +16,6 @@ import NIO
 class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, PasswordViewDelegate {
     
     @IBOutlet weak var walletDetailListTableView: UITableView!
-//    @IBOutlet weak var importActionView: UIStackView!
-//    @IBOutlet weak var checkActionView: UIStackView!
     @IBOutlet weak var btnImportPKey: UIButton!
     @IBOutlet weak var btnImportMnemonic: UIButton!
     @IBOutlet weak var btnCheckPkey: UIButton!
@@ -105,7 +103,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         } else if (indexPath.row == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDetailInfoCell") as! WalletDetailInfoCell
             cell.onBindView(selectedChainConfig, selectedAccount, chainId)
-            cell.actionAddress = { self.shareAddress(self.selectedAccount.account_address, self.selectedAccount.getDpName()) }
+            cell.actionAddress = { self.shareAddressType(self.selectedChainConfig, self.selectedAccount) }
             return cell
             
         } else {

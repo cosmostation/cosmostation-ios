@@ -35,6 +35,7 @@ class ChainAssetMantle: ChainConfig {
     
     let gasRate0 = "0.0umntl"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-asset-mantle-app.cosmostation.io"

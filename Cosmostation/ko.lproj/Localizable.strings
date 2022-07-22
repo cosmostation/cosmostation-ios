@@ -320,6 +320,9 @@
 "recent_history" = "최근 기록";
 "select_fee_denom" = "수수료 지불할 코인을 고르세요.";
 "gas_checked" = "가스량 확인 완료.";
+"address_type" = "주소 타입";
+"tendermint_type" = "텐더민트 타입";
+"ether_type" = "이더리움 타입";
 
 "current_price_format" = "현재 %@ 가격";
 "liquidation_price_format" = "청산 %@ 가격";

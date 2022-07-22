@@ -35,6 +35,7 @@ class ChainKi: ChainConfig {
     
     let gasRate0 = "0.025uxki"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-kichain-app.cosmostation.io"

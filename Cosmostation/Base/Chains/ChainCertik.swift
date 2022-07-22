@@ -35,6 +35,7 @@ class ChainCertik: ChainConfig {
     
     let gasRate0 = "0.05uctk"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-certik-app.cosmostation.io"
