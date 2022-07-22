@@ -37,6 +37,7 @@ class ChainBand: ChainConfig {
     let gasRate1 = "0.0025uband"
     let gasRate2 = "0.025uband"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-band-app.cosmostation.io"

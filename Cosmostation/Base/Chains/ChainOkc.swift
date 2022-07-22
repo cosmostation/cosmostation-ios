@@ -36,6 +36,7 @@ class ChainOkc: ChainConfig {
     
     let gasRate0 = "0.0000000001okt"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = ""

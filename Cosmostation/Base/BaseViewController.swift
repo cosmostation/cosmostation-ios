@@ -159,6 +159,24 @@ class BaseViewController: UIViewController {
         self.view.makeToast(text, duration: 2.0, position: .bottom, style: style)
     }
     
+    func shareAddressType(_ chainConfig: ChainConfig?, _ account: Account?) {
+        if (chainConfig == nil || account == nil) { return }
+        if (chainConfig!.etherAddressSupport) {
+            let alert = UIAlertController(title: NSLocalizedString("address_type", comment: ""), message: "", preferredStyle: .alert)
+            if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            alert.addAction(UIAlertAction(title: NSLocalizedString("tendermint_type", comment: ""), style: .default, handler: { _ in
+                self.shareAddress(account!.account_address, account!.getDpName())
+            }))
+            alert.addAction(UIAlertAction(title: NSLocalizedString("ether_type", comment: ""), style: .default, handler: { _ in
+                let ethAddress = WKey.convertAddressCosmosToTender(account!.account_address)
+                self.shareAddress(ethAddress, account!.getDpName())
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            shareAddress(account!.account_address, account!.getDpName())
+        }
+    }
+    
     func shareAddress(_ address: String, _ nickName: String?) {
         var qrCode = QRCode(address)
         qrCode?.backgroundColor = CIColor(rgba: "EEEEEE")
@@ -217,6 +235,7 @@ class BaseViewController: UIViewController {
     
     func onShowAddMenomicDialog() {
         let alert = UIAlertController(title: NSLocalizedString("alert_title_no_private_key", comment: ""), message: NSLocalizedString("alert_msg_no_private_key", comment: ""), preferredStyle: .alert)
+        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         alert.addAction(UIAlertAction(title: NSLocalizedString("add_mnemonic", comment: ""), style: .default, handler: { _ in
             self.onStartImportMnemonic()
         }))

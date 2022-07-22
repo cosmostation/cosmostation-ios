@@ -35,6 +35,7 @@ class ChainGravityBridge: ChainConfig {
     
     let gasRate0 = "0.0ugraviton"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-gravity-bridge-app.cosmostation.io"

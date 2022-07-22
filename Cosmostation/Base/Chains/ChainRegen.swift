@@ -37,6 +37,7 @@ class ChainRegen: ChainConfig {
     let gasRate1 = "0.0025uregen"
     let gasRate2 = "0.025uregen"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-regen-app.cosmostation.io"

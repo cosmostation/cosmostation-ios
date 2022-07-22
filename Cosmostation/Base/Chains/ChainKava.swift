@@ -38,6 +38,7 @@ class ChainKava: ChainConfig {
     let gasRate1 = "0.0025ukava"
     let gasRate2 = "0.025ukava"
     
+    var etherAddressSupport = true
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"

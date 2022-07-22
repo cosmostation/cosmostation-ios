@@ -37,6 +37,7 @@ class ChainKonstellation: ChainConfig {
     let gasRate1 = "0.001udarc"
     let gasRate2 = "0.01udarc"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-konstellation-app.cosmostation.io"

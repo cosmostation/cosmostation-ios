@@ -36,6 +36,7 @@ class ChainStarname: ChainConfig {
     let gasRate0 = "0.1uiov"
     let gasRate1 = "1.0uiov"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-iov-app.cosmostation.io"

@@ -13,30 +13,24 @@ import SafariServices
 
 class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let SECTION_NATIVE_GRPC             = 0;
-    let SECTION_IBC_AUTHED_GRPC         = 1;
-    let SECTION_BRIDGE_GRPC             = 2;
-    let SECTION_KAVA_BEP2_GRPC          = 3;
-    let SECTION_CW20_GRPC               = 4;
-    let SECTION_POOL_TOKEN_GRPC         = 5;
-    let SECTION_ETC_GRPC                = 6;
-    let SECTION_IBC_UNKNOWN_GRPC        = 7;
-    let SECTION_UNKNOWN_GRPC            = 8;
+    let SECTION_NATIVE_GRPC             = 1;
+    let SECTION_IBC_AUTHED_GRPC         = 2;
+    let SECTION_BRIDGE_GRPC             = 3;
+    let SECTION_KAVA_BEP2_GRPC          = 4;
+    let SECTION_CW20_GRPC               = 5;
+    let SECTION_POOL_TOKEN_GRPC         = 6;
+    let SECTION_ETC_GRPC                = 7;
+    let SECTION_IBC_UNKNOWN_GRPC        = 8;
+    let SECTION_UNKNOWN_GRPC            = 9;
     
-    let SECTION_NATIVE                  = 9;
-    let SECTION_ETC                     = 10;
-    let SECTION_UNKNOWN                 = 11;
+    let SECTION_NATIVE                  = 10;
+    let SECTION_ETC                     = 11;
+    let SECTION_UNKNOWN                 = 12;
     
 
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
     @IBOutlet weak var titleAlarmBtn: UIButton!
-    
-    @IBOutlet weak var totalCard: CardView!
-    @IBOutlet weak var totalKeyState: UIImageView!
-    @IBOutlet weak var totalDpAddress: UILabel!
-    @IBOutlet weak var totalValue: UILabel!
-    
     @IBOutlet weak var tokenTableView: UITableView!
     var refresher: UIRefreshControl!
     var mainTabVC: MainTabViewController!
@@ -45,19 +39,19 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var mBalances = Array<Balance>()
     var mBalances_gRPC = Array<Coin>()
     
-    var mNative_gRPC = Array<Coin>()                // section 0
-    var mIbcAuthed_gRPC = Array<Coin>()             // section 1
-    var mBridged_gRPC = Array<Coin>()               // section 2
-    var mKavaBep2_gRPC = Array<Coin>()              // section 3
-    var mCW20_gRPC = Array<Cw20Token>()             // section 4
-    var mPoolToken_gRPC = Array<Coin>()             // section 5
-    var mEtc_gRPC = Array<Coin>()                   // section 6
-    var mIbcUnknown_gRPC = Array<Coin>()            // section 7
-    var mUnKnown_gRPC = Array<Coin>()               // section 8
+    var mNative_gRPC = Array<Coin>()                // section 1
+    var mIbcAuthed_gRPC = Array<Coin>()             // section 2
+    var mBridged_gRPC = Array<Coin>()               // section 3
+    var mKavaBep2_gRPC = Array<Coin>()              // section 4
+    var mCW20_gRPC = Array<Cw20Token>()             // section 5
+    var mPoolToken_gRPC = Array<Coin>()             // section 6
+    var mEtc_gRPC = Array<Coin>()                   // section 7
+    var mIbcUnknown_gRPC = Array<Coin>()            // section 8
+    var mUnKnown_gRPC = Array<Coin>()               // section 9
     
-    var mNative = Array<Balance>()                  // section 9
-    var mEtc = Array<Balance>()                     // section 10
-    var mUnKnown = Array<Balance>()                 // section 11
+    var mNative = Array<Balance>()                  // section 10
+    var mEtc = Array<Balance>()                     // section 11
+    var mUnKnown = Array<Balance>()                 // section 12
     
 
     override func viewDidLoad() {
@@ -70,6 +64,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "TokenCell", bundle: nil), forCellReuseIdentifier: "TokenCell")
         self.tokenTableView.rowHeight = UITableView.automaticDimension
         self.tokenTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -86,9 +81,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.mBalances = BaseData.instance.mBalances
         self.mBalances_gRPC = BaseData.instance.mMyBalances_gRPC
         self.mCW20_gRPC = BaseData.instance.getCw20s_gRPC()
-        
-        let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
-        self.totalCard.addGestureRecognizer(tapTotalCard)
         
         self.updateView()
     }
@@ -118,18 +110,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.titleWalletName.text = account?.getDpName()
         self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
         
-        self.totalCard.backgroundColor = chainConfig?.chainColorBG
-        self.totalDpAddress.text = account?.account_address
-        self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
-        if (account?.account_has_private == true) {
-            self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
-            self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
-            self.totalKeyState.tintColor = chainConfig?.chainColor
-        } else {
-            self.totalKeyState.image = UIImage.init(named: "iconKeyEmpty")
-        }
-        
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
                 DispatchQueue.main.async {
@@ -150,7 +130,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     func updateView() {
         self.onClassifyTokens()
         self.tokenTableView.reloadData()
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
     }
     
     @objc func onRequestFetch() {
@@ -173,11 +152,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 12
+        return 13
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count == 0) { return 0 }
+        if (section == 0) { return 0 }
+        else if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count == 0) { return 0 }
         else if (section == SECTION_IBC_AUTHED_GRPC && mIbcAuthed_gRPC.count == 0) { return 0 }
         else if (section == SECTION_BRIDGE_GRPC && mBridged_gRPC.count == 0) { return 0 }
         else if (section == SECTION_KAVA_BEP2_GRPC && mKavaBep2_gRPC.count == 0) { return 0 }
@@ -216,7 +196,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
+        if (section == 0) { return 1}
+        else if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
         else if (section == SECTION_IBC_AUTHED_GRPC) { return mIbcAuthed_gRPC.count }
         else if (section == SECTION_BRIDGE_GRPC) { return mBridged_gRPC.count }
         else if (section == SECTION_KAVA_BEP2_GRPC) { return mKavaBep2_gRPC.count }
@@ -233,59 +214,61 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
-        if (indexPath.section == SECTION_NATIVE_GRPC) {
-            onBindNativeToken_gRPC(cell, mNative_gRPC[indexPath.row])
+        if (indexPath.section == 0) {
+            return onSetAddressItems(tableView, indexPath);
             
-        } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
-            onBindIbcToken_gRPC(cell, mIbcAuthed_gRPC[indexPath.row])
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
+            if (indexPath.section == SECTION_NATIVE_GRPC) {
+                onBindNativeToken_gRPC(cell, mNative_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
+                onBindIbcToken_gRPC(cell, mIbcAuthed_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
+                onBindEthBridgeToken_gRPC(cell, mBridged_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
+                onBindKavaBep2Token_gRPC(cell, mKavaBep2_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_CW20_GRPC) {
+                onBindCw20Token_gRPC(cell, mCW20_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
+                onBindPoolToken_gRPC(cell, mPoolToken_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_ETC_GRPC) {
+                onBindEtcToken_gRPC(cell, mEtc_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
+                onBindIbcToken_gRPC(cell, mIbcUnknown_gRPC[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
+                cell?.tokenImg.image = UIImage(named: "tokenDefault")
+                let denomText = mUnKnown_gRPC[indexPath.row].denom.uppercased()
+                if (denomText.count > 4) { cell?.tokenSymbol.text = denomText.substring(to: 4) }
+                else { cell?.tokenSymbol.text = denomText }
+                cell?.tokenTitle.text = ""
+                cell?.tokenDescription.text = " "
+                cell!.tokenValue.text = ""
+                cell?.tokenAmount.attributedText = WDP.dpAmount(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
+            }
             
-        } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-            onBindEthBridgeToken_gRPC(cell, mBridged_gRPC[indexPath.row])
             
-        } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
-            onBindKavaBep2Token_gRPC(cell, mKavaBep2_gRPC[indexPath.row])
             
-        } else if (indexPath.section == SECTION_CW20_GRPC) {
-            onBindCw20Token_gRPC(cell, mCW20_gRPC[indexPath.row])
+            else if (indexPath.section == SECTION_NATIVE) {
+                onBindNativeToken(cell, mNative[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_ETC) {
+                onBindEtcToken(cell, mEtc[indexPath.row])
+                
+            } else if (indexPath.section == SECTION_UNKNOWN) {
+                cell?.tokenSymbol.text = mUnKnown[indexPath.row].balance_denom.uppercased()
+                
+            }
+            return cell!
             
-        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
-            onBindPoolToken_gRPC(cell, mPoolToken_gRPC[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_ETC_GRPC) {
-            onBindEtcToken_gRPC(cell, mEtc_gRPC[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
-            onBindIbcToken_gRPC(cell, mIbcUnknown_gRPC[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
-            cell?.tokenImg.image = UIImage(named: "tokenDefault")
-            let denomText = mUnKnown_gRPC[indexPath.row].denom.uppercased()
-            if (denomText.count > 4) { cell?.tokenSymbol.text = denomText.substring(to: 4) }
-            else { cell?.tokenSymbol.text = denomText }
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = " "
-            cell!.tokenValue.text = ""
-            cell?.tokenAmount.attributedText = WDP.dpAmount(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
         }
-        
-        
-        
-        else if (indexPath.section == SECTION_NATIVE) {
-            onBindNativeToken(cell, mNative[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_ETC) {
-            onBindEtcToken(cell, mEtc[indexPath.row])
-            
-        } else if (indexPath.section == SECTION_UNKNOWN) {
-            cell?.tokenSymbol.text = mUnKnown[indexPath.row].balance_denom.uppercased()
-            
-        }
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -379,6 +362,13 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         } else if (indexPath.section == SECTION_UNKNOWN) {
             return
         }
+    }
+    
+    func onSetAddressItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
+        cell?.updateView(account, chainConfig)
+        cell?.actionTapAddress = { self.onClickAddress() }
+        return cell!
     }
     
     //bind native tokens with grpc
@@ -839,7 +829,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, account?.getDpName())
+    @objc func onClickAddress() {
+        self.shareAddressType(chainConfig, account)
     }
 }

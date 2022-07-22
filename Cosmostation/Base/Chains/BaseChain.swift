@@ -33,6 +33,7 @@ protocol ChainConfig {
     
     var addressPrefix: String { get set }
     
+    var etherAddressSupport: Bool { get set }
     var pushSupport: Bool { get set }
     var wcSupoort: Bool { get set }
     var grpcUrl: String { get set }

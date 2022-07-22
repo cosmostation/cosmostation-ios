@@ -36,6 +36,7 @@ class ChainSecret: ChainConfig {
     
     let gasRate0 = "0.25uscrt"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-secret.cosmostation.io"

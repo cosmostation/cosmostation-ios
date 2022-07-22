@@ -16,11 +16,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
     @IBOutlet weak var titleAlarmBtn: UIButton!
-    
-    @IBOutlet weak var totalCard: CardView!
-    @IBOutlet weak var totalKeyState: UIImageView!
-    @IBOutlet weak var totalDpAddress: UILabel!
-    @IBOutlet weak var totalValue: UILabel!
 
     @IBOutlet weak var historyTableView: UITableView!
     @IBOutlet weak var emptyLabel: UILabel!
@@ -43,6 +38,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.historyTableView.delegate = self
         self.historyTableView.dataSource = self
         self.historyTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.historyTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.historyTableView.register(UINib(nibName: "HistoryCell", bundle: nil), forCellReuseIdentifier: "HistoryCell")
         self.historyTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
         self.historyTableView.rowHeight = UITableView.automaticDimension
@@ -58,9 +54,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.historyTableView.addSubview(refresher)
         
         self.onRequestFetch()
-        
-        let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
-        self.totalCard.addGestureRecognizer(tapTotalCard)
         
         self.emptyLabel.isUserInteractionEnabled = true
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(testClick(tapGestureRecognizer:)))
@@ -96,7 +89,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @objc func onFetchPrice(_ notification: NSNotification) {
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
     }
     
     func updateTitle() {
@@ -107,18 +99,6 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         self.titleChainImg.image = chainConfig?.chainImg
         self.titleWalletName.text = account?.getDpName()
         self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
-        
-        self.totalCard.backgroundColor = chainConfig?.chainColorBG
-        self.totalDpAddress.text = account?.account_address
-        self.totalDpAddress.adjustsFontSizeToFitWidth = true
-        self.totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
-        if (account?.account_has_private == true) {
-            self.totalKeyState.image = UIImage.init(named: "iconKeyFull")
-            self.totalKeyState.image = self.totalKeyState.image!.withRenderingMode(.alwaysTemplate)
-            self.totalKeyState.tintColor = chainConfig?.chainColor
-        } else {
-            self.totalKeyState.image = UIImage.init(named: "iconKeyEmpty")
-        }
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             if settings.authorizationStatus == .authorized {
@@ -148,10 +128,11 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (section == 0) { return 0 }
         return 30
     }
     
@@ -171,36 +152,48 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (chainType == ChainType.BINANCE_MAIN) {
-            return self.mBnbHistories.count
-        } else if (chainType == ChainType.OKEX_MAIN) {
-            return self.mOkHistories.count
+        if (section == 0) {
+            return 1
+            
         } else {
-            return self.mApiCustomNewHistories.count
+            if (chainType == .BINANCE_MAIN) {
+                return self.mBnbHistories.count
+            } else if (chainType == .OKEX_MAIN) {
+                return self.mOkHistories.count
+            } else {
+                return self.mApiCustomNewHistories.count
+            }
         }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if (chainType == ChainType.BINANCE_MAIN) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
-            cell?.bindHistoryBnbView(mBnbHistories[indexPath.row], account!.account_address)
-            return cell!
-            
-        } else if (chainType == ChainType.OKEX_MAIN) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
-            cell?.bindHistoryOkView(mOkHistories[indexPath.row], account!.account_address)
-            return cell!
+        if (indexPath.section == 0) {
+            return onSetAddressItems(tableView, indexPath);
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
-            cell?.bindHistoryView(chainConfig!, mApiCustomNewHistories[indexPath.row], account!.account_address)
-            return cell!
+            if (chainType == .BINANCE_MAIN) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
+                cell?.bindHistoryBnbView(mBnbHistories[indexPath.row], account!.account_address)
+                return cell!
+                
+            } else if (chainType == .OKEX_MAIN) {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"HistoryCell") as? HistoryCell
+                cell?.bindHistoryOkView(mOkHistories[indexPath.row], account!.account_address)
+                return cell!
+                
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier:"NewHistoryCell") as? NewHistoryCell
+                cell?.bindHistoryView(chainConfig!, mApiCustomNewHistories[indexPath.row], account!.account_address)
+                return cell!
+            }
         }
     }
     
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension;
+    func onSetAddressItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
+        cell?.updateView(account, chainConfig)
+        cell?.actionTapAddress = { self.onClickAddress() }
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -365,8 +358,8 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
         }
     }
     
-    @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, account?.getDpName())
+    func onClickAddress() {
+        self.shareAddressType(chainConfig, account)
     }
     
 }

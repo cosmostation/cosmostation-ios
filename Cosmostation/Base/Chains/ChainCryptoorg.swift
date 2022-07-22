@@ -37,6 +37,7 @@ class ChainCryptoorg: ChainConfig {
     let gasRate1 = "0.05basecro"
     let gasRate2 = "0.075basecro"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-cryptocom-app.cosmostation.io"

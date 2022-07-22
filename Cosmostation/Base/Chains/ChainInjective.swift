@@ -35,6 +35,7 @@ class ChainInjective: ChainConfig {
     
     let gasRate0 = "500000000inj"
     
+    var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
     var grpcUrl = "lcd-inj-app.cosmostation.io"
