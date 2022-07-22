@@ -4864,6 +4864,8 @@
 		282371C826147A0F008780FF /* walletdash */ = {
 			isa = PBXGroup;
 			children = (
+				0469467C288A4005004EE923 /* WalletAddressCell.swift */,
+				0469467D288A4005004EE923 /* WalletAddressCell.xib */,
 				0443B89D285C62E00027A6B9 /* WalletBaseChainCell.swift */,
 				0443B89E285C62E00027A6B9 /* WalletBaseChainCell.xib */,
 				E1FD2326233E1BC4009327FE /* WalletIrisCell.swift */,
@@ -4900,8 +4902,6 @@
 				E126CFA22387A643002A546F /* WalletInflationCell.xib */,
 				E1FD233A233E1C44009327FE /* WalletGuideCell.swift */,
 				E1FD233B233E1C44009327FE /* WalletGuideCell.xib */,
-				0469467C288A4005004EE923 /* WalletAddressCell.swift */,
-				0469467D288A4005004EE923 /* WalletAddressCell.xib */,
 			);
 			path = walletdash;
 			sourceTree = "<group>";
