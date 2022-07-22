@@ -127,6 +127,10 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         
         mSelectedProposalId.removeAll()
         isSelectMode = false
+        voteTableView.reloadData()
+        btnMultiVote.isHidden = false
+        layerMultiVoteAction.isHidden = true
+        
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mProposals = selected
         txVC.mType = TASK_TYPE_VOTE
