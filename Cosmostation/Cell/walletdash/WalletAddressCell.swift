@@ -52,4 +52,30 @@ class WalletAddressCell: UITableViewCell {
         }
         totalValue.attributedText = WUtils.dpAllAssetValueUserCurrency(chainConfig, totalValue.font)
     }
+    
+    func onBindTokenDetail(_ account: Account?, _ chainConfig: ChainConfig?) {
+        if (chainConfig == nil || account == nil) { return }
+        cardRoot.backgroundColor = chainConfig?.chainColorBG
+        dpAddressLabel.text = account?.account_address
+        dpAddressLabel.adjustsFontSizeToFitWidth = true
+        
+        if (chainConfig?.etherAddressSupport == true) {
+            ethAddressLabel.isHidden = false
+            ethAddressLabel.text = "(" + WKey.convertAddressCosmosToTender(account!.account_address) + ")"
+        } else {
+            ethAddressLabel.isHidden = true
+        }
+        
+        if (account!.account_has_private == true) {
+            dpKeyStateImg.image = UIImage.init(named: "iconKeyFull")
+            dpKeyStateImg.image = dpKeyStateImg.image!.withRenderingMode(.alwaysTemplate)
+            dpKeyStateImg.tintColor = chainConfig?.chainColor
+        } else {
+            dpKeyStateImg.image = UIImage.init(named: "iconKeyEmpty")
+        }
+    }
+    
+    func onBindValue(_ denom: String, _ amount: NSDecimalNumber, _ decimal: Int16) {
+        totalValue.attributedText = WUtils.dpValueUserCurrency(denom, amount, decimal, totalValue.font)
+    }
 }

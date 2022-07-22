@@ -54,7 +54,7 @@ class WalletCrytoCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainType: ChainType?) {
         let totalToken = WUtils.getAllMainAsset(CRYPTO_MAIN_DENOM)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 8, 6)
-        totalValue.attributedText = WUtils.dpUserCurrencyValue(CRYPTO_MAIN_DENOM, totalToken, 8, totalValue.font)
+        totalValue.attributedText = WUtils.dpValueUserCurrency(CRYPTO_MAIN_DENOM, totalToken, 8, totalValue.font)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(CRYPTO_MAIN_DENOM), availableAmount.font!, 8, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 8, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 8, 6)

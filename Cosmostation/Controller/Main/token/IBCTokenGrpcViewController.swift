@@ -17,16 +17,12 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     @IBOutlet weak var naviUpdownPercent: UILabel!
     @IBOutlet weak var naviUpdownImg: UIImageView!
     
-    @IBOutlet weak var topCard: CardView!
-    @IBOutlet weak var topKeyState: UIImageView!
-    @IBOutlet weak var topDpAddress: UILabel!
-    @IBOutlet weak var topValue: UILabel!
-    
     @IBOutlet weak var tokenTableView: UITableView!
     @IBOutlet weak var btnIbcSend: UIButton!
     @IBOutlet weak var btnSend: UIButton!
     
     var ibcDenom = ""
+    var baseDenom = ""
     var ibcDivideDecimal: Int16 = 6
     var ibcDisplayDecimal: Int16 = 6
     var totalAmount = NSDecimalNumber.zero
@@ -37,16 +33,14 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
+        self.onInitView()
+        
         self.tokenTableView.delegate = self
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailIBCInfoCell", bundle: nil), forCellReuseIdentifier: "TokenDetailIBCInfoCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
-        
-        let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
-        self.topCard.addGestureRecognizer(tapTotalCard)
-        
-        self.onInitView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +56,7 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     
     func onInitView() {
         let ibcHash = ibcDenom.replacingOccurrences(of: "ibc/", with: "")
-        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, ibcDenom)
+        baseDenom = BaseData.instance.getBaseDenom(chainConfig, ibcDenom)
         guard let ibcToken = BaseData.instance.getIbcToken(ibcHash) else {
             self.navigationController?.popViewController(animated: true)
             return
@@ -77,7 +71,6 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
             WDP.dpSymbolImg(chainConfig, ibcDenom, naviTokenImg)
             naviTokenSymbol.text = ibcToken.display_denom?.uppercased()
             naviTokenChannel.text = "(" + ibcToken.channel_id! + ")"
-            topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, totalAmount, ibcDivideDecimal, topValue.font)
             
             self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(baseDenom, naviPerPrice.font)
             self.naviUpdownPercent.attributedText = WUtils.dpValueChange(baseDenom, font: naviUpdownPercent.font)
@@ -90,33 +83,22 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
             naviTokenImg.image = UIImage(named: "tokenDefaultIbc")
             naviTokenSymbol.text = "UnKnown"
             naviTokenChannel.text = "(" + ibcToken.channel_id! + ")"
-            topValue.attributedText = WUtils.dpUserCurrencyValue(baseDenom, NSDecimalNumber.zero, ibcDivideDecimal, topValue.font)
             
             self.naviPerPrice.text = ""
             self.naviUpdownPercent.text = ""
             self.naviUpdownImg.image = nil
         }
         
-        self.topCard.backgroundColor = chainConfig?.chainColorBG
-        if (account?.account_has_private == true) {
-            self.topKeyState.image = UIImage.init(named: "iconKeyFull")
-            self.topKeyState.image = self.topKeyState.image!.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = chainConfig?.chainColor
-        } else {
-            self.topKeyState.image = UIImage.init(named: "iconKeyEmpty")
-        }
-        
-        self.topDpAddress.text = account?.account_address
-        self.topDpAddress.adjustsFontSizeToFitWidth = true
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
+            return 1
+        } else if (section == 1) {
             return 1
         }
         return 0
@@ -124,6 +106,13 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
+            cell?.onBindTokenDetail(account, chainConfig)
+            cell?.onBindValue(baseDenom, totalAmount, ibcDivideDecimal)
+            cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
+            return cell!
+            
+        } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailIBCInfoCell") as? TokenDetailIBCInfoCell
             cell?.onBindIBCTokenInfo(chainType!, ibcDenom)
             return cell!
@@ -134,9 +123,6 @@ class IBCTokenGrpcViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    @objc func onClickActionShare() {
-        self.shareAddress(account!.account_address, account?.getDpName())
-    }
     
     @IBAction func onClickBack(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)

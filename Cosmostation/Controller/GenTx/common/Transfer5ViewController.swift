@@ -108,10 +108,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         
         if (toSendDenom == mainDenom) {
             remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
-            sendValueLabel.attributedText = WUtils.dpUserCurrencyValue(mainDenom, toSendAmount, mDivideDecimal, sendValueLabel.font)
-            feeValueLabel.attributedText = WUtils.dpUserCurrencyValue(mainDenom, feeAmount, mDivideDecimal, feeValueLabel.font)
-            availableValueLabel.attributedText = WUtils.dpUserCurrencyValue(mainDenom, currentAvailable, mDivideDecimal, availableValueLabel.font)
-            remainValueLabel.attributedText = WUtils.dpUserCurrencyValue(mainDenom, remainAvailable, mDivideDecimal, remainValueLabel.font)
+            sendValueLabel.attributedText = WUtils.dpValueUserCurrency(mainDenom, toSendAmount, mDivideDecimal, sendValueLabel.font)
+            feeValueLabel.attributedText = WUtils.dpValueUserCurrency(mainDenom, feeAmount, mDivideDecimal, feeValueLabel.font)
+            availableValueLabel.attributedText = WUtils.dpValueUserCurrency(mainDenom, currentAvailable, mDivideDecimal, availableValueLabel.font)
+            remainValueLabel.attributedText = WUtils.dpValueUserCurrency(mainDenom, remainAvailable, mDivideDecimal, remainValueLabel.font)
             
         } else {
             remainAvailable = currentAvailable.subtracting(toSendAmount)

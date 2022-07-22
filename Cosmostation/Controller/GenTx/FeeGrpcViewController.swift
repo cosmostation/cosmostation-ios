@@ -132,7 +132,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         WDP.dpCoin(chainConfig, mFee.amount[0], feeTotalDenom, feeTotalAmount)
         
         let denomDecimal = WUtils.getDenomDecimal(chainConfig, mFeeData.denom)
-        feeTotalValue.attributedText = WUtils.dpUserCurrencyValue(mFeeData.denom!, NSDecimalNumber.init(string: mFee.amount[0].amount), denomDecimal, feeTotalValue.font)
+        feeTotalValue.attributedText = WUtils.dpValueUserCurrency(mFeeData.denom!, NSDecimalNumber.init(string: mFee.amount[0].amount), denomDecimal, feeTotalValue.font)
     
         gasDescriptionLabel.text = mFeeInfo[mSelectedFeeInfo].msg
     }

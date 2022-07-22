@@ -58,7 +58,7 @@ class WalletStationCell: UITableViewCell {
     func updateView(_ account: Account?, _ chainType: ChainType?) {
         let totalToken = WUtils.getAllMainAsset(STATION_TEST_DENOM)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 6, 6)
-        totalValue.attributedText = WUtils.dpUserCurrencyValue(STATION_TEST_DENOM, totalToken, 6, totalValue.font)
+        totalValue.attributedText = WUtils.dpValueUserCurrency(STATION_TEST_DENOM, totalToken, 6, totalValue.font)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(STATION_TEST_DENOM), availableAmount.font!, 6, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)

@@ -192,7 +192,7 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
     func onSetAddressItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
         cell?.updateView(account, chainConfig)
-        cell?.actionTapAddress = { self.onClickAddress() }
+        cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
         return cell!
     }
     
@@ -357,9 +357,4 @@ class MainTabHistoryViewController: BaseViewController, UITableViewDelegate, UIT
             }
         }
     }
-    
-    func onClickAddress() {
-        self.shareAddressType(chainConfig, account)
-    }
-    
 }

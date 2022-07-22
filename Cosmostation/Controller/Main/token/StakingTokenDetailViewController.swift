@@ -16,11 +16,6 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     @IBOutlet weak var naviUpdownPercent: UILabel!
     @IBOutlet weak var naviUpdownImg: UIImageView!
     
-    @IBOutlet weak var topCard: CardView!
-    @IBOutlet weak var topKeyState: UIImageView!
-    @IBOutlet weak var topDpAddress: UILabel!
-    @IBOutlet weak var topValue: UILabel!
-    
     @IBOutlet weak var tokenDetailTableView: UITableView!
     @IBOutlet weak var btnBep3Send: UIButton!
     
@@ -38,18 +33,16 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
         self.stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
         self.stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
+        self.onInitView()
+        
         self.tokenDetailTableView.delegate = self
         self.tokenDetailTableView.dataSource = self
         self.tokenDetailTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.tokenDetailTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenDetailTableView.register(UINib(nibName: "TokenStakingOldCell", bundle: nil), forCellReuseIdentifier: "TokenStakingOldCell")
         self.tokenDetailTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
         self.tokenDetailTableView.register(UINib(nibName: "TokenDetailUnbondingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailUnbondingDetailCell")
         self.tokenDetailTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
-        
-        let tapTotalCard = UITapGestureRecognizer(target: self, action: #selector(self.onClickActionShare))
-        self.topCard.addGestureRecognizer(tapTotalCard)
-        
-        self.onInitView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,38 +66,26 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
         else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
         
-        self.topCard.backgroundColor = chainConfig?.chainColorBG
-        if (account?.account_has_private == true) {
-            self.topKeyState.image = UIImage.init(named: "iconKeyFull")
-            self.topKeyState.image = self.topKeyState.image!.withRenderingMode(.alwaysTemplate)
-            self.topKeyState.tintColor = chainConfig?.chainColor
-        } else {
-            self.topKeyState.image = UIImage.init(named: "iconKeyEmpty")
-        }
-        self.topDpAddress.text = account?.account_address
-        self.topDpAddress.adjustsFontSizeToFitWidth = true
-        
         if (chainType == ChainType.BINANCE_MAIN) {
             totalAmount = WUtils.getAllBnbToken(stakingDenom)
             btnBep3Send.isHidden = false
         } else if (chainType == ChainType.OKEX_MAIN) {
             totalAmount = WUtils.getAllExToken(stakingDenom)
         }
-        self.topValue.attributedText = WUtils.dpUserCurrencyValue(stakingDenom, totalAmount, stakingDivideDecimal, topValue.font)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return 1
-            
         } else if (section == 1) {
-            return 0
-            
+            return 1
         } else if (section == 2) {
+            return 0
+        } else if (section == 3) {
             return 0
         }
         return 0
@@ -112,16 +93,23 @@ class StakingTokenDetailViewController: BaseViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.section == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
+            cell?.onBindTokenDetail(account, chainConfig)
+            cell?.onBindValue(stakingDenom, totalAmount, stakingDivideDecimal)
+            cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
+            return cell!
+            
+        } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenStakingOldCell") as? TokenStakingOldCell
             cell?.onBindStakingToken(chainType!)
             return cell!
             
-        } else if (indexPath.section == 1) {
+        } else if (indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailVestingDetailCell") as? TokenDetailVestingDetailCell
             cell?.onBindVestingToken(chainType!, stakingDenom)
             return cell!
             
-        } else if (indexPath.section == 2) {
+        } else if (indexPath.section == 3) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailUnbondingDetailCell") as? TokenDetailUnbondingDetailCell
             cell?.onBindUnbondingToken(chainType!)
             return cell!
