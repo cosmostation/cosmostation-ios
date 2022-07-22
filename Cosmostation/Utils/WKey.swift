@@ -280,7 +280,7 @@ class WKey {
         return result
     }
     
-    //update prefix "ex" to "Ox"
+    //comsos address to ether style
     static func convertAddressCosmosToTender(_ exAddress: String) -> String {
         let data = getDatafromDpAddress(exAddress)
         return EthereumAddress.init(data: data!).string
