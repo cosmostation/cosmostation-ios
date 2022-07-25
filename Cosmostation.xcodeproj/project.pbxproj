@@ -543,6 +543,10 @@
 		0451FDAA2832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451FD752832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift */; };
 		04547BEB2786AF2900011984 /* DesmosProfileInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */; };
 		04547BEC2786AF2900011984 /* DesmosProfileInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */; };
+		045DAD4F288F52E2004ED9B4 /* GranterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD4D288F52E2004ED9B4 /* GranterViewCell.swift */; };
+		045DAD50288F52E2004ED9B4 /* GranterViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD4D288F52E2004ED9B4 /* GranterViewCell.swift */; };
+		045DAD51288F52E2004ED9B4 /* GranterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD4E288F52E2004ED9B4 /* GranterViewCell.xib */; };
+		045DAD52288F52E2004ED9B4 /* GranterViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD4E288F52E2004ED9B4 /* GranterViewCell.xib */; };
 		04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */; };
 		04615CC92750C7AD00A693B0 /* WalletDesmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */; };
 		0469467E288A4005004EE923 /* WalletAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469467C288A4005004EE923 /* WalletAddressCell.swift */; };
@@ -3135,6 +3139,8 @@
 		0451FD752832370100214FDA /* osmosis_gamm_pool-models_balancer_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "osmosis_gamm_pool-models_balancer_tx.grpc.swift"; sourceTree = "<group>"; };
 		04547BE92786AF2900011984 /* DesmosProfileInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesmosProfileInfoCell.swift; sourceTree = "<group>"; };
 		04547BEA2786AF2900011984 /* DesmosProfileInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DesmosProfileInfoCell.xib; sourceTree = "<group>"; };
+		045DAD4D288F52E2004ED9B4 /* GranterViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GranterViewCell.swift; sourceTree = "<group>"; };
+		045DAD4E288F52E2004ED9B4 /* GranterViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GranterViewCell.xib; sourceTree = "<group>"; };
 		04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosCell.swift; sourceTree = "<group>"; };
 		04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosCell.xib; sourceTree = "<group>"; };
 		0469467C288A4005004EE923 /* WalletAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAddressCell.swift; sourceTree = "<group>"; };
@@ -4722,9 +4728,9 @@
 				040FA6C2275F55B100229F6F /* desmos_posts_v1beta1_query.pb.swift */,
 				040FA489275F558B00229F6F /* desmos_posts_v1beta1_reactions.pb.swift */,
 				040FA4F9275F559200229F6F /* desmos_posts_v1beta1_report.pb.swift */,
+				040FA5BB275F559F00229F6F /* desmos_profiles_v1beta1_client_cli.pb.swift */,
 				040FA48E275F558C00229F6F /* desmos_profiles_legacy_v100_models_app_links.pb.swift */,
 				040FA58A275F559B00229F6F /* desmos_profiles_legacy_v100_models_params.pb.swift */,
-				040FA5BB275F559F00229F6F /* desmos_profiles_v1beta1_client_cli.pb.swift */,
 				040FA4E3275F559100229F6F /* desmos_profiles_v1beta1_models_app_links.pb.swift */,
 				040FA577275F559A00229F6F /* desmos_profiles_v1beta1_models_chain_links.pb.swift */,
 				040FA4CE275F559000229F6F /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift */,
@@ -5957,6 +5963,8 @@
 				0443B88C2855B94E0027A6B9 /* WalletDetailInfoCell.xib */,
 				0443B8912855B9600027A6B9 /* WalletDetailRewardCell.swift */,
 				0443B8922855B9600027A6B9 /* WalletDetailRewardCell.xib */,
+				045DAD4D288F52E2004ED9B4 /* GranterViewCell.swift */,
+				045DAD4E288F52E2004ED9B4 /* GranterViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6221,6 +6229,7 @@
 				18FFB721281AF533004E65BB /* CdpListAllCell.xib in Resources */,
 				18F4129E286064A80007E3F2 /* MnemonicListViewController.xib in Resources */,
 				18FFB723281AF533004E65BB /* WalletInflationCell.xib in Resources */,
+				045DAD52288F52E2004ED9B4 /* GranterViewCell.xib in Resources */,
 				18FFB724281AF533004E65BB /* TokenDetailIBCInfoCell.xib in Resources */,
 				18FFB725281AF533004E65BB /* Kava.storyboard in Resources */,
 				18FFB726281AF533004E65BB /* ManageAccountCell.xib in Resources */,
@@ -6571,6 +6580,7 @@
 				283EB77A26C8288400B9D28D /* EarnBondedCell.xib in Resources */,
 				28D7BE7E25F10636006EECD7 /* HardListMyStatusCell.xib in Resources */,
 				283A80C324513F6F008FF813 /* CdpListAllCell.xib in Resources */,
+				045DAD51288F52E2004ED9B4 /* GranterViewCell.xib in Resources */,
 				04C49380285069C800ECF4D2 /* PrivateKeyRestoreViewController.xib in Resources */,
 				E126CFA02387A643002A546F /* WalletInflationCell.xib in Resources */,
 				28B2E4C826CFC85400ECF960 /* TokenDetailIBCInfoCell.xib in Resources */,
@@ -7213,6 +7223,7 @@
 				1817CB06283E2CE500523713 /* sifnode_dispensation_v1_tx.pb.swift in Sources */,
 				1817CABE283E2CE500523713 /* crescent_liquidstaking_v1beta1_tx.pb.swift in Sources */,
 				18FFB3D6281AF533004E65BB /* GenDenom3ViewController.swift in Sources */,
+				045DAD50288F52E2004ED9B4 /* GranterViewCell.swift in Sources */,
 				E103967E2875AACC0055903A /* ProposalEtcPeriodCell.swift in Sources */,
 				1817CC0F283E2CE600523713 /* cosmos_group_v1beta1_tx.grpc.swift in Sources */,
 				1817CC13283E2CE600523713 /* cosmos_crypto_hd_v1_hd.pb.swift in Sources */,
@@ -7897,6 +7908,7 @@
 				2842AB65242C396700248EEB /* KavaPriceFeedPrice.swift in Sources */,
 				28B2E4CF26CFEF8C00ECF960 /* BridgeTokenGrpcViewController.swift in Sources */,
 				0451FDA92832370100214FDA /* osmosis_claim_v1beta1_claim.pb.swift in Sources */,
+				045DAD4F288F52E2004ED9B4 /* GranterViewCell.swift in Sources */,
 				048C830D27BF572800270528 /* ethermint_evm_v1_query.pb.swift in Sources */,
 				040FA868275F55C200229F6F /* cosmos_base_v1beta1_coin.pb.swift in Sources */,
 				040FA87C275F55C200229F6F /* ibc_core_client_v1_tx.grpc.swift in Sources */,

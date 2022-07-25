@@ -233,7 +233,8 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             DispatchQueue.global().async {
                 do {
                     let channel = BaseNetWork.getConnection(chainConfig.chainType, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                    let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = derive.dpAddress }
+                    let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
+                    let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = derive.dpAddress; $0.pagination = page }
                     if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                         response.balances.forEach { balance in
                             if (balance.denom == chainConfig.stakeDenom) {

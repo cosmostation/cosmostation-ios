@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthzListViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="authzEmptyView" destination="3bo-Nz-ya7" id="1PQ-nc-pRA"/>
+                <outlet property="authzEmptyView" destination="0au-g1-87M" id="lmc-df-Pd8"/>
                 <outlet property="authzTableView" destination="tUG-SX-UhH" id="t8s-mm-R5h"/>
                 <outlet property="loadingImg" destination="UqR-zg-gHs" id="aCG-ug-OaO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -42,7 +43,7 @@
                                 <constraint firstAttribute="height" constant="14" id="Cso-kK-nld"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -82,6 +83,9 @@
     <resources>
         <image name="iconDataEmpty" width="36" height="36"/>
         <image name="loading_1" width="144" height="144"/>
+        <namedColor name="_font05">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -13,11 +13,11 @@ import NIO
 class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var authzTableView: UITableView!
-    @IBOutlet weak var authzEmptyView: UILabel!
+    @IBOutlet weak var authzEmptyView: UIView!
     @IBOutlet weak var loadingImg: LoadingImageView!
-    var refresher: UIRefreshControl!
     
-    var authorizations = Array<Cosmos_Authz_V1beta1_GrantAuthorization>()
+    var refresher: UIRefreshControl!
+    var granters = Array<String>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
         self.authzTableView.delegate = self
         self.authzTableView.dataSource = self
         self.authzTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        self.authzTableView.register(UINib(nibName: "ProposalVotingPeriodCell", bundle: nil), forCellReuseIdentifier: "ProposalVotingPeriodCell")
+        self.authzTableView.register(UINib(nibName: "GranterViewCell", bundle: nil), forCellReuseIdentifier: "GranterViewCell")
         self.authzTableView.rowHeight = UITableView.automaticDimension
         self.authzTableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -49,34 +49,52 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
     }
     
     @objc func onFetchAuthz() {
-//        self.mVotingPeriods.removeAll()
-//        self.mEtcPeriods.removeAll()
         self.onFetchGranter_gRPC(account!.account_address)
     }
     
     func onUpdateViews() {
+        self.loadingImg.stopAnimating()
+        self.loadingImg.isHidden = true
+        if (granters.count > 0) {
+            self.authzTableView.reloadData()
+            self.authzTableView.isHidden = false
+            self.authzEmptyView.isHidden = true
+            
+        } else {
+            self.authzTableView.isHidden = true
+            self.authzEmptyView.isHidden = false
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return granters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalVotingPeriodCell") as? ProposalVotingPeriodCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"GranterViewCell") as? GranterViewCell
+        cell?.onBindView(chainConfig, granters[indexPath.row])
         return cell!
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let authzDetailVC = AuthzDetailViewController(nibName: "AuthzDetailViewController", bundle: nil)
+        authzDetailVC.granterAddress = granters[indexPath.row]
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(authzDetailVC, animated: true)
+    }
     
     func onFetchGranter_gRPC(_ address: String) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 defer { try! channel.close().wait() }
-                
                 let req = Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest.with { $0.grantee = address }
                 if let response = try? Cosmos_Authz_V1beta1_QueryClient(channel: channel).granteeGrants(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
-                    print("response", response.grants.count)
-                    self.authorizations = response.grants
+                    response.grants.forEach { grant in
+                        if (!self.granters.contains(grant.granter)) {
+                            self.granters.append(grant.granter)
+                        }
+                    }
                 }
                 try channel.close().wait()
 
