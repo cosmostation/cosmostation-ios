@@ -816,6 +816,14 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func onClickAuthz() {
         print("onClickAuthz")
+//        if (account?.account_has_private == false) {
+//            self.onShowAddMenomicDialog()
+//            return
+//        }
+        let authzListVC = AuthzListViewController(nibName: "AuthzListViewController", bundle: nil)
+        authzListVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(authzListVC, animated: true)
     }
     
     func onClickGuide1() {

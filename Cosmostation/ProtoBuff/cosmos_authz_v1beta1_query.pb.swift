@@ -109,8 +109,59 @@ struct Cosmos_Authz_V1beta1_QueryGranterGrantsResponse {
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  /// authorizations is a list of grants granted for grantee by granter.
-  var grants: [Cosmos_Authz_V1beta1_Grant] = []
+  /// grants is a list of grants granted by the granter.
+  var grants: [Cosmos_Authz_V1beta1_GrantAuthorization] = []
+
+  /// pagination defines an pagination for the response.
+  var pagination: Cosmos_Base_Query_V1beta1_PageResponse {
+    get {return _pagination ?? Cosmos_Base_Query_V1beta1_PageResponse()}
+    set {_pagination = newValue}
+  }
+  /// Returns true if `pagination` has been explicitly set.
+  var hasPagination: Bool {return self._pagination != nil}
+  /// Clears the value of `pagination`. Subsequent reads from it will return its default value.
+  mutating func clearPagination() {self._pagination = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageResponse? = nil
+}
+
+/// QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method.
+struct Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  var grantee: String = String()
+
+  /// pagination defines an pagination for the request.
+  var pagination: Cosmos_Base_Query_V1beta1_PageRequest {
+    get {return _pagination ?? Cosmos_Base_Query_V1beta1_PageRequest()}
+    set {_pagination = newValue}
+  }
+  /// Returns true if `pagination` has been explicitly set.
+  var hasPagination: Bool {return self._pagination != nil}
+  /// Clears the value of `pagination`. Subsequent reads from it will return its default value.
+  mutating func clearPagination() {self._pagination = nil}
+
+  var unknownFields = SwiftProtobuf.UnknownStorage()
+
+  init() {}
+
+  fileprivate var _pagination: Cosmos_Base_Query_V1beta1_PageRequest? = nil
+}
+
+/// QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method.
+struct Cosmos_Authz_V1beta1_QueryGranteeGrantsResponse {
+  // SwiftProtobuf.Message conformance is added in an extension below. See the
+  // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
+  // methods supported on all messages.
+
+  /// grants is a list of grants granted to the grantee.
+  var grants: [Cosmos_Authz_V1beta1_GrantAuthorization] = []
 
   /// pagination defines an pagination for the response.
   var pagination: Cosmos_Base_Query_V1beta1_PageResponse {
@@ -290,6 +341,82 @@ extension Cosmos_Authz_V1beta1_QueryGranterGrantsResponse: SwiftProtobuf.Message
   }
 
   static func ==(lhs: Cosmos_Authz_V1beta1_QueryGranterGrantsResponse, rhs: Cosmos_Authz_V1beta1_QueryGranterGrantsResponse) -> Bool {
+    if lhs.grants != rhs.grants {return false}
+    if lhs._pagination != rhs._pagination {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryGranteeGrantsRequest"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "grantee"),
+    2: .same(proto: "pagination"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeSingularStringField(value: &self.grantee) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.grantee.isEmpty {
+      try visitor.visitSingularStringField(value: self.grantee, fieldNumber: 1)
+    }
+    if let v = self._pagination {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest, rhs: Cosmos_Authz_V1beta1_QueryGranteeGrantsRequest) -> Bool {
+    if lhs.grantee != rhs.grantee {return false}
+    if lhs._pagination != rhs._pagination {return false}
+    if lhs.unknownFields != rhs.unknownFields {return false}
+    return true
+  }
+}
+
+extension Cosmos_Authz_V1beta1_QueryGranteeGrantsResponse: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+  static let protoMessageName: String = _protobuf_package + ".QueryGranteeGrantsResponse"
+  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+    1: .same(proto: "grants"),
+    2: .same(proto: "pagination"),
+  ]
+
+  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+    while let fieldNumber = try decoder.nextFieldNumber() {
+      // The use of inline closures is to circumvent an issue where the compiler
+      // allocates stack space for every case branch when no optimizations are
+      // enabled. https://github.com/apple/swift-protobuf/issues/1034
+      switch fieldNumber {
+      case 1: try { try decoder.decodeRepeatedMessageField(value: &self.grants) }()
+      case 2: try { try decoder.decodeSingularMessageField(value: &self._pagination) }()
+      default: break
+      }
+    }
+  }
+
+  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+    if !self.grants.isEmpty {
+      try visitor.visitRepeatedMessageField(value: self.grants, fieldNumber: 1)
+    }
+    if let v = self._pagination {
+      try visitor.visitSingularMessageField(value: v, fieldNumber: 2)
+    }
+    try unknownFields.traverse(visitor: &visitor)
+  }
+
+  static func ==(lhs: Cosmos_Authz_V1beta1_QueryGranteeGrantsResponse, rhs: Cosmos_Authz_V1beta1_QueryGranteeGrantsResponse) -> Bool {
     if lhs.grants != rhs.grants {return false}
     if lhs._pagination != rhs._pagination {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}

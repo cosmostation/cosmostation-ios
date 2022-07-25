@@ -635,6 +635,7 @@ support@cosmostation.io";
 "title_profile_detail" = "프로필 상세";
 "title_profile_create" = "프로필 작성";
 "title_account_chain_link" = "계정링크 & 에어드랍";
+"title_authz_list" = "Authz 목록";
 
 
 "proposal_type_basic" = "기본";

@@ -55,6 +55,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.mEtcPeriods.removeAll()
         self.onFetchMintscanProposal()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)

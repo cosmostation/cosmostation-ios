@@ -38,7 +38,7 @@ class ChainBitsong: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var grpcUrl = "lcd-bitsong-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-bitsong-app.cosmostation.io/"
