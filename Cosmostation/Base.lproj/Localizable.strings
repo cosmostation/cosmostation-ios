@@ -630,6 +630,7 @@ support@cosmostation.io";
 "title_profile_create" = "Create Profile";
 "title_account_chain_link" = "Account Link & AriDrop";
 "title_authz_list" = "Authz List";
+"title_authz_detail" = "Authz Detail";
 
 
 "proposal_type_basic" = "Basic";
