@@ -99,7 +99,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
+        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(chainConfig!.stakeDenom)
         let starnameFee = WUtils.getStarNameRenewDomainFee(mMyDomain!, mMyDomainInfo_gRPC!.type)
         if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
@@ -126,7 +126,7 @@ class DomainDetailViewController: BaseViewController, UITableViewDelegate, UITab
             return
         }
         
-        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
+        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(chainConfig!.stakeDenom)
         let starnameFee = WUtils.getReplaceFee()
         if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))

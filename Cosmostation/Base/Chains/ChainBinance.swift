@@ -76,3 +76,5 @@ class ChainBinance: ChainConfig {
         return 0
     }
 }
+
+let BNB_MAIN_DENOM = "BNB"

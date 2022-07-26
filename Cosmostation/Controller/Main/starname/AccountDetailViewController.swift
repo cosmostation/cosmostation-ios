@@ -13,7 +13,6 @@ import SwiftProtobuf
 
 class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
     @IBOutlet weak var myAccountNameLabel: UILabel!
     @IBOutlet weak var myAccountAddressCntLabel: UILabel!
     @IBOutlet weak var myAccountExpireTimeLabel: UILabel!
@@ -96,7 +95,7 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
+        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(chainConfig!.stakeDenom)
         let starnameFee = WUtils.getStarNameRenewAccountFee(mMyDomainInfo_gRPC!.type)
         if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))
@@ -123,7 +122,7 @@ class AccountDetailViewController: BaseViewController, UITableViewDelegate, UITa
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
-        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
+        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(chainConfig!.stakeDenom)
         let starnameFee = WUtils.getReplaceFee()
         if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))

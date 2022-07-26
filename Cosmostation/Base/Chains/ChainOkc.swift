@@ -77,3 +77,6 @@ class ChainOkc: ChainConfig {
         return 0
     }
 }
+
+let OKEX_MAIN_DENOM = "okt"
+let OKEX_MAIN_OKB = "okb"

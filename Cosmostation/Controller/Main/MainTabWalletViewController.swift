@@ -233,7 +233,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetIrisItem(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletIrisCell") as? WalletIrisCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionNFT = { self.onClickNFT() }
@@ -296,7 +296,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetIovItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletIovCell") as? WalletIovCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionNameService = { self.onClickStarName() }
@@ -334,7 +334,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetCrytoItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletCrytoCell") as? WalletCrytoCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionNFT = { self.onClickNFT() }
@@ -395,7 +395,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetDesmosItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDesmosCell") as? WalletDesmosCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionProfile = { self.onClickProfile() }
@@ -445,7 +445,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetCrescentItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletCrescentCell") as? WalletCrescentCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionWC = { self.onClickWalletConect() }
@@ -466,7 +466,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetStationItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletStationCell") as? WalletStationCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionWC = { self.onClickWalletConect() }

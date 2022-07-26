@@ -44,29 +44,17 @@ class WalletIrisCell: UITableViewCell {
         actionNFT?()
     }
     
-    func updateView(_ account: Account?, _ chainType: ChainType?) {
-        if (chainType == ChainType.IRIS_MAIN) {
-            denomTitle.text = "IRIS"
-            let totalIris = WUtils.getAllMainAsset(IRIS_MAIN_DENOM)
-            totalAmount.attributedText = WDP.dpAmount(totalIris.stringValue, totalAmount.font!, 6, 6)
-            totalValue.attributedText = WUtils.dpValueUserCurrency(IRIS_MAIN_DENOM, totalIris, 6, totalValue.font)
-            availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(IRIS_MAIN_DENOM), availableAmount.font!, 6, 6)
-            delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
-            unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
-            rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(IRIS_MAIN_DENOM), rewardAmount.font, 6, 6)
-            BaseData.instance.updateLastTotal(account, totalIris.multiplying(byPowerOf10: -6).stringValue)
-            
-        } else if (chainType == ChainType.IRIS_TEST) {
-            denomTitle.text = "BIF"
-            let totalBif = WUtils.getAllMainAsset(IRIS_TEST_DENOM)
-            totalAmount.attributedText = WDP.dpAmount(totalBif.stringValue, totalAmount.font!, 6, 6)
-            totalValue.attributedText = WUtils.dpValueUserCurrency(IRIS_TEST_DENOM, totalBif, 6, totalValue.font)
-            availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(IRIS_TEST_DENOM), availableAmount.font!, 6, 6)
-            delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
-            unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
-            rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(IRIS_TEST_DENOM), rewardAmount.font, 6, 6)
-            BaseData.instance.updateLastTotal(account, totalBif.multiplying(byPowerOf10: -6).stringValue)
-        }
+    func updateView(_ account: Account?, _ chainConfig: ChainConfig?) {
+        if (account == nil || chainConfig == nil) { return }
+        denomTitle.text = chainConfig!.stakeSymbol
+        let totalIris = WUtils.getAllMainAsset(chainConfig!.stakeDenom)
+        totalAmount.attributedText = WDP.dpAmount(totalIris.stringValue, totalAmount.font!, 6, 6)
+        totalValue.attributedText = WUtils.dpValueUserCurrency(chainConfig!.stakeDenom, totalIris, 6, totalValue.font)
+        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(chainConfig!.stakeDenom), availableAmount.font!, 6, 6)
+        delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
+        unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)
+        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(chainConfig!.stakeDenom), rewardAmount.font, 6, 6)
+        BaseData.instance.updateLastTotal(account, totalIris.multiplying(byPowerOf10: -6).stringValue)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
