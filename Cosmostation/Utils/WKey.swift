@@ -174,6 +174,15 @@ class WKey {
         return bech32.encode(chainConfig!.addressPrefix, values: data)
     }
     
+    static func getOpAddressFromAddress(_ address: String, _ chainConfig: ChainConfig?) -> String {
+        if (chainConfig == nil) { return  "" }
+        let bech32 = Bech32()
+        guard let (_, data) = try? bech32.decode(address) else {
+            return ""
+        }
+        return bech32.encode(chainConfig!.validatorPrefix, values: data)
+    }
+    
     static func getDatafromDpAddress(_ address: String) -> Data? {
         let bech32 = Bech32()
         guard let (_, data) = try? bech32.decode(address) else {
