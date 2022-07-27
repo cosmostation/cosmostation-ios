@@ -31,6 +31,7 @@ class ChainInjective: ChainConfig {
     var stakeSendBg = UIColor(named: "injective")!
     
     var addressPrefix = "inj"
+    var validatorPrefix = "injvaloper"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
     let gasRate0 = "500000000inj"

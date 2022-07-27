@@ -31,6 +31,7 @@ class StationTest: ChainConfig {
     var stakeSendBg = UIColor(named: "station")!
     
     var addressPrefix = "station"
+    var validatorPrefix = "stationvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uiss"

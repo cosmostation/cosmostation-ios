@@ -31,6 +31,7 @@ class ChainBinance: ChainConfig {
     var stakeSendBg = UIColor(named: "binance")!
     
     var addressPrefix = "bnb"
+    var validatorPrefix = ""
     let addressHdPath0 = "m/44'/714'/0'/0/X"
     
     let gasRate0 = "0.0BNB"

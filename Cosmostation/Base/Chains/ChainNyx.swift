@@ -31,6 +31,7 @@ class ChainNyx: ChainConfig {
     var stakeSendBg = UIColor(named: "nyx")!
     
     var addressPrefix = "n"
+    var validatorPrefix = "nvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.025unym"

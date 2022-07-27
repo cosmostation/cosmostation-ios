@@ -32,6 +32,7 @@ protocol ChainConfig {
     var stakeSendBg: UIColor { get set }
     
     var addressPrefix: String { get set }
+    var validatorPrefix: String { get set }
     
     var etherAddressSupport: Bool { get set }
     var pushSupport: Bool { get set }

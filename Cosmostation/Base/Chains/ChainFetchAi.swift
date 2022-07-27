@@ -31,6 +31,7 @@ class ChainFetchAi: ChainConfig {
     var stakeSendBg = UIColor(named: "fetchai")!
     
     var addressPrefix = "fetch"
+    var validatorPrefix = "fetchvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/60'/0'/0/X"
     let addressHdPath2 = "m/44'/60'/X'/0/0"

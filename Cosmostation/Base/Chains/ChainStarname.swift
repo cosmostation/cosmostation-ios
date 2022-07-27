@@ -31,6 +31,7 @@ class ChainStarname: ChainConfig {
     var stakeSendBg = UIColor(named: "starname")!
     
     var addressPrefix = "star"
+    var validatorPrefix = "starvaloper"
     let addressHdPath0 = "m/44'/234'/0'/0/X"
     
     let gasRate0 = "0.1uiov"

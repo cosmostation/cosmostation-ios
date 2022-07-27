@@ -31,6 +31,7 @@ class ChainKava: ChainConfig {
     var stakeSendBg = UIColor(named: "kava")!
     
     var addressPrefix = "kava"
+    var validatorPrefix = "kavavaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     var addressaddressHdPath1 = "m/44'/459'/0'/0/X"
     

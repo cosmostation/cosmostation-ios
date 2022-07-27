@@ -31,6 +31,7 @@ class ChainEmoney: ChainConfig {
     var stakeSendBg = UIColor(named: "emoney")!
     
     var addressPrefix = "emoney"
+    var validatorPrefix = "emoneyvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.1ungm"

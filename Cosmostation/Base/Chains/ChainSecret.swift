@@ -31,6 +31,7 @@ class ChainSecret: ChainConfig {
     var stakeSendBg = UIColor(named: "secret")!
     
     var addressPrefix = "secret"
+    var validatorPrefix = "secretvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/529'/0'/0/X"
     

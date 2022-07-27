@@ -31,6 +31,7 @@ class ChainOkc: ChainConfig {
     var stakeSendBg = UIColor(named: "okc")!
     
     var addressPrefix = "ex"
+    var validatorPrefix = "ex"
     let addressHdPath0 = "m/44'/996'/0'/0/X"
     let addressHdPath1 = "m/44'/60'/0'/0/X"
     

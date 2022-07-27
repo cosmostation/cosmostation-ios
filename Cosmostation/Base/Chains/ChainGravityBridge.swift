@@ -31,6 +31,7 @@ class ChainGravityBridge: ChainConfig {
     var stakeSendBg = UIColor(named: "gravitybridge")!
     
     var addressPrefix = "gravity"
+    var validatorPrefix = "gravityvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0ugraviton"

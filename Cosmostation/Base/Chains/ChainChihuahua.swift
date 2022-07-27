@@ -31,6 +31,7 @@ class ChainChihuahua: ChainConfig {
     var stakeSendBg = UIColor(named: "chihuahua")!
     
     var addressPrefix = "chihuahua"
+    var validatorPrefix = "chihuahuavaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00035uhuahua"

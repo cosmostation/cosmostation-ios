@@ -31,6 +31,7 @@ class ChainDesmos: ChainConfig {
     var stakeSendBg = UIColor(named: "desmos")!
     
     var addressPrefix = "desmos"
+    var validatorPrefix = "desmosvaloper"
     let addressHdPath0 = "m/44'/852'/0'/0/X"
     
     let gasRate0 = "0.001udsm"

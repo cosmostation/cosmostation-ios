@@ -31,6 +31,7 @@ class ChainCryptoorg: ChainConfig {
     var stakeSendBg = UIColor(named: "cryptoorg")!
     
     var addressPrefix = "cro"
+    var validatorPrefix = "crocncl"
     let addressHdPath0 = "m/44'/394'/0'/0/X"
     
     let gasRate0 = "0.025basecro"

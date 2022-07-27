@@ -31,6 +31,7 @@ class ChainKi: ChainConfig {
     var stakeSendBg = UIColor(named: "ki")!
     
     var addressPrefix = "ki"
+    var validatorPrefix = "kivaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.025uxki"

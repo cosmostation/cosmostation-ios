@@ -31,6 +31,7 @@ class ChainCertik: ChainConfig {
     var stakeSendBg = UIColor(named: "certik")!
     
     var addressPrefix = "certik"
+    var validatorPrefix = "certikvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.05uctk"

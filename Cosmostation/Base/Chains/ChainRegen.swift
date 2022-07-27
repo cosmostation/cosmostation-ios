@@ -31,6 +31,7 @@ class ChainRegen: ChainConfig {
     var stakeSendBg = UIColor(named: "regen")!
     
     var addressPrefix = "regen"
+    var validatorPrefix = "regenvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uregen"

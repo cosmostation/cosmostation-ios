@@ -31,6 +31,7 @@ class ChainUmee: ChainConfig {
     var stakeSendBg = UIColor(named: "umee")!
     
     var addressPrefix = "umee"
+    var validatorPrefix = "umeevaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.000uumee"

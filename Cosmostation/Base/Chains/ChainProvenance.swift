@@ -31,6 +31,7 @@ class ChainProvenance: ChainConfig {
     var stakeSendBg = UIColor(named: "provenance")!
     
     var addressPrefix = "pb"
+    var validatorPrefix = "pbvaloper"
     let addressHdPath0 = "m/44'/505'/0'/0/X"
     
     let gasRate0 = "2000nhash"

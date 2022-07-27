@@ -31,6 +31,7 @@ class ChainRizon: ChainConfig {
     var stakeSendBg = UIColor(named: "rizon")!
     
     var addressPrefix = "rizon"
+    var validatorPrefix = "rizonvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uatolo"

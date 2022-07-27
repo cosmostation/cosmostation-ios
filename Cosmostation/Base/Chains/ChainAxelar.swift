@@ -31,6 +31,7 @@ class ChainAxelar: ChainConfig {
     var stakeSendBg = UIColor(named: "axelar")!
     
     var addressPrefix = "axelar"
+    var validatorPrefix = "axelarvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.05uaxl"

@@ -31,6 +31,7 @@ class ChainBand: ChainConfig {
     var stakeSendBg = UIColor(named: "band")!
     
     var addressPrefix = "band"
+    var validatorPrefix = "bandvaloper"
     let addressHdPath0 = "m/44'/494'/0'/0/X"
     
     let gasRate0 = "0.00025uband"

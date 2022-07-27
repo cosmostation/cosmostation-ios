@@ -31,6 +31,7 @@ class ChainMedibloc: ChainConfig {
     var stakeSendBg = UIColor(named: "medibloc")!
     
     var addressPrefix = "panacea"
+    var validatorPrefix = "panaceavaloper"
     let addressHdPath0 = "m/44'/371'/0'/0/X"
     
     let gasRate0 = "5umed"

@@ -31,6 +31,7 @@ class ChainAlthea: ChainConfig {
     var stakeSendBg = UIColor(named: "cosmos")!
     
     var addressPrefix = "althea"
+    var validatorPrefix = "oper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0ualtg"

@@ -31,6 +31,7 @@ class ChainAssetMantle: ChainConfig {
     var stakeSendBg = UIColor(named: "assetmantle")!
     
     var addressPrefix = "mantle"
+    var validatorPrefix = "mantlevaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0umntl"

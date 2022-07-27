@@ -31,6 +31,7 @@ class ChainCrescent: ChainConfig {
     var stakeSendBg = UIColor.init(hexString: "452318")
     
     var addressPrefix = "cre"
+    var validatorPrefix = "crevaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.01ucre,0.01ubcre"

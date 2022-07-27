@@ -31,6 +31,7 @@ class ChainAkash: ChainConfig {
     var stakeSendBg = UIColor(named: "akash")!
     
     var addressPrefix = "akash"
+    var validatorPrefix = "akashvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uakt"

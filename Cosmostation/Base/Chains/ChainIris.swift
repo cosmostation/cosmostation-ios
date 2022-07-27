@@ -31,6 +31,7 @@ class ChainIris: ChainConfig {
     var stakeSendBg = UIColor(named: "iris")!
     
     var addressPrefix = "iaa"
+    var validatorPrefix = "iva"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.002uiris"

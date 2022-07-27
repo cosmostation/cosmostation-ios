@@ -31,6 +31,7 @@ class ChainOsmosis: ChainConfig {
     var stakeSendBg = UIColor(named: "osmosis")!
     
     var addressPrefix = "osmo"
+    var validatorPrefix = "osmovaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uosmo"

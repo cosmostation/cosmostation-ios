@@ -31,6 +31,7 @@ class ChainBitcana: ChainConfig {
     var stakeSendBg = UIColor(named: "bitcanna")!
     
     var addressPrefix = "bcna"
+    var validatorPrefix = "bcnavaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.025ubcna"

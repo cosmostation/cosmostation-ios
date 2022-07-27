@@ -31,6 +31,7 @@ class ChainJuno: ChainConfig {
     var stakeSendBg = UIColor(named: "juno")!
     
     var addressPrefix = "juno"
+    var validatorPrefix = "junovaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0025ujuno"

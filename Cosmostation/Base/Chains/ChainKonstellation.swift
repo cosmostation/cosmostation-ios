@@ -31,6 +31,7 @@ class ChainKonstellation: ChainConfig {
     var stakeSendBg = UIColor.init(hexString: "122951")
     
     var addressPrefix = "darc"
+    var validatorPrefix = "darcvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0001udarc"

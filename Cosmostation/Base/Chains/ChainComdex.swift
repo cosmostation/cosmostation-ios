@@ -31,6 +31,7 @@ class ChainComdex: ChainConfig {
     var stakeSendBg = UIColor(named: "comdex")!
     
     var addressPrefix = "comdex"
+    var validatorPrefix = "comdexvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.25ucmdx"
