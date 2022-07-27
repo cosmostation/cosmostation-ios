@@ -19,10 +19,13 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     var granterAddress: String!
     var grant = Array<Cosmos_Authz_V1beta1_Grant>()
     
-    var granterDelegation: Coin?
-    var granterUnbonding: Coin?
-    var granterAvaiable: Coin?
-    var granterReward: Coin?
+    var granterAuth: Google_Protobuf2_Any?
+    var granterBalance: Coin?
+    var granterAvailable: Coin?
+    var granterVesting: Coin?
+    var granterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
+    var granterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
+    var granterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
     var granterCommission: Coin?
     
     override func viewDidLoad() {
@@ -59,9 +62,19 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     var mFetchCnt = 0
     @objc func onFetchAuthz() {
         if (self.mFetchCnt > 0)  { return }
-        self.mFetchCnt = 6
+        self.mFetchCnt = 7
         self.grant.removeAll()
+        self.granterAuth = nil
+        self.granterBalance = Coin.init(chainConfig!.stakeDenom, "0")
+        self.granterAvailable = Coin.init(chainConfig!.stakeDenom, "0")
+        self.granterVesting = Coin.init(chainConfig!.stakeDenom, "0")
+        self.granterDelegation.removeAll()
+        self.granterUnbonding.removeAll()
+        self.granterReward.removeAll()
+        self.granterCommission = Coin.init(chainConfig!.stakeDenom, "0")
+        
         self.onFetchGrant_gRPC(account!.account_address, granterAddress)
+        self.onFetchAuth_gRPC(granterAddress)
         self.onFetchBalance_gRPC(granterAddress)
         self.onFetchDelegations_gRPC(granterAddress)
         self.onFetchUndelegations_gRPC(granterAddress)
@@ -70,14 +83,19 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchFinished() {
+        print("onFetchFinished ", mFetchCnt)
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
+        
+        self.checkAccountType()
+        self.onUpdateViews()
     }
     
     func onUpdateViews() {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
         print("grant ", self.grant.count)
+        self.authzTableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -95,12 +113,13 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzGranteeCell") as? AuthzGranteeCell
+                cell?.onBindView(chainConfig, account!.account_address)
                 return cell!
                 
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzGranterCell") as? AuthzGranterCell
+                cell?.onBindView(chainConfig, granterAddress, granterAvailable, granterVesting, getDelegatedSum(), getUnbondingSum(), getRewardSum(), granterCommission)
                 return cell!
-                
             }
         }
         let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzGranteeCell") as? AuthzGranteeCell
@@ -128,6 +147,23 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     
+    func onFetchAuth_gRPC(_ granterAddress: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = granterAddress }
+                if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.granterAuth = response.account
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onFetchAuth_gRPC failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
     
     func onFetchBalance_gRPC(_ granterAddress: String) {
         DispatchQueue.global().async {
@@ -136,16 +172,12 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = granterAddress; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    response.balances.forEach { balance in
-//                        if (NSDecimalNumber.init(string: balance.amount) != NSDecimalNumber.zero) {
-//                            BaseData.instance.mMyBalances_gRPC.append(Coin.init(balance.denom, balance.amount))
-//                        }
-//                    }
-//                    let chainConfig = ChainFactory.getChainConfig(self.mChainType)
-//                    if (BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainConfig)).compare(NSDecimalNumber.zero).rawValue <= 0) {
-//                        BaseData.instance.mMyBalances_gRPC.append(Coin.init(WUtils.getMainDenom(chainConfig), "0"))
-//                    }
                     print("Balance ", response)
+                    response.balances.forEach { balance in
+                        if (balance.denom == self.chainConfig!.stakeDenom) {
+                            self.granterBalance = Coin.init(balance.denom, balance.amount)
+                        }
+                    }
                 }
                 try channel.close().wait()
                 
@@ -156,17 +188,16 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         }
     }
     
-    
     func onFetchDelegations_gRPC(_ granterAddress: String) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = granterAddress }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    response.delegationResponses.forEach { delegationResponse in
-//                        BaseData.instance.mMyDelegations_gRPC.append(delegationResponse)
-//                    }
                     print("Delegations ", response)
+                    response.delegationResponses.forEach { delegationResponse in
+                        self.granterDelegation.append(delegationResponse)
+                    }
                 }
                 try channel.close().wait()
                 
@@ -177,18 +208,16 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         }
     }
     
-    
-    
     func onFetchUndelegations_gRPC(_ granterAddress: String) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = granterAddress }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    response.unbondingResponses.forEach { unbondingResponse in
-//                        BaseData.instance.mMyUnbondings_gRPC.append(unbondingResponse)
-//                    }
                     print("Undelegation ", response)
+                    response.unbondingResponses.forEach { unbondingResponse in
+                        self.granterUnbonding.append(unbondingResponse)
+                    }
                 }
                 try channel.close().wait()
                 
@@ -205,10 +234,10 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = granterAddress }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-//                    response.rewards.forEach { reward in
-//                        BaseData.instance.mMyReward_gRPC.append(reward)
-//                    }
                     print("Reward ", response)
+                    response.rewards.forEach { reward in
+                        self.granterReward.append(reward)
+                    }
                 }
                 try channel.close().wait()
                 
@@ -220,13 +249,20 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchCommission_gRPC(_ granterAddress: String) {
-        let valOpAddress = granterAddress
+        let valOpAddress = WKey.getOpAddressFromAddress(granterAddress, chainConfig)
+        print("valOpAddress ", valOpAddress)
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = valOpAddress }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).validatorCommission(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     print("Commission ", response)
+                    response.commission.commission.forEach { commission in
+                        if (commission.denom == self.chainConfig!.stakeDenom) {
+                            let commissionAmount = WUtils.plainStringToDecimal(commission.amount).multiplying(byPowerOf10: -18)
+                            self.granterCommission = Coin.init(commission.denom, commissionAmount.stringValue)
+                        }
+                    }
                 }
                 try channel.close().wait()
                 
@@ -235,5 +271,142 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
+    }
+    
+    func checkAccountType() {
+        guard let rawAccount = granterAuth else { return }
+        if (chainConfig?.chainType == .DESMOS_MAIN && rawAccount.typeURL.contains(Desmos_Profiles_V1beta1_Profile.protoMessageName)) {
+            if let profileAccount = try? Desmos_Profiles_V1beta1_Profile.init(serializedData: rawAccount.value) {
+                checkVesting(chainConfig?.chainType, profileAccount.account)
+            } else {
+                checkVesting(chainConfig?.chainType, rawAccount)
+            }
+        }
+        checkVesting(chainConfig?.chainType, rawAccount)
+    }
+    
+    func checkVesting(_ chain: ChainType?, _ rawAccount: Google_Protobuf2_Any) {
+        let stakingDenom = chainConfig!.stakeDenom
+        var dpAvailable = NSDecimalNumber.zero
+        var dpVesting = NSDecimalNumber.zero
+        var originalVesting = NSDecimalNumber.zero
+        var remainVesting = NSDecimalNumber.zero
+        var delegatedVesting = NSDecimalNumber.zero
+        
+        if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value)
+            dpAvailable = NSDecimalNumber.init(string: granterBalance?.amount)
+            vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                if (coin.denom == stakingDenom) {
+                    originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                }
+            })
+            vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                if (coin.denom == stakingDenom) {
+                    delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                }
+            })
+            remainVesting = WUtils.onParsePeriodicRemainVestingsAmountByDenom(vestingAccount, stakingDenom)
+            dpVesting = remainVesting.subtracting(delegatedVesting)
+            dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+            if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
+            }
+            granterAvailable = Coin.init(stakingDenom, dpAvailable.stringValue)
+            granterVesting = Coin.init(stakingDenom, dpVesting.stringValue)
+            
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value)
+            dpAvailable = NSDecimalNumber.init(string: granterBalance?.amount)
+            vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                if (coin.denom == stakingDenom) {
+                    originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                }
+            })
+            vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                if (coin.denom == stakingDenom) {
+                    delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                }
+            })
+            let cTime = Date().millisecondsSince1970
+            let vestingStart = vestingAccount.startTime * 1000
+            let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
+            if (cTime < vestingStart) {
+                remainVesting = originalVesting
+            } else if (cTime > vestingEnd) {
+                remainVesting = NSDecimalNumber.zero
+            } else {
+                let progress = ((Float)(cTime - vestingStart)) / ((Float)(vestingEnd - vestingStart))
+                remainVesting = originalVesting.multiplying(by: NSDecimalNumber.init(value: 1 - progress), withBehavior: WUtils.handler0Up)
+            }
+            dpVesting = remainVesting.subtracting(delegatedVesting)
+            dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+            if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
+            }
+            granterAvailable = Coin.init(stakingDenom, dpAvailable.stringValue)
+            granterVesting = Coin.init(stakingDenom, dpVesting.stringValue)
+            
+        } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)) {
+            let vestingAccount = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value)
+            dpAvailable = NSDecimalNumber.init(string: granterBalance?.amount)
+            vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                if (coin.denom == stakingDenom) {
+                    originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                }
+            })
+            vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                if (coin.denom == stakingDenom) {
+                    delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                }
+            })
+            let cTime = Date().millisecondsSince1970
+            let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
+            if (cTime < vestingEnd) {
+                remainVesting = originalVesting
+            }
+            dpVesting = remainVesting.subtracting(delegatedVesting)
+            dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+            if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
+            }
+            granterAvailable = Coin.init(stakingDenom, dpAvailable.stringValue)
+            granterVesting = Coin.init(stakingDenom, dpVesting.stringValue)
+            
+        } else {
+            granterAvailable = Coin.init(stakingDenom, granterBalance!.amount)
+            granterVesting = Coin.init(stakingDenom, "0")
+        }
+    }
+    
+    func getDelegatedSum() -> Coin {
+        var sum = NSDecimalNumber.zero
+        granterDelegation.forEach { delegation in
+            sum = sum.adding(WUtils.plainStringToDecimal(delegation.balance.amount))
+        }
+        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
+    }
+    
+    func getUnbondingSum() -> Coin {
+        var sum = NSDecimalNumber.zero
+        granterUnbonding.forEach { unbonding in
+            unbonding.entries.forEach { entry in
+                sum = sum.adding(WUtils.plainStringToDecimal(entry.balance))
+            }
+        }
+        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
+    }
+    
+    func getRewardSum() -> Coin {
+        var sum = NSDecimalNumber.zero
+        granterReward.forEach { reward in
+            reward.reward.forEach { rewardCoin in
+                if (rewardCoin.denom == chainConfig!.stakeDenom) {
+                    sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
+                }
+            }
+        }
+        sum = sum.multiplying(byPowerOf10: -18)
+        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
     }
 }

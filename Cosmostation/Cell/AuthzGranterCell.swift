@@ -34,4 +34,38 @@ class AuthzGranterCell: UITableViewCell {
         commissionAmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
+    func onBindView(_ chainConfig: ChainConfig?, _ address: String,
+                    _ available: Coin?, _ vesting: Coin?, _ delegated: Coin?, _ unbonding: Coin?,
+                    _ reward: Coin?, _ commission: Coin?) {
+        if (chainConfig == nil) { return }
+        let stakingDenom = chainConfig!.stakeDenom
+        let divideDecimal = WUtils.mainDivideDecimal(chainConfig?.chainType)
+        
+        let availableAmount = WUtils.plainStringToDecimal(available?.amount)
+        let vestingAmount = WUtils.plainStringToDecimal(vesting?.amount)
+        let delegatedAmount = WUtils.plainStringToDecimal(delegated?.amount)
+        let unbondingAmount = WUtils.plainStringToDecimal(unbonding?.amount)
+        let rewardAmount = WUtils.plainStringToDecimal(reward?.amount)
+        let commissionAmount = WUtils.plainStringToDecimal(commission?.amount)
+        let totalAmount = availableAmount.adding(delegatedAmount).adding(vestingAmount).adding(unbondingAmount).adding(rewardAmount).adding(commissionAmount)
+        
+        granterAddressLabel.text = address
+        
+        availableAmountLabel.attributedText = WDP.dpAmount(availableAmount.stringValue, availableAmountLabel.font!, divideDecimal, 6)
+        vestingAmountLabel.attributedText = WDP.dpAmount(vestingAmount.stringValue, availableAmountLabel.font!, divideDecimal, 6)
+        delegatedAmountLabel.attributedText = WDP.dpAmount(delegatedAmount.stringValue, availableAmountLabel.font!, divideDecimal, 6)
+        unbondingAmountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, availableAmountLabel.font!, divideDecimal, 6)
+        stakingRewardAmountLabel.attributedText = WDP.dpAmount(rewardAmount.stringValue, availableAmountLabel.font!, divideDecimal, 6)
+        commissionAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, availableAmountLabel.font!, divideDecimal, 6)
+        if (vestingAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
+            vestingLayer.isHidden = false
+        }
+        if (commissionAmount.compare(NSDecimalNumber.zero).rawValue > 0) {
+            commissionLayer.isHidden = false
+        }
+        
+        totalAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, totalAmountLabel.font!, divideDecimal, 6)
+        totalValueLabel.attributedText = WUtils.dpValueUserCurrency(stakingDenom, totalAmount, divideDecimal, totalValueLabel.font)
+        
+    }
 }

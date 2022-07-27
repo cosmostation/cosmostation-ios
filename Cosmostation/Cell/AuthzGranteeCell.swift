@@ -20,4 +20,13 @@ class AuthzGranteeCell: UITableViewCell {
         availableAmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
+    func onBindView(_ chainConfig: ChainConfig?, _ address: String) {
+        if (chainConfig == nil) { return }
+        let stakingDenom = chainConfig!.stakeDenom
+        let divideDecimal = WUtils.mainDivideDecimal(chainConfig?.chainType)
+        
+        rootCardView.backgroundColor = chainConfig!.chainColorBG
+        granteeAddressLabel.text = address
+        availableAmountLabel.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmountLabel.font!, divideDecimal, 6)
+    }
 }
