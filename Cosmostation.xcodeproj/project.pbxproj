@@ -555,6 +555,10 @@
 		045DAD5C288FAEC8004ED9B4 /* AuthzGranterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD59288FAEC8004ED9B4 /* AuthzGranterCell.swift */; };
 		045DAD5D288FAEC8004ED9B4 /* AuthzGranterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD5A288FAEC8004ED9B4 /* AuthzGranterCell.xib */; };
 		045DAD5E288FAEC8004ED9B4 /* AuthzGranterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD5A288FAEC8004ED9B4 /* AuthzGranterCell.xib */; };
+		045DAD61289128C3004ED9B4 /* AuthzExecuteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD5F289128C3004ED9B4 /* AuthzExecuteCell.swift */; };
+		045DAD62289128C3004ED9B4 /* AuthzExecuteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD5F289128C3004ED9B4 /* AuthzExecuteCell.swift */; };
+		045DAD63289128C3004ED9B4 /* AuthzExecuteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD60289128C3004ED9B4 /* AuthzExecuteCell.xib */; };
+		045DAD64289128C3004ED9B4 /* AuthzExecuteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD60289128C3004ED9B4 /* AuthzExecuteCell.xib */; };
 		04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */; };
 		04615CC92750C7AD00A693B0 /* WalletDesmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */; };
 		0469467E288A4005004EE923 /* WalletAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469467C288A4005004EE923 /* WalletAddressCell.swift */; };
@@ -3153,6 +3157,8 @@
 		045DAD54288FAEB5004ED9B4 /* AuthzGranteeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthzGranteeCell.xib; sourceTree = "<group>"; };
 		045DAD59288FAEC8004ED9B4 /* AuthzGranterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthzGranterCell.swift; sourceTree = "<group>"; };
 		045DAD5A288FAEC8004ED9B4 /* AuthzGranterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthzGranterCell.xib; sourceTree = "<group>"; };
+		045DAD5F289128C3004ED9B4 /* AuthzExecuteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthzExecuteCell.swift; sourceTree = "<group>"; };
+		045DAD60289128C3004ED9B4 /* AuthzExecuteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthzExecuteCell.xib; sourceTree = "<group>"; };
 		04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosCell.swift; sourceTree = "<group>"; };
 		04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosCell.xib; sourceTree = "<group>"; };
 		0469467C288A4005004EE923 /* WalletAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAddressCell.swift; sourceTree = "<group>"; };
@@ -5981,6 +5987,8 @@
 				045DAD54288FAEB5004ED9B4 /* AuthzGranteeCell.xib */,
 				045DAD59288FAEC8004ED9B4 /* AuthzGranterCell.swift */,
 				045DAD5A288FAEC8004ED9B4 /* AuthzGranterCell.xib */,
+				045DAD5F289128C3004ED9B4 /* AuthzExecuteCell.swift */,
+				045DAD60289128C3004ED9B4 /* AuthzExecuteCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -6361,6 +6369,7 @@
 				18FFB79A281AF533004E65BB /* WcCancelPopup.xib in Resources */,
 				18FFB79B281AF533004E65BB /* RegisterAccount1ViewController.xib in Resources */,
 				04E6ABA62863581F008DC3C7 /* CdpCreate1ViewController.xib in Resources */,
+				045DAD64289128C3004ED9B4 /* AuthzExecuteCell.xib in Resources */,
 				18FFB79C281AF533004E65BB /* TxIbcUpdateClientCell.xib in Resources */,
 				04E6ABD6286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */,
 				18FFB79D281AF533004E65BB /* CdpDetailMyTopCell.xib in Resources */,
@@ -6714,6 +6723,7 @@
 				E103DAB9228127D8006C2146 /* ValidatorDetailMyActionCell.xib in Resources */,
 				28D372B1254C07470071B136 /* RegistAccountCheckCell.xib in Resources */,
 				044374692862E9BD00C6A4ED /* Transfer2ViewController.xib in Resources */,
+				045DAD63289128C3004ED9B4 /* AuthzExecuteCell.xib in Resources */,
 				28E8FAEF2719C227005EAA9B /* SifChainDex.storyboard in Resources */,
 				04E25D4B2770D57E009B39BA /* NFTDetailRawCell.xib in Resources */,
 				2889FD6E2603378900CA9896 /* TxHardWithdrawCell.xib in Resources */,
@@ -6919,6 +6929,7 @@
 				1817CBAF283E2CE500523713 /* tendermint_crypto_keys.pb.swift in Sources */,
 				1817CC6A283E2CE600523713 /* tendermint_abci_types.grpc.swift in Sources */,
 				18FFB28D281AF533004E65BB /* TxLockTokenCell.swift in Sources */,
+				045DAD62289128C3004ED9B4 /* AuthzExecuteCell.swift in Sources */,
 				18FFB28E281AF533004E65BB /* WalletCrytoCell.swift in Sources */,
 				0451FC9B282A3B5000214FDA /* ChainComdex.swift in Sources */,
 				1817CB97283E2CE500523713 /* evmos_inflation_v1_query.grpc.swift in Sources */,
@@ -8829,6 +8840,7 @@
 				040FA891275F55C200229F6F /* cosmos_nft_v1beta1_tx.pb.swift in Sources */,
 				28D7BE4625F0D338006EECD7 /* IncentiveReward.swift in Sources */,
 				040FAA30275F55C400229F6F /* cryptoorg_nft_v1_tx.pb.swift in Sources */,
+				045DAD61289128C3004ED9B4 /* AuthzExecuteCell.swift in Sources */,
 				289DF178242DDF3800433CF4 /* CdpDetailTopCell.swift in Sources */,
 				040FAA57275F55C400229F6F /* tendermint_farming_v1beta1_query.grpc.swift in Sources */,
 				040FA838275F55C200229F6F /* cryptoorg_supply_v1_query.grpc.swift in Sources */,

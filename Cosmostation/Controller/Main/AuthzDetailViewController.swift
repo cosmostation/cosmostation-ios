@@ -39,6 +39,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         self.authzTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.authzTableView.register(UINib(nibName: "AuthzGranteeCell", bundle: nil), forCellReuseIdentifier: "AuthzGranteeCell")
         self.authzTableView.register(UINib(nibName: "AuthzGranterCell", bundle: nil), forCellReuseIdentifier: "AuthzGranterCell")
+        self.authzTableView.register(UINib(nibName: "AuthzExecuteCell", bundle: nil), forCellReuseIdentifier: "AuthzExecuteCell")
         self.authzTableView.rowHeight = UITableView.automaticDimension
         self.authzTableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -83,7 +84,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onFetchFinished() {
-        print("onFetchFinished ", mFetchCnt)
+//        print("onFetchFinished ", mFetchCnt)
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
         
@@ -105,6 +106,8 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) {
             return 2
+        } else if (section == 1) {
+            return 7
         }
         return 0
     }
@@ -121,9 +124,12 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 cell?.onBindView(chainConfig, granterAddress, granterAvailable, granterVesting, getDelegatedSum(), getUnbondingSum(), getRewardSum(), granterCommission)
                 return cell!
             }
+            
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzExecuteCell") as? AuthzExecuteCell
+            cell?.onBindView(indexPath.row, chainConfig, self.grant)
+            return cell!
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzGranteeCell") as? AuthzGranteeCell
-        return cell!
     }
     
     func onFetchGrant_gRPC(_ granteeAddress: String, _ granterAddress: String) {
@@ -172,7 +178,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = granterAddress; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Balance ", response)
+//                    print("Balance ", response)
                     response.balances.forEach { balance in
                         if (balance.denom == self.chainConfig!.stakeDenom) {
                             self.granterBalance = Coin.init(balance.denom, balance.amount)
@@ -194,7 +200,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = granterAddress }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Delegations ", response)
+//                    print("Delegations ", response)
                     response.delegationResponses.forEach { delegationResponse in
                         self.granterDelegation.append(delegationResponse)
                     }
@@ -214,7 +220,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = granterAddress }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Undelegation ", response)
+//                    print("Undelegation ", response)
                     response.unbondingResponses.forEach { unbondingResponse in
                         self.granterUnbonding.append(unbondingResponse)
                     }
@@ -234,7 +240,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = granterAddress }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Reward ", response)
+//                    print("Reward ", response)
                     response.rewards.forEach { reward in
                         self.granterReward.append(reward)
                     }
@@ -250,13 +256,13 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func onFetchCommission_gRPC(_ granterAddress: String) {
         let valOpAddress = WKey.getOpAddressFromAddress(granterAddress, chainConfig)
-        print("valOpAddress ", valOpAddress)
+//        print("valOpAddress ", valOpAddress)
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryValidatorCommissionRequest.with { $0.validatorAddress = valOpAddress }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).validatorCommission(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Commission ", response)
+//                    print("Commission ", response)
                     response.commission.commission.forEach { commission in
                         if (commission.denom == self.chainConfig!.stakeDenom) {
                             let commissionAmount = WUtils.plainStringToDecimal(commission.amount).multiplying(byPowerOf10: -18)
