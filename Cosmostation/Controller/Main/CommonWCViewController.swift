@@ -109,7 +109,7 @@ class CommonWCViewController: BaseViewController {
     func processQuery(host: String?, query: String?) {
         if let host = host, let query = query {
             if host == "wc" {
-                wcURL = query
+                wcURL = query.removingPercentEncoding
                 connectSession()
             } else if host == "dapp" || host == "internaldapp" {
                 if webView.isHidden == false, let url = URL(string: query) {
@@ -733,16 +733,23 @@ extension CommonWCViewController: SBCardPopupDelegate {
 
 extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url, url.absoluteString.starts(with: "keplrwallet://wcV1") {
-            UIApplication.shared.open(URL.init(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
-            decisionHandler(.cancel)
-        } else if let url = navigationAction.request.url, url.scheme == "cosmostation" {
-            UIApplication.shared.open(url, options: [:])
-            decisionHandler(.cancel)
+        if let url = navigationAction.request.url {
+            if (url.absoluteString.starts(with: "keplrwallet://wcV1")) {
+                UIApplication.shared.open(URL(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
+                decisionHandler(.cancel)
+            } else if (url.scheme == "cosmostation") {
+                UIApplication.shared.open(url, options: [:])
+                decisionHandler(.cancel)
+            } else if (url.absoluteString.range(of: "https://.*/wc", options: .regularExpression) != nil) {
+                let newUrl = url.absoluteString.replacingCharacters(in: url.absoluteString.range(of: "https://.*/wc", options: .regularExpression)!, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
+                UIApplication.shared.open(URL(string: newUrl.removingPercentEncoding!)!, options: [:])
+                decisionHandler(.cancel)
+            } else {
+                decisionHandler(.allow)
+            }
         } else {
             decisionHandler(.allow)
         }
-        
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {

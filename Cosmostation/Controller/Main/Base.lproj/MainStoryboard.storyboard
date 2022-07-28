@@ -191,7 +191,7 @@
             <objects>
                 <viewController id="t07-dn-E46" customClass="MainTabHistoryViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zcq-nb-U4b">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFY-lo-0IC">
@@ -748,7 +748,7 @@
             <objects>
                 <viewController id="1zF-Vz-4uW" customClass="MainTabSettingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eZu-D4-qDA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bms-CG-fww">
@@ -900,7 +900,6 @@
                     <tabBarItem key="tabBarItem" title="SETTING" image="mainTabSetting" id="hWX-Vb-kcg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A24-Xc-evI">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -2376,7 +2375,7 @@
             <objects>
                 <viewController id="QXN-Be-TMt" customClass="OtherValidatorViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tps-Ma-pY6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gec-G7-NYf">
@@ -2437,7 +2436,6 @@
                     <tabBarItem key="tabBarItem" title="ASSETS" image="mainTabAssets" id="1JO-em-9vw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="k59-4s-zb9">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -2459,7 +2457,6 @@
                     <tabBarItem key="tabBarItem" title="WALLET" image="mainTabWallet" id="QTX-GR-gtF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cf1-vj-0j5">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -2928,7 +2925,7 @@
         <scene sceneID="7Oq-0x-ogL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EII-eb-nej" userLabel="DAPP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="DAPP" image="mainTabHistory" id="hch-bZ-ki4" userLabel="DAPP"/>
+                    <tabBarItem key="tabBarItem" title="DAPP" image="mainTabDapp" id="hch-bZ-ki4" userLabel="DAPP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Z9q-D8-ROH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -2959,6 +2956,7 @@
         <image name="iconOrder" width="16" height="16"/>
         <image name="loading_1" width="144" height="144"/>
         <image name="mainTabAssets" width="24" height="24"/>
+        <image name="mainTabDapp" width="24" height="24"/>
         <image name="mainTabHistory" width="24" height="24"/>
         <image name="mainTabSetting" width="24" height="24"/>
         <image name="mainTabWallet" width="24" height="24"/>
