@@ -55,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     passwordVC.mWcURL = url.query
                 } else if (url.host == "dapp") {
                     passwordVC.mDappURL = url.query
+                } else if (url.host == "internaldapp") {
+                    passwordVC.mDappURL = url.query
                 }
                 if #available(iOS 13.0, *) { passwordVC.isModalInPresentation = true }
                 application.topViewController!.present(passwordVC, animated: true, completion: nil)

@@ -191,7 +191,7 @@
             <objects>
                 <viewController id="t07-dn-E46" customClass="MainTabHistoryViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zcq-nb-U4b">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFY-lo-0IC">
@@ -748,7 +748,7 @@
             <objects>
                 <viewController id="1zF-Vz-4uW" customClass="MainTabSettingViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eZu-D4-qDA">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bms-CG-fww">
@@ -846,7 +846,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Br-GE-e2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14" y="1509"/>
+            <point key="canvasLocation" x="287" y="1512"/>
         </scene>
         <!--Main Tab View Controller-->
         <scene sceneID="hEl-hw-B2u">
@@ -863,7 +863,8 @@
                         <segue destination="A62-66-G4a" kind="relationship" relationship="viewControllers" id="uXL-s7-Uje"/>
                         <segue destination="jCW-id-z93" kind="relationship" relationship="viewControllers" id="WwU-vZ-eWl"/>
                         <segue destination="6PU-dL-cQj" kind="relationship" relationship="viewControllers" id="Pj6-FH-cDH"/>
-                        <segue destination="ARn-Yi-ZWd" kind="relationship" relationship="viewControllers" id="A3b-TH-v99"/>
+                        <segue destination="EII-eb-nej" kind="relationship" relationship="viewControllers" id="Pqc-qa-XEf"/>
+                        <segue destination="ARn-Yi-ZWd" kind="relationship" relationship="viewControllers" id="kJg-ec-bZM"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FTM-V8-U4N" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -899,7 +900,6 @@
                     <tabBarItem key="tabBarItem" title="SETTING" image="mainTabSetting" id="hWX-Vb-kcg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="A24-Xc-evI">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -912,7 +912,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cZu-9k-6ez" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14" y="671"/>
+            <point key="canvasLocation" x="287" y="671"/>
         </scene>
         <!--My Validator View Controller-->
         <scene sceneID="Gw0-TT-sCx">
@@ -2375,7 +2375,7 @@
             <objects>
                 <viewController id="QXN-Be-TMt" customClass="OtherValidatorViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tps-Ma-pY6">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="805"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gec-G7-NYf">
@@ -2436,7 +2436,6 @@
                     <tabBarItem key="tabBarItem" title="ASSETS" image="mainTabAssets" id="1JO-em-9vw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="k59-4s-zb9">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -2458,7 +2457,6 @@
                     <tabBarItem key="tabBarItem" title="WALLET" image="mainTabWallet" id="QTX-GR-gtF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cf1-vj-0j5">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
@@ -2816,6 +2814,135 @@
             </objects>
             <point key="canvasLocation" x="1250.7246376811595" y="4225.4464285714284"/>
         </scene>
+        <!--Main Dapp View Controller-->
+        <scene sceneID="ZjM-nS-36G">
+            <objects>
+                <viewController id="YMX-6a-dIv" customClass="MainDappViewController" customModule="Cosmostation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wgz-mA-N6D">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LTU-r4-Wjg">
+                                <rect key="frame" x="0.0" y="88" width="414" height="50"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="LSh-36-EOY">
+                                        <rect key="frame" x="8" y="4" width="42" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="8gd-yq-AbO"/>
+                                            <constraint firstAttribute="height" constant="42" id="Vva-zk-s3R"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Wallet" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiA-uB-J6z">
+                                        <rect key="frame" x="50" y="16.5" width="234" height="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <color key="textColor" name="_font05"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ARL-bO-Mwe">
+                                        <rect key="frame" x="368" y="13" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="4we-BW-jIB"/>
+                                            <constraint firstAttribute="width" constant="24" id="kMM-gu-YVg"/>
+                                        </constraints>
+                                        <state key="normal" image="btnIconSwitch"/>
+                                        <connections>
+                                            <action selector="onClickSwitchAccount:" destination="YMX-6a-dIv" eventType="touchUpInside" id="P9X-vE-GyM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEo-Vq-gGM">
+                                        <rect key="frame" x="300" y="13" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="P44-Cs-2pJ"/>
+                                            <constraint firstAttribute="width" constant="24" id="lno-TO-YRt"/>
+                                        </constraints>
+                                        <state key="normal" image="btnAlramOff"/>
+                                        <connections>
+                                            <action selector="onClickAlaram:" destination="YMX-6a-dIv" eventType="touchUpInside" id="7wR-TQ-h4B"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ub-0k-OYf">
+                                        <rect key="frame" x="334" y="13" width="24" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="B9j-0B-QO4"/>
+                                            <constraint firstAttribute="height" constant="24" id="tUQ-Mr-ksY"/>
+                                        </constraints>
+                                        <state key="normal" image="btnExplorer"/>
+                                        <connections>
+                                            <action selector="onClickExplorer:" destination="YMX-6a-dIv" eventType="touchUpInside" id="bL3-fF-w2e"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ARL-bO-Mwe" secondAttribute="trailing" constant="22" id="6ql-Cd-Y9X"/>
+                                    <constraint firstItem="9ub-0k-OYf" firstAttribute="leading" secondItem="DEo-Vq-gGM" secondAttribute="trailing" constant="10" id="FOq-Jp-pr9"/>
+                                    <constraint firstItem="LSh-36-EOY" firstAttribute="leading" secondItem="LTU-r4-Wjg" secondAttribute="leading" constant="8" id="O34-jC-QbR"/>
+                                    <constraint firstItem="LSh-36-EOY" firstAttribute="centerY" secondItem="LTU-r4-Wjg" secondAttribute="centerY" id="Qdh-w3-hOt"/>
+                                    <constraint firstItem="XiA-uB-J6z" firstAttribute="centerY" secondItem="LTU-r4-Wjg" secondAttribute="centerY" id="TzG-8h-zl3"/>
+                                    <constraint firstItem="DEo-Vq-gGM" firstAttribute="centerY" secondItem="LTU-r4-Wjg" secondAttribute="centerY" id="aHh-fs-gQj"/>
+                                    <constraint firstItem="9ub-0k-OYf" firstAttribute="centerY" secondItem="ARL-bO-Mwe" secondAttribute="centerY" id="c8C-YZ-4KL"/>
+                                    <constraint firstItem="DEo-Vq-gGM" firstAttribute="leading" secondItem="XiA-uB-J6z" secondAttribute="trailing" constant="16" id="hUd-cE-m1r"/>
+                                    <constraint firstItem="ARL-bO-Mwe" firstAttribute="centerY" secondItem="LTU-r4-Wjg" secondAttribute="centerY" id="hnq-k3-klP"/>
+                                    <constraint firstItem="XiA-uB-J6z" firstAttribute="leading" secondItem="LSh-36-EOY" secondAttribute="trailing" id="pXA-nw-jqr"/>
+                                    <constraint firstAttribute="height" constant="50" id="tAb-lJ-GnN"/>
+                                    <constraint firstItem="ARL-bO-Mwe" firstAttribute="leading" secondItem="9ub-0k-OYf" secondAttribute="trailing" constant="10" id="vpz-w6-cCk"/>
+                                </constraints>
+                            </view>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WtX-oz-nPr">
+                                <rect key="frame" x="0.0" y="138" width="414" height="675"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="t8q-kM-zjz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WtX-oz-nPr" firstAttribute="top" secondItem="LTU-r4-Wjg" secondAttribute="bottom" id="5M3-0g-i1n"/>
+                            <constraint firstItem="LTU-r4-Wjg" firstAttribute="top" secondItem="t8q-kM-zjz" secondAttribute="top" id="8i7-5j-IMn"/>
+                            <constraint firstItem="t8q-kM-zjz" firstAttribute="leading" secondItem="LTU-r4-Wjg" secondAttribute="leading" id="NWU-e8-vOX"/>
+                            <constraint firstItem="t8q-kM-zjz" firstAttribute="trailing" secondItem="WtX-oz-nPr" secondAttribute="trailing" id="Tl6-BO-7fb"/>
+                            <constraint firstItem="t8q-kM-zjz" firstAttribute="trailing" secondItem="LTU-r4-Wjg" secondAttribute="trailing" id="mXL-nx-4a2"/>
+                            <constraint firstItem="t8q-kM-zjz" firstAttribute="bottom" secondItem="WtX-oz-nPr" secondAttribute="bottom" id="oiy-9X-UqE"/>
+                            <constraint firstItem="WtX-oz-nPr" firstAttribute="leading" secondItem="t8q-kM-zjz" secondAttribute="leading" id="ysx-wH-Z4k"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="7N1-oZ-Xgb"/>
+                    <connections>
+                        <outlet property="titleAlarmBtn" destination="DEo-Vq-gGM" id="WwO-Mx-Oce"/>
+                        <outlet property="titleChainImg" destination="LSh-36-EOY" id="3nk-SU-Q0N"/>
+                        <outlet property="titleWalletName" destination="XiA-uB-J6z" id="svU-t2-9Uy"/>
+                        <outlet property="webView" destination="WtX-oz-nPr" id="No5-At-f1l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YEM-hl-yB2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-604" y="1513"/>
+        </scene>
+        <!--DAPP-->
+        <scene sceneID="7Oq-0x-ogL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EII-eb-nej" userLabel="DAPP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="DAPP" image="mainTabDapp" id="hch-bZ-ki4" userLabel="DAPP"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Z9q-D8-ROH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <offsetWrapper key="textShadowOffset" horizontal="1000" vertical="0.0"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YMX-6a-dIv" kind="relationship" relationship="rootViewController" id="nRC-sL-Ptz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DBa-c9-Iul" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-603" y="671"/>
+        </scene>
     </scenes>
     <color key="tintColor" name="_font05"/>
     <resources>
@@ -2829,6 +2956,7 @@
         <image name="iconOrder" width="16" height="16"/>
         <image name="loading_1" width="144" height="144"/>
         <image name="mainTabAssets" width="24" height="24"/>
+        <image name="mainTabDapp" width="24" height="24"/>
         <image name="mainTabHistory" width="24" height="24"/>
         <image name="mainTabSetting" width="24" height="24"/>
         <image name="mainTabWallet" width="24" height="24"/>

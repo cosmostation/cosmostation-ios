@@ -17,24 +17,27 @@ import BigInt
 import web3swift
 
 class CommonWCViewController: BaseViewController {
-    
     @IBOutlet weak var wcLoading: WalletConnectImageView!
-    @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var wcCardView: CardView!
     @IBOutlet weak var wcImg: UIImageView!
     @IBOutlet weak var wcTitle: UILabel!
     @IBOutlet weak var wcUrl: UILabel!
     @IBOutlet weak var wcAddress: UILabel!
     @IBOutlet weak var wcDisconnectBtn: UIButton!
+    
+    @IBOutlet weak var dappWrapView: UIView!
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var dappConnectImage: UIImageView!
     @IBOutlet weak var dappConnectLabel: UILabel!
     @IBOutlet weak var dappUrl: UILabel!
     @IBOutlet weak var dappClose: UIButton!
-    @IBOutlet weak var dappView: UIView!
+    
+    @IBOutlet weak var loadingWrapView: UIView!
+    @IBOutlet weak var loadingImg: LoadingImageView!
     
     var isDeepLink = false
     var isDapp = false
+    var isDappInternal = false
     var wcURL: String?
     var dappURL: String?
     var wCPeerMeta: WCPeerMeta?
@@ -51,7 +54,12 @@ class CommonWCViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.loadingImg.onStartAnimation()
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_wallet_connect", comment: "");
+        self.navigationItem.title = NSLocalizedString("title_wallet_connect", comment: "");
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         if (!isDeepLink && !isDapp) {
             account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
@@ -61,18 +69,29 @@ class CommonWCViewController: BaseViewController {
             accountMap[baseChain] = account
         }
         
-        if (isDapp) {
+        if (isDappInternal || isDapp) {
             initWebView()
-            dappView.isHidden = false
+            hideLoading()
+            dappWrapView.isHidden = false
             connectStatus(connected: false)
             if let url = dappURL {
                 webView.load(URLRequest(url: URL(string: url)!))
                 dappUrl.text = url
             }
-        } else  {
-            dappView.isHidden = true
+        } else {
+            dappWrapView.isHidden = true
             connectSession()
         }
+    }
+    
+    private func showLoading() {
+        self.loadingImg.onStartAnimation()
+        self.loadingWrapView.isHidden = false
+    }
+    
+    private func hideLoading() {
+        self.loadingImg.onStopAnimation()
+        self.loadingWrapView.isHidden = true
     }
     
     func connectStatus(connected: Bool) {
@@ -90,13 +109,11 @@ class CommonWCViewController: BaseViewController {
     func processQuery(host: String?, query: String?) {
         if let host = host, let query = query {
             if host == "wc" {
-                wcURL = query
+                wcURL = query.removingPercentEncoding
                 connectSession()
-            } else if host == "dapp" {
-                if webView.isHidden == false {
-                    if let url = URL(string: query) {
-                        webView.load(URLRequest(url: url))
-                    }
+            } else if host == "dapp" || host == "internaldapp" {
+                if webView.isHidden == false, let url = URL(string: query) {
+                    webView.load(URLRequest(url: url))
                 }
             }
         }
@@ -129,15 +146,6 @@ class CommonWCViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = true
-        if (isDapp) {
-            return
-        }
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_wallet_connect", comment: "");
-        self.navigationItem.title = NSLocalizedString("title_wallet_connect", comment: "");
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -149,17 +157,19 @@ class CommonWCViewController: BaseViewController {
         super.viewDidDisappear(animated)
         if (interactor?.state == .connected) {
             interactor?.disconnect()
-            interactor?.killSession().done {[weak self] in
+            interactor?.killSession().done { [weak self] in
                 self?.interactor = nil
             }.cauterize()
         }
     }
     
     func connectSession() {
+        showLoading()
         guard let url = wcURL, let session = WCSession.from(string: url) else {
             if (isDeepLink) {
-                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+//                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+                self.dismiss(animated: true)
             } else {
                 self.navigationController?.popViewController(animated: false)
             }
@@ -203,9 +213,13 @@ class CommonWCViewController: BaseViewController {
                     self.interactor?.approveSession(accounts: [], chainId: chainId).cauterize()
                 }
             }
-            if (self.isDapp) {
-                self.connectStatus(connected: true)
-            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+                if (self.isDapp || self.isDappInternal) {
+                    self.connectStatus(connected: true)
+                }
+                self.hideLoading()
+            })
         }
         
         interactor.onDisconnect = { [weak self] (error) in
@@ -215,7 +229,7 @@ class CommonWCViewController: BaseViewController {
             } else {
                 self.navigationController?.popViewController(animated: false)
             }
-            if (self.isDapp) {
+            if (self.isDapp || self.isDappInternal) {
                 self.connectStatus(connected: false)
             }
         }
@@ -435,8 +449,7 @@ class CommonWCViewController: BaseViewController {
         if (self.navigationController != nil) {
             self.navigationController?.popViewController(animated: false)
         } else {
-            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+            self.dismiss(animated: true)
         }
     }
 
@@ -460,12 +473,12 @@ class CommonWCViewController: BaseViewController {
         self.wcUrl.text = peer.url
         self.wcAddress.text = accountMap.values.map { $0.account_address }.joined(separator: "\n")
         self.wcCardView.backgroundColor = chainConfig?.chainColorBG
-        if (!self.isDapp) {
+        if (!self.isDapp && !self.isDappInternal) {
             self.wcCardView.isHidden = false
-            self.wcLoading.isHidden = false
-            self.wcLoading.onStartAnimation()
             self.wcDisconnectBtn.isHidden = false
-            self.loadingImg.isHidden = true
+        } else {
+            self.wcCardView.isHidden = true
+            self.wcDisconnectBtn.isHidden = true
         }
     }
     
@@ -601,8 +614,7 @@ class CommonWCViewController: BaseViewController {
         if (self.navigationController != nil) {
             self.navigationController?.popViewController(animated: true)
         } else {
-            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+            self.dismiss(animated: true)
         }
     }
     
@@ -612,8 +624,7 @@ class CommonWCViewController: BaseViewController {
         self.interactor?.killSession().done {[weak self] in
             self?.interactor = nil
             if (self?.isDeepLink == true) {
-                UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+                self?.dismiss(animated: true)
             } else {
                 self?.navigationController?.popViewController(animated: false)
             }
@@ -722,13 +733,23 @@ extension CommonWCViewController: SBCardPopupDelegate {
 
 extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url, url.scheme == "cosmostation" {
-            UIApplication.shared.open(url, options: [:])
-            decisionHandler(.cancel)
+        if let url = navigationAction.request.url {
+            if (url.absoluteString.starts(with: "keplrwallet://wcV1")) {
+                UIApplication.shared.open(URL(string: url.absoluteString.replacingOccurrences(of: "keplrwallet://wcV1", with: "cosmostation://wc"))!, options: [:])
+                decisionHandler(.cancel)
+            } else if (url.scheme == "cosmostation") {
+                UIApplication.shared.open(url, options: [:])
+                decisionHandler(.cancel)
+            } else if (url.absoluteString.range(of: "https://.*/wc", options: .regularExpression) != nil) {
+                let newUrl = url.absoluteString.replacingCharacters(in: url.absoluteString.range(of: "https://.*/wc", options: .regularExpression)!, with: "cosmostation://wc").replacingOccurrences(of: "uri=", with: "")
+                UIApplication.shared.open(URL(string: newUrl.removingPercentEncoding!)!, options: [:])
+                decisionHandler(.cancel)
+            } else {
+                decisionHandler(.allow)
+            }
         } else {
             decisionHandler(.allow)
         }
-        
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
