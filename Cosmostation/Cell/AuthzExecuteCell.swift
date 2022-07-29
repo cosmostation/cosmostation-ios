@@ -54,7 +54,6 @@ class AuthzExecuteCell: UITableViewCell {
                 }
                 authzLimitAddressLabel.text = "Limitless"
             }
-            
         } else {
             setColor(false)
         }
