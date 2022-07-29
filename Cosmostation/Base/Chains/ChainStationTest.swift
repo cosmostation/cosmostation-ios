@@ -21,7 +21,7 @@ class StationTest: ChainConfig {
     var chainTitle = "(Station Testnet)"
     var chainTitle2 = "STATION TEST"
     var chainDBName = CHAIN_STATION_TEST_S
-    var chainAPIName = ""
+    var chainAPIName = "station"
     var chainIdPrefix = "station"
     
     var stakeDenomImg = UIImage(named: "tokenStation")

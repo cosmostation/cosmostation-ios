@@ -59,10 +59,17 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 commonWcVC.wcURL = mSchemeURL.query
                 commonWcVC.isDeepLink = true
                 commonWcVC.isDapp = false
+                commonWcVC.isDappInternal = false
             } else if (mSchemeURL.host == "dapp") {
                 commonWcVC.dappURL = mSchemeURL.query
                 commonWcVC.isDeepLink = false
                 commonWcVC.isDapp = true
+                commonWcVC.isDappInternal = false
+            } else if (mSchemeURL.host == "internaldapp") {
+                commonWcVC.dappURL = mSchemeURL.query
+                commonWcVC.isDeepLink = false
+                commonWcVC.isDapp = false
+                commonWcVC.isDappInternal = true
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
                 self.present(commonWcVC, animated: true, completion: nil)

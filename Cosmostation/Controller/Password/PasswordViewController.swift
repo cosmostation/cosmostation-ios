@@ -193,9 +193,12 @@ class PasswordViewController: BaseViewController {
             transition.type = CATransitionType.reveal
             transition.subtype = CATransitionSubtype.fromBottom
             self.resultDelegate?.passwordResponse(result: data)
-            self.navigationController!.view.layer.add(transition, forKey: kCATransition)
-            self.navigationController!.popViewController(animated: false)
-            
+            if let navigationController = self.navigationController {
+                navigationController.view.layer.add(transition, forKey: kCATransition)
+                navigationController.popViewController(animated: false)
+            } else {
+                self.dismiss(animated: true)
+            }
         } else {
             self.onShowToast(NSLocalizedString("insert_password_app_lock", comment: ""))
         }

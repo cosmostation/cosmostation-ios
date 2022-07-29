@@ -470,7 +470,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionWC = { self.onClickWalletConect() }
-            cell?.actionDapp = { self.onClickStationApp() }
             return cell!
 
         } else if (indexPath.row == 1) {
@@ -728,15 +727,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onClickCrescentApp() {
         let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
         commonWcVC.dappURL = "https://wc.dev.cosmostation.io"
-        commonWcVC.isDapp = true
-        commonWcVC.isDeepLink = false
-        commonWcVC.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(commonWcVC, animated: true)
-    }
-    
-    func onClickStationApp() {
-        let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-        commonWcVC.dappURL = "https://dapps.cosmostation.io"
         commonWcVC.isDapp = true
         commonWcVC.isDeepLink = false
         commonWcVC.hidesBottomBarWhenPushed = true

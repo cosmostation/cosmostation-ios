@@ -35,26 +35,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsv-cb-9Ts">
-                                <rect key="frame" x="522" y="13" width="13" height="21"/>
+                                <rect key="frame" x="522" y="-35" width="13" height="117"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GY-Fe-gwF">
-                                <rect key="frame" x="523.5" y="40" width="11.5" height="14.5"/>
+                                <rect key="frame" x="523.5" y="88" width="11.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wji-74-j1j">
-                                <rect key="frame" x="12" y="66.5" width="523" height="0.5"/>
+                                <rect key="frame" x="12" y="114.5" width="523" height="0.5"/>
                                 <color key="backgroundColor" name="_card_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="nlo-cF-Ufv"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="8Uq-o9-kzN">
-                                <rect key="frame" x="12" y="83" width="523" height="90"/>
+                                <rect key="frame" x="12" y="131" width="523" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6W-bb-Ddm">
                                         <rect key="frame" x="0.0" y="0.0" width="523" height="18"/>
@@ -180,7 +180,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="lyQ-pW-258">
-                                <rect key="frame" x="12" y="189" width="523" height="40"/>
+                                <rect key="frame" x="12" y="237" width="523" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Vy-sS-Nhq">
                                         <rect key="frame" x="0.0" y="0.0" width="257.5" height="40"/>
@@ -235,36 +235,10 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="utm-8Z-ypb">
-                                <rect key="frame" x="12" y="237" width="523" height="88"/>
+                                <rect key="frame" x="12" y="285" width="523" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GLx-EK-CYC">
-                                        <rect key="frame" x="0.0" y="0.0" width="523" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="Mgw-rm-1Ip"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
-                                        <state key="normal" title="Cosmostation Dapps" image="btnIconDex">
-                                            <color key="titleColor" name="_font05"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="0.5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="8"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                <color key="value" name="_font05"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="onClickDapp:" destination="ZYx-h2-tfU" eventType="touchUpInside" id="44J-tI-Qgj"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEi-pg-q22">
-                                        <rect key="frame" x="0.0" y="48" width="523" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="523" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Rsl-c6-7tO"/>
@@ -347,7 +321,6 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="Mdm-Sx-PcU" id="E47-1K-gZK"/>
-                <outlet property="btnDapp" destination="GLx-EK-CYC" id="cSN-da-oBP"/>
                 <outlet property="btnDelegate" destination="1Vy-sS-Nhq" id="Xoi-Lw-z1X"/>
                 <outlet property="btnProposal" destination="ivi-rx-b5E" id="vg6-f7-2Qs"/>
                 <outlet property="btnWalletConnect" destination="KEi-pg-q22" id="dh2-SI-bf3"/>
@@ -364,7 +337,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="btnIconDex" width="20" height="20"/>
         <image name="btnIconRewad" width="20" height="20"/>
         <image name="btnIconVote" width="20" height="20"/>
         <image name="btnIconWalletConnect" width="20" height="20"/>
