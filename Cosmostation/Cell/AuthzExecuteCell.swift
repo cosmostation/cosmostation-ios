@@ -16,6 +16,9 @@ class AuthzExecuteCell: UITableViewCell {
     @IBOutlet weak var authzLimitAmountLabel: UILabel!
     @IBOutlet weak var authzLimitAddressLabel: UILabel!
     
+    var stakingDenom: String = ""
+    var divideDecimal: Int16 = 6
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -28,66 +31,61 @@ class AuthzExecuteCell: UITableViewCell {
         authzLimitAddressLabel.textColor = UIColor.init(named: "_font05")
     }
     
-    func onBindView(_ position: Int, _ chainConfig: ChainConfig, _ grants: Array<Cosmos_Authz_V1beta1_Grant>) {
-        if (position == 0) {
-            //Transfer
-            onBindSend(grants)
-            
-        } else if (position == 1) {
-            //Delegate
-            onBindDelegate(grants)
-            
-        } else if (position == 2) {
-            //Undelegate
-            onBindUndelegate(grants)
-            
-        } else if (position == 3) {
-            //Redelegate
-            onBindRedelegate(grants)
-            
-        } else if (position == 4) {
-            //Rewards
-            onBindReward(grants)
-            
-        } else if (position == 5) {
-            //Commission
-            onBindCommission(grants)
-            
-        } else if (position == 6) {
-            //Vote
-            onBindVote(grants)
-            
-        }
-    }
-    
-    func onBindSend(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) {
+    func onBindSend(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
+        if (chainConfig == nil) { return }
+        divideDecimal = WUtils.mainDivideDecimal(chainConfig!.chainType)
+        stakingDenom = chainConfig!.stakeDenom
+        
         authzIconImgView.image = UIImage.init(named: "authzIconSend")
         authzTitleLabel.text = "Send"
-        
-        if let sendAuth = getSendAuth(grants) {
+        if (grant != nil) {
             setColor(true)
+            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                authzLimitAmountLabel.text = "Limitless"
+                authzLimitAddressLabel.text = "Limitless"
+            }
+            if (grant!.authorization.typeURL.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {
+                let transAuth = try! Cosmos_Bank_V1beta1_SendAuthorization.init(serializedData: grant!.authorization.value)
+                if let maxAmount = getSpendMax(transAuth) {
+                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, divideDecimal, 6)
+                } else {
+                    authzLimitAmountLabel.text = "Limitless"
+                }
+                authzLimitAddressLabel.text = "Limitless"
+            }
             
         } else {
             setColor(false)
         }
     }
     
-    func onBindDelegate(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) {
+    func onBindDelegate(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
+        if (chainConfig == nil) { return }
+        divideDecimal = WUtils.mainDivideDecimal(chainConfig!.chainType)
+        stakingDenom = chainConfig!.stakeDenom
+        
         authzIconImgView.image = UIImage.init(named: "authzIconStake")
         authzTitleLabel.text = "Delegate"
-        if let delegateAuth = getDelegateAuth(grants) {
+        if (grant != nil) {
             setColor(true)
-            if (delegateAuth.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzExpireDateLabel.text = WDP.dpTime(delegateAuth.expiration.seconds * 1000)
-                authzLimitAmountLabel.text = "Generic"
-                authzLimitAddressLabel.text = "Generic"
+            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                authzLimitAmountLabel.text = "Limitless"
+                authzLimitAddressLabel.text = "Limitless"
             }
-            if (delegateAuth.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                authzExpireDateLabel.text = WDP.dpTime(delegateAuth.expiration.seconds * 1000)
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: delegateAuth.authorization.value)
-//                authzLimitAmountLabel.text = getMaxToken(stakeAuth)
-                
-//                authzLimitAmountLabel.attributedText = WDP.dpAmount(availableAmount.stringValue, authzLimitAmountLabel.font!, divideDecimal, 6)
+            if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
+                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
+                if let maxAmount = getMaxToken(stakeAuth) {
+                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, divideDecimal, 6)
+                } else {
+                    authzLimitAmountLabel.text = "Limitless"
+                }
+                if let monikers = getMonikerNames(stakeAuth) {
+                    authzLimitAddressLabel.text = monikers
+                } else {
+                    authzLimitAddressLabel.text = "Limitless"
+                }
             }
             
         } else {
@@ -95,43 +93,32 @@ class AuthzExecuteCell: UITableViewCell {
         }
     }
     
-//    func getMaxToken(_ stakeAuth: Cosmos_Staking_V1beta1_StakeAuthorization) -> String {
-////        if (stakeAuth.maxTokens != nil) {
-////            return Coin.init(stakeAuth.maxTokens.denom, stakeAuth.maxTokens.amount)
-////        }
-////        return nil
-//        if let amount = NSDecimalNumber.init(string: stakeAuth.maxTokens.amount)
-//    }
-    
-    func getMonikerNames(_ stakeAuth: Cosmos_Staking_V1beta1_StakeAuthorization) -> String {
-        var opAddresses = Array<String>()
-        stakeAuth.allowList.address.forEach { opAddress in
-            opAddresses.append(opAddress)
-        }
-        stakeAuth.denyList.address.forEach { opAddress in
-            opAddresses.append(opAddress)
-        }
+    func onBindUndelegate(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
+        if (chainConfig == nil) { return }
+        divideDecimal = WUtils.mainDivideDecimal(chainConfig!.chainType)
+        stakingDenom = chainConfig!.stakeDenom
         
-        let monikerString = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddresses[0] }.first?.description_p.moniker ?? ""
-        if (opAddresses.count > 1) {
-            return monikerString + "+" + String(opAddresses.count - 1)
-        } else {
-            return monikerString
-        }
-    }
-    
-    func onBindUndelegate(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) {
         authzIconImgView.image = UIImage.init(named: "authzIconStake")
         authzTitleLabel.text = "Undelegate"
-        if let undelegateAuth = getUndelegateAuth(grants) {
+        if (grant != nil) {
             setColor(true)
-            if (undelegateAuth.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzExpireDateLabel.text = WDP.dpTime(undelegateAuth.expiration.seconds * 1000)
-                authzLimitAmountLabel.text = "Generic"
-                authzLimitAddressLabel.text = "Generic"
+            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                authzLimitAmountLabel.text = "Limitless"
+                authzLimitAddressLabel.text = "Limitless"
             }
-            if (undelegateAuth.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: undelegateAuth.authorization.value)
+            if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
+                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
+                if let maxAmount = getMaxToken(stakeAuth) {
+                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, divideDecimal, 6)
+                } else {
+                    authzLimitAmountLabel.text = "Limitless"
+                }
+                if let monikers = getMonikerNames(stakeAuth) {
+                    authzLimitAddressLabel.text = monikers
+                } else {
+                    authzLimitAddressLabel.text = "Limitless"
+                }
             }
             
         } else {
@@ -139,18 +126,32 @@ class AuthzExecuteCell: UITableViewCell {
         }
     }
     
-    func onBindRedelegate(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) {
+    func onBindRedelegate(_ chainConfig: ChainConfig?, _ grant: Cosmos_Authz_V1beta1_Grant?) {
+        if (chainConfig == nil) { return }
+        divideDecimal = WUtils.mainDivideDecimal(chainConfig!.chainType)
+        stakingDenom = chainConfig!.stakeDenom
+        
         authzIconImgView.image = UIImage.init(named: "authzIconStake")
         authzTitleLabel.text = "Redelegate"
-        if let redelegateAuth = getRedelegateAuth(grants) {
+        if (grant != nil) {
             setColor(true)
-            if (redelegateAuth.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzExpireDateLabel.text = WDP.dpTime(redelegateAuth.expiration.seconds * 1000)
-                authzLimitAmountLabel.text = "Generic"
-                authzLimitAddressLabel.text = "Generic"
+            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                authzLimitAmountLabel.text = "Limitless"
+                authzLimitAddressLabel.text = "Limitless"
             }
-            if (redelegateAuth.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: redelegateAuth.authorization.value)
+            if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
+                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
+                if let maxAmount = getMaxToken(stakeAuth) {
+                    authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, divideDecimal, 6)
+                } else {
+                    authzLimitAmountLabel.text = "Limitless"
+                }
+                if let monikers = getMonikerNames(stakeAuth) {
+                    authzLimitAddressLabel.text = monikers
+                } else {
+                    authzLimitAddressLabel.text = "Limitless"
+                }
             }
             
         } else {
@@ -159,40 +160,40 @@ class AuthzExecuteCell: UITableViewCell {
         
     }
     
-    func onBindReward(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) {
+    func onBindReward(_ grant: Cosmos_Authz_V1beta1_Grant?) {
         authzIconImgView.image = UIImage.init(named: "authzIconReward")
         authzTitleLabel.text = "Claim Rewards"
-        if let rewardAuth = getRewardAuth(grants) {
+        if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(rewardAuth.expiration.seconds * 1000)
-            authzLimitAmountLabel.text = "Generic"
-            authzLimitAddressLabel.text = "Generic"
+            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            authzLimitAmountLabel.text = "Limitless"
+            authzLimitAddressLabel.text = "Limitless"
         } else {
             setColor(false)
         }
     }
     
-    func onBindCommission(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) {
+    func onBindCommission(_ grant: Cosmos_Authz_V1beta1_Grant?) {
         authzIconImgView.image = UIImage.init(named: "authzIconCommission")
         authzTitleLabel.text = "Claim Commission"
-        if let rewardAuth = getCommissionAuth(grants) {
+        if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(rewardAuth.expiration.seconds * 1000)
-            authzLimitAmountLabel.text = "Generic"
-            authzLimitAddressLabel.text = "Generic"
+            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            authzLimitAmountLabel.text = "Limitless"
+            authzLimitAddressLabel.text = "Limitless"
         } else {
             setColor(false)
         }
     }
     
-    func onBindVote(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) {
+    func onBindVote(_ grant: Cosmos_Authz_V1beta1_Grant?) {
         authzIconImgView.image = UIImage.init(named: "authzIconVote")
         authzTitleLabel.text = "Vote"
-        if let rewardAuth = getVoteAuth(grants) {
+        if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(rewardAuth.expiration.seconds * 1000)
-            authzLimitAmountLabel.text = "Generic"
-            authzLimitAddressLabel.text = "Generic"
+            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            authzLimitAmountLabel.text = "Limitless"
+            authzLimitAddressLabel.text = "Limitless"
         } else {
             setColor(false)
         }
@@ -219,128 +220,40 @@ class AuthzExecuteCell: UITableViewCell {
     }
     
     
-    func getSendAuth(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) -> Cosmos_Authz_V1beta1_Grant? {
-        var result: Cosmos_Authz_V1beta1_Grant?
-        grants.forEach { grant in
-            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
-                if (genericAuth.msg.contains(Cosmos_Bank_V1beta1_MsgSend.protoMessageName)) {
-                    result = grant
-                    return
-                }
-            }
-            if (grant.authorization.typeURL.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {
-                result = grant
-                return
+
+    
+    func getSpendMax(_ transAuth: Cosmos_Bank_V1beta1_SendAuthorization) -> String? {
+        if (transAuth.spendLimit.count > 0) {
+            if let spendCoin = transAuth.spendLimit.filter({ $0.denom == stakingDenom }).first {
+                return spendCoin.amount
             }
         }
-        return result
+        return nil
     }
     
-    func getDelegateAuth(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) -> Cosmos_Authz_V1beta1_Grant? {
-        var result: Cosmos_Authz_V1beta1_Grant?
-        grants.forEach { grant in
-            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
-                if (genericAuth.msg.contains(Cosmos_Staking_V1beta1_MsgDelegate.protoMessageName)) {
-                    result = grant
-                    return
-                }
-            }
-            if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant.authorization.value)
-                if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.delegate) {
-                    result = grant
-                    return
-                }
-            }
+    func getMaxToken(_ stakeAuth: Cosmos_Staking_V1beta1_StakeAuthorization) -> String? {
+        if (stakeAuth.hasMaxTokens) {
+            return NSDecimalNumber.init(string: stakeAuth.maxTokens.amount).stringValue
         }
-        return result
+        return nil
     }
     
-    func getUndelegateAuth(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) -> Cosmos_Authz_V1beta1_Grant? {
-        var result: Cosmos_Authz_V1beta1_Grant?
-        grants.forEach { grant in
-            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
-                if (genericAuth.msg.contains(Cosmos_Staking_V1beta1_MsgUndelegate.protoMessageName)) {
-                    result = grant
-                    return
-                }
-            }
-            if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant.authorization.value)
-                if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.undelegate) {
-                    result = grant
-                    return
-                }
-            }
+    func getMonikerNames(_ stakeAuth: Cosmos_Staking_V1beta1_StakeAuthorization) -> String? {
+        var opAddresses = Array<String>()
+        stakeAuth.allowList.address.forEach { opAddress in
+            opAddresses.append(opAddress)
         }
-        return result
-    }
-    
-    func getRedelegateAuth(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) -> Cosmos_Authz_V1beta1_Grant? {
-        var result: Cosmos_Authz_V1beta1_Grant?
-        grants.forEach { grant in
-            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
-                if (genericAuth.msg.contains(Cosmos_Staking_V1beta1_MsgBeginRedelegate.protoMessageName)) {
-                    result = grant
-                    return
-                }
-            }
-            if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant.authorization.value)
-                if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.redelegate) {
-                    result = grant
-                    return
-                }
-            }
+        stakeAuth.denyList.address.forEach { opAddress in
+            opAddresses.append(opAddress)
         }
-        return result
-    }
-    
-    
-    
-    func getRewardAuth(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) -> Cosmos_Authz_V1beta1_Grant? {
-        var result: Cosmos_Authz_V1beta1_Grant?
-        grants.forEach { grant in
-            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
-                if (genericAuth.msg.contains(Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.protoMessageName)) {
-                    result = grant
-                    return
-                }
-            }
+        if (opAddresses.count == 0) {
+            return nil
         }
-        return result
-    }
-    
-    func getCommissionAuth(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) -> Cosmos_Authz_V1beta1_Grant? {
-        var result: Cosmos_Authz_V1beta1_Grant?
-        grants.forEach { grant in
-            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
-                if (genericAuth.msg.contains(Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission.protoMessageName)) {
-                    result = grant
-                    return
-                }
-            }
+        let monikerString = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddresses[0] }.first?.description_p.moniker ?? "Known Val"
+        if (opAddresses.count > 1) {
+            return monikerString + "+" + String(opAddresses.count - 1)
+        } else {
+            return monikerString
         }
-        return result
-    }
-    
-    func getVoteAuth(_ grants: Array<Cosmos_Authz_V1beta1_Grant>) -> Cosmos_Authz_V1beta1_Grant? {
-        var result: Cosmos_Authz_V1beta1_Grant?
-        grants.forEach { grant in
-            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
-                if (genericAuth.msg.contains(Cosmos_Gov_V1beta1_MsgVote.protoMessageName)) {
-                    result = grant
-                    return
-                }
-            }
-        }
-        return result
     }
 }

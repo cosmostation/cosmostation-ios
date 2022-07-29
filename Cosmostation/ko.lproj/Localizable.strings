@@ -769,6 +769,7 @@ support@cosmostation.io";
 "error_simul_error" = "실행할 수 없는 Tx입니다.";
 "error_no_mnemonic" = "개인키만 존재합니다.";
 "error_no_selected_proposal" = "투표하실 프로포절을 선택하세요.";
+"error_no_authz_type" = "이 타입에 대한 권한이 없습니다.";
 
 
 

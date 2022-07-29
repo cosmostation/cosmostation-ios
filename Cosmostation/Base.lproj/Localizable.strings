@@ -768,6 +768,7 @@ support@cosmostation.io";
 "error_simul_error" = "This Tx not executable.";
 "error_no_mnemonic" = "Only private key imported";
 "error_no_selected_proposal" = "Please select proposals to vote";
+"error_no_authz_type" = "No auth for this type";
 
 "theme_system" = "System";
 "theme_light" = "Light";

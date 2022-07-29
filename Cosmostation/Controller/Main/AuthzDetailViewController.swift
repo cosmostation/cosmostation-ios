@@ -17,7 +17,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
 
     var refresher: UIRefreshControl!
     var granterAddress: String!
-    var grant = Array<Cosmos_Authz_V1beta1_Grant>()
+    var grants = Array<Cosmos_Authz_V1beta1_Grant>()
     
     var granterAuth: Google_Protobuf2_Any?
     var granterBalance: Coin?
@@ -59,12 +59,11 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         self.navigationItem.title = NSLocalizedString("title_authz_detail", comment: "")
     }
     
-    
     var mFetchCnt = 0
     @objc func onFetchAuthz() {
         if (self.mFetchCnt > 0)  { return }
         self.mFetchCnt = 7
-        self.grant.removeAll()
+        self.grants.removeAll()
         self.granterAuth = nil
         self.granterBalance = Coin.init(chainConfig!.stakeDenom, "0")
         self.granterAvailable = Coin.init(chainConfig!.stakeDenom, "0")
@@ -95,7 +94,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func onUpdateViews() {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
-        print("grant ", self.grant.count)
+        print("grants ", self.grants.count)
         self.authzTableView.reloadData()
     }
     
@@ -127,8 +126,70 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzExecuteCell") as? AuthzExecuteCell
-            cell?.onBindView(indexPath.row, chainConfig, self.grant)
+            if (indexPath.row == 0) {
+                cell?.onBindSend(chainConfig, getSendAuth())
+            } else if (indexPath.row == 1) {
+                cell?.onBindDelegate(chainConfig, getDelegateAuth())
+            } else if (indexPath.row == 2) {
+                cell?.onBindUndelegate(chainConfig, getUndelegateAuth())
+            } else if (indexPath.row == 3) {
+                cell?.onBindRedelegate(chainConfig, getRedelegateAuth())
+            } else if (indexPath.row == 4) {
+                cell?.onBindReward(getRewardAuth())
+            } else if (indexPath.row == 5) {
+                cell?.onBindCommission(getCommissionAuth())
+            } else if (indexPath.row == 6) {
+                cell?.onBindVote(getVoteAuth())
+            }
             return cell!
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 1) {
+            if (indexPath.row == 0) {
+                guard let auth = getSendAuth() else {
+                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
+                
+            } else if (indexPath.row == 1) {
+                guard let auth = getDelegateAuth() else {
+                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
+                
+            } else if (indexPath.row == 2) {
+                guard let auth = getUndelegateAuth() else {
+                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
+                
+            } else if (indexPath.row == 3) {
+                guard let auth = getRedelegateAuth() else {
+                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
+                
+            } else if (indexPath.row == 4) {
+                guard let auth = getRedelegateAuth() else {
+                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
+                
+            } else if (indexPath.row == 5) {
+                guard let auth = getCommissionAuth() else {
+                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
+                
+            } else if (indexPath.row == 6) {
+                guard let auth = getVoteAuth() else {
+                    self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
+                    return
+                }
+                
+            }
         }
     }
     
@@ -140,7 +201,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let req = Cosmos_Authz_V1beta1_QueryGrantsRequest.with { $0.grantee = granteeAddress; $0.granter = granterAddress }
                 if let response = try? Cosmos_Authz_V1beta1_QueryClient(channel: channel).grants(req, callOptions:BaseNetWork.getCallOptions()).response.wait() {
                     response.grants.forEach { grant in
-                        self.grant.append(grant)
+                        self.grants.append(grant)
                     }
                 }
                 try channel.close().wait()
@@ -414,5 +475,132 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         }
         sum = sum.multiplying(byPowerOf10: -18)
         return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
+    }
+    
+    
+    
+    
+    
+    func getSendAuth() -> Cosmos_Authz_V1beta1_Grant? {
+        var result: Cosmos_Authz_V1beta1_Grant?
+        grants.forEach { grant in
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
+                if (genericAuth.msg.contains(Cosmos_Bank_V1beta1_MsgSend.protoMessageName)) {
+                    result = grant
+                    return
+                }
+            }
+            if (grant.authorization.typeURL.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {
+                result = grant
+                return
+            }
+        }
+        return result
+    }
+    
+    func getDelegateAuth() -> Cosmos_Authz_V1beta1_Grant? {
+        var result: Cosmos_Authz_V1beta1_Grant?
+        grants.forEach { grant in
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
+                if (genericAuth.msg.contains(Cosmos_Staking_V1beta1_MsgDelegate.protoMessageName)) {
+                    result = grant
+                    return
+                }
+            }
+            if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
+                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant.authorization.value)
+                if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.delegate) {
+                    result = grant
+                    return
+                }
+            }
+        }
+        return result
+    }
+    
+    func getUndelegateAuth() -> Cosmos_Authz_V1beta1_Grant? {
+        var result: Cosmos_Authz_V1beta1_Grant?
+        grants.forEach { grant in
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
+                if (genericAuth.msg.contains(Cosmos_Staking_V1beta1_MsgUndelegate.protoMessageName)) {
+                    result = grant
+                    return
+                }
+            }
+            if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
+                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant.authorization.value)
+                if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.undelegate) {
+                    result = grant
+                    return
+                }
+            }
+        }
+        return result
+    }
+    
+    func getRedelegateAuth() -> Cosmos_Authz_V1beta1_Grant? {
+        var result: Cosmos_Authz_V1beta1_Grant?
+        grants.forEach { grant in
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
+                if (genericAuth.msg.contains(Cosmos_Staking_V1beta1_MsgBeginRedelegate.protoMessageName)) {
+                    result = grant
+                    return
+                }
+            }
+            if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
+                let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant.authorization.value)
+                if (stakeAuth.authorizationType == Cosmos_Staking_V1beta1_AuthorizationType.redelegate) {
+                    result = grant
+                    return
+                }
+            }
+        }
+        return result
+    }
+    
+    func getRewardAuth() -> Cosmos_Authz_V1beta1_Grant? {
+        var result: Cosmos_Authz_V1beta1_Grant?
+        grants.forEach { grant in
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
+                if (genericAuth.msg.contains(Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.protoMessageName)) {
+                    result = grant
+                    return
+                }
+            }
+        }
+        return result
+    }
+    
+    func getCommissionAuth() -> Cosmos_Authz_V1beta1_Grant? {
+        var result: Cosmos_Authz_V1beta1_Grant?
+        grants.forEach { grant in
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
+                if (genericAuth.msg.contains(Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission.protoMessageName)) {
+                    result = grant
+                    return
+                }
+            }
+        }
+        return result
+    }
+    
+    func getVoteAuth() -> Cosmos_Authz_V1beta1_Grant? {
+        var result: Cosmos_Authz_V1beta1_Grant?
+        grants.forEach { grant in
+            if (grant.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
+                let genericAuth = try! Cosmos_Authz_V1beta1_GenericAuthorization.init(serializedData: grant.authorization.value)
+                if (genericAuth.msg.contains(Cosmos_Gov_V1beta1_MsgVote.protoMessageName)) {
+                    result = grant
+                    return
+                }
+            }
+        }
+        return result
     }
 }
