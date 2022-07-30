@@ -172,7 +172,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 }
                 
             } else if (indexPath.row == 4) {
-                guard let auth = getRedelegateAuth() else {
+                guard let auth = getRewardAuth() else {
                     self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
                     return
                 }
