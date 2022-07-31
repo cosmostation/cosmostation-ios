@@ -176,6 +176,13 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                     self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
                     return
                 }
+                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+                txVC.mGrant = auth
+                txVC.mGranterAddress = granterAddress
+                txVC.mGranterReward = granterReward
+                txVC.mType = TASK_TYPE_AUTHZ_CLAIM_REWARDS
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(txVC, animated: true)
                 
             } else if (indexPath.row == 5) {
                 guard let auth = getCommissionAuth() else {
@@ -192,6 +199,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
             }
         }
     }
+    
     
     func onFetchGrant_gRPC(_ granteeAddress: String, _ granterAddress: String) {
         DispatchQueue.global().async {

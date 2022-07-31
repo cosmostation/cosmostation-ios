@@ -1669,6 +1669,45 @@ class Signer {
         return [anyMsg]
     }
     
+    //AUTHz
+    static func genAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                    _ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
+                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzClaimRewards = genAuthzClaimStakingRewardMsg(grantee, granter, rewards)
+        return getGrpcSignedTx(auth, chainType, authzClaimRewards, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                            _ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzClaimRewards = genAuthzClaimStakingRewardMsg(grantee, granter, rewards)
+        return getGrpcSimulateTx(auth, chainType, authzClaimRewards, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzClaimStakingRewardMsg(_ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>) -> [Google_Protobuf2_Any] {
+        var innerMsgs = Array<Google_Protobuf2_Any>()
+        rewards.forEach { reward in
+            let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
+                $0.delegatorAddress = granter
+                $0.validatorAddress = reward.validatorAddress
+            }
+            let innerMsg = Google_Protobuf2_Any.with {
+                $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
+                $0.value = try! claimMsg.serializedData()
+            }
+            innerMsgs.append(innerMsg)
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = innerMsgs
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
     
     
     

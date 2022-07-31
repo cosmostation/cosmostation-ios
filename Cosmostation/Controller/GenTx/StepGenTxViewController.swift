@@ -153,6 +153,16 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mDesmosAirDropAmount: String?
     
     
+    var mGrant: Cosmos_Authz_V1beta1_Grant?
+    var mGranterAddress: String?
+    var mGranterAvailable: Coin?
+    var mGranterVesting: Coin?
+    var mGranterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
+    var mGranterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
+    var mGranterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
+    var mGranterCommission: Coin?
+    
+    
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {
             if (WUtils.isGRPC(chainType!)) {
@@ -455,6 +465,15 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     SendContract4ViewController(nibName: "SendContract4ViewController", bundle: nil)]
         }
+        
+        //AUTHZ
+        else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+           return [AuthzClaimReward1ViewController(nibName: "AuthzClaimReward1ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzClaimReward4ViewController(nibName: "AuthzClaimReward4ViewController", bundle: nil)]
+           
+       }
         
         else {
             return[]

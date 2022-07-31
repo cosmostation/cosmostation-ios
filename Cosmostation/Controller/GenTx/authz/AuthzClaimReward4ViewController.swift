@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import GRPC
+import NIO
 
-class AuthzClaimReward4ViewController: BaseViewController {
+class AuthzClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     
-    @IBOutlet weak var rewardAmoutLaebl: UILabel!
+    @IBOutlet weak var rewardAmoutLabel: UILabel!
     @IBOutlet weak var rewardDenomLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
     @IBOutlet weak var feeDenomLabel: UILabel!
@@ -22,11 +24,61 @@ class AuthzClaimReward4ViewController: BaseViewController {
     
     @IBOutlet weak var beforeBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
+    
+    var pageHolderVC: StepGenTxViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
+        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
+        self.chainConfig = ChainFactory.getChainConfig(chainType)
+        self.pageHolderVC = self.parent as? StepGenTxViewController
+        
+        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        confirmBtn.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        beforeBtn.borderColor = UIColor.init(named: "_font05")
+        confirmBtn.borderColor = UIColor.init(named: "photon")
+    }
+    
+    override func enableUserInteraction() {
+        self.onUpdateView()
+        self.beforeBtn.isUserInteractionEnabled = true
+        self.confirmBtn.isUserInteractionEnabled = true
+    }
+    
+    func onUpdateView() {
+        let mainReward = getRewardSum()
+        WDP.dpCoin(chainConfig, mainReward, rewardDenomLabel, rewardAmoutLabel)
+        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
+        
+        var monikers = ""
+        BaseData.instance.mAllValidators_gRPC.forEach { validator in
+            pageHolderVC.mGranterReward.forEach { myValidator in
+                if (validator.operatorAddress == myValidator.validatorAddress) {
+                    if (monikers.count > 0) {
+                        monikers = monikers + ",   " + validator.description_p.moniker
+                    } else {
+                        monikers = validator.description_p.moniker
+                    }
+                }
+            }
+        }
+        fromValidatorLabel.text = monikers
+        
+        recipientLabel.text = pageHolderVC.mRewardAddress
+        recipientLabel.adjustsFontSizeToFitWidth = true
+        if (pageHolderVC.mGranterAddress == pageHolderVC.mRewardAddress) {
+            self.recipientTitleLabel.isHidden = true
+            self.recipientLabel.isHidden = true
+        } else {
+            self.recipientTitleLabel.isHidden = false
+            self.recipientLabel.isHidden = false
+        }
+        
+        memoLabel.text = pageHolderVC.mMemo
     }
     
     @IBAction func onClickBack(_ sender: UIButton) {
@@ -36,5 +88,75 @@ class AuthzClaimReward4ViewController: BaseViewController {
     
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
+        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+        self.navigationItem.title = ""
+        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+        passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
+        passwordVC.resultDelegate = self
+        self.navigationController?.pushViewController(passwordVC, animated: false)
+    }
+    
+    func getRewardSum() -> Coin {
+        var sum = NSDecimalNumber.zero
+        pageHolderVC.mGranterReward.forEach { reward in
+            reward.reward.forEach { rewardCoin in
+                if (rewardCoin.denom == chainConfig!.stakeDenom) {
+                    sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
+                }
+            }
+        }
+        sum = sum.multiplying(byPowerOf10: -18)
+        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
+    }
+    
+    func passwordResponse(result: Int) {
+        if (result == PASSWORD_RESUKT_OK) {
+            self.onFetchgRPCAuth(pageHolderVC.mAccount!)
+        }
+    }
+    
+    func onFetchgRPCAuth(_ account: Account) {
+        self.showWaittingAlert()
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
+                if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.onBroadcastGrpcTx(response)
+                }
+                try channel.close().wait()
+            } catch {
+                print("onFetchgRPCAuth failed: \(error)")
+            }
+        }
+    }
+    
+    func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
+        DispatchQueue.global().async {
+            let reqTx = Signer.genAuthzClaimReward(auth!,
+                                                   self.account!.account_address,
+                                                   self.pageHolderVC.mGranterAddress!,
+                                                   self.pageHolderVC.mGranterReward,
+                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                   self.chainType!)
+            
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    DispatchQueue.main.async(execute: {
+                        if (self.waitAlert != nil) {
+                            self.waitAlert?.dismiss(animated: true, completion: {
+                                self.onStartTxDetailgRPC(response)
+                            })
+                        }
+                    });
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onBroadcastGrpcTx failed: \(error)")
+            }
+        }
     }
 }

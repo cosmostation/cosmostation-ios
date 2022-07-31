@@ -20,7 +20,7 @@
                 <outlet property="memoLabel" destination="0ZA-q8-5Zk" id="CER-2y-Vpa"/>
                 <outlet property="recipientLabel" destination="3BZ-Kr-wjK" id="ES4-QO-4DZ"/>
                 <outlet property="recipientTitleLabel" destination="Rz9-6c-nN0" id="7JI-tS-Hzr"/>
-                <outlet property="rewardAmoutLaebl" destination="F7q-ji-cDE" id="1da-Ak-sWw"/>
+                <outlet property="rewardAmoutLabel" destination="F7q-ji-cDE" id="uFg-gN-fNK"/>
                 <outlet property="rewardDenomLabel" destination="Uk3-YY-W9f" id="BFX-3e-dkv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

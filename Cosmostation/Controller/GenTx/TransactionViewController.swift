@@ -63,6 +63,17 @@ class TransactionViewController: UIViewController {
     var irisResponse: Irismod_Nft_QueryNFTResponse?
     var croResponse: Chainmain_Nft_V1_QueryNFTResponse?
     
+    //for authz tx
+    var mGrant: Cosmos_Authz_V1beta1_Grant?
+    var mGranterAddress: String?
+    var mGranterAvailable: Coin?
+    var mGranterVesting: Coin?
+    var mGranterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
+    var mGranterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
+    var mGranterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
+    var mGranterCommission: Coin?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
@@ -297,6 +308,11 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_account_chain_link", comment: "")
             
+        } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+            stepDescription.text = NSLocalizedString("str_authz_reward_step_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            self.titleLabel.text =  NSLocalizedString("title_authz_claim_reward", comment: "")
+            
         }
         
         
@@ -368,6 +384,15 @@ class TransactionViewController: UIViewController {
             StepVc.mNFTTokenId = self.mNFTTokenId
             StepVc.irisResponse = self.irisResponse
             StepVc.croResponse = self.croResponse
+            
+            StepVc.mGrant = self.mGrant
+            StepVc.mGranterAddress = self.mGranterAddress
+            StepVc.mGranterAvailable = self.mGranterAvailable
+            StepVc.mGranterVesting = self.mGranterVesting
+            StepVc.mGranterDelegation = self.mGranterDelegation
+            StepVc.mGranterUnbonding = self.mGranterUnbonding
+            StepVc.mGranterReward = self.mGranterReward
+            StepVc.mGranterCommission = self.mGranterCommission
         }
     }
     
@@ -551,6 +576,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_account_link_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+                    stepDescription.text = NSLocalizedString("str_authz_reward_step_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
                 }
                 
                 
@@ -729,6 +758,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
                     stepDescription.text = NSLocalizedString("str_account_link_step_1", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_2")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+                    stepDescription.text = NSLocalizedString("str_authz_reward_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
                 }
@@ -911,6 +944,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_account_link_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+                    stepDescription.text = NSLocalizedString("str_authz_reward_step_2", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_2")
+                    
                 }
                 
                 
@@ -1090,6 +1127,11 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT) {
                     stepDescription.text = NSLocalizedString("str_account_link_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+                    stepDescription.text = NSLocalizedString("str_authz_reward_step_3", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_2")
+                    
                 }
                 
             } else if (step == 4) {

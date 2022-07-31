@@ -702,6 +702,17 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                       self.chainType!)
         }
         
+        //for authz
+        else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+            return Signer.genSimulateAuthzClaimReward(auth,
+                                                      self.account!.account_address,
+                                                      self.pageHolderVC.mGranterAddress!,
+                                                      self.pageHolderVC.mGranterReward,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                      self.chainType!)
+        }
+        
         return nil
     }
 }
