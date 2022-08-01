@@ -202,6 +202,12 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                     self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
                     return
                 }
+                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+                txVC.mGrant = auth
+                txVC.mGranterAddress = granterAddress
+                txVC.mType = TASK_TYPE_AUTHZ_VOTE
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(txVC, animated: true)
                 
             }
         }

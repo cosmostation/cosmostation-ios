@@ -517,6 +517,12 @@
 "str_authz_commission_step_2" = "Tx 수수료를 선택하세요";
 "str_authz_commission_step_3" = "입력하신 정보를 확인하세요";
 
+"str_authz_vote_step_0" = "투표하실 의제를 선택하세요";
+"str_authz_vote_step_1" = "의견을 입력하세요";
+"str_authz_vote_step_2" = "메모를 입력하세요 (선택사항)";
+"str_authz_vote_step_3" = "Tx 수수료를 선택하세요";
+"str_authz_vote_step_4" = "입력하신 정보를 확인하세요";
+
 "str_description_open_domain" = "Open 타입은 계정 소유자가 계정에 대한 작업을 수행 할 수있는 유일한 엔티티인 도메인 유형입니다.";
 "str_description_closed_domain" = "Closed 타입은 도메인 소유자가 계정을 제어 할 수있는 도메인 유형입니다.";
 "str_safe_copy_title" = "니모닉 안전 복사";
@@ -649,6 +655,7 @@ support@cosmostation.io";
 "title_authz_detail" = "Authz 상세";
 "title_authz_claim_reward" = "Authz 이자 받기";
 "title_authz_claim_commission" = "Authz 커미션 받기";
+"title_authz_vote" = "Authz 투표하기";
 
 
 "proposal_type_basic" = "기본";

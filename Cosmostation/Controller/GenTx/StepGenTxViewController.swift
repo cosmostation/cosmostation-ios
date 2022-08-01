@@ -479,7 +479,17 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    AuthzClaimCommisstion4ViewController(nibName: "AuthzClaimCommisstion4ViewController", bundle: nil)]
            
+       } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
+           return [AuthzVote1ViewController(nibName: "AuthzVote1ViewController", bundle: nil),
+                   AuthzVote2ViewController(nibName: "AuthzVote2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzVote5ViewController(nibName: "AuthzVote5ViewController", bundle: nil)]
+           
        }
+        
+        
+        
         
         else {
             return[]

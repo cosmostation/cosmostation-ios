@@ -318,6 +318,11 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_authz_claim_commission", comment: "")
             
+        } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
+            stepDescription.text = NSLocalizedString("str_authz_vote_step_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            self.titleLabel.text =  NSLocalizedString("title_authz_vote", comment: "")
+            
         }
         
         
@@ -589,6 +594,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_commission_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
+                    stepDescription.text = NSLocalizedString("str_authz_vote_step_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_1")
+                    
                 }
                 
                 
@@ -776,6 +785,10 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
                     stepDescription.text = NSLocalizedString("str_authz_commission_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
+                    stepDescription.text = NSLocalizedString("str_authz_vote_step_1", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_2")
                     
                 }
                 
@@ -965,6 +978,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_commission_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
+                    stepDescription.text = NSLocalizedString("str_authz_vote_step_2", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_3")
+                    
                 }
                 
                 
@@ -1153,6 +1170,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_commission_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
+                    stepDescription.text = NSLocalizedString("str_authz_vote_step_3", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_4")
+                    
                 }
                 
             } else if (step == 4) {
@@ -1171,6 +1192,11 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_TYPE_IBC_TRANSFER) {
                     stepDescription.text = NSLocalizedString("str_ibc_transfer_step_4", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_5")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
+                    stepDescription.text = NSLocalizedString("str_authz_vote_step_4", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_5")
+                    
                 }
 //                else if (mType == KAVA_MSG_TYPE_CLAIM_HARD_INCENTIVE_VV) {
 //                    stepImg.image = UIImage.init(named: "txStep5_5")

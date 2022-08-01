@@ -262,6 +262,11 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/" + chainName + "/proposals/" + proposalId + "/votes?voter=" + voter
     }
     
+    static func mintscanMyVotes(_ chainConfig: ChainConfig?, _ voter: String) -> String {
+        let chainName = WUtils.getChainNameByBaseChain(chainConfig)
+        return MINTSCAN_API_URL + "v1/" + chainName + "/account/" + voter + "/votes"
+    }
+    
     static func mintscanAssets() -> String {
         return MINTSCAN_API_URL + "v1/assets"
     }
