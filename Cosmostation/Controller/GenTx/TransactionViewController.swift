@@ -313,6 +313,11 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_authz_claim_reward", comment: "")
             
+        } else if (mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+            stepDescription.text = NSLocalizedString("str_authz_commission_step_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep4_1")
+            self.titleLabel.text =  NSLocalizedString("title_authz_claim_commission", comment: "")
+            
         }
         
         
@@ -580,6 +585,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_reward_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+                    stepDescription.text = NSLocalizedString("str_authz_commission_step_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_1")
+                    
                 }
                 
                 
@@ -764,6 +773,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_reward_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+                    stepDescription.text = NSLocalizedString("str_authz_commission_step_1", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_2")
+                    
                 }
                 
                 
@@ -946,7 +959,11 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
                     stepDescription.text = NSLocalizedString("str_authz_reward_step_2", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep4_2")
+                    stepImg.image = UIImage.init(named: "txStep4_3")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+                    stepDescription.text = NSLocalizedString("str_authz_commission_step_2", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_3")
                     
                 }
                 
@@ -1130,7 +1147,11 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
                     stepDescription.text = NSLocalizedString("str_authz_reward_step_3", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep4_2")
+                    stepImg.image = UIImage.init(named: "txStep4_4")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+                    stepDescription.text = NSLocalizedString("str_authz_commission_step_3", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep4_4")
                     
                 }
                 

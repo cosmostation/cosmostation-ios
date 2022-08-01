@@ -473,6 +473,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    AuthzClaimReward4ViewController(nibName: "AuthzClaimReward4ViewController", bundle: nil)]
            
+       } else if (mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+           return [AuthzClaimCommisstion1ViewController(nibName: "AuthzClaimCommisstion1ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzClaimCommisstion4ViewController(nibName: "AuthzClaimCommisstion4ViewController", bundle: nil)]
+           
        }
         
         else {

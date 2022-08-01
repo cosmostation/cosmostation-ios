@@ -505,6 +505,11 @@
 "str_authz_reward_step_2" = "Select transaction fee";
 "str_authz_reward_step_3" = "Check transaction detail";
 
+"str_authz_commission_step_0" = "Confirm your commission info";
+"str_authz_commission_step_1" = "Insert memo (optional)";
+"str_authz_commission_step_2" = "Select transaction fee";
+"str_authz_commission_step_3" = "Check transaction detail";
+
 "str_description_open_domain" = "Open type in which an account owner is the only entity that can perform actions on the account.";
 "str_description_closed_domain" = "Closed type in which the domain owner has control over accounts too.";
 "str_safe_copy_title" = "Mnemonic Safe Copy";
@@ -637,6 +642,7 @@ support@cosmostation.io";
 "title_authz_list" = "Authz List";
 "title_authz_detail" = "Authz Detail";
 "title_authz_claim_reward" = "Authz Claim Rewards";
+"title_authz_claim_commission" = "Authz Claim Commission";
 
 
 "proposal_type_basic" = "Basic";

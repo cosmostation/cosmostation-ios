@@ -1670,6 +1670,7 @@ class Signer {
     }
     
     //AUTHz
+    //Tx for Authz Claim Rewards
     static func genAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                     _ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
@@ -1700,6 +1701,40 @@ class Signer {
         let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
             $0.grantee = grantee
             $0.msgs = innerMsgs
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Authz Claim Commission
+    static func genAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                        _ grantee: String, _ granter: String, _ validatorAddress: String,
+                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzClaimCommission = genAuthzClaimCommissionMsg(grantee, granter, validatorAddress)
+        return getGrpcSignedTx(auth, chainType, authzClaimCommission, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                                _ grantee: String, _ granter: String, _ validatorAddress: String,
+                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzClaimCommission = genAuthzClaimCommissionMsg(grantee, granter, validatorAddress)
+        return getGrpcSimulateTx(auth, chainType, authzClaimCommission, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzClaimCommissionMsg(_ grantee: String, _ granter: String, _ validatorAddress: String) -> [Google_Protobuf2_Any] {
+        let claimCommissionMsg = Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission.with {
+            $0.validatorAddress = validatorAddress
+        }
+        let innerMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission"
+            $0.value = try! claimCommissionMsg.serializedData()
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = [innerMsg]
         }
         let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"

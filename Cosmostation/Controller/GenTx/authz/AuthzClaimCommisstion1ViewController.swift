@@ -1,8 +1,8 @@
 //
-//  AuthzClaimReward1ViewController.swift
+//  AuthzClaimComisstion1ViewController.swift
 //  Cosmostation
 //
-//  Created by yongjoo jung on 2022/07/30.
+//  Created by yongjoo jung on 2022/08/01.
 //  Copyright © 2022 wannabit. All rights reserved.
 //
 
@@ -10,16 +10,16 @@ import UIKit
 import GRPC
 import NIO
 
-class AuthzClaimReward1ViewController: BaseViewController {
+class AuthzClaimCommisstion1ViewController: BaseViewController {
     
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
-    @IBOutlet weak var rewardAmountLabel: UILabel!
-    @IBOutlet weak var rewardDenomLabel: UILabel!
-    @IBOutlet weak var rewardFromLabel: UILabel!
-    @IBOutlet weak var rewardToAddressTitle: UILabel!
-    @IBOutlet weak var rewardToAddressLabel: UILabel!
+    @IBOutlet weak var commissionAmountLabel: UILabel!
+    @IBOutlet weak var commissionDenomLabel: UILabel!
+    @IBOutlet weak var commissionFromLabel: UILabel!
+    @IBOutlet weak var commissionToAddressTitle: UILabel!
+    @IBOutlet weak var commissionToAddressLabel: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
 
@@ -48,33 +48,22 @@ class AuthzClaimReward1ViewController: BaseViewController {
     }
     
     func onUpdateView() {
-        let mainReward = getRewardSum()
-        WDP.dpCoin(chainConfig, mainReward, rewardDenomLabel, rewardAmountLabel)
+        let mainCommision = pageHolderVC.mGranterCommission
+        WDP.dpCoin(chainConfig, mainCommision, commissionDenomLabel, commissionAmountLabel)
         
-        var monikers = ""
-        BaseData.instance.mAllValidators_gRPC.forEach { validator in
-            pageHolderVC.mGranterReward.forEach { myValidator in
-                if (validator.operatorAddress == myValidator.validatorAddress) {
-                    if (monikers.count > 0) {
-                        monikers = monikers + ",   " + validator.description_p.moniker
-                    } else {
-                        monikers = validator.description_p.moniker
-                    }
-                }
-            }
-        }
-        rewardFromLabel.text = monikers
+        let opAddress = WKey.getOpAddressFromAddress(pageHolderVC.mGranterAddress!, chainConfig)
+        let validatorInfo = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddress }.first
+        commissionFromLabel.text = validatorInfo?.description_p.moniker
         
-        rewardToAddressLabel.text = pageHolderVC.mRewardAddress
-        rewardToAddressLabel.adjustsFontSizeToFitWidth = true
+        commissionToAddressLabel.text = pageHolderVC.mRewardAddress
+        commissionToAddressLabel.adjustsFontSizeToFitWidth = true
         if (pageHolderVC.mGranterAddress == pageHolderVC.mRewardAddress) {
-            self.rewardToAddressTitle.isHidden = true
-            self.rewardToAddressLabel.isHidden = true
+            self.commissionToAddressTitle.isHidden = true
+            self.commissionToAddressLabel.isHidden = true
         } else {
-            self.rewardToAddressTitle.isHidden = false
-            self.rewardToAddressLabel.isHidden = false
+            self.commissionToAddressTitle.isHidden = false
+            self.commissionToAddressLabel.isHidden = false
         }
-        
         self.loadingImg.isHidden = true
     }
     
@@ -86,19 +75,6 @@ class AuthzClaimReward1ViewController: BaseViewController {
     @IBAction func onClickNext(_ sender: UIButton) {
         sender.isUserInteractionEnabled = false
         pageHolderVC.onNextPage()
-    }
-    
-    func getRewardSum() -> Coin {
-        var sum = NSDecimalNumber.zero
-        pageHolderVC.mGranterReward.forEach { reward in
-            reward.reward.forEach { rewardCoin in
-                if (rewardCoin.denom == chainConfig!.stakeDenom) {
-                    sum = sum.adding(WUtils.plainStringToDecimal(rewardCoin.amount))
-                }
-            }
-        }
-        sum = sum.multiplying(byPowerOf10: -18)
-        return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
     }
     
     func onFetchRewardAddress_gRPC(_ address: String) {

@@ -711,6 +711,15 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+            return Signer.genSimulateAuthzClaimCommission(auth,
+                                                          self.account!.account_address,
+                                                          self.pageHolderVC.mGranterAddress!,
+                                                          WKey.getOpAddressFromAddress(self.pageHolderVC.mGranterAddress!, self.chainConfig),
+                                                          self.mFee, self.pageHolderVC.mMemo!,
+                                                          self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                          self.chainType!)
         }
         
         return nil

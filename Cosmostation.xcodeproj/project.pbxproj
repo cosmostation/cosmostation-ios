@@ -559,6 +559,14 @@
 		045DAD62289128C3004ED9B4 /* AuthzExecuteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD5F289128C3004ED9B4 /* AuthzExecuteCell.swift */; };
 		045DAD63289128C3004ED9B4 /* AuthzExecuteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD60289128C3004ED9B4 /* AuthzExecuteCell.xib */; };
 		045DAD64289128C3004ED9B4 /* AuthzExecuteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD60289128C3004ED9B4 /* AuthzExecuteCell.xib */; };
+		045DAD6728978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD6528978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift */; };
+		045DAD6828978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD6528978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift */; };
+		045DAD6928978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD6628978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.xib */; };
+		045DAD6A28978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD6628978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.xib */; };
+		045DAD6D28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD6B28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift */; };
+		045DAD6E28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DAD6B28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift */; };
+		045DAD6F28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD6C28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib */; };
+		045DAD7028978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045DAD6C28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib */; };
 		04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */; };
 		04615CC92750C7AD00A693B0 /* WalletDesmosCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */; };
 		0469467E288A4005004EE923 /* WalletAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469467C288A4005004EE923 /* WalletAddressCell.swift */; };
@@ -3169,6 +3177,10 @@
 		045DAD5A288FAEC8004ED9B4 /* AuthzGranterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthzGranterCell.xib; sourceTree = "<group>"; };
 		045DAD5F289128C3004ED9B4 /* AuthzExecuteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthzExecuteCell.swift; sourceTree = "<group>"; };
 		045DAD60289128C3004ED9B4 /* AuthzExecuteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthzExecuteCell.xib; sourceTree = "<group>"; };
+		045DAD6528978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthzClaimCommisstion1ViewController.swift; sourceTree = "<group>"; };
+		045DAD6628978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthzClaimCommisstion1ViewController.xib; sourceTree = "<group>"; };
+		045DAD6B28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthzClaimCommisstion4ViewController.swift; sourceTree = "<group>"; };
+		045DAD6C28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthzClaimCommisstion4ViewController.xib; sourceTree = "<group>"; };
 		04615CC62750C7AD00A693B0 /* WalletDesmosCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDesmosCell.swift; sourceTree = "<group>"; };
 		04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosCell.xib; sourceTree = "<group>"; };
 		0469467C288A4005004EE923 /* WalletAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAddressCell.swift; sourceTree = "<group>"; };
@@ -5577,6 +5589,10 @@
 				E148780928957E1B00751D94 /* AuthzClaimReward1ViewController.xib */,
 				E148780E28957E2900751D94 /* AuthzClaimReward4ViewController.swift */,
 				E148780F28957E2900751D94 /* AuthzClaimReward4ViewController.xib */,
+				045DAD6528978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift */,
+				045DAD6628978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.xib */,
+				045DAD6B28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift */,
+				045DAD6C28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib */,
 			);
 			path = authz;
 			sourceTree = "<group>";
@@ -6251,6 +6267,7 @@
 				18FFB706281AF533004E65BB /* StartUnbonding3ViewController.xib in Resources */,
 				0443B8842855B9280027A6B9 /* WalletDetailAddressCell.xib in Resources */,
 				18FFB707281AF533004E65BB /* CdpDetailMyActionCell.xib in Resources */,
+				045DAD6A28978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.xib in Resources */,
 				E103967A2875AAB70055903A /* ProposalVotingPeriodCell.xib in Resources */,
 				18FFB708281AF533004E65BB /* TxJoinPoolCell.xib in Resources */,
 				04E6ABB828635867008DC3C7 /* CdpWithdraw1ViewController.xib in Resources */,
@@ -6349,6 +6366,7 @@
 				18FFB76B281AF533004E65BB /* KavaSwap3ViewController.xib in Resources */,
 				18FFB76D281AF533004E65BB /* WcSignRequestPopup.xib in Resources */,
 				04C5AE8628632062007627EA /* Redelegate5ViewController.xib in Resources */,
+				045DAD7028978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib in Resources */,
 				18FFB76E281AF533004E65BB /* TokenDetailStakingCell.xib in Resources */,
 				18FFB76F281AF533004E65BB /* OtherValidatorCell.xib in Resources */,
 				04C4937B284F465D00ECF4D2 /* MnemonicRestoreViewController.xib in Resources */,
@@ -6607,6 +6625,7 @@
 				E11338FE235D70D20011B61D /* ManageAccountAddCell.xib in Resources */,
 				28B2E4C426CFC84000ECF960 /* TokenDetailIBCCell.xib in Resources */,
 				287D746226A52B8E00532E01 /* JoinPool0ViewController.xib in Resources */,
+				045DAD6928978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.xib in Resources */,
 				04E6ABB728635867008DC3C7 /* CdpWithdraw1ViewController.xib in Resources */,
 				2894106226FDC029005BCBE4 /* IBCSend4ViewController.xib in Resources */,
 				044374632862E9A900C6A4ED /* Transfer1ViewController.xib in Resources */,
@@ -6705,6 +6724,7 @@
 				283E9459254901D9007A9291 /* RegisterDomain0ViewController.xib in Resources */,
 				280E1F17254ABB080007BA7D /* ResourceAddCell.xib in Resources */,
 				2894106926FF1307005BCBE4 /* SelectRelayerCell.xib in Resources */,
+				045DAD6F28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.xib in Resources */,
 				04C5AE8528632062007627EA /* Redelegate5ViewController.xib in Resources */,
 				041399EC275C94490013A1BE /* WalletCheckPKeyViewController.xib in Resources */,
 				28474ECC241E06AF00AF5A81 /* TxCdpBorrowCell.xib in Resources */,
@@ -7346,6 +7366,7 @@
 				18FFB424281AF533004E65BB /* TxIbcAcknowledgeCell.swift in Sources */,
 				1817CB34283E2CE500523713 /* desmos_profiles_v1beta1_query_profile.pb.swift in Sources */,
 				18FFB429281AF533004E65BB /* HardMyDeposit.swift in Sources */,
+				045DAD6828978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift in Sources */,
 				18FFB42A281AF533004E65BB /* RegistAccountCheckCell.swift in Sources */,
 				1817CB88283E2CE500523713 /* crescent_claim_v1beta1_tx.grpc.swift in Sources */,
 				1817CB6C283E2CE500523713 /* kava_pricefeed_v1beta1_query.grpc.swift in Sources */,
@@ -7805,6 +7826,7 @@
 				0451FC77282A3AC000214FDA /* ChainIris.swift in Sources */,
 				1817CBBA283E2CE500523713 /* sifnode_ethbridge_v1_query.grpc.swift in Sources */,
 				18FFB603281AF533004E65BB /* HardPoolWithdraw3ViewController.swift in Sources */,
+				045DAD6E28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift in Sources */,
 				0443B8822855B9280027A6B9 /* WalletDetailAddressCell.swift in Sources */,
 				1817CB56283E2CE500523713 /* kava_incentive_v1beta1_tx.pb.swift in Sources */,
 				18FFB604281AF533004E65BB /* FarmingDetailViewController.swift in Sources */,
@@ -8315,6 +8337,7 @@
 				E1F7F63623436B71000E597F /* BnbHistory.swift in Sources */,
 				04D138572691E25500D6AF9F /* TxJoinPoolCell.swift in Sources */,
 				040FA991275F55C300229F6F /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
+				045DAD6728978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift in Sources */,
 				04C43B5F278D5F530022D5DF /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
 				048C830527BF572800270528 /* evmos_inflation_v1_query.pb.swift in Sources */,
 				040FA9DB275F55C300229F6F /* ibc_core_client_v1_genesis.pb.swift in Sources */,
@@ -8674,6 +8697,7 @@
 				04C49374284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */,
 				04C43B58278D5F520022D5DF /* kava_incentive_v1beta1_genesis.pb.swift in Sources */,
 				E1827E212256292900BC0350 /* ValidatorDetailMyActionCell.swift in Sources */,
+				045DAD6D28978DFA004ED9B4 /* AuthzClaimCommisstion4ViewController.swift in Sources */,
 				28E0458A269B35480022A366 /* SwapViewController.swift in Sources */,
 				042A0CC5288E599F00C4DC38 /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				0451FC8B282A3AEB00214FDA /* ChainRizon.swift in Sources */,
