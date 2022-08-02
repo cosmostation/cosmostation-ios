@@ -320,8 +320,13 @@ class TransactionViewController: UIViewController {
             
         } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
             stepDescription.text = NSLocalizedString("str_authz_vote_step_0", comment: "")
-            stepImg.image = UIImage.init(named: "txStep4_1")
+            stepImg.image = UIImage.init(named: "txStep5_1")
             self.titleLabel.text =  NSLocalizedString("title_authz_vote", comment: "")
+            
+        } else if (mType == TASK_TYPE_AUTHZ_DELEGATE) {
+            stepDescription.text = NSLocalizedString("str_authz_delegate_step_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep5_1")
+            self.titleLabel.text =  NSLocalizedString("title_authz_delegate", comment: "")
             
         }
         
@@ -598,6 +603,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_vote_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_1")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_DELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_delegate_step_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_1")
+                    
                 }
                 
                 
@@ -788,6 +797,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
                     stepDescription.text = NSLocalizedString("str_authz_vote_step_1", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_2")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_DELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_delegate_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_2")
                     
                 }
@@ -982,6 +995,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_vote_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_3")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_DELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_delegate_step_2", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_3")
+                    
                 }
                 
                 
@@ -1174,6 +1191,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_vote_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_4")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_DELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_delegate_step_3", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_4")
+                    
                 }
                 
             } else if (step == 4) {
@@ -1195,6 +1216,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
                     stepDescription.text = NSLocalizedString("str_authz_vote_step_4", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_5")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_DELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_delegate_step_4", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_5")
                     
                 }

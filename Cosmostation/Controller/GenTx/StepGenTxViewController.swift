@@ -486,6 +486,12 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    AuthzVote5ViewController(nibName: "AuthzVote5ViewController", bundle: nil)]
            
+       } else if (mType == TASK_TYPE_AUTHZ_DELEGATE) {
+           return [AuthzDelegate1ViewController(nibName: "AuthzDelegate1ViewController", bundle: nil),
+                   AuthzDelegate2ViewController(nibName: "AuthzDelegate2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzDelegate5ViewController(nibName: "AuthzDelegate5ViewController", bundle: nil)]
        }
         
         
@@ -562,7 +568,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     func onNextPage() {
         disableBounce = false
         if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT ||
-            mType == TASK_TYPE_IBC_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
+            mType == TASK_TYPE_IBC_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER ||
+            mType == TASK_TYPE_AUTHZ_VOTE || mType == TASK_TYPE_AUTHZ_DELEGATE || mType == TASK_TYPE_AUTHZ_UNDELEGATE ) {
             if (currentIndex > 3) { return }
         } else {
             if (currentIndex > 2) { return }
