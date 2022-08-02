@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="beforeBtn" destination="Tzy-Wd-mnp" id="rGL-gi-pp2"/>
                 <outlet property="nextBtn" destination="i4P-8h-AIk" id="rmY-bT-s5u"/>
-                <outlet property="ptoposalTableView" destination="rep-xY-bDG" id="pia-2b-Mou"/>
+                <outlet property="proposalsTableView" destination="rep-xY-bDG" id="gCi-8n-zJD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -253,25 +253,6 @@ class Signer {
             anyMsgs.append(anyMsg)
         }
         return anyMsgs
-        
-//        let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
-//            $0.voter = WUtils.onParseAuthGrpc(auth).0!
-//            $0.proposalID = UInt64(proposalId)!
-//            if (opinion == "Yes") {
-//                $0.option = Cosmos_Gov_V1beta1_VoteOption.yes
-//            } else if (opinion == "No") {
-//                $0.option = Cosmos_Gov_V1beta1_VoteOption.no
-//            } else if (opinion == "NoWithVeto") {
-//                $0.option = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
-//            } else if (opinion == "Abstain") {
-//                $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
-//            }
-//        }
-//        let anyMsg = Google_Protobuf2_Any.with {
-//            $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
-//            $0.value = try! voteMsg.serializedData()
-//        }
-//        return [anyMsg]
     }
     
     //Tx for Common Reward Address Change
@@ -1735,6 +1716,54 @@ class Signer {
         let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
             $0.grantee = grantee
             $0.msgs = [innerMsg]
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Authz Vote
+    static func genAuthzVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                             _ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>,
+                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzVote = genAuthzVoteMsg(grantee, granter, proposals)
+        return getGrpcSignedTx(auth, chainType, authzVote, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                     _ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>,
+                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzVote = genAuthzVoteMsg(grantee, granter, proposals)
+        return getGrpcSimulateTx(auth, chainType, authzVote, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzVoteMsg(_ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>) -> [Google_Protobuf2_Any] {
+        var innerMsgs = Array<Google_Protobuf2_Any>()
+        proposals.forEach { proposal in
+            let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
+                $0.voter = granter
+                $0.proposalID = UInt64(proposal.id!)!
+                if (proposal.getMyVote() == "Yes") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.yes
+                } else if (proposal.getMyVote() == "No") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.no
+                } else if (proposal.getMyVote() == "NoWithVeto") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
+                } else if (proposal.getMyVote() == "Abstain") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
+                }
+            }
+            let innerMsg = Google_Protobuf2_Any.with {
+                $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
+                $0.value = try! voteMsg.serializedData()
+            }
+            innerMsgs.append(innerMsg)
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = innerMsgs
         }
         let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"

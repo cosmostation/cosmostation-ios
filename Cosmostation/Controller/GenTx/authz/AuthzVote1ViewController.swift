@@ -9,9 +9,10 @@
 import UIKit
 import Alamofire
 
-class AuthzVote1ViewController: BaseViewController {
+class AuthzVote1ViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var loadingImg: LoadingImageView!
+    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     @IBOutlet weak var proposalTableView: UITableView!
@@ -19,6 +20,7 @@ class AuthzVote1ViewController: BaseViewController {
     var pageHolderVC: StepGenTxViewController!
     var mVotingPeriods = Array<MintscanProposalDetail>()
     var myVotes = Array<MintscanMyVotes>()
+    var mSelectedProposalIds = Array<String>()
     var mFetchCnt = 0
     
     override func viewDidLoad() {
@@ -28,6 +30,14 @@ class AuthzVote1ViewController: BaseViewController {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
+        self.proposalTableView.delegate = self
+        self.proposalTableView.dataSource = self
+        self.proposalTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        self.proposalTableView.register(UINib(nibName: "ProposalVotingPeriodCell", bundle: nil), forCellReuseIdentifier: "ProposalVotingPeriodCell")
+        self.proposalTableView.rowHeight = UITableView.automaticDimension
+        self.proposalTableView.estimatedRowHeight = UITableView.automaticDimension
+        
+        loadingImg.onStartAnimation()
         onFetchVoteData()
         cancelBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
@@ -44,9 +54,38 @@ class AuthzVote1ViewController: BaseViewController {
     }
     
     func onUpdateView() {
-        print("mVotingPeriods ", mVotingPeriods.count)
-        print("myVotes ", myVotes.count)
-        
+        if (mVotingPeriods.count > 0) {
+            self.sortProposals()
+            self.proposalTableView.reloadData()
+            self.emptyView.isHidden = true
+        } else{
+            self.emptyView.isHidden = false
+        }
+        self.loadingImg.onStopAnimation()
+        self.loadingImg.isHidden = true
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return mVotingPeriods.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalVotingPeriodCell") as? ProposalVotingPeriodCell
+        let proposal = mVotingPeriods[indexPath.row]
+        cell?.onBindView(chainConfig, proposal, myVotes, true, mSelectedProposalIds)
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let proposal = mVotingPeriods[indexPath.row]
+        if (self.mSelectedProposalIds.contains(proposal.id!)) {
+            if let index = self.mSelectedProposalIds.firstIndex(of: proposal.id!) {
+                self.mSelectedProposalIds.remove(at: index)
+            }
+        } else {
+            self.mSelectedProposalIds.append(proposal.id!)
+        }
+        self.proposalTableView.reloadRows(at: [indexPath], with: .none)
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
@@ -55,6 +94,18 @@ class AuthzVote1ViewController: BaseViewController {
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
+        if (mSelectedProposalIds.count <= 0) {
+            self.onShowToast(NSLocalizedString("error_no_selected_proposal", comment: ""))
+            return
+        }
+        
+        var proposal = Array<MintscanProposalDetail>()
+        mSelectedProposalIds.forEach { selectedId in
+            if let filtered = mVotingPeriods.filter({ $0.id == selectedId }).first {
+                proposal.append(filtered)
+            }
+        }
+        pageHolderVC.mProposals = proposal
         sender.isUserInteractionEnabled = false
         pageHolderVC.onNextPage()
     }
@@ -71,9 +122,6 @@ class AuthzVote1ViewController: BaseViewController {
             onUpdateView()
         }
     }
-    
-    
-    
     
     func onFetchMintscanProposals() {
         let url = BaseNetWork.mintscanProposals(self.chainConfig!)
@@ -92,6 +140,13 @@ class AuthzVote1ViewController: BaseViewController {
             case .failure(let error):
                 print("onFetchMintscanProposal ", error)
             }
+            self.onFetchFinished()
+        }
+    }
+    
+    func sortProposals() {
+        self.mVotingPeriods.sort {
+            return Int($0.id!)! < Int($1.id!)! ? false : true
         }
     }
     
@@ -111,6 +166,7 @@ class AuthzVote1ViewController: BaseViewController {
             case .failure(let error):
                 print("onFetchMintscanMyVotes ", error)
             }
+            self.onFetchFinished()
         }
     }
 
