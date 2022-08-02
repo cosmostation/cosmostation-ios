@@ -40,7 +40,7 @@
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgVoteYes" translatesAutoresizingMaskIntoConstraints="NO" id="C24-yl-7fC">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgNotVoted" translatesAutoresizingMaskIntoConstraints="NO" id="C24-yl-7fC">
                                 <rect key="frame" x="301" y="14" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="D2d-E1-nUN"/>
@@ -101,7 +101,7 @@
     </objects>
     <resources>
         <image name="ImgGovDoposit" width="6" height="6"/>
-        <image name="imgVoteYes" width="40" height="40"/>
+        <image name="imgNotVoted" width="40" height="40"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -13,105 +13,59 @@ import NIO
 
 class ProposalVotingPeriodCell: UITableViewCell {
     
+    @IBOutlet weak var rootCardView: CardView!
     @IBOutlet weak var proposalTitleLabel: UILabel!
     @IBOutlet weak var votingEndTimeLabel: UILabel!
     @IBOutlet weak var myVoteStatusImg: UIImageView!
-    @IBOutlet weak var btnCheckVote: UIButton!
-    
-    var myVotes = Array<MintscanMyVote>()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
     }
     
-    override func prepareForReuse() {
-        self.myVotes.removeAll()
-        self.myVoteStatusImg.isHidden = true
-    }
+//    var actionMultiVote: (() -> Void)? = nil
+//
+//    @IBAction func onMultiVoteClick(_ sender: UIButton) {
+//        actionMultiVote?()
+//    }
     
-    var actionMultiVote: (() -> Void)? = nil
-    
-    @IBAction func onMultiVoteClick(_ sender: UIButton) {
-        actionMultiVote?()
-    }
-    
-    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanProposalDetail, _ address: String, _ selectMode: Bool, _ selected: Bool) {
+    func onBindView(_ chainConfig: ChainConfig?, _ proposal: MintscanProposalDetail, _ myVotes: Array<MintscanMyVotes>, _ selectMode: Bool, _ selected: Array<String>) {
         let title = "# ".appending(proposal.id!).appending("  ").appending(proposal.title ?? "")
         let time = WDP.dpTime(proposal.voting_end_time).appending(" ").appending(WDP.dpTimeGap(proposal.voting_end_time))
         proposalTitleLabel.text = title
         votingEndTimeLabel.text = time
-        myVoteStatusImg.isHidden = true
-        btnCheckVote.isHidden = true
         
-        if (selectMode) {
-            btnCheckVote.isHidden = false
-            btnCheckVote.titleLabel?.text = ""
-            if (selected) {
-                btnCheckVote.imageView?.image = btnCheckVote.imageView?.image?.withRenderingMode(.alwaysTemplate)
-                btnCheckVote.imageView?.tintColor = chainConfig?.chainColor
-
-            } else {
-                btnCheckVote.imageView?.image = btnCheckVote.imageView?.image?.withRenderingMode(.alwaysTemplate)
-                btnCheckVote.imageView?.tintColor = UIColor.init(named: "_font03")
-
-            }
+        if (selectMode && selected.contains(proposal.id!)) {
+            rootCardView.borderWidth = 1.0
+            rootCardView.borderColor = chainConfig?.chainColor
             
         } else {
-            let request = Alamofire.request(BaseNetWork.mintscanMyVote(chainConfig, String(proposal.id!), address),
-                                            method: .get,
-                                            parameters: [:],
-                                            encoding: URLEncoding.default,
-                                            headers: [:])
-            request.responseJSON { (response) in
-                switch response.result {
-                case .success(let res):
-                    if let responseDatas = res as? Array<NSDictionary> {
-                        responseDatas.forEach { rawMyVote in
-                            self.myVotes.append(MintscanMyVote.init(rawMyVote))
-                        }
-                        
-                    } else {
-                        self.myVotes.removeAll()
-                    }
-                    
-                case .failure(let error):
-                    self.myVotes.removeAll()
-                }
-                self.onBindMyVote()
-            }
+            rootCardView.borderWidth = 0
         }
-    }
-    
-    func onBindMyVote() {
-        if (myVotes.count <= 0) {
-            self.myVoteStatusImg.isHidden = true
-            
-        } else if (myVotes.count > 1) {
-            self.myVoteStatusImg.image = UIImage.init(named: "imgVoteWeight")
-            self.myVoteStatusImg.isHidden = false
-            
-        } else {
-            let myVote = myVotes[0]
-            if (myVote.answer == "yes") {
-                self.myVoteStatusImg.image = UIImage.init(named: "imgVoteYes")
-                self.myVoteStatusImg.isHidden = false
-                
-            } else if (myVote.answer == "no") {
-                self.myVoteStatusImg.image = UIImage.init(named: "imgVoteNo")
-                self.myVoteStatusImg.isHidden = false
-                
-            } else if (myVote.answer == "no with veto") {
-                self.myVoteStatusImg.image = UIImage.init(named: "imgVoteVeto")
-                self.myVoteStatusImg.isHidden = false
-                
-            } else if (myVote.answer == "abstain") {
-                self.myVoteStatusImg.image = UIImage.init(named: "imgVoteAbstain")
-                self.myVoteStatusImg.isHidden = false
-                
+        
+        if let rawVote = myVotes.filter({ String($0.proposal_id ?? -1) == proposal.id }).first {
+            if (rawVote.votes.count > 1) {
+                self.myVoteStatusImg.image = UIImage.init(named: "imgVoteWeight")
             } else {
-                self.myVoteStatusImg.isHidden = true
+                let myVote = rawVote.votes[0]
+                if (myVote.option?.contains("OPTION_YES") == true) {
+                    self.myVoteStatusImg.image = UIImage.init(named: "imgVoteYes")
+                    return
+                } else if (myVote.option?.contains("OPTION_NO_WITH_VETO") == true) {
+                    self.myVoteStatusImg.image = UIImage.init(named: "imgVoteVeto")
+                    return
+                } else if (myVote.option?.contains("OPTION_NO") == true) {
+                    self.myVoteStatusImg.image = UIImage.init(named: "imgVoteNo")
+                    return
+                } else if (myVote.option?.contains("OPTION_ABSTAIN") == true) {
+                    self.myVoteStatusImg.image = UIImage.init(named: "imgVoteAbstain")
+                    return
+                } else {
+                    self.myVoteStatusImg.isHidden = true
+                }
             }
+        } else {
+            self.myVoteStatusImg.image = UIImage.init(named: "imgNotVoted")
         }
     }
 }
