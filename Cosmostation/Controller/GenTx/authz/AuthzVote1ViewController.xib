@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iRX-Lc-jX2">
-                    <rect key="frame" x="0.0" y="34" width="414" height="754"/>
+                    <rect key="frame" x="0.0" y="54" width="414" height="734"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nUR-Vm-2L1">
@@ -133,7 +133,7 @@
                 <constraint firstItem="cnt-Ce-sT6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="dD3-RK-ftj"/>
                 <constraint firstItem="HdQ-Qb-BgT" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="faA-PX-ECs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="iRX-Lc-jX2" secondAttribute="leading" id="fiw-kk-053"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="iRX-Lc-jX2" secondAttribute="top" constant="10" id="fyw-vO-8vd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="iRX-Lc-jX2" secondAttribute="top" constant="-10" id="fyw-vO-8vd"/>
             </constraints>
             <point key="canvasLocation" x="139" y="154"/>
         </view>

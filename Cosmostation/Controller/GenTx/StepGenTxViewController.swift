@@ -492,6 +492,13 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    MemoViewController(nibName: "MemoViewController", bundle: nil),
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    AuthzDelegate5ViewController(nibName: "AuthzDelegate5ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_UNDELEGATE) {
+           return [AuthzUndelegate1ViewController(nibName: "AuthzUndelegate1ViewController", bundle: nil),
+                   AuthzUndelegate2ViewController(nibName: "AuthzUndelegate2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzUndelegate5ViewController(nibName: "AuthzUndelegate5ViewController", bundle: nil)]
        }
         
         
