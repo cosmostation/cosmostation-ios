@@ -120,12 +120,11 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             mFeeCoin = Coin.init(mFeeData.denom!, amount.stringValue)
         }
         mFee = Fee.init(mFeeGasAmount.stringValue, [mFeeCoin])
-//        print("mFee ", mFee)
+//        print("onCalculateFees ", mFee)
     }
     
     func onUpdateView() {
         self.onCalculateFees()
-        print("mFee ", mFee)
         
         WDP.dpSymbolImg(chainConfig, mFeeData.denom, feeTypeImg)
         WDP.dpSymbol(chainConfig, mFeeData.denom, feeTypeDenom)
@@ -726,9 +725,19 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                self.account!.account_address,
                                                self.pageHolderVC.mGranterAddress!,
                                                self.pageHolderVC.mProposals,
-                                               self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                               self.mFee, self.pageHolderVC.mMemo!,
                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_DELEGATE) {
+            return Signer.genSimulateAuthzDelegate(auth,
+                                                   self.account!.account_address,
+                                                   self.pageHolderVC.mGranterAddress!,
+                                                   self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+                                                   self.pageHolderVC.mToDelegateAmount!,
+                                                   self.mFee, self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                   self.chainType!)
         }
         
         return nil

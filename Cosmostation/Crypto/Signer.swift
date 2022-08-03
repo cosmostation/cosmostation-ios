@@ -1772,6 +1772,46 @@ class Signer {
         return [anyMsg]
     }
     
+    //Tx for Authz Delegate
+    static func genAuthzDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                 _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
+                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzDelegate = genAuthzDelegateMsg(grantee, granter, toValAddress, amount)
+        return getGrpcSignedTx(auth, chainType, authzDelegate, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
+                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzDelegate = genAuthzDelegateMsg(grantee, granter, toValAddress, amount)
+        return getGrpcSimulateTx(auth, chainType, authzDelegate, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzDelegateMsg(_ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
+        let toCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = amount.denom
+            $0.amount = amount.amount
+        }
+        let delegateMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
+            $0.delegatorAddress = granter
+            $0.validatorAddress = toValAddress
+            $0.amount = toCoin
+        }
+        let innerMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
+            $0.value = try! delegateMsg.serializedData()
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = [innerMsg]
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
     
     
     

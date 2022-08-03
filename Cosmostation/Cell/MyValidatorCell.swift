@@ -74,4 +74,61 @@ class MyValidatorCell: UITableViewCell {
             
     }
     
+    func updateAuthzView(_ validator: Cosmos_Staking_V1beta1_Validator, _ chainConfig: ChainConfig?,
+                         _ granterDelegation: Array<Cosmos_Staking_V1beta1_DelegationResponse>, _ granterUnbonding: Array<Cosmos_Staking_V1beta1_UnbondingDelegation>,
+                         _ granterReward: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>) {
+        if (chainConfig == nil) { return }
+        let chainType = chainConfig!.chainType
+        monikerLabel.text = validator.description_p.moniker
+        monikerLabel.adjustsFontSizeToFitWidth = true
+        if (validator.jailed == true) {
+            revokedImg.isHidden = false
+            validatorImg.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
+        } else {
+            revokedImg.isHidden = true
+            validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
+        }
+        
+        //DP granter delegation amount
+        var delegatedAmount = NSDecimalNumber.zero
+        if let matchedDelegate = granterDelegation.filter({ $0.delegation.validatorAddress == validator.operatorAddress }).first {
+            delegatedAmount = NSDecimalNumber.init(string: matchedDelegate.balance.amount)
+        }
+        myDelegatedAmoutLabel.attributedText = WDP.dpAmount(delegatedAmount.stringValue, myDelegatedAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        
+        //DP granter unbonding amount
+        var unbondingAmount = NSDecimalNumber.zero
+        if let matchedUnbonding = granterUnbonding.filter({ $0.validatorAddress == validator.operatorAddress }).first {
+            matchedUnbonding.entries.forEach { entry in
+                unbondingAmount = unbondingAmount.adding(NSDecimalNumber.init(string: entry.balance))
+            }
+        }
+        myUndelegatingAmountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, myUndelegatingAmountLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        
+        //DP granter staking reward amount
+        var rewardAmount = NSDecimalNumber.zero
+        if let matchedReward = granterReward.filter({ $0.validatorAddress == validator.operatorAddress }).first {
+            matchedReward.reward.forEach({ reward in
+                if (reward.denom == chainConfig?.stakeDenom) {
+                    rewardAmount = rewardAmount.adding(NSDecimalNumber.init(string: reward.amount))
+                }
+            })
+        }
+        rewardAmount = rewardAmount.multiplying(byPowerOf10: -18)
+        rewardAmoutLabel.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        
+        cardView.backgroundColor = chainConfig?.chainColorBG
+        if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
+            validatorImg.af_setImage(withURL: url)
+        }
+        
+        //display for band oracle status
+        if (chainType == .BAND_MAIN) {
+            if (BaseData.instance.mParam?.params?.band_active_validators?.addresses.contains(validator.operatorAddress) == false) {
+                bandOracleOffImg.isHidden = false
+            }
+        }
+        
+    }
+    
 }

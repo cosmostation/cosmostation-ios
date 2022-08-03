@@ -164,6 +164,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 txVC.mGranterAvailable = granterAvailable
                 txVC.mGranterVesting = granterVesting
                 txVC.mGranterDelegation = granterDelegation
+                txVC.mGranterReward = granterReward
                 txVC.mType = TASK_TYPE_AUTHZ_DELEGATE
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(txVC, animated: true)
