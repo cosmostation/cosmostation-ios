@@ -22,6 +22,9 @@ class AuthzExecuteCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        authzExpireDateLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        authzLimitAmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        authzLimitAddressLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -40,19 +43,19 @@ class AuthzExecuteCell: UITableViewCell {
         authzTitleLabel.text = "Send"
         if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
             if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzLimitAmountLabel.text = "Limitless"
-                authzLimitAddressLabel.text = "Limitless"
+                authzLimitAmountLabel.text = ""
+                authzLimitAddressLabel.text = ""
             }
             if (grant!.authorization.typeURL.contains(Cosmos_Bank_V1beta1_SendAuthorization.protoMessageName)) {
                 let transAuth = try! Cosmos_Bank_V1beta1_SendAuthorization.init(serializedData: grant!.authorization.value)
                 if let maxAmount = getSpendMax(transAuth) {
                     authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, divideDecimal, 6)
                 } else {
-                    authzLimitAmountLabel.text = "Limitless"
+                    authzLimitAmountLabel.text = "-"
                 }
-                authzLimitAddressLabel.text = "Limitless"
+                authzLimitAddressLabel.text = "-"
             }
         } else {
             setColor(false)
@@ -68,22 +71,22 @@ class AuthzExecuteCell: UITableViewCell {
         authzTitleLabel.text = "Delegate"
         if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
             if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzLimitAmountLabel.text = "Limitless"
-                authzLimitAddressLabel.text = "Limitless"
+                authzLimitAmountLabel.text = "-"
+                authzLimitAddressLabel.text = "-"
             }
             if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
                 let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
                 if let maxAmount = getMaxToken(stakeAuth) {
                     authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, divideDecimal, 6)
                 } else {
-                    authzLimitAmountLabel.text = "Limitless"
+                    authzLimitAmountLabel.text = "-"
                 }
                 if let monikers = getMonikerNames(stakeAuth) {
                     authzLimitAddressLabel.text = monikers
                 } else {
-                    authzLimitAddressLabel.text = "Limitless"
+                    authzLimitAddressLabel.text = "-"
                 }
             }
             
@@ -101,22 +104,22 @@ class AuthzExecuteCell: UITableViewCell {
         authzTitleLabel.text = "Undelegate"
         if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
             if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzLimitAmountLabel.text = "Limitless"
-                authzLimitAddressLabel.text = "Limitless"
+                authzLimitAmountLabel.text = "-"
+                authzLimitAddressLabel.text = "-"
             }
             if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
                 let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
                 if let maxAmount = getMaxToken(stakeAuth) {
                     authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, divideDecimal, 6)
                 } else {
-                    authzLimitAmountLabel.text = "Limitless"
+                    authzLimitAmountLabel.text = "-"
                 }
                 if let monikers = getMonikerNames(stakeAuth) {
                     authzLimitAddressLabel.text = monikers
                 } else {
-                    authzLimitAddressLabel.text = "Limitless"
+                    authzLimitAddressLabel.text = "-"
                 }
             }
             
@@ -134,22 +137,22 @@ class AuthzExecuteCell: UITableViewCell {
         authzTitleLabel.text = "Redelegate"
         if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
             if (grant!.authorization.typeURL.contains(Cosmos_Authz_V1beta1_GenericAuthorization.protoMessageName)) {
-                authzLimitAmountLabel.text = "Limitless"
-                authzLimitAddressLabel.text = "Limitless"
+                authzLimitAmountLabel.text = "-"
+                authzLimitAddressLabel.text = "-"
             }
             if (grant!.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
                 let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
                 if let maxAmount = getMaxToken(stakeAuth) {
                     authzLimitAmountLabel.attributedText = WDP.dpAmount(maxAmount, authzLimitAmountLabel.font!, divideDecimal, 6)
                 } else {
-                    authzLimitAmountLabel.text = "Limitless"
+                    authzLimitAmountLabel.text = "-"
                 }
                 if let monikers = getMonikerNames(stakeAuth) {
                     authzLimitAddressLabel.text = monikers
                 } else {
-                    authzLimitAddressLabel.text = "Limitless"
+                    authzLimitAddressLabel.text = "-"
                 }
             }
             
@@ -164,9 +167,9 @@ class AuthzExecuteCell: UITableViewCell {
         authzTitleLabel.text = "Claim Rewards"
         if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
-            authzLimitAmountLabel.text = "Limitless"
-            authzLimitAddressLabel.text = "Limitless"
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
+            authzLimitAmountLabel.text = "-"
+            authzLimitAddressLabel.text = "-"
         } else {
             setColor(false)
         }
@@ -177,9 +180,9 @@ class AuthzExecuteCell: UITableViewCell {
         authzTitleLabel.text = "Claim Commission"
         if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
-            authzLimitAmountLabel.text = "Limitless"
-            authzLimitAddressLabel.text = "Limitless"
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
+            authzLimitAmountLabel.text = "-"
+            authzLimitAddressLabel.text = "-"
         } else {
             setColor(false)
         }
@@ -190,9 +193,9 @@ class AuthzExecuteCell: UITableViewCell {
         authzTitleLabel.text = "Vote"
         if (grant != nil) {
             setColor(true)
-            authzExpireDateLabel.text = WDP.dpTime(grant!.expiration.seconds * 1000)
-            authzLimitAmountLabel.text = "Limitless"
-            authzLimitAddressLabel.text = "Limitless"
+            authzExpireDateLabel.text = WDP.dpTimeGap(grant!.expiration.seconds * 1000)
+            authzLimitAmountLabel.text = "-"
+            authzLimitAddressLabel.text = "-"
         } else {
             setColor(false)
         }
@@ -248,7 +251,7 @@ class AuthzExecuteCell: UITableViewCell {
         if (opAddresses.count == 0) {
             return nil
         }
-        let monikerString = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddresses[0] }.first?.description_p.moniker ?? "Known Val"
+        let monikerString = BaseData.instance.mAllValidators_gRPC.filter { $0.operatorAddress == opAddresses[0] }.first?.description_p.moniker ?? "known"
         if (opAddresses.count > 1) {
             return monikerString + "+" + String(opAddresses.count - 1)
         } else {

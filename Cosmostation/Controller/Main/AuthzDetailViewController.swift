@@ -99,6 +99,12 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         self.authzTableView.reloadData()
     }
     
+    func onLinkExplorer(_ address: String?) {
+        let link = WUtils.getAccountExplorer(chainConfig, address ?? "")
+        guard let url = URL(string: link) else { return }
+        self.onShowSafariWeb(url)
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -117,11 +123,13 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
             if (indexPath.row == 0) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzGranteeCell") as? AuthzGranteeCell
                 cell?.onBindView(chainConfig, account!.account_address)
+                cell?.actionGranteeAddress = { self.onLinkExplorer(self.account?.account_address) }
                 return cell!
                 
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzGranterCell") as? AuthzGranterCell
                 cell?.onBindView(chainConfig, granterAddress, getAvailableMain(), getVestingMain(), getDelegatedSum(), getUnbondingSum(), getRewardSum(), granterCommission)
+                cell?.actionGranterAddress = { self.onLinkExplorer(self.granterAddress) }
                 return cell!
             }
             
@@ -577,9 +585,6 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         sum = sum.multiplying(byPowerOf10: -18)
         return Coin.init(chainConfig!.stakeDenom, sum.stringValue)
     }
-    
-    
-    
     
     
     func getSendAuth() -> Cosmos_Authz_V1beta1_Grant? {

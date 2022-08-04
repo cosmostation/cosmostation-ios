@@ -32,8 +32,15 @@
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wE1-TM-FOv">
+                                <rect key="frame" x="593" y="11" width="24" height="24"/>
+                                <state key="normal" image="btnExplorer"/>
+                                <connections>
+                                    <action selector="onClickGranteeAddress:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xNz-Q3-Rxf"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-PT-HF2">
-                                <rect key="frame" x="12" y="42" width="605" height="16.5"/>
+                                <rect key="frame" x="12" y="42" width="605" height="18.5"/>
                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -73,18 +80,20 @@
                         </subviews>
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
+                            <constraint firstItem="wE1-TM-FOv" firstAttribute="centerY" secondItem="A9f-4b-PHU" secondAttribute="centerY" id="2JA-us-HDz"/>
                             <constraint firstAttribute="trailing" secondItem="s5Y-PT-HF2" secondAttribute="trailing" constant="12" id="3gT-h4-1eI"/>
                             <constraint firstItem="V33-tn-833" firstAttribute="leading" secondItem="qPu-dY-TDk" secondAttribute="leading" constant="12" id="4Vt-sM-2QX"/>
                             <constraint firstItem="s5Y-PT-HF2" firstAttribute="leading" secondItem="qPu-dY-TDk" secondAttribute="leading" constant="12" id="6lK-NS-n7e"/>
                             <constraint firstItem="A9f-4b-PHU" firstAttribute="top" secondItem="qPu-dY-TDk" secondAttribute="top" constant="16" id="Awc-gB-QdV"/>
                             <constraint firstItem="s5Y-PT-HF2" firstAttribute="top" secondItem="A9f-4b-PHU" secondAttribute="bottom" constant="12" id="Bc7-nm-Uf8"/>
+                            <constraint firstAttribute="bottom" secondItem="V33-tn-833" secondAttribute="bottom" constant="20" id="D1o-nm-avB"/>
                             <constraint firstItem="FID-IN-yvI" firstAttribute="top" secondItem="s5Y-PT-HF2" secondAttribute="bottom" constant="16" id="Jmp-o8-tgw"/>
                             <constraint firstAttribute="trailing" secondItem="FID-IN-yvI" secondAttribute="trailing" constant="12" id="VHM-Rt-ca1"/>
+                            <constraint firstAttribute="trailing" secondItem="wE1-TM-FOv" secondAttribute="trailing" constant="12" id="beL-eN-UOs"/>
                             <constraint firstItem="FID-IN-yvI" firstAttribute="leading" secondItem="qPu-dY-TDk" secondAttribute="leading" constant="12" id="fOK-1V-2c9"/>
                             <constraint firstItem="V33-tn-833" firstAttribute="top" secondItem="FID-IN-yvI" secondAttribute="bottom" constant="16" id="hf1-Pw-olT"/>
                             <constraint firstItem="A9f-4b-PHU" firstAttribute="leading" secondItem="qPu-dY-TDk" secondAttribute="leading" constant="12" id="i0N-SB-f64"/>
                             <constraint firstAttribute="trailing" secondItem="V33-tn-833" secondAttribute="trailing" constant="12" id="inO-ip-nfT"/>
-                            <constraint firstAttribute="bottom" secondItem="V33-tn-833" secondAttribute="bottom" constant="20" id="xaW-cf-4QY"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -130,6 +139,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="btnExplorer" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -23,6 +23,12 @@ class AuthzGranterCell: UITableViewCell {
     @IBOutlet weak var vestingLayer: UIView!
     @IBOutlet weak var commissionLayer: UIView!
     
+    var actionGranterAddress: (() -> Void)? = nil
+    
+    @IBAction func onClickGranterAddress(_ sender: UIButton) {
+        actionGranterAddress?()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none

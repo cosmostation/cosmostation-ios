@@ -32,8 +32,15 @@
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r0W-xh-HTc">
+                                <rect key="frame" x="557" y="11" width="24" height="24"/>
+                                <state key="normal" image="btnExplorer"/>
+                                <connections>
+                                    <action selector="onClickGranterAddress:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5ZI-RQ-tTu"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="45u-Vx-Yt9">
-                                <rect key="frame" x="12" y="36" width="569" height="18.5"/>
+                                <rect key="frame" x="12" y="41.5" width="569" height="18.5"/>
                                 <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -216,6 +223,7 @@
                         </subviews>
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="r0W-xh-HTc" secondAttribute="trailing" constant="12" id="0KV-qo-dcD"/>
                             <constraint firstItem="2kP-80-p7z" firstAttribute="top" secondItem="45u-Vx-Yt9" secondAttribute="bottom" constant="16" id="1UG-mO-CtM"/>
                             <constraint firstItem="hM0-uy-WGC" firstAttribute="top" secondItem="yrP-Py-A5r" secondAttribute="bottom" constant="12" id="3ez-K6-azb"/>
                             <constraint firstItem="yrP-Py-A5r" firstAttribute="top" secondItem="3tE-q2-aRQ" secondAttribute="bottom" constant="4" id="7nZ-mF-WMZ"/>
@@ -224,16 +232,17 @@
                             <constraint firstItem="45u-Vx-Yt9" firstAttribute="leading" secondItem="fK8-zG-bdn" secondAttribute="leading" constant="12" id="FUO-hr-4nD"/>
                             <constraint firstAttribute="trailing" secondItem="2kP-80-p7z" secondAttribute="trailing" constant="12" id="Fes-ZT-Tn1"/>
                             <constraint firstItem="TlD-O9-D8N" firstAttribute="top" secondItem="fK8-zG-bdn" secondAttribute="top" constant="16" id="FwP-OD-pBJ"/>
+                            <constraint firstAttribute="bottom" secondItem="hM0-uy-WGC" secondAttribute="bottom" constant="20" id="JJI-vp-VIj"/>
                             <constraint firstItem="hM0-uy-WGC" firstAttribute="leading" secondItem="2kP-80-p7z" secondAttribute="leading" id="KqS-Bj-u6g"/>
                             <constraint firstItem="HVn-Q0-W70" firstAttribute="top" secondItem="2kP-80-p7z" secondAttribute="bottom" constant="16" id="VwR-K8-QTa"/>
                             <constraint firstAttribute="trailing" secondItem="45u-Vx-Yt9" secondAttribute="trailing" constant="12" id="XQo-Af-Z4P"/>
-                            <constraint firstAttribute="bottom" secondItem="hM0-uy-WGC" secondAttribute="bottom" constant="20" id="dhJ-DY-QD9"/>
-                            <constraint firstItem="45u-Vx-Yt9" firstAttribute="top" secondItem="TlD-O9-D8N" secondAttribute="bottom" constant="6.5" id="epq-h3-qse"/>
+                            <constraint firstItem="45u-Vx-Yt9" firstAttribute="top" secondItem="TlD-O9-D8N" secondAttribute="bottom" constant="12" id="epq-h3-qse"/>
                             <constraint firstAttribute="trailing" secondItem="3tE-q2-aRQ" secondAttribute="trailing" constant="12" id="jFv-he-Vyl"/>
                             <constraint firstAttribute="trailing" secondItem="yrP-Py-A5r" secondAttribute="trailing" constant="12" id="mn2-XC-Za7"/>
                             <constraint firstItem="HVn-Q0-W70" firstAttribute="leading" secondItem="2kP-80-p7z" secondAttribute="leading" id="pBP-QF-MRO"/>
                             <constraint firstItem="2kP-80-p7z" firstAttribute="leading" secondItem="fK8-zG-bdn" secondAttribute="leading" constant="12" id="qy3-66-rAz"/>
                             <constraint firstItem="HVn-Q0-W70" firstAttribute="centerY" secondItem="3tE-q2-aRQ" secondAttribute="centerY" id="xVC-A6-Otw"/>
+                            <constraint firstItem="r0W-xh-HTc" firstAttribute="centerY" secondItem="TlD-O9-D8N" secondAttribute="centerY" id="zTs-gH-rgd"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -281,6 +290,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="btnExplorer" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

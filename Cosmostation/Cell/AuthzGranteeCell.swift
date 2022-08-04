@@ -14,6 +14,12 @@ class AuthzGranteeCell: UITableViewCell {
     @IBOutlet weak var granteeAddressLabel: UILabel!
     @IBOutlet weak var availableAmountLabel: UILabel!
     
+    var actionGranteeAddress: (() -> Void)? = nil
+    
+    @IBAction func onClickGranteeAddress(_ sender: UIButton) {
+        actionGranteeAddress?()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none

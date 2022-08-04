@@ -29,8 +29,8 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authz Execute" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0E6-gA-wsT">
-                                <rect key="frame" x="42" y="15" width="81" height="14.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <rect key="frame" x="42" y="13.5" width="90.5" height="17"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -75,7 +75,7 @@
                             <constraint firstItem="Sss-1b-6hL" firstAttribute="leading" secondItem="zIN-h6-j5j" secondAttribute="leading" constant="12" id="EMf-pu-sNa"/>
                             <constraint firstItem="j7c-JV-yAp" firstAttribute="centerY" secondItem="0E6-gA-wsT" secondAttribute="centerY" id="Fcl-g6-Ecg"/>
                             <constraint firstItem="SQ0-EC-0PY" firstAttribute="top" secondItem="Sss-1b-6hL" secondAttribute="bottom" constant="10" id="HCm-yw-SNa"/>
-                            <constraint firstAttribute="bottom" secondItem="SQ0-EC-0PY" secondAttribute="bottom" constant="14" id="JMA-l6-h0H"/>
+                            <constraint firstAttribute="bottom" secondItem="SQ0-EC-0PY" secondAttribute="bottom" constant="10" id="JMA-l6-h0H"/>
                             <constraint firstItem="UaZ-pb-ahU" firstAttribute="top" secondItem="zIN-h6-j5j" secondAttribute="top" constant="10" id="LQs-Ls-Bfw"/>
                             <constraint firstItem="SQ0-EC-0PY" firstAttribute="leading" secondItem="zIN-h6-j5j" secondAttribute="leading" constant="12" id="PaM-Ff-eiR"/>
                             <constraint firstItem="Sss-1b-6hL" firstAttribute="top" secondItem="UaZ-pb-ahU" secondAttribute="bottom" constant="10" id="Wgv-Km-NLD"/>
