@@ -120,8 +120,8 @@
 "send_guide_msg_band" = "Tendermint를 기반으로 하는 크로스 체인 오라클 플랫폼입니다. 밴드 프로토콜은 실제 데이터와 API를 스마트 계약으로 통합하여 제공합니다.";
 "send_guide_title_ok" = "OKC";
 "send_guide_msg_ok" = "OKC Chain은 Tendermint를 기반으로 하는 퍼블릭 탈 중앙화 거래소 플랫폼 입니다.";
-"send_guide_title_certik" = "써틱 체인";
-"send_guide_msg_certik" = "Certik Foundation의 고유 한 공식 검증 보안 시스템을 기반으로하는 공용 플랫폼입니다. Certik은 보안 중심 체인에서 스마트 계약 실행 및 상호 작용을 허용합니다.";
+"send_guide_title_certik" = "SHENTU CHAIN";
+"send_guide_msg_certik" = "Certik Foundation의 고유 한 공식 검증 보안 시스템을 기반으로하는 공용 플랫폼입니다. shentu체인은 보안 중심 체인에서 스마트 계약 실행 및 상호 작용을 허용합니다.";
 "send_guide_title_secret" = "시크릿 네트워크";
 "send_guide_msg_secret" = "프라이버시를 보호하는 스마트 계약을 가능하게하는 최초의 지분 증명 네트워크. 비밀은 개인적이고 안전한 계산을 허용합니다.";
 "send_guide_title_akash" = "아카시 네트워크";

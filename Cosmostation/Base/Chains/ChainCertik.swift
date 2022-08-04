@@ -18,10 +18,10 @@ class ChainCertik: ChainConfig {
     var chainInfoMsg = NSLocalizedString("send_guide_msg_certik", comment: "")
     var chainColor = UIColor(named: "certik")!
     var chainColorBG = UIColor(named: "certik_bg")!
-    var chainTitle = "(Certik Mainnet)"
-    var chainTitle2 = "CERTIK"
+    var chainTitle = "(Shentu Mainnet)"
+    var chainTitle2 = "SHENTU"
     var chainDBName = CHAIN_CERTIK_S
-    var chainAPIName = "certik"
+    var chainAPIName = "shentu"
     var chainIdPrefix = "shentu-"
     
     var stakeDenomImg = UIImage(named: "tokenCertik")
@@ -40,14 +40,14 @@ class ChainCertik: ChainConfig {
     var pushSupport = false
     var wcSupoort = false
     var authzSupoort = false
-    var grpcUrl = "lcd-certik-app.cosmostation.io"
+    var grpcUrl = "lcd-shentu-app.cosmostation.io"
     var grpcPort = 9090
-    var lcdUrl = "https://lcd-certik-app.cosmostation.io/"
-    var apiUrl = "https://api-certik.cosmostation.io/"
-    var explorerUrl = MintscanUrl + "certik/"
-    var validatorImgUrl = MonikerUrl + "certik/"
-    var relayerImgUrl = RelayerUrl + "certik/relay-certik-unknown.png"
-    var priceUrl = CoingeckoUrl + "certik"
+    var lcdUrl = "https://lcd-shentu-app.cosmostation.io/"
+    var apiUrl = "https://api-shentu.cosmostation.io/"
+    var explorerUrl = MintscanUrl + "shentu/"
+    var validatorImgUrl = MonikerUrl + "shentu/"
+    var relayerImgUrl = RelayerUrl + "shentu/relay-shentu-unknown.png"
+    var priceUrl = CoingeckoUrl + "shentu"
     
     required init(_ chainType: ChainType) {
         self.chainType = chainType
