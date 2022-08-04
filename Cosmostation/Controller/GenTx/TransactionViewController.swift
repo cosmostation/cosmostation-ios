@@ -333,6 +333,11 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep5_1")
             self.titleLabel.text =  NSLocalizedString("title_authz_undelegate", comment: "")
             
+        } else if (mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+            stepDescription.text = NSLocalizedString("str_authz_redelegate_step_0", comment: "")
+            stepImg.image = UIImage.init(named: "txStep5_1")
+            self.titleLabel.text =  NSLocalizedString("title_authz_redelegate", comment: "")
+            
         }
         
         
@@ -616,6 +621,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_undelegate_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_1")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_redelegate_step_0", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_1")
+                    
                 }
                 
                 
@@ -814,6 +823,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_AUTHZ_UNDELEGATE) {
                     stepDescription.text = NSLocalizedString("str_authz_undelegate_step_1", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_2")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_redelegate_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_2")
                     
                 }
@@ -1016,6 +1029,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_undelegate_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_3")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_redelegate_step_2", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_3")
+                    
                 }
                 
                 
@@ -1216,6 +1233,10 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_authz_undelegate_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_4")
                     
+                } else if (mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_redelegate_step_3", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_4")
+                    
                 }
                 
             } else if (step == 4) {
@@ -1245,6 +1266,10 @@ class TransactionViewController: UIViewController {
                     
                 } else if (mType == TASK_TYPE_AUTHZ_UNDELEGATE) {
                     stepDescription.text = NSLocalizedString("str_authz_undelegate_step_4", comment: "")
+                    stepImg.image = UIImage.init(named: "txStep5_5")
+                    
+                } else if (mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+                    stepDescription.text = NSLocalizedString("str_authz_redelegate_step_4", comment: "")
                     stepImg.image = UIImage.init(named: "txStep5_5")
                     
                 }

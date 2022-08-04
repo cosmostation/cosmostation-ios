@@ -499,6 +499,13 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                    MemoViewController(nibName: "MemoViewController", bundle: nil),
                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                    AuthzUndelegate5ViewController(nibName: "AuthzUndelegate5ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+           return [AuthzRedelegate1ViewController(nibName: "AuthzRedelegate1ViewController", bundle: nil),
+                   AuthzRedelegate2ViewController(nibName: "AuthzRedelegate2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzRedelegate5ViewController(nibName: "AuthzRedelegate5ViewController", bundle: nil)]
        }
         
         
@@ -574,13 +581,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     func onNextPage() {
         disableBounce = false
-        if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT ||
-            mType == TASK_TYPE_IBC_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER ||
-            mType == TASK_TYPE_AUTHZ_VOTE || mType == TASK_TYPE_AUTHZ_DELEGATE || mType == TASK_TYPE_AUTHZ_UNDELEGATE ) {
-            if (currentIndex > 3) { return }
-        } else {
-            if (currentIndex > 2) { return }
-        }
+        if (currentIndex >= (orderedViewControllers.count - 1)) { return }
+        
         setViewControllers([orderedViewControllers[currentIndex + 1]], direction: .forward, animated: true, completion: { (finished) -> Void in
             self.currentIndex = self.currentIndex + 1
             let value:[String: Int] = ["step": self.currentIndex ]

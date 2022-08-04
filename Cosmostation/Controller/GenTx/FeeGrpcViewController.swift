@@ -740,14 +740,25 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                    self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_UNDELEGATE) {
-            return Signer.genSimulateAuthzDelegate(auth,
-                                                   self.account!.account_address,
-                                                   self.pageHolderVC.mGranterAddress!,
-                                                   self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
-                                                   self.pageHolderVC.mToUndelegateAmount!,
-                                                   self.mFee, self.pageHolderVC.mMemo!,
-                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                   self.chainType!)
+            return Signer.genSimulateAuthzUndelegate(auth,
+                                                     self.account!.account_address,
+                                                     self.pageHolderVC.mGranterAddress!,
+                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+                                                     self.pageHolderVC.mToUndelegateAmount!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+            return Signer.genSimulateAuthzRedelegate(auth,
+                                                     self.account!.account_address,
+                                                     self.pageHolderVC.mGranterAddress!,
+                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+                                                     self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
+                                                     self.pageHolderVC.mToReDelegateAmount!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     self.chainType!)
         }
         
         return nil
