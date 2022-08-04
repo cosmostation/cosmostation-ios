@@ -39,7 +39,7 @@ class ChainEvmos: ChainConfig {
     var etherAddressSupport = true
     var pushSupport = false
     var wcSupoort = true
-    var authzSupoort = false
+    var authzSupoort = true
     var grpcUrl = "lcd-evmos-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-evmos-app.cosmostation.io/"

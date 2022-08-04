@@ -42,7 +42,7 @@ class ChainCosmos: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = true
     var wcSupoort = false
-    var authzSupoort = true
+    var authzSupoort = false
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-cosmos-app.cosmostation.io/"
