@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AuthzListViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="authzEmptyView" destination="0au-g1-87M" id="lmc-df-Pd8"/>
                 <outlet property="authzTableView" destination="tUG-SX-UhH" id="t8s-mm-R5h"/>
                 <outlet property="loadingImg" destination="UqR-zg-gHs" id="aCG-ug-OaO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -27,36 +25,6 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0au-g1-87M">
-                    <rect key="frame" x="114.5" y="400" width="185" height="106"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconDataEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="TuJ-Ez-YaT">
-                            <rect key="frame" x="67.5" y="8" width="50" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="50" id="OEe-1N-E5X"/>
-                                <constraint firstAttribute="width" constant="50" id="ncX-he-BO3"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Granter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bo-Nz-ya7">
-                            <rect key="frame" x="61.5" y="66" width="62.5" height="14"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="14" id="Cso-kK-nld"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <color key="textColor" name="_font05"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="106" id="EMH-tf-o55"/>
-                        <constraint firstItem="TuJ-Ez-YaT" firstAttribute="centerX" secondItem="0au-g1-87M" secondAttribute="centerX" id="Nye-cE-bEG"/>
-                        <constraint firstItem="3bo-Nz-ya7" firstAttribute="top" secondItem="TuJ-Ez-YaT" secondAttribute="bottom" constant="8" id="P1O-13-iCU"/>
-                        <constraint firstItem="TuJ-Ez-YaT" firstAttribute="top" secondItem="0au-g1-87M" secondAttribute="top" constant="8" id="ccB-SM-c9p"/>
-                        <constraint firstItem="3bo-Nz-ya7" firstAttribute="centerX" secondItem="0au-g1-87M" secondAttribute="centerX" id="dds-Ck-Fcq"/>
-                        <constraint firstAttribute="width" constant="185" id="urS-g5-Vb3"/>
-                    </constraints>
-                </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="UqR-zg-gHs" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="177" y="423" width="60" height="60"/>
                     <constraints>
@@ -68,11 +36,9 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="0au-g1-87M" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="CtQ-6J-TZQ"/>
                 <constraint firstItem="UqR-zg-gHs" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Le1-UX-I97"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tUG-SX-UhH" secondAttribute="trailing" id="MUf-Kd-doC"/>
                 <constraint firstItem="tUG-SX-UhH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XrN-Tp-irW"/>
-                <constraint firstItem="0au-g1-87M" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="f1b-N1-H6s"/>
                 <constraint firstItem="tUG-SX-UhH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="lve-Ch-FvS"/>
                 <constraint firstItem="UqR-zg-gHs" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="v4H-pT-sMA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tUG-SX-UhH" secondAttribute="bottom" id="xEH-Rk-f66"/>
@@ -81,11 +47,7 @@
         </view>
     </objects>
     <resources>
-        <image name="iconDataEmpty" width="36" height="36"/>
         <image name="loading_1" width="144" height="144"/>
-        <namedColor name="_font05">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -13,7 +13,6 @@ import NIO
 class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var authzTableView: UITableView!
-    @IBOutlet weak var authzEmptyView: UIView!
     @IBOutlet weak var loadingImg: LoadingImageView!
     
     var refresher: UIRefreshControl!
@@ -29,8 +28,10 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
         self.authzTableView.dataSource = self
         self.authzTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.authzTableView.register(UINib(nibName: "GranterViewCell", bundle: nil), forCellReuseIdentifier: "GranterViewCell")
+        self.authzTableView.register(UINib(nibName: "GranterEmptyViewCell", bundle: nil), forCellReuseIdentifier: "GranterEmptyViewCell")
         self.authzTableView.rowHeight = UITableView.automaticDimension
         self.authzTableView.estimatedRowHeight = UITableView.automaticDimension
+        self.authzTableView.isHidden = true
         
         self.refresher = UIRefreshControl()
         self.refresher.addTarget(self, action: #selector(onFetchAuthz), for: .valueChanged)
@@ -55,32 +56,36 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
     func onUpdateViews() {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
-        if (granters.count > 0) {
-            self.authzTableView.reloadData()
-            self.authzTableView.isHidden = false
-            self.authzEmptyView.isHidden = true
-            
-        } else {
-            self.authzTableView.isHidden = true
-            self.authzEmptyView.isHidden = false
-        }
+        self.authzTableView.isHidden = false
+        self.authzTableView.reloadData()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (granters.count == 0) {
+            return 1
+        }
         return granters.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"GranterViewCell") as? GranterViewCell
-        cell?.onBindView(chainConfig, granters[indexPath.row])
-        return cell!
+        if (granters.count == 0) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"GranterEmptyViewCell") as? GranterEmptyViewCell
+            cell?.rootCardView.backgroundColor = chainConfig?.chainColorBG
+            return cell!
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"GranterViewCell") as? GranterViewCell
+            cell?.onBindView(chainConfig, granters[indexPath.row])
+            return cell!
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let authzDetailVC = AuthzDetailViewController(nibName: "AuthzDetailViewController", bundle: nil)
-        authzDetailVC.granterAddress = granters[indexPath.row]
-        self.navigationItem.title = ""
-        self.navigationController?.pushViewController(authzDetailVC, animated: true)
+        if (granters.count > 0) {
+            let authzDetailVC = AuthzDetailViewController(nibName: "AuthzDetailViewController", bundle: nil)
+            authzDetailVC.granterAddress = granters[indexPath.row]
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(authzDetailVC, animated: true)
+        }
     }
     
     func onFetchGranter_gRPC(_ address: String) {

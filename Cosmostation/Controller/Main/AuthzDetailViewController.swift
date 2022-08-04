@@ -156,6 +156,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
+            if (!onCommonCheck()) { return }
             if (indexPath.row == 0) {
                 guard let auth = getSendAuth() else {
                     self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
@@ -256,6 +257,18 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 
             }
         }
+    }
+    
+    func onCommonCheck() -> Bool {
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return false
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return false
+        }
+        return true
     }
     
     

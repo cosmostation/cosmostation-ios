@@ -2727,6 +2727,10 @@
 		E1827E212256292900BC0350 /* ValidatorDetailMyActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E1F2256292900BC0350 /* ValidatorDetailMyActionCell.swift */; };
 		E1827E252256293900BC0350 /* ValidatorDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E232256293900BC0350 /* ValidatorDetailCell.swift */; };
 		E1827E2A2256298300BC0350 /* ValidatorDetailHistoryHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1827E292256298300BC0350 /* ValidatorDetailHistoryHeader.swift */; };
+		E1853682289C104700B84DC6 /* GranterEmptyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1853680289C104700B84DC6 /* GranterEmptyViewCell.swift */; };
+		E1853683289C104700B84DC6 /* GranterEmptyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1853680289C104700B84DC6 /* GranterEmptyViewCell.swift */; };
+		E1853684289C104700B84DC6 /* GranterEmptyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1853681289C104700B84DC6 /* GranterEmptyViewCell.xib */; };
+		E1853685289C104700B84DC6 /* GranterEmptyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E1853681289C104700B84DC6 /* GranterEmptyViewCell.xib */; };
 		E191A57D237902C5002577BC /* WalletKavaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E191A57B237902C5002577BC /* WalletKavaCell.swift */; };
 		E1945E28222E7C0600A1436F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1945E27222E7C0600A1436F /* AppDelegate.swift */; };
 		E1945E2D222E7C0600A1436F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1945E2B222E7C0600A1436F /* Main.storyboard */; };
@@ -4177,6 +4181,8 @@
 		E1827E1F2256292900BC0350 /* ValidatorDetailMyActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailMyActionCell.swift; sourceTree = "<group>"; };
 		E1827E232256293900BC0350 /* ValidatorDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailCell.swift; sourceTree = "<group>"; };
 		E1827E292256298300BC0350 /* ValidatorDetailHistoryHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailHistoryHeader.swift; sourceTree = "<group>"; };
+		E1853680289C104700B84DC6 /* GranterEmptyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GranterEmptyViewCell.swift; sourceTree = "<group>"; };
+		E1853681289C104700B84DC6 /* GranterEmptyViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GranterEmptyViewCell.xib; sourceTree = "<group>"; };
 		E191A57B237902C5002577BC /* WalletKavaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletKavaCell.swift; sourceTree = "<group>"; };
 		E1945E24222E7C0600A1436F /* Cosmostation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cosmostation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1945E27222E7C0600A1436F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -6151,6 +6157,8 @@
 				0443B8922855B9600027A6B9 /* WalletDetailRewardCell.xib */,
 				045DAD4D288F52E2004ED9B4 /* GranterViewCell.swift */,
 				045DAD4E288F52E2004ED9B4 /* GranterViewCell.xib */,
+				E1853680289C104700B84DC6 /* GranterEmptyViewCell.swift */,
+				E1853681289C104700B84DC6 /* GranterEmptyViewCell.xib */,
 				045DAD53288FAEB5004ED9B4 /* AuthzGranteeCell.swift */,
 				045DAD54288FAEB5004ED9B4 /* AuthzGranteeCell.xib */,
 				045DAD59288FAEC8004ED9B4 /* AuthzGranterCell.swift */,
@@ -6484,6 +6492,7 @@
 				18FFB75E281AF533004E65BB /* TxVoteCell.xib in Resources */,
 				18FFB75F281AF533004E65BB /* TxIssueNFTDenomCell.xib in Resources */,
 				18FFB760281AF533004E65BB /* WalletBnbCell.xib in Resources */,
+				E1853685289C104700B84DC6 /* GranterEmptyViewCell.xib in Resources */,
 				18FFB761281AF533004E65BB /* StartUnbonding0ViewController.xib in Resources */,
 				18FFB762281AF533004E65BB /* Swap3ViewController.xib in Resources */,
 				045DAD9D289BA1E4004ED9B4 /* AuthzRedelegate1ViewController.xib in Resources */,
@@ -6857,6 +6866,7 @@
 				280E1EF9254A7AC80007BA7D /* DeleteStarname0ViewController.xib in Resources */,
 				04D1385C2691E26700D6AF9F /* TxExitPoolCell.xib in Resources */,
 				E14BDFFC224CCFE20007DD7D /* MnemonicCell.xib in Resources */,
+				E1853684289C104700B84DC6 /* GranterEmptyViewCell.xib in Resources */,
 				28BB2A922533DA2D00CFF097 /* AccountCell.xib in Resources */,
 				282FF36223F532360028CC66 /* TxVoteCell.xib in Resources */,
 				045DAD9C289BA1E4004ED9B4 /* AuthzRedelegate1ViewController.xib in Resources */,
@@ -7917,6 +7927,7 @@
 				1817CC5A283E2CE600523713 /* evmos_incentives_v1_incentives.pb.swift in Sources */,
 				18FFB5C2281AF533004E65BB /* BinanceType.swift in Sources */,
 				18FFB5C4281AF533004E65BB /* MainTabWalletViewController.swift in Sources */,
+				E1853683289C104700B84DC6 /* GranterEmptyViewCell.swift in Sources */,
 				1817CAB0283E2CE500523713 /* osmosis_txfees_v1beta1_genesis.pb.swift in Sources */,
 				18FFB5C5281AF533004E65BB /* Price.swift in Sources */,
 				1817CADC283E2CE500523713 /* osmosis_lockup_query.pb.swift in Sources */,
@@ -8330,6 +8341,7 @@
 				0444442C27ABF06900EB093E /* TxExeContractCell.swift in Sources */,
 				E1945E50222E842B00A1436F /* BaseViewController.swift in Sources */,
 				E16D9B1B2248D1370019B7BB /* BoarderLabel.swift in Sources */,
+				E1853682289C104700B84DC6 /* GranterEmptyViewCell.swift in Sources */,
 				040FA817275F55C200229F6F /* tendermint_crypto_proof.pb.swift in Sources */,
 				2810084A2696D979002986A6 /* KeyFac.swift in Sources */,
 				0443748528630E3200C6A4ED /* Delegate4ViewController.swift in Sources */,
