@@ -24,8 +24,8 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
     
     var pageHolderVC: StepGenTxViewController!
     var grant: Cosmos_Authz_V1beta1_Grant!
-    var granterAvailable: Coin?
-    var granterVesting: Coin?
+    var granterAvailables = Array<Coin>()
+    var granterVestings = Array<Coin>()
     
     var granterDelegatable = NSDecimalNumber.zero
     var dpDecimal:Int16 = 6
@@ -38,12 +38,19 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.grant = pageHolderVC.mGrant
-        self.granterAvailable = pageHolderVC.mGranterAvailable
-        self.granterVesting = pageHolderVC.mGranterVesting
+        self.granterAvailables = pageHolderVC.mGranterAvailables
+        self.granterVestings = pageHolderVC.mGranterVestings
         
         dpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        let available = NSDecimalNumber.init(string: granterAvailable?.amount)
-        let vesting = NSDecimalNumber.init(string: granterVesting?.amount)
+        var available = NSDecimalNumber.zero
+        if let availableCoin = granterAvailables.filter({ $0.denom == chainConfig?.stakeDenom }).first {
+            available = NSDecimalNumber.init(string: availableCoin.amount)
+        }
+        var vesting = NSDecimalNumber.zero
+        if let vestingCoin = granterVestings.filter({ $0.denom == chainConfig?.stakeDenom }).first {
+            vesting = NSDecimalNumber.init(string: vestingCoin.amount)
+        }
+        
         granterDelegatable = available.adding(vesting)
         print("granterDelegatable1 ", granterDelegatable)
         

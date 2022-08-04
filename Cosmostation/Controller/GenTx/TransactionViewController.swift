@@ -66,8 +66,8 @@ class TransactionViewController: UIViewController {
     //for authz tx
     var mGrant: Cosmos_Authz_V1beta1_Grant?
     var mGranterAddress: String?
-    var mGranterAvailable: Coin?
-    var mGranterVesting: Coin?
+    var mGranterAvailables = Array<Coin>()
+    var mGranterVestings = Array<Coin>()
     var mGranterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var mGranterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     var mGranterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
@@ -412,8 +412,8 @@ class TransactionViewController: UIViewController {
             
             StepVc.mGrant = self.mGrant
             StepVc.mGranterAddress = self.mGranterAddress
-            StepVc.mGranterAvailable = self.mGranterAvailable
-            StepVc.mGranterVesting = self.mGranterVesting
+            StepVc.mGranterAvailables = self.mGranterAvailables
+            StepVc.mGranterVestings = self.mGranterVestings
             StepVc.mGranterDelegation = self.mGranterDelegation
             StepVc.mGranterUnbonding = self.mGranterUnbonding
             StepVc.mGranterReward = self.mGranterReward

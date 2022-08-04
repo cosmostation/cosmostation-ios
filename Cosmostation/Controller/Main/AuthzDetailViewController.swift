@@ -20,9 +20,9 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     var grants = Array<Cosmos_Authz_V1beta1_Grant>()
     
     var granterAuth: Google_Protobuf2_Any?
-    var granterBalance: Coin?
-    var granterAvailable: Coin?
-    var granterVesting: Coin?
+    var granterBalances = Array<Coin>()
+    var granterAvailables = Array<Coin>()
+    var granterVestings = Array<Coin>()
     var granterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var granterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     var granterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
@@ -65,9 +65,10 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
         self.mFetchCnt = 7
         self.grants.removeAll()
         self.granterAuth = nil
-        self.granterBalance = Coin.init(chainConfig!.stakeDenom, "0")
-        self.granterAvailable = Coin.init(chainConfig!.stakeDenom, "0")
-        self.granterVesting = Coin.init(chainConfig!.stakeDenom, "0")
+        self.granterBalances.removeAll()
+        self.granterAvailables.removeAll()
+        self.granterVestings.removeAll()
+        
         self.granterDelegation.removeAll()
         self.granterUnbonding.removeAll()
         self.granterReward.removeAll()
@@ -120,7 +121,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"AuthzGranterCell") as? AuthzGranterCell
-                cell?.onBindView(chainConfig, granterAddress, granterAvailable, granterVesting, getDelegatedSum(), getUnbondingSum(), getRewardSum(), granterCommission)
+                cell?.onBindView(chainConfig, granterAddress, getAvailableMain(), getVestingMain(), getDelegatedSum(), getUnbondingSum(), getRewardSum(), granterCommission)
                 return cell!
             }
             
@@ -161,8 +162,8 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
                 txVC.mGrant = auth
                 txVC.mGranterAddress = granterAddress
-                txVC.mGranterAvailable = granterAvailable
-                txVC.mGranterVesting = granterVesting
+                txVC.mGranterAvailables = granterAvailables
+                txVC.mGranterVestings = granterVestings
                 txVC.mGranterDelegation = granterDelegation
                 txVC.mGranterUnbonding = granterUnbonding
                 txVC.mGranterReward = granterReward
@@ -291,9 +292,7 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
 //                    print("Balance ", response)
                     response.balances.forEach { balance in
-                        if (balance.denom == self.chainConfig!.stakeDenom) {
-                            self.granterBalance = Coin.init(balance.denom, balance.amount)
-                        }
+                        self.granterBalances.append(Coin.init(balance.denom, balance.amount))
                     }
                 }
                 try channel.close().wait()
@@ -403,97 +402,142 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func checkVesting(_ chain: ChainType?, _ rawAccount: Google_Protobuf2_Any) {
-        let stakingDenom = chainConfig!.stakeDenom
-        var dpAvailable = NSDecimalNumber.zero
-        var dpVesting = NSDecimalNumber.zero
-        var originalVesting = NSDecimalNumber.zero
-        var remainVesting = NSDecimalNumber.zero
-        var delegatedVesting = NSDecimalNumber.zero
+        var sBalace = Array<Coin>()
+        granterBalances.forEach { coin in
+            sBalace.append(coin)
+        }
         
         if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_PeriodicVestingAccount.protoMessageName)) {
             let vestingAccount = try! Cosmos_Vesting_V1beta1_PeriodicVestingAccount.init(serializedData: rawAccount.value)
-            dpAvailable = NSDecimalNumber.init(string: granterBalance?.amount)
-            vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
-                if (coin.denom == stakingDenom) {
-                    originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+            sBalace.forEach({ (coin) in
+                let denom = coin.denom
+                var dpAvailable = NSDecimalNumber.zero
+                var dpVesting = NSDecimalNumber.zero
+                var originalVesting = NSDecimalNumber.zero
+                var remainVesting = NSDecimalNumber.zero
+                var delegatedVesting = NSDecimalNumber.zero
+                
+                dpAvailable = NSDecimalNumber.init(string: coin.amount)
+                vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                remainVesting = WUtils.onParsePeriodicRemainVestingsAmountByDenom(vestingAccount, denom)
+                dpVesting = remainVesting.subtracting(delegatedVesting)
+                dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                    dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
                 }
+                granterAvailables.append(Coin.init(denom, dpAvailable.stringValue))
+                granterVestings.append(Coin.init(denom, dpVesting.stringValue))
             })
-            vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
-                if (coin.denom == stakingDenom) {
-                    delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
-                }
-            })
-            remainVesting = WUtils.onParsePeriodicRemainVestingsAmountByDenom(vestingAccount, stakingDenom)
-            dpVesting = remainVesting.subtracting(delegatedVesting)
-            dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
-            if (remainVesting.compare(delegatedVesting).rawValue > 0) {
-                dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
-            }
-            granterAvailable = Coin.init(stakingDenom, dpAvailable.stringValue)
-            granterVesting = Coin.init(stakingDenom, dpVesting.stringValue)
             
         } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_ContinuousVestingAccount.protoMessageName)) {
             let vestingAccount = try! Cosmos_Vesting_V1beta1_ContinuousVestingAccount.init(serializedData: rawAccount.value)
-            dpAvailable = NSDecimalNumber.init(string: granterBalance?.amount)
-            vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
-                if (coin.denom == stakingDenom) {
-                    originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+            sBalace.forEach({ (coin) in
+                let denom = coin.denom
+                var dpAvailable = NSDecimalNumber.zero
+                var dpVesting = NSDecimalNumber.zero
+                var originalVesting = NSDecimalNumber.zero
+                var remainVesting = NSDecimalNumber.zero
+                var delegatedVesting = NSDecimalNumber.zero
+                
+                dpAvailable = NSDecimalNumber.init(string: coin.amount)
+                vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                let cTime = Date().millisecondsSince1970
+                let vestingStart = vestingAccount.startTime * 1000
+                let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
+                if (cTime < vestingStart) {
+                    remainVesting = originalVesting
+                } else if (cTime > vestingEnd) {
+                    remainVesting = NSDecimalNumber.zero
+                } else {
+                    let progress = ((Float)(cTime - vestingStart)) / ((Float)(vestingEnd - vestingStart))
+                    remainVesting = originalVesting.multiplying(by: NSDecimalNumber.init(value: 1 - progress), withBehavior: WUtils.handler0Up)
                 }
-            })
-            vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
-                if (coin.denom == stakingDenom) {
-                    delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                dpVesting = remainVesting.subtracting(delegatedVesting)
+                dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                    dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
                 }
+                granterAvailables.append(Coin.init(denom, dpAvailable.stringValue))
+                granterVestings.append(Coin.init(denom, dpVesting.stringValue))
             })
-            let cTime = Date().millisecondsSince1970
-            let vestingStart = vestingAccount.startTime * 1000
-            let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
-            if (cTime < vestingStart) {
-                remainVesting = originalVesting
-            } else if (cTime > vestingEnd) {
-                remainVesting = NSDecimalNumber.zero
-            } else {
-                let progress = ((Float)(cTime - vestingStart)) / ((Float)(vestingEnd - vestingStart))
-                remainVesting = originalVesting.multiplying(by: NSDecimalNumber.init(value: 1 - progress), withBehavior: WUtils.handler0Up)
-            }
-            dpVesting = remainVesting.subtracting(delegatedVesting)
-            dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
-            if (remainVesting.compare(delegatedVesting).rawValue > 0) {
-                dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
-            }
-            granterAvailable = Coin.init(stakingDenom, dpAvailable.stringValue)
-            granterVesting = Coin.init(stakingDenom, dpVesting.stringValue)
             
         } else if (rawAccount.typeURL.contains(Cosmos_Vesting_V1beta1_DelayedVestingAccount.protoMessageName)) {
             let vestingAccount = try! Cosmos_Vesting_V1beta1_DelayedVestingAccount.init(serializedData: rawAccount.value)
-            dpAvailable = NSDecimalNumber.init(string: granterBalance?.amount)
-            vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
-                if (coin.denom == stakingDenom) {
-                    originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+            sBalace.forEach({ (coin) in
+                let denom = coin.denom
+                var dpAvailable = NSDecimalNumber.zero
+                var dpVesting = NSDecimalNumber.zero
+                var originalVesting = NSDecimalNumber.zero
+                var remainVesting = NSDecimalNumber.zero
+                var delegatedVesting = NSDecimalNumber.zero
+                
+                dpAvailable = NSDecimalNumber.init(string: coin.amount)
+                vestingAccount.baseVestingAccount.originalVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        originalVesting = originalVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
+                    if (coin.denom == denom) {
+                        delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                    }
+                })
+                let cTime = Date().millisecondsSince1970
+                let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
+                if (cTime < vestingEnd) {
+                    remainVesting = originalVesting
                 }
-            })
-            vestingAccount.baseVestingAccount.delegatedVesting.forEach({ (coin) in
-                if (coin.denom == stakingDenom) {
-                    delegatedVesting = delegatedVesting.adding(NSDecimalNumber.init(string: coin.amount))
+                dpVesting = remainVesting.subtracting(delegatedVesting)
+                dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
+                if (remainVesting.compare(delegatedVesting).rawValue > 0) {
+                    dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
                 }
+                granterAvailables.append(Coin.init(denom, dpAvailable.stringValue))
+                granterVestings.append(Coin.init(denom, dpVesting.stringValue))
             })
-            let cTime = Date().millisecondsSince1970
-            let vestingEnd = vestingAccount.baseVestingAccount.endTime * 1000
-            if (cTime < vestingEnd) {
-                remainVesting = originalVesting
-            }
-            dpVesting = remainVesting.subtracting(delegatedVesting)
-            dpVesting = dpVesting.compare(NSDecimalNumber.zero).rawValue <= 0 ? NSDecimalNumber.zero : dpVesting
-            if (remainVesting.compare(delegatedVesting).rawValue > 0) {
-                dpAvailable = dpAvailable.subtracting(remainVesting).adding(delegatedVesting);
-            }
-            granterAvailable = Coin.init(stakingDenom, dpAvailable.stringValue)
-            granterVesting = Coin.init(stakingDenom, dpVesting.stringValue)
             
         } else {
-            granterAvailable = Coin.init(stakingDenom, granterBalance!.amount)
-            granterVesting = Coin.init(stakingDenom, "0")
+            granterAvailables = granterBalances
+            
         }
+    }
+    
+    func getAvailableMain() -> Coin {
+        var result = NSDecimalNumber.zero
+        granterAvailables.forEach { available in
+            if (available.denom == chainConfig!.stakeDenom) {
+                result = WUtils.plainStringToDecimal(available.amount)
+            }
+        }
+        return Coin.init(chainConfig!.stakeDenom, result.stringValue)
+    }
+    
+    func getVestingMain() -> Coin {
+        var result = NSDecimalNumber.zero
+        granterVestings.forEach { available in
+            if (available.denom == chainConfig!.stakeDenom) {
+                result = WUtils.plainStringToDecimal(available.amount)
+            }
+        }
+        return Coin.init(chainConfig!.stakeDenom, result.stringValue)
     }
     
     func getDelegatedSum() -> Coin {

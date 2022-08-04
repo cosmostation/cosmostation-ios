@@ -16,8 +16,6 @@ class AuthzDelegate1ViewController: BaseViewController, UITableViewDelegate, UIT
     
     var pageHolderVC: StepGenTxViewController!
     var grant: Cosmos_Authz_V1beta1_Grant!
-    var granterAvailable: Coin?
-    var granterVesting: Coin?
     var granterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
     var granterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
     var granterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
@@ -32,8 +30,6 @@ class AuthzDelegate1ViewController: BaseViewController, UITableViewDelegate, UIT
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
         self.grant = pageHolderVC.mGrant
-        self.granterAvailable = pageHolderVC.mGranterAvailable
-        self.granterVesting = pageHolderVC.mGranterVesting
         self.granterDelegation = pageHolderVC.mGranterDelegation
         self.granterUnbonding = pageHolderVC.mGranterUnbonding
         self.granterReward = pageHolderVC.mGranterReward
