@@ -153,6 +153,13 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
                     self.onShowToast(NSLocalizedString("error_no_authz_type", comment: ""))
                     return
                 }
+                let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+                txVC.mGrant = auth
+                txVC.mGranterAddress = granterAddress
+                txVC.mGranterAvailables = granterAvailables
+                txVC.mType = TASK_TYPE_AUTHZ_SEND
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(txVC, animated: true)
                 
             } else if (indexPath.row == 1) {
                 guard let auth = getDelegateAuth() else {

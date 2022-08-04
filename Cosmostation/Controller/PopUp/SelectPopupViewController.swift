@@ -22,6 +22,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     var toChain: ChainType?
     var toChainList = Array<ChainType>()
     var toCoinList = Array<String>()
+    var toCoins = Array<Coin>()
     var toAccountList = Array<Account>()
     var ibcToChain = Array<IbcPath>()
     var ibcRelayer = Array<Path>()
@@ -91,6 +92,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_FEE_DENOM) {
             self.popupTitle.text = NSLocalizedString("select_fee_denom", comment: "")
+            
+        } else if (type == SELECT_POPUP_COIN_LIST) {
+            self.popupTitle.text = NSLocalizedString("str_select_to_send_coin", comment: "")
+            
         }
     }
     
@@ -120,6 +125,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             esHeight = (CGFloat)((toAccountList.count * 55) + 55)
         } else if (type == SELECT_POPUP_FEE_DENOM) {
             esHeight = (CGFloat)((feeData.count * 55) + 55)
+        } else if (type == SELECT_POPUP_COIN_LIST) {
+            esHeight = (CGFloat)((toCoins.count * 55) + 55)
         }
         esHeight = (esHeight > 350) ? 350 : esHeight
         cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: esHeight)
@@ -152,6 +159,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return toAccountList.count;
         } else if (type == SELECT_POPUP_FEE_DENOM) {
             return feeData.count
+        } else if (type == SELECT_POPUP_COIN_LIST) {
+            return toCoins.count
         }
         return 0
     }
@@ -330,6 +339,13 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let feeDenom = feeData[indexPath.row].denom
             WDP.dpSymbolImg(chainConfig, feeDenom, cell!.coinImg)
             WDP.dpSymbol(chainConfig, feeDenom, cell!.coinTitle)
+            return cell!
+            
+        } else if (type == SELECT_POPUP_COIN_LIST) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectCoinCell") as? SelectCoinCell
+            let coin = toCoins[indexPath.row]
+            WDP.dpSymbolImg(chainConfig, coin.denom, cell!.coinImg)
+            WDP.dpSymbol(chainConfig, coin.denom, cell!.coinTitle)
             return cell!
             
         } else {
