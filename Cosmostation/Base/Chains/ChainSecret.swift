@@ -31,6 +31,7 @@ class ChainSecret: ChainConfig {
     var stakeSendBg = UIColor(named: "secret")!
     
     var addressPrefix = "secret"
+    var validatorPrefix = "secretvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/529'/0'/0/X"
     
@@ -39,6 +40,7 @@ class ChainSecret: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-secret.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-secret.cosmostation.io/"

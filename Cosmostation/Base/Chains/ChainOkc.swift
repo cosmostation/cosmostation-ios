@@ -31,6 +31,7 @@ class ChainOkc: ChainConfig {
     var stakeSendBg = UIColor(named: "okc")!
     
     var addressPrefix = "ex"
+    var validatorPrefix = "ex"
     let addressHdPath0 = "m/44'/996'/0'/0/X"
     let addressHdPath1 = "m/44'/60'/0'/0/X"
     
@@ -39,6 +40,7 @@ class ChainOkc: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = ""
     var grpcPort = -1
     var lcdUrl = "https://exchainrpc.okex.org/okexchain/v1/"
@@ -76,3 +78,6 @@ class ChainOkc: ChainConfig {
         return 0
     }
 }
+
+let OKEX_MAIN_DENOM = "okt"
+let OKEX_MAIN_OKB = "okb"

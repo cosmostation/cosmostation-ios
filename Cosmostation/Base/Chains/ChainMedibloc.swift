@@ -31,6 +31,7 @@ class ChainMedibloc: ChainConfig {
     var stakeSendBg = UIColor(named: "medibloc")!
     
     var addressPrefix = "panacea"
+    var validatorPrefix = "panaceavaloper"
     let addressHdPath0 = "m/44'/371'/0'/0/X"
     
     let gasRate0 = "5umed"
@@ -38,6 +39,7 @@ class ChainMedibloc: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-medibloc-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-medibloc-app.cosmostation.io/"

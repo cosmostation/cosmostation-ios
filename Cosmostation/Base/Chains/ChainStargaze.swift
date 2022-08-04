@@ -31,6 +31,7 @@ class ChainStargaze: ChainConfig {
     var stakeSendBg = UIColor(named: "stargaze")!
     
     var addressPrefix = "stars"
+    var validatorPrefix = "starsvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0ustars"
@@ -39,6 +40,7 @@ class ChainStargaze: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-stargaze-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-stargaze-app.cosmostation.io/"

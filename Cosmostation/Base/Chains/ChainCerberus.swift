@@ -31,6 +31,7 @@ class ChainCerberus: ChainConfig {
     var stakeSendBg = UIColor(named: "cerberus")!
     
     var addressPrefix = "cerberus"
+    var validatorPrefix = "cerberusvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0ucrbrus"
@@ -38,6 +39,7 @@ class ChainCerberus: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-cerberus-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-cerberus-app.cosmostation.io/"

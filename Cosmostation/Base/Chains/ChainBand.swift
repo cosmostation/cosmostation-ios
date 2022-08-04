@@ -31,6 +31,7 @@ class ChainBand: ChainConfig {
     var stakeSendBg = UIColor(named: "band")!
     
     var addressPrefix = "band"
+    var validatorPrefix = "bandvaloper"
     let addressHdPath0 = "m/44'/494'/0'/0/X"
     
     let gasRate0 = "0.00025uband"
@@ -40,6 +41,7 @@ class ChainBand: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-band-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-band-app.cosmostation.io/"

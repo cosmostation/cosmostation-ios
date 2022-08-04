@@ -31,6 +31,7 @@ class ChainEvmos: ChainConfig {
     var stakeSendBg = UIColor(named: "evmos")!
     
     var addressPrefix = "evmos"
+    var validatorPrefix = "evmosvaloper"
     let addressHdPath0 = "m/44'/60'/0'/0/X"
     
     let gasRate0 = "20000000000aevmos"
@@ -38,6 +39,7 @@ class ChainEvmos: ChainConfig {
     var etherAddressSupport = true
     var pushSupport = false
     var wcSupoort = true
+    var authzSupoort = false
     var grpcUrl = "lcd-evmos-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-evmos-app.cosmostation.io/"

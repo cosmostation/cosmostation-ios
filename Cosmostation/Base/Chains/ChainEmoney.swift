@@ -31,6 +31,7 @@ class ChainEmoney: ChainConfig {
     var stakeSendBg = UIColor(named: "emoney")!
     
     var addressPrefix = "emoney"
+    var validatorPrefix = "emoneyvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.1ungm"
@@ -40,6 +41,7 @@ class ChainEmoney: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-emoney-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-emoney-app.cosmostation.io/"

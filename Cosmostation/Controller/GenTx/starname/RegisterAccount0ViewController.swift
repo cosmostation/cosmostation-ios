@@ -79,7 +79,7 @@ class RegisterAccount0ViewController: BaseViewController, SBCardPopupDelegate {
             return
         }
         
-        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(IOV_MAIN_DENOM)
+        let userAvailable = BaseData.instance.getAvailableAmount_gRPC(chainConfig!.stakeDenom)
         let starnameFee = WUtils.getStarNameRegisterAccountFee("open")
         if (userAvailable.compare(starnameFee).rawValue < 0) {
             self.onShowToast(NSLocalizedString("error_not_enough_starname_fee", comment: ""))

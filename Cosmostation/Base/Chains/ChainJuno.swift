@@ -31,6 +31,7 @@ class ChainJuno: ChainConfig {
     var stakeSendBg = UIColor(named: "juno")!
     
     var addressPrefix = "juno"
+    var validatorPrefix = "junovaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.0025ujuno"
@@ -40,6 +41,7 @@ class ChainJuno: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-juno-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-juno-app.cosmostation.io/"

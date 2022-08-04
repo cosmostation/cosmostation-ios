@@ -31,6 +31,7 @@ class ChainLum: ChainConfig {
     var stakeSendBg = UIColor(named: "lum")!
     
     var addressPrefix = "lum"
+    var validatorPrefix = "lumvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     let addressHdPath1 = "m/44'/880'/0'/0/X"
     
@@ -39,6 +40,7 @@ class ChainLum: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-lum-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-lum-app.cosmostation.io/"

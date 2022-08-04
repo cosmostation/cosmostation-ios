@@ -31,6 +31,7 @@ class ChainCryptoorg: ChainConfig {
     var stakeSendBg = UIColor(named: "cryptoorg")!
     
     var addressPrefix = "cro"
+    var validatorPrefix = "crocncl"
     let addressHdPath0 = "m/44'/394'/0'/0/X"
     
     let gasRate0 = "0.025basecro"
@@ -40,6 +41,7 @@ class ChainCryptoorg: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-cryptocom-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-cryptocom-app.cosmostation.io/"

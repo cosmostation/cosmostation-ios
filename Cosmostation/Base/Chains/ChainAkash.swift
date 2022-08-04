@@ -31,6 +31,7 @@ class ChainAkash: ChainConfig {
     var stakeSendBg = UIColor(named: "akash")!
     
     var addressPrefix = "akash"
+    var validatorPrefix = "akashvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uakt"
@@ -40,6 +41,7 @@ class ChainAkash: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-akash-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-akash-app.cosmostation.io/"

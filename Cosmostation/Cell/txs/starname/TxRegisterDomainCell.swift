@@ -35,7 +35,7 @@ class TxRegisterDomainCell: TxCell {
             domainTypeLabel.text = msg.domainType
             
             let starnameFee = WUtils.getStarNameRegisterDomainFee(msg.name, msg.domainType)
-            WDP.dpCoin(chainConfig, IOV_MAIN_DENOM, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel)
+            WDP.dpCoin(chainConfig, chainConfig.stakeDenom, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel)
         }
     }
 }

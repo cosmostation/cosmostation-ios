@@ -31,6 +31,7 @@ class ChainDesmos: ChainConfig {
     var stakeSendBg = UIColor(named: "desmos")!
     
     var addressPrefix = "desmos"
+    var validatorPrefix = "desmosvaloper"
     let addressHdPath0 = "m/44'/852'/0'/0/X"
     
     let gasRate0 = "0.001udsm"
@@ -40,6 +41,7 @@ class ChainDesmos: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-desmos-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-desmos-app.cosmostation.io/"

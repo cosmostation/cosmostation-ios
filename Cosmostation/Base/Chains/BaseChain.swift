@@ -32,10 +32,12 @@ protocol ChainConfig {
     var stakeSendBg: UIColor { get set }
     
     var addressPrefix: String { get set }
+    var validatorPrefix: String { get set }
     
     var etherAddressSupport: Bool { get set }
     var pushSupport: Bool { get set }
     var wcSupoort: Bool { get set }
+    var authzSupoort: Bool { get set }
     var grpcUrl: String { get set }
     var grpcPort: Int { get set }
     var lcdUrl: String { get set }

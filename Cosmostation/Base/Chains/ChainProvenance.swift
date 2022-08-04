@@ -31,6 +31,7 @@ class ChainProvenance: ChainConfig {
     var stakeSendBg = UIColor(named: "provenance")!
     
     var addressPrefix = "pb"
+    var validatorPrefix = "pbvaloper"
     let addressHdPath0 = "m/44'/505'/0'/0/X"
     
     let gasRate0 = "2000nhash"
@@ -38,6 +39,7 @@ class ChainProvenance: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-provenance-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-provenance-app.cosmostation.io/"

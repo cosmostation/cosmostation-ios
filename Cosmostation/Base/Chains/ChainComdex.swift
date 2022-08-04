@@ -31,6 +31,7 @@ class ChainComdex: ChainConfig {
     var stakeSendBg = UIColor(named: "comdex")!
     
     var addressPrefix = "comdex"
+    var validatorPrefix = "comdexvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.25ucmdx"
@@ -38,6 +39,7 @@ class ChainComdex: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-comdex-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-comdex-app.cosmostation.io/"

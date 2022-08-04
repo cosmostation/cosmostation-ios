@@ -120,12 +120,11 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             mFeeCoin = Coin.init(mFeeData.denom!, amount.stringValue)
         }
         mFee = Fee.init(mFeeGasAmount.stringValue, [mFeeCoin])
-//        print("mFee ", mFee)
+//        print("onCalculateFees ", mFee)
     }
     
     func onUpdateView() {
         self.onCalculateFees()
-        print("mFee ", mFee)
         
         WDP.dpSymbolImg(chainConfig, mFeeData.denom, feeTypeImg)
         WDP.dpSymbol(chainConfig, mFeeData.denom, feeTypeDenom)
@@ -700,6 +699,76 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                       self.mFee, self.pageHolderVC.mMemo!,
                                                       self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
                                                       self.chainType!)
+        }
+        
+        //for authz
+        else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+            return Signer.genSimulateAuthzClaimReward(auth,
+                                                      self.account!.account_address,
+                                                      self.pageHolderVC.mGranterAddress!,
+                                                      self.pageHolderVC.mGranterReward,
+                                                      self.mFee, self.pageHolderVC.mMemo!,
+                                                      self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                      self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+            return Signer.genSimulateAuthzClaimCommission(auth,
+                                                          self.account!.account_address,
+                                                          self.pageHolderVC.mGranterAddress!,
+                                                          WKey.getOpAddressFromAddress(self.pageHolderVC.mGranterAddress!, self.chainConfig),
+                                                          self.mFee, self.pageHolderVC.mMemo!,
+                                                          self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                          self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_VOTE) {
+            return Signer.genSimulateAuthzVote(auth,
+                                               self.account!.account_address,
+                                               self.pageHolderVC.mGranterAddress!,
+                                               self.pageHolderVC.mProposals,
+                                               self.mFee, self.pageHolderVC.mMemo!,
+                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                               self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_DELEGATE) {
+            return Signer.genSimulateAuthzDelegate(auth,
+                                                   self.account!.account_address,
+                                                   self.pageHolderVC.mGranterAddress!,
+                                                   self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+                                                   self.pageHolderVC.mToDelegateAmount!,
+                                                   self.mFee, self.pageHolderVC.mMemo!,
+                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                   self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_UNDELEGATE) {
+            return Signer.genSimulateAuthzUndelegate(auth,
+                                                     self.account!.account_address,
+                                                     self.pageHolderVC.mGranterAddress!,
+                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+                                                     self.pageHolderVC.mToUndelegateAmount!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+            return Signer.genSimulateAuthzRedelegate(auth,
+                                                     self.account!.account_address,
+                                                     self.pageHolderVC.mGranterAddress!,
+                                                     self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress,
+                                                     self.pageHolderVC.mToReDelegateValidator_gRPC!.operatorAddress,
+                                                     self.pageHolderVC.mToReDelegateAmount!,
+                                                     self.mFee, self.pageHolderVC.mMemo!,
+                                                     self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                                     self.chainType!)
+            
+        } else if (pageHolderVC.mType == TASK_TYPE_AUTHZ_SEND) {
+            return Signer.genSimulateAuthzSend(auth,
+                                               self.account!.account_address,
+                                               self.pageHolderVC.mGranterAddress!,
+                                               self.pageHolderVC.mToSendRecipientAddress!,
+                                               self.pageHolderVC.mToSendAmount,
+                                               self.mFee, self.pageHolderVC.mMemo!,
+                                               self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+                                               self.chainType!)
         }
         
         return nil

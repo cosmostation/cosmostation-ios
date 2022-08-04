@@ -31,6 +31,7 @@ class ChainChihuahua: ChainConfig {
     var stakeSendBg = UIColor(named: "chihuahua")!
     
     var addressPrefix = "chihuahua"
+    var validatorPrefix = "chihuahuavaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00035uhuahua"
@@ -40,6 +41,7 @@ class ChainChihuahua: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-chihuahua-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-chihuahua-app.cosmostation.io/"

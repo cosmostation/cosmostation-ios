@@ -33,7 +33,7 @@ class TxReplaceResourceCell: TxCell {
             starnameLabel.text = msg.name + "*" + msg.domain
             
             let starnameFee = WUtils.getReplaceFee()
-            WDP.dpCoin(chainConfig, IOV_MAIN_DENOM, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel)
+            WDP.dpCoin(chainConfig, chainConfig.stakeDenom, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel)
             
             resourceCntLabel.text = String(msg.newResources.count)
             var resourceString = ""

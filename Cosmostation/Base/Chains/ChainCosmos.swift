@@ -32,6 +32,7 @@ class ChainCosmos: ChainConfig {
     var stakeSendBg = UIColor(named: "cosmos")!
     
     var addressPrefix = "cosmos"
+    var validatorPrefix = "cosmosvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uatom"
@@ -41,6 +42,7 @@ class ChainCosmos: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = true
     var wcSupoort = false
+    var authzSupoort = true
     var grpcUrl = "lcd-cosmos-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-cosmos-app.cosmostation.io/"

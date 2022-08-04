@@ -24,8 +24,10 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     var refresher: UIRefreshControl!
     var mVotingPeriods = Array<MintscanProposalDetail>()
     var mEtcPeriods = Array<MintscanProposalDetail>()
+    var mMyVotes = Array<MintscanMyVotes>()
     var mSelectedProposalId = Array<String>()
     var isSelectMode = false;
+    var mFetchCnt = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +53,20 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     @objc func onFetchProposals() {
-        self.mVotingPeriods.removeAll()
-        self.mEtcPeriods.removeAll()
-        self.onFetchMintscanProposal()
+        if (mFetchCnt > 0 ) { return }
+        
+        self.mFetchCnt = 2
+        self.onFetchMintscanProposals()
+        self.onFetchMintscanMyVotes()
     }
+    
+    func onFetchFinished() {
+        self.mFetchCnt = self.mFetchCnt - 1
+        if (mFetchCnt <= 0) {
+            onUpdateViews()
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -77,13 +89,13 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             layerMultiVoteAction.isHidden = true
         }
         
+        self.sortProposals()
         if (mVotingPeriods.count > 0 || mEtcPeriods.count > 0) {
             self.emptyLabel.isHidden = true
             self.voteTableView.reloadData()
         } else {
             self.emptyLabel.isHidden = false
         }
-        self.sortProposals()
         self.refresher.endRefreshing()
         self.loadingImg.onStopAnimation()
         self.loadingImg.isHidden = true
@@ -140,6 +152,9 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        if (isSelectMode) {
+            return 1
+        }
         return 2
     }
     
@@ -175,21 +190,12 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalVotingPeriodCell") as? ProposalVotingPeriodCell
             let proposal = mVotingPeriods[indexPath.row]
-            cell?.onBindView(chainConfig, proposal, account!.account_address, isSelectMode, self.mSelectedProposalId.contains(proposal.id!))
-            cell?.actionMultiVote = {
-                if (self.mSelectedProposalId.contains(proposal.id!)) {
-                    if let index = self.mSelectedProposalId.firstIndex(of: proposal.id!) {
-                        self.mSelectedProposalId.remove(at: index)
-                    }
-                } else {
-                    self.mSelectedProposalId.append(proposal.id!)
-                }
-                self.voteTableView.reloadRows(at: [indexPath], with: .none)
-            }
+            cell?.onBindView(chainConfig, proposal, mMyVotes, isSelectMode, mSelectedProposalId)
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier:"ProposalEtcPeriodCell") as? ProposalEtcPeriodCell
-            cell?.onBindView(chainConfig, mEtcPeriods[indexPath.row], account!.account_address)
+            let proposal = mEtcPeriods[indexPath.row]
+            cell?.onBindView(chainConfig, proposal, mMyVotes)
             return cell!
         }
     }
@@ -199,16 +205,30 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (isSelectMode) { return }
-        if (indexPath.section == 0) {
-            let proposal = mVotingPeriods[indexPath.row]
-            let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController
-            voteDetailsVC.proposalId = proposal.id!
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(voteDetailsVC, animated: true)
+        if (isSelectMode) {
+            if (indexPath.section == 0) {
+                let proposal = mVotingPeriods[indexPath.row]
+                if (self.mSelectedProposalId.contains(proposal.id!)) {
+                    if let index = self.mSelectedProposalId.firstIndex(of: proposal.id!) {
+                        self.mSelectedProposalId.remove(at: index)
+                    }
+                } else {
+                    self.mSelectedProposalId.append(proposal.id!)
+                }
+                self.voteTableView.reloadRows(at: [indexPath], with: .none)
+            }
+            
         } else {
-            let proposal = mEtcPeriods[indexPath.row]
-            onExplorerLink(proposal.id!)
+            if (indexPath.section == 0) {
+                let proposal = mVotingPeriods[indexPath.row]
+                let voteDetailsVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "VoteDetailsViewController") as! VoteDetailsViewController
+                voteDetailsVC.proposalId = proposal.id!
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(voteDetailsVC, animated: true)
+            } else {
+                let proposal = mEtcPeriods[indexPath.row]
+                onExplorerLink(proposal.id!)
+            }
         }
     }
     
@@ -218,12 +238,14 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.onShowSafariWeb(url)
     }
     
-    func onFetchMintscanProposal() {
+    func onFetchMintscanProposals() {
         let url = BaseNetWork.mintscanProposals(self.chainConfig!)
         let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
+                self.mVotingPeriods.removeAll()
+                self.mEtcPeriods.removeAll()
                 if let responseDatas = res as? Array<NSDictionary> {
                     responseDatas.forEach { rawProposal in
                         let tempProposal = MintscanProposalDetail.init(rawProposal)
@@ -237,7 +259,7 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
             case .failure(let error):
                 print("onFetchMintscanProposal ", error)
             }
-            self.onUpdateViews()
+            self.onFetchFinished()
         }
     }
     
@@ -247,6 +269,27 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         }
         self.mEtcPeriods.sort {
             return Int($0.id!)! < Int($1.id!)! ? false : true
+        }
+    }
+    
+    func onFetchMintscanMyVotes() {
+        let url = BaseNetWork.mintscanMyVotes(self.chainConfig!, self.account!.account_address)
+        let request = Alamofire.request(url, method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                self.mMyVotes.removeAll()
+                if let responseDatas = res as? NSDictionary,
+                    let rawVotes = responseDatas.object(forKey: "votes") as? Array<NSDictionary> {
+                    rawVotes.forEach { rawVote in
+                        self.mMyVotes.append(MintscanMyVotes.init(rawVote))
+                    }
+                }
+                
+            case .failure(let error):
+                print("onFetchMintscanMyVotes ", error)
+            }
+            self.onFetchFinished()
         }
     }
 

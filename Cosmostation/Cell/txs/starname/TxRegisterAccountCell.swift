@@ -34,7 +34,7 @@ class TxRegisterAccountCell: TxCell {
             registerLabel.text = msg.registerer
             
             let starnameFee = WUtils.getStarNameRegisterAccountFee("open")
-            WDP.dpCoin(chainConfig, IOV_MAIN_DENOM, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel)
+            WDP.dpCoin(chainConfig, chainConfig.stakeDenom, starnameFee.stringValue, starnameFeeDenomLabel, starnameFeeAmountLabel)
         }
         
     }

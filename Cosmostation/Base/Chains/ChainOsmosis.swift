@@ -31,6 +31,7 @@ class ChainOsmosis: ChainConfig {
     var stakeSendBg = UIColor(named: "osmosis")!
     
     var addressPrefix = "osmo"
+    var validatorPrefix = "osmovaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uosmo"
@@ -40,6 +41,7 @@ class ChainOsmosis: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = true
+    var authzSupoort = true
     var grpcUrl = "lcd-osmosis-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-osmosis-app.cosmostation.io/"

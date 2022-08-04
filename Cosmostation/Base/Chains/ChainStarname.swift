@@ -31,6 +31,7 @@ class ChainStarname: ChainConfig {
     var stakeSendBg = UIColor(named: "starname")!
     
     var addressPrefix = "star"
+    var validatorPrefix = "starvaloper"
     let addressHdPath0 = "m/44'/234'/0'/0/X"
     
     let gasRate0 = "0.1uiov"
@@ -39,6 +40,7 @@ class ChainStarname: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-iov-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-iov-app.cosmostation.io/"

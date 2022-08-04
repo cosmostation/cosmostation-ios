@@ -40,39 +40,17 @@
                                     <constraint firstAttribute="height" constant="40" id="cTX-7r-OKI"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eox-gt-jBG">
-                                <rect key="frame" x="299" y="16" width="46" height="36"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="tintColor" name="_font03"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="iconCheck">
-                                    <color key="titleColor" name="_font03"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onMultiVoteClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="if6-Qn-F8e"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
-                            <constraint firstItem="Eox-gt-jBG" firstAttribute="centerY" secondItem="c0U-xW-Aer" secondAttribute="centerY" id="63H-i8-u3x"/>
-                            <constraint firstItem="Eox-gt-jBG" firstAttribute="height" secondItem="c0U-xW-Aer" secondAttribute="height" multiplier="0.9" id="BqF-f6-8Hm"/>
                             <constraint firstItem="Soa-pp-vDv" firstAttribute="leading" secondItem="orz-Xr-OF6" secondAttribute="leading" id="DL8-p1-9RJ"/>
                             <constraint firstItem="orz-Xr-OF6" firstAttribute="top" secondItem="aP4-d7-MxA" secondAttribute="top" constant="14" id="Fwj-Y4-bga"/>
                             <constraint firstItem="c0U-xW-Aer" firstAttribute="centerY" secondItem="aP4-d7-MxA" secondAttribute="centerY" id="Ipl-Jr-idD"/>
                             <constraint firstItem="c0U-xW-Aer" firstAttribute="leading" secondItem="orz-Xr-OF6" secondAttribute="trailing" constant="8" id="NY1-bM-a5p"/>
                             <constraint firstAttribute="bottom" secondItem="Soa-pp-vDv" secondAttribute="bottom" constant="14" id="OjG-6Y-am5"/>
-                            <constraint firstItem="Eox-gt-jBG" firstAttribute="centerX" secondItem="c0U-xW-Aer" secondAttribute="centerX" id="XMF-7r-OAX"/>
                             <constraint firstAttribute="trailing" secondItem="c0U-xW-Aer" secondAttribute="trailing" constant="8" id="aL4-4A-dN5"/>
                             <constraint firstItem="Soa-pp-vDv" firstAttribute="top" secondItem="orz-Xr-OF6" secondAttribute="bottom" constant="10" id="cHH-0f-otj"/>
                             <constraint firstItem="orz-Xr-OF6" firstAttribute="leading" secondItem="aP4-d7-MxA" secondAttribute="leading" constant="16" id="e3q-Jy-ycW"/>
-                            <constraint firstItem="Eox-gt-jBG" firstAttribute="width" secondItem="c0U-xW-Aer" secondAttribute="width" multiplier="1.15" id="hAi-TS-kp9"/>
                             <constraint firstItem="Soa-pp-vDv" firstAttribute="trailing" secondItem="orz-Xr-OF6" secondAttribute="trailing" id="q7N-8Y-Yfj"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -105,22 +83,18 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="btnCheckVote" destination="Eox-gt-jBG" id="BKo-u3-jWx"/>
                 <outlet property="myVoteStatusImg" destination="c0U-xW-Aer" id="lyT-Ot-ETf"/>
                 <outlet property="proposalTitleLabel" destination="orz-Xr-OF6" id="qmy-sD-X0d"/>
+                <outlet property="rootCardView" destination="aP4-d7-MxA" id="kYo-te-L0P"/>
                 <outlet property="votingEndTimeLabel" destination="Soa-pp-vDv" id="S8p-nA-veZ"/>
             </connections>
             <point key="canvasLocation" x="176.81159420289856" y="123.21428571428571"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="iconCheck" width="22" height="22"/>
         <image name="imgVoteYes" width="40" height="40"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="_font03">
-            <color red="0.74500000476837158" green="0.77600002288818359" blue="0.81999999284744263" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font04">
             <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

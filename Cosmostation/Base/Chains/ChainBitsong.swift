@@ -31,6 +31,7 @@ class ChainBitsong: ChainConfig {
     var stakeSendBg = UIColor(named: "bitsong")!
     
     var addressPrefix = "bitsong"
+    var validatorPrefix = "bitsongvaloper"
     let addressHdPath0 = "m/44'/639'/0'/0/X"
     
     let gasRate0 = "0.025ubtsg"
@@ -38,6 +39,7 @@ class ChainBitsong: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = true
     var grpcUrl = "lcd-bitsong-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-bitsong-app.cosmostation.io/"

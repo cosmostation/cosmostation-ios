@@ -55,7 +55,7 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     override func enableUserInteraction() {
         self.onUpdateView()
         self.mBtnBack.isUserInteractionEnabled = true
-        self.mBtnBack.isUserInteractionEnabled = true
+        self.mBtnConfirm.isUserInteractionEnabled = true
     }
     
     func onUpdateView() {

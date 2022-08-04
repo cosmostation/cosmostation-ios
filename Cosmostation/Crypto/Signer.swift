@@ -253,25 +253,6 @@ class Signer {
             anyMsgs.append(anyMsg)
         }
         return anyMsgs
-        
-//        let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
-//            $0.voter = WUtils.onParseAuthGrpc(auth).0!
-//            $0.proposalID = UInt64(proposalId)!
-//            if (opinion == "Yes") {
-//                $0.option = Cosmos_Gov_V1beta1_VoteOption.yes
-//            } else if (opinion == "No") {
-//                $0.option = Cosmos_Gov_V1beta1_VoteOption.no
-//            } else if (opinion == "NoWithVeto") {
-//                $0.option = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
-//            } else if (opinion == "Abstain") {
-//                $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
-//            }
-//        }
-//        let anyMsg = Google_Protobuf2_Any.with {
-//            $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
-//            $0.value = try! voteMsg.serializedData()
-//        }
-//        return [anyMsg]
     }
     
     //Tx for Common Reward Address Change
@@ -1665,6 +1646,289 @@ class Signer {
         let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
             $0.value = try! exeContract.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //AUTHz
+    //Tx for Authz Claim Rewards
+    static func genAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                    _ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
+                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzClaimRewards = genAuthzClaimStakingRewardMsg(grantee, granter, rewards)
+        return getGrpcSignedTx(auth, chainType, authzClaimRewards, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzClaimReward(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                            _ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzClaimRewards = genAuthzClaimStakingRewardMsg(grantee, granter, rewards)
+        return getGrpcSimulateTx(auth, chainType, authzClaimRewards, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzClaimStakingRewardMsg(_ grantee: String, _ granter: String, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>) -> [Google_Protobuf2_Any] {
+        var innerMsgs = Array<Google_Protobuf2_Any>()
+        rewards.forEach { reward in
+            let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
+                $0.delegatorAddress = granter
+                $0.validatorAddress = reward.validatorAddress
+            }
+            let innerMsg = Google_Protobuf2_Any.with {
+                $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
+                $0.value = try! claimMsg.serializedData()
+            }
+            innerMsgs.append(innerMsg)
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = innerMsgs
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Authz Claim Commission
+    static func genAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                        _ grantee: String, _ granter: String, _ validatorAddress: String,
+                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzClaimCommission = genAuthzClaimCommissionMsg(grantee, granter, validatorAddress)
+        return getGrpcSignedTx(auth, chainType, authzClaimCommission, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzClaimCommission(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                                _ grantee: String, _ granter: String, _ validatorAddress: String,
+                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzClaimCommission = genAuthzClaimCommissionMsg(grantee, granter, validatorAddress)
+        return getGrpcSimulateTx(auth, chainType, authzClaimCommission, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzClaimCommissionMsg(_ grantee: String, _ granter: String, _ validatorAddress: String) -> [Google_Protobuf2_Any] {
+        let claimCommissionMsg = Cosmos_Distribution_V1beta1_MsgWithdrawValidatorCommission.with {
+            $0.validatorAddress = validatorAddress
+        }
+        let innerMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission"
+            $0.value = try! claimCommissionMsg.serializedData()
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = [innerMsg]
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Authz Vote
+    static func genAuthzVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                             _ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>,
+                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzVote = genAuthzVoteMsg(grantee, granter, proposals)
+        return getGrpcSignedTx(auth, chainType, authzVote, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzVote(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                     _ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>,
+                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzVote = genAuthzVoteMsg(grantee, granter, proposals)
+        return getGrpcSimulateTx(auth, chainType, authzVote, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzVoteMsg(_ grantee: String, _ granter: String, _ proposals: Array<MintscanProposalDetail>) -> [Google_Protobuf2_Any] {
+        var innerMsgs = Array<Google_Protobuf2_Any>()
+        proposals.forEach { proposal in
+            let voteMsg = Cosmos_Gov_V1beta1_MsgVote.with {
+                $0.voter = granter
+                $0.proposalID = UInt64(proposal.id!)!
+                if (proposal.getMyVote() == "Yes") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.yes
+                } else if (proposal.getMyVote() == "No") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.no
+                } else if (proposal.getMyVote() == "NoWithVeto") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.noWithVeto
+                } else if (proposal.getMyVote() == "Abstain") {
+                    $0.option = Cosmos_Gov_V1beta1_VoteOption.abstain
+                }
+            }
+            let innerMsg = Google_Protobuf2_Any.with {
+                $0.typeURL = "/cosmos.gov.v1beta1.MsgVote"
+                $0.value = try! voteMsg.serializedData()
+            }
+            innerMsgs.append(innerMsg)
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = innerMsgs
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Authz Delegate
+    static func genAuthzDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                 _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
+                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzDelegate = genAuthzDelegateMsg(grantee, granter, toValAddress, amount)
+        return getGrpcSignedTx(auth, chainType, authzDelegate, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                         _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
+                                         _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzDelegate = genAuthzDelegateMsg(grantee, granter, toValAddress, amount)
+        return getGrpcSimulateTx(auth, chainType, authzDelegate, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzDelegateMsg(_ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
+        let toCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = amount.denom
+            $0.amount = amount.amount
+        }
+        let delegateMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
+            $0.delegatorAddress = granter
+            $0.validatorAddress = toValAddress
+            $0.amount = toCoin
+        }
+        let innerMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
+            $0.value = try! delegateMsg.serializedData()
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = [innerMsg]
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Authz UnDelegate
+    static func genAuthzUndelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                   _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
+                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzUndelegate = genAuthzUndelegateMsg(grantee, granter, toValAddress, amount)
+        return getGrpcSignedTx(auth, chainType, authzUndelegate, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzUndelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                           _ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin,
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzUndelegate = genAuthzUndelegateMsg(grantee, granter, toValAddress, amount)
+        return getGrpcSimulateTx(auth, chainType, authzUndelegate, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzUndelegateMsg(_ grantee: String, _ granter: String, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
+        let toCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = amount.denom
+            $0.amount = amount.amount
+        }
+        let delegateMsg = Cosmos_Staking_V1beta1_MsgUndelegate.with {
+            $0.delegatorAddress = granter
+            $0.validatorAddress = toValAddress
+            $0.amount = toCoin
+        }
+        let innerMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.staking.v1beta1.MsgUndelegate"
+            $0.value = try! delegateMsg.serializedData()
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = [innerMsg]
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Authz ReDelegate
+    static func genAuthzRedelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                   _ grantee: String, _ granter: String, _ fromValAddress: String, _ toValAddress: String, _ amount: Coin,
+                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzRedelegate = genAuthzRedelegateMsg(grantee, granter, fromValAddress, toValAddress, amount)
+        return getGrpcSignedTx(auth, chainType, authzRedelegate, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzRedelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                           _ grantee: String, _ granter: String, _ fromValAddress: String, _ toValAddress: String, _ amount: Coin,
+                                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzRedelegate = genAuthzRedelegateMsg(grantee, granter, fromValAddress, toValAddress, amount)
+        return getGrpcSimulateTx(auth, chainType, authzRedelegate, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzRedelegateMsg(_ grantee: String, _ granter: String, _ fromValAddress: String, _ toValAddress: String, _ amount: Coin) -> [Google_Protobuf2_Any] {
+        let toCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = amount.denom
+            $0.amount = amount.amount
+        }
+        let delegateMsg = Cosmos_Staking_V1beta1_MsgBeginRedelegate.with {
+            $0.delegatorAddress = granter
+            $0.validatorSrcAddress = fromValAddress
+            $0.validatorDstAddress = toValAddress
+            $0.amount = toCoin
+        }
+        let innerMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.staking.v1beta1.MsgBeginRedelegate"
+            $0.value = try! delegateMsg.serializedData()
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = [innerMsg]
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for Authz Send
+    static func genAuthzSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                             _ grantee: String, _ granter: String, _ toAddress: String, _ amount: Array<Coin>,
+                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let authzSend = genAuthzSendMsg(grantee, granter, toAddress, amount)
+        return getGrpcSignedTx(auth, chainType, authzSend, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateAuthzSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                     _ grantee: String, _ granter: String, _ toAddress: String, _ amount: Array<Coin>,
+                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let authzSend = genAuthzSendMsg(grantee, granter, toAddress, amount)
+        return getGrpcSimulateTx(auth, chainType, authzSend, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genAuthzSendMsg(_ grantee: String, _ granter: String, _ toAddress: String, _ amount: Array<Coin>) -> [Google_Protobuf2_Any] {
+        let sendCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = amount[0].denom
+            $0.amount = amount[0].amount
+        }
+        let sendMsg = Cosmos_Bank_V1beta1_MsgSend.with {
+            $0.fromAddress = granter
+            $0.toAddress = toAddress
+            $0.amount = [sendCoin]
+        }
+        let innerMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.bank.v1beta1.MsgSend"
+            $0.value = try! sendMsg.serializedData()
+        }
+        let authzExec = Cosmos_Authz_V1beta1_MsgExec.with {
+            $0.grantee = grantee
+            $0.msgs = [innerMsg]
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmos.authz.v1beta1.MsgExec"
+            $0.value = try! authzExec.serializedData()
         }
         return [anyMsg]
     }

@@ -153,6 +153,16 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mDesmosAirDropAmount: String?
     
     
+    var mGrant: Cosmos_Authz_V1beta1_Grant?
+    var mGranterAddress: String?
+    var mGranterAvailables = Array<Coin>()
+    var mGranterVestings = Array<Coin>()
+    var mGranterDelegation = Array<Cosmos_Staking_V1beta1_DelegationResponse>()
+    var mGranterUnbonding = Array<Cosmos_Staking_V1beta1_UnbondingDelegation>()
+    var mGranterReward = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
+    var mGranterCommission: Coin?
+    
+    
     lazy var orderedViewControllers: [UIViewController] = {
         if (mType == TASK_TYPE_TRANSFER) {
             if (WUtils.isGRPC(chainType!)) {
@@ -456,6 +466,58 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     SendContract4ViewController(nibName: "SendContract4ViewController", bundle: nil)]
         }
         
+        //AUTHZ
+        else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
+           return [AuthzClaimReward1ViewController(nibName: "AuthzClaimReward1ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzClaimReward4ViewController(nibName: "AuthzClaimReward4ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_CLAIM_COMMISSIOMN) {
+           return [AuthzClaimCommisstion1ViewController(nibName: "AuthzClaimCommisstion1ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzClaimCommisstion4ViewController(nibName: "AuthzClaimCommisstion4ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
+           return [AuthzVote1ViewController(nibName: "AuthzVote1ViewController", bundle: nil),
+                   AuthzVote2ViewController(nibName: "AuthzVote2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzVote5ViewController(nibName: "AuthzVote5ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_DELEGATE) {
+           return [AuthzDelegate1ViewController(nibName: "AuthzDelegate1ViewController", bundle: nil),
+                   AuthzDelegate2ViewController(nibName: "AuthzDelegate2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzDelegate5ViewController(nibName: "AuthzDelegate5ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_UNDELEGATE) {
+           return [AuthzUndelegate1ViewController(nibName: "AuthzUndelegate1ViewController", bundle: nil),
+                   AuthzUndelegate2ViewController(nibName: "AuthzUndelegate2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzUndelegate5ViewController(nibName: "AuthzUndelegate5ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_REDELEGATE) {
+           return [AuthzRedelegate1ViewController(nibName: "AuthzRedelegate1ViewController", bundle: nil),
+                   AuthzRedelegate2ViewController(nibName: "AuthzRedelegate2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzRedelegate5ViewController(nibName: "AuthzRedelegate5ViewController", bundle: nil)]
+           
+       } else if (mType == TASK_TYPE_AUTHZ_SEND) {
+           return [AuthzSend1ViewController(nibName: "AuthzSend1ViewController", bundle: nil),
+                   AuthzSend2ViewController(nibName: "AuthzSend2ViewController", bundle: nil),
+                   MemoViewController(nibName: "MemoViewController", bundle: nil),
+                   FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
+                   AuthzSend5ViewController(nibName: "AuthzSend5ViewController", bundle: nil)]
+       }
+        
+        
+        
+        
         else {
             return[]
         }
@@ -526,12 +588,8 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     
     func onNextPage() {
         disableBounce = false
-        if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_REDELEGATE || mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT ||
-            mType == TASK_TYPE_IBC_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
-            if (currentIndex > 3) { return }
-        } else {
-            if (currentIndex > 2) { return }
-        }
+        if (currentIndex >= (orderedViewControllers.count - 1)) { return }
+        
         setViewControllers([orderedViewControllers[currentIndex + 1]], direction: .forward, animated: true, completion: { (finished) -> Void in
             self.currentIndex = self.currentIndex + 1
             let value:[String: Int] = ["step": self.currentIndex ]

@@ -31,6 +31,7 @@ class ChainUmee: ChainConfig {
     var stakeSendBg = UIColor(named: "umee")!
     
     var addressPrefix = "umee"
+    var validatorPrefix = "umeevaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.000uumee"
@@ -40,6 +41,7 @@ class ChainUmee: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-umee-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-umee-app.cosmostation.io/"

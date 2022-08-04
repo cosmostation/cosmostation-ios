@@ -31,6 +31,7 @@ class ChainCudos: ChainConfig {
     var stakeSendBg = UIColor(named: "cudos")!
     
     var addressPrefix = "cudos"
+    var validatorPrefix = "cudosvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "5000000000000acudos"
@@ -38,6 +39,7 @@ class ChainCudos: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-cudos-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-cudos-app.cosmostation.io/"

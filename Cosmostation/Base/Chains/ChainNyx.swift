@@ -31,6 +31,7 @@ class ChainNyx: ChainConfig {
     var stakeSendBg = UIColor(named: "nyx")!
     
     var addressPrefix = "n"
+    var validatorPrefix = "nvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.025unym"
@@ -38,6 +39,7 @@ class ChainNyx: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-nym-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-nym-app.cosmostation.io/"

@@ -31,6 +31,7 @@ class ChainKava: ChainConfig {
     var stakeSendBg = UIColor(named: "kava")!
     
     var addressPrefix = "kava"
+    var validatorPrefix = "kavavaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     var addressaddressHdPath1 = "m/44'/459'/0'/0/X"
     
@@ -41,6 +42,7 @@ class ChainKava: ChainConfig {
     var etherAddressSupport = true
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-kava-app.cosmostation.io/"

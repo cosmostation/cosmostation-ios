@@ -53,6 +53,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         self.walletTableView.register(UINib(nibName: "WalletUnbondingInfoCellTableViewCell", bundle: nil), forCellReuseIdentifier: "WalletUnbondingInfoCellTableViewCell")
         self.walletTableView.register(UINib(nibName: "WalletPriceCell", bundle: nil), forCellReuseIdentifier: "WalletPriceCell")
         self.walletTableView.register(UINib(nibName: "WalletInflationCell", bundle: nil), forCellReuseIdentifier: "WalletInflationCell")
+        self.walletTableView.register(UINib(nibName: "WalletAuthzCell", bundle: nil), forCellReuseIdentifier: "WalletAuthzCell")
         self.walletTableView.register(UINib(nibName: "WalletGuideCell", bundle: nil), forCellReuseIdentifier: "WalletGuideCell")
         self.walletTableView.rowHeight = UITableView.automaticDimension
         self.walletTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -147,12 +148,17 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             return 1;
             
         } else {
-            if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN || chainType == .MEDI_MAIN) {
-                return 5;
-            } else if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
+            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
                 return 3;
             }
-            return 4;
+            if (chainType == .KAVA_MAIN || chainType == .DESMOS_MAIN || chainType == .MEDI_MAIN) {
+                return 5;
+            }
+            if (chainConfig!.authzSupoort) {
+                return 5
+            } else {
+                return 4
+            }
         }
     }
     
@@ -214,6 +220,10 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
+        }
+        
+        if (indexPath.row == 3 && chainConfig!.authzSupoort) {
+            return onBindAuthzCell(tableView)
             
         } else {
             return onBindGuideCell(tableView)
@@ -223,7 +233,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetIrisItem(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletIrisCell") as? WalletIrisCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionNFT = { self.onClickNFT() }
@@ -286,7 +296,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetIovItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletIovCell") as? WalletIovCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionNameService = { self.onClickStarName() }
@@ -324,7 +334,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetCrytoItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletCrytoCell") as? WalletCrytoCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionNFT = { self.onClickNFT() }
@@ -377,6 +387,9 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
 
+        } else if (indexPath.row == 3) {
+            return onBindAuthzCell(tableView)
+            
         } else {
             return onBindGuideCell(tableView)
         }
@@ -385,7 +398,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetDesmosItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDesmosCell") as? WalletDesmosCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionProfile = { self.onClickProfile() }
@@ -435,7 +448,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetCrescentItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletCrescentCell") as? WalletCrescentCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionWC = { self.onClickWalletConect() }
@@ -456,7 +469,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     func onSetStationItems(_ tableView: UITableView, _ indexPath: IndexPath)  -> UITableViewCell {
         if (indexPath.row == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletStationCell") as? WalletStationCell
-            cell?.updateView(account, chainType)
+            cell?.updateView(account, chainConfig)
             cell?.actionDelegate = { self.onClickValidatorList() }
             cell?.actionVote = { self.onClickVoteList() }
             cell?.actionWC = { self.onClickWalletConect() }
@@ -485,6 +498,13 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let cell = tableView.dequeueReusableCell(withIdentifier:"WalletInflationCell") as? WalletInflationCell
         cell?.onBindCell(account, chainConfig)
         cell?.actionTapApr = { self.onClickAprHelp() }
+        return cell!
+    }
+    
+    func onBindAuthzCell(_ tableView: UITableView) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAuthzCell") as? WalletAuthzCell
+        cell?.onBindCell(chainConfig)
+        cell?.actionAuthz = { self.onClickAuthz() }
         return cell!
     }
     
@@ -785,6 +805,18 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
             helpAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
         }
+    }
+    
+    func onClickAuthz() {
+        print("onClickAuthz")
+//        if (account?.account_has_private == false) {
+//            self.onShowAddMenomicDialog()
+//            return
+//        }
+        let authzListVC = AuthzListViewController(nibName: "AuthzListViewController", bundle: nil)
+        authzListVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(authzListVC, animated: true)
     }
     
     func onClickGuide1() {

@@ -500,6 +500,46 @@
 "str_account_link_step_2" = "Select transaction fee";
 "str_account_link_step_3" = "Check transaction detail";
 
+"str_authz_reward_step_0" = "Confirm your staking reward info";
+"str_authz_reward_step_1" = "Insert memo (optional)";
+"str_authz_reward_step_2" = "Select transaction fee";
+"str_authz_reward_step_3" = "Check transaction detail";
+
+"str_authz_commission_step_0" = "Confirm your commission info";
+"str_authz_commission_step_1" = "Insert memo (optional)";
+"str_authz_commission_step_2" = "Select transaction fee";
+"str_authz_commission_step_3" = "Check transaction detail";
+
+"str_authz_vote_step_0" = "Select proposal for vote";
+"str_authz_vote_step_1" = "Select opinions";
+"str_authz_vote_step_2" = "Insert memo (optional)";
+"str_authz_vote_step_3" = "Select transaction fee";
+"str_authz_vote_step_4" = "Check transaction detail";
+
+"str_authz_delegate_step_0" = "Select validator";
+"str_authz_delegate_step_1" = "Insert amount to delegate";
+"str_authz_delegate_step_2" = "Insert memo (optional)";
+"str_authz_delegate_step_3" = "Select transaction fee";
+"str_authz_delegate_step_4" = "Check transaction detail";
+
+"str_authz_undelegate_step_0" = "Select validator";
+"str_authz_undelegate_step_1" = "Insert amount to undelegate";
+"str_authz_undelegate_step_2" = "Insert memo (optional)";
+"str_authz_undelegate_step_3" = "Select transaction fee";
+"str_authz_undelegate_step_4" = "Check transaction detail";
+
+"str_authz_redelegate_step_0" = "Select validator";
+"str_authz_redelegate_step_1" = "Insert amount to undelegate";
+"str_authz_redelegate_step_2" = "Insert memo (optional)";
+"str_authz_redelegate_step_3" = "Select transaction fee";
+"str_authz_redelegate_step_4" = "Check transaction detail";
+
+"str_authz_send_step_0" = "Insert recipient";
+"str_authz_send_step_1" = "Insert amount to send";
+"str_authz_send_step_2" = "Insert memo (optional)";
+"str_authz_send_step_3" = "Select transaction fee";
+"str_authz_send_step_4" = "Check transaction detail";
+
 "str_description_open_domain" = "Open type in which an account owner is the only entity that can perform actions on the account.";
 "str_description_closed_domain" = "Closed type in which the domain owner has control over accounts too.";
 "str_safe_copy_title" = "Mnemonic Safe Copy";
@@ -629,6 +669,15 @@ support@cosmostation.io";
 "title_profile_detail" = "Profile Detail";
 "title_profile_create" = "Create Profile";
 "title_account_chain_link" = "Account Link & AriDrop";
+"title_authz_list" = "Authz List";
+"title_authz_detail" = "Authz Detail";
+"title_authz_claim_reward" = "Authz Claim Rewards";
+"title_authz_claim_commission" = "Authz Claim Commission";
+"title_authz_vote" = "Authz Vote";
+"title_authz_delegate" = "Authz Delegate";
+"title_authz_undelegate" = "Authz Undelegate";
+"title_authz_redelegate" = "Authz Redelegate";
+"title_authz_send" = "Authz Send";
 
 
 "proposal_type_basic" = "Basic";
@@ -766,6 +815,7 @@ support@cosmostation.io";
 "error_simul_error" = "This Tx not executable.";
 "error_no_mnemonic" = "Only private key imported";
 "error_no_selected_proposal" = "Please select proposals to vote";
+"error_no_authz_type" = "No auth for this type";
 
 "theme_system" = "System";
 "theme_light" = "Light";

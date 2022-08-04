@@ -31,6 +31,7 @@ class ChainRegen: ChainConfig {
     var stakeSendBg = UIColor(named: "regen")!
     
     var addressPrefix = "regen"
+    var validatorPrefix = "regenvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.00025uregen"
@@ -40,6 +41,7 @@ class ChainRegen: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-regen-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-regen-app.cosmostation.io/"

@@ -31,6 +31,7 @@ class ChainKi: ChainConfig {
     var stakeSendBg = UIColor(named: "ki")!
     
     var addressPrefix = "ki"
+    var validatorPrefix = "kivaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
     let gasRate0 = "0.025uxki"
@@ -38,6 +39,7 @@ class ChainKi: ChainConfig {
     var etherAddressSupport = false
     var pushSupport = false
     var wcSupoort = false
+    var authzSupoort = false
     var grpcUrl = "lcd-kichain-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-kichain-app.cosmostation.io/"
