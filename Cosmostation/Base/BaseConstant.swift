@@ -365,7 +365,7 @@ public enum ChainType: String {
     }
     
     static func IS_TESTNET(_ chain: ChainType?) -> Bool {
-        if (chain == ChainType.CRESCENT_TEST) {
+        if (chain == .STATION_TEST) {
             return true
         }
         return false
