@@ -169,7 +169,30 @@ public struct ApiHistoryNewCustom {
                     
                 } else if (msgType.contains("MsgExec")) {
                     result = NSLocalizedString("tx_authz_exe", comment: "")
-                    
+                    if let innerMsgs = getMsgs()?[0].object(forKey: "msgs") as? Array<NSDictionary>,
+                        let inner0Type = innerMsgs[0].object(forKey: "@type") as? String {
+                        var innerTx = NSLocalizedString("tx_known", comment: "")
+                        if (inner0Type.contains("MsgSend")) {
+                            innerTx = NSLocalizedString("tx_transfer", comment: "")
+                        } else if (inner0Type.contains("MsgDelegate")) {
+                            innerTx = NSLocalizedString("tx_delegate", comment: "")
+                        } else if (inner0Type.contains("MsgUndelegate")) {
+                            innerTx = NSLocalizedString("tx_undelegate", comment: "")
+                        } else if (inner0Type.contains("MsgBeginRedelegate")) {
+                            innerTx = NSLocalizedString("tx_redelegate", comment: "")
+                        } else if (inner0Type.contains("MsgVote")) {
+                            innerTx = NSLocalizedString("tx_vote", comment: "")
+                        } else if (inner0Type.contains("MsgWithdrawDelegatorReward")) {
+                            innerTx = NSLocalizedString("tx_get_reward", comment: "")
+                        } else if (inner0Type.contains("MsgWithdrawValidatorCommission")) {
+                            innerTx = NSLocalizedString("tx_get_commission", comment: "")
+                        }
+                        if (innerMsgs.count > 1) {
+                            innerTx = innerTx +  " + " + String(innerMsgs.count - 1)
+                        }
+                        result = result + "\n" + innerTx
+                    }
+                        
                 }
                 
             } else if (msgType.contains("cosmos.") && msgType.contains("slashing")) {
