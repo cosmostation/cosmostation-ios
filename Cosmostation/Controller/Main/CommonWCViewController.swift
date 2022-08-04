@@ -345,7 +345,6 @@ class CommonWCViewController: BaseViewController {
         }
         self.getPrivateKeyAsync(account: baseAccount) { key in
             let ethAddressString = WKey.generateEthAddressFromPrivateKey(key)
-            let keystore = try? EthereumKeystoreV3(privateKey: key)
             guard let url = URL(string: "https://eth.bd.evmos.org:8545"),
                   let provider = Web3HttpProvider(url),
                   let ethAddress = EthereumAddress(ethAddressString),
@@ -357,27 +356,32 @@ class CommonWCViewController: BaseViewController {
                 self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
                 return
             }
-            let web3 = web3(provider: provider)
-            let nounce = try? web3.eth.getTransactionCount(address: ethAddress)
-            var tx = EthereumTransaction(
-                gasPrice: BigUInt(27500000000),
-                gasLimit: BigUInt(900000),
-                to: toAddress,
-                value: bigIntVal,
-                data: Data(hex: transaction.data)
-            )
-            guard let nounce = nounce, let keystore = keystore as? AbstractKeystore else {
-                self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
-                return
-            }
-            tx.nonce = nounce
-            tx.UNSAFE_setChainID(BigUInt(9001))
-            try? Web3Signer.signTX(transaction: &tx, keystore: keystore, account: ethAddress, password: "web3swift", useExtraEntropy: false)
-            let result = try? web3.eth.sendRawTransaction(tx)
-            if let result = result {
-                self.interactor?.approveRequest(id: id, result: result.hash).cauterize()
-            } else {
-                self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
+            DispatchQueue.global().async {
+                let web3 = web3(provider: provider)
+                let nounce = try? web3.eth.getTransactionCount(address: ethAddress)
+                
+                guard let nounce = nounce else {
+                    self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
+                    return
+                }
+                
+                let eip1559 = EIP1559Envelope(to: toAddress, nonce: nounce, chainID: BigUInt(9001), value: bigIntVal, data: Data(hex: transaction.data),
+                                              maxPriorityFeePerGas: BigUInt(500000000),
+                                              maxFeePerGas: BigUInt(27500000000),
+                                              gasLimit: BigUInt(900000)
+                )
+                var tx = EthereumTransaction(with: eip1559)
+                let gas = try? web3.eth.estimateGas(tx, transactionOptions: nil)
+                if let gas = gas {
+                    tx.parameters.gasLimit = gas
+                }
+                try? tx.sign(privateKey: key)
+                let result = try? web3.eth.sendRawTransaction(tx)
+                if let result = result {
+                    self.interactor?.approveRequest(id: id, result: result.hash).cauterize()
+                } else {
+                    self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
+                }
             }
         }
     }
