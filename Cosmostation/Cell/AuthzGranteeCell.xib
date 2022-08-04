@@ -26,25 +26,25 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qPu-dY-TDk" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="629" height="173"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" ambiguous="YES" text="Greantee (Signer)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9f-4b-PHU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Greantee (Signer)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A9f-4b-PHU">
                                 <rect key="frame" x="12" y="16" width="94" height="14"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wE1-TM-FOv">
-                                <rect key="frame" x="593" y="11" width="24" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-PT-HF2">
+                                <rect key="frame" x="12" y="40" width="573" height="62.5"/>
+                                <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="14"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wE1-TM-FOv">
+                                <rect key="frame" x="593" y="59.5" width="24" height="24"/>
                                 <state key="normal" image="btnExplorer"/>
                                 <connections>
                                     <action selector="onClickGranteeAddress:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xNz-Q3-Rxf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="-" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s5Y-PT-HF2">
-                                <rect key="frame" x="12" y="42" width="605" height="18.5"/>
-                                <fontDescription key="fontDescription" name="RobotoMono-Regular" family="Roboto Mono" pointSize="14"/>
-                                <color key="textColor" name="_font05"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FID-IN-yvI">
                                 <rect key="frame" x="12" y="118.5" width="605" height="0.5"/>
                                 <color key="backgroundColor" red="0.29411764709999999" green="0.30980392159999998" blue="0.3294117647" alpha="1" colorSpace="deviceRGB"/>
@@ -80,14 +80,14 @@
                         </subviews>
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
-                            <constraint firstItem="wE1-TM-FOv" firstAttribute="centerY" secondItem="A9f-4b-PHU" secondAttribute="centerY" id="2JA-us-HDz"/>
-                            <constraint firstAttribute="trailing" secondItem="s5Y-PT-HF2" secondAttribute="trailing" constant="12" id="3gT-h4-1eI"/>
                             <constraint firstItem="V33-tn-833" firstAttribute="leading" secondItem="qPu-dY-TDk" secondAttribute="leading" constant="12" id="4Vt-sM-2QX"/>
                             <constraint firstItem="s5Y-PT-HF2" firstAttribute="leading" secondItem="qPu-dY-TDk" secondAttribute="leading" constant="12" id="6lK-NS-n7e"/>
                             <constraint firstItem="A9f-4b-PHU" firstAttribute="top" secondItem="qPu-dY-TDk" secondAttribute="top" constant="16" id="Awc-gB-QdV"/>
-                            <constraint firstItem="s5Y-PT-HF2" firstAttribute="top" secondItem="A9f-4b-PHU" secondAttribute="bottom" constant="12" id="Bc7-nm-Uf8"/>
+                            <constraint firstItem="s5Y-PT-HF2" firstAttribute="top" secondItem="A9f-4b-PHU" secondAttribute="bottom" constant="10" id="Bc7-nm-Uf8"/>
                             <constraint firstAttribute="bottom" secondItem="V33-tn-833" secondAttribute="bottom" constant="20" id="D1o-nm-avB"/>
                             <constraint firstItem="FID-IN-yvI" firstAttribute="top" secondItem="s5Y-PT-HF2" secondAttribute="bottom" constant="16" id="Jmp-o8-tgw"/>
+                            <constraint firstItem="s5Y-PT-HF2" firstAttribute="trailing" secondItem="wE1-TM-FOv" secondAttribute="trailing" constant="-32" id="Pt8-SW-qe0"/>
+                            <constraint firstItem="wE1-TM-FOv" firstAttribute="centerY" secondItem="s5Y-PT-HF2" secondAttribute="centerY" id="TvS-xd-3LT"/>
                             <constraint firstAttribute="trailing" secondItem="FID-IN-yvI" secondAttribute="trailing" constant="12" id="VHM-Rt-ca1"/>
                             <constraint firstAttribute="trailing" secondItem="wE1-TM-FOv" secondAttribute="trailing" constant="12" id="beL-eN-UOs"/>
                             <constraint firstItem="FID-IN-yvI" firstAttribute="leading" secondItem="qPu-dY-TDk" secondAttribute="leading" constant="12" id="fOK-1V-2c9"/>

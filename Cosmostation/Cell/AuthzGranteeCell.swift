@@ -33,6 +33,7 @@ class AuthzGranteeCell: UITableViewCell {
         
         rootCardView.backgroundColor = chainConfig!.chainColorBG
         granteeAddressLabel.text = address
+        granteeAddressLabel.adjustsFontSizeToFitWidth = true
         availableAmountLabel.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmountLabel.font!, divideDecimal, 6)
     }
 }

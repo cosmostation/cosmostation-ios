@@ -56,6 +56,7 @@ class AuthzGranterCell: UITableViewCell {
         let totalAmount = availableAmount.adding(delegatedAmount).adding(vestingAmount).adding(unbondingAmount).adding(rewardAmount).adding(commissionAmount)
         
         granterAddressLabel.text = address
+        granterAddressLabel.adjustsFontSizeToFitWidth = true
         
         availableAmountLabel.attributedText = WDP.dpAmount(availableAmount.stringValue, availableAmountLabel.font!, divideDecimal, 6)
         vestingAmountLabel.attributedText = WDP.dpAmount(vestingAmount.stringValue, availableAmountLabel.font!, divideDecimal, 6)
