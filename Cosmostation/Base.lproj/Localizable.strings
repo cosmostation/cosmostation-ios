@@ -123,7 +123,7 @@
 "send_guide_msg_band" = "Cross-chain oracle platform based on Tendermint. Aggregates and connects real-world data and APIs to smart contracts.";
 "send_guide_title_ok" = "OKC CHAIN";
 "send_guide_msg_ok" = "OKC Chain is a public decentralized exchange powered by Tendermint.";
-"send_guide_title_certik" = "CERTIK CHAIN";
+"send_guide_title_certik" = "SHENTU CHAIN";
 "send_guide_msg_certik" = "A public platform based on the Certik Foundation's unique Formal Verification security system.";
 "send_guide_title_secret" = "SECRET CHAIN";
 "send_guide_msg_secret" = "First Proof-of-Stake network to enable privacy-preserving smart contracts. Secret allows private, secure computation.";
