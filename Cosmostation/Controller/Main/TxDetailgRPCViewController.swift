@@ -110,6 +110,9 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
         self.txTableView.register(UINib(nibName: "TxInstantContractCell", bundle: nil), forCellReuseIdentifier: "TxInstantContractCell")
         self.txTableView.register(UINib(nibName: "TxExeContractCell", bundle: nil), forCellReuseIdentifier: "TxExeContractCell")
         
+        //for authz execute msg type
+        self.txTableView.register(UINib(nibName: "TxAuthzExecCell", bundle: nil), forCellReuseIdentifier: "TxAuthzExecCell")
+        
         //for unknown msg type
         self.txTableView.register(UINib(nibName: "TxUnknownCell", bundle: nil), forCellReuseIdentifier: "TxUnknownCell")
         
@@ -458,8 +461,16 @@ class TxDetailgRPCViewController: BaseViewController, UITableViewDelegate, UITab
                 
             }
             
+            else if (msg.typeURL.contains(Cosmos_Authz_V1beta1_MsgExec.protoMessageName)) {
+               let cell = tableView.dequeueReusableCell(withIdentifier:"TxAuthzExecCell") as? TxCell
+               cell?.onBindMsg(chainConfig!, mTxRespose!, indexPath.row - 1)
+               return cell!
+               
+           }
+            
         }
         let cell:TxUnknownCell? = tableView.dequeueReusableCell(withIdentifier:"TxUnknownCell") as? TxUnknownCell
+        cell?.onBind(chainConfig!, mTxRespose!)
         return cell!
     }
     
