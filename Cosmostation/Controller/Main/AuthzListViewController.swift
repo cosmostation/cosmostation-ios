@@ -58,6 +58,7 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
         self.loadingImg.isHidden = true
         self.authzTableView.isHidden = false
         self.authzTableView.reloadData()
+        self.refresher.endRefreshing()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
