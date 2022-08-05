@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ClaimRewardAllDelegate {
+class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var myValidatorCnt: UILabel!
     @IBOutlet weak var btnSort: UIView!
@@ -107,8 +107,8 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         } else {
             if (indexPath.row == BaseData.instance.mMyValidators_gRPC.count) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"ClaimRewardAllCell") as? ClaimRewardAllCell
-                cell?.updateView(chainConfig)
-                cell?.delegate = self
+//                cell?.updateView(chainConfig)
+//                cell?.delegate = self
                 return cell!
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"MyValidatorCell") as? MyValidatorCell
@@ -133,6 +133,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         }
     }
     
+    /*
     func didTapClaimAll(_ sender: UIButton) {
         if (!self.account!.account_has_private) {
             self.onShowAddMenomicDialog()
@@ -174,6 +175,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         self.navigationItem.title = ""
         self.navigationController?.pushViewController(txVC, animated: true)
     }
+    */
     
     func onStartDelegate(_ validator_gRPC: Cosmos_Staking_V1beta1_Validator?, _ validator: Validator?) {
         if (!account!.account_has_private) {
