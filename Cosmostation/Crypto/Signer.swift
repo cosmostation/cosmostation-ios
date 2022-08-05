@@ -172,6 +172,37 @@ class Signer {
         return anyMsgs
     }
     
+    //Tx for Common Claim Staking Reward2
+    static func genSignedClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                            _ validators: Array<String>,
+                                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let claimRewardMsg = genClaimStakingRewardMsg(auth, validators)
+        return getGrpcSignedTx(auth, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                              _ validators: Array<String>,
+                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let claimRewardMsg = genClaimStakingRewardMsg(auth, validators)
+        return getGrpcSimulateTx(auth, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ validators: Array<String>) -> [Google_Protobuf2_Any] {
+        var anyMsgs = Array<Google_Protobuf2_Any>()
+        for validator in validators{
+            let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
+                $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
+                $0.validatorAddress = validator
+            }
+            let anyMsg = Google_Protobuf2_Any.with {
+                $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
+                $0.value = try! claimMsg.serializedData()
+            }
+            anyMsgs.append(anyMsg)
+        }
+        return anyMsgs
+    }
+    
     //Tx for Common Re-Invest
     static func genSignedReInvestTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                         _ valAddress: String, _ amount: Coin,

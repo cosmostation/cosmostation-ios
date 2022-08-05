@@ -15,8 +15,6 @@ class ClaimRewardAllCell: UITableViewCell {
     @IBOutlet weak var claimAllCardView: CardView!
     @IBOutlet weak var compoundingCardView: CardView!
     
-    weak var delegate: ClaimRewardAllDelegate?
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -40,5 +38,4 @@ class ClaimRewardAllCell: UITableViewCell {
     @objc func onClickCompound (_ sender: UITapGestureRecognizer) {
         actionCompunding?()
     }
-    
 }
