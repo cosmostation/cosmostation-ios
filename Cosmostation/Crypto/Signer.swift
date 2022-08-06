@@ -174,25 +174,25 @@ class Signer {
     
     //Tx for Common Claim Staking Reward2
     static func genSignedClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                            _ validators: Array<String>,
+                                            _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let claimRewardMsg = genClaimStakingRewardMsg(auth, validators)
+        let claimRewardMsg = genClaimStakingRewardMsg(auth, rewards)
         return getGrpcSignedTx(auth, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
     }
     
     static func genSimulateClaimRewardsTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                              _ validators: Array<String>,
+                                              _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
                                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let claimRewardMsg = genClaimStakingRewardMsg(auth, validators)
+        let claimRewardMsg = genClaimStakingRewardMsg(auth, rewards)
         return getGrpcSimulateTx(auth, chainType, claimRewardMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ validators: Array<String>) -> [Google_Protobuf2_Any] {
+    static func genClaimStakingRewardMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>) -> [Google_Protobuf2_Any] {
         var anyMsgs = Array<Google_Protobuf2_Any>()
-        for validator in validators{
+        for reward in rewards {
             let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
                 $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
-                $0.validatorAddress = validator
+                $0.validatorAddress = reward.validatorAddress
             }
             let anyMsg = Google_Protobuf2_Any.with {
                 $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
@@ -243,6 +243,54 @@ class Signer {
             $0.value = try! deleMsg.serializedData()
         }
         anyMsgs.append(deleAnyMsg)
+        return anyMsgs
+    }
+    
+    
+    //Tx for Common Compounding
+    static func genSignedCompounding(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                     _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
+                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let compoundingMsg = genCompoundingMsg(auth, rewards, chainType)
+        return getGrpcSignedTx(auth, chainType, compoundingMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateCompounding(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                       _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>,
+                                       _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let compoundingMsg = genCompoundingMsg(auth, rewards, chainType)
+        return getGrpcSimulateTx(auth, chainType, compoundingMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genCompoundingMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ rewards: Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>, _ chainType: ChainType) -> [Google_Protobuf2_Any] {
+        let chainConfig = ChainFactory.getChainConfig(chainType)
+        var anyMsgs = Array<Google_Protobuf2_Any>()
+        rewards.forEach { reward in
+            let claimMsg = Cosmos_Distribution_V1beta1_MsgWithdrawDelegatorReward.with {
+                $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
+                $0.validatorAddress = reward.validatorAddress
+            }
+            let claimAnyMsg = Google_Protobuf2_Any.with {
+                $0.typeURL = "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward"
+                $0.value = try! claimMsg.serializedData()
+            }
+            anyMsgs.append(claimAnyMsg)
+            let rewardCoin = reward.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first
+            let deleCoin = Cosmos_Base_V1beta1_Coin.with {
+                $0.denom = rewardCoin!.denom
+                $0.amount = NSDecimalNumber.init(string: rewardCoin!.amount).multiplying(byPowerOf10: -18, withBehavior: WUtils.handler0).stringValue
+            }
+            let deleMsg = Cosmos_Staking_V1beta1_MsgDelegate.with {
+                $0.delegatorAddress = WUtils.onParseAuthGrpc(auth).0!
+                $0.validatorAddress = reward.validatorAddress
+                $0.amount = deleCoin
+            }
+            let deleAnyMsg = Google_Protobuf2_Any.with {
+                $0.typeURL = "/cosmos.staking.v1beta1.MsgDelegate"
+                $0.value = try! deleMsg.serializedData()
+            }
+            anyMsgs.append(deleAnyMsg)
+        }
         return anyMsgs
     }
     
