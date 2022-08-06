@@ -828,6 +828,7 @@ support@cosmostation.io";
 "theme_light" = "라이트";
 "theme_dark" = "다크";
 
+"autopass_msg" = "최초 핀코드를 통과한 이후 설정한 시간동안 핀코드를 자동으로 통과합니다.\nTx 전송, 개인 데이터 확인에 해당 됩니다.\n(앱 잠금은 항상 작동합니다.)";
 "autopass_none" = "사용 안함";
 "autopass_5min" = "5분";
 "autopass_10min" = "10분";

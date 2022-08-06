@@ -20,7 +20,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var currecyLabel: UILabel!
     @IBOutlet weak var themeLabel: UILabel!
-    @IBOutlet weak var marketLabel: UILabel!
     @IBOutlet weak var appLockSwitch: UISwitch!
     @IBOutlet weak var bioTypeLabel: UILabel!
     @IBOutlet weak var bioSwitch: UISwitch!
@@ -42,10 +41,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         self.onUpdateTheme()
         self.onUpdateAutoPass()
         self.onUpdateCurrency()
-        self.onUpdateMarket()
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -73,7 +70,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 }
             }
         }
-        self.checkBioAuth()
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -192,17 +188,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 1 && indexPath.row == 2) {
-            if hideBio {
-                return 0
-            } else {
-                return 50
-            }
-        }
-        return super.tableView(tableView, heightForRowAt: indexPath)
-    }
-    
     func onUpdateTheme() {
         themeLabel.text = BaseData.instance.getThemeString()
     }
@@ -213,10 +198,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     func onUpdateCurrency() {
         currecyLabel.text = BaseData.instance.getCurrencyString()
-    }
-    
-    func onUpdateMarket() {
-        marketLabel.text = "CoinGecko"
     }
     
     
@@ -232,7 +213,17 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     func onShowAutoPassDialog() {
-        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.left
+        let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(
+            string: NSLocalizedString("autopass_msg", comment: ""),
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote)
+            ]
+        )
+        let showAlert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
+        showAlert.setValue(attributedMessage, forKey: "attributedMessage")
         if #available(iOS 13.0, *) { showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let autopass0Action = UIAlertAction(title: NSLocalizedString("autopass_5min", comment: ""), style: .default, handler: { _ in
             self.onSetAutoPass(1)
@@ -243,7 +234,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         let autopass2Action = UIAlertAction(title: NSLocalizedString("autopass_30min", comment: ""), style: .default, handler: { _ in
             self.onSetAutoPass(3)
         })
-        let autopass3Action = UIAlertAction(title: NSLocalizedString("autopass_none", comment: ""), style: .default, handler: { _ in
+        let autopass3Action = UIAlertAction(title: NSLocalizedString("autopass_none", comment: ""), style: .cancel, handler: { _ in
             self.onSetAutoPass(0)
         })
         showAlert.addAction(autopass0Action)
@@ -384,9 +375,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     @IBAction func appLockToggle(_ sender: UISwitch) {
         if (BaseData.instance.hasPassword()) {
-            if(sender.isOn) {
+            if (sender.isOn) {
                 BaseData.instance.setUsingAppLock(sender.isOn)
-                self.checkBioAuth()
             } else {
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
@@ -418,15 +408,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             BaseData.instance.setUsingEnginerMode(false)
             self.onShowToast("Engineer Mode Disabled")
         }
-    }
-    
-    func checkBioAuth() {
-        if(bioTypeLabel.text!.count > 0 && BaseData.instance.getUsingAppLock()) {
-            self.hideBio = false
-        } else {
-            self.hideBio = true
-        }
-        self.tableView.reloadData()
     }
     
     @objc func dismissAlertController() {
