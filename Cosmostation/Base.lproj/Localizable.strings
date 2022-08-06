@@ -821,6 +821,11 @@ support@cosmostation.io";
 "theme_light" = "Light";
 "theme_dark" = "Dark";
 
+"autopass_none" = "Never";
+"autopass_5min" = "5min";
+"autopass_10min" = "10min";
+"autopass_30min" = "30min";
+
 "currency_usd" = "USD";
 "currency_eur" = "EUR";
 "currency_krw" = "KRW";

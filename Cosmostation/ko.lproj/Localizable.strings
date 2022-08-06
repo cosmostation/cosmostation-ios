@@ -828,6 +828,11 @@ support@cosmostation.io";
 "theme_light" = "라이트";
 "theme_dark" = "다크";
 
+"autopass_none" = "사용 안함";
+"autopass_5min" = "5분";
+"autopass_10min" = "10분";
+"autopass_30min" = "30분";
+
 "currency_usd" = "USD";
 "currency_eur" = "EUR";
 "currency_krw" = "KRW";

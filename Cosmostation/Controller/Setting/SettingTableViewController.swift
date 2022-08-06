@@ -24,10 +24,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var appLockSwitch: UISwitch!
     @IBOutlet weak var bioTypeLabel: UILabel!
     @IBOutlet weak var bioSwitch: UISwitch!
+    @IBOutlet weak var autoPassLabel: UILabel!
     @IBOutlet weak var explorerLabel: UILabel!
     @IBOutlet weak var enginerModeSwitch: UISwitch!
     var hideBio = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
@@ -40,6 +40,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             self.versionLabel.text = "v " + appVersion
         }
         self.onUpdateTheme()
+        self.onUpdateAutoPass()
         self.onUpdateCurrency()
         self.onUpdateMarket()
         
@@ -114,6 +115,9 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.onShowThemeDialog()
                 
             } else if (indexPath.row == 3) {
+                self.onShowAutoPassDialog()
+                
+            } else if (indexPath.row == 4) {
                 self.onShowCurrenyDialog()
             }
             
@@ -203,6 +207,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         themeLabel.text = BaseData.instance.getThemeString()
     }
     
+    func onUpdateAutoPass() {
+        autoPassLabel.text = BaseData.instance.getAutoPassString()
+    }
+    
     func onUpdateCurrency() {
         currecyLabel.text = BaseData.instance.getCurrencyString()
     }
@@ -221,6 +229,38 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     func onShowNotice() {
         guard let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainConfig))") else { return }
         self.onShowSafariWeb(url)
+    }
+    
+    func onShowAutoPassDialog() {
+        let showAlert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        if #available(iOS 13.0, *) { showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        let autopass0Action = UIAlertAction(title: NSLocalizedString("autopass_5min", comment: ""), style: .default, handler: { _ in
+            self.onSetAutoPass(1)
+        })
+        let autopass1Action = UIAlertAction(title: NSLocalizedString("autopass_10min", comment: ""), style: .default, handler: { _ in
+            self.onSetAutoPass(2)
+        })
+        let autopass2Action = UIAlertAction(title: NSLocalizedString("autopass_30min", comment: ""), style: .default, handler: { _ in
+            self.onSetAutoPass(3)
+        })
+        let autopass3Action = UIAlertAction(title: NSLocalizedString("autopass_none", comment: ""), style: .default, handler: { _ in
+            self.onSetAutoPass(0)
+        })
+        showAlert.addAction(autopass0Action)
+        showAlert.addAction(autopass1Action)
+        showAlert.addAction(autopass2Action)
+        showAlert.addAction(autopass3Action)
+        self.present(showAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            showAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func onSetAutoPass(_ value:Int) {
+        if (BaseData.instance.getAutoPass() != value) {
+            BaseData.instance.setAutoPass(value)
+            self.onUpdateAutoPass()
+        }
     }
     
     func onShowCurrenyDialog() {

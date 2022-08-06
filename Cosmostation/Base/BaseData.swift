@@ -703,6 +703,25 @@ final class BaseData : NSObject{
         return UserDefaults.standard.bool(forKey: KEY_USING_BIO_AUTH)
     }
     
+    func setAutoPass(_ mode : Int) {
+        UserDefaults.standard.set(mode, forKey: KEY_AUTO_PASS)
+    }
+
+    func getAutoPass() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_AUTO_PASS)
+    }
+    
+    func getAutoPassString() -> String {
+        if (getAutoPass() == 1) {
+            return NSLocalizedString("autopass_5min", comment: "")
+        } else if (getAutoPass() == 2) {
+            return NSLocalizedString("autopass_10min", comment: "")
+        } else if (getAutoPass() == 3) {
+            return NSLocalizedString("autopass_30min", comment: "")
+        }
+        return NSLocalizedString("autopass_none", comment: "")
+    }
+    
     func setUsingEnginerMode(_ using : Bool) {
         UserDefaults.standard.set(using, forKey: KEY_ENGINER_MODE)
     }
