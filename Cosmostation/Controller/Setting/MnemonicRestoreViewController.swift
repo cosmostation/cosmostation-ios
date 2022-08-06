@@ -310,37 +310,50 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
     }
     
     func onCheckPassword() {
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.resultDelegate = self
         if (!BaseData.instance.hasPassword()) {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.resultDelegate = self
             passwordVC.mTarget = PASSWORD_ACTION_INIT
-        } else  {
-            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+            
+        } else {
+            if (BaseData.instance.isAutoPass()) {
+                self.onStartWalletDerive()
+            } else {
+                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+                self.navigationItem.title = ""
+                self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+                passwordVC.resultDelegate = self
+                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+                self.navigationController?.pushViewController(passwordVC, animated: false)
+            }
         }
-        self.navigationController?.pushViewController(passwordVC, animated: false)
     }
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            DispatchQueue.global().async {
-                let userInputSum = self.userInputWords.reduce("") { result, x in result + x + " "}.trimmingCharacters(in: .whitespacesAndNewlines)
-                let newWords = MWords.init(isNew: true)
-                newWords.wordsCnt = Int64(self.userInputWords.count)
-                if (BaseData.instance.insertMnemonics(newWords) > 0) {
-                    KeychainWrapper.standard.set(userInputSum, forKey: newWords.uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
-                }
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                    let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
-                    walletDeriveVC.mWords = BaseData.instance.selectAllMnemonics().filter { $0.getWords() == userInputSum }.first
-                    walletDeriveVC.mBackable = false
-                    self.navigationItem.title = ""
-                    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
-                    self.navigationController?.pushViewController(walletDeriveVC, animated: true)
-                });
+            self.onStartWalletDerive()
+        }
+    }
+    
+    func onStartWalletDerive() {
+        DispatchQueue.global().async {
+            let userInputSum = self.userInputWords.reduce("") { result, x in result + x + " "}.trimmingCharacters(in: .whitespacesAndNewlines)
+            let newWords = MWords.init(isNew: true)
+            newWords.wordsCnt = Int64(self.userInputWords.count)
+            if (BaseData.instance.insertMnemonics(newWords) > 0) {
+                KeychainWrapper.standard.set(userInputSum, forKey: newWords.uuid.sha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
+                walletDeriveVC.mWords = BaseData.instance.selectAllMnemonics().filter { $0.getWords() == userInputSum }.first
+                walletDeriveVC.mBackable = false
+                self.navigationItem.title = ""
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+                self.navigationController?.pushViewController(walletDeriveVC, animated: true)
+            });
         }
     }
 

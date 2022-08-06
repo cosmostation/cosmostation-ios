@@ -69,16 +69,26 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     }
     
     func onCheckPassword() {
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.resultDelegate = self
         if (!BaseData.instance.hasPassword()) {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.resultDelegate = self
             passwordVC.mTarget = PASSWORD_ACTION_INIT
-        } else  {
-            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+            
+        } else {
+            if (BaseData.instance.isAutoPass()) {
+                self.onStartWalletDerive()
+            } else {
+                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+                self.navigationItem.title = ""
+                self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+                passwordVC.resultDelegate = self
+                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+                self.navigationController?.pushViewController(passwordVC, animated: false)
+            }
         }
-        self.navigationController?.pushViewController(passwordVC, animated: false)
     }
     
     func scannedAddress(result: String) {
@@ -87,17 +97,19 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
-                walletDeriveVC.mPrivateKey = KeyFac.getPrivateFromString(self.userInput!)
-                walletDeriveVC.mPrivateKeyMode = true
-                walletDeriveVC.mBackable = false
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(walletDeriveVC, animated: true)
-                print("PASSWORD_RESUKT_OK ")
-            });
-            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
+                self.onStartWalletDerive()
+            })
         }
+    }
+    
+    func onStartWalletDerive() {
+        let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
+        walletDeriveVC.mPrivateKey = KeyFac.getPrivateFromString(self.userInput!)
+        walletDeriveVC.mPrivateKeyMode = true
+        walletDeriveVC.mBackable = false
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(walletDeriveVC, animated: true)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

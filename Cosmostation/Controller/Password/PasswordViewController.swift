@@ -272,6 +272,7 @@ class PasswordViewController: BaseViewController {
             }
             DispatchQueue.main.async(execute: {
                 if (result) {
+                    BaseData.instance.setLastPassTime()
                     self.sendResultAndPop(PASSWORD_RESUKT_OK)
                 } else {
                     self.onShowToast(NSLocalizedString("error_invalid_password", comment: ""))
@@ -322,6 +323,7 @@ class PasswordViewController: BaseViewController {
     
     func onUserSuccessUnlock() {
         print("onUserSuccessUnlock")
+        BaseData.instance.setLastPassTime()
         if (mTarget == PASSWORD_ACTION_INTRO_LOCK) {
             self.sendResultAndPop(PASSWORD_RESUKT_OK)
         } else {

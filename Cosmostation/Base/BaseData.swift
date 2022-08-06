@@ -722,6 +722,36 @@ final class BaseData : NSObject{
         return NSLocalizedString("autopass_none", comment: "")
     }
     
+    func setLastPassTime() {
+        let now = Date().millisecondsSince1970
+        UserDefaults.standard.set(String(now), forKey: KEY_LAST_PASS_TIME)
+    }
+
+    func getLastPassTime() -> Int64 {
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PASS_TIME) ?? "0")!
+        return last
+    }
+    
+    func isAutoPass() -> Bool {
+        let now = Date().millisecondsSince1970
+        let min: Int64 = 60000
+        if (getAutoPass() == 1) {
+            let passTime = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PASS_TIME) ?? "0")! + (min * 5)
+            print("now ", now)
+            print("passTime ", passTime)
+            return passTime > now ? true : false
+            
+        } else if (getAutoPass() == 2) {
+            let passTime = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PASS_TIME) ?? "0")! + (min * 10)
+            return passTime > now ? true : false
+            
+        } else if (getAutoPass() == 3) {
+            let passTime = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PASS_TIME) ?? "0")! + (min * 30)
+            return passTime > now ? true : false
+        }
+        return false
+    }
+    
     func setUsingEnginerMode(_ using : Bool) {
         UserDefaults.standard.set(using, forKey: KEY_ENGINER_MODE)
     }
