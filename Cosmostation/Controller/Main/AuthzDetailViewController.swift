@@ -95,8 +95,8 @@ class AuthzDetailViewController: BaseViewController, UITableViewDelegate, UITabl
     func onUpdateViews() {
         self.loadingImg.stopAnimating()
         self.loadingImg.isHidden = true
-        print("grants ", self.grants.count)
         self.authzTableView.reloadData()
+        self.refresher.endRefreshing()
     }
     
     func onLinkExplorer(_ address: String?) {

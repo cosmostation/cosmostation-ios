@@ -7,9 +7,14 @@
 //
 
 import UIKit
-import Alamofire
+import GRPC
+import NIO
+import SwiftKeychainWrapper
 
-class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, ClaimRewardAllDelegate {
+class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, PasswordViewDelegate {
+    
+    let EASY_MODE_CLAIM_REWARDS = 0
+    let EASY_MODE_COMPONDING = 1
     
     @IBOutlet weak var myValidatorCnt: UILabel!
     @IBOutlet weak var btnSort: UIView!
@@ -18,6 +23,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     
     var mainTabVC: MainTabViewController!
     var refresher: UIRefreshControl!
+    var easyMode = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +47,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onStartSort))
         self.btnSort.addGestureRecognizer(tap)
+        self.getKey()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +74,6 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     
     @objc func onSortingMy() {
         self.myValidatorCnt.text = String(BaseData.instance.mMyValidators_gRPC.count)
-        
         if (BaseData.instance.getMyValidatorSort() == 0) {
             self.sortType.text = NSLocalizedString("sort_by_my_delegate", comment: "")
             sortByDelegated()
@@ -89,7 +95,6 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (BaseData.instance.mMyValidators_gRPC.count < 1) { return 1; }
-        else if (BaseData.instance.mMyValidators_gRPC.count == 1) { return 1; }
         else { return BaseData.instance.mMyValidators_gRPC.count + 1; }
     }
     
@@ -99,21 +104,19 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             cell?.cardView.backgroundColor = chainConfig?.chainColorBG
             return cell!
             
-        } else if (BaseData.instance.mMyValidators_gRPC.count == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"MyValidatorCell") as? MyValidatorCell
-            cell?.updateView(BaseData.instance.mMyValidators_gRPC[indexPath.row], self.chainConfig)
-            return cell!
-            
         } else {
             if (indexPath.row == BaseData.instance.mMyValidators_gRPC.count) {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"ClaimRewardAllCell") as? ClaimRewardAllCell
                 cell?.updateView(chainConfig)
-                cell?.delegate = self
+                cell?.actionRewardAll = { self.onCheckEasyClaim() }
+                cell?.actionCompunding = { self.onCheckEasyCompounding() }
                 return cell!
+                
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier:"MyValidatorCell") as? MyValidatorCell
                 cell?.updateView(BaseData.instance.mMyValidators_gRPC[indexPath.row], self.chainConfig)
                 return cell!
+                
             }
         }
     }
@@ -133,46 +136,187 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         }
     }
     
-    func didTapClaimAll(_ sender: UIButton) {
+    func onCheckEasyClaim() {
         if (!self.account!.account_has_private) {
             self.onShowAddMenomicDialog()
             return
         }
-        var claimAbleValidators = Array<Cosmos_Staking_V1beta1_Validator>()
-        var toClaimValidators  = Array<Cosmos_Staking_V1beta1_Validator>()
-        let mainDenom = chainConfig!.stakeDenom
-        
-        BaseData.instance.mMyValidators_gRPC.forEach { validator in
-            if (BaseData.instance.getReward_gRPC(mainDenom, validator.operatorAddress).compare(NSDecimalNumber.init(string: "0.001")).rawValue > 0) {
-                claimAbleValidators.append(validator)
-            }
-        }
-        if (claimAbleValidators.count == 0) {
-            self.onShowToast(NSLocalizedString("error_not_enough_reward", comment: ""))
-            return;
-        }
-        claimAbleValidators.sort {
-            let reward0 = BaseData.instance.getReward_gRPC(mainDenom, $0.operatorAddress)
-            let reward1 = BaseData.instance.getReward_gRPC(mainDenom, $1.operatorAddress)
-            return reward0.compare(reward1).rawValue > 0 ? true : false
-        }
-        if (claimAbleValidators.count > 16) {
-            toClaimValidators = Array(claimAbleValidators[0..<16])
-        } else {
-            toClaimValidators = claimAbleValidators
-        }
-        
         if (!BaseData.instance.isTxFeePayable(chainConfig)) {
             self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
         }
+        let toClaimRewards = getClaimableReward()
+        if (toClaimRewards.count <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_reward", comment: ""))
+            return
+        }
+        self.easyMode = EASY_MODE_CLAIM_REWARDS
+        self.onStartPinCode()
+    }
+    
+    func onStartEasyClaim(_ selectFee: Int) {
+        self.showWaittingAlert()
+        var feeGasAmount = NSDecimalNumber.init(string: "500000")
+        let feeInfo = WUtils.getFeeInfos(chainConfig)
+        let feeData = feeInfo[chainConfig!.getGasDefault()].FeeDatas[0]
+        var fee: Fee!
+        var feeCoin: Coin!
+        if (chainType == .SIF_MAIN) {
+            feeCoin = Coin.init(feeData.denom!, "100000000000000000")
+        } else {
+            let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
+            feeCoin = Coin.init(feeData.denom!, amount.stringValue)
+        }
+        fee = Fee.init(feeGasAmount.stringValue, [feeCoin])
         
-        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mRewardTargetValidators_gRPC = toClaimValidators
-        txVC.mType = TASK_TYPE_CLAIM_STAKE_REWARD
-        txVC.hidesBottomBarWhenPushed = true
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let authReq = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = self.account!.account_address }
+                if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    let simulReq = Signer.genSimulateClaimRewardsTxgRPC(authRes, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
+                    if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
+                        if (self.chainType != .SIF_MAIN) {
+                            let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
+                            feeCoin = Coin.init(feeData.denom!, amount.stringValue)
+                        }
+                        fee = Fee.init(feeGasAmount.stringValue, [feeCoin])
+                        let txReq = Signer.genSignedClaimRewardsTxgRPC(authRes, self.getClaimableReward(), fee, "",  self.privateKey!, self.publicKey!, self.chainType!)
+                        if let txRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(txReq).response.wait() {
+                            DispatchQueue.main.async(execute: {
+                                if (self.waitAlert != nil) {
+                                    self.waitAlert?.dismiss(animated: true, completion: {
+                                        self.onStartTxDetailgRPC(txRes)
+                                    })
+                                }
+                            });
+                        }
+                    }
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onStartEasyClaim failed: \(error)")
+                if (self.waitAlert != nil) {
+                    self.waitAlert?.dismiss(animated: true, completion: {
+                        self.onShowToast(NSLocalizedString("error_network", comment: "") + "\n" + "\(error)")
+                    })
+                }
+            }
+        }
+    }
+    
+    func onCheckEasyCompounding() {
+        if (!self.account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let toClaimRewards = getClaimableReward()
+        if (toClaimRewards.count <= 0) {
+            self.onShowToast(NSLocalizedString("error_not_enough_reward", comment: ""))
+            return
+        }
+        self.easyMode = EASY_MODE_COMPONDING
+        self.onStartPinCode()
+    }
+    
+    func onStartEasyCompounding(_ selectFee: Int) {
+        self.showWaittingAlert()
+        var feeGasAmount = NSDecimalNumber.init(string: "500000")
+        let feeInfo = WUtils.getFeeInfos(chainConfig)
+        let feeData = feeInfo[chainConfig!.getGasDefault()].FeeDatas[0]
+        var fee: Fee!
+        var feeCoin: Coin!
+        if (chainType == .SIF_MAIN) {
+            feeCoin = Coin.init(feeData.denom!, "100000000000000000")
+        } else {
+            let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
+            feeCoin = Coin.init(feeData.denom!, amount.stringValue)
+        }
+        fee = Fee.init(feeGasAmount.stringValue, [feeCoin])
+        
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let authReq = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = self.account!.account_address }
+                if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    let simulReq = Signer.genSimulateCompounding(authRes, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
+                    if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
+                        if (self.chainType != .SIF_MAIN) {
+                            let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
+                            feeCoin = Coin.init(feeData.denom!, amount.stringValue)
+                        }
+                        fee = Fee.init(feeGasAmount.stringValue, [feeCoin])
+                        let txReq = Signer.genSignedCompounding(authRes, self.getClaimableReward(), fee, "",  self.privateKey!, self.publicKey!, self.chainType!)
+                        if let txRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(txReq).response.wait() {
+                            DispatchQueue.main.async(execute: {
+                                if (self.waitAlert != nil) {
+                                    self.waitAlert?.dismiss(animated: true, completion: {
+                                        self.onStartTxDetailgRPC(txRes)
+                                    })
+                                }
+                            });
+                        }
+                    }
+                }
+                try channel.close().wait()
+                
+            } catch {
+                print("onStartEasyCompounding failed: \(error)")
+                if (self.waitAlert != nil) {
+                    self.waitAlert?.dismiss(animated: true, completion: {
+                        self.onShowToast(NSLocalizedString("error_network", comment: "") + "\n" + "\(error)")
+                    })
+                }
+            }
+        }
+        
+    }
+    
+    func onShowFeeDialog() {
+        let feeInfo = WUtils.getFeeInfos(chainConfig)
+        if (feeInfo.count == 1) {
+            if (self.easyMode == EASY_MODE_CLAIM_REWARDS) { self.onStartEasyClaim(0) }
+            else { self.onStartEasyCompounding(0) }
+            
+        } else {
+            let alertController = UIAlertController(title: NSLocalizedString("send_step_4", comment: ""), message: "", preferredStyle: .actionSheet)
+            if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+            let feeInfo = WUtils.getFeeInfos(chainConfig)
+            for i in 0 ..< Int(feeInfo.count) {
+                let feeAction = UIAlertAction(title: feeInfo[i].title + " Fee", style: .default) { (_) -> Void in
+                    if (self.easyMode == self.EASY_MODE_CLAIM_REWARDS) { self.onStartEasyClaim(i) }
+                    else { self.onStartEasyCompounding(i) }
+                }
+                alertController.addAction(feeAction)
+            }
+            let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            DispatchQueue.main.async { self.present(alertController, animated: true, completion: nil) }
+        }
+    }
+    
+    func onStartPinCode() {
+        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
         self.navigationItem.title = ""
-        self.navigationController?.pushViewController(txVC, animated: true)
+        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+        passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
+        passwordVC.resultDelegate = self
+        self.navigationController?.pushViewController(passwordVC, animated: false)
+    }
+    
+    func passwordResponse(result: Int) {
+        if (result == PASSWORD_RESUKT_OK) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
+                self.onShowFeeDialog()
+            });
+        }
     }
     
     func onStartDelegate(_ validator_gRPC: Cosmos_Staking_V1beta1_Validator?, _ validator: Validator?) {
@@ -247,6 +391,59 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
             let firstVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainConfig), $0.operatorAddress)
             let seconVal = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(self.chainConfig), $1.operatorAddress)
             return firstVal.compare(seconVal).rawValue > 0 ? true : false
+        }
+    }
+    
+    func getClaimableReward() -> Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward> {
+        let soreted = BaseData.instance.mMyReward_gRPC.sorted {
+            let firstCoin = $0.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first
+            let secondCoin = $1.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first
+            let firstAmount = NSDecimalNumber.init(string: firstCoin?.amount)
+            let secondAmount = NSDecimalNumber.init(string: secondCoin?.amount)
+            return firstAmount.compare(secondAmount).rawValue > 0 ? true : false
+        }
+        var result = Array<Cosmos_Distribution_V1beta1_DelegationDelegatorReward>()
+        soreted.forEach { rawReward in
+            if let stakeCoin = rawReward.reward.filter({ $0.denom == chainConfig?.stakeDenom }).first {
+                let divideDecimal = WUtils.getDenomDecimal(chainConfig, stakeCoin.denom)
+                var rewardAmount = NSDecimalNumber.init(string: stakeCoin.amount)
+                rewardAmount = rewardAmount.multiplying(byPowerOf10: -18).multiplying(byPowerOf10: -divideDecimal)
+                if (rewardAmount.compare(NSDecimalNumber.init(string: "0.01")).rawValue > 0) {
+                    result.append(rawReward)
+                }
+            }
+        }
+        if (result.count > 10) {
+            result = Array(result[0..<10])
+        }
+        return result
+    }
+    
+    var privateKey: Data?
+    var publicKey: Data?
+    func getKey() {
+        DispatchQueue.global().async {
+            if (BaseData.instance.getUsingEnginerMode()) {
+                if (self.account?.account_from_mnemonic == true) {
+                    if let words = KeychainWrapper.standard.string(forKey: self.account!.account_uuid.sha1())?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ") {
+                        self.privateKey = KeyFac.getPrivateRaw(words, self.account!)
+                        self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    }
+                    
+                } else {
+                    if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
+                        self.privateKey = KeyFac.getPrivateFromString(key)
+                        self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                    }
+                }
+                
+            } else {
+                //Speed up for get privatekey with non-enginerMode
+                if let key = KeychainWrapper.standard.string(forKey: self.account!.getPrivateKeySha1()) {
+                    self.privateKey = KeyFac.getPrivateFromString(key)
+                    self.publicKey = KeyFac.getPublicFromPrivateKey(self.privateKey!)
+                }
+            }
         }
     }
 }

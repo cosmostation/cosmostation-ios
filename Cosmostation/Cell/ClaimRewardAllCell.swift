@@ -10,31 +10,20 @@ import UIKit
 
 class ClaimRewardAllCell: UITableViewCell {
     
-    @IBOutlet weak var claimAllBtn: UIButton!
     @IBOutlet weak var totalRewardLabel: UILabel!
     @IBOutlet weak var denomLabel: UILabel!
-    
-    weak var delegate: ClaimRewardAllDelegate?
+    @IBOutlet weak var claimAllCardView: CardView!
+    @IBOutlet weak var compoundingCardView: CardView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        
         self.selectionStyle = .none
-        claimAllBtn.addTarget(self, action: #selector(startHighlight), for: .touchDown)
-        claimAllBtn.addTarget(self, action: #selector(stopHighlight), for: .touchUpInside)
-        claimAllBtn.addTarget(self, action: #selector(stopHighlight), for: .touchUpOutside)
+        self.claimAllCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickReward (_:))))
+        self.compoundingCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickCompound (_:))))
     }
     
-    @objc func startHighlight(sender: UIButton) {
-        claimAllBtn.layer.borderColor = UIColor(named: "_font04")!.cgColor
-    }
-    @objc func stopHighlight(sender: UIButton) {
-        claimAllBtn.layer.borderColor = UIColor(named: "_font05")!.cgColor
-    }
-    @IBAction func onClickClaimAll(_ sender: UIButton) {
-        delegate?.didTapClaimAll(sender)
-    }
+    var actionRewardAll: (() -> Void)? = nil
+    var actionCompunding: (() -> Void)? = nil
     
     func updateView(_ chainConfig: ChainConfig?) {
         let mainDenom = WUtils.getMainDenom(chainConfig)
@@ -42,7 +31,11 @@ class ClaimRewardAllCell: UITableViewCell {
         WDP.dpCoin(chainConfig, mainDenom, rewardSum, denomLabel, totalRewardLabel)
     }
     
-}
-protocol ClaimRewardAllDelegate: class {
-    func didTapClaimAll(_ sender: UIButton)
+    @objc func onClickReward (_ sender: UITapGestureRecognizer) {
+        actionRewardAll?()
+    }
+    
+    @objc func onClickCompound (_ sender: UITapGestureRecognizer) {
+        actionCompunding?()
+    }
 }
