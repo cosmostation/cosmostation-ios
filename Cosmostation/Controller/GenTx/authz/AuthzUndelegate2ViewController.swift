@@ -36,31 +36,13 @@ class AuthzUndelegate2ViewController: BaseViewController, UITextFieldDelegate {
         
         self.grant = pageHolderVC.mGrant
         
-        dpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        let selectedValAddress = pageHolderVC.mTargetValidator_gRPC?.operatorAddress
-        if let delegated = pageHolderVC.mGranterDelegation.filter { $0.delegation.validatorAddress == selectedValAddress }.first {
-            granterUndelegatable = NSDecimalNumber.init(string: delegated.balance.amount)
-        }
-        print("granterUndelegatable1 ", granterUndelegatable)
-        
-        if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
-            let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
-            if (stakeAuth.hasMaxTokens) {
-                let maxAmount = NSDecimalNumber.init(string: stakeAuth.maxTokens.amount)
-                if (maxAmount.compare(granterUndelegatable).rawValue <= 0) {
-                    granterUndelegatable = maxAmount
-                }
-            }
-        }
-        print("granterUndelegatable2 ", granterUndelegatable)
-        WDP.dpCoin(chainConfig, chainConfig!.stakeDenom, granterUndelegatable.stringValue, availableDenomLabel, availableAmountLabel)
-        
         toUndelegateAmountInput.delegate = self
         toUndelegateAmountInput.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         let dp = "+ " + WUtils.decimalNumberToLocaleString(NSDecimalNumber(string: "0.1"), 1)
         btn01.setTitle(dp, for: .normal)
         
+        onUpdateView()
         cancelBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
         btn01.borderColor = UIColor.init(named: "_font05")
@@ -83,8 +65,30 @@ class AuthzUndelegate2ViewController: BaseViewController, UITextFieldDelegate {
     }
     
     override func enableUserInteraction() {
+        self.onUpdateView()
         self.cancelBtn.isUserInteractionEnabled = true
         self.nextBtn.isUserInteractionEnabled = true
+    }
+    
+    func onUpdateView() {
+        dpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+        let selectedValAddress = pageHolderVC.mTargetValidator_gRPC?.operatorAddress
+        if let delegated = pageHolderVC.mGranterDelegation.filter { $0.delegation.validatorAddress == selectedValAddress }.first {
+            granterUndelegatable = NSDecimalNumber.init(string: delegated.balance.amount)
+        }
+        print("granterUndelegatable1 ", granterUndelegatable)
+        
+        if (grant.authorization.typeURL.contains(Cosmos_Staking_V1beta1_StakeAuthorization.protoMessageName)) {
+            let stakeAuth = try! Cosmos_Staking_V1beta1_StakeAuthorization.init(serializedData: grant!.authorization.value)
+            if (stakeAuth.hasMaxTokens) {
+                let maxAmount = NSDecimalNumber.init(string: stakeAuth.maxTokens.amount)
+                if (maxAmount.compare(granterUndelegatable).rawValue <= 0) {
+                    granterUndelegatable = maxAmount
+                }
+            }
+        }
+        print("granterUndelegatable2 ", granterUndelegatable)
+        WDP.dpCoin(chainConfig, chainConfig!.stakeDenom, granterUndelegatable.stringValue, availableDenomLabel, availableAmountLabel)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
