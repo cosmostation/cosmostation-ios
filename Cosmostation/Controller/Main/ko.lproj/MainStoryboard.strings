@@ -150,7 +150,7 @@
 "f1h-kd-UJK.text" = "PHOTON";
 
 /* Class = "UILabel"; text = "FAQ"; ObjectID = "fIr-lJ-P4Q"; */
-"fIr-lJ-P4Q.text" = "도움말";
+"fIr-lJ-P4Q.text" = "코스모스테이션 블로그";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "faY-Ox-ts9"; */
 "faY-Ox-ts9.text" = "-";
@@ -213,7 +213,7 @@
 "vEs-a2-fLM.text" = "My Wallet";
 
 /* Class = "UILabel"; text = "Cosmostation"; ObjectID = "vkk-Df-UXk"; */
-"vkk-Df-UXk.text" = "코스모스테이션";
+"vkk-Df-UXk.text" = "코스모스테이션 홈페이지";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "vle-Ox-Lga"; */
 "vle-Ox-Lga.text" = "-";

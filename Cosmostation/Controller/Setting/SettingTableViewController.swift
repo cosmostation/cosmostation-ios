@@ -132,16 +132,14 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.onShowNotice()
             
             } else if (indexPath.row == 2) {
-                if(Locale.current.languageCode == "ko") {
-                    guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_ko.html") else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else {
-                    guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_en.html") else { return }
-                    self.onShowSafariWeb(url)
-                }
+                guard let url = URL(string: "https://www.cosmostation.io") else { return }
+                self.onShowSafariWeb(url)
             
             } else if (indexPath.row == 3) {
+                guard let url = URL(string: "https://medium.com/@mikeyjhlee") else { return }
+                self.onShowSafariWeb(url)
+            
+            } else if(indexPath.row == 4) {
                 let url = URL(string: "tg://resolve?domain=cosmostation")
                 if(UIApplication.shared.canOpenURL(url!)) {
                     UIApplication.shared.open(url!, options: [:], completionHandler: nil)
@@ -161,10 +159,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     alert.addAction(actionCancel)
                     self.present(alert, animated: true, completion: nil)
                 }
-            
-            } else if(indexPath.row == 4) {
-                guard let url = URL(string: "https://www.cosmostation.io") else { return }
-                self.onShowSafariWeb(url)
                 
             } else if(indexPath.row == 5) {
                 self.onShowStarnameWcDialog()
