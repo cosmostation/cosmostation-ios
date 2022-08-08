@@ -57,7 +57,8 @@ class PasswordViewController: BaseViewController {
                                                    selector: #selector(self.onBioAuth),
                                                    name: Notification.Name("ForeGround"),
                                                    object: nil)
-        } else if (mTarget == PASSWORD_ACTION_INTRO_LOCK || mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
+        } else if (mTarget == PASSWORD_ACTION_INTRO_LOCK || mTarget == PASSWORD_ACTION_DEEPLINK_LOCK ||
+                   mTarget == PASSWORD_ACTION_SIMPLE_CHECK || mTarget == PASSWORD_ACTION_CHECK_TX) {
             self.onBioAuth()
         }
         
@@ -78,7 +79,6 @@ class PasswordViewController: BaseViewController {
             passwordMsgLabel.isHidden = false
             passwordTitleLable.text = NSLocalizedString("password_init1", comment: "")
             
-            
         } else if (mTarget == PASSWORD_ACTION_SIMPLE_CHECK) {
             passwordTitleLable.text = NSLocalizedString("password_check", comment: "")
             
@@ -94,6 +94,8 @@ class PasswordViewController: BaseViewController {
         } else if (mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
             passwordTitleLable.text = NSLocalizedString("insert_password_deeplink", comment: "")
             
+        } else if (mTarget == PASSWORD_ACTION_SETTING_CHECK) {
+            passwordTitleLable.text = NSLocalizedString("password_check", comment: "")
         }
         passwordTitleLable.adjustsFontSizeToFitWidth = true
         
@@ -240,6 +242,10 @@ class PasswordViewController: BaseViewController {
             
         } else if (mTarget == PASSWORD_ACTION_APP_LOCK || mTarget == PASSWORD_ACTION_INTRO_LOCK || mTarget == PASSWORD_ACTION_DEEPLINK_LOCK) {
             self.onStartCheckAppLock(mUserInsert)
+            
+        } else if (mTarget == PASSWORD_ACTION_SETTING_CHECK) {
+            self.onStartCheckPassword(mUserInsert)
+            
         }
         
     }
@@ -272,6 +278,7 @@ class PasswordViewController: BaseViewController {
             }
             DispatchQueue.main.async(execute: {
                 if (result) {
+                    BaseData.instance.setLastPassTime()
                     self.sendResultAndPop(PASSWORD_RESUKT_OK)
                 } else {
                     self.onShowToast(NSLocalizedString("error_invalid_password", comment: ""))
@@ -322,8 +329,10 @@ class PasswordViewController: BaseViewController {
     
     func onUserSuccessUnlock() {
         print("onUserSuccessUnlock")
-        if (mTarget == PASSWORD_ACTION_INTRO_LOCK) {
+        BaseData.instance.setLastPassTime()
+        if (mTarget == PASSWORD_ACTION_INTRO_LOCK || mTarget == PASSWORD_ACTION_SIMPLE_CHECK || mTarget == PASSWORD_ACTION_CHECK_TX) {
             self.sendResultAndPop(PASSWORD_RESUKT_OK)
+            
         } else {
             self.dismiss(animated: true) {
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate

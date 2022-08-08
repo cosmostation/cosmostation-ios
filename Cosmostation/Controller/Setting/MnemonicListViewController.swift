@@ -63,26 +63,42 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func onCheckPassword() {
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.resultDelegate = self
         if (!BaseData.instance.hasPassword()) {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.resultDelegate = self
             passwordVC.mTarget = PASSWORD_ACTION_INIT
-        } else  {
-            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+            
+        } else {
+            if (BaseData.instance.isAutoPass()) {
+                self.onStartMenmonicDetail()
+                
+            } else {
+                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+                self.navigationItem.title = ""
+                self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+                passwordVC.resultDelegate = self
+                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+                self.navigationController?.pushViewController(passwordVC, animated: false)
+                
+            }
         }
-        self.navigationController?.pushViewController(passwordVC, animated: false)
     }
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300), execute: {
-                let mnemonicDetailVC = MnemonicDetailViewController(nibName: "MnemonicDetailViewController", bundle: nil)
-                mnemonicDetailVC.mnemonicId = self.mSelected!
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(mnemonicDetailVC, animated: true)
+                self.onStartMenmonicDetail()
             });
         }
+    }
+    
+    func onStartMenmonicDetail() {
+        let mnemonicDetailVC = MnemonicDetailViewController(nibName: "MnemonicDetailViewController", bundle: nil)
+        mnemonicDetailVC.mnemonicId = self.mSelected!
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(mnemonicDetailVC, animated: true)
     }
 }

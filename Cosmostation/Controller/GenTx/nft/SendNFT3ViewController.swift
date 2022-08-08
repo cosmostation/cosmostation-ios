@@ -52,12 +52,16 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
-        passwordVC.resultDelegate = self
-        self.navigationController?.pushViewController(passwordVC, animated: false)
+        if (BaseData.instance.isAutoPass()) {
+            self.onFetchgRPCAuth(pageHolderVC.mAccount!)
+        } else {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
+            passwordVC.resultDelegate = self
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
     }
     
     func passwordResponse(result: Int) {
@@ -69,18 +73,13 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
     func onFetchgRPCAuth(_ account: Account) {
         self.showWaittingAlert()
         DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
-            
-            let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with {
-                $0.address = account.account_address
-            }
             do {
-                let response = try Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait()
-                self.onBroadcastGrpcTx(response)
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
+                if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.onBroadcastGrpcTx(response)
+                }
+                try channel.close().wait()
             } catch {
                 print("onFetchgRPCAuth failed: \(error)")
             }
@@ -115,20 +114,17 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
                                                              self.chainType!)
                 }
                 
-                let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-                defer { try! group.syncShutdownGracefully() }
-                
-                let channel = BaseNetWork.getConnection(self.chainType!, group)!
-                defer { try! channel.close().wait() }
-                
-                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-                DispatchQueue.main.async(execute: {
-                    if (self.waitAlert != nil) {
-                        self.waitAlert?.dismiss(animated: true, completion: {
-                            self.onStartTxDetailgRPC(response)
-                        })
-                    }
-                });
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    DispatchQueue.main.async(execute: {
+                        if (self.waitAlert != nil) {
+                            self.waitAlert?.dismiss(animated: true, completion: {
+                                self.onStartTxDetailgRPC(response)
+                            })
+                        }
+                    });
+                }
+                try channel.close().wait()
             } catch {
                 print("onBroadcastGrpcTx failed: \(error)")
             }

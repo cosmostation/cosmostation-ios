@@ -966,64 +966,46 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
     
     func scannedAddress(result: String) {
         print("scannedAddress ", result)
+        self.wcURL = result
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
-            if (self.chainType == .BINANCE_MAIN) {
-                if (result.contains("wallet-bridge.binance.org")) {
-                    self.wcURL = result
-                    let wcAlert = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: NSLocalizedString("wc_alert_msg", comment: ""), preferredStyle: .alert)
-                    if #available(iOS 13.0, *) { wcAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
-                    wcAlert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .destructive, handler: nil))
-                    wcAlert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
-                        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-                        self.navigationItem.title = ""
-                        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-                        passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
-                        passwordVC.resultDelegate = self
-                        passwordVC.hidesBottomBarWhenPushed = true
-                        self.navigationController?.pushViewController(passwordVC, animated: false)
-                    }))
-                    self.present(wcAlert, animated: true) {
-                        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
-                        wcAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
-                    }
-                }
-                
-            } else if (self.chainType == .OSMOSIS_MAIN || self.chainType == .KAVA_MAIN || self.chainType == .CRESCENT_MAIN ||
-                       self.chainType == .EVMOS_MAIN || self.chainType == .STATION_TEST) {
-                self.wcURL = result
+            if (BaseData.instance.isAutoPass()) {
+                self.onStartWC()
+            } else {
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
                 self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
                 passwordVC.resultDelegate = self
-                passwordVC.hidesBottomBarWhenPushed = true
+                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
                 self.navigationController?.pushViewController(passwordVC, animated: false)
-                
             }
         })
     }
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
-                if (self.chainType == .BINANCE_MAIN) {
-                    let wcVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "WalletConnectViewController") as! WalletConnectViewController
-                    wcVC.wcURL = self.wcURL!
-                    wcVC.hidesBottomBarWhenPushed = true
-                    self.navigationItem.title = ""
-                    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
-                    self.navigationController?.pushViewController(wcVC, animated: true)
-                    
-                } else if (self.chainType == .OSMOSIS_MAIN || self.chainType == .KAVA_MAIN || self.chainType == .CRESCENT_MAIN ||
-                           self.chainType == .EVMOS_MAIN || self.chainType == .STATION_TEST) {
-                    let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
-                    commonWcVC.wcURL = self.wcURL!
-                    commonWcVC.hidesBottomBarWhenPushed = true
-                    self.navigationItem.title = ""
-                    self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
-                    self.navigationController?.pushViewController(commonWcVC, animated: true)
-                }
-            })
+            self.onStartWC()
         }
+    }
+    
+    func onStartWC() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
+            if (self.chainType == .BINANCE_MAIN) {
+                let wcVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "WalletConnectViewController") as! WalletConnectViewController
+                wcVC.wcURL = self.wcURL!
+                wcVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+                self.navigationController?.pushViewController(wcVC, animated: true)
+                
+            } else if (self.chainType == .OSMOSIS_MAIN || self.chainType == .KAVA_MAIN || self.chainType == .CRESCENT_MAIN ||
+                       self.chainType == .EVMOS_MAIN || self.chainType == .STATION_TEST) {
+                let commonWcVC = CommonWCViewController(nibName: "CommonWCViewController", bundle: nil)
+                commonWcVC.wcURL = self.wcURL!
+                commonWcVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+                self.navigationController?.pushViewController(commonWcVC, animated: true)
+            }
+        })
     }
 }

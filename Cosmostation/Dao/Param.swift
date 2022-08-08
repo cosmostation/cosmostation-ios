@@ -103,7 +103,7 @@ public struct Param {
             return inflation.multiplying(by: calTax).multiplying(by: stakingDistribution).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             
         } else if (chain == .STARGAZE_MAIN) {
-            let reductionFactor = NSDecimalNumber.one.subtracting(NSDecimalNumber.init(string: params?.stargaze_minting_params?.params?.reduction_factor))
+            let reductionFactor = NSDecimalNumber.one.subtracting(params?.stargaze_alloc_params?.getReduction() ?? NSDecimalNumber.zero)
             return inflation.multiplying(by: calTax).multiplying(by: reductionFactor).dividing(by: bondingRate, withBehavior: WUtils.handler6)
             
         } else if (chain == .EVMOS_MAIN) {
@@ -233,6 +233,7 @@ public struct Params {
     var rison_swap_enabled: Bool?
     
     var stargaze_minting_params: StargazeMintingParam?
+    var stargaze_alloc_params: StargazeAllocParam?
     
     var evmos_inflation_params: EvmosInflationParam?
     var evmos_minting_epoch_provisions: String?
@@ -339,6 +340,9 @@ public struct Params {
         
         if let rawStargazeMintingParam = dictionary?["stargaze_minting_params"] as? NSDictionary {
             self.stargaze_minting_params = StargazeMintingParam.init(rawStargazeMintingParam)
+        }
+        if let rawStargazeAllocParam = dictionary?["stargaze_alloc_params"] as? NSDictionary {
+            self.stargaze_alloc_params = StargazeAllocParam.init(rawStargazeAllocParam)
         }
         
         if let rawEvmosInflationParam = dictionary?["inflation_params"] as? NSDictionary {
@@ -817,6 +821,50 @@ public struct StargazeMintingParam {
         }
     }
 }
+
+public struct StargazeAllocParam {
+    var params: Params?
+    
+    init(_ dictionary: NSDictionary?) {
+        if let rawParams = dictionary?["params"] as? NSDictionary {
+            self.params = Params.init(rawParams)
+        }
+    }
+    
+    func getReduction() -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        result = result.adding(params?.distribution_proportions?.nft_incentives ?? NSDecimalNumber.zero)
+        result = result.adding(params?.distribution_proportions?.developer_rewards ?? NSDecimalNumber.zero)
+        return result
+    }
+    
+    public struct Params {
+        var distribution_proportions: DistributionProportions?
+        
+        init(_ dictionary: NSDictionary?) {
+            if let rawDistributionProportions = dictionary?["distribution_proportions"] as? NSDictionary {
+                self.distribution_proportions = DistributionProportions.init(rawDistributionProportions)
+            }
+        }
+    }
+    
+    public struct DistributionProportions {
+        var nft_incentives: NSDecimalNumber?
+        var developer_rewards: NSDecimalNumber?
+        
+        init(_ dictionary: NSDictionary?) {
+            if let incentives = dictionary?["nft_incentives"] as? String {
+                self.nft_incentives = NSDecimalNumber.init(string: incentives)
+            }
+            if let rewards = dictionary?["developer_rewards"] as? String {
+                self.developer_rewards = NSDecimalNumber.init(string: rewards)
+            }
+        }
+    }
+}
+
+
+
 
 public struct EvmosInflationParam {
     var params: Params?

@@ -22,6 +22,8 @@ let KEY_CURRENCY                        = "KEY_CURRENCY"
 let KEY_THEME                           = "KEY_THEME"
 let KEY_USING_APP_LOCK                  = "KEY_USING_APP_LOCK"
 let KEY_USING_BIO_AUTH                  = "KEY_USING_BIO_AUTH"
+let KEY_AUTO_PASS                       = "KEY_AUTO_PASS"
+let KEY_LAST_PASS_TIME                  = "KEY_LAST_PASS_TIME"
 let KEY_ENGINER_MODE                    = "KEY_ENGINER_MODE"
 let KEY_FCM_TOKEN                       = "KEY_FCM_TOKEN"
 let KEY_KAVA_TESTNET_WARN               = "KEY_KAVA_TESTNET_WARN"
@@ -205,6 +207,7 @@ let PASSWORD_ACTION_CHECK_TX                = "ACTION_CHECK_TX"
 let PASSWORD_ACTION_APP_LOCK                = "ACTION_APP_LOCK"
 let PASSWORD_ACTION_INTRO_LOCK              = "ACTION_INTRO_LOCK"
 let PASSWORD_ACTION_DEEPLINK_LOCK           = "ACTION_DEEPLINK_LOCK"
+let PASSWORD_ACTION_SETTING_CHECK           = "ACTION_SETTING_CHECK"
 
 
 let PASSWORD_RESUKT_OK                      = 0

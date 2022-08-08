@@ -173,12 +173,29 @@ class HtlcSend3ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         if (result == 1) {
             self.btnBack.isUserInteractionEnabled = false
             self.btnConfirm.isUserInteractionEnabled = false
-            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-            self.navigationItem.title = ""
-            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
-            passwordVC.resultDelegate = self
-            self.navigationController?.pushViewController(passwordVC, animated: false)
+            if (BaseData.instance.isAutoPass()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(610), execute: {
+                    let htlcDetailVC = HtlcResultViewController(nibName: "HtlcResultViewController", bundle: nil)
+                    self.navigationItem.title = ""
+                    htlcDetailVC.mHtlcDenom = self.pageHolderVC.mHtlcDenom
+                    htlcDetailVC.mHtlcToSendAmount = self.pageHolderVC.mToSendAmount
+                    htlcDetailVC.mHtlcToChain = self.pageHolderVC.mHtlcToChain
+                    htlcDetailVC.mHtlcToAccount = self.pageHolderVC.mHtlcToAccount
+                    htlcDetailVC.mHtlcSendFee = self.pageHolderVC.mHtlcSendFee
+                    htlcDetailVC.mHtlcClaimFee = self.pageHolderVC.mHtlcClaimFee
+                    self.navigationController?.pushViewController(htlcDetailVC, animated: true)
+                    self.btnBack.isUserInteractionEnabled = true
+                    self.btnConfirm.isUserInteractionEnabled = true
+                })
+                
+            } else {
+                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+                self.navigationItem.title = ""
+                self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+                passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
+                passwordVC.resultDelegate = self
+                self.navigationController?.pushViewController(passwordVC, animated: false)
+            }
         }
     }
     

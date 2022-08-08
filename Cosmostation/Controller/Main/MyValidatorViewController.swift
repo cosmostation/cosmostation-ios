@@ -243,25 +243,36 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let authReq = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = self.account!.account_address }
-                if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    let simulReq = Signer.genSimulateCompounding(authRes, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
-                    if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                        feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
-                        if (self.chainType != .SIF_MAIN) {
-                            let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
-                            feeCoin = Coin.init(feeData.denom!, amount.stringValue)
-                        }
-                        fee = Fee.init(feeGasAmount.stringValue, [feeCoin])
-                        let txReq = Signer.genSignedCompounding(authRes, self.getClaimableReward(), fee, "",  self.privateKey!, self.publicKey!, self.chainType!)
-                        if let txRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(txReq).response.wait() {
-                            DispatchQueue.main.async(execute: {
-                                if (self.waitAlert != nil) {
-                                    self.waitAlert?.dismiss(animated: true, completion: {
-                                        self.onStartTxDetailgRPC(txRes)
-                                    })
+                let rewardAddressReq = Cosmos_Distribution_V1beta1_QueryDelegatorWithdrawAddressRequest.with { $0.delegatorAddress = self.account!.account_address }
+                if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegatorWithdrawAddress(rewardAddressReq).response.wait() {
+                    if (response.withdrawAddress.replacingOccurrences(of: "\"", with: "") == self.account!.account_address) {
+                        let authReq = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = self.account!.account_address }
+                        if let authRes = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(authReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                            let simulReq = Signer.genSimulateCompounding(authRes, self.getClaimableReward(), fee, "", self.privateKey!, self.publicKey!, self.chainType!)
+                            if let simulRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).simulate(simulReq, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                                feeGasAmount = NSDecimalNumber.init(value: simulRes.gasInfo.gasUsed).multiplying(by: NSDecimalNumber.init(value: 1.1), withBehavior: WUtils.handler0Up)
+                                if (self.chainType != .SIF_MAIN) {
+                                    let amount = (feeData.gasRate)!.multiplying(by: feeGasAmount, withBehavior: WUtils.handler0Up)
+                                    feeCoin = Coin.init(feeData.denom!, amount.stringValue)
                                 }
-                            });
+                                fee = Fee.init(feeGasAmount.stringValue, [feeCoin])
+                                let txReq = Signer.genSignedCompounding(authRes, self.getClaimableReward(), fee, "",  self.privateKey!, self.publicKey!, self.chainType!)
+                                if let txRes = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(txReq).response.wait() {
+                                    DispatchQueue.main.async(execute: {
+                                        if (self.waitAlert != nil) {
+                                            self.waitAlert?.dismiss(animated: true, completion: {
+                                                self.onStartTxDetailgRPC(txRes)
+                                            })
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    } else {
+                        if (self.waitAlert != nil) {
+                            self.waitAlert?.dismiss(animated: true, completion: {
+                                self.onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
+                            })
                         }
                     }
                 }
@@ -303,12 +314,17 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func onStartPinCode() {
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
-        passwordVC.resultDelegate = self
-        self.navigationController?.pushViewController(passwordVC, animated: false)
+        if (BaseData.instance.isAutoPass()) {
+            self.onShowFeeDialog()
+            
+        } else {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
+            passwordVC.resultDelegate = self
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
     }
     
     func passwordResponse(result: Int) {

@@ -12,6 +12,10 @@ import Toast_Swift
 import LocalAuthentication
 
 class SettingTableViewController: UITableViewController, PasswordViewDelegate, QrScannerDelegate {
+    
+    let CHECK_NONE:Int = -1
+    let CHECK_FOR_APP_LOCK:Int = 1
+    let CHECK_FOR_AUTO_PASS:Int = 2
 
     var mAccount: Account!
     var chainType: ChainType!
@@ -20,13 +24,14 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var currecyLabel: UILabel!
     @IBOutlet weak var themeLabel: UILabel!
-    @IBOutlet weak var marketLabel: UILabel!
     @IBOutlet weak var appLockSwitch: UISwitch!
     @IBOutlet weak var bioTypeLabel: UILabel!
     @IBOutlet weak var bioSwitch: UISwitch!
+    @IBOutlet weak var autoPassLabel: UILabel!
     @IBOutlet weak var explorerLabel: UILabel!
     @IBOutlet weak var enginerModeSwitch: UISwitch!
     var hideBio = false
+    var checkMode = -1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +45,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             self.versionLabel.text = "v " + appVersion
         }
         self.onUpdateTheme()
+        self.onUpdateAutoPass()
         self.onUpdateCurrency()
-        self.onUpdateMarket()
         
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -72,7 +76,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 }
             }
         }
-        self.checkBioAuth()
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -114,6 +117,9 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.onShowThemeDialog()
                 
             } else if (indexPath.row == 3) {
+                self.onClickAutoPass()
+                
+            } else if (indexPath.row == 4) {
                 self.onShowCurrenyDialog()
             }
             
@@ -126,16 +132,14 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.onShowNotice()
             
             } else if (indexPath.row == 2) {
-                if(Locale.current.languageCode == "ko") {
-                    guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_ko.html") else { return }
-                    self.onShowSafariWeb(url)
-                    
-                } else {
-                    guard let url = URL(string: "https://guide.cosmostation.io/app_wallet_en.html") else { return }
-                    self.onShowSafariWeb(url)
-                }
+                guard let url = URL(string: "https://www.cosmostation.io") else { return }
+                self.onShowSafariWeb(url)
             
             } else if (indexPath.row == 3) {
+                guard let url = URL(string: "https://medium.com/@mikeyjhlee") else { return }
+                self.onShowSafariWeb(url)
+            
+            } else if(indexPath.row == 4) {
                 let url = URL(string: "tg://resolve?domain=cosmostation")
                 if(UIApplication.shared.canOpenURL(url!)) {
                     UIApplication.shared.open(url!, options: [:], completionHandler: nil)
@@ -155,10 +159,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                     alert.addAction(actionCancel)
                     self.present(alert, animated: true, completion: nil)
                 }
-            
-            } else if(indexPath.row == 4) {
-                guard let url = URL(string: "https://www.cosmostation.io") else { return }
-                self.onShowSafariWeb(url)
                 
             } else if(indexPath.row == 5) {
                 self.onShowStarnameWcDialog()
@@ -188,27 +188,16 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.section == 1 && indexPath.row == 2) {
-            if hideBio {
-                return 0
-            } else {
-                return 50
-            }
-        }
-        return super.tableView(tableView, heightForRowAt: indexPath)
-    }
-    
     func onUpdateTheme() {
         themeLabel.text = BaseData.instance.getThemeString()
     }
     
-    func onUpdateCurrency() {
-        currecyLabel.text = BaseData.instance.getCurrencyString()
+    func onUpdateAutoPass() {
+        autoPassLabel.text = BaseData.instance.getAutoPassString()
     }
     
-    func onUpdateMarket() {
-        marketLabel.text = "CoinGecko"
+    func onUpdateCurrency() {
+        currecyLabel.text = BaseData.instance.getCurrencyString()
     }
     
     
@@ -221,6 +210,72 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     func onShowNotice() {
         guard let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainConfig))") else { return }
         self.onShowSafariWeb(url)
+    }
+    
+    
+    func onClickAutoPass() {
+        if (BaseData.instance.hasPassword()) {
+            self.checkMode = self.CHECK_FOR_AUTO_PASS
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_SETTING_CHECK
+            passwordVC.resultDelegate = self
+            passwordVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+
+        } else {
+            self.checkMode = self.CHECK_FOR_AUTO_PASS
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_INIT
+            passwordVC.resultDelegate = self
+            passwordVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
+    }
+    
+    func onShowAutoPassDialog() {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.left
+        let attributedMessage: NSMutableAttributedString = NSMutableAttributedString(
+            string: NSLocalizedString("autopass_msg", comment: ""),
+            attributes: [
+                NSAttributedString.Key.paragraphStyle: paragraphStyle,
+                NSAttributedString.Key.font: UIFont.preferredFont(forTextStyle: UIFont.TextStyle.footnote)
+            ]
+        )
+        let showAlert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
+        showAlert.setValue(attributedMessage, forKey: "attributedMessage")
+        if #available(iOS 13.0, *) { showAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        let autopass0Action = UIAlertAction(title: NSLocalizedString("autopass_5min", comment: ""), style: .default, handler: { _ in
+            self.onSetAutoPass(1)
+        })
+        let autopass1Action = UIAlertAction(title: NSLocalizedString("autopass_10min", comment: ""), style: .default, handler: { _ in
+            self.onSetAutoPass(2)
+        })
+        let autopass2Action = UIAlertAction(title: NSLocalizedString("autopass_30min", comment: ""), style: .default, handler: { _ in
+            self.onSetAutoPass(3)
+        })
+        let autopass3Action = UIAlertAction(title: NSLocalizedString("autopass_none", comment: ""), style: .cancel, handler: { _ in
+            self.onSetAutoPass(0)
+        })
+        showAlert.addAction(autopass0Action)
+        showAlert.addAction(autopass1Action)
+        showAlert.addAction(autopass2Action)
+        showAlert.addAction(autopass3Action)
+        self.present(showAlert, animated: true) {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
+            showAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    func onSetAutoPass(_ value:Int) {
+        if (BaseData.instance.getAutoPass() != value) {
+            BaseData.instance.setAutoPass(value)
+            self.onUpdateAutoPass()
+        }
     }
     
     func onShowCurrenyDialog() {
@@ -344,19 +399,20 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     @IBAction func appLockToggle(_ sender: UISwitch) {
         if (BaseData.instance.hasPassword()) {
-            if(sender.isOn) {
+            if (sender.isOn) {
                 BaseData.instance.setUsingAppLock(sender.isOn)
-                self.checkBioAuth()
             } else {
+                self.checkMode = self.CHECK_FOR_APP_LOCK
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
                 self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+                passwordVC.mTarget = PASSWORD_ACTION_SETTING_CHECK
                 passwordVC.resultDelegate = self
                 passwordVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(passwordVC, animated: false)
             }
         } else {
+            self.checkMode = self.CHECK_FOR_APP_LOCK
             let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
@@ -380,23 +436,22 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         }
     }
     
-    func checkBioAuth() {
-        if(bioTypeLabel.text!.count > 0 && BaseData.instance.getUsingAppLock()) {
-            self.hideBio = false
-        } else {
-            self.hideBio = true
-        }
-        self.tableView.reloadData()
-    }
-    
     @objc func dismissAlertController() {
         self.dismiss(animated: true, completion: nil)
     }
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            BaseData.instance.setUsingAppLock(false)
+            if (self.checkMode == self.CHECK_FOR_APP_LOCK) {
+                BaseData.instance.setUsingAppLock(false)
+                
+            } else if (self.checkMode == self.CHECK_FOR_AUTO_PASS) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
+                    self.onShowAutoPassDialog()
+                });
+            }
         }
+        self.checkMode = self.CHECK_NONE
     }
     
     func onShowSafariWeb(_ url: URL) {

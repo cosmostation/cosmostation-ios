@@ -241,22 +241,30 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         }
         
         self.option = 1
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
-        passwordVC.resultDelegate = self
-        self.navigationController?.pushViewController(passwordVC, animated: false)
+        if (BaseData.instance.isAutoPass()) {
+            self.onStartCheckVc()
+        } else {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.resultDelegate = self
+            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
     }
     
     @IBAction func onClickCheckPrivateKey(_ sender: UIButton) {
         self.option = 2
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
-        passwordVC.resultDelegate = self
-        self.navigationController?.pushViewController(passwordVC, animated: false)
+        if (BaseData.instance.isAutoPass()) {
+            self.onStartCheckVc()
+        } else {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.resultDelegate = self
+            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
     }
     
     @IBAction func onClickImportMenmonic(_ sender: UIButton) {
@@ -308,19 +316,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
-                if (self.option == 1) {
-                    let mnemonicDetailVC = MnemonicDetailViewController(nibName: "MnemonicDetailViewController", bundle: nil)
-                    mnemonicDetailVC.mnemonicId = self.selectedAccount.account_mnemonic_id
-                    self.navigationItem.title = ""
-                    self.navigationController?.pushViewController(mnemonicDetailVC, animated: true)
-                    
-                } else if (self.option == 2) {
-                    let walletCheckPkeyVC = WalletCheckPKeyViewController(nibName: "WalletCheckPKeyViewController", bundle: nil)
-                    walletCheckPkeyVC.hidesBottomBarWhenPushed = true
-                    walletCheckPkeyVC.selectedAccount = self.selectedAccount
-                    self.navigationItem.title = ""
-                    self.navigationController?.pushViewController(walletCheckPkeyVC, animated: true)
-                }
+                self.onStartCheckVc()
             })
             
         } else if (result == PASSWORD_RESUKT_OK_FOR_DELETE) {
@@ -335,6 +331,22 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                     });
                 }
             })
+        }
+    }
+    
+    func onStartCheckVc() {
+        if (self.option == 1) {
+            let mnemonicDetailVC = MnemonicDetailViewController(nibName: "MnemonicDetailViewController", bundle: nil)
+            mnemonicDetailVC.mnemonicId = self.selectedAccount.account_mnemonic_id
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(mnemonicDetailVC, animated: true)
+            
+        } else if (self.option == 2) {
+            let walletCheckPkeyVC = WalletCheckPKeyViewController(nibName: "WalletCheckPKeyViewController", bundle: nil)
+            walletCheckPkeyVC.hidesBottomBarWhenPushed = true
+            walletCheckPkeyVC.selectedAccount = self.selectedAccount
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(walletCheckPkeyVC, animated: true)
         }
     }
     
