@@ -143,6 +143,8 @@ class ChainFactory {
             return .STARGAZE_MAIN
         case CHAIN_IOV_S:
             return .IOV_MAIN
+        case CHAIN_TGRADE_S:
+            return .TGRADE_MAIN
         case CHAIN_UMEE_S:
             return .UMEE_MAIN
             
@@ -239,6 +241,8 @@ class ChainFactory {
             return ChainStargaze(chainType!)
         case .IOV_MAIN:
             return ChainStarname(chainType!)
+        case .TGRADE_MAIN:
+            return ChainTgrade(chainType!)
         case .UMEE_MAIN:
             return ChainUmee(chainType!)
             
@@ -320,6 +324,7 @@ let CHAIN_SENTINEL_S = "SUPPORT_CHAIN_SENTINEL_MAIN"
 let CHAIN_SIF_S = "SUPPORT_CHAIN_SIF_MAIN"
 let CHAIN_STARGAZE_S = "SUPPORT_CHAIN_STARGAZE"
 let CHAIN_IOV_S = "SUPPORT_CHAIN_IOV_MAIN"
+let CHAIN_TGRADE_S = "SUPPORT_CHAIN_TGRADE"
 let CHAIN_UMEE_S = "SUPPORT_CHAIN_UMEE"
 
 let CHAIN_STATION_TEST_S = "SUPPORT_CHAIN_STATION_TEST"

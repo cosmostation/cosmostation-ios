@@ -346,6 +346,17 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchKavaIncentiveParam()
             self.onFetchKavaIncentiveReward(mAccount.account_address)
             
+        } else if (mChainType == .TGRADE_MAIN) {
+            self.mFetchCnt = 7
+            self.onFetchgRPCNodeInfo()
+            self.onFetchgRPCAuth(self.mAccount.account_address)
+            self.onFetchgRPCBondedValidators(0)
+            
+            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
+            self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
+            self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
+            self.onFetchgRPCRewards(self.mAccount.account_address, 0)
+            
         } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.ALTHEA_TEST || self.mChainType == ChainType.CRESCENT_TEST || self.mChainType == ChainType.STATION_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
@@ -366,26 +377,55 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     func onFetchFinished() {
         self.mFetchCnt = self.mFetchCnt - 1
         if (mFetchCnt > 0) { return }
+        
         if (WUtils.isGRPC(mChainType!)) {
-            BaseData.instance.mAllValidators_gRPC.append(contentsOf: BaseData.instance.mBondedValidators_gRPC)
-            BaseData.instance.mAllValidators_gRPC.append(contentsOf: BaseData.instance.mUnbondValidators_gRPC)
-            for validator in BaseData.instance.mAllValidators_gRPC {
-                var mine = false;
-                for delegation in BaseData.instance.mMyDelegations_gRPC {
-                    if (delegation.delegation.validatorAddress == validator.operatorAddress) {
-                        mine = true;
-                        break;
+            if (self.mChainType == .TGRADE_MAIN) {
+                for validator in BaseData.instance.mAllValidators_gRPC {
+                    var mine = false;
+                    for delegation in BaseData.instance.mMyDelegations_gRPC {
+                        if (delegation.delegation.validatorAddress == validator.operatorAddress) {
+                            mine = true;
+                            break;
+                        }
+                    }
+                    for unbonding in BaseData.instance.mMyUnbondings_gRPC {
+                        if (unbonding.validatorAddress == validator.operatorAddress) {
+                            mine = true;
+                            break;
+                        }
+                    }
+                    if (mine) {
+                        BaseData.instance.mMyValidators_gRPC.append(validator)
+                    }
+                    if (validator.status == Cosmos_Staking_V1beta1_BondStatus.bonded) {
+                        BaseData.instance.mBondedValidators_gRPC.append(validator)
+                    } else {
+                        BaseData.instance.mUnbondValidators_gRPC.append(validator)
                     }
                 }
-                for unbonding in BaseData.instance.mMyUnbondings_gRPC {
-                    if (unbonding.validatorAddress == validator.operatorAddress) {
-                        mine = true;
-                        break;
+                
+            } else {
+                BaseData.instance.mAllValidators_gRPC.append(contentsOf: BaseData.instance.mBondedValidators_gRPC)
+                BaseData.instance.mAllValidators_gRPC.append(contentsOf: BaseData.instance.mUnbondValidators_gRPC)
+                for validator in BaseData.instance.mAllValidators_gRPC {
+                    var mine = false;
+                    for delegation in BaseData.instance.mMyDelegations_gRPC {
+                        if (delegation.delegation.validatorAddress == validator.operatorAddress) {
+                            mine = true;
+                            break;
+                        }
+                    }
+                    for unbonding in BaseData.instance.mMyUnbondings_gRPC {
+                        if (unbonding.validatorAddress == validator.operatorAddress) {
+                            mine = true;
+                            break;
+                        }
+                    }
+                    if (mine) {
+                        BaseData.instance.mMyValidators_gRPC.append(validator)
                     }
                 }
-                if (mine) {
-                    BaseData.instance.mMyValidators_gRPC.append(validator)
-                }
+                
             }
             
             print("BaseData.instance.mAllValidators_gRPC ", BaseData.instance.mAllValidators_gRPC.count)
@@ -738,6 +778,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("Auth response ", response)
                     BaseData.instance.mAccount_gRPC = response.account
                 }
                 try channel.close().wait()
@@ -754,10 +795,20 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             do {
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 300 }
-                let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_BONDED" }
-                if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).validators(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    response.validators.forEach { validator in
-                        BaseData.instance.mBondedValidators_gRPC.append(validator)
+                if (self.mChainType == .TGRADE_MAIN) {
+                    let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page}
+                    if let response = try? Confio_Poe_V1beta1_QueryClient(channel: channel).validators(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        response.validators.forEach { validator in
+                            BaseData.instance.mAllValidators_gRPC.append(validator)
+                        }
+                    }
+                    
+                } else {
+                    let req = Cosmos_Staking_V1beta1_QueryValidatorsRequest.with { $0.pagination = page; $0.status = "BOND_STATUS_BONDED" }
+                    if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).validators(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                        response.validators.forEach { validator in
+                            BaseData.instance.mBondedValidators_gRPC.append(validator)
+                        }
                     }
                 }
                 try channel.close().wait()
@@ -816,6 +867,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("Balance response ", response)
                     response.balances.forEach { balance in
                         if (NSDecimalNumber.init(string: balance.amount) != NSDecimalNumber.zero) {
                             BaseData.instance.mMyBalances_gRPC.append(Coin.init(balance.denom, balance.amount))
@@ -841,6 +893,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("Delegations response ", response)
                     response.delegationResponses.forEach { delegationResponse in
                         BaseData.instance.mMyDelegations_gRPC.append(delegationResponse)
                     }
@@ -860,6 +913,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("Undelegations response ", response)
                     response.unbondingResponses.forEach { unbondingResponse in
                         BaseData.instance.mMyUnbondings_gRPC.append(unbondingResponse)
                     }
@@ -879,6 +933,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    print("Rewards response ", response)
                     response.rewards.forEach { reward in
                         BaseData.instance.mMyReward_gRPC.append(reward)
                     }

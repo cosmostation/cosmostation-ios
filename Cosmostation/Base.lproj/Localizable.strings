@@ -183,8 +183,6 @@
 "send_guide_msg_evmos" = "A Cosmos SDK based IBC & EVM-compatible(Ethereum Virtual Machine) blockchain.";
 "send_guide_title_provenance" = "PROVENANCE";
 "send_guide_msg_provenance" = "Provenance is a Tendermint-based blockchain network utilized by $HASH, designed to support financial service industry.";
-"send_guide_title_cudos" = "CUDOS";
-"send_guide_msg_cudos" = "Cudos aims to build a high-performance, sustainable and decentralized cloud computing network.";
 "send_guide_title_cerberus" = "CERBERUS";
 "send_guide_msg_cerberus" = "Cerberus is a community-led tri-headed dog meme coin in Cosmos ecosystem.";
 "send_guide_title_omniflix" = "OMNIFLIX";
@@ -197,6 +195,8 @@
 "send_guide_msg_nyx" = "Nyx is a decentralized and incentivized infrastructure providing next generation privacy infrastructure.";
 "send_guide_title_cudos" = "CUDOS";
 "send_guide_msg_cudos" = "Cudos aims to build a high-performance, sustainable and decentralized cloud computing network.";
+"send_guide_title_tgrade" = "TGRADE";
+"send_guide_msg_tgrade" = "Tgrade offers institutions a regulated DeFi platform with various self-sovereign governance frameworks.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
