@@ -12,6 +12,10 @@ import Toast_Swift
 import LocalAuthentication
 
 class SettingTableViewController: UITableViewController, PasswordViewDelegate, QrScannerDelegate {
+    
+    let CHECK_NONE:Int = -1
+    let CHECK_FOR_APP_LOCK:Int = 1
+    let CHECK_FOR_AUTO_PASS:Int = 2
 
     var mAccount: Account!
     var chainType: ChainType!
@@ -27,6 +31,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var explorerLabel: UILabel!
     @IBOutlet weak var enginerModeSwitch: UISwitch!
     var hideBio = false
+    var checkMode = -1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
@@ -111,7 +117,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.onShowThemeDialog()
                 
             } else if (indexPath.row == 3) {
-                self.onShowAutoPassDialog()
+                self.onClickAutoPass()
                 
             } else if (indexPath.row == 4) {
                 self.onShowCurrenyDialog()
@@ -210,6 +216,30 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     func onShowNotice() {
         guard let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainConfig))") else { return }
         self.onShowSafariWeb(url)
+    }
+    
+    
+    func onClickAutoPass() {
+        if (BaseData.instance.hasPassword()) {
+            self.checkMode = self.CHECK_FOR_AUTO_PASS
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+            passwordVC.resultDelegate = self
+            passwordVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+
+        } else {
+            self.checkMode = self.CHECK_FOR_AUTO_PASS
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_INIT
+            passwordVC.resultDelegate = self
+            passwordVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
     }
     
     func onShowAutoPassDialog() {
@@ -378,6 +408,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             if (sender.isOn) {
                 BaseData.instance.setUsingAppLock(sender.isOn)
             } else {
+                self.checkMode = self.CHECK_FOR_APP_LOCK
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
                 self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
@@ -387,6 +418,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.navigationController?.pushViewController(passwordVC, animated: false)
             }
         } else {
+            self.checkMode = self.CHECK_FOR_APP_LOCK
             let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
@@ -416,8 +448,16 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            BaseData.instance.setUsingAppLock(false)
+            if (self.checkMode == self.CHECK_FOR_APP_LOCK) {
+                BaseData.instance.setUsingAppLock(false)
+                
+            } else if (self.checkMode == self.CHECK_FOR_AUTO_PASS) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(310), execute: {
+                    self.onShowAutoPassDialog()
+                });
+            }
         }
+        self.checkMode = self.CHECK_NONE
     }
     
     func onShowSafariWeb(_ url: URL) {
