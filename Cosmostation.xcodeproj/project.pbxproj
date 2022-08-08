@@ -943,6 +943,34 @@
 		04DEAF48286476BE00F23233 /* HtlcSend3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DEAF45286476BE00F23233 /* HtlcSend3ViewController.swift */; };
 		04DEAF49286476BE00F23233 /* HtlcSend3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DEAF46286476BE00F23233 /* HtlcSend3ViewController.xib */; };
 		04DEAF4A286476BE00F23233 /* HtlcSend3ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DEAF46286476BE00F23233 /* HtlcSend3ViewController.xib */; };
+		04E1659528A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658C28A0F49A000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift */; };
+		04E1659628A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658C28A0F49A000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift */; };
+		04E1659728A0F49B000F12C0 /* confio_globalfee_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658D28A0F49A000F12C0 /* confio_globalfee_v1beta1_query.pb.swift */; };
+		04E1659828A0F49B000F12C0 /* confio_globalfee_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658D28A0F49A000F12C0 /* confio_globalfee_v1beta1_query.pb.swift */; };
+		04E1659928A0F49B000F12C0 /* confio_poe_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658E28A0F49A000F12C0 /* confio_poe_v1beta1_query.grpc.swift */; };
+		04E1659A28A0F49B000F12C0 /* confio_poe_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658E28A0F49A000F12C0 /* confio_poe_v1beta1_query.grpc.swift */; };
+		04E1659B28A0F49B000F12C0 /* confio_poe_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658F28A0F49A000F12C0 /* confio_poe_v1beta1_tx.pb.swift */; };
+		04E1659C28A0F49B000F12C0 /* confio_poe_v1beta1_tx.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1658F28A0F49A000F12C0 /* confio_poe_v1beta1_tx.pb.swift */; };
+		04E1659D28A0F49B000F12C0 /* confio_poe_v1beta1_poe.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659028A0F49A000F12C0 /* confio_poe_v1beta1_poe.pb.swift */; };
+		04E1659E28A0F49B000F12C0 /* confio_poe_v1beta1_poe.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659028A0F49A000F12C0 /* confio_poe_v1beta1_poe.pb.swift */; };
+		04E1659F28A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659128A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift */; };
+		04E165A028A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659128A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift */; };
+		04E165A128A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift */; };
+		04E165A228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift */; };
+		04E165A328A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659328A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift */; };
+		04E165A428A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659328A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift */; };
+		04E165A528A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659428A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift */; };
+		04E165A628A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1659428A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift */; };
+		04E165AC28A0F4A4000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165A728A0F4A3000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift */; };
+		04E165AD28A0F4A4000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165A728A0F4A3000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift */; };
+		04E165AE28A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165A828A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift */; };
+		04E165AF28A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165A828A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift */; };
+		04E165B028A0F4A4000F12C0 /* confio_twasm_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165A928A0F4A4000F12C0 /* confio_twasm_v1beta1_query.pb.swift */; };
+		04E165B128A0F4A4000F12C0 /* confio_twasm_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165A928A0F4A4000F12C0 /* confio_twasm_v1beta1_query.pb.swift */; };
+		04E165B228A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165AA28A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift */; };
+		04E165B328A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165AA28A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift */; };
+		04E165B428A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165AB28A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift */; };
+		04E165B528A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165AB28A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift */; };
 		04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
 		04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
 		04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2C276F23D9009B39BA /* xmas@2x.png */; };
@@ -3553,6 +3581,20 @@
 		04DEAF40286476AF00F23233 /* HtlcSend2ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HtlcSend2ViewController.xib; sourceTree = "<group>"; };
 		04DEAF45286476BE00F23233 /* HtlcSend3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtlcSend3ViewController.swift; sourceTree = "<group>"; };
 		04DEAF46286476BE00F23233 /* HtlcSend3ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HtlcSend3ViewController.xib; sourceTree = "<group>"; };
+		04E1658C28A0F49A000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_globalfee_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		04E1658D28A0F49A000F12C0 /* confio_globalfee_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_globalfee_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		04E1658E28A0F49A000F12C0 /* confio_poe_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_poe_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		04E1658F28A0F49A000F12C0 /* confio_poe_v1beta1_tx.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_poe_v1beta1_tx.pb.swift; sourceTree = "<group>"; };
+		04E1659028A0F49A000F12C0 /* confio_poe_v1beta1_poe.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_poe_v1beta1_poe.pb.swift; sourceTree = "<group>"; };
+		04E1659128A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_poe_v1beta1_tx.grpc.swift; sourceTree = "<group>"; };
+		04E1659228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_globalfee_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		04E1659328A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_poe_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		04E1659428A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_poe_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		04E165A728A0F4A3000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_twasm_v1beta1_contract_extension.pb.swift; sourceTree = "<group>"; };
+		04E165A828A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_twasm_v1beta1_query.grpc.swift; sourceTree = "<group>"; };
+		04E165A928A0F4A4000F12C0 /* confio_twasm_v1beta1_query.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_twasm_v1beta1_query.pb.swift; sourceTree = "<group>"; };
+		04E165AA28A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_twasm_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
+		04E165AB28A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_twasm_v1beta1_proposal.pb.swift; sourceTree = "<group>"; };
 		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
 		04E25D2B276F23D9009B39BA /* new2022@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@3x.png"; sourceTree = "<group>"; };
 		04E25D2C276F23D9009B39BA /* xmas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@2x.png"; sourceTree = "<group>"; };
@@ -4740,7 +4782,21 @@
 				040FA592275F559C00229F6F /* band_oracle_v1_query.pb.swift */,
 				040FA5E6275F55A200229F6F /* band_oracle_v1_tx.grpc.swift */,
 				040FA546275F559700229F6F /* band_oracle_v1_tx.pb.swift */,
+				04E1658C28A0F49A000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift */,
+				04E1659228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift */,
+				04E1658D28A0F49A000F12C0 /* confio_globalfee_v1beta1_query.pb.swift */,
+				04E1659328A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift */,
+				04E1659028A0F49A000F12C0 /* confio_poe_v1beta1_poe.pb.swift */,
+				04E1658E28A0F49A000F12C0 /* confio_poe_v1beta1_query.grpc.swift */,
+				04E1659428A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift */,
+				04E1659128A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift */,
+				04E1658F28A0F49A000F12C0 /* confio_poe_v1beta1_tx.pb.swift */,
 				040FA4DD275F559100229F6F /* confio_proofs.pb.swift */,
+				04E165A728A0F4A3000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift */,
+				04E165AA28A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift */,
+				04E165AB28A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift */,
+				04E165A828A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift */,
+				04E165A928A0F4A4000F12C0 /* confio_twasm_v1beta1_query.pb.swift */,
 				042A0CA0288E599D00C4DC38 /* cosmos_auth_module_v1_module.pb.swift */,
 				042A0CA7288E599E00C4DC38 /* cosmos_auth_v1beta1_auth.pb.swift */,
 				042A0CAC288E599F00C4DC38 /* cosmos_auth_v1beta1_genesis.pb.swift */,
@@ -7155,6 +7211,7 @@
 				1817CC6A283E2CE600523713 /* tendermint_abci_types.grpc.swift in Sources */,
 				18FFB28D281AF533004E65BB /* TxLockTokenCell.swift in Sources */,
 				045DAD62289128C3004ED9B4 /* AuthzExecuteCell.swift in Sources */,
+				04E165B128A0F4A4000F12C0 /* confio_twasm_v1beta1_query.pb.swift in Sources */,
 				18FFB28E281AF533004E65BB /* WalletCrytoCell.swift in Sources */,
 				0451FC9B282A3B5000214FDA /* ChainComdex.swift in Sources */,
 				1817CB97283E2CE500523713 /* evmos_inflation_v1_query.grpc.swift in Sources */,
@@ -7180,6 +7237,7 @@
 				1817CAA9283E2CE500523713 /* starname_iov_configuration_v1beta1_query.pb.swift in Sources */,
 				18FFB2A3281AF533004E65BB /* HardListCell.swift in Sources */,
 				1817CAA6283E2CE500523713 /* iris_mod_nft_tx.pb.swift in Sources */,
+				04E165AF28A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift in Sources */,
 				18FFB2A6281AF533004E65BB /* HardModuleAccount.swift in Sources */,
 				18FFB2A9281AF533004E65BB /* OkUnbonding.swift in Sources */,
 				18FFB2AF281AF533004E65BB /* BandOracleStatus.swift in Sources */,
@@ -7383,6 +7441,7 @@
 				18FFB37F281AF533004E65BB /* ReplaceResource0ViewController.swift in Sources */,
 				1817CB4A283E2CE500523713 /* osmosis_incentives_params.pb.swift in Sources */,
 				18FFB381281AF533004E65BB /* HtlcResultViewController.swift in Sources */,
+				04E1659E28A0F49B000F12C0 /* confio_poe_v1beta1_poe.pb.swift in Sources */,
 				1817CAD5283E2CE500523713 /* ethermint_evm_v1_tx.grpc.swift in Sources */,
 				1817CC72283E2CE600523713 /* kava_committee_v1beta1_tx.pb.swift in Sources */,
 				18FFB383281AF533004E65BB /* TransactionViewController.swift in Sources */,
@@ -7454,9 +7513,11 @@
 				0451FCA4282A3B7500214FDA /* ChainInjective.swift in Sources */,
 				0451FC7E282A3AC700214FDA /* ChainBand.swift in Sources */,
 				1817CBC6283E2CE500523713 /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
+				04E165A428A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift in Sources */,
 				18FFB3BD281AF533004E65BB /* AccountCell.swift in Sources */,
 				18FFB3BE281AF533004E65BB /* HardPoolDeposit0ViewController.swift in Sources */,
 				18FFB3C5281AF533004E65BB /* CardView.swift in Sources */,
+				04E165A228A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift in Sources */,
 				1817CC10283E2CE600523713 /* osmosis_pool-incentives_v1beta1_query.grpc.swift in Sources */,
 				1817CC3B283E2CE600523713 /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				1817CC30283E2CE600523713 /* sifnode_ethbridge_v1_types.pb.swift in Sources */,
@@ -7500,9 +7561,11 @@
 				1817CB36283E2CE500523713 /* desmos_profiles_v1beta1_client_cli.pb.swift in Sources */,
 				18FFB3E1281AF533004E65BB /* TokenDetailVestingDetailCell.swift in Sources */,
 				1817CB45283E2CE500523713 /* sifnode_tokenregistry_v1_query.grpc.swift in Sources */,
+				04E1659628A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */,
 				18FFB3E2281AF533004E65BB /* IbcPath.swift in Sources */,
 				18FFB3E7281AF533004E65BB /* HardPoolBorrow3ViewController.swift in Sources */,
 				1817CBE2283E2CE600523713 /* cosmos_crisis_v1beta1_tx.pb.swift in Sources */,
+				04E165A628A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift in Sources */,
 				18FFB3E8281AF533004E65BB /* CdpDeposit.swift in Sources */,
 				04DEAF48286476BE00F23233 /* HtlcSend3ViewController.swift in Sources */,
 				18FFB3EB281AF533004E65BB /* WcCancelPopup.swift in Sources */,
@@ -7577,6 +7640,7 @@
 				1817CBCE283E2CE600523713 /* cosmos_base_abci_v1beta1_abci.pb.swift in Sources */,
 				18FFB44C281AF533004E65BB /* WcSignRequestPopup.swift in Sources */,
 				18FFB44D281AF533004E65BB /* MyCdp.swift in Sources */,
+				04E165B328A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift in Sources */,
 				042A0CC6288E599F00C4DC38 /* cosmos_authz_module_v1_module.pb.swift in Sources */,
 				1817CC07283E2CE600523713 /* ibc_core_channel_v1_tx.grpc.swift in Sources */,
 				1817CC20283E2CE600523713 /* kava_issuance_v1beta1_genesis.pb.swift in Sources */,
@@ -7639,6 +7703,7 @@
 				18FFB48E281AF533004E65BB /* CdpDetailMyActionCell.swift in Sources */,
 				1817CB1E283E2CE500523713 /* starname_iov_configuration_v1beta1_types.pb.swift in Sources */,
 				1817CC5D283E2CE600523713 /* starname_cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
+				04E1659828A0F49B000F12C0 /* confio_globalfee_v1beta1_query.pb.swift in Sources */,
 				1817CB78283E2CE500523713 /* kava_hard_v1beta1_genesis.pb.swift in Sources */,
 				1817CBF4283E2CE600523713 /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				1817CBC9283E2CE500523713 /* osmosis_superfluid_query.pb.swift in Sources */,
@@ -7668,6 +7733,7 @@
 				042A0C97288E469700C4DC38 /* AuthzListViewController.swift in Sources */,
 				045DADB3289BCF59004ED9B4 /* AuthzSend2ViewController.swift in Sources */,
 				1817CAC3283E2CE500523713 /* cosmos_evidence_v1beta1_tx.pb.swift in Sources */,
+				04E165AD28A0F4A4000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift in Sources */,
 				18FFB4A1281AF533004E65BB /* MainTabSettingViewController.swift in Sources */,
 				1817CBE8283E2CE600523713 /* cosmos_gov_v1beta2_query.pb.swift in Sources */,
 				18FFB4A2281AF533004E65BB /* DelegateWarnPopup.swift in Sources */,
@@ -7712,6 +7778,7 @@
 				1817CC7C283E2CE600523713 /* osmosis_txfees_v1beta1_query.grpc.swift in Sources */,
 				1817CB4D283E2CE500523713 /* starname_cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				18FFB4D3281AF533004E65BB /* Coin.swift in Sources */,
+				04E1659A28A0F49B000F12C0 /* confio_poe_v1beta1_query.grpc.swift in Sources */,
 				18FFB4DB281AF533004E65BB /* WalletInflationCell.swift in Sources */,
 				0451FC7A282A3AC700214FDA /* ChainJuno.swift in Sources */,
 				18F4129A286062FA0007E3F2 /* MWords.swift in Sources */,
@@ -7745,6 +7812,7 @@
 				18FFB4F3281AF533004E65BB /* TxRedelegateCell.swift in Sources */,
 				18FFB4F4281AF533004E65BB /* HardPoolRepay0ViewController.swift in Sources */,
 				0451FC82282A3AC700214FDA /* ChainSif.swift in Sources */,
+				04E1659C28A0F49B000F12C0 /* confio_poe_v1beta1_tx.pb.swift in Sources */,
 				18F412982860628E0007E3F2 /* ManageMnemonicCell.swift in Sources */,
 				18FFB4F5281AF533004E65BB /* WalletGuideCell.swift in Sources */,
 				18FFB4F8281AF533004E65BB /* Param.swift in Sources */,
@@ -7999,6 +8067,7 @@
 				E1C5C0AC28992AC400E9E65D /* AuthzDelegate1ViewController.swift in Sources */,
 				1817CAA3283E2CE500523713 /* crescent_farming_v1beta1_query.pb.swift in Sources */,
 				18FFB5F8281AF533004E65BB /* KavaHardTotalBorrow.swift in Sources */,
+				04E165A028A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift in Sources */,
 				04E6ABBC28635875008DC3C7 /* CdpWithdraw4ViewController.swift in Sources */,
 				1817CB2E283E2CE500523713 /* cosmwasm_wasm_v1_proposal.pb.swift in Sources */,
 				1817CB7D283E2CE500523713 /* tendermint_farming_v1beta1_farming.pb.swift in Sources */,
@@ -8107,6 +8176,7 @@
 				18FFB64E281AF533004E65BB /* WcTransferPopup.swift in Sources */,
 				18FFB652281AF533004E65BB /* GenProfile3ViewController.swift in Sources */,
 				18FFB653281AF533004E65BB /* CdpDetailViewController.swift in Sources */,
+				04E165B528A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift in Sources */,
 				1817CBAE283E2CE500523713 /* osmosis_superfluid_gov.pb.swift in Sources */,
 				1817CB40283E2CE500523713 /* kava_committee_v1beta1_proposal.pb.swift in Sources */,
 				1817CB28283E2CE500523713 /* desmos_profiles_v1beta1_models_params.pb.swift in Sources */,
@@ -8172,6 +8242,7 @@
 				040FA89F275F55C200229F6F /* cosmos_slashing_v1beta1_tx.grpc.swift in Sources */,
 				04B1BE2227A3BC4500B1236A /* cosmwasm_wasm_v1_query.grpc.swift in Sources */,
 				047FB700281BD85E009D8AAF /* ManageMnemonicCell.swift in Sources */,
+				04E165B028A0F4A4000F12C0 /* confio_twasm_v1beta1_query.pb.swift in Sources */,
 				28EEECAC26DAE9B4002DDC4A /* KavaSwapExit0ViewController.swift in Sources */,
 				040FA834275F55C200229F6F /* cosmos_params_v1beta1_query.pb.swift in Sources */,
 				047FB6F9281A5823009D8AAF /* injective_crypto_v1beta1_ethsecp256k1_keys.pb.swift in Sources */,
@@ -8194,6 +8265,7 @@
 				045DAD4F288F52E2004ED9B4 /* GranterViewCell.swift in Sources */,
 				048C830D27BF572800270528 /* ethermint_evm_v1_query.pb.swift in Sources */,
 				040FA868275F55C200229F6F /* cosmos_base_v1beta1_coin.pb.swift in Sources */,
+				04E165B228A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift in Sources */,
 				040FA87C275F55C200229F6F /* ibc_core_client_v1_tx.grpc.swift in Sources */,
 				2876AD5A240CDC5A005B33F4 /* TokenDetailUnbondingDetailCell.swift in Sources */,
 				040FA7C5275F55C200229F6F /* ibc_applications_transfer_v1_tx.grpc.swift in Sources */,
@@ -8217,6 +8289,7 @@
 				04C43B5D278D5F520022D5DF /* kava_swap_v1beta1_tx.grpc.swift in Sources */,
 				048C830927BF572800270528 /* evmos_vesting_v1_tx.pb.swift in Sources */,
 				0451FD7F2832370100214FDA /* osmosis_superfluid_params.pb.swift in Sources */,
+				04E165B428A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift in Sources */,
 				2852EAF02681A4CC003A5E74 /* WalletOsmoCell.swift in Sources */,
 				28440C6B271E7BC800B4A7C3 /* SifExitPool3ViewController.swift in Sources */,
 				2888B7FC246BC17300B2EB4A /* BnbNodeInfo.swift in Sources */,
@@ -8231,6 +8304,7 @@
 				286855A02498DBBF0099D18F /* KavaSupply.swift in Sources */,
 				0451FCA9282A3B9100214FDA /* ChainChihuahua.swift in Sources */,
 				04DEAF41286476AF00F23233 /* HtlcSend2ViewController.swift in Sources */,
+				04E1659D28A0F49B000F12C0 /* confio_poe_v1beta1_poe.pb.swift in Sources */,
 				04E6ABC12863588A008DC3C7 /* CdpDrawDebt1ViewController.swift in Sources */,
 				040FA93F275F55C300229F6F /* cosmos_staking_v1beta1_staking.pb.swift in Sources */,
 				0451FD8C2832370100214FDA /* osmosis_superfluid_query.grpc.swift in Sources */,
@@ -8418,6 +8492,7 @@
 				04E6ABA128635816008DC3C7 /* CdpCreate4ViewController.swift in Sources */,
 				0451FD8E2832370100214FDA /* osmosis_gamm_v1beta1_tx.grpc.swift in Sources */,
 				04C43B73278D5F530022D5DF /* kava_hard_v1beta1_genesis.pb.swift in Sources */,
+				04E165AC28A0F4A4000F12C0 /* confio_twasm_v1beta1_contract_extension.pb.swift in Sources */,
 				280E1F0C254AB5BA0007BA7D /* ReplaceResource0ViewController.swift in Sources */,
 				285A33E2244862670052BD3D /* HtlcResultViewController.swift in Sources */,
 				04E6ABBB28635875008DC3C7 /* CdpWithdraw4ViewController.swift in Sources */,
@@ -8603,6 +8678,7 @@
 				28DB28B82437ADC8002B01A0 /* RiskCheckPopupViewController.swift in Sources */,
 				04C43B63278D5F530022D5DF /* kava_issuance_v1beta1_tx.pb.swift in Sources */,
 				040FA88F275F55C200229F6F /* desmos_profiles_v1beta1_models_params.pb.swift in Sources */,
+				04E1659728A0F49B000F12C0 /* confio_globalfee_v1beta1_query.pb.swift in Sources */,
 				04C5AE9528632ECD007627EA /* ReInvest1ViewController.swift in Sources */,
 				040FA8DB275F55C200229F6F /* desmos_profiles_v1beta1_query.grpc.swift in Sources */,
 				E19A321922544EB500A05E41 /* DashedView.swift in Sources */,
@@ -8821,6 +8897,7 @@
 				04166118278C2F01001CAF73 /* WalletDesmosEventCell.swift in Sources */,
 				E1827E18225620D000BC0350 /* VaildatorDetailViewController.swift in Sources */,
 				0451FCAC282A3BA400214FDA /* ChainAxelar.swift in Sources */,
+				04E1659928A0F49B000F12C0 /* confio_poe_v1beta1_query.grpc.swift in Sources */,
 				040FA8D6275F55C200229F6F /* cosmos_slashing_v1beta1_slashing.pb.swift in Sources */,
 				28A2A4C627218D0B0042ACC4 /* NewAccountTypePopup.swift in Sources */,
 				E1C5C0B728992AE000E9E65D /* AuthzDelegate5ViewController.swift in Sources */,
@@ -8852,6 +8929,7 @@
 				280E1F02254A9B6B0007BA7D /* RenewStarname0ViewController.swift in Sources */,
 				2876546B2726B2690071FF96 /* WalletChainEditViewController.swift in Sources */,
 				28BB2A812533D9FB00CFF097 /* DomainPromotionCell.swift in Sources */,
+				04E1659F28A0F49B000F12C0 /* confio_poe_v1beta1_tx.grpc.swift in Sources */,
 				04D3391927E826F100E82AA7 /* crescent_claim_v1beta1_claim.pb.swift in Sources */,
 				280E1F16254ABB080007BA7D /* ResourceAddCell.swift in Sources */,
 				04C43B65278D5F530022D5DF /* kava_bep3_v1beta1_query.pb.swift in Sources */,
@@ -8870,6 +8948,7 @@
 				283E946D254902E5007A9291 /* TxDeleteDomainCell.swift in Sources */,
 				040FAAAC275F55C400229F6F /* desmos_fees_v1beta1_query.pb.swift in Sources */,
 				040FA9C8275F55C300229F6F /* cosmos_base_reflection_v1beta1_reflection.pb.swift in Sources */,
+				04E165A528A0F49B000F12C0 /* confio_poe_v1beta1_query.pb.swift in Sources */,
 				04D3391827E826F100E82AA7 /* crescent_claim_v1beta1_tx.pb.swift in Sources */,
 				040FA965275F55C300229F6F /* cosmos_upgrade_v1beta1_query.grpc.swift in Sources */,
 				040FA9E3275F55C300229F6F /* ibc_core_connection_v1_connection.pb.swift in Sources */,
@@ -8899,6 +8978,7 @@
 				040FA806275F55C200229F6F /* cosmos_base_reflection_v2alpha1_reflection.grpc.swift in Sources */,
 				04D3390F27E826F100E82AA7 /* crescent_liquidity_v1beta1_liquidity.pb.swift in Sources */,
 				040FAAC8275F55C400229F6F /* gravity_v1_gravity.pb.swift in Sources */,
+				04E165A128A0F49B000F12C0 /* confio_globalfee_v1beta1_query.grpc.swift in Sources */,
 				04C5AE7D28632055007627EA /* Redelegate2ViewController.swift in Sources */,
 				04C49374284F0DF300ECF4D2 /* ChainStationTest.swift in Sources */,
 				04C43B58278D5F520022D5DF /* kava_incentive_v1beta1_genesis.pb.swift in Sources */,
@@ -9037,6 +9117,7 @@
 				04E25D36276F6C5D009B39BA /* MyNTFsViewController.swift in Sources */,
 				2894106126FDC029005BCBE4 /* IBCSend4ViewController.swift in Sources */,
 				040FA950275F55C300229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
+				04E1659528A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */,
 				283439A42531D1DF00CCFADE /* MyAccountViewController.swift in Sources */,
 				28B37D2C26D8EB42008AACD2 /* KavaSwapViewController.swift in Sources */,
 				040FA7C3275F55C200229F6F /* tendermint_types_params.pb.swift in Sources */,
@@ -9046,11 +9127,13 @@
 				E16D9B222249EA0C0019B7BB /* PasswordViewController.swift in Sources */,
 				E1945E3E222E7E2900A1436F /* SegwitAddrCoder.swift in Sources */,
 				040FA83F275F55C200229F6F /* desmos_profiles_v1beta1_models_dtag_requests.pb.swift in Sources */,
+				04E1659B28A0F49B000F12C0 /* confio_poe_v1beta1_tx.pb.swift in Sources */,
 				E1D4EA582871584B005C1ECF /* FeeInfo.swift in Sources */,
 				E1827E1B225628FF00BC0350 /* ValidatorDetailMyDetailCell.swift in Sources */,
 				040FAA6C275F55C400229F6F /* cosmos_crypto_multisig_keys.pb.swift in Sources */,
 				040FA941275F55C300229F6F /* desmos_profiles_v1beta1_msgs_app_links.pb.swift in Sources */,
 				048C831727BF572800270528 /* evmos_incentives_v1_incentives.pb.swift in Sources */,
+				04E165A328A0F49B000F12C0 /* confio_poe_v1beta1_genesis.pb.swift in Sources */,
 				28D7BE5D25F0FC11006EECD7 /* KavaHardTotalBorrow.swift in Sources */,
 				285A33EA24486DB60052BD3D /* HtlcResultClaimCell.swift in Sources */,
 				289E4DAF26E5D765007C7C35 /* CommonPoolCell.swift in Sources */,
@@ -9167,6 +9250,7 @@
 				04D3390427E826F100E82AA7 /* crescent_mint_v1beta1_query.pb.swift in Sources */,
 				28D765A2271585FA00730F47 /* StarnameAssets.swift in Sources */,
 				040FA96D275F55C300229F6F /* cosmos_base_tendermint_v1beta1_query.grpc.swift in Sources */,
+				04E165AE28A0F4A4000F12C0 /* confio_twasm_v1beta1_query.grpc.swift in Sources */,
 				040FA869275F55C200229F6F /* cosmos_crisis_v1beta1_tx.pb.swift in Sources */,
 				2842AB61242C30AA00248EEB /* KavaCdpParam.swift in Sources */,
 				040FA8A0275F55C200229F6F /* cosmos_staking_v1beta1_genesis.pb.swift in Sources */,
