@@ -56,9 +56,7 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
         if (checkIsWasteFee()) {
             let disableAlert = UIAlertController(title: NSLocalizedString("fee_over_title", comment: ""), message: NSLocalizedString("fee_over_msg", comment: ""), preferredStyle: .alert)
             if #available(iOS 13.0, *) { disableAlert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
-            disableAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: { [weak disableAlert] (_) in
-                self.dismiss(animated: true, completion: nil)
-            }))
+            disableAlert.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .default, handler: nil))
             self.present(disableAlert, animated: true) {
                 let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
                 disableAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
@@ -66,12 +64,16 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
             return
         }
 
-        let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
-        passwordVC.resultDelegate = self
-        self.navigationController?.pushViewController(passwordVC, animated: false)
+        if (BaseData.instance.isAutoPass()) {
+            self.onFetchgRPCAuth(pageHolderVC.mAccount!)
+        } else {
+            let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
+            self.navigationItem.title = ""
+            self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
+            passwordVC.mTarget = PASSWORD_ACTION_CHECK_TX
+            passwordVC.resultDelegate = self
+            self.navigationController?.pushViewController(passwordVC, animated: false)
+        }
     }
     
     @IBAction func onClickBack(_ sender: Any) {
@@ -156,18 +158,13 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     func onFetchgRPCAuth(_ account: Account) {
         self.showWaittingAlert()
         DispatchQueue.global().async {
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
-            
-            let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with {
-                $0.address = account.account_address
-            }
             do {
-                let response = try Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait()
-                self.onBroadcastGrpcTx(response)
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
+                if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    self.onBroadcastGrpcTx(response)
+                }
+                try channel.close().wait()
             } catch {
                 print("onFetchgRPCAuth failed: \(error)")
             }
@@ -181,22 +178,18 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
                                                            self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
             
-            let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
-            defer { try! group.syncShutdownGracefully() }
-            
-            let channel = BaseNetWork.getConnection(self.chainType!, group)!
-            defer { try! channel.close().wait() }
-            
             do {
-                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-//                print("response ", response.txResponse.txhash)
-                DispatchQueue.main.async(execute: {
-                    if (self.waitAlert != nil) {
-                        self.waitAlert?.dismiss(animated: true, completion: {
-                            self.onStartTxDetailgRPC(response)
-                        })
-                    }
-                });
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    DispatchQueue.main.async(execute: {
+                        if (self.waitAlert != nil) {
+                            self.waitAlert?.dismiss(animated: true, completion: {
+                                self.onStartTxDetailgRPC(response)
+                            })
+                        }
+                    });
+                }
+                try channel.close().wait()
             } catch {
                 print("onBroadcastGrpcTx failed: \(error)")
             }
