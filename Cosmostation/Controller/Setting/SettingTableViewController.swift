@@ -219,7 +219,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
             self.navigationItem.title = ""
             self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-            passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+            passwordVC.mTarget = PASSWORD_ACTION_SETTING_CHECK
             passwordVC.resultDelegate = self
             passwordVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(passwordVC, animated: false)
@@ -406,7 +406,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
                 self.navigationItem.title = ""
                 self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-                passwordVC.mTarget = PASSWORD_ACTION_SIMPLE_CHECK
+                passwordVC.mTarget = PASSWORD_ACTION_SETTING_CHECK
                 passwordVC.resultDelegate = self
                 passwordVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(passwordVC, animated: false)
