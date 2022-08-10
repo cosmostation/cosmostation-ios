@@ -357,7 +357,7 @@ public enum ChainType: String {
         result.append(SIF_MAIN)
         result.append(STARGAZE_MAIN)
         result.append(IOV_MAIN)
-        result.append(TGRADE_MAIN)
+//        result.append(TGRADE_MAIN)
         result.append(UMEE_MAIN)
         
 

@@ -241,8 +241,8 @@ class ChainFactory {
             return ChainStargaze(chainType!)
         case .IOV_MAIN:
             return ChainStarname(chainType!)
-        case .TGRADE_MAIN:
-            return ChainTgrade(chainType!)
+//        case .TGRADE_MAIN:
+//            return ChainTgrade(chainType!)
         case .UMEE_MAIN:
             return ChainUmee(chainType!)
             
