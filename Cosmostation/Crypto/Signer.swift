@@ -76,6 +76,43 @@ class Signer {
         return [anyMsg]
     }
     
+    //Tx for Tgrade Delegate
+    static func genSignedTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                        _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
+                                        _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
+        return getGrpcSignedTx(auth, chainType, deleMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genSimulateTgradeDelegate(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                          _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin,
+                                          _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        print("auth ", auth)
+        let deleMsg = genTgradeDelegateMsg(auth, toValAddress, availableAmount, vestingAmount)
+        return getGrpcSimulateTx(auth, chainType, deleMsg, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genTgradeDelegateMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toValAddress: String, _ availableAmount: Coin, _ vestingAmount: Coin) -> [Google_Protobuf2_Any] {
+        let availableCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = availableAmount.denom
+            $0.amount = availableAmount.amount
+        }
+        let vestingCoin = Cosmos_Base_V1beta1_Coin.with {
+            $0.denom = vestingAmount.denom
+            $0.amount = vestingAmount.amount
+        }
+        let deleMsg = Confio_Poe_V1beta1_MsgDelegate.with {
+            $0.operatorAddress = toValAddress
+            $0.amount = availableCoin
+            $0.vestingAmount = vestingCoin
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/confio.poe.v1beta1.MsgDelegate"
+            $0.value = try! deleMsg.serializedData()
+        }
+        return [anyMsg]
+    }
+    
     //Tx for Common UnDelegate
     static func genSignedUnDelegateTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                           _ toValAddress: String, _ amount: Coin,
