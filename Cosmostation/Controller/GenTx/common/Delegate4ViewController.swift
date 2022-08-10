@@ -106,10 +106,19 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedDelegateTxgRPC(auth!,
-                                                       self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
+            var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest!
+            if (self.pageHolderVC.chainType == .TGRADE_MAIN) {
+                reqTx = Signer.genSignedTgradeDelegate(auth!,
+                                                       self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!, Coin.init("utgd", "0"),
                                                        self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                        self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
+                
+            } else {
+                reqTx = Signer.genSignedDelegateTxgRPC(auth!,
+                                                           self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
+                                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
+            }
             
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!

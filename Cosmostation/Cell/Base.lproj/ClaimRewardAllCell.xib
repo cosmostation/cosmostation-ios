@@ -21,17 +21,23 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LM8-me-rqz" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="450" height="153"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Total Reward" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fus-s2-huz">
+                                <rect key="frame" x="188.5" y="12" width="73" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" name="_font04"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="liV-CD-bWn">
-                                <rect key="frame" x="148.5" y="16" width="153" height="59"/>
+                                <rect key="frame" x="148.5" y="30.5" width="153" height="44.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="121,232,212.000000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNn-gq-MZA">
-                                        <rect key="frame" x="0.0" y="0.0" width="115" height="59"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="115" height="44.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                         <color key="textColor" name="_font05"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ATOM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guL-u8-8x9">
-                                        <rect key="frame" x="121" y="0.0" width="32" height="59"/>
+                                        <rect key="frame" x="121" y="0.0" width="32" height="44.5"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                         <color key="textColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                         <nil key="highlightedColor"/>
@@ -39,19 +45,19 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="IFP-x6-nJ7">
-                                <rect key="frame" x="12" y="91" width="426" height="42"/>
+                                <rect key="frame" x="16" y="91" width="418" height="42"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nmO-yp-BVv" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="207" height="42"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="203" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One Click" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYr-BF-Qsc">
-                                                <rect key="frame" x="78.5" y="4" width="50.5" height="13.5"/>
+                                                <rect key="frame" x="76.5" y="6" width="50.5" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                 <color key="textColor" name="photon"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Claim Reward All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3sV-li-3CJ">
-                                                <rect key="frame" x="56" y="21.5" width="95" height="14.5"/>
+                                                <rect key="frame" x="54" y="21.5" width="95" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -59,7 +65,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="ZYr-BF-Qsc" firstAttribute="top" secondItem="nmO-yp-BVv" secondAttribute="top" constant="4" id="4aq-Ig-JDp"/>
+                                            <constraint firstItem="ZYr-BF-Qsc" firstAttribute="top" secondItem="nmO-yp-BVv" secondAttribute="top" constant="6" id="4aq-Ig-JDp"/>
                                             <constraint firstAttribute="height" constant="42" id="7G4-ed-NYI"/>
                                             <constraint firstAttribute="bottom" secondItem="3sV-li-3CJ" secondAttribute="bottom" constant="6" id="E4q-F4-4EL"/>
                                             <constraint firstItem="ZYr-BF-Qsc" firstAttribute="centerX" secondItem="nmO-yp-BVv" secondAttribute="centerX" id="JvL-i7-5ub"/>
@@ -78,16 +84,16 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AJW-8k-xXD" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                                        <rect key="frame" x="219" y="0.0" width="207" height="42"/>
+                                        <rect key="frame" x="215" y="0.0" width="203" height="42"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One Click" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDK-cN-VrG">
-                                                <rect key="frame" x="78.5" y="4" width="50.5" height="13.5"/>
+                                                <rect key="frame" x="76.5" y="6" width="50.5" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                 <color key="textColor" name="photon"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compounding" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="euh-tL-TwI">
-                                                <rect key="frame" x="64" y="21.5" width="79.5" height="14.5"/>
+                                                <rect key="frame" x="62" y="21.5" width="79.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -95,7 +101,7 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="NDK-cN-VrG" firstAttribute="top" secondItem="AJW-8k-xXD" secondAttribute="top" constant="4" id="6yf-Yl-rLa"/>
+                                            <constraint firstItem="NDK-cN-VrG" firstAttribute="top" secondItem="AJW-8k-xXD" secondAttribute="top" constant="6" id="6yf-Yl-rLa"/>
                                             <constraint firstItem="NDK-cN-VrG" firstAttribute="centerX" secondItem="AJW-8k-xXD" secondAttribute="centerX" id="C4X-j5-QDr"/>
                                             <constraint firstItem="euh-tL-TwI" firstAttribute="centerX" secondItem="AJW-8k-xXD" secondAttribute="centerX" id="Fsa-iK-dOV"/>
                                             <constraint firstAttribute="bottom" secondItem="euh-tL-TwI" secondAttribute="bottom" constant="6" id="gWu-Eq-ULT"/>
@@ -119,11 +125,13 @@
                         <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
                             <constraint firstItem="IFP-x6-nJ7" firstAttribute="centerX" secondItem="LM8-me-rqz" secondAttribute="centerX" id="5hp-fF-GaV"/>
-                            <constraint firstAttribute="trailing" secondItem="IFP-x6-nJ7" secondAttribute="trailing" constant="12" id="BCS-hX-VAD"/>
-                            <constraint firstItem="liV-CD-bWn" firstAttribute="top" secondItem="LM8-me-rqz" secondAttribute="top" constant="16" id="MJx-2a-r8w"/>
-                            <constraint firstItem="IFP-x6-nJ7" firstAttribute="leading" secondItem="LM8-me-rqz" secondAttribute="leading" constant="12" id="Ojn-WX-FbF"/>
+                            <constraint firstItem="fus-s2-huz" firstAttribute="top" secondItem="LM8-me-rqz" secondAttribute="top" constant="12" id="6ef-9b-sAp"/>
+                            <constraint firstAttribute="trailing" secondItem="IFP-x6-nJ7" secondAttribute="trailing" constant="16" id="BCS-hX-VAD"/>
+                            <constraint firstItem="IFP-x6-nJ7" firstAttribute="leading" secondItem="LM8-me-rqz" secondAttribute="leading" constant="16" id="Ojn-WX-FbF"/>
+                            <constraint firstItem="liV-CD-bWn" firstAttribute="top" secondItem="fus-s2-huz" secondAttribute="bottom" constant="4" id="UKw-tc-vc7"/>
                             <constraint firstItem="liV-CD-bWn" firstAttribute="centerX" secondItem="LM8-me-rqz" secondAttribute="centerX" id="f7d-LV-SKu"/>
                             <constraint firstItem="IFP-x6-nJ7" firstAttribute="top" secondItem="liV-CD-bWn" secondAttribute="bottom" constant="16" id="g9t-1P-qIu"/>
+                            <constraint firstItem="fus-s2-huz" firstAttribute="centerX" secondItem="LM8-me-rqz" secondAttribute="centerX" id="ieD-2S-bKA"/>
                             <constraint firstAttribute="bottom" secondItem="IFP-x6-nJ7" secondAttribute="bottom" constant="20" id="q7W-Xo-XKb"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -167,6 +175,9 @@
     <resources>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

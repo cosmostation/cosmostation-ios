@@ -239,10 +239,17 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                 privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_DELEGATE) {
-            return Signer.genSimulateDelegateTxgRPC(auth,
-                                                    self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
-                                                    self.mFee, self.pageHolderVC.mMemo!,
-                                                    privateKey, publicKey, self.chainType!)
+            if (self.pageHolderVC.chainType == .TGRADE_MAIN) {
+                return Signer.genSimulateTgradeDelegate(auth,
+                                                        self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!, Coin.init("utgd", "0"),
+                                                        self.mFee, self.pageHolderVC.mMemo!,
+                                                        privateKey, publicKey, self.chainType!)
+            } else {
+                return Signer.genSimulateDelegateTxgRPC(auth,
+                                                        self.pageHolderVC.mTargetValidator_gRPC!.operatorAddress, self.pageHolderVC.mToDelegateAmount!,
+                                                        self.mFee, self.pageHolderVC.mMemo!,
+                                                        privateKey, publicKey, self.chainType!)
+            }
             
         } else if (pageHolderVC.mType == TASK_TYPE_UNDELEGATE) {
             return Signer.genSimulateUnDelegateTxgRPC(auth,
