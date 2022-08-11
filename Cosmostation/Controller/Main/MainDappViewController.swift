@@ -31,7 +31,21 @@ class MainDappViewController: BaseViewController {
         self.navigationController?.navigationBar.topItem?.title = "";
         self.updateTitle()
         
-        webView.load(URLRequest(url: URL(string: "https://dapps.cosmostation.io/?chain=\(chainConfig?.chainAPIName ?? "")")!))
+        if let url = URL(string: "https://dapps.cosmostation.io/?chain=\(chainConfig?.chainAPIName ?? "")&theme=\(currentThemeParams())") {
+            webView.load(URLRequest(url: url))
+        }
+    }
+    
+    func currentThemeParams() -> String {
+        var themeParams = "dark"
+        if (BaseData.instance.getThemeType() == .unspecified) {
+            if (self.traitCollection.userInterfaceStyle != .dark) {
+                themeParams = "light"
+            }
+        } else if (BaseData.instance.getThemeType() == .light) {
+            themeParams = "light"
+        }
+        return themeParams
     }
     
     func initWebView() {
