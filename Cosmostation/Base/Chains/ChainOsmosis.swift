@@ -34,9 +34,8 @@ class ChainOsmosis: ChainConfig {
     var validatorPrefix = "osmovaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.00025uosmo"
-    let gasRate1 = "0.0025uosmo"
-    let gasRate2 = "0.025uosmo"
+    let gasRate0 = "0.0025uosmo"
+    let gasRate1 = "0.025uosmo"
     
     var etherAddressSupport = false
     var pushSupport = false
@@ -72,7 +71,7 @@ class ChainOsmosis: ChainConfig {
     }
     
     func getGasRates() -> Array<String> {
-        return [gasRate0, gasRate1, gasRate2]
+        return [gasRate0, gasRate1]
     }
     
     func getGasDefault() -> Int {
