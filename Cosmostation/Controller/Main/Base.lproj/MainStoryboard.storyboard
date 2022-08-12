@@ -2960,7 +2960,7 @@
         <image name="loading_1" width="144" height="144"/>
         <image name="mainTabAssets" width="24" height="24"/>
         <image name="mainTabDapp_disabled" width="24" height="24"/>
-        <image name="mainTabDapp_enabled" width="20" height="20"/>
+        <image name="mainTabDapp_enabled" width="24" height="24"/>
         <image name="mainTabHistory" width="24" height="24"/>
         <image name="mainTabSetting" width="24" height="24"/>
         <image name="mainTabWallet" width="24" height="24"/>

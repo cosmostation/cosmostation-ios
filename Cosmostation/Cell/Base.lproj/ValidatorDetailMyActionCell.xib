@@ -55,7 +55,7 @@
                                             <constraint firstAttribute="height" constant="40" id="goW-YD-cM9"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <state key="normal" title="DELEGATE">
+                                        <state key="normal" title="Delegate">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -80,7 +80,7 @@
                                             <constraint firstAttribute="height" constant="40" id="YcO-41-brJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <state key="normal" title="UNDELEGATE">
+                                        <state key="normal" title="Undelegate">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -105,7 +105,7 @@
                                             <constraint firstAttribute="height" constant="40" id="t56-56-7DT"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <state key="normal" title="REDELEGATE">
+                                        <state key="normal" title="Redelegate">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -178,7 +178,7 @@
                                             <constraint firstAttribute="height" constant="40" id="y3S-Tm-jXw"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <state key="normal" title="CLAIM REWARD">
+                                        <state key="normal" title="Claim Reward">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -203,7 +203,7 @@
                                             <constraint firstAttribute="height" constant="40" id="fyv-E4-iRn"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                        <state key="normal" title="RE-INVEST">
+                                        <state key="normal" title="Compounding">
                                             <color key="titleColor" name="_font05"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
