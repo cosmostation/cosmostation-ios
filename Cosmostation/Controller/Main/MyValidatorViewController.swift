@@ -269,22 +269,26 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
                             }
                         }
                     } else {
-                        if (self.waitAlert != nil) {
-                            self.waitAlert?.dismiss(animated: true, completion: {
-                                self.onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
-                            })
-                        }
+                        DispatchQueue.main.async(execute: {
+                            if (self.waitAlert != nil) {
+                                self.waitAlert?.dismiss(animated: true, completion: {
+                                    self.onShowToast(NSLocalizedString("error_reward_address_changed_msg", comment: ""))
+                                })
+                            }
+                        });
                     }
                 }
                 try channel.close().wait()
                 
             } catch {
                 print("onStartEasyCompounding failed: \(error)")
-                if (self.waitAlert != nil) {
-                    self.waitAlert?.dismiss(animated: true, completion: {
-                        self.onShowToast(NSLocalizedString("error_network", comment: "") + "\n" + "\(error)")
-                    })
-                }
+                DispatchQueue.main.async(execute: {
+                    if (self.waitAlert != nil) {
+                        self.waitAlert?.dismiss(animated: true, completion: {
+                            self.onShowToast(NSLocalizedString("error_network", comment: "") + "\n" + "\(error)")
+                        })
+                    }
+                });
             }
         }
         
