@@ -2928,11 +2928,7 @@
         <scene sceneID="7Oq-0x-ogL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EII-eb-nej" userLabel="DAPP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="DAPP" image="mainTabDapp_disabled" id="hch-bZ-ki4" userLabel="DAPP">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="mainTabDapp_enabled"/>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="DAPP" image="mainTabDapp_disabled" selectedImage="mainTabDapp_enabled" id="hch-bZ-ki4" userLabel="DAPP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Z9q-D8-ROH">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -2964,7 +2960,7 @@
         <image name="loading_1" width="144" height="144"/>
         <image name="mainTabAssets" width="24" height="24"/>
         <image name="mainTabDapp_disabled" width="24" height="24"/>
-        <image name="mainTabDapp_enabled" width="24" height="24"/>
+        <image name="mainTabDapp_enabled" width="20" height="20"/>
         <image name="mainTabHistory" width="24" height="24"/>
         <image name="mainTabSetting" width="24" height="24"/>
         <image name="mainTabWallet" width="24" height="24"/>
