@@ -234,6 +234,23 @@ class CommonWCViewController: BaseViewController {
             }
         }
         
+        interactor.eth.onSign = { [weak self] (id, payload) in
+            guard let self = self else { return }
+            if self.chainType == ChainType.EVMOS_MAIN {
+                let alertController = UIAlertController(title: NSLocalizedString("wc_request_sign_title", comment: ""), message: payload.message, preferredStyle: .alert)
+                if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+                let confirmAction = UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: .default) { (_) -> Void in
+                    self.processEthSign(id: id, payload: payload)
+                }
+                let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
+                alertController.addAction(cancelAction)
+                alertController.addAction(confirmAction)
+                DispatchQueue.main.async {
+                    self.present(alertController, animated: true, completion: nil)
+                }
+            }
+        }
+        
         interactor.eth.onTransaction = { [weak self] (id, event, transaction) in
             guard let self = self else { return }
             if event == .ethSendTransaction {
@@ -349,13 +366,18 @@ class CommonWCViewController: BaseViewController {
                   let provider = Web3HttpProvider(url),
                   let ethAddress = EthereumAddress(ethAddressString),
                   let to = transaction.to,
-                  let toAddress = EthereumAddress(to),
-                  let val = transaction.value,
-                   let bigIntVal = BigUInt(val.replacingOccurrences(of: "0x", with: ""), radix: 16)
+                  let toAddress = EthereumAddress(to)
             else {
                 self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
                 return
             }
+            
+            var bigIntVal = BigUInt(0)
+            if let val = transaction.value,
+               let bVal = BigUInt(val.replacingOccurrences(of: "0x", with: ""), radix: 16) {
+                bigIntVal = bVal
+            }
+            
             DispatchQueue.global().async {
                 let web3 = web3(provider: provider)
                 let nounce = try? web3.eth.getTransactionCount(address: ethAddress)
@@ -383,6 +405,18 @@ class CommonWCViewController: BaseViewController {
                     self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
                 }
             }
+        }
+    }
+    
+    func processEthSign(id: Int64, payload: WCEthereumSignPayload) {
+        guard let baseAccount = self.accountMap[self.baseChain] else {
+            self.interactor?.rejectRequest(id: id, message: "Sign failed").cauterize()
+            return
+        }
+        self.getPrivateKeyAsync(account: baseAccount) { key in
+            guard let data = payload.message.data(using: .utf8), let hash = Web3.Utils.hashPersonalMessage(data) else { return }
+            let (compressedSignature, _) = SECP256K1.signForRecovery(hash: hash, privateKey: key, useExtraEntropy: false)
+            self.interactor?.approveRequest(id: id, result: compressedSignature).cauterize()
         }
     }
     
