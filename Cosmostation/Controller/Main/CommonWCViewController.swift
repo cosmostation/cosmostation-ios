@@ -128,11 +128,6 @@ class CommonWCViewController: BaseViewController {
         webView.uiDelegate = self
         webView.allowsLinkPreview = false
         webView.scrollView.bounces = false
-        WKWebsiteDataStore.default().fetchDataRecords(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes()) { records in
-                    records.forEach { record in
-                        WKWebsiteDataStore.default().removeData(ofTypes: record.dataTypes, for: [record], completionHandler: {})
-                    }
-                }
         if let dictionary = Bundle.main.infoDictionary,
             let version = dictionary["CFBundleShortVersionString"] as? String {
             webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
@@ -478,9 +473,15 @@ class CommonWCViewController: BaseViewController {
             return
         }
         
-        guard let chainType = WUtils.getChainTypeByChainId(chainId) else { return }
-        self.wcRequestChainName = WUtils.getChainDBName(chainType)
-        self.onShowPopupAccountSelect(chainType)
+        if let account = self.accountMap[WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId))] {
+            accountSelectedSet.insert(account)
+            showAccountPopup()
+            return
+        } else {
+            guard let chainType = WUtils.getChainTypeByChainId(chainId) else { return }
+            self.wcRequestChainName = WUtils.getChainDBName(chainType)
+            self.onShowPopupAccountSelect(chainType)
+        }
     }
     
     func onDeepLinkDismiss() {
