@@ -1041,6 +1041,7 @@
 		04E6ABD5286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */; };
 		04E6ABD6286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
+		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
 		1817CAA3283E2CE500523713 /* crescent_farming_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338EA27E826EF00E82AA7 /* crescent_farming_v1beta1_query.pb.swift */; };
 		1817CAA4283E2CE500523713 /* starname_cosmwasm_wasm_v1_ibc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5FF275F55A300229F6F /* starname_cosmwasm_wasm_v1_ibc.pb.swift */; };
 		1817CAA5283E2CE500523713 /* cosmos_staking_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D9275F559000229F6F /* cosmos_staking_v1beta1_query.grpc.swift */; };
@@ -3648,6 +3649,7 @@
 		106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
+		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
 		188746D528914EE300E0A558 /* MainDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDappViewController.swift; sourceTree = "<group>"; };
 		18FFB7D5281AF533004E65BB /* CosmostationDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CosmostationDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CosmostationDev.plist; sourceTree = "<group>"; };
@@ -4426,6 +4428,7 @@
 				0451FC5F282A39FB00214FDA /* ChainOkc.swift */,
 				0451FCBD282A3C3E00214FDA /* ChainOmiflix.swift */,
 				0451FC6D282A3A7F00214FDA /* ChainOsmosis.swift */,
+				1569489728ABD9E0004777ED /* ChainPassage.swift */,
 				0451FC61282A3A0C00214FDA /* ChainPersistence.swift */,
 				0451FCB7282A3C1000214FDA /* ChainProvenance.swift */,
 				0451FC8D282A3B0800214FDA /* ChainRegen.swift */,
@@ -8336,6 +8339,7 @@
 				040FAA32275F55C400229F6F /* band_oracle_v1_query.grpc.swift in Sources */,
 				040FAA41275F55C400229F6F /* cosmos_feegrant_v1beta1_tx.grpc.swift in Sources */,
 				040FAA65275F55C400229F6F /* cosmos_gov_v1beta2_query.pb.swift in Sources */,
+				1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */,
 				04C4937E285069C800ECF4D2 /* PrivateKeyRestoreViewController.swift in Sources */,
 				0443B89F285C62E10027A6B9 /* WalletBaseChainCell.swift in Sources */,
 				040FAA9A275F55C400229F6F /* ibc_core_connection_v1_query.grpc.swift in Sources */,
