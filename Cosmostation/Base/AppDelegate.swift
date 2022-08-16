@@ -46,23 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let wcVC = application.topViewController as? CommonWCViewController {
                     wcVC.processQuery(host: url.host, query: url.query)
                 }
-                return false
-            } else if (BaseData.instance.hasPassword()) {
-                let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
-                passwordVC.mTarget = PASSWORD_ACTION_DEEPLINK_LOCK
-                passwordVC.mSchemeURL = url
-                if (url.host == "wc") {
-                    passwordVC.mWcURL = url.query
-                } else if (url.host == "dapp") {
-                    passwordVC.mDappURL = url.query
-                } else if (url.host == "internaldapp") {
-                    passwordVC.mDappURL = url.query
-                }
-                if #available(iOS 13.0, *) { passwordVC.isModalInPresentation = true }
-                application.topViewController!.present(passwordVC, animated: true, completion: nil)
             } else {
-                let emptyWcVc = EmptyWCViewController(nibName: "EmptyWCViewController", bundle: nil)
-                application.topViewController!.present(emptyWcVc, animated: true, completion: nil)
+                scheme = url
+                if let mainVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController {
+                    mainVC.processScheme()
+                } else {
+                    let emptyWcVc = EmptyWCViewController(nibName: "EmptyWCViewController", bundle: nil)
+                    application.topViewController!.present(emptyWcVc, animated: true, completion: nil)
+                }
             }
         }
         return false
