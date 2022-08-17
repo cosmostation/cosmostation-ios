@@ -35,26 +35,26 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZhP-nv-wIj">
-                                <rect key="frame" x="426" y="15" width="13" height="20"/>
+                                <rect key="frame" x="426" y="-33" width="13" height="116"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5E-nu-dyN">
-                                <rect key="frame" x="427.5" y="41" width="11.5" height="14.5"/>
+                                <rect key="frame" x="427.5" y="89" width="11.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lGO-lc-DP1">
-                                <rect key="frame" x="12" y="67.5" width="427" height="0.5"/>
+                                <rect key="frame" x="12" y="115.5" width="427" height="0.5"/>
                                 <color key="backgroundColor" name="_card_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="wRF-lf-2Ay"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="g0I-vH-fB1">
-                                <rect key="frame" x="12" y="84" width="427" height="90"/>
+                                <rect key="frame" x="12" y="132" width="427" height="90"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JpJ-mV-vLt">
                                         <rect key="frame" x="0.0" y="0.0" width="427" height="18"/>
@@ -180,7 +180,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bJZ-uS-vcE">
-                                <rect key="frame" x="12" y="190" width="427" height="40"/>
+                                <rect key="frame" x="12" y="238" width="427" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="onp-Up-qEw">
                                         <rect key="frame" x="0.0" y="0.0" width="209.5" height="40"/>
@@ -234,7 +234,7 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E0-Vf-syx">
+                            <button hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E0-Vf-syx">
                                 <rect key="frame" x="12" y="238" width="427" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -262,6 +262,7 @@
                         </subviews>
                         <color key="backgroundColor" name="cryptoorg_bg"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="bJZ-uS-vcE" secondAttribute="bottom" priority="750" constant="20" id="0ow-h6-3Uy"/>
                             <constraint firstItem="bJZ-uS-vcE" firstAttribute="leading" secondItem="v97-AB-9ct" secondAttribute="leading" constant="12" id="2AY-CM-klh"/>
                             <constraint firstItem="E8F-Fg-Icw" firstAttribute="leading" secondItem="gmJ-Tt-6Fh" secondAttribute="trailing" constant="6" id="6QB-ui-WsS"/>
                             <constraint firstItem="g0I-vH-fB1" firstAttribute="trailing" secondItem="lGO-lc-DP1" secondAttribute="trailing" id="C9m-EF-yGn"/>
@@ -302,6 +303,11 @@
                                 <integer key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="vRo-kR-dNU"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
