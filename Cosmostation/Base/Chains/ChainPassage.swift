@@ -11,7 +11,7 @@ import Foundation
 
 class ChainPassage: ChainConfig {
     var isGrpc = true
-    var chainType = ChainType.IRIS_MAIN
+    var chainType = ChainType.PASSAGE_MAIN
     var chainImg = UIImage(named: "chainPassage")
     var chainInfoImg = UIImage(named: "infoPassage")
     var chainInfoTitle = NSLocalizedString("send_guide_title_passage", comment: "")
