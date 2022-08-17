@@ -472,6 +472,7 @@ let BLOCK_TIME_EVMOS        = NSDecimalNumber.init(string: "5.824")
 let BLOCK_TIME_PROVENANCE   = NSDecimalNumber.init(string: "6.3061")
 let BLOCK_TIME_CERBERUS     = NSDecimalNumber.init(string: "5.9666")
 let BLOCK_TIME_OMNIFLIX     = NSDecimalNumber.init(string: "5.7970")
+let BLOCK_TIME_PASSAGE      = NSDecimalNumber.init(string: "5.8680")
 
 
 //NFT Denom Default config
