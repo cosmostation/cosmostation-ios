@@ -125,6 +125,8 @@ class ChainFactory {
             return .OMNIFLIX_MAIN
         case CHAIN_OSMOSIS_S:
             return .OSMOSIS_MAIN
+        case CHAIN_PASSAGE_S:
+            return .PASSAGE_MAIN
         case CHAIN_PERSIS_S:
             return .PERSIS_MAIN
         case CHAIN_PROVENANCE_S:
@@ -223,6 +225,8 @@ class ChainFactory {
             return ChainOmniflix(chainType!)
         case .OSMOSIS_MAIN:
             return ChainOsmosis(chainType!)
+        case .PASSAGE_MAIN:
+            return ChainPassage(chainType!)
         case .PERSIS_MAIN:
             return ChainPersistence(chainType!)
         case .PROVENANCE_MAIN:
@@ -315,6 +319,7 @@ let CHAIN_NYX_S = "SUPPORT_CHAIN_NYX"
 let CHAIN_OKEX_S = "SUPPORT_CHAIN_OKEX_MAIN"
 let CHAIN_OMNIFLIX_S = "SUPPORT_CHAIN_OMNIFLIX"
 let CHAIN_OSMOSIS_S = "SUPPORT_CHAIN_OSMOSIS_MAIN"
+let CHAIN_PASSAGE_S = "SUPPORT_CHAIN_PASSAGE_MAIN"
 let CHAIN_PERSIS_S = "SUPPORT_CHAIN_PERSISTENCE_MAIN"
 let CHAIN_PROVENANCE_S = "SUPPORT_CHAIN_PROVENANCE"
 let CHAIN_REGEN_S = "SUPPORT_CHAIN_REGEN"

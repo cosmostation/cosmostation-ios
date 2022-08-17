@@ -306,6 +306,7 @@ public enum ChainType: String {
     case MANTLE_MAIN
     case NYX_MAIN
     case TGRADE_MAIN
+    case PASSAGE_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -347,6 +348,7 @@ public enum ChainType: String {
         result.append(OKEX_MAIN)
         result.append(OMNIFLIX_MAIN)
         result.append(OSMOSIS_MAIN)
+        result.append(PASSAGE_MAIN)
         result.append(PERSIS_MAIN)
         result.append(PROVENANCE_MAIN)
         result.append(REGEN_MAIN)
@@ -470,6 +472,7 @@ let BLOCK_TIME_EVMOS        = NSDecimalNumber.init(string: "5.824")
 let BLOCK_TIME_PROVENANCE   = NSDecimalNumber.init(string: "6.3061")
 let BLOCK_TIME_CERBERUS     = NSDecimalNumber.init(string: "5.9666")
 let BLOCK_TIME_OMNIFLIX     = NSDecimalNumber.init(string: "5.7970")
+let BLOCK_TIME_PASSAGE      = NSDecimalNumber.init(string: "5.8680")
 
 
 //NFT Denom Default config
