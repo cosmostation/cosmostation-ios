@@ -1164,7 +1164,7 @@ public class WUtils {
             return BLOCK_TIME_OMNIFLIX
             
         } else if (chain == .PASSAGE_MAIN) {
-            return BLOCK_TIME_OMNIFLIX
+            return BLOCK_TIME_PASSAGE
             
         }
         return NSDecimalNumber.zero
