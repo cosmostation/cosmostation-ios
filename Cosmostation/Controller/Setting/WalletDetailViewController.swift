@@ -78,7 +78,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == 3) {
+        if (indexPath.row == 2) {
             if (rewardAddress == nil) { return 0 }
         }
         return UITableView.automaticDimension

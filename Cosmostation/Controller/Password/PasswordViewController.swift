@@ -341,21 +341,6 @@ class PasswordViewController: BaseViewController {
                     if let mainVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabViewController {
                         mainVC.processScheme()
                     }
-                } else if (appDelegate.userInfo != nil) {
-                    if let userInfo = appDelegate.userInfo,
-                        let notifyto = userInfo["notifyto"] as? String {
-                        appDelegate.userInfo = nil
-                        let notiAccount = BaseData.instance.selectAccountByAddress(address: notifyto)
-                        if (notiAccount != nil) {
-                            BaseData.instance.setRecentAccountId(notiAccount!.account_id)
-                            BaseData.instance.setLastTab(2)
-                            DispatchQueue.main.async(execute: {
-                                let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
-                                appDelegate.window?.rootViewController = mainTabVC
-                                self.present(mainTabVC, animated: true, completion: nil)
-                            })
-                        }
-                    }
                 }
             }
             

@@ -100,21 +100,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         if (application.topViewController!.isKind(of: PasswordViewController.self)) {
             NotificationCenter.default.post(name: Notification.Name("ForeGround"), object: nil, userInfo: nil)
-        } else {
-            if let notifyto = userInfo?["notifyto"] as? String {
-                userInfo = nil
-                let notiAccount = BaseData.instance.selectAccountByAddress(address: notifyto)
-                if (notiAccount != nil) {
-                    BaseData.instance.setRecentAccountId(notiAccount!.account_id)
-                    BaseData.instance.setLastTab(2)
-                    DispatchQueue.main.async(execute: {
-                        let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
-                        let rootVC = self.window?.rootViewController!
-                        self.window?.rootViewController = mainTabVC
-                        rootVC?.present(mainTabVC, animated: true, completion: nil)
-                    })
-                }
-            }
         }
     }
 
