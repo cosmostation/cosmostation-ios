@@ -365,7 +365,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             if (BaseData.instance.insertAccount(newAccount) > 0) {
                 KeychainWrapper.standard.set(mPrivateKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             }
-            
         } else {
             newAccount.account_from_mnemonic = true
             newAccount.account_m_size = Int64(self.mWords.getWordsCnt())
@@ -376,6 +375,7 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
                 KeychainWrapper.standard.set(derive.pKey.hexEncodedString(), forKey: newAccount.getPrivateKeySha1(), withAccessibility: .afterFirstUnlockThisDeviceOnly)
             }
         }
+        PushUtils.shared.sync()
         var hiddenChains = BaseData.instance.userHideChains()
         if (hiddenChains.contains(derive.chaintype)) {
             if let position = hiddenChains.firstIndex(where: { $0 == derive.chaintype }) {

@@ -1042,6 +1042,8 @@
 		04E6ABD6286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
+		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
+		181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
 		1817CAA3283E2CE500523713 /* crescent_farming_v1beta1_query.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D338EA27E826EF00E82AA7 /* crescent_farming_v1beta1_query.pb.swift */; };
 		1817CAA4283E2CE500523713 /* starname_cosmwasm_wasm_v1_ibc.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA5FF275F55A300229F6F /* starname_cosmwasm_wasm_v1_ibc.pb.swift */; };
 		1817CAA5283E2CE500523713 /* cosmos_staking_v1beta1_query.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040FA4D9275F559000229F6F /* cosmos_staking_v1beta1_query.grpc.swift */; };
@@ -3651,6 +3653,7 @@
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
 		1569489728ABD9E0004777ED /* ChainPassage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainPassage.swift; sourceTree = "<group>"; };
+		181099DE28AE92FC00C178B5 /* PushUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushUtils.swift; sourceTree = "<group>"; };
 		188746D528914EE300E0A558 /* MainDappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDappViewController.swift; sourceTree = "<group>"; };
 		18FFB7D5281AF533004E65BB /* CosmostationDev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CosmostationDev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FFB7D9281E9C9F004E65BB /* CosmostationDev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CosmostationDev.plist; sourceTree = "<group>"; };
@@ -6121,6 +6124,7 @@
 				E16FACB02361ADFA00372052 /* Bytes.swift */,
 				E17748D82282C612003D8CD1 /* Cosmostation-Bridging-Header.h */,
 				28D765A1271585FA00730F47 /* StarnameAssets.swift */,
+				181099DE28AE92FC00C178B5 /* PushUtils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -7630,6 +7634,7 @@
 				1817CBAA283E2CE500523713 /* iris_mod_nft_nft.pb.swift in Sources */,
 				18FFB435281AF533004E65BB /* SelectPopupViewController.swift in Sources */,
 				04C5AEA8286336D7007627EA /* RewardAddress4ViewController.swift in Sources */,
+				181099E028AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				1817CC65283E2CE600523713 /* evmos_inflation_v1_genesis.pb.swift in Sources */,
 				1817CAFC283E2CE500523713 /* sifnode_dispensation_v1_types.pb.swift in Sources */,
 				1817CB4F283E2CE500523713 /* cosmos_staking_v1beta1_authz.pb.swift in Sources */,
@@ -8924,6 +8929,7 @@
 				28D372AA254BFCE70071B136 /* RegisterAccount4ViewController.swift in Sources */,
 				040FAA16275F55C300229F6F /* desmos_subspaces_v1beta1_query.grpc.swift in Sources */,
 				2842AB6E242C5C7200248EEB /* CdpLisyMyCell.swift in Sources */,
+				181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */,
 				284D17D92535572300C364F9 /* DAppsListViewController.swift in Sources */,
 				E17748E62282D782003D8CD1 /* BTCProtocolSerialization.m in Sources */,
 				04C43B53278D5F520022D5DF /* kava_committee_v1beta1_tx.pb.swift in Sources */,

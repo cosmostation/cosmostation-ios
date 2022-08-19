@@ -48,7 +48,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         if( self.mFetchCnt > 0)  {
             self.showWaittingAlert()
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(self.showNotificationBanner(_:)), name: Notification.Name("pushNoti"), object: nil)
     }
     
     func processScheme() {
@@ -76,11 +75,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             })
             delegate.scheme = nil
         }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("pushNoti"), object: nil)
     }
     
     @objc public func showNotificationBanner(_ notification: NSNotification) {
