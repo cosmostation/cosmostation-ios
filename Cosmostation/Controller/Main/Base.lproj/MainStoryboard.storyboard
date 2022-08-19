@@ -1418,7 +1418,7 @@
                                                             <color key="textColor" name="_font05"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbV-j5-8zb">
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="gbV-j5-8zb">
                                                             <rect key="frame" x="329" y="6.5" width="51" height="31"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="gbV-j5-8zb" secondAttribute="height" multiplier="49:31" id="eGD-vG-YYO"/>
@@ -1481,7 +1481,7 @@
                                                             <color key="textColor" name="_font05"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OUi-VA-510">
+                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="OUi-VA-510">
                                                             <rect key="frame" x="329" y="6.5" width="51" height="31"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="OUi-VA-510" secondAttribute="height" multiplier="49:31" id="6rc-1m-IKN"/>
