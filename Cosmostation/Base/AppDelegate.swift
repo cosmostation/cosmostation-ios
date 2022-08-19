@@ -27,16 +27,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.synchronize()
         }
         
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
-        } else {
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .notDetermined:
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge], completionHandler: { (granted, error) in
+                    DispatchQueue.main.async {
+                        if granted {
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+                })
+                break
+            case .denied:
+                break
+            case .authorized, .provisional, .ephemeral:
+                DispatchQueue.main.async {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                break
+            }
         }
-
-        application.registerForRemoteNotifications()
+        
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                print("FCM registration token: \(token)")
+                PushUtils.shared.updateTokenIfNeed(token: token)
+            }
+        }
+        
         return true
     }
     
@@ -104,33 +124,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        let token = deviceToken.reduce("") { $0 + String(format: "%02.2hhx", $1) }
-//        print("token ", token)
-    }
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if application.applicationState == .inactive {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            guard let _ = userInfo["aps"] as? [String: Any],
+                  let address = userInfo["address"] as? String else {
+                    return
+            }
+            
+            let notiAccount = BaseData.instance.selectAccountByAddress(address: address)
+            if (notiAccount != nil) {
+                BaseData.instance.setRecentAccountId(notiAccount!.account_id)
+                BaseData.instance.setLastTab(2)
+                DispatchQueue.main.async(execute: {
+                    let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
+                    let rootVC = self.window?.rootViewController!
+                    self.window?.rootViewController = mainTabVC
+                    rootVC?.present(mainTabVC, animated: true, completion: nil)
+                })
+            }
+        } else {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+            guard let apsInfo = userInfo["aps"] as? [String: Any],
+                  let alert = apsInfo["alert"] as? [String: Any],
+                 let txhash = userInfo["txhash"] as? String,
+                  let chain = userInfo["chain"] as? String,
+                  let title = alert["title"] as? String,
+                  let body = alert["body"] as? String else {
+                    return
+            }
+            let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "보러가기", style: .default, handler: { (action) in
+                if let config = ChainFactory.SUPPRT_CONFIG().filter({ config in
+                    config.chainAPIName == chain
+                }).first {
+                    UIApplication.shared.open(URL(string: WUtils.getTxExplorer(config, txhash))!, options: [:], completionHandler: nil)
+                }
+            }))
+            alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+            window?.rootViewController?.present(alertController, animated: true, completion: nil)
         }
     }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print(" Message ID: \(messageID)")
-        }
-        print("fetch: ",userInfo)
-        completionHandler(UIBackgroundFetchResult.newData)
-    }
-
-
 }
+
 extension UIApplication{
-    var topViewController: UIViewController?{
+    var topViewController: UIViewController? {
         if keyWindow?.rootViewController == nil{
             return keyWindow?.rootViewController
         }
@@ -151,35 +189,3 @@ extension UIApplication{
         
     }
 }
-
-// [START ios_10_message_handling]
-@available(iOS 10, *)
-extension AppDelegate : UNUserNotificationCenterDelegate {
-    // Receive displayed notifications for iOS 10 devices.
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        NotificationCenter.default.post(name: Notification.Name("pushNoti"), object: nil, userInfo: userInfo)
-        completionHandler([])
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let userInfo = response.notification.request.content.userInfo
-        if let notifyto = userInfo["notifyto"] as? String {
-            self.userInfo = userInfo
-        }
-        completionHandler()
-    }
-}
-// [END ios_10_message_handling]
-
-extension AppDelegate : MessagingDelegate {
-//    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-//        print("msg didReceive \(remoteMessage.appData)")
-//    }
-//    
-//    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-//        print("msg didReceiveRegistrationToken : ", fcmToken)
-//    }
-    
-}
-

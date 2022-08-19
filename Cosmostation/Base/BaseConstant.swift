@@ -25,7 +25,7 @@ let KEY_USING_BIO_AUTH                  = "KEY_USING_BIO_AUTH"
 let KEY_AUTO_PASS                       = "KEY_AUTO_PASS"
 let KEY_LAST_PASS_TIME                  = "KEY_LAST_PASS_TIME"
 let KEY_ENGINER_MODE                    = "KEY_ENGINER_MODE"
-let KEY_FCM_TOKEN                       = "KEY_FCM_TOKEN"
+let KEY_FCM_TOKEN                       = "KEY_FCM_TOKEN_NEW"
 let KEY_KAVA_TESTNET_WARN               = "KEY_KAVA_TESTNET_WARN"
 let KEY_USER_HIDEN_CHAINS               = "KEY_USER_HIDEN_CHAINS"
 let KEY_USER_SORTED_CHAINS              = "KEY_USER_SORTED_CHAINS"
@@ -48,6 +48,10 @@ let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTu
 let CSS_VERSION                         = CSS_URL + "v1/app/version/ios";
 let CSS_PUSH_UPDATE                     = CSS_URL + "v1/account/update";
 let CSS_MOON_PAY                        = CSS_URL + "v1/sign/moonpay";
+
+let WALLET_API_BASE_URL                      = "https://api-wallet-dev.cosmostation.io/";
+let WALLET_API_SYNC_PUSH_URL                 = WALLET_API_BASE_URL + "v1/push/token/address";
+let WALLET_API_PUSH_STATUS_URL               = WALLET_API_BASE_URL + "v1/push/alarm/status";
 
 
 let DB_VERSION                      = 2

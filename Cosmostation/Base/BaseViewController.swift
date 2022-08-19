@@ -109,7 +109,7 @@ class BaseViewController: UIViewController {
         DispatchQueue.global().async {
             BaseData.instance.deleteAccount(account: account)
             BaseData.instance.deleteBalance(account: account)
-            
+            PushUtils.shared.sync()
             if (KeychainWrapper.standard.hasValue(forKey: account.account_uuid.sha1())) {
                 KeychainWrapper.standard.removeObject(forKey: account.account_uuid.sha1())
             }
@@ -127,8 +127,7 @@ class BaseViewController: UIViewController {
             linkedAccounts.forEach { account in
                 self.onDeleteWallet(account) { }
             }
-            
-            BaseData.instance.deleteMnemonic(mwords)
+            PushUtils.shared.sync()
             if (KeychainWrapper.standard.hasValue(forKey: mwords.uuid.sha1())) {
                 KeychainWrapper.standard.removeObject(forKey: mwords.uuid.sha1())
             }

@@ -10,6 +10,7 @@ import UIKit
 import SafariServices
 import Toast_Swift
 import LocalAuthentication
+import Alamofire
 
 class SettingTableViewController: UITableViewController, PasswordViewDelegate, QrScannerDelegate {
     
@@ -30,6 +31,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var autoPassLabel: UILabel!
     @IBOutlet weak var explorerLabel: UILabel!
     @IBOutlet weak var enginerModeSwitch: UISwitch!
+    @IBOutlet weak var noticeAlarmSwith: UISwitch!
+    @IBOutlet weak var txAlarmSwith: UISwitch!
     var hideBio = false
     var checkMode = -1
     
@@ -47,6 +50,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         self.onUpdateTheme()
         self.onUpdateAutoPass()
         self.onUpdateCurrency()
+        self.onUpdateAlarm()
         
     }
     
@@ -116,10 +120,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             if (indexPath.row == 0) {
                 self.onShowThemeDialog()
                 
-            } else if (indexPath.row == 3) {
+            } else if (indexPath.row == 5) {
                 self.onClickAutoPass()
                 
-            } else if (indexPath.row == 4) {
+            } else if (indexPath.row == 6) {
                 self.onShowCurrenyDialog()
             }
             
@@ -198,6 +202,23 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     func onUpdateCurrency() {
         currecyLabel.text = BaseData.instance.getCurrencyString()
+    }
+    
+    func onUpdateAlarm() {
+        guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
+        Alamofire.request(WALLET_API_PUSH_STATUS_URL + "/" + token, method: .get, encoding: URLEncoding.default).responseJSON { response in
+            switch response.result {
+            case .success(let res):
+                if let result = res as? [String : Any]  {
+                    if let txOn = result["sub_tx"] as? Bool, let noticeOn = result["sub_notice"] as? Bool {
+                        self.txAlarmSwith.isOn = txOn
+                        self.noticeAlarmSwith.isOn = noticeOn
+                    }
+                }
+            case .failure(let error):
+                print("push status error ", error)
+            }
+        }
     }
     
     
@@ -421,6 +442,14 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             passwordVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(passwordVC, animated: false)
         }
+    }
+    
+    @IBAction func noticeAlarmToggle(_ sender: UISwitch) {
+        PushUtils.shared.updateStatus(notice: sender.isOn, tx: txAlarmSwith.isOn)
+    }
+    
+    @IBAction func txAlarmToggle(_ sender: UISwitch) {
+        PushUtils.shared.updateStatus(notice: noticeAlarmSwith.isOn, tx: sender.isOn)
     }
     
     @IBAction func bioToggle(_ sender: UISwitch) {
