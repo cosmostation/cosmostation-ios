@@ -74,9 +74,13 @@ class MainDappViewController: BaseViewController {
 
 extension MainDappViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if let url = navigationAction.request.url, url.scheme == "cosmostation" {
-            UIApplication.shared.open(url, options: [:])
-            decisionHandler(.cancel)
+        if let url = navigationAction.request.url {
+            if (url.host == "dapps.cosmostation.io") {
+                decisionHandler(.allow)
+            } else {
+                UIApplication.shared.open(url, options: [:])
+                decisionHandler(.cancel)
+            }
         } else {
             decisionHandler(.allow)
         }
@@ -87,7 +91,7 @@ extension MainDappViewController: WKNavigationDelegate, WKUIDelegate {
         let alertController = UIAlertController(title: NSLocalizedString("wc_alert_title", comment: ""), message: message, preferredStyle: .alert)
         if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let cancelAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .cancel) { _ in
-            completionHandler()
+            completionHandler()	
         }
         alertController.addAction(cancelAction)
         DispatchQueue.main.async {
