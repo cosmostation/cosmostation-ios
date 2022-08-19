@@ -36,7 +36,6 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         self.walletDetailListTableView.dataSource = self
         self.walletDetailListTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.walletDetailListTableView.register(UINib(nibName: "WalletDetailAddressCell", bundle: nil), forCellReuseIdentifier: "WalletDetailAddressCell")
-        self.walletDetailListTableView.register(UINib(nibName: "WalletDetailPushCell", bundle: nil), forCellReuseIdentifier: "WalletDetailPushCell")
         self.walletDetailListTableView.register(UINib(nibName: "WalletDetailInfoCell", bundle: nil), forCellReuseIdentifier: "WalletDetailInfoCell")
         self.walletDetailListTableView.register(UINib(nibName: "WalletDetailRewardCell", bundle: nil), forCellReuseIdentifier: "WalletDetailRewardCell")
         self.walletDetailListTableView.rowHeight = UITableView.automaticDimension
@@ -75,13 +74,11 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row == 1) {
-            if (!selectedChainConfig.pushSupport) { return 0 }
-        } else if (indexPath.row == 3) {
+        if (indexPath.row == 3) {
             if (rewardAddress == nil) { return 0 }
         }
         return UITableView.automaticDimension
@@ -95,12 +92,6 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
             return cell
             
         } else if (indexPath.row == 1) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDetailPushCell") as! WalletDetailPushCell
-            cell.onBindView(selectedChainConfig, selectedAccount)
-            cell.actionPush = { bool in self.onTogglePush(bool) }
-            return cell
-            
-        } else if (indexPath.row == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletDetailInfoCell") as! WalletDetailInfoCell
             cell.onBindView(selectedChainConfig, selectedAccount, chainId)
             cell.actionAddress = { self.shareAddressType(self.selectedChainConfig, self.selectedAccount) }
@@ -142,53 +133,6 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
         self.present(nameAlert, animated: true) {
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissAlertController))
             nameAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
-        }
-    }
-    
-    func onTogglePush(_ isOn: Bool) {
-//        print("onTogglePush ", isOn)
-        if (isOn) {
-            UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-                if settings.authorizationStatus == .authorized {
-                    DispatchQueue.main.async {
-                        self.showWaittingAlert()
-                        self.onToggleAlarm(self.selectedAccount) { (success) in
-                            self.selectedAccount = BaseData.instance.selectAccountById(id: self.selectedAccount.account_id)
-                            self.onReloadTableView(1)
-                            self.dismissAlertController()
-                        }
-                    }
-                    
-                } else {
-                    let alertController = UIAlertController(title: NSLocalizedString("permission_push_title", comment: ""), message: NSLocalizedString("permission_push_msg", comment: ""), preferredStyle: .alert)
-                    if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
-                    let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (_) -> Void in
-                        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                            return
-                        }
-                        if UIApplication.shared.canOpenURL(settingsUrl) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
-                        }
-                    }
-                    let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
-                    alertController.addAction(cancelAction)
-                    alertController.addAction(settingsAction)
-                    self.onReloadTableView(1)
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true, completion: nil)
-                    }
-                }
-            }
-            
-        } else {
-            DispatchQueue.main.async {
-                self.showWaittingAlert()
-                self.onToggleAlarm(self.selectedAccount) { (success) in
-                    self.selectedAccount = BaseData.instance.selectAccountById(id: self.selectedAccount.account_id)
-                    self.onReloadTableView(1)
-                    self.dismissAlertController()
-                }
-            }
         }
     }
     

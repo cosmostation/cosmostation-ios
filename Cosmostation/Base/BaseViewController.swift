@@ -105,7 +105,6 @@ class BaseViewController: UIViewController {
     }
     
     func onDeleteWallet(_ account:Account, completion: @escaping () -> ()) {
-        self.onDeleteAlarm(account)
         DispatchQueue.global().async {
             BaseData.instance.deleteAccount(account: account)
             BaseData.instance.deleteBalance(account: account)
@@ -300,51 +299,5 @@ extension BaseViewController {
     }
     
     @objc func disableUserInteraction() {
-    }
-    
-    func onToggleAlarm(_ account: Account, completion: @escaping (Bool) -> ()) {
-        let param = ["chain_id":WUtils.getChainTypeInt(account.account_base_chain),
-                     "device_type":"ios",
-                     "address":account.account_address,
-                     "alarm_token":BaseData.instance.getFCMToken(),
-                     "alarm_status":!account.account_push_alarm] as [String : Any]
-        let request = Alamofire.request(CSS_PUSH_UPDATE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                guard let responseData = res as? NSDictionary else {
-                    completion(true)
-                    return
-                }
-                let result = responseData.object(forKey: "result") as? Bool ?? false
-                if (result) {
-                    BaseData.instance.updatePushAlarm(account, !account.account_push_alarm)
-                    completion(true)
-                }
-                completion(false)
-                
-
-            case .failure(let error):
-                completion(false)
-            }
-        }
-    }
-    
-    func onDeleteAlarm(_ account: Account) {
-        let param = ["chain_id":WUtils.getChainTypeInt(account.account_base_chain),
-                     "device_type":"ios",
-                     "address":account.account_address,
-                     "alarm_token":BaseData.instance.getFCMToken(),
-                     "alarm_status":false] as [String : Any]
-        let request = Alamofire.request(CSS_PUSH_UPDATE, method: .post, parameters: param, encoding: JSONEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                print("res ", res)
-
-            case .failure(let error):
-                print("error ", error)
-            }
-        }
     }
 }
