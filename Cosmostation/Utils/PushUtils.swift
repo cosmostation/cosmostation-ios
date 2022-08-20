@@ -16,7 +16,14 @@ class PushUtils {
         if token != UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) {
             UserDefaults.standard.set(token, forKey: KEY_FCM_TOKEN)
             UserDefaults.standard.synchronize()
-            sync()
+            guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
+            Alamofire.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).response { response in
+                if (response.error != nil || response.response?.statusCode != 200) {
+                    self.updateStatus(notice: false, tx: false)
+                } else {
+                    self.sync()
+                }
+            }
         }
     }
     

@@ -15,7 +15,6 @@ import StoreKit
 class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, FloatyDelegate, QrScannerDelegate, PasswordViewDelegate {
 
     @IBOutlet weak var titleChainImg: UIImageView!
-    @IBOutlet weak var titleAlarmBtn: UIButton!
     @IBOutlet weak var titleWalletName: UILabel!
     
     @IBOutlet weak var walletTableView: UITableView!
@@ -91,23 +90,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         
         self.titleChainImg.image = chainConfig?.chainImg
         self.titleWalletName.text = account?.getDpName()
-        self.titleAlarmBtn.isHidden = !(chainConfig?.pushSupport ?? false)
-        
-        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-            if settings.authorizationStatus == .authorized {
-                DispatchQueue.main.async {
-                    if (self.account!.account_push_alarm) {
-                        self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOn"), for: .normal)
-                    } else {
-                        self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOff"), for: .normal)
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.titleAlarmBtn.setImage(UIImage(named: "btnAlramOff"), for: .normal)
-                }
-            }
-        }
         self.updateFloaty()
     }
     
@@ -532,50 +514,6 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         let link = WUtils.getAccountExplorer(chainConfig, account!.account_address)
         guard let url = URL(string: link) else { return }
         self.onShowSafariWeb(url)
-    }
-    
-    @IBAction func onClickAlaram(_ sender: UIButton) {
-        if (sender.imageView?.image == UIImage(named: "btnAlramOff")) {
-            UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-                if settings.authorizationStatus == .authorized {
-                    DispatchQueue.main.async {
-                        self.showWaittingAlert()
-                        self.onToggleAlarm(self.account!) { (success) in
-                            self.mainTabVC.onUpdateAccountDB()
-                            self.updateTitle()
-                            self.dismissAlertController()
-                        }
-                    }
-                    
-                } else {
-                    let alertController = UIAlertController(title: NSLocalizedString("permission_push_title", comment: ""), message: NSLocalizedString("permission_push_msg", comment: ""), preferredStyle: .alert)
-                    if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
-                    let settingsAction = UIAlertAction(title: NSLocalizedString("settings", comment: ""), style: .default) { (_) -> Void in
-                        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                            return
-                        }
-                        if UIApplication.shared.canOpenURL(settingsUrl) {
-                            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in })
-                        }
-                    }
-                    let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
-                    alertController.addAction(cancelAction)
-                    alertController.addAction(settingsAction)
-                    DispatchQueue.main.async {
-                        self.present(alertController, animated: true, completion: nil)
-                    }
-                }
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.showWaittingAlert()
-                self.onToggleAlarm(self.account!) { (success) in
-                    self.mainTabVC.onUpdateAccountDB()
-                    self.updateTitle()
-                    self.dismissAlertController()
-                }
-            }
-        }
     }
     
     func onClickValidatorList() {

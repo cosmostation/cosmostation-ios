@@ -12,7 +12,7 @@ import Firebase
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     var userInfo:[AnyHashable : Any]?
@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserDefaults.standard.synchronize()
         }
         
+        UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .notDetermined:
@@ -35,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if granted {
                             UIApplication.shared.registerForRemoteNotifications()
                         }
+                        self.requestToken()
                     }
                 })
                 break
@@ -44,20 +46,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DispatchQueue.main.async {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
+                self.requestToken()
                 break
             }
         }
         
+        return true
+    }
+    
+    func requestToken() {
         Messaging.messaging().token { token, error in
             if let error = error {
-                print("Error fetching FCM registration token: \(error)")
+                print("Get FCM token error : \(error)")
             } else if let token = token {
-                print("FCM registration token: \(token)")
                 PushUtils.shared.updateTokenIfNeed(token: token)
             }
         }
-        
-        return true
     }
     
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -100,21 +104,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         if (application.topViewController!.isKind(of: PasswordViewController.self)) {
             NotificationCenter.default.post(name: Notification.Name("ForeGround"), object: nil, userInfo: nil)
-        } else {
-            if let notifyto = userInfo?["notifyto"] as? String {
-                userInfo = nil
-                let notiAccount = BaseData.instance.selectAccountByAddress(address: notifyto)
-                if (notiAccount != nil) {
-                    BaseData.instance.setRecentAccountId(notiAccount!.account_id)
-                    BaseData.instance.setLastTab(2)
-                    DispatchQueue.main.async(execute: {
-                        let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
-                        let rootVC = self.window?.rootViewController!
-                        self.window?.rootViewController = mainTabVC
-                        rootVC?.present(mainTabVC, animated: true, completion: nil)
-                    })
-                }
-            }
         }
     }
 
@@ -164,6 +153,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
             window?.rootViewController?.present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler(.alert)
     }
 }
 

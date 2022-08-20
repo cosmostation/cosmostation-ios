@@ -1447,15 +1447,6 @@ final class BaseData : NSObject{
         }
     }
     
-    public func updatePushAlarm(_ account: Account, _ enable: Bool){
-        let target = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
-        do {
-            try database.run(target.update(DB_ACCOUNT_PUSHALARM <- enable))
-        } catch {
-            print(error)
-        }
-    }
-    
     public func deleteAccount(account: Account) -> Int {
         let query = DB_ACCOUNT.filter(DB_ACCOUNT_ID == account.account_id)
         do {
