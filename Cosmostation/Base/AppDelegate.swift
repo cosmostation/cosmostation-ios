@@ -136,21 +136,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UIApplication.shared.applicationIconBadgeNumber = 0
             guard let apsInfo = userInfo["aps"] as? [String: Any],
                   let alert = apsInfo["alert"] as? [String: Any],
-                 let txhash = userInfo["txhash"] as? String,
-                  let chain = userInfo["chain"] as? String,
+                 let url = userInfo["url"] as? String,
                   let title = alert["title"] as? String,
                   let body = alert["body"] as? String else {
                     return
             }
             let alertController = UIAlertController(title: title, message: body, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "보러가기", style: .default, handler: { (action) in
-                if let config = ChainFactory.SUPPRT_CONFIG().filter({ config in
-                    config.chainAPIName == chain
-                }).first {
-                    UIApplication.shared.open(URL(string: WUtils.getTxExplorer(config, txhash))!, options: [:], completionHandler: nil)
-                }
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("mintscan_explorer", comment: ""), style: .default, handler: { (action) in
+                UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
             }))
-            alertController.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+            alertController.addAction(UIAlertAction(title: NSLocalizedString("close", comment: ""), style: .cancel, handler: nil))
             window?.rootViewController?.present(alertController, animated: true, completion: nil)
         }
     }
