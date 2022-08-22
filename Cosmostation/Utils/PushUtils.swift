@@ -19,7 +19,7 @@ class PushUtils {
             guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
             Alamofire.request("\(WALLET_API_PUSH_STATUS_URL)/\(token)", method: .get).response { response in
                 if (response.error != nil || response.response?.statusCode != 200) {
-                    self.updateStatus(notice: false, tx: false)
+                    self.updateStatus(enable: false)
                 } else {
                     self.sync()
                 }
@@ -27,13 +27,13 @@ class PushUtils {
         }
     }
     
-    func updateStatus(notice: Bool, tx: Bool) {
-        if (notice || tx) {
+    func updateStatus(enable: Bool) {
+        if (enable) {
             sync()
         }
         
         guard let token = UserDefaults.standard.string(forKey: KEY_FCM_TOKEN) else { return }
-        let parameters: Parameters = ["fcm_token": token, "sub_notice": notice, "sub_tx": tx]
+        let parameters: Parameters = ["fcm_token": token, "subscribe": enable]
         Alamofire.request(WALLET_API_PUSH_STATUS_URL, method: .put, parameters: parameters, encoding: JSONEncoding.default).response { response in
             if let error = response.error {
                 print("push status update error : ", error)

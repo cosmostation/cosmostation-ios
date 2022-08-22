@@ -31,8 +31,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var autoPassLabel: UILabel!
     @IBOutlet weak var explorerLabel: UILabel!
     @IBOutlet weak var enginerModeSwitch: UISwitch!
-    @IBOutlet weak var noticeAlarmSwith: UISwitch!
-    @IBOutlet weak var txAlarmSwith: UISwitch!
+    @IBOutlet weak var notificationSwitch: UISwitch!
     var hideBio = false
     var checkMode = -1
     
@@ -210,9 +209,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             switch response.result {
             case .success(let res):
                 if let result = res as? [String : Any]  {
-                    if let txOn = result["sub_tx"] as? Bool, let noticeOn = result["sub_notice"] as? Bool {
-                        self.txAlarmSwith.isOn = txOn
-                        self.noticeAlarmSwith.isOn = noticeOn
+                    if let on = result["subscribe"] as? Bool {
+                        self.notificationSwitch.isOn = on
                     }
                 }
             case .failure(let error):
@@ -444,12 +442,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         }
     }
     
-    @IBAction func noticeAlarmToggle(_ sender: UISwitch) {
-        PushUtils.shared.updateStatus(notice: sender.isOn, tx: txAlarmSwith.isOn)
-    }
-    
-    @IBAction func txAlarmToggle(_ sender: UISwitch) {
-        PushUtils.shared.updateStatus(notice: noticeAlarmSwith.isOn, tx: sender.isOn)
+    @IBAction func notificationToggle(_ sender: UISwitch) {
+        PushUtils.shared.updateStatus(enable: sender.isOn)
     }
     
     @IBAction func bioToggle(_ sender: UISwitch) {
