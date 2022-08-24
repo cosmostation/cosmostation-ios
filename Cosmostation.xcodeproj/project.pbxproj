@@ -969,6 +969,10 @@
 		04E165B528A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165AB28A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift */; };
 		04E165B728A0F873000F12C0 /* ChainTgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165B628A0F873000F12C0 /* ChainTgrade.swift */; };
 		04E165B828A0F873000F12C0 /* ChainTgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165B628A0F873000F12C0 /* ChainTgrade.swift */; };
+		04E165BA28B61BE1000F12C0 /* MintscanAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165B928B61BE1000F12C0 /* MintscanAsset.swift */; };
+		04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165B928B61BE1000F12C0 /* MintscanAsset.swift */; };
+		04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165BC28B62133000F12C0 /* MintscanToken.swift */; };
+		04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165BC28B62133000F12C0 /* MintscanToken.swift */; };
 		04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
 		04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
 		04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2C276F23D9009B39BA /* xmas@2x.png */; };
@@ -3596,6 +3600,8 @@
 		04E165AA28A0F4A4000F12C0 /* confio_twasm_v1beta1_genesis.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_twasm_v1beta1_genesis.pb.swift; sourceTree = "<group>"; };
 		04E165AB28A0F4A4000F12C0 /* confio_twasm_v1beta1_proposal.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confio_twasm_v1beta1_proposal.pb.swift; sourceTree = "<group>"; };
 		04E165B628A0F873000F12C0 /* ChainTgrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTgrade.swift; sourceTree = "<group>"; };
+		04E165B928B61BE1000F12C0 /* MintscanAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanAsset.swift; sourceTree = "<group>"; };
+		04E165BC28B62133000F12C0 /* MintscanToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanToken.swift; sourceTree = "<group>"; };
 		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
 		04E25D2B276F23D9009B39BA /* new2022@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@3x.png"; sourceTree = "<group>"; };
 		04E25D2C276F23D9009B39BA /* xmas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@2x.png"; sourceTree = "<group>"; };
@@ -6029,6 +6035,8 @@
 				0479664F2757409700315D55 /* MintscanProposalDetail.swift */,
 				045DAD832897BC14004ED9B4 /* MintscanMyVotes.swift */,
 				047DCEE128855F4800253CAA /* MintscanMyVote.swift */,
+				04E165B928B61BE1000F12C0 /* MintscanAsset.swift */,
+				04E165BC28B62133000F12C0 /* MintscanToken.swift */,
 				046BD21F27788723002333B5 /* StationNFTData.swift */,
 				0444443727AC27A900EB093E /* BridgeToken.swift */,
 				04E2A32227A5787A0045ED21 /* Cw20Token.swift */,
@@ -7368,6 +7376,7 @@
 				1817CB66283E2CE500523713 /* evmos_erc20_v1_query.pb.swift in Sources */,
 				1817CAB5283E2CE500523713 /* sifnode_dispensation_v1_query.pb.swift in Sources */,
 				18FFB336281AF533004E65BB /* KeyboardViewController.swift in Sources */,
+				04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				1817CBD0283E2CE600523713 /* osmosis_claim_v1beta1_query.pb.swift in Sources */,
 				0451FC73282A3AAE00214FDA /* ChainEmoney.swift in Sources */,
 				18FFB33A281AF533004E65BB /* DesmosProfileInfoCell.swift in Sources */,
@@ -7557,6 +7566,7 @@
 				042A0CBE288E599F00C4DC38 /* cosmos_auth_v1beta1_auth.pb.swift in Sources */,
 				1817CB21283E2CE500523713 /* sifnode_clp_v1_types.pb.swift in Sources */,
 				1817CB73283E2CE500523713 /* desmos_profiles_v1beta1_models_app_links.pb.swift in Sources */,
+				04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */,
 				18FFB3DF281AF533004E65BB /* BaseConstant.swift in Sources */,
 				1817CB2A283E2CE500523713 /* desmos_profiles_v1beta1_msg_server.grpc.swift in Sources */,
 				1817CB36283E2CE500523713 /* desmos_profiles_v1beta1_client_cli.pb.swift in Sources */,
@@ -8401,6 +8411,7 @@
 				04E6ABA928635845008DC3C7 /* CdpDeposit1ViewController.swift in Sources */,
 				28E04592269B52290022A366 /* Swap0ViewController.swift in Sources */,
 				28D28ACD26CB6BE00074964C /* StartLock3ViewController.swift in Sources */,
+				04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */,
 				0451FC66282A3A3200214FDA /* ChainSentinel.swift in Sources */,
 				04D3391527E826F100E82AA7 /* crescent_liquidity_v1beta1_query.grpc.swift in Sources */,
 				042A0CB3288E599F00C4DC38 /* cosmos_auth_v1beta1_query.pb.swift in Sources */,
@@ -8411,6 +8422,7 @@
 				04E6ABAF28635854008DC3C7 /* CdpDeposit4ViewController.swift in Sources */,
 				0451FD7A2832370100214FDA /* osmosis_gamm_pool-models_balancer_balancerPool.pb.swift in Sources */,
 				046E9049268C7C2B002CFFE1 /* BinanceHexEncoding.swift in Sources */,
+				04E165BA28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				28474ED5241E06AF00AF5A81 /* TxCdpRepayCell.swift in Sources */,
 				04D3392327E8803000E82AA7 /* WalletCrescentCell.swift in Sources */,
 				047FB6F6281A4C53009D8AAF /* sifnode_oracle_v1_types.pb.swift in Sources */,

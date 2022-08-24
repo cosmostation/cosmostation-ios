@@ -215,7 +215,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         
         
         
-        if (mChainType == ChainType.BINANCE_MAIN) {
+        if (mChainType == .BINANCE_MAIN) {
             self.mFetchCnt = 6
             onFetchNodeInfo()
             onFetchAccountInfo(mAccount)
@@ -224,7 +224,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             onFetchBnbTokenTickers()
             onFetchBnbMiniTokenTickers()
             
-        } else if (mChainType == ChainType.OKEX_MAIN) {
+        } else if (mChainType == .OKEX_MAIN) {
             self.mFetchCnt = 8
             onFetchNodeInfo()
             onFetchAllValidatorsInfo();
@@ -240,7 +240,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
         }
                 
-        else if (self.mChainType == ChainType.COSMOS_MAIN) {
+        else if (self.mChainType == .COSMOS_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -254,18 +254,18 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
             
-        } else if (self.mChainType == ChainType.IRIS_MAIN || self.mChainType == ChainType.AKASH_MAIN || self.mChainType == ChainType.PERSIS_MAIN ||
-                   self.mChainType == ChainType.CRYPTO_MAIN || self.mChainType == ChainType.SENTINEL_MAIN || self.mChainType == ChainType.MEDI_MAIN ||
-                   self.mChainType == ChainType.CERTIK_MAIN  || self.mChainType == ChainType.EMONEY_MAIN || self.mChainType == ChainType.FETCH_MAIN ||
-                   self.mChainType == ChainType.RIZON_MAIN || self.mChainType == ChainType.BAND_MAIN || self.mChainType == ChainType.JUNO_MAIN ||
-                   self.mChainType == ChainType.REGEN_MAIN || self.mChainType == ChainType.BITCANA_MAIN || self.mChainType == ChainType.ALTHEA_MAIN ||
-                   self.mChainType == ChainType.GRAVITY_BRIDGE_MAIN || self.mChainType == ChainType.KI_MAIN || self.mChainType == ChainType.COMDEX_MAIN ||
-                   self.mChainType == ChainType.SECRET_MAIN || self.mChainType == ChainType.INJECTIVE_MAIN || self.mChainType == ChainType.BITSONG_MAIN ||
-                   self.mChainType == ChainType.DESMOS_MAIN || self.mChainType == ChainType.LUM_MAIN || self.mChainType == ChainType.CHIHUAHUA_MAIN ||
-                   self.mChainType == ChainType.AXELAR_MAIN || self.mChainType == ChainType.KONSTELLATION_MAIN || self.mChainType == ChainType.UMEE_MAIN ||
-                   self.mChainType == ChainType.EVMOS_MAIN || self.mChainType == ChainType.PROVENANCE_MAIN || self.mChainType == ChainType.CUDOS_MAIN ||
-                   self.mChainType == ChainType.SIF_MAIN || self.mChainType == ChainType.CERBERUS_MAIN || self.mChainType == ChainType.OMNIFLIX_MAIN ||
-                   self.mChainType == ChainType.CRESCENT_MAIN || self.mChainType == ChainType.MANTLE_MAIN || self.mChainType == ChainType.NYX_MAIN || self.mChainType == ChainType.PASSAGE_MAIN) {
+        } else if (self.mChainType == .IRIS_MAIN || self.mChainType == .AKASH_MAIN || self.mChainType == .PERSIS_MAIN ||
+                   self.mChainType == .CRYPTO_MAIN || self.mChainType == .SENTINEL_MAIN || self.mChainType == .MEDI_MAIN ||
+                   self.mChainType == .CERTIK_MAIN  || self.mChainType == .EMONEY_MAIN || self.mChainType == .FETCH_MAIN ||
+                   self.mChainType == .RIZON_MAIN || self.mChainType == .BAND_MAIN || self.mChainType == .JUNO_MAIN ||
+                   self.mChainType == .REGEN_MAIN || self.mChainType == .BITCANA_MAIN || self.mChainType == .ALTHEA_MAIN ||
+                   self.mChainType == .GRAVITY_BRIDGE_MAIN || self.mChainType == .KI_MAIN || self.mChainType == .COMDEX_MAIN ||
+                   self.mChainType == .SECRET_MAIN || self.mChainType == .INJECTIVE_MAIN || self.mChainType == .BITSONG_MAIN ||
+                   self.mChainType == .DESMOS_MAIN || self.mChainType == .LUM_MAIN || self.mChainType == .CHIHUAHUA_MAIN ||
+                   self.mChainType == .AXELAR_MAIN || self.mChainType == .KONSTELLATION_MAIN || self.mChainType == .UMEE_MAIN ||
+                   self.mChainType == .EVMOS_MAIN || self.mChainType == .PROVENANCE_MAIN || self.mChainType == .CUDOS_MAIN ||
+                   self.mChainType == .SIF_MAIN || self.mChainType == .CERBERUS_MAIN || self.mChainType == .OMNIFLIX_MAIN ||
+                   self.mChainType == .CRESCENT_MAIN || self.mChainType == .MANTLE_MAIN || self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -278,7 +278,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (self.mChainType == ChainType.IOV_MAIN) {
+        } else if (self.mChainType == .IOV_MAIN) {
             self.mFetchCnt = 11
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -294,7 +294,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCStarNameFees()
             self.onFetchgRPCStarNameConfig()
             
-        } else if (self.mChainType == ChainType.OSMOSIS_MAIN) {
+        } else if (self.mChainType == .OSMOSIS_MAIN) {
             self.mFetchCnt = 10
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -309,7 +309,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
             self.onFetchgRPCOsmoPools()
             
-        } else if (self.mChainType == ChainType.STARGAZE_MAIN) {
+        } else if (self.mChainType == .STARGAZE_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -322,7 +322,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (mChainType == ChainType.KAVA_MAIN) {
+        } else if (mChainType == .KAVA_MAIN) {
             self.mFetchCnt = 12
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -351,7 +351,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.ALTHEA_TEST || self.mChainType == ChainType.CRESCENT_TEST || self.mChainType == ChainType.STATION_TEST) {
+        } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST || self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -441,7 +441,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.checkEventIcon()
             return
             
-        } else if (mChainType == ChainType.BINANCE_MAIN) {
+        } else if (mChainType == .BINANCE_MAIN) {
             mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
             mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
             BaseData.instance.mBalances = mBalances
@@ -451,7 +451,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.checkEventIcon()
             return
             
-        } else if (mChainType == ChainType.OKEX_MAIN) {
+        } else if (mChainType == .OKEX_MAIN) {
             mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
             mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
             
@@ -541,7 +541,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if (self.mChainType == ChainType.BINANCE_MAIN) {
+                if (self.mChainType == .BINANCE_MAIN) {
                     guard let info = res as? [String : Any] else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.onFetchFinished()
@@ -551,7 +551,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithBnbAccountInfo(account, bnbAccountInfo))
                     BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithBnbAccountInfo(account, bnbAccountInfo))
                     
-                } else if (self.mChainType == ChainType.OKEX_MAIN) {
+                } else if (self.mChainType == .OKEX_MAIN) {
                     guard let info = res as? NSDictionary else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.onFetchFinished()
@@ -772,7 +772,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Auth response ", response)
+//                    print("Auth response ", response)
                     BaseData.instance.mAccount_gRPC = response.account
                 }
                 try channel.close().wait()
@@ -861,7 +861,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Balance response ", response)
+//                    print("Balance response ", response)
                     response.balances.forEach { balance in
                         if (NSDecimalNumber.init(string: balance.amount) != NSDecimalNumber.zero) {
                             BaseData.instance.mMyBalances_gRPC.append(Coin.init(balance.denom, balance.amount))
@@ -887,7 +887,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Delegations response ", response)
+//                    print("Delegations response ", response)
                     response.delegationResponses.forEach { delegationResponse in
                         BaseData.instance.mMyDelegations_gRPC.append(delegationResponse)
                     }
@@ -907,7 +907,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Undelegations response ", response)
+//                    print("Undelegations response ", response)
                     response.unbondingResponses.forEach { unbondingResponse in
                         BaseData.instance.mMyUnbondings_gRPC.append(unbondingResponse)
                     }
@@ -927,7 +927,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Rewards response ", response)
+//                    print("Rewards response ", response)
                     response.rewards.forEach { reward in
                         BaseData.instance.mMyReward_gRPC.append(reward)
                     }
