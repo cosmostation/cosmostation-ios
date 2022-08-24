@@ -37,7 +37,8 @@ class ChainOmniflix: ChainConfig {
     let gasRate0 = "0.001uflix"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-omniflix-app.cosmostation.io"

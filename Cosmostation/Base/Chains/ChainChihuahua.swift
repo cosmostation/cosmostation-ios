@@ -39,7 +39,8 @@ class ChainChihuahua: ChainConfig {
     let gasRate2 = "0.035uhuahua"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-chihuahua-app.cosmostation.io"

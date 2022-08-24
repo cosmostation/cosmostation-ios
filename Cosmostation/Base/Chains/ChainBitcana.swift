@@ -37,7 +37,8 @@ class ChainBitcana: ChainConfig {
     let gasRate0 = "0.025ubcna"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-bitcanna-app.cosmostation.io"

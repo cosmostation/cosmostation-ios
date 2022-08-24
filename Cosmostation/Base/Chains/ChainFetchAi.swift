@@ -40,7 +40,8 @@ class ChainFetchAi: ChainConfig {
     let gasRate0 = "0.0afet"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = true
     var grpcUrl = "lcd-fetchai-app.cosmostation.io"

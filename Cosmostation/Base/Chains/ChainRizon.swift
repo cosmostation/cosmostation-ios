@@ -39,7 +39,8 @@ class ChainRizon: ChainConfig {
     let gasRate2 = "0.025uatolo"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-rizon-app.cosmostation.io"

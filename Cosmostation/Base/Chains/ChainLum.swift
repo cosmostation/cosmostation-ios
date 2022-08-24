@@ -38,7 +38,8 @@ class ChainLum: ChainConfig {
     let gasRate0 = "0.001ulum"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-lum-app.cosmostation.io"

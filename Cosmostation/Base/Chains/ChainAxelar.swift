@@ -37,7 +37,8 @@ class ChainAxelar: ChainConfig {
     let gasRate0 = "0.05uaxl"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-axelar-app.cosmostation.io"

@@ -37,7 +37,8 @@ class ChainComdex: ChainConfig {
     let gasRate0 = "0.25ucmdx"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-comdex-app.cosmostation.io"

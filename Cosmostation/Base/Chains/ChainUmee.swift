@@ -39,7 +39,8 @@ class ChainUmee: ChainConfig {
     let gasRate2 = "0.005uumee"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-umee-app.cosmostation.io"

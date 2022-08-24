@@ -37,7 +37,8 @@ class ChainSif: ChainConfig {
     let gasRate0 = "0.0rowan"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-sifchain-app.cosmostation.io"

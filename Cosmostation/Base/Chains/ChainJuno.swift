@@ -39,7 +39,8 @@ class ChainJuno: ChainConfig {
     let gasRate2 = "0.025ujuno"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = true
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = true
     var grpcUrl = "lcd-juno-app.cosmostation.io"
