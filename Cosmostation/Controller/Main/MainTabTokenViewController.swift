@@ -18,8 +18,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     let SECTION_BRIDGE_GRPC             = 3;
     let SECTION_TOKEN_GRPC              = 4;
     
-    let SECTION_NATIVE                  = 10;
-    let SECTION_ETC                     = 11;
+    let SECTION_NATIVE                  = 5;
+    let SECTION_ETC                     = 6;
 
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
@@ -36,8 +36,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var mBridged_gRPC = Array<Coin>()               // section 3
     var mToken_gRPC = Array<Cw20Token>()            // section 4
     
-    var mNative = Array<Balance>()                  // section 10
-    var mEtc = Array<Balance>()                     // section 11
+    var mNative = Array<Balance>()                  // section 5
+    var mEtc = Array<Balance>()                     // section 6
     
 
     override func viewDidLoad() {
@@ -122,7 +122,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 8
+        return 7
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -176,7 +176,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 return cell!
                 
             } else if (indexPath.section == SECTION_IBC_GRPC) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
                 onBindIbcCoin_gRPC(cell, mIbc_gRPC[indexPath.row])
                 return cell!
                 
@@ -297,16 +297,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     //bind ibc coins with grpc
-    func onBindIbcCoin_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-        if let ibcToken = BaseData.instance.getIbcToken(coin.getIbcHash()), ibcToken.auth == true {
-            WDP.dpSymbolImg(chainConfig, coin.denom, cell?.tokenImg)
-            cell?.tokenSymbol.text = ibcToken.display_denom?.uppercased()
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = ibcToken.channel_id
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, ibcToken.decimal!, 6)
-            let basedenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(basedenom, NSDecimalNumber.init(string: coin.amount), ibcToken.decimal!, cell!.tokenValue.font)
+    func onBindIbcCoin_gRPC(_ cell: AssetCell?, _ coin: Coin) {
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+            cell?.onBindIbcAsset(chainConfig, msAsset, coin)
         }
     }
     

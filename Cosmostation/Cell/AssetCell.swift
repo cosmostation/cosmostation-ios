@@ -55,6 +55,20 @@ class AssetCell: UITableViewCell {
         onBindPriceView(asset!.base_denom)
     }
     
+    func onBindIbcAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
+        if (chainConfig == nil || asset == nil) { return }
+        let decimal = asset!.decimal
+        let available = BaseData.instance.getAvailableAmount_gRPC(coin.denom)
+        if let assetImgeUrl = asset!.assetImg() {
+            assetImg.af_setImage(withURL: assetImgeUrl)
+        }
+        assetSymbol.text = asset!.dp_denom
+        assetDescription.text = asset!.path
+        assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
+        assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
+        onBindPriceView(asset!.base_denom)
+    }
+    
     func onBindBridgeAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
         if (chainConfig == nil || asset == nil) { return }
         let decimal = asset!.decimal
