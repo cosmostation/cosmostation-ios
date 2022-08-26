@@ -16,9 +16,10 @@ import SwiftProtobuf
 
 class MainTabViewController: UITabBarController, UITabBarControllerDelegate, AccountSwitchDelegate {
     
-    var mAccount: Account!
-    var mChainType: ChainType!
     var mAccounts = Array<Account>()
+    var mAccount: Account!
+    var mChainConfig: ChainConfig!
+    var mChainType: ChainType!
     var mBalances = Array<Balance>()
     var mFetchCnt = 0
         
@@ -160,6 +161,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             return
         }
         mChainType = ChainFactory.getChainType(mAccount.account_base_chain)
+        mChainConfig = ChainFactory.getChainConfig(mChainType)
     }
     
     func onFetchAccountData() -> Bool {
@@ -172,6 +174,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mIbcTokens.removeAll()
         BaseData.instance.mCw20Tokens.removeAll()
         BaseData.instance.mBridgeTokens.removeAll()
+        
+        BaseData.instance.mMintscanAssets.removeAll()
+        BaseData.instance.mMintscanTokens.removeAll()
         
         
         BaseData.instance.mNodeInfo = nil
@@ -212,9 +217,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         
         BaseData.instance.mOsmoPools_gRPC.removeAll()
         
-        
-        
-        
         if (mChainType == .BINANCE_MAIN) {
             self.mFetchCnt = 6
             onFetchNodeInfo()
@@ -240,32 +242,19 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
         }
                 
-        else if (self.mChainType == .COSMOS_MAIN) {
-            self.mFetchCnt = 9
-            self.onFetchgRPCNodeInfo()
-            self.onFetchgRPCAuth(self.mAccount.account_address)
-            self.onFetchgRPCBondedValidators(0)
-            self.onFetchgRPCUnbondedValidators(0)
-            self.onFetchgRPCUnbondingValidators(0)
-            
-            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
-            self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
-            self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
-            self.onFetchgRPCRewards(self.mAccount.account_address, 0)
-            
-            
-        } else if (self.mChainType == .IRIS_MAIN || self.mChainType == .AKASH_MAIN || self.mChainType == .PERSIS_MAIN ||
-                   self.mChainType == .CRYPTO_MAIN || self.mChainType == .SENTINEL_MAIN || self.mChainType == .MEDI_MAIN ||
-                   self.mChainType == .CERTIK_MAIN  || self.mChainType == .EMONEY_MAIN || self.mChainType == .FETCH_MAIN ||
-                   self.mChainType == .RIZON_MAIN || self.mChainType == .BAND_MAIN || self.mChainType == .JUNO_MAIN ||
-                   self.mChainType == .REGEN_MAIN || self.mChainType == .BITCANA_MAIN || self.mChainType == .ALTHEA_MAIN ||
-                   self.mChainType == .GRAVITY_BRIDGE_MAIN || self.mChainType == .KI_MAIN || self.mChainType == .COMDEX_MAIN ||
-                   self.mChainType == .SECRET_MAIN || self.mChainType == .INJECTIVE_MAIN || self.mChainType == .BITSONG_MAIN ||
-                   self.mChainType == .DESMOS_MAIN || self.mChainType == .LUM_MAIN || self.mChainType == .CHIHUAHUA_MAIN ||
-                   self.mChainType == .AXELAR_MAIN || self.mChainType == .KONSTELLATION_MAIN || self.mChainType == .UMEE_MAIN ||
-                   self.mChainType == .EVMOS_MAIN || self.mChainType == .PROVENANCE_MAIN || self.mChainType == .CUDOS_MAIN ||
-                   self.mChainType == .SIF_MAIN || self.mChainType == .CERBERUS_MAIN || self.mChainType == .OMNIFLIX_MAIN ||
-                   self.mChainType == .CRESCENT_MAIN || self.mChainType == .MANTLE_MAIN || self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN) {
+        else if (self.mChainType == .COSMOS_MAIN || self.mChainType == .IRIS_MAIN || self.mChainType == .AKASH_MAIN ||
+                   self.mChainType == .PERSIS_MAIN || self.mChainType == .CRYPTO_MAIN || self.mChainType == .SENTINEL_MAIN ||
+                   self.mChainType == .MEDI_MAIN || self.mChainType == .CERTIK_MAIN  || self.mChainType == .EMONEY_MAIN ||
+                   self.mChainType == .FETCH_MAIN || self.mChainType == .RIZON_MAIN || self.mChainType == .BAND_MAIN ||
+                   self.mChainType == .JUNO_MAIN || self.mChainType == .REGEN_MAIN || self.mChainType == .BITCANA_MAIN ||
+                   self.mChainType == .ALTHEA_MAIN || self.mChainType == .GRAVITY_BRIDGE_MAIN || self.mChainType == .KI_MAIN ||
+                   self.mChainType == .COMDEX_MAIN || self.mChainType == .SECRET_MAIN || self.mChainType == .INJECTIVE_MAIN ||
+                   self.mChainType == .BITSONG_MAIN || self.mChainType == .DESMOS_MAIN || self.mChainType == .LUM_MAIN ||
+                   self.mChainType == .CHIHUAHUA_MAIN || self.mChainType == .AXELAR_MAIN || self.mChainType == .KONSTELLATION_MAIN ||
+                   self.mChainType == .UMEE_MAIN || self.mChainType == .EVMOS_MAIN || self.mChainType == .PROVENANCE_MAIN ||
+                   self.mChainType == .CUDOS_MAIN || self.mChainType == .SIF_MAIN || self.mChainType == .CERBERUS_MAIN ||
+                   self.mChainType == .OMNIFLIX_MAIN || self.mChainType == .CRESCENT_MAIN || self.mChainType == .MANTLE_MAIN ||
+                   self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -750,12 +739,19 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
-                    self.mFetchCnt = self.mFetchCnt + 5
+//                    self.mFetchCnt = self.mFetchCnt + 5
+                    self.mFetchCnt = self.mFetchCnt + 8
                     self.onFetchParams(BaseData.instance.getChainId(self.mChainType))
                     self.onFetchIbcPaths(BaseData.instance.getChainId(self.mChainType))
                     self.onFetchIbcTokens(BaseData.instance.getChainId(self.mChainType))
                     self.onFetchBridgeAssets()
                     self.onFetchCw20Tokens()
+                    
+                    //upgrade V2
+                    self.onFetchMintscanAssetV2()
+                    self.onFetchMintscanCw20V2(self.mChainConfig.chainAPIName)
+                    self.onFetchMintscanErc20V2(self.mChainConfig.chainAPIName)
+                    
                 }
                 try channel.close().wait()
                 
@@ -867,9 +863,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                             BaseData.instance.mMyBalances_gRPC.append(Coin.init(balance.denom, balance.amount))
                         }
                     }
-                    let chainConfig = ChainFactory.getChainConfig(self.mChainType)
-                    if (BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainConfig)).compare(NSDecimalNumber.zero).rawValue <= 0) {
-                        BaseData.instance.mMyBalances_gRPC.append(Coin.init(WUtils.getMainDenom(chainConfig), "0"))
+                    if (BaseData.instance.getAvailableAmount_gRPC(self.mChainConfig.stakeDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
+                        BaseData.instance.mMyBalances_gRPC.append(Coin.init(self.mChainConfig.stakeDenom, "0"))
                     }
                 }
                 try channel.close().wait()
@@ -1193,7 +1188,69 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 print("mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
             
             case .failure(let error):
-                print("onFetchIbcTokens ", error)
+                print("mCw20Tokens ", error)
+            }
+            self.onFetchFinished()
+        }
+    }
+    
+    func onFetchMintscanAssetV2() {
+        let request = Alamofire.request(BaseNetWork.mintscanAssets_v2(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let resData = res as? NSDictionary, let mintscanAssets = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    mintscanAssets.forEach { mintscanAsset in
+                        let asset = MintscanAsset.init(mintscanAsset)
+                        BaseData.instance.mMintscanAssets.append(asset)
+                    }
+                }
+                print("onFetchMintscanAssetV2 ", BaseData.instance.mMintscanAssets.count)
+            
+            case .failure(let error):
+                print("onFetchMintscanAssetV2 ", error)
+            }
+            self.onFetchFinished()
+        }
+    }
+    
+    func onFetchMintscanCw20V2(_ chainId: String) {
+        print("onFetchMintscanCw20V2 ", chainId)
+        let request = Alamofire.request(BaseNetWork.mintscanCw20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let resData = res as? NSDictionary, let cw20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    cw20Tokens.forEach { cw20Token in
+                        let token = MintscanToken.init(cw20Token)
+                        BaseData.instance.mMintscanTokens.append(token)
+                    }
+                }
+                print("onFetchMintscanCw20V2 ", BaseData.instance.mMintscanTokens.count)
+
+            case .failure(let error):
+                print("onFetchMintscanCw20V2 ", error)
+            }
+            self.onFetchFinished()
+        }
+    }
+    
+    func onFetchMintscanErc20V2(_ chainId: String) {
+        print("onFetchMintscanErc20V2 ", chainId)
+        let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let resData = res as? NSDictionary, let erc20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    erc20Tokens.forEach { erc20Token in
+                        let token = MintscanToken.init(erc20Token)
+                        BaseData.instance.mMintscanTokens.append(token)
+                    }
+                }
+                print("onFetchMintscanErc20V2 ", BaseData.instance.mMintscanTokens.count)
+
+            case .failure(let error):
+                print("onFetchMintscanErc20V2 ", error)
             }
             self.onFetchFinished()
         }

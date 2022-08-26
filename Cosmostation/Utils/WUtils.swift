@@ -319,20 +319,23 @@ public class WUtils {
                     if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
                         totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
                     }
-                    
-                } else if (chainConfig?.chainType == .EMONEY_MAIN && coin.denom.starts(with: "e")) {
+
+                }
+                //disable pooltoken value
+//                else if (chainConfig?.chainType == .OSMOSIS_MAIN && coin.denom.contains("gamm/pool/")) {
+//                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
+//                    let assetValue = userCurrencyValue(coin.denom, amount, 18)
+//                    totalValue = totalValue.adding(assetValue)
+//
+//                } else if (chainConfig?.chainType == .COSMOS_MAIN && coin.denom.starts(with: "pool") && coin.denom.count >= 68) {
+//                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
+//                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
+//                    totalValue = totalValue.adding(assetValue)
+//
+//                }
+                else if (chainConfig?.chainType == .EMONEY_MAIN && coin.denom.starts(with: "e")) {
                     let available = baseData.getAvailableAmount_gRPC(coin.denom)
                     totalValue = totalValue.adding(userCurrencyValue(coin.denom, available, 6))
-                    
-                } else if (chainConfig?.chainType == .OSMOSIS_MAIN && coin.denom.contains("gamm/pool/")) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, 18)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                }  else if (chainConfig?.chainType == .COSMOS_MAIN && coin.denom.starts(with: "pool") && coin.denom.count >= 68) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
-                    totalValue = totalValue.adding(assetValue)
                     
                 } else if (chainConfig?.chainType == .KAVA_MAIN) {
                     let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)

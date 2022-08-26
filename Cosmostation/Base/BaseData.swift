@@ -23,6 +23,8 @@ final class BaseData : NSObject{
     var mIbcTokens = Array<IbcToken>()
     var mCw20Tokens = Array<Cw20Token>()
     var mBridgeTokens = Array<BridgeToken>()
+    var mMintscanAssets = Array<MintscanAsset>()
+    var mMintscanTokens = Array<MintscanToken>()
     
     var mNodeInfo: NodeInfo?
     var mBalances = Array<Balance>()

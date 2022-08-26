@@ -276,6 +276,19 @@ class BaseNetWork {
     }
     
     
+    static func mintscanAssets_v2() -> String {
+        return MINTSCAN_API_URL + "v2/assets"
+    }
+    
+    static func mintscanCw20Tokens_v2(_ chainId: String) -> String {
+        return MINTSCAN_API_URL + "v2/assets/" +  chainId + "/token/cw20"
+    }
+    
+    static func mintscanErc20Tokens_v2(_ chainId: String) -> String {
+        return MINTSCAN_API_URL + "v2/assets/" +  chainId + "/token/erc20"
+    }
+    
+    
     //API
     static func accountHistory(_ chain: ChainType, _ address: String) -> String {
         guard let chainConfig = ChainFactory.getChainConfig(chain) else {
