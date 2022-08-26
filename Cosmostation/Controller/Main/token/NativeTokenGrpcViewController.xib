@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NativeTokenGrpcViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="btnBepSend" destination="wcx-0h-QWi" id="m5b-f2-ztJ"/>
                 <outlet property="btnIbcSend" destination="TJl-Du-PKf" id="Cp9-mx-lFR"/>
                 <outlet property="btnSend" destination="6bu-eH-m8K" id="Of2-IT-POC"/>
                 <outlet property="naviPerPrice" destination="z6t-Ue-hoQ" id="0Y9-8a-fEP"/>
@@ -111,31 +110,8 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Z9m-9A-GIt">
                     <rect key="frame" x="16" y="801" width="382" height="45"/>
                     <subviews>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wcx-0h-QWi">
-                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="45" id="gRC-E3-eLI"/>
-                            </constraints>
-                            <state key="normal" title="BEP3 Send">
-                                <color key="titleColor" name="_font05"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                    <real key="value" value="8"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                    <color key="value" name="_font05"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="onClickBepSend:" destination="-1" eventType="touchUpInside" id="7ga-Ji-1o0"/>
-                            </connections>
-                        </button>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJl-Du-PKf">
-                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJl-Du-PKf">
+                            <rect key="frame" x="0.0" y="0.0" width="188" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="TP2-zA-LtR"/>
                             </constraints>
@@ -158,7 +134,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bu-eH-m8K">
-                            <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
+                            <rect key="frame" x="194" y="0.0" width="188" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="R4R-OK-Qb0"/>
                             </constraints>

@@ -17,6 +17,7 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     @IBOutlet weak var naviUpdownImg: UIImageView!
     
     @IBOutlet weak var tokenTableView: UITableView!
+    @IBOutlet weak var btnBepSend: UIButton!
     @IBOutlet weak var btnIbcSend: UIButton!
     @IBOutlet weak var btnSend: UIButton!
     
@@ -41,6 +42,12 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailNativeCell", bundle: nil), forCellReuseIdentifier: "TokenDetailNativeCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
+        
+        if (WUtils.isHtlcSwappableCoin(chainType, bridgeDenom)) {
+            self.btnBepSend.isHidden = false
+        } else {
+            self.btnIbcSend.isHidden = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,16 +65,24 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onInitView() {
-        if let tokenImgeUrl = bridgeToken.getImgUrl() {
-            naviTokenImg.af_setImage(withURL: tokenImgeUrl)
+        if (chainType == ChainType.KAVA_MAIN) {
+            WDP.dpSymbol(chainConfig, bridgeDenom, naviTokenSymbol)
+            WDP.dpSymbolImg(chainConfig, bridgeDenom, naviTokenImg)
+            bridgeDivideDecimal = WUtils.getDenomDecimal(chainConfig, bridgeDenom)
+            priceDenom = bridgeDenom
+            totalAmount = WUtils.getKavaTokenAll(bridgeDenom)
+            
         } else {
-            naviTokenImg.image = UIImage(named: "tokenDefault")
+            if let tokenImgeUrl = bridgeToken.getImgUrl() {
+                naviTokenImg.af_setImage(withURL: tokenImgeUrl)
+            } else {
+                naviTokenImg.image = UIImage(named: "tokenDefault")
+            }
+            naviTokenSymbol.text = bridgeToken.origin_symbol
+            bridgeDivideDecimal = bridgeToken.decimal
+            priceDenom = bridgeToken.origin_symbol!.lowercased()
+            totalAmount = BaseData.instance.getAvailableAmount_gRPC(bridgeDenom)
         }
-        naviTokenSymbol.text = bridgeToken.origin_symbol
-        
-        bridgeDivideDecimal = bridgeToken.decimal
-        priceDenom = bridgeToken.origin_symbol!.lowercased()
-        totalAmount = BaseData.instance.getAvailableAmount_gRPC(bridgeDenom)
         
         self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(priceDenom, naviPerPrice.font)
         self.naviUpdownPercent.attributedText = WUtils.dpValueChange(priceDenom, font: naviUpdownPercent.font)
@@ -173,6 +188,31 @@ class BridgeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
         txVC.mToSendDenom = bridgeDenom
         txVC.mType = TASK_TYPE_TRANSFER
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+        self.navigationController?.pushViewController(txVC, animated: true)
+    }
+    
+    @IBAction func onClickBepSend(_ sender: Any) {
+        if (!SUPPORT_BEP3_SWAP) {
+            self.onShowToast(NSLocalizedString("error_bep3_swap_temporary_disable", comment: ""))
+            return
+        }
+
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_HTLC_SWAP
+        txVC.mHtlcDenom = bridgeDenom
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;

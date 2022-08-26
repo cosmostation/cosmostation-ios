@@ -12,8 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BridgeTokenGrpcViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
-                <outlet property="btnIbcSend" destination="xF8-I5-qU0" id="n9T-3B-Cro"/>
-                <outlet property="btnSend" destination="FrK-Wt-FbS" id="naT-cs-3aD"/>
+                <outlet property="btnBepSend" destination="j5s-Xm-yi6" id="UdV-Gq-Xfs"/>
+                <outlet property="btnIbcSend" destination="K27-aT-J2m" id="5Lv-a1-40c"/>
+                <outlet property="btnSend" destination="hXM-Ce-iye" id="fVv-2m-Amh"/>
                 <outlet property="naviPerPrice" destination="0pJ-S2-Z1o" id="Qt8-gZ-Ixc"/>
                 <outlet property="naviTokenImg" destination="FAN-cn-cSP" id="ysR-pt-wAe"/>
                 <outlet property="naviTokenSymbol" destination="OpO-gn-Klf" id="o7Q-FH-PpR"/>
@@ -111,13 +112,36 @@
                     <rect key="frame" x="0.0" y="94" width="414" height="699"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Jdk-Sh-1Mf">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="cKd-3k-glE">
                     <rect key="frame" x="16" y="801" width="382" height="45"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xF8-I5-qU0">
-                            <rect key="frame" x="0.0" y="0.0" width="188" height="45"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j5s-Xm-yi6">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="45" id="W2R-oa-ctT"/>
+                                <constraint firstAttribute="height" constant="45" id="yO3-gi-Wgx"/>
+                            </constraints>
+                            <state key="normal" title="BEP3 Send">
+                                <color key="titleColor" name="_font05"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" name="_font05"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="onClickBepSend:" destination="-1" eventType="touchUpInside" id="dzs-N7-bTE"/>
+                            </connections>
+                        </button>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K27-aT-J2m">
+                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="9ht-uO-8h0"/>
                             </constraints>
                             <state key="normal" title="IBC Send">
                                 <color key="titleColor" name="_font05"/>
@@ -134,13 +158,13 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="onClickIbcSend:" destination="-1" eventType="touchUpInside" id="3xH-QA-mzv"/>
+                                <action selector="onClickIbcSend:" destination="-1" eventType="touchUpInside" id="K7x-vl-DGv"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FrK-Wt-FbS">
-                            <rect key="frame" x="194" y="0.0" width="188" height="45"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXM-Ce-iye">
+                            <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="45" id="3m8-x3-9dz"/>
+                                <constraint firstAttribute="height" constant="45" id="Y6j-DA-TwV"/>
                             </constraints>
                             <state key="normal" title="Send">
                                 <color key="titleColor" name="_font05"/>
@@ -157,7 +181,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="onClickSend:" destination="-1" eventType="touchUpInside" id="g1f-tC-4FM"/>
+                                <action selector="onClickSend:" destination="-1" eventType="touchUpInside" id="Ffq-tz-af8"/>
                             </connections>
                         </button>
                     </subviews>
@@ -167,15 +191,15 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="egh-pW-waj" secondAttribute="trailing" id="4ck-06-Nou"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Jdk-Sh-1Mf" secondAttribute="trailing" constant="16" id="6B7-pl-9cJ"/>
-                <constraint firstItem="Jdk-Sh-1Mf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Aqy-AX-fJX"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Jdk-Sh-1Mf" secondAttribute="bottom" constant="16" id="NIU-99-ZRq"/>
+                <constraint firstItem="cKd-3k-glE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="6ec-vs-csz"/>
                 <constraint firstItem="fH4-1v-k04" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ogc-vx-HWp"/>
+                <constraint firstItem="cKd-3k-glE" firstAttribute="top" secondItem="egh-pW-waj" secondAttribute="bottom" constant="8" id="UHw-lf-Rwl"/>
                 <constraint firstItem="egh-pW-waj" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="aX9-B1-FVs"/>
                 <constraint firstItem="fH4-1v-k04" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="dBk-zl-Yfi"/>
-                <constraint firstItem="Jdk-Sh-1Mf" firstAttribute="top" secondItem="egh-pW-waj" secondAttribute="bottom" constant="8" id="kfT-3T-uI0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="cKd-3k-glE" secondAttribute="trailing" constant="16" id="kdS-7M-zGt"/>
                 <constraint firstItem="egh-pW-waj" firstAttribute="top" secondItem="fH4-1v-k04" secondAttribute="bottom" id="l5T-8S-bAa"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fH4-1v-k04" secondAttribute="trailing" id="nsl-AN-p7V"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="cKd-3k-glE" secondAttribute="bottom" constant="16" id="pnZ-Tk-OnQ"/>
             </constraints>
             <point key="canvasLocation" x="74" y="130"/>
         </view>
