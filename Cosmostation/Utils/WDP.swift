@@ -207,7 +207,8 @@ public class WDP {
                 formatted = "0" + nf.decimalSeparator! + temp
                 
             } else {
-                let count = calNumber.multiplying(by: NSDecimalNumber.one, withBehavior: WUtils.handler0).stringValue.count
+                let count = calNumber.multiplying(by: NSDecimalNumber.one, withBehavior: WUtils.handler0Down).stringValue.count
+//                print("count ", count)
                 nf.minimumSignificantDigits = Int(dpPoint) + count
                 nf.maximumSignificantDigits = Int(dpPoint) + count
                 formatted = nf.string(from: calNumber)

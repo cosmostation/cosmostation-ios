@@ -42,6 +42,11 @@ public struct MintscanAsset {
         self.description = dictionary?["description"] as? String ?? ""
         self.image = dictionary?["image"] as? String ?? ""
     }
+    
+    func assetImg() -> URL? {
+        let imageurl = AssetBase + image
+        return URL(string: imageurl)
+    }
 }
 
 public struct MintscanAssetCounterParty {

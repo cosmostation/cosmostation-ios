@@ -222,6 +222,18 @@ public class WUtils {
         return getDpAttributedString(formatted, 9, font)
     }
     
+    static func dpValueChange2(_ denom: String, _ font:UIFont ) -> NSMutableAttributedString {
+        let nf = getNumberFormatter(2)
+        let change = valueChange(denom)
+        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
+            let formatted = "+" + nf.string(from: valueChange(denom))! + "%"
+            return getDpAttributedString(formatted, 3, font)
+        } else {
+            let formatted = nf.string(from: valueChange(denom))! + "%"
+            return getDpAttributedString(formatted, 3, font)
+        }
+    }
+    
     static func perUsdValue(_ denom: String) -> NSDecimalNumber? {
         if (denom.contains("gamm/pool/")) {
             if let pool = BaseData.instance.getOsmoPoolByDenom(denom) {

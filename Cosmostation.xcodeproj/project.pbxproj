@@ -1040,6 +1040,10 @@
 		04E6ABD4286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6ABD1286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift */; };
 		04E6ABD5286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */; };
 		04E6ABD6286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */; };
+		04FD713828B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
+		04FD713928B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
+		04FD713A28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
+		04FD713B28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
 		151788EC282E078600A7D7CC /* WalletStationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151788EA282E078600A7D7CC /* WalletStationCell.swift */; };
 		1569489828ABD9E0004777ED /* ChainPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1569489728ABD9E0004777ED /* ChainPassage.swift */; };
 		181099DF28AE92FC00C178B5 /* PushUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181099DE28AE92FC00C178B5 /* PushUtils.swift */; };
@@ -3649,6 +3653,8 @@
 		04E6ABCC286358B4008DC3C7 /* CdpDrawRepay1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CdpDrawRepay1ViewController.xib; sourceTree = "<group>"; };
 		04E6ABD1286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdpDrawRepay4ViewController.swift; sourceTree = "<group>"; };
 		04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CdpDrawRepay4ViewController.xib; sourceTree = "<group>"; };
+		04FD713628B8B3C80059E88B /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
+		04FD713728B8B3C80059E88B /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
 		106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
 		151788EA282E078600A7D7CC /* WalletStationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletStationCell.swift; sourceTree = "<group>"; };
 		151788EB282E078600A7D7CC /* WalletStationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletStationCell.xib; sourceTree = "<group>"; };
@@ -6186,6 +6192,8 @@
 				E16B70DF229F9A78001D6B9C /* RedelegateCell.xib */,
 				E16B89132341C558003E0922 /* TokenCell.swift */,
 				E16B89142341C558003E0922 /* TokenCell.xib */,
+				04FD713628B8B3C80059E88B /* AssetCell.swift */,
+				04FD713728B8B3C80059E88B /* AssetCell.xib */,
 				28CFBFDC26C028A3009A300D /* CommonHeader.swift */,
 				28CFBFDA26C0286A009A300D /* CommonHeader.xib */,
 				28E8FAE92716F190005EAA9B /* SelectTextCell.swift */,
@@ -6556,6 +6564,7 @@
 				18FFB752281AF533004E65BB /* xmas@3x.png in Resources */,
 				04C5AE7A28632049007627EA /* Redelegate1ViewController.xib in Resources */,
 				18FFB754281AF533004E65BB /* ReplaceResource3ViewController.xib in Resources */,
+				04FD713B28B8B3C80059E88B /* AssetCell.xib in Resources */,
 				18FFB756281AF533004E65BB /* SelectChainCell.xib in Resources */,
 				18FFB757281AF533004E65BB /* VoteInfoTableViewCell.xib in Resources */,
 				18FFB758281AF533004E65BB /* StakingTokenDetailViewController.xib in Resources */,
@@ -6930,6 +6939,7 @@
 				E126CF912387A55A002A546F /* WalletKavaCell.xib in Resources */,
 				E16D9B202249E9DC0019B7BB /* Password.storyboard in Resources */,
 				E17748F522842628003D8CD1 /* ClaimRewardAllCell.xib in Resources */,
+				04FD713A28B8B3C80059E88B /* AssetCell.xib in Resources */,
 				04C5AE7928632049007627EA /* Redelegate1ViewController.xib in Resources */,
 				288D250526834E980093121A /* TxIbcSendCell.xib in Resources */,
 				04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */,
@@ -7928,6 +7938,7 @@
 				18FFB566281AF533004E65BB /* IBCSend0ViewController.swift in Sources */,
 				04C5AE9628632ECD007627EA /* ReInvest1ViewController.swift in Sources */,
 				18FFB569281AF533004E65BB /* KavaHardParam.swift in Sources */,
+				04FD713928B8B3C80059E88B /* AssetCell.swift in Sources */,
 				1817CC39283E2CE600523713 /* starname_iov_starname_v1beta1_tx.grpc.swift in Sources */,
 				18FFB56A281AF533004E65BB /* KavaMyCdps.swift in Sources */,
 				18FFB56B281AF533004E65BB /* ExportStarname.swift in Sources */,
@@ -8632,6 +8643,7 @@
 				040FA991275F55C300229F6F /* cosmos_distribution_v1beta1_tx.grpc.swift in Sources */,
 				045DAD6728978DEB004ED9B4 /* AuthzClaimCommisstion1ViewController.swift in Sources */,
 				04C43B5F278D5F530022D5DF /* kava_cdp_v1beta1_query.grpc.swift in Sources */,
+				04FD713828B8B3C80059E88B /* AssetCell.swift in Sources */,
 				048C830527BF572800270528 /* evmos_inflation_v1_query.pb.swift in Sources */,
 				040FA9DB275F55C300229F6F /* ibc_core_client_v1_genesis.pb.swift in Sources */,
 				04E25D3D276F7574009B39BA /* NFTListCell.swift in Sources */,

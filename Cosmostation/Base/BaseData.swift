@@ -96,6 +96,10 @@ final class BaseData : NSObject{
         }
     }
     
+    func getMSAsset(_ chainConfig: ChainConfig, _ denom: String) -> MintscanAsset? {
+        return mMintscanAssets.filter { $0.chain == chainConfig.chainAPIName && $0.denom.lowercased() == denom.lowercased() }.first
+    }
+    
     func getPrice(_ denom: String) -> Price? {
         return mPrices.filter { $0.denom == denom.lowercased() }.first
     }
