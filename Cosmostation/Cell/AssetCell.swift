@@ -63,7 +63,7 @@ class AssetCell: UITableViewCell {
             assetImg.af_setImage(withURL: assetImgeUrl)
         }
         assetSymbol.text = asset!.dp_denom
-        assetDescription.text = asset!.path
+        assetDescription.text = WDP.dpPath(asset!.path)
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
         assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
         onBindPriceView(asset!.base_denom)
@@ -77,7 +77,7 @@ class AssetCell: UITableViewCell {
             assetImg.af_setImage(withURL: assetImgeUrl)
         }
         assetSymbol.text = asset!.dp_denom
-        assetDescription.text = asset!.path
+        assetDescription.text = WDP.dpPath(asset!.path)
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
         assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
         onBindPriceView(asset!.base_denom)

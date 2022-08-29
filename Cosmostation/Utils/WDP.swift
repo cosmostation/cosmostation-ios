@@ -268,4 +268,14 @@ public class WDP {
         }
         return WUtils.getGapTime(date)
     }
+    
+    static func dpPath(_ path: String) -> String {
+        return path.replacingOccurrences(of: "bnb-beacon-chain", with: "binance")
+            .replacingOccurrences(of: "ethereum", with: "eth")
+            .replacingOccurrences(of: "persistence", with: "persis")
+            .replacingOccurrences(of: "gravity-bridge", with: "gravity")
+            .replacingOccurrences(of: "konstellation", with: "konstel")
+            .replacingOccurrences(of: "assetmantle", with: "assetman")
+            .replacingOccurrences(of: ">", with: " ⇝ ")
+    }
 }
