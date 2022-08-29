@@ -417,6 +417,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             } else if (chainType == .GRAVITY_BRIDGE_MAIN && balance_gRPC.denom.starts(with: "gravity0x")) {
                 mBridged_gRPC.append(balance_gRPC)
                 
+            } else if (chainType == .AXELAR_MAIN) {
+                if (BaseData.instance.getMSAsset(chainConfig!, balance_gRPC.denom)?.type == "bridge") {
+                    mBridged_gRPC.append(balance_gRPC)
+                }
+                
             } else if (chainType == .KAVA_MAIN) {
                 if (balance_gRPC.denom == KAVA_HARD_DENOM || balance_gRPC.denom == KAVA_USDX_DENOM || balance_gRPC.denom == KAVA_SWAP_DENOM) {
                     mNative_gRPC.append(balance_gRPC)
