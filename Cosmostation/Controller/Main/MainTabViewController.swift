@@ -172,11 +172,12 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mParam = nil
         BaseData.instance.mIbcPaths.removeAll()
         BaseData.instance.mIbcTokens.removeAll()
-        BaseData.instance.mCw20Tokens.removeAll()
+//        BaseData.instance.mCw20Tokens.removeAll()
         BaseData.instance.mBridgeTokens.removeAll()
         
         BaseData.instance.mMintscanAssets.removeAll()
         BaseData.instance.mMintscanTokens.removeAll()
+        BaseData.instance.mMyTokens.removeAll()
         
         
         BaseData.instance.mNodeInfo = nil
@@ -416,8 +417,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             print("BaseData.instance.mUnbondValidators_gRPC ", BaseData.instance.mUnbondValidators_gRPC.count)
             print("BaseData.instance.mMyValidators_gRPC ", BaseData.instance.mMyValidators_gRPC.count)
             print("BaseData.instance.mMyBalances_gRPC ", BaseData.instance.mMyBalances_gRPC.count)
-            print("BaseData.instance.mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
-            print("BaseData.instance.getCw20s_gRPC ", BaseData.instance.getCw20s_gRPC().count)
+//            print("BaseData.instance.mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
+//            print("BaseData.instance.getCw20s_gRPC ", BaseData.instance.getCw20s_gRPC().count)
             
             if (BaseData.instance.mNodeInfo_gRPC == nil) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
@@ -739,19 +740,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
-//                    self.mFetchCnt = self.mFetchCnt + 5
-                    self.mFetchCnt = self.mFetchCnt + 8
+                    self.mFetchCnt = self.mFetchCnt + 4
                     self.onFetchParams(BaseData.instance.getChainId(self.mChainType))
-                    self.onFetchIbcPaths(BaseData.instance.getChainId(self.mChainType))
-                    self.onFetchIbcTokens(BaseData.instance.getChainId(self.mChainType))
-                    self.onFetchBridgeAssets()
-                    self.onFetchCw20Tokens()
-                    
-                    //upgrade V2
-                    self.onFetchMintscanAssetV2()
-                    self.onFetchMintscanCw20V2(self.mChainConfig.chainAPIName)
-                    self.onFetchMintscanErc20V2(self.mChainConfig.chainAPIName)
-                    
+                    self.onFetchMintscanAsset()
+                    self.onFetchMintscanCw20(self.mChainConfig.chainAPIName)
+                    self.onFetchMintscanErc20(self.mChainConfig.chainAPIName)
                 }
                 try channel.close().wait()
                 
@@ -1111,90 +1104,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    func onFetchIbcPaths(_ chainId: String) {
-        print("onFetchIbcPaths ", chainId, "   ", BaseNetWork.getIbcPaths(self.mChainType, chainId))
-        let request = Alamofire.request(BaseNetWork.getIbcPaths(self.mChainType, chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-//                print("onFetchIbcPaths res ", res)
-                if let resData = res as? NSDictionary, let senderables = resData.object(forKey: "sendable") as? Array<NSDictionary> {
-                    senderables.forEach { senderable in
-                        BaseData.instance.mIbcPaths.append(IbcPath.init(senderable))
-                    }
-                }
-//                print("mIbcPaths ", BaseData.instance.mIbcPaths.count)
-            
-            case .failure(let error):
-                print("onFetchIbcPaths ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchIbcTokens(_ chainId: String) {
-        print("onFetchIbcTokens ", chainId, "   ", BaseNetWork.getIbcTokens(self.mChainType, chainId))
-        let request = Alamofire.request(BaseNetWork.getIbcTokens(self.mChainType, chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if let resData = res as? NSDictionary, let ibcTokens = resData.object(forKey: "ibc_tokens") as? Array<NSDictionary> {
-                    ibcTokens.forEach { ibcToken in
-                        BaseData.instance.mIbcTokens.append(IbcToken.init(ibcToken))
-                    }
-                }
-//                print("ibcTokens ", BaseData.instance.mIbcTokens.count)
-            
-            case .failure(let error):
-                print("onFetchIbcTokens ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchBridgeAssets() {
-        let request = Alamofire.request(BaseNetWork.mintscanAssets(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if let resData = res as? NSDictionary, let bridgeAssets = resData.object(forKey: "assets") as? Array<NSDictionary> {
-                    bridgeAssets.forEach { bridgeAsset in
-                        BaseData.instance.mBridgeTokens.append(BridgeToken.init(bridgeAsset))
-                    }
-                }
-                print("onFetchBridgeAssets ", BaseData.instance.mBridgeTokens.count)
-                
-            case .failure(let error):
-                print("onFetchBridgeAssets ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchCw20Tokens() {
-//        print("onFetchCw20Tokens  ", BaseNetWork.mintscanCw20())
-        let request = Alamofire.request(BaseNetWork.mintscanCw20(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if let resData = res as? NSDictionary, let ibcCw20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
-                    ibcCw20Tokens.forEach { ibcCw20Token in
-                        let Cw20Token = Cw20Token.init(ibcCw20Token)
-                        BaseData.instance.mCw20Tokens.append(Cw20Token)
-                        self.mFetchCnt = self.mFetchCnt + 1
-                        self.onFetchgRPCCw20Balance(Cw20Token.contract_address!)
-                    }
-                }
-                print("mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
-            
-            case .failure(let error):
-                print("mCw20Tokens ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchMintscanAssetV2() {
+    func onFetchMintscanAsset() {
         let request = Alamofire.request(BaseNetWork.mintscanAssets_v2(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -1205,17 +1115,19 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                         BaseData.instance.mMintscanAssets.append(asset)
                     }
                 }
-                print("onFetchMintscanAssetV2 ", BaseData.instance.mMintscanAssets.count)
             
             case .failure(let error):
-                print("onFetchMintscanAssetV2 ", error)
+                print("onFetchMintscanAsset ", error)
             }
             self.onFetchFinished()
         }
     }
     
-    func onFetchMintscanCw20V2(_ chainId: String) {
-        print("onFetchMintscanCw20V2 ", chainId)
+    func onFetchMintscanCw20(_ chainId: String) {
+        if (mChainConfig.wasmSupport == false) {
+            self.onFetchFinished()
+            return
+        }
         let request = Alamofire.request(BaseNetWork.mintscanCw20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -1225,18 +1137,46 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                         let token = MintscanToken.init(cw20Token)
                         BaseData.instance.mMintscanTokens.append(token)
                     }
+                    BaseData.instance.setMyTokens(self.mAccount.account_address)
+                    BaseData.instance.mMyTokens.forEach { msToken in
+                        self.mFetchCnt = self.mFetchCnt + 1
+                        self.onFetchCw20Balance(msToken.contract_address)
+                    }
                 }
-                print("onFetchMintscanCw20V2 ", BaseData.instance.mMintscanTokens.count)
 
             case .failure(let error):
-                print("onFetchMintscanCw20V2 ", error)
+                print("onFetchMintscanCw20 ", error)
             }
             self.onFetchFinished()
         }
     }
     
-    func onFetchMintscanErc20V2(_ chainId: String) {
-        print("onFetchMintscanErc20V2 ", chainId)
+    func onFetchCw20Balance(_ contAddress: String) {
+        DispatchQueue.global().async {
+            do {
+                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
+                    $0.address = contAddress
+                    $0.queryData = Cw20BalaceReq.init(self.mAccount.account_address).getEncode()
+                }
+                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                    let cw20balance = try? JSONDecoder().decode(Cw20BalaceRes.self, from: response.data)
+                    BaseData.instance.setMyTokenBalance(contAddress, cw20balance?.balance ?? "0")
+                }
+                try channel.close().wait()
+
+            } catch {
+                print("onFetchgRPCCw20Balance failed: \(error)")
+            }
+            DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchMintscanErc20(_ chainId: String) {
+        if (mChainConfig.evmSupport == false) {
+            self.onFetchFinished()
+            return
+        }
         let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
@@ -1247,33 +1187,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                         BaseData.instance.mMintscanTokens.append(token)
                     }
                 }
-                print("onFetchMintscanErc20V2 ", BaseData.instance.mMintscanTokens.count)
 
             case .failure(let error):
-                print("onFetchMintscanErc20V2 ", error)
+                print("onFetchMintscanErc20 ", error)
             }
             self.onFetchFinished()
-        }
-    }
-    
-    func onFetchgRPCCw20Balance(_ contAddress: String) {
-        DispatchQueue.global().async {
-            do {
-                let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Cosmwasm_Wasm_V1_QuerySmartContractStateRequest.with {
-                    $0.address = contAddress
-                    $0.queryData = Cw20BalaceReq.init(self.mAccount.account_address).getEncode()
-                }
-                if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    let cw20balance = try? JSONDecoder().decode(Cw20BalaceRes.self, from: response.data)
-                    BaseData.instance.setCw20Balance(contAddress, cw20balance?.balance ?? "0")
-                }
-                try channel.close().wait()
-                
-            } catch {
-                print("onFetchgRPCCw20Balance failed: \(error)")
-            }
-            DispatchQueue.main.async(execute: { self.onFetchFinished() });
         }
     }
     

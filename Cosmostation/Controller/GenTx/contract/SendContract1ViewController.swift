@@ -30,7 +30,7 @@ class SendContract1ViewController: BaseViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        self.cw20Token = BaseData.instance.getCw20_gRPC(pageHolderVC.mCw20SendContract!)
+//        self.cw20Token = BaseData.instance.getCw20_gRPC(pageHolderVC.mCw20SendContract!)
         self.decimal = cw20Token.decimal
         self.maxAvailable = cw20Token.getAmount()
         

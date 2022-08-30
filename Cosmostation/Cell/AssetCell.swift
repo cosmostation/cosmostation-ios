@@ -32,6 +32,7 @@ class AssetCell: UITableViewCell {
         self.assetSymbol.textColor = UIColor(named: "_font05")
         self.assetPrice.textColor = UIColor(named: "_font05")
         self.assetPriceChange.textColor = UIColor(named: "_font05")
+        self.assetDescription.lineBreakMode = .byTruncatingTail
     }
     
     func onBindNativeAsset(_ chainConfig: ChainConfig?, _ asset: MintscanAsset?, _ coin: Coin) {
@@ -81,6 +82,21 @@ class AssetCell: UITableViewCell {
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
         assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
         onBindPriceView(asset!.base_denom)
+    }
+    
+    func onBindContractToken(_ chainConfig: ChainConfig?, _ token: MintscanToken?) {
+        if (chainConfig == nil || token == nil) { return }
+        let decimal = token!.decimal
+        let available = NSDecimalNumber.init(string: token!.amount)
+        if let assetImgeUrl = token!.assetImg() {
+            assetImg.af_setImage(withURL: assetImgeUrl)
+        }
+        assetSymbol.text = token!.denom.uppercased()
+        assetDescription.text = token?.contract_address
+        assetDescription.lineBreakMode = .byTruncatingMiddle
+        assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
+        assetValue.attributedText = WUtils.dpValueUserCurrency(token!.denom, available, decimal, assetValue.font)
+        onBindPriceView(token!.denom)
     }
     
     func onBindPriceView(_ priceDenom: String) {

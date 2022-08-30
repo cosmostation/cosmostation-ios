@@ -271,9 +271,9 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/assets"
     }
     
-    static func mintscanCw20() -> String {
-        return MINTSCAN_API_URL + "v1/assets/cw20"
-    }
+//    static func mintscanCw20() -> String {
+//        return MINTSCAN_API_URL + "v1/assets/cw20"
+//    }
     
     
     static func mintscanAssets_v2() -> String {

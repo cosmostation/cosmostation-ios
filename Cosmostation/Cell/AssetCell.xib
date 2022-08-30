@@ -35,7 +35,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="-" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh1-gm-d62">
-                                <rect key="frame" x="60" y="14.5" width="295" height="11.5"/>
+                                <rect key="frame" x="60" y="14.5" width="291" height="11.5"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                             <constraint firstItem="gtg-HU-wNe" firstAttribute="leading" secondItem="C0U-32-Q2d" secondAttribute="leading" id="LHa-r7-zcM"/>
                             <constraint firstItem="L1v-yg-G3O" firstAttribute="leading" secondItem="xtx-sx-FxV" secondAttribute="leading" constant="12" id="Pya-RK-Rzv"/>
                             <constraint firstItem="C0U-32-Q2d" firstAttribute="top" secondItem="xtx-sx-FxV" secondAttribute="top" constant="12" id="T8t-jn-NYD"/>
-                            <constraint firstItem="ntY-QX-Tj8" firstAttribute="leading" secondItem="Xh1-gm-d62" secondAttribute="trailing" constant="4" id="ThF-TW-9JM"/>
+                            <constraint firstItem="ntY-QX-Tj8" firstAttribute="leading" secondItem="Xh1-gm-d62" secondAttribute="trailing" constant="8" id="ThF-TW-9JM"/>
                             <constraint firstItem="ntY-QX-Tj8" firstAttribute="firstBaseline" secondItem="C0U-32-Q2d" secondAttribute="firstBaseline" id="Uiw-w1-tPw"/>
                             <constraint firstAttribute="bottom" secondItem="zVo-Lv-bzM" secondAttribute="bottom" constant="12" id="aKq-Ui-kAz"/>
                             <constraint firstAttribute="trailing" secondItem="ntY-QX-Tj8" secondAttribute="trailing" constant="12" id="evG-vb-EG0"/>

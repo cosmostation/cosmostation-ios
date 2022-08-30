@@ -21,10 +21,10 @@ final class BaseData : NSObject{
     var mParam: Param?
     var mIbcPaths = Array<IbcPath>()
     var mIbcTokens = Array<IbcToken>()
-    var mCw20Tokens = Array<Cw20Token>()
     var mBridgeTokens = Array<BridgeToken>()
     var mMintscanAssets = Array<MintscanAsset>()
     var mMintscanTokens = Array<MintscanToken>()
+    var mMyTokens = Array<MintscanToken>()
     
     var mNodeInfo: NodeInfo?
     var mBalances = Array<Balance>()
@@ -100,6 +100,28 @@ final class BaseData : NSObject{
         return mMintscanAssets.filter { $0.chain == chainConfig.chainAPIName && $0.denom.lowercased() == denom.lowercased() }.first
     }
     
+    func setMyTokens(_ address: String) {
+        mMintscanTokens.forEach { msToken in
+            if (msToken.default_show) {
+                mMyTokens.append(msToken)
+            }
+        }
+        getUserFavoTokens(address)?.forEach({ userFavo in
+            if (!mMyTokens.contains(where: { $0.contract_address == userFavo.contract_address })) {
+                mMyTokens.append(userFavo)
+            }
+        })
+        print("setMyTokens ", mMyTokens.count)
+    }
+    
+    func setMyTokenBalance(_ contAddress: String, _ amount: String) {
+        mMyTokens.forEach { myToken in
+            if (myToken.contract_address == contAddress) {
+                myToken.setAmount(amount)
+            }
+        }
+    }
+    
     func getPrice(_ denom: String) -> Price? {
         return mPrices.filter { $0.denom == denom.lowercased() }.first
     }
@@ -165,27 +187,21 @@ final class BaseData : NSObject{
         return result
     }
     
-    func setCw20Balance(_ contAddress: String, _ amount: String) {
-        mCw20Tokens.forEach { Cw20Token in
-            if (Cw20Token.contract_address == contAddress) {
-                Cw20Token.setAmount(amount)
-            }
-        }
-    }
-    
-    func getCw20s_gRPC() -> Array<Cw20Token> {
-        var result = Array<Cw20Token>()
-        mCw20Tokens.forEach { cw20Token in
-            if (cw20Token.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
-                result.append(cw20Token)
-            }
-        }
-        return result
-    }
-    
-    func getCw20_gRPC(_ contAddress: String) -> Cw20Token? {
-        return mCw20Tokens.filter { $0.contract_address == contAddress }.first
-    }
+
+//
+//    func getCw20s_gRPC() -> Array<Cw20Token> {
+//        var result = Array<Cw20Token>()
+//        mCw20Tokens.forEach { cw20Token in
+//            if (cw20Token.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
+//                result.append(cw20Token)
+//            }
+//        }
+//        return result
+//    }
+//
+//    func getCw20_gRPC(_ contAddress: String) -> Cw20Token? {
+//        return mCw20Tokens.filter { $0.contract_address == contAddress }.first
+//    }
     
     func getBridge_gRPC(_ denom: String) -> BridgeToken? {
         return mBridgeTokens.filter { $0.denom.lowercased() == denom.lowercased() }.first
@@ -197,16 +213,16 @@ final class BaseData : NSObject{
                 return denom
             }
             if (ibcToken.auth == true) {
-                if (ibcToken.base_denom?.starts(with: "cw20:") == true) {
-                    let cAddress = ibcToken.base_denom?.replacingOccurrences(of: "cw20:", with: "")
-                    if let cw20Basedenom = mCw20Tokens.filter({ $0.contract_address == cAddress }).first {
-                        return cw20Basedenom.denom
-                    } else {
-                        return ibcToken.base_denom!
-                    }
-                } else {
+//                if (ibcToken.base_denom?.starts(with: "cw20:") == true) {
+//                    let cAddress = ibcToken.base_denom?.replacingOccurrences(of: "cw20:", with: "")
+//                    if let cw20Basedenom = mCw20Tokens.filter({ $0.contract_address == cAddress }).first {
+//                        return cw20Basedenom.denom
+//                    } else {
+//                        return ibcToken.base_denom!
+//                    }
+//                } else {
                     return ibcToken.base_denom!
-                }
+//                }
             }
         }
         if (chainConfig?.chainType == .SIF_MAIN) {
@@ -934,6 +950,25 @@ final class BaseData : NSObject{
             }
         })
         return result;
+    }
+    
+    func getUserFavoTokens(_ address: String) -> Array<MintscanToken>? {
+        var result = Array<MintscanToken>()
+        let contracts = UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
+        contracts.forEach { contract in
+            if let userFavo = mMintscanTokens.filter { $0.contract_address == contract }.first {
+                result.append(userFavo)
+            }
+        }
+        return result
+    }
+    
+    func setUserFavoTokens(_ address: String, _ contracts: Array<String>) {
+        UserDefaults.standard.set(contracts, forKey: address + " " + KEY_USER_FAVO_TOKENS)
+    }
+    
+    func deleteUserFavoTokens(_ address: String) {
+        UserDefaults.standard.removeObject(forKey: address + " " + KEY_USER_FAVO_TOKENS)
     }
     
     

@@ -34,7 +34,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var mNative_gRPC = Array<Coin>()                // section 1
     var mIbc_gRPC = Array<Coin>()                   // section 2
     var mBridged_gRPC = Array<Coin>()               // section 3
-    var mToken_gRPC = Array<Cw20Token>()            // section 4
+    var mToken_gRPC = Array<MintscanToken>()        // section 4
     
     var mNative = Array<Balance>()                  // section 5
     var mEtc = Array<Balance>()                     // section 6
@@ -67,7 +67,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         self.mBalances = BaseData.instance.mBalances
         self.mBalances_gRPC = BaseData.instance.mMyBalances_gRPC
-        self.mToken_gRPC = BaseData.instance.getCw20s_gRPC()
         
         self.updateView()
     }
@@ -111,7 +110,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     @objc func onFetchDone(_ notification: NSNotification) {
         self.mBalances = BaseData.instance.mBalances
         self.mBalances_gRPC = BaseData.instance.mMyBalances_gRPC
-        self.mToken_gRPC = BaseData.instance.getCw20s_gRPC()
         
         self.updateView()
         self.refresher.endRefreshing()
@@ -186,10 +184,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 return cell!
                 
             } else if (indexPath.section == SECTION_TOKEN_GRPC) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
+                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
                 onBindToken_gRPC(cell, mToken_gRPC[indexPath.row])
                 return cell!
-                
             }
             
             else if (indexPath.section == SECTION_NATIVE) {
@@ -201,7 +198,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
                 onBindEtcToken(cell, mEtc[indexPath.row])
                 return cell!
-                
             }
         }
         let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
@@ -247,11 +243,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
 //
 //        }
         else if (indexPath.section == SECTION_TOKEN_GRPC) {
-            let cTokenDetailVC = ContractTokenGrpcViewController(nibName: "ContractTokenGrpcViewController", bundle: nil)
-            cTokenDetailVC.mCw20Token = mToken_gRPC[indexPath.row]
-            cTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(cTokenDetailVC, animated: true)
+//            let cTokenDetailVC = ContractTokenGrpcViewController(nibName: "ContractTokenGrpcViewController", bundle: nil)
+//            cTokenDetailVC.mCw20Token = mToken_gRPC[indexPath.row]
+//            cTokenDetailVC.hidesBottomBarWhenPushed = true
+//            self.navigationItem.title = ""
+//            self.navigationController?.pushViewController(cTokenDetailVC, animated: true)
             
         }
 
@@ -311,16 +307,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     //bind contract tokens
-    func onBindToken_gRPC(_ cell: TokenCell?, _ token: Cw20Token) {
-        cell?.tokenImg.af_setImage(withURL: token.getImgUrl())
-        cell?.tokenSymbol.text = token.denom.uppercased()
-        cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-        cell?.tokenTitle.text = ""
-        cell?.tokenDescription.text = token.contract_address
-        
-        let decimal = token.decimal
-        cell?.tokenAmount.attributedText = WDP.dpAmount(token.amount, cell!.tokenAmount.font!, decimal, 6)
-        cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(token.denom, token.getAmount(), decimal, cell!.tokenValue.font)
+    func onBindToken_gRPC(_ cell: AssetCell?, _ token: MintscanToken) {
+        cell?.onBindContractToken(chainConfig, token)
     }
     
     
@@ -392,64 +380,18 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mBridged_gRPC.removeAll()
         
         self.mBalances_gRPC.forEach { balance_gRPC in
-            if (WUtils.getMainDenom(chainConfig) == balance_gRPC.denom) {
+            let coinType = BaseData.instance.getMSAsset(chainConfig!, balance_gRPC.denom)?.type
+            if (coinType == "staking" || coinType == "native") {
                 mNative_gRPC.append(balance_gRPC)
-                
-            } else if (balance_gRPC.isIbc()) {
-                if let ibcToken = BaseData.instance.getIbcToken(balance_gRPC.getIbcHash()) {
-                    if (ibcToken.auth == true) { mIbc_gRPC.append(balance_gRPC) }
-                }
-                
-            } else if (chainType == .OSMOSIS_MAIN) {
-                if (balance_gRPC.denom == OSMOSIS_ION_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                }
-                
-            } else if (chainType == .EMONEY_MAIN) {
-                if (balance_gRPC.denom == EMONEY_EUR_DENOM || balance_gRPC.denom == EMONEY_CHF_DENOM || balance_gRPC.denom == EMONEY_DKK_DENOM ||
-                    balance_gRPC.denom == EMONEY_NOK_DENOM || balance_gRPC.denom == EMONEY_SEK_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                }
-            
-            } else if (chainType == .SIF_MAIN && balance_gRPC.denom.starts(with: "c")) {
+            } else if (coinType == "bep" || coinType == "bridge") {
                 mBridged_gRPC.append(balance_gRPC)
-                
-            } else if (chainType == .GRAVITY_BRIDGE_MAIN && balance_gRPC.denom.starts(with: "gravity0x")) {
-                mBridged_gRPC.append(balance_gRPC)
-                
-            } else if (chainType == .AXELAR_MAIN) {
-                if (BaseData.instance.getMSAsset(chainConfig!, balance_gRPC.denom)?.type == "bridge") {
-                    mBridged_gRPC.append(balance_gRPC)
-                }
-                
-            } else if (chainType == .KAVA_MAIN) {
-                if (balance_gRPC.denom == KAVA_HARD_DENOM || balance_gRPC.denom == KAVA_USDX_DENOM || balance_gRPC.denom == KAVA_SWAP_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-
-                } else if (balance_gRPC.denom == TOKEN_HTLC_KAVA_BNB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BTCB ||
-                           balance_gRPC.denom == TOKEN_HTLC_KAVA_XRPB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BUSD ||
-                           balance_gRPC.denom == "btch") {
-                    mBridged_gRPC.append(balance_gRPC)
-
-                }
-
-            } else if (chainType == .INJECTIVE_MAIN) {
-                if (balance_gRPC.denom.starts(with: "peggy0x")) {
-                    mBridged_gRPC.append(balance_gRPC)
-                }
-                
-            } else if (chainType == .CRESCENT_MAIN || chainType == .CRESCENT_TEST) {
-                if (balance_gRPC.denom == CRESCENT_BCRE_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                }
-                
-            } else if (chainType == .NYX_MAIN) {
-                if (balance_gRPC.denom == NYX_NYM_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                }
-                
+            } else if (coinType == "ibc") {
+                mIbc_gRPC.append(balance_gRPC)
             }
         }
+        mToken_gRPC = BaseData.instance.mMyTokens
+        
+        
         
         mNative.removeAll()
         mEtc.removeAll()

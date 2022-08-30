@@ -32,7 +32,7 @@ class SendContract4ViewController: BaseViewController, PasswordViewDelegate {
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
         
-        self.cw20Token = BaseData.instance.getCw20_gRPC(pageHolderVC.mCw20SendContract!)
+//        self.cw20Token = BaseData.instance.getCw20_gRPC(pageHolderVC.mCw20SendContract!)
         self.decimal = cw20Token.decimal
         
         btnBack.borderColor = UIColor.init(named: "_font05")
