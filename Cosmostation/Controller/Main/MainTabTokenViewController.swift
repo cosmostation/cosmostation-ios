@@ -144,7 +144,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         else if (section == SECTION_NATIVE) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative.count) }
         else if (section == SECTION_ETC) {
-            view.headerTitleLabel.text = (chainType! == ChainType.OKEX_MAIN) ? "KIP10 Coins" : "Etc Coins"
+            view.headerTitleLabel.text = (chainType! == ChainType.OKEX_MAIN) ? "KIP10 Coins" : "Tokens"
             view.headerCntLabel.text = String(self.mEtc.count)
         }
         else { view.headerTitleLabel.text = ""; view.headerCntLabel.text = "" }
@@ -168,37 +168,27 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             return onSetAddressItems(tableView, indexPath);
             
         } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
             if (indexPath.section == SECTION_NATIVE_GRPC) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
                 onBindNativeCoin_gRPC(cell, mNative_gRPC[indexPath.row])
-                return cell!
                 
             } else if (indexPath.section == SECTION_IBC_GRPC) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
                 onBindIbcCoin_gRPC(cell, mIbc_gRPC[indexPath.row])
-                return cell!
                 
             } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
                 onBindBridgedAsset_gRPC(cell, mBridged_gRPC[indexPath.row])
-                return cell!
                 
             } else if (indexPath.section == SECTION_TOKEN_GRPC) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
                 onBindToken_gRPC(cell, mToken_gRPC[indexPath.row])
-                return cell!
             }
             
             else if (indexPath.section == SECTION_NATIVE) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
-                onBindNativeToken(cell, mNative[indexPath.row])
-                return cell!
+                onBindNativeCoin(cell, mNative[indexPath.row])
                 
             } else if (indexPath.section == SECTION_ETC) {
-                let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
                 onBindEtcToken(cell, mEtc[indexPath.row])
-                return cell!
             }
+            return cell!
         }
         let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
         return cell!
@@ -227,11 +217,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
 
         } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-            let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
-            bTokenDetailVC.hidesBottomBarWhenPushed = true
-            bTokenDetailVC.bridgeDenom = mBridged_gRPC[indexPath.row].denom
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
+//            let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
+//            bTokenDetailVC.hidesBottomBarWhenPushed = true
+//            bTokenDetailVC.bridgeDenom = mBridged_gRPC[indexPath.row].denom
+//            self.navigationItem.title = ""
+//            self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
 
         }
 //        else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
@@ -252,19 +242,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         }
 
         else if (indexPath.section == SECTION_NATIVE) {
-            if (mNative[indexPath.row].balance_denom == WUtils.getMainDenom(chainConfig)) {
-                let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
-                sTokenDetailVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
-
-            } else {
-                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-                nTokenDetailVC.hidesBottomBarWhenPushed = true
-                nTokenDetailVC.denom = mNative[indexPath.row].balance_denom
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-            }
+            let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
+            sTokenDetailVC.hidesBottomBarWhenPushed = true
+            self.navigationItem.title = ""
+            self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
 
         } else if (indexPath.section == SECTION_ETC) {
             if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
@@ -313,65 +294,13 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     
     
     //bind native tokens
-    func onBindNativeToken(_ cell: TokenCell?, _ balance: Balance) {
-        if (balance.balance_denom == BNB_MAIN_DENOM) {
-            if let bnbToken = WUtils.getBnbToken(BNB_MAIN_DENOM) {
-                cell?.tokenImg.image = UIImage(named: "tokenBinance")
-                cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
-                cell?.tokenSymbol.textColor = UIColor(named: "binance")
-                cell?.tokenTitle.text = "(" + bnbToken.symbol + ")"
-                cell?.tokenDescription.text = bnbToken.name
-                
-                let amount = WUtils.getAllBnbToken(BNB_MAIN_DENOM)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(amount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, amount, 0, cell!.tokenValue.font)
-            }
-            
-        } else if (balance.balance_denom == OKEX_MAIN_DENOM) {
-            if let okToken = WUtils.getOkToken(OKEX_MAIN_DENOM) {
-                cell?.tokenImg.image = UIImage(named: "tokenOkc")
-                cell?.tokenSymbol.text = okToken.original_symbol!.uppercased()
-                cell?.tokenSymbol.textColor = UIColor(named: "okc")
-                cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
-                cell?.tokenDescription.text = "OKC Staking Coin"
-                
-                let tokenAmount = WUtils.getAllExToken(OKEX_MAIN_DENOM)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, tokenAmount, 0, cell!.tokenValue.font)
-            }
-        }
+    func onBindNativeCoin(_ cell: AssetCell?, _ balance: Balance) {
+        cell?.onBindStakingCoin(chainConfig, balance)
     }
     
     //bind Etc tokens (binance, okex)
-    func onBindEtcToken(_ cell: TokenCell?, _ balance: Balance) {
-        if (chainType == .BINANCE_MAIN) {
-            if let bnbToken = WUtils.getBnbToken(balance.balance_denom) {
-                cell?.tokenImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + bnbToken.original_symbol + ".png")!)
-                cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
-                cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-                cell?.tokenTitle.text = "(" + bnbToken.symbol + ")"
-                cell?.tokenDescription.text = bnbToken.name
-                
-                let tokenAmount = WUtils.getAllBnbToken(balance.balance_denom)
-                let convertAmount = WUtils.getBnbConvertAmount(balance.balance_denom)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, convertAmount, 0, cell!.tokenValue.font)
-            }
-            
-        }  else if (chainType == .OKEX_MAIN) {
-            if let okToken = WUtils.getOkToken(balance.balance_denom) {
-                cell?.tokenImg.af_setImage(withURL: URL(string: OKTokenImgUrl + okToken.original_symbol! + ".png")!)
-                cell?.tokenSymbol.text = okToken.original_symbol?.uppercased()
-                cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-                cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
-                cell?.tokenDescription.text = okToken.description
-                
-                let tokenAmount = WUtils.getAllExToken(balance.balance_denom)
-                let convertedAmount = WUtils.convertTokenToOkt(balance.balance_denom)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, convertedAmount, 0, cell!.tokenValue.font)
-            }
-        }
+    func onBindEtcToken(_ cell: AssetCell?, _ balance: Balance) {
+        cell?.onBindEtcCoin(chainConfig, balance)
     }
     
     func onClassifyAssets() {
@@ -392,19 +321,13 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         mToken_gRPC = BaseData.instance.mMyTokens
         
         
-        
         mNative.removeAll()
         mEtc.removeAll()
         self.mBalances.forEach { balance in
             if (WUtils.getMainDenom(chainConfig) == balance.balance_denom) {
                 mNative.append(balance)
-                
-            } else if (chainType == .BINANCE_MAIN) {
+            } else {
                 mEtc.append(balance)
-                
-            } else if (chainType == .OKEX_MAIN) {
-                mEtc.append(balance)
-                
             }
         }
         

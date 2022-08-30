@@ -561,6 +561,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchBnbTokens() {
+        print("onFetchBnbTokens ", BaseNetWork.bnbTokenUrl(mChainType))
         let request = Alamofire.request(BaseNetWork.bnbTokenUrl(mChainType), method: .get, parameters: ["limit":"3000"], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {

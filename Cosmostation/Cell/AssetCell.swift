@@ -84,6 +84,7 @@ class AssetCell: UITableViewCell {
         onBindPriceView(asset!.base_denom)
     }
     
+    //for bind cw20 & erc20
     func onBindContractToken(_ chainConfig: ChainConfig?, _ token: MintscanToken?) {
         if (chainConfig == nil || token == nil) { return }
         let decimal = token!.decimal
@@ -98,6 +99,66 @@ class AssetCell: UITableViewCell {
         assetValue.attributedText = WUtils.dpValueUserCurrency(token!.denom, available, decimal, assetValue.font)
         onBindPriceView(token!.denom)
     }
+    
+    //for Legacy lcd (binance, okc)
+    func onBindStakingCoin(_ chainConfig: ChainConfig?, _ balance: Balance?) {
+        if (chainConfig == nil || balance == nil) { return }
+        if (chainConfig?.chainType == .BINANCE_MAIN && balance?.balance_denom == BNB_MAIN_DENOM) {
+            if let bnbToken = WUtils.getBnbToken(BNB_MAIN_DENOM) {
+                let amount = WUtils.getAllBnbToken(BNB_MAIN_DENOM)
+                assetImg.image = UIImage(named: "tokenBinance")
+                assetSymbol.text = bnbToken.original_symbol.uppercased()
+                assetDescription.text = bnbToken.name
+                assetAmount.attributedText = WDP.dpAmount(amount.stringValue, assetAmount.font!, 0, 6)
+                assetValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, amount, 0, assetValue.font)
+            }
+            
+        } else if (chainConfig?.chainType == .OKEX_MAIN && balance?.balance_denom == OKEX_MAIN_DENOM) {
+            if let okToken = WUtils.getOkToken(OKEX_MAIN_DENOM) {
+                let amount = WUtils.getAllExToken(OKEX_MAIN_DENOM)
+                assetImg.image = UIImage(named: "tokenOkc")
+                assetSymbol.text = okToken.symbol!.uppercased()
+                assetDescription.text = okToken.description
+                assetAmount.attributedText = WDP.dpAmount(amount.stringValue, assetAmount.font!, 0, 6)
+                assetValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, amount, 0, assetValue.font)
+            }
+        }
+        onBindPriceView(balance!.balance_denom)
+    }
+    
+    func onBindEtcCoin(_ chainConfig: ChainConfig?, _ balance: Balance?) {
+        if (chainConfig == nil || balance == nil) { return }
+        if (chainConfig?.chainType == .BINANCE_MAIN) {
+            if let bnbToken = WUtils.getBnbToken(balance!.balance_denom) {
+                assetImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + bnbToken.original_symbol + ".png")!)
+                assetSymbol.text = bnbToken.original_symbol.uppercased()
+                assetDescription.text = bnbToken.name
+                
+                let tokenAmount = WUtils.getAllBnbToken(balance!.balance_denom)
+                let convertAmount = WUtils.getBnbConvertAmount(balance!.balance_denom)
+                assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
+                assetValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, convertAmount, 0, assetValue.font)
+                assetPrice.attributedText = WUtils.dpBnbTokenUserCurrencyPrice(balance!.balance_denom, assetPrice.font)
+                assetPriceChange.text = ""
+            }
+            
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+            if let okToken = WUtils.getOkToken(balance!.balance_denom) {
+                assetImg.af_setImage(withURL: URL(string: OKTokenImgUrl + okToken.original_symbol! + ".png")!)
+                assetSymbol.text = okToken.original_symbol?.uppercased()
+                assetDescription.text = okToken.description
+                
+                let tokenAmount = WUtils.getAllExToken(balance!.balance_denom)
+                let convertedAmount = WUtils.convertTokenToOkt(balance!.balance_denom)
+                assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
+                assetValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, convertedAmount, 0, assetValue.font)
+                assetPrice.text = "-"
+                assetPriceChange.text = ""
+            }
+        }
+    }
+    
+    
     
     func onBindPriceView(_ priceDenom: String) {
         assetPrice.attributedText = WUtils.dpPerUserCurrencyValue(priceDenom, assetPrice.font)
