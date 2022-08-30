@@ -148,16 +148,6 @@ class CommonWCViewController: BaseViewController {
         UIApplication.shared.isIdleTimerDisabled = false
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        if (interactor?.state == .connected) {
-            interactor?.disconnect()
-            interactor?.killSession().done { [weak self] in
-                self?.interactor = nil
-            }.cauterize()
-        }
-    }
-    
     func connectSession() {
         showLoading()
         guard let url = wcURL, let session = WCSession.from(string: url) else {
@@ -650,6 +640,22 @@ class CommonWCViewController: BaseViewController {
     }
     
     @IBAction func onCloseDapp(_ sender: UIButton) {
+        if let interactor = interactor {
+            if (interactor.state == .connected) {
+                interactor.killSession().done { [weak self] in
+                    self?.interactor = nil
+                    if (self?.navigationController != nil) {
+                        self?.navigationController?.popViewController(animated: true)
+                    } else {
+                        self?.dismiss(animated: true)
+                    }
+                }.cauterize()
+                return
+            } else {
+                interactor.disconnect()
+            }
+        }
+        
         if (self.navigationController != nil) {
             self.navigationController?.popViewController(animated: true)
         } else {
@@ -658,16 +664,27 @@ class CommonWCViewController: BaseViewController {
     }
     
     @IBAction func onClickDisconnect(_ sender: UIButton) {
-        //@TOBE need refactoring
-        self.interactor?.disconnect()
-        self.interactor?.killSession().done {[weak self] in
-            self?.interactor = nil
-            if (self?.isDeepLink == true) {
-                self?.dismiss(animated: true)
+        if let interactor = interactor {
+            if (interactor.state == .connected) {
+                interactor.killSession().done { [weak self] in
+                    self?.interactor = nil
+                    if (self?.navigationController != nil) {
+                        self?.navigationController?.popViewController(animated: true)
+                    } else {
+                        self?.dismiss(animated: true)
+                    }
+                }.cauterize()
+                return
             } else {
-                self?.navigationController?.popViewController(animated: false)
+                interactor.disconnect()
             }
-        }.cauterize()
+        }
+        
+        if (self.navigationController != nil) {
+            self.navigationController?.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true)
+        }
     }
     
     typealias KeyTuple = (privateKey: Data, publicKey: Data, tendermintAddress:Data)
