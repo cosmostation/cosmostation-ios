@@ -67,6 +67,17 @@ class MultiSelectPopupViewController: BaseViewController, SBCardPopupContent, UI
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (type == SELECT_POPUP_CONTRACT_TOKEN_EDIT) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectContractTokenCell") as? SelectContractTokenCell
+            let msToken = contractTokens[indexPath.row]
+            cell?.onBindToken(msToken, selectedContractTokens)
+            cell?.actionToggle = { result in
+                if (result) {
+                    if (!self.selectedContractTokens.contains(msToken.contract_address)) {
+                        self.selectedContractTokens.append(msToken.contract_address)
+                    }
+                } else {
+                    self.selectedContractTokens.removeAll { $0 == msToken.contract_address }
+                }
+            }
             return cell!
         }
         let cell = tableView.dequeueReusableCell(withIdentifier:"SelectContractTokenCell") as? SelectContractTokenCell
@@ -78,6 +89,7 @@ class MultiSelectPopupViewController: BaseViewController, SBCardPopupContent, UI
     }
     
     @IBAction func onClickConfirm(_ sender: UIButton) {
+        BaseData.instance.setUserFavoTokens(account!.account_address, selectedContractTokens)
         popupViewController?.resultDelegate?.SBCardPopupResponse(type: type!, result: 1)
         popupViewController?.close()
     }

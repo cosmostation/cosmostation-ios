@@ -156,7 +156,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
         else if (section == SECTION_IBC_GRPC) { return mIbc_gRPC.count }
         else if (section == SECTION_BRIDGE_GRPC) { return mBridged_gRPC.count }
-        else if (section == SECTION_TOKEN_GRPC) { return (mToken_gRPC.count + 1) }
+        else if (section == SECTION_TOKEN_GRPC) {
+            if (mToken_gRPC.count > 0) { return mToken_gRPC.count + 1 }
+            return 0
+        }
         
         else if (section == SECTION_NATIVE) { return mNative.count }
         else if (section == SECTION_ETC) { return mEtc.count }
@@ -272,9 +275,9 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func SBCardPopupResponse(type: Int, result: Int) {
-//        self.selectedCoin = granterAvailables[result]
-//        self.mTargetAmountTextField.text = ""
-//        self.onUpdateView()
+        if (type == SELECT_POPUP_CONTRACT_TOKEN_EDIT && result == 1) {
+            onRequestFetch()
+        }
     }
     
     func onSetAddressItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {

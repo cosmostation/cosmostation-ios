@@ -953,12 +953,12 @@ final class BaseData : NSObject{
     }
     
     func getUserFavoTokens2(_ address: String) -> Array<String> {
-        return UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
+        return UserDefaults.standard.stringArray(forKey: address + " " + KEY_USER_FAVO_TOKENS) ?? []
     }
     
     func getUserFavoTokens(_ address: String) -> Array<MintscanToken> {
         var result = Array<MintscanToken>()
-        let contracts = UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
+        let contracts = UserDefaults.standard.stringArray(forKey: address + " " + KEY_USER_FAVO_TOKENS) ?? []
         contracts.forEach { contract in
             if let userFavo = mMintscanTokens.filter { $0.contract_address == contract }.first {
                 result.append(userFavo)
@@ -966,8 +966,6 @@ final class BaseData : NSObject{
         }
         return result
     }
-    
-    
     
     func setUserFavoTokens(_ address: String, _ contracts: Array<String>) {
         UserDefaults.standard.set(contracts, forKey: address + " " + KEY_USER_FAVO_TOKENS)

@@ -93,7 +93,8 @@ class AssetCell: UITableViewCell {
             assetImg.af_setImage(withURL: assetImgeUrl)
         }
         assetSymbol.text = token!.denom.uppercased()
-        assetDescription.text = token?.contract_address
+//        assetDescription.text = token?.contract_address
+        assetDescription.text = ""
         assetDescription.lineBreakMode = .byTruncatingMiddle
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
         assetValue.attributedText = WUtils.dpValueUserCurrency(token!.denom, available, decimal, assetValue.font)

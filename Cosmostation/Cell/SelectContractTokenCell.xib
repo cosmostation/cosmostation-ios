@@ -37,6 +37,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WiY-YL-vfT">
                                 <rect key="frame" x="323" y="9.5" width="51" height="31"/>
                                 <color key="onTintColor" name="photon"/>
+                                <connections>
+                                    <action selector="onToggle:" destination="KGk-i7-Jjw" eventType="valueChanged" id="kk1-zy-Rh7"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
