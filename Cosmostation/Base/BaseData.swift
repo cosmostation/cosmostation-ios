@@ -106,7 +106,7 @@ final class BaseData : NSObject{
                 mMyTokens.append(msToken)
             }
         }
-        getUserFavoTokens(address)?.forEach({ userFavo in
+        getUserFavoTokens(address).forEach({ userFavo in
             if (!mMyTokens.contains(where: { $0.contract_address == userFavo.contract_address })) {
                 mMyTokens.append(userFavo)
             }
@@ -952,7 +952,11 @@ final class BaseData : NSObject{
         return result;
     }
     
-    func getUserFavoTokens(_ address: String) -> Array<MintscanToken>? {
+    func getUserFavoTokens2(_ address: String) -> Array<String> {
+        return UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
+    }
+    
+    func getUserFavoTokens(_ address: String) -> Array<MintscanToken> {
         var result = Array<MintscanToken>()
         let contracts = UserDefaults.standard.stringArray(forKey: KEY_USER_HIDEN_CHAINS) ?? []
         contracts.forEach { contract in
@@ -962,6 +966,8 @@ final class BaseData : NSObject{
         }
         return result
     }
+    
+    
     
     func setUserFavoTokens(_ address: String, _ contracts: Array<String>) {
         UserDefaults.standard.set(contracts, forKey: address + " " + KEY_USER_FAVO_TOKENS)

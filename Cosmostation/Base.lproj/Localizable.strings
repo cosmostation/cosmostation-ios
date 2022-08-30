@@ -320,6 +320,7 @@
 "str_starname_confirm_title" = "StarName Found";
 "str_starname_confirm_msg" = "A matched address was found. Would you like to send to this address? \n\n\n%@\n\n%@";
 "str_select_to_send_coin" = "Select To Send Coin Type";
+"str_select_contract_token" = "Select token to Display";
 "str_event_confirm" = "Please confirm twice yourself ETH deposit address for XPRT distribution. \n(we don't support validate checksum) \n\n\n%@";
 "str_event_confirm_title" = "Once More Check";
 "str_apr_help_title" = "APY";

@@ -11,7 +11,7 @@ import Alamofire
 import UserNotifications
 import SafariServices
 
-class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, SBCardPopupDelegate {
     
     let SECTION_NATIVE_GRPC             = 1;
     let SECTION_IBC_GRPC                = 2;
@@ -52,6 +52,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
         self.tokenTableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
+        self.tokenTableView.register(UINib(nibName: "AssetAddCell", bundle: nil), forCellReuseIdentifier: "AssetAddCell")
         self.tokenTableView.rowHeight = UITableView.automaticDimension
         self.tokenTableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -155,7 +156,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         else if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
         else if (section == SECTION_IBC_GRPC) { return mIbc_gRPC.count }
         else if (section == SECTION_BRIDGE_GRPC) { return mBridged_gRPC.count }
-        else if (section == SECTION_TOKEN_GRPC) { return mToken_gRPC.count }
+        else if (section == SECTION_TOKEN_GRPC) { return (mToken_gRPC.count + 1) }
         
         else if (section == SECTION_NATIVE) { return mNative.count }
         else if (section == SECTION_ETC) { return mEtc.count }
@@ -178,6 +179,10 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 onBindBridgedAsset_gRPC(cell, mBridged_gRPC[indexPath.row])
                 
             } else if (indexPath.section == SECTION_TOKEN_GRPC) {
+                if (indexPath.row == mToken_gRPC.count) {
+                    let addCell = tableView.dequeueReusableCell(withIdentifier:"AssetAddCell") as? AssetAddCell
+                    return addCell!
+                }
                 onBindToken_gRPC(cell, mToken_gRPC[indexPath.row])
             }
             
@@ -237,6 +242,14 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
 //            cTokenDetailVC.hidesBottomBarWhenPushed = true
 //            self.navigationItem.title = ""
 //            self.navigationController?.pushViewController(cTokenDetailVC, animated: true)
+            if (indexPath.row == mToken_gRPC.count) {
+                let popupVC = MultiSelectPopupViewController(nibName: "MultiSelectPopupViewController", bundle: nil)
+                popupVC.type = SELECT_POPUP_CONTRACT_TOKEN_EDIT
+                let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+                cardPopup.resultDelegate = self
+                cardPopup.show(onViewController: self)
+                return
+            }
             
         }
 
@@ -256,6 +269,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             }
 
         }
+    }
+    
+    func SBCardPopupResponse(type: Int, result: Int) {
+//        self.selectedCoin = granterAvailables[result]
+//        self.mTargetAmountTextField.text = ""
+//        self.onUpdateView()
     }
     
     func onSetAddressItems(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {

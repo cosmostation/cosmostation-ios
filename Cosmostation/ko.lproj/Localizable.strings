@@ -297,6 +297,7 @@
 "str_starname_confirm_title" = "스타네임 주소 사용";
 "str_starname_confirm_msg" = "매칭된 주소를 찾았습니다. 이 주소로 전송을 진행하시겠습니까? \n\n\n%@\n\n%@";
 "str_select_to_send_coin" = "보낼 코인 종류를 선택하세요";
+"str_select_contract_token" = "표시할 토큰을 선택하세요";
 "str_event_confirm" = "에어드랍을 받으실. ETH주소를 다시한번 확인해주세요.\n(입력하신 ETH 주소 검증은 지원하지 않습니다.) \n\n\n%@";
 "str_event_confirm_title" = "한번 더 확인";
 "str_apr_help_title" = "연 수익율";
