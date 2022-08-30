@@ -51,7 +51,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
-        self.tokenTableView.register(UINib(nibName: "TokenCell", bundle: nil), forCellReuseIdentifier: "TokenCell")
         self.tokenTableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
         self.tokenTableView.rowHeight = UITableView.automaticDimension
         self.tokenTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -190,7 +189,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             }
             return cell!
         }
-        let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
+        let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
         return cell!
     }
     
