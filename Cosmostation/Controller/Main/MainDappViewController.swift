@@ -50,6 +50,8 @@ class MainDappViewController: BaseViewController {
     func initWebView() {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor.clear
         webView.navigationDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.allowsBackForwardNavigationGestures = true
@@ -77,7 +79,11 @@ extension MainDappViewController: WKNavigationDelegate, WKUIDelegate {
             if (url.host == "dapps.cosmostation.io") {
                 decisionHandler(.allow)
             } else {
-                UIApplication.shared.open(url, options: [:])
+                if (account?.account_has_private == false) {
+                    self.onShowAddMenomicDialog()
+                } else {
+                    UIApplication.shared.open(url, options: [:])
+                }
                 decisionHandler(.cancel)
             }
         } else {
