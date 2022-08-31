@@ -25,6 +25,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var chainType: ChainType?
     var mBalances = Array<Balance>()
     
+    var mToSendDenom: String?
     var mToSendRecipientAddress:String?
     var mToSendAmount = Array<Coin>()
     
@@ -107,8 +108,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mStarnameTime: Int64?
     var mStarnameDomainType: String?
     var mStarnameResources_gRPC: Array<Starnamed_X_Starname_V1beta1_Resource> = Array<Starnamed_X_Starname_V1beta1_Resource>()
-    
-    var mToSendDenom: String?
     
     var mPoolId: String?
     var mSwapInDenom: String?

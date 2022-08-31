@@ -227,7 +227,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     func onShowNotice() {
-        guard let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainConfig))") else { return }
+        guard let url = URL(string: "https://notice.mintscan.io/\(chainConfig.chainAPIName)") else { return }
         self.onShowSafariWeb(url)
     }
     

@@ -248,23 +248,19 @@ class BaseNetWork {
     
     //mintscan
     static func mintscanProposals(_ chainConfig: ChainConfig) -> String {
-        let chainName = WUtils.getChainNameByBaseChain(chainConfig)
-        return MINTSCAN_API_URL + "v1/" + chainName + "/proposals"
+        return MINTSCAN_API_URL + "v1/" + chainConfig.chainAPIName + "/proposals"
     }
     
     static func mintscanProposalDetail(_ chainConfig: ChainConfig, _ proposalId: String) -> String {
-        let chainName = WUtils.getChainNameByBaseChain(chainConfig)
-        return MINTSCAN_API_URL + "v1/" + chainName + "/proposals/" + proposalId
+        return MINTSCAN_API_URL + "v1/" + chainConfig.chainAPIName + "/proposals/" + proposalId
     }
     
     static func mintscanMyVote(_ chainConfig: ChainConfig?, _ proposalId: String, _ voter: String) -> String {
-        let chainName = WUtils.getChainNameByBaseChain(chainConfig)
-        return MINTSCAN_API_URL + "v1/" + chainName + "/proposals/" + proposalId + "/votes?voter=" + voter
+        return MINTSCAN_API_URL + "v1/" + chainConfig!.chainAPIName + "/proposals/" + proposalId + "/votes?voter=" + voter
     }
     
     static func mintscanMyVotes(_ chainConfig: ChainConfig?, _ voter: String) -> String {
-        let chainName = WUtils.getChainNameByBaseChain(chainConfig)
-        return MINTSCAN_API_URL + "v1/" + chainName + "/account/" + voter + "/votes"
+        return MINTSCAN_API_URL + "v1/" + chainConfig!.chainAPIName + "/account/" + voter + "/votes"
     }
     
     static func mintscanAssets() -> String {

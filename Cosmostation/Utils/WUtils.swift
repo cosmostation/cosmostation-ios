@@ -1171,11 +1171,6 @@ public class WUtils {
         return chainConfig!.explorerUrl + "proposals/" + proposalId
     }
     
-    static func getChainNameByBaseChain(_ chainConfig: ChainConfig?) -> String {
-        if (chainConfig == nil) { return "" }
-        return chainConfig!.chainAPIName
-    }
-    
     static func getDefaultRlayerImg(_ chainConfig: ChainConfig?) -> String {
         if (chainConfig == nil) { return "" }
         return chainConfig!.relayerImgUrl

@@ -24,7 +24,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     var toCoinList = Array<String>()
     var toCoins = Array<Coin>()
     var toAccountList = Array<Account>()
-    var ibcToChain = Array<IbcPath>()
+    var ibcToChain = Array<ChainConfig>()
     var ibcRelayer = Array<Path>()
     var starnameDomains = Array<String>()
     var feeData = Array<FeeData>()
@@ -271,10 +271,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_IBC_CHAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
-            let toChain = WUtils.getChainTypeByChainId(ibcToChain[indexPath.row].chain_id)
-            let toChainConfig = ChainFactory.getChainConfig(toChain)
-            cell!.chainImg.image = toChainConfig?.chainImg
-            cell!.chainTitle.text = toChainConfig?.chainTitle2
+            let toChainConfig = ibcToChain[indexPath.row]
+            cell!.chainImg.image = toChainConfig.chainImg
+            cell!.chainTitle.text = toChainConfig.chainTitle2
+            cell!.chainTitle.textColor = toChainConfig.chainColor
             return cell!
             
         } else if (type == SELECT_POPUP_IBC_RELAYER) {

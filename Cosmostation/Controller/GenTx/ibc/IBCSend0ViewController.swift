@@ -108,12 +108,12 @@ class IBCSend0ViewController: BaseViewController, SBCardPopupDelegate {
     }
     
     @objc func onClickToChain (_ sender: UITapGestureRecognizer) {
-        let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
-        popupVC.type = SELECT_POPUP_IBC_CHAIN
-        popupVC.ibcToChain = ibcSendableChains
-        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
-        cardPopup.resultDelegate = self
-        cardPopup.show(onViewController: self)
+//        let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
+//        popupVC.type = SELECT_POPUP_IBC_CHAIN
+//        popupVC.ibcToChain = ibcSendableChains
+//        let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+//        cardPopup.resultDelegate = self
+//        cardPopup.show(onViewController: self)
     }
     
     @objc func onClickRelayer (_ sender: UITapGestureRecognizer) {
