@@ -313,81 +313,24 @@ public class WUtils {
                     let assetValue = userCurrencyValue(coin.denom, amount, mainDivideDecimal(chainConfig?.chainType))
                     totalValue = totalValue.adding(assetValue)
                     
-                } else if (chainConfig?.chainType == .OSMOSIS_MAIN && coin.denom == OSMOSIS_ION_DENOM) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                } else if (chainConfig?.chainType == .SIF_MAIN && coin.denom.starts(with: "c")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getDenomDecimal(chainConfig, coin.denom)
-                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
-                    }
-                    
-                } else if (chainConfig?.chainType == .GRAVITY_BRIDGE_MAIN && coin.denom.starts(with: "gravity0x")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getDenomDecimal(chainConfig, coin.denom)
-                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
-                    }
-
-                }
-                //disable pooltoken value
-//                else if (chainConfig?.chainType == .OSMOSIS_MAIN && coin.denom.contains("gamm/pool/")) {
-//                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-//                    let assetValue = userCurrencyValue(coin.denom, amount, 18)
-//                    totalValue = totalValue.adding(assetValue)
-//
-//                } else if (chainConfig?.chainType == .COSMOS_MAIN && coin.denom.starts(with: "pool") && coin.denom.count >= 68) {
-//                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-//                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
-//                    totalValue = totalValue.adding(assetValue)
-//
-//                }
-                else if (chainConfig?.chainType == .EMONEY_MAIN && coin.denom.starts(with: "e")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    totalValue = totalValue.adding(userCurrencyValue(coin.denom, available, 6))
-                    
                 } else if (chainConfig?.chainType == .KAVA_MAIN) {
-                    let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-                    let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
-                    let amount = WUtils.getKavaTokenAll(coin.denom)
-                    let assetValue = userCurrencyValue(baseDenom, amount, decimal)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                } else if (chainConfig?.chainType == .INJECTIVE_MAIN && coin.denom.starts(with: "peggy0x")) {
-                    let chainConfig = ChainInjective.init(.INJECTIVE_MAIN)
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getDenomDecimal(chainConfig, coin.denom)
-                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
+                    if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+                        let amount = WUtils.getKavaTokenAll(coin.denom)
+                        let assetValue = userCurrencyValue(msAsset.base_denom, amount, msAsset.decimal)
+                        totalValue = totalValue.adding(assetValue)
                     }
                     
-                } else if (chainConfig?.chainType == .NYX_MAIN && coin.denom == NYX_NYM_DENOM) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                }
-                
-                else if (coin.isIbc()) {
-                    if let ibcToken = BaseData.instance.getIbcToken(coin.getIbcHash()) {
-                        if (ibcToken.auth == true) {
-                            let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                            let assetValue = userCurrencyValue(ibcToken.base_denom!, amount, ibcToken.decimal!)
-                            totalValue = totalValue.adding(assetValue)
-                        }
+                } else {
+                    if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+                        let amount = baseData.getAvailableAmount_gRPC(coin.denom)
+                        let assetValue = userCurrencyValue(msAsset.base_denom, amount, msAsset.decimal)
+                        totalValue = totalValue.adding(assetValue)
                     }
                 }
             }
-            
-//            baseData.getCw20s_gRPC().forEach { cw20Token in
-//                let available = cw20Token.getAmount()
-//                let decimal = cw20Token.decimal
-//                totalValue = totalValue.adding(userCurrencyValue(cw20Token.denom, available, decimal))
-//            }
         }
+        
+        //cal for legacy chains
         else if (chainConfig?.chainType == .BINANCE_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allBnb = NSDecimalNumber.zero
@@ -413,6 +356,15 @@ public class WUtils {
                 totalValue = totalValue.adding(assetValue)
             }
             
+        }
+        
+        //Add contract token value
+        if (chainConfig?.wasmSupport == true || chainConfig?.evmSupport == true) {
+            BaseData.instance.mMyTokens.forEach { msToken in
+                let amount = NSDecimalNumber.init(string: msToken.amount)
+                let assetValue = userCurrencyValue(msToken.denom, amount, msToken.decimal)
+                totalValue = totalValue.adding(assetValue)
+            }
         }
         return totalValue
     }

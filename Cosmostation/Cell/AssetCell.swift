@@ -48,6 +48,11 @@ class AssetCell: UITableViewCell {
             assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
             assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), allAmount, decimal, assetValue.font)
             
+        } else if (chainConfig?.chainType == .KAVA_MAIN) {
+            let allAmount = WUtils.getKavaTokenAll(coin.denom)
+            assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
+            assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), allAmount, decimal, assetValue.font)
+            
         } else {
             let available = NSDecimalNumber.init(string: coin.amount)
             assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
@@ -166,10 +171,12 @@ class AssetCell: UITableViewCell {
         assetPriceChange.attributedText = WUtils.dpValueChange2(priceDenom, assetPriceChange.font)
         
         let changeValue = WUtils.valueChange(priceDenom)
-        if (changeValue.compare(NSDecimalNumber.zero).rawValue >= 0) {
+        if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) {
             assetPriceChange.textColor = UIColor(named: "_voteYes")
         } else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) {
             assetPriceChange.textColor = UIColor(named: "_voteNo")
+        } else if (changeValue.compare(NSDecimalNumber.zero).rawValue == 0) {
+            assetPriceChange.text = ""
         }
     }
 }
