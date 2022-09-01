@@ -122,6 +122,8 @@ class CommonWCViewController: BaseViewController {
     func initWebView() {
         let configuration = WKWebViewConfiguration()
         configuration.allowsInlineMediaPlayback = true
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor.clear
         webView.navigationDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         webView.allowsBackForwardNavigationGestures = true
