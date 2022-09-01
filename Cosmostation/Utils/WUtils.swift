@@ -855,17 +855,6 @@ public class WUtils {
         return chainConfig.chainDBName
     }
     
-    static func getChainTypeInt(_ chainS:String) -> Int {
-        if (chainS == CHAIN_COSMOS_S ) {
-            return 1
-        } else if (chainS == CHAIN_IRIS_S) {
-            return 2
-        } else if (chainS == CHAIN_BINANCE_S) {
-            return 3
-        }
-        return 0
-    }
-    
     static func clearBackgroundColor(of view: UIView) {
         if let effectsView = view as? UIVisualEffectView {
             effectsView.removeFromSuperview()
@@ -924,6 +913,9 @@ public class WUtils {
     
     static func getSymbol(_ chainConfig: ChainConfig?, _ denom: String?) -> String {
         if (chainConfig == nil || denom == nil || denom?.isEmpty == true) { return "Unknown" }
+        if (chainConfig!.stakeDenom == denom) {
+            return chainConfig!.stakeSymbol
+        }
         if (chainConfig?.isGrpc == true) {
             if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
                 return msAsset.dp_denom
@@ -943,72 +935,6 @@ public class WUtils {
                 }
             }
         }
-//        if (chainConfig!.stakeDenom == denom) {
-//            return chainConfig!.stakeSymbol
-//        }
-//        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
-//            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
-//               ibcToken.auth == true {
-//                return ibcToken.display_denom?.uppercased() ?? "Unknown"
-//            } else {
-//                return "Unknown"
-//            }
-//        }
-//        if (chainConfig!.chainType == .KAVA_MAIN) {
-//            if (denom == KAVA_HARD_DENOM) { return "HARD" }
-//            else if (denom == KAVA_USDX_DENOM) { return "USDX" }
-//            else if (denom == KAVA_SWAP_DENOM) { return "SWP" }
-//            else if (denom == TOKEN_HTLC_KAVA_BNB) { return "BNB" }
-//            else if (denom == TOKEN_HTLC_KAVA_XRPB) { return "XRPB" }
-//            else if (denom == TOKEN_HTLC_KAVA_BUSD) { return "BUSD" }
-//            else if (denom == TOKEN_HTLC_KAVA_BTCB) { return "BTCB" }
-//            else if (denom == "btch") { return "BTCH" }
-//
-//        } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
-//            if (denom == OSMOSIS_ION_DENOM) { return "ION" }
-//            else if (denom!.starts(with: "gamm/pool/")) {
-//                return "GAMM-" + String(denom!.split(separator: "/").last!)
-//            }
-//
-//        } else if (chainConfig!.chainType == .SIF_MAIN) {
-//            if (denom!.starts(with: "c")) { return denom!.substring(from: 1).uppercased() }
-//
-//        } else if (chainConfig!.chainType == .CRESCENT_MAIN) {
-//            if (denom == CRESCENT_BCRE_DENOM) { return "BCRE" }
-//            else if (denom!.starts(with: "pool")) { return denom!.uppercased() }
-//
-//        } else if (chainConfig!.chainType == .EMONEY_MAIN) {
-//            if (denom == EMONEY_EUR_DENOM) { return denom!.uppercased() }
-//            else if (denom == EMONEY_CHF_DENOM) { return denom!.uppercased() }
-//            else if (denom == EMONEY_DKK_DENOM) { return denom!.uppercased() }
-//            else if (denom == EMONEY_NOK_DENOM) { return denom!.uppercased() }
-//            else if (denom == EMONEY_SEK_DENOM) { return denom!.uppercased() }
-//
-//        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
-//            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-//                return bridgeTokenInfo.origin_symbol ?? "Unknown"
-//            }
-//
-//        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
-//            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-//                return bridgeTokenInfo.origin_symbol ?? "Unknown"
-//            } else if (denom!.starts(with: "share")) { return denom!.uppercased() }
-//
-//        } else if (chainConfig!.chainType == .NYX_MAIN) {
-//            if (denom == NYX_NYM_DENOM) { return "NYM" }
-//
-//        }
-//
-//        else if (chainConfig!.chainType == .BINANCE_MAIN) {
-//            if let bnbTokenInfo = getBnbToken(denom!) {
-//                return bnbTokenInfo.original_symbol.uppercased()
-//            }
-//
-//        } else if (chainConfig!.chainType == .OKEX_MAIN) {
-//            if let okTokenInfo = getOkToken(denom!) {
-//                return okTokenInfo.original_symbol!.uppercased()
-//            }
-//        }
         return "Unknown"
     }
     

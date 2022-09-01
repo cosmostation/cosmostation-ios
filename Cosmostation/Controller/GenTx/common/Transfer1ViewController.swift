@@ -25,8 +25,9 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     
     var pageHolderVC: StepGenTxViewController!
     var toSendDenom: String!
-    var toSendableChains = Array<ChainConfig>()
-    var toSendChain: ChainConfig!
+    var recipientableChains = Array<ChainConfig>()
+    var recipientableAccounts = Array<Account>()
+    var recipientChainConfig: ChainConfig!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,19 +37,19 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.toSendDenom = pageHolderVC.mToSendDenom
-        self.toSendableChains.append(chainConfig!)
+        self.recipientableChains.append(chainConfig!)
         
         let allChainConfig = ChainFactory.SUPPRT_CONFIG()
         BaseData.instance.mMintscanAssets.forEach { msAsset in
             if (msAsset.chain != chainConfig?.chainAPIName && msAsset.base_denom == toSendDenom) {
                 if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
-                    self.toSendableChains.append(sendable)
+                    self.recipientableChains.append(sendable)
                 }
             }
         }
-        print("toSendableChains ", toSendableChains.count)
+//        print("recipientableChains ", recipientableChains.count)
         self.onSortToChain()
-        self.toSendChain = toSendableChains[0]
+        self.recipientChainConfig = recipientableChains[0]
         self.onUpdateToChainView()
         self.recipientChainCard.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.onClickToChain (_:))))
         
@@ -73,24 +74,38 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     }
     
     func onUpdateToChainView() {
-        recipientChainImg.image = toSendChain?.chainImg
-        recipientChainLebel.text = toSendChain?.chainTitle2
-        recipientChainLebel.textColor = toSendChain?.chainColor
+        recipientChainImg.image = recipientChainConfig?.chainImg
+        recipientChainLebel.text = recipientChainConfig?.chainTitle2
+        recipientChainLebel.textColor = recipientChainConfig?.chainColor
         recipientAddressinput.text = ""
+        informationLayer.isHidden = (recipientChainConfig.chainType == chainType)
     }
-    
-    
+
     
     @objc func onClickToChain (_ sender: UITapGestureRecognizer) {
         let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
         popupVC.type = SELECT_POPUP_IBC_CHAIN
-        popupVC.ibcToChain = toSendableChains
+        popupVC.ibcToChain = recipientableChains
         let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
         cardPopup.resultDelegate = self
         cardPopup.show(onViewController: self)
     }
     
     @IBAction func onClickWallet(_ sender: UIButton) {
+        recipientableAccounts = BaseData.instance.selectAllAccountsByChain2(recipientChainConfig.chainType, account!.account_address)
+        if (recipientableAccounts.count <= 0) {
+            self.onShowToast(NSLocalizedString("error_no_wallet_this_chain", comment: ""))
+            return
+            
+        } else {
+            let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
+            popupVC.type = SELECT_POPUP_IBC_RECIPIENT
+            popupVC.toChain = recipientChainConfig.chainType
+            popupVC.toAccountList = recipientableAccounts
+            let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+            cardPopup.resultDelegate = self
+            cardPopup.show(onViewController: self)
+        }
     }
 
     @IBAction func onClickScan(_ sender: UIButton) {
@@ -111,9 +126,31 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     }
     
     @IBAction func onClickCancel(_ sender: UIButton) {
+        btnCancel.isUserInteractionEnabled = false
+        btnNext.isUserInteractionEnabled = false
+        pageHolderVC.onBeforePage()
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
+        let userInput = recipientAddressinput.text?.trimmingCharacters(in: .whitespaces)
+        if (WUtils.isStarnameValidStarName(userInput!.lowercased())) {
+            self.onCheckNameservice(userInput!.lowercased())
+            return;
+        }
+        if (account?.account_address == userInput) {
+            self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
+            return;
+        }
+        if (!WUtils.isValidChainAddress(recipientChainConfig, userInput)) {
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
+            return;
+        }
+        
+        btnCancel.isUserInteractionEnabled = false
+        btnNext.isUserInteractionEnabled = false
+        pageHolderVC.mRecipinetChainConfig = recipientChainConfig
+        pageHolderVC.mRecipinetAddress = userInput
+        pageHolderVC.onNextPage()
     }
     
     func scannedAddress(result: String) {
@@ -122,7 +159,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     
     override func keyboardWillHide(notification: NSNotification) {
         super.keyboardWillHide(notification: notification)
-        informationLayer.isHidden = false
+        informationLayer.isHidden = (recipientChainConfig.chainType == chainType)
     }
     
     override func keyboardWillShow(notification: NSNotification) {
@@ -132,13 +169,15 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     
     func SBCardPopupResponse(type: Int, result: Int) {
         if (type == SELECT_POPUP_IBC_CHAIN) {
-            toSendChain = toSendableChains[result]
+            recipientChainConfig = recipientableChains[result]
             onUpdateToChainView()
+        } else if (type == SELECT_POPUP_IBC_RECIPIENT) {
+            recipientAddressinput.text = recipientableAccounts[result].account_address
         }
     }
     
     func onSortToChain() {
-        toSendableChains.sort {
+        recipientableChains.sort {
             if ($0.chainType == self.chainType) { return true }
             if ($1.chainType == self.chainType) { return false }
             if ($0.chainType == ChainType.COSMOS_MAIN) { return true }
@@ -149,118 +188,19 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         }
     }
     
-    /*
-    @IBOutlet weak var mTargetAddressTextField: AddressInputTextField!
-    @IBOutlet weak var startNameLayer: UIView!
-    @IBOutlet weak var CancelBtn: UIButton!
-    @IBOutlet weak var NextBtn: UIButton!
-    @IBOutlet weak var ScanBtn: UIButton!
-    @IBOutlet weak var PasteBtn: UIButton!
-    
-    var pageHolderVC: StepGenTxViewController!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.pageHolderVC = self.parent as? StepGenTxViewController
-        self.account = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
-        self.chainType = ChainFactory.getChainType(account!.account_base_chain)
-        self.chainConfig = ChainFactory.getChainConfig(chainType)
-        
-        mTargetAddressTextField.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("recipient_address", comment: ""), attributes: [NSAttributedString.Key.foregroundColor: UIColor.init(named: "_font04")])
-        
-        CancelBtn.borderColor = UIColor.init(named: "_font05")
-        NextBtn.borderColor = UIColor.init(named: "photon")
-        ScanBtn.borderColor = UIColor.init(named: "_font05")
-        PasteBtn.borderColor = UIColor.init(named: "_font05")
-    }
-    
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        CancelBtn.borderColor = UIColor.init(named: "_font05")
-        NextBtn.borderColor = UIColor.init(named: "photon")
-        ScanBtn.borderColor = UIColor.init(named: "_font05")
-        PasteBtn.borderColor = UIColor.init(named: "_font05")
-    }
-    
-    @IBAction func onClickQrCode(_ sender: Any) {
-        let qrScanVC = QRScanViewController(nibName: "QRScanViewController", bundle: nil)
-        qrScanVC.hidesBottomBarWhenPushed = true
-        qrScanVC.resultDelegate = self
-        self.navigationItem.title = ""
-        self.navigationController!.view.layer.add(WUtils.getPasswordAni(), forKey: kCATransition)
-        self.navigationController?.pushViewController(qrScanVC, animated: false)
-        
-    }
-    
-    @IBAction func onClickPaste(_ sender: Any) {
-        if let myString = UIPasteboard.general.string {
-            self.mTargetAddressTextField.text = myString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        } else {
-            self.onShowToast(NSLocalizedString("error_no_clipboard", comment: ""))
-        }
-    }
-    
-    @IBAction func onClickCancel(_ sender: Any) {
-        self.CancelBtn.isUserInteractionEnabled = false
-        self.NextBtn.isUserInteractionEnabled = false
-        pageHolderVC.onBeforePage()
-    }
-    
-    override func keyboardWillHide(notification: NSNotification) {
-        super.keyboardWillHide(notification: notification)
-        startNameLayer.isHidden = false
-    }
-    
-    override func keyboardWillShow(notification: NSNotification) {
-        super.keyboardWillShow(notification: notification)
-        startNameLayer.isHidden = true
-    }
-    
-    @IBAction func onClickNext(_ sender: Any) {
-        let userInput = mTargetAddressTextField.text?.trimmingCharacters(in: .whitespaces)
-        if (WUtils.isStarnameValidStarName(userInput!.lowercased())) {
-            self.onCheckNameservice(userInput!.lowercased())
-            return;
-        }
-        
-        if (pageHolderVC.mAccount?.account_address == userInput) {
-            self.onShowToast(NSLocalizedString("error_self_send", comment: ""))
-            return;
-        }
-        
-        if (!WUtils.isValidChainAddress(chainConfig, userInput)) {
-            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
-            return;
-        }
-        
-        self.CancelBtn.isUserInteractionEnabled = false
-        self.NextBtn.isUserInteractionEnabled = false
-        pageHolderVC.mToSendRecipientAddress = userInput
-        pageHolderVC.onNextPage()
-        
-    }
-    
-    override func enableUserInteraction() {
-        self.CancelBtn.isUserInteractionEnabled = true
-        self.NextBtn.isUserInteractionEnabled = true
-    }
-    
-    func scannedAddress(result: String) {
-        mTargetAddressTextField.text = result.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    }
-    
     func onCheckNameservice(_ userInput: String) {
         DispatchQueue.global().async {
             do {
-                let channel = BaseNetWork.getConnection(ChainType.IOV_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let channel = BaseNetWork.getConnection(.IOV_MAIN, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Starnamed_X_Starname_V1beta1_QueryStarnameRequest.with { $0.starname = userInput }
                 let response = try Starnamed_X_Starname_V1beta1_QueryClient(channel: channel).starname(req, callOptions:BaseNetWork.getCallOptions()).response.wait()
                 try channel.close().wait()
                 DispatchQueue.main.async(execute: {
-                    guard let matchedAddress = WUtils.checkStarnameWithResource(self.pageHolderVC.chainType!, response) else {
+                    guard let matchedAddress = WUtils.checkStarnameWithResource(self.recipientChainConfig.chainType, response) else {
                         self.onShowToast(NSLocalizedString("error_no_mattched_starname", comment: ""))
                         return
                     }
-                    if (self.pageHolderVC.mAccount?.account_address == matchedAddress) {
+                    if (self.account?.account_address == userInput) {
                         self.onShowToast(NSLocalizedString("error_starname_self_send", comment: ""))
                         return;
                     }
@@ -282,9 +222,10 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         let alertController = UIAlertController(title: NSLocalizedString("str_starname_confirm_title", comment: ""), message: msg, preferredStyle: .alert)
         if #available(iOS 13.0, *) { alertController.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
         let settingsAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { (_) -> Void in
-            self.CancelBtn.isUserInteractionEnabled = false
-            self.NextBtn.isUserInteractionEnabled = false
-            self.pageHolderVC.mToSendRecipientAddress = matchedAddress
+            self.btnCancel.isUserInteractionEnabled = false
+            self.btnNext.isUserInteractionEnabled = false
+            self.pageHolderVC.mRecipinetChainConfig = self.recipientChainConfig
+            self.pageHolderVC.mRecipinetAddress = matchedAddress
             self.pageHolderVC.onNextPage()
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)
@@ -294,6 +235,4 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
             self.present(alertController, animated: true, completion: nil)
         }
     }
-     */
-
 }

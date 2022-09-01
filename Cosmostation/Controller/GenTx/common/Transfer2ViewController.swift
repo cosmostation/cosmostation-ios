@@ -23,10 +23,11 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
     @IBOutlet weak var btnMax: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
+    var toSendDenom: String!
     var maxAvailable = NSDecimalNumber.zero
     
-    var mDivideDecimal:Int16 = 6
-    var mDisplayDecimal:Int16 = 6
+    var divideDecimal:Int16 = 6
+    var displayDecimal:Int16 = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,22 +35,34 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
+        self.toSendDenom = pageHolderVC.mToSendDenom
         
         let mainDenom = chainConfig!.stakeDenom
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         if (chainConfig?.isGrpc == true) {
-            mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-            mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-            if (pageHolderVC.mToSendDenom == mainDenom) {
-                maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
-            } else {
-                maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!)
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == toSendDenom }).first {
+                // Coin Send
+                print("Coin Send")
+                divideDecimal = msAsset.decimal
+                displayDecimal = msAsset.decimal
+                if (pageHolderVC.mToSendDenom == mainDenom) {
+                    maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
+                } else {
+                    maxAvailable = BaseData.instance.getAvailableAmount_gRPC(pageHolderVC.mToSendDenom!)
+                }
+                
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == toSendDenom }).first {
+                print("Token Send")
+                // Token Send
+                divideDecimal = msToken.decimal
+                displayDecimal = msToken.decimal
+                maxAvailable = NSDecimalNumber.init(string: msToken.amount)
             }
             
         } else {
-            mDivideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-            mDisplayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
-            
+            // Binance & OKC
+            divideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+            displayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
             if (pageHolderVC.mToSendDenom == mainDenom) {
                 maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
             } else {
@@ -92,12 +105,12 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
             if (text.contains(",") && string.contains(",") && range.length == 0) { return false }
             if (text.count == 0 && string.starts(with: ",")) { return false }
             if let index = text.range(of: ".")?.upperBound {
-                if(text.substring(from: index).count > (mDisplayDecimal - 1) && range.length == 0) {
+                if(text.substring(from: index).count > (displayDecimal - 1) && range.length == 0) {
                     return false
                 }
             }
             if let index = text.range(of: ",")?.upperBound {
-                if(text.substring(from: index).count > (mDisplayDecimal - 1) && range.length == 0) {
+                if(text.substring(from: index).count > (displayDecimal - 1) && range.length == 0) {
                     return false
                 }
             }
@@ -126,7 +139,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
             self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
-        if (userInput.multiplying(byPowerOf10: mDivideDecimal).compare(maxAvailable).rawValue > 0) {
+        if (userInput.multiplying(byPowerOf10: divideDecimal).compare(maxAvailable).rawValue > 0) {
             self.mTargetAmountTextField.layer.borderColor = UIColor(named: "_warnRed")!.cgColor
             return
         }
@@ -146,10 +159,9 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
                     return false
                 }
             }
-            
         }
         
-        if (userInput.multiplying(byPowerOf10: mDivideDecimal).compare(maxAvailable).rawValue > 0) {
+        if (userInput.multiplying(byPowerOf10: divideDecimal).compare(maxAvailable).rawValue > 0) {
             self.onShowToast(NSLocalizedString("error_amount", comment: ""))
             return false
         }
@@ -166,10 +178,8 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         if (isValiadAmount()) {
             if (pageHolderVC.chainType! == ChainType.OKEX_MAIN) {
                 let userInput = WUtils.localeStringToDecimal((mTargetAmountTextField.text?.trimmingCharacters(in: .whitespaces))!)
-                let toSendCoin = Coin.init(pageHolderVC.mToSendDenom!, WUtils.getFormattedNumber(userInput, mDisplayDecimal))
-                var tempList = Array<Coin>()
-                tempList.append(toSendCoin)
-                self.pageHolderVC.mToSendAmount = tempList
+                let toSendCoin = Coin.init(pageHolderVC.mToSendDenom!, WUtils.getFormattedNumber(userInput, displayDecimal))
+                self.pageHolderVC.mToSendAmount = [toSendCoin]
                 
                 self.backBtn.isUserInteractionEnabled = false
                 self.nextBtn.isUserInteractionEnabled = false
@@ -177,10 +187,8 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
                 
             } else {
                 let userInput = WUtils.localeStringToDecimal((mTargetAmountTextField.text?.trimmingCharacters(in: .whitespaces))!)
-                let toSendCoin = Coin.init(pageHolderVC.mToSendDenom!, userInput.multiplying(byPowerOf10: mDivideDecimal).stringValue)
-                var tempList = Array<Coin>()
-                tempList.append(toSendCoin)
-                self.pageHolderVC.mToSendAmount = tempList
+                let toSendCoin = Coin.init(pageHolderVC.mToSendDenom!, userInput.multiplying(byPowerOf10: divideDecimal).stringValue)
+                self.pageHolderVC.mToSendAmount = [toSendCoin]
                 
                 self.backBtn.isUserInteractionEnabled = false
                 self.nextBtn.isUserInteractionEnabled = false
@@ -200,7 +208,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
             exist = NSDecimalNumber(string: mTargetAmountTextField.text!, locale: Locale.current)
         }
         let added = exist.adding(NSDecimalNumber(string: "0.1"))
-        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(added, mDisplayDecimal)
+        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(added, displayDecimal)
         self.onUIupdate()
         
     }
@@ -211,7 +219,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
             exist = NSDecimalNumber(string: mTargetAmountTextField.text!, locale: Locale.current)
         }
         let added = exist.adding(NSDecimalNumber(string: "1"))
-        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(added, mDisplayDecimal)
+        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(added, displayDecimal)
         self.onUIupdate()
     }
     
@@ -221,7 +229,7 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
             exist = NSDecimalNumber(string: mTargetAmountTextField.text!, locale: Locale.current)
         }
         let added = exist.adding(NSDecimalNumber(string: "10"))
-        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(added, mDisplayDecimal)
+        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(added, displayDecimal)
         self.onUIupdate()
     }
     
@@ -231,19 +239,19 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
             exist = NSDecimalNumber(string: mTargetAmountTextField.text!, locale: Locale.current)
         }
         let added = exist.adding(NSDecimalNumber(string: "100"))
-        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(added, mDisplayDecimal)
+        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(added, displayDecimal)
         self.onUIupdate()
     }
     
     @IBAction func onClickHalf(_ sender: UIButton) {
-        let halfValue = maxAvailable.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -mDivideDecimal, withBehavior: WUtils.getDivideHandler(mDisplayDecimal))
-        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(halfValue, mDisplayDecimal)
+        let halfValue = maxAvailable.dividing(by: NSDecimalNumber(2)).multiplying(byPowerOf10: -divideDecimal, withBehavior: WUtils.getDivideHandler(displayDecimal))
+        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(halfValue, displayDecimal)
         self.onUIupdate()
     }
     
     @IBAction func onClickMax(_ sender: UIButton) {
-        let maxValue = maxAvailable.multiplying(byPowerOf10: -mDivideDecimal, withBehavior: WUtils.getDivideHandler(mDisplayDecimal))
-        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(maxValue, mDisplayDecimal)
+        let maxValue = maxAvailable.multiplying(byPowerOf10: -divideDecimal, withBehavior: WUtils.getDivideHandler(displayDecimal))
+        mTargetAmountTextField.text = WUtils.decimalNumberToLocaleString(maxValue, displayDecimal)
         if (pageHolderVC.mToSendDenom == WUtils.getMainDenom(chainConfig)) {
             self.showMaxWarnning()
         }

@@ -179,6 +179,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 onBindIbcCoin_gRPC(cell, mIbc_gRPC[indexPath.row])
                 
             } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
+                //TODO bep3 send need
                 onBindBridgedAsset_gRPC(cell, mBridged_gRPC[indexPath.row])
                 
             } else if (indexPath.section == SECTION_TOKEN_GRPC) {
@@ -221,68 +222,31 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             cardPopup.resultDelegate = self
             cardPopup.show(onViewController: self)
             
-        } else {
-            //TODO display transfer UI!!!
+        } else if (indexPath.section == SECTION_TOKEN_GRPC && indexPath.row != mToken_gRPC.count) {
+            onStartTransferVC(mToken_gRPC[indexPath.row].denom)
             
+        } else if (indexPath.section == SECTION_IBC_GRPC) {
+            onStartTransferVC(mIbc_gRPC[indexPath.row].denom)
+            
+        } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
+            onStartTransferVC(mBridged_gRPC[indexPath.row].denom)
         }
         
-        
-//        else if (indexPath.section == SECTION_IBC_GRPC) {
-//            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
-//            iTokenDetailVC.ibcDenom = mIbc_gRPC[indexPath.row].denom
-//            iTokenDetailVC.hidesBottomBarWhenPushed = true
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
-//
-//        } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-////            let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
-////            bTokenDetailVC.hidesBottomBarWhenPushed = true
-////            bTokenDetailVC.bridgeDenom = mBridged_gRPC[indexPath.row].denom
-////            self.navigationItem.title = ""
-////            self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
-//
-//        }
-////        else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
-////            let nTokenDetailVC = NativeTokenGrpcViewController(nibName: "NativeTokenGrpcViewController", bundle: nil)
-////            nTokenDetailVC.nativeDenom = mKavaBep2_gRPC[indexPath.row].denom
-////            nTokenDetailVC.hidesBottomBarWhenPushed = true
-////            self.navigationItem.title = ""
-////            self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-////
-////        }
-//        else if (indexPath.section == SECTION_TOKEN_GRPC) {
-////            let cTokenDetailVC = ContractTokenGrpcViewController(nibName: "ContractTokenGrpcViewController", bundle: nil)
-////            cTokenDetailVC.mCw20Token = mToken_gRPC[indexPath.row]
-////            cTokenDetailVC.hidesBottomBarWhenPushed = true
-////            self.navigationItem.title = ""
-////            self.navigationController?.pushViewController(cTokenDetailVC, animated: true)
-//            if (indexPath.row == mToken_gRPC.count) {
-//                let popupVC = MultiSelectPopupViewController(nibName: "MultiSelectPopupViewController", bundle: nil)
-//                popupVC.type = SELECT_POPUP_CONTRACT_TOKEN_EDIT
-//                let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
-//                cardPopup.resultDelegate = self
-//                cardPopup.show(onViewController: self)
-//                return
-//            }
-//
-//        }
-//
-//        else if (indexPath.section == SECTION_NATIVE) {
-//            let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
-//            sTokenDetailVC.hidesBottomBarWhenPushed = true
-//            self.navigationItem.title = ""
-//            self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
-//
-//        } else if (indexPath.section == SECTION_ETC) {
-//            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
-//                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-//                nTokenDetailVC.hidesBottomBarWhenPushed = true
-//                nTokenDetailVC.denom = mEtc[indexPath.row].balance_denom
-//                self.navigationItem.title = ""
-//                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-//            }
-//
-//        }
+        else if (indexPath.section == SECTION_NATIVE) {
+            onStartTransferVC(mNative[indexPath.row].balance_denom)
+            
+        } else if (indexPath.section == SECTION_ETC) {
+            onStartTransferVC(mEtc[indexPath.row].balance_denom)
+        }
+    }
+    
+    func onStartTransferVC(_ denom: String) {
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mToSendDenom = denom
+        txVC.mType = TASK_TYPE_TRANSFER
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
     }
     
     func SBCardPopupResponse(type: Int, result: Int) {

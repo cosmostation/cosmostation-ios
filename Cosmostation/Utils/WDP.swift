@@ -153,32 +153,6 @@ public class WDP {
     }
     
     static func dpCoin(_ chainConfig: ChainConfig?, _ denom: String?, _ amount: String?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
-        if (chainConfig == nil || denom == nil || amount == nil ) { return }
-        dpSymbol(chainConfig, denom, denomLabel)
-        if (amountLabel == nil ) { return }
-        var divideDecimal: Int16 = 6
-        var displayDecimal: Int16 = 6
-        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
-               ibcToken.auth == true {
-                divideDecimal = ibcToken.decimal!
-                displayDecimal = ibcToken.decimal!
-            }
-            amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, divideDecimal, displayDecimal)
-            return
-        }
-        
-        if (chainConfig?.chainType == .BINANCE_MAIN || chainConfig?.chainType == .OKEX_MAIN ) {
-            divideDecimal = 0
-            displayDecimal = WUtils.mainDisplayDecimal(chainConfig?.chainType)
-        } else {
-            divideDecimal = WUtils.getDenomDecimal(chainConfig, denom)
-            displayDecimal = WUtils.getDenomDecimal(chainConfig, denom)
-        }
-        amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, divideDecimal, displayDecimal)
-    }
-    
-    static func dpAsset(_ chainConfig: ChainConfig?, _ denom: String?, _ amount: String?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
         if (chainConfig == nil || denom == nil || amount == nil || amountLabel == nil) { return }
         dpSymbol(chainConfig, denom, denomLabel)
         if (chainConfig?.isGrpc == true) {
@@ -186,6 +160,9 @@ public class WDP {
                 amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msAsset.decimal, msAsset.decimal)
             } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == denom }).first {
                 amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msToken.decimal, msToken.decimal)
+            } else {
+                let decimal = WUtils.getDenomDecimal(chainConfig, denom)
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, decimal, decimal)
             }
             
         } else {

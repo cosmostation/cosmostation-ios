@@ -1149,6 +1149,17 @@ final class BaseData : NSObject{
         return result;
     }
     
+    public func selectAllAccountsByChain2(_ chain:ChainType, _ address: String) -> Array<Account> {
+        var result = Array<Account>()
+        let allAccounts = selectAllAccounts()
+        for account in allAccounts {
+            if (ChainFactory.getChainType(account.account_base_chain) == chain && account.account_address != address) {
+                result.append(account)
+            }
+        }
+        return result;
+    }
+    
     public func selectAllAccountsByChainWithKey(_ chain: ChainType) -> Array<Account> {
         var result = Array<Account>()
         let allAccounts = selectAllAccounts()

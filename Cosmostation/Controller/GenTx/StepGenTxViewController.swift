@@ -29,6 +29,17 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mToSendRecipientAddress:String?
     var mToSendAmount = Array<Coin>()
     
+    var mIBCSendDenom: String?
+    var mIBCSendAmount: String?
+    var mIBCRecipient: String?
+    var mIBCSendRelayer: IbcPath?
+    var mIBCSendPath: Path?
+    var mCw20SendContract: String?
+    
+    //TODO new way
+    var mRecipinetChainConfig: ChainConfig?
+    var mRecipinetAddress: String?
+    
     var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mToDelegateAmount: Coin?
     var mToUndelegateAmount:Coin?
@@ -125,13 +136,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mSifPool: Sifnode_Clp_V1_Pool?
     var mSifMyAllUnitAmount: String?
     var mSifMyWithdrawUnitAmount: String?
-    
-    var mIBCSendDenom: String?
-    var mIBCSendAmount: String?
-    var mIBCRecipient: String?
-    var mIBCSendRelayer: IbcPath?
-    var mIBCSendPath: Path?
-    var mCw20SendContract: String?
     
     var mNFTHash: String?
     var mNFTName: String?

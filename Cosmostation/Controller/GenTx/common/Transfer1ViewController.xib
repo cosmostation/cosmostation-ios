@@ -179,7 +179,7 @@
                         </button>
                     </subviews>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J69-rE-yfD">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J69-rE-yfD">
                     <rect key="frame" x="16" y="635.5" width="382" height="136.5"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgUsingStarname" translatesAutoresizingMaskIntoConstraints="NO" id="HbB-Y6-Sms">

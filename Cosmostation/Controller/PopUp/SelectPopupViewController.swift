@@ -59,7 +59,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             self.toAccountList = BaseData.instance.selectAllAccountsByHtlcClaim(toChain)
             
-        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_IBC_RECIPIENT) {
+        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT) {
             self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             self.toAccountList = BaseData.instance.selectAllAccountsByChain(toChain!)
             
@@ -74,6 +74,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_IBC_RELAYER) {
             self.popupTitle.text = NSLocalizedString("str_select_ibc_relayer", comment: "")
+            
+        } else if(type == SELECT_POPUP_IBC_RECIPIENT) {
+            self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             
         } else if (type == SELECT_POPUP_STARNAME_DOMAIN) {
             self.popupTitle.text = NSLocalizedString("str_select_starname_domain", comment: "")
