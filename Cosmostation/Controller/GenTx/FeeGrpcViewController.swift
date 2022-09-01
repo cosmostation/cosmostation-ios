@@ -165,10 +165,10 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait() {
-                    if (self.pageHolderVC.mType == TASK_TYPE_IBC_TRANSFER) {
-                        self.onFetchIbcClientState(response)
-                    } else {
+                    if (self.chainType == self.pageHolderVC.mRecipinetChainConfig?.chainType) {
                         self.onSimulateGrpcTx(response, nil)
+                    } else {
+                        self.onFetchIbcClientState(response)
                     }
                 }
                 try channel.close().wait()
@@ -183,9 +183,10 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let destinationAsset = BaseData.instance.mMintscanAssets.filter { $0.counter_party?.denom == self.pageHolderVC.mToSendDenom && $0.type == "ibc" }.first!
                 let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-                    $0.channelID = self.pageHolderVC.mIBCSendPath!.channel_id!
-                    $0.portID = self.pageHolderVC.mIBCSendPath!.port_id!
+                    $0.channelID = destinationAsset.counter_party!.channel!
+                    $0.portID = destinationAsset.counter_party!.port!
                 }
                 if let response = try? Ibc_Core_Channel_V1_QueryClient(channel: channel).channelClientState(req).response.wait() {
                     let clientState = try! Ibc_Lightclients_Tendermint_V1_ClientState.init(serializedData: response.identifiedClientState.clientState.value)
@@ -237,10 +238,32 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     
     func genSimulateReq(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ privateKey: Data, _ publicKey: Data, _ height: Ibc_Core_Client_V1_Height?)  -> Cosmos_Tx_V1beta1_SimulateRequest? {
         if (pageHolderVC.mType == TASK_TYPE_TRANSFER) {
-            return Signer.genSimulateSendTxgRPC(auth,
-                                                self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
-                                                self.mFee, self.pageHolderVC.mMemo!,
-                                                privateKey, publicKey, self.chainType!)
+//            return Signer.genSimulateSendTxgRPC(auth,
+//                                                self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
+//                                                self.mFee, self.pageHolderVC.mMemo!,
+//                                                privateKey, publicKey, self.chainType!)
+            if (chainType == pageHolderVC.mRecipinetChainConfig?.chainType) {
+                if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pageHolderVC.mToSendDenom }).first {
+                    //simple coin send
+                    
+                    
+                } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == pageHolderVC.mToSendDenom }).first {
+                    //simple token send
+                    
+                }
+                
+            } else {
+                //ibc send
+                if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pageHolderVC.mToSendDenom }).first {
+                    //ibc coin send
+                    
+                    
+                } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == pageHolderVC.mToSendDenom }).first {
+                    //ibc token send (not-yet!)
+                    
+                }
+                
+            }
             
         } else if (pageHolderVC.mType == TASK_TYPE_DELEGATE) {
             if (self.pageHolderVC.chainType == .TGRADE_MAIN) {
