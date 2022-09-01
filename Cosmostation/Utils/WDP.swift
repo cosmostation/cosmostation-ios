@@ -178,6 +178,25 @@ public class WDP {
         amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, divideDecimal, displayDecimal)
     }
     
+    static func dpAsset(_ chainConfig: ChainConfig?, _ denom: String?, _ amount: String?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
+        if (chainConfig == nil || denom == nil || amount == nil || amountLabel == nil) { return }
+        dpSymbol(chainConfig, denom, denomLabel)
+        if (chainConfig?.isGrpc == true) {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msAsset.decimal, msAsset.decimal)
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == denom }).first {
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msToken.decimal, msToken.decimal)
+            }
+            
+        } else {
+            if (chainConfig?.chainType == .BINANCE_MAIN) {
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, 0, 8)
+            } else if (chainConfig?.chainType == .OKEX_MAIN ) {
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, 0, 18)
+            }
+        }
+    }
+    
     static func dpAmount(_ amount: String?, _ font: UIFont, _ inputPoint: Int16, _ dpPoint: Int16) -> NSMutableAttributedString {
         let nf = NumberFormatter()
         nf.roundingMode = .floor
