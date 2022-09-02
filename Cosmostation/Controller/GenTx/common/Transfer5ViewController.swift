@@ -14,26 +14,28 @@ import NIO
 
 class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     
-    @IBOutlet weak var sendAmountLabel: UILabel!
-    @IBOutlet weak var sendDenomLabel: UILabel!
-    @IBOutlet weak var sendValueLabel: UILabel!
     @IBOutlet weak var feeAmountLabel: UILabel!
     @IBOutlet weak var feeDenomLabel: UILabel!
     @IBOutlet weak var feeValueLabel: UILabel!
+    @IBOutlet weak var sendAmountLabel: UILabel!
+    @IBOutlet weak var sendDenomLabel: UILabel!
+    @IBOutlet weak var sendValueLabel: UILabel!
     @IBOutlet weak var availableAmountLabel: UILabel!
     @IBOutlet weak var availableDenomLabel: UILabel!
     @IBOutlet weak var availableValueLabel: UILabel!
     @IBOutlet weak var remainAmountLabel: UILabel!
     @IBOutlet weak var remainDenomLabel: UILabel!
     @IBOutlet weak var remainValueLabel: UILabel!
-    @IBOutlet weak var mToAddressLabel: UILabel!
+    @IBOutlet weak var recipientChainLayer: UIView!
+    @IBOutlet weak var recipientChainLabel: UILabel!
+    @IBOutlet weak var recipientAddressLabel: UILabel!
     @IBOutlet weak var mMemoLabel: UILabel!
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDivideDecimal:Int16 = 6
-    var mDisplayDecimal:Int16 = 6
+    var divideDecimal:Int16 = 6
+    var displayDecimal:Int16 = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,10 +43,6 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.pageHolderVC = self.parent as? StepGenTxViewController
-        
-        WUtils.setDenomTitle(chainType, sendDenomLabel)
-        WUtils.setDenomTitle(chainType, availableDenomLabel)
-        WUtils.setDenomTitle(chainType, remainDenomLabel)
         
         backBtn.borderColor = UIColor.init(named: "_font05")
         confirmBtn.borderColor = UIColor.init(named: "photon")
@@ -57,10 +55,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     
     @IBAction func onClickConfirm(_ sender: Any) {
         if (BaseData.instance.isAutoPass()) {
-            if (WUtils.isGRPC(chainType)) {
-                self.onFetchgRPCAuth(pageHolderVC.mAccount!)
+            if (chainConfig?.isGrpc == true) {
+                self.onFetchAuth(account!.account_address)
             } else {
-                self.onFetchAccountInfo(pageHolderVC.mAccount!)
+                self.onFetchAccountInfo(account!)
             }
         } else {
             let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
@@ -85,73 +83,90 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     }
     
     func onUpdateView() {
-        let mainDenom = WUtils.getMainDenom(chainConfig)
         let toSendDenom = pageHolderVC.mToSendAmount[0].denom
-        let toSendAmount = WUtils.plainStringToDecimal(pageHolderVC.mToSendAmount[0].amount)
-        let feeAmount = WUtils.plainStringToDecimal((pageHolderVC.mFee?.amount[0].amount)!)
+        let toSendAmount = NSDecimalNumber.init(string: pageHolderVC.mToSendAmount[0].amount)
+        let feeDenom = pageHolderVC.mFee!.amount[0].denom
+        let feeAmount = NSDecimalNumber.init(string: pageHolderVC.mFee!.amount[0].amount)
         var currentAvailable = NSDecimalNumber.zero
         var remainAvailable = NSDecimalNumber.zero
-        
-        if (WUtils.isGRPC(chainType)) {
-            mDivideDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-            mDisplayDecimal = WUtils.getDenomDecimal(chainConfig, pageHolderVC.mToSendDenom)
-            currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
-            
-        } else {
-            if (chainType == ChainType.BINANCE_MAIN) {
-                mDivideDecimal = WUtils.mainDivideDecimal(chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
+
+        if (chainConfig?.isGrpc == true) {
+            var priceSymbol = ""
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == toSendDenom }).first {
+                divideDecimal = msAsset.decimal
+                displayDecimal = msAsset.decimal
+                currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
+                if (toSendDenom == feeDenom) {
+                    remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
+                } else {
+                    remainAvailable = currentAvailable.subtracting(toSendAmount)
+                }
+                priceSymbol = msAsset.base_denom.lowercased()
                 
-            } else if (chainType == ChainType.OKEX_MAIN) {
-                mDivideDecimal = WUtils.mainDivideDecimal(chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
-                
-            } else {
-                mDivideDecimal = WUtils.mainDivideDecimal(chainType)
-                mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == toSendDenom }).first {
+                divideDecimal = msToken.decimal
+                displayDecimal = msToken.decimal
+                currentAvailable = NSDecimalNumber.init(string: msToken.amount)
+                remainAvailable = currentAvailable.subtracting(toSendAmount)
+                priceSymbol = msToken.denom
             }
-            currentAvailable = BaseData.instance.availableAmount(toSendDenom)
             
-        }
-        
-        if (toSendDenom == mainDenom) {
-            remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
-            sendValueLabel.attributedText = WUtils.dpValueUserCurrency(mainDenom, toSendAmount, mDivideDecimal, sendValueLabel.font)
-            feeValueLabel.attributedText = WUtils.dpValueUserCurrency(mainDenom, feeAmount, mDivideDecimal, feeValueLabel.font)
-            availableValueLabel.attributedText = WUtils.dpValueUserCurrency(mainDenom, currentAvailable, mDivideDecimal, availableValueLabel.font)
-            remainValueLabel.attributedText = WUtils.dpValueUserCurrency(mainDenom, remainAvailable, mDivideDecimal, remainValueLabel.font)
+            WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
+            WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
+            WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
+            WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
+            
+            feeValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, feeAmount, divideDecimal, feeValueLabel.font)
+            sendValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, toSendAmount, divideDecimal, sendValueLabel.font)
+            availableValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, currentAvailable, divideDecimal, availableValueLabel.font)
+            remainValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, remainAvailable, divideDecimal, remainValueLabel.font)
             
         } else {
-            remainAvailable = currentAvailable.subtracting(toSendAmount)
-            sendValueLabel.isHidden = true
+            divideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+            displayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
+            currentAvailable = BaseData.instance.availableAmount(toSendDenom)
+            if (pageHolderVC.mToSendDenom == chainConfig!.stakeDenom) {
+                remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
+            } else {
+                remainAvailable = currentAvailable.subtracting(toSendAmount)
+            }
+            
+            WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
+            WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
+            WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
+            WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
+            
             feeValueLabel.isHidden = true
+            sendValueLabel.isHidden = true
             availableValueLabel.isHidden = true
             remainValueLabel.isHidden = true
-            
         }
-//        print("currentAvailable ", currentAvailable)
-//        print("feeAmount ", feeAmount)
-//        print("toSendAmount ", toSendAmount)
-//        print("remainAvailable ", remainAvailable)
         
+        print("fee              ", feeDenom, "  ", feeAmount)
+        print("toSend           ", toSendDenom, "  ", toSendAmount)
+        print("currentAvailable ", toSendDenom, "  ", currentAvailable)
+        print("remainAvailable  ", toSendDenom, "  ", remainAvailable)
         
-        WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
-        WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
-        WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
-        WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
+        if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE || self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
+            recipientChainLayer.isHidden = false
+            recipientChainLabel.text = pageHolderVC.mRecipinetChainConfig?.chainTitle2
+            recipientChainLabel.textColor = pageHolderVC.mRecipinetChainConfig?.chainColor
+        } else {
+            recipientChainLayer.isHidden = true
+        }
         
-        mToAddressLabel.text = pageHolderVC.mRecipinetAddress
-        mToAddressLabel.adjustsFontSizeToFitWidth = true
+        recipientAddressLabel.text = pageHolderVC.mRecipinetAddress
+        recipientAddressLabel.adjustsFontSizeToFitWidth = true
         mMemoLabel.text = pageHolderVC.mMemo
         
     }
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK) {
-            if (WUtils.isGRPC(chainType)) {
-                self.onFetchgRPCAuth(pageHolderVC.mAccount!)
+            if (chainConfig?.isGrpc == true) {
+                self.onFetchAuth(account!.account_address)
             } else {
-                self.onFetchAccountInfo(pageHolderVC.mAccount!)
+                self.onFetchAccountInfo(account!)
             }
         }
     }
@@ -185,7 +200,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                     let okAccountInfo = OkAccountInfo.init(info)
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithOkAccountInfo(account, okAccountInfo))
                     BaseData.instance.mOkAccountInfo = okAccountInfo
-                    self.onGenOexSendTx()
+                    self.onGenOkcSendTx()
                     
                 }
                 
@@ -197,7 +212,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         }
     }
     
-    func onGenOexSendTx() {
+    func onGenOkcSendTx() {
         DispatchQueue.global().async {
             var stdTx:StdTx!
             do {
@@ -346,32 +361,75 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     
     
     //gRPC
-    func onFetchgRPCAuth(_ account: Account) {
+    func onFetchAuth(_ address: String) {
         self.showWaittingAlert()
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
+                let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    self.onBroadcastGrpcTx(response)
+                    if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE || self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
+                        self.onFetchIbcClientState(response)
+                    } else {
+                        self.onBroadcastTx(response, nil)
+                    }
                 }
                 try channel.close().wait()
             } catch {
-                print("onFetchgRPCAuth failed: \(error)")
+                print("onFetchAuth failed: \(error)")
             }
         }
     }
     
-    func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
+    func onFetchIbcClientState(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSimpleSend(auth!,
-                                                   self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mToSendAmount,
-                                                   self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                   self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
+            do {
+                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+                let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
+                    $0.channelID = self.pageHolderVC.mIBCSendPath!.channel_id!
+                    $0.portID = self.pageHolderVC.mIBCSendPath!.port_id!
+                }
+                if let response = try? Ibc_Core_Channel_V1_QueryClient(channel: channel).channelClientState(req).response.wait() {
+                    let clientState = try! Ibc_Lightclients_Tendermint_V1_ClientState.init(serializedData: response.identifiedClientState.clientState.value)
+                    self.onBroadcastTx(auth, clientState.latestHeight)
+                }
+                try channel.close().wait()
+            } catch {
+                print("onFetchIbcClientState failed: \(error)")
+            }
+        }
+    }
+    
+    func onBroadcastTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?, _ height: Ibc_Core_Client_V1_Height?) {
+        DispatchQueue.global().async {
+            var reqTx: Cosmos_Tx_V1beta1_BroadcastTxRequest?
+            if (self.pageHolderVC.mTransferType == TRANSFER_SIMPLE) {
+                reqTx = Signer.genSimpleSend(auth!,
+                                             self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mToSendAmount,
+                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
+                
+            } else if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE) {
+                reqTx = Signer.genIbcSend(auth!,
+                                          self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mToSendAmount,
+                                          self.pageHolderVC.mMintscanPath!, height!,
+                                          self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                          self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
+                
+            } else if (self.pageHolderVC.mTransferType == TRANSFER_WASM) {
+                reqTx = Signer.genWasmSend(auth!,
+                                           self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mMintscanTokens!.contract_address,
+                                           self.pageHolderVC.mToSendAmount,
+                                           self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                           self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
+                
+            } else if (self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
+                //not yet!!
+            }
             
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx, callOptions: BaseNetWork.getCallOptions()).response.wait() {
+                if let response = try? Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx!, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     DispatchQueue.main.async(execute: {
                         if (self.waitAlert != nil) {
                             self.waitAlert?.dismiss(animated: true, completion: {
@@ -382,7 +440,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 }
                 try channel.close().wait()
             } catch {
-                print("onBroadcastGrpcTx failed: \(error)")
+                print("onBroadcastTx failed: \(error)")
             }
         }
     }

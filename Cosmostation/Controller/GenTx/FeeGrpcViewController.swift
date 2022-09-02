@@ -165,10 +165,10 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = account.account_address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req).response.wait() {
-                    if (self.chainType == self.pageHolderVC.mRecipinetChainConfig?.chainType) {
-                        self.onSimulateGrpcTx(response, nil)
-                    } else {
+                    if (self.pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE || self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
                         self.onFetchIbcClientState(response)
+                    } else {
+                        self.onSimulateGrpcTx(response, nil)
                     }
                 }
                 try channel.close().wait()

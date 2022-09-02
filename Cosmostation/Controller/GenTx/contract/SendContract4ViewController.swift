@@ -113,7 +113,7 @@ class SendContract4ViewController: BaseViewController, PasswordViewDelegate {
 //                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
 //                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
 //                                                 self.chainType!)
-//            
+//
 //            do {
 //                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
 //                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
