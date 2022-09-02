@@ -50,7 +50,7 @@ class AuthzSend5ViewController: BaseViewController, PasswordViewDelegate{
     func onUpdateView() {
         WDP.dpCoin(chainConfig, pageHolderVC.mToSendAmount[0], sendDenomLabel, sendAmountLabel)
         WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0], feeDenomLabel, feeAmountLabel)
-        mToAddressLabel.text = pageHolderVC.mToSendRecipientAddress
+        mToAddressLabel.text = pageHolderVC.mRecipinetAddress
         mToAddressLabel.adjustsFontSizeToFitWidth = true
         mMemoLabel.text = pageHolderVC.mMemo
     }
@@ -101,7 +101,7 @@ class AuthzSend5ViewController: BaseViewController, PasswordViewDelegate{
             let reqTx = Signer.genAuthzSend(auth!,
                                             self.account!.account_address,
                                             self.pageHolderVC.mGranterAddress!,
-                                            self.pageHolderVC.mToSendRecipientAddress!,
+                                            self.pageHolderVC.mRecipinetAddress!,
                                             self.pageHolderVC.mToSendAmount,
                                             self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,

@@ -85,7 +85,7 @@ class AuthzSend1ViewController: BaseViewController, QrScannerDelegate {
         
         cancelBtn.isUserInteractionEnabled = false
         nextBtn.isUserInteractionEnabled = false
-        pageHolderVC.mToSendRecipientAddress = userInput
+        pageHolderVC.mRecipinetAddress = userInput
         pageHolderVC.onNextPage()
     }
     

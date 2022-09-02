@@ -56,7 +56,7 @@ class SendContract4ViewController: BaseViewController, PasswordViewDelegate {
         let toSendAmount = WUtils.plainStringToDecimal(pageHolderVC.mToSendAmount[0].amount)
         self.toSendDenomLabel.text = cw20Token.denom.uppercased()
         self.toSendAmountLabel.attributedText = WDP.dpAmount(toSendAmount.stringValue, toSendAmountLabel.font!, decimal, decimal)
-        self.destinationAddressLabel.text = pageHolderVC.mToSendRecipientAddress
+        self.destinationAddressLabel.text = pageHolderVC.mRecipinetAddress
         self.destinationAddressLabel.adjustsFontSizeToFitWidth = true
         self.memoLabel.text = pageHolderVC.mMemo
     }
@@ -104,30 +104,30 @@ class SendContract4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
-        DispatchQueue.global().async {
-            let reqTx = Signer.genSignedCw20Send(auth!,
-                                                 self.account!.account_address,
-                                                 self.pageHolderVC.mToSendRecipientAddress!,
-                                                 self.pageHolderVC.mCw20SendContract!,
-                                                 self.pageHolderVC.mToSendAmount,
-                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
-                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                 self.chainType!)
-            
-            do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-                DispatchQueue.main.async(execute: {
-                    if (self.waitAlert != nil) {
-                        self.waitAlert?.dismiss(animated: true, completion: {
-                            self.onStartTxDetailgRPC(response)
-                        })
-                    }
-                });
-                try channel.close().wait()
-            } catch {
-                print("onBroadcastGrpcTx failed: \(error)")
-            }
-        }
+//        DispatchQueue.global().async {
+//            let reqTx = Signer.genWasmSend(auth!,
+//                                                 self.account!.account_address,
+//                                                 self.pageHolderVC.mRecipinetAddress!,
+//                                                 self.pageHolderVC.mCw20SendContract!,
+//                                                 self.pageHolderVC.mToSendAmount,
+//                                                 self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+//                                                 self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+//                                                 self.chainType!)
+//            
+//            do {
+//                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+//                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
+//                DispatchQueue.main.async(execute: {
+//                    if (self.waitAlert != nil) {
+//                        self.waitAlert?.dismiss(animated: true, completion: {
+//                            self.onStartTxDetailgRPC(response)
+//                        })
+//                    }
+//                });
+//                try channel.close().wait()
+//            } catch {
+//                print("onBroadcastGrpcTx failed: \(error)")
+//            }
+//        }
     }
 }

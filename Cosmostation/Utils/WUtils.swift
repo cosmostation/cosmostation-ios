@@ -855,6 +855,37 @@ public class WUtils {
         return chainConfig.chainDBName
     }
     
+    static func getMintscanPath(_ fromChain: ChainConfig, _ toChain: ChainConfig, _ denom: String) -> MintscanPath? {
+        let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first
+        let msTokens = BaseData.instance.mMintscanTokens.filter({ $0.denom == denom }).first
+        var result: MintscanPath?
+        BaseData.instance.mMintscanAssets.forEach { asset in
+            if (msAsset != nil) {
+                if (asset.chain == fromChain.chainAPIName &&
+                    asset.beforeChain(fromChain) == toChain.chainAPIName &&
+                    asset.denom == denom) {
+                    result = MintscanPath.init(asset.channel, asset.port)
+                    return
+                }
+                if (asset.chain == toChain.chainAPIName &&
+                    asset.beforeChain(toChain) == fromChain.chainAPIName &&
+                    asset.counter_party?.denom == denom) {
+                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
+                    return
+                }
+                
+            } else if (msTokens != nil) {
+                if (asset.chain == toChain.chainAPIName &&
+                    asset.beforeChain(toChain) == fromChain.chainAPIName &&
+                    asset.counter_party?.denom == msTokens?.contract_address) {
+                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
+                    return
+                }
+            }
+        }
+        return result
+    }
+    
     static func clearBackgroundColor(of view: UIView) {
         if let effectsView = view as? UIVisualEffectView {
             effectsView.removeFromSuperview()

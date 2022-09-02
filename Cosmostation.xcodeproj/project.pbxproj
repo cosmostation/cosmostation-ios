@@ -344,6 +344,8 @@
 		043031E928BE1D72005FF935 /* MultiSelectPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031E628BE1D72005FF935 /* MultiSelectPopupViewController.swift */; };
 		043031EA28BE1D72005FF935 /* MultiSelectPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043031E728BE1D72005FF935 /* MultiSelectPopupViewController.xib */; };
 		043031EB28BE1D72005FF935 /* MultiSelectPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043031E728BE1D72005FF935 /* MultiSelectPopupViewController.xib */; };
+		043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
+		043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043031EC28C2136F005FF935 /* MintscanPath.swift */; };
 		0437E087268C0A6700088391 /* RIPEMD160.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0437E086268C0A6700088391 /* RIPEMD160.swift */; };
 		04403736284A2B2F004CD7E3 /* ChainNyx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04403735284A2B2F004CD7E3 /* ChainNyx.swift */; };
 		04403737284A2B2F004CD7E3 /* ChainNyx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04403735284A2B2F004CD7E3 /* ChainNyx.swift */; };
@@ -3152,6 +3154,7 @@
 		043031E128BE0D21005FF935 /* SelectContractTokenCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectContractTokenCell.xib; sourceTree = "<group>"; };
 		043031E628BE1D72005FF935 /* MultiSelectPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiSelectPopupViewController.swift; sourceTree = "<group>"; };
 		043031E728BE1D72005FF935 /* MultiSelectPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MultiSelectPopupViewController.xib; sourceTree = "<group>"; };
+		043031EC28C2136F005FF935 /* MintscanPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanPath.swift; sourceTree = "<group>"; };
 		0437E086268C0A6700088391 /* RIPEMD160.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RIPEMD160.swift; sourceTree = "<group>"; };
 		04403735284A2B2F004CD7E3 /* ChainNyx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainNyx.swift; sourceTree = "<group>"; };
 		0443745F2862E9A900C6A4ED /* Transfer1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer1ViewController.swift; sourceTree = "<group>"; };
@@ -6057,6 +6060,7 @@
 				047DCEE128855F4800253CAA /* MintscanMyVote.swift */,
 				04E165B928B61BE1000F12C0 /* MintscanAsset.swift */,
 				04E165BC28B62133000F12C0 /* MintscanToken.swift */,
+				043031EC28C2136F005FF935 /* MintscanPath.swift */,
 				046BD21F27788723002333B5 /* StationNFTData.swift */,
 				0444443727AC27A900EB093E /* BridgeToken.swift */,
 				04E2A32227A5787A0045ED21 /* Cw20Token.swift */,
@@ -7899,6 +7903,7 @@
 				1817CB23283E2CE500523713 /* starname_iov_escrow_v1beta1_test.pb.swift in Sources */,
 				1817CC1D283E2CE600523713 /* cosmos_staking_v1beta1_tx.grpc.swift in Sources */,
 				18FFB51D281AF533004E65BB /* DAppsListViewController.swift in Sources */,
+				043031EE28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				04C5AE9028632783007627EA /* ClaimReward4ViewController.swift in Sources */,
 				18FFB51E281AF533004E65BB /* BTCProtocolSerialization.m in Sources */,
 				18FFB520281AF533004E65BB /* MintscanProposalDetail.swift in Sources */,
@@ -8731,6 +8736,7 @@
 				04C43B63278D5F530022D5DF /* kava_issuance_v1beta1_tx.pb.swift in Sources */,
 				040FA88F275F55C200229F6F /* desmos_profiles_v1beta1_models_params.pb.swift in Sources */,
 				04E1659728A0F49B000F12C0 /* confio_globalfee_v1beta1_query.pb.swift in Sources */,
+				043031ED28C2136F005FF935 /* MintscanPath.swift in Sources */,
 				04C5AE9528632ECD007627EA /* ReInvest1ViewController.swift in Sources */,
 				040FA8DB275F55C200229F6F /* desmos_profiles_v1beta1_query.grpc.swift in Sources */,
 				E19A321922544EB500A05E41 /* DashedView.swift in Sources */,

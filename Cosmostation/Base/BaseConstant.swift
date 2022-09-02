@@ -139,6 +139,10 @@ let TASK_TYPE_CLAIM_COMMISSION              = "TASK_TYPE_CLAIM_COMMISSION";
 let TASK_TYPE_MODIFY_REWARD_ADDRESS         = "TASK_TYPE_MODIFY_REWARD_ADDRESS";
 let TASK_TYPE_REINVEST                      = "TASK_TYPE_REINVEST";
 let TASK_TYPE_VOTE                          = "TASK_TYPE_VOTE";
+let TRANSFER_SIMPLE                         = "TRANSFER_SIMPLE";
+let TRANSFER_IBC_SIMPLE                     = "TRANSFER_IBC_SIMPLE";
+let TRANSFER_WASM                           = "TRANSFER_WASM";
+let TRANSFER_IBC_WASM                       = "TRANSFER_IBC_WASM";
 
 let TASK_TYPE_KAVA_CDP_CREATE               = "TASK_TYPE_KAVA_CDP_CREATE";
 let TASK_TYPE_KAVA_CDP_DEPOSIT              = "TASK_TYPE_KAVA_CDP_DEPOSIT";

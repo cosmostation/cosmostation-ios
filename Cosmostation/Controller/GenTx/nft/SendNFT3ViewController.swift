@@ -39,7 +39,7 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
     
     func onUpdateView() {
         WDP.dpCoin(chainConfig, pageHolderVC.mFee!.amount[0].denom, pageHolderVC.mFee!.amount[0].amount, txFeeDenomLabel, txFeeAmountLabel)
-        recipientLabel.text = pageHolderVC.mToSendRecipientAddress
+        recipientLabel.text = pageHolderVC.mRecipinetAddress
         denomIdLabel.text = pageHolderVC.mNFTDenomId
         tokenIdLabel.text = pageHolderVC.mNFTTokenId
         memoLabel.text = pageHolderVC.mMemo
@@ -94,7 +94,7 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
                 if (self.chainType == ChainType.IRIS_MAIN) {
                     reqTx = Signer.genSignedSendNftIrisTxgRPC(auth!,
                                                               self.account!.account_address,
-                                                              self.pageHolderVC.mToSendRecipientAddress!,
+                                                              self.pageHolderVC.mRecipinetAddress!,
                                                               self.pageHolderVC.mNFTTokenId!,
                                                               self.pageHolderVC.mNFTDenomId!,
                                                               self.pageHolderVC.irisResponse!,
@@ -105,7 +105,7 @@ class SendNFT3ViewController: BaseViewController, PasswordViewDelegate {
                 } else if (self.chainType == ChainType.CRYPTO_MAIN) {
                     reqTx = Signer.genSignedSendNftCroTxgRPC(auth!,
                                                              self.account!.account_address,
-                                                             self.pageHolderVC.mToSendRecipientAddress!,
+                                                             self.pageHolderVC.mRecipinetAddress!,
                                                              self.pageHolderVC.mNFTTokenId!,
                                                              self.pageHolderVC.mNFTDenomId!,
                                                              self.pageHolderVC.croResponse!,

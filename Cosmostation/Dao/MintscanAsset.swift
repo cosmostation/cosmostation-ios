@@ -47,6 +47,16 @@ public struct MintscanAsset {
         let imageurl = AssetBase + image
         return URL(string: imageurl)
     }
+    
+    func beforeChain(_ currentChain: ChainConfig) -> String? {
+        let chainPath = path.components(separatedBy: ">")
+        if let matched = chainPath.lastIndex(of: currentChain.chainAPIName) {
+            if (matched > 0) {
+                return chainPath[matched - 1]
+            }
+        }
+        return nil
+    }
 }
 
 public struct MintscanAssetCounterParty {

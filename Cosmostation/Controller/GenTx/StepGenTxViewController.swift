@@ -25,9 +25,14 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var chainType: ChainType?
     var mBalances = Array<Balance>()
     
-    var mToSendDenom: String?
-    var mToSendRecipientAddress:String?
+    var mToSendDenom: String?                   //denom or contract_address
     var mToSendAmount = Array<Coin>()
+    var mRecipinetChainConfig: ChainConfig?
+    var mRecipinetAddress: String?
+    var mTransferType:String?
+    var mMintscanAsset: MintscanAsset?
+    var mMintscanTokens: MintscanToken?
+    var mMintscanPath: MintscanPath?
     
     var mIBCSendDenom: String?
     var mIBCSendAmount: String?
@@ -36,9 +41,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mIBCSendPath: Path?
     var mCw20SendContract: String?
     
-    //TODO new way
-    var mRecipinetChainConfig: ChainConfig?
-    var mRecipinetAddress: String?
     
     var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mToDelegateAmount: Coin?

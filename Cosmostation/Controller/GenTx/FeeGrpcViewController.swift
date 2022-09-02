@@ -183,10 +183,9 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let destinationAsset = BaseData.instance.mMintscanAssets.filter { $0.counter_party?.denom == self.pageHolderVC.mToSendDenom && $0.type == "ibc" }.first!
                 let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-                    $0.channelID = destinationAsset.counter_party!.channel!
-                    $0.portID = destinationAsset.counter_party!.port!
+                    $0.channelID = self.pageHolderVC.mMintscanPath!.channel!
+                    $0.portID = self.pageHolderVC.mMintscanPath!.port!
                 }
                 if let response = try? Ibc_Core_Channel_V1_QueryClient(channel: channel).channelClientState(req).response.wait() {
                     let clientState = try! Ibc_Lightclients_Tendermint_V1_ClientState.init(serializedData: response.identifiedClientState.clientState.value)
@@ -238,30 +237,25 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
     
     func genSimulateReq(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ privateKey: Data, _ publicKey: Data, _ height: Ibc_Core_Client_V1_Height?)  -> Cosmos_Tx_V1beta1_SimulateRequest? {
         if (pageHolderVC.mType == TASK_TYPE_TRANSFER) {
-//            return Signer.genSimulateSendTxgRPC(auth,
-//                                                self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
-//                                                self.mFee, self.pageHolderVC.mMemo!,
-//                                                privateKey, publicKey, self.chainType!)
-            if (chainType == pageHolderVC.mRecipinetChainConfig?.chainType) {
-                if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pageHolderVC.mToSendDenom }).first {
-                    //simple coin send
-                    
-                    
-                } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == pageHolderVC.mToSendDenom }).first {
-                    //simple token send
-                    
-                }
+            if (pageHolderVC.mTransferType == TRANSFER_SIMPLE) {
+                return Signer.simulSimpleSend(auth,
+                                              pageHolderVC.mRecipinetAddress!, pageHolderVC.mToSendAmount,
+                                              mFee, pageHolderVC.mMemo!, privateKey, publicKey, chainType!)
                 
-            } else {
-                //ibc send
-                if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == pageHolderVC.mToSendDenom }).first {
-                    //ibc coin send
-                    
-                    
-                } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == pageHolderVC.mToSendDenom }).first {
-                    //ibc token send (not-yet!)
-                    
-                }
+            } else if (pageHolderVC.mTransferType == TRANSFER_IBC_SIMPLE) {
+                return Signer.simulIbcSend(auth,
+                                           pageHolderVC.mRecipinetAddress!, pageHolderVC.mToSendAmount,
+                                           pageHolderVC.mMintscanPath!, height!,
+                                           mFee, pageHolderVC.mMemo!, privateKey, publicKey, chainType!)
+                
+            } else if (pageHolderVC.mTransferType == TRANSFER_WASM) {
+                return Signer.simulWasmSend(auth,
+                                            pageHolderVC.mRecipinetAddress!, pageHolderVC.mMintscanTokens!.contract_address,
+                                            pageHolderVC.mToSendAmount,
+                                            mFee, pageHolderVC.mMemo!, privateKey, publicKey, chainType!)
+                
+            } else if (pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
+                //not yet!!
                 
             }
             
@@ -311,10 +305,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                                            privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_VOTE) {
-//            return Signer.genSimulateVoteTxgRPC(auth,
-//                                                self.pageHolderVC.mProposeId!, self.pageHolderVC.mVoteOpinion!,
-//                                                self.mFee, self.pageHolderVC.mMemo!,
-//                                                privateKey, publicKey, self.chainType!)
             return Signer.genSimulateVoteTxgRPC(auth,
                                                 self.pageHolderVC.mProposals,
                                                 self.mFee, self.pageHolderVC.mMemo!,
@@ -420,24 +410,24 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         
         //for IBC Transfer or Cw20
         else if (pageHolderVC.mType == TASK_TYPE_IBC_TRANSFER) {
-            return Signer.genSimulateIbcTransferMsgTxgRPC(auth,
-                                                          self.pageHolderVC.mAccount!.account_address,
-                                                          self.pageHolderVC.mIBCRecipient!,
-                                                          self.pageHolderVC.mIBCSendDenom!,
-                                                          self.pageHolderVC.mIBCSendAmount!,
-                                                          self.pageHolderVC.mIBCSendPath!,
-                                                          height!,
-                                                          self.mFee, IBC_TRANSFER_MEMO,
-                                                          privateKey, publicKey, self.chainType!)
+//            return Signer.simulIbcSend(auth,
+//                                                          self.pageHolderVC.mAccount!.account_address,
+//                                                          self.pageHolderVC.mIBCRecipient!,
+//                                                          self.pageHolderVC.mIBCSendDenom!,
+//                                                          self.pageHolderVC.mIBCSendAmount!,
+//                                                          self.pageHolderVC.mIBCSendPath!,
+//                                                          height!,
+//                                                          self.mFee, IBC_TRANSFER_MEMO,
+//                                                          privateKey, publicKey, self.chainType!)
             
         } else if (pageHolderVC.mType == TASK_TYPE_IBC_CW20_TRANSFER) {
-            return Signer.genSimulateCw20Send(auth,
-                                              self.account!.account_address,
-                                              self.pageHolderVC.mToSendRecipientAddress!,
-                                              self.pageHolderVC.mCw20SendContract!,
-                                              self.pageHolderVC.mToSendAmount,
-                                              self.mFee, self.pageHolderVC.mMemo!,
-                                              privateKey, publicKey, self.chainType!)
+//            return Signer.simulWasmSend(auth,
+//                                              self.account!.account_address,
+//                                              self.pageHolderVC.mRecipinetAddress!,
+//                                              self.pageHolderVC.mCw20SendContract!,
+//                                              self.pageHolderVC.mToSendAmount,
+//                                              self.mFee, self.pageHolderVC.mMemo!,
+//                                              privateKey, publicKey, self.chainType!)
             
         }
         
@@ -511,7 +501,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
         } else if (pageHolderVC.mType == TASK_TYPE_NFT_SEND) {
             if (pageHolderVC.chainType == ChainType.IRIS_MAIN) {
                 return Signer.genSimulateSendNftIrisTxgRPC(auth, self.account!.account_address,
-                                                           self.pageHolderVC.mToSendRecipientAddress!,
+                                                           self.pageHolderVC.mRecipinetAddress!,
                                                            self.pageHolderVC.mNFTTokenId!,
                                                            self.pageHolderVC.mNFTDenomId!,
                                                            self.pageHolderVC.irisResponse!,
@@ -521,7 +511,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                 
             } else if (self.chainType == .CRYPTO_MAIN) {
                 return Signer.genSimulateSendNftCroTxgRPC(auth, self.account!.account_address,
-                                                          self.pageHolderVC.mToSendRecipientAddress!,
+                                                          self.pageHolderVC.mRecipinetAddress!,
                                                           self.pageHolderVC.mNFTTokenId!,
                                                           self.pageHolderVC.mNFTDenomId!,
                                                           self.pageHolderVC.croResponse!,
@@ -798,7 +788,7 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             return Signer.genSimulateAuthzSend(auth,
                                                self.account!.account_address,
                                                self.pageHolderVC.mGranterAddress!,
-                                               self.pageHolderVC.mToSendRecipientAddress!,
+                                               self.pageHolderVC.mRecipinetAddress!,
                                                self.pageHolderVC.mToSendAmount,
                                                self.mFee, self.pageHolderVC.mMemo!,
                                                self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,

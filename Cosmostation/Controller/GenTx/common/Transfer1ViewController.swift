@@ -28,6 +28,8 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     var recipientableChains = Array<ChainConfig>()
     var recipientableAccounts = Array<Account>()
     var recipientChainConfig: ChainConfig!
+    var mintscanAsset: MintscanAsset?
+    var mintscanTokens: MintscanToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +39,38 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         
         self.toSendDenom = pageHolderVC.mToSendDenom
+        print("toSendDenom ", toSendDenom)
+        self.mintscanAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == toSendDenom }).first
+        self.mintscanTokens = BaseData.instance.mMintscanTokens.filter({ $0.denom == toSendDenom }).first
         self.recipientableChains.append(chainConfig!)
         
         let allChainConfig = ChainFactory.SUPPRT_CONFIG()
         BaseData.instance.mMintscanAssets.forEach { msAsset in
-            if (msAsset.chain != chainConfig?.chainAPIName && msAsset.base_denom == toSendDenom) {
-                if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
-                    self.recipientableChains.append(sendable)
+            if (mintscanAsset != nil) {
+                if (msAsset.chain == chainConfig?.chainAPIName && msAsset.denom == toSendDenom) {
+                    //add backward path
+                    if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.beforeChain(chainConfig!)}).first {
+                        self.recipientableChains.append(sendable)
+                    }
+                } else if (msAsset.counter_party?.denom == toSendDenom) {
+                    //add forward path
+                    if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
+                        self.recipientableChains.append(sendable)
+                    }
+                }
+                
+                
+            } else if (mintscanTokens != nil) {
+                //add only forward path
+                if (msAsset.counter_party?.denom == mintscanTokens?.contract_address) {
+                    if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
+                        self.recipientableChains.append(sendable)
+                    }
                 }
             }
         }
-//        print("recipientableChains ", recipientableChains.count)
+        print("recipientableChains ", recipientableChains.count)
+        
         self.onSortToChain()
         self.recipientChainConfig = recipientableChains[0]
         self.onUpdateToChainView()
@@ -150,7 +173,29 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         btnNext.isUserInteractionEnabled = false
         pageHolderVC.mRecipinetChainConfig = recipientChainConfig
         pageHolderVC.mRecipinetAddress = userInput
+        onSetTranfserType()
         pageHolderVC.onNextPage()
+    }
+    
+    func onSetTranfserType() {
+        if (chainType == recipientChainConfig.chainType) {
+            if (mintscanAsset != nil) { pageHolderVC.mTransferType = TRANSFER_SIMPLE }
+            else if (mintscanTokens != nil) { pageHolderVC.mTransferType = TRANSFER_WASM }
+
+        } else {
+            if (mintscanAsset != nil) {
+                pageHolderVC.mTransferType = TRANSFER_IBC_SIMPLE
+                pageHolderVC.mMintscanPath = WUtils.getMintscanPath(chainConfig!, recipientChainConfig!, toSendDenom!)
+//                print("channel ", pageHolderVC.mMintscanPath?.channel)
+//                print("port ", pageHolderVC.mMintscanPath?.port)
+                
+            } else if (mintscanTokens != nil) {
+                pageHolderVC.mTransferType = TRANSFER_IBC_WASM
+                
+            }
+        }
+        pageHolderVC.mMintscanAsset = mintscanAsset
+        pageHolderVC.mMintscanTokens = mintscanTokens
     }
     
     func scannedAddress(result: String) {
@@ -226,6 +271,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
             self.btnNext.isUserInteractionEnabled = false
             self.pageHolderVC.mRecipinetChainConfig = self.recipientChainConfig
             self.pageHolderVC.mRecipinetAddress = matchedAddress
+            self.onSetTranfserType()
             self.pageHolderVC.onNextPage()
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)

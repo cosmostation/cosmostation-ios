@@ -86,7 +86,7 @@ class SendContract0ViewController: BaseViewController, QrScannerDelegate {
         }
         btnBack.isUserInteractionEnabled = true
         btnNext.isUserInteractionEnabled = true
-        pageHolderVC.mToSendRecipientAddress = userInputRecipient
+        pageHolderVC.mRecipinetAddress = userInputRecipient
         pageHolderVC.onNextPage()
     }
     
@@ -126,7 +126,7 @@ class SendContract0ViewController: BaseViewController, QrScannerDelegate {
         let settingsAction = UIAlertAction(title: NSLocalizedString("continue", comment: ""), style: .default) { (_) -> Void in
             self.btnBack.isUserInteractionEnabled = false
             self.btnNext.isUserInteractionEnabled = false
-            self.pageHolderVC.mToSendRecipientAddress = matchedAddress
+            self.pageHolderVC.mRecipinetAddress = matchedAddress
             self.pageHolderVC.onNextPage()
         }
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: nil)

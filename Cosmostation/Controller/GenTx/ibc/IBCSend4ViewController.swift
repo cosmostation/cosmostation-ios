@@ -123,33 +123,33 @@ class IBCSend4ViewController: BaseViewController, PasswordViewDelegate {
     
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ height: Ibc_Core_Client_V1_Height) {
-        DispatchQueue.global().async {
-            let reqTx = Signer.genSignedIbcTransferMsgTxgRPC(auth,
-                                                             self.pageHolderVC.mAccount!.account_address,
-                                                             self.pageHolderVC.mIBCRecipient!,
-                                                             self.pageHolderVC.mIBCSendDenom!,
-                                                             self.pageHolderVC.mIBCSendAmount!,
-                                                             self.pageHolderVC.mIBCSendPath!,
-                                                             height,
-                                                             self.pageHolderVC.mFee!,
-                                                             IBC_TRANSFER_MEMO,
-                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
-                                                             self.chainType!)
-            
-            do {
-                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
-                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
-                DispatchQueue.main.async(execute: {
-                    if (self.waitAlert != nil) {
-                        self.waitAlert?.dismiss(animated: true, completion: {
-                            self.onStartTxDetailgRPC(response)
-                        })
-                    }
-                });
-                try channel.close().wait()
-            } catch {
-                print("onBroadcastGrpcTx failed: \(error)")
-            }
-        }
+//        DispatchQueue.global().async {
+//            let reqTx = Signer.genIbcSend(auth,
+//                                                             self.pageHolderVC.mAccount!.account_address,
+//                                                             self.pageHolderVC.mIBCRecipient!,
+//                                                             self.pageHolderVC.mIBCSendDenom!,
+//                                                             self.pageHolderVC.mIBCSendAmount!,
+//                                                             self.pageHolderVC.mIBCSendPath!,
+//                                                             height,
+//                                                             self.pageHolderVC.mFee!,
+//                                                             IBC_TRANSFER_MEMO,
+//                                                             self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!,
+//                                                             self.chainType!)
+//            
+//            do {
+//                let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
+//                let response = try Cosmos_Tx_V1beta1_ServiceClient(channel: channel).broadcastTx(reqTx).response.wait()
+//                DispatchQueue.main.async(execute: {
+//                    if (self.waitAlert != nil) {
+//                        self.waitAlert?.dismiss(animated: true, completion: {
+//                            self.onStartTxDetailgRPC(response)
+//                        })
+//                    }
+//                });
+//                try channel.close().wait()
+//            } catch {
+//                print("onBroadcastGrpcTx failed: \(error)")
+//            }
+//        }
     }
 }

@@ -140,7 +140,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
         WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
         
-        mToAddressLabel.text = pageHolderVC.mToSendRecipientAddress
+        mToAddressLabel.text = pageHolderVC.mRecipinetAddress
         mToAddressLabel.adjustsFontSizeToFitWidth = true
         mMemoLabel.text = pageHolderVC.mMemo
         
@@ -202,7 +202,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             var stdTx:StdTx!
             do {
                 let msg = MsgGenerator.genGetSendMsg(self.pageHolderVC.mAccount!.account_address,
-                                                     self.pageHolderVC.mToSendRecipientAddress!,
+                                                     self.pageHolderVC.mRecipinetAddress!,
                                                      self.pageHolderVC.mToSendAmount,
                                                      self.chainType!)
                 var msgList = Array<Msg>()
@@ -304,7 +304,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         DispatchQueue.global().async {
             let bnbMsg = BinanceMessage.transfer(symbol: self.pageHolderVC.mToSendAmount[0].denom,
                                                  amount: (self.pageHolderVC.mToSendAmount[0].amount as NSString).doubleValue,
-                                                 toAddress: self.pageHolderVC.mToSendRecipientAddress!,
+                                                 toAddress: self.pageHolderVC.mRecipinetAddress!,
                                                  memo: self.pageHolderVC.mMemo!,
                                                  privateKey: PrivateKey.init(pk: self.pageHolderVC.privateKey!.hexEncodedString(), coin: .bitcoin)!,
                                                  signerAddress: self.pageHolderVC.mAccount!.account_address,
@@ -364,8 +364,8 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     
     func onBroadcastGrpcTx(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse?) {
         DispatchQueue.global().async {
-            let reqTx = Signer.genSignedSendTxgRPC(auth!,
-                                                   self.pageHolderVC.mToSendRecipientAddress!, self.pageHolderVC.mToSendAmount,
+            let reqTx = Signer.genSimpleSend(auth!,
+                                                   self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mToSendAmount,
                                                    self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
                                                    self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
             
