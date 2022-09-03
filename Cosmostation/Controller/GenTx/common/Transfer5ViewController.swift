@@ -103,7 +103,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                 }
                 priceSymbol = msAsset.base_denom.lowercased()
                 
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == toSendDenom }).first {
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
                 divideDecimal = msToken.decimal
                 displayDecimal = msToken.decimal
                 currentAvailable = NSDecimalNumber.init(string: msToken.amount)

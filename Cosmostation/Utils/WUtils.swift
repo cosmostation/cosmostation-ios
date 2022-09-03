@@ -948,9 +948,9 @@ public class WUtils {
             return chainConfig!.stakeSymbol
         }
         if (chainConfig?.isGrpc == true) {
-            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
                 return msAsset.dp_denom
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == denom }).first {
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
                 return msToken.denom.uppercased()
             }
             

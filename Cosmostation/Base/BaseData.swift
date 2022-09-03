@@ -960,7 +960,7 @@ final class BaseData : NSObject{
         var result = Array<MintscanToken>()
         let contracts = UserDefaults.standard.stringArray(forKey: address + " " + KEY_USER_FAVO_TOKENS) ?? []
         contracts.forEach { contract in
-            if let userFavo = mMintscanTokens.filter { $0.contract_address == contract }.first {
+            if let userFavo = mMintscanTokens.filter({ $0.contract_address.lowercased() == contract.lowercased() }).first {
                 result.append(userFavo)
             }
         }
