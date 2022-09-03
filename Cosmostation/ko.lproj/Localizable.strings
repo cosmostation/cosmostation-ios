@@ -34,8 +34,8 @@
 "undelegate_step_4" = "입력하신 정보를 확인하세요";
 "withdraw_single_step_1" = "지급받을 이자 내역을 확인하세요";
 "withdraw_single_step_4" = "입력하신 정보를 확인하세요";
-"send_step_1" = "받을 지갑 주소를 입력하세요";
-"send_step_2" = "전송하실 토큰과 수량을 입력하세요";
+"send_step_1" = "받으실 분의 정보를 입력해주세요.";
+"send_step_2" = "전송하실 수량을 입력하세요";
 "send_step_3" = "메모를 입력하세요 (선택사항)";
 "send_step_4" = "Tx 수수료를 선택하세요";
 "send_step_5" = "입력하신 정보를 확인하세요";
