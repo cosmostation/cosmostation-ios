@@ -96,7 +96,7 @@ class TransactionViewController: UIViewController {
             stepImg.image = UIImage.init(named: "txStep5_1")
             self.titleLabel.text =  NSLocalizedString("title_redelegate", comment: "")
             
-        } else if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
+        } else if (mType == TASK_TYPE_TRANSFER) {
             stepDescription.text = NSLocalizedString("send_step_1", comment: "")
             stepImg.image = UIImage.init(named: "txStep5_1")
             self.titleLabel.text =  NSLocalizedString("title_send", comment: "")
@@ -262,11 +262,6 @@ class TransactionViewController: UIViewController {
             stepDescription.text = NSLocalizedString("str_osmosis_begin_unbonding_step_0", comment: "")
             stepImg.image = UIImage.init(named: "txStep4_1")
             self.titleLabel.text =  NSLocalizedString("title_begin_unbonding_osmosis", comment: "")
-            
-        } else if (mType == TASK_TYPE_IBC_TRANSFER) {
-            stepDescription.text = NSLocalizedString("str_ibc_transfer_step_0", comment: "")
-            stepImg.image = UIImage.init(named: "txStep5_1")
-            self.titleLabel.text =  NSLocalizedString("title_ibc_transfer", comment: "")
             
         } else if (mType == TASK_TYPE_SIF_ADD_LP) {
             stepDescription.text = NSLocalizedString("str_sif_add_lp_step_0", comment: "")
@@ -442,7 +437,7 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep5_1")
                     stepDescription.text = NSLocalizedString("redelegate_step_1", comment: "")
                     
-                } else if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
+                } else if (mType == TASK_TYPE_TRANSFER) {
                     stepImg.image = UIImage.init(named: "txStep5_1")
                     stepDescription.text = NSLocalizedString("send_step_1", comment: "")
                     
@@ -570,10 +565,6 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_osmosis_begin_unbonding_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
                     
-                } else if (mType == TASK_TYPE_IBC_TRANSFER) {
-                    stepDescription.text = NSLocalizedString("str_ibc_transfer_step_0", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep5_1")
-                    
                 } else if (mType == TASK_TYPE_SIF_ADD_LP) {
                     stepDescription.text = NSLocalizedString("str_sif_add_lp_step_0", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_1")
@@ -650,7 +641,7 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep5_2")
                     stepDescription.text = NSLocalizedString("redelegate_step_2", comment: "")
                     
-                } else if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
+                } else if (mType == TASK_TYPE_TRANSFER) {
                     stepImg.image = UIImage.init(named: "txStep5_2")
                     stepDescription.text = NSLocalizedString("send_step_2", comment: "")
                     
@@ -778,10 +769,6 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_osmosis_begin_unbonding_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
                     
-                } else if (mType == TASK_TYPE_IBC_TRANSFER) {
-                    stepDescription.text = NSLocalizedString("str_ibc_transfer_step_1", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep5_2")
-                    
                 } else if (mType == TASK_TYPE_SIF_ADD_LP) {
                     stepDescription.text = NSLocalizedString("str_sif_add_lp_step_1", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_2")
@@ -858,7 +845,7 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep5_3")
                     stepDescription.text = NSLocalizedString("redelegate_step_3", comment: "")
                     
-                } else if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
+                } else if (mType == TASK_TYPE_TRANSFER) {
                     stepImg.image = UIImage.init(named: "txStep5_3")
                     stepDescription.text = NSLocalizedString("send_step_3", comment: "")
                     
@@ -986,10 +973,6 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_osmosis_begin_unbonding_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
                     
-                } else if (mType == TASK_TYPE_IBC_TRANSFER) {
-                    stepDescription.text = NSLocalizedString("str_ibc_transfer_step_2", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep5_3")
-                    
                 } else if (mType == TASK_TYPE_SIF_ADD_LP) {
                     stepDescription.text = NSLocalizedString("str_sif_add_lp_step_2", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_3")
@@ -1066,7 +1049,7 @@ class TransactionViewController: UIViewController {
                     stepImg.image = UIImage.init(named: "txStep5_4")
                     stepDescription.text = NSLocalizedString("redelegate_step_4", comment: "")
                     
-                } else if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
+                } else if (mType == TASK_TYPE_TRANSFER) {
                     stepImg.image = UIImage.init(named: "txStep5_4")
                     stepDescription.text = NSLocalizedString("send_step_4", comment: "")
                     
@@ -1194,10 +1177,6 @@ class TransactionViewController: UIViewController {
                     stepDescription.text = NSLocalizedString("str_osmosis_begin_unbonding_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
                     
-                } else if (mType == TASK_TYPE_IBC_TRANSFER) {
-                    stepDescription.text = NSLocalizedString("str_ibc_transfer_step_3", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep5_4")
-                    
                 } else if (mType == TASK_TYPE_SIF_ADD_LP) {
                     stepDescription.text = NSLocalizedString("str_sif_add_lp_step_3", comment: "")
                     stepImg.image = UIImage.init(named: "txStep4_4")
@@ -1261,7 +1240,7 @@ class TransactionViewController: UIViewController {
                 }
                 
             } else if (step == 4) {
-                if (mType == TASK_TYPE_TRANSFER || mType == TASK_TYPE_IBC_CW20_TRANSFER) {
+                if (mType == TASK_TYPE_TRANSFER) {
                     stepImg.image = UIImage.init(named: "txStep5_5")
                     stepDescription.text = NSLocalizedString("send_step_5", comment: "")
                     
@@ -1272,10 +1251,6 @@ class TransactionViewController: UIViewController {
                 } else if (mType == TASK_TYPE_STARNAME_REGISTER_ACCOUNT) {
                     stepImg.image = UIImage.init(named: "txStep5_5")
                     stepDescription.text = NSLocalizedString("str_starname_register_account_step_4", comment: "")
-                    
-                } else if (mType == TASK_TYPE_IBC_TRANSFER) {
-                    stepDescription.text = NSLocalizedString("str_ibc_transfer_step_4", comment: "")
-                    stepImg.image = UIImage.init(named: "txStep5_5")
                     
                 } else if (mType == TASK_TYPE_AUTHZ_VOTE) {
                     stepDescription.text = NSLocalizedString("str_authz_vote_step_4", comment: "")

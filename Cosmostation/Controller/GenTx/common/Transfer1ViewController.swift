@@ -40,19 +40,19 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         
         self.toSendDenom = pageHolderVC.mToSendDenom
         print("toSendDenom ", toSendDenom)
-        self.mintscanAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == toSendDenom }).first
-        self.mintscanTokens = BaseData.instance.mMintscanTokens.filter({ $0.denom == toSendDenom }).first
+        self.mintscanAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first
+        self.mintscanTokens = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first
         self.recipientableChains.append(chainConfig!)
         
         let allChainConfig = ChainFactory.SUPPRT_CONFIG()
         BaseData.instance.mMintscanAssets.forEach { msAsset in
             if (mintscanAsset != nil) {
-                if (msAsset.chain == chainConfig?.chainAPIName && msAsset.denom == toSendDenom) {
+                if (msAsset.chain == chainConfig?.chainAPIName && msAsset.denom.lowercased() == toSendDenom.lowercased()) {
                     //add backward path
                     if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.beforeChain(chainConfig!)}).first {
                         self.recipientableChains.append(sendable)
                     }
-                } else if (msAsset.counter_party?.denom == toSendDenom) {
+                } else if (msAsset.counter_party?.denom?.lowercased() == toSendDenom.lowercased()) {
                     //add forward path
                     if let sendable = allChainConfig.filter({ $0.chainAPIName == msAsset.chain }).first {
                         self.recipientableChains.append(sendable)

@@ -455,22 +455,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     GenDenom3ViewController(nibName: "GenDenom3ViewController", bundle: nil)]
         }
         
-        //COMMON
-        else if (mType == TASK_TYPE_IBC_TRANSFER) {
-            return [IBCSend0ViewController(nibName: "IBCSend0ViewController", bundle: nil),
-                    IBCSend1ViewController(nibName: "IBCSend1ViewController", bundle: nil),
-                    IBCSend2ViewController(nibName: "IBCSend2ViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    IBCSend4ViewController(nibName: "IBCSend4ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_TYPE_IBC_CW20_TRANSFER) {
-            return [SendContract0ViewController(nibName: "SendContract0ViewController", bundle: nil),
-                    SendContract1ViewController(nibName: "SendContract1ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SendContract4ViewController(nibName: "SendContract4ViewController", bundle: nil)]
-        }
-        
         //AUTHZ
         else if (mType == TASK_TYPE_AUTHZ_CLAIM_REWARDS) {
            return [AuthzClaimReward1ViewController(nibName: "AuthzClaimReward1ViewController", bundle: nil),

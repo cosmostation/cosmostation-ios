@@ -201,6 +201,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //TODO handle for kava bep sending!!
         if (indexPath.section == SECTION_NATIVE_GRPC) {
             if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainConfig)) {
                 let sTokenDetailVC = StakingTokenGrpcViewController(nibName: "StakingTokenGrpcViewController", bundle: nil)

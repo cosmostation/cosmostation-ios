@@ -407,30 +407,6 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
             
         }
         
-        
-        //for IBC Transfer or Cw20
-        else if (pageHolderVC.mType == TASK_TYPE_IBC_TRANSFER) {
-//            return Signer.simulIbcSend(auth,
-//                                                          self.pageHolderVC.mAccount!.account_address,
-//                                                          self.pageHolderVC.mIBCRecipient!,
-//                                                          self.pageHolderVC.mIBCSendDenom!,
-//                                                          self.pageHolderVC.mIBCSendAmount!,
-//                                                          self.pageHolderVC.mIBCSendPath!,
-//                                                          height!,
-//                                                          self.mFee, IBC_TRANSFER_MEMO,
-//                                                          privateKey, publicKey, self.chainType!)
-            
-        } else if (pageHolderVC.mType == TASK_TYPE_IBC_CW20_TRANSFER) {
-//            return Signer.simulWasmSend(auth,
-//                                              self.account!.account_address,
-//                                              self.pageHolderVC.mRecipinetAddress!,
-//                                              self.pageHolderVC.mCw20SendContract!,
-//                                              self.pageHolderVC.mToSendAmount,
-//                                              self.mFee, self.pageHolderVC.mMemo!,
-//                                              privateKey, publicKey, self.chainType!)
-            
-        }
-        
         else if (pageHolderVC.mType == TASK_TYPE_SIF_ADD_LP) {
             return Signer.genSimulateSifAddLpMsgTxgRPC(auth,
                                                        self.account!.account_address,

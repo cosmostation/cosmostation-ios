@@ -194,8 +194,8 @@ let TASK_TYPE_NFT_ISSUE                     = "TASK_TYPE_NFT_ISSUE";
 let TASK_TYPE_NFT_SEND                      = "TASK_TYPE_NFT_SEND";
 
 
-let TASK_TYPE_IBC_TRANSFER                  = "TASK_TYPE_IBC_TRANSFER";
-let TASK_TYPE_IBC_CW20_TRANSFER             = "TASK_TYPE_IBC_CW20_TRANSFER";
+//let TASK_TYPE_IBC_TRANSFER                  = "TASK_TYPE_IBC_TRANSFER";
+//let TASK_TYPE_IBC_CW20_TRANSFER             = "TASK_TYPE_IBC_CW20_TRANSFER";
 
 
 let TASK_TYPE_AUTHZ_SEND                    = "TASK_TYPE_AUTHZ_SEND";
@@ -268,7 +268,6 @@ let TOKEN_HTLC_KAVA_TEST_BTC                = "btcb"
 
 let SWAP_MEMO_CREATE                        = "Create Atomic Swap via Cosmostation iOS Wallet"
 let SWAP_MEMO_CLAIM                         = "Claim Atomic Swap via Cosmostation iOS Wallet"
-let IBC_TRANSFER_MEMO                       = "IBC Transfer via Cosmostation iOS Wallet"
 
 public enum ChainType: String {
     case COSMOS_MAIN

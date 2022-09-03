@@ -92,7 +92,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
 
         if (chainConfig?.isGrpc == true) {
             var priceSymbol = ""
-            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == toSendDenom }).first {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == toSendDenom.lowercased() }).first {
                 divideDecimal = msAsset.decimal
                 displayDecimal = msAsset.decimal
                 currentAvailable = BaseData.instance.getAvailableAmount_gRPC(toSendDenom)
@@ -386,8 +386,8 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             do {
                 let channel = BaseNetWork.getConnection(self.chainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Ibc_Core_Channel_V1_QueryChannelClientStateRequest.with {
-                    $0.channelID = self.pageHolderVC.mIBCSendPath!.channel_id!
-                    $0.portID = self.pageHolderVC.mIBCSendPath!.port_id!
+                    $0.channelID = self.pageHolderVC.mMintscanPath!.channel!
+                    $0.portID = self.pageHolderVC.mMintscanPath!.port!
                 }
                 if let response = try? Ibc_Core_Channel_V1_QueryClient(channel: channel).channelClientState(req).response.wait() {
                     let clientState = try! Ibc_Lightclients_Tendermint_V1_ClientState.init(serializedData: response.identifiedClientState.clientState.value)

@@ -156,9 +156,9 @@ public class WDP {
         if (chainConfig == nil || denom == nil || amount == nil || amountLabel == nil) { return }
         dpSymbol(chainConfig, denom, denomLabel)
         if (chainConfig?.isGrpc == true) {
-            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom == denom }).first {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
                 amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msAsset.decimal, msAsset.decimal)
-            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom == denom }).first {
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
                 amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msToken.decimal, msToken.decimal)
             } else {
                 let decimal = WUtils.getDenomDecimal(chainConfig, denom)
