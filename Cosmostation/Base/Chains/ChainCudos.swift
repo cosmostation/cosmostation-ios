@@ -47,7 +47,6 @@ class ChainCudos: ChainConfig {
     var apiUrl = "https://api-cudos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cudos/"
     var validatorImgUrl = MonikerUrl + "cudos/"
-    var relayerImgUrl = RelayerUrl + "cudos/relay-cudos-unknown.png"
     var priceUrl = CoingeckoUrl + "cudos"
     
     required init(_ chainType: ChainType) {

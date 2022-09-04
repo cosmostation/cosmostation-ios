@@ -47,7 +47,6 @@ class ChainSif: ChainConfig {
     var apiUrl = "https://api-sifchain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "sifchain/"
     var validatorImgUrl = MonikerUrl + "sif/"
-    var relayerImgUrl = RelayerUrl + "sifchain/relay-sifchain-unknown.png"
     var priceUrl = CoingeckoUrl + "sifchain"
     
     required init(_ chainType: ChainType) {

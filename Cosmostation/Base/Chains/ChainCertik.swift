@@ -47,7 +47,6 @@ class ChainCertik: ChainConfig {
     var apiUrl = "https://api-shentu.cosmostation.io/"
     var explorerUrl = MintscanUrl + "shentu/"
     var validatorImgUrl = MonikerUrl + "shentu/"
-    var relayerImgUrl = RelayerUrl + "shentu/relay-shentu-unknown.png"
     var priceUrl = CoingeckoUrl + "shentu"
     
     required init(_ chainType: ChainType) {

@@ -48,7 +48,6 @@ class ChainPersistence: ChainConfig {
     var apiUrl = "https://api-persistence.cosmostation.io/"
     var explorerUrl = MintscanUrl + "persistence/"
     var validatorImgUrl = MonikerUrl + "persistence/"
-    var relayerImgUrl = RelayerUrl + "persistence/relay-persistence-unknown.png"
     var priceUrl = CoingeckoUrl + "persistence"
     
     required init(_ chainType: ChainType) {

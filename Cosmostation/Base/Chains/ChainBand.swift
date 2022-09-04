@@ -49,7 +49,6 @@ class ChainBand: ChainConfig {
     var apiUrl = "https://api-band.cosmostation.io/"
     var explorerUrl = MintscanUrl + "band/"
     var validatorImgUrl = MonikerUrl + "bandprotocol/"
-    var relayerImgUrl = RelayerUrl + "band/relay-band-unknown.png"
     var priceUrl = CoingeckoUrl + "band-protocol"
     
     required init(_ chainType: ChainType) {

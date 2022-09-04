@@ -48,7 +48,6 @@ class ChainSecret: ChainConfig {
     var apiUrl = "https://api-secret.cosmostation.io/"
     var explorerUrl = MintscanUrl + "secret/"
     var validatorImgUrl = MonikerUrl + "secret/"
-    var relayerImgUrl = RelayerUrl + "secret/relay-secret-unknown.png"
     var priceUrl = CoingeckoUrl + "secret"
     
     required init(_ chainType: ChainType) {

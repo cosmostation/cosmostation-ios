@@ -47,7 +47,6 @@ class ChainPassage: ChainConfig {
     var apiUrl = "https://api-passage.cosmostation.io/"
     var explorerUrl = MintscanUrl + "passage/"
     var validatorImgUrl = MonikerUrl + "passage/"
-    var relayerImgUrl = RelayerUrl + "passage/relay-passage-unknown.png"
     var priceUrl = ""
     
     required init(_ chainType: ChainType) {

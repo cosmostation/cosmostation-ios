@@ -49,7 +49,6 @@ class ChainRizon: ChainConfig {
     var apiUrl = "https://api-rizon.cosmostation.io/"
     var explorerUrl = MintscanUrl + "rizon/"
     var validatorImgUrl = MonikerUrl + "rizon/"
-    var relayerImgUrl = RelayerUrl + "rizon/relay-rizon-unknown.png"
     var priceUrl = CoingeckoUrl + "rizon"
     
     required init(_ chainType: ChainType) {

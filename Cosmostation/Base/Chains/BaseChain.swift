@@ -45,7 +45,6 @@ protocol ChainConfig {
     var apiUrl: String { get set }
     var explorerUrl: String { get set }
     var validatorImgUrl: String { get set }
-    var relayerImgUrl: String { get set }
     var priceUrl: String { get set }
     
     init (_ chainType: ChainType)

@@ -48,7 +48,6 @@ class ChainOkc: ChainConfig {
     var apiUrl = "https://www.oklink.com/api/explorer/v1/"
     var explorerUrl = "https://www.oklink.com/okexchain/"
     var validatorImgUrl = MonikerUrl + "okex/"
-    var relayerImgUrl = ""
     var priceUrl = CoingeckoUrl + "okc-token"
     
     required init(_ chainType: ChainType) {

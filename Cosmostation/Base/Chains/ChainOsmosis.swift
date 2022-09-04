@@ -48,7 +48,6 @@ class ChainOsmosis: ChainConfig {
     var apiUrl = "https://api-osmosis.cosmostation.io/"
     var explorerUrl = MintscanUrl + "osmosis/"
     var validatorImgUrl = MonikerUrl + "osmosis/"
-    var relayerImgUrl = RelayerUrl + "osmosis/relay-osmosis-unknown.png"
     var priceUrl = CoingeckoUrl + "osmosis"
     
     required init(_ chainType: ChainType) {

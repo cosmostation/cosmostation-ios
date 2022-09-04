@@ -47,7 +47,6 @@ class ChainMedibloc: ChainConfig {
     var apiUrl = "https://api-medibloc.cosmostation.io/"
     var explorerUrl = MintscanUrl + "medibloc/"
     var validatorImgUrl = MonikerUrl + "medibloc/"
-    var relayerImgUrl = RelayerUrl + "medibloc/relay-medibloc-unknown.png"
     var priceUrl = CoingeckoUrl + "medibloc"
     
     required init(_ chainType: ChainType) {

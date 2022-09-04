@@ -412,7 +412,6 @@
 		0444443227AC034000EB093E /* TxInstantContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444443027AC034000EB093E /* TxInstantContractCell.xib */; };
 		0444443527AC08F100EB093E /* TxStoreContractCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444443327AC08F100EB093E /* TxStoreContractCell.swift */; };
 		0444443627AC08F100EB093E /* TxStoreContractCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0444443427AC08F100EB093E /* TxStoreContractCell.xib */; };
-		0444443827AC27A900EB093E /* BridgeToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444443727AC27A900EB093E /* BridgeToken.swift */; };
 		0447AE8A288AAEF0004701A0 /* WalletAuthzCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447AE88288AAEF0004701A0 /* WalletAuthzCell.swift */; };
 		0447AE8B288AAEF0004701A0 /* WalletAuthzCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0447AE88288AAEF0004701A0 /* WalletAuthzCell.swift */; };
 		0447AE8C288AAEF0004701A0 /* WalletAuthzCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0447AE89288AAEF0004701A0 /* WalletAuthzCell.xib */; };
@@ -1796,7 +1795,6 @@
 		18FFB51E281AF533004E65BB /* BTCProtocolSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = E17748E52282D782003D8CD1 /* BTCProtocolSerialization.m */; };
 		18FFB520281AF533004E65BB /* MintscanProposalDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479664F2757409700315D55 /* MintscanProposalDetail.swift */; };
 		18FFB521281AF533004E65BB /* TxSwapTokenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FBC7726DBE96000403FE2 /* TxSwapTokenCell.swift */; };
-		18FFB528281AF533004E65BB /* BridgeToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0444443727AC27A900EB093E /* BridgeToken.swift */; };
 		18FFB529281AF533004E65BB /* RenewStarname0ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280E1F00254A9B6B0007BA7D /* RenewStarname0ViewController.swift */; };
 		18FFB52A281AF533004E65BB /* WalletChainEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287654692726B2690071FF96 /* WalletChainEditViewController.swift */; };
 		18FFB52C281AF533004E65BB /* DomainPromotionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28BB2A7F2533D9FB00CFF097 /* DomainPromotionCell.swift */; };
@@ -3131,7 +3129,6 @@
 		0444443027AC034000EB093E /* TxInstantContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxInstantContractCell.xib; sourceTree = "<group>"; };
 		0444443327AC08F100EB093E /* TxStoreContractCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxStoreContractCell.swift; sourceTree = "<group>"; };
 		0444443427AC08F100EB093E /* TxStoreContractCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TxStoreContractCell.xib; sourceTree = "<group>"; };
-		0444443727AC27A900EB093E /* BridgeToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BridgeToken.swift; sourceTree = "<group>"; };
 		0447AE88288AAEF0004701A0 /* WalletAuthzCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAuthzCell.swift; sourceTree = "<group>"; };
 		0447AE89288AAEF0004701A0 /* WalletAuthzCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletAuthzCell.xib; sourceTree = "<group>"; };
 		0451FC48282A117400214FDA /* BaseChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseChain.swift; sourceTree = "<group>"; };
@@ -5921,7 +5918,6 @@
 				04E165BC28B62133000F12C0 /* MintscanToken.swift */,
 				043031EC28C2136F005FF935 /* MintscanPath.swift */,
 				046BD21F27788723002333B5 /* StationNFTData.swift */,
-				0444443727AC27A900EB093E /* BridgeToken.swift */,
 				04E2A32227A5787A0045ED21 /* Cw20Token.swift */,
 				04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */,
 				04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */,
@@ -7729,7 +7725,6 @@
 				18FFB51E281AF533004E65BB /* BTCProtocolSerialization.m in Sources */,
 				18FFB520281AF533004E65BB /* MintscanProposalDetail.swift in Sources */,
 				18FFB521281AF533004E65BB /* TxSwapTokenCell.swift in Sources */,
-				18FFB528281AF533004E65BB /* BridgeToken.swift in Sources */,
 				18FFB529281AF533004E65BB /* RenewStarname0ViewController.swift in Sources */,
 				18FFB52A281AF533004E65BB /* WalletChainEditViewController.swift in Sources */,
 				1817CAF5283E2CE500523713 /* gravity_v1_msgs.pb.swift in Sources */,
@@ -8789,7 +8784,6 @@
 				040FA820275F55C200229F6F /* cosmos_vesting_v1beta1_tx.pb.swift in Sources */,
 				040FA8FA275F55C300229F6F /* ibc_lightclients_solomachine_v2_solomachine.pb.swift in Sources */,
 				0451FC54282A398100214FDA /* ChainBinance.swift in Sources */,
-				0444443827AC27A900EB093E /* BridgeToken.swift in Sources */,
 				280E1F02254A9B6B0007BA7D /* RenewStarname0ViewController.swift in Sources */,
 				2876546B2726B2690071FF96 /* WalletChainEditViewController.swift in Sources */,
 				28BB2A812533D9FB00CFF097 /* DomainPromotionCell.swift in Sources */,

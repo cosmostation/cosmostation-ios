@@ -49,7 +49,6 @@ class ChainAkash: ChainConfig {
     var apiUrl = "https://api-akash.cosmostation.io/"
     var explorerUrl = MintscanUrl + "akash/"
     var validatorImgUrl = MonikerUrl + "akash/"
-    var relayerImgUrl = RelayerUrl + "akash/relay-akash-unknown.png"
     var priceUrl = CoingeckoUrl + "akash-network"
     
     required init(_ chainType: ChainType) {

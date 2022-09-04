@@ -48,7 +48,6 @@ class ChainStargaze: ChainConfig {
     var apiUrl = "https://api-stargaze.cosmostation.io/"
     var explorerUrl = MintscanUrl + "stargaze/"
     var validatorImgUrl = MonikerUrl + "stargaze/"
-    var relayerImgUrl = RelayerUrl + "stargaze/relay-stargaze-unknown.png"
     var priceUrl = CoingeckoUrl + "stargaze"
     
     required init(_ chainType: ChainType) {

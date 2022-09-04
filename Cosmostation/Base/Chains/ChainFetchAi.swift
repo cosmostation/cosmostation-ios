@@ -50,7 +50,6 @@ class ChainFetchAi: ChainConfig {
     var apiUrl = "https://api-fetchai.cosmostation.io/"
     var explorerUrl = MintscanUrl + "fetchai/"
     var validatorImgUrl = MonikerUrl + "fetchai/"
-    var relayerImgUrl = RelayerUrl + "fetchai/relay-fetchai-unknown.png"
     var priceUrl = CoingeckoUrl + "fetch-ai"
     
     required init(_ chainType: ChainType) {

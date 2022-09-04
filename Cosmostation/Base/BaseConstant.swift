@@ -492,7 +492,6 @@ let ICON_2002                   = "ICON_2002";
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/"
 let AssetBase = ResourceBase + "assets/images/"
 let MonikerUrl =  ResourceBase + "moniker/"
-let RelayerUrl = ResourceBase + "relayer/"
 let ChainImgStarnameUrl  = ResourceBase + "chains/logo/"
 let BinanceTokenImgUrl = ResourceBase + "coin_image/binance/";
 let OKTokenImgUrl = ResourceBase + "coin_image/okex/";

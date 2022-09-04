@@ -35,11 +35,4 @@ public class Cw20Token {
     func getAmount() -> NSDecimalNumber {
         return NSDecimalNumber.init(string: amount)
     }
-    
-    func getImgUrl() -> URL {
-        if let rawUrl = URL(string: logo) {
-            return rawUrl
-        }
-        return URL(string: "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/coin_image/juno/cw20/cw20-unknown.png")!
-    }
 }

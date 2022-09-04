@@ -47,7 +47,6 @@ class ChainAssetMantle: ChainConfig {
     var apiUrl = "https://api-asset-mantle.cosmostation.io/"
     var explorerUrl = MintscanUrl + "asset-mantle/"
     var validatorImgUrl = MonikerUrl + "asset-mantle/"
-    var relayerImgUrl = RelayerUrl + "asset-mantle/relay-assetmantle-unknown.png"
     var priceUrl = CoingeckoUrl + "assetmantle"
     
     required init(_ chainType: ChainType) {

@@ -49,7 +49,6 @@ class ChainIris: ChainConfig {
     var apiUrl = "https://api-iris.cosmostation.io/"
     var explorerUrl = MintscanUrl + "iris/"
     var validatorImgUrl = MonikerUrl + "irishub/"
-    var relayerImgUrl = RelayerUrl + "iris/relay-iris-unknown.png"
     var priceUrl = CoingeckoUrl + "irisnet"
     
     required init(_ chainType: ChainType) {

@@ -49,7 +49,6 @@ class ChainEmoney: ChainConfig {
     var apiUrl = "https://api-emoney.cosmostation.io/"
     var explorerUrl = MintscanUrl + "emoney/"
     var validatorImgUrl = MonikerUrl + "emoney/"
-    var relayerImgUrl = RelayerUrl + "emoney/relay-emoney-unknown.png"
     var priceUrl = CoingeckoUrl + "e-money"
     
     required init(_ chainType: ChainType) {

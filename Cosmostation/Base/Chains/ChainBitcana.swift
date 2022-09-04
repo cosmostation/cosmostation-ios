@@ -47,7 +47,6 @@ class ChainBitcana: ChainConfig {
     var apiUrl = "https://api-bitcanna.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitcanna/"
     var validatorImgUrl = MonikerUrl + "bitcanna/"
-    var relayerImgUrl = RelayerUrl + "bitcanna/relay-bitcanna-unknown.png"
     var priceUrl = CoingeckoUrl + "bitcanna"
     
     required init(_ chainType: ChainType) {
