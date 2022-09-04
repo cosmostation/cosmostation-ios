@@ -53,6 +53,8 @@
 "recipient_address" = "받을 주소";
 "reward_claim_top_16" = "이자량 순서대로 최대 16검증인으로부터 이자를 청구 합니다.";
 "add_mnemonic" = "니모닉 추가";
+"bep3_tranfser" = "Bep3 전송";
+"simple_tranfser" = "일반 전송";
 "sort_by_name" = "이름으로 정렬";
 "sort_by_my_delegate" = "내 위임 수량으로 정렬";
 "sort_by_reward" = "내 이자 수량으로 정렬";

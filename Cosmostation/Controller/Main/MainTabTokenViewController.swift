@@ -179,7 +179,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 onBindIbcCoin_gRPC(cell, mIbc_gRPC[indexPath.row])
                 
             } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-                //TODO bep3 send need
                 onBindBridgedAsset_gRPC(cell, mBridged_gRPC[indexPath.row])
                 
             } else if (indexPath.section == SECTION_TOKEN_GRPC) {
@@ -230,23 +229,82 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             onStartTransferVC(mIbc_gRPC[indexPath.row].denom)
             
         } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-            onStartTransferVC(mBridged_gRPC[indexPath.row].denom)
+            let bridgedCoin = mBridged_gRPC[indexPath.row]
+            let bridgedCoinType = BaseData.instance.getMSAsset(chainConfig!, bridgedCoin.denom)?.type
+            if (chainType == .KAVA_MAIN && bridgedCoinType == "bridge") {
+                onBepSelectDialog(bridgedCoin.denom)
+            } else {
+                onStartTransferVC(bridgedCoin.denom)
+            }
         }
         
         else if (indexPath.section == SECTION_NATIVE) {
-            onStartTransferVC(mNative[indexPath.row].balance_denom)
+            let nativeCoin = mNative[indexPath.row]
+            if (chainType == .BINANCE_MAIN) {
+                onBepSelectDialog(nativeCoin.balance_denom)
+            } else {
+                onStartTransferVC(nativeCoin.balance_denom)
+            }
             
         } else if (indexPath.section == SECTION_ETC) {
-            onStartTransferVC(mEtc[indexPath.row].balance_denom)
+            let etcCoin = mEtc[indexPath.row]
+            if (WUtils.isHtlcSwappableCoin(chainType, etcCoin.balance_denom)) {
+                onBepSelectDialog(etcCoin.balance_denom)
+            } else{
+                onStartTransferVC(etcCoin.balance_denom)
+            }
         }
     }
     
+    func onBepSelectDialog(_ denom: String) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("bep3_tranfser", comment: ""), style: UIAlertAction.Style.default, handler: { (action) in
+            self.onStartBep3TransferVC(denom)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("simple_tranfser", comment: ""), style: UIAlertAction.Style.default, handler: { (action) in
+            self.onStartTransferVC(denom)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func onStartTransferVC(_ denom: String) {
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
         let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
-        txVC.mToSendDenom = denom
         txVC.mType = TASK_TYPE_TRANSFER
+        txVC.mToSendDenom = denom
         txVC.hidesBottomBarWhenPushed = true
         self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
+    }
+    
+    func onStartBep3TransferVC(_ denom: String) {
+        if (!SUPPORT_BEP3_SWAP) {
+            self.onShowToast(NSLocalizedString("error_bep3_swap_temporary_disable", comment: ""))
+            return
+        }
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_HTLC_SWAP
+        txVC.mHtlcDenom = denom
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
         self.navigationController?.pushViewController(txVC, animated: true)
     }
     
@@ -346,7 +404,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             return false
         }
         mEtc.sort {
-            if (chainType == ChainType.OKEX_MAIN) {
+            if (chainType == .BINANCE_MAIN) {
+                if (WUtils.isHtlcSwappableCoin(chainType, $0.balance_denom)) { return true }
+                if (WUtils.isHtlcSwappableCoin(chainType, $1.balance_denom)) { return false }
+                
+            } else if (chainType == .OKEX_MAIN) {
                 if ($0.balance_denom == "okb-c4d") { return true }
                 if ($1.balance_denom == "okb-c4d") { return false }
             }

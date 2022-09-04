@@ -53,6 +53,8 @@
 "recipient_address" = "Recipient Address";
 "reward_claim_top_16" = "We claim rewards from up to max 16 validators in order of reward amount.";
 "add_mnemonic" = "Add Mnemonic";
+"bep3_tranfser" = "Bep3 Transfer";
+"simple_tranfser" = "Simple Transfer";
 "sort_by_name" = "By Name";
 "sort_by_my_delegate" = "By My Delegated Amount";
 "sort_by_reward" = "By Reward Amount";
