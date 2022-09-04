@@ -37,7 +37,8 @@ class ChainProvenance: ChainConfig {
     let gasRate0 = "2000nhash"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-provenance-app.cosmostation.io"

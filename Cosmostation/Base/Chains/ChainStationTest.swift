@@ -39,7 +39,8 @@ class StationTest: ChainConfig {
     let gasRate2 = "0.025uiss"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = true
     var authzSupoort = false
     var grpcUrl = "lcd-office.cosmostation.io"

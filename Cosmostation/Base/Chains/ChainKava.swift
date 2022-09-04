@@ -40,7 +40,8 @@ class ChainKava: ChainConfig {
     let gasRate2 = "0.025ukava"
     
     var etherAddressSupport = true
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-kava-app.cosmostation.io"

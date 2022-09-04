@@ -34,7 +34,7 @@
 "undelegate_step_4" = "Check undelegation detail";
 "withdraw_single_step_1" = "Check your rewards detail";
 "withdraw_single_step_4" = "Check your information to claim rewards.";
-"send_step_1" = "Enter recipient address";
+"send_step_1" = "Enter recipient information";
 "send_step_2" = "Enter to send amount";
 "send_step_3" = "Insert memo (optional)";
 "send_step_4" = "Select transaction fee";
@@ -53,6 +53,8 @@
 "recipient_address" = "Recipient Address";
 "reward_claim_top_16" = "We claim rewards from up to max 16 validators in order of reward amount.";
 "add_mnemonic" = "Add Mnemonic";
+"bep3_tranfser" = "Bep3 Transfer";
+"simple_tranfser" = "Simple Transfer";
 "sort_by_name" = "By Name";
 "sort_by_my_delegate" = "By My Delegated Amount";
 "sort_by_reward" = "By Reward Amount";
@@ -320,6 +322,7 @@
 "str_starname_confirm_title" = "StarName Found";
 "str_starname_confirm_msg" = "A matched address was found. Would you like to send to this address? \n\n\n%@\n\n%@";
 "str_select_to_send_coin" = "Select To Send Coin Type";
+"str_select_contract_token" = "Select token to Display";
 "str_event_confirm" = "Please confirm twice yourself ETH deposit address for XPRT distribution. \n(we don't support validate checksum) \n\n\n%@";
 "str_event_confirm_title" = "Once More Check";
 "str_apr_help_title" = "APY";
@@ -331,7 +334,7 @@
 "str_select_osmo_lockup_duration_title" = "Select Lockup Type.";
 "str_select_osmo_unbonding_all" = "Unbonding all for same durations?";
 "str_select_osmo_unlock_all" = "Unlock all?";
-"str_select_ibc_destination" = "Select Destination Chain.";
+"str_select_ibc_destination" = "Select Recipient Chain.";
 "str_select_ibc_relayer" = "Select Realyer for IBC Transfer.";
 "str_notice" = "Notice";
 "str_msg_ibc" = "IBC transactions are not supported on centralized exchanges.\nIf you wish to transfer to an exchange, you must send back the asset to its original chain before depositing it via a regular send transaction.\n\nThis wallet only supports the broadcasting of txs through active IBC relayers and therefore is not responsible for intrinsic issues that may exist in IBC txs.\nUser must perform due diligence on the stability and security of the selected relayer before executing IBC txs.";
@@ -462,11 +465,6 @@
 "str_osmosis_unlock_token_step_1" = "Insert memo (optional)";
 "str_osmosis_unlock_token_step_2" = "Select transaction fee";
 "str_osmosis_unlock_token_step_3" = "Check transaction detail";
-"str_ibc_transfer_step_0" = "Select destination chain & relayer";
-"str_ibc_transfer_step_1" = "Enter recipient address";
-"str_ibc_transfer_step_2" = "Enter to send amount";
-"str_ibc_transfer_step_3" = "Select transaction fee";
-"str_ibc_transfer_step_4" = "Check transaction detail";
 "str_sif_add_lp_step_0" = "Insert amount to deposit";
 "str_sif_add_lp_step_1" = "Insert memo (optional)";
 "str_sif_add_lp_step_2" = "Select transaction fee";

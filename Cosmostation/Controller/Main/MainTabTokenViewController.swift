@@ -11,22 +11,15 @@ import Alamofire
 import UserNotifications
 import SafariServices
 
-class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, SBCardPopupDelegate {
     
     let SECTION_NATIVE_GRPC             = 1;
-    let SECTION_IBC_AUTHED_GRPC         = 2;
+    let SECTION_IBC_GRPC                = 2;
     let SECTION_BRIDGE_GRPC             = 3;
-    let SECTION_KAVA_BEP2_GRPC          = 4;
-    let SECTION_CW20_GRPC               = 5;
-    let SECTION_POOL_TOKEN_GRPC         = 6;
-    let SECTION_ETC_GRPC                = 7;
-    let SECTION_IBC_UNKNOWN_GRPC        = 8;
-    let SECTION_UNKNOWN_GRPC            = 9;
+    let SECTION_TOKEN_GRPC              = 4;
     
-    let SECTION_NATIVE                  = 10;
-    let SECTION_ETC                     = 11;
-    let SECTION_UNKNOWN                 = 12;
-    
+    let SECTION_NATIVE                  = 5;
+    let SECTION_ETC                     = 6;
 
     @IBOutlet weak var titleChainImg: UIImageView!
     @IBOutlet weak var titleWalletName: UILabel!
@@ -39,18 +32,12 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     var mBalances_gRPC = Array<Coin>()
     
     var mNative_gRPC = Array<Coin>()                // section 1
-    var mIbcAuthed_gRPC = Array<Coin>()             // section 2
+    var mIbc_gRPC = Array<Coin>()                   // section 2
     var mBridged_gRPC = Array<Coin>()               // section 3
-    var mKavaBep2_gRPC = Array<Coin>()              // section 4
-    var mCW20_gRPC = Array<Cw20Token>()             // section 5
-    var mPoolToken_gRPC = Array<Coin>()             // section 6
-    var mEtc_gRPC = Array<Coin>()                   // section 7
-    var mIbcUnknown_gRPC = Array<Coin>()            // section 8
-    var mUnKnown_gRPC = Array<Coin>()               // section 9
+    var mToken_gRPC = Array<MintscanToken>()        // section 4
     
-    var mNative = Array<Balance>()                  // section 10
-    var mEtc = Array<Balance>()                     // section 11
-    var mUnKnown = Array<Balance>()                 // section 12
+    var mNative = Array<Balance>()                  // section 5
+    var mEtc = Array<Balance>()                     // section 6
     
 
     override func viewDidLoad() {
@@ -64,7 +51,8 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         self.tokenTableView.dataSource = self
         self.tokenTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         self.tokenTableView.register(UINib(nibName: "WalletAddressCell", bundle: nil), forCellReuseIdentifier: "WalletAddressCell")
-        self.tokenTableView.register(UINib(nibName: "TokenCell", bundle: nil), forCellReuseIdentifier: "TokenCell")
+        self.tokenTableView.register(UINib(nibName: "AssetCell", bundle: nil), forCellReuseIdentifier: "AssetCell")
+        self.tokenTableView.register(UINib(nibName: "AssetAddCell", bundle: nil), forCellReuseIdentifier: "AssetAddCell")
         self.tokenTableView.rowHeight = UITableView.automaticDimension
         self.tokenTableView.estimatedRowHeight = UITableView.automaticDimension
         
@@ -79,7 +67,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         
         self.mBalances = BaseData.instance.mBalances
         self.mBalances_gRPC = BaseData.instance.mMyBalances_gRPC
-        self.mCW20_gRPC = BaseData.instance.getCw20s_gRPC()
         
         self.updateView()
     }
@@ -110,7 +97,7 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func updateView() {
-        self.onClassifyTokens()
+        self.onClassifyAssets()
         self.tokenTableView.reloadData()
     }
     
@@ -123,7 +110,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     @objc func onFetchDone(_ notification: NSNotification) {
         self.mBalances = BaseData.instance.mBalances
         self.mBalances_gRPC = BaseData.instance.mMyBalances_gRPC
-        self.mCW20_gRPC = BaseData.instance.getCw20s_gRPC()
         
         self.updateView()
         self.refresher.endRefreshing()
@@ -134,64 +120,49 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 13
+        return 7
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (section == 0) { return 0 }
-        else if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_IBC_AUTHED_GRPC && mIbcAuthed_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_BRIDGE_GRPC && mBridged_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_KAVA_BEP2_GRPC && mKavaBep2_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_CW20_GRPC && mCW20_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_POOL_TOKEN_GRPC && mPoolToken_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_ETC_GRPC && mEtc_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_IBC_UNKNOWN_GRPC && mIbcUnknown_gRPC.count == 0) { return 0 }
-        else if (section == SECTION_UNKNOWN_GRPC && mUnKnown_gRPC.count == 0) { return 0 }
+        else if (section == SECTION_NATIVE_GRPC && mNative_gRPC.count > 0) { return 30 }
+        else if (section == SECTION_IBC_GRPC && mIbc_gRPC.count > 0) { return 30 }
+        else if (section == SECTION_BRIDGE_GRPC && mBridged_gRPC.count > 0) { return 30 }
+        else if (section == SECTION_TOKEN_GRPC && mToken_gRPC.count > 0) { return 30 }
         
-        else if (section == SECTION_NATIVE && mNative.count == 0) { return 0 }
-        else if (section == SECTION_ETC && mEtc.count == 0) { return 0 }
-        else if (section == SECTION_UNKNOWN && mUnKnown.count == 0) { return 0 }
-        else { return 30 }
+        else if (section == SECTION_NATIVE && mNative.count > 0) { return 30 }
+        else if (section == SECTION_ETC && mEtc.count > 0) { return 30 }
+        else { return 0 }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         if (section == SECTION_NATIVE_GRPC) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative_gRPC.count) }
-        else if (section == SECTION_IBC_AUTHED_GRPC) { view.headerTitleLabel.text = "IBC Coins"; view.headerCntLabel.text = String(self.mIbcAuthed_gRPC.count) }
-        else if (section == SECTION_BRIDGE_GRPC) { view.headerTitleLabel.text = "Ether Bridged Assets"; view.headerCntLabel.text = String(self.mBridged_gRPC.count) }
-        else if (section == SECTION_KAVA_BEP2_GRPC) { view.headerTitleLabel.text = "BEP2 Coins"; view.headerCntLabel.text = String(self.mKavaBep2_gRPC.count) }
-        else if (section == SECTION_CW20_GRPC) { view.headerTitleLabel.text = "CW20 Tokens"; view.headerCntLabel.text = String(self.mCW20_gRPC.count) }
-        else if (section == SECTION_POOL_TOKEN_GRPC) { view.headerTitleLabel.text = "Pool Coins"; view.headerCntLabel.text = String(self.mPoolToken_gRPC.count) }
-        else if (section == SECTION_ETC_GRPC) { view.headerTitleLabel.text = "Etc Coins"; view.headerCntLabel.text = String(self.mEtc_gRPC.count) }
-        else if (section == SECTION_IBC_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown IBC Coins"; view.headerCntLabel.text = String(self.mIbcUnknown_gRPC.count) }
-        else if (section == SECTION_UNKNOWN_GRPC) { view.headerTitleLabel.text = "Unknown Coins"; view.headerCntLabel.text = String(self.mUnKnown_gRPC.count) }
+        else if (section == SECTION_IBC_GRPC) { view.headerTitleLabel.text = "IBC Coins"; view.headerCntLabel.text = String(self.mIbc_gRPC.count) }
+        else if (section == SECTION_BRIDGE_GRPC) { view.headerTitleLabel.text = "Bridged Assets"; view.headerCntLabel.text = String(self.mBridged_gRPC.count) }
+        else if (section == SECTION_TOKEN_GRPC) { view.headerTitleLabel.text = "Contract Tokens"; view.headerCntLabel.text = String(self.mToken_gRPC.count) }
         
         else if (section == SECTION_NATIVE) { view.headerTitleLabel.text = "Native Coins"; view.headerCntLabel.text = String(self.mNative.count) }
         else if (section == SECTION_ETC) {
-            view.headerTitleLabel.text = (chainType! == ChainType.OKEX_MAIN) ? "KIP10 Coins" : "Etc Coins"
+            view.headerTitleLabel.text = (chainType! == ChainType.OKEX_MAIN) ? "KIP10 Coins" : "Tokens"
             view.headerCntLabel.text = String(self.mEtc.count)
         }
-        else if (section == SECTION_UNKNOWN) { view.headerTitleLabel.text = "Unknown Coins"; view.headerCntLabel.text = String(self.mUnKnown.count) }
-        else { view.headerTitleLabel.text = ""; view.headerCntLabel.text = "0" }
+        else { view.headerTitleLabel.text = ""; view.headerCntLabel.text = "" }
         return view
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (section == 0) { return 1}
         else if (section == SECTION_NATIVE_GRPC) { return mNative_gRPC.count }
-        else if (section == SECTION_IBC_AUTHED_GRPC) { return mIbcAuthed_gRPC.count }
+        else if (section == SECTION_IBC_GRPC) { return mIbc_gRPC.count }
         else if (section == SECTION_BRIDGE_GRPC) { return mBridged_gRPC.count }
-        else if (section == SECTION_KAVA_BEP2_GRPC) { return mKavaBep2_gRPC.count }
-        else if (section == SECTION_CW20_GRPC) { return mCW20_gRPC.count }
-        else if (section == SECTION_POOL_TOKEN_GRPC) { return mPoolToken_gRPC.count }
-        else if (section == SECTION_ETC_GRPC) { return mEtc_gRPC.count }
-        else if (section == SECTION_IBC_UNKNOWN_GRPC) { return mIbcUnknown_gRPC.count }
-        else if (section == SECTION_UNKNOWN_GRPC) { return mUnKnown_gRPC.count }
+        else if (section == SECTION_TOKEN_GRPC) {
+            if (mToken_gRPC.count > 0) { return mToken_gRPC.count + 1 }
+            return 0
+        }
         
         else if (section == SECTION_NATIVE) { return mNative.count }
         else if (section == SECTION_ETC) { return mEtc.count }
-        else if (section == SECTION_UNKNOWN) { return mUnKnown.count }
         else { return 0 }
     }
     
@@ -200,60 +171,36 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             return onSetAddressItems(tableView, indexPath);
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"TokenCell") as? TokenCell
+            let cell = tableView.dequeueReusableCell(withIdentifier:"AssetCell") as? AssetCell
             if (indexPath.section == SECTION_NATIVE_GRPC) {
-                onBindNativeToken_gRPC(cell, mNative_gRPC[indexPath.row])
+                onBindNativeCoin_gRPC(cell, mNative_gRPC[indexPath.row])
                 
-            } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
-                onBindIbcToken_gRPC(cell, mIbcAuthed_gRPC[indexPath.row])
+            } else if (indexPath.section == SECTION_IBC_GRPC) {
+                onBindIbcCoin_gRPC(cell, mIbc_gRPC[indexPath.row])
                 
             } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-                onBindEthBridgeToken_gRPC(cell, mBridged_gRPC[indexPath.row])
+                onBindBridgedAsset_gRPC(cell, mBridged_gRPC[indexPath.row])
                 
-            } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
-                onBindKavaBep2Token_gRPC(cell, mKavaBep2_gRPC[indexPath.row])
-                
-            } else if (indexPath.section == SECTION_CW20_GRPC) {
-                onBindCw20Token_gRPC(cell, mCW20_gRPC[indexPath.row])
-                
-            } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
-                onBindPoolToken_gRPC(cell, mPoolToken_gRPC[indexPath.row])
-                
-            } else if (indexPath.section == SECTION_ETC_GRPC) {
-                onBindEtcToken_gRPC(cell, mEtc_gRPC[indexPath.row])
-                
-            } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
-                onBindIbcToken_gRPC(cell, mIbcUnknown_gRPC[indexPath.row])
-                
-            } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
-                cell?.tokenImg.image = UIImage(named: "tokenDefault")
-                let denomText = mUnKnown_gRPC[indexPath.row].denom.uppercased()
-                if (denomText.count > 4) { cell?.tokenSymbol.text = denomText.substring(to: 4) }
-                else { cell?.tokenSymbol.text = denomText }
-                cell?.tokenTitle.text = ""
-                cell?.tokenDescription.text = " "
-                cell!.tokenValue.text = ""
-                cell?.tokenAmount.attributedText = WDP.dpAmount(mUnKnown_gRPC[indexPath.row].amount, cell!.tokenAmount.font, 6, 6)
+            } else if (indexPath.section == SECTION_TOKEN_GRPC) {
+                if (indexPath.row == mToken_gRPC.count) {
+                    let addCell = tableView.dequeueReusableCell(withIdentifier:"AssetAddCell") as? AssetAddCell
+                    return addCell!
+                }
+                onBindToken_gRPC(cell, mToken_gRPC[indexPath.row])
             }
             
-            
-            
             else if (indexPath.section == SECTION_NATIVE) {
-                onBindNativeToken(cell, mNative[indexPath.row])
+                onBindNativeCoin(cell, mNative[indexPath.row])
                 
             } else if (indexPath.section == SECTION_ETC) {
                 onBindEtcToken(cell, mEtc[indexPath.row])
-                
-            } else if (indexPath.section == SECTION_UNKNOWN) {
-                cell?.tokenSymbol.text = mUnKnown[indexPath.row].balance_denom.uppercased()
-                
             }
             return cell!
-            
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //TODO handle for kava bep sending!!
         if (indexPath.section == SECTION_NATIVE_GRPC) {
             if (mNative_gRPC[indexPath.row].denom == WUtils.getMainDenom(chainConfig)) {
                 let sTokenDetailVC = StakingTokenGrpcViewController(nibName: "StakingTokenGrpcViewController", bundle: nil)
@@ -268,81 +215,102 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
                 self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
             }
 
-        } else if (indexPath.section == SECTION_IBC_AUTHED_GRPC) {
-            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
-            iTokenDetailVC.ibcDenom = mIbcAuthed_gRPC[indexPath.row].denom
-            iTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
-
-        } else if (indexPath.section == SECTION_IBC_UNKNOWN_GRPC) {
-            let iTokenDetailVC = IBCTokenGrpcViewController(nibName: "IBCTokenGrpcViewController", bundle: nil)
-            iTokenDetailVC.ibcDenom = mIbcUnknown_gRPC[indexPath.row].denom
-            iTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(iTokenDetailVC, animated: true)
-
-        } else if (indexPath.section == SECTION_POOL_TOKEN_GRPC) {
-            let pTokenDetailVC = PoolTokenGrpcViewController(nibName: "PoolTokenGrpcViewController", bundle: nil)
-            pTokenDetailVC.poolDenom = mPoolToken_gRPC[indexPath.row].denom
-            pTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(pTokenDetailVC, animated: true)
-
+        } else if (indexPath.section == SECTION_TOKEN_GRPC && indexPath.row == mToken_gRPC.count) {
+            let popupVC = MultiSelectPopupViewController(nibName: "MultiSelectPopupViewController", bundle: nil)
+            popupVC.type = SELECT_POPUP_CONTRACT_TOKEN_EDIT
+            let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+            cardPopup.resultDelegate = self
+            cardPopup.show(onViewController: self)
+            
+        } else if (indexPath.section == SECTION_TOKEN_GRPC && indexPath.row != mToken_gRPC.count) {
+            onStartTransferVC(mToken_gRPC[indexPath.row].denom)
+            
+        } else if (indexPath.section == SECTION_IBC_GRPC) {
+            onStartTransferVC(mIbc_gRPC[indexPath.row].denom)
+            
         } else if (indexPath.section == SECTION_BRIDGE_GRPC) {
-            let bTokenDetailVC = BridgeTokenGrpcViewController(nibName: "BridgeTokenGrpcViewController", bundle: nil)
-            bTokenDetailVC.hidesBottomBarWhenPushed = true
-            bTokenDetailVC.bridgeDenom = mBridged_gRPC[indexPath.row].denom
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(bTokenDetailVC, animated: true)
-
-        } else if (indexPath.section == SECTION_KAVA_BEP2_GRPC) {
-            let nTokenDetailVC = NativeTokenGrpcViewController(nibName: "NativeTokenGrpcViewController", bundle: nil)
-            nTokenDetailVC.nativeDenom = mKavaBep2_gRPC[indexPath.row].denom
-            nTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
+            let bridgedCoin = mBridged_gRPC[indexPath.row]
+            let bridgedCoinType = BaseData.instance.getMSAsset(chainConfig!, bridgedCoin.denom)?.type
+            if (chainType == .KAVA_MAIN && bridgedCoinType == "bridge") {
+                onBepSelectDialog(bridgedCoin.denom)
+            } else {
+                onStartTransferVC(bridgedCoin.denom)
+            }
+        }
+        
+        else if (indexPath.section == SECTION_NATIVE) {
+            let nativeCoin = mNative[indexPath.row]
+            if (chainType == .BINANCE_MAIN) {
+                onBepSelectDialog(nativeCoin.balance_denom)
+            } else {
+                onStartTransferVC(nativeCoin.balance_denom)
+            }
             
-        } else if (indexPath.section == SECTION_CW20_GRPC) {
-            let cTokenDetailVC = ContractTokenGrpcViewController(nibName: "ContractTokenGrpcViewController", bundle: nil)
-            cTokenDetailVC.mCw20Token = mCW20_gRPC[indexPath.row]
-            cTokenDetailVC.hidesBottomBarWhenPushed = true
-            self.navigationItem.title = ""
-            self.navigationController?.pushViewController(cTokenDetailVC, animated: true)
-            
-        } else if (indexPath.section == SECTION_ETC_GRPC) {
-            return
-            
-        } else if (indexPath.section == SECTION_UNKNOWN_GRPC) {
+        } else if (indexPath.section == SECTION_ETC) {
+            let etcCoin = mEtc[indexPath.row]
+            if (WUtils.isHtlcSwappableCoin(chainType, etcCoin.balance_denom)) {
+                onBepSelectDialog(etcCoin.balance_denom)
+            } else{
+                onStartTransferVC(etcCoin.balance_denom)
+            }
+        }
+    }
+    
+    func onBepSelectDialog(_ denom: String) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+        alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertAction.Style.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("bep3_tranfser", comment: ""), style: UIAlertAction.Style.default, handler: { (action) in
+            self.onStartBep3TransferVC(denom)
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("simple_tranfser", comment: ""), style: UIAlertAction.Style.default, handler: { (action) in
+            self.onStartTransferVC(denom)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func onStartTransferVC(_ denom: String) {
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
             return
         }
-
-        else if (indexPath.section == SECTION_NATIVE) {
-            if (mNative[indexPath.row].balance_denom == WUtils.getMainDenom(chainConfig)) {
-                let sTokenDetailVC = StakingTokenDetailViewController(nibName: "StakingTokenDetailViewController", bundle: nil)
-                sTokenDetailVC.hidesBottomBarWhenPushed = true
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(sTokenDetailVC, animated: true)
-
-            } else {
-                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-                nTokenDetailVC.hidesBottomBarWhenPushed = true
-                nTokenDetailVC.denom = mNative[indexPath.row].balance_denom
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-            }
-
-        } else if (indexPath.section == SECTION_ETC) {
-            if (chainType == .BINANCE_MAIN || chainType == .OKEX_MAIN) {
-                let nTokenDetailVC = NativeTokenDetailViewController(nibName: "NativeTokenDetailViewController", bundle: nil)
-                nTokenDetailVC.hidesBottomBarWhenPushed = true
-                nTokenDetailVC.denom = mEtc[indexPath.row].balance_denom
-                self.navigationItem.title = ""
-                self.navigationController?.pushViewController(nTokenDetailVC, animated: true)
-            }
-
-        } else if (indexPath.section == SECTION_UNKNOWN) {
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
             return
+        }
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_TRANSFER
+        txVC.mToSendDenom = denom
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.pushViewController(txVC, animated: true)
+    }
+    
+    func onStartBep3TransferVC(_ denom: String) {
+        if (!SUPPORT_BEP3_SWAP) {
+            self.onShowToast(NSLocalizedString("error_bep3_swap_temporary_disable", comment: ""))
+            return
+        }
+        if (!account!.account_has_private) {
+            self.onShowAddMenomicDialog()
+            return
+        }
+        if (!BaseData.instance.isTxFeePayable(chainConfig)) {
+            self.onShowToast(NSLocalizedString("error_not_enough_fee", comment: ""))
+            return
+        }
+        let txVC = UIStoryboard(name: "GenTx", bundle: nil).instantiateViewController(withIdentifier: "TransactionViewController") as! TransactionViewController
+        txVC.mType = TASK_TYPE_HTLC_SWAP
+        txVC.mHtlcDenom = denom
+        txVC.hidesBottomBarWhenPushed = true
+        self.navigationItem.title = ""
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = false;
+        self.navigationController?.pushViewController(txVC, animated: true)
+    }
+    
+    func SBCardPopupResponse(type: Int, result: Int) {
+        if (type == SELECT_POPUP_CONTRACT_TOKEN_EDIT && result == 1) {
+            onRequestFetch()
         }
     }
     
@@ -353,373 +321,70 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
         return cell!
     }
     
-    //bind native tokens with grpc
-    func onBindNativeToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        if (coin.denom == OSMOSIS_ION_DENOM) {
-            cell?.tokenImg.image = UIImage(named: "tokenIon")
-            cell?.tokenSymbol.text = "ION"
-            cell?.tokenSymbol.textColor = UIColor(named: "osmosis_ion")
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Ion Coin"
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(OSMOSIS_ION_DENOM, BaseData.instance.getAvailableAmount_gRPC(OSMOSIS_ION_DENOM), 6, cell!.tokenValue.font)
-
-        } else if (coin.denom == EMONEY_EUR_DENOM || coin.denom == EMONEY_CHF_DENOM || coin.denom == EMONEY_DKK_DENOM ||
-                    coin.denom == EMONEY_NOK_DENOM || coin.denom == EMONEY_SEK_DENOM) {
-            cell?.tokenImg.af_setImage(withURL: URL(string: EMONEY_COIN_IMG_URL + coin.denom + ".png")!)
-            cell?.tokenSymbol.text = coin.denom.uppercased()
-            cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = coin.denom.substring(from: 1).uppercased() + " on E-Money Network"
-
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, BaseData.instance.getAvailableAmount_gRPC(coin.denom), 6, cell!.tokenValue.font)
-
-        } else if (coin.denom == KAVA_HARD_DENOM) {
-            WDP.dpSymbolImg(chainConfig, KAVA_HARD_DENOM, cell?.tokenImg)
-            cell?.tokenSymbol.text = "HARD"
-            cell?.tokenSymbol.textColor = UIColor(named: "kava_hard")
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "HardPool Gov. Coin"
-
-            let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(KAVA_HARD_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
-
-        } else if (coin.denom == KAVA_USDX_DENOM) {
-            WDP.dpSymbolImg(chainConfig, KAVA_USDX_DENOM, cell?.tokenImg)
-            cell?.tokenSymbol.text = KAVA_USDX_DENOM.uppercased()
-            cell?.tokenSymbol.textColor = UIColor(named: "kava_usdx")
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "USDX Stable Asset"
-
-            let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(KAVA_USDX_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
-
-        } else if (coin.denom == KAVA_SWAP_DENOM) {
-            WDP.dpSymbolImg(chainConfig, KAVA_SWAP_DENOM, cell?.tokenImg)
-            cell?.tokenSymbol.text = KAVA_SWAP_DENOM.uppercased()
-            cell?.tokenSymbol.textColor = UIColor(named: "kava_swp")
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Kava Swap Coin"
-
-            let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(KAVA_SWAP_DENOM, totalTokenAmount, 6, cell!.tokenValue.font)
-
-        } else if (coin.denom == CRESCENT_BCRE_DENOM) {
-            cell?.tokenImg.image = UIImage(named: "tokenBcre")
-            cell?.tokenSymbol.text = "BCRE"
-            cell?.tokenSymbol.textColor = UIColor(named: "crescent_bcre")
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Liquidated CRE"
-
-            let allBCre = NSDecimalNumber.init(string: coin.amount)
-            cell?.tokenAmount.attributedText = WDP.dpAmount(allBCre.stringValue, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(CRESCENT_BCRE_DENOM, allBCre, 6, cell!.tokenValue.font)
-
-        } else if (coin.denom == NYX_NYM_DENOM) {
-            cell?.tokenImg.image = UIImage(named: "tokenNym")
-            cell?.tokenSymbol.text = "NYM"
-            cell?.tokenSymbol.textColor = UIColor(named: "nyx_nym")
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Nym Coin"
-
-            let allNym = NSDecimalNumber.init(string: coin.amount)
-            cell?.tokenAmount.attributedText = WDP.dpAmount(allNym.stringValue, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(NYX_NYM_DENOM, allNym, 6, cell!.tokenValue.font)
-
-        } else {
-            let divideDecimal = WUtils.mainDivideDecimal(chainType)
-            if (coin.denom == chainConfig?.stakeDenom) {
-                cell?.tokenImg.image = chainConfig?.stakeDenomImg
-                cell?.tokenSymbol.text = chainConfig?.stakeSymbol
-                cell?.tokenSymbol.textColor = chainConfig?.chainColor
-                cell?.tokenTitle.text = ""
-                cell?.tokenDescription.text = (chainConfig?.chainAPIName.capitalizingFirstLetter() ?? "Base") + " Staking Coin"
-                
-                let allStakingCoin = WUtils.getAllMainAsset(coin.denom)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(allStakingCoin.stringValue, cell!.tokenAmount.font, divideDecimal, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, allStakingCoin, divideDecimal, cell!.tokenValue.font)
-            }
+    //bind native coins with grpc
+    func onBindNativeCoin_gRPC(_ cell: AssetCell?, _ coin: Coin) {
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+            cell?.onBindNativeAsset(chainConfig, msAsset, coin)
         }
     }
     
-    //bind ibc tokens with grpc
-    func onBindIbcToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-        guard let ibcToken = BaseData.instance.getIbcToken(coin.getIbcHash()) else {
-            cell?.tokenImg.image = UIImage(named: "tokenDefaultIbc")
-            cell?.tokenSymbol.text = "UnKnown"
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = ""
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
-            return
-        }
-        if (ibcToken.auth == true) {
-            WDP.dpSymbolImg(chainConfig, coin.denom, cell?.tokenImg)
-            cell?.tokenSymbol.text = ibcToken.display_denom?.uppercased()
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = ibcToken.channel_id
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, ibcToken.decimal!, 6)
-            let basedenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(basedenom, NSDecimalNumber.init(string: coin.amount), ibcToken.decimal!, cell!.tokenValue.font)
-            
-        } else {
-            cell?.tokenImg.image = UIImage(named: "tokenDefaultIbc")
-            cell?.tokenSymbol.text = "UnKnown"
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = ibcToken.channel_id
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 6, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 6, cell!.tokenValue.font)
+    //bind ibc coins with grpc
+    func onBindIbcCoin_gRPC(_ cell: AssetCell?, _ coin: Coin) {
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+            cell?.onBindIbcAsset(chainConfig, msAsset, coin)
         }
     }
     
-    //bind Pool tokens with grpc
-    func onBindPoolToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-        if (chainType == .OSMOSIS_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenOsmosisPool")
-            cell?.tokenSymbol.text = coin.isOsmosisAmmDpDenom()
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = coin.denom
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 18, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
-            
-        } else if (chainType == .INJECTIVE_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenInjectivePool")
-            cell?.tokenSymbol.text = coin.denom.uppercased()
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Pool Asset"
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 18, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 18, cell!.tokenValue.font)
-            
-        } else if (chainType == .CRESCENT_MAIN) {
-            cell?.tokenImg.image = UIImage(named: "tokenCrescentpool")
-            cell?.tokenSymbol.text = coin.denom.uppercased()
-            cell?.tokenTitle.text = ""
-            cell?.tokenDescription.text = "Pool Asset"
-            cell?.tokenAmount.attributedText = WDP.dpAmount(coin.amount, cell!.tokenAmount.font, 12, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(coin.denom, NSDecimalNumber.init(string: coin.amount), 12, cell!.tokenValue.font)
-            
+    //bind bridged tokens with grpc (Bep2, SifChain, G-bridge, Injective)
+    func onBindBridgedAsset_gRPC(_ cell: AssetCell?, _ coin: Coin) {
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+            cell?.onBindBridgeAsset(chainConfig, msAsset, coin)
         }
     }
     
-    //bind Eth bridged tokens with grpc (SifChain, G-bridge, Injective)
-    func onBindEthBridgeToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        cell?.onBindBridgeToken(self.chainType!, coin)
-    }
-    
-    //bind kava bep2 tokens with grpc
-    func onBindKavaBep2Token_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        WDP.dpSymbolImg(chainConfig, coin.denom, cell?.tokenImg)
-        cell?.tokenSymbol.text = coin.denom.uppercased()
-        cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-        cell?.tokenTitle.text = ""
-        cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"
-
-        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-        let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
-        let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-        cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
-        cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
-    }
-    
-    //bind cw20 tokens
-    func onBindCw20Token_gRPC(_ cell: TokenCell?, _ token: Cw20Token) {
-        cell?.tokenImg.af_setImage(withURL: token.getImgUrl())
-        cell?.tokenSymbol.text = token.denom.uppercased()
-        cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-        cell?.tokenTitle.text = ""
-        cell?.tokenDescription.text = token.contract_address
-        
-        let decimal = token.decimal
-        cell?.tokenAmount.attributedText = WDP.dpAmount(token.amount, cell!.tokenAmount.font!, decimal, 6)
-        cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(token.denom, token.getAmount(), decimal, cell!.tokenValue.font)
-    }
-    
-    //bind etc tokens with grpc
-    func onBindEtcToken_gRPC(_ cell: TokenCell?, _ coin: Coin) {
-        //bind "btch" for kava
-        if (chainType == .KAVA_MAIN || coin.denom == "btch") {
-            WDP.dpSymbolImg(chainConfig, coin.denom, cell?.tokenImg)
-            cell?.tokenSymbol.text = coin.denom.uppercased()
-            cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-            cell?.tokenDescription.text = coin.denom.uppercased() + " on Kava Chain"
-            
-            let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-            let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
-            let totalTokenAmount = WUtils.getKavaTokenAll(coin.denom)
-            cell?.tokenAmount.attributedText = WDP.dpAmount(totalTokenAmount.stringValue, cell!.tokenAmount.font!, decimal, 6)
-            cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(baseDenom, totalTokenAmount, decimal, cell!.tokenValue.font)
-        }
-        
+    //bind contract tokens
+    func onBindToken_gRPC(_ cell: AssetCell?, _ token: MintscanToken) {
+        cell?.onBindContractToken(chainConfig, token)
     }
     
     
     //bind native tokens
-    func onBindNativeToken(_ cell: TokenCell?, _ balance: Balance) {
-        if (balance.balance_denom == BNB_MAIN_DENOM) {
-            if let bnbToken = WUtils.getBnbToken(BNB_MAIN_DENOM) {
-                cell?.tokenImg.image = UIImage(named: "tokenBinance")
-                cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
-                cell?.tokenSymbol.textColor = UIColor(named: "binance")
-                cell?.tokenTitle.text = "(" + bnbToken.symbol + ")"
-                cell?.tokenDescription.text = bnbToken.name
-                
-                let amount = WUtils.getAllBnbToken(BNB_MAIN_DENOM)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(amount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, amount, 0, cell!.tokenValue.font)
-            }
-            
-        } else if (balance.balance_denom == OKEX_MAIN_DENOM) {
-            if let okToken = WUtils.getOkToken(OKEX_MAIN_DENOM) {
-                cell?.tokenImg.image = UIImage(named: "tokenOkc")
-                cell?.tokenSymbol.text = okToken.original_symbol!.uppercased()
-                cell?.tokenSymbol.textColor = UIColor(named: "okc")
-                cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
-                cell?.tokenDescription.text = "OKC Staking Coin"
-                
-                let tokenAmount = WUtils.getAllExToken(OKEX_MAIN_DENOM)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, tokenAmount, 0, cell!.tokenValue.font)
-            }
-            
-        }
+    func onBindNativeCoin(_ cell: AssetCell?, _ balance: Balance) {
+        cell?.onBindStakingCoin(chainConfig, balance)
     }
     
     //bind Etc tokens (binance, okex)
-    func onBindEtcToken(_ cell: TokenCell?, _ balance: Balance) {
-        if (chainType == .BINANCE_MAIN) {
-            if let bnbToken = WUtils.getBnbToken(balance.balance_denom) {
-                cell?.tokenImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + bnbToken.original_symbol + ".png")!)
-                cell?.tokenSymbol.text = bnbToken.original_symbol.uppercased()
-                cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-                cell?.tokenTitle.text = "(" + bnbToken.symbol + ")"
-                cell?.tokenDescription.text = bnbToken.name
-                
-                let tokenAmount = WUtils.getAllBnbToken(balance.balance_denom)
-                let convertAmount = WUtils.getBnbConvertAmount(balance.balance_denom)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, convertAmount, 0, cell!.tokenValue.font)
-            }
-            
-        }  else if (chainType == .OKEX_MAIN) {
-            if let okToken = WUtils.getOkToken(balance.balance_denom) {
-                cell?.tokenImg.af_setImage(withURL: URL(string: OKTokenImgUrl + okToken.original_symbol! + ".png")!)
-                cell?.tokenSymbol.text = okToken.original_symbol?.uppercased()
-                cell?.tokenSymbol.textColor = UIColor(named: "_font05")
-                cell?.tokenTitle.text = "(" + okToken.symbol! + ")"
-                cell?.tokenDescription.text = okToken.description
-                
-                let tokenAmount = WUtils.getAllExToken(balance.balance_denom)
-                let convertedAmount = WUtils.convertTokenToOkt(balance.balance_denom)
-                cell?.tokenAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, cell!.tokenAmount.font, 0, 6)
-                cell?.tokenValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, convertedAmount, 0, cell!.tokenValue.font)
-            }
-        }
-        
+    func onBindEtcToken(_ cell: AssetCell?, _ balance: Balance) {
+        cell?.onBindEtcCoin(chainConfig, balance)
     }
     
-    
-    func onClassifyTokens() {
+    func onClassifyAssets() {
         mNative_gRPC.removeAll()
-        mIbcAuthed_gRPC.removeAll()
-        mPoolToken_gRPC.removeAll()
+        mIbc_gRPC.removeAll()
         mBridged_gRPC.removeAll()
-        mKavaBep2_gRPC.removeAll()
-        mEtc_gRPC.removeAll()
-        mIbcUnknown_gRPC.removeAll()
-        mUnKnown_gRPC.removeAll()
         
         self.mBalances_gRPC.forEach { balance_gRPC in
-            if (WUtils.getMainDenom(chainConfig) == balance_gRPC.denom) {
+            let coinType = BaseData.instance.getMSAsset(chainConfig!, balance_gRPC.denom)?.type
+            if (coinType == "staking" || coinType == "native") {
                 mNative_gRPC.append(balance_gRPC)
-                
-            } else if (balance_gRPC.isIbc()) {
-                guard let ibcToken = BaseData.instance.getIbcToken(balance_gRPC.getIbcHash()) else {
-                    mIbcUnknown_gRPC.append(balance_gRPC)
-                    return
-                }
-                if (ibcToken.auth == true) { mIbcAuthed_gRPC.append(balance_gRPC) }
-                else { mIbcUnknown_gRPC.append(balance_gRPC) }
-                
-            } else if (chainType == .OSMOSIS_MAIN) {
-                if (balance_gRPC.denom == OSMOSIS_ION_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                } else if (balance_gRPC.isOsmosisAmm()) {
-                    mPoolToken_gRPC.append(balance_gRPC)
-                }
-                
-            } else if (chainType == .EMONEY_MAIN) {
-                if (balance_gRPC.denom == EMONEY_EUR_DENOM || balance_gRPC.denom == EMONEY_CHF_DENOM || balance_gRPC.denom == EMONEY_DKK_DENOM ||
-                        balance_gRPC.denom == EMONEY_NOK_DENOM || balance_gRPC.denom == EMONEY_SEK_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                }
-            
-            } else if (chainType == .SIF_MAIN && balance_gRPC.denom.starts(with: "c")) {
+            } else if (coinType == "bep" || coinType == "bridge") {
                 mBridged_gRPC.append(balance_gRPC)
-                
-            } else if (chainType == .GRAVITY_BRIDGE_MAIN && balance_gRPC.denom.starts(with: "gravity0x")) {
-                mBridged_gRPC.append(balance_gRPC)
-                
-            } else if (chainType == .KAVA_MAIN) {
-                if (balance_gRPC.denom == KAVA_HARD_DENOM || balance_gRPC.denom == KAVA_USDX_DENOM || balance_gRPC.denom == KAVA_SWAP_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-
-                } else if (balance_gRPC.denom == TOKEN_HTLC_KAVA_BNB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BTCB ||
-                           balance_gRPC.denom == TOKEN_HTLC_KAVA_XRPB || balance_gRPC.denom == TOKEN_HTLC_KAVA_BUSD) {
-                    mKavaBep2_gRPC.append(balance_gRPC)
-
-                } else if (balance_gRPC.denom == "btch") {
-                    mUnKnown_gRPC.append(balance_gRPC)
-                }
-
-            } else if (chainType == .INJECTIVE_MAIN) {
-                if (balance_gRPC.denom.starts(with: "peggy0x")) {
-                    mBridged_gRPC.append(balance_gRPC)
-                } else if (balance_gRPC.denom.starts(with: "share")) {
-                    mPoolToken_gRPC.append(balance_gRPC)
-                }
-                
-            } else if (chainType == .CRESCENT_MAIN || chainType == .CRESCENT_TEST) {
-                if (balance_gRPC.denom == CRESCENT_BCRE_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                } else if (balance_gRPC.isPoolToken()) {
-                    mPoolToken_gRPC.append(balance_gRPC)
-                }
-                
-            } else if (chainType == .NYX_MAIN) {
-                if (balance_gRPC.denom == NYX_NYM_DENOM) {
-                    mNative_gRPC.append(balance_gRPC)
-                }
-                
-            } else {
-                mUnKnown_gRPC.append(balance_gRPC)
+            } else if (coinType == "ibc") {
+                mIbc_gRPC.append(balance_gRPC)
             }
         }
+        mToken_gRPC = BaseData.instance.mMyTokens
+        
         
         mNative.removeAll()
         mEtc.removeAll()
-        mUnKnown.removeAll()
         self.mBalances.forEach { balance in
             if (WUtils.getMainDenom(chainConfig) == balance.balance_denom) {
                 mNative.append(balance)
-                
-            } else if (chainType == .BINANCE_MAIN) {
-                mEtc.append(balance)
-                
-            } else if (chainType == .OKEX_MAIN) {
-                mEtc.append(balance)
-                
             } else {
-                mUnKnown.append(balance)
-                
+                mEtc.append(balance)
             }
         }
-        
         
         mNative_gRPC.sort {
             if ($0.denom == WUtils.getMainDenom(chainConfig)) { return true }
@@ -732,12 +397,6 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             }
             return false
         }
-        mPoolToken_gRPC.sort {
-            if (chainType == ChainType.OSMOSIS_MAIN) {
-                return $0.osmosisAmmPoolId() < $1.osmosisAmmPoolId()
-            }
-            return false
-        }
         mNative.sort {
             if ($0.balance_denom == WUtils.getMainDenom(chainConfig)) { return true }
             if ($1.balance_denom == WUtils.getMainDenom(chainConfig)) { return false }
@@ -745,7 +404,11 @@ class MainTabTokenViewController: BaseViewController, UITableViewDelegate, UITab
             return false
         }
         mEtc.sort {
-            if (chainType == ChainType.OKEX_MAIN) {
+            if (chainType == .BINANCE_MAIN) {
+                if (WUtils.isHtlcSwappableCoin(chainType, $0.balance_denom)) { return true }
+                if (WUtils.isHtlcSwappableCoin(chainType, $1.balance_denom)) { return false }
+                
+            } else if (chainType == .OKEX_MAIN) {
                 if ($0.balance_denom == "okb-c4d") { return true }
                 if ($1.balance_denom == "okb-c4d") { return false }
             }

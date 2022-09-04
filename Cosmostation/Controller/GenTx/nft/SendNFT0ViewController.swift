@@ -77,7 +77,7 @@ class SendNFT0ViewController: BaseViewController, QrScannerDelegate {
         if (WUtils.isValidChainAddress(chainConfig, userInputRecipient)) {
             btnCancel.isUserInteractionEnabled = true
             btnNext.isUserInteractionEnabled = true
-            pageHolderVC.mToSendRecipientAddress = userInputRecipient
+            pageHolderVC.mRecipinetAddress = userInputRecipient
             pageHolderVC.onNextPage()
             
         } else {

@@ -37,7 +37,8 @@ class ChainNyx: ChainConfig {
     let gasRate0 = "0.025unym"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-nym-app.cosmostation.io"

@@ -222,6 +222,18 @@ public class WUtils {
         return getDpAttributedString(formatted, 9, font)
     }
     
+    static func dpValueChange2(_ denom: String, _ font:UIFont ) -> NSMutableAttributedString {
+        let nf = getNumberFormatter(2)
+        let change = valueChange(denom)
+        if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
+            let formatted = "+" + nf.string(from: valueChange(denom))! + "%"
+            return getDpAttributedString(formatted, 3, font)
+        } else {
+            let formatted = nf.string(from: valueChange(denom))! + "%"
+            return getDpAttributedString(formatted, 3, font)
+        }
+    }
+    
     static func perUsdValue(_ denom: String) -> NSDecimalNumber? {
         if (denom.contains("gamm/pool/")) {
             if let pool = BaseData.instance.getOsmoPoolByDenom(denom) {
@@ -301,78 +313,24 @@ public class WUtils {
                     let assetValue = userCurrencyValue(coin.denom, amount, mainDivideDecimal(chainConfig?.chainType))
                     totalValue = totalValue.adding(assetValue)
                     
-                } else if (chainConfig?.chainType == .OSMOSIS_MAIN && coin.denom == OSMOSIS_ION_DENOM) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                } else if (chainConfig?.chainType == .SIF_MAIN && coin.denom.starts(with: "c")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getDenomDecimal(chainConfig, coin.denom)
-                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
-                    }
-                    
-                } else if (chainConfig?.chainType == .GRAVITY_BRIDGE_MAIN && coin.denom.starts(with: "gravity0x")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getDenomDecimal(chainConfig, coin.denom)
-                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
-                    }
-                    
-                } else if (chainConfig?.chainType == .EMONEY_MAIN && coin.denom.starts(with: "e")) {
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    totalValue = totalValue.adding(userCurrencyValue(coin.denom, available, 6))
-                    
-                } else if (chainConfig?.chainType == .OSMOSIS_MAIN && coin.denom.contains("gamm/pool/")) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, 18)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                }  else if (chainConfig?.chainType == .COSMOS_MAIN && coin.denom.starts(with: "pool") && coin.denom.count >= 68) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
-                    totalValue = totalValue.adding(assetValue)
-                    
                 } else if (chainConfig?.chainType == .KAVA_MAIN) {
-                    let baseDenom = BaseData.instance.getBaseDenom(chainConfig, coin.denom)
-                    let decimal = WUtils.getDenomDecimal(chainConfig, coin.denom)
-                    let amount = WUtils.getKavaTokenAll(coin.denom)
-                    let assetValue = userCurrencyValue(baseDenom, amount, decimal)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                } else if (chainConfig?.chainType == .INJECTIVE_MAIN && coin.denom.starts(with: "peggy0x")) {
-                    let chainConfig = ChainInjective.init(.INJECTIVE_MAIN)
-                    let available = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let decimal = getDenomDecimal(chainConfig, coin.denom)
-                    if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(coin.denom) {
-                        totalValue = totalValue.adding(userCurrencyValue(bridgeTokenInfo.origin_symbol!.lowercased(), available, decimal))
+                    if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+                        let amount = WUtils.getKavaTokenAll(coin.denom)
+                        let assetValue = userCurrencyValue(msAsset.base_denom, amount, msAsset.decimal)
+                        totalValue = totalValue.adding(assetValue)
                     }
                     
-                } else if (chainConfig?.chainType == .NYX_MAIN && coin.denom == NYX_NYM_DENOM) {
-                    let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, 6)
-                    totalValue = totalValue.adding(assetValue)
-                    
-                }
-                
-                else if (coin.isIbc()) {
-                    if let ibcToken = BaseData.instance.getIbcToken(coin.getIbcHash()) {
-                        if (ibcToken.auth == true) {
-                            let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                            let assetValue = userCurrencyValue(ibcToken.base_denom!, amount, ibcToken.decimal!)
-                            totalValue = totalValue.adding(assetValue)
-                        }
+                } else {
+                    if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
+                        let amount = baseData.getAvailableAmount_gRPC(coin.denom)
+                        let assetValue = userCurrencyValue(msAsset.base_denom, amount, msAsset.decimal)
+                        totalValue = totalValue.adding(assetValue)
                     }
                 }
-            }
-            
-            baseData.getCw20s_gRPC().forEach { cw20Token in
-                let available = cw20Token.getAmount()
-                let decimal = cw20Token.decimal
-                totalValue = totalValue.adding(userCurrencyValue(cw20Token.denom, available, decimal))
             }
         }
+        
+        //cal for legacy chains
         else if (chainConfig?.chainType == .BINANCE_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allBnb = NSDecimalNumber.zero
@@ -398,6 +356,15 @@ public class WUtils {
                 totalValue = totalValue.adding(assetValue)
             }
             
+        }
+        
+        //Add contract token value
+        if (chainConfig?.wasmSupport == true || chainConfig?.evmSupport == true) {
+            BaseData.instance.mMyTokens.forEach { msToken in
+                let amount = NSDecimalNumber.init(string: msToken.amount)
+                let assetValue = userCurrencyValue(msToken.denom, amount, msToken.decimal)
+                totalValue = totalValue.adding(assetValue)
+            }
         }
         return totalValue
     }
@@ -888,15 +855,35 @@ public class WUtils {
         return chainConfig.chainDBName
     }
     
-    static func getChainTypeInt(_ chainS:String) -> Int {
-        if (chainS == CHAIN_COSMOS_S ) {
-            return 1
-        } else if (chainS == CHAIN_IRIS_S) {
-            return 2
-        } else if (chainS == CHAIN_BINANCE_S) {
-            return 3
+    static func getMintscanPath(_ fromChain: ChainConfig, _ toChain: ChainConfig, _ denom: String) -> MintscanPath? {
+        let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom.lowercased() }).first
+        let msTokens = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom.lowercased() }).first
+        var result: MintscanPath?
+        BaseData.instance.mMintscanAssets.forEach { asset in
+            if (msAsset != nil) {
+                if (asset.chain == fromChain.chainAPIName &&
+                    asset.beforeChain(fromChain) == toChain.chainAPIName &&
+                    asset.denom.lowercased() == denom.lowercased()) {
+                    result = MintscanPath.init(asset.channel, asset.port)
+                    return
+                }
+                if (asset.chain == toChain.chainAPIName &&
+                    asset.beforeChain(toChain) == fromChain.chainAPIName &&
+                    asset.counter_party?.denom?.lowercased() == denom.lowercased()) {
+                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
+                    return
+                }
+                
+            } else if (msTokens != nil) {
+                if (asset.chain == toChain.chainAPIName &&
+                    asset.beforeChain(toChain) == fromChain.chainAPIName &&
+                    asset.counter_party?.denom?.lowercased() == msTokens?.contract_address.lowercased()) {
+                    result = MintscanPath.init(asset.counter_party!.channel!, asset.counter_party!.port!)
+                    return
+                }
+            }
         }
-        return 0
+        return result
     }
     
     static func clearBackgroundColor(of view: UIView) {
@@ -960,67 +947,23 @@ public class WUtils {
         if (chainConfig!.stakeDenom == denom) {
             return chainConfig!.stakeSymbol
         }
-        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
-               ibcToken.auth == true {
-                return ibcToken.display_denom?.uppercased() ?? "Unknown"
-            } else {
-                return "Unknown"
-            }
-        }
-        if (chainConfig!.chainType == .KAVA_MAIN) {
-            if (denom == KAVA_HARD_DENOM) { return "HARD" }
-            else if (denom == KAVA_USDX_DENOM) { return "USDX" }
-            else if (denom == KAVA_SWAP_DENOM) { return "SWP" }
-            else if (denom == TOKEN_HTLC_KAVA_BNB) { return "BNB" }
-            else if (denom == TOKEN_HTLC_KAVA_XRPB) { return "XRPB" }
-            else if (denom == TOKEN_HTLC_KAVA_BUSD) { return "BUSD" }
-            else if (denom == TOKEN_HTLC_KAVA_BTCB) { return "BTCB" }
-            else if (denom == "btch") { return "BTCH" }
-            
-        } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
-            if (denom == OSMOSIS_ION_DENOM) { return "ION" }
-            else if (denom!.starts(with: "gamm/pool/")) {
-                return "GAMM-" + String(denom!.split(separator: "/").last!)
+        if (chainConfig?.isGrpc == true) {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+                return msAsset.dp_denom
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+                return msToken.denom.uppercased()
             }
             
-        } else if (chainConfig!.chainType == .SIF_MAIN) {
-            if (denom!.starts(with: "c")) { return denom!.substring(from: 1).uppercased() }
-            
-        } else if (chainConfig!.chainType == .CRESCENT_MAIN) {
-            if (denom == CRESCENT_BCRE_DENOM) { return "BCRE" }
-            else if (denom!.starts(with: "pool")) { return denom!.uppercased() }
-            
-        } else if (chainConfig!.chainType == .EMONEY_MAIN) {
-            if (denom == EMONEY_EUR_DENOM) { return denom!.uppercased() }
-            else if (denom == EMONEY_CHF_DENOM) { return denom!.uppercased() }
-            else if (denom == EMONEY_DKK_DENOM) { return denom!.uppercased() }
-            else if (denom == EMONEY_NOK_DENOM) { return denom!.uppercased() }
-            else if (denom == EMONEY_SEK_DENOM) { return denom!.uppercased() }
-            
-        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-                return bridgeTokenInfo.origin_symbol ?? "Unknown"
-            }
-            
-        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-                return bridgeTokenInfo.origin_symbol ?? "Unknown"
-            } else if (denom!.starts(with: "share")) { return denom!.uppercased() }
-            
-        } else if (chainConfig!.chainType == .NYX_MAIN) {
-            if (denom == NYX_NYM_DENOM) { return "NYM" }
-            
-        }
-        
-        else if (chainConfig!.chainType == .BINANCE_MAIN) {
-            if let bnbTokenInfo = getBnbToken(denom!) {
-                return bnbTokenInfo.original_symbol.uppercased()
-            }
-            
-        } else if (chainConfig!.chainType == .OKEX_MAIN) {
-            if let okTokenInfo = getOkToken(denom!) {
-                return okTokenInfo.original_symbol!.uppercased()
+        } else {
+            if (chainConfig!.chainType == .BINANCE_MAIN) {
+                if let bnbTokenInfo = getBnbToken(denom!) {
+                    return bnbTokenInfo.original_symbol.uppercased()
+                }
+                
+            } else if (chainConfig!.chainType == .OKEX_MAIN) {
+                if let okTokenInfo = getOkToken(denom!) {
+                    return okTokenInfo.original_symbol!.uppercased()
+                }
             }
         }
         return "Unknown"
@@ -1202,11 +1145,6 @@ public class WUtils {
     static func getProposalExplorer(_ chainConfig: ChainConfig?, _ proposalId: String) -> String {
         if (chainConfig == nil) { return "" }
         return chainConfig!.explorerUrl + "proposals/" + proposalId
-    }
-    
-    static func getChainNameByBaseChain(_ chainConfig: ChainConfig?) -> String {
-        if (chainConfig == nil) { return "" }
-        return chainConfig!.chainAPIName
     }
     
     static func getDefaultRlayerImg(_ chainConfig: ChainConfig?) -> String {

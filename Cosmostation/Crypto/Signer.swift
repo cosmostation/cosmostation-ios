@@ -13,16 +13,16 @@ import SwiftProtobuf
 class Signer {
     
     //Tx for Common Denom Transfer
-    static func genSignedSendTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+    static func genSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
                                     _ toAddress: String, _ amount: Array<Coin>,
                                     _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
         let sendMsg = genSendMsg(auth, toAddress, amount)
         return getGrpcSignedTx(auth, chainType, sendMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateSendTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                      _ toAddress: String, _ amount: Array<Coin>,
-                                      _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_SimulateRequest {
+    static func simulSimpleSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                   _ toAddress: String, _ amount: Array<Coin>,
+                                   _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType)  -> Cosmos_Tx_V1beta1_SimulateRequest {
         let sendMsg = genSendMsg(auth, toAddress, amount)
         return getGrpcSimulateTx(auth, chainType, sendMsg, privateKey, publicKey, fee, memo)
     }
@@ -780,34 +780,34 @@ class Signer {
     
     //for IBC Transfer custom msgs
     //Tx for Ibc Transfer
-    static func genSignedIbcTransferMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                              _ sender: String, _ receiver: String, _ ibcSendDenom: String, _ ibcSendAmount: String, _ ibcPath: Path, _ lastHeight: Ibc_Core_Client_V1_Height,
-                                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let ibcTransferMsg = genIbcTransferMsg(sender, receiver, ibcSendDenom, ibcSendAmount, ibcPath, lastHeight)
+    static func genIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                           _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height,
+                           _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight)
         return getGrpcSignedTx(auth, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateIbcTransferMsgTxgRPC(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                                _ sender: String, _ receiver: String, _ ibcSendDenom: String, _ ibcSendAmount: String, _ ibcPath: Path, _ lastHeight: Ibc_Core_Client_V1_Height,
-                                                _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let ibcTransferMsg = genIbcTransferMsg(sender, receiver, ibcSendDenom, ibcSendAmount, ibcPath, lastHeight)
+    static func simulIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                             _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height,
+                             _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let ibcTransferMsg = genIbcTransferMsg(auth, receiver, amount, path, lastHeight)
         return getGrpcSimulateTx(auth, chainType, ibcTransferMsg, privateKey, publicKey, fee, memo)
     }
     
-    static func genIbcTransferMsg(_ sender: String, _ receiver: String, _ ibcSendDenom: String, _ ibcSendAmount: String, _ ibcPath: Path, _ lastHeight: Ibc_Core_Client_V1_Height) -> [Google_Protobuf2_Any] {
+    static func genIbcTransferMsg(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ receiver: String, _ amount: Array<Coin>, _ path: MintscanPath, _ lastHeight: Ibc_Core_Client_V1_Height) -> [Google_Protobuf2_Any] {
         let re_timeout_height = Ibc_Core_Client_V1_Height.with {
             $0.revisionNumber = lastHeight.revisionNumber
             $0.revisionHeight = lastHeight.revisionHeight + 1000
         }
         let re_token = Cosmos_Base_V1beta1_Coin.with {
-            $0.denom = ibcSendDenom
-            $0.amount = ibcSendAmount
+            $0.denom = amount[0].denom
+            $0.amount = amount[0].amount
         }
         let ibcSendMsg = Ibc_Applications_Transfer_V1_MsgTransfer.with {
-            $0.sender = sender
+            $0.sender = WUtils.onParseAuthGrpc(auth).0!
             $0.receiver = receiver
-            $0.sourcePort = ibcPath.port_id!
-            $0.sourceChannel = ibcPath.channel_id!
+            $0.sourcePort = path.port!
+            $0.sourceChannel = path.channel!
             $0.timeoutHeight = re_timeout_height
             $0.timeoutTimestamp = 0
             $0.token = re_token
@@ -1739,23 +1739,23 @@ class Signer {
     
     //for WASM custom msg
     //Tx for CW20 Transfer
-    static func genSignedCw20Send(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                  _ fromAddress: String, _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
-                                  _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
-        let cw20Send = genCw20Send(fromAddress, toAddress, contractAddress, amount)
+    static func genWasmSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                            _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
+                            _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let cw20Send = genCw20Send(auth, toAddress, contractAddress, amount)
         return getGrpcSignedTx(auth, chainType, cw20Send, privateKey, publicKey, fee, memo)
     }
     
-    static func genSimulateCw20Send(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
-                                    _ fromAddress: String, _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
-                                    _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
-        let cw20Send = genCw20Send(fromAddress, toAddress, contractAddress, amount)
+    static func simulWasmSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                              _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>,
+                              _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let cw20Send = genCw20Send(auth, toAddress, contractAddress, amount)
         return getGrpcSimulateTx(auth, chainType, cw20Send, privateKey, publicKey, fee, memo)
     }
     
-    static func genCw20Send(_ fromAddress: String, _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>) -> [Google_Protobuf2_Any] {
+    static func genCw20Send(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ toAddress: String, _ contractAddress: String, _ amount: Array<Coin>) -> [Google_Protobuf2_Any] {
         let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
-            $0.sender = fromAddress
+            $0.sender = WUtils.onParseAuthGrpc(auth).0!
             $0.contract = contractAddress
             $0.msg  = Cw20TransferReq.init(toAddress, amount[0].amount).getEncode()
         }

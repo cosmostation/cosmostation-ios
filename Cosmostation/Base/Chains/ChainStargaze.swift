@@ -38,7 +38,8 @@ class ChainStargaze: ChainConfig {
     let gasRate1 = "0.0025ustars"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = true
     var grpcUrl = "lcd-stargaze-app.cosmostation.io"

@@ -39,7 +39,8 @@ class ChainEmoney: ChainConfig {
     let gasRate2 = "1ungm"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-emoney-app.cosmostation.io"

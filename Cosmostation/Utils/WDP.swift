@@ -153,29 +153,25 @@ public class WDP {
     }
     
     static func dpCoin(_ chainConfig: ChainConfig?, _ denom: String?, _ amount: String?, _ denomLabel: UILabel?, _ amountLabel: UILabel?) {
-        if (chainConfig == nil || denom == nil || amount == nil ) { return }
+        if (chainConfig == nil || denom == nil || amount == nil || amountLabel == nil) { return }
         dpSymbol(chainConfig, denom, denomLabel)
-        if (amountLabel == nil ) { return }
-        var divideDecimal: Int16 = 6
-        var displayDecimal: Int16 = 6
-        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
-               ibcToken.auth == true {
-                divideDecimal = ibcToken.decimal!
-                displayDecimal = ibcToken.decimal!
+        if (chainConfig?.isGrpc == true) {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msAsset.decimal, msAsset.decimal)
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, msToken.decimal, msToken.decimal)
+            } else {
+                let decimal = WUtils.getDenomDecimal(chainConfig, denom)
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, decimal, decimal)
             }
-            amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, divideDecimal, displayDecimal)
-            return
-        }
-        
-        if (chainConfig?.chainType == .BINANCE_MAIN || chainConfig?.chainType == .OKEX_MAIN ) {
-            divideDecimal = 0
-            displayDecimal = WUtils.mainDisplayDecimal(chainConfig?.chainType)
+            
         } else {
-            divideDecimal = WUtils.getDenomDecimal(chainConfig, denom)
-            displayDecimal = WUtils.getDenomDecimal(chainConfig, denom)
+            if (chainConfig?.chainType == .BINANCE_MAIN) {
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, 0, 8)
+            } else if (chainConfig?.chainType == .OKEX_MAIN ) {
+                amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, 0, 18)
+            }
         }
-        amountLabel!.attributedText = WDP.dpAmount(amount, amountLabel!.font, divideDecimal, displayDecimal)
     }
     
     static func dpAmount(_ amount: String?, _ font: UIFont, _ inputPoint: Int16, _ dpPoint: Int16) -> NSMutableAttributedString {
@@ -207,7 +203,8 @@ public class WDP {
                 formatted = "0" + nf.decimalSeparator! + temp
                 
             } else {
-                let count = calNumber.multiplying(by: NSDecimalNumber.one, withBehavior: WUtils.handler0).stringValue.count
+                let count = calNumber.multiplying(by: NSDecimalNumber.one, withBehavior: WUtils.handler0Down).stringValue.count
+//                print("count ", count)
                 nf.minimumSignificantDigits = Int(dpPoint) + count
                 nf.maximumSignificantDigits = Int(dpPoint) + count
                 formatted = nf.string(from: calNumber)
@@ -266,5 +263,15 @@ public class WDP {
             return ""
         }
         return WUtils.getGapTime(date)
+    }
+    
+    static func dpPath(_ path: String) -> String {
+        return path.replacingOccurrences(of: "bnb-beacon-chain", with: "binance")
+            .replacingOccurrences(of: "ethereum", with: "eth")
+            .replacingOccurrences(of: "persistence", with: "persis")
+            .replacingOccurrences(of: "gravity-bridge", with: "gravity")
+            .replacingOccurrences(of: "konstellation", with: "konstel")
+            .replacingOccurrences(of: "assetmantle", with: "assetman")
+            .replacingOccurrences(of: ">", with: " ⇝ ")
     }
 }

@@ -119,10 +119,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             if (indexPath.row == 0) {
                 self.onShowThemeDialog()
                 
-            } else if (indexPath.row == 5) {
+            } else if (indexPath.row == 4) {
                 self.onClickAutoPass()
                 
-            } else if (indexPath.row == 6) {
+            } else if (indexPath.row == 5) {
                 self.onShowCurrenyDialog()
             }
             
@@ -227,7 +227,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     func onShowNotice() {
-        guard let url = URL(string: "https://notice.mintscan.io/\(WUtils.getChainNameByBaseChain(chainConfig))") else { return }
+        guard let url = URL(string: "https://notice.mintscan.io/\(chainConfig.chainAPIName)") else { return }
         self.onShowSafariWeb(url)
     }
     

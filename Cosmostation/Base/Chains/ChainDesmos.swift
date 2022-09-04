@@ -39,7 +39,8 @@ class ChainDesmos: ChainConfig {
     let gasRate2 = "0.025udsm"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = false
     var authzSupoort = false
     var grpcUrl = "lcd-desmos-app.cosmostation.io"

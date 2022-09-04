@@ -35,7 +35,8 @@ protocol ChainConfig {
     var validatorPrefix: String { get set }
     
     var etherAddressSupport: Bool { get set }
-    var pushSupport: Bool { get set }
+    var wasmSupport: Bool { get set }
+    var evmSupport: Bool { get set }
     var wcSupoort: Bool { get set }
     var authzSupoort: Bool { get set }
     var grpcUrl: String { get set }

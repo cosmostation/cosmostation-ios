@@ -25,8 +25,22 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var chainType: ChainType?
     var mBalances = Array<Balance>()
     
-    var mToSendRecipientAddress:String?
+    var mToSendDenom: String?                   //denom or contract_address
     var mToSendAmount = Array<Coin>()
+    var mRecipinetChainConfig: ChainConfig?
+    var mRecipinetAddress: String?
+    var mTransferType:String?
+    var mMintscanAsset: MintscanAsset?
+    var mMintscanTokens: MintscanToken?
+    var mMintscanPath: MintscanPath?
+    
+    var mIBCSendDenom: String?
+    var mIBCSendAmount: String?
+    var mIBCRecipient: String?
+    var mIBCSendRelayer: IbcPath?
+    var mIBCSendPath: Path?
+    var mCw20SendContract: String?
+    
     
     var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mToDelegateAmount: Coin?
@@ -108,8 +122,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mStarnameDomainType: String?
     var mStarnameResources_gRPC: Array<Starnamed_X_Starname_V1beta1_Resource> = Array<Starnamed_X_Starname_V1beta1_Resource>()
     
-    var mToSendDenom: String?
-    
     var mPoolId: String?
     var mSwapInDenom: String?
     var mSwapOutDenom: String?
@@ -126,13 +138,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mSifPool: Sifnode_Clp_V1_Pool?
     var mSifMyAllUnitAmount: String?
     var mSifMyWithdrawUnitAmount: String?
-    
-    var mIBCSendDenom: String?
-    var mIBCSendAmount: String?
-    var mIBCRecipient: String?
-    var mIBCSendRelayer: IbcPath?
-    var mIBCSendPath: Path?
-    var mCw20SendContract: String?
     
     var mNFTHash: String?
     var mNFTName: String?
@@ -448,22 +453,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
                     MemoViewController(nibName: "MemoViewController", bundle: nil),
                     FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
                     GenDenom3ViewController(nibName: "GenDenom3ViewController", bundle: nil)]
-        }
-        
-        //COMMON
-        else if (mType == TASK_TYPE_IBC_TRANSFER) {
-            return [IBCSend0ViewController(nibName: "IBCSend0ViewController", bundle: nil),
-                    IBCSend1ViewController(nibName: "IBCSend1ViewController", bundle: nil),
-                    IBCSend2ViewController(nibName: "IBCSend2ViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    IBCSend4ViewController(nibName: "IBCSend4ViewController", bundle: nil)]
-            
-        } else if (mType == TASK_TYPE_IBC_CW20_TRANSFER) {
-            return [SendContract0ViewController(nibName: "SendContract0ViewController", bundle: nil),
-                    SendContract1ViewController(nibName: "SendContract1ViewController", bundle: nil),
-                    MemoViewController(nibName: "MemoViewController", bundle: nil),
-                    FeeGrpcViewController(nibName: "FeeGrpcViewController", bundle: nil),
-                    SendContract4ViewController(nibName: "SendContract4ViewController", bundle: nil)]
         }
         
         //AUTHZ

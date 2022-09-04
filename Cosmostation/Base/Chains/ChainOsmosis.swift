@@ -38,7 +38,8 @@ class ChainOsmosis: ChainConfig {
     let gasRate1 = "0.025uosmo"
     
     var etherAddressSupport = false
-    var pushSupport = false
+    var wasmSupport = false
+    var evmSupport = false
     var wcSupoort = true
     var authzSupoort = false
     var grpcUrl = "lcd-osmosis-app.cosmostation.io"

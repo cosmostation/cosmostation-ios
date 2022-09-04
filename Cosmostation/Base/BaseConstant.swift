@@ -30,6 +30,7 @@ let KEY_KAVA_TESTNET_WARN               = "KEY_KAVA_TESTNET_WARN"
 let KEY_USER_HIDEN_CHAINS               = "KEY_USER_HIDEN_CHAINS"
 let KEY_USER_SORTED_CHAINS              = "KEY_USER_SORTED_CHAINS"
 let KEY_USER_EXPENDED_CHAINS            = "KEY_USER_EXPENDED_CHAINS"
+let KEY_USER_FAVO_TOKENS                = "KEY_USER_FAVO_TOKENS"
 let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 let KEY_DB_VERSION                      = "KEY_DB_VERSION"
@@ -138,6 +139,10 @@ let TASK_TYPE_CLAIM_COMMISSION              = "TASK_TYPE_CLAIM_COMMISSION";
 let TASK_TYPE_MODIFY_REWARD_ADDRESS         = "TASK_TYPE_MODIFY_REWARD_ADDRESS";
 let TASK_TYPE_REINVEST                      = "TASK_TYPE_REINVEST";
 let TASK_TYPE_VOTE                          = "TASK_TYPE_VOTE";
+let TRANSFER_SIMPLE                         = "TRANSFER_SIMPLE";
+let TRANSFER_IBC_SIMPLE                     = "TRANSFER_IBC_SIMPLE";
+let TRANSFER_WASM                           = "TRANSFER_WASM";
+let TRANSFER_IBC_WASM                       = "TRANSFER_IBC_WASM";
 
 let TASK_TYPE_KAVA_CDP_CREATE               = "TASK_TYPE_KAVA_CDP_CREATE";
 let TASK_TYPE_KAVA_CDP_DEPOSIT              = "TASK_TYPE_KAVA_CDP_DEPOSIT";
@@ -187,10 +192,6 @@ let TASK_TYPE_DESMOS_LINK_CHAIN_ACCOUNT     = "TASK_TYPE_DESMOS_LINK_CHAIN_ACCOU
 let TASK_TYPE_NFT_ISSUE_DENOM               = "TASK_TYPE_NFT_ISSUE_DENOM";
 let TASK_TYPE_NFT_ISSUE                     = "TASK_TYPE_NFT_ISSUE";
 let TASK_TYPE_NFT_SEND                      = "TASK_TYPE_NFT_SEND";
-
-
-let TASK_TYPE_IBC_TRANSFER                  = "TASK_TYPE_IBC_TRANSFER";
-let TASK_TYPE_IBC_CW20_TRANSFER             = "TASK_TYPE_IBC_CW20_TRANSFER";
 
 
 let TASK_TYPE_AUTHZ_SEND                    = "TASK_TYPE_AUTHZ_SEND";
@@ -263,7 +264,6 @@ let TOKEN_HTLC_KAVA_TEST_BTC                = "btcb"
 
 let SWAP_MEMO_CREATE                        = "Create Atomic Swap via Cosmostation iOS Wallet"
 let SWAP_MEMO_CLAIM                         = "Claim Atomic Swap via Cosmostation iOS Wallet"
-let IBC_TRANSFER_MEMO                       = "IBC Transfer via Cosmostation iOS Wallet"
 
 public enum ChainType: String {
     case COSMOS_MAIN
@@ -434,6 +434,7 @@ let SELECT_POPUP_COSMOSTATION_GET_ACCOUNT = 16
 let SELECT_POPUP_KEPLR_GET_ACCOUNT = 17
 let SELECT_POPUP_FEE_DENOM = 18
 let SELECT_POPUP_COIN_LIST = 19
+let SELECT_POPUP_CONTRACT_TOKEN_EDIT = 20
 
 
 let DAY_SEC     = NSDecimalNumber.init(string: "86400")
@@ -489,6 +490,7 @@ let ICON_2002                   = "ICON_2002";
 
 
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/"
+let AssetBase = ResourceBase + "assets/images/"
 let MonikerUrl =  ResourceBase + "moniker/"
 let RelayerUrl = ResourceBase + "relayer/"
 let ChainImgStarnameUrl  = ResourceBase + "chains/logo/"

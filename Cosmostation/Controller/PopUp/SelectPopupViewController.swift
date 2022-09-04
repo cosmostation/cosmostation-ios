@@ -24,7 +24,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     var toCoinList = Array<String>()
     var toCoins = Array<Coin>()
     var toAccountList = Array<Account>()
-    var ibcToChain = Array<IbcPath>()
+    var ibcToChain = Array<ChainConfig>()
     var ibcRelayer = Array<Path>()
     var starnameDomains = Array<String>()
     var feeData = Array<FeeData>()
@@ -59,7 +59,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             self.toAccountList = BaseData.instance.selectAllAccountsByHtlcClaim(toChain)
             
-        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_IBC_RECIPIENT) {
+        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT) {
             self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             self.toAccountList = BaseData.instance.selectAllAccountsByChain(toChain!)
             
@@ -74,6 +74,9 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_IBC_RELAYER) {
             self.popupTitle.text = NSLocalizedString("str_select_ibc_relayer", comment: "")
+            
+        } else if(type == SELECT_POPUP_IBC_RECIPIENT) {
+            self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             
         } else if (type == SELECT_POPUP_STARNAME_DOMAIN) {
             self.popupTitle.text = NSLocalizedString("str_select_starname_domain", comment: "")
@@ -271,10 +274,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             
         } else if (type == SELECT_POPUP_IBC_CHAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
-            let toChain = WUtils.getChainTypeByChainId(ibcToChain[indexPath.row].chain_id)
-            let toChainConfig = ChainFactory.getChainConfig(toChain)
-            cell!.chainImg.image = toChainConfig?.chainImg
-            cell!.chainTitle.text = toChainConfig?.chainTitle2
+            let toChainConfig = ibcToChain[indexPath.row]
+            cell!.chainImg.image = toChainConfig.chainImg
+            cell!.chainTitle.text = toChainConfig.chainTitle2
+            cell!.chainTitle.textColor = toChainConfig.chainColor
             return cell!
             
         } else if (type == SELECT_POPUP_IBC_RELAYER) {

@@ -16,9 +16,10 @@ import SwiftProtobuf
 
 class MainTabViewController: UITabBarController, UITabBarControllerDelegate, AccountSwitchDelegate {
     
-    var mAccount: Account!
-    var mChainType: ChainType!
     var mAccounts = Array<Account>()
+    var mAccount: Account!
+    var mChainConfig: ChainConfig!
+    var mChainType: ChainType!
     var mBalances = Array<Balance>()
     var mFetchCnt = 0
         
@@ -160,6 +161,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             return
         }
         mChainType = ChainFactory.getChainType(mAccount.account_base_chain)
+        mChainConfig = ChainFactory.getChainConfig(mChainType)
     }
     
     func onFetchAccountData() -> Bool {
@@ -170,8 +172,12 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         BaseData.instance.mParam = nil
         BaseData.instance.mIbcPaths.removeAll()
         BaseData.instance.mIbcTokens.removeAll()
-        BaseData.instance.mCw20Tokens.removeAll()
+//        BaseData.instance.mCw20Tokens.removeAll()
         BaseData.instance.mBridgeTokens.removeAll()
+        
+        BaseData.instance.mMintscanAssets.removeAll()
+        BaseData.instance.mMintscanTokens.removeAll()
+        BaseData.instance.mMyTokens.removeAll()
         
         
         BaseData.instance.mNodeInfo = nil
@@ -212,10 +218,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         
         BaseData.instance.mOsmoPools_gRPC.removeAll()
         
-        
-        
-        
-        if (mChainType == ChainType.BINANCE_MAIN) {
+        if (mChainType == .BINANCE_MAIN) {
             self.mFetchCnt = 6
             onFetchNodeInfo()
             onFetchAccountInfo(mAccount)
@@ -224,7 +227,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             onFetchBnbTokenTickers()
             onFetchBnbMiniTokenTickers()
             
-        } else if (mChainType == ChainType.OKEX_MAIN) {
+        } else if (mChainType == .OKEX_MAIN) {
             self.mFetchCnt = 8
             onFetchNodeInfo()
             onFetchAllValidatorsInfo();
@@ -240,7 +243,19 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
         }
                 
-        else if (self.mChainType == ChainType.COSMOS_MAIN) {
+        else if (self.mChainType == .COSMOS_MAIN || self.mChainType == .IRIS_MAIN || self.mChainType == .AKASH_MAIN ||
+                   self.mChainType == .PERSIS_MAIN || self.mChainType == .CRYPTO_MAIN || self.mChainType == .SENTINEL_MAIN ||
+                   self.mChainType == .MEDI_MAIN || self.mChainType == .CERTIK_MAIN  || self.mChainType == .EMONEY_MAIN ||
+                   self.mChainType == .FETCH_MAIN || self.mChainType == .RIZON_MAIN || self.mChainType == .BAND_MAIN ||
+                   self.mChainType == .JUNO_MAIN || self.mChainType == .REGEN_MAIN || self.mChainType == .BITCANA_MAIN ||
+                   self.mChainType == .ALTHEA_MAIN || self.mChainType == .GRAVITY_BRIDGE_MAIN || self.mChainType == .KI_MAIN ||
+                   self.mChainType == .COMDEX_MAIN || self.mChainType == .SECRET_MAIN || self.mChainType == .INJECTIVE_MAIN ||
+                   self.mChainType == .BITSONG_MAIN || self.mChainType == .DESMOS_MAIN || self.mChainType == .LUM_MAIN ||
+                   self.mChainType == .CHIHUAHUA_MAIN || self.mChainType == .AXELAR_MAIN || self.mChainType == .KONSTELLATION_MAIN ||
+                   self.mChainType == .UMEE_MAIN || self.mChainType == .EVMOS_MAIN || self.mChainType == .PROVENANCE_MAIN ||
+                   self.mChainType == .CUDOS_MAIN || self.mChainType == .SIF_MAIN || self.mChainType == .CERBERUS_MAIN ||
+                   self.mChainType == .OMNIFLIX_MAIN || self.mChainType == .CRESCENT_MAIN || self.mChainType == .MANTLE_MAIN ||
+                   self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -253,32 +268,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-            
-        } else if (self.mChainType == ChainType.IRIS_MAIN || self.mChainType == ChainType.AKASH_MAIN || self.mChainType == ChainType.PERSIS_MAIN ||
-                   self.mChainType == ChainType.CRYPTO_MAIN || self.mChainType == ChainType.SENTINEL_MAIN || self.mChainType == ChainType.MEDI_MAIN ||
-                   self.mChainType == ChainType.CERTIK_MAIN  || self.mChainType == ChainType.EMONEY_MAIN || self.mChainType == ChainType.FETCH_MAIN ||
-                   self.mChainType == ChainType.RIZON_MAIN || self.mChainType == ChainType.BAND_MAIN || self.mChainType == ChainType.JUNO_MAIN ||
-                   self.mChainType == ChainType.REGEN_MAIN || self.mChainType == ChainType.BITCANA_MAIN || self.mChainType == ChainType.ALTHEA_MAIN ||
-                   self.mChainType == ChainType.GRAVITY_BRIDGE_MAIN || self.mChainType == ChainType.KI_MAIN || self.mChainType == ChainType.COMDEX_MAIN ||
-                   self.mChainType == ChainType.SECRET_MAIN || self.mChainType == ChainType.INJECTIVE_MAIN || self.mChainType == ChainType.BITSONG_MAIN ||
-                   self.mChainType == ChainType.DESMOS_MAIN || self.mChainType == ChainType.LUM_MAIN || self.mChainType == ChainType.CHIHUAHUA_MAIN ||
-                   self.mChainType == ChainType.AXELAR_MAIN || self.mChainType == ChainType.KONSTELLATION_MAIN || self.mChainType == ChainType.UMEE_MAIN ||
-                   self.mChainType == ChainType.EVMOS_MAIN || self.mChainType == ChainType.PROVENANCE_MAIN || self.mChainType == ChainType.CUDOS_MAIN ||
-                   self.mChainType == ChainType.SIF_MAIN || self.mChainType == ChainType.CERBERUS_MAIN || self.mChainType == ChainType.OMNIFLIX_MAIN ||
-                   self.mChainType == ChainType.CRESCENT_MAIN || self.mChainType == ChainType.MANTLE_MAIN || self.mChainType == ChainType.NYX_MAIN || self.mChainType == ChainType.PASSAGE_MAIN) {
-            self.mFetchCnt = 9
-            self.onFetchgRPCNodeInfo()
-            self.onFetchgRPCAuth(self.mAccount.account_address)
-            self.onFetchgRPCBondedValidators(0)
-            self.onFetchgRPCUnbondedValidators(0)
-            self.onFetchgRPCUnbondingValidators(0)
-            
-            self.onFetchgRPCBalance(self.mAccount.account_address, 0)
-            self.onFetchgRPCDelegations(self.mAccount.account_address, 0)
-            self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
-            self.onFetchgRPCRewards(self.mAccount.account_address, 0)
-            
-        } else if (self.mChainType == ChainType.IOV_MAIN) {
+        } else if (self.mChainType == .IOV_MAIN) {
             self.mFetchCnt = 11
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -294,7 +284,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCStarNameFees()
             self.onFetchgRPCStarNameConfig()
             
-        } else if (self.mChainType == ChainType.OSMOSIS_MAIN) {
+        } else if (self.mChainType == .OSMOSIS_MAIN) {
             self.mFetchCnt = 10
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -309,7 +299,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             
             self.onFetchgRPCOsmoPools()
             
-        } else if (self.mChainType == ChainType.STARGAZE_MAIN) {
+        } else if (self.mChainType == .STARGAZE_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -322,7 +312,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (mChainType == ChainType.KAVA_MAIN) {
+        } else if (mChainType == .KAVA_MAIN) {
             self.mFetchCnt = 12
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -351,7 +341,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.onFetchgRPCUndelegations(self.mAccount.account_address, 0)
             self.onFetchgRPCRewards(self.mAccount.account_address, 0)
             
-        } else if (self.mChainType == ChainType.COSMOS_TEST || self.mChainType == ChainType.IRIS_TEST || self.mChainType == ChainType.ALTHEA_TEST || self.mChainType == ChainType.CRESCENT_TEST || self.mChainType == ChainType.STATION_TEST) {
+        } else if (self.mChainType == .COSMOS_TEST || self.mChainType == .IRIS_TEST || self.mChainType == .ALTHEA_TEST || self.mChainType == .CRESCENT_TEST || self.mChainType == .STATION_TEST) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)
@@ -427,8 +417,8 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             print("BaseData.instance.mUnbondValidators_gRPC ", BaseData.instance.mUnbondValidators_gRPC.count)
             print("BaseData.instance.mMyValidators_gRPC ", BaseData.instance.mMyValidators_gRPC.count)
             print("BaseData.instance.mMyBalances_gRPC ", BaseData.instance.mMyBalances_gRPC.count)
-            print("BaseData.instance.mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
-            print("BaseData.instance.getCw20s_gRPC ", BaseData.instance.getCw20s_gRPC().count)
+//            print("BaseData.instance.mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
+//            print("BaseData.instance.getCw20s_gRPC ", BaseData.instance.getCw20s_gRPC().count)
             
             if (BaseData.instance.mNodeInfo_gRPC == nil) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))
@@ -441,7 +431,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.checkEventIcon()
             return
             
-        } else if (mChainType == ChainType.BINANCE_MAIN) {
+        } else if (mChainType == .BINANCE_MAIN) {
             mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
             mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
             BaseData.instance.mBalances = mBalances
@@ -451,7 +441,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             self.checkEventIcon()
             return
             
-        } else if (mChainType == ChainType.OKEX_MAIN) {
+        } else if (mChainType == .OKEX_MAIN) {
             mAccount    = BaseData.instance.selectAccountById(id: mAccount!.account_id)
             mBalances   = BaseData.instance.selectBalanceById(accountId: mAccount!.account_id)
             
@@ -541,7 +531,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if (self.mChainType == ChainType.BINANCE_MAIN) {
+                if (self.mChainType == .BINANCE_MAIN) {
                     guard let info = res as? [String : Any] else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.onFetchFinished()
@@ -551,7 +541,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     _ = BaseData.instance.updateAccount(WUtils.getAccountWithBnbAccountInfo(account, bnbAccountInfo))
                     BaseData.instance.updateBalances(account.account_id, WUtils.getBalancesWithBnbAccountInfo(account, bnbAccountInfo))
                     
-                } else if (self.mChainType == ChainType.OKEX_MAIN) {
+                } else if (self.mChainType == .OKEX_MAIN) {
                     guard let info = res as? NSDictionary else {
                         _ = BaseData.instance.deleteBalance(account: account)
                         self.onFetchFinished()
@@ -571,6 +561,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     }
     
     func onFetchBnbTokens() {
+        print("onFetchBnbTokens ", BaseNetWork.bnbTokenUrl(mChainType))
         let request = Alamofire.request(BaseNetWork.bnbTokenUrl(mChainType), method: .get, parameters: ["limit":"3000"], encoding: URLEncoding.default, headers: [:]);
         request.responseJSON { (response) in
             switch response.result {
@@ -750,12 +741,11 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let req = Cosmos_Base_Tendermint_V1beta1_GetNodeInfoRequest()
                 if let response = try? Cosmos_Base_Tendermint_V1beta1_ServiceClient(channel: channel).getNodeInfo(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     BaseData.instance.mNodeInfo_gRPC = response.nodeInfo
-                    self.mFetchCnt = self.mFetchCnt + 5
+                    self.mFetchCnt = self.mFetchCnt + 4
                     self.onFetchParams(BaseData.instance.getChainId(self.mChainType))
-                    self.onFetchIbcPaths(BaseData.instance.getChainId(self.mChainType))
-                    self.onFetchIbcTokens(BaseData.instance.getChainId(self.mChainType))
-                    self.onFetchBridgeAssets()
-                    self.onFetchCw20Tokens()
+                    self.onFetchMintscanAsset()
+                    self.onFetchMintscanCw20(self.mChainConfig.chainAPIName)
+                    self.onFetchMintscanErc20(self.mChainConfig.chainAPIName)
                 }
                 try channel.close().wait()
                 
@@ -772,7 +762,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Auth_V1beta1_QueryAccountRequest.with { $0.address = address }
                 if let response = try? Cosmos_Auth_V1beta1_QueryClient(channel: channel).account(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Auth response ", response)
+//                    print("Auth response ", response)
                     BaseData.instance.mAccount_gRPC = response.account
                 }
                 try channel.close().wait()
@@ -861,15 +851,14 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let page = Cosmos_Base_Query_V1beta1_PageRequest.with { $0.limit = 2000 }
                 let req = Cosmos_Bank_V1beta1_QueryAllBalancesRequest.with { $0.address = address; $0.pagination = page }
                 if let response = try? Cosmos_Bank_V1beta1_QueryClient(channel: channel).allBalances(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Balance response ", response)
+//                    print("Balance response ", response)
                     response.balances.forEach { balance in
                         if (NSDecimalNumber.init(string: balance.amount) != NSDecimalNumber.zero) {
                             BaseData.instance.mMyBalances_gRPC.append(Coin.init(balance.denom, balance.amount))
                         }
                     }
-                    let chainConfig = ChainFactory.getChainConfig(self.mChainType)
-                    if (BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainConfig)).compare(NSDecimalNumber.zero).rawValue <= 0) {
-                        BaseData.instance.mMyBalances_gRPC.append(Coin.init(WUtils.getMainDenom(chainConfig), "0"))
+                    if (BaseData.instance.getAvailableAmount_gRPC(self.mChainConfig.stakeDenom).compare(NSDecimalNumber.zero).rawValue <= 0) {
+                        BaseData.instance.mMyBalances_gRPC.append(Coin.init(self.mChainConfig.stakeDenom, "0"))
                     }
                 }
                 try channel.close().wait()
@@ -887,7 +876,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Delegations response ", response)
+//                    print("Delegations response ", response)
                     response.delegationResponses.forEach { delegationResponse in
                         BaseData.instance.mMyDelegations_gRPC.append(delegationResponse)
                     }
@@ -907,7 +896,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Staking_V1beta1_QueryDelegatorUnbondingDelegationsRequest.with { $0.delegatorAddr = address }
                 if let response = try? Cosmos_Staking_V1beta1_QueryClient(channel: channel).delegatorUnbondingDelegations(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Undelegations response ", response)
+//                    print("Undelegations response ", response)
                     response.unbondingResponses.forEach { unbondingResponse in
                         BaseData.instance.mMyUnbondings_gRPC.append(unbondingResponse)
                     }
@@ -927,7 +916,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
                 let req = Cosmos_Distribution_V1beta1_QueryDelegationTotalRewardsRequest.with { $0.delegatorAddress = address }
                 if let response = try? Cosmos_Distribution_V1beta1_QueryClient(channel: channel).delegationTotalRewards(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
-                    print("Rewards response ", response)
+//                    print("Rewards response ", response)
                     response.rewards.forEach { reward in
                         BaseData.instance.mMyReward_gRPC.append(reward)
                     }
@@ -1116,90 +1105,54 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    func onFetchIbcPaths(_ chainId: String) {
-        print("onFetchIbcPaths ", chainId, "   ", BaseNetWork.getIbcPaths(self.mChainType, chainId))
-        let request = Alamofire.request(BaseNetWork.getIbcPaths(self.mChainType, chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+    func onFetchMintscanAsset() {
+        let request = Alamofire.request(BaseNetWork.mintscanAssets_v2(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-//                print("onFetchIbcPaths res ", res)
-                if let resData = res as? NSDictionary, let senderables = resData.object(forKey: "sendable") as? Array<NSDictionary> {
-                    senderables.forEach { senderable in
-                        BaseData.instance.mIbcPaths.append(IbcPath.init(senderable))
+                if let resData = res as? NSDictionary, let mintscanAssets = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    mintscanAssets.forEach { mintscanAsset in
+                        let asset = MintscanAsset.init(mintscanAsset)
+                        BaseData.instance.mMintscanAssets.append(asset)
                     }
                 }
-//                print("mIbcPaths ", BaseData.instance.mIbcPaths.count)
             
             case .failure(let error):
-                print("onFetchIbcPaths ", error)
+                print("onFetchMintscanAsset ", error)
             }
             self.onFetchFinished()
         }
     }
     
-    func onFetchIbcTokens(_ chainId: String) {
-        print("onFetchIbcTokens ", chainId, "   ", BaseNetWork.getIbcTokens(self.mChainType, chainId))
-        let request = Alamofire.request(BaseNetWork.getIbcTokens(self.mChainType, chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+    func onFetchMintscanCw20(_ chainId: String) {
+        if (mChainConfig.wasmSupport == false) {
+            self.onFetchFinished()
+            return
+        }
+        let request = Alamofire.request(BaseNetWork.mintscanCw20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
-                if let resData = res as? NSDictionary, let ibcTokens = resData.object(forKey: "ibc_tokens") as? Array<NSDictionary> {
-                    ibcTokens.forEach { ibcToken in
-                        BaseData.instance.mIbcTokens.append(IbcToken.init(ibcToken))
+                if let resData = res as? NSDictionary, let cw20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    cw20Tokens.forEach { cw20Token in
+                        let token = MintscanToken.init(cw20Token)
+                        BaseData.instance.mMintscanTokens.append(token)
                     }
-                }
-//                print("ibcTokens ", BaseData.instance.mIbcTokens.count)
-            
-            case .failure(let error):
-                print("onFetchIbcTokens ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchBridgeAssets() {
-        let request = Alamofire.request(BaseNetWork.mintscanAssets(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if let resData = res as? NSDictionary, let bridgeAssets = resData.object(forKey: "assets") as? Array<NSDictionary> {
-                    bridgeAssets.forEach { bridgeAsset in
-                        BaseData.instance.mBridgeTokens.append(BridgeToken.init(bridgeAsset))
-                    }
-                }
-                print("onFetchBridgeAssets ", BaseData.instance.mBridgeTokens.count)
-                
-            case .failure(let error):
-                print("onFetchBridgeAssets ", error)
-            }
-            self.onFetchFinished()
-        }
-    }
-    
-    func onFetchCw20Tokens() {
-//        print("onFetchCw20Tokens  ", BaseNetWork.mintscanCw20())
-        let request = Alamofire.request(BaseNetWork.mintscanCw20(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
-        request.responseJSON { (response) in
-            switch response.result {
-            case .success(let res):
-                if let resData = res as? NSDictionary, let ibcCw20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
-                    ibcCw20Tokens.forEach { ibcCw20Token in
-                        let Cw20Token = Cw20Token.init(ibcCw20Token)
-                        BaseData.instance.mCw20Tokens.append(Cw20Token)
+                    BaseData.instance.setMyTokens(self.mAccount.account_address)
+                    BaseData.instance.mMyTokens.forEach { msToken in
                         self.mFetchCnt = self.mFetchCnt + 1
-                        self.onFetchgRPCCw20Balance(Cw20Token.contract_address!)
+                        self.onFetchCw20Balance(msToken.contract_address)
                     }
                 }
-                print("mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
-            
+
             case .failure(let error):
-                print("onFetchIbcTokens ", error)
+                print("onFetchMintscanCw20 ", error)
             }
             self.onFetchFinished()
         }
     }
     
-    func onFetchgRPCCw20Balance(_ contAddress: String) {
+    func onFetchCw20Balance(_ contAddress: String) {
         DispatchQueue.global().async {
             do {
                 let channel = BaseNetWork.getConnection(self.mChainType!, MultiThreadedEventLoopGroup(numberOfThreads: 1))!
@@ -1209,14 +1162,37 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                 }
                 if let response = try? Cosmwasm_Wasm_V1_QueryClient(channel: channel).smartContractState(req, callOptions: BaseNetWork.getCallOptions()).response.wait() {
                     let cw20balance = try? JSONDecoder().decode(Cw20BalaceRes.self, from: response.data)
-                    BaseData.instance.setCw20Balance(contAddress, cw20balance?.balance ?? "0")
+                    BaseData.instance.setMyTokenBalance(contAddress, cw20balance?.balance ?? "0")
                 }
                 try channel.close().wait()
-                
+
             } catch {
                 print("onFetchgRPCCw20Balance failed: \(error)")
             }
             DispatchQueue.main.async(execute: { self.onFetchFinished() });
+        }
+    }
+    
+    func onFetchMintscanErc20(_ chainId: String) {
+        if (mChainConfig.evmSupport == false) {
+            self.onFetchFinished()
+            return
+        }
+        let request = Alamofire.request(BaseNetWork.mintscanErc20Tokens_v2(chainId), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        request.responseJSON { (response) in
+            switch response.result {
+            case .success(let res):
+                if let resData = res as? NSDictionary, let erc20Tokens = resData.object(forKey: "assets") as? Array<NSDictionary> {
+                    erc20Tokens.forEach { erc20Token in
+                        let token = MintscanToken.init(erc20Token)
+                        BaseData.instance.mMintscanTokens.append(token)
+                    }
+                }
+
+            case .failure(let error):
+                print("onFetchMintscanErc20 ", error)
+            }
+            self.onFetchFinished()
         }
     }
     
