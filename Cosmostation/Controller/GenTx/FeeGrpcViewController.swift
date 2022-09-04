@@ -255,7 +255,10 @@ class FeeGrpcViewController: BaseViewController, SBCardPopupDelegate {
                                             mFee, pageHolderVC.mMemo!, privateKey, publicKey, chainType!)
                 
             } else if (pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
-                //not yet!!
+                return Signer.simulWasmIbcSend(auth,
+                                               pageHolderVC.mRecipinetAddress!, pageHolderVC.mMintscanTokens!.contract_address,
+                                               pageHolderVC.mToSendAmount, pageHolderVC.mMintscanPath!,
+                                               mFee, pageHolderVC.mMemo!, privateKey, publicKey, chainType!)
                 
             }
             

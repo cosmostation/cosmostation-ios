@@ -65,6 +65,7 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         #if RELEASE
         SKStoreReviewController.requestReview()
         #endif
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

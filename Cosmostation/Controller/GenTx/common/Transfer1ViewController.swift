@@ -193,6 +193,9 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
                 
             } else if (mintscanTokens != nil) {
                 pageHolderVC.mTransferType = TRANSFER_IBC_WASM
+                pageHolderVC.mMintscanPath = WUtils.getMintscanPath(chainConfig!, recipientChainConfig!, toSendDenom!)
+//                print("channel ", pageHolderVC.mMintscanPath?.channel)
+//                print("port ", pageHolderVC.mMintscanPath?.port)
                 
             }
         }
