@@ -424,7 +424,11 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
                                            self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
                 
             } else if (self.pageHolderVC.mTransferType == TRANSFER_IBC_WASM) {
-                //not yet!!
+                reqTx = Signer.genWasmIbcSend(auth!,
+                                              self.pageHolderVC.mRecipinetAddress!, self.pageHolderVC.mMintscanTokens!.contract_address,
+                                              self.pageHolderVC.mToSendAmount, self.pageHolderVC.mMintscanPath!,
+                                              self.pageHolderVC.mFee!, self.pageHolderVC.mMemo!,
+                                              self.pageHolderVC.privateKey!, self.pageHolderVC.publicKey!, self.chainType!)
             }
             
             do {

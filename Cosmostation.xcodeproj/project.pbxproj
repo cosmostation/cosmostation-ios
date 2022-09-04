@@ -2707,6 +2707,8 @@
 		E151B658224873640026B8C0 /* SettingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E151B657224873640026B8C0 /* SettingTableViewController.swift */; };
 		E1525DCB286FED4D001B84D2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E1525DCA286FED4D001B84D2 /* GoogleService-Info.plist */; };
 		E15DA48122F1738C000557FC /* PromotionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E15DA48322F1738C000557FC /* PromotionCell.xib */; };
+		E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
+		E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */; };
 		E16B70DD229F9A78001D6B9C /* RedelegateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E16B70DF229F9A78001D6B9C /* RedelegateCell.xib */; };
 		E16D9B1522489B030019B7BB /* IntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E16D9B1422489B030019B7BB /* IntroViewController.swift */; };
 		E16D9B192248C4880019B7BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E16D9B182248C4880019B7BB /* Assets.xcassets */; };
@@ -4160,6 +4162,7 @@
 		E1525DCA286FED4D001B84D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E15DA48222F1738C000557FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/PromotionCell.xib; sourceTree = "<group>"; };
 		E15DA48522F1738F000557FC /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/PromotionCell.strings; sourceTree = "<group>"; };
+		E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cw20IbcTransferReq.swift; sourceTree = "<group>"; };
 		E16B70DC229E619A001D6B9C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/GenTx.strings; sourceTree = "<group>"; };
 		E16B70DE229F9A78001D6B9C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RedelegateCell.xib; sourceTree = "<group>"; };
 		E16B70E3229F9FAD001D6B9C /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/RedelegateCell.strings; sourceTree = "<group>"; };
@@ -5963,6 +5966,7 @@
 				04E2A32427A57D270045ED21 /* Cw20BalanceReq.swift */,
 				04E2A32627A581720045ED21 /* Cw20BalanceRes.swift */,
 				0444442827ABDC5D00EB093E /* Cw20TransferReq.swift */,
+				E162430428C45D3C00C647C5 /* Cw20IbcTransferReq.swift */,
 				E1D4EA572871584B005C1ECF /* FeeInfo.swift */,
 			);
 			path = Dao;
@@ -7548,6 +7552,7 @@
 				18FFB43E281AF533004E65BB /* Swap3ViewController.swift in Sources */,
 				18FFB440281AF533004E65BB /* TxHardLiquidateCell.swift in Sources */,
 				0451FC8C282A3AEB00214FDA /* ChainRizon.swift in Sources */,
+				E162430628C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
 				18FFB441281AF533004E65BB /* TxSifSwapCell.swift in Sources */,
 				1817CBD8283E2CE600523713 /* ethermint_feemarket_v1_feemarket.pb.swift in Sources */,
 				18FFB442281AF533004E65BB /* TxOkStakeCell.swift in Sources */,
@@ -8962,6 +8967,7 @@
 				28CE973625872B7C006DEBEE /* Signer.swift in Sources */,
 				040FA9F8275F55C300229F6F /* desmos_profiles_v1beta1_query_params.pb.swift in Sources */,
 				28E0458E269B35750022A366 /* FarmingViewController.swift in Sources */,
+				E162430528C45D3C00C647C5 /* Cw20IbcTransferReq.swift in Sources */,
 				040FA8D9275F55C200229F6F /* starname_cosmwasm_wasm_v1_query.pb.swift in Sources */,
 				04615CC82750C7AD00A693B0 /* WalletDesmosCell.swift in Sources */,
 				040FA8EF275F55C200229F6F /* ibc_core_channel_v1_channel.pb.swift in Sources */,

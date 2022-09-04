@@ -16,4 +16,8 @@ public class MintscanPath {
         self.channel = channel
         self.port = port
     }
+    
+    func getIBCContract() -> String {
+        return self.port!.replacingOccurrences(of: "wasm.", with: "")
+    }
 }

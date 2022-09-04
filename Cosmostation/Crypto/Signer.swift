@@ -10,6 +10,8 @@ import Foundation
 import HDWalletKit
 import secp256k1
 import SwiftProtobuf
+import SwiftyJSON
+
 class Signer {
     
     //Tx for Common Denom Transfer
@@ -1758,6 +1760,39 @@ class Signer {
             $0.sender = WUtils.onParseAuthGrpc(auth).0!
             $0.contract = contractAddress
             $0.msg  = Cw20TransferReq.init(toAddress, amount[0].amount).getEncode()
+        }
+        let anyMsg = Google_Protobuf2_Any.with {
+            $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
+            $0.value = try! exeContract.serializedData()
+        }
+        return [anyMsg]
+    }
+    
+    //Tx for CW20 IBC Transfer
+    static func genWasmIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                               _ toAddress: String, _ cw20ContractAddress: String, _ amount: Array<Coin>, _ path: MintscanPath,
+                               _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_BroadcastTxRequest {
+        let jsonMsg : JSON = ["channel" : path.channel!, "remote_address" : toAddress, "timeout" : 900]
+        let jsonMsgBase64 = try! jsonMsg.rawData(options: .sortedKeys).base64EncodedString()
+        let innerMsg = Cw20IbcTransferReq.init(path.getIBCContract(), amount[0].amount, jsonMsgBase64).getEncode()
+        let cw20IbcSend = genCw20IbcSend(auth, cw20ContractAddress, innerMsg)
+        return getGrpcSignedTx(auth, chainType, cw20IbcSend, privateKey, publicKey, fee, memo)
+    }
+    static func simulWasmIbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse,
+                                 _ toAddress: String, _ cw20ContractAddress: String, _ amount: Array<Coin>, _ path: MintscanPath,
+                                 _ fee: Fee, _ memo: String, _ privateKey: Data, _ publicKey: Data, _ chainType: ChainType) -> Cosmos_Tx_V1beta1_SimulateRequest {
+        let jsonMsg : JSON = ["channel" : path.channel!, "remote_address" : toAddress, "timeout" : 900]
+        let jsonMsgBase64 = try! jsonMsg.rawData(options: .sortedKeys).base64EncodedString()
+        let innerMsg = Cw20IbcTransferReq.init(path.getIBCContract(), amount[0].amount, jsonMsgBase64).getEncode()
+        let cw20IbcSend = genCw20IbcSend(auth, cw20ContractAddress, innerMsg)
+        return getGrpcSimulateTx(auth, chainType, cw20IbcSend, privateKey, publicKey, fee, memo)
+    }
+    
+    static func genCw20IbcSend(_ auth: Cosmos_Auth_V1beta1_QueryAccountResponse, _ cw20ContractAddress: String, _ innerMsg: Data) -> [Google_Protobuf2_Any] {
+        let exeContract = Cosmwasm_Wasm_V1_MsgExecuteContract.with {
+            $0.sender = WUtils.onParseAuthGrpc(auth).0!
+            $0.contract = cw20ContractAddress
+            $0.msg  = innerMsg
         }
         let anyMsg = Google_Protobuf2_Any.with {
             $0.typeURL = "/cosmwasm.wasm.v1.MsgExecuteContract"
