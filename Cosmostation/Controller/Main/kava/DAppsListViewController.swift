@@ -239,17 +239,17 @@ extension WUtils {
     }
     
     static func getKavaMarketId(_ denom: String) -> String {
-        if denom.starts(with: "ibc/"),
-           let ibcToken = BaseData.instance.getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")),
-           let displayDenom = ibcToken.display_denom {
-            return "\(displayDenom):usd"
+        if (denom.starts(with: "ibc/")) {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
+                return "\(msAsset.base_denom):usd"
+            }
+        
         } else if denom == KAVA_MAIN_DENOM {
             return "kava:usd"
         } else if denom.contains("btc") {
             return "btc:usd"
-        } else {
-            return "\(denom):usd"
         }
+        return "\(denom):usd"
     }
     
     static func getKavaOraclePriceWithDenom(_ denom: String) -> NSDecimalNumber {

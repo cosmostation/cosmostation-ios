@@ -170,10 +170,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
         
         BaseData.instance.mParam = nil
-        BaseData.instance.mIbcPaths.removeAll()
-        BaseData.instance.mIbcTokens.removeAll()
-//        BaseData.instance.mCw20Tokens.removeAll()
-        BaseData.instance.mBridgeTokens.removeAll()
         
         BaseData.instance.mMintscanAssets.removeAll()
         BaseData.instance.mMintscanTokens.removeAll()
@@ -417,8 +413,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             print("BaseData.instance.mUnbondValidators_gRPC ", BaseData.instance.mUnbondValidators_gRPC.count)
             print("BaseData.instance.mMyValidators_gRPC ", BaseData.instance.mMyValidators_gRPC.count)
             print("BaseData.instance.mMyBalances_gRPC ", BaseData.instance.mMyBalances_gRPC.count)
-//            print("BaseData.instance.mCw20Tokens ", BaseData.instance.mCw20Tokens.count)
-//            print("BaseData.instance.getCw20s_gRPC ", BaseData.instance.getCw20s_gRPC().count)
             
             if (BaseData.instance.mNodeInfo_gRPC == nil) {
                 self.onShowToast(NSLocalizedString("error_network", comment: ""))

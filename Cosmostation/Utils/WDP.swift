@@ -58,90 +58,34 @@ public class WDP {
             imgView?.image = chainConfig!.stakeDenomImg
             return
         }
-        if (chainConfig!.isGrpc && denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
-               let url = URL(string: ibcToken.moniker ?? "") {
-                imgView?.af_setImage(withURL: url)
-                return
-            }
-        }
-        
-        if (chainConfig!.chainType == .KAVA_MAIN) {
-            if let url = URL(string: KAVA_COIN_IMG_URL + denom! + ".png") {
-                imgView?.af_setImage(withURL: url)
-                return
-            }
-            
-        } else if (chainConfig!.chainType == .OSMOSIS_MAIN) {
-            if (denom == OSMOSIS_ION_DENOM) {
-                imgView?.image = UIImage(named: "tokenIon")
-                return
-            } else if (denom!.starts(with: "gamm/pool/")) {
-                imgView?.image =  UIImage(named: "tokenOsmosisPool")
-                return
-            }
-            
-        } else if (chainConfig!.chainType == .SIF_MAIN) {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-                if let url = bridgeTokenInfo.getImgUrl() {
-                    imgView?.af_setImage(withURL: url)
+        if (chainConfig!.isGrpc) {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+                if let assetImgeUrl = msAsset.assetImg() {
+                    imgView?.af_setImage(withURL: assetImgeUrl)
+                    return
+                }
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+                if let assetImgeUrl = msToken.assetImg() {
+                    imgView?.af_setImage(withURL: assetImgeUrl)
                     return
                 }
             }
             
-        } else if (chainConfig!.chainType == .CRESCENT_MAIN) {
-            if (denom == CRESCENT_BCRE_DENOM) {
-                imgView?.image = UIImage(named: "tokenBcre")
-                return
-            }
-            
-        } else if (chainConfig!.chainType == .EMONEY_MAIN) {
-            if let url = URL(string: EMONEY_COIN_IMG_URL + denom! + ".png") {
-                imgView?.af_setImage(withURL: url)
-                return
-            }
-            
-        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-                if let url = bridgeTokenInfo.getImgUrl() {
-                    imgView?.af_setImage(withURL: url)
-                    return
+        } else {
+            if (chainConfig!.chainType == .BINANCE_MAIN) {
+                if let bnbTokenInfo = WUtils.getBnbToken(denom!) {
+                    if let url = URL(string: BinanceTokenImgUrl + bnbTokenInfo.original_symbol + ".png") {
+                        imgView?.af_setImage(withURL: url)
+                        return
+                    }
                 }
-            }
-            
-        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
-            if (denom!.starts(with: "share")) {
-                imgView?.image = UIImage(named: "tokenInjectivePool")
-                return
-                
-            } else if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-                if let url = bridgeTokenInfo.getImgUrl() {
-                    imgView?.af_setImage(withURL: url)
-                    return
-                }
-            }
-            
-        } else if (chainConfig!.chainType == .NYX_MAIN) {
-            if (denom == NYX_NYM_DENOM) {
-                imgView?.image = UIImage(named: "tokenNym")
-                return
-            }
-            
-        }
-        
-        else if (chainConfig!.chainType == .BINANCE_MAIN) {
-            if let bnbTokenInfo = WUtils.getBnbToken(denom!) {
-                if let url = URL(string: BinanceTokenImgUrl + bnbTokenInfo.original_symbol + ".png") {
-                    imgView?.af_setImage(withURL: url)
-                    return
-                }
-            }
-            
-        } else if (chainConfig!.chainType == .OKEX_MAIN) {
-            if let okTokenInfo = WUtils.getOkToken(denom!) {
-                if let url = URL(string: OKTokenImgUrl + okTokenInfo.original_symbol! + ".png") {
-                    imgView?.af_setImage(withURL: url)
-                    return
+
+            } else if (chainConfig!.chainType == .OKEX_MAIN) {
+                if let okTokenInfo = WUtils.getOkToken(denom!) {
+                    if let url = URL(string: OKTokenImgUrl + okTokenInfo.original_symbol! + ".png") {
+                        imgView?.af_setImage(withURL: url)
+                        return
+                    }
                 }
             }
         }

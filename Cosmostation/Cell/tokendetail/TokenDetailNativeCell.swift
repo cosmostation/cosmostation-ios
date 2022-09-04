@@ -58,52 +58,6 @@ class TokenDetailNativeCell: TokenDetailCell {
         }
     }
     
-    func onBindPoolToken(_ chainType: ChainType?, _ denom: String?) {
-        if (chainType! == ChainType.OSMOSIS_MAIN) {
-            divideDecimal = 18
-            displayDecimal = 18
-            
-            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-            availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
-            
-        } else if (chainType! == ChainType.COSMOS_MAIN) {
-            divideDecimal = 6
-            displayDecimal = 6
-
-            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-            availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
-            
-        } else if (chainType! == ChainType.INJECTIVE_MAIN) {
-            divideDecimal = 18
-            displayDecimal = 18
-            
-            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-            availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
-            
-        } else if (chainType! == ChainType.CRESCENT_MAIN) {
-            divideDecimal = 12
-            displayDecimal = 12
-            
-            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-            availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
-            
-        }
-    }
-    
-    func onBindBridgeToken(_ chainType: ChainType?, _ denom: String?) {
-        if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            divideDecimal = bridgeTokenInfo.decimal
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, divideDecimal)
-            availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, divideDecimal)
-        }
-    }
-    
-    
     func onBindNativeToken_gRPC(_ chainType: ChainType?, _ denom: String?) {
         if (chainType == ChainType.OSMOSIS_MAIN) {
             if (denom == OSMOSIS_ION_DENOM) {

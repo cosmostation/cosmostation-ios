@@ -34,14 +34,6 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
     var mMintscanTokens: MintscanToken?
     var mMintscanPath: MintscanPath?
     
-    var mIBCSendDenom: String?
-    var mIBCSendAmount: String?
-    var mIBCRecipient: String?
-    var mIBCSendRelayer: IbcPath?
-    var mIBCSendPath: Path?
-    var mCw20SendContract: String?
-    
-    
     var mTargetValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var mToDelegateAmount: Coin?
     var mToUndelegateAmount:Coin?

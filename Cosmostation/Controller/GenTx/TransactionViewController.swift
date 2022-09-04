@@ -55,9 +55,6 @@ class TransactionViewController: UIViewController {
     
     var mSifPool: Sifnode_Clp_V1_Pool?
     
-    var mIBCSendDenom: String?
-    var mCw20SendContract: String?
-    
     var mNFTDenomId: String?
     var mNFTTokenId: String?
     var irisResponse: Irismod_Nft_QueryNFTResponse?
@@ -399,9 +396,6 @@ class TransactionViewController: UIViewController {
             StepVc.mPool = self.mPool
             StepVc.mLockupDuration = self.mLockupDuration
             StepVc.mLockups = self.mLockups
-            
-            StepVc.mIBCSendDenom = self.mIBCSendDenom
-            StepVc.mCw20SendContract = self.mCw20SendContract
             
             StepVc.mSifPool = self.mSifPool
             

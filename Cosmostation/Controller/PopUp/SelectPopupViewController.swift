@@ -25,7 +25,6 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
     var toCoins = Array<Coin>()
     var toAccountList = Array<Account>()
     var ibcToChain = Array<ChainConfig>()
-    var ibcRelayer = Array<Path>()
     var starnameDomains = Array<String>()
     var feeData = Array<FeeData>()
     
@@ -42,7 +41,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         self.popupTableview.register(UINib(nibName: "SelectChainCell", bundle: nil), forCellReuseIdentifier: "SelectChainCell")
         self.popupTableview.register(UINib(nibName: "SelectCoinCell", bundle: nil), forCellReuseIdentifier: "SelectCoinCell")
         self.popupTableview.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
-        self.popupTableview.register(UINib(nibName: "SelectRelayerCell", bundle: nil), forCellReuseIdentifier: "SelectRelayerCell")
+//        self.popupTableview.register(UINib(nibName: "SelectRelayerCell", bundle: nil), forCellReuseIdentifier: "SelectRelayerCell")
         self.popupTableview.register(UINib(nibName: "SelectDesmosAirdopAccountCell", bundle: nil), forCellReuseIdentifier: "SelectDesmosAirdopAccountCell")
         self.popupTableview.rowHeight = UITableView.automaticDimension
         self.popupTableview.estimatedRowHeight = UITableView.automaticDimension
@@ -69,13 +68,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT || type == SELECT_POPUP_KAVA_SWAP_OUT || type == SELECT_POPUP_SIF_SWAP_OUT) {
             self.popupTitle.text = NSLocalizedString("str_select_coin_swap_out", comment: "")
             
-        } else if (type == SELECT_POPUP_IBC_CHAIN) {
+        } else if (type == SELECT_POPUP_RECIPIENT_CHAIN) {
             self.popupTitle.text = NSLocalizedString("str_select_ibc_destination", comment: "")
             
-        } else if (type == SELECT_POPUP_IBC_RELAYER) {
-            self.popupTitle.text = NSLocalizedString("str_select_ibc_relayer", comment: "")
-            
-        } else if(type == SELECT_POPUP_IBC_RECIPIENT) {
+        } else if(type == SELECT_POPUP_RECIPIENT_ADDRESS) {
             self.popupTitle.text = NSLocalizedString("select_account", comment: "")
             
         } else if (type == SELECT_POPUP_STARNAME_DOMAIN) {
@@ -110,12 +106,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             esHeight = (CGFloat)((toCoinList.count * 55) + 55)
         } else if (type == SELECT_POPUP_HTLC_TO_ACCOUNT) {
             esHeight = (CGFloat)((toAccountList.count * 55) + 55)
-        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_IBC_RECIPIENT) {
+        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_RECIPIENT_ADDRESS) {
             esHeight = (CGFloat)((toAccountList.count * 55) + 55)
-        } else if (type == SELECT_POPUP_IBC_CHAIN) {
+        } else if (type == SELECT_POPUP_RECIPIENT_CHAIN) {
             esHeight = (CGFloat)((ibcToChain.count * 55) + 55)
-        } else if (type == SELECT_POPUP_IBC_RELAYER) {
-            esHeight = (CGFloat)((ibcRelayer.count * 55) + 55)
         } else if (type == SELECT_POPUP_STARNAME_DOMAIN) {
             esHeight = (CGFloat)((starnameDomains.count * 55) + 55)
         } else if (type == SELECT_POPUP_SIF_SWAP_IN) {
@@ -144,16 +138,14 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return toCoinList.count
         } else if (type == SELECT_POPUP_HTLC_TO_ACCOUNT) {
             return toAccountList.count
-        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_IBC_RECIPIENT) {
+        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_RECIPIENT_ADDRESS) {
             return toAccountList.count
         } else if (type == SELECT_POPUP_OSMOSIS_COIN_IN || type == SELECT_POPUP_KAVA_SWAP_IN || type == SELECT_POPUP_SIF_SWAP_IN) {
             return toCoinList.count
         } else if (type == SELECT_POPUP_OSMOSIS_COIN_OUT || type == SELECT_POPUP_KAVA_SWAP_OUT || type == SELECT_POPUP_SIF_SWAP_OUT) {
             return toCoinList.count
-        } else if (type == SELECT_POPUP_IBC_CHAIN) {
+        } else if (type == SELECT_POPUP_RECIPIENT_CHAIN) {
             return ibcToChain.count
-        } else if (type == SELECT_POPUP_IBC_RELAYER) {
-            return ibcRelayer.count
         } else if (type == SELECT_POPUP_STARNAME_DOMAIN) {
             return starnameDomains.count
         } else if (type == SELECT_POPUP_DESMOS_LINK_CHAIN) {
@@ -227,7 +219,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             }
             return cell!
             
-        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_IBC_RECIPIENT) {
+        } else if (type == SELECT_POPUP_STARNAME_ACCOUNT || type == SELECT_POPUP_RECIPIENT_ADDRESS) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectAccountCell") as? SelectAccountCell
             let toChainConfig = ChainFactory.getChainConfig(toChain)
             let account = toAccountList[indexPath.row]
@@ -272,24 +264,12 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             WDP.dpSymbol(chainConfig, swapOutDenom, cell!.coinTitle)
             return cell!
             
-        } else if (type == SELECT_POPUP_IBC_CHAIN) {
+        } else if (type == SELECT_POPUP_RECIPIENT_CHAIN) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectChainCell") as? SelectChainCell
             let toChainConfig = ibcToChain[indexPath.row]
             cell!.chainImg.image = toChainConfig.chainImg
             cell!.chainTitle.text = toChainConfig.chainTitle2
             cell!.chainTitle.textColor = toChainConfig.chainColor
-            return cell!
-            
-        } else if (type == SELECT_POPUP_IBC_RELAYER) {
-            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectRelayerCell") as? SelectRelayerCell
-            let path = ibcRelayer[indexPath.row]
-            cell!.channelTitle.text = path.channel_id
-            cell!.channelMsg.text = ""
-            if (path.auth == true) {
-                cell!.channelStausImg.image = UIImage(named: "imgIbcWellKnown")
-            } else {
-                cell!.channelStausImg.image = UIImage(named: "imgIbcUnKnown")
-            }
             return cell!
             
         } else if (type == SELECT_POPUP_STARNAME_DOMAIN) {

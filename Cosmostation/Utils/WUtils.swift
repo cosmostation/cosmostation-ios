@@ -235,11 +235,6 @@ public class WUtils {
     }
     
     static func perUsdValue(_ denom: String) -> NSDecimalNumber? {
-        if (denom.contains("gamm/pool/")) {
-            if let pool = BaseData.instance.getOsmoPoolByDenom(denom) {
-                return WUtils.getOsmoLpTokenPerUsdPrice(pool)
-            }
-        }
         if (denom == EMONEY_EUR_DENOM || denom == EMONEY_CHF_DENOM || denom == EMONEY_DKK_DENOM || denom == EMONEY_NOK_DENOM || denom == EMONEY_SEK_DENOM) {
             if let value = BaseData.instance.getPrice("usdt")?.prices.filter{ $0.currency == denom.substring(from: 1) }.first?.current_price {
                 return NSDecimalNumber.one.dividing(by: NSDecimalNumber.init(value: value), withBehavior: handler18)
@@ -766,49 +761,12 @@ public class WUtils {
     
     static func getDenomDecimal(_ chainConfig: ChainConfig?, _ denom: String?) -> Int16 {
         if (chainConfig == nil || denom == nil) { return 6 }
-        if (denom!.starts(with: "ibc/")) {
-            if let ibcToken = BaseData.instance.getIbcToken(denom!.replacingOccurrences(of: "ibc/", with: "")),
-                let decimal = ibcToken.decimal  {
-                return decimal
+        if (chainConfig!.isGrpc) {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+                return msAsset.decimal
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom?.lowercased() }).first {
+                return msToken.decimal
             }
-        }
-        if (chainConfig!.stakeDenom == denom) {
-            return mainDivideDecimal(chainConfig!.chainType)
-        }
-        if (chainConfig!.chainType == .OSMOSIS_MAIN) {
-            if (denom?.caseInsensitiveCompare(OSMOSIS_ION_DENOM) == .orderedSame) { return 6; }
-            else if (denom!.starts(with: "gamm/pool/")) { return 18; }
-            return 6
-            
-        } else if (chainConfig!.chainType == .SIF_MAIN) {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-                return bridgeTokenInfo.decimal
-            }
-            return 18
-            
-        } else if (chainConfig!.chainType == .GRAVITY_BRIDGE_MAIN) {
-            if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom!) {
-                return bridgeTokenInfo.decimal
-            }
-            return 18
-            
-        } else if (chainConfig!.chainType == .KAVA_MAIN) {
-            if (denom?.caseInsensitiveCompare("btc") == .orderedSame) { return 8; }
-            else if (denom?.caseInsensitiveCompare("bnb") == .orderedSame) { return 8; }
-            else if (denom?.caseInsensitiveCompare("btcb") == .orderedSame || denom?.caseInsensitiveCompare("hbtc") == .orderedSame) { return 8; }
-            else if (denom?.caseInsensitiveCompare("busd") == .orderedSame) { return 8; }
-            else if (denom?.caseInsensitiveCompare("xrpb") == .orderedSame || denom?.caseInsensitiveCompare("xrbp") == .orderedSame) { return 8; }
-            return 6;
-            
-        } else if (chainConfig!.chainType == .INJECTIVE_MAIN) {
-            if (denom?.starts(with: "share") == true) { return 18 }
-            else if (denom?.starts(with: "peggy0x") == true) {
-                if let bridgeTokenInfo = BaseData.instance.getBridge_gRPC(denom ?? "") {
-                    return bridgeTokenInfo.decimal
-                }
-            }
-            return 18
-            
         }
         return mainDivideDecimal(chainConfig!.chainType)
     }
