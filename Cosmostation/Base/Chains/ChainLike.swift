@@ -75,7 +75,7 @@ class ChainLike: ChainConfig {
     }
     
     func getGasDefault() -> Int {
-        return 1
+        return 0
     }
 }
 
