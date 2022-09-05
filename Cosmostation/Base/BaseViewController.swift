@@ -127,6 +127,7 @@ class BaseViewController: UIViewController {
                 self.onDeleteWallet(account) { }
             }
             PushUtils.shared.sync()
+            BaseData.instance.deleteMnemonic(mwords)
             if (KeychainWrapper.standard.hasValue(forKey: mwords.uuid.sha1())) {
                 KeychainWrapper.standard.removeObject(forKey: mwords.uuid.sha1())
             }

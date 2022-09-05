@@ -632,6 +632,8 @@
 		0468BF9E28C5A04700CBC1C6 /* ChainSommelier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468BF9C28C5A04700CBC1C6 /* ChainSommelier.swift */; };
 		0468BFA028C5ADE900CBC1C6 /* ChainLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468BF9F28C5ADE900CBC1C6 /* ChainLike.swift */; };
 		0468BFA128C5ADE900CBC1C6 /* ChainLike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468BF9F28C5ADE900CBC1C6 /* ChainLike.swift */; };
+		0468BFA328C5EE7100CBC1C6 /* ChainIxo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468BFA228C5EE7100CBC1C6 /* ChainIxo.swift */; };
+		0468BFA428C5EE7100CBC1C6 /* ChainIxo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0468BFA228C5EE7100CBC1C6 /* ChainIxo.swift */; };
 		0469467E288A4005004EE923 /* WalletAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469467C288A4005004EE923 /* WalletAddressCell.swift */; };
 		0469467F288A4005004EE923 /* WalletAddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0469467C288A4005004EE923 /* WalletAddressCell.swift */; };
 		04694680288A4005004EE923 /* WalletAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0469467D288A4005004EE923 /* WalletAddressCell.xib */; };
@@ -3272,6 +3274,7 @@
 		04615CC72750C7AD00A693B0 /* WalletDesmosCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDesmosCell.xib; sourceTree = "<group>"; };
 		0468BF9C28C5A04700CBC1C6 /* ChainSommelier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainSommelier.swift; sourceTree = "<group>"; };
 		0468BF9F28C5ADE900CBC1C6 /* ChainLike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainLike.swift; sourceTree = "<group>"; };
+		0468BFA228C5EE7100CBC1C6 /* ChainIxo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainIxo.swift; sourceTree = "<group>"; };
 		0469467C288A4005004EE923 /* WalletAddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAddressCell.swift; sourceTree = "<group>"; };
 		0469467D288A4005004EE923 /* WalletAddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletAddressCell.xib; sourceTree = "<group>"; };
 		046BD21F27788723002333B5 /* StationNFTData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationNFTData.swift; sourceTree = "<group>"; };
@@ -4353,6 +4356,7 @@
 				0451FC4F282A390B00214FDA /* ChainFetchAi.swift */,
 				0451FC93282A3B3200214FDA /* ChainGravityBridge.swift */,
 				0451FCA2282A3B7500214FDA /* ChainInjective.swift */,
+				0468BFA228C5EE7100CBC1C6 /* ChainIxo.swift */,
 				0451FC63282A3A2200214FDA /* ChainJuno.swift */,
 				0451FC4D282A38F400214FDA /* ChainKava.swift */,
 				0451FC6B282A3A7300214FDA /* ChainKi.swift */,
@@ -7138,6 +7142,7 @@
 				18FFB2BA281AF533004E65BB /* TxIbcReceiveCell.swift in Sources */,
 				1817CB24283E2CE500523713 /* desmos_posts_v1beta1_msgs.pb.swift in Sources */,
 				18FFB2BC281AF533004E65BB /* EditHideChainCell.swift in Sources */,
+				0468BFA428C5EE7100CBC1C6 /* ChainIxo.swift in Sources */,
 				04E6ABB628635867008DC3C7 /* CdpWithdraw1ViewController.swift in Sources */,
 				18FFB2BD281AF533004E65BB /* KavaSupply.swift in Sources */,
 				1817CAD6283E2CE500523713 /* kava_hard_v1beta1_query.grpc.swift in Sources */,
@@ -8460,6 +8465,7 @@
 				E151B639224626990026B8C0 /* BorderButton.swift in Sources */,
 				046E9039268C3F95002CFFE1 /* BinanceModel.swift in Sources */,
 				040FA7EC275F55C200229F6F /* cosmos_distribution_v1beta1_tx.pb.swift in Sources */,
+				0468BFA328C5EE7100CBC1C6 /* ChainIxo.swift in Sources */,
 				E1945E542231256800A1436F /* BaseConstant.swift in Sources */,
 				28A209DF248897F400C2C078 /* TokenDetailVestingDetailCell.swift in Sources */,
 				04C5AEA7286336D7007627EA /* RewardAddress4ViewController.swift in Sources */,
