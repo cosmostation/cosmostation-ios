@@ -49,7 +49,6 @@ class ChainChihuahua: ChainConfig {
     var apiUrl = "https://api-chihuahua.cosmostation.io/"
     var explorerUrl = MintscanUrl + "chihuahua/"
     var validatorImgUrl = MonikerUrl + "chihuahua/"
-    var relayerImgUrl = RelayerUrl + "chihuahua/relay-chihuahua-unknown.png"
     var priceUrl = CoingeckoUrl + "chihuahua-chain"
     
     required init(_ chainType: ChainType) {

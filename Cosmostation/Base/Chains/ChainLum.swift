@@ -48,7 +48,6 @@ class ChainLum: ChainConfig {
     var apiUrl = "https://api-lum.cosmostation.io/"
     var explorerUrl = MintscanUrl + "lum/"
     var validatorImgUrl = MonikerUrl + "lum-network/"
-    var relayerImgUrl = RelayerUrl + "lum-network/relay-lum-unknown.png"
     var priceUrl = CoingeckoUrl + "lum-network"
     
     required init(_ chainType: ChainType) {

@@ -49,7 +49,6 @@ class ChainCryptoorg: ChainConfig {
     var apiUrl = "https://api-cryptocom.cosmostation.io/"
     var explorerUrl = MintscanUrl + "crypto-org/"
     var validatorImgUrl = MonikerUrl + "cryto/"
-    var relayerImgUrl = RelayerUrl + "cryptoorg/relay-cryptoorg-unknown.png"
     var priceUrl = CoingeckoUrl + "cronos"
     
     required init(_ chainType: ChainType) {

@@ -47,7 +47,6 @@ class ChainAlthea: ChainConfig {
     var apiUrl = ""
     var explorerUrl = ""
     var validatorImgUrl = ""
-    var relayerImgUrl = ""
     var priceUrl = ""
     
     required init(_ chainType: ChainType) {

@@ -49,7 +49,6 @@ class ChainDesmos: ChainConfig {
     var apiUrl = "https://api-desmos.cosmostation.io/"
     var explorerUrl = MintscanUrl + "desmos/"
     var validatorImgUrl = MonikerUrl + "desmos/"
-    var relayerImgUrl = RelayerUrl + "desmos/relay-desmos-unknown.png"
     var priceUrl = CoingeckoUrl + "desmos"
     
     required init(_ chainType: ChainType) {

@@ -45,7 +45,6 @@ protocol ChainConfig {
     var apiUrl: String { get set }
     var explorerUrl: String { get set }
     var validatorImgUrl: String { get set }
-    var relayerImgUrl: String { get set }
     var priceUrl: String { get set }
     
     init (_ chainType: ChainType)
@@ -114,6 +113,8 @@ class ChainFactory {
             return .KI_MAIN
         case CHAIN_KONSTELLATION_S:
             return .KONSTELLATION_MAIN
+        case CHAIN_LIKECOIN_S:
+            return .LIKECOIN_MAIN
         case CHAIN_LUM_S:
             return .LUM_MAIN
         case CHAIN_MEDI_S:
@@ -142,6 +143,8 @@ class ChainFactory {
             return .SENTINEL_MAIN
         case CHAIN_SIF_S:
             return .SIF_MAIN
+        case CHAIN_SOMMELIER_S:
+            return .SOMMELIER_MAIN
         case CHAIN_STARGAZE_S:
             return .STARGAZE_MAIN
         case CHAIN_IOV_S:
@@ -214,6 +217,8 @@ class ChainFactory {
             return ChainKi(chainType!)
         case .KONSTELLATION_MAIN:
             return ChainKonstellation(chainType!)
+        case .LIKECOIN_MAIN:
+            return ChainLike(chainType!)
         case .LUM_MAIN:
             return ChainLum(chainType!)
         case .MEDI_MAIN:
@@ -242,6 +247,8 @@ class ChainFactory {
             return ChainSentinel(chainType!)
         case .SIF_MAIN:
             return ChainSif(chainType!)
+        case .SOMMELIER_MAIN:
+            return ChainSommelier(chainType!)
         case .STARGAZE_MAIN:
             return ChainStargaze(chainType!)
         case .IOV_MAIN:
@@ -314,6 +321,7 @@ let CHAIN_JUNO_S = "SUPPORT_CHAIN_JUNO"
 let CHAIN_KAVA_S = "SUPPORT_CHAIN_KAVA_MAIN"
 let CHAIN_KI_S = "SUPPORT_CHAIN_KI_MAIN"
 let CHAIN_KONSTELLATION_S = "SUPPORT_CHAIN_KONSTELLATION"
+let CHAIN_LIKECOIN_S = "SUPPORT_CHAIN_LIKECOIN"
 let CHAIN_LUM_S = "SUPPORT_CHAIN_LUM"
 let CHAIN_MEDI_S = "SUPPORT_CHAIN_MEDI"
 let CHAIN_NYX_S = "SUPPORT_CHAIN_NYX"
@@ -328,6 +336,7 @@ let CHAIN_RIZON_S = "SUPPORT_CHAIN_RIZON"
 let CHAIN_SECRET_S = "SUPPORT_CHAIN_SECRET_MAIN"
 let CHAIN_SENTINEL_S = "SUPPORT_CHAIN_SENTINEL_MAIN"
 let CHAIN_SIF_S = "SUPPORT_CHAIN_SIF_MAIN"
+let CHAIN_SOMMELIER_S = "SUPPORT_CHAIN_SOMMELIER_MAIN"
 let CHAIN_STARGAZE_S = "SUPPORT_CHAIN_STARGAZE"
 let CHAIN_IOV_S = "SUPPORT_CHAIN_IOV_MAIN"
 let CHAIN_TGRADE_S = "SUPPORT_CHAIN_TGRADE"

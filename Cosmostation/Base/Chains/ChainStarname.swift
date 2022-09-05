@@ -48,7 +48,6 @@ class ChainStarname: ChainConfig {
     var apiUrl = "https://api-iov.cosmostation.io/"
     var explorerUrl = MintscanUrl + "starname/"
     var validatorImgUrl = MonikerUrl + "iov/"
-    var relayerImgUrl = RelayerUrl + "starname/relay-starname-unknown.png"
     var priceUrl = CoingeckoUrl + "starname"
     
     required init(_ chainType: ChainType) {

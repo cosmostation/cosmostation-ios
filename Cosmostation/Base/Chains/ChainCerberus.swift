@@ -47,7 +47,6 @@ class ChainCerberus: ChainConfig {
     var apiUrl = "https://api-cerberus.cosmostation.io/"
     var explorerUrl = MintscanUrl + "cerberus/"
     var validatorImgUrl = MonikerUrl + "cerberus/"
-    var relayerImgUrl = RelayerUrl + "cerberus/relay-cerberus-unknown.png"
     var priceUrl = CoingeckoUrl + "cerberus"
     
     required init(_ chainType: ChainType) {

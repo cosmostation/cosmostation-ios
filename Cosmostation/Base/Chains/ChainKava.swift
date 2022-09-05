@@ -50,7 +50,6 @@ class ChainKava: ChainConfig {
     var apiUrl = "https://api-kava.cosmostation.io/"
     var explorerUrl = MintscanUrl + "kava/"
     var validatorImgUrl = MonikerUrl + "kava/"
-    var relayerImgUrl = RelayerUrl + "kava/relay-kava-unknown.png"
     var priceUrl = CoingeckoUrl + "kava"
     
     required init(_ chainType: ChainType) {

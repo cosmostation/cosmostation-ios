@@ -19,9 +19,6 @@ final class BaseData : NSObject{
     var copySalt: String?
     var mPrices = Array<Price>()
     var mParam: Param?
-    var mIbcPaths = Array<IbcPath>()
-    var mIbcTokens = Array<IbcToken>()
-    var mBridgeTokens = Array<BridgeToken>()
     var mMintscanAssets = Array<MintscanAsset>()
     var mMintscanTokens = Array<MintscanToken>()
     var mMyTokens = Array<MintscanToken>()
@@ -126,114 +123,14 @@ final class BaseData : NSObject{
         return mPrices.filter { $0.denom == denom.lowercased() }.first
     }
     
-    func getIbcToken(_ hash: String?) -> IbcToken? {
-        return mIbcTokens.filter { $0.hash == hash }.first
-    }
-    
-    func getIbcPath(_ channelId: String?) -> Path? {
-        for ibcPath in mIbcPaths {
-            for path in ibcPath.paths {
-                if (path.channel_id == channelId) {
-                    return path
-                }
-            }
-        }
-        return nil
-    }
-    
-    func getIbcRlayerImg(_ chainConfig: ChainConfig?, _ channelId: String?) -> URL? {
-        if let url = URL(string: getIbcPath(channelId)?.relayer_img ?? "") {
-            return url
-        }
-        if let url = URL(string: WUtils.getDefaultRlayerImg(chainConfig)) {
-            return url
-        }
-        return nil
-    }
-    
-    func getIbcSendableChains() -> Array<IbcPath> {
-        var result = Array<IbcPath>()
-        for ibcPath in mIbcPaths {
-            if ibcPath.paths.filter({ $0.auth == true }).first != nil {
-                result.append(ibcPath)
-            }
-        }
-        return result
-    }
-    
-    func getIbcRollbackChain(_ denom: String) -> Array<IbcPath> {
-        var result = Array<IbcPath>()
-        if let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-            for ibcPath in mIbcPaths {
-                if (ibcPath.paths.filter { $0.channel_id == ibcToken.channel_id }.first != nil) {
-                    result.append(ibcPath)
-                }
-            }
-        }
-        return result
-    }
-    
-    func getIbcRollbackChannel(_ denom: String, _ paths: Array<Path>) -> Array<Path> {
-        var result = Array<Path>()
-        if let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) {
-            for path in paths {
-                if (path.channel_id == ibcToken.channel_id) {
-                    if (path.auth == true) {
-                        result.append(path)
-                    }
-                }
-            }
-        }
-        return result
-    }
-    
-
-//
-//    func getCw20s_gRPC() -> Array<Cw20Token> {
-//        var result = Array<Cw20Token>()
-//        mCw20Tokens.forEach { cw20Token in
-//            if (cw20Token.getAmount().compare(NSDecimalNumber.zero).rawValue > 0) {
-//                result.append(cw20Token)
-//            }
-//        }
-//        return result
-//    }
-//
-//    func getCw20_gRPC(_ contAddress: String) -> Cw20Token? {
-//        return mCw20Tokens.filter { $0.contract_address == contAddress }.first
-//    }
-    
-    func getBridge_gRPC(_ denom: String) -> BridgeToken? {
-        return mBridgeTokens.filter { $0.denom.lowercased() == denom.lowercased() }.first
-    }
-    
     func getBaseDenom(_ chainConfig: ChainConfig?, _ denom: String) -> String {
-        if (denom.starts(with: "ibc/")) {
-            guard let ibcToken = getIbcToken(denom.replacingOccurrences(of: "ibc/", with: "")) else {
-                return denom
+        if (chainConfig == nil) { return "" }
+        if (chainConfig!.isGrpc) {
+            if let msAsset = BaseData.instance.mMintscanAssets.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
+                return msAsset.base_denom
+            } else if let msToken = BaseData.instance.mMintscanTokens.filter({ $0.denom.lowercased() == denom.lowercased() }).first {
+                return msToken.denom.lowercased()
             }
-            if (ibcToken.auth == true) {
-//                if (ibcToken.base_denom?.starts(with: "cw20:") == true) {
-//                    let cAddress = ibcToken.base_denom?.replacingOccurrences(of: "cw20:", with: "")
-//                    if let cw20Basedenom = mCw20Tokens.filter({ $0.contract_address == cAddress }).first {
-//                        return cw20Basedenom.denom
-//                    } else {
-//                        return ibcToken.base_denom!
-//                    }
-//                } else {
-                    return ibcToken.base_denom!
-//                }
-            }
-        }
-        if (chainConfig?.chainType == .SIF_MAIN) {
-            if (denom.starts(with: "c") || denom.starts(with: "x")) {
-                return denom.substring(from: 1).uppercased()
-            }
-        } else if (chainConfig?.chainType == .KAVA_MAIN) {
-            if (denom == TOKEN_HTLC_KAVA_BNB) { return "bnb" }
-            else if (denom == TOKEN_HTLC_KAVA_XRPB) { return "xrp" }
-            else if (denom == TOKEN_HTLC_KAVA_BUSD) { return "busd" }
-            else if (denom.contains("btc")) { return "btc" }
         }
         return denom
     }

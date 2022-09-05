@@ -47,7 +47,6 @@ class ChainAxelar: ChainConfig {
     var apiUrl = "https://api-axelar.cosmostation.io/"
     var explorerUrl = MintscanUrl + "axelar/"
     var validatorImgUrl = MonikerUrl + "axelar/"
-    var relayerImgUrl = RelayerUrl + "axelar/relay-axelar-unknown.png"
     var priceUrl = CoingeckoUrl + "axelar-network"
     
     required init(_ chainType: ChainType) {

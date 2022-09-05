@@ -49,7 +49,6 @@ class ChainUmee: ChainConfig {
     var apiUrl = "https://api-umee.cosmostation.io/"
     var explorerUrl = MintscanUrl + "umee/"
     var validatorImgUrl = MonikerUrl + "umee/"
-    var relayerImgUrl = RelayerUrl + "umee/relay-umee-unknown.png"
     var priceUrl = CoingeckoUrl + "umee"
     
     required init(_ chainType: ChainType) {

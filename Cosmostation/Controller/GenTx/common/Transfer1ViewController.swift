@@ -109,7 +109,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     
     @objc func onClickToChain (_ sender: UITapGestureRecognizer) {
         let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
-        popupVC.type = SELECT_POPUP_IBC_CHAIN
+        popupVC.type = SELECT_POPUP_RECIPIENT_CHAIN
         popupVC.ibcToChain = recipientableChains
         let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
         cardPopup.resultDelegate = self
@@ -124,7 +124,7 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
             
         } else {
             let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
-            popupVC.type = SELECT_POPUP_IBC_RECIPIENT
+            popupVC.type = SELECT_POPUP_RECIPIENT_ADDRESS
             popupVC.toChain = recipientChainConfig.chainType
             popupVC.toAccountList = recipientableAccounts
             let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
@@ -188,17 +188,14 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
             if (mintscanAsset != nil) {
                 pageHolderVC.mTransferType = TRANSFER_IBC_SIMPLE
                 pageHolderVC.mMintscanPath = WUtils.getMintscanPath(chainConfig!, recipientChainConfig!, toSendDenom!)
-//                print("channel ", pageHolderVC.mMintscanPath?.channel)
-//                print("port ", pageHolderVC.mMintscanPath?.port)
                 
             } else if (mintscanTokens != nil) {
                 pageHolderVC.mTransferType = TRANSFER_IBC_WASM
                 pageHolderVC.mMintscanPath = WUtils.getMintscanPath(chainConfig!, recipientChainConfig!, toSendDenom!)
-//                print("channel ", pageHolderVC.mMintscanPath?.channel)
-//                print("port ", pageHolderVC.mMintscanPath?.port)
-                
             }
         }
+        print("channel ", pageHolderVC.mMintscanPath?.channel)
+        print("port ", pageHolderVC.mMintscanPath?.port)
         pageHolderVC.mMintscanAsset = mintscanAsset
         pageHolderVC.mMintscanTokens = mintscanTokens
     }
@@ -218,10 +215,10 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     }
     
     func SBCardPopupResponse(type: Int, result: Int) {
-        if (type == SELECT_POPUP_IBC_CHAIN) {
+        if (type == SELECT_POPUP_RECIPIENT_CHAIN) {
             recipientChainConfig = recipientableChains[result]
             onUpdateToChainView()
-        } else if (type == SELECT_POPUP_IBC_RECIPIENT) {
+        } else if (type == SELECT_POPUP_RECIPIENT_ADDRESS) {
             recipientAddressinput.text = recipientableAccounts[result].account_address
         }
     }

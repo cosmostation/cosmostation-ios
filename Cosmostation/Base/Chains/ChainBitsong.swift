@@ -47,7 +47,6 @@ class ChainBitsong: ChainConfig {
     var apiUrl = "https://api-bitsong.cosmostation.io/"
     var explorerUrl = MintscanUrl + "bitsong/"
     var validatorImgUrl = MonikerUrl + "bitsong/"
-    var relayerImgUrl = RelayerUrl + "bitsong/relay-bitsong-unknown.png"
     var priceUrl = CoingeckoUrl + "bitsong"
     
     required init(_ chainType: ChainType) {

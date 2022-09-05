@@ -47,7 +47,6 @@ class ChainKi: ChainConfig {
     var apiUrl = "https://api-kichain.cosmostation.io/"
     var explorerUrl = MintscanUrl + "ki-chain/"
     var validatorImgUrl = MonikerUrl + "ki/"
-    var relayerImgUrl = RelayerUrl + "ki/relay-kichain-unknown.png"
     var priceUrl = CoingeckoUrl + "ki"
     
     required init(_ chainType: ChainType) {

@@ -49,7 +49,6 @@ class ChainJuno: ChainConfig {
     var apiUrl = "https://api-juno.cosmostation.io/"
     var explorerUrl = MintscanUrl + "juno/"
     var validatorImgUrl = MonikerUrl + "juno/"
-    var relayerImgUrl = RelayerUrl + "juno/relay-juno-unknown.png"
     var priceUrl = CoingeckoUrl + "juno-network"
     
     required init(_ chainType: ChainType) {

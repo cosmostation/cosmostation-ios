@@ -49,10 +49,8 @@ let MOON_PAY_PUBLICK                    = "pk_live_zbG1BOGMVTcfKibboIE2K3vduJBTu
 let CSS_VERSION                         = CSS_URL + "v1/app/version/ios";
 let CSS_PUSH_UPDATE                     = CSS_URL + "v1/account/update";
 let CSS_MOON_PAY                        = CSS_URL + "v1/sign/moonpay";
-
-let WALLET_API_BASE_URL                      = "https://api-wallet-dev.cosmostation.io/";
-let WALLET_API_SYNC_PUSH_URL                 = WALLET_API_BASE_URL + "v1/push/token/address";
-let WALLET_API_PUSH_STATUS_URL               = WALLET_API_BASE_URL + "v1/push/alarm/status";
+let WALLET_API_SYNC_PUSH_URL            = CSS_URL + "v1/push/token/address";
+let WALLET_API_PUSH_STATUS_URL          = CSS_URL + "v1/push/alarm/status";
 
 
 let DB_VERSION                      = 2
@@ -311,6 +309,8 @@ public enum ChainType: String {
     case NYX_MAIN
     case TGRADE_MAIN
     case PASSAGE_MAIN
+    case SOMMELIER_MAIN
+    case LIKECOIN_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -346,6 +346,7 @@ public enum ChainType: String {
         result.append(KAVA_MAIN)
         result.append(KI_MAIN)
         result.append(KONSTELLATION_MAIN)
+        result.append(LIKECOIN_MAIN)
         result.append(LUM_MAIN)
         result.append(MEDI_MAIN)
         result.append(NYX_MAIN)
@@ -361,6 +362,7 @@ public enum ChainType: String {
         result.append(SENTINEL_MAIN)
         result.append(CERTIK_MAIN)
         result.append(SIF_MAIN)
+        result.append(SOMMELIER_MAIN)
         result.append(STARGAZE_MAIN)
         result.append(IOV_MAIN)
 //        result.append(TGRADE_MAIN)
@@ -422,9 +424,9 @@ let SELECT_POPUP_OSMOSIS_COIN_IN = 4
 let SELECT_POPUP_OSMOSIS_COIN_OUT = 5
 let SELECT_POPUP_KAVA_SWAP_IN = 6
 let SELECT_POPUP_KAVA_SWAP_OUT = 7
-let SELECT_POPUP_IBC_CHAIN = 8
-let SELECT_POPUP_IBC_RELAYER = 9
-let SELECT_POPUP_IBC_RECIPIENT = 10
+let SELECT_POPUP_RECIPIENT_CHAIN = 8
+//let SELECT_POPUP_IBC_RELAYER = 9
+let SELECT_POPUP_RECIPIENT_ADDRESS = 10
 let SELECT_POPUP_STARNAME_DOMAIN = 11
 let SELECT_POPUP_SIF_SWAP_IN = 12
 let SELECT_POPUP_SIF_SWAP_OUT = 13
@@ -492,7 +494,6 @@ let ICON_2002                   = "ICON_2002";
 let ResourceBase = "https://raw.githubusercontent.com/cosmostation/cosmostation_token_resource/master/"
 let AssetBase = ResourceBase + "assets/images/"
 let MonikerUrl =  ResourceBase + "moniker/"
-let RelayerUrl = ResourceBase + "relayer/"
 let ChainImgStarnameUrl  = ResourceBase + "chains/logo/"
 let BinanceTokenImgUrl = ResourceBase + "coin_image/binance/";
 let OKTokenImgUrl = ResourceBase + "coin_image/okex/";

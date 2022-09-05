@@ -322,20 +322,6 @@ class BaseNetWork {
         return STATION_URL + "v1/params/" + chainId
     }
     
-    static func getIbcPaths(_ chain : ChainType, _ chainId: String) -> String {
-        if (ChainType.IS_TESTNET(chain)) {
-            return STATION_TEST_URL + "v1/ibc/paths/" + chainId
-        }
-        return STATION_URL + "v1/ibc/paths/" + chainId
-    }
-    
-    static func getIbcTokens(_ chain : ChainType, _ chainId: String) -> String {
-        if (ChainType.IS_TESTNET(chain)) {
-            return STATION_TEST_URL + "v1/ibc/tokens/" + chainId
-        }
-        return STATION_URL + "v1/ibc/tokens/" + chainId
-    }
-    
     static func getConnection(_ chain: ChainType, _ group: MultiThreadedEventLoopGroup) -> ClientConnection? {
         guard let chainConfig = ChainFactory.getChainConfig(chain) else {
             return nil

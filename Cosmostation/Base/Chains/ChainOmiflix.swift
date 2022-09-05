@@ -21,7 +21,6 @@ class ChainOmniflix: ChainConfig {
     var chainTitle = "(Omniflix Mainnet)"
     var chainTitle2 = "OMNIFLIX"
     var chainDBName = CHAIN_OMNIFLIX_S
-//    var chainAPIName = "flix"
     var chainAPIName = "omniflix"
     var chainIdPrefix = "omniflixhub-"
     
@@ -48,7 +47,6 @@ class ChainOmniflix: ChainConfig {
     var apiUrl = "https://api-omniflix.cosmostation.io/"
     var explorerUrl = MintscanUrl + "omniflix/"
     var validatorImgUrl = MonikerUrl + "omniflix/"
-    var relayerImgUrl = RelayerUrl + "omniflix/relay-omniflix-unknown.png"
     var priceUrl = CoingeckoUrl + "omniflix-network"
     
     required init(_ chainType: ChainType) {

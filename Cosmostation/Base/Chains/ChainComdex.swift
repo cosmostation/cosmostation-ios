@@ -47,7 +47,6 @@ class ChainComdex: ChainConfig {
     var apiUrl = "https://api-comdex.cosmostation.io/"
     var explorerUrl = MintscanUrl + "comdex/"
     var validatorImgUrl = MonikerUrl + "comdex/"
-    var relayerImgUrl = RelayerUrl + "comdex/relay-comdex-unknown.png"
     var priceUrl = CoingeckoUrl + "comdex"
     
     required init(_ chainType: ChainType) {

@@ -47,7 +47,6 @@ class ChainNyx: ChainConfig {
     var apiUrl = "https://api-nym.cosmostation.io/"
     var explorerUrl = MintscanUrl + "nyx/"
     var validatorImgUrl = MonikerUrl + "nyx/"
-    var relayerImgUrl = RelayerUrl + "nyx/relay-nyx-unknown.png"
     var priceUrl = ""
     
     required init(_ chainType: ChainType) {

@@ -49,7 +49,6 @@ class StationTest: ChainConfig {
     var apiUrl = "https://api-office.cosmostation.io/station-testnet/"
     var explorerUrl = "https://testnet.mintscan.io/station/"
     var validatorImgUrl = ""
-    var relayerImgUrl = ""
     var priceUrl = ""
     
     required init(_ chainType: ChainType) {
