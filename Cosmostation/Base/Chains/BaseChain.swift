@@ -105,6 +105,8 @@ class ChainFactory {
             return .GRAVITY_BRIDGE_MAIN
         case CHAIN_INJECTIVE_S:
             return .INJECTIVE_MAIN
+        case CHAIN_IXO_S:
+            return .IXO_MAIN
         case CHAIN_JUNO_S:
             return .JUNO_MAIN
         case CHAIN_KAVA_S:
@@ -209,6 +211,8 @@ class ChainFactory {
             return ChainGravityBridge(chainType!)
         case .INJECTIVE_MAIN:
             return ChainInjective(chainType!)
+        case .IXO_MAIN:
+            return ChainIxo(chainType!)
         case .JUNO_MAIN:
             return ChainJuno(chainType!)
         case .KAVA_MAIN:
@@ -317,6 +321,7 @@ let CHAIN_EVMOS_S = "SUPPORT_CHAIN_EVMOS"
 let CHAIN_FETCH_S = "SUPPORT_CHAIN_FETCH_MAIN"
 let CHAIN_GRAVITY_BRIDGE_S = "SUPPORT_CHAIN_GRAVITY_BRIDGE"
 let CHAIN_INJECTIVE_S = "SUPPORT_CHAIN_INJECTIVE"
+let CHAIN_IXO_S = "SUPPORT_CHAIN_IXO"
 let CHAIN_JUNO_S = "SUPPORT_CHAIN_JUNO"
 let CHAIN_KAVA_S = "SUPPORT_CHAIN_KAVA_MAIN"
 let CHAIN_KI_S = "SUPPORT_CHAIN_KI_MAIN"

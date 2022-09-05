@@ -205,6 +205,8 @@
 "send_guide_msg_sommelier" = "Sommelier Finance is a Cosmos SDK-based blockchain that provides risk-managed multichain DeFi strategies.";
 "send_guide_title_like" = "LIKECOIN";
 "send_guide_msg_like" = "A Cosmos SDK-based blockchain for decentralized publishing infrastructure and social media.";
+"send_guide_title_ixo" = "IXO";
+"send_guide_msg_ixo" = "Ixo protocol aims to build a carbon-negative blockchain network for regenerative finance and verifying earth state change.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
