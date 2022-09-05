@@ -203,6 +203,8 @@
 "send_guide_msg_passage" = "Passage is building a virtual 3D world/metaverse that is mainly powered by Unreal Engine 5, Akash and IBC.";
 "send_guide_title_sommelier" = "SOMMELIER ";
 "send_guide_msg_sommelier" = "Sommelier Finance is a Cosmos SDK-based blockchain that provides risk-managed multichain DeFi strategies.";
+"send_guide_title_like" = "LIKECOIN";
+"send_guide_msg_like" = "A Cosmos SDK-based blockchain for decentralized publishing infrastructure and social media.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

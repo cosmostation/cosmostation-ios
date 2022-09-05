@@ -775,7 +775,7 @@ public class WUtils {
         if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
             chain == .EVMOS_MAIN || chain == .CUDOS_MAIN) {
             return 18
-        } else if (chain == .PROVENANCE_MAIN) {
+        } else if (chain == .PROVENANCE_MAIN || chain == .LIKECOIN_MAIN) {
             return 9
         } else if (chain == .CRYPTO_MAIN) {
             return 8
@@ -790,7 +790,7 @@ public class WUtils {
         if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
             chain == .EVMOS_MAIN || chain == .CUDOS_MAIN || chain == .OKEX_MAIN) {
             return 18
-        } else if (chain == .PROVENANCE_MAIN) {
+        } else if (chain == .PROVENANCE_MAIN || chain == .LIKECOIN_MAIN) {
             return 9
         } else if (chain == .BINANCE_MAIN || chain == .CRYPTO_MAIN) {
             return 8

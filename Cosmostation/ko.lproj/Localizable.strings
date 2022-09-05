@@ -200,6 +200,8 @@
 "send_guide_msg_passage" = "언리얼엔진5, Akash 그리고 IBC 기술을 활용하여 가상현실 및 메타버스를 구현하는 Cosmos SDK 기반 블록체인 프로토콜.";
 "send_guide_title_sommelier" = "SOMMELIER ";
 "send_guide_msg_sommelier" = "Somelier Finance는 위험이 최소화된 멀티체인 디파이 전략을 제공하는 Cosmos SDK 기반 블록체인 네트워크입니다.";
+"send_guide_title_like" = "LIKECOIN";
+"send_guide_msg_like" = "탈중앙화된 소셜미디어와 온라인 게시물의 인프라를 제공하는 Cosmos SDK 기반 블록체인 네트워크.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";

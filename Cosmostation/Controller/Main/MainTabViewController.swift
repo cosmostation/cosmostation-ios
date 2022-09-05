@@ -240,18 +240,19 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
                 
         else if (self.mChainType == .COSMOS_MAIN || self.mChainType == .IRIS_MAIN || self.mChainType == .AKASH_MAIN ||
-                   self.mChainType == .PERSIS_MAIN || self.mChainType == .CRYPTO_MAIN || self.mChainType == .SENTINEL_MAIN ||
-                   self.mChainType == .MEDI_MAIN || self.mChainType == .CERTIK_MAIN  || self.mChainType == .EMONEY_MAIN ||
-                   self.mChainType == .FETCH_MAIN || self.mChainType == .RIZON_MAIN || self.mChainType == .BAND_MAIN ||
-                   self.mChainType == .JUNO_MAIN || self.mChainType == .REGEN_MAIN || self.mChainType == .BITCANA_MAIN ||
-                   self.mChainType == .ALTHEA_MAIN || self.mChainType == .GRAVITY_BRIDGE_MAIN || self.mChainType == .KI_MAIN ||
-                   self.mChainType == .COMDEX_MAIN || self.mChainType == .SECRET_MAIN || self.mChainType == .INJECTIVE_MAIN ||
-                   self.mChainType == .BITSONG_MAIN || self.mChainType == .DESMOS_MAIN || self.mChainType == .LUM_MAIN ||
-                   self.mChainType == .CHIHUAHUA_MAIN || self.mChainType == .AXELAR_MAIN || self.mChainType == .KONSTELLATION_MAIN ||
-                   self.mChainType == .UMEE_MAIN || self.mChainType == .EVMOS_MAIN || self.mChainType == .PROVENANCE_MAIN ||
-                   self.mChainType == .CUDOS_MAIN || self.mChainType == .SIF_MAIN || self.mChainType == .CERBERUS_MAIN ||
-                   self.mChainType == .OMNIFLIX_MAIN || self.mChainType == .CRESCENT_MAIN || self.mChainType == .MANTLE_MAIN ||
-                   self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN || self.mChainType == .SOMMELIER_MAIN) {
+                 self.mChainType == .PERSIS_MAIN || self.mChainType == .CRYPTO_MAIN || self.mChainType == .SENTINEL_MAIN ||
+                 self.mChainType == .MEDI_MAIN || self.mChainType == .CERTIK_MAIN  || self.mChainType == .EMONEY_MAIN ||
+                 self.mChainType == .FETCH_MAIN || self.mChainType == .RIZON_MAIN || self.mChainType == .BAND_MAIN ||
+                 self.mChainType == .JUNO_MAIN || self.mChainType == .REGEN_MAIN || self.mChainType == .BITCANA_MAIN ||
+                 self.mChainType == .ALTHEA_MAIN || self.mChainType == .GRAVITY_BRIDGE_MAIN || self.mChainType == .KI_MAIN ||
+                 self.mChainType == .COMDEX_MAIN || self.mChainType == .SECRET_MAIN || self.mChainType == .INJECTIVE_MAIN ||
+                 self.mChainType == .BITSONG_MAIN || self.mChainType == .DESMOS_MAIN || self.mChainType == .LUM_MAIN ||
+                 self.mChainType == .CHIHUAHUA_MAIN || self.mChainType == .AXELAR_MAIN || self.mChainType == .KONSTELLATION_MAIN ||
+                 self.mChainType == .UMEE_MAIN || self.mChainType == .EVMOS_MAIN || self.mChainType == .PROVENANCE_MAIN ||
+                 self.mChainType == .CUDOS_MAIN || self.mChainType == .SIF_MAIN || self.mChainType == .CERBERUS_MAIN ||
+                 self.mChainType == .OMNIFLIX_MAIN || self.mChainType == .CRESCENT_MAIN || self.mChainType == .MANTLE_MAIN ||
+                 self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN || self.mChainType == .SOMMELIER_MAIN ||
+                 self.mChainType == .LIKECOIN_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)

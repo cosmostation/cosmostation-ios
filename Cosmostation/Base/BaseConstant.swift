@@ -312,6 +312,7 @@ public enum ChainType: String {
     case TGRADE_MAIN
     case PASSAGE_MAIN
     case SOMMELIER_MAIN
+    case LIKECOIN_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -347,6 +348,7 @@ public enum ChainType: String {
         result.append(KAVA_MAIN)
         result.append(KI_MAIN)
         result.append(KONSTELLATION_MAIN)
+        result.append(LIKECOIN_MAIN)
         result.append(LUM_MAIN)
         result.append(MEDI_MAIN)
         result.append(NYX_MAIN)
