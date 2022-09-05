@@ -251,7 +251,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                    self.mChainType == .UMEE_MAIN || self.mChainType == .EVMOS_MAIN || self.mChainType == .PROVENANCE_MAIN ||
                    self.mChainType == .CUDOS_MAIN || self.mChainType == .SIF_MAIN || self.mChainType == .CERBERUS_MAIN ||
                    self.mChainType == .OMNIFLIX_MAIN || self.mChainType == .CRESCENT_MAIN || self.mChainType == .MANTLE_MAIN ||
-                   self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN) {
+                   self.mChainType == .NYX_MAIN || self.mChainType == .PASSAGE_MAIN || self.mChainType == .SOMMELIER_MAIN) {
             self.mFetchCnt = 9
             self.onFetchgRPCNodeInfo()
             self.onFetchgRPCAuth(self.mAccount.account_address)

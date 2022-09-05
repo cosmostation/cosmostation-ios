@@ -141,6 +141,8 @@ class ChainFactory {
             return .SENTINEL_MAIN
         case CHAIN_SIF_S:
             return .SIF_MAIN
+        case CHAIN_SOMMELIER_S:
+            return .SOMMELIER_MAIN
         case CHAIN_STARGAZE_S:
             return .STARGAZE_MAIN
         case CHAIN_IOV_S:
@@ -241,6 +243,8 @@ class ChainFactory {
             return ChainSentinel(chainType!)
         case .SIF_MAIN:
             return ChainSif(chainType!)
+        case .SOMMELIER_MAIN:
+            return ChainSommelier(chainType!)
         case .STARGAZE_MAIN:
             return ChainStargaze(chainType!)
         case .IOV_MAIN:
@@ -327,6 +331,7 @@ let CHAIN_RIZON_S = "SUPPORT_CHAIN_RIZON"
 let CHAIN_SECRET_S = "SUPPORT_CHAIN_SECRET_MAIN"
 let CHAIN_SENTINEL_S = "SUPPORT_CHAIN_SENTINEL_MAIN"
 let CHAIN_SIF_S = "SUPPORT_CHAIN_SIF_MAIN"
+let CHAIN_SOMMELIER_S = "SUPPORT_CHAIN_SOMMELIER_MAIN"
 let CHAIN_STARGAZE_S = "SUPPORT_CHAIN_STARGAZE"
 let CHAIN_IOV_S = "SUPPORT_CHAIN_IOV_MAIN"
 let CHAIN_TGRADE_S = "SUPPORT_CHAIN_TGRADE"
