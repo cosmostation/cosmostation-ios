@@ -1009,6 +1009,8 @@ support@cosmostation.io";
 "tx_cosmwasm_instantiate" = "컨트랙트\n인스턴트화";
 "tx_cosmwasm_execontract" = "컨트랙트\n실행";
 
+"tx_ethereum_evm" = "이더리움 Tx";
+
 "tx_crescent_liquid_stake" = "유동성 스테이크";
 "tx_crescent_liquid_unstake" = "유동성 언스테이크";
 "tx_crescent_create_pair" = "유동성 페어 생성";

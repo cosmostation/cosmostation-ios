@@ -1003,6 +1003,8 @@ support@cosmostation.io";
 "tx_cosmwasm_instantiate" = "Instantiate\nContract";
 "tx_cosmwasm_execontract" = "Execute\nContract";
 
+"tx_ethereum_evm" = "Ethereum Tx";
+
 "tx_crescent_liquid_stake" = "Liquid Stake";
 "tx_crescent_liquid_unstake" = "Liquid Unstake";
 "tx_crescent_create_pair" = "Liquidity\nCreate Pair";
