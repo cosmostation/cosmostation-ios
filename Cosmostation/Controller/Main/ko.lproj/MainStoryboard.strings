@@ -206,6 +206,8 @@
 
 "Unv-6D-RIv.text" = "관찰 주소 등록";
 
+"FZG-dU-KQf.text" = "지갑 연결 관리"
+
 /* Class = "UILabel"; text = "Available"; ObjectID = "tH3-op-17D"; */
 "tH3-op-17D.text" = "사용 가능 수량";
 
