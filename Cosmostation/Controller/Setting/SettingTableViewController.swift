@@ -139,7 +139,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.onShowSafariWeb(url)
             
             } else if (indexPath.row == 3) {
-                guard let url = URL(string: "https://medium.com/@mikeyjhlee") else { return }
+                guard let url = URL(string: "https://medium.com/cosmostation") else { return }
                 self.onShowSafariWeb(url)
             
             } else if(indexPath.row == 4) {
