@@ -1054,6 +1054,8 @@
 		04E6ABD4286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E6ABD1286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift */; };
 		04E6ABD5286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */; };
 		04E6ABD6286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */; };
+		04FC7F1F28C6FECD00F64841 /* ChainStride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC7F1E28C6FECD00F64841 /* ChainStride.swift */; };
+		04FC7F2028C6FECD00F64841 /* ChainStride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FC7F1E28C6FECD00F64841 /* ChainStride.swift */; };
 		04FD713828B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713928B8B3C80059E88B /* AssetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04FD713628B8B3C80059E88B /* AssetCell.swift */; };
 		04FD713A28B8B3C80059E88B /* AssetCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04FD713728B8B3C80059E88B /* AssetCell.xib */; };
@@ -3609,6 +3611,7 @@
 		04E6ABCC286358B4008DC3C7 /* CdpDrawRepay1ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CdpDrawRepay1ViewController.xib; sourceTree = "<group>"; };
 		04E6ABD1286358C4008DC3C7 /* CdpDrawRepay4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CdpDrawRepay4ViewController.swift; sourceTree = "<group>"; };
 		04E6ABD2286358C4008DC3C7 /* CdpDrawRepay4ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CdpDrawRepay4ViewController.xib; sourceTree = "<group>"; };
+		04FC7F1E28C6FECD00F64841 /* ChainStride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainStride.swift; sourceTree = "<group>"; };
 		04FD713628B8B3C80059E88B /* AssetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetCell.swift; sourceTree = "<group>"; };
 		04FD713728B8B3C80059E88B /* AssetCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetCell.xib; sourceTree = "<group>"; };
 		106166B99D48E1E1E23A50A9 /* Pods-CosmostationDev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CosmostationDev.release.xcconfig"; path = "Target Support Files/Pods-CosmostationDev/Pods-CosmostationDev.release.xcconfig"; sourceTree = "<group>"; };
@@ -4379,6 +4382,7 @@
 				0468BF9C28C5A04700CBC1C6 /* ChainSommelier.swift */,
 				0451FC96282A3B4200214FDA /* ChainStargaze.swift */,
 				0451FC55282A398E00214FDA /* ChainStarname.swift */,
+				04FC7F1E28C6FECD00F64841 /* ChainStride.swift */,
 				04E165B628A0F873000F12C0 /* ChainTgrade.swift */,
 				0451FCB4282A3BD700214FDA /* ChainUmee.swift */,
 				04C49373284F0DF300ECF4D2 /* ChainStationTest.swift */,
@@ -7243,6 +7247,7 @@
 				1817CBA4283E2CE500523713 /* cosmos_group_v1beta1_types.pb.swift in Sources */,
 				1817CB66283E2CE500523713 /* evmos_erc20_v1_query.pb.swift in Sources */,
 				1817CAB5283E2CE500523713 /* sifnode_dispensation_v1_query.pb.swift in Sources */,
+				04FC7F2028C6FECD00F64841 /* ChainStride.swift in Sources */,
 				18FFB336281AF533004E65BB /* KeyboardViewController.swift in Sources */,
 				04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */,
 				1817CBD0283E2CE600523713 /* osmosis_claim_v1beta1_query.pb.swift in Sources */,
@@ -8644,6 +8649,7 @@
 				040FA980275F55C300229F6F /* cosmos_distribution_v1beta1_distribution.pb.swift in Sources */,
 				040FA804275F55C200229F6F /* cosmos_proto_cosmos.pb.swift in Sources */,
 				040FA8F7275F55C200229F6F /* starname_iov_starname_v1beta1_types.pb.swift in Sources */,
+				04FC7F1F28C6FECD00F64841 /* ChainStride.swift in Sources */,
 				28DB56F725FA3B8800B2F0E5 /* HardPoolDeposit3ViewController.swift in Sources */,
 				040FA918275F55C300229F6F /* cosmos_slashing_v1beta1_tx.pb.swift in Sources */,
 				0443B8812855B9280027A6B9 /* WalletDetailAddressCell.swift in Sources */,

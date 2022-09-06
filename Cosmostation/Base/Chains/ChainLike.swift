@@ -19,7 +19,7 @@ class ChainLike: ChainConfig {
     var chainColor = UIColor(named: "like")!
     var chainColorBG = UIColor(named: "like_bg")!
     var chainTitle = "(Likecoin Mainnet)"
-    var chainTitle2 = "Likecoin"
+    var chainTitle2 = "LIKECOIN"
     var chainDBName = CHAIN_LIKECOIN_S
     var chainAPIName = "likecoin"
     var chainIdPrefix = "likecoin-"
@@ -41,7 +41,7 @@ class ChainLike: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var grpcUrl = "lcd-likecoin-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-likecoin-app.cosmostation.io/"
