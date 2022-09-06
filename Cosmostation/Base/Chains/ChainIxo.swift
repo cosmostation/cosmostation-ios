@@ -41,7 +41,7 @@ class ChainIxo: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var grpcUrl = "lcd-ixo-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-ixo-app.cosmostation.io/"
