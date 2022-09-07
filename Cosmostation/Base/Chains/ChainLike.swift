@@ -11,7 +11,7 @@ import Foundation
 
 class ChainLike: ChainConfig {
     var isGrpc = true
-    var chainType = ChainType.COSMOS_MAIN
+    var chainType = ChainType.LIKECOIN_MAIN
     var chainImg = UIImage(named: "chainLike")
     var chainInfoImg = UIImage(named: "infoLike")
     var chainInfoTitle = NSLocalizedString("send_guide_title_like", comment: "")
