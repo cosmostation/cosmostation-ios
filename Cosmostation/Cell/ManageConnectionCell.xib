@@ -18,44 +18,77 @@
                 <rect key="frame" x="0.0" y="0.0" width="420" height="67"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th2-AV-Ine">
-                        <rect key="frame" x="20" y="23" width="36.5" height="21"/>
-                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
-                        <color key="textColor" name="_font05"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryl-ga-K3f">
-                        <rect key="frame" x="386" y="21.5" width="24" height="24"/>
-                        <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gkb-eA-aAw" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
+                        <rect key="frame" x="12" y="4" width="396" height="59"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Url" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Om-Oy-68O">
+                                <rect key="frame" x="12" y="22.5" width="16.5" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ryl-ga-K3f">
+                                <rect key="frame" x="368" y="17.5" width="24" height="24"/>
+                                <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="iWy-l0-eaa"/>
+                                    <constraint firstAttribute="height" constant="24" id="lnk-00-Oz4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <inset key="contentEdgeInsets" minX="4" minY="4" maxX="4" maxY="4"/>
+                                <state key="normal" image="btnIconClose"/>
+                                <connections>
+                                    <action selector="onClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OI7-jU-0OS"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="_card_bg"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="24" id="iWy-l0-eaa"/>
-                            <constraint firstAttribute="height" constant="24" id="lnk-00-Oz4"/>
+                            <constraint firstAttribute="trailing" secondItem="ryl-ga-K3f" secondAttribute="trailing" constant="4" id="Jcv-rv-X9T"/>
+                            <constraint firstItem="8Om-Oy-68O" firstAttribute="centerY" secondItem="Gkb-eA-aAw" secondAttribute="centerY" id="O5A-AL-xWZ"/>
+                            <constraint firstItem="8Om-Oy-68O" firstAttribute="leading" secondItem="Gkb-eA-aAw" secondAttribute="leading" constant="12" id="hlD-X1-3EB"/>
+                            <constraint firstItem="ryl-ga-K3f" firstAttribute="centerY" secondItem="Gkb-eA-aAw" secondAttribute="centerY" id="rDd-CR-s04"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                        <state key="normal" image="btnIconClose"/>
-                        <connections>
-                            <action selector="onClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="OI7-jU-0OS"/>
-                        </connections>
-                    </button>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.29999999999999999"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="th2-AV-Ine" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7fc-a3-9cx"/>
-                    <constraint firstItem="ryl-ga-K3f" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UgW-yr-voc"/>
-                    <constraint firstAttribute="trailing" secondItem="ryl-ga-K3f" secondAttribute="trailing" constant="10" id="bZW-3Z-799"/>
-                    <constraint firstItem="th2-AV-Ine" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="sW0-ug-CUh"/>
+                    <constraint firstItem="Gkb-eA-aAw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="4" id="9k1-Oh-uKa"/>
+                    <constraint firstItem="Gkb-eA-aAw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="SQr-9H-fQV"/>
+                    <constraint firstAttribute="trailing" secondItem="Gkb-eA-aAw" secondAttribute="trailing" constant="12" id="h3p-iJ-ppR"/>
+                    <constraint firstAttribute="bottom" secondItem="Gkb-eA-aAw" secondAttribute="bottom" constant="4" id="r8p-lH-MhI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="url" destination="th2-AV-Ine" id="QdU-35-xto"/>
+                <outlet property="url" destination="8Om-Oy-68O" id="uD4-fY-s7M"/>
             </connections>
             <point key="canvasLocation" x="208.69565217391306" y="156.36160714285714"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="btnIconClose" width="24" height="24"/>
+        <namedColor name="_card_bg">
+            <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
