@@ -35,7 +35,7 @@ class ChainStride: ChainConfig {
     var validatorPrefix = "stridevaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.0ustrds"
+    let gasRate0 = "0.0ustrd"
     
     var etherAddressSupport = false
     var wasmSupport = false
