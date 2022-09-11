@@ -176,37 +176,30 @@ class CommonWCViewController: BaseViewController {
         let chainId = 1
         
         guard let interactor = self.interactor else { return }
-        
         interactor.onSessionRequest = { [weak self] (id, peer) in
             guard let self = self else { return }
             self.wCPeerMeta = peer.peerMeta
-            if (!self.isDeepLink && !self.isDapp) {
-                if let baseAccount = self.accountMap[self.baseChain] {
-                    if self.chainType == ChainType.EVMOS_MAIN {
-                        self.getPrivateKeyAsync(account: baseAccount) { key in
-                            let ethAddress = WKey.generateEthAddressFromPrivateKey(key)
-                            self.interactor?.approveSession(accounts: [ethAddress], chainId: 9001).done { _ in
-                                    self.onViewUpdate(peer.peerMeta)
-                                }.cauterize()
-                        }
-                    } else {
-                        self.interactor?.approveSession(accounts: [baseAccount.account_address], chainId: chainId).done { _ in
-                                self.onViewUpdate(peer.peerMeta)
-                            }.cauterize()
-                    }
-                }
-            } else {
-                self.moveToBackgroundIfNeedAndAction {
-                    self.interactor?.approveSession(accounts: [], chainId: chainId).cauterize()
-                }
+            var url = self.wCPeerMeta?.url ?? "UNKNOWN"
+            if self.isDappInternal || self.isDapp {
+                url = self.webView.url?.host ?? "UNKNOWN"
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
-                if (self.isDapp || self.isDappInternal) {
-                    self.connectStatus(connected: true)
-                }
-                self.hideLoading()
-            })
+            if WalletConnectManager.shared.getWhitelist().contains(url) {
+                self.processSessionRequest(peer: peer, chainId: chainId)
+            } else {
+                let title = NSLocalizedString("wc_connect_alert_title", comment: "")
+                let message = "\(NSLocalizedString("wc_connect_alert_message", comment: ""))\n\(url)\n\n\(NSLocalizedString("wc_connect_alert_message_warning", comment: ""))"
+                let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+                if #available(iOS 13.0, *) { alert.overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
+                alert.addAction(UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: .default, handler: { _ in
+                    WalletConnectManager.shared.addWhitelist(url: url)
+                    self.processSessionRequest(peer: peer, chainId: chainId)
+                }))
+                alert.addAction(UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .default, handler: { _ in
+                    self.rejectSessionRequest()
+                }))
+                self.present(alert, animated: true)
+            }
         }
         
         interactor.onDisconnect = { [weak self] (error) in
@@ -329,6 +322,53 @@ class CommonWCViewController: BaseViewController {
                 self?.onShowPopupForRequest(WcRequestType.COSMOS_TYPE, sigData)
             }
         }
+    }
+    
+    func rejectSessionRequest() {
+        if (!self.isDeepLink && !self.isDapp) {
+            self.interactor?.rejectSession()
+        } else {
+            self.moveToBackgroundIfNeedAndAction {
+                self.interactor?.rejectSession()
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000), execute: {
+            if (self.isDapp || self.isDappInternal) {
+                self.connectStatus(connected: false)
+            }
+            self.hideLoading()
+        })
+    }
+    
+    func processSessionRequest(peer: WCSessionRequestParam, chainId: Int) {
+        if (!self.isDeepLink && !self.isDapp) {
+            if let baseAccount = self.accountMap[self.baseChain] {
+                if self.chainType == ChainType.EVMOS_MAIN {
+                    self.getPrivateKeyAsync(account: baseAccount) { key in
+                        let ethAddress = WKey.generateEthAddressFromPrivateKey(key)
+                        self.interactor?.approveSession(accounts: [ethAddress], chainId: 9001).done { _ in
+                                self.onViewUpdate(peer.peerMeta)
+                            }.cauterize()
+                    }
+                } else {
+                    self.interactor?.approveSession(accounts: [baseAccount.account_address], chainId: chainId).done { _ in
+                            self.onViewUpdate(peer.peerMeta)
+                        }.cauterize()
+                }
+            }
+        } else {
+            self.moveToBackgroundIfNeedAndAction {
+                self.interactor?.approveSession(accounts: [], chainId: chainId).cauterize()
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000), execute: {
+            if (self.isDapp || self.isDappInternal) {
+                self.connectStatus(connected: true)
+            }
+            self.hideLoading()
+        })
     }
     
     func moveToBackgroundIfNeedAndAction(action : @escaping () -> ()) {
