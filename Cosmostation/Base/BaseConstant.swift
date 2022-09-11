@@ -34,6 +34,7 @@ let KEY_USER_FAVO_TOKENS                = "KEY_USER_FAVO_TOKENS"
 let KEY_PRE_EVENT_HIDE                  = "KEY_PRE_EVENT_HIDE"
 let KEY_CUSTOM_ICON                     = "KEY_CUSTOM_ICON"
 let KEY_DB_VERSION                      = "KEY_DB_VERSION"
+let KEY_WC_WHITELIST                    = "KEY_WC_WHITELIST"
 
 let STATION_URL                         = "https://api-utility.cosmostation.io/";
 let STATION_TEST_URL                    = "https://api-office.cosmostation.io/utility/";

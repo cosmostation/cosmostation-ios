@@ -113,6 +113,12 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 self.navigationItem.title = ""
                 self.navigationController?.pushViewController(watchingAddressVC, animated: true)
                 
+            } else if (indexPath.row == 4) {
+                let manageConnectionVC = ManageConnectionViewController(nibName: "ManageConnectionViewController", bundle: nil)
+                manageConnectionVC.hidesBottomBarWhenPushed = true
+                self.navigationItem.title = ""
+                self.navigationController?.pushViewController(manageConnectionVC, animated: true)
+                
             }
             
         } else if (indexPath.section == 1) {
