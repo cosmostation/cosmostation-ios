@@ -116,7 +116,8 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             WDP.dpCoin(chainConfig, toSendDenom, currentAvailable.stringValue, availableDenomLabel, availableAmountLabel)
             WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
             
-            feeValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, feeAmount, divideDecimal, feeValueLabel.font)
+            let feeDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
+            feeValueLabel.attributedText = WUtils.dpValueUserCurrency(feeDenom, feeAmount, feeDecimal, feeValueLabel.font)
             sendValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, toSendAmount, divideDecimal, sendValueLabel.font)
             availableValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, currentAvailable, divideDecimal, availableValueLabel.font)
             remainValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, remainAvailable, divideDecimal, remainValueLabel.font)

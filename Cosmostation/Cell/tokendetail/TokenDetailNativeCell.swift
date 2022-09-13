@@ -25,10 +25,6 @@ class TokenDetailNativeCell: TokenDetailCell {
     @IBOutlet weak var lockedLayer: UIView!
     @IBOutlet weak var frozenLayer: UIView!
     @IBOutlet weak var vestingLayer: UIView!
-    
-    
-    var divideDecimal: Int16 = 6
-    var displayDecimal: Int16 = 6
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,76 +41,30 @@ class TokenDetailNativeCell: TokenDetailCell {
         vestingLayer.isHidden = true
     }
     
-    func onBindNativeToken(_ chainType: ChainType?, _ denom: String?) {
-        if (WUtils.isGRPC(chainType)) {
-            onBindNativeToken_gRPC(chainType, denom)
+    func onBindNativeToken(_ chainConfig: ChainConfig?, _ denom: String?) {
+        if (chainConfig?.isGrpc == true) {
+            onBindNativeToken_gRPC(chainConfig, denom)
             
-        } else if (chainType! == ChainType.BINANCE_MAIN) {
+        } else if (chainConfig?.chainType == .BINANCE_MAIN) {
             onBindBNBTokens(denom)
-            
-        } else if (chainType! == ChainType.OKEX_MAIN) {
-            onBindOKTokens(denom)
-            
-        }
-    }
-    
-    func onBindNativeToken_gRPC(_ chainType: ChainType?, _ denom: String?) {
-        if (chainType == ChainType.OSMOSIS_MAIN) {
-            if (denom == OSMOSIS_ION_DENOM) {
-                divideDecimal = 6
-                displayDecimal = 6
-                
-                let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-                totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-                availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
-            }
-            
-        } else if (chainType == ChainType.EMONEY_MAIN) {
-            divideDecimal = 6
-            displayDecimal = 6
-            
-            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-            availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
-            
-        } else if (chainType! == ChainType.KAVA_MAIN) {
-            onBindKavaTokens(denom)
-            
-        } else if (chainType! == ChainType.CRESCENT_MAIN || chainType! == ChainType.CRESCENT_TEST) {
-            divideDecimal = 6
-            displayDecimal = 6
-            
-            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-            availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
-            
-        } else if (chainType! == ChainType.NYX_MAIN) {
-            divideDecimal = 6
-            displayDecimal = 6
 
-            let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, divideDecimal, displayDecimal)
-            availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, divideDecimal, displayDecimal)
-            
+        } else if (chainConfig?.chainType == .OKEX_MAIN) {
+            onBindOKTokens(denom)
+
         }
     }
     
-    func onBindBNBTokens(_ denom: String?) {
-        let balance = BaseData.instance.getBalance(denom)
-        let bnbToken = WUtils.getBnbToken(denom)
-        if (balance != nil && bnbToken != nil) {
-            frozenLayer.isHidden = false
-            lockedLayer.isHidden = false
-            
-            let available = BaseData.instance.availableAmount(denom!)
-            let locked = BaseData.instance.lockedAmount(denom!)
-            let frozen = BaseData.instance.frozenAmount(denom!)
-            let total = available.adding(locked).adding(frozen)
-            
-            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, 0, 8)
-            availableAmount.attributedText = WDP.dpAmount(available.stringValue, availableAmount.font, 0, 8)
-            lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, availableAmount.font, 0, 8)
-            fronzenAmount.attributedText = WDP.dpAmount(frozen.stringValue, availableAmount.font, 0, 8)
+    func onBindNativeToken_gRPC(_ chainConfig: ChainConfig?, _ denom: String?) {
+        if (chainConfig == nil || denom == nil) { return }
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, denom!) {
+            let decimal = msAsset.decimal
+            if (chainConfig?.chainType == ChainType.KAVA_MAIN) {
+                onBindKavaTokens(denom)
+            } else {
+                let total = BaseData.instance.getAvailableAmount_gRPC(denom!)
+                totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, decimal, decimal)
+                availableAmount.attributedText = WDP.dpAmount(total.stringValue, availableAmount.font, decimal, decimal)
+            }
         }
     }
     
@@ -137,6 +87,25 @@ class TokenDetailNativeCell: TokenDetailCell {
             rootCardView.backgroundColor = UIColor.init(named: "_card_bg")
         } else if (denom == KAVA_SWAP_DENOM) {
             rootCardView.backgroundColor = UIColor.init(named: "_card_bg")
+        }
+    }
+    
+    func onBindBNBTokens(_ denom: String?) {
+        let balance = BaseData.instance.getBalance(denom)
+        let bnbToken = WUtils.getBnbToken(denom)
+        if (balance != nil && bnbToken != nil) {
+            frozenLayer.isHidden = false
+            lockedLayer.isHidden = false
+            
+            let available = BaseData.instance.availableAmount(denom!)
+            let locked = BaseData.instance.lockedAmount(denom!)
+            let frozen = BaseData.instance.frozenAmount(denom!)
+            let total = available.adding(locked).adding(frozen)
+            
+            totalAmount.attributedText = WDP.dpAmount(total.stringValue, totalAmount.font, 0, 8)
+            availableAmount.attributedText = WDP.dpAmount(available.stringValue, availableAmount.font, 0, 8)
+            lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, availableAmount.font, 0, 8)
+            fronzenAmount.attributedText = WDP.dpAmount(frozen.stringValue, availableAmount.font, 0, 8)
         }
     }
     

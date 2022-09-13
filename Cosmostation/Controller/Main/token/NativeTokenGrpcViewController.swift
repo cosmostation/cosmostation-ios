@@ -20,8 +20,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     @IBOutlet weak var btnSend: UIButton!
 
     var nativeDenom = ""
-    var nativeDivideDecimal: Int16 = 6
-    var nativeDisplayDecimal: Int16 = 6
+    var divideDecimal: Int16 = 6
     var totalAmount = NSDecimalNumber.zero
     
     override func viewDidLoad() {
@@ -53,44 +52,16 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func onInitView() {
-        if (chainType == ChainType.OSMOSIS_MAIN) {
-            WDP.dpSymbol(chainConfig, nativeDenom, naviTokenSymbol)
-            WDP.dpSymbolImg(chainConfig, nativeDenom, naviTokenImg)
-            if (nativeDenom == OSMOSIS_ION_DENOM) {
-                nativeDivideDecimal = 6
-                nativeDisplayDecimal = 6
-                totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
+        if let msAsset = BaseData.instance.getMSAsset(chainConfig!, nativeDenom) {
+            divideDecimal = msAsset.decimal
+            if let assetImgeUrl = msAsset.assetImg() {
+                naviTokenImg.af_setImage(withURL: assetImgeUrl)
             }
+            naviTokenSymbol.text = msAsset.dp_denom
             
-        } else if (chainType == ChainType.EMONEY_MAIN) {
-            naviTokenSymbol.text = nativeDenom.uppercased()
-            naviTokenImg.af_setImage(withURL: URL(string: EMONEY_COIN_IMG_URL + nativeDenom + ".png")!)
-            nativeDivideDecimal = 6
-            nativeDisplayDecimal = 6
-            totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
-            
-        } else if (chainType == ChainType.KAVA_MAIN) {
-            WDP.dpSymbol(chainConfig, nativeDenom, naviTokenSymbol)
-            WDP.dpSymbolImg(chainConfig, nativeDenom, naviTokenImg)
-            nativeDivideDecimal = WUtils.getDenomDecimal(chainConfig, nativeDenom)
-            nativeDisplayDecimal = WUtils.getDenomDecimal(chainConfig, nativeDenom)
-            totalAmount = WUtils.getKavaTokenAll(nativeDenom)
-            
-        } else if (chainType == ChainType.CRESCENT_MAIN || chainType == ChainType.CRESCENT_TEST) {
-            if (nativeDenom == CRESCENT_BCRE_DENOM) {
-                naviTokenSymbol.text = nativeDenom.uppercased()
-                naviTokenImg.image = UIImage(named: "tokenBcre")
-                nativeDivideDecimal = 6
-                nativeDisplayDecimal = 6
-                totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
-            }
-            
-        } else if (chainType == ChainType.NYX_MAIN) {
-            if (nativeDenom == NYX_NYM_DENOM) {
-                naviTokenSymbol.text = "NYM"
-                naviTokenImg.image = UIImage(named: "tokenNym")
-                nativeDivideDecimal = 6
-                nativeDisplayDecimal = 6
+            if (chainConfig?.chainType == .KAVA_MAIN) {
+                totalAmount = WUtils.getKavaTokenAll(nativeDenom)
+            } else {
                 totalAmount = BaseData.instance.getAvailableAmount_gRPC(nativeDenom)
             }
         }
@@ -123,13 +94,13 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             cell?.onBindTokenDetail(account, chainConfig)
-            cell?.onBindValue(nativeDenom, totalAmount, nativeDivideDecimal)
+            cell?.onBindValue(nativeDenom, totalAmount, divideDecimal)
             cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
             return cell!
             
         } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailNativeCell") as? TokenDetailNativeCell
-            cell?.onBindNativeToken(chainType, nativeDenom)
+            cell?.onBindNativeToken(chainConfig, nativeDenom)
             return cell!
             
         } else if (indexPath.section == 2) {

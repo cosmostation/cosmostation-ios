@@ -580,6 +580,13 @@ public struct ApiHistoryNewCustom {
                 }
             }
             
+            // evm msg type
+            else if (msgType.contains("ethermint.evm")) {
+                if (msgType.contains("MsgEthereumTx")) {
+                    result = NSLocalizedString("tx_ethereum_evm", comment: "")
+                }
+            }
+            
             // kava msg type
             else if (msgType.contains("kava.") && msgType.contains("auction")) {
                 if (msgType.contains("MsgPlaceBid")) {

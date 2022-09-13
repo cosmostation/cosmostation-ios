@@ -207,6 +207,8 @@
 "send_guide_msg_like" = "A Cosmos SDK-based blockchain for decentralized publishing infrastructure and social media.";
 "send_guide_title_ixo" = "IXO";
 "send_guide_msg_ixo" = "Ixo protocol aims to build a carbon-negative blockchain network for regenerative finance and verifying earth state change.";
+"send_guide_title_stride" = "STRIDE";
+"send_guide_msg_stride" = "Stride is a liquid staking protocol that unlocks the liquidity for staked assets in the IBC ecosystem.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -1006,6 +1008,8 @@ support@cosmostation.io";
 "tx_cosmwasm_store_code" = "Store\nContract Code";
 "tx_cosmwasm_instantiate" = "Instantiate\nContract";
 "tx_cosmwasm_execontract" = "Execute\nContract";
+
+"tx_ethereum_evm" = "Ethereum Tx";
 
 "tx_crescent_liquid_stake" = "Liquid Stake";
 "tx_crescent_liquid_unstake" = "Liquid Unstake";

@@ -34,7 +34,7 @@ class ChainSommelier: ChainConfig {
     var validatorPrefix = "sommvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0usomm"
+    let gasRate0 = "0.0usomm"
     
     var etherAddressSupport = false
     var wasmSupport = false

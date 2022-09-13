@@ -204,6 +204,8 @@
 "send_guide_msg_like" = "소셜 미디어와 온라인 게시물을 위한 탈중앙화 플랫폼 및 인프라를 제공하는 Cosmos SDK 기반 블록체인 네트워크.";
 "send_guide_title_ixo" = "IXO";
 "send_guide_msg_ixo" = "Ixo 프로토콜은 재생 금융 및 지구 상태 변화 검증을 위한 탄소 중립 블록체인 네트워크를 구축하는 것을 목표로 합니다.";
+"send_guide_title_stride" = "STRIDE";
+"send_guide_msg_stride" = "Stride 는 stToken의 발행을 통해 스테이킹된 자산을 유동화시키는 유동성 스테이킹 프로토콜입니다.";
 "send_guide_btn_home" = "Home";
 "send_guide_btn_blog" = "Blog";
 "send_guide_btn_market" = "Market";
@@ -1012,6 +1014,8 @@ support@cosmostation.io";
 "tx_cosmwasm_store_code" = "컨트랙트\n코드 저장";
 "tx_cosmwasm_instantiate" = "컨트랙트\n인스턴트화";
 "tx_cosmwasm_execontract" = "컨트랙트\n실행";
+
+"tx_ethereum_evm" = "이더리움 Tx";
 
 "tx_crescent_liquid_stake" = "유동성 스테이크";
 "tx_crescent_liquid_unstake" = "유동성 언스테이크";

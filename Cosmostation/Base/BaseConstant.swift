@@ -313,6 +313,7 @@ public enum ChainType: String {
     case SOMMELIER_MAIN
     case LIKECOIN_MAIN
     case IXO_MAIN
+    case STRIDE_MAIN
     
     case COSMOS_TEST
     case IRIS_TEST
@@ -368,6 +369,7 @@ public enum ChainType: String {
         result.append(SOMMELIER_MAIN)
         result.append(STARGAZE_MAIN)
         result.append(IOV_MAIN)
+        result.append(STRIDE_MAIN)
 //        result.append(TGRADE_MAIN)
         result.append(UMEE_MAIN)
         
