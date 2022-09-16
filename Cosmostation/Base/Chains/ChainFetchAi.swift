@@ -37,7 +37,7 @@ class ChainFetchAi: ChainConfig {
     let addressHdPath2 = "m/44'/60'/X'/0/0"
     let addressHdPath3 = "m/44'/60'/0'/X"
     
-    let gasRate0 = "0.0afet"
+    let gasRate0 = "2afet"
     
     var etherAddressSupport = false
     var wasmSupport = false

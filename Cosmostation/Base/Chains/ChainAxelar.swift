@@ -34,7 +34,8 @@ class ChainAxelar: ChainConfig {
     var validatorPrefix = "axelarvaloper"
     let addressHdPath0 = "m/44'/118'/0'/0/X"
     
-    let gasRate0 = "0.05uaxl"
+    let gasRate0 = "0.007uaxl"
+    let gasRate1 = "0.05uaxl"
     
     var etherAddressSupport = false
     var wasmSupport = false
