@@ -200,6 +200,14 @@ public struct ApiHistoryNewCustom {
                     result = NSLocalizedString("tx_unjail_validator", comment: "")
                     
                 }
+            
+            } else if (msgType.contains("cosmos.") && msgType.contains("feegrant")) {
+                if (msgType.contains("MsgGrantAllowance")) {
+                    result = NSLocalizedString("tx_feegrant_allowance", comment: "")
+                } else if (msgType.contains("MsgRevokeAllowance")) {
+                    result = NSLocalizedString("tx_feegrant_revoke", comment: "")
+                }
+
             }
             
             
@@ -308,6 +316,22 @@ public struct ApiHistoryNewCustom {
                 } else if (msgType.contains("MsgIssueDenom")) {
                     result = NSLocalizedString("tx_nft_issueDenom", comment: "")
                     
+                }
+            
+            } else if (msgType.contains("irismod.") && msgType.contains("coinswap")) {
+                if (msgType.contains("MsgSwapOrder")) {
+                    result = NSLocalizedString("tx_coin_swap", comment: "")
+                } else if (msgType.contains("MsgAddLiquidity")) {
+                    result = NSLocalizedString("tx_add_liquidity", comment: "")
+                } else if (msgType.contains("MsgRemoveLiquidity")) {
+                    result = NSLocalizedString("tx_remove_liquidity", comment: "")
+                }
+
+            } else if (msgType.contains("irismod.") && msgType.contains("farm")) {
+                if (msgType.contains("MsgStake")) {
+                    result = NSLocalizedString("tx_farm_stake", comment: "")
+                } else if (msgType.contains("MsgHarvest")) {
+                    result = NSLocalizedString("tx_farm_harvest", comment: "")
                 }
             }
             
@@ -541,8 +565,6 @@ public struct ApiHistoryNewCustom {
                     
                 } else if (msgType.contains("MsgUnlinkApplication")) {
                     
-                } else if (msgType.contains("MsgUnlinkChainAccount")) {
-                    
                 }
             }
             
@@ -687,8 +709,63 @@ public struct ApiHistoryNewCustom {
                     
                 }
                 
+            } else if (msgType.contains("kava.") && msgType.contains("pricefeed")) {
+                if (msgType.contains("MsgPostPrice")) {
+                    result = NSLocalizedString("tx_kava_post_price", comment: "")
+                }
             }
             
+            // axelar msg type
+            else if (msgType.contains("axelar.") && msgType.contains("reward")) {
+                if (msgType.contains("RefundMsgRequest")) {
+                    result = NSLocalizedString("tx_axelar_refund_msg_request", comment: "")
+                }
+
+            } else if (msgType.contains("axelar.") && msgType.contains("axelarnet")) {
+                if (msgType.contains("LinkRequest")) {
+                    result = NSLocalizedString("tx_axelar_link_request", comment: "")
+                
+                } else if (msgType.contains("ConfirmDepositRequest")) {
+                    result = NSLocalizedString("tx_axelar_confirm_deposit_request", comment: "")
+                
+                } else if (msgType.contains("RouteIBCTransfersRequest")) {
+                    result = NSLocalizedString("tx_axelar_route_ibc_request", comment: "")
+                
+                } else if (msgType.contains("ExecutePendingTransfersRequest")) {
+
+                } else if (msgType.contains("RegisterIBCPathRequest")) {
+
+                } else if (msgType.contains("AddCosmosBasedChainRequest")) {
+
+                } else if (msgType.contains("RegisterAssetRequest")) {
+
+                } else if (msgType.contains("RegisterFeeCollectorRequest")) {
+
+                } else if (msgType.contains("RetryIBCTransferRequest")) {
+
+                }
+            }
+            
+            // injective msg type
+            else if (msgType.contains("injective.") && msgType.contains("exchange")) {
+                if (msgType.contains("MsgBatchUpdateOrders")) {
+                    result = NSLocalizedString("tx_injective_batch_update_order", comment: "")
+                
+                } else if (msgType.contains("MsgBatchCreateDerivativeLimitOrders") || msgType.contains("MsgCreateDerivativeLimitOrder")) {
+                    result = NSLocalizedString("tx_injective_create_limit_order", comment: "")
+                
+                } else if (msgType.contains("MsgBatchCreateSpotLimitOrders") || msgType.contains("MsgCreateSpotLimitOrder")) {
+                    result = NSLocalizedString("tx_injective_create_spot_order", comment: "")
+                
+                } else if (msgType.contains("MsgBatchCancelDerivativeOrders") || msgType.contains("MsgCancelDerivativeOrder")) {
+                    result = NSLocalizedString("tx_injective_cancel_limit_order", comment: "")
+                
+                } else if (msgType.contains("MsgBatchCancelSpotOrder") || msgType.contains("MsgCancelSpotOrder")) {
+                    result = NSLocalizedString("tx_injective_cancel_spot_order", comment: "")
+                }
+            }
+
+
             if (getMsgCnt() > 1) {
                 result = result +  " + " + String(getMsgCnt() - 1)
             }

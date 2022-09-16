@@ -901,6 +901,8 @@ support@cosmostation.io";
 "tx_authz_grant" = "Authz Grant";
 "tx_authz_revoke" = "Authz Revoke";
 "tx_authz_exe" = "Authz Execute";
+"tx_feegrant_allowance" = "Fee Grant\nAllowance";
+"tx_feegrant_revoke" = "Fee Grant\nRevoke";
 "tx_create_validator" = "Create Val";
 "tx_edit_validator" = "Edit Val";
 "tx_unjail_validator" = "Unjail Val";
@@ -996,6 +998,9 @@ support@cosmostation.io";
 "tx_nft_edit" = "NFT Edit";
 "tx_nft_issueDenom" = "Issue NFT Denom";
 
+"tx_farm_stake" = "Stake";
+"tx_farm_harvest" = "Harvest";
+
 "tx_desmos_save_profile" = "Save Profile";
 "tx_desmos_delete_profile" = "Delete Profile";
 "tx_desmos_create_relation" = "Create Relationship";
@@ -1029,6 +1034,17 @@ support@cosmostation.io";
 "tx_crescent_remove_plan" = "Farming\nRemove Plain";
 "tx_crescent_advance_epoch" = "Farming\nEpoch";
 "tx_crescent_claim" = "Airdrop";
+
+"tx_axelar_refund_msg_request" = "Refund Msg\nRequest";
+"tx_axelar_link_request" = "Link Request";
+"tx_axelar_confirm_deposit_request" = "Confirm Deposit\nRequest";
+"tx_axelar_route_ibc_request" = "Route IBC request";
+
+"tx_injective_batch_update_order" = "Update Order";
+"tx_injective_create_limit_order" = "Create Derivative Order";
+"tx_injective_create_spot_order" = "Create Spot Order";
+"tx_injective_cancel_limit_order" = "Cancel Derivative Order";
+"tx_injective_cancel_spot_order" = "Cancel Spot Order";
 
 "tx_known" = "Unknown";
 
