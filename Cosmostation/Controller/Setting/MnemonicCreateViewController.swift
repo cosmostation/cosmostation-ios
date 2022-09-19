@@ -12,6 +12,9 @@ import SwiftKeychainWrapper
 
 class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     
+    
+    @IBOutlet weak var mnDisplayImg: UIButton!
+    
     @IBOutlet weak var mneminicLayer0: UIView!
     @IBOutlet weak var mneminicLayer1: UIView!
     @IBOutlet weak var mneminicLayer2: UIView!
@@ -66,7 +69,9 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     var mnemonicLayers: [UIView] = [UIView]()
     var mnemonicLabels: [UILabel] = [UILabel]()
     var mnemonicWords: [String]!
-
+    
+    var isDisplay = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mnemonicLayers = [self.mneminicLayer0, self.mneminicLayer1, self.mneminicLayer2, self.mneminicLayer3,
@@ -103,14 +108,31 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     
     func onUpdateView() {
         for i in 0 ..< self.mnemonicLabels.count {
-            self.mnemonicLabels[i].text = self.mnemonicWords[i]
+            if (isDisplay) {
+                self.mnemonicLabels[i].text = self.mnemonicWords[i]
+            } else {
+                self.mnemonicLabels[i].text = "****"
+                self.mnemonicLabels[i].translatesAutoresizingMaskIntoConstraints = false
+
+            }
             self.mnemonicLabels[i].adjustsFontSizeToFitWidth = true
             self.mnemonicLayers[i].layer.borderWidth = 1
             self.mnemonicLayers[i].layer.cornerRadius = 4
             self.mnemonicLayers[i].layer.borderColor = UIColor.init(named: "_font04")!.cgColor
         }
+        
+        if (isDisplay) {
+            mnDisplayImg.setImage(UIImage(named: "iconNotDisplay"), for: .normal)
+        } else {
+            mnDisplayImg.setImage(UIImage(named: "iconDisplay"), for: .normal)
+        }
     }
 
+    @IBAction func onClickDisplay(_ sender: UIButton) {
+        isDisplay = !isDisplay
+        self.onUpdateView()
+    }
+    
     @IBAction func onClickDeriveWallet(_ sender: UIButton) {
         if (!BaseData.instance.hasPassword()) {
             let passwordVC = UIStoryboard(name: "Password", bundle: nil).instantiateViewController(withIdentifier: "PasswordViewController") as! PasswordViewController
