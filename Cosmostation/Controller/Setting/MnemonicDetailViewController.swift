@@ -12,6 +12,7 @@ import SwiftKeychainWrapper
 class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var mnemonicNameLabel: UILabel!
+    @IBOutlet weak var mnDisplayImg: UIButton!
     
     @IBOutlet weak var mneminicLayer0: UIView!
     @IBOutlet weak var mneminicLayer1: UIView!
@@ -67,7 +68,9 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     
     var mWords: MWords!
     var mnemonicId: Int64!
-
+    
+    var isDisplay = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mnemonicLayers = [self.mneminicLayer0, self.mneminicLayer1, self.mneminicLayer2, self.mneminicLayer3,
@@ -105,12 +108,22 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
         self.mnemonicNameLabel.text = self.mWords.getName()
         for i in 0 ..< self.mnemonicLabels.count {
             if (self.mWords.getWordsCnt() > i) {
-                self.mnemonicLabels[i].text = self.mWords.getMnemonicWords()[i]
+                if (isDisplay) {
+                    self.mnemonicLabels[i].text = self.mWords.getMnemonicWords()[i]
+                } else {
+                    self.mnemonicLabels[i].text = "****"
+                }
                 self.mnemonicLabels[i].adjustsFontSizeToFitWidth = true
                 self.mnemonicLayers[i].layer.borderWidth = 1
                 self.mnemonicLayers[i].layer.cornerRadius = 4
                 self.mnemonicLayers[i].layer.borderColor = UIColor.init(named: "_font04")!.cgColor
             }
+        }
+        
+        if (isDisplay) {
+            mnDisplayImg.setImage(UIImage(named: "iconNotDisplay"), for: .normal)
+        } else {
+            mnDisplayImg.setImage(UIImage(named: "iconDisplay"), for: .normal)
         }
     }
     
@@ -120,6 +133,11 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     
     @IBAction func onClickCopy(_ sender: UIButton) {
         self.onCopyAlert()
+    }
+    
+    @IBAction func onClickDisplay(_ sender: UIButton) {
+        isDisplay = !isDisplay
+        self.onUpdateView()
     }
     
     @IBAction func onClickDeriveWallet(_ sender: UIButton) {
@@ -209,7 +227,6 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
             nameAlert.view.superview?.subviews[0].addGestureRecognizer(tapGesture)
         }
     }
-    
     
     func passwordResponse(result: Int) {
         if (result == PASSWORD_RESUKT_OK_FOR_DELETE) {

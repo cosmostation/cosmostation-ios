@@ -198,7 +198,7 @@
 "rEO-fz-cbK.headerTitle" = "지갑";
 
 /* Class = "UILabel"; text = "Wallet Manage"; ObjectID = "s1Y-7N-iWS"; */
-"s1Y-7N-iWS.text" = "니모닉 관리";
+"s1Y-7N-iWS.text" = "니모닉 관리 / 지갑 추가";
 
 "Up0-Ck-BHz.text" = "지갑 관리";
 
