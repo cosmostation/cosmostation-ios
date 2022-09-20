@@ -66,11 +66,11 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             }
         }
         
-        self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(nativeDenom, naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpValueChange(nativeDenom, font: naviUpdownPercent.font)
-        let changeValue = WUtils.valueChange(nativeDenom)
-        if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
-        else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
+        self.naviPerPrice.attributedText = WUtils.dpPrice(nativeDenom, naviPerPrice.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(nativeDenom, font: naviUpdownPercent.font)
+        let changePrice = WUtils.priceChange(nativeDenom)
+        if (changePrice.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
+        else if (changePrice.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
     }
 

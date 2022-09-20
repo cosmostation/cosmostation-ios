@@ -46,17 +46,17 @@ class AssetCell: UITableViewCell {
         if (coin.denom == chainConfig?.stakeDenom) {
             let allAmount = WUtils.getAllMainAsset(coin.denom)
             assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), allAmount, decimal, assetValue.font)
+            assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), allAmount, decimal, assetValue.font)
             
         } else if (chainConfig?.chainType == .KAVA_MAIN) {
             let allAmount = WUtils.getKavaTokenAll(coin.denom)
             assetAmount.attributedText = WDP.dpAmount(allAmount.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), allAmount, decimal, assetValue.font)
+            assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), allAmount, decimal, assetValue.font)
             
         } else {
             let available = NSDecimalNumber.init(string: coin.amount)
             assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-            assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
+            assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
         }
         onBindPriceView(asset!.base_denom)
     }
@@ -71,7 +71,7 @@ class AssetCell: UITableViewCell {
         assetSymbol.text = asset!.dp_denom
         assetDescription.text = WDP.dpPath(asset!.path)
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-        assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
+        assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
         onBindPriceView(asset!.base_denom)
     }
     
@@ -85,7 +85,7 @@ class AssetCell: UITableViewCell {
         assetSymbol.text = asset!.dp_denom
         assetDescription.text = WDP.dpPath(asset!.path)
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-        assetValue.attributedText = WUtils.dpValueUserCurrency(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
+        assetValue.attributedText = WUtils.dpAssetValue(asset!.base_denom.lowercased(), available, decimal, assetValue.font)
         onBindPriceView(asset!.base_denom)
     }
     
@@ -102,7 +102,7 @@ class AssetCell: UITableViewCell {
         assetDescription.text = ""
         assetDescription.lineBreakMode = .byTruncatingMiddle
         assetAmount.attributedText = WDP.dpAmount(available.stringValue, assetAmount.font!, decimal, 6)
-        assetValue.attributedText = WUtils.dpValueUserCurrency(token!.denom, available, decimal, assetValue.font)
+        assetValue.attributedText = WUtils.dpAssetValue(token!.denom, available, decimal, assetValue.font)
         onBindPriceView(token!.denom)
     }
     
@@ -116,7 +116,7 @@ class AssetCell: UITableViewCell {
                 assetSymbol.text = bnbToken.original_symbol.uppercased()
                 assetDescription.text = bnbToken.name
                 assetAmount.attributedText = WDP.dpAmount(amount.stringValue, assetAmount.font!, 0, 6)
-                assetValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, amount, 0, assetValue.font)
+                assetValue.attributedText = WUtils.dpAssetValue(BNB_MAIN_DENOM, amount, 0, assetValue.font)
             }
             
         } else if (chainConfig?.chainType == .OKEX_MAIN && balance?.balance_denom == OKEX_MAIN_DENOM) {
@@ -126,7 +126,7 @@ class AssetCell: UITableViewCell {
                 assetSymbol.text = okToken.symbol!.uppercased()
                 assetDescription.text = okToken.description
                 assetAmount.attributedText = WDP.dpAmount(amount.stringValue, assetAmount.font!, 0, 6)
-                assetValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, amount, 0, assetValue.font)
+                assetValue.attributedText = WUtils.dpAssetValue(OKEX_MAIN_DENOM, amount, 0, assetValue.font)
             }
         }
         onBindPriceView(balance!.balance_denom)
@@ -143,7 +143,7 @@ class AssetCell: UITableViewCell {
                 let tokenAmount = WUtils.getAllBnbToken(balance!.balance_denom)
                 let convertAmount = WUtils.getBnbConvertAmount(balance!.balance_denom)
                 assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
-                assetValue.attributedText = WUtils.dpValueUserCurrency(BNB_MAIN_DENOM, convertAmount, 0, assetValue.font)
+                assetValue.attributedText = WUtils.dpAssetValue(BNB_MAIN_DENOM, convertAmount, 0, assetValue.font)
                 assetPrice.attributedText = WUtils.dpBnbTokenUserCurrencyPrice(balance!.balance_denom, assetPrice.font)
                 assetPriceChange.text = ""
             }
@@ -157,7 +157,7 @@ class AssetCell: UITableViewCell {
                 let tokenAmount = WUtils.getAllExToken(balance!.balance_denom)
                 let convertedAmount = WUtils.convertTokenToOkt(balance!.balance_denom)
                 assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
-                assetValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, convertedAmount, 0, assetValue.font)
+                assetValue.attributedText = WUtils.dpAssetValue(OKEX_MAIN_DENOM, convertedAmount, 0, assetValue.font)
                 assetPrice.text = "-"
                 assetPriceChange.text = ""
             }
@@ -167,15 +167,15 @@ class AssetCell: UITableViewCell {
     
     
     func onBindPriceView(_ priceDenom: String) {
-        assetPrice.attributedText = WUtils.dpPerUserCurrencyValue(priceDenom, assetPrice.font)
-        assetPriceChange.attributedText = WUtils.dpValueChange2(priceDenom, assetPriceChange.font)
+        assetPrice.attributedText = WUtils.dpPrice(priceDenom, assetPrice.font)
+        assetPriceChange.attributedText = WUtils.dpPriceChange2(priceDenom, assetPriceChange.font)
         
-        let changeValue = WUtils.valueChange(priceDenom)
-        if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) {
+        let changePrice = WUtils.priceChange(priceDenom)
+        if (changePrice.compare(NSDecimalNumber.zero).rawValue > 0) {
             assetPriceChange.textColor = UIColor(named: "_voteYes")
-        } else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) {
+        } else if (changePrice.compare(NSDecimalNumber.zero).rawValue < 0) {
             assetPriceChange.textColor = UIColor(named: "_voteNo")
-        } else if (changeValue.compare(NSDecimalNumber.zero).rawValue == 0) {
+        } else if (changePrice.compare(NSDecimalNumber.zero).rawValue == 0) {
             assetPriceChange.text = ""
         }
     }

@@ -1065,7 +1065,12 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     
     //fetch for common
     func onFetchPriceInfo() {
-        let request = Alamofire.request(BaseNetWork.getPrices(self.mChainType), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+        print("onFetchPriceInfo ", BaseData.instance.needPriceUpdate())
+        if (!BaseData.instance.needPriceUpdate()) {
+//            NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
+            return
+        }
+        let request = Alamofire.request(BaseNetWork.getPrices(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
         request.responseJSON { (response) in
             switch response.result {
             case .success(let res):
@@ -1074,7 +1079,9 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
                     priceInfos.forEach { priceInfo in
                         BaseData.instance.mPrices.append(Price.init(priceInfo))
                     }
+                    BaseData.instance.setLastPriceTime()
                 }
+//                print("mPrices ", BaseData.instance.mPrices)
                 NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
             
             case .failure(let error):

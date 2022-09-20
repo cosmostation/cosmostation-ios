@@ -383,9 +383,26 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     func onSetCurrency(_ value:Int) {
-        if(BaseData.instance.getCurrency() != value) {
+        if (BaseData.instance.getCurrency() != value) {
             BaseData.instance.setCurrency(value)
             self.onUpdateCurrency()
+            let request = Alamofire.request(BaseNetWork.getPrices(), method: .get, parameters: [:], encoding: URLEncoding.default, headers: [:])
+            request.responseJSON { (response) in
+                switch response.result {
+                case .success(let res):
+                    BaseData.instance.mPrices.removeAll()
+                    if let priceInfos = res as? Array<NSDictionary> {
+                        priceInfos.forEach { priceInfo in
+                            BaseData.instance.mPrices.append(Price.init(priceInfo))
+                        }
+                        BaseData.instance.setLastPriceTime()
+                    }
+                    NotificationCenter.default.post(name: Notification.Name("onFetchPrice"), object: nil, userInfo: nil)
+                
+                case .failure(let error):
+                    print("onFetchPriceInfo ", error)
+                }
+            }
         }
     }
     

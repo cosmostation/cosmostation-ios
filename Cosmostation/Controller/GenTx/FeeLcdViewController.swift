@@ -51,7 +51,7 @@ class FeeLcdViewController: BaseViewController {
     func onUpdateView() {
         mFee = BaseData.instance.getMainDenomFee(chainConfig)
         WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
-        feeTotalValue.attributedText = WUtils.dpValueUserCurrency(WUtils.getMainDenom(chainConfig), mFee, mDivideDecimal, feeTotalValue.font)
+        feeTotalValue.attributedText = WUtils.dpAssetValue(WUtils.getMainDenom(chainConfig), mFee, mDivideDecimal, feeTotalValue.font)
     }
     
     override func enableUserInteraction() {

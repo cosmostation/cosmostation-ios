@@ -61,7 +61,7 @@ class WalletOkCell: UITableViewCell {
         lockedAmount.attributedText = WDP.dpAmount(locked.stringValue, lockedAmount.font, 0, 6)
         depositAmount.attributedText = WDP.dpAmount(deposit.stringValue, depositAmount.font, 0, 6)
         withdrawAmount.attributedText = WDP.dpAmount(withdraw.stringValue, withdrawAmount.font, 0, 6)
-        totalValue.attributedText = WUtils.dpValueUserCurrency(OKEX_MAIN_DENOM, total, 0, totalValue.font)
+        totalValue.attributedText = WUtils.dpAssetValue(OKEX_MAIN_DENOM, total, 0, totalValue.font)
         BaseData.instance.updateLastTotal(account, total.stringValue)
     }
     

@@ -61,11 +61,11 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     func onInitView() {
         WUtils.setDenomTitle(chainType, naviTokenSymbol)
         self.naviTokenImg.image = chainConfig?.stakeDenomImg
-        self.naviPerPrice.attributedText = WUtils.dpPerUserCurrencyValue(WUtils.getMainDenom(chainConfig), naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpValueChange(WUtils.getMainDenom(chainConfig), font: naviUpdownPercent.font)
-        let changeValue = WUtils.valueChange(WUtils.getMainDenom(chainConfig))
-        if (changeValue.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
-        else if (changeValue.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
+        self.naviPerPrice.attributedText = WUtils.dpPrice(WUtils.getMainDenom(chainConfig), naviPerPrice.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), font: naviUpdownPercent.font)
+        let changePrice = WUtils.priceChange(WUtils.getMainDenom(chainConfig))
+        if (changePrice.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
+        else if (changePrice.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
         else { naviUpdownImg.image = nil }
         
         totalAmount = WUtils.getAllMainAsset(stakingDenom)
