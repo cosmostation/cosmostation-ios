@@ -267,11 +267,6 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/assets"
     }
     
-//    static func mintscanCw20() -> String {
-//        return MINTSCAN_API_URL + "v1/assets/cw20"
-//    }
-    
-    
     static func mintscanAssets_v2() -> String {
         return MINTSCAN_API_URL + "v2/assets"
     }
@@ -286,7 +281,6 @@ class BaseNetWork {
     
     static func getPrices() -> String {
         let currency = BaseData.instance.getCurrencyString().lowercased()
-        print("getPrices ", MINTSCAN_API_URL + "v2/utils/market/prices?currency=" + currency)
         return MINTSCAN_API_URL + "v2/utils/market/prices?currency=" + currency
     }
     
