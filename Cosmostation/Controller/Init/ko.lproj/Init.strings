@@ -120,7 +120,7 @@
 "cgM-k7-H5E.text" = "니모닉 분실은 자산 피해로 이어질 수 있습니다.\n오프라인으로 별도 보관하는 것을 강력히 권장하며, 본인 외 접근이 불가능하도록 유의해주세요.";
 
 /* Class = "UILabel"; text = "Losing your mnemonics could lead to loss of your asset. We highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else. You can check/manage your mnemonics in [Manage Mnemonic]"; ObjectID = "jm3-Pg-B7O"; */
-"jm3-Pg-B7O.text" = "니모닉 분실은 자산 피해로 이어질 수 있습니다.\n오프라인으로 별도 보관하는 것을 강력히 권장하며, 본인 외 접근이 불가능하도록 유의해주세요.\n\n해당 문구가 추가됩니다. (Mnemonic Detail 화면에서는 문구가 추가되지 않습니다.)";
+"jm3-Pg-B7O.text" = "니모닉 분실은 자산 피해로 이어질 수 있습니다.\n오프라인으로 별도 보관하는 것을 강력히 권장하며, 본인 외 접근이 불가능하도록 유의해주세요.\n\n해당 문구가 추가됩니다.\n(Mnemonic Detail 화면에서는 문구가 추가되지 않습니다.)";
 
 /* Class = "UILabel"; text = "bembino"; ObjectID = "cqi-I0-lpm"; */
 "cqi-I0-lpm.text" = "bembino";
