@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MnemonicCreateViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="mnDisplayImg" destination="6lS-qQ-7BL" id="Okg-NI-Bfn"/>
                 <outlet property="mneminicLayer0" destination="U4f-tJ-ho8" id="HUb-lH-qKU"/>
                 <outlet property="mneminicLayer1" destination="Wqo-SW-LOu" id="dye-y3-cHB"/>
                 <outlet property="mneminicLayer10" destination="V27-rN-AFk" id="bnq-Jv-YER"/>
@@ -69,13 +70,46 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIC-ui-zeY" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="56" width="390" height="184"/>
+                    <rect key="frame" x="12" y="56" width="390" height="220"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sY0-1T-Vk3">
-                            <rect key="frame" x="8" y="8" width="374" height="164"/>
+                            <rect key="frame" x="8" y="8" width="374" height="200"/>
                             <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kck-Bx-0Mc">
+                                    <rect key="frame" x="0.0" y="0.0" width="374" height="32"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mnemonic Phrase" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hrq-Xp-8Cq">
+                                            <rect key="frame" x="4" y="7.5" width="121" height="17.5"/>
+                                            <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                                            <color key="textColor" name="_font05"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lS-qQ-7BL">
+                                            <rect key="frame" x="343" y="1" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="30" id="Tfr-21-3ON"/>
+                                                <constraint firstAttribute="height" constant="30" id="ZuK-8r-gR5"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" image="iconDisplay"/>
+                                            <connections>
+                                                <action selector="onClickDisplay:" destination="-1" eventType="touchUpInside" id="HH5-z8-xPu"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <viewLayoutGuide key="safeArea" id="vxZ-yX-KJU"/>
+                                    <color key="backgroundColor" name="_card_bg"/>
+                                    <constraints>
+                                        <constraint firstItem="Hrq-Xp-8Cq" firstAttribute="leading" secondItem="vxZ-yX-KJU" secondAttribute="leading" constant="4" id="5BY-8N-mEp"/>
+                                        <constraint firstItem="vxZ-yX-KJU" firstAttribute="trailing" secondItem="6lS-qQ-7BL" secondAttribute="trailing" constant="1" id="ESh-cM-d0b"/>
+                                        <constraint firstAttribute="height" constant="32" id="FX5-fd-S2j"/>
+                                        <constraint firstItem="Hrq-Xp-8Cq" firstAttribute="centerY" secondItem="kck-Bx-0Mc" secondAttribute="centerY" id="vQX-uK-shL"/>
+                                        <constraint firstItem="6lS-qQ-7BL" firstAttribute="centerY" secondItem="kck-Bx-0Mc" secondAttribute="centerY" id="xow-Qh-gzN"/>
+                                    </constraints>
+                                </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nzb-lP-PKk">
-                                    <rect key="frame" x="0.0" y="0.0" width="374" height="24"/>
+                                    <rect key="frame" x="0.0" y="36" width="374" height="24"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4f-tJ-ho8">
                                             <rect key="frame" x="0.0" y="0.0" width="90.5" height="24"/>
@@ -196,7 +230,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="CnQ-ya-5rf">
-                                    <rect key="frame" x="0.0" y="28" width="374" height="24"/>
+                                    <rect key="frame" x="0.0" y="64" width="374" height="24"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UaU-Pz-4qQ">
                                             <rect key="frame" x="0.0" y="0.0" width="90.5" height="24"/>
@@ -317,7 +351,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="mEu-b4-uKB">
-                                    <rect key="frame" x="0.0" y="56" width="374" height="24"/>
+                                    <rect key="frame" x="0.0" y="92" width="374" height="24"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqu-0K-Jt6">
                                             <rect key="frame" x="0.0" y="0.0" width="90.5" height="24"/>
@@ -438,7 +472,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="nbN-wX-7IR">
-                                    <rect key="frame" x="0.0" y="84" width="374" height="24"/>
+                                    <rect key="frame" x="0.0" y="120" width="374" height="24"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYv-uX-jHp">
                                             <rect key="frame" x="0.0" y="0.0" width="90.5" height="24"/>
@@ -559,7 +593,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="AOP-yQ-KKg">
-                                    <rect key="frame" x="0.0" y="112" width="374" height="24"/>
+                                    <rect key="frame" x="0.0" y="148" width="374" height="24"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KEm-Wn-7Hw">
                                             <rect key="frame" x="0.0" y="0.0" width="90.5" height="24"/>
@@ -680,7 +714,7 @@
                                     </subviews>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="gDe-r1-bjG">
-                                    <rect key="frame" x="0.0" y="140" width="374" height="24"/>
+                                    <rect key="frame" x="0.0" y="176" width="374" height="24"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clN-RA-1IO">
                                             <rect key="frame" x="0.0" y="0.0" width="90.5" height="24"/>
@@ -805,10 +839,10 @@
                     </subviews>
                     <color key="backgroundColor" name="_card_bg"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="184" id="HnP-pk-2AH"/>
                         <constraint firstItem="sY0-1T-Vk3" firstAttribute="leading" secondItem="yIC-ui-zeY" secondAttribute="leading" constant="8" id="Us4-gA-BEj"/>
                         <constraint firstAttribute="trailing" secondItem="sY0-1T-Vk3" secondAttribute="trailing" constant="8" id="ZnV-RR-YZ5"/>
                         <constraint firstItem="sY0-1T-Vk3" firstAttribute="top" secondItem="yIC-ui-zeY" secondAttribute="top" constant="8" id="i4A-Wf-13o"/>
+                        <constraint firstAttribute="bottom" secondItem="sY0-1T-Vk3" secondAttribute="bottom" constant="12" id="qU9-jd-7Qg"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -828,13 +862,29 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgWarnMnemonic" translatesAutoresizingMaskIntoConstraints="NO" id="4qD-4q-Ohg">
+                    <rect key="frame" x="157" y="595" width="100" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="22F-ek-Igb"/>
+                        <constraint firstAttribute="width" constant="100" id="YVY-0W-ZsC"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jm3-Pg-B7O">
+                    <rect key="frame" x="48" y="683" width="318" height="97"/>
+                    <string key="text">Losing your mnemonics could lead to loss of your asset. We highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.
+
+You can check/manage your mnemonics in [Manage Mnemonic]</string>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                    <color key="textColor" name="_font04"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZ1-tB-5G6">
                     <rect key="frame" x="16" y="796" width="382" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="jjv-6A-FWA"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                    <state key="normal" title="Derive Wallet">
+                    <state key="normal" title="Add Wallet">
                         <color key="titleColor" name="photon"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -856,17 +906,25 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="jm3-Pg-B7O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="48" id="9EX-au-KRq"/>
+                <constraint firstItem="jm3-Pg-B7O" firstAttribute="top" secondItem="4qD-4q-Ohg" secondAttribute="bottom" constant="8" id="Eh6-9V-8eg"/>
                 <constraint firstItem="yIC-ui-zeY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="GgI-Qm-DUU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dZ1-tB-5G6" secondAttribute="trailing" constant="16" id="IaP-nL-Isy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yIC-ui-zeY" secondAttribute="trailing" constant="12" id="NF5-sw-gZY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dZ1-tB-5G6" secondAttribute="bottom" constant="16" id="Ueg-kU-BTW"/>
                 <constraint firstItem="yIC-ui-zeY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="XT8-Xa-Eam"/>
+                <constraint firstItem="4qD-4q-Ohg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YIK-27-jTo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jm3-Pg-B7O" secondAttribute="trailing" constant="48" id="kzh-st-4vi"/>
+                <constraint firstItem="dZ1-tB-5G6" firstAttribute="top" secondItem="jm3-Pg-B7O" secondAttribute="bottom" constant="16" id="lSt-L8-hdQ"/>
+                <constraint firstItem="jm3-Pg-B7O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wJS-Oz-CXD"/>
                 <constraint firstItem="dZ1-tB-5G6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ypD-1L-mFV"/>
             </constraints>
             <point key="canvasLocation" x="139" y="153"/>
         </view>
     </objects>
     <resources>
+        <image name="ImgWarnMnemonic" width="100" height="70"/>
+        <image name="iconDisplay" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
