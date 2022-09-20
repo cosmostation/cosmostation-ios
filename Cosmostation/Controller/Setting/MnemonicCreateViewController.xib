@@ -862,6 +862,22 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgWarnMnemonic" translatesAutoresizingMaskIntoConstraints="NO" id="4qD-4q-Ohg">
+                    <rect key="frame" x="157" y="571" width="100" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="22F-ek-Igb"/>
+                        <constraint firstAttribute="width" constant="100" id="YVY-0W-ZsC"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jm3-Pg-B7O">
+                    <rect key="frame" x="48" y="659" width="318" height="121"/>
+                    <string key="text">Losing your mnemonics could lead to loss of your asset. We highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.
+
+You can check/manage your mnemonics in [Manage Mnemonic]</string>
+                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
+                    <color key="textColor" name="_font04"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZ1-tB-5G6">
                     <rect key="frame" x="16" y="796" width="382" height="50"/>
                     <constraints>
@@ -890,17 +906,24 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="jm3-Pg-B7O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="48" id="9EX-au-KRq"/>
+                <constraint firstItem="jm3-Pg-B7O" firstAttribute="top" secondItem="4qD-4q-Ohg" secondAttribute="bottom" constant="8" id="Eh6-9V-8eg"/>
                 <constraint firstItem="yIC-ui-zeY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="GgI-Qm-DUU"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dZ1-tB-5G6" secondAttribute="trailing" constant="16" id="IaP-nL-Isy"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yIC-ui-zeY" secondAttribute="trailing" constant="12" id="NF5-sw-gZY"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dZ1-tB-5G6" secondAttribute="bottom" constant="16" id="Ueg-kU-BTW"/>
                 <constraint firstItem="yIC-ui-zeY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="XT8-Xa-Eam"/>
+                <constraint firstItem="4qD-4q-Ohg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="YIK-27-jTo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jm3-Pg-B7O" secondAttribute="trailing" constant="48" id="kzh-st-4vi"/>
+                <constraint firstItem="dZ1-tB-5G6" firstAttribute="top" secondItem="jm3-Pg-B7O" secondAttribute="bottom" constant="16" id="lSt-L8-hdQ"/>
+                <constraint firstItem="jm3-Pg-B7O" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wJS-Oz-CXD"/>
                 <constraint firstItem="dZ1-tB-5G6" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ypD-1L-mFV"/>
             </constraints>
             <point key="canvasLocation" x="139" y="153"/>
         </view>
     </objects>
     <resources>
+        <image name="ImgWarnMnemonic" width="100" height="70"/>
         <image name="iconDisplay" width="24" height="24"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
