@@ -995,7 +995,7 @@
                         <constraint firstAttribute="height" constant="50" id="AWz-1y-27Z"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="15"/>
-                    <state key="normal" title="Derive Wallet">
+                    <state key="normal" title="Add Wallet">
                         <color key="titleColor" name="photon"/>
                     </state>
                     <userDefinedRuntimeAttributes>
