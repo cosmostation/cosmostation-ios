@@ -20,9 +20,11 @@ We will add more tendermint-based blockchain projects in the coming updates, suc
 
 
 ## Notice iOS
- can build with pod init, install, update
-
-
+You can build by following these instructions:
+1. Clone the project.
+2. `pod update` ( in m1. `arch -x86_64 pod update`)
+3. Remove **GoogleService-Info.plist** from list of project files.(Red highlighting)
+4. Comment out `FirebaseApp.configure()` in **AppDelegate.swift**
 
 ## Downloads
 
