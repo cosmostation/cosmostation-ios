@@ -183,6 +183,25 @@ final class BaseData : NSObject{
         return availableAmount(symbol).adding(lockedAmount(symbol))
     }
     
+    //binance chain
+    func allBnbTokenAmount(_ symbol: String) -> NSDecimalNumber {
+        return availableAmount(symbol).adding(frozenAmount(symbol)).adding(lockedAmount(symbol))
+    }
+    
+    func bnbToken(_ symbol: String?) -> BnbToken? {
+        return BaseData.instance.mBnbTokenList.filter{ $0.symbol == symbol }.first
+    }
+    
+    func bnbTicker(_ symbol: String?) -> BnbTicker? {
+        if let result = mBnbTokenTicker.filter({ $0.baseAssetName == BNB_MAIN_DENOM && $0.quoteAssetName == symbol }).first {
+            return result
+        }
+        if let result = mBnbTokenTicker.filter({ $0.baseAssetName == symbol && $0.quoteAssetName == BNB_MAIN_DENOM }).first {
+            return result
+        }
+        return nil
+    }
+    
     func okDepositAmount() -> NSDecimalNumber {
         return WUtils.plainStringToDecimal(mOkStaking?.tokens)
     }

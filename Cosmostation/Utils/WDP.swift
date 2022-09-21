@@ -73,7 +73,7 @@ public class WDP {
             
         } else {
             if (chainConfig!.chainType == .BINANCE_MAIN) {
-                if let bnbTokenInfo = WUtils.getBnbToken(denom!) {
+                if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
                     if let url = URL(string: BinanceTokenImgUrl + bnbTokenInfo.original_symbol + ".png") {
                         imgView?.af_setImage(withURL: url)
                         return

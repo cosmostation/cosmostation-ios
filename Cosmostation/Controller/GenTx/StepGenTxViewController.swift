@@ -515,7 +515,7 @@ class StepGenTxViewController: UIPageViewController, UIPageViewControllerDelegat
         mAccount        = BaseData.instance.selectAccountById(id: BaseData.instance.getRecentAccountId())
         mBalances       = mAccount!.account_balances
         chainType       = ChainFactory.getChainType(mAccount!.account_base_chain)
-        mBnbToken       = WUtils.getBnbToken(mToSendDenom)
+        mBnbToken       = BaseData.instance.bnbToken(mToSendDenom)
         
         self.getKey()
         

@@ -110,8 +110,8 @@ class AssetCell: UITableViewCell {
     func onBindStakingCoin(_ chainConfig: ChainConfig?, _ balance: Balance?) {
         if (chainConfig == nil || balance == nil) { return }
         if (chainConfig?.chainType == .BINANCE_MAIN && balance?.balance_denom == BNB_MAIN_DENOM) {
-            if let bnbToken = WUtils.getBnbToken(BNB_MAIN_DENOM) {
-                let amount = WUtils.getAllBnbToken(BNB_MAIN_DENOM)
+            if let bnbToken = BaseData.instance.bnbToken(BNB_MAIN_DENOM) {
+                let amount = BaseData.instance.allBnbTokenAmount(BNB_MAIN_DENOM)
                 assetImg.image = UIImage(named: "tokenBinance")
                 assetSymbol.text = bnbToken.original_symbol.uppercased()
                 assetDescription.text = bnbToken.name
@@ -135,12 +135,12 @@ class AssetCell: UITableViewCell {
     func onBindEtcCoin(_ chainConfig: ChainConfig?, _ balance: Balance?) {
         if (chainConfig == nil || balance == nil) { return }
         if (chainConfig?.chainType == .BINANCE_MAIN) {
-            if let bnbToken = WUtils.getBnbToken(balance!.balance_denom) {
+            if let bnbToken = BaseData.instance.bnbToken(balance!.balance_denom) {
                 assetImg.af_setImage(withURL: URL(string: BinanceTokenImgUrl + bnbToken.original_symbol + ".png")!)
                 assetSymbol.text = bnbToken.original_symbol.uppercased()
                 assetDescription.text = bnbToken.name
                 
-                let tokenAmount = WUtils.getAllBnbToken(balance!.balance_denom)
+                let tokenAmount = BaseData.instance.allBnbTokenAmount(balance!.balance_denom)
                 let convertAmount = WUtils.bnbConvertAmount(balance!.balance_denom)
                 assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
                 assetValue.attributedText = WUtils.dpAssetValue(BNB_MAIN_DENOM, convertAmount, 0, assetValue.font)

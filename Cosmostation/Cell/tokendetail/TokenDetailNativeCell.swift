@@ -92,7 +92,7 @@ class TokenDetailNativeCell: TokenDetailCell {
     
     func onBindBNBTokens(_ denom: String?) {
         let balance = BaseData.instance.getBalance(denom)
-        let bnbToken = WUtils.getBnbToken(denom)
+        let bnbToken = BaseData.instance.bnbToken(denom)
         if (balance != nil && bnbToken != nil) {
             frozenLayer.isHidden = false
             lockedLayer.isHidden = false

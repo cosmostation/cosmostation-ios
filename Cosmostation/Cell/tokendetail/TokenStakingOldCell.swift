@@ -62,7 +62,7 @@ class TokenStakingOldCell: UITableViewCell {
             okStakingLayer.isHidden = true
             okUnbondingLayer.isHidden = true
             
-            let total = WUtils.getAllBnbToken(stakingDenom)
+            let total = BaseData.instance.allBnbTokenAmount(stakingDenom)
             let available = BaseData.instance.availableAmount(stakingDenom)
             let locked = BaseData.instance.lockedAmount(stakingDenom)
             let frozen = BaseData.instance.frozenAmount(stakingDenom)

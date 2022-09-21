@@ -310,7 +310,7 @@ public class WUtils {
         else if (chainConfig?.chainType == .BINANCE_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allBnb = NSDecimalNumber.zero
-                let amount = WUtils.getAllBnbToken(coin.balance_denom)
+                let amount = BaseData.instance.allBnbTokenAmount(coin.balance_denom)
                 if (coin.balance_denom == getMainDenom(chainConfig)) {
                     allBnb = allBnb.adding(amount)
                 } else {
@@ -535,44 +535,22 @@ public class WUtils {
         return amount
     }
     
-    
-    //For Binance chain asset utils
-    static func getAllBnbToken(_ symbol: String) -> NSDecimalNumber {
-        let dataBase = BaseData.instance
-        return BaseData.instance.availableAmount(symbol).adding(dataBase.frozenAmount(symbol)).adding(dataBase.lockedAmount(symbol))
-    }
-    
-    static func getBnbToken(_ symbol: String?) -> BnbToken? {
-        return BaseData.instance.mBnbTokenList.filter{ $0.symbol == symbol }.first
-    }
-    
-    static func getBnbTokenTic(_ symbol: String?) -> BnbTicker? {
-        return BaseData.instance.mBnbTokenTicker.filter { $0.symbol == getBnbTicSymbol(symbol!)}.first
-    }
-    
-    static func getBnbTicSymbol(_ symbol:String) -> String {
-        if (isBnbMarketToken(symbol)) {
-            return BNB_MAIN_DENOM + "_" + symbol
-        } else {
-            return  "" + symbol + "_" + BNB_MAIN_DENOM
-        }
-    }
-    
+    //for binance utils
     static func bnbConvertAmount(_ symbol: String) -> NSDecimalNumber {
-        if let ticker = getBnbTokenTic(symbol) {
-            let amount = getAllBnbToken(symbol)
-            if (isBnbMarketToken(symbol)) {
-                return amount.dividing(by: ticker.getLastPrice(), withBehavior: WUtils.handler8)
+        if let bnbTicker = BaseData.instance.bnbTicker(symbol) {
+            let amount = BaseData.instance.allBnbTokenAmount(symbol)
+            if (bnbTicker.baseAssetName == BNB_MAIN_DENOM) {
+                return amount.dividing(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
             } else {
-                return amount.multiplying(by: ticker.getLastPrice(), withBehavior: WUtils.handler8)
+                return amount.multiplying(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
             }
         }
         return NSDecimalNumber.zero
     }
     
     static func bnbTokenPrice(_ symbol: String) -> NSDecimalNumber {
-        if let bnbTicker = getBnbTokenTic(symbol) {
-            if (isBnbMarketToken(symbol)) {
+        if let bnbTicker = BaseData.instance.bnbTicker(symbol) {
+            if (bnbTicker.baseAssetName == BNB_MAIN_DENOM) {
                 let perPrice = (NSDecimalNumber.one).dividing(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
                 return perPrice.multiplying(by: price(BNB_MAIN_DENOM))
             } else {
@@ -599,41 +577,7 @@ public class WUtils {
         amountLabel.attributedText = WDP.dpAmount(coin.amount, amountLabel.font, 8, 8)
     }
     
-    static func isBnbMarketToken(_ symbol:String?) ->Bool {
-        switch symbol {
-        case "USDT.B-B7C":
-            return true
-        case "ETH.B-261":
-            return true
-        case "BTC.B-918":
-            return true
-        case "USDSB-1AC":
-            return true
-        case "THKDB-888":
-            return true
-        case "TUSDB-888":
-            return true
-        case "BTCB-1DE":
-            return true
-            
-        case "ETH-1C9":
-            return true
-        case "BUSD-BD1":
-            return true
-        case "IDRTB-178":
-            return true
-        case "TAUDB-888":
-            return true
-            
-        default:
-            return false
-        }
-    }
-    
-    
-    
-    
-    
+    //for okx utils
     static func getAllExToken(_ symbol: String) -> NSDecimalNumber {
         let dataBase = BaseData.instance
         if (symbol == OKEX_MAIN_DENOM) {
@@ -845,7 +789,7 @@ public class WUtils {
             
         } else {
             if (chainConfig!.chainType == .BINANCE_MAIN) {
-                if let bnbTokenInfo = getBnbToken(denom!) {
+                if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
                     return bnbTokenInfo.original_symbol.uppercased()
                 }
                 
