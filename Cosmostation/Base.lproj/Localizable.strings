@@ -78,7 +78,7 @@
 "change_mnemonic_name" = "Change Mnemonic Name";
 "mnemonic_name" = "Mnemonic name";
 "share_text" = "Share Text Address";
-"share_qr" = "Share QrCode Image";
+"share_qr" = "Share QR Code Image";
 "delete_wallet" = "Delete Wallet";
 "delete_wallet_msg" = "All information about this wallet will delete. \nIf you do not backup your mnemonics, you can not find it again!";
 "delete_menmonic" = "Delete Mnemonic";

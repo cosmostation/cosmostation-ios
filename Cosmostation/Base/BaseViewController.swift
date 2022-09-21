@@ -181,11 +181,11 @@ class BaseViewController: UIViewController {
         qrCode?.backgroundColor = CIColor(rgba: "EEEEEE")
         qrCode?.size = CGSize(width: 200, height: 200)
         
-        let attributedString = NSAttributedString(string: nickName ?? "", attributes: [
-            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18),
+        let attributedString = NSAttributedString(string: address.substring(to: 20) + "..." , attributes: [
+            NSAttributedString.Key.font : UIFont.systemFont(ofSize: 14),
             NSAttributedString.Key.foregroundColor : UIColor.black
         ])
-        let alert = UIAlertController(title: nickName, message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
+        let alert = UIAlertController(title: address, message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         alert.setValue(attributedString, forKey: "attributedTitle")
         alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.init(hexString: "EEEEEE")
         alert.addAction(UIAlertAction(title: NSLocalizedString("share", comment: ""), style: .default, handler:  { _ in
