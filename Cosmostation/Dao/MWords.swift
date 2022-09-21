@@ -45,7 +45,7 @@ public class MWords {
     
     func getName() -> String {
         if (self.nickName == "") {
-            return "Mnemonic " + String(id)
+            return "Account " + String(id)
         }
         return nickName
     }
