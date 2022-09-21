@@ -55,7 +55,7 @@ class WalletStationCell: UITableViewCell {
         if (account == nil || chainConfig == nil) { return }
         let totalToken = WUtils.getAllMainAsset(chainConfig!.stakeDenom)
         totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, 6, 6)
-        totalValue.attributedText = WUtils.dpValueUserCurrency(chainConfig!.stakeDenom, totalToken, 6, totalValue.font)
+        totalValue.attributedText = WUtils.dpAssetValue(chainConfig!.stakeDenom, totalToken, 6, totalValue.font)
         availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(chainConfig!.stakeDenom), availableAmount.font!, 6, 6)
         delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, 6, 6)
         unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, 6, 6)

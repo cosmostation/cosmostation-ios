@@ -21,7 +21,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8WQ-Vs-Dxz" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="12" y="4" width="351" height="161"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="guideImg" translatesAutoresizingMaskIntoConstraints="NO" id="mAT-Oa-YZG">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="infoCosmos" translatesAutoresizingMaskIntoConstraints="NO" id="mAT-Oa-YZG">
                                 <rect key="frame" x="16" y="16" width="84" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="84" id="HIs-KC-zJy"/>
@@ -154,7 +154,7 @@ Learn more about us in the links below</string>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="guideImg" width="63" height="63"/>
+        <image name="infoCosmos" width="60" height="60"/>
         <namedColor name="_card_bg">
             <color red="0.96100002527236938" green="0.96100002527236938" blue="0.96100002527236938" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

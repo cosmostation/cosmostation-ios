@@ -117,10 +117,10 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             WDP.dpCoin(chainConfig, toSendDenom, remainAvailable.stringValue, remainDenomLabel, remainAmountLabel)
             
             let feeDecimal = WUtils.getDenomDecimal(chainConfig, feeDenom)
-            feeValueLabel.attributedText = WUtils.dpValueUserCurrency(feeDenom, feeAmount, feeDecimal, feeValueLabel.font)
-            sendValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, toSendAmount, divideDecimal, sendValueLabel.font)
-            availableValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, currentAvailable, divideDecimal, availableValueLabel.font)
-            remainValueLabel.attributedText = WUtils.dpValueUserCurrency(priceSymbol, remainAvailable, divideDecimal, remainValueLabel.font)
+            feeValueLabel.attributedText = WUtils.dpAssetValue(feeDenom, feeAmount, feeDecimal, feeValueLabel.font)
+            sendValueLabel.attributedText = WUtils.dpAssetValue(priceSymbol, toSendAmount, divideDecimal, sendValueLabel.font)
+            availableValueLabel.attributedText = WUtils.dpAssetValue(priceSymbol, currentAvailable, divideDecimal, availableValueLabel.font)
+            remainValueLabel.attributedText = WUtils.dpAssetValue(priceSymbol, remainAvailable, divideDecimal, remainValueLabel.font)
             
         } else {
             divideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)

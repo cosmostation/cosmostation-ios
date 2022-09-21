@@ -267,11 +267,6 @@ class BaseNetWork {
         return MINTSCAN_API_URL + "v1/assets"
     }
     
-//    static func mintscanCw20() -> String {
-//        return MINTSCAN_API_URL + "v1/assets/cw20"
-//    }
-    
-    
     static func mintscanAssets_v2() -> String {
         return MINTSCAN_API_URL + "v2/assets"
     }
@@ -282,6 +277,11 @@ class BaseNetWork {
     
     static func mintscanErc20Tokens_v2(_ chainId: String) -> String {
         return MINTSCAN_API_URL + "v2/assets/" +  chainId + "/token/erc20"
+    }
+    
+    static func getPrices() -> String {
+        let currency = BaseData.instance.getCurrencyString().lowercased()
+        return MINTSCAN_API_URL + "v2/utils/market/prices?currency=" + currency
     }
     
     
@@ -304,15 +304,6 @@ class BaseNetWork {
             return ""
         }
         return chainConfig.apiUrl + "v1/account/new_txs/" + address + "/" + valAddress
-    }
-    
-    
-    
-    static func getPrices(_ chain : ChainType) -> String {
-        if (ChainType.IS_TESTNET(chain)) {
-            return STATION_TEST_URL + "v1/market/prices"
-        }
-        return STATION_URL + "v1/market/prices"
     }
     
     static func getParams(_ chain : ChainType, _ chainId: String) -> String {

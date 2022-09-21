@@ -72,7 +72,7 @@ class AuthzGranterCell: UITableViewCell {
         }
         
         totalAmountLabel.attributedText = WDP.dpAmount(totalAmount.stringValue, totalAmountLabel.font!, divideDecimal, 6)
-        totalValueLabel.attributedText = WUtils.dpValueUserCurrency(stakingDenom, totalAmount, divideDecimal, totalValueLabel.font)
+        totalValueLabel.attributedText = WUtils.dpAssetValue(stakingDenom, totalAmount, divideDecimal, totalValueLabel.font)
         
     }
 }

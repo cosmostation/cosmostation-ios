@@ -199,7 +199,6 @@ public class WUtils {
         return formatted!
     }
     
-    //price displaying
     static func tokenCnt(_ chainType: ChainType?) -> String {
         if (isGRPC(chainType)) {
             return String(BaseData.instance.mMyBalances_gRPC.count)
@@ -208,117 +207,99 @@ public class WUtils {
         }
     }
     
-    static func valueChange(_ denom: String) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        guard let coinPrice = baseData.getPrice(denom) else {
+    static func priceChange(_ denom: String) -> NSDecimalNumber {
+        guard let coinPrice = BaseData.instance.getPrice(denom) else {
             return NSDecimalNumber.zero.rounding(accordingToBehavior: handler2Down)
         }
-        return coinPrice.priceChange()
+        return NSDecimalNumber.init(value: coinPrice.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
     }
     
-    static func dpValueChange(_ denom: String, font:UIFont ) -> NSMutableAttributedString {
+    static func dpPriceChange(_ denom: String, font:UIFont ) -> NSMutableAttributedString {
         let nf = getNumberFormatter(2)
-        let formatted = nf.string(from: valueChange(denom))! + "% (24h)"
+        let formatted = nf.string(from: priceChange(denom))! + "% (24h)"
         return getDpAttributedString(formatted, 9, font)
     }
     
-    static func dpValueChange2(_ denom: String, _ font:UIFont ) -> NSMutableAttributedString {
+    static func dpPriceChange2(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
         let nf = getNumberFormatter(2)
-        let change = valueChange(denom)
+        let change = priceChange(denom)
         if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {
-            let formatted = "+" + nf.string(from: valueChange(denom))! + "%"
+            let formatted = "+" + nf.string(from: change)! + "%"
             return getDpAttributedString(formatted, 3, font)
         } else {
-            let formatted = nf.string(from: valueChange(denom))! + "%"
+            let formatted = nf.string(from: change)! + "%"
             return getDpAttributedString(formatted, 3, font)
         }
     }
     
-    static func perUsdValue(_ denom: String) -> NSDecimalNumber? {
-        if (denom == EMONEY_EUR_DENOM || denom == EMONEY_CHF_DENOM || denom == EMONEY_DKK_DENOM || denom == EMONEY_NOK_DENOM || denom == EMONEY_SEK_DENOM) {
-            if let value = BaseData.instance.getPrice("usdt")?.prices.filter{ $0.currency == denom.substring(from: 1) }.first?.current_price {
-                return NSDecimalNumber.one.dividing(by: NSDecimalNumber.init(value: value), withBehavior: handler18)
-            }
+    static func price(_ denom: String) -> NSDecimalNumber {
+        guard let coinPrice = BaseData.instance.getPrice(denom) else {
+            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler3Down)
         }
-        if let coinPrice = BaseData.instance.getPrice(denom) {
-            return coinPrice.currencyPrice("usd").rounding(accordingToBehavior: handler18)
-        }
-        return nil
+        return NSDecimalNumber.init(value: coinPrice.current_price ?? 0).rounding(accordingToBehavior: handler3Down)
     }
     
-    static func usdValue(_ chainConfig: ChainConfig, _ denom: String, _ amount: NSDecimalNumber) -> NSDecimalNumber {
-        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, denom)
-        let decimalDenom = getDenomDecimal(chainConfig, denom)
-        if let perUsdValue = perUsdValue(baseDenom) {
-            return perUsdValue.multiplying(by: amount).multiplying(byPowerOf10: -decimalDenom, withBehavior: handler3Down)
-        }
+    static func dpPrice(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
+        let nf = getNumberFormatter(3)
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: price(denom))!
+        return getDpAttributedString(formatted, 3, font)
+    }
+    
+    static func assetValue(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
+        return price(denom).multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler3Down)
+    }
+    
+    static func dpAssetValue(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16, _ font: UIFont) -> NSMutableAttributedString {
+        let nf = getNumberFormatter(3)
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: assetValue(denom, amount, divider))!
+        return getDpAttributedString(formatted, 3, font)
+    }
+    
+    
+    //TODO using to display TVL with USD, need to update
+    static func perUsdValue(_ denom: String) -> NSDecimalNumber? {
+//        if (denom == EMONEY_EUR_DENOM || denom == EMONEY_CHF_DENOM || denom == EMONEY_DKK_DENOM || denom == EMONEY_NOK_DENOM || denom == EMONEY_SEK_DENOM) {
+//            if let value = BaseData.instance.getPrice("usdt")?.prices.filter{ $0.currency == denom.substring(from: 1) }.first?.current_price {
+//                return NSDecimalNumber.one.dividing(by: NSDecimalNumber.init(value: value), withBehavior: handler18)
+//            }
+//        }
+//        if let coinPrice = BaseData.instance.getPrice(denom) {
+//            return coinPrice.currencyPrice("usd").rounding(accordingToBehavior: handler18)
+//        }
+//        return nil
         return NSDecimalNumber.zero
     }
     
-    static func perUserCurrencyValue(_ denom: String) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        guard let perUsdValue = perUsdValue(denom), let usdtPrice = baseData.getPrice("usdt") else {
-            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler3Down)
-        }
-        if (baseData.getCurrency() == 0) {
-            return perUsdValue
-        } else {
-            let priceUSDT = usdtPrice.currencyPrice(baseData.getCurrencyString().lowercased())
-            return perUsdValue.multiplying(by: priceUSDT, withBehavior: handler3Down)
-        }
+    static func usdValue(_ chainConfig: ChainConfig, _ denom: String, _ amount: NSDecimalNumber) -> NSDecimalNumber {
+//        let baseDenom = BaseData.instance.getBaseDenom(chainConfig, denom)
+//        let decimalDenom = getDenomDecimal(chainConfig, denom)
+//        if let perUsdValue = perUsdValue(baseDenom) {
+//            return perUsdValue.multiplying(by: amount).multiplying(byPowerOf10: -decimalDenom, withBehavior: handler3Down)
+//        }
+        return NSDecimalNumber.zero
     }
     
-    static func perBtcValue(_ denom: String) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        guard let perUsdValue = perUsdValue(denom), let usdtPrice = baseData.getPrice("usdt") else {
-            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler8)
-        }
-        let priceUSDT = usdtPrice.currencyPrice("btc")
-        return perUsdValue.multiplying(by: priceUSDT, withBehavior: handler8)
-    }
-    
-    
-    static func dpPerUserCurrencyValue(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: perUserCurrencyValue(denom))!
-        return getDpAttributedString(formatted, 3, font)
-    }
-    
-    static func userCurrencyValue(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
-        return perUserCurrencyValue(denom).multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler3Down)
-    }
-    
-    static func dpValueUserCurrency(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16, _ font:UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: userCurrencyValue(denom, amount, divider))!
-        return getDpAttributedString(formatted, 3, font)
-    }
-    
-    static func btcValue(_ denom: String, _ amount: NSDecimalNumber, _ divider: Int16) -> NSDecimalNumber {
-        return perBtcValue(denom).multiplying(by: amount).multiplying(byPowerOf10: -divider, withBehavior: handler8)
-    }
-    
-    static func allAssetToUserCurrency(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
+    static func allAssetValue(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
         let baseData = BaseData.instance
         var totalValue = NSDecimalNumber.zero
         if (chainConfig?.isGrpc == true) {
             baseData.mMyBalances_gRPC.forEach { coin in
                 if (coin.denom == getMainDenom(chainConfig)) {
                     let amount = getAllMainAsset(coin.denom)
-                    let assetValue = userCurrencyValue(coin.denom, amount, mainDivideDecimal(chainConfig?.chainType))
+                    let assetValue = assetValue(coin.denom, amount, mainDivideDecimal(chainConfig?.chainType))
                     totalValue = totalValue.adding(assetValue)
                     
                 } else if (chainConfig?.chainType == .KAVA_MAIN) {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = WUtils.getKavaTokenAll(coin.denom)
-                        let assetValue = userCurrencyValue(msAsset.base_denom, amount, msAsset.decimal)
+                        let assetValue = assetValue(msAsset.base_denom, amount, msAsset.decimal)
                         totalValue = totalValue.adding(assetValue)
                     }
                     
                 } else {
                     if let msAsset = BaseData.instance.getMSAsset(chainConfig!, coin.denom) {
                         let amount = baseData.getAvailableAmount_gRPC(coin.denom)
-                        let assetValue = userCurrencyValue(msAsset.base_denom, amount, msAsset.decimal)
+                        let assetValue = assetValue(msAsset.base_denom, amount, msAsset.decimal)
                         totalValue = totalValue.adding(assetValue)
                     }
                 }
@@ -329,13 +310,13 @@ public class WUtils {
         else if (chainConfig?.chainType == .BINANCE_MAIN) {
             baseData.mBalances.forEach { coin in
                 var allBnb = NSDecimalNumber.zero
-                let amount = WUtils.getAllBnbToken(coin.balance_denom)
+                let amount = BaseData.instance.allBnbTokenAmount(coin.balance_denom)
                 if (coin.balance_denom == getMainDenom(chainConfig)) {
                     allBnb = allBnb.adding(amount)
                 } else {
-                    allBnb = allBnb.adding(getBnbConvertAmount(coin.balance_denom))
+                    allBnb = allBnb.adding(bnbConvertAmount(coin.balance_denom))
                 }
-                let assetValue = userCurrencyValue(getMainDenom(chainConfig), allBnb, 0)
+                let assetValue = assetValue(getMainDenom(chainConfig), allBnb, 0)
                 totalValue = totalValue.adding(assetValue)
             }
             
@@ -347,7 +328,7 @@ public class WUtils {
                 } else {
                     allOKT = allOKT.adding(convertTokenToOkt(coin.balance_denom))
                 }
-                let assetValue = userCurrencyValue(getMainDenom(chainConfig), allOKT, 0)
+                let assetValue = assetValue(getMainDenom(chainConfig), allOKT, 0)
                 totalValue = totalValue.adding(assetValue)
             }
             
@@ -357,15 +338,15 @@ public class WUtils {
         if (chainConfig?.wasmSupport == true || chainConfig?.evmSupport == true) {
             BaseData.instance.mMyTokens.forEach { msToken in
                 let amount = NSDecimalNumber.init(string: msToken.amount)
-                let assetValue = userCurrencyValue(msToken.denom, amount, msToken.decimal)
+                let assetValue = assetValue(msToken.denom, amount, msToken.decimal)
                 totalValue = totalValue.adding(assetValue)
             }
         }
         return totalValue
     }
     
-    static func dpAllAssetValueUserCurrency(_ chainConfig: ChainConfig?, _ font:UIFont) -> NSMutableAttributedString {
-        let totalValue = allAssetToUserCurrency(chainConfig)
+    static func dpAllAssetValue(_ chainConfig: ChainConfig?, _ font:UIFont) -> NSMutableAttributedString {
+        let totalValue = allAssetValue(chainConfig)
         let nf = getNumberFormatter(3)
         let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: totalValue)!
         return getDpAttributedString(formatted, 3, font)
@@ -379,7 +360,7 @@ public class WUtils {
         return nf
     }
     
-    static func getDpAttributedString(_ dpString: String, _ divider: Int, _ font:UIFont)  -> NSMutableAttributedString {
+    static func getDpAttributedString(_ dpString: String, _ divider: Int, _ font:UIFont) -> NSMutableAttributedString {
         let endIndex    = dpString.index(dpString.endIndex, offsetBy: -divider)
         let preString   = dpString[..<endIndex]
         let postString  = dpString[endIndex...]
@@ -401,51 +382,6 @@ public class WUtils {
         
         let formatted   = nf.string(from: rate)!
         let endIndex    = formatted.index(formatted.endIndex, offsetBy: -(deciaml))
-        
-        let preString   = formatted[..<endIndex]
-        let postString  = formatted[endIndex...]
-        
-        let preAttrs = [NSAttributedString.Key.font : font]
-        let postAttrs = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]
-        
-        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
-        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
-        
-        attributedString1.append(attributedString2)
-        return attributedString1
-    }
-    
-    static func displayGasRate2(_ rate: NSDecimalNumber, font:UIFont) -> NSMutableAttributedString {
-        let nf = NumberFormatter()
-        let deciaml = rate.stringValue.count - 2
-        nf.minimumFractionDigits = deciaml
-        nf.maximumFractionDigits = deciaml
-        nf.numberStyle = .decimal
-        
-        let formatted   = nf.string(from: rate)!
-        let endIndex    = formatted.index(formatted.endIndex, offsetBy: -(deciaml))
-        
-        let preString   = formatted[..<endIndex]
-        let postString  = formatted[endIndex...]
-        
-        let preAttrs = [NSAttributedString.Key.font : font]
-        let postAttrs = [NSAttributedString.Key.font : font.withSize(CGFloat(Int(Double(font.pointSize) * 0.85)))]
-        
-        let attributedString1 = NSMutableAttributedString(string:String(preString), attributes:preAttrs as [NSAttributedString.Key : Any])
-        let attributedString2 = NSMutableAttributedString(string:String(postString), attributes:postAttrs as [NSAttributedString.Key : Any])
-        
-        attributedString1.append(attributedString2)
-        return attributedString1
-    }
-    
-    static func displayPriceUPdown(_ updown:NSDecimalNumber, font:UIFont ) -> NSMutableAttributedString {
-        let nf = NumberFormatter()
-        nf.minimumFractionDigits = 2
-        nf.maximumFractionDigits = 2
-        nf.numberStyle = .decimal
-        
-        let formatted   = nf.string(from: updown.rounding(accordingToBehavior: handler2))! + "% (24h)"
-        let endIndex    = formatted.index(formatted.endIndex, offsetBy: -9)
         
         let preString   = formatted[..<endIndex]
         let postString  = formatted[endIndex...]
@@ -599,6 +535,49 @@ public class WUtils {
         return amount
     }
     
+    //for binance utils
+    static func bnbConvertAmount(_ symbol: String) -> NSDecimalNumber {
+        if let bnbTicker = BaseData.instance.bnbTicker(symbol) {
+            let amount = BaseData.instance.allBnbTokenAmount(symbol)
+            if (bnbTicker.baseAssetName == BNB_MAIN_DENOM) {
+                return amount.dividing(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
+            } else {
+                return amount.multiplying(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
+            }
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    static func bnbTokenPrice(_ symbol: String) -> NSDecimalNumber {
+        if let bnbTicker = BaseData.instance.bnbTicker(symbol) {
+            if (bnbTicker.baseAssetName == BNB_MAIN_DENOM) {
+                let perPrice = (NSDecimalNumber.one).dividing(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
+                return perPrice.multiplying(by: price(BNB_MAIN_DENOM))
+            } else {
+                let perPrice = (NSDecimalNumber.one).multiplying(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
+                return perPrice.multiplying(by: price(BNB_MAIN_DENOM))
+            }
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    static func dpBnbTokenPrice(_ symbol: String, _ font:UIFont) -> NSMutableAttributedString {
+        let nf = getNumberFormatter(3)
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: bnbTokenPrice(symbol))!
+        return getDpAttributedString(formatted, 3, font)
+    }
+    
+    static func showBNBTxDp(_ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel, _ chainType:ChainType) {
+        if (coin.denom == BNB_MAIN_DENOM) {
+            WUtils.setDenomTitle(chainType, denomLabel)
+        } else {
+            denomLabel.textColor = UIColor(named: "_font05")
+            denomLabel.text = coin.denom.uppercased()
+        }
+        amountLabel.attributedText = WDP.dpAmount(coin.amount, amountLabel.font, 8, 8)
+    }
+    
+    //for okx utils
     static func getAllExToken(_ symbol: String) -> NSDecimalNumber {
         let dataBase = BaseData.instance
         if (symbol == OKEX_MAIN_DENOM) {
@@ -606,11 +585,6 @@ public class WUtils {
         } else {
             return dataBase.availableAmount(symbol).adding(dataBase.lockedAmount(symbol))
         }
-    }
-    
-    static func getAllBnbToken(_ symbol: String) -> NSDecimalNumber {
-        let dataBase = BaseData.instance
-        return dataBase.availableAmount(symbol).adding(dataBase.frozenAmount(symbol)).adding(dataBase.lockedAmount(symbol))
     }
     
     static func getOkexTokenDollorValue(_ okToken: OkToken?, _ amount: NSDecimalNumber) -> NSDecimalNumber {
@@ -640,61 +614,11 @@ public class WUtils {
         return NSDecimalNumber.zero
     }
     
-    static func getBnbToken(_ symbol: String?) -> BnbToken? {
-        return BaseData.instance.mBnbTokenList.filter{ $0.symbol == symbol }.first
-    }
-    
-    static func getBnbTokenTic(_ symbol: String?) -> BnbTicker? {
-        return BaseData.instance.mBnbTokenTicker.filter { $0.symbol == getBnbTicSymbol(symbol!)}.first
-    }
-    
-    static func getBnbConvertAmount(_ symbol: String) -> NSDecimalNumber {
-        if let ticker = getBnbTokenTic(symbol) {
-            let amount = getAllBnbToken(symbol)
-            if (isBnbMarketToken(symbol)) {
-                return amount.dividing(by: ticker.getLastPrice(), withBehavior: WUtils.handler8)
-            } else {
-                return amount.multiplying(by: ticker.getLastPrice(), withBehavior: WUtils.handler8)
-            }
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    static func getBnbTokenUserCurrencyPrice(_ symbol: String) -> NSDecimalNumber {
-        if let bnbTicker = getBnbTokenTic(symbol) {
-            if (isBnbMarketToken(symbol)) {
-                let perPrice = (NSDecimalNumber.one).dividing(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
-                return perPrice.multiplying(by: perUserCurrencyValue(BNB_MAIN_DENOM))
-            } else {
-                let perPrice = (NSDecimalNumber.one).multiplying(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
-                return perPrice.multiplying(by: perUserCurrencyValue(BNB_MAIN_DENOM))
-            }
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    static func dpBnbTokenUserCurrencyPrice(_ symbol: String, _ font:UIFont) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: getBnbTokenUserCurrencyPrice(symbol))!
-        return getDpAttributedString(formatted, 3, font)
-    }
-    
-    
-    
-    static func getBnbMainToken(_ bnbTokens:Array<BnbToken>) -> BnbToken? {
-        for bnbToken in bnbTokens {
-            if (bnbToken.symbol == BNB_MAIN_DENOM) {
-                return bnbToken
-            }
-        }
-        return nil
-    }
-    
     static func getOkToken(_ symbol:String?) -> OkToken? {
         return BaseData.instance.mOkTokenList?.data?.filter { $0.symbol == symbol}.first
     }
     
-    static func getTokenAmount(_ balances:Array<Balance>?, _ symbol:String) -> NSDecimalNumber {
+    static func getTokenAmount(_ balances: Array<Balance>?, _ symbol:String) -> NSDecimalNumber {
         var result = NSDecimalNumber.zero
         if (balances != nil) {
             balances!.forEach({ (balance) in
@@ -704,55 +628,6 @@ public class WUtils {
             })
         }
         return result
-    }
-    
-    static func showBNBTxDp(_ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel, _ chainType:ChainType) {
-        if (coin.denom == BNB_MAIN_DENOM) {
-            WUtils.setDenomTitle(chainType, denomLabel)
-        } else {
-            denomLabel.textColor = UIColor(named: "_font05")
-            denomLabel.text = coin.denom.uppercased()
-        }
-        amountLabel.attributedText = WDP.dpAmount(coin.amount, amountLabel.font, 8, 8)
-    }
-    
-    static func isBnbMarketToken(_ symbol:String?) ->Bool {
-        switch symbol {
-        case "USDT.B-B7C":
-            return true
-        case "ETH.B-261":
-            return true
-        case "BTC.B-918":
-            return true
-        case "USDSB-1AC":
-            return true
-        case "THKDB-888":
-            return true
-        case "TUSDB-888":
-            return true
-        case "BTCB-1DE":
-            return true
-            
-        case "ETH-1C9":
-            return true
-        case "BUSD-BD1":
-            return true
-        case "IDRTB-178":
-            return true
-        case "TAUDB-888":
-            return true
-            
-        default:
-            return false
-        }
-    }
-    
-    static func getBnbTicSymbol(_ symbol:String) -> String {
-        if (isBnbMarketToken(symbol)) {
-            return BNB_MAIN_DENOM + "_" + symbol
-        } else {
-            return  "" + symbol + "_" + BNB_MAIN_DENOM
-        }
     }
     
     static func getMainDenom(_ chainConfig: ChainConfig?) -> String {
@@ -914,7 +789,7 @@ public class WUtils {
             
         } else {
             if (chainConfig!.chainType == .BINANCE_MAIN) {
-                if let bnbTokenInfo = getBnbToken(denom!) {
+                if let bnbTokenInfo = BaseData.instance.bnbToken(denom) {
                     return bnbTokenInfo.original_symbol.uppercased()
                 }
                 

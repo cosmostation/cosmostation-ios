@@ -120,7 +120,7 @@ final class BaseData : NSObject{
     }
     
     func getPrice(_ denom: String) -> Price? {
-        return mPrices.filter { $0.denom == denom.lowercased() }.first
+        return mPrices.filter { $0.denom!.lowercased() == denom.lowercased() }.first
     }
     
     func getBaseDenom(_ chainConfig: ChainConfig?, _ denom: String) -> String {
@@ -181,6 +181,25 @@ final class BaseData : NSObject{
     
     func delegatableAmount(_ symbol:String) -> NSDecimalNumber {
         return availableAmount(symbol).adding(lockedAmount(symbol))
+    }
+    
+    //binance chain
+    func allBnbTokenAmount(_ symbol: String) -> NSDecimalNumber {
+        return availableAmount(symbol).adding(frozenAmount(symbol)).adding(lockedAmount(symbol))
+    }
+    
+    func bnbToken(_ symbol: String?) -> BnbToken? {
+        return BaseData.instance.mBnbTokenList.filter{ $0.symbol == symbol }.first
+    }
+    
+    func bnbTicker(_ symbol: String?) -> BnbTicker? {
+        if let result = mBnbTokenTicker.filter({ $0.baseAssetName == BNB_MAIN_DENOM && $0.quoteAssetName == symbol }).first {
+            return result
+        }
+        if let result = mBnbTokenTicker.filter({ $0.baseAssetName == symbol && $0.quoteAssetName == BNB_MAIN_DENOM }).first {
+            return result
+        }
+        return nil
     }
     
     func okDepositAmount() -> NSDecimalNumber {
@@ -649,6 +668,19 @@ final class BaseData : NSObject{
     func getLastPassTime() -> Int64 {
         let last = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PASS_TIME) ?? "0")!
         return last
+    }
+    
+    func setLastPriceTime() {
+        let now = Date().millisecondsSince1970
+        UserDefaults.standard.set(String(now), forKey: KEY_LAST_PRICE_TIME)
+    }
+
+    func needPriceUpdate() -> Bool {
+        if (BaseData.instance.mPrices.count <= 0) { return true }
+        let now = Date().millisecondsSince1970
+        let min: Int64 = 60000
+        let last = Int64(UserDefaults.standard.string(forKey: KEY_LAST_PRICE_TIME) ?? "0")! + (min * 2)
+        return last < now ? true : false
     }
     
     func isAutoPass() -> Bool {
