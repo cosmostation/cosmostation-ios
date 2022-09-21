@@ -279,20 +279,6 @@ public class WUtils {
         return NSDecimalNumber.zero
     }
     
-    static func perUserCurrencyValue(_ denom: String) -> NSDecimalNumber {
-//        let baseData = BaseData.instance
-//        guard let perUsdValue = perUsdValue(denom), let usdtPrice = baseData.getPrice("usdt") else {
-//            return NSDecimalNumber.zero.rounding(accordingToBehavior: handler3Down)
-//        }
-//        if (baseData.getCurrency() == 0) {
-//            return perUsdValue
-//        } else {
-//            let priceUSDT = usdtPrice.currencyPrice(baseData.getCurrencyString().lowercased())
-//            return perUsdValue.multiplying(by: priceUSDT, withBehavior: handler3Down)
-//        }
-        return NSDecimalNumber.zero
-    }
-    
     static func allAssetValue(_ chainConfig: ChainConfig?) -> NSDecimalNumber {
         let baseData = BaseData.instance
         var totalValue = NSDecimalNumber.zero
@@ -328,7 +314,7 @@ public class WUtils {
                 if (coin.balance_denom == getMainDenom(chainConfig)) {
                     allBnb = allBnb.adding(amount)
                 } else {
-                    allBnb = allBnb.adding(getBnbConvertAmount(coin.balance_denom))
+                    allBnb = allBnb.adding(bnbConvertAmount(coin.balance_denom))
                 }
                 let assetValue = assetValue(getMainDenom(chainConfig), allBnb, 0)
                 totalValue = totalValue.adding(assetValue)
@@ -549,45 +535,11 @@ public class WUtils {
         return amount
     }
     
-    static func getAllExToken(_ symbol: String) -> NSDecimalNumber {
-        let dataBase = BaseData.instance
-        if (symbol == OKEX_MAIN_DENOM) {
-            return dataBase.availableAmount(symbol).adding(dataBase.lockedAmount(symbol)).adding(dataBase.okDepositAmount()).adding(dataBase.okWithdrawAmount())
-        } else {
-            return dataBase.availableAmount(symbol).adding(dataBase.lockedAmount(symbol))
-        }
-    }
     
+    //For Binance chain asset utils
     static func getAllBnbToken(_ symbol: String) -> NSDecimalNumber {
         let dataBase = BaseData.instance
-        return dataBase.availableAmount(symbol).adding(dataBase.frozenAmount(symbol)).adding(dataBase.lockedAmount(symbol))
-    }
-    
-    static func getOkexTokenDollorValue(_ okToken: OkToken?, _ amount: NSDecimalNumber) -> NSDecimalNumber {
-        if (okToken == nil) { return NSDecimalNumber.zero }
-        if (okToken!.original_symbol == "usdt" || okToken!.original_symbol == "usdc" || okToken!.original_symbol == "usdk") {
-            return amount
-            
-        } else if (okToken!.original_symbol == "okb" && BaseData.instance.mOKBPrice != nil) {
-            return amount.multiplying(by: BaseData.instance.mOKBPrice)
-            
-        } else if (BaseData.instance.mOkTickerList != nil) {
-            //TODO display with ticker update!
-            let okTickers = BaseData.instance.mOkTickerList?.data
-            return NSDecimalNumber.zero
-        }
-        return NSDecimalNumber.zero
-    }
-    
-    static func convertTokenToOkt(_ denom: String) -> NSDecimalNumber {
-        let baseData = BaseData.instance
-        let okToken = getOkToken(denom)
-        let tokenAmount = baseData.availableAmount(denom).adding(baseData.lockedAmount(denom))
-        let totalTokenValue = getOkexTokenDollorValue(okToken, tokenAmount)
-        if let okTUsd = perUsdValue(OKEX_MAIN_DENOM) {
-            return totalTokenValue.dividing(by: okTUsd, withBehavior: handler18)
-        }
-        return NSDecimalNumber.zero
+        return BaseData.instance.availableAmount(symbol).adding(dataBase.frozenAmount(symbol)).adding(dataBase.lockedAmount(symbol))
     }
     
     static func getBnbToken(_ symbol: String?) -> BnbToken? {
@@ -598,7 +550,15 @@ public class WUtils {
         return BaseData.instance.mBnbTokenTicker.filter { $0.symbol == getBnbTicSymbol(symbol!)}.first
     }
     
-    static func getBnbConvertAmount(_ symbol: String) -> NSDecimalNumber {
+    static func getBnbTicSymbol(_ symbol:String) -> String {
+        if (isBnbMarketToken(symbol)) {
+            return BNB_MAIN_DENOM + "_" + symbol
+        } else {
+            return  "" + symbol + "_" + BNB_MAIN_DENOM
+        }
+    }
+    
+    static func bnbConvertAmount(_ symbol: String) -> NSDecimalNumber {
         if let ticker = getBnbTokenTic(symbol) {
             let amount = getAllBnbToken(symbol)
             if (isBnbMarketToken(symbol)) {
@@ -610,50 +570,23 @@ public class WUtils {
         return NSDecimalNumber.zero
     }
     
-    static func getBnbTokenUserCurrencyPrice(_ symbol: String) -> NSDecimalNumber {
+    static func bnbTokenPrice(_ symbol: String) -> NSDecimalNumber {
         if let bnbTicker = getBnbTokenTic(symbol) {
             if (isBnbMarketToken(symbol)) {
                 let perPrice = (NSDecimalNumber.one).dividing(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
-                return perPrice.multiplying(by: perUserCurrencyValue(BNB_MAIN_DENOM))
+                return perPrice.multiplying(by: price(BNB_MAIN_DENOM))
             } else {
                 let perPrice = (NSDecimalNumber.one).multiplying(by: bnbTicker.getLastPrice(), withBehavior: WUtils.handler8)
-                return perPrice.multiplying(by: perUserCurrencyValue(BNB_MAIN_DENOM))
+                return perPrice.multiplying(by: price(BNB_MAIN_DENOM))
             }
         }
         return NSDecimalNumber.zero
     }
     
-    static func dpBnbTokenUserCurrencyPrice(_ symbol: String, _ font:UIFont) -> NSMutableAttributedString {
+    static func dpBnbTokenPrice(_ symbol: String, _ font:UIFont) -> NSMutableAttributedString {
         let nf = getNumberFormatter(3)
-        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: getBnbTokenUserCurrencyPrice(symbol))!
+        let formatted = BaseData.instance.getCurrencySymbol() + " " + nf.string(from: bnbTokenPrice(symbol))!
         return getDpAttributedString(formatted, 3, font)
-    }
-    
-    
-    
-    static func getBnbMainToken(_ bnbTokens:Array<BnbToken>) -> BnbToken? {
-        for bnbToken in bnbTokens {
-            if (bnbToken.symbol == BNB_MAIN_DENOM) {
-                return bnbToken
-            }
-        }
-        return nil
-    }
-    
-    static func getOkToken(_ symbol:String?) -> OkToken? {
-        return BaseData.instance.mOkTokenList?.data?.filter { $0.symbol == symbol}.first
-    }
-    
-    static func getTokenAmount(_ balances:Array<Balance>?, _ symbol:String) -> NSDecimalNumber {
-        var result = NSDecimalNumber.zero
-        if (balances != nil) {
-            balances!.forEach({ (balance) in
-                if (balance.balance_denom.caseInsensitiveCompare(symbol) == .orderedSame) {
-                    result = result.adding(WUtils.plainStringToDecimal(balance.balance_amount))
-                }
-            })
-        }
-        return result
     }
     
     static func showBNBTxDp(_ coin:Coin, _ denomLabel:UILabel, _ amountLabel:UILabel, _ chainType:ChainType) {
@@ -697,12 +630,60 @@ public class WUtils {
         }
     }
     
-    static func getBnbTicSymbol(_ symbol:String) -> String {
-        if (isBnbMarketToken(symbol)) {
-            return BNB_MAIN_DENOM + "_" + symbol
+    
+    
+    
+    
+    static func getAllExToken(_ symbol: String) -> NSDecimalNumber {
+        let dataBase = BaseData.instance
+        if (symbol == OKEX_MAIN_DENOM) {
+            return dataBase.availableAmount(symbol).adding(dataBase.lockedAmount(symbol)).adding(dataBase.okDepositAmount()).adding(dataBase.okWithdrawAmount())
         } else {
-            return  "" + symbol + "_" + BNB_MAIN_DENOM
+            return dataBase.availableAmount(symbol).adding(dataBase.lockedAmount(symbol))
         }
+    }
+    
+    static func getOkexTokenDollorValue(_ okToken: OkToken?, _ amount: NSDecimalNumber) -> NSDecimalNumber {
+        if (okToken == nil) { return NSDecimalNumber.zero }
+        if (okToken!.original_symbol == "usdt" || okToken!.original_symbol == "usdc" || okToken!.original_symbol == "usdk") {
+            return amount
+            
+        } else if (okToken!.original_symbol == "okb" && BaseData.instance.mOKBPrice != nil) {
+            return amount.multiplying(by: BaseData.instance.mOKBPrice)
+            
+        } else if (BaseData.instance.mOkTickerList != nil) {
+            //TODO display with ticker update!
+            let okTickers = BaseData.instance.mOkTickerList?.data
+            return NSDecimalNumber.zero
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    static func convertTokenToOkt(_ denom: String) -> NSDecimalNumber {
+        let baseData = BaseData.instance
+        let okToken = getOkToken(denom)
+        let tokenAmount = baseData.availableAmount(denom).adding(baseData.lockedAmount(denom))
+        let totalTokenValue = getOkexTokenDollorValue(okToken, tokenAmount)
+        if let okTUsd = perUsdValue(OKEX_MAIN_DENOM) {
+            return totalTokenValue.dividing(by: okTUsd, withBehavior: handler18)
+        }
+        return NSDecimalNumber.zero
+    }
+    
+    static func getOkToken(_ symbol:String?) -> OkToken? {
+        return BaseData.instance.mOkTokenList?.data?.filter { $0.symbol == symbol}.first
+    }
+    
+    static func getTokenAmount(_ balances: Array<Balance>?, _ symbol:String) -> NSDecimalNumber {
+        var result = NSDecimalNumber.zero
+        if (balances != nil) {
+            balances!.forEach({ (balance) in
+                if (balance.balance_denom.caseInsensitiveCompare(symbol) == .orderedSame) {
+                    result = result.adding(WUtils.plainStringToDecimal(balance.balance_amount))
+                }
+            })
+        }
+        return result
     }
     
     static func getMainDenom(_ chainConfig: ChainConfig?) -> String {

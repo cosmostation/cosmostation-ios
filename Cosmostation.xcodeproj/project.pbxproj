@@ -4099,7 +4099,6 @@
 		E103DACF22813248006C2146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/WalletDetailViewController.xib; sourceTree = "<group>"; };
 		E103DAD222813256006C2146 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/WalletDetailViewController.strings; sourceTree = "<group>"; };
 		E103DADF22814802006C2146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Init.storyboard; sourceTree = "<group>"; };
-		E103DAE222814815006C2146 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Init.strings; sourceTree = "<group>"; };
 		E103DAE422814DFC006C2146 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GenTx.storyboard; sourceTree = "<group>"; };
 		E10492122347B41000A2980F /* WalletConnectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectViewController.swift; sourceTree = "<group>"; };
 		E10492142347C5D900A2980F /* WalletConnectImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletConnectImageView.swift; sourceTree = "<group>"; };
@@ -9347,7 +9346,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				E103DADF22814802006C2146 /* Base */,
-				E103DAE222814815006C2146 /* ko */,
 			);
 			name = Init.storyboard;
 			sourceTree = "<group>";

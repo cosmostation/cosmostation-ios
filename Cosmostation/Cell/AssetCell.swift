@@ -141,10 +141,10 @@ class AssetCell: UITableViewCell {
                 assetDescription.text = bnbToken.name
                 
                 let tokenAmount = WUtils.getAllBnbToken(balance!.balance_denom)
-                let convertAmount = WUtils.getBnbConvertAmount(balance!.balance_denom)
+                let convertAmount = WUtils.bnbConvertAmount(balance!.balance_denom)
                 assetAmount.attributedText = WDP.dpAmount(tokenAmount.stringValue, assetAmount.font, 0, 6)
                 assetValue.attributedText = WUtils.dpAssetValue(BNB_MAIN_DENOM, convertAmount, 0, assetValue.font)
-                assetPrice.attributedText = WUtils.dpBnbTokenUserCurrencyPrice(balance!.balance_denom, assetPrice.font)
+                assetPrice.attributedText = WUtils.dpBnbTokenPrice(balance!.balance_denom, assetPrice.font)
                 assetPriceChange.text = ""
             }
             
