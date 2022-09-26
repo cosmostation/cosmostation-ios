@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import Toast_Swift
-import NotificationBannerSwift
 import GRPC
 import NIO
 import SwiftProtobuf
@@ -24,7 +23,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
     var mFetchCnt = 0
         
     var waitAlert: UIAlertController?
-    var banner: NotificationBanner?
     var notiView: NotificationView?
     
     override func viewDidLoad() {
@@ -77,55 +75,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
             delegate.scheme = nil
         }
     }
-    
-    @objc public func showNotificationBanner(_ notification: NSNotification) {
-        guard let userInfo = notification.userInfo as? [String: Any] else {
-            return
-        }
-        
-        if let notifyto = userInfo["notifyto"] as? String,
-            let txid = userInfo["txid"] as? String,
-            let type = userInfo["type"] as? String,
-            let aps = userInfo["aps"] as? NSDictionary,
-            let alert = aps["alert"] as? NSDictionary,
-            let title = alert["title"] as? String,
-            let body = alert["body"] as? String {
-            
-            if (type == "sent") {
-                notiView!.notiType.image = UIImage.init(named: "notificationsSend")
-                notiView!.notiTitle.textColor = UIColor.init(hexString: "#f31963")
-                
-            } else if (type == "received") {
-                notiView!.notiType.image = UIImage.init(named: "notificationsReceive")
-                notiView!.notiTitle.textColor = UIColor.init(hexString: "#37cc6e")
-            } else {
-                return
-            }
-            
-            notiView!.notiTitle.text = title
-            notiView!.notiMsg.text = body
-            notiView!.actionDismiss = {
-                self.banner?.dismiss()
-            }
-            notiView!.actionBody = {
-                let notiAccount = BaseData.instance.selectAccountByAddress(address: notifyto)
-                if (notiAccount != nil) {
-                    BaseData.instance.setRecentAccountId(notiAccount!.account_id)
-                    BaseData.instance.setLastTab(2)
-                    
-                    let mainTabVC = UIStoryboard(name: "MainStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MainTabViewController") as! MainTabViewController
-                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    appDelegate.window?.rootViewController = mainTabVC
-                    self.present(mainTabVC, animated: true, completion: nil)
-                }
-                self.banner?.dismiss()
-            }
-            banner = NotificationBanner(customView: notiView!)
-            banner?.dismissDuration = 0.5
-            banner?.show()
-        }
-    }
-    
     
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         BaseData.instance.setLastTab(tabBarController.selectedIndex)
