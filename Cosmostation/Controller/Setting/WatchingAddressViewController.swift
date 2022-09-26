@@ -14,10 +14,11 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnScan: UIButton!
     @IBOutlet weak var btnPaste: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addAddressInputText.delegate = self
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
     }
@@ -58,9 +59,8 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
         let userInput = self.addAddressInputText.text?.trimmingCharacters(in: .whitespaces) ?? ""
         if let chain = WUtils.getChainsFromAddress(userInput) {
             self.onGenWatchAccount(chain, userInput)
-            
         } else {
-            self.onShowToast(NSLocalizedString("error_invalid_address_or_pubkey", comment: ""))
+            self.onShowToast(NSLocalizedString("error_invalid_address", comment: ""))
             self.addAddressInputText.text = ""
             return;
         }
@@ -111,5 +111,16 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
         btnCancel.borderColor = UIColor.init(named: "_font05")
         btnScan.borderColor = UIColor.init(named: "_font05")
         btnPaste.borderColor = UIColor.init(named: "_font05")
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension WatchingAddressViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        defer {
+            onClickNext(btnNext)
+        }
+        return addAddressInputText.resignFirstResponder()
     }
 }
