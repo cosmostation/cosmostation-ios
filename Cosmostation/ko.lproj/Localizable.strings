@@ -1107,3 +1107,9 @@ support@cosmostation.io";
 "date_format2" = "yyyy-MM-dd";
 "date_format3" = "yyyy-MM-dd HH:mm";
 "date_format4" = "yy-MM-dd HH:mm:ss";
+
+"new_account_restore" = "지갑 복원";
+"new_account_private_key" = "개인키";
+"new_account_mnemonic" = "복구문자";
+"new_account_watching_only" = "관찰 모드";
+"new_account_address" = "주소";
