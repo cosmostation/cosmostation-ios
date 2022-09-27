@@ -56,6 +56,8 @@ public struct Param {
                 return thisInfaltion.dividing(by: creInitSupply, withBehavior: WUtils.handler18)
             }
             
+        } else if (chainType == .AXELAR_MAIN) {
+            return NSDecimalNumber.init(string: "0.150000000000000000")
         }
         return NSDecimalNumber.init(string: params?.minting_inflation)
     }
