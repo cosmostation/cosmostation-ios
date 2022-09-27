@@ -15,13 +15,15 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnScan: UIButton!
     @IBOutlet weak var btnPaste: UIButton!
-    var userInput: String?
+    @IBOutlet weak var btnNext: UIButton!
+    private var userInput: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
-        keyInputText.placeholder = "Private Key"
+        keyInputText.placeholder = NSLocalizedString("private_key_restore_priv_key", comment: "")
+        keyInputText.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +36,6 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
     }
-    
     
     @IBAction func onClickScan(_ sender: UIButton) {
         let qrScanVC = QRScanViewController(nibName: "QRScanViewController", bundle: nil)
@@ -61,7 +62,7 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     
     @IBAction func onClickNext(_ sender: UIButton) {
         userInput = keyInputText.text?.trimmingCharacters(in: .whitespaces) ?? ""
-        if (!KeyFac.isValidStringPrivateKey(userInput!)) {
+        if (!KeyFac.isValidStringPrivateKey(userInput)) {
             self.onShowToast(NSLocalizedString("error_invalid_private_Key", comment: ""))
             return
         }
@@ -105,7 +106,7 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
     
     func onStartWalletDerive() {
         let walletDeriveVC = WalletDeriveViewController(nibName: "WalletDeriveViewController", bundle: nil)
-        walletDeriveVC.mPrivateKey = KeyFac.getPrivateFromString(self.userInput!)
+        walletDeriveVC.mPrivateKey = KeyFac.getPrivateFromString(userInput)
         walletDeriveVC.mPrivateKeyMode = true
         walletDeriveVC.mBackable = false
         self.navigationItem.title = ""
@@ -118,4 +119,15 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
         btnPaste.borderColor = UIColor.init(named: "_font05")
     }
 
+}
+
+// MARK: - UITextFieldDelegate
+
+extension PrivateKeyRestoreViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        defer {
+            onClickNext(btnNext)
+        }
+        return textField.resignFirstResponder()
+    }
 }

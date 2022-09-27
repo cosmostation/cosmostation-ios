@@ -1113,3 +1113,5 @@ support@cosmostation.io";
 "new_account_mnemonic" = "복구문자";
 "new_account_watching_only" = "관찰 모드";
 "new_account_address" = "주소";
+
+"private_key_restore_priv_key" = "개인키";

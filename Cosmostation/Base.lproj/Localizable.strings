@@ -1107,3 +1107,5 @@ support@cosmostation.io";
 "new_account_mnemonic" = "Mnemonic";
 "new_account_watching_only" = "Watching only";
 "new_account_address" = "Address";
+
+"private_key_restore_priv_key" = "Private Key";
