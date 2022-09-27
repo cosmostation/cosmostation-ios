@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="addAddressInputText" destination="AY9-Pu-5bO" id="I4l-DN-oVd"/>
                 <outlet property="btnCancel" destination="GBx-OW-cBM" id="Ohm-rE-guf"/>
+                <outlet property="btnNext" destination="qhP-IN-yTe" id="Ji5-Nr-gXa"/>
                 <outlet property="btnPaste" destination="8pn-Xj-S8l" id="B06-Kv-2Tm"/>
                 <outlet property="btnScan" destination="NsS-wG-lOq" id="ugR-Re-7gd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -43,13 +44,14 @@ You need to add the correct mnemonics for the wallet to enable transactions.</st
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsS-wG-lOq">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NsS-wG-lOq">
                     <rect key="frame" x="170" y="159.5" width="110" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="KZN-tf-mZZ"/>
                         <constraint firstAttribute="width" constant="110" id="d4B-Jj-Dqt"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                    <color key="tintColor" name="_font05"/>
                     <state key="normal" title=" QR Scan" image="btnIconScan">
                         <color key="titleColor" name="_font05"/>
                     </state>
@@ -68,13 +70,14 @@ You need to add the correct mnemonics for the wallet to enable transactions.</st
                         <action selector="onClickScan:" destination="-1" eventType="touchUpInside" id="NhP-DJ-bh1"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pn-Xj-S8l">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8pn-Xj-S8l">
                     <rect key="frame" x="288" y="159.5" width="110" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="70v-rv-IIP"/>
                         <constraint firstAttribute="width" constant="110" id="egt-Fe-uCq"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                    <color key="tintColor" name="_font05"/>
                     <state key="normal" title="Paste" image="btnIconPaste">
                         <color key="titleColor" name="_font05"/>
                     </state>
