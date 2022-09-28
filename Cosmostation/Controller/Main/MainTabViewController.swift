@@ -1147,13 +1147,6 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate, Acc
         }
     }
     
-    
-    func onShowToast(_ text:String) {
-        var style = ToastStyle()
-        style.backgroundColor = UIColor.gray
-        self.view.makeToast(text, duration: 2.0, position: .bottom, style: style)
-    }
-    
     public func showWaittingAlert() {
         waitAlert = UIAlertController(title: "", message: "\n\n\n\n", preferredStyle: .alert)
         let image = LoadingImageView(frame: CGRect(x: 0, y: 0, width: 58, height: 58))

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Toast_Swift
 import QRCode
 import Alamofire
 import SafariServices
@@ -149,13 +148,6 @@ class BaseViewController: UIViewController {
                 BaseData.instance.setUserHiddenChains(hiddenChains)
             }
         }
-    }
-    
-    
-    func onShowToast(_ text:String) {
-        var style = ToastStyle()
-        style.backgroundColor = UIColor.gray
-        self.view.makeToast(text, duration: 2.0, position: .bottom, style: style)
     }
     
     func shareAddressType(_ chainConfig: ChainConfig?, _ account: Account?) {
