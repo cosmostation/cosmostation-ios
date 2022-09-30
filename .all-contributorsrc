@@ -77,6 +77,16 @@
         "bug",
         "maintenance"
       ]
+    },
+    {
+      "login": "albertopeam",
+      "name": "Alberto Penas Amor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/912381?v=4",
+      "profile": "https://es.linkedin.com/in/alberto-penas-amor",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
