@@ -15,7 +15,6 @@ class WalletPriceCell: UITableViewCell {
     @IBOutlet weak var perPrice: UILabel!
     @IBOutlet weak var sourceSite: UILabel!
     @IBOutlet weak var updownPercent: UILabel!
-    @IBOutlet weak var updownImg: UIImageView!
     @IBOutlet weak var buySeparator: UIView!
     @IBOutlet weak var buyBtn: UIButton!
     
@@ -57,11 +56,9 @@ class WalletPriceCell: UITableViewCell {
         
         sourceSite.text = "(CoinGecko)"
         perPrice.attributedText = WUtils.dpPrice(WUtils.getMainDenom(chainConfig), perPrice.font)
-        updownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), font: updownPercent.font)
+        updownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), updownPercent.font)
         let changePrice = WUtils.priceChange(WUtils.getMainDenom(chainConfig))
-        if (changePrice.compare(NSDecimalNumber.zero).rawValue > 0) { updownImg.image = UIImage(named: "priceUp") }
-        else if (changePrice.compare(NSDecimalNumber.zero).rawValue < 0) { updownImg.image = UIImage(named: "priceDown") }
-        else { updownImg.image = nil }
+        WDP.setPriceColor(updownPercent, changePrice)
         
         if (chainType == ChainType.COSMOS_MAIN) {
             buyBtn.setTitle(NSLocalizedString("buy_atom", comment: ""), for: .normal)

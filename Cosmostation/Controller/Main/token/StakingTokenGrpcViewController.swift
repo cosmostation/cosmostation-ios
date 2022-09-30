@@ -14,7 +14,6 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     @IBOutlet weak var naviTokenSymbol: UILabel!
     @IBOutlet weak var naviPerPrice: UILabel!
     @IBOutlet weak var naviUpdownPercent: UILabel!
-    @IBOutlet weak var naviUpdownImg: UIImageView!
     
     @IBOutlet weak var tokenTableView: UITableView!
     @IBOutlet weak var btnSend: UIButton!
@@ -62,12 +61,9 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         WUtils.setDenomTitle(chainType, naviTokenSymbol)
         self.naviTokenImg.image = chainConfig?.stakeDenomImg
         self.naviPerPrice.attributedText = WUtils.dpPrice(WUtils.getMainDenom(chainConfig), naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), font: naviUpdownPercent.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), naviUpdownPercent.font)
         let changePrice = WUtils.priceChange(WUtils.getMainDenom(chainConfig))
-        if (changePrice.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
-        else if (changePrice.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
-        else { naviUpdownImg.image = nil }
-        
+        WDP.setPriceColor(naviUpdownPercent, changePrice)
         totalAmount = WUtils.getAllMainAsset(stakingDenom)
     }
     

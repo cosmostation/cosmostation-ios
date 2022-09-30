@@ -582,6 +582,9 @@ support@cosmostation.io";
 "str_icon_updated" = "Icon updated.";
 "str_ipfs_connect_fail_title" = "Connection Error";
 "str_ipfs_connect_fail_msg" = "Unable to connect to IPFS. Please check the network connection status.";
+"str_bull" = "Bull";
+"str_bear" = "Bear";
+"str_select_price_color" = "Select price change color";
 
 "clear_all" = "Clear All";
 "delete" = "Delete";

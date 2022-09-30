@@ -12,7 +12,7 @@ import Toast_Swift
 import LocalAuthentication
 import Alamofire
 
-class SettingTableViewController: UITableViewController, PasswordViewDelegate, QrScannerDelegate {
+class SettingTableViewController: UITableViewController, PasswordViewDelegate, QrScannerDelegate, SBCardPopupDelegate {
     
     let CHECK_NONE:Int = -1
     let CHECK_FOR_APP_LOCK:Int = 1
@@ -32,7 +32,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var explorerLabel: UILabel!
     @IBOutlet weak var enginerModeSwitch: UISwitch!
     @IBOutlet weak var notificationSwitch: UISwitch!
-    var hideBio = false
+    @IBOutlet weak var priceUpLabel: UILabel!
+    @IBOutlet weak var priceDownLabel: UILabel!
     var checkMode = -1
     
     override func viewDidLoad() {
@@ -49,6 +50,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         self.onUpdateTheme()
         self.onUpdateAutoPass()
         self.onUpdateCurrency()
+        self.onUpdatePriceChangeColor()
         self.onUpdateAlarm()
         
     }
@@ -56,6 +58,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.explorerLabel.text = NSLocalizedString("mintscan_explorer", comment: "")
+        self.priceUpLabel.text = NSLocalizedString("str_bull", comment: "")
+        self.priceDownLabel.text = NSLocalizedString("str_bear", comment: "")
 
         let laContext = LAContext()
         let biometricsPolicy = LAPolicy.deviceOwnerAuthenticationWithBiometrics
@@ -130,6 +134,13 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 
             } else if (indexPath.row == 5) {
                 self.onShowCurrenyDialog()
+                
+            } else if (indexPath.row == 6) {
+                let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
+                popupVC.type = SELECT_POPUP_PRICE_COLOR
+                let cardPopup = SBCardPopupViewController(contentViewController: popupVC)
+                cardPopup.resultDelegate = self
+                cardPopup.show(onViewController: self)
             }
             
         } else if (indexPath.section == 2) {
@@ -207,6 +218,20 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     
     func onUpdateCurrency() {
         currecyLabel.text = BaseData.instance.getCurrencyString()
+    }
+    
+    func onUpdatePriceChangeColor() {
+        WDP.priceUpColor(priceUpLabel)
+        WDP.priceDownColor(priceDownLabel)
+    }
+    
+    func SBCardPopupResponse(type: Int, result: Int) {
+        if (type == SELECT_POPUP_PRICE_COLOR) {
+            if (BaseData.instance.getPriceChaingColor() != result) {
+                BaseData.instance.setPriceChaingColor(result)
+                onUpdatePriceChangeColor()
+            }
+        }
     }
     
     func onUpdateAlarm() {

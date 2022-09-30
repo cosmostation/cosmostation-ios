@@ -16,7 +16,6 @@
                 <outlet property="naviPerPrice" destination="z6t-Ue-hoQ" id="0Y9-8a-fEP"/>
                 <outlet property="naviTokenImg" destination="M3U-YV-fKU" id="mAb-kf-3Od"/>
                 <outlet property="naviTokenSymbol" destination="wel-57-CxU" id="LUd-r0-9Zt"/>
-                <outlet property="naviUpdownImg" destination="TxX-EV-cie" id="HP8-Yi-56E"/>
                 <outlet property="naviUpdownPercent" destination="4eY-5r-2Zp" id="Mpz-ZS-uAR"/>
                 <outlet property="tokenTableView" destination="6l8-ny-iEv" id="Y9p-sk-QD3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -61,19 +60,10 @@
                                     <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="priceDown" translatesAutoresizingMaskIntoConstraints="NO" id="TxX-EV-cie">
-                                    <rect key="frame" x="85" y="17.5" width="12" height="12"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="12" id="G1N-A6-rvh"/>
-                                        <constraint firstAttribute="height" constant="12" id="X8g-UB-JBg"/>
-                                    </constraints>
-                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="z6t-Ue-hoQ" firstAttribute="top" secondItem="7Tm-cO-UmA" secondAttribute="top" constant="4" id="If5-rm-ir0"/>
-                                <constraint firstItem="4eY-5r-2Zp" firstAttribute="leading" secondItem="TxX-EV-cie" secondAttribute="trailing" constant="4" id="LRG-Nc-pNO"/>
-                                <constraint firstItem="4eY-5r-2Zp" firstAttribute="centerY" secondItem="TxX-EV-cie" secondAttribute="centerY" id="TlR-o0-2Yh"/>
                                 <constraint firstAttribute="bottom" secondItem="4eY-5r-2Zp" secondAttribute="bottom" id="aRd-70-LoK"/>
                                 <constraint firstAttribute="width" constant="110" id="f5X-NU-CSm"/>
                                 <constraint firstAttribute="trailing" secondItem="z6t-Ue-hoQ" secondAttribute="trailing" id="ux3-7G-JWn"/>
@@ -158,7 +148,6 @@
     </objects>
     <resources>
         <image name="btnNaviBack" width="24" height="24"/>
-        <image name="priceDown" width="16" height="16"/>
         <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -214,13 +214,7 @@ public class WUtils {
         return NSDecimalNumber.init(value: coinPrice.daily_price_change_in_percent ?? 0).rounding(accordingToBehavior: handler2Down)
     }
     
-    static func dpPriceChange(_ denom: String, font:UIFont ) -> NSMutableAttributedString {
-        let nf = getNumberFormatter(2)
-        let formatted = nf.string(from: priceChange(denom))! + "% (24h)"
-        return getDpAttributedString(formatted, 9, font)
-    }
-    
-    static func dpPriceChange2(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
+    static func dpPriceChange(_ denom: String, _ font:UIFont) -> NSMutableAttributedString {
         let nf = getNumberFormatter(2)
         let change = priceChange(denom)
         if (change.compare(NSDecimalNumber.zero).rawValue >= 0) {

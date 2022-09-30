@@ -16,7 +16,6 @@
                 <outlet property="naviPerPrice" destination="kXL-e1-AkG" id="uN4-LO-ce6"/>
                 <outlet property="naviTokenImg" destination="vEx-eU-Vdh" id="3Qb-mZ-M91"/>
                 <outlet property="naviTokenSymbol" destination="4hq-As-VP1" id="Lkx-Et-Ayg"/>
-                <outlet property="naviUpdownImg" destination="Was-Om-E9B" id="DuN-Ts-OH5"/>
                 <outlet property="naviUpdownPercent" destination="lcq-59-Wfn" id="AQY-Gg-Xt7"/>
                 <outlet property="tokenTableView" destination="tcp-ty-nPt" id="bJ0-nj-uU4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -65,22 +64,13 @@
                                     <color key="textColor" name="_font05"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="priceDown" translatesAutoresizingMaskIntoConstraints="NO" id="Was-Om-E9B">
-                                    <rect key="frame" x="85" y="17.5" width="12" height="12"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="12" id="HBy-hp-Fsz"/>
-                                        <constraint firstAttribute="width" constant="12" id="Xof-0R-70p"/>
-                                    </constraints>
-                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="lcq-59-Wfn" secondAttribute="trailing" id="4JE-2g-gt1"/>
                                 <constraint firstItem="kXL-e1-AkG" firstAttribute="top" secondItem="znF-LT-P6t" secondAttribute="top" constant="4" id="DwI-pq-xd2"/>
-                                <constraint firstItem="lcq-59-Wfn" firstAttribute="centerY" secondItem="Was-Om-E9B" secondAttribute="centerY" id="NlW-pU-t2F"/>
                                 <constraint firstAttribute="bottom" secondItem="lcq-59-Wfn" secondAttribute="bottom" id="OFW-M8-cac"/>
                                 <constraint firstAttribute="width" constant="110" id="Oc9-cG-N68"/>
-                                <constraint firstItem="lcq-59-Wfn" firstAttribute="leading" secondItem="Was-Om-E9B" secondAttribute="trailing" constant="4" id="lRf-Le-U9L"/>
                                 <constraint firstAttribute="trailing" secondItem="kXL-e1-AkG" secondAttribute="trailing" id="reW-Ez-g1h"/>
                             </constraints>
                         </view>
@@ -158,7 +148,6 @@
     </objects>
     <resources>
         <image name="btnNaviBack" width="24" height="24"/>
-        <image name="priceDown" width="16" height="16"/>
         <image name="tokenDefault" width="22" height="22"/>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

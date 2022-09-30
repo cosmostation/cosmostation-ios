@@ -168,15 +168,9 @@ class AssetCell: UITableViewCell {
     
     func onBindPriceView(_ priceDenom: String) {
         assetPrice.attributedText = WUtils.dpPrice(priceDenom, assetPrice.font)
-        assetPriceChange.attributedText = WUtils.dpPriceChange2(priceDenom, assetPriceChange.font)
+        assetPriceChange.attributedText = WUtils.dpPriceChange(priceDenom, assetPriceChange.font)
         
         let changePrice = WUtils.priceChange(priceDenom)
-        if (changePrice.compare(NSDecimalNumber.zero).rawValue > 0) {
-            assetPriceChange.textColor = UIColor(named: "_voteYes")
-        } else if (changePrice.compare(NSDecimalNumber.zero).rawValue < 0) {
-            assetPriceChange.textColor = UIColor(named: "_voteNo")
-        } else if (changePrice.compare(NSDecimalNumber.zero).rawValue == 0) {
-            assetPriceChange.text = ""
-        }
+        WDP.setPriceColor(assetPriceChange, changePrice)
     }
 }
