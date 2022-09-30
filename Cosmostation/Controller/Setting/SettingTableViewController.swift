@@ -225,18 +225,10 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         }
     }
     
-    
-    func onShowToast(_ text:String) {
-        var style = ToastStyle()
-        style.backgroundColor = UIColor.gray
-        self.parent?.view.makeToast(text, duration: 2.0, position: .bottom, style: style)
-    }
-    
     func onShowNotice() {
         guard let url = URL(string: "https://notice.mintscan.io/\(chainConfig.chainAPIName)") else { return }
         self.onShowSafariWeb(url)
     }
-    
     
     func onClickAutoPass() {
         if (BaseData.instance.hasPassword()) {
@@ -478,7 +470,7 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             onShowEnginerModeDialog()
         } else {
             BaseData.instance.setUsingEnginerMode(false)
-            self.onShowToast("Engineer Mode Disabled")
+            onShowToast("Engineer Mode Disabled", onView: parent?.view)
         }
     }
     
@@ -562,9 +554,9 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
             if (trimmedString == "ibcwallet") {
                 self.enginerModeSwitch.setOn(true, animated: false)
                 BaseData.instance.setUsingEnginerMode(true)
-                self.onShowToast("Engineer Mode Enabled")
+                self.onShowToast("Engineer Mode Enabled", onView: self.parent?.view)
             } else {
-                self.onShowToast("Wrong Password")
+                self.onShowToast("Wrong Password", onView: self.parent?.view)
             }
         }))
         self.present(passcodeAlert, animated: true) {
