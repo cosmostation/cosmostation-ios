@@ -1,5 +1,5 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <p align="center">
   <a href="https://www.cosmostation.io" target="_blank" rel="noopener noreferrer"><img width="100" src="https://user-images.githubusercontent.com/20435620/55696624-d7df2e00-59f8-11e9-9126-edf9a40b11a8.png" alt="Cosmostation logo"></a>
@@ -68,6 +68,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center"><a href="https://es.linkedin.com/in/alberto-penas-amor"><img src="https://avatars.githubusercontent.com/u/912381?v=4?s=100" width="100px;" alt="Alberto Penas Amor"/><br /><sub><b>Alberto Penas Amor</b></sub></a><br /><a href="https://github.com/cosmostation/cosmostation-ios/commits?author=albertopeam" title="Code">💻</a> <a href="https://github.com/cosmostation/cosmostation-ios/issues?q=author%3Aalbertopeam" title="Bug reports">🐛</a></td>
+      <td align="center"><a href="https://github.com/professionallyatortoise"><img src="https://avatars.githubusercontent.com/u/95767439?v=4?s=100" width="100px;" alt="Diyair"/><br /><sub><b>Diyair</b></sub></a><br /><a href="https://github.com/cosmostation/cosmostation-ios/commits?author=professionallyatortoise" title="Code">💻</a> <a href="#design-professionallyatortoise" title="Design">🎨</a></td>
     </tr>
   </tbody>
   <tfoot>
