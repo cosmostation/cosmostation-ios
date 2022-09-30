@@ -989,6 +989,8 @@
 		04E165BB28B61BE1000F12C0 /* MintscanAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165B928B61BE1000F12C0 /* MintscanAsset.swift */; };
 		04E165BD28B62133000F12C0 /* MintscanToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165BC28B62133000F12C0 /* MintscanToken.swift */; };
 		04E165BE28B62133000F12C0 /* MintscanToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E165BC28B62133000F12C0 /* MintscanToken.swift */; };
+		04E1912C28E66F5800C98A6B /* UIViewController+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1912B28E66F5800C98A6B /* UIViewController+Toast.swift */; };
+		04E1912D28E66F5800C98A6B /* UIViewController+Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1912B28E66F5800C98A6B /* UIViewController+Toast.swift */; };
 		04E25D2E276F23D9009B39BA /* xmas@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2A276F23D9009B39BA /* xmas@3x.png */; };
 		04E25D2F276F23D9009B39BA /* new2022@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2B276F23D9009B39BA /* new2022@3x.png */; };
 		04E25D30276F23D9009B39BA /* xmas@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25D2C276F23D9009B39BA /* xmas@2x.png */; };
@@ -3579,6 +3581,7 @@
 		04E165B628A0F873000F12C0 /* ChainTgrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainTgrade.swift; sourceTree = "<group>"; };
 		04E165B928B61BE1000F12C0 /* MintscanAsset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanAsset.swift; sourceTree = "<group>"; };
 		04E165BC28B62133000F12C0 /* MintscanToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MintscanToken.swift; sourceTree = "<group>"; };
+		04E1912B28E66F5800C98A6B /* UIViewController+Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Toast.swift"; sourceTree = "<group>"; };
 		04E25D2A276F23D9009B39BA /* xmas@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@3x.png"; sourceTree = "<group>"; };
 		04E25D2B276F23D9009B39BA /* new2022@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new2022@3x.png"; sourceTree = "<group>"; };
 		04E25D2C276F23D9009B39BA /* xmas@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "xmas@2x.png"; sourceTree = "<group>"; };
@@ -5860,6 +5863,7 @@
 				E1945E51223124F000A1436F /* BaseData.swift */,
 				E1945E532231256800A1436F /* BaseConstant.swift */,
 				28592E762580616D00C31460 /* BaseNetWork.swift */,
+				04E1912B28E66F5800C98A6B /* UIViewController+Toast.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -7625,6 +7629,7 @@
 				1817CB78283E2CE500523713 /* kava_hard_v1beta1_genesis.pb.swift in Sources */,
 				1817CBF4283E2CE600523713 /* cosmos_nft_v1beta1_tx.grpc.swift in Sources */,
 				1817CBC9283E2CE500523713 /* osmosis_superfluid_query.pb.swift in Sources */,
+				04E1912D28E66F5800C98A6B /* UIViewController+Toast.swift in Sources */,
 				18FFB490281AF533004E65BB /* Delegation.swift in Sources */,
 				18FFB491281AF533004E65BB /* TxHardWithdrawCell.swift in Sources */,
 				1817CB6D283E2CE500523713 /* osmosis_lockup_genesis.pb.swift in Sources */,
@@ -9031,6 +9036,7 @@
 				04E25D36276F6C5D009B39BA /* MyNTFsViewController.swift in Sources */,
 				040FA950275F55C300229F6F /* desmos_profiles_v1beta1_models_relationships.pb.swift in Sources */,
 				04E1659528A0F49B000F12C0 /* confio_globalfee_v1beta1_genesis.pb.swift in Sources */,
+				04E1912C28E66F5800C98A6B /* UIViewController+Toast.swift in Sources */,
 				283439A42531D1DF00CCFADE /* MyAccountViewController.swift in Sources */,
 				28B37D2C26D8EB42008AACD2 /* KavaSwapViewController.swift in Sources */,
 				040FA7C3275F55C200229F6F /* tendermint_types_params.pb.swift in Sources */,
