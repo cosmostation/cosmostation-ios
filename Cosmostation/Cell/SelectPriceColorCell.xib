@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,26 +21,52 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ME0-pf-R55" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
                         <rect key="frame" x="8" y="4" width="362" height="50"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BULL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBd-zp-DA6">
-                                <rect key="frame" x="12" y="17" width="35.5" height="16.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Option 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBd-zp-DA6">
+                                <rect key="frame" x="12" y="16.5" width="53" height="17"/>
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEAR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4oi-OC-41k">
-                                <rect key="frame" x="59.5" y="16.5" width="39" height="17"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Up :" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nsk-IN-pMJ">
+                                <rect key="frame" x="234" y="18" width="23" height="14"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgGovFailed" translatesAutoresizingMaskIntoConstraints="NO" id="jNN-sD-UDH">
+                                <rect key="frame" x="261" y="21" width="8" height="8"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="8" id="a3D-tt-QE5"/>
+                                    <constraint firstAttribute="height" constant="8" id="oiN-Qi-HuF"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Down : " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PXU-fS-vAz">
+                                <rect key="frame" x="293" y="18" width="41" height="14"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <color key="textColor" name="_font05"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImgGovFailed" translatesAutoresizingMaskIntoConstraints="NO" id="Q3N-bj-gmR">
+                                <rect key="frame" x="338" y="21" width="8" height="8"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="8" id="DrS-DR-0pe"/>
+                                    <constraint firstAttribute="width" constant="8" id="Mkl-Ib-guQ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="4oi-OC-41k" firstAttribute="leading" secondItem="iBd-zp-DA6" secondAttribute="trailing" constant="12" id="NNN-1Y-RLr"/>
+                            <constraint firstItem="PXU-fS-vAz" firstAttribute="centerY" secondItem="ME0-pf-R55" secondAttribute="centerY" id="Ayj-Wc-mDr"/>
+                            <constraint firstItem="Q3N-bj-gmR" firstAttribute="leading" secondItem="PXU-fS-vAz" secondAttribute="trailing" constant="4" id="Ifh-Ce-Mvr"/>
+                            <constraint firstItem="jNN-sD-UDH" firstAttribute="centerY" secondItem="ME0-pf-R55" secondAttribute="centerY" id="d3J-WO-TNe"/>
                             <constraint firstAttribute="height" constant="50" id="gTC-qL-nLR"/>
+                            <constraint firstItem="Nsk-IN-pMJ" firstAttribute="centerY" secondItem="ME0-pf-R55" secondAttribute="centerY" id="iAd-tt-PuV"/>
                             <constraint firstItem="iBd-zp-DA6" firstAttribute="leading" secondItem="ME0-pf-R55" secondAttribute="leading" constant="12" id="jJ2-8e-nGe"/>
                             <constraint firstItem="iBd-zp-DA6" firstAttribute="centerY" secondItem="ME0-pf-R55" secondAttribute="centerY" id="kIr-ua-mKa"/>
-                            <constraint firstItem="4oi-OC-41k" firstAttribute="centerY" secondItem="iBd-zp-DA6" secondAttribute="centerY" id="nfj-kf-KNA"/>
+                            <constraint firstItem="Q3N-bj-gmR" firstAttribute="centerY" secondItem="ME0-pf-R55" secondAttribute="centerY" id="mjd-DV-W0v"/>
+                            <constraint firstItem="PXU-fS-vAz" firstAttribute="leading" secondItem="jNN-sD-UDH" secondAttribute="trailing" constant="24" id="rkA-9S-eHA"/>
+                            <constraint firstAttribute="trailing" secondItem="Q3N-bj-gmR" secondAttribute="trailing" constant="16" id="u13-pj-u2r"/>
+                            <constraint firstItem="jNN-sD-UDH" firstAttribute="leading" secondItem="Nsk-IN-pMJ" secondAttribute="trailing" constant="4" id="uoV-vI-qWT"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetHeight">
@@ -59,10 +85,10 @@
                                 <integer key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                <real key="value" value="0.0"/>
+                                <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="value" name="_font04"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
@@ -78,13 +104,19 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="bearLabel" destination="4oi-OC-41k" id="yhY-rH-DAq"/>
                 <outlet property="bullLabel" destination="iBd-zp-DA6" id="Oad-DE-9lA"/>
+                <outlet property="downColorImg" destination="Q3N-bj-gmR" id="BmP-I5-ica"/>
+                <outlet property="optionLabel" destination="iBd-zp-DA6" id="kje-MA-kwa"/>
+                <outlet property="upColorImg" destination="jNN-sD-UDH" id="mhx-Tl-Nh0"/>
             </connections>
             <point key="canvasLocation" x="179.71014492753625" y="158.03571428571428"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ImgGovFailed" width="6" height="6"/>
+        <namedColor name="_font04">
+            <color red="0.4779999852180481" green="0.49799999594688416" blue="0.53299999237060547" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="_font05">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

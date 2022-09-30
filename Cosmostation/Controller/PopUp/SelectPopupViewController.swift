@@ -339,11 +339,11 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_PRICE_COLOR) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectPriceColorCell") as? SelectPriceColorCell
             if (indexPath.row == 0) {
-                cell?.bullLabel.textColor = UIColor(named: "_voteYes")
-                cell?.bearLabel.textColor = UIColor(named: "_voteNo")
+                cell?.upColorImg.image = UIImage.init(named: "ImgGovPassed")
+                cell?.downColorImg.image = UIImage.init(named: "ImgGovRejected")
             } else {
-                cell?.bullLabel.textColor = UIColor(named: "_voteNo")
-                cell?.bearLabel.textColor = UIColor(named: "_voteYes")
+                cell?.upColorImg.image = UIImage.init(named: "ImgGovRejected")
+                cell?.downColorImg.image = UIImage.init(named: "ImgGovPassed")
             }
             return cell!
             

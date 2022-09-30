@@ -9,14 +9,15 @@
 import UIKit
 
 class SelectPriceColorCell: UITableViewCell {
-    @IBOutlet weak var bullLabel: UILabel!
-    @IBOutlet weak var bearLabel: UILabel!
-
+    
+    @IBOutlet weak var optionLabel: UILabel!
+    @IBOutlet weak var upColorImg: UIImageView!
+    @IBOutlet weak var downColorImg: UIImageView!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        self.bullLabel.text = NSLocalizedString("str_bull", comment: "")
-        self.bearLabel.text = NSLocalizedString("str_bear", comment: "")
     }
     
 }
