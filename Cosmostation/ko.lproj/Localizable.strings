@@ -589,6 +589,9 @@ support@cosmostation.io";
 "str_icon_updated" = "아이콘 업데이트 완료.";
 "str_ipfs_connect_fail_title" = "연결 상태 확인";
 "str_ipfs_connect_fail_msg" = "IPFS에 접속할 수 없습니다. 네트워크 연결 상태를 확인해주세요.";
+"str_bull" = "상승";
+"str_bear" = "하강";
+"str_select_price_color" = "가격 변동 색상을 선택하세요";
 
 "clear_all" = "전체 삭제";
 "delete" = "삭제";

@@ -15,7 +15,6 @@ class WalletPriceCell: UITableViewCell {
     @IBOutlet weak var perPrice: UILabel!
     @IBOutlet weak var sourceSite: UILabel!
     @IBOutlet weak var updownPercent: UILabel!
-    @IBOutlet weak var updownImg: UIImageView!
     @IBOutlet weak var buySeparator: UIView!
     @IBOutlet weak var buyBtn: UIButton!
     
@@ -25,8 +24,8 @@ class WalletPriceCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        perPrice.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
-        updownPercent.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_11_caption2)
+//        perPrice.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
+//        updownPercent.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapPrice))
         self.contentView.isUserInteractionEnabled = true
@@ -57,11 +56,9 @@ class WalletPriceCell: UITableViewCell {
         
         sourceSite.text = "(CoinGecko)"
         perPrice.attributedText = WUtils.dpPrice(WUtils.getMainDenom(chainConfig), perPrice.font)
-        updownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), font: updownPercent.font)
+        updownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), updownPercent.font)
         let changePrice = WUtils.priceChange(WUtils.getMainDenom(chainConfig))
-        if (changePrice.compare(NSDecimalNumber.zero).rawValue > 0) { updownImg.image = UIImage(named: "priceUp") }
-        else if (changePrice.compare(NSDecimalNumber.zero).rawValue < 0) { updownImg.image = UIImage(named: "priceDown") }
-        else { updownImg.image = nil }
+        WDP.setPriceColor(updownPercent, changePrice)
         
         if (chainType == ChainType.COSMOS_MAIN) {
             buyBtn.setTitle(NSLocalizedString("buy_atom", comment: ""), for: .normal)

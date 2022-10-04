@@ -218,4 +218,30 @@ public class WDP {
             .replacingOccurrences(of: "assetmantle", with: "assetman")
             .replacingOccurrences(of: ">", with: " ⇝ ")
     }
+    
+    static func priceUpColor(_ label: UILabel) {
+        if (BaseData.instance.getPriceChaingColor() > 0) {
+            label.textColor = UIColor(named: "_voteNo")
+        } else {
+            label.textColor = UIColor(named: "_voteYes")
+        }
+    }
+    
+    static func priceDownColor(_ label: UILabel) {
+        if (BaseData.instance.getPriceChaingColor() > 0) {
+            label.textColor = UIColor(named: "_voteYes")
+        } else {
+            label.textColor = UIColor(named: "_voteNo")
+        }
+    }
+    
+    static func setPriceColor(_ label: UILabel, _ change: NSDecimalNumber) {
+        if (change.compare(NSDecimalNumber.zero).rawValue > 0) {
+            priceUpColor(label)
+        } else if (change.compare(NSDecimalNumber.zero).rawValue < 0) {
+            priceDownColor(label)
+        } else if (change.compare(NSDecimalNumber.zero).rawValue == 0) {
+            label.text = ""
+        }
+    }
 }

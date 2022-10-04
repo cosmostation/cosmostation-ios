@@ -14,7 +14,6 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
     @IBOutlet weak var naviTokenSymbol: UILabel!
     @IBOutlet weak var naviPerPrice: UILabel!
     @IBOutlet weak var naviUpdownPercent: UILabel!
-    @IBOutlet weak var naviUpdownImg: UIImageView!
     
     @IBOutlet weak var tokenTableView: UITableView!
     @IBOutlet weak var btnSend: UIButton!
@@ -67,11 +66,9 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         }
         
         self.naviPerPrice.attributedText = WUtils.dpPrice(nativeDenom, naviPerPrice.font)
-        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(nativeDenom, font: naviUpdownPercent.font)
+        self.naviUpdownPercent.attributedText = WUtils.dpPriceChange(nativeDenom, naviUpdownPercent.font)
         let changePrice = WUtils.priceChange(nativeDenom)
-        if (changePrice.compare(NSDecimalNumber.zero).rawValue > 0) { naviUpdownImg.image = UIImage(named: "priceUp") }
-        else if (changePrice.compare(NSDecimalNumber.zero).rawValue < 0) { naviUpdownImg.image = UIImage(named: "priceDown") }
-        else { naviUpdownImg.image = nil }
+        WDP.setPriceColor(naviUpdownPercent, changePrice)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

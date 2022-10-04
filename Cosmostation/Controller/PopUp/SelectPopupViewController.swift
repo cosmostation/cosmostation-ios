@@ -41,6 +41,7 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         self.popupTableview.register(UINib(nibName: "SelectChainCell", bundle: nil), forCellReuseIdentifier: "SelectChainCell")
         self.popupTableview.register(UINib(nibName: "SelectCoinCell", bundle: nil), forCellReuseIdentifier: "SelectCoinCell")
         self.popupTableview.register(UINib(nibName: "SelectAccountCell", bundle: nil), forCellReuseIdentifier: "SelectAccountCell")
+        self.popupTableview.register(UINib(nibName: "SelectPriceColorCell", bundle: nil), forCellReuseIdentifier: "SelectPriceColorCell")
 //        self.popupTableview.register(UINib(nibName: "SelectRelayerCell", bundle: nil), forCellReuseIdentifier: "SelectRelayerCell")
         self.popupTableview.register(UINib(nibName: "SelectDesmosAirdopAccountCell", bundle: nil), forCellReuseIdentifier: "SelectDesmosAirdopAccountCell")
         self.popupTableview.rowHeight = UITableView.automaticDimension
@@ -95,6 +96,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_COIN_LIST) {
             self.popupTitle.text = NSLocalizedString("str_select_to_send_coin", comment: "")
             
+        } else if (type == SELECT_POPUP_PRICE_COLOR) {
+            self.popupTitle.text = NSLocalizedString("str_select_price_color", comment: "")
         }
     }
     
@@ -124,6 +127,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             esHeight = (CGFloat)((feeData.count * 55) + 55)
         } else if (type == SELECT_POPUP_COIN_LIST) {
             esHeight = (CGFloat)((toCoins.count * 55) + 55)
+        } else if (type == SELECT_POPUP_PRICE_COLOR) {
+            cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: 165)
+            cardView.layoutIfNeeded()
+            return
         }
         esHeight = (esHeight > 350) ? 350 : esHeight
         cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: esHeight)
@@ -156,6 +163,8 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             return feeData.count
         } else if (type == SELECT_POPUP_COIN_LIST) {
             return toCoins.count
+        } else if (type == SELECT_POPUP_PRICE_COLOR) {
+            return 2
         }
         return 0
     }
@@ -329,6 +338,19 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             let coin = toCoins[indexPath.row]
             WDP.dpSymbolImg(chainConfig, coin.denom, cell!.coinImg)
             WDP.dpSymbol(chainConfig, coin.denom, cell!.coinTitle)
+            return cell!
+            
+        } else if (type == SELECT_POPUP_PRICE_COLOR) {
+            let cell = tableView.dequeueReusableCell(withIdentifier:"SelectPriceColorCell") as? SelectPriceColorCell
+            if (indexPath.row == 0) {
+                cell?.optionLabel.text = "Oprion 1"
+                cell?.upColorImg.image = UIImage.init(named: "iconPriceGreen")
+                cell?.downColorImg.image = UIImage.init(named: "iconPriceRed")
+            } else {
+                cell?.optionLabel.text = "Oprion 2"
+                cell?.upColorImg.image = UIImage.init(named: "iconPriceRed")
+                cell?.downColorImg.image = UIImage.init(named: "iconPriceGreen")
+            }
             return cell!
             
         } else {

@@ -625,6 +625,14 @@ final class BaseData : NSObject{
         return ""
     }
     
+    func setPriceChaingColor(_ value : Int) {
+        UserDefaults.standard.set(value, forKey: KEY_PRICE_CHANGE_COLOR)
+    }
+
+    func getPriceChaingColor() -> Int {
+        return UserDefaults.standard.integer(forKey: KEY_PRICE_CHANGE_COLOR)
+    }
+    
     func setUsingAppLock(_ using : Bool) {
         UserDefaults.standard.set(using, forKey: KEY_USING_APP_LOCK)
     }

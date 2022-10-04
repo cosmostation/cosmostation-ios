@@ -19,6 +19,7 @@ let KEY_MY_VAL_SORT                     = "KEY_MY_VAL_SORT"
 let KEY_LAST_TAB                        = "KEY_LAST_TAB"
 let KEY_ACCOUNT_REFRESH_ALL             = "KEY_ACCOUNT_REFRESH_ALL"
 let KEY_CURRENCY                        = "KEY_CURRENCY"
+let KEY_PRICE_CHANGE_COLOR              = "KEY_PRICE_CHANGE_COLOR"
 let KEY_THEME                           = "KEY_THEME"
 let KEY_USING_APP_LOCK                  = "KEY_USING_APP_LOCK"
 let KEY_USING_BIO_AUTH                  = "KEY_USING_BIO_AUTH"
@@ -443,6 +444,7 @@ let SELECT_POPUP_KEPLR_GET_ACCOUNT = 17
 let SELECT_POPUP_FEE_DENOM = 18
 let SELECT_POPUP_COIN_LIST = 19
 let SELECT_POPUP_CONTRACT_TOKEN_EDIT = 20
+let SELECT_POPUP_PRICE_COLOR = 21
 
 
 let DAY_SEC     = NSDecimalNumber.init(string: "86400")
