@@ -314,7 +314,43 @@ class CommonWCViewController: BaseViewController {
             self.showAccountPopup()
         }
         
+        interactor.cosmos.onCosmosAccounts = { [weak self] (id, chains) in
+            guard let self = self else { return }
+            self.wcId = id
+            self.accountChainSet.removeAll()
+            self.accountSelectedSet.removeAll()
+            chains.forEach { chain in
+                self.accountChainSet.insert(chain)
+            }
+            self.showAccountPopup()
+        }
+        
         interactor.cosmostation.onCosmosatationSignTx = { [weak self] (rawData) in
+            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let chainId = params[0] as? String, let sigData = try? JSONSerialization.data(withJSONObject:params[2]) {
+                self?.wcId = id
+                self?.wcCosmosRequest = sigData
+                self?.wcRequestChainName = WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId))
+                self?.onShowPopupForRequest(WcRequestType.COSMOS_TYPE, sigData)
+            }
+        }
+        
+        interactor.cosmostation.onCosmosatationSignDirectTx = { [weak self] (rawData) in
+            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let sigData = try? JSONSerialization.data(withJSONObject:params[1]) {
+                self?.wcId = id
+                self?.wcCosmosRequest = sigData
+                self?.onShowPopupForRequest(WcRequestType.COSMOS_DIRECT_TYPE, sigData)
+            }
+        }
+        
+        interactor.cosmos.onCosmosSignDirect = { [weak self] (rawData) in
+            if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let sigData = try? JSONSerialization.data(withJSONObject:params[1]) {
+                self?.wcId = id
+                self?.wcCosmosRequest = sigData
+                self?.onShowPopupForRequest(WcRequestType.COSMOS_DIRECT_TYPE, sigData)
+            }
+        }
+        
+        interactor.cosmos.onCosmosSignAmino = { [weak self] (rawData) in
             if let id = rawData["id"] as? Int64, let params = rawData["params"] as? Array<Any>, let chainId = params[0] as? String, let sigData = try? JSONSerialization.data(withJSONObject:params[2]) {
                 self?.wcId = id
                 self?.wcCosmosRequest = sigData
@@ -651,6 +687,36 @@ class CommonWCViewController: BaseViewController {
         }
     }
     
+    func approveCosmosDirectRequest() {
+        if let json = try? JSON(data: wcCosmosRequest!),
+           let chainId = json["chainId"].rawString(),
+           let bodyString = json["bodyBytes"].rawString(),
+           let bodyBase64Decoded = Data(base64Encoded: bodyString),
+           let bodyBytes = try? Cosmos_Tx_V1beta1_TxBody.init(serializedData: bodyBase64Decoded),
+           let authInfoString = json["authInfoBytes"].rawString(),
+           let authInfoBase64Decoded = Data(base64Encoded: authInfoString),
+           let authInfo = try? Cosmos_Tx_V1beta1_AuthInfo.init(serializedData: authInfoBase64Decoded) {
+            let signDoc = Cosmos_Tx_V1beta1_SignDoc.with {
+                $0.bodyBytes = try! bodyBytes.serializedData()
+                $0.authInfoBytes = try! authInfo.serializedData()
+                $0.chainID = chainId
+                $0.accountNumber = json["accountNumber"].uInt64Value
+            }
+            
+            getKeyAsync(chainName: WUtils.getChainDBName(WUtils.getChainTypeByChainId(chainId)) ) { tuple in
+                if let signature = try? ECDSA.compactsign(try! signDoc.serializedData().sha256(), privateKey: tuple.privateKey) {
+                    let pubkey: JSON = ["type" : COSMOS_KEY_TYPE_PUBLIC, "value" : tuple.publicKey.base64EncodedString()]
+                    let signature: JSON = ["signature" : signature.base64EncodedString(), "pub_key" : pubkey]
+                    let response: JSON = ["signed" : json.rawValue, "signature":signature.rawValue]
+                    self.moveToBackgroundIfNeedAndAction {
+                        self.interactor?.approveRequest(id: self.wcId!, result: response).cauterize()
+                        self.onShowToast(NSLocalizedString("wc_request_responsed", comment: ""))
+                    }
+                }
+            }
+        }
+    }
+    
     func onShowPopupAccountSelect(_ chainType: ChainType) {
         let popupVC = SelectPopupViewController(nibName: "SelectPopupViewController", bundle: nil)
         popupVC.type = SELECT_POPUP_COSMOSTATION_GET_ACCOUNT
@@ -796,6 +862,13 @@ extension CommonWCViewController: SBCardPopupDelegate {
         } else if (type == WcRequestType.COSMOS_TYPE.rawValue) {
             if (result == 0) {
                 self.approveCosmosRequest()
+            } else {
+                self.rejectRequest()
+            }
+            
+        } else if (type == WcRequestType.COSMOS_DIRECT_TYPE.rawValue) {
+            if (result == 0) {
+                self.approveCosmosDirectRequest()
             } else {
                 self.rejectRequest()
             }

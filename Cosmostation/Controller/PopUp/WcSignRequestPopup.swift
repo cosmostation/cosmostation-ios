@@ -41,4 +41,5 @@ class WcSignRequestPopup: BaseViewController, SBCardPopupContent {
 public enum WcRequestType: Int {
     case TRUST_TYPE = 1
     case COSMOS_TYPE = 2
+    case COSMOS_DIRECT_TYPE = 3
 }
