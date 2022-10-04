@@ -54,7 +54,7 @@ class WalletPriceCell: UITableViewCell {
         if (account == nil || chainConfig == nil) { return }
         let chainType = chainConfig!.chainType
         
-        sourceSite.text = "(CoinGecko)"
+        sourceSite.text = "(CoinGecko 24h)"
         perPrice.attributedText = WUtils.dpPrice(WUtils.getMainDenom(chainConfig), perPrice.font)
         updownPercent.attributedText = WUtils.dpPriceChange(WUtils.getMainDenom(chainConfig), updownPercent.font)
         let changePrice = WUtils.priceChange(WUtils.getMainDenom(chainConfig))

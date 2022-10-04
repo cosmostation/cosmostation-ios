@@ -118,6 +118,9 @@ public struct Param {
             if let ap = params?.crescent_minting_params?.params?.inflation_schedules.filter({ $0.start_time < now && $0.end_time > now }).first?.amount {
                 return ap.multiplying(by: getCrescentRewardFact()).multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
             }
+        } else if (chain == .AXELAR_MAIN) {
+            let ap = getMainSupply().multiplying(by: NSDecimalNumber.init(value: 0.15))
+            return ap.multiplying(by: calTax).dividing(by: getBondedAmount(), withBehavior: WUtils.handler6)
         }
         
         let ap = NSDecimalNumber.init(string: params?.minting_annual_provisions)
