@@ -127,7 +127,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                 self.selectedAccount.account_nick_name = trimmedString!
                 BaseData.instance.updateAccount(self.selectedAccount)
                 BaseData.instance.setNeedRefresh(true)
-                self.onReloadTableView(1)
+                self.onReloadTableView(0)
             }
         }))
         self.present(nameAlert, animated: true) {
@@ -304,7 +304,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                 }
                 try channel.close().wait()
             } catch { print("onFetchRewardAddress_gRPC failed: \(error)") }
-            self.onReloadTableView(3)
+            self.onReloadTableView(2)
         }
     }
     
@@ -317,7 +317,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                     return
                 }
                 self.chainId = NodeInfo.init(nodeInfo).network ?? ""
-                self.onReloadTableView(2)
+                self.onReloadTableView(1)
                 
             case .failure(let error):
                 print("onFetchNodeInfo ", error)
@@ -335,7 +335,7 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
                 }
                 try channel.close().wait()
             } catch { print("onFetchgRPCNodeInfo failed: \(error)") }
-            self.onReloadTableView(2)
+            self.onReloadTableView(1)
         }
     }
 }
