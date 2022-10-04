@@ -14,6 +14,7 @@ class DeriveWalletCell: UITableViewCell {
     @IBOutlet weak var chainImgView: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var selectedImg: UIImageView!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var denomLabel: UILabel!
@@ -76,8 +77,11 @@ class DeriveWalletCell: UITableViewCell {
         }
         
         if (derive.selected == true) {
+            selectedImg.isHidden = false
             rootCardView.borderWidth = 1.5
-            rootCardView.borderColor = UIColor.init(named: "_font05")
+            rootCardView.borderColor = UIColor.init(named: "photon")
+        } else {
+            selectedImg.isHidden = true
         }
     }
     
