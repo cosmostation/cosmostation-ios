@@ -32,8 +32,8 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var explorerLabel: UILabel!
     @IBOutlet weak var enginerModeSwitch: UISwitch!
     @IBOutlet weak var notificationSwitch: UISwitch!
-    @IBOutlet weak var priceUpLabel: UILabel!
-    @IBOutlet weak var priceDownLabel: UILabel!
+    @IBOutlet weak var priceUpImg: UIImageView!
+    @IBOutlet weak var priceDownImg: UIImageView!
     var checkMode = -1
     
     override func viewDidLoad() {
@@ -58,8 +58,6 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.explorerLabel.text = NSLocalizedString("mintscan_explorer", comment: "")
-        self.priceUpLabel.text = NSLocalizedString("str_bull", comment: "")
-        self.priceDownLabel.text = NSLocalizedString("str_bear", comment: "")
 
         let laContext = LAContext()
         let biometricsPolicy = LAPolicy.deviceOwnerAuthenticationWithBiometrics
@@ -221,8 +219,13 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     }
     
     func onUpdatePriceChangeColor() {
-        WDP.priceUpColor(priceUpLabel)
-        WDP.priceDownColor(priceDownLabel)
+        if (BaseData.instance.getPriceChaingColor() > 0) {
+            priceUpImg.image = UIImage.init(named: "iconPriceRed")
+            priceDownImg.image = UIImage.init(named: "iconPriceGreen")
+        } else {
+            priceUpImg.image = UIImage.init(named: "iconPriceGreen")
+            priceDownImg.image = UIImage.init(named: "iconPriceRed")
+        }
     }
     
     func SBCardPopupResponse(type: Int, result: Int) {

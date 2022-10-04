@@ -127,6 +127,10 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
             esHeight = (CGFloat)((feeData.count * 55) + 55)
         } else if (type == SELECT_POPUP_COIN_LIST) {
             esHeight = (CGFloat)((toCoins.count * 55) + 55)
+        } else if (type == SELECT_POPUP_PRICE_COLOR) {
+            cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: 165)
+            cardView.layoutIfNeeded()
+            return
         }
         esHeight = (esHeight > 350) ? 350 : esHeight
         cardView.frame = CGRect(x: cardView.frame.origin.x, y: cardView.frame.origin.y, width: cardView.frame.size.width, height: esHeight)
@@ -339,11 +343,13 @@ class SelectPopupViewController: BaseViewController, SBCardPopupContent, UITable
         } else if (type == SELECT_POPUP_PRICE_COLOR) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"SelectPriceColorCell") as? SelectPriceColorCell
             if (indexPath.row == 0) {
-                cell?.upColorImg.image = UIImage.init(named: "ImgGovPassed")
-                cell?.downColorImg.image = UIImage.init(named: "ImgGovRejected")
+                cell?.optionLabel.text = "Oprion 1"
+                cell?.upColorImg.image = UIImage.init(named: "iconPriceGreen")
+                cell?.downColorImg.image = UIImage.init(named: "iconPriceRed")
             } else {
-                cell?.upColorImg.image = UIImage.init(named: "ImgGovRejected")
-                cell?.downColorImg.image = UIImage.init(named: "ImgGovPassed")
+                cell?.optionLabel.text = "Oprion 2"
+                cell?.upColorImg.image = UIImage.init(named: "iconPriceRed")
+                cell?.downColorImg.image = UIImage.init(named: "iconPriceGreen")
             }
             return cell!
             

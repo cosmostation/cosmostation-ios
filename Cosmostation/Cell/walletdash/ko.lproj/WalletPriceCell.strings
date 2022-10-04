@@ -3,7 +3,7 @@
 "DHe-xH-HA7.text" = "현재 가격";
 
 /* Class = "UILabel"; text = "(CoinGecko)"; ObjectID = "ZtA-um-cQp"; */
-"ZtA-um-cQp.text" = "(CoinGecko)";
+"ZtA-um-cQp.text" = "(CoinGecko 24h)";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "b82-jk-Cbh"; */
 "b82-jk-Cbh.text" = "-";

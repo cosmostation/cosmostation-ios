@@ -24,8 +24,8 @@ class WalletPriceCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-        perPrice.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
-        updownPercent.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_11_caption2)
+//        perPrice.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
+//        updownPercent.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapPrice))
         self.contentView.isUserInteractionEnabled = true
