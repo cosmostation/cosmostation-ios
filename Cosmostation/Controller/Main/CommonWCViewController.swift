@@ -31,9 +31,12 @@ class CommonWCViewController: BaseViewController {
     @IBOutlet weak var dappConnectLabel: UILabel!
     @IBOutlet weak var dappUrl: UILabel!
     @IBOutlet weak var dappClose: UIButton!
+    @IBOutlet weak var dappToolbar: UIView!
     
     @IBOutlet weak var loadingWrapView: UIView!
     @IBOutlet weak var loadingImg: LoadingImageView!
+    
+    @IBOutlet weak var toolbarTopConstraint: NSLayoutConstraint!
     
     var isDeepLink = false
     var isDapp = false
@@ -51,6 +54,9 @@ class CommonWCViewController: BaseViewController {
     var wcRequestChainName: String?
     var accountChainSet = Set<String>()
     var accountSelectedSet = Set<Account>()
+    
+    var beginingPoint: CGPoint!
+    var isViewShowed: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,6 +136,7 @@ class CommonWCViewController: BaseViewController {
         webView.uiDelegate = self
         webView.allowsLinkPreview = false
         webView.scrollView.bounces = false
+        webView.scrollView.delegate = self
         if let dictionary = Bundle.main.infoDictionary,
             let version = dictionary["CFBundleShortVersionString"] as? String {
             webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
@@ -777,6 +784,28 @@ class CommonWCViewController: BaseViewController {
             }
         }
     }
+    
+    func showToolbar() {
+        if (!isViewShowed) {
+            isViewShowed = true
+            UIView.animate(withDuration: 0.2) {
+                self.dappToolbar.alpha = 1.0
+                self.toolbarTopConstraint.constant = 0
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+    
+    func hideToolbar() {
+        if (isViewShowed) {
+            isViewShowed = false
+            UIView.animate(withDuration: 0.2) {
+                self.dappToolbar.alpha = 0.0
+                self.toolbarTopConstraint.constant = -56
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
 }
 
 @objc private protocol PrivateSelectors: NSObjectProtocol {
@@ -875,6 +904,22 @@ extension CommonWCViewController: WKNavigationDelegate, WKUIDelegate {
         alertController.addAction(okAction)
         DispatchQueue.main.async {
             self.present(alertController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension CommonWCViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        beginingPoint = scrollView.contentOffset
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentPoint = scrollView.contentOffset
+
+        if self.beginingPoint.y < currentPoint.y {
+            self.hideToolbar()
+        } else {
+            self.showToolbar()
         }
     }
 }
