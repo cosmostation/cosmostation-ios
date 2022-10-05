@@ -40,7 +40,7 @@ class ChainLike: ChainConfig {
     var etherAddressSupport = false
     var wasmSupport = false
     var evmSupport = false
-    var wcSupoort = false
+    var wcSupoort = true
     var authzSupoort = true
     var grpcUrl = "lcd-likecoin-app.cosmostation.io"
     var grpcPort = 9090
