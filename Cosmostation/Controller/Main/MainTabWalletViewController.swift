@@ -349,6 +349,11 @@ class MainTabWalletViewController: BaseViewController, UITableViewDelegate, UITa
         } else if (indexPath.row == 2) {
             return onBindMintingCell(tableView)
             
+        }
+        
+        if (indexPath.row == 3 && chainConfig!.authzSupoort) {
+            return onBindAuthzCell(tableView)
+            
         } else {
             return onBindGuideCell(tableView)
         }
