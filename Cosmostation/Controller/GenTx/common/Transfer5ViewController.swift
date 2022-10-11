@@ -123,7 +123,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             remainValueLabel.attributedText = WUtils.dpAssetValue(priceSymbol, remainAvailable, divideDecimal, remainValueLabel.font)
             
         } else {
-            divideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+            divideDecimal = chainConfig!.divideDecimal
             displayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
             currentAvailable = BaseData.instance.availableAmount(toSendDenom)
             if (pageHolderVC.mToSendDenom == chainConfig!.stakeDenom) {

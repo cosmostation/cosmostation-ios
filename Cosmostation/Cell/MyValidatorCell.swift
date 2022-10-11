@@ -56,9 +56,9 @@ class MyValidatorCell: UITableViewCell {
             validatorImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
         }
         
-        myDelegatedAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getDelegated_gRPC(validator.operatorAddress).stringValue, myDelegatedAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
-        myUndelegatingAmountLabel.attributedText = WDP.dpAmount(BaseData.instance.getUnbonding_gRPC(validator.operatorAddress).stringValue, myUndelegatingAmountLabel.font, WUtils.mainDivideDecimal(chainType), 6)
-        rewardAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress).stringValue, rewardAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        myDelegatedAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getDelegated_gRPC(validator.operatorAddress).stringValue, myDelegatedAmoutLabel.font, chainConfig!.divideDecimal, 6)
+        myUndelegatingAmountLabel.attributedText = WDP.dpAmount(BaseData.instance.getUnbonding_gRPC(validator.operatorAddress).stringValue, myUndelegatingAmountLabel.font, chainConfig!.divideDecimal, 6)
+        rewardAmoutLabel.attributedText = WDP.dpAmount(BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress).stringValue, rewardAmoutLabel.font, chainConfig!.divideDecimal, 6)
         
         cardView.backgroundColor = chainConfig?.chainColorBG
         if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
@@ -94,7 +94,7 @@ class MyValidatorCell: UITableViewCell {
         if let matchedDelegate = granterDelegation.filter({ $0.delegation.validatorAddress == validator.operatorAddress }).first {
             delegatedAmount = NSDecimalNumber.init(string: matchedDelegate.balance.amount)
         }
-        myDelegatedAmoutLabel.attributedText = WDP.dpAmount(delegatedAmount.stringValue, myDelegatedAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        myDelegatedAmoutLabel.attributedText = WDP.dpAmount(delegatedAmount.stringValue, myDelegatedAmoutLabel.font, chainConfig!.divideDecimal, 6)
         
         //DP granter unbonding amount
         var unbondingAmount = NSDecimalNumber.zero
@@ -103,7 +103,7 @@ class MyValidatorCell: UITableViewCell {
                 unbondingAmount = unbondingAmount.adding(NSDecimalNumber.init(string: entry.balance))
             }
         }
-        myUndelegatingAmountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, myUndelegatingAmountLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        myUndelegatingAmountLabel.attributedText = WDP.dpAmount(unbondingAmount.stringValue, myUndelegatingAmountLabel.font, chainConfig!.divideDecimal, 6)
         
         //DP granter staking reward amount
         var rewardAmount = NSDecimalNumber.zero
@@ -115,7 +115,7 @@ class MyValidatorCell: UITableViewCell {
             })
         }
         rewardAmount = rewardAmount.multiplying(byPowerOf10: -18)
-        rewardAmoutLabel.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardAmoutLabel.font, WUtils.mainDivideDecimal(chainType), 6)
+        rewardAmoutLabel.attributedText = WDP.dpAmount(rewardAmount.stringValue, rewardAmoutLabel.font, chainConfig!.divideDecimal, 6)
         
         cardView.backgroundColor = chainConfig?.chainColorBG
         if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {

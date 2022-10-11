@@ -73,7 +73,7 @@ class ValidatorDetailCell: UITableViewCell {
         website.text = validator?.description_p.website
         descriptionMsg.text = validator?.description_p.details
         
-        totalBondedAmount.attributedText = WDP.dpAmount(validator?.tokens, totalBondedAmount.font!, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
+        totalBondedAmount.attributedText = WDP.dpAmount(validator?.tokens, totalBondedAmount.font!, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         selfBondedRate.attributedText = WUtils.displaySelfBondRate(selfDelegation?.balance.amount, validator?.tokens, selfBondedRate.font)
         commissionRate.attributedText = WUtils.displayCommission(NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18).stringValue, font: commissionRate.font)
         if (validator?.status == Cosmos_Staking_V1beta1_BondStatus.bonded) {

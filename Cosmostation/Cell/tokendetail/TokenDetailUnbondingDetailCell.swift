@@ -58,19 +58,16 @@ class TokenDetailUnbondingDetailCell: UITableViewCell {
         self.unBondingLayer4.isHidden = true
     }
     
-    func onBindUnbondingToken(_ chainType: ChainType) {
-        guard let chainConfig = ChainFactory.getChainConfig(chainType) else {
-            return
-        }
+    func onBindUnbondingToken(_ chainConfig: ChainConfig) {
         unBondingCard.backgroundColor = chainConfig.chainColorBG
-        if (WUtils.isGRPC(chainType)) {
-            onBindUnbonding_gRPC(chainType)
+        if (chainConfig.isGrpc) {
+            onBindUnbonding_gRPC(chainConfig)
         }
     }
     
-    func onBindUnbonding_gRPC(_ chainType: ChainType) {
-        let stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
-        let stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
+    func onBindUnbonding_gRPC(_ chainConfig: ChainConfig) {
+        let stakingDivideDecimal = chainConfig.divideDecimal
+        let stakingDisplayDecimal = chainConfig.displayDecimal
         let unbondingEntries = BaseData.instance.getUnbondingEntrie_gRPC()
         unBondingCnt.text = String(unbondingEntries.count)
         

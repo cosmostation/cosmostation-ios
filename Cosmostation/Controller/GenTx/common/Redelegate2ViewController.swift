@@ -20,13 +20,11 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
     
     var checkedValidator_gRPC: Cosmos_Staking_V1beta1_Validator?
     var checkedPosition:IndexPath?
-    var mDpDecimal:Int16 = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
         pageHolderVC = self.parent as? StepGenTxViewController
         chainConfig = ChainFactory.getChainConfig(pageHolderVC.chainType!)
-        mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         
         self.redelegateToValTableView.delegate = self
         self.redelegateToValTableView.dataSource = self
@@ -59,7 +57,7 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
                 cell?.valjailedImg.layer.borderColor = UIColor(named: "_font04")!.cgColor
             }
             
-            cell?.valPowerLabel.attributedText = WDP.dpAmount(validator.tokens, cell!.valPowerLabel.font, mDpDecimal, mDpDecimal)
+            cell?.valPowerLabel.attributedText = WDP.dpAmount(validator.tokens, cell!.valPowerLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
             cell?.valCommissionLabel.attributedText = WUtils.getDpEstAprCommission(cell!.valCommissionLabel.font, NSDecimalNumber.init(string: validator.commission.commissionRates.rate).multiplying(byPowerOf10: -18), pageHolderVC.chainType!)
             if let url = URL(string: WUtils.getMonikerImgUrl(chainConfig, validator.operatorAddress)) {
                 cell?.valImg.af_setImage(withURL: url)

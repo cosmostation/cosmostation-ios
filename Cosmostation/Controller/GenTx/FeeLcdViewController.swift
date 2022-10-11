@@ -21,7 +21,6 @@ class FeeLcdViewController: BaseViewController {
     
     var mStakingDenom = ""
     var mFee = NSDecimalNumber.zero
-    var mDivideDecimal: Int16 = 6
     var mDisplayDecimal: Int16 = 6
 
     override func viewDidLoad() {
@@ -34,7 +33,6 @@ class FeeLcdViewController: BaseViewController {
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         
         mStakingDenom = chainConfig!.stakeDenom
-        mDivideDecimal = WUtils.mainDivideDecimal(chainType)
         mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
         onUpdateView()
@@ -51,7 +49,7 @@ class FeeLcdViewController: BaseViewController {
     func onUpdateView() {
         mFee = BaseData.instance.getMainDenomFee(chainConfig)
         WDP.dpCoin(chainConfig, mStakingDenom, mFee.stringValue, feeTotalDenom, feeTotalAmount)
-        feeTotalValue.attributedText = WUtils.dpAssetValue(WUtils.getMainDenom(chainConfig), mFee, mDivideDecimal, feeTotalValue.font)
+        feeTotalValue.attributedText = WUtils.dpAssetValue(WUtils.getMainDenom(chainConfig), mFee, chainConfig!.divideDecimal, feeTotalValue.font)
     }
     
     override func enableUserInteraction() {

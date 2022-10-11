@@ -102,7 +102,7 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
             
         } else if (indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailVestingDetailCell") as? TokenDetailVestingDetailCell
-            cell?.onBindVestingToken(chainType!, nativeDenom)
+            cell?.onBindVestingToken(chainConfig!, nativeDenom)
             return cell!
             
         } else {

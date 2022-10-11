@@ -31,7 +31,6 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var confirmBtn: UIButton!
 
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,7 +100,6 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     }
     
     func onUpdateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(chainType)
         var monikers = ""
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {
             if(monikers.count > 0) {
@@ -121,12 +119,12 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
         
-        rewardAmoutLaebl.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
-        feeAmountLabel.attributedText = WDP.dpAmount(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, mDpDecimal, mDpDecimal)
+        rewardAmoutLaebl.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmoutLaebl.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
+        feeAmountLabel.attributedText = WDP.dpAmount(pageHolderVC.mFee?.amount[0].amount, feeAmountLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         
         let userBalance: NSDecimalNumber = BaseData.instance.getAvailableAmount_gRPC(WUtils.getMainDenom(chainConfig))
         let expectedAmount = userBalance.adding(selectedRewardSum).subtracting(WUtils.plainStringToDecimal(pageHolderVC.mFee?.amount[0].amount))
-        expectedAmountLabel.attributedText = WDP.dpAmount(expectedAmount.stringValue, rewardAmoutLaebl.font, mDpDecimal, mDpDecimal)
+        expectedAmountLabel.attributedText = WDP.dpAmount(expectedAmount.stringValue, rewardAmoutLaebl.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         
         if (pageHolderVC.mAccount?.account_address == pageHolderVC.mRewardAddress) {
             recipientTitleLabel.isHidden = true

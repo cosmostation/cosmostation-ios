@@ -52,7 +52,7 @@ class WalletBaseChainCell: UITableViewCell {
         if (account == nil || chainConfig == nil) { return }
         let stakingDenom = chainConfig!.stakeDenom
         let chainType = chainConfig!.chainType
-        let divideDecimal = WUtils.mainDivideDecimal(chainType)
+        let divideDecimal = chainConfig!.divideDecimal
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
         
         cardRoot.backgroundColor = chainConfig!.chainColorBG

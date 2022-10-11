@@ -33,24 +33,21 @@ class TokenDetailStakingCell: UITableViewCell {
         vestingLayer.isHidden = true
     }
     
-    func onBindStakingToken(_ chainType: ChainType) {
-        let chainConfig = ChainFactory.getChainConfig(chainType)
+    func onBindStakingToken(_ chainConfig: ChainConfig) {
         let stakingDenom = WUtils.getMainDenom(chainConfig)
-        let stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
-        let stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         let totalToken = WUtils.getAllMainAsset(stakingDenom)
-        totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
-        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
-        delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
-        unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
-        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, stakingDivideDecimal, stakingDisplayDecimal)
+        totalAmount.attributedText = WDP.dpAmount(totalToken.stringValue, totalAmount.font!, chainConfig.divideDecimal, chainConfig.displayDecimal)
+        availableAmount.attributedText = WDP.dpAmount(BaseData.instance.getAvailable_gRPC(stakingDenom), availableAmount.font!, chainConfig.divideDecimal, chainConfig.displayDecimal)
+        delegatedAmount.attributedText = WDP.dpAmount(BaseData.instance.getDelegatedSum_gRPC(), delegatedAmount.font!, chainConfig.divideDecimal, chainConfig.displayDecimal)
+        unbondingAmount.attributedText = WDP.dpAmount(BaseData.instance.getUnbondingSum_gRPC(), unbondingAmount.font, chainConfig.divideDecimal, chainConfig.displayDecimal)
+        rewardAmount.attributedText = WDP.dpAmount(BaseData.instance.getRewardSum_gRPC(stakingDenom), rewardAmount.font, chainConfig.divideDecimal, chainConfig.displayDecimal)
         
         let vesting = BaseData.instance.getVestingAmount_gRPC(stakingDenom)
         if (vesting.compare(NSDecimalNumber.zero).rawValue > 0) {
             vestingLayer.isHidden = false
-            vestingAmount.attributedText = WDP.dpAmount(BaseData.instance.getVesting_gRPC(stakingDenom), availableAmount.font!, stakingDivideDecimal, stakingDisplayDecimal)
+            vestingAmount.attributedText = WDP.dpAmount(BaseData.instance.getVesting_gRPC(stakingDenom), availableAmount.font!, chainConfig.divideDecimal, chainConfig.displayDecimal)
         }
-        cardRoot.backgroundColor = chainConfig?.chainColorBG
+        cardRoot.backgroundColor = chainConfig.chainColorBG
     }
     
 }

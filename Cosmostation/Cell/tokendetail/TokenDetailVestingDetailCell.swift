@@ -57,26 +57,25 @@ class TokenDetailVestingDetailCell: TokenDetailCell {
         self.vestingLayer1.isHidden = true
     }
     
-    func onBindVestingToken(_ chainType: ChainType, _ denom: String) {
-        let chainConfig = ChainFactory.getChainConfig(chainType)
-        if (chainType == ChainType.KAVA_MAIN) {
+    func onBindVestingToken(_ chainConfig: ChainConfig, _ denom: String) {
+        if (chainConfig.chainType == ChainType.KAVA_MAIN) {
             if (denom == KAVA_MAIN_DENOM) {
-                rootCardView.backgroundColor = chainConfig?.chainColorBG
+                rootCardView.backgroundColor = chainConfig.chainColorBG
             } else if (denom == KAVA_HARD_DENOM) {
                 rootCardView.backgroundColor = UIColor.init(named: "_card_bg")
             } else if (denom == KAVA_SWAP_DENOM) {
                 rootCardView.backgroundColor = UIColor.init(named: "_card_bg")
             }
-            onBindVesting_gRPC(chainType, denom)
+            onBindVesting_gRPC(denom)
             
         } else {
-            rootCardView.backgroundColor = chainConfig?.chainColorBG
-            onBindVesting_gRPC(chainType, denom)
+            rootCardView.backgroundColor = chainConfig.chainColorBG
+            onBindVesting_gRPC(denom)
             
         }
     }
     
-    func onBindVesting_gRPC(_ chainType: ChainType, _ denom: String) {
+    func onBindVesting_gRPC(_ denom: String) {
         let baseData = BaseData.instance
         let vps = baseData.onParseRemainVestingsByDenom_gRPC(denom)
         vestingCntLabel.text = String(vps.count)

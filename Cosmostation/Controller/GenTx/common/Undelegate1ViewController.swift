@@ -35,7 +35,7 @@ class Undelegate1ViewController: BaseViewController, UITextFieldDelegate {
         
         let mainDenom = WUtils.getMainDenom(chainConfig)
         
-        mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+        mDpDecimal = chainConfig!.displayDecimal
         userDelegated = BaseData.instance.getDelegated_gRPC(self.pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
         WDP.dpCoin(chainConfig, mainDenom, userDelegated.stringValue, availableDenomLabel, availableAmountLabel)
         
