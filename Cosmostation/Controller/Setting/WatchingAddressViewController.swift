@@ -26,8 +26,10 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_watch_wallet", comment: "");
-        self.navigationItem.title = NSLocalizedString("title_watch_wallet", comment: "");
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_watch_wallet", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_watch_wallet", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {

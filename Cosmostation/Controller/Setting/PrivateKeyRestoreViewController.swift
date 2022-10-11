@@ -31,6 +31,8 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_restore_privatekey", comment: "")
         self.navigationItem.title = NSLocalizedString("title_restore_privatekey", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {

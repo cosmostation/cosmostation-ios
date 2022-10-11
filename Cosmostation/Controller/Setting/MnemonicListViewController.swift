@@ -30,6 +30,8 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_mnemonic_manage", comment: "")
         self.navigationItem.title = NSLocalizedString("title_mnemonic_manage", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         self.mMyMnemonics = BaseData.instance.selectAllMnemonics()
         self.mnemonicListTableView.reloadData()

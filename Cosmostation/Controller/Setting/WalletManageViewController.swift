@@ -35,8 +35,8 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
-        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_wallet_manage", comment: "");
-        self.navigationItem.title = NSLocalizedString("title_wallet_manage", comment: "");
+        self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_wallet_manage", comment: "")
+        self.navigationItem.title = NSLocalizedString("title_wallet_manage", comment: "")
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(onStartEdit))
