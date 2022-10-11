@@ -33,7 +33,7 @@ class FeeLcdViewController: BaseViewController {
         feeTotalCard.backgroundColor = chainConfig?.chainColorBG
         
         mStakingDenom = chainConfig!.stakeDenom
-        mDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
+        mDisplayDecimal = chainConfig!.displayDecimal
         
         onUpdateView()
         

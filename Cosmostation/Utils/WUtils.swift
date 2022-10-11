@@ -640,18 +640,18 @@ public class WUtils {
         return chainConfig!.divideDecimal
     }
     
-    static func mainDisplayDecimal(_ chain:ChainType?) -> Int16 {
-        if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
-            chain == .EVMOS_MAIN || chain == .CUDOS_MAIN || chain == .OKEX_MAIN) {
-            return 18
-        } else if (chain == .PROVENANCE_MAIN || chain == .LIKECOIN_MAIN) {
-            return 9
-        } else if (chain == .BINANCE_MAIN || chain == .CRYPTO_MAIN) {
-            return 8
-        } else {
-            return 6
-        }
-    }
+//    static func mainDisplayDecimal(_ chain:ChainType?) -> Int16 {
+//        if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
+//            chain == .EVMOS_MAIN || chain == .CUDOS_MAIN || chain == .OKEX_MAIN) {
+//            return 18
+//        } else if (chain == .PROVENANCE_MAIN || chain == .LIKECOIN_MAIN) {
+//            return 9
+//        } else if (chain == .BINANCE_MAIN || chain == .CRYPTO_MAIN) {
+//            return 8
+//        } else {
+//            return 6
+//        }
+//    }
     
     static func setDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
         if let chainConfig = ChainFactory.getChainConfig(chain) {

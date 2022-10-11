@@ -19,7 +19,6 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     @IBOutlet weak var btnSend: UIButton!
     
     var stakingDenom = ""
-    var stakingDisplayDecimal: Int16 = 6
     var totalAmount = NSDecimalNumber.zero
     var hasVesting = false
     var hasUnbonding = false
@@ -30,7 +29,6 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.stakingDenom = WUtils.getMainDenom(chainConfig)
-        self.stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
         self.onInitView()
         

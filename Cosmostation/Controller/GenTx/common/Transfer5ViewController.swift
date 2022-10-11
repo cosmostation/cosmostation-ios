@@ -124,7 +124,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
             
         } else {
             divideDecimal = chainConfig!.divideDecimal
-            displayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
+            displayDecimal = chainConfig!.displayDecimal
             currentAvailable = BaseData.instance.availableAmount(toSendDenom)
             if (pageHolderVC.mToSendDenom == chainConfig!.stakeDenom) {
                 remainAvailable = currentAvailable.subtracting(toSendAmount).subtracting(feeAmount)
