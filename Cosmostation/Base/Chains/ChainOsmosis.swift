@@ -29,6 +29,8 @@ class ChainOsmosis: ChainConfig {
     var stakeSymbol = "OSMO"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "osmosis")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "osmo"
     var validatorPrefix = "osmovaloper"

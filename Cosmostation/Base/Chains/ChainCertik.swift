@@ -29,6 +29,8 @@ class ChainCertik: ChainConfig {
     var stakeSymbol = "CTK"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "certik")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "certik"
     var validatorPrefix = "certikvaloper"

@@ -29,6 +29,8 @@ class ChainSentinel: ChainConfig {
     var stakeSymbol = "DVPN"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "sentinel")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "sent"
     var validatorPrefix = "sentvaloper"

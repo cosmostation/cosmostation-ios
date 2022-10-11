@@ -29,6 +29,8 @@ class ChainBitsong: ChainConfig {
     var stakeSymbol = "BTSG"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "bitsong")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "bitsong"
     var validatorPrefix = "bitsongvaloper"

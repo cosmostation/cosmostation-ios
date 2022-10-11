@@ -29,6 +29,8 @@ class ChainBinance: ChainConfig {
     var stakeSymbol = "BNB"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "binance")!
+    var divideDecimal: Int16 = 0
+    var displayDecimal: Int16 = 8
     
     var addressPrefix = "bnb"
     var validatorPrefix = ""

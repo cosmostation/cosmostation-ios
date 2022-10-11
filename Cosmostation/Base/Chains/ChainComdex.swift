@@ -29,6 +29,8 @@ class ChainComdex: ChainConfig {
     var stakeSymbol = "CMDX"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "comdex")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "comdex"
     var validatorPrefix = "comdexvaloper"

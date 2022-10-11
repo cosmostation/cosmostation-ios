@@ -29,6 +29,8 @@ class ChainEmoney: ChainConfig {
     var stakeSymbol = "NGM"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "emoney")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "emoney"
     var validatorPrefix = "emoneyvaloper"

@@ -29,6 +29,8 @@ class ChainRegen: ChainConfig {
     var stakeSymbol = "REGEN"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "regen")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "regen"
     var validatorPrefix = "regenvaloper"

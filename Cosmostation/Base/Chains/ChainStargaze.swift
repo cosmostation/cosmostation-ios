@@ -29,6 +29,8 @@ class ChainStargaze: ChainConfig {
     var stakeSymbol = "STARS"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "stargaze")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "stars"
     var validatorPrefix = "starsvaloper"

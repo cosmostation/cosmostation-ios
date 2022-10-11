@@ -29,6 +29,8 @@ class ChainSommelier: ChainConfig {
     var stakeSymbol = "SOMM"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "sommelier")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "somm"
     var validatorPrefix = "sommvaloper"

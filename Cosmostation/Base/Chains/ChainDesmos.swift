@@ -29,6 +29,8 @@ class ChainDesmos: ChainConfig {
     var stakeSymbol = "DSM"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "desmos")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "desmos"
     var validatorPrefix = "desmosvaloper"

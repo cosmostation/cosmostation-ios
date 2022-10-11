@@ -29,6 +29,8 @@ class ChainCudos: ChainConfig {
     var stakeSymbol = "CUDOS"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "cudos")!
+    var divideDecimal: Int16 = 18
+    var displayDecimal: Int16 = 18
     
     var addressPrefix = "cudos"
     var validatorPrefix = "cudosvaloper"

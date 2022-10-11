@@ -29,6 +29,8 @@ class StationTest: ChainConfig {
     var stakeSymbol = "ISS"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "station")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "station"
     var validatorPrefix = "stationvaloper"

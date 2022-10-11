@@ -29,6 +29,8 @@ class ChainSif: ChainConfig {
     var stakeSymbol = "ROWAN"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "sif")!
+    var divideDecimal: Int16 = 18
+    var displayDecimal: Int16 = 18
     
     var addressPrefix = "sif"
     var validatorPrefix = "sifvaloper"

@@ -29,6 +29,8 @@ class ChainFetchAi: ChainConfig {
     var stakeSymbol = "FET"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "fetchai")!
+    var divideDecimal: Int16 = 18
+    var displayDecimal: Int16 = 18
     
     var addressPrefix = "fetch"
     var validatorPrefix = "fetchvaloper"

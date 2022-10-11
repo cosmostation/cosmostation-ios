@@ -29,6 +29,8 @@ class ChainAkash: ChainConfig {
     var stakeSymbol = "AKT"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "akash")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "akash"
     var validatorPrefix = "akashvaloper"

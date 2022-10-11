@@ -29,6 +29,8 @@ class ChainInjective: ChainConfig {
     var stakeSymbol = "INJ"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "injective")!
+    var divideDecimal: Int16 = 18
+    var displayDecimal: Int16 = 18
     
     var addressPrefix = "inj"
     var validatorPrefix = "injvaloper"

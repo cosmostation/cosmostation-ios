@@ -29,6 +29,8 @@ class ChainBand: ChainConfig {
     var stakeSymbol = "BAND"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "band")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "band"
     var validatorPrefix = "bandvaloper"

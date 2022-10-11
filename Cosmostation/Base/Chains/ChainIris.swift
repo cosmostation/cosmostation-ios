@@ -29,6 +29,8 @@ class ChainIris: ChainConfig {
     var stakeSymbol = "IRIS"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "iris")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "iaa"
     var validatorPrefix = "iva"

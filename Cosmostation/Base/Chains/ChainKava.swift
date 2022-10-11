@@ -29,6 +29,8 @@ class ChainKava: ChainConfig {
     var stakeSymbol = "KAVA"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "kava")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "kava"
     var validatorPrefix = "kavavaloper"

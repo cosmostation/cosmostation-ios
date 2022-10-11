@@ -29,6 +29,8 @@ class ChainCrescent: ChainConfig {
     var stakeSymbol = "CRE"
     var stakeSendImg = UIImage(named: "btnSendCrescent")!
     var stakeSendBg = UIColor.init(hexString: "452318")
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "cre"
     var validatorPrefix = "crevaloper"

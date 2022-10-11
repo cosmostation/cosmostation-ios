@@ -29,6 +29,8 @@ class ChainMedibloc: ChainConfig {
     var stakeSymbol = "MED"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "medibloc")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "panacea"
     var validatorPrefix = "panaceavaloper"

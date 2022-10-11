@@ -29,6 +29,8 @@ class ChainPassage: ChainConfig {
     var stakeSymbol = "PASG"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "passage")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "pasg"
     var validatorPrefix = "pasgvaloper"

@@ -30,6 +30,8 @@ class ChainTgrade: ChainConfig {
     var stakeSymbol = "TGD"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "tgrade")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "tgrade"
     var validatorPrefix = "tgrade"
