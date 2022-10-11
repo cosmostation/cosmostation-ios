@@ -29,6 +29,8 @@ class ChainOmniflix: ChainConfig {
     var stakeSymbol = "FLIX"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "omniflix")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "omniflix"
     var validatorPrefix = "omniflixvaloper"

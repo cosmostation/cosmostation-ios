@@ -29,6 +29,8 @@ class ChainLum: ChainConfig {
     var stakeSymbol = "LUM"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "lum")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "lum"
     var validatorPrefix = "lumvaloper"

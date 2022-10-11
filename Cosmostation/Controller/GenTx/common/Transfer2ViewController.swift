@@ -57,8 +57,8 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
             
         } else {
             // Binance & OKC
-            divideDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-            displayDecimal = WUtils.mainDisplayDecimal(pageHolderVC.chainType)
+            divideDecimal = chainConfig!.divideDecimal
+            displayDecimal = chainConfig!.displayDecimal
             if (pageHolderVC.mToSendDenom == mainDenom) {
                 maxAvailable = BaseData.instance.availableAmount(pageHolderVC.mToSendDenom!).subtracting(mainDenomFee)
             } else {

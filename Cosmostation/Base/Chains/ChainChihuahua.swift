@@ -29,6 +29,8 @@ class ChainChihuahua: ChainConfig {
     var stakeSymbol = "HUAHUA"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "chihuahua")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "chihuahua"
     var validatorPrefix = "chihuahuavaloper"

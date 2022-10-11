@@ -29,6 +29,8 @@ class ChainPersistence: ChainConfig {
     var stakeSymbol = "XPRT"
     var stakeSendImg = UIImage(named: "btnSendPersistence")!
     var stakeSendBg = UIColor.init(hexString: "171718")
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "persistence"
     var validatorPrefix = "persistencevaloper"

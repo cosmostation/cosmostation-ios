@@ -29,6 +29,8 @@ class ChainCryptoorg: ChainConfig {
     var stakeSymbol = "CRO"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "cryptoorg")!
+    var divideDecimal: Int16 = 8
+    var displayDecimal: Int16 = 8
     
     var addressPrefix = "cro"
     var validatorPrefix = "crocncl"

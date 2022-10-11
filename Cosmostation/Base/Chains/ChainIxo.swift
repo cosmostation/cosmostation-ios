@@ -30,6 +30,8 @@ class ChainIxo: ChainConfig {
     var stakeSymbol = "IXO"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "ixo")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "ixo"
     var validatorPrefix = "ixovaloper"

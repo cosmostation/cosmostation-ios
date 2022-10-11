@@ -64,10 +64,8 @@ class ReInvest1ViewController: BaseViewController {
     }
     
     func updateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
-        
         let cReward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), pageHolderVC.mTargetValidator_gRPC?.operatorAddress)
-        rewardAmountLabel.attributedText = WDP.dpAmount(cReward.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
+        rewardAmountLabel.attributedText = WDP.dpAmount(cReward.stringValue, rewardAmountLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         validatorLabel.text = pageHolderVC.mTargetValidator_gRPC?.description_p.moniker
         
         let coin = Coin(WUtils.getMainDenom(chainConfig), cReward.rounding(accordingToBehavior: WUtils.handler0Down).stringValue)

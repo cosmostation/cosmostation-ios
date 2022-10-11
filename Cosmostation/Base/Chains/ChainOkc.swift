@@ -29,6 +29,8 @@ class ChainOkc: ChainConfig {
     var stakeSymbol = "OKT"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "okc")!
+    var divideDecimal: Int16 = 0
+    var displayDecimal: Int16 = 18
     
     var addressPrefix = "ex"
     var validatorPrefix = "ex"

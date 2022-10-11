@@ -29,6 +29,8 @@ class ChainAxelar: ChainConfig {
     var stakeSymbol = "AXL"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "axelar")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "axelar"
     var validatorPrefix = "axelarvaloper"

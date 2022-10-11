@@ -29,6 +29,8 @@ class ChainGravityBridge: ChainConfig {
     var stakeSymbol = "GRAVITON"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "gravitybridge")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "gravity"
     var validatorPrefix = "gravityvaloper"

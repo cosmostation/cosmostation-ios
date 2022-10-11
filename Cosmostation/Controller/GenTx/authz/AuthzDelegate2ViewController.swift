@@ -41,7 +41,7 @@ class AuthzDelegate2ViewController: BaseViewController, UITextFieldDelegate {
         self.granterAvailables = pageHolderVC.mGranterAvailables
         self.granterVestings = pageHolderVC.mGranterVestings
         
-        dpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+        dpDecimal = chainConfig!.displayDecimal
         var available = NSDecimalNumber.zero
         if let availableCoin = granterAvailables.filter({ $0.denom == chainConfig?.stakeDenom }).first {
             available = NSDecimalNumber.init(string: availableCoin.amount)

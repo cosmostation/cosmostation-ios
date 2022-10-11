@@ -29,6 +29,8 @@ class ChainSecret: ChainConfig {
     var stakeSymbol = "SCRT"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "secret")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "secret"
     var validatorPrefix = "secretvaloper"

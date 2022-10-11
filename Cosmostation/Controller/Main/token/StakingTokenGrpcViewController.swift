@@ -19,8 +19,6 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
     @IBOutlet weak var btnSend: UIButton!
     
     var stakingDenom = ""
-    var stakingDivideDecimal: Int16 = 6
-    var stakingDisplayDecimal: Int16 = 6
     var totalAmount = NSDecimalNumber.zero
     var hasVesting = false
     var hasUnbonding = false
@@ -31,8 +29,6 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         self.chainType = ChainFactory.getChainType(account!.account_base_chain)
         self.chainConfig = ChainFactory.getChainConfig(chainType)
         self.stakingDenom = WUtils.getMainDenom(chainConfig)
-        self.stakingDivideDecimal = WUtils.mainDivideDecimal(chainType)
-        self.stakingDisplayDecimal = WUtils.mainDisplayDecimal(chainType)
         
         self.onInitView()
         
@@ -93,23 +89,23 @@ class StakingTokenGrpcViewController: BaseViewController, UITableViewDelegate, U
         if (indexPath.section == 0) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"WalletAddressCell") as? WalletAddressCell
             cell?.onBindTokenDetail(account, chainConfig)
-            cell?.onBindValue(stakingDenom, totalAmount, stakingDivideDecimal)
+            cell?.onBindValue(stakingDenom, totalAmount, chainConfig!.divideDecimal)
             cell?.actionTapAddress = { self.shareAddressType(self.chainConfig, self.account) }
             return cell!
             
         } else if (indexPath.section == 1) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailStakingCell") as? TokenDetailStakingCell
-            cell?.onBindStakingToken(chainType!)
+            cell?.onBindStakingToken(chainConfig!)
             return cell!
             
         } else if (indexPath.section == 2) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailVestingDetailCell") as? TokenDetailVestingDetailCell
-            cell?.onBindVestingToken(chainType!, stakingDenom)
+            cell?.onBindVestingToken(chainConfig!, stakingDenom)
             return cell!
             
         } else if (indexPath.section == 3) {
             let cell = tableView.dequeueReusableCell(withIdentifier:"TokenDetailUnbondingDetailCell") as? TokenDetailUnbondingDetailCell
-            cell?.onBindUnbondingToken(chainType!)
+            cell?.onBindUnbondingToken(chainConfig!)
             return cell!
             
         } else {

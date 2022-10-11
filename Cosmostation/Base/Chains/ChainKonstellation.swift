@@ -29,6 +29,8 @@ class ChainKonstellation: ChainConfig {
     var stakeSymbol = "DARC"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor.init(hexString: "122951")
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "darc"
     var validatorPrefix = "darcvaloper"

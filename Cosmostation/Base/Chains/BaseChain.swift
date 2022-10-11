@@ -30,6 +30,8 @@ protocol ChainConfig {
     var stakeSymbol: String { get set }
     var stakeSendImg: UIImage { get set }
     var stakeSendBg: UIColor { get set }
+    var divideDecimal: Int16 { get set }
+    var displayDecimal: Int16 { get set }
     
     var addressPrefix: String { get set }
     var validatorPrefix: String { get set }

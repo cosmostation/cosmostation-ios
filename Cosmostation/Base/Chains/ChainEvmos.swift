@@ -29,6 +29,8 @@ class ChainEvmos: ChainConfig {
     var stakeSymbol = "EVMOS"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "evmos")!
+    var divideDecimal: Int16 = 18
+    var displayDecimal: Int16 = 18
     
     var addressPrefix = "evmos"
     var validatorPrefix = "evmosvaloper"

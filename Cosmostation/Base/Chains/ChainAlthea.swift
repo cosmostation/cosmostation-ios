@@ -29,6 +29,8 @@ class ChainAlthea: ChainConfig {
     var stakeSymbol = "ALTG"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "cosmos")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "althea"
     var validatorPrefix = "oper"

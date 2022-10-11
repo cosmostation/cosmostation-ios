@@ -36,7 +36,7 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
         let mainDenom = chainConfig!.stakeDenom
         let mainDenomFee = BaseData.instance.getMainDenomFee(chainConfig)
         
-        mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
+        mDpDecimal = chainConfig!.displayDecimal
         if (pageHolderVC.chainType == .TGRADE_MAIN) {
             userBalance = BaseData.instance.getAvailableAmount_gRPC(mainDenom).subtracting(mainDenomFee)
         } else {

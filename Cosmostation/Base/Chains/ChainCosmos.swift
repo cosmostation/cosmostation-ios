@@ -30,6 +30,8 @@ class ChainCosmos: ChainConfig {
     var stakeSymbol = "ATOM"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "cosmos")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "cosmos"
     var validatorPrefix = "cosmosvaloper"

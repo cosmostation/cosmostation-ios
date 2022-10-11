@@ -29,6 +29,8 @@ class ChainRizon: ChainConfig {
     var stakeSymbol = "ATOLO"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "rizon")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "rizon"
     var validatorPrefix = "rizonvaloper"

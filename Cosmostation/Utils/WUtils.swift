@@ -280,7 +280,7 @@ public class WUtils {
             baseData.mMyBalances_gRPC.forEach { coin in
                 if (coin.denom == getMainDenom(chainConfig)) {
                     let amount = getAllMainAsset(coin.denom)
-                    let assetValue = assetValue(coin.denom, amount, mainDivideDecimal(chainConfig?.chainType))
+                    let assetValue = assetValue(coin.denom, amount, chainConfig!.divideDecimal)
                     totalValue = totalValue.adding(assetValue)
                     
                 } else if (chainConfig?.chainType == .KAVA_MAIN) {
@@ -422,30 +422,30 @@ public class WUtils {
         return displayPercent(aprCommission, font)
     }
     
-    static func getDailyReward(_ font: UIFont, _ commission: NSDecimalNumber, _ delegated: NSDecimalNumber?, _ chain: ChainType) -> NSMutableAttributedString {
+    static func getDailyReward(_ font: UIFont, _ commission: NSDecimalNumber, _ delegated: NSDecimalNumber?, _ chainConfig: ChainConfig) -> NSMutableAttributedString {
         guard let param = BaseData.instance.mParam, let bondingAmount = delegated else {
-            return WDP.dpAmount(NSDecimalNumber.zero.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
+            return WDP.dpAmount(NSDecimalNumber.zero.stringValue, font, chainConfig.divideDecimal, chainConfig.displayDecimal)
         }
         var apr = NSDecimalNumber.zero
-        if (param.getRealApr(chain) == NSDecimalNumber.zero) { apr = param.getApr(chain) }
-        else { apr = param.getRealApr(chain) }
+        if (param.getRealApr(chainConfig.chainType) == NSDecimalNumber.zero) { apr = param.getApr(chainConfig.chainType) }
+        else { apr = param.getRealApr(chainConfig.chainType) }
         let calCommission = NSDecimalNumber.one.subtracting(commission)
         let aprCommission = apr.multiplying(by: calCommission, withBehavior: handler6)
         let dayReward = bondingAmount.multiplying(by: aprCommission).dividing(by: NSDecimalNumber.init(string: "365"), withBehavior: WUtils.handler0)
-        return WDP.dpAmount(dayReward.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
+        return WDP.dpAmount(dayReward.stringValue, font, chainConfig.divideDecimal, chainConfig.displayDecimal)
     }
     
-    static func getMonthlyReward(_ font: UIFont, _ commission: NSDecimalNumber, _ delegated: NSDecimalNumber?, _ chain: ChainType) -> NSMutableAttributedString {
+    static func getMonthlyReward(_ font: UIFont, _ commission: NSDecimalNumber, _ delegated: NSDecimalNumber?, _ chainConfig: ChainConfig) -> NSMutableAttributedString {
         guard let param = BaseData.instance.mParam, let bondingAmount = delegated else {
-            return WDP.dpAmount(NSDecimalNumber.zero.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
+            return WDP.dpAmount(NSDecimalNumber.zero.stringValue, font, chainConfig.divideDecimal, chainConfig.displayDecimal)
         }
         var apr = NSDecimalNumber.zero
-        if (param.getRealApr(chain) == NSDecimalNumber.zero) { apr = param.getApr(chain) }
-        else { apr = param.getRealApr(chain) }
+        if (param.getRealApr(chainConfig.chainType) == NSDecimalNumber.zero) { apr = param.getApr(chainConfig.chainType) }
+        else { apr = param.getRealApr(chainConfig.chainType) }
         let calCommission = NSDecimalNumber.one.subtracting(commission)
         let aprCommission = apr.multiplying(by: calCommission, withBehavior: handler6)
         let dayReward = bondingAmount.multiplying(by: aprCommission).dividing(by: NSDecimalNumber.init(string: "12"), withBehavior: WUtils.handler0)
-        return WDP.dpAmount(dayReward.stringValue, font, mainDivideDecimal(chain), mainDivideDecimal(chain))
+        return WDP.dpAmount(dayReward.stringValue, font, chainConfig.divideDecimal, chainConfig.displayDecimal)
     }
     
     static func displayCommission(_ rate:String?, font:UIFont ) -> NSMutableAttributedString {
@@ -637,36 +637,21 @@ public class WUtils {
                 return msToken.decimal
             }
         }
-        return mainDivideDecimal(chainConfig!.chainType)
+        return chainConfig!.divideDecimal
     }
     
-    static func mainDivideDecimal(_ chain:ChainType?) -> Int16 {
-        if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
-            chain == .EVMOS_MAIN || chain == .CUDOS_MAIN) {
-            return 18
-        } else if (chain == .PROVENANCE_MAIN || chain == .LIKECOIN_MAIN) {
-            return 9
-        } else if (chain == .CRYPTO_MAIN) {
-            return 8
-        } else if (chain == .BINANCE_MAIN || chain == .OKEX_MAIN) {
-            return 0
-        } else {
-            return 6
-        }
-    }
-    
-    static func mainDisplayDecimal(_ chain:ChainType?) -> Int16 {
-        if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
-            chain == .EVMOS_MAIN || chain == .CUDOS_MAIN || chain == .OKEX_MAIN) {
-            return 18
-        } else if (chain == .PROVENANCE_MAIN || chain == .LIKECOIN_MAIN) {
-            return 9
-        } else if (chain == .BINANCE_MAIN || chain == .CRYPTO_MAIN) {
-            return 8
-        } else {
-            return 6
-        }
-    }
+//    static func mainDisplayDecimal(_ chain:ChainType?) -> Int16 {
+//        if (chain == .FETCH_MAIN || chain == .SIF_MAIN || chain == .INJECTIVE_MAIN ||
+//            chain == .EVMOS_MAIN || chain == .CUDOS_MAIN || chain == .OKEX_MAIN) {
+//            return 18
+//        } else if (chain == .PROVENANCE_MAIN || chain == .LIKECOIN_MAIN) {
+//            return 9
+//        } else if (chain == .BINANCE_MAIN || chain == .CRYPTO_MAIN) {
+//            return 8
+//        } else {
+//            return 6
+//        }
+//    }
     
     static func setDenomTitle(_ chain: ChainType?, _ label: UILabel?) {
         if let chainConfig = ChainFactory.getChainConfig(chain) {

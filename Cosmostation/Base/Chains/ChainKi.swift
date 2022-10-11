@@ -29,6 +29,8 @@ class ChainKi: ChainConfig {
     var stakeSymbol = "XKI"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "ki")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "ki"
     var validatorPrefix = "kivaloper"

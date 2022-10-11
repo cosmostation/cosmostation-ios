@@ -30,6 +30,8 @@ class ChainStride: ChainConfig {
     var stakeSymbol = "STRD"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "stride")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "stride"
     var validatorPrefix = "stridevaloper"

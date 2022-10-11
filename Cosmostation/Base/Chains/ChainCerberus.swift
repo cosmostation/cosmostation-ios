@@ -29,6 +29,8 @@ class ChainCerberus: ChainConfig {
     var stakeSymbol = "CRBRUS"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "cerberus")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "cerberus"
     var validatorPrefix = "cerberusvaloper"

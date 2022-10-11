@@ -24,7 +24,6 @@ class ClaimReward1ViewController: BaseViewController {
     @IBOutlet weak var rewardToAddressLabel: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal: Int16 = 6
     var mFetchCnt = 0
 
     override func viewDidLoad() {
@@ -68,13 +67,12 @@ class ClaimReward1ViewController: BaseViewController {
     }
     
     func updateView() {
-        mDpDecimal = WUtils.mainDivideDecimal(pageHolderVC.chainType)
         var selectedRewardSum = NSDecimalNumber.zero
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {
             let amount = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator.operatorAddress)
             selectedRewardSum = selectedRewardSum.adding(amount)
         }
-        rewardAmountLabel.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmountLabel.font, mDpDecimal, mDpDecimal)
+        rewardAmountLabel.attributedText = WDP.dpAmount(selectedRewardSum.stringValue, rewardAmountLabel.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         
         var monikers = ""
         for validator in pageHolderVC.mRewardTargetValidators_gRPC {

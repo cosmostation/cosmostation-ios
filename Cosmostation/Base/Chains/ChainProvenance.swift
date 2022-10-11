@@ -29,6 +29,8 @@ class ChainProvenance: ChainConfig {
     var stakeSymbol = "HASH"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "provenance")!
+    var divideDecimal: Int16 = 9
+    var displayDecimal: Int16 = 9
     
     var addressPrefix = "pb"
     var validatorPrefix = "pbvaloper"

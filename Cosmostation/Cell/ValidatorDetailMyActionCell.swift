@@ -66,17 +66,17 @@ class ValidatorDetailMyActionCell: UITableViewCell {
         let delegation = BaseData.instance.getDelegated_gRPC(validator!.operatorAddress)
         let unbonding = BaseData.instance.getUnbonding_gRPC(validator!.operatorAddress)
         let reward = BaseData.instance.getReward_gRPC(WUtils.getMainDenom(chainConfig), validator!.operatorAddress)
-        myDelegateAmount.attributedText =  WDP.dpAmount(delegation.stringValue, myDelegateAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
-        myUndelegateAmount.attributedText =  WDP.dpAmount(unbonding.stringValue, myUndelegateAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
-        myRewardAmount.attributedText = WDP.dpAmount(reward.stringValue, myRewardAmount.font, WUtils.mainDivideDecimal(chainType), WUtils.mainDivideDecimal(chainType))
+        myDelegateAmount.attributedText =  WDP.dpAmount(delegation.stringValue, myDelegateAmount.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
+        myUndelegateAmount.attributedText =  WDP.dpAmount(unbonding.stringValue, myUndelegateAmount.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
+        myRewardAmount.attributedText = WDP.dpAmount(reward.stringValue, myRewardAmount.font, chainConfig!.divideDecimal, chainConfig!.displayDecimal)
         
         if (validator?.status == Cosmos_Staking_V1beta1_BondStatus.bonded) {
-            myDailyReturns.attributedText =  WUtils.getDailyReward(myDailyReturns.font, NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18), delegation, chainType)
-            myMonthlyReturns.attributedText =  WUtils.getMonthlyReward(myMonthlyReturns.font, NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18), delegation, chainType)
+            myDailyReturns.attributedText =  WUtils.getDailyReward(myDailyReturns.font, NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18), delegation, chainConfig!)
+            myMonthlyReturns.attributedText =  WUtils.getMonthlyReward(myMonthlyReturns.font, NSDecimalNumber.init(string: validator?.commission.commissionRates.rate).multiplying(byPowerOf10: -18), delegation, chainConfig!)
             
         } else {
-            myDailyReturns.attributedText =  WUtils.getDailyReward(myDailyReturns.font, NSDecimalNumber.zero, NSDecimalNumber.zero, chainType)
-            myMonthlyReturns.attributedText =  WUtils.getMonthlyReward(myMonthlyReturns.font, NSDecimalNumber.zero, NSDecimalNumber.zero, chainType)
+            myDailyReturns.attributedText =  WUtils.getDailyReward(myDailyReturns.font, NSDecimalNumber.zero, NSDecimalNumber.zero, chainConfig!)
+            myMonthlyReturns.attributedText =  WUtils.getMonthlyReward(myMonthlyReturns.font, NSDecimalNumber.zero, NSDecimalNumber.zero, chainConfig!)
             myDailyReturns.textColor = UIColor.init(hexString: "f31963")
             myMonthlyReturns.textColor = UIColor.init(hexString: "f31963")
             

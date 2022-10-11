@@ -29,6 +29,8 @@ class ChainAssetMantle: ChainConfig {
     var stakeSymbol = "MNTL"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "assetmantle")!
+    var divideDecimal: Int16 = 6
+    var displayDecimal: Int16 = 6
     
     var addressPrefix = "mantle"
     var validatorPrefix = "mantlevaloper"

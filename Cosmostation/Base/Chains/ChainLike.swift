@@ -30,6 +30,8 @@ class ChainLike: ChainConfig {
     var stakeSymbol = "LIKE"
     var stakeSendImg = UIImage(named: "sendImg")!
     var stakeSendBg = UIColor(named: "like")!
+    var divideDecimal: Int16 = 9
+    var displayDecimal: Int16 = 9
     
     var addressPrefix = "like"
     var validatorPrefix = "likevaloper"

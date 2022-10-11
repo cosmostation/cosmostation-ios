@@ -16,8 +16,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var mnemonicNameLabel: UILabel!
-    @IBOutlet weak var walletCntLabel: UILabel!
-    @IBOutlet weak var totalWalletCntLabel: UILabel!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var pathCardView: CardView!
     @IBOutlet weak var selectedHDPathLabel: UILabel!
@@ -73,7 +71,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         if (derive.status == 2) { return }
         self.mDerives[indexPath.row].selected = !derive.selected
         self.derivedWalletTableView.reloadRows(at: [indexPath], with: .none)
-        self.onUpdateCnt()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,23 +143,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         }
     }
     
-    func onUpdateCnt() {
-        let allKeyCnt = self.mDerives.count
-        let alreadyCnt = self.mDerives.filter { $0.status == 2 }.count
-        let selectedCnt = self.mDerives.filter { $0.selected == true }.count
-        
-        if (selectedCnt == 0) {
-            self.walletCntLabel.text = String(alreadyCnt)
-            self.walletCntLabel.textColor = UIColor.init(named: "_font04")
-            self.totalWalletCntLabel.text = "/ " + String(allKeyCnt)
-            
-        } else {
-            self.walletCntLabel.text = String(alreadyCnt + selectedCnt)
-            self.walletCntLabel.textColor = UIColor.init(named: "photon")
-            self.totalWalletCntLabel.text = "/ " + String(allKeyCnt)
-        }
-    }
-    
     func getSeedFormWords() {
         print("getSeedFormWords ")
         self.showWaittingAlert()
@@ -216,7 +196,6 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
         DispatchQueue.main.async(execute: {
             self.hideWaittingAlert()
             self.derivedWalletTableView.reloadData()
-            self.onUpdateCnt()
             
             for i in 0 ..< self.mDerives.count {
                 self.onFetchBalance(i)
