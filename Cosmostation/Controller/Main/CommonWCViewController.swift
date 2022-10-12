@@ -55,7 +55,7 @@ class CommonWCViewController: BaseViewController {
     var accountChainSet = Set<String>()
     var accountSelectedSet = Set<Account>()
     
-    var beginingPoint: CGPoint!
+    private var beginingPoint: CGPoint?
     var isViewShowed: Bool = true
 
     override func viewDidLoad() {
@@ -987,9 +987,10 @@ extension CommonWCViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let beginingPoint = beginingPoint else { return }
         let currentPoint = scrollView.contentOffset
 
-        if self.beginingPoint.y < currentPoint.y {
+        if beginingPoint.y < currentPoint.y {
             self.hideToolbar()
         } else {
             self.showToolbar()
