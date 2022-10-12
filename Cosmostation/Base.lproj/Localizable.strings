@@ -17,7 +17,23 @@
 "str_current_price" = "Current Price";
 "str_inflation" = "Inflation";
 "str_apr" = "Staking APR";
-
+"str_voting_power" = "Voting Power";
+"str_est_apr" = "Est. APR";
+"str_my_delegation" = "My Delegated";
+"str_my_unbonding" = "My Unbondig";
+"str_my_reward" = "My Reward";
+"str_total_reward" = "Total Reward";
+"str_self_bond_rate" = "Self Bonded Rate";
+"str_commission" = "Commission";
+"str_est_daily_reward" = "Est. Daily Reward";
+"str_est_monthly_reward" = "Est. Monthly Reward";
+"str_delegate" = "Delegate";
+"str_undelegate" = "Undelegate";
+"str_redelegate" = "Redelegate";
+"str_claim_reward" = "Claim Reward";
+"str_compounding" = "Compounding";
+"str_claim_reward_all" = "Claim Reward All";
+"str_one_click" = "One Click";
 
 "btn_delegate" = "  Delegate";
 "btn_governance" = "  Governance";
@@ -40,7 +56,11 @@
 "btn_buy_band" = "  Buy BAND";
 
 
+
 "msg_authz_description" = "Perform transactions on behalf of another account";
+"title_promotion" = "START DELEGATING FOR REWARDS";
+"msg_promotion" = "Delegate your tokens with Cosmostation.\nStart earning staking rewards and contribute to the network ecosystem.";
+"msg_history_with_validator" = "History with this validator";
 
 
 

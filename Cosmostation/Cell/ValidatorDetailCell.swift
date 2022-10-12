@@ -21,6 +21,10 @@ class ValidatorDetailCell: UITableViewCell {
     @IBOutlet weak var avergaeYield: UILabel!
     @IBOutlet weak var commissionRate: UILabel!
     @IBOutlet weak var delegateBtn: UIButton!
+    @IBOutlet weak var votingPowerTitle: UILabel!
+    @IBOutlet weak var selfBondRateTitle: UILabel!
+    @IBOutlet weak var estAprTitle: UILabel!
+    @IBOutlet weak var commissionTitle: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -35,6 +39,10 @@ class ValidatorDetailCell: UITableViewCell {
         selfBondedRate.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         avergaeYield.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         commissionRate.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        votingPowerTitle.text = NSLocalizedString("str_voting_power", comment: "")
+        selfBondRateTitle.text = NSLocalizedString("str_self_bond_rate", comment: "")
+        estAprTitle.text = NSLocalizedString("str_est_apr", comment: "")
+        commissionTitle.text = NSLocalizedString("str_commission", comment: "")
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapUrl))
         website.isUserInteractionEnabled = true

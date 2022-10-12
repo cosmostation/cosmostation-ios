@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,31 +22,31 @@
                         <rect key="frame" x="12" y="4" width="296" height="272"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Delegated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bs6-H3-HZs">
-                                <rect key="frame" x="12" y="16" width="54" height="13.5"/>
+                                <rect key="frame" x="12" y="16" width="58" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Unbonding" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L8L-5t-Ob2">
-                                <rect key="frame" x="12" y="37.5" width="57.5" height="13.5"/>
+                                <rect key="frame" x="12" y="38.5" width="62" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgs-C1-O6R">
-                                <rect key="frame" x="78" y="15.5" width="206" height="14.5"/>
+                                <rect key="frame" x="82" y="15.5" width="202" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hib-JF-mPX">
-                                <rect key="frame" x="81.5" y="37" width="202.5" height="14.5"/>
+                                <rect key="frame" x="86" y="38" width="198" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="jMS-jr-m0D">
-                                <rect key="frame" x="12" y="67" width="272" height="40"/>
+                                <rect key="frame" x="12" y="69" width="272" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWh-8K-Tdg">
                                         <rect key="frame" x="0.0" y="0.0" width="82.5" height="40"/>
@@ -126,44 +126,44 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lKL-Yi-yVT">
-                                <rect key="frame" x="12" y="123" width="272" height="0.5"/>
+                                <rect key="frame" x="12" y="125" width="272" height="0.5"/>
                                 <color key="backgroundColor" name="_card_divider"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="ZPo-rX-wqH"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOT-VC-ZBU">
-                                <rect key="frame" x="12" y="135.5" width="254" height="21.5"/>
+                                <rect key="frame" x="12" y="137.5" width="253.5" height="17.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FTh-Xd-UEg">
-                                <rect key="frame" x="278" y="139" width="6" height="14.5"/>
+                                <rect key="frame" x="277.5" y="138.5" width="6.5" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Est. Daily Reward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeA-BC-eAP">
-                                <rect key="frame" x="12" y="167" width="91" height="13.5"/>
+                                <rect key="frame" x="12" y="165" width="98" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wPR-SC-6DM">
-                                <rect key="frame" x="115" y="166.5" width="169" height="14.5"/>
+                                <rect key="frame" x="122" y="164.5" width="162" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Est. Monthly Reward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C3b-SX-Z56">
-                                <rect key="frame" x="12" y="182.5" width="254" height="13.5"/>
+                                <rect key="frame" x="12" y="181.5" width="253.5" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nk-dt-CiQ">
-                                <rect key="frame" x="278" y="182" width="6" height="14.5"/>
+                                <rect key="frame" x="277.5" y="181" width="6.5" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -295,10 +295,15 @@
                 <outlet property="cardView" destination="IM2-sP-s3L" id="OgQ-d0-M1y"/>
                 <outlet property="claimRewardBtn" destination="Uax-LB-HdT" id="CU2-To-Zbn"/>
                 <outlet property="delegateBtn" destination="IWh-8K-Tdg" id="UAa-cd-A4j"/>
+                <outlet property="estDailyRewardTitle" destination="IeA-BC-eAP" id="xfW-0f-nUl"/>
+                <outlet property="estMonthlyRewardTitle" destination="C3b-SX-Z56" id="hH9-cB-jsi"/>
                 <outlet property="myDailyReturns" destination="wPR-SC-6DM" id="WaQ-6p-Mbu"/>
                 <outlet property="myDelegateAmount" destination="sgs-C1-O6R" id="7fj-kb-jdn"/>
+                <outlet property="myDelegatedTitle" destination="Bs6-H3-HZs" id="Hjf-fq-WfZ"/>
                 <outlet property="myMonthlyReturns" destination="4nk-dt-CiQ" id="jYz-tW-K1h"/>
                 <outlet property="myRewardAmount" destination="FTh-Xd-UEg" id="AWJ-Ob-nga"/>
+                <outlet property="myRewardTitle" destination="QOT-VC-ZBU" id="8cD-2W-YFz"/>
+                <outlet property="myUnbondingTitle" destination="L8L-5t-Ob2" id="ZBa-fo-mQm"/>
                 <outlet property="myUndelegateAmount" destination="hib-JF-mPX" id="mcv-Vt-nkP"/>
                 <outlet property="reInvestBtn" destination="Das-Dc-QgD" id="Y80-Ou-asf"/>
                 <outlet property="redelegateBtn" destination="vxf-ut-Qfe" id="4tZ-hp-d4e"/>
