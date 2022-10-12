@@ -131,6 +131,7 @@
                 <outlet property="buyBtn" destination="9sb-GM-snQ" id="hy8-8R-iYu"/>
                 <outlet property="buyConstraint" destination="mRq-vZ-kls" id="tg0-cW-LHY"/>
                 <outlet property="buySeparator" destination="HEw-Tg-Exp" id="v9V-jC-sCA"/>
+                <outlet property="currentPriceLabel" destination="DHe-xH-HA7" id="mPO-Jv-NqW"/>
                 <outlet property="noBuyConstraint" destination="THG-ox-LwV" id="rli-2o-Wet"/>
                 <outlet property="perPrice" destination="b82-jk-Cbh" id="bn7-Xt-HBt"/>
                 <outlet property="priceLayer" destination="ZN6-ss-l5I" id="EO6-f5-FN7"/>
