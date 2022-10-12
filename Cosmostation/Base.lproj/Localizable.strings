@@ -34,6 +34,32 @@
 "str_compounding" = "Compounding";
 "str_claim_reward_all" = "Claim Reward All";
 "str_one_click" = "One Click";
+"str_wallet" = "WALLET";
+"str_general" = "GENERAL";
+"str_support" = "SUPPORT";
+"str_about_app" = "ABOUT APP";
+"str_manage_wallet" = "Manage Wallet";
+"str_manage_mnemonic" = "Manage Mnemonic/ Add Wallet";
+"str_import_privatekey" = "Import PrivateKey";
+"str_import_address" = "Import Watching Address";
+"str_manage_connection" = "Manage Connections";
+"str_theme" = "Theme";
+"str_notification" = "Notification";
+"str_applock" = "App Lock";
+"str_autopass" = "PIN Auto Pass";
+"str_currentcy" = "Currency";
+"str_price_change_color" = "Price Change Color";
+"str_explorer" = "MintScan Explorer";
+"str_notice" = "Notice";
+"str_homepage" = "Cosmostation Home Page";
+"str_blog" = "Cosmostation Blog";
+"str_telegram" = "Telegram";
+"str_starname_wc" = "Starname Wallet Connect";
+"str_term" = "Term and Policy";
+"str_opensource" = "Open Source (Github)";
+"str_version" = "Version";
+"str_engineer" = "Engineer Mode";
+
 
 "btn_delegate" = "  Delegate";
 "btn_governance" = "  Governance";

@@ -36,6 +36,32 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
     @IBOutlet weak var priceDownImg: UIImageView!
     var checkMode = -1
     
+    @IBOutlet weak var manageWalletTitle: UILabel!
+    @IBOutlet weak var manageMnemonicTitle: UILabel!
+    @IBOutlet weak var importPrivateKeyTitle: UILabel!
+    @IBOutlet weak var importWatchTitle: UILabel!
+    @IBOutlet weak var manageConnectionTitle: UILabel!
+    
+    @IBOutlet weak var themeTitle: UILabel!
+    @IBOutlet weak var notificationTitle: UILabel!
+    @IBOutlet weak var applockTitle: UILabel!
+    @IBOutlet weak var autopassTitle: UILabel!
+    @IBOutlet weak var currencyTitle: UILabel!
+    @IBOutlet weak var priceColorTitle: UILabel!
+    
+    @IBOutlet weak var explorerTitle: UILabel!
+    @IBOutlet weak var noticeTitle: UILabel!
+    @IBOutlet weak var homepageTitle: UILabel!
+    @IBOutlet weak var blogTitle: UILabel!
+    @IBOutlet weak var telegramTitle: UILabel!
+    @IBOutlet weak var starnameWCTitle: UILabel!
+    
+    @IBOutlet weak var termTitle: UILabel!
+    @IBOutlet weak var githubTitle: UILabel!
+    @IBOutlet weak var versionTitle: UILabel!
+    @IBOutlet weak var engineerTitle: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 13.0, *) { overrideUserInterfaceStyle = BaseData.instance.getThemeType() }
@@ -53,6 +79,27 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
         self.onUpdatePriceChangeColor()
         self.onUpdateAlarm()
         
+        manageWalletTitle.text = NSLocalizedString("str_manage_wallet", comment: "")
+        manageMnemonicTitle.text = NSLocalizedString("str_manage_mnemonic", comment: "")
+        importPrivateKeyTitle.text = NSLocalizedString("str_import_privatekey", comment: "")
+        importWatchTitle.text = NSLocalizedString("str_import_address", comment: "")
+        manageConnectionTitle.text = NSLocalizedString("str_manage_connection", comment: "")
+        themeTitle.text = NSLocalizedString("str_theme", comment: "")
+        notificationTitle.text = NSLocalizedString("str_notification", comment: "")
+        applockTitle.text = NSLocalizedString("str_applock", comment: "")
+        autopassTitle.text = NSLocalizedString("str_autopass", comment: "")
+        currencyTitle.text = NSLocalizedString("str_currentcy", comment: "")
+        priceColorTitle.text = NSLocalizedString("str_price_change_color", comment: "")
+        explorerTitle.text = NSLocalizedString("str_explorer", comment: "")
+        noticeTitle.text = NSLocalizedString("str_notice", comment: "")
+        homepageTitle.text = NSLocalizedString("str_homepage", comment: "")
+        blogTitle.text = NSLocalizedString("str_blog", comment: "")
+        telegramTitle.text = NSLocalizedString("str_telegram", comment: "")
+        starnameWCTitle.text = NSLocalizedString("str_starname_wc", comment: "")
+        termTitle.text = NSLocalizedString("str_term", comment: "")
+        githubTitle.text = NSLocalizedString("str_opensource", comment: "")
+        versionTitle.text = NSLocalizedString("str_version", comment: "")
+        engineerTitle.text = NSLocalizedString("str_engineer", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,6 +128,19 @@ class SettingTableViewController: UITableViewController, PasswordViewDelegate, Q
                 }
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if (section == 0) {
+            return NSLocalizedString("str_wallet", comment: "")
+        } else if (section == 1) {
+            return NSLocalizedString("str_general", comment: "")
+        } else if (section == 2) {
+            return NSLocalizedString("str_support", comment: "")
+        } else if (section == 3) {
+            return NSLocalizedString("str_about_app", comment: "")
+        }
+        return ""
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {

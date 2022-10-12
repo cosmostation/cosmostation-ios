@@ -34,6 +34,31 @@
 "str_one_click" = "원 클릭";
 "str_claim_reward_all" = "이자 모두 받기";
 "str_compounding" = "컴파운딩";
+"str_wallet" = "지갑";
+"str_general" = "일반";
+"str_support" = "지원";
+"str_about_app" = "앱정보";
+"str_manage_wallet" = "지갑 관리";
+"str_manage_mnemonic" = "니모닉 관리/ 지갑 추가";
+"str_import_privatekey" = "개인키 등록";
+"str_import_address" = "관찰 주소 등록";
+"str_manage_connection" = "지갑 연결 관리";
+"str_theme" = "테마";
+"str_notification" = "알림";
+"str_applock" = "앱 잠금";
+"str_autopass" = "핀코드 자동통과";
+"str_currentcy" = "통화";
+"str_price_change_color" = "가격 변동 색상";
+"str_explorer" = "민트스캔 익스플로러";
+"str_notice" = "공지사항";
+"str_homepage" = "코스모스테이션 홈페이지";
+"str_blog" = "코스모스테이션 블로그";
+"str_telegram" = "텔레그램";
+"str_starname_wc" = "스타네임 지갑연결";
+"str_term" = "약관";
+"str_opensource" = "오픈소스 (Github)";
+"str_version" = "버전";
+"str_engineer" = "엔지니어 모드";
 
 
 "btn_delegate" = "  위임 하기";
