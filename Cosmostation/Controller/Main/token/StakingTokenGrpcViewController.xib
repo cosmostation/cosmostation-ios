@@ -103,7 +103,7 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="S6W-vs-13A">
                     <rect key="frame" x="16" y="801" width="382" height="45"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOh-Iw-s8K">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOh-Iw-s8K">
                             <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="LIk-2u-KMs"/>
