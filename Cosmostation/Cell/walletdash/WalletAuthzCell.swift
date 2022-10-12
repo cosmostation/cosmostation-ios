@@ -11,11 +11,14 @@ import UIKit
 class WalletAuthzCell: UITableViewCell {
     
     @IBOutlet weak var authzImg: UIImageView!
+    @IBOutlet weak var authzMsgLabel: UILabel!
     @IBOutlet weak var btnAuthz: UIButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        authzMsgLabel.text = NSLocalizedString("msg_authz_description", comment: "")
     }
     
     var actionAuthz: (() -> Void)? = nil

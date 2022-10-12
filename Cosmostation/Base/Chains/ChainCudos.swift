@@ -14,8 +14,8 @@ class ChainCudos: ChainConfig {
     var chainType = ChainType.CUDOS_MAIN
     var chainImg = UIImage(named: "chainCudos")
     var chainInfoImg = UIImage(named: "infoCudos")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_cudos", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_cudos", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_cudos", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_cudos", comment: "")
     var chainColor = UIColor(named: "cudos")!
     var chainColorBG = UIColor(named: "cudos_bg")!
     var chainTitle = "(Cudos Mainnet)"

@@ -10,6 +10,8 @@ import UIKit
 
 class WalletInflationCell: UITableViewCell {
     
+    @IBOutlet weak var inflationTitleLabel: UILabel!
+    @IBOutlet weak var aprTitleLabel: UILabel!
     @IBOutlet weak var infaltionLabel: UILabel!
     @IBOutlet weak var yieldLabel: UILabel!
     @IBOutlet weak var aprCard: CardView!
@@ -20,6 +22,8 @@ class WalletInflationCell: UITableViewCell {
         infaltionLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
         yieldLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
         
+        inflationTitleLabel.text = NSLocalizedString("str_inflation", comment: "")
+        aprTitleLabel.text = NSLocalizedString("str_apr", comment: "")
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapApr))
         self.contentView.isUserInteractionEnabled = true

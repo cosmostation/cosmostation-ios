@@ -15,8 +15,8 @@ class ChainStride: ChainConfig {
     var chainType = ChainType.STRIDE_MAIN
     var chainImg = UIImage(named: "chainStride")
     var chainInfoImg = UIImage(named: "infoStride")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_stride", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_stride", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_stride", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_stride", comment: "")
     var chainColor = UIColor(named: "stride")!
     var chainColorBG = UIColor(named: "stride_bg")!
     var chainTitle = "(Stride Mainnet)"

@@ -10,6 +10,7 @@ import UIKit
 
 class WalletKavaIncentiveCell: UITableViewCell {
 
+    @IBOutlet weak var incentiveLabel: UILabel!
     @IBOutlet weak var kavaAmountLabel: UILabel!
     @IBOutlet weak var hardAmountLabel: UILabel!
     @IBOutlet weak var swpAmountLabel: UILabel!
@@ -21,10 +22,12 @@ class WalletKavaIncentiveCell: UITableViewCell {
         kavaAmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         hardAmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         swpAmountLabel.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        incentiveLabel.text = NSLocalizedString("str_incentive", comment: "")
+        btnClaimIncentive.setTitle(NSLocalizedString("btn_claim_incentive", comment: ""), for: .normal)
     }
     
     var actionGetIncentive: (() -> Void)? = nil
-    @IBAction func onClickCdp(_ sender: Any) {
+    @IBAction func onClickIncentive(_ sender: Any) {
         actionGetIncentive?()
     }
     

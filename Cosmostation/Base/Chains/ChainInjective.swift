@@ -14,8 +14,8 @@ class ChainInjective: ChainConfig {
     var chainType = ChainType.INJECTIVE_MAIN
     var chainImg = UIImage(named: "chainInjective")
     var chainInfoImg = UIImage(named: "infoInjective")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_injective", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_injective", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_injective", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_injective", comment: "")
     var chainColor = UIColor(named: "injective")!
     var chainColorBG = UIColor(named: "injective_bg")!
     var chainTitle = "(Injective Mainnet)"

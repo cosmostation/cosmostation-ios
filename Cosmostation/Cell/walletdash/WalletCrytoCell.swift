@@ -22,6 +22,12 @@ class WalletCrytoCell: UITableViewCell {
     @IBOutlet weak var btnDelegate: UIButton!
     @IBOutlet weak var btnProposal: UIButton!
     @IBOutlet weak var btnNtf: UIButton!
+    
+    @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var vestingLabel: UILabel!
+    @IBOutlet weak var delegateLabel: UILabel!
+    @IBOutlet weak var unbondingLabel: UILabel!
+    @IBOutlet weak var rewardLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,6 +37,15 @@ class WalletCrytoCell: UITableViewCell {
         delegatedAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         unbondingAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         rewardAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        availableLabel.text = NSLocalizedString("str_available", comment: "")
+        vestingLabel.text = NSLocalizedString("str_vesting", comment: "")
+        delegateLabel.text = NSLocalizedString("str_delegated", comment: "")
+        unbondingLabel.text = NSLocalizedString("str_unbonding", comment: "")
+        rewardLabel.text = NSLocalizedString("str_reward", comment: "")
+        btnDelegate.setTitle(NSLocalizedString("btn_delegate", comment: ""), for: .normal)
+        btnProposal.setTitle(NSLocalizedString("btn_governance", comment: ""), for: .normal)
+        btnNtf.setTitle(NSLocalizedString("btn_nft", comment: ""), for: .normal)
     }
     
     var actionDelegate: (() -> Void)? = nil

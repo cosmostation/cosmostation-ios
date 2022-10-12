@@ -14,8 +14,8 @@ class ChainIxo: ChainConfig {
     var chainType = ChainType.IXO_MAIN
     var chainImg = UIImage(named: "chainIxo")
     var chainInfoImg = UIImage(named: "infoIxo")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_ixo", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_ixo", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_ixo", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_ixo", comment: "")
     var chainColor = UIColor(named: "ixo")!
     var chainColorBG = UIColor(named: "ixo_bg")!
     var chainTitle = "(Ixo Mainnet)"

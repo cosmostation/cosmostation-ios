@@ -14,8 +14,8 @@ class ChainOmniflix: ChainConfig {
     var chainType = ChainType.OMNIFLIX_MAIN
     var chainImg = UIImage(named: "chainOmniflix")
     var chainInfoImg = UIImage(named: "infoOmniflix")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_omniflix", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_omniflix", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_omniflix", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_omniflix", comment: "")
     var chainColor = UIColor(named: "omniflix")!
     var chainColorBG = UIColor(named: "omniflix_bg")!
     var chainTitle = "(Omniflix Mainnet)"

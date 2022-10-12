@@ -14,8 +14,8 @@ class ChainRizon: ChainConfig {
     var chainType = ChainType.RIZON_MAIN
     var chainImg = UIImage(named: "chainRizon")
     var chainInfoImg = UIImage(named: "infoRizon")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_rizon", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_rizon", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_rizon", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_rizon", comment: "")
     var chainColor = UIColor(named: "rizon")!
     var chainColorBG = UIColor(named: "rizon_bg")!
     var chainTitle = "(Rizon Mainnet)"
