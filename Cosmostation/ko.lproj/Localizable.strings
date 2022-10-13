@@ -95,7 +95,7 @@
 "str_add_wallet" = "지갑 추가";
 "str_import_mnemonic" = "니모닉 등록";
 "str_create_mnemonic" = "니모닉 생성";
-"str_derived_wallets" = "파생된 지갑수";
+"str_derived_wallets" = "파생된 지갑 수";
 "str_words_count" = "단어 수";
 "str_paste" = "붙여넣기";
 "str_path" = "HD 경로 :";
