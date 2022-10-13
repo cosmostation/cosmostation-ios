@@ -28,13 +28,13 @@
                                     <constraint firstAttribute="width" secondItem="Ksy-dK-RnA" secondAttribute="height" multiplier="303:41" id="LCU-Y9-nHW"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Perform transactions on behalf of another account " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okh-L5-pQ2">
-                                <rect key="frame" x="16" y="42" width="289.5" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Perform transactions on behalf of another account " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okh-L5-pQ2">
+                                <rect key="frame" x="16" y="42" width="376" height="21"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-AS-bK0">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2l-AS-bK0">
                                 <rect key="frame" x="12" y="79" width="384" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -67,6 +67,7 @@
                             <constraint firstItem="X2l-AS-bK0" firstAttribute="leading" secondItem="ije-Zg-Q1u" secondAttribute="leading" constant="12" id="RxC-iH-cxn"/>
                             <constraint firstItem="X2l-AS-bK0" firstAttribute="top" secondItem="okh-L5-pQ2" secondAttribute="bottom" constant="16" id="Y7u-re-9OB"/>
                             <constraint firstItem="Ksy-dK-RnA" firstAttribute="top" secondItem="ije-Zg-Q1u" secondAttribute="top" constant="16" id="cfu-zA-Im7"/>
+                            <constraint firstAttribute="trailing" secondItem="okh-L5-pQ2" secondAttribute="trailing" constant="16" id="dOV-w1-0w5"/>
                             <constraint firstAttribute="bottom" secondItem="X2l-AS-bK0" secondAttribute="bottom" constant="20" id="jDF-lw-71m"/>
                             <constraint firstItem="okh-L5-pQ2" firstAttribute="leading" secondItem="Ksy-dK-RnA" secondAttribute="leading" id="kMJ-BE-LCe"/>
                             <constraint firstAttribute="trailing" secondItem="X2l-AS-bK0" secondAttribute="trailing" constant="12" id="uBc-QN-tgR"/>

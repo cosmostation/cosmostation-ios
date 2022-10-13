@@ -185,14 +185,15 @@
                                     <color key="textColor" name="_font04"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-xM-H7P">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EzO-xM-H7P">
                                     <rect key="frame" x="371" y="9" width="38" height="38"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="38" id="1EL-7E-HXa"/>
                                         <constraint firstAttribute="width" constant="38" id="JQw-iX-DMf"/>
                                     </constraints>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <buttonConfiguration key="configuration" style="plain" image="btnIconClose"/>
+                                    <color key="tintColor" name="_font05"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="btnIconClose"/>
                                     <connections>
                                         <action selector="onCloseDapp:" destination="-1" eventType="touchUpInside" id="oqI-mN-pPu"/>
                                     </connections>
