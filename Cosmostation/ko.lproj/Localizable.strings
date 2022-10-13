@@ -102,6 +102,8 @@
 "str_displayed_chain" = "보여지는 체인";
 "str_hidden_chain" = "숨겨진 체인";
 "str_qr_scan" = "QR 스캔";
+"str_switch_wallet" = "지갑 전환";
+"str_edit_token_list" = "토큰 편집";
 
 
 "btn_delegate" = "  위임 하기";
@@ -137,6 +139,7 @@
 "msg_enter_mnemonics" = "니모닉 문구를 입력하세요.";
 "msg_restore_pkey" = "개인 키를 입력하십시오.\n개인 키는 0x로 시작하는 66자리 문자열입니다.";
 "msg_import_address" = "관찰 모드를 사용하면 계정 상태를 확인할 수 있습니다.\트랜잭션을 활성화하려면 지갑에 올바른 니모닉 또는 개인키를 추가해야 합니다.";
+"msg_edit_token_list" = "표시할 토큰을 선택하세요";
 
 
 "guide_title_cosmos" = "COSMOS HUB";

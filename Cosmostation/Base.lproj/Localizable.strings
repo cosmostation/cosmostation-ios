@@ -102,6 +102,8 @@
 "str_displayed_chain" = "Displayed Chains";
 "str_hidden_chain" = "Hidden Chains";
 "str_qr_scan" = "QR Scan";
+"str_switch_wallet" = "Switch Wallet";
+"str_edit_token_list" = "Edit Token List";
 
 
 "btn_delegate" = "  Delegate";
@@ -137,6 +139,7 @@
 "msg_enter_mnemonics" = "Please enter the recovery phrase.";
 "msg_restore_pkey" = "Please enter your private key.\nThe private key is a 66-digit string starting with 0x.";
 "msg_import_address" = "With watch mode, you can check the status of an account.\nYou need to add the correct mnemonics or private key for the wallet to enable transactions.";
+"msg_edit_token_list" = "Select tokens to display";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
