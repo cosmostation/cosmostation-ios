@@ -11,6 +11,7 @@ import UIKit
 class TokenDetailUnbondingDetailCell: UITableViewCell {
     
     @IBOutlet weak var unBondingCard: CardView!
+    @IBOutlet weak var unBondingSchduleLabel: UILabel!
     @IBOutlet weak var unBondingCnt: UILabel!
     
     @IBOutlet weak var unBondingLayer0: UIView!
@@ -47,6 +48,8 @@ class TokenDetailUnbondingDetailCell: UITableViewCell {
         unBondingAmount2.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         unBondingAmount3.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         unBondingAmount4.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        unBondingSchduleLabel.text = NSLocalizedString("str_unbonding_schdule", comment: "")
     
     }
     

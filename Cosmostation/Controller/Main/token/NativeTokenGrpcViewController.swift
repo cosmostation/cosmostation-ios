@@ -37,6 +37,8 @@ class NativeTokenGrpcViewController: BaseViewController, UITableViewDelegate, UI
         self.tokenTableView.register(UINib(nibName: "TokenDetailNativeCell", bundle: nil), forCellReuseIdentifier: "TokenDetailNativeCell")
         self.tokenTableView.register(UINib(nibName: "TokenDetailVestingDetailCell", bundle: nil), forCellReuseIdentifier: "TokenDetailVestingDetailCell")
         self.tokenTableView.register(UINib(nibName: "NewHistoryCell", bundle: nil), forCellReuseIdentifier: "NewHistoryCell")
+        
+        self.btnSend.setTitle(NSLocalizedString("str_send", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

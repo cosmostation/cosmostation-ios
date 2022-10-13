@@ -69,6 +69,10 @@
 "str_next" = "다음";
 "str_multi_vote" = "멀티 투표";
 "str_vote" = "투표";
+"str_total" = "합계";
+"str_vesting_schdule" = "베스팅 일정";
+"str_unbonding_schdule" = "위임철회 일정";
+"str_send" = "전송";
 
 
 "btn_delegate" = "  위임 하기";

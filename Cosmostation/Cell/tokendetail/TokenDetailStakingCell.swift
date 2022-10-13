@@ -17,6 +17,13 @@ class TokenDetailStakingCell: UITableViewCell {
     @IBOutlet weak var rewardAmount: UILabel!
     @IBOutlet weak var vestingAmount: UILabel!
     @IBOutlet weak var vestingLayer: UIView!
+    
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var vestingLabel: UILabel!
+    @IBOutlet weak var delegateLabel: UILabel!
+    @IBOutlet weak var unbondingLabel: UILabel!
+    @IBOutlet weak var rewardLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +34,13 @@ class TokenDetailStakingCell: UITableViewCell {
         rewardAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         unbondingAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         vestingAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        totalLabel.text = NSLocalizedString("str_total", comment: "")
+        availableLabel.text = NSLocalizedString("str_available", comment: "")
+        vestingLabel.text = NSLocalizedString("str_vesting", comment: "")
+        delegateLabel.text = NSLocalizedString("str_delegated", comment: "")
+        unbondingLabel.text = NSLocalizedString("str_unbonding", comment: "")
+        rewardLabel.text = NSLocalizedString("str_reward", comment: "")
     }
     
     override func prepareForReuse() {

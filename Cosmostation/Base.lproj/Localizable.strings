@@ -69,6 +69,10 @@
 "str_next" = "Next";
 "str_multi_vote" = "Multi Vote";
 "str_vote" = "Vote";
+"str_total" = "Total";
+"str_vesting_schdule" = "Vesting Schdule";
+"str_unbonding_schdule" = "Unbonding Schdule";
+"str_send" = "Send";
 
 
 "btn_delegate" = "  Delegate";

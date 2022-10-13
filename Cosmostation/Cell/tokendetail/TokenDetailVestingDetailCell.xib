@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,13 +22,13 @@
                         <rect key="frame" x="12" y="4" width="460" height="272"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Vesting Schedule" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUX-Nt-ast">
-                                <rect key="frame" x="12" y="16" width="98.5" height="181.5"/>
+                                <rect key="frame" x="12" y="16" width="105.5" height="181.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4O-Eh-FIw">
-                                <rect key="frame" x="441.5" y="98.5" width="6.5" height="17"/>
+                                <rect key="frame" x="440" y="96.5" width="8" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -47,19 +47,19 @@
                                         <rect key="frame" x="0.0" y="0.0" width="436" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WL5-Lg-lEc">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="26.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="1day after" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87U-is-C9W">
-                                                <rect key="frame" x="0.0" y="13.5" width="52" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="14.5" width="52" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v7Z-fE-sD1">
-                                                <rect key="frame" x="400.5" y="4" width="35.5" height="14.5"/>
+                                                <rect key="frame" x="397.5" y="4" width="38.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -80,19 +80,19 @@
                                         <rect key="frame" x="0.0" y="34" width="436" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ms-kT-Exs">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="26.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="1day after" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAe-Zp-03e">
-                                                <rect key="frame" x="0.0" y="13.5" width="52" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="14.5" width="52" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve7-IN-yi9">
-                                                <rect key="frame" x="400.5" y="4" width="35.5" height="14.5"/>
+                                                <rect key="frame" x="397.5" y="4" width="38.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -113,19 +113,19 @@
                                         <rect key="frame" x="0.0" y="34" width="436" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WvR-KZ-rA8">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="26.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="1day after" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mr4-4j-dxs">
-                                                <rect key="frame" x="0.0" y="13.5" width="52" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="14.5" width="52" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79B-Ll-XfS">
-                                                <rect key="frame" x="400.5" y="4" width="35.5" height="14.5"/>
+                                                <rect key="frame" x="397.5" y="4" width="38.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -146,19 +146,19 @@
                                         <rect key="frame" x="0.0" y="34" width="436" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vH5-Ah-DQn">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="26.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="1day after" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S7S-8m-hnx">
-                                                <rect key="frame" x="0.0" y="13.5" width="52" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="14.5" width="52" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="05r-vu-DUM">
-                                                <rect key="frame" x="400.5" y="4" width="35.5" height="14.5"/>
+                                                <rect key="frame" x="397.5" y="4" width="38.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -179,19 +179,19 @@
                                         <rect key="frame" x="0.0" y="34" width="436" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MVh-XG-uMl">
-                                                <rect key="frame" x="0.0" y="0.0" width="25" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="26.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="1day after" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hp7-ok-mYX">
-                                                <rect key="frame" x="0.0" y="13.5" width="52" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="14.5" width="52" height="13.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yzo-86-ktD">
-                                                <rect key="frame" x="400.5" y="4" width="35.5" height="14.5"/>
+                                                <rect key="frame" x="397.5" y="4" width="38.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -272,6 +272,7 @@
                 <outlet property="vestingLayer2" destination="60T-db-nEn" id="EK3-Dn-G9f"/>
                 <outlet property="vestingLayer3" destination="Eqx-1F-lY7" id="ofH-Fb-ySa"/>
                 <outlet property="vestingLayer4" destination="JlJ-tC-IAD" id="oEs-yX-hPZ"/>
+                <outlet property="vestingSchduleLabel" destination="XUX-Nt-ast" id="GOq-Cg-oPX"/>
                 <outlet property="vestingTime0" destination="WL5-Lg-lEc" id="Xgp-8L-dZM"/>
                 <outlet property="vestingTime1" destination="3Ms-kT-Exs" id="HdN-vW-WXc"/>
                 <outlet property="vestingTime2" destination="WvR-KZ-rA8" id="9j2-hs-UDo"/>

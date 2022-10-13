@@ -8,9 +8,10 @@
 
 import UIKit
 
-class TokenDetailVestingDetailCell: TokenDetailCell {
+class TokenDetailVestingDetailCell: UITableViewCell {
 
     @IBOutlet weak var rootCardView: CardView!
+    @IBOutlet weak var vestingSchduleLabel: UILabel!
     @IBOutlet weak var vestingCntLabel: UILabel!
     
     @IBOutlet weak var vestingLayer0: UIView!
@@ -47,6 +48,8 @@ class TokenDetailVestingDetailCell: TokenDetailCell {
         vestingAmount2.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         vestingAmount3.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         vestingAmount4.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        vestingSchduleLabel.text = NSLocalizedString("str_vesting_schdule", comment: "")
     }
     
     override func prepareForReuse() {
