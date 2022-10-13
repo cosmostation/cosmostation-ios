@@ -66,6 +66,7 @@
 "str_select_validators" = "Select Validators";
 "str_ok" = "OK";
 "str_cancel" = "Cancel";
+"str_confirm" = "Confirm";
 "str_next" = "Next";
 "str_multi_vote" = "Multi Vote";
 "str_vote" = "Vote";
@@ -73,6 +74,34 @@
 "str_vesting_schdule" = "Vesting Schdule";
 "str_unbonding_schdule" = "Unbonding Schdule";
 "str_send" = "Send";
+"str_edit" = "Edit";
+"str_delete_wallet" = "Delete Wallet";
+"str_check_privatekey" = "Check Private Key";
+"str_check_mnemonic" = "Check Menemoic";
+"str_with_mnemonics" = "With Mnemonic";
+"str_with_private_key" = "With Private Key";
+"str_only_address" = "Only Address";
+"str_address" = "Address";
+"str_mnemonic" = "Mnemonic";
+"str_chainid" = "Chain ID";
+"str_imported_date" = "Imported Date";
+"str_imported_state" = "Imported state";
+"str_address" = "Address";
+"str_key_path" = "HD Key Path";
+"str_reward_recipient_address" = "Reward Recipient Address";
+"str_copy_clipboard" = "Copy to Clipboard";
+"str_mnemonic_phrase" = "Mnemonic Phrase";
+"str_delete_mnemonic" = "Delete Mnemonic";
+"str_add_wallet" = "Add Wallet";
+"str_import_mnemonic" = "Import Mnemonic";
+"str_create_mnemonic" = "Create Mnemonic";
+"str_derived_wallets" = "Derived Wallets";
+"str_words_count" = "Word Count";
+"str_paste" = "Paste";
+"str_path" = "HD Path :";
+"str_displayed_chain" = "Displayed Chains";
+"str_hidden_chain" = "Hidden Chains";
+"str_qr_scan" = "QR Scan";
 
 
 "btn_delegate" = "  Delegate";
@@ -101,7 +130,13 @@
 "msg_promotion1" = "START DELEGATING FOR REWARDS";
 "msg_promotion2" = "Delegate your tokens with Cosmostation.\nStart earning staking rewards and contribute to the network ecosystem.";
 "msg_history_with_validator" = "History with this validator";
-
+"msg_only_watchmode" = "Now only watch mode.\nAll services are available after mnemonic or private key integration.";
+"msg_warn_privatekey" = "Private Key is only used to restore the currently selected wallet. We highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.\n\nPrivate key is NOT mnemonics. You MUST backup your mnemonics if you have one. You need your mnemonics to restore your original wallets if you created them with mnemonics.";
+"msg_warn_mnemonic" = "Losing your mnemonics could lead to loss of your asset.\nWe highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.";
+"msg_warn_create_mnemonic" = "Losing your mnemonics could lead to loss of your asset.\nWe highly recommend keeping your mnemonics offline in a secure location, and never share your mnemonics with anyone else.\n\nYou can check/manage your mnemonics in [Manage Mnemonic]";
+"msg_enter_mnemonics" = "Please enter the recovery phrase.";
+"msg_restore_pkey" = "Please enter your private key.\nThe private key is a 66-digit string starting with 0x.";
+"msg_import_address" = "With watch mode, you can check the status of an account.\nYou need to add the correct mnemonics or private key for the wallet to enable transactions.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
@@ -264,12 +299,9 @@
 "sort_by_yield" = "By APY";
 "sort_by_amount" = "By Amount";
 "sort_by_value" = "By Value";
-"with_mnemonics" = "With Mnemonics";
-"with_private_key" = "With Private Key";
-"only_address" = "Only Address";
 "wallet_dash" = "Wallet ";
 "with_mnemonic" = "With Mnemonics ";
-"only_address" = "Only Address";
+"str_only_address" = "Only Address";
 "check_mnemonic" = "Check Mnemonic";
 "check_private_key" = "Check PrivateKey";
 "import_menmonic" = "Import Mnemonic";

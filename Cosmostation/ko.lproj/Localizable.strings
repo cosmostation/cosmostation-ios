@@ -67,12 +67,41 @@
 "str_ok" = "확인";
 "str_cancel" = "취소";
 "str_next" = "다음";
+"str_confirm" = "확인";
 "str_multi_vote" = "멀티 투표";
 "str_vote" = "투표";
 "str_total" = "합계";
 "str_vesting_schdule" = "베스팅 일정";
 "str_unbonding_schdule" = "위임철회 일정";
 "str_send" = "전송";
+"str_edit" = "편집";
+"str_delete_wallet" = "지갑 삭제";
+"str_check_privatekey" = "개인키 확인";
+"str_check_mnemonic" = "니모닉 확인";
+"str_with_mnemonics" = "전송 가능 지갑 (니모닉)";
+"str_with_private_key" = "전송 가능 지갑 (개인키)";
+"str_only_address" = "관찰용 지갑";
+"str_address" = "주소";
+"str_mnemonic" = "니모닉";
+"str_chainid" = "체인 아이디";
+"str_imported_date" = "등록 날짜";
+"str_imported_state" = "등록 상태";
+"str_address" = "주소";
+"str_key_path" = "HD 키 경로";
+"str_reward_recipient_address" = "이자 지급 주소";
+"str_copy_clipboard" = "클립보드로 복사";
+"str_mnemonic_phrase" = "니모닉 문구";
+"str_delete_mnemonic" = "니모닉 삭제";
+"str_add_wallet" = "지갑 추가";
+"str_import_mnemonic" = "니모닉 등록";
+"str_create_mnemonic" = "니모닉 생성";
+"str_derived_wallets" = "파생된 지갑수";
+"str_words_count" = "단어 수";
+"str_paste" = "붙여넣기";
+"str_path" = "HD 경로 :";
+"str_displayed_chain" = "보여지는 체인";
+"str_hidden_chain" = "숨겨진 체인";
+"str_qr_scan" = "QR 스캔";
 
 
 "btn_delegate" = "  위임 하기";
@@ -101,7 +130,13 @@
 "msg_promotion1" = "위임하고 이자받기";
 "msg_promotion2" = "코스모스테이션에 토큰을 위임하세요.\n스테이킹 보상을 받고 네트워크 생태계에 기여하세요.";
 "msg_history_with_validator" = "이 검증인과 거래내역";
-
+"msg_only_watchmode" = "현재 관찰모드 입니다.\n니모닉 또는 개인키를 등록 후 모든 서비스를 사용할 수 있습니다.";
+"msg_warn_privatekey" = "개인키는 현재 선택된 지갑을 복원할 때만 사용됩니다. 오프라인으로 별도 보관하는 것을 강력히 권장하며, 본인 외 접근이 불가능하도록 유의해주세요.\n\n개인키는 니모닉이 아닙니다. 니모닉이 있는 경우 반드시 니모닉을 백업하세요. 니모닉s으로 지갑을 만든 경우 파생된 지갑을 복원하려면 니모닉이 필요합니다.";
+"msg_warn_mnemonic" = "니모닉 분실은 자산 피해로 이어질 수 있습니다.\n오프라인으로 별도 보관하는 것을 강력히 권장하며, 본인 외 접근이 불가능하도록 유의해주세요.";
+"msg_warn_create_mnemonic" = "니모닉 분실은 자산 피해로 이어질 수 있습니다.\n오프라인으로 별도 보관하는 것을 강력히 권장하며, 본인 외 접근이 불가능하도록 유의해주세요.\n\n설정의 [니모닉 관리] 항목에서 확인 & 관리하실 수 있습니다.";
+"msg_enter_mnemonics" = "니모닉 문구를 입력하세요.";
+"msg_restore_pkey" = "개인 키를 입력하십시오.\n개인 키는 0x로 시작하는 66자리 문자열입니다.";
+"msg_import_address" = "관찰 모드를 사용하면 계정 상태를 확인할 수 있습니다.\트랜잭션을 활성화하려면 지갑에 올바른 니모닉 또는 개인키를 추가해야 합니다.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
@@ -265,12 +300,9 @@
 "sort_by_yield" = "이율로 정렬";
 "sort_by_amount" = "수량으로 정렬";
 "sort_by_value" = "금액으로 정렬";
-"with_mnemonics" = "전송 가능 지갑 (니모닉)";
-"with_private_key" = "전송 가능 지갑 (개인키)";
-"only_address" = "관찰용 지갑";
 "wallet_dash" = "내 지갑 ";
 "with_mnemonic" = "전송 가능 지갑";
-"only_address" = "관찰용 지갑";
+"str_only_address" = "관찰용 지갑";
 "check_mnemonic" = "니모닉 확인";
 "check_private_key" = "개인키 확인";
 "change_wallet_name" = "지갑 별칭 변경";

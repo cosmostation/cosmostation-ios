@@ -13,10 +13,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WalletDeriveViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="backBtn" destination="bTH-hI-ri0" id="5X5-0g-SZX"/>
+                <outlet property="btnAddWallet" destination="Cu9-nM-TCI" id="XL9-U1-Vlf"/>
                 <outlet property="derivedWalletTableView" destination="5h5-QG-NvX" id="7RJ-1q-mEZ"/>
                 <outlet property="mnemonicNameLabel" destination="l80-IG-HYS" id="N8y-AA-xE8"/>
                 <outlet property="pathCardView" destination="JPy-W7-6tb" id="j8E-VN-WaN"/>
                 <outlet property="pathLabel" destination="xa8-gy-ihg" id="5c3-2c-lkl"/>
+                <outlet property="pathTitle" destination="xa8-gy-ihg" id="8wX-ZD-wUX"/>
                 <outlet property="selectedHDPathLabel" destination="Syo-2g-U0Z" id="ktI-S3-0Ea"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

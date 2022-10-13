@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -17,6 +17,7 @@
                 <outlet property="btnPaste" destination="N4q-Q5-akk" id="Zy0-lf-Qzx"/>
                 <outlet property="btnScan" destination="DUU-tf-af4" id="iMT-Pe-eBu"/>
                 <outlet property="keyInputText" destination="PfV-KH-1UD" id="6h6-P1-Odx"/>
+                <outlet property="pkeyTitle" destination="0yj-tv-4fg" id="UCt-rL-VsD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -26,7 +27,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yj-tv-4fg">
-                    <rect key="frame" x="18" y="60" width="378" height="25.5"/>
+                    <rect key="frame" x="18" y="64" width="378" height="25.5"/>
                     <string key="text">Please enter your private key.
 The private key is a 66-digit string starting with 0x.</string>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="11"/>
@@ -34,7 +35,7 @@ The private key is a 66-digit string starting with 0x.</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Insert Private Key." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PfV-KH-1UD" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="97.5" width="382" height="50"/>
+                    <rect key="frame" x="16" y="101.5" width="382" height="50"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -45,7 +46,7 @@ The private key is a 66-digit string starting with 0x.</string>
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DUU-tf-af4">
-                    <rect key="frame" x="170" y="159.5" width="110" height="30"/>
+                    <rect key="frame" x="170" y="163.5" width="110" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="bBS-Nc-au1"/>
                         <constraint firstAttribute="height" constant="30" id="rY9-hP-oko"/>
@@ -71,7 +72,7 @@ The private key is a 66-digit string starting with 0x.</string>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N4q-Q5-akk">
-                    <rect key="frame" x="288" y="159.5" width="110" height="30"/>
+                    <rect key="frame" x="288" y="163.5" width="110" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="wVl-Vy-gjr"/>
                         <constraint firstAttribute="width" constant="110" id="xar-4c-2uE"/>
@@ -177,7 +178,7 @@ The private key is a 66-digit string starting with 0x.</string>
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

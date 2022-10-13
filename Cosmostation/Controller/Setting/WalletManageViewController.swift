@@ -39,7 +39,7 @@ class WalletManageViewController: BaseViewController, UITableViewDelegate, UITab
         self.navigationItem.title = NSLocalizedString("title_wallet_manage", comment: "")
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .done, target: self, action: #selector(onStartEdit))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("str_edit", comment: ""), style: .done, target: self, action: #selector(onStartEdit))
         
         self.displayChains = BaseData.instance.dpSortedChains()
         self.selectedChain = BaseData.instance.getRecentChain()

@@ -15,9 +15,17 @@ class ManageMnemonicCell: UITableViewCell {
     @IBOutlet weak var wordsCntLabel: UILabel!
     @IBOutlet weak var importedDataLabel: UILabel!
     
+    @IBOutlet weak var walletCntTitle: UILabel!
+    @IBOutlet weak var wordsCntTitle: UILabel!
+    @IBOutlet weak var importedDateTitle: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
+        
+        walletCntTitle.text = NSLocalizedString("str_derived_wallets", comment: "")
+        wordsCntTitle.text = NSLocalizedString("str_words_count", comment: "")
+        importedDateTitle.text = NSLocalizedString("str_imported_date", comment: "")
     }
     
     func onBindView(_ word: MWords) {

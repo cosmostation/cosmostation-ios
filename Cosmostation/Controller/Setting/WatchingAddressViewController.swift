@@ -10,10 +10,11 @@ import UIKit
 
 class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
     
+    @IBOutlet weak var addressTitle: UILabel!
     @IBOutlet weak var addAddressInputText: AddressInputTextField!
-    @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnScan: UIButton!
     @IBOutlet weak var btnPaste: UIButton!
+    @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     
     override func viewDidLoad() {
@@ -21,6 +22,12 @@ class WatchingAddressViewController: BaseViewController, QrScannerDelegate {
         addAddressInputText.delegate = self
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard (_:)))
         self.view.addGestureRecognizer(tapGesture)
+        
+        addressTitle.text = NSLocalizedString("msg_import_address", comment: "")
+        btnScan.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
+        btnPaste.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

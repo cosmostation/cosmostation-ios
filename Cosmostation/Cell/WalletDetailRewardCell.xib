@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -27,8 +27,8 @@
                         <rect key="frame" x="12" y="4" width="380" height="76"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Reward Recipient Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ois-tV-Wj3">
-                                <rect key="frame" x="16" y="12" width="141.5" height="14"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <rect key="frame" x="12" y="12" width="148" height="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -54,7 +54,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.61176470589999998" green="0.42352941179999998" blue="1" alpha="0.1524507705" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Ois-tV-Wj3" firstAttribute="leading" secondItem="8er-yM-E9m" secondAttribute="leading" constant="16" id="3ij-gs-PBz"/>
+                            <constraint firstItem="Ois-tV-Wj3" firstAttribute="leading" secondItem="8er-yM-E9m" secondAttribute="leading" constant="12" id="3ij-gs-PBz"/>
                             <constraint firstAttribute="trailing" secondItem="rhX-oJ-xDs" secondAttribute="trailing" constant="8" id="QQK-93-75H"/>
                             <constraint firstAttribute="bottom" secondItem="hsT-o1-h28" secondAttribute="bottom" constant="16" id="QkJ-J7-fki"/>
                             <constraint firstItem="rhX-oJ-xDs" firstAttribute="leading" secondItem="hsT-o1-h28" secondAttribute="trailing" constant="8" id="Vui-Fv-PcH"/>
@@ -94,6 +94,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="rewardAddressLabel" destination="hsT-o1-h28" id="TaW-lc-kmh"/>
+                <outlet property="rewardAddressTitle" destination="Ois-tV-Wj3" id="RXQ-Yi-TVF"/>
                 <outlet property="rootView" destination="8er-yM-E9m" id="CKh-TK-Zhd"/>
             </connections>
             <point key="canvasLocation" x="198.55072463768118" y="164.0625"/>
