@@ -10,7 +10,8 @@ import UIKit
 import Alamofire
 
 class OkOtherValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
+    @IBOutlet weak var okOtherValidatorLabel: UILabel!
     @IBOutlet weak var okOtherValidatorCnt: UILabel!
     @IBOutlet weak var okOtherValidatorTableView: UITableView!
 
@@ -41,6 +42,8 @@ class OkOtherValidatorViewController: BaseViewController, UITableViewDelegate, U
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         self.refresher.tintColor = UIColor(named: "_font05")
         self.okOtherValidatorTableView.addSubview(refresher)
+        
+        self.okOtherValidatorLabel.text = NSLocalizedString("str_validators", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {

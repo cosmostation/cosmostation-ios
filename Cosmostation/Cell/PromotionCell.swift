@@ -18,8 +18,8 @@ class PromotionCell: UITableViewCell {
         super.awakeFromNib()
         self.selectionStyle = .none
         
-        promotionTitleLabel.text = NSLocalizedString("title_promotion", comment: "")
-        promotionMsgLabel.text = NSLocalizedString("msg_promotion", comment: "")
+        promotionTitleLabel.text = NSLocalizedString("msg_promotion1", comment: "")
+        promotionMsgLabel.text = NSLocalizedString("msg_promotion2", comment: "")
     }
     
 }

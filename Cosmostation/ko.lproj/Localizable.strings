@@ -59,6 +59,16 @@
 "str_opensource" = "오픈소스 (Github)";
 "str_version" = "버전";
 "str_engineer" = "엔지니어 모드";
+"str_my_validator" = "내 검증인";
+"str_all_validator" = "모든 검증인";
+"str_other_validator" = "기타 노드";
+"str_validators" = "검증인";
+"str_select_validators" = "검증인 선택";
+"str_ok" = "확인";
+"str_cancel" = "취소";
+"str_next" = "다음";
+"str_multi_vote" = "멀티 투표";
+"str_vote" = "투표";
 
 
 "btn_delegate" = "  위임 하기";
@@ -84,8 +94,8 @@
 
 
 "msg_authz_description" = "다른 계정을 컨트롤 하실 수 있습니다.";
-"title_promotion" = "위임하고 이자받기";
-"msg_promotion" = "코스모스테이션에 토큰을 위임하세요.\n스테이킹 보상을 받고 네트워크 생태계에 기여하세요.";
+"msg_promotion1" = "위임하고 이자받기";
+"msg_promotion2" = "코스모스테이션에 토큰을 위임하세요.\n스테이킹 보상을 받고 네트워크 생태계에 기여하세요.";
 "msg_history_with_validator" = "이 검증인과 거래내역";
 
 

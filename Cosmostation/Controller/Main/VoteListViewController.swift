@@ -19,6 +19,8 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var loadingImg: LoadingImageView!
     @IBOutlet weak var layerMultiVote: UIView!
     @IBOutlet weak var layerMultiVoteAction: UIStackView!
+    @IBOutlet weak var btnCancel: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var btnMultiVote: UIButton!
     
     var refresher: UIRefreshControl!
@@ -48,6 +50,10 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.refresher.tintColor = UIColor(named: "_font05")
         self.voteTableView.addSubview(refresher)
         
+        self.btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        self.btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
+        self.btnMultiVote.setTitle(NSLocalizedString("str_multi_vote", comment: ""), for: .normal)
+        
         self.loadingImg.onStartAnimation()
         self.onFetchProposals()
     }
@@ -72,6 +78,8 @@ class VoteListViewController: BaseViewController, UITableViewDelegate, UITableVi
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_vote_list", comment: "")
         self.navigationItem.title = NSLocalizedString("title_vote_list", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func onUpdateViews() {

@@ -506,7 +506,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="E0Q-yY-xu0"/>
                     <connections>
+                        <outlet property="btnCancel" destination="qaP-ND-mpZ" id="Z2r-IB-3NQ"/>
                         <outlet property="btnMultiVote" destination="7J7-If-CgV" id="G08-wq-A05"/>
+                        <outlet property="btnNext" destination="Tzd-Xz-vPF" id="9CH-RE-Y2J"/>
                         <outlet property="emptyLabel" destination="a3x-sr-rPq" id="mph-OM-gFY"/>
                         <outlet property="layerMultiVote" destination="fv7-CO-xZV" id="LV0-Q6-Bs9"/>
                         <outlet property="layerMultiVoteAction" destination="boy-xT-bEE" id="ubc-h0-HYf"/>
@@ -936,6 +938,7 @@
                     <connections>
                         <outlet property="btnSort" destination="sOV-ev-ZWf" id="Fl2-tc-cdf"/>
                         <outlet property="myValidatorCnt" destination="N80-ZL-6PN" id="Y3O-g3-yfK"/>
+                        <outlet property="myValidatorLabel" destination="hyZ-Se-gEv" id="r7Z-1j-RT5"/>
                         <outlet property="myValidatorTableView" destination="eJb-4D-GcQ" id="jPV-Du-xgZ"/>
                         <outlet property="sortType" destination="mXH-Gm-gea" id="6Qc-e5-kFh"/>
                     </connections>
@@ -1065,6 +1068,7 @@
                     </view>
                     <connections>
                         <outlet property="allValidatorCnt" destination="ah0-Od-e9s" id="LuO-Q0-lEA"/>
+                        <outlet property="allValidatorLabel" destination="Noq-kv-SCF" id="fzR-ew-0p0"/>
                         <outlet property="allValidatorTableView" destination="yZa-Fs-rmW" id="Q1I-62-Ekr"/>
                         <outlet property="btnSort" destination="FRa-Om-pZH" id="i8i-sV-HHC"/>
                         <outlet property="sortType" destination="x7x-Kl-4dr" id="uX4-g2-GLT"/>
@@ -2602,6 +2606,7 @@
                     </view>
                     <connections>
                         <outlet property="otherValidatorCnt" destination="c2R-09-qJD" id="M4n-lq-HgO"/>
+                        <outlet property="otherValidatorLabel" destination="QKv-Xq-mSb" id="9bY-iC-rVA"/>
                         <outlet property="otherValidatorTableView" destination="EfH-ca-sl4" id="ylx-QA-Q9Q"/>
                     </connections>
                 </viewController>
@@ -2801,7 +2806,9 @@
                     </view>
                     <connections>
                         <outlet property="okMyValidatorCnt" destination="mPX-AV-fTY" id="sPd-mC-qZH"/>
+                        <outlet property="okMyValidatorLabel" destination="hVa-Wd-EkD" id="8U8-H4-W6V"/>
                         <outlet property="okMyValidatorTableView" destination="im5-Dp-kRW" id="0FQ-v9-wJC"/>
+                        <outlet property="voteBtn" destination="SuV-b3-34d" id="tjm-wg-IqP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6wB-5H-u5w" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2860,6 +2867,7 @@
                     </view>
                     <connections>
                         <outlet property="okTopValidatorCnt" destination="TtU-iN-vR0" id="oVB-sx-jcf"/>
+                        <outlet property="okTopValidatorLabel" destination="Em1-MK-LIZ" id="Pqm-Ua-Ygs"/>
                         <outlet property="okTopValidatorTableView" destination="rU3-Wu-foh" id="Usv-jp-3Gl"/>
                     </connections>
                 </viewController>
@@ -2919,6 +2927,7 @@
                     </view>
                     <connections>
                         <outlet property="okOtherValidatorCnt" destination="xci-WR-ws3" id="xh6-MH-QKG"/>
+                        <outlet property="okOtherValidatorLabel" destination="T6b-UA-wOH" id="tXC-Qo-RGW"/>
                         <outlet property="okOtherValidatorTableView" destination="YlL-fV-5KC" id="reV-bC-TZy"/>
                     </connections>
                 </viewController>

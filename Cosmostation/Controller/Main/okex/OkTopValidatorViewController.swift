@@ -11,6 +11,7 @@ import Alamofire
 
 class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var okTopValidatorLabel: UILabel!
     @IBOutlet weak var okTopValidatorCnt: UILabel!
     @IBOutlet weak var okTopValidatorTableView: UITableView!
 
@@ -41,6 +42,8 @@ class OkTopValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         self.refresher.tintColor = UIColor(named: "_font05")
         self.okTopValidatorTableView.addSubview(refresher)
+        
+        self.okTopValidatorLabel.text = NSLocalizedString("str_validators", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {

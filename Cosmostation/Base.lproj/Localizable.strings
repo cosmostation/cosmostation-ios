@@ -59,6 +59,16 @@
 "str_opensource" = "Open Source (Github)";
 "str_version" = "Version";
 "str_engineer" = "Engineer Mode";
+"str_my_validator" = "My Validator";
+"str_all_validator" = "Top Validator";
+"str_other_validator" = "Other Node";
+"str_validators" = "Validators";
+"str_select_validators" = "Select Validators";
+"str_ok" = "OK";
+"str_cancel" = "Cancel";
+"str_next" = "Next";
+"str_multi_vote" = "Multi Vote";
+"str_vote" = "Vote";
 
 
 "btn_delegate" = "  Delegate";
@@ -84,8 +94,8 @@
 
 
 "msg_authz_description" = "Perform transactions on behalf of another account";
-"title_promotion" = "START DELEGATING FOR REWARDS";
-"msg_promotion" = "Delegate your tokens with Cosmostation.\nStart earning staking rewards and contribute to the network ecosystem.";
+"msg_promotion1" = "START DELEGATING FOR REWARDS";
+"msg_promotion2" = "Delegate your tokens with Cosmostation.\nStart earning staking rewards and contribute to the network ecosystem.";
 "msg_history_with_validator" = "History with this validator";
 
 
