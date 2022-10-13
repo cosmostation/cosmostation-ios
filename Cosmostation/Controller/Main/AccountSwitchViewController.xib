@@ -30,12 +30,13 @@
                             <color key="textColor" name="_font05"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Gr-ym-3NM">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Gr-ym-3NM">
                             <rect key="frame" x="358" y="9" width="32" height="32"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="32" id="QS2-XP-TQc"/>
                                 <constraint firstAttribute="height" constant="32" id="aXR-bI-DF2"/>
                             </constraints>
+                            <color key="tintColor" name="_font05"/>
                             <state key="normal" image="btnIconClose"/>
                             <connections>
                                 <action selector="onClose:" destination="-1" eventType="touchUpInside" id="J6T-el-X4T"/>
