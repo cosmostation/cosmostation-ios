@@ -28,8 +28,9 @@
                                     <constraint firstAttribute="width" secondItem="Ksy-dK-RnA" secondAttribute="height" multiplier="303:41" id="LCU-Y9-nHW"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Perform transactions on behalf of another account " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okh-L5-pQ2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="okh-L5-pQ2">
                                 <rect key="frame" x="16" y="42" width="376" height="21"/>
+                                <string key="text">The authz (authorization) module enables one user (the granter) to authorize another (the grantee) to execute messages on their behalf</string>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
