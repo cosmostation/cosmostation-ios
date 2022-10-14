@@ -14,8 +14,8 @@ class ChainStarname: ChainConfig {
     var chainType = ChainType.IOV_MAIN
     var chainImg = UIImage(named: "chainStarname")
     var chainInfoImg = UIImage(named: "infoStarname")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_iov", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_iov", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_iov", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_iov", comment: "")
     var chainColor = UIColor(named: "starname")!
     var chainColorBG = UIColor(named: "starname_bg")!
     var chainTitle = "(Starname Mainnet)"

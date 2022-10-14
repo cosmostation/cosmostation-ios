@@ -14,6 +14,7 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var mnemonicNameLabel: UILabel!
     @IBOutlet weak var mnDisplayImg: UIButton!
     
+    @IBOutlet weak var mnemonicTitle: UILabel!
     @IBOutlet weak var mneminicLayer0: UIView!
     @IBOutlet weak var mneminicLayer1: UIView!
     @IBOutlet weak var mneminicLayer2: UIView!
@@ -63,6 +64,11 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var mnemonic22: UILabel!
     @IBOutlet weak var mnemonic23: UILabel!
     
+    @IBOutlet weak var menmonicWarnMsg: UILabel!
+    @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var btnCopy: UIButton!
+    @IBOutlet weak var btnAddWallet: UIButton!
+    
     var mnemonicLayers: [UIView] = [UIView]()
     var mnemonicLabels: [UILabel] = [UILabel]()
     
@@ -87,6 +93,12 @@ class MnemonicDetailViewController: BaseViewController, PasswordViewDelegate {
                                self.mnemonic20, self.mnemonic21, self.mnemonic22, self.mnemonic23]
         
         self.onRetriveMenmonic()
+        
+        mnemonicTitle.text = NSLocalizedString("str_mnemonic_phrase", comment: "")
+        menmonicWarnMsg.text = NSLocalizedString("msg_warn_mnemonic", comment: "")
+        btnDelete.setTitle(NSLocalizedString("str_delete_mnemonic", comment: ""), for: .normal)
+        btnCopy.setTitle(NSLocalizedString("str_copy_clipboard", comment: ""), for: .normal)
+        btnAddWallet.setTitle(NSLocalizedString("str_add_wallet", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

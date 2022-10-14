@@ -128,7 +128,7 @@ class AuthzDelegate1ViewController: BaseViewController, UITableViewDelegate, UIT
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        self.onShowToast(NSLocalizedString("str_authz_delegate_step_0", comment: ""))
+        self.onShowToast(NSLocalizedString("tx_authz_delegate_0", comment: ""))
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

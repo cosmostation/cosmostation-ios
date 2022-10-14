@@ -14,8 +14,8 @@ class ChainLum: ChainConfig {
     var chainType = ChainType.LUM_MAIN
     var chainImg = UIImage(named: "chainLum")
     var chainInfoImg = UIImage(named: "infoLum")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_lum", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_lum", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_lum", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_lum", comment: "")
     var chainColor = UIColor(named: "lum")!
     var chainColorBG = UIColor(named: "lum_bg")!
     var chainTitle = "(Lum Mainnet)"

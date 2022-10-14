@@ -16,9 +16,9 @@ class QRScanViewController: UIViewController {
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
-    
+    @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var scanGuide: UIImageView!
-    @IBOutlet weak var BtnCancel: UIButton!
+    
     private let supportedCodeTypes = [AVMetadataObject.ObjectType.upce,
                                       AVMetadataObject.ObjectType.code39,
                                       AVMetadataObject.ObjectType.code39Mod43,
@@ -63,7 +63,7 @@ class QRScanViewController: UIViewController {
             captureSession.startRunning()
             
             view.bringSubviewToFront(scanGuide)
-            view.bringSubviewToFront(BtnCancel)
+            view.bringSubviewToFront(btnCancel)
             
             qrCodeFrameView = UIView()
             
@@ -92,8 +92,7 @@ class QRScanViewController: UIViewController {
             return
         }
         
-        
-        
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

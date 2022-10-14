@@ -19,12 +19,22 @@ class WalletBnbCell: UITableViewCell {
     @IBOutlet weak var btnWalletConnect: UIButton!
     @IBOutlet weak var btnBep3: UIButton!
     
+    @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var lockedLabel: UILabel!
+    @IBOutlet weak var frozenLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
         availableAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         lockedAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         frozenAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        availableLabel.text = NSLocalizedString("str_available", comment: "")
+        lockedLabel.text = NSLocalizedString("str_locked", comment: "")
+        frozenLabel.text = NSLocalizedString("str_frozen", comment: "")
+        btnWalletConnect.setTitle(NSLocalizedString("btn_walletconnect", comment: ""), for: .normal)
+        btnBep3.setTitle(NSLocalizedString("btn_bepsend", comment: ""), for: .normal)
     }
     
     var actionWC: (() -> Void)? = nil

@@ -20,6 +20,12 @@ class RewardAddress4ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var newRewardAddress: UILabel!
     @IBOutlet weak var memoLabel: UILabel!
     
+    @IBOutlet weak var feeTitle: UILabel!
+    @IBOutlet weak var currentTitle: UILabel!
+    @IBOutlet weak var newTitle: UILabel!
+    @IBOutlet weak var memoTitle: UILabel!
+    @IBOutlet weak var recipientChangeMsg: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
 
     override func viewDidLoad() {
@@ -31,6 +37,13 @@ class RewardAddress4ViewController: BaseViewController, PasswordViewDelegate {
         
         btnBack.borderColor = UIColor.init(named: "_font05")
         btnConfirm.borderColor = UIColor.init(named: "photon")
+        feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
+        currentTitle.text = NSLocalizedString("str_current_reward_recipient_address", comment: "")
+        newTitle.text = NSLocalizedString("str_new_reward_recipient_address", comment: "")
+        memoTitle.text = NSLocalizedString("str_memo", comment: "")
+        recipientChangeMsg.text = NSLocalizedString("msg_recipient_change", comment: "")
+        btnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        btnConfirm.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

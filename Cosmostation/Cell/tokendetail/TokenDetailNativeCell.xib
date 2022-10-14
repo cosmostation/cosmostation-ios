@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -22,13 +22,13 @@
                         <rect key="frame" x="12" y="4" width="357" height="188"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="at7-er-Rcw">
-                                <rect key="frame" x="12" y="16" width="28" height="113.5"/>
+                                <rect key="frame" x="12" y="16" width="29.5" height="113.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Uk-pg-b32">
-                                <rect key="frame" x="332" y="64.5" width="13" height="17"/>
+                                <rect key="frame" x="329.5" y="62.5" width="15.5" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
@@ -47,13 +47,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="333" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bji-qW-XER">
-                                                <rect key="frame" x="0.0" y="2.5" width="46.5" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="2" width="50.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsI-2b-zqO">
-                                                <rect key="frame" x="321.5" y="2" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="320.5" y="1" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -72,13 +72,13 @@
                                         <rect key="frame" x="0.0" y="18" width="333" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Locked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9y-q3-20J">
-                                                <rect key="frame" x="0.0" y="-6.5" width="38" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="-7" width="41" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tL0-LP-4NA">
-                                                <rect key="frame" x="321.5" y="-7" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="320.5" y="-8" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -96,13 +96,13 @@
                                         <rect key="frame" x="0.0" y="18" width="333" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Frozen" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ntm-lP-5hc">
-                                                <rect key="frame" x="0.0" y="-6.5" width="36" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="-7" width="38.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF3-XS-azn">
-                                                <rect key="frame" x="321.5" y="-7" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="320.5" y="-8" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -120,13 +120,13 @@
                                         <rect key="frame" x="0.0" y="18" width="333" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Vesting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fkz-Gz-rlH">
-                                                <rect key="frame" x="0.0" y="-6.5" width="39.5" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="-7" width="42.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FgR-H4-hhN">
-                                                <rect key="frame" x="321.5" y="-7" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="320.5" y="-8" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -187,13 +187,18 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="hsI-2b-zqO" id="pZx-XI-1su"/>
+                <outlet property="availableLabel" destination="Bji-qW-XER" id="Zbg-gd-Q8Y"/>
                 <outlet property="fronzenAmount" destination="uF3-XS-azn" id="MU6-gu-b9h"/>
+                <outlet property="frozenLabel" destination="Ntm-lP-5hc" id="2di-8W-4lA"/>
                 <outlet property="frozenLayer" destination="NqO-oK-u5A" id="DxT-3Y-eCp"/>
                 <outlet property="lockedAmount" destination="tL0-LP-4NA" id="TBe-w6-ZX5"/>
+                <outlet property="lockedLabel" destination="q9y-q3-20J" id="UHZ-yi-HGm"/>
                 <outlet property="lockedLayer" destination="5NJ-09-RuO" id="CvJ-Mv-Of7"/>
                 <outlet property="rootCardView" destination="9Ln-uc-QRt" id="ReS-DR-zwr"/>
                 <outlet property="totalAmount" destination="2Uk-pg-b32" id="ioX-qW-oKw"/>
+                <outlet property="totalLabel" destination="at7-er-Rcw" id="V0V-Hv-nH2"/>
                 <outlet property="vestingAmount" destination="FgR-H4-hhN" id="5Zv-6c-Nbb"/>
+                <outlet property="vestingLabel" destination="Fkz-Gz-rlH" id="oP7-Ew-ZPD"/>
                 <outlet property="vestingLayer" destination="UdV-Me-p1w" id="gpG-HI-EYd"/>
             </connections>
             <point key="canvasLocation" x="181.8840579710145" y="163.39285714285714"/>

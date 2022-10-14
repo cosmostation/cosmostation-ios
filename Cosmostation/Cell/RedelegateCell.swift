@@ -18,6 +18,9 @@ class RedelegateCell: UITableViewCell {
     @IBOutlet weak var valPowerLabel: UILabel!
     @IBOutlet weak var valCommissionLabel: UILabel!
     
+    @IBOutlet weak var votingPowerTitleLabel: UILabel!
+    @IBOutlet weak var estAprTitleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         valImg.layer.borderWidth = 1
@@ -27,6 +30,8 @@ class RedelegateCell: UITableViewCell {
         valImg.clipsToBounds = true
         
         self.selectionStyle = .none
+        votingPowerTitleLabel.text = NSLocalizedString("str_voting_power", comment: "")
+        estAprTitleLabel.text = NSLocalizedString("str_est_apr", comment: "")
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

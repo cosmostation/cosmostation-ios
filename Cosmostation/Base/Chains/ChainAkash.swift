@@ -14,8 +14,8 @@ class ChainAkash: ChainConfig {
     var chainType = ChainType.AKASH_MAIN
     var chainImg = UIImage(named: "chainAkash")
     var chainInfoImg = UIImage(named: "infoAkash")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_akash", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_akash", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_akash", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_akash", comment: "")
     var chainColor = UIColor(named: "akash")!
     var chainColorBG = UIColor(named: "akash_bg")!
     var chainTitle = "(Akash Mainnet)"

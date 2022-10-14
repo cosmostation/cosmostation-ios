@@ -14,8 +14,8 @@ class ChainProvenance: ChainConfig {
     var chainType = ChainType.PROVENANCE_MAIN
     var chainImg = UIImage(named: "chainProvenance")
     var chainInfoImg = UIImage(named: "infoProvenance")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_provenance", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_provenance", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_provenance", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_provenance", comment: "")
     var chainColor = UIColor(named: "provenance")!
     var chainColorBG = UIColor(named: "provenance_bg")!
     var chainTitle = "(Provenance Mainnet)"

@@ -10,6 +10,8 @@ import UIKit
 
 class OtherValidatorCell: UITableViewCell {
     
+    @IBOutlet weak var votingPowerTitleLabel: UILabel!
+    @IBOutlet weak var estAprTitleLabel: UILabel!
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var validatorImg: UIImageView!
     @IBOutlet weak var revokedImg: UIImageView!
@@ -30,6 +32,8 @@ class OtherValidatorCell: UITableViewCell {
         
         powerLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         commissionLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        votingPowerTitleLabel.text = NSLocalizedString("str_voting_power", comment: "")
+        estAprTitleLabel.text = NSLocalizedString("str_est_apr", comment: "")
     }
     
     override func prepareForReuse() {

@@ -18,6 +18,8 @@ class WalletPriceCell: UITableViewCell {
     @IBOutlet weak var buySeparator: UIView!
     @IBOutlet weak var buyBtn: UIButton!
     
+    @IBOutlet weak var currentPriceLabel: UILabel!
+    
     @IBOutlet weak var noBuyConstraint: NSLayoutConstraint!
     @IBOutlet weak var buyConstraint: NSLayoutConstraint!
     
@@ -26,6 +28,8 @@ class WalletPriceCell: UITableViewCell {
         self.selectionStyle = .none
 //        perPrice.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_15_subTitle)
 //        updownPercent.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        currentPriceLabel.text = NSLocalizedString("str_current_price", comment: "")
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(onTapPrice))
         self.contentView.isUserInteractionEnabled = true
@@ -61,21 +65,21 @@ class WalletPriceCell: UITableViewCell {
         WDP.setPriceColor(updownPercent, changePrice)
         
         if (chainType == ChainType.COSMOS_MAIN) {
-            buyBtn.setTitle(NSLocalizedString("buy_atom", comment: ""), for: .normal)
+            buyBtn.setTitle(NSLocalizedString("btn_buy_atom", comment: ""), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false
             buyConstraint.priority = .defaultHigh
             noBuyConstraint.priority = .defaultLow
 
         } else if (chainType == ChainType.BINANCE_MAIN) {
-            buyBtn.setTitle(NSLocalizedString("buy_bnb", comment: ""), for: .normal)
+            buyBtn.setTitle(NSLocalizedString("btn_buy_bnb", comment: ""), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false
             buyConstraint.priority = .defaultHigh
             noBuyConstraint.priority = .defaultLow
 
         } else if (chainType == ChainType.KAVA_MAIN) {
-            buyBtn.setTitle(NSLocalizedString("buy_kava", comment: ""), for: .normal)
+            buyBtn.setTitle(NSLocalizedString("btn_buy_kava", comment: ""), for: .normal)
             buySeparator.isHidden = false
             buyBtn.isHidden = false
             buyConstraint.priority = .defaultHigh

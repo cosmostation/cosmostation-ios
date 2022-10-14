@@ -33,6 +33,8 @@ class Redelegate2ViewController: BaseViewController, UITableViewDelegate, UITabl
         
         btnBefore.borderColor = UIColor.init(named: "_font05")
         btnNext.borderColor = UIColor.init(named: "photon")
+        btnBefore.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -33,8 +33,8 @@ class WalletGuideCell: UITableViewCell {
     }
     
     func onBindCell(_ account: Account?, _ chainConfig: ChainConfig?) {
-        btn1Label.setTitle(NSLocalizedString("send_guide_btn_home", comment: ""), for: .normal)
-        btn2Label.setTitle(NSLocalizedString("send_guide_btn_blog", comment: ""), for: .normal)
+        btn1Label.setTitle(NSLocalizedString("guide_btn_home", comment: ""), for: .normal)
+        btn2Label.setTitle(NSLocalizedString("guide_btn_blog", comment: ""), for: .normal)
         
         if (account == nil || chainConfig == nil) { return }
         guideImg.image = chainConfig!.chainInfoImg

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MnemonicDetailViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="btnAddWallet" destination="eqz-Ed-CUx" id="a8Q-l0-9HM"/>
+                <outlet property="btnCopy" destination="S8m-Uc-ZO4" id="rlF-kT-n3A"/>
+                <outlet property="btnDelete" destination="Yk5-40-SZY" id="NjB-GY-09X"/>
+                <outlet property="menmonicWarnMsg" destination="mIE-3z-h4q" id="n1a-hP-6A2"/>
                 <outlet property="mnDisplayImg" destination="K56-aj-JCE" id="DkY-fe-Fhf"/>
                 <outlet property="mneminicLayer0" destination="50y-Vo-fPE" id="07r-wy-W9I"/>
                 <outlet property="mneminicLayer1" destination="qQ6-kD-RzN" id="z4G-SK-Shq"/>
@@ -62,6 +66,7 @@
                 <outlet property="mnemonic8" destination="kNW-dx-3M8" id="ljR-go-sqE"/>
                 <outlet property="mnemonic9" destination="X6Z-CT-AYZ" id="cGb-dn-QnL"/>
                 <outlet property="mnemonicNameLabel" destination="qCM-4U-baL" id="agu-d1-KNU"/>
+                <outlet property="mnemonicTitle" destination="Kmw-wb-vaJ" id="Obu-IB-FO4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -71,7 +76,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rtH-3e-Ci1" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="56" width="390" height="48"/>
+                    <rect key="frame" x="12" y="60" width="390" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mnemonic" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCM-4U-baL">
                             <rect key="frame" x="12" y="15.5" width="322" height="17.5"/>
@@ -121,7 +126,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X9o-GE-zN6" userLabel="Card View" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="112" width="390" height="220"/>
+                    <rect key="frame" x="12" y="116" width="390" height="220"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="EYL-j2-GVS">
                             <rect key="frame" x="8" y="8" width="374" height="200"/>

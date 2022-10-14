@@ -24,6 +24,13 @@ class WalletBaseChainCell: UITableViewCell {
     @IBOutlet weak var btnProposal: UIButton!
     @IBOutlet weak var btnWalletConnect: UIButton!
     
+    @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var vestingLabel: UILabel!
+    @IBOutlet weak var delegateLabel: UILabel!
+    @IBOutlet weak var unbondingLabel: UILabel!
+    @IBOutlet weak var rewardLabel: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -32,6 +39,15 @@ class WalletBaseChainCell: UITableViewCell {
         rewardAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         unbondingAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         vestingAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        availableLabel.text = NSLocalizedString("str_available", comment: "")
+        vestingLabel.text = NSLocalizedString("str_vesting", comment: "")
+        delegateLabel.text = NSLocalizedString("str_delegated", comment: "")
+        unbondingLabel.text = NSLocalizedString("str_unbonding", comment: "")
+        rewardLabel.text = NSLocalizedString("str_reward", comment: "")
+        btnDelegate.setTitle(NSLocalizedString("btn_delegate", comment: ""), for: .normal)
+        btnProposal.setTitle(NSLocalizedString("btn_governance", comment: ""), for: .normal)
+        btnWalletConnect.setTitle(NSLocalizedString("btn_walletconnect", comment: ""), for: .normal)
     }
     
     var actionDelegate: (() -> Void)? = nil

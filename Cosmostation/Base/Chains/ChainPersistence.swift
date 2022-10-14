@@ -14,8 +14,8 @@ class ChainPersistence: ChainConfig {
     var chainType = ChainType.PERSIS_MAIN
     var chainImg = UIImage(named: "chainPersistence")
     var chainInfoImg = UIImage(named: "infoPersistence")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_persis", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_persis", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_persis", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_persis", comment: "")
     var chainColor = UIColor(named: "persistence")!
     var chainColorBG = UIColor(named: "persistence_bg")!
     var chainTitle = "(Persistence Mainnet)"

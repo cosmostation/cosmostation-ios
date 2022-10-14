@@ -14,8 +14,8 @@ class ChainSentinel: ChainConfig {
     var chainType = ChainType.SENTINEL_MAIN
     var chainImg = UIImage(named: "chainSentinel")
     var chainInfoImg = UIImage(named: "infoSentinel")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_sentinel", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_sentinel", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_sentinel", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_sentinel", comment: "")
     var chainColor = UIColor(named: "sentinel")!
     var chainColorBG = UIColor(named: "sentinel_bg")!
     var chainTitle = "(Sentinel Mainnet)"

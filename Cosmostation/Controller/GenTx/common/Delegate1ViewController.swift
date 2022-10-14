@@ -11,6 +11,7 @@ import UIKit
 class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
     
     @IBOutlet weak var toDelegateAmountInput: AmountInputTextField!
+    @IBOutlet weak var availableTitle: UILabel!
     @IBOutlet weak var availableAmountLabel: UILabel!
     @IBOutlet weak var availableDenomLabel: UILabel!
     @IBOutlet weak var cancelBtn: UIButton!
@@ -58,6 +59,10 @@ class Delegate1ViewController: BaseViewController, UITextFieldDelegate {
         btn100.borderColor = UIColor.init(named: "_font05")
         btnHalf.borderColor = UIColor.init(named: "_font05")
         btnMax.borderColor = UIColor.init(named: "_font05")
+        
+        availableTitle.text = NSLocalizedString("str_max_delegable", comment: "")
+        cancelBtn.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        nextBtn.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -14,8 +14,8 @@ class ChainCertik: ChainConfig {
     var chainType = ChainType.CERTIK_MAIN
     var chainImg = UIImage(named: "chainCertik")
     var chainInfoImg = UIImage(named: "infoCertik")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_certik", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_certik", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_certik", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_certik", comment: "")
     var chainColor = UIColor(named: "certik")!
     var chainColorBG = UIColor(named: "certik_bg")!
     var chainTitle = "(Shentu Mainnet)"

@@ -21,6 +21,11 @@ class WalletOkCell: UITableViewCell {
     @IBOutlet weak var btnWithdraw: UIButton!
     @IBOutlet weak var btnVote: UIButton!
     @IBOutlet weak var btnProposal: UIButton!
+    
+    @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var lockedLabel: UILabel!
+    @IBOutlet weak var stakingLabel: UILabel!
+    @IBOutlet weak var unbondingLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +34,15 @@ class WalletOkCell: UITableViewCell {
         lockedAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         depositAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         withdrawAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        availableLabel.text = NSLocalizedString("str_available", comment: "")
+        lockedLabel.text = NSLocalizedString("str_locked", comment: "")
+        stakingLabel.text = NSLocalizedString("str_staking", comment: "")
+        unbondingLabel.text = NSLocalizedString("str_unbonding", comment: "")
+        btnDeposit.setTitle(NSLocalizedString("btn_deposit", comment: ""), for: .normal)
+        btnWithdraw.setTitle(NSLocalizedString("btn_withdraw", comment: ""), for: .normal)
+        btnVote.setTitle(NSLocalizedString("btn_vote_validator", comment: ""), for: .normal)
+        btnProposal.setTitle(NSLocalizedString("btn_governance", comment: ""), for: .normal)
     }
     
     var actionDeposit: (() -> Void)? = nil

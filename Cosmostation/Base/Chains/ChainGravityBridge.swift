@@ -14,8 +14,8 @@ class ChainGravityBridge: ChainConfig {
     var chainType = ChainType.GRAVITY_BRIDGE_MAIN
     var chainImg = UIImage(named: "chainGravityBridge")
     var chainInfoImg = UIImage(named: "infoGravityBridge")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_gbridge", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_gbridge", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_gbridge", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_gbridge", comment: "")
     var chainColor = UIColor(named: "gravitybridge")!
     var chainColorBG = UIColor(named: "gravitybridge_bg")!
     var chainTitle = "(G-Bridge Mainnet)"

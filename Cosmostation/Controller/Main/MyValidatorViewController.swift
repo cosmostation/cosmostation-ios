@@ -16,6 +16,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
     let EASY_MODE_CLAIM_REWARDS = 0
     let EASY_MODE_COMPONDING = 1
     
+    @IBOutlet weak var myValidatorLabel: UILabel!
     @IBOutlet weak var myValidatorCnt: UILabel!
     @IBOutlet weak var btnSort: UIView!
     @IBOutlet weak var sortType: UILabel!
@@ -45,6 +46,7 @@ class MyValidatorViewController: BaseViewController, UITableViewDelegate, UITabl
         self.refresher.tintColor = UIColor(named: "_font05")
         self.myValidatorTableView.addSubview(refresher)
         
+        self.myValidatorLabel.text = NSLocalizedString("str_validators", comment: "")
         let tap = UITapGestureRecognizer(target: self, action: #selector(onStartSort))
         self.btnSort.addGestureRecognizer(tap)
         self.getKey()

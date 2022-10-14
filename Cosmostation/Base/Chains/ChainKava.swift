@@ -14,8 +14,8 @@ class ChainKava: ChainConfig {
     var chainType = ChainType.KAVA_MAIN
     var chainImg = UIImage(named: "chainKava")
     var chainInfoImg = UIImage(named: "infoKava")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_kava", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_kava", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_kava", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_kava", comment: "")
     var chainColor = UIColor(named: "kava")!
     var chainColorBG = UIColor(named: "kava_bg")!
     var chainTitle = "(Kava Mainnet)"

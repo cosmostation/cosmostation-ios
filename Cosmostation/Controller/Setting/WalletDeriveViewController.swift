@@ -16,10 +16,12 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var mnemonicNameLabel: UILabel!
+    @IBOutlet weak var pathTitle: UILabel!
     @IBOutlet weak var pathLabel: UILabel!
     @IBOutlet weak var pathCardView: CardView!
     @IBOutlet weak var selectedHDPathLabel: UILabel!
     @IBOutlet weak var derivedWalletTableView: UITableView!
+    @IBOutlet weak var btnAddWallet: UIButton!
     
     var mPrivateKeyMode = false
     var mBackable = true
@@ -55,6 +57,9 @@ class WalletDeriveViewController: BaseViewController, UITableViewDelegate, UITab
             self.pathCardView.addGestureRecognizer(tapPath)
             self.getSeedFormWords()
         }
+        
+        pathTitle.text = NSLocalizedString("str_path", comment: "")
+        btnAddWallet.setTitle(NSLocalizedString("str_add_wallet", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

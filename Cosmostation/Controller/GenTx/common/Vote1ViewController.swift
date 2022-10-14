@@ -12,7 +12,7 @@ class Vote1ViewController: BaseViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var proposalsTableView: UITableView!
     @IBOutlet weak var btnCancel: UIButton!
-    @IBOutlet weak var bntNext: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
     
     var pageHolderVC: StepGenTxViewController!
     var toVoteProposals = Array<MintscanProposalDetail>()
@@ -34,12 +34,14 @@ class Vote1ViewController: BaseViewController, UITableViewDelegate, UITableViewD
         self.toVoteProposals = pageHolderVC.mProposals
         
         btnCancel.borderColor = UIColor.init(named: "_font05")
-        bntNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.init(named: "photon")
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         btnCancel.borderColor = UIColor.init(named: "_font05")
-        bntNext.borderColor = UIColor.init(named: "photon")
+        btnNext.borderColor = UIColor.init(named: "photon")
     }
     
     
@@ -72,7 +74,7 @@ class Vote1ViewController: BaseViewController, UITableViewDelegate, UITableViewD
     
     @IBAction func onClickCancel(_ sender: UIButton) {
         self.btnCancel.isUserInteractionEnabled = false
-        self.bntNext.isUserInteractionEnabled = false
+        self.btnNext.isUserInteractionEnabled = false
         pageHolderVC.onBeforePage()
     }
     
@@ -89,13 +91,13 @@ class Vote1ViewController: BaseViewController, UITableViewDelegate, UITableViewD
         }
         self.pageHolderVC.mProposals = self.toVoteProposals
         self.btnCancel.isUserInteractionEnabled = false
-        self.bntNext.isUserInteractionEnabled = false
+        self.btnNext.isUserInteractionEnabled = false
         pageHolderVC.onNextPage()
     }
     
     override func enableUserInteraction() {
         self.btnCancel.isUserInteractionEnabled = true
-        self.bntNext.isUserInteractionEnabled = true
+        self.btnNext.isUserInteractionEnabled = true
     }
 
 }

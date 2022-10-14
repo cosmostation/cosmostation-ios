@@ -14,8 +14,8 @@ class ChainBinance: ChainConfig {
     var chainType = ChainType.BINANCE_MAIN
     var chainImg = UIImage(named: "chainBinance")
     var chainInfoImg = UIImage(named: "infoBinanace")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_bnb", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_bnb", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_bnb", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_bnb", comment: "")
     var chainColor = UIColor(named: "binance")!
     var chainColorBG = UIColor(named: "binance_bg")!
     var chainTitle = "(Binance Mainnet)"

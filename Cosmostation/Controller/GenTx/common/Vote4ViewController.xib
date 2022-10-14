@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,12 +12,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Vote4ViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="feeTitle" destination="hXx-4p-taM" id="V5v-QZ-KPP"/>
                 <outlet property="mBtnBack" destination="2O9-v5-nLk" id="9nU-xg-sOM"/>
                 <outlet property="mBtnConfirm" destination="qVZ-Cf-YPg" id="VS6-OU-j7C"/>
                 <outlet property="mFeeAmount" destination="wKa-MX-o7g" id="Qk7-Ul-Eeg"/>
                 <outlet property="mFeeDenomTitle" destination="PuT-b2-aqk" id="RMF-Es-cHP"/>
                 <outlet property="mMemo" destination="VL2-oh-cnT" id="EA6-Ga-YD1"/>
                 <outlet property="mOpinion" destination="uxS-D0-MJm" id="lJT-IC-VkR"/>
+                <outlet property="memoTitle" destination="eJS-2e-H0E" id="9ge-e3-ITG"/>
+                <outlet property="opnionTitle" destination="s3A-Ru-zxS" id="RCQ-Zy-pgi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -80,7 +83,7 @@
                     </subviews>
                 </stackView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5c1-Df-kbV" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="54" width="382" height="300"/>
+                    <rect key="frame" x="16" y="58" width="382" height="300"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXx-4p-taM">
                             <rect key="frame" x="16" y="16" width="24.5" height="16.5"/>

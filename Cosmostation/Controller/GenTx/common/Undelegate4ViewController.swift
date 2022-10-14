@@ -22,6 +22,14 @@ class Undelegate4ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var beforeBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
     
+    @IBOutlet weak var undelegateTitle: UILabel!
+    @IBOutlet weak var feeTitle: UILabel!
+    @IBOutlet weak var undelegateFromTitle: UILabel!
+    @IBOutlet weak var deilveryTitle: UILabel!
+    @IBOutlet weak var memoTitle: UILabel!
+    @IBOutlet weak var undelegateMsgTitle: UILabel!
+    
+    
     var pageHolderVC: StepGenTxViewController!
 
     override func viewDidLoad() {
@@ -33,6 +41,14 @@ class Undelegate4ViewController: BaseViewController, PasswordViewDelegate {
         
         beforeBtn.borderColor = UIColor.init(named: "_font05")
         confirmBtn.borderColor = UIColor.init(named: "photon")
+        undelegateTitle.text = NSLocalizedString("str_undelegate_amount", comment: "")
+        feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
+        undelegateFromTitle.text = NSLocalizedString("str_undelegate_from", comment: "")
+        deilveryTitle.text = NSLocalizedString("str_expected_delivery", comment: "")
+        memoTitle.text = NSLocalizedString("str_memo", comment: "")
+        undelegateMsgTitle.text = NSLocalizedString("msg_undelegate", comment: "")
+        beforeBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

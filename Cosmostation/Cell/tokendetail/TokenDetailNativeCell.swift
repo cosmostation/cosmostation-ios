@@ -8,15 +8,10 @@
 
 import UIKit
 
-class TokenDetailNativeCell: TokenDetailCell {
-    
-//    @IBOutlet weak var tokenImg: UIImageView!
-//    @IBOutlet weak var tokenSymbol: UILabel!
-//    @IBOutlet weak var tokenDenom: UILabel!
+class TokenDetailNativeCell: UITableViewCell {
     
     @IBOutlet weak var rootCardView: CardView!
     @IBOutlet weak var totalAmount: UILabel!
-//    @IBOutlet weak var totalValue: UILabel!
     @IBOutlet weak var availableAmount: UILabel!
     @IBOutlet weak var lockedAmount: UILabel!
     @IBOutlet weak var fronzenAmount: UILabel!
@@ -25,6 +20,12 @@ class TokenDetailNativeCell: TokenDetailCell {
     @IBOutlet weak var lockedLayer: UIView!
     @IBOutlet weak var frozenLayer: UIView!
     @IBOutlet weak var vestingLayer: UIView!
+    
+    @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var availableLabel: UILabel!
+    @IBOutlet weak var lockedLabel: UILabel!
+    @IBOutlet weak var frozenLabel: UILabel!
+    @IBOutlet weak var vestingLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,6 +34,12 @@ class TokenDetailNativeCell: TokenDetailCell {
         lockedAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         fronzenAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         vestingAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        
+        totalLabel.text = NSLocalizedString("str_total", comment: "")
+        availableLabel.text = NSLocalizedString("str_available", comment: "")
+        lockedLabel.text = NSLocalizedString("str_locked", comment: "")
+        frozenLabel.text = NSLocalizedString("str_frozen", comment: "")
+        vestingLabel.text = NSLocalizedString("str_vesting", comment: "")
     }
     
     override func prepareForReuse() {

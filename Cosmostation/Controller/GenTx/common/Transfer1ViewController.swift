@@ -23,6 +23,12 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
     @IBOutlet weak var btnQrScan: UIButton!
     @IBOutlet weak var btnPaste: UIButton!
     
+    @IBOutlet weak var recipientChainTitle: UILabel!
+    @IBOutlet weak var recipientAddressTitle: UILabel!
+    @IBOutlet weak var ibcMsg1: UILabel!
+    @IBOutlet weak var ibcMsg2: UILabel!
+    @IBOutlet weak var ibcMsg3: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
     var toSendDenom: String!
     var recipientableChains = Array<ChainConfig>()
@@ -83,6 +89,17 @@ class Transfer1ViewController: BaseViewController, QrScannerDelegate, SBCardPopu
         btnWallet.borderColor = UIColor.init(named: "_font05")
         btnQrScan.borderColor = UIColor.init(named: "_font05")
         btnPaste.borderColor = UIColor.init(named: "_font05")
+        
+        recipientChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
+        recipientAddressTitle.text = NSLocalizedString("str_recipient_address", comment: "")
+        ibcMsg1.text = NSLocalizedString("msg_warn_ibc_send1", comment: "")
+        ibcMsg2.text = NSLocalizedString("msg_warn_ibc_send2", comment: "")
+        ibcMsg3.text = NSLocalizedString("msg_warn_ibc_send3", comment: "")
+        btnWallet.setTitle(NSLocalizedString("str_wallet2", comment: ""), for: .normal)
+        btnQrScan.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
+        btnPaste.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

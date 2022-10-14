@@ -14,8 +14,8 @@ class ChainTgrade: ChainConfig {
     var chainType = ChainType.TGRADE_MAIN
     var chainImg = UIImage(named: "chainTgrade")
     var chainInfoImg = UIImage(named: "infoTgrade")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_tgrade", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_tgrade", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_tgrade", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_tgrade", comment: "")
     var chainColor = UIColor(named: "tgrade")!
     var chainColorBG = UIColor(named: "tgrade_bg")!
     var chainTitle = "(Tgrade Mainnet)"

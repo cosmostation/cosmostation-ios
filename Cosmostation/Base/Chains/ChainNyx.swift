@@ -14,8 +14,8 @@ class ChainNyx: ChainConfig {
     var chainType = ChainType.NYX_MAIN
     var chainImg = UIImage(named: "chainNyx")
     var chainInfoImg = UIImage(named: "infoNyx")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_nyx", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_nyx", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_nyx", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_nyx", comment: "")
     var chainColor = UIColor(named: "nyx")!
     var chainColorBG = UIColor(named: "nyx_bg")!
     var chainTitle = "(Nyx Mainnet)"

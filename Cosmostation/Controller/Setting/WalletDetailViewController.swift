@@ -16,6 +16,7 @@ import NIO
 class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, PasswordViewDelegate {
     
     @IBOutlet weak var walletDetailListTableView: UITableView!
+    @IBOutlet weak var btnDelete: UIButton!
     @IBOutlet weak var btnImportPKey: UIButton!
     @IBOutlet weak var btnImportMnemonic: UIButton!
     @IBOutlet weak var btnCheckPkey: UIButton!
@@ -61,6 +62,12 @@ class WalletDetailViewController: BaseViewController, UITableViewDelegate, UITab
             self.btnCheckMnemonic.isHidden = true
             
         }
+        
+        btnDelete.setTitle(NSLocalizedString("str_delete_wallet", comment: ""), for: .normal)
+        btnImportPKey.setTitle(NSLocalizedString("str_import_privatekey", comment: ""), for: .normal)
+        btnImportMnemonic.setTitle(NSLocalizedString("str_import_mnemonic", comment: ""), for: .normal)
+        btnCheckPkey.setTitle(NSLocalizedString("str_check_privatekey", comment: ""), for: .normal)
+        btnCheckMnemonic.setTitle(NSLocalizedString("str_check_mnemonic", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -22,6 +22,12 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
     @IBOutlet weak var beforeBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
     
+    @IBOutlet weak var delegateAmountTitle: UILabel!
+    @IBOutlet weak var feeTitle: UILabel!
+    @IBOutlet weak var delegateToTitle: UILabel!
+    @IBOutlet weak var memoTitle: UILabel!
+    @IBOutlet weak var delegateWarnMsg: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
 
     override func viewDidLoad() {
@@ -33,6 +39,14 @@ class Delegate4ViewController: BaseViewController, PasswordViewDelegate, SBCardP
         
         beforeBtn.borderColor = UIColor.init(named: "_font05")
         confirmBtn.borderColor = UIColor.init(named: "photon")
+        
+        delegateAmountTitle.text = NSLocalizedString("str_delegate_amount", comment: "")
+        feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
+        delegateToTitle.text = NSLocalizedString("str_delegate_to", comment: "")
+        memoTitle.text = NSLocalizedString("str_memo", comment: "")
+        delegateWarnMsg.text = NSLocalizedString("msg_delegate", comment: "")
+        beforeBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

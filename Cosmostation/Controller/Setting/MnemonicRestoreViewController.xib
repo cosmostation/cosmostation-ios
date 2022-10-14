@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,6 +13,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MnemonicRestoreViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
                 <outlet property="actionView" destination="Fc7-1C-cXj" id="Zw0-lF-znt"/>
+                <outlet property="btnConfirm" destination="CY0-md-bag" id="Kvm-le-npb"/>
+                <outlet property="btnPaste" destination="f7p-Fe-DON" id="nxc-4i-aeo"/>
                 <outlet property="cardView" destination="JbH-87-EQi" id="pGv-On-US1"/>
                 <outlet property="keyboardView" destination="SUP-cc-VPr" id="p1h-Aq-fd7"/>
                 <outlet property="mNemonicInput0" destination="8c1-rK-TaY" id="8dH-mm-JH4"/>
@@ -63,6 +65,7 @@
                 <outlet property="mNemonicLayer7" destination="waS-4w-CJJ" id="Ci6-r0-dKk"/>
                 <outlet property="mNemonicLayer8" destination="HkS-QU-BXk" id="R1g-1N-PhN"/>
                 <outlet property="mNemonicLayer9" destination="lcL-Wu-VZs" id="2r9-bv-lBQ"/>
+                <outlet property="mnemonicTitle" destination="zGo-n6-iNI" id="ALW-OE-Evy"/>
                 <outlet property="suggestCollectionView" destination="2Sw-3C-FRd" id="j72-nJ-s5l"/>
                 <outlet property="topView" destination="w7x-Co-5wU" id="9Yi-hg-Azn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -75,7 +78,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w7x-Co-5wU">
-                    <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                    <rect key="frame" x="0.0" y="48" width="414" height="40"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconMnemonic" translatesAutoresizingMaskIntoConstraints="NO" id="fQq-y6-4kO">
                             <rect key="frame" x="16" y="7.5" width="25" height="25"/>
@@ -120,7 +123,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JbH-87-EQi" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="86" width="382" height="177"/>
+                    <rect key="frame" x="16" y="90" width="382" height="177"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="0HP-vk-HMU">
                             <rect key="frame" x="4" y="8" width="374" height="154"/>
@@ -923,7 +926,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="2Sw-3C-FRd">
-                    <rect key="frame" x="16" y="271" width="382" height="40"/>
+                    <rect key="frame" x="16" y="275" width="382" height="40"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="P2v-0Z-E6t"/>
@@ -1351,7 +1354,7 @@
             <color red="0.95300000905990601" green="0.097999997437000275" blue="0.3880000114440918" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="photon">
-            <color red="0.019999999552965164" green="0.82400000095367432" blue="0.86699998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.71799999475479126" blue="0.75300002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

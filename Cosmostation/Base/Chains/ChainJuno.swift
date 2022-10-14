@@ -14,8 +14,8 @@ class ChainJuno: ChainConfig {
     var chainType = ChainType.JUNO_MAIN
     var chainImg = UIImage(named: "chainJuno")
     var chainInfoImg = UIImage(named: "infoJuno")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_juno", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_juno", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_juno", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_juno", comment: "")
     var chainColor = UIColor(named: "juno")!
     var chainColorBG = UIColor(named: "juno_bg")!
     var chainTitle = "(Juno Mainnet)"

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,19 +29,19 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ISS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CRz-DV-al4">
-                                <rect key="frame" x="38" y="16" width="19" height="15"/>
+                                <rect key="frame" x="38" y="16" width="22.5" height="15"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                 <color key="textColor" name="station"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsv-cb-9Ts">
-                                <rect key="frame" x="522" y="-35" width="13" height="117"/>
+                                <rect key="frame" x="519.5" y="-33.5" width="15.5" height="114"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" name="_font05"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2GY-Fe-gwF">
-                                <rect key="frame" x="523.5" y="88" width="11.5" height="14.5"/>
+                                <rect key="frame" x="522.5" y="86.5" width="12.5" height="16"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                 <color key="textColor" name="_font04"/>
                                 <nil key="highlightedColor"/>
@@ -60,13 +60,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="523" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Available" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZV-aX-5HU">
-                                                <rect key="frame" x="0.0" y="2.5" width="46.5" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="2" width="50.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mdm-Sx-PcU">
-                                                <rect key="frame" x="511.5" y="2" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="510.5" y="1" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -85,13 +85,13 @@
                                         <rect key="frame" x="0.0" y="21" width="523" height="0.0"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Vesting (Delegable)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l9a-en-1xh">
-                                                <rect key="frame" x="0.0" y="-6.5" width="103.5" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="-7" width="111.5" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zP-FK-MJx">
-                                                <rect key="frame" x="511.5" y="-7" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="510.5" y="-8" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -109,13 +109,13 @@
                                         <rect key="frame" x="0.0" y="24" width="523" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delegated" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RB5-EV-iqF">
-                                                <rect key="frame" x="0.0" y="2.5" width="54" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="2" width="58" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dLo-5L-qei">
-                                                <rect key="frame" x="511.5" y="2" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="510.5" y="1" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -133,13 +133,13 @@
                                         <rect key="frame" x="0.0" y="48" width="523" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Unbonding" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd2-5g-BqU">
-                                                <rect key="frame" x="0.0" y="2.5" width="57.5" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="2" width="62" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U31-go-Sav">
-                                                <rect key="frame" x="511.5" y="2" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="510.5" y="1" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -157,13 +157,13 @@
                                         <rect key="frame" x="0.0" y="72" width="523" height="18"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="Staking Reward" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVz-b4-cj2">
-                                                <rect key="frame" x="0.0" y="2.5" width="81.5" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="2" width="88" height="14.5"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                 <color key="textColor" name="_font04"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UUc-fG-Fxc">
-                                                <rect key="frame" x="511.5" y="2" width="11.5" height="14.5"/>
+                                                <rect key="frame" x="510.5" y="1" width="12.5" height="16"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
                                                 <color key="textColor" name="_font05"/>
                                                 <nil key="highlightedColor"/>
@@ -321,16 +321,21 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="availableAmount" destination="Mdm-Sx-PcU" id="E47-1K-gZK"/>
+                <outlet property="availableLabel" destination="nZV-aX-5HU" id="S4j-5p-kMa"/>
                 <outlet property="btnDelegate" destination="1Vy-sS-Nhq" id="Xoi-Lw-z1X"/>
                 <outlet property="btnProposal" destination="ivi-rx-b5E" id="vg6-f7-2Qs"/>
                 <outlet property="btnWalletConnect" destination="KEi-pg-q22" id="dh2-SI-bf3"/>
                 <outlet property="cardRoot" destination="pxW-bD-Wvj" id="x99-GX-95m"/>
+                <outlet property="delegateLabel" destination="RB5-EV-iqF" id="hY6-CP-dLs"/>
                 <outlet property="delegatedAmount" destination="dLo-5L-qei" id="jVe-Fr-Ny6"/>
                 <outlet property="rewardAmount" destination="UUc-fG-Fxc" id="hzC-ng-JVa"/>
+                <outlet property="rewardLabel" destination="PVz-b4-cj2" id="Uhq-kC-kJA"/>
                 <outlet property="totalAmount" destination="bsv-cb-9Ts" id="tmh-O5-1Ti"/>
                 <outlet property="totalValue" destination="2GY-Fe-gwF" id="oEZ-ij-wVD"/>
                 <outlet property="unbondingAmount" destination="U31-go-Sav" id="E37-dF-OZH"/>
+                <outlet property="unbondingLabel" destination="Dd2-5g-BqU" id="Zip-iB-4xG"/>
                 <outlet property="vestingAmount" destination="1zP-FK-MJx" id="YnP-y2-zPf"/>
+                <outlet property="vestingLabel" destination="l9a-en-1xh" id="Yjf-oi-fbz"/>
                 <outlet property="vestingLayer" destination="bLT-Yc-RjX" id="crG-Zs-ZFe"/>
             </connections>
             <point key="canvasLocation" x="319.56521739130437" y="256.80803571428572"/>

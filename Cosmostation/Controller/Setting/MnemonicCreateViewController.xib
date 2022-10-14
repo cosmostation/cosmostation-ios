@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MnemonicCreateViewController" customModule="Cosmostation" customModuleProvider="target">
             <connections>
+                <outlet property="btnAddWallet" destination="dZ1-tB-5G6" id="AyX-li-SXh"/>
+                <outlet property="menmonicWarnMsg" destination="jm3-Pg-B7O" id="sMn-eJ-REK"/>
                 <outlet property="mnDisplayImg" destination="6lS-qQ-7BL" id="Okg-NI-Bfn"/>
                 <outlet property="mneminicLayer0" destination="U4f-tJ-ho8" id="HUb-lH-qKU"/>
                 <outlet property="mneminicLayer1" destination="Wqo-SW-LOu" id="dye-y3-cHB"/>
@@ -61,6 +63,7 @@
                 <outlet property="mnemonic7" destination="Rf8-pH-ZFU" id="thL-hE-hSF"/>
                 <outlet property="mnemonic8" destination="Spe-ea-MIq" id="hBy-Hr-GGB"/>
                 <outlet property="mnemonic9" destination="jvs-bD-uBA" id="Jwr-hR-aav"/>
+                <outlet property="mnemonicTitle" destination="Hrq-Xp-8Cq" id="YvW-mx-JoC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -70,7 +73,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yIC-ui-zeY" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="12" y="56" width="390" height="220"/>
+                    <rect key="frame" x="12" y="60" width="390" height="220"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="sY0-1T-Vk3">
                             <rect key="frame" x="8" y="8" width="374" height="200"/>

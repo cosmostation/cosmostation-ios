@@ -11,6 +11,7 @@ import UIKit
 class WalletDetailRewardCell: UITableViewCell {
 
     @IBOutlet weak var rootView: CardView!
+    @IBOutlet weak var rewardAddressTitle: UILabel!
     @IBOutlet weak var rewardAddressLabel: UILabel!
     
     var actionReward: (() -> Void)? = nil
@@ -30,5 +31,6 @@ class WalletDetailRewardCell: UITableViewCell {
         if (account.account_address != rewardAddress) {
             rewardAddressLabel.textColor = UIColor.init(hexString: "f31963")
         }
+        rewardAddressTitle.text = NSLocalizedString("str_reward_recipient_address", comment: "")
     }
 }

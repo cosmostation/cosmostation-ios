@@ -14,8 +14,8 @@ class ChainUmee: ChainConfig {
     var chainType = ChainType.UMEE_MAIN
     var chainImg = UIImage(named: "chainUmee")
     var chainInfoImg = UIImage(named: "infoUmee")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_umee", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_umee", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_umee", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_umee", comment: "")
     var chainColor = UIColor(named: "umee")!
     var chainColorBG = UIColor(named: "umee_bg")!
     var chainTitle = "(Umee Mainnet)"
