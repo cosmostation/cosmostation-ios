@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GranterEmptyViewCell: UITableViewCell {
+class GrantEmptyViewCell: UITableViewCell {
 
     @IBOutlet weak var rootCardView: CardView!
     

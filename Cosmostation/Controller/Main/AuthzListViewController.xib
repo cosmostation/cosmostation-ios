@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="authzTableView" destination="tUG-SX-UhH" id="t8s-mm-R5h"/>
                 <outlet property="loadingImg" destination="UqR-zg-gHs" id="aCG-ug-OaO"/>
+                <outlet property="rolSegmentedControl" destination="AKA-UB-1Ha" id="C6n-yC-E2C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,9 +23,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tUG-SX-UhH">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="763"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AKA-UB-1Ha">
+                    <rect key="frame" x="12" y="819" width="390" height="32"/>
+                    <segments>
+                        <segment title="Granted by me"/>
+                        <segment title="Granted to me"/>
+                    </segments>
+                </segmentedControl>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading_1" translatesAutoresizingMaskIntoConstraints="NO" id="UqR-zg-gHs" customClass="LoadingImageView" customModule="Cosmostation" customModuleProvider="target">
                     <rect key="frame" x="177" y="423" width="60" height="60"/>
                     <constraints>
@@ -36,12 +44,15 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="AKA-UB-1Ha" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="5Q9-ki-QOj"/>
                 <constraint firstItem="UqR-zg-gHs" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="Le1-UX-I97"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="tUG-SX-UhH" secondAttribute="trailing" id="MUf-Kd-doC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="AKA-UB-1Ha" secondAttribute="bottom" constant="12" id="Pu8-iL-Ghz"/>
                 <constraint firstItem="tUG-SX-UhH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XrN-Tp-irW"/>
+                <constraint firstItem="AKA-UB-1Ha" firstAttribute="top" secondItem="tUG-SX-UhH" secondAttribute="bottom" constant="12" id="iM8-on-vor"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="AKA-UB-1Ha" secondAttribute="trailing" constant="12" id="knE-n3-wlW"/>
                 <constraint firstItem="tUG-SX-UhH" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="lve-Ch-FvS"/>
                 <constraint firstItem="UqR-zg-gHs" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="v4H-pT-sMA"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="tUG-SX-UhH" secondAttribute="bottom" id="xEH-Rk-f66"/>
             </constraints>
             <point key="canvasLocation" x="139" y="154"/>
         </view>
