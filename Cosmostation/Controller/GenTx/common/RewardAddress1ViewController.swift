@@ -18,6 +18,7 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var btnScan: UIButton!
     @IBOutlet weak var btnPaste: UIButton!
+    @IBOutlet weak var currentRecipientTitle: UILabel!
     
     var pageHolderVC: StepGenTxViewController!
 
@@ -34,6 +35,12 @@ class RewardAddress1ViewController: BaseViewController, QrScannerDelegate {
         btnNext.borderColor = UIColor.init(named: "photon")
         btnScan.borderColor = UIColor.init(named: "_font05")
         btnPaste.borderColor = UIColor.init(named: "_font05")
+        
+        currentRecipientTitle.text = NSLocalizedString("str_current_reward_recipient_address", comment: "")
+        btnScan.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
+        btnPaste.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -18,14 +18,20 @@
                 <outlet property="expectedAmountTitle" destination="8pI-Kb-zGW" id="Wm8-dx-19B"/>
                 <outlet property="expectedDenomLabel" destination="S67-J2-TTF" id="Okv-1I-wzb"/>
                 <outlet property="expectedSeparator" destination="0UH-px-6hI" id="3bQ-Qi-mP5"/>
+                <outlet property="expectedTitle" destination="8pI-Kb-zGW" id="LDG-2m-zRP"/>
                 <outlet property="feeAmountLabel" destination="vJr-5U-GVQ" id="dn5-Of-FGU"/>
                 <outlet property="feeDenomLabel" destination="0wW-TF-OhB" id="qWo-BX-Crx"/>
+                <outlet property="feeTitle" destination="zRg-k5-0o2" id="n3l-Da-hvU"/>
                 <outlet property="fromValidatorLabel" destination="cDa-OI-fd9" id="iop-fn-nuY"/>
                 <outlet property="memoLabel" destination="0jl-2R-inv" id="FB3-Js-0E5"/>
+                <outlet property="memoTitle" destination="JCO-Dx-wE6" id="PHD-A9-xB4"/>
+                <outlet property="reawrdAmountTitle" destination="XDm-vf-VFq" id="odj-bk-4kN"/>
                 <outlet property="recipientLabel" destination="WzT-Lg-QlX" id="x4M-pF-ZV6"/>
+                <outlet property="recipientTitle" destination="4bM-47-Ofh" id="cXy-Wn-BBf"/>
                 <outlet property="recipientTitleLabel" destination="4bM-47-Ofh" id="Upm-X3-B9Y"/>
                 <outlet property="rewardAmoutLaebl" destination="paL-LT-l0N" id="S9K-NG-Mwh"/>
                 <outlet property="rewardDenomLabel" destination="KcS-1R-2ed" id="fpn-ad-yMf"/>
+                <outlet property="rewardFromTitle" destination="Iqd-on-JHc" id="Of1-ON-Kua"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -35,7 +41,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35k-dL-Rrm" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="54" width="382" height="380"/>
+                    <rect key="frame" x="16" y="58" width="382" height="380"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDm-vf-VFq">
                             <rect key="frame" x="16" y="16" width="100" height="16.5"/>

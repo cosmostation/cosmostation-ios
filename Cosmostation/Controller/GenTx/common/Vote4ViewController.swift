@@ -19,6 +19,10 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var mBtnBack: UIButton!
     @IBOutlet weak var mBtnConfirm: UIButton!
     
+    @IBOutlet weak var feeTitle: UILabel!
+    @IBOutlet weak var opnionTitle: UILabel!
+    @IBOutlet weak var memoTitle: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
 
     override func viewDidLoad() {
@@ -30,6 +34,11 @@ class Vote4ViewController: BaseViewController, PasswordViewDelegate {
         
         mBtnBack.borderColor = UIColor.init(named: "_font05")
         mBtnConfirm.borderColor = UIColor.init(named: "photon")
+        feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
+        opnionTitle.text = NSLocalizedString("str_my_opinion", comment: "")
+        memoTitle.text = NSLocalizedString("str_memo", comment: "")
+        mBtnBack.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        mBtnConfirm.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

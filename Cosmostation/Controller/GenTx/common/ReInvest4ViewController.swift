@@ -25,6 +25,13 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
     
+    @IBOutlet weak var rewardAmountTitle: UILabel!
+    @IBOutlet weak var feeTitle: UILabel!
+    @IBOutlet weak var validatorTitle: UILabel!
+    @IBOutlet weak var currentDelegateTitle: UILabel!
+    @IBOutlet weak var expectedDelegateTitle: UILabel!
+    @IBOutlet weak var memoTitle: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
 
     override func viewDidLoad() {
@@ -36,6 +43,14 @@ class ReInvest4ViewController: BaseViewController, PasswordViewDelegate {
         
         backBtn.borderColor = UIColor.init(named: "_font05")
         confirmBtn.borderColor = UIColor.init(named: "photon")
+        rewardAmountTitle.text = NSLocalizedString("str_reward_amount", comment: "")
+        feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
+        validatorTitle.text = NSLocalizedString("str_validator", comment: "")
+        currentDelegateTitle.text = NSLocalizedString("str_current_delegate_amount", comment: "")
+        expectedDelegateTitle.text = NSLocalizedString("str_expected_delegate_amount", comment: "")
+        memoTitle.text = NSLocalizedString("str_memo", comment: "")
+        backBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

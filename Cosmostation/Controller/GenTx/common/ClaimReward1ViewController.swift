@@ -23,6 +23,11 @@ class ClaimReward1ViewController: BaseViewController {
     @IBOutlet weak var rewardToAddressTitle: UILabel!
     @IBOutlet weak var rewardToAddressLabel: UILabel!
     
+    @IBOutlet weak var rewardAmountTitle: UILabel!
+    @IBOutlet weak var rewardFromTitle: UILabel!
+    @IBOutlet weak var rewardAddressTitle: UILabel!
+    @IBOutlet weak var rewardMsgTitle: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
     var mFetchCnt = 0
 
@@ -43,6 +48,12 @@ class ClaimReward1ViewController: BaseViewController {
         
         cancelBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
+        rewardAmountTitle.text = NSLocalizedString("str_reward_amount", comment: "")
+        rewardFromTitle.text = NSLocalizedString("str_reward_from", comment: "")
+        rewardAddressTitle.text = NSLocalizedString("str_reward_recipient_address", comment: "")
+        rewardMsgTitle.text = NSLocalizedString("msg_reward", comment: "")
+        cancelBtn.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        nextBtn.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

@@ -68,6 +68,7 @@
 "str_cancel" = "Cancel";
 "str_confirm" = "Confirm";
 "str_next" = "Next";
+"str_back" = "Back";
 "str_multi_vote" = "Multi Vote";
 "str_vote" = "Vote";
 "str_total" = "Total";
@@ -104,9 +105,41 @@
 "str_qr_scan" = "QR Scan";
 "str_switch_wallet" = "Switch Wallet";
 "str_edit_token_list" = "Edit Token List";
+"str_wallet2" = "My Wallet";
+"str_recipient_chain" = "Recipient Chain";
+"str_recipient_address" = "Recipient Address";
+"str_max_availabe" = "Max Available :";
+"str_max_delegable" = "Max Delegable :";
+"str_max_undelegable" = "Max Undelegable :";
+"str_max_redelegable" = "Max Redelegable :";
+"str_tx_fee" = "Tx Fee";
+"str_send_amount" = "Send Amount";
+"str_current_availabe" = "Current Amount";
+"str_remianing_availabe" = "Reminaing Amount";
+"str_memo" = "Memo";
+"str_delegate_amount" = "Delegate Amount";
+"str_delegate_to" = "Delegate To";
+"str_undelegate_amount" = "Undelegate Amount";
+"str_undelegate_from" = "Undelegate From";
+"str_expected_delivery" = "Expected Delivery";
+"str_redelegate_amount" = "Redelegate Amount";
+"str_redelegate_from" = "Redelegate From";
+"str_redelegate_to" = "Redelegate To";
+"str_reward_amount" = "Reward Amount";
+"str_reward_from" = "Reward From";
+"str_expected_amount" = "Expected Admout";
+"str_validator" = "Validator";
+"str_current_delegate_amount" = "Current Delegation";
+"str_expected_delegate_amount" = "Expected Delegation";
+"str_current_reward_recipient_address" = "Current Reward Recipient Address";
+"str_new_reward_recipient_address" = "New Reward Recipient Address";
+"str_my_opinion" = "My Opinion";
+"str_vote_direct" = "Direct vote to Validator";
+"str_vote_agent" = "Indirect vote with Agent";
 
 
 "btn_delegate" = "  Delegate";
+"btn_undelegate" = "  Undelegate";
 "btn_governance" = "  Governance";
 "btn_walletconnect" = "  Wallet Connect";
 "btn_nft" = "  NFT";
@@ -127,7 +160,6 @@
 "btn_buy_band" = "  Buy BAND";
 
 
-
 "msg_authz_description" = "Perform transactions on behalf of another account";
 "msg_promotion1" = "START DELEGATING FOR REWARDS";
 "msg_promotion2" = "Delegate your tokens with Cosmostation.\nStart earning staking rewards and contribute to the network ecosystem.";
@@ -140,6 +172,18 @@
 "msg_restore_pkey" = "Please enter your private key.\nThe private key is a 66-digit string starting with 0x.";
 "msg_import_address" = "With watch mode, you can check the status of an account.\nYou need to add the correct mnemonics or private key for the wallet to enable transactions.";
 "msg_edit_token_list" = "Select tokens to display";
+"msg_warn_ibc_send1" = "IBC Transfer";
+"msg_warn_ibc_send2" = "IBC transactions are NOT supported on centralized exchanges.";
+"msg_warn_ibc_send3" = "Transfer your asset back to its origin chain by IBC before sending it to a centralized exchange.";
+"msg_delegate" = "If you delegate to the validator you already delegated, the accumulated rewards will be automatically withdrawn and deposited into your available balance.";
+"msg_undelegate" = "Undelegate takes times (7~21 days depend on chain define) for delivery to your wallet, the accumulated rewards will be automatically withdrawn and deposited into your available balance, Immediately.";
+"msg_redelegate" = "For the certain period set by the system, you will not be able to redelegate from the validator you are redelegating to.";
+"msg_reward" = "Rewards are accumulated each block.\nThe actual amount of rewards you receive may be equal to or greater than what is displayed now.";
+"msg_recipient_change" = "You can change reward recipient address. After change this, every claimed rewards are going to changed address. Please confirm you have full authority with to change address.";
+"msg_htlc_swap_progress_0" = "1/4 Broadcasting BEP3 send Tx from sending chain.";
+"msg_htlc_swap_progress_1" = "2/4 Confirming swapid.";
+"msg_htlc_swap_progress_2" = "3/4 Broadcasting BEP3 claim Tx on receiving chain.";
+"msg_htlc_swap_progress_3" = "4/4 Confirming all Tx on each chain.";
 
 
 "guide_title_cosmos" = "COSMOS HUB";
@@ -244,6 +288,72 @@
 "guide_btn_blog" = "Official Blog";
 
 
+"tx_set_memo" = "Insert memo (optional)";
+"tx_set_fee" = "Select tx fee";
+"tx_set_confirm" = "Check transfer detail";
+"tx_send_0" = "Enter recipient information";
+"tx_send_1" = "Enter to send amount";
+"tx_delegate_0" = "Enter delegation amount";
+"tx_undelegate_0" = "Enter undelegation amount";
+"tx_redelegate_0" = "Enter redelegation amount";
+"tx_redelegate_1" = "Select validator redelegate";
+"tx_claim_staking_reward_0" = "Check your rewards detail";
+"tx_change_reward_address_0" = "Insert address to receive reward";
+"tx_compounding_0" = "Check reward for compounding";
+"tx_vote_0" = "Select your Opinion";
+"tx_create_cdp_0" = "Deposit collateral to borrow USDX";
+"tx_deposit_cdp_0" = "Enter deposit amount";
+"tx_withdraw_cdp_0" = "Enter withdrawal amount";
+"tx_drawdebt_cdp_0" = "Enter loan amount";
+"tx_repayt_cdp_0" = "Enter repayment amount";
+"tx_deposit_hardpool_0" = "Enter deposit amount to supply";
+"tx_withdraw_hardpool_0" = "Enter hard pool withdrawal amount";
+"tx_borrow_hardpool_0" = "Enter borrow amount";
+"tx_repay_hardpool_0" = "Enter repay amount";
+"tx_claim_incentive_0" = "Check your incentive";
+"tx_bep_swap_0" = "Select Destination Chain";
+"tx_bep_swap_1" = "Select Recipient Account";
+"tx_ok_stake_deposit_0" = "Insert amount to staking";
+"tx_ok_stake_withdraw_0" = "Insert amount to unbonding";
+"tx_ok_direct_vote_0" = "Select validator to vote";
+"tx_starname_register_domain_0" = "Insert starname and type";
+"tx_starname_register_account_0" = "Insert starname you want";
+"tx_starname_register_account_1" = "Insert your address to connect";
+"tx_starname_delete_starname_0" = "Confirm your starname to delete";
+"tx_starname_renew_starname_0" = "Confirm your starname to renew";
+"tx_starname_replace_starname_0" = "Insert your address to connect";
+"tx_osmosis_lock_0" = "Insert amount to lock";
+"tx_osmosis_begin_unbonding_0" = "Insert amount to unbonding";
+"tx_osmosis_unlock_0" = "Insert amount to unlock";
+"tx_sif_add_lp_0" = "Insert amount to deposit";
+"tx_sif_remove_lp_0" = "Insert amount to withdraw";
+"tx_desmos_create_profile_0" = "Insert Profile Information";
+"tx_desmos_account_link_0" = "Select Chain and Account to Link";
+"tx_swap_0" = "Insert amount to swap";
+"tx_join_pool_0" = "Insert amount to deposit";
+"tx_exit_pool_0" = "Insert amount to withdraw";
+"tx_issue_nft_0" = "Insert NFT Information";
+"tx_send_nft_0" = "Insert Recipient Address";
+"tx_issue_nft_denom_0" = "Insert Denom Information";
+"tx_authz_send_0" = "Insert recipient";
+"tx_authz_send_1" = "Enter to send amount";
+"tx_authz_claim_reward_0" = "Confirm your staking reward info";
+"tx_authz_claim_commission_0" = "Confirm your commission info";
+"tx_authz_vote_0" = "Select proposal for vote";
+"tx_authz_vote_1" = "Select opinions";
+"tx_authz_delegate_0" = "Select validator";
+"tx_authz_delegate_1" = "Enter delegation amount";
+"tx_authz_undelegate_0" = "Select validator";
+"tx_authz_undelegate_1" = "Enter undelegation amount";
+"tx_authz_redelegate_0" = "Select validator";
+"tx_authz_redelegate_1" = "Enter redelegation amount";
+
+
+
+
+
+
+
 "password_init1" = "Enter your new PIN";
 "password_init2" = "Verify your new PIN";
 "password_check" = "Enter PIN";
@@ -265,30 +375,29 @@
 "pkey_copied" = "PrivateKey copied\nClear your clipboard after paste it!";
 "pkey_safe_copied" = "PrivateKey copied safely";
 "wallet_delete_complete" = "Delete Completed!";
-"delegate_step_1" = "Enter delegation amount";
-"delegate_step_2" = "Insert memo (optional)";
-"delegate_step_3" = "Select transaction fee";
-"delegate_step_4" = "Check delegation detail";
-"undelegate_step_1" = "Enter undelegation amount";
-"undelegate_step_4" = "Check undelegation detail";
-"withdraw_single_step_1" = "Check your rewards detail";
-"withdraw_single_step_4" = "Check your information to claim rewards.";
-"send_step_1" = "Enter recipient information";
-"send_step_2" = "Enter to send amount";
-"send_step_3" = "Insert memo (optional)";
-"send_step_4" = "Select transaction fee";
-"send_step_5" = "Check transfer detail";
-"redelegate_step_1" = "Enter redelegation amount";
-"redelegate_step_2" = "Select validator redelegate";
-"redelegate_step_3" = "Insert memo (optional)";
-"redelegate_step_4" = "Select transaction fee";
-"redelegate_step_5" = "Check transaction detail";
-"reward_address_step_1" = "Insert address to receive reward";
-"reward_address_step_4" = "Check transaction detail";
-"reinvest_step_1" = "Check reward for compounding";
-"reinvest_step_4" = "Check transaction detail";
-"vote_step_1" = "Select your Opinion";
-"vote_step_4" = "Check transaction detail";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 "recipient_address" = "Recipient Address";
 "reward_claim_top_16" = "We claim rewards from up to max 16 validators in order of reward amount.";
 "add_mnemonic" = "Add Mnemonic";
@@ -498,193 +607,7 @@
 "tendermint_type" = "Tendermint Style";
 "ether_type" = "Ethereum Style";
 
-"creat_cdp_step_0" = "Deposit collateral to borrow USDX";
-"creat_cdp_step_1" = "Insert memo (optional)";
-"creat_cdp_step_2" = "Select transaction fee";
-"creat_cdp_step_3" = "Check transaction detail";
-"deposit_cdp_step_0" = "Enter deposit amount";
-"deposit_cdp_step_1" = "Insert memo (optional)";
-"deposit_cdp_step_2" = "Select transaction fee";
-"deposit_cdp_step_3" = "Check transaction detail";
-"withdraw_cdp_step_0" = "Enter withdrawal amount";
-"withdraw_cdp_step_1" = "Insert memo (optional)";
-"withdraw_cdp_step_2" = "Select transaction fee";
-"withdraw_cdp_step_3" = "Check transaction detail";
-"drawdebt_cdp_step_0" = "Enter loan amount";
-"drawdebt_cdp_step_1" = "Insert memo (optional)";
-"drawdebt_cdp_step_2" = "Select transaction fee";
-"drawdebt_cdp_step_3" = "Check transaction detail";
-"repay_cdp_step_0" = "Enter repayment amount";
-"repay_cdp_step_1" = "Insert memo (optional)";
-"repay_cdp_step_2" = "Select transaction fee";
-"repay_cdp_step_3" = "Check transaction detail";
-"htlc_swap_step_0" = "Select Destination Chain";
-"htlc_swap_step_1" = "Select Recipient Account";
-"htlc_swap_step_2" = "Insert Amount to Send";
-"htlc_swap_step_3" = "Check Transactions Detail";
-"htlc_swap_progress_0" = "1/4 Broadcasting BEP3 send Tx from sending chain.";
-"htlc_swap_progress_1" = "2/4 Confirming swapid.";
-"htlc_swap_progress_2" = "3/4 Broadcasting BEP3 claim Tx on receiving chain.";
-"htlc_swap_progress_3" = "4/4 Confirming all Tx on each chain.";
 
-"deposit_hardpool_step_0" = "Enter deposit amount to supply";
-"deposit_hardpool_step_1" = "Insert memo (optional)";
-"deposit_hardpool_step_2" = "Select transaction fee";
-"deposit_hardpool_step_3" = "Check transaction detail";
-"withdraw_hardpool_step_0" = "Enter hard pool withdrawal amount";
-"withdraw_hardpool_step_1" = "Insert memo (optional)";
-"withdraw_hardpool_step_2" = "Select transaction fee";
-"withdraw_hardpool_step_3" = "Check transaction detail";
-"borrow_hardpool_step_0" = "Enter borrow amount";
-"borrow_hardpool_step_1" = "Insert memo (optional)";
-"borrow_hardpool_step_2" = "Select transaction fee";
-"borrow_hardpool_step_3" = "Check transaction detail";
-"repay_hardpool_step_0" = "Enter repay amount";
-"repay_hardpool_step_1" = "Insert memo (optional)";
-"repay_hardpool_step_2" = "Select transaction fee";
-"repay_hardpool_step_3" = "Check transaction detail";
-"claim_incentive_step_0" = "Select incentive claim option";
-"claim_incentive_step_0" = "Insert memo (optional)";
-"claim_incentive_step_0" = "Select transaction fee";
-"claim_incentive_step_0" = "Check transaction detail";
-
-"str_ok_stake_deposit_step_0" = "Insert amount to staking";
-"str_ok_stake_deposit_step_1" = "Insert memo (optional)";
-"str_ok_stake_deposit_step_2" = "Select transaction fee";
-"str_ok_stake_deposit_step_3" = "Check transaction detail";
-"str_ok_stake_withdraw_step_0" = "Insert amount to unbonding";
-"str_ok_stake_withdraw_step_1" = "Insert memo (optional)";
-"str_ok_stake_withdraw_step_2" = "Select transaction fee";
-"str_ok_stake_withdraw_step_3" = "Check transaction detail";
-"str_ok_direct_vote_0" = "Select validator to vote";
-"str_ok_direct_vote_1" = "Insert memo (optional)";
-"str_ok_direct_vote_2" = "Select transaction fee";
-"str_ok_direct_vote_3" = "Check transaction detail";
-"str_vote_direct" = "Direct vote to Validator";
-"str_vote_agent" = "Indirect vote with Agent";
-"str_starname_register_domain_step_0" = "Insert starname and type";
-"str_starname_register_domain_step_1" = "Insert memo (optional)";
-"str_starname_register_domain_step_2" = "Select transaction fee";
-"str_starname_register_domain_step_3" = "Check transaction detail";
-"str_starname_register_account_step_0" = "Insert starname you want";
-"str_starname_register_account_step_1" = "Insert your address to connect";
-"str_starname_register_account_step_2" = "Insert memo (optional)";
-"str_starname_register_account_step_3" = "Select transaction fee";
-"str_starname_register_account_step_4" = "Check transaction detail";
-"str_starname_delete_starname_step_0" = "Confirm your starname to delete";
-"str_starname_delete_starname_step_1" = "Insert memo (optional)";
-"str_starname_delete_starname_step_2" = "Select transaction fee";
-"str_starname_delete_starname_step_3" = "Check transaction detail";
-"str_starname_renew_starname_step_0" = "Confirm your starname to renew";
-"str_starname_renew_starname_step_1" = "Insert memo (optional)";
-"str_starname_renew_starname_step_2" = "Select transaction fee";
-"str_starname_renew_starname_step_3" = "Check transaction detail";
-"str_starname_replace_starname_step_0" = "Insert your address to connect";
-"str_starname_replace_starname_step_1" = "Insert memo (optional)";
-"str_starname_replace_starname_step_2" = "Select transaction fee";
-"str_starname_replace_starname_step_3" = "Check transaction detail";
-"str_swap_step_0" = "Insert amount to swap";
-"str_swap_step_1" = "Insert memo (optional)";
-"str_swap_step_2" = "Select transaction fee";
-"str_swap_step_3" = "Check transaction detail";
-"str_join_pool_step_0" = "Insert amount to deposit";
-"str_join_pool_step_1" = "Insert memo (optional)";
-"str_join_pool_step_2" = "Select transaction fee";
-"str_join_pool_step_3" = "Check transaction detail";
-"str_exit_pool_step_0" = "Insert amount to withdraw";
-"str_exit_pool_step_1" = "Insert memo (optional)";
-"str_exit_pool_step_2" = "Select transaction fee";
-"str_exit_pool_step_3" = "Check transaction detail";
-"claim_incentive_step_0" = "Check your incentive";
-"claim_incentive_step_1" = "Insert memo (optional)";
-"claim_incentive_step_2" = "Select transaction fee";
-"claim_incentive_step_3" = "Check transaction detail";
-"str_osmosis_lock_token_step_0" = "Insert amount to lock";
-"str_osmosis_lock_token_step_1" = "Insert memo (optional)";
-"str_osmosis_lock_token_step_2" = "Select transaction fee";
-"str_osmosis_lock_token_step_3" = "Check transaction detail";
-"str_osmosis_begin_unbonding_step_0" = "Insert amount to unbonding";
-"str_osmosis_begin_unbonding_step_1" = "Insert memo (optional)";
-"str_osmosis_begin_unbonding_step_2" = "Select transaction fee";
-"str_osmosis_begin_unbonding_step_3" = "Check transaction detail";
-"str_osmosis_unlock_token_step_0" = "Insert amount to unlock";
-"str_osmosis_unlock_token_step_1" = "Insert memo (optional)";
-"str_osmosis_unlock_token_step_2" = "Select transaction fee";
-"str_osmosis_unlock_token_step_3" = "Check transaction detail";
-"str_sif_add_lp_step_0" = "Insert amount to deposit";
-"str_sif_add_lp_step_1" = "Insert memo (optional)";
-"str_sif_add_lp_step_2" = "Select transaction fee";
-"str_sif_add_lp_step_3" = "Check transaction detail";
-"str_sif_remove_lp_step_0" = "Insert amount to withdraw";
-"str_sif_remove_lp_step_1" = "Insert memo (optional)";
-"str_sif_remove_lp_step_2" = "Select transaction fee";
-"str_sif_remove_lp_step_3" = "Check transaction detail";
-"str_sif_swap_step_0" = "Insert amount to swap";
-"str_sif_swap_step_1" = "Insert memo (optional)";
-"str_sif_swap_step_2" = "Select transaction fee";
-"str_sif_swap_step_3" = "Check transaction detail";
-"str_rizon_swap_step_0" = "Insert mnemonic for Hdac";
-"str_rizon_swap_step_1" = "Check transaction detail";
-"str_issue_nft_step_0" = "Insert NFT Information";
-"str_issue_nft_step_1" = "Insert memo (optional)";
-"str_issue_nft_step_2" = "Select transaction fee";
-"str_issue_nft_step_3" = "Check transaction detail";
-"str_send_nft_step_0" = "Insert Recipient Address";
-"str_send_nft_step_1" = "Insert memo (optional";
-"str_send_nft_step_2" = "Select transaction fee";
-"str_send_nft_step_3" = "Check transaction detail";
-"str_issue_nft_denom_step_0" = "Insert Denom Information";
-"str_issue_nft_denom_step_1" = "Insert memo (optional)";
-"str_issue_nft_denom_step_2" = "Select transaction fee";
-"str_issue_nft_denom_step_3" = "Check transaction detail";
-"str_create_profile_step_0" = "Insert Profile Information";
-"str_create_profile_step_1" = "Insert memo (optional)";
-"str_create_profile_step_2" = "Select transaction fee";
-"str_create_profile_step_3" = "Check transaction detail";
-"str_account_link_step_0" = "Select Chain and Account to Link";
-"str_account_link_step_1" = "Insert memo (optional)";
-"str_account_link_step_2" = "Select transaction fee";
-"str_account_link_step_3" = "Check transaction detail";
-
-"str_authz_reward_step_0" = "Confirm your staking reward info";
-"str_authz_reward_step_1" = "Insert memo (optional)";
-"str_authz_reward_step_2" = "Select transaction fee";
-"str_authz_reward_step_3" = "Check transaction detail";
-
-"str_authz_commission_step_0" = "Confirm your commission info";
-"str_authz_commission_step_1" = "Insert memo (optional)";
-"str_authz_commission_step_2" = "Select transaction fee";
-"str_authz_commission_step_3" = "Check transaction detail";
-
-"str_authz_vote_step_0" = "Select proposal for vote";
-"str_authz_vote_step_1" = "Select opinions";
-"str_authz_vote_step_2" = "Insert memo (optional)";
-"str_authz_vote_step_3" = "Select transaction fee";
-"str_authz_vote_step_4" = "Check transaction detail";
-
-"str_authz_delegate_step_0" = "Select validator";
-"str_authz_delegate_step_1" = "Insert amount to delegate";
-"str_authz_delegate_step_2" = "Insert memo (optional)";
-"str_authz_delegate_step_3" = "Select transaction fee";
-"str_authz_delegate_step_4" = "Check transaction detail";
-
-"str_authz_undelegate_step_0" = "Select validator";
-"str_authz_undelegate_step_1" = "Insert amount to undelegate";
-"str_authz_undelegate_step_2" = "Insert memo (optional)";
-"str_authz_undelegate_step_3" = "Select transaction fee";
-"str_authz_undelegate_step_4" = "Check transaction detail";
-
-"str_authz_redelegate_step_0" = "Select validator";
-"str_authz_redelegate_step_1" = "Insert amount to undelegate";
-"str_authz_redelegate_step_2" = "Insert memo (optional)";
-"str_authz_redelegate_step_3" = "Select transaction fee";
-"str_authz_redelegate_step_4" = "Check transaction detail";
-
-"str_authz_send_step_0" = "Insert recipient";
-"str_authz_send_step_1" = "Insert amount to send";
-"str_authz_send_step_2" = "Insert memo (optional)";
-"str_authz_send_step_3" = "Select transaction fee";
-"str_authz_send_step_4" = "Check transaction detail";
 
 "str_description_open_domain" = "Open type in which an account owner is the only entity that can perform actions on the account.";
 "str_description_closed_domain" = "Closed type in which the domain owner has control over accounts too.";

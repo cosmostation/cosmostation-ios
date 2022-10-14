@@ -11,6 +11,7 @@ import UIKit
 class Redelegate1ViewController: BaseViewController, UITextFieldDelegate {
     
     @IBOutlet weak var redelegateInputTextField: AmountInputTextField!
+    @IBOutlet weak var availableTitle: UILabel!
     @IBOutlet weak var availableAmountLabel: UILabel!
     @IBOutlet weak var availableDenomLabel: UILabel!
     @IBOutlet weak var btnCancel: UIButton!
@@ -52,6 +53,10 @@ class Redelegate1ViewController: BaseViewController, UITextFieldDelegate {
         btn100.borderColor = UIColor.init(named: "_font05")
         btnHalf.borderColor = UIColor.init(named: "_font05")
         btnMax.borderColor = UIColor.init(named: "_font05")
+        
+        availableTitle.text = NSLocalizedString("str_max_redelegable", comment: "")
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

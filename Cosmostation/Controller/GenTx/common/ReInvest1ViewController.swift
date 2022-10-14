@@ -22,8 +22,11 @@ class ReInvest1ViewController: BaseViewController {
     @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var nextBtn: UIButton!
     
+    @IBOutlet weak var rewardAmountTitle: UILabel!
+    @IBOutlet weak var validatorTitle: UILabel!
+    @IBOutlet weak var compoundingMsg: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
-    var mDpDecimal:Int16 = 6
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,11 @@ class ReInvest1ViewController: BaseViewController {
         
         cancelBtn.borderColor = UIColor.init(named: "_font05")
         nextBtn.borderColor = UIColor.init(named: "photon")
+        rewardAmountTitle.text = NSLocalizedString("str_reward_amount", comment: "")
+        validatorTitle.text = NSLocalizedString("str_validator", comment: "")
+        compoundingMsg.text = NSLocalizedString("msg_reward", comment: "")
+        cancelBtn.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        nextBtn.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

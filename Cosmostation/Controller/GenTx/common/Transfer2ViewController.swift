@@ -11,6 +11,7 @@ import UIKit
 class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
     
     @IBOutlet weak var mTargetAmountTextField: AmountInputTextField!
+    @IBOutlet weak var mAvailableTitle: UILabel!
     @IBOutlet weak var mAvailableAmountLabel: UILabel!
     @IBOutlet weak var mAvailableDenomLabel: UILabel!
     @IBOutlet weak var backBtn: UIButton!
@@ -80,6 +81,10 @@ class Transfer2ViewController: BaseViewController, UITextFieldDelegate{
         btn100.borderColor = UIColor.init(named: "_font05")
         btnHalf.borderColor = UIColor.init(named: "_font05")
         btnMax.borderColor = UIColor.init(named: "_font05")
+        
+        mAvailableTitle.text = NSLocalizedString("str_max_availabe", comment: "")
+        backBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        nextBtn.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

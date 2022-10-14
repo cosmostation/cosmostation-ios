@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,12 +14,18 @@
             <connections>
                 <outlet property="btnBefore" destination="2Bl-Lf-MUV" id="Gnz-RJ-OBb"/>
                 <outlet property="btnConfirm" destination="tJQ-Sd-0HB" id="w6h-SV-q1y"/>
+                <outlet property="feeTitle" destination="Wki-xj-82N" id="m39-I3-kRc"/>
+                <outlet property="memoTitle" destination="XsT-23-cOC" id="laX-kQ-085"/>
                 <outlet property="redelegateAmountDenom" destination="5C6-zR-BO1" id="6Yd-4l-Y6r"/>
                 <outlet property="redelegateAmountLabel" destination="JqD-b7-S6d" id="U3W-gf-6q7"/>
+                <outlet property="redelegateAmountTitle" destination="0fA-lU-7yk" id="pMy-oz-aEJ"/>
                 <outlet property="redelegateFeeDenom" destination="JOI-k8-6lL" id="BAr-4Z-MoP"/>
                 <outlet property="redelegateFeeLabel" destination="ytt-1w-jan" id="bkJ-uy-Chn"/>
+                <outlet property="redelegateFromTitle" destination="QcF-UZ-xCM" id="Se4-VP-SoE"/>
                 <outlet property="redelegateFromValLabel" destination="iX3-sa-Vg3" id="cXw-Ok-IlY"/>
                 <outlet property="redelegateMemoLabel" destination="VDm-GM-U7X" id="fkn-Hc-r9W"/>
+                <outlet property="redelegateMsg" destination="omN-KQ-agv" id="SMW-JZ-lDM"/>
+                <outlet property="redelegateToTitle" destination="Wf1-Hq-MAb" id="TWT-jy-4zm"/>
                 <outlet property="redelegateToValLabel" destination="lxG-eN-18B" id="obq-1d-dZr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -30,7 +36,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dcH-wP-Yep" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="54" width="382" height="280"/>
+                    <rect key="frame" x="16" y="58" width="382" height="280"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redelegate Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0fA-lU-7yk">
                             <rect key="frame" x="16" y="16" width="123" height="16.5"/>

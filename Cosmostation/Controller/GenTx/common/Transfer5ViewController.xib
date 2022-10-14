@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,17 +16,23 @@
                 <outlet property="availableValueLabel" destination="a18-v4-XJs" id="gWX-kz-bY1"/>
                 <outlet property="backBtn" destination="UiW-8U-S9m" id="M3b-HU-cQB"/>
                 <outlet property="confirmBtn" destination="4gM-2e-beR" id="KI8-oJ-NSz"/>
+                <outlet property="currentTitle" destination="Iaq-CO-YKc" id="6Mg-0N-j8H"/>
                 <outlet property="feeAmountLabel" destination="4L0-3G-yRo" id="hsY-3J-GzE"/>
                 <outlet property="feeDenomLabel" destination="SKF-Uz-BU9" id="RYs-83-Mzh"/>
+                <outlet property="feeTitle" destination="0QB-XG-cZR" id="Qca-bX-jrv"/>
                 <outlet property="feeValueLabel" destination="Oiz-2b-uyb" id="y3T-at-Utf"/>
                 <outlet property="mMemoLabel" destination="po2-Ep-x91" id="Iax-vc-2Rz"/>
+                <outlet property="memoTitle" destination="gdz-Er-s9z" id="B6O-Hj-Jhd"/>
                 <outlet property="recipientAddressLabel" destination="oaD-3e-LNX" id="JXT-kz-TxY"/>
                 <outlet property="recipientChainLabel" destination="9cZ-57-90O" id="hMV-0f-L06"/>
                 <outlet property="recipientChainLayer" destination="OQG-QA-P1s" id="RTp-GO-fPD"/>
+                <outlet property="recipientTitle" destination="wCx-ud-bnX" id="01E-0s-fnA"/>
                 <outlet property="remainAmountLabel" destination="tVX-L4-KLv" id="il8-AR-zLu"/>
                 <outlet property="remainDenomLabel" destination="KVG-of-iTP" id="Rag-Bg-Fcw"/>
                 <outlet property="remainValueLabel" destination="Zwc-XZ-8JA" id="MRE-Lh-BZl"/>
+                <outlet property="remainingTitle" destination="he8-WB-8ov" id="XpO-K6-1qp"/>
                 <outlet property="sendAmountLabel" destination="uXn-ht-lbk" id="Jb9-JR-gP4"/>
+                <outlet property="sendAmountTitle" destination="hhi-Ej-Zn9" id="jxL-wz-3UD"/>
                 <outlet property="sendDenomLabel" destination="Mru-sF-lpo" id="c0E-k3-1d3"/>
                 <outlet property="sendValueLabel" destination="wzi-gP-PFy" id="ACa-CH-Rez"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -38,7 +44,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yew-uP-0wl" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="54" width="382" height="346"/>
+                    <rect key="frame" x="16" y="58" width="382" height="346"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QB-XG-cZR">
                             <rect key="frame" x="16" y="16" width="24.5" height="16.5"/>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,11 +16,16 @@
                 <outlet property="btnPaste" destination="pK2-DU-T01" id="qD3-an-wqF"/>
                 <outlet property="btnQrScan" destination="Qfr-QY-Vxq" id="Vn9-4e-PTc"/>
                 <outlet property="btnWallet" destination="83F-R9-Wtc" id="n2o-Sy-qwm"/>
+                <outlet property="ibcMsg1" destination="Xzo-hh-X2V" id="aWP-QG-0v9"/>
+                <outlet property="ibcMsg2" destination="v8N-00-3zm" id="cks-6Q-eM0"/>
+                <outlet property="ibcMsg3" destination="gsb-Nw-hUl" id="aL9-iZ-VRq"/>
                 <outlet property="informationLayer" destination="J69-rE-yfD" id="E7i-9F-lee"/>
+                <outlet property="recipientAddressTitle" destination="WY5-i4-4RK" id="tQ0-2G-7n7"/>
                 <outlet property="recipientAddressinput" destination="Ff0-9U-jko" id="kf9-14-1iT"/>
                 <outlet property="recipientChainCard" destination="P8G-fX-rWu" id="xMe-Q2-wBh"/>
                 <outlet property="recipientChainImg" destination="qZU-Hz-Lq4" id="Dnd-Hw-ygz"/>
                 <outlet property="recipientChainLebel" destination="iIv-Dk-azP" id="Ldg-nY-b2h"/>
+                <outlet property="recipientChainTitle" destination="ncQ-pl-8jK" id="pHK-tw-Ep7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,13 +35,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Chain" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncQ-pl-8jK">
-                    <rect key="frame" x="16" y="54" width="99" height="16.5"/>
+                    <rect key="frame" x="16" y="58" width="99" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P8G-fX-rWu" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="78.5" width="382" height="46"/>
+                    <rect key="frame" x="16" y="82.5" width="382" height="46"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chainDefault" translatesAutoresizingMaskIntoConstraints="NO" id="qZU-Hz-Lq4">
                             <rect key="frame" x="6" y="3" width="40" height="40"/>
@@ -82,13 +87,13 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recipient Address" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WY5-i4-4RK">
-                    <rect key="frame" x="16" y="148.5" width="113" height="16.5"/>
+                    <rect key="frame" x="16" y="152.5" width="113" height="16.5"/>
                     <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                     <color key="textColor" name="_font04"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="insert *starname or recipient address" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ff0-9U-jko" customClass="AddressInputTextField" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="173" width="382" height="46"/>
+                    <rect key="frame" x="16" y="177" width="382" height="46"/>
                     <color key="backgroundColor" name="_font02"/>
                     <color key="tintColor" name="_font05"/>
                     <constraints>
@@ -99,7 +104,7 @@
                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="alphabet" returnKeyType="done" smartInsertDeleteType="no"/>
                 </textField>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="maP-c5-fEs">
-                    <rect key="frame" x="142" y="231" width="256" height="35"/>
+                    <rect key="frame" x="142" y="235" width="256" height="35"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83F-R9-Wtc">
                             <rect key="frame" x="0.0" y="0.0" width="80" height="35"/>
@@ -113,7 +118,7 @@
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.5"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="8"/>
@@ -139,7 +144,7 @@
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.5"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="8"/>
@@ -164,7 +169,7 @@
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                    <real key="value" value="1"/>
+                                    <real key="value" value="0.5"/>
                                 </userDefinedRuntimeAttribute>
                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                     <real key="value" value="8"/>

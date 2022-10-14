@@ -33,6 +33,14 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
     
+    @IBOutlet weak var feeTitle: UILabel!
+    @IBOutlet weak var sendAmountTitle: UILabel!
+    @IBOutlet weak var currentTitle: UILabel!
+    @IBOutlet weak var remainingTitle: UILabel!
+    @IBOutlet weak var recipientTitle: UILabel!
+    @IBOutlet weak var memoTitle: UILabel!
+    
+    
     var pageHolderVC: StepGenTxViewController!
     var divideDecimal:Int16 = 6
     var displayDecimal:Int16 = 6
@@ -46,6 +54,15 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         
         backBtn.borderColor = UIColor.init(named: "_font05")
         confirmBtn.borderColor = UIColor.init(named: "photon")
+        
+        feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
+        sendAmountTitle.text = NSLocalizedString("str_send_amount", comment: "")
+        currentTitle.text = NSLocalizedString("str_current_availabe", comment: "")
+        remainingTitle.text = NSLocalizedString("str_remianing_availabe", comment: "")
+        recipientTitle.text = NSLocalizedString("str_recipient_address", comment: "")
+        memoTitle.text = NSLocalizedString("str_memo", comment: "")
+        backBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
