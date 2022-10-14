@@ -37,9 +37,9 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
     @IBOutlet weak var sendAmountTitle: UILabel!
     @IBOutlet weak var currentTitle: UILabel!
     @IBOutlet weak var remainingTitle: UILabel!
+    @IBOutlet weak var recipientChainTitle: UILabel!
     @IBOutlet weak var recipientTitle: UILabel!
     @IBOutlet weak var memoTitle: UILabel!
-    
     
     var pageHolderVC: StepGenTxViewController!
     var divideDecimal:Int16 = 6
@@ -60,6 +60,7 @@ class Transfer5ViewController: BaseViewController, PasswordViewDelegate{
         currentTitle.text = NSLocalizedString("str_current_availabe", comment: "")
         remainingTitle.text = NSLocalizedString("str_remianing_availabe", comment: "")
         recipientTitle.text = NSLocalizedString("str_recipient_address", comment: "")
+        recipientChainTitle.text = NSLocalizedString("str_recipient_chain", comment: "")
         memoTitle.text = NSLocalizedString("str_memo", comment: "")
         backBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
         confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
