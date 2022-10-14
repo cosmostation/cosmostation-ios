@@ -44,7 +44,7 @@ class ChainUmee: ChainConfig {
     var wasmSupport = false
     var evmSupport = false
     var wcSupoort = false
-    var authzSupoort = false
+    var authzSupoort = true
     var grpcUrl = "lcd-umee-app.cosmostation.io"
     var grpcPort = 9090
     var lcdUrl = "https://lcd-umee-app.cosmostation.io/"

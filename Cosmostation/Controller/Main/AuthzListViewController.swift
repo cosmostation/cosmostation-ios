@@ -47,6 +47,8 @@ class AuthzListViewController: BaseViewController, UITableViewDelegate, UITableV
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_authz_list", comment: "")
         self.navigationItem.title = NSLocalizedString("title_authz_list", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     @objc func onFetchAuthz() {
