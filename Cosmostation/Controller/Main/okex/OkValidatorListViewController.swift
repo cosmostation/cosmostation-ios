@@ -54,6 +54,10 @@ class OkValidatorListViewController: BaseViewController {
                 validatorSegment.tintColor = chainConfig?.chainColor
             }
         }
+        
+        validatorSegment.setTitle(NSLocalizedString("str_my_validator", comment: ""), forSegmentAt: 0)
+        validatorSegment.setTitle(NSLocalizedString("str_all_validator", comment: ""), forSegmentAt: 1)
+        validatorSegment.setTitle(NSLocalizedString("str_other_validator", comment: ""), forSegmentAt: 2)
     }
     
     override func viewWillAppear(_ animated: Bool) {

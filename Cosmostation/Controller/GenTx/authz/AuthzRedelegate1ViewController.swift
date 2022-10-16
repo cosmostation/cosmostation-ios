@@ -129,7 +129,7 @@ class AuthzRedelegate1ViewController: BaseViewController, UITableViewDelegate, U
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        self.onShowToast(NSLocalizedString("str_authz_redelegate_step_0", comment: ""))
+        self.onShowToast(NSLocalizedString("tx_authz_redelegate_0", comment: ""))
     }
     
     

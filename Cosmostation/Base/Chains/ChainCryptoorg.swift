@@ -14,8 +14,8 @@ class ChainCryptoorg: ChainConfig {
     var chainType = ChainType.CRYPTO_MAIN
     var chainImg = UIImage(named: "chainCryptoorg")
     var chainInfoImg = UIImage(named: "infoCryptoorg")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_crypto", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_crypto", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_crypto", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_crypto", comment: "")
     var chainColor = UIColor(named: "cryptoorg")!
     var chainColorBG = UIColor(named: "cryptoorg_bg")!
     var chainTitle = "(Crypto.org Mainnet)"

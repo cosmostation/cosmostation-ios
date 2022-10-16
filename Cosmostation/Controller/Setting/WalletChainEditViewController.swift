@@ -13,6 +13,8 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
     @IBOutlet weak var displayingChainTableView: UITableView!
     @IBOutlet weak var hideChainTableView: UITableView!
     @IBOutlet weak var emptyListImg: UIImageView!
+    @IBOutlet weak var displayChainTitle: UILabel!
+    @IBOutlet weak var hiddenChainTitle: UILabel!
     
     var allChains = Array<ChainType>()
     var displayedChains = Array<ChainType>()
@@ -38,6 +40,8 @@ class WalletChainEditViewController: BaseViewController, UITableViewDelegate, UI
         hidedChains = BaseData.instance.userHideChains()
         
         BaseData.instance.setNeedRefresh(true)
+        displayChainTitle.text = NSLocalizedString("str_displayed_chain", comment: "")
+        hiddenChainTitle.text = NSLocalizedString("str_hidden_chain", comment: "")
     }
     
     override func viewWillAppear(_ animated: Bool) {

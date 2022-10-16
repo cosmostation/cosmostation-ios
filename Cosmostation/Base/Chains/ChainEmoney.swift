@@ -14,8 +14,8 @@ class ChainEmoney: ChainConfig {
     var chainType = ChainType.EMONEY_MAIN
     var chainImg = UIImage(named: "chainEmoney")
     var chainInfoImg = UIImage(named: "infoEmoney")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_emoney", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_emoney", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_emoney", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_emoney", comment: "")
     var chainColor = UIColor(named: "emoney")!
     var chainColorBG = UIColor(named: "emoney_bg")!
     var chainTitle = "(E-Money Mainnet)"

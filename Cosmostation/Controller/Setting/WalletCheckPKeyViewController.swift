@@ -19,6 +19,8 @@ class WalletCheckPKeyViewController: BaseViewController {
     @IBOutlet weak var keyCardView: CardView!
     @IBOutlet weak var keyLabel: UILabel!
     @IBOutlet weak var btnCopy: UIButton!
+    @IBOutlet weak var btnOk: UIButton!
+    @IBOutlet weak var pkeyGuideLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +28,10 @@ class WalletCheckPKeyViewController: BaseViewController {
         self.selectedChainConfig = ChainFactory.getChainConfig(selectedChainType)
         self.keyCardView.backgroundColor = selectedChainConfig.chainColorBG
         self.onRetriveKey()
+        
+        pkeyGuideLabel.text = NSLocalizedString("msg_warn_privatekey", comment: "")
+        btnCopy.setTitle(NSLocalizedString("str_copy_clipboard", comment: ""), for: .normal)
+        btnOk.setTitle(NSLocalizedString("str_ok", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

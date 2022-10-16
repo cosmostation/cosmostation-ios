@@ -14,8 +14,8 @@ class ChainBand: ChainConfig {
     var chainType = ChainType.BAND_MAIN
     var chainImg = UIImage(named: "chainBand")
     var chainInfoImg = UIImage(named: "infoBand")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_band", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_band", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_band", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_band", comment: "")
     var chainColor = UIColor(named: "band")!
     var chainColorBG = UIColor(named: "band_bg")!
     var chainTitle = "(Band Mainnet)"

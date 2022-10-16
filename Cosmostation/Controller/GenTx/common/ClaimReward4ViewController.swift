@@ -29,7 +29,14 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
     
     @IBOutlet weak var beforeBtn: UIButton!
     @IBOutlet weak var confirmBtn: UIButton!
-
+    
+    @IBOutlet weak var reawrdAmountTitle: UILabel!
+    @IBOutlet weak var feeTitle: UILabel!
+    @IBOutlet weak var rewardFromTitle: UILabel!
+    @IBOutlet weak var recipientTitle: UILabel!
+    @IBOutlet weak var memoTitle: UILabel!
+    @IBOutlet weak var expectedTitle: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
 
     override func viewDidLoad() {
@@ -44,6 +51,15 @@ class ClaimReward4ViewController: BaseViewController, PasswordViewDelegate {
         
         beforeBtn.borderColor = UIColor.init(named: "_font05")
         confirmBtn.borderColor = UIColor.init(named: "photon")
+        reawrdAmountTitle.text = NSLocalizedString("str_reward_amount", comment: "")
+        feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
+        rewardFromTitle.text = NSLocalizedString("str_reward_from", comment: "")
+        recipientTitle.text = NSLocalizedString("str_reward_recipient_address", comment: "")
+        memoTitle.text = NSLocalizedString("str_memo", comment: "")
+        expectedTitle.text = NSLocalizedString("str_expected_amount", comment: "")
+        beforeBtn.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        confirmBtn.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
+        
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

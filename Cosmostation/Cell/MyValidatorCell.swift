@@ -10,6 +10,10 @@ import UIKit
 
 class MyValidatorCell: UITableViewCell {
     
+    @IBOutlet weak var myDelegateTitleLabel: UILabel!
+    @IBOutlet weak var myUnbondingTitleLabel: UILabel!
+    @IBOutlet weak var myRewardTitleLabel: UILabel!
+    
     @IBOutlet weak var cardView: CardView!
     @IBOutlet weak var validatorImg: UIImageView!
     @IBOutlet weak var revokedImg: UIImageView!
@@ -32,6 +36,9 @@ class MyValidatorCell: UITableViewCell {
         myDelegatedAmoutLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         myUndelegatingAmountLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
         rewardAmoutLabel.font = UIFontMetrics(forTextStyle: .caption1).scaledFont(for: Font_12_caption1)
+        myDelegateTitleLabel.text = NSLocalizedString("str_my_delegation", comment: "")
+        myUnbondingTitleLabel.text = NSLocalizedString("str_my_unbonding", comment: "")
+        myRewardTitleLabel.text = NSLocalizedString("str_my_reward", comment: "")
     }
     
     override func prepareForReuse() {

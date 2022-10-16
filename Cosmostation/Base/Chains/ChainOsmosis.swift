@@ -14,8 +14,8 @@ class ChainOsmosis: ChainConfig {
     var chainType = ChainType.OSMOSIS_MAIN
     var chainImg = UIImage(named: "chainOsmosis")
     var chainInfoImg = UIImage(named: "infoOsmosis")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_osmosis", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_osmosis", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_osmosis", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_osmosis", comment: "")
     var chainColor = UIColor(named: "osmosis")!
     var chainColorBG = UIColor(named: "osmosis_bg")!
     var chainTitle = "(Osmosis Mainnet)"

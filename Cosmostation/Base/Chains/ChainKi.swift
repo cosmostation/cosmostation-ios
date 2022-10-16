@@ -14,8 +14,8 @@ class ChainKi: ChainConfig {
     var chainType = ChainType.KI_MAIN
     var chainImg = UIImage(named: "chainKi")
     var chainInfoImg = UIImage(named: "infoKi")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_ki", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_ki", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_ki", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_ki", comment: "")
     var chainColor = UIColor(named: "ki")!
     var chainColorBG = UIColor(named: "ki_bg")!
     var chainTitle = "(KiChain Mainnet)"

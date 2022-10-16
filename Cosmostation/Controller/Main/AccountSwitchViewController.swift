@@ -10,6 +10,7 @@ import UIKit
 
 class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var switchAccountTitle: UILabel!
     @IBOutlet weak var accountTableView: UITableView!
     
     var resultDelegate: AccountSwitchDelegate?
@@ -29,6 +30,8 @@ class AccountSwitchViewController: BaseViewController, UITableViewDelegate, UITa
         self.accountTableView.backgroundView?.addGestureRecognizer(dismissTap1)
         
         self.onRefechUserInfo()
+        
+        self.switchAccountTitle.text = NSLocalizedString("str_switch_wallet", comment: "")
     }
     
     override func viewWillDisappear(_ animated: Bool) {

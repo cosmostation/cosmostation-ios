@@ -11,8 +11,10 @@ import Alamofire
 
 class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var okMyValidatorLabel: UILabel!
     @IBOutlet weak var okMyValidatorCnt: UILabel!
     @IBOutlet weak var okMyValidatorTableView: UITableView!
+    @IBOutlet weak var voteBtn: UIButton!
     
     var mainTabVC: MainTabViewController!
     var refresher: UIRefreshControl!
@@ -40,6 +42,9 @@ class OkMyValidatorViewController: BaseViewController, UITableViewDelegate, UITa
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         self.refresher.tintColor = UIColor(named: "_font05")
         self.okMyValidatorTableView.addSubview(refresher)
+        
+        self.okMyValidatorLabel.text = NSLocalizedString("str_validators", comment: "")
+        self.voteBtn.setTitle(NSLocalizedString("str_select_validators", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

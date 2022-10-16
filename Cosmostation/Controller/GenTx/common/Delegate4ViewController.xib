@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,9 +14,14 @@
             <connections>
                 <outlet property="beforeBtn" destination="g3X-56-RtE" id="pjD-on-vuq"/>
                 <outlet property="confirmBtn" destination="e9L-Uf-T4j" id="n2i-Lm-psU"/>
+                <outlet property="delegateAmountTitle" destination="SjK-G5-tdZ" id="Ue3-Te-eDv"/>
+                <outlet property="delegateToTitle" destination="Wgx-kg-2Hp" id="bE2-BA-TJi"/>
+                <outlet property="delegateWarnMsg" destination="RdJ-jz-gii" id="Vbq-z6-2BT"/>
                 <outlet property="feeAmountDenom" destination="dHq-6q-0Vx" id="Ca4-x5-RLz"/>
                 <outlet property="feeAmountLabel" destination="FfT-Nb-0gv" id="bRh-2p-w5q"/>
+                <outlet property="feeTitle" destination="5vJ-dx-unP" id="jAo-It-NYW"/>
                 <outlet property="memoLabel" destination="JUb-7V-yAO" id="JiX-NU-vz0"/>
+                <outlet property="memoTitle" destination="VXM-zl-SY5" id="Td8-gi-IWa"/>
                 <outlet property="targetValidatorLabel" destination="kUx-F9-Gal" id="Krp-Rw-Gn6"/>
                 <outlet property="toDelegateAmountDenom" destination="tV8-pm-6hk" id="m8h-TY-TFV"/>
                 <outlet property="toDelegateAmountLabel" destination="7J0-H6-kXY" id="EaS-Ny-Emm"/>
@@ -29,7 +34,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BBO-l7-eK8" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="54" width="382" height="230"/>
+                    <rect key="frame" x="16" y="58" width="382" height="230"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delegate Amount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjK-G5-tdZ">
                             <rect key="frame" x="16" y="16" width="107.5" height="16.5"/>

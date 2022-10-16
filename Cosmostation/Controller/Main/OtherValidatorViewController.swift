@@ -12,6 +12,7 @@ import Alamofire
 class OtherValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var otherValidatorTableView: UITableView!
+    @IBOutlet weak var otherValidatorLabel: UILabel!
     @IBOutlet weak var otherValidatorCnt: UILabel!
     
     var mainTabVC: MainTabViewController!
@@ -34,6 +35,8 @@ class OtherValidatorViewController: BaseViewController, UITableViewDelegate, UIT
         self.refresher.addTarget(self, action: #selector(onRequestFetch), for: .valueChanged)
         self.refresher.tintColor = UIColor(named: "_font05")
         self.otherValidatorTableView.addSubview(refresher)
+        
+        self.otherValidatorLabel.text = NSLocalizedString("str_validators", comment: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {

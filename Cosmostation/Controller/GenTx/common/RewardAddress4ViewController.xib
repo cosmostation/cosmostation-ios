@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -15,8 +15,13 @@
                 <outlet property="btnBack" destination="Mek-gC-bro" id="5EQ-ei-kCF"/>
                 <outlet property="btnConfirm" destination="kIm-aL-0RH" id="Bnk-1b-gUe"/>
                 <outlet property="currentRewardAddress" destination="B31-aR-MUs" id="9b2-A4-e68"/>
+                <outlet property="currentTitle" destination="wEZ-RB-1ok" id="iKf-wa-s3W"/>
+                <outlet property="feeTitle" destination="cFK-Sf-7hy" id="zvr-tT-y0t"/>
                 <outlet property="memoLabel" destination="SGW-CU-trF" id="3CG-Ca-hoY"/>
+                <outlet property="memoTitle" destination="kQL-Uj-FBh" id="dWp-L3-ImH"/>
                 <outlet property="newRewardAddress" destination="e3P-TC-ygi" id="9Np-r1-liN"/>
+                <outlet property="newTitle" destination="DgF-23-zHo" id="FwI-s8-SEj"/>
+                <outlet property="recipientChangeMsg" destination="NYD-a7-9gx" id="VYJ-eu-bLk"/>
                 <outlet property="rewardAddressChangeDenom" destination="as6-vx-TUo" id="VvE-on-Xu2"/>
                 <outlet property="rewardAddressChangeFee" destination="pMz-oO-biE" id="7PI-3C-gX9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -28,7 +33,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qTb-ie-CNO" customClass="CardView" customModule="Cosmostation" customModuleProvider="target">
-                    <rect key="frame" x="16" y="54" width="382" height="250"/>
+                    <rect key="frame" x="16" y="58" width="382" height="250"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fee" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFK-Sf-7hy">
                             <rect key="frame" x="16" y="16" width="24.5" height="16.5"/>

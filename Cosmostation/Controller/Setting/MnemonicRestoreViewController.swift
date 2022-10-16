@@ -16,6 +16,7 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
     @IBOutlet weak var actionView: UIStackView!
     @IBOutlet weak var keyboardView: UIView!
     
+    @IBOutlet weak var mnemonicTitle: UILabel!
     @IBOutlet weak var mNemonicLayer0: BottomLineView!
     @IBOutlet weak var mNemonicLayer1: BottomLineView!
     @IBOutlet weak var mNemonicLayer2: BottomLineView!
@@ -65,7 +66,9 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
     @IBOutlet weak var mNemonicInput21: UITextField!
     @IBOutlet weak var mNemonicInput22: UITextField!
     @IBOutlet weak var mNemonicInput23: UITextField!
-
+    @IBOutlet weak var btnPaste: UIButton!
+    @IBOutlet weak var btnConfirm: UIButton!
+    
     var mNemonicLayers: [BottomLineView] = [BottomLineView]()
     var mNemonicInputs: [UITextField] = [UITextField]()
     var allMnemonicWords = [String]()
@@ -115,6 +118,10 @@ class MnemonicRestoreViewController: BaseViewController, UICollectionViewDelegat
         if (BaseData.instance.getUsingEnginerMode()) {
             self.onShowEnginerModeDialog()
         }
+        
+        mnemonicTitle.text = NSLocalizedString("msg_enter_mnemonics", comment: "")
+        btnPaste.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
+        btnConfirm.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

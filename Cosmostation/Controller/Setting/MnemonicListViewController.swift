@@ -11,6 +11,8 @@ import UIKit
 class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, PasswordViewDelegate {
     
     @IBOutlet weak var mnemonicListTableView: UITableView!
+    @IBOutlet weak var btnImportMnemonic: UIButton!
+    @IBOutlet weak var btnCreateMnemonic: UIButton!
     
     var mMyMnemonics = Array<MWords>()
     var mSelected: Int64?
@@ -23,6 +25,9 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
         self.mnemonicListTableView.register(UINib(nibName: "ManageMnemonicCell", bundle: nil), forCellReuseIdentifier: "ManageMnemonicCell")
         self.mnemonicListTableView.rowHeight = UITableView.automaticDimension
         self.mnemonicListTableView.estimatedRowHeight = UITableView.automaticDimension
+        
+        self.btnImportMnemonic.setTitle(NSLocalizedString("str_import_mnemonic", comment: ""), for: .normal)
+        self.btnCreateMnemonic.setTitle(NSLocalizedString("str_create_mnemonic", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,6 +35,8 @@ class MnemonicListViewController: BaseViewController, UITableViewDelegate, UITab
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_mnemonic_manage", comment: "")
         self.navigationItem.title = NSLocalizedString("title_mnemonic_manage", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         self.mMyMnemonics = BaseData.instance.selectAllMnemonics()
         self.mnemonicListTableView.reloadData()

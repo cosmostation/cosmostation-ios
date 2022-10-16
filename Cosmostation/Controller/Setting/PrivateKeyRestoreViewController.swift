@@ -11,10 +11,11 @@ import SwiftKeychainWrapper
 
 class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, PasswordViewDelegate {
     
+    @IBOutlet weak var pkeyTitle: UILabel!
     @IBOutlet weak var keyInputText: AddressInputTextField!
-    @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnScan: UIButton!
     @IBOutlet weak var btnPaste: UIButton!
+    @IBOutlet weak var btnCancel: UIButton!
     @IBOutlet weak var btnNext: UIButton!
     private var userInput: String = ""
     
@@ -24,6 +25,12 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
         self.view.addGestureRecognizer(tapGesture)
         keyInputText.placeholder = NSLocalizedString("private_key_restore_priv_key", comment: "")
         keyInputText.delegate = self
+        
+        pkeyTitle.text = NSLocalizedString("msg_restore_pkey", comment: "")
+        btnScan.setTitle(NSLocalizedString("str_qr_scan", comment: ""), for: .normal)
+        btnPaste.setTitle(NSLocalizedString("str_paste", comment: ""), for: .normal)
+        btnCancel.setTitle(NSLocalizedString("str_cancel", comment: ""), for: .normal)
+        btnNext.setTitle(NSLocalizedString("str_next", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,6 +38,8 @@ class PrivateKeyRestoreViewController: BaseViewController, QrScannerDelegate, Pa
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         self.navigationController?.navigationBar.topItem?.title = NSLocalizedString("title_restore_privatekey", comment: "")
         self.navigationItem.title = NSLocalizedString("title_restore_privatekey", comment: "")
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     @objc func dismissKeyboard (_ sender: UITapGestureRecognizer) {

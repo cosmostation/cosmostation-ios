@@ -12,9 +12,9 @@ import SwiftKeychainWrapper
 
 class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     
-    
     @IBOutlet weak var mnDisplayImg: UIButton!
     
+    @IBOutlet weak var mnemonicTitle: UILabel!
     @IBOutlet weak var mneminicLayer0: UIView!
     @IBOutlet weak var mneminicLayer1: UIView!
     @IBOutlet weak var mneminicLayer2: UIView!
@@ -66,6 +66,9 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var mnemonic22: UILabel!
     @IBOutlet weak var mnemonic23: UILabel!
     
+    @IBOutlet weak var menmonicWarnMsg: UILabel!
+    @IBOutlet weak var btnAddWallet: UIButton!
+    
     var mnemonicLayers: [UIView] = [UIView]()
     var mnemonicLabels: [UILabel] = [UILabel]()
     var mnemonicWords: [String]!
@@ -92,6 +95,10 @@ class MnemonicCreateViewController: BaseViewController, PasswordViewDelegate {
         if (BaseData.instance.getUsingEnginerMode()) {
             self.onShowEnginerModeDialog()
         }
+        
+        mnemonicTitle.text = NSLocalizedString("str_mnemonic_phrase", comment: "")
+        menmonicWarnMsg.text = NSLocalizedString("msg_warn_create_mnemonic", comment: "")
+        btnAddWallet.setTitle(NSLocalizedString("str_add_wallet", comment: ""), for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {

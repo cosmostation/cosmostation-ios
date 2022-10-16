@@ -61,7 +61,7 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
         self.htlcResultTableView.estimatedRowHeight = UITableView.automaticDimension
         
 
-        self.loadingProgressLabel.text = NSLocalizedString("htlc_swap_progress_0", comment: "")
+        self.loadingProgressLabel.text = NSLocalizedString("msg_htlc_swap_progress_0", comment: "")
         self.loadingImg.onStartAnimation()
         self.onCheckCreateHtlcSwap()
         
@@ -69,11 +69,11 @@ class HtlcResultViewController: BaseViewController, UITableViewDelegate, UITable
     
     func onUpdateProgress(_ step: Int) {
         if (step == 1) {
-            loadingProgressLabel.text = NSLocalizedString("htlc_swap_progress_1", comment: "")
+            loadingProgressLabel.text = NSLocalizedString("msg_htlc_swap_progress_1", comment: "")
         } else if (step == 2) {
-            loadingProgressLabel.text = NSLocalizedString("htlc_swap_progress_2", comment: "")
+            loadingProgressLabel.text = NSLocalizedString("msg_htlc_swap_progress_2", comment: "")
         } else if (step == 3) {
-            loadingProgressLabel.text = NSLocalizedString("htlc_swap_progress_3", comment: "")
+            loadingProgressLabel.text = NSLocalizedString("msg_htlc_swap_progress_3", comment: "")
         }
     }
     

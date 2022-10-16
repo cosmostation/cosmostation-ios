@@ -12,6 +12,7 @@ import Alamofire
 class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var allValidatorTableView: UITableView!
+    @IBOutlet weak var allValidatorLabel: UILabel!
     @IBOutlet weak var allValidatorCnt: UILabel!
     @IBOutlet weak var btnSort: UIView!
     @IBOutlet weak var sortType: UILabel!
@@ -37,6 +38,7 @@ class AllValidatorViewController: BaseViewController, UITableViewDelegate, UITab
         self.refresher.tintColor = UIColor(named: "_font05")
         self.allValidatorTableView.addSubview(refresher)
         
+        self.allValidatorLabel.text = NSLocalizedString("str_validators", comment: "")
         let tap = UITapGestureRecognizer(target: self, action: #selector(onStartSort))
         self.btnSort.addGestureRecognizer(tap)
     }

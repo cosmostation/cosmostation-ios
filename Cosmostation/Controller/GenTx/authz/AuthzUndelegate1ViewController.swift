@@ -102,7 +102,7 @@ class AuthzUndelegate1ViewController: BaseViewController, UITableViewDelegate, U
     }
     
     @IBAction func onClickNext(_ sender: UIButton) {
-        self.onShowToast(NSLocalizedString("str_authz_undelegate_step_0", comment: ""))
+        self.onShowToast(NSLocalizedString("tx_authz_undelegate_0", comment: ""))
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -14,8 +14,8 @@ class ChainFetchAi: ChainConfig {
     var chainType = ChainType.FETCH_MAIN
     var chainImg = UIImage(named: "chainFetchAi")
     var chainInfoImg = UIImage(named: "infoFetchAi")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_fetch", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_fetch", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_fetch", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_fetch", comment: "")
     var chainColor = UIColor(named: "fetchai")!
     var chainColorBG = UIColor(named: "fetchai_bg")!
     var chainTitle = "(Fetch.Ai Mainnet)"

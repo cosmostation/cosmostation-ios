@@ -14,8 +14,8 @@ class ChainPassage: ChainConfig {
     var chainType = ChainType.PASSAGE_MAIN
     var chainImg = UIImage(named: "chainPassage")
     var chainInfoImg = UIImage(named: "infoPassage")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_passage", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_passage", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_passage", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_passage", comment: "")
     var chainColor = UIColor(named: "passage")!
     var chainColorBG = UIColor(named: "passage_bg")!
     var chainTitle = "(Passage Mainnet)"

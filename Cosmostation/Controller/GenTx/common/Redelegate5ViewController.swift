@@ -22,6 +22,13 @@ class Redelegate5ViewController: BaseViewController, PasswordViewDelegate {
     @IBOutlet weak var btnBefore: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!
     
+    @IBOutlet weak var redelegateAmountTitle: UILabel!
+    @IBOutlet weak var feeTitle: UILabel!
+    @IBOutlet weak var redelegateFromTitle: UILabel!
+    @IBOutlet weak var redelegateToTitle: UILabel!
+    @IBOutlet weak var memoTitle: UILabel!
+    @IBOutlet weak var redelegateMsg: UILabel!
+    
     var pageHolderVC: StepGenTxViewController!
 
     override func viewDidLoad() {
@@ -33,6 +40,14 @@ class Redelegate5ViewController: BaseViewController, PasswordViewDelegate {
         
         btnBefore.borderColor = UIColor.init(named: "_font05")
         btnConfirm.borderColor = UIColor.init(named: "photon")
+        redelegateAmountTitle.text = NSLocalizedString("str_redelegate_amount", comment: "")
+        feeTitle.text = NSLocalizedString("str_tx_fee", comment: "")
+        redelegateFromTitle.text = NSLocalizedString("str_redelegate_from", comment: "")
+        redelegateToTitle.text = NSLocalizedString("str_redelegate_to", comment: "")
+        memoTitle.text = NSLocalizedString("str_memo", comment: "")
+        redelegateMsg.text = NSLocalizedString("msg_redelegate", comment: "")
+        btnBefore.setTitle(NSLocalizedString("str_back", comment: ""), for: .normal)
+        btnConfirm.setTitle(NSLocalizedString("str_confirm", comment: ""), for: .normal)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {

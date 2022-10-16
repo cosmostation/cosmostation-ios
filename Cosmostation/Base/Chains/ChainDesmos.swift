@@ -14,8 +14,8 @@ class ChainDesmos: ChainConfig {
     var chainType = ChainType.DESMOS_MAIN
     var chainImg = UIImage(named: "chainDesmos")
     var chainInfoImg = UIImage(named: "infoDesmos")
-    var chainInfoTitle = NSLocalizedString("send_guide_title_desmos", comment: "")
-    var chainInfoMsg = NSLocalizedString("send_guide_msg_desmos", comment: "")
+    var chainInfoTitle = NSLocalizedString("guide_title_desmos", comment: "")
+    var chainInfoMsg = NSLocalizedString("guide_msg_desmos", comment: "")
     var chainColor = UIColor(named: "desmos")!
     var chainColorBG = UIColor(named: "desmos_bg")!
     var chainTitle = "(Desmos Mainnet)"

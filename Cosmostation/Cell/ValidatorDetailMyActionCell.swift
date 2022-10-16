@@ -23,6 +23,13 @@ class ValidatorDetailMyActionCell: UITableViewCell {
     @IBOutlet weak var claimRewardBtn: UIButton!
     @IBOutlet weak var reInvestBtn: UIButton!
     
+    @IBOutlet weak var myDelegatedTitle: UILabel!
+    @IBOutlet weak var myUnbondingTitle: UILabel!
+    @IBOutlet weak var myRewardTitle: UILabel!
+    @IBOutlet weak var estDailyRewardTitle: UILabel!
+    @IBOutlet weak var estMonthlyRewardTitle: UILabel!
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
@@ -31,6 +38,17 @@ class ValidatorDetailMyActionCell: UITableViewCell {
         myRewardAmount.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         myDailyReturns.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
         myMonthlyReturns.font = UIFontMetrics(forTextStyle: .footnote).scaledFont(for: Font_13_footnote)
+        myDelegatedTitle.text = NSLocalizedString("str_my_delegation", comment: "")
+        myUnbondingTitle.text = NSLocalizedString("str_my_unbonding", comment: "")
+        myRewardTitle.text = NSLocalizedString("str_my_reward", comment: "")
+        estDailyRewardTitle.text = NSLocalizedString("str_est_daily_reward", comment: "")
+        estMonthlyRewardTitle.text = NSLocalizedString("str_est_monthly_reward", comment: "")
+        
+        delegateBtn.setTitle(NSLocalizedString("str_delegate", comment: ""), for: .normal)
+        undelegateBtn.setTitle(NSLocalizedString("str_undelegate", comment: ""), for: .normal)
+        redelegateBtn.setTitle(NSLocalizedString("str_redelegate", comment: ""), for: .normal)
+        claimRewardBtn.setTitle(NSLocalizedString("str_claim_reward", comment: ""), for: .normal)
+        reInvestBtn.setTitle(NSLocalizedString("str_compounding", comment: ""), for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

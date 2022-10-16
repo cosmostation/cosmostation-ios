@@ -101,7 +101,11 @@ class VaildatorDetailViewController: BaseViewController, UITableViewDelegate, UI
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = ValidatorDetailHistoryHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let view = CommonHeader(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        if (section == 1) {
+            view.headerTitleLabel.text = NSLocalizedString("msg_history_with_validator", comment: "");
+            view.headerCntLabel.text = ""
+        }
         return view
     }
 
